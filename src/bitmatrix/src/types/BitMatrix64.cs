@@ -99,8 +99,8 @@ namespace Z0
         public readonly BitVector64 Column(int index)
         {
             var col = 0ul;
-            for(var r = 0; r < N; r++)
-                col = Bits.setif(Data[r], index, col, r);
+            for(byte r = 0; r<N; r++)
+                col = Bits.setif(Data[r], (byte)index, col, r);
             return col;
         }
 

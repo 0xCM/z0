@@ -36,8 +36,6 @@ namespace Z0
         MemberEvaluator Evaluator(BufferTokens buffers)
             => Evaluate.evaluator(buffers);
 
-        TCheckNumeric Numeric => CheckNumeric.Checker;
-
         Pair<string> Labels => ("method", "asm");
 
         PairEvalResults<T> init<T>()
@@ -164,10 +162,8 @@ namespace Z0
                 var x = result[i].Left;
                 var y = result[i].Right;
 
-                if(fp)
-                    Numeric.close(x,y);
-                else
-                    Numeric.eq(x,y);
+                if(!fp)
+                    root.require(gmath.eq(x,y), () => $"{x} != {y}");
             }
         }
 
@@ -193,10 +189,8 @@ namespace Z0
                 ref readonly var result = ref eval.Target;
                 var x = result[i].Left;
                 var y = result[i].Right;
-                if(fp)
-                    Numeric.close(x,y);
-                else
-                    Numeric.eq(x,y);
+                if(!fp)
+                    root.require(gmath.eq(x,y), () => $"{x} != {y}");
             }
         }
 

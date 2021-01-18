@@ -9,7 +9,7 @@ namespace Z0
 
     }
 
-    public interface IDynamicCase : TCheckNumeric, ICheckVectors
+    public interface IDynamicCase : ICheckNumeric, ICheckVectors
     {
 
     }

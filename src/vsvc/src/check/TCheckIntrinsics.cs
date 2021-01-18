@@ -8,7 +8,7 @@ namespace Z0
 
     using static SFx;
 
-    public interface TCheckIntrinsics : ICheckVectors, TCheckBlocks
+    public interface TCheckIntrinsics : ICheckVectors, ICheckSpanBlocks
     {
 
     }

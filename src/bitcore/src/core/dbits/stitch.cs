@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
-   
+
+    using static Part;
+
     partial class Bits
-    {                        
+    {
         [MethodImpl(Inline), Stitch]
         public static byte stitch(byte left, int ldx, byte right, int rdx)
         {

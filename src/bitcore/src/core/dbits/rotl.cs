@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    
+
+    using static Part;
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Rotates the source bits leftward by a specified offset amount
         /// </summary>

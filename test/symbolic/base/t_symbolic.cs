@@ -9,7 +9,7 @@ namespace Z0
         public static TCheckSymbolic Checker => default(CheckSymbolic);
     }
 
-    public interface TCheckSymbolic : TCheckNumeric, ICheckVectors
+    public interface TCheckSymbolic : ICheckNumeric, ICheckVectors
     {
 
     }

@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct GridCalcs
     {
+
         [MethodImpl(Inline)]
         public static GridCell<T> cell<T>(uint row, uint col)
             where T : struct

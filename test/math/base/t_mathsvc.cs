@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_mathsvc<X> : UnitTest<X,CheckNumeric,TCheckNumeric>
+    public abstract class t_mathsvc<X> : UnitTest<X,CheckNumeric,ICheckNumeric>
         where X : t_mathsvc<X>, new()
     {
 

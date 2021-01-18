@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(Bytes.add(x.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
         public static U dec(U x)

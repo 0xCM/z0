@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
- 
-    using static Konst;
-  
+
+    using static Part;
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Counts the number of leading zero bits in the source
         /// </summary>
@@ -45,6 +44,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Nlz]
         public static int nlz(ulong src)
-            => (int)Lzcnt.X64.LeadingZeroCount(src);    
+            => (int)Lzcnt.X64.LeadingZeroCount(src);
     }
 }

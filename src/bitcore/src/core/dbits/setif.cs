@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Bits
     {
@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline), Op]
-        public static byte setif(byte src, int srcpos, byte dst, int dstpos)
+        public static byte setif(byte src, byte srcpos, byte dst, byte dstpos)
         {
-            if(Bit32.test(src, srcpos))
+            if(BitStates.test(src, srcpos))
                 return enable(dst, srcpos);
             return dst;
         }
@@ -34,9 +34,9 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline), Op]
-        public static ushort setif(ushort src, int srcpos, ushort dst, int dstpos)
+        public static ushort setif(ushort src, byte srcpos, ushort dst, byte dstpos)
         {
-            if(Bit32.test(src, srcpos))
+            if(BitStates.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }
@@ -49,9 +49,9 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline), Op]
-        public static uint setif(uint src, int srcpos, uint dst, int dstpos)
+        public static uint setif(uint src, byte srcpos, uint dst, byte dstpos)
         {
-            if(Bit32.test(src, srcpos))
+            if(BitStates.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }
@@ -64,9 +64,9 @@ namespace Z0
         /// <param name="dst">The target value</param>
         /// <param name="dstpos">The target bit position</param>
         [MethodImpl(Inline), Op]
-        public static ulong setif(ulong src, int srcpos, ulong dst, int dstpos)
+        public static ulong setif(ulong src, byte srcpos, ulong dst, byte dstpos)
         {
-            if(Bit32.test(src, srcpos))
+            if(BitStates.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }

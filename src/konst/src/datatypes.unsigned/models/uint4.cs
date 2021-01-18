@@ -53,7 +53,7 @@ namespace Z0
         public static U Min
         {
             [MethodImpl(Inline)]
-            get => new U(MinLiteral,true);
+            get => new U(MinLiteral, true);
         }
 
         /// <summary>

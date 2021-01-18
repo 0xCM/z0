@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public readonly ref struct Block256<N,T>
@@ -30,50 +30,6 @@ namespace Z0
         /// </summary>
         public static int Length => (int)nat64u<N>();
 
-        /// <summary>
-        /// Vec => Slice
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="N">The natural length</typeparam>
-        /// <typeparam name="T">THe component type</typeparam>
-        [MethodImpl(Inline)]
-        public static implicit operator NatSpan<N,T>(Block256<N,T> src)
-            => RowVectors.natspan<N,T>(src.Data);
-
-        /// <summary>
-        /// Slice => Vec
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <typeparam name="N">The natural length</typeparam>
-        /// <typeparam name="T">THe component type</typeparam>
-        [MethodImpl(Inline)]
-        public static implicit operator Block256<N,T>(NatSpan<N,T> src)
-            => new Block256<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SpanBlock256<T>(Block256<N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator RowVector256<T>(Block256<N,T> src)
-            => src.Denaturalize();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Block256<N,T>(T[] src)
-            => new Block256<N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator != (Block256<N,T> lhs, in Block256<N,T> rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static T operator *(Block256<N,T> lhs, in Block256<N,T> rhs)
-            => gmath.dot<T>(lhs.Unsized, rhs.Unsized);
-
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
         {
@@ -83,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Block256(SpanBlock256<T> src)
         {
-            z.insist(src.CellCount >= Length, "no");
+            root.require(src.CellCount >= Length, () => "no");
             Data = src;
         }
 
@@ -106,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<N,U> As<U>()
             where U : unmanaged
-                => new Block256<N, U>(MemoryMarshal.Cast<T,U>(Unsized));
+                => new Block256<N,U>(MemoryMarshal.Cast<T,U>(Unsized));
 
         public bool Equals(Block256<N,T> rhs)
         {
@@ -176,5 +132,49 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        /// <summary>
+        /// Vec => Slice
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="N">The natural length</typeparam>
+        /// <typeparam name="T">THe component type</typeparam>
+        [MethodImpl(Inline)]
+        public static implicit operator NatSpan<N,T>(Block256<N,T> src)
+            => RowVectors.natspan<N,T>(src.Data);
+
+        /// <summary>
+        /// Slice => Vec
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="N">The natural length</typeparam>
+        /// <typeparam name="T">THe component type</typeparam>
+        [MethodImpl(Inline)]
+        public static implicit operator Block256<N,T>(NatSpan<N,T> src)
+            => new Block256<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock256<T>(Block256<N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator RowVector256<T>(Block256<N,T> src)
+            => src.Denaturalize();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Block256<N,T>(T[] src)
+            => new Block256<N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator != (Block256<N,T> lhs, in Block256<N,T> rhs)
+            => !lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static T operator *(Block256<N,T> lhs, in Block256<N,T> rhs)
+            => gmath.dot<T>(lhs.Unsized, rhs.Unsized);
     }
 }

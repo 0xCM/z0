@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         /// <typeparam name="T">The tag type</typeparam>
         [MethodImpl(Inline)]
-        public static TaggedMember<M,T> member<M,T>(M m, T t)
+        public static ClrMemberTag<M,T> member<M,T>(M m, T t)
             where M : MemberInfo
             where T : Attribute
                 => (m,t);

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;
-    
+
+    using static Part;
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Splits a 16-bit integer into lo/hi parts
         /// </summary>
@@ -127,7 +127,7 @@ namespace Z0
         {
             x0 = (byte)(src &0xF);
             x1 = (byte)(src >> 4);
-        }        
+        }
 
         /// <summary>
         /// Partitions an 8-bit source value into upper and lower parts of effective width 4,
@@ -136,7 +136,7 @@ namespace Z0
         /// <param name="x0">Receives source bits [0..3]</param>
         [MethodImpl(Inline), Split]
         public static byte split(byte src, out byte x0)
-        { 
+        {
             x0 = (byte)(src & 0xF);
             return (byte)(src >> 4);
         }
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="x0">Receives source bits [0..7]</param>
         [MethodImpl(Inline), Split]
         public static byte split(ushort src, out byte x0)
-        { 
+        {
             x0 = (byte)src;
             return (byte)(src >> 8);
         }
@@ -176,7 +176,7 @@ namespace Z0
         [MethodImpl(Inline), Split]
         public static void split(uint src, out ushort x0, out ushort x1)
         {
-            x0 = (ushort)(src); 
+            x0 = (ushort)(src);
             x1 = (ushort)(src >> 16);
         }
 
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="x0">Receives source bits [0..31]</param>
         [MethodImpl(Inline), Split]
         public static ushort split(uint src, out ushort x0)
-        { 
+        {
             x0 = (ushort)src;
             return (ushort)(src >> 16);
         }
@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="x1">Receives source bits [32..63]</param>
         [MethodImpl(Inline), Split]
         public static void split(ulong src, out uint x0, out uint x1)
-        { 
+        {
             x0 = (uint)src;
             x1 = (uint)(src >> 32);
         }
@@ -211,7 +211,7 @@ namespace Z0
         /// <param name="x0">Receives source bits [0..31]</param>
         [MethodImpl(Inline), Split]
         public static uint split(ulong src, out uint x0)
-        { 
+        {
             x0 = (uint)src;
             return (uint)(src >> 32);
         }
@@ -226,7 +226,7 @@ namespace Z0
         /// <param name="x3">Receives source bits [48..63]</param>
         [MethodImpl(Inline), Split]
         public static void split(ulong src, out ushort x0, out ushort x1, out ushort x2, out ushort x3)
-        { 
+        {
             x0 = (ushort)src;
             x1 = (ushort)(src >> 16);
             x2 = (ushort)(src >> 32);

@@ -27,13 +27,13 @@ namespace Z0
             i++;
             i++;
             i++;
-            Claim.eq(i,4u);
+            Claim.eq(i, 4u);
 
             i++;
             i++;
             i++;
             i++;
-            Claim.eq(i,8u);
+            Claim.eq(i, 8u);
 
             i++;
             i++;
@@ -45,7 +45,7 @@ namespace Z0
             i++;
             i++;
             i++;
-            Claim.eq(i,uint4.Min);
+            Claim.eq(i, uint4.Min);
 
         }
 
@@ -115,11 +115,10 @@ namespace Z0
             var x1 = (uint4)1;
             var x2 = (uint4)2;
             var x3 = (uint4)3;
-            ClaimPrimalSeq.ClaimEq(x0.Format(), "0");
-            ClaimPrimalSeq.ClaimEq(x1.Format(), "1");
-            ClaimPrimalSeq.ClaimEq(x2.Format(), "2");
-            ClaimPrimalSeq.ClaimEq(x3.Format(), "3");
-
+            ClaimPrimalSeq.ClaimEq(x0.Format(), "0000");
+            ClaimPrimalSeq.ClaimEq(x1.Format(), "0001");
+            ClaimPrimalSeq.ClaimEq(x2.Format(), "0010");
+            ClaimPrimalSeq.ClaimEq(x3.Format(), "0011");
         }
 
         public void uint4_inc()

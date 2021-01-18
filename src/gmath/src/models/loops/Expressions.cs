@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [ApiHost]
     public readonly struct Loops
     {
         const NumericKind Closure = UnsignedInts;
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Loop<I> loop<I>(Interval<I> bounds, I? step = null)

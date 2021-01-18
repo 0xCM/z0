@@ -92,7 +92,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => (uint)BitCalcs.tablecells<M,N,T>();
+            get => (uint)GridCalcs.cellcount<M,N,T>();
         }
 
         public uint BytCount

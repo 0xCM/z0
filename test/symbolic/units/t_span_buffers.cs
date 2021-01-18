@@ -14,7 +14,7 @@ namespace Z0
     {
         public override bool Enabled => true;
 
-        static new TCheckNumeric Claim = CheckNumeric.Checker;
+        static new ICheckNumeric Claim = CheckNumeric.Checker;
 
         public void check_caller()
         {

@@ -8,7 +8,7 @@ namespace Z0
         ICheckLengths,
         ICheckPrimal,
         ICheckPrimalSeq,
-        TCheckClose,
+        ICheckClose,
         ICheckFiles,
         ICheckInvariant,
         ICheckSets,

@@ -32,8 +32,6 @@ namespace Z0.Mkl
             return exit;
         }
 
-        static ICheckRowVectors Check => ICheckRowVectors.Checker;
-
         /// <summary>
         /// Returns a reference to the location of the first span element
         /// </summary>
@@ -90,6 +88,6 @@ namespace Z0.Mkl
         [MethodImpl(Inline)]
         static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs)
             where T : unmanaged
-                => Check.length(lhs,rhs);
+                => root.min(lhs.Length, rhs.Length);
     }
 }

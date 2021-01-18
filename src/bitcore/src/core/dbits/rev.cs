@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
-    
+
+    using static Part;
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Reverses the bits in a byte
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Reverse]
         public static ushort reverse(ushort src)
             => concat(
-                reverse((byte)hi(src)), 
+                reverse((byte)hi(src)),
                 reverse((byte)lo(src))
                 );
 
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong reverse(ulong src)
             => concat(
-                reverse((uint)hi(src)), 
+                reverse((uint)hi(src)),
                 reverse((uint)lo(src))
                 );
     }

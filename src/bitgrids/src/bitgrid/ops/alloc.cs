@@ -16,7 +16,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = W256.W;
-            var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
+            var blocks = GridCalcs.blocks<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }
@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = W256.W;
-            var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
+            var blocks = GridCalcs.blocks<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }

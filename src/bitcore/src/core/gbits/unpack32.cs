@@ -21,9 +21,9 @@ namespace Z0
             var bitcount = bitsize<T>()*src.Length;
             ref var target = ref first(dst);
             var k = 0;
-            for(var i=0; i < src.Length; i++)
-            for(byte j=0; j < srcsize; j++, k++)
-                seek(target, k) = testbit32(skip(src,i), j);
+            for(var i=0; i<src.Length; i++)
+            for(byte j=0; j<srcsize; j++, k++)
+                seek(target, k) = testbit(skip(src,i), j);
             return dst;
         }
 

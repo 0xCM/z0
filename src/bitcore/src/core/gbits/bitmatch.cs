@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class gbits
     {
@@ -21,9 +21,9 @@ namespace Z0
         /// <typeparam name="S">The left operand type</typeparam>
         /// <typeparam name="T">The right operand type</typeparam>
         [MethodImpl(Inline)]
-        public static Bit32 bitmatch<S,T>(S a, byte i, T b, byte j)
+        public static bit bitmatch<S,T>(S a, byte i, T b, byte j)
             where S : unmanaged
             where T : unmanaged
-                => testbit32(a,i) == testbit32(b,j);
+                => testbit(a,i) == testbit(b,j);
     }
 }

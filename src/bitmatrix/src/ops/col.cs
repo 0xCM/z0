@@ -19,7 +19,7 @@ namespace Z0
         {
             byte col = 0;
             for(var r = 0; r < BitMatrix4.N; r++)
-                col = Bit32.set(col, (byte)r, Bit32.test(A[r].Scalar, index));
+                col = BitStates.set(col, (byte)r, BitStates.test(A[r].Scalar, (byte)index));
             return col;
         }
 
@@ -27,8 +27,8 @@ namespace Z0
         public static BitVector32 col(in BitMatrix32 A, int index)
         {
             uint col = 0;
-            for(var r = 0; r < A.Order; r++)
-                col = Bits.setif(A[r], index, col, r);
+            for(byte r = 0; r<A.Order; r++)
+                col = Bits.setif(A[r], (byte)index, col, r);
             return col;
         }
     }

@@ -64,7 +64,7 @@ namespace Z0
         {
             var segments = src.Partitions.Length;
             for(var i = 1u; i<segments; i++)
-                seek(dst,i-1) = Histograms.bin(segment(src, i), count(src, i));
+                seek(dst,i-1) = bin(segment(src, i), count(src, i));
             return dst;
         }
 
@@ -206,6 +206,5 @@ namespace Z0
         public static T grain<T>(in ClosedInterval<T> src, ulong width = 100ul)
             where T : unmanaged
                 => generic<T>(src.Width/min(src.Width, 100ul));
-
     }
 }

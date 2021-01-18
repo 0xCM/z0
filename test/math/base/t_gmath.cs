@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public abstract class t_gmath<X> : UnitTest<X,CheckNumeric,TCheckNumeric>
+    public abstract class t_gmath<X> : UnitTest<X,CheckNumeric,ICheckNumeric>
         where X : t_gmath<X>, new()
     {
 

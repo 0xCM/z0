@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Bits
-    {         
+    {
         /// <summary>
         /// Enables a specified source bit
         /// </summary>
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Enable]
         public static sbyte enable(sbyte src, int pos)
             =>  src |= (sbyte)(1 << pos);
-            
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Enable]
         public static short enable(short src, int pos)
             =>  src |= (short)(1 << pos);
-            
+
         /// <summary>
         /// Enables a specified source bit
         /// </summary>
@@ -93,7 +93,7 @@ namespace Z0
         {
             var srcBits = BitConverter.SingleToInt32Bits(src);
             srcBits |= 1 << pos;
-            src = BitConverter.Int32BitsToSingle(srcBits);            
+            src = BitConverter.Int32BitsToSingle(srcBits);
             return src;
         }
 
@@ -104,10 +104,10 @@ namespace Z0
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Enable]
         public static double enable(double src, int pos)
-        {               
+        {
             var srcBits = BitConverter.DoubleToInt64Bits(src);
             srcBits |= 1L << pos;
-            src = BitConverter.Int64BitsToDouble(srcBits);                           
+            src = BitConverter.Int64BitsToDouble(srcBits);
             return src;
         }
 

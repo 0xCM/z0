@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static VServices;
 
     partial class VSvc
@@ -18,7 +18,7 @@ namespace Z0
                 => default(Reverse128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Reverse256<T> vreverse<T>(N256 w, T t = default)
+        public static Reverse256<T> vreverse<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(Reverse256<T>);
 
@@ -28,7 +28,7 @@ namespace Z0
                 => default(SwapHiLo128<T>);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SwapHiLo256<T> vswaphl<T>(N256 w, T t = default)
+        public static SwapHiLo256<T> vswaphl<T>(W256 w, T t = default)
             where T : unmanaged
                 => default(SwapHiLo256<T>);
     }

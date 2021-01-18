@@ -77,7 +77,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => (int)BitCalcs.tablecells<M,N,T>();
+            get => (int)GridCalcs.cellcount<M,N,T>();
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => (int)BitCalcs.tablebits<M,N>();
+            get => (int)NatCalc.mul<M,N>();
         }
 
         public Bit32 this[int row, int col]

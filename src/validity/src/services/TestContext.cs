@@ -152,7 +152,7 @@ namespace Z0
         protected ICheckPrimalSeq ClaimPrimalSeq
             => Claim;
 
-        protected TCheckNumeric ClaimNumeric
+        protected ICheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
 
         public ITestLogPaths TestPaths

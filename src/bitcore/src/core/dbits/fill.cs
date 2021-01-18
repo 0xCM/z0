@@ -86,7 +86,7 @@ namespace Z0
           /// <param name="count">The number of bits to fill</param>
           [MethodImpl(Inline), Op]
           public static int fill(int src, byte index, byte count)
-               => (int)fill((uint)src,index,count);
+               => (int)fill((uint)src, index, count);
 
           /// <summary>
           /// Enables a contiguous sequence of source bits starting at a specified index
