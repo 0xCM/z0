@@ -15,15 +15,18 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        public struct xmm : IRegister<xmm,W,T>
+        public struct xmm : IRegister<xmm,W,T>, IAsmOperand<K,T>
         {
+            public byte Position {get;}
+
             public T Content {get;}
 
             public K Kind {get;}
 
             [MethodImpl(Inline)]
-            public xmm(T data, K kind)
+            public xmm(byte pos, T data, K kind)
             {
+                Position = pos;
                 Content = data;
                 Kind = kind;
             }

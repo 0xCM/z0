@@ -7,17 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 
     public sealed class ApiHostCodeLookup : LU
     {
         public static ApiHostCodeLookup create(LU src)
             => new ApiHostCodeLookup(src);
-
-        public static ApiHostCodeLookup create()
-            => new ApiHostCodeLookup();
 
         public ApiHostCodeLookup()
         {
@@ -31,6 +26,6 @@ namespace Z0
         }
 
         public static ApiHostCodeLookup Empty
-            => create();
+           => new ApiHostCodeLookup();
     }
 }

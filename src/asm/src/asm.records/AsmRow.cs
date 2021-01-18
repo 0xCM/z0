@@ -66,33 +66,6 @@ namespace Z0.Asm
 
         public IceOpCodeId OpCodeId;
 
-        // [MethodImpl(Inline)]
-        // public AsmRow(
-        //     Sequential Sequence,
-        //     MemoryAddress Address,
-        //     Address32 GlobalOffset,
-        //     Address16 LocalOffset,
-        //     asci16 Mnemonic,
-        //     AsmOpCodePattern OpCode,
-        //     BinaryCode Encoded,
-        //     AsmSig Instruction,
-        //     asci64 SourceCode,
-        //     asci16 CpuId,
-        //     OpCodeId Id)
-        // {
-        //     this.Sequence = Sequence;
-        //     this.Address = Address;
-        //     this.GlobalOffset = GlobalOffset;
-        //     this.LocalOffset = LocalOffset;
-        //     this.Mnemonic = Mnemonic;
-        //     this.OpCode = OpCode;
-        //     this.Instruction = Instruction;
-        //     this.SourceCode = SourceCode;
-        //     this.Encoded = Encoded;
-        //     this.CpuId = CpuId;
-        //     this.OpCodeId = Id;
-        // }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

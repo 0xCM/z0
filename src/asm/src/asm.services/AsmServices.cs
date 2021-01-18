@@ -11,6 +11,22 @@ namespace Z0.Asm
 
     public sealed class AsmServices : IAsmServices
     {
+        [MethodImpl(Inline)]
+        public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)
+            => new CaptureExchangeProxy(service, capture);
+
+        [MethodImpl(Inline)]
+        public static ICaptureServiceProxy capture(ICaptureCore service, ICaptureExchange exchange)
+            => new CaptureServiceProxy(service, exchange);
+
+        public static QuickCapture quick(IAsmContext asm)
+        {
+            var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var exchange = AsmServices.exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
+            var service = AsmServices.capture(asm.CaptureCore, exchange);
+            return new QuickCapture(asm, buffer, tokens, service);
+        }
+
         public static AsmServices init(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
 

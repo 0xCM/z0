@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public struct MemOp64 : IMemOp<MemOp64,W64,ulong>
     {
-        public ulong Value;
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
         public MemOp64(ulong src)
@@ -22,9 +22,6 @@ namespace Z0
 
         public DataWidth Width
             => DataWidth.W64;
-
-        ulong IMemOp<ulong>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static implicit operator MemOp64(ulong src)

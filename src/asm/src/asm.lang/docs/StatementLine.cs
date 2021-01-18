@@ -18,11 +18,8 @@ namespace Z0.Asm
 
             public Statement Statement {get;}
 
-
-
             public PartKind Kind
                 => PartKind.BlockHeaderLine;
-
 
             [MethodImpl(Inline)]
             public string Format()

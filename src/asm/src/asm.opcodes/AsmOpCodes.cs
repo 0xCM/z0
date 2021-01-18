@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static z;
 
-    using F = AsmOpCodeField;
-
     [ApiHost(ApiNames.AsmOpCodes, true)]
     public readonly partial struct AsmOpCodes
     {

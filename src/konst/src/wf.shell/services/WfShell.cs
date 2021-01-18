@@ -59,7 +59,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {
-            Services = new WfServices();
             Init = config;
             Context = Init.Shell;
             Id = Init.ControlId;
@@ -77,6 +76,7 @@ namespace Z0
             Controller = Init.Control;
             AppName = Init.Shell.AppName;
             Router = new CmdRouter(this);
+            Services = new WfServices(this, Api.PartComponents);
         }
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router)

@@ -14,8 +14,6 @@ namespace Z0.Asm
     {
         public byte Position {get;}
 
-        public AsmOperandKind Kind => AsmOperandKind.Imm;
-
         public T Content {get;}
 
         [MethodImpl(Inline)]
@@ -24,6 +22,8 @@ namespace Z0.Asm
             Position = pos;
             Content = src;
         }
+
+        public AsmOperandKind Kind => AsmOperandKind.Imm;
 
         [MethodImpl(Inline)]
         public ImmOp<T> Reposition(byte pos)

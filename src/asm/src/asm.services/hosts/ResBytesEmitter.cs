@@ -5,54 +5,35 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
     using static CodeGenerator;
     using static z;
 
-    public readonly struct ResBytesEmitter
+    public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>, IResBytesEmitter
     {
-        readonly WfHost Host;
-
-        public readonly FS.FolderPath SourceDir;
-
-        public readonly FS.FolderPath TargetDir;
-
-        readonly IWfShell Wf;
-
-        readonly ApiCodeBlockIndex Index;
-
-        public static ResBytesEmitter service(IWfShell wf, ApiCodeBlockIndex index)
-            => new ResBytesEmitter(wf, WfShell.host(typeof(ResBytesEmitter)), index);
-
-        ResBytesEmitter(IWfShell wf, WfHost host, ApiCodeBlockIndex index)
+        public Index<ApiHostRes> Emit(ApiCodeBlockIndex index, FS.FolderPath dst)
         {
-            Host = host;
-            Wf = wf.WithHost(Host);
-            Index = index;
-            SourceDir = wf.Paths.AppCaptureRoot;
-            TargetDir = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
-        }
-
-        public void Emit()
-        {
-            var spec = DataFlows.flow(SourceDir, TargetDir);
+            var emissions = root.list<ApiHostRes>();
             var flow = Wf.Running();
-            TargetDir.Clear();
-            foreach(var host in Index.NonemptyHosts)
+            var counter = 0;
+            dst.Clear();
+            foreach(var host in index.NonemptyHosts)
             {
-                var emitted = Emit(Index.HostCodeBlocks(host), TargetDir);
+                var emitted = Emit(index.HostCodeBlocks(host), dst);
+                emissions.Add(emitted);
                 Wf.Processed(host, emitted.Count);
+                counter += emitted.Count;
             }
             Wf.Ran(flow);
+            return emissions.ToArray();
         }
 
         ApiHostRes Emit(in ApiHostCode src, FS.FolderPath dst)
         {
-            var target = dst + ApiIdentity.file(src.Host,FileExtensions.Cs);
+            var target = dst + ApiIdentity.file(src.Host, FileExtensions.Cs);
             Wf.EmittingFile(Host, target);
-            var emission = Emit(src,target);
+            var emission = Emit(src, target);
             Wf.EmittedFile(Host, emission.Count, target);
             return emission;
         }
@@ -62,8 +43,7 @@ namespace Z0
             var resources = Resources.from(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
-            var members = new HashSet<string>();
-
+            var members = root.hashset<string>();
             using var writer = target.Writer();
             EmitFileHeader(writer);
             OpenFileNamespace(writer, "Z0.ByteCode");
@@ -80,7 +60,6 @@ namespace Z0
             }
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
-
             return resources;
         }
     }

@@ -25,7 +25,7 @@ namespace Z0.Asm
         {
             Context = context;
             Tokens = Z0.Buffers.sequence(context.DefaultBufferLength, 5, out BufferAlloc).Tokenize();
-            CaptureExchange = CaptureExchangeProxy.create(Context.CaptureCore, Tokens[Aux3]);
+            CaptureExchange = AsmServices.exchange(Context.CaptureCore, Tokens[Aux3]);
         }
 
         public ref readonly BufferToken this[BufferSeqId id]

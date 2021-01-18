@@ -97,7 +97,6 @@ namespace Z0
             return count;
         }
 
-
         public static Outcome<FS.FilePath> EmitHexIndex(IWfShell wf)
         {
             try
@@ -147,8 +146,6 @@ namespace Z0
             => from line in src.ReadLines().Select(ApiHexParser.extracts)
                 where line.Succeeded
                 select line.Value;
-
-
 
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)

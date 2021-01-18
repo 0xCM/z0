@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     partial struct AsmOpCodes
     {
-
         [Op, MethodImpl(Inline)]
         public static Span<AsmOpCodeRow> rows(in AppResDoc specs)
         {

@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct CaptureExchangeProxy : ICaptureExchange
     {
@@ -20,10 +20,6 @@ namespace Z0.Asm
         /// The buffer that receives the captured data
         /// </summary>
         public BufferToken TargetBuffer {get;}
-
-        [MethodImpl(Inline)]
-        public static ICaptureExchange create(ICaptureCore service, BufferToken capture)
-            => new CaptureExchangeProxy(service, capture);
 
         [MethodImpl(Inline)]
         internal CaptureExchangeProxy(ICaptureCore service, BufferToken target)

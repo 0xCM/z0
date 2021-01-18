@@ -9,23 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines a 16-bit operand
-    /// </summary>
-    public readonly struct Arg16 : IAsmOperand<Arg16,W16,ushort>
+    public readonly struct Imm32Op : IAsmOperand<Imm32>
     {
         public byte Position {get;}
 
-        public ushort Content {get;}
+        public Imm32 Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandKind Kind
+            => AsmOperandKind.Imm;
 
         [MethodImpl(Inline)]
-        public Arg16(byte pos, ushort value, AsmOperandKind kind)
+        public Imm32Op(byte pos, Imm32 value)
         {
             Position = pos;
             Content = value;
-            Kind = kind;
         }
     }
 }

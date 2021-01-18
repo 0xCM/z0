@@ -12,19 +12,19 @@ namespace Z0.Asm
     partial struct AsmBuilder
     {
         [MethodImpl(Inline), Op]
-        public Imm<W64,byte> imm64(byte value)
-            => value;
+        public Imm8Op imm8(byte pos, Imm8 value)
+            => new Imm8Op(pos, value);
 
         [MethodImpl(Inline), Op]
-        public Imm<W64,ushort> imm64(ushort value)
-            => value;
+        public Imm16Op imm16(byte pos, Imm16 value)
+            => new Imm16Op(pos, value);
 
         [MethodImpl(Inline), Op]
-        public Imm<W64,uint> imm64(uint value)
-            => value;
+        public Imm32Op imm32(byte pos, Imm32 value)
+            => new Imm32Op(pos, value);
 
         [MethodImpl(Inline), Op]
-        public Imm<W64,ulong> imm64(ulong value)
-            => value;
+        public Imm64Op imm64(byte pos, Imm64 value)
+            => new Imm64Op(pos,value);
     }
 }

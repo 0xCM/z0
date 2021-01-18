@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// The juncture-coincident operation set
         /// </summary>
-        public readonly ICaptureCore Service;
+        public ICaptureCore Service {get;}
 
         [MethodImpl(Inline)]
         public CaptureExchange(ICaptureCore service, Span<byte> capture)
@@ -34,7 +34,7 @@ namespace Z0.Asm
         /// <param name="index">The cell index to query/manipulate</param>
         [MethodImpl(Inline)]
         public ref byte Target(int index)
-            => ref z.seek(TargetBuffer, index);
+            => ref memory.seek(TargetBuffer, index);
 
         public ref byte this[int index]
         {

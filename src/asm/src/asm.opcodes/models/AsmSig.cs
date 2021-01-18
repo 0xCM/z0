@@ -65,14 +65,6 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
 
-        // public AsmMnemonic Mnemonic
-        // {
-        //     get => asci.i
-        // }
-
-        public AsmSig Zero
-            => Empty;
-
         [MethodImpl(Inline)]
         public bool Equals(AsmSig src)
              => src.Value.Equals(Value);

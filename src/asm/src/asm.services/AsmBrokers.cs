@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct AsmBrokers

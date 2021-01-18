@@ -13,7 +13,6 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-
         void Init(IWfShell wf);
 
 

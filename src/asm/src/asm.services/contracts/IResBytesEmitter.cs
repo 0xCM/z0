@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    [ApiHost]
-    public readonly struct Imm
+    public interface IResBytesEmitter : IWfService
     {
-
+        Index<ApiHostRes> Emit(ApiCodeBlockIndex index, FS.FolderPath dst);
     }
 }

@@ -14,7 +14,6 @@ namespace Z0
         byte Count {get;}
     }
 
-
     public interface IAsmOperands<F,A> : IAsmOpererands
         where F : struct, IAsmOperands<F,A>
         where A : unmanaged

@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 
     public readonly struct PartCodeIndex
     {
-        public readonly PartId[] Parts;
+        public Index<PartId> Parts {get;}
 
         readonly ApiHostCodeLookup Data;
 

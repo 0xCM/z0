@@ -23,14 +23,6 @@ namespace Z0
 
         readonly ICaptureServiceProxy Service;
 
-        public static QuickCapture create(IAsmContext asm)
-        {
-            var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = CaptureExchangeProxy.create(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
-            var service = CaptureServiceProxy.create(asm.CaptureCore, exchange);
-            return new QuickCapture(asm, buffer, tokens, service);
-        }
-
         [MethodImpl(Inline)]
         internal QuickCapture(IAsmContext context, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {

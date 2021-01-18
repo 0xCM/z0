@@ -18,6 +18,14 @@ namespace Z0.Asm
             public AsmOpCode OpCode {get;}
 
             public EncodedStatement Encoded {get;}
+
+            [MethodImpl(Inline)]
+            public SemanticComment(AsmSig sig, AsmOpCode oc, EncodedStatement encoded)
+            {
+                Sig = sig;
+                OpCode = oc;
+                Encoded = encoded;
+            }
         }
     }
 }

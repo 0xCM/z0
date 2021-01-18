@@ -76,7 +76,7 @@ namespace Z0
         /// <summary>
         /// Hosts with at least one archived code block
         /// </summary>
-        public ApiHostUri[] NonemptyHosts
+        public Index<ApiHostUri> NonemptyHosts
         {
             [MethodImpl(Inline)]
             get => PartIndex.Hosts.Where(h => h.IsNonEmpty);

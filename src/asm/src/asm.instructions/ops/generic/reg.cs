@@ -18,33 +18,33 @@ namespace Z0.Asm
                 => new r8(pos, data, r.Kind);
 
         [MethodImpl(Inline)]
-        public static r16 reg<R>(R r, byte pos, ushort data)
+        public static r16 reg<R>(R r, byte pos, ushort data = default)
             where R : unmanaged, IRegister
                 => new r16(pos, data, r.Kind);
 
         [MethodImpl(Inline)]
-        public static r32 reg<R>(R r, byte pos, uint data)
+        public static r32 reg<R>(R r, byte pos, uint data = default)
             where R : unmanaged, IRegister
                 => new r32(pos, data, r.Kind);
 
         [MethodImpl(Inline)]
-        public static r64 reg<R>(byte pos, ulong data, R r = default)
+        public static r64 reg<R>(R r, byte pos, ulong data = default)
             where R : unmanaged, IRegister
                 => new r64(pos, data, r.Kind);
 
         [MethodImpl(Inline)]
-        public static xmm reg<R>(Cell128 data, R r = default)
+        public static Xmm<R> reg<R>(R r, byte pos, Cell128 data = default)
             where R : unmanaged, IRegister
-                => new xmm(data, r.Kind);
+                => new Xmm<R>(pos, data);
 
         [MethodImpl(Inline)]
-        public static Ymm<R> reg<R>(Cell256 data, R n = default)
+        public static Ymm<R> reg<R>(R r, byte pos, Cell256 data = default)
             where R : unmanaged, IRegister
-                => new Ymm<R>(data);
+                => new Ymm<R>(pos, data);
 
         [MethodImpl(Inline)]
-        public static Zmm<R> reg<R>(Cell512 data, R n = default)
+        public static Zmm<R> reg<R>(R r, byte pos, Cell512 data = default)
             where R : unmanaged, IRegister
-                => new Zmm<R>(data);
+                => new Zmm<R>(pos, data);
     }
 }

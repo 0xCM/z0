@@ -9,16 +9,19 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>
+    public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>, IAsmOperand<RegisterKind, Cell128>
         where R : unmanaged, IRegister
     {
-        public Cell128 Data;
+        public byte Position {get;}
 
-        public Cell128 Content => Data;
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public Xmm(Cell128 value)
-            => Data = value;
+        public Xmm(byte pos, Cell128 value)
+        {
+            Position = pos;
+            Content = value;
+        }
 
         public RegisterKind Kind
             => default(R).Kind;

@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static math;
 
     /// <summary>
     /// Defines a 16-bit register and its content
@@ -28,6 +27,5 @@ namespace Z0.Asm
 
         public RegisterClass Class
             => RegisterClass.GP;
-
     }
 }

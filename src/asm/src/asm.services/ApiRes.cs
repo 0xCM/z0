@@ -36,7 +36,7 @@ namespace Z0
             var target = span(captured);
 
             using var writer = dst.Writer();
-            using var quick = QuickCapture.create(context);
+            using var quick = AsmServices.quick(context);
 
             for(var i=0u; i<count; i++)
             {

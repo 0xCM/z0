@@ -46,18 +46,17 @@ namespace Z0
 
         public void EmitResBytes()
         {
-            ResBytesEmitter.service(Wf, Index).Emit();
+            var dst = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
+            var service = ResBytesEmitter.init(Wf);
+            service.Emit(Index, dst);
+            //ResBytesEmitter.service(Wf, Index).Emit(dst);
         }
 
         public void EmitCallRows()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-            {
-
-                ref readonly var routines = ref skip(Decoded,i);
-                EmitCallRows(routines);
-            }
+                EmitCallRows(skip(Decoded,i));
         }
 
         public void EmitJmpRows()

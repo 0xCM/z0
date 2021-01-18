@@ -14,14 +14,11 @@ namespace Z0
     /// </summary>
     public struct MemOp32 : IMemOp<MemOp32,W32,uint>
     {
-        public uint Value;
+        public uint Value {get;}
 
         [MethodImpl(Inline)]
         public MemOp32(uint src)
             => Value = src;
-
-        uint IMemOp<uint>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public static implicit operator MemOp32(uint src)
