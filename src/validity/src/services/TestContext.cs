@@ -143,7 +143,7 @@ namespace Z0
         protected virtual bool TraceDetailEnabled
             => false;
 
-        protected TChecks Claim
+        protected IChecks Claim
             => Checks.Checker;
 
         protected ICheckPrimal ClaimPrimal

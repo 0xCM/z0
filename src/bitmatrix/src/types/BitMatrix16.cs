@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -98,13 +98,13 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => Bit32.test(skip(in Head, row), col);
+            get => BitStates.test(skip(in Head, row), (byte)col);
 
             [MethodImpl(Inline)]
-            set => seek(Head, row) = Bit32.set(seek(Head, row), (byte)col, value);
+            set => seek(Head, row) = BitStates.set(seek(Head, row), (byte)col, value);
         }
 
         /// <summary>

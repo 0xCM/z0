@@ -15,11 +15,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// Creates a target vector where each component is initialized with the same value
         /// </summary>
@@ -259,5 +254,160 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
             => (BroadcastScalarToVector256(&src), BroadcastScalarToVector256(&src));
+    }
+
+    partial struct z
+    {
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<sbyte> vbroadcast(W128 w, sbyte src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<byte> vbroadcast(W128 w, byte src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<short> vbroadcast(W128 w, short src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<ushort> vbroadcast(W128 w, ushort src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<int> vbroadcast(W128 w, int src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<uint> vbroadcast(W128 w, uint src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<long> vbroadcast(W128 w, long src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector128<ulong> vbroadcast(W128 w, ulong src)
+            => BroadcastScalarToVector128(&src);
+
+        /// <summary>
+        /// __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<sbyte> vbroadcast(W256 w, sbyte src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        /// __m256i _mm256_broadcastb_epi8 (__m128i a) VPBROADCASTB ymm, m8
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<byte> vbroadcast(W256 w, byte src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        ///  __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<short> vbroadcast(W256 w, short src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        ///  __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<ushort> vbroadcast(W256 w, ushort src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        /// __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<int> vbroadcast(W256 w, int src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        /// __m256i _mm256_broadcastd_epi32 (__m128i a) VPBROADCASTD ymm, m32
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<uint> vbroadcast(W256 w, uint src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        /// __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<long> vbroadcast(W256 w, long src)
+            => BroadcastScalarToVector256(&src);
+
+        /// <summary>
+        ///  __m256i _mm256_broadcastq_epi64 (__m128i a) VPBROADCASTQ ymm, m64
+        /// Creates a target vector where each component is initialized with the same value
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The value to broadcast</param>
+        [MethodImpl(Inline), Broadcast]
+        public static unsafe Vector256<ulong> vbroadcast(W256 w, ulong src)
+            => BroadcastScalarToVector256(&src);
     }
 }

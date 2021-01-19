@@ -11,7 +11,7 @@ namespace Z0
 
     using Test = TestFixedBinaryOp;
 
-    public interface ICheckBinaryCellOp : ITestAction, ITestRandom
+    public interface ICheckBinaryCellOp : ICheckAction, ITestRandom
     {
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points

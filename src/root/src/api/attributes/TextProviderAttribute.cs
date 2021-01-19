@@ -4,7 +4,12 @@
 //-----------------------------------------------------------------------------
 using System;
 
-public class SymbolProviderAttribute : Attribute
+public class TextProviderAttribute : Attribute
 {
+    public TextProviderAttribute(Type target)
+    {
+        Target = target;
+    }
 
+    public Type Target {get;}
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -112,13 +112,13 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates a bit at a specified row/col
         /// </summary>
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get
             {
                 var index = GridCalcs.index(row, col, RowDim, ColDim, default(T));
-                return gbits.testbit32(Data[index.CellIndex], index.BitOffset);
+                return gbits.testbit(Data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]

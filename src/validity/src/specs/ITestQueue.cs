@@ -11,7 +11,7 @@ namespace Z0
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public interface ITestQueue : TTestResultSink, IAppMsgQueue, ISink<BenchmarkRecord>
+    public interface ITestQueue : ITestResultSink, IAppMsgQueue, ISink<BenchmarkRecord>
     {
         IEnumerable<BenchmarkRecord> TakeBenchmarks();
 

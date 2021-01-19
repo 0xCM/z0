@@ -57,5 +57,4 @@ namespace Z0
         /// </summary>
         d9 = '9',
     }
-
 }

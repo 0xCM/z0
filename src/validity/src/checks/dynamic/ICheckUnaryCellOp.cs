@@ -8,7 +8,7 @@ namespace Z0
 
     using Eq = CheckEquatable;
 
-    public interface ICheckUnaryCellOp : ITestAction, ITestRandom
+    public interface ICheckUnaryCellOp : ICheckAction, ITestRandom
     {
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points

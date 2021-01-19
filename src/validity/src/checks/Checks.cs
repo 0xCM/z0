@@ -10,9 +10,9 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct Checks : TChecks
+    public readonly struct Checks : IChecks
     {
-        public static TChecks Checker => default(Checks);
+        public static IChecks Checker => default(Checks);
 
         public const uint Reps = Pow2.T08;
 

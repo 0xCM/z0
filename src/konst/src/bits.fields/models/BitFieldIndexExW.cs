@@ -7,21 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     public readonly struct BitFieldIndex<E,W>
         where E : unmanaged
         where W : unmanaged
     {
         readonly BitFieldIndexEntry<E,W>[] Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitFieldIndex<E,W>(BitFieldIndexEntry<E,W>[] entries)
-            => new BitFieldIndex<E,W>(entries);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitFieldIndexEntry<E,W>[](BitFieldIndex<E,W> src)
-            => src.Data;
 
         [MethodImpl(Inline)]
         public BitFieldIndex(BitFieldIndexEntry<E,W>[] src)
@@ -54,7 +47,7 @@ namespace Z0
         public ref BitFieldIndexEntry<E,W> this[E index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[z.@as<E,int>(index)];
+            get => ref Data[@as<E,int>(index)];
         }
 
         public ref BitFieldIndexEntry<E,W> this[long index]
@@ -68,5 +61,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitFieldIndex<E,W>(BitFieldIndexEntry<E,W>[] entries)
+            => new BitFieldIndex<E,W>(entries);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitFieldIndexEntry<E,W>[](BitFieldIndex<E,W> src)
+            => src.Data;
     }
 }

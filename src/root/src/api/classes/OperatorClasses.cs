@@ -4,26 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class Kinds
+
+    public readonly struct OperatorClasses
     {
-        [KindFactory]
-        public static OperatorClass @operator()
-            => default;
+        const NumericKind Closure = NumericKind.All;
 
         [KindFactory]
         public static EmitterClass emitter()
             => default;
 
         [KindFactory]
-        public static UnaryClass unaryop()
+        public static UnaryClass unary()
             => default;
 
         [KindFactory]
-        public static BinaryClass binaryop()
+        public static BinaryClass binary()
             => default;
 
         [KindFactory]
-        public static TernaryClass ternaryop()
+        public static TernaryClass ternary()
             => default;
 
         [KindFactory]
@@ -35,27 +34,15 @@ namespace Z0
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static UnaryClass<T> unaryop<T>(T t = default)
+        public static UnaryClass<T> unary<T>(T t = default)
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static BinaryClass<T> binaryop<T>(T t = default)
+        public static BinaryClass<T> binary<T>(T t = default)
             where T : unmanaged => default;
 
         [KindFactory, Closures(Closure)]
-        public static TernaryClass<T> ternaryop<T>(T t = default)
+        public static TernaryClass<T> ternary<T>(T t = default)
             where T : unmanaged => default;
-
-        public static UnaryClass UnaryOp
-            => unaryop();
-
-        public static BinaryClass BinaryOp
-            => binaryop();
-
-        public static TernaryClass TernaryOp
-            => ternaryop();
-
-        public static ShiftClass ShiftOp
-            => shift();
     }
 }

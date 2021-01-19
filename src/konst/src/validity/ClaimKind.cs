@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Classifies common validiation invariants
     /// </summary>
     public enum ClaimKind : byte
     {
-
         /// <summary>
         /// Asserts that two values are equal
         /// </summary>

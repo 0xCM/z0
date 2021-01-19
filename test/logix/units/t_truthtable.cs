@@ -19,21 +19,21 @@ namespace Z0.Logix
 
         public void unary_truth()
         {
-            using var dst = UnitWriter(FS.file(CallingMember.define().Name));
+            using var dst = UnitWriter(FS.file(CallingMember.define().CallerName));
             var src = bitlogix.UnaryOpKinds;
             TruthTables.save(src, dst);
         }
 
         public void binary_truth()
         {
-            using var dst = UnitWriter(FS.file(CallingMember.define().Name));
+            using var dst = UnitWriter(FS.file(CallingMember.define().CallerName));
             var src = bitlogix.BinaryOpKinds;
             TruthTables.save(src, dst);
         }
 
         public void ternary_truth()
         {
-            using var dst = UnitWriter(FS.file(CallingMember.define().Name));
+            using var dst = UnitWriter(FS.file(CallingMember.define().CallerName));
             var src = bitlogix.TernaryOpKinds;
             TruthTables.save(src, dst);
         }

@@ -203,7 +203,7 @@ public readonly struct ApiNames
 
     public const string BitFormatOptions = bits + dot + formatters + dot + options;
 
-    public const string BitFieldSpecs = bits + dot + bitfields + dot + specs;
+    public const string BitFieldModels = bits + dot + bitfields + dot + models;
 
     // ~~ Memory
     // ~~ -----------------------------------------------------------------------------------------

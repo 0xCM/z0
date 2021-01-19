@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static z;
-    using static Konst;
+    using static Part;
     using static BinaryBitLogicKind;
 
     using BL = BitLogic.Scalar;

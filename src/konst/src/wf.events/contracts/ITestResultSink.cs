@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
-    public interface TTestResultSink : ISink<TestCaseRecord>
+    public interface ITestResultSink : ISink<TestCaseRecord>
     {
         void ReportCaseResult(string casename, bool succeeded, TimeSpan duration)
             => Deposit(TestCaseRecord.define(casename,succeeded,duration));

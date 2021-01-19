@@ -163,6 +163,16 @@ namespace Z0
         public const NK Int64k = NK.I64 | NK.U64;
 
         /// <summary>
+        /// Specifies a floating point type of width <see cref='W32'/>
+        /// </summary>
+        public const NK Float32k = NK.F32;
+
+        /// <summary>
+        /// Specifies a floating point type of width <see cref='W64'/>
+        /// </summary>
+        public const NK Float64k = NK.F64;
+
+        /// <summary>
         /// Specifies signed and unsigned integral types of width <see cref='W8'/> and <see cref='W16'/>
         /// </summary>
         public const NK Int8x16k = NK.I8 | NK.U8 | NK.I16 | NK.U16;

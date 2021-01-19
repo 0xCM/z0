@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool letter(UpperCased @case, char c)
-            => (ushort)c >= (ushort)AsciLetterUp.First  && (ushort)c <= (ushort)AsciLetterUp.Last;
+            => (ushort)c >= (ushort)AsciLetterUpFacets.First  && (ushort)c <= (ushort)AsciLetterUpFacets.Last;
 
         /// <summary>
         /// Tests whether a character is a lowercase asci letter character

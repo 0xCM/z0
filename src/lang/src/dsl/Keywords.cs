@@ -204,6 +204,11 @@ namespace Z0.Dsl
         public static Keyword source() => "source";
 
         /// <summary>
+        /// Specifies a data emitter
+        /// </summary>
+        public static Keyword type() => "type";
+
+        /// <summary>
         /// Specifies a tool
         /// </summary>
         public static Keyword tool() => "tool";

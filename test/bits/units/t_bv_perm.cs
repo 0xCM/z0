@@ -38,9 +38,9 @@ namespace Z0
             Claim.eq(p1[3], 3);
 
             var bm = p1.ToBitMatrix();
-            Claim.eq(bm[0,31], Bit32.On);
-            Claim.eq(bm[1,30], Bit32.On);
-            Claim.eq(bm[2,29], Bit32.On);
+            Claim.eq(bm[0,31], bit.On);
+            Claim.eq(bm[1,30], bit.On);
+            Claim.eq(bm[2,29], bit.On);
 
 
             var v1 = BitVector32.Zero;

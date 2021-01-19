@@ -31,12 +31,12 @@ namespace Z0
             byte p0 = 0b101;
             byte p1 = 0b010;
 
-            for(var row=0; row < bm.RowCount; row++)
+            for(byte row=0; row < bm.RowCount; row++)
                 bm[row] = BitBlocks.single<N3,byte>(gmath.even(row) ? p0 : p1);
 
-            for(var row=0; row < bm.RowCount; row++)
-            for(var col=0; col < bm.ColCount; col++)
-                Claim.eq(bm[row,col], gmath.even(row) ? Bit32.test(p0,col) : Bit32.test(p1,col));
+            for(byte row=0; row < bm.RowCount; row++)
+            for(byte col=0; col < bm.ColCount; col++)
+                Claim.eq(bm[row,col], gmath.even(row) ? BitStates.test(p0,col) : BitStates.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()

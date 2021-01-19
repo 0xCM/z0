@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = BitFieldModels;
 
@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public readonly struct BitFieldSpec :  ITextual
     {
-        readonly BitFieldSegment[] Data;
+        readonly Index<BitFieldSegment> Data;
 
         [MethodImpl(Inline)]
         public BitFieldSpec(BitFieldSegment[] src)

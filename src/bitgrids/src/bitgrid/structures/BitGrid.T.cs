@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a grid of bits over a contiguous sequence of primal values stored in blocks of 256 bits
@@ -74,7 +74,7 @@ namespace Z0
             get => Data.BlockCount;
         }
 
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => BitGrid.readbit(ColCount, in Head, row, col);
@@ -84,7 +84,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetBit(int index, Bit32 state)
+        public void SetBit(int index, bit state)
             => BitGrid.setbit(index, state, ref Head);
 
         [MethodImpl(Inline)]

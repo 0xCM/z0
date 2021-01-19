@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     /// <summary>
@@ -37,6 +37,87 @@ namespace Z0
         /// Allocates an 8x8 1-filled bitmatrix
         /// </summary>
         public static BitMatrix8 Ones => new BitMatrix8(0xFFFFFFFFFFFFFFFF);
+
+
+        [MethodImpl(Inline)]
+        internal BitMatrix8(Span<byte> src)
+            => this.Data = src;
+
+        [MethodImpl(Inline)]
+        internal BitMatrix8(ulong src)
+            => this.Data = z.bytes(src).Replicate();
+
+        public ReadOnlySpan<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        /// <summary>
+        /// A reference to the first row of the matrix
+        /// </summary>
+        public unsafe ref byte Head
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
+        }
+
+        /// <summary>
+        /// The square matrix order
+        /// </summary>
+        public readonly int Order
+        {
+            [MethodImpl(Inline)]
+            get => (int)N;
+        }
+
+        /// <summary>
+        /// Reads/manipulates the bit in a specified cell
+        /// </summary>
+        /// <param name="row">The row index</param>
+        /// <param name="col">The column index</param>
+        /// <param name="src">The source value</param>
+        public bit this[int row, int col]
+        {
+            [MethodImpl(Inline)]
+            get => BitStates.test(skip(in Head,row), (byte)col);
+
+            [MethodImpl(Inline)]
+            set => seek(Head, row) = BitStates.set(seek(Head, row), (byte)col, value);
+        }
+
+        /// <summary>
+        /// Gets/Sets the data for a row
+        /// </summary>
+        /// <param name="index">The row index</param>
+        public ref BitVector8 this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.As<byte,BitVector8>(ref seek(Head, index));
+        }
+
+        [MethodImpl(Inline)]
+        public BitVector8 Col(int index)
+            => BitVector.create(n8, BitMasks.gather((ulong)this, (C0 << index)));
+
+        const ulong C0 =
+            (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) |
+            (1ul << 64 - 5*8) | (1ul << 64 - 6*8) | (1ul << 64 - 7*8) | 1;
+
+        public override string ToString()
+            => this.Format();
+
+        [MethodImpl(Inline)]
+        public readonly bool Equals(BitMatrix8 src)
+            => BitMatrix.same(this, src);
+
+        [MethodImpl(Inline)]
+
+        public override bool Equals(object obj)
+            => throw new NotSupportedException();
+
+        public override int GetHashCode()
+            => throw new NotSupportedException();
 
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<byte>(BitMatrix8 src)
@@ -85,85 +166,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(in BitMatrix8 A, in BitMatrix8 B)
             => !(A.Equals(B));
-
-        [MethodImpl(Inline)]
-        internal BitMatrix8(Span<byte> src)
-            => this.Data = src;
-
-        [MethodImpl(Inline)]
-        internal BitMatrix8(ulong src)
-            => this.Data = z.bytes(src).Replicate();
-
-        public ReadOnlySpan<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        /// <summary>
-        /// A reference to the first row of the matrix
-        /// </summary>
-        public unsafe ref byte Head
-        {
-            [MethodImpl(Inline)]
-            get => ref first(Data);
-        }
-
-        /// <summary>
-        /// The square matrix order
-        /// </summary>
-        public readonly int Order
-        {
-            [MethodImpl(Inline)]
-            get => (int)N;
-        }
-
-        /// <summary>
-        /// Reads/manipulates the bit in a specified cell
-        /// </summary>
-        /// <param name="row">The row index</param>
-        /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
-        public Bit32 this[int row, int col]
-        {
-            [MethodImpl(Inline)]
-            get => Bit32.test(skip(in Head,row), col);
-
-            [MethodImpl(Inline)]
-            set => seek(Head, row) = Bit32.set(seek(Head, row), (byte)col, value);
-        }
-
-        /// <summary>
-        /// Gets/Sets the data for a row
-        /// </summary>
-        /// <param name="index">The row index</param>
-        public ref BitVector8 this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Unsafe.As<byte,BitVector8>(ref seek(Head, index));
-        }
-
-        [MethodImpl(Inline)]
-        public BitVector8 Col(int index)
-            => BitVector.create(n8, BitMasks.gather((ulong)this, (C0 << index)));
-
-        const ulong C0 =
-            (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) |
-            (1ul << 64 - 5*8) | (1ul << 64 - 6*8) | (1ul << 64 - 7*8) | 1;
-
-        public override string ToString()
-            => this.Format();
-
-        [MethodImpl(Inline)]
-        public readonly bool Equals(BitMatrix8 src)
-            => BitMatrix.same(this, src);
-
-        [MethodImpl(Inline)]
-
-        public override bool Equals(object obj)
-            => throw new NotSupportedException();
-
-        public override int GetHashCode()
-            => throw new NotSupportedException();
     }
 }

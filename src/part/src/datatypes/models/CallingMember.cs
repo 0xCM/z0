@@ -9,50 +9,54 @@ namespace Z0
 
     using static Part;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     /// <summary>
     /// Captures invocation origin details
     /// </summary>
     public struct CallingMember : ITextual
     {
         [MethodImpl(Inline), Op]
-        public static CallingMember define([CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
+        public static CallingMember define([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new CallingMember(caller, file, line ?? 0);
 
         [MethodImpl(Inline), Op]
-        public static ref CallingMember define(ref CallingMember dst, [CallerMemberName] string name = null, [CallerLineNumber] int? line = null, [CallerFilePath] string path = null)
+        public static ref CallingMember define(ref CallingMember dst, [Caller] string name = null, [CallerFilePath] string path = null, [Line] int? line = null)
         {
-            dst.Name = name;
-            dst.File = path;
-            dst.FileLine = (uint)(line ?? 0);
+            dst.CallerName = name;
+            dst.CallerFile = path;
+            dst.CallerLine = (uint)(line ?? 0);
             return ref dst;
         }
 
         /// <summary>
         /// The originator name
         /// </summary>
-        public StringRef Name;
+        public Name CallerName;
 
         /// <summary>
         /// The name of the file from which the invocation occurred
         /// </summary>
-        public StringRef File;
+        public Name CallerFile;
 
         /// <summary>
         /// The file-relative invocation line number
         /// </summary>
-        public uint FileLine;
+        public uint CallerLine;
 
         [MethodImpl(Inline)]
         public CallingMember(string name, string file, int line)
         {
-            Name = name;
-            File = file;
-            FileLine = (uint)line;
+            CallerName = name;
+            CallerFile = file;
+            CallerLine = (uint)line;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.PSx3, Name, FileLine, File);
+            => text.format(RP.PSx3, CallerName, CallerLine, CallerFile);
 
         public override string ToString()
             => Format();

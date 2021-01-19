@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static BufferSeqId;
 
-    using K = Kinds;
+    using K = OperatorClasses;
 
     public interface IAsmChecker : IContextual<IAsmContext>,  IBufferedChecker, ITestDynamic, ICaptureServiceProxy, ICheckDynamicVectors
     {
@@ -142,7 +142,7 @@ namespace Z0.Asm
 
             void check()
             {
-                var k = K.UnaryOp;
+                var k = K.unary();
                 var injector = Dynamic.UnaryInjector<T>(w);
                 var dynop = injector.EmbedImmediate(method,imm);
 

@@ -64,137 +64,198 @@ namespace Z0
                 return unparsed<T>(src);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         static bit parse_u<T>(string src, out T dst)
             where T : unmanaged
         {
-            dst = default;
             if(typeof(T) == typeof(byte))
-            {
-                if(SP.parse(src, out byte x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-            }
+                return parse_8u(src, out dst);
             else if(typeof(T) == typeof(ushort))
-            {
-                if(SP.parse(src, out ushort x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_16u(src, out dst);
             else if(typeof(T) == typeof(uint))
-            {
-                if(SP.parse(src, out uint x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_32u(src, out dst);
             else if(typeof(T) == typeof(ulong))
-            {
-                if(SP.parse(src, out ulong x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_64u(src, out dst);
             else
                 return parse_i(src, out dst);
         }
 
-        [MethodImpl(Inline), Op, Closures(SignedInts)]
+        [MethodImpl(Inline)]
         static bit parse_i<T>(string src, out T dst)
             where T : unmanaged
         {
-            dst = default;
             if(typeof(T) == typeof(sbyte))
-            {
-                if(SP.parse(src, out sbyte x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-            }
+                return parse_8i(src, out dst);
             else if(typeof(T) == typeof(short))
-            {
-                if(SP.parse(src, out short x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_16i(src, out dst);
             else if(typeof(T) == typeof(int))
-            {
-                if(SP.parse(src, out int x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_32i(src, out dst);
             else if(typeof(T) == typeof(long))
-            {
-                if(SP.parse(src, out long x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-
-            }
+                return parse_64i(src, out dst);
             else
                 return parse_f(src, out dst);
         }
 
-        [MethodImpl(Inline), Op, Closures(Floats)]
+        [MethodImpl(Inline)]
         static bit parse_f<T>(string src, out T dst)
             where T : unmanaged
         {
-            dst = default;
-
             if(typeof(T) == typeof(float))
-            {
-                if(SP.parse(src, out float x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
-            }
+                return parse_32f(src, out dst);
             else if(typeof(T) == typeof(double))
+                return parse_64f(src, out dst);
+            else
+                throw no<T>();
+        }
+
+        [MethodImpl(Inline), Op, Closures(Int8k)]
+        static bit parse_8i<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out sbyte x))
             {
-                if(SP.parse(src, out double x))
-                {
-                    dst = @as<T>(x);
-                    return true;
-                }
-                else
-                    return false;
+                dst = @as<T>(x);
+                return true;
             }
-            return false;
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
+        static bit parse_8u<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out byte x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt16k)]
+        static bit parse_16u<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out ushort x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt32k)]
+        static bit parse_32u<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out uint x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        static bit parse_64u<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out ulong x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Int16k)]
+        static bit parse_16i<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out short x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Int32k)]
+        static bit parse_32i<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out int x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Int64k)]
+        static bit parse_64i<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out long x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Float64k)]
+        static bit parse_64f<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out double x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [MethodImpl(Inline), Op, Closures(Float32k)]
+        static bit parse_32f<T>(string src, out T dst)
+        {
+            if(SP.parse(src, out float x))
+            {
+                dst = @as<T>(x);
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
         }
     }
 }

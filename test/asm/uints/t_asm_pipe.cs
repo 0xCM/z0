@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using K = Kinds;
+    using K = OperatorClasses;
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
@@ -25,20 +25,6 @@ namespace Z0.Asm
 
         }
 
-        void check_unary_ops(ApiCodeBlock[] src)
-        {
-            foreach(var code in ApiCode.withArity(src, 1))
-            {
-                if(ApiCode.accepts(code, NumericKind.U8))
-                    AsmCheck.CheckFixedMatch<Cell8>(K.UnaryOp, code, code);
-                else if(ApiCode.accepts(code, NumericKind.U16))
-                    AsmCheck.CheckFixedMatch<Cell16>(K.UnaryOp, code, code);
-                else if(ApiCode.accepts(code, NumericKind.U32))
-                    AsmCheck.CheckFixedMatch<Cell32>(K.UnaryOp, code, code);
-                else if(ApiCode.accepts(code, NumericKind.U64))
-                    AsmCheck.CheckFixedMatch<Cell64>(K.UnaryOp, code, code);
-            }
-        }
 
         public void check_math()
         {
@@ -52,6 +38,21 @@ namespace Z0.Asm
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);
             check_unary_ops(generic);
+        }
+
+        void check_unary_ops(ApiCodeBlock[] src)
+        {
+            foreach(var code in ApiCode.withArity(src, 1))
+            {
+                if(ApiCode.accepts(code, NumericKind.U8))
+                    AsmCheck.CheckFixedMatch<Cell8>(K.unary(), code, code);
+                else if(ApiCode.accepts(code, NumericKind.U16))
+                    AsmCheck.CheckFixedMatch<Cell16>(K.unary(), code, code);
+                else if(ApiCode.accepts(code, NumericKind.U32))
+                    AsmCheck.CheckFixedMatch<Cell32>(K.unary(), code, code);
+                else if(ApiCode.accepts(code, NumericKind.U64))
+                    AsmCheck.CheckFixedMatch<Cell64>(K.unary(), code, code);
+            }
         }
     }
 

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public interface IBitFieldIndexEntry
     {
@@ -42,7 +39,7 @@ namespace Z0
         new W FieldWidth {get;}
 
         uint IBitFieldIndexEntry.FieldWidth
-            => z.uint32(FieldWidth);
+            => memory.uint32(FieldWidth);
     }
 
     public interface IBitFieldIndexEntry<F,E,W> : IBitFieldIndexEntry<F,W>
@@ -56,15 +53,9 @@ namespace Z0
         new E FieldIndex {get;}
 
         uint IBitFieldIndexEntry.FieldIndex
-        {
-            [MethodImpl(Inline)]
-            get => z.@as<E,uint>(FieldIndex);
-        }
+            => memory.@as<E,uint>(FieldIndex);
 
         string IBitFieldIndexEntry.FieldName
-        {
-            [MethodImpl(Inline)]
-            get => FieldIndex.ToString();
-        }
+            => FieldIndex.ToString();
     }
 }

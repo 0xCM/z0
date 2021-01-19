@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    using K = Kinds;
+    using K = OperatorClasses;
 
     class EvalDispatcher : IEvalDispatcher
     {
@@ -73,9 +73,6 @@ namespace Z0
             where T : unmanaged
             where E : unmanaged, Enum
                 => Evaluator(buffers);
-
-        public void Notify(AppMsg msg)
-            => Sink.NotifyConsole(msg);
 
         public bit EvalCellOperators(BufferTokens buffers, ApiMemberCode[] api)
         {
@@ -335,10 +332,10 @@ namespace Z0
             }
         }
 
-        Bit32 Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
+        bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).Eval(api, K.BinaryOp, src);
+            var dst = Evaluator(buffers).Eval(api, K.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -358,7 +355,7 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalCellular(api, K.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalCellular(api, K.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -366,7 +363,7 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalCellular(api, K.BinaryOp, src);
+            var dst = Evaluator(buffers).EvalCellular(api, K.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -383,7 +380,7 @@ namespace Z0
         {
 
             var evaluator = Evaluator(buffers, k);
-            var dst = evaluator.Eval(api, K.BinaryOp, src);
+            var dst = evaluator.Eval(api, K.binary(), src);
             Analyze(src, dst, api);
             return dst;
         }

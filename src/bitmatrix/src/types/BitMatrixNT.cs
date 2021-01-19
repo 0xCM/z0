@@ -90,7 +90,7 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => this[row][col];

@@ -11,9 +11,9 @@ namespace Z0
 
     public class t_bm_permute : t_bitmatrix<t_bm_permute>
     {
-        Bit32 on => Bit32.On;
+        bit on => bit.On;
 
-        Bit32 off => Bit32.Off;
+        bit off => bit.Off;
 
         public void bm_fromperm_8x8x8()
         {

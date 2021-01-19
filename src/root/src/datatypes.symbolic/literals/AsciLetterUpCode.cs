@@ -141,20 +141,5 @@ namespace Z0
         /// The 'Z' symbol code 90
         /// </summary>
         Z = LC.Z,
-
-        /// <summary>
-        /// The first declared code, 65
-        /// </summary>
-        First = A,
-
-        /// <summary>
-        /// The last declared code, 90
-        /// </summary>
-        Last = Z,
-
-        /// <summary>
-        /// The code declaration count, 26
-        /// </summary>
-        Count = Last - First + 1
     }
 }

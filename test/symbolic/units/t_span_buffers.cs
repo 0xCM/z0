@@ -19,7 +19,7 @@ namespace Z0
         public void check_caller()
         {
             var c = CallingMember.define();
-            Assert.eq(c.Name, nameof(check_caller));
+            Assert.eq(c.CallerName, nameof(check_caller));
         }
 
         [Op]

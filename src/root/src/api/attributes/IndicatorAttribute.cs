@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Attaches a binary literal value to a target or identifies a literal field
     /// </summary>
-    public class IndicatorAttribute : LiteralAttachmentAttribute
+    public class IndicatorAttribute : Attribute
     {
         public object Min {get;}
 
@@ -18,7 +18,6 @@ namespace Z0
         public string Indicator {get;}
 
         public IndicatorAttribute(AsciChar c)
-            : base(c)
         {
             Indicator = $"{c}";
             Min = c;
@@ -26,78 +25,78 @@ namespace Z0
         }
 
         public IndicatorAttribute(string indicator, byte min, byte max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, sbyte min, sbyte max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, ushort min, ushort max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, short min, short max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, uint min, uint max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, int min, int max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, long min, long max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, ulong min, ulong max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, float min, float max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, double min, double max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }
 
         public IndicatorAttribute(string indicator, decimal min, decimal max)
-            : base(indicator,min,max)
         {
+            Indicator = indicator;
             Min = min;
             Max = max;
         }

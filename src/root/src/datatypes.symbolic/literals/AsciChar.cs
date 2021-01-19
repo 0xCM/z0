@@ -149,8 +149,7 @@ namespace Z0
         /// </summary>
         z = 'z',
 
-
-         /// <summary>
+        /// <summary>
         /// The 'A' symbol
         /// </summary>
         A = 'A',

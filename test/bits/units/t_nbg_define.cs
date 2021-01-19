@@ -57,8 +57,8 @@ namespace Z0
             var zero = 0u;
             var matrix = Random.BitMatrix(n);
             var grid = matrix.ToBitGrid();
-            for(var row = 0; row < n; row++)
-            for(var col = 0; col < n; col++)
+            for(byte row = 0; row < n; row++)
+            for(byte col = 0; col < n; col++)
                 Claim.eq(grid[row,col], matrix[row,col]);
 
             nbg_define_check(n,n,zero);
@@ -70,8 +70,8 @@ namespace Z0
             var zero = 0ul;
             var matrix = Random.BitMatrix(n);
             var grid = matrix.ToBitGrid();
-            for(var row = 0; row < n; row++)
-            for(var col = 0; col < n; col++)
+            for(byte row = 0; row < n; row++)
+            for(byte col = 0; col < n; col++)
                 Claim.eq(grid[row,col], matrix[row,col]);
 
             nbg_define_check(n,n,zero);

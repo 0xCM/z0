@@ -4,18 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using T = AsciLetterUpCode;
 
     /// <summary>
-    /// Specifies the effective bit-width of a bitfield segment
+    /// Defines facets for the <see cref='T'/> type
     /// </summary>
-    public class FieldWidthAttribute : Attribute
+    [FacetProvider(typeof(T))]
+    public readonly struct AsciLetterUpCodeFacets
     {
-        public FieldWidthAttribute(byte width)
-        {
-            Width = width;
-        }
+        public const T First = T.A;
 
-        public byte Width {get;}
+        public const T Last = T.Z;
+
+        public const byte Count = Last - First + 1;
     }
 }

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
 
     public class t_bm_xor : t_bitmatrix<t_bm_xor>

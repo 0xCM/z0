@@ -28,7 +28,7 @@ namespace Z0
             Random = random;
         }
 
-        ITestAction ActionTest
+        ICheckAction ActionTest
             => z.cast<ICheckBinaryCellOp>(this);
 
         ITestCaseIdentity Identity

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static NumericCast;
 
     /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         internal BitVector(T data)
-            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
+            => Data = gmath.and(BitMasks.lo<N,T>(), data);
 
         [MethodImpl(Inline)]
         internal BitVector(T data, bit inject)

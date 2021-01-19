@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitMatrix4(ushort src)
         {
-            this.Data = src;
+            Data = src;
         }
 
         public int Order => (int)N;
@@ -70,13 +70,13 @@ namespace Z0
             Data = result;
         }
 
-        public Bit32 this[int row, int col]
+        public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => Bit32.test(Data, row*4 + col);
+            get => BitStates.test(Data, (byte)(row*4 + col));
 
             [MethodImpl(Inline)]
-            set => Data = Bit32.set(Data, (byte)(row*4 + col), value);
+            set => Data = BitStates.set(Data, (byte)(row*4 + col), value);
         }
 
         public BitVector4 this[int row]
@@ -86,7 +86,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             set => SetRow(row, value);
-
         }
 
         [MethodImpl(Inline)]

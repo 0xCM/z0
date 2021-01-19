@@ -4,15 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public abstract class LiteralAttachmentAttribute : Attribute
+    public interface IChecks :
+        ICheckLengths,
+        ICheckPrimal,
+        ICheckPrimalSeq,
+        ICheckClose,
+        ICheckFiles,
+        ICheckInvariant,
+        ICheckSets,
+        ICheckNull
     {
-        public object[] Attached {get;}
 
-        protected LiteralAttachmentAttribute(params object[] values)
-        {
-            Attached = values;
-        }
     }
 }

@@ -59,7 +59,7 @@ namespace Z0
             var kCells = (int)GridCalcs.mincells<T>((ulong)bitcount);
 
             if(DiagnosticMode)
-                term.print($"Executing {caller.Name}: {bitcount} bits covered by {kCells} cells of kind {typeof(T).DisplayName()}");
+                term.print($"Executing {caller.CallerName}: {bitcount} bits covered by {kCells} cells of kind {typeof(T).DisplayName()}");
 
             var src = Random.Span<T>(RepCount);
 
@@ -75,7 +75,5 @@ namespace Z0
                     Claim.eq(bc[j], bs[j]);
             }
         }
-
-
     }
 }

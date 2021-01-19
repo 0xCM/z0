@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICheckNumericMatch : ITestAction, ICheckNumeric, ITestRandom
+    public interface ICheckNumericMatch : ICheckAction, ICheckNumeric, ITestRandom
     {
         /// <summary>
         /// Evaluates a pair of unary operators and asserts their equality over a random sequence

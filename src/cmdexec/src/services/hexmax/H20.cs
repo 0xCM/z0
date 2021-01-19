@@ -7,105 +7,104 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct HexMax
     {
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X20 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X21 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X22 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X23 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X24 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X25 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X26 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X27 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X28 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X29 x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2A x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2B x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2C x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2D x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2E x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
 
-        [MethodImpl(Inline)]
+        [Op, MethodImpl(Option)]
         public void Process(X2F x)
         {
-            State = vadd(State, vbroadcast(w128, (byte)x));
+
         }
     }
 }

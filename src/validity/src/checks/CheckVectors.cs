@@ -16,8 +16,6 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using R = ClaimResults;
-
     [ApiHost]
     public readonly struct CheckVectors : ICheckVectors
     {

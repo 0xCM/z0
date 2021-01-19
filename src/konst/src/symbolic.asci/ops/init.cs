@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci64 init(N64 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci64(z.vbroadcast(w512, (byte)fill));
+            => new asci64(cpu.vbroadcast(w512, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci2 init(N2 n, ReadOnlySpan<byte> src)

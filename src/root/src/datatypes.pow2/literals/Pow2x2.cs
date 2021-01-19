@@ -23,6 +23,5 @@ namespace Z0
         /// 2^1 = 2
         /// </summary>
         P2ᐞ01 = K.T01,
-
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
         {
             var dst = BitMatrix.alloc(n8);
             for(var row = 0; row<perm.Length; row++)
-                dst[row, perm[row]] = Bit32.On;
+                dst[row, perm[row]] = bit.On;
             return dst;
         }
 

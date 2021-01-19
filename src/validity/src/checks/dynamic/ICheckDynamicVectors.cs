@@ -10,7 +10,7 @@ namespace Z0
     using static z;
     using static BufferSeqId;
 
-    public interface ICheckDynamicVectors : ITestAction, ITestDynamic, IBufferedChecker
+    public interface ICheckDynamicVectors : ICheckAction, ITestDynamic, IBufferedChecker
     {
         TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiCodeBlock bits)
             where T : unmanaged

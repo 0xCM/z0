@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static NumericIndicator from(Type t)
         {
-            if(t == typeof(Bit32))
+            if(t == typeof(Bit32) || t == typeof(bit))
                 return NI.Unsigned;
             else
                 return NK.indicator(Numeric.kind(t));

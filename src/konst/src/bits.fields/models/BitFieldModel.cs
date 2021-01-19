@@ -7,25 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct BitFieldModel
     {
-        public readonly uint FieldCount;
+        public uint FieldCount {get;}
 
-        readonly TableSpan<BitFieldSegment> _Segments;
+        readonly Index<BitFieldSegment> Data;
 
         [MethodImpl(Inline)]
         public BitFieldModel(uint count, uint width, BitFieldSegment[] segments)
         {
             FieldCount = count;
-            _Segments = segments;
+            Data = segments;
         }
 
         public ReadOnlySpan<BitFieldSegment> Segments
         {
             [MethodImpl(Inline)]
-            get => _Segments.View;
+            get => Data.View;
         }
 
         [MethodImpl(Inline)]
@@ -38,6 +38,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly BitFieldSegment Segment(int index)
-            => ref _Segments[index];
+            => ref Data[index];
     }
 }
