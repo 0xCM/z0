@@ -18,17 +18,17 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 match<T>(Vector128<T> x, Vector128<T> y, BitLogicKinds.And f)
+        public static bit match<T>(Vector128<T> x, Vector128<T> y, BitLogicKinds.And f)
             where T : unmanaged
                 => CheckMatch(x, y, f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 match<T>(Vector256<T> x, Vector256<T> y, BitLogicKinds.And f)
+        public static bit match<T>(Vector256<T> x, Vector256<T> y, BitLogicKinds.And f)
             where T : unmanaged
                 => CheckMatch(x, y, f);
 
         [MethodImpl(Inline)]
-        public static Bit32 CheckMatch<K,T>(Vector128<T> x, Vector128<T> y, K f = default)
+        public static bit CheckMatch<K,T>(Vector128<T> x, Vector128<T> y, K f = default)
             where K : unmanaged, IBitLogicKind
             where T : unmanaged
         {
@@ -46,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Bit32 CheckMatch<K,T>(Vector256<T> x, Vector256<T> y, K f = default)
+        public static bit CheckMatch<K,T>(Vector256<T> x, Vector256<T> y, K f = default)
             where K : unmanaged, IBitLogicKind
             where T : unmanaged
         {

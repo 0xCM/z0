@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using K = OperatorClasses;
-
     using static z;
 
     public class EvalControl : IEvalControl
@@ -43,10 +41,10 @@ namespace Z0
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)
-                    Dispatcher.Dispatch(buffers, api, K.unary());
+                    Dispatcher.Dispatch(buffers, api, Api.unary());
 
                 foreach(var api in code.BinaryOperators)
-                    Dispatcher.Dispatch(buffers, api, K.binary());
+                    Dispatcher.Dispatch(buffers, api, Api.binary());
             }
         }
 

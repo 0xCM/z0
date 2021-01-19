@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Collections.Concurrent;
 
-    using static Konst;
-
     /// <summary>
     /// Base type for test applications
     /// </summary>

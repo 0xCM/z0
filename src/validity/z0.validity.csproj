@@ -13,6 +13,7 @@
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(VSvc)" />
   </ItemGroup>
 
 </Project>

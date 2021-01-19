@@ -11,8 +11,6 @@ namespace Z0
     using static SFx;
     using static z;
 
-    using K = OperatorClasses;
-
     public interface ICheckSVF : ITestService, ICheckVectors, ITestRandom, ICheckAction
     {
         ICheckSVF<T> Typed<T>()
@@ -22,42 +20,42 @@ namespace Z0
         void CheckUnaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : IUnaryOp128D<T>
-                => Typed<T>().CheckSVF(f, K.unary(), w);
+                => Typed<T>().CheckSVF(f, Api.unary(), w);
 
         void CheckUnaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IUnaryOp256D<T>
-                => Typed<T>().CheckSVF(f, K.unary(), w);
+                => Typed<T>().CheckSVF(f, Api.unary(), w);
 
         void CheckShiftOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : IShiftOp128D<T>
-                => Typed<T>().CheckSVF(f, K.shift(), w);
+                => Typed<T>().CheckSVF(f, Api.shift(), w);
 
         void CheckShiftOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IShiftOp256D<T>
-                => Typed<T>().CheckSVF(f, K.shift(), w);
+                => Typed<T>().CheckSVF(f, Api.shift(), w);
 
         void CheckBinaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : IBinaryOp128D<T>
-                => Typed<T>().CheckSVF(f, K.binary(), w);
+                => Typed<T>().CheckSVF(f, Api.binary(), w);
 
         void CheckBinaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : IBinaryOp256D<T>
-                => Typed<T>().CheckSVF(f, K.binary(), w);
+                => Typed<T>().CheckSVF(f, Api.binary(), w);
 
         void CheckTernaryOp<F,T>(F f, W128 w, T t = default)
             where T : unmanaged
             where F : ITernaryOp128D<T>
-                => Typed<T>().CheckSVF(f, K.ternary(), w);
+                => Typed<T>().CheckSVF(f, Api.ternary(), w);
 
         void CheckTernaryOp<F,T>(F f, W256 w, T t = default)
             where T : unmanaged
             where F : ITernaryOp256D<T>
-                => Typed<T>().CheckSVF(f, K.ternary(), w);
+                => Typed<T>().CheckSVF(f, Api.ternary(), w);
 
         void CheckCells<F,T>(F f, Func<uint,Pair<Vector128<T>>> src)
             where T : unmanaged

@@ -14,7 +14,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using K = OperatorClasses;
     using I = Z0;
     using VK = VKinds;
 
@@ -50,9 +49,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, VKinds.v128, K.unary());
+                return ImmInjector.create(Diviner, VKinds.v128, Api.unary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, VKinds.v256, K.unary());
+                return ImmInjector.create(Diviner, VKinds.v256, Api.unary());
             else
                 throw Unsupported.define<W>();
         }
@@ -60,9 +59,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, VKinds.v128, K.binary());
+                return ImmInjector.create(Diviner, VKinds.v128, Api.binary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, VKinds.v256, K.binary());
+                return ImmInjector.create(Diviner, VKinds.v256, Api.binary());
             else
                 throw no<W>();
         }

@@ -6,18 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
- 
-    using static Konst; 
-    
+    using static Part;
+
     partial struct z
-    {                
+    {
         /// <summary>
         /// Computes the material nomimplication, ~x & y for vectors x and y
         /// </summary>
@@ -98,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl]
         public static Vector256<sbyte> vnonimpl(Vector256<sbyte> x, Vector256<sbyte> y)
             => AndNot(x, y);
- 
+
         /// <summary>
         /// Computes the material nomimplication, ~x & y for vectors x and y
         /// </summary>

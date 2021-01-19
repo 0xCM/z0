@@ -11,8 +11,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using K = OperatorClasses;
-
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
         public t_asm_pipe()
@@ -45,13 +43,13 @@ namespace Z0.Asm
             foreach(var code in ApiCode.withArity(src, 1))
             {
                 if(ApiCode.accepts(code, NumericKind.U8))
-                    AsmCheck.CheckFixedMatch<Cell8>(K.unary(), code, code);
+                    AsmCheck.CheckFixedMatch<Cell8>(Api.unary(), code, code);
                 else if(ApiCode.accepts(code, NumericKind.U16))
-                    AsmCheck.CheckFixedMatch<Cell16>(K.unary(), code, code);
+                    AsmCheck.CheckFixedMatch<Cell16>(Api.unary(), code, code);
                 else if(ApiCode.accepts(code, NumericKind.U32))
-                    AsmCheck.CheckFixedMatch<Cell32>(K.unary(), code, code);
+                    AsmCheck.CheckFixedMatch<Cell32>(Api.unary(), code, code);
                 else if(ApiCode.accepts(code, NumericKind.U64))
-                    AsmCheck.CheckFixedMatch<Cell64>(K.unary(), code, code);
+                    AsmCheck.CheckFixedMatch<Cell64>(Api.unary(), code, code);
             }
         }
     }

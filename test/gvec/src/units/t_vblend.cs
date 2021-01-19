@@ -31,7 +31,7 @@ namespace Z0
             var w = n256;
             var a = gvec.vinc(w, z8);
             var b = gvec.vdec(w, Max8u);
-            var spec = z.v8u(z.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var spec = z.v8u(cpu.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var c = gvec.vblend(a,b,spec);
         }
 
@@ -39,7 +39,7 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)M.Msb16x8x1 << 16;
-            z.vcover(z.v16u(z.vbroadcast(w,alt)), out Vector128<byte> spec);
+            z.vcover(z.v16u(cpu.vbroadcast(w,alt)), out Vector128<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -50,7 +50,7 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)M.Msb16x8x1 << 16;
             var altEven = (uint)M.Msb16x8x1;
-            z.vcover(z.v16u(z.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
+            z.vcover(z.v16u(gcpu.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -64,8 +64,8 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = z.vbroadcast(n, (byte)1);
-                var y = z.vbroadcast(n, (byte)2);
+                var x = cpu.vbroadcast(n, (byte)1);
+                var y = cpu.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());
                 Trace("valignr/3",gvec.valignr(x,y, 3).Format());
@@ -79,8 +79,8 @@ namespace Z0
             void example2()
             {
                 var n = n256;
-                var x = z.vbroadcast(n, (byte)1);
-                var y = z.vbroadcast(n, (byte)2);
+                var x = cpu.vbroadcast(n, (byte)1);
+                var y = cpu.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.FormatLanes());
                 Trace($"y{n}", y.FormatLanes());
                 Trace("valignr/3", gvec.valignr(x,y, 3).FormatLanes());
@@ -153,7 +153,7 @@ namespace Z0
             Claim.veq(z.vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
             Claim.veq(z.vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
 
-            var lrpattern = z.v32u(z.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = z.v32u(cpu.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(byte i=0; i < 8; i++)
                 Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 

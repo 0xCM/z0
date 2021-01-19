@@ -31,15 +31,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci8(z.vlo64(z.vbroadcast(w128, (byte)fill)));
+            => new asci8(z.vlo64(cpu.vbroadcast(w128, (byte)fill)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci16(z.vbroadcast(w128, (byte)fill));
+            => new asci16(cpu.vbroadcast(w128, (byte)fill));
 
         [MethodImpl(Inline), Op]
         public static asci32 init(N32 n, AsciCharCode fill = AsciCharCode.Space)
-            => new asci32(z.vbroadcast(w256, (byte)fill));
+            => new asci32(cpu.vbroadcast(w256, (byte)fill));
 
         [MethodImpl(Inline)]
         public static asci2 init(N2 n, ReadOnlySpan<AsciCharCode> src)

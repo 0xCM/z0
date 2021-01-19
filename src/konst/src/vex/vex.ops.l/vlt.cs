@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector128<byte> vlt(Vector128<byte> x, Vector128<byte> y)
         {
-            var mask = vbroadcast(n128, SignMask8);
+            var mask = cpu.vbroadcast(n128, SignMask8);
             var mx = v8i(vxor(x,mask));
             var my = v8i(vxor(y,mask));
             return v8u(CompareLessThan(mx,my));
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = vbroadcast(n128, SignMask16);
+            var mask = cpu.vbroadcast(n128, SignMask16);
             var mx = v16i(vxor(x,mask));
             var my = v16i(vxor(y,mask));
             return v16u(CompareLessThan(mx,my));
@@ -99,7 +99,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = vbroadcast(n128, SignMask32);
+            var mask = cpu.vbroadcast(n128, SignMask32);
             return v32u(CompareLessThan(v32i(vxor(x,mask)), v32i(vxor(y,mask))));
         }
 
@@ -146,7 +146,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector256<byte> vlt(Vector256<byte> x, Vector256<byte> y)
         {
-            var mask = vbroadcast(n256, SignMask8);
+            var mask = cpu.vbroadcast(n256, SignMask8);
             return v8u(vlt(v8i(vxor(x,mask)), v8i(vxor(y,mask))));
         }
 
@@ -167,7 +167,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector256<ushort> vlt(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = vbroadcast(n256, SignMask16);
+            var mask = cpu.vbroadcast(n256, SignMask16);
             return v16u(vlt(v16i(vxor(x,mask)), v16i(vxor(y,mask))));
         }
 
@@ -188,7 +188,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector256<uint> vlt(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = vbroadcast(n256, SignMask32);
+            var mask = cpu.vbroadcast(n256, SignMask32);
             return v32u(vlt(v32i(vxor(x,mask)), v32i(vxor(y,mask))));
         }
 
@@ -209,7 +209,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var mask = vbroadcast(n256,SignMask64);
+            var mask = cpu.vbroadcast(n256,SignMask64);
             return v64u(vlt(v64i(vxor(x,mask)),v64i(vxor(y,mask))));
         }
     }

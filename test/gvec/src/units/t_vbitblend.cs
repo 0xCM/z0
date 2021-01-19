@@ -16,7 +16,7 @@ namespace Z0
         public void bitblend_basecases()
         {
             var n = n256;
-            var mask = z.vbroadcast(n, BitMasks.msb(n2,n1,z8));
+            var mask = cpu.vbroadcast(n, BitMasks.msb(n2,n1,z8));
             var zero = z.vzero<byte>(n);
             var ones = gvec.vones<byte>(n);
             var blend = gvec.vblendbits<byte>(zero, ones, mask);

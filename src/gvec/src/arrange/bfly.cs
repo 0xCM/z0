@@ -388,7 +388,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbfly(N1 n, Vector256<ulong> x)
-            => VBF(x,v666(n256,n64),1);
+            => VBF(x, v666(n256,n64),1);
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 2-bit segments
@@ -397,7 +397,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vbfly(N2 n, Vector256<byte> x)
-            => VBF(x,v3C(n256,n8),2);
+            => VBF(x, v3C(n256,n8),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -406,7 +406,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vbfly(N2 n, Vector256<ushort> x)
-            => VBF(x,v3C(n256,n16),2);
+            => VBF(x, v3C(n256,n16),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -415,7 +415,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vbfly(N2 n, Vector256<uint> x)
-            => VBF(x,v3C(n256,n32),2);
+            => VBF(x, v3C(n256,n32),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 2-bit segments of each 8-bit segment.
@@ -424,7 +424,7 @@ namespace Z0
         /// <param name="x">The bit source</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbfly(N2 n, Vector256<ulong> x)
-            => VBF(x,v3C(n256,n64),2);
+            => VBF(x, v3C(n256,n64),2);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments
@@ -434,7 +434,7 @@ namespace Z0
         /// <remarks> [0 1 2 3 ] -> [0 2 1 3] </remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vbfly(N4 n, Vector256<ushort> x)
-            => VBF(x,v0FF0(n256,n16),4);
+            => VBF(x, v0FF0(n256,n16),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -447,7 +447,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vbfly(N4 n, Vector256<uint> x)
-            => VBF(x,v0FF0(n256,n32),4);
+            => VBF(x, v0FF0(n256,n32),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 4-bit segments of each 16-bit segment.
@@ -460,7 +460,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbfly(N4 n, Vector256<ulong> x)
-            => VBF(x,v0FF0(n256,n64),4);
+            => VBF(x, v0FF0(n256,n64),4);
 
         /// <summary>
         /// Effects a butterfly permutation on the bit source that swaps the interior 8-bit segments
@@ -526,114 +526,114 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<byte> v666(N128 w, N8 n)
-            => z.vbroadcast(w, Central8x4x2);
+            => cpu.vbroadcast(w, Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v666(N128 w, N16 n)
-            => z.vbroadcast(w, Central16x4x2);
+            => cpu.vbroadcast(w, Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v666(N128 w, N32 n)
-            => z.vbroadcast(w, Central32x4x2);
+            => cpu.vbroadcast(w, Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v666(N128 w, N64 n)
-            => z.vbroadcast(w, Central64x4x2);
+            => cpu.vbroadcast(w, Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<byte> v3C(N128 w, N8 f)
-            => z.vbroadcast(w, Central8x8x4);
+            => cpu.vbroadcast(w, Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v3C(N128 w, N16 n)
-            => z.vbroadcast(w, Central16x8x4);
+            => cpu.vbroadcast(w, Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v3C(N128 w, N32 n)
-            => z.vbroadcast(w, Central32x8x4);
+            => cpu.vbroadcast(w, Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v3C(N128 w, N64 n)
-            => z.vbroadcast(w,  Central64x8x4);
+            => cpu.vbroadcast(w,  Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v0FF0(N128 w, N16 n)
-            => z.vbroadcast(w, Central16x16x8);
+            => cpu.vbroadcast(w, Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v0FF0(N128 w, N32 n)
-            => z.vbroadcast(w, Central32x16x8);
+            => cpu.vbroadcast(w, Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0FF0(N128 w, N64 n)
-            => z.vbroadcast(w, Central64x16x8);
+            => cpu.vbroadcast(w, Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v00FFFF00(N128 w)
-            => z.vbroadcast(w, Central32x32x16);
+            => cpu.vbroadcast(w, Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v00FFFF0000FFFF00(N128 w)
-            => z.vbroadcast(w, Central64x32x16);
+            => cpu.vbroadcast(w, Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0000FFFFFFFF0000(N128 w)
-            => z.vbroadcast(w, Central64x64x32);
+            => cpu.vbroadcast(w, Central64x64x32);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v666(N256 w, N8 n)
-            => z.vbroadcast(w, Central8x4x2);
+            => cpu.vbroadcast(w, Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v666(N256 w, N16 n)
-            => z.vbroadcast(w, Central16x4x2);
+            => cpu.vbroadcast(w, Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v666(N256 w, N32 n)
-            => z.vbroadcast<uint>(w,  Central32x4x2);
+            => gcpu.vbroadcast<uint>(w,  Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v666(N256 w, N64 n)
-            => z.vbroadcast(w, Central64x4x2);
+            => cpu.vbroadcast(w, Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v3C(N256 w, N8 n)
-            => z.vbroadcast(w,  Central8x8x4);
+            => cpu.vbroadcast(w,  Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v3C(N256 w, N16 n)
-            => z.vbroadcast(w,  Central16x8x4);
+            => cpu.vbroadcast(w,  Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v3C(N256 w, N32 n)
-            => z.vbroadcast<uint>(w,  Central32x8x4);
+            => gcpu.vbroadcast<uint>(w,  Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v3C(N256 w, N64 n)
-            => z.vbroadcast(w, Central64x8x4);
+            => cpu.vbroadcast(w, Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v0FF0(N256 w, N16 n)
-            => z.vbroadcast(w, Central16x16x8);
+            => cpu.vbroadcast(w, Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF0(N256 w, N32 n)
-            => z.vbroadcast<uint>(w,  Central32x16x8);
+            => gcpu.vbroadcast<uint>(w,  Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF0(N256 w, N64 n)
-            => z.vbroadcast(w, Central64x16x8);
+            => cpu.vbroadcast(w, Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 w)
-            => z.vbroadcast<uint>(w,  Central32x32x16);
+            => gcpu.vbroadcast<uint>(w,  Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 w)
-            => z.vbroadcast(w, Central64x32x16);
+            => cpu.vbroadcast(w, Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
-            => z.vbroadcast(w, Central64x64x32);
+            => cpu.vbroadcast(w, Central64x64x32);
     }
 }

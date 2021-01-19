@@ -192,7 +192,7 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var loMask = vbroadcast(w256, 0x00000000fffffffful);
+            var loMask = cpu.vbroadcast(w256, 0x00000000fffffffful);
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(

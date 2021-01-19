@@ -10,8 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-
-    using static Konst;
+    using static Part;
 
     partial struct z
     {

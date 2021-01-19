@@ -69,7 +69,7 @@ namespace Z0
             var hi = ScalarCast.uint16(Lsb16x16x15 & (a >> 15));
             var m = vsplit30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
-            var q = vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
+            var q = cpu.vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
             var r = v16u(vsrlv(vand(q,m), shifts));
             var s = vsplit30x8x3Assemble(r);
             return s;

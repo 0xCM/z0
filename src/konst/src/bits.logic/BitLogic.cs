@@ -16,14 +16,14 @@ namespace Z0
     {
         [MethodImpl(Inline), TestZ]
         public static bit testz(ulong a, ulong b)
-            => TestZ(vbroadcast(w128, a), vbroadcast(w128,b));
+            => TestZ(cpu.vbroadcast(w128, a), cpu.vbroadcast(w128, b));
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a, ulong b)
-            => TestC(vbroadcast(w128, a), vbroadcast(w128,b));
+            => TestC(cpu.vbroadcast(w128, a), cpu.vbroadcast(w128, b));
 
         [MethodImpl(Inline), TestZ]
         public static bit testc(ulong a)
-            => TestC(vbroadcast(w128, a), vones<ulong>(w128));
+            => TestC(cpu.vbroadcast(w128, a), vones<ulong>(w128));
     }
 }

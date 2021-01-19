@@ -36,7 +36,7 @@ namespace Z0
         {
             var sum = z.vadd(z.v64u(x.Data), z.v64u(y.Data));
             Bit32 carry = x.Lo > z.vcell(sum,0);
-            return  z.generic<T>(z.vadd(sum, z.vbroadcast(n128, (ulong)carry)));
+            return  z.generic<T>(z.vadd(sum, cpu.vbroadcast(n128, (ulong)carry)));
         }
     }
 }

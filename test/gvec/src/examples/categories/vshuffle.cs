@@ -158,9 +158,9 @@ namespace Z0
             Claim.veq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(w);
-            var x5Spec = vbroadcast(w,(byte)0b10000000);
+            var x5Spec = cpu.vbroadcast(w,(byte)0b10000000);
             var x5Dst = z.vshuf16x8(x5, x5Spec);
-            Claim.veq(x5Dst, z.vbroadcast(w,(byte)0));
+            Claim.veq(x5Dst, cpu.vbroadcast(w,(byte)0));
         }
 
         [Op(ExampleGroups.Shuffles)]

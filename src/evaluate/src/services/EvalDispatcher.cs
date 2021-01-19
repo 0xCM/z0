@@ -12,8 +12,6 @@ namespace Z0
     using static Part;
     using static z;
 
-    using K = OperatorClasses;
-
     class EvalDispatcher : IEvalDispatcher
     {
         readonly IPolyStream DataSource;
@@ -335,7 +333,7 @@ namespace Z0
         bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).Eval(api, K.binary(), src);
+            var dst = Evaluator(buffers).Eval(api, Api.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -355,7 +353,7 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalCellular(api, K.binary(), src);
+            var dst = Evaluator(buffers).EvalCellular(api, Api.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -363,7 +361,7 @@ namespace Z0
         Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
         {
 
-            var dst = Evaluator(buffers).EvalCellular(api, K.binary(), src);
+            var dst = Evaluator(buffers).EvalCellular(api, Api.binary(), src);
             Analyze(src, dst, api);
             return 1;
         }
@@ -380,7 +378,7 @@ namespace Z0
         {
 
             var evaluator = Evaluator(buffers, k);
-            var dst = evaluator.Eval(api, K.binary(), src);
+            var dst = evaluator.Eval(api, Api.binary(), src);
             Analyze(src, dst, api);
             return dst;
         }

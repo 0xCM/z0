@@ -81,7 +81,7 @@ namespace Z0
         public static BitBlock64 init<T>(W64 w, in T src)
             where T : unmanaged
         {
-            var x = z.vbroadcast(w128, uint8(src));
+            var x = cpu.vbroadcast(w128, uint8(src));
             vstore(x, ref alloc(out BitBlock128 dst));
             return @as<BitBlock128,BitBlock64>(dst);
         }
@@ -90,7 +90,7 @@ namespace Z0
         public static BitBlock128 init<T>(W128 w, in T src)
             where T : unmanaged
         {
-            var x = z.vbroadcast(w, uint8(src));
+            var x = cpu.vbroadcast(w, uint8(src));
             vstore(x, ref alloc(out BitBlock128 dst));
             return dst;
         }
@@ -99,7 +99,7 @@ namespace Z0
         public static BitBlock256 init<T>(W256 w, in T src)
             where T : unmanaged
         {
-            var x = z.vbroadcast(w, uint8(src));
+            var x = cpu.vbroadcast(w, uint8(src));
             vstore(x, ref alloc(out BitBlock256 dst));
             return dst;
         }

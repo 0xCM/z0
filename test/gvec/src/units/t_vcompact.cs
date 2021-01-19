@@ -35,8 +35,8 @@ namespace Z0
             var w = n128;
             var cellmax = Max8u;
 
-            var vsmax = vbroadcast(w, (ushort)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = cpu.vbroadcast(w, (ushort)cellmax);
+            var vtmax = cpu.vbroadcast(w,cellmax);
             var expect = vsub(vtmax, gvec.vinc(w,z8));
 
             var x = vsub(vsmax, gvec.vinc(w, z16));
@@ -51,8 +51,8 @@ namespace Z0
             var w = n256;
             var cellmax = Max8u;
 
-            var vsmax = vbroadcast(w, (ushort)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = cpu.vbroadcast(w, (ushort)cellmax);
+            var vtmax = cpu.vbroadcast(w,cellmax);
             var expect = vsub(vtmax, gvec.vinc(w,z8));
 
             var x = vsub(vsmax, gvec.vinc(w, z16));
@@ -67,8 +67,8 @@ namespace Z0
             var w = n128;
             var cellmax = Max16u;
 
-            var vsmax = vbroadcast(w, (uint)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = cpu.vbroadcast(w, (uint)cellmax);
+            var vtmax = cpu.vbroadcast(w,cellmax);
             var expect = vsub(vtmax, gvec.vinc(w,z16));
 
             var x = vsub(vsmax, gvec.vinc(w, 0u));
@@ -83,8 +83,8 @@ namespace Z0
             var w = n256;
             var cellmax = Max16u;
 
-            var vsmax = vbroadcast<uint>(w, (uint)cellmax);
-            var vtmax = vbroadcast(w,cellmax);
+            var vsmax = gcpu.vbroadcast<uint>(w, (uint)cellmax);
+            var vtmax = cpu.vbroadcast(w,cellmax);
 
             var x = vsub(vsmax, gvec.vinc(w, 0u));
             var y = vsub(vsmax, gvec.vinc(w, 8u));

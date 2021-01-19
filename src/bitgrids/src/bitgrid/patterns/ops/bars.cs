@@ -20,7 +20,7 @@ namespace Z0
         {
             var sep = (int)nat64u(n);
             var pattern = BitMasks.lo(sep, z64) << sep;
-            return generic<T>(z.vbroadcast(w, gbits.replicate(pattern)));
+            return generic<T>(cpu.vbroadcast(w, gbits.replicate(pattern)));
         }
     }
 }

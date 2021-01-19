@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.BitLogicKinds, true)]
+    [ApiHost]
     public readonly struct BitLogicKinds
     {
         const NumericKind Closure = UnsignedInts;

@@ -18,37 +18,37 @@ namespace Z0
         static Vector256<ulong> K1
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n256, Even64);
+            get => cpu.vbroadcast(n256, Even64);
         }
 
         static Vector256<ulong> K2
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n256, Even64x2);
+            get => cpu.vbroadcast(n256, Even64x2);
         }
 
         static Vector256<ulong> K4
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n256, Lsb64x8x4);
+            get => cpu.vbroadcast(n256, Lsb64x8x4);
         }
 
         static Vector128<ulong> v128K1
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n128, Even64);
+            get => cpu.vbroadcast(n128, Even64);
         }
 
         static Vector128<ulong> v128K2
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n128, Even64x2);
+            get => cpu.vbroadcast(n128, Even64x2);
         }
 
         static Vector128<ulong> v128K4
         {
             [MethodImpl(Inline), Op]
-            get => vbroadcast(n128, Lsb64x8x4);
+            get => cpu.vbroadcast(n128, Lsb64x8x4);
         }
 
         /// <summary>

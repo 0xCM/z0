@@ -38,7 +38,7 @@ namespace Z0
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(vinflate(src, n256, z16i),count));
-            var y = vand(x,v16u(vbroadcast(n256, byte.MaxValue)));
+            var y = vand(x,v16u(cpu.vbroadcast(n256, byte.MaxValue)));
             return v8i(vcompact8u(y,n128,z8));
         }
 
@@ -112,7 +112,7 @@ namespace Z0
         {
             var x = v16u(ShiftRightLogical(vinflate(vlo(src), n256, z16i),count));
             var y = v16u(ShiftRightLogical(vinflate(vhi(src), n256, z16i),count));
-            var m = v16u(vbroadcast(n256, byte.MaxValue));
+            var m = v16u(cpu.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact8u(vand(x,m), vand(y,m),n256,z8));
         }
 
@@ -203,7 +203,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
+                => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -215,6 +215,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
+                => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
     }
 }

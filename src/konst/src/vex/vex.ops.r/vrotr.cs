@@ -88,25 +88,25 @@ namespace Z0
         static Vector256<ulong> Vector256u64
         {
             [MethodImpl(Inline), Rotr]
-            get => vbroadcast(n256,64ul);
+            get => cpu.vbroadcast(n256,64ul);
         }
 
         static Vector256<uint> Vector256u32
         {
             [MethodImpl(Inline), Rotr]
-            get => vbroadcast<uint>(n256, 32u);
+            get => gcpu.vbroadcast<uint>(n256, 32u);
         }
 
         static Vector128<ulong> Vector128u64
         {
             [MethodImpl(Inline), Rotr]
-            get => vbroadcast(n128, 64ul);
+            get => cpu.vbroadcast(n128, 64ul);
         }
 
         static Vector128<uint> Vector128u32
         {
             [MethodImpl(Inline), Rotr]
-            get => vbroadcast(n128,32u);
+            get => cpu.vbroadcast(n128,32u);
         }
     }
 }
