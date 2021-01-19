@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static z;
+    using static Dimensions;
 
     partial class BitGrid
     {
@@ -16,106 +17,88 @@ namespace Z0
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N8 w)
+        public static IEnumerable<Pair<ulong>> dims(N8 w)
         {
-            yield return Dim.define(n1,n8);
-            yield return Dim.define(n8,n1);
-            yield return Dim.define(n2,n4);
-            yield return Dim.define(n4,n2);
+            yield return dim(n1,n8);
+            yield return dim(n8,n1);
+            yield return dim(n2,n4);
+            yield return dim(n4,n2);
         }
 
         /// <summary>
         /// Enumerates the valid dimensions for a 16-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N16 w)
+        public static IEnumerable<Pair<ulong>> dims(N16 w)
         {
-            yield return Dim.define(n1,n16);
-            yield return Dim.define(n16,n1);
-            yield return Dim.define(n2,n8);
-            yield return Dim.define(n8,n2);
-            yield return Dim.define(n4,n4);
+            yield return dim(n1,n16);
+            yield return dim(n16,n1);
+            yield return dim(n2,n8);
+            yield return dim(n8,n2);
+            yield return dim(n4,n4);
         }
 
         /// <summary>
         /// Enumerates the valid dimensions for a 32-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N32 w)
+        public static IEnumerable<Pair<ulong>> dims(N32 w)
         {
-            yield return Dim.define(n1,n32);
-            yield return Dim.define(n32,n1);
-            yield return Dim.define(n2,n16);
-            yield return Dim.define(n16,n2);
-            yield return Dim.define(n8,n4);
-            yield return Dim.define(n4,n8);
+            yield return dim(n1,n32);
+            yield return dim(n32,n1);
+            yield return dim(n2,n16);
+            yield return dim(n16,n2);
+            yield return dim(n8,n4);
+            yield return dim(n4,n8);
         }
 
         /// <summary>
         /// Enumerates the valid dimensions for a 64-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N64 w)
+        public static IEnumerable<Pair<ulong>> dims(N64 w)
         {
-            yield return Dim.define(n1,n64);
-            yield return Dim.define(n64,n1);
-            yield return Dim.define(n2,n32);
-            yield return Dim.define(n32,n2);
-            yield return Dim.define(n16,n4);
-            yield return Dim.define(n4,n16);
-            yield return Dim.define(n8,n8);
+            yield return dim(n1,n64);
+            yield return dim(n64,n1);
+            yield return dim(n2,n32);
+            yield return dim(n32,n2);
+            yield return dim(n16,n4);
+            yield return dim(n4,n16);
+            yield return dim(n8,n8);
         }
 
         /// <summary>
         /// Enumerates the valid dimensions for a 128-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N128 w)
+        public static IEnumerable<Pair<ulong>> dims(N128 w)
         {
-            yield return Dim.define(n1,n128);
-            yield return Dim.define(n128,n1);
-            yield return Dim.define(n2,n64);
-            yield return Dim.define(n64,n2);
-            yield return Dim.define(n32,n4);
-            yield return Dim.define(n4,n32);
-            yield return Dim.define(n8,n16);
-            yield return Dim.define(n16,n8);
+            yield return dim(n1,n128);
+            yield return dim(n128,n1);
+            yield return dim(n2,n64);
+            yield return dim(n64,n2);
+            yield return dim(n32,n4);
+            yield return dim(n4,n32);
+            yield return dim(n8,n16);
+            yield return dim(n16,n8);
         }
 
         /// <summary>
         /// Enumerates the valid dimensions for a 256-bit fixed bitgrid
         /// </summary>
         /// <param name="w">The grid width selector</param>
-        public static IEnumerable<Pair<ulong>> dimensions(N256 w)
+        public static IEnumerable<Pair<ulong>> dims(N256 w)
         {
-            yield return Dim.define(n1,n256);
-            yield return Dim.define(n256,n1);
-            yield return Dim.define(n2,n128);
-            yield return Dim.define(n128,n2);
-            yield return Dim.define(n64,n4);
-            yield return Dim.define(n4,n64);
-            yield return Dim.define(n8,n32);
-            yield return Dim.define(n32,n8);
-            yield return Dim.define(n16,n16);
+            yield return dim(n1,n256);
+            yield return dim(n256,n1);
+            yield return dim(n2,n128);
+            yield return dim(n128,n2);
+            yield return dim(n64,n4);
+            yield return dim(n4,n64);
+            yield return dim(n8,n32);
+            yield return dim(n32,n8);
+            yield return dim(n16,n16);
         }
-
-        /// <summary>
-        /// Computes dimension information for a blocked grid predicated on parametric types
-        /// </summary>
-        /// <param name="w">The block width representative</param>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="W">The block width</typeparam>
-        /// <typeparam name="M">The row type</typeparam>
-        /// <typeparam name="N">The col type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        public static GridDim<W,M,N,T> dimension<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
-            where W : unmanaged, ITypeNat
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
 
         /// <summary>
         /// Enumerates the valid grid dimensions where the total bit width is a power of 2
@@ -123,7 +106,7 @@ namespace Z0
         /// <typeparam name="W">The grid dimension type</typeparam>
         public static IEnumerable<Pair<ulong>> p2dimensions<W>()
             where W : unmanaged,INatPow2<W>
-                => p2dimensions(nat32u<W>());
+                => p2dimensions(z.nat32u<W>());
 
         /// <summary>
         /// Enumerates the valid grid dimensions where the total bit width is a power of 2

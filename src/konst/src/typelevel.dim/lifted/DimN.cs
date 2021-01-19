@@ -38,8 +38,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public Dimensions Describe()
-            => new Dimensions(1, new ulong[]{nat64u<N>()}, nat64u<N>());
+        public Dim Describe()
+            => new Dim(1, new ulong[]{nat64u<N>()}, nat64u<N>());
 
         public static implicit operator ulong(Dim<N> x)
             => x.I;

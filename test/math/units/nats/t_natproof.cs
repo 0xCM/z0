@@ -13,56 +13,56 @@ namespace Z0
     {
         public void equality()
         {
-            NatClaims.eq<N16>(16);
-            NatClaims.eq<N512>(512);
-            NatClaims.eq<NatSeq<N8, N2, N1>>(821);
+            NatRequire.eq<N16>(16);
+            NatRequire.eq<N512>(512);
+            NatRequire.eq<NatSeq<N8, N2, N1>>(821);
         }
 
         public void smaller()
         {
-            NatClaims.lt(n11, n12);
-            NatClaims.lt(n512, n1024);
+            NatRequire.lt(n11, n12);
+            NatRequire.lt(n512, n1024);
         }
 
         public void larger()
         {
-            NatClaims.gt(n12, n11);
-            NatClaims.gt(n1024, n512);
+            NatRequire.gt(n12, n11);
+            NatRequire.gt(n1024, n512);
         }
 
         public void nonzero()
         {
-            NatClaims.nonzero(n12);
-            NatClaims.nonzero(n4);
-            NatClaims.nonzero(n1);
+            NatRequire.nonzero(n12);
+            NatRequire.nonzero(n4);
+            NatRequire.nonzero(n1);
         }
 
         public void sum()
         {
-            NatClaims.sum(n5, n5, n10.NatValue);
-            NatClaims.sum(n13, n0, n13.NatValue);
-            NatClaims.sum(n512, n10, 522);
+            NatRequire.sum(n5, n5, n10.NatValue);
+            NatRequire.sum(n13, n0, n13.NatValue);
+            NatRequire.sum(n512, n10, 522);
         }
 
         public void product()
         {
-            NatClaims.mul(n5, n5, 25);
-            NatClaims.mul(n13, n10, 130);
-            NatClaims.mul(n512, n10, 5120);
+            NatRequire.mul(n5, n5, 25);
+            NatRequire.mul(n13, n10, 130);
+            NatRequire.mul(n512, n10, 5120);
         }
 
         public void next()
         {
-            NatClaims.next(n0, n1);
-            NatClaims.next(n5, n6);
-            NatClaims.next(n15, n16);
+            NatRequire.next(n0, n1);
+            NatRequire.next(n5, n6);
+            NatRequire.next(n15, n16);
 
             var n11 = TypeNats.next(n10);
             var n12 = TypeNats.next(n11);
             var n13 = TypeNats.next(n12);
-            NatClaims.next(n10, n11);
-            NatClaims.next(n11, n12);
-            NatClaims.next(n12, n13);
+            NatRequire.next(n10, n11);
+            NatRequire.next(n11, n12);
+            NatRequire.next(n12, n13);
 
         }
 
