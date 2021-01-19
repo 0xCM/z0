@@ -11,7 +11,15 @@ namespace Z0
 
         public uint Sequence;
 
-        public MemoryAddress Address;
+        public MemoryAddress ProcessBase;
+
+        public MemoryAddress MemberBase;
+
+        public MemoryAddress MemberOffset;
+
+        public MemoryAddress MemberRebase;
+
+        public ByteSize MaxSize;
 
         public Name PartName;
 

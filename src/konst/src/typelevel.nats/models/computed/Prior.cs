@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static z;
+    using static Root;
     using static TypeNats;
-
 
     /// <summary>
     /// Captures evidence that k1 - 1 = k2
@@ -25,10 +25,11 @@ namespace Z0
 
         static string Description => $"{k1} - 1 = {k2}";
 
+        [MethodImpl(Inline)]
         public NatPrior(K1 n1, K2 n2)
         {
             valid = true;
-            insist(n1.NatValue - 1 == n2.NatValue, Description);
+            root.require(n1.NatValue - 1 == n2.NatValue, () => Description);
         }
 
         public bool valid {get;}

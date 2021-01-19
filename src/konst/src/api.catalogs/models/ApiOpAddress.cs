@@ -72,6 +72,6 @@ namespace Z0
             => new ApiOpAddress(src.uri, src.address);
 
         public static ApiOpAddress Empty
-            => (ApiArtifactUri.Empty, MemoryAddress.Empty);
+            => (ApiArtifactUri.Empty, MemoryAddress.Zero);
     }
 }

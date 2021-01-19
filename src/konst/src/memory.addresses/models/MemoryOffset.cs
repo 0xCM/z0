@@ -34,7 +34,7 @@ namespace Z0
         public MemoryAddress Absolute
         {
             [MethodImpl(Inline)]
-            get => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
+            get => IsEmpty ? MemoryAddress.Zero : (Base + Offset);
         }
 
         public MemoryOffset Zero
@@ -107,6 +107,6 @@ namespace Z0
         }
 
         MemoryAddress IAddressable.Address
-            => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
+            => IsEmpty ? MemoryAddress.Zero : (Base + Offset);
     }
 }

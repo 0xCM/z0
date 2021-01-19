@@ -58,4 +58,6 @@ namespace Z0
     public sealed class VMapAttribute : A { public VMapAttribute() : base(K.VMap) {} }
 
     public sealed class BijectionAttribute : A { public BijectionAttribute() : base(K.Bijection) {} }
+
+    public sealed class ConcretizerAttribute : A { public ConcretizerAttribute() : base(K.Concretizer){} }
 }

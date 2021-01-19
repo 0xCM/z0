@@ -27,7 +27,7 @@ namespace Z0
             writer.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             var buffer = span<byte>(ImageContent.RowDataSize);
             var k = Read(reader, buffer);
-            var offset = MemoryAddress.Empty;
+            var offset = MemoryAddress.Zero;
             var lines = 0;
             while(k != 0)
             {

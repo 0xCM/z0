@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Defines and index over <see cref='ApiMember'/> values
     /// </summary>
-    public readonly struct ApiMembers : ITableSpan<ApiMember>
+    public readonly struct ApiMembers : IIndex<ApiMember>
     {
-        readonly TableSpan<ApiMember> Data;
+        readonly Index<ApiMember> Data;
 
         [MethodImpl(Inline)]
-        public ApiMembers(params ApiMember[] src)
+        public ApiMembers(ApiMember[] src)
             => Data = src;
 
         public Count Count

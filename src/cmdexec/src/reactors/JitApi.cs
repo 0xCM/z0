@@ -8,6 +8,7 @@ namespace Z0
     {
         protected override CmdResult Run(JitApiCmd cmd)
             => cmd.Success(ApiJit.service(Wf).JitApi(Db.IndexFile(ApiAddressRecord.TableId)));
+
     }
 
     internal static partial class XReact

@@ -5,6 +5,9 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     /// <summary>
     /// Captures evidence that k1:K1 & k2:K2 & k3:K3 => k1 % k2 = k3
@@ -25,6 +28,7 @@ namespace Z0
 
         public static string Description => $"{k1} % {k2} = {k3}";
 
+        [MethodImpl(Inline)]
         public NatMod(K1 k1, K2 k2, K3 k3)
             => root.require(k1.NatValue % k2.NatValue == k3.NatValue, () => Description);
 

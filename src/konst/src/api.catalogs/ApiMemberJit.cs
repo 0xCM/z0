@@ -99,6 +99,18 @@ namespace Z0
         }
 
         [Op]
+        public static IDictionary<MethodInfo,Type> ClosureProviders(IEnumerable<Type> src)
+        {
+            var query = from t in src
+                        from m in t.DeclaredStaticMethods()
+                        let tag = m.Tag<ClosureProviderAttribute>()
+                        where tag.IsSome()
+                        select (m, tag.Value.ProviderType);
+            return query.ToDictionary();
+        }
+
+
+        [Op]
         static ApiMember[] JitDirect(IApiHost src)
             =>  from m in ApiQuery.DirectMethods(src)
                 let kid = m.Method.KindId()

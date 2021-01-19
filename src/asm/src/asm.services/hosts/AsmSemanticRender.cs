@@ -90,7 +90,7 @@ namespace Z0.Asm
         {
             var functions = span(src.Routines);
             var count = src.RoutineCount;
-            var offset = MemoryAddress.Empty;
+            var offset = MemoryAddress.Zero;
 
             for(var i=0; i<count; i++)
             {

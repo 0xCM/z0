@@ -70,7 +70,7 @@ namespace Z0.Asm
         public ApiHostRoutines DecodeBlocks(ApiHostCode src)
         {
             var instructions = list<ApiRoutineObsolete>();
-            var ip = MemoryAddress.Empty;
+            var ip = MemoryAddress.Zero;
             var target = list<IceInstruction>();
             var count = src.Length;
             var decoder = Context.RoutineDecoder;

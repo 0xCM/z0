@@ -33,9 +33,6 @@ namespace Z0
              get => Location != 0;
         }
 
-        public MemoryAddress Zero
-            => Empty;
-
         public string Identifier
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
@@ -247,7 +244,7 @@ namespace Z0
         public static MemoryAddress operator-(MemoryAddress a, MemoryAddress b)
             => new MemoryAddress(a.Location - b.Location);
 
-        public static MemoryAddress Empty
+        public static MemoryAddress Zero
             => new MemoryAddress(0);
     }
 }

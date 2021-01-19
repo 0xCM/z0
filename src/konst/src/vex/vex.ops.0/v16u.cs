@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Presents a generic cpu vector as a cpu vector with components of type uint16
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
         public static Vector128<ushort> v16u<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsUInt16();
@@ -27,14 +27,32 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
         public static Vector256<ushort> v16u<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsUInt16();
 
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
-        public static ref Vector256<ushort> v16u<T>(in Vector256<T> src)
+        /// <summary>
+        /// Presents a generic cpu vector as a cpu vector with components of type int16
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The source vector primal component type</typeparam>
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
+        public static Vector512<ushort> v16u<T>(Vector512<T> x)
             where T : unmanaged
-                => ref @as<Vector256<T>,Vector256<ushort>>(src);
+                => x.As<ushort>();
+    }
+
+    partial struct z
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<ushort> v16u<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v16u(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<ushort> v16u<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v16u(x);
     }
 }

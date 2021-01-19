@@ -20,5 +20,10 @@ namespace Z0
         VPAVGB = Id.VPAVGB,
 
         VPAVGW = Id.VPAVGW,
+
+        PSHUFLW = Id.PSHUFLW,
+
+        PSHUFHW = Id.PSHUFHW,
+
     }
 }

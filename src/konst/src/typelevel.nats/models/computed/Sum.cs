@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct NatSum<K> : INatSum<K>
         where K : unmanaged, ITypeNat
@@ -31,7 +31,7 @@ namespace Z0
     /// <summary>
     /// Encodes a natural number k := k1 + k2
     /// </summary>
-    public readonly struct NatSum<K1, K2> : INatSum<K1,K2>
+    public readonly struct NatSum<K1,K2> : INatSum<K1,K2>
         where K1 : unmanaged, ITypeNat
         where K2 : unmanaged, ITypeNat
     {

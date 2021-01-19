@@ -80,6 +80,8 @@ namespace Z0
 
         VMap = Id.VMap,
 
-        Bijection = Id.Bijection
+        Bijection = Id.Bijection,
+
+        Concretizer = Id.Concretizer,
     }
 }

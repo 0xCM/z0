@@ -86,6 +86,6 @@ namespace Z0
         }
 
         public static R Empty
-            => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, CodeBlock.Empty);
+            => new R(0, MemoryAddress.Zero, 0, ExtractTermCode.None, OpUri.Empty, CodeBlock.Empty);
     }
 }

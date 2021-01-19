@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static TypeNats;
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines proof attempts for type naturals

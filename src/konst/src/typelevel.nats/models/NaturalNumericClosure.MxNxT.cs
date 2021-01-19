@@ -8,8 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static z;
+    using static Root;
+    using static TypeNats;
 
    public readonly struct NaturalNumericClosure<M,N,T>
         where M : unmanaged, ITypeNat

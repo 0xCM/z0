@@ -48,6 +48,20 @@ namespace Z0
             return emission(src, dst);
         }
 
+        public static TableEmission<T> emit<T>(Index<T> src, FS.FilePath dst)
+            where T : struct, IRecord<T>
+        {
+            var count = src.Count;
+            var data = src.View;
+            var formatter = Records.formatter<T>();
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(formatter.Format(skip(data,i)));
+
+            return emission(src, dst);
+        }
+
         public static TableEmission<T> emit<T>(Index<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
             where T : struct, IRecord<T>
                 => emit(src, rowspec<T>(widths), dst);

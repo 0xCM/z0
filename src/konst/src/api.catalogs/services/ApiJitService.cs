@@ -5,53 +5,71 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+
+    using static memory;
 
     [Service(typeof(IApiJit))]
     public sealed class ApiJitService : WfService<ApiJitService,IApiJit>, IApiJit
     {
-        public unsafe Index<ApiAddressRecord> JitApi(FS.FilePath dst)
+        public BasedApiMembers JitApi(FS.FilePath dst)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
-            var outer = Wf.Running($"Jitting {parts.Length} parts");
-            var all = root.list<MethodAddress>();
+            var jitting = Wf.Running(Msg.JittingParts.Format(parts.Length));
+            var all = root.list<ApiMembers>();
             var total = 0u;
             foreach(var part in parts)
             {
-                var members = ApiJit.jit(part);
-                if(members.Count != 0)
-                {
-                    var flow = Wf.Running(Msg.Jitting.Format(part));
-                    var addresses = members.Storage.Select(m => new MethodAddress(m.Method));
-                    all.AddRange(addresses);
-                    var memories = ApiPartMemories.load(part.Owner, addresses);
-                    var first = memories.First;
-                    var last = memories.Last;
-                    var range = memories.Range;
-                    var length = range.Size/1024;
-                    if(length == 0)
-                        length = 1;
-                    total += length;
-
-                    Wf.Ran(flow, Msg.Jitted.Format(members.Count, part, range, length));
-                }
+                var jittingPart = Wf.Running(Msg.JittingPart.Format(part.Id));
+                var partMembers = ApiJit.jit(part);
+                all.Add(partMembers);
+                Wf.Ran(jittingPart, Msg.JittedPart.Format(partMembers.Length, part.Id));
             }
-            Wf.Ran(outer, string.Format("Jitted {0:#,#}mb member data", total));
 
-            var sorted = Index.sort(all.ToArray());
-            var records = root.mapi(sorted, (i,x) => ApiQuery.record((uint)i, x));
-            var emission = Records.emit(records, new byte[]{12,16,16,32,80}, dst);
-            Wf.Status(emission);
+            var members = all.SelectMany(x => x).OrderBy(x => x.Address).Array();
+            var summaries = summarize(@base, members);
+            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
+            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
+            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted.RowCount, dst);
+            Wf.Ran(jitting, Msg.JittedMembers.Format(members.Length, parts.Length));
 
-            return records;
+            return new BasedApiMembers(@base, members);
+        }
+
+        static Index<ApiAddressRecord> summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
+        {
+            var count = members.Length;
+            var buffer = alloc<ApiAddressRecord>(count);
+            ref var dst = ref first(buffer);
+            var rebase = first(members).Address;
+            for(uint seq=0; seq<count; seq++)
+            {
+                ref var record = ref seek(dst,seq);
+                ref readonly var member = ref skip(members, seq);
+                record.Sequence = seq;
+                record.ProcessBase = @base;
+                record.MemberBase = member.Address;
+                record.MemberOffset = member.Address - @base;
+                record.MemberRebase = member.Address - rebase;
+                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).Address - record.MemberBase) : 0ul;
+                record.HostName = member.Host.Name;
+                record.PartName = member.Host.Owner.Format();
+                record.Identifier = member.Id;
+            }
+            return buffer;
         }
     }
 
     partial struct Msg
     {
-        public static RenderPattern<IPart> Jitting => "Jitting {0}";
+        public static RenderPattern<int> JittingParts => "Jitting {0} parts";
 
-        public static RenderPattern<uint,IPart,MemoryRange,ByteSize> Jitted => "Jitted {0} {1} members that cover memory segment {2} of size {3}mb";
+        public static RenderPattern<PartId> JittingPart => "Jitting {0} members";
+
+        public static RenderPattern<int,PartId> JittedPart => "Jitting {0} {1} members";
+
+        public static RenderPattern<dynamic,dynamic> JittedMembers => "Jitted {0} members from {1} parts";
     }
 }

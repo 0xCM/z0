@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N3 i, N0 j)
-            => vmove(vpermlo4x16(src,Perm4L.DBCA), w);
+            => vmove(cpu.vpermlo4x16(src,Perm4L.DBCA), w);
 
         /// <summary>
         /// src[2] -> r/m16
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N2 i, N0 j)
-            => vmove(vpermlo4x16(src,Perm4L.CBDA), w);
+            => vmove(cpu.vpermlo4x16(src,Perm4L.CBDA), w);
 
         /// <summary>
         /// src[1] -> r/m16
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N1 i, N0 j)
-            => vmove(vpermlo4x16(src,Perm4L.BCDA), w);
+            => vmove(cpu.vpermlo4x16(src,Perm4L.BCDA), w);
 
         /// <summary>
         /// src[0..7] -> r/m8[0..31]

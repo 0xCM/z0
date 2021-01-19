@@ -21,14 +21,6 @@ namespace Z0
             => signed(src);
 
         /// <summary>
-        /// Determines the indicator of a numeric kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline), Op]
-        public static NumericIndicator Indicator(this NumericKind src)
-            => indicator(src);
-
-        /// <summary>
         /// Determines the width of a numeric kind
         /// </summary>
         /// <param name="kind">The source kind</param>
@@ -43,13 +35,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int Width(this NumericKind k)
             => (int)(ushort)k;
-
-        /// <summary>
-        /// Determines the width of the represented kind in bytes
-        /// </summary>
-        /// <param name="k">The kind to examine</param>
-        [MethodImpl(Inline), Op]
-        public static int Size(this NumericKind k)
-            => ((int)(ushort)k)/8;
     }
 }

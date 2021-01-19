@@ -37,12 +37,12 @@ namespace Z0
             => src.MemRef;
 
         [MethodImpl(Inline)]
-        public LocatedMethod(OpIdentity id, MethodInfo method, MemoryAddress location, ByteSize? size = null)
+        public LocatedMethod(OpIdentity id, MethodInfo method, MemoryAddress location)
         {
             Id = id;
             Method = method;
             Address = location;
-            Size = size ?? ByteSize.Empty;
+            Size = ByteSize.Empty;
         }
 
         public string Format()

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     /// <summary>
     /// Encodes a natural number k := k1*k2
     /// </summary>
@@ -44,12 +46,15 @@ namespace Z0
         public INatSeq natseq()
             => Seq;
 
+        [MethodImpl(Inline)]
         public bool Equals(Product<K1,K2> other)
             => Value == other.NatValue;
 
+        [MethodImpl(Inline)]
         public bool Equals(INatSeq other)
             => Value == other.NatValue;
 
+        [MethodImpl(Inline)]
          public string format()
             => description;
 

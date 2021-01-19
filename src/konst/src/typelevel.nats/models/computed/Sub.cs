@@ -34,7 +34,7 @@ namespace Z0
             ulong ITypeNat.NatValue
                 => Value;
 
-            public bool Equals(Pow<K1, K2> other)
+            public bool Equals(Pow<K1,K2> other)
                 => Value == other.NatValue;
 
             public bool Equals(INatSeq other)

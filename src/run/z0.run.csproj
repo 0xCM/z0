@@ -4,6 +4,7 @@
     <OutputType>Exe</OutputType>
     <AssemblyName>run</AssemblyName>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <!-- <BaseAddress>0x11110000</BaseAddress> -->
   </PropertyGroup>
 
   <ItemGroup>

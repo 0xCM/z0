@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// When closed over a natural K, encodes a natural number k:K such that k1:K1 & k2:K2 => k = k1 + 1
@@ -23,7 +23,7 @@ namespace Z0
 
         static string description => $"++{k.NatValue} = {Value}";
 
-        public static byte[] Digits  => TypeNats.digits(Value);
+        public static byte[] Digits => TypeNats.digits(Value);
 
         public static INatSeq Seq => TypeNats.seq(Digits);
 
@@ -39,17 +39,20 @@ namespace Z0
         public INatSeq natseq()
             => Seq;
 
+        [MethodImpl(Inline)]
         public bool Equals(Next<K> rhs)
             => Value == rhs.NatValue;
 
+        [MethodImpl(Inline)]
         public bool Equals(INatSeq rhs)
             => Value == rhs.NatValue;
 
-        public string format()
+        [MethodImpl(Inline)]
+        public string Format()
             => description;
 
         public override string ToString()
-            => format();
+            => Format();
 
         public override int GetHashCode()
             => Value.GetHashCode();
@@ -57,7 +60,6 @@ namespace Z0
         public override bool Equals(object rhs)
             => Value.Equals(rhs);
     }
-
 
     /// <summary>
     /// Captures evidence that k1 + 1 = k2
@@ -85,5 +87,4 @@ namespace Z0
         public override string ToString()
             => Description;
     }
-
 }

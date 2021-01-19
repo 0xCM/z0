@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Part;
+    using static Root;
 
    /// <summary>
    // Captures evidence that k:K => k is prime

@@ -29,7 +29,7 @@ namespace Z0
         const int FieldCount = 6;
 
         public static ApiExtractBlock EmptyBlock
-            => new ApiExtractBlock(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, CodeBlock.Empty);
+            => new ApiExtractBlock(0, MemoryAddress.Zero, 0, OpUri.Empty, EmptyString, CodeBlock.Empty);
 
         public static ApiExtractBlock ParseBlock(string src)
         {

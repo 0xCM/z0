@@ -16,7 +16,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicMethod src)
             => new CilMethod(src.Name, bytes(src), src.GetMethodImplementationFlags());
@@ -61,10 +60,10 @@ namespace Z0
              => MethodBase.GetMethodFromHandle(src);
 
         [MethodImpl(Inline), Op]
-        public static LocatedMethod jit(IdentifiedMethod src, int? size = null)
+        public static LocatedMethod jit(IdentifiedMethod src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer(), size);
+            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
         }
 
         [MethodImpl(Inline)]
@@ -75,10 +74,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static LocatedMethod jit(MethodInfo src, int? size = null)
+        static LocatedMethod jit(MethodInfo src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return new LocatedMethod(OpIdentity.Empty, src, (MemoryAddress)src.MethodHandle.GetFunctionPointer(), size);
+            return new LocatedMethod(OpIdentity.Empty, src, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
         }
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         public static Index<LocatedMethod> jit(Type src)
-            => src.DeclaredMethods().Select(m => jit(m, size(m)));
+            => src.DeclaredMethods().Select(m => jit(m));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemorySlots<I> slots<I>(Type src)
@@ -108,7 +107,6 @@ namespace Z0
             RuntimeHelpers.PrepareDelegate(src);
             return src.Method.MethodHandle.GetFunctionPointer();
         }
-
 
         [MethodImpl(Inline), Op]
         public static DynamicPointer jit(DynamicDelegate src)
@@ -144,12 +142,5 @@ namespace Z0
             var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
             return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
         }
-
-        /// <summary>
-        /// Returns the size of the method, if known; otherwise, returns the monoidal zero
-        /// </summary>
-        /// <param name="src">The source method</param>
-        static ByteSize size(MethodInfo src)
-            => src.Tag<SizeAttribute>().MapValueOrDefault(a => (ByteSize)a.Size, ByteSize.Empty);
     }
 }

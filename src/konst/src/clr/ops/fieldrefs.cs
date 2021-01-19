@@ -57,7 +57,7 @@ namespace Z0
                 var type = src[i];
                 var fields = ClrLiterals.search(type);
                 var @base = address(type);
-                var offset = MemoryAddress.Empty;
+                var offset = MemoryAddress.Zero;
                 for(var j=0u; j<fields.Length; j++)
                 {
                     var fi = fields[j];

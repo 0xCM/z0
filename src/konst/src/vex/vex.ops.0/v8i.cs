@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Presents a 128-bit <typeparamref name='T'/> vector as a 128-bit <see cref='sybte'/> vector
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
         public static Vector128<sbyte> v8i<T>(Vector128<T> x)
             where T : unmanaged
                 => x.AsSByte();
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
         public static Vector256<sbyte> v8i<T>(Vector256<T> x)
             where T : unmanaged
                 => x.AsSByte();
@@ -37,9 +37,23 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline), Bijection, Closures(Closure)]
+        [MethodImpl(Inline), Concretizer, Closures(Closure)]
         public static Vector512<sbyte> v8i<T>(Vector512<T> x)
             where T : unmanaged
                 => x.As<sbyte>();
+    }
+
+    partial struct z
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<sbyte> v8i<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v8i(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<sbyte> v8i<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v8i(x);
+
     }
 }

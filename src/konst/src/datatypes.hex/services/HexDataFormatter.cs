@@ -37,7 +37,7 @@ namespace Z0
         public HexDataFormatter(HexLineConfig config, MemoryAddress? @base = null)
         {
             LineConfig = config;
-            BaseAddress = @base ?? MemoryAddress.Empty;
+            BaseAddress = @base ?? MemoryAddress.Zero;
             LabelConfig = HexFormatSpecs.options(zpad:true, specifier: true, uppercase: false, prespec:false);
             DataConfig = HexFormatSpecs.HexData;
         }
@@ -75,7 +75,7 @@ namespace Z0
         {
             var line = string.Empty.Build();
             var count = data.Length;
-            var offset = MemoryAddress.Empty;
+            var offset = MemoryAddress.Zero;
 
             for(var i=0u; i<count; i++)
             {

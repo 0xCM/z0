@@ -9,7 +9,6 @@
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Validity)" />
   </ItemGroup>
 
 </Project>

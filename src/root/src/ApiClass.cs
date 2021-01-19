@@ -405,6 +405,8 @@ public enum ApiClass : ushort
 
     Byteswap,
 
+    Concretizer,
+
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 
@@ -420,6 +422,9 @@ public enum ApiClass : ushort
 
     VPAVGW,
 
+    PSHUFLW,
+
+    PSHUFHW,
 
     // ~~ System-level operations
     // ~~ -------------------------------------------------------------------------------------------------------------

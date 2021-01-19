@@ -40,7 +40,7 @@ namespace Z0.Asm
         {
             Uri = host;
             Routines = src.OrderBy(x => x.BaseAddress).ToArray();
-            BaseAddress = Routines.Length != 0 ? Routines[0].BaseAddress : MemoryAddress.Empty;
+            BaseAddress = Routines.Length != 0 ? Routines[0].BaseAddress : MemoryAddress.Zero;
             InstructionCount = (uint)Routines.Sum(i => (long)i.InstructionCount);
         }
 

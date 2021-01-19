@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using F = Cell128;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal Cell128(ulong x0, ulong x1)
-            => Data = vparts(w128, x0,x1);
+            => Data = z.vparts(w128, x0,x1);
 
         public CellKind Kind
             => CellKind.Cell128;
@@ -102,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Cell128 src)
-            => vcell(v16u(src.Data),0);
+            => z.vcell(z.v16u(src.Data),0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)

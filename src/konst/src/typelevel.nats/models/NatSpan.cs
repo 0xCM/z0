@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     /// <summary>
@@ -21,7 +21,6 @@ namespace Z0
         readonly Span<T> Data;
 
         static N n => default;
-
 
         [MethodImpl(Inline)]
         internal NatSpan(Span<T> src)

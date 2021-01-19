@@ -11,17 +11,8 @@ namespace Z0
 
     partial class XNumeric
     {
-        /// <summary>
-        /// Determines the type identifer of a numeric kind
-        /// </summary>
-        /// <param name="kind">The source kind</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static NumericApiKind ApiKind(this NumericKind kind)
-        {
-            var noClass = ((uint)kind << 3) >> 3;
-            var noWidth = (noClass >> 16) << 16;
-            var key = (NumericApiKind)noWidth;
-            return key;
-        }
+            => NumericKinds.apikind(kind);
     }
 }

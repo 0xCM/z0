@@ -33,7 +33,7 @@ namespace Z0
         public ReadOnlySpan<byte> Data
         {
             [MethodImpl(Inline)]
-           get => cover<B,byte>(this, CellCount);
+           get => cover<B,byte>(this, Size);
         }
 
         [MethodImpl(Inline)]
@@ -43,17 +43,12 @@ namespace Z0
         public uint Length
         {
             [MethodImpl(Inline)]
-            get => CellCount;
+            get => Size;
         }
-
-        /// <summary>
-        /// The block capacity
-        /// </summary>
-        public const ushort CellCount = 16;
 
         /// <summary>
         /// The size of the block, in bytes
         /// </summary>
-        public const uint Size = CellCount;
+        public const uint Size = 16;
     }
 }

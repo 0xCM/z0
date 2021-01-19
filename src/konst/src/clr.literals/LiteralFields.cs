@@ -36,7 +36,7 @@ namespace Z0
         {
             var @base = address(host);
             var count = src.Length;
-            var offset = MemoryAddress.Empty;
+            var offset = MemoryAddress.Zero;
 
             for(var j=0u; j<count; j++)
             {
