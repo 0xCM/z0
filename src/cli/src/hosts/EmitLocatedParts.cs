@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [WfHost]
@@ -57,14 +57,17 @@ namespace Z0
         {
              var count = Parts.Length;
 
+            var emitter = ImageDataEmitter.init(Wf);
              Index = span<LocatedPart>(count);
              for(var i=0u; i<count; i++)
              {
                 ref readonly var part = ref skip(Parts, i);
                 var @base = ImageMaps.@base(part);
+
+                //var range = emitter.EmitImageContent(part.Owner);
                 using var step = new EmitPartImageData(Wf, part);
                 step.Run();
-                seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
+                seek(Index,i) = new LocatedPart(part, @base, (ulong)step.OffsetAddress - (ulong)@base);
              }
 
              ImageMaps.emit(Images, TargetDir + FS.file("imagemaps", FileExtensions.Csv));

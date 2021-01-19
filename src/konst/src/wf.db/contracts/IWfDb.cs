@@ -10,6 +10,9 @@ namespace Z0
 
     public interface IWfDb : IWfService, IWfDbPaths, IFileArchive
     {
+        WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
+            where T : struct, IRecord<T>;
+
         IToolDb ToolDb()
             => new ToolDb(Wf);
 

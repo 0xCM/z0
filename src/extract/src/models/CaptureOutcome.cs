@@ -40,19 +40,19 @@ namespace Z0
         public ulong Start
         {
             [MethodImpl(Inline)]
-            get => Range.BaseAddress;
+            get => Range.Min;
         }
 
         public ulong End
         {
             [MethodImpl(Inline)]
-            get => Range.EndAddress;
+            get => Range.Max;
         }
 
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => (int)Range.Length;
+            get => (int)Range.Size;
         }
 
         public bool IsEmpty

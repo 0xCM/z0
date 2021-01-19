@@ -9,7 +9,6 @@ namespace Z0
     [Service(typeof(IApiJit))]
     public sealed class ApiJitService : WfService<ApiJitService,IApiJit>, IApiJit
     {
-
         public unsafe Index<ApiAddressRecord> JitApi(FS.FilePath dst)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
@@ -30,7 +29,7 @@ namespace Z0
                     var first = memories.First;
                     var last = memories.Last;
                     var range = memories.Range;
-                    var length = range.Length/1024;
+                    var length = range.Size/1024;
                     if(length == 0)
                         length = 1;
                     total += length;

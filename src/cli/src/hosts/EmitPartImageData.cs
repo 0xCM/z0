@@ -11,6 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
+
     public ref struct EmitPartImageData
     {
         readonly IWfShell Wf;

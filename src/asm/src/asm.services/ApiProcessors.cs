@@ -49,7 +49,6 @@ namespace Z0
             var dst = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
             var service = ResBytesEmitter.init(Wf);
             service.Emit(Index, dst);
-            //ResBytesEmitter.service(Wf, Index).Emit(dst);
         }
 
         public void EmitCallRows()

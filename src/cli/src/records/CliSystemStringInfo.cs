@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId)]
+    [Record(TableId)]
     public struct CliSystemStringInfo : IRecord<CliSystemStringInfo>
     {
         public const string TableId = "cli.strings.system";

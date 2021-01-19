@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId)]
-    public struct CliLiteralInfo : IRecord<CliLiteralInfo>
+    [Record(TableId)]
+    public struct CliFieldName : IRecord<CliFieldName>
     {
-        public const string TableId = "cli.literal";
-
-        public const byte FieldCount = 4;
+        public const string TableId = "cli.fieldname";
 
         public Count Sequence;
 
@@ -28,7 +25,7 @@ namespace Z0
         public string Value;
 
         [MethodImpl(Inline)]
-        public CliLiteralInfo(Count seq, ByteSize heap, Address32 offset, string value)
+        public CliFieldName(Count seq, ByteSize heap, Address32 offset, string value)
         {
             Sequence = seq;
             HeapSize = heap;

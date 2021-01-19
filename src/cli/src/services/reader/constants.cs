@@ -5,11 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
+    using static Part;
     using static z;
+
 
     partial class PeTableReader
     {
+        public static ConstantHandle ConstantHandle(uint row)
+            => MetadataTokens.ConstantHandle((int)row);
+
         public ReadOnlySpan<CliConstantInfo> constants(ref uint counter)
         {
             var reader = State.Reader;

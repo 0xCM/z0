@@ -26,7 +26,7 @@ namespace Z0
         readonly WfHost Host;
 
         FS.FolderPath Target
-            => Wf.Db().TableRoot() + FS.folder(CliLiteralInfo.TableId);
+            => Wf.Db().TableRoot() + FS.folder(CliFieldName.TableId);
 
         public EmitFieldLiteralsStep(IWfShell wf, WfHost host)
         {

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Part;
 
@@ -15,7 +14,6 @@ namespace Z0
     {
 
     }
-
 
     [ApiHost]
     public readonly partial struct TableFormatter

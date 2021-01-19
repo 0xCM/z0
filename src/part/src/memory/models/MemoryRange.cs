@@ -21,49 +21,49 @@ namespace Z0
         /// <summary>
         /// The inclusive address at which the range begins
         /// </summary>
-        public MemoryAddress BaseAddress {get;}
+        public MemoryAddress Min {get;}
 
         /// <summary>
         /// The inclusive address at which the range ends
         /// </summary>
-        public MemoryAddress EndAddress {get;}
+        public MemoryAddress Max {get;}
 
         [MethodImpl(Inline)]
-        public MemoryRange(MemoryAddress start, MemoryAddress end)
+        public MemoryRange(MemoryAddress min, MemoryAddress max)
         {
-            BaseAddress = start;
-            EndAddress = end;
+            Min = min;
+            Max = max;
         }
 
-        public ByteSize Length
+        public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => (ulong)EndAddress - (ulong)BaseAddress;
+            get => (ulong)Max - (ulong)Min;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Length == 0;
+            get => Size == 0;
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.calc((ulong)BaseAddress, (ulong)EndAddress);
+            => (int)alg.hash.calc((ulong)Min, (ulong)Max);
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryRange src)
-            => BaseAddress == src.BaseAddress && EndAddress == src.EndAddress;
+            => Min == src.Min && Max == src.Max;
 
         public override bool Equals(object obj)
             => obj is MemoryRange x && Equals(x);
 
         [MethodImpl(Inline)]
         public bool Includes(MemoryRange range)
-            => range.BaseAddress >= BaseAddress && range.EndAddress <= EndAddress;
+            => range.Min >= Min && range.Max <= Max;
 
         [MethodImpl(Inline)]
         public bool Includes(MemoryAddress address)
-            => address.Location >= BaseAddress && address.Location <= EndAddress;
+            => address.Location >= Min && address.Location <= Max;
 
         [MethodImpl(Inline)]
         public int CompareTo(MemoryRange other)
@@ -78,7 +78,7 @@ namespace Z0
             => enclose($"{content}", Chars.LBracket, Chars.RBracket);
 
         public string Format()
-            => bracket(string.Concat(BaseAddress.Format(), Chars.Comma, Chars.Space, EndAddress.Format()));
+            => bracket(string.Concat(Min.Format(), Chars.Comma, Chars.Space, Max.Format()));
 
         public override string ToString()
             => Format();
@@ -93,19 +93,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator<(MemoryRange a, MemoryRange b)
-            => a.BaseAddress < b.BaseAddress;
+            => a.Min < b.Min;
 
         [MethodImpl(Inline)]
         public static bool operator>(MemoryRange a, MemoryRange b)
-            => a.BaseAddress > b.BaseAddress;
+            => a.Min > b.Min;
 
         [MethodImpl(Inline)]
         public static bool operator<=(MemoryRange a, MemoryRange b)
-            => a.BaseAddress <= b.BaseAddress;
+            => a.Min <= b.Min;
 
         [MethodImpl(Inline)]
         public static bool operator>=(MemoryRange a, MemoryRange b)
-            => a.BaseAddress >= b.BaseAddress;
+            => a.Min >= b.Min;
 
         [MethodImpl(Inline)]
         public static implicit operator MemoryRange((MemoryAddress start, MemoryAddress end) src)

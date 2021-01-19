@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection.Metadata.Ecma335;
-    using System.Collections.Generic;
-    using System.Linq;
 
     partial class PeTableReader
     {
@@ -18,7 +16,7 @@ namespace Z0
             if (size == 0)
                 return empty<CliSystemStringInfo>();
 
-            var values = new List<CliSystemStringInfo>();
+            var values = root.list<CliSystemStringInfo>();
             var handle = MetadataTokens.StringHandle(0);
             var i=0;
             do

@@ -65,7 +65,7 @@ namespace Z0
             dst.Append(RP.SpacedPipe);
             dst.Append(Size.Format().PadRight(10));
             dst.Append(RP.SpacedPipe);
-            dst.Append(Range.EndAddress.Format().PadRight(16));
+            dst.Append(Range.Max.Format().PadRight(16));
             return dst.ToString();
         }
     }

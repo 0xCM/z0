@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryRange src)
-            => cover(src.BaseAddress.Ref<T>(), cells<T>(src));
+            => cover(src.Min.Ref<T>(), cells<T>(src));
 
         /// <summary>
         /// Presents a readonly S-reference as a readonly T-reference

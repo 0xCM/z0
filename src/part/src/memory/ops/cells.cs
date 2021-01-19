@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint cells<T>(MemoryRange src)
-            => (uint)(src.Length/size<T>());
+            => (uint)(src.Size/size<T>());
 
         /// <summary>
         /// Computes the number of <typeparamref name='T'/> cells that comprise a single 8-bit block

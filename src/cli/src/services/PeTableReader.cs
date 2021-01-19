@@ -9,10 +9,9 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static Konst;
+    using static Part;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using I = System.Reflection.Metadata.Ecma335.TableIndex;
 
     [Free, ApiHost]
     public partial class PeTableReader : IDisposable
@@ -41,12 +40,5 @@ namespace Z0
             else
                 return null;
         }
-
-        public static ConstantHandle ConstantHandle(uint row)
-            => MetadataTokens.ConstantHandle((int)row);
-
-        [MethodImpl(Inline), Op]
-        public static int ConstantCount(in ReaderState state)
-            => state.Reader.GetTableRowCount(I.Constant);
     }
 }

@@ -26,24 +26,36 @@ namespace Z0
                 ref readonly var handle = ref skip(handles,i);
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
-
-                seek(dst,i) = new ClrFieldInfo(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
+                seek(dst,i) = new ClrFieldInfo(i, FieldName(entry.Name, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
         }
 
-        public static CliLiteralInfo literal(in ReaderState state, StringHandle handle, Count seq)
+        public CliFieldName FieldName(StringHandle handle, Count seq)
         {
-            var value = state.Reader.GetString(handle);
-            var offset = state.Reader.GetHeapOffset(handle);
-            var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new CliLiteralInfo(seq, size, (Address32)offset, value);
+            var value = State.Reader.GetString(handle);
+            var offset = State.Reader.GetHeapOffset(handle);
+            var size = State.Reader.GetHeapSize(HeapIndex.String);
+            return new CliFieldName(seq, size, (Address32)offset, value);
         }
-
-        public static CliLiteralInfo name(in ReaderState state, FieldDefinition entry, Count seq)
-            => literal(state, entry.Name, seq);
 
         internal static string format(FieldAttributes src)
             => src.ToString();
+
+        public FieldDefinition Read(FieldDefinitionHandle src)
+            => State.Reader.GetFieldDefinition(src);
+
+        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
+
+        public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                Read(skip(src,i), ref seek(dst,i));
+        }
     }
 }

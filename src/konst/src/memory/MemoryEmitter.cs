@@ -26,8 +26,8 @@ namespace Z0
 
         public void Emit2(MemoryRange src, StreamWriter dst)
         {
-            var formatter = HexDataFormatter.create(src.BaseAddress, 40);
-            var data = memory.cover<byte>(src.BaseAddress, src.Length);
+            var formatter = HexDataFormatter.create(src.Min, 40);
+            var data = memory.cover<byte>(src.Min, src.Size);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             formatter.FormatLines(data, line => dst.WriteLine(line));
         }
@@ -49,12 +49,12 @@ namespace Z0
             const ushort PageSize = 0x1000;
 
             var buffer = span<byte>(PageSize);
-            var pages = (uint)(src.Length/PageSize);
+            var pages = (uint)(src.Size/PageSize);
             var reader = memory.reader<byte>(src);
             var offset = 0ul;
-            var @base = src.BaseAddress;
+            var @base = src.Min;
 
-            Wf.Status($"Length = {src.Length}, Pages={pages}, Base={@base}, End = {src.EndAddress}");
+            Wf.Status($"Length = {src.Size}, Pages={pages}, Base={@base}, End = {src.Max}");
 
             var formatter = HexDataFormatter.create(@base);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
@@ -67,7 +67,7 @@ namespace Z0
 
                 offset += PageSize;
 
-                if(size < PageSize || offset >= src.Length)
+                if(size < PageSize || offset >= src.Size)
                     break;
             }
         }

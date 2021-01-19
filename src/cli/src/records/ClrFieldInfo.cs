@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId)]
+    [Record(TableId)]
     public struct ClrFieldInfo : IRecord<ClrFieldInfo>
     {
         public const byte FieldCount = 7;
@@ -33,14 +33,14 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ClrFieldInfo(Count seq, CliLiteralInfo field, BlobRow sig, string attribs)
+        public ClrFieldInfo(Count seq, CliFieldName name, BlobRow sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;
-            HeapSize = field.HeapSize;
-            Length = field.Length;
-            Offset = field.Offset;
-            Value = field.Value;
+            HeapSize = name.HeapSize;
+            Length = name.Length;
+            Offset = name.Offset;
+            Value = name.Value;
             Sig = sig.Data;
             Attribs = attribs;
         }

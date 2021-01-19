@@ -23,6 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static MemoryReader<T> reader<T>(MemoryRange src)
             where T : unmanaged
-                => reader(src.BaseAddress.Pointer<T>(), (int)src.Length);
+                => reader(src.Min.Pointer<T>(), (int)src.Size);
     }
 }
