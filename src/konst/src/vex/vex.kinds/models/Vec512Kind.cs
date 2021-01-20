@@ -12,14 +12,6 @@ namespace Z0
     public readonly struct Vec512Kind<T> : IVectorKind<Vec512Kind<T>,W512,T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static implicit operator VectorWidth(Vec512Kind<T> src)
-            => src.Width;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vec512Type(Vec512Kind<T> src)
-            => default;
-
         public W512 W => default;
 
         public VectorWidth Width
@@ -38,5 +30,12 @@ namespace Z0
         public Type Close()
             => TypeDefinition.MakeGenericType(typeof(T));
 
+        [MethodImpl(Inline)]
+        public static implicit operator VectorWidth(Vec512Kind<T> src)
+            => src.Width;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vec512Type(Vec512Kind<T> src)
+            => default;
     }
 }

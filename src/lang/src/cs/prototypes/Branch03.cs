@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-
     using static Prototypes.Branch03;
 
     using C = System.UInt64;

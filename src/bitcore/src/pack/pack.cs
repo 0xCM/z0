@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class Bits
     {
@@ -48,17 +47,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="n">The number of bits to pack</param>
-        /// <param name="w">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static ulong pack64x32x1(in uint src, N64 n, W64 w)
-        {
-            var buffer = z64;
-            return pack64x32x1(src, ref buffer);
-        }
+
     }
 }

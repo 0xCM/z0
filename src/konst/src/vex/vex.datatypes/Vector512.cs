@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static memory;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>
@@ -25,26 +24,6 @@ namespace Z0
         /// The hi 256 bits
         /// </summary>
         public readonly Vector256<T> Hi;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<T>((Vector256<T> a, Vector256<T> b) src)
-            => new Vector512<T>(src.a, src.b);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector512<T>((Vector128<T> a, Vector128<T> b, Vector128<T> c, Vector128<T> d) src)
-            => new Vector512<T>(src.a, src.b,src.c, src.d);
-
-        [MethodImpl(Inline)]
-        public static implicit operator (Vector256<T> lo, Vector256<T> hi)(Vector512<T> src)
-            => (src.Lo, src.Hi);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in Vector512<T> a, in Vector512<T> b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in Vector512<T> a, in Vector512<T> b)
-            => a.Equals(b);
 
         [MethodImpl(Inline)]
         public Vector512(Vector256<T> a, Vector256<T> b)
@@ -133,5 +112,25 @@ namespace Z0
         /// </summary>
         public static int Count
             => 2*Vector256<T>.Count;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector512<T>((Vector256<T> a, Vector256<T> b) src)
+            => new Vector512<T>(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector512<T>((Vector128<T> a, Vector128<T> b, Vector128<T> c, Vector128<T> d) src)
+            => new Vector512<T>(src.a, src.b,src.c, src.d);
+
+        [MethodImpl(Inline)]
+        public static implicit operator (Vector256<T> lo, Vector256<T> hi)(Vector512<T> src)
+            => (src.Lo, src.Hi);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in Vector512<T> a, in Vector512<T> b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in Vector512<T> a, in Vector512<T> b)
+            => a.Equals(b);
     }
 }

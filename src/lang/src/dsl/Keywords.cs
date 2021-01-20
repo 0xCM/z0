@@ -16,27 +16,27 @@ namespace Z0.Dsl
         /// <summary>
         /// Specifies an action
         /// </summary>
-        public static Keyword action() => "action";
+        public static Keyword action() => Action;
 
         /// <summary>
         /// Allocates a buffer
         /// </summary>
-        public static Keyword alloc() => "alloc";
+        public static Keyword alloc() => Alloc;
 
         /// <summary>
         /// Specifies the arity of an operation
         /// </summary>
-        public static Keyword arity() => "arity";
+        public static Keyword arity() => Arity;
 
         /// <summary>
         /// Specifies a file repository
         /// </summary>
-        public static Keyword archive() => "archive";
+        public static Keyword archive() => Archive;
 
         /// <summary>
         /// Presents a value of one type as another
         /// </summary>
-        public static Keyword @as() => "as";
+        public static Keyword @as() => As;
 
         /// <summary>
         /// An data type that represents a binary state
@@ -74,6 +74,11 @@ namespace Z0.Dsl
         public static Keyword cmd() => "cmd";
 
         /// <summary>
+        /// Declares a data type
+        /// </summary>
+        public static Keyword data() => "data";
+
+        /// <summary>
         /// Specifies a directory
         /// </summary>
         public static Keyword dir() => "dir";
@@ -87,6 +92,11 @@ namespace Z0.Dsl
         /// Specifies a function
         /// </summary>
         public static Keyword func() => "func";
+
+        /// <summary>
+        /// Specifies a datatype/record field
+        /// </summary>
+        public static Keyword field() => "field";
 
         /// <summary>
         /// Specifies an instruction
@@ -133,15 +143,6 @@ namespace Z0.Dsl
         /// </summary>
         public static Keyword test() => "test";
 
-        /// <summary>
-        /// Declares a data type
-        /// </summary>
-        public static Keyword data() => "data";
-
-        /// <summary>
-        /// Specifies a datatype/record field
-        /// </summary>
-        public static Keyword field() => "field";
 
         /// <summary>
         /// Specifies an identifer that is unique within some scope
@@ -189,6 +190,11 @@ namespace Z0.Dsl
         public static Keyword nat() => "nat";
 
         /// <summary>
+        /// Publishes an event
+        /// </summary>
+        public static Keyword raise() => "raise";
+
+        /// <summary>
         /// Defines a closed interval
         /// </summary>
         public static Keyword segment() => "segment";
@@ -231,22 +237,17 @@ namespace Z0.Dsl
         /// <summary>
         /// Delimits a statement sequence
         /// </summary>
-        public static Keyword scope() => "label";
-
-        /// <summary>
-        /// Publishes an event
-        /// </summary>
-        public static Keyword raise() => "raise";
-
-        /// <summary>
-        /// Specifies a vector of the form bitwidth X cellwidth
-        /// </summary>
-        public static Keyword vector() => "vector";
+        public static Keyword scope() => "scope";
 
         /// <summary>
         /// Persists a buffer content to a target
         /// </summary>
         public static Keyword store() => "store";
+
+        /// <summary>
+        /// Specifies a vector of the form bitwidth X cellwidth
+        /// </summary>
+        public static Keyword vector() => Vector;
 
         /// <summary>
         /// Specifies an unsigned data type
@@ -291,7 +292,7 @@ namespace Z0.Dsl
         /// <summary>
         /// Specifies a variable
         /// </summary>
-        public static Keyword var() => "var";
+        public static Keyword var() => Var;
 
         /// <summary>
         /// Specifies a bit-width

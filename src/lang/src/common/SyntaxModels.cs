@@ -16,7 +16,6 @@ namespace Z0.Lang
 
         const NumericKind Closure = UnsignedInts;
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Label<T> label<T>(T src)
             => new Label<T>(src);

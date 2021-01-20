@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Text;
 
@@ -135,17 +134,6 @@ namespace Z0
                             Console.WriteLine(msg);
                         Console.ForegroundColor = revert;
                     }
-
-                    // foreach(var msg in messages)
-                    // {
-                    //     Console.ForegroundColor = (ConsoleColor)msg.Flair;
-                    //     if(msg.IsError)
-                    //         Console.Error.WriteLine(msg);
-                    //     else
-                    //         Console.WriteLine(msg);
-                    //     Console.ForegroundColor = current;
-                    // }
-                    //Console.ForegroundColor = revert;
                 }
             }
         }

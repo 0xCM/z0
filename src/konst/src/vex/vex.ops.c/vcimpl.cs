@@ -14,8 +14,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Part;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the converse implication, ~x | y for vectors x and y

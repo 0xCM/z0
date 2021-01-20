@@ -57,7 +57,7 @@ namespace Z0
             return aspects;
         }
 
-        public readonly AspectRow[] Data {get;}
+        public AspectRow[] Data {get;}
 
         [MethodImpl(Inline)]
         public Aspects(params AspectRow[] data)
