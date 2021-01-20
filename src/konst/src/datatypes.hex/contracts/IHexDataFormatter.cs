@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public sealed class ApiServices : WfService<ApiServices, ApiServices>
+    public interface IHexDataFormatter
     {
-        public IApiJit ApiJit()
-            => ApiJitService.create(Wf);
+        void FormatLines(ReadOnlySpan<byte> data, Action<string> receiver);
 
+        string FormatLine(ReadOnlySpan<byte> data, ulong offset, char delimiter = Chars.Space);
     }
 }

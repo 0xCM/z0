@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
     public abstract class WfHost<H> : IWfHost<H>
         where H : WfHost<H>, new()

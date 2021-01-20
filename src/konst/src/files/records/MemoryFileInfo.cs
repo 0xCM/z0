@@ -8,7 +8,6 @@ namespace Z0
 
     using System.IO;
 
-
     [Record(TableId)]
     public struct MemoryFileInfo : IRecord<MemoryFileInfo>
     {

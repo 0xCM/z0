@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The maximum byte-count per line
         /// </summary>
-        public int BytesPerLine {get;}
+        public ushort BytesPerLine {get;}
 
         /// <summary>
         /// Specifies whether offset labels should be emitted
@@ -27,7 +27,7 @@ namespace Z0
         public char Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public HexLineConfig(int linebytes, bool linelabels, char delimiter = FieldDelimiter)
+        public HexLineConfig(ushort linebytes, bool linelabels, char delimiter = FieldDelimiter)
         {
             BytesPerLine = linebytes;
             LineLabels = linelabels;

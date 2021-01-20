@@ -9,45 +9,29 @@ namespace Z0
     using System.IO;
 
     using static memory;
-    using static Part;
 
-    [ApiHost]
-    public readonly struct MemoryEmitter : IWfStateless<MemoryEmitter>
+    [Service(typeof(IMemoryEmitter))]
+    public class MemoryEmitter : WfService<MemoryEmitter, IMemoryEmitter>,  IMemoryEmitter
     {
-        public IWfShell Wf {get;}
-
-        [MethodImpl(Inline)]
-        public static MemoryEmitter create(IWfShell wf)
-            => new MemoryEmitter(wf);
-
-        [MethodImpl(Inline)]
-        MemoryEmitter(IWfShell wf)
-            => Wf = wf;
-
-        public void Emit2(MemoryRange src, StreamWriter dst)
+        public void Emit(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {
-            var formatter = HexDataFormatter.create(src.Min, 40);
+            var formatter = HexDataFormatter.create(src.Min, bpl);
             var data = memory.cover<byte>(src.Min, src.Size);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             formatter.FormatLines(data, line => dst.WriteLine(line));
         }
 
-        [Op]
-        public void Emit2(MemoryRange src, FS.FilePath dst)
+        public void Emit(MemoryRange src, FS.FilePath dst, byte bpl = 40)
         {
             using var writer = dst.Writer();
-            Emit2(src, writer);
+            Emit(src, writer, bpl);
         }
 
-        [Op]
-        public void Emit2(MemoryAddress @base, ByteSize size, FS.FilePath dst)
-            => Emit2((@base,  @base + size), dst);
+        public void Emit(MemoryAddress @base, ByteSize size, FS.FilePath dst, byte bpl = 40)
+            => Emit((@base,  @base + size), dst, bpl);
 
-        [Op]
-        public void Emit(MemoryRange src, StreamWriter dst)
+        public void EmitPaged(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {
-            const ushort PageSize = 0x1000;
-
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Size/PageSize);
             var reader = memory.reader<byte>(src);
@@ -56,7 +40,7 @@ namespace Z0
 
             Wf.Status($"Length = {src.Size}, Pages={pages}, Base={@base}, End = {src.Max}");
 
-            var formatter = HexDataFormatter.create(@base);
+            var formatter = HexDataFormatter.create(@base, bpl);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             for(var i=0; i<pages; i++)
             {
@@ -72,15 +56,13 @@ namespace Z0
             }
         }
 
-        [Op]
-        public void Emit(MemoryRange src, FS.FilePath dst)
+        public void EmitPaged(MemoryRange src, FS.FilePath dst, byte bpl = 40)
         {
             using var writer = dst.Writer();
-            Emit(src,writer);
+            EmitPaged(src,writer, bpl);
         }
 
-        [Op]
-        public void Emit(MemoryAddress @base, ByteSize size, FS.FilePath dst)
-            => Emit((@base,  @base + size), dst);
+        public void EmitPaged(MemoryAddress @base, ByteSize size, FS.FilePath dst, byte bpl = 40)
+            => EmitPaged((@base,  @base + size), dst, bpl);
     }
 }

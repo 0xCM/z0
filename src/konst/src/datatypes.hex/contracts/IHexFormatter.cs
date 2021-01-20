@@ -9,17 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct AppRes<T> : IAppRes<T>
+    public interface IHexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatOptions>
+        where T : unmanaged
     {
-        public string Name {get;}
 
-        public T Content {get;}
-
-        [MethodImpl(Inline)]
-        public AppRes(string name, T data)
-        {
-            Name = name;
-            Content = data;
-        }
     }
 }

@@ -206,7 +206,7 @@ namespace Z0
 
         void EmitImageHeaders()
         {
-            var svc = ImageDataEmitter.init(Wf);
+            var svc = ImageDataEmitter.create(Wf);
             svc.EmitSectionHeaders(Archives.build(Wf));
         }
 
@@ -352,7 +352,7 @@ namespace Z0
 
         public void LoadAsmStore()
         {
-            var store = AsmDataStore.init(Wf);
+            var store = AsmDataStore.create(Wf);
             var patterns = store.Summaries();
             Wf.Status($"{patterns.Length}");
         }

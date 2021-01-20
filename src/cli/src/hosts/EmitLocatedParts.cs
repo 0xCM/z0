@@ -57,7 +57,7 @@ namespace Z0
         {
              var count = Parts.Length;
 
-            var emitter = ImageDataEmitter.init(Wf);
+            var emitter = ImageDataEmitter.create(Wf);
              Index = span<LocatedPart>(count);
              for(var i=0u; i<count; i++)
              {

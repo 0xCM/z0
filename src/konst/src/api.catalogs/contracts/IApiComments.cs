@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
+    using System.Collections.Generic;
 
-    using static Part;
-
-    partial struct Resources
+    public interface IApiComments : IWfService
     {
-
+        Dictionary<FS.FilePath, Dictionary<string,string>> Collect();
     }
 }

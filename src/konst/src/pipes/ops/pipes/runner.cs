@@ -11,6 +11,6 @@ namespace Z0
     {
         [Op]
         public static IPipeRunner runner(IWfShell wf)
-            => PipeRunnerSvc.init(wf);
+            => PipeRunnerSvc.create(wf);
     }
 }

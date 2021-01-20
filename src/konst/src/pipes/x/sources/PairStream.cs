@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     partial class XSource
     {
         public static Deferred<Pair<T>> PairStream<T>(this IDataSource src)

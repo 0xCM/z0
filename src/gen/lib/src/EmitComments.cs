@@ -7,8 +7,6 @@ namespace Z0
 {
     using System;
 
-    using static Dev;
-
     [WfHost]
     public sealed class EmitComments : WfHost<EmitComments>
     {
@@ -35,7 +33,7 @@ namespace Z0
         public void Run()
         {
             var flow = Wf.Running();
-            CommentCollector.collect(Wf);
+            ApiComments.collect(Wf);
             Wf.Ran(flow);
         }
 

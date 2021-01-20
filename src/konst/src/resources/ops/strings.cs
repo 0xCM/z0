@@ -30,7 +30,7 @@ namespace Z0
             return buffer;
         }
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static StringRes<T>[] strings<T>(Type src)
             where T : unmanaged
         {

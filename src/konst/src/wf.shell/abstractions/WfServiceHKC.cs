@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="wf">The source workflow</param>
         public static H init(IWfShell wf, C context)
         {
-            var service = create();
+            var service = @new();
             service.Context = context;
             service.Init(wf);
             return service;

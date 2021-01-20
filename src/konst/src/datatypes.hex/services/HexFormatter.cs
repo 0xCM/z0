@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatOptions>
+    public readonly struct HexFormatter<T> : IHexFormatter<T>
         where T : unmanaged
     {
         readonly ISystemFormatter<T> BaseFormatter;

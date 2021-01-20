@@ -8,7 +8,7 @@ namespace Z0
     {
         protected override CmdResult Run(EmitAssemblyRefsCmd cmd)
         {
-            using var emitter = ImageDataEmitter.init(Wf);
+            using var emitter = ImageDataEmitter.create(Wf);
             emitter.EmitAssemblyRefs(cmd.Sources, cmd.Target);
             return Cmd.ok(cmd);
         }

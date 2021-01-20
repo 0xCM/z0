@@ -5,7 +5,7 @@
 namespace Z0
 {
     using static TypeNats;
-    
+
     /// <summary>
     /// Characterizes a dimension of arbitrary order
     /// </summary>
@@ -29,30 +29,28 @@ namespace Z0
 
     public interface IDim1 : IDim
     {
-        ulong I {get;}   
+        ulong I {get;}
     }
 
     public interface IDim2 : IDim
     {
-        ulong I {get;}   
+        ulong I {get;}
 
-        ulong J {get;}   
+        ulong J {get;}
     }
 
     public interface IDim<M,N>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
     {
-
         /// <summary>
         /// Specifies the first component of the dimension
         /// </summary>
         int RowCount => (int)value<M>();
-        
+
         /// <summary>
         /// Specifies the second component of the dimension
         /// </summary>
         int ColCount => (int)value<M>();
-
     }
 }

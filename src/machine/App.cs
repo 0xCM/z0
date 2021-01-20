@@ -42,14 +42,14 @@ namespace Z0
             {
                 ApiCode.EmitHexIndex(Wf);
 
-                var resources = ResDataService.init(Wf);
+                var resources = ResDataService.create(Wf);
                 resources.EmitContentIndex();
                 resources.EmitReferenceData();
                 EmitComments.create().Run(Wf);
 
                 //XedEtlWfHost.create().Run(Wf);
 
-                var images = ImageDataEmitter.init(Wf);
+                var images = ImageDataEmitter.create(Wf);
                 images.EmitSectionHeaders();
                 images.EmitCilRecords();
                 images.EmitUserStrings();

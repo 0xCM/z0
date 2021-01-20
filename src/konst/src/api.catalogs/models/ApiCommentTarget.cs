@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public enum CommentTargetKind : byte
+    public enum ApiCommentTarget : byte
     {
         None = 0,
 

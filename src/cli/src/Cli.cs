@@ -46,6 +46,6 @@ namespace Z0
     {
         [ServiceFactory]
         public static IPdbSymbolStore PdbSymbolStore(this IWfShell wf)
-            => PdbSymbolStoreSvc.init(wf);
+            => PdbSymbolStoreSvc.create(wf);
     }
 }

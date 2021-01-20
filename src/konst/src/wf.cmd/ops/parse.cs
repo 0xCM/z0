@@ -14,7 +14,7 @@ namespace Z0
     {
         [Op]
         public static CmdParser parser(IWfShell wf)
-            => CmdParser.init(wf);
+            => CmdParser.create(wf);
 
         [Op]
         public static ParseResult<CmdExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')

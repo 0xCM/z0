@@ -20,7 +20,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(cmd.Target);
             var service = MemoryEmitter.create(Wf);
-            service.Emit(cmd.Source.BaseAddress, cmd.Source.Size, cmd.Target);
+            service.EmitPaged(cmd.Source.BaseAddress, cmd.Source.Size, cmd.Target);
             Wf.EmittedFile(flow, cmd.Target);
             return Cmd.ok(cmd);
         }

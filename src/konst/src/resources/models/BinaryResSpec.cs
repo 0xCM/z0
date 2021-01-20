@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines the content of a binary resource
     /// </summary>
     public readonly struct BinaryResSpec
     {
-        public readonly string Identifier;
+        public string Identifier {get;}
 
-        public readonly BinaryCode Encoded;
+        public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
         public BinaryResSpec(string name, BinaryCode code)

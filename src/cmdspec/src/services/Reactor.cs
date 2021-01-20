@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class Reactor : WfSingleton<Reactor, IReactor, int>, IReactor
+    public sealed class Reactor : WfSingleton<Reactor,IReactor,int>, IReactor
     {
         CmdBuilder Builder;
 
@@ -139,7 +139,7 @@ namespace Z0
                 var target = cmd.Target + FS.file(file.Path.FileName.Name, FileExtensions.Csv);
                 var flow = Wf.EmittingFile(target);
                 var service = MemoryEmitter.create(Wf);
-                service.Emit2(file.BaseAddress, file.Size, target);
+                service.Emit(file.BaseAddress, file.Size, target);
                 Wf.EmittedFile(flow, target);
             }
         }

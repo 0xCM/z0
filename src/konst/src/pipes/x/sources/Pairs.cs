@@ -39,9 +39,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstPair<T> ConstPair<T>(this IDataSource src, T t = default)
+        public static ConstPair<T> ConstPair<T>(this IDataSource src)
             where T : struct
-                => Sources.kpair(src,t);
+                => Sources.kpair<T>(src);
 
         /// <summary>
         /// Yields the next source-provided pair over a specified domain

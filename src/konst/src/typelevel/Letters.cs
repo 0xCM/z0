@@ -111,7 +111,6 @@ namespace Z0
                 => Format();
         }
 
-
         public readonly struct C : IAsciLetter<C>
         {
             [MethodImpl(Inline)]
@@ -164,17 +163,6 @@ namespace Z0
 
         public readonly struct D : IAsciLetter<D>
         {
-            [MethodImpl(Inline)]
-            public static implicit operator AsciLetterCode(D src)
-                => src.Code;
-
-            [MethodImpl(Inline)]
-            public static implicit operator AsciLetter(D src)
-                => src.Symbol;
-
-            [MethodImpl(Inline)]
-            public static implicit operator char(D src)
-                => src.Character;
 
             public AsciLetter Symbol
             {
@@ -210,6 +198,18 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsciLetterCode(D src)
+                => src.Code;
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsciLetter(D src)
+                => src.Symbol;
+
+            [MethodImpl(Inline)]
+            public static implicit operator char(D src)
+                => src.Character;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
 
         public void EmitSectionHeaders(IBuildArchive src)
         {
-            var svc = ImageDataEmitter.init(Wf);
+            var svc = ImageDataEmitter.create(Wf);
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
             var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));

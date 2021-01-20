@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Describes an individual term of a permutation p, i.e. the point
@@ -18,12 +18,12 @@ namespace Z0
         /// <summary>
         /// The point at which the permutation is evaluated
         /// </summary>
-        public readonly int Source;
+        public int Source {get;}
 
         /// <summary>
         /// The result of evaluating the permutation over the source
         /// </summary>
-        public readonly int Target;
+        public int Target {get;}
 
         [MethodImpl(Inline)]
         public PermTerm(int src, int dst)

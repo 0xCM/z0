@@ -110,7 +110,6 @@ namespace Z0
             else
                 return @null;
         }
-
     }
 
     /// <summary>

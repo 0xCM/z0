@@ -4,20 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     [Record(TableId)]
-    public struct SummaryComment : IRecord<SummaryComment>
+    public struct ApiComment : IRecord<ApiComment>
     {
-        public const string TableId = "api.summary";
+        public const string TableId = "api.comments";
 
-        public CommentTargetKind Kind;
+        public ApiCommentTarget Kind;
 
         public string Identifer;
 
         public string Summary;
 
-        public SummaryComment(CommentTargetKind kind, string identifier, string summary)
+        public ApiComment(ApiCommentTarget kind, string identifier, string summary)
         {
             Kind = kind;
             Identifer = identifier;

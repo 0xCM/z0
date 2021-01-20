@@ -14,6 +14,8 @@ namespace Z0
     {
         const NumericKind Closure = NumericKind.UnsignedInts;
 
+        public const ushort PageSize = 0x1000;
+
         [MethodImpl(Inline)]
         internal static Span<T> EmptySpan<T>()
             => Span<T>.Empty;

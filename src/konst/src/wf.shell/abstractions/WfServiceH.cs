@@ -17,15 +17,15 @@ namespace Z0
         /// Instantites the serice without initialization
         /// </summary>
         [MethodImpl(Inline)]
-        public static H create() => new H();
+        protected static H @new() => new H();
 
         /// <summary>
         /// Creates and initializes the service
         /// </summary>
         /// <param name="wf">The source workflow</param>
-        public static H init(IWfShell wf)
+        public static H create(IWfShell wf)
         {
-            var service = create();
+            var service = @new();
             service.Init(wf);
             return service;
         }

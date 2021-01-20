@@ -102,19 +102,19 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
-            => z.vcompact8u(src, gvec.vinc(w256, ScalarCast.uint16(16)),n256,z8);
+            => vcompact8u(src, gvec.vinc(w256, ScalarCast.uint16(16)),n256,z8);
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => z.v16u(z.vshuf32x8(z.v8u(a), vshuffle_spec_1(spec)));
+            => v16u(vshuf32x8(v8u(a), vshuffle_spec_1(spec)));
 
         [Op(ExampleGroups.Shuffles)]
         public void vshuf16x16()
         {
             var w = n256;
             var x = gvec.vinc(w,z16);
-            var reverse = z.vdec<ushort>(w);
-            var identity = z.vinc<ushort>(w);
+            var reverse = vdec<ushort>(w);
+            var identity = vinc<ushort>(w);
             var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
@@ -138,23 +138,23 @@ namespace Z0
 
             var x1 = z.vinc<byte>(w);
             var x1Spec = vload(w, z.first(ReversalPattern));
-            var x1Dst = z.vshuf16x8(x1,x1Spec);
+            var x1Dst = vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = z.vinc<byte>(w);
-            var x2Spec = z.vrotl(n128, n8);
-            var x2Dst = z.vshuf16x8(x2,x2Spec);
+            var x2 = vinc<byte>(w);
+            var x2Spec = vrotl(n128, n8);
+            var x2Dst = vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = z.vinc<byte>(w);
-            var x3Spec = z.vrotr(n128, n8);
-            var x3Dst = z.vshuf16x8(x3,x3Spec);
+            var x3 = vinc<byte>(w);
+            var x3Spec = vrotr(n128, n8);
+            var x3Dst = vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = z.vinc<byte>(w);
-            var x4Spec1 = z.vrotl(n128, n8);
-            var x4Spec2 = z.vrotr(n128, n8);
-            var x4Dst = z.vshuf16x8(z.vshuf16x8(x4,x4Spec1), x4Spec2);
+            var x4 = vinc<byte>(w);
+            var x4Spec1 = vrotl(n128, n8);
+            var x4Spec2 = vrotr(n128, n8);
+            var x4Dst = vshuf16x8(vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.veq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(w);
@@ -164,19 +164,17 @@ namespace Z0
         }
 
         [Op(ExampleGroups.Shuffles)]
-        void vshuf16x8()
+        void vshuf_16x8()
         {
             var reverse = PermSymbolic.reversed(n16);
             var perm = Permute.natural(reverse);
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i], j);
 
-            var increments = z.vinc<byte>(n128);
-
-
+            var increments = vinc<byte>(n128);
             var spec = perm.ToShuffleSpec();
             var dst = z.vshuf16x8(increments, spec);
-            var expect = z.vdec<byte>(n128);
+            var expect = vdec<byte>(n128);
             Claim.veq(expect, dst);
 
             var identity = videntity_shuffle();
@@ -191,7 +189,7 @@ namespace Z0
         [Op]
         public static Vector256<byte> videntity_shuffle()
         {
-            SpanBlock256<byte> mask = SpanBlocks.cellalloc<byte>(n256,1);
+            var mask = SpanBlocks.cellalloc<byte>(n256,1);
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;

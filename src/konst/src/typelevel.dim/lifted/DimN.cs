@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static TypeNats;
-    using static  Part;
 
     /// <summary>
     /// Defines a dimension axis which may represent the dimension of a vector of length N

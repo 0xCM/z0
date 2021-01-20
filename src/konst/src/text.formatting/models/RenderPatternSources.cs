@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct RenderPatternSources
     {
-        readonly TableSpan<RenderPatternSource> Data;
+        readonly Index<RenderPatternSource> Data;
 
         [MethodImpl(Inline)]
         public RenderPatternSources(RenderPatternSource[] src)

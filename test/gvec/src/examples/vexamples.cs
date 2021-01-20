@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Linq;
 
     using static Konst;
+
     /// <summary>
     /// Collects random examples
     /// </summary>
@@ -43,7 +43,7 @@ namespace Z0
         {
             var examples = new VexExamples();
             Run(examples.vduplicate);
-            Run(examples.vcover);
+            Run(examples.covers);
             Run(examples.vgather_128);
             Run(examples.vgather_256);
             Run(examples.vgather_blocks);

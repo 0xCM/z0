@@ -16,16 +16,17 @@ namespace Z0
     {
         public MemoryRange EmitImageContent(Assembly src)
         {
+            var rowsize = ImageContent.RowDataSize;
             var dst = Wf.Db().Table(ImageContent.TableId, src.GetSimpleName());
             var flow = Wf.EmittingTable<ImageContent>(dst);
             var @base = ImageMaps.@base(src);
-            var formatter = Hex.formatter(@base);
+            var formatter = Hex.formatter(@base, rowsize);
             var path = FS.path(src.Location);
             using var stream = path.Reader();
             using var reader = stream.BinaryReader();
             using var writer = dst.Writer();
             writer.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
-            var buffer = span<byte>(ImageContent.RowDataSize);
+            var buffer = span<byte>(rowsize);
             var k = Read(reader, buffer);
             var offset = MemoryAddress.Zero;
             var lines = 0;

@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct ApiJit
     {
         public static IApiJit service(IWfShell wf)
-            => ApiJitService.init(wf);
+            => ApiJitService.create(wf);
 
         [Op]
         public static ApiMembers jit(IPart src)

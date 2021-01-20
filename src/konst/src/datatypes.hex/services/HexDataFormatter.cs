@@ -10,20 +10,11 @@ namespace Z0
     using static Part;
     using static z;
 
-    public readonly struct HexDataFormatter
+    public readonly struct HexDataFormatter : IHexDataFormatter
     {
         [MethodImpl(Inline), Op]
-        public static HexDataFormatter create(MemoryAddress? @base = null, int bpl = 20, bool labels = true)
+        public static HexDataFormatter create(MemoryAddress? @base = null, ushort bpl = 20, bool labels = true)
             => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
-
-        /// <summary>
-        /// Creates a data formatter
-        /// </summary>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HexDataFormatter<T> create<T>()
-            where T : unmanaged
-                => new HexDataFormatter<T>(HexFormatSpecs.HexData);
 
         public readonly HexLineConfig LineConfig;
 
@@ -66,10 +57,8 @@ namespace Z0
                     line.Append(Space);
             }
 
-
             return line.ToString();
         }
-
 
         public void FormatLines(ReadOnlySpan<byte> data, Action<string> receiver)
         {

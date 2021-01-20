@@ -12,11 +12,11 @@ namespace Z0
 
     public readonly struct ApiMemberRes : ITextual
     {
-        public readonly ApiHostUri Host;
+        public ApiHostUri Host {get;}
 
-        public readonly MethodInfo Member;
+        public MethodInfo Member {get;}
 
-        public readonly ApiResKind Kind;
+        public ApiResKind Kind {get;}
 
         [MethodImpl(Inline)]
         public ApiMemberRes(ApiHostUri host, MethodInfo member, ApiResKind format)
