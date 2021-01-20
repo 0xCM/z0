@@ -10,14 +10,8 @@ namespace Z0
     using System.Collections;
 
     using static Part;
-    using static memory;
 
-    public interface IEnumerableTarget<T>
-    {
-
-    }
-
-    public struct EnumerableTarget<T> : IEnumerable<T>, IEnumerator<T>, IEnumerableTarget<T>
+    public struct EnumerableTarget<T> : IEnumerableTarget<T>
     {
         IteratorRelay<T> Relay;
 

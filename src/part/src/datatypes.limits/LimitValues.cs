@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     [LiteralProvider]
     public readonly struct LimitValues
     {

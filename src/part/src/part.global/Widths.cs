@@ -62,5 +62,6 @@ namespace Z0
         public static W512i w512i => default;
 
         public static W1024 w1024 => default;
+
     }
 }

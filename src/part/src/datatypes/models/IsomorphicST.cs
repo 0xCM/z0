@@ -13,14 +13,14 @@ namespace Z0
     {
         public static Isomorphic Untyped => new Isomorphic(typeof(S), typeof(T));
 
-        [MethodImpl(Inline)]
-        public static implicit operator Isomorphic(Isomorphic<S,T> x)
-            => Untyped;
-
         public string Format()
             => Untyped.Format();
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Isomorphic(Isomorphic<S,T> x)
+            => Untyped;
     }
 }

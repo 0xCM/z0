@@ -5,9 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     public struct OutputReceiver<T>
     {
+        internal T Current;
+
+        internal ViewTrigger<T> Trigger;
+
+        [MethodImpl(Inline)]
         public static OutputReceiver<T> create(ViewTrigger<T> trigger)
         {
             var receiver = new OutputReceiver<T>();
@@ -15,9 +23,5 @@ namespace Z0
             receiver.Current = default;
             return receiver;
         }
-
-        internal T Current;
-
-        internal ViewTrigger<T> Trigger;
     }
 }

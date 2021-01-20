@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     using api = RecordUtilities;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 

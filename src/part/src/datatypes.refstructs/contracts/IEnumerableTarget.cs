@@ -5,18 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    using static Part;
-
-    public struct ViewTrigger<T>
+    public interface IEnumerableTarget<T> : IEnumerable<T>, IEnumerator<T>
     {
-        T Current;
 
-        [MethodImpl(Inline)]
-        public void Raise(in T src)
-        {
-            Current = src;
-        }
     }
 }
