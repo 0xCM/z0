@@ -36,12 +36,12 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W128 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
-                => vsave(vselect(n, in a, in b, in c), ref z);
+                => vstore(vselect(n, in a, in b, in c), ref z);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W256 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
-                => vsave(vselect(n, in a, in b, in c), ref z);
+                => vstore(vselect(n, in a, in b, in c), ref z);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W128 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)

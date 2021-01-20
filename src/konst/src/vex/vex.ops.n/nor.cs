@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector128<float> vnor(Vector128<float> x, Vector128<float> y)
-            => z.vnot(Or(x, y));
+            => vnot(Or(x, y));
 
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector128<double> vnor(Vector128<double> x, Vector128<double> y)
-            => z.vnot(Or(x, y));
+            => vnot(Or(x, y));
 
         /// <summary>
         /// Computes ~(x | y) for vectors x and y

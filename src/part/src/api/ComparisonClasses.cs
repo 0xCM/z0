@@ -7,7 +7,7 @@ namespace Z0
     using K = ComparisonApiClass;
     using I = IComparisonApiKey;
 
-    public readonly struct ComparisonKinds
+    public readonly struct ComparisonClasses
     {
         public readonly struct Lt : I { K I.Kind => K.Lt; }
 

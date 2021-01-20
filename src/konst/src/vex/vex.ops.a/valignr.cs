@@ -16,11 +16,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// __m128i _mm_alignr_epi8 (__m128i a, __m128i b, int count) PALIGNR xmm, xmm/m128, imm8
         /// </summary>

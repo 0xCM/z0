@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Packs 16 1-bit values taken from each source byte at a specified index

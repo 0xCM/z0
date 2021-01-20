@@ -13,7 +13,6 @@ namespace Z0
 
     using M = CalcManaged;
     using N = CalcNative;
-    using K = Kinds;
     using I = CalcOpIndex;
 
     [ApiHost]
@@ -26,7 +25,7 @@ namespace Z0
         {
             var x = ScalarCast.uint8(4);
             var y = ScalarCast.uint8(16);
-            var f = K.mul();
+            var f = Api.mul();
 
             var expect = M.eval(f, x, y);
             var actual = N.eval(f, x, y);
@@ -95,14 +94,14 @@ namespace Z0
                 seek(mulRef, i) = skip(divCode,i);
 
             var z1 = CalcSlots.mul(x,y);
-            seek(dst, offset++) = (CalcChecks.describe(K.mul(), x,y, z1));
+            seek(dst, offset++) = (CalcChecks.describe(Api.mul(), x,y, z1));
 
             ref var divRef = ref div.BaseAddress.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 
             var z2 = CalcSlots.div(x,y);
-            seek(dst, offset++) = CalcChecks.describe(K.div(), x,y, z2);
+            seek(dst, offset++) = CalcChecks.describe(Api.div(), x,y, z2);
         }
     }
 }

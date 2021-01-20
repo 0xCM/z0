@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Kinds;
+    using static ArithmeticClasses;
 
     [ApiHost]
     public readonly struct CalcManaged

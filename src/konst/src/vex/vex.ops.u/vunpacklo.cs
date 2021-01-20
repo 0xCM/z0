@@ -17,7 +17,7 @@ namespace Z0
 
     partial struct z
     {
-       /// <summary>
+        /// <summary>
         /// __m128 _mm_unpacklo_ps (__m128 a, __m128 b) UNPCKLPS xmm, xmm/m128
         /// Creates a 128-bit vector where the lower 64 bits are taken from the
         /// lower 64 bits of the first source vector and the higher 64 bits are taken
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<float> vunpacklo(Vector128<float> x, Vector128<float> y)
-            => UnpackLow(x,y);
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m128d _mm_unpacklo_pd (__m128d a, __m128d b) UNPCKLPD xmm, xmm/m128
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<double> vunpacklo(Vector128<double> x, Vector128<double> y)
-            => UnpackLow(x,y);
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256 _mm256_unpacklo_ps (__m256 a, __m256 b) VUNPCKLPS ymm, ymm, ymm/m256
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="y">The right source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<float> vunpacklo(Vector256<float> x, Vector256<float> y)
-            => UnpackLow(x,y);
+            => UnpackLow(x, y);
 
         /// <summary>
         /// __m256d _mm256_unpacklo_pd (__m256d a, __m256d b) VUNPCKLPD ymm, ymm, ymm/m256

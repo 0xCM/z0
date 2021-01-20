@@ -9,11 +9,11 @@ namespace Z0
     /// </summary>
     public class AsmAttribute : OpAttribute
     {
-        public AsmAttribute(AsmApiClass key)
+        public AsmAttribute(AsmClass key)
         {
             Key = key;
         }
 
-        public AsmApiClass Key {get;}
+        public AsmClass Key {get;}
     }
 }

@@ -12,13 +12,12 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-
     using static Konst;
 
     partial struct z
     {
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -28,7 +27,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -38,7 +37,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -48,7 +47,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -58,7 +57,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -68,7 +67,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -78,7 +77,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -88,7 +87,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -98,7 +97,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m128i _mm_or_si128 (__m128i a, __m128i b)POR xmm, xmm/m128
+        ///  __m128i _mm_or_si128 (__m128i a, __m128i b) POR xmm, xmm/m128
         /// Computes the bitwise or between the source operands
         /// </summary>
         /// <param name="x">The left operand</param>
@@ -108,7 +107,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -117,7 +116,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -126,7 +125,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -135,7 +134,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -144,7 +143,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -153,7 +152,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -162,7 +161,7 @@ namespace Z0
             => Or(x, y);
 
         /// <summary>
-        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b)VPOR ymm, ymm, ymm/m25
+        ///  __m256i _mm256_or_si256 (__m256i a, __m256i b) VPOR ymm, ymm, ymm/m25
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

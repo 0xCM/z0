@@ -22,7 +22,7 @@ namespace Z0
             {
                 var blocks = dst.BlockCount;
                 for(var block = 0; block < blocks; block++)
-                    z.vsave(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
+                    z.vstore(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
                 return ref dst;
             }
         }
@@ -36,7 +36,7 @@ namespace Z0
             {
                 var blocks = dst.BlockCount;
                 for(var block = 0; block < blocks; block++)
-                    z.vsave(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
+                    z.vstore(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
                 return ref dst;
             }
         }

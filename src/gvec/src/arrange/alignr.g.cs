@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> valignr<T>(Vector128<T> x, Vector128<T> y, [Imm] byte offset)
             where T : unmanaged
-                => generic<T>(z.valignr(v64u(x), v64u(y), offset));
+                => generic<T>(cpu.valignr(v64u(x), v64u(y), offset));
 
         /// <summary>
         ///
@@ -33,6 +33,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valignr<T>(Vector256<T> x, Vector256<T> y, [Imm] byte offset)
             where T : unmanaged
-                => generic<T>(z.valignr(v64u(x), v64u(y), offset));
+                => generic<T>(cpu.valignr(v64u(x), v64u(y), offset));
     }
 }

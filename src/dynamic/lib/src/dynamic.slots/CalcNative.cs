@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static CalculatorCode;
+    using static ArithmeticClasses;
 
     using E = FunctionEvaluator;
 
@@ -19,7 +20,7 @@ namespace Z0
         /// <param name="f">The function selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        public static byte eval(Kinds.Mul f, byte x, byte y)
+        public static byte eval(Mul f, byte x, byte y)
             => E.eval(f, mul_ᐤ8uㆍ8uᐤ, x,y);
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Z0
         /// <param name="f">The function selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        public static byte eval(Kinds.Sub f, byte x, byte y)
+        public static byte eval(Sub f, byte x, byte y)
             => E.eval(f,sub_ᐤ8uㆍ8uᐤ, x, y );
 
         /// <summary>

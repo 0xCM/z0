@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static void or<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vsave(vor(w, a, b), ref z);
+                => vstore(vor(w, a, b), ref z);
 
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static void or<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static void or<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => z.vsave(vor(w, a, b), ref dst);
+                => z.vstore(vor(w, a, b), ref dst);
 
         [MethodImpl(Inline), Or, Closures(Closure)]
         public static void or<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)

@@ -11,8 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Part;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise

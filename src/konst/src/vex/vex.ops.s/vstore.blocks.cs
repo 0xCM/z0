@@ -20,12 +20,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, ref Cell128 dst)
             where T : unmanaged
-                => z.vsave(src, ref Cells.first<T>(dst));
+                => z.vstore(src, ref Cells.first<T>(dst));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector256<T> src, ref Cell256 dst)
             where T : unmanaged
-                => z.vsave(src, ref Cells.first<T>(dst));
+                => z.vstore(src, ref Cells.first<T>(dst));
 
         /// <summary>
         /// Stores the source vector to the head of a blocked container
@@ -33,10 +33,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector128<T> src, in SpanBlock128<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.First);
+                => vstore(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -45,10 +45,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector128<T> src, in SpanBlock128<T> dst, int block)
             where T : unmanaged
-                => vsave(src, ref dst.BlockRef(block));
+                => vstore(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -56,10 +56,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector256<T> src, in SpanBlock256<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.First);
+                => vstore(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a blocked container
@@ -67,10 +67,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector512<T> src, in SpanBlock512<T> dst)
             where T : unmanaged
-                => vsave(src, ref dst.First);
+                => vstore(src, ref dst.First);
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -79,10 +79,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector256<T> src, in SpanBlock256<T> dst, int block)
             where T : unmanaged
-                => vsave(src, ref dst.BlockRef(block));
+                => vstore(src, ref dst.BlockRef(block));
 
         /// <summary>
         /// Stores the source vector to a specified block in a blocked container
@@ -91,10 +91,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector512<T> src, in SpanBlock512<T> dst, int block)
             where T : unmanaged
-                => vsave(src, ref dst.BlockRef(block));
+                => vstore(src, ref dst.BlockRef(block));
 
         [MethodImpl(Inline), Store]
         public static unsafe void vstore(Vector128<byte> src, ref byte dst)

@@ -10,7 +10,6 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-
     using static Konst;
 
     partial struct z
@@ -87,7 +86,7 @@ namespace Z0
             => TestNotZAndNotC(x, y);
 
         /// <summary>
-        /// int _mm_testnzc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testnzc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -96,7 +95,7 @@ namespace Z0
             => TestNotZAndNotC(x, y);
 
         /// <summary>
-        /// int _mm_testnzc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testnzc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

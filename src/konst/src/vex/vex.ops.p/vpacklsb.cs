@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte

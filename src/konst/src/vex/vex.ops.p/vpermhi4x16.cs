@@ -11,7 +11,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Konst;
-    using static z;
 
     partial struct cpu
     {
@@ -20,7 +19,7 @@ namespace Z0
         ///</summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline), Asm(AsmApiClass.PSHUFHW)]
+        [MethodImpl(Inline), Asm(AsmClass.PSHUFHW)]
         public static Vector128<short> vpermhi4x16(Vector128<short> src, [Imm] Perm4L spec)
             => ShuffleHigh(src, (byte)spec);
 
@@ -30,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline), Asm(AsmApiClass.PSHUFHW)]
+        [MethodImpl(Inline), Asm(AsmClass.PSHUFHW)]
         public static Vector128<ushort> vpermhi4x16(Vector128<ushort> src, [Imm] Perm4L spec)
             => ShuffleHigh(src, (byte)spec);
 
@@ -39,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline), Asm(AsmApiClass.PSHUFHW)]
+        [MethodImpl(Inline), Asm(AsmClass.PSHUFHW)]
         public static Vector256<short> vpermhi4x16(Vector256<short> src, [Imm] Perm4L spec)
             => ShuffleHigh(src, (byte)spec);
 
@@ -48,9 +47,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline), Asm(AsmApiClass.PSHUFHW)]
+        [MethodImpl(Inline), Asm(AsmClass.PSHUFHW)]
         public static Vector256<ushort> vpermhi4x16(Vector256<ushort> src, [Imm] Perm4L spec)
             => ShuffleHigh(src, (byte)spec);
-
     }
 }

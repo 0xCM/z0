@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Returns true if at least one of the components of the source vector is nonzero, false otherwise
@@ -74,13 +73,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vnonz(v8i(src));
+                return cpu.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return z.vnonz(v16i(src));
+                return cpu.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return z.vnonz(v32i(src));
+                return cpu.vnonz(v32i(src));
             else
-                return z.vnonz(v64i(src));
+                return cpu.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -88,13 +87,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vnonz(v8u(src));
+                return cpu.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return z.vnonz(v16u(src));
+                return cpu.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return z.vnonz(v32u(src));
+                return cpu.vnonz(v32u(src));
             else
-                return z.vnonz(v64u(src));
+                return cpu.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -102,9 +101,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vnonz(v32f(src));
+                return cpu.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return z.vnonz(v64f(src));
+                return cpu.vnonz(v64f(src));
             else
                 throw no<T>();
         }
@@ -114,13 +113,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vnonz(v8i(src));
+                return cpu.vnonz(v8i(src));
             else if(typeof(T) == typeof(short))
-                return z.vnonz(v16i(src));
+                return cpu.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
-                return z.vnonz(v32i(src));
+                return cpu.vnonz(v32i(src));
             else
-                return z.vnonz(v64i(src));
+                return cpu.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
@@ -128,13 +127,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vnonz(v8u(src));
+                return cpu.vnonz(v8u(src));
             else if(typeof(T) == typeof(ushort))
-                return z.vnonz(v16u(src));
+                return cpu.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
-                return z.vnonz(v32u(src));
+                return cpu.vnonz(v32u(src));
             else
-                return z.vnonz(v64u(src));
+                return cpu.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
@@ -142,9 +141,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vnonz(v32f(src));
+                return cpu.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
-                return z.vnonz(v64f(src));
+                return cpu.vnonz(v64f(src));
             else
                 throw no<T>();
         }

@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
+    using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Packs 16 1-bit values taken from the most significant bit of each source byte
@@ -26,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong vpackmsb<T>(Vector256<T> src)
+        public static uint vpackmsb<T>(Vector256<T> src)
             where T : unmanaged
                 => vtakemask(src);
     }

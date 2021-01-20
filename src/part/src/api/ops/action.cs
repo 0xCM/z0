@@ -7,11 +7,16 @@ namespace Z0
     partial struct Api
     {
         [KindFactory]
-        public static UnaryClass unary()
+        public static UnaryActionClass action(A1 rep)
             => default;
 
-        [KindFactory, Closures(Closure)]
-        public static UnaryClass<T> unary<T>(T t = default)
-            where T : unmanaged => default;
+        [KindFactory]
+        public static BinaryActionClass action(A2 rep)
+            => default;
+
+        [KindFactory]
+        public static TernaryActionClass action(A3 rep)
+            => default;
+
     }
 }

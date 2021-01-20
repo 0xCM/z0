@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
         public static Vector128<ulong> vparts(W128 w, ulong x0, ulong x1)
-            => Create(x0,x1);
+            => Create(x0, x1);
 
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant
@@ -96,14 +96,14 @@ namespace Z0
         /// <param name="w">The vector width selector</param>
         [MethodImpl(Inline),Op]
         public static Vector128<float> vparts(W128 w, float x0, float x1, float x2, float x3)
-            => Create(x0,x1,x2,x3);
+            => Create(x0, x1, x2, x3);
 
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant
         /// </summary>
         /// <param name="w">The vector width selector</param>
-        [MethodImpl(Inline),Op]
+        [MethodImpl(Inline), Op]
         public static Vector128<double> vparts(W128 w, double x0, double x1)
-            => Create(x0,x1);
+            => Create(x0, x1);
     }
 }

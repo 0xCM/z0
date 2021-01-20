@@ -11,8 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static Konst; 
+    using static Konst;
 
     partial struct z
     {
@@ -26,7 +25,7 @@ namespace Z0
             => Shuffle(src, (byte)spec);
 
         /// <summary>
-        /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate)PSHUFD xmm, xmm/m128, imm8
+        /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate) PSHUFD xmm, xmm/m128, imm8
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>

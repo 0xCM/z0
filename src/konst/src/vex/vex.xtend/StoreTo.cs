@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector128<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
-                => z.vsave(src,dst,offset);
+                => gcpu.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector256<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
-                => z.vsave(src,dst,offset);
+                => gcpu.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a caller-supplied span
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector512<T> src, Span<T> dst, int offset = 0)
             where T : unmanaged
-                => z.vsave(src,dst,offset);
+                => gcpu.vstore(src,dst,offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector128<T> src, ref T dst, int offset = 0)
             where T : unmanaged
-                => z.vsave(src, ref dst, offset);
+                => z.vstore(src, ref dst, offset);
 
         /// <summary>
         /// Stores vector content to a memory reference
@@ -62,6 +62,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void StoreTo<T>(this Vector256<T> src, ref T dst, int offset = 0)
             where T : unmanaged
-                => z.vsave(src, ref dst, offset);
+                => z.vstore(src, ref dst, offset);
     }
 }

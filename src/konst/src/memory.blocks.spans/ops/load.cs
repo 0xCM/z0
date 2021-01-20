@@ -136,7 +136,7 @@ namespace Z0
             var w = w128;
             var stack = MemoryStacks.alloc(w);
             ref var dst = ref MemoryStacks.head<T>(ref stack);
-            z.vsave(src, ref dst);
+            z.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
 
@@ -152,7 +152,7 @@ namespace Z0
             var w = w256;
             var stack = MemoryStacks.alloc(w);
             ref var dst = ref MemoryStacks.head<T>(ref stack);
-            z.vsave(src, ref dst);
+            z.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
 
@@ -168,7 +168,7 @@ namespace Z0
             var w = w512;
             var stack = MemoryStacks.alloc(w);
             ref var dst = ref MemoryStacks.head<T>(ref stack);
-            z.vsave(src, ref dst);
+            z.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
 

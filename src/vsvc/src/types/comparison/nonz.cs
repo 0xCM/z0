@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Bit32 Invoke(Vector128<T> x)
-                => gvec.vnonz(x);
+                => gcpu.vnonz(x);
 
             [MethodImpl(Inline)]
             public Bit32 Invoke(T a)
@@ -32,12 +32,11 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Bit32 Invoke(Vector256<T> x)
-                => gvec.vnonz(x);
+                => gcpu.vnonz(x);
 
             [MethodImpl(Inline)]
             public Bit32 Invoke(T a)
                 => gmath.nonz(a);
-
         }
     }
 }

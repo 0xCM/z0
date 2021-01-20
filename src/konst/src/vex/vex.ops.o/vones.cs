@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector128<T> vones<T>(W128 n, T t = default)
             where T : unmanaged
                 => veq(default(Vector128<T>), default(Vector128<T>));
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector256<T> vones<T>(W256 n, T t = default)
             where T : unmanaged
                 => veq(default(Vector256<T>), default(Vector256<T>));
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The vector width selector</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector512<T> vones<T>(W512 n, T t = default)
             where T : unmanaged
                 => veq(default(Vector512<T>), default(Vector512<T>));

@@ -30,7 +30,7 @@ namespace Z0
             v1 = vload(n256, skip(src,3*8));
             var y = vcompact16u(v0, v1, n256, z16);
 
-            var packed = (ulong)vpacklsb(vcompact8u(x,y,n256,z8));
+            var packed = (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8));
 
             v0 = vload(n256, skip(src,4*8));
             v1 = vload(n256, skip(src,5*8));
@@ -40,7 +40,7 @@ namespace Z0
             v1 = vload(n256, skip(src,7*8));
             y = vcompact16u(v0,v1,n256,z16);
 
-            packed |= (ulong)vpacklsb(vcompact8u(x,y,n256,z8)) << 32;
+            packed |= (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8)) << 32;
 
             dst = packed;
             return ref dst;

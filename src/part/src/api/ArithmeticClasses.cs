@@ -7,7 +7,7 @@ namespace Z0
     using K = ArithmeticApiClass;
     using I = IArithmeticApiKey;
 
-    partial class Kinds
+    public readonly struct ArithmeticClasses
     {
         public readonly struct Add : I { K I.Kind => K.Add; }
 

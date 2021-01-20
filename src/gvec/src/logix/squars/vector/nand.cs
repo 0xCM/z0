@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vsave(vnand(w, in a, in b), ref z);
+                => vstore(vnand(w, in a, in b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vsave(vnand(n, in a, in b), ref z);
+                => vstore(vnand(n, in a, in b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)

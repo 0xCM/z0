@@ -7,7 +7,7 @@ namespace Z0
     using Id = ApiClass;
 
     [ApiClass]
-    public enum AsmApiClass : ushort
+    public enum AsmClass : ushort
     {
         CVTSS2SI = Id.CVTSS2SI,
 
@@ -25,5 +25,16 @@ namespace Z0
 
         PSHUFHW = Id.PSHUFHW,
 
+        PSHUFB = Id.PSHUFB,
+
+        VPSHUFB = Id.VPSHUFB,
+
+        VPERMD = Id.VPERMD,
+
+        VPERMPS = Id.VPERMPS,
+
+        VPERMQ = Id.VPERMQ,
+
+        VPERMPD = Id.VPERMPD,
     }
 }

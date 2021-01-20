@@ -8,15 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial struct cpu
-    {
-
-    }
-
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Stores vector content to the front of a span
@@ -25,10 +19,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vsave<T>(Vector128<T> src, Span<T> dst)
+        public static Span<T> vstore<T>(Vector128<T> src, Span<T> dst)
             where T : unmanaged
         {
-            vsave(src, ref first(dst));
+            z.vstore(src, ref memory.first(dst));
             return dst;
         }
 
@@ -39,10 +33,10 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> vsave<T>(Vector256<T> src, Span<T> dst)
+        public static Span<T> vstore<T>(Vector256<T> src, Span<T> dst)
             where T : unmanaged
         {
-            vsave(src, ref first(dst));
+            z.vstore(src, ref memory.first(dst));
             return dst;
         }
 
@@ -54,9 +48,9 @@ namespace Z0
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void vsave<T>(Vector128<T> src, Span<T> dst, int offset)
+        public static void vstore<T>(Vector128<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vsave(src, ref first(dst), offset);
+                => z.vstore(src, ref memory.first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -66,9 +60,9 @@ namespace Z0
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void vsave<T>(Vector256<T> src, Span<T> dst, int offset)
+        public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vsave(src, ref first(dst), offset);
+                => z.vstore(src, ref memory.first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -78,8 +72,8 @@ namespace Z0
         /// <param name="offset">The target offset at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void vsave<T>(Vector512<T> src, Span<T> dst, int offset)
+        public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vsave(src, ref first(dst), offset);
+                => z.vstore(src, ref memory.first(dst), offset);
     }
 }

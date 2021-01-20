@@ -10,10 +10,10 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
+    using static z;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         ///  __m128i _mm_packs_epi16 (__m128i a, __m128i b) PACKSSWB xmm, xmm/m128
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vpackss(Vector256<int> x, Vector256<int> y)
-            =>  PackSignedSaturate(x,y);
+            => PackSignedSaturate(x,y);
 
         /// <summary>
         /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b) VPACKSSDW ymm, ymm, ymm/m256

@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void not<T>(W128 w, in T src, ref T dst)
             where T : unmanaged
-                => vsave(vnot(w, src), ref dst);
+                => vstore(vnot(w, src), ref dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void not<T>(W128 w, int count, int step, in T src, ref T dst)
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void not<T>(W256 w, in T src, ref T dst)
             where T : unmanaged
-                => vsave(vnot(w, src), ref dst);
+                => vstore(vnot(w, src), ref dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void not<T>(W256 w, int count, int step, in T src, ref T dst)

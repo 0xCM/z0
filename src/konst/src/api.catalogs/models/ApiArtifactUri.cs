@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
     using System.Runtime.Intrinsics;
 
@@ -71,13 +70,13 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => vnonz(Data);
+            get => cpu.vnonz(Data);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => !vnonz(Data);
+            get => !cpu.vnonz(Data);
         }
 
         [MethodImpl(Inline)]

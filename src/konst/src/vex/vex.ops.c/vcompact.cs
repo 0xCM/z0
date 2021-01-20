@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector256<short> src, W8 w)
-            => v8u(vpackss(vlo(src), vhi(src)));
+            => v8u(cpu.vpackss(vlo(src), vhi(src)));
 
         /// <summary>
         /// 8x16u -> 8x8u
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vcompact8i(Vector256<short> src, W8 w)
-            => vpackss(vlo(src), vhi(src));
+            => cpu.vpackss(vlo(src), vhi(src));
 
         /// <summary>
         /// 8x32u -> 8x16u
@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vcompact8i(Vector128<short> x, Vector128<short> y, N128 w)
-            => vpackss(x,y);
+            => cpu.vpackss(x,y);
 
         /// <summary>
         /// (8x16i,8x16i) -> 16x8u
@@ -153,7 +153,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vcompact8i(Vector256<short> x, Vector256<short> y, N256 w, sbyte t = 0)
-            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
+            => vperm4x64(cpu.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vcompact16i(Vector128<int> x, Vector128<int> y, N128 w, short t = 0)
-            => vpackss(x,y);
+            => cpu.vpackss(x,y);
 
         /// <summary>
         /// (8x32i,8x32i) -> 16x16i
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vcompact16i(Vector256<int> x, Vector256<int> y, N256 w, short t = 0)
-            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
+            => vperm4x64(cpu.vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (4x32u,4x32u) -> 8x16u
@@ -305,7 +305,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vcompact8i(Vector256<short> src, W128 w, sbyte t = 0)
-            => vpackss(vlo(src), vhi(src));
+            => cpu.vpackss(vlo(src), vhi(src));
 
         /// <summary>
         /// 16x16i -> 16x8u
@@ -313,7 +313,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector256<short> src, W128 w, byte t = 0)
-            => v8u(vpackss(vlo(src), vhi(src)));
+            => v8u(cpu.vpackss(vlo(src), vhi(src)));
 
         /// <summary>
         /// 8x16u -> 8x8u

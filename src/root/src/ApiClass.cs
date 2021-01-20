@@ -426,6 +426,18 @@ public enum ApiClass : ushort
 
     PSHUFHW,
 
+    PSHUFB,
+
+    VPSHUFB,
+
+    VPERMD,
+
+    VPERMPS,
+
+    VPERMQ,
+
+    VPERMPD,
+
     // ~~ System-level operations
     // ~~ -------------------------------------------------------------------------------------------------------------
 

@@ -40,7 +40,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(n);
                 var x1 = gvec.vbitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
-                Claim.nea(gvec.vnonz(x2));
+                Claim.nea(gcpu.vnonz(x2));
             }
         }
 
@@ -55,7 +55,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(n);
                 var x1 = gvec.vbitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
-                Claim.nea(gvec.vnonz(x2));
+                Claim.nea(gcpu.vnonz(x2));
             }
         }
 

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static z;
     using static BitMasks.Literals;
 
     partial struct z
