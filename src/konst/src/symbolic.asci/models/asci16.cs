@@ -21,31 +21,21 @@ namespace Z0
     /// </summary>
     public readonly struct asci16 : IBytes<A,N>
     {
+        public const int Size = 16;
+
         public readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator A(string src)
-            => new A(src);
+        public asci16(S src)
+            => Storage = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator string(A src)
-            => src.Text;
+        public asci16(string src)
+            => Storage = Asci.encode(n,src).Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.View;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(A src)
-            => src.Decoded;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(A a, A b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(A a, A b)
-            => !a.Equals(b);
+        public asci16(ReadOnlySpan<byte> src)
+            => Storage = cpu.vload(w, first(src));
 
         public bool IsBlank
         {
@@ -156,7 +146,6 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public const int Size = 16;
 
         public static A Spaced
         {
@@ -171,16 +160,28 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public asci16(S src)
-            => Storage = src;
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public asci16(string src)
-            => Storage = Asci.encode(n,src).Storage;
+        public static implicit operator string(A src)
+            => src.Text;
 
         [MethodImpl(Inline)]
-        public asci16(ReadOnlySpan<byte> src)
-            => Storage = cpu.vload(w, first(src));
+        public static implicit operator ReadOnlySpan<byte>(A src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(A src)
+            => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
 
         static N n => default;
 

@@ -123,7 +123,6 @@ namespace Z0
 
         static W w => default;
 
-
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<byte>(A src)
             => src.View;

@@ -14,15 +14,25 @@ namespace Z0
         /// </summary>
         Null = 0,
 
-         /// <summary>
+        /// <summary>
         /// The tab character code 9
         /// </summary>
         Tab = (byte)AC.Tab,
 
         /// <summary>
+        /// The vertical tab
+        /// </summary>
+        VTab = (byte)AC.VTab,
+
+        /// <summary>
         /// The new-line character code 10
         /// </summary>
         NL = (byte)AC.LF,
+
+        /// <summary>
+        /// The form-feed control character
+        /// </summary>
+        FF = (byte)AC.FF,
 
         /// <summary>
         /// The line-feed character code 13

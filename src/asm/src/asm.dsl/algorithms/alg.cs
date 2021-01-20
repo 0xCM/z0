@@ -9,6 +9,7 @@ namespace alg.asm
 
     using Z0;
 
+    using static Z0.memory;
     using static Z0.Part;
 
     [ApiHost]
@@ -18,9 +19,34 @@ namespace alg.asm
         public static section<T> section<T>(T min, T max)
             => new section<T>(min,max);
 
-        public static ref section<T> parse<T>(object src, out section<T> dst)
+        /// <summary>
+        /// Parses an expression of the form {identifier}[max:min]
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public static ref section<T> parse<T>(asci src, out section<T> dst)
         {
             dst = default;
+            var index = 0;
+            var count = src.Length;
+            var codes = src.Codes;
+            var foundIdentifierStart = bit.Off;
+            var foundIdentifier = bit.Off;
+            var foundLeftBracket = bit.Off;
+            var foundRightBracket = bit.Off;
+            var foundRangeSeparator = bit.Off;
+
+            while(index-- < count)
+            {
+                ref readonly var current = ref skip(codes,index);
+                if(AsciTest.whitespace(current))
+                    continue;
+
+
+            }
+
 
             return ref dst;
         }

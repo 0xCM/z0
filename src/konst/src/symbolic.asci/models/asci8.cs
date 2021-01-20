@@ -163,7 +163,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(A a, A b)
             => !a.Equals(b);
-
-
     }
 }

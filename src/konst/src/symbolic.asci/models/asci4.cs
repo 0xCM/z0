@@ -18,6 +18,8 @@ namespace Z0
     /// </summary>
     public readonly struct asci4 : IBytes<A,N>
     {
+        public const uint Size = 4;
+
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
@@ -71,7 +73,7 @@ namespace Z0
         public int Capacity
         {
             [MethodImpl(Inline)]
-            get => Size;
+            get => (int)Size;
         }
 
         public ReadOnlySpan<byte> View
@@ -121,11 +123,6 @@ namespace Z0
             get => Asci.init(n);
         }
 
-        public const int Size = 4;
-
-        static N n => default;
-
-
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
@@ -170,5 +167,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(A a, A b)
             => !a.Equals(b);
+
+        static N n => default;
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
     [ApiHost]
     public readonly struct AsciSymbol : IBytes<C,N>
     {
-        readonly AsciCharCode Code;
+        public AsciCharCode Code {get;}
 
         [MethodImpl(Inline), Op]
         public AsciSymbol(AsciCharCode code)
@@ -68,7 +68,40 @@ namespace Z0
         public string Format()
             => Text;
 
-        [MethodImpl(Inline)]
+        public override int GetHashCode()
+            => (int)Code;
+
+        public override bool Equals(object src)
+            => src is C c && Equals(c);
+
+        public override string ToString()
+            => Text;
+
+        ReadOnlySpan<byte> IByteSeq.View
+            => z.bytes(this);
+
+        bool INullity.IsEmpty
+            => IsEmpty;
+
+        bool INullity.IsNonEmpty
+            => IsNonEmpty;
+
+        int IByteSeq.Length
+            => 1;
+
+        bool IEquatable<C>.Equals(C src)
+            => Code == src.Code;
+
+        C INullary<C>.Zero
+            => Empty;
+
+        string ITextual.Format()
+            => Text;
+
+        public static C Empty
+            => new C(AsciCharCode.Null);
+
+       [MethodImpl(Inline)]
         public static implicit operator C(AsciCharCode src)
             => new AsciSymbol(src);
 
@@ -112,37 +145,12 @@ namespace Z0
         public static explicit operator ulong(C src)
             => (ulong)src.Code;
 
-        public override int GetHashCode()
-            => (int)Code;
+        [MethodImpl(Inline)]
+        public static bool operator ==(C a, C b)
+            => a.Code == b.Code;
 
-        public override bool Equals(object src)
-            => src is C c && Equals(c);
-
-        public override string ToString()
-            => Text;
-
-        ReadOnlySpan<byte> IByteSeq.View
-            => z.bytes(this);
-
-        bool INullity.IsEmpty
-            => IsEmpty;
-
-        bool INullity.IsNonEmpty
-            => IsNonEmpty;
-
-        int IByteSeq.Length
-            => 1;
-
-        bool IEquatable<C>.Equals(C src)
-            => Code == src.Code;
-
-        C INullary<C>.Zero
-            => Empty;
-
-        string ITextual.Format()
-            => Text;
-
-        public static C Empty
-            => new C(AsciCharCode.Null);
+        [MethodImpl(Inline)]
+        public static bool operator !=(C a, C b)
+            => a.Code != b.Code;
     }
 }

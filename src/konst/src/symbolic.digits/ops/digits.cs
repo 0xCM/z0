@@ -14,8 +14,6 @@ namespace Z0
     using D = DecimalDigit;
     using X = HexDigit;
 
-    //using BS = BinarySym;
-
     /// <summary>
     /// Defines operations over character digits
     /// </summary>

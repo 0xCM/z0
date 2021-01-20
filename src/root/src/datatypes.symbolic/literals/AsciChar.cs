@@ -490,9 +490,14 @@ namespace Z0
         US = PKSym.US,
 
         /// <summary>
-        /// The tab character
+        /// The tab control character
         /// </summary>
         Tab = CSym.Tab,
+
+        /// <summary>
+        /// The vertical tab control character
+        /// </summary>
+        VTab = CSym.VTab,
 
         /// <summary>
         /// The line-feed character
@@ -507,6 +512,11 @@ namespace Z0
         /// <summary>
         /// The delete control symbol
         /// </summary>
-        Del = CSym.Del
+        Del = CSym.Del,
+
+        /// <summary>
+        /// The form-feed control character
+        /// </summary>
+        FF = CSym.FF,
     }
 }

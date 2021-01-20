@@ -56,22 +56,27 @@ namespace Z0
         BS = '\b',
 
         /// <summary>
-        /// A horizontal tab
+        /// The horizontal tab control character '\t',
         /// </summary>
         Tab = '\t',
 
         /// <summary>
-        /// The new-line control symbol \n', asci code 10
+        /// The vertical tab control character '\v'
+        /// </summary>
+        VTab = '\v',
+
+        /// <summary>
+        /// The new-line control character \n', asci code 10
         /// </summary>
         LF = '\n',
 
         /// <summary>
-        /// The form-feed control symbol '\f', asci code 12
+        /// The form-feed control character '\f', asci code 12
         /// </summary>
         FF  = '\f',
 
         /// <summary>
-        /// The carriage return control symbol '\r', asci code 13
+        /// The carriage return control character '\r', asci code 13
         /// </summary>
         CR = '\r',
 

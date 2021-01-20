@@ -47,19 +47,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
-            var decoded = vinflate(cpu.vbytes(w128, src.Storage));
+            var decoded = cpu.vinflate(cpu.vbytes(w128, src.Storage));
             return z.recover<char>(z.bytes(vlo(decoded)));
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => z.recover<char>(z.bytes(vinflate(src.Storage)));
+            => z.recover<char>(z.bytes(cpu.vinflate(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
-            var lo = vinflate(src.Storage, n0);
-            var hi = vinflate(src.Storage, n1);
+            var lo = cpu.vinflate(src.Storage, n0);
+            var hi = cpu.vinflate(src.Storage, n1);
             return z.recover<char>(z.bytes(new Seg512(lo,hi)));
         }
 
@@ -67,24 +67,24 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci64 src)
         {
             var x = src.Storage;
-            var x0 = vinflate(x.Lo,n0);
-            var x1 = vinflate(x.Lo,n1);
-            var x2 = vinflate(x.Hi,n0);
-            var x3 = vinflate(x.Hi,n1);
+            var x0 = cpu.vinflate(x.Lo,n0);
+            var x1 = cpu.vinflate(x.Lo,n1);
+            var x2 = cpu.vinflate(x.Hi,n0);
+            var x3 = cpu.vinflate(x.Hi,n1);
             return z.recover<char>(z.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci8 src, ref char dst)
         {
-            var decoded = vinflate(cpu.vbytes(w128, src.Storage));
+            var decoded = cpu.vinflate(cpu.vbytes(w128, src.Storage));
             z.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
-           var decoded = vinflate(src.Storage);
+           var decoded = cpu.vinflate(src.Storage);
            z.vstore(decoded, ref @as<char,ushort>(dst));
         }
 
