@@ -107,7 +107,7 @@ namespace Z0
             var a0 = gvec.vinc(ws,1u);
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
             var b0 = z.vmul(a0,a1);
-            var b1 = z.vmul(z.vswaphl(a0), z.vswaphl(a1));
+            var b1 = z.vmul(cpu.vswaphl(a0), cpu.vswaphl(a1));
             Trace("x", a0.Format());
             Trace("y", a1.Format());
             Trace("lo", b0.Format());

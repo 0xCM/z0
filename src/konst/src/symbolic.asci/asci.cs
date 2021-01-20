@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     [ApiHost(ApiNames.Asci, true)]
-    public readonly partial struct asci
+    public readonly partial struct Asci
     {
         static AsciSymbols AsciStrings => default;
 

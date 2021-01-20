@@ -17,7 +17,7 @@ namespace Z0
         [Op]
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
-            var vec = z.vload(n128,A.Bytes);
+            var vec = gcpu.vload(n128,A.Bytes);
             z.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Content);
         }
@@ -136,7 +136,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => z.vload(n128, z.first(Tr8x16MaskBytes));
+            get => cpu.vload(n128, memory.first(Tr8x16MaskBytes));
         }
 
         /// <summary>

@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Extracts the lower 128-bit lane from a source vector
@@ -48,6 +48,10 @@ namespace Z0
             where T : unmanaged
              => lane == 0 ? vlane(src,n0) : vlane(src,n1);
 
+    }
+
+    partial struct cpu
+    {
         /// <summary>
         ///  __m256i _mm256_inserti128_si256 (__m256i a, __m128i b, const int imm8) VINSERTI128 ymm, ymm, xmm, imm8
         /// Overwrites a 128-bit lane in the target with the content of the source vector

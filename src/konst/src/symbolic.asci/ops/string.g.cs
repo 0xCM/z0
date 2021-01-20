@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline)]
         public static string @string<A>(in A src)

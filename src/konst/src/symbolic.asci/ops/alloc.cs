@@ -9,14 +9,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static asci16[] alloc(N16 n, int count)
         {
             var buffer =  new asci16[count];
             Span<asci16> dst = buffer;
-            dst.Fill(asci.init(n));
+            dst.Fill(Asci.init(n));
             return buffer;
         }
     }

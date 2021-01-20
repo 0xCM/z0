@@ -65,18 +65,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<byte> blend(W256 w, W8 n, bool odd)
-            => vload<byte>(w,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
+            => gcpu.vload<byte>(w,odd ? BlendSpec_Odd_256x8 : BlendSpec_Even_256x8);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blend(W256 w, W16 n, bool odd)
-            => vload<byte>(w,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
+            => gcpu.vload<byte>(w,odd ? BlendSpec_Odd_256x16 : BlendSpec_Even_256x16);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blend(W256 w, W32 n, bool odd)
-            => vload<byte>(w,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
+            => gcpu.vload<byte>(w,odd ? BlendSpec_Odd_256x32 : BlendSpec_Even_256x32);
 
         [MethodImpl(Inline)]
         static Vector256<byte> blend(N256 w, N64 n, bool odd)
-            => vload<byte>(w, odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
+            => gcpu.vload<byte>(w, odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
    }
 }

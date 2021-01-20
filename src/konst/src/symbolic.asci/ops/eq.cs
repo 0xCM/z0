@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static bool eq(ReadOnlySpan<char> x, ReadOnlySpan<AsciCharCode> y)

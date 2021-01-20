@@ -8,23 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Abs, Closures(SignedInts)]
         public static Vector128<T> vabs<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vabs(v8i(x)));
+                return generic<T>(cpu.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vabs(v16i(x)));
+                return generic<T>(cpu.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vabs(v32i(x)));
+                return generic<T>(cpu.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vabs(v64i(x)));
+                return generic<T>(cpu.vabs(v64i(x)));
             else
                 throw no<T>();
         }
@@ -34,15 +34,16 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vabs(v8i(x)));
+                return generic<T>(cpu.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vabs(v16i(x)));
+                return generic<T>(cpu.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vabs(v32i(x)));
+                return generic<T>(cpu.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vabs(v64i(x)));
+                return generic<T>(cpu.vabs(v64i(x)));
             else
                 throw no<T>();
         }
+
     }
 }

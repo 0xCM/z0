@@ -20,8 +20,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ushort pack16x32x1(in uint src, ref ushort dst)
         {
-            var v0 = vload(n256, skip(src,0*8));
-            var v1 = vload(n256, skip(src,1*8));
+            var v0 = cpu.vload(n256, skip(src,0*8));
+            var v1 = cpu.vload(n256, skip(src,1*8));
             dst = gcpu.vpacklsb(vcompact8u(v0, v1, n128, z8));
             return ref dst;
         }

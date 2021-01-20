@@ -16,7 +16,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Loads a 128-bit vector from a pointer-identified memory location
@@ -28,7 +28,7 @@ namespace Z0
         public static unsafe Vector128<T> vload<T>(W128 w, T* pSrc)
             where T : unmanaged
                 => vload(pSrc, out Vector128<T> _);
-        
+
         /// <summary>
         /// Loads a 256-bit vector from a pointer-identified memory location
         /// </summary>
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Vector512<T> vload<T>(W512 w, T* pSrc)
             where T : unmanaged
-                => vload(pSrc, out Vector512<T> _);        
+                => vload(pSrc, out Vector512<T> _);
 
         /// <summary>
         /// Loads a 128-bit vector from a pointer-identified memory location
@@ -61,14 +61,14 @@ namespace Z0
         public static unsafe ref Vector128<T> vload<T>(T* pSrc, out Vector128<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 vloadu_u(pSrc, out dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 vloadu_i(pSrc, out dst);
             else
@@ -86,19 +86,19 @@ namespace Z0
         public static unsafe ref Vector256<T> vload<T>(T* pSrc, out Vector256<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 vloadu_u(pSrc, out dst);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 vloadu_i(pSrc, out dst);
             else
                 vloadu_f(pSrc, out dst);
-            
+
             return ref dst;
         }
 
@@ -106,7 +106,7 @@ namespace Z0
         public static unsafe ref Vector512<T> vload<T>(T* pSrc, out Vector512<T> dst)
             where T : unmanaged
         {
-            vload(pSrc, out Vector256<T> a);            
+            vload(pSrc, out Vector256<T> a);
             vload((T*)Unsafe.Add<T>(pSrc, Vector256<T>.Count), out Vector256<T> b);
             dst = new Vector512<T>(a,b);
             return ref dst;
@@ -122,7 +122,7 @@ namespace Z0
                 dst = generic<T>(LoadDquVector256((ushort*)pSrc));
             else if(typeof(T) == typeof(uint))
                 dst = generic<T>(LoadDquVector256((uint*)pSrc));
-            else 
+            else
                 dst = generic<T>(LoadDquVector256((ulong*)pSrc));
         }
 
@@ -136,7 +136,7 @@ namespace Z0
                 dst = generic<T>(LoadDquVector256((short*)pSrc));
             else if(typeof(T) == typeof(int))
                 dst = generic<T>(LoadDquVector256((int*)pSrc));
-            else 
+            else
                 dst = generic<T>(LoadDquVector256((long*)pSrc));
         }
 
@@ -148,7 +148,7 @@ namespace Z0
                 dst = generic<T>(LoadVector256((float*)pSrc));
             else if(typeof(T) == typeof(double))
                 dst = generic<T>(LoadVector256((double*)pSrc));
-            else 
+            else
                 throw no<T>();
         }
 
@@ -162,7 +162,7 @@ namespace Z0
                 dst = generic<T>(LoadDquVector128((ushort*)pSrc));
             else if(typeof(T) == typeof(uint))
                 dst = generic<T>(LoadDquVector128((uint*)pSrc));
-            else 
+            else
                 dst = generic<T>(LoadDquVector128((ulong*)pSrc));
 
         }
@@ -177,7 +177,7 @@ namespace Z0
                 dst = generic<T>(LoadDquVector128((short*)pSrc));
             else if(typeof(T) == typeof(int))
                 dst = generic<T>(LoadDquVector128((int*)pSrc));
-            else 
+            else
                 dst = generic<T>(LoadDquVector128((long*)pSrc));
         }
 
@@ -189,8 +189,8 @@ namespace Z0
                 dst = generic<T>(LoadVector128((float*)pSrc));
             else if(typeof(T) == typeof(double))
                 dst = generic<T>(LoadVector128((double*)pSrc));
-            else 
+            else
                 throw no<T>();
-        }         
+        }
     }
 }

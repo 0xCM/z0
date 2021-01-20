@@ -33,21 +33,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong pack64x32x1(in uint src, ref ulong dst)
         {
-            var v0 = vload(n256, skip(src, 0*8));
-            var v1 = vload(n256, skip(src, 1*8));
+            var v0 = cpu.vload(n256, skip(src, 0*8));
+            var v1 = cpu.vload(n256, skip(src, 1*8));
             var x = vcompact16u(v0, v1, n256, z16);
-            v0 = vload(n256, skip(src,2*8));
-            v1 = vload(n256, skip(src,3*8));
+            v0 = cpu.vload(n256, skip(src,2*8));
+            v1 = cpu.vload(n256, skip(src,3*8));
 
             var y = vcompact16u(v0, v1, n256, z16);
             var packed = (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8));
 
-            v0 = vload(n256, skip(src,4*8));
-            v1 = vload(n256, skip(src,5*8));
+            v0 = cpu.vload(n256, skip(src,4*8));
+            v1 = cpu.vload(n256, skip(src,5*8));
             x = vcompact16u(v0,v1,n256,z16);
 
-            v0 = vload(n256, skip(src,6*8));
-            v1 = vload(n256, skip(src,7*8));
+            v0 = cpu.vload(n256, skip(src,6*8));
+            v1 = cpu.vload(n256, skip(src,7*8));
             y = vcompact16u(v0,v1,n256,z16);
 
             packed |= (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8)) << 32;

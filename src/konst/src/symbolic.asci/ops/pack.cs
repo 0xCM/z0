@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static ref ushort pack(AsciCharCode c0, AsciCharCode c1, out ushort dst)

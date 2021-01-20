@@ -46,10 +46,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         VLut16(in SpanBlock128<byte> src)
-            => Mask = z.vload(src);
+            => Mask = gcpu.vload(src);
 
         [MethodImpl(Inline)]
         VLut16(ReadOnlySpan<byte> src)
-            => Mask = z.vload(w128,src);
+            => Mask = gcpu.vload(w128,src);
     }
 }

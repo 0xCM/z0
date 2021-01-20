@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vreverse(Vector128<short> src)
-            => vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
+            => cpu.vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
 
         /// <summary>
         /// Reverses the source vector components
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vreverse(Vector128<ushort> src)
-            => vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
+            => cpu.vswaphl(vshuf4x16(src, Arrange4L.DCBA, Arrange4L.DCBA));
 
         /// <summary>
         /// Reverses the source vector components
@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<long> vreverse(Vector128<long> src)
-            => vswaphl(src);
+            => cpu.vswaphl(src);
 
         /// <summary>
         /// Reverses the source vector components
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vreverse(Vector128<ulong> src)
-            => vswaphl(src);
+            => cpu.vswaphl(src);
 
         /// <summary>
         /// Reverses the source vector components
@@ -145,7 +145,7 @@ namespace Z0
             => vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
 
         static Vector256<uint> MRev256u32
-            => v32u(vload(n256,MRev256u32Data));
+            => v32u(gcpu.vload(n256,MRev256u32Data));
 
             //=> vbuild.parts(n256, 7u, 6u, 5u, 4u, 3u, 2u, 1u, 0u);
 

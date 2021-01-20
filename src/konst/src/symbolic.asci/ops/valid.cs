@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static BitMasks.Literals;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Tests whether a byte represents an asci character

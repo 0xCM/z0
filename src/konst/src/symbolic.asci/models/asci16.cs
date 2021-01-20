@@ -80,7 +80,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => Asci.length(this);
         }
 
         public int Capacity
@@ -92,7 +92,7 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(this);
+            get => Asci.bytes(this);
         }
 
         public AsciCharCode this[int index]
@@ -122,13 +122,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => asci.format(this);
+            get => Asci.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -137,11 +137,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void CopyTo(Span<byte> dst)
-            => asci.copy(this,dst);
+            => Asci.copy(this,dst);
 
         [MethodImpl(Inline)]
         public void CopyTo(ref byte dst)
-            => asci.copy(this, ref dst);
+            => Asci.copy(this, ref dst);
 
          public override int GetHashCode()
             => Storage.GetHashCode();
@@ -161,7 +161,7 @@ namespace Z0
         public static A Spaced
         {
             [MethodImpl(Inline)]
-            get => asci.init(n);
+            get => Asci.init(n);
         }
 
         public static A Null
@@ -176,11 +176,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public asci16(string src)
-            => Storage = asci.encode(n,src).Storage;
+            => Storage = Asci.encode(n,src).Storage;
 
         [MethodImpl(Inline)]
         public asci16(ReadOnlySpan<byte> src)
-            => Storage = z.vload(w, first(src));
+            => Storage = cpu.vload(w, first(src));
 
         static N n => default;
 

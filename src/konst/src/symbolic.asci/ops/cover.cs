@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciSymbol> cover(in asci2 src)

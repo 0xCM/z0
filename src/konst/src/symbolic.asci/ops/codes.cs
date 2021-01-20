@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<AsciCharCode> codes(sbyte offset, sbyte count)

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Tests whether a character is an uppercase asci letter character

@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
-            var v0 = vload(n256, skip(src,0*8));
+            var v0 = cpu.vload(n256, skip(src,0*8));
             dst = (byte)gcpu.vpacklsb(vcompact8u(v0, n128, z8));
             return ref dst;
         }

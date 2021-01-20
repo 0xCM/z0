@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
@@ -63,7 +62,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => Asci.length(this);
         }
 
         public int Capacity
@@ -75,7 +74,7 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(this);
+            get => Asci.bytes(this);
         }
 
         public A Zero
@@ -99,13 +98,13 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => asci.format(this);
+            get => Asci.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -130,7 +129,7 @@ namespace Z0
         public static A Spaced
         {
             [MethodImpl(Inline)]
-            get => asci.init(n);
+            get => Asci.init(n);
         }
 
         public static A Null
@@ -145,11 +144,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public asci64(string src)
-            => Storage = asci.encode(n,src).Storage;
+            => Storage = Asci.encode(n,src).Storage;
 
         [MethodImpl(Inline)]
         public asci64(ReadOnlySpan<byte> src)
-            => Storage = z.vload(w, first(src));
+            => Storage = cpu.vload(w, first(src));
 
         static N n => default;
 

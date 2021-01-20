@@ -132,12 +132,12 @@ namespace Z0
         {
             var w = w128;
             var x0 = z.vinc<byte>(w);
-            var x0Spec = vload(w, z.first(IdentityPattern));
+            var x0Spec = cpu.vload(w, z.first(IdentityPattern));
             var x0Dst = z.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
             var x1 = z.vinc<byte>(w);
-            var x1Spec = vload(w, z.first(ReversalPattern));
+            var x1Spec = cpu.vload(w, z.first(ReversalPattern));
             var x1Dst = vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 

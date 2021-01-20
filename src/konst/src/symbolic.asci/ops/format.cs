@@ -11,7 +11,7 @@ namespace Z0
 
     using F = AsciFormatter;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static string format(in asci2 src)

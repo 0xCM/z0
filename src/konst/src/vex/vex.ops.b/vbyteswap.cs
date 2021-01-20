@@ -24,11 +24,11 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return vload<byte>(w, ByteSwap128x16u);
+                return gcpu.vload<byte>(w, ByteSwap128x16u);
             else if(typeof(N) == typeof(N32))
-                return vload<byte>(w, ByteSwap128x32u);
+                return gcpu.vload<byte>(w, ByteSwap128x32u);
             else if(typeof(N) == typeof(N64))
-                return vload<byte>(w, ByteSwap128x64u);
+                return gcpu.vload<byte>(w, ByteSwap128x64u);
             else
                 throw no<N>();
         }
@@ -45,11 +45,11 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return vload<byte>(w, ByteSwap256x16u);
+                return gcpu.vload<byte>(w, ByteSwap256x16u);
             else if(typeof(N) == typeof(N32))
-                return vload<byte>(w, ByteSwap256x32u);
+                return gcpu.vload<byte>(w, ByteSwap256x32u);
             else if(typeof(N) == typeof(N64))
-                return vload<byte>(w, ByteSwap256x64u);
+                return gcpu.vload<byte>(w, ByteSwap256x64u);
             else
                 throw no<N>();
         }

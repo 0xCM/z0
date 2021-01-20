@@ -24,9 +24,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vload<T>(n256,LaneMerge256x8u);
+                return gcpu.vload<T>(n256,LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return vload<T>(n256,LaneMerge256x16u);
+                return gcpu.vload<T>(n256,LaneMerge256x16u);
             else
                 return default;
         }

@@ -47,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public VLut32(in SpanBlock256<byte> src)
-            => Mask = z.vload(src);
+            => Mask = gcpu.vload(src);
 
         [MethodImpl(Inline)]
         public VLut32(ReadOnlySpan<byte> src)

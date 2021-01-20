@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
        {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return generic<T>(vload(w, first(Inc128x8u)));
+                return generic<T>(cpu.vload(w, first(Inc128x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return generic<T>(vload(w, first(Inc128x16u)));
+                return generic<T>(cpu.vload(w, first(Inc128x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-                return generic<T>(vload(w, first(Inc128x32u)));
+                return generic<T>(cpu.vload(w, first(Inc128x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return generic<T>(vload(w, first(Inc128x64u)));
+                return generic<T>(cpu.vload(w, first(Inc128x64u)));
             else
                 throw no<T>();
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return generic<T>(vload(w, first(Inc256x8u)));
+                return generic<T>(cpu.vload(w, first(Inc256x8u)));
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return generic<T>(vload(w, first(Inc256x16u)));
+                return generic<T>(cpu.vload(w, first(Inc256x16u)));
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int)  || typeof(T) == typeof(float))
-                return generic<T>(vload(w, first(Inc256x32u)));
+                return generic<T>(cpu.vload(w, first(Inc256x32u)));
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return generic<T>(vload(w, first(Inc256x64u)));
+                return generic<T>(cpu.vload(w, first(Inc256x64u)));
             else
                 throw no<T>();
         }
@@ -65,13 +65,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w, Inc512x8u);
+                return gcpu.vload<T>(w, Inc512x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w, Inc512x16u);
+                return gcpu.vload<T>(w, Inc512x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-                return vload<T>(w, Inc512x32u);
+                return gcpu.vload<T>(w, Inc512x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vload<T>(w,Inc512x64u);
+                return gcpu.vload<T>(w,Inc512x64u);
             else
                 throw no<T>();
         }

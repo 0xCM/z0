@@ -20,12 +20,12 @@ namespace Z0
         internal AsciTestCase02(sbyte c0)
         {
             C0 = (AsciCharCode)c0;
-            A2 = asci.init(n2, asci.codes(c0,2));
-            A4 = asci.init(n4, asci.codes(c0,4));
-            A8 = asci.init(n8, asci.codes(c0,8));
-            A16 = asci.init(n16, asci.codes(c0,16));
-            A32 = asci.init(n32, asci.codes(c0,32));
-            A64 = asci.init(n64, asci.codes(c0,64));
+            A2 = Asci.init(n2, Asci.codes(c0,2));
+            A4 = Asci.init(n4, Asci.codes(c0,4));
+            A8 = Asci.init(n8, Asci.codes(c0,8));
+            A16 = Asci.init(n16, Asci.codes(c0,16));
+            A32 = Asci.init(n32, Asci.codes(c0,32));
+            A64 = Asci.init(n64, Asci.codes(c0,64));
         }
 
         public readonly AsciCharCode C0;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci2 src, ref byte dst)

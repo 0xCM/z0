@@ -13,7 +13,7 @@ namespace Z0
     using H = HexSymData;
     using C = AsciCharCode;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static C code(in asci2 src, Hex1Seq index)

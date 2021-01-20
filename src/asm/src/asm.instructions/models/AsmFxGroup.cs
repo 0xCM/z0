@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmFxGroup(string name)
-            => Body = asci.encode(n16, name);
+            => Body = Asci.encode(n16, name);
 
         [MethodImpl(Inline)]
         public AsmFxGroup(asci16 name)

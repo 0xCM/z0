@@ -14,15 +14,15 @@ namespace Z0
         /// <summary>
         /// Produces an array of random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="src">The random source</param>
         /// <param name="length">The length of the produced array</param>
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The generated value type</typeparam>
         [MethodImpl(Inline)]
-        public static T[] Array<T>(this IDataSource random, int length)
+        public static T[] Array<T>(this IDataSource src, int length)
             where T : unmanaged
-                => random.Stream<T>().TakeArray(length);
+                => src.Stream<T>().TakeArray(length);
 
         /// <summary>
         /// Produces an array of random values

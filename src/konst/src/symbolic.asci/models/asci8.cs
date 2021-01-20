@@ -22,36 +22,12 @@ namespace Z0
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator A(string src)
-            => new A(src);
+        public asci8(S src)
+            => Storage = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator string(A src)
-            => src.Text;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.View;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(A src)
-            => src.Decoded;
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(uint src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator A(S src)
-            => new A(src);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(A a, A b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(A a, A b)
-            => !a.Equals(b);
+        public asci8(string src)
+            => Storage = Asci.encode(n,src).Storage;
 
         public bool IsBlank
         {
@@ -95,7 +71,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => Asci.length(this);
         }
         public int Capacity
         {
@@ -106,19 +82,19 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(this);
+            get => Asci.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => asci.format(this);
+            get => Asci.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -152,16 +128,41 @@ namespace Z0
         public static A Spaced
         {
             [MethodImpl(Inline)]
-            get => asci.init(n);
+            get => Asci.init(n);
         }
 
-        [MethodImpl(Inline)]
-        public asci8(S src)
-            => Storage = src;
 
         [MethodImpl(Inline)]
-        public asci8(string src)
-            => Storage = asci.encode(n,src).Storage;
+        public static implicit operator A(string src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator string(A src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(A src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(A src)
+            => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(uint src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(S src)
+            => new A(src);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
 
 
     }

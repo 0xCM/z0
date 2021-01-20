@@ -83,8 +83,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate(W256 w, in byte src)
         {
-           var lo = vinflate(vload(w128, src));
-           var hi = vinflate(vload(w128, add(src,16)));
+           var lo = vinflate(cpu.vload(w128, src));
+           var hi = vinflate(cpu.vload(w128, add(src,16)));
            return gcpu.vconcat(lo,hi);
         }
 

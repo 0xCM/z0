@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static AsciSymData;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Presents a span of character codes as a bytespan

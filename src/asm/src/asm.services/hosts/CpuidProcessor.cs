@@ -51,7 +51,7 @@ namespace Z0.Asm
             var take = math.min(rendered.Length, remaining);
             var source = slice(rendered,0,take);
             ref var target = ref Unsafe.Add(ref dst, consumed);
-            asci.encode(source, ref target);
+            Asci.encode(source, ref target);
             return take;
         }
     }

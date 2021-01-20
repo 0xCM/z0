@@ -20,7 +20,7 @@ namespace Z0
             var count = tc.CharCount;
 
             Span<byte> dst = new byte[count];
-            asci.encode(src, dst);
+            Asci.encode(src, dst);
             var success = AsciTestCases.check(tc, dst);
             var description = AsciTestCases.report(tc,dst);
             return new TestCaseResult<T>(tc, success, description);

@@ -29,13 +29,13 @@ namespace Z0.Asm
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(Value);
+            get => Asci.bytes(Value);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(Value);
+            get => Asci.decode(Value);
         }
 
         public AsmOpCode Zero
@@ -43,7 +43,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => asci.format(Value);
+            => Asci.format(Value);
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCode src)

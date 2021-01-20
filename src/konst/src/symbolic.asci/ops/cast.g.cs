@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline)]
         public static ref readonly asci2 cast<A>(N2 n, in A src)

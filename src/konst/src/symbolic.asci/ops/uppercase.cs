@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static AsciSymbols;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// if given a lowercase character [a..z], produces the corresponding uppercase character [A..z]

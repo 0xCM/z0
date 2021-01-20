@@ -39,11 +39,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
-            => symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+            => symbol<HexSym,byte,N4>(((HexSym)Asci.code(@case, src)));
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
-            => symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+            => symbol<HexSym,byte,N4>(((HexSym)Asci.code(@case, src)));
 
         /// <summary>
         /// Creates a symbol from an unmanaged value

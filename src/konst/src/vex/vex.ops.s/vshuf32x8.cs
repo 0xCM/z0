@@ -23,7 +23,7 @@ namespace Z0
         public static Vector256<byte> vshuf32x8(Vector256<byte> a, Vector256<byte> spec)
         {
             var x = vshuf16x8(a, vadd(spec, K0V));
-            var y = vshuf16x8(vswaphl(a), vadd(spec, K1V));
+            var y = vshuf16x8(cpu.vswaphl(a), vadd(spec, K1V));
             return vor(x,y);
         }
 

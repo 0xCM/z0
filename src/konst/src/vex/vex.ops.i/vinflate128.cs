@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="src"></param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(W128 w, in byte src)
-            => ConvertToVector256Int16(vload(w, src)).AsUInt16();
+            => ConvertToVector256Int16(cpu.vload(w, src)).AsUInt16();
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm

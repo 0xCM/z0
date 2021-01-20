@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Loads a 128-bit vector from the first 128 bits of the source
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="offset">The position of the fist source element</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(W128 w, Span<T> src, int offset)
-            where T : unmanaged            
+            where T : unmanaged
                 => vload(w, seek(src, (uint)offset));
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="offset">The position of the fist source element</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(W256 w, Span<T> src, int offset)
-            where T : unmanaged            
+            where T : unmanaged
                 => vload(w, seek(src, (uint)offset));
 
         /// <summary>
@@ -83,9 +83,9 @@ namespace Z0
         /// <param name="offset">The position of the fist source element</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(N512 w, Span<T> src, int offset)
-            where T : unmanaged            
+            where T : unmanaged
                 => vload(w, seek(src, (uint)offset));
-         
+
         /// <summary>
         /// Loads a 256-bit vector from the first 256 bits of the source
         /// </summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(N128 w, ReadOnlySpan<T> src, int offset)
-            where T : unmanaged            
+            where T : unmanaged
                 => vload(w, skip(src, offset));
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src, int offset)
-            where T : unmanaged            
+            where T : unmanaged
                 => vload(w, skip(src, offset));
 
         /// <summary>
@@ -136,7 +136,30 @@ namespace Z0
         /// <param name="offset">The position of the fist source element </param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(N512 w, ReadOnlySpan<T> src, int offset)
-            where T : unmanaged            
-                => vload(w, skip(src, offset));                 
+            where T : unmanaged
+                => vload(w, skip(src, offset));
+    }
+
+    partial struct z
+    {
+        /// <summary>
+        /// Loads a 128-bit vector from the first 128 bits of the source
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> vload<T>(W128 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => vload(w, first(src));
+
+        /// <summary>
+        /// Loads a 256-bit vector from the first 256 bits of the source
+        /// </summary>
+        /// <param name="w">The target vector width</param>
+        /// <param name="src">The source span</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> vload<T>(N256 w, ReadOnlySpan<T> src)
+            where T : unmanaged
+                => vload(w, first(src));
     }
 }

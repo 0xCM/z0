@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Returns the index of the first source element that matches a specified value

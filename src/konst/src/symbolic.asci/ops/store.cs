@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static void store(ReadOnlySpan<byte> src, char fill, Span<char> dst)
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int store(in asci2 src, Span<char> dst)
         {
-            var data = asci.cover(src);
+            var data = Asci.cover(src);
             seek(dst,0) = skip(data,0);
             seek(dst,1) = skip(data,1);
             return 2;
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int store(in asci4 src, Span<char> dst)
         {
-            var data = asci.cover(src);
+            var data = Asci.cover(src);
             seek(dst,0) = skip(data,0);
             seek(dst,1) = skip(data,1);
             seek(dst,2) = skip(data,2);

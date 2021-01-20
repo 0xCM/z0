@@ -24,28 +24,22 @@ namespace Z0
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public static implicit operator A(string src)
-            => new A(src);
+        public asci32(Vector256<byte> src)
+        {
+            Storage = src;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator string(A src)
-            => src.Text;
+        public asci32(string src)
+        {
+            Storage = Asci.encode(n,src).Storage;
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(A src)
-            => src.View;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<char>(A src)
-            => src.Decoded;
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(A a, A b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(A a, A b)
-            => !a.Equals(b);
+        public asci32(ReadOnlySpan<byte> src)
+        {
+            Storage = cpu.vload(w, first(src));
+        }
 
         public bool IsBlank
         {
@@ -74,7 +68,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => Asci.length(this);
         }
 
         public int Capacity
@@ -86,13 +80,13 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(this);
+            get => Asci.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public AsciCharCode this[int index]
@@ -141,7 +135,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => asci.format(this);
+            get => Asci.format(this);
         }
 
 
@@ -167,7 +161,7 @@ namespace Z0
         public static A Spaced
         {
             [MethodImpl(Inline)]
-            get => asci.init(n);
+            get => Asci.init(n);
         }
 
         public static A Null
@@ -177,23 +171,30 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline)]
-        public asci32(Vector256<byte> src)
-        {
-            Storage = src;
-        }
 
         [MethodImpl(Inline)]
-        public asci32(string src)
-        {
-            Storage = asci.encode(n,src).Storage;
-        }
+        public static implicit operator A(string src)
+            => new A(src);
 
         [MethodImpl(Inline)]
-        public asci32(ReadOnlySpan<byte> src)
-        {
-            Storage = z.vload(w, first(src));
-        }
+        public static implicit operator string(A src)
+            => src.Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<byte>(A src)
+            => src.View;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ReadOnlySpan<char>(A src)
+            => src.Decoded;
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(A a, A b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(A a, A b)
+            => !a.Equals(b);
 
         static N n => default;
 

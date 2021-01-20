@@ -45,8 +45,8 @@ namespace Z0
             for(var i=0u; i<src.Length; i++, j+=2)
             {
                 ref readonly var data = ref skip(src, i);
-                seek(dst, j) = asci.code(casing, (HexDigit)(data >> 4));
-                seek(dst, j + 1) = asci.code(casing, (HexDigit)(0xF & data));
+                seek(dst, j) = Asci.code(casing, (HexDigit)(data >> 4));
+                seek(dst, j + 1) = Asci.code(casing, (HexDigit)(0xF & data));
             }
             return (int)j;
         }
@@ -64,8 +64,8 @@ namespace Z0
             for(var i=0u; i<src.Length; i++, j+=2)
             {
                 ref readonly var data = ref skip(src, i);
-                seek(dst, j) = asci.code(casing, (HexDigit)(data >> 4));
-                seek(dst, j + 1) = asci.code(casing, (HexDigit)(0xF & data));
+                seek(dst, j) = Asci.code(casing, (HexDigit)(data >> 4));
+                seek(dst, j + 1) = Asci.code(casing, (HexDigit)(0xF & data));
             }
             return (int)j;
         }

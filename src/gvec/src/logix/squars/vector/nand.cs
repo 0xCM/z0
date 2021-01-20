@@ -16,17 +16,17 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static Vector128<T> vnand<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vnand(vload(w, in a),vload(w, in b));
+                => gvec.vnand(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static Vector256<T> vnand<T>(N256 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vnand(vload(w, in a),vload(w, in b));
+                => gvec.vnand(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnand(w, in a, in b), ref z);
+                => vstore(vnand(w, a, b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)

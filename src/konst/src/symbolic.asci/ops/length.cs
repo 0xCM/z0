@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Counts the number of characters that precede a null terminator, if any

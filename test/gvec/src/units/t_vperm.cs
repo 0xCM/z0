@@ -259,7 +259,7 @@ namespace Z0
             {
                 var x = Random.CpuVector<byte>(n256);
                 var y = vswaphl(x);
-                var _z = z.vswaphl(x);
+                var _z = cpu.vswaphl(x);
                 Claim.veq(y,_z);
             }
         }

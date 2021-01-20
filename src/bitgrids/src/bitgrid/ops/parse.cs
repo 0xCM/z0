@@ -117,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.vload(w, bs.Pack(0,w));
+                => gcpu.vload(w, bs.Pack(0,w));
 
         /// <summary>
         /// Hydrates a 256-bit natural bitgrid from a bitstring
@@ -135,6 +135,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.vload(w, bs.Pack(0,w));
+                => gcpu.vload(w, bs.Pack(0,w));
     }
 }

@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
- 
-    partial struct asci
+
+    partial struct Asci
     {
         /// <summary>
         /// Presents the input  as a byte

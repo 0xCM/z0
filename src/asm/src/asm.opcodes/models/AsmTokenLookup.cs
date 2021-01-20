@@ -60,7 +60,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         static uint EncodeDefinitions(string[] src, byte[] dst)
-            => asci.encode(src, dst, EncodingDelimiter);
+            => Asci.encode(src, dst, EncodingDelimiter);
 
     }
 }

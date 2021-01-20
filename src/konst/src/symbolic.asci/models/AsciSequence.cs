@@ -22,7 +22,7 @@ namespace Z0
         public AsciSequence(BinaryCode src)
         {
             Data = src;
-            Length = asci.length(src);
+            Length = Asci.length(src);
         }
 
         public int Capacity

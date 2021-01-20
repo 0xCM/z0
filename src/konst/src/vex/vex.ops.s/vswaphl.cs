@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Swaps the source vectors' hi/lo 128-bit lanes

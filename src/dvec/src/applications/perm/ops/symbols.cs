@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm16 vinit(W128 w, Perm<byte> spec)
-            => new Perm16(vload(w128, spec.Terms));
+            => new Perm16(gcpu.vload(w128, spec.Terms));
 
         /// <summary>
         /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         [MethodImpl(Inline), Op]
         public static Perm32 vinit(W256 w, Perm<byte> src)
-            => new Perm32(vload(w, src.Terms));
+            => new Perm32(gcpu.vload(w, src.Terms));
 
         [MethodImpl(Inline), Op]
         public static Perm16 vspec(Vector128<byte> data)
@@ -135,7 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => vload(n128, (byte)first(src.Terms));
+            => cpu.vload(n128, (byte)first(src.Terms));
 
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.

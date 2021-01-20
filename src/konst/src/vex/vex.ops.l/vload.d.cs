@@ -11,8 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_lddqu_si128 (__m128i const* mem_addr) LDDQU xmm, m128

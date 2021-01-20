@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in SpanBlock128<T> src)
             where T : unmanaged
-                => z.vload(src, 0);
+                => gcpu.vload(src, 0);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this in SpanBlock128<T> src, int block)
             where T : unmanaged
-                => z.vload(src, block);
+                => gcpu.vload(src, block);
 
         /// <summary>
         /// Loads 2 block-indexed 128-bit vectors
@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ConstPair<Vector128<T>> LoadVectors<T>(this in SpanBlock128<T> src, int block1, int block2)
             where T : unmanaged
-                => (z.vload(src, block1), z.vload(src, block2));
+                => (gcpu.vload(src, block1), gcpu.vload(src, block2));
 
         /// <summary>
         /// Loads 3 block-indexed 128-bit vectors
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ConstTriple<Vector128<T>> LoadVectors<T>(this in SpanBlock128<T> src, int block1, int block2, int block3)
             where T : unmanaged
-                => (z.vload(src, block1), z.vload(src, block2), z.vload(src, block3));
+                => (gcpu.vload(src, block1), gcpu.vload(src, block2), gcpu.vload(src, block3));
 
         /// <summary>
         /// Loads a 256-bit vector from the first 256-bit block
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in SpanBlock256<T> src)
             where T : unmanaged
-                => z.vload(src);
+                => gcpu.vload(src);
 
         /// <summary>
         /// Loads 2 block-indexed 256-bit vectors
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ConstPair<Vector256<T>> LoadVectors<T>(this in SpanBlock256<T> src, int block1, int block2)
             where T : unmanaged
-                => (z.vload(src, block1), z.vload(src, block2));
+                => (gcpu.vload(src, block1), gcpu.vload(src, block2));
 
         /// <summary>
         /// Loads 3 block-indexed 256-bit vectors
@@ -92,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ConstTriple<Vector256<T>> LoadVectors<T>(this in SpanBlock256<T> src, int block1, int block2, int block3)
             where T : unmanaged
-                => (z.vload(src, block1), z.vload(src, block2), z.vload(src, block3));
+                => (gcpu.vload(src, block1), gcpu.vload(src, block2), gcpu.vload(src, block3));
 
         /// <summary>
         /// Loads a 512-bit vector from the first 512-bit block
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in SpanBlock512<T> src)
             where T : unmanaged
-                => z.vload(src);
+                => gcpu.vload(src);
 
         /// <summary>
         /// Loads a 256-bit vector from an index-identified block
@@ -114,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in SpanBlock256<T> src, int block)
             where T : unmanaged
-                => z.vload(src,block);
+                => gcpu.vload(src,block);
 
         /// <summary>
         /// Loads a 256-bit vector from an index-identified block
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this in SpanBlock256<T> src, uint block)
             where T : unmanaged
-                => z.vload(src,(int)block);
+                => gcpu.vload(src,(int)block);
 
         /// <summary>
         /// Loads 512-bit vector from an index-identified block
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this in SpanBlock512<T> src, int block)
             where T : unmanaged
-                => z.vload(src,block);
+                => gcpu.vload(src,block);
 
         /// <summary>
         /// Loads a 128-bit vector from a span
@@ -146,7 +146,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this Span<T> src, W128 w, int offset = 0)
             where T : unmanaged
-                => z.vload(w, src, offset);
+                => gcpu.vload(w, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector from a span
@@ -156,7 +156,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this Span<T> src, W256 n, int offset = 0)
             where T : unmanaged
-                => z.vload(n, src, offset);
+                => gcpu.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 512-bit vector from a span
@@ -166,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this Span<T> src, W512 n, int offset = 0)
             where T : unmanaged
-                => z.vload(n, src, offset);
+                => gcpu.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 128-bit vector from a readonly span
@@ -176,7 +176,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> LoadVector<T>(this ReadOnlySpan<T> src, W128 n, int offset = 0)
             where T : unmanaged
-                => z.vload(n, src, offset);
+                => gcpu.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly span
@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> LoadVector<T>(this ReadOnlySpan<T> src, W256 n, int offset = 0)
             where T : unmanaged
-                => z.vload(n, src, offset);
+                => gcpu.vload(n, src, offset);
 
         /// <summary>
         /// Loads a 512-bit vector from a readonly span
@@ -196,6 +196,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> LoadVector<T>(this ReadOnlySpan<T> src, W512 n, int offset = 0)
             where T : unmanaged
-                => z.vload(n, src, offset);
+                => gcpu.vload(n, src, offset);
     }
 }

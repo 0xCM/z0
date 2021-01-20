@@ -84,7 +84,7 @@ namespace Z0
         public static Vector256<long> vmul(Vector128<int> x, Vector128<int> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(vswaphl(x), vswaphl(y));
+            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
             return cpu.vconcat(lo,hi);
         }
 
@@ -97,7 +97,7 @@ namespace Z0
         public static Vector256<ulong> vmul(Vector128<uint> x, Vector128<uint> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(vswaphl(x), vswaphl(y));
+            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
             return cpu.vconcat(lo,hi);
         }
 
@@ -166,7 +166,7 @@ namespace Z0
         public static Vector512<long> vmul(Vector256<int> x,Vector256<int> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(vswaphl(x), vswaphl(y));
+            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
             return (lo,hi);
         }
 
@@ -179,7 +179,7 @@ namespace Z0
         public static Vector512<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(vswaphl(x), vswaphl(y));
+            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
             return (lo,hi);
         }
 

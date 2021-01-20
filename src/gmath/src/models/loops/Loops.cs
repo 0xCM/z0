@@ -35,7 +35,7 @@ namespace Z0
                 => host(loop(bounds),h);
 
         [MethodImpl(Inline)]
-        public static LoopHost<H,I> host<H,I>(in Loop<I> loop, in  H host)
+        public static LoopHost<H,I> host<H,I>(in Loop<I> loop, in H host)
             where I : unmanaged, IComparable<I>
             where H : struct, ILoopHost<H,I>
         {

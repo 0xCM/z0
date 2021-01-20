@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w, Dec128x8u);
+                return gcpu.vload<T>(w, Dec128x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w, Dec128x16u);
+                return gcpu.vload<T>(w, Dec128x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vload<T>(w, Dec128x32u);
+                return gcpu.vload<T>(w, Dec128x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vload<T>(w, Dec128x64u);
+                return gcpu.vload<T>(w, Dec128x64u);
             else
                 throw no<T>();
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w,Dec256x8u);
+                return gcpu.vload<T>(w,Dec256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w,Dec256x16u);
+                return gcpu.vload<T>(w,Dec256x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
-                return vload<T>(w,Dec256x32u);
+                return gcpu.vload<T>(w,Dec256x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
-                return vload<T>(w,Dec256x64u);
+                return gcpu.vload<T>(w,Dec256x64u);
             else
                 throw no<T>();
         }

@@ -11,7 +11,7 @@ namespace Z0
     using static AsciSymbols;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Transforms an uppercase character [A..Z] to the corresponding lowercase character [a..z];

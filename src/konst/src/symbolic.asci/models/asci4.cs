@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci4(string src)
         {
-            Storage = asci.encode(n,src).Storage;
+            Storage = Asci.encode(n,src).Storage;
         }
 
         public bool IsBlank
@@ -65,7 +65,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => asci.length(this);
+            get => Asci.length(this);
         }
 
         public int Capacity
@@ -77,19 +77,19 @@ namespace Z0
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(this);
+            get => Asci.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public string Text
         {
             [MethodImpl(Inline)]
-            get => asci.format(this);
+            get => Asci.format(this);
         }
 
         [MethodImpl(Inline)]
@@ -118,7 +118,7 @@ namespace Z0
         public static A Spaced
         {
             [MethodImpl(Inline)]
-            get => asci.init(n);
+            get => Asci.init(n);
         }
 
         public const int Size = 4;

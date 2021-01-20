@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static asci;
+    using static Asci;
     using static z;
 
     /// <summary>

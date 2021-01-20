@@ -25,7 +25,7 @@ namespace Z0
         {
             if(aligned<T>(w128, dst.CellCount))
                 for(var i=0; i<dst.BlockCount; i++)
-                    vload(n128, dst.Block(i));
+                    gcpu.vload(n128, dst.Block(i));
         }
 
         /// <summary>

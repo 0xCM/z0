@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Loads a 128-bit pattern described by a readonly bytespan
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(W128 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(vload(n, first(src)));
+                => generic<T>(cpu.vload(n, first(src)));
 
         /// <summary>
         /// Loads a 256-bit pattern described by a readonly bytespan
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(W256 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(vload(n, first(src)));
+                => generic<T>(cpu.vload(n, first(src)));
 
         /// <summary>
         /// Loads a 512-bit pattern described by a readonly bytespan
@@ -44,6 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(W512 n, ReadOnlySpan<byte> src)
             where T : unmanaged
-                => generic<T>(vload(n, first(src)));
+                => generic<T>(cpu.vload(n, first(src)));
     }
+
 }

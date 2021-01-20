@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Returns the uint16 asci scalar values corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count

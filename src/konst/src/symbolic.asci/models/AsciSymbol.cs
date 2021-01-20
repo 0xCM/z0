@@ -27,7 +27,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline), Op]
-            get => asci.@string(Code);
+            get => Asci.@string(Code);
         }
 
         public ReadOnlySpan<byte> Encoded
@@ -39,7 +39,7 @@ namespace Z0
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline), Op]
-            get => asci.decode(this);
+            get => Asci.decode(this);
         }
 
         public C Zero

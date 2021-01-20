@@ -19,18 +19,18 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Cpuid(string src)
-            => asci.encode(src, out Value);
+            => Asci.encode(src, out Value);
 
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => asci.bytes(Value);
+            get => Asci.bytes(Value);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => asci.decode(Value);
+            get => Asci.decode(Value);
         }
 
         public Cpuid Zero
@@ -77,6 +77,6 @@ namespace Z0.Asm
             => new Cpuid(src);
 
         public static Cpuid Empty
-            => new Cpuid(asci.Null);
+            => new Cpuid(Asci.Null);
     }
 }

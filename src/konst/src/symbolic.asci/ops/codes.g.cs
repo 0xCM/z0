@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct asci
+    partial struct Asci
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<AsciCharCode> codes<A>(in A src)

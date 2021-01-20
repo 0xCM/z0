@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct asci
+    partial struct Asci
     {
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
         public static void encode(in char src, uint offset, N16 count, ref AsciCharCode dst)
-            => vsave(vcompact8u(vload(w256, memory.read(src, offset)), w8), ref @byte(dst));
+            => vsave(vcompact8u(cpu.vload(w256, memory.read(src, offset)), w8), ref @byte(dst));
 
         /// <summary>
         /// Encodes a sequence of source characters and stores a result in a caller-supplied
@@ -110,7 +110,7 @@ namespace Z0
         {
             dst = asci2.Null;
             ref var codes = ref Unsafe.As<asci2,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -125,7 +125,7 @@ namespace Z0
         {
             dst = asci4.Null;
             ref var codes = ref Unsafe.As<asci4,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -140,7 +140,7 @@ namespace Z0
         {
             dst = asci8.Null;
             ref var codes = ref Unsafe.As<asci8,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -155,7 +155,7 @@ namespace Z0
         {
             dst = asci16.Null;
             ref var codes = ref Unsafe.As<asci16,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -170,7 +170,7 @@ namespace Z0
         {
             dst = asci32.Null;
             ref var codes = ref Unsafe.As<asci32,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -185,7 +185,7 @@ namespace Z0
         {
             dst = asci64.Null;
             ref var codes = ref Unsafe.As<asci64,AsciCharCode>(ref dst);
-            asci.codes(src, (byte)count, ref codes);
+            Asci.codes(src, (byte)count, ref codes);
             return ref dst;
         }
 
@@ -313,7 +313,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci2 encode(N2 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci2 dst);
+            => Asci.encode(src, out asci2 dst);
 
         /// <summary>
         /// Populates a 4-code asci block from the leading cells of a character span
@@ -321,7 +321,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci4 encode(N4 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci4 dst);
+            => Asci.encode(src, out asci4 dst);
 
         /// <summary>
         /// Populates an 8-code asci block from the leading cells of a character span
@@ -329,7 +329,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci8 encode(N8 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci8 dst);
+            => Asci.encode(src, out asci8 dst);
 
         /// <summary>
         /// Populates a 16-code asci block from the leading cells of a character span
@@ -337,7 +337,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci16 encode(N16 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci16 dst);
+            => Asci.encode(src, out asci16 dst);
 
         /// <summary>
         /// Populates a 32-code asci block from the leading cells of a character span
@@ -345,7 +345,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci32 encode(N32 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci32 dst);
+            => Asci.encode(src, out asci32 dst);
 
         /// <summary>
         /// Populates a 32-code asci block from the leading cells of a character span
@@ -353,6 +353,6 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static asci64 encode(N64 n, ReadOnlySpan<char> src)
-            => asci.encode(src, out asci64 dst);
+            => Asci.encode(src, out asci64 dst);
     }
 }
