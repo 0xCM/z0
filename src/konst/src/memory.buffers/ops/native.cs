@@ -15,9 +15,9 @@ namespace Z0
         /// <summary>
         /// Allocates a native buffer
         /// </summary>
-        /// <param name="length">The buffer length in bytes</param>
+        /// <param name="size">The buffer length in bytes</param>
         [MethodImpl(Inline), Op]
-        public static NativeBuffer native(uint length)
-            => new NativeBuffer((memory.liberate(Marshal.AllocHGlobal((int)length), (int)length), length));
+        public static NativeBuffer native(uint size)
+            => new NativeBuffer((memory.liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
     }
 }

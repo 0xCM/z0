@@ -20,7 +20,7 @@ namespace Z0
             where K : ICellOpKind
         {
             var name = kind.OperatorType.DisplayName();
-            var width = kind.OperandWidth.Format();
+            var width = kind.OperandWidth.FormatValue();
             var operand = kind.OperandType.DisplayName();
             var format = text.concat(name, Chars.LBracket, width, Chars.RBracket, Chars.Colon, operand, Chars.MapsTo, operand);
             return format;

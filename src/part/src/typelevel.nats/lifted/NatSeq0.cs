@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static TypeNats;
+    using static memory;
 
     /// <summary>
     /// Reifies a one-term natural sequence

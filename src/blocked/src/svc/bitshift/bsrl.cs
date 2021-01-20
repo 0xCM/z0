@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
     using static SFx;
 
     partial class BSvcHosts

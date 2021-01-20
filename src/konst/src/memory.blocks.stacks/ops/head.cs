@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class MemoryStacks
     {
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source storage</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T head<T>(ref BitBlock256 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));

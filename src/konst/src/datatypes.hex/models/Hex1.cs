@@ -47,6 +47,38 @@ namespace Z0
 
         public static H Max => KMax;
 
+        K IHexNumber<K>.Value
+            => Value;
+
+        [MethodImpl(Inline)]
+        public bool Equals(H src)
+            => Value == src.Value;
+
+        public override bool Equals(object src)
+            => src is H x && Equals(x);
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Value;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Value == One ? On : Off;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+
+        public override string ToString()
+            => Text;
+
         [MethodImpl(Inline)]
         public static implicit operator Hex1(Bit32 src)
             => new Hex1((byte)(src ? 1 : 0));
@@ -102,37 +134,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(H src)
             => (ulong)src.Value;
-
-        K IHexNumber<K>.Value
-            => Value;
-
-        [MethodImpl(Inline)]
-        public bool Equals(H src)
-            => Value == src.Value;
-
-        public override bool Equals(object src)
-            => src is H x && Equals(x);
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Value;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public string Text
-        {
-            [MethodImpl(Inline)]
-            get => Value == One ? On : Off;
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Text;
-
-        public override string ToString()
-            => Text;
     }
 }

@@ -43,34 +43,6 @@ namespace Z0
 
         public static H Max => KMax;
 
-        [MethodImpl(Inline)]
-        public static implicit operator H(K src)
-            => new H(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator K(H src)
-            => src.Value;
-
-        [MethodImpl(Inline)]
-        public static implicit operator H(byte src)
-            => new H((K)src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator byte(H src)
-            => (byte)src.Value;
-
-        [MethodImpl(Inline)]
-        public static explicit operator uint(H src)
-            => (uint)src.Value;
-
-        [MethodImpl(Inline)]
-        public static explicit operator ushort(H src)
-            => (ushort)src.Value;
-
-        [MethodImpl(Inline)]
-        public static explicit operator ulong(H src)
-            => (ulong)src.Value;
-
         K IHexNumber<K>.Value
             => Value;
 
@@ -102,5 +74,33 @@ namespace Z0
 
         public override string ToString()
             => Text;
+
+        [MethodImpl(Inline)]
+        public static implicit operator H(K src)
+            => new H(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(H src)
+            => src.Value;
+
+         [MethodImpl(Inline)]
+        public static implicit operator H(byte src)
+            => new H((K)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(H src)
+            => (byte)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator uint(H src)
+            => (uint)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(H src)
+            => (ushort)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(H src)
+            => (ulong)src.Value;
     }
 }

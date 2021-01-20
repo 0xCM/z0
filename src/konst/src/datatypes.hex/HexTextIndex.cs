@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using H = Hex3;
     using K = Hex3Seq;
@@ -46,14 +46,14 @@ namespace Z0
         {
             var target = span(dst);
             byte i = 0;
-            seek(target,i++) = @ref(T.x00);
-            seek(target,i++) = @ref(T.x01);
-            seek(target,i++) = @ref(T.x02);
-            seek(target,i++) = @ref(T.x03);
-            seek(target,i++) = @ref(T.x04);
-            seek(target,i++) = @ref(T.x05);
-            seek(target,i++) = @ref(T.x06);
-            seek(target,i++) = @ref(T.x07);
+            seek(target,i++) = z.@ref(T.x00);
+            seek(target,i++) = z.@ref(T.x01);
+            seek(target,i++) = z.@ref(T.x02);
+            seek(target,i++) = z.@ref(T.x03);
+            seek(target,i++) = z.@ref(T.x04);
+            seek(target,i++) = z.@ref(T.x05);
+            seek(target,i++) = z.@ref(T.x06);
+            seek(target,i++) = z.@ref(T.x07);
             return new HexStrings<K>(dst);
         }
 
@@ -84,29 +84,29 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static HexStrings<Hex1Seq> init(N1 n)
-            => new HexStrings<Hex1Seq>(sys.array(@ref(Hex1Text.x00), @ref(Hex1Text.x01)));
+            => new HexStrings<Hex1Seq>(sys.array(z.@ref(Hex1Text.x00), z.@ref(Hex1Text.x01)));
 
         [MethodImpl(Inline), Op]
         public static HexStrings<Hex2Seq> init(N2 n)
             => new HexStrings<Hex2Seq>(sys.array(
-                @ref(Hex2Text.x00), @ref(Hex2Text.x01),
-                @ref(Hex2Text.x02), @ref(Hex2Text.x03)
+                z.@ref(Hex2Text.x00), z.@ref(Hex2Text.x01),
+                z.@ref(Hex2Text.x02), z.@ref(Hex2Text.x03)
                 ));
 
         [Op]
         public static HexStrings<Hex3Seq> init(N3 n)
             => new HexStrings<Hex3Seq>(sys.array(
-                    @ref(Hex3Text.x00), @ref(Hex3Text.x01), @ref(Hex3Text.x02), @ref(Hex3Text.x03),
-                    @ref(Hex3Text.x04), @ref(Hex3Text.x05), @ref(Hex3Text.x06), @ref(Hex3Text.x07)
+                    z.@ref(Hex3Text.x00), z.@ref(Hex3Text.x01), z.@ref(Hex3Text.x02), z.@ref(Hex3Text.x03),
+                    z.@ref(Hex3Text.x04), z.@ref(Hex3Text.x05), z.@ref(Hex3Text.x06), z.@ref(Hex3Text.x07)
                         ));
 
         [Op]
         public static HexStrings<Hex4Seq> init(N4 n)
             => new HexStrings<Hex4Seq>(sys.array(
-                    @ref(Hex4Text.x00), @ref(Hex4Text.x01), @ref(Hex4Text.x02), @ref(Hex4Text.x03),
-                    @ref(Hex4Text.x04), @ref(Hex4Text.x05), @ref(Hex4Text.x06), @ref(Hex4Text.x07),
-                    @ref(Hex4Text.x08), @ref(Hex4Text.x09), @ref(Hex4Text.x0A), @ref(Hex4Text.x0B),
-                    @ref(Hex4Text.x0C), @ref(Hex4Text.x0D), @ref(Hex4Text.x0E), @ref(Hex4Text.x0F)
+                    z.@ref(Hex4Text.x00), z.@ref(Hex4Text.x01), z.@ref(Hex4Text.x02), z.@ref(Hex4Text.x03),
+                    z.@ref(Hex4Text.x04), z.@ref(Hex4Text.x05), z.@ref(Hex4Text.x06), z.@ref(Hex4Text.x07),
+                    z.@ref(Hex4Text.x08), z.@ref(Hex4Text.x09), z.@ref(Hex4Text.x0A), z.@ref(Hex4Text.x0B),
+                    z.@ref(Hex4Text.x0C), z.@ref(Hex4Text.x0D), z.@ref(Hex4Text.x0E), z.@ref(Hex4Text.x0F)
                     ));
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitVector(T src)
-            => this.Data = src;
+            => Data = src;
 
         /// <summary>
         /// Specifies the data over which the vector is defined

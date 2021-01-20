@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static BitNumbers;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines operations over character digits

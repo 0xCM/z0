@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Represents the least 8 bits of a unicode code point which, by definition of the encoding, is equivalent to the 7 ascii bits.

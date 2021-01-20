@@ -11,7 +11,7 @@ namespace Z0
     using MsBC = Microsoft.Build.Construction;
 
     using static Part;
-    using static z;
+    using static memory;
     using static ProjectModel;
 
     [ApiHost]

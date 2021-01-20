@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct Hex8 : IHexNumber<H,W,K>
     {
-        public readonly K Value;
+        public K Value {get;}
 
         [MethodImpl(Inline)]
         public Hex8(K src)
@@ -42,10 +42,6 @@ namespace Z0
         public static H Min => KMin;
 
         public static H Max => KMax;
-
-
-        K IHexNumber<K>.Value
-            => Value;
 
         [MethodImpl(Inline)]
         public bool Equals(H src)

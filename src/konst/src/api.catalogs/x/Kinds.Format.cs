@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     partial class XKinds
     {
@@ -56,6 +56,6 @@ namespace Z0
 
         [Op, Closures(Closure)]
         public static string Format<T>(this BitLogicApiClass key, T a, T b)
-            => text.format("{0}({1}, {2})", key.Format(), a, b);
+            => string.Format("{0}({1}, {2})", key.Format(), a, b);
     }
 }

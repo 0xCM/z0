@@ -11,6 +11,7 @@ namespace Z0
 
     using N = N0;
 
+
     /// <summary>
     /// The singleton type representative for 0
     /// </summary>

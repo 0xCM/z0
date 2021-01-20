@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines a 32-bit bitvector

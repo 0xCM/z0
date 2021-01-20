@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a sequence of unmanaged values indexed by an integer in the range [0,255]

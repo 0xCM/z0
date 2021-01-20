@@ -29,7 +29,7 @@ namespace Z0
             else if(args == 3)
                 return TypeIdentity.define(text.concat(
                         kind.Indicator(), sep,
-                        kind.Width().Format(), sep,
+                        kind.Width().FormatValue(), sep,
                         closures.M.ToString(), sep,
                         closures.N.ToString(), sep,
                         closures.T.Format()

@@ -52,7 +52,7 @@ namespace Z0
                 }
 
                 if(kind != 0 && width != 0)
-                    return TypeIdentity.define(text.concat(prefix, width.Format(), IDI.SegSep, kind.Format()));
+                    return TypeIdentity.define(text.concat(prefix, width.FormatValue(), IDI.SegSep, kind.Format()));
             }
 
             return TypeIdentity.define($"{prefix}err");

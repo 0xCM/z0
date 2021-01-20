@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly struct FunctionEmitter

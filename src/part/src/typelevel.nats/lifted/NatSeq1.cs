@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TypeNats;
+    using static memory;
 
     /// <summary>
     /// Reifies a two-term natural sequence that represents the value k := k1*10 + k2

@@ -27,7 +27,7 @@ namespace Z0
             if(generic && k == 0)
                 return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
             else if(w.IsSome())
-                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
+                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.FormatValue()}{IDI.SegSep}{k.Format()}"));
             else
                 return OpIdentityParser.parse(Strings.concat($"{opname}_{g}{k.Format()}"));
         }

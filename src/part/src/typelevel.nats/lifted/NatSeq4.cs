@@ -7,30 +7,37 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static TypeNats;
+    using static Root;
+    using static memory;
 
     /// <summary>
-    /// Reifies a three-term natural sequence
+    /// Reifies a five-term natural sequence
     /// </summary>
-    public readonly struct NatSeq<D0,D1,D2> : INatSeq<NatSeq<D0,D1,D2>>
+    public readonly struct NatSeq<D0,D1,D2,D3,D4> : INatSeq<NatSeq<D0,D1,D2,D3,D4>>
         where D0 : unmanaged, INatPrimitive<D0>
         where D1 : unmanaged, INatPrimitive<D1>
         where D2 : unmanaged, INatPrimitive<D2>
+        where D3 : unmanaged, INatPrimitive<D3>
+        where D4 : unmanaged, INatPrimitive<D4>
     {
-        public static NatSeq<D0,D1,D2> Rep => default;
+        public static NatSeq<D0,D1,D2,D3,D4> Rep => default;
 
         public static ulong Value
         {
             [MethodImpl(Inline)]
             get =>
-              value<D0>() * 100ul
-            + value<D1>() * 10ul
-            + value<D2>();
+              value<D0>() * 10000
+            + value<D1>() * 1000
+            + value<D2>() * 100
+            + value<D3>() * 10
+            + value<D4>();
         }
 
         public ulong NatValue
             => Value;
+
+        public ITypeNat NatRep
+            => Rep;
 
         public INatSeq Sequence
             => Rep;
@@ -39,6 +46,6 @@ namespace Z0
             => Value.ToString();
 
         public override string ToString()
-            => Value.ToString();
+            => format();
     }
 }

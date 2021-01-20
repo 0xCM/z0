@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Part;
+    using static Konst;
     using static z;
 
     [ApiHost(ApiNames.Utf8Data)]

@@ -11,7 +11,7 @@ namespace Z0
         /// </summary>
         public struct StackBlock1
         {
-            public Cell8 Data;
+            public byte Data;
         }
 
         /// <summary>

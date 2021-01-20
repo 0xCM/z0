@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class MemoryStacks
     {
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock64 src, int index, T t = default)
             where T : unmanaged
-                => ref z.add(head<T>(ref src), index);
+                => ref memory.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock128 src, int index, T t = default)
             where T : unmanaged
-                => ref z.add(head<T>(ref src), index);
+                => ref memory.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock256 src, int index, T t = default)
             where T : unmanaged
-                => ref z.add(head<T>(ref src), index);
+                => ref memory.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock512 src, int index, T t = default)
             where T : unmanaged
-                => ref z.add(head<T>(ref src), index);
+                => ref memory.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref BitBlock1024 src, int index, T t = default)
             where T : unmanaged
-                => ref z.add(head<T>(ref src), index);
+                => ref memory.add(head<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="index">The character index</param>
         [MethodImpl(Inline), Op]
         public static ref char cell(ref CharStack2 src, int index)
-            => ref z.add(head(ref src), index);
+            => ref memory.add(head(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="index">The character index</param>
         [MethodImpl(Inline), Op]
         public static ref char cell(ref CharStack16 src, int index)
-            => ref z.add(head(ref src), index);
+            => ref memory.add(head(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a index-identified character in a storage stack

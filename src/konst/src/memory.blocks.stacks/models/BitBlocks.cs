@@ -8,28 +8,28 @@ namespace Z0
     {
         public struct BitBlock8
         {
-            public const int Size = 1;
+            public const uint Size = 1;
 
             public byte X0;
         }
 
         public struct BitBlock16
         {
-            public const int Size = 2;
+            public const uint Size = 2;
 
             public ushort X0;
         }
 
         public struct BitBlock32
         {
-            public const int Size = 4;
+            public const uint Size = 4;
 
             public uint X0;
         }
 
         public struct BitBlock64
         {
-            public const int Size = 8;
+            public const uint Size = 8;
 
             public ulong X0;
         }
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         public struct BitBlock128
         {
-            public const int Size = 16;
+            public const uint Size = 16;
 
             public ulong X0;
 
@@ -51,7 +51,7 @@ namespace Z0
         /// </summary>
         public struct BitBlock256
         {
-            public const int Size = 32;
+            public const uint Size = 32;
 
             public BitBlock128 X0;
 
@@ -63,7 +63,7 @@ namespace Z0
         /// </summary>
         public struct BitBlock512
         {
-            public const int Size = 64;
+            public const uint Size = 64;
 
             public BitBlock256 X0;
 
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         public struct BitBlock1024
         {
-            public const int Size = 128;
+            public const uint Size = 128;
 
             public BitBlock512 X0;
 

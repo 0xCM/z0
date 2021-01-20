@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [StructLayout(LayoutKind.Sequential, Size = 64), Vector(TypeWidth.W512)]
     public readonly struct Vector512<T>
