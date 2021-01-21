@@ -9,13 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
     partial struct cpu
-    {
-
-    }
-
-    partial struct z
     {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector
@@ -177,6 +173,10 @@ namespace Z0
         public static Vector256<double> vscalar(W256 w, double a)
             => Vector256.CreateScalarUnsafe(a);
 
+    }
+
+    partial struct gcpu
+    {
         /// <summary>
         /// Loads a scalar into the first component of a 128-bit vector
         /// </summary>
@@ -227,13 +227,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(w, uint8(src)));
+                return generic<T>(cpu.vscalar(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(w, uint16(src)));
+                return generic<T>(cpu.vscalar(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(w, uint32(src)));
+                return generic<T>(cpu.vscalar(w, uint32(src)));
             else
-                return generic<T>(vscalar(w, uint64(src)));
+                return generic<T>(cpu.vscalar(w, uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -241,13 +241,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(w, int8(src)));
+                return generic<T>(cpu.vscalar(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(w, int16(src)));
+                return generic<T>(cpu.vscalar(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(w, int32(src)));
+                return generic<T>(cpu.vscalar(w, int32(src)));
             else
-                return generic<T>(vscalar(w, int64(src)));
+                return generic<T>(cpu.vscalar(w, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -255,9 +255,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vscalar(w, float32(src)));
+                return generic<T>(cpu.vscalar(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vscalar(w, float64(src)));
+                return generic<T>(cpu.vscalar(w, float64(src)));
             else
                 throw no<T>();
         }
@@ -267,13 +267,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(vscalar(w,uint8(src)));
+                return generic<T>(cpu.vscalar(w,uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(vscalar(w,uint16(src)));
+                return generic<T>(cpu.vscalar(w,uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(vscalar(w,uint32(src)));
+                return generic<T>(cpu.vscalar(w,uint32(src)));
             else
-                return generic<T>(vscalar(w,uint64(src)));
+                return generic<T>(cpu.vscalar(w,uint64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -281,13 +281,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(vscalar(w, int8(src)));
+                return generic<T>(cpu.vscalar(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(vscalar(w, int16(src)));
+                return generic<T>(cpu.vscalar(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(vscalar(w, int32(src)));
+                return generic<T>(cpu.vscalar(w, int32(src)));
             else
-                return generic<T>(vscalar(w, int64(src)));
+                return generic<T>(cpu.vscalar(w, int64(src)));
         }
 
         [MethodImpl(Inline)]
@@ -295,9 +295,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(vscalar(n,float32(src)));
+                return generic<T>(cpu.vscalar(n,float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(vscalar(n,float64(src)));
+                return generic<T>(cpu.vscalar(n,float64(src)));
             else
                 throw no<T>();
         }

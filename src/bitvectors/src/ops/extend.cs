@@ -54,6 +54,6 @@ namespace Z0
         /// <param name="n">The target width</param>
         [MethodImpl(Inline), Op]
         public static BitVector128<N128,ulong> extend(BitVector64 src, W128 n)
-            => new BitVector128<N128, ulong>(z.vscalar(n,src.Data));
+            => new BitVector128<N128, ulong>(cpu.vscalar(n,src.Data));
     }
 }

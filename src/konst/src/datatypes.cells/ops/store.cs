@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         /// <typeparam name="F">The fixed target type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe ref F deposit<S,F>(in S src, ref F dst)
+        public static unsafe ref F store<S,F>(in S src, ref F dst)
             where S : struct
             where F : unmanaged, IDataCell
         {

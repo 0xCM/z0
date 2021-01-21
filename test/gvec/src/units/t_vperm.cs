@@ -248,8 +248,8 @@ namespace Z0
         public static Vector256<byte> vswaphl(Vector256<byte> x)
         {
             Vector256<byte> y = default;
-            y = z.vinsert(vhi(x), y, BitState.Off);
-            y = z.vinsert(vlo(x), y, BitState.On);
+            y = z.vinsert(vhi(x), y, LaneIndex.L0);
+            y = z.vinsert(vlo(x), y, LaneIndex.L1);
             return y;
         }
 

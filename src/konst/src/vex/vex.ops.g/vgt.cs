@@ -121,8 +121,8 @@ namespace Z0
         [MethodImpl(Inline), Gt]
         public static Vector128<long> vgt(Vector128<long> x, Vector128<long> y)
         {
-            var a = z.vinsert(x,default, BitState.Off);
-            var b = z.vinsert(y,default, BitState.Off);
+            var a = z.vinsert(x,default, LaneIndex.L0);
+            var b = z.vinsert(y,default, LaneIndex.L0);
             return z.vlo(vgt(a,b));
         }
 

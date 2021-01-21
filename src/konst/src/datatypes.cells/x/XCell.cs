@@ -9,6 +9,6 @@ namespace Z0
     [Free, ApiHost(ApiNames.XCell, true)]
     public static partial class XCell
     {
-
+        const NumericKind Closure = Part.Integers;
     }
 }

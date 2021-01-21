@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vload(in BitMatrix8 A)
-            => z.vscalar(w128, (ulong)A).AsByte();
+            => cpu.vscalar(w128, (ulong)A).AsByte();
 
         /// <summary>
         /// Loads a 256-bit cpu vector from matrix data

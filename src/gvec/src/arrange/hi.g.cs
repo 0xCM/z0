@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
-    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
     using static Konst;
     using static z;
 
     partial class gvec
-    {        
+    {
         /// <summary>
         /// Moves the hi 64 bits of the source vector the the lo 64 bits of a target vector
         /// </summary>
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vhi<T>(Vector128<T> src)
             where T : unmanaged
-                => generic<T>(z.vscalar(w128, vcell(v64u(src),1)));
+                => generic<T>(cpu.vscalar(w128, vcell(v64u(src),1)));
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to scalar targets
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vhi<T>(Vector512<T> src)
             where T : unmanaged
-                => src.Hi;       
+                => src.Hi;
 
         /// <summary>
         /// Extracts the lower 256-bits from the source vector
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static Vector512<T> vhi<T>(Vector1024<T> src)
             where T : unmanaged
-                => src.Hi;       
+                => src.Hi;
 
         /// <summary>
         /// Extracts hi 128-bit lane of the source vector
@@ -109,7 +109,7 @@ namespace Z0
                 return generic<T>(z.vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(z.vhi(v64f(src)));
-            else 
+            else
                 throw no<T>();
         }
     }

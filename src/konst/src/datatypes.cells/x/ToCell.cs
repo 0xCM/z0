@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial class XCell
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Cell128 ToCell<T>(this in Vector128<T> x)
             where T : unmanaged
-                => ref Cells.from(x);
+                => ref Cells.cell(x);
 
         /// <summary>
         /// Presents a 256-bit vector as a 256-bit fixed block
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly Cell256 ToCell<T>(this in Vector256<T> x)
             where T : unmanaged
-                => ref Cells.from(x);
+                => ref Cells.cell(x);
 
         [MethodImpl(Inline)]
         public static Cell512 ToCell<T>(this Vector512<T> x)

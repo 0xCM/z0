@@ -13,7 +13,7 @@ namespace Z0
     partial class Cells
     {
         [MethodImpl(Inline)]
-        public static ref T cast<S,T>(in S src, ref T dst)
+        public static ref T recover<S,T>(in S src, ref T dst)
             where S : unmanaged, IDataCell<S>
             where T : unmanaged, IDataCell<T>
         {

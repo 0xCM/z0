@@ -14,29 +14,35 @@ namespace Z0
     using static z;
 
     using F = Cell256;
+    using api = Cells;
 
     public readonly struct Cell256 : IDataCell<Cell256,W256,Vector256<ulong>>
     {
-        internal readonly Vector256<ulong> Data;
+        public Vector256<ulong> Content {get;}
+
+        [MethodImpl(Inline)]
+        public Cell256(Vector256<ulong> src)
+            => Content = src;
 
         public CellKind Kind => CellKind.Cell256;
 
-        public Vector256<ulong> Content
+
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => api.bytes(this);
         }
 
         public Cell128 Lo
         {
             [MethodImpl(Inline)]
-            get => Vector256.GetLower(Data);
+            get => Vector256.GetLower(Content);
         }
 
         public Cell128 Hi
         {
             [MethodImpl(Inline)]
-            get => Vector256.GetUpper(Data);
+            get => Vector256.GetUpper(Content);
         }
 
         public int BitWidth => 256;
@@ -55,52 +61,47 @@ namespace Z0
                 => new Cell256(v64u(src));
 
         [MethodImpl(Inline)]
-        public static Cell256 init<T>(Vector128<T> x, Vector128<T> y)
+        public static Cell256 init<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
-            var z = vinsert(v64u(x), default, 0);
-            return new Cell256(vinsert(v64u(y),z,1));
+            var c = z.vinsert(gcpu.v64u(a), default, LaneIndex.L0);
+            return new Cell256(z.vinsert(gcpu.v64u(b),c,LaneIndex.L1));
         }
 
         [MethodImpl(Inline)]
-        public static Cell256 init(Cell128 x, Cell128 y)
+        public static Cell256 init(Cell128 a, Cell128 b)
         {
-            var x1 = x.ToVector<ulong>();
-            var y1 = y.ToVector<ulong>();
-            var z = vinsert(x1,default, 0);
-            return new Cell256(vinsert(y1,z,1));
+            var a1 = a.ToVector<ulong>();
+            var b1 = b.ToVector<ulong>();
+            var c = vinsert(a1, default, 0);
+            return new Cell256(vinsert(b1, c, 1));
         }
-
-        [MethodImpl(Inline)]
-        public Cell256(Vector256<ulong> src)
-            => Data = src;
-
 
         [MethodImpl(Inline)]
         public bool Equals(Cell256 src)
-            => Data.Equals(src.Data);
+            => Content.Equals(src.Content);
 
         [MethodImpl(Inline)]
         public bool Equals(Vector256<ulong> src)
-            => Data.Equals(src);
+            => Content.Equals(src);
 
         [MethodImpl(Inline)]
         public Vector256<T> ToVector<T>()
             where T : unmanaged
-                => Data.As<ulong,T>();
+                => Content.As<ulong,T>();
 
         [MethodImpl(Inline)]
         public T As<T>()
              where T : struct
                => In.generic<F,T>(this);
        public string Format()
-            => Data.ToString();
+            => Content.ToString();
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
 
         public override bool Equals(object src)
             => src is Cell256 x && Equals(x);
@@ -131,19 +132,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<byte>(Cell256 x)
-            => x.Data.AsByte();
+            => x.Content.AsByte();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ushort>(Cell256 x)
-            => x.Data.AsUInt16();
+            => x.Content.AsUInt16();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<uint>(Cell256 x)
-            => x.Data.AsUInt32();
+            => x.Content.AsUInt32();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ulong>(Cell256 x)
-            => x.Data.AsUInt64();
+            => x.Content.AsUInt64();
 
         public static Cell256 Empty => default;
     }

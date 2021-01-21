@@ -9,12 +9,28 @@ namespace Z0
 
     using static Part;
 
+    using api = Cells;
+
     public readonly struct Cell8 : IDataCell<Cell8,W8,byte>
     {
-        internal readonly byte Data;
+        readonly byte Data;
+
+        [MethodImpl(Inline)]
+        public Cell8(byte src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public Cell8(sbyte src)
+            => Data = (byte)src;
 
         public CellKind Kind
             => CellKind.Cell8;
+
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => api.bytes(this);
+        }
 
         public byte Content
         {
@@ -26,19 +42,12 @@ namespace Z0
         public static Cell8 init(byte src)
             => new Cell8(src);
 
-        [MethodImpl(Inline)]
-        public static Cell8 init(sbyte src)
-            => new Cell8((byte)src);
-
         public Cell8 Zero
         {
             [MethodImpl(Inline)]
             get => Empty;
         }
 
-        [MethodImpl(Inline)]
-        internal Cell8(byte x0)
-            => Data = x0;
 
         [MethodImpl(Inline)]
         public T As<T>()
@@ -71,23 +80,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell8(byte src)
-            => init(src);
+            => new Cell8(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell8(sbyte x0)
-            => init(x0);
+            => new Cell8(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell16(Cell8 x)
-            => Cell16.init(x.Data);
+            => new Cell16(x.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(Cell8 x)
-            => Cell32.init(x.Data);
+            => new Cell32(x.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(Cell8 x)
-            => Cell64.init(x.Data);
+            => new Cell64(x.Content);
 
         [MethodImpl(Inline)]
         public static explicit operator Cell8(int x)

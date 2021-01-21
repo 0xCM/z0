@@ -53,7 +53,7 @@ namespace Z0
         {
             var data = Random.Span<ushort>(16);
             var src = Cells.alloc<Cell256>();
-            Cells.deposit(first(data), ref src);
+            Cells.store(first(data), ref src);
             var A = BitMatrix.primal(n16, Cells.byteview(src));
             var B = BitMatrix.primal(n16, data);
             Claim.Require(BitMatrix.same(A,B));

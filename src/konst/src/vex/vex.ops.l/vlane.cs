@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public enum VLane : byte
+    public enum LaneIndex : byte
     {
         L0 = 0,
 
@@ -26,10 +26,10 @@ namespace Z0
         /// Extracts the lower 128-bit lane from a source vector
         /// </summary>
         /// <param name="src">The source</param>
-        /// <param name="lane">The lane selector</param>
+        /// <param name="index">The lane selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vlane<T>(Vector256<T> src, N0 lane)
+        public static Vector128<T> vlane<T>(Vector256<T> src, N0 index)
             where T : unmanaged
              => Vector256.GetLower(src);
 
@@ -37,10 +37,10 @@ namespace Z0
         /// Extracts the lower 128-bit lane from a source vector
         /// </summary>
         /// <param name="src">The source</param>
-        /// <param name="lane">The lane selector</param>
+        /// <param name="index">The lane selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vlane<T>(Vector256<T> src, N1 lane)
+        public static Vector128<T> vlane<T>(Vector256<T> src, N1 index)
             where T : unmanaged
              => Vector256.GetUpper(src);
 
@@ -48,12 +48,12 @@ namespace Z0
         /// Extracts the lower 128-bit lane from a source vector
         /// </summary>
         /// <param name="src">The source</param>
-        /// <param name="lane">The lane selector</param>
+        /// <param name="index">The lane selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector128<T> vlane<T>(Vector256<T> src, [Imm] VLane lane)
+        public static Vector128<T> vlane<T>(Vector256<T> src, [Imm] LaneIndex index)
             where T : unmanaged
-             => lane == 0 ? vlane(src, n0) : vlane(src, n1);
+             => index == 0 ? vlane(src, n0) : vlane(src, n1);
     }
 
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifying low or hi </param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vlane(Vector128<byte> src, Vector256<byte> dst, [Imm] VLane index)
+        public static Vector256<byte> vlane(Vector128<byte> src, Vector256<byte> dst, [Imm] LaneIndex index)
             => InsertVector128(dst, src, (byte)index);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively
         /// identifying low or hi</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vlane(Vector128<short> src, Vector256<short> dst, [Imm] VLane index)
+        public static Vector256<short> vlane(Vector128<short> src, Vector256<short> dst, [Imm] LaneIndex index)
             => InsertVector128(dst, src, (byte)index);
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively
         /// identifying low or hi</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vlane(Vector128<ushort> src, Vector256<ushort> dst, [Imm] VLane index)
+        public static Vector256<ushort> vlane(Vector128<ushort> src, Vector256<ushort> dst, [Imm] LaneIndex index)
             => InsertVector128(dst, src, (byte)index);
 
         /// <summary>

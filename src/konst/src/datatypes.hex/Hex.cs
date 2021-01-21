@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using H = HexSymData;
 

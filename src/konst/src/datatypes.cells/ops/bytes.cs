@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes<F>(in F src)
             where F : unmanaged, IDataCell
-                => new Span<byte>(z.pointer(ref z.edit(src)), (int)z.size<F>());
+                => new Span<byte>(memory.pointer(ref memory.edit(src)), (int)memory.size<F>());
 
         /// <summary>
         /// Presents a fixed source value as a readonly span of bytes

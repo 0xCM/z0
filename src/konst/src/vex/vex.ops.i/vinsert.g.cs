@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct z
     {
@@ -20,12 +19,12 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] BitState index)
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] LaneIndex index)
             where T : unmanaged
                 => vinsert_u(src, dst, index);
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, BitState index)
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, LaneIndex index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -41,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, BitState index)
+        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, LaneIndex index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -57,7 +56,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, BitState index)
+        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, LaneIndex index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

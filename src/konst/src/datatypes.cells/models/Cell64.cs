@@ -9,28 +9,31 @@ namespace Z0
 
     using static Part;
 
+    using api = Cells;
+
     public readonly struct Cell64 : IDataCell<Cell64,W64,ulong>
     {
-        internal readonly ulong Data;
+        public ulong Content {get;}
 
-        public CellKind Kind => CellKind.Cell64;
+        public CellKind Kind
+            => CellKind.Cell64;
 
-        public ulong Content
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => api.bytes(this);
         }
 
         public Cell32 Lo
         {
             [MethodImpl(Inline)]
-            get => (uint)Data;
+            get => (uint)Content;
         }
 
         public Cell32 Hi
         {
             [MethodImpl(Inline)]
-            get => (uint)(Data >> 32);
+            get => (uint)(Content >> 32);
         }
 
         public Cell64 Zero
@@ -40,115 +43,82 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Cell64 init(int src)
-            => new Cell64((ulong)(long)src);
+        public Cell64(ulong x0)
+            => Content = x0;
 
         [MethodImpl(Inline)]
-        public static Cell64 init(byte src)
-            => new Cell64(src);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(ushort src)
-            => new Cell64(src);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(uint src)
-            => new Cell64(src);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(ulong src)
-            => new Cell64(src);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(Cell8 src)
-            => new Cell64(src.Data);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(Cell16 src)
-            => new Cell64(src.Data);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(Cell32 src)
-            => new Cell64(src.Data);
-
-        [MethodImpl(Inline)]
-        public static Cell64 init(long src)
-            => new Cell64((ulong)src);
-
-        [MethodImpl(Inline)]
-        Cell64(ulong x0)
-            => Data = x0;
+        public Cell64(long x0)
+            => Content = (uint)x0;
 
         [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-                => NumericCast.force<T>(Data);
+                => NumericCast.force<T>(Content);
 
         [MethodImpl(Inline)]
         public bool Equals(ulong src)
-            => Data == src;
+            => Content == src;
 
         [MethodImpl(Inline)]
         public bool Equals(Cell64 src)
-            => Data == src.Data;
+            => Content == src.Content;
 
         public string Format()
-            => Data.ToString();
+            => Content.ToString();
 
         public override string ToString()
             => Format();
 
          public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
 
         public override bool Equals(object src)
             => src is Cell64 x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(int x0)
-            => init(x0);
+            => new Cell64(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(long x0)
-            => init(x0);
+            => new Cell64(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(ulong x0)
-            => init(x0);
+            => new Cell64(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell64(Cell32 x0)
-            => init(x0);
+            => new Cell64(x0.Content);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Cell64 x)
-            => (sbyte)x.Data;
+            => (sbyte)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator short(Cell64 x)
-            => (short)x.Data;
+            => (short)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Cell64 x)
-            => (ushort)x.Data;
+            => (ushort)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(Cell64 x)
-            => (uint)x.Data;
+            => (uint)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Cell64 x)
-            => (int)x.Data;
+            => (int)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator long(Cell64 x)
-            => (long)x.Data;
+            => (long)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell64 x)
-            => x.Data;
+            => x.Content;
 
         public static Cell64 Empty => default;
-
    }
 }

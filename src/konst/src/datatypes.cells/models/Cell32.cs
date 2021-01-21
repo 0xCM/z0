@@ -9,51 +9,39 @@ namespace Z0
 
     using static Part;
 
+    using api = Cells;
+
     public readonly struct Cell32 : IDataCell<Cell32,W32,uint>
     {
-        internal readonly uint Data;
-
-        public CellKind Kind => CellKind.Cell32;
+        public uint Content {get;}
 
         [MethodImpl(Inline)]
-        public static Cell32 init(uint src)
-            => new Cell32(src);
+        public Cell32(uint x0)
+            => Content = x0;
 
         [MethodImpl(Inline)]
-        public static Cell32 init(byte src)
-            => new Cell32(src);
+        public Cell32(int x0)
+            => Content = (uint)x0;
 
-        [MethodImpl(Inline)]
-        public static Cell32 init(ushort src)
-            => new Cell32(src);
+        public CellKind Kind
+            => CellKind.Cell32;
 
-        [MethodImpl(Inline)]
-        public static Cell32 init(Cell8 src)
-            => new Cell32(src.Data);
-
-        [MethodImpl(Inline)]
-        public static Cell32 init(Cell16 src)
-            => new Cell32(src.Data);
-
-        [MethodImpl(Inline)]
-        public static Cell32 init(int src)
-            => new Cell32((uint)src);
-
-        public uint Content
+        public Span<byte> Bytes
         {
-            [MethodImpl(Inline)] get => Data;
+            [MethodImpl(Inline)]
+            get => api.bytes(this);
         }
 
         public Cell16 Lo
         {
             [MethodImpl(Inline)]
-            get => (ushort)Data;
+            get => (ushort)Content;
         }
 
         public Cell16 Hi
         {
             [MethodImpl(Inline)]
-            get => (ushort)(Data >> 16);
+            get => (ushort)(Content >> 16);
         }
 
         public Cell32 Zero
@@ -63,73 +51,69 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal Cell32(uint x0)
-            => Data = x0;
-
-        [MethodImpl(Inline)]
         public T As<T>()
             where T : struct
-              => NumericCast.force<T>(Data);
+              => NumericCast.force<T>(Content);
 
         [MethodImpl(Inline)]
         public bool Equals(Cell32 src)
-            => Data == src.Data;
+            => Content == src.Content;
 
         [MethodImpl(Inline)]
         public bool Equals(uint src)
-            => Data == src;
+            => Content == src;
 
         public string Format()
-            => Data.ToString();
+            => Content.ToString();
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => Content.GetHashCode();
 
         public override bool Equals(object src)
             => src is Cell32 x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(uint x0)
-            => init(x0);
+            => new Cell32(x0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(int x0)
-            => init(x0);
+            => new Cell32(x0);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Cell32 x)
-            => (sbyte)x.Data;
+            => (sbyte)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator byte(Cell32 x)
-            => (byte)x.Data;
+            => (byte)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator short(Cell32 x)
-            => (short)x.Data;
+            => (short)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Cell32 x)
-            => (ushort)x.Data;
+            => (ushort)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator uint(Cell32 x)
-            => x.Data;
+            => x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Cell32 x)
-            => (int)x.Data;
+            => (int)x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator long(Cell32 x)
-            => x.Data;
+            => x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell32 x)
-            => (ulong)x.Data;
+            => (ulong)x.Content;
 
         public static Cell32 Empty => default;
     }

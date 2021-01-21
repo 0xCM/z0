@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
 
     using F = Cell512;
+    using api = Cells;
 
     public readonly struct Cell512  : IDataCell<Cell512,W512,Vector512<ulong>>
     {

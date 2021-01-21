@@ -12,12 +12,10 @@ namespace Z0
     using K = ApiOperatorKind;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-
     [Free]
     public interface IOperatorClass<E> : IOperationClass, IOperationClass<E>
         where E : unmanaged, Enum
     {
-
 
     }
 

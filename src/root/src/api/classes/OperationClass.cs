@@ -17,8 +17,6 @@ namespace Z0
 
     }
 
-
-
     /// <summary>
     /// Characterizes a class-parametric operation class
     /// </summary>

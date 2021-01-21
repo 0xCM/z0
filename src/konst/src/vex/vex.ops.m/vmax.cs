@@ -89,8 +89,8 @@ namespace Z0
         [MethodImpl(Inline), Max]
         public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
         {
-            var xL = z.vinsert(x,default, BitState.Off);
-            var yL = z.vinsert(y,default, BitState.Off);
+            var xL = z.vinsert(x,default, LaneIndex.L0);
+            var yL = z.vinsert(y,default, LaneIndex.L0);
             return z.vlo(vmax(xL,yL));
         }
 

@@ -37,13 +37,25 @@ namespace alg.asm
             var foundLeftBracket = bit.Off;
             var foundRightBracket = bit.Off;
             var foundRangeSeparator = bit.Off;
+            var parsingIdentifier = bit.Off;
 
+            var identifier = asci16.Null;
             while(index-- < count)
             {
                 ref readonly var current = ref skip(codes,index);
                 if(AsciTest.whitespace(current))
                     continue;
 
+                if(!foundIdentifierStart && AsciTest.letter(current))
+                {
+                    foundIdentifierStart = true;
+                    parsingIdentifier = true;
+                }
+
+                if(parsingIdentifier)
+                {
+
+                }
 
             }
 

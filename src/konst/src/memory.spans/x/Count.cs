@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XSpan
     {
-
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
         /// </summary>

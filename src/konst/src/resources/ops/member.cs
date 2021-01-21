@@ -7,16 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Linq;
 
-    using static z;
     using static Part;
+    using static memory;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public unsafe static ResMember member<T>(MemberInfo member, ReadOnlySpan<T> src)
-            => new ResMember(member, z.segment(recover<T,byte>(src)));
+            => new ResMember(member, segment(recover<T,byte>(src)));
 
         [MethodImpl(Inline), Op]
         public unsafe static ResMember member(FieldInfo field, uint size)

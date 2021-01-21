@@ -9,6 +9,8 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using static memory;
+
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime
     /// </summary>
@@ -31,19 +33,19 @@ namespace Z0
         where T : struct
     {
         Span<byte> CellBytes
-            => z.bytes((T)this);
+            => bytes((T)this);
 
         uint IDataCell.Width
-            => (uint)Unsafe.SizeOf<T>()*8;
+            => bitsize<T>();
 
         ByteSize IDataCell.Size
-            => Unsafe.SizeOf<T>();
+            => size<T>();
 
         NumericKind NumericKind
             => Numeric.kind<T>();
 
         NumericWidth NumericWidth
-            => (NumericWidth)(z.size<T>()*8);
+            => (NumericWidth)(size<T>()*8);
     }
 
     [Free]

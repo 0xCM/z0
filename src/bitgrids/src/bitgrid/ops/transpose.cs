@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = alloc64<N8,N8,byte>();
-            var src = z.vscalar(w128,g.Data);
+            var src = cpu.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {
                 dst.Cell(i) = (byte)z.vtakemask(v8u(src));

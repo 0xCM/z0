@@ -12,17 +12,18 @@ namespace Z0
     using static memory;
 
     using F = Cell128;
+    using api = Cells;
 
     public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
     {
-        internal readonly Vector128<ulong> Data;
+        readonly Vector128<ulong> Data;
 
         [MethodImpl(Inline)]
         public Cell128(Vector128<ulong> src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        internal Cell128(ulong x0, ulong x1)
+        public Cell128(ulong x0, ulong x1)
             => Data = z.vparts(w128, x0,x1);
 
         public CellKind Kind
@@ -86,35 +87,35 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128((ulong x0, ulong x1) x)
-            => Cells.init(x);
+            => api.cell(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)
-            => Cells.init(x);
+            => api.cell(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
-            => Cells.init(x);
+            => api.cell(x);
 
         [MethodImpl(Inline)]
         public static explicit operator Cell128(ushort src)
-            => Cells.init(z.vscalar(w128,src));
+            => api.init(cpu.vscalar(w128, src));
 
         [MethodImpl(Inline)]
         public static explicit operator ushort(Cell128 src)
-            => z.vcell(z.v16u(src.Data),0);
+            => gcpu.vcell(gcpu.v16u(src.Data), 0);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)
-            => Cells.init(x);
+            => api.cell(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<uint> x)
-            => Cells.init(x);
+            => api.cell(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ulong> x)
-            => Cells.init(x);
+            => new Cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(Cell128 x)

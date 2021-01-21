@@ -146,7 +146,6 @@ namespace Z0
         public override string ToString()
             => Format();
 
-
         public static A Spaced
         {
             [MethodImpl(Inline)]

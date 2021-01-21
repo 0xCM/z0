@@ -25,7 +25,7 @@ namespace Z0
                 => ref Unsafe.As<F,T>(ref z.edit(src));
 
         [MethodImpl(Inline)]
-        internal static ref readonly F from<T,F>(in T src)
+        internal static ref F from<T,F>(in T src)
             where F : unmanaged, IDataCell
             where T : struct
                 => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));

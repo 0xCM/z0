@@ -219,9 +219,6 @@ namespace Z0
             return dst;
         }
 
-        public string Format(int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
-            => Data.FormatTable(nat32i<M>(), nat32i<N>(),  padlen, padchar, rowsep, cellsep);
-
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
 
