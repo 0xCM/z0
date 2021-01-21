@@ -22,7 +22,7 @@ namespace Z0
                 {
                     var i2 = src.IndexOf(right, i1 + 1);
                     if(i2 != -1)
-                        result = src.Substring(i1 + 1, i2 - i1 - 1);
+                        result = substring(src,i1 + 1, i2 - i1 - 1);
                 }
                 return result;
             }

@@ -407,7 +407,7 @@ namespace Z0
         /// <summary>
         /// The '[' character
         /// </summary>
-        LB = '[',
+        LBracket = '[',
 
         /// <summary>
         /// The '(' character

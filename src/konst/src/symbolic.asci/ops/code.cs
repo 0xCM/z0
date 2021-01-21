@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using H = HexSymData;
+    using H = HexCharData;
     using C = AsciCharCode;
 
     partial struct Asci

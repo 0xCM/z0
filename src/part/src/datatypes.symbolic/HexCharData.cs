@@ -18,7 +18,7 @@ namespace Z0
     /// Defines codes and symbol datasets for hex digits
     /// </summary>
     [ApiType]
-    public readonly struct HexSymData
+    public readonly struct HexCharData
     {
         /// <summary>
         /// Defines a 16-byte sequence with terms that correspond to the ASCI codes the hex digits {0..9,A..F}

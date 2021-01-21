@@ -25,9 +25,9 @@ namespace Z0
         VTab = (byte)AC.VTab,
 
         /// <summary>
-        /// The new-line character code 10
+        /// The line-feed character code 10
         /// </summary>
-        NL = (byte)AC.LF,
+        LF = (byte)AC.LF,
 
         /// <summary>
         /// The form-feed control character
@@ -477,7 +477,7 @@ namespace Z0
         /// <summary>
         /// The '[' character code 91
         /// </summary>
-        LBracket = (byte)AC.LB,
+        LBracket = (byte)AC.LBracket,
 
         /// <summary>
         /// The '<' character code 60

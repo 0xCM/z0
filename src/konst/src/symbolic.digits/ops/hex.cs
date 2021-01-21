@@ -16,11 +16,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static HexSymLo hex(LowerCased casing, byte index)
-            => skip(HexSymData.LowerSymbols, index);
+            => skip(HexCharData.LowerSymbols, index);
 
         [MethodImpl(Inline), Op]
         public static HexSymUp hex(UpperCased casing, byte index)
-            => skip(HexSymData.UpperSymbols, index);
+            => skip(HexCharData.UpperSymbols, index);
 
         [MethodImpl(Inline), Op]
         public static HexSym hex(LowerCased @case, HexDigit src)

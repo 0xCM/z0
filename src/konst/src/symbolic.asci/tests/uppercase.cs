@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
 
     using C = AsciCharCode;
+    using F = AsciCodeFacets;
 
     partial struct AsciTest
     {
@@ -19,7 +20,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         [MethodImpl(Inline), Op]
         public static bit uppercase(C src)
-            => contains((C)AsciLetterFacets.MinUpperCode, (C)AsciLetterFacets.MaxUpperCode, src);
+            => contains(F.MinUpperCode, F.MaxUpperCode, src);
 
         /// <summary>
         /// Determines whether the code of a specified character is one of <see cref='AsciLetterUpCode'/>

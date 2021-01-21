@@ -33,14 +33,14 @@ namespace Z0
                     }
                 }
 
-                return found != -1 ? src.Substring(found + 1) : src;
+                return found != -1 ?  substring(src, found + 1) : src;
             }
 
             [Op]
             public static string after(string src, string match)
             {
                 var found = src.IndexOf(match);
-                return found != -1 ? src.Substring(found + match.Length) : src;
+                return found != -1 ? substring(src,found + match.Length) : src;
             }
         }
     }

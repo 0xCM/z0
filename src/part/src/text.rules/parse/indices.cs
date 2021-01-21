@@ -22,7 +22,7 @@ namespace Z0
             /// <param name="second">THe second character to match</param>
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, char first, char second)
-                => root.pair(src.IndexOf(first), src.IndexOf(second));
+                => root.pair(index(src,first), index(src,second));
 
             /// <summary>
             /// Returns the indices of the first occurrences of the first and second strings in the source, if any
@@ -33,17 +33,6 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, string first, string second)
                 => root.pair(src.IndexOf(first), src.IndexOf(second));
-
-            [Op]
-            public static int index(string src, char match)
-            {
-                var count = src.Length;
-                ref readonly var c = ref @char(src);
-                for(var i=0; i<count; i++)
-                    if(skip(c,i) == match)
-                        return i;
-                return NotFound;
-            }
 
             /// <summary>
             /// Returns the indicies of all locations of a specified character within specified text

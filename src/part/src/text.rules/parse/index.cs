@@ -8,17 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct TextRules
     {
         partial struct Parse
         {
-            /// <summary>
-            /// Returns the substring [0,chars-1]
-            /// </summary>
-            [MethodImpl(Inline), Op]
-            public static string left(string src, int chars)
-                => Query.blank(src) ? src : substring(src, 0, src.Length < chars ? src.Length : chars);
+            [Op]
+            public static int index(ReadOnlySpan<char> src, char match)
+            {
+                var count = src.Length;
+                ref readonly var c = ref first(src);
+                for(var i=0; i<count; i++)
+                    if(skip(c, i) == match)
+                        return i;
+                return NotFound;
+            }
         }
     }
 }

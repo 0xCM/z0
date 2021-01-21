@@ -8,9 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static AsciLetterLoCode;
 
-    public readonly struct AsciSymData
+    public readonly partial struct AsciCharData
     {
         public const byte LetterCount = 26;
 
@@ -40,12 +39,6 @@ namespace Z0
             120,0,   121,0,  122,0,   123,0,   124,0,   125,0,   126,0,   127,0,    // [_,          2^8 - 1]
         };
 
-        public static ReadOnlySpan<byte> LettersLo => new byte[LetterCount]{
-            (byte)a, (byte)b, (byte)c, (byte)d, (byte)e, (byte)f, (byte)g, (byte)h,
-            (byte)i, (byte)j, (byte)k, (byte)l, (byte)m, (byte)n, (byte)o, (byte)p,
-            (byte)q, (byte)r, (byte)s, (byte)t, (byte)u, (byte)v, (byte)w, (byte)x,
-            (byte)y, (byte)AsciLetterLoCode.z,
-            };
 
         public static ReadOnlySpan<byte> CodeBytes
             => new byte[CodeByteCount]{
@@ -66,12 +59,6 @@ namespace Z0
             112, 113,114, 115, 116, 117, 118, 119,
             120, 121,122, 123, 124, 125, 126, 127,
         };
-
-        public static ReadOnlySpan<AsciLetterLoCode> LetterCodesLo
-        {
-            [MethodImpl(Inline)]
-            get => memory.recover<AsciLetterLoCode>(LettersLo);
-        }
 
         public static ReadOnlySpan<AsciCharCode> CharCodes
         {

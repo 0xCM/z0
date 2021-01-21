@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-            => slice(memory.recover<char>(AsciSymData.CharBytes), offset, count);
+            => slice(memory.recover<char>(AsciCharData.CharBytes), offset, count);
 
         /// <summary>
         /// Loads up to 16 asci scalar symbols [offset, offset + count]

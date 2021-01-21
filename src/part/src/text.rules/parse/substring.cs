@@ -13,12 +13,13 @@ namespace Z0
     {
         partial struct Parse
         {
-            /// <summary>
-            /// Returns the substring [0,chars-1]
-            /// </summary>
             [MethodImpl(Inline), Op]
-            public static string left(string src, int chars)
-                => Query.blank(src) ? src : substring(src, 0, src.Length < chars ? src.Length : chars);
+            public static string substring(string src, int start)
+                => sys.substring(src, start);
+
+            [MethodImpl(Inline), Op]
+            public static string substring(string src, int start, int len)
+                => sys.substring(src, start, len);
         }
     }
 }

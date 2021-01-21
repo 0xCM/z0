@@ -85,7 +85,7 @@ namespace Z0
             var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
             summary.WriteLine(header);
 
-            var types = array(typeof(HexSymData), typeof(KonstBytes));
+            var types = array(typeof(HexCharData), typeof(KonstBytes));
             var mod = types[0].Module;
             var props = types.StaticProperties().Where(p => p.GetGetMethod() != null && p.PropertyType == typeof(ReadOnlySpan<byte>));
 

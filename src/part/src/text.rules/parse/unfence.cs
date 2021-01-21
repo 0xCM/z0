@@ -22,15 +22,14 @@ namespace Z0
             [Op]
             public static ParseResult<string> unfence(string src, char left, char right)
             {
-                if(text.blank(src))
+                if(Query.blank(src))
                     return root.unparsed<string>(src);
 
                 if(!Query.fenced(src,left,right))
                     return root.unparsed<string>(src);
 
                 var data = src.Trim();
-                var length = data.Length;
-                return root.parsed(src, data.Substring(1, length - 2));
+                return root.parsed(src, substring(data, 1, data.Length - 2));
             }
 
             /// <summary>

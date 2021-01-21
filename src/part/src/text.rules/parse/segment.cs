@@ -21,7 +21,7 @@ namespace Z0
             /// <param name="i1">The index of the last character in the substring</param>
             [MethodImpl(Inline), Op]
             public static string segment(string src, int i0, int i1)
-                => src.Substring(i0, i1 - i0 + 1);
+                => substring(src, i0, i1 - i0 + 1);
 
             /// <summary>
             /// Extracts an index-identified substring

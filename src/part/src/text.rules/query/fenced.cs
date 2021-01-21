@@ -20,7 +20,7 @@ namespace Z0
             /// <param name="src">The text to analyze</param>
             /// <param name="left">The left boundary</param>
             /// <param name="right">The right boundary</param>
-            [MethodImpl(Inline), Op]
+            [Op]
             public static bool fenced(string src, char left, char right)
             {
                 var result = false;

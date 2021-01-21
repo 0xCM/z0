@@ -32,7 +32,7 @@ namespace Z0
                         break;
                     }
                 }
-                return found != -1 ? src.Substring(0, found) : src;
+                return found != -1 ? substring(src, 0, found) : src;
             }
         }
     }

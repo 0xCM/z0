@@ -111,6 +111,8 @@ namespace Z0
 
       FillArray,
 
-      CreateDelegate
+      CreateDelegate,
+
+      Substring
     }
 }

@@ -15,6 +15,7 @@ namespace alg.asm
     [ApiHost]
     public readonly struct algorithms
     {
+
         [MethodImpl(Inline)]
         public static section<T> section<T>(T min, T max)
             => new section<T>(min,max);
@@ -96,6 +97,7 @@ namespace alg.asm
     }
 
 /*
+
 ### VPACKSSWB instruction (VEX.128 encoded version)
 
 DEST[7:0]←SaturateSignedWordToSignedByte (SRC1[15:0]);

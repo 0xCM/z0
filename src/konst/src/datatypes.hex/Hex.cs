@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using H = HexSymData;
+    using H = HexCharData;
 
     [ApiHost(ApiNames.SymbolicHex, true)]
     public partial class Hex

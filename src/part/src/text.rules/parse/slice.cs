@@ -20,7 +20,7 @@ namespace Z0
             /// <param name="offset">The index of the first character</param>
             [MethodImpl(Inline), Op]
             public static string slice(string src, int offset)
-                => src.Substring(offset);
+                => substring(src, offset);
 
             /// <summary>
             /// Extracts a substring
@@ -30,7 +30,7 @@ namespace Z0
             /// <param name="length">The substring length</param>
             [MethodImpl(Inline), Op]
             public static string slice(string src, int offset, int length)
-                => src.Substring(offset, length);
+                => substring(src, offset, length);
 
             /// <summary>
             /// Extracts a substring beginning at a specified offset
@@ -40,7 +40,7 @@ namespace Z0
             /// <param name="length">The substring length</param>
             [MethodImpl(Inline), Op]
             public static string slice(string src, uint offset)
-                => src.Substring((int)offset);
+                => substring(src, (int)offset);
 
             /// <summary>
             /// Extracts a substring of specified length beginning at a specified offset
@@ -50,7 +50,7 @@ namespace Z0
             /// <param name="length">The substring length</param>
             [MethodImpl(Inline), Op]
             public static string slice(string src, uint offset, uint length)
-                => src.Substring((int)offset, (int)length);
+                => substring(src,(int)offset, (int)length);
         }
     }
 }

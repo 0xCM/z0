@@ -24,7 +24,7 @@ namespace Z0.Asm
         public AsmSemanticArchive(IWfShell wf)
         {
             Wf = wf;
-            Root = wf.Db().CaptureRoot() + FS.folder("asm.semantic");
+            Root = wf.Db().TableRoot() + FS.folder("asm.semantic");
         }
 
         public FS.FolderPath SemanticDir(PartId part)

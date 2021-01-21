@@ -11,6 +11,7 @@ namespace Z0
     using static z;
 
     using XF = HexSymFacet;
+    using AC = AsciChar;
 
     [ApiHost]
     public readonly partial struct SymbolicTests
@@ -23,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bit whitespace(char c)
-            => space(c) || tab(c) || newline(c);
+            => space(c) || tab(c) || newline(c) || vtab(c);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit contains<T>(ReadOnlySpan<T> src, T match)
@@ -57,21 +58,46 @@ namespace Z0
             => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
             || ((XF)src >= XF.FirstLetterLo && (XF)src <= XF.LastLetterLo);
 
-
         [MethodImpl(Inline), Op]
         public static bit upperhex(char src)
             => ((XF)src >= XF.FirstNumber && (XF)src <= XF.LastNumber)
             || ((XF)src >= XF.FirstLetterUp && (XF)src <= XF.LastLetterUp);
 
-
         [MethodImpl(Inline), Op]
         public static bit newline(char c)
-            => (ushort)AsciCharCode.NL == (ushort)c
+            => (ushort)AsciCharCode.LF == (ushort)c
             || (ushort)AsciCharCode.CR == (ushort)c;
-
 
         [MethodImpl(Inline), Op]
         public static bit tab(char c)
-            => (ushort)AsciCharCode.Tab == (ushort)c;
+            => AC.Tab == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit vtab(char c)
+            => AC.VTab == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit lbracket(char c)
+            => AC.LBracket == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit rbracket(char c)
+            => AC.RBracket == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit lbrace(char c)
+            => AC.LBrace == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit rbrace(char c)
+            => AC.RBrace == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit lparen(char c)
+            => AC.LParen == (AC)c;
+
+        [MethodImpl(Inline), Op]
+        public static bit rparen(char c)
+            => AC.RParen == (AC)c;
     }
 }

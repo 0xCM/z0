@@ -11,9 +11,9 @@ namespace Z0
     partial struct SymbolicTests
     {
         /// <summary>
-        /// Tests whether a character is either a <see cref="AsciCharCode.CR"/> or <see cref="AsciCharCode.NL"/>
+        /// Tests whether a character is either a <see cref="AsciCharCode.CR"/> or <see cref="AsciCharCode.LF"/>
         /// </summary>
-        public readonly struct IsNewLine : ISymbolicTest<IsWhitespace,char>
+        public readonly struct IsNewLine : ISymbolicTest<IsNewLine,char>
         {
             [MethodImpl(Inline)]
             public bit Check(char c)
