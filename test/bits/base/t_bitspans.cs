@@ -7,13 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     public abstract class t_bitspans<X> : t_bitgrids_base<X>
         where X : t_bitspans<X>, new()
     {
-
 
     }
 }

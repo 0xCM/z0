@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
 
@@ -42,7 +41,7 @@ namespace Z0.Asm
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-            => Z0.Asm.AsmWriter.create(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
+            => AsmServices.writer(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
         protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
         {

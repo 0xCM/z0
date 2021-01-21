@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Canonical;
     using static z;
-
 
     public static class MonoidialX
     {
@@ -44,7 +42,5 @@ namespace Z0
                 accumulate = accumulate.Mul(item);
             return accumulate;
         }
-
-
     }
 }

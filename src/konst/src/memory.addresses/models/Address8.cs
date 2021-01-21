@@ -20,6 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Address8(T offset)
             => Location = offset;
+
         public static W W => default;
 
         public bool IsEmpty

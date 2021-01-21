@@ -33,7 +33,7 @@ namespace Z0.Asm
         {
             try
             {
-                var summary = capture(exchange, src.Id, src.Address);
+                var summary = capture(exchange, src.Id, src.BaseAddress);
                 var size = summary.DataFlow.Length;
                 var code = new ApiCaptureBlock(src.Id, src.Method, summary.DataFlow.Input, summary.DataFlow.Output, summary.Outcome.TermCode);
                 return new ApiMemberCapture(src, code);

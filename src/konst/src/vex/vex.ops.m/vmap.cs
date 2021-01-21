@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
-     
-    using static Konst; 
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
+    using static Konst;
 
     partial struct z
     {
@@ -372,7 +372,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<sbyte> src, N1 n, W16 w)
-            => ConvertToVector256Int16(vhi(src));
+            => ConvertToVector256Int16(cpu.vhi(src));
 
         // ~ 256x8u -> X
         // ~ ------------------------------------------------------------------
@@ -397,7 +397,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ushort> vmap(Vector256<byte> src, N1 n, W16 w)
-            => v16u(ConvertToVector256Int16(vhi(src)));
+            => v16u(ConvertToVector256Int16(cpu.vhi(src)));
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -421,11 +421,11 @@ namespace Z0
         /// <param name="i">Specifies a target sign extension</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<byte> src, N1 n, W16 w, N1 i)
-            => ConvertToVector256Int16(vhi(src));
+            => ConvertToVector256Int16(cpu.vhi(src));
 
         // ~ 256x16i -> X
         // ~ ------------------------------------------------------------------
-        
+
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
         /// 8x16i -> 8x32i
@@ -446,7 +446,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector256<short> src, N1 n, W32 w)
-            => ConvertToVector256Int32(vhi(src));
+            => ConvertToVector256Int32(cpu.vhi(src));
 
         // ~ 256x16u -> X
         // ~ ------------------------------------------------------------------
@@ -471,7 +471,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<uint> vmap(Vector256<ushort> src, N1 n, W32 w)
-            => v32u(ConvertToVector256Int32(vhi(src)));
+            => v32u(ConvertToVector256Int32(cpu.vhi(src)));
 
         // ~ 256x32i -> X
         // ~ ------------------------------------------------------------------
@@ -496,7 +496,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector256<int> src, N1 n, W64 w)
-            => ConvertToVector256Int64(vhi(src));
+            => ConvertToVector256Int64(cpu.vhi(src));
 
         // ~ 256x32u -> X
         // ~ ------------------------------------------------------------------
@@ -521,6 +521,6 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VMap]
         public static Vector256<ulong> vmap(Vector256<uint> src, N1 n, W64 w)
-            => v64u(ConvertToVector256Int64(vhi(src)));    
+            => v64u(ConvertToVector256Int64(cpu.vhi(src)));
     }
 }

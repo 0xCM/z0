@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using Z0.Asm;
-
     public struct ApiHostAsmEmitter
     {
         public static ApiHostAsmEmitter service(IWfShell wf, IAsmContext asm, ApiHostUri uri)

@@ -11,6 +11,18 @@ namespace Z0.Asm
 
     public sealed class AsmServices : IAsmServices
     {
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst)
+            => new AsmWriter(dst, new AsmFormatter());
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, new AsmFormatter(config));
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
+            => new AsmWriter(dst, formatter);
+
         [MethodImpl(Inline)]
         public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)
             => new CaptureExchangeProxy(service, capture);

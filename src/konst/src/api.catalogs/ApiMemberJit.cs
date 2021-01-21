@@ -46,9 +46,9 @@ namespace Z0
         public static ApiMembers jit(IApiHost src)
         {
             var direct = JitDirect(src);
-            var generic = _JitGeneric(src);
+            var generic = JitGeneric(src);
             var all = direct.Concat(generic).Array();
-            return all.OrderBy(x => x.Address);
+            return all.OrderBy(x => x.BaseAddress);
         }
 
         [Op]
@@ -119,15 +119,13 @@ namespace Z0
                 let address = z.address(Jit(m.Method))
                 select new ApiMember(uri, m.Method, kid, address);
 
-        static ApiMember[] _JitGeneric(IApiHost src)
+        static ApiMember[] JitGeneric(IApiHost src)
         {
             var generic = @readonly(ApiQuery.GenericMethods(src));
             var gCount = generic.Length;
             var buffer = list<ApiMember>();
             for(var i=0; i<gCount; i++)
-            {
                 buffer.AddRange(reify(skip(generic,i)));
-            }
             return buffer.ToArray();
         }
 
@@ -160,16 +158,16 @@ namespace Z0
             return buffer;
         }
 
-        [Op]
-        static ApiMember[] JitGeneric(IApiHost src)
-            =>  (from m in ApiQuery.GenericMethods(src)
-                let kid = m.Method.KindId()
-                from t in ApiQuery.NumericClosureTypes(m.Method)
-                let reified = m.Method.MakeGenericMethod(t)
-                let address = z.address(Jit(reified))
-                let id = Diviner.Identify(reified)
-                let uri = ApiIdentity.uri(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
-                select new ApiMember(uri, reified, kid, address)).Array();
+        // [Op]
+        // static ApiMember[] JitGeneric(IApiHost src)
+        //     =>  (from m in ApiQuery.GenericMethods(src)
+        //         let kid = m.Method.KindId()
+        //         from t in ApiQuery.NumericClosureTypes(m.Method)
+        //         let reified = m.Method.MakeGenericMethod(t)
+        //         let address = z.address(Jit(reified))
+        //         let id = Diviner.Identify(reified)
+        //         let uri = ApiIdentity.uri(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
+        //         select new ApiMember(uri, reified, kid, address)).Array();
 
         static IMultiDiviner Diviner
             => MultiDiviner.Service;

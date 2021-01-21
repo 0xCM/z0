@@ -25,9 +25,6 @@ namespace Z0
                 return ParseResult.fail<ulong>(src);
         }
 
-        public static HexNumericParser Service
-            => default(HexNumericParser);
-
         [MethodImpl(Inline)]
         public T Parse<T>(string src, T @default)
             => Parse<T>(src).ValueOrDefault(@default);

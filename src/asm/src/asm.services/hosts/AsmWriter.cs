@@ -13,18 +13,6 @@ namespace Z0.Asm
 
     public readonly struct AsmWriter : IAsmWriter
     {
-        [MethodImpl(Inline), Op]
-        public static AsmWriter create(FS.FilePath dst)
-            => new AsmWriter(dst, new AsmFormatter());
-
-        [MethodImpl(Inline), Op]
-        public static AsmWriter create(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, new AsmFormatter(config));
-
-        [MethodImpl(Inline), Op]
-        public static AsmWriter create(FS.FilePath dst, IAsmFormatter formatter)
-            => new AsmWriter(dst, formatter);
-
         public static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
         {
             var count = src.Length;

@@ -8,16 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-        
-    partial struct z
+    using static Part;
+
+    partial struct gcpu
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong vhi64<T>(Vector128<T> src)
             where T : unmanaged
                 => vcell(v64u(src),1);
 
-        
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vhi256<T>(Vector512<T> src)
             where T : unmanaged

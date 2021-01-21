@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;

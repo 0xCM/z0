@@ -44,7 +44,6 @@ namespace Z0
         public static BitBlock<N64,ulong> load(BitVector64 src)
             => new BitBlock<N64, ulong>(src);
 
-
         /// <summary>
         /// Loads a bitblock from a span
         /// </summary>

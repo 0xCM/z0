@@ -18,7 +18,7 @@ namespace Z0
             var v128x8u_input = gvec.vinc<byte>(n128,0);
             var v256x16u =  cpu.vinflate(v128x8u_input, n256, z16);
             var v128x16u_a = vlo(v256x16u);
-            var v128x16u_b = vhi(v256x16u);
+            var v128x16u_b = cpu.vhi(v256x16u);
             var v128x16u_a_expect = gvec.vinc<ushort>(n128,0);
             var v128x16u_b_expect = gvec.vinc<ushort>(n128,8);
             var v128x8u_output = vcompact8u(v128x16u_a, v128x16u_b, n128, z8);
@@ -33,7 +33,7 @@ namespace Z0
             var v128x8u = gvec.vinc(default(Vector128<byte>));
             var v256x16u =  cpu.vinflate(v128x8u, n256, z16);
             var v128x16u_a = vlo(v256x16u);
-            var v128x16u_b = vhi(v256x16u);
+            var v128x16u_b = cpu.vhi(v256x16u);
 
             for(byte i=0; i<8; i++)
                 Claim.eq(vcell(v128x8u, i), vcell(v128x16u_a,i));

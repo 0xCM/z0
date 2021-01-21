@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
-            var address = src.Address;
+            var address = src.BaseAddress;
             var length = MemoryExtractor.read(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
             return new ApiMemberExtract(src, new CodeBlock(address, extracted));

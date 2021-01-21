@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class BitVector
     {
@@ -34,9 +33,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var sum = z.vadd(z.v64u(x.Data), z.v64u(y.Data));
-            Bit32 carry = x.Lo > z.vcell(sum,0);
-            return  z.generic<T>(z.vadd(sum, cpu.vbroadcast(n128, (ulong)carry)));
+            var sum = cpu.vadd(gcpu.v64u(x.Data), gcpu.v64u(y.Data));
+            bit carry = x.Lo > gcpu.vcell(sum,0);
+            return  z.generic<T>(cpu.vadd(sum, cpu.vbroadcast(n128, (ulong)carry)));
         }
     }
 }

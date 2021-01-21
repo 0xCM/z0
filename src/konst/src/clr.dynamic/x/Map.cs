@@ -27,11 +27,5 @@ namespace Z0
             where S : INullity
             where T : new()
                 => src.IsNonEmpty ? f(src) : @default ?? new T();
-
-        [MethodImpl(Inline)]
-        public static T Map<S,T>(this S src, Func<S,T> f)
-            where S : INullity
-            where T : INullary<T>, new()
-                => src.IsNonEmpty ? f(src) : new T().Zero;
     }
 }

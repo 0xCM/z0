@@ -62,9 +62,6 @@ namespace Z0
         public override int GetHashCode()
             => Location.GetHashCode();
 
-        public static A Empty
-            => new A(0);
-
         [MethodImpl(Inline)]
         public static implicit operator MemoryAddress(Address32 src)
             => src.Location;
@@ -120,5 +117,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
+
+        public static A Empty
+            => new A(0);
     }
 }

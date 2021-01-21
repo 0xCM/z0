@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static z;
 
-    readonly struct ApiHostDecoder
+    public readonly struct ApiHostDecoder
     {
         public static ApiHostDecoder create(IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, WfShell.host(typeof(ApiHostDecoder)), decoder);

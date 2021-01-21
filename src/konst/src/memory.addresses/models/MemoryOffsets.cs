@@ -8,10 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct MemoryOffsets
     {
         readonly MemoryOffset[] Offsets;
+
+        [MethodImpl(Inline)]
+        public MemoryOffsets(MemoryOffset[] src)
+            => Offsets = src;
 
         [MethodImpl(Inline), Op]
         public static MemoryOffsets offsets(params MemoryOffset[] src)
@@ -48,22 +53,6 @@ namespace Z0
                 return offset(@base, (ulong)delta);
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryOffsets(MemoryOffset[] src)
-            => new MemoryOffsets(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryOffsets(ReadOnlySpan<MemoryOffset> src)
-            => new MemoryOffsets(src.ToArray());
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemoryOffsets(Span<MemoryOffset> src)
-            => new MemoryOffsets(src.ToArray());
-
-        [MethodImpl(Inline)]
-        public MemoryOffsets(MemoryOffset[] src)
-            => Offsets = src;
-
         public ReadOnlySpan<MemoryOffset> Content
         {
             [MethodImpl(Inline)]
@@ -73,13 +62,13 @@ namespace Z0
         public ref readonly MemoryOffset this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref z.skip(Content,(uint)index);
+            get => ref skip(Content,(uint)index);
         }
 
         public ref readonly MemoryOffset this[uint index]
         {
             [MethodImpl(Inline)]
-            get => ref z.skip(Content,(uint)index);
+            get => ref skip(Content,(uint)index);
         }
 
         public int Length
@@ -93,5 +82,17 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Offsets.Length;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryOffsets(MemoryOffset[] src)
+            => new MemoryOffsets(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryOffsets(ReadOnlySpan<MemoryOffset> src)
+            => new MemoryOffsets(src.ToArray());
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryOffsets(Span<MemoryOffset> src)
+            => new MemoryOffsets(src.ToArray());
     }
 }

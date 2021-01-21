@@ -79,7 +79,6 @@ namespace Z0.Asm
                 BaseAddress = baseaddress;
             }
 
-            [MethodImpl(Inline), Op]
             static string label(string src, ulong baseaddress)
             {
                 var hex = HexNumericParser.parse(src).ValueOrDefault();

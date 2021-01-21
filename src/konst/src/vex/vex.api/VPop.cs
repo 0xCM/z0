@@ -74,13 +74,13 @@ namespace Z0
             maj = vsub(maj, vand(vsrl(maj, 1), k1));
             odd = vsub(odd, vand(vsrl(odd, 1), k1));
 
-            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
-            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
+            maj = cpu.vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
+            odd = cpu.vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
 
-            maj = vand(vadd(maj, vsrl(maj,4)), k4);
-            odd = vand(vadd(odd, vsrl(odd,4)), k4);
+            maj = vand(cpu.vadd(maj, vsrl(maj,4)), k4);
+            odd = vand(cpu.vadd(odd, vsrl(odd,4)), k4);
 
-            odd = vadd(vadd(maj, maj), odd);
+            odd = cpu.vadd(cpu.vadd(maj, maj), odd);
 
             var dst = MemoryStacks.alloc(n128);
             vsave(odd, ref dst.X0);
@@ -115,13 +115,13 @@ namespace Z0
             maj = vsub(maj, vand(z.vsrl(maj, 1), k1));
             odd = vsub(odd, vand(z.vsrl(odd, 1), k1));
 
-            maj = vadd(vand(maj,k2), vand(z.vsrl(maj, 2), k2));
-            odd = vadd(vand(odd,k2), vand(z.vsrl(odd, 2), k2));
+            maj = cpu.vadd(vand(maj,k2), vand(z.vsrl(maj, 2), k2));
+            odd = cpu.vadd(vand(odd,k2), vand(z.vsrl(odd, 2), k2));
 
-            maj = vand(vadd(maj, z.vsrl(maj,4)), k4);
-            odd = vand(vadd(odd, z.vsrl(odd,4)), k4);
+            maj = vand(cpu.vadd(maj, z.vsrl(maj,4)), k4);
+            odd = vand(cpu.vadd(odd, z.vsrl(odd,4)), k4);
 
-            odd = vadd(vadd(maj, maj), odd);
+            odd = cpu.vadd(cpu.vadd(maj, maj), odd);
 
             var dst = MemoryStacks.alloc(n256);
             ref var X = ref MemoryStacks.head(ref dst, z64);

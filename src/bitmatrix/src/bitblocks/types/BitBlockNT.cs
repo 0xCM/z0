@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A data structure that covers a natural count of packed bits
@@ -21,6 +21,25 @@ namespace Z0
     {
         readonly Span<T> data;
 
+        [MethodImpl(Inline)]
+        internal BitBlock(Span<T> src)
+        {
+            var allocated = CellWidth * (uint)src.Length;
+            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));
+            data = src;
+        }
+
+        [MethodImpl(Inline)]
+        internal BitBlock(params T[] src)
+            : this(src.AsSpan())
+        {
+
+        }
+
+        [MethodImpl(Inline)]
+        internal BitBlock(Span<T> src, bool skipChecks)
+            => data = src;
+
         /// <summary>
         /// The number of bits covered by a cell
         /// </summary>
@@ -31,7 +50,7 @@ namespace Z0
         /// The total number of bits covered by the block
         /// </summary>
         public static uint BitCount
-            => (uint)nat64u<N>();
+            => nat32u<N>();
 
         public static uint WholeCells
             => BitCount/CellWidth;
@@ -56,25 +75,6 @@ namespace Z0
         static string Format(uint capacity, uint needed)
             => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace,
                     "CellWidth*CellCount", Space, Chars.Eq, Space, capacity, Chars.Space, Chars.Lt, Chars.Space, needed);
-
-        [MethodImpl(Inline)]
-        internal BitBlock(Span<T> src)
-        {
-            var allocated = CellWidth * (uint)src.Length;
-            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));
-            data = src;
-        }
-
-        [MethodImpl(Inline)]
-        internal BitBlock(params T[] src)
-            : this(src.AsSpan())
-        {
-
-        }
-
-        [MethodImpl(Inline)]
-        internal BitBlock(Span<T> src, bool skipChecks)
-            => data = src;
 
         /// <summary>
         /// The data over which the bitvector is constructed
@@ -118,7 +118,7 @@ namespace Z0
         public bit this[int bitpos]
         {
             [MethodImpl(Inline)]
-            get => BitBlocks.readbit(in Head, bitpos);
+            get => BitBlocks.readbit(in Head, (uint)bitpos);
 
             [MethodImpl(Inline)]
             set => BitBlocks.setbit((uint)bitpos, value, ref Head);

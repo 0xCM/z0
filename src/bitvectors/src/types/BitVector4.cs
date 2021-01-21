@@ -16,20 +16,13 @@ namespace Z0
     {
         internal byte Data;
 
-        public static BitVector4 Zero => default;
-
-        public static BitVector4 One => 1;
-
-        public static BitVector4 Ones => 0xF;
-
-
         [MethodImpl(Inline)]
         internal BitVector4(byte data, bit direct)
-            => this.Data = data;
+            => Data = data;
 
         [MethodImpl(Inline)]
         public BitVector4(byte data)
-            => this.Data = (byte)(data & 0xF);
+            => Data = (byte)(data & 0xF);
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -252,5 +245,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector4 x, BitVector4 y)
             => math.gteq(x,y);
+
+        public static BitVector4 Zero => default;
+
+        public static BitVector4 One => 1;
+
+        public static BitVector4 Ones => 0xF;
     }
 }

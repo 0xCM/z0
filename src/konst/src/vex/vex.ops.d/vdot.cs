@@ -13,16 +13,15 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
-
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         [MethodImpl(Inline), Dot]
         public static long vdot(Vector256<int> x, Vector256<int> y)
         {
             var product = Multiply(x,y);
-            var sum = vadd(vlo(product), vhi(product));
+            var sum = cpu.vadd(z.vlo(product), cpu.vhi(product));
             return sum.Cell(0) + sum.Cell(1);
         }
 
@@ -30,7 +29,7 @@ namespace Z0
         public static ulong vdot(Vector256<uint> x, Vector256<uint> y)
         {
             var product = Multiply(x,y);
-            var sum = vadd(vlo(product), vhi(product));
+            var sum = cpu.vadd(z.vlo(product), cpu.vhi(product));
             return sum.Cell(0) + sum.Cell(1);
         }
     }

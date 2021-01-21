@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public abstract class t_bitgrids_base<U> : t_bitcore<U>
         where U : t_bitgrids_base<U>, new()
     {

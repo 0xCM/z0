@@ -79,7 +79,7 @@ namespace Z0
         static ref ApiRuntimeMember fill(IApiHost host, ApiMember src, ref ApiRuntimeMember dst)
         {
             var method = src.Method;
-            dst.Address = src.Address;
+            dst.Address = src.BaseAddress;
             dst.Uri = src.OpUri;
             dst.Sig = ClrDisplaySig.from(method.Metadata());
             dst.Cil = src.Cil;

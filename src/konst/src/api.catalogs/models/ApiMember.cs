@@ -23,7 +23,7 @@ namespace Z0
 
         public ApiClass ApiKind {get;}
 
-        public MemoryAddress Address {get;}
+        public MemoryAddress BaseAddress {get;}
 
         public ApiHostUri Host {get;}
 
@@ -44,7 +44,7 @@ namespace Z0
             OpUri = uri;
             ApiKind = kindId;
             Method = z.insist(method);
-            Address = address;
+            BaseAddress = address;
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(method);
             CliSig = sig ?? CliSig.Empty;
@@ -57,14 +57,14 @@ namespace Z0
             result &= OpUri.Equals(src.OpUri);
             result &= Method.Equals(src.Method);
             result &= ApiKind.Equals(src.ApiKind);
-            result &= Address.Equals(src.Address);
+            result &= BaseAddress.Equals(src.BaseAddress);
             result &= Host.Equals(src.Host);
             return result;
         }
 
         [MethodImpl(Inline)]
         public int CompareTo(ApiMember src)
-            => Address.CompareTo(src.Address);
+            => BaseAddress.CompareTo(src.BaseAddress);
 
         public static ApiMember Empty
             => new ApiMember(OpUri.Empty, EmptyVessels.EmptyMethod, 0, 0);

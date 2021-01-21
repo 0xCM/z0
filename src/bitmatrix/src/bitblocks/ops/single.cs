@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitBlocks
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="N">The bitwidth type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitBlock<N,T> single<N,T>(T src, N n = default)        
+        public static BitBlock<N,T> single<N,T>(T src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new BitBlock<N,T>(src);

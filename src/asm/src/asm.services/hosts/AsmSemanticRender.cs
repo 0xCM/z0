@@ -126,7 +126,6 @@ namespace Z0.Asm
             }
 
             render(Buffer.ToArray(), dst);
-
         }
 
         /// <summary>

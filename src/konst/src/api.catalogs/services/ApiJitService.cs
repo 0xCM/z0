@@ -28,7 +28,7 @@ namespace Z0
                 Wf.Ran(jittingPart, Msg.JittedPart.Format(partMembers.Length, part.Id));
             }
 
-            var members = all.SelectMany(x => x).OrderBy(x => x.Address).Array();
+            var members = all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array();
             var summaries = summarize(@base, members);
             var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
             var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
@@ -43,17 +43,17 @@ namespace Z0
             var count = members.Length;
             var buffer = alloc<ApiAddressRecord>(count);
             ref var dst = ref first(buffer);
-            var rebase = first(members).Address;
+            var rebase = first(members).BaseAddress;
             for(uint seq=0; seq<count; seq++)
             {
                 ref var record = ref seek(dst,seq);
                 ref readonly var member = ref skip(members, seq);
                 record.Sequence = seq;
                 record.ProcessBase = @base;
-                record.MemberBase = member.Address;
-                record.MemberOffset = member.Address - @base;
-                record.MemberRebase = member.Address - rebase;
-                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).Address - record.MemberBase) : 0ul;
+                record.MemberBase = member.BaseAddress;
+                record.MemberOffset = member.BaseAddress - @base;
+                record.MemberRebase = member.BaseAddress - rebase;
+                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
                 record.HostName = member.Host.Name;
                 record.PartName = member.Host.Owner.Format();
                 record.Identifier = member.Id;

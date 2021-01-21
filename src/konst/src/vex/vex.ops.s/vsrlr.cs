@@ -111,7 +111,7 @@ namespace Z0
         {
             var y = v16i(count);
             var lo = vsrlr(cpu.vinflate(vlo(src),w256,z16i),y);
-            var hi = vsrlr(cpu.vinflate(vhi(src),w256,z16i),y);
+            var hi = vsrlr(cpu.vinflate(cpu.vhi(src),w256,z16i),y);
             return vcompact8i(lo,hi, w256);
         }
 
@@ -125,7 +125,7 @@ namespace Z0
         {
             var y = v16u(count);
             var lo = vsrlr(cpu.vinflate(vlo(src),w256,z16),y);
-            var hi = vsrlr(cpu.vinflate(vhi(src),w256,z16),y);
+            var hi = vsrlr(cpu.vinflate(cpu.vhi(src),w256,z16),y);
             return vcompact8u(lo,hi, w256);
         }
 

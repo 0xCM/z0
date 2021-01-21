@@ -76,7 +76,7 @@ namespace Z0
                 var op = src[i];
                 records[i] = new ApiExtractBlock(
                     Sequence : i,
-                    Address : op.Member.Address,
+                    Address : op.Member.BaseAddress,
                     Length : op.Encoded.Length,
                     Uri : op.OpUri,
                     OpSig : op.Member.Method.Metadata().Format(),

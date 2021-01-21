@@ -111,7 +111,7 @@ namespace Z0
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
             var x = v16u(ShiftRightLogical(cpu.vinflate(vlo(src), n256, z16i),count));
-            var y = v16u(ShiftRightLogical(cpu.vinflate(vhi(src), n256, z16i),count));
+            var y = v16u(ShiftRightLogical(cpu.vinflate(cpu.vhi(src), n256, z16i),count));
             var m = v16u(cpu.vbroadcast(n256, byte.MaxValue));
             return v8i(vcompact8u(vand(x,m), vand(y,m),n256,z8));
         }

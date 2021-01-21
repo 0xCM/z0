@@ -41,7 +41,6 @@ namespace Z0
              get => Empty;
         }
 
-
         [MethodImpl(Inline)]
         public bool Equals(A src)
             => Location == src.Location;

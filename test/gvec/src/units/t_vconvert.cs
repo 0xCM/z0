@@ -31,7 +31,7 @@ namespace Z0
             var yE = vparts(n128,5,6,7,8);
             var z = vconvert32u(block, n256);
             Claim.eq(xE, vlo(z));
-            Claim.eq(yE, vhi(z));
+            Claim.eq(yE, cpu.vhi(z));
         }
 
         public void block_32x8u_to_2x128x64u()
@@ -42,7 +42,7 @@ namespace Z0
 
             var z = vconvert64u(block,n256);
             Claim.eq(xE, vlo(z));
-            Claim.eq(yE, vhi(z));
+            Claim.eq(yE, cpu.vhi(z));
         }
 
         public void block_128x8u_to_2x128x16u()
@@ -53,7 +53,7 @@ namespace Z0
             var z = vconvert16u(block,n256);
 
             Claim.eq(xE, vlo(z));
-            Claim.eq(yE, vhi(z));
+            Claim.eq(yE, cpu.vhi(z));
         }
 
         public void v128x8u_v128x16u()
@@ -80,7 +80,7 @@ namespace Z0
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
             var y0s = vlo(q).ToSpan();
-            var y1s = vhi(q).ToSpan();
+            var y1s = cpu.vhi(q).ToSpan();
 
             for(var i=0; i <8; i++)
             {
@@ -96,7 +96,7 @@ namespace Z0
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
             var y0s = vlo(y).ToSpan();
-            var y1s = vhi(y).ToSpan();
+            var y1s = cpu.vhi(y).ToSpan();
 
             for(var i=0; i <4; i++)
             {
@@ -155,7 +155,7 @@ namespace Z0
                 var sv = Random.CpuVector(sw,st);
                 var tv = cpu.vconvert16u(sv,n256,tt);
                 var tvLo = vlo(tv);
-                var tvHi = vhi(tv);
+                var tvHi = cpu.vhi(tv);
 
                 sv.StoreTo(sb);
                 tvLo.StoreTo(tb,0);

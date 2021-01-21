@@ -81,7 +81,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector512<long> vconvert64i(Vector256<short> src, W512 w, long t)
-            => (ConvertToVector256Int64(z.vlo(src)), ConvertToVector256Int64(z.vhi(src)));
+            => (ConvertToVector256Int64(z.vlo(src)), ConvertToVector256Int64(cpu.vhi(src)));
 
         /// <summary>
         /// 32x8u -> (16x16u, 16x16u)
@@ -129,10 +129,6 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector1024<ulong> vconvert64u(Vector256<ushort> src, W1024 w, ulong t)
-            => (cpu.vconvert64u(z.vlo(src), w512, t), cpu.vconvert64u(z.vhi(src), w512, t));
-    }
-
-    partial struct z
-    {
+            => (cpu.vconvert64u(z.vlo(src), w512, t), cpu.vconvert64u(cpu.vhi(src), w512, t));
     }
 }

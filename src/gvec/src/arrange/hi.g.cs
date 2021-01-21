@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vhi<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => z.vhi(v64u(src), out x0, out x1);
+                => cpu.vhi(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the hi 128-bit lane of the source vector to a pair
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vhi<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref z.vhi(v64u(src), ref dst);
+                => ref cpu.vhi(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the upper 256-bits from the source vector
@@ -74,13 +74,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vhi(v8u(src)));
+                return generic<T>(cpu.vhi(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vhi(v16u(src)));
+                return generic<T>(cpu.vhi(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vhi(v32u(src)));
+                return generic<T>(cpu.vhi(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vhi(v64u(src)));
+                return generic<T>(cpu.vhi(v64u(src)));
             else
                 return vhi_i(src);
         }
@@ -90,13 +90,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vhi(v8i(src)));
+                return generic<T>(cpu.vhi(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vhi(v16i(src)));
+                return generic<T>(cpu.vhi(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vhi(v32i(src)));
+                return generic<T>(cpu.vhi(v32i(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vhi(v64i(src)));
+                return generic<T>(cpu.vhi(v64i(src)));
             else
                 return vhi_f(src);
         }
@@ -106,9 +106,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vhi(v32f(src)));
+                return generic<T>(cpu.vhi(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vhi(v64f(src)));
+                return generic<T>(cpu.vhi(v64f(src)));
             else
                 throw no<T>();
         }

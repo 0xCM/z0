@@ -103,7 +103,7 @@ namespace Z0.Asm
         }
 
         public Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f)
-            => Decode(new CodeBlock(src.BaseAddress,src.Data),f);
+            => Decode(new CodeBlock(src.BaseAddress, src.Data), f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
         {
