@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class XSpan
     {
@@ -20,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> Concat<T>(this ReadOnlySpan<T> head, ReadOnlySpan<T> tail)
         {
-            var dst = z.span<T>(head.Length + tail.Length);
+            var dst = span<T>(head.Length + tail.Length);
             head.CopyTo(dst);
             tail.CopyTo(dst, head.Length);
             return dst;
@@ -34,6 +35,6 @@ namespace Z0
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline), Op]
         public static Span<T> Concat<T>(this Span<T> head, ReadOnlySpan<T> tail)
-            => z.@readonly(head).Concat(tail);
+            => @readonly(head).Concat(tail);
     }
 }

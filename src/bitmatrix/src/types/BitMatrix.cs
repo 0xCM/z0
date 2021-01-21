@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(Content.Cast<T,S>());
+                => new BitMatrix<S>(Content.Recover<T,S>());
     }
 }

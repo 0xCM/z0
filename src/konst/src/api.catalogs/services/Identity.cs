@@ -44,7 +44,7 @@ namespace Z0
                 {
                     if(argtype.IsVector())
                         last = text.concat(IDI.Vector, ApiIdentify.width(argtype).FormatValue());
-                    else if(argtype.IsBlocked())
+                    else if(argtype.IsSegmented())
                         last = text.concat(IDI.Block, ApiIdentify.width(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();

@@ -63,14 +63,6 @@ namespace Z0
                 => scalars(cover(z.vref(ref src), cpu.vcount<T>(W512.W)), maxbits);
 
         /// <summary>
-        /// Constructs a bitstring from a span of bits
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        [MethodImpl(Inline)]
-        public static BitString load(ReadOnlySpan<Bit32> src)
-            => new BitString(src);
-
-        /// <summary>
         /// Constructs a bitstring from primal value
         /// </summary>
         /// <param name="src">The source value</param>

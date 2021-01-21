@@ -64,7 +64,6 @@ namespace Z0
                     gmath.sll(seg2, (byte)spec[2].StartPos),
                     gmath.sll(seg3, (byte)spec[3].StartPos));
                 Claim.eq(input,output);
-
             }
         }
 

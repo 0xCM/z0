@@ -83,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowBits<S> As<S>()
             where S : unmanaged
-                => new RowBits<S>(data.Cast<T,S>());
+                => new RowBits<S>(data.Recover<T,S>());
 
         /// <summary>
         /// Computes the bitwise AND between the operands

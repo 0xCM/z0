@@ -36,25 +36,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
-            first(Data.Cast<T,ushort>()) = Zero16u;
+            first(Data.Recover<T,ushort>()) = Zero16u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W32 w)
         {
-            first(Data.Cast<T,uint>()) = Zero32u;
+            first(Data.Recover<T,uint>()) = Zero32u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W64 w)
         {
-            first(Data.Cast<T,ulong>()) = Zero64u;
+            first(Data.Recover<T,ulong>()) = Zero64u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W128 w)
         {
-            first(Data.Cast<T,Cell128>()) = Cell128.Empty;
+            first(Data.Recover<T,Cell128>()) = Cell128.Empty;
         }
     }
 }

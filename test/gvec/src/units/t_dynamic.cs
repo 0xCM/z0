@@ -16,7 +16,7 @@ namespace Z0
             {
                 foreach(var t in method.ParameterTypes())
                 {
-                    Claim.yea(t.IsBlocked(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
+                    Claim.yea(t.IsSegmented(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
                     var width = ApiIdentify.width(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
                 }

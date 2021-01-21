@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class XSpan
     {
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> Bytes<T>(this Span<T> src, int offset, int ? length = null)
             where T : struct
-                => z.bytes(src, offset,length);
+                => bytes(src, offset,length);
 
         /// <summary>
         /// Presents a span of generic values as a span of bytes
@@ -31,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<byte> Bytes<T>(this Span<T> src)
             where T : struct
-                => z.bytes(src);
+                => bytes(src);
 
         /// <summary>
         /// Presents a readonly span of generic values as a span of readonly bytes
@@ -41,6 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> Bytes<T>(this ReadOnlySpan<T> src)
             where T : struct
-                => z.bytes(src);
+                => bytes(src);
     }
 }

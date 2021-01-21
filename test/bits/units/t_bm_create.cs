@@ -12,6 +12,16 @@ namespace Z0
 
     public class t_bm_create : t_bitmatrix<t_bm_create>
     {
+
+        void bm_format_n7x9x8()
+        {
+            var m1 = BitMatrix.alloc<N7,N9,byte>();
+            m1.Fill(bit.On);
+            var fmt = m1.Format().RemoveBlanks();
+
+            Claim.eq(7*9, fmt.Length);
+        }
+
         public void bm_cellcount()
         {
             Claim.eq(BitMatrix.cellcount<N2,N1,byte>(),2);
@@ -63,14 +73,6 @@ namespace Z0
             }
         }
 
-        public void bm_format_n7x9x8()
-        {
-            var m1 = BitMatrix.alloc<N7,N9,byte>();
-            m1.Fill(Bit32.On);
-            var fmt = m1.Format().RemoveBlanks();
-
-            Claim.eq(7*9, fmt.Length);
-        }
 
         public void bm_init_n7x9x8()
         {

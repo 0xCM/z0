@@ -29,7 +29,7 @@ namespace Z0
             => configure(false);
 
         [MethodImpl(Inline), Op]
-        public static void format(byte[] src, Span<char> dst)
+        public static void format(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var input = span(src);
             var config = DefaultConfig;
@@ -82,12 +82,16 @@ namespace Z0
 
         [Op]
         public static string format(params bit[] src)
+            => format(src.ToReadOnlySpan());
+
+        [Op]
+        public static string format(ReadOnlySpan<bit> src)
         {
             var count = src.Length;
             if(count == 0)
                 return EmptyString;
 
-            var terms = @readonly(src);
+            var terms = src;
             Span<char> dst = stackalloc char[count];
             for(var i=0u; i<count; i++)
                 seek(dst,i) = skip(terms,i).ToChar();
@@ -122,7 +126,7 @@ namespace Z0
             => _format(first(src), src.Length, maxbits, dst);
 
         [Op]
-        public static ReadOnlySpan<char> chars(byte[] src)
+        public static Span<char> chars(ReadOnlySpan<byte> src)
         {
             var dst = span<char>(src.Length*8);
             var input = span(src);

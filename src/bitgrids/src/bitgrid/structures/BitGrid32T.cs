@@ -41,7 +41,7 @@ namespace Z0
 
         public uint Content { [MethodImpl(Inline)] get => Data; }
 
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
+        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Recover<T>(); }
 
         public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
 

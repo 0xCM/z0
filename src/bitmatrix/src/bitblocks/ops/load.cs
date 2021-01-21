@@ -13,6 +13,39 @@ namespace Z0
     partial class BitBlocks
     {
         /// <summary>
+        /// Converts the source bitvector to bit cells
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N8,byte> load(BitVector8 src)
+            => new BitBlock<N8, byte>(src);
+
+        /// <summary>
+        /// Converts the source bitvector to an equivalent natural/generic bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N16,ushort> load(BitVector16 src)
+            => new BitBlock<N16, ushort>(src);
+
+        /// <summary>
+        /// Converts the source bitvector to an equivalent natural/generic bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N32,uint> load(BitVector32 src)
+            => new BitBlock<N32, uint>(src);
+
+        /// <summary>
+        /// Converts the source bitvector it the equivalent natural/generic bitvector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static BitBlock<N64,ulong> load(BitVector64 src)
+            => new BitBlock<N64, ulong>(src);
+
+
+        /// <summary>
         /// Loads a bitblock from a span
         /// </summary>
         /// <param name="src">The source span</param>
@@ -74,7 +107,7 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(Span<byte> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N,T>(src.Cast<byte,T>());
+                => new BitBlock<N,T>(src.Recover<byte,T>());
 
         /// <summary>
         /// Creates a bitvector from a span of bytes

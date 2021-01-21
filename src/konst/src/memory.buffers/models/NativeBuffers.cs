@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Buffer<T>(byte index)
             where T : unmanaged
-                => Buffer(index).Cast<T>();
+                => Buffer(index).Recover<T>();
 
         /// <summary>
         /// Retrieves an index-identified token

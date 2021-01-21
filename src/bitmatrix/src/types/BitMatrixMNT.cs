@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(Bit32 value)
+        public void Fill(bit value)
         {
             if(value)
                 Content.Fill(maxval<T>());
@@ -208,7 +208,7 @@ namespace Z0
         public string Format()
         {
             var sb = text.build();
-            for(var i=0; i< RowCount; i++)
+            for(var i=0; i<RowCount; i++)
                  sb.AppendLine(ReadRow(i).Format(1));
             return sb.ToString();
         }

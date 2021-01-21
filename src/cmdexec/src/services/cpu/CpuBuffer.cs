@@ -90,24 +90,24 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public void Clear(W128 w, byte index)
         {
-            first(Content.Cast<byte,Cell128>()) = Cell128.Empty;
+            first(Content.Recover<byte,Cell128>()) = Cell128.Empty;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W256 w, byte index)
         {
-            first(Content.Cast<byte,Cell256>()) = Cell256.Empty;
+            first(Content.Recover<byte,Cell256>()) = Cell256.Empty;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W512 w, byte index)
         {
-            first(Content.Cast<byte,Cell512>()) = Cell512.Empty;
+            first(Content.Recover<byte,Cell512>()) = Cell512.Empty;
         }
 
         [MethodImpl(Inline), Op]
         public ref Cell512 Cell(W512 w, byte index)
-            => ref seek(Content.Cast<byte,Cell512>(), index);
+            => ref seek(Content.Recover<byte,Cell512>(), index);
 
         [MethodImpl(Inline)]
         uint offset(byte index)

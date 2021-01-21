@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Linq;
 
-    partial class BlockedKinds
+    partial class SegmentedKinds
     {
         /// <summary>
         /// Determines the segment kind classifier for a blocked type
         /// </summary>
         /// <param name="t">The type to examine</param>
         public static NumericKind segment(Type t)
-            => t.IsBlocked() ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
+            => t.IsSegmented() ?  t.SuppliedTypeArgs().First().NumericKind() : NumericKind.None;
     }
 }

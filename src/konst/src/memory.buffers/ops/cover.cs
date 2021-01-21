@@ -24,6 +24,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(BufferToken src)
             where T : unmanaged
-                => memory.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();
+                => memory.cover(src.Address.Pointer<byte>(), src.BufferSize).Recover<T>();
     }
 }

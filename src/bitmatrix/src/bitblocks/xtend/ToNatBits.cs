@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XBitBlocks
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N8,byte> ToNatBits(this BitVector8 src)
-            => new BitBlock<N8, byte>(src);
+            => BitBlocks.load(src);
 
         /// <summary>
         /// Converts the source bitvector to an equivalent natural/generic bitvector
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N16,ushort> ToNatBits(this BitVector16 src)
-            => new BitBlock<N16, ushort>(src);
+            => BitBlocks.load(src);
 
         /// <summary>
         /// Converts the source bitvector it the equivalent natural/generic bitvector
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static BitBlock<N64,ulong> ToNatBits(this BitVector64 src)
-            => new BitBlock<N64, ulong>(src);
+            => BitBlocks.load(src);
 
         /// <summary>
         /// Constructs a bitvector of natural length from a source span
@@ -46,7 +46,7 @@ namespace Z0
         public static BitBlock<N,T> ToNatBits<N,T>(this ReadOnlySpan<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitBlocks.load(src,n);
+                => BitBlocks.load(src, n);
 
         /// <summary>
         /// Constructs a bitvector of natural length from a source span

@@ -12,30 +12,6 @@ namespace Z0
 
     public class t_bg_dim : t_bitgrids<t_bg_dim>
     {
-        public void nbg_describe_dim()
-        {
-            var g1 = Dimensions.dim<N128,N4,N32,uint>();
-            Claim.eq(g1.BitCount,128);
-            Claim.eq(g1.BlockLength,4);
-            Claim.eq(g1.BlockWidth,128);
-            Claim.eq(g1.ByteCount,16);
-            Claim.eq(g1.CellCount,4);
-            Claim.eq(g1.CellWidth,32);
-            Claim.eq(g1.ColCount, 32);
-            Claim.eq(g1.RowCount, 4);
-            Claim.eq(g1.BlockCount,1);
-
-            var g2 = Dimensions.dim<N256,N16,N16,byte>();
-            Claim.eq(g2.BitCount,256);
-            Claim.eq(g2.BlockLength,32);
-            Claim.eq(g2.BlockWidth,256);
-            Claim.eq(g2.ByteCount,32);
-            Claim.eq(g2.CellCount,32);
-            Claim.eq(g2.CellWidth,8);
-            Claim.eq(g2.ColCount, 16);
-            Claim.eq(g2.RowCount, 16);
-            Claim.eq(g2.BlockCount,1);
-        }
 
         public void nbg_dimensions()
         {

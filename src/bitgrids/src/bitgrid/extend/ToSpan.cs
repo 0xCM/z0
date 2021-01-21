@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {   
+    {
         /// <summary>
         /// Extracts grid content to a span
         /// </summary>
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid16<T> src)
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid32<T> src)
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this BitGrid64<T> src)
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -53,7 +53,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -67,7 +67,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -109,8 +109,8 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
-        
+                => z.bytes(src.Data).Recover<T>();
+
         /// <summary>
         /// Extracts grid content to a span
         /// </summary>
@@ -123,7 +123,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span
@@ -137,7 +137,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.bytes(src.Data).Cast<T>();
+                => z.bytes(src.Data).Recover<T>();
 
         /// <summary>
         /// Extracts grid content to a span

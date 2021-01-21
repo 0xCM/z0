@@ -67,6 +67,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public S Peek<S>()
             where S : unmanaged
-                => first(Buffer.Cast<T,S>());
+                => first(Buffer.Recover<T,S>());
     }
 }

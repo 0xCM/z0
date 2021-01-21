@@ -19,7 +19,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len == 0)
-                return new T[]{};
+                return sys.empty<T>();
 
             Span<T> dst = new T[len*2 - 1];
             for(int i=0, j=0; i<len; i++, j+= 2)

@@ -121,22 +121,6 @@ namespace Z0
             => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
-        /// Converts a span of bits to a to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString(this Span<Bit32> src)
-            => BitString.load((ReadOnlySpan<Bit32>)src);
-
-        /// <summary>
-        /// Converts a readonly span of bits to a bitstring
-        /// </summary>
-        /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]
-        public static BitString ToBitString(this ReadOnlySpan<Bit32> src)
-            => BitString.load(src);
-
-        /// <summary>
         /// Converts span content to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>

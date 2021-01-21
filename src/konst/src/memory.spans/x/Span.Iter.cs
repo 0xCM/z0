@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void Iter<T>(this Span<T> src, Action<T> f)
-            => z.iter(src,f);
+            => root.iter(src,f);
     }
 }

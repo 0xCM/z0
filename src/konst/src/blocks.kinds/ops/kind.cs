@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
 
-    using BK = SegBlockKind;
+    using BK = SegKind;
     using TW = TypeWidth;
     using ID = NumericApiKind;
 
-    partial class BlockedKinds
+    partial class SegmentedKinds
     {
         /// <summary>
         /// Determines the block classifier for a blocked type
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static BK kind(Type t)
-            => kind(BlockedKinds.width(t), BlockedKinds.segment(t).ApiKind());
+            => kind(SegmentedKinds.width(t), SegmentedKinds.segment(t).ApiKind());
 
         [Op]
         public static BK kind(TW width, ID id)

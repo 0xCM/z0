@@ -17,8 +17,8 @@ namespace Z0
         {
             if(t.IsVector())
                 return Widths.vector(t);
-            else if(t.IsBlocked())
-                return Widths.blocked(t);
+            else if(t.IsSegmented())
+                return Widths.segmented(t);
             if(NumericKinds.test(t))
                 return (TypeWidth)Widths.numeric(t);
             else

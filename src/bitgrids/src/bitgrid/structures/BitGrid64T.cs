@@ -34,7 +34,7 @@ namespace Z0
 
         public uint CellCount { [MethodImpl(Inline)] get => 8/size<T>(); }
 
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Cast<T>(); }
+        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Recover<T>(); }
 
         public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
 

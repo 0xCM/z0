@@ -13,11 +13,11 @@ namespace Z0
     partial class XApi
     {
         /// <summary>
-        /// Returns true if the source type is intrinsic or blocked
+        /// Determines whether a type is classified as a blocked type via attribution
         /// </summary>
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsSegmented(this Type t)
-            => t.IsBlocked() || t.IsVector();
+            => t.Tagged<SegmentedAttribute>();
     }
 }

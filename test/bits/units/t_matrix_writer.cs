@@ -26,13 +26,13 @@ namespace Z0.Test
         public void check_matrix_emission_n19xn32x8u()
             => check(Pow2.T03, n19, n32, t8u);
 
-        public void check_matrix_emission_n5xn5x32u()
+        void check_matrix_emission_n5xn5x32u()
             => check(Pow2.T03, n5, n5, t32u);
 
-        public void check_matrix_emission_n31xn31x32u()
+        void check_matrix_emission_n31xn31x32u()
             => check(Pow2.T03, n31, n31, t32u);
 
-        public void check_matrix_emission_n5xn5x64f()
+        void check_matrix_emission_n5xn5x64f()
             => check(Pow2.T03, n5, n5, t64f);
 
         void check(uint count, N12 m, N14 n, I64 k)

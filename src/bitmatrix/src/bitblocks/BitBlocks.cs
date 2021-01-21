@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost]
     public static partial class XBitBlocks
     {
 
@@ -19,6 +20,7 @@ namespace Z0
     public partial class BitBlocks
     {
         const NumericKind Closure = UnsignedInts;
+
 
         /// <summary>
         /// Reads a cell determined by a linear bit position

@@ -13,7 +13,7 @@ namespace Z0
     partial class XSpan
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T? First<T>(this ReadOnlySpan<T> src, ValuePredicate<T> predicate)
+        public static T? First<T>(this ReadOnlySpan<T> src, Func<T,bool> predicate)
             where T : struct
         {
             var count = src.Length;
@@ -40,7 +40,7 @@ namespace Z0
         {
             if(src.IsEmpty)
                 ThrowEmptySpanError();
-            return ref z.first(src);
+            return ref first(src);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]

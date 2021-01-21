@@ -13,6 +13,27 @@ namespace Z0
 
     public class t_bm_equality : t_bitmatrix<t_bm_equality>
     {
+
+        void bm_equality_8x8x8()
+        {
+            var n = n8;
+            for(var i=0; i<RepCount; i++)
+            {
+
+                var m1 = Random.BitMatrix(n);
+                Claim.Require(BitMatrix.same(m1,m1));
+
+                var m2 = m1.Replicate();
+                Claim.Require(BitMatrix.same(m1,m2));
+                Claim.Require(are_equal(m1,m2));
+
+                m2[5,5] = !m1[5,5];
+                Claim.nea(BitMatrix.same(m1,m2));
+                Claim.nea(m1.Equals(m2));
+
+            }
+        }
+
         static bool are_equal(in BitMatrix8 A, in BitMatrix8 B)
         {
             var n = BitMatrix8.N;
@@ -39,34 +60,6 @@ namespace Z0
             return result;
         }
 
-        public void bm_equality_8x8x8()
-        {
-            var n = n8;
-            for(var i=0; i<RepCount; i++)
-            {
-
-                // var bBytes = Random.BitMatrix(n).Bytes;
-                // Trace(bBytes.FormatBits());
-                // //var bCell = Bytes.cell<ulong>(bBytes);
-                // var bCell1 = BitConverter.ToUInt64(bBytes);
-                // Trace(bCell1.FormatHex());
-                // var bCell2 = Bytes.cell<ulong>(bBytes);
-                // Trace(bCell2.FormatHex());
-
-
-                var m1 = Random.BitMatrix(n);
-                Claim.Require(BitMatrix.same(m1,m1));
-
-                var m2 = m1.Replicate();
-                Claim.Require(BitMatrix.same(m1,m2));
-                Claim.Require(are_equal(m1,m2));
-
-                m2[5,5] = !m1[5,5];
-                Claim.nea(BitMatrix.same(m1,m2));
-                Claim.nea(m1.Equals(m2));
-
-            }
-        }
 
         public void bm_equality_16x16x16()
         {

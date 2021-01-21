@@ -14,5 +14,17 @@ namespace Z0
         {
 
         }
+
+        public SegmentedAttribute(TypeWidth width, params CellWidth[] cells)
+            : this(width, false, cells)
+        {
+        }
+
+        public SegmentedAttribute(TypeWidth width, SpanBlockKind kind)
+            : this(width, false)
+        {
+
+        }
+
     }
 }

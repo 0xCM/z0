@@ -24,7 +24,7 @@ namespace Z0
         public static Span<T> MapRange<S,T>(this ReadOnlySpan<S> src, int offset, int length, Func<S,T> f)
         {
             Span<T> dst = new T[length];
-            for (uint i = (uint)offset; i < length; i++)
+            for (uint i = (uint)offset; i<length; i++)
                 seek(dst,i) = f(skip(src,i));
             return dst;
         }
@@ -52,7 +52,7 @@ namespace Z0
         public static T[] MapArray<S,T>(this ReadOnlySpan<S> src, Func<S,T> f)
         {
             var buffer = new T[src.Length];
-            z.map(src,f,buffer);
+            root.map(src,f,buffer);
             return buffer;
        }
     }

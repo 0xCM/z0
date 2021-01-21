@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    partial class BlockedKinds
+    partial class SegmentedKinds
     {
         public static TypeWidth width(Type src)
-            => Widths.blocked(src);
+            => Widths.segmented(src);
     }
 }

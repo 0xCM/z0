@@ -16,7 +16,7 @@ namespace Z0
     /// s = {u | i | f} as determined by kind[30..31]
     /// </summary>
     [Flags]
-    public enum SegBlockKind : uint
+    public enum SegKind : uint
     {
         None = 0,
 

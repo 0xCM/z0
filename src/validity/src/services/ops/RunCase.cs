@@ -19,27 +19,25 @@ namespace Z0
             var exectime = Duration.Zero;
             var casename = ApiUri.TestCase(method);
             var clock = Time.counter(false);
-            var messages = new List<IAppMsg>();
-            var outcomes = z.list<TestCaseRecord>();
+            var messages = root.list<IAppMsg>();
+            var outcomes = root.list<TestCaseRecord>();
 
             if(DiagnosticMode)
                 term.print($"Executing case {unit.HostType.Name}/{method.Name}");
 
-            var started = now();
+            var started = root.now();
             var finished = started;
             try
             {
-
                 messages.Add(PreCase(casename, started));
 
                 clock.Start();
                 method.Invoke(unit,null);
                 clock.Stop();
-                finished = now();
+                finished = root.now();
 
                 messages.AddRange(unit.Dequeue());
                 messages.Add(PostCase(casename, clock.Time, started, finished));
-
                 outcomes.AddRange(unit.TakeOutcomes().Array());
 
                 if(outcomes.Count == 0)
@@ -52,7 +50,7 @@ namespace Z0
             catch(Exception e)
             {
                 clock.Stop();
-                finished = now();
+                finished = root.now();
                 var message = format(e);
                 messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));
@@ -71,10 +69,7 @@ namespace Z0
             => e switch {
                 TargetInvocationException ie => format(e.InnerException),
                 ClaimException ce => ce.Message.Format(),
-                //ArgumentOutOfRangeException re => $"Argument out of range:{re.Source}",
-                //FormatException fe => $"Format error:{fe.Source}",
                 _ => e.ToString()
             };
-
     }
 }

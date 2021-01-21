@@ -113,7 +113,7 @@ namespace Z0
             {
                 var src = Random.Next<S>();
                 counter.Start();
-                gbits.unpack(src,dst);
+                gbits.unpack(src, dst);
                 counter.Stop();
             }
 

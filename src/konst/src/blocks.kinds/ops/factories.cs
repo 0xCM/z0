@@ -7,264 +7,264 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class BlockedKinds
+    partial class SegmentedKinds
     {
         [KindFactory]
-        public static Blocked16 b16()
+        public static Seged16 seg16()
             => default;
 
         [KindFactory]
-        public static Blocked32 b32()
+        public static Seged32 seg32()
             => default;
 
         [KindFactory]
-        public static Blocked64 b64()
+        public static Seged64 seg64()
             => default;
 
         [KindFactory]
-        public static Blocked128 b128()
+        public static Seged128 seg128()
             => default;
 
         [KindFactory]
-        public static Blocked256 b256()
+        public static Seged256 seg256()
             => default;
 
         [KindFactory]
-        public static Blocked512 b512()
+        public static Seged512 seg512()
             => default;
 
         [KindFactory]
-        public static Block16x8u b16x8u()
+        public static Seg16x8u seg16x8u()
             => default;
 
         [KindFactory]
-        public static Block16x8i b16x8i()
+        public static Seg16x8i seg16x8i()
             => default;
 
         [KindFactory]
-        public static Block16x16u b16x16u()
+        public static Seg16x16u seg16x16u()
             => default;
 
         [KindFactory]
-        public static Block16x16i b16x16i()
+        public static Seg16x16i seg16x16i()
             => default;
 
         [KindFactory]
-        public static Block32x8u b32x8u()
+        public static Seg32x8u seg32x8u()
             => default;
 
         [KindFactory]
-        public static Block32x8i b32x8i()
+        public static Seg32x8i seg32x8i()
             => default;
 
         [KindFactory]
-        public static Block32x16u b32x16u()
+        public static Seg32x16u seg32x16u()
             => default;
 
         [KindFactory]
-        public static Block32x16i b32x16i()
+        public static Seg32x16i seg32x16i()
             => default;
 
         [KindFactory]
-        public static Block32x32u b32x32u()
+        public static Seg32x32u seg32x32u()
             => default;
 
         [KindFactory]
-        public static Block32x32i b32x32i()
+        public static Seg32x32i seg32x32i()
             => default;
 
         [KindFactory]
-        public static Block64x8u b64x8u()
+        public static Seg64x8u seg64x8u()
             => default;
 
         [KindFactory]
-        public static Block64x8i b64x8i()
+        public static Seg64x8i seg64x8i()
             => default;
 
         [KindFactory]
-        public static Block64x16u b64x16u()
+        public static Seg64x16u seg64x16u()
             => default;
 
         [KindFactory]
-        public static Block64x16i b64x16i()
+        public static Seg64x16i seg64x16i()
             => default;
 
         [KindFactory]
-        public static Block64x32u b64x32u()
+        public static Seg64x32u seg64x32u()
             => default;
 
         [KindFactory]
-        public static Block64x32i b64x32i()
+        public static Seg64x32i seg64x32i()
             => default;
 
         [KindFactory]
-        public static Block64x64u b64x64u()
+        public static Seg64x64u seg64x64u()
             => default;
 
         [KindFactory]
-        public static Block64x64i b64x64i()
+        public static Seg64x64i seg64x64i()
             => default;
 
         [KindFactory]
-        public static Block128x8u b128x8u()
+        public static Seg128x8u seg128x8u()
             => default;
 
         [KindFactory]
-        public static Block128x8i b128x8i()
+        public static Seg128x8i seg128x8i()
             => default;
 
         [KindFactory]
-        public static Block128x16u b128x16u()
+        public static Seg128x16u seg128x16u()
             => default;
 
         [KindFactory]
-        public static Block128x16i b128x16i()
+        public static Seg128x16i seg128x16i()
             => default;
 
         [KindFactory]
-        public static Block128x32u b128x32u()
+        public static Seg128x32u seg128x32u()
             => default;
 
         [KindFactory]
-        public static Block128x32i b128x32i()
+        public static Seg128x32i seg128x32i()
             => default;
 
         [KindFactory]
-        public static Block128x64u b128x64u()
+        public static Seg128x64u seg128x64u()
             => default;
 
         [KindFactory]
-        public static Block128x64i b128x64i()
+        public static Seg128x64i seg128x64i()
             => default;
 
         [KindFactory]
-        public static Block128x32f b128x32f()
+        public static Seg128x32f seg128x32f()
             => default;
 
         [KindFactory]
-        public static Block128x64f b128x64f()
+        public static Seg128x64f seg128x64f()
             => default;
 
         [KindFactory]
-        public static Block256x8u b256x8u()
+        public static Seg256x8u seg256x8u()
             => default;
 
         [KindFactory]
-        public static Block256x8i b256x8i()
+        public static Seg256x8i seg256x8i()
             => default;
 
         [KindFactory]
-        public static Block256x16u b256x16u()
+        public static Seg256x16u seg256x16u()
             => default;
 
         [KindFactory]
-        public static Block256x16i b256x16i()
+        public static Seg256x16i seg256x16i()
             => default;
 
         [KindFactory]
-        public static Block256x32u b256x32u()
+        public static Seg256x32u seg256x32u()
             => default;
 
         [KindFactory]
-        public static Block256x32i b256x32i()
+        public static Seg256x32i seg256x32i()
             => default;
 
         [KindFactory]
-        public static Block256x64u b256x64u()
+        public static Seg256x64u seg256x64u()
             => default;
 
         [KindFactory]
-        public static Block256x64i b256x64i()
+        public static Seg256x64i seg256x64i()
             => default;
 
         [KindFactory]
-        public static Block256x32f b256x32f()
+        public static Seg256x32f seg256x32f()
             => default;
 
         [KindFactory]
-        public static Block256x64f b256x64f()
+        public static Seg256x64f seg256x64f()
             => default;
 
         [KindFactory]
-        public static Block512x8u b512x8u()
+        public static Seg512x8u seg512x8u()
             => default;
 
         [KindFactory]
-        public static Block512x8i b512x8i()
+        public static Seg512x8i seg512x8i()
             => default;
 
         [KindFactory]
-        public static Block512x16u b512x16u()
+        public static Seg512x16u seg512x16u()
             => default;
 
         [KindFactory]
-        public static Block512x16i b512x16i()
+        public static Seg512x16i seg512x16i()
             => default;
 
         [KindFactory]
-        public static Block512x32u b512x32u()
+        public static Seg512x32u seg512x32u()
             => default;
 
         [KindFactory]
-        public static Block512x32i b512x32i()
+        public static Seg512x32i seg512x32i()
             => default;
 
         [KindFactory]
-        public static Block512x64u b512x64u()
+        public static Seg512x64u seg512x64u()
             => default;
 
         [KindFactory]
-        public static Block512x64i b512x64i()
+        public static Seg512x64i seg512x64i()
             => default;
 
         [KindFactory]
-        public static Block512x32f b512x32f()
+        public static Seg512x32f seg512x32f()
             => default;
 
         [KindFactory]
-        public static Block512x64f b512x64f()
+        public static Seg512x64f seg512x64f()
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<T> block<T>(T t = default)
+        public static SegmentedKind<T> seglock<T>(T t = default)
             where T : unmanaged
                 => default;
 
         [MethodImpl(Inline)]
-        public static BlockedKind<W,T> block<W,T>(W w = default, T t = default)
+        public static SegmentedKind<W,T> seglock<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W16,T> block<T>(W16 w, T t = default)
+        public static SegmentedKind<W16,T> seglock<T>(W16 w, T t = default)
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W32,T> block<T>(W32 w, T t = default)
+        public static SegmentedKind<W32,T> seglock<T>(W32 w, T t = default)
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W64,T> block<T>(W64 w, T t = default)
+        public static SegmentedKind<W64,T> seglock<T>(W64 w, T t = default)
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W128,T> block<T>(W128 w, T t = default)
+        public static SegmentedKind<W128,T> seglock<T>(W128 w, T t = default)
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W256,T> block<T>(W256 w, T t = default)
+        public static SegmentedKind<W256,T> seglock<T>(W256 w, T t = default)
             where T : unmanaged
                 => default;
 
         [KindFactory, Closures(Closure)]
-        public static BlockedKind<W512,T> block<T>(W512 w, T t = default)
+        public static SegmentedKind<W512,T> seglock<T>(W512 w, T t = default)
             where T : unmanaged
                 => default;
     }

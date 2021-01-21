@@ -30,13 +30,6 @@ namespace Z0
             data = src.ToArray();
         }
 
-        [MethodImpl(Inline)]
-        internal BitString(ReadOnlySpan<Bit32> src)
-        {
-            data = new byte[src.Length];
-            for(var i=0; i<src.Length; i++)
-                data[i] = (byte)src[i];
-        }
 
         [MethodImpl(Inline)]
         internal BitString(ReadOnlySpan<bit> src)

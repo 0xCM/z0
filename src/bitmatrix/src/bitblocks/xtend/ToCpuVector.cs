@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial class XBitBlocks
     {
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> ToCpuVector<T>(this BitString src, N128 w, T t = default)
             where T : unmanaged
-                => src.Pack().Cast<byte,T>().Blocked(w).LoadVector();
+                => src.Pack().Recover<byte,T>().Blocked(w).LoadVector();
 
         /// <summary>
         /// Extracts a 256-bit cpu vector from a bitsring of sufficient length
@@ -34,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> ToCpuVector<T>(this BitString src, N256 w, T t = default)
             where T : unmanaged
-                => src.Pack().Cast<byte,T>().Blocked(w).LoadVector();
+                => src.Pack().Recover<byte,T>().Blocked(w).LoadVector();
     }
 }

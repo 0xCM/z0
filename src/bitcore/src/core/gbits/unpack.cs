@@ -88,13 +88,13 @@ namespace Z0
         /// <typeparam name="T">The bit source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> unpack<S,T>(S src, Span<T> dst, uint offset = 0)
+        public static Span<T> unpack<S,T>(S src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
-            var len = bitsize<S>();
-            for(var i=0u; i<len; i++)
-                seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? one<T>() : zero<T>();
+            var count = root.min(bitsize<S>(), dst.Length);
+            for(var i=0u; i<count; i++)
+                seek(dst, i) = testbit(src, (byte)i) == bit.On ? one<T>() : zero<T>();
             return dst;
         }
 

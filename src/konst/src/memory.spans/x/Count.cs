@@ -11,21 +11,6 @@ namespace Z0
 
     partial class XSpan
     {
-        /// <summary>
-        /// Counts the number of values in the source that satisfy the predicate
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="f">The predicate to evaluate over each element</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        static int count<T>(ReadOnlySpan<T> src, Func<T,bool> f)
-        {
-            int count = 0;
-            for(var i=0u; i<src.Length; i++)
-                if(f(z.skip(src,i)))
-                    count++;
-            return count;
-        }
 
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
@@ -35,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static int Count<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
-            => count(src,f);
+            => Spans.count(src, f);
 
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
