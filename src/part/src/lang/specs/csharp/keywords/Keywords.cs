@@ -43,7 +43,6 @@ namespace Z0.Lang
             public static Name Struct => "struct";
 
             public static Name Unmanaged => "unmanaged";
-
         }
 
         public readonly struct KeywordSpecs

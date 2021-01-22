@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct asm
+    partial struct AsmLang
     {
         [MethodImpl(Inline), Op]
         public static AsmCall call(string id, MemoryAddress src, Address16 callsite, MemoryAddress dst, string actualId, MemoryAddress actual = default)

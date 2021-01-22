@@ -38,6 +38,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static uint offset(MemoryAddress src, byte fxSize, MemoryAddress dst)
             => (uint)(dst - (src + fxSize));
-
     }
 }

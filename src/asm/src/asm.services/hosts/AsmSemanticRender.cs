@@ -165,7 +165,7 @@ namespace Z0.Asm
             else if(AsmTest.isMem(kind))
                 desc = format(meminfo(src, i));
             else if (AsmTest.isBranch(kind))
-                desc = format(asm.branch(@base, src, i));
+                desc = format(IceExtractors.branch(@base, src, i));
             else if(AsmTest.isImm(kind))
                 desc = format(IceExtractors.imminfo(src, i));
             else
@@ -370,7 +370,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, AsmLang.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [MethodImpl(Inline), Op]
         public static IceMemoryInfo meminfo(IceRegister sReg, IceRegister prefix, IceMemDirect mem, MemoryAddress address, IceMemorySize size)

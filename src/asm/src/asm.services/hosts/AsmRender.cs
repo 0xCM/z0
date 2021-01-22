@@ -58,7 +58,7 @@ namespace Z0.Asm
                     continue;
                 }
 
-                seek(dst, i) = asm.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
+                seek(dst, i) = IceExtractors.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
                 offset += size;
             }
             return dst;

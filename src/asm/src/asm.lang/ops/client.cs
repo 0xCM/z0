@@ -9,10 +9,14 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct asm
+    partial struct AsmLang
     {
         [MethodImpl(Inline), Op]
-        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
-            => new AsmDisplacement(value, (AsmDisplacementSize)size);
+        public static AsmCallClient client(MemoryAddress @base)
+            => new AsmCallClient(@base);
+
+        [MethodImpl(Inline), Op]
+        public static AsmCallClient client(string id, MemoryAddress @base)
+            => new AsmCallClient(id, @base);
     }
 }

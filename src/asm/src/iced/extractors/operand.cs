@@ -10,8 +10,23 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    partial struct asm
+    partial struct IceExtractors
     {
+        /// <summary>
+        /// Defines an instruction operand
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="fx"></param>
+        /// <param name="index"></param>
+        [MethodImpl(Inline), Op]
+        public static IceOperandInfo operand(MemoryAddress @base, in IceInstruction fx, byte index)
+        {
+            var dst = new IceOperandInfo();
+            dst.Index = index;
+            dst.Kind = opkind(fx, index);
+            dst.Branch = AsmTest.isBranch(dst.Kind) ? branch(@base, fx, branch(fx,index)) : default;
+            return dst;
+        }
 
         /// <summary>
         /// Extracts operand instruction data
@@ -28,13 +43,5 @@ namespace Z0.Asm
                 seek(dst, j) = operand(@base, fx, j);
             return buffer;
         }
-
-        [Op]
-        public static AsmInstructionSummary summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
-            => new AsmInstructionSummary(@base, offset,  formatted,  src.Specifier, operands(@base, src),  encoded.Slice((int)offset, src.ByteLength).ToArray());
-
-        [Op]
-        public static AsmInstructionSummary Summarize(MemoryAddress @base, in IceInstruction src, ReadOnlySpan<byte> encoded, string formatted, uint offset)
-            => summarize(@base, src, encoded, formatted, offset);
     }
 }

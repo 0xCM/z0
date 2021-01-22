@@ -18,7 +18,6 @@ namespace Z0.Asm
 
         public NumericWidth TargetWidth {get;}
 
-
         [MethodImpl(Inline)]
         public Zx(NumericWidth src, NumericWidth dst)
         {

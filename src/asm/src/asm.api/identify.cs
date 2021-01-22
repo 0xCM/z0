@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using NI = NumericIndicator;
     using TI = TypeIndicator;
     using MZ = Asm.IceMemorySize;

@@ -18,13 +18,17 @@ namespace Z0.Asm
     {
         readonly AsmFormatConfig AsmFormat;
 
+        [MethodImpl(Inline), Op]
+        static ApiBlockAsm apiblock(ApiCodeBlock encoded, IceInstruction[] decoded, ExtractTermCode term)
+            => new ApiBlockAsm(encoded, decoded, term);
+
         [MethodImpl(Inline)]
         public AsmRoutineDecoder(AsmFormatConfig format)
             => AsmFormat = format;
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
-                let block = asm.block(src.CodeBlock, i, src.TermCode)
+                let block = apiblock(src.CodeBlock, i, src.TermCode)
                 select routine(src.MetaUri, src.OpUri, src.Method.Metadata().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
@@ -141,7 +145,7 @@ namespace Z0.Asm
                 var instruction = src[i];
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
-                info[i] = asm.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
+                info[i] = IceExtractors.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
                 offset += (uint)instruction.ByteLength;
             }
 

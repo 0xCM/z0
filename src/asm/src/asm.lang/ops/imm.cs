@@ -9,8 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmBuilder
+    partial struct AsmLang
     {
+        /// <summary>
+        /// Creates an immediate operand
+        /// </summary>
+        /// <param name="src">The defining source value</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ImmOp<T> imm<T>(byte pos, T src)
+            where T : unmanaged, IImmediate<T>
+                => new ImmOp<T>(pos, src);
+
         [MethodImpl(Inline), Op]
         public Imm8Op imm8(byte pos, Imm8 value)
             => new Imm8Op(pos, value);

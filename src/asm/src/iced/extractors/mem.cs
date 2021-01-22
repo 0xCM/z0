@@ -48,7 +48,7 @@ namespace Z0.Asm
             dst.MemoryIndex = convert(memidx(src,index), out RegisterKind _);
             dst.MemorySize = memsize(src,index);
             dst.MemoryIndexScale = memScale(src,index);
-            dst.Displacement = asm.dx(dxvalue(src,index), dxsize(src,index));
+            dst.Displacement = AsmLang.dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = convert(memSeg(src,index), out RegisterKind _);
             dst.SegmentPrefix = convert(asm.segprefix(src,index), out RegisterKind _);
             dst.IsStackInstruction = src.IsStackInstruction;
@@ -64,7 +64,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, AsmLang.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [MethodImpl(Inline), Op]
         public static IceRegister memidx(IceInstruction src, byte index)

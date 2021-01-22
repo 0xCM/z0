@@ -11,6 +11,8 @@ namespace Z0.Asm
     using static AsmRegs;
     using M = AsmMnemonics;
 
+    using static AsmLang;
+
     partial struct AsmBuilder
     {
         [MethodImpl(Inline), Op]

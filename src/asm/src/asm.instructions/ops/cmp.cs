@@ -9,8 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmRegs;
-
-    using M = AsmMnemonics;
+    using static AsmLang;
 
     partial struct AsmBuilder
     {

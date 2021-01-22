@@ -10,8 +10,18 @@ namespace Z0.Asm
     using static Part;
     using static AsmRegs;
 
-    partial struct AsmBuilder
+    partial struct AsmLang
     {
+        /// <summary>
+        /// Creates a register operand
+        /// </summary>
+        /// <param name="src">The defining source value</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static RegOp<T> reg<T>(byte pos, T src)
+            where T : unmanaged, IRegister
+                => new RegOp<T>(pos, src);
+
         [MethodImpl(Inline)]
         public static r8 reg<R>(R r, byte pos, byte data = default)
             where R : unmanaged, IRegister

@@ -4,15 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    public enum AsmOperatorCode : byte
+    using Z0.Lang;
+
+    public interface IAsmKeyword : IKeyword
     {
-        add = AsciMathCode.Add,
 
-        sub = AsciMathCode.Sub,
+    }
 
-        mul = AsciMathCode.Mul
+    public interface IAsmKeyword<T,K> : IAsmKeyword, IKeyword<AsmLang,K>
+        where T : unmanaged, IAsmKeyword<T,K>
+        where K : unmanaged
+    {
+
     }
 }

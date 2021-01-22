@@ -8,16 +8,17 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
     using static Asm.IceOpKind;
 
     using BTK = BranchTargetKind;
     using BTW = BranchTargetWidth;
 
-    partial struct asm
+    partial struct IceExtractors
     {
-        [MethodImpl(Inline), Op]
+       [MethodImpl(Inline), Op]
         public static AsmBranch branch(in MemoryAddress @base, in IceInstruction ix, in AsmBranchTarget target)
-            => new AsmBranch(@base, ix.IP, target, offset(ix.IP, (byte)ix.ByteLength, target.Address));
+            => new AsmBranch(@base, ix.IP, target, asm.offset(ix.IP, (byte)ix.ByteLength, target.Address));
 
         [MethodImpl(Inline), Op]
         public static AsmBranch branch(in MemoryAddress @base, in IceInstruction src, byte index)
@@ -30,15 +31,15 @@ namespace Z0.Asm
             switch(k)
             {
                 case NearBranch16:
-                    return asm.target(BTK.Near, src.NearBranch16, BTW.Branch16);
+                    return AsmLang.target(BTK.Near, src.NearBranch16, BTW.Branch16);
                 case NearBranch32:
-                    return asm.target(BTK.Near, src.NearBranch32, BTW.Branch32);
+                    return AsmLang.target(BTK.Near, src.NearBranch32, BTW.Branch32);
                 case NearBranch64:
-                    return asm.target(BTK.Near, src.NearBranch64, BTW.Branch64);
+                    return AsmLang.target(BTK.Near, src.NearBranch64, BTW.Branch64);
                 case FarBranch16:
-                    return asm.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
+                    return AsmLang.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
                 case FarBranch32:
-                    return asm.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
+                    return AsmLang.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }

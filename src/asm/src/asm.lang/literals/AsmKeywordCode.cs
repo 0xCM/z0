@@ -380,5 +380,25 @@ namespace Z0.Asm
         or,
 
         ret,
+
+        add,
+
+        sub,
+
+        mul,
+
+        @byte,
+
+        word,
+
+        dword,
+
+        qword,
+
+        xmmword,
+
+        ymmword,
+
+        zmmword
     }
 }

@@ -7,32 +7,40 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Lang;
+
     using static Part;
-    using SQ = AsmSizeQualifiers;
 
     [ApiHost]
-    public readonly partial struct AsmLang
+    public readonly partial struct AsmLang  : ILanguage<AsmLang>
     {
-        public static SQ.Byte @byte()
-            => default;
+        const NumericKind Closure = UnsignedInts;
 
-        public static SQ.Word word()
-            => default;
+        public Name Id => "asm";
 
-        public static SQ.DWord dword()
-            => default;
+        [MethodImpl(Inline), Op]
+        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
+            => new AsmDisplacement(value, (AsmDisplacementSize)size);
 
-        public static SQ.QWord qword()
-            => default;
+        /// <summary>
+        /// Generalizes a <see cref='IAsmOperand{T}'/> reification
+        /// </summary>
+        /// <param name="src">The source operand</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline)]
+        public static AsmOp<T> operand<T>(T src)
+            where T : unmanaged, IAsmOperand<T>
+                => new AsmOp<T>(src.Position, src);
 
-        public static SQ.XmmWord xmmword()
-            => default;
-
-        public static SQ.YmmWord ymmword()
-            => default;
-
-        public static SQ.ZmmWord zmmword()
-            => default;
+        /// <summary>
+        /// Creates a memory operand
+        /// </summary>
+        /// <param name="src">The defining source value</param>
+        /// <typeparam name="T">The operand type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static MemOp<T> mem<T>(byte pos, T src)
+            where T : unmanaged, IMemOp
+                => new MemOp<T>(pos, src);
 
         [MethodImpl(Inline), Op]
         public static AsmTokenLookup lookup(in AsmTokenIndex index)
@@ -53,65 +61,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static string identifier(in AsmTokenLookup tokens, AsmTokenKind id)
             => tokens.Identity[id];
-
-        public interface IElement : ITextual
-        {
-            string RenderPattern {get;}
-        }
-
-        public interface IElement<T> : IElement
-        {
-
-        }
-
-        public interface IElement<H,T> : IElement
-            where H : IElement<H,T>
-        {
-
-        }
-
-
-        public interface ISyntaxAtom : IElement
-        {
-
-        }
-
-        public interface ISyntaxAtom<K> : ISyntaxAtom
-            where K : unmanaged
-        {
-            K Code {get;}
-
-            string ITextual.Format()
-                => string.Format(RenderPattern,Code);
-
-            string IElement.RenderPattern
-                => "{0:g}";
-        }
-
-        public interface ISyntaxAtom<H,K> : ISyntaxAtom<K>, IElement<H,K>
-            where K : unmanaged
-            where H : struct, ISyntaxAtom<H,K>
-        {
-
-        }
-
-        public interface IExpression : IElement
-        {
-
-        }
-
-        public interface IExpression<T> : IExpression
-        {
-            T Subject {get;}
-
-            string ITextual.Format()
-                => string.Format(RenderPattern, Subject);
-        }
-
-        public interface IExpression<H,T> : IExpression<T>
-            where H : struct, IExpression<H,T>
-        {
-
-        }
     }
 }

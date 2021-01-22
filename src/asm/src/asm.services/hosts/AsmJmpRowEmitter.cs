@@ -110,7 +110,7 @@ namespace Z0
 
         static ref AsmJmpRow init(in ApiInstruction src, JccKind jk, out AsmJmpRow dst)
         {
-            var target = asm.branch(src.Base, src.Instruction, 0);
+            var target = IceExtractors.branch(src.Base, src.Instruction, 0);
             dst.Kind = jk;
             dst.Base = src.Base;
             dst.Source = src.IP;

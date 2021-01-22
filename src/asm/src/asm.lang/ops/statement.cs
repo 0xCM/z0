@@ -9,8 +9,9 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmBuilder
+    partial struct AsmLang
     {
+
         [MethodImpl(Inline)]
         public static AsmStatement<A> statement<A>(AsmMnemonic mnemonic, A a)
             where A : unmanaged, IAsmOperand
@@ -41,6 +42,5 @@ namespace Z0.Asm
             where B : unmanaged, IAsmOperand
             where C : unmanaged, IAsmOperand
                 => new AsmStatement<A,B,C>(mnemonic, args);
-
     }
 }
