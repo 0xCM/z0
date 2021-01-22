@@ -12,16 +12,16 @@ namespace Z0
     partial class BitSpans
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan xor(in BitSpan x, in BitSpan y, in BitSpan z)
+        public static ref readonly BitSpan xor(in BitSpan a, in BitSpan b, in BitSpan c)
         {
-            var bitcount = z.Length;
-            for(var i=0; i< bitcount; i++)
-                z[i] = x[i] ^ y[i];
-            return ref z;
+            var count = c.Length;
+            for(var i=0; i< count; i++)
+                c[i] = a[i] ^ b[i];
+            return ref c;
         }
 
         [Op]
-        public static BitSpan xor(in BitSpan x, in BitSpan y)
-            => xor(x,y, alloc(y.BitCount));
+        public static BitSpan xor(in BitSpan a, in BitSpan b)
+            => xor(a, b, alloc(b.BitCount));
     }
 }

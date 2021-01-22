@@ -24,23 +24,14 @@ namespace Z0
     {
         internal readonly Vector128<T> Data;
 
-        public static N128 MaxWidth => default;
-
-        public static Vector128<T> Ones
-        {
-            [MethodImpl(Inline)]
-            get => z.vones<T>(MaxWidth);
-        }
-
-        public static T Zero => default;
-
         /// <summary>
         /// Initializes a bitvector with the lo N bits of a scalar source
         /// </summary>
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         public BitVector128(Vector128<T> data)
-            => this.Data = data;
+            => Data = data;
+
 
         /// <summary>
         /// The scalar representation of the vector
@@ -231,5 +222,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator !=(in BitVector128<N,T> x, in BitVector128<N,T> y)
             => !BitVector.eq(x,y);
+
+        public static N128 MaxWidth => default;
+
+        public static Vector128<T> Ones
+        {
+            [MethodImpl(Inline)]
+            get => z.vones<T>(MaxWidth);
+        }
+
+        public static T Zero => default;
     }
 }

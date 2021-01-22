@@ -12,20 +12,6 @@ namespace Z0
 
     partial struct Table
     {
-        [Op]
-        public static TableColumns columns(Type table, ReadOnlySpan<byte> widths)
-        {
-            var fields = span(table.DeclaredInstanceFields());
-            var count = fields.Length;
-            var buffer = alloc<TableColumn>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                seek(dst,i) = new TableColumn((ushort)i, field.Name, skip(widths,i));
-            }
-            return buffer;
-        }
 
         [Op]
         public static TableColumns columns<E>()

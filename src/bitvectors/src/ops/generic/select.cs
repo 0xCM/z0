@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The pivot/mask vector</param>
         /// <param name="y">The primary choice</param>
         /// <param name="z">The alternative choice</param>
-        [MethodImpl(Inline), Select, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Select, Closures(Closure)]
         public static BitVector<T> select<T>(BitVector<T> x, BitVector<T> y, BitVector<T> z)
             where T : unmanaged
                 => gmath.select(x.Data, y.Data, z.Data);
@@ -44,7 +44,7 @@ namespace Z0
         public static BitVector128<N,T> select<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y, in BitVector128<N,T> z)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vselect(x.Data, y.Data, z.Data);   
+                => gvec.vselect(x.Data, y.Data, z.Data);
 
     }
 }

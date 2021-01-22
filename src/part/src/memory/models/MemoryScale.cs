@@ -23,7 +23,7 @@ namespace Z0
             =>(ulong)Factor * src;
 
         public static MemoryScale Empty
-            => new MemoryScale(MemoryScaleFactor.None);
+            => new MemoryScale(0);
 
         public bool IsEmpty
         {
@@ -76,7 +76,7 @@ namespace Z0
             if(value == 1 || value == 2 || value == 4 || value == 8)
                 return new MemoryScale((MemoryScaleFactor)value);
             else
-                return new MemoryScale(MemoryScaleFactor.None);
+                return new MemoryScale(0);
         }
 
         public string Format()

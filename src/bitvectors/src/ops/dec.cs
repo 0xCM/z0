@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> dec<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.dec(x.Data);

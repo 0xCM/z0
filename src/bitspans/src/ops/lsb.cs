@@ -18,8 +18,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int lsb(in BitSpan src)
         {
-            var len = src.Length;
-            for(var i = 0; i <len;  i++)
+            var count = src.Length;
+            for(var i = 0; i<count;  i++)
                 if(src[i])
                     return i;
             return -1;

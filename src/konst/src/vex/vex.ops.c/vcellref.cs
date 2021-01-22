@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector128<T> src, byte index)
             where T : unmanaged
-                => ref add(vfirst(src), index);
+                => ref memory.add(vfirst(src), index);
 
         /// <summary>
         /// Returns a reference to an index-identified cell
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector256<T> src, byte index)
             where T : unmanaged
-                => ref add(vfirst(src), index);
+                => ref memory.add(vfirst(src), index);
 
         /// <summary>
         /// Returns a reference to an index-identified cell
@@ -43,6 +43,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector512<T> src, byte index)
             where T : unmanaged
-                => ref add(vfirst(src), index);
+                => ref memory.add(vfirst(src), index);
     }
 }

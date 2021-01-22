@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Not, Closures(Closure)]
         public static BitVector<T> not<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.not(x.Data);
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static BitVector8 not(BitVector8 x)
             => gmath.not(x.Data);
-            
+
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x
         /// </summary>

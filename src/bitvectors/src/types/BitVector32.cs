@@ -18,29 +18,12 @@ namespace Z0
         internal uint Data;
 
         /// <summary>
-        /// Allocates a vector with all bits disabled
-        /// </summary>
-        public static BitVector32 Zero => default;
-
-        /// <summary>
-        /// Allocates a vector that has the least bit enabled and all others disabled
-        /// </summary>
-        public static BitVector32 One => 1;
-
-        /// <summary>
-        /// Allocates a vector with all bits enabled
-        /// </summary>
-        public static BitVector32 Ones => uint.MaxValue;
-
-        public static N32 N => default;
-
-        /// <summary>
         /// Initializes the vector with the source value it represents
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public BitVector32(uint src)
-            => this.Data = src;
+            => Data = src;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -371,5 +354,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector32 x, BitVector32 y)
             => math.gteq(x,y);
+
+        /// <summary>
+        /// Allocates a vector with all bits disabled
+        /// </summary>
+        public static BitVector32 Zero => default;
+
+        /// <summary>
+        /// Allocates a vector that has the least bit enabled and all others disabled
+        /// </summary>
+        public static BitVector32 One => 1;
+
+        /// <summary>
+        /// Allocates a vector with all bits enabled
+        /// </summary>
+        public static BitVector32 Ones => uint.MaxValue;
+
+        public static N32 N => default;
    }
 }

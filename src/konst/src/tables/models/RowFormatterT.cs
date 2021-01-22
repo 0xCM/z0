@@ -52,8 +52,21 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            RowFormatter.header(Fields, Delimiter, dst);
+            header(Fields, Delimiter, dst);
             return dst.ToString();
+        }
+
+        static void header(in TableFields src, char Delimiter, StringBuilder dst)
+        {
+            var view = src.View;
+            var count = view.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var field = ref memory.skip(view,i);
+                dst.Append(Delimiter);
+                dst.Append(Space);
+                dst.Append(field.Name.PadRight(field.RenderWidth - 2));
+            }
         }
 
         public void EmitHeader()

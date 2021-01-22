@@ -11,8 +11,6 @@ namespace Z0
 
     public enum MemoryScaleFactor : byte
     {
-        None  = 0,
-
         S1 = 1,
 
         S2 = 2,

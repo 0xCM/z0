@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data to be encrypted</param>
         /// <param name="key">The round key</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesEncode(Vector128<byte> src, Vector128<byte> key)
             => AES.Encrypt(src,key);
 
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The last block of data to be encrypted</param>
         /// <param name="key">The round key</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesEncodeLast(Vector128<byte> src, Vector128<byte> key)
             => AES.EncryptLast(src,key);
 
@@ -43,7 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data to be decrypted</param>
         /// <param name="key">The round key</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesDecode(Vector128<byte> src, Vector128<byte> key)
             => AES.Decrypt(src,key);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data to be decrypted</param>
         /// <param name="key">The round key</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesDecodeLast(Vector128<byte> src, Vector128<byte> key)
             => AES.DecryptLast(src,key);
 
@@ -62,7 +62,7 @@ namespace Z0
         /// Applies the InvMixColumns transformation to the source
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesInvMix(Vector128<byte> src)
             => AES.InverseMixColumns(src);
 
@@ -73,18 +73,18 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="imm8"></param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> aesKeyGen(Vector128<byte> src,byte imm8)
             => AES.KeygenAssist(src,imm8);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void aesEncode(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)
                  z.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static void aesdec(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)

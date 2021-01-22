@@ -37,7 +37,7 @@ namespace Z0.Logix
             var count = force<T,int>(gmath.add(gmath.sub(max, min), z.one<T>()));
             var expect = gmath.square(count);
             var sln = LogicEngine.solve(identity, (min,max));
-            Claim.eq(expect,sln.Count);
+            Claim.eq(expect, sln.Count);
         }
     }
 }

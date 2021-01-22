@@ -63,7 +63,7 @@ namespace Z0
             => Vars[index].Set(value);
 
         public string Format()
-            => ComparisonKind.Format(LeftArg,RightArg);
+            => ComparisonKind.Format(LeftArg, RightArg);
 
         public override string ToString()
             => Format();

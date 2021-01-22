@@ -29,6 +29,6 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [Op]
         public static BitSpan select(in BitSpan a, in BitSpan b, in BitSpan c)
-            => select(a,b,c, alloc(c.BitCount));
+            => select(a, b, c, alloc(c.BitCount));
     }
 }

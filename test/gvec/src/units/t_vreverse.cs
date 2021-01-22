@@ -55,7 +55,7 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = z.vinc<T>(w);
-            var v2 = z.vdec<T>(w);
+            var v2 = gcpu.vdec<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }
@@ -64,7 +64,7 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = z.vinc<T>(w);
-            var v2 = z.vdec<T>(w);
+            var v2 = gcpu.vdec<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }

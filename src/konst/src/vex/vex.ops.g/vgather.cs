@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vcompact16u(GatherVector256(p32u(src), v32i(vinflate(vidx, n256, z32)), 2), n128, z16);
+            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate(vidx, n256, z32)), 2), n128, z16);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vcompact16u(GatherVector256(p32u(src), v32i(vinflate(v16u(vidx), n256, z32)),2),n128, z16));
+            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate(v16u(vidx), n256, z32)),2),n128, z16));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -154,8 +154,8 @@ namespace Z0
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
             (var v0, var v1) = vinflate(v8u(vidx), n512, z32);
-            var x0 = GatherVector256(p32u(src), v32i(v0),1);
-            var x1 = GatherVector256(p32u(src), v32i(v1),1);
+            var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
+            var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
             return v8i(vcompact8u(x0,x1,n128, z8));
         }
 
@@ -169,8 +169,8 @@ namespace Z0
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
             (var v0, var v1) = vinflate(vidx, n512, z32);
-            var x0 = GatherVector256(p32u(src), v32i(v0),1);
-            var x1 = GatherVector256(p32u(src), v32i(v1),1);
+            var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
+            var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
             return vcompact8u(x0,x1,n128, z8);
         }
 
@@ -199,8 +199,8 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         /// <param name="scale">The amount by which to scale each index component value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<long> vgather(N256 w, in long src, Vector256<long> vidx, byte scale)
-            => GatherVector256(gptr(src), vidx, scale);
+        public static unsafe Vector256<long> vgather(in long src, Vector256<long> vidx, [Imm] MemoryScaleFactor scale)
+            => GatherVector256(gptr(src), vidx, (byte)scale);
 
         /// <summary>
         /// __m256i _mm256_i64gather_epi64 (__int64 const* base_addr, __m256i vindex, const int scale) VPGATHERQQ ymm, vm64y, ymm
@@ -218,8 +218,8 @@ namespace Z0
         ///	    dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+63:m])*scale]
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector256<long> vidx, byte scale)
-            => GatherVector256(gptr(src), vidx, scale);
+        public static unsafe Vector256<ulong> vgather(in ulong src, Vector256<long> vidx, [Imm] MemoryScaleFactor scale)
+            => GatherVector256(gptr(src), vidx, (byte)scale);
 
         /// <summary>
         /// __m256i _mm256_i32gather_epi64 (__int64 const* base_addr, __m128i vindex, const int scale) VPGATHERDQ ymm, vm32y, ymm
@@ -237,11 +237,11 @@ namespace Z0
 	    ///     dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+31:m])*scale]
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vgather(N256 w, in ulong src, Vector128<int> vidx, byte scale)
-            => GatherVector256(gptr(src), vidx, scale);
+        public static unsafe Vector256<ulong> vgather(in ulong src, Vector128<int> vidx, [Imm] MemoryScaleFactor scale)
+            => GatherVector256(gptr(src), vidx, (byte)scale);
 
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vgather(N256 w, in ushort src, Vector256<uint> vidx)
-            => GatherVector256(p32u(src), v32i(vidx), 2);
+        public static unsafe Vector256<uint> vgather(in ushort src, Vector256<uint> vidx)
+            => GatherVector256(memory.p32u(src), v32i(vidx), 2);
     }
 }

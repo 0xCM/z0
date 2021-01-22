@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int vcount<T>(N512 w, T t = default)
+        public static int vcount<T>(N512 w)
             where T : unmanaged
                 => 2*vcount<T>(default(N256));
     }

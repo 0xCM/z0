@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline), Rotl]
         public static BitVector8 rotl(BitVector8 src, byte offset)
             => gbits.rotl(src.Data,offset);
-            
+
         /// <summary>
         /// Rotates source bits leftward
         /// </summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="x">The source bitvector</param>
         /// <param name="offset">The rotation magnitude</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Rotl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotl, Closures(Closure)]
         public static BitVector<T> rotl<T>(BitVector<T> x, byte offset)
             where T : unmanaged
                 => gbits.rotl(x.Data,offset);

@@ -19,8 +19,8 @@ namespace Z0
         public static int pop(in BitSpan src)
         {
             var enabled = 0;
-            var bitcount = src.Length;
-            for(var i=0; i< bitcount; i++)
+            var count = src.Length;
+            for(var i=0; i< count; i++)
                 enabled += (int)src[i];
             return enabled;
         }

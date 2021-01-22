@@ -215,6 +215,7 @@ namespace Z0
         public EvalResult CheckMatch(BinaryOp256 f, OpUri fUri, BinaryOp256 g, OpUri gUri)
         {
             var w = n256;
+
             void check()
             {
                 for(var i=0; i < RepCount; i++)

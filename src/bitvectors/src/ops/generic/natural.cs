@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitVector
     {
-
         /// <summary>
         /// Defines a bitvector of natural width
         /// </summary>
@@ -62,10 +61,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => packseq(src.Slice(0, z.nat32i(n)).BitSeq, out T _);
-    }
-
-    static class BvUtil
-    {
-
     }
 }

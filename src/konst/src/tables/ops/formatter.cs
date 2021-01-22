@@ -11,13 +11,6 @@ namespace Z0
 
     partial struct Table
     {
-
-        [MethodImpl(Inline)]
-        public static DatasetFormatter<F,W> formatter<F,W>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-            where W : unmanaged, Enum
-                => new DatasetFormatter<F,W>(text.build(), delimiter);
-
         [Op, Closures(UnsignedInts)]
         public static TableFormatter<F> formatter<F>(F f = default)
             where F : unmanaged

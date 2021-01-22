@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
-        [MethodImpl(Inline), Parse, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Parse, Closures(Closure)]
         public static ref T parse<T>(ReadOnlySpan<char> src, byte offset, out T dst)
             where T : unmanaged
         {
@@ -20,7 +20,7 @@ namespace Z0
             ref readonly var input = ref first(src);
             dst = default;
 
-            for(int i=offset, pos = 0; i<= last; i++, pos++)
+            for(byte i=offset, pos = 0; i<= last; i++, pos++)
                 if(skip(input,i) == Bit32.One)
                     dst = gbits.enable(dst, pos);
             return ref dst;

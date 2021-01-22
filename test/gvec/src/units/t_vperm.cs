@@ -98,7 +98,7 @@ namespace Z0
             var u = z.vinc<uint>(n);
             Claim.veq(vparts(n,0,1,2,3), u);
 
-            var v = z.vdec<uint>(n);
+            var v = gcpu.vdec<uint>(n);
             Claim.veq(vparts(n,3,2,1,0),v);
 
             Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));
@@ -279,7 +279,7 @@ namespace Z0
         public void vperm_256u8_outline()
         {
             var a = z.vinc<byte>(n256);
-            var b = z.vdec<byte>(n256);
+            var b = gcpu.vdec<byte>(n256);
             var c = z.vreverse(z.vshuf32x8(a,b));
             Claim.veq(a,c);
         }

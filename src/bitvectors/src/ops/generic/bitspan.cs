@@ -12,22 +12,20 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Enables a bit if it is disabled
+        /// Converts the vector to a bitspan representation
         /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitVector<T> enable<T>(BitVector<T> x, byte index)
+        public static BitSpan32 bitspan<T>(BitVector<T> src, int? maxbits = null)
             where T : unmanaged
-                => gbits.enable(x.Data, index);
+                => BitSpans.from32(src.Data, maxbits ?? 0);
 
         /// <summary>
-        /// Enables a bit if it is disabled
+        /// Converts the vector to a bitspan representation
         /// </summary>
-        /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> enable<N,T>(BitVector<N,T> x, byte index)
+        public static BitSpan32 bitspan<N,T>(BitVector<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.enable(x.Data, index);
+                => BitSpans.from32(x.Data, z.nat32i<N>());
     }
 }

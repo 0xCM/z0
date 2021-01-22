@@ -16,13 +16,124 @@ namespace Z0
     {
         internal ushort Data;
 
-        public static BitVector16 Zero => 0;
+        /// <summary>
+        /// Initializes the vector with the source value it represents
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public BitVector16(ushort src)
+            => Data = src;
 
-        public static BitVector16 One => 1;
+        /// <summary>
+        /// Extracts the scalar represented by the vector
+        /// </summary>
+        public ushort Scalar
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
-        public static BitVector16 Ones => ushort.MaxValue;
+        /// <summary>
+        /// The number of bits represented by the vector
+        /// </summary>
+        public readonly int Width
+        {
+            [MethodImpl(Inline)]
+            get => 16;
+        }
 
-        public static N16 N => default;
+        /// <summary>
+        /// Returns true if no bits are enabled, false otherwise
+        /// </summary>
+        public bit Empty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        /// <summary>
+        /// Returns true if the vector has at least one enabled bit; false otherwise
+        /// </summary>
+        public bit NonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        public bit AllOn
+        {
+            [MethodImpl(Inline)]
+            get => (UInt16.MaxValue & Data) == UInt16.MaxValue;
+        }
+
+        /// <summary>
+        /// The vector's 8 least significant bits
+        /// </summary>
+        public BitVector8 Lo
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Data;
+        }
+
+        /// <summary>
+        /// The vector's 8 most significant bits
+        /// </summary>
+        public BitVector8 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (byte)(Data >> 8);
+        }
+
+        /// <summary>
+        /// Presents bitvector content as a bytespan
+        /// </summary>
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.bytes(Data);
+        }
+
+        /// <summary>
+        /// Gets/sets the state of an index-identified bit
+        /// </summary>
+        public bit this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => BitStates.test(Data, (byte)index);
+
+            [MethodImpl(Inline)]
+            set => Data = BitStates.set(Data, (byte)index, value);
+        }
+
+        /// <summary>
+        /// Selects a contiguous range of bits
+        /// </summary>
+        /// <param name="first">The position of the first bit</param>
+        /// <param name="last">The position of the last bit</param>
+        public BitVector16 this[byte first, byte last]
+        {
+            [MethodImpl(Inline)]
+            get => BitVector.segment(this, first, last);
+        }
+
+        [MethodImpl(Inline)]
+        public bool Equals(BitVector16 y)
+            => Data == y.Data;
+
+        public override bool Equals(object obj)
+            => obj is BitVector16 x ? Equals(x) : false;
+
+        public override int GetHashCode()
+            => Data.GetHashCode();
+
+         public string Format(BitFormat config)
+            => BitVector.format(this,config);
+
+        public string Format()
+            => BitVector.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<ushort>(BitVector16 src)
@@ -223,124 +334,12 @@ namespace Z0
         public static bit operator >=(BitVector16 x, BitVector16 y)
             => math.gteq(x,y);
 
-        /// <summary>
-        /// Initializes the vector with the source value it represents
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public BitVector16(ushort src)
-            => this.Data = src;
+        public static BitVector16 Zero => 0;
 
-        /// <summary>
-        /// Extracts the scalar represented by the vector
-        /// </summary>
-        public ushort Scalar
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
+        public static BitVector16 One => 1;
 
-        /// <summary>
-        /// The number of bits represented by the vector
-        /// </summary>
-        public readonly int Width
-        {
-            [MethodImpl(Inline)]
-            get => 16;
-        }
+        public static BitVector16 Ones => ushort.MaxValue;
 
-        /// <summary>
-        /// Returns true if no bits are enabled, false otherwise
-        /// </summary>
-        public bit Empty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        /// <summary>
-        /// Returns true if the vector has at least one enabled bit; false otherwise
-        /// </summary>
-        public bit NonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        public bit AllOn
-        {
-            [MethodImpl(Inline)]
-            get => (UInt16.MaxValue & Data) == UInt16.MaxValue;
-        }
-
-        /// <summary>
-        /// The vector's 8 least significant bits
-        /// </summary>
-        public BitVector8 Lo
-        {
-            [MethodImpl(Inline)]
-            get => (byte)Data;
-        }
-
-        /// <summary>
-        /// The vector's 8 most significant bits
-        /// </summary>
-        public BitVector8 Hi
-        {
-            [MethodImpl(Inline)]
-            get => (byte)(Data >> 8);
-        }
-
-        /// <summary>
-        /// Presents bitvector content as a bytespan
-        /// </summary>
-        public Span<byte> Bytes
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
-        }
-
-        /// <summary>
-        /// Gets/sets the state of an index-identified bit
-        /// </summary>
-        public bit this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => BitStates.test(Data, (byte)index);
-
-            [MethodImpl(Inline)]
-            set => Data = BitStates.set(Data, (byte)index, value);
-        }
-
-        /// <summary>
-        /// Selects a contiguous range of bits
-        /// </summary>
-        /// <param name="first">The position of the first bit</param>
-        /// <param name="last">The position of the last bit</param>
-        public BitVector16 this[byte first, byte last]
-        {
-            [MethodImpl(Inline)]
-            get => BitVector.segment(this, first, last);
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(BitVector16 y)
-            => Data == y.Data;
-
-        public override bool Equals(object obj)
-            => obj is BitVector16 x ? Equals(x) : false;
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
-
-         public string Format(BitFormat config)
-            => BitVector.format(this,config);
-
-        public string Format()
-            => BitVector.format(this);
-
-        public override string ToString()
-            => Format();
-  }
-
+        public static N16 N => default;
+    }
 }

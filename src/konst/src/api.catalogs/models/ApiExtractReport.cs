@@ -17,7 +17,7 @@ namespace Z0
         /// Loads a saved extract report
         /// </summary>
         /// <param name="src">The report path</param>
-        public static ApiExtractReport Load(FilePath src)
+        public static ApiExtractReport Load(FS.FilePath src)
         {
             var lines = src.ReadLines().Skip(1). Select(ParseBlock).ToArray();
             if(lines.Length != 0)

@@ -43,7 +43,7 @@ namespace Z0
         public static SeqEval<T> eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged, IEquatable<T>
         {
-            var dst = EvalSeq.alloc<T>((uint)a.Length, true);
+            var dst = alloc<T>((uint)a.Length, true);
             return eq(a,b, ref dst);
         }
 

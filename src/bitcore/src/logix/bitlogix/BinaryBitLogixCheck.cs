@@ -37,7 +37,7 @@ namespace Z0.Logix
         }
 
         [Op]
-        public static BinaryBitLogixCheck create(IWfShell wf, BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IPolyStream source)
+        public static BinaryBitLogixCheck create(IWfShell wf, BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IDataSource source)
         {
             var dst = new BinaryBitLogixCheck(wf);
             dst.Kind = kind;
@@ -50,28 +50,32 @@ namespace Z0.Logix
             return dst;
         }
 
-        [Op]
-        ref BinaryEval<bit> Check(in bit a, in bit b, ref BinaryEval<bit> dst)
-        {
-            var expect = Rule(a, b);
-            var actual = Service.Evaluate(Kind, a, b);
-            var result = expect == actual;
-            dst = new BinaryEval<bit>(a, b, result);
-            return ref dst;
-        }
+        // [Op]
+        // ref BinaryEval<bit> Check(in bit a, in bit b, ref BinaryEval<bit> dst)
+        // {
+        //     var expect = Rule(a, b);
+        //     var actual = Service.Evaluate(Kind, a, b);
+        //     var result = expect == actual;
+        //     dst = new BinaryEval<bit>(a, b, result);
+        //     return ref dst;
+        // }
 
         [Op]
         public SeqEval<bit> Run()
         {
             var dst = Result;
-            var service = BitLogix.Service;
             var target = dst.Edit;
             ref var result = ref dst.Result;
             for(var i=0u; i<Count; i++)
             {
                 ref readonly var a = ref skip(A,i);
                 ref readonly var b = ref skip(B,i);
-                ref var judgement = ref Check(a,b, ref seek(target,i));
+                var expect = Rule(a,b);
+                var actual = Service.Evaluate(Kind, a, b);
+                ref var judgement = ref seek(target, i);
+                judgement = new BinaryEval<bit>(a,b, expect == actual);
+
+                // ref var judgement = ref Check(a,b, ref seek(target, i));
                 result &= judgement.Result;
             }
             return Result;

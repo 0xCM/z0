@@ -39,7 +39,7 @@ namespace Z0
             (var a, var b, var c) = vars3<T>();
             var lhs = and(a, or(b,c));
             var rhs = or(and(a,b), and(a,c));
-            return equals(lhs,rhs, a,b,c);
+            return equals(lhs, rhs, a,b,c);
         }
 
         /// <summary>

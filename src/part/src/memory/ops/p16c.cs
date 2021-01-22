@@ -7,18 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct memory
     {
-        /// <summary>
-        /// Presents a generic reference as a short pointer
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <typeparam name="T">The source reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe short* p16i<T>(in T src)
+        public static unsafe char* p16c<T>(in T src)
             where T : unmanaged
-                => refptr<T,short>(ref edit(src));
+                => refptr<T,char>(ref edit(src));
     }
 }

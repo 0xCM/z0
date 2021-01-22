@@ -26,6 +26,10 @@ namespace Z0.Asm
             return dst;
         }
 
+        [MethodImpl(Inline), Op]
+        public static uint dxvalue(IceInstruction src, byte index)
+            => opkind(src, (byte)index) == Memory ? src.MemoryDisplacement : 0;
+
         [Op]
         public static AsmMemory memory(IceInstruction src, byte index)
         {

@@ -9,16 +9,16 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct memory
     {
         /// <summary>
-        /// Presents a generic reference as an uint32 pointer
+        /// Presents a generic reference as a short pointer
         /// </summary>
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The source reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe uint* p32u<T>(in T src)
+        public static unsafe short* p16i<T>(in T src)
             where T : unmanaged
-                => refptr<T,uint>(ref edit(src));
+                => refptr<T,short>(ref edit(src));
     }
 }

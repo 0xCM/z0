@@ -14,10 +14,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool same(in BitSpan a, in BitSpan b)
         {
-            if(a.Length != b.Length)
+            var count = a.Length;
+            if(count != b.Length)
                 return false;
 
-            for(var i=0; i<a.Length; i++)
+            for(var i=0; i<count; i++)
                 if(a[i] != b[i])
                     return false;
 

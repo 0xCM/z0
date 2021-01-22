@@ -14,8 +14,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int msb(in BitSpan src)
         {
-            var len = src.Length;
-            for(var i = len - 1; i >=0; i--)
+            var count = src.Length;
+            for(var i = count - 1; i >=0; i--)
                 if(src[i])
                     return i;
             return 0;

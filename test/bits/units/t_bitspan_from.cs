@@ -368,7 +368,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.BitVector<N,T>();
-                var y = x.ToBitSpan();
+                var y = x.ToBitSpan32();
                 Claim.eq(nat32i<N>(), x.Width);
                 Claim.eq(x.Width, y.Length);
                 for(var j=0; j<length; j++)

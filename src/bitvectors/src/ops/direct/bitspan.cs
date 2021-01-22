@@ -58,22 +58,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan32 bitspan(BitVector64 x, int? maxbits = null)
             => BitSpans.from32(x.Data, maxbits ?? 0);
-
-        /// <summary>
-        /// Converts the vector to a bitspan representation
-        /// </summary>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitSpan32 bitspan<T>(BitVector<T> src, int? maxbits = null)
-            where T : unmanaged
-                => BitSpans.from32(src.Data, maxbits ?? 0);
-
-        /// <summary>
-        /// Converts the vector to a bitspan representation
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static BitSpan32 bitspan<N,T>(BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => BitSpans.from32(x.Data, (int)TypeNats.value<N>());
     }
 }

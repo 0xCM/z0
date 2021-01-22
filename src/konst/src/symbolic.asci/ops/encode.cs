@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
         public static void encode(in char src, uint offset, N16 count, ref AsciCharCode dst)
-            => vsave(vcompact8u(cpu.vload(w256, memory.read(src, offset)), w8), ref @byte(dst));
+            => cpu.vstore(vcompact8u(cpu.vload(w256, memory.read(src, offset)), w8), ref @byte(dst));
 
         /// <summary>
         /// Encodes a sequence of source characters and stores a result in a caller-supplied

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct memory
     {
         /// <summary>
         /// Presents a generic reference as an int32 pointer

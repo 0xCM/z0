@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Add, Closures(AllNumeric)]
         public static Vector128<T> vadd<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vadd(x, z.vbroadcast(n128,a));
+                => vadd(x, gcpu.vbroadcast(n128,a));
 
         /// <summary>
         /// Adds a constant value to each vector component
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Add, Closures(AllNumeric)]
         public static Vector256<T> vadd<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vadd(x, z.vbroadcast(n256,a));
+                => vadd(x, gcpu.vbroadcast(n256,a));
 
         /// <summary>
         /// Adds a constant value to each source vector component
@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline), Add, Closures(AllNumeric)]
         public static Vector512<T> vadd<T>(Vector512<T> x, T a)
             where T : unmanaged
-                => vadd(x, z.vbroadcast(n512,a));
+                => vadd(x, gcpu.vbroadcast(n512,a));
 
         [MethodImpl(Inline)]
         static Vector128<T> vadd_u<T>(Vector128<T> x, Vector128<T> y)
@@ -108,7 +108,19 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vadd(v64i(x), v64i(y)));
             else
-                return ginxfp.vadd(x,y);
+                return vadd_f(x,y);
+        }
+
+        [MethodImpl(Inline)]
+        static Vector128<T> vadd_f<T>(Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(cpu.vadd(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(cpu.vadd(v64f(x), v64f(y)));
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -140,7 +152,19 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vadd(v64i(x), v64i(y)));
             else
-                return ginxfp.vadd(x,y);
+                return vadd_f(x,y);
+        }
+
+       [MethodImpl(Inline)]
+       static Vector256<T> vadd_f<T>(Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(float))
+                return generic<T>(cpu.vadd(v32f(x), v32f(y)));
+            else if(typeof(T) == typeof(double))
+                return generic<T>(cpu.vadd(v64f(x), v64f(y)));
+            else
+                throw no<T>();
         }
     }
 }

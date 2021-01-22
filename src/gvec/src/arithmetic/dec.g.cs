@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Vector128<T> vdec<T>(N128 n, T first)
             where T : unmanaged
-                => vsub(first, z.vdec<T>(n));
+                => vsub(first, gcpu.vdec<T>(n));
 
         /// <summary>
         /// Creates a 256-bit vector with components that decrease by unit step from an initial value
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Vector256<T> vdec<T>(N256 n, T first)
             where T : unmanaged
-                => vsub(first, z.vdec<T>(n));
+                => vsub(first, gcpu.vdec<T>(n));
 
         [MethodImpl(Inline)]
         static Vector128<T> vdec_u<T>(Vector128<T> src)
@@ -84,7 +84,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(z.vdec(v64i(src)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]

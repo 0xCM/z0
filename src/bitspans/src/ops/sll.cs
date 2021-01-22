@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan sll(in BitSpan a, int offset, in BitSpan dst)
         {
-            memory.slice(a.Storage,0, offset).CopyTo(dst.Storage, offset);
+            memory.slice(a.Storage, 0, offset).CopyTo(dst.Storage, offset);
             for(var i=0; i<offset; i++)
                 dst[i] = bit.Off;
             return ref dst;

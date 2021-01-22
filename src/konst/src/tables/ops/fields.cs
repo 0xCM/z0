@@ -76,19 +76,5 @@ namespace Z0
             return new TableFields(buffer);
         }
 
-        [Op, Closures(UnsignedInts)]
-        public static TableFields fields<T>()
-            where T : struct
-        {
-            var type = typeof(T);
-            var declared = @readonly(type.DeclaredInstanceFields());
-            var count = declared.Length;
-            var buffer = alloc<TableField>(count);
-            var fields = span(buffer);
-            for(ushort i=0; i<count; i++)
-                map(skip(declared,i), i, ref seek(fields,i));
-
-            return new TableFields(buffer);
-        }
     }
 }

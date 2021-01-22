@@ -83,7 +83,7 @@ namespace Z0
             odd = cpu.vadd(cpu.vadd(maj, maj), odd);
 
             var dst = MemoryStacks.alloc(n128);
-            vsave(odd, ref dst.X0);
+            cpu.vstore(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -125,7 +125,7 @@ namespace Z0
 
             var dst = MemoryStacks.alloc(n256);
             ref var X = ref MemoryStacks.head(ref dst, z64);
-            vstore(odd, ref X);
+            cpu.vstore(odd, ref X);
 
             var total = 0ul;
             total += (seek(X, 0) * kf) >> 56;

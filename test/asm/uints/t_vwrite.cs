@@ -52,7 +52,7 @@ namespace Z0
             var src = Random.Span<byte>(16);
             var dst = gcpu.vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
-            z.vsave(dst, ref first(a));
+            cpu.vstore(dst, ref first(a));
             var b = memory.uint32(src);
 
             Claim.ClaimEq(a,b);

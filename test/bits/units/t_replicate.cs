@@ -24,7 +24,7 @@ namespace Z0
         public void replicate_32u()
         {
             var src = 0b111000u;
-            var actual = gbits.replicate(src).ToBitVector();
+            var actual = gbits.replicate(src).ToBitVector32();
             var width = gbits.effwidth(src);
             Claim.eq(6,width);
 
@@ -40,7 +40,7 @@ namespace Z0
         {
 
             var src = 0b111000ul;
-            var actual = gbits.replicate(src).ToBitVector();
+            var actual = gbits.replicate(src).ToBitVector64();
 
             var width = gbits.effwidth(src);
             Claim.eq(6,width);

@@ -33,9 +33,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = from32(src);
-            return (dst.Length > maxbits && maxbits != 0)
-                ? load32(dst.Data.Slice(0, maxbits))
-                : dst;
+            return (dst.Length > maxbits && maxbits != 0) ? load32(dst.Data.Slice(0, maxbits)) : dst;
         }
 
         [MethodImpl(Inline)]

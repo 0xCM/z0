@@ -9,11 +9,12 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial class BitVector
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe char* p16c<T>(in T src)
+        [MethodImpl(Inline)]
+        public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
-                => refptr<T,char>(ref edit(src));
+            where N : unmanaged, ITypeNat
+                => z.vbroadcast(w,a);
     }
 }

@@ -13,12 +13,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public enum LaneIndex : byte
-    {
-        L0 = 0,
-
-        L1 = 1
-    }
 
     partial struct gcpu
     {

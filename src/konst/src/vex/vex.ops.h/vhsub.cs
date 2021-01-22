@@ -15,7 +15,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_hsub_epi16 (__m128i a, __m128i b) PHSUBW xmm, xmm/m128

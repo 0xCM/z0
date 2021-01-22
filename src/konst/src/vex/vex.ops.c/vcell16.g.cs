@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector

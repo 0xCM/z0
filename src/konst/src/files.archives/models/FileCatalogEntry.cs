@@ -17,10 +17,6 @@ namespace Z0
         public FS.FilePath FilePath;
 
         [MethodImpl(Inline)]
-        public static implicit operator FileCatalogEntry(FS.FilePath src)
-            => new FileCatalogEntry(src);
-
-        [MethodImpl(Inline)]
         public FileCatalogEntry(FS.FilePath src)
             => FilePath = src;
 
@@ -41,5 +37,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => FilePath.FolderName;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator FileCatalogEntry(FS.FilePath src)
+            => new FileCatalogEntry(src);
     }
 }

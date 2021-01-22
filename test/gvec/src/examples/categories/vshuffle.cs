@@ -113,7 +113,7 @@ namespace Z0
         {
             var w = n256;
             var x = gvec.vinc(w,z16);
-            var reverse = vdec<ushort>(w);
+            var reverse = gcpu.vdec<ushort>(w);
             var identity = vinc<ushort>(w);
             var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
@@ -174,7 +174,7 @@ namespace Z0
             var increments = vinc<byte>(n128);
             var spec = perm.ToShuffleSpec();
             var dst = z.vshuf16x8(increments, spec);
-            var expect = vdec<byte>(n128);
+            var expect = gcpu.vdec<byte>(n128);
             Claim.veq(expect, dst);
 
             var identity = videntity_shuffle();

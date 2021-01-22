@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -61,6 +61,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 TestC(this BitVector64 src)
             => BitVector.testc(src);
-
     }
 }

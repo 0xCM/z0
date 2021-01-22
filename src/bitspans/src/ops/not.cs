@@ -14,8 +14,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan not(in BitSpan x, in BitSpan z)
         {
-            var bitcount = z.Length;
-            for(var i=0; i< bitcount; i++)
+            var count = z.Length;
+            for(var i=0; i< count; i++)
                 z[i] = ~ x[i];
             return ref z;
         }

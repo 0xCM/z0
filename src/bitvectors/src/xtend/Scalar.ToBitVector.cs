@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this uint src, N16 n)        
+        public static BitVector16 ToBitVector16(this uint src)
             => (ushort)src;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector8 ToBitVector(this byte src)
+        public static BitVector8 ToBitVector8(this byte src)
             => src;
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector(this uint src)
+        public static BitVector32 ToBitVector32(this uint src)
             => src;
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector32 ToBitVector(this int src)        
+        public static BitVector32 ToBitVector32(this int src)
             => (uint)src;
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector16 ToBitVector(this ushort src)
+        public static BitVector16 ToBitVector16(this ushort src)
             => src;
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector64 ToBitVector(this ulong src)
+        public static BitVector64 ToBitVector64(this ulong src)
             => src;
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector24 ToBitVector(this byte src, N24 n)
+        public static BitVector24 ToBitVector24(this byte src)
             => src;
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector24 ToBitVector(this ushort src, N24 n)
+        public static BitVector24 ToBitVector24(this ushort src)
             => src;
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector24 ToBitVector(this uint src, N24 n)
+        public static BitVector24 ToBitVector24(this uint src)
             => src;
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitVector24 ToBitVector(this ulong src, N24 n)
+        public static BitVector24 ToBitVector24(this ulong src)
             => (uint)src;
    }
 }

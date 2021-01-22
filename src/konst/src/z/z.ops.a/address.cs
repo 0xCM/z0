@@ -13,11 +13,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(in byte src)
-            => p8u(src);
+            => memory.p8u(src);
 
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address(in char src)
-            => p16c(src);
+            => memory.p16c(src);
 
         [MethodImpl(Inline)]
         public unsafe static MemoryAddress address(void* p)

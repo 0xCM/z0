@@ -11,11 +11,6 @@ namespace Z0
 
     partial class BitVector
     {
-        [MethodImpl(Inline)]
-        public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => z.vbroadcast(w,a);
 
         [MethodImpl(Inline), Broadcast]
         public static BitVector16 broadcast(N16 n, byte a)

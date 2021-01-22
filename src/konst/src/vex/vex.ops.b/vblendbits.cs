@@ -12,11 +12,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// Blends the left and right vectors at the bit-level as specified by the mask operand.
         /// </summary>

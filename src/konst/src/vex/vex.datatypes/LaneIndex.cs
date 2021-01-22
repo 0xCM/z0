@@ -5,13 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static z;
-
-    partial struct Table
+    public enum LaneIndex : byte
     {
+        L0 = 0,
 
+        L1 = 1
     }
 }

@@ -90,7 +90,7 @@ namespace Z0
                 for(var row = 0; row<m; row++)
                 {
                     var row1 = BitGrid.row(bg,row);
-                    var row2 = bd[row].ToBitVector();
+                    var row2 = bd[row].ToBitVector64();
                     Claim.eq(row1,row2);
                 }
             }
@@ -111,7 +111,7 @@ namespace Z0
                 for(var row = 0; row<m; row++)
                 {
                     var row1 = BitGrid.row(bg,row);
-                    var row2 = bd[row].ToBitVector();
+                    var row2 = bd[row].ToBitVector16();
                     Claim.eq(row1,row2);
                 }
             }

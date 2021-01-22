@@ -34,7 +34,7 @@ namespace Z0
                 {
                     var range = Random.Interval(min, max);
                     var count = (byte)range.Width;
-                    var expect = gbits.fill(zed, range.Left, count);
+                    var expect = gbits.enable(zed, range.Left, count);
                     var actual = gbits.copy(lit, range.Left, count, zed);
                     if(gmath.neq(expect,actual))
                     {

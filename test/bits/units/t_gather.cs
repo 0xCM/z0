@@ -16,8 +16,8 @@ namespace Z0
         {
             var m2 = BitMasks.Literals.Lsb32x8x1;
             var x2 = BitMasks.gather(UInt32.MaxValue, m2);
-            var y2 = BitMasks.scatter(x2, m2).ToBitVector();
-            var bv = m2.ToBitVector();
+            var y2 = BitMasks.scatter(x2, m2).ToBitVector32();
+            var bv = m2.ToBitVector32();
 
             Claim.eq(y2.Scalar, bv.Scalar);
             for(var i=0; i<y2.Width; i++)
