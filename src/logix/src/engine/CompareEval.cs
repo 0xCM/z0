@@ -10,7 +10,6 @@ namespace Z0.Logix
 
     using static Konst;
 
-    [ApiHost]
     public static class CmpExprEval
     {
         [Op, Closures(UnsignedInts)]

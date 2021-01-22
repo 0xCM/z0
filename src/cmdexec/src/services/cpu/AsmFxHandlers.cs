@@ -36,7 +36,7 @@ namespace Z0.Asm
             if(Collectors.TryGetValue(src.Mnemonic, out var collector))
                 collector.Collect(src);
             else
-                Collectors[src.Mnemonic] = asm.collector(src);
+                Collectors[src.Mnemonic] = Ice.collector(src);
 
             if(Sinks.TryGetValue(src.Mnemonic, out var sink))
                 sink.Deposit(src);

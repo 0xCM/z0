@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.ClrQuery, true)]
+    //[ApiHost(ApiNames.ClrQuery, true)]
     public static partial class ClrQuery
     {
         const NumericKind Closure = AllNumeric;

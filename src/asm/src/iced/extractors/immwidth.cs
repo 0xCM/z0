@@ -7,11 +7,12 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static Asm.IceOpKind;
 
     using W = NumericWidth;
 
-    partial struct asm
+    partial struct IceExtractors
     {
         /// <summary>
         /// Determines the size of a classified immediate operand, if applicable; otherwise, returns 0

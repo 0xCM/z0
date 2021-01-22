@@ -17,7 +17,7 @@ namespace Z0.Asm
         {
             var src = Db.CapturedAsmFile<memory>();
             var doc = asm.doc(src);
-            var lines = doc.Lines;
+            var lines = doc.Content;
             using var target = AsmCaseWriter();
             foreach(var line in lines)
                 target.WriteLine(line.Content);

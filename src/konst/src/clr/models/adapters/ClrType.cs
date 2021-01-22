@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiType(ApiNames.ClrType, true)]
     public readonly struct ClrType : IClrRuntimeType<ClrType>
     {
         public Type Definition {get;}

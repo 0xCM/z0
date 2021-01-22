@@ -7,7 +7,6 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiHost]
     public readonly struct LogicExprEval
     {
         static BitLogix bitlogix => BitLogix.Service;

@@ -12,8 +12,9 @@ namespace Z0.Asm
     using Iced = Iced.Intel;
 
     [ApiHost]
-    public struct IceExtractors
+    public readonly partial struct IceExtractors
     {
+
         [MethodImpl(Inline), Op]
         public static IceUsedMemory[] UsedMemory(Iced.InstructionInfo src)
             => src.GetUsedMemory().Map(x => Deicer.Thaw(x));

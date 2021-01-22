@@ -167,7 +167,7 @@ namespace Z0.Asm
             else if (AsmTest.isBranch(kind))
                 desc = format(asm.branch(@base, src, i));
             else if(AsmTest.isImm(kind))
-                desc = format(asm.imminfo(src, i));
+                desc = format(IceExtractors.imminfo(src, i));
             else
                 desc = kind.ToString();
 

@@ -12,7 +12,6 @@ namespace Z0.Logix
     using static Konst;
     using static z;
 
-    [ApiHost("logic.engine")]
     public static partial class LogicEngine
     {
         /// <summary>

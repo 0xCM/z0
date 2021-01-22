@@ -145,7 +145,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static BinaryOp<Vector256<T>> lookup<T>(N256 w, BLK kind)
             where T : unmanaged
         {
@@ -176,7 +175,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static TernaryOp<Vector256<T>> lookup<T>(N256 w, TLK kind)
             where T : unmanaged
         {

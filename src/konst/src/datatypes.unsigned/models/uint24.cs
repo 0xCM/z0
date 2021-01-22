@@ -28,7 +28,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of an unsigned integer of bit-width 24
     /// </summary>
-    [ApiType, StructLayout(LayoutKind.Sequential, Size = Size)]
+    [StructLayout(LayoutKind.Sequential, Size = Size)]
     public struct uint24 : ISizedInt<U,W,K,T>
     {
         internal ushort Lo;

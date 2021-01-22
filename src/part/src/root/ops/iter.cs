@@ -35,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The item type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void iter<T>(T[] src, Action<T> action)
-            => iter(@readonly(src), action);
+            => iter(@readonly(src),  action);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
@@ -44,6 +44,16 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 action(skip(src,i));
         }
+
+        /// <summary>
+        /// Iterates over the supplied items, invoking a receiver for each
+        /// </summary>
+        /// <param name="src">The source items</param>
+        /// <param name="f">The receiver</param>
+        /// <typeparam name="T">The item type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void iter<T>(Index<T> src, Action<T> action)
+            => iter(src.View,  action);
 
         /// <summary>
         /// Iterates a pair of readonly spans in tandem, invoking a caller-supplied action for each cell pair

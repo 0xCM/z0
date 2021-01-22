@@ -12,7 +12,6 @@ namespace Z0.Logix
 
     using BCK = ComparisonApiClass;
 
-    [ApiHost]
     public readonly struct PredicateApi
     {
         [Op, NumericClosures(Integers)]

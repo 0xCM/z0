@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct asm
+    partial struct IceExtractors
     {
         [Op]
         public static IceInstructionInfo details(in IceInstruction src)

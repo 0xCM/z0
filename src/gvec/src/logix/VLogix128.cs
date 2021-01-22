@@ -52,7 +52,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static UnaryOp<Vector128<T>> lookup<T>(N128 w, ULK kind)
             where T : unmanaged
         {
@@ -69,7 +68,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static UnaryOp<Vector256<T>> lookup<T>(N256 w, ULK kind)
             where T : unmanaged
         {
@@ -81,7 +79,6 @@ namespace Z0
             }
         }
 
-        [Op, Closures(Integers)]
         public static BinaryOp<Vector128<T>> lookup<T>(N128 w,BCK kind)
             where T : unmanaged
         {
@@ -94,7 +91,6 @@ namespace Z0
             }
         }
 
-        [Op, Closures(Integers)]
         public static BinaryOp<Vector256<T>> lookup<T>(N256 w, BCK kind)
             where T : unmanaged
         {
@@ -112,7 +108,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static Shifter<Vector128<T>> lookup<T>(N128 w, BSK kind)
             where T : unmanaged
         {
@@ -131,7 +126,6 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <typeparam name="T">The primal vector component type</typeparam>
-        [Op, Closures(Integers)]
         public static Shifter<Vector256<T>> lookup<T>(N256 w, BSK kind)
             where T : unmanaged
         {

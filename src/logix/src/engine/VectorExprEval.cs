@@ -10,7 +10,6 @@ namespace Z0.Logix
 
     using static Konst;
 
-    [ApiHost]
     public readonly struct VectorExprEval
     {
         [Op, Closures(UnsignedInts)]

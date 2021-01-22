@@ -8,17 +8,14 @@ namespace Z0.Asm
 
     public class AsmDataStore : WfService<AsmDataStore,AsmDataStore>
     {
-        ITableArchive Tables;
-
-        Index<XedSummaryRow> Rows;
+        ITableArchive XedTables;
 
         protected override void OnInit()
         {
-            Tables = Db.TableArchive("xed");
-            Rows = Xed.summaries(Tables);
+            XedTables = Db.TableArchive("xed");
         }
 
-        public ReadOnlySpan<XedSummaryRow> Summaries()
-            => Rows.View;
+        public ReadOnlySpan<XedSummaryRow> XedSummaries()
+            => Xed.summaries(XedTables);
     }
 }

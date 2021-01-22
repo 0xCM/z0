@@ -9,10 +9,12 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using Iced = Iced.Intel;
-
     public readonly struct Ice
     {
+        [MethodImpl(Inline), Op]
+        public static IceInstructionCollector collector(params IceInstruction[] seed)
+            => new IceInstructionCollector(seed);
+
         public Index<IceRegister> registers()
             => Enums.literals<IceRegister>();
     }

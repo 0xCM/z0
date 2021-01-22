@@ -5,15 +5,12 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
     using static LogicSig;
 
     using UAR = UnaryArithmeticApiClass;
 
-    [ApiHost("expr.arith.eval")]
     public class ArithExprEval
     {
         [Op, NumericClosures(UnsignedInts)]
