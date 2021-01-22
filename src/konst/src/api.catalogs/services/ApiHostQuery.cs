@@ -55,7 +55,7 @@ namespace Z0
             where K : unmanaged
                 => (from m in Hosted.Tagged(typeof(OpKindAttribute))
                 let a = m.Tag<OpKindAttribute>().Require()
-                where a.Id.ToString() == k.ToString()
+                where a.ClassId.ToString() == k.ToString()
                     select m).Array();
 
         /// <summary>

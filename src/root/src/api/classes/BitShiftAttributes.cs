@@ -23,7 +23,11 @@ namespace Z0
 
     public sealed class RotlAttribute : A { public RotlAttribute() : base(K.Rotl) {} }
 
+    public sealed class RotlvAttribute : A { public RotlvAttribute() : base(K.Rotlv) {} }
+
     public sealed class RotrAttribute : A { public RotrAttribute() : base(K.Rotr) {} }
+
+    public sealed class RotrvAttribute : A { public RotrvAttribute() : base(K.Rotrv) {} }
 
     public sealed class XorSlAttribute : A { public XorSlAttribute() : base(K.XorSl) {} }
 

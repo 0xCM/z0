@@ -71,8 +71,8 @@ namespace Z0
             var maj =  vor(vand(vxor(x,y),z), vand(x,y));
             var odd =  vxor(vxor(x,y),z);
 
-            maj = vsub(maj, vand(vsrl(maj, 1), k1));
-            odd = vsub(odd, vand(vsrl(odd, 1), k1));
+            maj = cpu.vsub(maj, vand(vsrl(maj, 1), k1));
+            odd = cpu.vsub(odd, vand(vsrl(odd, 1), k1));
 
             maj = cpu.vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
             odd = cpu.vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
@@ -112,8 +112,8 @@ namespace Z0
             var maj =  z.vor(z.vand(z.vxor(a,b),c), z.vand(a,b));
             var odd =  z.vxor(z.vxor(a,b),c);
 
-            maj = vsub(maj, vand(z.vsrl(maj, 1), k1));
-            odd = vsub(odd, vand(z.vsrl(odd, 1), k1));
+            maj = cpu.vsub(maj, vand(z.vsrl(maj, 1), k1));
+            odd = cpu.vsub(odd, vand(z.vsrl(odd, 1), k1));
 
             maj = cpu.vadd(vand(maj,k2), vand(z.vsrl(maj, 2), k2));
             odd = cpu.vadd(vand(odd,k2), vand(z.vsrl(odd, 2), k2));

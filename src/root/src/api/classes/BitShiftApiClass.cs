@@ -58,6 +58,16 @@ namespace Z0
         Rotr  = Id.Rotr,
 
         /// <summary>
+        /// Identifies a segmented right circular shift operator with potentially varying shift amounts per segment
+        /// </summary>
+        Rotrv  = Id.Rotrv,
+
+        /// <summary>
+        /// Identifies a segmented left circular shift operator with potentially varying shift amounts per segment
+        /// </summary>
+        Rotlv  = Id.Rotlv,
+
+        /// <summary>
         /// Identifies a composite shift operator of the form a^(a << offset)
         /// </summary>
         XorSl = Id.XorSl,

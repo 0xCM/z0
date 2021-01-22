@@ -138,7 +138,11 @@ public enum ApiClass : ushort
 
     Rotl,
 
+    Rotlv,
+
     Rotr,
+
+    Rotrv,
 
     XorSl,
 

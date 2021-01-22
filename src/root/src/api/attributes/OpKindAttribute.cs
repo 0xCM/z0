@@ -11,21 +11,18 @@ namespace Z0
     /// </summary>
     public class OpKindAttribute : OpAttribute
     {
-        public static ApiClass OpKindId(object id)
+        static ApiClass @class(object id)
             => (ApiClass)(ulong)Convert.ChangeType(id, typeof(ulong));
 
-        protected OpKindAttribute(object id, object group = null)
-            : base(group?.ToString() ?? string.Empty)
+        protected OpKindAttribute(object id, AsmClass asm = 0)
+            : base(@class(id), asm)
         {
-            Id = OpKindId(id);
+
         }
 
         public OpKindAttribute()
-            : base("")
         {
 
         }
-
-        public ApiClass Id {get;}
     }
 }

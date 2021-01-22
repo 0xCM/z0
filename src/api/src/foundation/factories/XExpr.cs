@@ -258,13 +258,5 @@ namespace Z0
             where T : unmanaged
                 => src.Var2().Assign(value);
 
-
-        [MethodImpl(Inline)]
-        public static bool IsOperator(this LogicExprKind kind)
-            => (uint)kind >= (uint)LogicExprKind.UnaryOperator;
-
-        [MethodImpl(Inline)]
-        public static bool IsOperator(this TypedExprKind kind)
-            => (uint)kind >= (uint)TypedExprKind.UnaryOperator;
     }
 }

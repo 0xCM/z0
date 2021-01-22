@@ -15,28 +15,12 @@ namespace Z0
         public static ApiCaptureRunner create(IWfShell wf, IAsmContext asm)
             => new ApiCaptureRunner(wf, asm, WfShell.host(typeof(ApiCaptureRunner)));
 
-        public static void run(IWfShell wf)
-        {
-            var app = Apps.context(wf, Rng.@default());
-            run(wf, new AsmContext(app, wf));
-        }
-
         public static void run(string[] args)
         {
             using var wf = Configure(WfShell.create(args));
-            run(wf);
-            dump(wf);
-        }
-
-        static void dump(IWfShell wf)
-        {
-            var flow = wf.Running("Emitting process dump");
-            var process = Runtime.CurrentProcess;
-            var name = process.ProcessName;
-            var dst = wf.Db().ProcDumpPath(name).EnsureParentExists();
-            dst.Delete();
-            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
-            wf.Ran(flow, "Emitted process dump");
+            var app = Apps.context(wf, Rng.@default());
+            using var control = create(wf, new AsmContext(app, wf));
+            control.Run();
         }
 
         readonly WfHost Host;
@@ -71,6 +55,7 @@ namespace Z0
             RunPrimary();
             RunImm();
             RunEvaluate();
+            EmitDump();
         }
 
         void RunPrimary()
@@ -98,11 +83,17 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        static void run(IWfShell wf, IAsmContext asm)
+        void EmitDump()
         {
-            using var control = create(wf, asm);
-            control.Run();
+            var flow = Wf.Running("Emitting process dump");
+            var process = Runtime.CurrentProcess;
+            var name = process.ProcessName;
+            var dst = Wf.Db().ProcDumpPath(name).EnsureParentExists();
+            dst.Delete();
+            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
+            Wf.Ran(flow, "Emitted process dump");
         }
+
 
         static IWfShell describe(IWfShell wf)
         {

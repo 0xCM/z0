@@ -16,7 +16,7 @@ namespace Z0
         public static ApiClass kind(MethodInfo src)
         {
             if(src.Tag<OpKindAttribute>(out var dst))
-                return dst.Id;
+                return dst.ClassId;
             else
                 return 0;
         }

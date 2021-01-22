@@ -24,7 +24,7 @@ namespace Z0
         public interface IFunc : IOperation
         {
             string IOperation.Name
-                => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.Id.Format(), GetType().DisplayName());
+                => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => a.ClassId.Format(), GetType().DisplayName());
 
             /// <summary>
             /// The operation identity

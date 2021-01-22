@@ -9,6 +9,8 @@ namespace Z0
     [ApiClass]
     public enum AsmClass : ushort
     {
+        None = 0,
+
         CVTSS2SI = Id.CVTSS2SI,
 
         CVTSD2SI = Id.CVTSD2SI,

@@ -84,13 +84,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vsub(v8u(x), v8u(y)));
+                return generic<T>(cpu.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vsub(v16u(x), v16u(y)));
+                return generic<T>(cpu.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vsub(v32u(x), v32u(y)));
+                return generic<T>(cpu.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vsub(v64u(x), v64u(y)));
+                return generic<T>(cpu.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }
@@ -100,13 +100,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(z.vsub(v8i(x), v8i(y)));
+                 return generic<T>(cpu.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(z.vsub(v16i(x), v16i(y)));
+                 return generic<T>(cpu.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(z.vsub(v32i(x), v32i(y)));
+                 return generic<T>(cpu.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(z.vsub(v64i(x), v64i(y)));
+                 return generic<T>(cpu.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }
@@ -116,13 +116,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vsub(v8u(x), v8u(y)));
+                return generic<T>(cpu.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vsub(v16u(x), v16u(y)));
+                return generic<T>(cpu.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vsub(v32u(x), v32u(y)));
+                return generic<T>(cpu.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vsub(v64u(x), v64u(y)));
+                return generic<T>(cpu.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }
@@ -132,13 +132,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(z.vsub(v8i(x), v8i(y)));
+                 return generic<T>(cpu.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(z.vsub(v16i(x), v16i(y)));
+                 return generic<T>(cpu.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(z.vsub(v32i(x), v32i(y)));
+                 return generic<T>(cpu.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vsub(v64i(x), v64i(y)));
+                return generic<T>(cpu.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }
