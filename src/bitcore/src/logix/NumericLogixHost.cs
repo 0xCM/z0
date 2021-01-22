@@ -42,7 +42,6 @@ namespace Z0
     public delegate T Shifter<T>(T a, byte count)
         where T : unmanaged;
 
-    [ApiHost]
     public readonly struct NumericLogixHost
     {
         /// <summary>

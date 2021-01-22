@@ -12,7 +12,6 @@ namespace Z0.Asm
 
     using FK = AsmFragmentKind;
 
-    [ApiHost]
     public readonly struct AsmFragmentWriter : IAsmFragmentWriter
     {
         const MethodImplOptions Options = MethodImplOptions.NoInlining;

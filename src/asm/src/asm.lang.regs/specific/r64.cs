@@ -22,6 +22,7 @@ namespace Z0.Asm
         public struct r64 : IRegister<r64,W,T>, IAsmOperand<K,T>
         {
             public byte Position {get;}
+
             public T Content {get;}
 
             public K Kind {get;}
@@ -35,25 +36,43 @@ namespace Z0.Asm
             }
         }
 
+        /// <summary>
+        /// Represents the <see cref='K.RAX'/> register
+        /// </summary>
+        /// <remarks>
+        /// | 000  | rax    | eax    | ax     | al    |
+        /// </remarks>
         public struct rax : IRegister<rax,W,T>
         {
-            public T Data;
+            public T Content {get;}
 
             [MethodImpl(Inline)]
             public rax(T value)
-                => Data = value;
+                => Content = value;
 
-            public T Content
+            public eax Eax
             {
                 [MethodImpl(Inline)]
-                get => Data;
+                get => new eax((uint)Content);
             }
+
+            public ax Ax
+            {
+                [MethodImpl(Inline)]
+                get => new ax((ushort)Content);
+            }
+
+            public al Al
+            {
+                [MethodImpl(Inline)]
+                get => new al((byte)Content);
+            }
+
+            public K Kind => K.RAX;
 
             [MethodImpl(Inline)]
             public static implicit operator G(rax src)
                 => new G(src.Content, src.Kind);
-
-            public K Kind => K.RAX;
         }
 
         public struct rcx : IRegister<rcx,W,T>
