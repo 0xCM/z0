@@ -158,17 +158,6 @@ namespace Z0
             return buffer;
         }
 
-        // [Op]
-        // static ApiMember[] JitGeneric(IApiHost src)
-        //     =>  (from m in ApiQuery.GenericMethods(src)
-        //         let kid = m.Method.KindId()
-        //         from t in ApiQuery.NumericClosureTypes(m.Method)
-        //         let reified = m.Method.MakeGenericMethod(t)
-        //         let address = z.address(Jit(reified))
-        //         let id = Diviner.Identify(reified)
-        //         let uri = ApiIdentity.uri(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
-        //         select new ApiMember(uri, reified, kid, address)).Array();
-
         static IMultiDiviner Diviner
             => MultiDiviner.Service;
 

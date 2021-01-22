@@ -11,11 +11,7 @@ namespace Z0.Asm
 
     public readonly struct CaptureServices : TCaptureServices
     {
-        public IAsmContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public CaptureServices(IAsmContext context)
-            => Context = context;
+        public static ICaptureServices Service => default(CaptureServices);
 
         public ICaptureCore CaptureCore
             => Asm.CaptureCore.Service;

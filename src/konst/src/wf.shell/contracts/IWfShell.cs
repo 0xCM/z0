@@ -60,7 +60,7 @@ namespace Z0
         CmdBuilder CmdBuilder()
             => new CmdBuilder(this);
 
-        Task<CmdResult> Dispatch(ICmdExecSpec cmd)
+        Task<CmdResult> Dispatch(ICmd cmd)
             => Task.Factory.StartNew(() => Router.Dispatch(cmd));
 
         IWfShell WithHost(WfHost host)

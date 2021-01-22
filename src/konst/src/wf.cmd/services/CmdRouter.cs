@@ -45,7 +45,7 @@ namespace Z0
             iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
-        public CmdResult Dispatch(ICmdExecSpec cmd)
+        public CmdResult Dispatch(ICmd cmd)
         {
             using var dispatch = Wf.Running($"Dispatching {cmd.CmdName}");
             try

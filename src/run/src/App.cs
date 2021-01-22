@@ -31,7 +31,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
+                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
                 var app = new Runner(wf);
                 if(args.Length == 0)
                 {

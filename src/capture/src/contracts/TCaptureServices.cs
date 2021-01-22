@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     public interface TCaptureServices : ICaptureServices
     {
-        IAsmContext Context {get;}
-
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmDecoder decoder)
             => new ImmSpecializer(decoder);
 

@@ -21,5 +21,11 @@ namespace Z0
             Base = @base;
             Members = members;
         }
+
+        public uint MemberCount
+        {
+            [MethodImpl(Inline)]
+            get => Members.Count;
+        }
     }
 }

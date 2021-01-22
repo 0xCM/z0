@@ -64,6 +64,8 @@ namespace Z0
             var name =  first(args).Content;
             var a0 = args.Length >= 2 ? args[1].Content : EmptyString;
             var a1 = args.Length >= 3 ? args[2].Content : EmptyString;
+            var a2 = args.Length >= 4 ? args[3].Content : EmptyString;
+            var a3 = args.Length >= 5 ? args[4].Content : EmptyString;
 
             switch(name)
             {
@@ -100,13 +102,13 @@ namespace Z0
                     Builder.EmitRuntimeIndex().Run(Wf);
                 break;
                 case DumpCliTablesCmd.CmdName:
-                    Run(Builder.DumpCliTables(Parts.Part.Assembly));
+                    Builder.DumpCliTables(Parts.Part.Assembly).Run(Wf);
                 break;
                 case BuildProjectCmd.CmdName:
-                    Run(Builder.Build());
+                    Builder.Build().Run(Wf);
                 break;
                 case EmitImageContentCmd.CmdName:
-                    Run(Builder.EmitImageContent());
+                    Builder.EmitImageContent().Run(Wf);
                 break;
                 case RunPartCmd.CmdName:
                     Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();
@@ -144,17 +146,6 @@ namespace Z0
             }
         }
 
-
-        void Run(in DumpCliTablesCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
-        void Run(in EmitImageContentCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
-
         void Run(in EmitImageMapsCmd cmd)
         {
             cmd.Dispatch(Wf).Wait();
@@ -180,12 +171,6 @@ namespace Z0
         {
             cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
         }
-
-        void Run(in ListFilesCmd cmd)
-        {
-
-        }
-
 
         void Run(in ShowConfigCmd cmd)
         {

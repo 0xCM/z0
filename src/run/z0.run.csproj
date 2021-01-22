@@ -10,6 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(CmdSpec)" />
+    <ProjectReference Include="$(Polyrand)" />
   </ItemGroup>
 
 </Project>

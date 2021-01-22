@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct CmdExecSpec : ICmdExecSpec, IDataType<CmdExecSpec>
+    public struct CmdExecSpec : ICmd, IDataType<CmdExecSpec>
     {
         public CmdId CmdId {get;}
 

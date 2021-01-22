@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="cmd">The completed command</param>
         /// <param name="ok">Whether the command succeeded</param>
         [MethodImpl(Inline), Op]
-        public static CmdResult result(ICmdExecSpec cmd, bool ok)
+        public static CmdResult result(ICmd cmd, bool ok)
             => new CmdResult(cmd.CmdId, ok);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="cmd">The completed command</param>
         /// <param name="ok">Whether the command succeeded</param>
         [MethodImpl(Inline), Op]
-        public static CmdResult result(ICmdExecSpec cmd, bool ok, dynamic payload)
+        public static CmdResult result(ICmd cmd, bool ok, dynamic payload)
             => new CmdResult(cmd.CmdId, ok, payload);
 
         /// <summary>

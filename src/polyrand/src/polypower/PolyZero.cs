@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IDataStream<T> NonZStream<T>(this IDomainSource random, Interval<T> domain)
             where T : unmanaged
-                => PolyStreams.create<T>(random, domain, x => gmath.nonz(x));
+                => PolyStreams.create<T>(random, domain, x => root.nonz(x));
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range

@@ -59,8 +59,6 @@ namespace Z0
 
         public const string imm = nameof(imm);
 
-        public const string asm_imm = asm + delimiter + imm;
-
         public const string builds = nameof(builds);
 
         public const string tmp = nameof(tmp);

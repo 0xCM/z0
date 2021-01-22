@@ -15,19 +15,25 @@ namespace Z0.Asm
     {
         public IWfShell Wf {get;}
 
+        public IAsmContext Asm {get;}
+
         public AsmFormatConfig FormatConfig {get;}
 
         public IAsmDecoder Decoder {get;}
 
         public IAsmFormatter Formatter {get;}
 
+        public ICaptureAlt CaptureService {get;}
+
         [MethodImpl(Inline), Op]
-        public AsmWf(IWfShell wf)
+        public AsmWf(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
+            Asm = asm;
             FormatConfig = AsmFormatConfig.DefaultStreamFormat;
             Decoder = AsmServices.Decoder(FormatConfig);
             Formatter = new AsmFormatter(FormatConfig);
+            CaptureService = CaptureAlt.service();
         }
 
         public ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src)
@@ -35,36 +41,6 @@ namespace Z0.Asm
 
         public Span<LocatedMethod> Locate(ReadOnlySpan<IdentifiedMethod> src)
             => CaptureAlt.locate(src);
-
-        public ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<MethodInfo> src)
-            => CaptureAlt.capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
-
-        public ReadOnlySpan<ApiCaptureBlock> Capture(Type src)
-            => CaptureAlt.capture(src);
-
-        public ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src)
-            => CaptureAlt.capture(src);
-
-        public ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
-            => CaptureAlt.capture(src,id,buffer);
-
-        public ApiCaptureBlock Capture(MethodInfo src)
-            => CaptureAlt.capture(src);
-
-        public ApiCaptureBlock Capture(IdentifiedMethod src)
-            => CaptureAlt.capture(src);
-
-        public ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
-            => CaptureAlt.capture(src, buffer);
-
-        public ApiMemberCapture Capture(in ApiMember src, Span<byte> buffer)
-            => CaptureAlt.capture(src, buffer);
-
-        public ApiCaptureBlock Capture(LocatedMethod src, Span<byte> buffer)
-            => CaptureAlt.capture(src, buffer);
-
-        public ApiCaptureBlock Capture(IdentifiedMethod src, Span<byte> buffer)
-            => CaptureAlt.capture(src,buffer);
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
             => Decode(CaptureAlt.capture(src), target);

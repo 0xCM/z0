@@ -39,7 +39,7 @@ namespace Z0
             }
         }
 
-        CmdResult ICmdReactor.Invoke(ICmdExecSpec src)
+        CmdResult ICmdReactor.Invoke(ICmd src)
             => Invoke((S)src);
 
         public void Init(IWfShell wf)

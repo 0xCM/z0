@@ -79,7 +79,6 @@ namespace Z0
         [Op]
         public static IWfShell create(string[] args, bool verbose = true)
         {
-
             var status = new WfInitStatus();
             status.StartTS = now();
 

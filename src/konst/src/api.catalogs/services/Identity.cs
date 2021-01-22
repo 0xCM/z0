@@ -111,7 +111,6 @@ namespace Z0
                 let id = Identity.identify(op.Method, k) where !id.IsEmpty
                 select new ClosedApiMethod(op.Host, id, k, op.Method.MakeGenericMethod(pt.Value));
 
-
         /// <summary>
         /// Assigns host-independent api identity to a constructed generic method
         /// </summary>

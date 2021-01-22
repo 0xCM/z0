@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(ICmdExecSpec src)
+        public static string format(ICmd src)
         {
             var count = src.Args.Count;
             var buffer = Buffers.text();

@@ -9,7 +9,6 @@ namespace Z0
 
     using static DbNames;
 
-
     public interface IWfDbPaths : IFileArchive
     {
         FS.FolderName SubjectFolder<S>(S src)
@@ -168,7 +167,7 @@ namespace Z0
             => Root + FS.folder(capture);
 
         FS.FolderPath ImmRoot()
-            => CaptureRoot() + FS.folder(asm_imm);
+            => CaptureRoot() + FS.folder(imm);
 
         FS.FolderPath JobRoot()
             => Root + FS.folder(jobs);

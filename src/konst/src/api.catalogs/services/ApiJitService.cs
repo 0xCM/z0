@@ -14,28 +14,40 @@ namespace Z0
     {
         public BasedApiMembers JitApi(FS.FilePath dst)
         {
+            var members = JitApi();
+            EmitAddresses(members, dst);
+            return members;
+        }
+
+        public BasedApiMembers JitApi()
+        {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var catalog = Wf.ApiParts.Api;
             var parts = catalog.Parts;
-            var jitting = Wf.Running(Msg.JittingParts.Format(parts.Length));
+            var kParts = parts.Length;
+            var flow = Wf.Running(Msg.JittingParts.Format(kParts));
             var all = root.list<ApiMembers>();
             var total = 0u;
             foreach(var part in parts)
             {
-                var jittingPart = Wf.Running(Msg.JittingPart.Format(part.Id));
+                var subflow = Wf.Running(Msg.JittingPart.Format(part.Id));
                 var partMembers = ApiJit.jit(part);
                 all.Add(partMembers);
-                Wf.Ran(jittingPart, Msg.JittedPart.Format(partMembers.Length, part.Id));
+                Wf.Ran(subflow, Msg.JittedPart.Format(partMembers.Length, part.Id));
             }
 
-            var members = all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array();
-            var summaries = summarize(@base, members);
+            var members = new BasedApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
+            Wf.Ran(flow, Msg.JittedMembers.Format(members.MemberCount, parts.Length));
+            return members;
+        }
+
+        public Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst)
+        {
+            var summaries = summarize(src.Base, src.Members.View);
             var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
             var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
             Wf.EmittedTable<ApiAddressRecord>(emitting, emitted.RowCount, dst);
-            Wf.Ran(jitting, Msg.JittedMembers.Format(members.Length, parts.Length));
-
-            return new BasedApiMembers(@base, members);
+            return summaries;
         }
 
         static Index<ApiAddressRecord> summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)

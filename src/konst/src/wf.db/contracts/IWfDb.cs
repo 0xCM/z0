@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static z;
-
     public interface IWfDb : IWfService, IWfDbPaths, IFileArchive
     {
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)

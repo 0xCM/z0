@@ -7,7 +7,7 @@ namespace Z0
     partial class XWf
     {
         public static CmdResult Run<T>(this T cmd, IWfShell wf)
-            where T : struct, ICmdExecSpec
+            where T : struct, ICmd
         {
             var task = wf.Dispatch(cmd);
             task.Wait();

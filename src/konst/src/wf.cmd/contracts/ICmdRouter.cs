@@ -15,7 +15,7 @@ namespace Z0
 
         void Enlist(Index<ICmdReactor> reactors);
 
-        CmdResult Dispatch(ICmdExecSpec cmd);
+        CmdResult Dispatch(ICmd cmd);
     }
 
     [Free]

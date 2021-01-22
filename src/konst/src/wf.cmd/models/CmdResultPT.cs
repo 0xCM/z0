@@ -13,7 +13,7 @@ namespace Z0
     /// Capures a command along with the outcome and payload
     /// </summary>
     public struct CmdResult<C,P> : ICmdResult<C,P>
-        where C : struct, ICmdExecSpec
+        where C : struct, ICmd
     {
         public C Cmd {get;}
 

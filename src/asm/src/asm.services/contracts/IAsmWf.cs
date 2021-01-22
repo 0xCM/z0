@@ -9,7 +9,15 @@ namespace Z0.Asm
 
     public interface IAsmWf
     {
+        /// <summary>
+        /// The workflow context in use
+        /// </summary>
         IWfShell Wf {get;}
+
+        /// <summary>
+        /// The asm context in use
+        /// </summary>
+        IAsmContext Asm {get;}
 
         /// <summary>
         /// The default asm formatting configuration
@@ -26,31 +34,13 @@ namespace Z0.Asm
         /// </summary>
         IAsmDecoder Decoder {get;}
 
+        ICaptureAlt CaptureService {get;}
+
         ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src);
 
         Span<LocatedMethod> Locate(ReadOnlySpan<MethodInfo> src);
 
         Span<LocatedMethod> Locate(ReadOnlySpan<IdentifiedMethod> src);
-
-        ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<MethodInfo> src);
-
-        ReadOnlySpan<ApiCaptureBlock> Capture(Type src);
-
-        ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src);
-
-        ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> buffer);
-
-        ApiCaptureBlock Capture(MethodInfo src);
-
-        ApiCaptureBlock Capture(IdentifiedMethod src);
-
-        ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer);
-
-        ApiMemberCapture Capture(in ApiMember src, Span<byte> buffer);
-
-        ApiCaptureBlock Capture(LocatedMethod src, Span<byte> buffer);
-
-        ApiCaptureBlock Capture(IdentifiedMethod src, Span<byte> buffer);
 
         ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target);
 

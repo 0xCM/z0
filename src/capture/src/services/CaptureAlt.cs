@@ -16,6 +16,10 @@ namespace Z0
     public readonly unsafe struct CaptureAlt
     {
         [Op]
+        public static ICaptureAlt service()
+            => CaptureAltService.create();
+
+        [Op]
         public static ReadOnlySpan<IdentifiedMethod> identify(ReadOnlySpan<MethodInfo> src)
             => src.Map(m =>  new IdentifiedMethod(m.Identify(), m));
 

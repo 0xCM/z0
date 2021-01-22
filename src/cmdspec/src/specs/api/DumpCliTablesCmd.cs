@@ -19,6 +19,15 @@ namespace Z0
         public FS.FilePath Target;
     }
 
+    sealed class DumpCliTablesAug : CmdAugmenter<DumpCliTablesAug,DumpCliTablesCmd>
+    {
+        public override ref DumpCliTablesCmd Augment(ref DumpCliTablesCmd cmd)
+        {
+            cmd = Builder.DumpCliTables(cmd.Source);
+            return ref cmd;
+        }
+    }
+
     partial class XCmd
     {
         [MethodImpl(Inline), Op]

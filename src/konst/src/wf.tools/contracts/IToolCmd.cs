@@ -7,10 +7,10 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolCmd<C> : ICmdExecSpec, ICmd<C>
+    public interface IToolCmd<C> : ICmd, ICmd<C>
         where C : struct, IToolCmd<C>
     {
-        ToolId ICmdExecSpec.ToolId
+        ToolId ICmd.ToolId
             => Cmd.toolid<C>();
     }
 
@@ -19,7 +19,7 @@ namespace Z0
         where C : struct, IToolCmd<C>
         where T : struct, ITool<T>
     {
-        ToolId ICmdExecSpec.ToolId
+        ToolId ICmd.ToolId
             => Cmd.toolid<C>();
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     public struct CmdResult<C> : ICmdResult<C>
-        where C : struct, ICmdExecSpec
+        where C : struct, ICmd
     {
         public C Cmd {get;}
 

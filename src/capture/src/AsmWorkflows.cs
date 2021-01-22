@@ -14,9 +14,9 @@ namespace Z0
     [ApiHost]
     public readonly struct AsmWorkflows
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static IAsmWf create(IWfShell wf)
-            => new AsmWf(wf);
+            => new AsmWf(wf, context(wf));
 
         [Op]
         public static IAsmContext context(IWfShell wf)

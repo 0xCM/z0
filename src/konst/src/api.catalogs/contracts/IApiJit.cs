@@ -9,5 +9,7 @@ namespace Z0
     public interface IApiJit
     {
         BasedApiMembers JitApi(FS.FilePath dst);
+
+        BasedApiMembers JitApi();
     }
 }

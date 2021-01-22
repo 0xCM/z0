@@ -8,12 +8,12 @@ namespace Z0
 
     using static z;
 
-    public sealed class CheckService : CmdReactor<CheckServiceCmd>
+    sealed class CheckService : CmdReactor<CheckServiceCmd>
     {
         protected override CmdResult Run(CheckServiceCmd cmd)
         {
             Wf.Status(cmd.Format());
-
+            CheckBitMasks();
             return Cmd.ok(cmd);
         }
 
@@ -24,7 +24,7 @@ namespace Z0
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
             var dst = Wf.AppData + FS.file("bitmasks", FileExtensions.Asm);
             var routines = asmWf.Decode(methods, dst);
-            Wf.Router.Dispatch(Z0.CheckBitMasks.Spec());
+            Wf.CmdBuilder().CheckBitmasks().Run(Wf);
         }
 
         void Run59()
@@ -55,7 +55,5 @@ namespace Z0
                 Wf.Ran(flow, Host);
             }
         }
-
     }
-
 }

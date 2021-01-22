@@ -12,7 +12,7 @@ namespace Z0
         /// The imm root directory path
         /// </summary>
         FS.FolderPath ImmRoot
-            => FS.dir(Root.Name) + FS.folder("imm");
+            => FS.dir(Root.Name);
 
         /// <summary>
         /// Nonrecursively enumerates directory paths owned by a specified part
@@ -29,7 +29,7 @@ namespace Z0
             => parts.SelectMany(ImmHostDirs).ToArray();
 
         FS.FolderPath ImmSubDir(FS.FolderName name)
-            => (ImmRoot +  name);
+            => (ImmRoot + name);
 
         FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
             => ImmSubDir(FS.folder(owner.Format(), host.Name)) + HexOpFileName(id);

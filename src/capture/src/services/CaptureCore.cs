@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public unsafe readonly struct CaptureCore : ICaptureCore
     {
-        public static CaptureCore Service => default;
+        public static ICaptureCore Service => default(CaptureCore);
 
         public Option<ApiParseResult> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {

@@ -112,7 +112,7 @@ namespace Z0
             }
         }
 
-        public CmdResult Run(ICmdExecSpec spec)
+        public CmdResult Run(ICmd spec)
         {
             Wf.Status(Msg.Dispatching().Format(spec.CmdId));
             return Wf.Router.Dispatch(spec);
