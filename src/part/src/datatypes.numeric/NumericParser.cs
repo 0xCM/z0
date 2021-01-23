@@ -16,6 +16,11 @@ namespace Z0
     [ApiHost]
     public class NumericParser
     {
+        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
+        public static Parsers.Parser<T> parser<T>()
+            where T : unmanaged
+                => Parsers.create<T>(parse);
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static NumericParser<T> create<T>()
             where T : unmanaged
@@ -45,8 +50,8 @@ namespace Z0
             where T : unmanaged
                 => parse<T>(src).ValueOrDefault();
 
-        [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        static bit parse<T>(string src, out T dst)
+        [MethodImpl(Inline), ParseFunction, NumericClosures(AllNumeric)]
+        public static bool parse<T>(string src, out T dst)
             where T : unmanaged
                 => parse_u(src, out dst);
 
@@ -65,7 +70,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit parse_u<T>(string src, out T dst)
+        static bool parse_u<T>(string src, out T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -81,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit parse_i<T>(string src, out T dst)
+        static bool parse_i<T>(string src, out T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -97,7 +102,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit parse_f<T>(string src, out T dst)
+        static bool parse_f<T>(string src, out T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -109,7 +114,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        static bit parse_8i<T>(string src, out T dst)
+        static bool parse_8i<T>(string src, out T dst)
         {
             if(SP.parse(src, out sbyte x))
             {
@@ -124,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
-        static bit parse_8u<T>(string src, out T dst)
+        static bool parse_8u<T>(string src, out T dst)
         {
             if(SP.parse(src, out byte x))
             {
@@ -139,7 +144,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UInt16k)]
-        static bit parse_16u<T>(string src, out T dst)
+        static bool parse_16u<T>(string src, out T dst)
         {
             if(SP.parse(src, out ushort x))
             {
@@ -154,7 +159,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
-        static bit parse_32u<T>(string src, out T dst)
+        static bool parse_32u<T>(string src, out T dst)
         {
             if(SP.parse(src, out uint x))
             {
@@ -169,7 +174,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        static bit parse_64u<T>(string src, out T dst)
+        static bool parse_64u<T>(string src, out T dst)
         {
             if(SP.parse(src, out ulong x))
             {
@@ -184,7 +189,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int16k)]
-        static bit parse_16i<T>(string src, out T dst)
+        static bool parse_16i<T>(string src, out T dst)
         {
             if(SP.parse(src, out short x))
             {
@@ -199,7 +204,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int32k)]
-        static bit parse_32i<T>(string src, out T dst)
+        static bool parse_32i<T>(string src, out T dst)
         {
             if(SP.parse(src, out int x))
             {
@@ -214,7 +219,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int64k)]
-        static bit parse_64i<T>(string src, out T dst)
+        static bool parse_64i<T>(string src, out T dst)
         {
             if(SP.parse(src, out long x))
             {
@@ -229,7 +234,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Float64k)]
-        static bit parse_64f<T>(string src, out T dst)
+        static bool parse_64f<T>(string src, out T dst)
         {
             if(SP.parse(src, out double x))
             {
@@ -244,7 +249,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Float32k)]
-        static bit parse_32f<T>(string src, out T dst)
+        static bool parse_32f<T>(string src, out T dst)
         {
             if(SP.parse(src, out float x))
             {

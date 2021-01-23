@@ -74,6 +74,9 @@ namespace Z0
                     var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
                     Run(Builder.DumpImages(srcDir, dstDir));
                 break;
+                case EmitResDataCmd.CmdName:
+                    Builder.EmitResData().Run(Wf);
+                    break;
                 case ShowProcessMemoryCmd.CmdName:
                     Builder.ShowProcessMemory().Run(Wf);
                     break;

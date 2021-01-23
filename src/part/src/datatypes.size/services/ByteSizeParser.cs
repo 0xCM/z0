@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static root;
 
-    [Parser]
     readonly struct ByteSizeParser : ITextParser<ByteSize>
     {
         public ParseResult<ByteSize> Parse(string src)

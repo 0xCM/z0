@@ -11,8 +11,8 @@ namespace Z0
 
     partial struct Grids
     {
-        [Op]
-        public static Outcome Parse(string s, out GridDim dst)
+        [ParseFunction]
+        public static bool Parse(string s, out GridDim dst)
         {
             var parts = s.Split('x');
             var parser = NumericParser.create<uint>();

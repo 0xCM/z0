@@ -9,37 +9,33 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
 
     [ApiType]
-    public struct Multiparser
+    public class ParseFunctions
     {
-        [FixedAddressValueType]
-        static Multiparser _Service;
+        Dictionary<ClrToken,IParseFunction> Parsers;
 
-        Dictionary<ClrToken,IParser> Parsers;
-
-        static Multiparser()
+        public ParseFunctions()
         {
-            _Service = new Multiparser();
-            _Service.Parsers = root.dict<ClrToken,IParser>();
-            _Service.Include(FilePathParser.service());
+            Parsers = root.dict<ClrToken,IParseFunction>();
+        }
+
+        public ParseFunctions(Index<IParseFunction> src)
+            : this()
+        {
+            root.iter(src, Include);
         }
 
         [MethodImpl(Inline)]
-        public static ref Multiparser service()
-            => ref address(_Service).Ref<Multiparser>();
-
-        [MethodImpl(Inline)]
-        public void Include(IParser parser)
+        public void Include(IParseFunction parser)
             => Parsers[parser.TargetType] = parser;
 
         [MethodImpl(Inline)]
-        public bool Lookup(Type target, out IParser parser)
+        public bool Lookup(Type target, out IParseFunction parser)
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
-        public bool Lookup(ClrToken target, out IParser parser)
+        public bool Lookup(ClrToken target, out IParseFunction parser)
             => Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
@@ -51,11 +47,11 @@ namespace Z0
             => Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
-        public IParser Require(Type target)
+        public IParseFunction Require(Type target)
             => Parsers[target];
 
         [MethodImpl(Inline)]
-        public IParser Require(ClrToken target)
+        public IParseFunction Require(ClrToken target)
             => Parsers[target];
     }
 }

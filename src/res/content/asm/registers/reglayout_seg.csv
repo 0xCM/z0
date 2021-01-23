@@ -1,7 +1,7 @@
-| Register | Bit
-| ES       | 0
-| CS       | 1
-| SS       | 2
-| DS       | 3
-| FS       | 4
-| GS       | 5
+| Code | Register | Bit |
+| 000  | ES       | 0   |
+| 001  | CS       | 1   |
+| 010  | SS       | 2   |
+| 011  | DS       | 3   |
+| 100  | FS       | 4   |
+| 101  | GS       | 5   |

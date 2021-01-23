@@ -411,6 +411,9 @@ public enum ApiClass : ushort
 
     Concretizer,
 
+    ParseFunction,
+
+
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 

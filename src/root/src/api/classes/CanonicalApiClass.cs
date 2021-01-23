@@ -83,5 +83,7 @@ namespace Z0
         Bijection = Id.Bijection,
 
         Concretizer = Id.Concretizer,
+
+        ParseFunction = Id.ParseFunction,
     }
 }

@@ -13,7 +13,6 @@ namespace Z0
 
         public Process Source;
 
-
         public FS.FilePath Target;
     }
 

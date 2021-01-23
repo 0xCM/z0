@@ -60,4 +60,6 @@ namespace Z0
     public sealed class BijectionAttribute : A { public BijectionAttribute() : base(K.Bijection) {} }
 
     public sealed class ConcretizerAttribute : A { public ConcretizerAttribute() : base(K.Concretizer){} }
+
+    public sealed class ParseFunctionAttribute : A { public ParseFunctionAttribute() : base(K.ParseFunction){} }
 }
