@@ -121,7 +121,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = cpu.vconvert16u(sv,tw,tt);
+                var tv = cpu.vconvert16u(sv,tw);
 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
@@ -153,7 +153,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = cpu.vconvert16u(sv,n256,tt);
+                var tv = cpu.vconvert16u(sv,n256);
                 var tvLo = vlo(tv);
                 var tvHi = cpu.vhi(tv);
 

@@ -19,9 +19,17 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        internal readonly Span<T> Data;
+        readonly Span<T> Data;
 
         static N NatRep => default;
+
+        [MethodImpl(Inline)]
+        internal BitMatrix(params T[] src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        internal BitMatrix(Span<T> src)
+            => Data = src;
 
         /// <summary>
         /// The bit width of each row/column
@@ -57,31 +65,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Multiplies the left matrix by the right
-        /// </summary>
-        /// <param name="A">The left matrix</param>
-        /// <param name="B">The right matrix</param>
-        [MethodImpl(Inline)]
-        public static BitMatrix<N,T> operator *(BitMatrix<N,T> A, BitMatrix<N,T> B)
-            => BitMatrix.mul(A, B);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        internal BitMatrix(params T[] src)
-            => Data = src;
-
-        [MethodImpl(Inline)]
-        internal BitMatrix(Span<T> src)
-            => Data = src;
-
-        /// <summary>
         /// Returns a reference to the leading segment of the underlying storage
         /// </summary>
         public ref T Head
@@ -99,7 +82,7 @@ namespace Z0
             set
             {
                 var index = GridCalcs.index(row, col, NatRep, NatRep, default(T));
-                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);
+                seek(Data,index.CellIndex) = gbits.setbit(skip(Data,index.CellIndex), index.BitOffset, value);
             }
         }
 
@@ -205,5 +188,22 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
+
+        /// <summary>
+        /// Multiplies the left matrix by the right
+        /// </summary>
+        /// <param name="A">The left matrix</param>
+        /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline)]
+        public static BitMatrix<N,T> operator *(BitMatrix<N,T> A, BitMatrix<N,T> B)
+            => BitMatrix.mul(A, B);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
+            => lhs.Equals(rhs);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitMatrix<N,T> lhs, BitMatrix<N,T> rhs)
+            => !lhs.Equals(rhs);
     }
 }

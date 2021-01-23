@@ -15,12 +15,12 @@ namespace Z0
     using VW = VectorWidth;
     using TS = TypeSignKind;
 
-    using W = W128;
+    using W = Seg128x8;
 
     /// <summary>
-    /// Defines a type-level representation of <see cref='DW.W128'/> with a <see cref='TS.Signed'/> classifier
+    /// Defines a type-level representation of a <see cref='DW.W128'/> bits with <see cref='DW.W8'/> bit partition widths
     /// </summary>
-    public readonly struct W128 : IVectorWidth<W>
+    public readonly struct Seg128x8 : IVectorWidth<W>
     {
         public const DW Width = DW.W128;
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The width identity
         /// </summary>
-        public const string Identifier = "w128";
+        public const string Identifier = "128x8";
 
         public string Id
             => Identifier;
@@ -60,7 +60,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Width.FormatValue();
+            => Identifier;
 
         public override string ToString()
             => Format();

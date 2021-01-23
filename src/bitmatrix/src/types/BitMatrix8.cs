@@ -38,7 +38,6 @@ namespace Z0
         /// </summary>
         public static BitMatrix8 Ones => new BitMatrix8(0xFFFFFFFFFFFFFFFF);
 
-
         [MethodImpl(Inline)]
         internal BitMatrix8(Span<byte> src)
             => this.Data = src;

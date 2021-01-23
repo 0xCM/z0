@@ -31,7 +31,7 @@ namespace Z0
         /// Allocates a Zero-filled mxn matrix
         /// </summary>
         public static BitMatrix<M,N,T> Alloc()
-            => new BitMatrix<M, N, T>(new T[BitMatrix.cellcount<M,N,T>()]);
+            => new BitMatrix<M,N,T>(new T[BitMatrix.cellcount<M,N,T>()]);
 
         /// <summary>
         /// Loads a matrix from an array of appropriate length
@@ -40,7 +40,7 @@ namespace Z0
         public static BitMatrix<M,N,T> Load(Span<T> src)
         {
             Demands.insist(src.Length == BitMatrix.cellcount<M,N,T>());
-            return new BitMatrix<M, N, T>(src);
+            return new BitMatrix<M,N,T>(src);
         }
 
         [MethodImpl(Inline)]

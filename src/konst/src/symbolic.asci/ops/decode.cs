@@ -47,13 +47,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
         {
-            var decoded = cpu.vinflate(cpu.vbytes(w128, src.Storage));
+            var decoded = cpu.vinflate16u(cpu.vbytes(w128, src.Storage));
             return z.recover<char>(z.bytes(vlo(decoded)));
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => z.recover<char>(z.bytes(cpu.vinflate(src.Storage)));
+            => z.recover<char>(z.bytes(cpu.vinflate16u(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
@@ -77,14 +77,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void decode(in asci8 src, ref char dst)
         {
-            var decoded = cpu.vinflate(cpu.vbytes(w128, src.Storage));
+            var decoded = cpu.vinflate16u(cpu.vbytes(w128, src.Storage));
             z.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
-           var decoded = cpu.vinflate(src.Storage);
+           var decoded = cpu.vinflate16u(src.Storage);
            z.vstore(decoded, ref @as<char,ushort>(dst));
         }
 

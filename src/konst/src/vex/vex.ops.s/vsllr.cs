@@ -25,8 +25,8 @@ namespace Z0
         public static Vector128<byte> vsllr(Vector128<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var dst = vsllr(cpu.vinflate(src,w256,z16),y);
-            return z.vcompact8u(dst, w128, z8);
+            var dst = vsllr(cpu.vinflate16u(src,w256,z16),y);
+            return z.vcompact8u(dst, w128);
         }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace Z0
         public static Vector128<sbyte> vsllr(Vector128<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var dst = vsllr(cpu.vinflate(src,w256,z16i),y);
-            return z.vcompact8i(dst, w128, z8i);
+            var dst = vsllr(cpu.vinflate16i(src,w256,z16i),y);
+            return z.vcompact8i(dst, w128);
         }
 
         /// <summary>
@@ -110,8 +110,8 @@ namespace Z0
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var lo = vsllr(cpu.vinflate(z.vlo(src),w256,z16i),y);
-            var hi = vsllr(cpu.vinflate(cpu.vhi(src),w256,z16i),y);
+            var lo = vsllr(cpu.vinflate16i(z.vlo(src),w256,z16i),y);
+            var hi = vsllr(cpu.vinflate16i(cpu.vhi(src),w256,z16i),y);
             return z.vcompact8i(lo,hi, w256);
         }
 
@@ -124,8 +124,8 @@ namespace Z0
         public static Vector256<byte> vsllr(Vector256<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var lo = vsllr(cpu.vinflate(z.vlo(src),w256,z16),y);
-            var hi = vsllr(cpu.vinflate(cpu.vhi(src),w256,z16),y);
+            var lo = vsllr(cpu.vinflate16u(z.vlo(src),w256,z16),y);
+            var hi = vsllr(cpu.vinflate16u(cpu.vhi(src),w256,z16),y);
             return z.vcompact8u(lo,hi, w256);
         }
 

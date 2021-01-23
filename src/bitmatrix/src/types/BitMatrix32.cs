@@ -16,62 +16,12 @@ namespace Z0
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix32
     {
-        internal readonly Span<uint> Data;
+        readonly Span<uint> Data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
         public const int N = 32;
-
-        /// <summary>
-        /// Allocates a 32x32 identity bitmatrix
-        /// </summary>
-        public static BitMatrix32 Identity => BitMatrix.identity(n32);
-
-        /// <summary>
-        /// Allocates a 32x32 zero bitmatrix
-        /// </summary>
-        public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitMatrix<uint>(in BitMatrix32 src)
-            => BitMatrix.load(src.Data);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.and(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator | (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.or(A, B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator ^ (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrixA.xor(A, B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator ~ (in BitMatrix32 A)
-            => BitMatrix.not(A);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator - (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.xornot(A,B);
-
-        [MethodImpl(Inline)]
-        public static BitMatrix32 operator * (in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.mul(A, B);
-
-        [MethodImpl(Inline)]
-        public static BitVector32 operator * (in BitMatrix32 A, in BitVector32 B)
-            => BitMatrix.mul(A, B);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(in BitMatrix32 A, in BitMatrix32 B)
-            => BitMatrix.same(A,B);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(in BitMatrix32 A, in BitMatrix32 B)
-            => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix32(Span<uint> src)
@@ -129,10 +79,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Data[row], (byte)col);
+            get => BitStates.test(skip(Data, row), (byte)col);
 
             [MethodImpl(Inline)]
-            set =>  Data[row] = BitStates.set(Data[row], (byte)col, value);
+            set =>  seek(Data,row) = BitStates.set(skip(Data, row), (byte)col, value);
         }
 
         /// <summary>
@@ -157,5 +107,55 @@ namespace Z0
 
         public override string ToString()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitMatrix<uint>(in BitMatrix32 src)
+            => BitMatrix.load(src.Data);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator & (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.and(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator | (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.or(A, B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator ^ (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrixA.xor(A, B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator ~ (in BitMatrix32 A)
+            => BitMatrix.not(A);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator - (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.xornot(A,B);
+
+        [MethodImpl(Inline)]
+        public static BitMatrix32 operator * (in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.mul(A, B);
+
+        [MethodImpl(Inline)]
+        public static BitVector32 operator * (in BitMatrix32 A, in BitVector32 B)
+            => BitMatrix.mul(A, B);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(in BitMatrix32 A, in BitMatrix32 B)
+            => BitMatrix.same(A,B);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(in BitMatrix32 A, in BitMatrix32 B)
+            => !BitMatrix.same(A,B);
+
+        /// <summary>
+        /// Allocates a 32x32 identity bitmatrix
+        /// </summary>
+        public static BitMatrix32 Identity => BitMatrix.identity(n32);
+
+        /// <summary>
+        /// Allocates a 32x32 zero bitmatrix
+        /// </summary>
+        public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
     }
 }

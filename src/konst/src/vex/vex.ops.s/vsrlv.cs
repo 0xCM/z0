@@ -22,8 +22,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsrlv(Vector128<sbyte> src, Vector128<sbyte> counts)
         {
-            var x = cpu.vinflate(src, n256, z16i);
-            var y = cpu.vinflate(counts, n256, z16i);
+            var x = cpu.vinflate16i(src, n256, z16i);
+            var y = cpu.vinflate16i(counts, n256, z16i);
             return vcompact8i(vsrlv(x,y),n128,z8i);
         }
 
@@ -35,8 +35,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vsrlv(Vector128<byte> src, Vector128<byte> counts)
         {
-            var x = cpu.vinflate(src, n256, z16);
-            var y = cpu.vinflate(counts, n256, z16);
+            var x = cpu.vinflate16u(src, n256, z16);
+            var y = cpu.vinflate16u(counts, n256, z16);
             return vcompact8u(vsrlv(x,y),n128,z8);
         }
 
@@ -48,8 +48,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<short> vsrlv(Vector128<short> src, Vector128<short> counts)
         {
-            var x = cpu.vinflate(src, n256, z32i);
-            var y = v32u(cpu.vinflate(counts,n256,z32i));
+            var x = cpu.vinflate32i(src, n256, z32i);
+            var y = v32u(cpu.vinflate32i(counts,n256,z32i));
             return vcompact16i(ShiftRightLogicalVariable(x,y),n128,z16i);
         }
 
@@ -61,8 +61,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsrlv(Vector128<ushort> src, Vector128<ushort> counts)
         {
-            var x = cpu.vinflate(src, n256, z32);
-            var y = cpu.vinflate(counts, n256, z32);
+            var x = cpu.vinflate32u(src, n256, z32);
+            var y = cpu.vinflate32u(counts, n256, z32);
             return vcompact16u(ShiftRightLogicalVariable(x,y), n128);
         }
 
@@ -114,8 +114,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsrlv(Vector256<sbyte> src, Vector256<sbyte> counts)
         {
-            (var x0, var x1) = cpu.vinflate(src, n512, z16i);
-            (var s0, var s1) = cpu.vinflate(counts, n512, z16i);
+            (var x0, var x1) = cpu.vinflate16i(src, n512, z16i);
+            (var s0, var s1) = cpu.vinflate16i(counts, n512, z16i);
             return vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
@@ -127,8 +127,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsrlv(Vector256<byte> src, Vector256<byte> counts)
         {
-            (var x0, var x1) = cpu.vinflate(src, n512, z16);
-            (var s0, var s1) = cpu.vinflate(counts, n512, z16);
+            (var x0, var x1) = cpu.vinflate16u(src, n512, z16);
+            (var s0, var s1) = cpu.vinflate16u(counts, n512, z16);
             return vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
@@ -140,8 +140,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<short> vsrlv(Vector256<short> src, Vector256<short> counts)
         {
-            (var x0, var x1) = cpu.vinflate(src, n512, z32i);
-            (var s0, var s1) = cpu.vinflate(counts, n512, z32i);
+            (var x0, var x1) = cpu.vinflate32i(src, n512, z32i);
+            (var s0, var s1) = cpu.vinflate32i(counts, n512, z32i);
             return vcompact16i(vsrlv(x0,s0),vsrlv(x1,s1),n256);
         }
 
@@ -153,8 +153,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsrlv(Vector256<ushort> src, Vector256<ushort> counts)
         {
-            (var x0, var x1) = cpu.vinflate(src, n512, z32);
-            (var s0, var s1) = cpu.vinflate(counts, n512, z32);
+            (var x0, var x1) = cpu.vinflate32u(src, n512, z32);
+            (var s0, var s1) = cpu.vinflate32u(counts, n512, z32);
             return vcompact16u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 

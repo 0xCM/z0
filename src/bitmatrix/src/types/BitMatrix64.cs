@@ -71,18 +71,17 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reads/manipulates the bit in a specified cell
+        /// Queries/manipulates a bit in an identified cell
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
-        /// <param name="src">The source value</param>
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Data[row], (byte)col);
+            get => BitStates.test(skip(Data, row), (byte)col);
 
             [MethodImpl(Inline)]
-            set => Data[row] = BitStates.set(Data[row], (byte)col, value);
+            set =>  seek(Data,row) = BitStates.set(skip(Data, row), (byte)col, value);
         }
 
         /// <summary>
@@ -100,7 +99,7 @@ namespace Z0
         {
             var col = 0ul;
             for(byte r = 0; r<N; r++)
-                col = Bits.setif(Data[r], (byte)index, col, r);
+                col = Bits.setif(skip(Data,r), (byte)index, col, r);
             return col;
         }
 
