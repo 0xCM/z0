@@ -17,13 +17,14 @@ namespace Z0
             where T : IEquatable<T>
                 => new Replacement<T>(src,dst);
 
-        public static Replacements<T> replace<T>(T[] src, T dst)
+        [Op, Closures(Closure)]
+        public static Replacements<T> replace<T>(Index<T> src, T dst)
             where T : IEquatable<T>
         {
             var count = src.Length;
             var buffer = sys.alloc<Replacement<T>>(count);
             ref var target = ref first(buffer);
-            ref readonly var input = ref first(src);
+            ref readonly var input = ref src.First;
             for(var i=0; i<count; i++)
                 seek(target,i) = replace(skip(input,i), dst);
             return buffer;

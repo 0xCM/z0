@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct Rules
     {
@@ -17,9 +16,9 @@ namespace Z0
         /// </summary>
         public readonly struct Bijection<S,T>
         {
-            public S[] Source {get;}
+            public Index<S> Source {get;}
 
-            public T[] Target {get;}
+            public Index<T> Target {get;}
 
             [MethodImpl(Inline)]
             public Bijection(Index<S> src, Index<T> dst)
@@ -32,7 +31,7 @@ namespace Z0
             public Paired<S,T> this[uint i]
             {
                 [MethodImpl(Inline)]
-                get => root.paired(skip(Source,i), skip(Target,i));
+                get => root.paired(Source[i], Target[i]);
             }
         }
 

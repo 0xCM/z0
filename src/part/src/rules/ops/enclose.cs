@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct Rules
     {
@@ -18,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Fenced<C,F> enclose<C,F>(C content, Fence<F> fence)
-            => new Fenced<C, F>(content, fence);
+            => new Fenced<C,F>(content, fence);
 
         [MethodImpl(Inline)]
         public static Fenced<C,F> enclose<C,F>(C content, F left, F right)

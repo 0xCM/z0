@@ -5,21 +5,29 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
     partial struct Rules
     {
-        public interface IConsequent : ITerm
+        public readonly struct Consequent : IConsequent
         {
+            public TermId Id {get;}
 
-        }
+            public dynamic Term {get;}
 
-        public interface IConsequent<C> : IConsequent, ITerm<C>
-            where C : IEquatable<C>
-        {
-            C Term {get;}
+            [MethodImpl(Inline)]
+            public Consequent(TermId id, dynamic src)
+            {
+                Id = id;
+                Term = src;
+            }
+
+            [MethodImpl(Inline)]
+            public bool Equals(Consequent src)
+                => equals(this, src);
         }
 
         public readonly struct Consequent<C> : IConsequent<C>
@@ -36,8 +44,13 @@ namespace Z0
                 Term = src;
             }
 
+            [MethodImpl(Inline)]
             public bool Equals(Consequent<C> src)
                 => equals(this, src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Consequent(Consequent<C> src)
+                => new Consequent(src.Id, src.Term);
         }
     }
 }

@@ -11,10 +11,15 @@ namespace Z0
 
     partial struct Rules
     {
-        [MethodImpl(Inline)]
-        public static Rule<A,C> rule<A,C>(TermId id, Index<Proposition<A,C>> terms)
-            where A : IEquatable<A>
-            where C : IEquatable<C>
-                => new Rule<A,C>(id,terms);
+        public interface IRule : ITerm
+        {
+
+        }
+
+        public interface IRule<P> : IRule
+            where P : IProposition, IEquatable<P>
+        {
+            Index<P> Terms {get;}
+        }
     }
 }

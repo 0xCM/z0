@@ -2,19 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Konst;
+    using static RegisterBits;
+    using static z;
 
-    partial struct Rules
+    using W = RegisterWidth;
+
+    [ApiHost]
+    public readonly partial struct AsmRegs
     {
-        [MethodImpl(Inline)]
-        public static Rule<A,C> rule<A,C>(TermId id, Index<Proposition<A,C>> terms)
-            where A : IEquatable<A>
-            where C : IEquatable<C>
-                => new Rule<A,C>(id,terms);
+
     }
 }

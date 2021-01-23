@@ -59,7 +59,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Fence(Pair<dynamic> src)
                 => new Fence(src.Left, src.Right);
-
         }
     }
 }

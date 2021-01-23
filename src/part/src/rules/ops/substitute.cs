@@ -28,13 +28,13 @@ namespace Z0
         /// <param name="src"></param>
         /// <typeparam name="T">The data type</typeparam>
         [Op, Closures(Closure)]
-        public static Substitutions<T> substitutions<T>(Substitution<T>[] src)
+        public static Substitutions<T> substitutions<T>(Index<Substitution<T>> src)
         {
             var count = (uint)src.Length;
             var sources = alloc<T>(count);
             var targets = alloc<T>(count);
 
-            ref var input = ref first(src);
+            ref var input = ref src.First;
             ref var s = ref first(sources);
             ref var t = ref first(targets);
 

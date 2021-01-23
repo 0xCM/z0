@@ -11,6 +11,17 @@ namespace Z0
 
     partial struct Rules
     {
+        public readonly struct One
+        {
+            public dynamic Value {get;}
+
+            [MethodImpl(Inline)]
+            public One(dynamic src)
+            {
+                Value = src;
+            }
+        }
+
         /// <summary>
         /// Just one, neither more nor less
         /// </summary>
@@ -27,6 +38,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator One<T>(T src)
                 => new One<T>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator One(One<T> src)
+                => new One(src.Value);
         }
     }
 }

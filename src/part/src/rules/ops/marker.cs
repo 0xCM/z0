@@ -14,10 +14,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Marker<T> marker<T>(Index<T> symbols)
             => new Marker<T>(symbols);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Marker untype<T>(Marker<T> src)
-            => new Marker(src.Symbols.Map(s => (dynamic)s));
-
     }
 }

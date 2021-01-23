@@ -20,7 +20,7 @@ namespace Z0
             var input = span(src);
             fixed(T* c = src)
                 for(var i=offset; i<count; i++)
-                    seek(dst,i) = (*c).Equals(rule.Match) ? rule.Replace : skip(input,i);
+                    seek(dst, i) = (*c).Equals(rule.Match) ? rule.Replace : skip(input,i);
         }
     }
 }

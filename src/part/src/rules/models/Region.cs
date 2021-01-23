@@ -11,51 +11,20 @@ namespace Z0
 
     partial struct Rules
     {
-        public interface IRegion
-        {
-            dynamic Base {get;}
-
-            Pair<dynamic> TopLeft {get;}
-
-            Pair<dynamic> BottomRight {get;}
-        }
-
-        public interface IRegion<B,T> : IRegion
-        {
-            /// <summary>
-            /// A value to which the region coordinates are relative
-            /// </summary>
-            new B Base {get;}
-
-            new Pair<T> TopLeft {get;}
-
-            new Pair<T> BottomRight {get;}
-
-            dynamic IRegion.Base
-                => Base;
-
-            Pair<dynamic> IRegion.TopLeft
-                => (TopLeft.Left, TopLeft.Right);
-
-            Pair<dynamic> IRegion.BottomRight
-                => (BottomRight.Left, BottomRight.Right);
-        }
-
-
         public readonly struct Region : IRegion
         {
             public dynamic Base {get;}
 
-            public Pair<dynamic> TopLeft {get;}
+            public Pair<dynamic> UpperLeft {get;}
 
-            public Pair<dynamic> BottomRight {get;}
+            public Pair<dynamic> LowerRight {get;}
 
             [MethodImpl(Inline)]
             public Region(dynamic @base, Pair<dynamic> tl, Pair<dynamic> br)
             {
                 Base = @base;
-                TopLeft = tl;
-                BottomRight = br;
+                UpperLeft = tl;
+                LowerRight = br;
             }
         }
 
@@ -63,17 +32,23 @@ namespace Z0
         {
             public B Base {get;}
 
-            public Pair<T> TopLeft {get;}
+            public Pair<T> UpperLeft {get;}
 
-            public Pair<T> BottomRight {get;}
+            public Pair<T> LowerRight {get;}
 
             [MethodImpl(Inline)]
             public Region(B @base, Pair<T> tl, Pair<T> br)
             {
                 Base = @base;
-                TopLeft = tl;
-                BottomRight = br;
+                UpperLeft = tl;
+                LowerRight = br;
             }
+
+            public static implicit operator Region(Region<B,T> src)
+                => new Region(src.Base,
+                    root.pair((dynamic)src.UpperLeft.Left, src.UpperLeft.Right),
+                    root.pair((dynamic)src.LowerRight.Left, src.LowerRight.Right)
+                    );
         }
     }
 }

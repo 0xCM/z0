@@ -75,6 +75,9 @@ namespace Z0.Asm
                 => new G(src.Content, src.Kind);
         }
 
+        /// <summary>
+        /// Register C Extended
+        /// </summary>
         public struct rcx : IRegister<rcx,W,T>
         {
             public T Data;
@@ -102,6 +105,9 @@ namespace Z0.Asm
             }
         }
 
+        /// <summary>
+        /// Register D Extended
+        /// </summary>
         public struct rdx : IRegister<rdx,W,T>
         {
             public T Data;
@@ -123,6 +129,9 @@ namespace Z0.Asm
             public K Kind => K.RDX;
         }
 
+        /// <summary>
+        /// Register B Extended
+        /// </summary>
         public struct rbx : IRegister<rbx,W,T>
         {
             public T Data;
@@ -145,7 +154,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Register source index
+        /// Register Source Index: Specifies the source for data copies
         /// </summary>
         public struct rsi : IRegister<rsi,W,T>
         {
@@ -170,7 +179,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Register destination index
+        /// Register Destination Index: Specifies the target for data copies
         /// </summary>
         public struct rdi : IRegister<rdi,W,T>
         {
@@ -200,7 +209,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Specifies the stack location and grows downwards
+        /// Register Stack Pointer: Specifies the current location in stack and grows downwards
         /// </summary>
         public struct rsp : IRegister<rsp,W,T>
         {
@@ -224,7 +233,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Specifies the register base pointer - the top of the stack
+        /// Register Base Pointer: Specifies the top of the stack
         /// </summary>
         public struct rbp : IRegister<rbp,W,T>
         {

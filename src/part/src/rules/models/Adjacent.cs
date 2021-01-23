@@ -42,6 +42,5 @@ namespace Z0
             public static implicit operator Adjacent<T>(Pair<T> src)
                 => new Adjacent<T>(src.Left, src.Right);
         }
-
     }
 }

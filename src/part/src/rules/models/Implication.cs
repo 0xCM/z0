@@ -11,24 +11,23 @@ namespace Z0
 
     partial struct Rules
     {
-        public interface IImplication : ITerm
-        {
-
-        }
-
-        public interface IImplication<I,A,C> : IImplication
-            where I : unmanaged, IEquatable<I>
+        public readonly struct Implication<A,C> : IImplication<A,C>
             where A : IEquatable<A>
             where C : IEquatable<C>
         {
-            I Index {get;}
+            public uint Index {get;}
 
-            A Antecedant {get;}
+            public A Antecedant {get;}
 
-            C Consequent {get;}
+            public C Consequent {get;}
 
-            TermId ITerm.Id
-                => memory.u32(Index);
+            [MethodImpl(Inline)]
+            public Implication(uint index, A a, C c)
+            {
+                Index = index;
+                Antecedant = a;
+                Consequent = c;
+            }
         }
 
         /// <summary>

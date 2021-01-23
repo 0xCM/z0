@@ -191,10 +191,4 @@ namespace Z0.Asm
             return dst;
         }
     }
-
-    [ApiHost]
-    public readonly partial struct AsmRegs
-    {
-
-    }
 }

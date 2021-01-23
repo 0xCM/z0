@@ -11,11 +11,32 @@ namespace Z0
 
     partial struct Rules
     {
-        [MethodImpl(Inline)]
-        public static Implication<I,A,C> implies<I,A,C>(I index, A @if, C then)
+        public interface IImplication : ITerm
+        {
+
+        }
+
+        public interface IImplication<I,A,C> : IImplication
             where I : unmanaged, IEquatable<I>
             where A : IEquatable<A>
             where C : IEquatable<C>
-                => new Implication<I,A,C>(index, @if, then);
+        {
+            I Index {get;}
+
+            A Antecedant {get;}
+
+            C Consequent {get;}
+
+            TermId ITerm.Id
+                => memory.u32(Index);
+        }
+
+        public interface IImplication<A,C> : IImplication<uint,A,C>
+            where A : IEquatable<A>
+            where C : IEquatable<C>
+        {
+
+        }
+
     }
 }

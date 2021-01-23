@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct Rules
     {
@@ -22,6 +21,5 @@ namespace Z0
         public static Range<T> range<T>(T min, T max, T step)
             where T : unmanaged, IEquatable<T>
                 => new Range<T>(min, max, step);
-
     }
 }
