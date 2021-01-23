@@ -50,7 +50,7 @@ namespace Z0
         public static ref StackBlock16 copy(ReadOnlySpan<byte> src, ref StackBlock16 dst)
         {
             var vSrc = cpu.vload(w128, first(src));
-            z.vstore(vSrc, ref u8(dst));
+            cpu.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
@@ -58,7 +58,7 @@ namespace Z0
         public static ref StackBlock32 copy(ReadOnlySpan<byte> src, ref StackBlock32 dst)
         {
             var vSrc = cpu.vload(w256, first(src));
-            z.vstore(vSrc, ref u8(dst));
+            cpu.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         public static ref StackBlock64 copy(ReadOnlySpan<byte> src, ref StackBlock64 dst)
         {
             var vSrc = cpu.vload(w512, first(src));
-            z.vstore(vSrc, ref u8(dst));
+            cpu.vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 

@@ -28,7 +28,6 @@ namespace Z0
             where T : unmanaged
                 => new LayoutPart(src.Id, src.Left, src.Right);
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static LayoutPart untyped<T,R>(in LayoutPart<T,R> src)
             where T : unmanaged

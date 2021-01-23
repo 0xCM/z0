@@ -82,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vtestc(v8u(src), v8u(mask));
+                return cpu.vtestc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return z.vtestc(v16u(src), v16u(mask));
+                return cpu.vtestc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return z.vtestc(v32u(src), v32u(mask));
+                return cpu.vtestc(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return z.vtestc(v64u(src), v64u(mask));
+                return cpu.vtestc(v64u(src), v64u(mask));
             else
                 return vtestc_i(src,mask);
         }
@@ -98,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vtestc(v8i(src), v8i(mask));
+                return cpu.vtestc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return z.vtestc(v16i(src), v16i(mask));
+                return cpu.vtestc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return z.vtestc(v32i(src), v32i(mask));
+                return cpu.vtestc(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return z.vtestc(v64i(src), v64i(mask));
+                return cpu.vtestc(v64i(src), v64i(mask));
             else
                 return vtestc_f(src,mask);
         }
@@ -114,9 +114,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vtestc(v32f(src), v32f(mask));
+                return cpu.vtestc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return z.vtestc(v64f(src), v64f(mask));
+                return cpu.vtestc(v64f(src), v64f(mask));
             else
                 throw no<T>();
         }
@@ -126,13 +126,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vtestc(v8u(src), v8u(mask));
+                return cpu.vtestc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return z.vtestc(v16u(src), v16u(mask));
+                return cpu.vtestc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return z.vtestc(v32u(src), v32u(mask));
+                return cpu.vtestc(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return z.vtestc(v64u(src), v64u(mask));
+                return cpu.vtestc(v64u(src), v64u(mask));
             else
                 return vtestc_i(src,mask);
         }
@@ -142,13 +142,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vtestc(v8i(src), v8i(mask));
+                return cpu.vtestc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return z.vtestc(v16i(src), v16i(mask));
+                return cpu.vtestc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return z.vtestc(v32i(src), v32i(mask));
+                return cpu.vtestc(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return z.vtestc(v64i(src), v64i(mask));
+                return cpu.vtestc(v64i(src), v64i(mask));
             else
                 return vtestc_f(src,mask);
         }
@@ -158,9 +158,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vtestc(v32f(src), v32f(mask));
+                return cpu.vtestc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return z.vtestc(v64f(src), v64f(mask));
+                return cpu.vtestc(v64f(src), v64f(mask));
             else
                 throw no<T>();
         }

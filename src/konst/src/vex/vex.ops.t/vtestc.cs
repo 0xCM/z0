@@ -11,8 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

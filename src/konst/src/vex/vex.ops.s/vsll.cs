@@ -24,7 +24,7 @@ namespace Z0
         public static Vector128<byte> vsll(Vector128<byte> src, [Imm] byte count)
         {
             var y = v8u(vsll(v64u(src), count));
-            var m = vmsb(n128, n8, (byte)(8 - count),z8);
+            var m = vmsb(n128, n8, (byte)(8 - count), z8);
             return vand(y,m);
         }
 

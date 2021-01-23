@@ -16,10 +16,9 @@ namespace Z0
         /// Presents the leading source storage cell as a generic reference
         /// </summary>
         /// <param name="src">The source storage</param>
-        /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T head<T>(ref BitBlock64 src, T t = default)
+        public static ref T head<T>(ref BitBlock64 src)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
 

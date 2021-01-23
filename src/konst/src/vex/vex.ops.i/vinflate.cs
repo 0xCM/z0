@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate16i(Vector128<byte> src, W256 w)
-            => vinflate16i(src, w, Zero16i);
+            => vinflate16i(src, w);
 
         /// <summary>
         /// 32x8u -> 32x16u
@@ -360,7 +360,7 @@ namespace Z0
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector1024<uint> vinflate32u(Vector256<byte> src, N1024 w, uint t = 0)
-            => vconvert32u(src, w, t);
+            => vconvert32u(src, w);
 
         /// <summary>
         /// 16x16u -> 16x32u
@@ -370,6 +370,6 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate32u(Vector256<ushort> src, N512 w, uint t)
-            => vconvert32u(src, w, t);
+            => vconvert32u(src, w);
     }
 }

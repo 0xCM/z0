@@ -78,14 +78,14 @@ namespace Z0
         public static void decode(in asci8 src, ref char dst)
         {
             var decoded = cpu.vinflate16u(cpu.vbytes(w128, src.Storage));
-            z.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
+            cpu.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
            var decoded = cpu.vinflate16u(src.Storage);
-           z.vstore(decoded, ref @as<char,ushort>(dst));
+           cpu.vstore(decoded, ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]

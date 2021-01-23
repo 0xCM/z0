@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref BitBlock64 src, int index, T t = default)
+        public static ref T cell<T>(ref BitBlock64 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
 
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref BitBlock128 src, int index, T t = default)
+        public static ref T cell<T>(ref BitBlock128 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref BitBlock256 src, int index, T t = default)
+        public static ref T cell<T>(ref BitBlock256 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref BitBlock512 src, int index, T t = default)
+        public static ref T cell<T>(ref BitBlock512 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="index">The source index, relative to the cell type</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T cell<T>(ref BitBlock1024 src, int index, T t = default)
+        public static ref T cell<T>(ref BitBlock1024 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
 

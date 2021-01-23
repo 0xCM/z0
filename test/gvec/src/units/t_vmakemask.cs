@@ -16,7 +16,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.BitVector(n16);
-                var b = z.vtakemask(z.vmakemask(a));
+                var b = cpu.vtakemask(z.vmakemask(a));
                 Claim.eq(b,a.Scalar);
             }
         }
@@ -26,7 +26,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.BitVector(n32);
-                var b = z.vtakemask(z.vmakemask(a));
+                var b = cpu.vtakemask(z.vmakemask(a));
                 Claim.eq(b,a.Scalar);
             }
         }

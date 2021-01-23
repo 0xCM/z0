@@ -17,7 +17,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_min_epu8 (__m128i a, __m128i b) PMINUB xmm, xmm/m128
@@ -165,6 +165,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Min]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
-            => cpu.vblend(y, x, v8u(vlt(x,y)));
+            => vblend(y, x, v8u(vlt(x,y)));
     }
 }

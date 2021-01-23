@@ -1,0 +1,5 @@
+# BSWAP — Byte Swap
+----------------------------------------------------------------------------------------------------------------------------
+| Opcode            | Instruction | Op/En | 64-bit Mode | Compat/Leg Mode | Description                                   |
+| 0F C8+ rd         | BSWAP r32   | O     | Valid*      | Valid           | Reverses the byte order of a 32-bit register. |
+| REX.W + 0F C8+ rd | BSWAP r64   | O     | Valid       | N.E.            | Reverses the byte order of a 64-bit register. |

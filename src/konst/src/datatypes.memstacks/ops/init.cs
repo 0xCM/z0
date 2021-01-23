@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock32 init<T>(W32 w, in T src)
+        public static BitBlock32 init<T>(in T src, W32 w)
             where T : unmanaged
         {
             ref var dst8 = ref alloc(out BitBlock32 dst);
@@ -78,29 +78,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock64 init<T>(W64 w, in T src)
+        public static BitBlock64 init<T>(in T src, W64 w)
             where T : unmanaged
         {
             var x = cpu.vbroadcast(w128, uint8(src));
-            vstore(x, ref alloc(out BitBlock128 dst));
+            cpu.vstore(x, ref alloc(out BitBlock128 dst));
             return @as<BitBlock128,BitBlock64>(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock128 init<T>(W128 w, in T src)
+        public static BitBlock128 init<T>(in T src, W128 w)
             where T : unmanaged
         {
             var x = cpu.vbroadcast(w, uint8(src));
-            vstore(x, ref alloc(out BitBlock128 dst));
+            cpu.vstore(x, ref alloc(out BitBlock128 dst));
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock256 init<T>(W256 w, in T src)
+        public static BitBlock256 init<T>(in T src, W256 w)
             where T : unmanaged
         {
             var x = cpu.vbroadcast(w, uint8(src));
-            vstore(x, ref alloc(out BitBlock256 dst));
+            cpu.vstore(x, ref alloc(out BitBlock256 dst));
             return dst;
         }
     }

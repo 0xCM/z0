@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Partitions a 32-bit source value into 32 8-bit pieces each with an effective width of 1

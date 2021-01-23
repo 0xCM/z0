@@ -125,7 +125,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vconvert32i(Vector128<short> src, W256 w, int t = 0)
+        public static Vector256<int> vconvert32i(Vector128<short> src, W256 w)
             => ConvertToVector256Int32(src);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vconvert32u(Vector128<ushort> src, W256 w, uint t = 0)
+        public static Vector256<uint> vconvert32u(Vector128<ushort> src, W256 w)
             => v32u(ConvertToVector256Int32(src));
 
         /// <summary>
@@ -168,8 +168,8 @@ namespace Z0
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<long> vconvert64i(Vector128<short> src, W512 w, long t = 0)
-            => (vmaplo64i(src, n256, z64i), vmaphi64i(src, n256, z64i));
+        public static Vector512<long> vconvert64i(Vector128<short> src, W512 w)
+            => (vmaplo64i(src, w256), vmaphi64i(src, w256));
 
         /// <summary>
         /// 8x16x -> (4x64u,4x64u)
@@ -178,8 +178,8 @@ namespace Z0
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<ulong> vconvert64u(Vector128<ushort> src, W512 w, ulong t = 0)
-            => (vmaplo64u(src, n256, z64), vmaphi64u(src, n256, z64));
+        public static Vector512<ulong> vconvert64u(Vector128<ushort> src, W512 w)
+            => (vmaplo64u(src, w256), vmaphi64u(src, w256));
 
         /// <summary>
         /// 16x8i -> 16x32i
@@ -188,8 +188,8 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<int> vconvert32i(Vector128<sbyte> src, W512 w, int t = 0)
-            => (vmaplo32i(src,n256,t), vmaphi32i(src,n256,t));
+        public static Vector512<int> vconvert32i(Vector128<sbyte> src, W512 w)
+            => (vmaplo32i(src, w256), vmaphi32i(src, w256));
 
         /// <summary>
         /// 16x8u -> 16x32u
@@ -198,8 +198,8 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<uint> vconvert32u(Vector128<byte> src, W512 w, uint t = 0)
-            => (vmaplo32u(src, n256, t), vmaphi32u(src, n256, t));
+        public static Vector512<uint> vconvert32u(Vector128<byte> src, W512 w)
+            => (vmaplo32u(src, w256), vmaphi32u(src, w256));
     }
 
     partial struct z

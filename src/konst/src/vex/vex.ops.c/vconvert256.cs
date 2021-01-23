@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vconvert32u(Vector256<ulong> src, W128 w, uint t = 0)
+        public static Vector128<uint> vconvert32u(Vector256<ulong> src, W128 w)
             => gcpu.v32u(ConvertToVector128Int32(gcpu.v64f(src)));
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<short> vconvert16i(Vector256<sbyte> src, W512 w, short t = 0)
+        public static Vector512<short> vconvert16i(Vector256<sbyte> src, W512 w)
             => (z.vmaplo16i(src, w256), z.vmaphi16i(src, w256));
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<uint> vconvert32u(Vector256<ushort> src, W512 w, uint t = 0)
+        public static Vector512<uint> vconvert32u(Vector256<ushort> src, W512 w)
             => (z.vmaplo32u(src, w256), z.vmaphi16u(src, w256));
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<long> vconvert64i(Vector256<int> src, W512 w, long t = 0)
+        public static Vector512<long> vconvert64i(Vector256<int> src, W512 w)
             => (z.vmaplo64i(src, w256), z.vmaphi64i(src, w256));
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vconvert16u(Vector256<byte> src, W512 w, ushort t = 0)
+        public static Vector512<ushort> vconvert16u(Vector256<byte> src, W512 w)
              => (z.vmaplo16u(src, w256), z.vmaphi16u(src, w256));
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector1024<int> vconvert32i(Vector256<sbyte> src, W1024 w, int t = 0)
+        public static Vector1024<int> vconvert32i(Vector256<sbyte> src, W1024 w)
         {
             (var lo, var hi) = vconvert16i(src, w512);
             var x0 = z.vmaplo32i(lo, w256);
@@ -113,7 +113,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector1024<uint> vconvert32u(Vector256<byte> src, W1024 w, uint t = 0)
+        public static Vector1024<uint> vconvert32u(Vector256<byte> src, W1024 w)
         {
             (var lo, var hi) = vconvert16u(src, w512);
             (var x0, var x1) = vconvert32u(lo, w512);
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector1024<ulong> vconvert64u(Vector256<ushort> src, W1024 w, ulong t = 0)
+        public static Vector1024<ulong> vconvert64u(Vector256<ushort> src, W1024 w)
             => (cpu.vconvert64u(z.vlo(src), w512), cpu.vconvert64u(cpu.vhi(src), w512));
     }
 }

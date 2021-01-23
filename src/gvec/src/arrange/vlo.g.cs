@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vlo<T>(Vector256<T> src, out ulong x0, out ulong x1)
             where T : unmanaged
-                => z.vlo(v64u(src), out x0, out x1);
+                => cpu.vlo(v64u(src), out x0, out x1);
 
         /// <summary>
         /// Extracts the lo 128-bit lane of the source vector to a pair
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Closures(AllNumeric)]
         public static ref Pair<ulong> vlo<T>(Vector256<T> src, ref Pair<ulong> dst)
             where T : unmanaged
-                => ref z.vlo(v64u(src), ref dst);
+                => ref cpu.vlo(v64u(src), ref dst);
 
         /// <summary>
         /// Extracts the lower 256-bits from the source vector
@@ -85,13 +85,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.generic<T>(z.vlo(v8i(src)));
+                return z.generic<T>(cpu.vlo(v8i(src)));
             else if(typeof(T) == typeof(short))
-                return z.generic<T>(z.vlo(v16i(src)));
+                return z.generic<T>(cpu.vlo(v16i(src)));
             else if(typeof(T) == typeof(int))
-                return z.generic<T>(z.vlo(v32i(src)));
+                return z.generic<T>(cpu.vlo(v32i(src)));
             else
-                return z.generic<T>(z.vlo(v64i(src)));
+                return z.generic<T>(cpu.vlo(v64i(src)));
         }
 
         [MethodImpl(Inline)]
@@ -99,13 +99,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.generic<T>(z.vlo(v8u(src)));
+                return z.generic<T>(cpu.vlo(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return z.generic<T>(z.vlo(v16u(src)));
+                return z.generic<T>(cpu.vlo(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return z.generic<T>(z.vlo(v32u(src)));
+                return z.generic<T>(cpu.vlo(v32u(src)));
             else
-                return z.generic<T>(z.vlo(v64u(src)));
+                return z.generic<T>(cpu.vlo(v64u(src)));
         }
 
         [MethodImpl(Inline)]
@@ -113,9 +113,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.generic<T>(z.vlo(v32f(src)));
+                return z.generic<T>(cpu.vlo(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return z.generic<T>(z.vlo(v64f(src)));
+                return z.generic<T>(cpu.vlo(v64f(src)));
             else
                 throw no<T>();
         }

@@ -6,20 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
     using api = DataLayouts;
 
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct DataLayout<T,R> : IDataLayout<DataLayout<T,R>,LayoutPart<T,R>,T>
         where T : unmanaged
         where R : unmanaged
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly TableSpan<LayoutPart<T,R>> Data;
+        readonly Index<LayoutPart<T,R>> Data;
 
         [MethodImpl(Inline)]
         public DataLayout(LayoutIdentity<T> id, LayoutPart<T,R>[] parts)
@@ -40,10 +38,10 @@ namespace Z0
             get => Data.Count;
         }
 
-        public TableSpan<LayoutPart<T,R>> Storage
+        public LayoutPart<T,R>[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<LayoutPart<T,R>> Partitions
