@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,28 +12,26 @@ namespace Z0.Lang
 
     using C = AsciCharCode;
 
-    [ApiHost(ApiNames.SyntaxParserCases, true)]
-    public struct SeqParserCases
+    [ApiHost]
+    public struct SeqParserChecks
     {
         [Op]
-        public static SeqParserCases create(IWfShell wf)
-            => new SeqParserCases(wf);
+        public static SeqParserChecks create(IWfShell wf)
+            => new SeqParserChecks(wf);
 
         readonly WfHost Host;
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        internal SeqParserCases(IWfShell wf)
+        internal SeqParserChecks(IWfShell wf)
         {
-            Host = WfShell.host(typeof(SeqParserCases));
+            Host = WfShell.host(typeof(SeqParserChecks));
             Wf = wf.WithHost(Host).WithVerbosity(LogLevel.Babble);
         }
 
-        void Ran<C,T>(WfExecFlow flow, C @case, T data)
-        {
-            Wf.Ran(flow, Seq.delimit(@case, data));
-        }
+        WfExecToken Ran<C,T>(WfExecFlow flow, C @case, T data)
+            => Wf.Ran(flow, Seq.delimit(@case, data));
 
         [Op]
         public void Run()
@@ -46,7 +44,7 @@ namespace Z0.Lang
         }
 
         [Op]
-        public BufferSegments<char> test(N0 n)
+        BufferSegments<char> test(N0 n)
         {
             const string Input = "323,3333,33,1";
             const char Delimiter = ',';
@@ -59,7 +57,7 @@ namespace Z0.Lang
         }
 
         [Op]
-        public BufferSegments<ushort> test(N1 n)
+        BufferSegments<ushort> test(N1 n)
         {
             const string Input = "90.33.33.391.385.9";
             const char Delimiter = '.';
@@ -71,11 +69,9 @@ namespace Z0.Lang
             return segments;
         }
 
-        static ReadOnlySpan<AsciCharCode> Case2Input
-            => new AsciCharCode[]{C.d9,C.d0,C.Dot, C.d3,C.d3,C.Dot, C.d3,C.d9,C.d1,C.Dot, C.d3,C.d8,C.d5,C.Dot, C.d9};
 
         [Op]
-        public BufferSegments<AsciCharCode> test(N2 n)
+        BufferSegments<AsciCharCode> test(N2 n)
         {
             const char Delimiter = '.';
             const byte SegCount = 6;
@@ -85,5 +81,8 @@ namespace Z0.Lang
             SeqSplitters.run(parser, input, out var segments);
             return segments;
         }
+
+        static ReadOnlySpan<AsciCharCode> Case2Input
+            => new AsciCharCode[]{C.d9,C.d0,C.Dot, C.d3,C.d3,C.Dot, C.d3,C.d9,C.d1,C.Dot, C.d3,C.d8,C.d5,C.Dot, C.d9};
     }
 }

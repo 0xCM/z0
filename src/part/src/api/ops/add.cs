@@ -15,6 +15,5 @@ namespace Z0
         [KindFactory, Closures(Closure)]
         public static Add<T> add<T>()
             => default;
-
     }
 }

@@ -30,19 +30,19 @@ namespace Z0.Lang
 
         public readonly struct KeywordNames
         {
-            public static Name Abstract => "abstract";
+            public const string Abstract = "abstract";
 
-            public static Name Add => "add";
+            public const string Add = "add";
 
-            public static Name Alias => "alias";
+            public const string Alias = "alias";
 
-            public static Name As => "as";
+            public const string As = "as";
 
-            public static Name Public => "public";
+            public const string Public = "public";
 
-            public static Name Struct => "struct";
+            public const string Struct = "struct";
 
-            public static Name Unmanaged => "unmanaged";
+            public const string Unmanaged = "unmanaged";
         }
 
         public readonly struct KeywordSpecs

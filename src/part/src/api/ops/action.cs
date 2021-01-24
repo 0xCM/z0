@@ -17,6 +17,5 @@ namespace Z0
         [KindFactory]
         public static TernaryActionClass action(A3 rep)
             => default;
-
     }
 }

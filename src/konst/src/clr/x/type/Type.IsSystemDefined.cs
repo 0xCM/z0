@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static bool IsSystemDefined(this Type t)
-            => t.IsPrimalNumeric() || t.IsBool() || t.IsVoid() || t.IsChar() || t.IsString() || t.IsObject();
+            => t.IsPrimalNumeric() || t.IsBool() || t.IsVoid() || t.IsChar() || t.IsString() || t.IsObject() || t.IsDynamic();
 
         /// <summary>
         /// Determines whether a type is a system-defined and architecture-suppored numeric type or a system-defined variation thereof
@@ -112,6 +112,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool IsObject(this Type t)
             => t.IsTypeOf<object>();
+
+        /// <summary>
+        /// Determines whether a supplied type is predicated on a string, including references
+        /// </summary>
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline), Op]
+        public static bool IsDynamic(this Type t)
+            => t.IsTypeOf<dynamic>();
 
         /// <summary>
         /// Determines whether a supplied type is of type Void

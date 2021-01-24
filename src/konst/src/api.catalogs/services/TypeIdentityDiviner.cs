@@ -104,7 +104,7 @@ namespace Z0
             {
                 var cellType = arg.GetElementType();
                 var cellId = DoDivination(cellType);
-                return TypeIdentity.define(text.concat(IDI.Array, cellId));
+                return TypeIdentity.define(text.concat(IDI.Array, Chars.Underscore, cellId));
             }
             else
                 return none<TypeIdentity>();

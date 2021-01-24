@@ -124,7 +124,7 @@ namespace Z0
         /// <summary>
         /// Indicates an array
         /// </summary>
-        public const string Array = "arr";
+        public const string Array = "array";
 
         /// <summary>
         /// Indicates a span

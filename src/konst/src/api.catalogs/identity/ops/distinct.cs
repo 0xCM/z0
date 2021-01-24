@@ -52,6 +52,8 @@ namespace Z0
                 return "string";
             else if(src.IsVoid())
                 return "void";
+            else if(src.IsDynamic())
+                return "dynamic";
             else if(src.IsObject())
                 return "object";
             else

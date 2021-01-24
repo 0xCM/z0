@@ -6,9 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    [ApiHost]
-    public readonly partial struct Api
+
+    public interface IOperationChecker : IValidator
     {
-        const NumericKind Closure = NumericKind.UnsignedInts;
+        OpUri Operation {get;}
+    }
+
+    public interface IEquatableChecker : IOperationChecker
+    {
+        CheckResult Eq<T>(T lhs, T rhs)
+            where T : IEquatable<T>;
     }
 }
