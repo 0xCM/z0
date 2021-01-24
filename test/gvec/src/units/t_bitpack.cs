@@ -40,7 +40,7 @@ namespace Z0
                 Bits.unpack1x8x16(src, dst, 0);
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack16x8x1(dst,n8);
+                var rebound = BitPack.pack16x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -55,7 +55,7 @@ namespace Z0
 
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack32x8x1(dst,n8);
+                var rebound = BitPack.pack32x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -112,7 +112,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = BitPack.pack32x8x1(bitseq,n8);
+                uint packed = BitPack.pack32x8x1(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], (byte)Bit32.test(packed, i));
             }
@@ -145,7 +145,7 @@ namespace Z0
             {
                 var src = SpanBlocks.alloc<byte>(n256);
                 gvec.vones<byte>(n256).StoreTo(src);
-                var dst = BitPack.pack32x8x1(src,n8);
+                var dst = BitPack.pack32x8x1(src);
                 Claim.eq(dst,uint.MaxValue);
 
             }
@@ -154,7 +154,7 @@ namespace Z0
             {
                 var src = SpanBlocks.alloc<byte>(n128);
                 gvec.vones<byte>(n128).StoreTo(src);
-                var dst = BitPack.pack16x8x1(src,n8);
+                var dst = BitPack.pack16x8x1(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
 

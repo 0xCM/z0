@@ -7,15 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static BitMasks.Literals;
-    using static BitMasks;
-
-    [ApiHost("api")]
+    [ApiHost]
     public partial class BitPack
     {
-        const NumericKind Closure = Konst.UnsignedInts;
-
-
+        const NumericKind Closure = Part.UnsignedInts;
     }
 }

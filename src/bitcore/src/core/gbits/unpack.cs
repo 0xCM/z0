@@ -23,15 +23,16 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Unpack, Closures(Closure)]
+        [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
             where T : unmanaged
         {
+            var kCell = src.Length;
             var wCell = bitsize<T>();
-            var bitcount = bitsize<T>()*src.Length;
+            var bitcount = bitsize<T>()*kCell;
             ref var target = ref first(dst);
             var k = 0;
-            for(var i=0; i <src.Length; i++)
+            for(var i=0; i<kCell; i++)
             for(byte j=0; j<wCell; j++, k++)
                 seek(target, k) = testbit(skip(src,i), j);
             return dst;
@@ -44,7 +45,6 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The bit source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
         public static Span<T> unpack<S,T>(ReadOnlySpan<S> src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged

@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
-    
+
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(v8u(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8u(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(v16u(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16u(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(v32u(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32u(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vperm4x64(v64u(x), spec));
+                return generic<T>(cpu.vperm4x64(v64u(x), spec));
             else
                 return vperm4x64_i(x,spec);
         }
@@ -39,14 +39,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(v8i(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v8i(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(v16i(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v16i(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(v32i(z.vperm4x64(v64u(x), spec)));
+                return generic<T>(v32i(cpu.vperm4x64(v64u(x), spec)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vperm4x64(v64i(x), spec));
-            else 
+                return generic<T>(cpu.vperm4x64(v64i(x), spec));
+            else
                 return vperm4x64_f(x,spec);
         }
 
@@ -55,9 +55,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(v32f(z.vperm4x64(v64f(x), spec)));
+                return generic<T>(v32f(cpu.vperm4x64(v64f(x), spec)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vperm4x64(v64f(x), spec));
+                return generic<T>(cpu.vperm4x64(v64f(x), spec));
             else
                 throw no<T>();
         }

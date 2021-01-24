@@ -127,7 +127,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vreverse(Vector256<long> src)
-            => vperm4x64(src,Perm4L.DCBA);
+            => cpu.vperm4x64(src,Perm4L.DCBA);
 
         /// <summary>
         /// Reverses the source vector components
@@ -135,7 +135,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vreverse(Vector256<ulong> src)
-            => vperm4x64(src,Perm4L.DCBA);
+            => cpu.vperm4x64(src,Perm4L.DCBA);
 
         [MethodImpl(Inline), Op]
         public static Vector256<float> vreverse(Vector256<float> src)

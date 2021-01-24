@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Bits
     {
@@ -31,8 +31,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
-            var v0 = cpu.vload(n256, skip(src,0*8));
-            dst = (byte)gcpu.vpacklsb(vcompact8u(v0, n128, z8));
+            var v0 = cpu.vload(w256, skip(src,0*8));
+            dst = (byte)gcpu.vpacklsb(z.vcompact8u(v0, w128));
             return ref dst;
         }
     }

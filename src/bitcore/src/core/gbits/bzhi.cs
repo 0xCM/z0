@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -18,20 +18,20 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="index">The index at which to begin disabling target bits</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), ZHi, Closures(UnsignedInts)]
-        public static T zhi<T>(T src, int index)
+        [MethodImpl(Inline), ZHi, Closures(Closure)]
+        public static T bzhi<T>(T src, byte index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.zhi(uint8(src), index));
+                return generic<T>(Bits.bzhi(uint8(src), index));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.zhi(uint16(src), index));
+                return generic<T>(Bits.bzhi(uint16(src), index));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.zhi(uint32(src), index));
+                return generic<T>(Bits.bzhi(uint32(src), index));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.zhi(uint64(src),index));
+                return generic<T>(Bits.bzhi(uint64(src),index));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

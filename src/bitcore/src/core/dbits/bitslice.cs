@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static sbyte slice(sbyte src, byte start, byte length)
+        public static sbyte bitslice(sbyte src, byte start, byte length)
             => (sbyte)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static byte slice(byte src, byte start, byte length)
+        public static byte bitslice(byte src, byte start, byte length)
             => (byte)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static short slice(short src, byte start, byte length)
+        public static short bitslice(short src, byte start, byte length)
             => (short)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static ushort slice(ushort src, byte start, byte length)
+        public static ushort bitslice(ushort src, byte start, byte length)
             => (ushort)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static int slice(int src, byte start, byte length)
+        public static int bitslice(int src, byte start, byte length)
             => (int)BitFieldExtract((uint)src, start, length);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static uint slice(uint src, byte start, byte length)
+        public static uint bitslice(uint src, byte start, byte length)
             => BitFieldExtract(src, start, length);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static long slice(long src, byte start, byte length)
+        public static long bitslice(long src, byte start, byte length)
             => (long)BitFieldExtract((ulong)src, start, length);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="start">The bit position within the source where extraction should benin</param>
         /// <param name="length">The number of bits that should be extracted</param>
         [MethodImpl(Inline), Slice]
-        public static ulong slice(ulong src, byte start, byte length)
+        public static ulong bitslice(ulong src, byte start, byte length)
             => BitFieldExtract(src, start, length);
      }
 }

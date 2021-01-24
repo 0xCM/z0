@@ -24,7 +24,7 @@ namespace Z0
         {
             var n = bitwidth<T>();
             var dst = gbits.clear(maxval<T>(), first, count);
-            var bs = BitString.scalar(dst);
+            var bs = BitSpans.create(dst);
             var len = bs.Length;
             Claim.eq(len, n);
             for(var i=0; i<len; i++)

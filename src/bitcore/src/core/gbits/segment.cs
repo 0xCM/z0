@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -39,7 +39,7 @@ namespace Z0
         {
             var seg = gbits.segment(a, first, last);
             var cells = GridCalcs.minbytes(last - first + 1);
-            var src = z.bytes<T>(seg).Slice(0,cells);
+            var src = slice(bytes<T>(seg), 0, cells);
             src.CopyTo(dst,offset);
         }
 
@@ -60,14 +60,14 @@ namespace Z0
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
             var firstCount = ScalarCast.uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
-            var part1 = gbits.slice(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
+            var part1 = gbits.bitslice(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = ScalarCast.uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,i1), 0, lastCount), firstCount));
+                return gmath.or(part1, gmath.sal(gbits.bitslice(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }
 
@@ -93,9 +93,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                  return generic<T>(Bits.segment(int16(src), i0, i1));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.extract(int32(src), i0, i1));
+                 return generic<T>(Bits.segment(int32(src), i0, i1));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(Bits.extract(int64(src), i0, i1));
+                 return generic<T>(Bits.segment(int64(src), i0, i1));
             else
                 return Segment_f(src,i0,i1);
         }
@@ -109,9 +109,9 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                  return generic<T>(Bits.segment(uint16(src), i0, i1));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(Bits.extract(uint32(src), i0, i1));
+                 return generic<T>(Bits.segment(uint32(src), i0, i1));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(Bits.extract(uint64(src), i0, i1));
+                 return generic<T>(Bits.segment(uint64(src), i0, i1));
             else
                 return segment_i(src,i0,i1);
         }
@@ -121,9 +121,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.extract(float32(src), i0, i1));
+                 return generic<T>(Bits.segment(float32(src), i0, i1));
             else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.extract(float64(src),  i0, i1));
+                 return generic<T>(Bits.segment(float64(src),  i0, i1));
             else
                 throw no<T>();
         }

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static SpanBlocks;
 
     partial class Blocked
     {
@@ -20,88 +19,91 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static void broadcast<T>(T data, in SpanBlock8<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock8<T> dst)
             where T : unmanaged
         {
-            if(aligned<T>(w128, dst.CellCount))
-                for(var i=0; i<dst.BlockCount; i++)
-                    gcpu.vload(n128, dst.Block(i));
+            var blocks = dst.BlockCount;
+            for(var i=0; i<blocks; i++)
+                broadcast(src, dst.Block(i));
         }
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static void broadcast<T>(T data, in SpanBlock16<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock16<T> dst)
             where T : unmanaged
         {
-            var kBlocks = dst.BlockCount;
-            for(var i=0; i<kBlocks; i++)
-            {
-                var block = dst.Block(i);
-                var kCells = block.Length;
-                for(var j=0u; i<block.Length; j++)
-                    seek(block,j) = data;
-            }
+            var blocks = dst.BlockCount;
+            for(var i=0; i<blocks; i++)
+                broadcast(src, dst.Block(i));
         }
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
-        public static void broadcast<T>(T data, in SpanBlock32<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock32<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+        {
+            var blocks = dst.BlockCount;
+            for(var i=0; i<blocks; i++)
+                broadcast(src, dst.Block(i));
+        }
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in SpanBlock64<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock64<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+        {
+            var blocks = dst.BlockCount;
+            for(var i=0; i<blocks; i++)
+                broadcast(src, dst.Block(i));
+        }
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in SpanBlock128<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock128<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+                => dst.Fill(src);
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in SpanBlock256<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock256<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+                => dst.Fill(src);
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
-        /// <param name="data">The data used to fill the block</param>
+        /// <param name="src">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in SpanBlock512<T> dst)
+        public static void broadcast<T>(T src, in SpanBlock512<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+                => dst.Fill(src);
 
         /// <summary>
         /// Expands a bit-level S-pattern to a block-level T-pattern
@@ -116,9 +118,9 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = z.min(dst.CellCount, bitsize<S>());
-            for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit32(src,(byte)i) ? enabled : default;
+            var length = root.min(dst.CellCount, bitsize<S>());
+            for(var i=0; i<length; i++)
+                dst[i] = gbits.testbit(src, (byte)i) ? enabled : default;
             return ref dst;
         }
 
@@ -135,10 +137,18 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = z.min(dst.CellCount, bitsize<S>());
-            for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit32(src,(byte)i) ? enabled : default;
+            var length = root.min(dst.CellCount, bitsize<S>());
+            for(var i=0; i<length; i++)
+                dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        static void broadcast<T>(T src, Span<T> dst)
+        {
+            var count = dst.Length;
+            for(var i=0; i<count; i++)
+                seek(dst,i) = src;
         }
     }
 }

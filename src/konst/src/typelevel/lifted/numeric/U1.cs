@@ -10,9 +10,10 @@ namespace Z0
     using static Part;
 
     using P = bit;
+    using T = bit;
     using NK = NumericKind;
 
-    public readonly struct U1 : INumericKind<P>
+    public readonly struct U1 : INumericKind<T>
     {
         public const bool Max = true;
 

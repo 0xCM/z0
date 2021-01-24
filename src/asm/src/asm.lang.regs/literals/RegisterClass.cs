@@ -32,22 +32,32 @@ namespace Z0.Asm
         FLAG = 4,
 
         /// <summary>
-        /// An xmm vector register of width <see cref='W128'/>
+        /// Classifies a control register
+        /// </summary>
+        Control = 5,
+
+        /// <summary>
+        /// Classifies a debug register
+        /// </summary>
+        Debug = 6,
+
+        /// <summary>
+        /// Classifies an xmm vector register of width <see cref='W128'/>
         /// </summary>
         XMM = 10,
 
         /// <summary>
-        /// A ymm vector register of width <see cref='W256'/>
+        /// Classifies a ymm vector register of width <see cref='W256'/>
         /// </summary>
         YMM = 11,
 
         /// <summary>
-        /// A zmm vector register of width <see cref='W512'/>
+        /// Classifies a zmm vector register of width <see cref='W512'/>
         /// </summary>
         ZMM = 12,
 
         /// <summary>
-        /// A 64-bit mask register
+        /// Classifies a 64-bit mask register
         /// </summary>
         Mask = 13,
     }

@@ -10,20 +10,24 @@ namespace Z0
     using static Part;
 
     using NK = NumericKind;
+    using T = System.Int64;
 
-    public readonly struct I64 : INumericKind<long>
+    public readonly struct I64 : INumericKind<T>
     {
+        public const T Max = T.MaxValue;
+
+        public const T Min = T.MinValue;
+
         [MethodImpl(Inline)]
         public static implicit operator NK(I64 src)
             => NK.I64;
 
         [MethodImpl(Inline)]
-        public static implicit operator I64(NK<long> src)
+        public static implicit operator I64(NK<T> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator NK<long>(I64 src)
+        public static implicit operator NK<T>(I64 src)
             => default;
     }
-
 }

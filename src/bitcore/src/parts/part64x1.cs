@@ -39,13 +39,10 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline), Op]
-        public static void part64x1(ulong src, Span<Bit32> dst)
+        public static void part64x1(ulong src, Span<bit> dst)
         {
-            // each bit has a 32-bit physical width so 2 bit values = 64 bits of storage
-            // thus, the target covers 32 64-bit segments where each segment covers 2 bit values
-            ref var target = ref first(dst.Recover<Bit32,ulong>());
-            for(byte i=0; i<32; i++)
-                seek(target, i) = lsb32x1(src >> i);
+            ref var target = ref first(recover<bit,byte>(dst));
+            part64x1(src, ref target);
         }
     }
 }

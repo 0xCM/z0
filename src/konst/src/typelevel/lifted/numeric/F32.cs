@@ -10,24 +10,24 @@ namespace Z0
     using static Part;
 
     using NK = NumericKind;
-    using P = System.Single;
+    using T = System.Single;
 
-    public readonly struct F32 : INumericKind<float>
+    public readonly struct F32 : INumericKind<T>
     {
-        public const P Max = P.MaxValue;
+        public const T Max = T.MaxValue;
 
-        public const P Min = P.MinValue;
+        public const T Min = T.MinValue;
 
         [MethodImpl(Inline)]
         public static implicit operator NK(F32 src)
             => NK.F32;
 
         [MethodImpl(Inline)]
-        public static implicit operator F32(NK<float> src)
+        public static implicit operator F32(NK<T> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator NK<float>(F32 src)
+        public static implicit operator NK<T>(F32 src)
             => default;
     }
 }

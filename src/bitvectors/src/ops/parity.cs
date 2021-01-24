@@ -20,7 +20,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 parity<T>(BitVector<T> src)
+        public static bit parity<T>(BitVector<T> src)
             where T : unmanaged
                 => odd(gbits.pop(src.Data));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 parity(BitVector4 src)
+        public static bit parity(BitVector4 src)
             => odd(pop(src));
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 parity(BitVector8 src)
+        public static bit parity(BitVector8 src)
             => odd(pop(src));
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 parity(BitVector16 src)
+        public static bit parity(BitVector16 src)
             => odd(pop(src));
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 parity(BitVector32 src)
+        public static bit parity(BitVector32 src)
             => odd(pop(src));
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Bit32 parity(BitVector64 src)
+        public static bit parity(BitVector64 src)
             => odd(pop(src));
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         /// value 1 when an odd number of its input values are 1 and 0 otherwise.
         /// </remarks>
         [MethodImpl(Inline)]
-        public static Bit32 parity<N,T>(BitVector<N,T> src)
+        public static bit parity<N,T>(BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => odd(gbits.pop(src.Data));
@@ -96,7 +96,7 @@ namespace Z0
         /// Computes the parity of the source vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static Bit32 parity<N,T>(in BitVector128<N,T> src)
+        public static bit parity<N,T>(in BitVector128<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => odd(pop(src));

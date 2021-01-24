@@ -139,8 +139,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<uint> vmul(Vector256<ushort> x, Vector256<ushort> y)
         {
-            (var x1, var x2) = cpu.vinflate32u(x, w512, z32);
-            (var y1, var y2) = cpu.vinflate32u(y, w512, z32);
+            (var x1, var x2) = cpu.vinflate32u(x, w512);
+            (var y1, var y2) = cpu.vinflate32u(y, w512);
             return(vmullo(x1,y1), vmullo(x2,y2));
         }
 

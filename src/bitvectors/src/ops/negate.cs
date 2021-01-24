@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Negate, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Negate, Closures(Closure)]
         public static BitVector<T> negate<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.negate(x.Data);
- 
+
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Negate]
         public static BitVector4 negate(BitVector4 x)
             => gmath.negate(x.Data);
-            
+
         /// <summary>
         /// Computes the two's complement bitvector z := ~x + 1 for a bitvector x
         /// </summary>

@@ -11,6 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static AppErrorMsg;
+    using static ClaimResult;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -24,31 +25,31 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult veq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => a.Equals(b) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(a,b, caller, file, line).Format());
+                => a.Equals(b) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(a,b, caller, file, line).Format());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult veq<T>(Vector256<T> lhs, Vector256<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => lhs.Equals(rhs) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(lhs,rhs, caller, file, line).Format());
+                => lhs.Equals(rhs) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line).Format());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult vneq<T>(Vector128<T> a, Vector128<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => !a.Equals(b) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(a,b, caller, file, line).Format());
+                => !a.Equals(b) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(a,b, caller, file, line).Format());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult vneq<T>(Vector256<T> a, Vector256<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => !a.Equals(b) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(a,b, caller, file, line).Format());
+                => !a.Equals(b) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(a,b, caller, file, line).Format());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult veq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => a.Equals(b) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(a,b, caller, file, line).Format());
+                => a.Equals(b) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(a,b, caller, file, line).Format());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult vneq<T>(Vector512<T> a, Vector512<T> b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => !a.Equals(b) ? tripled(ClaimKind.Eq, true, EmptyString) : tripled(ClaimKind.Eq, false, NotEqual(a,b, caller, file, line).Format());
+                => !a.Equals(b) ? success(ClaimKind.Eq) : failure(ClaimKind.Eq, NotEqual(a,b, caller, file, line).Format());
     }
 }

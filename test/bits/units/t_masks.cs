@@ -37,8 +37,8 @@ namespace Z0
             var himask = BitMasks.hi<uint>(8);
             var src = uint.MaxValue;
             var dst = gmath.xor(gmath.xor(src,lomask), himask);
-            Claim.eq(7, gbits.ntz(dst));
-            Claim.eq(8, gbits.nlz(dst));
+            Claim.eq(7, Bits.ntz(dst));
+            Claim.eq(8, Bits.nlz(dst));
 
             Claim.eq(7, Bits.pop(BitMasks.lo<uint>(6)));
             Claim.eq(12, Bits.pop(BitMasks.lo<uint>(11)));

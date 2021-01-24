@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline), Rank]
         public static uint rank(uint src, int pos)
-            => pop(extract(src,0,(byte)pos));
+            => pop(segment(src,0,(byte)pos));
 
         /// <summary>
         /// Calculates the number of bits set up to and including the specified position
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
         [MethodImpl(Inline), Rank]
         public static uint rank(ulong src, int pos)
-            => pop(extract(src,0,(byte)pos));
+            => pop(segment(src,0,(byte)pos));
     }
 }

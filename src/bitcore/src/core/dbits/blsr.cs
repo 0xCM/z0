@@ -18,7 +18,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Blsr]
         public static byte blsr(byte src)
             => (byte)ResetLowestSetBit(src);
 
@@ -27,7 +27,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Blsr]
         public static ushort blsr(ushort src)
             => (ushort)ResetLowestSetBit(src);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Blsr]
         public static uint blsr(uint src)
             => ResetLowestSetBit(src);
 
@@ -45,7 +45,7 @@ namespace Z0
         /// Logically equivalent to the composite operation (src - 1) & src that disables the least set bit in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Blsr]
         public static ulong blsr(ulong src)
             => ResetLowestSetBit(src);
     }

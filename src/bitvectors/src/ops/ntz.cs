@@ -7,69 +7,36 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class BitVector
     {
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
-        [MethodImpl(Inline), Nlz, Closures(Closure)]
-        public static T ntz<T>(in BitVector<T> x)
-            where T : unmanaged
-                => gbits.ntz(x.Data);
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static T ntz<N,T>(in BitVector<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.ntz(x.Data);
-
-        /// <summary>
-        /// Counts the number of trailing zeros
-        /// </summary>
-        [MethodImpl(Inline)]
-        public static T ntz<N,T>(in BitVector128<N,T> x)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            var lo = x.Lo;
-            if(lo != 0)
-                return z.generic<T>(gbits.ntz(lo.Data));
-            else
-                return z.generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
-        }
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
         [MethodImpl(Inline), Ntz]
         public static byte ntz(BitVector8 x)
-            => gbits.ntz(x.Data);
+            => Bits.ntz(x.Data);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static ushort ntz(BitVector16 x)
-            => gbits.ntz(x.Data);
+            => Bits.ntz(x.Data);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static uint ntz(BitVector32 x)
-            => gbits.ntz(x.Data);
+            => Bits.ntz(x.Data);
 
         /// <summary>
         /// Counts the number of trailing zero bits
         /// </summary>
         [MethodImpl(Inline), Ntz]
         public static ulong ntz(BitVector64 x)
-            => gbits.ntz(x.Data);
+            => Bits.ntz(x.Data);
     }
 }

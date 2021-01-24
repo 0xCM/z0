@@ -15,7 +15,7 @@ namespace Z0
         public static int ord(BitVector8 x)
         {
             var dst = x.Replicate();
-            for(var i=2; i < Gf256.MemberCount; i++)
+            for(var i=2; i<Gf256.MemberCount; i++)
             {
                 dst *= x;
                 if(dst == BitVector8.One)

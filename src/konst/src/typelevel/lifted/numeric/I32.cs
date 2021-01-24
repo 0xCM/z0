@@ -10,19 +10,25 @@ namespace Z0
     using static Part;
 
     using NK = NumericKind;
+    using T = System.Int32;
 
-    public readonly struct I32 : INumericKind<int>
+    public readonly struct I32 : INumericKind<T>
     {
+        public const T Max = T.MaxValue;
+
+        public const T Min = T.MinValue;
+
+
         [MethodImpl(Inline)]
         public static implicit operator NK(I32 src)
             => NK.I32;
 
         [MethodImpl(Inline)]
-        public static implicit operator I32(NK<int> src)
+        public static implicit operator I32(NK<T> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator NK<int>(I32 src)
+        public static implicit operator NK<T>(I32 src)
             => default;
     }
 }

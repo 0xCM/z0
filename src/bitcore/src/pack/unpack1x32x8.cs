@@ -25,7 +25,7 @@ namespace Z0
             ref var tmp = ref uint8(ref buffer);
             ref var lead = ref first(dst);
             unpack1x8x8(src, ref tmp);
-            vconvert32u(n64, in tmp, n256).StoreTo(ref lead);
+            cpu.vconvert32u(n64, in tmp, n256).StoreTo(ref lead);
         }
     }
 }

@@ -65,6 +65,5 @@ namespace Z0
         [MethodImpl(Inline), HiSeg]
         public static BitVector64 hiseg(BitVector64 x, byte n)
             => segment(x, (byte)(x.Width - n), (byte)(x.Width - 1));
-
     }
 }

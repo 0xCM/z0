@@ -57,7 +57,5 @@ namespace Z0
             for(var block=0; block<gx.BlockCount; block++)
                 Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);
         }
-
-
    }
 }

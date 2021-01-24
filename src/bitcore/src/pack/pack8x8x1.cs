@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static BitMasks.Literals;
 
     partial class Bits
@@ -20,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in T src)
             where T : unmanaged
-                => (byte)BitMasks.gather(force<T,ulong>(src), Lsb64x8x1);
+                => (byte)BitMasks.gather(NumericCast.force<T,ulong>(src), Lsb64x8x1);
     }
 }

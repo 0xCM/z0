@@ -18,15 +18,15 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N1))
-                return bfly(n1,a);
+                return bfly(n1, a);
             else if(typeof(N) == typeof(N2))
-                return bfly(n2,a);
+                return bfly(n2, a);
             else if(typeof(N) == typeof(N4))
-                return bfly(n4,a);
+                return bfly(n4, a);
             else if(typeof(N) == typeof(N8))
-                return bfly(n8,a);
+                return bfly(n8, a);
             else if(typeof(N) == typeof(N16))
-                return bfly(n16,a);
+                return bfly(n16, a);
             else
                 throw no<N>();
         }
@@ -36,18 +36,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T bfly<T>(N1 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.bfly(n,uint8(x)));
+                return generic<T>(Bits.bfly(n, uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bfly(n,uint16(x)));
+                return generic<T>(Bits.bfly(n, uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n, uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -57,18 +57,18 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T bfly<T>(N2 n, T x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.bfly(n,uint8(x)));
+                return generic<T>(Bits.bfly(n, uint8(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.bfly(n,uint16(x)));
+                return generic<T>(Bits.bfly(n, uint16(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.bfly(n,uint32(x)));
+                return generic<T>(Bits.bfly(n, uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T bfly<T>(N4 n, T x)
             where T : unmanaged
         {
@@ -101,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T bfly<T>(N8 n, T x)
             where T : unmanaged
         {
@@ -110,7 +110,7 @@ namespace Z0
             else if(typeof(T) == typeof(uint))
                 return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.bfly(n,uint64(x)));
+                return generic<T>(Bits.bfly(n, uint64(x)));
             else
                 throw no<T>();
         }
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T bfly<T>(N16 n, T x)
             where T : unmanaged
         {

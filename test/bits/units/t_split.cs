@@ -8,14 +8,6 @@ namespace Z0
 
     public class t_split : t_bitcore<t_split>
     {
-        public void sb_part_64x1()
-        {
-            var src = ulong.MaxValue;
-            Span<Bit32> dst = new Bit32[64];
-            BitParts.part64x1(src,dst);
-            for(var i=0; i< dst.Length; i++)
-                Claim.Require(dst[i]);
-        }
 
         public void sb_split_16x8()
         {

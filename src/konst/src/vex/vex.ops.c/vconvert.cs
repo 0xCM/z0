@@ -16,8 +16,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2.X64;
 
     using static Part;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm

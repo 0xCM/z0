@@ -76,4 +76,8 @@ namespace Z0
     public sealed class DisableAttribute : A { public DisableAttribute() : base(K.Disable) {} }
 
     public sealed class ByteswapAttribute : A { public ByteswapAttribute() : base(K.Byteswap) {} }
+
+    public sealed class BlsrAttribute : A { public BlsrAttribute() : base(K.Blsr) {} }
+
+    public sealed class BlsiAttribute : A { public BlsiAttribute() : base(K.Blsi) {} }
 }

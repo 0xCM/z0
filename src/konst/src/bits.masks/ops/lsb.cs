@@ -15,6 +15,7 @@ namespace Z0
     {
         /// <summary>
         /// [00000001 ... 00000001]
+        /// Enables the least significant bit of each 8-bit segment
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -25,6 +26,7 @@ namespace Z0
 
         /// <summary>
         /// [00000000 00000000 00000000 0000001 00000000 00000000 00000000 0000001]
+        /// Enables the least signifcant bit of each 32-bit segment
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>

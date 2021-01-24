@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var dstIdx = index;
-            var sliced = slice(src, index, count);
+            var sliced = bitslice(src, index, count);
             var cleared = gbits.clear(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
@@ -61,7 +61,7 @@ namespace Z0
         public static T copy<T>(T src, byte srcIdx, byte dstIdx, byte count, T dst)
             where T : unmanaged
         {
-            var sliced = slice(src, srcIdx, count);
+            var sliced = bitslice(src, srcIdx, count);
             var cleared = gbits.clear(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }

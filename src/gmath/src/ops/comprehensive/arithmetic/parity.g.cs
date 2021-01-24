@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The value to test</param>
         /// <typeparam name="T">The primal integer type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Bit32 odd<T>(T a)
+        public static bit odd<T>(T a)
             where T : unmanaged
                 => odd_u(a);
 

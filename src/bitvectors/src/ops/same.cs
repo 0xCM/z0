@@ -11,19 +11,19 @@ namespace Z0
 
     partial class BitVector
     {
-        [MethodImpl(Inline), Eq, Closures(UnsignedInts)]
-        public static Bit32 eq<T>(in BitVector<T> x, in BitVector<T> y)
+        [MethodImpl(Inline), Eq, Closures(Closure)]
+        public static bit eq<T>(in BitVector<T> x, in BitVector<T> y)
             where T : unmanaged
                 => gmath.eq(x.Data,y.Data);
 
         [MethodImpl(Inline)]
-        public static Bit32 eq<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
+        public static bit eq<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gmath.eq(x.Data,y.Data);
 
         [MethodImpl(Inline)]
-        public static Bit32 eq<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
+        public static bit eq<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => gvec.vsame(x.Data, y.Data);

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
@@ -16,19 +16,19 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi, Closures(UnsignedInts)]
-        public static BitVector<T> zhi<T>(BitVector<T> src, int pos)
+        public static BitVector<T> zhi<T>(BitVector<T> src, byte pos)
             where T : unmanaged
-                => gbits.zhi(src.Data, pos);
+                => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> zhi<N,T>(BitVector<N,T> src, int pos)
+        public static BitVector<N,T> zhi<N,T>(BitVector<N,T> src, byte pos)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.zhi(src.Data, pos);
+                => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Computes z := x >> s for a bitvector x and shift offset s
@@ -46,39 +46,39 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi]
-        public static BitVector4 zhi(BitVector4 src, int pos)
-            => gbits.zhi(src.Data, pos);
+        public static BitVector4 zhi(BitVector4 src, byte pos)
+            => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi]
-        public static BitVector8 zhi(BitVector8 src, int pos)
-            => gbits.zhi(src.Data, pos);
+        public static BitVector8 zhi(BitVector8 src, byte pos)
+            => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi]
-        public static BitVector16 zhi(BitVector16 src, int pos)
-            => gbits.zhi(src.Data, pos);
+        public static BitVector16 zhi(BitVector16 src, byte pos)
+            => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi]
-        public static BitVector32 zhi(BitVector32 src, int pos)
-            => gbits.zhi(src.Data, pos);
+        public static BitVector32 zhi(BitVector32 src, byte pos)
+            => gbits.bzhi(src.Data, pos);
 
         /// <summary>
         /// Disables the high bits starting at a specified position
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), ZHi]
-        public static BitVector64 zhi(BitVector64 src, int pos)
-            => gbits.zhi(src.Data, pos);
+        public static BitVector64 zhi(BitVector64 src, byte pos)
+            => gbits.bzhi(src.Data, pos);
     }
 }

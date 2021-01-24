@@ -17,7 +17,7 @@ namespace Z0
             where F : IUnaryPred128<T>
         {
             var blocks = lhs.BlockCount;
-            var result = Bit32.On;
+            var result = bit.On;
             for(var block = 0; block < blocks; block++)
                 result &= f.Invoke(lhs.LoadVector(block));
             return result;
@@ -29,7 +29,7 @@ namespace Z0
             where F : IUnaryPred256<T>
         {
             var blocks = lhs.BlockCount;
-            var result = Bit32.On;
+            var result = bit.On;
             for(var block = 0; block < blocks; block++)
                 result &= f.Invoke(lhs.LoadVector(block));
             return result;
@@ -41,7 +41,7 @@ namespace Z0
             where F : IBinaryPred128<T>
         {
             var blocks = lhs.BlockCount;
-            var result = Bit32.On;
+            var result = bit.On;
             for(var block = 0; block<blocks; block++)
                 result &= f.Invoke(lhs.LoadVector(block), rhs.LoadVector(block));
             return result;
@@ -53,7 +53,7 @@ namespace Z0
             where F : IBinaryPred256<T>
         {
             var blocks = lhs.BlockCount;
-            var result = Bit32.On;
+            var result = bit.On;
             for(var block = 0; block<blocks; block++)
                 result &= f.Invoke(lhs.LoadVector(block), rhs.LoadVector(block));
             return result;

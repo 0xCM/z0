@@ -129,7 +129,7 @@ namespace Z0.Asm
         public RexPrefixCode Code
         {
             [MethodImpl(Inline)]
-            get => (RexPrefixCode)gbits.slice(Scalar, 4, (byte)RFW.Code);
+            get => (RexPrefixCode)gbits.bitslice(Scalar, 4, (byte)RFW.Code);
 
             [MethodImpl(Inline)]
             set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));

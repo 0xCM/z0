@@ -18,7 +18,7 @@ namespace Z0
         /// For example, [11101010] |> blsic = [11111101]
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T blsic<T>(T src)
             where T : unmanaged
         {

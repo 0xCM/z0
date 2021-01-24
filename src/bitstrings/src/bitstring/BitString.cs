@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
@@ -20,16 +19,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitString(byte[] src)
-        {
-            data = src;
-        }
+            => data = src;
 
         [MethodImpl(Inline)]
         internal BitString(ReadOnlySpan<byte> src)
         {
             data = src.ToArray();
         }
-
 
         [MethodImpl(Inline)]
         internal BitString(ReadOnlySpan<bit> src)
@@ -75,11 +71,17 @@ namespace Z0
             get => data.Length;
         }
 
-        public readonly bool IsEmpty
-            => this.data.Length == 0;
+        public uint Width
+        {
+            [MethodImpl(Inline)]
+            get => (uint)data.Length;
+        }
 
-        public BitString Zero
-            => Empty;
+        public readonly bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => (data?.Length ?? 0) == 0;
+        }
 
         /// <summary>
         /// The (unpacked) sequence of bits represented by the bitstring
@@ -189,31 +191,15 @@ namespace Z0
         public int Nlz()
         {
             var lastix = data.Length - 1;
-            var count = 0;
+            var result = 0;
             for(var i=lastix; i>= 0; i--)
             {
                 if(data[i] != 0)
                     break;
                 else
-                    count++;
+                    result++;
             }
-            return count;
-        }
-
-        /// <summary>
-        /// Counts the number of trailing zero bits
-        /// </summary>
-        public int Ntz()
-        {
-            var count = 0;
-            for(var i=0; i < data.Length; i++)
-            {
-                if(data[i] == 0)
-                    count++;
-                else
-                    break;
-            }
-            return count;
+            return result;
         }
 
         /// <summary>
@@ -288,6 +274,7 @@ namespace Z0
             BitSeq.CopyTo(dst, s0.Length + s1.Length);
             return new BitString(dst);
         }
+
         /// <summary>
         /// Forms a new bitstring by concatenation
         /// </summary>
@@ -301,7 +288,6 @@ namespace Z0
             BitSeq.CopyTo(dst, s2.Length + s1.Length + s0.Length);
             return new BitString(dst);
         }
-
 
         /// <summary>
         /// Returns a new bitstring of length no greater than a specified maximum
@@ -333,11 +319,11 @@ namespace Z0
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
-        public Span<Bit32> ToBits()
+        public Span<bit> ToBits()
         {
-            Span<Bit32> dst = new Bit32[data.Length];
+            Span<bit> dst = new bit[data.Length];
             for(var i=0; i< data.Length; i++)
-                dst[i] = (Bit32)data[i];
+                dst[i] = (bit)data[i];
             return dst;
         }
 
@@ -358,12 +344,12 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural block of bits
         /// </summary>
-        public NatSpan<N,Bit32> ToNatBits<N>(N n = default)
+        public NatSpan<N,bit> ToNatBits<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatSpan.alloc<N,Bit32>();
+            var dst = NatSpan.alloc<N,bit>();
             for(var i=0; i< data.Length; i++)
-                dst[i] = (Bit32)data[i];
+                dst[i] = (bit)data[i];
             return dst;
         }
 
@@ -406,7 +392,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(BitString rhs)
         {
-            var x = Truncate(this.Length - this.Nlz());
+            var x = Truncate(Length - this.Nlz());
             var y = rhs.Truncate(rhs.Length - rhs.Nlz());
             if(x.Length != y.Length)
             {
@@ -415,9 +401,8 @@ namespace Z0
 
             for(var i=0; i< x.Length; i++)
                 if(x.data[i] != y.data[i])
-                {
                     return false;
-                }
+
             return true;
         }
 
@@ -480,7 +465,7 @@ namespace Z0
             else
             {
                 var sep = blocksep ?? ' ';
-                var sb = new StringBuilder();
+                var sb = text.build();
                 var blocks = Partition(blockWidth.Value).Reverse();
                 var lastix = blocks.Length - 1;
                 var counter = 0;
@@ -581,12 +566,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        readonly T PackOne<T>(int offset)
+        T PackOne<T>(int offset)
             where T : unmanaged
         {
-            var src = data.ToReadOnlySpan();
+            var src = View;
             var packed = PackedBits(src, offset, bitsize<T>());
-            return packed.Length != 0 ? packed.Singleton<byte,T>() : default;
+            return packed.Length != 0
+                ? packed.Singleton<byte,T>()
+                : default;
+        }
+
+        ReadOnlySpan<byte> View
+        {
+            [MethodImpl(Inline)]
+            get => data;
         }
 
         /// <summary>

@@ -9,6 +9,8 @@ namespace Z0
     /// </summary>
     public enum ClaimKind : byte
     {
+        None = 0,
+
         /// <summary>
         /// Asserts that two values are equal
         /// </summary>
@@ -19,31 +21,56 @@ namespace Z0
         /// </summary>
         Close,
 
-        EqItem,
-
         /// <summary>
         /// Asserts that two values are not equal
         /// </summary>
         NEq,
 
+        /// <summary>
+        /// Asserts that one value is less than another
+        /// </summary>
         Lt,
 
+        /// <summary>
+        /// Asserts that one value is less than or equal to another
+        /// </summary>
         LtEq,
 
+        /// <summary>
+        /// Asserts that one value is greater than another
+        /// </summary>
         Gt,
 
+        /// <summary>
+        /// Asserts that one value is greater than or equal to another
+        /// </summary>
         GtEq,
 
+        /// <summary>
+        /// Asserts that a predicate evaluates to false
+        /// </summary>
         False,
 
+        /// <summary>
+        /// Asserts that a predicate evaluates to true
+        /// </summary>
         True,
 
         Fail,
 
+        /// <summary>
+        /// Asserts that a value is nonzero
+        /// </summary>
         Nonzero,
 
+        /// <summary>
+        /// Asserts that a value is contained with a closed interval
+        /// </summary>
         Between,
 
+        /// <summary>
+        /// Asserts that a value is not in a set
+        /// </summary>
         NotIn,
 
         Invariant

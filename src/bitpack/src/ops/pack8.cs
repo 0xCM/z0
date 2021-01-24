@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte pack8x8x1<T>(ReadOnlySpan<T> src, N8 count, N8 mod, int offset)
+        public static byte pack8x8x1<T>(ReadOnlySpan<T> src, uint offset)
             where T : unmanaged
                 => pack8(uint64(skip(src,(uint)offset)));
 
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="mod">The bit selection modulus</param>
         /// <param name="block">The index of the block to pack</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte pack8x8x1<T>(in SpanBlock64<T> src, int block)
+        public static byte pack8x8x1<T>(in SpanBlock64<T> src, uint block)
             where T : unmanaged
-                => pack8(force<T,ulong>(src.BlockRef(block)));
+                => pack8(force<T,ulong>(src.BlockRef((int)block)));
     }
 }

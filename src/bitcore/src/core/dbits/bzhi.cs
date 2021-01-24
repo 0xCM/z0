@@ -10,18 +10,18 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi2;
     using static System.Runtime.Intrinsics.X86.Bmi2.X64;
 
-    using static Konst;
+    using static Part;
 
     partial class Bits
-    {                
+    {
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
         /// Replicates the source bits to the target and disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), ZHi]
-        public static byte zhi(byte src, int index)
-            => (byte)ZeroHighBits((uint)src, (uint)index);
+        public static byte bzhi(byte src, byte index)
+            => (byte)ZeroHighBits((uint)src, index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -29,8 +29,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), ZHi]
-        public static ushort zhi(ushort src, int index)
-            => (ushort)ZeroHighBits((uint)src, (uint)index);
+        public static ushort bzhi(ushort src, byte index)
+            => (ushort)ZeroHighBits((uint)src, index);
 
         /// <summary>
         /// unsigned int _bzhi_u32 (unsigned int a, unsigned int index) BZHI r32a, reg/m32, r32b
@@ -38,17 +38,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), ZHi]
-        public static uint zhi(uint src, int index)
-            => ZeroHighBits(src, (uint)index);
+        public static uint bzhi(uint src, byte index)
+            => ZeroHighBits(src, index);
 
         /// <summary>
-        /// unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b 
+        /// unsigned __int64 _bzhi_u64 (unsigned __int64 a, unsigned int index) BZHI r64a,reg/m32, r64b
         /// Disables the high target bits starting at a specified index.
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="index">The index at which to begin disabling bits</param>
         [MethodImpl(Inline), ZHi]
-        public static ulong zhi(ulong src, int index)
-            => ZeroHighBits(src, (uint)index);
+        public static ulong bzhi(ulong src, byte index)
+            => ZeroHighBits(src, index);
     }
 }

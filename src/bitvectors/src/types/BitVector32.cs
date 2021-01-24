@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -105,7 +104,7 @@ namespace Z0
         public BitVector32 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.extract(Data, first, last);
+            get =>  Bits.segment(Data, first, last);
         }
 
         [MethodImpl(Inline)]

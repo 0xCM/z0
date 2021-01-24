@@ -9,18 +9,17 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Bmi1;
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
+    using static Part;
 
-    using static Konst;
-
-    partial class BitMasks
+    partial class Bits
     {
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static byte xlsb(byte src)
+        [MethodImpl(Inline), Blsi]
+        public static byte blsi(byte src)
             => (byte)ExtractLowestSetBit(src);
 
         /// <summary>
@@ -28,8 +27,8 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static ushort xlsb(ushort src)
+        [MethodImpl(Inline), Blsi]
+        public static ushort blsi(ushort src)
             => (ushort)ExtractLowestSetBit(src);
 
         /// <summary>
@@ -37,8 +36,8 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static uint xlsb(uint src)
+        [MethodImpl(Inline), Blsi]
+        public static uint blsi(uint src)
             => ExtractLowestSetBit(src);
 
         /// <summary>
@@ -46,8 +45,8 @@ namespace Z0
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op]
-        public static ulong xlsb(ulong src)
+        [MethodImpl(Inline), Blsi]
+        public static ulong blsi(ulong src)
             => ExtractLowestSetBit(src);
     }
 }

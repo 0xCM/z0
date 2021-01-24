@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bg_patterns : t_bitgrids<t_bg_patterns>
     {
-        void stripes_12x12()
+        public void stripes_12x12()
             => BitGrid.export(GridPatterns.stripes(n256,n12,n12,z16));
 
         void bars_16x16()
@@ -46,6 +46,5 @@ namespace Z0
 
         void identity_rotr_4_16x16()
             => BitGrid.export(BitGrid.rotr(GridPatterns.one(n256,n16,n16,z16), 4));
-
     }
 }

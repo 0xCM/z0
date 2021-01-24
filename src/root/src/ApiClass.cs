@@ -413,6 +413,9 @@ public enum ApiClass : ushort
 
     ParseFunction,
 
+    Blsr,
+
+    Blsi,
 
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------

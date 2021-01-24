@@ -173,8 +173,8 @@ namespace Z0
             var himask = BitMasks.hi<uint>(8);
             var src = uint.MaxValue;
             var dst = gmath.xor(gmath.xor(src,lomask), himask);
-            eq(7u, gbits.ntz(dst), ref index, ref log);
-            eq(8u, (uint)gbits.nlz(dst), ref index, ref log);
+            eq(7u, Bits.ntz(dst), ref index, ref log);
+            eq(8u, (uint)Bits.nlz(dst), ref index, ref log);
             eq(7u, Bits.pop(BitMasks.lo<uint>(6)), ref index, ref log);
             eq(12u, Bits.pop(BitMasks.lo<uint>(11)), ref index, ref log);
         }

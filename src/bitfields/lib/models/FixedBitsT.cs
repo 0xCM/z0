@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T BitSlice(byte start, byte length)
-            => gbits.slice(Data[start/CellWidth], (byte)(start % CellWidth), length);
+            => gbits.bitslice(Data[start/CellWidth], (byte)(start % CellWidth), length);
 
         public Bit32 this[ByteSize offset, byte pos]
         {

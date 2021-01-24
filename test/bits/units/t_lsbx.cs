@@ -40,6 +40,5 @@ namespace Z0
                 Claim.eq(x,y);
             }
         }
-
     }
 }

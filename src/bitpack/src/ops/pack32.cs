@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="n">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint pack32x8x1<T>(in T src, N32 n, N8 mod)
+        public static uint pack32x8x1<T>(in T src)
             where T : unmanaged
                 => cpu.vtakemask(gvec.vsll(cpu.vload(n256, view64u(src)),7));
 
@@ -27,9 +27,9 @@ namespace Z0
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint pack32x8x1<T>(in SpanBlock256<T> src, N8 mod, int block = 0)
+        public static uint pack32x8x1<T>(in SpanBlock256<T> src, uint block = 0)
             where T : unmanaged
-                => pack32x8x1(src.BlockRef(block), n32, mod);
+                => pack32x8x1(src.BlockRef((int)block));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint pack32x8x1<T>(ReadOnlySpan<T> src, N32 count, N8 mod, int offset = 0)
+        public static uint pack32x8x1<T>(ReadOnlySpan<T> src, uint offset = 0)
             where T : unmanaged
-                => pack32x8x1(skip(src,(uint)offset), count, mod);
+                => pack32x8x1(skip(src, offset));
     }
 }

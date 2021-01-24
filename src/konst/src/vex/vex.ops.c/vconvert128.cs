@@ -201,9 +201,4 @@ namespace Z0
         public static Vector512<uint> vconvert32u(Vector128<byte> src, W512 w)
             => (vmaplo32u(src, w256), vmaphi32u(src, w256));
     }
-
-    partial struct z
-    {
-
-    }
 }

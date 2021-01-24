@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public S ReadSeg(I index)
-            => @as<T,S>(gbits.slice(Data, Pos8u(index), Width8u(index)));
+            => @as<T,S>(gbits.bitslice(Data, Pos8u(index), Width8u(index)));
 
         [MethodImpl(Inline)]
         public void WriteSeg(I index, S value)

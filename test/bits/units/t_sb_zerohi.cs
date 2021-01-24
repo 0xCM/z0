@@ -26,11 +26,11 @@ namespace Z0
             where T : unmanaged
         {
             var width = bitwidth<T>();
-            for(var i=0; i< width; i++)
+            for(byte i=0; i<width; i++)
                 sb_zerohi_check<T>(i);
         }
 
-        void sb_zerohi_check<T>(int maxlen, T t = default)
+        void sb_zerohi_check<T>(byte maxlen, T t = default)
             where T : unmanaged
         {
             var width = bitwidth<T>();
@@ -47,7 +47,7 @@ namespace Z0
             Claim.eq(maxlen, bs1.PopCount());
             Claim.eq(maxlen, bs1.Length);
 
-            var bv1 = gbits.zhi(bv0.Scalar, maxlen);
+            var bv1 = gbits.bzhi(bv0.Scalar, maxlen);
             Claim.eq(maxlen, gbits.pop(bv1));
 
             var bs2 = bs1.Pad(width);
@@ -58,7 +58,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var j = Random.Next(2, width - width/2);
-                var y = gbits.zhi(x, (int)j);
+                var y = gbits.bzhi(x, (byte)j);
 
                 var x0 = gbits.segment(x,0, (byte)(j - 1));
                 var y0 = gbits.segment(y,0, (byte)(j - 1));

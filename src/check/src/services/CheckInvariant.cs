@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void require(bool invariant, string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => invariant.OnNone(() => throw ClaimException.Define(NotTrue(msg ?? string.Empty, caller, file,line)));
+            => invariant.OnNone(() => throw exception(ClaimKind.Invariant,  InvariantFailure(msg, caller, file,line)));
 
         /// <summary>
         /// Raises an exception upon invariant failure
@@ -46,7 +46,7 @@ namespace Z0
         /// <typeparam name="T"></typeparam>
         public static void require<T>(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => src.OnNone(() => throw ClaimException.Define(NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
+                => src.OnNone(() => throw exception(ClaimKind.Invariant, NotTrue($"{typeof(T).NumericKind().Format()}" + (msg ?? string.Empty) , caller, file, line)));
 
         /// <summary>
         /// Asserts the operand is false
@@ -57,6 +57,6 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         public static void not(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => src.OnSome(() => throw ClaimException.Define(NotFalse(msg, caller, file,line)));
+            => src.OnSome(() => throw exception(ClaimKind.False, NotFalse(msg, caller, file,line)));
     }
 }

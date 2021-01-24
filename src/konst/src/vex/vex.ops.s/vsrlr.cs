@@ -26,7 +26,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsrlr(cpu.vinflate16u(src,w256,z16),y);
-            return vcompact8u(dst, w128, z8);
+            return vcompact8u(dst, w128);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         {
             var y = v16i(count);
             var dst = vsrlr(cpu.vinflate16i(src,w256,z16i),y);
-            return vcompact8i(dst, w128, z8i);
+            return vcompact8i(dst, w128);
         }
 
         /// <summary>

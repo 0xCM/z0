@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static CallingMember;
-    using static z;
 
     [ApiType]
     public class t_gbb_create : t_bitspans<t_gbb_create>

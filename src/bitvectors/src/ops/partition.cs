@@ -19,7 +19,6 @@ namespace Z0
             return dst;
         }
 
-
         [MethodImpl(Inline), Op]
         public static Span<BitVector4> partition(uint src, Span<BitVector4> dst)
         {

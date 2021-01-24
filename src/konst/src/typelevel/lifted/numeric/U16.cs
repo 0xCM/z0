@@ -9,25 +9,25 @@ namespace Z0
 
     using static Part;
 
-    using P = System.UInt16;
+    using T = System.UInt16;
     using NK = NumericKind;
 
-    public readonly struct U16 : INumericKind<P>
+    public readonly struct U16 : INumericKind<T>
     {
-        public const P MaxLiteral = P.MaxValue;
+        public const T MaxLiteral = T.MaxValue;
 
-        public const P MinLiteral = P.MinValue;
+        public const T MinLiteral = T.MinValue;
 
         [MethodImpl(Inline)]
         public static implicit operator NK(U16 src)
             => NK.U16;
 
         [MethodImpl(Inline)]
-        public static implicit operator U16(NK<P> src)
+        public static implicit operator U16(NK<T> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator NK<P>(U16 src)
+        public static implicit operator NK<T>(U16 src)
             => default;
     }
 }

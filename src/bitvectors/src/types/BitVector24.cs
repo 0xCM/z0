@@ -166,7 +166,7 @@ namespace Z0
         public BitVector24 this[byte first, byte last]
         {
             [MethodImpl(Inline)]
-            get =>  Bits.extract(Data, first, last);
+            get =>  Bits.segment(Data, first, last);
         }
 
         [MethodImpl(Inline)]
@@ -379,6 +379,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator >=(BitVector24 x, BitVector24 y)
             => math.gteq(x,y);
-
     }
 }

@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(vidx, n256, z32)), 2), n128, z16);
+            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(vidx, n256, z32)), 2), w128);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(v16u(vidx), n256, z32)),2),n128, z16));
+            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(v16u(vidx), n256, z32)),2), w128));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -156,7 +156,7 @@ namespace Z0
             (var v0, var v1) = vinflate32u(v8u(vidx), n512, z32);
             var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
             var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
-            return v8i(vcompact8u(x0,x1,n128, z8));
+            return v8i(vcompact8u(x0, x1, w128));
         }
 
         /// <summary>
@@ -168,10 +168,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
-            (var v0, var v1) = vinflate32u(vidx, n512, z32);
-            var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
-            var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
-            return vcompact8u(x0,x1,n128, z8);
+            (var v0, var v1) = vinflate32u(vidx, w512);
+            var x0 = GatherVector256(memory.p32u(src), v32i(v0), 1);
+            var x1 = GatherVector256(memory.p32u(src), v32i(v1), 1);
+            return vcompact8u(x0, x1, w128);
         }
 
         [MethodImpl(Inline), Op]

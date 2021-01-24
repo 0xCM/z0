@@ -27,10 +27,10 @@ namespace Z0.Asm
         }
 
         static AppException BadBlockLength(in ApiBlockAsm src, uint computedLength)
-            => AppException.Define(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
+            => new AppException(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
 
         static AppException SizeMismatch(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
-            => AppException.Define(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
+            => new AppException(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
 
         static AppMsg InstructionSizeMismatch(MemoryAddress ip, uint offset, uint actual, uint reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

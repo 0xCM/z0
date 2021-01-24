@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Part;
 
     partial class BitVector
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         /// <typeparam name="T">The primal bitvector type</typeparam>
-        [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Nor, Closures(Closure)]
         public static BitVector<T> nor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.nor(x.Data, y.Data);
@@ -89,6 +89,6 @@ namespace Z0
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Nor]
         public static BitVector64 nor(BitVector64 x, BitVector64 y)
-            => gmath.nor(x.Data, y.Data); 
+            => gmath.nor(x.Data, y.Data);
    }
 }

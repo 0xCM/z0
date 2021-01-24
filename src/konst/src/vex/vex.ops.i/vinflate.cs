@@ -359,7 +359,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector1024<uint> vinflate32u(Vector256<byte> src, N1024 w, uint t = 0)
+        public static Vector1024<uint> vinflate32u(Vector256<byte> src, N1024 w)
             => vconvert32u(src, w);
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<uint> vinflate32u(Vector256<ushort> src, N512 w, uint t)
+        public static Vector512<uint> vinflate32u(Vector256<ushort> src, N512 w)
             => vconvert32u(src, w);
     }
 }

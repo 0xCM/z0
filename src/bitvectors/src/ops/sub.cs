@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Sub, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Sub, Closures(Closure)]
         public static BitVector<T> sub<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.sub(x.Data, y.Data);

@@ -35,22 +35,22 @@ namespace Z0
         {
             var v0 = cpu.vload(n256, skip(src, 0*8));
             var v1 = cpu.vload(n256, skip(src, 1*8));
-            var x = vcompact16u(v0, v1, n256, z16);
+            var x = vcompact16u(v0, v1, n256);
             v0 = cpu.vload(n256, skip(src,2*8));
             v1 = cpu.vload(n256, skip(src,3*8));
 
-            var y = vcompact16u(v0, v1, n256, z16);
-            var packed = (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8));
+            var y = vcompact16u(v0, v1, n256);
+            var packed = (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256));
 
             v0 = cpu.vload(n256, skip(src,4*8));
             v1 = cpu.vload(n256, skip(src,5*8));
-            x = vcompact16u(v0,v1,n256,z16);
+            x = vcompact16u(v0,v1,n256);
 
             v0 = cpu.vload(n256, skip(src,6*8));
             v1 = cpu.vload(n256, skip(src,7*8));
-            y = vcompact16u(v0,v1,n256,z16);
+            y = vcompact16u(v0,v1,n256);
 
-            packed |= (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256,z8)) << 32;
+            packed |= (ulong)gcpu.vpacklsb(vcompact8u(x,y,n256)) << 32;
 
             dst = packed;
             return ref dst;

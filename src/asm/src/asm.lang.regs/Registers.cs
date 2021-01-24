@@ -95,23 +95,23 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegisterIndex code1(RegisterKind src)
-            => (RegisterIndex)Bits.slice((uint)src, (byte)FI.C, (byte)FW.C);
+            => (RegisterIndex)Bits.bitslice((uint)src, (byte)FI.C, (byte)FW.C);
 
         [MethodImpl(Inline), Op]
         public static RegisterClass @class1(RegisterKind src)
-            => (RegisterClass)Bits.slice((uint)src, (byte)FI.K, (byte)FW.K);
+            => (RegisterClass)Bits.bitslice((uint)src, (byte)FI.K, (byte)FW.K);
 
         [MethodImpl(Inline), Op]
         public static RegisterKind code(RegisterIndex src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.C, (byte)(FW.C), (uint)dst));
+            => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.C, (byte)(FW.C), (ulong)(uint)dst));
 
         [MethodImpl(Inline), Op]
         public static RegisterKind @class(RegisterClass src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.K), (uint)dst));
+            => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.K, (byte)(FW.K), (ulong)(uint)dst));
 
         [MethodImpl(Inline), Op]
         public static RegisterKind width(RegisterWidth src, RegisterKind dst)
-            => (RegisterKind)(Bits.copy((uint)src, (byte)FI.K, (byte)(FW.W), (uint)dst));
+            => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.K, (byte)(FW.W), (ulong)(uint)dst));
 
         [Op]
         public static Index<Register> All()

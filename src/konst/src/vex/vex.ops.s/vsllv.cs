@@ -52,7 +52,7 @@ namespace Z0
             var a = cpu.vinflate32i(src, w256);
             var b = v32u(cpu.vinflate32i(counts, w256));
             var x = ShiftLeftLogicalVariable(a,b);
-            return vcompact16i(x,n128);
+            return vcompact16i(x,w128);
         }
 
         /// <summary>

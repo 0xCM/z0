@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static BitMasks;
 
     partial class Bits
@@ -87,7 +87,7 @@ namespace Z0
             for(var i=0; i < count; i++)
             {
                 unpack1x8x8(skip(src, i), ref tmp);
-                vconvert32u(n64, in tmp, n256).StoreTo(ref seek(dst, i*8));
+                cpu.vconvert32u(n64, in tmp, n256).StoreTo(ref seek(dst, i*8));
             }
         }
 

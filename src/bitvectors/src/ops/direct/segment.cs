@@ -7,30 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitVector
     {
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline), Segment, Closures(Closure)]
-        public static BitVector<T> segment<T>(BitVector<T> x, byte first, byte last)
-            where T : unmanaged
-                => gbits.segment(x.Data, first, last);
-
-        /// <summary>
-        /// Extracts a contiguous sequence of bits defined by an inclusive range
-        /// </summary>
-        /// <param name="first">The first bit position</param>
-        /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline)]
-        public static BitVector<N,T> segment<N,T>(BitVector<N,T> x, byte first, byte last)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => gbits.segment(x.Data, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -66,7 +46,7 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), Segment]
         public static BitVector32 segment(BitVector32 x, byte first, byte last)
-            => Bits.extract(x.Data, first, last);
+            => Bits.segment(x.Data, first, last);
 
         /// <summary>
         /// Extracts a contiguous sequence of bits defined by an inclusive range
@@ -75,6 +55,6 @@ namespace Z0
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), Segment]
         public static BitVector64 segment(BitVector64 x, byte first, byte last)
-            => Bits.extract(x.Data, first, last);
+            => Bits.segment(x.Data, first, last);
     }
 }

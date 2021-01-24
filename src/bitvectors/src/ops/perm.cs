@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BitVector
     {
@@ -34,7 +34,6 @@ namespace Z0
         {
             var dst = src.Replicate();
             var width = src.Width;
-
             for(var i=0; i<width; i++)
                 dst[i] = src[p[i]];
             return dst;
@@ -47,7 +46,7 @@ namespace Z0
         /// <param name="spec">The permutation</param>
         [MethodImpl(Inline)]
         public static BitVector16 perm(BitVector16 src, in Perm spec)
-        {            
+        {
             var dst = src.Replicate();
             var width = src.Width;
             for(var i=0; i<width; i++)
@@ -57,7 +56,7 @@ namespace Z0
                     dst[i] = src[j];
             }
             return dst;
-        }        
+        }
 
         /// <summary>
         /// Rearranges the vector specified by a permutation
@@ -76,7 +75,7 @@ namespace Z0
                     dst[i] = src[j];
             }
             return dst;
-        }        
+        }
 
         /// <summary>
         /// Creates a new vector by permuting a replica of the source vector as specified by a permuation
@@ -95,7 +94,7 @@ namespace Z0
                     dst[i] = src[j];
             }
             return dst;
-        }        
+        }
 
         /// <summary>
         /// Rearranges the vector as specified by a permutation

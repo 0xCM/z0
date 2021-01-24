@@ -91,7 +91,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public AsmOpCodeOperand operand(ulong src, uint2 index)
-            => new AsmOpCodeOperand((ushort)Bits.slice(src, index*16, 16));
+            => new AsmOpCodeOperand((ushort)Bits.bitslice(src, index*16, 16));
 
         [Op]
         public static AsmSymbols symbols()

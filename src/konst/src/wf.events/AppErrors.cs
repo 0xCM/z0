@@ -20,7 +20,7 @@ namespace Z0
         const string Delimiter = " | ";
 
         public static AppException missing([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotImplemented(caller,file,line));
+            => new AppException(AppErrorMsg.NotImplemented(caller,file,line));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static string neq<T>(T lhs, T rhs)
@@ -48,47 +48,47 @@ namespace Z0
 
         [Op]
         public static void Throw(object reason, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw AppException.Define(reason, caller,file,line);
+            => throw AppException.define(reason, caller, file, line);
 
         [Op]
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.Equal(lhs,rhs,caller,file,line));
+            => new AppException(AppErrorMsg.Equal(lhs,rhs,caller,file,line));
 
         [Op]
         public static AppException NotLessThan(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotLessThan(lhs,rhs,caller,file,line));
+            => new AppException(AppErrorMsg.NotLessThan(lhs,rhs,caller,file,line));
 
         [Op]
         public static AppException ItemsNotEqual(int index, object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.ItemsNotEqual(index, lhs,rhs,caller,file,line));
+            => new AppException(AppErrorMsg.ItemsNotEqual(index, lhs,rhs,caller,file,line));
 
         [Op]
         public static AppException NotNonzero([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotNonzero(caller,file,line));
+            => new AppException(AppErrorMsg.NotNonzero(caller,file,line));
 
         [Op]
         public static AppException NotTrue(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotTrue(msg,caller,file,line));
+            => new AppException(AppErrorMsg.NotTrue(msg,caller,file,line));
 
         [Op]
         public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NotFalse(msg,caller,file,line));
+            => new AppException(AppErrorMsg.NotFalse(msg,caller,file,line));
 
         [Op]
         public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.LengthMismatch(lhs,rhs,caller,file,line));
+            => new AppException(AppErrorMsg.LengthMismatch(lhs,rhs,caller,file,line));
 
         [Op]
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.NonGenericMethod(method,caller,file,line));
+            => new AppException(AppErrorMsg.NonGenericMethod(method,caller,file,line));
 
         [Op]
         public static AppException GenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.GenericMethod(method,caller,file,line));
+            => new AppException(AppErrorMsg.GenericMethod(method,caller,file,line));
 
         [Op]
         public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.FileDoesNotExist(path, caller, file, line));
+            => new AppException(AppErrorMsg.FileDoesNotExist(path, caller, file, line));
 
         [Op]
         public static ArgumentException BadArg(object arg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -131,7 +131,7 @@ namespace Z0
 
         [Op]
         public static AppException InvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define(AppErrorMsg.InvariantFailure(description, caller, file, line));
+            => new AppException(AppErrorMsg.InvariantFailure(description, caller, file, line));
 
         [Op]
         public static void ThrowInvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

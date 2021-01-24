@@ -13,18 +13,18 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_cvtepi8_epi16 (__m128i a) PMOVSXBW xmm, xmm/m64
         /// 8x8i -> 8x16i
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vmaphi16i(Vector128<sbyte> src, N128 w, short k = 0)
+        public static Vector128<short> vmaphi16i(Vector128<sbyte> src, N128 w)
             => ConvertToVector128Int16(vshi(src));
 
         /// <summary>
@@ -33,8 +33,7 @@ namespace Z0
         /// dst[i] = src[i], i = 8, ..., 15
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi16u(Vector128<sbyte> src, N128 w)
             => v16u(ConvertToVector128Int16(vshi(src)));
@@ -44,10 +43,9 @@ namespace Z0
         /// 8x8i -> 8x32i
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaphi32i(Vector128<sbyte> src, N256 w, int k = 0)
+        public static Vector256<int> vmaphi32i(Vector128<sbyte> src, N256 w)
             => ConvertToVector256Int32(vshi(src));
 
         /// <summary>
@@ -56,8 +54,7 @@ namespace Z0
         /// src[i] -> dst[i], i = 8,.., 15
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vmaph16i(Vector128<byte> src, N128 w)
             =>  ConvertToVector128Int16(vshi(src));
@@ -68,8 +65,7 @@ namespace Z0
         /// src[i] -> dst[i], i = 0,.., 7
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vmaphi16u(Vector128<byte> src, N128 w)
             => v16u(ConvertToVector128Int16(vshi(src)));
@@ -79,10 +75,9 @@ namespace Z0
         /// Zero extends 8 8-bit integers from the low 8 bytes of the source to 8 32-bit integers in the target
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vmaphi32u(Vector128<byte> src, N256 w, uint k = 0)
+        public static Vector256<uint> vmaphi32u(Vector128<byte> src, N256 w)
             => v32u(ConvertToVector256Int32(vshi(src)));
 
         /// <summary>
@@ -90,8 +85,7 @@ namespace Z0
         /// Zero extends 8 8-bit integers from the low 8 bytes of the source to 8 32-bit integers in the target
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmaphi32i(Vector128<byte> src, N256 w)
             => ConvertToVector256Int32(vshi(src));
@@ -103,15 +97,14 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaphi16i(Vector256<sbyte> src, N256 w, short t = 0)
+        public static Vector256<short> vmaphi16i(Vector256<sbyte> src, N256 w)
             => ConvertToVector256Int16(cpu.vhi(src));
 
         /// <summary>
         /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vmaphi16i(Vector128<short> src, N128 w)
             => ConvertToVector128Int32(vshi(src));
@@ -121,18 +114,16 @@ namespace Z0
         /// 4x16u -> 4x64u
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaphi64i(Vector128<short> src, N256 w, long k = 0)
+        public static Vector256<long> vmaphi64i(Vector128<short> src, N256 w)
             => ConvertToVector256Int64(vshi(src));
 
         /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a) PMOVZXWD xmm, xmm/m64
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vmaphi32u(Vector128<ushort> src, N128 w)
             => v32u(ConvertToVector128Int32(vshi(src)));
@@ -141,8 +132,7 @@ namespace Z0
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi64i(Vector128<ushort> src, N256 w)
             => ConvertToVector256Int64(vshi(src));
@@ -151,10 +141,9 @@ namespace Z0
         /// __m256i _mm256_cvtepu16_epi64 (__m128i a) VPMOVZXWQ ymm, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vmaphi64u(Vector128<ushort> src, N256 w, ulong k = 0)
+        public static Vector256<ulong> vmaphi64u(Vector128<ushort> src, N256 w)
             => v64u(ConvertToVector256Int64(vshi(src)));
 
         /// <summary>
@@ -163,8 +152,7 @@ namespace Z0
         /// src[i] -> dst[i], i = 0, 2
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vmaphi64i(Vector128<uint> src, N128 w)
             => ConvertToVector128Int64(vshi(src));
@@ -175,8 +163,7 @@ namespace Z0
         /// src[i] -> dst[i], i = 0, 2
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vmaphi64u(Vector128<uint> src, N128 w)
             => v64u(ConvertToVector128Int64(vshi(src)));
@@ -186,10 +173,9 @@ namespace Z0
         /// 16x8u -> 16x16u
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vmaphi16u(Vector256<byte> src, N256 w, ushort k = 0)
+        public static Vector256<ushort> vmaphi16u(Vector256<byte> src, N256 w)
             => v16u(ConvertToVector256Int16(cpu.vhi(src)));
 
         /// <summary>
@@ -197,10 +183,9 @@ namespace Z0
         /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaphi16i(Vector256<byte> src, N256 w, short k = 0)
+        public static Vector256<short> vmaphi16i(Vector256<byte> src, N256 w)
             => ConvertToVector256Int16(cpu.vhi(src));
 
         /// <summary>
@@ -208,10 +193,9 @@ namespace Z0
         /// 8x16i -> 8x32i
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaphi32i(Vector256<short> src, N256 w, int k = 0)
+        public static Vector256<int> vmaphi32i(Vector256<short> src, N256 w)
             => ConvertToVector256Int32(cpu.vhi(src));
 
         /// <summary>
@@ -219,8 +203,7 @@ namespace Z0
         /// 8x16u -> 8x32u
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmaphi16u(Vector256<ushort> src, N256 w)
             => v32u(ConvertToVector256Int32(cpu.vhi(src)));
@@ -230,8 +213,7 @@ namespace Z0
         /// 4x32i -> 4x64i
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmaphi64i(Vector256<int> src, N256 w)
             => ConvertToVector256Int64(cpu.vhi(src));
@@ -241,8 +223,7 @@ namespace Z0
         /// 4x32u -> 4x64u
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        /// <param name="k">The target cell kind selector</param>
+        /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmaphi64u(Vector256<uint> src, N256 w)
             => v64u(ConvertToVector256Int64(cpu.vhi(src)));

@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
+    using static memory;
 
     public class t_ntz : t_bitcore<t_ntz>
     {
         public void ntz_outline()
         {
-            Claim.eq((byte)3, gbits.ntz((byte)0b111000));
-            Claim.eq(2u, gbits.ntz(0b0001011000100u));
-            Claim.eq(5u, gbits.ntz(0b000101100000u));
-            Claim.eq(3ul, gbits.ntz(Pow2.pow(3)));
+            Claim.eq((byte)3, Bits.ntz((byte)0b111000));
+            Claim.eq(2u, Bits.ntz(0b0001011000100u));
+            Claim.eq(5u, Bits.ntz(0b000101100000u));
+            Claim.eq(3ul, Bits.ntz(Pow2.pow(3)));
         }
 
         public void ntz_8()
@@ -28,22 +29,15 @@ namespace Z0
         public void ntz_64()
             => ntz_check<ulong>();
 
-        protected void ntz_check<T>(T t = default)
+        protected void ntz_check<T>()
             where T : unmanaged
         {
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
-                var y = BitString.scalar(x);
-                var ntzY = z.generic<T>(y.Ntz());
-
-                if(gmath.neq(ntzX, ntzY))
-                {
-                    Trace("scalar", x.ToString());
-                    Trace("bitstring", y.Format());
-                }
-
+                var y = BitSpans.ntz(BitSpans.create(x));
+                var ntzY = generic<T>(y);
                 Claim.eq(ntzX, ntzY);
             }
         }

@@ -20,15 +20,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref uint pack32x32x1(in uint src, ref uint dst)
         {
-            var v0 = cpu.vload(n256, skip(src,0*8));
-            var v1 = cpu.vload(n256, skip(src,1*8));
-            var x = vcompact16u(v0,v1,n256,z16);
+            var v0 = cpu.vload(w256, skip(src,0*8));
+            var v1 = cpu.vload(w256, skip(src,1*8));
+            var x = vcompact16u(v0, v1, w256);
 
-            v0 = cpu.vload(n256, skip(src,2*8));
-            v1 = cpu.vload(n256, skip(src,3*8));
-            var y = vcompact16u(v0,v1,n256,z16);
+            v0 = cpu.vload(w256, skip(src,2*8));
+            v1 = cpu.vload(w256, skip(src,3*8));
+            var y = vcompact16u(v0,v1, w256);
 
-            dst = gcpu.vpacklsb(vcompact8u(x,y,n256,z8));
+            dst = gcpu.vpacklsb(vcompact8u(x, y, w256));
             return ref dst;
         }
     }

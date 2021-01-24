@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
 
     public class t_lsboff : t_bitcore<t_lsboff>
     {

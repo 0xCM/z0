@@ -83,5 +83,9 @@ namespace Z0
         Disable = Id.Disable,
 
         Byteswap = Id.Byteswap,
+
+        Blsr = Id.Blsr,
+
+        Blsi = Id.Blsi,
     }
 }

@@ -13,25 +13,19 @@ namespace Z0
     {
         public new IAppMsg Message {get;}
 
-        [MethodImpl(Inline)]
-        public static AppException Define(IAppMsg msg)
-            => new AppException(msg);
-
-        public static AppException Define(object reason, string caller, string file, int? line)
-            => new AppException(reason?.ToString(), caller, file, line);
+        public static AppException define(object reason, string caller, string file, int? line)
+            => new AppException(reason?.ToString() ?? EmptyString, caller, file, line);
 
         public AppException() { }
 
-        [MethodImpl(Inline)]
         public AppException(IAppMsg src)
-            : base(src.Format())
-                => Message = src;
+            : base(src?.Format() ?? EmptyString)
+                => Message = src ?? AppMsg.Empty;
 
-        [MethodImpl(Inline)]
-        public AppException(string msg, string caller, string file, int? line)
-            : base(msg)
+        AppException(string msg, string caller, string file, int? line)
+            : base(msg ?? EmptyString)
         {
-            Message = AppMsg.error(msg, caller, file, line);
+            Message = AppMsg.error(msg ?? EmptyString, caller, file, line);
         }
 
         public override string ToString()

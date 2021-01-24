@@ -57,17 +57,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Concat]
         public static ulong concat(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7)
-        {
-            return
-              (ulong)x0 << 0 * 8
-            | (ulong)x1 << 1 * 8
-            | (ulong)x2 << 2 * 8
-            | (ulong)x3 << 3 * 8
-            | (ulong)x4 << 4 * 8
-            | (ulong)x5 << 5 * 8
-            | (ulong)x6 << 6 * 8
-            | (ulong)x7 << 7 * 8
-            ;
-        }
+            => (ulong)x0 << 0 * 8 | (ulong)x1 << 1 * 8 | (ulong)x2 << 2 * 8 | (ulong)x3 << 3 * 8
+             | (ulong)x4 << 4 * 8 | (ulong)x5 << 5 * 8 | (ulong)x6 << 6 * 8 | (ulong)x7 << 7 * 8;
     }
 }
