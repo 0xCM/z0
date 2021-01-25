@@ -14,12 +14,16 @@ namespace Z0
     public readonly struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static EvalExecutorContext context(IPolyStream src, uint count)
-            => new EvalExecutorContext(src, count,0);
+        public static IEvalDispatcher dispatcher(IWfShell wf, IPolyStream random, uint bufferSize)
+            => new EvalDispatcher(wf, random, bufferSize);
 
         [MethodImpl(Inline), Op]
-        public static IEvalDispatcher dispatcher(IPolyStream random, IAppMsgSink sink, uint bufferSize)
-            => new EvalDispatcher(random, sink, bufferSize);
+        public static IEvalExecutor executor(IWfShell wf, IPolyStream random)
+            => new EvalExecutor(wf, random);
+
+        [MethodImpl(Inline), Op]
+        public static IEvalControl control(IWfShell wf, IPolyrand random, FS.FolderPath root, uint bufferSize)
+            => new EvalControl(wf, random, root, bufferSize);
 
         public static ref readonly UnaryEvaluations<T> compute<T>(in UnaryEvalContext<T> exchange, Action<Exception> error)
             where T : unmanaged
@@ -34,18 +38,6 @@ namespace Z0
             @try(exchange, error);
             return ref exchange.Target;
         }
-
-        [MethodImpl(Inline), Op]
-        public static MemberEvaluator evaluator(BufferTokens buffers)
-            => new MemberEvaluator(buffers);
-
-        [MethodImpl(Inline), Op]
-        public static IEvalExecutor executor(IPolyrand random)
-            => new EvalExecutor(random);
-
-        [MethodImpl(Inline), Op]
-        public static IEvalControl control(IAppContext context, FS.FolderPath root, uint bufferSize)
-            => new EvalControl(context, context.Random, root, bufferSize);
 
         static void @try<T>(in UnaryEvalContext<T> exchange, Action<Exception> handler)
             where T : unmanaged

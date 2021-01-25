@@ -8,16 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    partial struct Rules
     {
-        [MethodImpl(Inline)]
-        public static Index<string> split(string src, char sep)
-            => Parse.split(src, sep);
-
-        [MethodImpl(Inline)]
-        public static Index<string> split(string src, string sep)
-            => Parse.split(src, sep);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Precedes<T> precedes<T>(T before, T after)
+            => new Precedes<T>(before, after);
     }
 }

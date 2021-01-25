@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
-
-    using Z0.Lang;
 
     partial struct Rules
     {
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static OneOf<T> oneof<T>(params T[] src)
+            => new OneOf<T>(src);
     }
 }

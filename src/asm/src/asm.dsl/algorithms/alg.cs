@@ -16,77 +16,8 @@ namespace alg.asm
     public readonly struct algorithms
     {
 
-        [MethodImpl(Inline)]
-        public static section<T> section<T>(T min, T max)
-            => new section<T>(min,max);
-
-        /// <summary>
-        /// Parses an expression of the form {identifier}[max:min]
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public static ref section<T> parse<T>(asci src, out section<T> dst)
-        {
-            dst = default;
-            var index = 0;
-            var count = src.Length;
-            var codes = src.Codes;
-            var foundIdentifierStart = bit.Off;
-            var foundIdentifier = bit.Off;
-            var foundLeftBracket = bit.Off;
-            var foundRightBracket = bit.Off;
-            var foundRangeSeparator = bit.Off;
-            var parsingIdentifier = bit.Off;
-
-            var identifier = asci16.Null;
-            while(index-- < count)
-            {
-                ref readonly var current = ref skip(codes,index);
-                if(AsciTest.whitespace(current))
-                    continue;
-
-                if(!foundIdentifierStart && AsciTest.letter(current))
-                {
-                    foundIdentifierStart = true;
-                    parsingIdentifier = true;
-                }
-
-                if(parsingIdentifier)
-                {
-
-                }
-
-            }
-
-
-            return ref dst;
-        }
     }
 
-    /// <summary>
-    /// Represents a closed interval of bits from an operand and corresponds to the notation [max:min]
-    /// </summary>
-    public readonly struct section<T>
-    {
-        public T Min {get;}
-
-        public T Max {get;}
-
-        [MethodImpl(Inline)]
-        public section(T min, T max)
-        {
-            Min = min;
-            Max = max;
-        }
-
-
-        [MethodImpl(Inline)]
-        public static implicit operator section<T>((T min, T max) src)
-            => new section<T>(src.min, src.max);
-
-    }
 
     public readonly struct functions
     {

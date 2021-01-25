@@ -18,21 +18,20 @@ namespace Z0
         public A Content {get;}
 
         [MethodImpl(Inline)]
+        public AsciSequence(A src)
+            => Content = src;
+        public string Format()
+            => Content.Format();
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator A(AsciSequence<A> src)
             => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator AsciSequence<A>(A src)
             => new AsciSequence<A>(src);
-
-        [MethodImpl(Inline)]
-        public AsciSequence(A src)
-            => Content = src;
-
-        public string Format()
-            => Content.Format();
-
-        public override string ToString()
-            => Format();
     }
 }

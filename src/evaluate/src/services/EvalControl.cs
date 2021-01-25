@@ -10,26 +10,26 @@ namespace Z0
 
     public class EvalControl : IEvalControl
     {
-        readonly IAppContext Context;
+        readonly IWfShell Wf;
 
-        readonly IEvalDispatcher Dispatcher;
+        readonly byte BufferCount;
 
         readonly uint BufferSize;
 
-        readonly byte BufferCount;
+        readonly IEvalDispatcher Dispatcher;
 
         readonly IPartCapturePaths CodeArchive;
 
         readonly ISystemApiCatalog ApiSet;
 
-        internal EvalControl(IAppContext context, IPolyrand random, FS.FolderPath root, uint buffersize)
+        internal EvalControl(IWfShell wf, IPolyrand random, FS.FolderPath root, uint buffersize)
         {
+            Wf = wf;
             BufferCount = 3;
             BufferSize = buffersize;
-            Context = context;
-            Dispatcher = Evaluate.dispatcher(random, context, buffersize);
+            Dispatcher = Evaluate.dispatcher(Wf, random, BufferSize);
             CodeArchive = Archives.capture(root);
-            ApiSet = context.Api;
+            ApiSet = wf.Api;
         }
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
@@ -37,8 +37,8 @@ namespace Z0
             var dst = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
             if(dst.HostX86Path.Exists)
             {
-                var code = ApiQuery.code(ApiSet, host.Uri, CodeArchive.Root).Members;
-                Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
+                var code = ApiQuery.code(Wf, ApiSet, host.Uri, CodeArchive.Root).Members;
+                Wf.Status($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)
                     Dispatcher.Dispatch(buffers, api, Api.unary());

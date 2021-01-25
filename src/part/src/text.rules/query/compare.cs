@@ -14,13 +14,22 @@ namespace Z0
         partial struct Query
         {
             /// <summary>
-            /// Compares the source operands via the default <see cref='IComparable'/> implementation by the <see cref'string'/> type
+            /// Compares two <see cref='string'/> operands via the default <see cref='IComparable'/> implementation
             /// </summary>
             /// <param name="a">The left operand</param>
             /// <param name="b">The right operand</param>
             [MethodImpl(Inline), Op]
             public static int compare(string a, string b)
                 => a?.CompareTo(b) ?? 0;
+
+            /// <summary>
+            /// Compares two <see cref='char'/> operands via the default <see cref='IComparable'/> implementation
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), Op]
+            public static int compare(char a, char b)
+                => a.CompareTo(b);
         }
     }
 }

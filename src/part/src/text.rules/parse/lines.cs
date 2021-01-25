@@ -23,7 +23,7 @@ namespace Z0
             [Op]
             public static Index<TextLine> lines(string src)
             {
-                var parts = @readonly(split(src, CRLF));
+                var parts = split(src, CRLF).View;
                 var count = parts.Length;
                 var buffer = alloc<TextLine>(count);
                 ref var dst = ref first(buffer);

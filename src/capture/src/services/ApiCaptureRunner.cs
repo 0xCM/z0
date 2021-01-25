@@ -78,7 +78,7 @@ namespace Z0
         void RunEvaluate()
         {
             var flow = Wf.Running(nameof(Evaluate));
-            var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
+            var evaluate = Evaluate.control(Wf, App.Random, Wf.Paths.AppCaptureRoot, Pow2.T14);
             evaluate.Execute();
             Wf.Ran(flow);
         }

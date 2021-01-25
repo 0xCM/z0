@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Rules;
     using static memory;
 
     partial struct TextRules
@@ -23,15 +24,14 @@ namespace Z0
             [Op]
             public static bool fenced(string src, char left, char right)
             {
-                var result = false;
                 if(nonempty(src))
                 {
-                    var x = span(src.Trim());
-                    var length = x.Length;
-                    result = first(x) == left && skip(x,length - 1) == right;
+                    var chars = span(src.Trim());
+                    var count = chars.Length;
+                    return first(chars) == left && skip(chars, count - 1) == right;
                 }
 
-                return result;
+                return false;
             }
 
             /// <summary>
@@ -44,6 +44,24 @@ namespace Z0
             [Op]
             public static bool fenced(string src, string left, string right)
                 => src.StartsWith(left, InvariantCulture) && src.EndsWith(right, InvariantCulture);
+
+            /// <summary>
+            /// Determines whether the source text is enclosed by a specified fence
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="fence">The fence definition</param>
+            [Op]
+            public static bool fenced(string src, Fence<char> fence)
+                => fenced(src, fence.Left, fence.Right);
+
+            /// <summary>
+            /// Determines whether the source text is enclosed by a specified fence
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="fence">The fence definition</param>
+            [Op]
+            public static bool fenced(string src, Fence<string> fence)
+                => fenced(src, fence.Left, fence.Right);
         }
     }
 }

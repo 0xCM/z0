@@ -39,7 +39,6 @@ namespace Z0
             120,0,   121,0,  122,0,   123,0,   124,0,   125,0,   126,0,   127,0,    // [_,          2^8 - 1]
         };
 
-
         public static ReadOnlySpan<byte> CodeBytes
             => new byte[CodeByteCount]{
             0,   1,  2,   3,   4,   5,   6,   7,

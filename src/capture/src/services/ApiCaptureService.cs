@@ -103,7 +103,8 @@ namespace Z0
             try
             {
                 var extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
-                return extractor.Extract(ApiJit.jit(host));
+                var jitter = ApiJit.service(Wf);
+                return extractor.Extract(jitter.Jit(host));
             }
             catch(Exception e)
             {
@@ -117,7 +118,8 @@ namespace Z0
             try
             {
                 var extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
-                return extractor.Extract(ApiJit.jit(types));
+                var jitter = ApiJit.service(Wf);
+                return extractor.Extract(jitter.Jit(types));
             }
             catch(Exception e)
             {

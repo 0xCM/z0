@@ -33,7 +33,7 @@ namespace Z0
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline), Op]
-            get => z.bytes(this);
+            get => memory.bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded

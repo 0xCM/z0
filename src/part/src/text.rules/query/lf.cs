@@ -6,20 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
+    using static Part;
 
     partial struct TextRules
     {
         partial struct Query
         {
             /// <summary>
-            /// Determines whether the source text is of the form "[{content}]"
+            /// Tests whether a source character is a <see cref='AsciChar.LF'/>
             /// </summary>
-            /// <param name="src">The source text</param>
-            [Op]
-            public static bool bracketed(string src)
-                => fenced(src, Chars.LBracket, Chars.RBracket);
+            /// <param name="c">The character to test</param>
+            [MethodImpl(Inline), Op]
+            public static bool lf(char c)
+                => (ushort)AsciChar.LF == (ushort)c;
         }
     }
 }

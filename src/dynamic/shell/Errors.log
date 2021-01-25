@@ -1,8 +1,0 @@
-Failure trapped by Main at J:\dev\projects\z0\src\dynamic\shell\src\App.cs 33
-System.Exception: The record field count of 4 does not match the supplied width count of 5
-   at Z0.proxy.throw(String msg) in j:\dev\projects\z0\src\part\src\part.sys\proxy\throw.cs:line 16
-   at Z0.Records.header(Type record, ReadOnlySpan`1 widths, String delimiter) in j:\dev\projects\z0\src\konst\src\datatypes.records\ops\header.cs:line 31
-   at Z0.Records.header[T](ReadOnlySpan`1 widths, String delimiter) in j:\dev\projects\z0\src\konst\src\datatypes.records\ops\header.cs:line 20
-   at Z0.App.CreateApiIndex() in J:\dev\projects\z0\src\dynamic\shell\src\App.cs:line 422
-   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\dynamic\shell\src\App.cs:line 29
-

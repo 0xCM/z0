@@ -33,6 +33,5 @@ namespace Z0
         /// The ''' character text
         /// </summary>
         public const string SQuote = "\'";
-
     }
 }

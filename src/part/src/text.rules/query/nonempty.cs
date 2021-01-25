@@ -14,20 +14,20 @@ namespace Z0
         partial struct Query
         {
             /// <summary>
-            /// Tests whether the source string is either null or of zero length
+            /// Tests whether a specified <see cref='string'/> is nonempty
             /// </summary>
-            /// <param name="src">The string to test</param>
-            [MethodImpl(Inline), Op]
-            public static bool empty(string src)
-                => string.IsNullOrEmpty(src);
-
-            /// <summary>
-            /// Tests whether the source string is nonempty
-            /// </summary>
-            /// <param name="src">The string to evaluate</param>
+            /// <param name="src">The source text</param>
             [MethodImpl(Inline), Op]
             public static bool nonempty(string src)
                 => !string.IsNullOrEmpty(src);
+
+            /// <summary>
+            /// Tests whether a specified <see cref='char'/> has a nozero value
+            /// </summary>
+            /// <param name="src">The source text</param>
+            [MethodImpl(Inline), Op]
+            public static bool nonempty(char src)
+                => src != Chars.Null;
         }
     }
 }

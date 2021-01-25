@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Rules;
 
     partial struct TextRules
     {
@@ -30,6 +31,26 @@ namespace Z0
 
                 var data = src.Trim();
                 return root.parsed(src, substring(data, 1, data.Length - 2));
+            }
+
+            /// <summary>
+            /// Extracts text that is enclosed between left and right boundaries, i.e. {left}{content}{right} => {content}
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="left">The left boundary</param>
+            /// <param name="right">The right boundary</param>
+            [Op]
+            public static bool unfence(string src, Fence<char> fence, out string dst)
+            {
+                dst = EmptyString;
+                if(!Query.blank(src) && Query.fenced(src, fence.Left, fence.Right))
+                {
+                    var len = src.Length;
+                    dst = substring(src.Trim(), 1, len - 2);
+                    return true;
+                }
+
+                return false;
             }
 
             /// <summary>

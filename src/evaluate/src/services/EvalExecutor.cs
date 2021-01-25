@@ -12,6 +12,8 @@ namespace Z0
 
     class EvalExecutor : IEvalExecutor
     {
+        readonly IWfShell Wf;
+
         readonly IPolyStream Random;
 
         readonly int RepCount;
@@ -19,11 +21,12 @@ namespace Z0
         EvalExecutorContext Context;
 
         [MethodImpl(Inline)]
-        internal EvalExecutor(IPolyStream random)
+        internal EvalExecutor(IWfShell wf, IPolyStream random)
         {
+            Wf = wf;
             RepCount = 128;
             Random = random;
-            Context = Evaluate.context(random, 128);
+            Context = new EvalExecutorContext(random, 128, 0);
         }
 
         public EvalResult MatchBinaryOps(in NativeBuffers buffers, CellWidth w, in ConstPair<ApiMemberCode> paired)

@@ -14,17 +14,17 @@ namespace Z0
 
     class EvalDispatcher : IEvalDispatcher
     {
-        readonly IPolyStream DataSource;
+        readonly IWfShell Wf;
 
-        readonly IAppMsgSink Sink;
+        readonly IPolyStream DataSource;
 
         readonly uint BufferSize;
 
         [MethodImpl(Inline)]
-        public EvalDispatcher(IPolyStream  random, IAppMsgSink sink, uint bufferSize)
+        public EvalDispatcher(IWfShell wf, IPolyStream  random, uint bufferSize)
         {
+            Wf = wf;
             DataSource = random;
-            Sink = sink;
             BufferSize = bufferSize;
         }
 
@@ -32,7 +32,7 @@ namespace Z0
             => (uint)z.size<T>()/BufferSize;
 
         MemberEvaluator Evaluator(BufferTokens buffers)
-            => Evaluate.evaluator(buffers);
+            => new MemberEvaluator(buffers);
 
         Pair<string> Labels => ("method", "asm");
 
@@ -46,7 +46,7 @@ namespace Z0
 
         void error(Exception e)
         {
-            term.error(e);
+            Wf.Error(e);
         }
 
         UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryClass<T> k)
@@ -144,7 +144,7 @@ namespace Z0
             var sampleMax = 10;
             var fp = typeof(T).IsFloatingPoint();
 
-            Sink.AnalyzingEvaluation(api);
+            //Sink.AnalyzingEvaluation(api);
 
             var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
@@ -173,7 +173,7 @@ namespace Z0
             var sampleMax = 10;
             var fp = typeof(T).IsFloatingPoint();
 
-            Sink.AnalyzingEvaluation(api);
+            //Sink.AnalyzingEvaluation(api);
 
             var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
@@ -237,7 +237,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Sink.RuntimeEvalFailure(api, e);
+                Wf.Error(e);
             }
         }
 
@@ -289,7 +289,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Sink.RuntimeEvalFailure(api, e);
+                Wf.Error(e);
             }
         }
 
@@ -326,7 +326,7 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.ApiKind.Format(), x0,x1,x2);
+                //Sink.EvaluatedPoint(api.Member.ApiKind.Format(), x0,x1,x2);
             }
         }
 
@@ -346,7 +346,7 @@ namespace Z0
                 var x0 = eval[n0];
                 var x1 = eval[n1];
                 var x2 = eval[n2];
-                Sink.EvaluatedPoint(api.Member.ApiKind.Format(),x0,x1,x2);
+                //Sink.EvaluatedPoint(api.Member.ApiKind.Format(),x0,x1,x2);
             }
         }
 

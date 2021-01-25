@@ -14,23 +14,7 @@ namespace Z0
         partial struct Query
         {
             /// <summary>
-            /// Tests whether a source character is a <see cref='AsciChar.CR'/>
-            /// </summary>
-            /// <param name="c">The character to test</param>
-            [MethodImpl(Inline), Op]
-            public static bool cr(char c)
-                => (ushort)AsciChar.CR == (ushort)c;
-
-            /// <summary>
-            /// Tests whether a source character is a <see cref='AsciChar.LF'/>
-            /// </summary>
-            /// <param name="c">The character to test</param>
-            [MethodImpl(Inline), Op]
-            public static bool lf(char c)
-                => (ushort)AsciChar.LF == (ushort)c;
-
-            /// <summary>
-            /// Tests whether a source character is a <see cref='AsciChar.CR'/> followed by a <see cref='AsciChar.LF'/>
+            /// Tests whether the first <see cref='char'/> is a <see cref='AsciChar.CR'/> and the second <see cref='char'/> is a <see cref='AsciChar.LF'/>
             /// </summary>
             /// <param name="c">The character to test</param>
             [MethodImpl(Inline), Op]

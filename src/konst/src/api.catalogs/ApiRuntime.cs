@@ -53,7 +53,7 @@ namespace Z0
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var catalog = ApiQuery.members(host);
+                var catalog = ApiQuery.members(wf, host);
                 var component = host.HostType.Assembly;
                 var members = @readonly(catalog.Members.Storage);
                 var apicount = (uint)members.Length;

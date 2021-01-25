@@ -20,7 +20,7 @@ namespace Z0
         public static ParseResult<CmdExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
         {
             var fail = unparsed<CmdExecSpec>(src);
-            var parts = @readonly(text.split(src, delimiter));
+            var parts = text.split(src, delimiter).View;
             var count = parts.Length;
             ushort pos = 0;
             if(count != 0)

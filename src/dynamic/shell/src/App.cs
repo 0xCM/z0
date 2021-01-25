@@ -376,40 +376,9 @@ namespace Z0
         }
         public void Run()
         {
-            //ShowHandlers();
-            //Jit();
-            //PipeImageData();
-            //LoadAsmStore();
-            //EmitAmsOpCodes();
-            // var commands = Commands.service(Wf);
-            // commands.EmitDocComments().Wait();
-            //EmitImageHeaders();
 
-            Wf.CmdBuilder().JitApiCmd().Dispatch(Wf).Wait();
+            Wf.CmdBuilder().JitApiCmd().Run(Wf);
 
-            // var service = ApiJit.service(Wf);
-            // var records = service.JitApi(Db.IndexFile(ApiAddressRecord.TableId));
-
-            //var records = Jit(Db.IndexFile(ApiAddressRecord.TableId));
-            //ShowPartComponents();
-
-            //Run(Args);
-            //EmitProcessImages(Wf);
-            //EmitAsmMnemonics();
-            //EmitAsmOpCodes();
-            //EmitBuildArchiveList(Wf.Db().BuildArchiveRoot(), "zbuild");
-            //EmitCilTables(Wf, "z0.bitcore.dll");
-
-            //ShowPartSummary();
-            //EmitDocComments().Wait();
-
-            //EmitResData();
-            // var component = Wf.Api.FindComponent(PartId.BitCore).Require();
-            // var result = Cli.EmitCilTableDoc(Wf, component);
-
-            // var cmd = new LocateImagesCmd();
-            // cmd.Target = Wf.Db().IndexFile(LocatedImageRow.TableId);
-            // Dispatch(cmd);
         }
     }
 

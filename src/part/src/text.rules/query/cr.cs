@@ -14,12 +14,12 @@ namespace Z0
         partial struct Query
         {
             /// <summary>
-            /// Determines the length of a specified <see cref='string'/>
+            /// Tests whether a source character is a <see cref='AsciChar.CR'/>
             /// </summary>
-            /// <param name="src">The source text</param>
+            /// <param name="c">The character to test</param>
             [MethodImpl(Inline), Op]
-            public static int length(string src)
-                => src?.Length ?? 0;
+            public static bool cr(char c)
+                => (ushort)AsciChar.CR == (ushort)c;
         }
     }
 }

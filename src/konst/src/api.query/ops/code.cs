@@ -9,16 +9,17 @@ namespace Z0
     partial struct ApiQuery
     {
         [Op]
-        public static ApiHostCatalog members(IApiHost src)
+        public static ApiHostCatalog members(IWfShell wf, IApiHost src)
         {
-            var members = ApiJit.jit(src);
+            var service = ApiJit.service(wf);
+            var members = service.Jit(src);
             return members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
         }
 
         [Op]
-        public static ApiHostMemberCode code(ISystemApiCatalog api, ApiHostUri host, FS.FolderPath root)
+        public static ApiHostMemberCode code(IWfShell wf, ISystemApiCatalog api, ApiHostUri host, FS.FolderPath root)
         {
-            var catalog = members(api.FindHost(host).Require());
+            var catalog = members(wf, api.FindHost(host).Require());
             if(catalog.IsEmpty)
                 return ApiHostMemberCode.Empty;
 

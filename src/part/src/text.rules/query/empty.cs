@@ -11,25 +11,23 @@ namespace Z0
 
     partial struct TextRules
     {
-        partial struct Parse
+        partial struct Query
         {
             /// <summary>
-            /// Splits the string, removing empty entries
+            /// Tests whether a specified <see cref='string'/> is either null or of zero length
             /// </summary>
             /// <param name="src">The source text</param>
-            /// <param name="sep">The delimiter</param>
-            [Op]
-            public static Index<string> split(string src, char sep)
-                => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            [MethodImpl(Inline), Op]
+            public static bool empty(string src)
+                => string.IsNullOrEmpty(src);
 
             /// <summary>
-            /// Splits the string, removing empty entries
+            /// Tests whether a specified <see cref='char'/> matches the <see cref='Chars.Null'/> character
             /// </summary>
             /// <param name="src">The source text</param>
-            /// <param name="sep">The delimiter</param>
-            [Op]
-            public static Index<string> split(string src, string sep)
-                => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            [MethodImpl(Inline), Op]
+            public static bool empty(char src)
+                => src == Chars.Null;
         }
     }
 }
