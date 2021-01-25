@@ -9,7 +9,7 @@ namespace Z0
 
     using K = ApiPredicateKind;
 
-    public readonly struct PredicateApiClasses
+    public readonly struct ApiPredicateClasses
     {
         public readonly struct PredicateClass : IOperationClassHost<PredicateClass,K> { public K Kind => K.Predicate; }
 

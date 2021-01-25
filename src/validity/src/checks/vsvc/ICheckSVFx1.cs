@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f, UnaryClass op, W128 w)
+        void CheckSVF<F>(F f, UnaryOperatorClass op, W128 w)
             where F : IUnaryOp128D<T>
         {
             var t = default(T);
@@ -123,7 +123,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f, UnaryClass op, W256 w)
+        void CheckSVF<F>(F f, UnaryOperatorClass op, W256 w)
             where F : IUnaryOp256D<T>
         {
 
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f, BinaryClass op, W128 w)
+        void CheckSVF<F>(F f, BinaryOperatorClass op, W128 w)
             where F : IBinaryOp128D<T>
         {
             var t = default(T);
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="k">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f, BinaryClass k, W256 w)
+        void CheckSVF<F>(F f, BinaryOperatorClass k, W256 w)
             where F : IBinaryOp256D<T>
         {
             var t = default(T);
@@ -207,7 +207,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f,TernaryClass op, W128 w)
+        void CheckSVF<F>(F f,TernaryOperatorClass op, W128 w)
             where F : ITernaryOp128D<T>
         {
             var t = default(T);
@@ -237,7 +237,7 @@ namespace Z0
         /// <param name="op">The operator arity selector</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="F">The function type</typeparam>
-        void CheckSVF<F>(F f, TernaryClass op, W256 w)
+        void CheckSVF<F>(F f, TernaryOperatorClass op, W256 w)
             where F : ITernaryOp256D<T>
         {
             var t = default(T);
@@ -260,7 +260,7 @@ namespace Z0
             Run(f, run, w, op.Classifier);
         }
 
-        void CheckSVF<F>(F f, ShiftClass k, W128 w)
+        void CheckSVF<F>(F f, ShiftOperatorClass k, W128 w)
             where F : IShiftOp128D<T>
         {
             var t = default(T);
@@ -282,7 +282,7 @@ namespace Z0
             Run(f, run, w, k.Classifier);
         }
 
-        void CheckSVF<F>(F f, ShiftClass k, W256 w)
+        void CheckSVF<F>(F f, ShiftOperatorClass k, W256 w)
             where F : IShiftOp256D<T>
         {
             var t = default(T);

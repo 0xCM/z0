@@ -25,10 +25,10 @@ namespace Z0
             get => new OperatorClass<W>(Kind);
         }
 
-        public TernaryCellClass Untyped
+        public TernaryCellFunctionClass Untyped
         {
             [MethodImpl(Inline)]
-            get => new TernaryCellClass(Width);
+            get => new TernaryCellFunctionClass(Width);
         }
 
         [MethodImpl(Inline)]
@@ -36,11 +36,11 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator TernaryClass(TernaryCellOpClass<W> src)
+        public static implicit operator TernaryOperatorClass(TernaryCellOpClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator TernaryCellClass(TernaryCellOpClass<W> src)
+        public static implicit operator TernaryCellFunctionClass(TernaryCellOpClass<W> src)
             => src.Untyped;
     }
 }

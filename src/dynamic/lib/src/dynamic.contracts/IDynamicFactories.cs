@@ -9,13 +9,13 @@ namespace Z0
         IEmitterOpFactory<T> Factory<T>(EmitterClass<T> k)
             where T : unmanaged;
 
-        IUnaryOpFactory<T> Factory<T>(UnaryClass<T> op)
+        IUnaryOpFactory<T> Factory<T>(UnaryOperatorClass<T> op)
             where T :  unmanaged;
 
-        IBinaryOpFactory<T> Factory<T>(BinaryClass<T> op)
+        IBinaryOpFactory<T> Factory<T>(BinaryOperatorClass<T> op)
             where T :  unmanaged;
 
-        ITernaryOpFactory<T> Factory<T>(TernaryClass<T> op)
+        ITernaryOpFactory<T> Factory<T>(TernaryOperatorClass<T> op)
             where T :  unmanaged;
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial class XNumeric
     {
         [MethodImpl(Inline)]
-        public static NumericApiKind ApiKind(this NumericKind kind)
+        public static ScalarKind ApiKind(this NumericKind kind)
             => NumericKinds.apikind(kind);
     }
 }

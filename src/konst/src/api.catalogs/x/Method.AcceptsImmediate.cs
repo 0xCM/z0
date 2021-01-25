@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static bool AcceptsImmediate(this MethodInfo src, ScalarRefinementKind refinement)
+        public static bool AcceptsImmediate(this MethodInfo src, RefinementClass refinement)
             => src.ImmParameters(refinement).Any();
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static bool AcceptsImmediate(this MethodInfo m, int index, ScalarRefinementKind refinement)
+        public static bool AcceptsImmediate(this MethodInfo m, int index, RefinementClass refinement)
         {
             var parameters = m.GetParameters().ToArray();
             return parameters.Length > index && parameters[index].IsImmediate(refinement);

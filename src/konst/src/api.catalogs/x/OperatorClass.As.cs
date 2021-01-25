@@ -15,20 +15,20 @@ namespace Z0
             where T : unmanaged => default;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryClass<T> As<T>(this UnaryClass src)
+        public static UnaryOperatorClass<T> As<T>(this UnaryOperatorClass src)
             where T : unmanaged => default;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TernaryClass<T> As<T>(this TernaryClass src)
+        public static TernaryOperatorClass<T> As<T>(this TernaryOperatorClass src)
             where T : unmanaged => default;
 
         public static OperatorClass<W> Fixed<W>(this OperatorClass src)
             where W : unmanaged, ITypeWidth => default;
 
-        public static UnaryClass<W> Fixed<W>(this UnaryClass src)
+        public static UnaryOperatorClass<W> Fixed<W>(this UnaryOperatorClass src)
             where W : unmanaged, ITypeWidth => default;
 
-        public static TernaryClass<W> Fixed<W>(this TernaryClass src)
+        public static TernaryOperatorClass<W> Fixed<W>(this TernaryOperatorClass src)
             where W : unmanaged, ITypeWidth => default;
     }
 }

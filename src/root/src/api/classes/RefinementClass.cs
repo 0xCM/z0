@@ -10,7 +10,7 @@ namespace Z0
     /// Defines immediate value classifiers
     /// </summary>
     [Flags]
-    public enum ScalarRefinementKind : byte
+    public enum RefinementClass : byte
     {
         None = 0,
 

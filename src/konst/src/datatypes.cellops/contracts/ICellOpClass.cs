@@ -11,12 +11,12 @@ namespace Z0
     using static OperationClasses;
 
     [Free]
-    public interface ICellOpClass<F,W,E> : ICellClass, IOperationClassHost<F,E>
+    public interface ICellOpClass<F,W,E> : ICellFunctionClass, IOperationClassHost<F,E>
         where F : struct, ICellOpClass<F,W,E>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
-        TypeWidth ICellClass.Width
+        TypeWidth ICellFunctionClass.Width
             => Widths.type<W>();
     }
 }

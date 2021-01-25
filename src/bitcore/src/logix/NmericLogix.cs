@@ -79,7 +79,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(uint64(a)^ ulong.MaxValue);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]

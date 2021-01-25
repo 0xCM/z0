@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using K = BinaryClass;
+    using K = BinaryOperatorClass;
     using Test = CheckBinaryDynamic;
 
     public interface ITestBinaryDynamic : ITestOperatorMatch, ICheckDynamic

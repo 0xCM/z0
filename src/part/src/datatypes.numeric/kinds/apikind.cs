@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static NumericApiKind apikind(NumericKind kind)
+        public static ScalarKind apikind(NumericKind kind)
         {
             var noClass = ((uint)kind << 3) >> 3;
             var noWidth = (noClass >> 16) << 16;
-            var key = (NumericApiKind)noWidth;
+            var key = (ScalarKind)noWidth;
             return key;
         }
     }

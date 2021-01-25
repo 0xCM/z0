@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         readonly bool Generic;
 
-        readonly ScalarRefinementKind ImmSource;
+        readonly RefinementClass ImmSource;
 
         readonly Type Refinement;
 
@@ -29,21 +29,21 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public SpecializedImmEvent refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FilePath dst, CorrelationToken ct)
-            => new SpecializedImmEvent(step, uri, generic, ScalarRefinementKind.Refined, refinement, dst, ct);
+            => new SpecializedImmEvent(step, uri, generic, RefinementClass.Refined, refinement, dst, ct);
 
         [MethodImpl(Inline)]
         public SpecializedImmEvent literal(WfStepId step, ApiHostUri uri, bool generic, FilePath dst, CorrelationToken ct)
-            => new SpecializedImmEvent(step, uri, generic, ScalarRefinementKind.Unrefined, typeof(void), dst, ct);
+            => new SpecializedImmEvent(step, uri, generic, RefinementClass.Unrefined, typeof(void), dst, ct);
 
         [MethodImpl(Inline)]
         public SpecializedImmEvent define(WfStepId step, ApiHostUri uri, bool generic, FilePath dst, Type refinement, CorrelationToken ct)
             => new SpecializedImmEvent(step, uri, generic,
-                refinement != null ? ScalarRefinementKind.Refined : ScalarRefinementKind.Unrefined,
+                refinement != null ? RefinementClass.Refined : RefinementClass.Unrefined,
                 refinement,
                 dst, ct);
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, ScalarRefinementKind source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public SpecializedImmEvent(WfStepId step, ApiHostUri uri, bool generic, RefinementClass source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Host = uri;

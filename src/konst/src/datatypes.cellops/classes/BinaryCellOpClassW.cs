@@ -25,10 +25,10 @@ namespace Z0
             get => new OperatorClass<W>(Kind);
         }
 
-        public BinaryCellClass Untyped
+        public BinaryCellFunctionClass Untyped
         {
             [MethodImpl(Inline)]
-            get => new BinaryCellClass(Width);
+            get => new BinaryCellFunctionClass(Width);
         }
 
         [MethodImpl(Inline)]
@@ -36,11 +36,11 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryClass(BinaryCellClass<W> src)
+        public static implicit operator BinaryOperatorClass(BinaryCellClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCellClass(BinaryCellClass<W> src)
+        public static implicit operator BinaryCellFunctionClass(BinaryCellClass<W> src)
             => src.Untyped;
     }
 }

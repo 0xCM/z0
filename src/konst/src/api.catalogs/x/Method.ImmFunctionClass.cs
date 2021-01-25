@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to classify</param>
         [Op]
-        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, ScalarRefinementKind refinement)
+        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, RefinementClass refinement)
         {
             var found = src.ImmParameters(refinement);
             var count = found.Length;

@@ -49,7 +49,7 @@ namespace Z0
             Wf.Error(e);
         }
 
-        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryClass<T> k)
+        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryOperatorClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -58,7 +58,7 @@ namespace Z0
             return Evaluate.compute(context, error);
         }
 
-        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, BinaryClass<T> k)
+        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, BinaryOperatorClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -189,7 +189,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOperatorClass k)
         {
             var kid = api.Member.ApiKind;
             int count = 128;
@@ -241,7 +241,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOperatorClass k)
         {
             var kid = api.Member.ApiKind;
             int count = 128;

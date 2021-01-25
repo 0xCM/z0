@@ -11,13 +11,13 @@ namespace Z0
 
     public readonly struct ApiImmediates
     {
-        public static DirectApiGroup[] direct(ApiHost host, ScalarRefinementKind kind)
+        public static DirectApiGroup[] direct(ApiHost host, RefinementClass kind)
             => from g in direct(host)
                 let imm = ImmGroup(host, g, kind)
                 where !imm.IsEmpty
                 select g;
 
-        public static ApiMethodG[] generic(ApiHost host, ScalarRefinementKind kind)
+        public static ApiMethodG[] generic(ApiHost host, RefinementClass kind)
             => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
 
         static MethodInfo[] TaggedOps(IApiHost src)
@@ -39,7 +39,7 @@ namespace Z0
                 where closures.Length != 0
                 select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
-        static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ScalarRefinementKind kind)
+        static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, RefinementClass kind)
             => new DirectApiGroup(g.GroupId, host,
                 g.Members.Storage.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
 

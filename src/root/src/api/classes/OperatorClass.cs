@@ -10,14 +10,7 @@ namespace Z0
     using static Root;
 
     using K = ApiOperatorKind;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IOperatorClass<E> : IOperationClass, IOperationClass<E>
-        where E : unmanaged, Enum
-    {
-
-    }
 
     public readonly struct OperatorClass : IOperatorClassHost<OperatorClass,K>
     {

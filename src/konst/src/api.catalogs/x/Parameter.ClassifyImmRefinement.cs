@@ -10,12 +10,12 @@ namespace Z0
     partial class XKinds
     {
         [Op]
-        public static ScalarRefinementKind ClassifyImmRefinement(this ParameterInfo src)
+        public static RefinementClass ClassifyImmRefinement(this ParameterInfo src)
         {
             if(!src.Tagged<ImmAttribute>())
-                return ScalarRefinementKind.None;
+                return RefinementClass.None;
             else
-                return src.ParameterType.IsEnum ? ScalarRefinementKind.Refined : ScalarRefinementKind.Unrefined;
+                return src.ParameterType.IsEnum ? RefinementClass.Refined : RefinementClass.Unrefined;
         }
     }
 }

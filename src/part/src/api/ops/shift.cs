@@ -10,7 +10,7 @@ namespace Z0
     partial struct Api
     {
         [KindFactory]
-        public static ShiftClass shift()
+        public static ShiftOperatorClass shift()
             => default;
     }
 }

@@ -10,11 +10,11 @@ namespace Z0
     partial struct Api
     {
         [KindFactory]
-        public static TernaryClass ternary()
+        public static TernaryOperatorClass ternary()
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static TernaryClass<T> ternary<T>(T t = default)
+        public static TernaryOperatorClass<T> ternary<T>(T t = default)
             where T : unmanaged => default;
     }
 }

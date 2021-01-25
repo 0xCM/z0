@@ -9,14 +9,13 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct UnaryClass : IOperatorClassHost<UnaryClass,ApiOperatorKind>
+    public readonly struct TernaryOperatorClass : IOperatorClassHost<TernaryOperatorClass,ApiOperatorKind>
     {
-        [MethodImpl(Inline)]
-        public static implicit operator OperatorClass(UnaryClass src)
+        public static implicit operator OperatorClass(TernaryOperatorClass src)
             => src.Classifier;
 
         public ApiOperatorKind Kind
-            => ApiOperatorKind.UnaryOp;
+            => ApiOperatorKind.TernaryOp;
 
         public OperatorClass Classifier
         {
@@ -25,10 +24,10 @@ namespace Z0
         }
     }
 
-    public readonly struct UnaryClass<T> : IOperatorClassHost<UnaryClass<T>, ApiOperatorKind,T>
+    public readonly struct TernaryOperatorClass<T> : IOperatorClassHost<TernaryOperatorClass<T>,ApiOperatorKind,T>
     {
         public ApiOperatorKind Kind
-            => ApiOperatorKind.UnaryOp;
+            => ApiOperatorKind.TernaryOp;
 
         public OperatorClass<T> Classifier
         {
@@ -36,15 +35,15 @@ namespace Z0
             get => new OperatorClass<T>(Kind);
         }
 
-        public UnaryClass Untyped
+        public TernaryOperatorClass Untyped
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator OperatorClass<T>(UnaryClass<T> src)
+        public static implicit operator OperatorClass<T>(TernaryOperatorClass<T> src)
             => src.Classifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator UnaryClass(UnaryClass<T> src)
+        public static implicit operator TernaryOperatorClass(TernaryOperatorClass<T> src)
             => src.Untyped;
     }
 }

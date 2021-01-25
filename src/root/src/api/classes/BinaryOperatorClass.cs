@@ -12,9 +12,9 @@ namespace Z0
     /// <summary>
     /// Defines a type-level lift for the <see cref='ApiOperatorKind.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryClass : IOperatorClassHost<BinaryClass,ApiOperatorKind>
+    public readonly struct BinaryOperatorClass : IOperatorClassHost<BinaryOperatorClass,ApiOperatorKind>
     {
-        public static implicit operator OperatorClass(BinaryClass src)
+        public static implicit operator OperatorClass(BinaryOperatorClass src)
             => src.Classifier;
 
         public ApiOperatorKind Kind
@@ -30,17 +30,17 @@ namespace Z0
     /// <summary>
     /// Defines an operand-parametric type-level lift for the <see cref='ApiOperatorKind.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryClass<T> : IOperatorClassHost<BinaryClass<T>,ApiOperatorKind,T>
+    public readonly struct BinaryOperatorClass<T> : IOperatorClassHost<BinaryOperatorClass<T>,ApiOperatorKind,T>
     {
         public ApiOperatorKind Kind
             => ApiOperatorKind.BinaryOp;
 
         [MethodImpl(Inline)]
-        public static implicit operator OperatorClass<T>(BinaryClass<T> src)
+        public static implicit operator OperatorClass<T>(BinaryOperatorClass<T> src)
             => src.Classifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryClass(BinaryClass<T> src)
+        public static implicit operator BinaryOperatorClass(BinaryOperatorClass<T> src)
             => src.Untyped;
 
         public OperatorClass<T> Classifier
@@ -49,7 +49,7 @@ namespace Z0
             get => new OperatorClass<T>(Kind);
         }
 
-        public BinaryClass Untyped
+        public BinaryOperatorClass Untyped
             => default;
     }
 }

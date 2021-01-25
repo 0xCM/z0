@@ -61,8 +61,8 @@ namespace Z0.Asm
         {
             Claim.Require(src.IsVectorized(w));
             Claim.Require(VexReflex.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1, ScalarRefinementKind.Unrefined));
-            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ScalarRefinementKind.Unrefined));
+            Claim.Require(src.AcceptsImmediate(1, RefinementClass.Unrefined));
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(RefinementClass.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
@@ -119,8 +119,8 @@ namespace Z0.Asm
         {
             Claim.Require(src.IsVectorized(w));
             Claim.Require(VexReflex.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1,ScalarRefinementKind.Unrefined));
-            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ScalarRefinementKind.Unrefined));
+            Claim.Require(src.AcceptsImmediate(1,RefinementClass.Unrefined));
+            Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(RefinementClass.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);

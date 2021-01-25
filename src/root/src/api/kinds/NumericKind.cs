@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using W = DataWidth;
-    using ID = NumericApiKind;
+    using ID = ScalarKind;
 
     /// <summary>
     /// Classifies system-defined numeric primitive types

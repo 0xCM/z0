@@ -7,11 +7,11 @@ namespace Z0
     partial struct Api
     {
         [KindFactory]
-        public static BinaryClass binary()
+        public static BinaryOperatorClass binary()
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static BinaryClass<T> binary<T>(T t = default)
+        public static BinaryOperatorClass<T> binary<T>(T t = default)
             where T : unmanaged => default;
     }
 }

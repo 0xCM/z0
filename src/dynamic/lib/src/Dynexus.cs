@@ -17,9 +17,9 @@ namespace Z0
     using I = Z0;
     using VK = VKinds;
 
-    using U = UnaryClass;
-    using B = BinaryClass;
-    using T = TernaryClass;
+    using U = UnaryOperatorClass;
+    using B = BinaryOperatorClass;
+    using T = TernaryOperatorClass;
 
     readonly struct Dynexus : IDynexus
     {
@@ -82,13 +82,13 @@ namespace Z0
         IEmitterOpFactory<T> IDynamicFactories.Factory<T>(EmitterClass<T> k)
             => FactorySource.Factory(k);
 
-        IUnaryOpFactory<T> IDynamicFactories.Factory<T>(UnaryClass<T> k)
+        IUnaryOpFactory<T> IDynamicFactories.Factory<T>(UnaryOperatorClass<T> k)
             => FactorySource.Factory(k);
 
-        IBinaryOpFactory<T> IDynamicFactories.Factory<T>(BinaryClass<T> k)
+        IBinaryOpFactory<T> IDynamicFactories.Factory<T>(BinaryOperatorClass<T> k)
             => FactorySource.Factory(k);
 
-        ITernaryOpFactory<T> IDynamicFactories.Factory<T>(TernaryClass<T> k)
+        ITernaryOpFactory<T> IDynamicFactories.Factory<T>(TernaryOperatorClass<T> k)
             => FactorySource.Factory(k);
 
         Option<DynamicDelegate> IDynamicImmediate.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)

@@ -6,10 +6,13 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a parametric literal: typed literals that support kind partitioning
     /// </summary>
     /// <typeparam name="E">The classifying enum type</typeparam>
+    [Free]
     public interface ILiteralKind<E> : ITypedLiteral<E>
         where E : unmanaged, Enum
     {
@@ -21,6 +24,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="E">The classifier type</typeparam>
+    [Free]
     public interface ILiteralKind<F,E> : ILiteralKind<E>
         where F : ILiteralKind<F,E>, new()
         where E : unmanaged, Enum
@@ -34,6 +38,7 @@ namespace Z0
     /// <typeparam name="K">The literal kind </typeparam>
     /// <typeparam name="E">The kind classifier type</typeparam>
     /// <typeparam name="T">Free</typeparam>
+    [Free]
     public interface ILiteralKind<F,E,T> : ILiteralKind<E>
         where F : ILiteralKind<E>, new()
         where E : unmanaged, Enum

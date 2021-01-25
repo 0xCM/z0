@@ -14,7 +14,7 @@ namespace Z0
         public static Imm8R[] RefinedImmValues(this ParameterInfo param)
         {
             if(param.IsRefinedImmediate())
-                return param.ParameterType.GetEnumValues().Cast<byte>().ToImm8Values(ScalarRefinementKind.Refined);
+                return param.ParameterType.GetEnumValues().Cast<byte>().ToImm8Values(RefinementClass.Refined);
             else
                 return sys.empty<Imm8R>();
         }

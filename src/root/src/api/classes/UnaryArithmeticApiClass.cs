@@ -27,5 +27,9 @@ namespace Z0
         Square = Id.Square,
 
         Sqrt = Id.Sqrt,
+
+        Even = Id.Even,
+
+        Odd = Id.Odd,
     }
 }

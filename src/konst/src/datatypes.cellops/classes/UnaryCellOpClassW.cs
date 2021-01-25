@@ -25,10 +25,10 @@ namespace Z0
             get => new OperatorClass<W>(Kind);
         }
 
-        public UnaryCellClass Untyped
+        public UnaryCellFunctionClass Untyped
         {
             [MethodImpl(Inline)]
-            get => new UnaryCellClass(Width);
+            get => new UnaryCellFunctionClass(Width);
         }
 
         [MethodImpl(Inline)]
@@ -36,11 +36,11 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator UnaryClass(UnaryCellClass<W> src)
+        public static implicit operator UnaryOperatorClass(UnaryCellClass<W> src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator UnaryCellClass(UnaryCellClass<W> src)
+        public static implicit operator UnaryCellFunctionClass(UnaryCellClass<W> src)
             => src.Untyped;
     }
 }

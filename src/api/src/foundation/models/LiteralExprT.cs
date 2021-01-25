@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public LiteralExpr(T value)
-            =>    Value = value;
+            => Value = value;
 
         [MethodImpl(Inline)]
         public bool Equals(T other)

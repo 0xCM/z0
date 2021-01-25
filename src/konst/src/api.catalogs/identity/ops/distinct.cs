@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using NK = NumericKind;
-    using ID = NumericApiKind;
+    using ID = ScalarKind;
 
     partial struct ApiIdentify
     {

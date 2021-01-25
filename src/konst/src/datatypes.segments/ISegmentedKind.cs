@@ -7,19 +7,6 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ISegmentedKind : ILiteralKind<SegKind>
-    {
-        TypeWidth BlockWidth => default;
-    }
-
-    [Free]
-    public interface ISegmentedKind<B> : ISegmentedKind, ILiteralKind<B,SegKind>
-        where B : struct, ISegmentedKind<B>
-    {
-
-    }
-
-    [Free]
     public interface ISegmentedKind<W,T> : ISegmentedKind, ILiteralType<SegKind,T>
         where W : unmanaged, ITypeWidth
         where T : unmanaged

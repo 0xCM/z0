@@ -12,27 +12,27 @@ namespace Z0
     partial class SegmentedKinds
     {
         [KindFactory]
-        public static Seged16 seg16()
+        public static Seg16 seg16()
             => default;
 
         [KindFactory]
-        public static Seged32 seg32()
+        public static Seg32 seg32()
             => default;
 
         [KindFactory]
-        public static Seged64 seg64()
+        public static Seg64 seg64()
             => default;
 
         [KindFactory]
-        public static Seged128 seg128()
+        public static Seg128 seg128()
             => default;
 
         [KindFactory]
-        public static Seged256 seg256()
+        public static Seg256 seg256()
             => default;
 
         [KindFactory]
-        public static Seged512 seg512()
+        public static Seg512 seg512()
             => default;
 
         [KindFactory]

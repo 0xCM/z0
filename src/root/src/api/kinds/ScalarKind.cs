@@ -5,9 +5,9 @@
 namespace Z0
 {
     /// <summary>
-    /// Defines numeric identifiers for primal numeric types
+    /// Defines identifiers for primal numeric types
     /// </summary>
-    public enum NumericApiKind : uint
+    public enum ScalarKind : uint
     {
         None = 0,
 

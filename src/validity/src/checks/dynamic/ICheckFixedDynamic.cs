@@ -12,7 +12,7 @@ namespace Z0
 
     public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
-        void CheckFixedMatch<F>(UnaryClass k, ApiCodeBlock a, ApiCodeBlock b)
+        void CheckFixedMatch<F>(UnaryOperatorClass k, ApiCodeBlock a, ApiCodeBlock b)
             where F : unmanaged, IDataCell
         {
             var f = Dynamic.EmitFixedUnary<F>(Tokens[Left], a);

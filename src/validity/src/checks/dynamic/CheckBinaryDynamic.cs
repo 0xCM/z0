@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static BufferSeqId;
 
-    using K = BinaryClass;
+    using K = BinaryOperatorClass;
 
     public readonly struct CheckBinaryDynamic : ITestBinaryDynamic
     {

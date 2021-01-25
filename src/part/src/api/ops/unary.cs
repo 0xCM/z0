@@ -9,11 +9,11 @@ namespace Z0
     partial struct Api
     {
         [KindFactory]
-        public static UnaryClass unary()
+        public static UnaryOperatorClass unary()
             => default;
 
         [KindFactory, Closures(Closure)]
-        public static UnaryClass<T> unary<T>(T t = default)
+        public static UnaryOperatorClass<T> unary<T>(T t = default)
             where T : unmanaged => default;
 
     }

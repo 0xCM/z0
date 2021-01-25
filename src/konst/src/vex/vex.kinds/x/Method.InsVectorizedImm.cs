@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to query</param>
         [Op]
-        public static bool IsVectorizedImm(this MethodInfo src, ScalarRefinementKind kind)
+        public static bool IsVectorizedImm(this MethodInfo src, RefinementClass kind)
             => src.IsVectorized() && src.AcceptsImmediate(kind) && src.ReturnsVector();
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to query</param>
         [Op]
-        public static bool IsVectorizedUnaryImm(this MethodInfo src, ScalarRefinementKind refinement)
+        public static bool IsVectorizedUnaryImm(this MethodInfo src, RefinementClass refinement)
         {
             var parameters = src.GetParameters().ToArray();
             return parameters.Length == 2
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to query</param>
         [Op]
-        public static bool IsVectorizedBinaryImm(this MethodInfo src, ScalarRefinementKind kind)
+        public static bool IsVectorizedBinaryImm(this MethodInfo src, RefinementClass kind)
         {
             var parameters = src.GetParameters().ToArray();
             return parameters.Length == 3

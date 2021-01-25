@@ -18,19 +18,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source parameter</param>
         [Op]
-        public static bool IsImmediate(this ParameterInfo param, ScalarRefinementKind refinement)
+        public static bool IsImmediate(this ParameterInfo param, RefinementClass refinement)
         {
             if(param.Tagged<ImmAttribute>())
             {
                 var refined = param.ParameterType.IsEnum;
                 if(refined)
                 {
-                    if(refinement == ScalarRefinementKind.Refined || refinement == ScalarRefinementKind.All)
+                    if(refinement == RefinementClass.Refined || refinement == RefinementClass.All)
                         return true;
                 }
                 else
                 {
-                    if(refinement == ScalarRefinementKind.Unrefined)
+                    if(refinement == RefinementClass.Unrefined)
                         return true;
                 }
 
@@ -39,11 +39,11 @@ namespace Z0
         }
 
         [Op]
-        public static Imm8R[] ToImm8Values(this byte[] src, ScalarRefinementKind kind)
+        public static Imm8R[] ToImm8Values(this byte[] src, RefinementClass kind)
             => src.Map(x => new Imm8R(x));
 
         [Op]
-        public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ScalarRefinementKind kind)
+        public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, RefinementClass kind)
             => src.Map(x => new Imm8R(x));
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static Type[] ImmParameterTypes(this MethodInfo src, ScalarRefinementKind kind)
+        public static Type[] ImmParameterTypes(this MethodInfo src, RefinementClass kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
         [Op]
