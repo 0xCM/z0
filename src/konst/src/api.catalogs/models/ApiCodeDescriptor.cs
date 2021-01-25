@@ -7,9 +7,7 @@ namespace Z0
     [Record(TableId)]
     public struct ApiCodeDescriptor : IRecord<ApiCodeDescriptor>
     {
-        public const string FormatPattern = "{0,-12} | {1,-32} | {2,-16} | {3,-10} | {4}";
-
-        public const string TableId = nameof(ApiCodeDescriptor);
+        public const string TableId = "apicode";
 
         public ApiPartKind Part;
 
@@ -20,5 +18,7 @@ namespace Z0
         public ByteSize Size;
 
         public ApiUri<string> Uri;
+
+        public BinaryCode Encoded;
     }
 }

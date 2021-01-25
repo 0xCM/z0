@@ -12,7 +12,7 @@ namespace Z0
 
     public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>, IResBytesEmitter
     {
-        public Index<ApiHostRes> Emit(ApiCodeBlockIndex index, FS.FolderPath dst)
+        public Index<ApiHostRes> Emit(ApiCodeBlocks index, FS.FolderPath dst)
         {
             var emissions = root.list<ApiHostRes>();
             var flow = Wf.Running();

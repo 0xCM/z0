@@ -8,11 +8,13 @@ namespace Z0.Asm
 
     using static z;
 
+    public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCode blocks);
+
     public readonly struct CodeBlockDecoder
     {
-        public static void decode(PartId part, HostBlockDecoder decoder, in ApiCodeBlockIndex src, ref ApiPartRoutines dst)
+        public static void decode(PartId part, HostBlockDecoder decoder, in ApiCodeBlocks src, ref ApiPartRoutines dst)
         {
-            var hosts = @readonly(src.Hosts.Where(h => h.Owner == part));
+            var hosts = src.Hosts.Where(h => h.Owner == part).View;
             var count = hosts.Length;
             var buffer = alloc<ApiHostRoutines>(count);
             ref var _dst = ref first(span(buffer));

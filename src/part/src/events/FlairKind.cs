@@ -10,9 +10,9 @@ namespace Z0
     {
         None = LogLevel.None,
 
-        Created = LogLevel.Babble,
+        Created = ConsoleColor.DarkGray,
 
-        Disposed = LogLevel.Babble,
+        Disposed = ConsoleColor.DarkGray,
 
         Running = ConsoleColor.Cyan,
 
@@ -20,16 +20,16 @@ namespace Z0
 
         Processed = ConsoleColor.Magenta,
 
-        Babble = LogLevel.Babble,
+        Babble = ConsoleColor.DarkGray,
 
-        Status = LogLevel.Status,
+        Status = ConsoleColor.Green,
 
-        Trace = LogLevel.Trace,
+        Trace = ConsoleColor.DarkMagenta,
 
-        Warning = LogLevel.Warning,
+        Warning = ConsoleColor.Yellow,
 
         Data = ConsoleColor.DarkCyan,
 
-        Error = LogLevel.Error,
+        Error = ConsoleColor.Red,
     }
 }

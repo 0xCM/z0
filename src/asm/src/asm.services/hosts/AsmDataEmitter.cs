@@ -22,7 +22,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly ApiCodeBlockIndex Encoded;
+        readonly ApiCodeBlocks Encoded;
 
         readonly int[] Sequence;
 
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmDataEmitter(IWfShell wf, IAsmContext asm, in ApiCodeBlockIndex encoded)
+        public AsmDataEmitter(IWfShell wf, IAsmContext asm, in ApiCodeBlocks encoded)
         {
             Wf = wf;
             Asm = asm;
@@ -57,15 +57,10 @@ namespace Z0
         public AsmRowSets<IceMnemonic> Emit()
         {
             using var flow = Wf.Running();
-            var locations = span(Encoded.Locations);
-            var count = locations.Length;
-
+            var addresses = Encoded.Locations.View;
+            var count = addresses.Length;
             for(var i=0u; i<count; i++)
-            {
-                ref readonly var address = ref skip(locations,i);
-                CreateRecords(Encoded[address]);
-            }
-
+                CreateRecords(Encoded[skip(addresses, i)]);
             return Rowsets();
         }
 

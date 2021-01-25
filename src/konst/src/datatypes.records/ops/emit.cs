@@ -16,7 +16,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(Closure)]
         public static RowsetEmissions<DynamicRow<T>> emit<T>(DynamicRows<T> src, RowFormatSpec spec, FS.FilePath dst)
             where T : struct, IRecord<T>
         {

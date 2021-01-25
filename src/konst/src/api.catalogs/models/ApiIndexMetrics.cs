@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='ApiCodeBlockIndex'/>
+    /// Collects statistics of encoded data known to a <see cref='ApiCodeBlocks'/>
     /// </summary>
     public struct ApiIndexMetrics : ITextual
     {
@@ -25,15 +25,15 @@ namespace Z0
 
         public ByteSize ByteCount;
 
-        public static ApiIndexMetrics from(ApiCodeBlockIndex src)
+        public static ApiIndexMetrics from(ApiCodeBlocks src)
         {
             var stats = default(ApiIndexMetrics);
-            stats.PartCount = (uint)src.Parts.Length;
-            stats.HostCount = (uint)src.Hosts.Length;
-            stats.AddressCount =(uint)src.Locations.Length;
-            stats.FunctionCount = src.CodeBlocks.Count;
-            stats.IdentityCount = (uint)src.Identities.Length;
-            stats.ByteCount = src.CodeBlocks.Storage.Sum(x => x.Data.Length);
+            stats.PartCount = src.Parts.Count;
+            stats.HostCount = src.Hosts.Count;
+            stats.AddressCount = src.Locations.Count;
+            stats.FunctionCount = src.Blocks.Count;
+            stats.IdentityCount = src.Identities.Count;
+            stats.ByteCount = src.Blocks.Storage.Sum(x => x.Data.Length);
             return stats;
         }
 

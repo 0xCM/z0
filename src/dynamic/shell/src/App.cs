@@ -384,14 +384,6 @@ namespace Z0
 
     readonly struct Msg
     {
-        public static RenderPattern<uint,ApiHostUri,uint> IndexedHost => "{2} | {0} | {1} | Api summary accumulation";
-
-        public static RenderPattern<uint,FS.FilePath> EmittedOpIndex => "Emitted operation index for {0} hosts to {1}";
-
-        public static RenderPattern<IPart> Jitting => "Jitting {0}";
-
-        public static RenderPattern<uint,IPart,MemoryRange,ByteSize> Jitted => "Jitted {0} {1} members that cover memory segment {2} of size {3}mb";
-
         public static RenderPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
 

@@ -11,8 +11,6 @@ namespace Z0
 
     using static z;
 
-    public delegate ApiHostRoutines HostBlockDecoder(in ApiHostCode blocks);
-
     public ref struct ApiProcessors
     {
         public static ApiProcessors create(IWfShell wf, IAsmContext asm)
@@ -26,7 +24,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        ApiCodeBlockIndex Index;
+        ApiCodeBlocks Index;
 
         Span<ApiPartRoutines> Decoded;
 
@@ -88,7 +86,7 @@ namespace Z0
                 var result = emitter.Emit();
                 var records = 0u;
 
-                Wf.Processed(Seq.delimit(nameof(AsmRow), Index.Hosts.Length, result.Count));
+                Wf.Processed(Seq.delimit(nameof(AsmRow), Index.Hosts.Count, result.Count));
 
                 var sets = result.View;
                 var count = result.Count;

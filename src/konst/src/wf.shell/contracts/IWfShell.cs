@@ -51,6 +51,11 @@ namespace Z0
 
         WfExecToken Ran(WfExecFlow src);
 
+        WfServices Services {get;}
+
+        ApiServices ApiServices
+            => Services.ApiServices;
+
         string ITextual.Format()
             => AppName;
 

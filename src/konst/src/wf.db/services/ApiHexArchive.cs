@@ -47,21 +47,21 @@ namespace Z0
         public FS.FilePath[] Files(PartId owner)
             => Root.Files(owner, DefaultExt, true);
 
-        /// <summary>
-        /// Enumerates the content of all archived files
-        /// </summary>
-        public IEnumerable<ApiCodeBlock> ApiCode()
-        {
-            var list = List();
-            var iCount = list.Count;
-            for(var i=0; i<iCount; i++)
-            {
-                var path = list[i].Path;
-                var items = Z0.ApiCode.extracts(path);
-                var jCount = items.Length;
-                for(var j=0; j<jCount; j++)
-                    yield return items[j];            }
-        }
+        // /// <summary>
+        // /// Enumerates the content of all archived files
+        // /// </summary>
+        // public IEnumerable<ApiCodeBlock> ApiCode()
+        // {
+        //     var list = List();
+        //     var iCount = list.Count;
+        //     for(var i=0; i<iCount; i++)
+        //     {
+        //         var path = list[i].Path;
+        //         var items = Z0.ApiCode.extracts(path);
+        //         var jCount = items.Length;
+        //         for(var j=0; j<jCount; j++)
+        //             yield return items[j];            }
+        // }
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
@@ -87,19 +87,19 @@ namespace Z0
             }
         }
 
-        public ApiHostCode Index(FS.FilePath src)
-        {
-            var uri = ApiUri.host(src.FileName);
-            if(uri.Failed || uri.Value.IsEmpty)
-                return default;
+        // public ApiHostCode Index(FS.FilePath src)
+        // {
+        //     var uri = ApiUri.host(src.FileName);
+        //     if(uri.Failed || uri.Value.IsEmpty)
+        //         return default;
 
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in ApiCode())
-                if(item.IsNonEmpty)
-                    dst.Add(item);
+        //     var dst = z.list<ApiCodeBlock>();
+        //     foreach(var item in ApiCode())
+        //         if(item.IsNonEmpty)
+        //             dst.Add(item);
 
-            return new ApiHostCode(uri.Value, dst.Array());
-        }
+        //     return new ApiHostCode(uri.Value, dst.Array());
+        // }
 
         static Index<FS.FilePath> paths(FS.FolderPath root, FS.FileExt ext)
             => root.Files(ext, true);

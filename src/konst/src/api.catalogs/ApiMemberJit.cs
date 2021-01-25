@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Security;
 
     using static Part;
     using static z;
@@ -17,9 +15,6 @@ namespace Z0
     [ApiHost(ApiNames.ApiJit)]
     public readonly struct ApiJit
     {
-        public static IApiJit service(IWfShell wf)
-            => ApiJitService.create(wf);
-
         [Op]
         public static MemoryAddress jit(MethodInfo src)
         {

@@ -79,7 +79,7 @@ namespace Z0
             Services = new WfServices(this, Api.PartComponents);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
             Init = config;
             Context = Init.Shell;
@@ -98,6 +98,7 @@ namespace Z0
             PolyStream = random;
             Verbosity = verbosity;
             Router = router;
+            Services = wfservices;
         }
 
         public WfExecToken Ran(WfExecFlow src)

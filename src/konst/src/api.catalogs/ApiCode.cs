@@ -36,66 +36,11 @@ namespace Z0
         public static int arity(ApiCodeBlock src)
             => src.OpUri.OpId.Components.Count() - 1;
 
-        /// <summary>
-        /// Excludes source operations that do not accept two parameters of specified numeric kind
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="k1">The first parameter kind</param>
-        /// <param name="k2">The second parameter kind</param>
-        public static IEnumerable<ApiCodeBlock> accepts(IEnumerable<ApiCodeBlock> src, NumericKind k1, NumericKind k2)
-            => from code in src
-                let kinds = ApiIdentify.numeric(code.OpUri.OpId.Components.Skip(1))
-                where kinds.Contains(k1) && kinds.Contains(k2)
-                select code;
-
         [Op]
         public static IEnumerable<ApiCodeBlock> withArity(IEnumerable<ApiCodeBlock> src, int count)
             => from code in src
                 where ApiCode.arity(code) == count
                 select code;
-
-        public static Dictionary<PartId,PartFile[]> index(PartFileKind kind, PartFiles src, params PartId[] parts)
-        {
-            switch(kind)
-            {
-                case PartFileKind.Parsed:
-                    return select(PartFileKind.Parsed, src.Parsed, parts);
-                default:
-                    return root.dict<PartId,PartFile[]>();
-            }
-        }
-
-        static Dictionary<PartId,PartFile[]> select(PartFileKind kind, FS.Files src, PartId[] parts)
-        {
-            var partSet = parts.ToHashSet();
-            var files = (from f in src
-                        let part = f.Owner
-                        where part != PartId.None && partSet.Contains(part)
-                        let pf = new PartFile(part, f)
-                        group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
-            return files;
-        }
-
-        public static WfExecToken emit(IWfShell wf, ReadOnlySpan<ApiCodeDescriptor> src)
-        {
-            var dst = wf.Db().IndexTable("apihex.index");
-            var flow = wf.EmittingTable<ApiCodeDescriptor>(dst);
-            var count = emit(src, dst);
-            return wf.EmittedTable<ApiCodeDescriptor>(flow, count, dst);
-        }
-
-        [Op]
-        public static uint emit(ReadOnlySpan<ApiCodeDescriptor> src, FS.FilePath dst)
-        {
-            using var writer = dst.Writer();
-            var count = (uint)src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                writer.WriteLine(string.Format(ApiCodeDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
-            }
-            return count;
-        }
 
         public static Outcome<FS.FilePath> EmitHexIndex(IWfShell wf)
         {
@@ -116,11 +61,11 @@ namespace Z0
             }
         }
 
-        public static Outcome emit(IWfShell wf, ApiCodeBlockIndex src, FS.FilePath dst)
+        public static Outcome emit(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
         {
             var svc = ApiIndex.service(wf);
-            Array.Sort(src.CodeBlocks.Storage);
-            var blocks = src.CodeBlocks.View;
+            Array.Sort(src.Blocks.Storage);
+            var blocks = src.Blocks.View;
             var count = blocks.Length;
             var buffer = sys.alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
@@ -140,12 +85,6 @@ namespace Z0
             }
             return true;
         }
-
-        [Op]
-        public static Index<ApiCodeBlock> extracts(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiHexParser.extracts)
-                where line.Succeeded
-                select line.Value;
 
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
@@ -190,7 +129,7 @@ namespace Z0
 
         public static Index<ApiCodeDescriptor> descriptors(ReadOnlySpan<FS.FilePath> files)
         {
-            var dst = z.list<ApiCodeDescriptor>();
+            var dst = root.list<ApiCodeDescriptor>();
             var count = files.Length;
             for(var i=0u; i<count; i++)
             {
@@ -203,10 +142,7 @@ namespace Z0
                     var buffer = alloc<ApiCodeDescriptor>(kBlock);
                     var target = span(buffer);
                     for(var j=0u; j<kBlock; j++)
-                    {
-                        ref readonly var row = ref skip(content,j);
-                        store(row, ref seek(target,j));
-                    }
+                        store(skip(content,j), ref seek(target,j));
                     dst.AddRange(buffer);
 
                 }
@@ -220,7 +156,7 @@ namespace Z0
         {
             var archive = Archives.hex(src);
             var files = archive.List();
-            var dst = z.list<ApiCodeDescriptor>();
+            var dst = root.list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)
                 dst.AddRange(archive.Read(file.Path).Select(x => descriptor(x)));
             return dst.OrderBy(x => x.Base).ToArray();
@@ -235,6 +171,7 @@ namespace Z0
             dst.Base = src.Code.BaseAddress;
             dst.Size = src.Code.Length;
             dst.Uri = src.Identifier;
+            dst.Encoded = src.Encoded;
             return dst;
         }
 
@@ -246,6 +183,7 @@ namespace Z0
             dst.Base = src.Code.BaseAddress;
             dst.Size = src.Code.Length;
             dst.Uri = src.Identifier;
+            dst.Encoded = src.Encoded;
             return ref dst;
         }
 
@@ -257,6 +195,7 @@ namespace Z0
             dst.Base = src.Address;
             dst.Size = src.Data.Length;
             dst.Uri = src.Uri.OpId.Identifier;
+            dst.Encoded = src.Data;
             return ref dst;
         }
     }

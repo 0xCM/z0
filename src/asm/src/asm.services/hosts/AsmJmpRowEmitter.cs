@@ -15,7 +15,7 @@ namespace Z0
 
     public struct AsmJmpRowEmitter
     {
-        readonly BitBroker<JccKind,ApiInstruction> broker;
+        readonly BitBroker<JccKind,ApiInstruction> Broker;
 
         public IWfShell Wf {get;}
 
@@ -29,7 +29,7 @@ namespace Z0
         public AsmJmpRowEmitter(IWfShell wf, ApiPartRoutines src)
         {
             Wf = wf;
-            broker = AsmBrokers.jmp();
+            Broker = AsmBrokers.jmp();
             Source = src;
             Collected = list<AsmJmpRow>();
             Target = Wf.Db().Table(AsmJmpRow.TableId, src.Part);
@@ -38,17 +38,17 @@ namespace Z0
         void Dispatch(in ApiInstruction fx)
         {
             var kind = AsmBuilder.jccKind(fx.Mnemonic);
-            init(fx, kind, out var dst);
+            IceExtractors.jmprow(fx, kind, out var dst);
             Collected.Add(dst);
-            broker.Get(kind).Handle(fx);
+            Broker.Get(kind).Handle(fx);
         }
 
-        public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4,-16} | {5,-16:g} | {6,-32}";
+        const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4,-16} | {5,-16:g} | {6,-32}";
 
-        public static string format(in AsmJmpRow jmp)
+        static string format(in AsmJmpRow jmp)
             => string.Format(RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
 
-        public static string header()
+        static string header()
             => string.Format(RenderPattern,
                 nameof(AsmJmpRow.Base),
                 nameof(AsmJmpRow.Source),
@@ -106,19 +106,6 @@ namespace Z0
                     writer.WriteLine(format(jmp));
                 }
             }
-        }
-
-        static ref AsmJmpRow init(in ApiInstruction src, JccKind jk, out AsmJmpRow dst)
-        {
-            var target = IceExtractors.branch(src.Base, src.Instruction, 0);
-            dst.Kind = jk;
-            dst.Base = src.Base;
-            dst.Source = src.IP;
-            dst.InstructionSize = src.Encoded.Size;
-            dst.CallSite = dst.Source + dst.InstructionSize;
-            dst.Target = target.Target.Address;
-            dst.Asm = src.FormattedInstruction;
-            return ref dst;
         }
     }
 }

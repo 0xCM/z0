@@ -35,7 +35,7 @@ namespace Z0
 
         static ApiMethodG[] generic(ApiHost src)
              => from m in TaggedOps(src).OpenGeneric()
-                let closures = ApiQuery.NumericClosureKinds(m)
+                let closures = ApiJitService.NumericClosureKinds(m)
                 where closures.Length != 0
                 select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 

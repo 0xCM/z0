@@ -16,6 +16,14 @@ namespace Z0
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
+        [Op]
+        public static ApiHostCatalog host(IWfShell wf, IApiHost src)
+        {
+            var jitter = wf.ApiServices.ApiJit();
+            var members = jitter.Jit(src);
+            return members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
+        }
+
         /// <summary>
         /// Creates a system-level api catalog over a set of path-identified components
         /// </summary>
@@ -68,12 +76,12 @@ namespace Z0
         {
             try
             {
-                return z.some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+                return root.some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
             }
             catch(Exception e)
             {
                 term.error(WfEvents.error(nameof(ApiCatalogs), text.format("Assembly {0} | {1}", src.GetSimpleName(), e)));
-                return z.none<IPart>();
+                return root.none<IPart>();
             }
         }
 
@@ -127,7 +135,7 @@ namespace Z0
         static ApiHost[] apiHosts(Assembly src)
         {
             var _id = Q.id(src);
-            return apiHostTypes(src).Select(h => Q.host(_id, h));
+            return apiHostTypes(src).Select(h => host(_id, h));
         }
 
         /// <summary>
@@ -151,6 +159,19 @@ namespace Z0
                 seek(dst,i) = new ApiTypeInfo(type, name, part, uri);
             }
             return buffer;
+        }
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="t">The reifying type</param>
+        [Op]
+        static ApiHost host(PartId part, Type t)
+        {
+            var attrib = t.Tag<ApiHostAttribute>();
+            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, t.Name), t.Name).ToLower();
+            return new ApiHost(t, name, part, new ApiHostUri(part, name));
         }
     }
 }

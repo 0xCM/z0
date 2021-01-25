@@ -33,7 +33,7 @@ namespace Z0
             }
 
             var members = new BasedApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
-            Wf.Ran(flow, Msg.JittedMembers.Format(members.MemberCount, parts.Length));
+            Wf.Ran(flow, Msg.JittedParts.Format(members.MemberCount, parts.Length));
             return members;
         }
 
@@ -42,6 +42,15 @@ namespace Z0
             var members = JitApi();
             EmitAddresses(members, dst);
             return members;
+        }
+
+        public Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst)
+        {
+            var summaries = Summarize(src.Base, src.Members.View);
+            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
+            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
+            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted.RowCount, dst);
+            return summaries;
         }
 
         public ApiMembers Jit(IApiHost src)
@@ -121,7 +130,7 @@ namespace Z0
 
         ApiMember[] JitDirect(IApiHost src)
         {
-            var methods = ApiQuery.DirectMethods(src);
+            var methods = DirectMethods(src);
             var count = methods.Length;
             var buffer = alloc<ApiMember>(count);
             ref var dst = ref first(buffer);
@@ -137,17 +146,11 @@ namespace Z0
 
             }
             return buffer;
-            // return from m in methods
-            //     let kid = m.Method.KindId()
-            //     let id = Diviner.Identify(m.Method)
-            //     let uri = ApiIdentity.uri(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
-            //     let address = address(Jit(m.Method))
-            //     select new ApiMember(uri, m.Method, kid, address);
         }
 
         ApiMember[] JitGeneric(IApiHost src)
         {
-            var generic = @readonly(ApiQuery.GenericMethods(src));
+            var generic = @readonly(GenericMethods(src));
             var gCount = generic.Length;
             var buffer = root.list<ApiMember>();
             for(var i=0; i<gCount; i++)
@@ -155,11 +158,29 @@ namespace Z0
             return buffer.ToArray();
         }
 
+        /// <summary>
+        /// Computes a method's numeric closures, predicated on available metadata
+        /// </summary>
+        /// <param name="m">The source method</param>
+        [Op]
+        public static NumericKind[] NumericClosureKinds(MethodInfo m)
+            => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());
+
+        [Op]
+        static Type[] NumericClosureTypes(MethodInfo m)
+            => from c in NumericClosureKinds(m)
+               let t = c.ToSystemType()
+               where t != typeof(void)
+               select t;
+
         [Op]
         ApiMember[] JitGeneric(HostedMethod src)
         {
             var method = src.Method;
-            var types = @readonly(ApiQuery.NumericClosureTypes(method));
+            var types = @readonly(NumericClosureTypes(method));
             var count = types.Length;
             var buffer = alloc<ApiMember>(count);
             var dst = span(buffer);
@@ -179,16 +200,15 @@ namespace Z0
             catch(ArgumentException e)
             {
                 var msg = string.Format("{0}: Closure creation failed for {1}/{2}", e.GetType().Name, method.DeclaringType.DisplayName(), method.DisplayName());
-                term.warn(msg);
+                Wf.Warn(msg);
                 return sys.empty<ApiMember>();
             }
             catch(Exception e)
             {
-                term.warn(e.ToString());
+                Wf.Warn(e.ToString());
             }
             return buffer;
         }
-
 
         public IDictionary<MethodInfo,Type> ClosureProviders(IEnumerable<Type> src)
         {
@@ -198,15 +218,6 @@ namespace Z0
                         where tag.IsSome()
                         select (m, tag.Value.ProviderType);
             return query.ToDictionary();
-        }
-
-        public Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst)
-        {
-            var summaries = Summarize(src.Base, src.Members.View);
-            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
-            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
-            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted.RowCount, dst);
-            return summaries;
         }
 
         Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
@@ -231,6 +242,23 @@ namespace Z0
             }
             return buffer;
         }
+
+        [Op]
+        static HostedMethod[] GenericMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGeneric).Select(m => new HostedMethod(host.Uri, m));
+
+        [Op]
+        static bool IsGeneric(MethodInfo src)
+            => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
+
+        [Op]
+        public static HostedMethod[] DirectMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirect).Select(m => new HostedMethod(host.Uri, m));
+
+        [Op]
+        static bool IsDirect(MethodInfo src)
+            => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
+
     }
 
     partial struct Msg
@@ -239,8 +267,8 @@ namespace Z0
 
         public static RenderPattern<PartId> JittingPart => "Jitting {0} members";
 
-        public static RenderPattern<int,PartId> JittedPart => "Jitting {0} {1} members";
+        public static RenderPattern<int,PartId> JittedPart => "Jitted {0} {1} members";
 
-        public static RenderPattern<dynamic,dynamic> JittedMembers => "Jitted {0} members from {1} parts";
+        public static RenderPattern<dynamic,dynamic> JittedParts => "Jitted {0} members from {1} parts";
     }
 }

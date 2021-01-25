@@ -32,12 +32,28 @@ namespace Z0
             ApiSet = wf.Api;
         }
 
+        [Op]
+        public static ApiHostMemberCode code(IWfShell wf, ApiHostUri host, FS.FolderPath root)
+        {
+            var catalog = ApiCatalogs.host(wf, wf.Api.FindHost(host).Require());
+            if(catalog.IsEmpty)
+                return ApiHostMemberCode.Empty;
+
+            var idx = ApiQuery.index(catalog);
+            var archive =  Archives.capture(root);
+            var paths =  Archives.capture(FS.dir(root.Name), host);
+            var code = ApiHexReader.Service.Read(paths.HostX86Path);
+            var opIndex =  ApiQuery.index(code);
+            return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
+        }
+
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dst = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
-            if(dst.HostX86Path.Exists)
+            var capture = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
+            if(capture.HostX86Path.Exists)
             {
-                var code = ApiQuery.code(Wf, ApiSet, host.Uri, CodeArchive.Root).Members;
+
+                var code = EvalControl.code(Wf, host.Uri, CodeArchive.Root).Members;
                 Wf.Status($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)

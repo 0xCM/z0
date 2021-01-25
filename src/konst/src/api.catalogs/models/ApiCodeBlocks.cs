@@ -9,44 +9,118 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiCodeBlocks : IIndex<ApiCodeBlock>
+    public class ApiCodeBlocks
     {
-        public Index<ApiCodeBlock> Code {get;}
+        PartCodeAddresses Memories;
+
+        PartUriAddresses UriLocations;
+
+        PartCodeIndex PartIndex;
 
         [MethodImpl(Inline)]
-        public ApiCodeBlocks(ApiCodeBlock[] code)
-            => Code = code;
-
-        public uint Count
+        public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex code)
         {
-            [MethodImpl(Inline)]
-            get => Code.Count;
+            Memories = memories;
+            UriLocations = memuri;
+            PartIndex = code;
         }
 
-        public ReadOnlySpan<ApiCodeBlock> View
+        public Index<PartId> Parts
+            => Memories.Parts;
+
+        /// <summary>
+        /// The number of indexed functions
+        /// </summary>
+        public uint EntryCount
         {
             [MethodImpl(Inline)]
-            get => Code.View;
+            get => Memories.Count;
         }
 
-        public Span<ApiCodeBlock> Edit
+        /// <summary>
+        /// The base addresses that identify entries in the index
+        /// </summary>
+        public Index<MemoryAddress> Locations
         {
             [MethodImpl(Inline)]
-            get => Code.Edit;
+            get => Memories.Locations;
         }
 
-        public ApiCodeBlock[] Storage
+        /// <summary>
+        /// All indexed code
+        /// </summary>
+        public Index<ApiCodeBlock> Blocks
         {
             [MethodImpl(Inline)]
-            get => Code.Storage;
+            get => Memories.Encoded;
+        }
+
+        /// <summary>
+        /// Operation identifiers, each of which are associated with one or more code blocks
+        /// </summary>
+        public Index<OpUri> Identities
+        {
+            [MethodImpl(Inline)]
+            get => UriLocations.Identities;
+        }
+
+        /// <summary>
+        /// Hosts with at least one archived code block
+        /// </summary>
+        public Index<ApiHostUri> Hosts
+        {
+            [MethodImpl(Inline)]
+            get => PartIndex.Hosts;
+        }
+
+        /// <summary>
+        /// Hosts with at least one archived code block
+        /// </summary>
+        public Index<ApiHostUri> NonemptyHosts
+        {
+            [MethodImpl(Inline)]
+            get => PartIndex.Hosts.Where(h => h.IsNonEmpty);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiCodeBlocks(ApiCodeBlock[] src)
-            => new ApiCodeBlocks(src);
+        public ApiCodeBlock Code(MemoryAddress location)
+            => Memories[location];
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiCodeBlock[](ApiCodeBlocks src)
-            => src.Code;
+        public ApiHostCode HostCodeBlocks(ApiHostUri host)
+        {
+            if(PartIndex.HostCode(host, out var code))
+                return code;
+            else
+                return ApiHostCode.Empty;
+        }
+
+        [MethodImpl(Inline)]
+        public ApiPartCode PartCodeBlocks(PartId id)
+            => ApiCode.combine(id, Hosts.Map(HostCodeBlocks));
+
+        public ApiCodeBlock this[MemoryAddress location]
+        {
+            [MethodImpl(Inline)]
+            get => Code(location);
+        }
+
+        public ApiHostCode this[ApiHostUri id]
+        {
+            [MethodImpl(Inline)]
+            get => HostCodeBlocks(id);
+        }
+
+        public ApiPartCode this[PartId id]
+        {
+            [MethodImpl(Inline)]
+            get => PartCodeBlocks(id);
+        }
+
+        public static ApiCodeBlocks Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiCodeBlocks(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty);
+        }
     }
 }

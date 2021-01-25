@@ -14,7 +14,7 @@ namespace Z0
     [Service(typeof(IApiIndex))]
     class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
     {
-        public ApiCodeBlockIndex Product;
+        public ApiCodeBlocks Product;
 
         public ApiIndexStatus IndexStatus;
 
@@ -29,10 +29,10 @@ namespace Z0
             CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
             UriAddress = root.dict<MemoryAddress,OpUri>();
             Locations = root.dict<OpUri,ApiCodeBlock>();
-            Product = ApiCodeBlockIndex.Empty;
+            Product = ApiCodeBlocks.Empty;
         }
 
-        public ApiCodeBlockIndex CreateIndex()
+        public ApiCodeBlocks CreateIndex()
         {
             var src = Wf.Db().PartFiles();
             Wf.Status(src);
@@ -102,7 +102,7 @@ namespace Z0
             return dst;
         }
 
-        ApiCodeBlockIndex Freeze()
+        ApiCodeBlocks Freeze()
         {
             var memories = CodeAddress.ToKVPairs();
             var parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
@@ -111,7 +111,7 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new ApiHostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new ApiCodeBlockIndex(
+            return new ApiCodeBlocks(
                    new PartCodeAddresses(parts, memories),
                    new PartUriAddresses(parts, UriAddress),
                    new PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));

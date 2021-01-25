@@ -12,6 +12,21 @@ namespace Z0
 
     partial struct ApiQuery
     {
+        /// <summary>
+        /// Creates an operation index from a uri bitstream
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [Op]
+        public static ApiOpIndex<ApiCodeBlock> index(ApiCodeBlock[] src)
+            => index(src.Select(x => (x.OpUri.OpId, x)),true);
+
+        [Op]
+        public static ApiMemberIndex index(ApiHostCatalog src)
+        {
+            var ix = index(src.Storage.Select(h => (h.Id, h)),true);
+            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
+        }
+
         [Op]
         public static ApiMemberCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
         {
@@ -30,7 +45,6 @@ namespace Z0
             var duplicates = (from g in identities.GroupBy(i => i.Identifier)
                              where g.Count() > 1
                              select g.Key).ToHashSet();
-
             var HashTable = new Dictionary<OpIdentity,T>();
 
             if(duplicates.Count() != 0)
@@ -44,13 +58,6 @@ namespace Z0
                 HashTable = src.ToDictionary();
 
             return new ApiOpIndex<T>(HashTable, duplicates.Select(d => OpIdentityParser.parse(d)).Array());
-        }
-
-        [Op]
-        public static ApiMemberIndex index(ApiHostCatalog src)
-        {
-            var ix = index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
         }
 
         static ApiOpIndex<T> freeze<T>(IEnumerable<(OpIdentity,T)> src)

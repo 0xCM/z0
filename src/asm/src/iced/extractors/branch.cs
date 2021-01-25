@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     partial struct IceExtractors
     {
-       [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op]
         public static AsmBranch branch(in MemoryAddress @base, in IceInstruction ix, in AsmBranchTarget target)
             => new AsmBranch(@base, ix.IP, target, asm.offset(ix.IP, (byte)ix.ByteLength, target.Address));
 

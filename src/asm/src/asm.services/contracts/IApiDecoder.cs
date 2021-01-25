@@ -13,6 +13,6 @@ namespace Z0
     {
         ApiHostRoutines DecodeBlocks(ApiHostCode src);
 
-        Span<ApiPartRoutines> DecodeIndex(ApiCodeBlockIndex index);
+        Span<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index);
     }
 }

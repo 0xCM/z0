@@ -12,12 +12,12 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline)]
-        public static StatusEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
+        public static RanEvent<T> ran<H,T>(H host, T data, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new StatusEvent<T>(host.Id, GlobalEvents.Ran, data, ct);
+                => new RanEvent<T>(host.Id, data, ct);
 
         [MethodImpl(Inline), Op]
-        public static StatusEvent<string> ran(WfStepId step, CorrelationToken ct)
-            => new StatusEvent<string>(step, GlobalEvents.Ran, ct);
+        public static RanEvent ran(WfStepId step, CorrelationToken ct)
+            => new RanEvent(step, ct);
     }
 }
