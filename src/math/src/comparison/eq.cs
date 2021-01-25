@@ -79,6 +79,6 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Eq]
         public static bool eq(ulong a, ulong b)
-            => a == b;  
+            => a == b;
     }
 }

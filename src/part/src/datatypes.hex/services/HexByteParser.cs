@@ -12,8 +12,32 @@ namespace Z0
     using static HexFormatSpecs;
     using static root;
 
+    using P = TextRules.Parse;
+
     public readonly struct HexByteParser : IHexParser<byte>
     {
+        [Op]
+        public static bool parse(string src, out byte[] dst)
+        {
+            try
+            {
+                var s0 = text.trim(src);
+                var len = s0.Length;
+                if(HexTest.HasPreSpec(s0))
+                    s0 = text.slice(s0, len - PreSpec.Length);
+                else if(HexTest.HasPostSpec(s0))
+                    s0 = text.slice(s0, 0, len - PostSpec.Length);
+                var blocks = P.split(s0, Chars.Space);
+                dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber));
+                return true;
+            }
+            catch(Exception)
+            {
+                dst = Array.Empty<byte>();
+                return false;
+            }
+        }
+
         public static HexByteParser Service
             => default(HexByteParser);
 
@@ -29,19 +53,10 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline)]
-        public bool HasPreSpec(string src)
-            => src.TrimStart().StartsWith(PreSpec);
-
-        [MethodImpl(Inline)]
-        public bool HasPostSpec(string src)
-            => src.TrimEnd().EndsWith(PostSpec);
-
         /// <summary>
         /// Parses a single hex digit
         /// </summary>
         /// <param name="c">The source character</param>
-        [MethodImpl(Inline)]
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
@@ -52,6 +67,7 @@ namespace Z0
             else
                 return unparsed<byte>(c);
         }
+
 
         /// <summary>
         /// Parses a space-delimited sequence of hex text

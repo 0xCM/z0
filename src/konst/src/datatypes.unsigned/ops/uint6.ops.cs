@@ -19,6 +19,10 @@ namespace Z0
         public static U maxval(W w)
             => maxval<U>();
 
+        /// <summary>
+        /// Increments a specified operand by the unit value
+        /// </summary>
+        /// <param name="x">The source operand</param>
         [MethodImpl(Inline), Op]
         public static U inc(U x)
             => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
@@ -227,14 +231,14 @@ namespace Z0
             => uint6(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U src, byte pos)
-            => z.test(src,pos);
+        public static bit test(U src, byte pos)
+            => bit.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static U set(U src, byte pos, BitState state)
+        public static U set(U src, byte pos, bit state)
         {
             if(pos < U.Width)
-                return wrap6(z.set(src.data, pos, state));
+                return wrap6(bit.set(src.data, pos, state));
             else
                 return src;
         }

@@ -9,15 +9,8 @@ namespace Z0
     using static Part;
     using static root;
 
-    public readonly struct ApiHexParser : ITextParser<ApiCodeBlock>
+    public readonly struct ApiHexParser
     {
-        /// <summary>
-        /// Parses a row of identified hex text
-        /// </summary>
-        /// <param name="src">The formatted text</param>
-        ParseResult<ApiCodeBlock> ITextParser<ApiCodeBlock>.Parse(string src)
-            => extracts(src);
-
         public static ParseResult<ApiCodeBlock> extracts(string src)
         {
             try

@@ -154,14 +154,14 @@ namespace Z0
             => new U((byte)src);
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U src, byte pos)
-            => z.test(src,pos);
+        public static bit test(U src, byte pos)
+            => bit.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static U set(U src, byte pos, BitState state)
+        public static U set(U src, byte pos, bit state)
         {
             if(pos < U.Width)
-                return new U(z.set(src.data, pos, state));
+                return new U(bit.set(src.data, pos, state));
             else
                 return src;
         }

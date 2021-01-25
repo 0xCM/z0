@@ -221,7 +221,7 @@ namespace Z0
             else if(typeof(S) == typeof(double))
                 return force<T>(float64(src));
             else if(typeof(S) == typeof(char))
-                return force<T>(char16(src));
+                return force<T>(c16(src));
             else
                 return no<S,T>();
         }

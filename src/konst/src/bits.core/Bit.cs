@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public partial class Bit
@@ -28,12 +28,12 @@ namespace Z0
             where T : struct
         {
             var size = memory.size<T>();
-            ref readonly var input = ref memory.uint8(ref edit(src));
+            ref readonly var input = ref uint8(ref edit(src));
             for(var i=0u; i<size; i++)
             {
-                ref readonly var b = ref memory.skip(input,i);
+                ref readonly var b = ref skip(input,i);
                 for(byte j=0; j<8; j++)
-                    seek(dst,j) = BitStates.test(b,j);
+                    seek(dst,j) = bit.test(b,j);
             }
         }
 

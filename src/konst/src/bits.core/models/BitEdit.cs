@@ -58,10 +58,10 @@ namespace Z0
         public bit this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Bytes[offset], pos);
+            get => bit.test(Bytes[offset], pos);
 
             [MethodImpl(Inline)]
-            set => Bytes[offset] = BitStates.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
         }
 
         [MethodImpl(Inline)]

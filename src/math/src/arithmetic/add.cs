@@ -55,7 +55,7 @@ namespace Z0
         {
             c = a + b;
             var carry = a > c;
-            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + @uint(carry);
+            seek(c, 1) = skip(in a, 1) + skip(in b, 1) + u32(carry);
         }
     }
 }

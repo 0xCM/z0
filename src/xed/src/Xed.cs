@@ -320,9 +320,6 @@ namespace Z0
                         var left = line.LeftOfFirst(IMPLIES);
                         var opcount = Xed.operands(left, out var _operands);
                         var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
-
-                        // var operands = left.SplitClean(Chars.Space);
-                        // var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
                         var rhs = line.RightOfFirst(IMPLIES);
                         writer.WriteLine(string.Format("{0} -> {1}", lhs, rhs));
                     }
@@ -331,10 +328,6 @@ namespace Z0
                         var left = line.LeftOfFirst(Bar);
                         var opcount = Xed.operands(left, out var _operands);
                         var lhs = text.parenthetical(opcount != 0 ? _operands.Intersperse(", ").Concat() : left);
-
-                        // var operands = left.SplitClean(Chars.Space);
-                        // var lhs = text.parenthetical(operands.Length != 0 ? operands.Intersperse(", ").Concat() : left);
-
                         var rhs = line.RightOfFirst(Bar);
                         writer.WriteLine(string.Format("{0} | {1}", lhs, rhs));
                     }
@@ -384,7 +377,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var part = src.Parts[i];
-                if(parser.HasPreSpec(part))
+                if(HexTest.HasPreSpec(part))
                     seek8(dst, pos++) = parser.ParseByte(part);
             }
 

@@ -34,8 +34,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiCodeBlock(OpUri uri, CodeBlock code)
         {
-            Code = code;
             Uri = uri;
+            Code = code;
         }
 
         public byte[] Storage
@@ -166,6 +166,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CodeBlock(ApiCodeBlock src)
-            => new CodeBlock(src.BaseAddress, src.Code);
+            => src.Code;
     }
 }

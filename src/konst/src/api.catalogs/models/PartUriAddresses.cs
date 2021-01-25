@@ -24,13 +24,13 @@ namespace Z0
             Data = src;
         }
 
-        public OpUri[] Identities
+        public Index<OpUri> Identities
         {
             [MethodImpl(Inline)]
             get => Data.Values.Array();
         }
 
-        public MemoryAddress[] Addresses
+        public Index<MemoryAddress> Addresses
         {
             [MethodImpl(Inline)]
             get => Data.Keys.Array();

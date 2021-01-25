@@ -13,12 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static unsafe uint @uint(bool src)
-            => memory.@uint(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe uint @uint<T>(T src)
-            where T : unmanaged
-                => memory.@uint(src);
+            => memory.u32(src);
 
     }
 }

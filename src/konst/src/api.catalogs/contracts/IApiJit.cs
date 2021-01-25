@@ -8,6 +8,8 @@ namespace Z0
 
     public interface IApiJit
     {
+        LocatedMethod Jit(IdentifiedMethod src);
+
         BasedApiMembers JitApi(FS.FilePath dst);
 
         BasedApiMembers JitApi();

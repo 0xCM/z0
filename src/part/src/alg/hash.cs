@@ -147,7 +147,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint calc(double x)
-            => calc(@ulong(x));
+            => calc(u64(x));
 
         /// <summary>
         /// Creates an unsigned calc code
@@ -156,7 +156,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint calc(decimal x)
-            => calc(@ulong(x));
+            => calc(u64(x));
 
         /// <summary>
         /// Creates an unsigned calc code
@@ -263,7 +263,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint calc(float x, float y)
-            => calc(@int(x), @int(y));
+            => calc(i32(x), i32(y));
 
         /// <summary>
         /// Creates a combined/unsigned calc code
@@ -273,7 +273,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint calc(double x, double y)
-            => calc(@ulong(x), @ulong(y));
+            => calc(u64(x), u64(y));
 
         /// <summary>
         /// Creates a combined/unsigned calc code
@@ -283,7 +283,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint calc(decimal x, decimal y)
-            => calc(@ulong(x) ,@ulong(y));
+            => calc(u64(x), u64(y));
 
         /// <summary>
         /// Creates a 64-bit calccode over a pair
@@ -420,7 +420,7 @@ namespace alg
         static uint calc_x<T>(T src)
         {
             if(typeof(T) == typeof(char))
-                return calc(char16(src));
+                return calc(c16(src));
             else if(typeof(T) == typeof(bool))
                 return calc(@bool(src));
             else

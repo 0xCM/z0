@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct PartCodeAddresses
     {
-        public readonly PartId[] Parts;
+        public Index<PartId> Parts {get;}
 
         readonly KVP Data;
 
@@ -24,16 +24,16 @@ namespace Z0
             Parts = parts;
         }
 
-        public MemoryAddress[] Locations
-        {
-            [MethodImpl(Inline)]
-            get => Data.Keys;
-        }
-
-        public ApiCodeBlock[] Encoded
+        public Index<ApiCodeBlock> Code
         {
             [MethodImpl(Inline)]
             get => Data.Values;
+        }
+
+        public Index<MemoryAddress> Addresses
+        {
+            [MethodImpl(Inline)]
+            get => Data.Keys;
         }
 
         public uint Count

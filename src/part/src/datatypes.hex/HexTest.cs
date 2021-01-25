@@ -13,6 +13,18 @@ namespace Z0
     [ApiHost]
     public readonly struct HexTest
     {
+        [MethodImpl(Inline)]
+        public static bool HasPreSpec(string src)
+            => src.TrimStart().StartsWith(PreSpec);
+
+        [MethodImpl(Inline)]
+        public static bool HasPostSpec(string src)
+            => src.TrimEnd().EndsWith(PostSpec);
+
+        /// <summary>
+        /// Determines whether a specified character is a hex digit
+        /// </summary>
+        /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(char c)
             => scalar(c) || upper(c) || lower(c);

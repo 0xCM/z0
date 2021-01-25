@@ -203,14 +203,14 @@ namespace Z0
             => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U x)
-            => z.test(x.data, 0);
+        public static bit test(U x)
+            => bit.test(x.data, 0);
 
         [MethodImpl(Inline), Op]
-        public static U set(U src, byte pos, BitState state)
+        public static U set(U src, byte pos, bit state)
         {
             if(pos < U.Width)
-                return wrap1(z.set(src.data, pos, state));
+                return wrap1(bit.set(src.data, pos, state));
             else
                 return src;
         }

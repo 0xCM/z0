@@ -18,5 +18,61 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref bit u1(in byte src)
             => ref @as<byte,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='sbyte'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in sbyte src)
+            => ref @as<sbyte,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='ushort'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in ushort src)
+            => ref @as<ushort,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='short'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in short src)
+            => ref @as<short,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='uint'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in uint src)
+            => ref @as<uint,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='int'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in int src)
+            => ref @as<int,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='ulong'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in ulong src)
+            => ref @as<ulong,bit>(src);
+
+        /// <summary>
+        /// Presents a <see cref='long'/> reference as a <see cref='bit'/> reference
+        /// </summary>
+        /// <param name="src">The source byte</param>
+        [MethodImpl(Inline), Op]
+        public static ref bit u1(in long src)
+            => ref @as<long,bit>(src);
     }
 }

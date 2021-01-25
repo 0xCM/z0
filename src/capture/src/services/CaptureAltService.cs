@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using Z0.Asm;
 
     using static Part;
 
     readonly struct CaptureAltService : ICaptureAlt
     {
-        public static ICaptureAlt create()
+        public static ICaptureAlt create(IWfShell wf, IAsmContext asm)
             => default(CaptureAltService);
 
         public ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src)

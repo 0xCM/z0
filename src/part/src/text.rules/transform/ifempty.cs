@@ -13,7 +13,6 @@ namespace Z0
     {
         partial struct Transform
         {
-
             /// <summary>
             /// Returns the replacement text if the source text is blank := {null | empty}
             /// </summary>

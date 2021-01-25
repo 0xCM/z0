@@ -20,6 +20,14 @@ namespace Z0
             => *((sbyte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='long'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe long i64(bit src)
+            => *((sbyte*)(&src));
+
+        /// <summary>
         /// Presents a T-references as a <see cref='long'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

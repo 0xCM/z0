@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -22,7 +21,7 @@ namespace Z0
             if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(IDI.Imm), out var immval))
                 return immval;
             else
-                return Option.none<byte>();
+                return root.none<byte>();
         }
     }
 }

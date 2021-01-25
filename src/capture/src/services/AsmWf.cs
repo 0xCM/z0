@@ -33,7 +33,7 @@ namespace Z0.Asm
             FormatConfig = AsmFormatConfig.DefaultStreamFormat;
             Decoder = AsmServices.Decoder(FormatConfig);
             Formatter = new AsmFormatter(FormatConfig);
-            CaptureService = CaptureAlt.service();
+            CaptureService = CaptureAlt.service(Wf, Asm);
         }
 
         public ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src)

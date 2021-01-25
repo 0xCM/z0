@@ -72,7 +72,7 @@ namespace Z0
             get => (Data & (1 << pos)) != 0;
 
             [MethodImpl(Inline)]
-            set => Data = BitStates.set(Data, pos, value);
+            set => Data = bit.set(Data, pos, value);
         }
 
         public BitVector4 this[byte first, byte last]

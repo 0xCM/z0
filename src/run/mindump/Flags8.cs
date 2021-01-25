@@ -24,13 +24,13 @@ namespace Z0
         public bit this[E flag]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(u8(Data), Pow2.log2(u8(flag)));
+            get => bit.test(u8(Data), Pow2.log2(u8(flag)));
         }
 
         public bit this[Pow2x8 flag]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(u8(Data), Pow2.log2(flag));
+            get => bit.test(u8(Data), Pow2.log2(flag));
         }
 
         public E Value

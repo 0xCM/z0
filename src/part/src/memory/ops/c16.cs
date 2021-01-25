@@ -7,15 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static char char16<T>(T src)
-            => As<T,char>(ref src);
-
         /// <summary>
         /// Presents a parametric reference as a <see cref='char'/> reference
         /// </summary>

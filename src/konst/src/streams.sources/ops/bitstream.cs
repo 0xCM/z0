@@ -22,7 +22,7 @@ namespace Z0
             {
                 var data = src.Next<ulong>();
                 for(byte i=0; i<64; i++)
-                    yield return BitStates.test(data,i);
+                    yield return bit.test(data,i);
             }
         }
 
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var data = src.Next<ulong>();
                 for(byte i=0; i<64; i++)
-                    yield return force<byte,T>((byte)BitStates.test(data,i));
+                    yield return force<byte,T>((byte)bit.test(data,i));
             }
         }
     }

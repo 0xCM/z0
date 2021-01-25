@@ -60,7 +60,7 @@ namespace Z0
         public BitState this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Bytes[offset], pos);
+            get => bit.test(Bytes[offset], pos);
         }
 
         [MethodImpl(Inline)]

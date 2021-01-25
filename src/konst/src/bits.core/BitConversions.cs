@@ -33,7 +33,7 @@ namespace Z0
             if(typeof(T) == typeof(bool))
                 return (Bit32)@bool(src);
             else if(typeof(T) == typeof(char))
-                return  (Bit32)char16(src);
+                return  (Bit32)c16(src);
             else
                 return to_u(src);
         }

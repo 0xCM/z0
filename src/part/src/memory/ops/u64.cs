@@ -20,6 +20,30 @@ namespace Z0
             => *((byte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong u64(bit src)
+            => *((byte*)(&src));
+
+        /// <summary>
+        /// Converts a <see cref='double'/> to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong u64(double src)
+            => (*((ulong*)(&src)));
+
+        /// <summary>
+        /// Converts a <see cref='decimal'/> to a <see cref='ulong'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong u64(decimal src)
+            => (*((ulong*)(&src)));
+
+        /// <summary>
         /// Presents a T-references as a <see cref='ulong'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

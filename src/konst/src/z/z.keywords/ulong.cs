@@ -13,19 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static unsafe ulong @ulong(bool src)
-            => memory.@ulong(src);
+            => memory.u64(src);
 
-        [MethodImpl(Inline)]
-        public static unsafe ulong @ulong(double src)
-            => memory.@ulong(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe ulong @ulong(decimal src)
-            => memory.@ulong(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe ulong @ulong<T>(T src)
-            where T : unmanaged
-                => memory.@ulong(src);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiType, Datatype]
+    [ApiHost, Datatype]
     public readonly partial struct bit : ITextual, IEquatable<bit>
     {
         internal readonly bool State;
@@ -24,7 +24,7 @@ namespace Z0
             get => new bit[]{Off,On};
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bit Parse(char c)
             => c == One;
 

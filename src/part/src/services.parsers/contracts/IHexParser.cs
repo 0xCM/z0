@@ -8,10 +8,6 @@ namespace Z0
 
     public interface IHexParser : IParser<char,byte>
     {
-        bool HasPreSpec(string src);
-
-        bool HasPostSpec(string src);
-
     }
 
     public interface IHexParser<T> : IHexParser, IDataParser<T>

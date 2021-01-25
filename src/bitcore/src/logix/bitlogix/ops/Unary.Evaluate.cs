@@ -19,7 +19,7 @@ namespace Z0
             if(kind == ULK.False)
                 return bit.Off;
             else if(kind == ULK.Not)
-                return bit.BitLogic.not(a);
+                return bit.not(a);
             else if(kind == ULK.Identity)
                 return a;
             else if(kind == ULK.True)

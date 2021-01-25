@@ -87,10 +87,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Data, (byte)index);
+            get => bit.test(Data, (byte)index);
 
             [MethodImpl(Inline)]
-            set => Data = BitStates.set(Data, (byte)index, value);
+            set => Data = bit.set(Data, (byte)index, value);
         }
 
         /// <summary>

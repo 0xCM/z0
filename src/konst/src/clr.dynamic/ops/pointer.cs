@@ -5,6 +5,8 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -33,5 +35,16 @@ namespace Z0
         public static DynamicPointer pointer<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => pointer(src);
+
+        /// <summary>
+        /// Finds the magical function pointer for a dynamic method
+        /// </summary>
+        /// <param name="method">The source method</param>
+        /// <remarks>See https://stackoverflow.com/questions/45972562/c-sharp-how-to-get-runtimemethodhandle-from-dynamicmethod</remarks>
+        public static IntPtr pointer(DynamicMethod method)
+        {
+            var descriptor = typeof(DynamicMethod).GetMethod("GetMethodDescriptor", BindingFlags.NonPublic | BindingFlags.Instance);
+            return ((RuntimeMethodHandle)descriptor.Invoke(method, null)).GetFunctionPointer();
+        }
     }
 }

@@ -72,10 +72,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Data, (byte)(row*4 + col));
+            get => bit.test(Data, (byte)(row*4 + col));
 
             [MethodImpl(Inline)]
-            set => Data = BitStates.set(Data, (byte)(row*4 + col), value);
+            set => Data = bit.set(Data, (byte)(row*4 + col), value);
         }
 
         public BitVector4 this[int row]

@@ -108,7 +108,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static int calc(double x)
-            => calc(@ulong(x));
+            => calc(u64(x));
 
         /// <summary>
         /// Creates a signed hash code
@@ -117,7 +117,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static int calc(decimal x)
-            => calc(@ulong(x));
+            => calc(u64(x));
 
         /// <summary>
         /// Creates a signed hash code

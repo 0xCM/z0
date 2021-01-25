@@ -96,7 +96,7 @@ namespace Z0
             dst.Length = src.Encoded.Length;
             dst.TermCode = src.TermCode;
             dst.Uri = src.OpUri;
-            dst.Data = new CodeBlock(src.Address, src.Encoded.Data);
+            dst.Data = src.Encoded;
             return dst;
         }
 

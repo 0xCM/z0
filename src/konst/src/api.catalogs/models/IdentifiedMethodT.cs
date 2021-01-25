@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct IdentifiedMethod<I> : ITextual, IIdentified<I>
         where I : unmanaged
@@ -16,10 +16,6 @@ namespace Z0
         public I Id {get;}
 
         public readonly MethodInfo Method;
-
-        [MethodImpl(Inline)]
-        public static implicit operator IdentifiedMethod<I>((I id, MethodInfo method) src)
-            => new IdentifiedMethod<I>(src.id, src.method);
 
         [MethodImpl(Inline)]
         public IdentifiedMethod(I id, MethodInfo method)
@@ -34,5 +30,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator IdentifiedMethod<I>((I id, MethodInfo method) src)
+            => new IdentifiedMethod<I>(src.id, src.method);
     }
 }

@@ -211,14 +211,14 @@ namespace Z0
             => wrap4((byte)(src.data & 0b11));
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U src, byte pos)
-            => z.test(src,pos);
+        public static bit test(U src, byte pos)
+            => bit.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static U set(U src, byte pos, BitState state)
+        public static U set(U src, byte pos, bit state)
         {
             if(pos < U.Width)
-                return wrap4(z.set(src.data, pos, state));
+                return wrap4(bit.set(src.data, pos, state));
             else
                 return src;
         }

@@ -8,6 +8,8 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Part;
     using static z;
     using static ExtractTermCode;
@@ -16,8 +18,8 @@ namespace Z0
     public readonly unsafe struct CaptureAlt
     {
         [Op]
-        public static ICaptureAlt service()
-            => CaptureAltService.create();
+        public static ICaptureAlt service(IWfShell wf, IAsmContext asm)
+            => CaptureAltService.create(wf, asm);
 
         [Op]
         public static ReadOnlySpan<IdentifiedMethod> identify(ReadOnlySpan<MethodInfo> src)
@@ -30,7 +32,7 @@ namespace Z0
             var buffer = alloc<LocatedMethod>(count);
             ref var located = ref first(span(buffer));
             for(var i=0u; i<count; i++)
-                seek(located, i) = ClrDynamic.jit(skip(src,i));
+                seek(located, i) = ApiJit.jit(skip(src, i));
             Array.Sort(buffer);
             return buffer;
         }
@@ -103,7 +105,7 @@ namespace Z0
         [Op]
         public static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
-            var summary = capture(buffer, src.Id, ClrDynamic.jit(src));
+            var summary = capture(buffer, src.Id, ApiJit.jit(src));
             var size = summary.Data.Length;
             var code = new ApiCaptureBlock(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
             return new ApiMemberCapture(src, code);
@@ -119,7 +121,7 @@ namespace Z0
         [Op]
         public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
-            var located = ClrDynamic.jit(src);
+            var located = ApiJit.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
             return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }

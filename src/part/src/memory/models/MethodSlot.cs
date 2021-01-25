@@ -7,17 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
-    partial struct z
+    public readonly struct MethodSlot
     {
-        [MethodImpl(Inline)]
-        public static unsafe ushort @ushort(bool src)
-            => memory.@ushort(src);
+        public Name Name {get;}
+
+        public MemoryAddress Address {get;}
 
         [MethodImpl(Inline)]
-        public static unsafe ushort @ushort<T>(T src)
-            where T : unmanaged
-                => memory.@ushort(src);
+        public MethodSlot(Name name, MemoryAddress address)
+        {
+            Name = name;
+            Address = address;
+        }
     }
 }

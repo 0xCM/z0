@@ -22,6 +22,7 @@ namespace Z0
             Id = id;
             Method = method;
         }
+
         public RuntimeMethodHandle MethodHandle
         {
             [MethodImpl(Inline)]

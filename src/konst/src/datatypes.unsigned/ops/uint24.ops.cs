@@ -107,12 +107,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U x, byte pos)
-            => z.test(x.data, pos);
+        public static bit test(U x, byte pos)
+            => bit.test(x.data, pos);
 
         [MethodImpl(Inline), Op]
-        public static U set(U x, byte pos, BitState state)
-            => new U(z.set(x.data, pos, state));
+        public static U set(U x, byte pos, bit state)
+            => new U(bit.set(x.data, pos, state));
 
         [MethodImpl(Inline), Op]
         public static U add(U x, U y)

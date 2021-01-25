@@ -12,6 +12,6 @@ namespace Z0
     public sealed class ApiServices : WfService<ApiServices, ApiServices>
     {
         public IApiJit ApiJit()
-            => ApiJitService.create(Wf);
+            => Z0.ApiJit.create(Wf);
     }
 }

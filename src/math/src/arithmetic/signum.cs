@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static sbyte sign(sbyte src)
-            => mul(@sbyte(src < 0),(sbyte)-1);
+            => mul(i8(src < 0), (sbyte)-1);
 
         [MethodImpl(Inline), Op]
         public static SignKind signum(sbyte src)

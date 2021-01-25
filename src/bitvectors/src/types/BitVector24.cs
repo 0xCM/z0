@@ -152,10 +152,10 @@ namespace Z0
         public bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(Data, pos);
+            get => bit.test(Data, pos);
 
             [MethodImpl(Inline)]
-            set => Data = BitStates.set(Data, pos, value);
+            set => Data = bit.set(Data, pos, value);
        }
 
         /// <summary>

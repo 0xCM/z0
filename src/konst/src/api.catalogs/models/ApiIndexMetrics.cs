@@ -30,10 +30,10 @@ namespace Z0
             var stats = default(ApiIndexMetrics);
             stats.PartCount = src.Parts.Count;
             stats.HostCount = src.Hosts.Count;
-            stats.AddressCount = src.Locations.Count;
+            stats.AddressCount = src.Addresses.Count;
             stats.FunctionCount = src.Blocks.Count;
             stats.IdentityCount = src.Identities.Count;
-            stats.ByteCount = src.Blocks.Storage.Sum(x => x.Data.Length);
+            stats.ByteCount = src.Blocks.Storage.Sum(x => x.Length);
             return stats;
         }
 

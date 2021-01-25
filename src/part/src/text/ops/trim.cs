@@ -7,12 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static TextRules;
 
-    partial struct z
+    partial class text
     {
         [MethodImpl(Inline)]
-        public static char char16<T>(T src)
-            => memory.char16(src);
+        public static string trim(string src)
+            => Transform.trim(src);
+
+        [MethodImpl(Inline)]
+        public static string trim(string src, char match)
+            => Transform.trim(src, match);
     }
 }

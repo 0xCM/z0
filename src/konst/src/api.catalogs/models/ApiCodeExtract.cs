@@ -7,9 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ApiCodeExtract
+    [Record(TableId)]
+    public struct ApiCodeExtract : IRecord<ApiCodeExtract>
     {
+        public const string TableId = "extract";
+
         public MemoryAddress Base;
 
         public string Uri;

@@ -20,6 +20,22 @@ namespace Z0
             => *((sbyte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='int'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe int i32(bit src)
+            => *((sbyte*)(&src));
+
+        /// <summary>
+        /// Presents a <see cref='float'/> value as an <see cref='int'/> value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe int i32(float src)
+            => (*((int*)(&src)));
+
+        /// <summary>
         /// Presents a T-references as a <see cref='int'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -27,5 +43,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref int i32<T>(in T src)
             => ref @as<T,int>(src);
+
+        /// <summary>
+        /// Adds a <see cref='int'/> measured offset to a parametric reference and presents the resulting as a <see cref='int'/> cell reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="offset">The offset count, measured in bytes</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref int i32<T>(in T src, int offset)
+            => ref add(@as<T,int>(src), offset);
     }
 }

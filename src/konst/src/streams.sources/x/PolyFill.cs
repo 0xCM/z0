@@ -132,7 +132,7 @@ namespace Z0
 
                 var i = -1;
                 while(++pos <= last && ++i < w)
-                    dst[pos] = BitStates.test(data,(byte)i);
+                    dst[pos] = bit.test(data,(byte)i);
             }
         }
 

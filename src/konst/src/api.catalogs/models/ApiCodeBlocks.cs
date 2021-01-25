@@ -11,7 +11,7 @@ namespace Z0
 
     public class ApiCodeBlocks
     {
-        PartCodeAddresses Memories;
+        PartCodeAddresses CodeAddresses;
 
         PartUriAddresses UriLocations;
 
@@ -20,13 +20,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex code)
         {
-            Memories = memories;
+            CodeAddresses = memories;
             UriLocations = memuri;
             PartIndex = code;
         }
 
         public Index<PartId> Parts
-            => Memories.Parts;
+            => CodeAddresses.Parts;
 
         /// <summary>
         /// The number of indexed functions
@@ -34,16 +34,16 @@ namespace Z0
         public uint EntryCount
         {
             [MethodImpl(Inline)]
-            get => Memories.Count;
+            get => CodeAddresses.Count;
         }
 
         /// <summary>
         /// The base addresses that identify entries in the index
         /// </summary>
-        public Index<MemoryAddress> Locations
+        public Index<MemoryAddress> Addresses
         {
             [MethodImpl(Inline)]
-            get => Memories.Locations;
+            get => CodeAddresses.Addresses;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         public Index<ApiCodeBlock> Blocks
         {
             [MethodImpl(Inline)]
-            get => Memories.Encoded;
+            get => CodeAddresses.Code;
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiCodeBlock Code(MemoryAddress location)
-            => Memories[location];
+            => CodeAddresses[location];
 
         [MethodImpl(Inline)]
         public ApiHostCode HostCodeBlocks(ApiHostUri host)

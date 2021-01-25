@@ -79,10 +79,10 @@ namespace Z0
         public bit this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => BitStates.test(skip(in Head,row), (byte)col);
+            get => bit.test(skip(in Head,row), (byte)col);
 
             [MethodImpl(Inline)]
-            set => seek(Head, row) = BitStates.set(seek(Head, row), (byte)col, value);
+            set => seek(Head, row) = bit.set(seek(Head, row), (byte)col, value);
         }
 
         /// <summary>

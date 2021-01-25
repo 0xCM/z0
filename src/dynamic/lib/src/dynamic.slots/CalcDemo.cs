@@ -18,9 +18,6 @@ namespace Z0
     [ApiHost]
     public readonly struct CalcDemo
     {
-        static ReadOnlySpan<LocatedMethod> Slots
-            => ClrDynamic.jit(typeof(CalcSlots));
-
         void Display1()
         {
             var x = ScalarCast.uint8(4);
@@ -36,8 +33,8 @@ namespace Z0
 
         void Display2()
         {
-            var slots = Slots;
-            for(var i=0; i< Slots.Length; i++)
+            var slots = ClrDynamic.slots(typeof(CalcSlots));
+            for(var i=0; i<slots.Length; i++)
             {
                 ref readonly var slot = ref skip(slots,i);
                 term.print(slot);
@@ -89,14 +86,14 @@ namespace Z0
             var x = ScalarCast.uint8(4);
             var y = ScalarCast.uint8(4);
 
-            ref var mulRef = ref mul.BaseAddress.Ref<byte>();
+            ref var mulRef = ref mul.Address.Ref<byte>();
             for(var i=0u; i<size; i++)
                 seek(mulRef, i) = skip(divCode,i);
 
             var z1 = CalcSlots.mul(x,y);
             seek(dst, offset++) = (CalcChecks.describe(Api.mul(), x,y, z1));
 
-            ref var divRef = ref div.BaseAddress.Ref<byte>();
+            ref var divRef = ref div.Address.Ref<byte>();
             for(var i=0; i<size; i++)
                 seek(divRef, i) = skip(mulCode,i);
 

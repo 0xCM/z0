@@ -15,31 +15,6 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Creates a T-span from an S-reference
-        /// </summary>
-        /// <param name="src">A reference to the leading source cell</param>
-        /// <param name="count">The source cell count</param>
-        /// <typeparam name="S">The source cell type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> span<S,T>(ref S src, int count)
-            where T : struct
-            where S : struct
-                => Cast<S,T>(CreateSpan(ref src, count));
-
-        /// <summary>
-        /// Creates a T-span from a single S-reference
-        /// </summary>
-        /// <param name="src">A reference to the source cell</param>
-        /// <typeparam name="S">The source cell type</typeparam>
-        /// <typeparam name="T">The target cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static Span<T> span<S,T>(ref S src)
-            where T : struct
-            where S : struct
-                => Cast<S,T>(CreateSpan(ref src, 1));
-
-        /// <summary>
         /// Allocates storage for a specified number of T-cells
         /// </summary>
         /// <param name="count">The cell allocation count</param>
@@ -121,5 +96,30 @@ namespace Z0
                 seek(dst, i++) = item;
             return dst;
         }
+
+        /// <summary>
+        /// Creates a T-span from an S-reference
+        /// </summary>
+        /// <param name="src">A reference to the leading source cell</param>
+        /// <param name="count">The source cell count</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<S,T>(ref S src, int count)
+            where T : struct
+            where S : struct
+                => Cast<S,T>(CreateSpan(ref src, count));
+
+        /// <summary>
+        /// Creates a T-span from a single S-reference
+        /// </summary>
+        /// <param name="src">A reference to the source cell</param>
+        /// <typeparam name="S">The source cell type</typeparam>
+        /// <typeparam name="T">The target cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static Span<T> span<S,T>(ref S src)
+            where T : struct
+            where S : struct
+                => Cast<S,T>(CreateSpan(ref src, 1));
     }
 }

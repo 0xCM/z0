@@ -32,6 +32,13 @@ namespace Z0
             Code = new BinaryCode(insist(data));
         }
 
+        [MethodImpl(Inline)]
+        public CodeBlock(MemoryAddress src, BinaryCode code)
+        {
+            BaseAddress = insist(src, x => x.IsNonEmpty);
+            Code = code;
+        }
+
         public MemoryRange MemorySegment
         {
             [MethodImpl(Inline)]

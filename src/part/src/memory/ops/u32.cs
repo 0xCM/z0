@@ -20,6 +20,14 @@ namespace Z0
             => *((byte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='uint'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe uint u32(bit src)
+            => *((byte*)(&src));
+
+        /// <summary>
         /// Presents a parametric references as a <see cref='uint'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

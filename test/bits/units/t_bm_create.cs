@@ -46,7 +46,7 @@ namespace Z0
 
             for(byte row=0; row < bm.RowCount; row++)
             for(byte col=0; col < bm.ColCount; col++)
-                Claim.eq(bm[row,col], gmath.even(row) ? BitStates.test(p0,col) : BitStates.test(p1,col));
+                Claim.eq(bm[row,col], gmath.even(row) ? bit.test(p0,col) : bit.test(p1,col));
         }
 
         public void bm_create_fromfixed_16x16x16()

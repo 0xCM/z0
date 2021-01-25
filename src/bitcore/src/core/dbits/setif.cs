@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte setif(byte src, byte srcpos, byte dst, byte dstpos)
         {
-            if(BitStates.test(src, srcpos))
+            if(bit.test(src, srcpos))
                 return enable(dst, srcpos);
             return dst;
         }
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort setif(ushort src, byte srcpos, ushort dst, byte dstpos)
         {
-            if(BitStates.test(src, srcpos))
+            if(bit.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint setif(uint src, byte srcpos, uint dst, byte dstpos)
         {
-            if(BitStates.test(src, srcpos))
+            if(bit.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong setif(ulong src, byte srcpos, ulong dst, byte dstpos)
         {
-            if(BitStates.test(src, srcpos))
+            if(bit.test(src, srcpos))
                 return enable(dst, dstpos);
             return dst;
         }

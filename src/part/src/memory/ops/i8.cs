@@ -20,6 +20,14 @@ namespace Z0
             => *((sbyte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='sbyte'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe sbyte i8(bit src)
+            => *((sbyte*)(&src));
+
+        /// <summary>
         /// Presents a <typeparamref name='T'/> reference as an <see cref='sbyte'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

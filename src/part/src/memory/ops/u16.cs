@@ -20,6 +20,14 @@ namespace Z0
             => *((byte*)(&src));
 
         /// <summary>
+        /// Presents a <see cref='bit'/> as a <see cref='ushort'/>
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ushort u16(bit src)
+            => *((byte*)(&src));
+
+        /// <summary>
         /// Presents a T-reference as a <see cref='ushort'/> reference
         /// </summary>
         /// <param name="src">The source reference</param>

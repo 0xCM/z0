@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="x3">The term at index 3</param>
         /// <param name="x4">The term at index 4</param>
         [MethodImpl(Inline), Op]
-        public static U uint5(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default, BitState x4 = default)
+        public static U uint5(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default)
              => wrap5(Bytes.or(
                  Bytes.sll((byte)x0, 0),
                  Bytes.sll((byte)x1, 1),
@@ -229,12 +229,12 @@ namespace Z0
             => uint5(lhs.data << rhs);
 
         [MethodImpl(Inline), Op]
-        public static BitState test(U src, byte pos)
-            => z.test(src,pos);
+        public static bit test(U src, byte pos)
+            => bit.test(src,pos);
 
         [MethodImpl(Inline), Op]
-        public static U set(U src, byte pos, BitState state)
-            => Bytes.lt(pos, U.Width) ? new U(z.set(src.data, pos, state), false) : src;
+        public static U set(U src, byte pos, bit state)
+            => Bytes.lt(pos, U.Width) ? new U(bit.set(src.data, pos, state), false) : src;
 
         [MethodImpl(Inline)]
         public static bool eq(U x, U y)

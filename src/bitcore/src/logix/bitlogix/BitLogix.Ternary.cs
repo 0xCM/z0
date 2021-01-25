@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bit select(bit a, bit b, bit c)
-            => bit.BitLogic.select(a,b,c);
+            => bit.select(a,b,c);
 
         [MethodImpl(Inline), Op]
         public static bit @false(bit a, bit b, bit c)

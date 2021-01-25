@@ -57,7 +57,7 @@ namespace Z0
         public AsmRowSets<IceMnemonic> Emit()
         {
             using var flow = Wf.Running();
-            var addresses = Encoded.Locations.View;
+            var addresses = Encoded.Addresses.View;
             var count = addresses.Length;
             for(var i=0u; i<count; i++)
                 CreateRecords(Encoded[skip(addresses, i)]);

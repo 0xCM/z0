@@ -186,7 +186,7 @@ namespace Z0
             {
                 if(k>=maxbits)
                     break;
-                seek(dst, (uint)k) = @char(@bool(BitStates.test(src, j)));
+                seek(dst, (uint)k) = @char(@bool(bit.test(src, j)));
             }
         }
 

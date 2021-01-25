@@ -18,10 +18,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe uint @uint(bool src)
             => (*((byte*)(&src)));
-
-        [MethodImpl(Inline), Op, Closures(Numeric32x64k)]
-        public static unsafe uint @uint<T>(T src)
-            where T : unmanaged
-                => *((uint*)(&src));
     }
 }

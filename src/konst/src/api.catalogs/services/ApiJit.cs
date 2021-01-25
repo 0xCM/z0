@@ -11,10 +11,57 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static memory;
+    using static Part;
 
-    [Service(typeof(IApiJit))]
-    public sealed class ApiJitService : WfService<ApiJitService,IApiJit>, IApiJit
+    [Service(typeof(IApiJit)), ApiHost]
+    public sealed class ApiJit : WfService<ApiJit,IApiJit>, IApiJit
     {
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress jit(ApiMember src)
+        {
+            RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }
+
+        [Op]
+        public static MemoryAddress jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
+        [Op]
+        public static LocatedMethod jit(IdentifiedMethod src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
+        }
+
+        [Op]
+        public LocatedMethod Jit(IdentifiedMethod src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
+        }
+
+        [Op]
+        public static IntPtr jit(Delegate src)
+        {
+            RuntimeHelpers.PrepareDelegate(src);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }
+
+        [Op]
+        public static DynamicPointer jit(DynamicDelegate src)
+        {
+            RuntimeHelpers.PrepareDelegate(src.Operation);
+            return ClrDynamic.pointer(src, ClrDynamic.pointer(src.Target));
+        }
+
+        [MethodImpl(Inline)]
+        public static DynamicPointer jit<D>(DynamicDelegate<D> src)
+            where D : Delegate
+                => jit(src.Untyped);
         public BasedApiMembers JitApi()
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
@@ -122,12 +169,14 @@ namespace Z0
         IMultiDiviner Diviner
             => MultiDiviner.Service;
 
+        [Op]
         IntPtr Jit(MethodInfo src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return src.MethodHandle.GetFunctionPointer();
         }
 
+        [Op]
         ApiMember[] JitDirect(IApiHost src)
         {
             var methods = DirectMethods(src);
@@ -148,6 +197,7 @@ namespace Z0
             return buffer;
         }
 
+        [Op]
         ApiMember[] JitGeneric(IApiHost src)
         {
             var generic = @readonly(GenericMethods(src));
@@ -220,6 +270,7 @@ namespace Z0
             return query.ToDictionary();
         }
 
+        [Op]
         Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
             var count = members.Length;
