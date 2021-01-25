@@ -9,36 +9,30 @@ namespace Z0
 
     using static Part;
 
-    using api = ClrLiterals;
-
     /// <summary>
     /// Covers a value that can be interpreted as a compile-time literal constant
     /// </summary>
     public readonly struct LiteralValue<T> : ILiteralValue<T>
         where T : IEquatable<T>
     {
-        public ClrLiteralKind Kind {get;}
-
         public T Value {get;}
 
+        public ClrLiteralKind Kind {get;}
+
         [MethodImpl(Inline)]
-        internal LiteralValue(T value, ClrLiteralKind kind)
+        public LiteralValue(T value, ClrLiteralKind kind)
         {
             Value = value;
             Kind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator LiteralValue<T>(T value)
-            => api.value(value);
-
-        [MethodImpl(Inline)]
         public bool Equals(LiteralValue<T> src)
-            => api.eq(this, src);
+            => eq(this, src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Value?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();
@@ -51,5 +45,13 @@ namespace Z0
 
         public static LiteralValue<T> Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator LiteralValue<T>(T value)
+            => new LiteralValue<T>(value, ClrLiteralKinds.kind<T>());
+
+        [MethodImpl(Inline)]
+        static bool eq(LiteralValue<T> a, LiteralValue<T> b)
+            => a.Value?.Equals(b.Value) ?? false;
     }
 }

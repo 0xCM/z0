@@ -15,7 +15,7 @@ namespace Z0.Asm
         public static T[] binlits<T>(Type declarer, Action<AppMsg> msg)
             where T : unmanaged
         {
-            var literals = ClrLiterals.tagged<T>(base2, declarer).Table;
+            var literals = ClrLiterals.tagged<T>(base2, declarer).View;
             var count = literals.Length;
             var buffer = sys.alloc<T>(count);
             var dst = span(buffer);

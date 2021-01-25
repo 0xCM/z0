@@ -289,7 +289,7 @@ public readonly struct ApiNames
 
     // ~~ Literals
     // ~~ -----------------------------------------------------------------------------------------
-    public const string LiteralFields = literal + dot + fields;
+    public const string ClrLiteralFields = clr + literal + dot + fields;
 
     public const string TypedLiterals = literals + dot + typed;
 

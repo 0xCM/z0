@@ -8,11 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Rules;
 
     partial struct TextRules
     {
         partial struct Format
         {
+            [MethodImpl(Inline)]
+            public static string enclose<S,T>(S content, Fence<T> fence)
+                => adjacent(fence.Left, content, fence.Right);
+
             /// <summary>
             /// Encloses text within (possibly distinct) left and right boundaries
             /// </summary>

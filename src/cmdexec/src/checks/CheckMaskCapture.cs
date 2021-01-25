@@ -29,7 +29,7 @@ namespace Z0
         public void Run()
         {
             var declarer = typeof(BitMasks.Literals);
-            var src = ClrLiterals.tagged<T>(base2, declarer).Table.View;
+            var src = ClrLiterals.tagged<T>(base2, declarer).View;
             var dst = alloc<CaptureCheckResult>(src.Length);
             check(src,dst);
         }

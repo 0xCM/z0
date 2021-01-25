@@ -13,8 +13,8 @@ namespace Z0
 
     using api = ClrLiterals;
 
-    [ApiHost(ApiNames.LiteralFields, true)]
-    public readonly struct LiteralFields
+    [ApiHost(ApiNames.ClrLiteralFields, true)]
+    public readonly struct ClrLiteralFields
     {
         [MethodImpl(Inline), Op]
         public static string @string(FieldInfo f)
@@ -85,11 +85,11 @@ namespace Z0
         public readonly FieldInfo[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator LiteralFields(FieldInfo[] src)
-            => new LiteralFields(src);
+        public static implicit operator ClrLiteralFields(FieldInfo[] src)
+            => new ClrLiteralFields(src);
 
         [MethodImpl(Inline)]
-        public LiteralFields(FieldInfo[] src)
+        public ClrLiteralFields(FieldInfo[] src)
             => Data = src;
 
         public Count Count

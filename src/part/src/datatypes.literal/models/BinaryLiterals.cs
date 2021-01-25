@@ -9,10 +9,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct BinaryLiterals<T> : ITableSpan<BinaryLiterals<T>, BinaryLiteral<T>>
+    public readonly struct BinaryLiterals<T>
         where T : unmanaged
     {
-        readonly TableSpan<BinaryLiteral<T>> Data;
+        readonly Index<BinaryLiteral<T>> Data;
+
+        [MethodImpl(Inline)]
+        public BinaryLiterals(BinaryLiteral<T>[] src)
+            => Data = src;
 
         public BinaryLiteral<T>[] Storage
         {
@@ -20,22 +24,14 @@ namespace Z0
             get => Data;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryLiterals<T>(BinaryLiteral<T>[] src)
-            => new BinaryLiterals<T>(src);
-
-        [MethodImpl(Inline)]
-        public BinaryLiterals(BinaryLiteral<T>[] src)
-            => Data = src;
-
-        public TableSpan<BinaryLiteral<T>> Table
+        public ReadOnlySpan<BinaryLiteral<T>> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         [MethodImpl(Inline)]
-        public BinaryLiterals<T> Refresh(BinaryLiteral<T>[] src)
+        public static implicit operator BinaryLiterals<T>(BinaryLiteral<T>[] src)
             => new BinaryLiterals<T>(src);
     }
 }

@@ -48,19 +48,5 @@ namespace Z0
 
             return format(data, src.KindId);
         }
-
-        [MethodImpl(Inline), Op]
-        public static string format(BinaryLiteral src)
-            => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(BinaryLiteral<T> src)
-            where T : unmanaged
-                => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(LiteralValue<T> src)
-            where T : IEquatable<T>
-                => src.Value?.ToString() ?? EmptyString;
     }
 }

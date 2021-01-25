@@ -20,6 +20,8 @@ namespace Z0.Lang
             get => Rules.fence(Chars.LBracket, Chars.RBracket);
         }
 
+        public const char SectionDelimiter = Chars.Colon;
+
         /// <summary>
         /// Produces a <see cref='Section{T}'/> from text of the form '[max:min]'
         /// </summary>
@@ -33,13 +35,13 @@ namespace Z0.Lang
             dst = default;
             if(Parse.unfence(src, SectionFence, out var fenced))
             {
-                var parts = Parse.split(fenced, Chars.Colon);
+                var parts = Parse.split(fenced, SectionDelimiter);
                 if(parts.Count == 2)
                 {
                     if(NumericParser.parse(parts[0], out T max)
                         && NumericParser.parse(parts[1], out T min))
                     {
-                        dst = new Section<T>(min,max);
+                        dst = section<T>(min,max);
                         return true;
                     }
                 }

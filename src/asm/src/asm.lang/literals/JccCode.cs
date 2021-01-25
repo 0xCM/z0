@@ -84,11 +84,11 @@ namespace Z0.Asm
         /// <summary>
         /// Less than or equal to, Not greater than
         /// </summary>
-        LE = b1110,
+        NG = b1110,
 
         /// <summary>
         /// Not less than or equal to, Greater than
         /// </summary>
-        NLE = b1111,
+        G = b1111,
     }
 }

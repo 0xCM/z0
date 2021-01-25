@@ -21,7 +21,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var tValues = LiteralFields.values<T>(src);
+            var tValues = ClrLiteralFields.values<T>(src);
             var count = tValues.Length;
             var eValueBuffer = memory.alloc<EnumValue<E,T>>(count);
             var dst = span(eValueBuffer);

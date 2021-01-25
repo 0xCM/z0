@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ClrLiterals;
-
     public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>
         where T : unmanaged
     {
@@ -31,13 +29,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => api.empty(this);
+            get => text.empty(Name) && (text.empty(Text) || Data.Equals(default));
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => api.nonempty(this);
+            get => text.nonempty(Name) && text.nonempty(Text) && !Data.Equals(default);
         }
 
         public BinaryLiteral<T> Zero
@@ -46,19 +44,22 @@ namespace Z0
             get => Empty;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => $"{Name}({Data}:{Numeric.kind<T>().Keyword()}) := " + text.enquote(Text);
 
         public override string ToString()
             => Format();
 
-
         [MethodImpl(Inline)]
         public bool Equals(BinaryLiteral<T> src)
-            => api.eq(this, src);
-
+            => eq(this, src);
         public static BinaryLiteral<T> Empty
             => new BinaryLiteral<T>(EmptyString, default, EmptyString);
+
+        [MethodImpl(Inline)]
+        static bool eq(BinaryLiteral<T> x, BinaryLiteral<T> y)
+            => string.Equals(x.Text, y.Text)
+            && object.Equals(x.Data, y.Data)
+            && string.Equals(x.Name, y.Name);
     }
 }
