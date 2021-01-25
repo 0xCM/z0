@@ -17,6 +17,10 @@ namespace Z0
     public readonly struct ApiCatalogs
     {
         [Op]
+        public static IApiClassCatalog classes(IWfShell wf)
+            => ApiClassCatalog.create(wf);
+
+        [Op]
         public static ApiHostCatalog host(IWfShell wf, IApiHost src)
         {
             var jitter = wf.ApiServices.ApiJit();

@@ -372,12 +372,26 @@ namespace Z0
                 Wf.Row(info.ToString());
             }
 
+        }
 
+        void ShowApiClasses()
+        {
+            var service = ApiCatalogs.classes(Wf);
+            var classifiers = service.Classifiers();
+            var formatter = Records.formatter<EnumLiteral>();
+            foreach(var c in classifiers)
+            {
+                foreach(var l in c.Literals)
+                {
+                    Wf.Row(formatter.Format(l));
+                }
+            }
         }
         public void Run()
         {
+            ShowApiClasses();
 
-            Wf.CmdBuilder().JitApiCmd().Run(Wf);
+            //Wf.CmdBuilder().JitApiCmd().Run(Wf);
 
         }
     }

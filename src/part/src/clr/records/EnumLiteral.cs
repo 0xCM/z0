@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct EnumLiteralRow : IComparableRecord<EnumLiteralRow>
+    public struct EnumLiteral : IComparableRecord<EnumLiteral>
     {
         public const string TableId = "enums.literals";
 
@@ -25,10 +25,10 @@ namespace Z0
 
         public MemoryAddress TypeAddress;
 
-        static string Identifier(in EnumLiteralRow src)
+        static string Identifier(in EnumLiteral src)
             => text.format(RP.SlotDot3, src.Component, src.Type, src.LiteraIndex);
 
-        public int CompareTo(EnumLiteralRow src)
+        public int CompareTo(EnumLiteral src)
             => Identifier(this).CompareTo(Identifier(src));
     }
 }

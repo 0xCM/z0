@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class EmitEnumCatalog : CmdReactor<EmitEnumCatalogCmd>
+    using System;
+    using System.Reflection;
+
+    partial class XApi
     {
-        protected override CmdResult Run(EmitEnumCatalogCmd cmd)
-        {
-            ClrEnumCatalogs.emit(Wf, cmd.Target);
-            return Cmd.ok(cmd);
-        }
+        [Op]
+        public static Index<EnumLiteral> ApiClasses(this Assembly src)
+            => Clr.enums(src.Enums().Tagged<ApiClassAttribute>());
     }
 }

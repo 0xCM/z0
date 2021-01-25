@@ -37,6 +37,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<CreditTypes.ContentField> literals(ClrEnumDetails<CreditTypes.ContentField> src)
             => literals<CreditTypes.ContentField>(src);
-
     }
 }
