@@ -9,8 +9,10 @@ namespace Z0.Lang
 
     using static Part;
 
-    public interface ITreeNode
+    partial struct lang
     {
-
+        [MethodImpl(Inline), Op]
+        public static Assignment<A,B> assign<A,B>(A a, B b)
+            => new Assignment<A,B>(a,b);
     }
 }

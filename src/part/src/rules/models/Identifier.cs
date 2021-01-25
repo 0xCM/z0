@@ -25,6 +25,12 @@ namespace Z0.Lang
         public Identifier(Name src)
             => Content = src;
 
+        public Name Name
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -145,9 +151,15 @@ namespace Z0.Lang
         public Identifier(T src)
             => Value = src;
 
+        public Name Name
+        {
+            [MethodImpl(Inline)]
+            get => Value?.ToString() ?? EmptyString;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
-            => Value?.ToString() ?? EmptyString;
+            => Name.Format();
 
         public override string ToString()
             => Format();

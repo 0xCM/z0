@@ -2,21 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct Rules
+    partial struct lang
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Alt<T> alt<T>(T a, T b)
-            => new Alt<T>(a,b);
-
         [MethodImpl(Inline)]
-        public static Alt<A,B> alt<A,B>(A a, B b)
-            => new Alt<A,B>(a,b);
+        public static Identifier<T> identifier<T>(T src)
+            where T : unmanaged, Enum, IComparable<T>
+                => new Identifier<T>(src);
+
+        [MethodImpl(Inline), Op]
+        public static Identifier<Name> identifier(string src)
+            => new Identifier<Name>(src);
     }
 }

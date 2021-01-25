@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     public interface IKeyword
     {
         Name Name {get;}

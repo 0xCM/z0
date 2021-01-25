@@ -9,22 +9,29 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Label<T>
+    public readonly struct ConstExpr<S,T> : IConstExpr<ConstExpr<S,T>,T>
     {
+        public Identifier Name {get;}
+
+        public S Source {get;}
+
         public T Value {get;}
 
+        public ClrLiteralKind Kind {get;}
+
         [MethodImpl(Inline)]
-        public Label(T src)
-            => Value = src;
+        public ConstExpr(string name, S src, T value, ClrLiteralKind kind)
+        {
+            Name = name;
+            Source = src;
+            Value = value;
+            Kind = kind;
+        }
 
         public string Format()
             => Value?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Label<T>(T src)
-            => new Label<T>(src);
-    }
+   }
 }

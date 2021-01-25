@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public struct Branch<T>
+    public struct Fork<T>
     {
         public Predicate<T> Test;
 
@@ -18,7 +18,7 @@ namespace Z0.Lang
         public Action<T> Unsatisfied;
 
         [MethodImpl(Inline)]
-        public Branch(Predicate<T> test, Action<T> sat, Action<T> unsat)
+        public Fork(Predicate<T> test, Action<T> sat, Action<T> unsat)
         {
             Test = test;
             Satisfied = sat;

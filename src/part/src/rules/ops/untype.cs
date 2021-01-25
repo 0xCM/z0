@@ -26,6 +26,15 @@ namespace Z0
                 => src;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Alt untype<T>(Alt<T> src)
+            where T : IEquatable<T>
+                => src;
+
+        [MethodImpl(Inline)]
+        public static Alt untype<A,B>(Alt<A,B> src)
+            => src;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Marker untype<T>(Marker<T> src)
             => new Marker(src.Symbols.Map(s => (dynamic)s));
     }

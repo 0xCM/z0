@@ -9,8 +9,10 @@ namespace Z0.Lang
 
     using static Part;
 
-    public interface ITreeNode
+    partial struct lang
     {
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Label<T> label<T>(Identifier name, T value)
+            => new Label<T>(name, value);
     }
 }

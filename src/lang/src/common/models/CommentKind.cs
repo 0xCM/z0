@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     /// <summary>
     /// Defines comment classifiers
     /// </summary>

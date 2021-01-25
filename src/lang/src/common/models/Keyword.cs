@@ -38,4 +38,21 @@ namespace Z0.Lang
         public static implicit operator Keyword(string name)
             => new Keyword(name);
     }
+
+    /// <summary>
+    /// Defines a parametric keyword
+    /// </summary>
+    public readonly struct Keyword<A>
+    {
+        public MemoryAddress Name {get;}
+
+        public A Arg {get;}
+
+        [MethodImpl(Inline)]
+        public Keyword(MemoryAddress src, A arg)
+        {
+            Name = src;
+            Arg = arg;
+        }
+    }
 }

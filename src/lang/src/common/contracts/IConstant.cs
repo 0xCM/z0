@@ -17,14 +17,4 @@ namespace Z0.Lang
         ClrLiteralKind Kind
             => ClrLiteralKinds.kind<T>();
     }
-
-    /// <summary>
-    /// Characterizes a reified constant value
-    /// </summary>
-    /// <typeparam name="T">The constant type</typeparam>
-    public interface IConstant<H,T> : IConstant<T>, ISyntax<H>
-        where H : IConstant<H,T>, new()
-    {
-
-    }
 }

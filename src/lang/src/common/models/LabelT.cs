@@ -9,20 +9,23 @@ namespace Z0.Lang
 
     using static Part;
 
-    /// <summary>
-    /// Defines a parametric keyword
-    /// </summary>
-    public readonly struct Keyword<A>
+    public readonly struct Label<T>
     {
-        public MemoryAddress Name {get;}
+        public Identifier Name {get;}
 
-        public A Arg {get;}
+        public T Value {get;}
 
         [MethodImpl(Inline)]
-        public Keyword(MemoryAddress src, A arg)
+        public Label(Identifier name, T src)
         {
-            Name = src;
-            Arg = arg;
+            Name = name;
+            Value = src;
         }
+
+        public string Format()
+            => Value?.ToString() ?? EmptyString;
+
+        public override string ToString()
+            => Format();
     }
 }

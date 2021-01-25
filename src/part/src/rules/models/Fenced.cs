@@ -27,6 +27,7 @@ namespace Z0
                 Content = content;
             }
         }
+
         /// <summary>
         /// Defines fenced content
         /// </summary>
