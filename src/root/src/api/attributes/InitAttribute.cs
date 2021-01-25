@@ -7,7 +7,7 @@ namespace Z0
     public class InitAttribute : OpKindAttribute
     {
         public InitAttribute()
-        : base(SystemApiClass.Init)
+        : base(ApiSystemClass.Init)
         {}
     }
 

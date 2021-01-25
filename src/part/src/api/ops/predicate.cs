@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static ApiPredicateClasses;
+    using static PredicateClasses;
 
     partial struct Api
     {

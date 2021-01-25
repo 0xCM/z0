@@ -26,25 +26,25 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [Op]
-        public static string format(ComparisonApiClass kind)
+        public static string format(ApiComparisonClass kind)
             => kind.ToString().ToLower();
 
         [Op]
-        public static string format(UnaryArithmeticApiClass kind)
+        public static string format(ApiUnaryArithmeticClass kind)
             => kind switch {
-                UnaryArithmeticApiClass.Inc => "++",
-                UnaryArithmeticApiClass.Dec => "--",
-                UnaryArithmeticApiClass.Negate => "-",
+                ApiUnaryArithmeticClass.Inc => "++",
+                ApiUnaryArithmeticClass.Dec => "--",
+                ApiUnaryArithmeticClass.Negate => "-",
                 _ => kind.ToString()
             };
 
-        public static string format<T>(UnaryArithmeticApiClass kind, T arg)
+        public static string format<T>(ApiUnaryArithmeticClass kind, T arg)
             => $"{kind.Format()}({arg})";
 
-        public static string format<T>(BinaryArithmeticApiClass kind, T arg1, T arg2)
+        public static string format<T>(ApiBinaryArithmeticClass kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
-        public static string format<T>(ComparisonApiClass kind, T arg1, T arg2)
+        public static string format<T>(ApiComparisonClass kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

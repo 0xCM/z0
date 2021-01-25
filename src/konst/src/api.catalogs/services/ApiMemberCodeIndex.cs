@@ -55,13 +55,13 @@ namespace Z0
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
 
-        public IEnumerable<ApiMemberCode> Search(ArityKind arity)
+        public IEnumerable<ApiMemberCode> Search(ArityClass arity)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ArityValue() == (int)arity
                 select code;
 
-        public IEnumerable<ApiMemberCode> Search(ApiOperatorKind @class)
+        public IEnumerable<ApiMemberCode> Search(OperatorArity @class)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ClassifyOperator() == @class
@@ -77,13 +77,13 @@ namespace Z0
             => Values.Where(x => x.Member.Method.IsOperator());
 
         public IEnumerable<ApiMemberCode> UnaryOperators
-            => Search(ApiOperatorKind.UnaryOp);
+            => Search(OperatorArity.UnaryOp);
 
         public IEnumerable<ApiMemberCode> BinaryOperators
-            => Search(ApiOperatorKind.BinaryOp);
+            => Search(OperatorArity.BinaryOp);
 
         public IEnumerable<ApiMemberCode> TernaryOperators
-            => Search(ApiOperatorKind.TernaryOp);
+            => Search(OperatorArity.TernaryOp);
 
         public IEnumerable<ApiMemberCode> NumericOperators(int? arity = null)
             => Values.Where(x => x.Member.Method.IsNumericOperator(arity));

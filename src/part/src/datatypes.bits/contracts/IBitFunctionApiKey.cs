@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitFunctionApiClass;
+    using K = ApiBitFunctionClass;
     using I = IBitFunctionApiKey;
 
     /// <summary>
@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     public interface IBitFunctionApiKey : IApiKey, IApiKind<K>
     {
-        BitFunctionApiClass Kind {get;}
+        ApiBitFunctionClass Kind {get;}
 
         ApiClass IApiKey.Id
             => (ApiClass)Kind;

@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<byte> vperm16x8(Vector128<byte> src, Vector128<byte> spec)
             => Shuffle(src, spec);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<sbyte> vperm16x8(Vector128<sbyte> src, Vector128<byte> spec)
             => Shuffle(src, v8i(spec));
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<short> vperm16x8(Vector128<short> src, Vector128<byte> spec)
             => v16i(Shuffle(v8u(src), spec));
 
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<ushort> vperm16x8(Vector128<ushort> src, Vector128<byte> spec)
             => v16u(Shuffle(v8u(src), spec));
 
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<int> vperm16x8(Vector128<int> src, Vector128<byte> spec)
             => v32i(Shuffle(v8u(src), spec));
 
@@ -66,7 +66,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<uint> vperm16x8(Vector128<uint> src, Vector128<byte> spec)
             => v32u(Shuffle(v8u(src), spec));
 
@@ -75,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<long> vperm16x8(Vector128<long> src, Vector128<byte> spec)
             => v64i(Shuffle(v8u(src), spec));
 
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The content vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.PSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.PSHUFB)]
         public static Vector128<ulong> vperm16x8(Vector128<ulong> src, Vector128<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
 
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<byte> vperm16x8(Vector256<byte> src, Vector256<byte> spec)
             => Shuffle(src, spec);
 
@@ -102,7 +102,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<sbyte> vperm16x8(Vector256<sbyte> src, Vector256<byte> spec)
             => Shuffle(src, v8i(spec));
 
@@ -111,7 +111,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<short> vperm16x8(Vector256<short> src, Vector256<byte> spec)
             => v16i(Shuffle(v8u(src), spec));
 
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<ushort> vperm16x8(Vector256<ushort> src, Vector256<byte> spec)
             => v16u(Shuffle(v8u(src), spec));
 
@@ -129,7 +129,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<int> vperm16x8(Vector256<int> src, Vector256<byte> spec)
             => v32i(Shuffle(v8u(src), spec));
 
@@ -138,7 +138,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<uint> vperm16x8(Vector256<uint> src, Vector256<byte> spec)
             => v32u(Shuffle(v8u(src), spec));
 
@@ -147,7 +147,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<long> vperm16x8(Vector256<long> src, Vector256<byte> spec)
             => v64i(Shuffle(v8u(src), spec));
 
@@ -156,7 +156,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The shuffle spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPSHUFB)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPSHUFB)]
         public static Vector256<ulong> vperm16x8(Vector256<ulong> src, Vector256<byte> spec)
             => v64u(Shuffle(v8u(src), spec));
     }

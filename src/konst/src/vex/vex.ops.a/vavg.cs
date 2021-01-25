@@ -25,7 +25,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Asm(AsmClass.PAVGB)]
+          [MethodImpl(Inline), Asm(ApiAsmClass.PAVGB)]
           public static Vector128<byte> vavg(Vector128<byte> lhs, Vector128<byte> rhs)
                => Average(lhs,rhs);
 
@@ -34,7 +34,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Asm(AsmClass.PAVGW)]
+          [MethodImpl(Inline), Asm(ApiAsmClass.PAVGW)]
           public static Vector128<ushort> vavg(Vector128<ushort> lhs,Vector128<ushort> rhs)
                => Average(lhs,rhs);
 
@@ -43,7 +43,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Asm(AsmClass.VPAVGB)]
+          [MethodImpl(Inline), Asm(ApiAsmClass.VPAVGB)]
           public static Vector256<byte> vavg(Vector256<byte> lhs,Vector256<byte> rhs)
                => Average(lhs,rhs);
 
@@ -52,7 +52,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Asm(AsmClass.VPAVGW)]
+          [MethodImpl(Inline), Asm(ApiAsmClass.VPAVGW)]
           public static Vector256<ushort> vavg(Vector256<ushort> lhs,Vector256<ushort> rhs)
                => Average(lhs,rhs);
      }

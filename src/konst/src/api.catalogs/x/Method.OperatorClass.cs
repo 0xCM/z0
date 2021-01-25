@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using OC = ApiOperatorKind;
+    using OC = OperatorArity;
 
     partial class XKinds
     {
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         [Op]
-        public static ApiOperatorKind ClassifyOperator(this MethodInfo src)
+        public static OperatorArity ClassifyOperator(this MethodInfo src)
         {
             if(IsOperator(src))
             {

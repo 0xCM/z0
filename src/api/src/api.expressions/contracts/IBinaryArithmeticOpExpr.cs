@@ -11,7 +11,7 @@ namespace Z0
 
     }
 
-    public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,BinaryArithmeticApiClass>
+    public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,ApiBinaryArithmeticClass>
         where T : unmanaged
     {
         IExpr<T> LeftArg {get;}

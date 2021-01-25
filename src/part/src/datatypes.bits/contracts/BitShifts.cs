@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using K = BitShiftApiClass;
+    using K = ApiBitShiftClass;
     using I = IBitShiftApiKey;
 
     public readonly partial struct BitShifts

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static UnaryArithmeticApiClass;
-    using static BinaryArithmeticApiClass;
+    using static ApiUnaryArithmeticClass;
+    using static ApiBinaryArithmeticClass;
 
     using TLS = TypedLogicSpec;
 
@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryArithmeticOpExpr<T> unary<T>(UnaryArithmeticApiClass op, IExpr<T> a)
+        public static UnaryArithmeticOpExpr<T> unary<T>(ApiUnaryArithmeticClass op, IExpr<T> a)
             where T : unmanaged
                 => new UnaryArithmeticOpExpr<T>(op,a);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="operand">The literal value</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryArithmeticOpExpr<T> unary<T>(UnaryArithmeticApiClass op, T a)
+        public static UnaryArithmeticOpExpr<T> unary<T>(ApiUnaryArithmeticClass op, T a)
             where T : unmanaged
                 => new UnaryArithmeticOpExpr<T>(op, TLS.literal(a));
 
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticApiClass op, IExpr<T> a, IExpr<T> b)
+        public static BinaryArithmeticOpExpr<T> binary<T>(ApiBinaryArithmeticClass op, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new BinaryArithmeticOpExpr<T>(op, a, b);
 
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticApiClass op, T a, T b)
+        public static BinaryArithmeticOpExpr<T> binary<T>(ApiBinaryArithmeticClass op, T a, T b)
             where T : unmanaged
                 => new BinaryArithmeticOpExpr<T>(op, TLS.literal(a), TLS.literal(b));
 

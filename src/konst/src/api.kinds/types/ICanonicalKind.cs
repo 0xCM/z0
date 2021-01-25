@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using I = ICanonicalKind;
-    using K = CanonicalApiClass;
+    using K = ApiCanonicalClass;
 
     [Free]
     public interface ICanonicalKind : IApiKey, IApiKind<K>

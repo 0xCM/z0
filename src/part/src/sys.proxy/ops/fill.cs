@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.CompilerServices.Unsafe;
 
-    using static OpaqueApiClass;
+    using static ApiOpaqueClass;
 
     partial struct proxy
     {

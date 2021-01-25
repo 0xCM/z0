@@ -12,7 +12,7 @@ namespace Z0
 
         public ApiClass ClassId;
 
-        public AsmClass AsmId;
+        public ApiAsmClass AsmId;
 
         public OperationName Name;
 

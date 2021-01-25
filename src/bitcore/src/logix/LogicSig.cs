@@ -23,7 +23,7 @@ namespace Z0
         public static string sig(TLK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        public static string sig(BitLogicApiClass kind)
+        public static string sig(ApiBitLogicClass kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         public static string sig<T>(ULK kind)
@@ -38,19 +38,19 @@ namespace Z0
             where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());
 
-        public static string sig<T>(BitShiftApiClass kind)
+        public static string sig<T>(ApiBitShiftClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        public static string sig<T>(ComparisonApiClass kind)
+        public static string sig<T>(ApiComparisonClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        public static string sig<T>(UnaryArithmeticApiClass kind)
+        public static string sig<T>(ApiUnaryArithmeticClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        public static string sig<T>(BinaryArithmeticApiClass kind)
+        public static string sig<T>(ApiBinaryArithmeticClass kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
@@ -63,7 +63,7 @@ namespace Z0
         public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BitLogicApiClass kind)
+        public static string format(ApiBitLogicClass kind)
             => kind.Format();
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ComparisonApiClass;
+    using K = ApiComparisonClass;
     using I = IComparisonApiKey;
 
     /// <summary>

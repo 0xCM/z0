@@ -9,7 +9,7 @@ namespace Z0
 
     }
 
-    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, BitShiftApiClass>
+    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, ApiBitShiftClass>
         where T : unmanaged
     {
         /// <summary>

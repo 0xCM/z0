@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticApiClass;
+    using K = ApiArithmeticClass;
     using I = IArithmeticApiKey;
 
     public readonly struct ArithmeticClasses

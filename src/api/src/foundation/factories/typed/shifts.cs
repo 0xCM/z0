@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    using BSK = BitShiftApiClass;
+    using BSK = ApiBitShiftClass;
 
     partial struct TypedLogicSpec
     {

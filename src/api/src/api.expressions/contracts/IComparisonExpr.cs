@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The sort of comparison to be applied
         /// </summary>
-        ComparisonApiClass ComparisonKind {get;}
+        ApiComparisonClass ComparisonKind {get;}
     }
 
     /// <summary>

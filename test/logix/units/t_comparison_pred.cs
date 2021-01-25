@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     using static LogicEngine;
     using static PredicateSpec;
-    using static ComparisonApiClass;
+    using static ApiComparisonClass;
     using static NumericLogixHost;
 
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
@@ -104,9 +104,9 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var vc = var_c<T>();
-            var x = predicate(ComparisonApiClass.Lt,va,vb);
-            var y = predicate(ComparisonApiClass.Lt,vb,vc);
-            var z = predicate(ComparisonApiClass.Lt,vc,va);
+            var x = predicate(ApiComparisonClass.Lt,va,vb);
+            var y = predicate(ApiComparisonClass.Lt,vb,vc);
+            var z = predicate(ApiComparisonClass.Lt,vc,va);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
@@ -128,7 +128,7 @@ namespace Z0.Logix
 
         }
 
-        void predicate_check<T>(ComparisonApiClass kind)
+        void predicate_check<T>(ApiComparisonClass kind)
             where T : unmanaged
         {
             var va = var_a<T>();

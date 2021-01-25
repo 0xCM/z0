@@ -9,7 +9,7 @@ namespace Z0.Logix
     using static Part;
     using static LogicSig;
 
-    using UAR = UnaryArithmeticApiClass;
+    using UAR = ApiUnaryArithmeticClass;
 
     public class ArithExprEval
     {
@@ -78,8 +78,8 @@ namespace Z0.Logix
                 default:
                     switch(expr.ApiClass)
                     {
-                        case BinaryArithmeticApiClass.Add: return add(expr);
-                        case BinaryArithmeticApiClass.Sub: return sub(expr);
+                        case ApiBinaryArithmeticClass.Add: return add(expr);
+                        case ApiBinaryArithmeticClass.Sub: return sub(expr);
                         default: throw new NotSupportedException(sig<T>(expr.ApiClass));
                     }
             }

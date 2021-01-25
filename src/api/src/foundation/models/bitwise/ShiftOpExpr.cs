@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BitShiftApiClass ApiClass {get;}
+        public ApiBitShiftClass ApiClass {get;}
 
         /// <summary>
         /// The operand
@@ -31,7 +31,7 @@ namespace Z0
         public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(BitShiftApiClass op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(ApiBitShiftClass op, IExpr<T> subject, IExpr<byte> offset)
         {
             ApiClass = op;
             Subject = subject;

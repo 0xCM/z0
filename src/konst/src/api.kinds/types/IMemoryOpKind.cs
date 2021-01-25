@@ -7,7 +7,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using K = MemoryApiClass;
+    using K = ApiMemoryClass;
     using I = IMemoryApiKey;
 
     /// <summary>

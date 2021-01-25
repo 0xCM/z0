@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = SystemApiClass;
+    using K = ApiSystemClass;
     using I = ISystemApiKind;
 
     partial class Kinds

@@ -7,9 +7,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitshift operation classifier
     /// </summary>
-    public interface IBitShiftApiKey : IApiKey, IApiKind<BitShiftApiClass>
+    public interface IBitShiftApiKey : IApiKey, IApiKind<ApiBitShiftClass>
     {
-        BitShiftApiClass Kind {get;}
+        ApiBitShiftClass Kind {get;}
 
         ApiClass IApiKey.Id
             => (ApiClass)Kind;
@@ -19,7 +19,7 @@ namespace Z0
     /// Characterizes a reified bitlogic operation classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBitShiftApiKey<F> : IBitShiftApiKey, IApiKind<F,BitShiftApiClass>
+    public interface IBitShiftApiKey<F> : IBitShiftApiKey, IApiKind<F,ApiBitShiftClass>
         where F : unmanaged, IBitShiftApiKey
     {
         ApiClass IApiKey.Id
@@ -34,7 +34,7 @@ namespace Z0
     public interface IBitShiftApiKey<K,T> : IBitShiftApiKey<K>
         where K : unmanaged, IBitShiftApiKey
     {
-        BitShiftApiClass IBitShiftApiKey.Kind
+        ApiBitShiftClass IBitShiftApiKey.Kind
             => default(K).Kind;
 
         /// <summary>

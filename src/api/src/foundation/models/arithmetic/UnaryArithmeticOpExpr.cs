@@ -16,14 +16,14 @@ namespace Z0
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryArithmeticApiClass ApiClass {get;}
+        public ApiUnaryArithmeticClass ApiClass {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
         public IExpr<T> Arg {get;}
 
-        public UnaryArithmeticOpExpr(UnaryArithmeticApiClass op, IExpr<T> operand)
+        public UnaryArithmeticOpExpr(ApiUnaryArithmeticClass op, IExpr<T> operand)
         {
             ApiClass = op;
             Arg = operand;

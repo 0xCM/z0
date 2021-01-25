@@ -9,44 +9,44 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ApiGridKind;
+    using static GridKind;
 
     [ApiHost]
     public static class XGridIdentity
     {
         [MethodImpl(Inline), Op]
-        public static bool IsPrimalGeneric(this ApiGridKind k)
+        public static bool IsPrimalGeneric(this GridKind k)
             => (k & NumericGeneric) != 0;
 
         [MethodImpl(Inline), Op]
-        public static bool IsFixedNatural(this ApiGridKind k)
+        public static bool IsFixedNatural(this GridKind k)
             => (k & FixedNatural) != 0;
 
         [MethodImpl(Inline), Op]
-        public static bool IsSubGrid(this ApiGridKind k)
+        public static bool IsSubGrid(this GridKind k)
             => (k & FixedSubgrid) != 0;
 
         [MethodImpl(Inline), Op]
-        public static CellWidth Width(this ApiGridKind k)
+        public static CellWidth Width(this GridKind k)
             => (CellWidth)((ushort)k);
 
         [MethodImpl(Inline), Op]
-        public static ApiGridClass Category(this ApiGridKind k)
-            => (ApiGridClass)(((uint)k >> 16) << 16);
+        public static GridClass Category(this GridKind k)
+            => (GridClass)(((uint)k >> 16) << 16);
 
         [MethodImpl(Inline), Op]
-        public static bool IsSome(this ApiGridKind k)
-            => k != Z0.ApiGridKind.None;
+        public static bool IsSome(this GridKind k)
+            => k != Z0.GridKind.None;
 
         [Op]
-        public static string Indicator(this ApiGridKind k)
+        public static string Indicator(this GridKind k)
             => k.IsPrimalGeneric() ? GridIndicators.PrimalGeneric
              : k.IsSubGrid() ? GridIndicators.FixedSubgrid
              : k.IsFixedNatural() ? GridIndicators.FixedNatural
-             : (k & Z0.ApiGridKind.Generic) != 0 ? GridIndicators.Generic
-             : (k & Z0.ApiGridKind.GenericUnfixed) != 0 ? GridIndicators.Generic
-             : (k & Z0.ApiGridKind.Natural) != 0 ? GridIndicators.Natural
-             : (k & Z0.ApiGridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural
+             : (k & Z0.GridKind.Generic) != 0 ? GridIndicators.Generic
+             : (k & Z0.GridKind.GenericUnfixed) != 0 ? GridIndicators.Generic
+             : (k & Z0.GridKind.Natural) != 0 ? GridIndicators.Natural
+             : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural
              :  k.ToString();
 
         [Op]
@@ -70,44 +70,44 @@ namespace Z0
             => (src.M != 0 ? 1 : 0) + (src.N != 0 ? 1 : 0)  + (src.T.IsSome() ? 1 : 0);
 
         [Op]
-        public static Option<ApiGridKind> GridKind(this Type src)
+        public static Option<GridKind> GridKind(this Type src)
         {
             var def =  src.GenericDefinition2();
             if(def == typeof(void))
-                return none<ApiGridKind>();
+                return none<GridKind>();
 
             if(def == typeof(BitGrid<>))
-                return Z0.ApiGridKind.NumericGeneric;
+                return Z0.GridKind.NumericGeneric;
             else if(def == typeof(BitGrid<,,>))
-                return Z0.ApiGridKind.NaturalUnfixed;
+                return Z0.GridKind.NaturalUnfixed;
             if(def == typeof(BitGrid16<>))
-                return Z0.ApiGridKind.Numeric16;
+                return Z0.GridKind.Numeric16;
             else if(def == typeof(BitGrid32<>))
-                return Z0.ApiGridKind.Numeric32;
+                return Z0.GridKind.Numeric32;
             else if(def == typeof(BitGrid64<>))
-                return Z0.ApiGridKind.Numeric64;
+                return Z0.GridKind.Numeric64;
             else if(def == typeof(BitGrid16<,,>))
-                return Z0.ApiGridKind.Natural16;
+                return Z0.GridKind.Natural16;
             else if(def == typeof(BitGrid32<,,>))
-                return Z0.ApiGridKind.Natural32;
+                return Z0.GridKind.Natural32;
             else if(def == typeof(BitGrid64<,,>))
-                return Z0.ApiGridKind.Natural64;
+                return Z0.GridKind.Natural64;
             else if(def == typeof(BitGrid128<,,>))
-                return Z0.ApiGridKind.Natural128;
+                return Z0.GridKind.Natural128;
             else if(def == typeof(BitGrid256<,,>))
-                return Z0.ApiGridKind.Natural256;
+                return Z0.GridKind.Natural256;
             else if(def == typeof(SubGrid16<,,>))
-                return Z0.ApiGridKind.Subgrid16;
+                return Z0.GridKind.Subgrid16;
             else if(def == typeof(SubGrid32<,,>))
-                return Z0.ApiGridKind.Subgrid32;
+                return Z0.GridKind.Subgrid32;
             else if(def == typeof(SubGrid64<,,>))
-                return Z0.ApiGridKind.Subgrid64;
+                return Z0.GridKind.Subgrid64;
             else if(def == typeof(SubGrid128<,,>))
-                return Z0.ApiGridKind.Subgrid128;
+                return Z0.GridKind.Subgrid128;
             else if(def == typeof(SubGrid256<,,>))
-                return Z0.ApiGridKind.Subgrid256;
+                return Z0.GridKind.Subgrid256;
             else
-                return none<ApiGridKind>();
+                return none<GridKind>();
         }
 
         [MethodImpl(Inline), Op]

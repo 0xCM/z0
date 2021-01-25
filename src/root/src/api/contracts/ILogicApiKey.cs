@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = LogicApiClass;
+    using K = ApiLogicClass;
     using I = ILogicApiKey;
 
     /// Characterizes a bitfunction classifier

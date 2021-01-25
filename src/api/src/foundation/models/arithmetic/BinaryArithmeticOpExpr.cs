@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryArithmeticApiClass ApiClass {get;}
+        public ApiBinaryArithmeticClass ApiClass {get;}
 
         /// <summary>
         /// The left operand
@@ -31,7 +31,7 @@ namespace Z0
         public IExpr<T> RightArg {get;}
 
         [MethodImpl(Inline)]
-        public BinaryArithmeticOpExpr(BinaryArithmeticApiClass op, IExpr<T> lhs, IExpr<T> rhs)
+        public BinaryArithmeticOpExpr(ApiBinaryArithmeticClass op, IExpr<T> lhs, IExpr<T> rhs)
         {
             ApiClass = op;
             LeftArg= lhs;

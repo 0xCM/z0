@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using O = OpaqueApiClass;
+    using O = ApiOpaqueClass;
 
     partial struct sys
     {

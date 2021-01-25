@@ -164,7 +164,6 @@ public enum ApiClass : ushort
 
     Gtz,
 
-
     Ltz,
 
     Eqz,
@@ -174,7 +173,6 @@ public enum ApiClass : ushort
     EqB,
 
     NeqB,
-
 
     LtB,
 

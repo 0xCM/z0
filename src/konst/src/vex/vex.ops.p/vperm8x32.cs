@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<byte> vperm8x32(Vector256<byte> src, Vector256<uint> spec)
             => v8u(PermuteVar8x32(v32u(src), spec));
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<sbyte> vperm8x32(Vector256<sbyte> src, Vector256<uint> spec)
             => v8i(PermuteVar8x32(v32u(src), spec));
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<short> vperm8x32(Vector256<short> src, Vector256<uint> spec)
             => v16i(PermuteVar8x32(v32u(src), spec));
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<ushort> vperm8x32(Vector256<ushort> src, Vector256<uint> spec)
             => v16u(PermuteVar8x32(v32u(src), spec));
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<uint> vperm8x32(Vector256<uint> src, Vector256<uint> spec)
             => PermuteVar8x32(src, spec);
 
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<int> vperm8x32(Vector256<int> src, Vector256<uint> spec)
             => PermuteVar8x32(src, v32i(spec));
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<long> vperm8x32(Vector256<long> src, Vector256<uint> spec)
             => v64i(PermuteVar8x32(v32u(src), spec));
 
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMD)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMD)]
         public static Vector256<ulong> vperm8x32(Vector256<ulong> src, Vector256<uint> spec)
             => v64u(PermuteVar8x32(v32u(src), spec));
 
@@ -98,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The perm spec</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMPS)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMPS)]
         public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<uint> spec)
             => PermuteVar8x32(src, spec.AsInt32());
 
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The control vector</param>
-        [MethodImpl(Inline), Asm(AsmClass.VPERMPS)]
+        [MethodImpl(Inline), Asm(ApiAsmClass.VPERMPS)]
         public static Vector256<float> vperm8x32(Vector256<float> src, Vector256<int> spec)
             => PermuteVar8x32(src, spec);
     }

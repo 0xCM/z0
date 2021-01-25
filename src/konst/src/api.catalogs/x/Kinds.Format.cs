@@ -16,7 +16,7 @@ namespace Z0
             => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.ReadOnlySpan) : EmptyString;
 
         [MethodImpl(Inline), Op]
-        public static string Format(this ComparisonApiClass kind)
+        public static string Format(this ApiComparisonClass kind)
             => kind.ToString().ToLower();
 
         [Op]
@@ -24,38 +24,38 @@ namespace Z0
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [Op]
-        public static string Format(this ArithmeticApiClass key)
+        public static string Format(this ApiArithmeticClass key)
             => key switch {
-                ArithmeticApiClass.Inc => "++",
-                ArithmeticApiClass.Dec => "--",
-                ArithmeticApiClass.Negate => "-",
+                ApiArithmeticClass.Inc => "++",
+                ApiArithmeticClass.Dec => "--",
+                ApiArithmeticClass.Negate => "-",
                 _ => key.ToString()
             };
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this ArithmeticApiClass key, T a, T b)
+        public static string Format<T>(this ApiArithmeticClass key, T a, T b)
             => $"{key.Format()}({a}, {b})";
 
         [Op]
-        public static string Format(this BitShiftApiClass kind)
+        public static string Format(this ApiBitShiftClass kind)
             => kind switch {
-                BitShiftApiClass.Sll => "<<",
-                BitShiftApiClass.Srl => ">>",
-                BitShiftApiClass.Rotl => "<<>",
-                BitShiftApiClass.Rotr => ">><",
+                ApiBitShiftClass.Sll => "<<",
+                ApiBitShiftClass.Srl => ">>",
+                ApiBitShiftClass.Rotl => "<<>",
+                ApiBitShiftClass.Rotr => ">><",
                 _ => kind.ToString()
             };
 
         [Op]
-        public static string Format<S,T>(this BitShiftApiClass key, S a, T b)
+        public static string Format<S,T>(this ApiBitShiftClass key, S a, T b)
             => $"{a} {key.Format()} {b}";
 
         [Op]
-        public static string Format(this BitLogicApiClass key)
+        public static string Format(this ApiBitLogicClass key)
             => key.ToString().ToLower();
 
         [Op, Closures(Closure)]
-        public static string Format<T>(this BitLogicApiClass key, T a, T b)
+        public static string Format<T>(this ApiBitLogicClass key, T a, T b)
             => string.Format("{0}({1}, {2})", key.Format(), a, b);
     }
 }

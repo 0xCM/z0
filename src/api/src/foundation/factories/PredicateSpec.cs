@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ComparisonApiClass;
+    using static ApiComparisonClass;
     using static TypedLogicSpec;
 
     [ApiHost]
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ComparisonPredExpr<T> predicate<T>(ComparisonApiClass kind, IExpr<T> a, IExpr<T> b)
+        public static ComparisonPredExpr<T> predicate<T>(ApiComparisonClass kind, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind,a,b);
 
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ComparisonPredExpr<T> predicate<T>(ComparisonApiClass kind, T a, T b)
+        public static ComparisonPredExpr<T> predicate<T>(ApiComparisonClass kind, T a, T b)
             where T : unmanaged
                 => new ComparisonPredExpr<T>(kind, literal(a), literal(b));
 

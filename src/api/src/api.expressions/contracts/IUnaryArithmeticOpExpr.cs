@@ -12,7 +12,7 @@ namespace Z0
     }
 
 
-    public interface IUnaryArithmeticOpExpr<T> :  IUnaryArithmeticOpExpr, IArithmeticOpExpr<T, UnaryArithmeticApiClass>
+    public interface IUnaryArithmeticOpExpr<T> :  IUnaryArithmeticOpExpr, IArithmeticOpExpr<T, ApiUnaryArithmeticClass>
         where T : unmanaged
     {
 

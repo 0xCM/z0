@@ -11,9 +11,9 @@ namespace Z0
 
     using static Part;
 
-    using AC = ArityKind;
-    using OC = ApiOperatorKind;
-    using PC = ApiPredicateKind;
+    using AC = ArityClass;
+    using OC = OperatorArity;
+    using PC = PredicateClass;
 
     [ApiHost(ApiNames.ApiIdentityReflector, true)]
     public readonly struct IdentityReflector
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithArityClass(MethodInfo[] src, ArityKind @class)
+        public static MethodInfo[] WithArityClass(MethodInfo[] src, ArityClass @class)
             => from m in src where ArityClass(m) == @class select m;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithPredicateClass(MethodInfo[] src, ApiPredicateKind @class)
+        public static MethodInfo[] WithPredicateClass(MethodInfo[] src, PredicateClass @class)
             => from m in src where ClassifyPredicate(m) == @class select m;
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithOperatorClass(MethodInfo[] src, ApiOperatorKind @class)
+        public static MethodInfo[] WithOperatorClass(MethodInfo[] src, OperatorArity @class)
             => from m in src where m.ClassifyOperator() == @class select m;
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static ApiPredicateKind ClassifyPredicate(MethodInfo m)
+        public static PredicateClass ClassifyPredicate(MethodInfo m)
         {
             if(IsPredicate(m))
             {
@@ -142,7 +142,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static ArityKind ArityClass(MethodInfo m)
+        public static ArityClass ArityClass(MethodInfo m)
             => m.ArityValue() switch{
                 0 => AC.Nullary,
                 1 => AC.Unary,
@@ -152,7 +152,7 @@ namespace Z0
             };
 
         [Op]
-        public static int ArityValue(ApiOperatorKind src)
+        public static int ArityValue(OperatorArity src)
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,

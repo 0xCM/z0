@@ -106,7 +106,7 @@ namespace Z0
             var apiclass = api.Method.ClassifyOperator();
             switch(apiclass)
             {
-                case ApiOperatorKind.BinaryOp:
+                case OperatorArity.BinaryOp:
                 switch(nk)
                 {
                     case NumericKind.U8:

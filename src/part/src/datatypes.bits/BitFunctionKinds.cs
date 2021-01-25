@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using K = BitFunctionApiClass;
+    using K = ApiBitFunctionClass;
     using I = IBitFunctionApiKey;
 
     public readonly struct BitFunctionKinds

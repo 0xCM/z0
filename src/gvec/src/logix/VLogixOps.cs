@@ -13,9 +13,9 @@ namespace Z0
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
-    using BAR = BinaryArithmeticApiClass;
-    using BCK = ComparisonApiClass;
-    using BSK = BitShiftApiClass;
+    using BAR = ApiBinaryArithmeticClass;
+    using BCK = ApiComparisonClass;
+    using BSK = ApiBitShiftClass;
 
     [ApiHost]
     public class VLogixOps

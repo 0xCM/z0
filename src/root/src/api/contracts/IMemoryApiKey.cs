@@ -5,7 +5,7 @@
 namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-    using K = MemoryApiClass;
+    using K = ApiMemoryClass;
 
     /// <summary>
     /// Characterizes a system operation classifier

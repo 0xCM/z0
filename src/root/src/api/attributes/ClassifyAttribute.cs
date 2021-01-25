@@ -7,6 +7,6 @@ namespace Z0
     public class ClassifyAttribute : OpKindAttribute
     {
         public ClassifyAttribute()
-        : base(SystemApiClass.Kind) {}
+        : base(ApiSystemClass.Kind) {}
     }
 }

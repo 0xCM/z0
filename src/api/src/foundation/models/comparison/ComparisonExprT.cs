@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The operator kind
         /// </summary>
-        public ComparisonApiClass ComparisonKind {get;}
+        public ApiComparisonClass ComparisonKind {get;}
 
         /// <summary>
         /// The left expression
@@ -36,7 +36,7 @@ namespace Z0
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonExpr(ComparisonApiClass kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        public ComparisonExpr(ApiComparisonClass kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
         {
             ComparisonKind = kind;
             LeftArg = lhs;

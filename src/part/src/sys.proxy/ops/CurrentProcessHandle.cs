@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Diagnostics;
 
-    using static OpaqueApiClass;
+    using static ApiOpaqueClass;
 
     partial struct proxy
     {

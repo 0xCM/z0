@@ -13,14 +13,14 @@ public class OpAttribute : ApiPartAttribute
 
     public ApiClass ClassId {get;}
 
-    public AsmClass AsmId {get;}
+    public ApiAsmClass AsmId {get;}
 
     public OpAttribute()
     {
         GroupName = "";
     }
 
-    public OpAttribute(ApiClass id, AsmClass asm = 0)
+    public OpAttribute(ApiClass id, ApiAsmClass asm = 0)
         : base((ulong)id)
     {
         ClassId = id;
@@ -28,7 +28,7 @@ public class OpAttribute : ApiPartAttribute
 
     }
 
-    public OpAttribute(string group, AsmClass asm = 0)
+    public OpAttribute(string group, ApiAsmClass asm = 0)
     {
         GroupName = group;
         AsmId = asm;

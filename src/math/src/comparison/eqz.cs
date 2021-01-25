@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Eqz]
         public static uint eqz(uint a, uint b)
-            => mul(eqb(a,b),Max32u);
+            => mul(eqb(a,b), Max32u);
 
         /// <summary>
         /// Defines the operator eqz(a,b) := a == b ? Min : Zero
