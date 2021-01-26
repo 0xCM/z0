@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    partial struct asm
+    partial struct AsmEtl
     {
         [Op]
         public static Index<AsmEncodingSummary> summarize(AsmEncodings encodings)

@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Part;
 
@@ -31,9 +30,9 @@ namespace Z0.Asm
         public ParseResult<string, IceMnemonic> Parse(string src)
         {
             if(Index.TryGetValue(src.Trim().ToLower(), out var mne))
-                return ParseResult.win<string,IceMnemonic>(src,mne);
+                return root.parsed<string,IceMnemonic>(src,mne);
             else
-                return ParseResult.fail<string,IceMnemonic>(src);
+                return root.unparsed<string,IceMnemonic>(src);
         }
     }
 }

@@ -38,16 +38,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmDataEmitter(IWfShell wf, IAsmContext asm, in ApiCodeBlocks blocks, Index<ApiPartRoutines> decoded)
-            : this()
-        {
-            Wf = wf;
-            Asm = asm;
-            CodeBlocks = blocks;
-            Decoded = decoded;
-        }
-
-        [MethodImpl(Inline)]
         public AsmDataEmitter(IWfShell wf, IAsmContext asm)
             : this()
         {
@@ -69,6 +59,9 @@ namespace Z0
             var count = addresses.Length;
             for(var i=0u; i<count; i++)
                 CreateRecords(CodeBlocks[skip(addresses, i)]);
+
+            Wf.Ran(flow);
+
             return Rowsets();
         }
 
@@ -76,17 +69,16 @@ namespace Z0
         {
             try
             {
-                var result = Emit();
+                var rowsets = Emit();
                 var records = 0u;
+                var sets = rowsets.View;
+                var count = rowsets.Count;
 
-                Wf.Processed(Seq.delimit(nameof(AsmRow), CodeBlocks.Hosts.Count, result.Count));
-
-                var sets = result.View;
-                var count = result.Count;
-                Wf.Status($"Emitting {count} instruction tables");
+                var flow = Wf.Running(Msg.EmittingInstructionRecords.Format(count));
                 for(var i=0; i<count; i++)
                     records += AsmEtl.emit(Wf, skip(sets,i));
-                Wf.Status($"Emitted a total of {records} records for {count} instruction tables");
+
+                Wf.Ran(flow, Msg.EmittedInstructionRecords.Format(records, count));
 
             }
             catch(Exception e)
@@ -120,11 +112,12 @@ namespace Z0
             var dst = Wf.Db().Table(AsmCallRow.TableId, src.Part);
             Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
-            var records = @readonly(AsmEtl.calls(src.Instructions));
+            var records = AsmEtl.calls(src.Instructions).View;
             var count = records.Length;
-            writer.WriteLine(AsmCallRow.header());
+            var formatter = Records.formatter<AsmCallRow>();
+            writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(format(skip(records,i)));
+                writer.WriteLine(formatter.Format(skip(records,i)));
             Wf.EmittedTable<AsmCallRow>(count, dst);
         }
 
@@ -213,7 +206,13 @@ namespace Z0
             get => Offset[0]++;
         }
 
-        static string format(in AsmCallRow src)
-            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+    }
+
+    partial struct Msg
+    {
+        public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";
+
+        public static RenderPattern<Count,Count> EmittedInstructionRecords => "Emitted a total of {0} records for {1} instruction tables";
+
     }
 }

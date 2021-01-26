@@ -28,11 +28,15 @@ namespace Z0.Asm
         public static string format(RexPrefixBits src)
             => $"{RF.Code}:{src.Code} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
 
+        [MethodImpl(Inline), Op]
+        public static bool test(byte src)
+            => (uint4)(src >> 4) == b0100;
+
         byte Data;
 
         [MethodImpl(Inline)]
         public static RexPrefixBits define(byte src)
-            => new RexPrefixBits(src);
+            => test(src) ? define(src) : default;
 
         public static ref RexPrefixBits BitCopy(in RexPrefixBits src, ref RexPrefixBits dst)
         {

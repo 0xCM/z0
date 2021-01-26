@@ -19,10 +19,6 @@ namespace Z0.Asm
         public Name Id => "asm";
 
         [MethodImpl(Inline), Op]
-        public static AsmStatement statement(string src)
-            => new AsmStatement(src.Trim());
-
-        [MethodImpl(Inline), Op]
         public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
             => new AsmDisplacement(value, (AsmDisplacementSize)size);
 
@@ -35,16 +31,6 @@ namespace Z0.Asm
         public static AsmOp<T> operand<T>(T src)
             where T : unmanaged, IAsmOperand<T>
                 => new AsmOp<T>(src.Position, src);
-
-        /// <summary>
-        /// Creates a memory operand
-        /// </summary>
-        /// <param name="src">The defining source value</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemOp<T> mem<T>(byte pos, T src)
-            where T : unmanaged, IMemOp
-                => new MemOp<T>(pos, src);
 
         [MethodImpl(Inline), Op]
         public static AsmTokenLookup lookup(in AsmTokenIndex index)

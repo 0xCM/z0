@@ -157,7 +157,7 @@ namespace Z0.Asm
         [Op]
         string Format(MemoryAddress @base, IceInstruction src, byte i)
         {
-            var kind = asm.opkind(src, i);
+            var kind = IceExtractors.opkind(src, i);
             var desc = EmptyString;
 
             if(AsmTest.isRegister(kind))
@@ -208,10 +208,10 @@ namespace Z0.Asm
             Buffer.Add(header);
 
             var opcount = src.Instruction.OpCount;
-            var summaries = z.list<string>();
+            var summaries = root.list<string>();
             for(byte i =0; i<opcount; i++)
             {
-                var kind = asm.opkind(fx, i);
+                var kind = IceExtractors.opkind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(SubColPad);
                 var kindLabel = Render(kind).PadRight(OpKindPad);
                 var col03 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
@@ -366,7 +366,7 @@ namespace Z0.Asm
 
         [Op]
         static string format(IceMemorySize src)
-            => asm.identify(src).Format();
+            => IceExtractors.identify(src).Format();
 
         [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
@@ -379,7 +379,7 @@ namespace Z0.Asm
         [Op]
         public static IceMemoryInfo meminfo(IceInstruction src, byte index)
         {
-            var k = asm.opkind(src, (byte)index);
+            var k = IceExtractors.opkind(src, (byte)index);
 
             if(AsmTest.isMem(k))
             {

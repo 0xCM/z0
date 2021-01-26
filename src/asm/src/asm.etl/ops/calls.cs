@@ -26,7 +26,7 @@ namespace Z0.Asm
                 select a;
 
         [Op]
-        public static AsmCallRow[] calls(ApiInstructionBlock src)
+        public static Index<AsmCallRow> calls(ApiInstructionBlock src)
         {
             var calls = filter(src, IceMnemonic.Call).View;
             var count = calls.Length;

@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmLang
+    partial struct asm
     {
         /// <summary>
         /// Creates an immediate operand
         /// </summary>
         /// <param name="src">The defining source value</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ImmOp<T> imm<T>(byte pos, T src)
             where T : unmanaged, IImmediate<T>
                 => new ImmOp<T>(pos, src);

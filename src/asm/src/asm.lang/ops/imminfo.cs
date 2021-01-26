@@ -40,6 +40,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmImmInfo imminfo(ulong value, bool direct)
             => new AsmImmInfo(W.W64, value, direct);
-
     }
 }

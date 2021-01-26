@@ -9,8 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmLang
+    partial struct asm
     {
+        [MethodImpl(Inline), Op]
+        public static AsmStatement statement(string src)
+            => new AsmStatement(src.Trim());
 
         [MethodImpl(Inline)]
         public static AsmStatement<A> statement<A>(AsmMnemonic mnemonic, A a)

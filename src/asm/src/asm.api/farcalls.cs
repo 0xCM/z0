@@ -11,6 +11,14 @@ namespace Z0.Asm
 
     partial struct asm
     {
+        [MethodImpl(Inline), Op]
+        public static AsmCallClient client(MemoryAddress @base)
+            => new AsmCallClient(@base);
+
+        [MethodImpl(Inline), Op]
+        public static AsmCallClient client(string id, MemoryAddress @base)
+            => new AsmCallClient(id, @base);
+
         /// <summary>
         /// Summarizes a collection of far-call datapoints
         /// </summary>

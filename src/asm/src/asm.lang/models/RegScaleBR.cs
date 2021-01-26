@@ -22,6 +22,7 @@ namespace Z0.Asm
 
         public R Operand {get;}
 
+        [MethodImpl(Inline)]
         public RegScale(B @base, MemoryScaleFactor factor, R op)
         {
             Base = @base;

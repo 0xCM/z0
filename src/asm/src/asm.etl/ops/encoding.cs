@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct asm
+    partial struct AsmEtl
     {
         [MethodImpl(Inline), Op]
         public static AsmEncoding encoding(AsmSpecifier specifier, AsmStatement statement, BinaryCode encoded)

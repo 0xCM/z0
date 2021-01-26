@@ -10,10 +10,36 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static AsmDocParts;
 
     [ApiHost]
     public readonly struct AsmRender
     {
+        /// <summary>
+        /// Formats the function header
+        /// </summary>
+        /// <param name="src">The source function</param>
+        [Op]
+        public static ReadOnlySpan<string> header(AsmRoutine src)
+        {
+            var dst = span<string>(8);
+            const string Separator = "; " + RP.PageBreak160;
+            var count = lines(new BlockHeader(Separator, src.Code.Uri, src.DisplaySig, src.Code, src.TermCode), dst);
+            return slice(dst, 0, count);
+        }
+
+        [Op]
+        public static byte lines(in BlockHeader src, Span<string> dst)
+        {
+            var i = z8;
+            seek(dst, i++) = src.Separator;
+            seek(dst, i++) = asm.comment($"{src.DisplaySig}::{src.Uri}");
+            seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
+            seek(dst, i++) = asm.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
+            seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
+            return i;
+        }
+
         /// <summary>
         /// Formats the instructions in a function
         /// </summary>
@@ -113,7 +139,7 @@ namespace Z0.Asm
         public static void format(in AsmRoutine src, in AsmFormatConfig config, StringBuilder dst)
         {
             if(config.EmitFunctionHeader)
-                foreach(var line in asm.header(src))
+                foreach(var line in header(src))
                     dst.AppendLine(line);
 
             dst.AppendLine(lines(src, config).Concat(Eol));
@@ -124,7 +150,7 @@ namespace Z0.Asm
         {
 
             if(config.EmitFunctionHeader)
-                foreach(var line in asm.header(src))
+                foreach(var line in header(src))
                     dst.AppendLine(line);
 
             dst.AppendLine(lines(src, config).Concat(Eol));

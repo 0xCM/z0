@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static Part;
+    using static memory;
 
     partial struct asm
     {
@@ -20,7 +21,7 @@ namespace Z0.Asm
             var source = sys.span(src);
             for(var i=0u; i<count; i++)
             {
-                ref readonly var located = ref z.skip(source,i);
+                ref readonly var located = ref skip(source,i);
                 if(lookup.TryAdd(located.IP, located))
                     success++;
                 else

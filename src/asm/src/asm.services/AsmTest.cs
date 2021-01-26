@@ -103,7 +103,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public bool isMem(in IceInstruction src, byte index)
         {
-            switch(asm.opkind(src,index))
+            switch(IceExtractors.opkind(src,index))
             {
                 case Memory:
                 case Memory64:

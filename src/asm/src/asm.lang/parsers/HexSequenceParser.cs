@@ -65,7 +65,7 @@ namespace Z0.Asm
 
         void Parse(AsciChar c)
         {
-            if(DigitParsers.parse(c, out var d))
+            if(Hex.parse(c, out var d))
             {
                 ParsingDigits();
             }
@@ -77,7 +77,6 @@ namespace Z0.Asm
             {
                 ref readonly var c = ref skip(Source, CurrentPos++);
                 Parse(c);
-
             }
         }
 

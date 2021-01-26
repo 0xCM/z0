@@ -27,19 +27,19 @@ namespace Z0.Asm
         [Op]
         public static AsmBranchTarget branch(in IceInstruction src, byte index)
         {
-            var k = asm.opkind(src, index);
+            var k = opkind(src, index);
             switch(k)
             {
                 case NearBranch16:
-                    return AsmLang.target(BTK.Near, src.NearBranch16, BTW.Branch16);
+                    return asm.target(BTK.Near, src.NearBranch16, BTW.Branch16);
                 case NearBranch32:
-                    return AsmLang.target(BTK.Near, src.NearBranch32, BTW.Branch32);
+                    return asm.target(BTK.Near, src.NearBranch32, BTW.Branch32);
                 case NearBranch64:
-                    return AsmLang.target(BTK.Near, src.NearBranch64, BTW.Branch64);
+                    return asm.target(BTK.Near, src.NearBranch64, BTW.Branch64);
                 case FarBranch16:
-                    return AsmLang.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
+                    return asm.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
                 case FarBranch32:
-                    return AsmLang.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
+                    return asm.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }

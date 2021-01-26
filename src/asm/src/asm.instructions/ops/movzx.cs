@@ -11,28 +11,28 @@ namespace Z0.Asm
     using static AsmRegs;
     using M = AsmMnemonics;
 
-    using static AsmLang;
+    using static asm;
 
     partial struct AsmBuilder
     {
         [MethodImpl(Inline), Op]
         public AsmStatement<r8,r16> movzx(r8 src, r16 dst)
-            => statement(M.movzx, args(src,dst));
+            => asm.statement(M.movzx, args(src,dst));
 
         [MethodImpl(Inline), Op]
         public AsmStatement<r8,r32> movzx(r8 src, r32 dst)
-            => statement(M.movzx, args(src,dst));
+            => asm.statement(M.movzx, args(src,dst));
 
         [MethodImpl(Inline), Op]
         public AsmStatement<r8,r64> movzx(r8 src, r64 dst)
-            => statement(M.movzx, args(src,dst));
+            => asm.statement(M.movzx, args(src,dst));
 
         [MethodImpl(Inline), Op]
         public AsmStatement<r16,r32> movzx(r16 src, r32 dst)
-            => statement(M.movzx, args(src,dst));
+            => asm.statement(M.movzx, args(src,dst));
 
         [MethodImpl(Inline), Op]
         public AsmStatement<r16,r64> movzx(r16 src, r64 dst)
-            => statement(M.movzx, args(src,dst));
+            => asm.statement(M.movzx, args(src,dst));
     }
 }

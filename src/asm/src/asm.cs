@@ -15,6 +15,8 @@ namespace Z0.Asm
     {
         public static asm Service => new asm(2);
 
+        const NumericKind Closure = UnsignedInts;
+
         readonly object[] state;
 
         ref object this[byte index]
@@ -29,5 +31,11 @@ namespace Z0.Asm
             state[0] = HexFormatSpecs.options(zpad:false, specifier:false);
             state[1] = new StringBuilder(1024);
         }
+    }
+
+    [ApiType]
+    partial struct Msg
+    {
+
     }
 }

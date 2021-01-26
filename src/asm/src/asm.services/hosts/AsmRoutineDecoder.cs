@@ -18,9 +18,6 @@ namespace Z0.Asm
     {
         readonly AsmFormatConfig AsmFormat;
 
-        [MethodImpl(Inline), Op]
-        static ApiBlockAsm apiblock(ApiCodeBlock encoded, IceInstruction[] decoded, ExtractTermCode term)
-            => new ApiBlockAsm(encoded, decoded, term);
 
         [MethodImpl(Inline)]
         public AsmRoutineDecoder(AsmFormatConfig format)
@@ -32,7 +29,7 @@ namespace Z0.Asm
                 select routine(src.MetaUri, src.OpUri, src.Method.Metadata().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
-            => Decode(src.Code, src.BaseAddress).TryMap(x => asm.list(x, src));
+            => Decode(src.Code, src.BaseAddress).TryMap(x => icelist(x, src));
 
         public Option<AsmInstructionBlock> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.BaseAddress);
@@ -46,7 +43,7 @@ namespace Z0.Asm
             {
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Code);
-                var formatter = asm.formatter(AsmFormat);
+                var formatter = iformatter(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
@@ -62,7 +59,7 @@ namespace Z0.Asm
                     dst.Add(z);
                     f(z);
                 }
-                return asm.list(dst.ToArray(), src);
+                return icelist(dst.ToArray(), src);
 
             }
             catch(Exception e)
@@ -92,7 +89,7 @@ namespace Z0.Asm
                     decoder.Decode(out instruction);
                 }
 
-                var formatter = asm.formatter(AsmFormat);
+                var formatter = iformatter(AsmFormat);
                 var instructions = new Asm.IceInstruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
@@ -152,7 +149,7 @@ namespace Z0.Asm
             if(check)
                 CheckBlockLength(src);
 
-            return new AsmRoutine(meta, uri, sig, src.Encoded, src.TermCode, asm.list(src.Decoded, src.Encoded.Code));
+            return new AsmRoutine(meta, uri, sig, src.Encoded, src.TermCode, icelist(src.Decoded, src.Encoded.Code));
         }
 
         static AsmRoutine routine(ApiCaptureBlock captured, IceInstructionList src)
@@ -166,5 +163,17 @@ namespace Z0.Asm
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
             return new AsmRoutine(member.MetaUri, member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));
         }
+
+        [MethodImpl(Inline), Op]
+        static IceInstructionList icelist(IceInstruction[] src, CodeBlock data)
+            => new IceInstructionList(src, data);
+
+        [MethodImpl(Inline), Op]
+        static IIceInstructionFormatter iformatter(in AsmFormatConfig config)
+            => new IceInstructionFormatter(config);
+
+        [MethodImpl(Inline), Op]
+        static ApiBlockAsm apiblock(ApiCodeBlock encoded, IceInstruction[] decoded, ExtractTermCode term)
+            => new ApiBlockAsm(encoded, decoded, term);
     }
 }

@@ -10,15 +10,12 @@ namespace Z0.Asm
     using static Konst;
     using static Asm.IceOpKind;
 
-    using Iced = Iced.Intel;
-    using W = NumericWidth;
-
     partial struct IceExtractors
     {
         [Op]
         public static IceMemorySize memsize(IceInstruction src, byte index)
         {
-            switch(asm.opkind(src,(byte)index))
+            switch(opkind(src,(byte)index))
             {
                 case Memory:
                 case Memory64:
@@ -50,7 +47,7 @@ namespace Z0.Asm
             dst.MemoryIndexScale = memScale(src,index);
             dst.Displacement = AsmLang.dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = convert(memSeg(src,index), out RegisterKind _);
-            dst.SegmentPrefix = convert(asm.segprefix(src,index), out RegisterKind _);
+            dst.SegmentPrefix = convert(IceExtractors.segprefix(src,index), out RegisterKind _);
             dst.IsStackInstruction = src.IsStackInstruction;
             dst.StackPointerIncrement = src.StackPointerIncrement;
             dst.IsIPRelativeMemoryOperand = src.IsIPRelativeMemoryOperand;

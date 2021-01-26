@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmLang
+    partial struct asm
     {
         [MethodImpl(Inline)]
         public static Args<A> args<A>(A a)

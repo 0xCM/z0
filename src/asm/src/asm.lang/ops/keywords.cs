@@ -14,9 +14,11 @@ namespace Z0.Asm
 
     partial struct AsmLang
     {
+        [Op]
         public static SQ.Byte @byte()
             => default;
 
+        [Op]
         public static Word word()
             => default;
 
