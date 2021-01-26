@@ -415,6 +415,14 @@ public enum ApiClass : ushort
 
     Blsi,
 
+    AddAssign,
+
+    SubAssign,
+
+    MulAssign,
+
+    DivAssign,
+
     // ~~ Instructions/Intrinsics
     // ~~ -------------------------------------------------------------------------------------------------------------
 

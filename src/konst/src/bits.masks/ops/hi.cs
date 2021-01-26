@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static Numeric;
+    using static memory;
 
     partial class BitMasks
     {
@@ -37,12 +38,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-                => force<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
+                => force<T>(lo64(n) << ((int)bitwidth<T>() - n));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(byte n, T t = default)
             where T : unmanaged
-                => force<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
+                => force<T>(lo64(n) << ((int)bitwidth<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits
@@ -52,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong hi<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => hi<ulong>((int)nat64u(n));
+                => hi<ulong>((int)z.nat64u(n));
 
         /// <summary>
         /// Produces a sequence of n enabled hi bits
@@ -63,6 +64,6 @@ namespace Z0
         public static T hi<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => hi<T>((int)nat64u(n));
+                => hi<T>((int)z.nat64u(n));
     }
 }

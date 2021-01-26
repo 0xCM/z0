@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
+    using static Numeric;
     using static memory;
 
     partial class Cells
@@ -17,13 +18,13 @@ namespace Z0
         public static T cell<T>(ReadOnlySpan<byte> src)
         {
             if(typeof(T) == typeof(byte))
-                return memory.generic<T>(cell(src, n1));
+                return generic<T>(cell(src, n1));
             else if(typeof(T) == typeof(ushort))
-                return memory.generic<T>(cell(src, n2));
+                return generic<T>(cell(src, n2));
             else if(typeof(T) == typeof(uint))
-                return memory.generic<T>(cell(src, n4));
+                return generic<T>(cell(src, n4));
             else if(typeof(T) == typeof(ulong))
-                return memory.generic<T>(cell(src, n8));
+                return generic<T>(cell(src, n8));
             else
                 return default;
         }
@@ -135,22 +136,22 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell8 cell8<T>(T src)
             where T : unmanaged
-                => new Cell8(z.force<T,byte>(src));
+                => new Cell8(force<T,byte>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell16 cell16<T>(T src)
             where T : unmanaged
-                => Cell16.init(z.force<T,ushort>(src));
+                => Cell16.init(force<T,ushort>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell32 cell32<T>(T src)
             where T : unmanaged
-                => new Cell32(z.force<T,uint>(src));
+                => new Cell32(force<T,uint>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell64 cell64<T>(T src)
             where T : unmanaged
-                => new Cell64(z.force<T,ulong>(src));
+                => new Cell64(force<T,ulong>(src));
 
         /// <summary>
         /// Presents a 128-bit vector as a 128-bit fixed block
@@ -198,7 +199,6 @@ namespace Z0
         public static Cell128 cell<T>(W128 w, T src)
             where T : unmanaged
                 => cell(gcpu.vscalar(w128,src));
-
 
         [MethodImpl(Inline), Op]
         static ulong cell(ReadOnlySpan<byte> src, N2 n)

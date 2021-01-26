@@ -89,5 +89,13 @@ namespace Z0
 
         Log2 = Id.Log2,
 
+        AddAssign = Id.AddAssign,
+
+        SubAssign = Id.SubAssign,
+
+        MulAssign = Id.MulAssign,
+
+        DivAssign = Id.DivAssign,
+
     }
 }

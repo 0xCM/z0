@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
-
-    using L = BitMasks.Literals;
+    using static BitMasks.Literals;
 
     partial class BitMasks
     {
@@ -23,9 +21,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static byte mix(N0 parity, byte x, byte y)
         {
-            var mask = L.Even8;
-            var xE = scatter(gather(x, mask), L.Even8);
-            var yE = scatter(gather(y, mask), L.Odd8);
+            var mask = Even8;
+            var xE = scatter(gather(x, mask), Even8);
+            var yE = scatter(gather(y, mask), Odd8);
             var xEy = xE | yE;
             return (byte)xEy;
         }
@@ -39,9 +37,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static byte mix(N1 parity, byte x, byte y)
         {
-            var mask = L.Odd8;
-            var xO = scatter(gather(x, mask), L.Even8);
-            var yO = scatter(gather(y, mask), L.Odd8);
+            var mask = Odd8;
+            var xO = scatter(gather(x, mask), Even8);
+            var yO = scatter(gather(y, mask), Odd8);
             var xOy = xO | yO;
             return (byte)xOy;
         }
@@ -55,9 +53,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static ushort mix(N0 parity, ushort x, ushort y)
         {
-            var mask = L.Even16;
-            var xE = scatter(gather(x, mask), L.Even16);
-            var yE = scatter(gather(y, mask), L.Odd16);
+            var mask = Even16;
+            var xE = scatter(gather(x, mask), Even16);
+            var yE = scatter(gather(y, mask), Odd16);
             var xEy = xE | yE;
             return (ushort)xEy;
         }
@@ -71,9 +69,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static ushort mix(N1 parity, ushort x, ushort y)
         {
-            var mask = L.Odd16;
-            var xO = scatter(gather(x, mask), L.Even16);
-            var yO = scatter(gather(y, mask), L.Odd16);
+            var mask = Odd16;
+            var xO = scatter(gather(x, mask), Even16);
+            var yO = scatter(gather(y, mask), Odd16);
             var xOy = xO | yO;
             return (ushort)xOy;
         }
@@ -87,9 +85,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static uint mix(N0 parity, uint x, uint y)
         {
-            var mask = L.Even32;
-            var xE = scatter(gather(x,mask),  L.Even32);
-            var yE = scatter(gather(y,mask),  L.Odd32);
+            var mask = Even32;
+            var xE = scatter(gather(x,mask),  Even32);
+            var yE = scatter(gather(y,mask),  Odd32);
             var xEy = xE | yE;
             return xEy;
         }
@@ -103,9 +101,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static uint mix(N1 parity, uint x, uint y)
         {
-            var mask =  L.Odd32;
-            var xO = scatter(gather(x, mask),  L.Even32);
-            var yO = scatter(gather(y, mask),  L.Odd32);
+            var mask =  Odd32;
+            var xO = scatter(gather(x, mask),  Even32);
+            var yO = scatter(gather(y, mask),  Odd32);
             var xOy = xO | yO;
             return xOy;
         }
@@ -119,9 +117,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static ulong mix(N0 parity, ulong x, ulong y)
         {
-            var mask = L.Even64;
-            var xE = scatter(gather(x,mask), L.Even64);
-            var yE = scatter(gather(y,mask), L.Odd64);
+            var mask = Even64;
+            var xE = scatter(gather(x,mask), Even64);
+            var yE = scatter(gather(y,mask), Odd64);
             var xEy = xE | yE;
             return xEy;
         }
@@ -135,9 +133,9 @@ namespace Z0
         [MethodImpl(Inline), Mix]
         public static ulong mix(N1 parity, ulong x, ulong y)
         {
-            var mask = L.Odd64;
-            var xO = scatter(gather(x, mask), L.Even64);
-            var yO = scatter(gather(y, mask), L.Odd64);
+            var mask = Odd64;
+            var xO = scatter(gather(x, mask), Even64);
+            var yO = scatter(gather(y, mask), Odd64);
             var xOy = xO | yO;
             return xOy;
         }

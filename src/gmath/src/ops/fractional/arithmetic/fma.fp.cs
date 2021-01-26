@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gfp
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         /// <typeparam name="T">The floating point operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Fma, Closures(Closure)]
         public static T fma<T>(T x, T y, T z)
             where T : unmanaged
         {

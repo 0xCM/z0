@@ -72,5 +72,21 @@ namespace Z0
         [MethodImpl(Inline), Inc]
         public static ulong inc(ulong src)
             => ++src;
+
+        /// <summary>
+        /// Increments the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Inc]
+        public static float inc(float src)
+            => ++src;
+
+        /// <summary>
+        /// Increments the operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Inc]
+        public static double inc(double src)
+            => ++src;
     }
 }

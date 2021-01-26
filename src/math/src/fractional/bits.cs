@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static math;
     using static memory;
@@ -29,5 +28,4 @@ namespace Z0
         public static ulong hibits(decimal src)
             => skip(@as<decimal,ulong>(src), 1);
     }
-
 }

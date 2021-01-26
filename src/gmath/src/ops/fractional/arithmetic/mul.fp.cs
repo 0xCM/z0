@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gfp
     {
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.mul(float64(lhs), float64(rhs)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

@@ -78,4 +78,12 @@ namespace Z0
     public sealed class PowAttribute : A { public PowAttribute(ApiAsmClass asm = 0) : base(K.Pow, asm) {} }
 
     public sealed class Log2Attribute : A { public Log2Attribute(ApiAsmClass asm = 0) : base(K.Log2, asm) {} }
+
+    public sealed class AddAssignAttribute : A { public AddAssignAttribute(ApiAsmClass asm = 0) : base(K.AddAssign, asm) {} }
+
+    public sealed class SubAssignAttribute : A { public SubAssignAttribute(ApiAsmClass asm = 0) : base(K.SubAssign, asm) {} }
+
+    public sealed class MulAssignAttribute : A { public MulAssignAttribute(ApiAsmClass asm = 0) : base(K.MulAssign, asm) {} }
+
+    public sealed class DivAssignAttribute : A { public DivAssignAttribute(ApiAsmClass asm = 0) : base(K.DivAssign, asm) {} }
 }

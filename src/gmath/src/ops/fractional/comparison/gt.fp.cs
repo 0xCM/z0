@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 gt<T>(T a, T b)
+        [MethodImpl(Inline), Gt, Closures(Closure)]
+        public static bit gt<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -24,8 +24,8 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 gteq<T>(T a, T b)
+        [MethodImpl(Inline), GtEq, Closures(Closure)]
+        public static bit gteq<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

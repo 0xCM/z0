@@ -3,13 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    using static Konst; 
+{
+    using static Part;
 
     [ApiHost]
     public static partial class gfp
     {
         const NumericKind Closure = Floats;
     }
-
 }

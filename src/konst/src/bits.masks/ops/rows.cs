@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
+    using static memory;
     using static TextRules;
 
     using NBI = NumericBaseIndicator;

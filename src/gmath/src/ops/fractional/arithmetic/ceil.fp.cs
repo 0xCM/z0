@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Ceil, Closures(Closure)]
         public static T ceil<T>(T src)
             where T : unmanaged
         {

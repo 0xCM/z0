@@ -72,5 +72,21 @@ namespace Z0
         [MethodImpl(Inline), Dec]
         public static ulong dec(ulong src)
             => --src;
+
+        /// <summary>
+        /// Decrements the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Dec]
+        public static float dec(float src)
+            => --src;
+
+        /// <summary>
+        /// Decrements the source value
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Dec]
+        public static double dec(double src)
+            => --src;
     }
 }

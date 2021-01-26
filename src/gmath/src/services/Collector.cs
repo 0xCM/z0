@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences
     /// </summary>
+    [ApiType]
     public class Collector
     {
         int count;
@@ -36,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Collector Create<T>(T seed = default)
             where T : unmanaged
-                => new Collector(z.force<T,double>(seed));
+                => new Collector(Numeric.force<T,double>(seed));
 
         [MethodImpl(Inline)]
         public static Collector operator +(Collector a, byte value)
@@ -399,7 +400,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public void Collect<T>(T src)
             where T : unmanaged
         {
@@ -426,7 +427,9 @@ namespace Z0
         public void Collect<T>(IEnumerable<T> src)
             where T : unmanaged
         {
-            Collect(src.ToSpan());
+            //Collect(src.ToSpan());
+            foreach(var cell in src)
+                Collect(cell);
         }
 
         /// <summary>
@@ -444,7 +447,7 @@ namespace Z0
 
             ref readonly var data = ref memory.first(src);
             for(var i=0u; i<count; i++)
-                Collect(z.skip(in data, i));
+                Collect(skip(in data, i));
         }
 
         /// <summary>
@@ -457,9 +460,9 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref readonly var data = ref z.first(src);
+            ref readonly var cells = ref first(src);
             for(var i=0u; i<count; i++)
-                Collect(z.skip(in data, i));
+                Collect(skip(cells, i));
         }
 
         /// <summary>
@@ -472,11 +475,10 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref readonly var data = ref z.first(src);
+            ref readonly var cells = ref first(src);
             for(var i=0u; i<count; i++)
-                Collect(z.skip(in data, i));
+                Collect(skip(cells, i));
         }
-
 
         [MethodImpl(Inline)]
         Collector(double seed)
@@ -510,9 +512,7 @@ namespace Z0
         }
 
         public string Format(int? scale = null)
-        {
-            return $"observations = {count} | min = {min} | max = {max} | mean={Mean.Round(scale ?? 4)} | stdev={Stdev.Round(scale ?? 4)}";
-        }
+            => $"observations = {count} | min = {min} | max = {max} | mean={Mean.Round(scale ?? 4)} | stdev={Stdev.Round(scale ?? 4)}";
 
         public override string ToString()
             => Format();
@@ -522,13 +522,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                Merge(z.int8(src));
+                Merge(int8(src));
             else if(typeof(T) == typeof(short))
-                Merge(z.int16(src));
+                Merge(int16(src));
             else if(typeof(T) == typeof(int))
-                Merge(z.int32(src));
+                Merge(int32(src));
             else
-                Merge(z.int64(src));
+                Merge(int64(src));
         }
 
         [MethodImpl(Inline)]
@@ -536,13 +536,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                Merge(z.uint8(src));
+                Merge(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                Merge(z.uint16(src));
+                Merge(uint16(src));
             else if(typeof(T) == typeof(uint))
-                Merge(z.uint32(src));
+                Merge(uint32(src));
             else
-                Merge(z.uint64(src));
+                Merge(uint64(src));
         }
 
         [MethodImpl(Inline)]
@@ -550,11 +550,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                Merge(z.float32(src));
+                Merge(float32(src));
             else if(typeof(T) == typeof(double))
-                Merge(z.float64(src));
+                Merge(float64(src));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }
