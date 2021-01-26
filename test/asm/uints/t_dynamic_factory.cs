@@ -94,7 +94,7 @@ namespace Z0.Asm
             {
                 var x = Random.CpuVector<uint>(n128);
                 var y = vbsll(x);
-                var z = gvec.vbsll(x,imm8);
+                var z = gcpu.vbsll(x,imm8);
                 Claim.veq(z,y);
             }
         }

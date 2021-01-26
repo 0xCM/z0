@@ -30,20 +30,32 @@ namespace Z0.Asm
         VMethodSearch Search
             => VMethods.Search;
 
+        public void check_vector_types()
+        {
+            var numeric = NumericKinds.NumericTypes().Array();
+            Claim.gteq(numeric.Length, 10);
+            Claim.eq(VKinds.Types128().Length, numeric.Length);
+            Claim.eq(VKinds.Types256().Length, numeric.Length);
+        }
+
         public void unary_shift_v128_embed_imm8()
         {
             var w = w128;
             using var dst = AsmCaseWriter();
-            iter(VImmTestCases.V128UnaryShifts, m =>  check_unary_shift(m, w, dst));
-            check_vbsll_imm(w,dst);
+            var cases = VImmTestCases.V128UnaryShifts;
+            Claim.nonzero(cases.Length);
+            iter(cases, m => check_unary_shift(m, w, dst));
+            check_vbsll_imm(w, dst);
         }
 
         public void unary_shift_v256_embed_imm8()
         {
             var w = w256;
             using var dst = AsmCaseWriter();
-            iter(VImmTestCases.V256UnaryShifts, m => check_unary_shift(m, w, dst));
-            check_vbsll_imm(w,dst);
+            var cases = VImmTestCases.V256UnaryShifts;
+            Claim.nonzero(cases.Length);
+            iter(cases, m => check_unary_shift(m, w, dst));
+            check_vbsll_imm(w, dst);
         }
 
         public void check_blend_imm()
@@ -89,8 +101,8 @@ namespace Z0.Asm
         void check_vbsll_imm(W128 w, StreamWriter dst)
         {   const byte imm8 = 9;
 
-            var name = nameof(gvec.vbsll);
-            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
+            var name = nameof(gcpu.vbsll);
+            var src = typeof(gcpu).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
@@ -103,9 +115,10 @@ namespace Z0.Asm
         void check_vbsll_imm(W256 w, StreamWriter dst)
         {   const byte imm8 = 4;
 
+
             var name = "vbsll";
             var vKind = K.vk256<uint>();
-            var src = typeof(z).DeclaredMethods().WithName(name).OfKind(vKind).Single();
+            var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
@@ -132,7 +145,7 @@ namespace Z0.Asm
             var kVector = VKinds.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
-            var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
+            var vones = vbroadcast.Invoke(null, new object[]{w, one(tCell).Boxed});
 
             foreach(var imm in Immediates)
             {

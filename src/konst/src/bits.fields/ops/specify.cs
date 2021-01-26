@@ -27,9 +27,9 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var w = ref skip(widths,i);
-                ref readonly var n = ref skip(names,i);
+                ref readonly var name = ref skip(names,i);
                 seek(positions,i) = totalWidth;
-                seek(segments,i) = new BitFieldSegment(w, (totalWidth, totalWidth + w));
+                seek(segments,i) = new BitFieldSegment(name, (totalWidth, totalWidth + w));
                 totalWidth += skip(fieldWidths, i);
             }
             return new BitFieldModel(count, totalWidth, sBuffer);

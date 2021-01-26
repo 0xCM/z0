@@ -15,39 +15,45 @@ namespace Z0
     public readonly struct BitFieldSegment : IBitFieldSegment<uint>
     {
         /// <summary>
-        /// The segment bit count
+        /// The segment name
         /// </summary>
-        /// <remarks>
-        /// gmath.add(gmath.sub(startpos, endpos), one<T>())
-        /// </remarks>
-        public uint Width {get;}
+        public Name Name {get;}
 
         /// <summary>
-        /// The inclusive left/right segment index boundaries
+        /// The section over which the segment is defined
         /// </summary>
-        public ConstPair<uint> Boundary {get;}
+        public BitSection<uint> Section {get;}
 
         [MethodImpl(Inline)]
-        public BitFieldSegment(byte width, in ConstPair<uint> boundary)
+        public BitFieldSegment(Name name, BitSection<uint> section)
         {
-            Width = width;
-            Boundary = boundary;
+            Name = name;
+            Section = section;
+        }
+
+        /// <summary>
+        /// The segment bit-width
+        /// </summary>
+        public uint Width
+        {
+            [MethodImpl(Inline)]
+            get => Section.Width;
         }
 
         public uint StartPos
         {
            [MethodImpl(Inline)]
-           get => Boundary.Left;
+           get => Section.Min;
         }
 
         public uint EndPos
         {
             [MethodImpl(Inline)]
-            get => Boundary.Right;
+            get => Section.Max;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator BitFieldSegment<uint>(in BitFieldSegment src)
-            => new BitFieldSegment<uint>(src.Width, src.Boundary);
+            => new BitFieldSegment<uint>(src.Name, src.Section);
     }
 }

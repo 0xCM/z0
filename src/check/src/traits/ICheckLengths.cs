@@ -8,7 +8,7 @@ namespace Z0
 
     using api = CheckLengths;
 
-    public interface ICheckLengths : IValidator
+    public interface ICheckLengths : IClaimValidator
     {
         int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             => api.length(lhs, rhs);

@@ -10,7 +10,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckFiles : IValidator
+    public interface ICheckFiles : IClaimValidator
     {
         void Exists(FS.FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => path.Exists.OnNone(() => throw AppException.define($"The file {path} does not exist", caller, file,line));

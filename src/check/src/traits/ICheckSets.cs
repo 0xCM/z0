@@ -14,7 +14,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckSets : IValidator
+    public interface ICheckSets : IClaimValidator
     {
         /// <summary>
         /// Asserts the equality of two sets

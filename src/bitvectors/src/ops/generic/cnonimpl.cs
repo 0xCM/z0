@@ -44,6 +44,6 @@ namespace Z0
         public static BitVector128<N,T> cnonimpl<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vcnonimpl(x.Data, y.Data);
+                => gcpu.vcnonimpl(x.Data, y.Data);
    }
 }

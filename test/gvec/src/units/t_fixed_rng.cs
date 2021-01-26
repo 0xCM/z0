@@ -41,8 +41,8 @@ namespace Z0
         {
             BinaryOp<uint> f = gmath.add<uint>;
             CellDelegates.BinaryOp32 g = CellDelegates.define(gmath.add<uint>);
-            var lhs = Random.CellStream<Cell32>().Take(RepCount).ToArray();
-            var rhs = Random.CellStream<Cell32>().Take(RepCount).ToArray();
+            var lhs = Random.Cells<Cell32>().Take(RepCount).ToArray();
+            var rhs = Random.Cells<Cell32>().Take(RepCount).ToArray();
 
             void check()
             {

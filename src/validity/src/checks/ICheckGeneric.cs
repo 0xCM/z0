@@ -14,7 +14,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckGeneric : IValidator
+    public interface ICheckGeneric : IClaimValidator
     {
         void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.eq(lhs, rhs, caller, file, line);

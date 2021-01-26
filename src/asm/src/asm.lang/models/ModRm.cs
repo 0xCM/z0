@@ -14,22 +14,22 @@ namespace Z0.Asm
     /// Defines a byte that follows an opcode that specifies either
     /// a) two register operands or,
     /// b) one register operand and a memory operand together with an addressing mode
-    /// ModRM = [Mod:[7 6] | Reg:[5 4 3] | Rm:[2 1 0] ]
+    /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
     /// </summary>
     public readonly struct ModRm : ITextual
     {
         readonly uint8T Data;
 
         [MethodImpl(Inline)]
-        public static ModRm Define(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRm(rm,reg,mod);
+        public static ModRm define(uint3 rm, uint3 reg, uint2 mod)
+            => new ModRm(rm, reg, mod);
 
         [MethodImpl(Inline)]
         public ModRm(uint3 rm, uint3 reg, uint2 mod)
             => Data = (uint8T)rm | ((uint8T)reg << RegIndex ) | ((uint8T)mod << ModIndex);
 
         [MethodImpl(Inline)]
-        public ModRm(uint8T src)
+        public ModRm(byte src)
             => Data = src;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded bitfield value
         /// </summary>
-        public uint8T Encoded
+        public byte Encoded
         {
             [MethodImpl(Inline)]
             get => Data;

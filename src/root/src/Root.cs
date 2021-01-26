@@ -11,6 +11,10 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Root
     {
+        [MethodImpl(Inline)]
+        internal static ref T @as<S,T>(in S src)
+            => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
+
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
         /// </summary>

@@ -55,20 +55,17 @@ namespace Z0.Asm
         ﾉ4,
 
         /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5
-        /// provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode
         /// </summary>
         ﾉ5,
 
         /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6
-        /// provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode
         /// </summary>
         ﾉ6 = 11,
 
         /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7
-        /// provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode
         /// </summary>
         ﾉ7 = 12,
 

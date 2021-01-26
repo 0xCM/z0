@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Shifts the entire 128-bit vector rightwards at bit-level resolution
@@ -23,9 +23,9 @@ namespace Z0
         public static Vector128<ulong> vsrlx(Vector128<ulong> src, [Imm] byte count)
         {
             if(count >= 64)
-                return vsrl(z.vbsrl(src, 8), (byte)(count - 64));
+                return vsrl(cpu.vbsrl(src, 8), (byte)(count - 64));
             else
-                return vor(vsrl(src, count), vsll(z.vbsrl(src, 8), (byte)(64 - count)));
+                return vor(vsrl(src, count), vsll(cpu.vbsrl(src, 8), (byte)(64 - count)));
         }
 
         [MethodImpl(Inline), Op]
@@ -50,9 +50,9 @@ namespace Z0
         public static Vector256<ulong> vsrlx(Vector256<ulong> src, [Imm] byte count)
         {
             if(count >= 64)
-                return vsrl(z.vbsrl(src, 8), (byte)(count - 64));
+                return vsrl(cpu.vbsrl(src, 8), (byte)(count - 64));
             else
-                return vor(vsrl(src, count), vsll(z.vbsrl(src, 8), (byte)(64 - count)));
+                return vor(vsrl(src, count), vsll(cpu.vbsrl(src, 8), (byte)(64 - count)));
         }
 
         [MethodImpl(Inline), Op]

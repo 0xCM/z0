@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
 
-    using api = Validator;
+    using api = ClaimValidator;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface IValidator
+    public interface IClaimValidator
     {
         Type HostType => GetType();
 
@@ -32,9 +32,9 @@ namespace Z0
             => api.fail(caller,file,line);
     }
 
-    public interface IValidator<V,I> : IValidator
-        where V : struct, IValidator<V,I>, I
-        where I : IValidator
+    public interface IClaimValidator<V,I> : IClaimValidator
+        where V : struct, IClaimValidator<V,I>, I
+        where I : IClaimValidator
     {
         I Validator
             => default(V);

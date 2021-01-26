@@ -13,7 +13,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    using api = Validator;
+    using api = ClaimValidator;
 
     [ApiHost]
     public readonly struct CheckPrimal

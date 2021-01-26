@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
     using F = Cell128;
     using api = Cells;
@@ -122,8 +121,16 @@ namespace Z0
             => x.Data.AsByte();
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector128<sbyte>(Cell128 x)
+            => x.Data.AsSByte();
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector128<ushort>(Cell128 x)
             => x.Data.AsUInt16();
+
+       [MethodImpl(Inline)]
+        public static implicit operator Vector128<short>(Cell128 x)
+            => x.Data.AsInt16();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<uint>(Cell128 x)

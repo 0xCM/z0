@@ -11,7 +11,7 @@ namespace Z0
     using static AppErrorMsg;
     using static CheckLengths;
     using static CheckInvariant;
-    using static Validator;
+    using static ClaimValidator;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;

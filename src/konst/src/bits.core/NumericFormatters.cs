@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class NumericFormatters
     {
@@ -63,54 +63,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return get<F64Formatter, double>().As<T>();
             else
-                throw Unsupported.define<T>();
-        }
-
-        [MethodImpl(Inline)]
-        static F get_u<F,T>()
-            where F : struct, INumericFormatter<F,T>
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
-                return generic<U8Formatter,F>(default(U8Formatter));
-            else if(typeof(T) == typeof(ushort))
-                return generic<U16Formatter,F>(default(U16Formatter));
-            else if(typeof(T) == typeof(uint))
-                return generic<U32Formatter,F>(default(U32Formatter));
-            else if(typeof(T) == typeof(ulong))
-                return generic<U64Formatter,F>(default(U64Formatter));
-            else
-                return get_i<F,T>();
-        }
-
-        [MethodImpl(Inline)]
-        static F get_i<F,T>()
-            where F : struct, INumericFormatter<F,T>
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<I8Formatter,F>(default(I8Formatter));
-            else if(typeof(T) == typeof(short))
-                return generic<I16Formatter,F>(default(I16Formatter));
-            else if(typeof(T) == typeof(int))
-                return generic<I32Formatter,F>(default(I32Formatter));
-            else if(typeof(T) == typeof(long))
-                return generic<I64Formatter,F>(default(I64Formatter));
-            else
-                return get_f<F,T>();
-        }
-
-        [MethodImpl(Inline)]
-        static F get_f<F,T>()
-            where F : struct, INumericFormatter<F,T>
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return generic<F32Formatter,F>(default(F32Formatter));
-            else if(typeof(T) == typeof(double))
-                return generic<F64Formatter,F>(default(F64Formatter));
-            else
-                throw Unsupported.define<F>();
+                throw no<T>();
         }
 
         readonly struct U8Formatter : INumericFormatter<U8Formatter, byte>
@@ -137,7 +90,6 @@ namespace Z0
                     NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
-
 
             [MethodImpl(Inline)]
             public NumericFormatter<I8Formatter, sbyte> Concretize()
@@ -269,8 +221,7 @@ namespace Z0
         static NumericFormatter<F,T> generalize<F,T>(F formatter)
             where T : unmanaged
              where F : struct, INumericFormatter<F,T>
-                => new NumericFormatter<F, T>(formatter);
-
+                => new NumericFormatter<F,T>(formatter);
 
         [MethodImpl(Inline)]
         static G generic<S,G>(in S specific)

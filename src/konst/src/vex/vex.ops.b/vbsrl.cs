@@ -15,11 +15,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
         /// Shifts the source vector rightwards with byte-level resolution

@@ -10,7 +10,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Validator;
+    using static ClaimValidator;
 
     public readonly struct CheckInvariant : ICheckInvariant
     {

@@ -18,7 +18,7 @@ namespace Z0
             var f = Dynamic.EmitFixedUnary<F>(Tokens[Left], a);
             var g = Dynamic.EmitFixedUnary<F>(Tokens[Right], b);
 
-            var stream = Random.CellStream<F>();
+            var stream = Random.Cells<F>();
             notnull(stream);
 
             var points = stream.Take(RepCount);

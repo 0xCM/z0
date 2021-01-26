@@ -16,12 +16,12 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static Vector128<T> vcnonimpl<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vcnonimpl(vload(w, in a),vload(w, in b));
+                => gcpu.vcnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static Vector256<T> vcnonimpl<T>(W256 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vcnonimpl(vload(w, in a),vload(w, in b));
+                => gcpu.vcnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(W128 w, in T a, in T b, ref T dst)

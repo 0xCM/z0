@@ -10,9 +10,9 @@ namespace Z0
     public interface IBitFieldSegment
     {
         /// <summary>
-        /// A unique name that identifies the segment
+        /// The segment name
         /// </summary>
-        string Name  =>"";
+        Name Name {get;}
     }
 
     /// <summary>
@@ -36,12 +36,5 @@ namespace Z0
         /// The number of bits in the segment
         /// </summary>
         uint Width {get;}
-    }
-
-    public interface IBitFieldSegment<F,T> : IBitFieldSegment<T>
-        where T : unmanaged
-        where F : unmanaged, IBitFieldSegment<F,T>
-    {
-
     }
 }

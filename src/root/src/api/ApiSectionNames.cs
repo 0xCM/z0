@@ -2,17 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial struct AsmAlgorithms
+    public readonly struct ApiSectionNames
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Section<T> section<T>(T min, T max)
-            => new Section<T>(min,max);
+        public const string vcpu = nameof(vcpu);
     }
 }

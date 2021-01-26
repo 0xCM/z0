@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static AppErrorMsg;
 
-    using api = Validator;
+    using api = ClaimValidator;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;

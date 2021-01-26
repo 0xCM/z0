@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface IOperationChecker : IValidator
+    public interface IOperationChecker : IClaimValidator
     {
         OpUri Operation {get;}
     }

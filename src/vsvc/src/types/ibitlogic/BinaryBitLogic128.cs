@@ -8,16 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-    using static SFx;
+    using static Part;
 
     using K = BitLogicKinds;
 
     partial class VServices
     {
         [Closures(Integers)]
-        public readonly struct BinaryBitLogic128<T> : IBinaryBitLogic<Vector128<T>>
+        public readonly struct BinaryBitLogic128<T> : IUnaryBitLogic<Vector128<T>>, IBinaryBitLogic<Vector128<T>>, ITernaryBitLogic<Vector128<T>>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -38,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> cnonimpl(Vector128<T> a, Vector128<T> b)
-                => gvec.vcnonimpl(a,b);
+                => gcpu.vcnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> @false()
@@ -74,26 +72,26 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> @true()
-                => gvec.vones<T>(n128);
+                => gvec.vones<T>(w128);
 
             [MethodImpl(Inline)]
             public Vector128<T> xnor(Vector128<T> a, Vector128<T> b)
                 => gvec.vxnor(a,b);
 
             [MethodImpl(Inline)]
-            public Vector128<T> eval<K>(Vector128<T> a, K kind = default)
+            public Vector128<T> eval<K>(Vector128<T> a, K f = default)
                 where K : unmanaged, IBitLogicKind
-                    => eval_unary_1(a,kind);
+                    => eval_unary_1(a,f);
 
             [MethodImpl(Inline)]
-            public Vector128<T> eval<K>(Vector128<T> a, Vector128<T> b, K kind = default)
+            public Vector128<T> eval<K>(Vector128<T> a, Vector128<T> b, K f = default)
                 where K : unmanaged, IBitLogicKind
-                     => eval_binary_1(a,b,kind);
+                     => eval_binary_1(a, b, f);
 
             [MethodImpl(Inline)]
-            public Vector128<T> eval<K>(Vector128<T> a, Vector128<T> b, Vector128<T> c, K kind = default)
+            public Vector128<T> eval<K>(Vector128<T> a, Vector128<T> b, Vector128<T> c, K f = default)
                 where K : unmanaged, IBitLogicKind
-                    => eval_ternary_1(a, b, c,kind);
+                    => eval_ternary_1(a, b, c, f);
 
             [MethodImpl(Inline)]
             Vector128<T> eval_unary_1<B>(Vector128<T> a, B kind)

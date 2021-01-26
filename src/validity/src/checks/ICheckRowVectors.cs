@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public interface ICheckRowVectors : IValidator
+    public interface ICheckRowVectors : IClaimValidator
     {
         static ICheckRowVectors<CheckRowVectors> Checker => default(CheckRowVectors);
 

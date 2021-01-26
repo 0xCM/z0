@@ -10,7 +10,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public interface ICheckNull : IValidator
+    public interface ICheckNull : IClaimValidator
     {
         void notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class

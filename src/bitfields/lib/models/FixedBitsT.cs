@@ -13,13 +13,13 @@ namespace Z0
     public readonly ref struct FixedBits<T>
         where T : unmanaged
     {
-        public readonly uint BitCount;
+        public readonly uint BitCount {get;}
 
-        readonly byte CellWidth;
+        public readonly uint CellWidth {get;}
 
-        internal readonly int CellCount;
+        public readonly uint CellCount {get;}
 
-        internal readonly int BlockCount;
+        public readonly uint BlockCount {get;}
 
         internal readonly SpanBlock64<T> Data;
 
@@ -34,21 +34,21 @@ namespace Z0
             Data = src;
             BitCount = bitcount;
             CellWidth = (byte)bitwidth<T>();
-            BlockCount = src.BlockCount;
-            CellCount = src.CellCount;
+            BlockCount = (uint)src.BlockCount;
+            CellCount = (uint)src.CellCount;
         }
 
         [MethodImpl(Inline)]
         public T BitSlice(byte start, byte length)
-            => gbits.bitslice(Data[start/CellWidth], (byte)(start % CellWidth), length);
+            => gbits.bitslice(Data[(int)(start/CellWidth)], (byte)(start % CellWidth), length);
 
-        public Bit32 this[ByteSize offset, byte pos]
+        public bit this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => Bit32.test(Bytes[offset], pos);
+            get => bit.test(Bytes[offset], pos);
 
             [MethodImpl(Inline)]
-            set => Bytes[offset] = Bit32.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
         }
     }
 }

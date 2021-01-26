@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface ICheckSpans : IValidator, ICheckGeneric
+    public interface ICheckSpans : IClaimValidator, ICheckGeneric
     {
         void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged

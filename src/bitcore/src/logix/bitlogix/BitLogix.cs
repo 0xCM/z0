@@ -32,11 +32,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bit Nand_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.nand(n2));
+            => BitLogixOps.eval(a, b, K.nand());
 
         [MethodImpl(Inline), Op]
         public bit Xor_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.xor(n2));
+            => BitLogixOps.eval(a, b, K.xor());
 
         /// <summary>
         /// Advertises the supported unary operators

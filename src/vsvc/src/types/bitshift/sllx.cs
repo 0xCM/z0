@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     partial class VServices
@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count)
-                => gvec.vsllx(x,count);
+                => gcpu.vsllx(x,count);
         }
 
         [Closures(Integers), Sllx]
@@ -28,7 +28,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count)
-                => gvec.vsllx(x,count);
+                => gcpu.vsllx(x,count);
         }
     }
 }

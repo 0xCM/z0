@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct CheckSymbolic : TCheckSymbolic, IValidator<CheckSymbolic,TCheckSymbolic>
+    public readonly struct CheckSymbolic : TCheckSymbolic, IClaimValidator<CheckSymbolic,TCheckSymbolic>
     {
         public static TCheckSymbolic Checker => default(CheckSymbolic);
     }

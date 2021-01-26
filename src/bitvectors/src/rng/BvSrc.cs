@@ -171,7 +171,7 @@ namespace Z0
             var w = Z0.BitVector128<N,T>.MaxWidth;
             var v = source.CpuVector<T>(w);
             var clamp = nat8u(w) - NatCalc.min(w, n);
-            return gvec.vsrlx(v,(byte)clamp);
+            return gcpu.vsrlx(v,(byte)clamp);
         }
     }
 }

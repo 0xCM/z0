@@ -86,6 +86,6 @@ namespace Z0
         public static BitVector128<N,T> srl<N,T>(in BitVector128<N,T> x, byte offset)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vsrlx(x.Data, offset);
+                => gcpu.vsrlx(x.Data, offset);
    }
 }

@@ -8,33 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static Rules;
+    using static TextRules;
+    using static memory;
 
     partial struct BitFieldModels
     {
         [Op]
         public static string format(in BitFieldModel src)
             => lines(src).Intersperse(Eol).Concat();
-
-        [Op]
-        static string[] lines(in BitFieldModel src)
-        {
-            var dst = new string[src.FieldCount];
-            for(var i=0; i<src.FieldCount; i++)
-            {
-                var index = i;
-                var indexLabel = index.ToString().PadLeft(2, Chars.D0);
-                var width = src.Width(i);
-                var widthLabel = width.ToString().PadLeft(2, Chars.D0);
-                var left = src.Position(i);
-                var leftLabel = left.ToString().PadLeft(2, Chars.D0);
-                var right = left + width - 1;
-                var rightLabel = right.ToString().PadLeft(2, Chars.D0);
-                dst[i] = $"{index} | {indexLabel} | {widthLabel} | [{leftLabel}..{rightLabel}]";
-            }
-            return dst;
-        }
-
 
         public static string format<F>(IBitFieldIndexEntry<F> entry)
             where F : unmanaged
@@ -100,7 +82,7 @@ namespace Z0
             dst.Append(Left);
             for(var i=0; i<count; i++)
             {
-                ref readonly var seg = ref z.skip(src,i);
+                ref readonly var seg = ref skip(src,i);
                 dst.Append(string.Format(SegRenderPattern, seg.StartPos, seg.EndPos));
                 if(i != last)
                     dst.Append(SegSep);

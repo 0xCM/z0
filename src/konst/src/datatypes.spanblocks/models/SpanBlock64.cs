@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32 and 64-bit segments
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock64<S> As<S>()
             where S : unmanaged
-                => new SpanBlock64<S>(z.recover<T,S>(Data));
+                => new SpanBlock64<S>(recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Applies a rightward shift over the full 128 vector bits at byte-level resolution
@@ -24,13 +24,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vbsrl(v8u(x), count));
+                return generic<T>(cpu.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vbsrl(v16u(x), count));
+                return generic<T>(cpu.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vbsrl(v32u(x), count));
+                return generic<T>(cpu.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vbsrl(v64u(x), count));
+                return generic<T>(cpu.vbsrl(v64u(x), count));
             else
                 throw no<T>();
         }
@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vbsrl(v8u(x), count));
+                return generic<T>(cpu.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vbsrl(v16u(x), count));
+                return generic<T>(cpu.vbsrl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vbsrl(v32u(x), count));
+                return generic<T>(cpu.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vbsrl(v64u(x), count));
+                return generic<T>(cpu.vbsrl(v64u(x), count));
             else
                 throw no<T>();
         }

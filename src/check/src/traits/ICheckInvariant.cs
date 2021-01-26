@@ -10,7 +10,7 @@ namespace Z0
 
     using api = CheckInvariant;
 
-    public interface ICheckInvariant : IValidator
+    public interface ICheckInvariant : IClaimValidator
     {
         bool Require(bool invariant, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.require(invariant, caller, file, line);

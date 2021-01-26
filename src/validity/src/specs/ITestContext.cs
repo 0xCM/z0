@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface ITestContext : IAppMsgContext, IDisposable, IPolyrandProvider, ITestService, ITestQueue, IClocked, ICheckAction, ICheckSettings, ITestCaseIdentity, IValidator
+    public interface ITestContext : IAppMsgContext, IDisposable, IPolyrandProvider, ITestService, ITestQueue, IClocked, ICheckAction, ICheckSettings, ITestCaseIdentity, IClaimValidator
     {
         bool DiagnosticMode {get;}
 
@@ -16,7 +16,7 @@ namespace Z0
     public interface ITestContext<U> : ITestContext
         where U : ITestContext<U>
     {
-        Type IValidator.HostType
+        Type IClaimValidator.HostType
             => typeof(U);
     }
 

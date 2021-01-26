@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static AppErrorMsg;
-    using static Validator;
+    using static ClaimValidator;
     using static z;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

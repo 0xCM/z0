@@ -25,7 +25,7 @@ namespace Z0
 
         public void vbsll_imm_handle()
         {   const byte imm8 = 9;
-            var name = nameof(gvec.vbsll);
+            var name = nameof(gcpu.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(VKinds.v128).Single();
             var op = Dynop.EmbedVUnaryOpImm(VKinds.vk128<uint>(), Z0.Identity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
@@ -44,7 +44,7 @@ namespace Z0
             {
                 var x = Random.CpuVector<uint>(n128);
                 var y = vbsll(x);
-                var z = gvec.vbsll(x,imm8);
+                var z = gcpu.vbsll(x,imm8);
                 Claim.veq(z,y);
             }
         }

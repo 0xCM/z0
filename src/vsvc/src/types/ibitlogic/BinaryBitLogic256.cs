@@ -8,16 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-    using static SFx;
+    using static Part;
 
     using K = BitLogicKinds;
 
     partial class VServices
     {
         [Closures(Integers)]
-        public readonly struct BinaryBitLogic256<T> : IBinaryBitLogic<Vector256<T>>, ITernaryBitLogic<Vector256<T>>
+        public readonly struct BinaryBitLogic256<T> : IUnaryBitLogic<Vector256<T>>, IBinaryBitLogic<Vector256<T>>, ITernaryBitLogic<Vector256<T>>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
@@ -38,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> cnonimpl(Vector256<T> a, Vector256<T> b)
-                => gvec.vcnonimpl(a,b);
+                => gcpu.vcnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> @false()
@@ -81,19 +79,19 @@ namespace Z0
                 => gvec.vxnor(a,b);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, K kind = default)
+            public Vector256<T> eval<K>(Vector256<T> a, K f = default)
                 where K : unmanaged, IBitLogicKind
-                    => eval_unary_1(a,kind);
+                    => eval_unary_1(a,f);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K kind = default)
+            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K f = default)
                 where K : unmanaged, IBitLogicKind
-                    => eval_binary_1(a,b,kind);
+                    => eval_binary_1(a,b,f);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K kind = default)
+            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K f = default)
                 where K : unmanaged, IBitLogicKind
-                    => eval_ternary_1(a, b, c,kind);
+                    => eval_ternary_1(a, b, c,f);
 
             [MethodImpl(Inline)]
             Vector256<T> eval_unary_1<B>(Vector256<T> a, B kind)

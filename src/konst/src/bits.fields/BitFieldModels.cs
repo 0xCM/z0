@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static Part;
 
     [ApiHost(ApiNames.BitFieldModels, true)]

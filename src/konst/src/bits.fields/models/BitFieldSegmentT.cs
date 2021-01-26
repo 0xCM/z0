@@ -13,39 +13,42 @@ namespace Z0
     /// Defines a segment within a bitfield
     /// </summary>
     /// <typeparam name="T">The value type relative to which the segment is defined</typeparam>
-    public readonly struct BitFieldSegment<T> : IBitFieldSegment<BitFieldSegment<T>,T>
+    public readonly struct BitFieldSegment<T> : IBitFieldSegment<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The segment bit count
-        /// </summary>
-        /// <remarks>
-        /// gmath.add(gmath.sub(startpos, endpos), one<T>())
-        /// </remarks>
-        public uint Width {get;}
+        public Name Name {get;}
 
         /// <summary>
-        /// The inclusive left/right segment index boundaries
+        /// The section over which the segment is defined
         /// </summary>
-        public readonly ConstPair<T> Boundary;
+        public BitSection<T> Section {get;}
 
         [MethodImpl(Inline)]
-        public BitFieldSegment(uint width, in ConstPair<T> boundary)
+        public BitFieldSegment(Name name, BitSection<T> section)
         {
-            Width = width;
-            Boundary = boundary;
+            Name = name;
+            Section = section;
+        }
+
+        /// <summary>
+        /// The segment bit-width
+        /// </summary>
+        public uint Width
+        {
+           [MethodImpl(Inline)]
+            get => Section.Width;
         }
 
         public T StartPos
         {
            [MethodImpl(Inline)]
-           get => Boundary.Left;
+           get => Section.Min;
         }
 
         public T EndPos
         {
             [MethodImpl(Inline)]
-            get => Boundary.Right;
+            get => Section.Max;
         }
     }
 }

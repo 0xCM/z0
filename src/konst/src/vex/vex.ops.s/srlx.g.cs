@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Shifts the full 128 bits of a vector rightward at bit-level resolution
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vsrlx<T>(Vector128<T> src, [Imm] byte count)
             where T : unmanaged
-                => generic<T>(z.vsrlx(v64u(src), count));
+                => generic<T>(cpu.vsrlx(v64u(src), count));
 
         /// <summary>
         /// Shifts each 128 bit lane rightward at bit-level resolution
@@ -31,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vsrlx<T>(Vector256<T> src, [Imm] byte count)
             where T : unmanaged
-                => generic<T>(z.vsrlx(v64u(src), count));
+                => generic<T>(cpu.vsrlx(v64u(src), count));
     }
 }

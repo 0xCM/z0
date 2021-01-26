@@ -21,9 +21,9 @@ namespace Z0
             var n = n128;
             var dst = SpanBlocks.alloc<byte>(n);
             var m0 = cpu.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
-            var m1 = vsllx(m0,32);
-            var m2 = vsllx(m1,32);
-            var m3 = vsllx(m2,32);
+            var m1 = cpu.vsllx(m0,32);
+            var m2 = cpu.vsllx(m1,32);
+            var m3 = cpu.vsllx(m2,32);
 
             for(var i = 0; i<RepCount; i++)
             {
@@ -79,7 +79,7 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            mask = gvec.vbsrl(BitMasks.vmsb(n256,n16,n1,z8),1);
+            mask = gcpu.vbsrl(BitMasks.vmsb(n256,n16,n1,z8),1);
             gvec.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 
@@ -97,7 +97,6 @@ namespace Z0
                 Trace("mask", mask.FormatBits());
                 Trace("stored", stored.Format());
             }
-
         }
     }
 }
