@@ -25,6 +25,9 @@ namespace Z0.Asm
             OpCode = opcode;
         }
 
+        public bool Equals(AsmSpecifier src)
+            => Sig.Equals(src.Sig) && OpCode.Equals(src.OpCode);
+
         [MethodImpl(Inline)]
         public string Format()
             => TextFormatter.format(Sig, OpCode);

@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public sealed class ApiDecoder : WfService<ApiDecoder,IApiDecoder,IAsmContext>, IApiDecoder
     {
-        public Span<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index)
+        public Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index)
         {
             var decoder = Context.RoutineDecoder;
             var parts = index.Parts;

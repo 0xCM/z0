@@ -9,9 +9,9 @@ namespace Z0.Asm
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static memory;
+    using static z;
 
-    public readonly struct AsmRecords
+    partial struct AsmEtl
     {
         /// <summary>
         /// Filters a set of instructions predicated on s specified mnemonic
@@ -25,6 +25,7 @@ namespace Z0.Asm
                 where i.Mnemonic == mnemonic
                 select a;
 
+        [Op]
         public static AsmCallRow[] calls(ApiInstructionBlock src)
         {
             var calls = filter(src, IceMnemonic.Call).View;
@@ -47,6 +48,5 @@ namespace Z0.Asm
             }
             return buffer;
         }
-
     }
 }

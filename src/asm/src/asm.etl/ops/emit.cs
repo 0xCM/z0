@@ -8,11 +8,12 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
+    using static Part;
     using static z;
 
     using F = AsmRowField;
 
-    partial struct asm
+    partial struct AsmEtl
     {
         public static uint emit(IWfShell wf, AsmRowSet<IceMnemonic> src)
         {
@@ -49,7 +50,7 @@ namespace Z0.Asm
             dst.Delimit(F.Mnemonic, src.Mnemonic);
             dst.Delimit(F.OpCode, src.OpCode);
             dst.Delimit(F.Instruction, src.Instruction);
-            dst.Delimit(F.SourceCode, src.SourceCode);
+            dst.Delimit(F.Statement, src.Statement);
             dst.Delimit(F.Encoded, src.Encoded);
             dst.Delimit(F.CpuId, src.CpuId);
             dst.Delimit(F.OpCodeId, src.OpCodeId);

@@ -16,58 +16,63 @@ namespace Z0
         public static ApiProcessors create(IWfShell wf, IAsmContext asm)
         {
             var processors = new ApiProcessors(wf, asm);
-            processors.Init();
+            //processors.Init();
             return processors;
         }
 
         readonly IWfShell Wf;
 
-        readonly IAsmContext Asm;
+        //readonly IAsmContext Asm;
 
-        ApiCodeBlocks Index;
+        ApiCodeBlocks CodeBlocks;
 
-        Span<ApiPartRoutines> Decoded;
+        Index<ApiPartRoutines> Decoded;
+
+        readonly AsmDataEmitter Emitter;
 
         ApiProcessors(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
-            Asm = asm;
-            Index = default;
-            Decoded = default;
+            //Asm = asm;
+            Emitter = new AsmDataEmitter(wf, asm);
+            CodeBlocks = Emitter.CodeBlocks;
+            Decoded = Emitter.Decoded;
         }
 
-        void Init()
-        {
-            Index = ApiIndex.service(Wf).CreateIndex();
-            Decoded = ApiDecoder.init(Wf,Asm).DecodeIndex(Index);
-        }
+        // void Init()
+        // {
+        //     CodeBlocks = ApiIndex.service(Wf).CreateApiBlocks();
+        //     Decoded = ApiDecoder.init(Wf,Asm).DecodeIndex(CodeBlocks);
+        // }
 
         public void EmitResBytes()
         {
             var dst = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
             var service = ResBytesEmitter.create(Wf);
-            service.Emit(Index, dst);
+            service.Emit(CodeBlocks, dst);
         }
 
         public void EmitCallRows()
-        {
-            var count = Decoded.Length;
-            for(var i=0; i<count; i++)
-                EmitCallRows(skip(Decoded,i));
-        }
+            => Emitter.EmitCallRows();
+        // {
+        //     var count = Decoded.Length;
+        //     for(var i=0; i<count; i++)
+        //         EmitCallRows(Decoded[i]);
+        // }
 
         public void EmitJmpRows()
-        {
-            var count = Decoded.Length;
-            for(var i=0; i<count; i++)
-                EmitJumpRows(skip(Decoded,i));
-        }
+            => Emitter.EmitJmpRows();
+        // {
+        //     var count = Decoded.Length;
+        //     for(var i=0; i<count; i++)
+        //         EmitJumpRows(Decoded[i]);
+        // }
 
         public void ProcessEnlisted()
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-                AsmProcessors.parts(Wf).Process(skip(Decoded,i));
+                AsmProcessors.parts(Wf).Process(Decoded[i]);
         }
 
         public void EmitSemantic()
@@ -75,53 +80,55 @@ namespace Z0
             using var service = AsmSemanticRender.create(Wf);
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-                service.Render(skip(Decoded, i));
+                service.Render(Decoded[i]);
         }
 
         public void EmitAsmRows()
-        {
-            try
-            {
-                var emitter = new AsmDataEmitter(Wf, Asm, Index);
-                var result = emitter.Emit();
-                var records = 0u;
+            => Emitter.EmitAsmRows();
 
-                Wf.Processed(Seq.delimit(nameof(AsmRow), Index.Hosts.Count, result.Count));
+        // {
+        //     try
+        //     {
+        //         var emitter = new AsmDataEmitter(Wf, Asm, CodeBlocks, Decoded);
+        //         var result = emitter.Emit();
+        //         var records = 0u;
 
-                var sets = result.View;
-                var count = result.Count;
-                Wf.Status($"Emitting {count} instruction tables");
-                for(var i=0; i<count; i++)
-                    records += asm.emit(Wf, skip(sets,i));
-                Wf.Status($"Emitted a total of {records} records for {count} instruction tables");
+        //         Wf.Processed(Seq.delimit(nameof(AsmRow), CodeBlocks.Hosts.Count, result.Count));
 
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-        }
+        //         var sets = result.View;
+        //         var count = result.Count;
+        //         Wf.Status($"Emitting {count} instruction tables");
+        //         for(var i=0; i<count; i++)
+        //             records += AsmEtl.emit(Wf, skip(sets,i));
+        //         Wf.Status($"Emitted a total of {records} records for {count} instruction tables");
 
-        void EmitJumpRows(ApiPartRoutines src)
-        {
-            var step = new AsmJmpRowEmitter(Wf, src);
-            step.Emit();
-        }
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(e);
+        //     }
+        // }
 
-        static string format(in AsmCallRow src)
-            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+        // void EmitJumpRows(ApiPartRoutines src)
+        // {
+        //     var step = new AsmJmpRowEmitter(Wf, src);
+        //     step.Emit();
+        // }
 
-        void EmitCallRows(ApiPartRoutines Source)
-        {
-            var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
-            Wf.EmittingTable<AsmCallRow>(dst);
-            using var writer = dst.Writer();
-            var records = @readonly(AsmRecords.calls(Source.Instructions));
-            var count = records.Length;
-            writer.WriteLine(AsmCallRow.header());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(format(skip(records,i)));
-            Wf.EmittedTable<AsmCallRow>(count, dst);
-        }
+        // static string format(in AsmCallRow src)
+        //     => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+
+        // void EmitCallRows(ApiPartRoutines Source)
+        // {
+        //     var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
+        //     Wf.EmittingTable<AsmCallRow>(dst);
+        //     using var writer = dst.Writer();
+        //     var records = @readonly(AsmEtl.calls(Source.Instructions));
+        //     var count = records.Length;
+        //     writer.WriteLine(AsmCallRow.header());
+        //     for(var i=0; i<count; i++)
+        //         writer.WriteLine(format(skip(records,i)));
+        //     Wf.EmittedTable<AsmCallRow>(count, dst);
+        // }
     }
 }

@@ -9,6 +9,32 @@ namespace Z0.Asm
 
     using static Part;
 
+    public readonly struct AsmStatement : IEquatable<AsmStatement>
+    {
+        public asci64 Content {get;}
+
+        [MethodImpl(Inline)]
+        public AsmStatement(asci64 content)
+            => Content = content;
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmStatement src)
+            => Content.Equals(src.Content);
+
+        public override int GetHashCode()
+            => Content.GetHashCode();
+
+        public override bool Equals(object src)
+            => src is AsmStatement x && Equals(x);
+
+        public int CompareTo(AsmStatement src)
+            => Content.CompareTo(src.Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatement(asci64 src)
+            => new AsmStatement(src);
+    }
+
     public readonly struct AsmStatement<A> : IAsmStatement<A>
         where A : unmanaged, IAsmOperand
     {
@@ -45,7 +71,6 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = args;
         }
-
     }
 
     public readonly struct AsmStatement<A,B,C> : IAsmStatement<A,B,C>

@@ -49,7 +49,7 @@ namespace Z0
                 var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
                 var flow = wf.EmittingFile(dst);
                 var svc = ApiIndex.service(wf);
-                var api = svc.CreateIndex();
+                var api = svc.CreateApiBlocks();
                 emit(wf, api, dst);
                 wf.EmittedFile(flow, dst);
                 return dst;

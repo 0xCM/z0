@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         Instruction = 7 | (64 << WidthOffset),
 
-        SourceCode = 8 | (64 << WidthOffset),
+        Statement = 8 | (64 << WidthOffset),
 
         Encoded = 9 | 32 << WidthOffset,
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
         OpCodeId = 11 | (20 << WidthOffset),
     }
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId)]
+    [Record(TableId)]
     public struct AsmRow : IRecord<AsmRow>, IComparable<AsmRow>
     {
         public const string TableId = "asm.rows";
@@ -58,7 +58,7 @@ namespace Z0.Asm
 
         public AsmSig Instruction;
 
-        public asci64 SourceCode;
+        public asci64 Statement;
 
         public BinaryCode Encoded;
 

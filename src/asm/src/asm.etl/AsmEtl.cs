@@ -2,17 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using static Part;
+    using static z;
 
-    public interface IApiDecoder : IWfService
+    [ApiHost]
+    public readonly partial struct AsmEtl
     {
-        ApiHostRoutines DecodeBlocks(ApiHostCode src);
 
-        Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index);
     }
 }

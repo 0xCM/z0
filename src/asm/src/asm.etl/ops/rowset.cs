@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct asm
+    partial struct AsmEtl
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static AsmRowSet<T> rowset<T>(T key, AsmRow[] src)

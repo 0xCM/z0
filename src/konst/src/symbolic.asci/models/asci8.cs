@@ -98,6 +98,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Text.CompareTo(src.Text);
+
+        [MethodImpl(Inline)]
         public bool Equals(A src)
             => Storage.Equals(src.Storage);
 

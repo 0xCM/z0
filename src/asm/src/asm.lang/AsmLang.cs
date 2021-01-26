@@ -19,6 +19,10 @@ namespace Z0.Asm
         public Name Id => "asm";
 
         [MethodImpl(Inline), Op]
+        public static AsmStatement statement(string src)
+            => new AsmStatement(src.Trim());
+
+        [MethodImpl(Inline), Op]
         public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
             => new AsmDisplacement(value, (AsmDisplacementSize)size);
 

@@ -32,7 +32,7 @@ namespace Z0
             Product = ApiCodeBlocks.Empty;
         }
 
-        public ApiCodeBlocks CreateIndex()
+        public ApiCodeBlocks CreateApiBlocks()
         {
             var src = Wf.Db().PartFiles();
             Wf.Status(src);

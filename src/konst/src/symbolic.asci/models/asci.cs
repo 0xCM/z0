@@ -68,7 +68,6 @@ namespace Z0
         public string Format()
             => Digital.format(Data);
 
-
         [MethodImpl(Inline)]
         public bool Equals(asci src)
             => Data.Equals(src.Data);

@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using Z0.Asm;
-
-    public interface IApiDecoder : IWfService
+    [Cmd(CmdName)]
+    public struct EmitAsmEncodingCmd : ICmd<EmitAsmEncodingCmd>
     {
-        ApiHostRoutines DecodeBlocks(ApiHostCode src);
-
-        Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index);
+        public const string CmdName = "emit-asm-encodings";
     }
 }

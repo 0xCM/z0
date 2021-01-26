@@ -131,13 +131,15 @@ namespace Z0
             get => new asci16(Storage.GetUpper());
         }
 
-
         public string Text
         {
             [MethodImpl(Inline)]
             get => Asci.format(this);
         }
 
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Text.CompareTo(src.Text);
 
         [MethodImpl(Inline)]
         public bool Equals(A src)

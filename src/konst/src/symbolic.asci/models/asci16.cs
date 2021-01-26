@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using N = N16;
@@ -157,6 +157,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
+
+        [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Text.CompareTo(src.Text);
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
