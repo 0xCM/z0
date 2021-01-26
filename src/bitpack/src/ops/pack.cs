@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitPack
     {
@@ -20,8 +20,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte pack(Span<Bit32> src, N8 count)
         {
-            var v0 = cpu.vload(n256, first(convert(src, 0, bitwidth<byte>(w8))));
-            return (byte)gcpu.vpacklsb(vcompact8u(v0, w128));
+            var v0 = cpu.vload(w256, first(convert(src, 0, bitwidth<byte>(w8))));
+            return (byte)gcpu.vpacklsb(z.vcompact8u(v0, w128));
         }
 
         /// <summary>

@@ -13,6 +13,50 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
+        /// Disables a sequence of bits starting at a specified index
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="index">The index at which to begin clearing bits</param>
+        /// <param name="count">The number of bits to clear</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static T disable<T>(T src, byte index, byte count)
+            where T : unmanaged
+                => disable_u(src,index,count);
+
+        [MethodImpl(Inline)]
+        static T disable_u<T>(T src, byte index, byte count)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(Bits.disable(uint8(src), index, count));
+            else if(typeof(T) == typeof(ushort))
+                return generic<T>(Bits.disable(uint16(src), index, count));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(Bits.disable(uint32(src), index, count));
+            else if(typeof(T) == typeof(ulong))
+                return generic<T>(Bits.disable(uint64(src), index, count));
+            else
+                return disable_i(src,index,count);
+        }
+
+        [MethodImpl(Inline)]
+        static T disable_i<T>(T src, byte index, byte count)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                return generic<T>(Bits.disable(int8(src), index, count));
+            else if(typeof(T) == typeof(short))
+                return generic<T>(Bits.disable(int16(src), index, count));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(Bits.disable(int32(src), index, count));
+            else if(typeof(T) == typeof(long))
+                return generic<T>(Bits.disable(int64(src), index, count));
+            else
+                throw no<T>();
+        }
+
+        /// <summary>
         /// Disables an identified source bit
         /// </summary>
         /// <param name="src">The source segment</param>
@@ -73,7 +117,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return generic<T>(Bits.disable(float64(src), pos));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

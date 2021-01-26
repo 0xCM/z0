@@ -26,7 +26,7 @@ namespace Z0
         {
             var dstIdx = index;
             var sliced = bitslice(src, index, count);
-            var cleared = gbits.clear(dst, dstIdx, count);
+            var cleared = gbits.disable(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
 
@@ -62,7 +62,7 @@ namespace Z0
             where T : unmanaged
         {
             var sliced = bitslice(src, srcIdx, count);
-            var cleared = gbits.clear(dst, dstIdx, count);
+            var cleared = gbits.disable(dst, dstIdx, count);
             return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
 

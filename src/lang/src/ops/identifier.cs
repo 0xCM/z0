@@ -17,7 +17,7 @@ namespace Z0.Lang
                 => new Identifier<T>(src);
 
         [MethodImpl(Inline), Op]
-        public static Identifier<Name> identifier(string src)
-            => new Identifier<Name>(src);
+        public static Identifier identifier(string src)
+            => new Identifier(src);
     }
 }

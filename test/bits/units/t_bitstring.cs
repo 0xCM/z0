@@ -289,7 +289,6 @@ namespace Z0
         void bs_seq_check<T>()
             where T : unmanaged
         {
-
             void case2()
             {
                 var src = Random.Span<T>(RepCount);
@@ -301,7 +300,7 @@ namespace Z0
                     Claim.eq(seqlen, bitwidth<T>());
 
                     for(byte j = 0; j < seqlen; j++)
-                        Claim.eq(gbits.testbit32(x0, j), (Bit32)(x1[j] == 1));
+                        Claim.eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
                 }
 
             }

@@ -25,6 +25,9 @@ namespace Z0.Asm
         public static RexPrefixBits Empty
             => Define(0,0,0,0,0);
 
+        public static string format(RexPrefixBits src)
+            => $"{RF.Code}:{src.Code} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
+
         byte Data;
 
         [MethodImpl(Inline)]
@@ -93,43 +96,43 @@ namespace Z0.Asm
         public bit B
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Scalar,(byte)RFI.B);
+            get => bit.test(Scalar,(byte)RFI.B);
 
             [MethodImpl(Inline)]
-            set => Update(gbits.setbit(Scalar,(byte)RFI.B, value));
+            set => Update(bit.set(Scalar,(byte)RFI.B, value));
         }
 
         public bit X
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Scalar, (byte)RFI.X);
+            get => bit.test(Scalar, (byte)RFI.X);
 
             [MethodImpl(Inline)]
-            set => Update(gbits.setbit(Scalar, (byte)RFI.X, value));
+            set => Update(bit.set(Scalar, (byte)RFI.X, value));
         }
 
         public bit R
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Scalar, (byte)RFI.R);
+            get => bit.test(Scalar, (byte)RFI.R);
 
             [MethodImpl(Inline)]
-            set => Update(gbits.setbit(Scalar, (byte)RFI.R, value));
+            set => Update(bit.set(Scalar, (byte)RFI.R, value));
         }
 
         public bit W
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Scalar, (byte)RFI.W);
+            get => bit.test(Scalar, (byte)RFI.W);
 
             [MethodImpl(Inline)]
-            set => Update(gbits.setbit(Scalar, (byte)RFI.W, value));
+            set => Update(bit.set(Scalar, (byte)RFI.W, value));
         }
 
         public RexPrefixCode Code
         {
             [MethodImpl(Inline)]
-            get => (RexPrefixCode)gbits.bitslice(Scalar, 4, (byte)RFW.Code);
+            get => (RexPrefixCode)Bits.bitslice(Scalar, 4, (byte)RFW.Code);
 
             [MethodImpl(Inline)]
             set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));
@@ -142,7 +145,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => asm.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

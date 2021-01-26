@@ -16,17 +16,17 @@ namespace Z0
         {
             void case1()
             {
-                var a = vparts(n128,0,1,2,4,4,5,6,7);
-                var b = vparts(n128,8,9,10,11,12,13,14,15);
-                var c = vpackus(a,b);
-                var d = vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
+                var a = cpu.vparts(n128,0,1,2,4,4,5,6,7);
+                var b = cpu.vparts(n128,8,9,10,11,12,13,14,15);
+                var c = cpu.vpackus(a,b);
+                var d = cpu.vparts(n128,0,1,2,4,4,5,6,7,8,9,10,11,12,13,14,15);
                 Claim.veq(d,c);
             }
 
             void case2()
             {
-                var x = vparts(n128,127,0,127,0,127,0,127,0);
-                var y = vpackus(x,x);
+                var x = cpu.vparts(n128,127,0,127,0,127,0,127,0);
+                var y = cpu.vpackus(x,x);
                 Notify(y.Format());
             }
             case1();

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-               seek(dst, i) =  gbits.rotr(skip(in src, i),offset);
+               seek(dst, i) =  rotr(skip(src, i),offset);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotr, Closures(Closure)]
         public static T rotr<T>(T src, byte offset)
             where T : unmanaged
         {
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The magnitude of the rotation</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Rotr, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rotr, Closures(Closure)]
         public static T rotr<T>(T src, byte offset, byte width)
             where T : unmanaged
         {
@@ -69,7 +69,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotr(uint64(src), offset, width));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

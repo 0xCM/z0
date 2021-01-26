@@ -15,5 +15,4 @@ namespace Z0.Lang
         public override bool IsLeaf
             => true;
     }
-
 }

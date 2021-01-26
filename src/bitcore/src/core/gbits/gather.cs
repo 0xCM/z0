@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vale</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Gather, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Gather, Closures(Closure)]
         public static T gather<T>(T src, T mask)
             where T : unmanaged
         {

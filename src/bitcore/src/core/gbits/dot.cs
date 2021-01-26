@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class gbits
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="y">The right scalar</param>
         /// <typeparam name="T">The primal unsigned integral type</typeparam>
         [MethodImpl(Inline), Dot, Closures(Integers)]
-        public static Bit32 dot<T>(T x, T y)
+        public static bit dot<T>(T x, T y)
             where T : unmanaged
                 => gmath.odd(pop(gmath.and(x,y)));
     }

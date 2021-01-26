@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// Extracts the lower source bits
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Lo, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Lo, Closures(Closure)]
         public static T lo<T>(T src)
             where T : unmanaged
         {
@@ -29,7 +29,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.lo(uint64(src)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

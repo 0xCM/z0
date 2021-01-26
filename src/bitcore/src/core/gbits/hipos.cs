@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// Computes the position of the highest enabled source bit, a number in the inclusive range [0 , bitsize[T] - 1]
         /// </summary>
         /// <param name="src">The source bit</param>
-        [MethodImpl(Inline), HiPos, Closures(UnsignedInts)]
+        [MethodImpl(Inline), HiPos, Closures(Closure)]
         public static byte hipos<T>(T src)
             where T : unmanaged
         {

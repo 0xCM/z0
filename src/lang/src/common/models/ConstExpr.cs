@@ -17,10 +17,10 @@ namespace Z0.Lang
 
         public T Value {get;}
 
-        public ClrLiteralKind Kind {get;}
+        public ConstantKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public ConstExpr(string name, S src, T value, ClrLiteralKind kind)
+        public ConstExpr(string name, S src, T value, ConstantKind kind)
         {
             Name = name;
             Source = src;

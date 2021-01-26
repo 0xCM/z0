@@ -88,12 +88,12 @@ namespace Z0
             ref readonly var src = ref z.first64(data);
             var spec = GridCalcs.grid(n8, n8, byte.MinValue);
             var map = spec.Map();
-            var state = Bit32.Off;
+            var state = bit.Off;
             Claim.eq(map.CellCount, data.Length * bitwidth<byte>());
             for(var row = 0; row < map.RowCount; row++)
             for(var col = 0; col < map.ColCount; col++)
             {
-                var actual = gbits.testbit32(src, (byte)map.Position(row,col));
+                var actual = bit.test(src, (byte)map.Position(row,col));
                 Claim.Require(actual == state);
                 state = !state;
             }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+
 
     partial struct z
     {
@@ -33,10 +33,10 @@ namespace Z0
         {
             var perm = vinc<byte>(w128);
 
-            var i0 = Bit.parity((uint)i, BitState.Off);
-            var i1 = Bit.parity((uint)i, BitState.On);
-            var j0 = Bit.parity((uint)j, BitState.Off);
-            var j1 = Bit.parity((uint)j, BitState.On);
+            var i0 = bit.parity((uint)i, bit.Off);
+            var i1 = bit.parity((uint)i, bit.On);
+            var j0 = bit.parity((uint)j, bit.Off);
+            var j1 = bit.parity((uint)j, bit.On);
 
             perm = vset(i0, j0, perm);
             perm = vset(i1, j1, perm);

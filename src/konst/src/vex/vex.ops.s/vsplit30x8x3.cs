@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector256<uint> vsplit30x8x3Mask(uint src)
-            => z.vparts(m0, m1, m2, m3, m4, 0, 0, 0);
+            => cpu.vparts(m0, m1, m2, m3, m4, 0, 0, 0);
 
         // The components are now in the following order, from lo to hi:
         // 0, 5, 1, 6, 2, 7, 3, 8, 4, 9
@@ -43,7 +43,7 @@ namespace Z0
         // Permuting would be cheaper but, in any case...
         [MethodImpl(Inline)]
         static Vector256<ushort> vsplit30x8x3Assemble(Vector256<ushort> y)
-            => vparts(w256,
+            => cpu.vparts(w256,
                 vcell(y,0), // 0
                 vcell(y,2), // 1
                 vcell(y,4), // 2
@@ -68,7 +68,7 @@ namespace Z0
             var lo = ScalarCast.uint16(Lsb16x16x15 & a);
             var hi = ScalarCast.uint16(Lsb16x16x15 & (a >> 15));
             var m = vsplit30x8x3Mask(src);
-            var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
+            var shifts = cpu.vparts(0, 3, 6, 9, 12, 0, 0, 0);
             var q = cpu.vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
             var r = v16u(vsrlv(vand(q,m), shifts));
             var s = vsplit30x8x3Assemble(r);

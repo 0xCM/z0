@@ -31,7 +31,7 @@ namespace Z0.Lang
         /// <typeparam name="T">The constant type</typeparam>
         public static ConstExpr<S,T> constexpr<S,T>(Identifier name, S src, ITransformer<S,T> map)
             => map.Transform(src, out var dst)
-            ? new ConstExpr<S,T>(name, src, dst,ClrLiteralKinds.kind<T>())
+            ? new ConstExpr<S,T>(name, src, dst, (ConstantKind)ClrLiteralKinds.kind<T>())
             : @throw<ConstExpr<S,T>>(new Exception(Msg.TransformFailed<S,T>(src)));
     }
 }

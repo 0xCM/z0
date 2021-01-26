@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using W = NumericWidth;
 
-    partial struct asm
+    partial struct AsmLang
     {
         [MethodImpl(Inline), Op]
         public static AsmImmInfo imminfo(byte value, bool direct)

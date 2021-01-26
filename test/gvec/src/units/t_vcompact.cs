@@ -96,8 +96,8 @@ namespace Z0
         public void vcompact_2x128x64u_128x32u()
         {
             var w = Part.w128;
-            var x0 = vparts(w, 25, 50);
-            var x1 = vparts(w, 75, 10);
+            var x0 = cpu.vparts(w, 25, 50);
+            var x1 = cpu.vparts(w, 75, 10);
             var dst = vcompact32u(x0, x1, w);
             var expect = vparts(w, 25, 50, 75, 10);
             Claim.veq(expect,dst);

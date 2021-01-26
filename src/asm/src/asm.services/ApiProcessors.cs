@@ -108,16 +108,19 @@ namespace Z0
             step.Emit();
         }
 
+        static string format(in AsmCallRow src)
+            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Instruction, src.Encoded);
+
         void EmitCallRows(ApiPartRoutines Source)
         {
             var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
             Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
-            var records = @readonly(asm.calls(Source.Instructions));
+            var records = @readonly(AsmRecords.calls(Source.Instructions));
             var count = records.Length;
             writer.WriteLine(AsmCallRow.header());
             for(var i=0; i<count; i++)
-                writer.WriteLine(asm.format(skip(records,i)));
+                writer.WriteLine(format(skip(records,i)));
             Wf.EmittedTable<AsmCallRow>(count, dst);
         }
     }

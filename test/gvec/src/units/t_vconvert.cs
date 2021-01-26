@@ -58,7 +58,7 @@ namespace Z0
 
         public void v128x8u_v128x16u()
         {
-            var x = vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = cpu.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = cpu.vmaplo16u(x, w128);
             var z = vparts(n128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     partial class VBitServices
@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
-                => gbits.clear(a, b, c);
+                => gbits.disable(a, b, c);
         }
 
         [Closures(Integers)]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
-                => gbits.clear(a, b, c);
+                => gbits.disable(a, b, c);
         }
     }
 }

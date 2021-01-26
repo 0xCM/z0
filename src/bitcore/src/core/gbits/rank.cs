@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="pos">The position of the bit for which rank will be calculated</param>
-        [MethodImpl(Inline), Rank, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Rank, Closures(Closure)]
         public static uint rank<T>(T src, int pos)
             where T : unmanaged
         {

@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="pos">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 enable(BitVector4 x, int index)
+        public static BitVector4 enable(BitVector4 x, byte index)
             => Bits.enable(x.Data, index);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 enable(BitVector8 x, int index)
+        public static BitVector8 enable(BitVector8 x, byte index)
             => Bits.enable(x.Data, index);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
-        public static BitVector16 enable(BitVector16 x, int index)
+        public static BitVector16 enable(BitVector16 x, byte index)
             => Bits.enable(x.Data, index);
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
-        public static BitVector32 enable(BitVector32 x, int index)
+        public static BitVector32 enable(BitVector32 x, byte index)
             => Bits.enable(x.Data, index);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The position of the bit to enable</param>
         [MethodImpl(Inline), Op]
-        public static BitVector64 enable(BitVector64 x, int index)
+        public static BitVector64 enable(BitVector64 x, byte index)
             => Bits.enable(x.Data, index);
     }
 }

@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsSome<E>(this E src)
             where E : unmanaged, Enum
-                => !api.zero<E>().Equals(src);
+                => !default(E).Equals(src);
 
         /// <summary>
         /// Filters zero-valued elements from the source stream
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNone<E>(this E src)
             where E : unmanaged, Enum
-                => api.zero<E>().Equals(src);
+                => default(E).Equals(src);
 
         [MethodImpl(Inline)]
         public static T MapSomeOrElse<E,T>(this E kind, Func<E,T> ifSome, Func<T> ifNone)
@@ -54,18 +54,10 @@ namespace Z0
                 => kind.IsSome() ? ifSome(kind) : ifNone();
 
         [MethodImpl(Inline)]
-        public static NumericKind NumericKind(this ClrEnumCode k)
-            => k.TypeCode().ToNumericKind();
-
-        [MethodImpl(Inline)]
         public static T NumericValue<E,T>(this E src, T dst = default)
             where E : unmanaged, Enum
             where T : unmanaged
                 => api.scalar<E,T>(src);
-
-        [MethodImpl(Inline)]
-        public static TypeCode TypeCode(this ClrEnumCode k)
-            =>(System.TypeCode)k;
 
         public static EnumLiteralDetails<E> ToIndex<E>(this IEnumerable<EnumLiteralDetail<E>> src)
             where E : unmanaged, Enum

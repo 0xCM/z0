@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         [MethodImpl(Inline)]
-        public static object To(this NumericKind dst, object src)
+        public static object Rebox(this NumericKind dst, object src)
             => Numeric.rebox(src,dst);
     }
 }

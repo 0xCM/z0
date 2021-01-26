@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
-    {                
+    {
         /// <summary>
         /// Computes the minimum number of bits required to represent the source value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), EffWidth, Closures(UnsignedInts)]
+        [MethodImpl(Inline), EffWidth, Closures(Closure)]
         public static int effwidth<T>(T src)
             where T : unmanaged
         {
@@ -29,8 +29,8 @@ namespace Z0
                 return Bits.effwidth(uint32(src));
             else if(typeof(T) == typeof(ulong))
                 return Bits.effwidth(uint64(src));
-            else            
+            else
                 throw no<T>();
-        }           
+        }
     }
 }

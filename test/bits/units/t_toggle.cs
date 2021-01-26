@@ -55,9 +55,9 @@ namespace Z0
                 var x = src[i];
                 for(byte j =0; j< tLen; j++)
                 {
-                    var before = gbits.testbit32(x, j);
+                    var before = gbits.testbit(x, j);
                     x = gbits.toggle(x, j);
-                    var after = gbits.testbit32(x, j);
+                    var after = gbits.testbit(x, j);
                     ClaimNumeric.neq((uint)before, (uint)after);
                     x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
@@ -81,13 +81,13 @@ namespace Z0
 
         public void testbit_outline()
         {
-            Claim.Require(gbits.testbit32(0b00000101, (byte)0));
-            Claim.nea(gbits.testbit32(0b00000101, (byte)1));
-            Claim.Require(gbits.testbit32(0b00000101, (byte)2));
+            Claim.Require(bit.test(0b00000101, (byte)0));
+            Claim.nea(bit.test(0b00000101, (byte)1));
+            Claim.Require(bit.test(0b00000101, (byte)2));
 
-            Claim.Require(gbits.testbit32(0b00000111, (byte)0));
-            Claim.Require(gbits.testbit32(0b00000111, (byte)1));
-            Claim.Require(gbits.testbit32(0b00000111, (byte)2));
+            Claim.Require(bit.test(0b00000111, (byte)0));
+            Claim.Require(bit.test(0b00000111, (byte)1));
+            Claim.Require(bit.test(0b00000111, (byte)2));
         }
 
         public void enable_outline()

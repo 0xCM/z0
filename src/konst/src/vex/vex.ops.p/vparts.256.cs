@@ -10,9 +10,9 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.Vector128;
     using static System.Runtime.Intrinsics.Vector256;
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Defines a 256-bit vector by explicit component specification, from least -> most significant

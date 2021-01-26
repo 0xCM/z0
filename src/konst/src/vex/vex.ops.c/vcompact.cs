@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
     partial struct cpu
     {
@@ -24,7 +23,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector256<short> src, W8 w)
-            => v8u(cpu.vpackss(vlo(src), cpu.vhi(src)));
+            => v8u(cpu.vpackss(cpu.vlo(src), cpu.vhi(src)));
 
         /// <summary>
         /// 8x16u -> 8x8u
@@ -43,7 +42,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector256<ushort> src, W8 w)
-            => vpackus(vlo(src), cpu.vhi(src));
+            => cpu.vpackus(vlo(src), cpu.vhi(src));
 
         /// <summary>
         /// 8x32u -> 8x8u (a scalar vector)
@@ -72,7 +71,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector128<short> x, Vector128<short> y, N128 w)
-            => vpackus(x,y);
+            => cpu.vpackus(x,y);
 
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
@@ -81,7 +80,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector128<ushort> x, Vector128<ushort> y, N128 w)
-            => vpackus(x,y);
+            => cpu.vpackus(x,y);
 
         /// <summary>
         /// (16x16u,16x16u) -> 32x8u
@@ -91,7 +90,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vcompact8u(Vector256<ushort> x, Vector256<ushort> y, N256 w)
-            => cpu.vperm4x64(vpackus(x,y), Perm4L.ACBD);
+            => cpu.vperm4x64(cpu.vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// (8x32u, 8x32u) -> 16x8u
@@ -161,7 +160,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vcompact8u(Vector256<ushort> src, W128 w)
-            => vpackus(vlo(src), cpu.vhi(src));
+            => cpu.vpackus(vlo(src), cpu.vhi(src));
 
         /// <summary>
         /// 8x32u -> 8x8u (a scalar vector)
@@ -226,7 +225,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vcompact16u(Vector128<uint> x, Vector128<uint> y, N128 w)
-            => vpackus(x,y);
+            => cpu.vpackus(x,y);
 
         /// <summary>
         /// (8x32w,8x32w) -> 16x16w
@@ -240,7 +239,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vcompact16u(Vector256<uint> x, Vector256<uint> y, N256 w)
-            => cpu.vperm4x64(vpackus(x,y), Perm4L.ACBD);
+            => cpu.vperm4x64(cpu.vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
         /// 8x32i -> 8x16i
@@ -288,7 +287,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact32u(Vector256<ulong> src, W32 w)
-            => vparts(w128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
+            => cpu.vparts(w128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
@@ -298,7 +297,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact32u(Vector128<ulong> x0, Vector128<ulong> x1, W128 w)
-            => vparts(n128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
+            => cpu.vparts(w128, (uint)vcell(x0, 0),(uint)vcell(x0, 1),(uint)vcell(x1, 0),(uint)vcell(x1, 1));
 
         /// <summary>
         /// (4x64w,4x64w) -> 8x32w
@@ -317,7 +316,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vcompact32u(Vector256<ulong> src, W128 w)
-            => vparts(n128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
+            => cpu.vparts(w128, (uint)vcell(src, 0),(uint)vcell(src, 1),(uint)vcell(src, 2),(uint)vcell(src, 3));
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -326,7 +325,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vcompact32i(Vector256<long> src, W32 w)
-            => vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
+            => cpu.vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
 
         /// <summary>
         /// 4x64w -> 4x32w
@@ -335,7 +334,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vcompact32i(Vector256<long> src, W128 w)
-            => vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
+            => cpu.vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
 
         /// <summary>
         /// 8x16u -> 64u (a scalar)

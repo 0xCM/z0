@@ -94,10 +94,10 @@ namespace Z0
 
         public T Convert<T>()
             where T : unmanaged
-                => (T)typeof(T).NumericKind().To(Boxed);
+                => (T)typeof(T).NumericKind().Rebox(Boxed);
 
         public BoxedNumber Convert(NumericKind target)
-            => define(target.To(Boxed), target);
+            => define(target.Rebox(Boxed), target);
 
         public BoxedNumber Convert(Type target)
             => Convert(target.NumericKind());

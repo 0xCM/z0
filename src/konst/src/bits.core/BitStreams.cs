@@ -35,7 +35,7 @@ namespace Z0
             var buffer = alloc<bit>(size<T>());
             while(src.MoveNext())
             {
-                Bit.unpack(src.Current, buffer.Clear());
+                bit.unpack(src.Current, buffer.Clear());
                 foreach(var b in buffer)
                     yield return b;
             }

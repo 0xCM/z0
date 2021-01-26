@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class Bit
+    partial struct bit
     {
         /// <summary>
         /// Defines a parity index j from a source integer i and a parity bit p, j := i*2 + p
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="i">The source integer</param>
         /// <param name="p">The parity bit</param>
         [MethodImpl(Inline), Op]
-        public static byte parity(uint i, BitState p)
+        public static byte parity(uint i, bit p)
             => (byte)(i*2 + (uint)p);
     }
 }

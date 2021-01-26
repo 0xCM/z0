@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using Q = Z0;
 
@@ -16,12 +17,12 @@ namespace Z0
         [MethodImpl(Inline)]
         static S cast<S>(byte src)
             where S : unmanaged, ISizedInt<S>
-                => z.@as<byte,S>(src);
+                => @as<byte,S>(src);
 
         [MethodImpl(Inline)]
         static S cast<S>(Limits24u src)
             where S : unmanaged, ISizedInt<S>
-                => z.@as<Limits24u,S>(src);
+                => @as<Limits24u,S>(src);
 
         [MethodImpl(Inline)]
         static S maxval<S>()
@@ -36,7 +37,7 @@ namespace Z0
             else if(typeof(S) == typeof(uint4))
                 return cast<S>(Q.uint4.MaxLiteral);
             else
-                return maxval<S>(z.w5);
+                return maxval<S>(w5);
         }
 
         [MethodImpl(Inline)]
@@ -52,7 +53,7 @@ namespace Z0
             else if(typeof(S) == typeof(uint8T))
                 return cast<S>(Q.uint8T.MaxLiteral);
             else
-                return maxval<S>(z.w16);
+                return maxval<S>(w16);
         }
 
         [MethodImpl(Inline)]

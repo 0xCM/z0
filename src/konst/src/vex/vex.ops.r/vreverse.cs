@@ -142,7 +142,7 @@ namespace Z0
             => vperm8x32(src,MRev256f32);
 
         static Vector256<int> MRev256f32
-            => vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
+            => cpu.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
 
         static Vector256<uint> MRev256u32
             => v32u(gcpu.vload(n256,MRev256u32Data));

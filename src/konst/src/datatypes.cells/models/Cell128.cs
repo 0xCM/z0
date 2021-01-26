@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Cell128(ulong x0, ulong x1)
-            => Data = z.vparts(w128, x0,x1);
+            => Data = cpu.vparts(w128, x0,x1);
 
         public CellKind Kind
             => CellKind.Cell128;

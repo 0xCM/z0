@@ -36,10 +36,9 @@ namespace Z0
                 var src = (BoxedNumber)incoming;
                 return Numeric.rebox(src.Boxed, dst.NumericKind());
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                term.error(e);
-                return default;
+                return root.none<object>();
             }
         }
 

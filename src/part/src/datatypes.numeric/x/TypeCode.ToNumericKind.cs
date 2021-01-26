@@ -18,5 +18,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static NumericKind ToNumericKind(this TypeCode tc)
             => Numeric.kind(tc);
+
+        [MethodImpl(Inline)]
+        public static NumericKind NumericKind(this ClrEnumCode k)
+            => k.TypeCode().ToNumericKind();
+
+        [MethodImpl(Inline)]
+        public static TypeCode TypeCode(this ClrEnumCode k)
+            =>(System.TypeCode)k;
+
     }
 }

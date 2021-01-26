@@ -74,11 +74,11 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var input = z.span(src);
+            var input = memory.span(src);
             var count = input.Length;
-            var target = z.span(dst);
+            var target = memory.span(dst);
             for(var i=0; i<count; i++)
-                z.seek(target,(uint)i) = z.force<S,T>(z.skip(input,(uint)i));
+                memory.seek(target,(uint)i) = NumericCast.force<S,T>(memory.skip(input,(uint)i));
             return dst;
         }
 
@@ -92,12 +92,12 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var input = z.span(src);
+            var input = memory.span(src);
             var count = input.Length;
-            var buffer = sys.alloc<T>(count);
+            var buffer = memory.alloc<T>(count);
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
-                z.seek(dst,(uint)i) = z.force<S,T>(z.skip(input,(uint)i));
+                memory.seek(dst,(uint)i) = NumericCast.force<S,T>(memory.skip(input,(uint)i));
             return buffer;
         }
     }

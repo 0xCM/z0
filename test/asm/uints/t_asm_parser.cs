@@ -16,7 +16,7 @@ namespace Z0.Asm
         public void part_memory_copy()
         {
             var src = Db.CapturedAsmFile<memory>();
-            var doc = asm.doc(src);
+            var doc = AsmDoc.load(src);
             var lines = doc.Content;
             using var target = AsmCaseWriter();
             foreach(var line in lines)

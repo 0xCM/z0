@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct asm
+    partial struct AsmLang
     {
         [MethodImpl(Inline), Op]
         public static AsmFarBranch farbranch(W16 w, Address16 dst, Address16 selector)

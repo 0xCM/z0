@@ -18,6 +18,14 @@ namespace Z0
         public static void unpack(byte src, Span<bit> dst)
             => unpack(src, ref first(dst));
 
+        public static bit[] unpack<T>(T src)
+            where T : struct
+        {
+            var buffer = sys.alloc<bit>(bitsize<T>());
+            unpack(src, buffer);
+            return buffer;
+        }
+
         /// <summary>
         /// Populates a caller-supplied target with unpacked source bits
         /// </summary>
@@ -25,16 +33,16 @@ namespace Z0
         /// <param name="dst">The target</param>
         /// <typeparam name="T">The data source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void unpack<T>(T src, Span<bit> dst)
+        public static void unpack<T>(in T src, Span<bit> dst)
             where T : struct
         {
             var count = size<T>();
-            var data = bytes(src);
+            ref readonly var input = ref uint8(ref edit(src));
             for(var i=0u; i<count; i++)
             {
-                ref readonly var u8 = ref skip(data,i);
+                ref readonly var eight = ref skip(input,i);
                 for(byte j=0; j<8; j++)
-                    seek(dst, i+j) = bit.test(u8,j);
+                    seek(dst,j) = bit.test(eight,j);
             }
         }
 

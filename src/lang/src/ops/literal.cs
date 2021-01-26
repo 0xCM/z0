@@ -11,14 +11,9 @@ namespace Z0.Lang
 
     partial struct lang
     {
-        [MethodImpl(Inline)]
-        public static Literal<I,T> literal<I,T>(I id, T value)
-            where I : IComparable<I>
-                => new Literal<I,T>(id,value);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Literal<Name,T> literal<T>(string id, T value)
+        public static Literal<T> literal<T>(Name name, T value)
             where T : IComparable<T>
-                => new Literal<Name,T>(identifier(id), value);
+                => new Literal<T>(identifier(name), value);
     }
 }

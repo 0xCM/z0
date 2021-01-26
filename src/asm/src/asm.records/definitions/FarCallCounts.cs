@@ -9,27 +9,30 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct FarCallCounts
+    [Record(TableId)]
+    public struct FarCallCounts : IRecord<FarCallCounts>
     {
+        public const string TableId = "asm.far-call-counts";
+
         /// <summary>
         /// The distinct count of far-call target addresses
         /// </summary>
-        public uint TargetsFar {get;}
+        public uint TargetsFar;
 
         /// <summary>
         /// The distinct count of host-defined addresses
         /// </summary>
-        public uint HostedCount {get;}
+        public uint HostedCount;
 
         /// <summary>
         /// The distinct count of host-defined addresses that are targets of a far-call
         /// </summary>
-        public uint HostedReceivers {get;}
+        public uint HostedReceivers;
 
         /// <summary>
         /// The distinct count of far-call target addresses that are not provided by a howt
         /// </summary>
-        public uint UnhostedReceivers {get;}
+        public uint UnhostedReceivers;
 
         [MethodImpl(Inline)]
         public FarCallCounts(uint targets, uint hosted, uint hostedTargets, uint unhostedTargets)

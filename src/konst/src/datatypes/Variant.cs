@@ -54,11 +54,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(ulong value, NK kind)
-            => vparts((ulong)value, (ulong)kind);
+            => cpu.vparts((ulong)value, (ulong)kind);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(long value, NK kind)
-            => vparts((ulong)value, (ulong)kind);
+            => cpu.vparts((ulong)value, (ulong)kind);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> store(double value, NK kind)

@@ -82,7 +82,7 @@ namespace Z0
             var b1E = (byte)(xF + xF);
             var b1F = (byte)(xF + xF + 1);
 
-            return vparts(w256,
+            return cpu.vparts(w256,
                 b0,b1, b2,b3, b4,b5, b6,b7, b8,b9,   bA,bB, bC,bD, bE,bF,
                 b10,b11, b12,b13, b14,b15, b16,b17,  b18,b19, b1A,b1B, b1C,b1D, b1E,b1F
                 );
@@ -115,7 +115,7 @@ namespace Z0
             var x = gvec.vinc(w,z16);
             var reverse = gcpu.vdec<ushort>(w);
             var identity = vinc<ushort>(w);
-            var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
+            var pairswap = cpu.vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
             Claim.veq(reverse, y1);

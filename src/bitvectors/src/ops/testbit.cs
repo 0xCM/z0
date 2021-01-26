@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline), TestBit, Closures(Closure)]
-        public static Bit32 testbit<T>(BitVector<T> x, byte index)
+        public static bit testbit<T>(BitVector<T> x, byte index)
             where T : unmanaged
-                => gbits.testbit32(x.Data, index);
+                => gbits.testbit(x.Data, index);
 
         /// <summary>
         /// Determines whether an index-identified bit is enabled
@@ -27,49 +27,49 @@ namespace Z0
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
         [MethodImpl(Inline)]
-        public static Bit32 testbit<N,T>(BitVector<N,T> x, byte index)
+        public static bit testbit<N,T>(BitVector<N,T> x, byte index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.testbit32(x.Data, index);
+                => gbits.testbit(x.Data, index);
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit(BitVector4 x, byte pos)
-            => Bits.testbit32(x.Data, pos);
+        public static bit testbit(BitVector4 x, byte pos)
+            => bit.test(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit(BitVector8 x, byte pos)
-            => Bits.testbit32(x.Data, pos);
+        public static bit testbit(BitVector8 x, byte pos)
+            => bit.test(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit(BitVector16 x, byte pos)
-            => Bits.testbit32(x.Data, pos);
+        public static bit testbit(BitVector16 x, byte pos)
+            => bit.test(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit(BitVector32 x, byte pos)
-            => Bits.testbit32(x.Data, pos);
+        public static bit testbit(BitVector32 x, byte pos)
+            => bit.test(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
         /// </summary>
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
-        public static Bit32 testbit(BitVector64 x, byte pos)
-            => Bits.testbit32(x.Data, pos);
+        public static bit testbit(BitVector64 x, byte pos)
+            => bit.test(x.Data, pos);
     }
 }

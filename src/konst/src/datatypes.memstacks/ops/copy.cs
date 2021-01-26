@@ -15,27 +15,27 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref StackBlock2 copy(ReadOnlySpan<byte> src, ref StackBlock2 dst)
         {
-            z.u8(dst,0) = skip(src,0);
-            z.u8(dst,1) = skip(src,1);
+            u8(dst,0) = skip(src,0);
+            u8(dst,1) = skip(src,1);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref StackBlock3 copy(ReadOnlySpan<byte> src, ref StackBlock3 dst)
         {
-            z.u8(dst,0) = skip(src,0);
-            z.u8(dst,1) = skip(src,1);
-            z.u8(dst,2) = skip(src,2);
+            u8(dst,0) = skip(src,0);
+            u8(dst,1) = skip(src,1);
+            u8(dst,2) = skip(src,2);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref StackBlock4 copy(ReadOnlySpan<byte> src, ref StackBlock4 dst)
         {
-            z.u8(dst,0) = skip(src,0);
-            z.u8(dst,1) = skip(src,1);
-            z.u8(dst,2) = skip(src,2);
-            z.u8(dst,3) = skip(src,3);
+            u8(dst,0) = skip(src,0);
+            u8(dst,1) = skip(src,1);
+            u8(dst,2) = skip(src,2);
+            u8(dst,3) = skip(src,3);
             return ref dst;
         }
 

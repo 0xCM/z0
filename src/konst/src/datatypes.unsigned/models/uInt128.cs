@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint128(C lo, C hi)
-            => data = vparts(lo,hi);
+            => data = cpu.vparts(lo,hi);
 
         [MethodImpl(Inline)]
         public uint128(T src)

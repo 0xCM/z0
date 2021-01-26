@@ -10,11 +10,8 @@ namespace Z0.Lang
     /// <typeparam name="T">The constant type</typeparam>
     public interface IConstant<T>
     {
-        Identifier Name {get;}
-
         T Value {get;}
 
-        ClrLiteralKind Kind
-            => ClrLiteralKinds.kind<T>();
+        ConstantKind Kind {get;}
     }
 }

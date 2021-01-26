@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Constant<T>
+    public readonly struct Constant<T> : IConstant<T>
     {
         public T Value {get;}
 

@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct ModRmEncoder
@@ -37,7 +37,7 @@ namespace Z0.Asm
                 ref readonly var reg = ref skip(regF, b);
                 ref readonly var mod = ref skip(modF, c);
                 var encoded = define(rm, reg, mod);
-                z.seek(dst, i) = new ModRmEncoding(rm, reg, mod, encoded);
+                seek(dst, i) = new ModRmEncoding(rm, reg, mod, encoded);
             }
             return i;
         }

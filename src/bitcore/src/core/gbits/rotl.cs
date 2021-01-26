@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-               seek(dst, i) =  gbits.rotl(skip(in src, i),offset);
+               seek(dst, i) =  rotl(skip(in src, i),offset);
         }
 
         /// <summary>

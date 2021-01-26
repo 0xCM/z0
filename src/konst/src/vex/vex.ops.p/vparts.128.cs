@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.Vector128;
     using static System.Runtime.Intrinsics.Vector256;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Defines a 128-bit vector by explicit component specification, from least -> most significant
@@ -105,5 +105,32 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<double> vparts(W128 w, double x0, double x1)
             => Create(x0, x1);
+    }
+
+    partial struct z
+    {
+        /// <summary>
+        /// Defines a 128-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline),Op]
+        public static Vector128<ushort> vparts(W128 w, ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7)
+            => Create(x0,x1, x2, x3, x4, x5, x6, x7);
+
+        /// <summary>
+        /// Defines a 128-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline),Op]
+        public static Vector128<uint> vparts(W128 w, uint x0, uint x1, uint x2, uint x3)
+            => Create(x0, x1, x2, x3);
+
+        /// <summary>
+        /// Defines a 128-bit vector by explicit component specification, from least -> most significant
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        [MethodImpl(Inline),Op]
+        public static Vector128<ulong> vparts(ulong x0, ulong x1)
+            => Create(x0,x1);
     }
 }
