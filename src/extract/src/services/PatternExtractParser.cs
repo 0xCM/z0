@@ -12,6 +12,7 @@ namespace Z0
 
     using BP = BytePatternParser<EncodingPatternKind>;
 
+    [ApiHost]
     public readonly struct PatternExtractParser
     {
         /// <summary>
@@ -31,41 +32,21 @@ namespace Z0
             get => ApiExtractParsers.pattern(Buffer.Clear());
         }
 
-        [MethodImpl(Inline)]
-        static int CalcLength(ReadOnlySpan<byte> src, int maxcut, byte code)
-        {
-            var srcLen = src.Length;
-            var cut = 0;
-            if(srcLen > maxcut)
-            {
-                var start = srcLen - maxcut - 1;
-                ref readonly var lead = ref skip(src, maxcut);
-                ref readonly var current = ref lead;
-
-                for(var i=start; i<srcLen && cut < maxcut; i++, cut++)
-                {
-                    current = ref skip(lead, i);
-                    if(current == code)
-                        break;
-                }
-            }
-            var dstLen = src.Length - cut;
-            return dstLen <= 0 ? src.Length : dstLen;
-        }
-
-        CodeBlock Locate(MemoryAddress address, byte[] src, int cut = 0)
+        [Op]
+        CodeBlock Locate(MemoryAddress address, byte[] src, int cut)
         {
             if(cut == 0)
                 return new CodeBlock(address, src);
             else
             {
                 Span<byte> data = src;
-                var len = CalcLength(data, cut, 0xC3);
+                var len = data.ExtractLength(cut, 0xC3);
                 var keep = data.Slice(0, len);
                 return new CodeBlock(address, keep.ToArray());
             }
         }
 
+        [Op]
         public Outcome<ApiMemberCode> ParseMember(in ApiMemberExtract src, uint seq)
         {
             try
@@ -87,6 +68,7 @@ namespace Z0
             }
         }
 
+        [Op]
         public Index<ApiMemberCode> ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
@@ -94,14 +76,14 @@ namespace Z0
                 return default;
 
             var buffer = alloc<ApiMemberCode>(count);
-            ref var dst = ref first(span(buffer));
+            ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
             {
-                var outcome = ParseMember(skip(src,i),i);
+                var outcome = ParseMember(skip(src,i), i);
                 if(outcome)
-                    seek(dst,i) = outcome.Data;
+                    seek(dst, i) = outcome.Data;
                 else
-                    seek(dst,i) = ApiMemberCode.Empty;
+                    seek(dst, i) = ApiMemberCode.Empty;
             }
             return buffer;
         }

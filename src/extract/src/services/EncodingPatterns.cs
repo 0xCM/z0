@@ -37,7 +37,7 @@ namespace Z0
         EncodingPatterns(int dummy)
         {
             FullKinds = new EncodingPatternKind[]
-             {
+            {
                 EncodingPatternKind.RET_SBB,
                 RET_INTR,
                 EncodingPatternKind.RET_ZED_SBB,
@@ -96,22 +96,22 @@ namespace Z0
             => (int)MatchOffset(code);
 
         static ReadOnlySpan<byte> RET_SBB
-            => new byte[]{RET_xC3,SBB_x19};
+            => new byte[]{RET_xC3, SBB_x19};
 
         static ReadOnlySpan<byte> RET_INT
-            => new byte[]{RET_xC3,INTR_xCC};
+            => new byte[]{RET_xC3, INTR_xCC};
 
         static ReadOnlySpan<byte> RET_ZED_SBB
-            => new byte[]{RET_xC3,ZED,SBB_x19};
+            => new byte[]{RET_xC3, ZED,SBB_x19};
 
         static ReadOnlySpan<byte> RET_Zx2
-            => new byte[]{RET_xC3,ZED,ZED};
+            => new byte[]{RET_xC3, ZED,ZED};
 
         static ReadOnlySpan<byte> INTRx2
-            => new byte[]{INTR_xCC,INTR_xCC};
+            => new byte[]{INTR_xCC, INTR_xCC};
 
         static ReadOnlySpan<byte> JMP_RAX
-            => new byte[]{ZED,ZED,Jmp_x48,FF,E0};
+            => new byte[]{ZED,ZED, Jmp_x48,FF,E0};
 
         static ReadOnlySpan<byte> Z7
             => new byte[]{ZED,ZED,ZED,ZED,ZED,ZED,ZED};

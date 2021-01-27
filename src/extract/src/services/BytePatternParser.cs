@@ -37,9 +37,7 @@ namespace Z0
             => ParsedSlice.ToArray();
 
         ReadOnlySpan<byte> ParsedSlice
-            =>  (Offset + Delta - 1) > 0
-              ? Buffer.Slice(0, Offset + Delta - 1)
-              : sys.array<byte>();
+            =>  (Offset + Delta - 1) > 0 ? Buffer.Slice(0, Offset + Delta - 1) : sys.empty<byte>();
 
         internal BytePatternParser(IBytePatternSet<T> patterns, byte[] buffer)
         {
@@ -118,11 +116,7 @@ namespace Z0
                 var match = skip(codes,i);
                 var pattern = Patterns.FullPattern(match);
                 var len = pattern.Length;
-
-                var matched = Offset > len
-                    ? Buffer.Slice(Offset -  1 - len, len).EndsWith(pattern)
-                    : false;
-
+                var matched = Offset > len ? Buffer.Slice(Offset -  1 - len, len).EndsWith(pattern) : false;
                 if(matched)
                 {
                     mc = match;

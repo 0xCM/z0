@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static memory;
 
+    [ApiHost]
     public static class PartialEncodingMatch
     {
+        [Op]
         public static bool TryPartialMatch(this EncodingPatterns patterns, EncodingPatternKind id, ReadOnlySpan<byte> input, out ReadOnlySpan<byte> selected)
         {
             var pattern = patterns.PartialPattern(id);
@@ -17,14 +19,15 @@ namespace Z0
             return TryMatch(offset, input, pattern, out selected);
         }
 
+        [Op]
         static int? TerminalIndex(ReadOnlySpan<byte> src, ReadOnlySpan<byte?> pattern, Span<byte> state)
         {
             var pos = 0;
             var posMax = state.Length - 1;
             int? index = null;
 
-            ref readonly var input = ref z.first(src);
-            ref readonly var match = ref z.first(pattern);
+            ref readonly var input = ref first(src);
+            ref readonly var match = ref first(pattern);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var atom = ref skip(input,i);
@@ -46,11 +49,12 @@ namespace Z0
             return index;
         }
 
+        [Op]
         static bool TryMatch(EncodingPatternOffset offset, ReadOnlySpan<byte> input, ReadOnlySpan<byte?> pattern,  out ReadOnlySpan<byte> selected)
         {
             selected = input;
             Span<byte> state = stackalloc byte[pattern.Length];
-            var terminal = PartialEncodingMatch.TerminalIndex(input,pattern,state);
+            var terminal = TerminalIndex(input,pattern,state);
             if(terminal.HasValue)
             {
                 var length = (terminal.Value + 1) + (int)offset;

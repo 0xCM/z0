@@ -33,7 +33,7 @@ namespace Z0
         {
             Span<byte> target = buffer;
             var length = ApiMemoryExtractor.extract(src, target);
-            return new CodeBlock(src, sys.array(target.Slice(0,length)));
+            return new CodeBlock(src, sys.array(target.Slice(0, length)));
         }
 
         [Op]

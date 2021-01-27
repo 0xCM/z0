@@ -24,27 +24,35 @@ namespace Z0
         public static PatternExtractParser member(uint size = ApiCodeExtractors.DefaultBufferLength)
             => new PatternExtractParser(sys.alloc<byte>(size));
 
+        // [MethodImpl(Inline), Op]
+        // static ParseResult<BinaryCode,CodeBlock> parse(in CodeBlock src, in BinaryCode buffer)
+        // {
+        //     var parser = pattern(buffer);
+        //     var status = parser.Parse(src);
+        //     var matched = parser.Result;
+        //     var succeeded = matched.IsSome() && status.Success();
+        //     return succeeded
+        //         ? root.parsed(buffer, new CodeBlock(src.BaseAddress, parser.Parsed))
+        //         : root.unparsed<BinaryCode,CodeBlock>(buffer);
+        // }
+
         [MethodImpl(Inline), Op]
-        public static ParseResult<BinaryCode,CodeBlock> parse(in CodeBlock src, in BinaryCode buffer)
+        public static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
         {
             var parser = pattern(buffer);
             var status = parser.Parse(src);
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
-            return succeeded
-                ? root.parsed(buffer, new CodeBlock(src.BaseAddress, parser.Parsed))
-                : root.unparsed<BinaryCode,CodeBlock>(buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
-        {
-            var result = parse(src, buffer);
-            if(result.Succeeded)
-                dst = result.Value;
+            if(succeeded)
+            {
+                dst = new CodeBlock(src.BaseAddress, parser.Parsed);
+                return true;
+            }
             else
+            {
                 dst = CodeBlock.Empty;
-            return result.Succeeded;
+                return false;
+            }
         }
     }
 }
