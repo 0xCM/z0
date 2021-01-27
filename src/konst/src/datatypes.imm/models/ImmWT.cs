@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericCast;
+    using static Numeric;
 
     [Datatype]
     public readonly struct Imm<W,T> : IImmediate<Imm<W,T>,W,T>
@@ -66,7 +66,7 @@ namespace Z0
             => obj is Imm<W,T> x && Equals(x);
 
         public string Format()
-            => Hex.format(Content, Width);
+            => HexFormat.format(Content, Width);
 
         public override string ToString()
             => Format();

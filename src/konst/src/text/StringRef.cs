@@ -228,6 +228,15 @@ namespace Z0
             get => (uint)Length;
         }
 
+        /// <summary>
+        /// The string content presented as a readonly span
+        /// </summary>
+        public ReadOnlySpan<char> View
+        {
+            [MethodImpl(Inline)]
+            get => view(this);
+        }
+
         public unsafe string Text
         {
             [MethodImpl(Inline)]
@@ -246,14 +255,6 @@ namespace Z0
             get => ref memory.skip(View,(uint)index);
         }
 
-        /// <summary>
-        /// The string content presented as a readonly span
-        /// </summary>
-        public ReadOnlySpan<char> View
-        {
-            [MethodImpl(Inline)]
-            get => view(this);
-        }
 
         /// <summary>
         /// The string content presented as a mutable span

@@ -8,27 +8,17 @@ namespace Z0
 
     partial class XTend
     {
-        public static string FormatHexBytes(this uint src)
-            => Hex.format(memory.bytes(src));
-
-        public static string FormatHexBytes(this ulong src)
-            => Hex.format(memory.bytes(src));
-
-        public static string FormatHexBytes(this byte[] src, HexFormatOptions config)
-            => Hex.format(src,config);
-
-        public static string FormatHexBytes(this byte[] src)
-            => Hex.format(src);
-
-        public static string FormatHexBytes(this byte[] src, char sep, bool zpad = true, bool specifier = true)
-            => Hex.format(src, sep, zpad, specifier);
-
-        public static string FormatHexBytes(this ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true,
-            bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => Hex.format(src, sep, zpad, specifier, uppercase, prespec, segwidth);
-
-        public static string FormatHexBytes(this Span<byte> src, char sep, bool zpad = true, bool specifier = true,
-            bool uppercase = false, bool prespec = true, int? segwidth = null)
-                => Hex.format(src, sep, zpad, specifier, uppercase, prespec, segwidth);
+        /// <summary>
+        /// Formats a span of natural length and integral type as a sequence of hex values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="bracket">Whether to enclose the formatted hex within brackets</param>
+        /// <param name="sep">The character to use when separating digits</param>
+        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static string FormatHex<N,T>(this NatSpan<N,T> src, char sep = Chars.Space, bool specifier = false)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => src.Edit.FormatHex(sep, specifier);
     }
 }

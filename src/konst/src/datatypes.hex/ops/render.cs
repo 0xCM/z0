@@ -29,7 +29,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var current = ref skip(cell,i);
-                var formatted = format(current, config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+                var formatted = HexFormat.format(current, config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
                 dst.Append(formatted);
 
                 if(i != last)

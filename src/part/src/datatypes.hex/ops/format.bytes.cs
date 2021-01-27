@@ -10,32 +10,8 @@ namespace Z0
     using static Part;
     using static HexFormatSpecs;
 
-    partial class Hex
+    partial struct HexFormat
     {
-        /// <summary>
-        /// Formats a span pf presumed integral values as a sequence of hex values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="bracket">Whether to format the result as a vector</param>
-        /// <param name="sep">The character to use when separating digits</param>
-        /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [Op, Closures(UnsignedInts)]
-        public static string format<T>(ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
-            where T : unmanaged
-        {
-            var builder = Strings.build();
-            var count = src.Length;
-            for(var i = 0; i<count; i++)
-            {
-                builder.Append(format(src[i], true, specifier));
-                if(i != count - 1)
-                    builder.Append(sep);
-            }
-
-            return builder.ToString();
-        }
-
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src)
             => format(src, HexFormatSpecs.HexData);

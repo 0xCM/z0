@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static string hex<T>(T src)
             where T : unmanaged
-                => Hex.format(src, false, false);
+                => HexFormat.format(src, false, false);
         [Op]
         public static string format(object data, PrimalTypeCode code)
             => code switch {

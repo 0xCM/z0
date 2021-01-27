@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static Numeric;
 
     public readonly struct Address<W,T> : IAddress<W,T>
         where W : unmanaged, INumericWidth

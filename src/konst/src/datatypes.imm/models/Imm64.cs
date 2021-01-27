@@ -37,7 +37,7 @@ namespace Z0
             => (int)Hash;
 
         public string Format()
-            => Hex.format(Content, W);
+            => HexFormat.format(Content, W);
 
         public override string ToString()
             => Format();

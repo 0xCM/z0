@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Hex
+    partial struct HexFormat
     {
         [MethodImpl(Inline), Op]
         public static string format<W,T>(T value, W w = default)
@@ -18,13 +18,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return SmallHex.format(NumericCast.force<T,byte>(value));
+                return SmallHex.format(Numeric.force<T,byte>(value));
             else if(typeof(W) == typeof(W16))
-                return SmallHex.format(NumericCast.force<T,ushort>(value));
+                return SmallHex.format(Numeric.force<T,ushort>(value));
             else if(typeof(W) == typeof(W32))
-                return SmallHex.format(NumericCast.force<T,uint>(value));
+                return SmallHex.format(Numeric.force<T,uint>(value));
             else
-                return SmallHex.format(NumericCast.force<T,ulong>(value));
+                return SmallHex.format(Numeric.force<T,ulong>(value));
         }
 
         [Op]
@@ -62,5 +62,21 @@ namespace Z0
         public static string format<T>(W64 w, T src, bool postspec = false)
              where T : unmanaged
                 => format64(uint64(src), postspec);
+
+        [Op]
+        static string format8(byte src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [Op]
+        static string format16(ushort src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [Op]
+        static string format32(uint src, bool postspec = false)
+            => format64(((ulong)src), postspec);
+
+        [Op]
+        static string format64(ulong src, bool postspec = false)
+            => src.ToString(HexFormatSpecs.SmallHexSpec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
     }
 }

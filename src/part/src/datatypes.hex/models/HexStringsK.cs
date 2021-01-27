@@ -13,17 +13,19 @@ namespace Z0
     public readonly struct HexStrings<K>
         where K : unmanaged
     {
-        public readonly StringRef[] Refs;
+        readonly Index<HexString<K>> Refs;
 
         [MethodImpl(Inline)]
-        public HexStrings(params StringRef[] src)
-            => Refs = src;
+        public HexStrings(params HexString<K>[] src)
+        {
+            Refs = src;
+        }
 
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<char> Chars(uint index)
         {
             ref var src = ref Refs[index];
-            return cover(src.BaseAddress.Pointer<char>(), (uint)src.Length);
+            return cover(src.BaseAddress.Pointer<char>(), src.Length);
         }
 
         [MethodImpl(Inline)]
@@ -37,6 +39,6 @@ namespace Z0
         }
 
         public static HexStrings<K> Empty
-            => new HexStrings<K>(StringRef.Empty);
+            => new HexStrings<K>(HexString<K>.Empty);
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
             => Content = src;
 
         public string Format()
-            => Hex.format(Content, W);
+            => HexFormat.format(Content, W);
 
         public override string ToString()
             => Format();

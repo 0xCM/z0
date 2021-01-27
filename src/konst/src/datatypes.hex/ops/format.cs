@@ -7,28 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Hex
     {
-        [Op]
-        static string format64(ulong src, bool postspec = false)
-            => src.ToString(HexFormatSpecs.SmallHexSpec) + (postspec ? HexFormatSpecs.PostSpec : EmptyString);
-
-        [Op]
-        static string format8(byte src, bool postspec = false)
-            => format64(((ulong)src), postspec);
-
-        [Op]
-        static string format16(ushort src, bool postspec = false)
-            => format64(((ulong)src), postspec);
-
-        [Op]
-        static string format32(uint src, bool postspec = false)
-            => format64(((ulong)src), postspec);
-
-
         [MethodImpl(Inline), Op]
         public static string format(in HexString<Hex1Seq> src, Hex1Seq kind)
             => src.String(kind);
@@ -64,7 +47,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(Hex4Seq kind)
             => format(text(n4), kind);
-
-
     }
 }

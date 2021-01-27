@@ -9,16 +9,16 @@ namespace Z0
 
     using static Part;
 
-    using A = Address8;
-    using W = W8;
-    using T = System.Byte;
+    using A = Address64;
+    using W = W64;
+    using T = System.UInt64;
 
-    public readonly struct Address8 : IAddress<A,W,T>
+    public readonly struct Address64 : IAddress<A,W,T>
     {
         public T Location {get;}
 
         [MethodImpl(Inline)]
-        public Address8(T offset)
+        public Address64(T offset)
             => Location = offset;
 
         public static W W => default;
@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format(Location, W);
+            => HexFormat.format(Location, W);
 
         public override string ToString()
             => Format();
@@ -66,8 +66,16 @@ namespace Z0
             => new A(0);
 
         [MethodImpl(Inline)]
-        public static implicit operator A(T src)
-            => new A(src);
+        public static implicit operator MemoryAddress(Address64 src)
+            => src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator Address64(IntPtr src)
+            => (ulong)src.ToInt64();
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(A src)
+            => src.Location;
 
         [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)
@@ -76,6 +84,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator A(Address<W,T> src)
             => new A(src.Location);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(T src)
+            => new A(src);
 
         [MethodImpl(Inline)]
         public static A operator+(A x, T y)

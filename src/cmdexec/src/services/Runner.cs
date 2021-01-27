@@ -159,7 +159,7 @@ namespace Z0
                 if(pos == 0)
                     line.Append(text.format("0x{0}  ", address.Format()));
 
-                line.Append(text.format("{0} ", Hex.format<W8,byte>(*pSrc)));
+                line.Append(text.format("{0} ", HexFormat.format<W8,byte>(*pSrc)));
 
                 pos += 3;
 

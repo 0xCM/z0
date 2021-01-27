@@ -78,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Hex.format<RW,R>(Offset);
+            => HexFormat.format<RW,R>(Offset);
 
         public override string ToString()
             => Format();
