@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    partial struct asm
+    partial struct AsmEtl
     {
         [Op]
         public static ApiInstructionLookup deduplicate(ApiInstruction[] src, out ApiInstructionDuplication stats)

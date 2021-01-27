@@ -30,23 +30,27 @@ namespace Z0
         public void Emit(MemoryAddress @base, ByteSize size, FS.FilePath dst, byte bpl = 40)
             => Emit((@base,  @base + size), dst, bpl);
 
-        public void EmitPaged(MemoryRange src, StreamWriter dst, byte bpl = 40)
+        public unsafe void EmitPaged(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {
+            memory.liberate(src);
             var buffer = span<byte>(PageSize);
             var pages = (uint)(src.Size/PageSize);
             var reader = memory.reader<byte>(src);
             var offset = 0ul;
             var @base = src.Min;
 
-            Wf.Status($"Length = {src.Size}, Pages={pages}, Base={@base}, End = {src.Max}");
+            Wf.Status($"Length = {src.Size} | Pages={pages} | Base={src.Min} | End = {src.Max}");
 
-            var formatter = HexDataFormatter.create(@base, bpl);
+            var formatter = HexDataFormatter.create(src.Min, bpl);
             dst.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
             for(var i=0; i<pages; i++)
             {
                 var size = reader.Read((int)offset, PageSize, buffer);
-                var lines = formatter.FormatLines(slice(buffer, size));
-                for(var j =0; j<lines.Length; j++)
+                Wf.Babble($"Read {size} bytes");
+                var content = slice(buffer, size);
+                var lines = formatter.FormatLines(content);
+                var kLines = lines.Length;
+                for(var j =0; j<kLines; j++)
                     dst.WriteLine(skip(lines,j));
 
                 offset += PageSize;

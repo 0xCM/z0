@@ -15,6 +15,26 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmRender
     {
+        [MethodImpl(Inline), Op]
+        public static string format(in AsmCallTarget src)
+            => text.concat(src.Base.Format(), Chars.Colon, Chars.Space, text.ifempty(src.Id, "target"));
+
+        /// <summary>
+        /// Computes the call-site offset relative to the base address of the client
+        /// </summary>
+        /// <param name="src">The invocation</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in AsmCallInfo src)
+        {
+            var site = src.InstructionAddress;
+            var target =  src.CalledTarget.Base;
+            var o = (site - target).Location;
+            var delta = (src.ActualTarget.Base - site).Location;
+            var actual = src.ActualTarget.Id;
+            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));
+            return $"{client_field} | {target} | {o} | {actual} | {delta}";
+        }
+
         /// <summary>
         /// Formats the function header
         /// </summary>
@@ -90,6 +110,17 @@ namespace Z0.Asm
             return dst;
         }
 
+        [Op]
+        public static string format(in LineLabel src, out string dst)
+            => dst = src.Width switch{
+                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex() + CharText.Space,
+                DataWidth.W64 => src.Offset.FormatAsmHex() + CharText.Space,
+                _ => EmptyString
+            };
+
+
         [MethodImpl(Inline), Op]
         public static string format(AsmSpecifier src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
@@ -107,7 +138,7 @@ namespace Z0.Asm
         {
             var label = asm.label(w16, src.Offset);
             var absolute = @base + src.Offset;
-            dst.Append(text.concat(asm.label(label, out _), src.Formatted.PadRight(config.InstructionPad, Space)));
+            dst.Append(text.concat(format(label, out _), src.Formatted.PadRight(config.InstructionPad, Space)));
             dst.Append(asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
         }
 

@@ -12,16 +12,6 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-
-        // public void EmitAssemblyRefs()
-        // {
-        //     var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
-        //     var sources = array(srcDir + FS.file("z0.konst.dll"), srcDir + FS.file("z0.asm.dll"));
-        //     var dst = Db.Doc("AssemblyReferences", FileExtensions.Csv);
-        //     var cmd = EmitAssemblyRefs.specify(Wf, sources, dst);
-        //     return EmitAssemblyRefs.run(Wf,cmd);
-        // }
-
         public void EmitAssemblyRefs(FS.Files input, FS.FilePath dst)
         {
             var sources = input.View;

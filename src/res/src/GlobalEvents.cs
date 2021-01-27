@@ -54,5 +54,6 @@ namespace Z0
 
         public const string CreatedToolCmd = nameof(CreatedToolCmd);
 
+        public const string Babble = nameof(Babble);
     }
 }

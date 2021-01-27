@@ -96,8 +96,13 @@ namespace Z0
 
         public void EmitJumpRows(ApiPartRoutines src)
         {
-            var step = new AsmJmpRowEmitter(Wf, src);
-            step.Emit();
+            var collector = AsmJmpCollector.create(Wf);
+            var rows = collector.Collect(src);
+            var emitter = AsmJmpEmitter.create(Wf);
+            var dst = Wf.Db().Table(AsmJmpRow.TableId, src.Part);
+            emitter.Emit(rows, dst);
+            // var step = new AsmJmpRowEmitter(Wf, src);
+            // step.Emit();
         }
 
         public void EmitCallRows()
@@ -112,12 +117,12 @@ namespace Z0
             var dst = Wf.Db().Table(AsmCallRow.TableId, src.Part);
             Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
-            var records = AsmEtl.calls(src.Instructions).View;
-            var count = records.Length;
+            var calls = AsmEtl.calls(src.Instructions()).View;
+            var count = calls.Length;
             var formatter = Records.formatter<AsmCallRow>();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(records,i)));
+                writer.WriteLine(formatter.Format(skip(calls,i)));
             Wf.EmittedTable<AsmCallRow>(count, dst);
         }
 
@@ -205,7 +210,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Offset[0]++;
         }
-
     }
 
     partial struct Msg

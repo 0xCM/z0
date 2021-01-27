@@ -12,8 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Captures operation invocation information from the client perspective
     /// </summary>
-    [Record]
-    public struct AsmCall : IRecord<AsmCall>
+    public struct AsmCallInfo
     {
         /// <summary>
         /// The invoking operation
@@ -31,12 +30,12 @@ namespace Z0.Asm
         public AsmCallTarget CalledTarget;
 
         /// <summary>
-        /// The base address of the intended target, magically-known
+        /// The base address of the intended target
         /// </summary>
         public AsmCallTarget ActualTarget;
 
         [MethodImpl(Inline)]
-        public AsmCall(AsmCallClient client, Address16 site, AsmCallTarget called, AsmCallTarget actual = default)
+        public AsmCallInfo(AsmCallClient client, Address16 site, AsmCallTarget called, AsmCallTarget actual)
         {
             Client = client;
             CallSite = site;
@@ -53,8 +52,17 @@ namespace Z0.Asm
             get => CalledTarget.Base - (Client.Base + CallSite);
         }
 
+        /// <summary>
+        /// The address of the call instruction
+        /// </summary>
+        public MemoryAddress InstructionAddress
+        {
+            [MethodImpl(Inline)]
+            get => Client.Base + CallSite;
+        }
+
         public string Format()
-            => AsmCalls.format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

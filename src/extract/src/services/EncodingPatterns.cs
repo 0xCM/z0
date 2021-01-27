@@ -120,9 +120,9 @@ namespace Z0
             => new byte?[]{Call_xE8,null,null,null,null,INTR_xCC};
 
         static ReadOnlySpan<byte> Empty
-            => new byte[]{};
+            => sys.empty<byte>();
 
         static ReadOnlySpan<byte?> EmptyPartial
-            => new byte?[]{};
+            => sys.empty<byte?>();
     }
 }

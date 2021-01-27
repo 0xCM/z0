@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The invocation</param>
         [MethodImpl(Inline), Op]
-        public static MemoryAddress offset(in AsmCall src)
+        public static MemoryAddress offset(in AsmCallInfo src)
             => src.Client.Base + src.CallSite;
 
         /// <summary>

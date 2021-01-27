@@ -27,16 +27,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static LineLabel label(W64 w, ulong offset)
             => new LineLabel(offset);
-
-        [Op]
-        public static string label(in LineLabel src, out string dst)
-            => dst = src.Width switch{
-                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W64 => src.Offset.FormatAsmHex() + CharText.Space,
-                _ => EmptyString
-            };
-
     }
 }

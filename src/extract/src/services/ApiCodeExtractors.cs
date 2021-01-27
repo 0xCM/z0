@@ -8,31 +8,64 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
-    public readonly struct ApiCodeExtractors
+    public unsafe readonly struct ApiCodeExtractors
     {
         public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
+
+        const int MaxZeroCount = 10;
 
         [MethodImpl(Inline), Op]
         public static ApiMemberExtractor service(int bufferlen = DefaultBufferLength)
             => new ApiMemberExtractor(bufferlen);
 
         [MethodImpl(Inline), Op]
+        public static BytePatternParser<EncodingPatternKind> patterns(byte[] buffer)
+            => new BytePatternParser<EncodingPatternKind>(EncodingPatterns.Default, buffer);
+
+        [MethodImpl(Inline), Op]
+        public static PatternExtractParser parser(byte[] buffer)
+            => new PatternExtractParser(buffer);
+
+        [MethodImpl(Inline), Op]
+        public static PatternExtractParser parser(uint size = DefaultBufferLength)
+            => new PatternExtractParser(sys.alloc<byte>(size));
+
+        [MethodImpl(Inline), Op]
         public static Option<CodeBlock> parse(CodeBlock src, byte[] buffer)
         {
-            if(ApiExtractParsers.parse(src, buffer, out var dst))
+            if(parse(src, buffer, out var dst))
                 return root.some(dst);
             else
                 return root.none<CodeBlock>();
+        }
+
+        [Op]
+        public static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
+        {
+            var parser = patterns(buffer);
+            var status = parser.Parse(src);
+            var matched = parser.Result;
+            var succeeded = matched.IsSome() && status.Success();
+            if(succeeded)
+            {
+                dst = new CodeBlock(src.BaseAddress, parser.Parsed);
+                return true;
+            }
+            else
+            {
+                dst = CodeBlock.Empty;
+                return false;
+            }
         }
 
         [MethodImpl(Inline), Op]
         public static CodeBlock extract(MemoryAddress src, byte[] buffer)
         {
             Span<byte> target = buffer;
-            var length = ApiMemoryExtractor.extract(src, target);
+            var length = extract(src, target);
             return new CodeBlock(src, sys.array(target.Slice(0, length)));
         }
 
@@ -51,9 +84,38 @@ namespace Z0
         public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.BaseAddress;
-            var length = ApiMemoryExtractor.extract(address, buffer);
+            var length = extract(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
             return new ApiMemberExtract(src, new CodeBlock(address, extracted));
+        }
+
+        [MethodImpl(Inline), Op]
+        static int extract(MemoryAddress src, Span<byte> dst)
+        {
+            var pSrc = src.Pointer<byte>();
+            var limit = dst.Length;
+            return read(ref pSrc, limit, dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        static int read(ref byte* pSrc, int count, Span<byte> dst)
+            => read(ref pSrc, count, ref first(dst));
+
+        [MethodImpl(Inline), Op]
+        static int read(ref byte* pSrc, int limit, ref byte dst)
+        {
+            var offset = 0;
+            var count = 0;
+            while(offset < limit && count < MaxZeroCount)
+            {
+                var value = Unsafe.Read<byte>(pSrc++);
+                seek(dst, offset++) = value;
+                if(value != 0)
+                    count = 0;
+                else
+                    count++;
+            }
+            return offset;
         }
     }
 }

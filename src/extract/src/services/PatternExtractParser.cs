@@ -29,7 +29,7 @@ namespace Z0
         BP Parser
         {
             [MethodImpl(Inline)]
-            get => ApiExtractParsers.pattern(Buffer.Clear());
+            get => ApiCodeExtractors.patterns(Buffer.Clear());
         }
 
         [Op]

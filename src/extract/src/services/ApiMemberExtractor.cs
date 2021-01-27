@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Extracts operations from an api host
@@ -22,13 +23,13 @@ namespace Z0
             get
             {
                 Span<byte> buffer = _Buffer;
-                return memory.clear(buffer);
+                return clear(buffer);
             }
         }
 
         [MethodImpl(Inline)]
         internal ApiMemberExtractor(int bufferlen)
-            => _Buffer = memory.alloc<byte>(bufferlen);
+            => _Buffer = alloc<byte>(bufferlen);
 
         [MethodImpl(Inline)]
         public ApiMemberExtract Extract(ApiMember src)

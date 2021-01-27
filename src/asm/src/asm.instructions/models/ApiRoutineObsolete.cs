@@ -49,12 +49,6 @@ namespace Z0.Asm
             get => Instructions.Length;
         }
 
-        public ref ApiInstruction this[int i]
-        {
-            [MethodImpl(Inline)]
-            get => ref Instructions[i];
-        }
-
         [MethodImpl(Inline)]
         public ApiRoutineObsolete(MemoryAddress @base, ApiInstruction[] src)
         {

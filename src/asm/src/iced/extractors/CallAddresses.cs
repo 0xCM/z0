@@ -8,10 +8,10 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static z;
     using static Part;
+    using static memory;
 
-    partial struct asm
+    partial struct IceExtractors
     {
         /// <summary>
         /// Selects a (non-distinct) sequence of far addresses that are target by call instructions in the source function

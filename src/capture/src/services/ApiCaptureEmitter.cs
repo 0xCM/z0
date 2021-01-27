@@ -72,7 +72,7 @@ namespace Z0
         {
             if(src.Length != 0)
             {
-                var parser = ApiExtractParsers.member();
+                var parser = ApiCodeExtractors.parser();
                 var parsed = parser.ParseMembers(src);
                 Wf.Status(string.Format("Parsed {0} {1} extract blocks", parsed.Count, HostUri));
                 return parsed;

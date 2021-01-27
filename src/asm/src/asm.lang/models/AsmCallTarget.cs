@@ -36,7 +36,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmCalls.format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

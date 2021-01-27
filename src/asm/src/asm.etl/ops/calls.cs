@@ -25,6 +25,17 @@ namespace Z0.Asm
                 where i.Mnemonic == mnemonic
                 select a;
 
+        /// <summary>
+        /// Summarizes a collection of far-call datapoints
+        /// </summary>
+        /// <param name="targets">The call target addresses</param>
+        /// <param name="bases">The base addresses of the callers</param>
+        /// <param name="hosted">Base addresses of api host functions that are targets of a far call</param>
+        /// <param name="unhosted">Far call targets that are not defined by an api host</param>
+        [MethodImpl(Inline), Op]
+        public static AsmCallSummary farcalls(Index<MemoryAddress> targets, Index<MemoryAddress> bases, Index<MemoryAddress> hosted, Index<MemoryAddress> unhosted)
+            => new AsmCallSummary(targets, bases, hosted, unhosted);
+
         [Op]
         public static Index<AsmCallRow> calls(ApiInstructionBlock src)
         {

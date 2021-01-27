@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct AsmEncodingSummary
+    public struct AsmEncodingInfo
     {
         public AsmStatement Statement;
 

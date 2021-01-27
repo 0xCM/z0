@@ -8,7 +8,6 @@ namespace Z0
 
     using Z0.Asm;
 
-
     class Machine : IDisposable
     {
         readonly IWfShell Wf;
@@ -60,7 +59,7 @@ namespace Z0
                 EmitFieldMetadata.create().Run(Wf);
                 EmitLocatedParts.create().Run(Wf);
 
-                Commands.EmitEnumCatalog().Run(Wf);
+                Commands.EmitEnumCatalog().RunTask(Wf);
 
                 EmitFieldLiterals.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
@@ -80,8 +79,6 @@ namespace Z0
             }
         }
     }
-
-
 
     struct App
     {

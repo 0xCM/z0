@@ -9,7 +9,7 @@ namespace Z0
     using System.Diagnostics;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     [Cmd(CmdName)]
@@ -24,7 +24,6 @@ namespace Z0
 
     partial class XCmd
     {
-
         public static EmitImageContentCmd EmitImageContent(this CmdBuilder builder, LocatedImage src)
             => define(builder.Wf, src);
 

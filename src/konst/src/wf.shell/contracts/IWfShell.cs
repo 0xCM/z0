@@ -68,6 +68,9 @@ namespace Z0
         Task<CmdResult> Dispatch(ICmd cmd)
             => Task.Factory.StartNew(() => Router.Dispatch(cmd));
 
+        CmdResult Execute(ICmd cmd)
+            => Router.Dispatch(cmd);
+
         IWfShell WithHost(WfHost host)
             => WfShell.clone(this, host, PolyStream, Verbosity);
 
@@ -103,18 +106,20 @@ namespace Z0
         }
 
         void Status<T>(WfStepId step, T data)
-        {
-            signal(this).Status(step, data);
-        }
+            => signal(this).Status(step, data);
 
         void Status<T>(T data)
-        {
-            signal(this).Status(data);
-        }
+            => signal(this).Status(data);
 
-        void Warn<T>(WfStepId step, T content)
+        void Babble<T>(T data)
+            => signal(this).Babble(data);
+
+        void Babble<T>(WfStepId step, T data)
+            => signal(this).Babble(step, data);
+
+        void Warn<T>(WfStepId step, T data)
         {
-            signal(this).Warn(step, content);
+            signal(this).Warn(step, data);
         }
 
         void Warn<T>(T content)

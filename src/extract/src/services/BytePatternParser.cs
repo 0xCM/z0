@@ -42,7 +42,7 @@ namespace Z0
         internal BytePatternParser(IBytePatternSet<T> patterns, byte[] buffer)
         {
             Buffer = buffer;
-            Accepted = new Dictionary<byte, int>();
+            Accepted = new Dictionary<byte,int>();
             Patterns = patterns;
             Offset = default;
             State = default;

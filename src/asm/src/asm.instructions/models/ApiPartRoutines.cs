@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        readonly TableSpan<ApiHostRoutines> Data;
+        readonly Index<ApiHostRoutines> Data;
 
         /// <summary>
         /// The defining part
@@ -26,10 +26,10 @@ namespace Z0.Asm
         public PartId Part {get;}
 
         [MethodImpl(Inline)]
-        public ApiPartRoutines(PartId part, ApiHostRoutines[] hosts)
+        public ApiPartRoutines(PartId part, ApiHostRoutines[] src)
         {
             Part = part;
-            Data = hosts;
+            Data = src;
         }
 
         public Span<ApiHostRoutines> Edit
@@ -80,7 +80,7 @@ namespace Z0.Asm
         public Count InstructionCount
             => (uint)Data.Storage.Sum(i => (long)i.InstructionCount);
 
-        public ApiInstructionBlock Instructions
+        public ApiInstructionBlock Instructions()
             => Data.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
     }
 }

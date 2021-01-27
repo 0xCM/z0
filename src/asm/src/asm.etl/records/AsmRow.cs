@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
@@ -65,18 +64,6 @@ namespace Z0.Asm
 		public asci16 CpuId;
 
         public IceOpCodeId OpCodeId;
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Sequence == 0 && OpCodeId == IceOpCodeId.INVALID;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmRow src)

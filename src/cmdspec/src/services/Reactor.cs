@@ -75,43 +75,43 @@ namespace Z0
                     Run(Builder.DumpImages(srcDir, dstDir));
                 break;
                 case EmitResDataCmd.CmdName:
-                    Builder.EmitResData().Run(Wf);
+                    Builder.EmitResData().RunTask(Wf);
                     break;
                 case ShowProcessMemoryCmd.CmdName:
-                    Builder.ShowProcessMemory().Run(Wf);
+                    Builder.ShowProcessMemory().RunTask(Wf);
                     break;
                 case EmitEnumCatalogCmd.CmdName:
-                    Builder.EmitEnumCatalog().Run(Wf);
+                    Builder.EmitEnumCatalog().RunTask(Wf);
                     break;
                 case CheckServiceCmd.CmdName:
-                    Builder.CheckService(a0).Run(Wf);
+                    Builder.CheckService(a0).RunTask(Wf);
                     break;
                 case JitApiCmd.CmdName:
-                    Builder.JitApiCmd().Run(Wf);
+                    Builder.JitApiCmd().RunTask(Wf);
                     break;
                 case ShowRuntimeArchiveCmd.CmdName:
-                    Builder.ShowRuntimeArchive().Run(Wf);
+                    Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
                 case EmitImageMapsCmd.CmdName:
-                    Builder.EmitImageMaps().Run(Wf);
+                    Builder.EmitImageMaps().RunTask(Wf);
                     break;
                 case EmitHexIndexCmd.CmdName:
-                    Builder.EmitHexIndex().Run(Wf);
+                    Builder.EmitHexIndex().RunTask(Wf);
                 break;
                 case EmitAssemblyRefsCmd.CmdName:
-                    Builder.EmitAssemblyRefs().Run(Wf);
+                    Builder.EmitAssemblyRefs().RunTask(Wf);
                 break;
                 case EmitRuntimeIndexCmd.CmdName:
-                    Builder.EmitRuntimeIndex().Run(Wf);
+                    Builder.EmitRuntimeIndex().RunTask(Wf);
                 break;
                 case DumpCliTablesCmd.CmdName:
-                    Builder.DumpCliTables(Parts.Part.Assembly).Run(Wf);
+                    Builder.DumpCliTables(Parts.Part.Assembly).RunTask(Wf);
                 break;
                 case BuildProjectCmd.CmdName:
-                    Builder.Build().Run(Wf);
+                    Builder.Build().RunTask(Wf);
                 break;
                 case EmitImageContentCmd.CmdName:
-                    Builder.EmitImageContent().Run(Wf);
+                    Builder.EmitImageContent().RunDirect(Wf);
                 break;
                 case RunPartCmd.CmdName:
                     Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();

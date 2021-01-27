@@ -12,7 +12,6 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-
         public void EmitProcessData()
         {
             Wf.CmdBuilder().EmitImageContent(Process.GetCurrentProcess(), out var commands);

@@ -128,6 +128,12 @@ namespace Z0
         public void Status<T>(T data)
             => Status(Host, data);
 
+        public void Babble<T>(WfStepId step, T data)
+            => Raise(babble(step, data, Ct));
+
+        public void Babble<T>(T data)
+            => Babble(Host, data);
+
         public void Error<T>(WfStepId step, T body)
             => Raise(error(step, body, Ct));
 

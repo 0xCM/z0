@@ -95,11 +95,13 @@ namespace Z0
                 receiver(last);
         }
 
-        public ReadOnlySpan<string> FormatLines(ReadOnlySpan<byte> data)
+        public ReadOnlySpan<string> FormatLines(ReadOnlySpan<byte> src)
         {
-            var lines = list<string>();
-            var line = string.Empty.Build();
-            var count = data.Length;
+            const char delimiter = Chars.Space;
+
+            var dst = root.list<string>();
+            var line = Buffers.text();
+            var count = src.Length;
 
             for(var i=0; i<count; i++)
             {
@@ -107,26 +109,25 @@ namespace Z0
                 {
                     if(i != 0)
                     {
-                        lines.Add(line.ToString());
-                        line.Clear();
+                        dst.Add(line.Emit());
                     }
 
                     if(LineConfig.LineLabels)
                     {
                         line.Append(i.FormatHex(LabelConfig));
-                        line.Append(Chars.Space);
+                        line.Append(delimiter);
                     }
                 }
 
-                line.Append(data[i].FormatHex(DataConfig));
-                line.Append(Chars.Space);
+                line.Append(skip(src,i).FormatHex(DataConfig));
+                line.Append(delimiter);
             }
 
-            var last = line.ToString();
+            var last = line.Emit();
             if(!string.IsNullOrWhiteSpace(last))
-                lines.Add(last);
+                dst.Add(last);
 
-            return lines.ToArray();
+            return dst.ToArray();
         }
     }
 }

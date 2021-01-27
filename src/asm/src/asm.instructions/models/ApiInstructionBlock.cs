@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct ApiInstructionBlock
     {
-        readonly ApiInstruction[] Data;
+        readonly Index<ApiInstruction> Data;
 
         [MethodImpl(Inline)]
         internal ApiInstructionBlock(ApiInstruction[] src)
@@ -22,25 +22,13 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => Data.Count;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
             get => Data.Length;
-        }
-
-        public ref ApiInstruction this[ulong i]
-        {
-            [MethodImpl(Inline)]
-            get => ref z.first(z.span(Data));
-        }
-
-        public ref ApiInstruction this[long i]
-        {
-            [MethodImpl(Inline)]
-            get => ref z.first(z.span(Data));
         }
 
         public ApiInstruction[] Storage
