@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, ushort spec)
             where T : unmanaged
-                => vblend(x,y, z.vmakemask(spec));
+                => vblend(x,y, cpu.vmakemask(spec));
 
         /// <summary>
         /// Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...31
@@ -55,20 +55,20 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, uint spec)
             where T : unmanaged
-                => vblend(x,y, z.vmakemask(spec));
+                => vblend(x,y, cpu.vmakemask(spec));
 
         [MethodImpl(Inline)]
         static Vector256<T> vblend_u<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(cpu.vblend(v8u(x), v8u(y), spec));
+                return generic<T>(cpu.vblendv(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(cpu.vblend(v16u(x), v16u(y), spec));
+                return generic<T>(cpu.vblendv(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(cpu.vblend(v32u(x), v32u(y), spec));
+                return generic<T>(cpu.vblendv(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(cpu.vblend(v64u(x), v64u(y), spec));
+                return generic<T>(cpu.vblendv(v64u(x), v64u(y), spec));
             else
                 return vblend_i(x,y,spec);
         }
@@ -78,13 +78,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(cpu.vblend(v8i(x), v8i(y), spec));
+                return generic<T>(cpu.vblendv(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(cpu.vblend(v16i(x), v16i(y), spec));
+                return generic<T>(cpu.vblendv(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(cpu.vblend(v32i(x), v32i(y), spec));
+                return generic<T>(cpu.vblendv(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(cpu.vblend(v64i(x), v64i(y), spec));
+                return generic<T>(cpu.vblendv(v64i(x), v64i(y), spec));
             else
                 throw no<T>();
         }
@@ -94,13 +94,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(cpu.vblend(v8u(x), v8u(y), spec));
+                return generic<T>(cpu.vblendv(v8u(x), v8u(y), spec));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(cpu.vblend(v16u(x), v16u(y), spec));
+                return generic<T>(cpu.vblendv(v16u(x), v16u(y), spec));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(cpu.vblend(v32u(x), v32u(y), spec));
+                return generic<T>(cpu.vblendv(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(cpu.vblend(v64u(x), v64u(y), spec));
+                return generic<T>(cpu.vblendv(v64u(x), v64u(y), spec));
             else
                 return vblend_i(x,y,spec);
         }
@@ -110,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(cpu.vblend(v8i(x), v8i(y), spec));
+                return generic<T>(cpu.vblendv(v8i(x), v8i(y), spec));
             else if(typeof(T) == typeof(short))
-                return generic<T>(cpu.vblend(v16i(x), v16i(y), spec));
+                return generic<T>(cpu.vblendv(v16i(x), v16i(y), spec));
             else if(typeof(T) == typeof(int))
-                return generic<T>(cpu.vblend(v32i(x), v32i(y), spec));
+                return generic<T>(cpu.vblendv(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return generic<T>(cpu.vblend(v64i(x), v64i(y), spec));
+                return generic<T>(cpu.vblendv(v64i(x), v64i(y), spec));
             else
                 throw no<T>();
         }

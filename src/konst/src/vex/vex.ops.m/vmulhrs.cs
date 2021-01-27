@@ -10,9 +10,9 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Ssse3;
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b) PMULHRSW xmm, xmm/m128

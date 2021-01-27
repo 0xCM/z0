@@ -12,13 +12,12 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
         /// <summary>
-        ///  __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b)PUNPCKHBW xmm, xmm/m128
+        ///  __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b) PUNPCKHBW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
@@ -27,7 +26,7 @@ namespace Z0
             => UnpackHigh(x, y);
 
         /// <summary>
-        /// __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b)PUNPCKHBW xmm, xmm/m128
+        /// __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b) PUNPCKHBW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>
@@ -36,7 +35,7 @@ namespace Z0
             => UnpackHigh(x, y);
 
         /// <summary>
-        /// __m128i _mm_unpackhi_epi16 (__m128i a, __m128i b)PUNPCKHWD xmm, xmm/m128
+        /// __m128i _mm_unpackhi_epi16 (__m128i a, __m128i b) PUNPCKHWD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left source vector</param>
         /// <param name="y">The right source vector</param>

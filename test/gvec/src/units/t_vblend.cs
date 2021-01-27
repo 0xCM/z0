@@ -98,10 +98,10 @@ namespace Z0
             var x = cpu.vparts(n, 0,2,4,6,8,A,C,E);
             var y = cpu.vparts(n, 1,3,5,7,9,B,D,F);
 
-            Claim.veq(x, z.vblend(x,y, Blend8x16.LLLLLLLL));
-            Claim.veq(y, z.vblend(x,y, Blend8x16.RRRRRRRR));
-            Claim.veq(cpu.vparts(n, 0,2,4,6,9,B,D,F), z.vblend(x,y, Blend8x16.LLLLRRRR));
-            Claim.veq(cpu.vparts(n, 1,3,5,7,8,A,C,E), z.vblend(x,y, Blend8x16.RRRRLLLL));
+            Claim.veq(x, cpu.vblend(x,y, Blend8x16.LLLLLLLL));
+            Claim.veq(y, cpu.vblend(x,y, Blend8x16.RRRRRRRR));
+            Claim.veq(cpu.vparts(n, 0,2,4,6,9,B,D,F), cpu.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.veq(cpu.vparts(n, 1,3,5,7,8,A,C,E), cpu.vblend(x,y, Blend8x16.RRRRLLLL));
 
         }
 
@@ -136,10 +136,10 @@ namespace Z0
             var w = w32;
             var left =  cpu.vparts(n,0,1,2,3);
             var right = cpu.vparts(n,4,5,6,7);
-            Claim.veq(cpu.vparts(n,0,5,2,7), z.vblend(left,right,Blend4x32.LRLR));
-            Claim.veq(cpu.vparts(n,4,1,6,3), z.vblend(left,right,Blend4x32.RLRL));
-            Claim.veq(cpu.vparts(n,0,1,6,7), z.vblend(left,right,Blend4x32.LLRR));
-            Claim.veq(cpu.vparts(n,4,5,2,3), z.vblend(left,right,Blend4x32.RRLL));
+            Claim.veq(cpu.vparts(n,0,5,2,7), cpu.vblend(left,right,Blend4x32.LRLR));
+            Claim.veq(cpu.vparts(n,4,1,6,3), cpu.vblend(left,right,Blend4x32.RLRL));
+            Claim.veq(cpu.vparts(n,0,1,6,7), cpu.vblend(left,right,Blend4x32.LLRR));
+            Claim.veq(cpu.vparts(n,4,5,2,3), cpu.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()
@@ -148,10 +148,10 @@ namespace Z0
             var w = w32;
             var left =  cpu.vparts(0,1,2,3,4,5,6,7);
             var right = cpu.vparts(8,9,A,B,C,D,E,F);
-            Claim.veq(cpu.vparts(0,9,2,B,4,D,6,F), z.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.veq(cpu.vparts(8,1,A,3,C,5,E,7), z.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.veq(cpu.vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.veq(cpu.vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
+            Claim.veq(cpu.vparts(0,9,2,B,4,D,6,F), cpu.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.veq(cpu.vparts(8,1,A,3,C,5,E,7), cpu.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.veq(cpu.vparts(0,1,A,B,4,5,E,F), cpu.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.veq(cpu.vparts(8,9,2,3,C,D,6,7), cpu.vblend(left,right, Blend8x32.RRLLRRLL));
 
             var lrpattern = z.v32u(cpu.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(byte i=0; i < 8; i++)
@@ -159,7 +159,7 @@ namespace Z0
 
             var zero = z.vzero<uint>(n);
             var ones = gvec.vones<uint>(n);
-            Claim.veq(lrpattern, z.vblend(zero, ones, Blend8x32.LRLRLRLR));
+            Claim.veq(lrpattern, cpu.vblend(zero, ones, Blend8x32.LRLRLRLR));
         }
 
         public void vblend_32x8_256x32u_basecase()

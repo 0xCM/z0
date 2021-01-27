@@ -43,6 +43,25 @@ namespace Z0
                 => x.As<short>();
     }
 
+    partial struct cpu
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<short> v16i<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v16i(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<short> v16i<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v16i(x);
+
+        [MethodImpl(Inline)]
+        public static Vector512<short> v16i<T>(Vector512<T> x)
+            where T : unmanaged
+                => gcpu.v16i(x);
+
+    }
+
     partial struct z
     {
         [MethodImpl(Inline)]

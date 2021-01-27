@@ -64,8 +64,8 @@ namespace Z0
         public static Cell256 init<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
-            var c = z.vinsert(gcpu.v64u(a), default, LaneIndex.L0);
-            return new Cell256(z.vinsert(gcpu.v64u(b),c,LaneIndex.L1));
+            var c = cpu.vinsert(gcpu.v64u(a), default, LaneIndex.L0);
+            return new Cell256(cpu.vinsert(gcpu.v64u(b),c,LaneIndex.L1));
         }
 
         [MethodImpl(Inline)]

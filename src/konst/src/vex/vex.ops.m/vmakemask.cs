@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static BitMasks.Literals;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector

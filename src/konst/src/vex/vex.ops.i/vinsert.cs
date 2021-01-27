@@ -13,10 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41.X64;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_insert_epi8 (__m128i a, int i, const int imm8) PINSRB xmm, reg/m8, imm8

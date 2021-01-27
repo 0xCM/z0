@@ -89,8 +89,8 @@ namespace Z0
         [MethodImpl(Inline), Max]
         public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
         {
-            var xL = z.vinsert(x,default, LaneIndex.L0);
-            var yL = z.vinsert(y,default, LaneIndex.L0);
+            var xL = cpu.vinsert(x,default, LaneIndex.L0);
+            var yL = cpu.vinsert(y,default, LaneIndex.L0);
             return z.vlo(vmax(xL,yL));
         }
 
@@ -164,6 +164,6 @@ namespace Z0
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline), Max]
         public static Vector256<long> vmax(Vector256<long> x, Vector256<long> y)
-            => cpu.vblend(y, x, v8u(vgt(x,y)));
+            => cpu.vblendv(y, x, v8u(vgt(x,y)));
     }
 }

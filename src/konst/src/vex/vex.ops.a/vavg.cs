@@ -11,14 +11,8 @@ namespace Z0
      using static System.Runtime.Intrinsics.X86.Sse2;
      using static System.Runtime.Intrinsics.X86.Avx2;
      using static Part;
-     using static z;
 
-    partial struct cpu
-    {
-
-    }
-
-     partial struct z
+     partial struct cpu
      {
           /// <summary>
           /// __m128i _mm_avg_epu8 (__m128i a, __m128i b) PAVGB xmm, xmm/m128

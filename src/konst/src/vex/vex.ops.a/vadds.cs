@@ -13,7 +13,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_adds_epu8 (__m128i a, __m128i b) PADDUSB xmm, xmm/m128

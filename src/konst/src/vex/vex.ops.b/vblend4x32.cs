@@ -15,11 +15,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// __m128i _mm_blend_epi32 (__m128i a, __m128i b, const int imm8) VPBLENDD xmm, xmm, xmm/m128, imm8
         /// Combines components from left/right vectors per the blend spec
@@ -64,4 +59,5 @@ namespace Z0
         public static Vector128<uint> vblend(Vector128<uint> x, Vector128<uint> y, [Imm] Blend4x32 spec)
             => Blend(x, y, (byte)spec);
     }
+
 }

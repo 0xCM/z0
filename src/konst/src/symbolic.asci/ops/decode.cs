@@ -58,8 +58,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
-            var lo = cpu.vinflate(src.Storage, n0);
-            var hi = cpu.vinflate(src.Storage, n1);
+            var lo = cpu.vinflate16u(src.Storage, n0);
+            var hi = cpu.vinflate16u(src.Storage, n1);
             return z.recover<char>(z.bytes(new Seg512(lo,hi)));
         }
 
@@ -67,10 +67,10 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci64 src)
         {
             var x = src.Storage;
-            var x0 = cpu.vinflate(x.Lo,n0);
-            var x1 = cpu.vinflate(x.Lo,n1);
-            var x2 = cpu.vinflate(x.Hi,n0);
-            var x3 = cpu.vinflate(x.Hi,n1);
+            var x0 = cpu.vinflate16u(x.Lo,n0);
+            var x1 = cpu.vinflate16u(x.Lo,n1);
+            var x2 = cpu.vinflate16u(x.Hi,n0);
+            var x3 = cpu.vinflate16u(x.Hi,n1);
             return z.recover<char>(z.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 

@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(vidx, n256, z32)), 2), w128);
+            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(vidx, w256)), 2), w128);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(v16u(vidx), n256, z32)),2), w128));
+            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(v16u(vidx), w256)),2), w128));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
-            (var v0, var v1) = vinflate32u(v8u(vidx), n512, z32);
+            (var v0, var v1) = vinflate32u(v8u(vidx), w512);
             var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
             var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
             return v8i(vcompact8u(x0, x1, w128));
@@ -243,5 +243,98 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vgather(in ushort src, Vector256<uint> vidx)
             => GatherVector256(memory.p32u(src), v32i(vidx), 2);
+
+        /// <summary>
+        /// __m128i _mm_mask_i32gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERDD xmm, vm32x, xmm
+        /// </summary>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        /// <remarks>Elements are copied from the source vector when the highest bit of the corresponding element in the mask vector is not set
+        /// If, for example, all hi bits in the mask vector are set then the corresponding target element is loaded from the index-identified cell
+        /// and this operation reduces to the coresponding maskless gather function
+        /// </remarks>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<uint> vgather(MemoryAddress msrc, Vector128<uint> vsrc, Vector128<int> vidx, Vector128<uint> mask)
+            => GatherMaskVector128(vsrc, msrc.Pointer<uint>(), vidx, mask, 4);
+
+        /// <summary>
+        /// __m128i _mm_mask_i64gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERQQ xmm, vm64x, xmm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<ulong> vgather(Vector128<ulong> vsrc, MemoryAddress msrc, Vector128<long> vidx, Vector128<ulong> mask)
+            => GatherMaskVector128(vsrc, msrc.Pointer<ulong>(), vidx, mask, 8);
+
+        /// <summary>
+        /// __m128i _mm_mask_i32gather_epi64 (__m128i src, __int64 const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERDQ xmm, vm32x, xmm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<ulong> vgather(Vector128<ulong> vsrc, MemoryAddress msrc, Vector128<int> vidx, Vector128<ulong> mask)
+            => GatherMaskVector128(vsrc, msrc.Pointer<ulong>(), vidx, mask, 8);
+
+        /// <summary>
+        /// __m128i _mm_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m128i vindex, __m128i mask, const int scale) VPGATHERQD xmm, vm64x, xmm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<uint> vgather(Vector128<uint> vsrc, MemoryAddress msrc, Vector128<long> vidx, Vector128<uint> mask)
+            => GatherMaskVector128(vsrc, msrc.Pointer<uint>(), vidx, mask, 4);
+
+        /// <summary>
+        /// __m128i _mm256_mask_i64gather_epi32 (__m128i src, int const* base_addr, __m256i vindex, __m128i mask, const int scale) VPGATHERQD xmm, vm32y, xmm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="mSrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<uint> vgather(Vector128<uint> vsrc,  MemoryAddress msrc, Vector256<long> vidx, Vector128<uint> mask)
+            => GatherMaskVector128(vsrc, msrc.Pointer<uint>(), vidx, mask, 4);
+
+        /// <summary>
+        ///   __m256i _mm256_mask_i32gather_epi32 (__m256i src, int const* base_addr, __m256i vindex, __m256i mask, const int scale) VPGATHERDD ymm, vm32y, ymm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<uint> vgather(Vector256<uint> vsrc, MemoryAddress msrc, Vector256<int> vidx, Vector256<uint> mask)
+            => GatherMaskVector256(vsrc, msrc.Pointer<uint>(), vidx, mask, 4);
+
+        /// <summary>
+        /// __m256i _mm256_mask_i64gather_epi64 (__m256i src, __int64 const* base_addr, __m256i vindex, __m256i mask, const int scale) VPGATHERQQ ymm, vm32y, ymm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<ulong> vgather(Vector256<ulong> vsrc, MemoryAddress msrc, Vector256<long> vidx, Vector256<ulong> mask)
+            => GatherMaskVector256(vsrc, msrc.Pointer<ulong>(), vidx, mask, 8);
+
+        /// <summary>
+        ///  __m256i _mm256_mask_i32gather_epi64 (__m256i src, __int64 const* base_addr, __m128i vindex, __m256i mask, const int scale) VPGATHERDQ ymm, vm32y, ymm
+        /// </summary>
+        /// <param name="vsrc">The vector-based source for target component data as controlled by the mask vector</param>
+        /// <param name="msrc">The memory-based source for target component data as controlled by the mask vector</param>
+        /// <param name="vidx">The index vector</param>
+        /// <param name="mask">The vector that determines whether target vector components are loaded from the vector or memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<ulong> vgather(Vector256<ulong> vsrc, MemoryAddress msrc, Vector128<int> vidx, Vector256<ulong> mask)
+            => GatherMaskVector256(vsrc, msrc.Pointer<ulong>(), vidx, mask, 8);
     }
 }

@@ -87,9 +87,6 @@ namespace Z0
         public static Vector256<int> vmap(Vector128<sbyte> src, N1 n, W32 w)
             => ConvertToVector256Int32(vshi(src));
 
-        // ~ 128x8u -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m128i _mm_cvtepu8_epi16 (__m128i a) PMOVZXBW xmm, xmm/m64
         /// 8x8u -> 8x16u
@@ -188,9 +185,6 @@ namespace Z0
         public static Vector256<int> vmap(Vector128<byte> src, N1 n, W32 w, N1 i)
             => ConvertToVector256Int32(vshi(src));
 
-        // ~ 128x16i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m128i _mm_cvtepi16_epi32 (__m128i a) PMOVSXWD xmm, xmm/m64
         /// </summary>
@@ -231,9 +225,6 @@ namespace Z0
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector128<short> src, N1 n, W64 w)
             => ConvertToVector256Int64(vshi(src));
-
-        // ~ 128x16u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// __m128i _mm_cvtepu16_epi32 (__m128i a)PMOVZXWD xmm, xmm/m64
@@ -297,9 +288,6 @@ namespace Z0
         public static Vector256<ulong> vmap(Vector128<ushort> src, N1 n, W64 w)
             => v64u(ConvertToVector256Int64(vshi(src)));
 
-        // ~ 128x32u -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m128i _mm_cvtepu32_epi64 (__m128i a) PMOVZXDQ xmm, xmm/m64
         /// 2x32u -> 2x64i
@@ -350,9 +338,6 @@ namespace Z0
         public static Vector128<ulong> vmap(Vector128<uint> src, N1 n, W64 w)
             => v64u(ConvertToVector128Int64(vshi(src)));
 
-        // ~ 256x8i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
         /// 16x8u -> 16x16i
@@ -374,9 +359,6 @@ namespace Z0
         [MethodImpl(Inline), VMap]
         public static Vector256<short> vmap(Vector256<sbyte> src, N1 n, W16 w)
             => ConvertToVector256Int16(cpu.vhi(src));
-
-        // ~ 256x8u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -424,9 +406,6 @@ namespace Z0
         public static Vector256<short> vmap(Vector256<byte> src, N1 n, W16 w, N1 i)
             => ConvertToVector256Int16(cpu.vhi(src));
 
-        // ~ 256x16i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
         /// 8x16i -> 8x32i
@@ -448,9 +427,6 @@ namespace Z0
         [MethodImpl(Inline), VMap]
         public static Vector256<int> vmap(Vector256<short> src, N1 n, W32 w)
             => ConvertToVector256Int32(cpu.vhi(src));
-
-        // ~ 256x16u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
@@ -474,9 +450,6 @@ namespace Z0
         public static Vector256<uint> vmap(Vector256<ushort> src, N1 n, W32 w)
             => v32u(ConvertToVector256Int32(cpu.vhi(src)));
 
-        // ~ 256x32i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
         /// 4x32i -> 4x64i
@@ -498,9 +471,6 @@ namespace Z0
         [MethodImpl(Inline), VMap]
         public static Vector256<long> vmap(Vector256<int> src, N1 n, W64 w)
             => ConvertToVector256Int64(cpu.vhi(src));
-
-        // ~ 256x32u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128

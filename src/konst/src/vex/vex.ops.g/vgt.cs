@@ -104,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Gt]
         public static Vector128<uint> vgt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = cpu.vbroadcast(n128,CmpMask32u);
+            var mask = cpu.vbroadcast(n128, CmpMask32u);
             var mx = cpu.vxor(x,mask).AsInt32();
             var my = cpu.vxor(y,mask).AsInt32();
             return CompareGreaterThan(mx,my).AsUInt32();
@@ -121,8 +121,8 @@ namespace Z0
         [MethodImpl(Inline), Gt]
         public static Vector128<long> vgt(Vector128<long> x, Vector128<long> y)
         {
-            var a = z.vinsert(x,default, LaneIndex.L0);
-            var b = z.vinsert(y,default, LaneIndex.L0);
+            var a = cpu.vinsert(x,default, LaneIndex.L0);
+            var b = cpu.vinsert(y,default, LaneIndex.L0);
             return z.vlo(vgt(a,b));
         }
 

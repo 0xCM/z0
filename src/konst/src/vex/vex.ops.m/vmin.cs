@@ -81,8 +81,8 @@ namespace Z0
         [MethodImpl(Inline), Min]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
-            var xL = z.vinsert(x,default, LaneIndex.L0);
-            var yL = z.vinsert(y,default, LaneIndex.L0);
+            var xL = cpu.vinsert(x,default, LaneIndex.L0);
+            var yL = cpu.vinsert(y,default, LaneIndex.L0);
             return z.vlo(vmin(xL,yL));
         }
 
@@ -165,6 +165,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Min]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
-            => vblend(y, x, v8u(vlt(x,y)));
+            => vblendv(y, x, v8u(vlt(x,y)));
     }
 }

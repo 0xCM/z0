@@ -160,7 +160,7 @@ namespace Z0.Asm
         void check_blend_imm(StreamWriter dst)
         {
             var w = w256;
-            var name = nameof(z.vblend8x16);
+            var name = nameof(cpu.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
             var vKind = K.vk256<ushort>();
             var src = typeof(z).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();

@@ -34,6 +34,19 @@ namespace Z0
                 => x.AsSingle();
     }
 
+    partial struct cpu
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<float> v32f<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v32f(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<float> v32f<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v32f(x);
+    }
+
     partial struct z
     {
         [MethodImpl(Inline)]

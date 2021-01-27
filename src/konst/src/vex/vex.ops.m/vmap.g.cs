@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    partial struct z
+    using static z;
+
+    partial struct gcpu
     {
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function

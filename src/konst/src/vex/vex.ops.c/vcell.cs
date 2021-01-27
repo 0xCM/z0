@@ -72,6 +72,50 @@ namespace Z0
                 => src.GetElement(index);
 
         /// <summary>
+        /// Returns a reference to an index-identified cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The cell index</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T vcell<T>(Vector256<T> src, N0 index)
+            where T : unmanaged
+                => src.GetElement(0);
+
+        /// <summary>
+        /// Returns a reference to an index-identified cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The cell index</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T vcell<T>(Vector256<T> src, N1 index)
+            where T : unmanaged
+                => src.GetElement(1);
+
+        /// <summary>
+        /// Returns a reference to an index-identified cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The cell index</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T vcell<T>(Vector256<T> src, N2 index)
+            where T : unmanaged
+                => src.GetElement(2);
+
+        /// <summary>
+        /// Returns a reference to an index-identified cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="index">The cell index</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T vcell<T>(Vector256<T> src, N3 index)
+            where T : unmanaged
+                => src.GetElement(3);
+
+        /// <summary>
         /// Extracts a T-indexed component from a vector obtained by converting the S-vector to a T-vector
         /// </summary>
         /// <param name="src">The source vector</param>

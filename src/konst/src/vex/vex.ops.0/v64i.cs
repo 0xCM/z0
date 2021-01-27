@@ -43,6 +43,19 @@ namespace Z0
                 => x.As<long>();
     }
 
+    partial struct cpu
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<long> v64i<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v64i(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<long> v64i<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v64i(x);
+    }
+
     partial struct z
     {
         [MethodImpl(Inline)]
@@ -50,11 +63,6 @@ namespace Z0
             where T : unmanaged
                 => gcpu.v64i(x);
 
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type int64
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
         [MethodImpl(Inline)]
         public static Vector256<long> v64i<T>(Vector256<T> x)
             where T : unmanaged

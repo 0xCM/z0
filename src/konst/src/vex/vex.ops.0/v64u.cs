@@ -44,6 +44,24 @@ namespace Z0
                 => x.As<ulong>();
     }
 
+    partial struct cpu
+    {
+        [MethodImpl(Inline)]
+        public static Vector128<ulong> v64u<T>(Vector128<T> x)
+            where T : unmanaged
+                => gcpu.v64u(x);
+
+        [MethodImpl(Inline)]
+        public static Vector256<ulong> v64u<T>(Vector256<T> x)
+            where T : unmanaged
+                => gcpu.v64u(x);
+
+        [MethodImpl(Inline)]
+        public static Vector512<ulong> v64u<T>(Vector512<T> x)
+            where T : unmanaged
+                => gcpu.v64u(x);
+    }
+
     partial struct z
     {
         [MethodImpl(Inline)]
