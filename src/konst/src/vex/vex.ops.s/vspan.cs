@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w128;
-            var dst = vinit<T>(w);
+            var dst = vzero<T>(w);
             ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w256;
-            var dst = vinit<T>(w);
+            var dst = vzero<T>(w);
             ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
@@ -54,7 +54,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w512;
-            var dst = vinit<T>(w);
+            var dst = vzero<T>(w);
             ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));

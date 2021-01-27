@@ -71,7 +71,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16i(x, w512);
             (var y0, var y1) = cpu.vinflate16i(x, w512);
-            return cpu.vcompact8i(vhadd(x0,y0),vhadd(x1,y1), w256);
+            return cpu.vcompact8i(vhadd(x0,y0), vhadd(x1,y1), w256);
         }
 
         /// <summary>

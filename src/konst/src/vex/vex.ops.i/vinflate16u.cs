@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate16u(Vector256<byte> src, W512 w)
-            => vinflate16u(src, w);
+            => vconvert16u(src, w);
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -40,8 +40,8 @@ namespace Z0
         /// <param name="src"></param>
         /// <param name="w"></param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vinflate16u(in byte src, W128 w)
-            => ConvertToVector256Int16(vload(w, src)).AsUInt16();
+        public static Vector256<ushort> vinflate16u(in byte src, W256 w)
+            => ConvertToVector256Int16(vload(w128, src)).AsUInt16();
 
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -52,7 +52,7 @@ namespace Z0
             => ConvertToVector256Int16(src).AsUInt16();
 
         [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vinflate16u(in byte src, W256 w)
+        public static Vector512<ushort> vinflate16u(in byte src, W512 w)
         {
            var lo = vinflate16u(vload(w128, src));
            var hi = vinflate16u(vload(w128, add(src, 16)));

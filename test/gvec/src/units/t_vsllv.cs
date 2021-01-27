@@ -14,7 +14,7 @@ namespace Z0
     public class t_vsllv : t_inx<t_vsllv>
     {
         public override bool Enabled
-            => false;
+            => true;
 
         public void vsllv_check()
         {

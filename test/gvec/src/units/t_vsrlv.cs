@@ -13,7 +13,7 @@ namespace Z0
     public class t_vsrlv : t_inx<t_vsrlv>
     {
         public override bool Enabled
-            => false;
+            => true;
 
         public void vsrlv_check()
         {

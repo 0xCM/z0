@@ -21,16 +21,6 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate16i(Vector128<byte> src, W256 w)
-            => vinflate16i(src, w);
-
-        /// <summary>
-        /// 16x8u -> 16x16u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width selector</param>
-        /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<short> vinflate16i(Vector128<byte> src, W256 w, short t = 0)
             => vconvert16i(src, w);
 
         /// <summary>
@@ -40,7 +30,7 @@ namespace Z0
         /// <param name="lo">The target for the lower source elements</param>
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vinflate16i(Vector128<sbyte> src, W256 w, short t = 0)
+        public static Vector256<short> vinflate16i(Vector128<sbyte> src, W256 w)
             => vconcat(vmaplo16i(src, w128), vmaphi16i(src, w128));
 
         /// <summary>
