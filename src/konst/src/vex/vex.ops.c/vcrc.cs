@@ -10,9 +10,9 @@ namespace Z0
     using CRC = System.Runtime.Intrinsics.X86.Sse42;
     using CRC64 = System.Runtime.Intrinsics.X86.Sse42.X64;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// unsigned int _mm_crc32_u8 (unsigned int crc, unsigned char v) CRC32 reg, reg/m8

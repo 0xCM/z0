@@ -31,7 +31,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> counts)
-                => gvec.vsrlv(x,counts);
+                => gvec.vsrlv(x, counts);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T count)

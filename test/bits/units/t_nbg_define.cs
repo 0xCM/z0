@@ -115,8 +115,8 @@ namespace Z0
             var row126 = cpu.vload(n, g32.BlockRef(126*cpr));
             var row127 = cpu.vload(n, g32.BlockRef(127*cpr));
 
-            var diagA = cpu.vgather(n, in g32src, z.vparts(n, 496, 501, 506, 511));
-            var diagB = z.vparts(n, g32[496], g32[501], g32[506], g32[511]);
+            var diagA = cpu.vgather(n, in g32src, cpu.vparts(n, 496, 501, 506, 511));
+            var diagB = cpu.vparts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.veq(diagA,diagB);
         }
 

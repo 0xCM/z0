@@ -27,7 +27,7 @@ namespace Z0
         {
             var a = cpu.vinflate16i(x, w256);
             var b = cpu.vinflate16i(y, w256);
-            return vcompact8i(vhadd(a,b), w128);
+            return cpu.vcompact8i(vhadd(a,b), w128);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Z0
         {
             var z0 = cpu.vinflate16i(x, w256);
             var z1 = cpu.vinflate16i(y, w256);
-            return vcompact8u(vhadd(z0,z1), w128);
+            return cpu.vcompact8u(vhadd(z0,z1), w128);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16i(x, w512);
             (var y0, var y1) = cpu.vinflate16i(x, w512);
-            return vcompact8i(vhadd(x0,y0),vhadd(x1,y1), w256);
+            return cpu.vcompact8i(vhadd(x0,y0),vhadd(x1,y1), w256);
         }
 
         /// <summary>

@@ -161,7 +161,7 @@ namespace Z0
         public static T broadcast<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
-                => vfirst<S,T>(vbroadcast(N128.N, src));
+                => gcpu.vfirst<S,T>(vbroadcast(N128.N, src));
 
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector

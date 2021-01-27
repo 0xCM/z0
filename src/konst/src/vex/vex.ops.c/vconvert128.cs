@@ -57,9 +57,6 @@ namespace Z0
         public static Vector128<uint> vconvert32u(Vector128<ulong> lo, Vector128<ulong> hi, W128 w)
             => vconvert32u(vconcat(lo,hi), w);
 
-        // ~ 128x8i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// 16x8i -> (8x16u, 8x16u)
         /// </summary>
@@ -89,9 +86,6 @@ namespace Z0
         public static Vector128<int> vconvert32i(Vector128<sbyte> src, W128 w)
             => ConvertToVector128Int32(src);
 
-        // ~ 128x8u -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m256i _mm256_cvtepu8_epi16 (__m128i a) vpmovzxbw ymm, xmm
         /// 16x8u -> 16x16i
@@ -115,9 +109,6 @@ namespace Z0
         public static Vector256<ushort> vconvert16u(Vector128<byte> src, W256 w)
             => v16u(ConvertToVector256Int16(src));
 
-        // ~ 128x16i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// __m256i _mm256_cvtepi16_epi32 (__m128i a) VPMOVSXWD ymm, xmm/m128
         /// 8x16i -> 8x32i
@@ -137,9 +128,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vconvert32u(Vector128<short> src, W256 w)
             => v32u(ConvertToVector256Int32(src));
-
-        // ~ 128x16u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm

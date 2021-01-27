@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
-    {        
+    partial struct gcpu
+    {
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector
         /// </summary>

@@ -13,6 +13,9 @@ namespace Z0
 
     public class t_vsllv : t_inx<t_vsllv>
     {
+        public override bool Enabled
+            => false;
+
         public void vsllv_check()
         {
             vsllv_check(n128);
@@ -42,7 +45,7 @@ namespace Z0
         void vsllv_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(zero(t), force<uint,T>( (uint)bitwidth(t) - 1));
+            var domain = Interval.closed(zero(t), force<uint,T>(bitwidth(t) - 1));
 
             Pair<Vector128<T>> @case(uint i)
             {
@@ -51,13 +54,13 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
+            CheckSVF.CheckCells(VSvc.vsllv(w, t), @case);
         }
 
         void vsllv_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(z.zero(t),force<uint,T>((uint)bitwidth(t) - 1));
+            var domain = Interval.closed(z.zero(t), force<uint,T>(bitwidth(t) - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {
@@ -66,7 +69,7 @@ namespace Z0
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
+            CheckSVF.CheckCells(VSvc.vsllv(w, t), @case);
         }
     }
 }

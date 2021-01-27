@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Rotlv]
         public static Vector128<uint> vrotlv(Vector128<uint> src, Vector128<uint> counts)
-            => vor(vsllv(src, counts), vsrlv(src, cpu.vsub(Vector128u32, counts)));
+            => cpu.vor(vsllv(src, counts), vsrlv(src, cpu.vsub(Vector128u32, counts)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the corresponding component in the shift spec
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Rotlv]
         public static Vector128<ulong> vrotlv(Vector128<ulong> src, Vector128<ulong> counts)
-            => vor(vsllv(src,counts),vsrlv(src, cpu.vsub(Vector128u64,counts)));
+            => cpu.vor(vsllv(src,counts),vsrlv(src, cpu.vsub(Vector128u64,counts)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the corresponding component in the shift spec
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Rotlv]
         public static Vector256<uint> vrotlv(Vector256<uint> src, Vector256<uint> counts)
-            => vor(vsllv(src,counts), vsrlv(src, cpu.vsub(Vector256u32,counts)));
+            => cpu.vor(vsllv(src,counts), cpu.vsrlv(src, cpu.vsub(Vector256u32,counts)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by the corresponding component in the shift spec
@@ -47,6 +47,6 @@ namespace Z0
         /// <param name="counts">The variable shift spec</param>
         [MethodImpl(Inline), Rotlv]
         public static Vector256<ulong> vrotlv(Vector256<ulong> src, Vector256<ulong> counts)
-            => vor(vsllv(src,counts), vsrlv(src,  cpu.vsub(Vector256u64,counts)));
+            => cpu.vor(vsllv(src,counts), cpu.vsrlv(src,  cpu.vsub(Vector256u64,counts)));
     }
 }

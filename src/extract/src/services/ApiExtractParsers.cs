@@ -32,8 +32,8 @@ namespace Z0
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded
-                ? ParseResult.win(buffer, new CodeBlock(src.BaseAddress, parser.Parsed))
-                : ParseResult.fail<BinaryCode,CodeBlock>(buffer);
+                ? root.parsed(buffer, new CodeBlock(src.BaseAddress, parser.Parsed))
+                : root.unparsed<BinaryCode,CodeBlock>(buffer);
         }
 
         [MethodImpl(Inline), Op]

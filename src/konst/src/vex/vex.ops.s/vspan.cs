@@ -23,7 +23,7 @@ namespace Z0
         {
             var w = w128;
             var dst = vinit<T>(w);
-            ref var storage = ref vfirst(dst);
+            ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }
@@ -39,7 +39,7 @@ namespace Z0
         {
             var w = w256;
             var dst = vinit<T>(w);
-            ref var storage = ref vfirst(dst);
+            ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }
@@ -55,7 +55,7 @@ namespace Z0
         {
             var w = w512;
             var dst = vinit<T>(w);
-            ref var storage = ref vfirst(dst);
+            ref var storage = ref gcpu.vfirst(dst);
             vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }

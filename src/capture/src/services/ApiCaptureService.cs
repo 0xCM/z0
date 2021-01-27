@@ -24,6 +24,10 @@ namespace Z0
 
         readonly WfHost Host;
 
+        readonly MemberExtractor Extractor;
+
+        readonly IApiJit Jitter;
+
         [MethodImpl(Inline)]
         public ApiCaptureService(IWfShell wf, WfHost host, IAsmContext asm)
         {
@@ -31,6 +35,8 @@ namespace Z0
             Wf = wf.WithHost(Host);
             Asm = asm;
             Wf.Created();
+            Extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
+            Jitter = Wf.ApiServices.ApiJit();
         }
 
         public void Dispose()
@@ -46,6 +52,7 @@ namespace Z0
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 Capture(skip(catalogs,i));
+            Wf.Ran(flow);
         }
 
         void ClearArchive()
@@ -61,6 +68,13 @@ namespace Z0
 
             Capture(src.ApiTypes);
             Capture(src.OperationHosts);
+        }
+
+        void Capture(ReadOnlySpan<ApiHost> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Capture(skip(src, i));
         }
 
         void Capture(IApiHost api)
@@ -79,14 +93,6 @@ namespace Z0
             Wf.Ran(flow, api.Name);
         }
 
-        void Capture(ApiHost[] src)
-        {
-            var count = src.Length;
-            var hosts = @readonly(src);
-            for(var i=0; i<count; i++)
-                Capture(skip(hosts,i));
-        }
-
         void Capture(Index<ApiTypeInfo> src)
         {
             var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
@@ -102,9 +108,7 @@ namespace Z0
         {
             try
             {
-                var extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
-                var jitter = Wf.ApiServices.ApiJit();
-                return extractor.Extract(jitter.Jit(host));
+                return Extractor.Extract(Jitter.Jit(host));
             }
             catch(Exception e)
             {
@@ -117,9 +121,7 @@ namespace Z0
         {
             try
             {
-                var extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
-                var jitter = Wf.ApiServices.ApiJit();
-                return extractor.Extract(jitter.Jit(types));
+                return Extractor.Extract(Jitter.Jit(types));
             }
             catch(Exception e)
             {

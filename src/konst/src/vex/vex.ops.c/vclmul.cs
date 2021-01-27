@@ -45,8 +45,8 @@ namespace Z0
         public static Vector128<ulong> vclmulr(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> poly)
         {
             var prod = vclmul(a,b);
-            prod = vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
-            prod = vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = cpu.vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = cpu.vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
     }

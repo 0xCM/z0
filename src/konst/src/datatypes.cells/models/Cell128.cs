@@ -128,13 +128,21 @@ namespace Z0
         public static implicit operator Vector128<ushort>(Cell128 x)
             => x.Data.AsUInt16();
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator Vector128<short>(Cell128 x)
             => x.Data.AsInt16();
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector128<int>(Cell128 x)
+            => x.Data.AsInt32();
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector128<uint>(Cell128 x)
             => x.Data.AsUInt32();
+
+       [MethodImpl(Inline)]
+        public static implicit operator Vector128<long>(Cell128 x)
+            => x.Data.AsInt64();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(Cell128 x)

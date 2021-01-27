@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Extracts the first T-indexed component after converting the S-vector to a T-vector

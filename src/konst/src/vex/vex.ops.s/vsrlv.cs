@@ -11,6 +11,50 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
 
     using static Konst;
+    using static z;
+
+    partial struct cpu
+    {
+        /// <summary>
+        /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256
+        /// Computes z[i] := x[i] >> offsets[i] for i = 0...7
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="counts">The offset vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<int> vsrlv(Vector256<int> x, Vector256<int> counts)
+            => ShiftRightLogicalVariable(x, v32u(counts));
+
+        /// <summary>
+        /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256
+        /// Computes z[i] := x[i] >> offsets[i] for i = 0...7
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="counts">The offset vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<uint> vsrlv(Vector256<uint> x, Vector256<uint> counts)
+            => ShiftRightLogicalVariable(x, counts);
+
+        /// <summary>
+        /// __m256i _mm256_srlv_epi64 (__m256i a, __m256i count) VPSRLVQ ymm, ymm, ymm/m256
+        /// Computes z[i] := x[i] >> offsets[i] for i = 0...3
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="counts">The offset vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<long> vsrlv(Vector256<long> x, Vector256<long> counts)
+            => ShiftRightLogicalVariable(x, v64u(counts));
+
+        /// <summary>
+        ///  __m256i _mm256_srlv_epi64 (__m256i a, __m256i count) VPSRLVQ ymm, ymm, ymm/m256
+        /// Computes z[i] := x[i] >> offsets[i] for i = 0...3
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <param name="counts">The offset vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> counts)
+            => ShiftRightLogicalVariable(x, counts);
+    }
 
     partial struct z
     {
@@ -24,7 +68,7 @@ namespace Z0
         {
             var x = cpu.vinflate16i(src, w256);
             var y = cpu.vinflate16i(counts, w256);
-            return vcompact8i(vsrlv(x,y), w128);
+            return cpu.vcompact8i(vsrlv(x,y), w128);
         }
 
         /// <summary>
@@ -37,7 +81,7 @@ namespace Z0
         {
             var x = cpu.vinflate16u(src, w256);
             var y = cpu.vinflate16u(counts, w256);
-            return vcompact8u(vsrlv(x,y), w128);
+            return cpu.vcompact8u(vsrlv(x,y), w128);
         }
 
         /// <summary>
@@ -50,7 +94,7 @@ namespace Z0
         {
             var x = cpu.vinflate32i(src, w256);
             var y = v32u(cpu.vinflate32i(counts, w256));
-            return vcompact16i(ShiftRightLogicalVariable(x,y), w128);
+            return cpu.vcompact16i(ShiftRightLogicalVariable(x,y), w128);
         }
 
         /// <summary>
@@ -63,7 +107,7 @@ namespace Z0
         {
             var x = cpu.vinflate32u(src, w256);
             var y = cpu.vinflate32u(counts, w256);
-            return vcompact16u(ShiftRightLogicalVariable(x,y), w128);
+            return cpu.vcompact16u(ShiftRightLogicalVariable(x,y), w128);
         }
 
         /// <summary>
@@ -116,7 +160,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16i(src, w512);
             (var s0, var s1) = cpu.vinflate16i(counts, w512);
-            return vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
+            return cpu.vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -129,7 +173,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16u(src, w512);
             (var s0, var s1) = cpu.vinflate16u(counts, w512);
-            return vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
+            return cpu.vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -142,7 +186,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate32i(src, w512);
             (var s0, var s1) = cpu.vinflate32i(counts, w512);
-            return vcompact16i(vsrlv(x0,s0),vsrlv(x1,s1), w256);
+            return cpu.vcompact16i(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -155,47 +199,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate32u(src, w512);
             (var s0, var s1) = cpu.vinflate32u(counts, w512);
-            return vcompact16u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
+            return cpu.vcompact16u(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
         }
-
-        /// <summary>
-        /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256
-        /// Computes z[i] := x[i] >> offsets[i] for i = 0...7
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<int> vsrlv(Vector256<int> x, Vector256<int> counts)
-            => ShiftRightLogicalVariable(x, v32u(counts));
-
-        /// <summary>
-        /// __m256i _mm256_srlv_epi32 (__m256i a, __m256i count) VPSRLVD ymm, ymm, ymm/m256
-        /// Computes z[i] := x[i] >> offsets[i] for i = 0...7
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<uint> vsrlv(Vector256<uint> x, Vector256<uint> counts)
-            => ShiftRightLogicalVariable(x, counts);
-
-        /// <summary>
-        /// __m256i _mm256_srlv_epi64 (__m256i a, __m256i count) VPSRLVQ ymm, ymm, ymm/m256
-        /// Computes z[i] := x[i] >> offsets[i] for i = 0...3
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<long> vsrlv(Vector256<long> x, Vector256<long> counts)
-            => ShiftRightLogicalVariable(x, v64u(counts));
-
-        /// <summary>
-        ///  __m256i _mm256_srlv_epi64 (__m256i a, __m256i count) VPSRLVQ ymm, ymm, ymm/m256
-        /// Computes z[i] := x[i] >> offsets[i] for i = 0...3
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="counts">The offset vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> counts)
-            => ShiftRightLogicalVariable(x, counts);
     }
 }

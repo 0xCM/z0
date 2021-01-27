@@ -137,7 +137,6 @@ namespace Z0
                 return generic<T>(z.vand(v64f(x), v64f(y)));
             else
                 throw no<T>();
-
         }
 
         [MethodImpl(Inline), Op, Closures(Floats)]
@@ -145,9 +144,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vor(v32f(x), v32f(y)));
+                return generic<T>(cpu.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vor(v64f(x), v64f(y)));
+                return generic<T>(cpu.vor(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -157,9 +156,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vor(v32f(x), v32f(y)));
+                return generic<T>(cpu.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vor(v64f(x), v64f(y)));
+                return generic<T>(cpu.vor(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -169,9 +168,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vxor(v32f(x), v32f(y)));
+                return generic<T>(cpu.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vxor(v64f(x), v64f(y)));
+                return generic<T>(cpu.vxor(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -181,9 +180,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vxor(v32f(x), v32f(y)));
+                return generic<T>(cpu.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vxor(v64f(x), v64f(y)));
+                return generic<T>(cpu.vxor(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }

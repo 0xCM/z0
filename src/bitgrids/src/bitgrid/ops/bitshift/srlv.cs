@@ -28,12 +28,12 @@ namespace Z0
         public static BitGrid256<M,N,uint> srlv<M,N>(in BitGrid256<M,N,uint> g, Vector256<uint> offsets)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => z.vsrlv(g.Data, offsets);
+                => cpu.vsrlv(g.Data, offsets);
 
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,ulong> srlv<M,N>(in BitGrid256<M,N,ulong> g, Vector256<ulong> offsets)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => z.vsrlv(g.Data, offsets);
+                => cpu.vsrlv(g.Data, offsets);
     }
 }

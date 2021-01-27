@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-    
-    partial struct z
+    using static Part;
+    using static memory;
+
+    partial struct gcpu
     {
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -27,7 +27,7 @@ namespace Z0
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -39,7 +39,7 @@ namespace Z0
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -54,13 +54,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.veq(v8u(x), v8u(y)));
+                return generic<T>(cpu.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.veq(v16u(x), v16u(y)));
+                return generic<T>(cpu.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.veq(v32u(x), v32u(y)));
+                return generic<T>(cpu.veq(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.veq(v64u(x), v64u(y)));
+                return generic<T>(cpu.veq(v64u(x), v64u(y)));
             else
                 return veq_i(x,y);
         }
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.veq(v8i(x), v8i(y)));
+                return generic<T>(cpu.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.veq(v16i(x), v16i(y)));
+                return generic<T>(cpu.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.veq(v32i(x), v32i(y)));
+                return generic<T>(cpu.veq(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.veq(v64i(x), v64i(y)));
+                return generic<T>(cpu.veq(v64i(x), v64i(y)));
             else
                 return veq_f(x,y);
         }
@@ -86,10 +86,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.veq(v32f(x), v32f(y)));
+                return generic<T>(cpu.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.veq(v64f(x), v64f(y)));
-            else 
+                return generic<T>(cpu.veq(v64f(x), v64f(y)));
+            else
                 throw no<T>();
         }
 
@@ -98,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.veq(v8u(x), v8u(y)));
+                return generic<T>(cpu.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.veq(v16u(x), v16u(y)));
+                return generic<T>(cpu.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.veq(v32u(x), v32u(y)));
+                return generic<T>(cpu.veq(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.veq(v64u(x), v64u(y)));
+                return generic<T>(cpu.veq(v64u(x), v64u(y)));
             else
                 return veq_i(x,y);
         }
@@ -114,13 +114,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.veq(v8i(x), v8i(y)));
+                return generic<T>(cpu.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.veq(v16i(x), v16i(y)));
+                return generic<T>(cpu.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.veq(v32i(x), v32i(y)));
+                return generic<T>(cpu.veq(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.veq(v64i(x), v64i(y)));
+                return generic<T>(cpu.veq(v64i(x), v64i(y)));
             else
                 return veq_f(x,y);
         }
@@ -130,11 +130,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.veq(v32f(x), v32f(y)));
+                return generic<T>(cpu.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.veq(v64f(x), v64f(y)));
-            else 
+                return generic<T>(cpu.veq(v64f(x), v64f(y)));
+            else
                 throw no<T>();
-        } 
+        }
     }
 }

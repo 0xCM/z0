@@ -19,17 +19,6 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
-        /// src[0..31] -> r64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static long convert64i(Vector128<float> src, W64 w)
-            => ConvertToInt64(src);
-
-        /// <summary>
         /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
         /// src[0..31] -> r32
         /// </summary>
@@ -41,17 +30,6 @@ namespace Z0
             => ConvertToInt32(src);
 
         /// <summary>
-        ///  __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
-        /// src[0..63] -> r64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static long convert64i(Vector128<double> src, W64 w)
-            => ConvertToInt64(src);
-
-        /// <summary>
         /// __m128i _mm_cvttps_epi32 (__m128 a) CVTTPS2DQ xmm, xmm/m128
         /// Converts a floating-point source vector to an 32-bit integer target vector with a loss of precision
         /// </summary>
@@ -59,7 +37,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> convert32i(Vector128<float> src, W128 w)
+        public static Vector128<int> vconvert32i(Vector128<float> src, W128 w)
             => ConvertToVector128Int32(src);
 
         /// <summary>
@@ -70,7 +48,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<float> convert32f(Vector128<int> src, W128 w)
+        public static Vector128<float> vconvert32f(Vector128<int> src, W128 w)
             => ConvertToVector128Single(src);
 
         /// <summary>
@@ -80,7 +58,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<double> convert64f(Vector128<int> src, W256 w)
+        public static Vector256<double> vconvert64f(Vector128<int> src, W256 w)
             => ConvertToVector256Double(src);
 
         /// <summary>
@@ -90,7 +68,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<float> convert32f(Vector128<double> src, W128 w)
+        public static Vector128<float> vconvert32f(Vector128<double> src, W128 w)
             => ConvertToVector128Single(src);
 
         /// <summary>
@@ -100,7 +78,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<float> convert32f(Vector256<int> src, W256 w)
+        public static Vector256<float> vconvert32f(Vector256<int> src, W256 w)
             => ConvertToVector256Single(src);
 
         /// <summary>

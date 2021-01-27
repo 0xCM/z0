@@ -47,16 +47,6 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static long convert64i(Vector128<long> src, W64 w)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
         public static ulong convert64u(Vector128<ulong> src, W64 w)
             => ConvertToUInt64(src);
 

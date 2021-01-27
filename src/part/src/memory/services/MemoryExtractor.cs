@@ -17,14 +17,8 @@ namespace Z0
     {
         const int MaxZeroCount = 10;
 
-        public static MemoryExtractor Service => default;
-
         [MethodImpl(Inline), Op]
-        public unsafe int Read(MemoryAddress src, Span<byte> dst, int? count = null)
-            => read(src,dst,count);
-
-        [MethodImpl(Inline), Op]
-        public static int read(MemoryAddress src, Span<byte> dst, int? count = null)
+        public static int extract(MemoryAddress src, Span<byte> dst, int? count = null)
         {
             var pSrc = src.Pointer<byte>();
             var limit = count ?? dst.Length;
@@ -32,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static int read(MemoryAddress src, ref byte dst, int count)
+        public static int extract(MemoryAddress src, ref byte dst, int count)
         {
             var pSrc = memory.pointer(ref dst);
             return read(ref pSrc, count, ref dst);

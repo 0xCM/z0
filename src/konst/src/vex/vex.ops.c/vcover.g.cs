@@ -401,5 +401,4 @@ namespace Z0
             where T : unmanaged
                 => ref vcover<decimal,T>(w, ref src);
     }
-
 }

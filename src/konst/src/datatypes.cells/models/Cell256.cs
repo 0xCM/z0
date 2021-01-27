@@ -135,12 +135,28 @@ namespace Z0
             => x.Content.AsByte();
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector256<sbyte>(Cell256 x)
+            => x.Content.AsSByte();
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector256<ushort>(Cell256 x)
             => x.Content.AsUInt16();
 
         [MethodImpl(Inline)]
+        public static implicit operator Vector256<short>(Cell256 x)
+            => x.Content.AsInt16();
+
+        [MethodImpl(Inline)]
         public static implicit operator Vector256<uint>(Cell256 x)
             => x.Content.AsUInt32();
+
+       [MethodImpl(Inline)]
+        public static implicit operator Vector256<int>(Cell256 x)
+            => x.Content.AsInt32();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<long>(Cell256 x)
+            => x.Content.AsInt64();
 
         [MethodImpl(Inline)]
         public static implicit operator Vector256<ulong>(Cell256 x)

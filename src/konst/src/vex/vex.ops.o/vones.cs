@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector128<T> vones<T>(W128 n, T t = default)
             where T : unmanaged
-                => veq(default(Vector128<T>), default(Vector128<T>));
+                => gcpu.veq(default(Vector128<T>), default(Vector128<T>));
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector256<T> vones<T>(W256 n, T t = default)
             where T : unmanaged
-                => veq(default(Vector256<T>), default(Vector256<T>));
+                => gcpu.veq(default(Vector256<T>), default(Vector256<T>));
 
         /// <summary>
         /// Creates a 512-bit vector with all bits enabled
@@ -40,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static Vector512<T> vones<T>(W512 n, T t = default)
             where T : unmanaged
-                => veq(default(Vector512<T>), default(Vector512<T>));
+                => gcpu.veq(default(Vector512<T>), default(Vector512<T>));
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint vhash<T>(Vector128<T> src)
@@ -29,6 +29,6 @@ namespace Z0
         /// <typeparam name="D">The fourth type</typeparam>
         [MethodImpl(Inline)]
         public static Vector128<uint> vhash<A,B,C,D>()
-            => vparts(w128, alg.hash.calc<A>(), alg.hash.calc<B>(), alg.hash.calc<C>(), alg.hash.calc<D>());
+            => cpu.vparts(w128, alg.hash.calc<A>(), alg.hash.calc<B>(), alg.hash.calc<C>(), alg.hash.calc<D>());
     }
 }

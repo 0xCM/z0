@@ -21,11 +21,11 @@ namespace Z0
             var c = gvec.vinc<uint>(n,8);
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = vcompact16u(a,b,n128);
+            var abActual = cpu.vcompact16u(a,b,n128);
             var abExpect = vinc<ushort>(n);
             Claim.veq(abExpect, abActual);
 
-            var abcdActual = vcompact8u(a, b, c, d, n128);
+            var abcdActual = cpu.vcompact8u(a, b, c, d, n128);
             var abcdExpect = vinc<byte>(n);
             Claim.veq(abcdExpect, abcdActual);
         }
@@ -41,7 +41,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gvec.vinc(w, z16));
             var y = cpu.vsub(vsmax, gvec.vinc(w, (ushort)8));
-            var actual = vcompact8u(x,y,n128);
+            var actual = cpu.vcompact8u(x,y,n128);
 
             Claim.veq(expect,actual);
         }
@@ -57,7 +57,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gvec.vinc(w, z16));
             var y = cpu.vsub(vsmax, gvec.vinc(w, (ushort)16));
-            var actual = vcompact8u(x,y,n256);
+            var actual = cpu.vcompact8u(x,y,n256);
 
             Claim.veq(expect,actual);
         }
@@ -73,7 +73,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gvec.vinc(w, 0u));
             var y = cpu.vsub(vsmax, gvec.vinc(w, 4u));
-            var actual = vcompact16u(x,y,n128);
+            var actual = cpu.vcompact16u(x,y,n128);
 
             Claim.veq(expect,actual);
         }
@@ -88,7 +88,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gvec.vinc(w, 0u));
             var y = cpu.vsub(vsmax, gvec.vinc(w, 8u));
-            var v = vcompact16u(x,y,n256);
+            var v = cpu.vcompact16u(x,y,n256);
             var expect = cpu.vsub(vtmax, gvec.vinc(w, z16));
             Claim.veq(expect,v);
         }
@@ -98,8 +98,8 @@ namespace Z0
             var w = Part.w128;
             var x0 = cpu.vparts(w, 25, 50);
             var x1 = cpu.vparts(w, 75, 10);
-            var dst = vcompact32u(x0, x1, w);
-            var expect = vparts(w, 25, 50, 75, 10);
+            var dst = cpu.vcompact32u(x0, x1, w);
+            var expect = cpu.vparts(w, 25, 50, 75, 10);
             Claim.veq(expect,dst);
         }
     }

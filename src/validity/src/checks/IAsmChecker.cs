@@ -129,7 +129,7 @@ namespace Z0.Asm
                 var asm = Decoder.Decode(captured).Require();
                 var g = Dynamic.EmitFixedBinary<Cell128>(this[Main], asm.Code);
                 var v2 = g(x.ToCell(),y.ToCell()).ToVector<T>();
-                z.veq(v1,v2);
+                gcpu.veq(v1,v2);
             }
             return TestAction(check, CaseName<T>(method.Name));
         }
@@ -152,7 +152,7 @@ namespace Z0.Asm
 
                 var f = Dynamic.EmitFixedUnary<Cell256>(this[Main], capture.CodeBlock);
                 var v2 = f(x.ToCell()).ToVector<T>();
-                z.veq(v1,v2);
+                gcpu.veq(v1,v2);
             }
 
             return TestAction(check, CaseName<T>(method.Name));

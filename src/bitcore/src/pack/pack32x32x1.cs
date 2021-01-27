@@ -22,13 +22,13 @@ namespace Z0
         {
             var v0 = cpu.vload(w256, skip(src,0*8));
             var v1 = cpu.vload(w256, skip(src,1*8));
-            var x = vcompact16u(v0, v1, w256);
+            var x = cpu.vcompact16u(v0, v1, w256);
 
             v0 = cpu.vload(w256, skip(src,2*8));
             v1 = cpu.vload(w256, skip(src,3*8));
-            var y = vcompact16u(v0,v1, w256);
+            var y = cpu.vcompact16u(v0,v1, w256);
 
-            dst = gcpu.vpacklsb(vcompact8u(x, y, w256));
+            dst = gcpu.vpacklsb(cpu.vcompact8u(x, y, w256));
             return ref dst;
         }
     }

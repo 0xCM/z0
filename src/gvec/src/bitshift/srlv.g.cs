@@ -74,9 +74,9 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(z.vsrlv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vsrlv(v32u(x), v32u(counts)));
+                return generic<T>(cpu.vsrlv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vsrlv(v64u(x), v64u(counts)));
+                return generic<T>(cpu.vsrlv(v64u(x), v64u(counts)));
             else
                 return vsrlv_i(x,counts);
         }
@@ -90,9 +90,9 @@ namespace Z0
             else if(typeof(T) == typeof(short))
                 return generic<T>(z.vsrlv(v16i(x), v16i(counts)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vsrlv(v32i(x), v32i(counts)));
+                return generic<T>(cpu.vsrlv(v32i(x), v32i(counts)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vsrlv(v64i(x), v64i(counts)));
+                return generic<T>(cpu.vsrlv(v64i(x), v64i(counts)));
             else
                 throw no<T>();
        }

@@ -25,7 +25,7 @@ namespace Z0
         {
             var x = cpu.vinflate16i(src, w256);
             var y = cpu.vinflate16i(counts, w256);
-            return vcompact8i(vsllv(x,y), w128);
+            return cpu.vcompact8i(vsllv(x,y), w128);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         {
             var x = cpu.vinflate16u(src, w256);
             var y = cpu.vinflate16u(counts, w256);
-            return vcompact8u(vsllv(x,y), w128);
+            return cpu.vcompact8u(vsllv(x,y), w128);
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
             var a = cpu.vinflate32i(src, w256);
             var b = v32u(cpu.vinflate32i(counts, w256));
             var x = ShiftLeftLogicalVariable(a,b);
-            return vcompact16i(x,w128);
+            return cpu.vcompact16i(x,w128);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
             var a = cpu.vinflate32u(src, w256);
             var b = cpu.vinflate32u(counts, w256);
             var c = ShiftLeftLogicalVariable(a,b);
-            return vcompact16u(c, n128);
+            return cpu.vcompact16u(c, n128);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16i(src, w512);
             (var s0, var s1) = cpu.vinflate16i(counts, w512);
-            return vcompact8i(vsllv(x0,s0), vsllv(x1,s1), w256);
+            return cpu.vcompact8i(vsllv(x0,s0), vsllv(x1,s1), w256);
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate16u(src, w512);
             (var s0, var s1) = cpu.vinflate16u(counts, w512);
-            return vcompact8u(vsllv(x0,s0),vsllv(x1,s1), w256);
+            return cpu.vcompact8u(vsllv(x0,s0),vsllv(x1,s1), w256);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate32i(src, w512);
             (var s0, var s1) = cpu.vinflate32i(counts, w512);
-            return vcompact16i(vsllv(x0,s0),vsllv(x1,s1), w256);
+            return cpu.vcompact16i(vsllv(x0,s0),vsllv(x1,s1), w256);
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate32u(src, w512);
             (var s0, var s1) = cpu.vinflate32u(counts, w512);
-            return vcompact16u(vsllv(x0,s0), vsllv(x1,s1), w256);
+            return cpu.vcompact16u(vsllv(x0,s0), vsllv(x1,s1), w256);
         }
 
         /// <summary>

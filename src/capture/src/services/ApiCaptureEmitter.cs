@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
@@ -14,56 +13,6 @@ namespace Z0
     {
         public static ApiCaptureEmitter create(IWfShell wf, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
             => new ApiCaptureEmitter(wf, WfShell.host(typeof(ApiCaptureEmitter)), asm, src, extracts);
-
-        public static Outcome<T> run<T>(Func<T> f, [CallerMemberName] string caller = null)
-        {
-            var result = default(Outcome<T>);
-            try
-            {
-                result = f();
-            }
-            catch(Exception e)
-            {
-                result = e;
-            }
-
-            return result;
-        }
-
-        public static Outcome<T> run<S,T>(S src, Func<S,T> f, [CallerMemberName] string caller = null)
-        {
-            var result = default(Outcome<T>);
-            try
-            {
-                result = f(src);
-            }
-            catch(Exception e)
-            {
-                result = e;
-            }
-
-            return result;
-        }
-
-        public static Outcome<T> run<T>(IWfShell wf, Func<T> f, [CallerMemberName] string caller = null)
-        {
-            var flow = wf.Running(caller);
-            var outcome = run(f, caller);
-            if(!outcome.Ok)
-                wf.Error(outcome.Message);
-            wf.Ran(flow, caller);
-            return outcome;
-        }
-
-        public static Outcome<T> run<S,T>(IWfShell wf, S src, Func<S,T> f, [CallerMemberName] string caller = null)
-        {
-            var flow = wf.Running(caller);
-            var outcome = run(src, f, caller);
-            if(!outcome.Ok)
-                wf.Error(outcome.Message);
-            wf.Ran(flow, caller);
-            return outcome;
-        }
 
         readonly CorrelationToken Ct;
 
@@ -130,13 +79,10 @@ namespace Z0
             }
             else
                 return Index<ApiMemberCode>.Empty;
-
         }
 
         Index<ApiHexRow> EmitApiHex(Index<ApiMemberCode> src)
-        {
-            return ApiHexRows.emit(Wf, HostUri, src.View);
-        }
+            => ApiHexRows.emit(Wf, HostUri, src.View);
 
         Index<CilMethod> EmitCil(Index<ApiMemberCode> src)
         {
@@ -173,5 +119,37 @@ namespace Z0
             }
             return decoded;
        }
+
+        static Outcome<T> run<S,T>(IWfShell wf, S src, Func<S,T> f, [CallerMemberName] string caller = null)
+        {
+            var flow = wf.Running(caller);
+            var result = default(Outcome<T>);
+            try
+            {
+                result = f(src);
+            }
+            catch(Exception e)
+            {
+                wf.Error(e.Message);
+                result = e;
+            }
+            wf.Ran(flow, caller);
+            return result;
+        }
+
+        // static Outcome<T> run<S,T>(S src, Func<S,T> f, [CallerMemberName] string caller = null)
+        // {
+        //     var result = default(Outcome<T>);
+        //     try
+        //     {
+        //         result = f(src);
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         result = e;
+        //     }
+
+        //     return result;
+        // }
     }
 }

@@ -12,12 +12,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
-        // ~ 8i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// PMOVSXBQ xmm, m16
         /// 2x8i -> 2x64i
@@ -77,9 +75,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<short> vconvert16u(in SpanBlock128<sbyte> src, N256 w)
             => ConvertToVector256Int16(gptr(src.First));
-
-        // ~ 8u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// PMOVZXBQ xmm, m16
@@ -191,9 +186,6 @@ namespace Z0
         public static unsafe Vector256<ushort> vconvert16u(in SpanBlock128<byte> src, N256 w)
             => v16u(ConvertToVector256Int16(gptr(src.First)));
 
-        // ~ 16i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// PMOVSXWQ xmm, m32
         /// 2x16i -> 2x64u
@@ -213,9 +205,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vconvert32i(in SpanBlock64<short> src, N128 w)
             => ConvertToVector128Int32(gptr(src.First));
-
-        // ~ 16u -> X
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// PMOVZXWQ xmm, m32
@@ -286,9 +275,6 @@ namespace Z0
         public static unsafe Vector256<long> vconvert64i(in SpanBlock64<ushort> src, N256 w)
             => ConvertToVector256Int64(gptr(src.First));
 
-        // ~ 32u -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// VPMOVZXDQ ymm, m128
         /// 4x32u -> 4x64i
@@ -319,9 +305,6 @@ namespace Z0
         public static unsafe Vector128<long> vconvert(in SpanBlock64<uint> src, N128 w)
             => ConvertToVector128Int64(gptr(src.First));
 
-        // ~ 32i -> X
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// PMOVSXDQ xmm, m64
         /// 2x32i -> 2x64i
@@ -341,9 +324,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert64i(in SpanBlock128<int> src, N256 w)
             => ConvertToVector256Int64(gptr(src.First));
-
-        // ~ X -> 512
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
@@ -401,5 +381,6 @@ namespace Z0
         public static unsafe Vector512<ulong> vconvert64u(in SpanBlock256<uint> src, N512 w)
             => (v64u(ConvertToVector256Int64(gptr(src.First))),
                 v64u(ConvertToVector256Int64(gptr(src.First,4))));
+
     }
 }

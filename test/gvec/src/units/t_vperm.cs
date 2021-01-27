@@ -88,7 +88,7 @@ namespace Z0
             var xACBD = cpu.vpermhi4x16(x, Perm4L.ACBD);
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));
 
-            Claim.veq(cpu.vpermhi4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.veq(cpu.vpermhi4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), cpu.vparts(n128,0,1,2,3,6,9,8,7));
         }
 
         public void vperm4x32_128x32u_outline()
@@ -96,10 +96,10 @@ namespace Z0
             var n = n128;
 
             var u = z.vinc<uint>(n);
-            Claim.veq(vparts(n,0,1,2,3), u);
+            Claim.veq(cpu.vparts(n,0,1,2,3), u);
 
             var v = gcpu.vdec<uint>(n);
-            Claim.veq(vparts(n,3,2,1,0),v);
+            Claim.veq(cpu.vparts(n,3,2,1,0),v);
 
             Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));
             Claim.veq(u, z.vperm4x32(v, Perm4L.DCBA));
@@ -108,7 +108,7 @@ namespace Z0
         public void vperm_4x16_outline()
         {
             var w = W128.W;
-            var x = vparts(w,0,1,2,3,4,5,6,7);
+            var x = cpu.vparts(w,0,1,2,3,4,5,6,7);
 
             var a0 = cpu.vpermlo4x16(x, Perm4L.DCBA);
             var a1 = cpu.vparts(w,3,2,1,0,4,5,6,7);

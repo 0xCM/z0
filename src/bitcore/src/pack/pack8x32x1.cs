@@ -32,7 +32,7 @@ namespace Z0
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
             var v0 = cpu.vload(w256, skip(src,0*8));
-            dst = (byte)gcpu.vpacklsb(z.vcompact8u(v0, w128));
+            dst = (byte)gcpu.vpacklsb(cpu.vcompact8u(v0, w128));
             return ref dst;
         }
     }

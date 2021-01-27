@@ -12,7 +12,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
 
     partial struct cpu
@@ -129,6 +128,6 @@ namespace Z0
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector1024<ulong> vconvert64u(Vector256<ushort> src, W1024 w)
-            => (vconvert64u(z.vlo(src), w512), vconvert64u(cpu.vhi(src), w512));
+            => (vconvert64u(vlo(src), w512), vconvert64u(vhi(src), w512));
     }
 }

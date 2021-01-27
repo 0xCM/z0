@@ -102,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
-            => vcompact8u(src, gvec.vinc(w256, ScalarCast.uint16(16)),n256);
+            => cpu.vcompact8u(src, gvec.vinc(w256, ScalarCast.uint16(16)),n256);
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)

@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static HexConst;
-    using static KonstBytes;
+    using static Part;
 
     partial struct z
     {

@@ -10,8 +10,8 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct cpu
     {

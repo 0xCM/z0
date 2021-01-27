@@ -12,10 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
+    using static Part;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the bitwise XOR between operands
@@ -251,5 +250,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vxor(in Vector256<double> x, in Vector256<double> y)
             => Xor(x, y);
-   }
+    }
 }

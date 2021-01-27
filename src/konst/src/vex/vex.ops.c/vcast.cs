@@ -13,92 +13,92 @@ namespace Z0
     partial struct z
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<sbyte> vcast<T>(in Vector128<T> src, NK<sbyte> dst)
+        public static ref Vector128<sbyte> vcast8i<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<sbyte>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<byte> vcast<T>(in Vector128<T> src, NK<byte> dst)
+        public static ref Vector128<byte> vcast8u<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<byte>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<short> vcast<T>(in Vector128<T> src, NK<short> dst)
+        public static ref Vector128<short> vcast16i<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<short>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<ushort> vcast<T>(in Vector128<T> src, NK<ushort> dst)
+        public static ref Vector128<ushort> vcast16u<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<ushort>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref  Vector128<int> vcast<T>(in Vector128<T> src, NK<int> dst)
+        public static ref  Vector128<int> vcast32i<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<int>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<uint> vcast<T>(in Vector128<T> src, NK<uint> dst)
+        public static ref Vector128<uint> vcast32u<T>(in Vector128<T> src)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<uint>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<long> vcast<T>(in Vector128<T> src, NK<long> dst)
+        public static ref Vector128<long> vcast64i<T>(in Vector128<T> src, NK<long> dst)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<long>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<ulong> vcast<T>(in Vector128<T> src, NK<ulong> dst)
+        public static ref Vector128<ulong> vcast64u<T>(in Vector128<T> src, NK<ulong> dst)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<ulong>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<double> vcast<T>(in Vector128<T> src, NK<double> dst)
-            where T : unmanaged
-                => ref @as<Vector128<T>,Vector128<double>>(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector128<float> vcast<T>(in Vector128<T> src, NK<float> dst)
+        public static ref Vector128<float> vcast32f<T>(in Vector128<T> src, NK<float> dst)
             where T : unmanaged
                 => ref @as<Vector128<T>,Vector128<float>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<sbyte> vcast<T>(in Vector256<T> src, NK<sbyte> dst)
+        public static ref Vector128<double> vcast64f<T>(in Vector128<T> src, NK<double> dst)
+            where T : unmanaged
+                => ref @as<Vector128<T>,Vector128<double>>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref Vector256<sbyte> vcast8i<T>(in Vector256<T> src, NK<sbyte> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<sbyte>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<byte> vcast<T>(in Vector256<T> src, NK<byte> dst)
+        public static ref Vector256<byte> vcast8u<T>(in Vector256<T> src, NK<byte> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<byte>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<short> vcast<T>(in Vector256<T> src, NK<short> dst)
+        public static ref Vector256<short> vcast16i<T>(in Vector256<T> src, NK<short> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<short>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<ushort> vcast<T>(in Vector256<T> src, NK<ushort> dst)
+        public static ref Vector256<ushort> vcast16u<T>(in Vector256<T> src, NK<ushort> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<ushort>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref  Vector256<int> vcast<T>(in Vector256<T> src, NK<int> dst)
+        public static ref  Vector256<int> vcast32i<T>(in Vector256<T> src, NK<int> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<int>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<uint> vcast<T>(in Vector256<T> src, NK<uint> dst)
+        public static ref Vector256<uint> vcast32u<T>(in Vector256<T> src, NK<uint> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<uint>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<long> vcast<T>(in Vector256<T> src, NK<long> dst)
+        public static ref Vector256<long> vcast64i<T>(in Vector256<T> src, NK<long> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<long>>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Vector256<ulong> vcast<T>(in Vector256<T> src, NK<ulong> dst)
+        public static ref Vector256<ulong> vcast64u<T>(in Vector256<T> src, NK<ulong> dst)
             where T : unmanaged
                 => ref @as<Vector256<T>,Vector256<ulong>>(src);
 

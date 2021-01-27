@@ -101,7 +101,7 @@ namespace Z0
         public static ApiArtifactUri artifact(MethodInfo src)
         {
             var host = src.DeclaringType;
-            return new ApiArtifactUri(vparts(w128, (uint)host.Assembly.Id(), (uint)host.MetadataToken, (uint)src.KindId(), (uint)src.MetadataToken));
+            return new ApiArtifactUri(cpu.vparts(w128, (uint)host.Assembly.Id(), (uint)host.MetadataToken, (uint)src.KindId(), (uint)src.MetadataToken));
         }
 
         [MethodImpl(Inline), Op]

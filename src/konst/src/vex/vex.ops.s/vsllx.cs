@@ -82,7 +82,7 @@ namespace Z0
             if(count >= 64)
                 return vsll(cpu.vbsll(src, 8), (byte)(count - 64));
             else
-                return vor(vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
+                return cpu.vor(vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
             if(count >= 64)
                 return vsll(cpu.vbsll(src, 8), (byte)(count - 64));
             else
-                return vor(vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
+                return cpu.vor(vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
         }
     }
 }

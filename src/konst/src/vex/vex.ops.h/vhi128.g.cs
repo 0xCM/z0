@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct gcpu
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vhi128<T>(Vector256<T> src)
             where T : unmanaged

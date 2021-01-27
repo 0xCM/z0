@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial struct z
     {
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotlx(Vector128<ulong> src, [Imm] byte count)
-            => vor(cpu.vsllx(src, count), cpu.vsrlx(src, (byte)(128 - count)));
+            => cpu.vor(cpu.vsllx(src, count), cpu.vsrlx(src, (byte)(128 - count)));
 
         /// <summary>
         /// Rotates each 128 lane leftward a bit-level resolution
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vrotlx(Vector256<ulong> src, [Imm] byte count)
-            => vor(cpu.vsllx(src, count), cpu.vsrlx(src, (byte)(128 - count)));
+            => cpu.vor(cpu.vsllx(src, count), cpu.vsrlx(src, (byte)(128 - count)));
     }
 }

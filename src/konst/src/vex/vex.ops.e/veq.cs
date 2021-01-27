@@ -15,10 +15,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_cmpeq_epi8 (__m128i a, __m128i b) PCMPEQB xmm, xmm/m128

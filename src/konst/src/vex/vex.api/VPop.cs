@@ -68,8 +68,8 @@ namespace Z0
             var k1 = v128K1;
             var k2 = v128K2;
             var k4 = v128K4;
-            var maj =  vor(vand(vxor(x,y),z), vand(x,y));
-            var odd =  vxor(vxor(x,y),z);
+            var maj =  cpu.vor(vand(cpu.vxor(x,y),z), vand(x,y));
+            var odd =  cpu.vxor(cpu.vxor(x,y),z);
 
             maj = cpu.vsub(maj, vand(vsrl(maj, 1), k1));
             odd = cpu.vsub(odd, vand(vsrl(odd, 1), k1));
@@ -109,8 +109,8 @@ namespace Z0
             var k1 = K1;
             var k2 = K2;
             var k4 = K4;
-            var maj =  z.vor(z.vand(z.vxor(a,b),c), z.vand(a,b));
-            var odd =  z.vxor(z.vxor(a,b),c);
+            var maj =  cpu.vor(z.vand(cpu.vxor(a,b),c), z.vand(a,b));
+            var odd =  cpu.vxor(cpu.vxor(a,b),c);
 
             maj = cpu.vsub(maj, vand(z.vsrl(maj, 1), k1));
             odd = cpu.vsub(odd, vand(z.vsrl(odd, 1), k1));

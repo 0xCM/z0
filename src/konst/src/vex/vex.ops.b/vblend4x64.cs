@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vblend4x64(Vector256<int> x, Vector256<int> y, [Imm] Blend4x64 spec)
-            => vblend4x64(x,y,(byte)spec);
+            => vblend4x64(x, y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -159,7 +159,7 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vblend4x64(Vector256<uint> x, Vector256<uint> y, [Imm] Blend4x64 spec)
-            => vblend4x64(x,y,(byte)spec);
+            => vblend4x64(x, y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vblend4x64(Vector256<long> x, Vector256<long> y, [Imm] Blend4x64 spec)
-            => vblend4x64(x,y,(byte)spec);
+            => vblend4x64(x, y,(byte)spec);
 
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8

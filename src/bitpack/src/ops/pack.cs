@@ -21,7 +21,7 @@ namespace Z0
         public static byte pack(Span<Bit32> src, N8 count)
         {
             var v0 = cpu.vload(w256, first(convert(src, 0, bitwidth<byte>(w8))));
-            return (byte)gcpu.vpacklsb(z.vcompact8u(v0, w128));
+            return (byte)gcpu.vpacklsb(cpu.vcompact8u(v0, w128));
         }
 
         /// <summary>

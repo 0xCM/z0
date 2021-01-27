@@ -21,7 +21,7 @@ namespace Z0.Asm
         {
             var srcCount = src.Length;
             var storage = default(Vector128<byte>);
-            ref var dst = ref vfirst(storage);
+            ref var dst = ref gcpu.vfirst(storage);
 
             var consumed = 0;
             var remaining = asci16.Size;
