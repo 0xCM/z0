@@ -25,7 +25,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] clear<T>(T[] dst)
-            where T : struct
-                => proxy.clear(dst);
+            => proxy.clear(dst);
     }
 }

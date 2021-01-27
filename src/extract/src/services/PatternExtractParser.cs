@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The default length of the segment removed from the tail of the parsed byte array when the term code is Zx7
         /// </summary>
-        const int Zx7Cut = 16;
+        const int Zx7Cut = 7;
 
         readonly byte[] Buffer;
 

@@ -20,7 +20,6 @@ namespace Z0
 
         [MethodImpl(Options), Opaque(ClearSpan), Closures(Closure)]
         public static T[] clear<T>(T[] dst)
-            where T : struct
         {
             if(dst == null)
                 return empty<T>();

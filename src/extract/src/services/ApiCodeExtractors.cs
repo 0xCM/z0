@@ -16,8 +16,8 @@ namespace Z0
         public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
 
         [MethodImpl(Inline), Op]
-        public static MemberExtractor service(int bufferlen)
-            => new MemberExtractor(bufferlen);
+        public static ApiMemberExtractor service(int bufferlen = DefaultBufferLength)
+            => new ApiMemberExtractor(bufferlen);
 
         [MethodImpl(Inline), Op]
         public static Option<CodeBlock> parse(CodeBlock src, byte[] buffer)
@@ -32,7 +32,7 @@ namespace Z0
         public static CodeBlock extract(MemoryAddress src, byte[] buffer)
         {
             Span<byte> target = buffer;
-            var length = MemoryExtractor.extract(src, target);
+            var length = ApiMemoryExtractor.extract(src, target);
             return new CodeBlock(src, sys.array(target.Slice(0,length)));
         }
 
@@ -51,7 +51,7 @@ namespace Z0
         public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.BaseAddress;
-            var length = MemoryExtractor.extract(address, buffer);
+            var length = ApiMemoryExtractor.extract(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
             return new ApiMemberExtract(src, new CodeBlock(address, extracted));
         }

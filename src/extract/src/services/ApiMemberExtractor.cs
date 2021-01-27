@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Extracts operations from an api host
     /// </summary>
-    public readonly struct MemberExtractor
+    public readonly struct ApiMemberExtractor
     {
         readonly byte[] _Buffer;
 
@@ -22,17 +22,13 @@ namespace Z0
             get
             {
                 Span<byte> buffer = _Buffer;
-                return sys.clear(buffer);
+                return memory.clear(buffer);
             }
         }
 
         [MethodImpl(Inline)]
-        internal MemberExtractor(int bufferlen)
-            => _Buffer = sys.alloc<byte>(bufferlen);
-
-        [MethodImpl(Inline)]
-        internal MemberExtractor(byte[] buffer)
-            => _Buffer = buffer;
+        internal ApiMemberExtractor(int bufferlen)
+            => _Buffer = memory.alloc<byte>(bufferlen);
 
         [MethodImpl(Inline)]
         public ApiMemberExtract Extract(ApiMember src)

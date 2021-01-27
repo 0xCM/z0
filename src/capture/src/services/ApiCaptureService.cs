@@ -24,7 +24,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly MemberExtractor Extractor;
+        readonly ApiMemberExtractor Extractor;
 
         readonly IApiJit Jitter;
 
@@ -35,7 +35,7 @@ namespace Z0
             Wf = wf.WithHost(Host);
             Asm = asm;
             Wf.Created();
-            Extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
+            Extractor = ApiCodeExtractors.service();
             Jitter = Wf.ApiServices.ApiJit();
         }
 

@@ -12,15 +12,11 @@ namespace Z0
     partial struct memory
     {
         [MethodImpl(Inline)]
-        public static T[] alloc<T>(uint count)
-            => sys.alloc<T>(count);
+        public static Span<T> clear<T>(Span<T> src)
+            => sys.clear(src);
 
         [MethodImpl(Inline)]
-        public static T[] alloc<T>(long count)
-            => sys.alloc<T>(count);
-
-        [MethodImpl(Inline)]
-        public static T[] alloc<T>(ulong count)
-            => sys.alloc<T>(count);
+        public static T[] clear<T>(T[] dst)
+            => sys.clear(dst);
     }
 }
