@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -21,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Eqz, Closures(AllNumeric)]
         public static T eqz<T>(T a, T b)
             where T : unmanaged
-                => gmath.mul(NumericCast.force<T>((uint)gmath.eq(a,b)),ones<T>());
+                => gmath.mul(force<T>((uint)eq(a,b)), ones<T>());
     }
 }

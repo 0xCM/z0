@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -22,7 +23,7 @@ namespace Z0
             where T : unmanaged
                 => force<ulong,T>(1ul << i);
 
-        [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {

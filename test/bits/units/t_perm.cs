@@ -25,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var perm = Perm.identity(n);
-            var lengths = Algorithmic.stream(m,n);
+            var lengths = gAlg.stream(m,n);
             z.iter(lengths, i => {
                 var p = Perm.identity(i);
                 var cycle = p.Cycle(default(T));

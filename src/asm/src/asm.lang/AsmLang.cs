@@ -18,38 +18,6 @@ namespace Z0.Asm
 
         public Name Id => "asm";
 
-        [MethodImpl(Inline), Op]
-        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
-            => new AsmDisplacement(value, (AsmDisplacementSize)size);
 
-        /// <summary>
-        /// Generalizes a <see cref='IAsmOperand{T}'/> reification
-        /// </summary>
-        /// <param name="src">The source operand</param>
-        /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline)]
-        public static AsmOp<T> operand<T>(T src)
-            where T : unmanaged, IAsmOperand<T>
-                => new AsmOp<T>(src.Position, src);
-
-        [MethodImpl(Inline), Op]
-        public static AsmTokenLookup lookup(in AsmTokenIndex index)
-            => new AsmTokenLookup(index);
-
-        [MethodImpl(Inline), Op]
-        public static string definition(in AsmTokenLookup tokens, AsmTokenKind id)
-            => tokens.Definitions[(int)id];
-
-        [MethodImpl(Inline), Op]
-        public static string meaning(in AsmTokenLookup tokens, AsmTokenKind id)
-            => tokens.Meanings[(int)id];
-
-        [MethodImpl(Inline), Op]
-        public static ref readonly TokenRecord token(in AsmTokenLookup tokens, AsmTokenKind id)
-            => ref tokens.Models[(int)id];
-
-        [MethodImpl(Inline), Op]
-        public static string identifier(in AsmTokenLookup tokens, AsmTokenKind id)
-            => tokens.Identity[id];
     }
 }

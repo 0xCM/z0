@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="src">The test value</param>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The upper bound</param>
-        [MethodImpl(Inline), Between, Closures(Integers)]
+        [MethodImpl(Inline), Between, Closures(AllNumeric)]
         public static bit between<T>(T src, T min, T max)
             where T : unmanaged
                 => between_u(src,min,max);

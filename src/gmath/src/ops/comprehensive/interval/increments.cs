@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Span<T> increments<T>(Span<T> dst)
             where T : unmanaged
         {
@@ -34,7 +35,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void increments<T>(T first, uint count, ref T dst)
             where T : unmanaged
         {
@@ -48,7 +49,7 @@ namespace Z0
         /// <param name="count">The number of terms to populate</param>
         /// <param name="dst">The target reference</param>
         /// <typeparam name="T">The sequence term type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void increments<T>(uint count, ref T dst)
             where T : unmanaged
         {

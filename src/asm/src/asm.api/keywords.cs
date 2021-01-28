@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using SQ = AsmLang.SizeQualifiers;
 
-    partial struct AsmLang
+    partial struct asm
     {
         [Op]
         public static SQ.Byte @byte()

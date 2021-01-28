@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged
         {
             var sw = Time.stopwatch();
-            var variations = from i in Algorithmic.stream(count)
+            var variations = from i in gAlg.stream(count)
                     let seed = PolySeed1024.Entropic
                     let evolve = TimeSeries.Evolve(seed, domain, steps)
                     let status = evolve.ContinueWith(t => receiver(t.Result))

@@ -370,7 +370,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, AsmLang.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [MethodImpl(Inline), Op]
         public static IceMemoryInfo meminfo(IceRegister sReg, IceRegister prefix, IceMemDirect mem, MemoryAddress address, IceMemorySize size)

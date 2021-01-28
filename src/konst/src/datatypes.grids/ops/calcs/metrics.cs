@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct GridCalcs
     {
@@ -86,6 +86,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => metrics(GridCalcs.grid(m,n, zero));
+                => metrics(grid(m,n, zero));
     }
 }

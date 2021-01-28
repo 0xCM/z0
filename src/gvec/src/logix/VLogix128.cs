@@ -39,7 +39,7 @@ namespace Z0
         /// Advertises the supported ternary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryBitLogicKinds
-            => Algorithmic.stream((byte)1,(byte)TLK.X18).Cast<TLK>().ToArray();
+            => gAlg.stream((byte)1,(byte)TLK.X18).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Specifies the supported comparison operators

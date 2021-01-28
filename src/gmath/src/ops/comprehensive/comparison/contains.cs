@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial class gmath
     {
@@ -37,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static bit contains<T>(Span<T> xs, T match)
             where T : unmanaged
-                => contains(z.first(xs), match, (uint)xs.Length);
+                => contains(first(xs), match, (uint)xs.Length);
 
         /// <summary>
         ///  Adapted from corefx repo
@@ -67,7 +68,7 @@ namespace Z0
             while (length > 0)
             {
                 length -= 1;
-                if (eq(match, z.add(src, index)))
+                if (eq(match, memory.add(src, index)))
                     return true;
                 index += 1;
             }
@@ -77,23 +78,22 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bit test8<T>(in T src, T match, uint index)
             where T : unmanaged
-                =>  eq(match, z.add(src, index + 0)) ||
-                    eq(match, z.add(src, index + 1)) ||
-                    eq(match, z.add(src, index + 2)) ||
-                    eq(match, z.add(src, index + 3)) ||
-                    eq(match, z.add(src, index + 4)) ||
-                    eq(match, z.add(src, index + 5)) ||
-                    eq(match, z.add(src, index + 6)) ||
-                    eq(match, z.add(src, index + 7)
+                =>  eq(match, memory.add(src, index + 0)) ||
+                    eq(match, memory.add(src, index + 1)) ||
+                    eq(match, memory.add(src, index + 2)) ||
+                    eq(match, memory.add(src, index + 3)) ||
+                    eq(match, memory.add(src, index + 4)) ||
+                    eq(match, memory.add(src, index + 5)) ||
+                    eq(match, memory.add(src, index + 6)) ||
+                    eq(match, memory.add(src, index + 7)
                     );
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bit test4<T>(in T src, T match, uint index)
             where T : unmanaged
-                =>  eq(match, z.add(src, index + 0)) ||
-                    eq(match, z.add(src, index + 1)) ||
-                    eq(match, z.add(src, index + 2)) ||
-                    eq(match, z.add(src, index + 3));
-
+                =>  eq(match, memory.add(src, index + 0)) ||
+                    eq(match, memory.add(src, index + 1)) ||
+                    eq(match, memory.add(src, index + 2)) ||
+                    eq(match, memory.add(src, index + 3));
     }
 }

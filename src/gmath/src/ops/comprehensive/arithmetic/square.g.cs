@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Square, Closures(Integers)]
+        [MethodImpl(Inline), Square, Closures(AllNumeric)]
         public static T square<T>(T a)
             where T : unmanaged
                 => square_u(a);

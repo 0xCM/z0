@@ -134,7 +134,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline), Op]
         public static Perm Identity(int n)
-            => new Perm(Algorithmic.stream(0, n-1));
+            => new Perm(gAlg.stream(0, n-1));
 
         /// <summary>
         /// Defines an untyped identity permutation
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline), Op]
         public static Perm Identity(uint n)
-            => new Perm(Algorithmic.stream((int)n, (int)n-1));
+            => new Perm(gAlg.stream((int)n, (int)n-1));
 
         /// <summary>
         /// Defines an identity permutation on n symbols
@@ -151,7 +151,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
-                => Perm.Init(Algorithmic.stream(default, gmath.dec(n)));
+                => Perm.Init(gAlg.stream(default, gmath.dec(n)));
 
         /// <summary>
         /// Defines an untyped permutation determined by values in a source span
@@ -223,7 +223,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> Identity<T>(T n)
             where T : unmanaged
-                => new Perm<T>(Algorithmic.stream(default, gmath.dec(n)));
+                => new Perm<T>(gAlg.stream(default, gmath.dec(n)));
 
         /// <summary>
         /// Initializes permutation with the identity followed by a sequence of transpostions

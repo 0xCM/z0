@@ -11,14 +11,9 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Ones all bits each and every ... one
-        /// </summary>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline)]
         public static T ones<T>(T t = default)
             where T : unmanaged
-                => NumericLiterals.ones<T>();
+                => Numeric.ones<T>();
     }
 }

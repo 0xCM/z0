@@ -10,10 +10,9 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T negate<T>(T lhs)
             where T : unmanaged
         {

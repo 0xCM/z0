@@ -7,12 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
-        [MethodImpl(Inline), Inc, Closures(Integers)]
+        [MethodImpl(Inline), Inc, Closures(AllNumeric)]
         public static T inc<T>(T a)
             where T : unmanaged
                 => inc_u(a);
@@ -22,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.force<T>(math.inc(z.force<T,uint>(a)));
+                return force<T>(math.inc(force<T,uint>(a)));
             else if(typeof(T) == typeof(ushort))
-                return z.force<T>(math.inc(z.force<T,uint>(a)));
+                return force<T>(math.inc(force<T,uint>(a)));
             else if(typeof(T) == typeof(uint))
-                return z.force<T>(math.inc(uint32(a)));
+                return force<T>(math.inc(uint32(a)));
             else if(typeof(T) == typeof(ulong))
-                return z.force<T>(math.inc(uint64(a)));
+                return force<T>(math.inc(uint64(a)));
             else
                 return inc_i(a);
         }
@@ -38,9 +39,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.force<T>(math.inc(z.force<T,int>(a)));
+                return force<T>(math.inc(force<T,int>(a)));
             else if(typeof(T) == typeof(short))
-                return z.force<T>(math.inc(z.force<T,int>(a)));
+                return force<T>(math.inc(force<T,int>(a)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.inc(int32(a)));
             else if(typeof(T) == typeof(long))

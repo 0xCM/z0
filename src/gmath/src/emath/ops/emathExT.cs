@@ -13,6 +13,17 @@ namespace Z0
     public readonly partial struct emath
     {
         [MethodImpl(Inline)]
+        public static uint sll<E>(bit x, E offset)
+            where E : unmanaged, Enum
+                => gmath.sll((uint)x, memory.@as<E,byte>(offset));
+
+        [MethodImpl(Inline)]
+        public static T sll<T,E>(T x, E offset)
+            where T : unmanaged
+            where E : unmanaged, Enum
+                => gmath.sll(x, EnumValue.scalar<E,byte>(offset));
+
+        [MethodImpl(Inline)]
         public static @enum<E,T> add<E,T>(@enum<E,T> a, @enum<E,T> b)
             where E : unmanaged, Enum
             where T : unmanaged

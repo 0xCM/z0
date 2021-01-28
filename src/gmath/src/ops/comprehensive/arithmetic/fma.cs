@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -65,7 +66,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.fma(float64(x), float64(y), float64(z)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

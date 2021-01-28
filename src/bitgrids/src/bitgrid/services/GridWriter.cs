@@ -26,8 +26,8 @@ namespace Z0
             using var dst = path.Writer();
             dst.WriteLine(Grids.header());
             var points = (
-                from row in Algorithmic.stream(kMinSegs, mkMaxSgs)
-                from col in Algorithmic.stream(kMinSegs, mkMaxSgs)
+                from row in gAlg.stream(kMinSegs, mkMaxSgs)
+                from col in gAlg.stream(kMinSegs, mkMaxSgs)
                 let count = row*col
                 orderby count
                 select (row, col)).ToArray();
@@ -35,8 +35,8 @@ namespace Z0
             for(var i = 0; i<points.Length; i++)
             {
                 var gs = GridCalcs.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
-                    if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
-                        dst.WriteLine(Grids.format(gs));
+                if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
+                    dst.WriteLine(Grids.format(gs));
             }
 
             dst.Flush();

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gmath
     {
@@ -43,7 +43,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>((math.gcdbin(uint64(a), uint64(b))));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]

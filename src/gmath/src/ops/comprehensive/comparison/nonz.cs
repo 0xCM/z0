@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -17,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Nonz, Closures(Integers)]
+        [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
         public static bit nonz<T>(T src)
             where T : unmanaged
                 => nonz_u(src);

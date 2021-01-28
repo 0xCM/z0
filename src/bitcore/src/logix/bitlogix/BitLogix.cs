@@ -54,7 +54,7 @@ namespace Z0
         /// Advertises the supported ternary operators
         /// </summary>
         public ReadOnlySpan<TLK> TernaryOpKinds
-            => Algorithmic.stream((byte)1,(byte)TLK.X5F).Cast<TLK>().ToArray();
+            => gAlg.stream((byte)1,(byte)TLK.X5F).Cast<TLK>().ToArray();
 
         /// <summary>
         /// Returns a kind-identified unary operator

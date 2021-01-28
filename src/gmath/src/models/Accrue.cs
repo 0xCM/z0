@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct Accrue<I> : ILoopHost<Accrue<I>,I>
+    public struct Accrue<I> : ILoop<Accrue<I>,I>
         where I : unmanaged
     {
         I Total;

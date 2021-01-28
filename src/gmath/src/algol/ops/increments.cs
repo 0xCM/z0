@@ -10,7 +10,7 @@ namespace Z0
     using static gmath;
     using static z;
 
-    partial struct Algorithmic
+    partial struct gAlg
     {
         public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged

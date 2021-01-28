@@ -13,6 +13,6 @@ namespace Z0
     {
         public static Span<T> Increments<T>(this Interval<T> src, T t = default)
             where T : unmanaged
-                => Algorithmic.increments(src.ToClosed());
+                => gAlg.increments(src.ToClosed());
     }
 }

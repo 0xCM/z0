@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -25,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0u; i<count; i++)
-                z.seek(dst,i) = add(first, mul(z.force<T>(i),step));
+                seek(dst,i) = add(first, mul(force<T>(i),step));
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]

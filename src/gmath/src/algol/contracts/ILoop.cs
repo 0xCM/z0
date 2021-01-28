@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IIntegralLoop<I>
+    public interface ILoop<I>
         where I : unmanaged
     {
         void Step(I i);
     }
 
-    public interface ILoopHost<H,I> : IIntegralLoop<I>
+    public interface ILoop<H,I> : ILoop<I>
         where I : unmanaged
-        where H : struct, ILoopHost<H,I>
+        where H : struct, ILoop<H,I>
     {
 
     }

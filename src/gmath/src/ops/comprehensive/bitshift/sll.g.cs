@@ -7,22 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gmath
     {
-        [MethodImpl(Inline)]
-        public static uint sll<E>(bit x, E offset)
-            where E : unmanaged, Enum
-                => sll((uint)x, @as<E,byte>(offset));
-
-        [MethodImpl(Inline)]
-        public static T sll<T,E>(T x, E offset)
-            where T : unmanaged
-            where E : unmanaged, Enum
-                => sll(x, EnumValue.scalar<E,byte>(offset));
-
         /// <summary>
         /// Applies a logical left-shift to an integral value
         /// </summary>

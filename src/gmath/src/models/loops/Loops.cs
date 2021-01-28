@@ -31,13 +31,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static LoopHost<H,I> loop<H,I>(Interval<I> bounds, H h = default)
             where I : unmanaged, IComparable<I>
-            where H : struct, ILoopHost<H,I>
+            where H : struct, ILoop<H,I>
                 => host(loop(bounds),h);
 
         [MethodImpl(Inline)]
         public static LoopHost<H,I> host<H,I>(in Loop<I> loop, in H host)
             where I : unmanaged, IComparable<I>
-            where H : struct, ILoopHost<H,I>
+            where H : struct, ILoop<H,I>
         {
             var dst = new LoopHost<H,I>();
             dst.Host = host;
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void run<H,I>(in LoopHost<H,I> spec)
             where I : unmanaged, IComparable<I>
-            where H : struct, ILoopHost<H,I>
+            where H : struct, ILoop<H,I>
         {
             var loop =  spec.Loop;
             var host = spec.Host;

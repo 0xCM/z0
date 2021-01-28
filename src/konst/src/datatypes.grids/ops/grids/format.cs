@@ -16,6 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="colpad">The amount by which to pad each column</param>
         /// <param name="delimiter">The column separator</param>
+        [Op]
         public static string header(int? colpad = null, char? delimiter = null)
         {
             var pad = colpad ?? 10;
@@ -36,6 +37,7 @@ namespace Z0
             return format.ToString();
         }
 
+        [Op]
         public static string format(GridStats stats, int? colpad = null, char? delimiter = null)
         {
             var format = text.build();

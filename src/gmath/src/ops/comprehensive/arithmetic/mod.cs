@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="a">The source value</param>
         /// <param name="m">The modulus</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Mod, Closures(Integers)]
+        [MethodImpl(Inline), Mod, Closures(AllNumeric)]
         public static T mod<T>(T a, T m)
             where T : unmanaged
         {

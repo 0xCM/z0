@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Inc, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Inc, Closures(Floats)]
         public static T inc<T>(T src)
             where T : unmanaged
         {

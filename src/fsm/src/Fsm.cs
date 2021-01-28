@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged
         {
             var seeds = Entropy.Values<ulong>(machineCount);
-            var indices = Algorithmic.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
+            var indices = gAlg.stream(0xFFFFul, 0xFFFFFFFFul).Where(x => x % 2 != 0).Take(machineCount).ToArray();
             if(sequential)
                 return Fsm.sequential(spec, seeds, indices).Array();
             else
@@ -154,7 +154,7 @@ namespace Z0
         static TransitionFunction<T,T> transition<T>(IFsmContext context, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
+            var sources = gAlg.stream<T>(spec.StateCount).ToArray();
             var random = context.Random;
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
@@ -171,7 +171,7 @@ namespace Z0
         static TransitionFunction<T,T> transition<T>(IPolyStream src, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
-            var sources = Algorithmic.stream<T>(spec.StateCount).ToArray();
+            var sources = gAlg.stream<T>(spec.StateCount).ToArray();
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
             {

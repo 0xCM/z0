@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static Numeric;
 
     partial class gmath
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void decrements<T>(int count, ref T dst)
             where T : unmanaged
         {
@@ -33,7 +34,7 @@ namespace Z0
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void decrements<T>(T first, int count, ref T dst)
             where T : unmanaged
         {
@@ -47,7 +48,7 @@ namespace Z0
         /// <param name="first">The first value</param>
         /// <param name="dst">The target span</param>
         /// <typeparam name="T">The target value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static void decrements<T>(T lead, Span<T> dst)
             where T : unmanaged
                 => decrements(lead, dst.Length, ref first(dst));

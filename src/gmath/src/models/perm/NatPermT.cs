@@ -38,7 +38,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T[] AllocIdentity()
-            => Algorithmic.stream<T>(default, force<T>(n - 1)).ToArray();
+            => gAlg.stream<T>(default, force<T>(n - 1)).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation

@@ -46,20 +46,6 @@ namespace Z0.Asm
             get => Value != 0;
         }
 
-        HexFormatOptions HexSpec
-            => HexFormatSpecs.options(zpad:false, specifier:false);
-
-        public string Format()
-            => (Size switch{
-                AsmDisplacementSize.y1 => ((byte)Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y2 => ((ushort)Value).FormatHex(HexSpec),
-                AsmDisplacementSize.y4 => ((uint)Value).FormatHex(HexSpec),
-                _ => (Value).FormatHex(HexSpec),
-            }) + "dx";
-
-        public override string ToString()
-            => Format();
-
         public static AsmDisplacement Empty
             => default;
     }

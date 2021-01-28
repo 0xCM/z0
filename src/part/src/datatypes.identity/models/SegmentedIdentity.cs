@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal SegmentedIdentity(string text)
+        public SegmentedIdentity(string text)
         {
             Identifier = text;
             Indicator = TypeIndicator.Empty;

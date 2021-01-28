@@ -42,6 +42,11 @@ namespace Z0.Asm
         Debug = 6,
 
         /// <summary>
+        /// Classifies an instruction-pointer register of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
+        /// </summary>
+        IPTR = 7,
+
+        /// <summary>
         /// Classifies an xmm vector register of width <see cref='W128'/>
         /// </summary>
         XMM = 10,

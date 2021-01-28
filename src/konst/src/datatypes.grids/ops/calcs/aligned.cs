@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="src">The source specifier</param>
         /// <param name="w">A width-type representative</param>
         /// <typeparam name="N">The bit type</typeparam>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static bool aligned<N>(in GridMetrics src, N n = default)
             where N : unmanaged, ITypeNat
                 => (ulong)src.StoreSize % TypeNats.value(n) == 0;
