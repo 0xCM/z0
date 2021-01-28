@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(Closure)]
         public static void nor<T>(W128 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnor(n, in a, in b), ref z);
+                => gcpu.vstore(vnor(n, in a, in b), ref z);
 
         [MethodImpl(Inline), Nor, Closures(Closure)]
         public static void nor<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T dst)
@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(Closure)]
         public static void nor<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => z.vstore(vnor(w, in a, in b), ref dst);
+                => gcpu.vstore(vnor(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), Nor, Closures(Closure)]
         public static void nor<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)

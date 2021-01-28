@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W128 w, Type tCell)
-            => VKinds.test(t,w,tCell);
+            => VK.test(t,w,tCell);
 
         /// <summary>
         /// Determines whether a type is a 256-bit intrinsic vector closed over a specified type
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W256 w, Type tCell)
-            => VKinds.test(t,w,tCell);
+            => VK.test(t,w,tCell);
 
         /// <summary>
         /// Determines whether a type is a 512-bit intrinsic vector closed over a specified type
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W512 w, Type tCell)
-            => VKinds.test(t,w,tCell);
+            => VK.test(t,w,tCell);
 
         /// <summary>
         /// Determines whether a type is a 128-bit intrinsic vector
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W128 w)
-            => VKinds.test(t,w);
+            => VK.test(t,w);
 
         /// <summary>
         /// Determines whether a type is a 256-bit intrinsic vector
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W256 w)
-            => VKinds.test(t,w);
+            => VK.test(t,w);
 
         /// <summary>
         /// Determines whether a type is a 512-bit intrinsic vector
@@ -62,6 +62,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [Op]
         public static bool IsVector(this Type t, W512 w)
-            => VKinds.test(t,w);
+            => VK.test(t,w);
     }
 }

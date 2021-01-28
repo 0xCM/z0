@@ -92,7 +92,7 @@ namespace Z0.Asm
 
         Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
         {
-            var width = VKinds.width(src.ReturnType);
+            var width = VK.width(src.ReturnType);
             var f = Dynamic.CreateUnaryOp(width, src, imm);
             if(f)
               return

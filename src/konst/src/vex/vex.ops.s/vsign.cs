@@ -11,9 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         ///  __m128i _mm_sign_epi8 (__m128i a, __m128i b) PSIGNB xmm, xmm/m128
@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsign(Vector128<sbyte> src)
-            => Sign(vones<sbyte>(w128), src);
+            => Sign(z.vones<sbyte>(w128), src);
 
         /// <summary>
         ///  __m128i _mm_sign_epi16 (__m128i a, __m128i b) PSIGNW xmm, xmm/m128

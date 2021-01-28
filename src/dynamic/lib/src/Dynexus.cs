@@ -11,11 +11,10 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using I = Z0;
-    using VK = VKinds;
 
     using U = UnaryOperatorClass;
     using B = BinaryOperatorClass;
@@ -49,9 +48,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, VKinds.v128, Api.unary());
+                return ImmInjector.create(Diviner, I.VK.v128, Api.unary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, VKinds.v256, Api.unary());
+                return ImmInjector.create(Diviner, I.VK.v256, Api.unary());
             else
                 throw Unsupported.define<W>();
         }
@@ -59,9 +58,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, VKinds.v128, Api.binary());
+                return ImmInjector.create(Diviner, I.VK.v128, Api.binary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, VKinds.v256, Api.binary());
+                return ImmInjector.create(Diviner, I.VK.v256, Api.binary());
             else
                 throw no<W>();
         }
@@ -98,7 +97,7 @@ namespace Z0
             else if(w == TypeWidth.W256)
                 return DynamicImmediate.EmbedVUnaryOpImm(w256, src,imm8, Identify(src));
             else
-                return none<DynamicDelegate>();
+                return root.none<DynamicDelegate>();
         }
 
         Option<DynamicDelegate> IDynamicImmediate.CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm8)
@@ -108,7 +107,7 @@ namespace Z0
             else if(w == TypeWidth.W256)
                 return DynamicImmediate.EmbedVBinaryOpImm(w256, src, imm8, Identify(src));
             else
-                return none<DynamicDelegate>();
+                return root.none<DynamicDelegate>();
         }
 
         /// <summary>

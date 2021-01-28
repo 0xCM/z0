@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static void xornot<T>(W128 w, in T a, in T b, ref T c)
             where T : unmanaged
-                => vstore(vxornot(w, in a, in b), ref c);
+                => gcpu.vstore(vxornot(w, in a, in b), ref c);
 
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static void xornot<T>(W256 w, in T a, in T b, ref T c)
             where T : unmanaged
-                => vstore(vxornot(w, in a, in b), ref c);
+                => gcpu.vstore(vxornot(w, in a, in b), ref c);
 
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static void xornot<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T c)

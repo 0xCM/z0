@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="count">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<uint> vxorsrv(Vector128<uint> x, Vector128<uint> counts)
-            => cpu.vxor(x, vsrlv(x,counts));
+            => cpu.vxor(x, cpu.vsrlv(x,counts));
 
         /// <summary>
         /// Computes x^(x >> counts)
@@ -100,7 +100,7 @@ namespace Z0
         /// <param name="counts">Specifies the count count for each corresponding component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<ulong> vxorsrv(Vector128<ulong> x, Vector128<ulong> counts)
-            => cpu.vxor(x, vsrlv(x, counts));
+            => cpu.vxor(x, cpu.vsrlv(x, counts));
 
         /// <summary>
         /// Computes x^(x >> counts)

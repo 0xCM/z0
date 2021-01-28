@@ -172,8 +172,8 @@ namespace Z0
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
         [Op]
         public static bool IsVectorized(MethodInfo src, int? width, bool total)
-            => total ? (VKinds.test(src.ReturnType,width) && src.ParameterTypes().All(t => VKinds.test(t,width)))
-                     : (VKinds.test(src.ReturnType,width) || src.ParameterTypes().Any(t => VKinds.test(t,width)));
+            => total ? (VK.test(src.ReturnType,width) && src.ParameterTypes().All(t => VK.test(t,width)))
+                     : (VK.test(src.ReturnType,width) || src.ParameterTypes().Any(t => VK.test(t,width)));
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         [Op]
         public static bool IsVectorized(MethodInfo src)
-            => src.ReturnType.IsVector() || src.ParameterTypes().Any(VKinds.test);
+            => src.ReturnType.IsVector() || src.ParameterTypes().Any(VK.test);
 
         /// <summary>
         /// Determines whether a method has at least one 128-bit intrinsic vector parameter

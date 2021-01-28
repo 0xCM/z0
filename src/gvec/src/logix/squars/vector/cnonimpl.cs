@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(W128 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vstore(vcnonimpl(w, in a, in b), ref dst);
+                => gcpu.vstore(vcnonimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vstore(vcnonimpl(w, in a, in b), ref dst);
+                => gcpu.vstore(vcnonimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)

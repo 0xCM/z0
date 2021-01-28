@@ -46,7 +46,7 @@ namespace Z0
             Method = z.insist(method);
             BaseAddress = address;
             Host = OpUri.Host;
-            Cil = ClrDynamic.cil(method);
+            Cil = ClrDynamic.cil(BaseAddress, uri, method);
             CliSig = sig ?? CliSig.Empty;
         }
 

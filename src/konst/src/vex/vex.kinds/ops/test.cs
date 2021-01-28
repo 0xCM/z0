@@ -12,7 +12,7 @@ namespace Z0
 
     using static Part;
 
-    partial class VKinds
+    partial class VK
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector

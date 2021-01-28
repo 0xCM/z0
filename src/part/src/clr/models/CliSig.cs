@@ -12,17 +12,8 @@ namespace Z0
     /// <summary>
     /// Defines a cli signature
     /// </summary>
-    public readonly struct CliSig : ITextual, IComparable<CliSig>
+    public readonly struct CliSig : IDataTypeComparable<CliSig>
     {
-        public static CliSig Parse(string data)
-        {
-            var bytes = HexByteParser.Service.ParseData(data);
-            if(bytes)
-                return bytes.Value;
-            else
-                return CliSig.Empty;
-        }
-
         public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]

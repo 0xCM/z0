@@ -11,7 +11,7 @@ namespace Z0
 
     using NK = NumericKind;
 
-    partial class VKinds
+    partial class VK
     {
         /// <summary>
         /// Determines the number of bits covered by a k-kinded vector

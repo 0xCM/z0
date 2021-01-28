@@ -65,7 +65,7 @@ namespace Z0
             var xACBD = cpu.vpermlo4x16(x, Perm4L.ACBD);
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[C], xs[B], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]));
 
-            Claim.veq(cpu.vpermlo4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), vparts(n128, 0,3,2,1,6,7,8,9));
+            Claim.veq(cpu.vpermlo4x16(cpu.vparts(w128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), cpu.vparts(w128, 0,3,2,1,6,7,8,9));
         }
 
         public void vpermhi_4x16_outline()
@@ -88,7 +88,7 @@ namespace Z0
             var xACBD = cpu.vpermhi4x16(x, Perm4L.ACBD);
             Claim.veq(xACBD, Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[C + 4], xs[B + 4], xs[D + 4]));
 
-            Claim.veq(cpu.vpermhi4x16(vparts(n128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), cpu.vparts(n128,0,1,2,3,6,9,8,7));
+            Claim.veq(cpu.vpermhi4x16(cpu.vparts(w128, 0,1,2,3,6,7,8,9), Perm4L.ADCB), cpu.vparts(n128,0,1,2,3,6,9,8,7));
         }
 
         public void vperm4x32_128x32u_outline()
@@ -280,7 +280,7 @@ namespace Z0
         {
             var a = z.vinc<byte>(n256);
             var b = gcpu.vdec<byte>(n256);
-            var c = z.vreverse(z.vshuf32x8(a,b));
+            var c = z.vreverse(cpu.vshuf32x8(a,b));
             Claim.veq(a,c);
         }
 

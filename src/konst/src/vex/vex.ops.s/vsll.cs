@@ -10,10 +10,10 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
-
     using static Part;
+    using static memory;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Defines the unfortunately missing _mm_slli_epi8 that shifts each vector component leftward by a common number of bits
@@ -194,7 +194,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, msb8f(d)));
+                => generic<T>(gcpu.vbroadcast<byte>(w, msb8f(d)));
 
         /// <summary>
         /// Creates a mask where f most significant bits of each 8 bits are enabled
@@ -206,6 +206,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, msb8f(d)));
+                => generic<T>(gcpu.vbroadcast<byte>(w, msb8f(d)));
     }
 }

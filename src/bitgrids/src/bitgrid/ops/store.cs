@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Store, Closures(Closure)]
         public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
-                => vstore(src, ref dst.Data.BlockRef(block));
+                => gcpu.vstore(src, ref dst.Data.BlockRef(block));
 
         /// <summary>
         /// Stores a 128-bit bitgrid to a caller-supplied target
@@ -105,6 +105,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => vstore(src, ref dst.Data.BlockRef(block));
+                => gcpu.vstore(src, ref dst.Data.BlockRef(block));
     }
 }

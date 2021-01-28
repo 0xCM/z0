@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Encoded;
+    //using static Encoded;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -143,6 +143,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(BinaryCode a, BinaryCode b)
             => !a.Equals(b);
+
+        [Op]
+        public static bool equals(BinaryCode a, BinaryCode b)
+        {
+            if(a.IsNonEmpty && b.IsNonEmpty)
+                return a.View.SequenceEqual(b.View);
+            else
+            {
+                if(a.Length == 0 && a.Length == 0)
+                    return true;
+                else
+                    return false;
+            }
+        }
 
         /// <summary>
         /// The canonical zero

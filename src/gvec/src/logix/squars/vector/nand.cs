@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnand(w, a, b), ref z);
+                => gcpu.vstore(vnand(w, a, b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W256 n, in T a, in T b, ref T z)
             where T : unmanaged
-                => vstore(vnand(n, in a, in b), ref z);
+                => gcpu.vstore(vnand(n, in a, in b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
         public static void nand<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)

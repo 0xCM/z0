@@ -74,6 +74,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf32x8<T>(Vector256<T> src, Vector256<byte> spec)
             where T : unmanaged
-                => generic<T>(z.vshuf32x8(v8u(src), spec));
+                => generic<T>(cpu.vshuf32x8(v8u(src), spec));
     }
 }

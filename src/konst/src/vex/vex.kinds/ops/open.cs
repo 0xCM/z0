@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class VKinds
+    partial class VK
     {
         /// <summary>
         /// Returns true if a type is an open generic 128-bit intrinsic vector

@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w128);
-            z.vstore(src, ref dst.First);
+            gcpu.vstore(src, ref dst.First);
             return dst;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w256);
-            z.vstore(src, ref dst.First);
+            gcpu.vstore(src, ref dst.First);
             return dst;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w512);
-            z.vstore(src, ref dst.First);
+            gcpu.vstore(src, ref dst.First);
             return dst;
         }
     }

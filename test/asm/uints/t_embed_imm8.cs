@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using K = VKinds;
+    using K = VK;
 
     public class t_embed_imm8 : t_asm<t_embed_imm8>
     {
@@ -34,8 +34,8 @@ namespace Z0.Asm
         {
             var numeric = NumericKinds.NumericTypes().Array();
             Claim.gteq(numeric.Length, 10);
-            Claim.eq(VKinds.Types128().Length, numeric.Length);
-            Claim.eq(VKinds.Types256().Length, numeric.Length);
+            Claim.eq(VK.Types128().Length, numeric.Length);
+            Claim.eq(VK.Types256().Length, numeric.Length);
         }
 
         public void unary_shift_v128_embed_imm8()
@@ -83,7 +83,7 @@ namespace Z0.Asm
 
         void check_imm(MethodInfo src, W128 w, Type tVector, StreamWriter dst)
         {
-            var kVector = VKinds.kind(tVector);
+            var kVector = VK.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
             var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
@@ -142,7 +142,7 @@ namespace Z0.Asm
 
         void check_imm(MethodInfo src, W256 w, Type tVector, StreamWriter dst)
         {
-            var kVector = VKinds.kind(tVector);
+            var kVector = VK.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
             var vones = vbroadcast.Invoke(null, new object[]{w, one(tCell).Boxed});
@@ -182,7 +182,7 @@ namespace Z0.Asm
 
         void check_cell_type(Type tVector, W128 w)
         {
-            var kVector = VKinds.kind(tVector);
+            var kVector = VK.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -240,7 +240,7 @@ namespace Z0.Asm
 
         void check_cell_type(Type tVector, W256 w)
         {
-            var kVector = VKinds.kind(tVector);
+            var kVector = VK.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)

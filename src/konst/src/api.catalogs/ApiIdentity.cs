@@ -26,15 +26,6 @@ namespace Z0
 
         internal const byte OpIndex = 3;
 
-        public static OpIdentity identify(MethodInfo src)
-            => MultiDiviner.Service.DivineIdentity(src);
-
-        public static OpIdentity identify(Delegate src)
-            => MultiDiviner.Service.DivineIdentity(src);
-
-        public static TypeIdentity identify(Type src)
-            => MultiDiviner.Service.DivineIdentity(src);
-
         public static FS.FileName file(ApiHostUri host, FS.FileExt ext)
             => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 

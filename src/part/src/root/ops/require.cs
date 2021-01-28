@@ -38,5 +38,20 @@ namespace Z0
 
             return src;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T require<T>(T src, Func<T,bool> f)
+        {
+            require(f(src),  () => $"The centre does not hold");
+            return src;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] require<T>(T[] src)
+        {
+            if(src is null)
+                sys.@throw("Null arrays are bad");
+            return src;
+        }
     }
 }

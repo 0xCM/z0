@@ -51,6 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DynamicDelegate<BinaryOp<Vector128<T>>> EmbedImmediate(MethodInfo src, byte imm)
-            => DynamicImmediate.EmbedVBinaryOpImm(VKinds.vk128<T>(), Diviner.Identify(src), src, imm);
+            => DynamicImmediate.EmbedVBinaryOpImm(VK.vk128<T>(), Diviner.Identify(src), src, imm);
     }
 }

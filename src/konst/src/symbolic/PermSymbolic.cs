@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> digits(Perm32 spec)
-            => vshuf32x8(z.vinc<byte>(n256),spec.data);
+            => cpu.vshuf32x8(z.vinc<byte>(n256),spec.data);
 
         [MethodImpl(Inline), Op]
         public static Perm8L permid(N8 n)

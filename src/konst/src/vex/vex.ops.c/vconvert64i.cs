@@ -22,10 +22,9 @@ namespace Z0
         /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
+        /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<long> src, W64 w)
+        public static long vconvert64i(Vector128<long> src, W64 wDst)
             => ConvertToInt64(src);
 
         /// <summary>
@@ -33,10 +32,9 @@ namespace Z0
         /// src[0..31] -> r64
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
+        /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<float> src, W64 w)
+        public static long vconvert64i(Vector128<float> src, W64 wDst)
             => ConvertToInt64(src);
 
         /// <summary>
@@ -44,10 +42,9 @@ namespace Z0
         /// src[0..63] -> r64
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
+        /// <param name="wDst">The target width</param>
         [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<double> src, W64 w)
+        public static long vconvert64i(Vector128<double> src, W64 wDst)
             => ConvertToInt64(src);
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static memory;
     using static root;
 
@@ -68,18 +68,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         [Op]
-        public static Outcome<CliSig> resolve(Type src)
+        public static bool resolve(Type src, out CliSig dst)
         {
             var module = src.Module;
             try
             {
-                return new CliSig(module.ResolveSignature(src.MetadataToken));
+                dst = new CliSig(module.ResolveSignature(src.MetadataToken));
+                return true;
             }
             catch(Exception)
             {
-                var msg = $"Signature resolution failure: The signature of the type {src.AssemblyQualifiedName} was not found in the module {src.Module}";
-
-                throw new AppException(AppMsg.error(msg));
+                dst = CliSig.Empty;
+                return false;
             }
         }
 

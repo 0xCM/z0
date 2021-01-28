@@ -67,8 +67,8 @@ namespace Z0
         public static Vector128<byte> vpackus(Vector128<ushort> x, Vector128<ushort> y)
         {
             var mask = vbroadcast(n128, (ushort)(byte.MaxValue));
-            var v1 = z.v16i(z.vand(x,mask));
-            var v2 = z.v16i(z.vand(y,mask));
+            var v1 = v16i(vand(x,mask));
+            var v2 = v16i(vand(y,mask));
             return PackUnsignedSaturate(v1,v2);
         }
 

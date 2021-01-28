@@ -36,12 +36,12 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W128 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
-                => vstore(vselect(n, in a, in b, in c), ref z);
+                => gcpu.vstore(vselect(n, in a, in b, in c), ref z);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W256 n, in T a, in T b, in T c, ref T z)
             where T : unmanaged
-                => vstore(vselect(n, in a, in b, in c), ref z);
+                => gcpu.vstore(vselect(n, in a, in b, in c), ref z);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static void select<T>(W128 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
@@ -55,7 +55,7 @@ namespace Z0
         public static void select<T>(W256 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
+            for(int i=0, offset = 0; i<vcount; i++, offset += blocklen)
                 select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(z, offset));
         }
     }

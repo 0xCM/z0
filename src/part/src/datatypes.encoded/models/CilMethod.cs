@@ -10,48 +10,55 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CilMethod
+    public readonly struct CilMethod : ITextual
     {
         const string FormatPattern = "{0,-16} | {1, -80} | {2}";
 
         /// <summary>
-        /// The code's base address
+        /// The operation identity
         /// </summary>
-        public readonly MemoryAddress Base;
+        public Name Id {get;}
 
         /// <summary>
-        /// The operation uri
+        /// The code's base address
         /// </summary>
-        public readonly string Name;
+        public MemoryAddress Base {get;}
 
         /// <summary>
         /// The encoded cil
         /// </summary>
-        public readonly BinaryCode Encoded;
+        public BinaryCode Encoded {get;}
 
-        public readonly MethodImplAttributes ImplSpec;
+        /// <summary>
+        /// The method implementation attributes
+        /// </summary>
+        public MethodImplAttributes ImplSpec {get;}
+
+        public TextBlock Formatted {get;}
 
         [MethodImpl(Inline)]
-        public CilMethod(MemoryAddress @base, OpUri uri, BinaryCode data, MethodImplAttributes impl)
+        public CilMethod(MemoryAddress @base, Name name, BinaryCode data, MethodImplAttributes impl, TextBlock? formatted = null)
         {
             Base = @base;
-            Name = uri.Format();
+            Id = name;
             Encoded = data;
             ImplSpec = impl;
+            Formatted = formatted ?? TextBlock.Empty;
         }
 
         [MethodImpl(Inline)]
-        public CilMethod(string name, BinaryCode data, MethodImplAttributes impl)
+        public CilMethod(Name name, BinaryCode data, MethodImplAttributes impl, TextBlock? formatted = null)
         {
             Base = 0;
-            Name = name;
+            Id = name;
             Encoded = data;
             ImplSpec = impl;
+            Formatted = formatted ?? TextBlock.Empty;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(FormatPattern, Base, Name, Encoded.Format());
+            => string.Format(FormatPattern, Base, Id, Encoded.Format());
 
         public override string ToString()
             => Format();

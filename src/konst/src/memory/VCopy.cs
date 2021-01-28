@@ -31,7 +31,7 @@ namespace Z0
             {
                 var offset = i*seg;
                 var vSrc = vload(w, skip(src, offset));
-                vstore(vSrc, ref seek(dst,offset));
+                gcpu.vstore(vSrc, ref seek(dst,offset));
             }
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             {
                 var offset = i*seg;
                 var vSrc = vload(w, skip(src, offset));
-                vstore(vSrc, ref seek(dst,offset));
+                gcpu.vstore(vSrc, ref seek(dst,offset));
             }
         }
     }

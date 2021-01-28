@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
+    using static Part;
+
     public class t_dynamic : t_inx<t_dynamic>
     {
         public void check_blocks()
@@ -26,8 +28,8 @@ namespace Z0
         public void vbsll_imm_handle()
         {   const byte imm8 = 9;
             var name = nameof(gcpu.vbsll);
-            var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(VKinds.v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(VKinds.vk128<uint>(), Z0.Identity.identify(src), src, imm8);
+            var src = typeof(gcpu).DeclaredMethods().WithName(name).OfKind(VK.v128).Single();
+            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), Z0.Identity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
             var dst = ClrDynamic.method(handle);
             Claim.ClaimEq(dst.Name, name);
@@ -36,8 +38,10 @@ namespace Z0
         public unsafe void vbsll_128x32u()
         {
             const byte imm8 = 9;
+            var host = typeof(gcpu);
+            var w = w128;
 
-            var resolver = default(VImm8UnaryResolver128<uint>);
+            var resolver = VImm8UnaryResolvers.create<uint>(host, w);
             var vbsll = resolver.inject(imm8, ApiClass.Bsll).Operation;
 
             for(var i=0; i<RepCount; i++)

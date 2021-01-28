@@ -16,28 +16,28 @@ namespace Z0
         /// </summary>
         /// <param name="p">The parameter to examine</param>
         public static bool IsVector(this ParameterInfo p)
-            => VKinds.test(p);
+            => VK.test(p);
 
         /// <summary>
         /// Determines whether a parameter is of type 128-bit intrinsic vector
         /// </summary>
         /// <param name="p">The parameter to examine</param>
         public static bool IsVector(this ParameterInfo p, W128 w)
-            => VKinds.test(p,w);
+            => VK.test(p,w);
 
         /// <summary>
         /// Determines whether a parameter is of type 256-bit intrinsic vector
         /// </summary>
         /// <param name="p">The parameter to examine</param>
         public static bool IsVector(this ParameterInfo p, W256 w)
-            => VKinds.test(p,w);
+            => VK.test(p,w);
 
         /// <summary>
         /// Determines whether a parameter is of type 512-bit intrinsic vector
         /// </summary>
         /// <param name="p">The parameter to examine</param>
         public static bool IsVector(this ParameterInfo p, W512 w)
-            => VKinds.test(p,w);
+            => VK.test(p,w);
 
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="tCell">The argument type to match</param>
         public static bool IsVector(this ParameterInfo p, W128 w, Type tCell)
-            => VKinds.test(p,w,tCell);
+            => VK.test(p,w,tCell);
 
         /// <summary>
         /// Returns true if a method parameter is a 256-bit intrinsic vector closed over a specified argument type
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="tCell">The argument type to match</param>
         public static bool IsVector(this ParameterInfo p, W256 w, Type tCell)
-            => VKinds.test(p,w,tCell);
+            => VK.test(p,w,tCell);
 
         /// <summary>
         /// Returns true if a method parameter is a 512-bit intrinsic vector closed over a specified argument type
@@ -65,6 +65,6 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="tCell">The argument type to match</param>
         public static bool IsVector(this ParameterInfo p, W512 w, Type tCell)
-            => VKinds.test(p,w,tCell);
+            => VK.test(p,w,tCell);
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost("api")]
     public partial class Blocked
@@ -20,7 +20,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0u; i<a.BlockCount; i++)
-                z.vstore(gvec.vand<T>(a.LoadVector(i), b.LoadVector(i)), ref dst.BlockRef(i));
+                gcpu.vstore(gvec.vand<T>(a.LoadVector(i), b.LoadVector(i)), ref dst.BlockRef(i));
             return dst;
         }
 

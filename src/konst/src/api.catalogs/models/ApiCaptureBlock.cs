@@ -43,7 +43,7 @@ namespace Z0
             insist(extracted.BaseAddress, parsed.BaseAddress);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
-            Cil = ClrDynamic.cil(method);
+            Cil = ClrDynamic.cil(parsed.BaseAddress, OpUri, method);
             CliSig = CliSigs.resolve(method);
         }
 

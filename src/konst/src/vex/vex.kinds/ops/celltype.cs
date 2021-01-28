@@ -8,7 +8,7 @@ namespace Z0
 
     using static Part;
 
-    partial class VKinds
+    partial class VK
     {
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind

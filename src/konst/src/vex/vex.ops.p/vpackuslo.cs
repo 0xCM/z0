@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static KonstBytes;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Produces the lo shuffle spec for packing (128x32, 128x32) -> 128x16
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackuslo(N256 w, N32 src, N16 dst)
-            => vload(w,PackUSLo32x256x16u);
+            => gcpu.vload(w,PackUSLo32x256x16u);
     }
 }

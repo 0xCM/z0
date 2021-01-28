@@ -21,9 +21,8 @@ namespace Z0
         /// 2x8i -> 2x64i
         /// </summary>
         /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vconvert64i(in SpanBlock16<sbyte> src, N128 w)
+        public static unsafe Vector128<long> vconvert64i(in SpanBlock16<sbyte> src, W128 wDst)
             => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
@@ -33,7 +32,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<int> vconvert32i(in SpanBlock32<sbyte> src, N128 w)
+        public static unsafe Vector128<int> vconvert32i(in SpanBlock32<sbyte> src, W128 w)
             => ConvertToVector128Int32(gptr(src.First));
 
         /// <summary>
@@ -43,7 +42,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<long> vconvert64i(in SpanBlock32<sbyte> src, N256 w)
+        public static unsafe Vector256<long> vconvert64i(in SpanBlock32<sbyte> src, W256 w)
             => ConvertToVector256Int64(gptr(src.First));
 
         /// <summary>
@@ -53,7 +52,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<short> vconvert16i(in SpanBlock64<sbyte> src, N128 w)
+        public static unsafe Vector128<short> vconvert16i(in SpanBlock64<sbyte> src, W128 w)
             => ConvertToVector128Int16(gptr(src.First));
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<int> vconvert32i(in SpanBlock64<sbyte> src, N256 w)
+        public static unsafe Vector256<int> vconvert32i(in SpanBlock64<sbyte> src, W256 w)
             => ConvertToVector256Int32(gptr(src.First));
 
         /// <summary>
@@ -73,7 +72,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<short> vconvert16u(in SpanBlock128<sbyte> src, N256 w)
+        public static unsafe Vector256<short> vconvert16u(in SpanBlock128<sbyte> src, W256 w)
             => ConvertToVector256Int16(gptr(src.First));
 
         /// <summary>
@@ -83,7 +82,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vconvert64i(in SpanBlock16<byte> src, N128 w)
+        public static unsafe Vector128<long> vconvert64i(in SpanBlock16<byte> src, W128 w)
             => ConvertToVector128Int64(gptr(src.First));
 
         /// <summary>
@@ -93,7 +92,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ulong> vconvert64u(in SpanBlock16<byte> src, N128 w)
+        public static unsafe Vector128<ulong> vconvert64u(in SpanBlock16<byte> src, W128 w)
             => v64u(ConvertToVector128Int64(gptr(src.First)));
 
         /// <summary>
@@ -103,7 +102,7 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<int> vconvert(in SpanBlock32<byte> src, N128 w)
+        public static unsafe Vector128<int> vconvert(in SpanBlock32<byte> src, W128 w)
             => ConvertToVector128Int32(gptr(src.First));
 
         /// <summary>

@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static void cimpl<T>(W128 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => z.vstore(vcimpl(w, in a, in b), ref dst);
+                => gcpu.vstore(vcimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static void cimpl<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => z.vstore(vcimpl(w, in a, in b), ref dst);
+                => gcpu.vstore(vcimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
         public static void cimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)

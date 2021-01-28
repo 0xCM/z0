@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source with a known (nonzero) location
@@ -28,15 +27,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public CodeBlock(MemoryAddress src, byte[] data)
         {
-            BaseAddress = insist(src, x => x.IsNonEmpty);
-            Code = new BinaryCode(insist(data));
+            BaseAddress = root.require(src, x => x.IsNonEmpty);
+            Code = new BinaryCode(root.require(data));
         }
 
         [MethodImpl(Inline)]
         public CodeBlock(MemoryAddress src, BinaryCode code)
         {
-            BaseAddress = insist(src, x => x.IsNonEmpty);
+            BaseAddress = root.require(src, x => x.IsNonEmpty);
             Code = code;
+        }
+
+        [MethodImpl(Inline)]
+        CodeBlock(ulong zero)
+        {
+            BaseAddress = zero;
+            Code = Array.Empty<byte>();
         }
 
         public MemoryRange MemorySegment
@@ -101,12 +107,6 @@ namespace Z0
         public override bool Equals(object src)
             => src is CodeBlock x && Equals(x);
 
-        [MethodImpl(Inline)]
-        CodeBlock(ulong zero)
-        {
-            BaseAddress = zero;
-            Code = Array.Empty<byte>();
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator byte[](CodeBlock src)

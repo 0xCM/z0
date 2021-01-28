@@ -114,7 +114,6 @@ namespace Z0
         public static unsafe ref Vector512<T> vload<T>(in T src, out Vector512<T> dst)
             where T : unmanaged
                 => ref vload(gptr(src), out dst);
-
     }
 
     partial struct z

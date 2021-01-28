@@ -29,6 +29,10 @@ namespace Msil
                 AppendIL(method, sw, typeFactory);
                 return sw.ToString();
             }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
             finally
             {
                 CultureInfo.CurrentCulture = oldCulture;

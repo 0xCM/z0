@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using K = VKinds;
+    using K = VK;
 
     partial class VServices
     {

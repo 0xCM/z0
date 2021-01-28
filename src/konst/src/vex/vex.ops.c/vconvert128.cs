@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vconvert64i(Vector128<int> src, W256 w)
+        public static Vector256<long> vconvert64i(Vector128<int> src, W256 wDst)
             => ConvertToVector256Int64(src);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vconvert64i(Vector128<uint> src, W256 w)
+        public static Vector256<long> vconvert64i(Vector128<uint> src, W256 wDst)
             => ConvertToVector256Int64(src);
 
         /// <summary>

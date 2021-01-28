@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class VKinds
+    partial class VK
     {
         /// <summary>
         /// Computes a vector kind classifier from a 128-bit vector instance
@@ -88,11 +88,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W128))
-                return VKinds.kind<T>(default(W128));
+                return VK.kind<T>(default(W128));
             else if(typeof(W) == typeof(W256))
-                return VKinds.kind<T>(default(W256));
+                return VK.kind<T>(default(W256));
             else if(typeof(W) == typeof(W512))
-                return VKinds.kind<T>(default(W512));
+                return VK.kind<T>(default(W512));
             else
                 return VectorKind.None;
         }

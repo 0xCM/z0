@@ -82,7 +82,7 @@ namespace Z0
         {
             try
             {
-                var width = VKinds.width(src.ReturnType);
+                var width = VK.width(src.ReturnType);
                 return width switch{
                     TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
                     TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),

@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [Op]
         public static bool IsOpenVector(this Type t, W128 w)
-            => VKinds.open(t,w);
+            => VK.open(t,w);
 
         /// <summary>
         /// Returns true if a type is an open generic 512-bit intrinsic vector
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [Op]
         public static bool IsOpenVector(this Type t, W256 w)
-            => VKinds.open(t,w);
+            => VK.open(t,w);
 
         /// <summary>
         /// Returns true if a type is an open generic 512-bit intrinsic vector
@@ -33,6 +33,6 @@ namespace Z0
         /// <param name="w">The vector width</param>
         [Op]
         public static bool IsOpenVector(this Type t, W512 w)
-            => VKinds.open(t,w);
+            => VK.open(t,w);
     }
 }

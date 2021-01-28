@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static KonstBytes;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Creates a vector that describes a lo/hi lane merge permutation
@@ -24,9 +24,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return gcpu.vload<T>(n256,LaneMerge256x8u);
+                return vload<T>(w256, LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return gcpu.vload<T>(n256,LaneMerge256x16u);
+                return vload<T>(w256, LaneMerge256x16u);
             else
                 return default;
         }

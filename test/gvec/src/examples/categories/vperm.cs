@@ -46,7 +46,7 @@ namespace Z0
                 var v2 = z.vperm4x32(v1,p);
 
                 // Permute vector manually
-                var v3 = z.vparts(w128, v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
+                var v3 = cpu.vparts(w128, v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
 
                 // Same?
                 Claim.veq(v3,v2);
@@ -70,7 +70,7 @@ namespace Z0
             var x = z.vperm4x32(src, Perm4L.ABCD);
             Claim.veq(x, src);
 
-            y = z.vparts(w128,4,3,2,1);
+            y = cpu.vparts(w128,4,3,2,1);
             spec = Perm4L.DCBA;
             x = z.vperm4x32(src,spec);
             Claim.veq(x, y);

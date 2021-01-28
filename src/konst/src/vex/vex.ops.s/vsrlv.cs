@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct cpu
     {
@@ -54,10 +52,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> counts)
             => ShiftRightLogicalVariable(x, counts);
-    }
 
-    partial struct z
-    {
         /// <summary>
         /// Computes z[i] := x[i] >> s[i] for i = 0..15
         /// </summary>

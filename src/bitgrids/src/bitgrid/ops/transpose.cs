@@ -22,7 +22,7 @@ namespace Z0
             for(var i=7; i>= 0; i--)
             {
                 dst.Cell(i) = (byte)cpu.vtakemask(v8u(src));
-                src = z.vsll(src,1);
+                src = cpu.vsll(src,1);
             }
             return dst.As<T>();
         }

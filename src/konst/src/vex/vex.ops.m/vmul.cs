@@ -197,8 +197,8 @@ namespace Z0
             var yl = v32u(vand(y, loMask));
             return cpu.vadd(
                 Multiply(v32u(vand(x, loMask)), yl),
-                cpu.vadd(vsll(Multiply(xh, yl), 32),
-                    vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
+                cpu.vadd(cpu.vsll(Multiply(xh, yl), 32),
+                    cpu.vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
         }
     }
 }

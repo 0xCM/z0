@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Konst;
+    using static Part;
     using static BitMasks.Literals;
 
     partial struct z
@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector128<ushort> vlt(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var mask = cpu.vbroadcast(n128, SignMask16);
+            var mask = cpu.vbroadcast(w128, SignMask16);
             var mx = v16i(cpu.vxor(x,mask));
             var my = v16i(cpu.vxor(y,mask));
             return v16u(CompareLessThan(mx,my));
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline), Lt]
         public static Vector128<uint> vlt(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = cpu.vbroadcast(n128, SignMask32);
+            var mask = cpu.vbroadcast(w128, SignMask32);
             return v32u(CompareLessThan(v32i(cpu.vxor(x,mask)), v32i(cpu.vxor(y,mask))));
         }
 

@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vreverse(Vector256<byte> src)
-            => vshuf32x8(src, gcpu.vdec<byte>(n256));
+            => cpu.vshuf32x8(src, gcpu.vdec<byte>(n256));
 
         /// <summary>
         /// Reverses the source vector components

@@ -106,7 +106,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => v16u(vshuf32x8(v8u(a), vshuffle_spec_1(spec)));
+            => v16u(cpu.vshuf32x8(v8u(a), vshuffle_spec_1(spec)));
 
         [Op(ExampleGroups.Shuffles)]
         public void vshuf16x16()

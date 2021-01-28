@@ -10,7 +10,7 @@ namespace Z0
 
     using TW = TypeWidth;
 
-    partial class VKinds
+    partial class VK
     {
         [Op]
         public static TW width(Type t)

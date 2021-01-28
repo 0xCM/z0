@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Rearranges the source vector according to the indices specified in the control vector dst[i] = src[spec[i]]
@@ -22,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuf32x8(Vector256<byte> a, Vector256<byte> spec)
         {
-            var x = vshuf16x8(a, cpu.vadd(spec, K0V));
-            var y = vshuf16x8(cpu.vswaphl(a), cpu.vadd(spec, K1V));
+            var x = vshuf16x8(a, vadd(spec, K0V));
+            var y = vshuf16x8(vswaphl(a), vadd(spec, K1V));
             return cpu.vor(x,y);
         }
 
@@ -34,13 +33,13 @@ namespace Z0
         static Vector256<byte> K0V
         {
             [MethodImpl(Inline)]
-            get => vload(n256, K0Bytes);
+            get => gcpu.vload(w256, K0Bytes);
         }
 
         static Vector256<byte> K1V
         {
             [MethodImpl(Inline)]
-            get => vload(n256,K1Bytes);
+            get => gcpu.vload(w256, K1Bytes);
         }
 
         static ReadOnlySpan<byte> K0Bytes

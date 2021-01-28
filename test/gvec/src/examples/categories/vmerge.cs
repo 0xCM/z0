@@ -13,10 +13,10 @@ namespace Z0
         [Op(ExampleGroups.Merge)]
         public void vmerge_128()
         {
-            var a = z.vparts(n128, 0u,1,2,3);
-            var b = z.vparts(n128, 4u,5,6,7);
-            var c = z.vparts(n128, 8u,9,10,11);
-            var d = z.vparts(n128, 12u,13,14,15);
+            var a = cpu.vparts(w128, 0u,1,2,3);
+            var b = cpu.vparts(w128, 4u,5,6,7);
+            var c = cpu.vparts(w128, 8u,9,10,11);
+            var d = cpu.vparts(w128, 12u,13,14,15);
             var x0 = z.vmergelo(v8u(a), v8u(b));
             var y0 = z.vmergelo(v8u(c), v8u(d));
             var z0 = v8u(z.vmergelo(v16u(x0),v16u(y0)));

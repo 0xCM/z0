@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static ulong vcompact64u(Vector128<ushort> src)
+        public static ulong vcompact64u(Vector128<ushort> src, W64 wDst)
             => gcpu.vcell64(vcompact8u(src, default, w128), 0);
 
         /// <summary>
@@ -26,6 +26,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static ulong vcompact64u(Vector256<uint> src)
-            => vcompact64u(vcompact16u(src, w128));
+            => vcompact64u(vcompact16u(src, w128), w64);
     }
 }

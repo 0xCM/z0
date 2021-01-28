@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W128 n, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vstore(and(n, in a, in b), ref dst);
+                => gcpu.vstore(and(n, in a, in b), ref dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T dst)
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vstore(and(w, in a, in b), ref dst);
+                => gcpu.vstore(and(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W256 n, int vcount, int blocklen, in T a, in T b, ref T dst)

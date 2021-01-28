@@ -11,7 +11,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
-    using static z;
 
     partial struct cpu
     {

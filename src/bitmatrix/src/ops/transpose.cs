@@ -41,7 +41,7 @@ namespace Z0
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)cpu.vtakemask(v8u(x));
-                x = z.vsll(x,1);
+                x = cpu.vsll(x,1);
             }
             return ref Z;
         }
