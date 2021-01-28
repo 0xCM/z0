@@ -109,7 +109,7 @@ namespace Z0
         {
             var result = BitVector64.Zero;
             var index = z8;
-            var r1 = Credits.define(Intel, Vol2A, Chapter3, Section4, Topic5);
+            var r1 = Credits.credit(Intel, Vol2A, Chapter3, Section4, Topic5);
             result |= bveq(r1.Vendor, Intel, index++);
             result |= bveq(r1.Volume, Vol2A, index++);
             result |= bveq(r1.Chapter, Chapter3, index++);
@@ -124,7 +124,7 @@ namespace Z0
             var result = BitVector64.Zero;
             var index = z8;
             var tr = Credits.table(d2, d3, d1);
-            var r1 = Credits.define(Intel, Vol2A, Chapter3, Section4, Topic5, tr);
+            var r1 = Credits.credit(Intel, Vol2A, Chapter3, Section4, Topic5, tr);
             result |= bveq(r1.Vendor, Intel, index++);
             result |= bveq(r1.Volume, Vol2A, index++);
             result |= bveq(r1.Chapter, Chapter3, index++);

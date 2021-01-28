@@ -12,7 +12,7 @@ namespace Msil
         protected readonly IILStringCollector collector;
 
         public ReadableILStringVisitor(IILStringCollector collector)
-            : this(collector, DefaultFormatProvider.Instance)
+            : this(collector, DefaultCilFormatProvider.Instance)
         {
         }
 
@@ -32,7 +32,7 @@ namespace Msil
             string field;
             try
             {
-                field = inlineFieldInstruction.Field.ToIL();
+                field = inlineFieldInstruction.Field.GetILSig();
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace Msil
             string method;
             try
             {
-                method = inlineMethodInstruction.Method.ToIL();
+                method = inlineMethodInstruction.Method.GetILSig();
             }
             catch (Exception ex)
             {
@@ -102,14 +102,14 @@ namespace Msil
                     case MemberTypes.Method:
                     case MemberTypes.Constructor:
                         prefix = "method ";
-                        token = ((MethodBase)inlineTokInstruction.Member).ToIL();
+                        token = ((MethodBase)inlineTokInstruction.Member).GetILSig();
                         break;
                     case MemberTypes.Field:
                         prefix = "field ";
-                        token = ((FieldInfo)inlineTokInstruction.Member).ToIL();
+                        token = ((FieldInfo)inlineTokInstruction.Member).GetILSig();
                         break;
                     default:
-                        token = ((TypeInfo)inlineTokInstruction.Member).ToIL();
+                        token = ((TypeInfo)inlineTokInstruction.Member).GetILSig();
                         break;
                 }
 
@@ -127,7 +127,7 @@ namespace Msil
             string type;
             try
             {
-                type = inlineTypeInstruction.Type.ToIL();
+                type = inlineTypeInstruction.Type.GetILSig();
             }
             catch (Exception ex)
             {

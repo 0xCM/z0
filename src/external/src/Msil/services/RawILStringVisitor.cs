@@ -5,7 +5,7 @@ namespace Msil
     public sealed class RawILStringVisitor : ReadableILStringVisitor
     {
         public RawILStringVisitor(IILStringCollector collector)
-            : this(collector, DefaultFormatProvider.Instance)
+            : this(collector, DefaultCilFormatProvider.Instance)
         {
         }
 

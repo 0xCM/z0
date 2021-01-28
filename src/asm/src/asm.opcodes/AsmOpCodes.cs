@@ -50,14 +50,6 @@ namespace Z0.Asm
         public static AsmOpCode opcode(in AsmOpCodeRow src)
             => new AsmOpCode(src.OpCode);
 
-        [MethodImpl(Inline), Op]
-        public static AsmSig sig(string src)
-            => new AsmSig(src);
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(string src)
-            => new AsmOpCode(src);
-
         /// <summary>
         /// Selects the instruction pattern from the source table
         /// </summary>
@@ -65,10 +57,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmSig sig(in AsmOpCodeRow src)
             => new AsmSig(src.Instruction);
-
-        [MethodImpl(Inline), Op]
-        public static AsmSpecifier specifier(in AsmSig sig, in AsmOpCode opcode)
-            => new AsmSpecifier(sig, opcode);
 
         [Op]
         public static AsmOpCodeTokens tokens(ReadOnlySpan<FieldRef> src)

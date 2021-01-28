@@ -86,7 +86,7 @@ namespace Msil
             {
                 Dedent();
                 _writer.WriteLine(_indent + "}");
-                _writer.WriteLine(_indent + $"catch ({t.ToIL()})");
+                _writer.WriteLine(_indent + $"catch ({t.GetILSig()})");
                 _writer.WriteLine(_indent + "{");
                 Indent();
             }

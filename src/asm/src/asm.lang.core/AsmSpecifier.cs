@@ -14,15 +14,15 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSpecifier : ITextual
     {
-        public AsmSig Sig {get;}
-
         public AsmOpCode OpCode {get;}
 
+        public AsmSig Sig {get;}
+
         [MethodImpl(Inline)]
-        public AsmSpecifier(in AsmSig pattern, in AsmOpCode opcode)
+        public AsmSpecifier(in AsmOpCode opcode, in AsmSig pattern)
         {
-            Sig = pattern;
             OpCode = opcode;
+            Sig = pattern;
         }
 
         public bool Equals(AsmSpecifier src)

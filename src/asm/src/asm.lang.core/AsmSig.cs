@@ -90,6 +90,10 @@ namespace Z0.Asm
         public static implicit operator AsmSig(string src)
             => new AsmSig(src);
 
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSig(asci64 src)
+            => new AsmSig(src);
+
         public static AsmSig Empty
             => new AsmSig(EmptyString);
     }

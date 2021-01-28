@@ -56,6 +56,7 @@ namespace Msil
         }
 
         public IILProvider ILProvider { get; }
+
         public ICilTokenResolver Resolver { get; }
 
         public IEnumerator<ILInlineInstruction> GetEnumerator()

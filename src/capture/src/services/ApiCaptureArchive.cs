@@ -70,7 +70,7 @@ namespace Z0.Asm
         Outcome<uint> ClearExtracts(PartId part)
         {
             var kind = FileExtensions.XCsv;
-            var files = Wf.Db().CapturedExtractFiles(part);
+            var files = Wf.Db().ApiExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -118,7 +118,7 @@ namespace Z0.Asm
         Outcome<uint> ClearCil(PartId part)
         {
             var kind = FileExtensions.IlData;
-            var files = Wf.Db().CapturedCilDataFiles(part);
+            var files = Wf.Db().CilDataFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);

@@ -8,9 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmRegs;
-
-    using K = RegisterKind;
 
     public readonly struct Xmm : IXmmReg
     {
@@ -33,101 +30,5 @@ namespace Z0.Asm
 
         public RegisterClass Class
             => RegisterClass.XMM;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm8 src)
-            => new Xmm(src.Content, K.XMM8);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm9 src)
-            => new Xmm(src.Content, K.XMM9);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm10 src)
-            => new Xmm(src.Content, K.XMM10);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm11 src)
-            => new Xmm(src.Content, K.XMM11);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm12 src)
-            => new Xmm(src.Content, K.XMM12);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm13 src)
-            => new Xmm(src.Content, K.XMM13);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm14 src)
-            => new Xmm(src.Content, K.XMM14);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Xmm(xmm15 src)
-            => new Xmm(src.Content, K.XMM15);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm0(Xmm src)
-            => new xmm0(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm1(Xmm src)
-            => new xmm1(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm2(Xmm src)
-            => new xmm2(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm3(Xmm src)
-            => new xmm3(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm4(Xmm src)
-            => new xmm4(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm5(Xmm src)
-            => new xmm5(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm6(Xmm src)
-            => new xmm6(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm7(Xmm src)
-            => new xmm7(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm8(Xmm src)
-            => new xmm8(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm9(Xmm src)
-            => new xmm9(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm10(Xmm src)
-            => new xmm10(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm11(Xmm src)
-            => new xmm11(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm12(Xmm src)
-            => new xmm12(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm13(Xmm src)
-            => new xmm13(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm14(Xmm src)
-            => new xmm14(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator xmm15(Xmm src)
-            => new xmm15(src.Content);
     }
 }

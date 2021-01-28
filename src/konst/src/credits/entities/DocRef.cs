@@ -7,21 +7,67 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static CreditTypes;
 
     using E = DocRef;
     using S = System.UInt64;
-    using API = Credits;
+    using api = Credits;
 
     /// <summary>
     /// Defines a reference to document content
     /// </summary>
-    public readonly struct DocRef : ITextual, INullary<DocRef>, IEquatable<DocRef>
+    public readonly struct DocRef : ITextual, IEquatable<DocRef>
     {
         readonly S State;
 
-        public static E Empty => new E(0);
+        public Vendor Vendor
+        {
+            [MethodImpl(Inline)]
+            get => api.vendor(this);
+        }
+
+        public Volume Volume
+        {
+            [MethodImpl(Inline)]
+            get => api.volume(this);
+        }
+
+        public Division Division
+        {
+            [MethodImpl(Inline)]
+            get => api.division(this);
+        }
+
+        public Chapter Chapter
+        {
+            [MethodImpl(Inline)]
+            get => api.chapter(this);
+        }
+
+        public Appendix Appendix
+        {
+            [MethodImpl(Inline)]
+            get => api.appendix(this);
+        }
+
+        public Section Section
+        {
+            [MethodImpl(Inline)]
+            get => api.section(this);
+        }
+
+        public Topic Topic
+        {
+            [MethodImpl(Inline)]
+            get => api.topic(this);
+        }
+
+        public ContentRef Content
+        {
+            [MethodImpl(Inline)]
+            get => api.content(this);
+        }
 
         public E Zero
         {
@@ -42,20 +88,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator E(S src)
-            => new DocRef(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator S(E src)
-            => src.State;
-
-        [MethodImpl(Inline)]
         public bool Equals(E src)
             => State == src.State;
 
         [MethodImpl(Inline)]
         public string Format()
-            => API.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
@@ -70,52 +108,14 @@ namespace Z0
         public DocRef(S data)
             => State = data;
 
-        public Vendor Vendor
-        {
-            [MethodImpl(Inline)]
-            get => API.vendor(this);
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator E(S src)
+            => new DocRef(src);
 
-        public Volume Volume
-        {
-            [MethodImpl(Inline)]
-            get => API.volume(this);
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator S(E src)
+            => src.State;
 
-        public Division Division
-        {
-            [MethodImpl(Inline)]
-            get => API.division(this);
-        }
-
-        public Chapter Chapter
-        {
-            [MethodImpl(Inline)]
-            get => API.chapter(this);
-        }
-
-        public Appendix Appendix
-        {
-            [MethodImpl(Inline)]
-            get => API.appendix(this);
-        }
-
-        public Section Section
-        {
-            [MethodImpl(Inline)]
-            get => API.section(this);
-        }
-
-        public Topic Topic
-        {
-            [MethodImpl(Inline)]
-            get => API.topic(this);
-        }
-
-        public ContentRef Content
-        {
-            [MethodImpl(Inline)]
-            get => API.content(this);
-        }
+        public static E Empty => new E(0);
     }
 }

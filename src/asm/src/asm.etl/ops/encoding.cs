@@ -17,6 +17,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmEncoding encoding(in AsmRow src)
-            => encoding(AsmOpCodes.specifier(src.Instruction, src.OpCode), src.Statement, src.Encoded);
+            => encoding(asm.specifier(src.OpCode, src.Instruction), src.Statement, src.Encoded);
     }
 }

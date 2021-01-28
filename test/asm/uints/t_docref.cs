@@ -45,7 +45,7 @@ namespace Z0.Asm
 
         public void t_reference_encode()
         {
-            var r1 = Credits.define(Intel, Vol2A, Chapter3, Section4, Topic5);
+            var r1 = Credits.credit(Intel, Vol2A, Chapter3, Section4, Topic5);
             Claim.eq(r1.Vendor, Intel);
             Claim.eq(r1.Volume, Vol2A);
             Claim.eq(r1.Chapter, Chapter3);
@@ -56,7 +56,7 @@ namespace Z0.Asm
         public void t_reference_encode_content()
         {
             var tr = Credits.table(d2, d3, d1);
-            var r1 = Credits.define(Intel, Vol2A, Chapter3, Section4, Topic5, tr);
+            var r1 = Credits.credit(Intel, Vol2A, Chapter3, Section4, Topic5, tr);
             Claim.eq(r1.Vendor, Intel);
             Claim.eq(r1.Volume, Vol2A);
             Claim.eq(r1.Chapter, Chapter3);

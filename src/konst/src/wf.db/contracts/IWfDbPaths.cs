@@ -244,7 +244,7 @@ namespace Z0
         FS.FolderPath CapturedExtractDir()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.Files CapturedExtractFiles()
+        FS.Files ExtractFiles()
             => CapturedExtractDir().AllFiles;
 
         FS.FolderPath ParsedExtractDir()
@@ -292,29 +292,45 @@ namespace Z0
         FS.FilePath CapturedHexFile(ApiHostUri host)
             => CapturedHexFile(ApiIdentity.file(host, Hex));
 
-        FS.FolderPath CapturedCilDir()
+        FS.FolderPath CilDataDir()
+            => CaptureRoot() + FS.folder(cildata);
+
+
+        FS.FilePath CilDataFile(FS.FileName name)
+            => CilDataDir() + name;
+
+        FS.FilePath CilDataFile(ApiHostUri host)
+            => CilDataFile(ApiIdentity.file(host, IlData));
+
+        FS.Files CilDataFiles()
+            => CilDataDir().Files(Csv);
+
+        FS.Files CilDataFiles(PartId part)
+            => CilDataFiles().Where(f => f.IsOwner(part));
+
+        FS.FolderPath CilCodeDir()
             => CaptureRoot() + FS.folder(cil);
 
-        FS.FilePath CapturedCilDataFile(FS.FileName name)
-            => CapturedCilDir() + name;
+        FS.FilePath CilCodeFile(FS.FileName name)
+            => CilCodeDir() + name;
 
-        FS.FilePath CapturedCilDataFile(ApiHostUri host)
-            => CapturedCilDataFile(ApiIdentity.file(host, IlData));
+        FS.FilePath CilCodeFile(ApiHostUri host)
+            => CilCodeFile(ApiIdentity.file(host, Il));
 
-        FS.Files CapturedCilDataFiles()
-            => CapturedCilDir().Files(Csv);
+        FS.Files CilCodeFiles()
+            => CilCodeDir().Files(Csv);
 
-        FS.Files CapturedCilDataFiles(PartId part)
-            => CapturedCilDataFiles().Where(f => f.IsOwner(part));
+        FS.Files CilCodeFiles(PartId part)
+            => CilCodeFiles().Where(f => f.IsOwner(part));
 
-        FS.FilePath CapturedExtractFile(ApiHostUri host)
-            => CapturedExtractFile(ApiIdentity.file(host, XCsv));
+        FS.FilePath ApiExtractFile(ApiHostUri host)
+            => ApiExtractFile(ApiIdentity.file(host, XCsv));
 
-        FS.FilePath CapturedExtractFile(FS.FileName name)
+        FS.FilePath ApiExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
 
-        FS.Files CapturedExtractFiles(PartId part)
-            => CapturedExtractFiles().Where(f => f.IsOwner(part));
+        FS.Files ApiExtractFiles(PartId part)
+            => ExtractFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath ParsedExtractFile(FS.FileName name)
             => ParsedExtractDir() + name;

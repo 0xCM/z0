@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     using N = N32;
@@ -40,6 +40,10 @@ namespace Z0
         {
             Storage = cpu.vload(w, first(src));
         }
+
+        [MethodImpl(Inline)]
+        public asci32 Replace(string match, string value)
+            => Text.Replace(match, value);
 
         public bool IsBlank
         {
@@ -171,8 +175,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
-
-
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)

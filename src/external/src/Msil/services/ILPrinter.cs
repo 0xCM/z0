@@ -96,7 +96,7 @@ namespace Msil
             ExceptionInfo[] exceptions = reader.ILProvider.GetExceptionInfos();
             var writer = new RichILStringToTextWriter(sw, exceptions);
 
-            sw.WriteLine(".method " + method.ToIL());
+            sw.WriteLine(".method " + method.GetILSig());
             sw.WriteLine("{");
             sw.WriteLine("  .maxstack " + reader.ILProvider.MaxStackSize);
 
@@ -109,7 +109,7 @@ namespace Msil
 
                 for (var i = 0; i < locals.Length; i++)
                 {
-                    sw.WriteLine($"    [{i}] {locals[i].ToIL()}{(i != locals.Length - 1 ? "," : "")}");
+                    sw.WriteLine($"    [{i}] {locals[i].GetILSig()}{(i != locals.Length - 1 ? "," : "")}");
                 }
 
                 sw.WriteLine("  )");

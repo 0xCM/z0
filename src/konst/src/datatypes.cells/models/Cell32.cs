@@ -76,8 +76,12 @@ namespace Z0
             => src is Cell32 x && Equals(x);
 
         [MethodImpl(Inline)]
-        public static implicit operator Cell32(uint x0)
-            => new Cell32(x0);
+        public static implicit operator Cell32(uint src)
+            => new Cell32(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(Cell32 src)
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator Cell32(int x0)
@@ -99,9 +103,6 @@ namespace Z0
         public static explicit operator ushort(Cell32 x)
             => (ushort)x.Content;
 
-        [MethodImpl(Inline)]
-        public static explicit operator uint(Cell32 x)
-            => x.Content;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Cell32 x)

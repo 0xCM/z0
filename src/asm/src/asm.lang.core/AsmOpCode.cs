@@ -20,6 +20,10 @@ namespace Z0.Asm
         public AsmOpCode(string src)
             => Value = src.Replace("o32 ", EmptyString);
 
+        [MethodImpl(Inline)]
+        public AsmOpCode(asci32 src)
+            => Value = src.Replace("o32 ", EmptyString);
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -64,6 +68,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator string(AsmOpCode src)
             => src.Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmOpCode(asci32 src)
+            => new AsmOpCode(src);
 
         [MethodImpl(Inline)]
         public static implicit operator asci32(AsmOpCode src)

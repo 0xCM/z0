@@ -14,16 +14,13 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct Arg16 : IAsmOperand<Arg16,W16,ushort>
     {
-        public byte Position {get;}
-
         public ushort Content {get;}
 
         public AsmOperandKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg16(byte pos, ushort value, AsmOperandKind kind)
+        public Arg16(ushort value, AsmOperandKind kind)
         {
-            Position = pos;
             Content = value;
             Kind = kind;
         }

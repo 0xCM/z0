@@ -10,8 +10,8 @@ namespace Z0
     {
         public TokenRecord[] Records
             = new TokenRecord[TokenCount]{
-                None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, m8,
-                m16, m32, m64, m128, m16ᙾ16, m16ᙾ32, m16ᙾ64, m16Ʌ32, m16Ʌ16,
+                None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, Asm.AsmTokenSpecs.m8,
+                Asm.AsmTokenSpecs.m16, Asm.AsmTokenSpecs.m32, Asm.AsmTokenSpecs.m64, Asm.AsmTokenSpecs.m128, m16ᙾ16, m16ᙾ32, m16ᙾ64, m16Ʌ32, m16Ʌ16,
                 m32Ʌ32, m16Ʌ64, m32fp, m64fp, m80fp, m16int, m32int, m64int,
                 mm, mmノm32, mmノm64, mib, moffs8, moffs16, moffs32, moffs64,
                 ptr16ᙾ16, ptr16ᙾ32, r8, r16, r32, r64, rel8, rel16, rel32,

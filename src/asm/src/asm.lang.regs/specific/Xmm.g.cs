@@ -12,14 +12,11 @@ namespace Z0.Asm
     public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>, IAsmOperand<RegisterKind, Cell128>
         where R : unmanaged, IRegister
     {
-        public byte Position {get;}
-
         public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public Xmm(byte pos, Cell128 value)
+        public Xmm(Cell128 value)
         {
-            Position = pos;
             Content = value;
         }
 

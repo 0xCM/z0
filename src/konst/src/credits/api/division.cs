@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static CreditTypes;
 
     using D = CreditTypes.DocFieldDelimiter;
@@ -16,22 +16,6 @@ namespace Z0
 
     public partial class Credits
     {
-        /// <summary>
-        /// Extracts the Vendor segment value
-        /// </summary>
-        /// <param name="src">The bitfield source</param>
-        [MethodImpl(Inline), Op]
-        public static Vendor vendor(Entity src)
-            => (Vendor)(((ulong)F.Vendor & (ulong)src) >> (int)D.Vendor);
-
-        /// <summary>
-        /// Initializes an empty bitfield with a Vendor segment value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static Entity vendor(Vendor src)
-            => (ulong)src << (byte)D.Vendor;
-
         /// <summary>
         /// Extracts the Volume segment value
         /// </summary>
@@ -112,21 +96,6 @@ namespace Z0
         public static Entity section(Section src)
             => (ulong)src << (byte)D.Section;
 
-        /// <summary>
-        /// Extracts the Topic segment value
-        /// </summary>
-        /// <param name="src">The bitfield source</param>
-        [MethodImpl(Inline), Op]
-        public static Topic topic(Entity src)
-            => (Topic)(((ulong)F.Topic & (ulong)src) >> (int)D.Topic);
-
-        /// <summary>
-        /// Initializes an empty bitfield with a Topic segment value
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline), Op]
-        public static Entity topic(Topic src)
-            => (ulong)src << (byte)D.Topic;
 
         public static string format(Entity src)
         {

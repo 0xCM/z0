@@ -88,6 +88,10 @@ namespace Z0
             => new Cell64(x0);
 
         [MethodImpl(Inline)]
+        public static implicit operator ulong(Cell64 x)
+            => x.Content;
+
+        [MethodImpl(Inline)]
         public static implicit operator Cell64(Cell32 x0)
             => new Cell64(x0.Content);
 
@@ -115,9 +119,6 @@ namespace Z0
         public static explicit operator long(Cell64 x)
             => (long)x.Content;
 
-        [MethodImpl(Inline)]
-        public static explicit operator ulong(Cell64 x)
-            => x.Content;
 
         public static Cell64 Empty => default;
    }

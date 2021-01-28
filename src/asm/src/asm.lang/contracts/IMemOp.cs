@@ -7,32 +7,25 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IMemOp
+    public interface IMemOp : IAsmOperand
     {
 
     }
 
     [Free]
-    public interface IMemOp<T> : IMemOp, IDataType<T>
+    public interface IMemOp<T> : IMemOp, IAsmOperand<T>
         where T : unmanaged
     {
-        T Value {get;}
+        AsmOperandKind IKinded<AsmOperandKind>.Kind
+            => AsmOperandKind.M;
     }
 
     [Free]
-    public interface IMemOp<W,T> : IMemOp<T>
-        where T : unmanaged
-        where W : unmanaged, ITypeWidth
-    {
-
-    }
-
-    [Free]
-    public interface IMemOp<F,W,T> : IMemOp<W,T>
+    public interface IMemOp<F,W,T> : IMemOp<T>
         where T : unmanaged
         where F : unmanaged, IMemOp<F,W,T>
         where W : unmanaged, ITypeWidth
     {
-
+        W Width => default(W);
     }
 }

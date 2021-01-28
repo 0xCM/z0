@@ -41,6 +41,8 @@ namespace Z0
 
         public const string cil = nameof(cil);
 
+        public const string cildata = nameof(cil) + delimiter + data;
+
         public const string asm = nameof(asm);
 
         public const string hex = nameof(hex);

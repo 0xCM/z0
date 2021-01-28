@@ -54,9 +54,9 @@ namespace Z0.Asm
         public static AsmSpecifier specifier(Iced.Instruction src)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            var sig = AsmOpCodes.sig(iceOpCode.ToInstructionString());
-            var code = AsmOpCodes.opcode(iceOpCode.ToOpCodeString());
-            return AsmOpCodes.specifier(sig, code);
+            var sig = asm.sig(iceOpCode.ToInstructionString());
+            var code = asm.opcode(iceOpCode.ToOpCodeString());
+            return asm.specifier(code, sig);
         }
 
         [MethodImpl(Inline), Op]

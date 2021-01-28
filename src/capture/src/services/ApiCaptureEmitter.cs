@@ -62,7 +62,7 @@ namespace Z0
             var emitted = sys.empty<ApiCodeExtract>();
             var count = src.Length;
             var blocks = src.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded));
-            var dst = Wf.Db().CapturedExtractFile(HostUri);
+            var dst = Wf.Db().ApiExtractFile(HostUri);
             emitted = ApiCodeExtracts.emit(blocks, dst);
             Wf.EmittedTable<ApiCodeExtract>(count, dst);
             return emitted;
@@ -84,28 +84,16 @@ namespace Z0
         Index<ApiHexRow> EmitApiHex(Index<ApiMemberCode> src)
             => ApiHexRows.emit(Wf, HostUri, src.View);
 
-        Index<CilMethod> EmitCil(Index<ApiMemberCode> src)
+        Count EmitCil(Index<ApiMemberCode> src)
         {
-            var dst = Wf.Db().CapturedCilDataFile(HostUri);
-            var count = src.Count;
-            var methods = sys.alloc<CilMethod>(count);
-
-            if(count != 0)
+            if(src.Count != 0)
             {
-                var view = src.View;
-                using var writer = dst.Writer();
-                for(var i=0u; i<count; i++)
-                {
-                    ref readonly var parsed = ref memory.skip(view,i);
-                    var cil = ClrDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
-                    methods[i] = cil;
-                    writer.WriteLine(cil.Format());
-                }
-
-                Wf.EmittedFile(GetType().Name, count, dst);
+                var emitter = CilEmitter.create(Wf);
+                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(HostUri));
+                emitter.EmitCilData(src, Wf.Db().CilDataFile(HostUri));
             }
 
-            return methods;
+            return src.Count;
         }
 
         AsmRoutines DecodeMembers(Index<ApiMemberCode> src)

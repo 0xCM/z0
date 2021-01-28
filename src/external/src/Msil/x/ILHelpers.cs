@@ -9,10 +9,10 @@ namespace Msil
 
     public static class ILHelpers
     {
-        public static string ToIL(this Type type)
-            => ToIL(type?.GetTypeInfo());
+        public static string GetILSig(this Type type)
+            => GetILSig(type?.GetTypeInfo());
 
-        public static string ToIL(this TypeInfo type)
+        public static string GetILSig(this TypeInfo type)
         {
             if (type == null)
             {
@@ -23,27 +23,27 @@ namespace Msil
             {
                 if (type.GetElementType().MakeArrayType().GetTypeInfo() == type)
                 {
-                    return ToIL(type.GetElementType()) + "[]";
+                    return GetILSig(type.GetElementType()) + "[]";
                 }
                 else
                 {
                     string bounds = string.Join(",", Enumerable.Repeat("...", type.GetArrayRank()));
-                    return ToIL(type.GetElementType()) + "[" + bounds + "]";
+                    return GetILSig(type.GetElementType()) + "[" + bounds + "]";
                 }
             }
             else if (type.IsGenericType && !type.IsGenericTypeDefinition && !type.IsGenericParameter /* TODO */)
             {
-                string args = string.Join(",", type.GetGenericArguments().Select(ToIL));
-                string def = ToIL(type.GetGenericTypeDefinition());
+                string args = string.Join(",", type.GetGenericArguments().Select(GetILSig));
+                string def = GetILSig(type.GetGenericTypeDefinition());
                 return def + "<" + args + ">";
             }
             else if (type.IsByRef)
             {
-                return ToIL(type.GetElementType()) + "&";
+                return GetILSig(type.GetElementType()) + "&";
             }
             else if (type.IsPointer)
             {
-                return ToIL(type.GetElementType()) + "*";
+                return GetILSig(type.GetElementType()) + "*";
             }
             else
             {
@@ -66,34 +66,41 @@ namespace Msil
             }
         }
 
-        public static string ToIL(this MethodBase method)
+        public static string GetILSig(this MethodBase method)
         {
-            if (method == null)
-                return "";
+            try
+            {
+                if (method == null)
+                    return "";
 
-            string res = "";
+                string res = "";
 
-            if (!method.IsStatic)
-                res = "instance ";
+                if (!method.IsStatic)
+                    res = "instance ";
 
-            var mtd = method as MethodInfo;
-            Type ret = mtd?.ReturnType ?? typeof(void);
+                var mtd = method as MethodInfo;
+                Type ret = mtd?.ReturnType ?? typeof(void);
 
-            res += ret.ToIL() + " ";
-            res += method.DeclaringType.ToIL();
-            res += "::";
-            res += method.Name;
+                res += ret.GetILSig() + " ";
+                res += method.DeclaringType.GetILSig();
+                res += "::";
+                res += method.Name;
 
-            if (method.IsGenericMethod)
-                res += "<" + string.Join(",", method.GetGenericArguments().Select(ToIL)) + ">";
+                if (method.IsGenericMethod)
+                    res += "<" + string.Join(",", method.GetGenericArguments().Select(GetILSig)) + ">";
 
-            res += "(" + string.Join(",", method.GetParameters().Select(p => ToIL(p.ParameterType))) + ")";
+                res += "(" + string.Join(",", method.GetParameters().Select(p => GetILSig(p.ParameterType))) + ")";
 
-            return res;
+                return res;
+            }
+            catch(Exception e)
+            {
+                return e.ToString();
+            }
         }
 
-        public static string ToIL(this FieldInfo field)
-            => field.DeclaringType.ToIL() + "::" + field.Name;
+        public static string GetILSig(this FieldInfo field)
+            => field.DeclaringType.GetILSig() + "::" + field.Name;
 
         static readonly Dictionary<TypeInfo, string> s_primitives = new Dictionary<Type,string>
         {
