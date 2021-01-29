@@ -12,16 +12,6 @@ namespace Z0
     partial class Enums
     {
         /// <summary>
-        /// Interprets an enum value as a signed 64-bit integer
-        /// </summary>
-        /// <param name="e">The enum value</param>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static long e64i<E>(E e)
-            where E : unmanaged, Enum
-                => EnumValue.e64i(e);
-
-        /// <summary>
         /// Interprets an enum value as an unsigned 64-bit integer
         /// </summary>
         /// <param name="e">The enum value</param>

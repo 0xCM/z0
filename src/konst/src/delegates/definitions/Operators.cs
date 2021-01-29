@@ -32,5 +32,4 @@ namespace Z0
     /// <typeparam name="T">The operand type</typeparam>
     [Free]
     public delegate T TernaryOp<T>(T a, T b, T c);
-
 }

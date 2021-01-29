@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         ///  __m128i _mm_unpackhi_epi8 (__m128i a, __m128i b) PUNPCKHBW xmm, xmm/m128
@@ -159,5 +159,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmergehi(Vector256<long> x, Vector256<long> y)
             => UnpackHigh(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
-   }
+    }
 }

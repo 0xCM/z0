@@ -10,8 +10,9 @@ namespace Z0
 
     using static Konst;
     using static KonstBytes;
+    using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Creates a 128-bit vector where each component is of unit value

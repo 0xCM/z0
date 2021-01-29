@@ -13,22 +13,6 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static void render(TableFields fields, object src, StringBuilder dst, bool eol = true)
-        {
-            var count = fields.Count;
-            var view = fields.View;
-            var tref = __makeref(src);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var field = ref skip(view,i);
-                dst.Append(text.format(Clr.value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
-            }
-
-            if(eol)
-                dst.Append(Eol);
-        }
-
         public static void render<T>(TableFields fields, in T src, StringBuilder dst, bool eol = true)
             where T : struct
         {

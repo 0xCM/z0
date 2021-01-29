@@ -15,11 +15,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse.X64;
     using static System.Runtime.Intrinsics.X86.Sse41;
+    using static Part;
+    using static memory;
 
-    using static z;
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -85,13 +84,13 @@ namespace Z0
         /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
+        /// <param name="dst">The target width</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movzx eax,al
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static byte vmove(Vector128<byte> src, N8 w)
+        public static byte vmove(Vector128<byte> src, N8 dst)
             => (byte)ConvertToUInt32(v32u(src));
 
         /// <summary>
@@ -99,13 +98,13 @@ namespace Z0
         /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
+        /// <param name="dst">The target width</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx rax,ax |>
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static short vmove(Vector128<short> src, N16 w)
+        public static short vmove(Vector128<short> src, N16 dst)
             => (short)ConvertToInt32(v32i(src));
 
         /// <summary>
@@ -113,13 +112,13 @@ namespace Z0
         /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
+        /// <param name="dst">The target width</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx eax,ax
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static ushort vmove(Vector128<ushort> src, W16 w)
+        public static ushort vmove(Vector128<ushort> src, W16 dst)
             => (ushort)ConvertToUInt32(v32u(src));
 
         /// <summary>
@@ -127,13 +126,13 @@ namespace Z0
         /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
+        /// <param name="dst">The target width</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static int vmove(Vector128<int> src, N32 w)
+        public static int vmove(Vector128<int> src, N32 dst)
             => ConvertToInt32(src);
 
         /// <summary>
@@ -141,13 +140,13 @@ namespace Z0
         /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
+        /// <param name="dst">The target width</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static uint vmove(Vector128<uint> src, N32 w)
+        public static uint vmove(Vector128<uint> src, N32 dst)
             => ConvertToUInt32(src);
 
         /// <summary>
@@ -156,13 +155,13 @@ namespace Z0
         /// Moves the lower half of the source vector to a 64-bit register
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width selector</param>
+        /// <param name="dst">The target width selector</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static long vmove(Vector128<long> src, N64 w)
+        public static long vmove(Vector128<long> src, N64 dst)
             => ConvertToInt64(src);
 
         /// <summary>
@@ -171,13 +170,13 @@ namespace Z0
         /// Moves the lower half of the source vector to a 64-bit register
         /// </summary>
         /// <param name="src">The source vector</param>
-        /// <param name="w">The target width selector</param>
+        /// <param name="dst">The target width selector</param>
         /// <param name="t">A target type representative</param>
         /// <remarks>
         /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static ulong vmove(Vector128<ulong> src, N64 w)
+        public static ulong vmove(Vector128<ulong> src, N64 dst)
             => ConvertToUInt64(src);
 
         /// <summary>
@@ -210,9 +209,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ulong> vmove(in byte src, N2 n, W64 w)
+        public static unsafe Vector128<ulong> vmove2x64u(in byte src)
             => v64u(ConvertToVector128Int64(gptr(src)));
 
         /// <summary>
@@ -222,9 +221,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<uint> vmove(in byte src, N4 n, W32 w)
+        public static unsafe Vector128<uint> vmove4x32u(in byte src)
             => v32u(ConvertToVector128Int32(gptr(src)));
 
         /// <summary>
@@ -234,9 +233,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vmove(in byte src, N4 n, W64 w)
+        public static unsafe Vector256<ulong> vmove4x64u(in byte src)
             => v64u(ConvertToVector256Int64(gptr(src)));
 
         /// <summary>
@@ -246,9 +245,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ushort> vmove(in byte src, N8 n, W16 w)
+        public static unsafe Vector128<ushort> vmove8x16u(in byte src)
             => v16u(ConvertToVector128Int16(gptr(src)));
 
         /// <summary>
@@ -257,10 +256,9 @@ namespace Z0
         /// Projects 8 unsigned 8-bit integers onto 8 unsigned 32-bit integers
         /// </summary>
         /// <param name="src">The input component source</param>
-        /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vmove(in byte src, N8 n, W32 w)
+        public static unsafe Vector256<uint> vmove8x32u(in byte src)
             => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
@@ -269,10 +267,9 @@ namespace Z0
         /// Projects 16 unsigned 8-bit integers onto 16 unsigned 16-bit integers
         /// </summary>
         /// <param name="src">The input component source</param>
-        /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
+        /// <param name="dst">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ushort> vmove(in byte src, N16 n, W16 w)
+        public static unsafe Vector256<ushort> vmove16x16u(in byte src)
             => v16u(ConvertToVector256Int16(gptr(src)));
 
         /// <summary>
@@ -284,18 +281,19 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<ulong> vmove(in ushort src, N2 n, W64 w)
+        public static unsafe Vector128<ulong> vmove2x64u(in ushort src)
             => v64u(ConvertToVector128Int64(gptr(src)));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
         /// 4x16u -> 4x64u
+        /// Projects 4 unsigned 16-bit integers onto 4 unsigned 64-bit integers
         /// </summary>
         /// <param name="src">The input component source</param>
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vmove(in ushort src, N4 n, W64 w)
+        public static unsafe Vector256<ulong> vmove4x64u(in ushort src)
             => v64u(ConvertToVector256Int64(gptr(src)));
 
         /// <summary>
@@ -307,7 +305,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<uint> vmove(in ushort src, N4 n, W32 w)
+        public static unsafe Vector128<uint> vmove4x32u(in ushort src)
             => v32u(ConvertToVector128Int32(gptr(in src)));
 
         /// <summary>
@@ -319,7 +317,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vmove(in ushort src, N8 n, W32 w)
+        public static unsafe Vector256<uint> vmove8x32u(in ushort src)
             => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
@@ -332,7 +330,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vmove(in byte src, N2 n, W64 w, N1 i)
+        public static unsafe Vector128<long> vmove2x64i(in byte src)
             => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
@@ -345,7 +343,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<int> vmove(in byte src, N128 w, W32 n, N1 i)
+        public static unsafe Vector128<int> vmove2x32i(in byte src)
             => ConvertToVector128Int32(gptr(src));
 
         /// <summary>
@@ -358,7 +356,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<long> vmove(in byte src, W256 w, W64 n, N1 i)
+        public static unsafe Vector256<long> vmove4x64i(in byte src)
             => ConvertToVector256Int64(gptr(src));
 
         /// <summary>
@@ -371,7 +369,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<short> vmove(in byte src, N8 n, W16 w, N1 i)
+        public static unsafe Vector128<short> vmove8x16i(in byte src)
             => ConvertToVector128Int16(gptr(src));
 
         /// <summary>
@@ -384,7 +382,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<short> vmove(in byte src, N16 n, W16 w, N1 i)
+        public static unsafe Vector256<short> vmove16x16i(in byte src)
             => ConvertToVector256Int16(gptr(src));
 
         /// <summary>
@@ -396,7 +394,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vmove(in short src, N2 n, W64 w)
+        public static unsafe Vector128<long> vmove2x64i(in short src)
             => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
@@ -408,7 +406,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<int> vmove(in short src, N4 n, W32 w)
+        public static unsafe Vector128<int> vmove4x32i(in short src)
             => ConvertToVector128Int32(gptr(src));
 
         /// <summary>
@@ -420,7 +418,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vmove(in ushort src, N2 n, W64 w, N1 i)
+        public static unsafe Vector128<long> vmove2x64i(in ushort src)
             => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
@@ -432,7 +430,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vmove(in int src, N2 n, W64 w)
+        public static unsafe Vector128<long> vmove2x64i(in int src)
             => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
@@ -444,7 +442,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<uint> vmove(in ushort src, N16 n, W32 w)
+        public static unsafe Vector512<uint> vmove16x32u(in ushort src)
             => (v32u(ConvertToVector256Int32(gptr(src))),
                 v32u(ConvertToVector256Int32(gptr(src, 8))));
 
@@ -457,7 +455,7 @@ namespace Z0
         /// <param name="n">The source component count</param>
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<int> vmove(in short src, N16 n, W32 w)
+        public static unsafe Vector512<int> vmove16x32i(in short src)
             => (ConvertToVector256Int32(gptr(in src)),
                 ConvertToVector256Int32(gptr(in src, 8)));
 
@@ -470,7 +468,7 @@ namespace Z0
         /// <param name="lo">The lo target</param>
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ushort> vmove(in byte src, N32 n, W16 w)
+        public static unsafe Vector512<ushort> vmove32x16u(in byte src)
             => (v16u(ConvertToVector256Int16(gptr(src))),
                 v16u(ConvertToVector256Int16(gptr(src,16))));
 
@@ -483,7 +481,7 @@ namespace Z0
         /// <param name="lo">The lower target</param>
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vmove(in ushort src, N8 n, W64 w)
+        public static unsafe Vector512<ulong> vmove8x64u(in ushort src)
             => (v64u(ConvertToVector256Int64(gptr(src))),
                 v64u(ConvertToVector256Int64(gptr(src,4))));
 
@@ -496,7 +494,7 @@ namespace Z0
         /// <param name="lo">The lower target</param>
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vmove(in uint src, N8 n, W64 w)
+        public static unsafe Vector512<ulong> vmove8x64u(in uint src)
             => (v64u(ConvertToVector256Int64(gptr(src))),
                 v64u(ConvertToVector256Int64(gptr(src,4))));
     }

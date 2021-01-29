@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<sbyte> src)
-            => TestC(src, vones<sbyte>(w128));
+            => TestC(src, gcpu.vones<sbyte>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<byte> src)
-            => TestC(src, vones<byte>(w128));
+            => TestC(src, gcpu.vones<byte>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<ushort> src)
-            => TestC(src, vones<ushort>(w128));
+            => TestC(src, gcpu.vones<ushort>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<int> src)
-            => TestC(src, vones<int>(w128));
+            => TestC(src, gcpu.vones<int>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<uint> src)
-            => TestC(src, vones<uint>(w128));
+            => TestC(src, gcpu.vones<uint>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<long> src)
-            => TestC(src, vones<long>(w128));
+            => TestC(src, gcpu.vones<long>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
         public static bool vtestc(Vector128<ulong> src)
-            => TestC(src, vones<ulong>(w128));
+            => TestC(src, gcpu.vones<ulong>(w128));
 
         /// <summary>
         /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128

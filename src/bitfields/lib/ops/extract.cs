@@ -11,12 +11,12 @@ namespace Z0
 
     partial class BitFields
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public T extract<T>(in BitField<T> field, in BitFieldSegment seg, T src)
             where T : unmanaged
                 => field.Extract(seg, src);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public T extract<T>(in BitField<T> field,in BitFieldSegment seg, T src, bool offset)
             where T : unmanaged
                 => field.Extract(seg, src, offset);
@@ -40,9 +40,9 @@ namespace Z0
             where T : unmanaged
             where F : IBitField<T>
             where I : unmanaged, Enum
-                => extract<F,T>(f, Enums.e8u(i0), Enums.e8u(i1));
+                => extract<F,T>(f, EnumValue.e8u(i0), EnumValue.e8u(i1));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T extract<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
                 => gbits.bitslice(src, (byte)seg.StartPos, (byte)seg.Width);

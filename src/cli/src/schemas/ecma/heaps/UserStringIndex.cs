@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
-    using System;
-    using System.Runtime.InteropServices;
-
-    using static Part;
 
     using static HeapIndexKinds;
 

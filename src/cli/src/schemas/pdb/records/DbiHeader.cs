@@ -49,6 +49,4 @@ namespace Z0.Schemas.Pdb
 
         public Cell32 Reserved;                   // 60..63
     }
-
-
 }

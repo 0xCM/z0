@@ -12,10 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the horizontal sum of the source vectors
@@ -25,32 +24,32 @@ namespace Z0
         [MethodImpl(Inline), AddH]
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
-            var a = cpu.vinflate16i(x, w256);
-            var b = cpu.vinflate16i(y, w256);
-            return cpu.vcompact8i(vhadd(a,b), w128);
+            var a = vinflate16i(x, w256);
+            var b = vinflate16i(y, w256);
+            return vcompact8i(vhadd(a,b), w128);
         }
 
         /// <summary>
         /// Computes the horizontal sum of the source vectors
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
         [MethodImpl(Inline), AddH]
-        public static Vector128<byte> vhadd(Vector128<byte> x, Vector128<byte> y)
+        public static Vector128<byte> vhadd(Vector128<byte> a, Vector128<byte> b)
         {
-            var z0 = cpu.vinflate16i(x, w256);
-            var z1 = cpu.vinflate16i(y, w256);
-            return cpu.vcompact8u(vhadd(z0,z1), w128);
+            var c = vinflate16i(a, w256);
+            var d = vinflate16i(b, w256);
+            return vcompact8u(vhadd(c,d), w128);
         }
 
         /// <summary>
         /// __m128i _mm_hadd_epi16 (__m128i a, __m128i b) PHADDW xmm, xmm/m128
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
         [MethodImpl(Inline), AddH]
-        public static Vector128<short> vhadd(Vector128<short> x, Vector128<short> y)
-            => HorizontalAdd(x, y);
+        public static Vector128<short> vhadd(Vector128<short> a, Vector128<short> b)
+            => HorizontalAdd(a, b);
 
         /// <summary>
         /// __m128i _mm_hadd_epi32 (__m128i a, __m128i b) PHADDD xmm, xmm/m128

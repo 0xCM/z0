@@ -13,9 +13,9 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct z
+    partial struct cpu
     {
-       /// <summary>
+        /// <summary>
         /// __m128i _mm_clmulepi64_si128 (__m128i a, __m128i b, const int imm8) PCLMULQDQ xmm, xmm/m128, imm8
         /// Computes the caryless 128-bit product of two 64-bit operands
         /// </summary>

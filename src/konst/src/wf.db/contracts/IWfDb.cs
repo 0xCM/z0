@@ -17,9 +17,6 @@ namespace Z0
         ITableArchive TableArchive<S>(S subject)
             => new DbTables<S>(this, subject);
 
-        FS.FilePath CopyToNotebook(FS.FilePath src, string notebook)
-            => src.CopyTo(Notebook(notebook));
-
         FS.Files IFileArchive.Clear(string id)
             => (TableRoot() + FS.folder(id)).Clear(root.list<FS.FilePath>()).Array();
 

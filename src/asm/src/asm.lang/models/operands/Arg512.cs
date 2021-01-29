@@ -16,10 +16,10 @@ namespace Z0.Asm
     {
         public Cell512 Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg512(Cell512 value, AsmOperandKind kind)
+        public Arg512(Cell512 value, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

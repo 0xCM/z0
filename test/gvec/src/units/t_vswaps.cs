@@ -43,7 +43,7 @@ namespace Z0
             var b = src.LoadVector(1);
             var c = src.LoadVector(2);
             var d = src.LoadVector(3);
-            z.vtranspose(ref a, ref b, ref c, ref d);
+            cpu.vtranspose(ref a, ref b, ref c, ref d);
 
 
             var dst = new uint[cells];

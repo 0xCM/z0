@@ -14,19 +14,19 @@ namespace Z0
     {
         public readonly struct BinaryPredicate8<T> : IFunc<T,T,bool>
         {
-            readonly Z0.BinaryPredicate8<T> F;
+            readonly Z0.BinaryBooleanPredicate<T> F;
 
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate8(Z0.BinaryPredicate8<T> f, OpIdentity id)
+            internal BinaryPredicate8(Z0.BinaryBooleanPredicate<T> f, OpIdentity id)
             {
                 F = f;
                 Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate8(Z0.BinaryPredicate8<T> f, string name)
+            internal BinaryPredicate8(Z0.BinaryBooleanPredicate<T> f, string name)
             {
                 F = f;
                 Id = ApiIdentify.sfunc<T>(name);
@@ -36,7 +36,7 @@ namespace Z0
             public bool Invoke(T a, T b)
                 => F(a,b);
 
-            public Z0.BinaryPredicate8<T> Subject
+            public Z0.BinaryBooleanPredicate<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;

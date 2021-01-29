@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Linq.Expressions;
 
     using static Konst;
@@ -17,7 +14,6 @@ namespace Z0
     public partial class Delegates
     {
         const NumericKind Closure = UnsignedInts;
-
 
         /// <summary>
         /// Infers a delegate type compatible with the signature of a specified method
@@ -28,7 +24,7 @@ namespace Z0
             var args = src.ParameterTypes();
             return src.IsAction()
                 ? Expression.GetActionType(args)
-                : Expression.GetFuncType(z.concat(args, z.array(src.ReturnType)));
+                : Expression.GetFuncType(Arrays.concat(args, memory.array(src.ReturnType)));
         }
     }
 

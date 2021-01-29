@@ -39,7 +39,7 @@ namespace Z0
             => new System.Func<T,T,bit>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static System.Func<T,T,bool> func<T>(BinaryPredicate8<T> f)
+        public static System.Func<T,T,bool> func<T>(BinaryBooleanPredicate<T> f)
             => new System.Func<T,T,bool>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

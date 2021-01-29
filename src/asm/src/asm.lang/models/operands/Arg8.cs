@@ -16,10 +16,10 @@ namespace Z0.Asm
     {
         public byte Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg8(byte value, AsmOperandKind kind)
+        public Arg8(byte value, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

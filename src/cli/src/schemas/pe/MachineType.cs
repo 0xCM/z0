@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Pe
 {
-    using System;
-
     /// <summary>
     /// Spcifies a CPU type. An image file can be run only on the specified machine or on a system that emulates the specified machine.
     /// </summary>

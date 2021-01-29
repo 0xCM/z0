@@ -17,9 +17,6 @@ namespace Z0
             where T : unmanaged
                 => vcell(v64u(src),1);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vhi256<T>(Vector512<T> src)
-            where T : unmanaged
-                => src.Hi;
+
     }
 }

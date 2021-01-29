@@ -143,7 +143,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DataIndex<T> Concat(in DataIndex<T> rhs)
-            => api.values(concat(Data, rhs.Data));
+            => api.values(Arrays.concat(Data, rhs.Data));
 
         [MethodImpl(Inline)]
         public unsafe DataIndex<S> Cast<S>()

@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke()
-                => z.vunits(K.vk128<T>());
+                => gcpu.vunits(K.vk128<T>());
         }
 
         public readonly struct Units256<T> : SFx.IEmitter256<T>
@@ -27,7 +27,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke()
-                => z.vunits<T>(K.vk256<T>());
+                => gcpu.vunits<T>(K.vk256<T>());
         }
     }
 }

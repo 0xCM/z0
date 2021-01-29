@@ -12,7 +12,6 @@ namespace Z0
     using static Part;
     using static z;
 
-
     partial class PeTableReader
     {
         public static ConstantHandle ConstantHandle(uint row)

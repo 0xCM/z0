@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Surfaces AES intrinsics
     /// </summary>
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_aesenc_si128 (__m128i a, __m128i RoundKey) AESENC xmm, xmm/m128

@@ -22,7 +22,7 @@ namespace Z0.Asm
                 Content = src;
             }
 
-            public AsmOperandKind Kind => AsmOperandKind.Imm;
+            public AsmOperandClass Kind => AsmOperandClass.Imm;
 
             [MethodImpl(Inline)]
             public static implicit operator imm<T>(T src)

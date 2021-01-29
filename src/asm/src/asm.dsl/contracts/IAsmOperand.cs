@@ -17,7 +17,7 @@ namespace Z0
 
     }
 
-    public interface IAsmOperand<T> : IAsmOperand<AsmOperandKind,T>, ISizedOperand<T>
+    public interface IAsmOperand<T> : IAsmOperand<AsmOperandClass,T>, ISizedOperand<T>
         where T : unmanaged
     {
 

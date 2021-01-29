@@ -16,10 +16,10 @@ namespace Z0.Asm
     {
         public uint Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg32(uint value, SignKind sign, AsmOperandKind kind)
+        public Arg32(uint value, SignKind sign, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public struct Sequential : ITextual, IComparable<Sequential>, IEquatable<Sequential>
+    public struct Sequential : IDataTypeComparable<Sequential>
     {
         public uint Value;
 

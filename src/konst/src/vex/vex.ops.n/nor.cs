@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
@@ -185,7 +185,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector256<float> vnor(Vector256<float> x, Vector256<float> y)
-            => z.vnot(Or(x, y));
+            => vnot(Or(x, y));
 
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
@@ -194,6 +194,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector256<double> vnor(Vector256<double> x, Vector256<double> y)
-            => z.vnot(Or(x, y));
-   }
+            => vnot(Or(x, y));
+    }
 }

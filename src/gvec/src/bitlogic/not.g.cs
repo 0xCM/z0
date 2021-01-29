@@ -51,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnot(v8u(x)));
+                return generic<T>(cpu.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnot(v16u(x)));
+                return generic<T>(cpu.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnot(v32u(x)));
+                return generic<T>(cpu.vnot(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnot(v64u(x)));
+                return generic<T>(cpu.vnot(v64u(x)));
             else
                 return vnot_i(x);
         }
@@ -67,15 +67,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vnot(v8i(x)));
+                return generic<T>(cpu.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vnot(v16i(x)));
+                return generic<T>(cpu.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vnot(v32i(x)));
+                return generic<T>(cpu.vnot(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vnot(v64i(x)));
+                return generic<T>(cpu.vnot(v64i(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -83,13 +83,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnot(v8u(x)));
+                return generic<T>(cpu.vnot(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnot(v16u(x)));
+                return generic<T>(cpu.vnot(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnot(v32u(x)));
+                return generic<T>(cpu.vnot(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnot(v64u(x)));
+                return generic<T>(cpu.vnot(v64u(x)));
             else
                 return vnot_i(x);
         }
@@ -99,15 +99,15 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vnot(v8i(x)));
+                return generic<T>(cpu.vnot(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vnot(v16i(x)));
+                return generic<T>(cpu.vnot(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vnot(v32i(x)));
+                return generic<T>(cpu.vnot(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vnot(v64i(x)));
+                return generic<T>(cpu.vnot(v64i(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
        }
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Creates a 128-bit vector with all bits enabled

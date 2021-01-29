@@ -16,7 +16,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the bitwise negation of the source vector

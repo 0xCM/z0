@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the material nomimplication, ~x & y for vectors x and y

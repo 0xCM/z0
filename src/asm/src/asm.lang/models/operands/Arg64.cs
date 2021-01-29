@@ -17,10 +17,10 @@ namespace Z0.Asm
 
         public ulong Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg64(ulong value, AsmOperandKind kind)
+        public Arg64(ulong value, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

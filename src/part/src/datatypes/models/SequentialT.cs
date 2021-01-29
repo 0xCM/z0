@@ -22,10 +22,6 @@ namespace Z0
         public Sequential(T src)
             => Value = src;
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => Value.ToString();
-
         public void Increment()
         {
             ref var x = ref @as<T,ulong>(Value);
@@ -37,6 +33,10 @@ namespace Z0
             ref var x = ref @as<T,ulong>(Value);
             x -= Step;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Value.ToString();
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator ++(Sequential<T> src)

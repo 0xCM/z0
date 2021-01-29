@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     partial class Delegates
@@ -16,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref Func<T,T,T> generic<T>(in Func<sbyte,sbyte,sbyte> src)
             where T : unmanaged
-                => ref edit<Func<sbyte,sbyte,sbyte>,Func<T,T,T>>(src);
+                => ref edit<Func<sbyte,sbyte,sbyte>, Func<T,T,T>>(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref Func<T,T,T> generic<T>(in Func<byte,byte,byte> src)

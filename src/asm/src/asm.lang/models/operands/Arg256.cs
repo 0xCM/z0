@@ -16,10 +16,10 @@ namespace Z0.Asm
     {
         public Cell256 Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg256(Cell256 value, SignKind sign, AsmOperandKind kind)
+        public Arg256(Cell256 value, SignKind sign, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

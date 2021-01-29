@@ -151,7 +151,7 @@ namespace Z0
         /// <typeparam name="F">The field specifier type</typeparam>
         [MethodImpl(Inline)]
         static int index(F field)
-            => (int)(Datasets.PosMask & Enums.e32u(field));
+            => (int)(Datasets.PosMask & EnumValue.e32u(field));
 
         /// <summary>
         /// Computes the field width from a field specifier

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Pdb
 {
-    using System;
-
     [Record]
     public struct NameIndexStreamHeader : IRecord<NameIndexStreamHeader>
     {

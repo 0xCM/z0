@@ -32,15 +32,5 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline), Op]
-        public static ref TableField map(FieldInfo src, ushort index, byte width, ref TableField dst)
-        {
-            dst.Index = index;
-            dst.RecordType = src.DeclaringType;
-            dst.DataType = src.FieldType;
-            dst.RenderWidth = width;
-            dst.Definition = src;
-            return ref dst;
-        }
     }
 }

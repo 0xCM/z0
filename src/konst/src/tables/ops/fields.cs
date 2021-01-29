@@ -57,24 +57,5 @@ namespace Z0
 
             return final;
         }
-
-        [Op, Closures(UnsignedInts)]
-        public static TableFields fields<T>(ReadOnlySpan<byte> widths)
-            where T : struct
-        {
-            var type = typeof(T);
-            var declared = @readonly(type.DeclaredInstanceFields());
-            var count = declared.Length;
-            if(count != widths.Length)
-                @throw(AppErrors.LengthMismatch(count, widths.Length));
-
-            var buffer = alloc<TableField>(count);
-            var fields = span(buffer);
-            for(ushort i=0; i<count; i++)
-                map(skip(declared,i), i, skip(widths,i), ref seek(fields,i));
-
-            return new TableFields(buffer);
-        }
-
     }
 }

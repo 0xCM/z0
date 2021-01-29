@@ -61,50 +61,17 @@ namespace Z0.Asm
             }
         }
 
-        // public void instruction_tokens()
-        // {
-        //     var opcodes = span(AsmOpCodes.Tokens);
-        //     using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
-        //     var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-        //     dst.WriteLine(header);
-        //     for(var i=1; i<opcodes.Length; i++)
-        //     {
-        //         ref readonly var token = ref skip(opcodes,i);
-        //         var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
-        //         dst.WriteLine(line);
-        //     }
-        // }
-
-        public static string header(char delimiter = FieldDelimiter)
-            => Table.headerText<AsmOpCodeField>(delimiter);
 
         public void check_opcode_records()
         {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
+            var formatter = Records.formatter<AsmOpCodeRow>();
             using var writer = CaseWriter("OpCodes");
-            writer.WriteLine(header());
+            writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(AsmOpCodes.format(skip(records,i)));
+                writer.WriteLine(formatter.Format(skip(records,i)));
         }
-
-        // void opcode_tokens()
-        // {
-        //     var data = AsmOpCodes.dataset();
-        //     var count = data.OpCodeCount;
-        //     var records = data.Records.ToReadOnlySpan();
-        //     var identifers = data.OpCodeIdentifiers.ToReadOnlySpan();
-        //     Claim.eq(count, records.Length);
-        //     Claim.eq(count, identifers.Length);
-
-        //     var processor = AsmOpCodePartitoner.Create();
-        //     var handler = OpCodePartition.Create(count);
-        //     processor.Partition(records, handler);
-
-        //     emit(handler.Instructions);
-        //     emit(handler.OpCodes);
-        //     emit(handler.Mnemonics);
-        // }
     }
 }

@@ -22,7 +22,7 @@ namespace Z0.Asm
                 Content = src;
             }
 
-            public AsmOperandKind Kind => AsmOperandKind.R;
+            public AsmOperandClass Kind => AsmOperandClass.R;
 
             [MethodImpl(Inline)]
             public reg<T> Reposition(byte pos)

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
 
@@ -28,8 +28,8 @@ namespace Z0
                 var srcFormat = TextDocFormat.Structured(Chars.Tab);
                 var lines = Parse.lines(content).View;
                 var count = lines.Length;
-                var dstFormatter = Records.formatter<StokeOpCodeRow>(42);
-                var dstPath = Wf.Db().IndexTable<StokeOpCodeRow>();
+                var dstFormatter = Records.formatter<AsmCatalogImportRow>(42);
+                var dstPath = Wf.Db().IndexTable<AsmCatalogImportRow>();
                 var writer = dstPath.Writer();
                 writer.WriteLine(dstFormatter.FormatHeader());
                 var foundheader = false;
@@ -38,7 +38,7 @@ namespace Z0
                     ref readonly var line = ref skip(lines,i);
                     if(foundheader)
                     {
-                        var row = default(StokeOpCodeRow);
+                        var row = default(AsmCatalogImportRow);
                         if(parse(line, ref row))
                         {
                             writer.WriteLine(dstFormatter.Format(row));
@@ -46,7 +46,7 @@ namespace Z0
                     }
                     else
                     {
-                        if(line.Content.Equals(StokeOpCodeRow.SourceHeader))
+                        if(line.Content.Equals(AsmCatalogImportRow.SourceHeader))
                             foundheader = true;
                     }
                 }
@@ -57,7 +57,7 @@ namespace Z0
             }
         }
 
-        bool parse(in TextLine src, ref StokeOpCodeRow dst)
+        bool parse(in TextLine src, ref AsmCatalogImportRow dst)
         {
             if(Parse.row(src, SourceFormat, out var row))
             {

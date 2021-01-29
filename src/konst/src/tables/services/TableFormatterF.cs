@@ -81,13 +81,6 @@ namespace Z0
             Target.Append(Render(content).PadRight(width(f)));
         }
 
-        public TableFormatter<F> Reset(char? delimiter = null)
-        {
-            Target.Clear();
-            Delimiter = delimiter ?? FieldDelimiter;
-            return this;
-        }
-
         public string Format()
             => Target.ToString();
 

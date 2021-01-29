@@ -12,10 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes ~ (x ^ y) for vectors x and y
@@ -160,5 +159,42 @@ namespace Z0
         [MethodImpl(Inline), Xnor]
         public static Vector256<ulong> vxnor(Vector256<ulong> x, Vector256<ulong> y)
             => vnot(Xor(x, y));
-   }
+
+        /// <summary>
+        /// Computes the bitwise XOR between operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vxnor(Vector128<float> x, Vector128<float> y)
+            => vnot(Xor(x, y));
+
+        /// <summary>
+        /// Computes the bitwise XOR between operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vxnor(Vector128<double> x, Vector128<double> y)
+            => vnot(Xor(x, y));
+
+        /// <summary>
+        /// Computes the bitwise XOR between operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<float> vxnor(Vector256<float> x, Vector256<float> y)
+            => vnot(Xor(x, y));
+
+        /// <summary>
+        /// Computes the bitwise XOR between operands
+        /// </summary>
+        /// <param name="x">The left operand</param>
+        /// <param name="y">The right operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vxnor(Vector256<double> x, Vector256<double> y)
+            => vnot(Xor(x, y));
+
+    }
 }

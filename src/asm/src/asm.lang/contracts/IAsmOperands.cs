@@ -42,7 +42,6 @@ namespace Z0
         A First  => this[n0];
 
         B Second  => this[n1];
-
     }
 
     public interface IAsmOperands<F,A,B,C> : IAsmOpererands

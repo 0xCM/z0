@@ -17,14 +17,14 @@ namespace Z0
             var b = cpu.vparts(w128, 4u,5,6,7);
             var c = cpu.vparts(w128, 8u,9,10,11);
             var d = cpu.vparts(w128, 12u,13,14,15);
-            var x0 = z.vmergelo(v8u(a), v8u(b));
-            var y0 = z.vmergelo(v8u(c), v8u(d));
-            var z0 = v8u(z.vmergelo(v16u(x0),v16u(y0)));
-            var z1 = v8u(z.vmergehi(v16u(x0),v16u(y0)));
-            var x1 = z.vmergehi(v8u(a), v8u(b));
-            var y1 = z.vmergehi(v8u(c), v8u(d));
-            var z2 = v8u(z.vmergelo(v16u(x1),v16u(y1)));
-            var z3 = v8u(z.vmergehi(v16u(x1),v16u(y1)));
+            var x0 = cpu.vmergelo(v8u(a), v8u(b));
+            var y0 = cpu.vmergelo(v8u(c), v8u(d));
+            var z0 = v8u(cpu.vmergelo(v16u(x0),v16u(y0)));
+            var z1 = v8u(cpu.vmergehi(v16u(x0),v16u(y0)));
+            var x1 = cpu.vmergehi(v8u(a), v8u(b));
+            var y1 = cpu.vmergehi(v8u(c), v8u(d));
+            var z2 = v8u(cpu.vmergelo(v16u(x1),v16u(y1)));
+            var z3 = v8u(cpu.vmergehi(v16u(x1),v16u(y1)));
         }
 
         [Op(ExampleGroups.Merge)]
@@ -41,7 +41,7 @@ namespace Z0
             var count = cpu.vcount(w,t);
             var a = gvec.vinc(w,t);
             var b = gvec.vinc(w, (a.LastCell() + 1));
-            var c = vmergelo(a,b);
+            var c = cpu.vmergelo(a,b);
             var fmt = $"({a.Format()},{b.Format()}) -> {c.Format()}";
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             var t = z8;
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-            var _z = z.vmerge(x,y);
+            var _z = cpu.vmerge(x,y);
             Notify($"vmerge_256");
             Notify(x.Format());
             Notify(y.Format());
@@ -66,7 +66,7 @@ namespace Z0
             var t = z8;
             var x = gvec.vinc(w,t);
             var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
-            var _z = z.vmergehi(x,y);
+            var _z = cpu.vmergehi(x,y);
             Notify($"vmerge_hi");
             Notify(x.Format());
             Notify(y.Format());

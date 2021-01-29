@@ -8,22 +8,23 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
+
 
     using static AsmDsl;
 
-    public unsafe readonly ref struct RegBankXmm
+    public unsafe readonly ref struct XmmRegSlots
     {
-        public static void render(in RegBankXmm src, ITextBuffer dst)
+        public static void render(in XmmRegSlots src, ITextBuffer dst)
         {
             var count = src.CellCount;
             ref var lead = ref src.First;
-            var @base = z.address(lead);
+            var @base = address(lead);
             for(var i=0; i<count; i++)
             {
-                var address = z.skip(@base,i);
+                var address = skip(@base,i);
                 var offset = address - @base;
-                var reg = z.skip(lead,i);
+                var reg = skip(lead,i);
                 dst.AppendLine(string.Format(RP.PSx3, address, offset, reg.Kind));
             }
         }
@@ -37,11 +38,11 @@ namespace Z0.Asm
         public readonly uint BankSize;
 
         [MethodImpl(Inline)]
-        public static RegBankXmm Create(N16 n)
-            => new RegBankXmm(16);
+        public static XmmRegSlots Create(N16 n)
+            => new XmmRegSlots(16);
 
         [MethodImpl(Inline)]
-        RegBankXmm(byte count)
+        XmmRegSlots(byte count)
         {
             CellCount = count;
             Buffer = new Cell128[count];

@@ -12,9 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Transposes a 4x4 matrix of unsigned integers, adapted from MSVC intrinsic headers

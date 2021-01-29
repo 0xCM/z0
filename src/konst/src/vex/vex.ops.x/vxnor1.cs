@@ -53,41 +53,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vxor1(Vector256<double> x)
             => Xor(x, Compare(default(Vector256<double>), default(Vector256<double>), FloatComparisonMode.OrderedEqualNonSignaling));
-
-        /// <summary>
-        /// Computes the bitwise XOR between operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<float> vxnor(Vector128<float> x, Vector128<float> y)
-            => vnot(Xor(x, y));
-
-        /// <summary>
-        /// Computes the bitwise XOR between operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<double> vxnor(Vector128<double> x, Vector128<double> y)
-            => vnot(Xor(x, y));
-
-        /// <summary>
-        /// Computes the bitwise XOR between operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<float> vxnor(Vector256<float> x, Vector256<float> y)
-            => vnot(Xor(x, y));
-
-        /// <summary>
-        /// Computes the bitwise XOR between operands
-        /// </summary>
-        /// <param name="x">The left operand</param>
-        /// <param name="y">The right operand</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<double> vxnor(Vector256<double> x, Vector256<double> y)
-            => vnot(Xor(x, y));
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
@@ -195,5 +195,5 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static Vector256<double> vnand(Vector256<double> x, Vector256<double> y)
             => vnot(And(x, y));
-   }
+    }
 }

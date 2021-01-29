@@ -27,16 +27,6 @@ namespace Z0
             where F : unmanaged, Enum
                 => text.width(field);
 
-        /// <summary>
-        /// Computes the field index from a field specifier
-        /// </summary>
-        /// <param name="field">The field specifier</param>
-        /// <typeparam name="F">The field specifier type</typeparam>
-        [MethodImpl(Inline)]
-        public static int index<F>(F field)
-            where F : unmanaged, Enum
-                => (int)(PosMask & Enums.e32u(field));
-
         [MethodImpl(Inline)]
         public static DatasetHeader<F> header<F>()
             where F : unmanaged, Enum

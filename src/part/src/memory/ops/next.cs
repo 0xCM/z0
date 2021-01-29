@@ -18,13 +18,13 @@ namespace Z0
             ref var dst = ref @edit(src);
             ref var value = ref dst.Value;
 
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                 uint8(ref value) = (byte)(uint8(value) + 1);
-            else if(typeof(T) == typeof(ushort))
+            else if(size<T>() == 2)
                 uint16(ref value) = (ushort)(uint16(value) + 1);
-            else if(typeof(T) == typeof(uint))
+            else if(size<T>() == 4)
                 uint32(ref value) = uint32(value) + 1u;
-            else if(typeof(T) == typeof(ulong))
+            else if(size<T>() == 8)
                 uint64(ref value) = uint64(value) + 1ul;
             else
                 throw no<T>();

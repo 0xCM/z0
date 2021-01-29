@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the material implication, x | ~y for vectors x and y

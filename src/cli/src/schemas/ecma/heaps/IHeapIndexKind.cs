@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Schemas.Ecma
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     /// <summary>
     /// Characterizes a help index classifier
     /// </summary>
@@ -26,5 +21,4 @@ namespace Z0.Schemas.Ecma
     {
 
     }
-
 }

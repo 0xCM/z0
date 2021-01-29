@@ -16,8 +16,8 @@ namespace Z0
     public interface IMemOp<T> : IMemOp, IAsmOperand<T>
         where T : unmanaged
     {
-        AsmOperandKind IKinded<AsmOperandKind>.Kind
-            => AsmOperandKind.M;
+        AsmOperandClass IKinded<AsmOperandClass>.Kind
+            => AsmOperandClass.M;
     }
 
     [Free]

@@ -16,10 +16,10 @@ namespace Z0.Asm
     {
         public ushort Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg16(ushort value, AsmOperandKind kind)
+        public Arg16(ushort value, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

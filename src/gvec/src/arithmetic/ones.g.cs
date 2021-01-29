@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-        
+
+    using static Part;
+
     partial class gvec
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vones<T>(W128 w, T t = default)
             where T : unmanaged
-                => z.vones(w,t);
+                => gcpu.vones(w,t);
 
         /// <summary>
         /// Creates a 256-bit vector with all bits enabled
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vones<T>(W256 w, T t = default)
             where T : unmanaged
-                => z.vones(w,t);
+                => gcpu.vones(w,t);
 
         /// <summary>
         /// Creates a 512-bit vector with all bits enabled
@@ -40,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vones<T>(W512 w, T t = default)
             where T : unmanaged
-                => z.vones(w,t);
+                => gcpu.vones(w,t);
     }
 }

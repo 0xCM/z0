@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct TableSpans
     {
-
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
             where M : unmanaged, ITypeNat

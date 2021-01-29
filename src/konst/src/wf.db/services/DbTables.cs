@@ -41,16 +41,5 @@ namespace Z0
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => TableArchives.deposit<F,R>(Root, src, name);
-
-        public Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => TableArchives.deposit<F,R>(Root, src, folder, name);
-
-        public RowsetEmissions<T> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
-            where T : struct
-            where M : struct, IDataModel
-            where K : unmanaged, Enum
-                => TableArchives.deposit<T,M,K>(Root, src, header, render, m);
     }
 }

@@ -27,7 +27,7 @@ namespace Z0.Asm
             /// <summary>
             /// The basic operand classification - imm, reg or mem
             /// </summary>
-            public AsmOperandKind Kind {get;}
+            public AsmOperandClass Kind {get;}
 
             /// <summary>
             /// The operand bit-widht

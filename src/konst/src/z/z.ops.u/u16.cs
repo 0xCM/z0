@@ -21,6 +21,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ushort u16(ReadOnlySpan<byte> src, int offset = 0)
-            => z.cell<ushort>(src, offset);
+            => memory.cell<ushort>(src, offset);
     }
 }

@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
 
     [Record(TableId)]
-    public struct StokeOpCodeRow : IRecord<StokeOpCodeRow>
+    public struct AsmCatalogImportRow : IRecord<AsmCatalogImportRow>
     {
         public const string TableId = "stoke";
 

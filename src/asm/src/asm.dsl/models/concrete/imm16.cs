@@ -21,8 +21,8 @@ namespace Z0.Asm
                 Content = value;
             }
 
-            public AsmOperandKind Kind
-                => AsmOperandKind.Imm;
+            public AsmOperandClass Kind
+                => AsmOperandClass.Imm;
 
             [MethodImpl(Inline)]
             public static implicit operator Arg16(imm16 src)

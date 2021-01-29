@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public T Content {get;}
 
-        public AsmOperandKind Kind => Content.Kind;
+        public AsmOperandClass Kind => Content.Kind;
 
         [MethodImpl(Inline)]
         public AsmOp(byte pos, T value)

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static gcpu;
 
     partial class gvec
     {
@@ -49,13 +50,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnand(v8u(x), v8u(y)));
+                return generic<T>(cpu.vnand(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnand(v16u(x), v16u(y)));
+                return generic<T>(cpu.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnand(v32u(x), v32u(y)));
+                return generic<T>(cpu.vnand(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnand(v64u(x), v64u(y)));
+                return generic<T>(cpu.vnand(v64u(x), v64u(y)));
             else
                 return vnand_i(x,y);
         }
@@ -65,13 +66,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vnand(v8i(x), v8i(y)));
+                return generic<T>(cpu.vnand(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vnand(v16i(x), v16i(y)));
+                return generic<T>(cpu.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vnand(v32i(x), v32i(y)));
+                return generic<T>(cpu.vnand(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vnand(v64i(x), v64i(y)));
+                return generic<T>(cpu.vnand(v64i(x), v64i(y)));
             else
                 throw no<T>();
         }
@@ -81,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnand(v8u(x), v8u(y)));
+                return generic<T>(cpu.vnand(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnand(v16u(x), v16u(y)));
+                return generic<T>(cpu.vnand(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnand(v32u(x), v32u(y)));
+                return generic<T>(cpu.vnand(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnand(v64u(x), v64u(y)));
+                return generic<T>(cpu.vnand(v64u(x), v64u(y)));
             else
                 return vnand_i(x,y);
         }
@@ -97,13 +98,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vnand(v8i(x), v8i(y)));
+                return generic<T>(cpu.vnand(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vnand(v16i(x), v16i(y)));
+                return generic<T>(cpu.vnand(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vnand(v32i(x), v32i(y)));
+                return generic<T>(cpu.vnand(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vnand(v64i(x), v64i(y)));
+                return generic<T>(cpu.vnand(v64i(x), v64i(y)));
             else
                 throw no<T>();
         }

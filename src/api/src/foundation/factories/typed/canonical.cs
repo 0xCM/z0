@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static LiteralExpr<Vector128<T>> @true<T>(N128 n)
             where T : unmanaged
-                => literal(z.vones<T>(n));
+                => literal(gcpu.vones<T>(n));
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static LiteralExpr<Vector256<T>> @true<T>(N256 n)
             where T : unmanaged
-                => literal(z.vones<T>(n));
+                => literal(gcpu.vones<T>(n));
 
         /// <summary>
         /// Defines a typed literal where all bits are off

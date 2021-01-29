@@ -9,16 +9,16 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmOpCodeSymbol : ISymbol<char>
+    public readonly struct AsmOpCodeSymbol
     {
-        public char Value {get;}
+        public string Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeSymbol(char src)
+        public AsmOpCodeSymbol(string src)
             => Value = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeSymbol(char src)
+        public static implicit operator AsmOpCodeSymbol(string src)
             => new AsmOpCodeSymbol(src);
     }
 }

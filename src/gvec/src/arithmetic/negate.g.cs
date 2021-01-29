@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnegate(v8u(x)));
+                return generic<T>(cpu.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnegate(v16u(x)));
+                return generic<T>(cpu.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnegate(v32u(x)));
+                return generic<T>(cpu.vnegate(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnegate(v64u(x)));
+                return generic<T>(cpu.vnegate(v64u(x)));
             else
                 return vnegate_i(x);
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(z.vnegate(v8i(x)));
+                 return generic<T>(cpu.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(z.vnegate(v16i(x)));
+                 return generic<T>(cpu.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(z.vnegate(v32i(x)));
+                 return generic<T>(cpu.vnegate(v32i(x)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(z.vnegate(v64i(x)));
+                 return generic<T>(cpu.vnegate(v64i(x)));
             else
                 return ginxfp.vnegate(x);
         }
@@ -60,29 +60,30 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(z.vnegate(v8i(x)));
+                 return generic<T>(cpu.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(z.vnegate(v16i(x)));
+                 return generic<T>(cpu.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(z.vnegate(v32i(x)));
+                 return generic<T>(cpu.vnegate(v32i(x)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(z.vnegate(v64i(x)));
+                 return generic<T>(cpu.vnegate(v64i(x)));
             else
                 return ginxfp.vnegate(x);
         }
+
 
         [MethodImpl(Inline)]
         static Vector256<T> vnegate_u<T>(Vector256<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vnegate(v8u(x)));
+                return generic<T>(cpu.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vnegate(v16u(x)));
+                return generic<T>(cpu.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vnegate(v32u(x)));
+                return generic<T>(cpu.vnegate(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vnegate(v64u(x)));
+                return generic<T>(cpu.vnegate(v64u(x)));
             else
                 return vnegate_i(x);
         }

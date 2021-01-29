@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Enums
     {
@@ -18,7 +17,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            dst = z.@as<E,T>(e);
+            dst = @as<E,T>(e);
             return ref dst;
         }
 
@@ -33,12 +32,11 @@ namespace Z0
             where E : unmanaged
         {
             dst = 0ul;
-            var eSize = z.size<E>();
-            if(eSize == 1)
+            if(size<E>() == 1)
                 store(w8, src, ref dst);
-            else if(eSize == 2)
+            else if(size<E>() == 2)
                 store(w16, src, ref dst);
-            else if(eSize == 4)
+            else if(size<E>() == 4)
                 store(w32, src, ref dst);
             else
                 store(w64, src, ref dst);
@@ -49,7 +47,7 @@ namespace Z0
         public static ref byte store<E>(W8 w, in E src, ref ulong dst)
             where E : unmanaged
         {
-            ref var u8 = ref z.@as<E,byte>(src);
+            ref var u8 = ref @as<E,byte>(src);
             dst = u8;
             return ref u8;
         }
@@ -58,7 +56,7 @@ namespace Z0
         public static ref ushort store<E>(W16 w, in E src, ref ulong dst)
             where E : unmanaged
         {
-            ref var tVal = ref z.@as<E,ushort>(src);
+            ref var tVal = ref @as<E,ushort>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -67,7 +65,7 @@ namespace Z0
         public static ref uint store<E>(W32 w, in E src, ref ulong dst)
             where E : unmanaged
         {
-            ref var tVal = ref z.@as<E,uint>(src);
+            ref var tVal = ref @as<E,uint>(src);
             dst = tVal;
             return ref tVal;
         }
@@ -76,7 +74,7 @@ namespace Z0
         public static ref ulong store<E>(W64 w, in E src, ref ulong dst)
             where E : unmanaged
         {
-            ref var tVal = ref z.@as<E,ulong>(src);
+            ref var tVal = ref @as<E,ulong>(src);
             dst = tVal;
             return ref tVal;
         }

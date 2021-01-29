@@ -2,8 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 namespace Z0.Schemas.Ecma
 {
-    using System;
-
     public enum ManifestResourceFlags : uint
     {
         PublicVisibility = 0x00000001,

@@ -12,7 +12,7 @@ namespace Z0
     using static BitMasks.Literals;
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         // The goal is to partition the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
         // The pattern repeats every 32 bits

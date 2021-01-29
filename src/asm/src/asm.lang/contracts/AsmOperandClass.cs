@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Flags]
-    public enum AsmOperandKind : byte
+    public enum AsmOperandClass : byte
     {
         /// <summary>
         /// Unclassified

@@ -17,12 +17,12 @@ namespace Z0.Asm
 
         public T Content {get;}
 
-        public AsmOperandKind Kind {get;}
+        public AsmOperandClass Kind {get;}
 
         public uint Width {get;}
 
         [MethodImpl(Inline)]
-        public Arg(byte pos, T value, AsmOperandKind kind, uint width)
+        public Arg(byte pos, T value, AsmOperandClass kind, uint width)
         {
             Position = pos;
             Content = value;

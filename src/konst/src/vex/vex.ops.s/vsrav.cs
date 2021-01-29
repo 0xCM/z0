@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// _mm_srav_epi32, avx2, shift-right variable arithmetic:

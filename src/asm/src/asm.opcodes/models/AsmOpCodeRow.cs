@@ -9,8 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct AsmOpCodeRow
+    [Record(TableId)]
+    public struct AsmOpCodeRow : IRecord<AsmOpCodeRow>
     {
+        public const string TableId = "asm.opcodes";
+
         public int Sequence;
 
 		public asci32 Mnemonic;

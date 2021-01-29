@@ -21,6 +21,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong u64(ReadOnlySpan<byte> src, int offset = 0)
-            => cell<ulong>(src, offset);
+            => memory.cell<ulong>(src, offset);
     }
 }

@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
-    using static z;
 
     using api = Table;
 
@@ -21,11 +17,6 @@ namespace Z0
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => deposit(src, api.renderspec<F>(), root + name);
-
-        public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FolderName folder, FS.FileName name)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => deposit(src, api.renderspec<F>(), (root + folder) + name);
 
         public static Option<FS.FilePath> deposit<F,R>(R[] data, TableRenderSpec<F> spec, FS.FilePath dst, FileWriteMode mode = Overwrite)
             where F : unmanaged
@@ -53,25 +44,6 @@ namespace Z0
                 term.error(e);
                 return Option.none<FS.FilePath>();
             }
-        }
-
-
-        public static RowsetEmissions<T> deposit<T,M,K>(FS.FolderPath root, T[] src, string header, Func<T,string> render,  M m = default)
-            where T : struct
-            where M : struct, IDataModel
-            where K : unmanaged
-        {
-            var path = root + FS.folder(m.Name) + FS.file(typeof(T).Name);
-            var records = z.span(src);
-            var count = records.Length;
-
-            using var writer = path.Writer();
-            writer.WriteLine(header);
-
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(render(skip(records, i)));
-
-            return (Records.rowset<T>(src), path);
         }
     }
 }

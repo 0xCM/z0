@@ -16,7 +16,7 @@ namespace Z0.Asm
         {
             public T Content {get;}
 
-            public AsmOperandKind Kind => AsmOperandKind.M;
+            public AsmOperandClass Kind => AsmOperandClass.M;
 
             [MethodImpl(Inline)]
             public MemOp(T src)

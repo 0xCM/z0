@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static z;
-    
+
     partial class gvec
     {
         /// <summary>
@@ -29,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(z.vmove(v8u(x), n8));
+                 return generic<T>(cpu.vmove(v8u(x), n8));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(z.vmove(v16u(x), n16));
+                 return generic<T>(cpu.vmove(v16u(x), n16));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(z.vmove(v32u(x), n32));
+                 return generic<T>(cpu.vmove(v32u(x), n32));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(z.vmove(v64u(x), n64));
+                 return generic<T>(cpu.vmove(v64u(x), n64));
             else
                 return vmovelo_i(x);
         }
@@ -45,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(z.vmove(v8i(x), n8));
+                 return generic<T>(cpu.vmove(v8i(x), n8));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(z.vmove(v16i(x), n16));
+                 return generic<T>(cpu.vmove(v16i(x), n16));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(z.vmove(v32i(x), n32));
+                 return generic<T>(cpu.vmove(v32i(x), n32));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(z.vmove(v64i(x), n64));
+                 return generic<T>(cpu.vmove(v64i(x), n64));
             else
                 throw no<T>();
         }

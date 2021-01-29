@@ -15,8 +15,8 @@ namespace Z0.Asm
         {
             public Imm32 Content {get;}
 
-            public AsmOperandKind Kind
-                => AsmOperandKind.Imm;
+            public AsmOperandClass Kind
+                => AsmOperandClass.Imm;
 
             [MethodImpl(Inline)]
             public imm32(uint value)
