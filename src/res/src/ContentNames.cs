@@ -6,7 +6,7 @@ namespace Z0
 {
     using static ApiNameParts;
 
-    public readonly struct PartResId
+    public readonly struct ContentNames
     {
         public const string OpCodeSpecs = nameof(OpCodeSpecs);
 
@@ -14,6 +14,8 @@ namespace Z0
 
         const string intrinsics = nameof(intrinsics);
 
-        public const string IntelIntinsicx = intel + dot + nameof(intrinsics);
+        public static ContentName IntelIntinsics => intel + dot + nameof(intrinsics);
+
+        public static ContentName StokeX86 => "stoke-x86.csv";
     }
 }

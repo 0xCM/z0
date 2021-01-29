@@ -25,14 +25,14 @@ namespace Z0.Asm
         [Op]
         public static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
         {
-            var cells = src.CellContent.View;
-            var count = root.length(cells,fields);
+            var cells = src.Cells.View;
+            var count = root.length(cells, fields);
 
             var parser = new AsmFieldParser();
             for(var i=0; i<count; i++)
             {
-                ref readonly var cell = ref skip(cells,i);
-                ref readonly var field = ref skip(fields,i);
+                ref readonly var cell = ref skip(cells, i);
+                ref readonly var field = ref skip(fields, i);
                 switch(field)
                 {
                     case F.Sequence:

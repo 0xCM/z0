@@ -4,30 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
-    using static Part;
-
-    using api = Resources;
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct StringResRow : ITextual
+    [Record(TableId)]
+    public struct StringResRow : IRecord<StringResRow>
     {
-        public const string RenderPattern = "{0} | {1} | {2}";
+        public const string TableId = "stringres";
 
         public ClrToken Id;
 
         public MemoryAddress Address;
 
         public uint Length;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => api.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

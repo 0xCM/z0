@@ -122,34 +122,6 @@ namespace Z0
             get => UppercaseHexString;
         }
 
-        const int TextResCount = 2;
-
-        const int ByteResCount = 2;
-
-        ReadOnlySpan<ResIdentity<byte>> ByteResInfo
-            => new ResIdentity<byte>[ByteResCount]{
-                Resources.identify<byte>(
-                    name: nameof(CharBytes),
-                    location: address(first(CharBytes)),
-                    length: CharBytes.Length),
-                Resources.identify<byte>(
-                    name: nameof(B001),
-                    location: address(first(B001)),
-                    length: B001.Length),
-                };
-
-        ReadOnlySpan<ResIdentity<char>> TextResInfo
-            => new ResIdentity<char>[TextResCount]{
-                Resources.identify<char>(
-                    name: nameof(AsciCharString),
-                    location: address(first(AsciChars)),
-                    length: AsciCharString.Length),
-                Resources.identify<char>(
-                    name: nameof(UppercaseHexString),
-                    location: address(first(UppercaseHexDigits)),
-                    length: UppercaseHexString.Length),
-                };
-
         static ReadOnlySpan<byte> B001
             => new byte[16]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
     }

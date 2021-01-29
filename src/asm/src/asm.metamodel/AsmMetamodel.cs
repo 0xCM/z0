@@ -17,7 +17,6 @@ namespace Z0.Asm
         public readonly struct StatementFactory
         {
             public AsmSpecInfo SpecInfo {get;}
-
         }
 
         /// <summary>

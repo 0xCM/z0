@@ -14,31 +14,31 @@ namespace Z0
     /// </summary>
     public readonly struct TextRow
     {
-        readonly Index<TextBlock> Blocks;
+        readonly Index<TextBlock> Data;
 
         [MethodImpl(Inline)]
-        public TextRow(params TextBlock[] cells)
-            => Blocks = cells;
+        public TextRow(params TextBlock[] src)
+            => Data = src;
 
-        public readonly Index<string> CellContent
+        public readonly Index<TextBlock> Cells
         {
             [MethodImpl(Inline)]
-            get => Blocks.Map(x => x.Format());
+            get => Data;
         }
 
         public string RowText
-            => string.Concat(CellContent);
+            => string.Concat(Data.Map(x => x.Format()));
 
-        public int BlockCount
+        public int CellCount
         {
             [MethodImpl(Inline)]
-            get => Blocks.Length;
+            get => Data.Length;
         }
 
         public ref readonly TextBlock this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Blocks[index];
+            get => ref Data[index];
         }
 
         static string ColSep(char? delimiter)
@@ -49,9 +49,15 @@ namespace Z0
         /// </summary>
         /// <param name="delimiter">The separator to apply to delimit the cell data in the line </param>
         public string Format(char? delimiter = null)
-            => string.Join(ColSep(delimiter),  Blocks.Select(x => x.Format()));
+            => string.Join(ColSep(delimiter),  Data.Select(x => x.Format()));
 
         public override string ToString()
             => Format();
+
+        public static TextRow Empty
+        {
+            [MethodImpl(Inline)]
+            get => new TextRow(sys.empty<TextBlock>());
+        }
     }
 }

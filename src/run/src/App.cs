@@ -8,6 +8,7 @@ namespace Z0
 
     using static Part;
     using static z;
+    using static TextRules;
 
     class Runner
     {
@@ -41,7 +42,7 @@ namespace Z0
                 }
                 else
                 {
-                    if(args.Length == 1 && args[0] == "tests")
+                    if(args.Length == 1 && (args[0] == "tests" || args[0] == "test"))
                         app.RunTests();
                     else
                     {
@@ -142,12 +143,12 @@ namespace Z0
 
         }
 
+
         public void RunTests()
         {
-            const ushort Assign = '←';
-            const char Test = (char)127;
-            Wf.Row(Assign.ToString());
-
+            // const ushort Assign = '←';
+            // const char Test = (char)127;
+            // Wf.Row(Assign.ToString());
             CalcAddress();
         }
     }

@@ -10,9 +10,6 @@ public readonly struct ApiNameParts
 
     public const string @fixed = Fixed;
 
-    public const string @const = Const;
-
-    public const string @char = Char;
 
     public const string @enum = Enum;
 
@@ -20,7 +17,6 @@ public readonly struct ApiNameParts
 
     public const string @case = Case;
 
-    public const string dot = ".";
 
     public const string api = nameof(api);
 
@@ -38,21 +34,31 @@ public readonly struct ApiNameParts
 
     public const string chars = nameof(chars);
 
+    public const string @const = Const;
+
+    public const string @char = Char;
+
     public const string cmd = nameof(cmd);
 
     public const string core = nameof(core);
 
+    public const string csv = nameof(csv);
+
+    public const string dot = ".";
+
+    public const string dash = "-";
+
     public const string data = nameof(data);
 
     public const string delegates = nameof(delegates);
-
-    public const string parts = nameof(parts);
 
     public const string dynamic = nameof(dynamic);
 
     public const string expressions = nameof(expressions);
 
     public const string extensions = nameof(extensions);
+
+    public const string grids = nameof(grids);
 
     public const string identity = nameof(identity);
 
@@ -85,6 +91,8 @@ public readonly struct ApiNameParts
     public const string primal = nameof(primal);
 
     public const string rows = nameof(rows);
+
+    public const string parts = nameof(parts);
 
     public const string parser = nameof(parser);
 
@@ -427,6 +435,4 @@ public readonly struct ApiNameParts
     public const string semantic = nameof(semantic);
 
     public const string archive = nameof(archive);
-
-    public const string grids = nameof(grids);
 }

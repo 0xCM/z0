@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static TextRules;
     using static z;
 
     public readonly struct BitMatrixWriter : IBitMatrixWriter<BitMatrixWriter>
@@ -54,7 +55,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 Write(src,n64);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         public void Write<M,N,T>(in BitMatrix<M,N,T> src)
@@ -86,7 +87,7 @@ namespace Z0
             var sig = result.ToBitString().Format();
             var title = $"{label} {sig}";
             var sep = new string('-',80);
-            var header = text.lines(title,sep);
+            var header = Format.lines(title,sep);
             return header;
         }
 
@@ -101,7 +102,7 @@ namespace Z0
             var sig = result.ToBitString().Format();
             var title = $"{kind} {sig}";
             var sep = new string('-',80);
-            var header = text.lines(title,sep);
+            var header = Format.lines(title,sep);
             return header;
         }
 

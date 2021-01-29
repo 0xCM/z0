@@ -46,7 +46,7 @@ namespace Z0
             for(var i=0; i<RowCount; i++)
             {
                 ref readonly var row = ref this[i];
-                for(var j = 0; j<row.BlockCount; j++)
+                for(var j = 0; j<row.CellCount; j++)
                 {
                     ref readonly var block = ref row[j];
                     var data = block.View;

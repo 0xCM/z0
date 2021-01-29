@@ -64,18 +64,25 @@ namespace Z0
             get => text.blank(Content);
         }
 
+        [MethodImpl(Inline)]
+        public bool StartsWith(char match)
+            => IsNonEmpty && Content[0] == match;
+
+        [MethodImpl(Inline)]
+        public bool StartsWith(string match)
+            => IsNonEmpty && Content.StartsWith(match);
+
         public string[] Split(in TextDocFormat spec)
-            => IsNonEmpty ? Content.SplitClean(spec.Delimiter) : sys.empty<string>();
+            => IsNonEmpty ? Content.Split(spec.Delimiter) : sys.empty<string>();
+
+        public string Format()
+            => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
 
         public override string ToString()
-            =>  $"{LineNumber.ToString().PadLeft(10, '0')}:{Content}";
+            => Format();
 
         public string this[int startpos, int endpos]
             => Content.Substring(startpos, endpos - startpos + 1);
-
-        [MethodImpl(Inline)]
-        public static explicit operator TextLine(string text)
-            =>  new TextLine(0, text);
 
         [MethodImpl(Inline)]
         public static implicit operator TextLine((int index, string text) src)
@@ -85,9 +92,6 @@ namespace Z0
         public static implicit operator TextLine((uint index, string text) src)
             =>  new TextLine(src.index, src.text);
 
-        [MethodImpl(Inline)]
-        public static implicit operator string(TextLine line)
-            => line.Content;
 
         public static TextLine Empty
             => new TextLine(0, EmptyString);

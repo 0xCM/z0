@@ -17,28 +17,28 @@ namespace Z0
     {
         public MemberInfo Member {get;}
 
-        public MemorySegment Reference {get;}
+        public MemorySegment Segment {get;}
 
         [MethodImpl(Inline)]
         public ResMember(MemberInfo member, MemorySegment seg)
         {
             Member = member;
-            Reference = seg;
+            Segment = seg;
         }
 
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Reference.BaseAddress;
+            get => Segment.BaseAddress;
         }
 
         public uint DataSize
         {
             [MethodImpl(Inline)]
-            get => Reference.Length;
+            get => Segment.Length;
         }
 
         public string Format()
-            => $"{Member.Name} {Reference.Format()}";
+            => $"{Member.Name} {Segment.Format()}";
     }
 }

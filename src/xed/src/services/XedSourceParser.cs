@@ -63,7 +63,7 @@ namespace Z0
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
-                if(data[i].RowText.ContainsAny(Instructions))
+                if(data[i].Format().ContainsAny(Instructions))
                     return ParseInstructions(data, i);
             }
             return memory.array<XedInstructionDoc>();

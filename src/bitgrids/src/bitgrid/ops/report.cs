@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static TextRules;
     using static z;
 
     partial class BitGrid
@@ -175,7 +175,7 @@ namespace Z0
         static string report<M,N>(ushort data, bool showrow = false, string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-                => text.lines(title(label, n16, default(M), default(N), default(ushort)), HeaderSep, format<M,N>(data,showrow));
+                => Format.lines(title(label, n16, default(M), default(N), default(ushort)), HeaderSep, format<M,N>(data,showrow));
 
         /// <summary>
         /// Renders grid data
@@ -189,7 +189,7 @@ namespace Z0
         static string report<M,N>(uint data, bool showrow = false, string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-                => text.lines(title(label, n32, default(M), default(N), default(uint)), HeaderSep, format<M,N>(data,showrow));
+                => Format.lines(title(label, n32, default(M), default(N), default(uint)), HeaderSep, format<M,N>(data,showrow));
 
         /// <summary>
         /// Renders grid data
@@ -203,7 +203,7 @@ namespace Z0
         static string report<M,N>(ulong data, bool showrow = false, string label = null)
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-                => text.lines(title(label, n64, default(M), default(N), default(ulong)), HeaderSep, format<M,N>(data,showrow));
+                => Format.lines(title(label, n64, default(M), default(N), default(ulong)), HeaderSep, format<M,N>(data,showrow));
 
         /// <summary>
         /// Renders grid data
@@ -218,7 +218,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => text.lines(title(label, n128, default(M), default(N), default(T)), HeaderSep, format<M,N,T>(data,showrow));
+                => Format.lines(title(label, n128, default(M), default(N), default(T)), HeaderSep, format<M,N,T>(data,showrow));
 
         /// <summary>
         /// Renders grid data
@@ -233,6 +233,6 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => text.lines(title(label, n256, default(M), default(N), default(T)), HeaderSep, format<M,N,T>(data,showrow));
+                => Format.lines(title(label, n256, default(M), default(N), default(T)), HeaderSep, format<M,N,T>(data,showrow));
     }
 }

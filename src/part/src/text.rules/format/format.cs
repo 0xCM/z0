@@ -14,6 +14,14 @@ namespace Z0
         partial struct Format
         {
             /// <summary>
+            /// Formats a character span
+            /// </summary>
+            /// <param name="src"></param>
+            [Op]
+            public static string format(ReadOnlySpan<char> src)
+                => new string(src);
+
+            /// <summary>
             /// Formats a pattern using an arbitrary kind/number of arguments
             /// </summary>
             /// <param name="pattern">The source pattern</param>

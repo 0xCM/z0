@@ -237,7 +237,7 @@ namespace Z0
             var sig = result.ToBitString().Format();
             var title = $"{label} {sig}";
             var sep = new string('-',80);
-            var header = text.lines(title,sep);
+            var header = TextRules.Format.lines(title,sep);
             return header;
         }
 
@@ -252,7 +252,7 @@ namespace Z0
             var sig = result.ToBitString().Format();
             var title = $"{kind} {sig}";
             var sep = new string('-',80);
-            var header = text.lines(title,sep);
+            var header = TextRules.Format.lines(title,sep);
             return header;
         }
 

@@ -85,17 +85,17 @@ namespace Z0
         [MethodImpl(Inline)]
         static TextDocFormat define(
             bool HasHeader = true,
-            bool delimited = true,
+            bool Delimited = true,
             char Delimiter = DefaultDelimiter,
             char CommentPrefix = DefaultCommentPrefix,
             uint? ColWidth = null,
             uint? FirstLine = null,
             uint? LastLine = null)
         {
-            var dst = Empty;
+            var dst = default(TextDocFormat);
             dst.RowBlockSep = DefaultRowBlockSep;
             dst.HasDataHeader = HasHeader;
-            dst.IsDelimited = delimited;
+            dst.IsDelimited = Delimited;
             dst.Delimiter = Delimiter;
             dst.CommentPrefix = CommentPrefix;
             dst.ColWidth = ColWidth;
@@ -104,13 +104,10 @@ namespace Z0
             return dst;
         }
 
-
         public static TextDocFormat Empty
         {
             [MethodImpl(Inline)]
             get => define(false, false, Chars.Null, Chars.Null, null);
         }
-
-
     }
 }

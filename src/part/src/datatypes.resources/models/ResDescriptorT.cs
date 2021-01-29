@@ -13,14 +13,14 @@ namespace Z0
     /// <summary>
     /// Identifies a resource of parametric type along with a reference to the memory segment it occupies
     /// </summary>
-    public readonly struct ResIdentity<T>
+    public readonly struct ResDescriptor<T> : IDataTypeComparable<ResDescriptor<T>>, IAddressable
     {
         public Name Name {get;}
 
         public MemorySegment Segment {get;}
 
         [MethodImpl(Inline)]
-        public ResIdentity(Name name, MemorySegment seg)
+        public ResDescriptor(Name name, MemorySegment seg)
         {
             Name = name;
             Segment = seg;
@@ -51,7 +51,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ResIdentity(ResIdentity<T> src)
-            => new ResIdentity(src.Name, src.Segment, ClrPrimitives.kind<T>());
+        public int CompareTo(ResDescriptor<T> src)
+            => Address.CompareTo(src.Address);
+
+        [MethodImpl(Inline)]
+        public bool Equals(ResDescriptor<T> src)
+            => Address.Equals(src.Address);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format(RP.PSx3, Address, DataSize, Name);
+
+        public override string ToString()
+            => Format();
+
+        public static ResDescriptor<T> Empty
+            => new ResDescriptor<T>(Name.Empty, MemorySegment.Empty);
     }
 }

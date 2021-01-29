@@ -55,7 +55,7 @@ namespace Z0
                 if(f(row))
                     return row;
             }
-            return Option.none<TextRow>();
+            return root.none<TextRow>();
         }
 
         public ref readonly TextRow this[int index]
@@ -84,8 +84,8 @@ namespace Z0
 
         public IEnumerable<TextRows> Partition(int offset, Func<TextRow,bool> f)
         {
-            var part = new List<TextRow>();
-            for(var i=offset; i< RowCount; i++)
+            var part = root.list<TextRow>();
+            for(var i=offset; i<RowCount; i++)
             {
                 var row = this[i];
                 if(f(row))
@@ -99,6 +99,6 @@ namespace Z0
         }
 
         public static TextDoc Empty
-            => new TextDoc(TextDocFormat.Empty, default, 0, Array.Empty<TextRow>());
+            => new TextDoc(TextDocFormat.Empty, default, 0, sys.empty<TextRow>());
     }
 }

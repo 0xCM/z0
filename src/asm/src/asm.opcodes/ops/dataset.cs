@@ -15,7 +15,7 @@ namespace Z0.Asm
          [Op]
         public static AsmOpCodeDataset dataset()
         {
-            var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(PartResId.OpCodeSpecs);
+            var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeRow>(count);
             parse(resource, records);

@@ -12,6 +12,10 @@ namespace Z0
 
     partial class text
     {
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<char> src)
+            => Format.format(src);
+
         [MethodImpl(Inline)]
         public static string format(string pattern, params object[] args)
             => Format.format(pattern, args);

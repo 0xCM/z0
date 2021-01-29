@@ -86,7 +86,7 @@ namespace Z0
         [Op]
         static bool load(in TextRow src, ref XedSummaryRow dst)
         {
-            if(src.BlockCount == 9)
+            if(src.CellCount == 9)
             {
                 var i=0;
                 dst.Class = src[i++];

@@ -28,6 +28,12 @@ namespace Z0
             Size = size;
         }
 
+        public MemorySegment Segment
+        {
+            [MethodImpl(Inline)]
+            get => new MemorySegment(Address, Size);
+        }
+
         [MethodImpl(Inline)]
         public bool NameLike(string match)
             => Name.Format().Contains(match);
@@ -46,5 +52,8 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static ResDescriptor Empty
+            => new ResDescriptor(Name.Empty, 0, 0);
     }
 }

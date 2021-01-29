@@ -55,6 +55,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Content(uint index)
-            => Resources.content(Descriptor(index));
+            => Resources.view(Descriptor(index));
     }
 }

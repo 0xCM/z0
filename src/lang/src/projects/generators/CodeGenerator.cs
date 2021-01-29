@@ -10,6 +10,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static TextRules;
 
     public interface ICodeGenerator
     {
@@ -142,11 +143,11 @@ namespace Z0
 
 
         public static string FileHeader
-            => text.lines(
+            => Format.lines(
                 HeaderLine1,
                 HeaderLine2,
                 HeaderLine3,
-                string.Format(HeaderLine4, z.now(),
+                string.Format(HeaderLine4, root.now(),
                 HeaderLine5)
                 );
 
