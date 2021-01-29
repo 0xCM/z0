@@ -16,7 +16,7 @@ namespace Z0
         readonly Index<TextRow> Data;
 
         [MethodImpl(Inline)]
-        public XedDocRows(FS.FilePath src, TextRow[] rows)
+        public XedDocRows(FS.FilePath src, Index<TextRow> rows)
         {
             Source = src;
             Data = rows;
@@ -52,7 +52,7 @@ namespace Z0
         public static XedDocRows Empty
         {
             [MethodImpl(Inline)]
-            get => new XedDocRows(FS.FilePath.Empty, sys.empty<TextRow>());
+            get => new XedDocRows(FS.FilePath.Empty, Index<TextRow>.Empty);
         }
     }
 }

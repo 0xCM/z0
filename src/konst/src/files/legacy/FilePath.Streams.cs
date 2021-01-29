@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
 
     partial class XTend
     {
@@ -25,10 +24,5 @@ namespace Z0
         /// <param name="dst">The file path</param>
         public static StreamWriter Writer(this FilePath dst)
             => new StreamWriter(dst.CreateParentIfMissing().Name, false);
-
-        public static BinaryWriter BinaryWriter(this FilePath dst)
-            => new BinaryWriter(File.Open(dst.CreateParentIfMissing().Name, FileMode.Create));
-
-
     }
 }

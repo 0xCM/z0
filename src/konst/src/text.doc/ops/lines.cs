@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.IO;
-    using System.Collections.Generic;
 
-    partial struct TextDocParser
+    partial struct TextDocs
     {
-        public static ParseResult<TextLine[]> lines(string src)
+        public static Index<TextLine> lines(string src)
         {
-            var lines = new List<TextLine>();
+            var lines = root.list<TextLine>();
             var lineNumber = 0u;
             using (var reader = new StringReader(src))
             {
@@ -22,7 +21,7 @@ namespace Z0
                     lines.Add(new TextLine(++lineNumber, next));
                 }
             }
-            return ParseResult.win(src, lines.ToArray());
+            return lines.ToArray();
         }
     }
 }

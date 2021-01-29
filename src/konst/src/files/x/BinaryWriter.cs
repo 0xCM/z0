@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.IO;
 
-    public interface ITextDocParser<T> : ITextParser<T>
+    partial class XFs
     {
-        ParseResult<T> Parse(TextDoc src);
-
-        ParseResult<T> ITextParser<T>.Parse(string src)
-            => TextDocs.parse(src,Parse);
+        public static BinaryWriter BinaryWriter(this FS.FilePath dst)
+            => new BinaryWriter(File.Open(dst.EnsureParentExists().Name, FileMode.Create));
     }
 }

@@ -67,7 +67,7 @@ namespace Z0
         public string Format()
         {
             var dst = text.build();
-            z.iter(Content.RowData, d => dst.AppendLine(d.RowText));
+            root.iter(Content.RowData, d => dst.AppendLine(d.RowText));
             return dst.ToString();
         }
 

@@ -40,7 +40,7 @@ namespace Z0
             {
                 using var stream = Source.GetManifestResourceStream(name);
                 using var reader = new StreamReader(stream);
-                return TextDocParser.parse(reader).TryMap(doc => new AppResDoc(name,doc));
+                return TextDocs.parse(reader).TryMap(doc => new AppResDoc(name,doc));
             }
             catch(Exception e)
             {
@@ -59,7 +59,7 @@ namespace Z0
                 {
                     using var stream = Source.GetManifestResourceStream(name);
                     using var reader = new StreamReader(stream);
-                    var result = TextDocParser.parse(reader).TryMap(doc => new AppResDoc(name,doc));
+                    var result = TextDocs.parse(reader).TryMap(doc => new AppResDoc(name,doc));
                     if(result.Succeeded)
                         return result.Value;
 

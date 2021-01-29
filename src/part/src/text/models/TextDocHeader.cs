@@ -14,10 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct TextDocHeader
     {
-        public readonly string[] Labels;
+        public Index<string> Labels {get;}
 
         [MethodImpl(Inline)]
-        public TextDocHeader(params string[] src)
+        public TextDocHeader(string[] src)
             => Labels = src;
 
         public string Format(char? sep = null)
@@ -27,6 +27,6 @@ namespace Z0
             => Format();
 
         public static TextDocHeader Empty
-            => new TextDocHeader();
+            => new TextDocHeader(sys.empty<string>());
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    partial struct TextDocParser
+    partial struct TextDocs
     {
         public static ParseResult<T> parse<T>(string data, Func<TextDoc,ParseResult<T>> pfx)
         {
@@ -34,7 +34,7 @@ namespace Z0
             };
 
             using var reader = src.Reader();
-            return parse(reader,format).Select(doc => parsed(src.Name, doc)).Value;
+            return parse(reader, format).Select(doc => parsed(src.Name, doc)).Value;
         }
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace Z0
         {
             var rows = new List<TextRow>();
             var counter = 1u;
-            var fmt = format ?? TextDocFormat.Structured;
+            var fmt = format ?? TextDocFormat.Structured();
             var comment = fmt.CommentPrefix;
-            var rowsep = fmt.RowSeparator;
+            var rowsep = fmt.RowBlockSep;
             Option<TextDocHeader> docheader = default;
             try
             {

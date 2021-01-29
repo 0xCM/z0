@@ -9,12 +9,30 @@ namespace Z0
 
     using static Part;
 
+    /// <summary>
+    /// Defines a text document format scheme
+    /// </summary>
     public struct TextDocFormat
     {
         /// <summary>
+        /// Specifies the default delimiter to use with structured content
+        /// </summary>
+        public const char DefaultDelimiter = Chars.Pipe;
+
+        /// <summary>
+        /// Specifies the default comment prefix
+        /// </summary>
+        public const char DefaultCommentPrefix = Chars.Hash;
+
+        /// <summary>
+        /// Specifies the default row block separator
+        /// </summary>
+        public const string DefaultRowBlockSep = "-------------------------------------------------------";
+
+        /// <summary>
         /// Specifies leading content that identifies a non-semantic row division marker
         /// </summary>
-        public string RowSeparator;
+        public string RowBlockSep;
 
         /// <summary>
         /// Indicates whether the first line of the data is a header row
@@ -39,38 +57,60 @@ namespace Z0
         /// <summary>
         /// If specified, defines a uniform column width
         /// </summary>
-        public int? ColWidth;
+        public uint? ColWidth;
+
+        /// <summary>
+        /// Specifies the line number at which pertinent content begins
+        /// </summary>
+        public uint FirstLine;
+
+        /// <summary>
+        /// If specified, indicates the line number at which pertinent content ends
+        /// </summary>
+        public uint? LastLine;
 
         [MethodImpl(Inline)]
-        internal TextDocFormat(string empty)
-            : this()
-        {
-            RowSeparator = EmptyString;
-        }
-
-        [MethodImpl(Inline)]
-        public TextDocFormat(bool header, bool delimited, char sep, char cp, int? colwidth)
-        {
-            RowSeparator = "-------------------------------------------------------";
-            HasDataHeader = header;
-            IsDelimited = delimited;
-            Delimiter = sep;
-            CommentPrefix = cp;
-            ColWidth = colwidth;
-        }
-
-        public static TextDocFormat Empty
-            => new TextDocFormat(EmptyString);
-
-        public static TextDocFormat Structured
+        public static TextDocFormat Structured()
             => define();
 
-        public static TextDocFormat Unstructured
+        [MethodImpl(Inline)]
+        public static TextDocFormat Structured(char delimiter)
+            => define(
+                Delimiter: delimiter
+                );
+
+        public static TextDocFormat Unstructured()
             => define(false, false);
 
         [MethodImpl(Inline)]
-        static TextDocFormat define(bool HasHeader = true, bool delimited = true,
-            char Delimiter = Chars.Pipe, char CommentPrefix = Chars.Hash, int? ColWidth = null)
-                => new TextDocFormat(HasHeader, delimited, Delimiter, CommentPrefix,ColWidth);
+        static TextDocFormat define(
+            bool HasHeader = true,
+            bool delimited = true,
+            char Delimiter = DefaultDelimiter,
+            char CommentPrefix = DefaultCommentPrefix,
+            uint? ColWidth = null,
+            uint? FirstLine = null,
+            uint? LastLine = null)
+        {
+            var dst = Empty;
+            dst.RowBlockSep = DefaultRowBlockSep;
+            dst.HasDataHeader = HasHeader;
+            dst.IsDelimited = delimited;
+            dst.Delimiter = Delimiter;
+            dst.CommentPrefix = CommentPrefix;
+            dst.ColWidth = ColWidth;
+            dst.FirstLine = FirstLine ?? 0;
+            dst.LastLine = LastLine;
+            return dst;
+        }
+
+
+        public static TextDocFormat Empty
+        {
+            [MethodImpl(Inline)]
+            get => define(false, false, Chars.Null, Chars.Null, null);
+        }
+
+
     }
 }

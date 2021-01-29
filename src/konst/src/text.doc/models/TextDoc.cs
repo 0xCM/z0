@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct TextDoc : IIndex<TextRow>
     {
-        public TextRow[] RowData {get;}
+        public Index<TextRow> RowData {get;}
 
         public TextDocFormat Format {get;}
 
@@ -32,13 +32,13 @@ namespace Z0
         public ReadOnlySpan<TextRow> Rows
         {
             [MethodImpl(Inline)]
-            get => RowData;
+            get => RowData.View;
         }
 
         public TextRow[] Storage
         {
             [MethodImpl(Inline)]
-            get => RowData;
+            get => RowData.Storage;
         }
 
         public string Content
@@ -61,7 +61,7 @@ namespace Z0
         public ref readonly TextRow this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref memory.seek(RowData, index);
+            get => ref RowData[index];
         }
 
         public int RowCount

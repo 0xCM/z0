@@ -16,7 +16,7 @@ namespace Z0
         public static XedSourceParser Service => default;
 
         public XedDocRows LoadSource(FS.FilePath src)
-            => TextDocParser.parse(src,TextDocFormat.Unstructured)
+            => TextDocs.parse(src,TextDocFormat.Unstructured())
                     .MapValueOrDefault(c => new XedDocRows(src, c.RowData), XedDocRows.Empty);
 
         public XedInstructionDoc ParseInstruction(XedDocRows src, in int idxStart, ref int ix)
@@ -66,7 +66,7 @@ namespace Z0
                 if(data[i].RowText.ContainsAny(Instructions))
                     return ParseInstructions(data, i);
             }
-            return z.array<XedInstructionDoc>();
+            return memory.array<XedInstructionDoc>();
         }
 
         static void Advance(ref int index)

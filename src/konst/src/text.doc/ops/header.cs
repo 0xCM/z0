@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct TextDocParser
+    partial struct TextDocs
     {
         /// <summary>
         /// Parses a header row from a line of text

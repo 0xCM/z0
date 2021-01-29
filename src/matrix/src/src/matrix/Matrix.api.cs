@@ -234,8 +234,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var options = fmt ?? TextDocFormat.Structured;
-            var width = fmt?.ColWidth ?? src.ColFormatWidth();
+            var options = fmt ?? TextDocFormat.Structured();
+            var width = fmt?.ColWidth ?? (uint)src.ColFormatWidth();
             var sep = options.Delimiter;
             var rows = (int)nat64u<M>();
             var cols = (int)nat64u<N>();
@@ -247,7 +247,7 @@ namespace Z0
                     if(i != 0)
                         dst.Write(Chars.Space);
 
-                    dst.Write($"Col{i}".PadRight(width, Chars.Space));
+                    dst.Write($"Col{i}".PadRight((int)width, Chars.Space));
 
                     if(i != cols - 1)
                         dst.Write(sep);
@@ -255,7 +255,7 @@ namespace Z0
                 dst.WriteLine();
             }
 
-            dst.Write(src.Format(width,sep));
+            dst.Write(src.Format((int)width, sep));
             dst.Flush();
         }
 
@@ -272,7 +272,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var doc = TextDocParser.parse(src).Require();
+            var doc = TextDocs.parse(src).Require();
             var m = (int)nat64u<M>();
             var n = (int)nat64u<N>();
 

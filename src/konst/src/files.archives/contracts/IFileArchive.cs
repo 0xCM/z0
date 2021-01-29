@@ -15,7 +15,7 @@ namespace Z0
         FS.FolderPath Root {get;}
 
         ParseResult<TextDoc> Document(FS.FilePath src)
-            => TextDocParser.parse(src);
+            => TextDocs.parse(src);
 
         FS.Files Clear(FS.FolderName id)
             => (Root + id).Clear(root.list<FS.FilePath>()).Array();

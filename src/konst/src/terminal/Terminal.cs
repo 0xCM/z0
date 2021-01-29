@@ -35,7 +35,7 @@ namespace Z0
 
         Option<Action> TerminationHandler;
 
-        readonly FilePath ErrorLogPath;
+        readonly FS.FilePath ErrorLogPath;
 
         Terminal()
         {
@@ -44,7 +44,7 @@ namespace Z0
              StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();
              Console.CancelKeyPress += OnCancelKeyPressed;
-             ErrorLogPath = FilePath.Define("Errors.log");
+             ErrorLogPath = Env.create().LogRoot + FS.file("term.errors.log");
         }
 
         /// <summary>
