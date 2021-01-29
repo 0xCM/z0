@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
-        void emit(ReadOnlySpan<AsmSig> src)
+        void emit(ReadOnlySpan<AsmSigExpr> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -19,11 +19,11 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
             }
         }
 
-        void emit(ReadOnlySpan<AsmOpCode> src)
+        void emit(ReadOnlySpan<AsmOpCodeExpr> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();
@@ -49,7 +49,7 @@ namespace Z0.Asm
 
         }
 
-        void emit(ReadOnlySpan<AsmMnemonic> src)
+        void emit(ReadOnlySpan<AsmMnemonicExpr> src)
         {
             var dstPath = CasePath($"Mnemonics");
             using var writer = dstPath.Writer();
@@ -57,7 +57,7 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Name.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
             }
         }
 

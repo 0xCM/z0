@@ -17,9 +17,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public One(dynamic src)
-            {
-                Value = src;
-            }
+                => Value = src;
         }
 
         /// <summary>
@@ -31,9 +29,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public One(T src)
-            {
-                Value = src;
-            }
+                => Value = src;
 
             [MethodImpl(Inline)]
             public static implicit operator One<T>(T src)

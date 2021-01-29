@@ -39,7 +39,7 @@ namespace Z0.Asm
             emit(handler.Mnemonics, root + FS.file("mnemonics", FileExtensions.Csv));
         }
 
-        public static void emit(ReadOnlySpan<AsmOpCode> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmOpCodeExpr> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("OpCode");
@@ -50,14 +50,14 @@ namespace Z0.Asm
             }
         }
 
-        public static void emit(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmMnemonicExpr> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("Mnemonic");
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Name.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
             }
         }
 
@@ -77,14 +77,14 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void emit(ReadOnlySpan<AsmSig> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmSigExpr> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("Instruction");
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
+                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
             }
         }
 

@@ -17,19 +17,19 @@ namespace Z0.Asm
             => new AsmTokenLookup(index);
 
         [MethodImpl(Inline), Op]
-        public static string definition(in AsmTokenLookup tokens, AsmTokenKind id)
+        public static string definition(in AsmTokenLookup tokens, AsmSigKeywordId id)
             => tokens.Definitions[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static string meaning(in AsmTokenLookup tokens, AsmTokenKind id)
+        public static string meaning(in AsmTokenLookup tokens, AsmSigKeywordId id)
             => tokens.Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static ref readonly TokenRecord token(in AsmTokenLookup tokens, AsmTokenKind id)
+        public static ref readonly TokenRecord token(in AsmTokenLookup tokens, AsmSigKeywordId id)
             => ref tokens.Models[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static string identifier(in AsmTokenLookup tokens, AsmTokenKind id)
+        public static string identifier(in AsmTokenLookup tokens, AsmSigKeywordId id)
             => tokens.Identity[id];
     }
 }

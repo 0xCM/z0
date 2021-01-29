@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     partial struct Asci
     {
@@ -29,7 +30,7 @@ namespace Z0
             ref var dst = ref @as<uint,char>(storage);
             seek(dst, 0) = (char)(byte)(src.Storage >> 0);
             seek(dst, 1) = (char)(byte)(src.Storage >> 8);
-            return z.cover(dst, 2);
+            return memory.cover(dst, 2);
         }
 
         [MethodImpl(Inline), Op]
@@ -41,50 +42,47 @@ namespace Z0
             seek(dst, 1) = (char)(byte)(src.Storage >> 8);
             seek(dst, 2) = (char)(byte)(src.Storage >> 16);
             seek(dst, 3) = (char)(byte)(src.Storage >> 24);
-            return z.cover(dst, asci4.Size);
+            return memory.cover(dst, asci4.Size);
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
-        {
-            var decoded = cpu.vinflate16u(cpu.vbytes(w128, src.Storage));
-            return z.recover<char>(z.bytes(vlo(decoded)));
-        }
+            => memory.recover<char>(memory.bytes(vlo(vinflate16u(vbytes(w128, src.Storage)))));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => z.recover<char>(z.bytes(cpu.vinflate16u(src.Storage)));
+            => memory.recover<char>(memory.bytes(vinflate16u(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
-            var lo = cpu.vinflate16u(src.Storage, n0);
-            var hi = cpu.vinflate16u(src.Storage, n1);
-            return z.recover<char>(z.bytes(new Seg512(lo,hi)));
+            var lo = vinflate16u(src.Storage, n0);
+            var hi = vinflate16u(src.Storage, n1);
+            return memory.recover<char>(memory.bytes(new Seg512(lo,hi)));
         }
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci64 src)
         {
             var x = src.Storage;
-            var x0 = cpu.vinflate16u(x.Lo,n0);
-            var x1 = cpu.vinflate16u(x.Lo,n1);
-            var x2 = cpu.vinflate16u(x.Hi,n0);
-            var x3 = cpu.vinflate16u(x.Hi,n1);
-            return z.recover<char>(z.bytes(new Seg1024(x0,x1,x2,x3)));
+            var x0 = vinflate16u(x.Lo,n0);
+            var x1 = vinflate16u(x.Lo,n1);
+            var x2 = vinflate16u(x.Hi,n0);
+            var x3 = vinflate16u(x.Hi,n1);
+            return memory.recover<char>(memory.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci8 src, ref char dst)
         {
-            var decoded = cpu.vinflate16u(cpu.vbytes(w128, src.Storage));
+            var decoded = vinflate16u(cpu.vbytes(w128, src.Storage));
             cpu.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
-           var decoded = cpu.vinflate16u(src.Storage);
+           var decoded = vinflate16u(src.Storage);
            cpu.vstore(decoded, ref @as<char,ushort>(dst));
         }
 

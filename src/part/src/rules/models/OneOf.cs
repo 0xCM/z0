@@ -17,9 +17,8 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public OneOf(Index<dynamic> choices)
-            {
-                Choices = choices;
-            }
+                => Choices = choices;
+
         }
 
         public readonly struct OneOf<T>

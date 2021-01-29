@@ -13,14 +13,14 @@ namespace Z0.Asm
     {
         public readonly struct SemanticComment
         {
-            public AsmSig Sig {get;}
+            public AsmSigExpr Sig {get;}
 
-            public AsmOpCode OpCode {get;}
+            public AsmOpCodeExpr OpCode {get;}
 
             public EncodedStatement Encoded {get;}
 
             [MethodImpl(Inline)]
-            public SemanticComment(AsmSig sig, AsmOpCode oc, EncodedStatement encoded)
+            public SemanticComment(AsmSigExpr sig, AsmOpCodeExpr oc, EncodedStatement encoded)
             {
                 Sig = sig;
                 OpCode = oc;

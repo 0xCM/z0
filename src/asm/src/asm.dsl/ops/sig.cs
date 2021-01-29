@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmSig sig(asci64 src)
-            => new AsmSig(src);
+        public static AsmSigExpr sig(asci64 src)
+            => new AsmSigExpr(src);
     }
 }

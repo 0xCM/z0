@@ -7,7 +7,7 @@ namespace Z0
     using static Part;
 
     [LiteralProvider]
-    public readonly struct AsmTokenValues
+    public readonly struct AsmSigKeywordNames
     {
         public const string None = EmptyString;
 

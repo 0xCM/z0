@@ -7,26 +7,29 @@ namespace Z0
     using static Limits;
 
     /// <summary>
-    /// Defines keys for <see cref='AsmTokenIndex'/>
+    /// Assigns surrogate keys to instruction signature keywords
     /// </summary>
-    public enum AsmTokenKind : byte
+    public enum AsmSigKeywordId : byte
     {
+        /// <summary>
+        /// Indicates the absence of a keyword specification
+        /// </summary>
         None = 0,
 
         /// <summary>
         /// A 128-bit bounds register. BND0 through BND3
         /// </summary>
-        bnd = 1,
+        bnd,
 
         /// <summary>
         /// The destination in an instruction; this field is encoded by reg_field
         /// </summary>
-        DST = 2,
+        DST,
 
         /// <summary>
         /// Indicates support for embedded rounding control
         /// </summary>
-        ᛁerᛁ = 3,
+        ᛁerᛁ,
 
         /// <summary>
         /// An immediate <see cref='W8'/> value in the inclusive range [<see cref='Min8i'/>, <see cref='Max8i'/>]
@@ -36,32 +39,32 @@ namespace Z0
         /// sign-extended to form a word or doubleword. The upper byte of the word is filled with the topmost
         /// bit of the immediate value
         /// </remarks>
-        imm8 = 4,
+        imm8,
 
         /// <summary>
         /// An immediate value for an operand of width <see cref='W16'/> in the inclusive range [<see cref='Min16i'/>, <see cref='Max16i'/>]
         /// </summary>
-        imm16 = 5,
+        imm16,
 
         /// <summary>
         /// An immediate value for an operand of width <see cref='W32'/> in the inclusive range [<see cref='Min32i'/>, <see cref='Max32i'/>]
         /// </summary>
-        imm32 = 6,
+        imm32,
 
         /// <summary>
         /// An immediate value for an operand of width <see cref='W64'/> in the inclusive range [<see cref='Min64i'/>, <see cref='Max64i'/>]
         /// </summary>
-        imm64 = 7,
+        imm64,
 
         /// <summary>
         /// A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7
         /// </summary>
-        k1 = 8,
+        k1,
 
         /// <summary>
         /// An operand in memory of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/> bits
         /// </summary>
-        m = 9,
+        m,
 
         /// <summary>
         /// An operand in memory of width <see cref='W8'/> pointed to by a register that <see cref='OperatingMode'/> dependent
@@ -76,7 +79,7 @@ namespace Z0
         /// <see cref='RSI'/>
         /// <see cref='RDI'/>
         /// </remarks>
-        m8 = 10,
+        m8,
 
         /// <summary>
         /// An operand in memory of width <see cref='W16'/>, pointed to by a register, and applicable only to string instructions
@@ -86,7 +89,7 @@ namespace Z0
         /// <see cref='DS'/>:<see cref='SI'/>
         /// <see cref='DS'/>:<see cref='ESI'/>
         /// </remarks>
-        m16 = 11,
+        m16,
 
         /// <summary>
         /// An operand in memory of width <see cref='W32'/>, pointed to by a register, and applicable only to string instructions
@@ -96,17 +99,17 @@ namespace Z0
         /// <see cref='DS'/><see cref='SI'/>
         /// <see cref='DS'/>:<see cref='ESI'/>
         /// </remarks>
-        m32 = 12,
+        m32,
 
         /// <summary>
         /// An operand in memory of width <see cref='W64'/>
         /// </summary>
-        m64 = 13,
+        m64,
 
         /// <summary>
         /// An operand in memory of width <see cref='W128'/>
         /// </summary>
-        m128 = 14,
+        m128,
 
         /// <summary>
         /// A memory operand containing a far pointer expressed as a segment-selector/offset pair
@@ -114,12 +117,12 @@ namespace Z0
         /// <remarks>
         /// For the expression S:R, S denotes the pointer's segment selector and R designates the offset
         /// </remarks>
-        m16ᙾ16 = 15,
+        m16ᙾ16,
 
         /// <summary>
         ///
         /// </summary>
-        m16ᙾ32 = 16,
+        m16ᙾ32,
 
         /// <summary>
         ///

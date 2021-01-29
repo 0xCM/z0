@@ -13,9 +13,9 @@ namespace Z0.Asm
     {
         public Index<AsmOpCodeRow> Entries {get;}
 
-        public Index<AsmOpCode> Identity {get;}
+        public Index<AsmOpCodeExpr> Identity {get;}
 
-        public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCode[] identifiers)
+        public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCodeExpr[] identifiers)
         {
             Entries = records;
             Identity = identifiers;
@@ -24,7 +24,7 @@ namespace Z0.Asm
         public int OpCodeCount
             => Entries.Length;
 
-        public ref readonly AsmOpCode this[ushort index]
+        public ref readonly AsmOpCodeExpr this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Identity[index];

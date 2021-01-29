@@ -2,22 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
+    using static memory;
 
-    public struct AsmEncodingInfo
+    partial struct Rules
     {
-        public AsmStatement Statement;
-
-        public AsmSigExpr Sig;
-
-        public AsmOpCodeExpr OpCode;
-
-        public BinaryCode Encoded;
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static SeqSplit<T> splitter<T>(T delimiter)
+            => new SeqSplit<T>(delimiter);
     }
 }

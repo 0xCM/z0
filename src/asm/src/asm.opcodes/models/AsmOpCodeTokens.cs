@@ -23,7 +23,7 @@ namespace Z0.Asm
             get => ref Data[index];
         }
 
-        public ref readonly AsmOpCodeToken this[AsmOpCodeTokenKind index]
+        public ref readonly AsmOpCodeToken this[AsmOpCodeKeywordId index]
         {
             [MethodImpl(Inline)]
             get => ref Data[(byte)index];

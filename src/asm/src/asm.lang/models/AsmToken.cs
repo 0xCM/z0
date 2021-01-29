@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public byte Index {get;}
 
-        public AsmTokenKind Identifier {get;}
+        public AsmSigKeywordId Identifier {get;}
 
         public asci16 Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmToken(byte index, AsmTokenKind identifier, asci16 value)
+        public AsmToken(byte index, AsmSigKeywordId identifier, asci16 value)
         {
             Index = index;
             Identifier = identifier;

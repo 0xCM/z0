@@ -12,11 +12,11 @@ namespace Z0.Asm
 
     public readonly ref struct AsmOpCodeGroup
     {
-        readonly Span<AsmSig> SigData;
+        readonly Span<AsmSigExpr> SigData;
 
-        readonly Span<AsmOpCode> OpCodeData;
+        readonly Span<AsmOpCodeExpr> OpCodeData;
 
-        readonly Span<AsmMnemonic> MnemonicData;
+        readonly Span<AsmMnemonicExpr> MnemonicData;
 
         readonly Span<Cpuid> CpuidData;
 
@@ -28,19 +28,19 @@ namespace Z0.Asm
         internal AsmOpCodeGroup(uint count)
         {
             MnemonicSeq = new uint[1];
-            SigData = new AsmSig[count];
-            OpCodeData = new AsmOpCode[count];
-            MnemonicData = new AsmMnemonic[count];
+            SigData = new AsmSigExpr[count];
+            OpCodeData = new AsmOpCodeExpr[count];
+            MnemonicData = new AsmMnemonicExpr[count];
             CpuidData = new Cpuid[count];
             ModeData = new OperatingMode[count];
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmSig src)
+        public void Include(uint seq, in AsmSigExpr src)
             => Sig(seq) = src;
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmOpCode src)
+        public void Include(uint seq, in AsmOpCodeExpr src)
             => OpCode(seq) = src;
 
         [MethodImpl(Inline), Op]
@@ -52,38 +52,38 @@ namespace Z0.Asm
             => Mode(seq) = src;
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in AsmSig src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmSigExpr src)
             => Sig((uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in AsmOpCode src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmOpCodeExpr src)
             => OpCode((uint)ocp.Sequence) = src;
 
         [MethodImpl(Inline), Op]
-        void Include(in AsmMnemonic src)
+        void Include(in AsmMnemonicExpr src)
             => seek(MnemonicData, first(MnemonicSeq)++) = src;
 
-        ref readonly AsmMnemonic LastMnemonic
+        ref readonly AsmMnemonicExpr LastMnemonic
         {
             [MethodImpl(Inline)]
             get => ref skip(MnemonicData, first(MnemonicSeq) - 1);
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(AsmOpCodePartitoner ocp, in AsmMnemonic src)
+        public void Include(AsmOpCodePartitoner ocp, in AsmMnemonicExpr src)
         {
             if(first(MnemonicSeq) > 0)
-                if(!LastMnemonic.Name.Equals(src.Name))
+                if(!LastMnemonic.Content.Equals(src.Content))
                     Include(src);
             else
                 Include(src);
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmMnemonic src)
+        public void Include(uint seq, in AsmMnemonicExpr src)
         {
             if(first(MnemonicSeq) > 0)
-                if(!LastMnemonic.Name.Equals(src.Name))
+                if(!LastMnemonic.Content.Equals(src.Content))
                     Include(src);
             else
                 Include(src);
@@ -103,13 +103,13 @@ namespace Z0.Asm
             get => (uint)OpCodeData.Length;
         }
 
-        public ReadOnlySpan<AsmSig> Signatures
+        public ReadOnlySpan<AsmSigExpr> Signatures
         {
             [MethodImpl(Inline)]
             get => SigData;
         }
 
-        public ReadOnlySpan<AsmOpCode> OpCodes
+        public ReadOnlySpan<AsmOpCodeExpr> OpCodes
         {
             [MethodImpl(Inline)]
             get => OpCodeData;
@@ -121,7 +121,7 @@ namespace Z0.Asm
             get => CpuidData;
         }
 
-        public ReadOnlySpan<AsmMnemonic> Mnemonics
+        public ReadOnlySpan<AsmMnemonicExpr> Mnemonics
         {
             [MethodImpl(Inline)]
             get => MnemonicData;
@@ -134,11 +134,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        ref AsmMnemonic Mnemonic(uint seq)
+        ref AsmMnemonicExpr Mnemonic(uint seq)
             => ref seek(MnemonicData, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmOpCode OpCode(uint seq)
+        ref AsmOpCodeExpr OpCode(uint seq)
             => ref seek(OpCodeData, seq);
 
         [MethodImpl(Inline), Op]
@@ -146,7 +146,7 @@ namespace Z0.Asm
             => ref seek(ModeData, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmSig Sig(uint seq)
+        ref AsmSigExpr Sig(uint seq)
             => ref seek(SigData, seq);
     }
 }

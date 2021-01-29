@@ -5,19 +5,19 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
-    using static Part;
-
-    public struct AsmEncodingInfo
+    public sealed class AsmSigParser : WfService<AsmSigParser, AsmSigParser>
     {
-        public AsmStatement Statement;
 
-        public AsmSigExpr Sig;
 
-        public AsmOpCodeExpr OpCode;
+        public bool Parse(AsmSigExpr src, out AsmSig dst)
+        {
+            dst = AsmSig.Empty;
 
-        public BinaryCode Encoded;
+
+            return false;
+        }
+
     }
+
 }

@@ -6,18 +6,12 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
 
-    public struct AsmEncodingInfo
+    public readonly struct AsmSigOperand
     {
-        public AsmStatement Statement;
 
-        public AsmSigExpr Sig;
 
-        public AsmOpCodeExpr OpCode;
-
-        public BinaryCode Encoded;
     }
 }

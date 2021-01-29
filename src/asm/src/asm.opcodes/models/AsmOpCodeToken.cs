@@ -16,10 +16,10 @@ namespace Z0.Asm
 
         public byte Index {get;}
 
-        public AsmOpCodeTokenKind Id {get;}
+        public AsmOpCodeKeywordId Id {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeToken(byte index, AsmOpCodeTokenKind id, SegRef<char> src)
+        public AsmOpCodeToken(byte index, AsmOpCodeKeywordId id, SegRef<char> src)
         {
             Index = index;
             Source = src;

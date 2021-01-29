@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(asci32 src)
-            => new AsmOpCode(src);
+        public static AsmOpCodeExpr opcode(asci32 src)
+            => new AsmOpCodeExpr(src);
     }
 }

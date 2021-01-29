@@ -52,15 +52,15 @@ namespace Z0.Asm
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in AsmSig src, in AsmOpCodeGroup handler)
+        void Process(in AsmSigExpr src, in AsmOpCodeGroup handler)
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in AsmOpCode src, in AsmOpCodeGroup handler)
+        void Process(in AsmOpCodeExpr src, in AsmOpCodeGroup handler)
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        void Process(in AsmMnemonic src, in AsmOpCodeGroup handler)
+        void Process(in AsmMnemonicExpr src, in AsmOpCodeGroup handler)
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
@@ -68,19 +68,19 @@ namespace Z0.Asm
             => handler.Include(this, src);
 
         [MethodImpl(Inline), Op]
-        static AsmMnemonic Mnemonic(in AsmOpCodeRow src)
-            => new AsmMnemonic(src.Mnemonic);
+        static AsmMnemonicExpr Mnemonic(in AsmOpCodeRow src)
+            => new AsmMnemonicExpr(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
         static Cpuid Cpuid(in AsmOpCodeRow src)
             => new Cpuid(src.CpuId);
 
         [MethodImpl(Inline), Op]
-        static AsmOpCode OpCode(in AsmOpCodeRow src)
-            => new AsmOpCode(src.OpCode);
+        static AsmOpCodeExpr OpCode(in AsmOpCodeRow src)
+            => new AsmOpCodeExpr(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        static AsmSig Instruction(in AsmOpCodeRow src)
-            => new AsmSig(src.Instruction);
+        static AsmSigExpr Instruction(in AsmOpCodeRow src)
+            => new AsmSigExpr(src.Instruction);
     }
 }

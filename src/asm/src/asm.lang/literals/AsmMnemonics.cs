@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     public readonly struct AsmMnemonics
     {
-        public static AsmMnemonic cmp => nameof(cmp);
+        public static AsmMnemonicExpr cmp => nameof(cmp);
 
-        public static AsmMnemonic movzx => nameof(movzx);
+        public static AsmMnemonicExpr movzx => nameof(movzx);
 
-        public static AsmMnemonic push => nameof(push);
+        public static AsmMnemonicExpr push => nameof(push);
     }
 }

@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using T = AsmTokenKind;
-    using I = AsmTokenIdentifier;
-    using P = AsmTokenMeaning;
-    using V = AsmTokenValues;
+    using T = AsmSigKeywordId;
+    using I = AsmSigKeywordNames;
+    using P = AsmSigKeywordMeaning;
+    using V = AsmSigKeywordNames;
 
     [ApiType]
     public readonly struct AsmTokenSpecs

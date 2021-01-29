@@ -12,9 +12,9 @@ namespace Z0
     [ApiHost]
     public partial class AsmTokenIndex
     {
-        internal const int TokenCount = (int)AsmTokenKind.TokenCount;
+        internal const int TokenCount = (int)AsmSigKeywordId.TokenCount;
 
-        public readonly SemanticLookup<AsmTokenKind,string> Identifier;
+        public readonly SemanticLookup<AsmSigKeywordId,string> Identifier;
 
         [MethodImpl(Inline), Op]
         public static AsmTokenIndex create()
@@ -26,19 +26,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public ref readonly string identifier(AsmTokenKind kind)
+        public ref readonly string identifier(AsmSigKeywordId kind)
             => ref Identifier[kind];
 
         [MethodImpl(Inline), Op]
-        public string meaning(AsmTokenKind kind)
+        public string meaning(AsmSigKeywordId kind)
             => Meaning[(int)kind];
 
         [MethodImpl(Inline), Op]
-        public string value(AsmTokenKind kind)
+        public string value(AsmSigKeywordId kind)
             => Value[(int)kind];
 
         [MethodImpl(Inline), Op]
-        public TokenRecord model(AsmTokenKind kind)
+        public TokenRecord model(AsmSigKeywordId kind)
             => Records[(int)kind];
     }
 }

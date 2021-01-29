@@ -4,155 +4,161 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using KW = AsmOpCodeKeywordKeys;
+
     /// <summary>
-    /// Defines symbols used to specify opcode syntax
+    /// Gives a type to the literals defined by <see cref='AsmOpCodeKeywordKeys'/>
     /// </summary>
-    public enum AsmOpCodeTokenKind : byte
+    public enum AsmOpCodeKeywordId : byte
     {
+        /// <summary>
+        /// Indicates the absence of a keyword specification
+        /// </summary>
+        None = 0,
+
         /// <summary>
         /// Not encodable
         /// </summary>
-        NE = 1,
+        NE = KW.NE,
 
         /// <summary>
         /// Indicates the use of 66/F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction
         /// </summary>
-        NP,
+        NP = KW.NP,
 
         /// <summary>
         /// Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.
         /// </summary>
-        NFx,
+        NFx = KW.NFx,
 
-        /// <summary>
-        /// Indicates the use of a REX prefix that affects operand size or instruction semantics
-        /// </summary>
-        REXᕀW,
+        Rexᕀ = KW.REXᕀ,
 
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ0,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ1,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ2,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ3,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ4,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ5,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ6 = 11,
-
-        /// <summary>
-        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode
-        /// </summary>
-        ﾉ7 = 12,
+        REXㆍWᕀ = KW.REXㆍWᕀ,
 
         /// <summary>
         /// Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand
         /// </summary>
-        ﾉr = 13,
+        ﾉr = KW.ﾉr,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ0 = KW.ﾉ0,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ1 = KW.ﾉ1,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ2 = KW.ﾉ2,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ3 = KW.ﾉ3,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ4 = KW.ﾉ4,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ5 = KW.ﾉ5,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ6 = KW.ﾉ6,
+
+        /// <summary>
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode
+        /// </summary>
+        ﾉ7 = KW.ﾉ7,
 
         /// <summary>
         /// A 1-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        cb,
+        cb = KW.cb,
 
         /// <summary>
         /// A 2-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        cw,
+        cw = KW.cw,
 
         /// <summary>
         /// A 4-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        cd = 16,
+        cd = KW.cd,
 
         /// <summary>
         /// A 6-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        cp = 17,
+        cp = KW.cp,
 
         /// <summary>
         /// A 8-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        co,
+        co = KW.co,
 
         /// <summary>
         /// A 10-byte value following the opcode to specify a code offset and/or new value for the code segment register
         /// </summary>
-        ct = 19,
+        ct = KW.ct,
 
         /// <summary>
         /// A 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        ib = 20,
+        ib = KW.ib,
 
         /// <summary>
         /// A 2-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        iw = 21,
+        iw = KW.iw,
 
         /// <summary>
         /// A 4-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        id,
+        id = KW.id,
 
         /// <summary>
         /// A 8-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        io,
+        io = KW.io,
 
         /// <summary>
         /// For an 8-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        ᕀrb,
+        ᕀrb = KW.ᕀrb,
 
         /// <summary>
         /// For a 16-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        ᕀrw,
+        ᕀrw = KW.ᕀrw,
 
         /// <summary>
         /// For a 32-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        ᕀrd,
+        ᕀrd = KW.ᕀrd,
 
         /// <summary>
         /// For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        ᕀro,
+        ᕀro = KW.ᕀro,
 
         /// <summary>
         /// A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack.
         /// </summary>
-        ᕀi,
+        ᕀi = KW.ᕀi,
     }
 }

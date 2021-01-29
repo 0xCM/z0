@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    using Index = SemanticLookup<AsmTokenKind,string>;
+    using Index = SemanticLookup<AsmSigKeywordId,string>;
 
     public readonly struct AsmTokenLookup
     {
@@ -35,19 +35,19 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public string Definition(AsmTokenKind id)
+        public string Definition(AsmSigKeywordId id)
             => Definitions[(int)id];
 
         [MethodImpl(Inline), Op]
-        public string Meaning(AsmTokenKind id)
+        public string Meaning(AsmSigKeywordId id)
             => Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly TokenRecord Token(AsmTokenKind id)
+        public ref readonly TokenRecord Token(AsmSigKeywordId id)
             => ref Models[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly string Identifier(AsmTokenKind id)
+        public ref readonly string Identifier(AsmSigKeywordId id)
             => ref Identity[id];
 
         public int TokenCount

@@ -16,7 +16,7 @@ namespace Z0.Asm
             => new AsmSpecifier(opcode, sig);
 
         [MethodImpl(Inline), Op]
-        public static AsmSpecifier specifier(in AsmOpCode opcode, in AsmSig sig)
+        public static AsmSpecifier specifier(in AsmOpCodeExpr opcode, in AsmSigExpr sig)
             => new AsmSpecifier(opcode, sig);
     }
 }

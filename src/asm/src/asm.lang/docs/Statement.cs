@@ -16,12 +16,12 @@ namespace Z0.Asm
         /// </summary>
         public readonly struct Statement
         {
-            public AsmMnemonic Mnemonic {get;}
+            public AsmMnemonicExpr Mnemonic {get;}
 
             public string[] Operands {get;}
 
             [MethodImpl(Inline)]
-            public Statement(AsmMnemonic mnemonic, string[] operands)
+            public Statement(AsmMnemonicExpr mnemonic, string[] operands)
             {
                 Mnemonic = mnemonic;
                 Operands = operands;

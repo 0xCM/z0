@@ -19,7 +19,7 @@ namespace Z0.Asm
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeRow>(count);
             parse(resource, records);
-            var identifers = sys.alloc<AsmOpCode>(count);
+            var identifers = sys.alloc<AsmOpCodeExpr>(count);
             AsmOpCodes.identify(records, identifers);
             return new AsmOpCodeDataset(records,identifers);
         }

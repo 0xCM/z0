@@ -52,15 +52,15 @@ namespace Z0.Asm
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmSig src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmSigExpr src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmOpCode src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmOpCodeExpr src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmMnemonic src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmMnemonicExpr src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]

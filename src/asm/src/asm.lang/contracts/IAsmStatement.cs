@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public interface IAsmStatement
     {
-        AsmMnemonic Mnemonic {get;}
+        AsmMnemonicExpr Mnemonic {get;}
     }
 
     public interface IAsmStatement<A> : IAsmStatement

@@ -12,16 +12,16 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
-    public readonly struct AsmOpCode : ITextual
+    public readonly struct AsmOpCodeExpr : ITextual
     {
         public asci32 Value {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCode(string src)
+        public AsmOpCodeExpr(string src)
             => Value = src.Replace("o32 ", EmptyString);
 
         [MethodImpl(Inline)]
-        public AsmOpCode(asci32 src)
+        public AsmOpCodeExpr(asci32 src)
             => Value = src.Replace("o32 ", EmptyString);
 
         public bool IsEmpty
@@ -42,7 +42,7 @@ namespace Z0.Asm
             get => Asci.decode(Value);
         }
 
-        public AsmOpCode Zero
+        public AsmOpCodeExpr Zero
             => Empty;
 
         [MethodImpl(Inline)]
@@ -50,7 +50,7 @@ namespace Z0.Asm
             => Asci.format(Value);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmOpCode src)
+        public bool Equals(AsmOpCodeExpr src)
             => Value.Equals(src.Value);
 
         public override string ToString()
@@ -60,29 +60,29 @@ namespace Z0.Asm
             => Value.GetHashCode();
 
         public override bool Equals(object src)
-            => src is AsmOpCode id && Equals(id);
+            => src is AsmOpCodeExpr id && Equals(id);
 
-        public static AsmOpCode Empty
-            => new AsmOpCode(EmptyString);
+        public static AsmOpCodeExpr Empty
+            => new AsmOpCodeExpr(EmptyString);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(AsmOpCode src)
+        public static implicit operator string(AsmOpCodeExpr src)
             => src.Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmOpCode(asci32 src)
-            => new AsmOpCode(src);
+        public static implicit operator AsmOpCodeExpr(asci32 src)
+            => new AsmOpCodeExpr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci32(AsmOpCode src)
+        public static implicit operator asci32(AsmOpCodeExpr src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static bool operator ==(AsmOpCode d1, AsmOpCode d2)
+        public static bool operator ==(AsmOpCodeExpr d1, AsmOpCodeExpr d2)
             => d1.Equals(d2);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(AsmOpCode d1, AsmOpCode d2)
+        public static bool operator !=(AsmOpCodeExpr d1, AsmOpCodeExpr d2)
             => !d1.Equals(d2);
     }
 }

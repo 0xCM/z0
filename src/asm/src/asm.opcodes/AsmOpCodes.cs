@@ -22,8 +22,8 @@ namespace Z0.Asm
             => new AsmOpCodeGroup((uint)count);
 
         [MethodImpl(Inline), Op]
-        public static AsmMnemonic mnemonic(in AsmOpCodeRow src)
-            => new AsmMnemonic(src.Mnemonic);
+        public static AsmMnemonicExpr mnemonic(in AsmOpCodeRow src)
+            => new AsmMnemonicExpr(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
         public static Cpuid cpuid(in AsmOpCodeRow src)
@@ -47,16 +47,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(in AsmOpCodeRow src)
-            => new AsmOpCode(src.OpCode);
+        public static AsmOpCodeExpr opcode(in AsmOpCodeRow src)
+            => new AsmOpCodeExpr(src.OpCode);
 
         /// <summary>
         /// Selects the instruction pattern from the source table
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmSig sig(in AsmOpCodeRow src)
-            => new AsmSig(src.Instruction);
+        public static AsmSigExpr sig(in AsmOpCodeRow src)
+            => new AsmSigExpr(src.Instruction);
 
         [Op]
         public static AsmOpCodeTokens tokens(ReadOnlySpan<FieldRef> src)
@@ -71,7 +71,7 @@ namespace Z0.Asm
         {
             var count = src.Length;
             for(byte i=0; i<count; i++)
-                seek(dst, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), skip(src,i).NameRef);
+                seek(dst, i) = new AsmOpCodeToken(i, (AsmOpCodeKeywordId)(i + 1), skip(src,i).NameRef);
         }
 
         public static Index<TokenRecord> Tokens
@@ -105,11 +105,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCode identity(in AsmOpCodeRow src)
-            => new AsmOpCode(src.OpCode);
+        public static AsmOpCodeExpr identity(in AsmOpCodeRow src)
+            => new AsmOpCodeExpr(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCode> dst)
+        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCodeExpr> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
