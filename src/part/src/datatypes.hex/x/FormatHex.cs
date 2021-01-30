@@ -9,6 +9,18 @@ namespace Z0
 
     partial class XTend
     {
+        public static string FormatHex(this byte[] src)
+            => HexFormat.format(src, HexFormatSpecs.HexData);
+
+        public static string FormatHex(this ReadOnlySpan<byte> src)
+            => HexFormat.format(src, HexFormatSpecs.HexData);
+
+        public static string FormatHex(this Span<byte> src)
+            => HexFormat.format(src, HexFormatSpecs.HexData);
+
+        public static string FormatHex(this byte[] src, HexFormatOptions config)
+            => HexFormat.format(src, config);
+
         /// <summary>
         /// Formats a span of numeric cell type as a sequence of hex values
         /// </summary>

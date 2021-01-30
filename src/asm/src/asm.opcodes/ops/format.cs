@@ -7,15 +7,10 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     using F = AsmOpCodeField;
 
-    partial struct AsmOpCodes
+    partial struct AsmOpCodesLegacy
     {
-        public static string format(in AsmOpCodeRowLegacy src, char delimiter = FieldDelimiter)
-            => format(src, Formatters.dataset<F>(delimiter)).ToString();
-
         [Op]
         public static ref readonly DatasetFormatter<F> format(in AsmOpCodeRowLegacy src, in DatasetFormatter<F> dst)
         {

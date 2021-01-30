@@ -116,7 +116,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string Format()
-            => HexFormat.format(ByteView);
+            => HexFormat.format(ByteView, HexFormatSpecs.HexData);
 
         [MethodImpl(Inline), Op]
         public string Format(in HexFormatOptions config)

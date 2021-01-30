@@ -67,15 +67,15 @@ namespace Z0
         m,
 
         /// <summary>
-        /// An operand in memory of width <see cref='W8'/> pointed to by a register that <see cref='OperatingMode'/> dependent
+        /// An operand in memory of width <see cref='W8'/> pointed to by a register that <see cref='AsmOperatingMode'/> dependent
         /// </summary>
         /// <remarks>
-        /// For <see cref='OperatingMode.Non64'/> mode, is pointed to by one of
+        /// For <see cref='AsmOperatingMode.Non64'/> mode, is pointed to by one of
         /// <see cref='DS'/>:<see cref='SI'/>
         /// <see cref='DS'/>:<see cref='ESI'/>
         /// <see cref='ES'/>:<see cref='DI'/>
         /// <see cref='ES'/>:<see cref='EDI'/>
-        /// For <see cref='OperatingMode.Mode64'/>, it is pointed to by one of
+        /// For <see cref='AsmOperatingMode.Mode64'/>, it is pointed to by one of
         /// <see cref='RSI'/>
         /// <see cref='RDI'/>
         /// </remarks>

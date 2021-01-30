@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-
     /// <summary>
     /// Captures an asm opcode together with an instruction signature
     /// </summary>

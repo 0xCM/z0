@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     [Flags]
-    public enum OperatingMode : byte
+    public enum AsmOperatingMode : byte
     {
         None = 0,
 

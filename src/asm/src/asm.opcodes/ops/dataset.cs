@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static z;
-
-    partial struct AsmOpCodes
+    partial struct AsmOpCodesLegacy
     {
-         [Op]
+        [Op]
         public static AsmOpCodeDataset dataset()
         {
             var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
@@ -20,7 +14,7 @@ namespace Z0.Asm
             var records = sys.alloc<AsmOpCodeRowLegacy>(count);
             parse(resource, records);
             var identifers = sys.alloc<AsmOpCodeExprLegacy>(count);
-            AsmOpCodes.identify(records, identifers);
+            AsmOpCodesLegacy.identify(records, identifers);
             return new AsmOpCodeDataset(records,identifers);
         }
     }

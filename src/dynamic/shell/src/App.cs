@@ -201,9 +201,6 @@ namespace Z0
             Wf.Ran(flow, $"Ran {count} values through pipe");
         }
 
-        CmdResult EmitAsmMnemonics()
-            => Wf.Router.Dispatch(CmdBuilder.EmitAsmMnemonics());
-
         void EmitImageHeaders()
         {
             var svc = ImageDataEmitter.create(Wf);

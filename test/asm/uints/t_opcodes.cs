@@ -64,7 +64,7 @@ namespace Z0.Asm
 
         public void check_opcode_records()
         {
-            var data = AsmOpCodes.dataset();
+            var data = AsmOpCodesLegacy.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
             var formatter = Records.formatter<AsmOpCodeRowLegacy>();

@@ -23,6 +23,14 @@ namespace Z0
             where T : struct
                 => AsBytes(CreateSpan(ref edit(src), 1));
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<byte> bytes2<T>(in T src)
+            where T : struct
+        {
+            ref readonly var b = ref @as<T,byte>(src);
+            return cover(b, size<T>());
+        }
+
         /// <summary>
         /// Presents a span of generic values as bytespan
         /// </summary>

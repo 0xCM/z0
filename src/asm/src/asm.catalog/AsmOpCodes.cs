@@ -2,23 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static z;
 
-    [Cmd]
-    public struct EmitAsmMnemonicsCmd : ICmd<EmitAsmMnemonicsCmd>
+    [ApiHost]
+    public readonly partial struct AsmOpCodes
     {
 
-    }
 
-    partial class XCmd
-    {
-        [MethodImpl(Inline), Op]
-        public static EmitAsmMnemonicsCmd EmitAsmMnemonics(this CmdBuilder builder)
-            => new EmitAsmMnemonicsCmd();
     }
 }

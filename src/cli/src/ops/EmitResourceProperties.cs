@@ -26,7 +26,7 @@ namespace Z0
                 var m = p.GetGetMethod();
                 var body = m.GetMethodBody();
                 var cil = body.GetILAsByteArray();
-                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHexBytes());
+                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
                 summary.WriteLine(line);
             }
 

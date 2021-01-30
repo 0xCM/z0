@@ -5,13 +5,12 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static z;
 
     using F = AsmOpCodeField;
 
-    partial struct AsmOpCodes
+    partial struct AsmOpCodesLegacy
     {
         [Op]
         public static void parse(in AppResDoc specs, Span<AsmOpCodeRowLegacy> dst)

@@ -123,7 +123,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static string format(AsmInstructionSpecExprLegacy src, byte[] encoded, string sep)
-            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
+            => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
 
         [Op]
         public static string format(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config)

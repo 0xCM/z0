@@ -176,7 +176,7 @@ namespace Z0.Asm
 
         [Op]
         string Format(BinaryCode src)
-            => src.Storage.FormatHexBytes(DataFormat);
+            => src.Storage.FormatHex(DataFormat);
 
         [Op]
         static string footer(ApiInstruction src)

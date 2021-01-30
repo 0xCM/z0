@@ -48,7 +48,7 @@ namespace Z0
             {
                 var r = refs[i];
                 var data = memory.view(r.BaseAddress, r.Length);
-                dst.WriteLine(data.FormatHexBytes(Chars.Space));
+                dst.WriteLine(data.FormatHex());
             }
         }
 
@@ -94,7 +94,7 @@ namespace Z0
                 var m = p.GetGetMethod();
                 var body = m.GetMethodBody();
                 var cil = body.GetILAsByteArray();
-                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHexBytes());
+                var line = string.Concat(m.DeclaringType.Name.PadRight(20), "| ", m.Name.PadRight(30), "| ", cil.FormatHex());
                 summary.WriteLine(line);
             }
 

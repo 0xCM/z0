@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    //using static Encoded;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -99,10 +98,10 @@ namespace Z0
             => equals(this,src);
 
         public string Format()
-            => Data.FormatHexBytes();
+            => Data.FormatHex();
 
         public string Format(HexFormatOptions config)
-            => Data.FormatHexBytes(config);
+            => Data.FormatHex(config);
 
         public override int GetHashCode()
             => View.GetHashCode();

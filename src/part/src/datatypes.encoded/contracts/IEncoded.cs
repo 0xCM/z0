@@ -14,7 +14,7 @@ namespace Z0
             => Storage.Length;
 
         string ITextual.Format()
-            => Storage.FormatHexBytes();
+            => Storage.FormatHex();
     }
 
     public interface IEncoded<F> : IEncoded, IEquatable<F>

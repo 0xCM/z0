@@ -8,7 +8,10 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    public enum OverrideCode : byte
+    /// <summary>
+    /// The segment override codes as specified by Intel Vol II, 2.1.1
+    /// </summary>
+    public enum SegOverrideCode : byte
     {
         None = 0,
 
@@ -41,15 +44,5 @@ namespace Z0.Asm
         /// Specifies the <see cref='x65'/> override code for the <see cref='K.GS'/> register
         /// </summary>
         GS = x65,
-
-        /// <summary>
-        /// Specifies the <see cref='x66'/> operand data size override code
-        /// </summary>
-        Operand = x66,
-
-        /// <summary>
-        /// Specifies the <see cref='x67'/> operand address size override code
-        /// </summary>
-        Address = x67,
     }
 }

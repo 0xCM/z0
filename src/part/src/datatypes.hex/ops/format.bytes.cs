@@ -13,10 +13,6 @@ namespace Z0
     partial struct HexFormat
     {
         [MethodImpl(Inline), Op]
-        public static string format(ReadOnlySpan<byte> src)
-            => format(src, HexFormatSpecs.HexData);
-
-        [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
             => format(src, config.Delimiter, config.ZPad, config.Specifier);
 

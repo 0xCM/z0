@@ -39,7 +39,7 @@ namespace Z0.Asm
             emit<RegisterIndex,byte>();
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
-            emit<OperatingMode,byte>();
+            emit<AsmOperatingMode,byte>();
             emit<AsmSigKeywordId,byte>();
             emit<AsmOpCodeKeywordId,byte>();
         }

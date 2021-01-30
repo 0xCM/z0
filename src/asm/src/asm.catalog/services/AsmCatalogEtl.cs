@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public Span<AsmCatalogImportRow> LoadImportRows()
         {
-            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.StokeX86, out var descriptor))
+            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
             {
                 var content = Resources.utf8(descriptor);
                 var srcFormat = TextDocFormat.Structured(Chars.Tab);
@@ -53,7 +53,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.StokeX86, out var descriptor))
+            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
             {
                 Wf.Status(descriptor.Format());
                 var content = Resources.utf8(descriptor);
@@ -85,7 +85,7 @@ namespace Z0.Asm
             }
             else
             {
-                Wf.Error(Resources.ContentNotFound.Format(ContentNames.StokeX86));
+                Wf.Error(Resources.ContentNotFound.Format(ContentNames.AsmCatalog));
             }
         }
 

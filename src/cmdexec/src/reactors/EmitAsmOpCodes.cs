@@ -18,10 +18,10 @@ namespace Z0
         [Op]
         static FS.FilePath react(IWfShell wf, EmitAsmOpCodesCmd cmd)
         {
-            var data = AsmOpCodes.dataset().Entries;
+            var data = AsmOpCodesLegacy.dataset().Entries;
             var count = data.Count;
             var view = data.View;
-            var formatter = AsmOpCodes.formatter<AsmOpCodeField>();
+            var formatter = AsmOpCodesLegacy.formatter<AsmOpCodeField>();
             var rowbuffer = alloc<AsmOpCodeRowLegacy>(count);
             var rows = span(rowbuffer);
             using var dst = cmd.Target.Writer();
@@ -32,7 +32,7 @@ namespace Z0
                 ref readonly var record = ref skip(view,i);
                 seek(rows,i) = record;
 
-                AsmOpCodes.format(record, formatter);
+                AsmOpCodesLegacy.format(record, formatter);
                 dst.WriteLine(formatter.Render());
             }
             return  cmd.Target;
