@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct MuxGate<T> : ITernaryGate<T>, ITernaryGate<Vector128<T>>, ITernaryGate<Vector256<T>>, ITernaryGate<Vector512<T>>
         where T : unmanaged

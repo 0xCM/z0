@@ -67,37 +67,4 @@ namespace Z0
         public static Vector256<uint> vsllx(Vector256<uint> src, [Imm] byte count)
             => v32u(vsllx(v64u(src), count));
     }
-
-    partial struct z
-    {
-        /// <summary>
-        /// Shifts the entire 128-bit vector leftwards at bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="count">The number of bits the shift leftward</param>
-        /// <remarks>Taken from http://programming.sirrida.de</remarks>
-        [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vsllx(Vector128<ulong> src, [Imm] byte count)
-        {
-            if(count >= 64)
-                return cpu.vsll(cpu.vbsll(src, 8), (byte)(count - 64));
-            else
-                return cpu.vor(cpu.vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
-        }
-
-        /// <summary>
-        /// Shifts each 128-bit lane leftwards at bit-level resolution
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="count">The number of bits the shift leftward</param>
-        /// <remarks>Taken from http://programming.sirrida.de</remarks>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vsllx(Vector256<ulong> src, [Imm] byte count)
-        {
-            if(count >= 64)
-                return cpu.vsll(cpu.vbsll(src, 8), (byte)(count - 64));
-            else
-                return cpu.vor(cpu.vsll(src, count), vsrl(cpu.vbsll(src, 8), (byte)(64 - count)));
-        }
-    }
 }

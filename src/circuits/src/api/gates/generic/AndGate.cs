@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct AndGate<T> : IBinaryGate<T>, IBinaryGate128<T>, IBinaryGate256<T>, IBinaryGate512<T>
         where T : unmanaged

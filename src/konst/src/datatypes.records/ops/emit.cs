@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The record type</typeparam>
-        public static RowsetEmissions<DynamicRow<T>> emit<T>(DynamicRows<T> src, RowFormatSpec spec, FS.FilePath dst)
+        public static Count emit<T>(DynamicRows<T> src, FS.FilePath dst, RowFormatSpec spec)
             where T : struct, IRecord<T>
         {
             var count = src.Count;
@@ -30,39 +30,48 @@ namespace Z0
                 writer.WriteLine(buffer.Emit());
             }
 
-            return emission(src, dst);
+            return count;
         }
 
-        public static TableEmission<T> emit<T>(Index<T> src, RowFormatSpec spec, FS.FilePath dst)
+        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, RowFormatSpec spec)
             where T : struct, IRecord<T>
         {
-            var count = src.Count;
-            var data = src.View;
+            var count = src.Length;
             var formatter = Records.formatter<T>(spec);
             using var writer = dst.Writer();
             writer.WriteLine(format(spec.Header));
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(data,i)));
+                writer.WriteLine(formatter.Format(skip(src,i)));
 
-            return emission(src, dst);
+            return count;
         }
 
-        public static TableEmission<T> emit<T>(Index<T> src, FS.FilePath dst)
+        public static Count emit<T>(Index<T> src, FS.FilePath dst, RowFormatSpec spec)
+            where T : struct, IRecord<T>
+                => emit(src.View, dst, spec);
+
+        public static Count emit<T>(Index<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => emit(src, dst, rowspec<T>(widths));
+
+        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null)
             where T : struct, IRecord<T>
         {
-            var count = src.Count;
-            var data = src.View;
-            var formatter = Records.formatter<T>();
+            var count = src.Length;
+            var formatter = Records.formatter<T>(fieldwidth ?? DefaultFieldWidth);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(data,i)));
+                writer.WriteLine(formatter.Format(skip(src,i)));
 
-            return emission(src, dst);
+            return count;
         }
 
-        public static TableEmission<T> emit<T>(Index<T> src, ReadOnlySpan<byte> widths, FS.FilePath dst)
+        public static Count emit<T>(Span<T> src, FS.FilePath dst, byte? fieldwidth = null)
             where T : struct, IRecord<T>
-                => emit(src, rowspec<T>(widths), dst);
+                => emit(src.ReadOnly(), dst, fieldwidth);
+        public static Count emit<T>(Index<T> src, FS.FilePath dst, byte? fieldwidth = null)
+            where T : struct, IRecord<T>
+                => emit(src.View, dst, fieldwidth);
     }
 }

@@ -388,11 +388,10 @@ namespace Z0
         void LoadImportRows()
         {
             var etl = AsmCatalogEtl.create(Wf);
-            var rows = etl.LoadImportRows();
+            var rows = etl.ImportedRows();
             var count = rows.Length;
             var formatter = Records.formatter<AsmCatalogImportRow>();
             var parser = AsmSigParser.create(Wf);
-            //Wf.Row(formatter.FormatHeader());
             var mnemonics = root.hashset<AsmMnemonicExpr>();
             for(var i=0; i<count; i++)
             {
@@ -402,7 +401,6 @@ namespace Z0
                 if(parser.ParseMnemonic(sigex, out var mnemonic))
                     mnemonics.Add(mnemonic);
 
-                //Wf.Row(formatter.Format(row));
             }
 
             var terms = root.terms(mnemonics.OrderBy(x => x.Content).Index().View);
@@ -416,7 +414,11 @@ namespace Z0
 
             //Wf.CmdBuilder().JitApiCmd().Run(Wf);
 
-            LoadImportRows();
+            var etl = AsmCatalogEtl.create(Wf);
+            etl.Run();
+            var monic = etl.Mnemonics();
+            var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
+            root.iter(terms, r => Wf.Row(r));
         }
     }
 

@@ -39,7 +39,7 @@ namespace Z0
         {
             var src = scalars(offset, (sbyte)count);
             var target = default(Vector256<ushort>);
-            ref var dst = ref z.vref(ref target);
+            ref var dst = ref gcpu.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
                 memory.seek(dst,i) = memory.skip(src,i);
             return target;
@@ -54,7 +54,7 @@ namespace Z0
         {
             var src = scalars(offset, (sbyte)count);
             var target = default(Vector512<ushort>);
-            ref var dst = ref z.vref(ref target);
+            ref var dst = ref gcpu.vref(ref target);
             for(byte i=0; i<(byte)count; i++)
                 memory.seek(dst, i) = memory.skip(src, i);
             return target;

@@ -25,4 +25,22 @@ namespace Z0
         public void Dispose()
             => Wf.Ran(this);
     }
+
+    // public readonly struct WfExecFlow<T>: IDisposable
+    // {
+    //     readonly IWfShell Wf;
+
+    //     public WfExecToken Token {get;}
+
+    //     [MethodImpl(Inline)]
+    //     internal WfExecFlow(IWfShell wf, in WfExecToken token)
+    //     {
+    //         Wf = wf;
+    //         Token = token;
+    //     }
+
+    //     public void Dispose()
+    //         => Wf.Ran(this);
+
+    // }
 }

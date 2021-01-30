@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a generic bitvector over a primal cell
@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// Specifies the data over which the vector is defined
         /// </summary>
-        public readonly T Scalar
+        public readonly T Content
         {
             [MethodImpl(Inline)]
             get => Data;

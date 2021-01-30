@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector16 mul(BitVector16 a, BitVector16 b)
-            => z.clmulr(n16, a.Scalar,b.Scalar,Redux.Scalar);
+            => z.clmulr(n16, a.Content,b.Content,Redux.Content);
 
         /// <summary>
         /// Computes the full multiplication table for GF512

@@ -49,7 +49,7 @@ namespace Z0
                 ov[5] = BitVector.mux(iv, ++cv);
                 ov[6] = BitVector.mux(iv, ++cv);
                 ov[7] = BitVector.mux(iv, ++cv);
-                Claim.eq(iv.Scalar,ov.Scalar);
+                Claim.eq(iv.Content,ov.Content);
             }
         }
 
@@ -72,7 +72,7 @@ namespace Z0
                 var input = Random.BitVector(n32);
                 var control = Random.BitVector(n8) & 0b11111;
                 var output = BitVector.mux(input,control);
-                var expect = input[control.Scalar];
+                var expect = input[control.Content];
                 Claim.eq(expect, output);
             }
         }
@@ -84,7 +84,7 @@ namespace Z0
                 var input = Random.BitVector(n64);
                 var control = Random.BitVector(n8) & 0b111111;
                 var output = Bits.mux(input,control);
-                var expect = input[control.Scalar];
+                var expect = input[control.Content];
                 Claim.eq(expect, output);
             }
         }

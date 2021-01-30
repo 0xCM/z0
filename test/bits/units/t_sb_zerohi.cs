@@ -47,7 +47,7 @@ namespace Z0
             Claim.eq(maxlen, bs1.PopCount());
             Claim.eq(maxlen, bs1.Length);
 
-            var bv1 = gbits.bzhi(bv0.Scalar, maxlen);
+            var bv1 = gbits.bzhi(bv0.Content, maxlen);
             Claim.eq(maxlen, gbits.pop(bv1));
 
             var bs2 = bs1.Pad(width);

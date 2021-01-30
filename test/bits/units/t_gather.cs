@@ -19,7 +19,7 @@ namespace Z0
             var y2 = BitMasks.scatter(x2, m2).ToBitVector32();
             var bv = m2.ToBitVector32();
 
-            Claim.eq(y2.Scalar, bv.Scalar);
+            Claim.eq(y2.Content, bv.Content);
             for(var i=0; i<y2.Width; i++)
                 Claim.eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
         }

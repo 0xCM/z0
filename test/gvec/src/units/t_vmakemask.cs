@@ -17,7 +17,7 @@ namespace Z0
             {
                 var a = Random.BitVector(n16);
                 var b = cpu.vtakemask(cpu.vmakemask(a));
-                Claim.eq(b,a.Scalar);
+                Claim.eq(b,a.Content);
             }
         }
 
@@ -27,7 +27,7 @@ namespace Z0
             {
                 var a = Random.BitVector(n32);
                 var b = cpu.vtakemask(cpu.vmakemask(a));
-                Claim.eq(b,a.Scalar);
+                Claim.eq(b,a.Content);
             }
         }
     }

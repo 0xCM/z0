@@ -49,6 +49,11 @@ namespace Z0
             get => Data.IsEmpty;
         }
 
+        public TextBlock Text
+        {
+            [MethodImpl(Inline)]
+            get => Format();
+        }
         public string Format()
         {
             var dst = span(sys.alloc<char>(Data.Length));

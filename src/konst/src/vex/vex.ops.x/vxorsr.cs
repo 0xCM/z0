@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<byte> vxorsr(Vector128<byte> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<ushort> vxorsr(Vector128<ushort> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<uint> vxorsr(Vector128<uint> x, [Imm] byte count)
-            => cpu.vxor(x,vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector128<ulong> vxorsr(Vector128<ulong> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector256<byte> vxorsr(Vector256<byte> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector256<ushort> vxorsr(Vector256<ushort> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector256<uint> vxorsr(Vector256<uint> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> count)
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="count">The amount by which to count each component</param>
         [MethodImpl(Inline), XorSr]
         public static Vector256<ulong> vxorsr(Vector256<ulong> x, [Imm] byte count)
-            => cpu.vxor(x, vsrl(x,count));
+            => cpu.vxor(x, cpu.vsrl(x,count));
 
         /// <summary>
         /// Computes x^(x >> counts)

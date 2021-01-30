@@ -7,7 +7,7 @@ namespace Z0.Asm
     partial struct AsmOpCodesLegacy
     {
         [Op]
-        public static AsmOpCodeDataset dataset()
+        public static AsmOpCodeDatasetLegacy dataset()
         {
             var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
             var count = resource.RowCount;
@@ -15,7 +15,7 @@ namespace Z0.Asm
             parse(resource, records);
             var identifers = sys.alloc<AsmOpCodeExprLegacy>(count);
             AsmOpCodesLegacy.identify(records, identifers);
-            return new AsmOpCodeDataset(records,identifers);
+            return new AsmOpCodeDatasetLegacy(records,identifers);
         }
     }
 }

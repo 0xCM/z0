@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct OrGate : IBinaryGate
     {
@@ -16,5 +15,4 @@ namespace Z0
         public bit Invoke(bit x, bit y)
             => (x | y);
     }
-
 }

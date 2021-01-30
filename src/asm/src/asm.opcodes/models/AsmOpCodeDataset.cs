@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmOpCodeDataset
+    public readonly struct AsmOpCodeDatasetLegacy
     {
         public Index<AsmOpCodeRowLegacy> Entries {get;}
 
         public Index<AsmOpCodeExprLegacy> Identity {get;}
 
-        public AsmOpCodeDataset(AsmOpCodeRowLegacy[] records, AsmOpCodeExprLegacy[] identifiers)
+        public AsmOpCodeDatasetLegacy(AsmOpCodeRowLegacy[] records, AsmOpCodeExprLegacy[] identifiers)
         {
             Entries = records;
             Identity = identifiers;

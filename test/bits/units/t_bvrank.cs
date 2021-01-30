@@ -31,7 +31,7 @@ namespace Z0
                 var x = Random.BitVector(n8);
                 var pos = Random.Next(1,6);
 
-                var actual = gbits.rank(x.Scalar,pos);
+                var actual = gbits.rank(x.Content,pos);
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
@@ -46,7 +46,7 @@ namespace Z0
                 var x = Random.BitVector(n32);
                 var pos = Random.Next(1,28);
 
-                var actual = gbits.rank(x.Scalar,pos);
+                var actual = gbits.rank(x.Content,pos);
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
@@ -62,7 +62,7 @@ namespace Z0
                 var x = Random.BitVector(n64);
                 var pos = Random.Next(1,50);
 
-                var actual = gbits.rank(x.Scalar,pos);
+                var actual = gbits.rank(x.Content,pos);
                 var expect = 0u;
                 for(var j=0; j<= pos; j++)
                     expect += (x[j] ? 1u : 0u);
@@ -76,7 +76,7 @@ namespace Z0
             var x = Random.BitVector<T>();
             var pos = Random.Next(1,bitwidth<T>() - 2);
 
-            var actual = gbits.rank(x.Scalar,(int)pos);
+            var actual = gbits.rank(x.Content,(int)pos);
             var expect = 0u;
             for(var i=0; i<= pos; i++)
                 expect += (x[i] ? 1u : 0u);

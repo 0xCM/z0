@@ -58,7 +58,7 @@ namespace Z0
             get => (uint)Data.Length;
         }
 
-        public string Text
+        public TextBlock Text
         {
             [MethodImpl(Inline)]
             get => Digital.format(Data);

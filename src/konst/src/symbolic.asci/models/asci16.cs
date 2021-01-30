@@ -115,7 +115,7 @@ namespace Z0
             get => Asci.decode(this);
         }
 
-        public string Text
+        public TextBlock Text
         {
             [MethodImpl(Inline)]
             get => Asci.format(this);
@@ -165,6 +165,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
             => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(TextBlock src)
+            => new A(src.Format());
 
         [MethodImpl(Inline)]
         public static implicit operator string(A src)

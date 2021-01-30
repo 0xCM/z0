@@ -5,27 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
-    public interface ICellBits<T>
-        where T : struct, IDataCell<T>
-    {
-
-    }
-
-    public interface IScalarBits<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The value over which the bitvector is defined
-        /// </summary>
-        T Scalar {get;}
-
-        TypeWidth Width => (TypeWidth)z.bitwidth<T>();
-    }
 
     public interface IBitVector : ITextual<IBitVector,BitFormat>
     {
@@ -38,18 +20,26 @@ namespace Z0
         /// Selects an index-identified mutable 8-bit segment from the source vector
         /// </summary>
         /// <param name="index">The byte-relative segment index</param>
-        [MethodImpl(Inline)]
         ref byte Byte(uint index)
             => ref seek(Bytes, index);
     }
 
-    public interface IBitVector<V> : IBitVector, IEquatable<V>
-        where V : struct, IBitVector
+    public interface IBitVector<T> : IBitVector
+        where T : unmanaged
     {
+        /// <summary>
+        /// The value over which the bitvector is defined
+        /// </summary>
+        T Content {get;}
 
+        Span<byte> IBitVector.Bytes
+            => memory.bytes2(Content);
+
+        TypeWidth Width
+            => (TypeWidth)bitwidth<T>();
     }
 
-    public interface IBitVector<V,T> : IScalarBits<T>, IBitVector<V>
+    public interface IBitVector<V,T> : IBitVector<T>, IEquatable<V>
         where V : unmanaged, IBitVector
         where T : unmanaged
     {

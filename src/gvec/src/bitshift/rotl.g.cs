@@ -18,18 +18,18 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vrotl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vrotl(v8u(x), count));
+                return generic<T>(cpu.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vrotl(v16u(x), count));
+                return generic<T>(cpu.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vrotl(v32u(x), count));
+                return generic<T>(cpu.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vrotl(v64u(x), count));
+                return generic<T>(cpu.vrotl(v64u(x), count));
             else
                 throw no<T>();
         }
@@ -39,18 +39,18 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The magnitude of the rotation</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vrotl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vrotl(v8u(x), count));
+                return generic<T>(cpu.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vrotl(v16u(x), count));
+                return generic<T>(cpu.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vrotl(v32u(x), count));
+                return generic<T>(cpu.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vrotl(v64u(x), count));
+                return generic<T>(cpu.vrotl(v64u(x), count));
             else
                 throw no<T>();
         }

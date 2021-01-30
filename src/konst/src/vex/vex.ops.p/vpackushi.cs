@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static KonstBytes;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Produces the hi shuffle spec for packing (128x32, 128x32) -> 128x16

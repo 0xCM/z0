@@ -96,7 +96,7 @@ namespace Z0
             var summaries = Summarize(src.Base, src.Members.View);
             var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
             var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
-            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted.RowCount, dst);
+            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
             return summaries;
         }
 

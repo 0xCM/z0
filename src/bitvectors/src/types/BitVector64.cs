@@ -36,7 +36,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public readonly ulong Scalar
+        public readonly ulong Content
         {
             [MethodImpl(Inline)]
             get => Data;

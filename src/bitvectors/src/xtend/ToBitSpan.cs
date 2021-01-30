@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XBv
     {
         [MethodImpl(Inline)]
         public static BitSpan32 ToBitSpan32<N,T>(this BitVector<N,T> x)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Permutes the lower four elements of the source vector with the lo mask and the upper four elements with the hi mask

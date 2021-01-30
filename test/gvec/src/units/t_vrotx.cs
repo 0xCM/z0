@@ -17,10 +17,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = gcpu.vunits<byte>(n128);
-                Claim.veq(gvec.vrotrx(x,8), z.vrotrx(x,n8));
-                Claim.veq(gvec.vrotrx(x,16), z.vrotrx(x,n16));
-                Claim.veq(gvec.vrotrx(x,24), z.vrotrx(x,n24));
-                Claim.veq(gvec.vrotrx(x,32), z.vrotrx(x,n32));
+                Claim.veq(gcpu.vrotrx(x,8), cpu.vrotrx(x,n8));
+                Claim.veq(gcpu.vrotrx(x,16), cpu.vrotrx(x,n16));
+                Claim.veq(gcpu.vrotrx(x,24), cpu.vrotrx(x,n24));
+                Claim.veq(gcpu.vrotrx(x,32), cpu.vrotrx(x,n32));
             }
         }
 
@@ -29,10 +29,10 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = gcpu.vunits<byte>(n128);
-                Claim.veq(gvec.vrotlx(x,8), z.vrotlx(x,n8));
-                Claim.veq(gvec.vrotlx(x,16), z.vrotlx(x,n16));
-                Claim.veq(gvec.vrotlx(x,24), z.vrotlx(x,n24));
-                Claim.veq(gvec.vrotlx(x,32), z.vrotlx(x,n32));
+                Claim.veq(gcpu.vrotlx(x,8), cpu.vrotlx(x,n8));
+                Claim.veq(gcpu.vrotlx(x,16), cpu.vrotlx(x,n16));
+                Claim.veq(gcpu.vrotlx(x,24), cpu.vrotlx(x,n24));
+                Claim.veq(gcpu.vrotlx(x,32), cpu.vrotlx(x,n32));
             }
         }
     }

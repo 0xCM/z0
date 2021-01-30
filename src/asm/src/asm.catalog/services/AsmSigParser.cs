@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
+    using static Part;
     [ApiHost]
     public sealed partial class AsmSigParser : WfService<AsmSigParser, AsmSigParser>
     {
@@ -22,23 +23,22 @@ namespace Z0.Asm
         /// Determines whether a <see cref='AsmSigOperandExpr'/> is a composite expression delimited by the <see cref='Chars.FSlash'/> character
         /// </summary>
         /// <param name="src"></param>
-        /// <returns></returns>
         [Op]
         public bool IsComposite(AsmSigOperandExpr src)
         {
 
-            return false;
+            return src.Content.Contains(AsciChar.FS);
         }
 
         [Op]
         public bool ParseMnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
         {
             dst = AsmMnemonicExpr.Empty;
-            var content = src.Content.Text;
+            var content = src.Content;
             var index = content.FirstIndexOf(AsciChar.Space);
-            if(index)
+            if(index != NotFound)
             {
-                dst = text.slice(content,0, index.Value);
+                dst = text.slice(content,0, index);
                 return true;
             }
             return false;

@@ -16,7 +16,7 @@ namespace Z0
         public void block_32x8u_to_128x32u()
         {
             var blockA = SpanBlocks.parts<byte>(n32,1,2,3,4);
-            var x = vparts(n128,1,2,3,4);
+            var x = cpu.vparts(n128,1,2,3,4);
             var blockB = x.ToBlock();
             var y = cpu.vconvert32u(blockA, n128);
             var blockC = y.ToBlock();

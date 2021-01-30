@@ -66,7 +66,7 @@ namespace Z0
         /// <summary>
         /// The scalar representation of the vector
         /// </summary>
-        public T Scalar
+        public T Content
         {
             [MethodImpl(Inline)]
             get => Data;

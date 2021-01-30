@@ -96,24 +96,6 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Rearranges the vector as specified by a permutation
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <param name="spec">The permutation</param>
-        public static BitVector<T> perm<T>(BitVector<T> src, in Perm spec)
-            where T : unmanaged
-        {
-            var dst = src.Replicate();
-            var width = src.Width;
 
-            for(var i=0; i<width; i++)
-            {
-                ref readonly var j = ref spec[i];
-                if(j != i)
-                    dst[i] = src[j];
-            }
-            return dst;
-        }
     }
 }

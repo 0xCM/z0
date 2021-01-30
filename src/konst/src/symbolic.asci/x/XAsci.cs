@@ -16,5 +16,10 @@ namespace Z0
         public static int FirstIndexOf<T>(this T src, AsciChar match)
             where T : IAsciSeq
                 => AsciG.index(src, match);
+
+        [MethodImpl(Inline)]
+        public static bool Contains<T>(this T src, AsciChar match)
+            where T : IAsciSeq
+                => AsciG.contains(src, match);
     }
 }

@@ -64,6 +64,14 @@ namespace Z0
             => Data;
 
         [MethodImpl(Inline)]
+        public TextBlock Trim()
+            => Data?.Trim() ?? EmptyString;
+
+        [MethodImpl(Inline)]
+        public TextBlock Replace(TextBlock match, TextBlock value)
+            => Data?.Replace(match,value) ?? EmptyString;
+
+        [MethodImpl(Inline)]
         public bool Equals(TextBlock src)
             => string.Equals(Data, src.Data);
 

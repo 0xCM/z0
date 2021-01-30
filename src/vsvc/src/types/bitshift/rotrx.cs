@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte count)
-                => gvec.vrotrx(x,count);
+                => gcpu.vrotrx(x,count);
         }
 
         [Closures(Integers), Rotrx]
@@ -28,7 +28,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte count)
-                => gvec.vrotrx(x,count);
+                => gcpu.vrotrx(x,count);
         }
     }
 }

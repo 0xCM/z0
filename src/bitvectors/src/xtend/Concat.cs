@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Creates a new vector via concatenation

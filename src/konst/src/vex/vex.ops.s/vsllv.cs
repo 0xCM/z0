@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes z[i] := x[i] << s[i] for i = 0..15

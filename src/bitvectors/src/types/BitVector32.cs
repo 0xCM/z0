@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public readonly uint Scalar
+        public readonly uint Content
         {
             [MethodImpl(Inline)]
             get => Data;

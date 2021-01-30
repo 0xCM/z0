@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct InPair<T>
         where T : unmanaged
@@ -16,19 +16,11 @@ namespace Z0
 
         public T B {get;}
 
-
         [MethodImpl(Inline)]
         public InPair(T x, T y)
         {
             A = x;
             B = y;
-        }
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out T x, out T y)
-        {
-            x = A;
-            y = B;
         }
 
         [MethodImpl(Inline)]

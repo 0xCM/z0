@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public interface IAsciSeq : IByteSeq
+    public interface IAsciSeq : IByteSeq, ITextExpr
     {
 
     }
 
-    public interface IAsciSeq<F> : IAsciSeq, IBytes<F>, IDataTypeComparable<F>
+    public interface IAsciSeq<F> : IAsciSeq, ITextExpr<F>, IBytes<F>, IDataTypeComparable<F>
         where F : struct, IAsciSeq<F>
     {
 

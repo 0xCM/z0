@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
+    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -82,6 +83,6 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector256<ulong> vrotl(Vector256<ulong> src, [Imm] byte count)
-            => cpu.vor(cpu.vsll(src, count),vsrl(src, (byte)(64 - count)));
+            => cpu.vor(cpu.vsll(src, count), vsrl(src, (byte)(64 - count)));
     }
 }

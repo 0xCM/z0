@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Computes the smallest integer n > 1 such that v^n = identity

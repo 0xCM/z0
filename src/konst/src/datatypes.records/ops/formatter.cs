@@ -11,6 +11,8 @@ namespace Z0
 
     partial struct Records
     {
+        const byte DefaultFieldWidth = 24;
+
         /// <summary>
         /// Defines a <typeparamref name='T'/> record formatter
         /// </summary>
@@ -35,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="widths">The column widths</param>
         /// <typeparam name="T">The record type</typeparam>
-        public static IRecordFormatter<T> formatter<T>(byte fieldwidth = 24)
+        public static IRecordFormatter<T> formatter<T>(byte fieldwidth = DefaultFieldWidth)
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(fieldwidth));
 

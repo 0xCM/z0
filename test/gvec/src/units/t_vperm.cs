@@ -101,8 +101,8 @@ namespace Z0
             var v = gcpu.vdec<uint>(n);
             Claim.veq(cpu.vparts(n,3,2,1,0),v);
 
-            Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));
-            Claim.veq(u, z.vperm4x32(v, Perm4L.DCBA));
+            Claim.veq(v, cpu.vperm4x32(u, Perm4L.DCBA));
+            Claim.veq(u, cpu.vperm4x32(v, Perm4L.DCBA));
         }
 
         public void vperm_4x16_outline()
@@ -118,7 +118,7 @@ namespace Z0
             var b1 = cpu.vparts(w,0,1,2,3,7,6,5,4);
             Claim.veq(b0,b1);
 
-            var c0 = vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
+            var c0 = cpu.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
             var c1 = cpu.vparts(w,3,2,1,0,7,6,5,4);
             Claim.veq(c0,c1);
 
@@ -130,7 +130,7 @@ namespace Z0
             var e1 = cpu.vparts(w,0,1,2,3,5,4,7,6);
             Claim.veq(e0,e1);
 
-            var f0 = z.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
+            var f0 = cpu.vperm4x16(x, Perm4L.BADC, Perm4L.BADC);
             var f1 = cpu.vparts(w,1,0,3,2,5,4,7,6);
             Claim.veq(f0,f1);
         }
@@ -299,9 +299,9 @@ namespace Z0
             var pformat_actual = p.FormatMap();
             Claim.ClaimEq(pformat_epect, pformat_actual);
 
-            var vIn = vparts(w128, 0,1,2,3);
-            var vExpect = vparts(w128, 3,2,1,0);
-            var vActual = vperm4x32(vIn,p);
+            var vIn = cpu.vparts(w128, 0,1,2,3);
+            var vExpect = cpu.vparts(w128, 3,2,1,0);
+            var vActual = cpu.vperm4x32(vIn,p);
             Claim.veq(vExpect, vActual);
         }
 

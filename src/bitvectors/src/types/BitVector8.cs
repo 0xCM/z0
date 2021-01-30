@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public byte Scalar
+        public byte Content
         {
             [MethodImpl(Inline)]
             get => Data;

@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Reverses a copy of the source vector

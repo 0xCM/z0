@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public static partial class BitVectorX
+    partial class XBv
     {
         /// <summary>
         /// Zero extends the source vector

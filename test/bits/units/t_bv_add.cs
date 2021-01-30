@@ -15,8 +15,8 @@ namespace Z0
             {
                 var x = Random.BitVector(n8);
                 var y = Random.BitVector(n8);
-                Claim.eq(math.add(x.Scalar,  y.Scalar), (x + y).Scalar);
-                Claim.eq(math.add(x.Scalar,  (byte)1), (++x).Scalar);
+                Claim.eq(math.add(x.Content,  y.Content), (x + y).Content);
+                Claim.eq(math.add(x.Content,  (byte)1), (++x).Content);
             }
         }
 
@@ -26,8 +26,8 @@ namespace Z0
             {
                 var x = Random.BitVector(n16);
                 var y = Random.BitVector(n16);
-                Claim.eq(math.add(x.Scalar,  y.Scalar), (x + y).Scalar);
-                Claim.eq(math.add(x.Scalar,  (ushort)1), (++x).Scalar);
+                Claim.eq(math.add(x.Content,  y.Content), (x + y).Content);
+                Claim.eq(math.add(x.Content,  (ushort)1), (++x).Content);
             }
         }
 
@@ -37,8 +37,8 @@ namespace Z0
             {
                 var x = Random.BitVector(n32);
                 var y = Random.BitVector(n32);
-                Claim.eq(math.add(x.Scalar,  y.Scalar), (x + y).Scalar);
-                Claim.eq(math.add(x.Scalar,  1), (++x).Scalar);
+                Claim.eq(math.add(x.Content,  y.Content), (x + y).Content);
+                Claim.eq(math.add(x.Content,  1), (++x).Content);
 
             }
         }
@@ -49,8 +49,8 @@ namespace Z0
             {
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
-                Claim.eq(math.add(x.Scalar,  y.Scalar), (x + y).Scalar);
-                Claim.eq(math.add(x.Scalar,  1), (++x).Scalar);
+                Claim.eq(math.add(x.Content,  y.Content), (x + y).Content);
+                Claim.eq(math.add(x.Content,  1), (++x).Content);
 
             }
         }

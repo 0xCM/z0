@@ -14,18 +14,18 @@ namespace Z0
         [MethodImpl(Inline), Eq, Closures(Closure)]
         public static bit eq<T>(in BitVector<T> x, in BitVector<T> y)
             where T : unmanaged
-                => gmath.eq(x.Data,y.Data);
+                => gmath.eq(x.Content, y.Content);
 
         [MethodImpl(Inline)]
         public static bit eq<N,T>(in BitVector<N,T> x, in BitVector<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.eq(x.Data,y.Data);
+                => gmath.eq(x.Content, y.Content);
 
         [MethodImpl(Inline)]
         public static bit eq<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vsame(x.Data, y.Data);
+                => gvec.vsame(x.Content, y.Content);
     }
 }

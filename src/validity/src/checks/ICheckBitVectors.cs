@@ -23,24 +23,24 @@ namespace Z0
 
         [MethodImpl(Inline)]
         void eq(BitVector8 x, BitVector8 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);
+            => Primal.eq(x.Content, y.Content, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector16 x, BitVector16 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);
+            => Primal.eq(x.Content, y.Content, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector32 x, BitVector32 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);
+            => Primal.eq(x.Content, y.Content, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq(BitVector64 x, BitVector64 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);
+            => Primal.eq(x.Content, y.Content, caller, file, line);
 
         [MethodImpl(Inline)]
         void eq<T>(BitVector<T> x, BitVector<T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => yea(gmath.eq(x.Scalar, y.Scalar), $"{x} != {y}", caller, file, line);
+                => yea(gmath.eq(x.Content, y.Content), $"{x} != {y}", caller, file, line);
 
         [MethodImpl(Inline)]
         void eq<N,T>(BitVector128<N,T> x, BitVector128<N,T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

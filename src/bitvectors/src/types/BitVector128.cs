@@ -32,7 +32,6 @@ namespace Z0
         public BitVector128(Vector128<T> data)
             => Data = data;
 
-
         /// <summary>
         /// The scalar representation of the vector
         /// </summary>

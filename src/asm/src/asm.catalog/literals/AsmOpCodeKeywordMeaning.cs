@@ -83,6 +83,5 @@ namespace Z0.Asm
         public const string ᕀro = "For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction";
 
         public const string ᕀi = "A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack.";
-
     }
 }

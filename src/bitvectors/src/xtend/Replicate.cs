@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Creates a copy of the source vector
@@ -138,7 +138,7 @@ namespace Z0
         /// Creates a copy of the source vector
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitVector64 Replicate(this BitVector64 src)        
+        public static BitVector64 Replicate(this BitVector64 src)
             => BitVector.replicate(src);
     }
 }

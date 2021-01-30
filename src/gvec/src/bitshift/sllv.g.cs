@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(cpu.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vsllv(v16u(x), v16u(counts)));
+                return generic<T>(cpu.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vsllv(v32u(x), v32u(counts)));
+                return generic<T>(cpu.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vsllv(v64u(x), v64u(counts)));
+                return generic<T>(cpu.vsllv(v64u(x), v64u(counts)));
             else
                 return vsllv_i(x,counts);
         }
@@ -54,13 +54,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vsllv(v8i(x), v8i(counts)));
+                return generic<T>(cpu.vsllv(v8i(x), v8i(counts)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vsllv(v16i(x), v16i(counts)));
+                return generic<T>(cpu.vsllv(v16i(x), v16i(counts)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vsllv(v32i(x), v32i(counts)));
+                return generic<T>(cpu.vsllv(v32i(x), v32i(counts)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vsllv(v64i(x), v64i(counts)));
+                return generic<T>(cpu.vsllv(v64i(x), v64i(counts)));
             else
                 throw no<T>();
         }
@@ -70,13 +70,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vsllv(v8u(x), v8u(counts)));
+                return generic<T>(cpu.vsllv(v8u(x), v8u(counts)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vsllv(v16u(x), v16u(counts)));
+                return generic<T>(cpu.vsllv(v16u(x), v16u(counts)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vsllv(v32u(x), v32u(counts)));
+                return generic<T>(cpu.vsllv(v32u(x), v32u(counts)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vsllv(v64u(x), v64u(counts)));
+                return generic<T>(cpu.vsllv(v64u(x), v64u(counts)));
             else
                 return vsllv_i(x,counts);
         }
@@ -86,15 +86,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(z.vsllv(v8i(x), v8i(counts)));
+                return generic<T>(cpu.vsllv(v8i(x), v8i(counts)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(z.vsllv(v16i(x), v16i(counts)));
+                return generic<T>(cpu.vsllv(v16i(x), v16i(counts)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(z.vsllv(v32i(x), v32i(counts)));
+                return generic<T>(cpu.vsllv(v32i(x), v32i(counts)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(z.vsllv(v64i(x), v64i(counts)));
+                return generic<T>(cpu.vsllv(v64i(x), v64i(counts)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

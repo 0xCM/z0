@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Generic vectorized intrinsics
     /// </summary>
-    public class Circuits 
+    public class Circuits
     {
         [MethodImpl(Inline)]
         public static HalfAdder<T> half<T>()
-            where T : unmanaged 
+            where T : unmanaged
                 => default(HalfAdder<T>);
     }
 }

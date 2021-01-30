@@ -142,18 +142,18 @@ namespace Z0
             Claim.veq(x1Spec,x1Dst);
 
             var x2 = vinc<byte>(w);
-            var x2Spec = vrotl(n128, n8);
+            var x2Spec = cpu.vrotl(n128, n8);
             var x2Dst = vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
             var x3 = vinc<byte>(w);
-            var x3Spec = vrotr(n128, n8);
+            var x3Spec = cpu.vrotr(n128, n8);
             var x3Dst = vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
             var x4 = vinc<byte>(w);
-            var x4Spec1 = vrotl(n128, n8);
-            var x4Spec2 = vrotr(n128, n8);
+            var x4Spec1 = cpu.vrotl(n128, n8);
+            var x4Spec2 = cpu.vrotr(n128, n8);
             var x4Dst = vshuf16x8(vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.veq(x4,x4Dst);
 

@@ -20,7 +20,7 @@ namespace Z0.Asm
     /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
     /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
     /// <remarks>
-    public readonly struct AsmSigExpr : ITextual
+    public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>
     {
         public asci64 Content {get;}
 
@@ -63,6 +63,12 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Asci.decode(Content);
+        }
+
+        public TextBlock Text
+        {
+            [MethodImpl(Inline)]
+            get => Content.Text;
         }
 
         [MethodImpl(Inline)]

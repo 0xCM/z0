@@ -35,7 +35,7 @@ namespace Z0
                 var p0 = Perm2x4.DA;
                 var p1 = Perm2x4.BC;
                 var src = z.vinc<ulong>(w512);
-                var expect = z.vparts(w512,6, 7, 0, 1, 2, 3, 4, 5);
+                var expect = cpu.vparts(w512,6, 7, 0, 1, 2, 3, 4, 5);
                 var actual = gvec.vperm2x128(src, p0, p1);
                 Claim.eq(actual,expect);
                 Notify(describe(src,p0,p1));

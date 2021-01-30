@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Returns a reference to the leading component of the source

@@ -24,7 +24,7 @@ namespace Z0
         public AsciSymbol(AsciCharCode code)
             => Code = code;
 
-        public string Text
+        public TextBlock Text
         {
             [MethodImpl(Inline), Op]
             get => Asci.@string(Code);

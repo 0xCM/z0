@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmMnemonicExpr : ITextual
+    public readonly struct AsmMnemonicExpr : ITextExpr<AsmMnemonicExpr>
     {
         public asci32 Content {get;}
 
@@ -52,6 +52,12 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Asci.decode(Content);
+        }
+
+        public TextBlock Text
+        {
+            [MethodImpl(Inline)]
+            get => Content.Text;
         }
 
         [MethodImpl(Inline)]

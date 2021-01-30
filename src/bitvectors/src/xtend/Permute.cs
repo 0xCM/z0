@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Applies a permutation to a copy of the source vector
@@ -21,7 +21,7 @@ namespace Z0
         public static BitVector<T> Permute<T>(this BitVector<T> src, in Perm p)
             where T : unmanaged
                 => BitVector.perm(src,p);
-  
+
         /// <summary>
         /// Applies a permutation to a copy of the source vector
         /// </summary>
@@ -32,7 +32,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitVector.perm(src,p);
-                
+
         /// <summary>
         /// Applies a permutation to copy of the source vector
         /// </summary>

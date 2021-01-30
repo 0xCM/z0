@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m256i _mm256_permute2x128_si256 (__m256i a, __m256i b, const int imm8) VPERM2I128 ymm, ymm, ymm/m256, imm8

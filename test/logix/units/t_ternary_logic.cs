@@ -66,7 +66,7 @@ namespace Z0.Logix
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = NumericLogix.select(a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> x = NumericLogix.select(a.Content, b.Content, c.Content);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
@@ -144,7 +144,7 @@ namespace Z0.Logix
                     u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
 
 
-                BitVector<T> v = NumericLogixHost.eval(kind, a.Scalar, b.Scalar, c.Scalar);
+                BitVector<T> v = NumericLogixHost.eval(kind, a.Content, b.Content, c.Content);
 
                 if(u != v)
                     Notify($"Equivalence failed for ternary op {kind}:{ApiIdentify.numeric<T>()}");

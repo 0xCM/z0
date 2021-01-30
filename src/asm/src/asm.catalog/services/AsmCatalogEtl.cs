@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -14,12 +15,43 @@ namespace Z0.Asm
     {
         readonly TextDocFormat SourceFormat;
 
+        readonly Index<AsmCatalogImportRow> RowBuffer;
+
+        const uint MaxRowCount = 2500;
+
         public AsmCatalogEtl()
         {
             SourceFormat = TextDocFormat.Structured(Chars.Tab);
+            RowBuffer = alloc<AsmCatalogImportRow>(MaxRowCount);
         }
 
-        public Span<AsmCatalogImportRow> LoadImportRows()
+        public uint ImportRowCount {get; private set;}
+
+        public Index<AsmMnemonicExpr> Mnemonics()
+        {
+            var mnemonics = root.hashset<AsmMnemonicExpr>();
+            var rows = ImportedRows();
+            var count = rows.Length;
+            var parser = AsmSigParser.create(Wf);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                var sig = AsmExpr.sig(row.Instruction);
+                if(parser.ParseMnemonic(sig, out var mnemonic))
+                    mnemonics.Add(mnemonic);
+            }
+            return mnemonics.ToArray();
+        }
+
+        public ReadOnlySpan<AsmCatalogImportRow> ImportedRows()
+        {
+            if(ImportRowCount != 0)
+                return slice(RowBuffer.View,0, ImportRowCount);
+            else
+                return ImportRows();
+        }
+
+        ReadOnlySpan<AsmCatalogImportRow> ImportRows()
         {
             if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
             {
@@ -28,9 +60,9 @@ namespace Z0.Asm
                 var foundheader = false;
                 var lines = Parse.lines(content).View;
                 var count = lines.Length;
-                var buffer = span<AsmCatalogImportRow>(count);
+                var buffer = RowBuffer.Edit;
                 ref var dst = ref first(buffer);
-                var j = 0;
+                var j = 0u;
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var line = ref skip(lines,i);
@@ -46,47 +78,20 @@ namespace Z0.Asm
                             foundheader = true;
                     }
                 }
-                return slice(buffer,0, j);
+                ImportRowCount = j;
+                return slice(buffer,0, ImportRowCount);
             }
-            return Index<AsmCatalogImportRow>.Empty;
+            else
+                return Index<AsmCatalogImportRow>.Empty;
         }
 
         public void Run()
         {
-            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
-            {
-                Wf.Status(descriptor.Format());
-                var content = Resources.utf8(descriptor);
-                var srcFormat = TextDocFormat.Structured(Chars.Tab);
-                var lines = Parse.lines(content).View;
-                var count = lines.Length;
-                var dstFormatter = Records.formatter<AsmCatalogImportRow>(42);
-                var dstPath = Wf.Db().IndexTable<AsmCatalogImportRow>();
-                var writer = dstPath.Writer();
-                writer.WriteLine(dstFormatter.FormatHeader());
-                var foundheader = false;
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var line = ref skip(lines,i);
-                    if(foundheader)
-                    {
-                        var row = default(AsmCatalogImportRow);
-                        if(parse(line, ref row))
-                        {
-                            writer.WriteLine(dstFormatter.Format(row));
-                        }
-                    }
-                    else
-                    {
-                        if(line.Content.Equals(AsmCatalogImportRow.SourceHeader))
-                            foundheader = true;
-                    }
-                }
-            }
-            else
-            {
-                Wf.Error(Resources.ContentNotFound.Format(ContentNames.AsmCatalog));
-            }
+            var dst = Wf.Db().IndexTable<AsmCatalogImportRow>();
+            var flow = Wf.EmittingTable<AsmCatalogImportRow>(dst);
+            var imports = ImportedRows();
+            var count = Records.emit(imports, dst, 42);
+            Wf.EmittedTable<AsmCatalogImportRow>(flow, count, dst);
         }
 
         bool parse(in TextLine src, ref AsmCatalogImportRow dst)

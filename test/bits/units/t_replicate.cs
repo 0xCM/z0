@@ -33,7 +33,7 @@ namespace Z0
                 if(math.between( i % 6,3,5))
                     expect[i] = Bit32.On;
 
-            Claim.eq(expect.Scalar,actual.Scalar);
+            Claim.eq(expect.Content,actual.Content);
         }
 
         public void replicate_64u()
@@ -50,7 +50,7 @@ namespace Z0
                 if(math.between( i % 6,3,5))
                     expect[i] = Bit32.On;
 
-            Claim.eq(expect.Scalar,actual.Scalar);
+            Claim.eq(expect.Content,actual.Content);
 
             void report()
             {

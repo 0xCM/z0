@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Konst;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_shuffle_epi32 (__m128i a, int immediate) PSHUFD xmm, xmm/m128, imm8
@@ -52,5 +52,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vperm4x32(Vector256<uint> src, [Imm] Perm4L spec)
              => Shuffle(src, (byte)spec);
-   }
+    }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XBv
     {
         /// <summary>
         /// Converts the source bitvector to an equivalent generic bitvector

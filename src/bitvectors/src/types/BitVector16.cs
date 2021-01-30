@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// Extracts the scalar represented by the vector
         /// </summary>
-        public ushort Scalar
+        public ushort Content
         {
             [MethodImpl(Inline)]
             get => Data;

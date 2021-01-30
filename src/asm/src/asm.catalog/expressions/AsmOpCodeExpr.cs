@@ -9,50 +9,57 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmOpCodeExpr : ITextual
+    public readonly struct AsmOpCodeExpr : ITextExpr<AsmOpCodeExpr>
     {
-        public readonly asci32 Value;
+        public asci32 Content {get;}
 
         [MethodImpl(Inline)]
         public AsmOpCodeExpr(asci32 src)
-            => Value = src;
+            => Content = src;
 
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline)]
-            get => Asci.bytes(Value);
+            get => Asci.bytes(Content);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline)]
-            get => Asci.decode(Value);
+            get => Asci.decode(Content);
+        }
+
+        public TextBlock Text
+        {
+            [MethodImpl(Inline)]
+            get => Content.Text;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Value.IsEmpty;
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Value.IsNonEmpty;
+            get => Content.IsNonEmpty;
         }
+
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
-            => src.Value.Equals(Value);
+            => src.Content.Equals(Content);
 
         public override bool Equals(object src)
             => src is AsmOpCodeExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => Content.GetHashCode();
 
         public string Format()
-            => Value.Format();
+            => Content.Format();
 
         public override string ToString()
             => Format();

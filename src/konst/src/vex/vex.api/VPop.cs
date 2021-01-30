@@ -71,14 +71,14 @@ namespace Z0
             var maj =  cpu.vor(vand(cpu.vxor(x,y),z), vand(x,y));
             var odd =  cpu.vxor(cpu.vxor(x,y),z);
 
-            maj = cpu.vsub(maj, vand(vsrl(maj, 1), k1));
-            odd = cpu.vsub(odd, vand(vsrl(odd, 1), k1));
+            maj = cpu.vsub(maj, vand(cpu.vsrl(maj, 1), k1));
+            odd = cpu.vsub(odd, vand(cpu.vsrl(odd, 1), k1));
 
-            maj = cpu.vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
-            odd = cpu.vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
+            maj = cpu.vadd(vand(maj,k2), vand(cpu.vsrl(maj, 2), k2));
+            odd = cpu.vadd(vand(odd,k2), vand(cpu.vsrl(odd, 2), k2));
 
-            maj = vand(cpu.vadd(maj, vsrl(maj,4)), k4);
-            odd = vand(cpu.vadd(odd, vsrl(odd,4)), k4);
+            maj = vand(cpu.vadd(maj, cpu.vsrl(maj,4)), k4);
+            odd = vand(cpu.vadd(odd, cpu.vsrl(odd,4)), k4);
 
             odd = cpu.vadd(cpu.vadd(maj, maj), odd);
 
@@ -112,14 +112,14 @@ namespace Z0
             var maj =  cpu.vor(z.vand(cpu.vxor(a,b),c), z.vand(a,b));
             var odd =  cpu.vxor(cpu.vxor(a,b),c);
 
-            maj = cpu.vsub(maj, vand(z.vsrl(maj, 1), k1));
-            odd = cpu.vsub(odd, vand(z.vsrl(odd, 1), k1));
+            maj = cpu.vsub(maj, vand(cpu.vsrl(maj, 1), k1));
+            odd = cpu.vsub(odd, vand(cpu.vsrl(odd, 1), k1));
 
-            maj = cpu.vadd(vand(maj,k2), vand(z.vsrl(maj, 2), k2));
-            odd = cpu.vadd(vand(odd,k2), vand(z.vsrl(odd, 2), k2));
+            maj = cpu.vadd(vand(maj,k2), vand(cpu.vsrl(maj, 2), k2));
+            odd = cpu.vadd(vand(odd,k2), vand(cpu.vsrl(odd, 2), k2));
 
-            maj = vand(cpu.vadd(maj, z.vsrl(maj,4)), k4);
-            odd = vand(cpu.vadd(odd, z.vsrl(odd,4)), k4);
+            maj = vand(cpu.vadd(maj, cpu.vsrl(maj,4)), k4);
+            odd = vand(cpu.vadd(odd, cpu.vsrl(odd,4)), k4);
 
             odd = cpu.vadd(cpu.vadd(maj, maj), odd);
 

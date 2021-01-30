@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct XOrGate<T> : IBinaryGate<T>, IBinaryGate128<T>, IBinaryGate256<T>, IBinaryGate512<T>
             where T : unmanaged

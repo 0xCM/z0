@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vreverse(Vector128<int> src)
-            => vperm4x32(src, Perm4L.DCBA);
+            => cpu.vperm4x32(src, Perm4L.DCBA);
 
         /// <summary>
         /// Reverses the source vector components
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vreverse(Vector128<uint> src)
-            => vperm4x32(src, Perm4L.DCBA);
+            => cpu.vperm4x32(src, Perm4L.DCBA);
 
         [MethodImpl(Inline), Op]
         public static Vector128<long> vreverse(Vector128<long> src)
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vreverse(Vector256<int> src)
-            => vperm8x32(src,MRev256u32);
+            => cpu.vperm8x32(src,MRev256u32);
 
         /// <summary>
         /// Reverses the source vector components
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vreverse(Vector256<uint> src)
-            => vperm8x32(src,MRev256u32);
+            => cpu.vperm8x32(src,MRev256u32);
 
         /// <summary>
         /// Reverses the source vector components
@@ -139,7 +139,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<float> vreverse(Vector256<float> src)
-            => vperm8x32(src,MRev256f32);
+            => cpu.vperm8x32(src,MRev256f32);
 
         static Vector256<int> MRev256f32
             => cpu.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);

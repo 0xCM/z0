@@ -33,15 +33,17 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => gbits.pop(x.Data);
 
-        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Perm spec)
+
+        /// <summary>
+        /// Counts the number of enabled bits in the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint pop<N,T>(in BitVector128<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-        {
-            var dst = src.Replicate();
-            var n = src.Width;
-            for(var i=0; i<n; i++)
-                dst[i] = src[spec[i]];
-            return dst;
-        }
+                => gbits.pop(x.Data.AsUInt64().GetElement(0)) + gbits.pop(x.Data.AsUInt64().GetElement(1));
+
     }
 }

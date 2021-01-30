@@ -23,6 +23,12 @@ namespace Z0
         public string Format()
             => Content.Format();
 
+        public TextBlock Text
+        {
+            [MethodImpl(Inline)]
+            get => Format();
+        }
+
         public override string ToString()
             => Format();
 

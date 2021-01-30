@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static HexConst;
     using static KonstBytes;
 
-    partial struct z
+    partial struct cpu
     {
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vrotl(W128 n, N8 offset)

@@ -14,8 +14,8 @@ namespace Z0
         [Op(ExampleGroups.Perms)]
         public void vperm4x16()
         {
-            var id = vparts(w128,0,1,2,3,6,7,8,9);
-            Claim.veq(z.vperm4x16(vparts(w128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vparts(w128,0,3,2,1,6,9,8,7));
+            var id = cpu.vparts(w128,0,1,2,3,6,7,8,9);
+            Claim.veq(cpu.vperm4x16(cpu.vparts(w128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), cpu.vparts(w128,0,3,2,1,6,9,8,7));
         }
 
         [Op(ExampleGroups.Perms)]
@@ -43,7 +43,7 @@ namespace Z0
                 Claim.eq(p,q);
 
                 // Permute vector via api
-                var v2 = z.vperm4x32(v1,p);
+                var v2 = cpu.vperm4x32(v1,p);
 
                 // Permute vector manually
                 var v3 = cpu.vparts(w128, v1s[p0],v1s[p1],v1s[p2],v1s[p3]);
@@ -67,21 +67,21 @@ namespace Z0
             var src = cpu.vparts(w128, 1,2,3,4);
             var spec = Perm4L.ABCD;
             var y = cpu.vparts(w128, 4,3,2,1);
-            var x = z.vperm4x32(src, Perm4L.ABCD);
+            var x = cpu.vperm4x32(src, Perm4L.ABCD);
             Claim.veq(x, src);
 
             y = cpu.vparts(w128,4,3,2,1);
             spec = Perm4L.DCBA;
-            x = z.vperm4x32(src,spec);
+            x = cpu.vperm4x32(src,spec);
             Claim.veq(x, y);
 
             y = cpu.vparts(w128,4u,3u,2u,1u);
             spec = Perm4L.DCBA;
-            x = z.vperm4x32(src,spec);
+            x = cpu.vperm4x32(src,spec);
             Claim.veq(x, y);
 
-            Claim.veq(z.vperm4x32(cpu.vparts(w128, 0,1,2,3), Perm4L.ADCB), cpu.vparts(w128, 0,3,2,1));
-            Claim.veq(z.vperm4x32(cpu.vparts(w128, 0,1,2,3), Perm4L.DBCA), cpu.vparts(w128, 3,1,2,0));
+            Claim.veq(cpu.vperm4x32(cpu.vparts(w128, 0,1,2,3), Perm4L.ADCB), cpu.vparts(w128, 0,3,2,1));
+            Claim.veq(cpu.vperm4x32(cpu.vparts(w128, 0,1,2,3), Perm4L.DBCA), cpu.vparts(w128, 3,1,2,0));
         }
     }
 }

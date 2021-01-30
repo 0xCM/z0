@@ -8,19 +8,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial class BitVector
     {
         /// <summary>
-        /// Counts the number of enabled bits in the source vector
+        /// Rearranges the vector as specified by a permutation
         /// </summary>
         /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static uint pop<N,T>(in BitVector128<N,T> x)
+        /// <param name="spec">The permutation</param>
+        [Op, Closures(Closure)]
+        public static BitVector<T> perm<T>(BitVector<T> src, in Perm spec)
+            where T : unmanaged
+        {
+            var dst = replicate(src);
+            var w = src.Width;
+            for(var i=0; i<w; i++)
+            {
+                ref readonly var j = ref spec[i];
+                if(j != i)
+                    dst[i] = src[j];
+            }
+            return dst;
+        }
+
+        public static BitVector<N,T> perm<N,T>(BitVector<N,T> src, in Perm spec)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.pop(x.Data.AsUInt64().GetElement(0)) + gbits.pop(x.Data.AsUInt64().GetElement(1));
+        {
+            var dst = src.Replicate();
+            var n = src.Width;
+            for(var i=0; i<n; i++)
+                dst[i] = src[spec[i]];
+            return dst;
+        }
     }
 }

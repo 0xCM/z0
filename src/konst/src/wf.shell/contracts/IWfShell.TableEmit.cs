@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
     using static WfEvents;
-
 
     partial interface IWfShell
     {
