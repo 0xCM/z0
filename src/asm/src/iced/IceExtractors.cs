@@ -51,12 +51,12 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmSpecifier specifier(Iced.Instruction src)
+        public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            var sig = asm.sig(iceOpCode.ToInstructionString());
-            var code = asm.opcode(iceOpCode.ToOpCodeString());
-            return asm.specifier(code, sig);
+            var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
+            var code = new AsmOpCodeExprLegacy(iceOpCode.ToOpCodeString());
+            return new AsmInstructionSpecExprLegacy(code, sig);
         }
 
         [MethodImpl(Inline), Op]

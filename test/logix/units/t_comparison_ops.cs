@@ -135,8 +135,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = vzero<T>(n);
-            var actual = vzero<T>(n);
+            var expect = gcpu.vzero<T>(n);
+            var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
                 expect = gvec.vlt(x,y);
@@ -154,8 +154,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = vzero<T>(n);
-            var actual = vzero<T>(n);
+            var expect = gcpu.vzero<T>(n);
+            var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
                 expect = gvec.vlt(x,y);
@@ -174,8 +174,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = z.vzero<T>(n);
-            var actual = z.vzero<T>(n);
+            var expect = gcpu.vzero<T>(n);
+            var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
                 expect = gvec.vgt(x,y);
@@ -194,8 +194,8 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = z.vzero<T>(n);
-            var actual = z.vzero<T>(n);
+            var expect = gcpu.vzero<T>(n);
+            var actual = gcpu.vzero<T>(n);
             for(var i=0; i<RepCount; i++)
             {
                 expect = gvec.vgt(x,y);

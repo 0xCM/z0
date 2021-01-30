@@ -11,11 +11,11 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeDataset
     {
-        public Index<AsmOpCodeRow> Entries {get;}
+        public Index<AsmOpCodeRowLegacy> Entries {get;}
 
-        public Index<AsmOpCodeExpr> Identity {get;}
+        public Index<AsmOpCodeExprLegacy> Identity {get;}
 
-        public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCodeExpr[] identifiers)
+        public AsmOpCodeDataset(AsmOpCodeRowLegacy[] records, AsmOpCodeExprLegacy[] identifiers)
         {
             Entries = records;
             Identity = identifiers;
@@ -24,7 +24,7 @@ namespace Z0.Asm
         public int OpCodeCount
             => Entries.Length;
 
-        public ref readonly AsmOpCodeExpr this[ushort index]
+        public ref readonly AsmOpCodeExprLegacy this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Identity[index];

@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public AsmStatement Statement {get;}
 
-        public AsmSpecifier Specifier {get;}
+        public AsmInstructionSpecExprLegacy Specifier {get;}
 
         public BinaryCode Encoded {get;}
 
         [MethodImpl(Inline)]
-        public AsmEncoding(AsmStatement statement, AsmSpecifier specifier, BinaryCode encoded)
+        public AsmEncoding(AsmStatement statement, AsmInstructionSpecExprLegacy specifier, BinaryCode encoded)
         {
             Specifier = specifier;
             Statement = statement;

@@ -11,18 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Marker<T>
-        {
-            public Index<T> Symbols {get;}
-
-            [MethodImpl(Inline)]
-            public Marker(Index<T> symbols)
-            {
-                Symbols = symbols;
-            }
-        }
-
-        public readonly struct Marker
+        public readonly struct Marker : IRule<Marker>
         {
             public Index<dynamic> Symbols {get;}
 
@@ -31,6 +20,15 @@ namespace Z0
             {
                 Symbols = symbols;
             }
+        }
+
+        public readonly struct Marker<T> : IRule<Marker<T>,T>
+        {
+            public Index<T> Symbols {get;}
+
+            [MethodImpl(Inline)]
+            public Marker(Index<T> symbols)
+                => Symbols = symbols;
         }
     }
 }

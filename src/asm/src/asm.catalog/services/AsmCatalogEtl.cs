@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
 
     using static Part;
-    using static z;
+    using static memory;
     using static TextRules;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
@@ -17,6 +17,38 @@ namespace Z0.Asm
         public AsmCatalogEtl()
         {
             SourceFormat = TextDocFormat.Structured(Chars.Tab);
+        }
+
+        public Span<AsmCatalogImportRow> LoadImportRows()
+        {
+            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.StokeX86, out var descriptor))
+            {
+                var content = Resources.utf8(descriptor);
+                var srcFormat = TextDocFormat.Structured(Chars.Tab);
+                var foundheader = false;
+                var lines = Parse.lines(content).View;
+                var count = lines.Length;
+                var buffer = span<AsmCatalogImportRow>(count);
+                ref var dst = ref first(buffer);
+                var j = 0;
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var line = ref skip(lines,i);
+                    if(foundheader)
+                    {
+                        var row = default(AsmCatalogImportRow);
+                        if(parse(line, ref row))
+                            seek(dst,j++) = row;
+                    }
+                    else
+                    {
+                        if(line.Content.Equals(AsmCatalogImportRow.SourceHeader))
+                            foundheader = true;
+                    }
+                }
+                return slice(buffer,0, j);
+            }
+            return Index<AsmCatalogImportRow>.Empty;
         }
 
         public void Run()

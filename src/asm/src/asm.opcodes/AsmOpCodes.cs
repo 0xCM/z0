@@ -22,15 +22,15 @@ namespace Z0.Asm
             => new AsmOpCodeGroup((uint)count);
 
         [MethodImpl(Inline), Op]
-        public static AsmMnemonicExpr mnemonic(in AsmOpCodeRow src)
+        public static AsmMnemonicExpr mnemonic(in AsmOpCodeRowLegacy src)
             => new AsmMnemonicExpr(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
-        public static Cpuid cpuid(in AsmOpCodeRow src)
+        public static Cpuid cpuid(in AsmOpCodeRowLegacy src)
             => new Cpuid(src.CpuId);
 
         [MethodImpl(Inline), Op]
-        public static OperatingMode mode(in AsmOpCodeRow src)
+        public static OperatingMode mode(in AsmOpCodeRowLegacy src)
         {
             if(src.M16)
                 return OperatingMode.Mode16;
@@ -47,15 +47,15 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr opcode(in AsmOpCodeRow src)
-            => new AsmOpCodeExpr(src.OpCode);
+        public static AsmOpCodeExprLegacy opcode(in AsmOpCodeRowLegacy src)
+            => new AsmOpCodeExprLegacy(src.OpCode);
 
         /// <summary>
         /// Selects the instruction pattern from the source table
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigExpr sig(in AsmOpCodeRow src)
+        public static AsmSigExpr sig(in AsmOpCodeRowLegacy src)
             => new AsmSigExpr(src.Instruction);
 
         [Op]
@@ -86,8 +86,8 @@ namespace Z0.Asm
             => new AsmSymbols(SymbolStore.named<IceMnemonic,ushort>(), SymbolStore.named<RegisterKind,uint>(), AsmOpCodes.dataset());
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCodePart part(asci8 src)
-            => new AsmOpCodePart(src);
+        public static AsmOpCodePartExpr part(asci8 src)
+            => new AsmOpCodePartExpr(src);
 
         public static Index<string> Mnemonics
         {
@@ -105,11 +105,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr identity(in AsmOpCodeRow src)
-            => new AsmOpCodeExpr(src.OpCode);
+        public static AsmOpCodeExprLegacy identity(in AsmOpCodeRowLegacy src)
+            => new AsmOpCodeExprLegacy(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCodeExpr> dst)
+        public static void identify(ReadOnlySpan<AsmOpCodeRowLegacy> src, Span<AsmOpCodeExprLegacy> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)

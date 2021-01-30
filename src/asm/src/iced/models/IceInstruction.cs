@@ -11,7 +11,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        public AsmSpecifier Specifier {get;set;}
+        public AsmInstructionSpecExprLegacy Specifier {get;set;}
 
         /// <summary>
         /// Captures the formatted view of the instruction

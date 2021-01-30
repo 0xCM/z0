@@ -14,7 +14,7 @@ namespace Z0.Asm
     partial struct AsmOpCodes
     {
         [Op]
-        public static void parse(in AppResDoc specs, Span<AsmOpCodeRow> dst)
+        public static void parse(in AppResDoc specs, Span<AsmOpCodeRowLegacy> dst)
         {
             var fields = Enums.literals<F>();
             var src = specs.Rows.View;
@@ -23,7 +23,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
+        public static ref readonly AsmOpCodeRowLegacy parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRowLegacy dst)
         {
             var cells = src.Cells.View;
             var count = root.length(cells, fields);

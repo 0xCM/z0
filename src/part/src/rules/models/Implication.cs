@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Implication<A,C> : IImplication<A,C>
+        public readonly struct Implication<A,C> : IRule<Implication<A,C>,A,C>
             where A : IEquatable<A>
             where C : IEquatable<C>
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// Specifies an if->then style rule as described by https://en.wikipedia.org/wiki/Material_conditional
         /// </summary>
-        public readonly struct Implication<I,A,C> : IImplication<I,A,C>
+        public readonly struct Implication<I,A,C> : IRule<Implication<I,A,C>,I,A,C>
             where I : unmanaged, IEquatable<I>
             where A : IEquatable<A>
             where C : IEquatable<C>

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     public readonly struct AsmDataTypes
     {
-        public readonly struct Byte : IAsmDataType<Byte>
+        public readonly struct AsmByte : IAsmDataType<AsmByte>
         {
             public AsmSizeQualifier Kind => SQ.Byte;
 

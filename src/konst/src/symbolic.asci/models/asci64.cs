@@ -15,7 +15,7 @@ namespace Z0
     using A = asci64;
     using S = Vector512<byte>;
 
-    public readonly struct asci64 : IBytes<A,N>
+    public readonly struct asci64 : IAsciSeq<A,N>
     {
         internal readonly S Storage;
 

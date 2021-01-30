@@ -9,6 +9,12 @@ namespace Z0.Asm
     public sealed class AsmOpCodeParser : WfService<AsmOpCodeParser, AsmOpCodeParser>
     {
 
+        public bool Parse(AsmOpCodeExprLegacy src, out AsmOpCode dst)
+        {
+            dst = AsmOpCode.Empty;
 
+
+            return false;
+        }
     }
 }

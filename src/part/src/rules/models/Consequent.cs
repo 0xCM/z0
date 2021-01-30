@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Consequent : IConsequent
+        public readonly struct Consequent : IRule<Consequent>
         {
             public TermId Id {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
                 => equals(this, src);
         }
 
-        public readonly struct Consequent<C> : IConsequent<C>
+        public readonly struct Consequent<C> : IRule<Consequent<C>,C>
             where C : IEquatable<C>
         {
             public TermId Id {get;}

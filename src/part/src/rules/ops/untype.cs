@@ -37,5 +37,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Marker untype<T>(Marker<T> src)
             => new Marker(src.Symbols.Map(s => (dynamic)s));
+
+        public static Region untype<B,T>(Region<B,T> src)
+            => new Region(src.Base,
+                root.pair((dynamic)src.UpperLeft.Left, src.UpperLeft.Right),
+                root.pair((dynamic)src.LowerRight.Left, src.LowerRight.Right)
+                );
+
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public class NonEmpty
+        public readonly struct NonEmpty : IRule<NonEmpty>
         {
             readonly Index<dynamic> Terms;
 
@@ -40,10 +40,9 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Terms.Edit;
             }
-
         }
 
-        public class NonEmpty<T>
+        public readonly struct NonEmpty<T> : IRule<NonEmpty<T>,T>
         {
             readonly Index<T> Terms;
 
@@ -71,7 +70,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Terms.Edit;
             }
-
         }
     }
 }

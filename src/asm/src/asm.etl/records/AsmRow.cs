@@ -53,7 +53,7 @@ namespace Z0.Asm
 
 		public asci16 Mnemonic;
 
-		public AsmOpCodeExpr OpCode;
+		public AsmOpCodeExprLegacy OpCode;
 
         public AsmSigExpr Instruction;
 

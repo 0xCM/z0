@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents the magnitude of the distance between two values with respect to a contectxtual metric
         /// </summary>
-        public readonly struct Delta
+        public readonly struct Delta : IRule<Delta>
         {
             public dynamic Left {get;}
 
@@ -40,11 +40,10 @@ namespace Z0
                 => new Delta<dynamic>(src.Left, src.Right);
         }
 
-
         /// <summary>
         /// Represents the magnitude of the distance between two values with respect to a contectxtual metric
         /// </summary>
-        public readonly struct Delta<T>
+        public readonly struct Delta<T> : IRule<Delta<T>,T>
         {
             public T Left {get;}
 

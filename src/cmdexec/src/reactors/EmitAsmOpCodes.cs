@@ -22,7 +22,7 @@ namespace Z0
             var count = data.Count;
             var view = data.View;
             var formatter = AsmOpCodes.formatter<AsmOpCodeField>();
-            var rowbuffer = alloc<AsmOpCodeRow>(count);
+            var rowbuffer = alloc<AsmOpCodeRowLegacy>(count);
             var rows = span(rowbuffer);
             using var dst = cmd.Target.Writer();
             formatter.EmitHeader(false);

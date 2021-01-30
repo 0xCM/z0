@@ -18,12 +18,12 @@ namespace Z0
         /// </summary>
         public OpUri Operation {get;}
 
-        public Operands Operands {get;}
+        public Index<dynamic> Operands {get;}
 
         public bool Passed {get;}
 
         [MethodImpl(Inline)]
-        public CheckResult(ClaimKind kind, OpUri subject, Operands operands, bool passed)
+        public CheckResult(ClaimKind kind, OpUri subject, Index<dynamic> operands, bool passed)
         {
             Operands = operands;
             Operation = subject;

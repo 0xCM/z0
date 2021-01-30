@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Alt
+        public readonly struct Alt : IRule<Alt>
         {
             public One Left {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Defines two potential choices
         /// </summary>
-        public readonly struct Alt<T>
+        public readonly struct Alt<T> : IRule<Alt<T>,T>
         {
             public One<T> Left {get;}
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <summary>
         /// Defines two potential choices
         /// </summary>
-        public readonly struct Alt<A,B>
+        public readonly struct Alt<A,B> : IRule<Alt<A,B>,A,B>
         {
             public One<A> Left {get;}
 

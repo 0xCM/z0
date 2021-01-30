@@ -39,7 +39,7 @@ namespace Z0.Asm
             emit(handler.Mnemonics, root + FS.file("mnemonics", FileExtensions.Csv));
         }
 
-        public static void emit(ReadOnlySpan<AsmOpCodeExpr> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<AsmOpCodeExprLegacy> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             writer.WriteLine("OpCode");
@@ -89,7 +89,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static ref readonly DatasetFormatter<F> emit(in AsmOpCodeRow src, in DatasetFormatter<F> dst)
+        public static ref readonly DatasetFormatter<F> emit(in AsmOpCodeRowLegacy src, in DatasetFormatter<F> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Mnemonic, src.Mnemonic);

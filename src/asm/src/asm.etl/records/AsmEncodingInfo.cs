@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         public AsmSigExpr Sig;
 
-        public AsmOpCodeExpr OpCode;
+        public AsmOpCodeExprLegacy OpCode;
 
         public BinaryCode Encoded;
     }

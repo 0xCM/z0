@@ -80,7 +80,7 @@ namespace Z0
             {
                 var input = emitter.Invoke();
                 var output = f.Invoke(input);
-                var expect = z.vzero(w,t);
+                var expect = gcpu.vzero(w,t);
                 for(byte j = 0; j < n; j++)
                     expect = vset(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 
@@ -101,7 +101,7 @@ namespace Z0
             {
                 var input = emitter.Invoke();
                 var output = f.Invoke(input);
-                var expect = z.vzero(w,t);
+                var expect = gcpu.vzero(w,t);
                 for(byte j = 0; j < n; j++)
                     expect = vset(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 

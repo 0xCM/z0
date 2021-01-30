@@ -13,9 +13,9 @@ namespace Z0.Asm
     partial struct AsmOpCodes
     {
         [Op, MethodImpl(Inline)]
-        public static Span<AsmOpCodeRow> rows(in AppResDoc specs)
+        public static Span<AsmOpCodeRowLegacy> rows(in AppResDoc specs)
         {
-            var dst = Spans.alloc<AsmOpCodeRow>(specs.Rows.Length);
+            var dst = Spans.alloc<AsmOpCodeRowLegacy>(specs.Rows.Length);
             parse(specs, dst);
             return dst;
         }

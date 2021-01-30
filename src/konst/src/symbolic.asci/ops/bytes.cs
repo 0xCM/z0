@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
-            => memory.bytes(src);
+            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci4 src)
-            => memory.bytes(src);
+            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci8 src)
-            => memory.bytes(src);
+            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci16 src)
-            => memory.bytes(src);
+            => src.Storage.ToSpan();
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -75,7 +75,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci32 src)
-            => memory.bytes(src);
+            => src.Storage.ToSpan();
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -83,6 +83,6 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci64 src)
-            => memory.bytes(src);
+            => src.Storage.ToSpan();
     }
 }

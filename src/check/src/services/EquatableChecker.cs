@@ -16,8 +16,7 @@ namespace Z0
             where T : IEquatable<T>
         {
             var passed = lhs.Equals(rhs);
-            var operands = Api.operands(lhs,rhs);
-            return new CheckResult(ClaimKind.Eq, Operation, operands, passed);
+            return new CheckResult(ClaimKind.Eq, Operation, root.index((dynamic)lhs, (dynamic)rhs), passed);
         }
     }
 }

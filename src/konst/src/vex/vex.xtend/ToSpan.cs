@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial class XVex
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this Vector128<T> src)
             where T : unmanaged
-                => z.vspan(src);
+                => gcpu.vspan(src);
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this Vector256<T> src)
             where T : unmanaged
-                => z.vspan(src);
+                => gcpu.vspan(src);
 
         /// <summary>
         /// Allocates and deposits vector content to a span
@@ -40,6 +40,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> ToSpan<T>(this Vector512<T> src)
             where T : unmanaged
-                => z.vspan(src);
+                => gcpu.vspan(src);
     }
 }

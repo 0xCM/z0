@@ -13,11 +13,11 @@ namespace Z0.Asm
 
     partial struct AsmOpCodes
     {
-        public static string format(in AsmOpCodeRow src, char delimiter = FieldDelimiter)
+        public static string format(in AsmOpCodeRowLegacy src, char delimiter = FieldDelimiter)
             => format(src, Formatters.dataset<F>(delimiter)).ToString();
 
         [Op]
-        public static ref readonly DatasetFormatter<F> format(in AsmOpCodeRow src, in DatasetFormatter<F> dst)
+        public static ref readonly DatasetFormatter<F> format(in AsmOpCodeRowLegacy src, in DatasetFormatter<F> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Mnemonic, src.Mnemonic);

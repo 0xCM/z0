@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Returns a 128-bit vector with all bits disabled

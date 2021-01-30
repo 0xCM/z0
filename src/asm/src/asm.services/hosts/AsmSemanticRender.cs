@@ -237,7 +237,7 @@ namespace Z0.Asm
                 Strings.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
-        static string format(AsmSpecifier src)
+        static string format(AsmInstructionSpecExprLegacy src)
         {
             return src.Format();
         }

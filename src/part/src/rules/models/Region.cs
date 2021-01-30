@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Region : IRegion
+        public readonly struct Region : IRule<Region>
         {
             public dynamic Base {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Region<B,T> : IRegion<B,T>
+        public readonly struct Region<B,T> : IRule<Region<B,T>,B,T>
         {
             public B Base {get;}
 
@@ -45,10 +45,7 @@ namespace Z0
             }
 
             public static implicit operator Region(Region<B,T> src)
-                => new Region(src.Base,
-                    root.pair((dynamic)src.UpperLeft.Left, src.UpperLeft.Right),
-                    root.pair((dynamic)src.LowerRight.Left, src.LowerRight.Right)
-                    );
+                => Rules.untype(src);
         }
     }
 }

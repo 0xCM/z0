@@ -23,7 +23,7 @@ namespace Z0
         void cnonimpl_check<T>(T t = default)
             where T : unmanaged
         {
-            var vZero = z.vzero<T>(n128);
+            var vZero = gcpu.vzero<T>(n128);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

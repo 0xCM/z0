@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Substitutions<T>
+        public readonly struct Substitutions<T> : IRule<Substitutions<T>,T>
         {
             public uint Count {get;}
 

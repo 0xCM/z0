@@ -29,7 +29,7 @@ namespace Z0.Asm
         public string FormattedInstruction
             => Instruction.FormattedInstruction;
 
-        public AsmSpecifier Specifier
+        public AsmInstructionSpecExprLegacy Specifier
             => Instruction.Specifier;
 
         public MemoryAddress IP

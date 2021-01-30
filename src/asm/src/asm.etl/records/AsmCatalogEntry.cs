@@ -12,7 +12,7 @@ namespace Z0.Asm
 
         public Name Identifier;
 
-        public AsmOpCodeExpr OpCode;
+        public AsmOpCodeExprLegacy OpCode;
 
         public AsmSigExpr Sig;
 

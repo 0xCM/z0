@@ -15,7 +15,7 @@ namespace Z0
         /// Defines a stewise-contiguous sequence of scalar values, available on-demand, that satisfy upper/lower bound constraints
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        public readonly struct Range<T>
+        public readonly struct Range<T> : IRule<Range<T>,T>
             where T : unmanaged, IEquatable<T>
         {
             /// <summary>

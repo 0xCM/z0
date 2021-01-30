@@ -10,13 +10,11 @@ namespace Z0.Asm
     using static Part;
     using static AsmDataTypes;
 
-    using SQ = AsmDataTypes;
-
 
     partial struct asm
     {
         [Op]
-        public static SQ.Byte @byte()
+        public static AsmByte @byte()
             => default;
 
         [Op]

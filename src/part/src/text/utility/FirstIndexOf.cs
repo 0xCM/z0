@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
+    using static Part;
 
     partial class XText
     {
-
         /// <summary>
         /// Searches a string for the first occurrence of a specified character
         /// </summary>
@@ -18,6 +18,19 @@ namespace Z0
         public static Option<int> FirstIndexOf(this string s, char match)
         {
             var idx = s.IndexOf(match);
+            return idx != -1 ? idx : root.none<int>();
+        }
+
+        /// <summary>
+        /// Searches a string for the first occurrence of a specified character
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="match">The character to match</param>
+        [TextUtility, Closures(UInt8k | UInt16k)]
+        public static Option<int> FirstIndexOf<T>(this string s, T match)
+            where T : unmanaged
+        {
+            var idx = s.IndexOf(memory.@as<T,char>(match));
             return idx != -1 ? idx : root.none<int>();
         }
 

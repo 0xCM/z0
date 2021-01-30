@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct asci : IBytes<asci>
+    public readonly struct asci : IAsciSeq<asci>
     {
         readonly BinaryCode Data;
 
@@ -58,6 +58,12 @@ namespace Z0
             get => (uint)Data.Length;
         }
 
+        public string Text
+        {
+            [MethodImpl(Inline)]
+            get => Digital.format(Data);
+        }
+
         public int Capacity
             => Length;
 
@@ -65,8 +71,12 @@ namespace Z0
             => Data.IsEmpty;
 
         [MethodImpl(Inline)]
+        public int CompareTo(asci src)
+            => Text.CompareTo(src.Text);
+
+        [MethodImpl(Inline)]
         public string Format()
-            => Digital.format(Data);
+            => Text;
 
         [MethodImpl(Inline)]
         public bool Equals(asci src)

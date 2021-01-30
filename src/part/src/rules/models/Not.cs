@@ -12,9 +12,21 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Defines the logical negation of a specified subject
+        /// Represents the logical negation of a distinguished subject
         /// </summary>
-        public readonly struct Not<T>
+        public readonly struct Not : IRule<Not>
+        {
+            public dynamic Subject {get;}
+
+            [MethodImpl(Inline)]
+            public Not(dynamic src)
+                => Subject = src;
+        }
+
+        /// <summary>
+        /// Represents the logical negation of a distinguished subject
+        /// </summary>
+        public readonly struct Not<T> : IRule<Not<T>,T>
         {
             public T Subject {get;}
 
@@ -33,18 +45,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Not(Not<T> src)
                 => new Not(src.Subject);
-        }
-
-        /// <summary>
-        /// Defines the logical negation of a specified subject
-        /// </summary>
-        public readonly struct Not
-        {
-            public dynamic Subject {get;}
-
-            [MethodImpl(Inline)]
-            public Not(dynamic src)
-                => Subject = src;
         }
     }
 }

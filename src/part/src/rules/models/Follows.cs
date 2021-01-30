@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Requires that one element occurrs after another
         /// </summary>
-        public readonly struct Follows<T>
+        public readonly struct Follows<T> : IRule<Follows<T>,T>
         {
             public T Before {get;}
 

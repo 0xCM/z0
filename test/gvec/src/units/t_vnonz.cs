@@ -49,7 +49,7 @@ namespace Z0
             var domain = Interval.closed(one(t), maxval(t));
             var f = VSvc.vnonz(w,t);
 
-            Claim.nea(gcpu.vnonz(z.vzero(w,t)));
+            Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
 
             for(var i=0; i<RepCount; i++)
                 Claim.Require(f.Invoke(Random.CpuVector(w, domain)));
@@ -63,7 +63,7 @@ namespace Z0
             var domain = Interval.closed(one(t), maxval(t));
             var f = VSvc.vnonz(w,t);
 
-            Claim.nea(gcpu.vnonz(z.vzero(w,t)));
+            Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));
 
             for(var i=0; i<RepCount; i++)
                 Claim.Require(f.Invoke(Random.CpuVector(w,domain)));

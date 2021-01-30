@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public AsmSpecifier Spec {get;}
+        public AsmInstructionSpecExprLegacy Spec {get;}
 
         /// <summary>
         /// Describes the instruction operands
@@ -40,7 +40,7 @@ namespace Z0.Asm
         public IceOperandInfo[] Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, IceOperandInfo[] operands, byte[] encoded)
+        public AsmInstructionSummary(MemoryAddress @base, uint offset, string content, AsmInstructionSpecExprLegacy spec, IceOperandInfo[] operands, byte[] encoded)
         {
             Encoded = new CodeBlock(@base, encoded);
             Offset = offset;

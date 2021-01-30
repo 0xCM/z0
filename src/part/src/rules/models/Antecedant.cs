@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Antecedant<A> : IAntecedant<A>, IEquatable<Antecedant<A>>
+        public readonly struct Antecedant<A> : IRule<Antecedant<A>,A>, IEquatable<Antecedant<A>>
             where A : IEquatable<A>
         {
             public TermId Id {get;}

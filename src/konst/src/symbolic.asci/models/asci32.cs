@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Defines an asci code sequence of length 32
     /// </summary>
-    public readonly struct asci32 : IBytes<A,N>
+    public readonly struct asci32 : IAsciSeq<A,N>
     {
         internal readonly S Storage;
 

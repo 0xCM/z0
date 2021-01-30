@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Annotation
+        public readonly struct Annotation : IRule<Annotation>
         {
             public TextBlock Content {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
             }
         }
 
-        public readonly struct Annotation<K>
+        public readonly struct Annotation<K> : IRule<Annotation<K>,K>
             where K : unmanaged
         {
             public TextBlock Content {get;}

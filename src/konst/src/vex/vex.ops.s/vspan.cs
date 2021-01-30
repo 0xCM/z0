@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
+    using static memory;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Deposits source vector content to a span without heap allocation
@@ -23,7 +24,7 @@ namespace Z0
         {
             var w = w128;
             var dst = vzero<T>(w);
-            ref var storage = ref gcpu.vfirst(dst);
+            ref var storage = ref vfirst(dst);
             gcpu.vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }
@@ -39,8 +40,8 @@ namespace Z0
         {
             var w = w256;
             var dst = vzero<T>(w);
-            ref var storage = ref gcpu.vfirst(dst);
-            gcpu.vstore(src, ref storage);
+            ref var storage = ref vfirst(dst);
+            vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }
 
@@ -56,7 +57,7 @@ namespace Z0
             var w = w512;
             var dst = vzero<T>(w);
             ref var storage = ref gcpu.vfirst(dst);
-            gcpu.vstore(src, ref storage);
+            vstore(src, ref storage);
             return cover(storage, cpu.vcount<T>(w));
         }
     }

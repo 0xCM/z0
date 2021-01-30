@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced
+        public readonly struct Fenced : IRule<Fenced>
         {
             public Fence Fence {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced<T>
+        public readonly struct Fenced<T> : IRule<Fenced<T>,T>
         {
             public Index<T> Content {get;}
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// Defines fenced content
         /// </summary>
-        public readonly struct Fenced<C,F>
+        public readonly struct Fenced<C,F> : IRule<Fenced<C,F>,C,F>
         {
             public C Content {get;}
 

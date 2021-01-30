@@ -9,20 +9,23 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct OneOrNone<T>
-        where T : IEquatable<T>
+    partial struct Rules
     {
-        public T Value {get;}
+        public readonly struct OneOrNone<T>
+            where T : IEquatable<T>
+        {
+            public T Value {get;}
 
-        [MethodImpl(Inline)]
-        public OneOrNone(T src)
-            => Value = src;
+            [MethodImpl(Inline)]
+            public OneOrNone(T src)
+                => Value = src;
 
-        public MultiplicityKind Multiplicity
-            => MultiplicityKind.ZeroOrOne;
+            public MultiplicityKind Multiplicity
+                => MultiplicityKind.ZeroOrOne;
 
-        [MethodImpl(Inline)]
-        public static implicit operator OneOrNone<T>(T src)
-            => new OneOrNone<T>(src);
+            [MethodImpl(Inline)]
+            public static implicit operator OneOrNone<T>(T src)
+                => new OneOrNone<T>(src);
+        }
     }
 }

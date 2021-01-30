@@ -188,7 +188,7 @@ namespace Z0
             where F : IBinaryOp128<T>
             where T : unmanaged
         {
-            var last = z.vzero(w,t);
+            var last = gcpu.vzero<T>(w);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitwidth(t);
@@ -212,7 +212,7 @@ namespace Z0
             where F : IBinaryOp256<T>
             where T : unmanaged
         {
-            var last = z.vzero(w,t);
+            var last = gcpu.vzero<T>(w);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitwidth(t);
@@ -236,7 +236,7 @@ namespace Z0
             where F : IUnaryImm8Op128<T>
             where T : unmanaged
         {
-            var last = z.vzero(w,t);
+            var last = gcpu.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitwidth(t);
@@ -260,7 +260,7 @@ namespace Z0
             where F : IUnaryImm8Op256<T>
             where T : unmanaged
         {
-            var last = z.vzero(w,t);
+            var last = gcpu.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
             var bitlen = bitwidth(t);

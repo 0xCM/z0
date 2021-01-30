@@ -157,8 +157,8 @@ namespace Z0
             for(byte i=0; i < 8; i++)
                 Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 
-            var zero = z.vzero<uint>(n);
-            var ones = gvec.vones<uint>(n);
+            var zero = gcpu.vzero<uint>(n);
+            var ones = gcpu.vones<uint>(n);
             Claim.veq(lrpattern, cpu.vblend(zero, ones, Blend8x32.LRLRLRLR));
         }
 

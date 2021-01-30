@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct One
+        public readonly struct One : IRule<One>
         {
             public dynamic Value {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// Just one, neither more nor less
         /// </summary>
-        public readonly struct One<T>
+        public readonly struct One<T> : IRule<One<T>,T>
         {
             public T Value {get;}
 

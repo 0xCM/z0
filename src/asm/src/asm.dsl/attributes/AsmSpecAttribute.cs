@@ -21,8 +21,5 @@ namespace Z0.Asm
             Sig = sig;
             Description = desc;
         }
-
-        public AsmSpecifier Spec()
-            => asm.specifier(OpCode, Sig);
     }
 }

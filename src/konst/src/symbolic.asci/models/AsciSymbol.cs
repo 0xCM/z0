@@ -16,7 +16,7 @@ namespace Z0
     /// Lifts an asci code to a structural type
     /// </summary>
     [ApiHost]
-    public readonly struct AsciSymbol : IBytes<C,N>
+    public readonly struct AsciSymbol : IAsciSeq<C,N>
     {
         public AsciCharCode Code {get;}
 
@@ -98,10 +98,14 @@ namespace Z0
         string ITextual.Format()
             => Text;
 
+        [MethodImpl(Inline)]
+        public int CompareTo(C src)
+            => Code.CompareTo(src.Code);
+
         public static C Empty
             => new C(AsciCharCode.Null);
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator C(AsciCharCode src)
             => new AsciSymbol(src);
 

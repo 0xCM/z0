@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Represents the consecutive occurrence of two values
         /// </summary>
-        public readonly struct Adjacent<T>
+        public readonly struct Adjacent<T> : IRule<Adjacent<T>,T>
         {
             public T A {get;}
 

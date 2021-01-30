@@ -23,7 +23,7 @@ namespace Z0.Asm
             }
         }
 
-        void emit(ReadOnlySpan<AsmOpCodeExpr> src)
+        void emit(ReadOnlySpan<AsmOpCodeExprLegacy> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();
@@ -36,18 +36,18 @@ namespace Z0.Asm
 
         }
 
-        void emit(ReadOnlySpan<AsmOpCodeExpression> src)
-        {
-            var dstPath = CasePath($"OpCodes");
-            using var writer = dstPath.Writer();
-            writer.WriteLine("OpCode");
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
-            }
+        // void emit(ReadOnlySpan<AsmOpCodeExpression> src)
+        // {
+        //     var dstPath = CasePath($"OpCodes");
+        //     using var writer = dstPath.Writer();
+        //     writer.WriteLine("OpCode");
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         ref readonly var id = ref skip(src,i);
+        //         writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
+        //     }
 
-        }
+        // }
 
         void emit(ReadOnlySpan<AsmMnemonicExpr> src)
         {
@@ -67,7 +67,7 @@ namespace Z0.Asm
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
-            var formatter = Records.formatter<AsmOpCodeRow>();
+            var formatter = Records.formatter<AsmOpCodeRowLegacy>();
             using var writer = CaseWriter("OpCodes");
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<records.Length; i++)

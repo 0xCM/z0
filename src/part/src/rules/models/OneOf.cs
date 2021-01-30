@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct OneOf
+        public readonly struct OneOf : IRule<OneOf>
         {
             public Index<dynamic> Choices {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
 
         }
 
-        public readonly struct OneOf<T>
+        public readonly struct OneOf<T> : IRule<OneOf<T>,T>
         {
             public Index<T> Choices {get;}
 

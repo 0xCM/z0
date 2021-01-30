@@ -15,12 +15,12 @@ namespace Z0.Asm
         {
             public AsmSigExpr Sig {get;}
 
-            public AsmOpCodeExpr OpCode {get;}
+            public AsmOpCodeExprLegacy OpCode {get;}
 
             public EncodedStatement Encoded {get;}
 
             [MethodImpl(Inline)]
-            public SemanticComment(AsmSigExpr sig, AsmOpCodeExpr oc, EncodedStatement encoded)
+            public SemanticComment(AsmSigExpr sig, AsmOpCodeExprLegacy oc, EncodedStatement encoded)
             {
                 Sig = sig;
                 OpCode = oc;

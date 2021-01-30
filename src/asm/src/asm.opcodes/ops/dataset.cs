@@ -17,9 +17,9 @@ namespace Z0.Asm
         {
             var resource = ResExtractor.Service(typeof(Parts.Res).Assembly).MatchDocument(ContentNames.OpCodeSpecs);
             var count = resource.RowCount;
-            var records = sys.alloc<AsmOpCodeRow>(count);
+            var records = sys.alloc<AsmOpCodeRowLegacy>(count);
             parse(resource, records);
-            var identifers = sys.alloc<AsmOpCodeExpr>(count);
+            var identifers = sys.alloc<AsmOpCodeExprLegacy>(count);
             AsmOpCodes.identify(records, identifers);
             return new AsmOpCodeDataset(records,identifers);
         }

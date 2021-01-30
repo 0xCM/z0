@@ -54,8 +54,8 @@ namespace Z0
             var count = 32;
             var x = Random.CpuVector(n256,z8);
             var storage = SpanBlocks.alloc<byte>(n256);
-            var stored = z.vzero(n256,z8);
-            var mask = z.vzero(n256,z8);
+            var stored = gcpu.vzero(n256,z8);
+            var mask = gcpu.vzero(n256,z8);
 
             // Store every component
             storage.Clear();

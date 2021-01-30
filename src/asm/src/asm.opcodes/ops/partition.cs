@@ -24,7 +24,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static uint partition(ReadOnlySpan<AsmOpCodeRow> src, in AsmOpCodeGroup handler)
+        public static uint partition(ReadOnlySpan<AsmOpCodeRowLegacy> src, in AsmOpCodeGroup handler)
         {
             var count = src.Length;
             var s0 = 0u;
@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmOpCodeRow src, in AsmOpCodeGroup handler, ref uint s0)
+        static void process(in AsmOpCodeRowLegacy src, in AsmOpCodeGroup handler, ref uint s0)
         {
             process(opcode(src), handler, s0);
             process(sig(src), handler, s0);
@@ -56,7 +56,7 @@ namespace Z0.Asm
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmOpCodeExpr src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmOpCodeExprLegacy src, in AsmOpCodeGroup handler, uint seq)
             => handler.Include(seq, src);
 
         [MethodImpl(Inline), Op]

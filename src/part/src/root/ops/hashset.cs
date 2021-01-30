@@ -23,5 +23,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static HashSet<T> hashset<T>(IEnumerable<T> members)
             => new HashSet<T>(members);
+
+        /// <summary>
+        /// Allocates a <see cref='HashSet{t}'/> with a specified capacity
+        /// </summary>
+        /// <param name="capacity">The number of preallocated slots</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static HashSet<T> hashset<T>(Count capacity)
+            => new HashSet<T>((int)capacity);
     }
 }

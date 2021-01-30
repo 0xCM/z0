@@ -42,32 +42,32 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector128<T> src, char sep = Chars.Comma, bool specifier = false)
             where T : unmanaged
-                => vspan(src).FormatHex(sep, specifier);
+                => gcpu.vspan(src).FormatHex(sep, specifier);
 
 
         [Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector256<T> src, char sep = Chars.Comma, bool specifier = false)
              where T : unmanaged
-                => vspan(src).FormatHex(sep, specifier);
+                => gcpu.vspan(src).FormatHex(sep, specifier);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this Vector128<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => vspan(src).Format(sep,0,pad,true);
+                => gcpu.vspan(src).Format(sep,0,pad,true);
 
         [Op, Closures(Closure)]
         public static string Format<T>(this Vector256<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => vspan(src).Format(sep, 0, pad, true);
+                => gcpu.vspan(src).Format(sep, 0, pad, true);
 
         [Op, Closures(Closure)]
         public static string Format<T>(this Vector512<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => text.bracket(
                         text.concat(
-                            z.vspan(src).Format(sep, 0, pad, false),
+                            gcpu.vspan(src).Format(sep, 0, pad, false),
                             sep, Chars.Space,
-                            z.vspan(src).Format(sep, 0, pad, false)
+                            gcpu.vspan(src).Format(sep, 0, pad, false)
                         )
                     );
 
@@ -82,16 +82,16 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector128<T> src)
             where T : unmanaged
-                => vspan(src).FormatHex(Chars.Space, false);
+                => gcpu.vspan(src).FormatHex(Chars.Space, false);
 
         [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector256<T> src)
             where T : unmanaged
-                => vspan(src).FormatHex(Chars.Space, false);
+                => gcpu.vspan(src).FormatHex(Chars.Space, false);
 
         [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector512<T> src)
             where T : unmanaged
-                => vspan(src).FormatHex(Chars.Space, false);
+                => gcpu.vspan(src).FormatHex(Chars.Space, false);
    }
 }

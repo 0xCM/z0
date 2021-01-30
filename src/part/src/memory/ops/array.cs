@@ -12,25 +12,20 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static T[] array<T>(IEnumerable<T> src)
-            => sys.array(src);
+            => root.array(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static T[] array<T>(List<T> src)
-            => sys.array(src);
+            => root.array(src);
 
-        /// <summary>
-        /// Produces an array from a <see cref='Span{T}'/>
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static T[] array<T>(Span<T> src)
-            => sys.array(src);
+            => root.array(src);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static T[] array<T>(params T[] src)
-            => sys.array(src);
+            => root.array(src);
     }
 }
