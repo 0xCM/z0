@@ -9,12 +9,19 @@ namespace Z0
 
     using static Part;
 
-    partial struct Rules
+    [Datatype]
+    public readonly struct VersionExpr
     {
+        public string Value {get;}
+
         [MethodImpl(Inline)]
-        public static Rule<A,C> rule<A,C>(TermId id, Index<Proposition<A,C>> terms)
-            where A : IEquatable<A>
-            where C : IEquatable<C>
-                => new Rule<A,C>(id,terms);
+        public VersionExpr(string src)
+        {
+            Value = src;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator VersionExpr(string src)
+            => new VersionExpr(src);
     }
 }

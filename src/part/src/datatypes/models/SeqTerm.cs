@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     /// <summary>
     /// Defines a sequence term
     /// </summary>

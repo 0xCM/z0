@@ -12,6 +12,12 @@ namespace Z0
     /// <summary>
     /// Defines a byte-parametric field segment
     /// </summary>
+    /// Open = '['
+    /// Close = ']'
+    /// PosDelimiter = ','
+    /// Specify = ':'
+    // Seg = <SegName> <Specify> <Open> <FirstPos> <PosDelimiter> <LastPos> <Close>
+    // Seg = Name:[a,b]
     public readonly struct BitFieldSegment : IBitFieldSegment<uint>
     {
         /// <summary>
@@ -43,13 +49,13 @@ namespace Z0
         public uint StartPos
         {
            [MethodImpl(Inline)]
-           get => Section.Min;
+           get => Section.StartPos;
         }
 
         public uint EndPos
         {
             [MethodImpl(Inline)]
-            get => Section.Max;
+            get => Section.EndPos;
         }
 
         [MethodImpl(Inline)]

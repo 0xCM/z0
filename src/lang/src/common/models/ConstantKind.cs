@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
     using static Pow2x16;
 

@@ -45,7 +45,10 @@ namespace Z0
             }
 
             public static implicit operator Region(Region<B,T> src)
-                => Rules.untype(src);
+                => new Region(src.Base,
+                    root.pair((dynamic)src.UpperLeft.Left, src.UpperLeft.Right),
+                    root.pair((dynamic)src.LowerRight.Left, src.LowerRight.Right)
+                    );
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    [ApiHost]
+    [ApiHost("lang.api")]
     public readonly partial struct lang
     {
         const NumericKind Closure = UnsignedInts;

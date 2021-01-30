@@ -14,9 +14,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Bijection<T> bijection<T>(Index<T> src, Index<T> dst)
             => new Bijection<T>(src, dst);
-
-        [MethodImpl(Inline)]
-        public static Bijection<S,T> bijection<S,T>(Index<S> src, Index<T> dst)
-            => new Bijection<S,T>(src, dst);
     }
 }

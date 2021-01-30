@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    [ApiHost]
-    public readonly partial struct Rules
+    partial struct Rules
     {
-        const NumericKind Closure = UnsignedInts;
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Bifurcate<C> bifurcate<C>(C criterion)
+            => new Bifurcate<C>(criterion);
     }
 }

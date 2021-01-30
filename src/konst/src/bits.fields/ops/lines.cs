@@ -16,8 +16,8 @@ namespace Z0
         [Op]
         static string[] lines(in BitFieldModel src)
         {
-            var dst = new string[src.FieldCount];
-            for(var i=0; i<src.FieldCount; i++)
+            var dst = new string[src.SegCount];
+            for(var i=0; i<src.SegCount; i++)
             {
                 var index = i;
                 var indexLabel = index.ToString().PadLeft(2, Chars.D0);

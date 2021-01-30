@@ -15,7 +15,7 @@ namespace Z0
         {
             /// <summary>
             /// Selects the substring after the first ocurrence of a specified character it is found in the string; otherwise,
-            /// returns the original string
+            /// returns the <see cref='EmptyString'/>
             /// </summary>
             /// <param name="src">The string to search</param>
             /// <param name="match">The marking character</param>

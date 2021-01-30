@@ -14,18 +14,18 @@ namespace Z0
         public readonly struct ZeroOrMore<T> : IRule<ZeroOrMore<T>,T>
             where T : IEquatable<T>
         {
-            public Index<T> Value {get;}
+            public Index<T> Elements {get;}
 
             public bool IsZero
             {
                 [MethodImpl(Inline)]
-                get => Value.Count == 0;
+                get => Elements.Count == 0;
             }
 
             public bool IsMore
             {
                 [MethodImpl(Inline)]
-                get => Value.Count > 0;
+                get => Elements.Count > 0;
             }
 
             public MultiplicityKind Multiplicity
@@ -33,7 +33,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ZeroOrMore(T[] src)
-                => Value = src;
+                => Elements = src;
 
             [MethodImpl(Inline)]
             public static implicit operator ZeroOrMore<T>(T[] src)

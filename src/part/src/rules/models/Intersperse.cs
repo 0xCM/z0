@@ -11,29 +11,35 @@ namespace Z0
 
     partial struct Rules
     {
+        /// <summary>
+        /// Specifies that the terms of an input sequence are interspersed by a distinguished element
+        /// </summary>
         public readonly struct Intersperse : IRule<Intersperse>
         {
-            public dynamic Insert {get;}
+            public dynamic Element {get;}
 
             [MethodImpl(Inline)]
             public Intersperse(dynamic insert)
             {
-                Insert = insert;
+                Element = insert;
             }
         }
 
         /// <summary>
-        /// Specifies that the terms of an input sequence are interspersed by a specified marker
+        /// Specifies that the terms of an input sequence are interspersed by a distinguished element
         /// </summary>
         public readonly struct Intersperse<T> : IRule<Intersperse<T>,T>
         {
-            public T Insert {get;}
+            public T Element {get;}
 
             [MethodImpl(Inline)]
             public Intersperse(T insert)
             {
-                Insert = insert;
+                Element = insert;
             }
+
+            public static implicit operator Intersperse(Intersperse<T> src)
+                => new Intersperse(src.Element);
         }
     }
 }

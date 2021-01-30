@@ -46,13 +46,13 @@ namespace Z0
 
         public static string format<T>(BitSection<T> src)
             where T : unmanaged
-                => Format.enclose(Format.adjacent(src.Max, SectionDelimiter, src.Min), SectionFence);
+                => Format.enclose(Format.adjacent(src.EndPos, SectionDelimiter, src.StartPos), SectionFence);
 
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint width<T>(BitSection<T> src)
             where T : unmanaged
-                => bw32(src.Max) - bw32(src.Min) + 1u;
+                => bw32(src.EndPos) - bw32(src.StartPos) + 1u;
 
         public const char SectionDelimiter = Chars.Colon;
 

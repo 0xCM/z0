@@ -11,6 +11,20 @@ namespace Z0
 
     partial struct Rules
     {
+        public readonly struct Adjacent
+        {
+            public dynamic A {get;}
+
+            public dynamic B {get;}
+
+            [MethodImpl(Inline)]
+            public Adjacent(dynamic a, dynamic b)
+            {
+                A = a;
+                B = b;
+            }
+        }
+
         /// <summary>
         /// Represents the consecutive occurrence of two values
         /// </summary>
@@ -41,6 +55,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Adjacent<T>(Pair<T> src)
                 => new Adjacent<T>(src.Left, src.Right);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Adjacent(Adjacent<T> src)
+                => new Adjacent(src.A, src.B);
         }
     }
 }

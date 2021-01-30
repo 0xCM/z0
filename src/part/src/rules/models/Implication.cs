@@ -11,23 +11,38 @@ namespace Z0
 
     partial struct Rules
     {
+        public readonly struct Implication : IRule<Implication>
+        {
+            public dynamic Antecedant {get;}
+
+            public dynamic Consequent {get;}
+
+            [MethodImpl(Inline)]
+            public Implication(dynamic a, dynamic c)
+            {
+                Antecedant = a;
+                Consequent = c;
+            }
+        }
+
         public readonly struct Implication<A,C> : IRule<Implication<A,C>,A,C>
             where A : IEquatable<A>
             where C : IEquatable<C>
         {
-            public uint Index {get;}
-
             public A Antecedant {get;}
 
             public C Consequent {get;}
 
             [MethodImpl(Inline)]
-            public Implication(uint index, A a, C c)
+            public Implication(A a, C c)
             {
-                Index = index;
                 Antecedant = a;
                 Consequent = c;
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Implication(Implication<A,C> src)
+                => new Implication(src.Antecedant, src.Consequent);
         }
 
         /// <summary>
@@ -51,6 +66,10 @@ namespace Z0
                 Antecedant = a;
                 Consequent = c;
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Implication<A,C>(Implication<I,A,C> src)
+                => new Implication<A,C>(src.Antecedant, src.Consequent);
         }
     }
 }

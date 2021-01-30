@@ -42,13 +42,13 @@ namespace Z0
         public T StartPos
         {
            [MethodImpl(Inline)]
-           get => Section.Min;
+           get => Section.StartPos;
         }
 
         public T EndPos
         {
             [MethodImpl(Inline)]
-            get => Section.Max;
+            get => Section.EndPos;
         }
     }
 }

@@ -11,14 +11,17 @@ namespace Z0
 
     partial struct Rules
     {
+        /// <summary>
+        /// Specifies that an element either occurs once or not at all
+        /// </summary>
         public readonly struct OneOrNone<T>
             where T : IEquatable<T>
         {
-            public T Value {get;}
+            public T Element {get;}
 
             [MethodImpl(Inline)]
             public OneOrNone(T src)
-                => Value = src;
+                => Element = src;
 
             public MultiplicityKind Multiplicity
                 => MultiplicityKind.ZeroOrOne;

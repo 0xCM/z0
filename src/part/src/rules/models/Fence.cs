@@ -64,7 +64,5 @@ namespace Z0
             public static implicit operator Fence(Fence<T> src)
                 => new Fence(src.Left, src.Right);
         }
-
-
     }
 }

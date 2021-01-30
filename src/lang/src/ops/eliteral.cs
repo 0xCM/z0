@@ -12,11 +12,11 @@ namespace Z0.Lang
     partial struct lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Literal<T> literal<T>(Identifier name, Constant<T> value)
-            => new Literal<T>(name, value);
+        public static EnumLiteral<T> eliteral<T>(uint index, Identifier name, Constant<T> value, TextBlock? desc = null)
+            => new EnumLiteral<T>(index, literal(name,value), desc ?? TextBlock.Empty);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Literal<T> literal<T>(Name name, T value)
-            => new Literal<T>(name, constant(value));
+        public static EnumLiteral<T> eliteral<T>(uint index, Name name, T value, TextBlock? desc = null)
+            => new EnumLiteral<T>(index, literal(name,value), desc ?? TextBlock.Empty);
     }
 }

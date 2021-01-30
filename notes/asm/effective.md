@@ -1,4 +1,4 @@
-# AsmTEffOpSize - Effective Operand and Address Size Attributes; Table 3-3 Intel Vol1
+# Effective Operand and Address Size Attributes; Table 3-3 Intel Vol1
 -------------------------------------------------------------------------------------------------------------------
 | D Flag in Code Segment Descriptor | 0  | 0  | 0  | 0  | 1  | 1  | 1  | 1  |
 | Operand-Size Prefix 66H           | N  | N  | Y  | Y  | N  | N  | Y  | Y  |

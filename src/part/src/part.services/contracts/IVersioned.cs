@@ -11,6 +11,6 @@ namespace Z0
     [Free]
     public interface IVersioned
     {
-        VersionExpresson Version => "*";
+        VersionExpr Version => "*";
     }
 }

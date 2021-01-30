@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    [ApiHost]
-    public readonly partial struct Rules
+    public interface IBitSection<T>
+        where T : unmanaged
     {
-        const NumericKind Closure = UnsignedInts;
+        T StartPos {get;}
 
+        T EndPos {get;}
     }
 }

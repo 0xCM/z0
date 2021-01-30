@@ -10,20 +10,19 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static TextRules;
-    using static AsmExpr;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {
         readonly TextDocFormat SourceFormat;
 
-        readonly Index<AsmCatalogImportRow> RowBuffer;
+        readonly Index<StokeAsmImportRow> RowBuffer;
 
         const uint MaxRowCount = 2500;
 
         public AsmCatalogEtl()
         {
             SourceFormat = TextDocFormat.Structured(Chars.Tab);
-            RowBuffer = alloc<AsmCatalogImportRow>(MaxRowCount);
+            RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
         }
 
         public uint ImportRowCount {get; private set;}
@@ -31,7 +30,7 @@ namespace Z0.Asm
         public Index<AsmMnemonicExpr> Mnemonics()
         {
             var mnemonics = root.hashset<AsmMnemonicExpr>();
-            var rows = ImportedRows();
+            var rows = ImportedStokeRows();
             var count = rows.Length;
             var parser = AsmSigParser.create(Wf);
             for(var i=0; i<count; i++)
@@ -44,15 +43,15 @@ namespace Z0.Asm
             return mnemonics.ToArray();
         }
 
-        public ReadOnlySpan<AsmCatalogImportRow> ImportedRows()
+        public ReadOnlySpan<StokeAsmImportRow> ImportedStokeRows()
         {
             if(ImportRowCount != 0)
                 return slice(RowBuffer.View,0, ImportRowCount);
             else
-                return ImportRows();
+                return ImportStokeRows();
         }
 
-        ReadOnlySpan<AsmCatalogImportRow> ImportRows()
+        ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
             if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
             {
@@ -69,13 +68,13 @@ namespace Z0.Asm
                     ref readonly var line = ref skip(lines,i);
                     if(foundheader)
                     {
-                        var row = default(AsmCatalogImportRow);
+                        var row = default(StokeAsmImportRow);
                         if(parse(line, ref row))
                             seek(dst,j++) = row;
                     }
                     else
                     {
-                        if(line.Content.Equals(AsmCatalogImportRow.SourceHeader))
+                        if(line.Content.Equals(SourceHeader))
                             foundheader = true;
                     }
                 }
@@ -83,19 +82,22 @@ namespace Z0.Asm
                 return slice(buffer,0, ImportRowCount);
             }
             else
-                return Index<AsmCatalogImportRow>.Empty;
+                return Index<StokeAsmImportRow>.Empty;
         }
 
-        public void Run()
+        FS.FolderName TargetFolder => FS.folder("asmcat");
+
+        public ReadOnlySpan<StokeAsmImportRow> TransformSource()
         {
-            var dst = Wf.Db().IndexTable<AsmCatalogImportRow>();
-            var flow = Wf.EmittingTable<AsmCatalogImportRow>(dst);
-            var imports = ImportedRows();
+            var dst = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
+            var flow = Wf.EmittingTable<StokeAsmImportRow>(dst);
+            var imports = ImportedStokeRows();
             var count = Records.emit(imports, dst, 42);
-            Wf.EmittedTable<AsmCatalogImportRow>(flow, count, dst);
+            Wf.EmittedTable<StokeAsmImportRow>(flow, count, dst);
+            return imports;
         }
 
-        bool parse(in TextLine src, ref AsmCatalogImportRow dst)
+        bool parse(in TextLine src, ref StokeAsmImportRow dst)
         {
             if(Parse.row(src, SourceFormat, out var row))
             {
@@ -103,7 +105,6 @@ namespace Z0.Asm
                 {
                     var cells = row.Cells.View;
                     var i = 0;
-                    dst.SourceLine = src.LineNumber;
                     dst.OpCode = skip(cells, i++);
                     dst.Instruction = skip(cells, i++);
                     dst.EncodingKind = skip(cells, i++);
@@ -125,5 +126,8 @@ namespace Z0.Asm
 
             return false;
         }
+
+
+        const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
     }
 }

@@ -12,38 +12,37 @@ namespace Z0
     partial struct Rules
     {
         /// <summary>
-        /// Specifies that the occurence of an element is distinguished by membership in a specified set
+        /// Specifies that the occurence of an element is distinguished by non-membership in a specified set
         /// </summary>
-        public readonly struct OneOf : IRule<OneOf>
+        public readonly struct NoneOf : IRule<NoneOf>
         {
             public Index<dynamic> Elements {get;}
 
             [MethodImpl(Inline)]
-            public OneOf(Index<dynamic> choices)
+            public NoneOf(Index<dynamic> choices)
                 => Elements = choices;
-
         }
 
         /// <summary>
-        /// Specifies that the occurence of an element is distinguished by membership in a specified set
+        /// Specifies that the occurence of an element is distinguished by non-membership in a specified set
         /// </summary>
-        public readonly struct OneOf<T> : IRule<OneOf<T>,T>
+        public readonly struct NoneOf<T> : IRule<NoneOf<T>,T>
         {
             public Index<T> Elements {get;}
 
             [MethodImpl(Inline)]
-            public OneOf(Index<T> choices)
+            public NoneOf(Index<T> choices)
             {
                 Elements = choices;
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator OneOf<T>(T[] src)
-                => new OneOf<T>(src);
+            public static implicit operator NoneOf<T>(T[] src)
+                => new NoneOf<T>(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator OneOf(OneOf<T> src)
-                => new OneOf(src.Elements.Select(x => (dynamic)x));
+            public static implicit operator NoneOf(NoneOf<T> src)
+                => new NoneOf(src.Elements.Select(x => (dynamic)x));
         }
     }
 }

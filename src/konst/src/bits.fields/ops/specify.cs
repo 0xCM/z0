@@ -14,7 +14,7 @@ namespace Z0
     partial struct BitFieldModels
     {
         [Op]
-        public static BitFieldModel specify(ReadOnlySpan<string> names, ReadOnlySpan<byte> widths)
+        public static BitFieldModel model(Name name, ReadOnlySpan<string> names, ReadOnlySpan<byte> widths)
         {
             Demands.insist(names.Length, widths.Length);
             var count = (uint)names.Length;
@@ -27,12 +27,12 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var w = ref skip(widths,i);
-                ref readonly var name = ref skip(names,i);
+                ref readonly var segname = ref skip(names,i);
                 seek(positions,i) = totalWidth;
-                seek(segments,i) = new BitFieldSegment(name, (totalWidth, totalWidth + w));
+                seek(segments,i) = new BitFieldSegment(segname, (totalWidth, totalWidth + w));
                 totalWidth += skip(fieldWidths, i);
             }
-            return new BitFieldModel(count, totalWidth, sBuffer);
+            return new BitFieldModel(name, count, totalWidth, sBuffer);
         }
 
         /// <summary>

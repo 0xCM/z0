@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -31,7 +30,6 @@ namespace Z0
         }
 
         public readonly struct Consequent<C> : IRule<Consequent<C>,C>
-            where C : IEquatable<C>
         {
             public TermId Id {get;}
 
@@ -43,10 +41,6 @@ namespace Z0
                 Id = id;
                 Term = src;
             }
-
-            [MethodImpl(Inline)]
-            public bool Equals(Consequent<C> src)
-                => equals(this, src);
 
             [MethodImpl(Inline)]
             public static implicit operator Consequent(Consequent<C> src)

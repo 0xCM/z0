@@ -98,6 +98,13 @@ namespace Z0
             => TableRoot() + FS.folder(subject);
 
         /// <summary>
+        /// Specifies a table subdirectory
+        /// </summary>
+        /// <param name="subject">The subject identifier</param>
+        FS.FolderPath TableDir(FS.FolderName subject)
+            => TableRoot() + subject;
+
+        /// <summary>
         /// Specifies a table root for a type-identified subject
         /// </summary>
         /// <param name="t">The identifying type</param>
@@ -125,6 +132,14 @@ namespace Z0
         FS.FilePath Table<T>(string name)
             where T : struct, IRecord<T>
                 => Table<T>(name, Csv);
+
+        FS.FilePath Table<T>()
+            where T : struct, IRecord<T>
+                => Table<T>(default(T).TableId.Format(), Csv);
+
+        FS.FilePath Table<T>(FS.FolderName subject)
+            where T : struct, IRecord<T>
+                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format(), Csv);
 
         FS.FilePath Table<T>(string name, FS.FileExt ext)
             where T : struct, IRecord<T>

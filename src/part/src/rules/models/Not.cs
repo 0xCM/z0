@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         public readonly struct Not : IRule<Not>
         {
-            public dynamic Subject {get;}
+            public dynamic Element {get;}
 
             [MethodImpl(Inline)]
             public Not(dynamic src)
-                => Subject = src;
+                => Element = src;
         }
 
         /// <summary>
@@ -28,11 +28,11 @@ namespace Z0
         /// </summary>
         public readonly struct Not<T> : IRule<Not<T>,T>
         {
-            public T Subject {get;}
+            public T Element {get;}
 
             [MethodImpl(Inline)]
             public Not(T src)
-                => Subject = src;
+                => Element = src;
 
             [MethodImpl(Inline)]
             public static implicit operator Not<T>(T src)
@@ -40,11 +40,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator Not<T>(Not src)
-                => new Not<T>(src.Subject);
+                => new Not<T>(src.Element);
 
             [MethodImpl(Inline)]
             public static implicit operator Not(Not<T> src)
-                => new Not(src.Subject);
+                => new Not(src.Element);
         }
     }
 }

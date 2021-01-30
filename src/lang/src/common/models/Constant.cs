@@ -9,6 +9,23 @@ namespace Z0.Lang
 
     using static Part;
 
+    public readonly struct Constant
+    {
+        public dynamic Value {get;}
+
+        public ConstantKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Constant(dynamic value, ConstantKind kind)
+        {
+            Value = value;
+            Kind = kind;
+        }
+    }
+
+    /// <summary>
+    /// Defines a compile-time literal value
+    /// </summary>
     public readonly struct Constant<T> : IConstant<T>
     {
         public T Value {get;}
@@ -27,5 +44,9 @@ namespace Z0.Lang
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Constant(Constant<T> src)
+            => new Constant(src.Value, src.Kind);
     }
 }

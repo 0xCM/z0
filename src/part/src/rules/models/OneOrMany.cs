@@ -11,37 +11,41 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct OneOrMany<T> : IRule<OneOrMany<T>,T>
-            where T : IEquatable<T>
+        /// <summary>
+        /// Specifies that an element occurs at least once
+        /// </summary>
+        public readonly struct OneOrMany : IRule<OneOrMany>
         {
-            public Index<T> Value {get;}
-
-            public bool IsOne
-            {
-                [MethodImpl(Inline)]
-                get => Value.Count == 1;
-            }
-
-            public bool IsMany
-            {
-                [MethodImpl(Inline)]
-                get => Value.Count > 1;
-            }
+            public dynamic Element {get;}
 
             [MethodImpl(Inline)]
-            public OneOrMany(T[] src)
-            {
-                root.require(src.Length > 0, () => "At least one there must be");
-                Value = src;
-            }
+            public OneOrMany(dynamic src)
+                => Element = src;
 
-            public MultiplicityKind Multiplicity
-                => MultiplicityKind.OneOrMany;
-
-            [MethodImpl(Inline)]
-            public static implicit operator OneOrMany<T>(T[] src)
-                => new OneOrMany<T>(src);
+            public static Marker<string> Indicator => "(1..*)";
         }
 
+        /// <summary>
+        /// Specifies that an element occurs at least once
+        /// (1..*)
+        /// </summary>
+        public readonly struct OneOrMany<T> : IRule<OneOrMany<T>,T>
+        {
+            public T Element {get;}
+
+            [MethodImpl(Inline)]
+            public OneOrMany(T src)
+                => Element = src;
+
+            [MethodImpl(Inline)]
+            public static implicit operator OneOrMany<T>(T src)
+                => new OneOrMany<T>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator OneOrMany(OneOrMany<T> src)
+                => new OneOrMany(src);
+
+            public static Marker<string> Indicator => OneOrMany.Indicator;
+        }
     }
 }

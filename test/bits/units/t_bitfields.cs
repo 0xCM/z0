@@ -276,7 +276,7 @@ namespace Z0
 
         public void bitfield_model()
         {
-            var m = BitFieldModels.specify(new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
+            var m = BitFieldModels.model("BitField1", new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
             Claim.eq((byte)0, m.Position(0));
             Claim.eq((byte)4, m.Position(1));
             Claim.eq((byte)12, m.Position(2));

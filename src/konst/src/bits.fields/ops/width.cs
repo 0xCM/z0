@@ -17,11 +17,26 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint width(in BitFieldSpec spec)
+        public static uint segwidth(in BitFieldSpec spec)
         {
             var total = 0u;
             var count = spec.FieldCount;
             var segments = spec.Segments;
+            for(byte i=0; i<count; i++)
+                total += skip(segments, i).Width;
+            return total;
+        }
+
+        /// <summary>
+        /// Computes the aggregate width of the segments that comprise the bitfield
+        /// </summary>
+        /// <param name="src">The bitfield spec</param>
+        [MethodImpl(Inline), Op]
+        public static uint segwidth(in BitFieldModel src)
+        {
+            var total = 0u;
+            var count = src.SegCount;
+            var segments = src.Segments;
             for(byte i=0; i<count; i++)
                 total += skip(segments, i).Width;
             return total;

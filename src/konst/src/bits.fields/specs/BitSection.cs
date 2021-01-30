@@ -11,26 +11,63 @@ namespace Z0
     using static BitSections;
 
     /// <summary>
-    /// Represents a closed interval of bits from an operand and corresponds to the notation [max:min]
+    /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
     /// </summary>
-    public readonly struct BitSection<T>
+    public readonly struct BitSection : IBitSection<uint>
+    {
+        /// <summary>
+        /// The index of the first bit in the section
+        /// </summary>
+        public uint StartPos {get;}
+
+        /// <summary>
+        /// The index of the last bit in the section
+        /// </summary>
+        public uint EndPos {get;}
+
+        [MethodImpl(Inline)]
+        public BitSection(uint min, uint max)
+        {
+            StartPos = min;
+            EndPos = max;
+        }
+
+        public uint Width
+        {
+            [MethodImpl(Inline)]
+            get => EndPos - StartPos;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSection((ushort min, ushort max) src)
+            => new BitSection(src.min, src.max);
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitSection(Pair<ushort> src)
+            => new BitSection(src.Left, src.Right);
+    }
+
+    /// <summary>
+    /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
+    /// </summary>
+    public readonly struct BitSection<T> : IBitSection<T>
         where T : unmanaged
     {
         /// <summary>
         /// The index of the first bit in the section
         /// </summary>
-        public T Min {get;}
+        public T StartPos {get;}
 
         /// <summary>
         /// The index of the last bit in the section
         /// </summary>
-        public T Max {get;}
+        public T EndPos {get;}
 
         [MethodImpl(Inline)]
         public BitSection(T min, T max)
         {
-            Min = min;
-            Max = max;
+            StartPos = min;
+            EndPos = max;
         }
 
         public uint Width

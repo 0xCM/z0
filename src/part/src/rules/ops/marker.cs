@@ -12,7 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Marker<T> marker<T>(Index<T> symbols)
-            => new Marker<T>(symbols);
+        public static Marker<T> marker<T>(T src)
+            => new Marker<T>(src);
     }
 }

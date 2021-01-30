@@ -10,20 +10,40 @@ namespace Z0.Lang
     using static Part;
 
     /// <summary>
-    /// Represents a named, compile-time literal
+    /// Defines a literal value which, by definition, is a named constant
     /// </summary>
-    public readonly struct Literal<T>
-        where T : IComparable<T>
+    public readonly struct Literal
     {
-        public Identifier Identifier {get;}
+        public Identifier Name {get;}
 
-        public T Value {get;}
+        public Constant Value {get;}
 
         [MethodImpl(Inline)]
-        public Literal(Identifier id, T value)
+        public Literal(Identifier id, Constant value)
         {
-            Identifier = id;
+            Name = id;
             Value = value;
         }
+    }
+
+    /// <summary>
+    /// Defines a literal value which, by definition, is a named constant
+    /// </summary>
+    public readonly struct Literal<T>
+    {
+        public Identifier Name {get;}
+
+        public Constant<T> Value {get;}
+
+        [MethodImpl(Inline)]
+        public Literal(Identifier id, Constant<T> value)
+        {
+            Name = id;
+            Value = value;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Literal(Literal<T> src)
+            => new Literal(src.Name, src.Value);
     }
 }

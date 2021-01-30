@@ -386,28 +386,28 @@ namespace Z0
             }
         }
 
-        void LoadImportRows()
-        {
-            var etl = AsmCatalogEtl.create(Wf);
-            var rows = etl.ImportedRows();
-            var count = rows.Length;
-            var formatter = Records.formatter<AsmCatalogImportRow>();
-            var parser = AsmSigParser.create(Wf);
-            var mnemonics = root.hashset<AsmMnemonicExpr>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var row = ref skip(rows,i);
+        // void LoadImportRows()
+        // {
+        //     var etl = AsmCatalogEtl.create(Wf);
+        //     var rows = etl.ImportedRows();
+        //     var count = rows.Length;
+        //     var formatter = Records.formatter<AsmCatalogImportRow>();
+        //     var parser = AsmSigParser.create(Wf);
+        //     var mnemonics = root.hashset<AsmMnemonicExpr>();
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var row = ref skip(rows,i);
 
-                var sigex = AsmExpr.sig(row.Instruction);
-                if(parser.ParseMnemonic(sigex, out var mnemonic))
-                    mnemonics.Add(mnemonic);
+        //         var sigex = AsmExpr.sig(row.Instruction);
+        //         if(parser.ParseMnemonic(sigex, out var mnemonic))
+        //             mnemonics.Add(mnemonic);
 
-            }
+        //     }
 
-            var terms = root.terms(mnemonics.OrderBy(x => x.Content).Index().View);
+        //     var terms = root.terms(mnemonics.OrderBy(x => x.Content).Index().View);
 
-            root.iter(terms, r => Wf.Row(r));
-        }
+        //     root.iter(terms, r => Wf.Row(r));
+        // }
 
         public void Run()
         {
@@ -416,7 +416,7 @@ namespace Z0
             //Wf.CmdBuilder().JitApiCmd().Run(Wf);
 
             var etl = AsmCatalogEtl.create(Wf);
-            etl.Run();
+            var records = etl.TransformSource();
             var monic = etl.Mnemonics();
             var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
             root.iter(terms, r => Wf.Row(r));

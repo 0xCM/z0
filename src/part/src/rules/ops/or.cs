@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct Rules
+    partial struct Rules
     {
-        const NumericKind Closure = UnsignedInts;
-
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Or<T> or<T>(params T[] src)
+            => new Or<T>(src);
     }
 }

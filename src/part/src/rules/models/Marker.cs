@@ -13,22 +13,28 @@ namespace Z0
     {
         public readonly struct Marker : IRule<Marker>
         {
-            public Index<dynamic> Symbols {get;}
+            public dynamic Element {get;}
 
             [MethodImpl(Inline)]
-            public Marker(Index<dynamic> symbols)
+            public Marker(dynamic src)
             {
-                Symbols = symbols;
+                Element = src;
             }
         }
 
         public readonly struct Marker<T> : IRule<Marker<T>,T>
         {
-            public Index<T> Symbols {get;}
+            public T Element{get;}
 
             [MethodImpl(Inline)]
-            public Marker(Index<T> symbols)
-                => Symbols = symbols;
+            public Marker(T src)
+                => Element = src;
+
+            public static implicit operator Marker(Marker<T> src)
+                => new Marker(src.Element);
+
+            public static implicit operator Marker<T>(T src)
+                => new Marker<T>(src);
         }
     }
 }
