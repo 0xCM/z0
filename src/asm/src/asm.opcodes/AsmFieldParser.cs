@@ -79,7 +79,7 @@ namespace Z0.Asm
         public T Numeric<T>(string src, out T result, T @default = default)
             where T : unmanaged
         {
-            var parser = NumericParser.create<T>();
+            var parser = Z0.Numeric.parser<T>();
             result = parser.Parse(src).ValueOrDefault(@default);
             return result;
         }

@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct LiteralIndex<F>
         where F : unmanaged
@@ -42,7 +41,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Index(in F f)
-            => Scalars.scalar(f, out uint _ );
+            => Numeric.scalar(f, out uint _ );
 
         [MethodImpl(Inline)]
         public F Literal(uint index)

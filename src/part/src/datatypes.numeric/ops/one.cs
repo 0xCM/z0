@@ -2,19 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public struct AsmCatalogEntry
+    using static Part;
+
+    partial struct Numeric
     {
-        public Sequential Sequence;
-
-        public Name Identifier;
-
-        public AsmOpCodeExprLegacy OpCode;
-
-        public AsmSigExpr Sig;
-
-    }
+        [MethodImpl(Inline)]
+        public static T one<T>()
+            where T : unmanaged
+                => force<T>(1);
+   }
 }

@@ -104,6 +104,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op, AsmSpec("REX.W + 0F B7 / r","MOVZX r64, m16")]
         public AsmStatement<r64,m16> movzx(r64 dst, m16 src)
             => asm.statement(M.movzx, args(dst,src));
-
     }
 }

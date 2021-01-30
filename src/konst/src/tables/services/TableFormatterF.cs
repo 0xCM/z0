@@ -30,11 +30,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ushort width(F field)
-            => Scalars.scalar<F,ushort>(field);
+            => Numeric.scalar<F,ushort>(field);
 
         [MethodImpl(Inline)]
         static ushort width(FieldInfo field)
-            =>  Scalars.scalar<F,ushort>((F)field.GetRawConstantValue());
+            =>  Numeric.scalar<F,ushort>((F)field.GetRawConstantValue());
 
         public void EmitEol()
             => Target.Append(Eol);

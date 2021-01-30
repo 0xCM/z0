@@ -37,7 +37,7 @@ namespace Z0
             if(fields.Length != FieldCount)
                 return EmptyBlock;
 
-            var parser = NumericParser.create<int>();
+            var parser = Numeric.parser<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();
             var address = z.address(HexParsers.scalar().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();

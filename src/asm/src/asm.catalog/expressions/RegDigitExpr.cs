@@ -9,16 +9,16 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmMnemonicExpr : ITextExpr<AsmMnemonicExpr>
+    public readonly struct RegDigitExpr : ITextExpr<RegDigitExpr>
     {
-        public asci32 Content {get;}
+        public asci2 Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmMnemonicExpr(asci32 name)
-            => Content = name;
+        public RegDigitExpr(string src)
+            => Content = src;
 
         [MethodImpl(Inline)]
-        public AsmMnemonicExpr(string src)
+        public RegDigitExpr(in asci2 src)
             => Content = src;
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmMnemonicExpr src)
+        public bool Equals(RegDigitExpr src)
             => src.Content.Equals(Content);
 
         public override bool Equals(object src)
-            => src is AsmMnemonicExpr x && Equals(x);
+            => src is RegDigitExpr x && Equals(x);
 
         public override int GetHashCode()
             => Content.GetHashCode();
@@ -78,17 +78,18 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmMnemonicExpr(string name)
-            => new AsmMnemonicExpr(name);
+        public static implicit operator TextBlock(RegDigitExpr src)
+            => new TextBlock(src.Text);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmMnemonicExpr(asci32 src)
-            => new AsmMnemonicExpr(src);
+        public static implicit operator RegDigitExpr(string src)
+            => new RegDigitExpr(src);
 
-        public static AsmMnemonicExpr Empty
-        {
-            [MethodImpl(Inline)]
-            get => new AsmMnemonicExpr(asci32.Null);
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator RegDigitExpr(asci2 src)
+            => new RegDigitExpr(src);
+
+        public static RegDigitExpr Empty
+            => new RegDigitExpr(asci2.Null);
     }
 }

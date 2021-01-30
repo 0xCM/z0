@@ -125,7 +125,7 @@ namespace Z0.Logix
                 Claim.nea(y2);
 
                 var y3 = S.equals(x,y);
-                Claim.eq(NumericLiterals.zero<T>(),y3);
+                Claim.eq(Numeric.zero<T>(),y3);
 
             }
         }

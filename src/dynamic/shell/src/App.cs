@@ -11,6 +11,7 @@ namespace Z0
 
     using Z0.Tools;
     using Z0.Asm;
+    using static Asm.AsmExpr;
 
     using static z;
     using static Tools.Llvm;

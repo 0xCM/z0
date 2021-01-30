@@ -7,6 +7,8 @@ namespace Z0.Asm
     using System;
 
     using static Part;
+    using static AsmExpr;
+
     [ApiHost]
     public sealed partial class AsmSigParser : WfService<AsmSigParser, AsmSigParser>
     {
@@ -18,13 +20,12 @@ namespace Z0.Asm
             return false;
         }
 
-
         /// <summary>
-        /// Determines whether a <see cref='AsmSigOperandExpr'/> is a composite expression delimited by the <see cref='Chars.FSlash'/> character
+        /// Determines whether a <see cref='SigOperandExpr'/> is a composite expression delimited by the <see cref='Chars.FSlash'/> character
         /// </summary>
         /// <param name="src"></param>
         [Op]
-        public bool IsComposite(AsmSigOperandExpr src)
+        public bool IsComposite(SigOperandExpr src)
         {
 
             return src.Content.Contains(AsciChar.FS);

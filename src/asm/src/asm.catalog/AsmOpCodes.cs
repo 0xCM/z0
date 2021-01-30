@@ -13,7 +13,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
-
+        [MethodImpl(Inline), Op]
+        public static OpCodeRegDigit digit(uint3 src)
+            => new OpCodeRegDigit(src);
 
     }
 }

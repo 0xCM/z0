@@ -8,6 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmExpr;
+
 
     public readonly struct AsmStatement : IEquatable<AsmStatement>
     {

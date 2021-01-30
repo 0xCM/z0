@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static AsmExpr;
+
     public readonly struct AsmMnemonics
     {
         public static AsmMnemonicExpr cmp => nameof(cmp);

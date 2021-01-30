@@ -10,23 +10,20 @@ namespace Z0.Asm
     using static Part;
 
     [ApiHost]
-    public readonly struct AsmExpr
+    public readonly partial struct AsmExpr
     {
-        [MethodImpl(Inline), Op]
-        public static AsmInstructionSpecExpr instruction(in AsmOpCodeExpr opcode, in AsmSigExpr sig)
-            => new AsmInstructionSpecExpr(opcode, sig);
 
         [MethodImpl(Inline), Op]
         public static AsmMnemonicExpr mnemonic(asci32 src)
             => new AsmMnemonicExpr(src);
 
         /// <summary>
-        /// Defines a <see cref='AsmSigOperandExpr'/>
+        /// Defines a <see cref='SigOperandExpr'/>
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOperandExpr sigop(asci16 src)
-            => new AsmSigOperandExpr(src);
+        public static SigOperandExpr sigop(asci16 src)
+            => new SigOperandExpr(src);
 
         /// <summary>
         /// Defines a <see cref='AsmOpCodeExpr'/>

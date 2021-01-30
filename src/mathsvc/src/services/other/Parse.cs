@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public readonly T Invoke(string a)
-                => NumericParser.create<T>().Parse(a).ValueOrDefault();
+                => Numeric.parser<T>().Parse(a).ValueOrDefault();
         }
     }
 }

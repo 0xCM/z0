@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-        
-    public readonly struct Divisors<T> 
+
+    public readonly struct Divisors<T>
         where T : unmanaged
-    {            
-        static T One => NumericLiterals.one<T>();
+    {
+        static T One => Numeric.one<T>();
 
         [MethodImpl(Inline)]
         public T[] divisors(T src)
             => Divisors.Compute(src);
-    
+
         /// <summary>
         /// Computes the divisors for each number in a specified interval
         /// </summary>
@@ -72,7 +72,7 @@ namespace Z0
                 {
                     yield return current;
                     current = gmath.inc(current);
-                }                
+                }
             }
             else
             {
@@ -80,9 +80,9 @@ namespace Z0
                 {
                     yield return current;
                     current = gmath.dec(current);
-                    
+
                 }
             }
-        }        
-    } 
+        }
+    }
 }

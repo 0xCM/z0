@@ -49,17 +49,17 @@ namespace Z0.Asm
 
         // }
 
-        void emit(ReadOnlySpan<AsmMnemonicExpr> src)
-        {
-            var dstPath = CasePath($"Mnemonics");
-            using var writer = dstPath.Writer();
-            writer.WriteLine("Mnemonic");
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
-            }
-        }
+        // void emit(ReadOnlySpan<AsmMnemonicExpr> src)
+        // {
+        //     var dstPath = CasePath($"Mnemonics");
+        //     using var writer = dstPath.Writer();
+        //     writer.WriteLine("Mnemonic");
+        //     for(var i=0; i<src.Length; i++)
+        //     {
+        //         ref readonly var id = ref skip(src,i);
+        //         writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
+        //     }
+        // }
 
 
         public void check_opcode_records()

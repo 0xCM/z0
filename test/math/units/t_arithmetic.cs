@@ -351,7 +351,7 @@ namespace Z0
         protected void signum_check<T>(T t = default)
             where T : unmanaged
         {
-            var zero = NumericLiterals.zero<T>();
+            var zero = Numeric.zero<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

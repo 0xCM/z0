@@ -32,7 +32,6 @@ namespace Z0.Asm
 
         }
 
-
         public AsmDoc(Index<DocLine> content)
             : base(FileLocation.Empty, content)
         {

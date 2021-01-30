@@ -32,8 +32,8 @@ namespace Z0
                 var parts = Parse.split(fenced, SectionDelimiter);
                 if(parts.Count == 2)
                 {
-                    if(NumericParser.parse(parts[0], out T max)
-                        && NumericParser.parse(parts[1], out T min))
+                    if(Numeric.parse(parts[0], out T max)
+                        && Numeric.parse(parts[1], out T min))
                     {
                         dst = BitFieldModels.section<T>(min, max);
                         return true;

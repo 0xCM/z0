@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static TextRules;
+    using static AsmExpr;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {

@@ -8,10 +8,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Part;
 
     partial class BitVector
-    {   
+    {
         /// <summary>
         /// Returns a generic vector with all bits enabled
         /// </summary>
@@ -19,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector<T> ones<T>()
             where T : unmanaged
-                => NumericLiterals.ones<T>();           
+                => Numeric.ones<T>();
     }
 }

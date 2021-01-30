@@ -9,16 +9,19 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmSigOperandExpr : ITextExpr<AsmSigOperandExpr>
+    /// <summary>
+    /// Represents an operand in the context of a <see cref='AsmSigExpr'/>
+    /// </summary>
+    public readonly struct SigOperandExpr : ITextExpr<SigOperandExpr>
     {
         public readonly asci16 Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperandExpr(string src)
+        public SigOperandExpr(string src)
             => Content = src;
 
         [MethodImpl(Inline)]
-        public AsmSigOperandExpr(in asci16 src)
+        public SigOperandExpr(in asci16 src)
             => Content = src;
 
         /// <summary>
@@ -61,11 +64,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmSigOperandExpr src)
-             => src.Content.Equals(Content);
+        public bool Equals(SigOperandExpr src)
+            => src.Content.Equals(Content);
 
         public override bool Equals(object src)
-            => src is AsmSigOperandExpr x && Equals(x);
+            => src is SigOperandExpr x && Equals(x);
 
         public override int GetHashCode()
             => Content.GetHashCode();
@@ -78,14 +81,14 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSigOperandExpr(string src)
-            => new AsmSigOperandExpr(src);
+        public static implicit operator SigOperandExpr(string src)
+            => new SigOperandExpr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSigOperandExpr(asci16 src)
-            => new AsmSigOperandExpr(src);
+        public static implicit operator SigOperandExpr(asci16 src)
+            => new SigOperandExpr(src);
 
-        public static AsmSigOperandExpr Empty
-            => new AsmSigOperandExpr(EmptyString);
+        public static SigOperandExpr Empty
+            => new SigOperandExpr(EmptyString);
     }
 }

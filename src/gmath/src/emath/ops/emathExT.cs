@@ -5,23 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly partial struct emath
     {
         [MethodImpl(Inline)]
-        public static uint sll<E>(bit x, E offset)
+        public static uint sll<E>(bit src, E offset)
             where E : unmanaged, Enum
-                => gmath.sll((uint)x, memory.@as<E,byte>(offset));
+                => gmath.sll((uint)src, memory.@as<E,byte>(offset));
 
         [MethodImpl(Inline)]
-        public static T sll<T,E>(T x, E offset)
+        public static T sll<T,E>(T src, E offset)
             where T : unmanaged
             where E : unmanaged, Enum
-                => gmath.sll(x, EnumValue.scalar<E,byte>(offset));
+                => gmath.sll(src, EnumValue.scalar<E,byte>(offset));
 
         [MethodImpl(Inline)]
         public static @enum<E,T> add<E,T>(@enum<E,T> a, @enum<E,T> b)

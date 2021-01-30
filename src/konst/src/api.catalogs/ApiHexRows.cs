@@ -123,10 +123,10 @@ namespace Z0
 
                 var dst = new ApiHexRow();
                 var index = 0;
-                dst.Seq = NumericParser.succeed<int>(fields[index++]);
-                dst.SourceSeq = NumericParser.succeed<int>(fields[index++]);
+                dst.Seq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+                dst.SourceSeq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
                 dst.Address = MemoryAddressParser.succeed(fields[index++]);
-                dst.Length = NumericParser.succeed<int>(fields[index++]);
+                dst.Length = Numeric.parse<int>(fields[index++]).ValueOrDefault();
                 dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
                 dst.Uri = ApiUri.parse(fields[index++]).Require();
                 dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));

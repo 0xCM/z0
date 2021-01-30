@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
 
     /// <summary>
-    /// Generated from a <see cref='AsmMnemonicExpr'/>
+    /// Generated from a mnemonic expression
     /// </summary>
     public enum AsmMnemonicClass : ushort
     {

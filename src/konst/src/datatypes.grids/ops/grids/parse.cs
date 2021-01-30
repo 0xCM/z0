@@ -15,7 +15,7 @@ namespace Z0
         public static bool Parse(string s, out GridDim dst)
         {
             var parts = s.Split('x');
-            var parser = NumericParser.create<uint>();
+            var parser = Numeric.parser<uint>();
             dst = default;
             var succeeded = false;
             if(parts.Length == 2)

@@ -10,11 +10,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.Scalars, true)]
-    public readonly struct Scalars
+    partial struct Numeric
     {
-        const NumericKind Closure = UnsignedInts;
-
         /// <summary>
         /// Interprets a scalar value of one sort as a scalar value of another
         /// </summary>
