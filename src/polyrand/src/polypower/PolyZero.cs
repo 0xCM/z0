@@ -10,7 +10,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericLiterals;
 
     public static class PolyZero
     {
@@ -54,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T NonZ<T>(this IDomainSource src, T max)
             where T : unmanaged
-                => src.NonZStream<T>((minval<T>(),max)).First();
+                => src.NonZStream<T>((Numeric.minval<T>(),max)).First();
 
         /// <summary>
         /// Queries the source for the next nonzero value
@@ -64,6 +63,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T NonZ<T>(this IDomainSource src)
             where T : unmanaged
-                => src.NonZStream<T>((minval<T>(), maxval<T>())).First();
+                => src.NonZStream<T>((Numeric.minval<T>(), Numeric.maxval<T>())).First();
     }
 }

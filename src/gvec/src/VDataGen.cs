@@ -72,7 +72,7 @@ namespace Z0
             var data = SpanBlocks.alloc<T>(n);
             var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.First;
-            for(var i=0; i < len; i++)
+            for(var i=0; i<len; i++)
             {
                 seek(mem, i) = current;
                 current = gmath.dec(current);
@@ -275,7 +275,7 @@ namespace Z0
             where T : unmanaged
         {
             var mask = SpanBlocks.cellalloc<T>(n256,1);
-            var chop = NumericLiterals.maxval<T>();
+            var chop = Numeric.maxval<T>();
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;
@@ -284,7 +284,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i] = chop;
                 else
-                    mask[i] = force<byte,T>(i);
+                    mask[i] = Numeric.force<byte,T>(i);
             }
 
             //For the second 128-bit lane
@@ -293,7 +293,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i + half] = chop;
                 else
-                    mask[i + half] = force<byte,T>(i);
+                    mask[i + half] = Numeric.force<byte,T>(i);
             }
 
             return mask;

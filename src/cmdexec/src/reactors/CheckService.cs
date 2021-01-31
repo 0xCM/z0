@@ -17,7 +17,6 @@ namespace Z0
             return Cmd.ok(cmd);
         }
 
-
         void CheckBitMasks()
         {
             var asmWf = AsmWorkflows.create(Wf);

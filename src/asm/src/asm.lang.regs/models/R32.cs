@@ -27,5 +27,9 @@ namespace Z0.Asm
 
         public RegClass Class
             => RegClass.GP;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(R32 src)
+            => src.Content;
     }
 }

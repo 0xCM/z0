@@ -30,5 +30,9 @@ namespace Z0.Asm
 
         public RegClass Class
             => RegClass.XMM;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(Xmm src)
+            => src.Content;
     }
 }

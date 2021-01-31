@@ -13,12 +13,6 @@ namespace Z0.Asm
     {
         public AsmFormatConfig Config {get;}
 
-        public static IAsmFormatter Default
-        {
-            [MethodImpl(Inline)]
-            get => new AsmFormatter(null);
-        }
-
         [MethodImpl(Inline)]
         public AsmFormatter(AsmFormatConfig? config)
             => Config = config ?? AsmFormatConfig.Default;

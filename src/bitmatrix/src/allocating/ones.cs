@@ -72,7 +72,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix.init(NumericLiterals.maxval<T>(),m,n);
+                => BitMatrix.init(Numeric.maxval<T>(),m,n);
 
         /// <summary>
         /// Allocates a 1-filled bitmatrix of natural order
@@ -84,6 +84,6 @@ namespace Z0
         public static BitMatrix<N,T> ones<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix.init(NumericLiterals.maxval<T>(),n);
+                => BitMatrix.init(Numeric.maxval<T>(),n);
     }
 }

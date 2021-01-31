@@ -49,7 +49,7 @@ namespace Z0
         public static ref readonly BitGrid<T> ones<T>(in BitGrid<T> dst)
             where T : unmanaged
         {
-            broadcast(maxval<T>(), dst);
+            broadcast(Numeric.maxval<T>(), dst);
             return ref dst;
         }
 
@@ -144,7 +144,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
         {
-            broadcast(maxval<T>(), dst);
+            broadcast(Numeric.maxval<T>(), dst);
             return ref dst;
         }
 

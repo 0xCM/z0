@@ -53,7 +53,7 @@ namespace Z0.Mkl
         public static IRngSampler<T> UniformSampler<T>(this MklRng rng, UniformSpec<T>? spec = null)
             where T : unmanaged
         {
-            var _spec = spec ?? Distributions.uniform<T>(minval<T>(), maxval<T>());
+            var _spec = spec ?? Distributions.uniform<T>(Numeric.minval<T>(), Numeric.maxval<T>());
             var sampler = default(IRngSampler<T>);
             if(typeof(T) == typeof(int))
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as IRngSampler<T>;
@@ -62,7 +62,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sampler = samplers.uniform(rng, _spec.ToFloat64()) as IRngSampler<T>;
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
             return sampler;
         }
 

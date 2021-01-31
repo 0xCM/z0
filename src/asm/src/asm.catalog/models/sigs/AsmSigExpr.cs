@@ -117,13 +117,13 @@ namespace Z0.Asm
         public static implicit operator TextBlock(AsmSigExpr src)
             => new TextBlock(src.Content.Format());
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmSigExpr(string src)
-            => new AsmSigExpr(src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator AsmSigExpr(string src)
+        //     => new AsmSigExpr(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmSigExpr(asci64 src)
-            => new AsmSigExpr(src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator AsmSigExpr(asci64 src)
+        //     => new AsmSigExpr(src);
 
         public static AsmSigExpr Empty
             => new AsmSigExpr(EmptyString);

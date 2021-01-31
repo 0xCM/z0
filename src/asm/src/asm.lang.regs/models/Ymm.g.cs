@@ -16,11 +16,13 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Ymm(Cell256 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public RegisterKind Kind
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Ymm(Ymm<R> src)
+            => new Ymm(src.Content, src.Kind);
     }
 }

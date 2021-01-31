@@ -16,11 +16,12 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Zmm(Cell512 value)
-        {
-            Content = value;
-        }
-
+            => Content = value;
         public RegisterKind Kind
             => default(R).Kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Zmm(Zmm<R> src)
+            => new Zmm(src.Content, src.Kind);
     }
 }

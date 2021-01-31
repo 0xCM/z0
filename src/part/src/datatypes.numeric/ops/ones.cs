@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericLiterals;
 
     partial struct Numeric
     {
@@ -65,5 +64,21 @@ namespace Z0
             else
                  throw no<T>();
        }
+
+        const byte Ones8u = byte.MaxValue;
+
+        const sbyte Ones8i = -1;
+
+        const ushort Ones16u = ushort.MaxValue;
+
+        const short Ones16i = -1;
+
+        const uint Ones32u = uint.MaxValue;
+
+        const int Ones32i = -1;
+
+        const ulong Ones64u = ulong.MaxValue;
+
+        const long Ones64i = -1;
     }
 }

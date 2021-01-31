@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @true<T>()
             where T : unmanaged
-                => z.maxval<T>();
+                => Numeric.maxval<T>();
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on

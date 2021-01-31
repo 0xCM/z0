@@ -16,34 +16,25 @@ namespace Z0.Asm
     {
         public asci32 Value {get;}
 
+        public static AsmOpCodeExprLegacy create(string src)
+            => new AsmOpCodeExprLegacy(src.Replace("o32 ", EmptyString));
+
+        public static AsmOpCodeExprLegacy create(asci32 src)
+            => new AsmOpCodeExprLegacy(src);
+
         [MethodImpl(Inline)]
-        public AsmOpCodeExprLegacy(string src)
+        AsmOpCodeExprLegacy(string src)
             => Value = src.Replace("o32 ", EmptyString);
 
         [MethodImpl(Inline)]
-        public AsmOpCodeExprLegacy(asci32 src)
-            => Value = src.Replace("o32 ", EmptyString);
+        AsmOpCodeExprLegacy(asci32 src)
+            => Value = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Value.IsEmpty;
         }
-
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.bytes(Value);
-        }
-
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.decode(Value);
-        }
-
-        public AsmOpCodeExprLegacy Zero
-            => Empty;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -62,16 +53,9 @@ namespace Z0.Asm
         public override bool Equals(object src)
             => src is AsmOpCodeExprLegacy id && Equals(id);
 
-        public static AsmOpCodeExprLegacy Empty
-            => new AsmOpCodeExprLegacy(EmptyString);
-
         [MethodImpl(Inline)]
         public static implicit operator string(AsmOpCodeExprLegacy src)
             => src.Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeExprLegacy(asci32 src)
-            => new AsmOpCodeExprLegacy(src);
 
         [MethodImpl(Inline)]
         public static implicit operator asci32(AsmOpCodeExprLegacy src)

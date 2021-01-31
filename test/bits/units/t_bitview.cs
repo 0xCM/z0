@@ -25,7 +25,7 @@ namespace Z0
         void bitview_check<T>(T t = default)
             where T : unmanaged
         {
-            var src = maxval<T>();
+            var src = Numeric.maxval<T>();
             var view = Bit.editor(src);
             var bytecount = size<T>();
 

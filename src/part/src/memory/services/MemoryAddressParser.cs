@@ -18,9 +18,6 @@ namespace Z0
         public static MemoryAddress succeed(string src)
             => parse(src).ValueOrDefault();
 
-        public static MemoryAddressParser Service
-            => default(MemoryAddressParser);
-
         public ParseResult<MemoryAddress> Parse(string src)
             => HexNumericParser.parse(src).TryMap(x => memory.address(x));
 

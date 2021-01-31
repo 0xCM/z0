@@ -29,8 +29,8 @@ namespace Z0
         public void sb_bit_parse()
         {
             //parse
-            Claim.eq(Off, bit.Parse('0'));
-            Claim.eq(On, bit.Parse('1'));
+            Claim.eq(Off, bit.parse('0'));
+            Claim.eq(On, bit.parse('1'));
         }
 
         public void sb_bit_not()

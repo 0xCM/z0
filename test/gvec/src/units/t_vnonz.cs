@@ -45,8 +45,8 @@ namespace Z0
             where T : unmanaged
         {
             var min = one(t);
-            var max = maxval(t);
-            var domain = Interval.closed(one(t), maxval(t));
+            var max = Numeric.maxval(t);
+            var domain = Interval.closed(one(t), Numeric.maxval(t));
             var f = VSvc.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
@@ -59,8 +59,8 @@ namespace Z0
             where T : unmanaged
         {
             var min = one(t);
-            var max = maxval(t);
-            var domain = Interval.closed(one(t), maxval(t));
+            var max = Numeric.maxval(t);
+            var domain = Interval.closed(one(t), Numeric.maxval(t));
             var f = VSvc.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));

@@ -161,7 +161,7 @@ namespace Z0
         public void Fill(bit state)
         {
             if(state)
-                data.Fill(NumericLiterals.maxval<T>());
+                data.Fill(Numeric.maxval<T>());
             else
                 data.Clear();
         }

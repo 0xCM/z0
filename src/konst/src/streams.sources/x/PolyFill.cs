@@ -68,7 +68,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static void Fill<T>(this IDomainSource source, Span<T> dst)
             where T : unmanaged
-                => source.Fill(ClosedInterval<T>.Full, dst.Length, ref z.first(dst));
+                => source.Fill(ClosedInterval<T>.Full, dst.Length, ref memory.first(dst));
+
 
         /// <summary>
         /// Fills a caller-allocated span with random values
@@ -84,6 +85,7 @@ namespace Z0
             source.Fill((min,max), dst.Length, ref first(dst), filter);
             return dst;
         }
+
 
         /// <summary>
         /// Fills a caller-allocated span with random values
@@ -277,5 +279,30 @@ namespace Z0
         public static void Fill<T>(this IDomainSource src,T min, T max, in SpanBlock512<T> dst)
             where T : unmanaged
                 => src.Fill(min,max,dst.Storage);
+
+        /// <summary>
+        /// Fills a caller-allocated buffer with random values
+        /// </summary>
+        /// <param name="source">The data source</param>
+        /// <param name="dst">The target span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static void Fill<T>(this IDomainSource source, Index<T> dst)
+            where T : unmanaged
+                => source.Fill(ClosedInterval<T>.Full, dst.Length, ref dst.First);
+
+        /// <summary>
+        /// Fills a caller-allocated span with random values
+        /// </summary>
+        /// <param name="source">The data source</param>
+        /// <param name="dst">The target span</param>
+        /// <param name="min">The inclusive lower bound</param>
+        /// <param name="max">The exclusive upper bound</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        public static Index<T> Fill<T>(this IDomainSource source, T min, T max, Index<T> dst, Func<T,bool> filter = null)
+            where T : unmanaged
+        {
+            source.Fill((min,max), dst.Length, ref dst.First, filter);
+            return dst;
+        }
     }
 }

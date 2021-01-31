@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-
     using Z0.Asm;
 
-    using static z;
+    using static memory;
+    using static Asm.AsmOpCodesLegacy;
 
     sealed class EmitAsmOpCodes : CmdReactor<EmitAsmOpCodesCmd,FS.FilePath>
     {
@@ -18,10 +18,10 @@ namespace Z0
         [Op]
         static FS.FilePath react(IWfShell wf, EmitAsmOpCodesCmd cmd)
         {
-            var data = AsmOpCodesLegacy.dataset().Entries;
+            var data = dataset().Entries;
             var count = data.Count;
             var view = data.View;
-            var formatter = AsmOpCodesLegacy.formatter<AsmOpCodeField>();
+            var formatter = formatter<AsmOpCodeField>();
             var rowbuffer = alloc<AsmOpCodeRowLegacy>(count);
             var rows = span(rowbuffer);
             using var dst = cmd.Target.Writer();
@@ -32,10 +32,11 @@ namespace Z0
                 ref readonly var record = ref skip(view,i);
                 seek(rows,i) = record;
 
-                AsmOpCodesLegacy.format(record, formatter);
+                format(record, formatter);
                 dst.WriteLine(formatter.Render());
             }
-            return  cmd.Target;
+
+            return cmd.Target;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static T promote<T>(bit src)
             where T : unmanaged
-                => src ? NumericLiterals.maxval<T>() : default;
+                => src ? Numeric.maxval<T>() : default;
 
         /// <summary>
         /// Wraps a bitview around a generic reference

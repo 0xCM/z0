@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericLiterals;
 
     using K = IntervalKind;
 
@@ -47,22 +46,22 @@ namespace Z0
         /// Defines a closed interval that subsumes all points representable by the primal type
         /// </summary>
         public static Interval<T> Full
-            => new Interval<T>(minval<T>(), maxval<T>(), K.Closed);
+            => new Interval<T>(Numeric.minval<T>(), Numeric.maxval<T>(), K.Closed);
 
         /// <summary>
         /// Defines an open interval that subsumes all points representable by the primal type and all points represented
         /// by increasing the size of the primal type without altering other characteristics
         /// </summary>
         public static Interval<T> Unbound
-            => new Interval<T>(minval<T>(), maxval<T>(), K.Open);
+            => new Interval<T>(Numeric.minval<T>(), Numeric.maxval<T>(), K.Open);
 
         [MethodImpl(Inline)]
         public static Interval<T> LeftUnbound(T right)
-            => new Interval<T>(minval<T>(), right, K.LeftOpen);
+            => new Interval<T>(Numeric.minval<T>(), right, K.LeftOpen);
 
         [MethodImpl(Inline)]
         public static Interval<T> RightUnbound(T left)
-            => new Interval<T>(left, maxval<T>(), K.RightOpen);
+            => new Interval<T>(left, Numeric.maxval<T>(), K.RightOpen);
 
         [MethodImpl(Inline)]
         public static implicit operator Interval<T>((T left, T right) x)
@@ -166,7 +165,7 @@ namespace Z0
         public bool LeftUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.LeftOpen && Left.Equals(minval<T>());
+            get => Kind == K.LeftOpen && Left.Equals(Numeric.minval<T>());
         }
 
         /// <summary>
@@ -175,7 +174,7 @@ namespace Z0
         public bool RightUnbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.RightOpen && Right.Equals(maxval<T>());
+            get => Kind == K.RightOpen && Right.Equals(Numeric.maxval<T>());
         }
 
         /// <summary>
@@ -184,7 +183,7 @@ namespace Z0
         public bool Unbounded
         {
             [MethodImpl(Inline)]
-            get => Kind == K.Open && Left.Equals(minval<T>()) && Right.Equals(maxval<T>());
+            get => Kind == K.Open && Left.Equals(Numeric.minval<T>()) && Right.Equals(Numeric.maxval<T>());
         }
 
         /// <summary>

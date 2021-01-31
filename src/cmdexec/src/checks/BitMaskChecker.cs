@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Part;
     using static Checks;
-    using static z;
+    using static memory;
     using static BitMasks;
 
     [ApiHost]
-    public ref struct BitMaskChecker
+    public struct BitMaskChecker : IDisposable
     {
         readonly StringBuilder Log;
 
@@ -30,13 +30,13 @@ namespace Z0
 
         readonly IPolyStream DataSource;
 
-        Span<byte> Cases8;
+        Index<byte> Cases8;
 
-        Span<byte> Cases16;
+        Index<byte> Cases16;
 
-        Span<byte> Cases32;
+        Index<byte> Cases32;
 
-        Span<byte> Cases64;
+        Index<byte> Cases64;
 
         BinaryLiterals<byte> Literals8;
 
@@ -76,10 +76,10 @@ namespace Z0
         [Op]
         void Init()
         {
-            Cases8 = DataSource.Fill(z8, (byte)bitwidth<byte>(), span<byte>(Reps));
-            Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), span<byte>(Reps));
-            Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
-            Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
+            Cases8 = DataSource.Fill(z8, (byte)bitwidth<byte>(), index<byte>(Reps));
+            Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), index<byte>(Reps));
+            Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), index<byte>(Reps));
+            Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), index<byte>(Reps));
             Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMasks.Literals));
             Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMasks.Literals));
             Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMasks.Literals));
@@ -111,13 +111,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.@as<BinaryLiterals<byte>, BinaryLiterals<T>>(Literals8);
+                return @as<BinaryLiterals<byte>, BinaryLiterals<T>>(Literals8);
             else if(typeof(T) == typeof(ushort))
-                return z.@as<BinaryLiterals<ushort>, BinaryLiterals<T>>(Literals16);
+                return @as<BinaryLiterals<ushort>, BinaryLiterals<T>>(Literals16);
             else if(typeof(T) == typeof(uint))
-                return z.@as<BinaryLiterals<uint>, BinaryLiterals<T>>(Literals32);
+                return @as<BinaryLiterals<uint>, BinaryLiterals<T>>(Literals32);
             else if(typeof(T) == typeof(ulong))
-                return z.@as<BinaryLiterals<ulong>, BinaryLiterals<T>>(Literals64);
+                return @as<BinaryLiterals<ulong>, BinaryLiterals<T>>(Literals64);
             else
                 throw no<T>();
         }
@@ -146,7 +146,7 @@ namespace Z0
             CheckLoMask(n2, ref index, ref log);
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void CheckLoMask(N0 @case, ref byte index, ref ulong log)
         {
             eq((Pow2.pow(3) - 1)^Pow2.pow(3), lo64(3), ref index, ref log);
@@ -156,7 +156,7 @@ namespace Z0
             eq((Pow2.pow(59) - 1)^Pow2.pow(59), lo64(59), ref index, ref log);
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void CheckLoMask(N1 @case, ref byte index, ref ulong log)
         {
             eq(4u, Bits.pop(lo64(3)), ref index, ref log);
@@ -166,7 +166,7 @@ namespace Z0
             eq(59u, Bits.pop(lo64(58)), ref index, ref log);
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void CheckLoMask(N2 @case, ref byte index, ref ulong log)
         {
             var lomask = BitMasks.lo<uint>(6);
@@ -254,7 +254,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth<W>
         {
             var mincount = (byte)1;
-            var maxcount = (byte)bitwidth(t);
+            var maxcount = (byte)bitwidth<T>();
             var cases = Cases(w);
 
             for(var i=0u; i<Reps; i++)
@@ -266,7 +266,7 @@ namespace Z0
                 dst.PopCount = (byte)gbits.pop(dst.Mask);
                 dst.Check1 = dst.PopCount  != dst.Count;
                 dst.Check1 = eq(dst.Count, gbits.pop(dst.Mask));
-                dst.Lowered = gmath.srl(dst.Mask, (byte)(bitwidth(t) -  dst.Count));
+                dst.Lowered = gmath.srl(dst.Mask, (byte)(bitwidth<T>() -  dst.Count));
                 dst.EffectiveWidth = (byte)gbits.effwidth(dst.Lowered);
                 dst.Check3 = dst.Count == dst.EffectiveWidth;
             }

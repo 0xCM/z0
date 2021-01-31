@@ -10,7 +10,9 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
+    using static memory;
 
+    [ApiHost]
     public readonly struct HexNumericParser
     {
         /// <summary>
@@ -25,59 +27,35 @@ namespace Z0
                 return ParseResult.fail<ulong>(src);
         }
 
-        [MethodImpl(Inline)]
-        public T Parse<T>(string src, T @default)
-            => Parse<T>(src).ValueOrDefault(@default);
-
-        [MethodImpl(Inline)]
-        public ParseResult<T> Parse<T>(string src)
+        [Op, Closures(UnsignedInts)]
+        public static T parse<T>(string src, T @default)
         {
             if(typeof(T) == typeof(byte))
-                return U8(src).As<T>();
+                return generic<T>(U8(src, uint8(@default)));
             else if(typeof(T) == typeof(ushort))
-                return U16(src).As<T>();
+                return generic<T>(U16(src, uint16(@default)));
             else if(typeof(T) == typeof(uint))
-                return U32(src).As<T>();
+                return generic<T>(U32(src, uint32(@default)));
             else if(typeof(T) == typeof(ulong))
-                return U64(src).As<T>();
+                return generic<T>(U64(src, uint64(@default)));
             else
                 throw no<T>();
         }
 
         [MethodImpl(Inline)]
-        static ParseResult<byte> U8(string src)
-        {
-            if(byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out byte value))
-                return ParseResult.win(src, value);
-            else
-                return ParseResult.fail<byte>(src);
-        }
+        static byte U8(string src, byte @default)
+            => byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out byte value) ? value : @default;
 
         [MethodImpl(Inline)]
-        static ParseResult<ushort> U16(string src)
-        {
-            if(ushort.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out ushort value))
-                return ParseResult.win(src, value);
-            else
-                return ParseResult.fail<ushort>(src);
-        }
+        static ushort U16(string src, ushort @default)
+            => ushort.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out ushort value) ? value : @default;
 
         [MethodImpl(Inline)]
-        static ParseResult<uint> U32(string src)
-        {
-            if(uint.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out uint value))
-                return ParseResult.win(src, value);
-            else
-                return ParseResult.fail<uint>(src);
-        }
+        static uint U32(string src, uint @default)
+            => uint.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null, out uint value) ? value : @default;
 
         [MethodImpl(Inline)]
-        static ParseResult<ulong> U64(string src)
-        {
-            if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
-                return ParseResult.win(src, value);
-            else
-                return ParseResult.fail<ulong>(src);
-        }
+        static ulong U64(string src, ulong @default)
+            => ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value) ? value : @default;
     }
 }

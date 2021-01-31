@@ -94,7 +94,7 @@ namespace Z0
         public static Histogram<T> create<T>()
             where T : unmanaged
         {
-            var domain = Intervals.closed(minval<T>(), maxval<T>());
+            var domain = Intervals.closed(Numeric.minval<T>(), Numeric.maxval<T>());
             var grain = domain.Width;
             return create<T>(domain, generic<T>(domain.Width));
         }

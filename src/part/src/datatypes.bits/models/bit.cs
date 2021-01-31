@@ -25,8 +25,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static bit Parse(char c)
+        public static bit parse(char c)
             => c == One;
+
+        [MethodImpl(Inline), Op]
+        public static bit parse(string src)
+            => parse(text.ifempty(src, "0")[0]);
 
         [MethodImpl(Inline)]
         public bit(bool state)

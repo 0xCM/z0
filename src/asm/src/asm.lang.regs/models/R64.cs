@@ -14,7 +14,7 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct R64 : IRegister<R64,W64,ulong>
     {
-        public ulong Content  {get;}
+        public ulong Content {get;}
 
         public RegisterKind Kind {get;}
 
@@ -27,5 +27,9 @@ namespace Z0.Asm
 
         public RegClass Class
             => RegClass.GP;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(R64 src)
+            => src.Content;
     }
 }

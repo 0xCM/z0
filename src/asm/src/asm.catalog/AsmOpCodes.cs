@@ -19,5 +19,8 @@ namespace Z0.Asm
         public static RegDigit digit(uint3 src)
             => new RegDigit(src);
 
+
+        public static string normalize(AsmSigExpr sig, string opcode)
+            => opcode;
     }
 }

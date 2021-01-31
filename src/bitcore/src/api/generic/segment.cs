@@ -56,7 +56,7 @@ namespace Z0
         {
             var bitcount = (uint)(i1 - i0);
             if(bitcount > bitwidth<T>())
-                return NumericLiterals.maxval<T>();
+                return Numeric.maxval<T>();
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
             var firstCount = ScalarCast.uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);

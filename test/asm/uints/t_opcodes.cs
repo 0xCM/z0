@@ -62,16 +62,16 @@ namespace Z0.Asm
         // }
 
 
-        public void check_opcode_records()
-        {
-            var data = AsmOpCodesLegacy.dataset();
-            var count = data.OpCodeCount;
-            var records = data.Entries.View;
-            var formatter = Records.formatter<AsmOpCodeRowLegacy>();
-            using var writer = CaseWriter("OpCodes");
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<records.Length; i++)
-                writer.WriteLine(formatter.Format(skip(records,i)));
-        }
+        // public void check_opcode_records()
+        // {
+        //     var data = AsmOpCodesLegacy.dataset();
+        //     var count = data.OpCodeCount;
+        //     var records = data.Entries.View;
+        //     var formatter = Records.formatter<AsmOpCodeRowLegacy>();
+        //     using var writer = CaseWriter("OpCodes");
+        //     writer.WriteLine(formatter.FormatHeader());
+        //     for(var i=0; i<records.Length; i++)
+        //         writer.WriteLine(formatter.Format(skip(records,i)));
+        // }
     }
 }

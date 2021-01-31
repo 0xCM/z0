@@ -110,7 +110,7 @@ namespace Z0
             var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), z.maxval<ulong>());
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
@@ -131,7 +131,7 @@ namespace Z0
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n4,n1,t);
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,1,2,7,4,5,6,3);
             Claim.Require(gvec.vsame(expect,target));
@@ -153,7 +153,7 @@ namespace Z0
             var maskspec = BitMasks.LsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,1,6,3,0,5,2,7);
             Claim.Require(gvec.vsame(expect,target));
@@ -175,7 +175,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,5,2,3,0,1,6,7);
             Claim.Require(gvec.vsame(expect,target));
@@ -196,7 +196,7 @@ namespace Z0
             var t = z32;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
             Claim.Require(gvec.vsame(expect,target));
@@ -218,7 +218,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = cpu.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
@@ -240,7 +240,7 @@ namespace Z0
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gvec.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z64)), source,target);
@@ -253,7 +253,7 @@ namespace Z0
             var w = n512;
             var t = z8;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
-            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var maskbits = BitMasks.mask(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)

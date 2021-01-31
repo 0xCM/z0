@@ -54,7 +54,6 @@ namespace Z0.Asm
             get => Components.IsNonEmpty;
         }
 
-
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
             => src.Components.Equals(Components);

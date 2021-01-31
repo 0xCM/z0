@@ -41,7 +41,7 @@ namespace Z0
             void check()
             {
                 var zed = z.zero(t);
-                var src = Random.Blocks<T>(w, Interval.closed(zed, maxval(t)),3);
+                var src = Random.Blocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 
@@ -66,7 +66,7 @@ namespace Z0
             void check()
             {
                 var zed = zero(t);
-                var src = Random.Blocks<T>(w, Interval.closed(zed, maxval(t)),3);
+                var src = Random.Blocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
 

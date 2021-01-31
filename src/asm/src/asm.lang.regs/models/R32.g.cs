@@ -23,5 +23,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator R32(R32<R> src)
+            => new R32(src.Content, src.Kind);
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++ )
                 total += Cells.primal(emit());
 
-            var expect = (ulong)(maxval<byte>()/2);
+            var expect = (ulong)(Numeric.maxval<byte>()/2);
             var actual = total/(ulong)RepCount;
             var succeeded = math.within(expect,actual,tolerance);
 

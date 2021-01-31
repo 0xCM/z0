@@ -188,9 +188,9 @@ namespace Z0
         public void Fill(bit value)
         {
             if(value)
-                Content.Fill(maxval<T>());
+                Content.Fill(Numeric.maxval<T>());
             else
-                Content.Fill(minval<T>());
+                Content.Fill(Numeric.minval<T>());
         }
 
         /// <summary>

@@ -119,7 +119,7 @@ namespace Z0.Logix
                 Claim.Require(y0);
 
                 var y1 = S.equals(x,x);
-                Claim.eq(NumericLiterals.maxval<T>(), y1);
+                Claim.eq(Numeric.maxval<T>(), y1);
 
                 var y2 = gmath.eq(x,y);
                 Claim.nea(y2);

@@ -24,5 +24,9 @@ namespace Z0.Asm
 
         public RegClass Class
             => RegClass.YMM;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell256(Ymm src)
+            => src.Content;
     }
 }
