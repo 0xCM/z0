@@ -63,7 +63,7 @@ namespace Z0
                 Commands.EmitEnumCatalog().RunTask(Wf);
 
                 EmitFieldLiterals.create().Run(Wf);
-                EmitBitMasks.create().Run(Wf);
+                BitMaskServices.create(Wf).Emit();
 
                 var processors = ApiProcessors.create(Wf, Asm);
                 processors.EmitAsmRows();

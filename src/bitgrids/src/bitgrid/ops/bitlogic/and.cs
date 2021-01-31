@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Computes the bitwise AND between fixed-width 16-bit generic bitgrids
         /// </summary>
@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(a,b);    
+                => gvec.vand<T>(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
@@ -124,7 +124,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(a,b);    
+                => gvec.vand<T>(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target

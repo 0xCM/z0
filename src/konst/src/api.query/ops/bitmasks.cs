@@ -9,7 +9,7 @@ namespace Z0
     partial struct ApiQuery
     {
         [Op]
-        public static BitMaskInfo[] bitmasks(Type src)
+        public static Index<BitMaskInfo> bitmasks(Type src)
             => BitMasks.rows(src);
     }
 }

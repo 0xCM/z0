@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     partial class gmath
     {
         /// <summary>

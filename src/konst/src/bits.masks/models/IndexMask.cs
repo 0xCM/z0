@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a specification for producing an index-oriented mask

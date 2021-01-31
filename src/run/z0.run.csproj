@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(Api)" />
   </ItemGroup>
 
 </Project>

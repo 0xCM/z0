@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static memory;
 
-    using BL = BitLogic.Bytes;
+    using BL = ByteLogic64;
 
     /// <summary>
     /// Defines operators over square bit domains

@@ -12,7 +12,7 @@ namespace Z0
     using static In;
     using static SFx;
 
-    using BL = BitLogic.Bytes;
+    using BL = ByteLogic64;
     using LS = LogicSquare;
 
     partial class LogicSquares

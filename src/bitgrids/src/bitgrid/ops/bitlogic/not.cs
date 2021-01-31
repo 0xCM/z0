@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Computes the bitwise complement of the source grid
         /// </summary>
@@ -40,7 +40,7 @@ namespace Z0
         public static BitGrid64<T> not<T>(BitGrid64<T> gx)
             where T : unmanaged
                 => init64<T>(math.not(gx));
-                         
+
         /// <summary>
         /// Computes the bitwise complement of the source grid
         /// </summary>
@@ -87,7 +87,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnot<T>(gx);    
+                => gvec.vnot<T>(gx);
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnot<T>(gx);    
+                => gvec.vnot<T>(gx);
 
         /// <summary>
         /// Computes the bitwise complement of the source grid and stores the result to a caller-supplied target

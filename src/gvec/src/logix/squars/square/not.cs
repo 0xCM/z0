@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static In;
 
-    using BL = BitLogic.Bytes;
+    using BL = ByteLogic64;
 
     /// <summary>
     /// Defines operators over square bit domains

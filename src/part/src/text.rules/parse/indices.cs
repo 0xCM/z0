@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Rules;
 
     partial struct TextRules
     {
@@ -33,6 +34,16 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, string first, string second)
                 => root.pair(src.IndexOf(first), src.IndexOf(second));
+
+            /// <summary>
+            /// Returns the indices of the first occurrences of the first and second strings in the source, if any
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="first">The first character to match</param>
+            /// <param name="second">THe second character to match</param>
+            [MethodImpl(Inline), Op]
+            public static Pair<int> indices(string src, Fence<string> fence)
+                => root.pair(src.IndexOf(fence.Left), src.IndexOf(fence.Right));
 
             /// <summary>
             /// Returns the indicies of all locations of a specified character within specified text

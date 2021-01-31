@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static BinaryBitLogicKind;
 
-    using BL = BitLogic.Scalar;
+    using BL = ScalarBitLogic;
 
     [ApiType]
     public unsafe readonly struct Blm32u

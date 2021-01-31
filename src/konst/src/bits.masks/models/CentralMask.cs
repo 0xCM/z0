@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a specification for producing Central-oriented masks
@@ -31,9 +31,7 @@ namespace Z0
 
         public T t => default;
 
-
         BitMaskKind IMaskSpec.M => M;
-
 
         [MethodImpl(Inline)]
         public CentralMask<F,D,S> As<S>(S s = default)

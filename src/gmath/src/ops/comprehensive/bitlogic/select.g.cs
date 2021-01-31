@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using BL = BitLogic.Scalar;
+    using BL = ScalarBitLogic;
 
     partial class gmath
     {

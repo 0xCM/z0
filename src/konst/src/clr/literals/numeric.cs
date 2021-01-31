@@ -10,8 +10,9 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static z;
+    using static memory;
     using static TextRules;
+    using static TaggedLiterals;
 
     using NBK = NumericBaseKind;
     using NBI = NumericBaseIndicator;
@@ -39,64 +40,18 @@ namespace Z0
             where T : unmanaged
                 => root.map(search<T>(src),numeric<T>);
 
-        public static NumericLiteral[] numeric(Type src)
+        public static NumericLiteral[] numeric(Type src, Base2 b)
         {
             var fields = span(src.LiteralFields());
-            var dst = new List<NumericLiteral>();
+            var dst = root.list<NumericLiteral>();
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
                 var tc = Type.GetTypeCode(field.FieldType);
                 var vRaw = field.GetRawConstantValue();
-                if(LiteralAttributes.HasMultiLiteral(field))
-                    dst.AddRange(numeric(multiliteral(field), vRaw));
-                else if(LiteralAttributes.HasBinaryLiteral(field))
-                    dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
-                else
-                    dst.Add(Numeric.literal(field.Name, vRaw, BitFormatter.format(vRaw, tc), NumericBaseKind.Base2));
+                dst.Add(Numeric.literal(field.Name, vRaw, BitFormatter.format(vRaw, tc), b));
             }
             return dst.ToArray();
-        }
-
-        public static NumericLiteral[] numeric(LiteralInfo src, object value)
-        {
-            if(src.MultiLiteral)
-            {
-                var result = Parse.unbracket(src.Text);
-                if(result)
-                {
-                    var content = result.Value;
-                    var components = content.SplitClean(Chars.Pipe);
-                    var count = components.Length;
-                    var dst = sys.alloc<NumericLiteral>(count);
-                    for(var i=0; i<components.Length; i++)
-                    {
-                        var component = components[i];
-                        var length = component.Length;
-                        if(length > 0)
-                        {
-                            var indicator = NumericBases.indicator(component[0]);
-
-                            if(indicator != 0)
-                                dst[i] = Numeric.literal(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
-                            else
-                            {
-                                indicator = NumericBases.indicator(component[length - 1]);
-                                indicator = indicator != 0 ? indicator : NBI.Base2;
-                                dst[i] = Numeric.literal(
-                                    src.Name,
-                                    value,
-                                    component.Substring(0, length - 1),
-                                    NumericBases.kind(indicator)
-                                    );
-                            }
-                        }
-                        else
-                            dst[i] = NumericLiteral.Empty;
-                    }
-                }
-            }
-            return sys.empty<NumericLiteral>();
         }
     }
 }

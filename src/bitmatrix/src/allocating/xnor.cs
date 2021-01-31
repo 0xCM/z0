@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using BL = BitLogic.Scalar;
+    using BL = ScalarBitLogic;
 
     partial class BitMatrixA
     {

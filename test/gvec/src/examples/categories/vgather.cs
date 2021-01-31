@@ -130,8 +130,8 @@ namespace Z0
             var A = SpanBlocks.alloc(w,BlockCount, t);
             var B = SpanBlocks.alloc(w,BlockCount, t);
 
-            var pattern0 = BitMasks.vlsb(w,n2,n1,t);
-            var pattern1 = BitMasks.vmsb(w,n2,n1,t);
+            var pattern0 = VMask.vlsb(w,n2,n1,t);
+            var pattern1 = VMask.vmsb(w,n2,n1,t);
 
             for(var block = 0; block<BlockCount; block++)
             {

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Hex8Seq;
 
-    using BL = BitLogic.Scalar;
+    using BL = ScalarBitLogic;
 
     [ApiType]
     public readonly ref struct Switch16

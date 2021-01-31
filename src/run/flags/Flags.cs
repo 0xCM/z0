@@ -27,7 +27,6 @@ namespace Z0
             {
                 var state = src[(Pow2x8)i];
                 render(skip(fields,i), state, buffer, enabledOnly);
-
             }
             return buffer.Emit();
         }
@@ -40,9 +39,9 @@ namespace Z0
             var buffer = Buffers.text();
             for(byte i=0; i<count; i++)
             {
-                var field = skip(fields,i);
-                // var state = src[(Pow2x64)Pow2.pow(i)];
-                // render(skip(fields,i), state, buffer, enabledOnly);
+                var field = skip(fields, i);
+                var state = src[(Pow2x64)Pow2.pow(i)];
+                render(skip(fields,i), state, buffer, enabledOnly);
             }
             return buffer.Emit();
         }

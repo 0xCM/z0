@@ -122,6 +122,16 @@ namespace Z0
         }
 
 
+        static Address32 displacement(BinaryCode instruction)
+        {
+            var opcode = instruction[0];
+            root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
+            var len = instruction.Length - 1;
+            var bytes = slice(instruction.View, 1);
+            return Numeric.take32u(bytes);
+
+        }
+
         void CalcAddress()
         {
             // ; BaseAddress = 7ffc56862280h
@@ -131,6 +141,9 @@ namespace Z0
             const ulong CallOffset = 0x25;
             const ulong CallInstructionSize = 0x5;
             const ulong CallDisplacement = 0xfc632176;
+            var instruction = array<byte>(0xe8, 0x76, 0x21, 0x63, 0xfc);
+            var dx = displacement(instruction);
+
             MemoryAddress Expected = 0x7ffc56862310;
             MemoryAddress Encoded =  0x7ffc52e94420;
 
@@ -138,11 +151,18 @@ namespace Z0
             MemoryAddress target = next + CallDisplacement;
             MemoryAddress encoded = 0x7ffc52e94420;
 
-            Wf.Status($"Computed:{target} | Expected:{Expected} | Encoded:{encoded}");
+
+            Wf.Status($"Computed:{target} | Expected:{Expected} | Encoded:{encoded} | Computed2:{dx}");
 
 
         }
 
+        void EmitBitMasks()
+        {
+            var service = BitMaskServices.create(Wf);
+            var masks = service.Emit();
+            Wf.Status($"Emitted {masks.Count} masks");
+        }
 
         public void RunTests()
         {
@@ -150,6 +170,7 @@ namespace Z0
             // const char Test = (char)127;
             // Wf.Row(Assign.ToString());
             CalcAddress();
+            //EmitBitMasks();
         }
     }
 }

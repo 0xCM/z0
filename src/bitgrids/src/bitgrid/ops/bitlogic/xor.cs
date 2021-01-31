@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Computes the bitwise xor between generic bitgrids
         /// </summary>
@@ -119,7 +119,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise xor between natural bitgrids
@@ -134,9 +134,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);
 
- 
+
         /// <summary>
         /// Computes the bitwise xor between subgrids
         /// </summary>
@@ -150,7 +150,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vxor<T>(gx,gy);    
+                => gvec.vxor<T>(gx,gy);
 
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var gz = alloc<M,N,T>();    
+            var gz = alloc<M,N,T>();
             xor(gx,gy,gz);
             return gz;
         }

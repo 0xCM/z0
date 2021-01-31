@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids
         /// </summary>
@@ -112,7 +112,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vor<T>(gx,gy);    
+                => gvec.vor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids of natural dimensions
@@ -125,7 +125,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vor<T>(gx,gy);    
+                => gvec.vor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise OR between natural bitgrids and stores the result to a caller-supplied target
@@ -158,7 +158,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var gz = alloc<M,N,T>();    
+            var gz = alloc<M,N,T>();
             or(gx,gy,gz);
             return gz;
         }

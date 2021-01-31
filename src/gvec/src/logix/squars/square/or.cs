@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    using BL = BitLogic.Bytes;
+    using BL = ByteLogic64;
 
     /// <summary>
     /// Defines operators over square bit domains
@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.or(memory.u8(A), memory.u8(B), ref memory.u8(Z));
+               BL.or(u8(A), u8(B), ref u8(Z));
             else if(typeof(T) == typeof(ushort))
                 or(w, A, B, ref Z);
             else if(typeof(T) == typeof(uint))

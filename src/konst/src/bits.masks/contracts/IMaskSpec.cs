@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static memory;
+
     public interface IMaskSpec : ITextual
     {
         BitMaskKind M {get;}
@@ -29,12 +31,12 @@ namespace Z0
             => MaskSpec.define<F,D,T>(M);
 
         uint IBitFrequency.F
-            => z.nat32u<F>();
+            => nat32u<F>();
 
         uint IBitDensity.D
-            => z.nat32u<D>();
+            => nat32u<D>();
 
         string ITextual.Format()
-            => $"lsb(f:{z.nat32u<F>()}, d:{z.nat32u<D>()}, t:{typeof(T).NumericKind().Format()})";
+            => $"lsb(f:{nat32u<F>()}, d:{nat32u<D>()}, t:{typeof(T).NumericKind().Format()})";
     }
 }
