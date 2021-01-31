@@ -11,10 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// int _mm_extract_epi8 (__m128i a, const int imm8) PEXTRB reg/m8, xmm, imm8
@@ -152,5 +151,6 @@ namespace Z0
             else
                 throw no<N>();
         }
+
     }
 }

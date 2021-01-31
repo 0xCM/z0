@@ -28,7 +28,7 @@ namespace Z0
                 0b0000011100000111, 0b0000011100000111
                 );
 
-            var z16 = z.vbyteswap(x16);
+            var z16 = cpu.vbyteswap(x16);
             var z16s = z16.ToSpan();
 
             Claim.veq(y16,z16);
@@ -44,7 +44,7 @@ namespace Z0
                 0x000000FF, 0xFF000000
                 );
 
-            var z32 = z.vbyteswap(x32);
+            var z32 = cpu.vbyteswap(x32);
             Claim.veq(y32,z32);
         }
 

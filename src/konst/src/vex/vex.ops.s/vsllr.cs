@@ -110,7 +110,7 @@ namespace Z0
         public static Vector256<sbyte> vsllr(Vector256<sbyte> src, Vector128<sbyte> count)
         {
             var y = v16i(count);
-            var lo = vsllr(cpu.vinflate16i(z.vlo(src), w256),y);
+            var lo = vsllr(cpu.vinflate16i(cpu.vlo(src), w256),y);
             var hi = vsllr(cpu.vinflate16i(cpu.vhi(src), w256),y);
             return cpu.vcompact8i(lo,hi, w256);
         }
@@ -124,7 +124,7 @@ namespace Z0
         public static Vector256<byte> vsllr(Vector256<byte> src, Vector128<byte> count)
         {
             var y = v16u(count);
-            var lo = vsllr(cpu.vinflate16u(z.vlo(src), w256), y);
+            var lo = vsllr(cpu.vinflate16u(cpu.vlo(src), w256), y);
             var hi = vsllr(cpu.vinflate16u(cpu.vhi(src), w256), y);
             return cpu.vcompact8u(lo, hi, w256);
         }

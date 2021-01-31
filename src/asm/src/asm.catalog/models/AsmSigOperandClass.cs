@@ -5,17 +5,22 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static z;
+    using static Pow2x16;
 
-    [ApiHost]
-    public readonly partial struct AsmOpCodes
+    [Flags]
+    public enum AsmSigOperandClass : ushort
     {
-        [MethodImpl(Inline), Op]
-        public static RegDigit digit(uint3 src)
-            => new RegDigit(src);
+        None = 0,
 
+        Reg = P2ᐞ08,
+
+        Mem = P2ᐞ09,
+
+        Rm = P2ᐞ10,
+
+        Imm = P2ᐞ11,
+
+        NamedReg = P2ᐞ12
     }
 }

@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMasks.lsb(n2,n1,Konst.z32),0);
-            var offsets = z.vinc<T>(w);
+            var offsets = gcpu.vinc<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;
         }

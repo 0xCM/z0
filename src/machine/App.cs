@@ -45,6 +45,7 @@ namespace Z0
                 resources.EmitContentIndex();
                 resources.EmitReferenceData();
                 EmitComments.create().Run(Wf);
+                AsmCatalogEtl.create(Wf).TransformSource();
 
                 //XedEtlWfHost.create().Run(Wf);
 

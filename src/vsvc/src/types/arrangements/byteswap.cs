@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vbyteswap(x);
+            public Vector128<T> Invoke(Vector128<T> x) => gcpu.vbyteswap(x);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);
@@ -27,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) => gvec.vbyteswap(x);
+            public Vector256<T> Invoke(Vector256<T> x) => gcpu.vbyteswap(x);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);

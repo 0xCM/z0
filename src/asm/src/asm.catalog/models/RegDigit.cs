@@ -12,13 +12,16 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a register digit 0..7 that occurs within an op code expression
     /// </summary>
-    public readonly struct OpCodeRegDigit
+    public readonly struct RegDigit
     {
         public uint3 Value {get;}
 
         [MethodImpl(Inline)]
-        public OpCodeRegDigit(uint3 value)
+        public RegDigit(uint3 value)
             => Value = value;
-    }
 
+        [MethodImpl(Inline)]
+        public static implicit operator RegDigit(uint3 src)
+            => new RegDigit(src);
+    }
 }

@@ -17,7 +17,7 @@ namespace Z0
         {
             var w = w128;
 
-            var src = z.vinc<byte>(w);
+            var src = gcpu.vinc<byte>(w);
             var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
@@ -29,7 +29,7 @@ namespace Z0
         {
             var w = w256;
 
-            var src = z.vinc<byte>(w);
+            var src = gcpu.vinc<byte>(w);
             var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);

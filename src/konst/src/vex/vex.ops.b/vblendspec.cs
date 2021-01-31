@@ -13,11 +13,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-    }
-
-    partial struct z
-    {
         /// <summary>
         /// Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector
         /// </summary>
@@ -77,5 +72,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<byte> blend(N256 w, N64 n, bool odd)
             => gcpu.vload<byte>(w, odd ? BlendSpec_Odd_256x64 : BlendSpec_Even_256x64);
-   }
+    }
 }

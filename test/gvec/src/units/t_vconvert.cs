@@ -30,7 +30,7 @@ namespace Z0
             var xE = cpu.vparts(n128,1,2,3,4);
             var yE = cpu.vparts(n128,5,6,7,8);
             var z = cpu.vconvert32u(block, n256);
-            Claim.eq(xE, vlo(z));
+            Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
 
@@ -41,7 +41,7 @@ namespace Z0
             var yE = cpu.vparts(3,4);
 
             var z = cpu.vconvert64u(block,n256);
-            Claim.eq(xE, vlo(z));
+            Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             var yE = cpu.vparts(n128,9,10,11,12,13,14,15,16);
             var z = cpu.vconvert16u(block,n256);
 
-            Claim.eq(xE, vlo(z));
+            Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
 
@@ -79,7 +79,7 @@ namespace Z0
             var q = cpu.vconvert16u(x, n256);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
-            var y0s = vlo(q).ToSpan();
+            var y0s = cpu.vlo(q).ToSpan();
             var y1s = cpu.vhi(q).ToSpan();
 
             for(var i=0; i <8; i++)
@@ -95,7 +95,7 @@ namespace Z0
             var y = cpu.vconvert32u(x,n256);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
-            var y0s = vlo(y).ToSpan();
+            var y0s = cpu.vlo(y).ToSpan();
             var y1s = cpu.vhi(y).ToSpan();
 
             for(var i=0; i <4; i++)
@@ -120,8 +120,8 @@ namespace Z0
 
             for(var sample = 0; sample < RepCount; sample++)
             {
-                var sv = Random.CpuVector(sw,st);
-                var tv = cpu.vconvert16u(sv,tw);
+                var sv = Random.CpuVector(sw, st);
+                var tv = cpu.vinflate16u(sv, tw);
 
                 sv.StoreTo(sb);
                 tv.StoreTo(tb);
@@ -153,8 +153,8 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample++)
             {
                 var sv = Random.CpuVector(sw,st);
-                var tv = cpu.vconvert16u(sv,n256);
-                var tvLo = vlo(tv);
+                var tv = cpu.vinflate16u(sv, w256);
+                var tvLo = cpu.vlo(tv);
                 var tvHi = cpu.vhi(tv);
 
                 sv.StoreTo(sb);
@@ -164,7 +164,7 @@ namespace Z0
                 var i = 0;
                 for(var block = 0; block < tbc; block++)
                 for(var j = 0; j < tb.BlockLength; j++, i++)
-                    Claim.eq(sb[i], z.force<byte>(tb[block,j]));
+                    Claim.eq(sb[i], Numeric.force<byte>(tb[block,j]));
             }
         }
     }

@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// Copymask   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Returns 1 if all mask-identified source bits are disabled, 0 otherwise
@@ -48,13 +47,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vtestz(v8u(src), v8u(mask));
+                return cpu.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return z.vtestz(v16u(src), v16u(mask));
+                return cpu.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return z.vtestz(v32u(src), v32u(mask));
+                return cpu.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return z.vtestz(v64u(src), v64u(mask));
+                return cpu.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -64,13 +63,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vtestz(v8i(src), v8i(mask));
+                return cpu.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return z.vtestz(v16i(src), v16i(mask));
+                return cpu.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return z.vtestz(v32i(src), v32i(mask));
+                return cpu.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return z.vtestz(v64i(src), v64i(mask));
+                return cpu.vtestz(v64i(src), v64i(mask));
             else
                 return vtestz_f<T>(src,mask);
         }
@@ -80,9 +79,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vtestz(v32f(src), v32f(mask));
+                return cpu.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return z.vtestz(v64f(src), v64f(mask));
+                return cpu.vtestz(v64f(src), v64f(mask));
             else
                 throw no<T>();
         }
@@ -92,13 +91,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return z.vtestz(v8u(src), v8u(mask));
+                return cpu.vtestz(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return z.vtestz(v16u(src), v16u(mask));
+                return cpu.vtestz(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return z.vtestz(v32u(src), v32u(mask));
+                return cpu.vtestz(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return z.vtestz(v64u(src), v64u(mask));
+                return cpu.vtestz(v64u(src), v64u(mask));
             else
                 return vtestz_i(src,mask);
         }
@@ -108,13 +107,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return z.vtestz(v8i(src), v8i(mask));
+                return cpu.vtestz(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return z.vtestz(v16i(src), v16i(mask));
+                return cpu.vtestz(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return z.vtestz(v32i(src), v32i(mask));
+                return cpu.vtestz(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return z.vtestz(v64i(src), v64i(mask));
+                return cpu.vtestz(v64i(src), v64i(mask));
             else
                 return vtestz_f<T>(src,mask);
         }
@@ -124,9 +123,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return z.vtestz(v32f(src), v32f(mask));
+                return cpu.vtestz(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return z.vtestz(v64f(src), v64f(mask));
+                return cpu.vtestz(v64f(src), v64f(mask));
             else
                 throw no<T>();
         }

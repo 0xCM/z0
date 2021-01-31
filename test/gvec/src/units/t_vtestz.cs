@@ -69,9 +69,9 @@ namespace Z0
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = gcpu.vcnonimpl(gvec.vones(w,t), x);
+                var mask = gcpu.vcnonimpl(gcpu.vones(w,t), x);
 
-                Claim.Require(gvec.vtestz(x,mask));
+                Claim.Require(gcpu.vtestz(x,mask));
             }
         }
 
@@ -86,9 +86,9 @@ namespace Z0
                 // Creates a mask corresponding to each off bit in the source vector
                 // thereby establishing the the context where testz will return true
                 // since all mask-identified source bits are disabled
-                var mask = gcpu.vcnonimpl(gvec.vones(w,t), x);
+                var mask = gcpu.vcnonimpl(gcpu.vones(w,t), x);
 
-                Claim.Require(gvec.vtestz(x,mask));
+                Claim.Require(gcpu.vtestz(x,mask));
             }
         }
     }

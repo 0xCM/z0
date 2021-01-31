@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
-
     using static Part;
-    using static z;
 
     partial struct cpu
     {

@@ -15,7 +15,7 @@ namespace Z0
         public void vswap_128x8u()
         {
             var src = gvec.vinc(n128, z8);
-            var dst = z.vswap(src,2,3);
+            var dst = cpu.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));
         }
@@ -23,7 +23,7 @@ namespace Z0
         public void vswap_128x16u()
         {
             var src = gvec.vinc(n128, z16);
-            var dst = z.vswap(src,2,3);
+            var dst = cpu.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
             Claim.eq(src.Cell(3), dst.Cell(2));
         }

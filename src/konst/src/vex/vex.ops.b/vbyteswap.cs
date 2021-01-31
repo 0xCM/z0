@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static KonstBytes;
-    partial struct z
+
+    partial struct cpu
     {
         /// <summary>
         /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation

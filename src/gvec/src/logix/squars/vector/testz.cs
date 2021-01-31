@@ -19,7 +19,7 @@ namespace Z0
         {
             vload(a, out Vector128<T> vA);
             vload(b, out Vector128<T> vB);
-            return gvec.vtestz(vA,vB);
+            return gcpu.vtestz(vA,vB);
         }
 
         [MethodImpl(Inline), TestZ, Closures(Closure)]
@@ -28,7 +28,7 @@ namespace Z0
         {
             vload(a, out Vector256<T> vA);
             vload(b, out Vector256<T> vB);
-            return gvec.vtestz(vA,vB);
+            return gcpu.vtestz(vA,vB);
         }
 
         [MethodImpl(Inline), TestZ, Closures(Closure)]

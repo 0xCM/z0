@@ -9,6 +9,31 @@ namespace Z0.Asm
 
     using static Part;
 
+    /* Examples:
+    ADD AL, imm8
+    ADD AX, imm16
+    ADD EAX, imm32
+    ADD RAX, imm32
+    ADD r/m8, imm8
+    ADD r/m8, imm8
+    ADD r/m16, imm16
+    ADD r/m32, imm32
+    ADD r/m64, imm32
+    ADD r/m16, imm8
+    ADD r/m32, imm8
+    ADD r/m64, imm8
+    ADD r/m8, r8
+    ADD r/m8, r8
+    ADD r/m16, r16
+    ADD r/m32, r32
+    ADD r/m64, r64
+    ADD r8, r/m8
+    ADD r8, r/m8
+    ADD r16, r/m16
+    ADD r32, r/m32
+    ADD r64, r/m64
+    */
+
     /// <summary>
     /// Represents an expression that identifies an instruction
     /// </summary>

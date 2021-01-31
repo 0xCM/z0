@@ -8,6 +8,16 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    /*
+    /0
+    /1
+    /2
+    /3
+    /4
+    /5
+    /6
+    /7
+    */
 
     public readonly struct RegDigitExpr : ITextExpr<RegDigitExpr>
     {

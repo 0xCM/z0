@@ -114,7 +114,7 @@ namespace Z0
             var w = n256;
             var x = gvec.vinc(w,z16);
             var reverse = gcpu.vdec<ushort>(w);
-            var identity = vinc<ushort>(w);
+            var identity = gcpu.vinc<ushort>(w);
             var pairswap = cpu.vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);
@@ -131,27 +131,27 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var w = w128;
-            var x0 = z.vinc<byte>(w);
+            var x0 = gcpu.vinc<byte>(w);
             var x0Spec = cpu.vload(w, z.first(IdentityPattern));
             var x0Dst = z.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
-            var x1 = z.vinc<byte>(w);
+            var x1 = gcpu.vinc<byte>(w);
             var x1Spec = cpu.vload(w, z.first(ReversalPattern));
             var x1Dst = vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = vinc<byte>(w);
+            var x2 = gcpu.vinc<byte>(w);
             var x2Spec = cpu.vrotl(n128, n8);
             var x2Dst = vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = vinc<byte>(w);
+            var x3 = gcpu.vinc<byte>(w);
             var x3Spec = cpu.vrotr(n128, n8);
             var x3Dst = vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = vinc<byte>(w);
+            var x4 = gcpu.vinc<byte>(w);
             var x4Spec1 = cpu.vrotl(n128, n8);
             var x4Spec2 = cpu.vrotr(n128, n8);
             var x4Dst = vshuf16x8(vshuf16x8(x4,x4Spec1), x4Spec2);
@@ -171,10 +171,10 @@ namespace Z0
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i], j);
 
-            var increments = vinc<byte>(n128);
+            var increments = gcpu.vinc<byte>(w128);
             var spec = perm.ToShuffleSpec();
             var dst = z.vshuf16x8(increments, spec);
-            var expect = gcpu.vdec<byte>(n128);
+            var expect = gcpu.vdec<byte>(w128);
             Claim.veq(expect, dst);
 
             var identity = videntity_shuffle();

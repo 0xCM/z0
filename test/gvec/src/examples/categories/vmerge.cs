@@ -76,7 +76,7 @@ namespace Z0
         [Op(ExampleGroups.Merge)]
         public void vmerge_hilo()
         {
-            var x = z.vinc<byte>(n128);
+            var x = gcpu.vinc<byte>(n128);
             var y = cpu.vadd(x, cpu.vbroadcast(n128, (byte)16));
 
             var lo = gvec.vmergelo(x,y);

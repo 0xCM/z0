@@ -13,9 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
-    using static z;
-    using static Konst;
+    using static Part;
 
     partial struct cpu
     {
@@ -81,9 +79,9 @@ namespace Z0
         [MethodImpl(Inline), Min]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
-            var xL = cpu.vinsert(x,default, LaneIndex.L0);
-            var yL = cpu.vinsert(y,default, LaneIndex.L0);
-            return z.vlo(vmin(xL,yL));
+            var xL = vinsert(x,default, LaneIndex.L0);
+            var yL = vinsert(y,default, LaneIndex.L0);
+            return vlo(vmin(xL,yL));
         }
 
         /// <summary>
@@ -93,7 +91,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ulong> vmin(Vector128<ulong> x, Vector128<ulong> y)
-            => z.vselect(vlt(x,y),x,y);
+            => vselect(vlt(x,y),x,y);
 
         /// <summary>
         /// __m256i _mm256_min_epu8 (__m256i a, __m256i b) VPMINUB ymm, ymm, ymm/m256
@@ -156,7 +154,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Min]
         public static Vector256<ulong> vmin(Vector256<ulong> x, Vector256<ulong> y)
-            => z.vselect(vlt(x,y),x,y);
+            => vselect(vlt(x,y),x,y);
 
         /// <summary>
         /// Computes the maximum values of corresponding components

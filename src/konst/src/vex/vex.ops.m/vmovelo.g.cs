@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// src[0..n-1] -> rm[n]:[0..n-1] where m = bitsize[T]
@@ -29,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(cpu.vmove(v8u(x), n8));
+                 return generic<T>(cpu.vmovelo(v8u(x), w8));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(cpu.vmove(v16u(x), n16));
+                 return generic<T>(cpu.vmovelo(v16u(x), w16));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(cpu.vmove(v32u(x), n32));
+                 return generic<T>(cpu.vmovelo(v32u(x), w32));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(cpu.vmove(v64u(x), n64));
+                 return generic<T>(cpu.vmovelo(v64u(x), w64));
             else
                 return vmovelo_i(x);
         }
@@ -45,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(cpu.vmove(v8i(x), n8));
+                 return generic<T>(cpu.vmovelo(v8i(x), w8));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(cpu.vmove(v16i(x), n16));
+                 return generic<T>(cpu.vmovelo(v16i(x), w16));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(cpu.vmove(v32i(x), n32));
+                 return generic<T>(cpu.vmovelo(v32i(x), w32));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(cpu.vmove(v64i(x), n64));
+                 return generic<T>(cpu.vmovelo(v64i(x), w64));
             else
                 throw no<T>();
         }

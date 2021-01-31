@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static C code<N>(in asci16 src, N index = default)
             where N : unmanaged, ITypeNat
-                => (C)vextract(src.Storage, index);
+                => (C)cpu.vextract(src.Storage, index);
 
         /// <summary>
         /// Returns the upper-case hex code for a specified digit

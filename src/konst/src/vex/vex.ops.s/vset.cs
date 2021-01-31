@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Sets an index-identified component to a specified value

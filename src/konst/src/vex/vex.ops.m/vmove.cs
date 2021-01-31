@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N3 i, N0 j)
-            => vmove(cpu.vpermlo4x16(src,Perm4L.DBCA), w);
+            => vmovelo(cpu.vpermlo4x16(src,Perm4L.DBCA), w);
 
         /// <summary>
         /// src[2] -> r/m16
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N2 i, N0 j)
-            => vmove(cpu.vpermlo4x16(src,Perm4L.CBDA), w);
+            => vmovelo(cpu.vpermlo4x16(src,Perm4L.CBDA), w);
 
         /// <summary>
         /// src[1] -> r/m16
@@ -63,121 +63,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N1 i, N0 j)
-            => vmove(cpu.vpermlo4x16(src,Perm4L.BCDA), w);
-
-        /// <summary>
-        /// src[0..7] -> r/m8[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movzx rax,al
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static sbyte vmove(Vector128<sbyte> src, N8 w)
-            => (sbyte)ConvertToInt32(v32i(src));
-
-        /// <summary>
-        /// src[0..7] -> r/m8[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movzx eax,al
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static byte vmove(Vector128<byte> src, N8 dst)
-            => (byte)ConvertToUInt32(v32u(src));
-
-        /// <summary>
-        /// src[0..15] -> r/m16[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx rax,ax |>
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static short vmove(Vector128<short> src, N16 dst)
-            => (short)ConvertToInt32(v32i(src));
-
-        /// <summary>
-        /// src[0..15] -> r/m16[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0 |> movsx eax,ax
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static ushort vmove(Vector128<ushort> src, W16 dst)
-            => (ushort)ConvertToUInt32(v32u(src));
-
-        /// <summary>
-        /// src[0..31] -> r/m32[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static int vmove(Vector128<int> src, N32 dst)
-            => ConvertToInt32(src);
-
-        /// <summary>
-        /// src[0..31] -> r/m32[0..31]
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovd eax,xmm0
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static uint vmove(Vector128<uint> src, N32 dst)
-            => ConvertToUInt32(src);
-
-        /// <summary>
-        /// src[0..64] -> r/m32[0..64]
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// Moves the lower half of the source vector to a 64-bit register
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width selector</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static long vmove(Vector128<long> src, N64 dst)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        /// src[0..64] -> r/m32[0..64]
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// Moves the lower half of the source vector to a 64-bit register
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target width selector</param>
-        /// <param name="t">A target type representative</param>
-        /// <remarks>
-        /// vmovupd xmm0,[rcx] |> vmovq rax,xmm0
-        /// </remarks>
-        [MethodImpl(Inline), Op]
-        public static ulong vmove(Vector128<ulong> src, N64 dst)
-            => ConvertToUInt64(src);
+            => vmovelo(cpu.vpermlo4x16(src,Perm4L.BCDA), w);
 
         /// <summary>
         /// src[0..31] -> dst[0..64]
@@ -497,5 +383,135 @@ namespace Z0
         public static unsafe Vector512<ulong> vmove8x64u(in uint src)
             => (v64u(ConvertToVector256Int64(gptr(src))),
                 v64u(ConvertToVector256Int64(gptr(src,4))));
+
+        /// <summary>
+        /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
+        /// 4x32i -> 4x64i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<long> vmove4x64i(Vector128<int> src, W256 wDst)
+            => ConvertToVector256Int64(src);
+
+        /// <summary>
+        ///  __m256i _mm256_cvtepu32_epi64 (__m128i a) VPMOVZXDQ ymm, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<long> vmove4x64i(Vector128<uint> src, W256 wDst)
+            => ConvertToVector256Int64(src);
+
+        /// <summary>
+        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
+        /// 4x64u -> 4x32u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<uint> vconvert32u(Vector256<ulong> src, W128 w)
+            => gcpu.v32u(ConvertToVector128Int32(gcpu.v64f(src)));
+
+        /// <summary>
+        /// __m128i _mm256_cvtpd_epi32 (__m256d a) VCVTPD2DQ xmm, ymm/m256
+        /// (2x64u,2x64u) -> 4x32u
+        /// </summary>
+        /// <param name="lo">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target type representative</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<uint> vconvert32u(Vector128<ulong> lo, Vector128<ulong> hi, W128 w)
+            => vconvert32u(vconcat(lo, hi), w);
+
+        /// <summary>
+        /// 16x8i -> (8x16u, 8x16u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<ushort> vmove16x16u(Vector128<sbyte> src, W256 w)
+            => v16u(ConvertToVector256Int16(src));
+
+        /// <summary>
+        /// __m256i _mm256_cvtepi8_epi16 (__m128i a) VPMOVSXBW ymm, xmm/m128
+        /// 16x8i -> 16x16u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<short> vmove16x16i(Vector128<sbyte> src, W256 w)
+            => ConvertToVector256Int16(src);
+
+        /// <summary>
+        /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<int> vconvert32i(Vector128<sbyte> src, W128 w)
+            => ConvertToVector128Int32(src);
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
+        /// 8x16i -> 8x32u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<uint> vconvert32u(Vector128<short> src, W256 w)
+            => v32u(ConvertToVector256Int32(src));
+
+        /// <summary>
+        /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
+        /// 8x16u -> 8x32i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<int> vconvert32i(Vector128<ushort> src, W256 w)
+            => ConvertToVector256Int32(src);
+
+        /// <summary>
+        /// 8x16x -> (4x64u,4x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<long> vconvert64i(Vector128<short> src, W512 w)
+            => (vmaplo64i(src, w256), vmaphi64i(src, w256));
+
+        /// <summary>
+        /// 8x16x -> (4x64u,4x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<ulong> vconvert64u(Vector128<ushort> src, W512 w)
+            => (vmaplo64u(src, w256), vmaphi64u(src, w256));
+
+        /// <summary>
+        /// 16x8i -> 16x32i
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width</param>
+        /// <param name="t">A target cell type representative</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<int> vconvert32i(Vector128<sbyte> src, W512 w)
+            => (vmaplo32i(src, w256), vmaphi32i(src, w256));
+
+        /// <summary>
+        /// 16x8u -> 16x32u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width selector</param>
+        /// <param name="t">A target cell type representative</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<uint> vconvert32u(Vector128<byte> src, W512 w)
+            => (vmaplo32u(src, w256), vmaphi32u(src, w256));
     }
 }

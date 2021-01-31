@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static KonstBytes;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Creates a shuffle mask that clears every-other vector component

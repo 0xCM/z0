@@ -46,13 +46,13 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm16 identity(W128 w)
-            => new Perm16(z.vinc<byte>(w));
+            => new Perm16(gcpu.vinc<byte>(w));
 
         /// <summary>
         /// Creates the identity permutation
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Perm32 identity(W256 w)
-            => new Perm32(z.vinc<byte>(w));
+            => new Perm32(gcpu.vinc<byte>(w));
     }
 }

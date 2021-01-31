@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// 8x16w -> 16x8w

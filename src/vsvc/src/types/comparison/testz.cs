@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public bit Invoke(Vector128<T> x,Vector128<T> y)
-                => gvec.vtestz(x,y);
+                => gcpu.vtestz(x,y);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b)
@@ -32,7 +32,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public bit Invoke(Vector256<T> x,Vector256<T> y)
-                => gvec.vtestz(x,y);
+                => gcpu.vtestz(x,y);
 
             [MethodImpl(Inline)]
             public bit InvokeScalar(T a, T b)

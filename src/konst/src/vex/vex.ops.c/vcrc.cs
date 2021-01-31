@@ -11,6 +11,7 @@ namespace Z0
     using CRC64 = System.Runtime.Intrinsics.X86.Sse42.X64;
 
     using static Part;
+    using static memory;
 
     partial struct cpu
     {
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="data"></param>
         [MethodImpl(Inline), Op]
         public static uint crc(uint crc, ushort data)
-            => CRC.Crc32(crc,data);
+            => CRC.Crc32(crc, data);
 
         /// <summary>
         /// unsigned int _mm_crc32_u32 (unsigned int crc, unsigned int v) CRC32 reg, reg/m32
@@ -47,7 +48,7 @@ namespace Z0
         /// <param name="crc"></param>
         /// <param name="data"></param>
         [MethodImpl(Inline), Op]
-        public static ulong crc(uint crc, ulong data)
+        public static ulong crc(ulong crc, ulong data)
             => CRC64.Crc32(crc, data);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct z
+    partial struct gcpu
     {
         /// <summary>
         /// Extracts the lower 64 source bits
@@ -32,4 +32,5 @@ namespace Z0
             where T : unmanaged
                 => src.Lo;
     }
+
 }

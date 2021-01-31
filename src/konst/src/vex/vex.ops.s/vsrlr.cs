@@ -10,11 +10,9 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
+    using static Part;
 
-    using static Konst;
-    using static z;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector

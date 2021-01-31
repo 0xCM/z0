@@ -11,10 +11,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse3;
+    using static Part;
+    using static memory;
 
-    using static Konst;
-
-    partial struct z
+    partial struct cpu
     {
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vduplicate(N0 parity, N32 w, Vector256<byte> src)
@@ -99,4 +99,5 @@ namespace Z0
         public static Vector256<double> vdup64(N1 odd, Vector256<double> src)
             => DuplicateEvenIndexed(ShiftRightLogical(src.AsUInt64(),64).AsDouble());
     }
+
 }

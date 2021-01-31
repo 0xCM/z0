@@ -11,7 +11,16 @@ namespace Z0.Asm
 
     public readonly struct AsmSigOperand
     {
+        public AsmSigOperandId Kind {get;}
 
+        [MethodImpl(Inline)]
+        public AsmSigOperand(AsmSigOperandId kind)
+        {
+            Kind = kind;
+        }
 
+        [MethodImpl(Inline)]
+        public static implicit operator AsmSigOperand(AsmSigOperandId src)
+            => new AsmSigOperand(src);
     }
 }

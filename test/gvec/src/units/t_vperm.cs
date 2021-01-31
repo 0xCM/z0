@@ -52,7 +52,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = z.vinc<ushort>(n128);
+            var x = gcpu.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -75,7 +75,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = z.vinc<ushort>(n128);
+            var x = gcpu.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -95,7 +95,7 @@ namespace Z0
         {
             var n = n128;
 
-            var u = z.vinc<uint>(n);
+            var u = gcpu.vinc<uint>(n);
             Claim.veq(cpu.vparts(n,0,1,2,3), u);
 
             var v = gcpu.vdec<uint>(n);
@@ -177,19 +177,19 @@ namespace Z0
         static Vector128<T> vswapspec<T>(N128 n, params Swap[] swaps)
             where T : unmanaged
         {
-            var src = z.vinc<T>(n).ToSpan();
+            var src = gcpu.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
             return z.vload(n, in z.first(src));
         }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
-            => z.vshuf16x8(src, vswapspec<byte>(n128, swaps));
+            => z.vshuf16x8(src, vswapspec<byte>(w128, swaps));
 
         public void perm_swaps()
         {
 
-            var src = z.vinc<byte>(n128);
+            var src = gcpu.vinc<byte>(w128);
 
             Swap s = (0,1);
             var x1 = vswap(src, s);
@@ -249,7 +249,7 @@ namespace Z0
         {
             Vector256<byte> y = default;
             y = cpu.vinsert(cpu.vhi(x), y, LaneIndex.L0);
-            y = cpu.vinsert(vlo(x), y, LaneIndex.L1);
+            y = cpu.vinsert(cpu.vlo(x), y, LaneIndex.L1);
             return y;
         }
 
@@ -268,7 +268,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var src = z.vinc<ulong>(n256);
+                var src = gcpu.vinc<ulong>(n256);
                 var x = cpu.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);
@@ -278,7 +278,7 @@ namespace Z0
 
         public void vperm_256u8_outline()
         {
-            var a = z.vinc<byte>(n256);
+            var a = gcpu.vinc<byte>(n256);
             var b = gcpu.vdec<byte>(n256);
             var c = z.vreverse(cpu.vshuf32x8(a,b));
             Claim.veq(a,c);

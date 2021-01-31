@@ -13,7 +13,7 @@ namespace Z0
 
     partial class Bits
     {
-       /// <summary>
+        /// <summary>
         /// Distributes 8 packed source bits to 8 corresponding target bits
         /// </summary>
         /// <param name="src">The packed source bits</param>

@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct cpu
     {
@@ -380,6 +380,5 @@ namespace Z0
         public static unsafe Vector512<ulong> vconvert64u(in SpanBlock256<uint> src, N512 w)
             => (v64u(ConvertToVector256Int64(gptr(src.First))),
                 v64u(ConvertToVector256Int64(gptr(src.First,4))));
-
     }
 }

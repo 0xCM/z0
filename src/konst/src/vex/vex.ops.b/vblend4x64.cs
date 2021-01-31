@@ -11,15 +11,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial struct cpu
-    {
-
-    }
-
-    partial struct z
     {
         /// <summary>
         /// __m256d _mm256_blend_pd (__m256d a, __m256d b, const int imm8) VBLENDPD ymm, ymm, ymm/m256, imm8

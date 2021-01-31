@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static z;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Effects the reversal of the byte-level representation of each component in the source vector
@@ -24,11 +24,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vbyteswap(v16u(x)));
+                return generic<T>(cpu.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vbyteswap(v32u(x)));
+                return generic<T>(cpu.vbyteswap(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vbyteswap(v64u(x)));
+                return generic<T>(cpu.vbyteswap(v64u(x)));
             else
                 throw no<T>();
         }
@@ -44,11 +44,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return x;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vbyteswap(v16u(x)));
+                return generic<T>(cpu.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vbyteswap(v32u(x)));
+                return generic<T>(cpu.vbyteswap(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vbyteswap(v64u(x)));
+                return generic<T>(cpu.vbyteswap(v64u(x)));
             else
                 throw no<T>();
         }

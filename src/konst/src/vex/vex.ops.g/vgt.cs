@@ -118,7 +118,7 @@ namespace Z0
         {
             var a = cpu.vinsert(x,default, LaneIndex.L0);
             var b = cpu.vinsert(y,default, LaneIndex.L0);
-            return z.vlo(vgt(a,b));
+            return cpu.vlo(vgt(a,b));
         }
 
         /// <summary>

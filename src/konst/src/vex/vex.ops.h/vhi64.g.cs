@@ -16,7 +16,5 @@ namespace Z0
         public static ulong vhi64<T>(Vector128<T> src)
             where T : unmanaged
                 => vcell(v64u(src),1);
-
-
     }
 }
