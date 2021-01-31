@@ -21,16 +21,16 @@ namespace Z0.Asm
             => Kind = kind;
 
         [MethodImpl(Inline)]
-        public Register(RegisterIndex c, RegisterClass k, RegisterWidth w)
+        public Register(RegIndex c, RegClass k, RegWidth w)
             => Kind = Registers.join(c,k,w);
 
-        public RegisterIndex Code
+        public RegIndex Code
             => api.code(Kind);
 
-        public RegisterClass Class
+        public RegClass Class
             => api.@class(Kind);
 
-        public RegisterWidth Width
+        public RegWidth Width
             => api.width(Kind);
 
         public bit Hi

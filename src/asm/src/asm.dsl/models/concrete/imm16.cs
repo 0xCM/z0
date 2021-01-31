@@ -17,9 +17,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public imm16(ushort value)
-            {
-                Content = value;
-            }
+                => Content = value;
 
             public AsmOperandClass Kind
                 => AsmOperandClass.Imm;

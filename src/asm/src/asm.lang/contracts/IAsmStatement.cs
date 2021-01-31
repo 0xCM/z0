@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static AsmExpr;
-
     public interface IAsmStatement
     {
         AsmMnemonicExpr Mnemonic {get;}

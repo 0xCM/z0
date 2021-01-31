@@ -17,7 +17,5 @@ namespace Z0.Asm
         const NumericKind Closure = UnsignedInts;
 
         public Name Id => "asm";
-
-
     }
 }

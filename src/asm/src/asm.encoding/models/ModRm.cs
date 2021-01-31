@@ -26,7 +26,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ModRm(uint3 rm, uint3 reg, uint2 mod)
-            => Data = (uint8T)rm | ((uint8T)reg << RegIndex ) | ((uint8T)mod << ModIndex);
+            => Data = (uint8T)rm | ((uint8T)reg << ModRmMasks.RegIndex ) | ((uint8T)mod << ModIndex);
 
         [MethodImpl(Inline)]
         public ModRm(byte src)
@@ -47,7 +47,7 @@ namespace Z0.Asm
         public uint3 Reg
         {
             [MethodImpl(Inline)]
-            get => (Data & RegMask) >> RegIndex;
+            get => (Data & RegMask) >> ModRmMasks.RegIndex;
         }
 
         /// <summary>

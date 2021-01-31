@@ -22,9 +22,6 @@ namespace Z0.Asm
 
         public MemoryAddress HostAddress {get;}
 
-        public MemoryOffset OffsetAddress
-            => MemoryOffsets.offset(BaseAddress, HostAddress);
-
         public uint InstructionCount
         {
             [MethodImpl(Inline)]

@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines register class identifiers
     /// </summary>
-    public enum RegisterClass : byte
+    public enum RegClass : byte
     {
         /// <summary>
         /// A non-numbered general-purpose register of width <see cref='W8'/>, <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
@@ -32,12 +32,12 @@ namespace Z0.Asm
         FLAG = 4,
 
         /// <summary>
-        /// Classifies a control register
+        /// Class identifier control registers
         /// </summary>
         Control = 5,
 
         /// <summary>
-        /// Classifies a debug register
+        /// Class identifier for debug registers
         /// </summary>
         Debug = 6,
 
@@ -45,6 +45,11 @@ namespace Z0.Asm
         /// Classifies an instruction-pointer register of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>
         IPTR = 7,
+
+        /// <summary>
+        /// Class identifier for pointer table registers
+        /// </summary>
+        SPTR = 8,
 
         /// <summary>
         /// Classifies an xmm vector register of width <see cref='W128'/>

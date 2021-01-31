@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegisterIndex;
-    using static RegisterClass;
-    using static RegisterWidth;
+    using static RegIndex;
+    using static RegClass;
+    using static RegWidth;
     using static RegisterBits;
 
     using SR = SegRegKind;
@@ -365,7 +365,7 @@ namespace Z0.Asm
 
         ZMM15 = r15 | ZMM << ClassIndex | W512 << WidthIndex,
 
-        ZMM16 = RegisterIndex.r16 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM16 = RegIndex.r16 | ZMM << ClassIndex | W512 << WidthIndex,
 
         ZMM17 = r17 | ZMM << ClassIndex | W512 << WidthIndex,
 

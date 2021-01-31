@@ -19,7 +19,7 @@ namespace Z0.Asm
         public AsmOperandClass Kind {get;}
 
         [MethodImpl(Inline)]
-        public Arg32(uint value, SignKind sign, AsmOperandClass kind)
+        public Arg32(uint value, AsmOperandClass kind)
         {
             Content = value;
             Kind = kind;

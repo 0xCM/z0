@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegisterWidth;
+    using static RegWidth;
     using static RegisterBits;
-    using static RegisterClass;
+    using static RegClass;
 
+    /// <summary>
+    /// Classifies instruction pointer registers
+    /// </summary>
     public enum IpRegKind : uint
     {
         IP = IPTR << ClassIndex | W16 << WidthIndex,

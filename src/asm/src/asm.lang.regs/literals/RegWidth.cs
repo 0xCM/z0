@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a <see cref='DataWidth' subset that corresponds to x86 register widths and
     /// </summary>
-    public enum RegisterWidth : ushort
+    public enum RegWidth : ushort
     {
         /// <summary>
         /// Specifies the register with a 0-bit register

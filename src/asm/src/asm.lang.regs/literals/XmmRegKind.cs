@@ -5,9 +5,9 @@
 namespace Z0.Asm
 {
     using static RegisterBits;
-    using static RegisterIndex;
-    using static RegisterClass;
-    using static RegisterWidth;
+    using static RegIndex;
+    using static RegClass;
+    using static RegWidth;
 
     /// <summary>
     /// Defines <see cref='XMM'/> register classifiers

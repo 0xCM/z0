@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-
-
     using static AsmDsl;
 
     public unsafe readonly ref struct XmmRegSlots

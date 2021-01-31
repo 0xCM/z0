@@ -93,6 +93,4 @@ namespace Z0.Asm
         ///</summary>
         ID = 21,
     }
-
-
 }

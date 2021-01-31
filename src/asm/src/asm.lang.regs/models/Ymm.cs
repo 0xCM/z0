@@ -22,7 +22,7 @@ namespace Z0.Asm
             Kind = kind;
         }
 
-        public RegisterClass Class
-            => RegisterClass.YMM;
+        public RegClass Class
+            => RegClass.YMM;
     }
 }

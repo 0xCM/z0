@@ -43,8 +43,8 @@ namespace Z0.Asm
 
             public K Kind => K.AL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator G(al src)
@@ -83,8 +83,8 @@ namespace Z0.Asm
 
             public K Kind => K.DL;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
 
             [MethodImpl(Inline)]
             public static implicit operator G(dl src)
@@ -254,8 +254,8 @@ namespace Z0.Asm
 
             public K Kind => K.R11L;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
         }
 
         public struct r12b : IRegister<r12b,W,T>
@@ -277,8 +277,8 @@ namespace Z0.Asm
 
             public K Kind => K.R12L;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
         }
 
         public struct r13b : IRegister<r13b,W,T>
@@ -300,8 +300,8 @@ namespace Z0.Asm
 
             public K Kind => K.R13L;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
         }
 
         public struct r14b : IRegister<r14b,W,T>
@@ -323,8 +323,8 @@ namespace Z0.Asm
 
             public K Kind => K.R14L;
 
-            public RegisterClass Class
-                => RegisterClass.GP;
+            public RegClass Class
+                => RegClass.GP;
         }
 
         public struct r15b : IRegister<r15b,W,T>
@@ -345,9 +345,9 @@ namespace Z0.Asm
                 => Data = value;
 
             public K Kind => K.R15L;
-            public RegisterClass Class
+            public RegClass Class
 
-                => RegisterClass.GP;
+                => RegClass.GP;
        }
     }
 }

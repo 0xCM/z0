@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmDsl;
 
     using K = RegisterKind;
     using W = W64;

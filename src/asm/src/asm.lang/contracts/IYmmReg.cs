@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     public interface IYmmReg : IRegister<W256,Cell256>
     {
-        RegisterClass IRegister.Class
-            => RegisterClass.YMM;
+        RegClass IRegister.Class
+            => RegClass.YMM;
     }
 
     /// <summary>

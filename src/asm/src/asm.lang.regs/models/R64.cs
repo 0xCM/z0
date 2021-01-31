@@ -25,7 +25,7 @@ namespace Z0.Asm
             Kind = kind;
         }
 
-        public RegisterClass Class
-            => RegisterClass.GP;
+        public RegClass Class
+            => RegClass.GP;
     }
 }

@@ -15,6 +15,5 @@ namespace Z0.Asm
     {
         public static bool compound(in SigOperandExpr src)
             => Query.contains(src.Decoded, Chars.FSlash);
-
     }
 }

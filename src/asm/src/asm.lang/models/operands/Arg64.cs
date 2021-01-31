@@ -14,7 +14,6 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct Arg64 : IAsmOperand<Arg64,W64,ulong>
     {
-
         public ulong Content {get;}
 
         public AsmOperandClass Kind {get;}

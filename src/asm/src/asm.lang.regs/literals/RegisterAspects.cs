@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegisterAspectKind;
+    using static RegAspect;
 
     /// <summary>
     /// Defines register characteristics
@@ -20,334 +20,334 @@ namespace Z0.Asm
         // ~ 8-bit registers
         // ~ ------------------------------------------------------------------
 
-        public const RegisterAspectKind AL = default;
+        public const RegAspect AL = default;
 
-        public const RegisterAspectKind CL = default;
+        public const RegAspect CL = default;
 
-        public const RegisterAspectKind DL = default;
+        public const RegAspect DL = default;
 
-        public const RegisterAspectKind BL = default;
+        public const RegAspect BL = default;
 
-        public const RegisterAspectKind SPL = default;
+        public const RegAspect SPL = default;
 
-        public const RegisterAspectKind BPL = default;
+        public const RegAspect BPL = default;
 
-        public const RegisterAspectKind SIL = default;
+        public const RegAspect SIL = default;
 
-        public const RegisterAspectKind DIL = default;
+        public const RegAspect DIL = default;
 
-        public const RegisterAspectKind R8L = default;
+        public const RegAspect R8L = default;
 
-        public const RegisterAspectKind R9L = default;
+        public const RegAspect R9L = default;
 
-        public const RegisterAspectKind R10L = default;
+        public const RegAspect R10L = default;
 
-        public const RegisterAspectKind R11L = default;
+        public const RegAspect R11L = default;
 
-        public const RegisterAspectKind R12L = default;
+        public const RegAspect R12L = default;
 
-        public const RegisterAspectKind R13L = default;
+        public const RegAspect R13L = default;
 
-        public const RegisterAspectKind R14L = default;
+        public const RegAspect R14L = default;
 
-        public const RegisterAspectKind R15L = default;
+        public const RegAspect R15L = default;
 
         // ~ 16-bit registers
         // ~ ------------------------------------------------------------------
 
-        public const RegisterAspectKind AX = default;
+        public const RegAspect AX = default;
 
-        public const RegisterAspectKind CX = default;
+        public const RegAspect CX = default;
 
-        public const RegisterAspectKind DX = default;
+        public const RegAspect DX = default;
 
-        public const RegisterAspectKind BX = default;
+        public const RegAspect BX = default;
 
-        public const RegisterAspectKind SP = default;
+        public const RegAspect SP = default;
 
-        public const RegisterAspectKind BP = default;
+        public const RegAspect BP = default;
 
-        public const RegisterAspectKind SI = default;
+        public const RegAspect SI = default;
 
-        public const RegisterAspectKind DI = default;
+        public const RegAspect DI = default;
 
-        public const RegisterAspectKind R8W = default;
+        public const RegAspect R8W = default;
 
-        public const RegisterAspectKind R9W = default;
+        public const RegAspect R9W = default;
 
-        public const RegisterAspectKind R10W = default;
+        public const RegAspect R10W = default;
 
-        public const RegisterAspectKind R11W = default;
+        public const RegAspect R11W = default;
 
-        public const RegisterAspectKind R12W = default;
+        public const RegAspect R12W = default;
 
-        public const RegisterAspectKind R13W = default;
+        public const RegAspect R13W = default;
 
-        public const RegisterAspectKind R14W = default;
+        public const RegAspect R14W = default;
 
-        public const RegisterAspectKind R15W = default;
+        public const RegAspect R15W = default;
 
         // ~ 32-bit registers
         // ~ ------------------------------------------------------------------
 
-        public const RegisterAspectKind EAX = default;
+        public const RegAspect EAX = default;
 
-        public const RegisterAspectKind ECX = default;
+        public const RegAspect ECX = default;
 
-        public const RegisterAspectKind EDX = default;
+        public const RegAspect EDX = default;
 
-        public const RegisterAspectKind EBX = default;
+        public const RegAspect EBX = default;
 
-        public const RegisterAspectKind ESP = default;
+        public const RegAspect ESP = default;
 
-        public const RegisterAspectKind EBP = default;
+        public const RegAspect EBP = default;
 
-        public const RegisterAspectKind ESI = default;
+        public const RegAspect ESI = default;
 
-        public const RegisterAspectKind EDI = default;
+        public const RegAspect EDI = default;
 
-        public const RegisterAspectKind R8D = default;
+        public const RegAspect R8D = default;
 
-        public const RegisterAspectKind R9D = default;
+        public const RegAspect R9D = default;
 
-        public const RegisterAspectKind R10D = default;
+        public const RegAspect R10D = default;
 
-        public const RegisterAspectKind R11D = default;
+        public const RegAspect R11D = default;
 
-        public const RegisterAspectKind R12D = default;
+        public const RegAspect R12D = default;
 
-        public const RegisterAspectKind R13D = default;
+        public const RegAspect R13D = default;
 
-        public const RegisterAspectKind R14D = default;
+        public const RegAspect R14D = default;
 
-        public const RegisterAspectKind R15D = default;
+        public const RegAspect R15D = default;
 
         // ~ 64-bit registers
         // ~ ------------------------------------------------------------------
 
         //  %rdi, %rsi, %rdx, %rcx, %r8, and %r9
-        public const RegisterAspectKind RAX = Volatile | Return;
+        public const RegAspect RAX = Volatile | Return;
 
-        public const RegisterAspectKind RCX = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect RCX = Volatile | ArgSequence;
 
-        public const RegisterAspectKind RDX = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect RDX = Volatile | ArgSequence;
 
-        public const RegisterAspectKind RBX = Persistent;
+        public const RegAspect RBX = Persistent;
 
-        public const RegisterAspectKind RSP = Volatile | StackPointer;
+        public const RegAspect RSP = Volatile | StackPointer;
 
-        public const RegisterAspectKind RBP = Persistent;
+        public const RegAspect RBP = Persistent;
 
-        public const RegisterAspectKind RSI = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect RSI = Volatile | ArgSequence;
 
-        public const RegisterAspectKind RDI = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect RDI = Volatile | ArgSequence;
 
-        public const RegisterAspectKind R8Q = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect R8Q = Volatile | ArgSequence;
 
-        public const RegisterAspectKind R9Q = Volatile | RegisterAspectKind.ArgSequence;
+        public const RegAspect R9Q = Volatile | ArgSequence;
 
-        public const RegisterAspectKind R10Q = Volatile;
+        public const RegAspect R10Q = Volatile;
 
-        public const RegisterAspectKind R11Q = Volatile;
+        public const RegAspect R11Q = Volatile;
 
-        public const RegisterAspectKind R12Q = Persistent;
+        public const RegAspect R12Q = Persistent;
 
-        public const RegisterAspectKind R13Q = Persistent;
+        public const RegAspect R13Q = Persistent;
 
-        public const RegisterAspectKind R14Q = Persistent;
+        public const RegAspect R14Q = Persistent;
 
-        public const RegisterAspectKind R15Q = Persistent;
+        public const RegAspect R15Q = Persistent;
 
-        public const RegisterAspectKind XMM0 = default;
+        public const RegAspect XMM0 = default;
 
-        public const RegisterAspectKind XMM1 = default;
+        public const RegAspect XMM1 = default;
 
-        public const RegisterAspectKind XMM2 = default;
+        public const RegAspect XMM2 = default;
 
-        public const RegisterAspectKind XMM3 = default;
+        public const RegAspect XMM3 = default;
 
-        public const RegisterAspectKind XMM4 = default;
+        public const RegAspect XMM4 = default;
 
-        public const RegisterAspectKind XMM5 = default;
+        public const RegAspect XMM5 = default;
 
-        public const RegisterAspectKind XMM6 = default;
+        public const RegAspect XMM6 = default;
 
-        public const RegisterAspectKind XMM7 = default;
+        public const RegAspect XMM7 = default;
 
-        public const RegisterAspectKind XMM8 = default;
+        public const RegAspect XMM8 = default;
 
-        public const RegisterAspectKind XMM9 = default;
+        public const RegAspect XMM9 = default;
 
-        public const RegisterAspectKind XMM10 = default;
+        public const RegAspect XMM10 = default;
 
-        public const RegisterAspectKind XMM11 = default;
+        public const RegAspect XMM11 = default;
 
-        public const RegisterAspectKind XMM12 = default;
+        public const RegAspect XMM12 = default;
 
-        public const RegisterAspectKind XMM13 = default;
+        public const RegAspect XMM13 = default;
 
-        public const RegisterAspectKind XMM14 = default;
+        public const RegAspect XMM14 = default;
 
-        public const RegisterAspectKind XMM15 = default;
+        public const RegAspect XMM15 = default;
 
-        public const RegisterAspectKind XMM16 = default;
+        public const RegAspect XMM16 = default;
 
-        public const RegisterAspectKind XMM17 = default;
+        public const RegAspect XMM17 = default;
 
-        public const RegisterAspectKind XMM18 = default;
+        public const RegAspect XMM18 = default;
 
-        public const RegisterAspectKind XMM19 = default;
+        public const RegAspect XMM19 = default;
 
-        public const RegisterAspectKind XMM20 = default;
+        public const RegAspect XMM20 = default;
 
-        public const RegisterAspectKind XMM21 = default;
+        public const RegAspect XMM21 = default;
 
-        public const RegisterAspectKind XMM22 = default;
+        public const RegAspect XMM22 = default;
 
-        public const RegisterAspectKind XMM23 = default;
+        public const RegAspect XMM23 = default;
 
-        public const RegisterAspectKind XMM24 = default;
+        public const RegAspect XMM24 = default;
 
-        public const RegisterAspectKind XMM25 = default;
+        public const RegAspect XMM25 = default;
 
-        public const RegisterAspectKind XMM26 = default;
+        public const RegAspect XMM26 = default;
 
-        public const RegisterAspectKind XMM27 = default;
+        public const RegAspect XMM27 = default;
 
-        public const RegisterAspectKind XMM28 = default;
+        public const RegAspect XMM28 = default;
 
-        public const RegisterAspectKind XMM29 = default;
+        public const RegAspect XMM29 = default;
 
-        public const RegisterAspectKind XMM30 = default;
+        public const RegAspect XMM30 = default;
 
-        public const RegisterAspectKind XMM31 = default;
+        public const RegAspect XMM31 = default;
 
-        public const RegisterAspectKind YMM0 = default;
+        public const RegAspect YMM0 = default;
 
-        public const RegisterAspectKind YMM1 = default;
+        public const RegAspect YMM1 = default;
 
-        public const RegisterAspectKind YMM2 = default;
+        public const RegAspect YMM2 = default;
 
-        public const RegisterAspectKind YMM3 = default;
+        public const RegAspect YMM3 = default;
 
-        public const RegisterAspectKind YMM4 = default;
+        public const RegAspect YMM4 = default;
 
-        public const RegisterAspectKind YMM5 = default;
+        public const RegAspect YMM5 = default;
 
-        public const RegisterAspectKind YMM6 = default;
+        public const RegAspect YMM6 = default;
 
-        public const RegisterAspectKind YMM7 = default;
+        public const RegAspect YMM7 = default;
 
-        public const RegisterAspectKind YMM8 = default;
+        public const RegAspect YMM8 = default;
 
-        public const RegisterAspectKind YMM9 = default;
+        public const RegAspect YMM9 = default;
 
-        public const RegisterAspectKind YMM10 = default;
+        public const RegAspect YMM10 = default;
 
-        public const RegisterAspectKind YMM11 = default;
+        public const RegAspect YMM11 = default;
 
-        public const RegisterAspectKind YMM12 = default;
+        public const RegAspect YMM12 = default;
 
-        public const RegisterAspectKind YMM13 = default;
+        public const RegAspect YMM13 = default;
 
-        public const RegisterAspectKind YMM14 = default;
+        public const RegAspect YMM14 = default;
 
-        public const RegisterAspectKind YMM15 = default;
+        public const RegAspect YMM15 = default;
 
-        public const RegisterAspectKind YMM16 = default;
+        public const RegAspect YMM16 = default;
 
-        public const RegisterAspectKind YMM17 = default;
+        public const RegAspect YMM17 = default;
 
-        public const RegisterAspectKind YMM18 = default;
+        public const RegAspect YMM18 = default;
 
-        public const RegisterAspectKind YMM19 = default;
+        public const RegAspect YMM19 = default;
 
-        public const RegisterAspectKind YMM20 = default;
+        public const RegAspect YMM20 = default;
 
-        public const RegisterAspectKind YMM21 = default;
+        public const RegAspect YMM21 = default;
 
-        public const RegisterAspectKind YMM22 = default;
+        public const RegAspect YMM22 = default;
 
-        public const RegisterAspectKind YMM23 = default;
+        public const RegAspect YMM23 = default;
 
-        public const RegisterAspectKind YMM24 = default;
+        public const RegAspect YMM24 = default;
 
-        public const RegisterAspectKind YMM25 = default;
+        public const RegAspect YMM25 = default;
 
-        public const RegisterAspectKind YMM26 = default;
+        public const RegAspect YMM26 = default;
 
-        public const RegisterAspectKind YMM27 = default;
+        public const RegAspect YMM27 = default;
 
-        public const RegisterAspectKind YMM28 = default;
+        public const RegAspect YMM28 = default;
 
-        public const RegisterAspectKind YMM29 = default;
+        public const RegAspect YMM29 = default;
 
-        public const RegisterAspectKind YMM30 = default;
+        public const RegAspect YMM30 = default;
 
-        public const RegisterAspectKind YMM31 = default;
+        public const RegAspect YMM31 = default;
 
-        public const RegisterAspectKind ZMM0 = default;
+        public const RegAspect ZMM0 = default;
 
-        public const RegisterAspectKind ZMM1 = default;
+        public const RegAspect ZMM1 = default;
 
-        public const RegisterAspectKind ZMM2 = default;
+        public const RegAspect ZMM2 = default;
 
-        public const RegisterAspectKind ZMM3 = default;
+        public const RegAspect ZMM3 = default;
 
-        public const RegisterAspectKind ZMM4 = default;
+        public const RegAspect ZMM4 = default;
 
-        public const RegisterAspectKind ZMM5 = default;
+        public const RegAspect ZMM5 = default;
 
-        public const RegisterAspectKind ZMM6 = default;
+        public const RegAspect ZMM6 = default;
 
-        public const RegisterAspectKind ZMM7 = default;
+        public const RegAspect ZMM7 = default;
 
-        public const RegisterAspectKind ZMM8 = default;
+        public const RegAspect ZMM8 = default;
 
-        public const RegisterAspectKind ZMM9 = default;
+        public const RegAspect ZMM9 = default;
 
-        public const RegisterAspectKind ZMM10 = default;
+        public const RegAspect ZMM10 = default;
 
-        public const RegisterAspectKind ZMM11 = default;
+        public const RegAspect ZMM11 = default;
 
-        public const RegisterAspectKind ZMM12 = default;
+        public const RegAspect ZMM12 = default;
 
-        public const RegisterAspectKind ZMM13 = default;
+        public const RegAspect ZMM13 = default;
 
-        public const RegisterAspectKind ZMM14 = default;
+        public const RegAspect ZMM14 = default;
 
-        public const RegisterAspectKind ZMM15 = default;
+        public const RegAspect ZMM15 = default;
 
-        public const RegisterAspectKind ZMM16 = default;
+        public const RegAspect ZMM16 = default;
 
-        public const RegisterAspectKind ZMM17 = default;
+        public const RegAspect ZMM17 = default;
 
-        public const RegisterAspectKind ZMM18 = default;
+        public const RegAspect ZMM18 = default;
 
-        public const RegisterAspectKind ZMM19 = default;
+        public const RegAspect ZMM19 = default;
 
-        public const RegisterAspectKind ZMM20 = default;
+        public const RegAspect ZMM20 = default;
 
-        public const RegisterAspectKind ZMM21 = default;
+        public const RegAspect ZMM21 = default;
 
-        public const RegisterAspectKind ZMM22 = default;
+        public const RegAspect ZMM22 = default;
 
-        public const RegisterAspectKind ZMM23 = default;
+        public const RegAspect ZMM23 = default;
 
-        public const RegisterAspectKind ZMM24 = default;
+        public const RegAspect ZMM24 = default;
 
-        public const RegisterAspectKind ZMM25 = default;
+        public const RegAspect ZMM25 = default;
 
-        public const RegisterAspectKind ZMM26 = default;
+        public const RegAspect ZMM26 = default;
 
-        public const RegisterAspectKind ZMM27 = default;
+        public const RegAspect ZMM27 = default;
 
-        public const RegisterAspectKind ZMM28 = default;
+        public const RegAspect ZMM28 = default;
 
-        public const RegisterAspectKind ZMM29 = default;
+        public const RegAspect ZMM29 = default;
 
-        public const RegisterAspectKind ZMM30 = default;
+        public const RegAspect ZMM30 = default;
 
-        public const RegisterAspectKind ZMM31 = default;
+        public const RegAspect ZMM31 = default;
     }
 }

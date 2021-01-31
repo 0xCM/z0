@@ -15,7 +15,7 @@ namespace Z0.Asm
 
         public RegisterKind Kind {get;}
 
-        public RegisterIndex Index
+        public RegIndex Index
         {
             [MethodImpl(Inline)]
             get => Registers.code(Kind);
@@ -28,7 +28,7 @@ namespace Z0.Asm
             Kind = kind;
         }
 
-        public RegisterClass Class
-            => RegisterClass.XMM;
+        public RegClass Class
+            => RegClass.XMM;
     }
 }

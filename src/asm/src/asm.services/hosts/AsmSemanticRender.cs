@@ -110,7 +110,7 @@ namespace Z0.Asm
             Buffer.Add(SectionSep);
 
             var sequence = AsmOffsetSequence.Zero;
-            var @base = src.OffsetAddress.Base;
+            var @base = src.BaseAddress;
             var address = @base;
             var instructions = src.Instructions.View;
             var count = src.InstructionCount;

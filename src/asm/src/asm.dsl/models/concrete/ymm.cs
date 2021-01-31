@@ -18,10 +18,8 @@ namespace Z0.Asm
             public Cell256 Content {get;}
 
             [MethodImpl(Inline)]
-            public ymm0(Cell256 value)
-            {
-                Content = value;
-            }
+            public ymm0(Cell256 src)
+                => Content = src;
 
             public K Kind => K.XMM0;
         }
@@ -30,12 +28,9 @@ namespace Z0.Asm
         {
             public Cell256 Content {get;}
 
-
             [MethodImpl(Inline)]
-            public ymm1(Cell256 value)
-            {
-                Content = value;
-            }
+            public ymm1(Cell256 src)
+                => Content = src;
 
             public K Kind => K.XMM1;
         }
@@ -45,10 +40,8 @@ namespace Z0.Asm
             public Cell256 Content {get;}
 
             [MethodImpl(Inline)]
-            public ymm2(Cell256 value)
-            {
-                Content = value;
-            }
+            public ymm2(Cell256 src)
+                => Content = src;
 
             public K Kind => K.XMM2;
         }

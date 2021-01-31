@@ -8,7 +8,7 @@ namespace Z0.Asm
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
-        RegisterClass IRegister.Class
-            => RegisterClass.GP;
+        RegClass IRegister.Class
+            => RegClass.GP;
     }
 }

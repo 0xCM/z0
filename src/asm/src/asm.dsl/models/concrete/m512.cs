@@ -22,7 +22,6 @@ namespace Z0.Asm
             public m512(Cell512 src)
                 => Content = src;
 
-
             [MethodImpl(Inline)]
             public static implicit operator m512(Cell512 src)
                 => new m512(src);
@@ -35,7 +34,5 @@ namespace Z0.Asm
             public static implicit operator Cell512(m512 src)
                 => src.Content;
         }
-
     }
-
 }

@@ -15,14 +15,16 @@ namespace Z0.Asm
         {
             public Imm32 Content {get;}
 
+            [MethodImpl(Inline)]
+            public imm32(uint value)
+                => Content = value;
+
             public AsmOperandClass Kind
                 => AsmOperandClass.Imm;
 
             [MethodImpl(Inline)]
-            public imm32(uint value)
-            {
-                Content = value;
-            }
+            public static implicit operator Arg32(imm32 src)
+                => new Arg32(src.Content, src.Kind);
         }
     }
 }

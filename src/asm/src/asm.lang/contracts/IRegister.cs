@@ -14,10 +14,10 @@ namespace Z0.Asm
         /// </summary>
         RegisterKind Kind {get;}
 
-        RegisterIndex Index
-            => (RegisterIndex)((byte)Kind);
+        RegIndex Index
+            => (RegIndex)((byte)Kind);
 
-        RegisterClass Class
+        RegClass Class
             => default;
     }
 
@@ -58,7 +58,7 @@ namespace Z0.Asm
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        RegisterIndex IRegister.Index
-            => (RegisterIndex)z.nat8u<N>();
+        RegIndex IRegister.Index
+            => (RegIndex)z.nat8u<N>();
     }
 }

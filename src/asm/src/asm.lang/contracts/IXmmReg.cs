@@ -6,8 +6,8 @@ namespace Z0.Asm
 {
     public interface IXmmReg : IRegister<W128,Cell128>
     {
-        RegisterClass IRegister.Class
-            => RegisterClass.XMM;
+        RegClass IRegister.Class
+            => RegClass.XMM;
     }
 
     /// <summary>

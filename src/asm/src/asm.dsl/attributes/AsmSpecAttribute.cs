@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public class AsmSpecAttribute : Attribute
     {

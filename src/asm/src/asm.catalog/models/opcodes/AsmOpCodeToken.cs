@@ -9,13 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
-
     partial struct AsmOpCodeModel
     {
         public readonly struct OpCodeToken
         {
             public AsmOpCodeSyntaxKey Id {get;}
-
         }
     }
 }

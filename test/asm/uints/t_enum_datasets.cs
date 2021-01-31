@@ -36,9 +36,9 @@ namespace Z0.Asm
             emit<BitSeq8,byte>();
             emit<Hex8Seq,byte>();
             emit<RegisterKind,uint>();
-            emit<RegisterIndex,byte>();
-            emit<RegisterClass,byte>();
-            emit<RegisterWidth,ushort>();
+            emit<RegIndex,byte>();
+            emit<RegClass,byte>();
+            emit<RegWidth,ushort>();
             emit<AsmOperatingMode,byte>();
         }
 

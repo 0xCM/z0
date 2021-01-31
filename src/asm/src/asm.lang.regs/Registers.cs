@@ -7,11 +7,10 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static RegisterBits;
-    using static z;
 
-    using W = RegisterWidth;
+    using W = RegWidth;
 
     [ApiHost(ApiNames.AsmRegisters)]
     public readonly struct Registers
@@ -24,7 +23,7 @@ namespace Z0.Asm
             => kind;
 
         [MethodImpl(Inline), Op]
-        public static Register define(RegisterIndex c, RegisterClass k, RegisterWidth w)
+        public static Register define(RegIndex c, RegClass k, RegWidth w)
             => new Register(c, k, w);
 
         [MethodImpl(Inline), Op]
@@ -56,33 +55,33 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegisterIndex code(RegisterKind src)
-            => (RegisterIndex)((byte)src >> CodeIndex);
+        public static RegIndex code(RegisterKind src)
+            => (RegIndex)((byte)src >> CodeIndex);
 
         /// <summary>
         /// Determines the register class from the kind
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegisterClass @class(RegisterKind src)
-            => (RegisterClass)((uint)src >> ClassIndex);
+        public static RegClass @class(RegisterKind src)
+            => (RegClass)((uint)src >> ClassIndex);
 
         /// <summary>
         /// Determines the register width from the kind
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegisterWidth width(RegisterKind src)
-            => (RegisterWidth)((uint)src >> WidthIndex);
+        public static RegWidth width(RegisterKind src)
+            => (RegWidth)((uint)src >> WidthIndex);
 
         /// <summary>
-        /// Combines a <see cref='RegisterIndex'/>, a <see cref='RegisterClass'/> and a <see cref='RegisterWidth'/> to produce a <see cref='RegisterKind'/>
+        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegisterKind'/>
         /// </summary>
         /// <param name="i">The register index</param>
         /// <param name="k">The register class</param>
         /// <param name="w">The register width</param>
         [MethodImpl(Inline), Op]
-        public static RegisterKind join(RegisterIndex i, RegisterClass k, RegisterWidth w)
+        public static RegisterKind join(RegIndex i, RegClass k, RegWidth w)
             => (RegisterKind)((uint)i  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
 
         /// <summary>
@@ -94,23 +93,23 @@ namespace Z0.Asm
             => ((uint)Pow2x32.P2ᐞ31 & (uint)src) != 0;
 
         [MethodImpl(Inline), Op]
-        public static RegisterIndex code1(RegisterKind src)
-            => (RegisterIndex)Bits.bitslice((uint)src, (byte)FI.C, (byte)FW.C);
+        public static RegIndex code1(RegisterKind src)
+            => (RegIndex)Bits.bitslice((uint)src, (byte)FI.C, (byte)FW.C);
 
         [MethodImpl(Inline), Op]
-        public static RegisterClass @class1(RegisterKind src)
-            => (RegisterClass)Bits.bitslice((uint)src, (byte)FI.K, (byte)FW.K);
+        public static RegClass @class1(RegisterKind src)
+            => (RegClass)Bits.bitslice((uint)src, (byte)FI.K, (byte)FW.K);
 
         [MethodImpl(Inline), Op]
-        public static RegisterKind code(RegisterIndex src, RegisterKind dst)
+        public static RegisterKind code(RegIndex src, RegisterKind dst)
             => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.C, (byte)(FW.C), (ulong)(uint)dst));
 
         [MethodImpl(Inline), Op]
-        public static RegisterKind @class(RegisterClass src, RegisterKind dst)
+        public static RegisterKind @class(RegClass src, RegisterKind dst)
             => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.K, (byte)(FW.K), (ulong)(uint)dst));
 
         [MethodImpl(Inline), Op]
-        public static RegisterKind width(RegisterWidth src, RegisterKind dst)
+        public static RegisterKind width(RegWidth src, RegisterKind dst)
             => (RegisterKind)(Bits.bitcopy((uint)src, (byte)FI.K, (byte)(FW.W), (ulong)(uint)dst));
 
         [Op]
@@ -173,7 +172,7 @@ namespace Z0.Asm
             => src.Where(r => width(r) == W.W512);
 
         [MethodImpl(Inline)]
-        public static void split(RegisterKind src, out RegisterIndex c, out RegisterClass k, out RegisterWidth w)
+        public static void split(RegisterKind src, out RegIndex c, out RegClass k, out RegWidth w)
         {
             c = code(src);
             k = @class(src);
@@ -184,9 +183,9 @@ namespace Z0.Asm
         public static string format(Register src)
         {
             const string Sep = " | ";
-            var seg0 = BitFields.format<RegisterIndex,byte>(src.Code);
-            var seg1 = BitFields.format<RegisterClass,byte>(src.Class);
-            var seg2 = BitFields.format<RegisterWidth,ushort>(src.Width);
+            var seg0 = BitFields.format<RegIndex,byte>(src.Code);
+            var seg1 = BitFields.format<RegClass,byte>(src.Class);
+            var seg2 = BitFields.format<RegWidth,ushort>(src.Width);
             var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));
             return dst;
         }

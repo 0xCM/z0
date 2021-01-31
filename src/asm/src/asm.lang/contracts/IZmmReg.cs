@@ -8,8 +8,8 @@ namespace Z0.Asm
 
     public interface IZmmReg : IRegister<W512,Cell512>
     {
-        RegisterClass IRegister.Class
-            => RegisterClass.ZMM;
+        RegClass IRegister.Class
+            => RegClass.ZMM;
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ namespace Z0.Asm
         where F : struct, IZmmReg<F,N>
         where N : unmanaged, ITypeNat
     {
-        RegisterIndex IRegister.Index
-            => (RegisterIndex)nat64u<N>();
+        RegIndex IRegister.Index
+            => (RegIndex)nat64u<N>();
     }
 }
