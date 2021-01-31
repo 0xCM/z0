@@ -19,7 +19,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
-        /// Joins three operands via <see cref='BitLogicKinds.Or'/>
+        /// Joins three operands via the bitwise or operator
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -29,7 +29,7 @@ namespace Z0
             => (byte)(a | b | c);
 
         /// <summary>
-        /// Joins four operands via the <see cref='BitLogicKinds.Or'/> operator
+        /// Joins four operands via the bitwise or operator
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -39,22 +39,28 @@ namespace Z0
         public static byte or(byte a, byte b, byte c, byte d)
             => (byte)(a | b | c | d);
 
+        /// <summary>
+        /// Joins five operands via the bitwise or operator
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        /// <param name="c">The third operand</param>
+        /// <param name="d">The fourth operand</param>
         [MethodImpl(Inline), Or]
         public static byte or(byte a, byte b, byte c, byte d, byte e)
-
             => (byte)(a | b | c | d | e);
 
         [MethodImpl(Inline), Or]
-        public static void or(in byte A, in byte B, ref byte Z)
-            => store8(or(read8(A), read8(B)), ref Z);
+        public static void or(in byte a, in byte b, ref byte dst)
+            => store8(or(read8(a), read8(b)), ref dst);
 
         [MethodImpl(Inline), Xor]
         public static byte xor(byte a, byte b)
             => (byte)(a ^ b);
 
         [MethodImpl(Inline), Xor]
-        public static void xor(in byte A, in byte B, ref byte Z)
-            => store8(xor(read8(A), read8(B)), ref Z);
+        public static void xor(in byte a, in byte b, ref byte c)
+            => store8(xor(read8(a), read8(b)), ref c);
 
         [MethodImpl(Inline), Not]
         public static byte not(byte src)
@@ -173,12 +179,12 @@ namespace Z0
             => (byte)AndNot((uint)b,(uint)a);
 
         [MethodImpl(Inline), CNonImpl]
-        public static void cnonimpl(in byte A, in byte B, ref byte Z)
-            => store8(cnonimpl(read8(A), read8(B)), ref Z);
+        public static void cnonimpl(in byte a, in byte b, ref byte dst)
+            => dst = cnonimpl(a, b);
 
         [MethodImpl(Inline), XorNot]
-        public static void xornot(in byte A, in byte B, ref byte Z)
-            => store8(xor(read8(A), not(read8(B))), ref Z);
+        public static void xornot(in byte A, in byte B, ref byte dst)
+            => dst = xor(A, not(B));
 
         /// <summary>
         /// Computes the bitwise select among the operands
@@ -191,8 +197,8 @@ namespace Z0
             => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline), Select]
-        public static void select(in byte A, in byte B, in byte C, ref byte Z)
-            => store8(select(read8(A), read8(B), read8(C)), ref Z);
+        public static void select(in byte a, in byte b, in byte c, ref byte dst)
+            => dst = select(a,b,c);
 
         [MethodImpl(Inline), Op]
         public static uint join(byte a, byte b, byte c, byte d)

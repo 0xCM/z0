@@ -61,29 +61,5 @@ namespace Z0
         public static unsafe Span<T> span<T>(ref BitBlock1024 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 128));
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack2 src)
-            => cover(head(ref src), 2);
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack4 src)
-            => cover(head(ref src), 4);
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack8 src)
-            => cover(head(ref src), 8);
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack16 src)
-            => cover(head(ref src), 16);
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack32 src)
-            => cover(head(ref src), 32);
-
-        [MethodImpl(Inline), Op]
-        public static Span<char> span(ref CharStack64 src)
-            => cover(head(ref src), 64);
     }
 }

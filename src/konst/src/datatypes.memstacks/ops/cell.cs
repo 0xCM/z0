@@ -70,59 +70,5 @@ namespace Z0
         public static ref T cell<T>(ref BitBlock1024 src, int index)
             where T : unmanaged
                 => ref memory.add(head<T>(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack2 src, int index)
-            => ref memory.add(head(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack4 src, int index)
-            => ref Unsafe.Add(ref head(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack8 src, int index)
-            => ref Unsafe.Add(ref head(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack16 src, int index)
-            => ref memory.add(head(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack32 src, int index)
-            => ref Unsafe.Add(ref head(ref src), index);
-
-        /// <summary>
-        /// Queries/manipulates a index-identified character in a storage stack
-        /// </summary>
-        /// <param name="src">The character storage</param>
-        /// <param name="index">The character index</param>
-        [MethodImpl(Inline), Op]
-        public static ref char cell(ref CharStack64 src, int index)
-            => ref Unsafe.Add(ref head(ref src), index);
     }
 }

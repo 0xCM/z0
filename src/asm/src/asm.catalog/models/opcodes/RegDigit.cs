@@ -25,6 +25,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator RegDigit(uint3 src)
                 => new RegDigit(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator RegDigit(byte src)
+                => new RegDigit(src);
+
         }
     }
 }

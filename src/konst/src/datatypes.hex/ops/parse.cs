@@ -29,7 +29,7 @@ namespace Z0
             }
             else if(HexTest.lower(src))
             {
-                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.unsigned(0xA));
+                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.unsigned(0xa));
                 return true;
             }
             else

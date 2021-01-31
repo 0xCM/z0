@@ -38,6 +38,18 @@ namespace Z0
             }
         }
 
+        [Op]
+        public static bool parse(char c0, char c1, out byte dst)
+        {
+            if(parse(c0, out var d1) && parse(c1, out var d2))
+            {
+                dst = (byte)(d1 | (d2 << 8));
+                return true;
+            }
+            dst = 0;
+            return false;
+        }
+
         public static HexByteParser Service
             => default(HexByteParser);
 
@@ -57,6 +69,7 @@ namespace Z0
         /// Parses a single hex digit
         /// </summary>
         /// <param name="c">The source character</param>
+        [Op]
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
@@ -66,6 +79,32 @@ namespace Z0
                 return parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return unparsed<byte>(c);
+        }
+
+        /// <summary>
+        /// Parses a single hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [Op]
+        public static bool parse(char c, out byte dst)
+        {
+            if(HexTest.scalar(c))
+            {
+                dst = (byte)((byte)c - MinScalarCode);
+                return true;
+            }
+            else if(HexTest.upper(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeU + 0xA);
+                return true;
+            }
+            else if(HexTest.lower(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeL + 0xa);
+                return true;
+            }
+            dst = byte.MaxValue;
+            return false;
         }
 
 

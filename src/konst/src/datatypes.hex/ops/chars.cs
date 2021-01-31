@@ -91,12 +91,12 @@ namespace Z0
         public static ReadOnlySpan<char> chars(byte src)
         {
             ref readonly var codes = ref first(UpperHexDigits);
-            var storage = MemoryStacks.char2();
+            var storage = CharStacks.alloc(n2);
             ref var dst = ref storage.C0;
 
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
-            return MemoryStacks.span(ref storage);
+            return CharStacks.span(ref storage);
         }
 
         /// <summary>
@@ -108,12 +108,12 @@ namespace Z0
         {
             const int count = 4;
             ref readonly var codes = ref first(UpperHexDigits);
-            var storage = MemoryStacks.char4();
+            var storage = CharStacks.alloc(n4);
             ref var dst = ref storage.C0;
 
             for(var i=0; i < count; i++)
-                MemoryStacks.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
-            return MemoryStacks.span(ref storage);
+                CharStacks.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
+            return CharStacks.span(ref storage);
         }
 
         /// <summary>
@@ -125,12 +125,12 @@ namespace Z0
         {
             const byte count = 8;
             ref readonly var codes = ref first(UpperHexDigits);
-            var storage = MemoryStacks.char8();
+            var storage = CharStacks.alloc(n8);
             ref var dst = ref storage.C0;
 
             for(byte i=0; i < count; i++)
-                MemoryStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return MemoryStacks.span(ref storage);
+                CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return CharStacks.span(ref storage);
         }
 
         /// <summary>
@@ -142,12 +142,12 @@ namespace Z0
         {
             const byte count = 16;
             ref readonly var codes = ref first(UpperHexDigits);
-            var storage = MemoryStacks.char16();
+            var storage = CharStacks.alloc(n16);
             ref var dst = ref storage.C0;
 
             for(byte i=0; i<count; i++)
-                MemoryStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
-            return MemoryStacks.span(ref storage);
+                CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
+            return CharStacks.span(ref storage);
         }
 
         [MethodImpl(Inline), Op]

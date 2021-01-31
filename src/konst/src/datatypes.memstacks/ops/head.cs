@@ -65,53 +65,5 @@ namespace Z0
         public static ref T head<T>(ref BitBlock1024 src, T t = default)
             where T : unmanaged
                 => ref @as<ulong,T>(u64(src));
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack2 src)
-            => ref src.C0;
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack4 src)
-            => ref c16(src);
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack8 src)
-            => ref c16(src);
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack16 src)
-            => ref c16(src);
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack32 src)
-            => ref c16(src);
-
-        /// <summary>
-        /// Retrieves a reference to the leading character storage cell
-        /// </summary>
-        /// <param name="src">The character storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref char head(ref CharStack64 src)
-            => ref c16(src);
     }
 }

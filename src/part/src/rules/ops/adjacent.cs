@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Adjacent<T> adjacent<T>(T a, T b)
             => new Adjacent<T>(a, b);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Adjacent<S,T> adjacent<S,T>(S a, T b)
+            => new Adjacent<S,T>(a, b);
     }
 }

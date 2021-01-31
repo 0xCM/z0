@@ -34,62 +34,44 @@ namespace Z0.Asm
     REX.W+ 03 /r
     */
 
-    public readonly struct AsmOpCodeExpr : ITextExpr<AsmOpCodeExpr>
+    public readonly struct AsmOpCodeExpr
     {
-        public asci32 Content {get;}
+        public Index<string> Components {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeExpr(asci32 src)
-            => Content = src;
-
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.bytes(Content);
-        }
-
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.decode(Content);
-        }
-
-        public TextBlock Text
-        {
-            [MethodImpl(Inline)]
-            get => Content.Text;
-        }
+        public AsmOpCodeExpr(Index<string> src)
+            => Components = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => Components.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => Components.IsNonEmpty;
         }
 
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
-            => src.Content.Equals(Content);
+            => src.Components.Equals(Components);
 
         public override bool Equals(object src)
             => src is AsmOpCodeExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => Components.GetHashCode();
 
         public string Format()
-            => Content.Format();
+            => Components.Format();
 
         public override string ToString()
             => Format();
 
         public static AsmOpCodeExpr Empty
-            => new AsmOpCodeExpr(asci32.Null);
+            => new AsmOpCodeExpr(Index<string>.Empty);
     }
 }

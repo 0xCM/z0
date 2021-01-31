@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
+
     [ApiHost]
     public readonly partial struct AsmExpr
     {
@@ -36,8 +37,8 @@ namespace Z0.Asm
         /// REX+ 20 /r
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr opcode(asci32 src)
-            => new AsmOpCodeExpr(src);
+        public static AsmOpCodeExpr opcode(string src)
+            => new AsmOpCodeExpr(src.Split(src, Chars.Space));
 
         /// <summary>
         /// Defines a signature expression
