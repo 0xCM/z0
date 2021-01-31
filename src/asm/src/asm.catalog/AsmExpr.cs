@@ -12,7 +12,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmExpr
     {
-
         [MethodImpl(Inline), Op]
         public static AsmMnemonicExpr mnemonic(asci32 src)
             => new AsmMnemonicExpr(src);

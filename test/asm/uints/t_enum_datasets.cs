@@ -40,14 +40,12 @@ namespace Z0.Asm
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
             emit<AsmOperatingMode,byte>();
-            emit<AsmSigKeywordId,byte>();
-            emit<AsmOpCodeKeywordId,byte>();
         }
 
         public void enum_dataset_convert()
         {
             var path = CasePath(FileExtensions.Csv);
-            var enums = @readonly(Enums.describe<AsmSigKeywordId,byte>());
+            var enums = @readonly(Enums.describe<AsmSigSyntaxKey,byte>());
             EnumTables.emit(enums,path);
         }
 

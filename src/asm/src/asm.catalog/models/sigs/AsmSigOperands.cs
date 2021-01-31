@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static AsmSigOperandKind;
 
-    using static Part;
-
-    using K = AsmSigOperandId;
+    using K = AsmSigOperandKind;
 
     public readonly partial struct AsmSigOperands
     {
@@ -21,19 +18,21 @@ namespace Z0.Asm
 
         public static AsmSigOperand RAX() => K.RAX;
 
-        public static AsmSigOperand imm8() => K.Imm8;
+        public static AsmSigOperand imm8() => K.Imm8 | ImmClass;
 
-        public static AsmSigOperand imm16() => K.Imm16;
+        public static AsmSigOperand imm16() => K.Imm16 | ImmClass;
 
-        public static AsmSigOperand imm32() => K.Imm32;
+        public static AsmSigOperand imm32() => K.Imm32 | ImmClass;
 
-        public static AsmSigOperand rm8() => K.Rm8;
+        public static AsmSigOperand imm64() => K.Imm64 | ImmClass;
 
-        public static AsmSigOperand rm16() => K.Rm16;
+        public static AsmSigOperand rm8() => K.Rm8 | RmClass;
 
-        public static AsmSigOperand rm32() => K.Rm32;
+        public static AsmSigOperand rm16() => K.Rm16 | RmClass;
 
-        public static AsmSigOperand rm64() => K.Rm64;
+        public static AsmSigOperand rm32() => K.Rm32 | RmClass;
+
+        public static AsmSigOperand rm64() => K.Rm64 | RmClass;
 
         public static AsmSigOperand m8() => K.M8;
 

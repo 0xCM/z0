@@ -8,22 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static asci2 init(AsciCharCode c0, AsciCharCode c1)
-            => new asci2(pack(c0,c1, out var dst));
-
-        [MethodImpl(Inline), Op]
         public static asci2 init(N2 n)
             => new asci2(0x2020);
-
-        [MethodImpl(Inline), Op]
-        public static asci4 init(AsciCharCode c0, AsciCharCode c1, AsciCharCode c2, AsciCharCode c3)
-            => new asci4(pack(c0,c1,c2,c3, out var dst));
 
         [MethodImpl(Inline), Op]
         public static asci4 init(N4 n)
@@ -43,15 +35,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static asci2 init(N2 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci2(z.first(recover<AsciCharCode,ushort>(src)));
+            => new asci2(first(recover<AsciCharCode,ushort>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci4 init(N4 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci4(z.first(recover<AsciCharCode,asci4>(src)));
+            => new asci4(first(recover<AsciCharCode,asci4>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci8 init(N8 n, ReadOnlySpan<AsciCharCode> src)
-            => new asci8(z.first(z.recover<AsciCharCode,asci8>(src)));
+            => new asci8(first(z.recover<AsciCharCode,asci8>(src)));
 
         [MethodImpl(Inline), Op]
         public static asci16 init(N16 n, ReadOnlySpan<AsciCharCode> src)

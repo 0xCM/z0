@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using static Limits;
 
     /// <summary>
     /// Assigns surrogate keys to instruction signature keywords
     /// </summary>
-    public enum AsmSigKeywordId : byte
+    public enum AsmSigSyntaxKey : byte
     {
         /// <summary>
         /// Indicates the absence of a keyword specification

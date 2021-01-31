@@ -10,26 +10,9 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static memory;
 
     partial struct Lookups
     {
-        [Op]
-        public static KeyedValues<uint,TextBlock> keyed(in StringIndex src)
-            => keyed(src,sys.alloc<KeyedValue<uint,TextBlock>>(src.Count));
-
-        [MethodImpl(Inline), Op]
-        public static KeyedValues<uint,TextBlock> keyed(in StringIndex src, KeyedValue<uint,TextBlock>[] buffer)
-        {
-            var keys = src.Keys.View;
-            var values = src.Values.View;
-            var count = keys.Length;
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = root.kvp(skip(keys,i), skip(values,i));
-            return buffer;
-        }
-
         [MethodImpl(Inline)]
         public static KeyedValues<K,V> keyed<K,V>(KeyedValue<K,V>[] src)
             => new KeyedValues<K,V>(src);

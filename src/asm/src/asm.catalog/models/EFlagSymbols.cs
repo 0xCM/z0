@@ -5,17 +5,13 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static Pow2x32;
+    using static AsciCharCode;
+    using static root;
 
-    /// <summary>
-    /// Defines literals corresponding the bits in the EFLAGS register
-    /// </summary>
-    /// <remarks>
-    /// 3-16 Vol 1 of Intel Manual
-    /// </remarks>
-    [Flags]
-    public enum EFlagKind : uint
+    [ApiType]
+    public readonly struct EFlagSymbols
     {
         /// <summary>
         /// Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow
@@ -23,43 +19,43 @@ namespace Z0.Asm
         /// indicates an overflow condition for unsigned-integer arithmetic. It is also used
         /// in multiple-precision arithmetic
         ///</summary>
-        CF = P2ᐞ00,
+        public static EFlagSymbol CF => (C,F);
 
         /// <summary>
         /// Parity Flag (Status Flag): Set if the least-significant byte of the result contains an even number of 1 bits; cleared otherwise.
         ///</summary>
-        PF = P2ᐞ02,
+        public static EFlagSymbol PF => (P,F);
 
         /// <summary>
-        /// Adjust/Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow out of bit 3 of the result; cleared otherwise.
+        /// Auxillary Carry Flag (Status Flag): Set if an arithmetic operation generates a carry or a borrow out of bit 3 of the result; cleared otherwise.
         ///</summary>
-        AF = P2ᐞ04,
+        public static EFlagSymbol AF => (A,F);
 
         /// <summary>
         /// Zero Flag (Status Flag): Set if the result is zero; cleared otherwise
         ///</summary>
-        ZF = P2ᐞ06,
+        public static EFlagSymbol ZF => (Z,F);
 
         /// <summary>
         /// Sign Flag (Status Flag): Set equal to the most-significant bit of the result, which is the sign bit of a signed
         /// integer. (0 indicates a positive value and 1 indicates a negative value.)
         ///</summary>
-        SF = P2ᐞ07,
+        public static EFlagSymbol SF => (S,F);
 
         /// <summary>
         ///  Trap Flag (System Flag): Set to enable single-step mode for debugging; clear to disable single-step mode.
         ///</summary>
-        TF = P2ᐞ08,
+        public static EFlagSymbol TF => (T,F);
 
         /// <summary>
         /// Interupt Flag (System Flag)
         ///</summary>
-        IF = P2ᐞ09,
+        public static EFlagSymbol IF => (I,F);
 
         /// <summary>
         /// Direction Flag
         ///</summary>
-        DF = P2ᐞ10,
+        public static EFlagSymbol DF => (D,F);
 
         /// <summary>
         /// Overflow Flag (Status Flag): Set if the integer result is too large a positive number
@@ -67,36 +63,36 @@ namespace Z0.Asm
         /// operand; cleared otherwise. This flag indicates an overflow condition for signed-integer
         /// (two’s complement) arithmetic.
         ///</summary>
-        OF = P2ᐞ11,
+        public static EFlagSymbol OF => (O,F);
 
         /// <summary>
         /// Resume Flag
         ///</summary>
-        RF = P2ᐞ16,
+        public static EFlagSymbol RF => (R,F);
 
         /// <summary>
         /// Virtual 8086 Mode
         ///</summary>
-        VM = P2ᐞ17,
+        public static EFlagSymbol VM => (V,M);
 
         /// <summary>
         /// Alignment Check
         ///</summary>
-        AC = P2ᐞ18,
+        public static EFlagSymbol AC => (A,C);
 
         /// <summary>
         /// Virtual Interrupt Flag
         ///</summary>
-        VIF = P2ᐞ19,
+        public static EFlagSymbol VIF => triple(V,I,F);
 
         /// <summary>
         /// Virtual Interrupt Pending
         ///</summary>
-        VIP = P2ᐞ20,
+        public static EFlagSymbol VIP => triple(V,I,P);
 
         /// <summary>
         /// CPUID-capability
         ///</summary>
-        ID = P2ᐞ21,
+        public static EFlagSymbol ID => (I,D);
     }
 }

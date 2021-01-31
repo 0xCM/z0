@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Pow2x16;
     using static RegisterKind;
 
-    public enum AsmSigOperandId : byte
+    public enum AsmSigOperandKind : ushort
     {
         None = 0,
 
@@ -341,5 +341,13 @@ namespace Z0.Asm
         /// A vector memory operand; the operand size is dependent on the instruction
         /// </summary>
         MV,
+
+        RegClass = P2ᐞ08,
+
+        MemClass = P2ᐞ09,
+
+        RmClass = RegClass | MemClass,
+
+        ImmClass = P2ᐞ11,
     }
 }

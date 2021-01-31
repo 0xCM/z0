@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsciSequence sequence(string src)
         {
-            var buffer = z.alloc<byte>(src.Length);
+            var buffer = memory.alloc<byte>(src.Length);
             var seq = new AsciSequence(buffer);
             return encode(src,seq);
         }

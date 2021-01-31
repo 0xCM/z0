@@ -9,6 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
+    using static TextRules;
+
     partial class XText
     {
         /// <summary>
@@ -25,12 +27,12 @@ namespace Z0
             => string.Join(sep, src);
 
         [TextUtility]
-        public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
-            => Strings.concat(src,delimiter);
+        public static string Concat(this ReadOnlySpan<string> src, string sep = null)
+            => text.concat(src,sep);
 
         [TextUtility]
-        public static string Concat(this ReadOnlySpan<string> src, char? delimiter)
-            => Strings.concat(src,delimiter);
+        public static string Concat(this ReadOnlySpan<string> src, char? sep)
+            => text.concat(src, sep);
 
         /// <summary>
         /// Joins a sequence of source characters interspersed with a supplied separator
@@ -83,18 +85,7 @@ namespace Z0
 
         [TextUtility]
         public static string Concat(this Span<string> src, string sep)
-        {
-            var dst = text.build();
-            for(var i=0; i<src.Length; i++)
-            {
-                ref var cell = ref src[i];
-                if(i != src.Length - 1)
-                    dst.Append($"{cell}{sep}");
-                else
-                    dst.Append(cell);
-            }
-            return dst.ToString();
-        }
+            => TextRules.Format.concat(src,sep);
 
         /// <summary>
         /// Sequentially concatenates each indexed cell to the next without deimiters/interspersal

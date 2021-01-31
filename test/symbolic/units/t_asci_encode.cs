@@ -48,7 +48,7 @@ namespace Z0
         public void test_case_02()
         {
 
-            var a2 = Asci.init(C.A, C.Z);
+            var a2 = Asci.define(C.A, C.Z);
             Claim.ClaimEq(a2, "AZ");
 
             //var tc = AsciTestCase02.Create(c0);

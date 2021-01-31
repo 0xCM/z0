@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public asci2(string src)
-            => Storage = Asci.encode(n,src).Storage;
+            => Storage = Asci.encode(n, src).Storage;
 
         public bool IsBlank
         {
@@ -142,6 +142,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
             => new A(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A((char a, char b) src)
+            => Asci.encode(src.a, src.b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator A(Pair<char> src)
+            => Asci.encode(src.Left, src.Right);
 
         [MethodImpl(Inline)]
         public static implicit operator A(TextBlock src)

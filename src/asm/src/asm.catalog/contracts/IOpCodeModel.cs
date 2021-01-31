@@ -5,22 +5,18 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static Pow2x16;
+    using static Part;
 
-    [Flags]
-    public enum AsmSigOperandClass : ushort
+    public interface IOpCodeModel
     {
-        None = 0,
 
-        Reg = P2ᐞ08,
+    }
 
-        Mem = P2ᐞ09,
+    public interface IOpCodeModel<T> : IOpCodeModel
+        where T : unmanaged, IOpCodeModel<T>
+    {
 
-        Rm = P2ᐞ10,
-
-        Imm = P2ᐞ11,
-
-        NamedReg = P2ᐞ12
     }
 }

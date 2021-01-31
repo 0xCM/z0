@@ -7,11 +7,39 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Asci
     {
+        /// <summary>
+        /// Encodes a 2-character asci sequence
+        /// </summary>
+        /// <param name="a">The first asci character</param>
+        /// <param name="b">The second asci character</param>
+        [MethodImpl(Inline), Op]
+        public static asci2 encode(char a, char b)
+            => new asci2(pack((AsciCharCode)a, (AsciCharCode)b));
+
+        /// <summary>
+        /// Encodes a 3-character asci sequence
+        /// </summary>
+        /// <param name="a">The first asci character</param>
+        /// <param name="b">The second asci character</param>
+        /// <param name="c">The third asci character</param>
+        [MethodImpl(Inline), Op]
+        public static asci4 encode(char a, char b, char c)
+            => new asci4(pack((AsciCharCode)a, (AsciCharCode)b, (AsciCharCode)c, out var _ ));
+
+        /// <summary>
+        /// Encodes a 4-character asci sequence
+        /// </summary>
+        /// <param name="a">The first asci character</param>
+        /// <param name="b">The second asci character</param>
+        [MethodImpl(Inline), Op]
+        public static asci4 encode(char a, char b, char c, char d)
+            => new asci4(pack((AsciCharCode)a, (AsciCharCode)b, (AsciCharCode)c, (AsciCharCode)d, out var _ ));
+
         /// <summary>
         /// Converts 16 source characters to 16 asci codes
         /// </summary>
@@ -66,7 +94,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static int encode(ReadOnlySpan<char> src, ref byte dst)
-            => encode(z.first(src), src.Length, ref dst);
+            => encode(memory.first(src), src.Length, ref dst);
 
         /// <summary>
         /// Encodes each source string and packs the result into the target
@@ -94,7 +122,7 @@ namespace Z0
             for(var i=0u; i<src.Length; i++)
             {
                 j += (uint)(encode(skip(src, i), slice(dst,j)));
-                z.seek(dst, ++j) = delimiter;
+                seek(dst, ++j) = delimiter;
             }
             return j + 1;
         }
@@ -237,7 +265,6 @@ namespace Z0
         public static ref readonly asci2 encode(ReadOnlySpan<char> src, out asci2 dst)
         {
             dst = default;
-
             codes(src, span<asci2,AsciCharCode>(ref dst));
             return ref dst;
         }

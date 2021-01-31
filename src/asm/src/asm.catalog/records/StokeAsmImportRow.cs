@@ -31,7 +31,6 @@ namespace Z0.Asm
     | 03 /r                                      | ADD r32, r/m32                             | RM                                         | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | V                                          |                                            | addl                                       |                                            | Add r/m32 to r32.
     | REX.W+ 03 /r                               | ADD r64, r/m64                             | RM                                         | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | NE                                         |                                            | addq                                       |                                            | Add r/m64 to r64.
     */
-
     [Record(TableId)]
     public struct StokeAsmImportRow : IRecord<StokeAsmImportRow>
     {

@@ -21,7 +21,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public OneOf(Index<dynamic> choices)
                 => Elements = choices;
-
         }
 
         /// <summary>

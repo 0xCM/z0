@@ -157,6 +157,10 @@ namespace Z0
             => new A(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator A(asci2 src)
+            => new A(src.Storage);
+
+        [MethodImpl(Inline)]
         public static explicit operator byte(A src)
             => (byte)src.Storage;
 

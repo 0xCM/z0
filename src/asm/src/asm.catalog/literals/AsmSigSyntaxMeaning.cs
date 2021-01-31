@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using static Part;
 
     [LiteralProvider]
-    public readonly struct AsmSigKeywordMeaning
+    public readonly struct AsmSigSyntaxMeaning
     {
         public const string None = EmptyString;
 

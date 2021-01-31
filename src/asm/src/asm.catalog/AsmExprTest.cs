@@ -8,17 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static TextRules;
 
-    public readonly struct AsmOpCodeKeyword
+    [ApiHost]
+    public readonly partial struct AsmExprTest
     {
-        public string Value {get;}
+        public static bool compound(in SigOperandExpr src)
+            => Query.contains(src.Decoded, Chars.FSlash);
 
-        [MethodImpl(Inline)]
-        public AsmOpCodeKeyword(string src)
-            => Value = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeKeyword(string src)
-            => new AsmOpCodeKeyword(src);
     }
 }

@@ -6,34 +6,17 @@ namespace Z0.Asm
 {
     using static Part;
 
-    using KW = AsmOpCodeKeywordNames;
-
     [LiteralProvider]
-    public readonly struct AsmOpCodeKeywordMeaning
+    public readonly struct AsmOpCodeSyntaxMeaning
     {
-        /// <summary>
-        /// Defines the meaning of <see cref='KW.NE'/>
-        /// </summary>
         public const string NE = "Not encodable";
 
-        /// <summary>
-        /// Defines the meaning of <see cref='KW.NP'/>
-        /// </summary>
         public const string NP = "Indicates the use of 66/F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction";
 
-        /// <summary>
-        /// Defines the meaning of <see cref='KW.NFx'/>
-        /// </summary>
         public const string NFx = "Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.";
 
-        /// <summary>
-        /// Defines the meaning of <see cref='KW.Rexᕀ'/>
-        /// </summary>
         public const string Rexᕀ = "";
 
-        /// <summary>
-        /// Defines the meaning of <see cref='REXㆍWᕀ'/>
-        /// </summary>
         public const string REXㆍWᕀ = "";
 
         public const string ﾉr = "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand";

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static HexFormatSpecs;
     using static memory;
 
     partial struct HexFormat
@@ -25,7 +24,7 @@ namespace Z0
         public static string format<T>(ReadOnlySpan<T> src,  char sep = Chars.Space, bool specifier = false)
             where T : unmanaged
         {
-            var builder = Strings.build();
+            var builder = text.build();
             var count = src.Length;
             for(var i = 0; i<count; i++)
             {

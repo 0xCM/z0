@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int first(in asci4 src, byte match)
+        public static int index(in asci4 src, byte match)
             => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int first(in asci8 src, byte match)
+        public static int index(in asci8 src, byte match)
             => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int first(in asci16 src, byte match)
+        public static int index(in asci16 src, byte match)
             => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int first(in asci32 src, byte match)
+        public static int index(in asci32 src, byte match)
             => search(@byte(edit(src)), src.Capacity, match);
 
         /// <summary>
@@ -54,9 +54,8 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <param name="match">The value to match</param>
         [MethodImpl(Inline), Op]
-        public static int first(in asci64 src, byte match)
+        public static int index(in asci64 src, byte match)
             => search(@byte(edit(src)), src.Capacity, match);
-
 
         [MethodImpl(Inline), Op]
         static int search(in byte src, int count, byte match)
@@ -68,21 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static int first(ReadOnlySpan<byte> src, byte match)
-        {
-            for(var i=0u; i<src.Length; i++)
-                if(skip(src,i) == match)
-                    return (int)i;
-            return NotFound;
-        }
-
-        /// <summary>
-        /// Returns the index of the first source character that matches a target character
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <param name="match">The character to match</param>
-        [MethodImpl(Inline), Op]
-        static int first(ReadOnlySpan<char> src, char match)
+        static int search(ReadOnlySpan<byte> src, byte match)
         {
             for(var i=0u; i<src.Length; i++)
                 if(skip(src,i) == match)

@@ -4,152 +4,167 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [LiteralProvider]
-    public readonly struct AsmOpCodeKeywordNames
+    public enum AsmOpCodeSyntaxKey : byte
     {
+        /// <summary>
+        /// Indicates the absence of a keyword specification
+        /// </summary>
+        None = 0,
+
         /// <summary>
         /// Not encodable
         /// </summary>
-        public const string NE = "NE";
+        NE = 1,
 
         /// <summary>
         /// Indicates the use of 66/F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction
         /// </summary>
-        public const string NP = "NP";
+        NP,
 
         /// <summary>
         /// Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.
         /// </summary>
-        public const string NFx = "NFx";
+        NFx,
 
-        public const string REXᕀ = "REX+";
+        /// <summary>
+        /// 'Rex+'
+        /// </summary>
+        Rex,
 
-        public const string REXㆍWᕀ = "REX.W+";
+        /// <summary>
+        /// 'Rex.W+'
+        /// </summary>
+        RexW,
+
+        /// <summary>
+        /// 'Rex.R+'
+        /// </summary>
+        RexR,
 
         /// <summary>
         /// Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand
         /// </summary>
-        public const string ﾉr = "/r";
+        ﾉr,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ0 = "/0";
+        ﾉ0,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ1 = "/1";
+        ﾉ1,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ2 = "/2";
+        ﾉ2,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ3 = "/3";
+        ﾉ3,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ4 = "/4";
+        ﾉ4,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ5 = "/5";
+        ﾉ5,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ6 = "/6";
+        ﾉ6,
 
         /// <summary>
-        /// Indicates the ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode
+        /// The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode
         /// </summary>
-        public const string ﾉ7 = "/7";
+        ﾉ7,
 
         /// <summary>
-        /// Represents a 1-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+        /// A 1-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        public const string cb = "cb";
+        cb,
 
         /// <summary>
-        /// Represents a 2-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+        /// A 2-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        public const string cw = "cw";
+        cw,
 
         /// <summary>
-        /// Represents a 4-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+        /// A 4-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        public const string cd = "cd";
+        cd,
 
         /// <summary>
-        /// Represents a 6-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+        /// A 6-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        public const string cp = "cp";
+        cp,
 
         /// <summary>
-        /// Represents an 8-byte value following the opcode to specify a code offset and/or new value for the code segment register.
+        /// A 8-byte value following the opcode to specify a code offset and/or new value for the code segment register.
         /// </summary>
-        public const string co = "co";
+        co,
 
         /// <summary>
-        /// Represents a 10-byte value following the opcode to specify a code offset and/or new value for the code segment register
+        /// A 10-byte value following the opcode to specify a code offset and/or new value for the code segment register
         /// </summary>
-        public const string ct = "ct";
+        ct,
 
         /// <summary>
         /// A 1-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        public const string ib = "ib";
+        ib,
 
         /// <summary>
         /// A 2-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        public const string iw = "iw";
+        iw,
 
         /// <summary>
         /// A 4-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        public const string id = "id";
+        id,
 
         /// <summary>
         /// A 8-byte immediate operand to the instruction that follows the opcode or ModR/M bytes or scale-indexing bytes.
         /// </summary>
-        public const string io = "io";
+        io,
 
         /// <summary>
         /// For an 8-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        public const string ᕀrb = "+rb";
+        ᕀrb,
 
         /// <summary>
         /// For a 16-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        public const string ᕀrw = "+rw";
+        ᕀrw,
 
         /// <summary>
         /// For a 32-bit register indicates:
         /// (a) In non-64-bit mode, a register code is arithmetically added to the value of the opcode byte.
         /// (b) In 64-bit mode, the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        public const string ᕀrd = "+rd";
+        ᕀrd,
 
         /// <summary>
         /// For a 64-bit register, indicates the four bit field of REX.b and opcode[2:0] field encodes the register operand of the instruction
         /// </summary>
-        public const string ᕀro = "+ro";
+        ᕀro,
 
         /// <summary>
         /// A number used in floating-point instructions when one of the operands is ST(i) from the FPU register stack.
         /// </summary>
-        public const string ᕀi = "+i";
+        ᕀi,
     }
 }

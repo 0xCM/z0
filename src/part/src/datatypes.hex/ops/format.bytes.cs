@@ -23,7 +23,7 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<byte> src, char sep, bool zpad, bool specifier, bool uppercase, bool prespec, int? segwidth)
         {
-            var dst = Strings.build();
+            var dst = text.build();
             var size = src.Length;
             var pre = (specifier && prespec) ? "0x" : EmptyString;
             var post = (specifier && !prespec) ? "h" : EmptyString;

@@ -234,7 +234,7 @@ namespace Z0.Asm
         [Op]
         string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
             => text.concat(FormatAddress(src, AddressPad),
-                Strings.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
         static string format(AsmInstructionSpecExprLegacy src)
@@ -275,7 +275,7 @@ namespace Z0.Asm
 
         [Op]
         static string format(in AsmImmInfo src)
-            => Strings.concat(src.Value.FormatHex(zpad:false, prespec:false));
+            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         [Op]
         static string format(IceRegister src)
@@ -362,7 +362,7 @@ namespace Z0.Asm
 
         [Op]
         static string FormatAddress(IceInstruction src, int pad = 16)
-            => Strings.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
+            => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         [Op]
         static string format(IceMemorySize src)

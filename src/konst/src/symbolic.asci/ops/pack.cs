@@ -12,9 +12,13 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static ref ushort pack(AsciCharCode c0, AsciCharCode c1, out ushort dst)
+        public static ushort pack(AsciCharCode c0, AsciCharCode c1)
+            => (ushort)((uint)c0 | ((uint)c1 << 8));
+
+        [MethodImpl(Inline), Op]
+        public static ref uint pack(AsciCharCode c0, AsciCharCode c1, AsciCharCode c2, out uint dst)
         {
-            dst = (ushort)((ushort)c0 | ((ushort)c1 << 8));
+            dst = (uint)c0 | ((uint)c1 << 8) | (uint)c2 << 16;
             return ref dst;
         }
 
