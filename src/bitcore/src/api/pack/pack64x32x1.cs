@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Bits
     {
@@ -33,24 +33,24 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong pack64x32x1(in uint src, ref ulong dst)
         {
-            var v0 = cpu.vload(n256, skip(src, 0*8));
-            var v1 = cpu.vload(n256, skip(src, 1*8));
-            var x = cpu.vcompact16u(v0, v1, n256);
-            v0 = cpu.vload(n256, skip(src,2*8));
-            v1 = cpu.vload(n256, skip(src,3*8));
+            var v0 = cpu.vload(w256, skip(src, 0*8));
+            var v1 = cpu.vload(w256, skip(src, 1*8));
+            var x = cpu.vcompact16u(v0, v1, w256);
+            v0 = cpu.vload(w256, skip(src,2*8));
+            v1 = cpu.vload(w256, skip(src,3*8));
 
-            var y = cpu.vcompact16u(v0, v1, n256);
-            var packed = (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,n256));
+            var y = cpu.vcompact16u(v0, v1, w256);
+            var packed = (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,w256));
 
-            v0 = cpu.vload(n256, skip(src,4*8));
-            v1 = cpu.vload(n256, skip(src,5*8));
-            x = cpu.vcompact16u(v0,v1,n256);
+            v0 = cpu.vload(w256, skip(src,4*8));
+            v1 = cpu.vload(w256, skip(src,5*8));
+            x = cpu.vcompact16u(v0,v1,w256);
 
-            v0 = cpu.vload(n256, skip(src,6*8));
-            v1 = cpu.vload(n256, skip(src,7*8));
-            y = cpu.vcompact16u(v0,v1,n256);
+            v0 = cpu.vload(w256, skip(src,6*8));
+            v1 = cpu.vload(w256, skip(src,7*8));
+            y = cpu.vcompact16u(v0,v1,w256);
 
-            packed |= (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,n256)) << 32;
+            packed |= (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,w256)) << 32;
 
             dst = packed;
             return ref dst;

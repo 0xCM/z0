@@ -16,7 +16,6 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
         public readonly struct Range<T> : IRule<Range<T>,T>
-            where T : unmanaged, IEquatable<T>
         {
             /// <summary>
             /// The min value in the range

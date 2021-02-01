@@ -16,7 +16,7 @@ namespace Z0.Asm
         public static ReadOnlySpan<Link<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
         {
             var hander = new AsmMovHandler(capacity);
-            var fx = span(src.Instructions.Data);
+            var fx = src.Instructions.View;
             var count = fx.Length;
             for(var i=0u; i<count; i++)
                 hander.Handle(skip(fx, i));

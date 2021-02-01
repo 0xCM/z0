@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct memory
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryAddress src, int count)
             where T : unmanaged

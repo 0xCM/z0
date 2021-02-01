@@ -16,14 +16,14 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static AsmStatement<r16> push(r16 r)
-            => asm.statement(M.push, r);
+            => asm.statement(M.PUSH, r);
 
         [MethodImpl(Inline), Op]
         public static AsmStatement<r32> push(r32 r)
-            => asm.statement(M.push, r);
+            => asm.statement(M.PUSH, r);
 
         [MethodImpl(Inline), Op]
         public static AsmStatement<r64> push(r64 r)
-            => asm.statement(M.push, r);
+            => asm.statement(M.PUSH, r);
     }
 }

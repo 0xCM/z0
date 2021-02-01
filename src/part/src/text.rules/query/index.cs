@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct TextRules
     {
-        partial struct Parse
+        partial struct Query
         {
             [Op]
             public static int index(ReadOnlySpan<char> src, char match)
@@ -24,6 +24,18 @@ namespace Z0
                         return i;
                 return NotFound;
             }
+
+            [Op]
+            public static int index(string src, char match)
+            {
+                var count = src.Length;
+                ref readonly var c = ref first(src);
+                for(var i=0; i<count; i++)
+                    if(skip(c, i) == match)
+                        return i;
+                return NotFound;
+            }
+
         }
     }
 }

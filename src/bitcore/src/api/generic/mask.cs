@@ -11,7 +11,6 @@ namespace Z0
 
     partial class gbits
     {
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitMask<T> mask<T>(T invariant)
             where T : unmanaged

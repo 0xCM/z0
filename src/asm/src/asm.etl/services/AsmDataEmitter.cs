@@ -101,8 +101,6 @@ namespace Z0
             var emitter = AsmJmpEmitter.create(Wf);
             var dst = Wf.Db().Table(AsmJmpRow.TableId, src.Part);
             emitter.Emit(rows, dst);
-            // var step = new AsmJmpRowEmitter(Wf, src);
-            // step.Emit();
         }
 
         public void EmitCallRows()
@@ -134,27 +132,19 @@ namespace Z0
         }
 
         void CreateRecords(in CodeBlock code, in IceInstructionList asm)
-        {
-            var data = code.Code;
-            var bytes = data.View;
-            var instructions = asm.Data;
-            CreateRecords(code, instructions);
-        }
+            => CreateRecords(code, asm.Storage);
 
         void CreateRecords(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
-            ushort offset = 0;
+            var offset = z16;
+            var count = src.Length;
 
-            for(var i=0; i<src.Length; i++)
+            for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref src[i];
-
                 var size = (ushort)instruction.ByteLength;
-                var encoded = bytes.Slice(offset, size);
-
-                var a16 = new Address16(offset);
-                CreateRecord(code, a16, encoded, instruction);
+                CreateRecord(code, new Address16(offset), bytes.Slice(offset, size), instruction);
                 offset += size;
             }
         }
@@ -162,7 +152,6 @@ namespace Z0
         void CreateRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src)
         {
             var mnemonic = src.Mnemonic;
-
             if(mnemonic != 0)
             {
                 var record = new AsmRow();

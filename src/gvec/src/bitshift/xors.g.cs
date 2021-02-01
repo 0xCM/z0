@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Xors, Closures(Integers)]
         public static Vector128<T> vxors<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
-                => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
+                => vxor(x,vxor(gcpu.vsll(x, count),vsrl(x,count)));
 
         /// <summary>
         /// Computes x ^ ((x << offset) ^ (x >> offset));
@@ -32,6 +32,6 @@ namespace Z0
         [MethodImpl(Inline), Xors, Closures(Integers)]
         public static Vector256<T> vxors<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
-                => vxor(x,vxor(vsll(x, count),vsrl(x,count)));
+                => vxor(x,vxor(gcpu.vsll(x, count),vsrl(x,count)));
     }
 }

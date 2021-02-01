@@ -51,13 +51,12 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src)
+        public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src, BinaryCode encoded)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
-            var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString());
-            var code = AsmOpCodeExprLegacy.create(ocs);
-            return new AsmInstructionSpecExprLegacy(code, sig);
+            var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString(), encoded);
+            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(ocs), sig);
         }
 
         [MethodImpl(Inline), Op]
@@ -74,15 +73,16 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The iced source value</param>
         [Op]
-        public static IceInstruction extract(Iced.Instruction src, string formatted)
+        public static IceInstruction extract(Iced.Instruction src, string formatted, BinaryCode encoded)
         {
             var info = src.GetInfo();
+            root.require(src.ByteLength == encoded.Length, () => $"The instruction byte length {src.ByteLength} does not match the encoded length {encoded.Length}");
             return new IceInstruction
             {
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                Specifier = specifier(src),
+                Specifier = specifier(src, encoded),
                 ByteLength = src.ByteLength,
                 ConditionCode = Deicer.Thaw(src.ConditionCode),
                 CodeSize = Deicer.Thaw(src.CodeSize),

@@ -86,10 +86,10 @@ namespace Z0
         {
             switch(kind)
             {
-                case BSK.Sll: return gvec.vsll(a,count);
+                case BSK.Sll: return gcpu.vsll(a,count);
                 case BSK.Srl: return gvec.vsrl(a,count);
                 case BSK.Rotl: return gvec.vrotl(a,count);
-                case BSK.Rotr: return gvec.vrotr(a,count);
+                case BSK.Rotr: return gcpu.vrotr(a,count);
                 default: throw Unsupported.value(sig<T>(kind));
             }
         }

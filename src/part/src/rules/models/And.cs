@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Conjunction
         /// </summary>
-        public readonly struct And
+        public readonly struct And : IRule<And>
         {
             public Index<dynamic> Elements {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Conjunction
         /// </summary>
-        public readonly struct And<T>
+        public readonly struct And<T> : IRule<And<T>,T>
         {
             public Index<T> Elements {get;}
 

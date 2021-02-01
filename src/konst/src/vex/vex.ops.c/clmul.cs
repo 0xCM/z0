@@ -10,7 +10,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
@@ -117,6 +117,7 @@ namespace Z0
             var z = CarrylessMultiply(u, v, 0);
             return vcell(z,0);
         }
+
     }
 
     /// <summary>

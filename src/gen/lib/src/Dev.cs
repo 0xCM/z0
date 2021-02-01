@@ -19,6 +19,7 @@ namespace Z0
     {
         const string NetSdk = "Microsoft.NET.Sdk";
 
+
         [Op]
         public static Project resbytes()
         {
@@ -161,5 +162,13 @@ namespace Z0
             dst.Platform = src.PlatformName;
             return ref dst;
         }
+
+        public const string SourceCodeHeader =
+@"//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+";
+
     }
 }

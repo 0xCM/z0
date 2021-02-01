@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static byte clmul(byte a, byte b)
-            => z.clmulr(n8,a,b,Redux);
+            => cpu.clmulr(n8,a,b,Redux);
 
         /// <summary>
         /// Fills caller-allocated memory with a GF(256) multiplication table

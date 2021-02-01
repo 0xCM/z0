@@ -8,6 +8,7 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmExpr;
+    using static TextRules;
 
     [ApiHost]
     public sealed partial class AsmSigParser : WfService<AsmSigParser, AsmSigParser>
@@ -28,15 +29,15 @@ namespace Z0.Asm
         public bool IsComposite(SigOperandExpr src)
         {
 
-            return src.Content.Contains(AsciChar.FS);
+            return Query.contains(src.Text, Chars.FSlash);
         }
 
         [Op]
         public bool ParseMnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
         {
             dst = AsmMnemonicExpr.Empty;
-            var content = src.Content;
-            var index = content.FirstIndexOf(AsciChar.Space);
+            var content = src.Text;
+            var index = Query.index(content, Chars.Space);
             if(index != NotFound)
             {
                 dst = text.slice(content,0, index);

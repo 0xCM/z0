@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<N16,ushort> col<T>(in BitGrid128<N16,N8,T> g, int index)
             where T : unmanaged
-                => gvec.vtakemask(gvec.vsll(g.Content, (byte)(7 - index)));
+                => gvec.vtakemask(gcpu.vsll(g.Content, (byte)(7 - index)));
 
         /// <summary>
         /// Extracts an index-identified 32-bit grid column
@@ -209,6 +209,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<N32,uint> col<T>(in BitGrid256<N32,N8,T> g, int index)
             where T : unmanaged
-                => gvec.vtakemask(gvec.vsll(g.Content, (byte)(7 - index)));
+                => gvec.vtakemask(gcpu.vsll(g.Content, (byte)(7 - index)));
     }
 }

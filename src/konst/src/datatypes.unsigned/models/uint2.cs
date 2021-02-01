@@ -23,6 +23,54 @@ namespace Z0
     {
         internal readonly T data;
 
+        [MethodImpl(Inline)]
+        internal uint2(uint8T src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(sbyte src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(short src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(ushort src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(int x)
+            => data = (byte)((byte)x & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(uint src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(long src)
+            => data = (byte)((byte)src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint2(uint src, bool safe)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(K src)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint2(BitState src)
+            => data = (byte)src;
+
         /// <summary>
         /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
         /// </summary>
@@ -90,58 +138,10 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline)]
-        internal uint2(uint8T src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(byte src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(byte src, bool @unchecked)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(sbyte src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(short src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(ushort src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(int x)
-            => data = (byte)((byte)x & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(uint src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(long src)
-            => data = (byte)((byte)src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint2(uint src, bool safe)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(K src)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint2(BitState src)
-            => data = (byte)src;
-
         /// <summary>
         /// Queries an index-identified bit
         /// </summary>
-        public BitState this[byte pos]
+        public bit this[byte pos]
         {
             [MethodImpl(Inline)]
             get => test(this, pos);
@@ -262,6 +262,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator uint8T(U src)
             => new uint8T(src.data);
+
+        [MethodImpl(Inline)]
+        public static explicit operator bit(U src)
+            => new bit(src.data & 1);
 
         [MethodImpl(Inline)]
         public static implicit operator U(K src)
@@ -442,5 +446,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U operator >= (U lhs, U rhs)
             => @bool(lhs.data >= rhs.data);
-   }
+    }
 }

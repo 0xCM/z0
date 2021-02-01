@@ -47,14 +47,10 @@ namespace Z0.Asm
     /// <remarks>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>
     {
-        public asci64 Content {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
         public AsmSigExpr(string src)
-            => Content = src;
-
-        [MethodImpl(Inline)]
-        public AsmSigExpr(in asci64 src)
             => Content = src;
 
         /// <summary>
@@ -78,22 +74,10 @@ namespace Z0.Asm
             get => Content.IsNonEmpty;
         }
 
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.bytes(Content);
-        }
-
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.decode(Content);
-        }
-
         public TextBlock Text
         {
             [MethodImpl(Inline)]
-            get => Content.Text;
+            get => Content;
         }
 
         [MethodImpl(Inline)]
@@ -116,14 +100,6 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator TextBlock(AsmSigExpr src)
             => new TextBlock(src.Content.Format());
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator AsmSigExpr(string src)
-        //     => new AsmSigExpr(src);
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator AsmSigExpr(asci64 src)
-        //     => new AsmSigExpr(src);
 
         public static AsmSigExpr Empty
             => new AsmSigExpr(EmptyString);

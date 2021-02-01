@@ -23,27 +23,27 @@ namespace Z0
             {
                 var content = span(s);
                 var size = s.Length*2;
-                var seg = segment(pvoid(first(content)), size);
+                var seg = memseg(pvoid(first(content)), size);
                 return new FieldRef(src, seg);
             }
             else if(type.IsEnum)
             {
                 var nk = type.GetEnumUnderlyingType().NumericKind();
                 var size = nk.Width()/8;
-                var seg = segment(@base + offset, size);
+                var seg = memseg(@base + offset, size);
                 return new FieldRef(src, seg);
             }
             else if(type.IsPrimalNumeric())
             {
                 var nk = type.NumericKind();
                 var size = nk.Width()/8;
-                var seg = segment(@base + offset, size);
+                var seg = memseg(@base + offset, size);
                 return new FieldRef(src, seg);
             }
             else if(type.IsChar())
-                return new FieldRef(src, segment(@base + offset, 2));
+                return new FieldRef(src, memseg(@base + offset, 2));
             else if(type.IsDecimal())
-                return new FieldRef(src, segment(@base + offset, 16));
+                return new FieldRef(src, memseg(@base + offset, 16));
             return FieldRef.Empty;
         }
 

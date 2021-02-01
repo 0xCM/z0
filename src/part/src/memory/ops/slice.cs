@@ -72,6 +72,17 @@ namespace Z0
         /// <param name="length"></param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, long offset, long length)
+            => cover(skip(src, offset), length);
+
+        /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, ulong offset, ulong length)
             => cover(skip(src, offset), length);
 
@@ -115,6 +126,17 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, uint offset, uint length)
+            => CreateSpan(ref seek(first(src), offset), (int)length);
+
+        /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> slice<T>(Span<T> src, long offset, long length)
             => CreateSpan(ref seek(first(src), offset), (int)length);
 
         /// <summary>

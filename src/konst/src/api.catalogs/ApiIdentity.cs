@@ -78,11 +78,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ApiClass kind(in ApiArtifactUri src)
-            => (ApiClass)vcell(src.Data, KeyIndex);
+            => (ApiClass)cpu.vcell(src.Data, KeyIndex);
 
         [MethodImpl(Inline), Op]
         public static PartId part(in ApiArtifactUri src)
-            => (PartId)vcell(src.Data, PartIndex);
+            => (PartId)cpu.vcell(src.Data, PartIndex);
 
         /// <summary>
         /// Creates a <see cref='ApiArtifactUri'/> that identifies a specified method

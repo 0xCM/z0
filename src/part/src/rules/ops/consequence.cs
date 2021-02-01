@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct Rules
     {
@@ -18,10 +17,8 @@ namespace Z0
         /// <param name="id"></param>
         /// <param name="term"></param>
         /// <typeparam name="C"></typeparam>
-        /// <returns></returns>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Consequent<C> consequence<C>(TermId id, C term)
-            where C : IEquatable<C>
-                => new Consequent<C>(id, term);
+            => new Consequent<C>(id, term);
     }
 }

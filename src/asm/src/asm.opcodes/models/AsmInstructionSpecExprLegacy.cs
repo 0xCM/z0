@@ -19,10 +19,10 @@ namespace Z0.Asm
         public AsmSigExpr Sig {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSpecExprLegacy(in AsmOpCodeExprLegacy opcode, in AsmSigExpr pattern)
+        public AsmInstructionSpecExprLegacy(in AsmOpCodeExprLegacy opcode, in AsmSigExpr sig)
         {
             OpCode = opcode;
-            Sig = pattern;
+            Sig = sig;
         }
 
         public bool Equals(AsmInstructionSpecExprLegacy src)

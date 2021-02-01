@@ -93,6 +93,10 @@ namespace Z0
             => x.data == 0;
 
         [MethodImpl(Inline)]
+        public static explicit operator bit(S src)
+            => new bit(src.data & 1);
+
+        [MethodImpl(Inline)]
         public static implicit operator S(byte src)
             => new S(src);
 

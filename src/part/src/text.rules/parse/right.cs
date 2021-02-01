@@ -17,7 +17,7 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static string right(string src, int desired)
             {
-                var count = length(src);
+                var count = Query.length(src);
                 if (count == 0)
                     return EmptyString;
 

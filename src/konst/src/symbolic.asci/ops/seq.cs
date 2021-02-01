@@ -12,11 +12,11 @@ namespace Z0
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
-        public static AsciSequence sequence(byte[] src)
+        public static AsciSequence seq(byte[] src)
             => new AsciSequence(src);
 
         [MethodImpl(Inline), Op]
-        public static AsciSequence sequence(string src)
+        public static AsciSequence seq(string src)
         {
             var buffer = memory.alloc<byte>(src.Length);
             var seq = new AsciSequence(buffer);
@@ -24,14 +24,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static AsciSequence sequence(string src, byte[] dst)
+        public static AsciSequence seq(string src, byte[] dst)
         {
             encode(src,dst);
-            return sequence(dst);
+            return seq(dst);
         }
 
         [MethodImpl(Inline)]
-        public static AsciSequence<A> sequence<A>(A content)
+        public static AsciSequence<A> seq<A>(A content)
             where A : unmanaged, IByteSeq
                 => new AsciSequence<A>(content);
     }

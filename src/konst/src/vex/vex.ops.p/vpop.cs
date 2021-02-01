@@ -12,43 +12,42 @@ namespace Z0
     using static z;
     using static BitMasks.Literals;
 
-    [ApiHost(ApiNames.VexPop, true)]
-    public readonly struct VPop
+    partial struct cpu
     {
         static Vector256<ulong> K1
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n256, Even64);
+            get => vbroadcast(n256, Even64);
         }
 
         static Vector256<ulong> K2
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n256, Even64x2);
+            get => vbroadcast(n256, Even64x2);
         }
 
         static Vector256<ulong> K4
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n256, Lsb64x8x4);
+            get => vbroadcast(n256, Lsb64x8x4);
         }
 
         static Vector128<ulong> v128K1
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n128, Even64);
+            get => vbroadcast(n128, Even64);
         }
 
         static Vector128<ulong> v128K2
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n128, Even64x2);
+            get => vbroadcast(n128, Even64x2);
         }
 
         static Vector128<ulong> v128K4
         {
             [MethodImpl(Inline), Op]
-            get => cpu.vbroadcast(n128, Lsb64x8x4);
+            get => vbroadcast(n128, Lsb64x8x4);
         }
 
         /// <summary>
@@ -68,22 +67,22 @@ namespace Z0
             var k1 = v128K1;
             var k2 = v128K2;
             var k4 = v128K4;
-            var maj =  cpu.vor(vand(cpu.vxor(x,y),z), vand(x,y));
-            var odd =  cpu.vxor(cpu.vxor(x,y),z);
+            var maj =  vor(vand(vxor(x,y),z), vand(x,y));
+            var odd =  vxor(vxor(x,y),z);
 
-            maj = cpu.vsub(maj, vand(cpu.vsrl(maj, 1), k1));
-            odd = cpu.vsub(odd, vand(cpu.vsrl(odd, 1), k1));
+            maj = vsub(maj, vand(vsrl(maj, 1), k1));
+            odd = vsub(odd, vand(vsrl(odd, 1), k1));
 
-            maj = cpu.vadd(vand(maj,k2), vand(cpu.vsrl(maj, 2), k2));
-            odd = cpu.vadd(vand(odd,k2), vand(cpu.vsrl(odd, 2), k2));
+            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
+            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
 
-            maj = vand(cpu.vadd(maj, cpu.vsrl(maj,4)), k4);
-            odd = vand(cpu.vadd(odd, cpu.vsrl(odd,4)), k4);
+            maj = vand(vadd(maj, vsrl(maj,4)), k4);
+            odd = vand(vadd(odd, vsrl(odd,4)), k4);
 
-            odd = cpu.vadd(cpu.vadd(maj, maj), odd);
+            odd = vadd(vadd(maj, maj), odd);
 
             var dst = MemoryStacks.alloc(n128);
-            cpu.vstore(odd, ref dst.X0);
+            vstore(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -109,23 +108,23 @@ namespace Z0
             var k1 = K1;
             var k2 = K2;
             var k4 = K4;
-            var maj =  cpu.vor(z.vand(cpu.vxor(a,b),c), z.vand(a,b));
-            var odd =  cpu.vxor(cpu.vxor(a,b),c);
+            var maj =  vor(vand(vxor(a,b),c), vand(a,b));
+            var odd =  vxor(vxor(a,b),c);
 
-            maj = cpu.vsub(maj, vand(cpu.vsrl(maj, 1), k1));
-            odd = cpu.vsub(odd, vand(cpu.vsrl(odd, 1), k1));
+            maj = vsub(maj, vand(vsrl(maj, 1), k1));
+            odd = vsub(odd, vand(vsrl(odd, 1), k1));
 
-            maj = cpu.vadd(vand(maj,k2), vand(cpu.vsrl(maj, 2), k2));
-            odd = cpu.vadd(vand(odd,k2), vand(cpu.vsrl(odd, 2), k2));
+            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
+            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
 
-            maj = vand(cpu.vadd(maj, cpu.vsrl(maj,4)), k4);
-            odd = vand(cpu.vadd(odd, cpu.vsrl(odd,4)), k4);
+            maj = vand(vadd(maj, vsrl(maj,4)), k4);
+            odd = vand(vadd(odd, vsrl(odd,4)), k4);
 
-            odd = cpu.vadd(cpu.vadd(maj, maj), odd);
+            odd = vadd(vadd(maj, maj), odd);
 
             var dst = MemoryStacks.alloc(n256);
             ref var X = ref MemoryStacks.head(ref dst, z64);
-            cpu.vstore(odd, ref X);
+            vstore(odd, ref X);
 
             var total = 0ul;
             total += (seek(X, 0) * kf) >> 56;

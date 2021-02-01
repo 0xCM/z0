@@ -17,9 +17,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte clmul(byte a, byte b)
         {
-            var p = z.clmul(a,b);
-            p ^= z.clmul((byte)(p >> 3), Reducer);
-            p ^= z.clmul((byte)(p >> 3), Reducer);
+            var p = cpu.clmul(a,b);
+            p ^= cpu.clmul((byte)(p >> 3), Reducer);
+            p ^= cpu.clmul((byte)(p >> 3), Reducer);
             return (byte)p;
         }
 

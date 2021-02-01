@@ -34,8 +34,7 @@ namespace Z0
 
 
             {
-                using var step = new CheckCredits(Wf, new CheckCreditsHost());
-                step.Run();
+                CheckCredits.create(Wf).Run();
             }
 
 

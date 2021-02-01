@@ -8,12 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static TextRules;
 
     [ApiHost]
     public readonly partial struct AsmExpr
     {
         [MethodImpl(Inline), Op]
-        public static AsmMnemonicExpr mnemonic(asci32 src)
+        public static AsmMnemonicExpr mnemonic(string src)
             => new AsmMnemonicExpr(src);
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static SigOperandExpr sigop(asci16 src)
+        public static SigOperandExpr sigop(string src)
             => new SigOperandExpr(src);
 
         /// <summary>
@@ -52,7 +53,23 @@ namespace Z0.Asm
         /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
         /// <remarks>
         [MethodImpl(Inline), Op]
-        public static AsmSigExpr sig(asci64 src)
+        public static AsmSigExpr sig(string src)
             => new AsmSigExpr(src);
+
+        [Op]
+        public static bool mnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
+        {
+            var i = Query.index(src.Text, Chars.Space);
+            if(i != NotFound && i > 0)
+            {
+                dst = mnemonic(Parse.segment(src.Text, 0, i - 1));
+                return true;
+            }
+            else
+            {
+                dst = AsmMnemonicExpr.Empty;
+                return false;
+            }
+        }
     }
 }

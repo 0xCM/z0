@@ -13,6 +13,5 @@ namespace Z0
     public readonly partial struct Rules
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

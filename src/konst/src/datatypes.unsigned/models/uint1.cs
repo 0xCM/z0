@@ -91,6 +91,10 @@ namespace Z0
         internal uint1(BitState src)
             => data = (byte)src;
 
+        [MethodImpl(Inline)]
+        internal uint1(bit src)
+            => data = (byte)src;
+
         public K Kind
         {
             [MethodImpl(Inline)]
@@ -197,8 +201,12 @@ namespace Z0
             => src.data == 1;
 
         [MethodImpl(Inline)]
-        public static implicit operator U(Bit32 src)
-            => new U((uint)src);
+        public static implicit operator U(bit src)
+            => new U((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator bit(U src)
+            => new bit(src.data & 1);
 
         /// <summary>
         /// Converts a 1-bit integer to an unsigned 8-bit integer
@@ -214,7 +222,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator U(X01 src)
-        => (byte)src;
+            => (byte)src;
 
         /// <summary>
         /// Converts a 1-bit integer to an unsigned 16-bit integer
@@ -423,6 +431,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new U(1,true);
         }
-
    }
 }

@@ -20,7 +20,7 @@ namespace Z0
             /// <param name="rule">The transformation rule</param>
             /// <param name="src">The source string</param>
             [Op]
-            public static Pair<string> apply(Bifurcate<char> rule, string src)
+            public static Pair<string> apply(Fork<char> rule, string src)
                 => root.pair(Parse.before(src, rule.Criterion), Parse.after(src, rule.Criterion));
         }
     }

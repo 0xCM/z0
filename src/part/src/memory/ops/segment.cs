@@ -12,28 +12,43 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Defines a memory <see cref='MemorySegment'/> with a specified base and size
+        /// Extracts an inclusive seqment form the source span
         /// </summary>
-        /// <param name="base">The base address</param>
-        /// <param name="bytes">The number of reference bytes</param>
+        /// <param name="src">The source text</param>
+        /// <param name="i0">The index of the first span cell</param>
+        /// <param name="i1">The index of the last last span cell</param>
         [MethodImpl(Inline), Op]
-        public static MemorySegment segment(MemoryAddress @base, ByteSize bytes)
-            => new MemorySegment(@base,bytes);
+        public static Span<T> segment<T>(Span<T> src, long i0, long i1)
+            => slice(src, i0, i1 - i0 + 1);
 
         /// <summary>
-        /// Defines a memory <see cref='MemorySegment'/> over source span content
+        /// Extracts an inclusive seqment form the source span
         /// </summary>
-        /// <param name="src">The data source</param>
+        /// <param name="src">The source text</param>
+        /// <param name="i0">The index of the first span cell</param>
+        /// <param name="i1">The index of the last last span cell</param>
         [MethodImpl(Inline), Op]
-        public unsafe static MemorySegment segment(ReadOnlySpan<byte> src)
-            => segment((ulong)gptr(src), src.Length);
+        public static Span<T> segment<T>(Span<T> src, ulong i0, ulong i1)
+            => slice(src, i0, i1 - i0 + 1);
 
+        /// <summary>
+        /// Extracts an inclusive seqment form the source span
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="i0">The index of the first span cell</param>
+        /// <param name="i1">The index of the last last span cell</param>
         [MethodImpl(Inline), Op]
-        public static unsafe MemorySegment segment(string src)
-            => segment(pchar(src), (uint)src.Length);
+        public static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, long i0, long i1)
+            => slice(src, i0, i1 - i0 + 1);
 
+        /// <summary>
+        /// Extracts an inclusive seqment form the source span
+        /// </summary>
+        /// <param name="src">The source text</param>
+        /// <param name="i0">The index of the first span cell</param>
+        /// <param name="i1">The index of the last last span cell</param>
         [MethodImpl(Inline), Op]
-        public static unsafe MemorySegment segment(char* src, uint count)
-            => new MemorySegment(address(src), count*2);
+        public static ReadOnlySpan<T> segment<T>(ReadOnlySpan<T> src, ulong i0, ulong i1)
+            => slice(src, i0, i1 - i0 + 1);
     }
 }

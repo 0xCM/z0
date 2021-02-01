@@ -18,9 +18,5 @@ namespace Z0.Asm
 
     }
 
-    public readonly partial struct AsmInstructions
-    {
 
-
-    }
 }

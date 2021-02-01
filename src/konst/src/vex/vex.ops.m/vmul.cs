@@ -13,11 +13,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
+    using static Part;
 
-    using static Konst;
-    using static z;
-
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Computes the full 16-bit product of corresponding left and right source components
@@ -28,7 +26,7 @@ namespace Z0
         /// <param name="hi">Receiver for the product of the upper components</param>
         [MethodImpl(Inline), Mul]
         public static Vector256<short> vmul(Vector128<sbyte> x, Vector128<sbyte> y)
-            => vmullo(cpu.vinflate16i(x, w256), cpu.vinflate16i(y, w256));
+            => vmullo(vinflate16i(x, w256), vinflate16i(y, w256));
 
         /// <summary>
         /// Computes the full 16-bit product of corresponding left and right source components
@@ -40,8 +38,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<ushort> vmul(Vector128<byte> x, Vector128<byte> y)
         {
-            var z0 = cpu.vinflate16u(x, w256);
-            var z1 = cpu.vinflate16u(y, w256);
+            var z0 = vinflate16u(x, w256);
+            var z1 = vinflate16u(y, w256);
             return vmullo(z0,z1);
         }
 
@@ -55,8 +53,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<int> vmul(Vector128<short> x, Vector128<short> y)
         {
-            var z0 = cpu.vinflate32i(x, w256);
-            var z1 = cpu.vinflate32i(y, w256);
+            var z0 = vinflate32i(x, w256);
+            var z1 = vinflate32i(y, w256);
             return vmullo(z0,z1);
         }
 
@@ -70,8 +68,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<uint> vmul(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var z0 = cpu.vinflate32u(x, w256);
-            var z1 = cpu.vinflate32u(y, w256);
+            var z0 = vinflate32u(x, w256);
+            var z1 = vinflate32u(y, w256);
             return vmullo(z0,z1);
         }
 
@@ -84,8 +82,8 @@ namespace Z0
         public static Vector256<long> vmul(Vector128<int> x, Vector128<int> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
-            return cpu.vconcat(lo,hi);
+            var hi = Multiply(vswaphl(x), vswaphl(y));
+            return vconcat(lo,hi);
         }
 
         /// <summary>
@@ -97,8 +95,8 @@ namespace Z0
         public static Vector256<ulong> vmul(Vector128<uint> x, Vector128<uint> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
-            return cpu.vconcat(lo,hi);
+            var hi = Multiply(vswaphl(x), vswaphl(y));
+            return vconcat(lo,hi);
         }
 
         /// <summary>
@@ -111,8 +109,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<short> vmul(Vector256<sbyte> x, Vector256<sbyte> y)
         {
-            (var x1, var x2) = cpu.vinflate16i(x,w512);
-            (var y1, var y2) = cpu.vinflate16i(x,w512);
+            (var x1, var x2) = vinflate16i(x,w512);
+            (var y1, var y2) = vinflate16i(x,w512);
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -126,8 +124,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<ushort> vmul(Vector256<byte> x, Vector256<byte> y)
         {
-            (var x1, var x2) = cpu.vinflate16u(x,w512);
-            (var y1, var y2) = cpu.vinflate16u(y,w512);
+            (var x1, var x2) = vinflate16u(x,w512);
+            (var y1, var y2) = vinflate16u(y,w512);
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -139,8 +137,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<uint> vmul(Vector256<ushort> x, Vector256<ushort> y)
         {
-            (var x1, var x2) = cpu.vinflate32u(x, w512);
-            (var y1, var y2) = cpu.vinflate32u(y, w512);
+            (var x1, var x2) = vinflate32u(x, w512);
+            (var y1, var y2) = vinflate32u(y, w512);
             return(vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -152,8 +150,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<int> vmul(Vector256<short> x, Vector256<short> y)
         {
-            (var x1, var x2) = cpu.vinflate32i(x, w512);
-            (var y1, var y2) = cpu.vinflate32i(y, w512);
+            (var x1, var x2) = vinflate32i(x, w512);
+            (var y1, var y2) = vinflate32i(y, w512);
             return(vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -166,7 +164,7 @@ namespace Z0
         public static Vector512<long> vmul(Vector256<int> x,Vector256<int> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
+            var hi = Multiply(vswaphl(x), vswaphl(y));
             return (lo,hi);
         }
 
@@ -179,7 +177,7 @@ namespace Z0
         public static Vector512<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
         {
             var lo = Multiply(x, y);
-            var hi = Multiply(cpu.vswaphl(x), cpu.vswaphl(y));
+            var hi = Multiply(vswaphl(x), vswaphl(y));
             return (lo,hi);
         }
 
@@ -192,13 +190,13 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var loMask = cpu.vbroadcast(w256, 0x00000000fffffffful);
-            var xh = v32u(cpu.vsrl(x, 32));
+            var loMask = vbroadcast(w256, 0x00000000fffffffful);
+            var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
-            return cpu.vadd(
+            return vadd(
                 Multiply(v32u(vand(x, loMask)), yl),
-                cpu.vadd(cpu.vsll(Multiply(xh, yl), 32),
-                    cpu.vsll(Multiply(xh, v32u(cpu.vsrl(y, 32))), 32)));
+                vadd(vsll(Multiply(xh, yl), 32),
+                    vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
         }
     }
 }

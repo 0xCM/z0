@@ -35,5 +35,4 @@ namespace Z0
         public static Vector256<int> vsrav(Vector256<int> src, Vector256<uint> counts)
             => ShiftRightArithmeticVariable(src, counts);
     }
-
 }

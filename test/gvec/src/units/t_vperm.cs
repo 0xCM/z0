@@ -280,7 +280,7 @@ namespace Z0
         {
             var a = gcpu.vinc<byte>(n256);
             var b = gcpu.vdec<byte>(n256);
-            var c = z.vreverse(cpu.vshuf32x8(a,b));
+            var c = cpu.vreverse(cpu.vshuf32x8(a,b));
             Claim.veq(a,c);
         }
 

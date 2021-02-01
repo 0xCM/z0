@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Computes z := x^(x << offset)
@@ -20,20 +19,20 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The shift offset</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), XorSl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), XorSl, Closures(Closure)]
         public static Vector128<T> vxorsl<T>(Vector128<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vxorsl(v8u(x), count));
+                return generic<T>(cpu.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vxorsl(v16u(x), count));
+                return generic<T>(cpu.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vxorsl(v32u(x), count));
+                return generic<T>(cpu.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vxorsl(v64u(x), count));
+                return generic<T>(cpu.vxorsl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -47,15 +46,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(z.vxorsl(v8u(x), count));
+                return generic<T>(cpu.vxorsl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(z.vxorsl(v16u(x), count));
+                return generic<T>(cpu.vxorsl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(z.vxorsl(v32u(x), count));
+                return generic<T>(cpu.vxorsl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(z.vxorsl(v64u(x), count));
+                return generic<T>(cpu.vxorsl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

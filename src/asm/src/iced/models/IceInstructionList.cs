@@ -16,63 +16,54 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct IceInstructionList : IEnumerable<IceInstruction>
     {
-        readonly IceInstruction[] Source;
+        readonly IceInstruction[] Data;
 
         public CodeBlock Encoded {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator IceInstruction[](IceInstructionList src)
-            => src.Source;
-
-        [MethodImpl(Inline)]
-        public IceInstructionList(IceInstruction[] src, CodeBlock data)
+        public IceInstructionList(IceInstruction[] src, CodeBlock code)
         {
-            Source = src;
-            Encoded = data;
-        }
-
-        public ref readonly IceInstruction this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Source[index];
+            Data = src;
+            Encoded = code;
         }
 
         public ReadOnlySpan<IceInstruction> View
         {
             [MethodImpl(Inline)]
-            get => Source;
+            get => Data;
         }
 
-        public IceInstruction[] Data
+        public IceInstruction[] Storage
         {
             [MethodImpl(Inline)]
-            get => Source;
+            get => Data;
         }
 
         public Count Count
         {
             [MethodImpl(Inline)]
-            get => Source.Length;
+            get => Data.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Source.Length;
+            get => Data.Length;
         }
 
         public bool IsEmpty
         {
              [MethodImpl(Inline)]
-             get => Source == null || Source.Length == 0;
+             get => Data == null || Data.Length == 0;
         }
 
         public IEnumerator<IceInstruction> GetEnumerator()
-            => ((IReadOnlyList<IceInstruction>)Source).GetEnumerator();
+            => ((IReadOnlyList<IceInstruction>)Data).GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator()
-            => Source.GetEnumerator();
+            => Data.GetEnumerator();
 
         public static IceInstructionList Empty
-            => new IceInstructionList(z.array<IceInstruction>(), CodeBlock.Empty);
+            => new IceInstructionList(sys.empty<IceInstruction>(), CodeBlock.Empty);
     }
 }

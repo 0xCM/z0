@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<short> vinflate16i(Vector256<byte> src, N512 w)
-            => vconvert16i(src, w);
+            => (vmaplo16i(src, w256), vmaphi16i(src, w256));
 
         /// <summary>
         /// 32x8u -> 32x16u
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="hi">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ushort> vinflate16u(Vector256<byte> src, W512 w)
-            => vconvert16u(src, w);
+             => (vmaplo16u(src, w256), vmaphi16u(src, w256));
 
         /// <summary>
         ///  __m256i _mm256_cvtepu8_epi16 (__m128i a) VPMOVZXBW ymm, xmm
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vinflate64i(Vector256<int> src, N512 w)
-            => vconvert64i(src, w);
+            => vmap64i(src, w);
 
         /// <summary>
         /// 8x32i -> 8x64i
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vinflate64i(Vector256<int> src, W512 w)
-            => vconvert64i(src, w);
+            => vmap64i(src, w);
 
         /// <summary>
         /// 4x32w -> 4x64w
@@ -200,7 +200,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate32u(Vector128<byte> src, W512 w)
-            => vconvert32u(src, w);
+            => vmap32u(src, w);
 
         /// <summary>
         /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
@@ -223,9 +223,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector1024<uint> vinflate32u(Vector256<byte> src, W1024 w)
         {
-            (var lo, var hi) = vconvert16u(src, w512);
-            (var x0, var x1) = vconvert32u(lo, w512);
-            (var x2, var x3) = vconvert32u(hi, w512);
+            (var lo, var hi) = vmap16u(src, w512);
+            (var x0, var x1) = vmap32u(lo, w512);
+            (var x2, var x3) = vmap32u(hi, w512);
             return (x0, x1, x2, x3);
         }
 
@@ -237,7 +237,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate32u(Vector256<ushort> src, N512 w)
-            => vconvert32u(src, w);
+            => vmap32u(src, w);
 
         /// <summary>
         /// 16x16u -> 16x32u
@@ -247,7 +247,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate32u(Vector256<ushort> src, W512 w)
-            => vconvert32u(src, w);
+            => vmap32u(src, w);
 
         /// <summary>
         /// 4x32u -> 4x64u
@@ -264,7 +264,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Vector512<ulong> vinflate64u(Vector256<uint> src, N512 w)
-            => vconvert64u(src, w);
+            => vmap64u(src, w);
 
         /// <summary>
         /// 8x32u -> 8x64u
@@ -272,7 +272,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ulong> vinflate64u(Vector256<uint> src, W512 w)
-            => vconvert64u(src, w);
+            => vmap64u(src, w);
 
         /// <summary>
         /// 4x32u -> 4x64u

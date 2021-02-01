@@ -21,37 +21,19 @@ namespace Z0
     using static CreditTypes.ContentNumber;
 
     using CT = CreditTypes.ContentType;
-    using Step = CheckCreditsHost;
 
     [ApiHost]
-    public ref struct CheckCredits
+    public class CheckCredits : WfService<CheckCredits,CheckCredits>
     {
-        readonly IWfShell Wf;
-
-        readonly WfHost Host;
-
-        [MethodImpl(Inline)]
-        public CheckCredits(IWfShell wf, WfHost host)
-        {
-            Host = host;
-            Wf = wf.WithHost(Host);
-            Wf.Created();
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed();
-        }
-
         public void Run()
         {
             var flow = Wf.Running();
             try
             {
-                Exec(CheckCreditFields, default(Step));
-                Exec(CheckReferenceFields, default(Step));
-                Exec(CheckContentFields, default(Step));
-                Exec(CheckTableFields, default(Step));
+                Exec(CheckCreditFields);
+                Exec(CheckReferenceFields);
+                Exec(CheckContentFields);
+                Exec(CheckTableFields);
                 var result = CheckLiterals();
             }
             catch(Exception e)
@@ -62,23 +44,12 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        void Exec<C,R>(Func<R> f, C step = default)
-            where C : IWfStep<C>, new()
-            where R : ITextual
-        {
-            var fx = new WfFunc<C,R>(f.Method.Name);
-            Wf.Status($"{f()}");
-        }
+        void Exec<R>(Func<R> f)
+            => Wf.Status($"{f()}");
 
-        void Status<C,R>(WfFunc<C> fx, R src)
-            where C : struct, IWfStep<C>
-            where R : ITextual
-        {
-            Wf.Status(src.Format());
-        }
 
         [Op]
-        static BitVector64 CheckCreditFields()
+        BitVector64 CheckCreditFields()
         {
             var result = BitVector64.Zero;
             var index = z8;
@@ -105,7 +76,7 @@ namespace Z0
         }
 
         [Op]
-        static BitVector64 CheckReferenceFields()
+        BitVector64 CheckReferenceFields()
         {
             var result = BitVector64.Zero;
             var index = z8;
@@ -119,7 +90,7 @@ namespace Z0
         }
 
         [Op]
-        static BitVector64 CheckContentFields()
+        BitVector64 CheckContentFields()
         {
             var result = BitVector64.Zero;
             var index = z8;
@@ -134,7 +105,7 @@ namespace Z0
         }
 
         [Op]
-        static BitVector64 CheckTableFields()
+        BitVector64 CheckTableFields()
         {
             var result = BitVector64.Zero;
             var index = z8;
@@ -147,7 +118,7 @@ namespace Z0
         }
 
         [Op]
-        static ReadOnlySpan<bit> CheckLiterals()
+        ReadOnlySpan<bit> CheckLiterals()
         {
             var index = z8;
             var src = Enums.BinaryLiterals<DocField,ulong>().ToReadOnlySpan();
@@ -158,7 +129,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static void Check(ReadOnlySpan<BinaryLiteral<ulong>> src, Span<bit> dst)
+        void Check(ReadOnlySpan<BinaryLiteral<ulong>> src, Span<bit> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

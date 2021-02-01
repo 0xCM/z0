@@ -11,12 +11,12 @@ namespace Z0
 
     partial struct Rules
     {
-        public readonly struct Bifurcate : IRule<Bifurcate>
+        public readonly struct Fork : IRule<Fork>
         {
             public dynamic Criterion {get;}
 
             [MethodImpl(Inline)]
-            public Bifurcate(dynamic c)
+            public Fork(dynamic c)
             {
                 Criterion = c;
             }
@@ -25,23 +25,21 @@ namespace Z0
         /// <summary>
         /// Ordains that a value of unspecified type is partitioned into two disjoint pieces by a criterion <typeparamref name='C'/>
         /// </summary>
-        public readonly struct Bifurcate<C> : IRule<Bifurcate<C>,C>
+        public readonly struct Fork<C> : IRule<Fork<C>,C>
         {
             public C Criterion {get;}
 
             [MethodImpl(Inline)]
-            public Bifurcate(C criterion)
-            {
-                Criterion = criterion;
-            }
+            public Fork(C criterion)
+                => Criterion = criterion;
 
             [MethodImpl(Inline)]
-            public static implicit operator Bifurcate(Bifurcate<C> src)
-                => new Bifurcate(src.Criterion);
+            public static implicit operator Fork(Fork<C> src)
+                => new Fork(src.Criterion);
 
             [MethodImpl(Inline)]
-            public static implicit operator Bifurcate<C>(C src)
-                => new Bifurcate<C>(src);
+            public static implicit operator Fork<C>(C src)
+                => new Fork<C>(src);
         }
     }
 }

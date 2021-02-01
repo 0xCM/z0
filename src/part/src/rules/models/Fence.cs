@@ -36,9 +36,6 @@ namespace Z0
                 => new Fence(src.Left, src.Right);
         }
 
-        /// <summary>
-        /// Defines a 1-dimensional enclosure
-        /// </summary>
         public readonly struct Fence<T> : IRule<Fence<T>,T>
         {
             public T Left {get;}
@@ -62,6 +59,32 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator Fence(Fence<T> src)
+                => new Fence(src.Left, src.Right);
+        }
+
+        public readonly struct Fence<A,B> : IRule<Fence<A,B>,A,B>
+        {
+            public A Left {get;}
+
+            public B Right {get;}
+
+            [MethodImpl(Inline)]
+            public Fence(A left, B right)
+            {
+                Left = left;
+                Right = right;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator Fence<A,B>((A left, B right) src)
+                => new Fence<A,B>(src.left, src.right);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Fence<A,B>(Paired<A,B> src)
+                => new Fence<A,B>(src.Left, src.Right);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Fence(Fence<A,B> src)
                 => new Fence(src.Left, src.Right);
         }
     }

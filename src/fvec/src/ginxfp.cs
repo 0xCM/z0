@@ -113,15 +113,14 @@ namespace Z0
                 throw no<T>();
         }
 
-
         [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vand(v32f(x), v32f(y)));
+                return generic<T>(cpu.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vand(v64f(x), v64f(y)));
+                return generic<T>(cpu.vand(v64f(x), v64f(y)));
             else
                 throw no<T>();
 
@@ -132,9 +131,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.vand(v32f(x), v32f(y)));
+                return generic<T>(cpu.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.vand(v64f(x), v64f(y)));
+                return generic<T>(cpu.vand(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }

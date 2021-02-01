@@ -11,34 +11,42 @@ namespace Z0.Asm
 
     public readonly struct RexField
     {
-        readonly uint4 Data;
+        readonly uint4 Lo;
 
         [MethodImpl(Inline)]
         public RexField(uint4 src)
-            => Data = src;
+            => Lo = src;
 
-        public uint1 B
+        public bit B
         {
             [MethodImpl(Inline)]
-            get => (uint1)Data;
+            get => (bit)Lo;
         }
 
-        public uint1 X
+        public bit X
         {
             [MethodImpl(Inline)]
-            get => (uint1)(Data >> 1);
+            get => (bit)(Lo >> 1);
         }
 
-        public uint1 R
+        public bit R
         {
             [MethodImpl(Inline)]
-            get => (uint1)(Data >> 2);
+            get => (bit)(Lo >> 2);
         }
 
-        public uint1 W
+        public bit W
         {
             [MethodImpl(Inline)]
-            get => (uint1)(Data >> 3);
+            get => (bit)(Lo >> 3);
         }
+
+        public byte Encoded => 0x40 | Lo;
+
+        public string Format()
+            => Encoded.FormatHex();
+
+        public override string ToString()
+            => Format();
     }
 }

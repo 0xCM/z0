@@ -31,7 +31,7 @@ namespace Z0
             /// <param name="i1">The index of the last character in the substring</param>
             [MethodImpl(Inline), Op]
             public static string segment(string src, uint i0, uint i1)
-                => segment(src,(int)i0, (int)i1);
+                => segment(src, (int)i0, (int)i1);
         }
     }
 }

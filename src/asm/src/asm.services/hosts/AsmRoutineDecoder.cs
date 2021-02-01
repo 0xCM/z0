@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
     using static AsmFxCheck;
@@ -18,14 +17,13 @@ namespace Z0.Asm
     {
         readonly AsmFormatConfig AsmFormat;
 
-
         [MethodImpl(Inline)]
         public AsmRoutineDecoder(AsmFormatConfig format)
             => AsmFormat = format;
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
-                let block = apiblock(src.CodeBlock, i, src.TermCode)
+                let block = apiblock(src.CodeBlock, i.Storage, src.TermCode)
                 select routine(src.MetaUri, src.OpUri, src.Method.Metadata().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
@@ -34,9 +32,6 @@ namespace Z0.Asm
         public Option<AsmInstructionBlock> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.BaseAddress);
 
-        public Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f)
-            => Decode(src.Parsed,f).TryMap(x => routine(src,x));
-
         public Option<IceInstructionList> Decode(CodeBlock src, Action<Asm.IceInstruction> f)
         {
             try
@@ -44,20 +39,22 @@ namespace Z0.Asm
                 var decoded = new Iced.InstructionList();
                 var reader = new Iced.ByteArrayCodeReader(src.Code);
                 var formatter = iformatter(AsmFormat);
-                var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
+                var decoder = Iced.Decoder.Create(IntPtr.Size*8, reader);
                 var @base = src.BaseAddress;
                 decoder.IP = @base;
-                var stop = false;
-                var dst = new List<Asm.IceInstruction>(decoded.Count);
-
-                while (reader.CanReadByte && !stop)
+                var dst = root.list<Asm.IceInstruction>(decoded.Count);
+                var position = 0u;
+                while (reader.CanReadByte)
                 {
                     ref var iced = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out iced);
-                    var format = formatter.FormatInstruction(iced, @base);
-                    var z = IceExtractors.extract(iced,format);
-                    dst.Add(z);
-                    f(z);
+                    var size = (uint)iced.ByteLength;
+                    var encoded = slice(src.View, position, size).ToArray();
+                    var instruction = IceExtractors.extract(iced, formatter.FormatInstruction(iced, @base), encoded);
+                    dst.Add(instruction);
+                    f(instruction);
+                    position += size;
+
                 }
                 return icelist(dst.ToArray(), src);
 
@@ -89,17 +86,26 @@ namespace Z0.Asm
                     decoder.Decode(out instruction);
                 }
 
+                var count = decoded.Count;
                 var formatter = iformatter(AsmFormat);
-                var instructions = new Asm.IceInstruction[decoded.Count];
+                var instructions = alloc<Asm.IceInstruction>(count);
                 var formatted = formatter.FormatInstructions(decoded, @base);
-                for(var i=0; i<instructions.Length; i++)
-                    instructions[i] = IceExtractors.extract(decoded[i], formatted[i]);
-                return AsmInstructionBlock.Create(instructions, code);
+                var position = 0u;
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var instruction = ref decoded[i];
+                    var size = (uint)instruction.ByteLength;
+                    var encoded = slice(code.View, position, size).ToArray();
+                    instructions[i] = IceExtractors.extract(instruction, formatted[i], encoded);
+                    position += size;
+
+                }
+                return new AsmInstructionBlock(instructions, code);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<AsmInstructionBlock>();
+                return root.none<AsmInstructionBlock>();
             }
         }
 

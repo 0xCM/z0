@@ -14,6 +14,6 @@ namespace Z0.Asm
     public readonly partial struct AsmExprTest
     {
         public static bool compound(in SigOperandExpr src)
-            => Query.contains(src.Decoded, Chars.FSlash);
+            => Query.contains(src.Text, Chars.FSlash);
     }
 }

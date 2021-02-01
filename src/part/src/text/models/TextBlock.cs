@@ -71,9 +71,13 @@ namespace Z0
         public TextBlock Replace(TextBlock match, TextBlock value)
             => Data?.Replace(match,value) ?? EmptyString;
 
-        [MethodImpl(Inline)]
         public bool Equals(TextBlock src)
             => string.Equals(Data, src.Data);
+
+        public bool Equals(TextBlock src, bool insensitive)
+            => insensitive
+            ? string.Equals(Data, src.Data, StringComparison.CurrentCultureIgnoreCase)
+            : string.Equals(Data, src.Data);
 
         public override bool Equals(object src)
             => src is TextBlock x && Equals(x);

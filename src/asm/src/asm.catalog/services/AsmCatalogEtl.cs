@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         public Index<AsmMnemonicExpr> Mnemonics()
         {
-            var mnemonics = root.hashset<AsmMnemonicExpr>();
+            var dst = root.hashset<AsmMnemonicExpr>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
             var parser = AsmSigParser.create(Wf);
@@ -37,10 +37,12 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(rows,i);
                 var sig = AsmExpr.sig(row.Instruction);
-                if(parser.ParseMnemonic(sig, out var mnemonic))
-                    mnemonics.Add(mnemonic);
+                if(AsmExpr.mnemonic(sig, out var monic))
+                    dst.Add(monic);
+                // if(parser.ParseMnemonic(sig, out var mnemonic))
+                //     mnemonics.Add(mnemonic);
             }
-            return mnemonics.ToArray();
+            return dst.ToArray();
         }
 
         public ReadOnlySpan<StokeAsmImportRow> ImportedStokeRows()

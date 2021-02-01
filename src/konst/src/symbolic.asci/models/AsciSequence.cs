@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Covers a sequence of asci-encoded bytes
@@ -37,6 +37,12 @@ namespace Z0
             get => Data.Storage;
         }
 
+        public ReadOnlySpan<AsciCharCode> Codes
+        {
+            [MethodImpl(Inline)]
+            get => memory.recover<byte,AsciCharCode>(View);
+        }
+
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
@@ -54,12 +60,18 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Format();
         }
+
         public string Format()
         {
-            var dst = span(sys.alloc<char>(Data.Length));
-            for(var i=0u; i<Data.Length; i++)
-                seek(dst,i) = (char)Data[(int)i];
+            var len = Length;
+            var dst = span(sys.alloc<char>(len));
+            var src = Data.View;
+            for(var i=0u; i<len; i++)
+                seek(dst, i) = (char)skip(src,i);
             return sys.@string(dst);
         }
+
+        public override string ToString()
+            => Format();
     }
 }

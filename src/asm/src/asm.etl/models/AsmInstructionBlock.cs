@@ -23,8 +23,11 @@ namespace Z0.Asm
         public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]
-        public static AsmInstructionBlock Create(IceInstruction[] src, BinaryCode data)
-            => new AsmInstructionBlock(src, data);
+        internal AsmInstructionBlock(IceInstruction[] src, BinaryCode data)
+        {
+            Instructions = src;
+            Data = data;
+        }
 
         public ref readonly IceInstruction this[long index]
         {
@@ -62,16 +65,6 @@ namespace Z0.Asm
             get => Instructions.IsNonEmpty;
         }
 
-        public static implicit operator IceInstruction[](AsmInstructionBlock src)
-            => src.Instructions;
-
-        [MethodImpl(Inline)]
-        internal AsmInstructionBlock(IceInstruction[] src, BinaryCode data)
-        {
-            Instructions = src;
-            Data = data;
-        }
-
         [MethodImpl(Inline)]
         public bool Equals(AsmInstructionBlock src)
             => Instructions.Equals(src.Instructions);
@@ -88,7 +81,10 @@ namespace Z0.Asm
         IEnumerator IEnumerable.GetEnumerator()
             => Instructions.AsEnumerable().GetEnumerator();
 
+        public static implicit operator IceInstruction[](AsmInstructionBlock src)
+            => src.Instructions;
+
         public static AsmInstructionBlock Empty
-            => Create(array<IceInstruction>(), BinaryCode.Empty);
+            => new AsmInstructionBlock(array<IceInstruction>(), BinaryCode.Empty);
     }
 }

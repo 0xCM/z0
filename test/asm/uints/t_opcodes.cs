@@ -19,7 +19,7 @@ namespace Z0.Asm
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var id = ref skip(src,i);
-                writer.WriteLine(id.Format().PadRight(id.Content.Capacity));
+                writer.WriteLine(id.Format().PadRight(32));
             }
         }
 

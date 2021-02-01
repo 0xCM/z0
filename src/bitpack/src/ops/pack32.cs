@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint pack32x8x1<T>(in T src)
             where T : unmanaged
-                => cpu.vtakemask(gvec.vsll(cpu.vload(n256, view64u(src)),7));
+                => cpu.vtakemask(gcpu.vsll(cpu.vload(n256, view64u(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte

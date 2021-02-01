@@ -23,7 +23,7 @@ namespace Z0
             {
                 var a = Random.CpuVector(ws,s);
                 var b = Random.CpuVector(ws,s);
-                var c = z.vmul(a,b);
+                var c = cpu.vmul(a,b);
 
                 var xs = a.ToSpan();
                 var ys = b.ToSpan();
@@ -44,7 +44,7 @@ namespace Z0
             {
                 var a = Random.CpuVector(ws,s);
                 var b = Random.CpuVector(ws,s);
-                var c = z.vmul(a,b);
+                var c = cpu.vmul(a,b);
 
                 var xs = a.ToSpan();
                 var ys = b.ToSpan();
@@ -65,7 +65,7 @@ namespace Z0
             {
                 var a = Random.CpuVector(ws,s);
                 var b = Random.CpuVector(ws,s);
-                var c = z.vmul(a,b);
+                var c = cpu.vmul(a,b);
 
                 var xs = a.ToSpan();
                 var ys = b.ToSpan();
@@ -86,7 +86,7 @@ namespace Z0
             {
                 var a = Random.CpuVector(ws,s);
                 var b = Random.CpuVector(ws,s);
-                var c = z.vmul(a,b);
+                var c = cpu.vmul(a,b);
 
                 var xs = a.ToSpan();
                 var ys = b.ToSpan();
@@ -106,8 +106,8 @@ namespace Z0
 
             var a0 = gvec.vinc(ws,1u);
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
-            var b0 = z.vmul(a0,a1);
-            var b1 = z.vmul(cpu.vswaphl(a0), cpu.vswaphl(a1));
+            var b0 = cpu.vmul(a0,a1);
+            var b1 = cpu.vmul(cpu.vswaphl(a0), cpu.vswaphl(a1));
             Trace("x", a0.Format());
             Trace("y", a1.Format());
             Trace("lo", b0.Format());
@@ -122,7 +122,7 @@ namespace Z0
                 var x2 = math.mul64(vcell(x,2), vcell(y,2));
                 var x3 = math.mul64(vcell(x,3), vcell(y,3));
                 var expect = cpu.vparts(wt, x0,x1,x2,x3);
-                var actual = z.vmul(x,y);
+                var actual = cpu.vmul(x,y);
 
                 Claim.veq(expect,actual);
             }
@@ -139,7 +139,7 @@ namespace Z0
             {
                 var a = Random.CpuVector(ws,s);
                 var b = Random.CpuVector(ws,s);
-                var c = z.vmul(a,b);
+                var c = cpu.vmul(a,b);
 
                 var xs = a.ToSpan();
                 var ys = b.ToSpan();
@@ -167,7 +167,7 @@ namespace Z0
                 var y = Random.CpuVector(w,s);
                 var ys = y.ToSpan();
 
-                z.vmul(x,y).StoreTo(zb);
+                cpu.vmul(x,y).StoreTo(zb);
 
                 for(var j=0; j< count; j++)
                     eb[j] = ScalarCast.uint32(xs[j] * ys[j]);

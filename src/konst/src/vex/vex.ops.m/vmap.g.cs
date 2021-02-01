@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct gcpu
     {
@@ -24,14 +25,14 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
+            var xLen = root.min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
             var dstLen = cpu.vcount<T>(w128);
             var lhsData = a.ToSpan();
             var rhsData = b.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return vload(w128, first(dst));
+            return gcpu.vload(w128, first(dst));
         }
 
         /// <summary>
@@ -45,13 +46,13 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
+            var xLen = root.min(cpu.vcount<S>(w128), cpu.vcount<T>(w128));
             var dstLen = cpu.vcount<T>(w128);
             var data = src.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return vload(w128, first(dst));
+            return gcpu.vload(w128, first(dst));
         }
 
         /// <summary>
@@ -65,13 +66,13 @@ namespace Z0
             where T : unmanaged
             where S : unmanaged
         {
-            var xLen = min(cpu.vcount<S>(w256), cpu.vcount<T>(w256));
+            var xLen = root.min(cpu.vcount<S>(w256), cpu.vcount<T>(w256));
             var dstLen = cpu.vcount<T>(w256);
             var data = src.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(data[i]);
-            return vload(w256, first(dst));
+            return gcpu.vload(w256, first(dst));
         }
 
         /// <summary>
@@ -87,14 +88,14 @@ namespace Z0
             where S : unmanaged
         {
             var w = w256;
-            var xLen = min(cpu.vcount<S>(w), cpu.vcount<T>(w));
+            var xLen = root.min(cpu.vcount<S>(w), cpu.vcount<T>(w));
             var dstLen = cpu.vcount<T>(w);
             var lhsData = a.ToSpan();
             var rhsData = b.ToSpan();
             Span<T> dst = new T[dstLen];
             for(var i=0; i< xLen; i++)
                 dst[i] = f(lhsData[i],rhsData[i]);
-            return vload(w, first(dst));
+            return gcpu.vload(w, first(dst));
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct TextRules
     {
-        partial struct Parse
+        partial struct Query
         {
             /// <summary>
             /// Returns the indices of the first occurrences of the first and second characters in the source, if any
@@ -23,7 +23,7 @@ namespace Z0
             /// <param name="second">THe second character to match</param>
             [MethodImpl(Inline), Op]
             public static Pair<int> indices(string src, char first, char second)
-                => root.pair(index(src,first), index(src,second));
+                => root.pair(index(src, first), index(src,second));
 
             /// <summary>
             /// Returns the indices of the first occurrences of the first and second strings in the source, if any
@@ -81,7 +81,7 @@ namespace Z0
                     if(skip(c,i) == match)
                         seek(matched, j++) = i;
 
-                return j != 0 ? memory.slice(matched,0,j) : Span<int>.Empty;
+                return j != 0 ? slice(matched,0,j) : Span<int>.Empty;
             }
         }
     }

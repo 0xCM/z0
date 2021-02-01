@@ -56,7 +56,7 @@ namespace Z0
         {
             var v1 = gcpu.vinc<T>(w);
             var v2 = gcpu.vdec<T>(w);
-            var v3 = gvec.vreverse(v1);
+            var v3 = gcpu.vreverse(v1);
             Claim.veq(v2,v3);
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         {
             var v1 = gcpu.vinc<T>(w);
             var v2 = gcpu.vdec<T>(w);
-            var v3 = gvec.vreverse(v1);
+            var v3 = gcpu.vreverse(v1);
             Claim.veq(v2,v3);
         }
 

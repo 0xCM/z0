@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial struct Rules
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this int src)
-            => ByteReader.read4(src);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Fork<C> fork<C>(C criterion)
+            => new Fork<C>(criterion);
     }
 }

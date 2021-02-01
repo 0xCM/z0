@@ -37,7 +37,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<double>();
-                var y = x.Bytes();
+                var y = ByteReader.read8(x);
                 Span<byte> z = BitConverter.GetBytes(x);
                 ClaimNumeric.eq(y,z);
             }

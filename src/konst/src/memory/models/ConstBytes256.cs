@@ -33,13 +33,13 @@ namespace Z0
         public void SegRefs(Span<MemorySegment> dst)
         {
             var i=0u;
-            seek(dst,i++) = segment(Seg6x0);
-            seek(dst,i++) = segment(Seg6x1);
-            seek(dst,i++) = segment(Seg6x2);
-            seek(dst,i++) = segment(Seg6x3);
-            seek(dst,i++) = segment(Seg7x0);
-            seek(dst,i++) = segment(Seg7x1);
-            seek(dst,i) = segment(Seg8x0);
+            seek(dst,i++) = memseg(Seg6x0);
+            seek(dst,i++) = memseg(Seg6x1);
+            seek(dst,i++) = memseg(Seg6x2);
+            seek(dst,i++) = memseg(Seg6x3);
+            seek(dst,i++) = memseg(Seg7x0);
+            seek(dst,i++) = memseg(Seg7x1);
+            seek(dst,i) = memseg(Seg8x0);
         }
 
         public ReadOnlySpan<byte> SegLeads()

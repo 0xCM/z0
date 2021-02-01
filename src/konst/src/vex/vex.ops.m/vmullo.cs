@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// __m128i _mm_mullo_epi16 (__m128i a, __m128i b) PMULLW xmm, xmm/m128

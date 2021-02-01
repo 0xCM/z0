@@ -51,6 +51,18 @@ namespace Z0
             }
         }
 
+        void Indent<T>(uint margin, T src)
+        {
+            var indent = new string(Chars.Space, (int)margin);
+            Append(string.Format("{0}{1}",indent, src));
+        }
+
+        void IndentLine<T>(uint margin, T src)
+        {
+            var indent = new string(Chars.Space, (int)margin);
+            AppendLine(string.Format("{0}{1}",indent, src));
+        }
+
         void AppendDelimited(char delimiter, params string[] src)
         {
             var count = src.Length;

@@ -12,12 +12,12 @@ namespace Z0
     partial class BitSpans
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan not(in BitSpan x, in BitSpan z)
+        public static ref readonly BitSpan not(in BitSpan a, in BitSpan b)
         {
-            var count = z.Length;
+            var count = b.Length;
             for(var i=0; i< count; i++)
-                z[i] = ~ x[i];
-            return ref z;
+                b[i] = ~ a[i];
+            return ref b;
         }
 
         [Op]

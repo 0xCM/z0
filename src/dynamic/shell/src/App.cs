@@ -409,17 +409,86 @@ namespace Z0
         //     root.iter(terms, r => Wf.Row(r));
         // }
 
+
+
+        void GenerateCodes(ReadOnlySpan<AsmMnemonicExpr> src, FS.FilePath dst)
+        {
+            var buffer = text.buffer();
+            var margin = 0u;
+            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine("{");
+            margin += 4;
+            buffer.IndentLine(margin, "public enum AsmMnemonicCode : ushort");
+            buffer.IndentLine(margin, "{");
+            margin += 4;
+
+            buffer.IndentLine(margin, "None = 0,");
+            buffer.AppendLine();
+
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var monic = ref skip(src,i);
+                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Text, i+1));
+                buffer.AppendLine();
+            }
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceCodeHeader);
+            writer.Write(buffer.Emit());
+        }
+
+        void GenerateExpressions(ReadOnlySpan<AsmMnemonicExpr> src, FS.FilePath dst)
+        {
+            var buffer = text.buffer();
+            var margin = 0u;
+            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine("{");
+            margin += 4;
+            buffer.IndentLine(margin, "public readonly struct AsmMnemonics");
+            buffer.IndentLine(margin, "{");
+            margin += 4;
+
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var monic = ref skip(src,i);
+                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Text));
+                buffer.AppendLine();
+            }
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceCodeHeader);
+            writer.Write(buffer.Emit());
+        }
+
         public void Run()
         {
             //ShowApiClasses();
 
             //Wf.CmdBuilder().JitApiCmd().Run(Wf);
 
+
             var etl = AsmCatalogEtl.create(Wf);
             var records = etl.TransformSource();
-            var monic = etl.Mnemonics();
-            var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
-            root.iter(terms, r => Wf.Row(r));
+            var monics = etl.Mnemonics();
+            var maxlen = monics.Select(x => x.Text.Length).Max();
+            Wf.Status(maxlen);
+            GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
+            GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
+
+            // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
+            // root.iter(terms, r => Wf.Row(r));
         }
     }
 

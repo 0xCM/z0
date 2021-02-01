@@ -8,12 +8,30 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static z;
+    using static Part;
     using static BitMasks.Literals;
-    using static Konst;
 
     partial struct cpu
     {
+        /// <summary>
+        /// Partitions the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">A target span of sufficient length</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<ushort> vsplit30x8x3(uint src)
+        {
+            var a = src & uint.MaxValue >> 2;
+            var lo = ScalarCast.uint16(Lsb16x16x15 & a);
+            var hi = ScalarCast.uint16(Lsb16x16x15 & (a >> 15));
+            var m = vsplit30x8x3Mask(src);
+            var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
+            var q = vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
+            var r = v16u(vsrlv(vand(q,m), shifts));
+            var s = vsplit30x8x3Assemble(r);
+            return s;
+        }
+
         // The goal is to partition the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
         // The pattern repeats every 32 bits
         // Each 32-bit segment can be cut into 2 16-bit parts where both parts
@@ -55,24 +73,5 @@ namespace Z0
                 vcell(y,7), // 8
                 vcell(y,9), // 9
                 0,0,0,0,0,0);
-
-        /// <summary>
-        /// Partitions the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">A target span of sufficient length</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vsplit30x8x3(uint src)
-        {
-            var a = src & uint.MaxValue >> 2;
-            var lo = ScalarCast.uint16(Lsb16x16x15 & a);
-            var hi = ScalarCast.uint16(Lsb16x16x15 & (a >> 15));
-            var m = vsplit30x8x3Mask(src);
-            var shifts = cpu.vparts(0, 3, 6, 9, 12, 0, 0, 0);
-            var q = cpu.vbroadcast(w256, ScalarCast.uint32(lo | hi << 16));
-            var r = v16u(cpu.vsrlv(vand(q,m), shifts));
-            var s = vsplit30x8x3Assemble(r);
-            return s;
-        }
     }
 }

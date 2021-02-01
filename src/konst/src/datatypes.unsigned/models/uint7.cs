@@ -86,175 +86,6 @@ namespace Z0
             get => new U(1,true);
         }
 
-
-        [MethodImpl(Inline)]
-        public static implicit operator uint8T(U src)
-            => src.data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator U(uint8T src)
-            => new U(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator U(K src)
-            => new U(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator K(U src)
-            => (K)src.data;
-
-        /// <summary>
-        /// Converts a 5-bit integer to an unsigned 8-bit integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator byte(U src)
-            => (byte)src.data;
-
-        /// <summary>
-        /// Converts a 5-bit integer to an unsigned 16-bit integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(U src)
-            => (ushort)src.data;
-
-        /// <summary>
-        /// Converts a 5-bit integer to an unsigned 32-bit integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator uint(U src)
-            => src.data;
-
-        /// <summary>
-        /// Converts a 5-bit integer to an unsigned 65-bit integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator ulong(U src)
-            => src.data;
-
-        /// <summary>
-        /// Converts a 5-bit integer to a signed 32-bit integer
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator int(U src)
-            => (int)src.data;
-
-        /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator U(byte src)
-            => uint7(src);
-
-        /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static implicit operator U(uint src)
-            => uint7(src);
-
-        /// <summary>
-        /// Creates a 5-bit integer from the least four bits of the source operand
-        /// </summary>
-        /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
-        public static explicit operator U(ulong src)
-            => uint7(src);
-
-        [MethodImpl(Inline)]
-        public static U @bool(bool x)
-            => uint7(x);
-
-        [MethodImpl(Inline)]
-        public static bool operator true(U x)
-            => x.data != 0;
-
-        [MethodImpl(Inline)]
-        public static bool operator false(U x)
-            => x.data == 0;
-
-        [MethodImpl(Inline)]
-        public static U operator + (U x, U y)
-            => add(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator - (U x, U y)
-            => sub(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator * (U x, U y)
-            => mul(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator / (U x, U y)
-            => div(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator % (U x, U y)
-            => mod(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator &(U x, U y)
-            => and(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator |(U x, U y)
-            => or(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator ^(U x, U y)
-            => xor(x,y);
-
-        [MethodImpl(Inline)]
-        public static U operator >>(U x, int count)
-            => srl(x, (byte)count);
-
-        [MethodImpl(Inline)]
-        public static U operator <<(U x, int count)
-            => sll(x, (byte)count);
-
-        [MethodImpl(Inline)]
-        public static U operator ~(U src)
-            => wrap7((byte)(~src.data & MaxLiteral));
-
-        [MethodImpl(Inline)]
-        public static U operator ++(U x)
-            => inc(x);
-
-        [MethodImpl(Inline)]
-        public static U operator --(U x)
-            => dec(x);
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(U x, U y)
-            => eq(x,y);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(U x, U y)
-            => !x.Equals(y);
-
-        [MethodImpl(Inline)]
-        public static U operator < (U x, U y)
-            => @bool(x.data < y.data);
-
-        [MethodImpl(Inline)]
-        public static U operator <= (U x, U y)
-            => @bool(x.data <= y.data);
-
-        [MethodImpl(Inline)]
-        public static U operator > (U x, U y)
-            => @bool(x.data > y.data);
-
-        [MethodImpl(Inline)]
-        public static U operator >= (U x, U y)
-            => @bool(x.data >= y.data);
-
         [MethodImpl(Inline)]
         internal uint7(uint8T src)
             => data = (byte)(src & MaxLiteral);
@@ -384,5 +215,169 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint8T(U src)
+            => src.data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator U(uint8T src)
+            => new U(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator U(K src)
+            => new U(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(U src)
+            => (K)src.data;
+
+        /// <summary>
+        /// Converts a 5-bit integer to an unsigned 8-bit integer
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator byte(U src)
+            => (byte)src.data;
+
+        /// <summary>
+        /// Converts a 5-bit integer to an unsigned 16-bit integer
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(U src)
+            => (ushort)src.data;
+
+        /// <summary>
+        /// Converts a 5-bit integer to an unsigned 32-bit integer
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator uint(U src)
+            => src.data;
+
+        /// <summary>
+        /// Converts a 5-bit integer to an unsigned 65-bit integer
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(U src)
+            => src.data;
+
+        /// <summary>
+        /// Converts a 5-bit integer to a signed 32-bit integer
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static implicit operator int(U src)
+            => (int)src.data;
+
+        /// <summary>
+        /// Creates a 5-bit integer from the least four bits of the source operand
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline)]
+        public static explicit operator U(byte src)
+            => uint7(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator U(uint src)
+            => uint7(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator U(ulong src)
+            => uint7(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator bit(U src)
+            => new bit(src.data & 1);
+
+        [MethodImpl(Inline)]
+        public static U @bool(bool x)
+            => uint7(x);
+
+        [MethodImpl(Inline)]
+        public static bool operator true(U x)
+            => x.data != 0;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(U x)
+            => x.data == 0;
+
+        [MethodImpl(Inline)]
+        public static U operator + (U x, U y)
+            => add(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator - (U x, U y)
+            => sub(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator * (U x, U y)
+            => mul(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator / (U x, U y)
+            => div(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator % (U x, U y)
+            => mod(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator &(U x, U y)
+            => and(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator |(U x, U y)
+            => or(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator ^(U x, U y)
+            => xor(x,y);
+
+        [MethodImpl(Inline)]
+        public static U operator >>(U x, int count)
+            => srl(x, (byte)count);
+
+        [MethodImpl(Inline)]
+        public static U operator <<(U x, int count)
+            => sll(x, (byte)count);
+
+        [MethodImpl(Inline)]
+        public static U operator ~(U src)
+            => wrap7((byte)(~src.data & MaxLiteral));
+
+        [MethodImpl(Inline)]
+        public static U operator ++(U x)
+            => inc(x);
+
+        [MethodImpl(Inline)]
+        public static U operator --(U x)
+            => dec(x);
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(U x, U y)
+            => eq(x,y);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(U x, U y)
+            => !x.Equals(y);
+
+        [MethodImpl(Inline)]
+        public static U operator < (U x, U y)
+            => @bool(x.data < y.data);
+
+        [MethodImpl(Inline)]
+        public static U operator <= (U x, U y)
+            => @bool(x.data <= y.data);
+
+        [MethodImpl(Inline)]
+        public static U operator > (U x, U y)
+            => @bool(x.data > y.data);
+
+        [MethodImpl(Inline)]
+        public static U operator >= (U x, U y)
+            => @bool(x.data >= y.data);
    }
 }

@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial struct z
+    partial struct cpu
     {
         /// <summary>
         /// Reverses the source vector components

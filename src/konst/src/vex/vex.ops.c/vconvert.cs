@@ -129,60 +129,6 @@ namespace Z0
             => v32u(ConvertToVector256Int32(gptr(u8(src))));
 
         /// <summary>
-        /// 32x8u -> (16x16i, 16x16i)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<short> vconvert16i(Vector256<byte> src, W512 w)
-            => (vmaplo16i(src, w256), vmaphi16i(src, w256));
-
-        /// <summary>
-        /// 16x16u -> 16x32u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<uint> vconvert32u(Vector256<ushort> src, W512 w)
-            => (vmaplo32u(src, w256), vmaphi16u(src, w256));
-
-        /// <summary>
-        /// 8x32i -> (4x64i, 4x64i)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<long> vconvert64i(Vector256<int> src, W512 w)
-            => (vmaplo64i(src, w256), vmaphi64i(src, w256));
-
-        /// <summary>
-        /// 8x32u -> (4x64u, 4x64u)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<ulong> vconvert64u(Vector256<uint> src, W512 w)
-            => (vmaplo64u(src, w256), vmaphi64u(src, w256));
-
-        [MethodImpl(Inline), Op]
-        public static Vector512<long> vconvert64i(Vector256<short> src, W512 w)
-            => (ConvertToVector256Int64(vlo(src)), ConvertToVector256Int64(vhi(src)));
-
-        /// <summary>
-        /// 32x8u -> (16x16u, 16x16u)
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vconvert16u(Vector256<byte> src, W512 w)
-             => (vmaplo16u(src, w256), vmaphi16u(src, w256));
-
-        /// <summary>
-        /// 16x16u -> 16x64u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector1024<ulong> vconvert64u(Vector256<ushort> src, W1024 w)
-            => (vconvert64u(vlo(src), w512), vconvert64u(vhi(src), w512));
-
-        /// <summary>
         /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
         /// src[0..31] -> r32
         /// </summary>

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     class EmitImageHeaders : CmdReactor<EmitImageHeadersCmd, CmdResult>
     {
         protected override CmdResult Run(EmitImageHeadersCmd cmd)

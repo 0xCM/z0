@@ -23,6 +23,22 @@ namespace Z0
     {
         internal readonly T data;
 
+        [MethodImpl(Inline)]
+        internal uint4(uint8T src)
+            => data = (byte)(src & MaxLiteral);
+
+        [MethodImpl(Inline)]
+        internal uint4(byte src)
+            => data = crop4(src);
+
+        [MethodImpl(Inline)]
+        internal uint4(byte src, bool @unchecked)
+            => data = (byte)src;
+
+        [MethodImpl(Inline)]
+        internal uint4(K src)
+            => data = (byte)src;
+
         /// <summary>
         /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
         /// </summary>
@@ -83,7 +99,84 @@ namespace Z0
             get => new U(1,true);
         }
 
+        /// <summary>
+        /// Queries an index-identified bit
+        /// </summary>
+        public bit this[byte pos]
+        {
+            [MethodImpl(Inline)]
+            get => test(this, pos);
+        }
+
+        public K Kind
+        {
+            [MethodImpl(Inline)]
+            get => (K) data;
+        }
+
+        public T Content
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public bool IsZero
+        {
+            [MethodImpl(Inline)]
+            get => data == 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => data != 0;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the maximum value
+        /// </summary>
+        public bool IsMax
+        {
+            [MethodImpl(Inline)]
+            get => data == MaxLiteral;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinLiteral;
+        }
+
+        /// <summary>
+        /// Renders the source value as as hexadecimal string
+        /// </summary>
         [MethodImpl(Inline)]
+        public string Format()
+             => format(this);
+
+         public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(U y)
+            => eq(this,y);
+
+        public override bool Equals(object y)
+            => y is U x && Equals(x);
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+       [MethodImpl(Inline)]
         public static implicit operator uint8T(U src)
             => new uint8T(src.data);
 
@@ -102,6 +195,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator K(U src)
             => (K)src.data;
+
+        [MethodImpl(Inline)]
+        public static explicit operator bit(U src)
+            => new bit(src.data & 1);
 
         /// <summary>
         /// Converts a 4-bit integer to an unsigned 8-bit integer
@@ -254,98 +351,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U operator >= (U x, U y)
             => @bool(x.data >= y.data);
-
-        /// <summary>
-        /// Queries an index-identified bit
-        /// </summary>
-        public BitState this[byte pos]
-        {
-            [MethodImpl(Inline)]
-            get => test(this, pos);
-        }
-
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => (K) data;
-        }
-
-        public T Content
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public bool IsZero
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
-
-        public bool IsNonZero
-        {
-            [MethodImpl(Inline)]
-            get => data != 0;
-        }
-
-        /// <summary>
-        /// Specifies whether the current value is the maximum value
-        /// </summary>
-        public bool IsMax
-        {
-            [MethodImpl(Inline)]
-            get => data == MaxLiteral;
-        }
-
-        /// <summary>
-        /// Specifies whether the current value is the minimum value
-        /// </summary>
-        public bool IsMin
-        {
-            [MethodImpl(Inline)]
-            get => data == MinLiteral;
-        }
-
-        [MethodImpl(Inline)]
-        internal uint4(uint8T src)
-            => data = (byte)(src & MaxLiteral);
-
-        [MethodImpl(Inline)]
-        internal uint4(byte src)
-            => data = crop4(src);
-
-        [MethodImpl(Inline)]
-        internal uint4(byte src, bool @unchecked)
-            => data = (byte)src;
-
-        [MethodImpl(Inline)]
-        internal uint4(K src)
-            => data = (byte)src;
-
-        /// <summary>
-        /// Renders the source value as as hexadecimal string
-        /// </summary>
-        [MethodImpl(Inline)]
-        public string Format()
-             => format(this);
-
-         public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public bool Equals(U y)
-            => eq(this,y);
-
-        public override bool Equals(object y)
-            => y is U x && Equals(x);
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
     }
 }

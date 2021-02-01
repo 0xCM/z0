@@ -9,6 +9,4 @@ namespace Z0
         protected override CmdResult Run(DumpCliTablesCmd cmd)
             => cmd.ToResult(CliTables.init(Wf).DumpTables(cmd.Source, cmd.Target));
     }
-
-
 }

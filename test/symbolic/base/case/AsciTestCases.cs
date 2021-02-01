@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static z;
 
     public class AsciTestCases
@@ -26,7 +25,7 @@ namespace Z0
             return new TestCaseResult<T>(tc, success, description);
         }
 
-        public static Bit32 check<T>(T tc, ReadOnlySpan<byte> encoded)
+        public static bit check<T>(T tc, ReadOnlySpan<byte> encoded)
             where T : IAsciTestCase
         {
             for(var i = 0; i<tc.CharCount; i++)

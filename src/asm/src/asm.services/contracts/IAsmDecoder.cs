@@ -33,8 +33,6 @@ namespace Z0.Asm
 
         Option<AsmInstructionBlock> Decode(ApiCodeBlock src);
 
-        Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.IceInstruction> f);
-
         Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
 
         Option<IceInstructionList> Decode(CodeBlock src, Action<IceInstruction> f);

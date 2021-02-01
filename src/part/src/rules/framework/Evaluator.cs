@@ -9,13 +9,19 @@ namespace Z0
 
     using static Part;
 
-    partial struct TextRules
+    partial struct Rules
     {
-        partial struct Parse
+        public abstract class Evaluator<R,T>
+            where R : IRule
         {
-            [MethodImpl(Inline), Op]
-            public static int length(string src)
-                => src?.Length ?? 0;
+
+            public abstract T Evaluate(R src);
+        }
+
+        public abstract class RuleTest<R> : Evaluator<R,bool>
+            where R : IRule
+        {
+
         }
     }
 }

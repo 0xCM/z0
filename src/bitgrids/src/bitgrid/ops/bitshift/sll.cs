@@ -37,13 +37,13 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vsll<T>(g,(byte)shift);
+                => gcpu.vsll<T>(g,(byte)shift);
 
         [MethodImpl(Inline)]
         public static BitGrid256<M,N,T> sll<M,N,T>(in BitGrid256<M,N,T> g, byte shift)
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vsll<T>(g,(byte)shift);
+                => gcpu.vsll<T>(g,(byte)shift);
     }
 }

@@ -11,11 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmMnemonicExpr : ITextExpr<AsmMnemonicExpr>
     {
-        public asci32 Content {get;}
-
-        [MethodImpl(Inline)]
-        public AsmMnemonicExpr(asci32 name)
-            => Content = name;
+        TextBlock Content {get;}
 
         [MethodImpl(Inline)]
         public AsmMnemonicExpr(string src)
@@ -42,22 +38,10 @@ namespace Z0.Asm
             get => Content.IsNonEmpty;
         }
 
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.bytes(Content);
-        }
-
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.decode(Content);
-        }
-
         public TextBlock Text
         {
             [MethodImpl(Inline)]
-            get => Content.Text;
+            get => Content;
         }
 
         [MethodImpl(Inline)]
@@ -78,17 +62,21 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmMnemonicExpr(string name)
-            => new AsmMnemonicExpr(name);
+        public static implicit operator AsmMnemonicExpr(string src)
+            => new AsmMnemonicExpr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmMnemonicExpr(asci32 src)
-            => new AsmMnemonicExpr(src);
+        public static bool operator ==(AsmMnemonicExpr a, AsmMnemonicExpr b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(AsmMnemonicExpr a, AsmMnemonicExpr b)
+            => !a.Equals(b);
 
         public static AsmMnemonicExpr Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmMnemonicExpr(asci32.Null);
+            get => new AsmMnemonicExpr(TextBlock.Empty);
         }
     }
 }

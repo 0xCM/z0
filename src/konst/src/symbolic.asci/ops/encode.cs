@@ -242,7 +242,7 @@ namespace Z0
         public static uint encode(ReadOnlySpan<char> src, uint offset, uint count, Span<AsciCharCode> dst)
         {
             ref readonly var input = ref skip(src, offset);
-            ref var target = ref z.first(dst);
+            ref var target = ref memory.first(dst);
             for(var i=0u; i<count; i++)
                 seek(target, i) = (AsciCharCode)skip(input,i);
             return count;
@@ -251,8 +251,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly AsciSequence encode(string src, in AsciSequence dst)
         {
-            var buffer = dst.Storage;
-            encode(src, buffer);
+            encode(src, dst.Storage);
             return ref dst;
         }
 
