@@ -17,7 +17,6 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of elements in the sequence</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static IEnumerable<T> stream<T>(T count)
             where T : unmanaged
                 => stream(default(T), count);
@@ -28,7 +27,6 @@ namespace Z0
         /// <param name="x0">The lower bound</param>
         /// <param name="x1">The upper bound</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static IEnumerable<T> stream<T>(T x0, T x1)
             where T : unmanaged
                 => range_1(x0, x1, null);
@@ -40,7 +38,6 @@ namespace Z0
         /// <param name="x1">The upper bound</param>
         /// <param name="step">The step size</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static IEnumerable<T> stream<T>(T x0, T x1, T step)
             where T : unmanaged
                 => range_1(x0, x1, step);

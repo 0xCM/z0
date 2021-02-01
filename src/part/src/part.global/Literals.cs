@@ -148,24 +148,44 @@ namespace Z0
         public const NK Numeric32x64k = NK.Width32 | NK.Width64;
 
         /// <summary>
-        /// Specifies signed and unsigned integral type of width <see cref='W8'/>
+        /// Specifies an usigned integral type of width <see cref='W8'/>
         /// </summary>
-        public const NK Int8k = NK.I8 | NK.U8;
+        public const NK UInt8k = NK.U8;
 
         /// <summary>
-        /// Specifies signed and unsigned integral type of width <see cref='W16'/>
+        /// Specifies an usigned integral type of width <see cref='W16'/>
         /// </summary>
-        public const NK Int16k = NK.I16 | NK.U16;
+        public const NK UInt16k = NK.U16;
 
         /// <summary>
-        /// Specifies signed and unsigned integral type of width <see cref='W32'/>
+        /// Specifies an usigned integral type of width <see cref='W32'/>
         /// </summary>
-        public const NK Int32k = NK.I32 | NK.U32;
+        public const NK UInt32k = NK.U32;
 
         /// <summary>
-        /// Specifies signed and unsigned integral type of width <see cref='W64'/>
+        /// Specifies an usigned integral type of width <see cref='W64'/>
         /// </summary>
-        public const NK Int64k = NK.I64 | NK.U64;
+        public const NK UInt64k = NK.U64;
+
+        /// <summary>
+        /// Specifies a signed integral type of width <see cref='W8'/>
+        /// </summary>
+        public const NK Int8k = NK.I8;
+
+        /// <summary>
+        /// Specifies a signed integral type of width <see cref='W16'/>
+        /// </summary>
+        public const NK Int16k = NK.I16;
+
+        /// <summary>
+        /// Specifies a signed integral type of width <see cref='W32'/>
+        /// </summary>
+        public const NK Int32k = NK.I32;
+
+        /// <summary>
+        /// Specifies a signed integral type of width <see cref='W64'/>
+        /// </summary>
+        public const NK Int64k = NK.I64;
 
         /// <summary>
         /// Specifies a floating point type of width <see cref='W32'/>
@@ -200,14 +220,6 @@ namespace Z0
         public const NK Integers8x64k = Int8x64k;
 
         public const NK Numeric8x16k = Int8x16k;
-
-        public const NK UInt8k = NK.U8;
-
-        public const NK UInt16k = NK.U16;
-
-        public const NK UInt32k = NK.U32;
-
-        public const NK UInt64k = NK.U64;
 
         public const NK UInt8x64k = Int8x64k;
 

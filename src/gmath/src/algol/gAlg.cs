@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static gmath;
     using static memory;
 
     [ApiHost]

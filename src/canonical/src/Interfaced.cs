@@ -9,11 +9,9 @@ namespace Z0
 
     using static Part;
 
+    [ApiType]
     public readonly struct Interfaced : IChronic<Interfaced>, ICorrelated<Interfaced>, ITextual
     {
-        [MethodImpl(NotInline)]
-        public static string format()
-            => nameof(Interfaced);
 
         public Timestamp Ts
             => root.now();
@@ -22,6 +20,6 @@ namespace Z0
             => CorrelationToken.Default;
 
         public string Format()
-            => format();
+            => Ts.ToString();
     }
 }
