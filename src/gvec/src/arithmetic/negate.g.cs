@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     partial class gvec
     {
@@ -52,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vnegate(v64i(x)));
             else
-                return ginxfp.vnegate(x);
+                return gfcpu.vnegate(x);
         }
 
         [MethodImpl(Inline)]
@@ -68,7 +69,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vnegate(v64i(x)));
             else
-                return ginxfp.vnegate(x);
+                return gfcpu.vnegate(x);
         }
 
 

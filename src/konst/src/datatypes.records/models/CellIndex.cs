@@ -40,7 +40,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Row,Col);
+            => (int)alg.hash.combine(Row,Col);
 
         public bool Equals(CellIndex src)
             => Row == src.Row && Col == src.Col;

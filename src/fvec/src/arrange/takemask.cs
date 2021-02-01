@@ -12,10 +12,9 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// int _mm_movemask_ps (__m128 a) MOVMSKPS reg, xmm<

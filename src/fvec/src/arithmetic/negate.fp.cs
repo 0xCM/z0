@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// Negates each source vector component

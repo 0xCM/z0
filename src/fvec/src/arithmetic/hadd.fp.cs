@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
        /// <summary>
         /// __m128 _mm_hadd_ps (__m128 a, __m128 b) HADDPS xmm, xmm/m128

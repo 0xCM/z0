@@ -23,6 +23,12 @@ namespace Z0
             get => memory.cover(Data);
         }
 
+        public string String
+        {
+            [MethodImpl(Inline)]
+            get => Data ?? EmptyString;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]

@@ -112,7 +112,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong hash64(LinkType src)
-            => alg.hash.calc(src.Kind, src.Source, src.Target);
+            => alg.hash.combine(src.Kind, src.Source, src.Target);
 
         [MethodImpl(Inline), Op]
         public static bool eq(LinkType a, LinkType b)

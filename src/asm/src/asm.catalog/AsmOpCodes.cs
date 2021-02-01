@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         public static string normalize(AsmSigExpr sig, string opcode, BinaryCode encoded)
         {
-            if(AsmExpr.mnemonic(sig, out var mnemonic) && mnemonic == PUSH)
+            if(ParseMnemonic(sig, out var mnemonic) && mnemonic == PUSH)
             {
                 var rule = Rules.fork(Chars.Plus);
                 var result = Transform.apply(rule, opcode);
@@ -31,6 +31,21 @@ namespace Z0.Asm
             }
             else
                 return opcode;
+        }
+
+        static bool ParseMnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
+        {
+            var i = Query.index(src.Text, Chars.Space);
+            if(i != NotFound && i > 0)
+            {
+                dst = AsmExpr.mnemonic(Parse.segment(src.Text, 0, i - 1));
+                return true;
+            }
+            else
+            {
+                dst = AsmMnemonicExpr.Empty;
+                return false;
+            }
         }
     }
 }

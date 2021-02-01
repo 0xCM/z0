@@ -10,10 +10,9 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8

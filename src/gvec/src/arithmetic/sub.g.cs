@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     partial class gvec
     {
@@ -44,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector128<T> vsub<T>(Vector128<T> x, T a)
             where T : unmanaged
-                => vsub(x, z.vbroadcast(n128,a));
+                => vsub(x, gcpu.vbroadcast(n128,a));
 
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -55,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector128<T> vsub<T>(T a, Vector128<T> x)
             where T : unmanaged
-                => vsub(z.vbroadcast(n128,a), x);
+                => vsub(gcpu.vbroadcast(n128,a), x);
 
         /// <summary>
         /// Subtracts a constant value from each vector component
@@ -66,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
-                => vsub(x, z.vbroadcast(n256,a));
+                => vsub(x, gcpu.vbroadcast(n256,a));
 
         /// <summary>
         /// Subtracts each vector component from a constant value
@@ -77,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(T a, Vector256<T> x)
             where T : unmanaged
-                => vsub(z.vbroadcast(n256,a), x);
+                => vsub(gcpu.vbroadcast(n256,a), x);
 
         [MethodImpl(Inline)]
         static Vector128<T> vsub_u<T>(Vector128<T> x, Vector128<T> y)
@@ -108,7 +109,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vsub(v64i(x), v64i(y)));
             else
-                return ginxfp.vsub(x,y);
+                return gfcpu.vsub(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -140,7 +141,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(cpu.vsub(v64i(x), v64i(y)));
             else
-                return ginxfp.vsub(x,y);
+                return gfcpu.vsub(x,y);
         }
     }
 }

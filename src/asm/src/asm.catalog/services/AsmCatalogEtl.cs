@@ -32,15 +32,13 @@ namespace Z0.Asm
             var dst = root.hashset<AsmMnemonicExpr>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
-            var parser = AsmSigParser.create(Wf);
+            var parser = AsmExprParser.create(Wf);
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
                 var sig = AsmExpr.sig(row.Instruction);
-                if(AsmExpr.mnemonic(sig, out var monic))
+                if(parser.Mnemonic(sig, out var monic))
                     dst.Add(monic);
-                // if(parser.ParseMnemonic(sig, out var mnemonic))
-                //     mnemonics.Add(mnemonic);
             }
             return dst.ToArray();
         }
@@ -71,8 +69,8 @@ namespace Z0.Asm
                     if(foundheader)
                     {
                         var row = default(StokeAsmImportRow);
-                        if(parse(line, ref row))
-                            seek(dst,j++) = row;
+                        if(parse(j, line, ref row))
+                            seek(dst, j++) = row;
                     }
                     else
                     {
@@ -99,7 +97,29 @@ namespace Z0.Asm
             return imports;
         }
 
-        bool parse(in TextLine src, ref StokeAsmImportRow dst)
+        public ReadOnlySpan<AsmSpecifierExpr> Specifiers()
+        {
+            var imported = ImportedStokeRows();
+            var denormal = span<AsmSpecifierExpr>(imported.Length);
+            var j=0u;
+            var k=0u;
+            for(var i=0; i<imported.Length; i++)
+            {
+                ref readonly var row = ref skip(imported, i);
+                var seq = row.Sequence;
+                var oc = AsmExpr.opcode(row.OpCode);
+                var sig = AsmExpr.sig(row.Instruction);
+                var spec = AsmExpr.specifier((ushort)k,oc,sig);
+                seek(denormal,k++) = spec;
+
+                //k += Denormalize(spec, denormal, k);
+            }
+
+            return denormal;
+        }
+
+
+        bool parse(uint seq, in TextLine src, ref StokeAsmImportRow dst)
         {
             if(Parse.row(src, SourceFormat, out var row))
             {
@@ -107,6 +127,7 @@ namespace Z0.Asm
                 {
                     var cells = row.Cells.View;
                     var i = 0;
+                    dst.Sequence = (ushort)(seq + 1);
                     dst.OpCode = skip(cells, i++);
                     dst.Instruction = skip(cells, i++);
                     dst.EncodingKind = skip(cells, i++);
@@ -129,6 +150,40 @@ namespace Z0.Asm
             return false;
         }
 
+
+        public uint Denormalize(AsmSpecifierExpr src, Span<AsmSpecifierExpr> dst, uint offset)
+        {
+            var index = offset;
+            var input = AsmExpr.specifier((ushort)index, src.OpCode, src.Sig);
+            var pair = Denormalize(input);
+            seek(dst,index++) = pair.Left;
+            if(pair.Right.IsNonEmpty)
+                seek(dst,index++) = pair.Right;
+            return index - offset;
+        }
+
+        public Pair<AsmSpecifierExpr> Denormalize(AsmSpecifierExpr src)
+        {
+            var a0 = AsmSpecifierExpr.Empty;
+            var a1 = AsmSpecifierExpr.Empty;
+            var sigs = Denormalize(src.Sig);
+            return (a0,a1);
+        }
+
+        public Pair<AsmSig> Denormalize(AsmSigExpr src)
+        {
+            var a0 = AsmSig.Empty;
+            var a1 = AsmSig.Empty;
+
+            // var operands = src.Operands;
+            // var opcount = operands.Count;
+            // for(var i=0; i<opcount; i++)
+            // {
+
+            // }
+
+            return (a0,a1);
+        }
 
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
     }

@@ -59,12 +59,12 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an operand in the context of a <see cref='AsmSigExpr'/>
     /// </summary>
-    public readonly struct SigOperandExpr : ITextExpr<SigOperandExpr>
+    public readonly struct AsmSigOpExpr : ITextExpr<AsmSigOpExpr>
     {
         public readonly TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public SigOperandExpr(string src)
+        public AsmSigOpExpr(string src)
             => Content = src;
 
         /// <summary>
@@ -94,12 +94,18 @@ namespace Z0.Asm
             get => Content;
         }
 
+        public string String
+        {
+            [MethodImpl(Inline)]
+            get => Content.String;
+        }
+
         [MethodImpl(Inline)]
-        public bool Equals(SigOperandExpr src)
+        public bool Equals(AsmSigOpExpr src)
             => src.Content.Equals(Content);
 
         public override bool Equals(object src)
-            => src is SigOperandExpr x && Equals(x);
+            => src is AsmSigOpExpr x && Equals(x);
 
         public override int GetHashCode()
             => Content.GetHashCode();
@@ -112,10 +118,10 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator SigOperandExpr(string src)
-            => new SigOperandExpr(src);
+        public static implicit operator AsmSigOpExpr(string src)
+            => new AsmSigOpExpr(src);
 
-        public static SigOperandExpr Empty
-            => new SigOperandExpr(EmptyString);
+        public static AsmSigOpExpr Empty
+            => new AsmSigOpExpr(EmptyString);
     }
 }

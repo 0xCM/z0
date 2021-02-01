@@ -9,18 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmSigOperand
+    public readonly struct AsmSigOp
     {
-        public AsmSigOperandKind Kind {get;}
+        public AsmSigOpKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(AsmSigOperandKind kind)
+        public AsmSigOp(AsmSigOpKind kind)
         {
             Kind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmSigOperand(AsmSigOperandKind src)
-            => new AsmSigOperand(src);
+        public static implicit operator AsmSigOp(AsmSigOpKind src)
+            => new AsmSigOp(src);
     }
 }

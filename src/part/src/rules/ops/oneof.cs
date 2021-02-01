@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static OneOf<T> oneof<T>(params T[] src)
             => new OneOf<T>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static OneOf<T> oneof<T>(Index<T> src)
+            => new OneOf<T>(src);
     }
 }

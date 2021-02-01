@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class gvec
     {
@@ -24,9 +23,8 @@ namespace Z0
         public static Vector128<T> vbitclear<T>(Vector128<T> src, byte start, byte count)
             where T : unmanaged
         {
-            var n = n128;
             var cellmask = gbits.eraser<T>(start,count);
-            var vmask = z.vbroadcast(n, cellmask);
+            var vmask = gcpu.vbroadcast(w128, cellmask);
             return vand(vmask,src);
         }
 
@@ -43,7 +41,7 @@ namespace Z0
         {
             var n = n256;
             var cellmask = gbits.eraser<T>(start,count);
-            var vmask = z.vbroadcast(n, cellmask);
+            var vmask = gcpu.vbroadcast(w256, cellmask);
             return vand(vmask,src);
         }
     }

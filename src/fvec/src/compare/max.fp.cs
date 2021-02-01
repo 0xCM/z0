@@ -13,7 +13,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         ///  __m128 _mm_max_ps (__m128 a, __m128 b) MAXPS xmm, xmm/m128
         /// </summary>

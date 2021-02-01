@@ -8,8 +8,10 @@ namespace Z0
     {
         TextBlock Text {get;}
 
-        string ITextual.Format()
+        string String
             => Text.Format();
+        string ITextual.Format()
+            => String;
     }
 
     public interface ITextExpr<F> : ITextExpr

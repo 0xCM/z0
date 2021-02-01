@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Part;
     using static gmath;
-            
+
     partial class gvec
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="hi">THe hi part of the result</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See:
-        /// https://arxiv.org/pdf/1611.07612.pdf 
+        /// https://arxiv.org/pdf/1611.07612.pdf
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -34,7 +34,7 @@ namespace Z0
             lo = xor(u,c);
             hi = or(and(a,b), and(u,c));
         }
-         
+
         /// <summary>
         /// Implements a carry-save adder that deposits the bitwise sum of three input vectors into two output vectors
         /// </summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="hi">THe hi part of the result</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>See:
-        /// https://arxiv.org/pdf/1611.07612.pdf 
+        /// https://arxiv.org/pdf/1611.07612.pdf
         /// https://github.com/WojciechMula/sse-popcount
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -53,7 +53,7 @@ namespace Z0
             where T : unmanaged
         {
             var u = vxor(a,b);
-            var lo = vxor(u,c);            
+            var lo = vxor(u,c);
             var hi = vor(vand(a,b), vand(u,c));
             return(lo,hi);
         }

@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Pow2x16;
     using static RegisterKind;
 
-    public enum AsmSigOperandKind : ushort
+    public enum AsmSigOpKind : ushort
     {
         None = 0,
 

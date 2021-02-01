@@ -15,10 +15,10 @@ namespace Z0.Asm
 
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Index<AsmSigOperand> Operands {get;}
+        public Index<AsmSigOp> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmSig(AsmSigIdentifier identifier, AsmMnemonicCode mnenonic, Index<AsmSigOperand> operands)
+        public AsmSig(AsmSigIdentifier identifier, AsmMnemonicCode mnenonic, Index<AsmSigOp> operands)
         {
             Identifier = identifier;
             Mnemonic = mnenonic;

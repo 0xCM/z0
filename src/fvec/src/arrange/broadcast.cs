@@ -10,11 +10,10 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
-    using static z;
+    using static memory;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32

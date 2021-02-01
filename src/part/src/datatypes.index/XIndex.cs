@@ -9,6 +9,6 @@ namespace Z0
     [ApiHost]
     public static partial class XIndex
     {
-        const NumericKind Closure = UInt64k;
+        const NumericKind Closure = UInt64k | UInt8k;
     }
 }

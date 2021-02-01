@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static TextRules;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct AsmExpr
@@ -18,12 +19,12 @@ namespace Z0.Asm
             => new AsmMnemonicExpr(src);
 
         /// <summary>
-        /// Defines a <see cref='SigOperandExpr'/>
+        /// Defines a <see cref='AsmSigOpExpr'/>
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static SigOperandExpr sigop(string src)
-            => new SigOperandExpr(src);
+        public static AsmSigOpExpr sigop(string src)
+            => new AsmSigOpExpr(src);
 
         /// <summary>
         /// Defines a <see cref='AsmOpCodeExpr'/>
@@ -38,7 +39,7 @@ namespace Z0.Asm
         /// </remarks>
         [MethodImpl(Inline), Op]
         public static AsmOpCodeExpr opcode(string src)
-            => new AsmOpCodeExpr(src.Split(src, Chars.Space));
+            => new AsmOpCodeExpr(src);
 
         /// <summary>
         /// Defines a signature expression
@@ -56,20 +57,8 @@ namespace Z0.Asm
         public static AsmSigExpr sig(string src)
             => new AsmSigExpr(src);
 
-        [Op]
-        public static bool mnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
-        {
-            var i = Query.index(src.Text, Chars.Space);
-            if(i != NotFound && i > 0)
-            {
-                dst = mnemonic(Parse.segment(src.Text, 0, i - 1));
-                return true;
-            }
-            else
-            {
-                dst = AsmMnemonicExpr.Empty;
-                return false;
-            }
-        }
+        [MethodImpl(Inline), Op]
+        public static AsmSpecifierExpr specifier(ushort seq, AsmOpCodeExpr op, AsmSigExpr sig)
+            => new AsmSpecifierExpr(seq, op,sig);
     }
 }

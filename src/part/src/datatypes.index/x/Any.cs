@@ -11,8 +11,8 @@ namespace Z0
 
     partial class XIndex
     {
-        [MethodImpl(Inline)]
-        public static bool Any<T>(this Index<T> src)
-            => Index.any(src);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Index<dynamic> Dynamify<T>(this Index<T> src)
+            => src.Map(x => (dynamic)x);
     }
 }

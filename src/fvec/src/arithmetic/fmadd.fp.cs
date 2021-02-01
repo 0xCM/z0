@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using static System.Runtime.Intrinsics.X86.Fma;
 
+    using static System.Runtime.Intrinsics.X86.Fma;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// dst = x*y + z

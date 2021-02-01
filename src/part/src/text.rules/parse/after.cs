@@ -42,6 +42,22 @@ namespace Z0
                 var found = src.IndexOf(match);
                 return found != -1 ? substring(src,found + match.Length) : src;
             }
+
+            [Op]
+            public static bool after(string src, string match, out string result)
+            {
+                var found = src.IndexOf(match);
+                if(found == NotFound)
+                {
+                    result = EmptyString;
+                    return false;
+                }
+                else
+                {
+                    result = substring(src,found + match.Length);
+                    return true;
+                }
+            }
         }
     }
 }

@@ -36,6 +36,8 @@ namespace Z0.Asm
     {
         public const string TableId = "stoke-asmcat";
 
+        public ushort Sequence;
+
         public string OpCode;
 
         public string Instruction;

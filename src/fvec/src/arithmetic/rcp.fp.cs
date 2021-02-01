@@ -10,10 +10,9 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Avx;
-
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m128 _mm_rcp_ps (__m128 a) RCPPS xmm, xmm/m128

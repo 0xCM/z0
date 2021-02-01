@@ -72,7 +72,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static int calc(ulong x)
-            => (int)hash.calc(x,(x >> 32));
+            => (int)hash.combine(x,(x >> 32));
 
         /// <summary>
         /// Creates a signed hash code
@@ -81,7 +81,7 @@ namespace alg
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static int calc(long x)
-            => (int)hash.calc(x,(x >> 32));
+            => (int)hash.combine(x,(x >> 32));
 
         /// <summary>
         /// Creates a signed hash code

@@ -41,7 +41,7 @@ namespace Z0
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Source,Target);
+            get => alg.hash.combine(Source,Target);
         }
 
         public override int GetHashCode()

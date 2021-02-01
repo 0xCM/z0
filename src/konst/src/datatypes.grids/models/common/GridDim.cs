@@ -57,7 +57,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(RowCount, ColCount);
+            => (int)alg.hash.combine(RowCount, ColCount);
 
         public override bool Equals(object obj)
             => obj is GridDim d && Equals(d);

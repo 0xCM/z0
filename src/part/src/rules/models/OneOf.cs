@@ -21,6 +21,12 @@ namespace Z0
             [MethodImpl(Inline)]
             public OneOf(Index<dynamic> choices)
                 => Elements = choices;
+
+            public uint Count
+            {
+                [MethodImpl(Inline)]
+                get => Elements.Count;
+            }
         }
 
         /// <summary>
@@ -36,7 +42,13 @@ namespace Z0
                 Elements = choices;
             }
 
-            [MethodImpl(Inline)]
+            public uint Count
+            {
+                [MethodImpl(Inline)]
+                get => Elements.Count;
+            }
+
+           [MethodImpl(Inline)]
             public static implicit operator OneOf<T>(T[] src)
                 => new OneOf<T>(src);
 

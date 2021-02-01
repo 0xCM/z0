@@ -44,6 +44,12 @@ namespace Z0.Asm
             get => Content;
         }
 
+        public string String
+        {
+            [MethodImpl(Inline)]
+            get => Content.String;
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(AsmMnemonicExpr src)
             => src.Content.Equals(Content);

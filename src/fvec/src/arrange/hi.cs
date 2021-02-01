@@ -11,9 +11,10 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
-    using static z;
+    using static memory;
+    using static cpu;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// Creates a scalar vector from the upper 64 bits of the source vector

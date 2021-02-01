@@ -16,11 +16,11 @@ namespace Z0
         /// </summary>
         public readonly struct OneOrMany : IRule<OneOrMany>
         {
-            public dynamic Element {get;}
+            public Index<dynamic> Elements {get;}
 
             [MethodImpl(Inline)]
-            public OneOrMany(dynamic src)
-                => Element = src;
+            public OneOrMany(Index<dynamic> src)
+                => Elements = src;
 
             public static Marker<string> Indicator => "(1..*)";
         }
@@ -31,19 +31,19 @@ namespace Z0
         /// </summary>
         public readonly struct OneOrMany<T> : IRule<OneOrMany<T>,T>
         {
-            public T Element {get;}
+            public Index<T> Elements {get;}
 
             [MethodImpl(Inline)]
-            public OneOrMany(T src)
-                => Element = src;
+            public OneOrMany(Index<T> src)
+                => Elements = src;
 
             [MethodImpl(Inline)]
-            public static implicit operator OneOrMany<T>(T src)
+            public static implicit operator OneOrMany<T>(T[] src)
                 => new OneOrMany<T>(src);
 
             [MethodImpl(Inline)]
             public static implicit operator OneOrMany(OneOrMany<T> src)
-                => new OneOrMany(src);
+                => new OneOrMany(src.Elements.Dynamify());
 
             public static Marker<string> Indicator => OneOrMany.Indicator;
         }

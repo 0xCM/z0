@@ -123,7 +123,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Ts.Hashed, alg.hash.calc(Name));
+            get => alg.hash.combine(Ts.Hashed, alg.hash.calc(Name));
         }
 
         public override int GetHashCode()

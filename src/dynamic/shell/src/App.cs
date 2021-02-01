@@ -472,6 +472,21 @@ namespace Z0
             writer.Write(buffer.Emit());
         }
 
+        void ShowSpecifiers(AsmCatalogEtl etl)
+        {
+            var parser = AsmExprParser.create(Wf);
+            var specifiers = etl.Specifiers();
+            for(var i=0; i<specifiers.Length; i++)
+            {
+                ref readonly var spec = ref skip(specifiers,i);
+                parser.Mnemonic(spec.Sig, out var monic);
+                var operands = parser.Operands(spec.Sig).View;
+                var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
+                Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
+
+            }
+        }
+
         public void Run()
         {
             //ShowApiClasses();
@@ -486,6 +501,7 @@ namespace Z0
             Wf.Status(maxlen);
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
+            ShowSpecifiers(etl);
 
             // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
             // root.iter(terms, r => Wf.Row(r));

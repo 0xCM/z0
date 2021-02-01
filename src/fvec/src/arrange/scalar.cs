@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vscalar(float src)

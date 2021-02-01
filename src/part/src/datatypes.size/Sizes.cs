@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint hash(Kb src)
-            => alg.hash.calc(src.Count, src.Rem);
+            => alg.hash.combine(src.Count, src.Rem);
 
         [MethodImpl(Inline), Op]
         public static Kb kb(ByteSize src)

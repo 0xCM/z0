@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Fma;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m128 _mm_fnmadd_ps (__m128 a, __m128 b, __m128 c) VFNMADDPS xmm, xmm, xmm/m128

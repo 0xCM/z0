@@ -33,7 +33,7 @@ namespace Z0
             /// </summary>
             /// <param name="src">The source string</param>
             /// <param name="match">The character to match</param>
-            [Op]
+            [MethodImpl(Inline), Op]
             public static bool contains(ReadOnlySpan<char> src, char match)
             {
                 var len = src.Length;

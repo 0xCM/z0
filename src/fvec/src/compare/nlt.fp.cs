@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         ///  __m128d _mm_cmpnlt_pd (__m128d a, __m128d b) CMPPD xmm, xmm/m128, imm8(5)

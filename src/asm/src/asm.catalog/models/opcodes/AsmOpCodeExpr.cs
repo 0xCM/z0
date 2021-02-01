@@ -36,41 +36,61 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeExpr
     {
-        public Index<string> Components {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeExpr(Index<string> src)
-            => Components = src;
+        public AsmOpCodeExpr(TextBlock src)
+            => Content = src;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Components.IsEmpty;
+            get => Content.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Components.IsNonEmpty;
+            get => Content.IsNonEmpty;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Content.Hash;
+        }
+
+        public string String
+        {
+            [MethodImpl(Inline)]
+            get => Content.String;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
-            => src.Components.Equals(Components);
+            => src.Content.Equals(Content);
 
         public override bool Equals(object src)
             => src is AsmOpCodeExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Components.GetHashCode();
+            => Content.GetHashCode();
 
         public string Format()
-            => Components.Format();
+            => Content.Format();
 
         public override string ToString()
             => Format();
 
+        [MethodImpl(Inline)]
+        public static bool operator ==(AsmOpCodeExpr a, AsmOpCodeExpr b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(AsmOpCodeExpr a, AsmOpCodeExpr b)
+            => !a.Equals(b);
+
         public static AsmOpCodeExpr Empty
-            => new AsmOpCodeExpr(Index<string>.Empty);
+            => new AsmOpCodeExpr(EmptyString);
     }
 }

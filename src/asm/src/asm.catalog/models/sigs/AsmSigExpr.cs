@@ -80,6 +80,18 @@ namespace Z0.Asm
             get => Content;
         }
 
+        public string String
+        {
+            [MethodImpl(Inline)]
+            get => Content.String;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => Content.Hash;
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(AsmSigExpr src)
              => src.Content.Equals(Content);
@@ -100,6 +112,14 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator TextBlock(AsmSigExpr src)
             => new TextBlock(src.Content.Format());
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(AsmSigExpr a, AsmSigExpr b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(AsmSigExpr a, AsmSigExpr b)
+            => !a.Equals(b);
 
         public static AsmSigExpr Empty
             => new AsmSigExpr(EmptyString);

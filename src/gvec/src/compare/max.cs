@@ -52,7 +52,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vmax(v64i(x), v64i(y)));
             else
-                return ginxfp.vmax(x,y);
+                return gfcpu.vmax(x,y);
         }
 
         [MethodImpl(Inline)]
@@ -84,7 +84,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(cpu.vmax(v64i(x), v64i(y)));
             else
-                return ginxfp.vmax(x,y);
+                return gfcpu.vmax(x,y);
         }
     }
 }

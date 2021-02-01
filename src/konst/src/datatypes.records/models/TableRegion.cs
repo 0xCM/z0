@@ -46,7 +46,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get =>alg.hash.calc(
+            get =>alg.hash.combine(
                 alg.hash.calc(Min),
                 alg.hash.calc(Max)
                 );

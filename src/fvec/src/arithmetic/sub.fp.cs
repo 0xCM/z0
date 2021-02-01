@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m128d _mm_sub_ps (__m128d a, __m128d b) SUBPS xmm, xmm/m128

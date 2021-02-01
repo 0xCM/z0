@@ -15,7 +15,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
 
-    partial class dinxfp
+    partial class fcpu
     {
         /// <summary>
         /// __m128 _mm_cmpgt_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(6)

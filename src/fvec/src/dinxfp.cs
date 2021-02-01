@@ -10,7 +10,7 @@ namespace Z0
     /// Direct vectorized intrinsics over floating-point domains
     /// </summary>
     [ApiHost]
-    public static partial class dinxfp
+    public static partial class fcpu
     {
 
     }

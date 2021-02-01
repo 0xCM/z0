@@ -36,7 +36,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Row,Col);
+            get => alg.hash.combine(Row,Col);
         }
 
         [MethodImpl(Inline)]
