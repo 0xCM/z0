@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// The target's identifier
         /// </summary>
-        public StringRef Id;
+        public Identifier Name;
 
         /// <summary>
         /// The target's base address
@@ -24,14 +24,14 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmCallTarget(MemoryAddress @base)
         {
-            Id = EmptyString;
+            Name = EmptyString;
             Base = @base;
         }
 
         [MethodImpl(Inline)]
         public AsmCallTarget(string id, MemoryAddress @base)
         {
-            Id = id;
+            Name = id;
             Base = @base;
         }
 

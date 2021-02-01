@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct GridCalcs
     {
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="row">The 0-based row index</param>
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
-        public static uint linear(GridDim dim, GridCell point)
+        public static uint linear(GridDim dim, GridPoint point)
             => point.Row*dim.ColCount+ point.Col;
 
         /// <summary>

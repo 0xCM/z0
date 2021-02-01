@@ -24,7 +24,7 @@ namespace Z0.Asm
             => new AsmCallTarget(@base);
 
         [MethodImpl(Inline), Op]
-        public static AsmCallTarget target(string id, MemoryAddress @base)
-            => new AsmCallTarget(id, @base);
+        public static AsmCallTarget target(string name, MemoryAddress @base)
+            => new AsmCallTarget(name, @base);
     }
 }

@@ -8,10 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    [ApiHost]
-    public readonly partial struct AsmExprTest
+    /// <summary>
+    /// Specifies an instruction definition
+    /// </summary>
+    public readonly struct AsmInstructionSpec
     {
+        public AsmOpCode OpCode {get;}
+
+        public AsmSig Sig {get;}
+
+        public AsmInstructionSpec(AsmOpCode oc, AsmSig sig)
+        {
+            OpCode = oc;
+            Sig = sig;
+        }
     }
 }

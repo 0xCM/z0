@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly partial struct AsmCatalog
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    public sealed class AsmSourceParser : WfService<AsmSourceParser,AsmSourceParser>
     {
 
     }
+
 }

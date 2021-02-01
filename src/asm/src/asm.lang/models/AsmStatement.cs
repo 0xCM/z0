@@ -8,15 +8,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmExpr;
-
 
     public readonly struct AsmStatement : IEquatable<AsmStatement>
     {
-        public asci64 Content {get;}
+        public TextBlock Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(asci64 content)
+        public AsmStatement(TextBlock content)
             => Content = content;
 
         [MethodImpl(Inline)]
@@ -31,10 +29,6 @@ namespace Z0.Asm
 
         public int CompareTo(AsmStatement src)
             => Content.CompareTo(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(asci64 src)
-            => new AsmStatement(src);
     }
 
     public readonly struct AsmStatement<A> : IAsmStatement<A>

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0.Lang
     using static Part;
 
     /// <summary>
-    /// Defines a legal identifier
+    /// Defines a legal identifier within a given context
     /// </summary>
     [Datatype]
     public readonly struct Identifier : IIdentifier<Identifier>

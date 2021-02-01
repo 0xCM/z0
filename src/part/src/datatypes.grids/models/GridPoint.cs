@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Locates a cell within a grid
     /// </summary>
-     [StructLayout(LayoutKind.Sequential), Datatype]
-     public readonly struct GridCell : IDataTypeEquatable<GridCell>
+     public readonly struct GridPoint : IGridPoint<GridPoint>
      {
         /// <summary>
         /// The cell row
@@ -27,7 +25,7 @@ namespace Z0
         public uint Col {get;}
 
         [MethodImpl(Inline)]
-        public GridCell(uint row, uint col)
+        public GridPoint(uint row, uint col)
         {
             Row = row;
             Col = col;
@@ -40,14 +38,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(GridCell src)
+        public bool Equals(GridPoint src)
             => Row == src.Row && Col == src.Col;
 
         public override int GetHashCode()
             => (int)Hashed;
 
         public override bool Equals(object src)
-            => src is GridCell x && Equals(x);
+            => src is GridPoint x && Equals(x);
 
         public string Format()
             => $"({Row},{Col})";
@@ -57,11 +55,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator GridCell((uint row, uint col) src)
-            => new GridCell(src.row,src.col);
+        public static implicit operator GridPoint((uint row, uint col) src)
+            => new GridPoint(src.row,src.col);
 
         [MethodImpl(Inline)]
-        public static implicit operator (uint row, uint col)(GridCell src)
+        public static implicit operator (uint row, uint col)(GridPoint src)
             => (src.Row, src.Col);
     }
 }

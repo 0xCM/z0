@@ -12,20 +12,12 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a keyword in the asm grammar
     /// </summary>
-    public readonly struct AsmKeyword : ISyntaxAtom<AsmKeyword,AsmKeywordCode>
+    public readonly struct AsmKeyword
     {
-        public AsmKeywordCode Code {get;}
+        public Name Name {get;}
 
         [MethodImpl(Inline)]
-        public AsmKeyword(AsmKeywordCode key)
-            => Code = key;
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmKeyword(AsmKeywordCode src)
-            => new AsmKeyword(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmKeywordCode(AsmKeyword src)
-            => src.Code;
+        public AsmKeyword(Name name)
+            => Name = name;
     }
 }

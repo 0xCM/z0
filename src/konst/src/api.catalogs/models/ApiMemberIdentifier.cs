@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiMemberIdentifier : IIdentifier<ApiMemberIdentifier, StringRef>
+    public readonly struct ApiMemberIdentifier :  IEquatable<ApiMemberIdentifier>
     {
         public static ApiMemberIdentifier create(in OpIdentity src)
             => legalize(src, CreateCodeOptions());

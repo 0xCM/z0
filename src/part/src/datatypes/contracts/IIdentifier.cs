@@ -8,21 +8,23 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IIdentifier : ITextual
+    /// <summary>
+    /// Characterizes a lexical identifier
+    /// </summary>
+    /// <typeparam name="H">The reifying type</typeparam>
+    public interface IIdentifier<H> : IName<Name>, IDataTypeComparable<H>
+        where H : struct, IIdentifier<H>
     {
 
     }
 
-    [Free]
-    public interface IIdentifier<T> : IIdentifier
+    public interface IIdentifier<H,T> : IIdentifier<H>
+        where H : struct, IIdentifier<H,T>
+        where T : IComparable<T>
     {
-        T Identifier {get;}
-    }
+        Name IContented<Name>.Content
+            => Format();
 
-    [Free]
-    public interface IIdentifier<H,T> : IIdentifier<T>, IEquatable<H>
-    {
-
+        T Value {get;}
     }
 }

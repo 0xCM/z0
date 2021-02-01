@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct TermId : IIdentifier<uint>
+    public readonly struct TermId
     {
         public uint Identifier {get;}
 
