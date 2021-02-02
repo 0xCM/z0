@@ -82,7 +82,7 @@ namespace Z0
             get => Asci.decode(this);
         }
 
-        public TextBlock Text
+        public string Text
         {
             [MethodImpl(Inline)]
             get => Asci.format(this);

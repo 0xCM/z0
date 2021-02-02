@@ -6,27 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
 
     /// <summary>
     /// Defines an E-parametric literal index
     /// </summary>
-    [Datatype]
     public readonly struct EnumLiteralDetails<E> : IIndex<EnumLiteralDetail<E>>
         where E : unmanaged, Enum
     {
-        readonly EnumLiteralDetail<E>[] Data;
+        readonly Index<EnumLiteralDetail<E>> Data;
 
         [MethodImpl(Inline)]
-        internal EnumLiteralDetails(EnumLiteralDetail<E>[] src)
+        public EnumLiteralDetails(EnumLiteralDetail<E>[] src)
             => Data = src;
 
-        public EnumLiteralDetail<E>[] Content
+        public EnumLiteralDetail<E>[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
+        }
+
+        public ReadOnlySpan<EnumLiteralDetail<E>> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
         }
 
         public int Length
@@ -64,14 +68,8 @@ namespace Z0
             return dst;
         }
 
-        public IEnumerable<NamedValue<E>> NamedValues
+        public Index<NamedValue<E>> NamedValues
             => from i in Data select Names.value(i.Name, i.LiteralValue);
-
-        public EnumLiteralDetail<E>[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)

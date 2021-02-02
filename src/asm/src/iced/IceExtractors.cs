@@ -55,8 +55,8 @@ namespace Z0.Asm
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
-            var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString(), encoded);
-            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(ocs), sig);
+            //var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString(), encoded);
+            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(iceOpCode.ToOpCodeString()), sig);
         }
 
         [MethodImpl(Inline), Op]

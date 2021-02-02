@@ -45,7 +45,7 @@ namespace Z0
         public static EnumLiteralDetails<E,V> values<E,V>()
             where E : unmanaged, Enum
             where V : unmanaged
-                => (EnumLiteralDetails<E,V>)ValueCache.GetOrAdd(typeof(E), _ => LiteralSequence<E,V>());
+                => (EnumLiteralDetails<E,V>)ValueCache.GetOrAdd(typeof(E), _ => details<E,V>());
 
         /// <summary>
         /// Defines an E-V parametric enum value given an E-parametric literal an a value:V

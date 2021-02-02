@@ -61,11 +61,11 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigOpExpr : ITextExpr<AsmSigOpExpr>
     {
-        public readonly TextBlock Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public AsmSigOpExpr(string src)
-            => Content = src;
+            => Content = src ?? EmptyString;
 
         /// <summary>
         /// The expression length
@@ -73,46 +73,34 @@ namespace Z0.Asm
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => text.length(Content);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
-        }
-
-        public TextBlock Text
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public string String
-        {
-            [MethodImpl(Inline)]
-            get => Content.String;
+            get => text.nonempty(Content);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(AsmSigOpExpr src)
-            => src.Content.Equals(Content);
+            => text.equals(Content, src.Content);
 
         public override bool Equals(object src)
             => src is AsmSigOpExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => text.hash(Content);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Content;
 
         public override string ToString()
             => Format();

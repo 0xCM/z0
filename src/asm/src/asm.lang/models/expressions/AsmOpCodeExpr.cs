@@ -36,51 +36,46 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeExpr
     {
-        public TextBlock Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmOpCodeExpr(TextBlock src)
-            => Content = src;
+        public AsmOpCodeExpr(string src)
+            => Content = src ?? EmptyString;
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => text.length(Content);
+        }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => text.nonempty(Content);
         }
 
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => Content.Hash;
-        }
-
-        public string String
-        {
-            [MethodImpl(Inline)]
-            get => Content.String;
-        }
+        public override int GetHashCode()
+            => text.hash(Content);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmOpCodeExpr src)
-            => src.Content.Equals(Content);
+        public string Format()
+            => Content ?? EmptyString;
+
+        public override string ToString()
+            => Format();
 
         public override bool Equals(object src)
             => src is AsmOpCodeExpr x && Equals(x);
 
-        public override int GetHashCode()
-            => Content.GetHashCode();
-
-        public string Format()
-            => Content.Format();
-
-        public override string ToString()
-            => Format();
+        [MethodImpl(Inline)]
+        public bool Equals(AsmOpCodeExpr src)
+            => text.equals(Content, src.Content);
 
         [MethodImpl(Inline)]
         public static bool operator ==(AsmOpCodeExpr a, AsmOpCodeExpr b)

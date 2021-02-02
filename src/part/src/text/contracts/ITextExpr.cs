@@ -4,19 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
+    using static Part;
+
     public interface ITextExpr : ITextual
     {
-        TextBlock Text {get;}
+        Type ExprType {get;}
 
-        string String
-            => Text.Format();
+        string Content {get;}
+
         string ITextual.Format()
-            => String;
+            => Content;
     }
 
     public interface ITextExpr<F> : ITextExpr
         where F : struct, ITextExpr<F>
     {
-
+        Type ITextExpr.ExprType
+            => typeof(F);
     }
 }

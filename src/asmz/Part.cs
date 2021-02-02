@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+[assembly: PartId(PartId.AsmZ)]
+
+namespace Z0.Parts
 {
-    using H = Hex8Seq;
+    using System;
 
-    /// <summary>
-    /// Defines the escape op code byte as specified by Intel Vol II, 2.1.2
-    /// </summary>
-    public enum EscapeCode : byte
+    public sealed class AsmZ : Part<AsmZ>
     {
-        None = 0,
 
-        x0f = H.x0f
     }
 }

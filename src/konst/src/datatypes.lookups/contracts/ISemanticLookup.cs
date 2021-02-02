@@ -37,7 +37,7 @@ namespace Z0
             => Enums.literals<K>();
 
         ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
-            => Enums.index<K>().Content;
+            => Enums.index<K>().View;
     }
 
     public interface ISemanticLookup<H,K,P,T> : ISemanticLookup<K,T>

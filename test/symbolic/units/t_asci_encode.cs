@@ -29,9 +29,9 @@ namespace Z0
         {
             var tc = default(AsciTestCase01);
             var result = AsciTestCases.execute(tc);
-            using var writer = CaseWriter(FileExtensions.Csv);
-            writer.Write(result.Description);
-            Claim.yea(result.Success);
+            // using var writer = CaseWriter(FileExtensions.Csv);
+            // writer.Write(result.Description);
+            Claim.yea(result.Passed);
         }
 
         public unsafe void string_ptr()

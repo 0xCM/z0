@@ -428,7 +428,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Text, i+1));
+                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Content, i+1));
                 buffer.AppendLine();
             }
             margin -= 4;
@@ -457,7 +457,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Text));
+                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Content));
                 buffer.AppendLine();
             }
             margin -= 4;
@@ -492,7 +492,7 @@ namespace Z0
             var etl = AsmCatalogEtl.create(Wf);
             var records = etl.TransformSource();
             var monics = etl.Mnemonics();
-            var maxlen = monics.Select(x => x.Text.Length).Max();
+            var maxlen = monics.Select(x => x.Content.Length).Max();
             Wf.Status(maxlen);
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));

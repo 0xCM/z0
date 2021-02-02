@@ -18,24 +18,6 @@ namespace Z0
         static ConcurrentDictionary<Type,object> ValueCache {get;}
             = new ConcurrentDictionary<Type,object>();
 
-        /// <summary>
-        /// Gets the literals defined by an enumeration together with their integral values
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="T">The value type</typeparam>
-        public static EnumLiteralDetails<E,T> LiteralSequence<E,T>()
-            where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            var index = details<E>();
-            var dst = new EnumLiteralDetail<E,T>[index.Length];
-            for(var i=0; i<index.Length; i++)
-            {
-                var literal = index[i];
-                dst[i] =  evalue(literal, EnumValue.scalar<E,T>(literal.LiteralValue));
-            }
-            return dst;
-        }
 
         /// <summary>
         /// Gets the literals defined by an enumeration

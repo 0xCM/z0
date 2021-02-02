@@ -4,26 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public readonly struct ApiOperand
+    public interface ITestCase
     {
-        public ApiOperandKind Kind {get;}
+
     }
 
-    public enum ApiOperandKind
+    public interface ITestCase<T> : ITestCase
+        where T : struct, ITestCase<T>
     {
-        None,
 
-        Bit,
-
-        Primitive,
-
-        Vector,
-
-        Cell,
-
-        Span,
-
-        SpanBlock,
     }
 }

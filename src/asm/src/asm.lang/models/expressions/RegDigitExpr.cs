@@ -21,54 +21,36 @@ namespace Z0.Asm
 
     public readonly struct RegDigitExpr : ITextExpr<RegDigitExpr>
     {
-        public asci2 Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public RegDigitExpr(string src)
             => Content = src;
 
-        [MethodImpl(Inline)]
-        public RegDigitExpr(in asci2 src)
-            => Content = src;
-
-        /// <summary>
-        /// The expression length
-        /// </summary>
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => text.length(Content);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => text.nonempty(Content);
         }
 
-        public ReadOnlySpan<byte> Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.bytes(Content);
-        }
+        public override int GetHashCode()
+            => text.hash(Content);
 
-        public ReadOnlySpan<char> Decoded
-        {
-            [MethodImpl(Inline)]
-            get => Asci.decode(Content);
-        }
-
-        public TextBlock Text
-        {
-            [MethodImpl(Inline)]
-            get => Content.Text;
-        }
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content ?? EmptyString;
 
         [MethodImpl(Inline)]
         public bool Equals(RegDigitExpr src)
@@ -77,19 +59,12 @@ namespace Z0.Asm
         public override bool Equals(object src)
             => src is RegDigitExpr x && Equals(x);
 
-        public override int GetHashCode()
-            => Content.GetHashCode();
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Content.Format();
-
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator TextBlock(RegDigitExpr src)
-            => new TextBlock(src.Text);
+            => new TextBlock(src.Content);
 
         [MethodImpl(Inline)]
         public static implicit operator RegDigitExpr(string src)

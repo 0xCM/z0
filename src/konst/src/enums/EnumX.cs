@@ -59,10 +59,6 @@ namespace Z0
             where T : unmanaged
                 => api.scalar<E,T>(src);
 
-        public static EnumLiteralDetails<E> ToIndex<E>(this IEnumerable<EnumLiteralDetail<E>> src)
-            where E : unmanaged, Enum
-                => new EnumLiteralDetails<E>(src.ToArray());
-
         [MethodImpl(Inline)]
         public static sbyte ToInt8<E>(this E src)
             where E : unmanaged, Enum

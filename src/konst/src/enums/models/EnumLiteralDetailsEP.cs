@@ -6,23 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections;
-    using System.Collections.Generic;
 
     using static Part;
 
     /// <summary>
     /// Defines an E-V parametric literal index
     /// </summary>
-     public readonly struct EnumLiteralDetails<E,P> : IEnumerable<EnumLiteralDetail<E,P>>, IIndex<EnumLiteralDetail<E,P>>
+     public readonly struct EnumLiteralDetails<E,P> : IIndex<EnumLiteralDetail<E,P>>
         where E : unmanaged, Enum
         where P : unmanaged
     {
-        readonly EnumLiteralDetail<E,P>[] Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnumLiteralDetails<E,P>(EnumLiteralDetail<E,P>[] src)
-            => new EnumLiteralDetails<E,P>(src);
+        readonly Index<EnumLiteralDetail<E,P>> Data;
 
         [MethodImpl(Inline)]
         public EnumLiteralDetails(EnumLiteralDetail<E,P>[] src)
@@ -34,10 +28,28 @@ namespace Z0
             get => Data.Length;
         }
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
         public EnumLiteralDetail<E,P>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
+        }
+
+        public Span<EnumLiteralDetail<E,P>> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public ReadOnlySpan<EnumLiteralDetail<E,P>> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
         }
 
         public ref readonly EnumLiteralDetail<E,P> this[int i]
@@ -52,13 +64,15 @@ namespace Z0
             get => ref Data[i];
         }
 
-        public IEnumerator<EnumLiteralDetail<E,P>> GetEnumerator()
-            => ((IEnumerable<EnumLiteralDetail<E,P>>)Data).GetEnumerator();
+        // public IEnumerator<EnumLiteralDetail<E,P>> GetEnumerator()
+        //     => ((IEnumerable<EnumLiteralDetail<E,P>>)Data).GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => Data.GetEnumerator();
+        // IEnumerator IEnumerable.GetEnumerator()
+        //     => Data.Storage.GetEnumerator();
 
-        public EnumLiteralDetails<E> Indices
-            => Enums.index<E>();
+
+        [MethodImpl(Inline)]
+        public static implicit operator EnumLiteralDetails<E,P>(EnumLiteralDetail<E,P>[] src)
+            => new EnumLiteralDetails<E,P>(src);
     }
 }

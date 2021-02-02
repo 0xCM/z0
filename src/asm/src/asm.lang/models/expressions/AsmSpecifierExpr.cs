@@ -45,7 +45,7 @@ namespace Z0.Asm
             => src is AsmSpecifierExpr x && Equals(x);
 
         public override int GetHashCode()
-            => (int)alg.hash.combine(OpCode.Hash, Sig.Hash);
+            => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
             => string.Format(RP.PSx2, OpCode.Format(), Sig.Format());

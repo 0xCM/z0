@@ -12,7 +12,7 @@ namespace Z0
     public class AsciTestCases
     {
         public static TestCaseResult<T> execute<T>(T tc)
-            where T : IAsciTestCase
+            where T : struct, IAsciTestCase, ITestCase<T>
         {
             var chars = tc.Chars;
             var src = tc.Strings;
@@ -22,7 +22,7 @@ namespace Z0
             Asci.encode(src, dst);
             var success = AsciTestCases.check(tc, dst);
             var description = AsciTestCases.report(tc,dst);
-            return new TestCaseResult<T>(tc, success, description);
+            return new TestCaseResult<T>(0, tc, success);
         }
 
         public static bit check<T>(T tc, ReadOnlySpan<byte> encoded)
@@ -39,7 +39,6 @@ namespace Z0
             }
             return true;
         }
-
 
         public static string report<T>(T tc, ReadOnlySpan<byte> encoded)
             where T : IAsciTestCase

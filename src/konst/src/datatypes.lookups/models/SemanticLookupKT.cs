@@ -30,7 +30,7 @@ namespace Z0
             Storage = data;
             Key = typeof(K);
             Keys = Enums.literals<K>();
-            _KeyIndex = Enums.index<K>().Content;
+            _KeyIndex = Enums.index<K>().Storage;
             _KeyNames = ClrEnums.names<K>();
             _KeyKind = ClrEnums.@base<K>();
         }

@@ -7,40 +7,40 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     readonly struct AsciTestCase01 : IAsciTestCase<AsciTestCase01>
     {
         const string s0 = "0123456789";
-        
+
         const string s1 = "abcdefghijklmnopqrstuvwxyz";
-        
+
         const string s2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
+
         const string s3 = "!@#$%^&*(){}[]<>";
 
-        const string S 
+        const string S
             = s0 + s1 + s2 + s3;
 
-        static string[] StringData 
+        static string[] StringData
             => new string[4]{s0,s1,s2,s3};
 
         [MethodImpl(Inline)]
-        public static implicit operator AsciTestCase(AsciTestCase01 src)       
+        public static implicit operator AsciTestCase(AsciTestCase01 src)
             => new AsciTestCase(nameof(AsciTestCase01), S, StringData);
-        
+
         public ReadOnlySpan<string> Strings
             => StringData;
 
-        public ReadOnlySpan<char> Chars 
+        public ReadOnlySpan<char> Chars
             => S;
 
         public string Text
             => S;
-        
+
         public int StringCount
             => Strings.Length;
-        
+
         public int CharCount
             => Chars.Length;
     }

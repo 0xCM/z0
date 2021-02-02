@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
     using static memory;
 
     [ApiHost]
@@ -25,6 +24,35 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmSigOpExpr sigop(string src)
             => new AsmSigOpExpr(src);
+
+        /// <summary>
+        /// Defines a <see cref='AsmSigOpIdentifier'/>
+        /// </summary>
+        /// <param name="index">The identifier index that serves as a surrogate key for lookups</param>
+        /// <param name="name">The identifer name</param>
+        /// <param name="kind">The identifier kind</param>
+        [MethodImpl(Inline), Op]
+        public static AsmSigOpIdentifier identifier(byte index, Identifier name, AsmSigOpKind kind)
+            => new AsmSigOpIdentifier(index, name, kind);
+
+        /// <summary>
+        /// Creates a <see cref='AsmSigOpIdentifier'/> index
+        /// </summary>
+        /// <param name="k">An identifier representative</param>
+        [Op]
+        public static Index<AsmSigOpIdentifier> identifiers(AsmSigOpKind k)
+        {
+            var details = Enums.details<AsmSigOpKind,ushort>().View;
+            var count = AsmSigOpKindFacets.IdentifierCount + 1;
+            var buffer = alloc<AsmSigOpIdentifier>(count);
+            ref var dst = ref first(buffer);
+            for(byte i=1; i<count; i++)
+            {
+                ref readonly var detail = ref skip(details,i);
+                seek(dst,i) = AsmExpr.identifier(i, detail.Name, detail.LiteralValue);
+            }
+            return buffer;
+        }
 
         /// <summary>
         /// Defines a <see cref='AsmOpCodeExpr'/>

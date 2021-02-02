@@ -47,71 +47,50 @@ namespace Z0.Asm
     /// <remarks>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>
     {
-        public TextBlock Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public AsmSigExpr(string src)
             => Content = src;
 
-        /// <summary>
-        /// The expression length
-        /// </summary>
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => text.length(Content);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => text.nonempty(Content);
         }
-
-        public TextBlock Text
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public string String
-        {
-            [MethodImpl(Inline)]
-            get => Content.String;
-        }
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => Content.Hash;
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(AsmSigExpr src)
-             => src.Content.Equals(Content);
-
-        public override bool Equals(object src)
-            => src is AsmSigExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => text.hash(Content);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Content ?? EmptyString;
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
+        public bool Equals(AsmSigExpr src)
+            => text.equals(Content, src.Content);
+
+        public override bool Equals(object src)
+            => src is AsmSigExpr x && Equals(x);
+
+        [MethodImpl(Inline)]
         public static implicit operator TextBlock(AsmSigExpr src)
-            => new TextBlock(src.Content.Format());
+            => new TextBlock(src.Content);
 
         [MethodImpl(Inline)]
         public static bool operator ==(AsmSigExpr a, AsmSigExpr b)

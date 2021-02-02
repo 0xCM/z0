@@ -5,24 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
 
     public interface ITestCaseResult
     {
-        string CaseName {get;}
+        ulong Id {get;}
 
-        Bit32 Success {get;}
-
-        string Description {get;}
-
+        bool Passed {get;}
     }
 
-    public interface ITestCaseResult<C> : ITestCaseResult
-        where C: ITestCase
+    public interface ITestCaseResult<T> : ITestCaseResult
+        where T : struct, ITestCase<T>
     {
-
-        C Case {get;}
-
-        string ITestCaseResult.CaseName
-            => Case.CaseName;
+        T Case {get;}
     }
 }

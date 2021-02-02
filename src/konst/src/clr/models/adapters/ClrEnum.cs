@@ -60,7 +60,7 @@ namespace Z0
                 var value = (E)field.GetRawConstantValue();
                 indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value));
             }
-            return indices.ToIndex();
+            return indices.ToArray();
         }
 
         /// <summary>

@@ -11,61 +11,46 @@ namespace Z0.Asm
 
     public readonly struct AsmMnemonicExpr : ITextExpr<AsmMnemonicExpr>
     {
-        TextBlock Content {get;}
+        public string Content {get;}
 
         [MethodImpl(Inline)]
         public AsmMnemonicExpr(string src)
-            => Content = src;
+            => Content = src ?? EmptyString;
 
-        /// <summary>
-        /// The expression length
-        /// </summary>
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Content.Length;
+            get => text.length(Content);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => text.empty(Content);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => text.nonempty(Content);
         }
-
-        public TextBlock Text
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public string String
-        {
-            [MethodImpl(Inline)]
-            get => Content.String;
-        }
-
-        [MethodImpl(Inline)]
-        public bool Equals(AsmMnemonicExpr src)
-            => src.Content.Equals(Content);
-
-        public override bool Equals(object src)
-            => src is AsmMnemonicExpr x && Equals(x);
 
         public override int GetHashCode()
-            => Content.GetHashCode();
+            => text.hash(Content);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Content ?? EmptyString;
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmMnemonicExpr src)
+            => text.equals(Content, src.Content);
+
+        public override bool Equals(object src)
+            => src is AsmMnemonicExpr x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmMnemonicExpr(string src)

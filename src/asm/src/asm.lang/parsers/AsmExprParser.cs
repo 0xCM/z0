@@ -5,38 +5,63 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmExpr;
-    using static TextRules;
     using static memory;
+    using static Chars;
+    using static Rules;
+    using static TextRules;
+    using static AsmExpr;
+    using static AsmOpCodeModel;
+
+    using api = AsmExpr;
 
     [ApiHost]
     public sealed partial class AsmExprParser : WfService<AsmExprParser, AsmExprParser>
     {
         Index<char> RegDigits;
 
+        Adjacent<char, OneOf<char>> RegDigitRule;
+
+        Index<AsmSigOpIdentifier> SigOpIdentifiers;
+
+        const char MnemonicTerminator = Chars.Space;
+
+        const char OperandSeparator = Chars.Comma;
+
+        const char DigitQualifier = FSlash;
+
         public AsmExprParser()
         {
-            RegDigits = array(Chars.D0, Chars.D1, Chars.D2, Chars.D3, Chars.D4, Chars.D5, Chars.D6, Chars.D7);
+            RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
+            RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
+            SigOpIdentifiers = api.identifiers(AsmSigOpKind.None);
         }
 
-        public bool Sig(AsmSigExpr src, out AsmSig dst)
+
+        [MethodImpl(Inline), Op]
+        public ref readonly AsmSigOpIdentifier Identifier(AsmSigOpKind kind)
         {
-            dst = AsmSig.Empty;
-
-
-            return false;
+            if(kind <= AsmSigOpKindFacets.LastClass)
+                return ref SigOpIdentifiers[(byte)kind];
+            else
+                return ref SigOpIdentifiers[0];
         }
 
+        [Op]
+        public AsmSigOpKind Kind(AsmSigOpExpr src)
+        {
+            return SigOpIdentifiers.First.Kind;
+        }
 
         [Op]
         public bool Mnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
         {
-            var i = Query.index(src.Text, Chars.Space);
+            var i = Query.index(src.Content, MnemonicTerminator);
             if(i != NotFound && i > 0)
             {
-                dst = AsmExpr.mnemonic(Parse.segment(src.Text, 0, i - 1));
+                dst = mnemonic(Parse.segment(src.Content, 0, i - 1));
                 return true;
             }
             else
@@ -50,28 +75,34 @@ namespace Z0.Asm
         public Index<AsmSigOpExpr> Operands(AsmSigExpr src)
         {
             if(Mnemonic(src, out var monic))
-            {
-                if(Parse.after(src.String, monic.String, out var remainder))
-                {
-                    var operands = remainder.SplitClean(Chars.Comma).Map(AsmExpr.sigop);
-                    return operands;
-                }
-            }
-
-            return sys.empty<AsmSigOpExpr>();
+                if(Parse.after(src.Content, monic.Content, out var remainder))
+                    return remainder.SplitClean(OperandSeparator).Map(sigop);
+            return Index<AsmSigOpExpr>.Empty;
         }
 
         [Op]
         public bool IsDigit(AsmSigOpExpr src)
         {
-            var s = src.String;
-            return s.Length >= 2 && Query.begins(s, Chars.FSlash) && Query.test(s[1], Rules.oneof(RegDigits));
+            var s = src.Content;
+            return s.Length >= 2
+                && Query.begins(s, DigitQualifier)
+                && Query.test(s[1], Rules.oneof(RegDigits));
         }
 
         [Op]
         public bool IsComposite(AsmSigOpExpr src)
         {
-            return Query.begins(src.String, Chars.FSlash) && !IsDigit(src);
+            return Query.begins(src.Content, DigitQualifier) && !IsDigit(src);
+        }
+
+        [Op]
+        public bool RegisterDigit(string src, out RegDigit dst)
+        {
+            dst = default;
+            if(Parse.rule(src, RegDigitRule, out var result) &&
+                Parse.digit(result.B, out var digit))
+                    return assign(digit, out dst);
+            return false;
         }
     }
 }

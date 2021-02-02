@@ -13,16 +13,14 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Replacement<T> replace<T>(T src, T dst)
-            where T : IEquatable<T>
-                => new Replacement<T>(src,dst);
+        public static Replace<T> replace<T>(T src, T dst)
+            => new Replace<T>(src,dst);
 
         [Op, Closures(Closure)]
-        public static Replacements<T> replace<T>(Index<T> src, T dst)
-            where T : IEquatable<T>
+        public static Index<Replace<T>> replace<T>(Index<T> src, T dst)
         {
             var count = src.Length;
-            var buffer = sys.alloc<Replacement<T>>(count);
+            var buffer = sys.alloc<Replace<T>>(count);
             ref var target = ref first(buffer);
             ref readonly var input = ref src.First;
             for(var i=0; i<count; i++)
@@ -31,14 +29,13 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static Replacements<T> replace<T>(Bijection<T> spec)
-            where T : IEquatable<T>
+        public static Index<Replace<T>> replace<T>(Bijection<T> spec)
         {
             var src = spec.Source.View;
             var dst = spec.Target.View;
             root.require(src.Length == dst.Length, () => "Same lengths there must me");
             var count = src.Length;
-            var buffer = sys.alloc<Replacement<T>>(count);
+            var buffer = sys.alloc<Replace<T>>(count);
             ref var target = ref first(buffer);
             ref readonly var input = ref first(src);
             ref readonly var output = ref first(dst);
@@ -48,8 +45,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static Replacements<T> replace<T>(Index<T> src, Index<T> dst)
-            where T : IEquatable<T>
-                => replace(bijection<T>(src,dst));
+        public static Index<Replace<T>> replace<T>(Index<T> src, Index<T> dst)
+            => replace(bijection<T>(src,dst));
     }
 }

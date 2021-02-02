@@ -19,7 +19,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var src = LiteralSequence<E,T>();
+            var src = details<E,T>();
             var count = src.Length;
             var token = ClrToken.from<E>();
             var datatype = ClrEnums.@base<E>();
