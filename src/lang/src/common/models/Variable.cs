@@ -9,12 +9,23 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Variable
     {
-        public Name Name {get;}
+        public Identifier Name {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Variable(Identifier name)
+        {
+            Name = name;
+        }
+    }
+
+    public readonly struct Variable<T>
+    {
+        public Identifier Name {get;}
+
+        [MethodImpl(Inline)]
+        public Variable(Identifier name)
         {
             Name = name;
         }

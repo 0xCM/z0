@@ -9,14 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct RangeIterator
     {
-        public Name Name {get;}
+        public long Step {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public RangeIterator(long step)
         {
-            Name = name;
+            Step = step;
         }
     }
 }

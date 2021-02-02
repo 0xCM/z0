@@ -9,14 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Segment
     {
-        public Name Name {get;}
+        public IDataSource Source {get;}
+
+        public Range Selection {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Segment(IDataSource source, Range selection)
         {
-            Name = name;
+            Source = source;
+            Selection = selection;
         }
     }
 }

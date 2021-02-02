@@ -2,15 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct Api
+    using static Part;
+
+    public readonly struct Cell
     {
-        [KindFactory]
-        public static ShiftOperatorClass shift()
-            => default;
+        public BitSize Width {get;}
+
+        [MethodImpl(Inline)]
+        public Cell(BitSize width)
+        {
+            Width = width;
+        }
     }
 }

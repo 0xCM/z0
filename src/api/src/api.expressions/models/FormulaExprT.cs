@@ -35,5 +35,4 @@ namespace Z0
         public string Format()
             => $"{Name} := {Encoding.Format()}";
     }
-
 }

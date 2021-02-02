@@ -9,14 +9,19 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Function
     {
-        public Name Name {get;}
+        public Identifier Name {get;}
 
-        [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Index<Operand> Operands {get;}
+
+        public Index<Statement> Statements {get;}
+
+        public Function(Identifier name, Index<Operand> operands, Index<Statement> statements)
         {
             Name = name;
+            Operands = operands;
+            Statements = statements;
         }
     }
 }

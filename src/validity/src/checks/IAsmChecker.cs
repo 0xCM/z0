@@ -140,7 +140,7 @@ namespace Z0.Asm
 
             void check()
             {
-                var k = Api.unary();
+                var k = OperatorClasses.unary();
                 var injector = Dynamic.UnaryInjector<T>(w);
                 var dynop = injector.EmbedImmediate(method,imm);
 

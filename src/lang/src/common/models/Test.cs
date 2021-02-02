@@ -9,6 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
+    public readonly struct Test
+    {
+        public IPredicate Condition {get;}
+
+        [MethodImpl(Inline)]
+        public Test(IPredicate condition)
+        {
+            Condition = condition;
+        }
+    }
+
     /// <summary>
     /// Represents a boolean evaluation
     /// </summary>

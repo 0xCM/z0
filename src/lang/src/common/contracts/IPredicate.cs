@@ -9,14 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public interface IPredicate
     {
-        public Name Name {get;}
 
-        [MethodImpl(Inline)]
-        public TypeParameter(string name)
-        {
-            Name = name;
-        }
+    }
+
+    public interface IPredicate<T>: IPredicate
+        where T : struct, IPredicate<T>
+    {
+
     }
 }

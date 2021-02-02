@@ -9,14 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Bitvector
     {
-        public Name Name {get;}
+        public BitSize Width {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Bitvector(BitSize width)
         {
-            Name = name;
+            Width = width;
         }
     }
 }

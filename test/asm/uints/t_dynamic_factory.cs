@@ -28,7 +28,7 @@ namespace Z0.Asm
             var m = M.K17_Method;
             var id = m.Identify();
 
-            var factory = Dynamic.Factory(Api.emitter(t));
+            var factory = Dynamic.Factory(OperatorClasses.emitter(t));
             var f = factory.Create(m);
             Claim.eq(f(), M.K17());
         }
@@ -40,7 +40,7 @@ namespace Z0.Asm
             var m = M.Square_Method;
             var id = m.Identify();
 
-            var factory = Dynamic.Factory(Api.unary(t));
+            var factory = Dynamic.Factory(OperatorClasses.unary(t));
             var f = factory.Create(m);
             Claim.eq(f(3), M.Square(3));
         }
@@ -52,7 +52,7 @@ namespace Z0.Asm
             var m = M.BinaryAdd_Method;
             var id = m.Identify();
 
-            var factory = Dynamic.Factory(Api.binary(t));
+            var factory = Dynamic.Factory(OperatorClasses.binary(t));
             var f = factory.Create(m);
             Claim.eq(f(10,5), M.BinaryAdd(10,5));
         }
@@ -64,7 +64,7 @@ namespace Z0.Asm
             var m = M.TernaryAdd_Method;
             var id = m.Identify();
 
-            var factory = Dynamic.Factory(Api.ternary(t));
+            var factory = Dynamic.Factory(OperatorClasses.ternary(t));
             var f = factory.Create(m);
             Claim.eq(f(10,5,5), M.TernaryAdd(10,5,5));
         }
@@ -132,7 +132,7 @@ namespace Z0.Asm
             var archive = Archives.hex(FS.dir(TargetArchive.HexDir.Name));
             var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.hostinfo<gvec>().Uri).Where(x => x.Id == gId).Single();
-            return AsmCheck.Match(Api.binary(), w, dBits, gBits, dst);
+            return AsmCheck.Match(OperatorClasses.binary(), w, dBits, gBits, dst);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)

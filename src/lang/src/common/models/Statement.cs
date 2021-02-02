@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct Api
+    using static Part;
+
+    public readonly struct Statement : IStatement
     {
-        [KindFactory, Closures(Closure)]
-        public static ReceiverClass<T> receiver<T>()
-            where T : unmanaged => default;
+
     }
 }

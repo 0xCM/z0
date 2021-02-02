@@ -61,7 +61,6 @@ namespace Z0
             return new CodeBlock(src, sys.array(target.Slice(0, length)));
         }
 
-
         [MethodImpl(Inline), Op]
         public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
         {

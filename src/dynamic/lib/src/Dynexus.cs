@@ -19,6 +19,7 @@ namespace Z0
     using U = UnaryOperatorClass;
     using B = BinaryOperatorClass;
     using T = TernaryOperatorClass;
+    using K = OperatorClasses;
 
     readonly struct Dynexus : IDynexus
     {
@@ -48,9 +49,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, I.VK.v128, Api.unary());
+                return ImmInjector.create(Diviner, I.VK.v128, K.unary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, I.VK.v256, Api.unary());
+                return ImmInjector.create(Diviner, I.VK.v256, K.unary());
             else
                 throw Unsupported.define<W>();
         }
@@ -58,9 +59,9 @@ namespace Z0
         IImmInjector IDynamicImmediate.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
-                return ImmInjector.create(Diviner, I.VK.v128, Api.binary());
+                return ImmInjector.create(Diviner, I.VK.v128, K.binary());
             else if(typeof(W) == typeof(W256))
-                return ImmInjector.create(Diviner, I.VK.v256, Api.binary());
+                return ImmInjector.create(Diviner, I.VK.v256, K.binary());
             else
                 throw no<W>();
         }

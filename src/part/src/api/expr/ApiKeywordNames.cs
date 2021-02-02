@@ -2,10 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dsl
+namespace Z0
 {
     [LiteralProvider]
-    public readonly struct KeywordNames
+    public readonly struct ApiKeywordNames
     {
         public const string Action = "action";
 

@@ -9,10 +9,20 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Tests
+    public readonly struct RangeLoop
     {
+        public Range Range {get;}
+
+        public RangeIterator Iterator {get;}
+
+        public Block Body {get;}
+
         [MethodImpl(Inline)]
-        public static Tests<C> alloc<C>(uint count)
-            => new Tests<C>(count);
+        public RangeLoop(Range range, RangeIterator iterator, Block body)
+        {
+            Range = range;
+            Iterator = iterator;
+            Body = body;
+        }
     }
 }

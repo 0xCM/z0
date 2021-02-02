@@ -4,18 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
-    using static Part;
-
-    public readonly struct TypeSystem<K> : ITypeSystem<K,TypeSystem<K>>
-        where K : unmanaged, Enum, IEquatable<K>
+    public readonly struct ApiOperand
     {
-        public Index<K> Kinds {get;}
+        public ApiOperandKind Kind {get;}
     }
 
-    public readonly struct TypeSystem : ITypeSystem<TypeSystem>
+    public enum ApiOperandKind
     {
+        None,
 
+        Bit,
+
+        Primitive,
+
+        Vector,
+
+        Cell,
+
+        Span,
+
+        SpanBlock,
     }
 }

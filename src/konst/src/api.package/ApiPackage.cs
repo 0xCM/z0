@@ -30,7 +30,7 @@ namespace Z0
     {
         public OpUri Uri;
 
-        public ApiSig ApiSig;
+        public object ApiSig;
 
         public MsilCode CilCode;
 

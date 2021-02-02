@@ -57,10 +57,10 @@ namespace Z0
                 Wf.Status($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)
-                    Dispatcher.Dispatch(buffers, api, Api.unary());
+                    Dispatcher.Dispatch(buffers, api, OperatorClasses.unary());
 
                 foreach(var api in code.BinaryOperators)
-                    Dispatcher.Dispatch(buffers, api, Api.binary());
+                    Dispatcher.Dispatch(buffers, api, OperatorClasses.binary());
             }
         }
 

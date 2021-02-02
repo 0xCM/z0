@@ -9,14 +9,20 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Comparison : IPredicate<Comparison>
     {
-        public Name Name {get;}
+        public Operand Left {get;}
+
+        public Operand Right {get;}
+
+        public ComparisonKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Comparison(Operand left, Operand right, ComparisonKind kind)
         {
-            Name = name;
+            Left = left;
+            Right = right;
+            Kind = kind;
         }
     }
 }

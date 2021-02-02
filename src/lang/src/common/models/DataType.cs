@@ -9,14 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct DataType
     {
-        public Name Name {get;}
+        public Identifier Name {get;}
+
+        public BitSize Width {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public DataType(Identifier name, BitSize width)
         {
             Name = name;
+            Width = width;
         }
     }
 }

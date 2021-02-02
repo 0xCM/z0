@@ -9,14 +9,21 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct TypeParameter
+    public readonly struct Range
     {
-        public Name Name {get;}
+        public long Min {get;}
+
+        public long Max {get;}
 
         [MethodImpl(Inline)]
-        public TypeParameter(string name)
+        public Range(long min, long max)
         {
-            Name = name;
+            Min = min;
+            Max = max;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator Range((long min, long max) src)
+            => new Range(src.min, src.max);
     }
 }
