@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Returns true if a method is open generic with parametric arity 2 and is attributed

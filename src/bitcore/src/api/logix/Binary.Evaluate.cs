@@ -13,7 +13,7 @@ namespace Z0
 
     using BLK = BinaryBitLogicKind;
 
-    using K = BitLogicKinds;
+    using K = ApiClasses;
 
     partial class BitLogixOps
     {

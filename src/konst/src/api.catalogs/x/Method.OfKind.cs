@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Selects methods from a stream that accept and/or return intrinsic vectors

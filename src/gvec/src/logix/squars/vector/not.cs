@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             vload(src, out Vector128<T> dst);
-            return gvec.vnot(dst);
+            return gcpu.vnot(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             vload(src, out Vector256<T> dst);
-            return gvec.vnot(dst);
+            return gcpu.vnot(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]

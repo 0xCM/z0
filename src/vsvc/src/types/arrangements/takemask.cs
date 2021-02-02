@@ -19,7 +19,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x)
-                => gvec.vtakemask(x);
+                => gcpu.vtakemask(x);
         }
 
         public readonly struct TakeMask256<T> : ISVUnaryScalarFunc256<T,uint>
@@ -28,7 +28,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x)
-                => gvec.vtakemask(x);
+                => gcpu.vtakemask(x);
         }
     }
 }

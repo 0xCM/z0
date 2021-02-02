@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     partial class gvec
     {
@@ -22,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> valt<T>(W256 w, T a, T b)
             where T : unmanaged
-                => gvec.vblend(z.vbroadcast(w,a), z.vbroadcast(w,b), cpu.vblendspec<T>(w,false));
+                => gvec.vblend(gcpu.vbroadcast(w,a), gcpu.vbroadcast(w,b), cpu.vblendspec<T>(w,false));
 
         /// <summary>
         ///

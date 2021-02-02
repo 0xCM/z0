@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
 
     using static ImmFunctionClass;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines whether a parameters is an immediate
@@ -71,7 +70,7 @@ namespace Z0
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
         [Op]
-        static ImmFunctionClass ImmSlot(this ParameterInfo p)
+        internal static ImmFunctionClass ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)
             {

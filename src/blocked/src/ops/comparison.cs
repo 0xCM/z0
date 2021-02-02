@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class Blocked
     {
@@ -43,12 +42,12 @@ namespace Z0
                 => ref BSvc.lt<T>(w256).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<Bit32> nonz<T>(in SpanBlock128<T> a, Span<Bit32> dst)
+        public static Span<bit> nonz<T>(in SpanBlock128<T> a, Span<bit> dst)
             where T : unmanaged
                 => BSvc.nonz<T>(w128).Invoke(a, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<Bit32> nonz<T>(in SpanBlock256<T> a, Span<Bit32> dst)
+        public static Span<bit> nonz<T>(in SpanBlock256<T> a, Span<bit> dst)
             where T : unmanaged
                 => BSvc.nonz<T>(w256).Invoke(a, dst);
 

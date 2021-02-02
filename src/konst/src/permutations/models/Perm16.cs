@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
-    /// Defines a 16-symbol permutation 
+    /// Defines a 16-symbol permutation
     /// </summary>
     public readonly struct Perm16
     {

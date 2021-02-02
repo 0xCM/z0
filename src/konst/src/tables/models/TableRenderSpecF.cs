@@ -37,9 +37,6 @@ namespace Z0
             get => ref Fields[i];
         }
 
-        public static implicit operator TableRenderSpec(TableRenderSpec<F> src)
-            => src.Generalize();
-
         [MethodImpl(Inline)]
         public TableRenderSpec(TableColumn<F>[] columns)
         {
@@ -47,20 +44,6 @@ namespace Z0
             Headers = columns.Map(f => f.Name);
         }
 
-        public TableRenderSpec Generalize()
-        {
-            var src = this;
-            var count = src.FieldCount;
-            var fields = sys.alloc<TableColumn>(count);
-            var headers = sys.alloc<string>(count);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var x = ref src[i];
-                fields[i] = new TableColumn((ushort)x.Index, x.Name, (ushort)x.Width);
-                headers[i] = x.Name;
-            }
-            return new TableRenderSpec(fields, headers, src.Delimiter, src.EmitHeader);
-        }
 
         /// <summary>
         /// Formats the format specification, not the object being specified

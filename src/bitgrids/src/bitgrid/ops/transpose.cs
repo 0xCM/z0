@@ -70,7 +70,7 @@ namespace Z0
             const uint E = BitMasks.Literals.Even32;
             const uint O = BitMasks.Literals.Odd32;
 
-            var mask = gvec.vtakemask(src, (byte)i);
+            var mask = gcpu.vtakemask(src, (byte)i);
             var gT = gcell(g0, i, force<T>(BitMasks.gather(mask, E)));
             gT = gcell(gT, j, force<T>(BitMasks.gather(mask, O)));
             return gT;

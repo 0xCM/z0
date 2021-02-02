@@ -39,7 +39,7 @@ namespace Z0
         public static BitVector128<N,T> zhi<N,T>(in BitVector128<N,T> x)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vzerohi(x.Data);
+                => gcpu.vzerohi(x.Data);
 
         /// <summary>
         /// Disables the high bits starting at a specified position

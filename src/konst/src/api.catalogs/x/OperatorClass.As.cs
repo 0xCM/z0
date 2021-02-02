@@ -8,7 +8,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XKinds
+    partial class XApi
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static OperatorClass<T> As<T>(this OperatorClass src)

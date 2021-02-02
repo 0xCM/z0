@@ -13,8 +13,6 @@ namespace Z0
     [ApiHost(ApiNames.MemoryReader, true)]
     public unsafe struct MemoryReader
     {
-        const NumericKind Closure = UnsignedInts;
-
         readonly byte* Source;
 
         MemoryReaderState State;
@@ -43,9 +41,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public int Read(int offset, int wantedCount, Span<byte> dst)
+        public int Read(int offset, int requested, Span<byte> dst)
         {
-            int count = Math.Min(wantedCount, State.Remaining);
+            int count = root.min(requested, State.Remaining);
             memory.read(Source, offset, ref first(dst), count);
             Advance((uint)count);
             return count;
@@ -53,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public int ReadAll(Span<byte> dst)
-            => Read(0, Length, dst);
+            => Read(0, CellCount, dst);
 
         [MethodImpl(Inline), Op]
         public bool Seek(uint pos)
@@ -77,10 +75,10 @@ namespace Z0
         /// <summary>
         /// Specifies the length of the data source
         /// </summary>
-        public readonly int Length
+        public readonly int CellCount
         {
             [MethodImpl(Inline)]
-            get => State.Length;
+            get => State.CellCount;
         }
 
         /// <summary>

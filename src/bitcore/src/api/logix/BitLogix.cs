@@ -8,14 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using ULK = UnaryBitLogicKind;
-
-    using K = BitLogicKinds;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -32,11 +29,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bit Nand_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.nand());
+            => BitLogixOps.eval(a, b, Api.nand());
 
         [MethodImpl(Inline), Op]
         public bit Xor_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.xor());
+            => BitLogixOps.eval(a, b, Api.xor());
 
         /// <summary>
         /// Advertises the supported unary operators

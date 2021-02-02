@@ -166,7 +166,7 @@ namespace Z0.Logix
 
         public void check_and_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.And;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -176,7 +176,7 @@ namespace Z0.Logix
 
         public void check_or_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.Or;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -186,7 +186,7 @@ namespace Z0.Logix
 
         public void check_xor_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -196,7 +196,7 @@ namespace Z0.Logix
 
         public void check_nand_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.Nand;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -206,7 +206,7 @@ namespace Z0.Logix
 
         public void check_nor_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.Nor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -216,7 +216,7 @@ namespace Z0.Logix
 
         public void check_xnor_256_expr()
         {
-            var n = n256;
+            var n = w256;
             var op = BinaryBitLogicKind.Xnor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
@@ -257,7 +257,7 @@ namespace Z0.Logix
             var BL = bitlogix.Lookup(id);
             var SC = NumericLogixHost.lookup<T>(id);
             var V128 = VLogixOps.lookup<T>(n128,id);
-            var V256 = VLogixOps.lookup<T>(n256,id);
+            var V256 = VLogixOps.lookup<T>(w256,id);
             check_op_identity<T>(id);
 
             for(var sample = 0; sample< RepCount; sample++)
@@ -277,16 +277,16 @@ namespace Z0.Logix
                 if(!NumericLogix.same(z3, z0.Content))
                     Claim.FailWith($"Evalutation of ternary op {id} failed");
 
-                var v1 = z.vbroadcast(n256,sa);
-                var v2 = z.vbroadcast(n256,sb);
-                var v3 = z.vbroadcast(n256,sc);
+                var v1 = gcpu.vbroadcast(w256,sa);
+                var v2 = gcpu.vbroadcast(w256,sb);
+                var v3 = gcpu.vbroadcast(w256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
                 Claim.eq(v4,z3);
 
 
-                var u1 = gvec.vlo(v1);
-                var u2 = gvec.vlo(v2);
-                var u3 = gvec.vlo(v3);
+                var u1 = gcpu.vlo(v1);
+                var u2 = gcpu.vlo(v2);
+                var u3 = gcpu.vlo(v3);
                 var u4 = Vector128.GetElement(V128(u1,u2,u3),0);
 
                 Claim.eq(u4, z3);
@@ -355,7 +355,7 @@ namespace Z0.Logix
 
             for(var i=0; i< RepCount; i++)
             {
-                var a = Random.CpuVector<T>(n256);
+                var a = Random.CpuVector<T>(w256);
                 v1.Set(a);
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = VLogixOps.eval(op,a);
@@ -392,8 +392,8 @@ namespace Z0.Logix
 
             for(var i=0; i< RepCount; i++)
             {
-                var a = Random.CpuVector<T>(n256);
-                var b = Random.CpuVector<T>(n256);
+                var a = Random.CpuVector<T>(w256);
+                var b = Random.CpuVector<T>(w256);
                 v1.Set(a);
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);

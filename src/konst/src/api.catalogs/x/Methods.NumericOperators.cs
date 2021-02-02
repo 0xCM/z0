@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Queries the stream for methods that are recognized as numeric operators

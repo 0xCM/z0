@@ -281,8 +281,8 @@ namespace Z0
             var z = gvec.vblendp(x,y,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
-            gvec.vlo(z).StoreTo(dst,0);
-            gvec.vhi(z).StoreTo(dst,1);
+            gcpu.vlo(z).StoreTo(dst,0);
+            gcpu.vhi(z).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Storage);
             for(var i=0; i< perm.Length; i++)
@@ -347,8 +347,8 @@ namespace Z0
 
 
             var dst = SpanBlocks.alloc(w,2,t);
-            gvec.vlo(blend).StoreTo(dst,0);
-            gvec.vhi(blend).StoreTo(dst,1);
+            gcpu.vlo(blend).StoreTo(dst,0);
+            gcpu.vhi(blend).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Storage);
             var tc = 0;
@@ -453,8 +453,8 @@ namespace Z0
             var c = gvec.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
-            gvec.vlo(c).StoreTo(dst,0);
-            gvec.vhi(c).StoreTo(dst,1);
+            gcpu.vlo(c).StoreTo(dst,0);
+            gcpu.vhi(c).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Storage);
             for(var i=0; i< perm.Length; i++)

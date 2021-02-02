@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct SFx
     {
@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public ref T map<T>(ValueProjector projector, object x)
             where T : struct
-                => ref memory.unbox<T>(projector.Delegate((ValueType)x));
+                => ref unbox<T>(projector.Delegate((ValueType)x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T> f, in T x)
             where T : struct
-                => ref memory.unbox<T>(f.Actor(x));
+                => ref unbox<T>(f.Actor(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, in T x)
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, ValueType x)
             where T : unmanaged
-                => ref f.Delegate(z.unbox<T>(x));
+                => ref f.Delegate(unbox<T>(x));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T map<T>(ValueProjector<T,T> f, object x)
@@ -55,14 +55,13 @@ namespace Z0
         public static ref T map<S,T>(ProjectorProxy<S,T> proxy, object x)
             where S : struct
             where T : struct
-                => ref proxy.Project(z.unbox<S>(x));
+                => ref proxy.Project(unbox<S>(x));
 
         [MethodImpl(Inline)]
         public static ref T map<S,T>(ProjectorProxy<S,T> proxy, ValueType x)
             where S : struct
             where T : struct
-                => ref proxy.Project(z.unbox<S>(x));
-
+                => ref proxy.Project(unbox<S>(x));
 
         [MethodImpl(Inline)]
         public static ref readonly SpanBlock128<T> map<F,T>(in SpanBlock128<T> src, in SpanBlock128<T> dst, F f)
@@ -87,26 +86,26 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<Bit32> map<F,T>(in SpanBlock128<T> src, in Span<Bit32> dst, F f)
+        public static Span<bit> map<F,T>(in SpanBlock128<T> src, in Span<bit> dst, F f)
             where T : unmanaged
             where F : IUnaryPred128<T>
         {
             var blocks = src.BlockCount;
-            ref var result = ref z.first(dst);
+            ref var result = ref first(dst);
             for(var block = 0; block < blocks; block++)
-                z.seek(result, block) = f.Invoke(src.LoadVector(block));
+                seek(result, block) = f.Invoke(src.LoadVector(block));
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public static Span<Bit32> map<F,T>(in SpanBlock256<T> src, Span<Bit32> dst, F f)
+        public static Span<bit> map<F,T>(in SpanBlock256<T> src, Span<bit> dst, F f)
             where T : unmanaged
             where F : IUnaryPred256<T>
         {
             var blocks = src.BlockCount;
-            ref var result = ref z.first(dst);
-            for(var block = 0; block < blocks; block++)
-                z.seek(result, block) = f.Invoke(src.LoadVector(block));
+            ref var result = ref first(dst);
+            for(var block = 0; block<blocks; block++)
+                seek(result, block) = f.Invoke(src.LoadVector(block));
             return dst;
         }
     }

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using K = OperationKind;
 
     public readonly struct TernaryActionClass : IOperationClass<K>

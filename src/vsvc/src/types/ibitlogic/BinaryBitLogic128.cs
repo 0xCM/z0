@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using K = BitLogicKinds;
+    using K = ApiClasses;
 
     partial class VServices
     {
@@ -64,7 +64,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> not(Vector128<T> a)
-                => gvec.vnot(a);
+                => gcpu.vnot(a);
 
             [MethodImpl(Inline)]
             public Vector128<T> select(Vector128<T> a, Vector128<T> b, Vector128<T> c)

@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x)
-                => gvec.vhi(x);
+                => gcpu.vhi(x);
         }
 
         public readonly struct Hi256<T> : IReducer256<T>
@@ -26,7 +26,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector256<T> x)
-                => gvec.vhi(x);
+                => gcpu.vhi(x);
         }
     }
 }

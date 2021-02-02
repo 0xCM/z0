@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static CalcChecks;
-    using static z;
-    using static Konst;
+    using static Part;
+    using static memory;
 
     using M = CalcManaged;
     using N = CalcNative;

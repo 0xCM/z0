@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static PredicateClasses;
+    using static ApiClasses;
 
     partial struct Api
     {

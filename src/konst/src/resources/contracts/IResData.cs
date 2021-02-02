@@ -6,7 +6,6 @@ namespace Z0
 {
     using System.Reflection;
 
-    [ServiceContract]
     public interface IResData : IWfService
     {
         Index<ResEmission> EmitReferenceData();

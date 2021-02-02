@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Enumerates the distinct numeric kinds represented by the (bitfield) source kind

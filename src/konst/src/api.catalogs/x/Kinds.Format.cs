@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial class XKinds
+    partial class XApi
     {
         [MethodImpl(Inline), Op]
         public static string Format(this SpanKind kind)

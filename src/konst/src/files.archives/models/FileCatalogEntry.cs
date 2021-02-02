@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a file catalog entry that specifies a path to a file
     /// </summary>
-    public struct FileCatalogEntry : ITable<FileCatalogEntry>
+    public struct FileCatalogEntry
     {
         public FS.FilePath FilePath;
 

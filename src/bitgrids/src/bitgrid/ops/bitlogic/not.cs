@@ -87,7 +87,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnot<T>(gx);
+                => gcpu.vnot<T>(gx);
 
         /// <summary>
         /// Computes the bitwise complement of the source grid
@@ -99,7 +99,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnot<T>(gx);
+                => gcpu.vnot<T>(gx);
 
         /// <summary>
         /// Computes the bitwise complement of the source grid and stores the result to a caller-supplied target
@@ -114,7 +114,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnot(gx[i]);
+                gz[i] = gcpu.vnot(gx[i]);
             return ref gz;
         }
 
@@ -142,7 +142,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnot(gx[i]);
+                gz[i] = gcpu.vnot(gx[i]);
             return ref gz;
         }
 

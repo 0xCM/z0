@@ -5,10 +5,7 @@
 namespace Z0
 {
     using K = ApiLogicClass;
-    using I = ILogicApiKey;
 
-    /// Characterizes a bitfunction classifier
-    /// </summary>
     public interface ILogicApiKey : IApiKey, IApiKind<K>
     {
         K Kind {get;}

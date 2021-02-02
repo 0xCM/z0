@@ -10,5 +10,4 @@ namespace Z0
     public sealed class EvenAttribute : A { public EvenAttribute() : base(K.Even) {} }
 
     public sealed class OddAttribute : A { public OddAttribute() : base(K.Odd) {} }
-
 }

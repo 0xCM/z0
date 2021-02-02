@@ -41,7 +41,7 @@ namespace Z0
         public static BitVector128<N,T> not<N,T>(in BitVector128<N,T> x)
             where N : unmanaged,ITypeNat
             where T : unmanaged
-                => gvec.vnot(x.Data);
+                => gcpu.vnot(x.Data);
 
         /// <summary>
         /// Computes the bitwise complement z:= ~x of a bitvector x

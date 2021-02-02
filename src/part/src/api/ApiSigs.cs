@@ -31,6 +31,5 @@ namespace Z0
         public static ApiSig define<T,A0,A1,A2>(PartId part, string host, T @class)
             where T : unmanaged
                 => new ApiSig(new dynamic[6]{part, host, @class, typeof(A0), typeof(A1), typeof(A2)});
-
     }
 }

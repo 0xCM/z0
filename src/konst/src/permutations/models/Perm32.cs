@@ -8,17 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-        
+    using static Part;
+
     /// <summary>
     /// Defines a 32-symbol permutation
     /// </summary>
     public readonly struct Perm32
-    {            
-        public readonly Vector256<byte> data;
-         
+    {
+        public readonly Vector256<byte> Data;
+
         [MethodImpl(Inline)]
-        public Perm32(Vector256<byte> data)
-            => this.data = data;        
+        public Perm32(Vector256<byte> src)
+            => this.Data = src;
     }
 }

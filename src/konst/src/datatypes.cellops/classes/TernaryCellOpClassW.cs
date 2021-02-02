@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static OperationClasses;
 
     public readonly struct TernaryCellOpClass<W> : ICellOpClass<TernaryCellOpClass<W>,W,OperatorArity>
         where W : unmanaged, ITypeWidth

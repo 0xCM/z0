@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W128 w)
             => src.NonGeneric().Where(m => m.IsVectorized(w));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W256 w)
             => src.NonGeneric().Where(m => m.IsVectorized(w));
 
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W512 w)
             => src.NonGeneric().Where(m => m.IsVectorized(w));
 
@@ -44,7 +44,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W128 w, string name)
             => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
 
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W256 w, string name)
             => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
 
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W512 w, string name)
             => src.NonGeneric().WithName(name).WithParameter(p => p.IsClosedVector(w));
 
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W128 w, Type tCell)
             => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
 
@@ -80,7 +80,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W256 w, Type tCell)
             => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
 
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source methods</param>
         /// <param name="w">The vector width</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W512 w, Type tCell)
             => src.NonGeneric().WithParameter(p => p.IsVector(w,tCell));
 

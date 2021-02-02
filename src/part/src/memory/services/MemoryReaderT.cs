@@ -45,12 +45,12 @@ namespace Z0
         /// Returns the actual number of elements read
         /// </summary>
         /// <param name="offset">The offset at which to begin reading</param>
-        /// <param name="wantedCount">The number of desired</param>
+        /// <param name="cells">The number of desired</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline)]
-        public int Read(int offset, int wantedCount, Span<T> dst)
+        public int Read(int offset, int cells, Span<T> dst)
         {
-            int count = root.min(wantedCount, State.Remaining);
+            int count = root.min(cells, State.Remaining);
             read<T>(Source, offset, ref first(dst), count);
             State.Advance((uint)count);
             return count;
@@ -61,12 +61,12 @@ namespace Z0
         /// Returns the actual number of elements read
         /// </summary>
         /// <param name="offset">The offset at which to begin reading</param>
-        /// <param name="wantedCount">The number of desired</param>
+        /// <param name="cells">The number of desired</param>
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline)]
-        public int Read(int offset, int wantedCount, ref T dst)
+        public int Read(int offset, int cells, ref T dst)
         {
-            int count = root.min(wantedCount, State.Remaining);
+            int count = root.min(cells, State.Remaining);
             read<T>(Source, offset, ref dst, count);
             State.Advance((uint)count);
             return count;
@@ -74,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int ReadAll(Span<T> dst)
-            => Read(0, Length, dst);
+            => Read(0, CellCount, dst);
 
         /// <summary>
         /// If source value pos is within the range [0,Length), assigns Current = pos;
@@ -106,10 +106,10 @@ namespace Z0
         /// <summary>
         /// Specifies the length of the data source
         /// </summary>
-        public readonly int Length
+        public readonly int CellCount
         {
             [MethodImpl(Inline)]
-            get => State.Length;
+            get => State.CellCount;
         }
 
         /// <summary>

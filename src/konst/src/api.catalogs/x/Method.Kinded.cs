@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines whether the method has a kind identifier

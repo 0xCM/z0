@@ -31,7 +31,7 @@ namespace Z0
             if(!src.Exists)
             {
                 term.error($"No such file {src}");
-                return unparsed(src.Name, default(TextDoc));
+                return root.unparsed(src.Name, default(TextDoc));
             };
 
             using var reader = src.Reader();
@@ -93,7 +93,7 @@ namespace Z0
             catch(Exception e)
             {
                 term.error(e);
-                return unparsed<TextDoc>(EmptyString,e);
+                return root.unparsed<TextDoc>(EmptyString,e);
             }
         }
     }

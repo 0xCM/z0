@@ -160,13 +160,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(cpu.vsrlr(v8u(x), v8u(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v8u(x), v8u(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(cpu.vsrlr(v16u(x), v16u(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v16u(x), v16u(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(cpu.vsrlr(v32u(x), v32u(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v32u(x), v32u(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(cpu.vsrlr(v64u(x), v64u(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v64u(x), v64u(gcpu.vlo(offset))));
             else
                 return vsrlr_i(x,offset);
         }
@@ -176,13 +176,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(cpu.vsrlr(v8i(x), v8i(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v8i(x), v8i(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(short))
-                return generic<T>(cpu.vsrlr(v16i(x), v16i(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v16i(x), v16i(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(int))
-                return generic<T>(cpu.vsrlr(v32i(x), v32i(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v32i(x), v32i(gcpu.vlo(offset))));
             else if(typeof(T) == typeof(long))
-                return generic<T>(cpu.vsrlr(v64i(x), v64i(vlo(offset))));
+                return generic<T>(cpu.vsrlr(v64i(x), v64i(gcpu.vlo(offset))));
             else
                 throw no<T>();
         }

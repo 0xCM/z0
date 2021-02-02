@@ -11,7 +11,6 @@ namespace Z0
 
     using Z0.Tools;
     using Z0.Asm;
-    using static Asm.AsmExpr;
 
     using static z;
     using static Tools.Llvm;
@@ -489,10 +488,6 @@ namespace Z0
 
         public void Run()
         {
-            //ShowApiClasses();
-
-            //Wf.CmdBuilder().JitApiCmd().Run(Wf);
-
 
             var etl = AsmCatalogEtl.create(Wf);
             var records = etl.TransformSource();

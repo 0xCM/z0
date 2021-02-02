@@ -124,20 +124,5 @@ namespace Z0
             wf.Ran(flow, caller);
             return result;
         }
-
-        // static Outcome<T> run<S,T>(S src, Func<S,T> f, [CallerMemberName] string caller = null)
-        // {
-        //     var result = default(Outcome<T>);
-        //     try
-        //     {
-        //         result = f(src);
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         result = e;
-        //     }
-
-        //     return result;
-        // }
     }
 }

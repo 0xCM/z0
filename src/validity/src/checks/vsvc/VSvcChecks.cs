@@ -44,7 +44,7 @@ namespace Z0
                 ref readonly var a = ref lhs[i];
                 ref readonly var b = ref rhs[i];
 
-                Check128x8u(a, b, BitLogicKinds.and());
+                Check128x8u(a, b, Api.and());
                 // Check128x8i(a, b, BitLogicKinds.and());
                 // Check128x16u(a, b, BitLogicKinds.and());
                 // Check128x16i(a, b, BitLogicKinds.and());
@@ -80,23 +80,23 @@ namespace Z0
             {
                 ref readonly var a = ref lhs[i];
                 ref readonly var b = ref rhs[i];
-                Check256x8u(a, b, BitLogicKinds.and());
-                Check256x8i(a, b, BitLogicKinds.and());
-                Check256x16u(a, b, BitLogicKinds.and());
-                Check256x16i(a, b, BitLogicKinds.and());
-                Check256x32u(a, b, BitLogicKinds.and());
-                Check256x32i(a, b, BitLogicKinds.and());
-                Check256x64u(a, b, BitLogicKinds.and());
-                Check256x64i(a, b, BitLogicKinds.and());
+                Check256x8u(a, b, Api.and());
+                Check256x8i(a, b, Api.and());
+                Check256x16u(a, b, Api.and());
+                Check256x16i(a, b, Api.and());
+                Check256x32u(a, b, Api.and());
+                Check256x32i(a, b, Api.and());
+                Check256x64u(a, b, Api.and());
+                Check256x64i(a, b, Api.and());
 
-                Check256x8u(a, b, BitLogicKinds.or());
-                Check256x8i(a, b, BitLogicKinds.or());
-                Check256x16u(a, b, BitLogicKinds.or());
-                Check256x16i(a, b, BitLogicKinds.or());
-                Check256x32u(a, b, BitLogicKinds.or());
-                Check256x32i(a, b, BitLogicKinds.or());
-                Check256x64u(a, b, BitLogicKinds.or());
-                Check256x64i(a, b, BitLogicKinds.or());
+                Check256x8u(a, b, Api.or());
+                Check256x8i(a, b, Api.or());
+                Check256x16u(a, b, Api.or());
+                Check256x16i(a, b, Api.or());
+                Check256x32u(a, b, Api.or());
+                Check256x32i(a, b, Api.or());
+                Check256x64u(a, b, Api.or());
+                Check256x64i(a, b, Api.or());
             }
         }
 

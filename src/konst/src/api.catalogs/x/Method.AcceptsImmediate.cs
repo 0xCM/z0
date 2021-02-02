@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate

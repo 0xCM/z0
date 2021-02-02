@@ -10,7 +10,7 @@ namespace Z0
 
     using OC = OperatorArity;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines whether a method defines an operator over a (common) domain

@@ -51,7 +51,7 @@ namespace Z0
         public void Run()
         {
             using var flow = Wf.Running();
-            Wf.Status(enclose(Wf.Api.PartIdentities));
+            Wf.Status(Seq.enclose(Wf.Api.PartIdentities));
             RunPrimary();
             RunImm();
             RunEvaluate();
@@ -105,6 +105,5 @@ namespace Z0
             => describe(wf.WithRandom(Rng.@default())
                  .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
                  .WithVerbosity(LogLevel.Babble));
-
     }
 }

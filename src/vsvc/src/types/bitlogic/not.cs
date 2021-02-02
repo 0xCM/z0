@@ -18,10 +18,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vnot(x);
+            public Vector128<T> Invoke(Vector128<T> x)
+                => gcpu.vnot(x);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => gmath.not(a);
+            public T Invoke(T a)
+                => gmath.not(a);
         }
 
         [NumericClosures(Integers), Not]
@@ -29,10 +31,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) => gvec.vnot(x);
+            public Vector256<T> Invoke(Vector256<T> x)
+                => gcpu.vnot(x);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => gmath.not(a);
+            public T Invoke(T a)
+                => gmath.not(a);
         }
    }
 }

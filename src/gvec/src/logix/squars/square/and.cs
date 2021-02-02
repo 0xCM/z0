@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static In;
+    using static Part;
+    using static memory;
 
     using BL = ByteLogic64;
 
@@ -23,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.and(in uint8(in a), in uint8(in b), ref uint8(ref dst));
+               BL.and(u8(a), u8(b), ref u8(dst));
             else if(typeof(T) == typeof(ushort))
                 and(w, in a, in b, ref dst);
             else if(typeof(T) == typeof(uint))

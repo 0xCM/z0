@@ -40,7 +40,7 @@ namespace Z0
             else
             {
                 Span<byte> data = src;
-                var len = data.ExtractLength(cut, 0xC3);
+                var len = ExtractLength(data,cut, 0xC3);
                 var keep = data.Slice(0, len);
                 return new CodeBlock(address, keep.ToArray());
             }
@@ -86,6 +86,28 @@ namespace Z0
                     seek(dst, i) = ApiMemberCode.Empty;
             }
             return buffer;
+        }
+
+        [Op]
+        static int ExtractLength(Span<byte> src, int maxcut, byte code)
+        {
+            var srcLen = src.Length;
+            var cut = 0;
+            if(srcLen > maxcut)
+            {
+                var start = srcLen - maxcut - 1;
+                ref readonly var lead = ref skip(src, maxcut);
+                ref readonly var current = ref lead;
+
+                for(var i=start; i<srcLen && cut < maxcut; i++, cut++)
+                {
+                    current = ref skip(lead, i);
+                    if(current == code)
+                        break;
+                }
+            }
+            var dstLen = src.Length - cut;
+            return dstLen <= 0 ? src.Length : dstLen;
         }
     }
 }

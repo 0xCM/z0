@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Specifies the primal types identified by a specified kind

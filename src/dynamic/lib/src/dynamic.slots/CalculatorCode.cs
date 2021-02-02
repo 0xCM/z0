@@ -7,9 +7,9 @@ namespace Z0
     using System;
 
     using static CalcManaged;
-    using static ArithmeticClasses;
+    using static ApiClasses;
 
-    using BLK = BitLogicKinds;
+    using BLK = ApiClasses;
 
     public readonly struct CalculatorCode
     {

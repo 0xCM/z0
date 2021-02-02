@@ -7,27 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Symbolic
     {
         [MethodImpl(Inline), Closures(Closure)]
         public static char @char<S>(Symbol<S> src)
             where S : unmanaged, IEquatable<S>
-                => Unsafe.As<S,char>(ref edit(src.Value));
+                => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S,T>(Symbol<S,T> src)
             where S : unmanaged, IEquatable<S>
             where T : unmanaged
-                => Unsafe.As<S,char>(ref edit(src.Value));
+                => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
             where S : unmanaged, IEquatable<S>
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Unsafe.As<S,char>(ref edit(src.Value));
+                => @as<S,char>(src.Value);
     }
 }

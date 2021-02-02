@@ -16,11 +16,4 @@ namespace Z0
         ApiHostUri IApiMethod.Host
             => Host.Uri;
     }
-
-    [Free]
-    public interface IApiMember<T> : IApiMember, IEquatable<T>, ITextual<T>, INullary<T>, IComparable<T>
-        where T : struct, IApiMember<T>
-    {
-
-    }
 }

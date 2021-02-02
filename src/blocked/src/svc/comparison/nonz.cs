@@ -8,8 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static SFx;
 
     partial class BSvcHosts
@@ -19,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Span<Bit32> Invoke(in SpanBlock128<T> src, Span<Bit32> dst)
+            public Span<bit> Invoke(in SpanBlock128<T> src, Span<bit> dst)
                 => map(src, dst, VSvc.vnonz<T>(w128));
         }
 
@@ -28,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Span<Bit32> Invoke(in SpanBlock256<T> src, Span<Bit32> dst)
+            public Span<bit> Invoke(in SpanBlock256<T> src, Span<bit> dst)
                 => map(src, dst, VSvc.vnonz<T>(w256));
         }
     }

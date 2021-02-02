@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines whether a method has numeric operands (if any) and a numeric return type (if any)

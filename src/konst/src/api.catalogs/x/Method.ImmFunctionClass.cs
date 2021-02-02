@@ -10,7 +10,7 @@ namespace Z0
 
     using FC = ImmFunctionClass;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Calculates a method's immediate class

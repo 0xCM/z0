@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Describes cycle in a perutation
@@ -24,19 +24,19 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                insist(src[0].Source == src[len - 1].Target, "Not equal");
-            
+                root.require(src[0].Source == src[len - 1].Target, () => "Not equal");
+
             Terms = src;
         }
-        
+
         public string Format()
         {
             var sb = text.build();
             sb.Append(Chars.LParen);
-            for(var i=0; i< Terms.Length; i++)            
+            for(var i=0; i< Terms.Length; i++)
             {
                 sb.Append(Terms[i].Source);
-                if(i != Terms.Length - 1)                
+                if(i != Terms.Length - 1)
                     sb.Append(Chars.Space);
             }
 

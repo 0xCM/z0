@@ -67,21 +67,21 @@ namespace Z0
             /// </summary>
             /// <param name="src">The source text</param>
             /// <param name="match">The character to match</param>
-            /// <param name="matched">The matched index buffer</param>
+            /// <param name="buffer">The matched index buffer</param>
             [Op]
-            public static Span<int> indices(string src, char match, Span<int> matched)
+            public static Span<int> indices(string src, char match, Span<int> buffer)
             {
                 var dst = root.list<int>();
                 var count = src.Length;
-                var max = matched.Length;
+                var max = buffer.Length;
 
                 ref readonly var c = ref @char(src);
                 var j = 0;
                 for(var i=0; i<count && j<max; i++)
                     if(skip(c,i) == match)
-                        seek(matched, j++) = i;
+                        seek(buffer, j++) = i;
 
-                return j != 0 ? slice(matched,0,j) : Span<int>.Empty;
+                return j != 0 ? slice(buffer,0,j) : Span<int>.Empty;
             }
         }
     }

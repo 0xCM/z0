@@ -8,7 +8,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.ApiCatalogExtensions, true)]
+    [ApiHost]
     public static partial class XApi
     {
         const NumericKind Closure = UnsignedInts;

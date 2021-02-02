@@ -108,7 +108,6 @@ namespace Z0
         public const string EmptyString = "";
     }
 
-
     [ApiHost]
     public static partial class XTend
     {

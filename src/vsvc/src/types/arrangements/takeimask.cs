@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public ushort Invoke(Vector128<T> x, byte index)
-                => gvec.vtakemask(x,index);
+                => gcpu.vtakemask(x,index);
         }
 
         public readonly struct TakeIMask256<T>  : IUnaryScalarImm8Op256<T,uint>
@@ -26,7 +26,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public uint Invoke(Vector256<T> x,byte index)
-                => gvec.vtakemask(x,index);
+                => gcpu.vtakemask(x,index);
         }
     }
 }

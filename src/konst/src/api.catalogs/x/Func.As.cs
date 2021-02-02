@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XKinds
+    partial class XApi
     {
         [MethodImpl(Inline)]
         public static BinaryOperatorClass<W> Fixed<W>(this BinaryOperatorClass src)

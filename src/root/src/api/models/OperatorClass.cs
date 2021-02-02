@@ -11,7 +11,6 @@ namespace Z0
 
     using K = OperatorArity;
 
-
     public readonly struct OperatorClass : IOperatorClassHost<OperatorClass,K>
     {
         public K Kind {get;}

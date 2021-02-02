@@ -30,5 +30,4 @@ namespace Z0
         public static implicit operator OperatorClass(TernaryCellFunctionClass src)
             => new OperatorClass(src.Kind);
     }
-
 }

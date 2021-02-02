@@ -57,15 +57,6 @@ namespace Z0
             ParseBuffer.Clear();
         }
 
-        public Index<CapturedBlock> Capture(MemoryAddress[] addresses)
-        {
-            var count = addresses.Length;
-            ref readonly var address = ref first(addresses);
-            var captured = root.list<CapturedBlock>(count);
-            for(var i=0u; i<count; i++)
-                captured.Add(Capture(skip(address,i)));
-            return captured.Array();
-        }
 
         public CapturedBlock Capture(MemoryAddress src)
         {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ArithmeticClasses;
+    using static ApiClasses;
 
     partial struct Api
     {

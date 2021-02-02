@@ -11,14 +11,14 @@ namespace Z0
 
     unsafe struct MemoryReaderState
     {
-        public readonly int Length;
+        public int CellCount {get;}
 
         public int Position;
 
         [MethodImpl(Inline)]
         internal MemoryReaderState(int length, int position)
         {
-            Length = length;
+            CellCount = length;
             Position = position;
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Seek(uint pos)
         {
-            if(pos >= Length)
+            if(pos >= CellCount)
                 Position = -1;
             else
                 Position = (int)pos;
@@ -58,13 +58,13 @@ namespace Z0
         public bool HasNext
         {
             [MethodImpl(Inline)]
-            get => Position < (Length - 1);
+            get => Position < (CellCount - 1);
         }
 
         public readonly int Remaining
         {
             [MethodImpl(Inline)]
-            get => Length - Position;
+            get => CellCount - Position;
         }
     }
 }

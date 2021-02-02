@@ -7,19 +7,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Characterizes an in-memory table store
-    /// </summary>
-    [Free]
-    public interface ITableSpan : ISpanBuffer
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a parametric <see cref='ITableSpan' />
-    /// </summary>
-    /// <typeparam name="T">The table type</typeparam>
     [Free]
     public interface ITableSpan<T> : ISpanBuffer<T>
         where T : struct
@@ -32,5 +19,18 @@ namespace Z0
         where T : struct
     {
 
+    }
+
+    [Free]
+    public interface ISpanBuffer<T> : IIndex<T>, INullity, IMeasured
+    {
+
+    }
+
+    [Free]
+    public interface ISpanBuffer<H,T> : ISpanBuffer<T>
+        where H : struct, ISpanBuffer<H,T>
+    {
+        H Refresh(T[] src);
     }
 }

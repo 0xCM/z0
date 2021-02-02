@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XKinds
+    partial class XApi
     {
         /// <summary>
         /// Determines the imm refinement type, if any

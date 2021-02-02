@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
-    partial class XTend
+    partial class XApi
     {
         /// <summary>
         /// Identifies a delegate

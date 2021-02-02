@@ -13,6 +13,17 @@ namespace Z0
     [ApiHost]
     public unsafe readonly struct ApiCodeExtractors
     {
+        [Op]
+        public static ApiMemberExtract[] extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
+        {
+            var count = src.Length;
+            var dst = memory.alloc<ApiMemberExtract>(count);
+            ref var target = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(target, i) = extract(skip(src, i), sys.clear(buffer));
+            return dst;
+        }
+
         public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
 
         const int MaxZeroCount = 10;
@@ -42,8 +53,26 @@ namespace Z0
                 return root.none<CodeBlock>();
         }
 
+        [MethodImpl(Inline), Op]
+        public static CodeBlock extract(MemoryAddress src, byte[] buffer)
+        {
+            Span<byte> target = buffer;
+            var length = extract(src, target);
+            return new CodeBlock(src, sys.array(target.Slice(0, length)));
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
+        {
+            var address = src.BaseAddress;
+            var length = extract(address, buffer);
+            var extracted = sys.array(buffer.Slice(0,length));
+            return new ApiMemberExtract(src, new CodeBlock(address, extracted));
+        }
+
         [Op]
-        public static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
+        static bool parse(in CodeBlock src, in BinaryCode buffer, out CodeBlock dst)
         {
             var parser = patterns(buffer);
             var status = parser.Parse(src);
@@ -59,34 +88,6 @@ namespace Z0
                 dst = CodeBlock.Empty;
                 return false;
             }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static CodeBlock extract(MemoryAddress src, byte[] buffer)
-        {
-            Span<byte> target = buffer;
-            var length = extract(src, target);
-            return new CodeBlock(src, sys.array(target.Slice(0, length)));
-        }
-
-        [Op]
-        public static ApiMemberExtract[] extract(ReadOnlySpan<ApiMember> src, Span<byte> buffer)
-        {
-            var count = src.Length;
-            var dst = memory.alloc<ApiMemberExtract>(count);
-            ref var target = ref first(dst);
-            for(var i=0u; i<count; i++)
-                seek(target, i) = extract(skip(src, i), sys.clear(buffer));
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ApiMemberExtract extract(in ApiMember src, Span<byte> buffer)
-        {
-            var address = src.BaseAddress;
-            var length = extract(address, buffer);
-            var extracted = sys.array(buffer.Slice(0,length));
-            return new ApiMemberExtract(src, new CodeBlock(address, extracted));
         }
 
         [MethodImpl(Inline), Op]
