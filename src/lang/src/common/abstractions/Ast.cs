@@ -13,7 +13,7 @@ namespace Z0.Lang
     /// Represents an abstract syntax tree as described by https://en.wikipedia.org/wiki/Abstract_syntax_tree
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class Ast<T> : Tree<T>
+    public abstract class Ast<T>
         where T : Ast<T>, new()
     {
 

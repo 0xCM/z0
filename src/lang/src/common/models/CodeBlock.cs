@@ -9,21 +9,21 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Block
+    public readonly struct CodeBlock
     {
         public Identifier Label {get;}
 
         public Index<Statement> Statements {get;}
 
         [MethodImpl(Inline)]
-        public Block(Identifier label, Index<Statement> statements)
+        public CodeBlock(Identifier label, Index<Statement> statements)
         {
             Label = label;
             Statements = statements;
         }
 
         [MethodImpl(Inline)]
-        public Block(Index<Statement> statements)
+        public CodeBlock(Index<Statement> statements)
         {
             Label = Identifier.Empty;
             Statements = statements;

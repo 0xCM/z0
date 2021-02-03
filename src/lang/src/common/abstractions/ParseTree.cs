@@ -13,8 +13,7 @@ namespace Z0.Lang
     /// Represents a parsed expression as described in https://en.wikipedia.org/wiki/Parse_tree
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class ParseTree<T> : Tree<T>
-        where T : ParseTree<T>, new()
+    public class ParseTree<T>
     {
 
     }

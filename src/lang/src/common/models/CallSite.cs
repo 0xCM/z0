@@ -9,21 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Range : IDataType<Range>
+    public readonly struct CallSite
     {
-        public long Min {get;}
+        public Call Call {get;}
 
-        public long Max {get;}
+        public Var Receiver {get;}
 
         [MethodImpl(Inline)]
-        public Range(long min, long max)
+        public CallSite(Call call, Var receiver)
         {
-            Min = min;
-            Max = max;
+            Call = call;
+            Receiver = receiver;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Range((long min, long max) src)
-            => new Range(src.min, src.max);
     }
 }

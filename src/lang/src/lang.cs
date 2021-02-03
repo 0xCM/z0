@@ -12,7 +12,7 @@ namespace Z0.Lang
     [ApiHost("lang.api")]
     public readonly partial struct lang
     {
-        const NumericKind Closure = UnsignedInts;
+        const Z0.NumericKind Closure = UnsignedInts;
     }
 
     partial struct Msg

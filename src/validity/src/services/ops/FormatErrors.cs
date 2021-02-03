@@ -16,7 +16,7 @@ namespace Z0
         static IEnumerable<IAppMsg> FormatErrors(string name, Exception e)
         {
             if(e.InnerException is ClaimException claim)
-                yield return claim.Message;
+                yield return AppMsg.define(claim.Message, LogLevel.Error);
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)
@@ -34,7 +34,7 @@ namespace Z0
                     yield return m;
             }
             else if(e.InnerException is ClaimException claim)
-                yield return claim.Message;
+                yield return AppMsg.define(claim.Message, LogLevel.Error);
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)

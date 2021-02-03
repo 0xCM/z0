@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
+    using static DataKind;
 
-    using static Pow2x16;
-
+    using NK = NumericKind;
     using LK = ClrLiteralKind;
 
+    [System.Flags]
     public enum ConstantKind : ushort
     {
         None = 0,
@@ -16,67 +17,67 @@ namespace Z0.Lang
         /// <summary>
         /// A bit/bool
         /// </summary>
-        Bit = LK.U1,
+        Bit = NK.Bit,
 
         /// <summary>
         /// An 8-bit unsigned integer
         /// </summary>
-        u8 = LK.U8,
-
-        /// <summary>
-        /// A 16-bit unsigned integer
-        /// </summary>
-        u16 = LK.U16,
-
-        /// <summary>
-        /// A 32-bit unsigned integer
-        /// </summary>
-        u32 = LK.U32,
-
-        /// <summary>
-        /// A 64-bit unsigned integer
-        /// </summary>
-        u64 = LK.U64,
+        Int8u = NK.Int8u,
 
         /// <summary>
         /// A 8-bit signed integer
         /// </summary>
-        i8 = LK.I8,
+        Int8i = NK.Int8i,
+
+        /// <summary>
+        /// A 16-bit unsigned integer
+        /// </summary>
+        Int16u = NK.Int16u,
 
         /// <summary>
         /// A 16-bit signed integer
         /// </summary>
-        i16 = LK.I16,
+        Int16i = NK.Int16i,
+
+        /// <summary>
+        /// A 32-bit unsigned integer
+        /// </summary>
+        Int32u = NK.Int32u,
 
         /// <summary>
         /// A 32-bit signed integer
         /// </summary>
-        i32 =  LK.I32,
+        Int32i = NK.Int32i,
+
+        /// <summary>
+        /// A 64-bit unsigned integer
+        /// </summary>
+        Int64u = NK.Int64u,
 
         /// <summary>
         /// A 64-bit signed integer
         /// </summary>
-        i64 = LK.I64,
+        Int64i = NK.Int64i,
 
         /// <summary>
         /// A 32-bit float
         /// </summary>
-        f32 = LK.F32,
+        Float32 = NK.Float32,
 
         /// <summary>
         /// A 64-bit float
         /// </summary>
-        f64 = LK.F64,
+        Float64 = NK.Float64,
 
         /// <summary>
         /// A 128-bit float
         /// </summary>
-        f128 = LK.F128,
+        Float128 = NK.Float128,
 
         /// <summary>
         /// A 16-bit character
         /// </summary>
-        c16 = LK.C16,
+        Char16 = LK.C16,
 
         /// <summary>
         /// A string
@@ -84,69 +85,64 @@ namespace Z0.Lang
         String = LK.String,
 
         /// <summary>
-        /// Identifies a constant sequence
-        /// </summary>
-        Seq = P2ᐞ06,
-
-        /// <summary>
         /// A bit sequence of literal length
         /// </summary>
-        u1Seq = Bit | Seq,
+        BitSeq = Bit | Seq,
 
         /// <summary>
         /// A u8 sequence of literal length
         /// </summary>
-        u8Seq = u8 | Seq,
-
-        /// <summary>
-        /// A u16 sequence of literal length
-        /// </summary>
-        u16Seq = u16 | Seq,
-
-        /// <summary>
-        /// A u32 sequence of literal length
-        /// </summary>
-        u32Seq = u32 | Seq,
+        Int8uSeq = Int8u | Seq,
 
         /// <summary>
         /// An i8 sequence of literal length
         /// </summary>
-        i8Seq = i8 | Seq,
+        Int8iSeq = Int8i | Seq,
+
+        /// <summary>
+        /// A u16 sequence of literal length
+        /// </summary>
+        Int16uSeq = Int16u | Seq,
 
         /// <summary>
         /// An i16 sequence of literal length
         /// </summary>
-        i16Seq = i16 | Seq,
+        Int16iSeq = Int16i | Seq,
+
+        /// <summary>
+        /// A u32 sequence of literal length
+        /// </summary>
+        Int32uSeq = Int32u | Seq,
 
         /// <summary>
         /// An i32 sequence of literal length
         /// </summary>
-        i32Seq = i32 | Seq,
-
-        /// <summary>
-        /// An i64 sequence of literal length
-        /// </summary>
-        i64Seq = i64 | Seq,
+        Int32iSeq = Int32i | Seq,
 
         /// <summary>
         /// An f32 sequence of literal length
         /// </summary>
-        f32Seq = f32 | Seq,
+        Float32Seq = Float32 | Seq,
+
+        /// <summary>
+        /// An i64 sequence of literal length
+        /// </summary>
+        Int64iSeq = Int64i | Seq,
 
         /// <summary>
         /// An f64 sequence of literal length
         /// </summary>
-        f64Seq = f64 | Seq,
+        Float64Seq = Float64 | Seq,
 
         /// <summary>
         /// An f128 sequence of literal length
         /// </summary>
-        f128Seq = f128 | Seq,
+        Float128Seq = Float128 | Seq,
 
         /// <summary>
         /// A character sequence of literal length
         /// </summary>
-        c16Seq = c16 | Seq,
+        Char16Seq = Char16 | Seq,
 
         /// <summary>
         /// A string sequence of literal length

@@ -9,9 +9,8 @@ namespace Z0.Lang
 
     using static Part;
 
-    public interface ITree
+    public readonly struct Expr
     {
 
     }
-
 }

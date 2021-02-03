@@ -31,5 +31,4 @@ namespace Z0.Lang
         /// </summary>
         MultiLine,
     }
-
 }

@@ -68,7 +68,7 @@ namespace Z0
         static string format(Exception e)
             => e switch {
                 TargetInvocationException ie => format(e.InnerException),
-                ClaimException ce => ce.Message.Format(),
+                ClaimException ce => ce.Message,
                 _ => e.ToString()
             };
     }

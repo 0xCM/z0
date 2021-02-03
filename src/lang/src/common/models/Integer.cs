@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct AsmAlgorithms
+    public readonly struct IntegerValue
     {
-        const Z0.NumericKind Closure = UnsignedInts;
+        public IntegerKind Kind {get;}
 
-        public static T SaturateSignedWordToSignedByte<T>()
-        {
-            return default;
-        }
+        public BinaryCode Value {get;}
     }
+
 }

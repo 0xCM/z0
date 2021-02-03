@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using static MySql.TypeAffinityKind;
+    using A = MySql.TypeAffinityKind;
 
     public readonly partial struct MySql
     {
@@ -16,7 +16,8 @@ namespace Z0.Lang
 
                 public ByteSize Size => 0;
 
-                public TypeAffinityKind Affinity => None;
+                public A Affinity => 0;
+
             }
 
             public readonly struct Int<T> : IFixedStorageType<T>
@@ -26,8 +27,8 @@ namespace Z0.Lang
                 public ByteSize Size
                     => memory.size<T>();
 
-                public TypeAffinityKind Affinity
-                    => Integer;
+                public A Affinity
+                    => A.Integer;
             }
 
             public readonly struct Int8 : IFixedStorageType<byte>
@@ -38,7 +39,7 @@ namespace Z0.Lang
                 public ByteSize Size
                     => default(Int<byte>).Size;
 
-                public TypeAffinityKind Affinity
+                public A Affinity
                     => default(Int<byte>).Affinity;
             }
 
@@ -50,7 +51,7 @@ namespace Z0.Lang
                 public ByteSize Size
                     => default(Int<ushort>).Size;
 
-                public TypeAffinityKind Affinity
+                public A Affinity
                     => default(Int<ushort>).Affinity;
             }
 
@@ -62,7 +63,7 @@ namespace Z0.Lang
                 public ByteSize Size
                     => default(Int<uint>).Size;
 
-                public TypeAffinityKind Affinity
+                public A Affinity
                     => default(Int<uint>).Affinity;
             }
 
@@ -74,7 +75,7 @@ namespace Z0.Lang
                 public ByteSize Size
                     => default(Int<ulong>).Size;
 
-                public TypeAffinityKind Affinity
+                public A Affinity
                     => default(Int<ulong>).Affinity;
             }
 
@@ -85,22 +86,24 @@ namespace Z0.Lang
                 public ByteSize Size
                     => memory.size<double>();
 
-                public TypeAffinityKind Affinity
-                    => TypeAffinityKind.Real;
+                public A Affinity
+                    => A.Real;
             }
 
             public readonly struct SqlText : IStorageType<char[]>
             {
                 public string Name => "text";
 
-                public TypeAffinityKind Affinity => Text;
+                public A Affinity
+                    => A.Text;
             }
 
             public readonly struct SqlBlob : IStorageType<byte[]>
             {
                 public string Name => "blob";
 
-                public TypeAffinityKind Affinity => Blob;
+                public A Affinity
+                    => A.Blob;
             }
         }
     }

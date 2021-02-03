@@ -9,17 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Segment
+    public readonly struct DataCell : IDataType<DataCell>
     {
-        public IDataSource Source {get;}
-
-        public Range Selection {get;}
+        public DataWidth Width {get;}
 
         [MethodImpl(Inline)]
-        public Segment(IDataSource source, Range selection)
+        public DataCell(DataWidth width)
         {
-            Source = source;
-            Selection = selection;
+            Width = width;
         }
     }
 }

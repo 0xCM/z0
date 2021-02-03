@@ -4,16 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct AsmAlgorithms
+    public readonly struct Call
     {
-        const Z0.NumericKind Closure = UnsignedInts;
+        public Function Target {get;}
 
-        public static T SaturateSignedWordToSignedByte<T>()
+        public Index<Operand> Operands {get;}
+
+        public Call(Function f, params Operand[] args)
         {
-            return default;
+            Target = f;
+            Operands = args;
         }
     }
+
 }

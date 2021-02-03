@@ -9,25 +9,18 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Variable
+    public readonly struct ByteBlock
     {
-        public Identifier Name {get;}
-
-        [MethodImpl(Inline)]
-        public Variable(Identifier name)
-        {
-            Name = name;
-        }
+        public ByteSize Length {get;}
     }
 
-    public readonly struct Variable<T>
+    public readonly struct ByteBlockValue
     {
-        public Identifier Name {get;}
+        public byte[] Content {get;}
 
-        [MethodImpl(Inline)]
-        public Variable(Identifier name)
+        public ByteBlockValue(byte[] content)
         {
-            Name = name;
+            Content = content;
         }
     }
 }

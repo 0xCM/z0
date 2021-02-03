@@ -11,18 +11,18 @@ namespace Z0.Lang
 
     public readonly struct Operand
     {
+        public byte Index {get;}
+
         public Name Name {get;}
 
         public DataType Type {get;}
 
-        public dynamic Value {get;}
-
         [MethodImpl(Inline)]
-        public Operand(string name, DataType type, dynamic value)
+        public Operand(byte index, string name, DataType type)
         {
+            Index = index;
             Name = name;
             Type = type;
-            Value = value;
         }
     }
 }

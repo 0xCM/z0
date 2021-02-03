@@ -9,20 +9,6 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Assignment
-    {
-        public Variable Left {get;}
-
-        public Variable Right {get;}
-
-        [MethodImpl(Inline)]
-        public Assignment(Variable lhs, Variable rhs)
-        {
-            Left = lhs;
-            Right = rhs;
-        }
-    }
-
     /// <summary>
     /// Represents an assignment A := B
     /// </summary>

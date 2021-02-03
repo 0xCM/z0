@@ -14,7 +14,7 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmLang  : ILanguage<AsmLang>
     {
-        const NumericKind Closure = UnsignedInts;
+        const Z0.NumericKind Closure = UnsignedInts;
 
         public Name Id => "asm";
     }

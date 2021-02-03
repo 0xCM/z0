@@ -9,10 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-
-    public abstract class Tree<T> : ITree
-        where T : Tree<T>, new()
+    public readonly struct Var : IDeclaration<Var>
     {
+        public DataType Type {get;}
 
+        public Identifier Name {get;}
+
+        [MethodImpl(Inline)]
+        public Var(DataType type, Identifier name)
+        {
+            Type = type;
+            Name = name;
+        }
     }
 }

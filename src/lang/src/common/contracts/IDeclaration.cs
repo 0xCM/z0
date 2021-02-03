@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    public abstract class Terminal<T> : TreeNode<T>
-        where T : TreeNode<T>, new()
+    public interface IDeclaration
     {
-        public override bool IsLeaf
-            => true;
+
+    }
+
+    public interface IDeclaration<T> : IDeclaration
+        where T : struct, IDeclaration<T>
+    {
+
     }
 }

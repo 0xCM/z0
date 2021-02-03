@@ -9,8 +9,10 @@ namespace Z0.Lang
 
     using static Part;
 
-    public interface ITreeNode
+    partial struct lang
     {
-
+        [MethodImpl(Inline)]
+        public static Value<T> value<T>(DataType type, T content)
+            => new Value<T>(type,content);
     }
 }

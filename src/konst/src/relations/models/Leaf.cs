@@ -2,28 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Range : IDataType<Range>
+    public readonly struct Leaf<T> : ILeaf<T>
     {
-        public long Min {get;}
-
-        public long Max {get;}
+        public T Content {get;}
 
         [MethodImpl(Inline)]
-        public Range(long min, long max)
+        public Leaf(T content)
         {
-            Min = min;
-            Max = max;
+            Content = content;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Range((long min, long max) src)
-            => new Range(src.min, src.max);
     }
 }

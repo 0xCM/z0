@@ -15,10 +15,10 @@ namespace Z0.Lang
 
         public RangeIterator Iterator {get;}
 
-        public Block Body {get;}
+        public CodeBlock Body {get;}
 
         [MethodImpl(Inline)]
-        public RangeLoop(Range range, RangeIterator iterator, Block body)
+        public RangeLoop(Range range, RangeIterator iterator, CodeBlock body)
         {
             Range = range;
             Iterator = iterator;

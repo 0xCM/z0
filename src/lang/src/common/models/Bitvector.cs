@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Bitvector
+    public readonly struct Bitvector : IDataType<Bitvector>
     {
         public BitSize Width {get;}
 

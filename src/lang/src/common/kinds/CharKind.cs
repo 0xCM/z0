@@ -4,16 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using static Part;
+    using static DataWidth;
+    using static DataKind;
 
-    [ApiHost]
-    public readonly partial struct AsmAlgorithms
+    [System.Flags]
+    public enum CharKind : ushort
     {
-        const Z0.NumericKind Closure = UnsignedInts;
+        None = 0,
 
-        public static T SaturateSignedWordToSignedByte<T>()
-        {
-            return default;
-        }
+        Char6 = W6 | Char,
+
+        Char7 = W7 | Char,
+
+        Char8 = W8 | Char,
+
+        Char16 = W16 | Char,
     }
 }

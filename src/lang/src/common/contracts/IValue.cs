@@ -9,15 +9,18 @@ namespace Z0.Lang
 
     using static Part;
 
-
-    public readonly struct DataType : IDataType
+    public interface IValue
     {
-        public Identifier Name {get;}
+        DataType Type {get;}
 
-        [MethodImpl(Inline)]
-        public DataType(Identifier name)
-        {
-            Name = name;
-        }
+        dynamic Content {get;}
+    }
+
+    public interface IValue<T> : IValue
+    {
+        new T Content {get;}
+
+        dynamic IValue.Content
+            => Content;
     }
 }

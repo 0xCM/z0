@@ -9,14 +9,18 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Cell
+    public readonly struct VarValue : IValue<Value>
     {
-        public BitSize Width {get;}
+        public Var Var {get;}
 
-        [MethodImpl(Inline)]
-        public Cell(BitSize width)
+        public DataType Type => Var.Type;
+
+        public Value Content {get;}
+
+        public VarValue(Var var, Value value)
         {
-            Width = width;
+            Var = var;
+            Content = value;
         }
     }
 }

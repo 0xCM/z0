@@ -25,6 +25,6 @@ namespace Z0.Lang
 
         [Op]
         public static Enumeration<byte> enumeration(Name ns, Identifier name, Index<EnumLiteral<byte>> literals, TextBlock? desc = null)
-            => enumeration<byte>(ns,name, ConstantKind.u8, desc ?? TextBlock.Empty, literals);
+            => enumeration<byte>(ns,name, ConstantKind.Int8u, desc ?? TextBlock.Empty, literals);
     }
 }

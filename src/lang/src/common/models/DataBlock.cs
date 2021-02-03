@@ -9,21 +9,21 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Range : IDataType<Range>
+    public readonly struct DataBlock : IDataType
     {
-        public long Min {get;}
+        public SegmentKind SegKind {get;}
 
-        public long Max {get;}
+        public uint SegCount {get;}
+
+        public Identifier Name => "block";
+
+        public BitSize Width => throw new NotImplementedException();
 
         [MethodImpl(Inline)]
-        public Range(long min, long max)
+        public DataBlock(SegmentKind kind, uint count)
         {
-            Min = min;
-            Max = max;
+            SegKind = kind;
+            SegCount = count;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Range((long min, long max) src)
-            => new Range(src.min, src.max);
     }
 }
