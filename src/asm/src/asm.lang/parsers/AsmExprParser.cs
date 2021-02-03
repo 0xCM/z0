@@ -24,35 +24,45 @@ namespace Z0.Asm
 
         Adjacent<char, OneOf<char>> RegDigitRule;
 
-        Index<AsmSigOpIdentifier> SigOpIdentifiers;
+        Index<AsmSigOpToken> SigOpTokens;
+
+        SymbolTable<AsmSigOpToken> SigOpLookup;
+
+        SeqSplit<char> SigOpSplitRule;
 
         const char MnemonicTerminator = Chars.Space;
 
-        const char OperandSeparator = Chars.Comma;
+        const char OperandSeparator = Comma;
 
         const char DigitQualifier = FSlash;
+
+        const char CompoundSignifier = FSlash;
 
         public AsmExprParser()
         {
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
-            SigOpIdentifiers = api.identifiers(AsmSigOpKind.None);
+            SigOpTokens = api.SigOpTokens();
+            SigOpLookup = SymbolTables.create(SigOpTokens, t => t.Symbol);
+            SigOpSplitRule = Rules.splitter(OperandSeparator);
         }
 
-
         [MethodImpl(Inline), Op]
-        public ref readonly AsmSigOpIdentifier Identifier(AsmSigOpKind kind)
+        public ref readonly AsmSigOpToken Token(AsmSigOpKind kind)
         {
             if(kind <= AsmSigOpKindFacets.LastClass)
-                return ref SigOpIdentifiers[(byte)kind];
+                return ref SigOpTokens[(byte)kind];
             else
-                return ref SigOpIdentifiers[0];
+                return ref SigOpTokens[0];
         }
 
         [Op]
-        public AsmSigOpKind Kind(AsmSigOpExpr src)
+        public ref readonly AsmSigOpToken ParseSigOp(AsmSigOpExpr src)
         {
-            return SigOpIdentifiers.First.Kind;
+            if(SigOpLookup.Index(src.Content, out var index))
+                return ref SigOpTokens[index];
+            else
+                return ref SigOpTokens[0];
         }
 
         [Op]
@@ -71,17 +81,20 @@ namespace Z0.Asm
             }
         }
 
+        public Index<AsmSigOpExpr> Operands(string src)
+            => Transform.apply(SigOpSplitRule, src).Map(sigop);
+
         [Op]
         public Index<AsmSigOpExpr> Operands(AsmSigExpr src)
         {
             if(Mnemonic(src, out var monic))
                 if(Parse.after(src.Content, monic.Content, out var remainder))
-                    return remainder.SplitClean(OperandSeparator).Map(sigop);
+                    return Operands(remainder);
             return Index<AsmSigOpExpr>.Empty;
         }
 
         [Op]
-        public bool IsDigit(AsmSigOpExpr src)
+        public bool IsDigit(AsmOpCodeExpr src)
         {
             var s = src.Content;
             return s.Length >= 2
@@ -92,7 +105,25 @@ namespace Z0.Asm
         [Op]
         public bool IsComposite(AsmSigOpExpr src)
         {
-            return Query.begins(src.Content, DigitQualifier) && !IsDigit(src);
+            return Query.contains(src.Content, CompoundSignifier);
+        }
+
+        [Op]
+        public bool Decompose(AsmSigOpExpr src, out Pair<AsmSigOpExpr> dst)
+        {
+            if(IsComposite(src))
+            {
+                var parts = src.Content.Split(CompoundSignifier);
+                if(parts.Length != 2)
+                    root.@throw(new Exception($"Composition logic wrong for {src.Content}"));
+
+                var left = api.sigop(parts[0]);
+                var right = api.sigop(parts[1]);
+                dst = root.pair(left,right);
+                return true;
+            }
+            dst = default;
+            return false;
         }
 
         [Op]

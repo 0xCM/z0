@@ -96,6 +96,7 @@ namespace Z0
 
             var f = Table.formatter<ContentLibField>();
             var target = wf.Db().RefDataRoot() + FS.file("index", FileExtensions.Csv);
+            var emitting = wf.EmittingTable<DocLibEntry>(target);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var entry = ref skip(entries, i);
@@ -107,7 +108,7 @@ namespace Z0
             using var dst = target.Writer();
             dst.Write(f.Format());
 
-            wf.EmittedTable<DocLibEntry>(count, target);
+            wf.EmittedTable(emitting, count);
 
             wf.Ran(flow);
             return  provider.Entries;

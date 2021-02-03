@@ -9,16 +9,15 @@ namespace Z0
     /// <summary>
     /// Raised when a validation check has failed
     /// </summary>
-    [Serializable]
-    public class ClaimException : AppException
+    public class ClaimException : Exception
     {
-        public static ClaimException Define(ClaimKind op, IAppMsg msg)
+        public static ClaimException define(ClaimKind op, TextBlock msg)
             => new ClaimException(op, msg);
 
         public ClaimException() { }
 
-        internal ClaimException(ClaimKind kind, IAppMsg msg)
-            : base(msg)
+         ClaimException(ClaimKind kind, TextBlock msg)
+            : base(msg.Format())
             {
                 OpKind = kind;
             }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial struct ApiIdentify
     {
@@ -18,7 +18,7 @@ namespace Z0
             else if(t.IsVector())
                 return TypeIndicator.Define(IDI.Vector);
             else
-                return Option.none<TypeIndicator>();
+                return root.none<TypeIndicator>();
         }
 
         [MethodImpl(Inline), Op]

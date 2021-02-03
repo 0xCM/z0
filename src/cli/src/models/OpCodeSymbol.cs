@@ -35,6 +35,9 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator OpCodeSymbol(OpCodeValue src)
                 => new OpCodeSymbol((ILOpCode)src);
+
+            public string Format()
+                => Value.Value.ToString();
         }
     }
 }

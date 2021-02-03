@@ -113,7 +113,7 @@ namespace Z0
         public void EmitCallRows(ApiPartRoutines src)
         {
             var dst = Wf.Db().Table(AsmCallRow.TableId, src.Part);
-            Wf.EmittingTable<AsmCallRow>(dst);
+            var flow = Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
             var calls = AsmEtl.calls(src.Instructions()).View;
             var count = calls.Length;
@@ -121,7 +121,7 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(calls,i)));
-            Wf.EmittedTable<AsmCallRow>(count, dst);
+            Wf.EmittedTable(flow, count);
         }
 
         void CreateRecords(in ApiCodeBlock src)

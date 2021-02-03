@@ -61,10 +61,6 @@ namespace Z0
         public static AppMsg error(Exception e)
             => define(e.ToString(), LogLevel.Error);
 
-        [MethodImpl(Inline), Op]
-        public static AppMsg error(ClaimException e)
-            => define(e.Message, LogLevel.Error);
-
         [MethodImpl(Inline)]
         AppMsg(object content, LogLevel kind, FlairKind color, string caller, string file, int? line)
             => Data = new AppMsgData(content,"{0}", kind, color, source(caller, file, line));

@@ -33,7 +33,7 @@ namespace Z0
             var tSize = size<T>();
             var srclen = src.Length;
             if(srclen >= tSize)
-                return read<T>((ReadOnlySpan<byte>)src);
+                return memory.first<T>((ReadOnlySpan<byte>)src);
             else
             {
                 var remaining = tSize - srclen;

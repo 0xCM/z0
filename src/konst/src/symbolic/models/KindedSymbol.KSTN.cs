@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Attaches a classifier to a symbol
     /// </summary>
-    public readonly struct KindedSymbol<K,S,T,N> : IKindedSymbolic<KindedSymbol<K,S,T,N>,K,S,T,N>
+    public readonly struct KindedSymbol<K,S,T,N>
         where K : unmanaged
         where S : unmanaged
         where T : unmanaged

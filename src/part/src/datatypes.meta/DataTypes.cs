@@ -45,7 +45,6 @@ namespace Z0
             return dst.ToArray();
         }
 
-
         [MethodImpl(Inline), Op]
         public static DataType empty()
             => new DataType(new EmptyDataType());

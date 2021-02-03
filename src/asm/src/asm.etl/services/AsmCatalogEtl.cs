@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
@@ -93,29 +94,35 @@ namespace Z0.Asm
             var flow = Wf.EmittingTable<StokeAsmImportRow>(dst);
             var imports = ImportedStokeRows();
             var count = Records.emit(imports, dst, 42);
-            Wf.EmittedTable<StokeAsmImportRow>(flow, count, dst);
+            Wf.EmittedTable(flow, count);
             return imports;
+        }
+
+        public void Emit(ReadOnlySpan<AsmSpecifierExpr> src)
+        {
+            var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
+            var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
+            var count = Records.emit(src.Map(AsmEtl.record), dst, AsmEtl.AsmSpecifierWidths);
+            Wf.EmittedTable(flow, count);
         }
 
         public ReadOnlySpan<AsmSpecifierExpr> Specifiers()
         {
             var imported = ImportedStokeRows();
-            var denormal = span<AsmSpecifierExpr>(imported.Length);
+            var count = imported.Length;
+            var buffer = span<AsmSpecifierExpr>(count);
             var j=0u;
             var k=0u;
-            for(var i=0; i<imported.Length; i++)
+            for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
-                var seq = row.Sequence;
                 var oc = AsmExpr.opcode(row.OpCode);
                 var sig = AsmExpr.sig(row.Instruction);
-                var spec = AsmExpr.specifier((ushort)k,oc,sig);
-                seek(denormal,k++) = spec;
-
-                //k += Denormalize(spec, denormal, k);
+                var spec = AsmExpr.specifier(row.Sequence, oc, sig);
+                seek(buffer, k++) = spec;
             }
 
-            return denormal;
+            return buffer;
         }
 
 

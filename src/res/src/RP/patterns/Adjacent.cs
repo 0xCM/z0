@@ -36,5 +36,6 @@ namespace Z0
         [RenderPattern(6, Adjacent6)]
         public const string Adjacent6 = "{0}{1}{2}{3}{4}{5}";
 
+        public const string EmptySymbol = "<empty>";
     }
 }

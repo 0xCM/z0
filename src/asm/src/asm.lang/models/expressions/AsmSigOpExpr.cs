@@ -61,49 +61,56 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSigOpExpr : ITextExpr<AsmSigOpExpr>
     {
-        public string Content {get;}
+        readonly TextBlock Data;
 
         [MethodImpl(Inline)]
         public AsmSigOpExpr(string src)
-            => Content = src ?? EmptyString;
+            => Data = src;
 
-        /// <summary>
-        /// The expression length
-        /// </summary>
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data.Text;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
-            get => text.length(Content);
+            get => Data.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => Data.IsNonEmpty;
         }
 
-        [MethodImpl(Inline)]
-        public bool Equals(AsmSigOpExpr src)
-            => text.equals(Content, src.Content);
-
-        public override bool Equals(object src)
-            => src is AsmSigOpExpr x && Equals(x);
-
         public override int GetHashCode()
-            => text.hash(Content);
+            => Data.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content;
+            => Data.Format();
+
+        [MethodImpl(Inline)]
+        public string Format(int pad)
+            => Data.Format(pad);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmSigOpExpr src)
+            => Data.Equals(src.Data);
+
+        public override bool Equals(object src)
+            => src is AsmSigOpExpr x && Equals(x);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmSigOpExpr(string src)

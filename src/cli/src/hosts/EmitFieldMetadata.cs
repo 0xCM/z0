@@ -78,7 +78,7 @@ namespace Z0
             foreach(var item in src)
                 writer.WriteLine(formatter.FormatRow(item));
 
-            Wf.EmittedTable<ClrFieldInfo>(Host, src.Length, target);
+            Wf.EmittedTable(flow, src.Length);
             return count;
         }
 

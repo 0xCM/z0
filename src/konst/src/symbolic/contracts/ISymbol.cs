@@ -7,22 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
     /// </summary>
     public interface ISymbol : ITextual
     {
-        /// <summary>
-        /// The encoded symbol value
-        /// </summary>
-        BinaryCode Encoded {get;}
 
-        char Render();
-
-        string ITextual.Format()
-            => Render().ToString();
     }
 
     /// <summary>
@@ -30,39 +22,28 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The symbol value type</typeparam>
     public interface ISymbol<S> : ISymbol
-        where S : unmanaged
     {
         /// <summary>
         /// The symbol value
         /// </summary>
         S Value {get;}
 
-        char ISymbol.Render()
-            => (char)memory.c16<S>(Value);
-
-        BinaryCode ISymbol.Encoded
-            => memory.bytes(Value);
+        string ITextual.Format()
+            => string.Format("{0}", Value);
     }
 
     public interface ISymbol<S,T> : ISymbol<S>
-        where S : unmanaged
         where T : unmanaged
     {
         /// <summary>
         /// The <typeparamref name='T' /> cell bit-width
         /// </summary>
         ushort SegWidth
-            => (ushort)memory.bitwidth<T>();
+            => (ushort)bitwidth<T>();
 
-        /// <summary>
-        /// The <typeparamref name='T' /> cell value
-        /// </summary>
-        T Cell
-            => Unsafe.As<S,T>(ref memory.edit(Value));
     }
 
     public interface ISymbol<S,T,N> : ISymbol<S,T>
-        where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {

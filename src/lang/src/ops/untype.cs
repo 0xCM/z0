@@ -13,13 +13,7 @@ namespace Z0.Lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EnumLiteral untype<T>(EnumLiteral<T> src)
-        {
-            var dst = new EnumLiteral();
-            dst.Index = src.Index;
-            dst.Value = src.Value;
-            dst.Description = src.Description;
-            return dst;
-        }
+            => new EnumLiteral(src.Order, src.Value, src.Description);
 
         [Op, Closures(Closure)]
         public static Enumeration untype<T>(Enumeration<T> src)

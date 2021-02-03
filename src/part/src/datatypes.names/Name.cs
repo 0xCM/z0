@@ -18,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Name(string src)
-            => Data = src;
+            => Data = src ?? EmptyString;
 
         public bool IsEmpty
         {

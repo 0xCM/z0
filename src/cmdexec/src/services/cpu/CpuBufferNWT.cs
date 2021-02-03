@@ -36,19 +36,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
-            first(Data.Recover<T,ushort>()) = Zero16u;
+            first(Data.Recover<T,ushort>()) = z16;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W32 w)
         {
-            first(Data.Recover<T,uint>()) = Zero32u;
+            first(Data.Recover<T,uint>()) = z32;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W64 w)
         {
-            first(Data.Recover<T,ulong>()) = Zero64u;
+            first(Data.Recover<T,ulong>()) = z64;
         }
 
         [MethodImpl(Inline)]

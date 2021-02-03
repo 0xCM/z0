@@ -19,5 +19,9 @@ namespace Z0
             Array.Reverse(src);
             return src;
         }
+
+        [Op, Closures(Closure)]
+        public static HashIndex<T> hash<T>(Index<T> src)
+            => new HashIndex<T>(src);
     }
 }

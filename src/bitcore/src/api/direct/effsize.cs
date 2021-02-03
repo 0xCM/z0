@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), EffSize]
         public static byte effsize(short src)
-            => math.lt(src, Zero16i) ? (byte)2 : effsize((uint)src);
+            => math.lt(src, z16i) ? (byte)2 : effsize((uint)src);
 
         /// <summary>
         /// Computes the minimum number of bytes required to represent the source value
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), EffSize]
         public static byte effsize(int src)
-            => math.lt(src, Zero32i) ? (byte)4 : effsize((uint)src);
+            => math.lt(src, z32i) ? (byte)4 : effsize((uint)src);
 
         /// <summary>
         /// Computes the minimum number of bytes required to represent the source value
@@ -113,6 +113,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), EffSize]
         public static byte effsize(long src)
-            => math.lt(src, Zero64i) ? (byte)8 : effsize_baseline((ulong)src);
+            => math.lt(src, z64i) ? (byte)8 : effsize_baseline((ulong)src);
     }
 }

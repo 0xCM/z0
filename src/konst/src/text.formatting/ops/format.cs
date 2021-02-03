@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
+    using static Root;
     using static RP;
 
     partial struct TextFormatter
@@ -52,14 +52,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> a)
             => a.ToString();
-
-        /// <summary>
-        /// Formats a <see cref='StringRef'/>
-        /// </summary>
-        /// <param name="src">The source</param>
-        [MethodImpl(Inline), Op]
-        public static string format(in StringRef src)
-            => src.Format();
 
         [MethodImpl(Inline), Op]
         static string format(string src)
@@ -140,7 +132,6 @@ namespace Z0
             where C : ITextual
             where D : ITextual
                 => string.Format(PSx4, a.Format(), b.Format(), c.Format(), d.Format());
-
 
         /// <summary>
         /// Renders a quintet of <see cref='ITextual'/> values as pipe-delimited text

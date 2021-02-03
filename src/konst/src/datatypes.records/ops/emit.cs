@@ -46,14 +46,6 @@ namespace Z0
             return count;
         }
 
-        public static Count emit<T>(Index<T> src, FS.FilePath dst, RowFormatSpec spec)
-            where T : struct, IRecord<T>
-                => emit(src.View, dst, spec);
-
-        public static Count emit<T>(Index<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
-            where T : struct, IRecord<T>
-                => emit(src, dst, rowspec<T>(widths));
-
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null)
             where T : struct, IRecord<T>
         {
@@ -70,8 +62,21 @@ namespace Z0
         public static Count emit<T>(Span<T> src, FS.FilePath dst, byte? fieldwidth = null)
             where T : struct, IRecord<T>
                 => emit(src.ReadOnly(), dst, fieldwidth);
+
         public static Count emit<T>(Index<T> src, FS.FilePath dst, byte? fieldwidth = null)
             where T : struct, IRecord<T>
                 => emit(src.View, dst, fieldwidth);
+
+        public static Count emit<T>(Span<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => emit(src.ReadOnly(), dst, rowspec<T>(widths));
+
+        public static Count emit<T>(Index<T> src, FS.FilePath dst, RowFormatSpec spec)
+            where T : struct, IRecord<T>
+                => emit(src.View, dst, spec);
+
+        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
+            where T : struct, IRecord<T>
+                => emit(src, dst, rowspec<T>(widths));
     }
 }

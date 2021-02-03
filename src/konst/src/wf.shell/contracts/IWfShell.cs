@@ -51,6 +51,8 @@ namespace Z0
 
         WfExecToken Ran(WfExecFlow src);
 
+        WfExecToken Ran<T>(WfExecFlow<T> src);
+
         WfServices Services {get;}
 
         ApiServices ApiServices
@@ -61,6 +63,13 @@ namespace Z0
 
         WfExecFlow Flow()
             => new WfExecFlow(this, NextExecToken());
+
+        WfExecFlow<T> Flow<T>()
+            => new WfExecFlow<T>(this, NextExecToken());
+
+        WfTableFlow<T> TableFlow<T>(FS.FilePath dst)
+            where T : struct, IRecord<T>
+                => new WfTableFlow<T>(this, dst, NextExecToken());
 
         CmdBuilder CmdBuilder()
             => new CmdBuilder(this);

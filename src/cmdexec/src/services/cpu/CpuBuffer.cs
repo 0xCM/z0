@@ -72,19 +72,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w, byte index)
         {
-            first(s16u(Data)) = Zero16u;
+            first(s16u(Data)) = z16;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W32 w, byte index)
         {
-            first(s32u(Data)) = Zero32u;
+            first(s32u(Data)) = z32;
         }
 
         [MethodImpl(Inline), Op]
         public void Clear(W64 w, byte index)
         {
-            first(s64u(Data)) = Zero64u;
+            first(s64u(Data)) = z64;
         }
 
         [MethodImpl(Inline), Op]

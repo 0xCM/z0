@@ -13,6 +13,10 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmExpr
     {
+        [Op]
+        public static AsmExprParser parser(IWfShell wf)
+            => AsmExprParser.create(wf);
+
         [MethodImpl(Inline), Op]
         public static AsmMnemonicExpr mnemonic(string src)
             => new AsmMnemonicExpr(src);
@@ -26,30 +30,31 @@ namespace Z0.Asm
             => new AsmSigOpExpr(src);
 
         /// <summary>
-        /// Defines a <see cref='AsmSigOpIdentifier'/>
+        /// Defines a <see cref='AsmSigOpToken'/>
         /// </summary>
         /// <param name="index">The identifier index that serves as a surrogate key for lookups</param>
         /// <param name="name">The identifer name</param>
         /// <param name="kind">The identifier kind</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOpIdentifier identifier(byte index, Identifier name, AsmSigOpKind kind)
-            => new AsmSigOpIdentifier(index, name, kind);
+        public static AsmSigOpToken token(byte index, Identifier name, AsmSigOpKind kind, string symbol)
+            => new AsmSigOpToken(index, name, kind, symbol);
 
         /// <summary>
-        /// Creates a <see cref='AsmSigOpIdentifier'/> index
+        /// Creates a <see cref='AsmSigOpToken'/> index
         /// </summary>
         /// <param name="k">An identifier representative</param>
         [Op]
-        public static Index<AsmSigOpIdentifier> identifiers(AsmSigOpKind k)
+        public static Index<AsmSigOpToken> SigOpTokens()
         {
             var details = Enums.details<AsmSigOpKind,ushort>().View;
             var count = AsmSigOpKindFacets.IdentifierCount + 1;
-            var buffer = alloc<AsmSigOpIdentifier>(count);
+            var buffer = alloc<AsmSigOpToken>(count);
             ref var dst = ref first(buffer);
             for(byte i=1; i<count; i++)
             {
                 ref readonly var detail = ref skip(details,i);
-                seek(dst,i) = AsmExpr.identifier(i, detail.Name, detail.LiteralValue);
+                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, EmptyString);
+                seek(dst,i) = token(i, detail.Name, detail.LiteralValue, symbol);
             }
             return buffer;
         }

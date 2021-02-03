@@ -11,16 +11,19 @@ namespace Z0.Lang
 
     public struct EnumLiteral
     {
-        public uint Index;
+        /// <summary>
+        /// The literal's declaration order
+        /// </summary>
+        public uint Order;
 
         public Literal Value;
 
         public TextBlock Description;
 
         [MethodImpl(Inline)]
-        public EnumLiteral(uint index, Literal value, TextBlock desc)
+        public EnumLiteral(uint order, Literal value, TextBlock desc)
         {
-            Index = index;
+            Order = order;
             Value = value;
             Description = desc;
         }
@@ -28,16 +31,19 @@ namespace Z0.Lang
 
     public struct EnumLiteral<T>
     {
-        public uint Index;
+        /// <summary>
+        /// The literal's declaration order
+        /// </summary>
+        public uint Order;
 
         public Literal<T> Value;
 
         public TextBlock Description;
 
         [MethodImpl(Inline)]
-        public EnumLiteral(uint index, Literal<T> value, TextBlock desc)
+        public EnumLiteral(uint order, Literal<T> value, TextBlock desc)
         {
-            Index = index;
+            Order = order;
             Value = value;
             Description = desc;
         }

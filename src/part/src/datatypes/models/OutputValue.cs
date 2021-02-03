@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [Datatype]
     public readonly struct OutputValue<T> : ITextual
     {
         public T Value {get;}

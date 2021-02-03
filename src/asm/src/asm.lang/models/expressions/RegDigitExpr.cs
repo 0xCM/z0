@@ -21,40 +21,46 @@ namespace Z0.Asm
 
     public readonly struct RegDigitExpr : ITextExpr<RegDigitExpr>
     {
-        public string Content {get;}
+        readonly TextBlock Data;
 
         [MethodImpl(Inline)]
         public RegDigitExpr(string src)
-            => Content = src;
+            => Data = src;
+
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data.Text;
+        }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => text.length(Content);
+            get => Data.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => Data.IsNonEmpty;
         }
 
         public override int GetHashCode()
-            => text.hash(Content);
+            => Data.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content ?? EmptyString;
+            => Data.Format();
 
         [MethodImpl(Inline)]
         public bool Equals(RegDigitExpr src)
-            => src.Content.Equals(Content);
+            => Data.Equals(src.Data);
 
         public override bool Equals(object src)
             => src is RegDigitExpr x && Equals(x);
@@ -70,11 +76,7 @@ namespace Z0.Asm
         public static implicit operator RegDigitExpr(string src)
             => new RegDigitExpr(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator RegDigitExpr(asci2 src)
-            => new RegDigitExpr(src);
-
         public static RegDigitExpr Empty
-            => new RegDigitExpr(asci2.Null);
+            => new RegDigitExpr(EmptyString);
     }
 }

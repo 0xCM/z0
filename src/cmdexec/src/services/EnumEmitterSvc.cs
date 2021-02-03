@@ -29,7 +29,7 @@ namespace Z0
                 var flow = Wf.EmittingTable<ClrEnumRecord>(dst);
                 var counter = 0u;
                 Execute(records, ref counter, formatter, dst);
-                Wf.EmittedTable<ClrEnumRecord>(Host, counter, dst);
+                Wf.EmittedTable(flow, counter);
             }
             return records;
         }

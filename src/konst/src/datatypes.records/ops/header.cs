@@ -54,7 +54,7 @@ namespace Z0
             var _fields = fields(record).View;
             var count = _fields.Length;
             if(count != widths.Length)
-                @throw(Msg.RecordFieldWidthMismatch.Format((uint)count, (uint)widths.Length));
+                sys.@throw(Msg.RecordFieldWidthMismatch.Format((uint)count, (uint)widths.Length));
             var buffer = alloc<HeaderCell>(count);
             var cells = span(buffer);
             for(var i=0u; i<count; i++)

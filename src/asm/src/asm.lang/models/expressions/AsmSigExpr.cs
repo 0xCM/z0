@@ -47,43 +47,53 @@ namespace Z0.Asm
     /// <remarks>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>
     {
-        public string Content {get;}
+        readonly TextBlock Data;
 
         [MethodImpl(Inline)]
         public AsmSigExpr(string src)
-            => Content = src;
+            => Data = src;
+
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data.Text;
+        }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => text.length(Content);
+            get => Data.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => Data.IsNonEmpty;
         }
 
         public override int GetHashCode()
-            => text.hash(Content);
+            => Data.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content ?? EmptyString;
+            => Data.Format();
+
+        [MethodImpl(Inline)]
+        public string Format(int pad)
+            => Data.Format(pad);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(AsmSigExpr src)
-            => text.equals(Content, src.Content);
+            => Data.Equals(src.Data);
 
         public override bool Equals(object src)
             => src is AsmSigExpr x && Equals(x);

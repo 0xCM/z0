@@ -23,6 +23,8 @@ namespace Z0
             {
                 var id = part.FileName.WithoutExtension.Name;
                 var path = wf.Db().Table<ApiComment>(id, FileExtensions.Csv);
+                var flow = wf.EmittingTable<ApiComment>(path);
+
                 var docs = new Dictionary<string, ApiComment>();
                 dst[part] = docs;
                 using var writer = path.Writer();
@@ -34,7 +36,7 @@ namespace Z0
                     if(member.Succeeded)
                         writer.WriteLine(format(member.Value));
                 }
-                wf.EmittedTable<ApiComment>(kvp.Count, path);
+                wf.EmittedTable(flow, kvp.Count);
             }
             return src;
         }

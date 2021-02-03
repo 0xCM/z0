@@ -45,6 +45,10 @@ namespace Z0
                 action(skip(src,i));
         }
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void iter<T>(Span<T> src, Action<T> action)
+            => iter(src.ReadOnly(), action);
+
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each
         /// </summary>

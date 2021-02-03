@@ -36,36 +36,42 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeExpr
     {
-        public string Content {get;}
+        readonly TextBlock Data;
 
         [MethodImpl(Inline)]
         public AsmOpCodeExpr(string src)
-            => Content = src ?? EmptyString;
+            => Data = src;
+
+        public string Content
+        {
+            [MethodImpl(Inline)]
+            get => Data.Text;
+        }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => text.length(Content);
+            get => Data.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Content);
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Content);
+            get => Data.IsNonEmpty;
         }
 
         public override int GetHashCode()
-            => text.hash(Content);
+            => Data.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content ?? EmptyString;
+            => string.Format("{0,-32}", Data);
 
         public override string ToString()
             => Format();
@@ -75,7 +81,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
-            => text.equals(Content, src.Content);
+            => Data.Equals(src.Data);
 
         [MethodImpl(Inline)]
         public static bool operator ==(AsmOpCodeExpr a, AsmOpCodeExpr b)

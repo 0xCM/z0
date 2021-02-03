@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Part;
     using static memory;
@@ -15,6 +16,15 @@ namespace Z0
 
     public readonly struct ByteLogic64
     {
+        /// <summary>
+        /// Interprets a readonly generic reference as a readonly uint64 reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref readonly ulong read<T>(W64 w, in T src)
+            => ref As<T,ulong>(ref AsRef(in src));
+
         [MethodImpl(Inline), Not]
         public static void not(in byte a, ref byte dst)
             => write(L.not(read(w, a)), ref dst);

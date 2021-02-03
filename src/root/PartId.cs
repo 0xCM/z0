@@ -50,13 +50,13 @@ public enum PartId : ulong
 
     Gen = 47,
 
-    Cli = 50,
+    Cli = 48,
 
-    Canonical = 63,
+    Canonical = 49,
 
-    CmdSpec = 75,
+    CmdSpec = 50,
 
-    CmdExec = 76,
+    CmdExec = 51,
 
     BitVectors = 100,
 
@@ -70,55 +70,57 @@ public enum PartId : ulong
 
     BitSvc = 106,
 
-    BitFields = 108,
+    BitFields = 107,
 
-    BitSuite = 109,
+    BitSuite = 108,
 
-    BitCore = 110,
+    BitCore = 109,
 
-    BitMatrix = 111,
+    BitMatrix = 110,
 
-    MathSvc = 114,
+    MathSvc = 111,
 
-    Logix = 115,
+    Logix = 112,
 
-    LibM = 116,
+    LibM = 113,
 
-    Matrix = 117,
+    Matrix = 114,
 
-    Machines = 118,
+    Machines = 115,
 
-    Merge = 119,
+    Merge = 116,
 
-    Blocked = 125,
+    Memory = 117,
 
-    Nats = 133,
+    Blocked = 118,
 
-    Mkl = 134,
+    Nats = 119,
 
-    Stats = 135,
+    Mkl = 120,
 
-    Dynamic = 137,
+    Stats = 121,
 
-    Asm = 140,
+    Dynamic = 122,
 
-    External = 141,
+    Asm = 123,
 
-    Capture = 144,
+    External = 124,
 
-    Evaluate = 146,
+    Capture = 125,
 
-    Extract = 148,
+    Evaluate = 126,
 
-    FVec = 150,
+    Extract = 127,
 
-    DVec = 151,
+    FVec = 128,
 
-    GVec = 152,
+    DVec = 129,
 
-    VSvc = 153,
+    GVec = 130,
 
-    Circuits = 154,
+    VSvc = 131,
+
+    Circuits = 132,
 
     Unsigned = 157,
 

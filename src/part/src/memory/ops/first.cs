@@ -40,6 +40,20 @@ namespace Z0
         public static ref readonly T first<T>(ReadOnlySpan<T> src)
             => ref GetReference<T>(src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T first<T>(Span<byte> src)
+            => ref @as<byte,T>(first(src));
+
+        /// <summary>
+        /// Reads the first T-cell from a bytespan
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly T first<T>(ReadOnlySpan<byte> src)
+            where T : struct
+                => ref @as<byte,T>(first(src));
+
         /// <summary>
         /// Returns a readonly reference to the first source cell
         /// </summary>

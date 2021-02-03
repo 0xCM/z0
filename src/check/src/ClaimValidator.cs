@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="msg">The failure description</param>
         [MethodImpl(Inline), Op]
         public static ClaimException exception(ClaimKind claim, IAppMsg msg)
-            => ClaimException.Define(claim, msg);
+            => ClaimException.define(claim, msg.Format());
 
         /// <summary>
         /// Creates, but does not throw, a claim exception
@@ -57,10 +57,10 @@ namespace Z0
         /// <param name="line">The source file line number where invocation ocurred</param>
         [MethodImpl(Inline), Op]
         public static void fail(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw exception(ClaimKind.Fail, AppMsg.error(msg, caller, file,line));
+            => throw exception(ClaimKind.None, AppMsg.error(msg, caller, file,line));
 
         [MethodImpl(Inline), Op]
         public static void fail([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw exception(ClaimKind.Fail, AppMsg.error("failed", caller, file,line));
+            => throw exception(ClaimKind.None, AppMsg.error("failed", caller, file,line));
     }
 }

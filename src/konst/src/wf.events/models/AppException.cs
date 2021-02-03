@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public class AppException : Exception
+    public class AppException : Exception, ITextual
     {
         public new IAppMsg Message {get;}
 
@@ -28,7 +27,10 @@ namespace Z0
             Message = AppMsg.error(msg ?? EmptyString, caller, file, line);
         }
 
-        public override string ToString()
+        public string Format()
             => Message.Format();
+
+        public override string ToString()
+            => Format();
     }
 }

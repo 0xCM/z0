@@ -9,8 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [Datatype]
-    public readonly struct DocLibEntry
+    public readonly struct DocLibEntry : IRecord<DocLibEntry>
     {
         public string Name {get;}
 

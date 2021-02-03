@@ -13,9 +13,9 @@ namespace Z0.Asm
     {
         public ushort Seq {get;}
 
-        public AsmOpCodeExpr OpCode {get;}
-
         public AsmSigExpr Sig {get;}
+
+        public AsmOpCodeExpr OpCode {get;}
 
         [MethodImpl(Inline)]
         internal AsmSpecifierExpr(ushort seq, AsmOpCodeExpr opcode, AsmSigExpr sig)
@@ -48,7 +48,7 @@ namespace Z0.Asm
             => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
-            => string.Format(RP.PSx2, OpCode.Format(), Sig.Format());
+            => string.Format("{0,-8} | {1,-64} | {2}", Seq, Sig.Format(), OpCode.Format());
 
         public override string ToString()
             => Format();

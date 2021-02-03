@@ -108,6 +108,13 @@ namespace Z0
             return token;
         }
 
+        public WfExecToken Ran<T>(WfExecFlow<T> src)
+        {
+            var token = CloseExecToken(src.Token);
+            Tokens.TryAdd(token.Started, token);
+            return token;
+        }
+
         [MethodImpl(Inline)]
         public WfExecToken NextExecToken()
             => new WfExecToken((ulong)root.atomic(ref StartToken));

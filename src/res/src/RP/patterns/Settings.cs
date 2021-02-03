@@ -20,6 +20,5 @@ namespace Z0
 
         [RenderPattern(8, Settings4)]
         public const string Settings4 ="{0}:{1} | {2}:{3} | {4}:{5} | {6}:{7}";
-
     }
 }

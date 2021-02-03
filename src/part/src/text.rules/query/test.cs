@@ -18,6 +18,23 @@ namespace Z0
             [MethodImpl(Inline), Op]
             public static bool test(char src, OneOf<char> match)
                 => contains(match.Elements, src);
+
+            [Op]
+            public static bool test(string src, OneOf<string> match, out int index)
+            {
+                var count = match.Count;
+                var elements = match.Elements.View;
+                for(var i=0; i<count; i++)
+                {
+                    if(equals(skip(elements,i), src))
+                    {
+                        index = i;
+                        return true;
+                    }
+                }
+                index = NotFound;
+                return false;
+            }
         }
     }
 }

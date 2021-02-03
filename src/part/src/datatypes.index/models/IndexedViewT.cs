@@ -10,7 +10,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
     public readonly struct IndexedView<T> : IConstIndex<T>
     {

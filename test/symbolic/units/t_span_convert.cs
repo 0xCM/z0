@@ -11,11 +11,11 @@ namespace Z0
     {
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
-                => Claim.eq(expect, memory.read2<T>(src));
+                => Claim.eq(expect, memory.first<T>(src));
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
-                => ClaimNumeric.eq(expect, z.recover<T>(src));
+                => ClaimNumeric.eq(expect, memory.recover<T>(src));
 
         void VerifyBytesToValues<T>()
             where T : unmanaged

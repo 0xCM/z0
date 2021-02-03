@@ -13,6 +13,7 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmEtl
     {
-
+        public static AsmCatalogEtl catalog(IWfShell wf)
+            => AsmCatalogEtl.create(wf);
     }
 }

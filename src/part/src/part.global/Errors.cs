@@ -40,7 +40,6 @@ namespace Z0
         public static NotSupportedException no()
             => new NotSupportedException();
 
-
         public static T no<S,T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Unsupported.raise<S,T>(caller, file, line);
 
@@ -54,6 +53,6 @@ namespace Z0
 
         [Op]
         public static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
+            => new Exception(string.Concat($"Duplicate keys were detected {string.Join(Chars.Comma, keys)}",  caller,file, line));
     }
 }

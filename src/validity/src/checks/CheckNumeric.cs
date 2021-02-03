@@ -29,7 +29,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T).IsPrimalNumeric())
-                gmath.eq(lhs,rhs).OnNone(() => throw ClaimException.Define(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line)));
+                gmath.eq(lhs,rhs).OnNone(() => throw ClaimException.define(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line).Format()));
             else
                 CheckEqual.Checker.Eq(lhs,rhs);
         }

@@ -23,7 +23,7 @@ namespace Z0
             get => memory.cover(Data);
         }
 
-        public string String
+        public string Text
         {
             [MethodImpl(Inline)]
             get => Data ?? EmptyString;
@@ -68,6 +68,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Data;
+
+        public string Format(int pad)
+            => string.Format(RP.pad(pad), Data);
 
         [MethodImpl(Inline)]
         public TextBlock Trim()

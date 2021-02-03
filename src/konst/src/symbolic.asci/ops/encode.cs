@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="dst">The receiving buffer</param>
         [MethodImpl(Inline), Op]
         public static void encode(in char src, uint offset, N16 count, ref AsciCharCode dst)
-            => cpu.vstore(cpu.vcompact8u(cpu.vload(w256, memory.read(src, offset))), ref @byte(dst));
+            => cpu.vstore(cpu.vcompact8u(cpu.vload(w256, memory.skip(src, offset))), ref @byte(dst));
 
         /// <summary>
         /// Encodes a sequence of source characters and stores a result in a caller-supplied

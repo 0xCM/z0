@@ -37,7 +37,7 @@ namespace Z0
                 }
             }
 
-            Wf.EmittedTable<T>(flow, counter, target);
+            Wf.EmittedTable(flow, counter);
         }
     }
 }

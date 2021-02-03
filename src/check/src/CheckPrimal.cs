@@ -20,7 +20,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool require(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => !src ? @throw<bool>(ClaimException.Define(ClaimKind.Invariant, NotTrue(msg, caller, file,line))) : true;
+            => !src ? @throw<bool>(ClaimException.define(ClaimKind.Invariant,NotTrue(msg, caller, file,line).Format())) : true;
 
         [MethodImpl(Inline), Op]
         public static bool eq(char lhs, char rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

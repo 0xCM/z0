@@ -20,11 +20,10 @@ namespace Z0.Asm
             if(count != 0)
             {
                 var dst = wf.Db().Table(AsmRow.TableId, src.Key.ToString());
+                var flow = wf.EmittingTable<AsmRow>(dst);
                 var records = span(src.Sequenced);
                 var formatter = Table.dsformatter<AsmRowField>();
                 var header = Table.header53<AsmRowField>();
-
-                wf.EmittingTable<AsmRow>(dst);
                 using var writer = dst.Writer();
                 writer.WriteLine(header);
                 for(var i=0; i<count; i++)
@@ -33,7 +32,7 @@ namespace Z0.Asm
                     var line = format(record, formatter).Render();
                     writer.WriteLine(line);
                 }
-                wf.EmittedTable<AsmRow>(count, dst);
+                wf.EmittedTable(flow, count);
             }
             return count;
         }
