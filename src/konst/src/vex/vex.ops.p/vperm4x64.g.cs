@@ -10,9 +10,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vperm4x64<T>(Vector256<T> x, Perm4L spec)

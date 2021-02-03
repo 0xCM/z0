@@ -18,6 +18,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
+        /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively designating low or hi</param>
+        [MethodImpl(Inline), Closures(AllNumeric)]
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)
+            where T : unmanaged
+                => vinsert_u(src,dst,(LaneIndex)index);
+
+        /// <summary>
+        /// Overwrites a 128-bit lane in the target with the content of the source vector
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] LaneIndex index)

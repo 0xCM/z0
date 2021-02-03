@@ -102,7 +102,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         static Func<Vector256<T>,Vector256<T>> shuffler<T>(N2 n)
             where T : unmanaged
-                => x => gvec.vshuf4x32<T>(x, Arrange4L.AABB);
+                => x => gcpu.vshuf4x32<T>(x, Arrange4L.AABB);
 
         [MethodImpl(Inline)]
         static Func<Vector256<uint>, Vector256<uint>> shuffler(N3 n)

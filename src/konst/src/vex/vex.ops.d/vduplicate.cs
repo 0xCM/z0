@@ -44,7 +44,6 @@ namespace Z0
             => v32u(vdup32(parity, v32f(src)));
 
         // [0 1 2 3 4 5 6 7] -> [1 1 3 3 5 5 7 7]
-
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vduplicate(N1 parity, N32 w, Vector256<uint> src)
             => v32u(vdup32(parity, v32f(src)));

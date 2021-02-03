@@ -10,9 +10,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Applies a cross-lane permutation over 8 32-bit source vector segments

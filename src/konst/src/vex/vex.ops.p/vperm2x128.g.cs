@@ -10,9 +10,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector512<T> vperm2x128<T>(in Vector512<T> src, [Imm] Perm2x4 lo, [Imm] Perm2x4 hi)

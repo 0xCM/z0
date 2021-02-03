@@ -21,8 +21,6 @@ namespace Z0
         public static Vec512Type v512
             => default;
 
-
-
         /// <summary>
         /// Reifies a cell-parametric 512-bit vector kind
         /// </summary>

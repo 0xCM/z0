@@ -227,17 +227,17 @@ namespace Z0
             var x = cpu.vparts(n, 0, 1, 2, 3);
             var y = cpu.vparts(n, 4, 5, 6, 7);
 
-            Claim.veq(cpu.vparts(n, 0, 1, 4, 5), gvec.vperm2x128(x,y, Perm2x4.AC));
-            Claim.veq(cpu.vparts(n, 4, 5, 0, 1), gvec.vperm2x128(x,y, Perm2x4.CA));
+            Claim.veq(cpu.vparts(n, 0, 1, 4, 5), gcpu.vperm2x128(x,y, Perm2x4.AC));
+            Claim.veq(cpu.vparts(n, 4, 5, 0, 1), gcpu.vperm2x128(x,y, Perm2x4.CA));
 
-            Claim.veq(cpu.vparts(n, 0, 1, 6, 7), gvec.vperm2x128(x,y, Perm2x4.AD));
-            Claim.veq(cpu.vparts(n, 6, 7, 0, 1), gvec.vperm2x128(x,y, Perm2x4.DA));
+            Claim.veq(cpu.vparts(n, 0, 1, 6, 7), gcpu.vperm2x128(x,y, Perm2x4.AD));
+            Claim.veq(cpu.vparts(n, 6, 7, 0, 1), gcpu.vperm2x128(x,y, Perm2x4.DA));
 
-            Claim.veq(cpu.vparts(n, 2, 3, 4, 5), gvec.vperm2x128(x,y, Perm2x4.BC));
-            Claim.veq(cpu.vparts(n, 4, 5, 2, 3), gvec.vperm2x128(x,y, Perm2x4.CB));
+            Claim.veq(cpu.vparts(n, 2, 3, 4, 5), gcpu.vperm2x128(x,y, Perm2x4.BC));
+            Claim.veq(cpu.vparts(n, 4, 5, 2, 3), gcpu.vperm2x128(x,y, Perm2x4.CB));
 
-            Claim.veq(cpu.vparts(n, 2, 3, 6, 7), gvec.vperm2x128(x,y, Perm2x4.BD));
-            Claim.veq(cpu.vparts(n, 6, 7, 2, 3), gvec.vperm2x128(x,y, Perm2x4.DB));
+            Claim.veq(cpu.vparts(n, 2, 3, 6, 7), gcpu.vperm2x128(x,y, Perm2x4.BD));
+            Claim.veq(cpu.vparts(n, 6, 7, 2, 3), gcpu.vperm2x128(x,y, Perm2x4.DB));
         }
 
         /// <summary>

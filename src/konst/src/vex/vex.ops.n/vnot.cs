@@ -18,6 +18,8 @@ namespace Z0
 
     partial struct cpu
     {
+
+
         /// <summary>
         /// Computes the bitwise negation of the source vector
         /// </summary>

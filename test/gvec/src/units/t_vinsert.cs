@@ -50,10 +50,10 @@ namespace Z0
                 var srcSpan = v128Src.ToSpan();
 
                 var dst = gcpu.vzero(n256,t);
-                var vLo = gvec.vinsert(v128Src, dst, (byte)0);
+                var vLo = gcpu.vinsert(v128Src, dst, (byte)0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
 
-                var vHi = gvec.vinsert(v128Src, dst, (byte)1);
+                var vHi = gcpu.vinsert(v128Src, dst, (byte)1);
                 var vHiSpan = vHi.ToSpan().Slice(vLo.Length()/2);
 
                 ClaimNumeric.eq(srcSpan, vLoSpan);

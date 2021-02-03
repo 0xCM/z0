@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx;
     using static Part;
 
-    partial class fcpu
+    partial struct cpu
     {
         /// <summary>
         /// __m128 _mm_cmpneq_ps (__m128 a, __m128 b) CMPPS xmm, xmm/m128, imm8(4)
@@ -52,5 +52,4 @@ namespace Z0
         public static Vector256<double> vneq(Vector256<double> lhs, Vector256<double> rhs)
             => Compare(lhs, rhs, FloatComparisonMode.OrderedNotEqualNonSignaling);
     }
-
 }

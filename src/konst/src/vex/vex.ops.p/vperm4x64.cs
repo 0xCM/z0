@@ -102,5 +102,16 @@ namespace Z0
         [MethodImpl(Inline), Asm(ApiAsmClass.VPERMPD)]
         public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] Perm4L spec)
             => Permute4x64(x,(byte)spec);
+
+        /// <summary>
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
+        /// Permutes components in the source vector across lanes as specified by the control byte
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="spec">The control byte</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] byte spec)
+            => Permute4x64(x,spec);
+
     }
 }

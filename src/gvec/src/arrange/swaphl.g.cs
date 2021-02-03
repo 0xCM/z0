@@ -32,6 +32,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector256<T> vswaphl<T>(Vector256<T> x)
             where T : unmanaged
-                => vperm2x128(x,x,Perm2x4.DA);
+                => gcpu.vperm2x128(x,x,Perm2x4.DA);
     }
 }

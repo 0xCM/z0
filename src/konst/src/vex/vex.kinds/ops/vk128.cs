@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-    using System.Linq;
-
-    using static Part;
 
     partial class VK
     {
@@ -17,7 +12,6 @@ namespace Z0
         /// </summary>
         public static Vec128Type v128
             => default;
-
 
         /// <summary>
         /// Reifies a cell-parametric 128-bit vector kind

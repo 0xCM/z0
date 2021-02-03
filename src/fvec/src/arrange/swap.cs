@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<float> vswaphl(Vector256<float> x)
-            => vperm2x128(x,x, Perm2x4.DA);
+            => cpu.vperm2x128(x,x, Perm2x4.DA);
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes
@@ -26,6 +26,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vswaphl(Vector256<double> x)
-            => vperm2x128(x,x, Perm2x4.DA);
+            => cpu.vperm2x128(x,x, Perm2x4.DA);
     }
 }

@@ -47,9 +47,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vsub(v32f(x), v32f(y)));
+                return generic<T>(cpu.vsub(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vsub(v64f(x), v64f(y)));
+                return generic<T>(cpu.vsub(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -59,9 +59,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vsub(v32f(x), v32f(y)));
+                return generic<T>(cpu.vsub(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vsub(v64f(x), v64f(y)));
+                return generic<T>(cpu.vsub(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -240,9 +240,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vmax(v32f(x), v32f(y)));
+                return generic<T>(cpu.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vmax(v64f(x), v64f(y)));
+                return generic<T>(cpu.vmax(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -252,9 +252,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vmax(v32f(x), v32f(y)));
+                return generic<T>(cpu.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vmax(v64f(x), v64f(y)));
+                return generic<T>(cpu.vmax(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -264,9 +264,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vnegate(v32f(src)));
+                return generic<T>(cpu.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vnegate(v64f(src)));
+                return generic<T>(cpu.vnegate(v64f(src)));
             else
                 throw no<T>();
         }
@@ -276,9 +276,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fcpu.vnegate(v32f(src)));
+                return generic<T>(cpu.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fcpu.vnegate(v64f(src)));
+                return generic<T>(cpu.vnegate(v64f(src)));
             else
                 throw no<T>();
         }

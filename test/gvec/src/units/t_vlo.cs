@@ -97,7 +97,7 @@ namespace Z0
             {
                 var x = r.Invoke();
                 var y = f.Invoke(x);
-                var z = gvec.vinsert(y,x,(byte)0);
+                var z = gcpu.vinsert(y,x,(byte)0);
                 Claim.veq(x,z);
             }
         }

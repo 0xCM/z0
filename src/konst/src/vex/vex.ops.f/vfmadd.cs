@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Fma;
     using static Part;
 
-    partial class fcpu
+    partial struct cpu
     {
         /// <summary>
         /// dst = x*y + z
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<float> fmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
+        public static Vector128<float> vfmadd(Vector128<float> x, Vector128<float> y, Vector128<float> z)
             => MultiplyAdd(x, y, z);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<double> fmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
+        public static Vector128<double> vfmadd(Vector128<double> x, Vector128<double> y, Vector128<double> z)
             => MultiplyAdd(x, y, z);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<float> fmadd(Vector256<float> x, Vector256<float> y, Vector256<float> z)
+        public static Vector256<float> vfmadd(Vector256<float> x, Vector256<float> y, Vector256<float> z)
             => MultiplyAdd(x,y,z);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <param name="z">The third operand</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<double> fmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
+        public static Vector256<double> vfmadd(Vector256<double> x, Vector256<double> y, Vector256<double> z)
             => MultiplyAdd(x,y,z);
     }
 }

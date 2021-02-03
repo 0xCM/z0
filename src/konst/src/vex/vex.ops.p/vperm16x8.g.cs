@@ -10,9 +10,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Permutes 16 8-bit source vector segments
