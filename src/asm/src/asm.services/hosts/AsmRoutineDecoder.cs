@@ -136,7 +136,7 @@ namespace Z0.Asm
             }
         }
 
-        static AsmRoutine routine(ApiArtifactUri meta, OpUri uri, ClrDisplaySig sig, ApiBlockAsm src, bool check = false)
+        static AsmRoutine routine(ApiArtifactKey meta, OpUri uri, ClrDisplaySig sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
             var info = new AsmInstructionSummary[count];

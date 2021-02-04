@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface IAsmStatement
     {
-        AsmMnemonicExpr Mnemonic {get;}
+        AsmMnemonic Mnemonic {get;}
     }
 
     public interface IAsmStatement<A> : IAsmStatement

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Root;
 
     /// <summary>
     /// Identifies/describes a type that declares a formalized api set
@@ -23,7 +23,7 @@ namespace Z0
 
         public ApiHostUri Uri {get;}
 
-        public MethodInfo[] Methods {get;}
+        public Index<MethodInfo> Methods {get;}
 
         [MethodImpl(Inline)]
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)

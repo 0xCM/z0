@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static AsmExpr;
+
     [Record(TableId)]
     public struct AsmSpecifierRecord : IRecord<AsmSpecifierRecord>
     {
@@ -11,8 +13,8 @@ namespace Z0.Asm
 
         public uint Seq;
 
-        public AsmSigExpr Sig;
+        public AsmExpr.Signature Sig;
 
-        public AsmOpCodeExpr OpCode;
+        public OpCode OpCode;
     }
 }

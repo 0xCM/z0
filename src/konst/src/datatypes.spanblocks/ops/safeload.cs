@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     partial struct SpanBlocks
     {
         /// <summary>
@@ -81,7 +79,7 @@ namespace Z0
 
         public static SpanBlock32<T> safeload<T>(W32 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads 64-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -105,7 +103,7 @@ namespace Z0
 
         public static SpanBlock64<T> safeload<T>(W64 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads 128-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -129,7 +127,7 @@ namespace Z0
 
         public static SpanBlock128<T> safeload<T>(W128 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads 256-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -153,7 +151,7 @@ namespace Z0
 
         public static SpanBlock256<T> safeload<T>(W256 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads 512-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked
@@ -176,6 +174,6 @@ namespace Z0
 
         public static SpanBlock512<T> safeload<T>(W512 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
     }
 }

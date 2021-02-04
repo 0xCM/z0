@@ -19,7 +19,7 @@ namespace Z0
             var reader = State.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Spans.alloc<ClrFieldInfo>(count);
+            var dst = memory.span<ClrFieldInfo>(count);
 
             for(var i=0u; i<count; i++)
             {

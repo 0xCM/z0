@@ -8,10 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
-    using Iced = Iced.Intel;
     using static Asm.IceOpKind;
 
+    using Iced = Iced.Intel;
     using NI = NumericIndicator;
     using TI = TypeIndicator;
     using MZ = Asm.IceMemorySize;

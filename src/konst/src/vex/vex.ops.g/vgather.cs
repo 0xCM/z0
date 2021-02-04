@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct cpu
     {
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ushort> vgather(N128 w, in ushort src, Vector128<ushort> vidx)
-            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(vidx, w256)), 2), w128);
+            => vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate256x32u(vidx, w256)), 2), w128);
 
         /// <summary>
         /// Loads a 128x16i vector from index-identified source cells
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vgather(N128 w, in short src, Vector128<short> vidx)
-            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate32u(v16u(vidx), w256)),2), w128));
+            => v16i(vcompact16u(GatherVector256(memory.p32u(src), v32i(vinflate256x32u(v16u(vidx), w256)),2), w128));
 
         /// <summary>
         /// Loads a 128x8u vector from index-identified source cells
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<sbyte> vgather(N128 w, in sbyte src, Vector128<sbyte> vidx)
         {
-            (var v0, var v1) = vinflate32u(v8u(vidx), w512);
+            (var v0, var v1) = vinflate512x32u(v8u(vidx), w512);
             var x0 = GatherVector256(memory.p32u(src), v32i(v0),1);
             var x1 = GatherVector256(memory.p32u(src), v32i(v1),1);
             return v8i(vcompact8u(x0, x1, w128));
@@ -168,7 +168,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<byte> vgather(N128 w, in byte src, Vector128<byte> vidx)
         {
-            (var v0, var v1) = vinflate32u(vidx, w512);
+            (var v0, var v1) = vinflate512x32u(vidx, w512);
             var x0 = GatherVector256(memory.p32u(src), v32i(v0), 1);
             var x1 = GatherVector256(memory.p32u(src), v32i(v1), 1);
             return vcompact8u(x0, x1, w128);

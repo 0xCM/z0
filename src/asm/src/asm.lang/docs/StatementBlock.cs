@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         public readonly struct StatementBlock
         {
-            readonly Index<StatementSource> Data;
+            readonly Index<SourceCode> Data;
 
             [MethodImpl(Inline)]
-            public StatementBlock(StatementSource[] src)
+            public StatementBlock(SourceCode[] src)
                 => Data = src;
 
             public uint Count
@@ -26,26 +26,26 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator StatementBlock(StatementSource[] src)
+            public static implicit operator StatementBlock(SourceCode[] src)
                 => new StatementBlock(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator StatementSource[](StatementBlock src)
+            public static implicit operator SourceCode[](StatementBlock src)
                 => src.Data;
 
-            public ReadOnlySpan<StatementSource> View
+            public ReadOnlySpan<SourceCode> View
             {
                 [MethodImpl(Inline)]
                 get => Data.View;
             }
 
-            public Span<StatementSource> Edit
+            public Span<SourceCode> Edit
             {
                 [MethodImpl(Inline)]
                 get => Data.Edit;
             }
 
-            public ref StatementSource First
+            public ref SourceCode First
             {
                 [MethodImpl(Inline)]
                 get => ref Data.First;

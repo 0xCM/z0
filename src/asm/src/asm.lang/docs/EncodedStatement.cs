@@ -15,8 +15,8 @@ namespace Z0.Asm
         {
             public BinaryCode Content {get;}
 
-            public PartKind Kind
-                => PartKind.StatementEncoding;
+            public AsmDocPartKind Kind
+                => AsmDocPartKind.StatementEncoding;
 
             [MethodImpl(Inline)]
             public EncodedStatement(byte[] data)

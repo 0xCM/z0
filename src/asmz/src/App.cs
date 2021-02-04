@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static memory;
     using static TextRules;
+    using static AsmExpr;
 
     class App : WfService<App,App>
     {
@@ -35,6 +36,26 @@ namespace Z0.Asm
         {
             var tokens = AsmExpr.SigOpTokens();
             root.iter(tokens, item => Wf.Row(item.Format()));
+        }
+
+
+        void Jit()
+        {
+            var jitter = ApiServices.create(Wf).ApiJit();
+            var dst = Db.IndexFile(ApiAddressRecord.TableId);
+            var members = jitter.JitApi(dst);
+        }
+
+        void EmitApiClasses()
+        {
+            var dst = Db.IndexTable("api.classes");
+            var flow = Wf.EmittingTable<EnumLiteral>(dst);
+            var service = ApiCatalogs.classes(Wf);
+            var formatter = Records.formatter<EnumLiteral>();
+            var classifiers = service.Classifiers();
+            var literals = classifiers.SelectMany(x => x.Literals);
+            var count = Records.emit(literals,dst);
+            Wf.EmittedTable(flow, count);
         }
 
         void CreateLookup()
@@ -81,7 +102,7 @@ namespace Z0.Asm
             Etl.Emit(specifiers);
         }
 
-        void ParseSpec(AsmSpecifierExpr src)
+        void ParseSpec(OperationSpec src)
         {
             var sig = src.Sig;
             TextBuffer.Clear();
@@ -89,7 +110,7 @@ namespace Z0.Asm
             if(AsmParser.Mnemonic(sig, out var monic))
             {
                 TextBuffer.AppendFormat(" | {0,-16}", monic);
-                if(Parse.after(sig.Content, monic.Content, out var remainder))
+                if(Parse.after(sig.Content, monic.Name, out var remainder))
                 {
                     var operands = AsmParser.Operands(remainder).View;
                     var count = operands.Length;
@@ -125,7 +146,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ParseSigs();
+            EmitApiClasses();
 
         }
 

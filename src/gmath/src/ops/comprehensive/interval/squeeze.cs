@@ -53,7 +53,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = (uint)root.length(src,max);
-            var dst = Spans.alloc<T>(count);
+            var dst = memory.span<T>(count);
             squeeze<T>(first(src), first(max), ref first(dst), count);
             return dst;
         }

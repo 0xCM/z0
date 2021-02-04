@@ -19,62 +19,6 @@ namespace Z0
 
     partial struct cpu
     {
-        /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<long> src, W64 wDst)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
-        /// src[0..31] -> r64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<float> src, W64 wDst)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        ///  __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
-        /// src[0..63] -> r64
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static long vconvert64i(Vector128<double> src, W64 wDst)
-            => ConvertToInt64(src);
-
-        /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static int convert32i(Vector128<int> src, W32 wDst)
-            => ConvertToInt32(src);
-
-        /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static uint convert32u(Vector128<uint> src, W32 wDst)
-            => ConvertToUInt32(src);
-
-        /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="wDst">The target width</param>
-        [MethodImpl(Inline), Op]
-        public static ulong convert64u(Vector128<ulong> src, W64 wDst)
-            => ConvertToUInt64(src);
 
         /// <summary>
         /// VPMOVZXBD ymm, m64
@@ -127,17 +71,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vconvert32u(W64 wSrc, in ulong src, W256 wDst)
             => v32u(ConvertToVector256Int32(gptr(u8(src))));
-
-        /// <summary>
-        /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
-        /// src[0..31] -> r32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width</param>
-        /// <param name="t">A target type representative</param>
-        [MethodImpl(Inline), Op]
-        public static int convert32i(Vector128<float> src, W32 w)
-            => ConvertToInt32(src);
 
         /// <summary>
         /// __m128i _mm_cvttps_epi32 (__m128 a) CVTTPS2DQ xmm, xmm/m128

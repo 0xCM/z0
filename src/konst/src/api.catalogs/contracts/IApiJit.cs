@@ -18,7 +18,7 @@ namespace Z0
 
         ApiMembers Jit(IApiHost src);
 
-        ApiMember[] Jit(Index<ApiTypeInfo> src);
+        ApiMember[] Jit(Index<ApiRuntimeType> src);
 
         Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst);
     }

@@ -8,21 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines an homogenous api dependency
     /// </summary>
     public readonly struct ApiDependency<T>
     {
-        public static implicit operator Link<T>(ApiDependency<T> src)
-            => src.Arrow;
-
         readonly Pair<T> Data;
 
         [MethodImpl(Inline)]
         public ApiDependency(T src, T dst)
-            => Data = pair(src,dst);
+            => Data = root.pair(src,dst);
 
         public T Source
         {

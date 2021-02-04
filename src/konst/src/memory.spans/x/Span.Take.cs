@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static z;
+    using static Part;
+    using static memory;
     using static Spans;
 
     partial class XSpan
@@ -63,11 +63,11 @@ namespace Z0
             where T : unmanaged
         {
             var storage = 0u;
-            ref var dst = ref z.@as<uint,byte>(storage);
-            ref readonly var src8 = ref z.first(w8, src);
-            seek(dst,0) = skip(src8,0);
-            seek(dst,1) = skip(src8,1);
-            seek(dst,2) = skip(src8,2);
+            ref var dst = ref @as<uint,byte>(storage);
+            ref readonly var src8 = ref first(w8, src);
+            seek(dst, 0) = skip(src8, 0);
+            seek(dst, 1) = skip(src8, 1);
+            seek(dst, 2) = skip(src8, 2);
             return storage;
         }
 

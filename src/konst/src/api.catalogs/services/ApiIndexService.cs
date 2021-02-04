@@ -9,7 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static z;
+    using static memory;
+
+    using api = ApiIndex;
 
     [Service(typeof(IApiIndex))]
     class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
@@ -58,8 +60,7 @@ namespace Z0
             Wf.Status(IndexStatus.Format());
             Product = Freeze();
 
-            var metrics = ApiIndexMetrics.from(Product);
-            Wf.Status(metrics);
+            Wf.Status(api.metrics(Product));
             return Product;
         }
 

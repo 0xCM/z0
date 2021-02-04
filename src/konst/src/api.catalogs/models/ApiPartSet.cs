@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     /// <summary>
-    /// Associates a collection of components along with a<see cref = 'ISystemApiCatalog'/>
+    /// Associates a collection of components along with a<see cref = 'IGlobalApiCatalog'/>
     /// </summary>
     public readonly struct ApiPartSet : IApiParts
     {
@@ -26,7 +26,7 @@ namespace Z0
 
         public Assembly[] PartComponents {get;}
 
-        public ISystemApiCatalog Api {get;}
+        public IGlobalApiCatalog ApiGlobal {get;}
 
         public ApiPartSet(Assembly control, FS.FolderPath src)
         {
@@ -34,7 +34,7 @@ namespace Z0
             Source = src;
             ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             PartComponents = ApiQuery.components(ManagedSources);
-            Api = ApiCatalogs.create(ManagedSources);
+            ApiGlobal = ApiCatalogs.create(ManagedSources);
         }
 
         public ApiPartSet(Assembly control, PartId[] parts)
@@ -42,8 +42,8 @@ namespace Z0
             Control = control;
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Api = ApiCatalogs.siblings(control, parts);
-            PartComponents = Api.PartComponents;
+            ApiGlobal = ApiCatalogs.siblings(control, parts);
+            PartComponents = ApiGlobal.PartComponents;
         }
 
         public ApiPartSet(Assembly control)
@@ -51,8 +51,8 @@ namespace Z0
             Control = control;
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Api =  ApiCatalogs.create(ManagedSources);
-            PartComponents = Api.PartComponents;
+            ApiGlobal =  ApiCatalogs.create(ManagedSources);
+            PartComponents = ApiGlobal.PartComponents;
         }
     }
 }

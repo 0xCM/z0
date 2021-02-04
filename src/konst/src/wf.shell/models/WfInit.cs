@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Captures workflow configuration data
     /// </summary>
-    public struct WfInit : IWfInit
+    struct WfInit : IWfInit
     {
         /// <summary>
         /// The entry assembly
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         public IApiParts ApiParts {get;}
 
-        public ISystemApiCatalog Api {get;}
+        public IGlobalApiCatalog ApiGlobal {get;}
 
         public FS.FolderPath DbRoot {get;}
 
@@ -56,7 +56,7 @@ namespace Z0
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;
-            Api = ctx.ApiParts.Api;
+            ApiGlobal = ctx.ApiParts.ApiGlobal;
             ControlId = ctx.Controller.Id;
             LogConfig = logConfig;
             PartIdentities = parts;

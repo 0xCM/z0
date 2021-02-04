@@ -17,7 +17,7 @@ namespace Z0
         string[] Args {get;}
 
         CorrelationToken Ct
-            => z.correlate(Controller.Id);
+            => root.correlate(Controller.Id);
 
         string AppName
             => Controller.Name;

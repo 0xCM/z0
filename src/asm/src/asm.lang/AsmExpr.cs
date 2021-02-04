@@ -18,16 +18,16 @@ namespace Z0.Asm
             => AsmExprParser.create(wf);
 
         [MethodImpl(Inline), Op]
-        public static AsmMnemonicExpr mnemonic(string src)
-            => new AsmMnemonicExpr(src);
+        public static AsmMnemonic mnemonic(string src)
+            => new AsmMnemonic(src);
 
         /// <summary>
-        /// Defines a <see cref='AsmSigOpExpr'/>
+        /// Defines a <see cref='SigOperand'/>
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOpExpr sigop(string src)
-            => new AsmSigOpExpr(src);
+        public static SigOperand sigop(string src)
+            => new SigOperand(src);
 
         /// <summary>
         /// Defines a <see cref='AsmSigOpToken'/>
@@ -60,7 +60,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Defines a <see cref='AsmOpCodeExpr'/>
+        /// Defines a <see cref='OpCode'/>
         /// </summary>
         /// <param name="src">The source text</param>
         /// <remarks>
@@ -71,8 +71,8 @@ namespace Z0.Asm
         /// REX+ 20 /r
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpr opcode(string src)
-            => new AsmOpCodeExpr(src);
+        public static OpCode opcode(string src)
+            => new OpCode(src);
 
         /// <summary>
         /// Defines a signature expression
@@ -87,11 +87,11 @@ namespace Z0.Asm
         /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
         /// <remarks>
         [MethodImpl(Inline), Op]
-        public static AsmSigExpr sig(string src)
-            => new AsmSigExpr(src);
+        public static Signature sig(string src)
+            => new Signature(src);
 
         [MethodImpl(Inline), Op]
-        public static AsmSpecifierExpr specifier(ushort seq, AsmOpCodeExpr op, AsmSigExpr sig)
-            => new AsmSpecifierExpr(seq, op,sig);
+        public static OperationSpec specifier(ushort seq, OpCode op, Signature sig)
+            => new OperationSpec(seq, op,sig);
     }
 }

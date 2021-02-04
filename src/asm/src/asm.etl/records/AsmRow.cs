@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmExpr;
 
     public enum AsmRowField : uint
     {
@@ -55,7 +56,7 @@ namespace Z0.Asm
 
 		public AsmOpCodeExprLegacy OpCode;
 
-        public AsmSigExpr Instruction;
+        public Signature Instruction;
 
         public asci64 Statement;
 

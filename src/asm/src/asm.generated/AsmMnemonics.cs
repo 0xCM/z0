@@ -6,1802 +6,1802 @@ namespace Z0.Asm
 {
     public readonly struct AsmMnemonics
     {
-        public static AsmMnemonicExpr AAD => nameof(AAD);
+        public static AsmMnemonic AAD => nameof(AAD);
 
-        public static AsmMnemonicExpr AAM => nameof(AAM);
+        public static AsmMnemonic AAM => nameof(AAM);
 
-        public static AsmMnemonicExpr ADC => nameof(ADC);
+        public static AsmMnemonic ADC => nameof(ADC);
 
-        public static AsmMnemonicExpr ADD => nameof(ADD);
+        public static AsmMnemonic ADD => nameof(ADD);
 
-        public static AsmMnemonicExpr ADDPD => nameof(ADDPD);
+        public static AsmMnemonic ADDPD => nameof(ADDPD);
 
-        public static AsmMnemonicExpr VADDPD => nameof(VADDPD);
+        public static AsmMnemonic VADDPD => nameof(VADDPD);
 
-        public static AsmMnemonicExpr ADDPS => nameof(ADDPS);
+        public static AsmMnemonic ADDPS => nameof(ADDPS);
 
-        public static AsmMnemonicExpr VADDPS => nameof(VADDPS);
+        public static AsmMnemonic VADDPS => nameof(VADDPS);
 
-        public static AsmMnemonicExpr ADDSD => nameof(ADDSD);
+        public static AsmMnemonic ADDSD => nameof(ADDSD);
 
-        public static AsmMnemonicExpr VADDSD => nameof(VADDSD);
+        public static AsmMnemonic VADDSD => nameof(VADDSD);
 
-        public static AsmMnemonicExpr ADDSS => nameof(ADDSS);
+        public static AsmMnemonic ADDSS => nameof(ADDSS);
 
-        public static AsmMnemonicExpr VADDSS => nameof(VADDSS);
+        public static AsmMnemonic VADDSS => nameof(VADDSS);
 
-        public static AsmMnemonicExpr ADDSUBPD => nameof(ADDSUBPD);
+        public static AsmMnemonic ADDSUBPD => nameof(ADDSUBPD);
 
-        public static AsmMnemonicExpr VADDSUBPD => nameof(VADDSUBPD);
+        public static AsmMnemonic VADDSUBPD => nameof(VADDSUBPD);
 
-        public static AsmMnemonicExpr ADDSUBPS => nameof(ADDSUBPS);
+        public static AsmMnemonic ADDSUBPS => nameof(ADDSUBPS);
 
-        public static AsmMnemonicExpr VADDSUBPS => nameof(VADDSUBPS);
+        public static AsmMnemonic VADDSUBPS => nameof(VADDSUBPS);
 
-        public static AsmMnemonicExpr AESDEC => nameof(AESDEC);
+        public static AsmMnemonic AESDEC => nameof(AESDEC);
 
-        public static AsmMnemonicExpr VAESDEC => nameof(VAESDEC);
+        public static AsmMnemonic VAESDEC => nameof(VAESDEC);
 
-        public static AsmMnemonicExpr AESDECLAST => nameof(AESDECLAST);
+        public static AsmMnemonic AESDECLAST => nameof(AESDECLAST);
 
-        public static AsmMnemonicExpr VAESDECLAST => nameof(VAESDECLAST);
+        public static AsmMnemonic VAESDECLAST => nameof(VAESDECLAST);
 
-        public static AsmMnemonicExpr AESENC => nameof(AESENC);
+        public static AsmMnemonic AESENC => nameof(AESENC);
 
-        public static AsmMnemonicExpr VAESENC => nameof(VAESENC);
+        public static AsmMnemonic VAESENC => nameof(VAESENC);
 
-        public static AsmMnemonicExpr AESENCLAST => nameof(AESENCLAST);
+        public static AsmMnemonic AESENCLAST => nameof(AESENCLAST);
 
-        public static AsmMnemonicExpr VAESENCLAST => nameof(VAESENCLAST);
+        public static AsmMnemonic VAESENCLAST => nameof(VAESENCLAST);
 
-        public static AsmMnemonicExpr AESIMC => nameof(AESIMC);
+        public static AsmMnemonic AESIMC => nameof(AESIMC);
 
-        public static AsmMnemonicExpr VAESIMC => nameof(VAESIMC);
+        public static AsmMnemonic VAESIMC => nameof(VAESIMC);
 
-        public static AsmMnemonicExpr AESKEYGENASSIST => nameof(AESKEYGENASSIST);
+        public static AsmMnemonic AESKEYGENASSIST => nameof(AESKEYGENASSIST);
 
-        public static AsmMnemonicExpr VAESKEYGENASSIST => nameof(VAESKEYGENASSIST);
+        public static AsmMnemonic VAESKEYGENASSIST => nameof(VAESKEYGENASSIST);
 
-        public static AsmMnemonicExpr AND => nameof(AND);
+        public static AsmMnemonic AND => nameof(AND);
 
-        public static AsmMnemonicExpr ANDN => nameof(ANDN);
+        public static AsmMnemonic ANDN => nameof(ANDN);
 
-        public static AsmMnemonicExpr ANDPD => nameof(ANDPD);
+        public static AsmMnemonic ANDPD => nameof(ANDPD);
 
-        public static AsmMnemonicExpr VANDPD => nameof(VANDPD);
+        public static AsmMnemonic VANDPD => nameof(VANDPD);
 
-        public static AsmMnemonicExpr ANDPS => nameof(ANDPS);
+        public static AsmMnemonic ANDPS => nameof(ANDPS);
 
-        public static AsmMnemonicExpr VANDPS => nameof(VANDPS);
+        public static AsmMnemonic VANDPS => nameof(VANDPS);
 
-        public static AsmMnemonicExpr ANDNPD => nameof(ANDNPD);
+        public static AsmMnemonic ANDNPD => nameof(ANDNPD);
 
-        public static AsmMnemonicExpr VANDNPD => nameof(VANDNPD);
+        public static AsmMnemonic VANDNPD => nameof(VANDNPD);
 
-        public static AsmMnemonicExpr ANDNPS => nameof(ANDNPS);
+        public static AsmMnemonic ANDNPS => nameof(ANDNPS);
 
-        public static AsmMnemonicExpr VANDNPS => nameof(VANDNPS);
+        public static AsmMnemonic VANDNPS => nameof(VANDNPS);
 
-        public static AsmMnemonicExpr ARPL => nameof(ARPL);
+        public static AsmMnemonic ARPL => nameof(ARPL);
 
-        public static AsmMnemonicExpr BLENDPD => nameof(BLENDPD);
+        public static AsmMnemonic BLENDPD => nameof(BLENDPD);
 
-        public static AsmMnemonicExpr VBLENDPD => nameof(VBLENDPD);
+        public static AsmMnemonic VBLENDPD => nameof(VBLENDPD);
 
-        public static AsmMnemonicExpr BEXTR => nameof(BEXTR);
+        public static AsmMnemonic BEXTR => nameof(BEXTR);
 
-        public static AsmMnemonicExpr BLENDPS => nameof(BLENDPS);
+        public static AsmMnemonic BLENDPS => nameof(BLENDPS);
 
-        public static AsmMnemonicExpr VBLENDPS => nameof(VBLENDPS);
+        public static AsmMnemonic VBLENDPS => nameof(VBLENDPS);
 
-        public static AsmMnemonicExpr BLENDVPD => nameof(BLENDVPD);
+        public static AsmMnemonic BLENDVPD => nameof(BLENDVPD);
 
-        public static AsmMnemonicExpr VBLENDVPD => nameof(VBLENDVPD);
+        public static AsmMnemonic VBLENDVPD => nameof(VBLENDVPD);
 
-        public static AsmMnemonicExpr BLENDVPS => nameof(BLENDVPS);
+        public static AsmMnemonic BLENDVPS => nameof(BLENDVPS);
 
-        public static AsmMnemonicExpr VBLENDVPS => nameof(VBLENDVPS);
+        public static AsmMnemonic VBLENDVPS => nameof(VBLENDVPS);
 
-        public static AsmMnemonicExpr BLSI => nameof(BLSI);
+        public static AsmMnemonic BLSI => nameof(BLSI);
 
-        public static AsmMnemonicExpr BLSMSK => nameof(BLSMSK);
+        public static AsmMnemonic BLSMSK => nameof(BLSMSK);
 
-        public static AsmMnemonicExpr BLSR => nameof(BLSR);
+        public static AsmMnemonic BLSR => nameof(BLSR);
 
-        public static AsmMnemonicExpr BOUND => nameof(BOUND);
+        public static AsmMnemonic BOUND => nameof(BOUND);
 
-        public static AsmMnemonicExpr BSF => nameof(BSF);
+        public static AsmMnemonic BSF => nameof(BSF);
 
-        public static AsmMnemonicExpr BSR => nameof(BSR);
+        public static AsmMnemonic BSR => nameof(BSR);
 
-        public static AsmMnemonicExpr BSWAP => nameof(BSWAP);
+        public static AsmMnemonic BSWAP => nameof(BSWAP);
 
-        public static AsmMnemonicExpr BT => nameof(BT);
+        public static AsmMnemonic BT => nameof(BT);
 
-        public static AsmMnemonicExpr BTC => nameof(BTC);
+        public static AsmMnemonic BTC => nameof(BTC);
 
-        public static AsmMnemonicExpr BTR => nameof(BTR);
+        public static AsmMnemonic BTR => nameof(BTR);
 
-        public static AsmMnemonicExpr BTS => nameof(BTS);
+        public static AsmMnemonic BTS => nameof(BTS);
 
-        public static AsmMnemonicExpr BZHI => nameof(BZHI);
+        public static AsmMnemonic BZHI => nameof(BZHI);
 
-        public static AsmMnemonicExpr CALL => nameof(CALL);
+        public static AsmMnemonic CALL => nameof(CALL);
 
-        public static AsmMnemonicExpr CLFLUSH => nameof(CLFLUSH);
+        public static AsmMnemonic CLFLUSH => nameof(CLFLUSH);
 
-        public static AsmMnemonicExpr CMOVA => nameof(CMOVA);
+        public static AsmMnemonic CMOVA => nameof(CMOVA);
 
-        public static AsmMnemonicExpr CMOVAE => nameof(CMOVAE);
+        public static AsmMnemonic CMOVAE => nameof(CMOVAE);
 
-        public static AsmMnemonicExpr CMOVB => nameof(CMOVB);
+        public static AsmMnemonic CMOVB => nameof(CMOVB);
 
-        public static AsmMnemonicExpr CMOVBE => nameof(CMOVBE);
+        public static AsmMnemonic CMOVBE => nameof(CMOVBE);
 
-        public static AsmMnemonicExpr CMOVC => nameof(CMOVC);
+        public static AsmMnemonic CMOVC => nameof(CMOVC);
 
-        public static AsmMnemonicExpr CMOVE => nameof(CMOVE);
+        public static AsmMnemonic CMOVE => nameof(CMOVE);
 
-        public static AsmMnemonicExpr CMOVG => nameof(CMOVG);
+        public static AsmMnemonic CMOVG => nameof(CMOVG);
 
-        public static AsmMnemonicExpr CMOVGE => nameof(CMOVGE);
+        public static AsmMnemonic CMOVGE => nameof(CMOVGE);
 
-        public static AsmMnemonicExpr CMOVL => nameof(CMOVL);
+        public static AsmMnemonic CMOVL => nameof(CMOVL);
 
-        public static AsmMnemonicExpr CMOVLE => nameof(CMOVLE);
+        public static AsmMnemonic CMOVLE => nameof(CMOVLE);
 
-        public static AsmMnemonicExpr CMOVNA => nameof(CMOVNA);
+        public static AsmMnemonic CMOVNA => nameof(CMOVNA);
 
-        public static AsmMnemonicExpr CMOVNAE => nameof(CMOVNAE);
+        public static AsmMnemonic CMOVNAE => nameof(CMOVNAE);
 
-        public static AsmMnemonicExpr CMOVNB => nameof(CMOVNB);
+        public static AsmMnemonic CMOVNB => nameof(CMOVNB);
 
-        public static AsmMnemonicExpr CMOVNBE => nameof(CMOVNBE);
+        public static AsmMnemonic CMOVNBE => nameof(CMOVNBE);
 
-        public static AsmMnemonicExpr CMOVNC => nameof(CMOVNC);
+        public static AsmMnemonic CMOVNC => nameof(CMOVNC);
 
-        public static AsmMnemonicExpr CMOVNE => nameof(CMOVNE);
+        public static AsmMnemonic CMOVNE => nameof(CMOVNE);
 
-        public static AsmMnemonicExpr CMOVNG => nameof(CMOVNG);
+        public static AsmMnemonic CMOVNG => nameof(CMOVNG);
 
-        public static AsmMnemonicExpr CMOVNGE => nameof(CMOVNGE);
+        public static AsmMnemonic CMOVNGE => nameof(CMOVNGE);
 
-        public static AsmMnemonicExpr CMOVNL => nameof(CMOVNL);
+        public static AsmMnemonic CMOVNL => nameof(CMOVNL);
 
-        public static AsmMnemonicExpr CMOVNLE => nameof(CMOVNLE);
+        public static AsmMnemonic CMOVNLE => nameof(CMOVNLE);
 
-        public static AsmMnemonicExpr CMOVNO => nameof(CMOVNO);
+        public static AsmMnemonic CMOVNO => nameof(CMOVNO);
 
-        public static AsmMnemonicExpr CMOVNP => nameof(CMOVNP);
+        public static AsmMnemonic CMOVNP => nameof(CMOVNP);
 
-        public static AsmMnemonicExpr CMOVNS => nameof(CMOVNS);
+        public static AsmMnemonic CMOVNS => nameof(CMOVNS);
 
-        public static AsmMnemonicExpr CMOVNZ => nameof(CMOVNZ);
+        public static AsmMnemonic CMOVNZ => nameof(CMOVNZ);
 
-        public static AsmMnemonicExpr CMOVO => nameof(CMOVO);
+        public static AsmMnemonic CMOVO => nameof(CMOVO);
 
-        public static AsmMnemonicExpr CMOVP => nameof(CMOVP);
+        public static AsmMnemonic CMOVP => nameof(CMOVP);
 
-        public static AsmMnemonicExpr CMOVPE => nameof(CMOVPE);
+        public static AsmMnemonic CMOVPE => nameof(CMOVPE);
 
-        public static AsmMnemonicExpr CMOVPO => nameof(CMOVPO);
+        public static AsmMnemonic CMOVPO => nameof(CMOVPO);
 
-        public static AsmMnemonicExpr CMOVS => nameof(CMOVS);
+        public static AsmMnemonic CMOVS => nameof(CMOVS);
 
-        public static AsmMnemonicExpr CMOVZ => nameof(CMOVZ);
+        public static AsmMnemonic CMOVZ => nameof(CMOVZ);
 
-        public static AsmMnemonicExpr CMP => nameof(CMP);
+        public static AsmMnemonic CMP => nameof(CMP);
 
-        public static AsmMnemonicExpr CMPPD => nameof(CMPPD);
+        public static AsmMnemonic CMPPD => nameof(CMPPD);
 
-        public static AsmMnemonicExpr VCMPPD => nameof(VCMPPD);
+        public static AsmMnemonic VCMPPD => nameof(VCMPPD);
 
-        public static AsmMnemonicExpr CMPPS => nameof(CMPPS);
+        public static AsmMnemonic CMPPS => nameof(CMPPS);
 
-        public static AsmMnemonicExpr VCMPPS => nameof(VCMPPS);
+        public static AsmMnemonic VCMPPS => nameof(VCMPPS);
 
-        public static AsmMnemonicExpr CMPS => nameof(CMPS);
+        public static AsmMnemonic CMPS => nameof(CMPS);
 
-        public static AsmMnemonicExpr CMPSD => nameof(CMPSD);
+        public static AsmMnemonic CMPSD => nameof(CMPSD);
 
-        public static AsmMnemonicExpr VCMPSD => nameof(VCMPSD);
+        public static AsmMnemonic VCMPSD => nameof(VCMPSD);
 
-        public static AsmMnemonicExpr CMPSS => nameof(CMPSS);
+        public static AsmMnemonic CMPSS => nameof(CMPSS);
 
-        public static AsmMnemonicExpr VCMPSS => nameof(VCMPSS);
+        public static AsmMnemonic VCMPSS => nameof(VCMPSS);
 
-        public static AsmMnemonicExpr CMPXCHG => nameof(CMPXCHG);
+        public static AsmMnemonic CMPXCHG => nameof(CMPXCHG);
 
-        public static AsmMnemonicExpr CMPXCHG8B => nameof(CMPXCHG8B);
+        public static AsmMnemonic CMPXCHG8B => nameof(CMPXCHG8B);
 
-        public static AsmMnemonicExpr CMPXCHG16B => nameof(CMPXCHG16B);
+        public static AsmMnemonic CMPXCHG16B => nameof(CMPXCHG16B);
 
-        public static AsmMnemonicExpr COMISD => nameof(COMISD);
+        public static AsmMnemonic COMISD => nameof(COMISD);
 
-        public static AsmMnemonicExpr VCOMISD => nameof(VCOMISD);
+        public static AsmMnemonic VCOMISD => nameof(VCOMISD);
 
-        public static AsmMnemonicExpr COMISS => nameof(COMISS);
+        public static AsmMnemonic COMISS => nameof(COMISS);
 
-        public static AsmMnemonicExpr VCOMISS => nameof(VCOMISS);
+        public static AsmMnemonic VCOMISS => nameof(VCOMISS);
 
-        public static AsmMnemonicExpr CRC32 => nameof(CRC32);
+        public static AsmMnemonic CRC32 => nameof(CRC32);
 
-        public static AsmMnemonicExpr CVTDQ2PD => nameof(CVTDQ2PD);
+        public static AsmMnemonic CVTDQ2PD => nameof(CVTDQ2PD);
 
-        public static AsmMnemonicExpr VCVTDQ2PD => nameof(VCVTDQ2PD);
+        public static AsmMnemonic VCVTDQ2PD => nameof(VCVTDQ2PD);
 
-        public static AsmMnemonicExpr CVTDQ2PS => nameof(CVTDQ2PS);
+        public static AsmMnemonic CVTDQ2PS => nameof(CVTDQ2PS);
 
-        public static AsmMnemonicExpr VCVTDQ2PS => nameof(VCVTDQ2PS);
+        public static AsmMnemonic VCVTDQ2PS => nameof(VCVTDQ2PS);
 
-        public static AsmMnemonicExpr CVTPD2DQ => nameof(CVTPD2DQ);
+        public static AsmMnemonic CVTPD2DQ => nameof(CVTPD2DQ);
 
-        public static AsmMnemonicExpr VCVTPD2DQ => nameof(VCVTPD2DQ);
+        public static AsmMnemonic VCVTPD2DQ => nameof(VCVTPD2DQ);
 
-        public static AsmMnemonicExpr CVTPD2PI => nameof(CVTPD2PI);
+        public static AsmMnemonic CVTPD2PI => nameof(CVTPD2PI);
 
-        public static AsmMnemonicExpr CVTPD2PS => nameof(CVTPD2PS);
+        public static AsmMnemonic CVTPD2PS => nameof(CVTPD2PS);
 
-        public static AsmMnemonicExpr VCVTPD2PS => nameof(VCVTPD2PS);
+        public static AsmMnemonic VCVTPD2PS => nameof(VCVTPD2PS);
 
-        public static AsmMnemonicExpr CVTPI2PD => nameof(CVTPI2PD);
+        public static AsmMnemonic CVTPI2PD => nameof(CVTPI2PD);
 
-        public static AsmMnemonicExpr CVTPI2PS => nameof(CVTPI2PS);
+        public static AsmMnemonic CVTPI2PS => nameof(CVTPI2PS);
 
-        public static AsmMnemonicExpr CVTPS2DQ => nameof(CVTPS2DQ);
+        public static AsmMnemonic CVTPS2DQ => nameof(CVTPS2DQ);
 
-        public static AsmMnemonicExpr VCVTPS2DQ => nameof(VCVTPS2DQ);
+        public static AsmMnemonic VCVTPS2DQ => nameof(VCVTPS2DQ);
 
-        public static AsmMnemonicExpr CVTPS2PD => nameof(CVTPS2PD);
+        public static AsmMnemonic CVTPS2PD => nameof(CVTPS2PD);
 
-        public static AsmMnemonicExpr VCVTPS2PD => nameof(VCVTPS2PD);
+        public static AsmMnemonic VCVTPS2PD => nameof(VCVTPS2PD);
 
-        public static AsmMnemonicExpr CVTPS2PI => nameof(CVTPS2PI);
+        public static AsmMnemonic CVTPS2PI => nameof(CVTPS2PI);
 
-        public static AsmMnemonicExpr CVTSD2SI => nameof(CVTSD2SI);
+        public static AsmMnemonic CVTSD2SI => nameof(CVTSD2SI);
 
-        public static AsmMnemonicExpr VCVTSD2SI => nameof(VCVTSD2SI);
+        public static AsmMnemonic VCVTSD2SI => nameof(VCVTSD2SI);
 
-        public static AsmMnemonicExpr CVTSD2SS => nameof(CVTSD2SS);
+        public static AsmMnemonic CVTSD2SS => nameof(CVTSD2SS);
 
-        public static AsmMnemonicExpr VCVTSD2SS => nameof(VCVTSD2SS);
+        public static AsmMnemonic VCVTSD2SS => nameof(VCVTSD2SS);
 
-        public static AsmMnemonicExpr CVTSI2SD => nameof(CVTSI2SD);
+        public static AsmMnemonic CVTSI2SD => nameof(CVTSI2SD);
 
-        public static AsmMnemonicExpr VCVTSI2SD => nameof(VCVTSI2SD);
+        public static AsmMnemonic VCVTSI2SD => nameof(VCVTSI2SD);
 
-        public static AsmMnemonicExpr CVTSI2SS => nameof(CVTSI2SS);
+        public static AsmMnemonic CVTSI2SS => nameof(CVTSI2SS);
 
-        public static AsmMnemonicExpr VCVTSI2SS => nameof(VCVTSI2SS);
+        public static AsmMnemonic VCVTSI2SS => nameof(VCVTSI2SS);
 
-        public static AsmMnemonicExpr CVTSS2SD => nameof(CVTSS2SD);
+        public static AsmMnemonic CVTSS2SD => nameof(CVTSS2SD);
 
-        public static AsmMnemonicExpr VCVTSS2SD => nameof(VCVTSS2SD);
+        public static AsmMnemonic VCVTSS2SD => nameof(VCVTSS2SD);
 
-        public static AsmMnemonicExpr CVTSS2SI => nameof(CVTSS2SI);
+        public static AsmMnemonic CVTSS2SI => nameof(CVTSS2SI);
 
-        public static AsmMnemonicExpr VCVTSS2SI => nameof(VCVTSS2SI);
+        public static AsmMnemonic VCVTSS2SI => nameof(VCVTSS2SI);
 
-        public static AsmMnemonicExpr CVTTPD2DQ => nameof(CVTTPD2DQ);
+        public static AsmMnemonic CVTTPD2DQ => nameof(CVTTPD2DQ);
 
-        public static AsmMnemonicExpr VCVTTPD2DQ => nameof(VCVTTPD2DQ);
+        public static AsmMnemonic VCVTTPD2DQ => nameof(VCVTTPD2DQ);
 
-        public static AsmMnemonicExpr CVTTPD2PI => nameof(CVTTPD2PI);
+        public static AsmMnemonic CVTTPD2PI => nameof(CVTTPD2PI);
 
-        public static AsmMnemonicExpr CVTTPS2DQ => nameof(CVTTPS2DQ);
+        public static AsmMnemonic CVTTPS2DQ => nameof(CVTTPS2DQ);
 
-        public static AsmMnemonicExpr VCVTTPS2DQ => nameof(VCVTTPS2DQ);
+        public static AsmMnemonic VCVTTPS2DQ => nameof(VCVTTPS2DQ);
 
-        public static AsmMnemonicExpr CVTTPS2PI => nameof(CVTTPS2PI);
+        public static AsmMnemonic CVTTPS2PI => nameof(CVTTPS2PI);
 
-        public static AsmMnemonicExpr CVTTSD2SI => nameof(CVTTSD2SI);
+        public static AsmMnemonic CVTTSD2SI => nameof(CVTTSD2SI);
 
-        public static AsmMnemonicExpr VCVTTSD2SI => nameof(VCVTTSD2SI);
+        public static AsmMnemonic VCVTTSD2SI => nameof(VCVTTSD2SI);
 
-        public static AsmMnemonicExpr CVTTSS2SI => nameof(CVTTSS2SI);
+        public static AsmMnemonic CVTTSS2SI => nameof(CVTTSS2SI);
 
-        public static AsmMnemonicExpr VCVTTSS2SI => nameof(VCVTTSS2SI);
+        public static AsmMnemonic VCVTTSS2SI => nameof(VCVTTSS2SI);
 
-        public static AsmMnemonicExpr DEC => nameof(DEC);
+        public static AsmMnemonic DEC => nameof(DEC);
 
-        public static AsmMnemonicExpr DIV => nameof(DIV);
+        public static AsmMnemonic DIV => nameof(DIV);
 
-        public static AsmMnemonicExpr DIVPD => nameof(DIVPD);
+        public static AsmMnemonic DIVPD => nameof(DIVPD);
 
-        public static AsmMnemonicExpr VDIVPD => nameof(VDIVPD);
+        public static AsmMnemonic VDIVPD => nameof(VDIVPD);
 
-        public static AsmMnemonicExpr DIVPS => nameof(DIVPS);
+        public static AsmMnemonic DIVPS => nameof(DIVPS);
 
-        public static AsmMnemonicExpr VDIVPS => nameof(VDIVPS);
+        public static AsmMnemonic VDIVPS => nameof(VDIVPS);
 
-        public static AsmMnemonicExpr DIVSD => nameof(DIVSD);
+        public static AsmMnemonic DIVSD => nameof(DIVSD);
 
-        public static AsmMnemonicExpr VDIVSD => nameof(VDIVSD);
+        public static AsmMnemonic VDIVSD => nameof(VDIVSD);
 
-        public static AsmMnemonicExpr DIVSS => nameof(DIVSS);
+        public static AsmMnemonic DIVSS => nameof(DIVSS);
 
-        public static AsmMnemonicExpr VDIVSS => nameof(VDIVSS);
+        public static AsmMnemonic VDIVSS => nameof(VDIVSS);
 
-        public static AsmMnemonicExpr DPPD => nameof(DPPD);
+        public static AsmMnemonic DPPD => nameof(DPPD);
 
-        public static AsmMnemonicExpr VDPPD => nameof(VDPPD);
+        public static AsmMnemonic VDPPD => nameof(VDPPD);
 
-        public static AsmMnemonicExpr DPPS => nameof(DPPS);
+        public static AsmMnemonic DPPS => nameof(DPPS);
 
-        public static AsmMnemonicExpr VDPPS => nameof(VDPPS);
+        public static AsmMnemonic VDPPS => nameof(VDPPS);
 
-        public static AsmMnemonicExpr ENTER => nameof(ENTER);
+        public static AsmMnemonic ENTER => nameof(ENTER);
 
-        public static AsmMnemonicExpr EXTRACTPS => nameof(EXTRACTPS);
+        public static AsmMnemonic EXTRACTPS => nameof(EXTRACTPS);
 
-        public static AsmMnemonicExpr VEXTRACTPS => nameof(VEXTRACTPS);
+        public static AsmMnemonic VEXTRACTPS => nameof(VEXTRACTPS);
 
-        public static AsmMnemonicExpr FADD => nameof(FADD);
+        public static AsmMnemonic FADD => nameof(FADD);
 
-        public static AsmMnemonicExpr FADDP => nameof(FADDP);
+        public static AsmMnemonic FADDP => nameof(FADDP);
 
-        public static AsmMnemonicExpr FIADD => nameof(FIADD);
+        public static AsmMnemonic FIADD => nameof(FIADD);
 
-        public static AsmMnemonicExpr FBLD => nameof(FBLD);
+        public static AsmMnemonic FBLD => nameof(FBLD);
 
-        public static AsmMnemonicExpr FBSTP => nameof(FBSTP);
+        public static AsmMnemonic FBSTP => nameof(FBSTP);
 
-        public static AsmMnemonicExpr FCMOVB => nameof(FCMOVB);
+        public static AsmMnemonic FCMOVB => nameof(FCMOVB);
 
-        public static AsmMnemonicExpr FCMOVE => nameof(FCMOVE);
+        public static AsmMnemonic FCMOVE => nameof(FCMOVE);
 
-        public static AsmMnemonicExpr FCMOVBE => nameof(FCMOVBE);
+        public static AsmMnemonic FCMOVBE => nameof(FCMOVBE);
 
-        public static AsmMnemonicExpr FCMOVU => nameof(FCMOVU);
+        public static AsmMnemonic FCMOVU => nameof(FCMOVU);
 
-        public static AsmMnemonicExpr FCMOVNB => nameof(FCMOVNB);
+        public static AsmMnemonic FCMOVNB => nameof(FCMOVNB);
 
-        public static AsmMnemonicExpr FCMOVNE => nameof(FCMOVNE);
+        public static AsmMnemonic FCMOVNE => nameof(FCMOVNE);
 
-        public static AsmMnemonicExpr FCMOVNBE => nameof(FCMOVNBE);
+        public static AsmMnemonic FCMOVNBE => nameof(FCMOVNBE);
 
-        public static AsmMnemonicExpr FCMOVNU => nameof(FCMOVNU);
+        public static AsmMnemonic FCMOVNU => nameof(FCMOVNU);
 
-        public static AsmMnemonicExpr FCOM => nameof(FCOM);
+        public static AsmMnemonic FCOM => nameof(FCOM);
 
-        public static AsmMnemonicExpr FCOMP => nameof(FCOMP);
+        public static AsmMnemonic FCOMP => nameof(FCOMP);
 
-        public static AsmMnemonicExpr FCOMI => nameof(FCOMI);
+        public static AsmMnemonic FCOMI => nameof(FCOMI);
 
-        public static AsmMnemonicExpr FCOMIP => nameof(FCOMIP);
+        public static AsmMnemonic FCOMIP => nameof(FCOMIP);
 
-        public static AsmMnemonicExpr FUCOMI => nameof(FUCOMI);
+        public static AsmMnemonic FUCOMI => nameof(FUCOMI);
 
-        public static AsmMnemonicExpr FUCOMIP => nameof(FUCOMIP);
+        public static AsmMnemonic FUCOMIP => nameof(FUCOMIP);
 
-        public static AsmMnemonicExpr FDIV => nameof(FDIV);
+        public static AsmMnemonic FDIV => nameof(FDIV);
 
-        public static AsmMnemonicExpr FDIVP => nameof(FDIVP);
+        public static AsmMnemonic FDIVP => nameof(FDIVP);
 
-        public static AsmMnemonicExpr FIDIV => nameof(FIDIV);
+        public static AsmMnemonic FIDIV => nameof(FIDIV);
 
-        public static AsmMnemonicExpr FDIVR => nameof(FDIVR);
+        public static AsmMnemonic FDIVR => nameof(FDIVR);
 
-        public static AsmMnemonicExpr FDIVRP => nameof(FDIVRP);
+        public static AsmMnemonic FDIVRP => nameof(FDIVRP);
 
-        public static AsmMnemonicExpr FIDIVR => nameof(FIDIVR);
+        public static AsmMnemonic FIDIVR => nameof(FIDIVR);
 
-        public static AsmMnemonicExpr FFREE => nameof(FFREE);
+        public static AsmMnemonic FFREE => nameof(FFREE);
 
-        public static AsmMnemonicExpr FICOM => nameof(FICOM);
+        public static AsmMnemonic FICOM => nameof(FICOM);
 
-        public static AsmMnemonicExpr FICOMP => nameof(FICOMP);
+        public static AsmMnemonic FICOMP => nameof(FICOMP);
 
-        public static AsmMnemonicExpr FILD => nameof(FILD);
+        public static AsmMnemonic FILD => nameof(FILD);
 
-        public static AsmMnemonicExpr FIST => nameof(FIST);
+        public static AsmMnemonic FIST => nameof(FIST);
 
-        public static AsmMnemonicExpr FISTP => nameof(FISTP);
+        public static AsmMnemonic FISTP => nameof(FISTP);
 
-        public static AsmMnemonicExpr FISTTP => nameof(FISTTP);
+        public static AsmMnemonic FISTTP => nameof(FISTTP);
 
-        public static AsmMnemonicExpr FLD => nameof(FLD);
+        public static AsmMnemonic FLD => nameof(FLD);
 
-        public static AsmMnemonicExpr FLDCW => nameof(FLDCW);
+        public static AsmMnemonic FLDCW => nameof(FLDCW);
 
-        public static AsmMnemonicExpr FLDENV => nameof(FLDENV);
+        public static AsmMnemonic FLDENV => nameof(FLDENV);
 
-        public static AsmMnemonicExpr FMUL => nameof(FMUL);
+        public static AsmMnemonic FMUL => nameof(FMUL);
 
-        public static AsmMnemonicExpr FMULP => nameof(FMULP);
+        public static AsmMnemonic FMULP => nameof(FMULP);
 
-        public static AsmMnemonicExpr FIMUL => nameof(FIMUL);
+        public static AsmMnemonic FIMUL => nameof(FIMUL);
 
-        public static AsmMnemonicExpr FRSTOR => nameof(FRSTOR);
+        public static AsmMnemonic FRSTOR => nameof(FRSTOR);
 
-        public static AsmMnemonicExpr FSAVE => nameof(FSAVE);
+        public static AsmMnemonic FSAVE => nameof(FSAVE);
 
-        public static AsmMnemonicExpr FNSAVE => nameof(FNSAVE);
+        public static AsmMnemonic FNSAVE => nameof(FNSAVE);
 
-        public static AsmMnemonicExpr FST => nameof(FST);
+        public static AsmMnemonic FST => nameof(FST);
 
-        public static AsmMnemonicExpr FSTP => nameof(FSTP);
+        public static AsmMnemonic FSTP => nameof(FSTP);
 
-        public static AsmMnemonicExpr FSTCW => nameof(FSTCW);
+        public static AsmMnemonic FSTCW => nameof(FSTCW);
 
-        public static AsmMnemonicExpr FNSTCW => nameof(FNSTCW);
+        public static AsmMnemonic FNSTCW => nameof(FNSTCW);
 
-        public static AsmMnemonicExpr FSTENV => nameof(FSTENV);
+        public static AsmMnemonic FSTENV => nameof(FSTENV);
 
-        public static AsmMnemonicExpr FNSTENV => nameof(FNSTENV);
+        public static AsmMnemonic FNSTENV => nameof(FNSTENV);
 
-        public static AsmMnemonicExpr FSTSW => nameof(FSTSW);
+        public static AsmMnemonic FSTSW => nameof(FSTSW);
 
-        public static AsmMnemonicExpr FNSTSW => nameof(FNSTSW);
+        public static AsmMnemonic FNSTSW => nameof(FNSTSW);
 
-        public static AsmMnemonicExpr FSUB => nameof(FSUB);
+        public static AsmMnemonic FSUB => nameof(FSUB);
 
-        public static AsmMnemonicExpr FSUBP => nameof(FSUBP);
+        public static AsmMnemonic FSUBP => nameof(FSUBP);
 
-        public static AsmMnemonicExpr FISUB => nameof(FISUB);
+        public static AsmMnemonic FISUB => nameof(FISUB);
 
-        public static AsmMnemonicExpr FSUBR => nameof(FSUBR);
+        public static AsmMnemonic FSUBR => nameof(FSUBR);
 
-        public static AsmMnemonicExpr FSUBRP => nameof(FSUBRP);
+        public static AsmMnemonic FSUBRP => nameof(FSUBRP);
 
-        public static AsmMnemonicExpr FISUBR => nameof(FISUBR);
+        public static AsmMnemonic FISUBR => nameof(FISUBR);
 
-        public static AsmMnemonicExpr FUCOM => nameof(FUCOM);
+        public static AsmMnemonic FUCOM => nameof(FUCOM);
 
-        public static AsmMnemonicExpr FUCOMP => nameof(FUCOMP);
+        public static AsmMnemonic FUCOMP => nameof(FUCOMP);
 
-        public static AsmMnemonicExpr FXCH => nameof(FXCH);
+        public static AsmMnemonic FXCH => nameof(FXCH);
 
-        public static AsmMnemonicExpr FXRSTOR => nameof(FXRSTOR);
+        public static AsmMnemonic FXRSTOR => nameof(FXRSTOR);
 
-        public static AsmMnemonicExpr FXRSTOR64 => nameof(FXRSTOR64);
+        public static AsmMnemonic FXRSTOR64 => nameof(FXRSTOR64);
 
-        public static AsmMnemonicExpr FXSAVE => nameof(FXSAVE);
+        public static AsmMnemonic FXSAVE => nameof(FXSAVE);
 
-        public static AsmMnemonicExpr FXSAVE64 => nameof(FXSAVE64);
+        public static AsmMnemonic FXSAVE64 => nameof(FXSAVE64);
 
-        public static AsmMnemonicExpr HADDPD => nameof(HADDPD);
+        public static AsmMnemonic HADDPD => nameof(HADDPD);
 
-        public static AsmMnemonicExpr VHADDPD => nameof(VHADDPD);
+        public static AsmMnemonic VHADDPD => nameof(VHADDPD);
 
-        public static AsmMnemonicExpr HADDPS => nameof(HADDPS);
+        public static AsmMnemonic HADDPS => nameof(HADDPS);
 
-        public static AsmMnemonicExpr VHADDPS => nameof(VHADDPS);
+        public static AsmMnemonic VHADDPS => nameof(VHADDPS);
 
-        public static AsmMnemonicExpr HSUBPD => nameof(HSUBPD);
+        public static AsmMnemonic HSUBPD => nameof(HSUBPD);
 
-        public static AsmMnemonicExpr VHSUBPD => nameof(VHSUBPD);
+        public static AsmMnemonic VHSUBPD => nameof(VHSUBPD);
 
-        public static AsmMnemonicExpr HSUBPS => nameof(HSUBPS);
+        public static AsmMnemonic HSUBPS => nameof(HSUBPS);
 
-        public static AsmMnemonicExpr VHSUBPS => nameof(VHSUBPS);
+        public static AsmMnemonic VHSUBPS => nameof(VHSUBPS);
 
-        public static AsmMnemonicExpr IDIV => nameof(IDIV);
+        public static AsmMnemonic IDIV => nameof(IDIV);
 
-        public static AsmMnemonicExpr IMUL => nameof(IMUL);
+        public static AsmMnemonic IMUL => nameof(IMUL);
 
-        public static AsmMnemonicExpr IN => nameof(IN);
+        public static AsmMnemonic IN => nameof(IN);
 
-        public static AsmMnemonicExpr INC => nameof(INC);
+        public static AsmMnemonic INC => nameof(INC);
 
-        public static AsmMnemonicExpr INS => nameof(INS);
+        public static AsmMnemonic INS => nameof(INS);
 
-        public static AsmMnemonicExpr INSERTPS => nameof(INSERTPS);
+        public static AsmMnemonic INSERTPS => nameof(INSERTPS);
 
-        public static AsmMnemonicExpr VINSERTPS => nameof(VINSERTPS);
+        public static AsmMnemonic VINSERTPS => nameof(VINSERTPS);
 
-        public static AsmMnemonicExpr INT => nameof(INT);
+        public static AsmMnemonic INT => nameof(INT);
 
-        public static AsmMnemonicExpr INVLPG => nameof(INVLPG);
+        public static AsmMnemonic INVLPG => nameof(INVLPG);
 
-        public static AsmMnemonicExpr INVPCID => nameof(INVPCID);
+        public static AsmMnemonic INVPCID => nameof(INVPCID);
 
-        public static AsmMnemonicExpr JA => nameof(JA);
+        public static AsmMnemonic JA => nameof(JA);
 
-        public static AsmMnemonicExpr JAE => nameof(JAE);
+        public static AsmMnemonic JAE => nameof(JAE);
 
-        public static AsmMnemonicExpr JB => nameof(JB);
+        public static AsmMnemonic JB => nameof(JB);
 
-        public static AsmMnemonicExpr JBE => nameof(JBE);
+        public static AsmMnemonic JBE => nameof(JBE);
 
-        public static AsmMnemonicExpr JC => nameof(JC);
+        public static AsmMnemonic JC => nameof(JC);
 
-        public static AsmMnemonicExpr JCXZ => nameof(JCXZ);
+        public static AsmMnemonic JCXZ => nameof(JCXZ);
 
-        public static AsmMnemonicExpr JECXZ => nameof(JECXZ);
+        public static AsmMnemonic JECXZ => nameof(JECXZ);
 
-        public static AsmMnemonicExpr JRCXZ => nameof(JRCXZ);
+        public static AsmMnemonic JRCXZ => nameof(JRCXZ);
 
-        public static AsmMnemonicExpr JE => nameof(JE);
+        public static AsmMnemonic JE => nameof(JE);
 
-        public static AsmMnemonicExpr JG => nameof(JG);
+        public static AsmMnemonic JG => nameof(JG);
 
-        public static AsmMnemonicExpr JGE => nameof(JGE);
+        public static AsmMnemonic JGE => nameof(JGE);
 
-        public static AsmMnemonicExpr JL => nameof(JL);
+        public static AsmMnemonic JL => nameof(JL);
 
-        public static AsmMnemonicExpr JLE => nameof(JLE);
+        public static AsmMnemonic JLE => nameof(JLE);
 
-        public static AsmMnemonicExpr JNA => nameof(JNA);
+        public static AsmMnemonic JNA => nameof(JNA);
 
-        public static AsmMnemonicExpr JNAE => nameof(JNAE);
+        public static AsmMnemonic JNAE => nameof(JNAE);
 
-        public static AsmMnemonicExpr JNB => nameof(JNB);
+        public static AsmMnemonic JNB => nameof(JNB);
 
-        public static AsmMnemonicExpr JNBE => nameof(JNBE);
+        public static AsmMnemonic JNBE => nameof(JNBE);
 
-        public static AsmMnemonicExpr JNC => nameof(JNC);
+        public static AsmMnemonic JNC => nameof(JNC);
 
-        public static AsmMnemonicExpr JNE => nameof(JNE);
+        public static AsmMnemonic JNE => nameof(JNE);
 
-        public static AsmMnemonicExpr JNG => nameof(JNG);
+        public static AsmMnemonic JNG => nameof(JNG);
 
-        public static AsmMnemonicExpr JNGE => nameof(JNGE);
+        public static AsmMnemonic JNGE => nameof(JNGE);
 
-        public static AsmMnemonicExpr JNL => nameof(JNL);
+        public static AsmMnemonic JNL => nameof(JNL);
 
-        public static AsmMnemonicExpr JNLE => nameof(JNLE);
+        public static AsmMnemonic JNLE => nameof(JNLE);
 
-        public static AsmMnemonicExpr JNO => nameof(JNO);
+        public static AsmMnemonic JNO => nameof(JNO);
 
-        public static AsmMnemonicExpr JNP => nameof(JNP);
+        public static AsmMnemonic JNP => nameof(JNP);
 
-        public static AsmMnemonicExpr JNS => nameof(JNS);
+        public static AsmMnemonic JNS => nameof(JNS);
 
-        public static AsmMnemonicExpr JNZ => nameof(JNZ);
+        public static AsmMnemonic JNZ => nameof(JNZ);
 
-        public static AsmMnemonicExpr JO => nameof(JO);
+        public static AsmMnemonic JO => nameof(JO);
 
-        public static AsmMnemonicExpr JP => nameof(JP);
+        public static AsmMnemonic JP => nameof(JP);
 
-        public static AsmMnemonicExpr JPE => nameof(JPE);
+        public static AsmMnemonic JPE => nameof(JPE);
 
-        public static AsmMnemonicExpr JPO => nameof(JPO);
+        public static AsmMnemonic JPO => nameof(JPO);
 
-        public static AsmMnemonicExpr JS => nameof(JS);
+        public static AsmMnemonic JS => nameof(JS);
 
-        public static AsmMnemonicExpr JZ => nameof(JZ);
+        public static AsmMnemonic JZ => nameof(JZ);
 
-        public static AsmMnemonicExpr JMP => nameof(JMP);
+        public static AsmMnemonic JMP => nameof(JMP);
 
-        public static AsmMnemonicExpr LAR => nameof(LAR);
+        public static AsmMnemonic LAR => nameof(LAR);
 
-        public static AsmMnemonicExpr LDDQU => nameof(LDDQU);
+        public static AsmMnemonic LDDQU => nameof(LDDQU);
 
-        public static AsmMnemonicExpr VLDDQU => nameof(VLDDQU);
+        public static AsmMnemonic VLDDQU => nameof(VLDDQU);
 
-        public static AsmMnemonicExpr LDMXCSR => nameof(LDMXCSR);
+        public static AsmMnemonic LDMXCSR => nameof(LDMXCSR);
 
-        public static AsmMnemonicExpr VLDMXCSR => nameof(VLDMXCSR);
+        public static AsmMnemonic VLDMXCSR => nameof(VLDMXCSR);
 
-        public static AsmMnemonicExpr LDS => nameof(LDS);
+        public static AsmMnemonic LDS => nameof(LDS);
 
-        public static AsmMnemonicExpr LSS => nameof(LSS);
+        public static AsmMnemonic LSS => nameof(LSS);
 
-        public static AsmMnemonicExpr LES => nameof(LES);
+        public static AsmMnemonic LES => nameof(LES);
 
-        public static AsmMnemonicExpr LFS => nameof(LFS);
+        public static AsmMnemonic LFS => nameof(LFS);
 
-        public static AsmMnemonicExpr LGS => nameof(LGS);
+        public static AsmMnemonic LGS => nameof(LGS);
 
-        public static AsmMnemonicExpr LEA => nameof(LEA);
+        public static AsmMnemonic LEA => nameof(LEA);
 
-        public static AsmMnemonicExpr LEAVE => nameof(LEAVE);
+        public static AsmMnemonic LEAVE => nameof(LEAVE);
 
-        public static AsmMnemonicExpr LGDT => nameof(LGDT);
+        public static AsmMnemonic LGDT => nameof(LGDT);
 
-        public static AsmMnemonicExpr LIDT => nameof(LIDT);
+        public static AsmMnemonic LIDT => nameof(LIDT);
 
-        public static AsmMnemonicExpr LLDT => nameof(LLDT);
+        public static AsmMnemonic LLDT => nameof(LLDT);
 
-        public static AsmMnemonicExpr LMSW => nameof(LMSW);
+        public static AsmMnemonic LMSW => nameof(LMSW);
 
-        public static AsmMnemonicExpr LODS => nameof(LODS);
+        public static AsmMnemonic LODS => nameof(LODS);
 
-        public static AsmMnemonicExpr LOOP => nameof(LOOP);
+        public static AsmMnemonic LOOP => nameof(LOOP);
 
-        public static AsmMnemonicExpr LOOPE => nameof(LOOPE);
+        public static AsmMnemonic LOOPE => nameof(LOOPE);
 
-        public static AsmMnemonicExpr LOOPNE => nameof(LOOPNE);
+        public static AsmMnemonic LOOPNE => nameof(LOOPNE);
 
-        public static AsmMnemonicExpr LSL => nameof(LSL);
+        public static AsmMnemonic LSL => nameof(LSL);
 
-        public static AsmMnemonicExpr LTR => nameof(LTR);
+        public static AsmMnemonic LTR => nameof(LTR);
 
-        public static AsmMnemonicExpr LZCNT => nameof(LZCNT);
+        public static AsmMnemonic LZCNT => nameof(LZCNT);
 
-        public static AsmMnemonicExpr MASKMOVDQU => nameof(MASKMOVDQU);
+        public static AsmMnemonic MASKMOVDQU => nameof(MASKMOVDQU);
 
-        public static AsmMnemonicExpr VMASKMOVDQU => nameof(VMASKMOVDQU);
+        public static AsmMnemonic VMASKMOVDQU => nameof(VMASKMOVDQU);
 
-        public static AsmMnemonicExpr MASKMOVQ => nameof(MASKMOVQ);
+        public static AsmMnemonic MASKMOVQ => nameof(MASKMOVQ);
 
-        public static AsmMnemonicExpr MAXPD => nameof(MAXPD);
+        public static AsmMnemonic MAXPD => nameof(MAXPD);
 
-        public static AsmMnemonicExpr VMAXPD => nameof(VMAXPD);
+        public static AsmMnemonic VMAXPD => nameof(VMAXPD);
 
-        public static AsmMnemonicExpr MAXPS => nameof(MAXPS);
+        public static AsmMnemonic MAXPS => nameof(MAXPS);
 
-        public static AsmMnemonicExpr VMAXPS => nameof(VMAXPS);
+        public static AsmMnemonic VMAXPS => nameof(VMAXPS);
 
-        public static AsmMnemonicExpr MAXSD => nameof(MAXSD);
+        public static AsmMnemonic MAXSD => nameof(MAXSD);
 
-        public static AsmMnemonicExpr VMAXSD => nameof(VMAXSD);
+        public static AsmMnemonic VMAXSD => nameof(VMAXSD);
 
-        public static AsmMnemonicExpr MAXSS => nameof(MAXSS);
+        public static AsmMnemonic MAXSS => nameof(MAXSS);
 
-        public static AsmMnemonicExpr VMAXSS => nameof(VMAXSS);
+        public static AsmMnemonic VMAXSS => nameof(VMAXSS);
 
-        public static AsmMnemonicExpr MINPD => nameof(MINPD);
+        public static AsmMnemonic MINPD => nameof(MINPD);
 
-        public static AsmMnemonicExpr VMINPD => nameof(VMINPD);
+        public static AsmMnemonic VMINPD => nameof(VMINPD);
 
-        public static AsmMnemonicExpr MINPS => nameof(MINPS);
+        public static AsmMnemonic MINPS => nameof(MINPS);
 
-        public static AsmMnemonicExpr VMINPS => nameof(VMINPS);
+        public static AsmMnemonic VMINPS => nameof(VMINPS);
 
-        public static AsmMnemonicExpr MINSD => nameof(MINSD);
+        public static AsmMnemonic MINSD => nameof(MINSD);
 
-        public static AsmMnemonicExpr VMINSD => nameof(VMINSD);
+        public static AsmMnemonic VMINSD => nameof(VMINSD);
 
-        public static AsmMnemonicExpr MINSS => nameof(MINSS);
+        public static AsmMnemonic MINSS => nameof(MINSS);
 
-        public static AsmMnemonicExpr VMINSS => nameof(VMINSS);
+        public static AsmMnemonic VMINSS => nameof(VMINSS);
 
-        public static AsmMnemonicExpr MOV => nameof(MOV);
+        public static AsmMnemonic MOV => nameof(MOV);
 
-        public static AsmMnemonicExpr MOVAPD => nameof(MOVAPD);
+        public static AsmMnemonic MOVAPD => nameof(MOVAPD);
 
-        public static AsmMnemonicExpr VMOVAPD => nameof(VMOVAPD);
+        public static AsmMnemonic VMOVAPD => nameof(VMOVAPD);
 
-        public static AsmMnemonicExpr MOVAPS => nameof(MOVAPS);
+        public static AsmMnemonic MOVAPS => nameof(MOVAPS);
 
-        public static AsmMnemonicExpr VMOVAPS => nameof(VMOVAPS);
+        public static AsmMnemonic VMOVAPS => nameof(VMOVAPS);
 
-        public static AsmMnemonicExpr MOVBE => nameof(MOVBE);
+        public static AsmMnemonic MOVBE => nameof(MOVBE);
 
-        public static AsmMnemonicExpr MOVD => nameof(MOVD);
+        public static AsmMnemonic MOVD => nameof(MOVD);
 
-        public static AsmMnemonicExpr MOVQ => nameof(MOVQ);
+        public static AsmMnemonic MOVQ => nameof(MOVQ);
 
-        public static AsmMnemonicExpr VMOVD => nameof(VMOVD);
+        public static AsmMnemonic VMOVD => nameof(VMOVD);
 
-        public static AsmMnemonicExpr VMOVQ => nameof(VMOVQ);
+        public static AsmMnemonic VMOVQ => nameof(VMOVQ);
 
-        public static AsmMnemonicExpr MOVDDUP => nameof(MOVDDUP);
+        public static AsmMnemonic MOVDDUP => nameof(MOVDDUP);
 
-        public static AsmMnemonicExpr VMOVDDUP => nameof(VMOVDDUP);
+        public static AsmMnemonic VMOVDDUP => nameof(VMOVDDUP);
 
-        public static AsmMnemonicExpr MOVDQA => nameof(MOVDQA);
+        public static AsmMnemonic MOVDQA => nameof(MOVDQA);
 
-        public static AsmMnemonicExpr VMOVDQA => nameof(VMOVDQA);
+        public static AsmMnemonic VMOVDQA => nameof(VMOVDQA);
 
-        public static AsmMnemonicExpr MOVDQU => nameof(MOVDQU);
+        public static AsmMnemonic MOVDQU => nameof(MOVDQU);
 
-        public static AsmMnemonicExpr VMOVDQU => nameof(VMOVDQU);
+        public static AsmMnemonic VMOVDQU => nameof(VMOVDQU);
 
-        public static AsmMnemonicExpr MOVDQ2Q => nameof(MOVDQ2Q);
+        public static AsmMnemonic MOVDQ2Q => nameof(MOVDQ2Q);
 
-        public static AsmMnemonicExpr MOVHLPS => nameof(MOVHLPS);
+        public static AsmMnemonic MOVHLPS => nameof(MOVHLPS);
 
-        public static AsmMnemonicExpr VMOVHLPS => nameof(VMOVHLPS);
+        public static AsmMnemonic VMOVHLPS => nameof(VMOVHLPS);
 
-        public static AsmMnemonicExpr MOVHPD => nameof(MOVHPD);
+        public static AsmMnemonic MOVHPD => nameof(MOVHPD);
 
-        public static AsmMnemonicExpr VMOVHPD => nameof(VMOVHPD);
+        public static AsmMnemonic VMOVHPD => nameof(VMOVHPD);
 
-        public static AsmMnemonicExpr MOVHPS => nameof(MOVHPS);
+        public static AsmMnemonic MOVHPS => nameof(MOVHPS);
 
-        public static AsmMnemonicExpr VMOVHPS => nameof(VMOVHPS);
+        public static AsmMnemonic VMOVHPS => nameof(VMOVHPS);
 
-        public static AsmMnemonicExpr MOVLHPS => nameof(MOVLHPS);
+        public static AsmMnemonic MOVLHPS => nameof(MOVLHPS);
 
-        public static AsmMnemonicExpr VMOVLHPS => nameof(VMOVLHPS);
+        public static AsmMnemonic VMOVLHPS => nameof(VMOVLHPS);
 
-        public static AsmMnemonicExpr MOVLPD => nameof(MOVLPD);
+        public static AsmMnemonic MOVLPD => nameof(MOVLPD);
 
-        public static AsmMnemonicExpr VMOVLPD => nameof(VMOVLPD);
+        public static AsmMnemonic VMOVLPD => nameof(VMOVLPD);
 
-        public static AsmMnemonicExpr MOVLPS => nameof(MOVLPS);
+        public static AsmMnemonic MOVLPS => nameof(MOVLPS);
 
-        public static AsmMnemonicExpr VMOVLPS => nameof(VMOVLPS);
+        public static AsmMnemonic VMOVLPS => nameof(VMOVLPS);
 
-        public static AsmMnemonicExpr MOVMSKPD => nameof(MOVMSKPD);
+        public static AsmMnemonic MOVMSKPD => nameof(MOVMSKPD);
 
-        public static AsmMnemonicExpr VMOVMSKPD => nameof(VMOVMSKPD);
+        public static AsmMnemonic VMOVMSKPD => nameof(VMOVMSKPD);
 
-        public static AsmMnemonicExpr MOVMSKPS => nameof(MOVMSKPS);
+        public static AsmMnemonic MOVMSKPS => nameof(MOVMSKPS);
 
-        public static AsmMnemonicExpr VMOVMSKPS => nameof(VMOVMSKPS);
+        public static AsmMnemonic VMOVMSKPS => nameof(VMOVMSKPS);
 
-        public static AsmMnemonicExpr MOVNTDQA => nameof(MOVNTDQA);
+        public static AsmMnemonic MOVNTDQA => nameof(MOVNTDQA);
 
-        public static AsmMnemonicExpr VMOVNTDQA => nameof(VMOVNTDQA);
+        public static AsmMnemonic VMOVNTDQA => nameof(VMOVNTDQA);
 
-        public static AsmMnemonicExpr MOVNTDQ => nameof(MOVNTDQ);
+        public static AsmMnemonic MOVNTDQ => nameof(MOVNTDQ);
 
-        public static AsmMnemonicExpr VMOVNTDQ => nameof(VMOVNTDQ);
+        public static AsmMnemonic VMOVNTDQ => nameof(VMOVNTDQ);
 
-        public static AsmMnemonicExpr MOVNTI => nameof(MOVNTI);
+        public static AsmMnemonic MOVNTI => nameof(MOVNTI);
 
-        public static AsmMnemonicExpr MOVNTPD => nameof(MOVNTPD);
+        public static AsmMnemonic MOVNTPD => nameof(MOVNTPD);
 
-        public static AsmMnemonicExpr VMOVNTPD => nameof(VMOVNTPD);
+        public static AsmMnemonic VMOVNTPD => nameof(VMOVNTPD);
 
-        public static AsmMnemonicExpr MOVNTPS => nameof(MOVNTPS);
+        public static AsmMnemonic MOVNTPS => nameof(MOVNTPS);
 
-        public static AsmMnemonicExpr VMOVNTPS => nameof(VMOVNTPS);
+        public static AsmMnemonic VMOVNTPS => nameof(VMOVNTPS);
 
-        public static AsmMnemonicExpr MOVNTQ => nameof(MOVNTQ);
+        public static AsmMnemonic MOVNTQ => nameof(MOVNTQ);
 
-        public static AsmMnemonicExpr MOVQ2DQ => nameof(MOVQ2DQ);
+        public static AsmMnemonic MOVQ2DQ => nameof(MOVQ2DQ);
 
-        public static AsmMnemonicExpr MOVS => nameof(MOVS);
+        public static AsmMnemonic MOVS => nameof(MOVS);
 
-        public static AsmMnemonicExpr MOVSD => nameof(MOVSD);
+        public static AsmMnemonic MOVSD => nameof(MOVSD);
 
-        public static AsmMnemonicExpr VMOVSD => nameof(VMOVSD);
+        public static AsmMnemonic VMOVSD => nameof(VMOVSD);
 
-        public static AsmMnemonicExpr MOVSHDUP => nameof(MOVSHDUP);
+        public static AsmMnemonic MOVSHDUP => nameof(MOVSHDUP);
 
-        public static AsmMnemonicExpr VMOVSHDUP => nameof(VMOVSHDUP);
+        public static AsmMnemonic VMOVSHDUP => nameof(VMOVSHDUP);
 
-        public static AsmMnemonicExpr MOVSLDUP => nameof(MOVSLDUP);
+        public static AsmMnemonic MOVSLDUP => nameof(MOVSLDUP);
 
-        public static AsmMnemonicExpr VMOVSLDUP => nameof(VMOVSLDUP);
+        public static AsmMnemonic VMOVSLDUP => nameof(VMOVSLDUP);
 
-        public static AsmMnemonicExpr MOVSS => nameof(MOVSS);
+        public static AsmMnemonic MOVSS => nameof(MOVSS);
 
-        public static AsmMnemonicExpr VMOVSS => nameof(VMOVSS);
+        public static AsmMnemonic VMOVSS => nameof(VMOVSS);
 
-        public static AsmMnemonicExpr MOVSX => nameof(MOVSX);
+        public static AsmMnemonic MOVSX => nameof(MOVSX);
 
-        public static AsmMnemonicExpr MOVSXD => nameof(MOVSXD);
+        public static AsmMnemonic MOVSXD => nameof(MOVSXD);
 
-        public static AsmMnemonicExpr MOVUPD => nameof(MOVUPD);
+        public static AsmMnemonic MOVUPD => nameof(MOVUPD);
 
-        public static AsmMnemonicExpr VMOVUPD => nameof(VMOVUPD);
+        public static AsmMnemonic VMOVUPD => nameof(VMOVUPD);
 
-        public static AsmMnemonicExpr MOVUPS => nameof(MOVUPS);
+        public static AsmMnemonic MOVUPS => nameof(MOVUPS);
 
-        public static AsmMnemonicExpr VMOVUPS => nameof(VMOVUPS);
+        public static AsmMnemonic VMOVUPS => nameof(VMOVUPS);
 
-        public static AsmMnemonicExpr MOVZX => nameof(MOVZX);
+        public static AsmMnemonic MOVZX => nameof(MOVZX);
 
-        public static AsmMnemonicExpr MPSADBW => nameof(MPSADBW);
+        public static AsmMnemonic MPSADBW => nameof(MPSADBW);
 
-        public static AsmMnemonicExpr VMPSADBW => nameof(VMPSADBW);
+        public static AsmMnemonic VMPSADBW => nameof(VMPSADBW);
 
-        public static AsmMnemonicExpr MUL => nameof(MUL);
+        public static AsmMnemonic MUL => nameof(MUL);
 
-        public static AsmMnemonicExpr MULPD => nameof(MULPD);
+        public static AsmMnemonic MULPD => nameof(MULPD);
 
-        public static AsmMnemonicExpr VMULPD => nameof(VMULPD);
+        public static AsmMnemonic VMULPD => nameof(VMULPD);
 
-        public static AsmMnemonicExpr MULPS => nameof(MULPS);
+        public static AsmMnemonic MULPS => nameof(MULPS);
 
-        public static AsmMnemonicExpr VMULPS => nameof(VMULPS);
+        public static AsmMnemonic VMULPS => nameof(VMULPS);
 
-        public static AsmMnemonicExpr MULSD => nameof(MULSD);
+        public static AsmMnemonic MULSD => nameof(MULSD);
 
-        public static AsmMnemonicExpr VMULSD => nameof(VMULSD);
+        public static AsmMnemonic VMULSD => nameof(VMULSD);
 
-        public static AsmMnemonicExpr MULSS => nameof(MULSS);
+        public static AsmMnemonic MULSS => nameof(MULSS);
 
-        public static AsmMnemonicExpr VMULSS => nameof(VMULSS);
+        public static AsmMnemonic VMULSS => nameof(VMULSS);
 
-        public static AsmMnemonicExpr MULX => nameof(MULX);
+        public static AsmMnemonic MULX => nameof(MULX);
 
-        public static AsmMnemonicExpr NEG => nameof(NEG);
+        public static AsmMnemonic NEG => nameof(NEG);
 
-        public static AsmMnemonicExpr NOP => nameof(NOP);
+        public static AsmMnemonic NOP => nameof(NOP);
 
-        public static AsmMnemonicExpr NOT => nameof(NOT);
+        public static AsmMnemonic NOT => nameof(NOT);
 
-        public static AsmMnemonicExpr OR => nameof(OR);
+        public static AsmMnemonic OR => nameof(OR);
 
-        public static AsmMnemonicExpr ORPD => nameof(ORPD);
+        public static AsmMnemonic ORPD => nameof(ORPD);
 
-        public static AsmMnemonicExpr VORPD => nameof(VORPD);
+        public static AsmMnemonic VORPD => nameof(VORPD);
 
-        public static AsmMnemonicExpr ORPS => nameof(ORPS);
+        public static AsmMnemonic ORPS => nameof(ORPS);
 
-        public static AsmMnemonicExpr VORPS => nameof(VORPS);
+        public static AsmMnemonic VORPS => nameof(VORPS);
 
-        public static AsmMnemonicExpr OUT => nameof(OUT);
+        public static AsmMnemonic OUT => nameof(OUT);
 
-        public static AsmMnemonicExpr OUTS => nameof(OUTS);
+        public static AsmMnemonic OUTS => nameof(OUTS);
 
-        public static AsmMnemonicExpr PABSB => nameof(PABSB);
+        public static AsmMnemonic PABSB => nameof(PABSB);
 
-        public static AsmMnemonicExpr PABSW => nameof(PABSW);
+        public static AsmMnemonic PABSW => nameof(PABSW);
 
-        public static AsmMnemonicExpr PABSD => nameof(PABSD);
+        public static AsmMnemonic PABSD => nameof(PABSD);
 
-        public static AsmMnemonicExpr VPABSB => nameof(VPABSB);
+        public static AsmMnemonic VPABSB => nameof(VPABSB);
 
-        public static AsmMnemonicExpr VPABSW => nameof(VPABSW);
+        public static AsmMnemonic VPABSW => nameof(VPABSW);
 
-        public static AsmMnemonicExpr VPABSD => nameof(VPABSD);
+        public static AsmMnemonic VPABSD => nameof(VPABSD);
 
-        public static AsmMnemonicExpr PACKSSWB => nameof(PACKSSWB);
+        public static AsmMnemonic PACKSSWB => nameof(PACKSSWB);
 
-        public static AsmMnemonicExpr PACKSSDW => nameof(PACKSSDW);
+        public static AsmMnemonic PACKSSDW => nameof(PACKSSDW);
 
-        public static AsmMnemonicExpr VPACKSSWB => nameof(VPACKSSWB);
+        public static AsmMnemonic VPACKSSWB => nameof(VPACKSSWB);
 
-        public static AsmMnemonicExpr VPACKSSDW => nameof(VPACKSSDW);
+        public static AsmMnemonic VPACKSSDW => nameof(VPACKSSDW);
 
-        public static AsmMnemonicExpr PACKUSDW => nameof(PACKUSDW);
+        public static AsmMnemonic PACKUSDW => nameof(PACKUSDW);
 
-        public static AsmMnemonicExpr VPACKUSDW => nameof(VPACKUSDW);
+        public static AsmMnemonic VPACKUSDW => nameof(VPACKUSDW);
 
-        public static AsmMnemonicExpr PACKUSWB => nameof(PACKUSWB);
+        public static AsmMnemonic PACKUSWB => nameof(PACKUSWB);
 
-        public static AsmMnemonicExpr VPACKUSWB => nameof(VPACKUSWB);
+        public static AsmMnemonic VPACKUSWB => nameof(VPACKUSWB);
 
-        public static AsmMnemonicExpr PADDB => nameof(PADDB);
+        public static AsmMnemonic PADDB => nameof(PADDB);
 
-        public static AsmMnemonicExpr PADDW => nameof(PADDW);
+        public static AsmMnemonic PADDW => nameof(PADDW);
 
-        public static AsmMnemonicExpr PADDD => nameof(PADDD);
+        public static AsmMnemonic PADDD => nameof(PADDD);
 
-        public static AsmMnemonicExpr VPADDB => nameof(VPADDB);
+        public static AsmMnemonic VPADDB => nameof(VPADDB);
 
-        public static AsmMnemonicExpr VPADDW => nameof(VPADDW);
+        public static AsmMnemonic VPADDW => nameof(VPADDW);
 
-        public static AsmMnemonicExpr VPADDD => nameof(VPADDD);
+        public static AsmMnemonic VPADDD => nameof(VPADDD);
 
-        public static AsmMnemonicExpr PADDQ => nameof(PADDQ);
+        public static AsmMnemonic PADDQ => nameof(PADDQ);
 
-        public static AsmMnemonicExpr VPADDQ => nameof(VPADDQ);
+        public static AsmMnemonic VPADDQ => nameof(VPADDQ);
 
-        public static AsmMnemonicExpr PADDSB => nameof(PADDSB);
+        public static AsmMnemonic PADDSB => nameof(PADDSB);
 
-        public static AsmMnemonicExpr PADDSW => nameof(PADDSW);
+        public static AsmMnemonic PADDSW => nameof(PADDSW);
 
-        public static AsmMnemonicExpr VPADDSB => nameof(VPADDSB);
+        public static AsmMnemonic VPADDSB => nameof(VPADDSB);
 
-        public static AsmMnemonicExpr VPADDSW => nameof(VPADDSW);
+        public static AsmMnemonic VPADDSW => nameof(VPADDSW);
 
-        public static AsmMnemonicExpr PADDUSB => nameof(PADDUSB);
+        public static AsmMnemonic PADDUSB => nameof(PADDUSB);
 
-        public static AsmMnemonicExpr PADDUSW => nameof(PADDUSW);
+        public static AsmMnemonic PADDUSW => nameof(PADDUSW);
 
-        public static AsmMnemonicExpr VPADDUSB => nameof(VPADDUSB);
+        public static AsmMnemonic VPADDUSB => nameof(VPADDUSB);
 
-        public static AsmMnemonicExpr VPADDUSW => nameof(VPADDUSW);
+        public static AsmMnemonic VPADDUSW => nameof(VPADDUSW);
 
-        public static AsmMnemonicExpr PALIGNR => nameof(PALIGNR);
+        public static AsmMnemonic PALIGNR => nameof(PALIGNR);
 
-        public static AsmMnemonicExpr VPALIGNR => nameof(VPALIGNR);
+        public static AsmMnemonic VPALIGNR => nameof(VPALIGNR);
 
-        public static AsmMnemonicExpr PAND => nameof(PAND);
+        public static AsmMnemonic PAND => nameof(PAND);
 
-        public static AsmMnemonicExpr VPAND => nameof(VPAND);
+        public static AsmMnemonic VPAND => nameof(VPAND);
 
-        public static AsmMnemonicExpr PANDN => nameof(PANDN);
+        public static AsmMnemonic PANDN => nameof(PANDN);
 
-        public static AsmMnemonicExpr VPANDN => nameof(VPANDN);
+        public static AsmMnemonic VPANDN => nameof(VPANDN);
 
-        public static AsmMnemonicExpr PAVGB => nameof(PAVGB);
+        public static AsmMnemonic PAVGB => nameof(PAVGB);
 
-        public static AsmMnemonicExpr PAVGW => nameof(PAVGW);
+        public static AsmMnemonic PAVGW => nameof(PAVGW);
 
-        public static AsmMnemonicExpr VPAVGB => nameof(VPAVGB);
+        public static AsmMnemonic VPAVGB => nameof(VPAVGB);
 
-        public static AsmMnemonicExpr VPAVGW => nameof(VPAVGW);
+        public static AsmMnemonic VPAVGW => nameof(VPAVGW);
 
-        public static AsmMnemonicExpr PBLENDVB => nameof(PBLENDVB);
+        public static AsmMnemonic PBLENDVB => nameof(PBLENDVB);
 
-        public static AsmMnemonicExpr VPBLENDVB => nameof(VPBLENDVB);
+        public static AsmMnemonic VPBLENDVB => nameof(VPBLENDVB);
 
-        public static AsmMnemonicExpr PBLENDW => nameof(PBLENDW);
+        public static AsmMnemonic PBLENDW => nameof(PBLENDW);
 
-        public static AsmMnemonicExpr VPBLENDW => nameof(VPBLENDW);
+        public static AsmMnemonic VPBLENDW => nameof(VPBLENDW);
 
-        public static AsmMnemonicExpr PCLMULQDQ => nameof(PCLMULQDQ);
+        public static AsmMnemonic PCLMULQDQ => nameof(PCLMULQDQ);
 
-        public static AsmMnemonicExpr VPCLMULQDQ => nameof(VPCLMULQDQ);
+        public static AsmMnemonic VPCLMULQDQ => nameof(VPCLMULQDQ);
 
-        public static AsmMnemonicExpr PCMPEQB => nameof(PCMPEQB);
+        public static AsmMnemonic PCMPEQB => nameof(PCMPEQB);
 
-        public static AsmMnemonicExpr PCMPEQW => nameof(PCMPEQW);
+        public static AsmMnemonic PCMPEQW => nameof(PCMPEQW);
 
-        public static AsmMnemonicExpr PCMPEQD => nameof(PCMPEQD);
+        public static AsmMnemonic PCMPEQD => nameof(PCMPEQD);
 
-        public static AsmMnemonicExpr VPCMPEQB => nameof(VPCMPEQB);
+        public static AsmMnemonic VPCMPEQB => nameof(VPCMPEQB);
 
-        public static AsmMnemonicExpr VPCMPEQW => nameof(VPCMPEQW);
+        public static AsmMnemonic VPCMPEQW => nameof(VPCMPEQW);
 
-        public static AsmMnemonicExpr VPCMPEQD => nameof(VPCMPEQD);
+        public static AsmMnemonic VPCMPEQD => nameof(VPCMPEQD);
 
-        public static AsmMnemonicExpr PCMPEQQ => nameof(PCMPEQQ);
+        public static AsmMnemonic PCMPEQQ => nameof(PCMPEQQ);
 
-        public static AsmMnemonicExpr VPCMPEQQ => nameof(VPCMPEQQ);
+        public static AsmMnemonic VPCMPEQQ => nameof(VPCMPEQQ);
 
-        public static AsmMnemonicExpr PCMPESTRI => nameof(PCMPESTRI);
+        public static AsmMnemonic PCMPESTRI => nameof(PCMPESTRI);
 
-        public static AsmMnemonicExpr VPCMPESTRI => nameof(VPCMPESTRI);
+        public static AsmMnemonic VPCMPESTRI => nameof(VPCMPESTRI);
 
-        public static AsmMnemonicExpr PCMPESTRM => nameof(PCMPESTRM);
+        public static AsmMnemonic PCMPESTRM => nameof(PCMPESTRM);
 
-        public static AsmMnemonicExpr VPCMPESTRM => nameof(VPCMPESTRM);
+        public static AsmMnemonic VPCMPESTRM => nameof(VPCMPESTRM);
 
-        public static AsmMnemonicExpr PCMPGTB => nameof(PCMPGTB);
+        public static AsmMnemonic PCMPGTB => nameof(PCMPGTB);
 
-        public static AsmMnemonicExpr PCMPGTW => nameof(PCMPGTW);
+        public static AsmMnemonic PCMPGTW => nameof(PCMPGTW);
 
-        public static AsmMnemonicExpr PCMPGTD => nameof(PCMPGTD);
+        public static AsmMnemonic PCMPGTD => nameof(PCMPGTD);
 
-        public static AsmMnemonicExpr VPCMPGTB => nameof(VPCMPGTB);
+        public static AsmMnemonic VPCMPGTB => nameof(VPCMPGTB);
 
-        public static AsmMnemonicExpr VPCMPGTW => nameof(VPCMPGTW);
+        public static AsmMnemonic VPCMPGTW => nameof(VPCMPGTW);
 
-        public static AsmMnemonicExpr VPCMPGTD => nameof(VPCMPGTD);
+        public static AsmMnemonic VPCMPGTD => nameof(VPCMPGTD);
 
-        public static AsmMnemonicExpr PCMPGTQ => nameof(PCMPGTQ);
+        public static AsmMnemonic PCMPGTQ => nameof(PCMPGTQ);
 
-        public static AsmMnemonicExpr VPCMPGTQ => nameof(VPCMPGTQ);
+        public static AsmMnemonic VPCMPGTQ => nameof(VPCMPGTQ);
 
-        public static AsmMnemonicExpr PCMPISTRI => nameof(PCMPISTRI);
+        public static AsmMnemonic PCMPISTRI => nameof(PCMPISTRI);
 
-        public static AsmMnemonicExpr VPCMPISTRI => nameof(VPCMPISTRI);
+        public static AsmMnemonic VPCMPISTRI => nameof(VPCMPISTRI);
 
-        public static AsmMnemonicExpr PCMPISTRM => nameof(PCMPISTRM);
+        public static AsmMnemonic PCMPISTRM => nameof(PCMPISTRM);
 
-        public static AsmMnemonicExpr VPCMPISTRM => nameof(VPCMPISTRM);
+        public static AsmMnemonic VPCMPISTRM => nameof(VPCMPISTRM);
 
-        public static AsmMnemonicExpr PDEP => nameof(PDEP);
+        public static AsmMnemonic PDEP => nameof(PDEP);
 
-        public static AsmMnemonicExpr PEXT => nameof(PEXT);
+        public static AsmMnemonic PEXT => nameof(PEXT);
 
-        public static AsmMnemonicExpr PEXTRB => nameof(PEXTRB);
+        public static AsmMnemonic PEXTRB => nameof(PEXTRB);
 
-        public static AsmMnemonicExpr PEXTRD => nameof(PEXTRD);
+        public static AsmMnemonic PEXTRD => nameof(PEXTRD);
 
-        public static AsmMnemonicExpr PEXTRQ => nameof(PEXTRQ);
+        public static AsmMnemonic PEXTRQ => nameof(PEXTRQ);
 
-        public static AsmMnemonicExpr VPEXTRB => nameof(VPEXTRB);
+        public static AsmMnemonic VPEXTRB => nameof(VPEXTRB);
 
-        public static AsmMnemonicExpr VPEXTRD => nameof(VPEXTRD);
+        public static AsmMnemonic VPEXTRD => nameof(VPEXTRD);
 
-        public static AsmMnemonicExpr VPEXTRQ => nameof(VPEXTRQ);
+        public static AsmMnemonic VPEXTRQ => nameof(VPEXTRQ);
 
-        public static AsmMnemonicExpr PEXTRW => nameof(PEXTRW);
+        public static AsmMnemonic PEXTRW => nameof(PEXTRW);
 
-        public static AsmMnemonicExpr VPEXTRW => nameof(VPEXTRW);
+        public static AsmMnemonic VPEXTRW => nameof(VPEXTRW);
 
-        public static AsmMnemonicExpr PHADDW => nameof(PHADDW);
+        public static AsmMnemonic PHADDW => nameof(PHADDW);
 
-        public static AsmMnemonicExpr PHADDD => nameof(PHADDD);
+        public static AsmMnemonic PHADDD => nameof(PHADDD);
 
-        public static AsmMnemonicExpr VPHADDW => nameof(VPHADDW);
+        public static AsmMnemonic VPHADDW => nameof(VPHADDW);
 
-        public static AsmMnemonicExpr VPHADDD => nameof(VPHADDD);
+        public static AsmMnemonic VPHADDD => nameof(VPHADDD);
 
-        public static AsmMnemonicExpr PHADDSW => nameof(PHADDSW);
+        public static AsmMnemonic PHADDSW => nameof(PHADDSW);
 
-        public static AsmMnemonicExpr VPHADDSW => nameof(VPHADDSW);
+        public static AsmMnemonic VPHADDSW => nameof(VPHADDSW);
 
-        public static AsmMnemonicExpr PHMINPOSUW => nameof(PHMINPOSUW);
+        public static AsmMnemonic PHMINPOSUW => nameof(PHMINPOSUW);
 
-        public static AsmMnemonicExpr VPHMINPOSUW => nameof(VPHMINPOSUW);
+        public static AsmMnemonic VPHMINPOSUW => nameof(VPHMINPOSUW);
 
-        public static AsmMnemonicExpr PHSUBW => nameof(PHSUBW);
+        public static AsmMnemonic PHSUBW => nameof(PHSUBW);
 
-        public static AsmMnemonicExpr PHSUBD => nameof(PHSUBD);
+        public static AsmMnemonic PHSUBD => nameof(PHSUBD);
 
-        public static AsmMnemonicExpr VPHSUBW => nameof(VPHSUBW);
+        public static AsmMnemonic VPHSUBW => nameof(VPHSUBW);
 
-        public static AsmMnemonicExpr VPHSUBD => nameof(VPHSUBD);
+        public static AsmMnemonic VPHSUBD => nameof(VPHSUBD);
 
-        public static AsmMnemonicExpr PHSUBSW => nameof(PHSUBSW);
+        public static AsmMnemonic PHSUBSW => nameof(PHSUBSW);
 
-        public static AsmMnemonicExpr VPHSUBSW => nameof(VPHSUBSW);
+        public static AsmMnemonic VPHSUBSW => nameof(VPHSUBSW);
 
-        public static AsmMnemonicExpr PINSRB => nameof(PINSRB);
+        public static AsmMnemonic PINSRB => nameof(PINSRB);
 
-        public static AsmMnemonicExpr PINSRD => nameof(PINSRD);
+        public static AsmMnemonic PINSRD => nameof(PINSRD);
 
-        public static AsmMnemonicExpr PINSRQ => nameof(PINSRQ);
+        public static AsmMnemonic PINSRQ => nameof(PINSRQ);
 
-        public static AsmMnemonicExpr VPINSRB => nameof(VPINSRB);
+        public static AsmMnemonic VPINSRB => nameof(VPINSRB);
 
-        public static AsmMnemonicExpr VPINSRD => nameof(VPINSRD);
+        public static AsmMnemonic VPINSRD => nameof(VPINSRD);
 
-        public static AsmMnemonicExpr VPINSRQ => nameof(VPINSRQ);
+        public static AsmMnemonic VPINSRQ => nameof(VPINSRQ);
 
-        public static AsmMnemonicExpr PINSRW => nameof(PINSRW);
+        public static AsmMnemonic PINSRW => nameof(PINSRW);
 
-        public static AsmMnemonicExpr VPINSRW => nameof(VPINSRW);
+        public static AsmMnemonic VPINSRW => nameof(VPINSRW);
 
-        public static AsmMnemonicExpr PMADDUBSW => nameof(PMADDUBSW);
+        public static AsmMnemonic PMADDUBSW => nameof(PMADDUBSW);
 
-        public static AsmMnemonicExpr VPMADDUBSW => nameof(VPMADDUBSW);
+        public static AsmMnemonic VPMADDUBSW => nameof(VPMADDUBSW);
 
-        public static AsmMnemonicExpr PMADDWD => nameof(PMADDWD);
+        public static AsmMnemonic PMADDWD => nameof(PMADDWD);
 
-        public static AsmMnemonicExpr VPMADDWD => nameof(VPMADDWD);
+        public static AsmMnemonic VPMADDWD => nameof(VPMADDWD);
 
-        public static AsmMnemonicExpr PMAXSB => nameof(PMAXSB);
+        public static AsmMnemonic PMAXSB => nameof(PMAXSB);
 
-        public static AsmMnemonicExpr VPMAXSB => nameof(VPMAXSB);
+        public static AsmMnemonic VPMAXSB => nameof(VPMAXSB);
 
-        public static AsmMnemonicExpr PMAXSD => nameof(PMAXSD);
+        public static AsmMnemonic PMAXSD => nameof(PMAXSD);
 
-        public static AsmMnemonicExpr VPMAXSD => nameof(VPMAXSD);
+        public static AsmMnemonic VPMAXSD => nameof(VPMAXSD);
 
-        public static AsmMnemonicExpr PMAXSW => nameof(PMAXSW);
+        public static AsmMnemonic PMAXSW => nameof(PMAXSW);
 
-        public static AsmMnemonicExpr VPMAXSW => nameof(VPMAXSW);
+        public static AsmMnemonic VPMAXSW => nameof(VPMAXSW);
 
-        public static AsmMnemonicExpr PMAXUB => nameof(PMAXUB);
+        public static AsmMnemonic PMAXUB => nameof(PMAXUB);
 
-        public static AsmMnemonicExpr VPMAXUB => nameof(VPMAXUB);
+        public static AsmMnemonic VPMAXUB => nameof(VPMAXUB);
 
-        public static AsmMnemonicExpr PMAXUD => nameof(PMAXUD);
+        public static AsmMnemonic PMAXUD => nameof(PMAXUD);
 
-        public static AsmMnemonicExpr VPMAXUD => nameof(VPMAXUD);
+        public static AsmMnemonic VPMAXUD => nameof(VPMAXUD);
 
-        public static AsmMnemonicExpr PMAXUW => nameof(PMAXUW);
+        public static AsmMnemonic PMAXUW => nameof(PMAXUW);
 
-        public static AsmMnemonicExpr VPMAXUW => nameof(VPMAXUW);
+        public static AsmMnemonic VPMAXUW => nameof(VPMAXUW);
 
-        public static AsmMnemonicExpr PMINSB => nameof(PMINSB);
+        public static AsmMnemonic PMINSB => nameof(PMINSB);
 
-        public static AsmMnemonicExpr VPMINSB => nameof(VPMINSB);
+        public static AsmMnemonic VPMINSB => nameof(VPMINSB);
 
-        public static AsmMnemonicExpr PMINSD => nameof(PMINSD);
+        public static AsmMnemonic PMINSD => nameof(PMINSD);
 
-        public static AsmMnemonicExpr VPMINSD => nameof(VPMINSD);
+        public static AsmMnemonic VPMINSD => nameof(VPMINSD);
 
-        public static AsmMnemonicExpr PMINSW => nameof(PMINSW);
+        public static AsmMnemonic PMINSW => nameof(PMINSW);
 
-        public static AsmMnemonicExpr VPMINSW => nameof(VPMINSW);
+        public static AsmMnemonic VPMINSW => nameof(VPMINSW);
 
-        public static AsmMnemonicExpr PMINUB => nameof(PMINUB);
+        public static AsmMnemonic PMINUB => nameof(PMINUB);
 
-        public static AsmMnemonicExpr VPMINUB => nameof(VPMINUB);
+        public static AsmMnemonic VPMINUB => nameof(VPMINUB);
 
-        public static AsmMnemonicExpr PMINUD => nameof(PMINUD);
+        public static AsmMnemonic PMINUD => nameof(PMINUD);
 
-        public static AsmMnemonicExpr VPMINUD => nameof(VPMINUD);
+        public static AsmMnemonic VPMINUD => nameof(VPMINUD);
 
-        public static AsmMnemonicExpr PMINUW => nameof(PMINUW);
+        public static AsmMnemonic PMINUW => nameof(PMINUW);
 
-        public static AsmMnemonicExpr VPMINUW => nameof(VPMINUW);
+        public static AsmMnemonic VPMINUW => nameof(VPMINUW);
 
-        public static AsmMnemonicExpr PMOVMSKB => nameof(PMOVMSKB);
+        public static AsmMnemonic PMOVMSKB => nameof(PMOVMSKB);
 
-        public static AsmMnemonicExpr VPMOVMSKB => nameof(VPMOVMSKB);
+        public static AsmMnemonic VPMOVMSKB => nameof(VPMOVMSKB);
 
-        public static AsmMnemonicExpr PMOVSXBW => nameof(PMOVSXBW);
+        public static AsmMnemonic PMOVSXBW => nameof(PMOVSXBW);
 
-        public static AsmMnemonicExpr PMOVSXBD => nameof(PMOVSXBD);
+        public static AsmMnemonic PMOVSXBD => nameof(PMOVSXBD);
 
-        public static AsmMnemonicExpr PMOVSXBQ => nameof(PMOVSXBQ);
+        public static AsmMnemonic PMOVSXBQ => nameof(PMOVSXBQ);
 
-        public static AsmMnemonicExpr PMOVSXWD => nameof(PMOVSXWD);
+        public static AsmMnemonic PMOVSXWD => nameof(PMOVSXWD);
 
-        public static AsmMnemonicExpr PMOVSXWQ => nameof(PMOVSXWQ);
+        public static AsmMnemonic PMOVSXWQ => nameof(PMOVSXWQ);
 
-        public static AsmMnemonicExpr PMOVSXDQ => nameof(PMOVSXDQ);
+        public static AsmMnemonic PMOVSXDQ => nameof(PMOVSXDQ);
 
-        public static AsmMnemonicExpr VPMOVSXBW => nameof(VPMOVSXBW);
+        public static AsmMnemonic VPMOVSXBW => nameof(VPMOVSXBW);
 
-        public static AsmMnemonicExpr VPMOVSXBD => nameof(VPMOVSXBD);
+        public static AsmMnemonic VPMOVSXBD => nameof(VPMOVSXBD);
 
-        public static AsmMnemonicExpr VPMOVSXBQ => nameof(VPMOVSXBQ);
+        public static AsmMnemonic VPMOVSXBQ => nameof(VPMOVSXBQ);
 
-        public static AsmMnemonicExpr VPMOVSXWD => nameof(VPMOVSXWD);
+        public static AsmMnemonic VPMOVSXWD => nameof(VPMOVSXWD);
 
-        public static AsmMnemonicExpr VPMOVSXWQ => nameof(VPMOVSXWQ);
+        public static AsmMnemonic VPMOVSXWQ => nameof(VPMOVSXWQ);
 
-        public static AsmMnemonicExpr VPMOVSXDQ => nameof(VPMOVSXDQ);
+        public static AsmMnemonic VPMOVSXDQ => nameof(VPMOVSXDQ);
 
-        public static AsmMnemonicExpr PMOVZXBW => nameof(PMOVZXBW);
+        public static AsmMnemonic PMOVZXBW => nameof(PMOVZXBW);
 
-        public static AsmMnemonicExpr PMOVZXBD => nameof(PMOVZXBD);
+        public static AsmMnemonic PMOVZXBD => nameof(PMOVZXBD);
 
-        public static AsmMnemonicExpr PMOVZXBQ => nameof(PMOVZXBQ);
+        public static AsmMnemonic PMOVZXBQ => nameof(PMOVZXBQ);
 
-        public static AsmMnemonicExpr PMOVZXWD => nameof(PMOVZXWD);
+        public static AsmMnemonic PMOVZXWD => nameof(PMOVZXWD);
 
-        public static AsmMnemonicExpr PMOVZXWQ => nameof(PMOVZXWQ);
+        public static AsmMnemonic PMOVZXWQ => nameof(PMOVZXWQ);
 
-        public static AsmMnemonicExpr PMOVZXDQ => nameof(PMOVZXDQ);
+        public static AsmMnemonic PMOVZXDQ => nameof(PMOVZXDQ);
 
-        public static AsmMnemonicExpr VPMOVZXBW => nameof(VPMOVZXBW);
+        public static AsmMnemonic VPMOVZXBW => nameof(VPMOVZXBW);
 
-        public static AsmMnemonicExpr VPMOVZXBD => nameof(VPMOVZXBD);
+        public static AsmMnemonic VPMOVZXBD => nameof(VPMOVZXBD);
 
-        public static AsmMnemonicExpr VPMOVZXBQ => nameof(VPMOVZXBQ);
+        public static AsmMnemonic VPMOVZXBQ => nameof(VPMOVZXBQ);
 
-        public static AsmMnemonicExpr VPMOVZXWD => nameof(VPMOVZXWD);
+        public static AsmMnemonic VPMOVZXWD => nameof(VPMOVZXWD);
 
-        public static AsmMnemonicExpr VPMOVZXWQ => nameof(VPMOVZXWQ);
+        public static AsmMnemonic VPMOVZXWQ => nameof(VPMOVZXWQ);
 
-        public static AsmMnemonicExpr VPMOVZXDQ => nameof(VPMOVZXDQ);
+        public static AsmMnemonic VPMOVZXDQ => nameof(VPMOVZXDQ);
 
-        public static AsmMnemonicExpr PMULDQ => nameof(PMULDQ);
+        public static AsmMnemonic PMULDQ => nameof(PMULDQ);
 
-        public static AsmMnemonicExpr VPMULDQ => nameof(VPMULDQ);
+        public static AsmMnemonic VPMULDQ => nameof(VPMULDQ);
 
-        public static AsmMnemonicExpr PMULHRSW => nameof(PMULHRSW);
+        public static AsmMnemonic PMULHRSW => nameof(PMULHRSW);
 
-        public static AsmMnemonicExpr VPMULHRSW => nameof(VPMULHRSW);
+        public static AsmMnemonic VPMULHRSW => nameof(VPMULHRSW);
 
-        public static AsmMnemonicExpr PMULHUW => nameof(PMULHUW);
+        public static AsmMnemonic PMULHUW => nameof(PMULHUW);
 
-        public static AsmMnemonicExpr VPMULHUW => nameof(VPMULHUW);
+        public static AsmMnemonic VPMULHUW => nameof(VPMULHUW);
 
-        public static AsmMnemonicExpr PMULHW => nameof(PMULHW);
+        public static AsmMnemonic PMULHW => nameof(PMULHW);
 
-        public static AsmMnemonicExpr VPMULHW => nameof(VPMULHW);
+        public static AsmMnemonic VPMULHW => nameof(VPMULHW);
 
-        public static AsmMnemonicExpr PMULLD => nameof(PMULLD);
+        public static AsmMnemonic PMULLD => nameof(PMULLD);
 
-        public static AsmMnemonicExpr VPMULLD => nameof(VPMULLD);
+        public static AsmMnemonic VPMULLD => nameof(VPMULLD);
 
-        public static AsmMnemonicExpr PMULLW => nameof(PMULLW);
+        public static AsmMnemonic PMULLW => nameof(PMULLW);
 
-        public static AsmMnemonicExpr VPMULLW => nameof(VPMULLW);
+        public static AsmMnemonic VPMULLW => nameof(VPMULLW);
 
-        public static AsmMnemonicExpr PMULUDQ => nameof(PMULUDQ);
+        public static AsmMnemonic PMULUDQ => nameof(PMULUDQ);
 
-        public static AsmMnemonicExpr VPMULUDQ => nameof(VPMULUDQ);
+        public static AsmMnemonic VPMULUDQ => nameof(VPMULUDQ);
 
-        public static AsmMnemonicExpr POP => nameof(POP);
+        public static AsmMnemonic POP => nameof(POP);
 
-        public static AsmMnemonicExpr POPCNT => nameof(POPCNT);
+        public static AsmMnemonic POPCNT => nameof(POPCNT);
 
-        public static AsmMnemonicExpr POR => nameof(POR);
+        public static AsmMnemonic POR => nameof(POR);
 
-        public static AsmMnemonicExpr VPOR => nameof(VPOR);
+        public static AsmMnemonic VPOR => nameof(VPOR);
 
-        public static AsmMnemonicExpr PREFETCHT0 => nameof(PREFETCHT0);
+        public static AsmMnemonic PREFETCHT0 => nameof(PREFETCHT0);
 
-        public static AsmMnemonicExpr PREFETCHT1 => nameof(PREFETCHT1);
+        public static AsmMnemonic PREFETCHT1 => nameof(PREFETCHT1);
 
-        public static AsmMnemonicExpr PREFETCHT2 => nameof(PREFETCHT2);
+        public static AsmMnemonic PREFETCHT2 => nameof(PREFETCHT2);
 
-        public static AsmMnemonicExpr PREFETCHNTA => nameof(PREFETCHNTA);
+        public static AsmMnemonic PREFETCHNTA => nameof(PREFETCHNTA);
 
-        public static AsmMnemonicExpr PSADBW => nameof(PSADBW);
+        public static AsmMnemonic PSADBW => nameof(PSADBW);
 
-        public static AsmMnemonicExpr VPSADBW => nameof(VPSADBW);
+        public static AsmMnemonic VPSADBW => nameof(VPSADBW);
 
-        public static AsmMnemonicExpr PSHUFB => nameof(PSHUFB);
+        public static AsmMnemonic PSHUFB => nameof(PSHUFB);
 
-        public static AsmMnemonicExpr VPSHUFB => nameof(VPSHUFB);
+        public static AsmMnemonic VPSHUFB => nameof(VPSHUFB);
 
-        public static AsmMnemonicExpr PSHUFD => nameof(PSHUFD);
+        public static AsmMnemonic PSHUFD => nameof(PSHUFD);
 
-        public static AsmMnemonicExpr VPSHUFD => nameof(VPSHUFD);
+        public static AsmMnemonic VPSHUFD => nameof(VPSHUFD);
 
-        public static AsmMnemonicExpr PSHUFHW => nameof(PSHUFHW);
+        public static AsmMnemonic PSHUFHW => nameof(PSHUFHW);
 
-        public static AsmMnemonicExpr VPSHUFHW => nameof(VPSHUFHW);
+        public static AsmMnemonic VPSHUFHW => nameof(VPSHUFHW);
 
-        public static AsmMnemonicExpr PSHUFLW => nameof(PSHUFLW);
+        public static AsmMnemonic PSHUFLW => nameof(PSHUFLW);
 
-        public static AsmMnemonicExpr VPSHUFLW => nameof(VPSHUFLW);
+        public static AsmMnemonic VPSHUFLW => nameof(VPSHUFLW);
 
-        public static AsmMnemonicExpr PSHUFW => nameof(PSHUFW);
+        public static AsmMnemonic PSHUFW => nameof(PSHUFW);
 
-        public static AsmMnemonicExpr PSIGNB => nameof(PSIGNB);
+        public static AsmMnemonic PSIGNB => nameof(PSIGNB);
 
-        public static AsmMnemonicExpr PSIGNW => nameof(PSIGNW);
+        public static AsmMnemonic PSIGNW => nameof(PSIGNW);
 
-        public static AsmMnemonicExpr PSIGND => nameof(PSIGND);
+        public static AsmMnemonic PSIGND => nameof(PSIGND);
 
-        public static AsmMnemonicExpr VPSIGNB => nameof(VPSIGNB);
+        public static AsmMnemonic VPSIGNB => nameof(VPSIGNB);
 
-        public static AsmMnemonicExpr VPSIGNW => nameof(VPSIGNW);
+        public static AsmMnemonic VPSIGNW => nameof(VPSIGNW);
 
-        public static AsmMnemonicExpr VPSIGND => nameof(VPSIGND);
+        public static AsmMnemonic VPSIGND => nameof(VPSIGND);
 
-        public static AsmMnemonicExpr PSLLDQ => nameof(PSLLDQ);
+        public static AsmMnemonic PSLLDQ => nameof(PSLLDQ);
 
-        public static AsmMnemonicExpr VPSLLDQ => nameof(VPSLLDQ);
+        public static AsmMnemonic VPSLLDQ => nameof(VPSLLDQ);
 
-        public static AsmMnemonicExpr PSLLW => nameof(PSLLW);
+        public static AsmMnemonic PSLLW => nameof(PSLLW);
 
-        public static AsmMnemonicExpr PSLLD => nameof(PSLLD);
+        public static AsmMnemonic PSLLD => nameof(PSLLD);
 
-        public static AsmMnemonicExpr PSLLQ => nameof(PSLLQ);
+        public static AsmMnemonic PSLLQ => nameof(PSLLQ);
 
-        public static AsmMnemonicExpr VPSLLW => nameof(VPSLLW);
+        public static AsmMnemonic VPSLLW => nameof(VPSLLW);
 
-        public static AsmMnemonicExpr VPSLLD => nameof(VPSLLD);
+        public static AsmMnemonic VPSLLD => nameof(VPSLLD);
 
-        public static AsmMnemonicExpr VPSLLQ => nameof(VPSLLQ);
+        public static AsmMnemonic VPSLLQ => nameof(VPSLLQ);
 
-        public static AsmMnemonicExpr PSRAW => nameof(PSRAW);
+        public static AsmMnemonic PSRAW => nameof(PSRAW);
 
-        public static AsmMnemonicExpr PSRAD => nameof(PSRAD);
+        public static AsmMnemonic PSRAD => nameof(PSRAD);
 
-        public static AsmMnemonicExpr VPSRAW => nameof(VPSRAW);
+        public static AsmMnemonic VPSRAW => nameof(VPSRAW);
 
-        public static AsmMnemonicExpr VPSRAD => nameof(VPSRAD);
+        public static AsmMnemonic VPSRAD => nameof(VPSRAD);
 
-        public static AsmMnemonicExpr PSRLDQ => nameof(PSRLDQ);
+        public static AsmMnemonic PSRLDQ => nameof(PSRLDQ);
 
-        public static AsmMnemonicExpr VPSRLDQ => nameof(VPSRLDQ);
+        public static AsmMnemonic VPSRLDQ => nameof(VPSRLDQ);
 
-        public static AsmMnemonicExpr PSRLW => nameof(PSRLW);
+        public static AsmMnemonic PSRLW => nameof(PSRLW);
 
-        public static AsmMnemonicExpr PSRLD => nameof(PSRLD);
+        public static AsmMnemonic PSRLD => nameof(PSRLD);
 
-        public static AsmMnemonicExpr PSRLQ => nameof(PSRLQ);
+        public static AsmMnemonic PSRLQ => nameof(PSRLQ);
 
-        public static AsmMnemonicExpr VPSRLW => nameof(VPSRLW);
+        public static AsmMnemonic VPSRLW => nameof(VPSRLW);
 
-        public static AsmMnemonicExpr VPSRLD => nameof(VPSRLD);
+        public static AsmMnemonic VPSRLD => nameof(VPSRLD);
 
-        public static AsmMnemonicExpr VPSRLQ => nameof(VPSRLQ);
+        public static AsmMnemonic VPSRLQ => nameof(VPSRLQ);
 
-        public static AsmMnemonicExpr PSUBB => nameof(PSUBB);
+        public static AsmMnemonic PSUBB => nameof(PSUBB);
 
-        public static AsmMnemonicExpr PSUBW => nameof(PSUBW);
+        public static AsmMnemonic PSUBW => nameof(PSUBW);
 
-        public static AsmMnemonicExpr PSUBD => nameof(PSUBD);
+        public static AsmMnemonic PSUBD => nameof(PSUBD);
 
-        public static AsmMnemonicExpr VPSUBB => nameof(VPSUBB);
+        public static AsmMnemonic VPSUBB => nameof(VPSUBB);
 
-        public static AsmMnemonicExpr VPSUBW => nameof(VPSUBW);
+        public static AsmMnemonic VPSUBW => nameof(VPSUBW);
 
-        public static AsmMnemonicExpr VPSUBD => nameof(VPSUBD);
+        public static AsmMnemonic VPSUBD => nameof(VPSUBD);
 
-        public static AsmMnemonicExpr PSUBQ => nameof(PSUBQ);
+        public static AsmMnemonic PSUBQ => nameof(PSUBQ);
 
-        public static AsmMnemonicExpr VPSUBQ => nameof(VPSUBQ);
+        public static AsmMnemonic VPSUBQ => nameof(VPSUBQ);
 
-        public static AsmMnemonicExpr PSUBSB => nameof(PSUBSB);
+        public static AsmMnemonic PSUBSB => nameof(PSUBSB);
 
-        public static AsmMnemonicExpr PSUBSW => nameof(PSUBSW);
+        public static AsmMnemonic PSUBSW => nameof(PSUBSW);
 
-        public static AsmMnemonicExpr VPSUBSB => nameof(VPSUBSB);
+        public static AsmMnemonic VPSUBSB => nameof(VPSUBSB);
 
-        public static AsmMnemonicExpr VPSUBSW => nameof(VPSUBSW);
+        public static AsmMnemonic VPSUBSW => nameof(VPSUBSW);
 
-        public static AsmMnemonicExpr PSUBUSB => nameof(PSUBUSB);
+        public static AsmMnemonic PSUBUSB => nameof(PSUBUSB);
 
-        public static AsmMnemonicExpr PSUBUSW => nameof(PSUBUSW);
+        public static AsmMnemonic PSUBUSW => nameof(PSUBUSW);
 
-        public static AsmMnemonicExpr VPSUBUSB => nameof(VPSUBUSB);
+        public static AsmMnemonic VPSUBUSB => nameof(VPSUBUSB);
 
-        public static AsmMnemonicExpr VPSUBUSW => nameof(VPSUBUSW);
+        public static AsmMnemonic VPSUBUSW => nameof(VPSUBUSW);
 
-        public static AsmMnemonicExpr PTEST => nameof(PTEST);
+        public static AsmMnemonic PTEST => nameof(PTEST);
 
-        public static AsmMnemonicExpr VPTEST => nameof(VPTEST);
+        public static AsmMnemonic VPTEST => nameof(VPTEST);
 
-        public static AsmMnemonicExpr PUNPCKHBW => nameof(PUNPCKHBW);
+        public static AsmMnemonic PUNPCKHBW => nameof(PUNPCKHBW);
 
-        public static AsmMnemonicExpr PUNPCKHWD => nameof(PUNPCKHWD);
+        public static AsmMnemonic PUNPCKHWD => nameof(PUNPCKHWD);
 
-        public static AsmMnemonicExpr PUNPCKHDQ => nameof(PUNPCKHDQ);
+        public static AsmMnemonic PUNPCKHDQ => nameof(PUNPCKHDQ);
 
-        public static AsmMnemonicExpr PUNPCKHQDQ => nameof(PUNPCKHQDQ);
+        public static AsmMnemonic PUNPCKHQDQ => nameof(PUNPCKHQDQ);
 
-        public static AsmMnemonicExpr VPUNPCKHBW => nameof(VPUNPCKHBW);
+        public static AsmMnemonic VPUNPCKHBW => nameof(VPUNPCKHBW);
 
-        public static AsmMnemonicExpr VPUNPCKHWD => nameof(VPUNPCKHWD);
+        public static AsmMnemonic VPUNPCKHWD => nameof(VPUNPCKHWD);
 
-        public static AsmMnemonicExpr VPUNPCKHDQ => nameof(VPUNPCKHDQ);
+        public static AsmMnemonic VPUNPCKHDQ => nameof(VPUNPCKHDQ);
 
-        public static AsmMnemonicExpr VPUNPCKHQDQ => nameof(VPUNPCKHQDQ);
+        public static AsmMnemonic VPUNPCKHQDQ => nameof(VPUNPCKHQDQ);
 
-        public static AsmMnemonicExpr PUNPCKLBW => nameof(PUNPCKLBW);
+        public static AsmMnemonic PUNPCKLBW => nameof(PUNPCKLBW);
 
-        public static AsmMnemonicExpr PUNPCKLWD => nameof(PUNPCKLWD);
+        public static AsmMnemonic PUNPCKLWD => nameof(PUNPCKLWD);
 
-        public static AsmMnemonicExpr PUNPCKLDQ => nameof(PUNPCKLDQ);
+        public static AsmMnemonic PUNPCKLDQ => nameof(PUNPCKLDQ);
 
-        public static AsmMnemonicExpr PUNPCKLQDQ => nameof(PUNPCKLQDQ);
+        public static AsmMnemonic PUNPCKLQDQ => nameof(PUNPCKLQDQ);
 
-        public static AsmMnemonicExpr VPUNPCKLBW => nameof(VPUNPCKLBW);
+        public static AsmMnemonic VPUNPCKLBW => nameof(VPUNPCKLBW);
 
-        public static AsmMnemonicExpr VPUNPCKLWD => nameof(VPUNPCKLWD);
+        public static AsmMnemonic VPUNPCKLWD => nameof(VPUNPCKLWD);
 
-        public static AsmMnemonicExpr VPUNPCKLDQ => nameof(VPUNPCKLDQ);
+        public static AsmMnemonic VPUNPCKLDQ => nameof(VPUNPCKLDQ);
 
-        public static AsmMnemonicExpr VPUNPCKLQDQ => nameof(VPUNPCKLQDQ);
+        public static AsmMnemonic VPUNPCKLQDQ => nameof(VPUNPCKLQDQ);
 
-        public static AsmMnemonicExpr PUSH => nameof(PUSH);
+        public static AsmMnemonic PUSH => nameof(PUSH);
 
-        public static AsmMnemonicExpr PUSHQ => nameof(PUSHQ);
+        public static AsmMnemonic PUSHQ => nameof(PUSHQ);
 
-        public static AsmMnemonicExpr PUSHW => nameof(PUSHW);
+        public static AsmMnemonic PUSHW => nameof(PUSHW);
 
-        public static AsmMnemonicExpr PXOR => nameof(PXOR);
+        public static AsmMnemonic PXOR => nameof(PXOR);
 
-        public static AsmMnemonicExpr VPXOR => nameof(VPXOR);
+        public static AsmMnemonic VPXOR => nameof(VPXOR);
 
-        public static AsmMnemonicExpr RCL => nameof(RCL);
+        public static AsmMnemonic RCL => nameof(RCL);
 
-        public static AsmMnemonicExpr RCR => nameof(RCR);
+        public static AsmMnemonic RCR => nameof(RCR);
 
-        public static AsmMnemonicExpr ROL => nameof(ROL);
+        public static AsmMnemonic ROL => nameof(ROL);
 
-        public static AsmMnemonicExpr ROR => nameof(ROR);
+        public static AsmMnemonic ROR => nameof(ROR);
 
-        public static AsmMnemonicExpr RCPPS => nameof(RCPPS);
+        public static AsmMnemonic RCPPS => nameof(RCPPS);
 
-        public static AsmMnemonicExpr VRCPPS => nameof(VRCPPS);
+        public static AsmMnemonic VRCPPS => nameof(VRCPPS);
 
-        public static AsmMnemonicExpr RCPSS => nameof(RCPSS);
+        public static AsmMnemonic RCPSS => nameof(RCPSS);
 
-        public static AsmMnemonicExpr VRCPSS => nameof(VRCPSS);
+        public static AsmMnemonic VRCPSS => nameof(VRCPSS);
 
-        public static AsmMnemonicExpr RDFSBASE => nameof(RDFSBASE);
+        public static AsmMnemonic RDFSBASE => nameof(RDFSBASE);
 
-        public static AsmMnemonicExpr RDGSBASE => nameof(RDGSBASE);
+        public static AsmMnemonic RDGSBASE => nameof(RDGSBASE);
 
-        public static AsmMnemonicExpr RDRAND => nameof(RDRAND);
+        public static AsmMnemonic RDRAND => nameof(RDRAND);
 
-        public static AsmMnemonicExpr REP_INS => nameof(REP_INS);
+        public static AsmMnemonic REP_INS => nameof(REP_INS);
 
-        public static AsmMnemonicExpr REP_MOVS => nameof(REP_MOVS);
+        public static AsmMnemonic REP_MOVS => nameof(REP_MOVS);
 
-        public static AsmMnemonicExpr REP_OUTS => nameof(REP_OUTS);
+        public static AsmMnemonic REP_OUTS => nameof(REP_OUTS);
 
-        public static AsmMnemonicExpr REP_LODS => nameof(REP_LODS);
+        public static AsmMnemonic REP_LODS => nameof(REP_LODS);
 
-        public static AsmMnemonicExpr REP_STOS => nameof(REP_STOS);
+        public static AsmMnemonic REP_STOS => nameof(REP_STOS);
 
-        public static AsmMnemonicExpr REPE_CMPS => nameof(REPE_CMPS);
+        public static AsmMnemonic REPE_CMPS => nameof(REPE_CMPS);
 
-        public static AsmMnemonicExpr REPE_SCAS => nameof(REPE_SCAS);
+        public static AsmMnemonic REPE_SCAS => nameof(REPE_SCAS);
 
-        public static AsmMnemonicExpr REPNE_CMPS => nameof(REPNE_CMPS);
+        public static AsmMnemonic REPNE_CMPS => nameof(REPNE_CMPS);
 
-        public static AsmMnemonicExpr REPNE_SCAS => nameof(REPNE_SCAS);
+        public static AsmMnemonic REPNE_SCAS => nameof(REPNE_SCAS);
 
-        public static AsmMnemonicExpr RET => nameof(RET);
+        public static AsmMnemonic RET => nameof(RET);
 
-        public static AsmMnemonicExpr RORX => nameof(RORX);
+        public static AsmMnemonic RORX => nameof(RORX);
 
-        public static AsmMnemonicExpr ROUNDPD => nameof(ROUNDPD);
+        public static AsmMnemonic ROUNDPD => nameof(ROUNDPD);
 
-        public static AsmMnemonicExpr VROUNDPD => nameof(VROUNDPD);
+        public static AsmMnemonic VROUNDPD => nameof(VROUNDPD);
 
-        public static AsmMnemonicExpr ROUNDPS => nameof(ROUNDPS);
+        public static AsmMnemonic ROUNDPS => nameof(ROUNDPS);
 
-        public static AsmMnemonicExpr VROUNDPS => nameof(VROUNDPS);
+        public static AsmMnemonic VROUNDPS => nameof(VROUNDPS);
 
-        public static AsmMnemonicExpr ROUNDSD => nameof(ROUNDSD);
+        public static AsmMnemonic ROUNDSD => nameof(ROUNDSD);
 
-        public static AsmMnemonicExpr VROUNDSD => nameof(VROUNDSD);
+        public static AsmMnemonic VROUNDSD => nameof(VROUNDSD);
 
-        public static AsmMnemonicExpr ROUNDSS => nameof(ROUNDSS);
+        public static AsmMnemonic ROUNDSS => nameof(ROUNDSS);
 
-        public static AsmMnemonicExpr VROUNDSS => nameof(VROUNDSS);
+        public static AsmMnemonic VROUNDSS => nameof(VROUNDSS);
 
-        public static AsmMnemonicExpr RSQRTPS => nameof(RSQRTPS);
+        public static AsmMnemonic RSQRTPS => nameof(RSQRTPS);
 
-        public static AsmMnemonicExpr VRSQRTPS => nameof(VRSQRTPS);
+        public static AsmMnemonic VRSQRTPS => nameof(VRSQRTPS);
 
-        public static AsmMnemonicExpr RSQRTSS => nameof(RSQRTSS);
+        public static AsmMnemonic RSQRTSS => nameof(RSQRTSS);
 
-        public static AsmMnemonicExpr VRSQRTSS => nameof(VRSQRTSS);
+        public static AsmMnemonic VRSQRTSS => nameof(VRSQRTSS);
 
-        public static AsmMnemonicExpr SAL => nameof(SAL);
+        public static AsmMnemonic SAL => nameof(SAL);
 
-        public static AsmMnemonicExpr SAR => nameof(SAR);
+        public static AsmMnemonic SAR => nameof(SAR);
 
-        public static AsmMnemonicExpr SHL => nameof(SHL);
+        public static AsmMnemonic SHL => nameof(SHL);
 
-        public static AsmMnemonicExpr SHR => nameof(SHR);
+        public static AsmMnemonic SHR => nameof(SHR);
 
-        public static AsmMnemonicExpr SARX => nameof(SARX);
+        public static AsmMnemonic SARX => nameof(SARX);
 
-        public static AsmMnemonicExpr SHLX => nameof(SHLX);
+        public static AsmMnemonic SHLX => nameof(SHLX);
 
-        public static AsmMnemonicExpr SHRX => nameof(SHRX);
+        public static AsmMnemonic SHRX => nameof(SHRX);
 
-        public static AsmMnemonicExpr SBB => nameof(SBB);
+        public static AsmMnemonic SBB => nameof(SBB);
 
-        public static AsmMnemonicExpr SCAS => nameof(SCAS);
+        public static AsmMnemonic SCAS => nameof(SCAS);
 
-        public static AsmMnemonicExpr SETA => nameof(SETA);
+        public static AsmMnemonic SETA => nameof(SETA);
 
-        public static AsmMnemonicExpr SETAE => nameof(SETAE);
+        public static AsmMnemonic SETAE => nameof(SETAE);
 
-        public static AsmMnemonicExpr SETB => nameof(SETB);
+        public static AsmMnemonic SETB => nameof(SETB);
 
-        public static AsmMnemonicExpr SETBE => nameof(SETBE);
+        public static AsmMnemonic SETBE => nameof(SETBE);
 
-        public static AsmMnemonicExpr SETC => nameof(SETC);
+        public static AsmMnemonic SETC => nameof(SETC);
 
-        public static AsmMnemonicExpr SETE => nameof(SETE);
+        public static AsmMnemonic SETE => nameof(SETE);
 
-        public static AsmMnemonicExpr SETG => nameof(SETG);
+        public static AsmMnemonic SETG => nameof(SETG);
 
-        public static AsmMnemonicExpr SETGE => nameof(SETGE);
+        public static AsmMnemonic SETGE => nameof(SETGE);
 
-        public static AsmMnemonicExpr SETL => nameof(SETL);
+        public static AsmMnemonic SETL => nameof(SETL);
 
-        public static AsmMnemonicExpr SETLE => nameof(SETLE);
+        public static AsmMnemonic SETLE => nameof(SETLE);
 
-        public static AsmMnemonicExpr SETNA => nameof(SETNA);
+        public static AsmMnemonic SETNA => nameof(SETNA);
 
-        public static AsmMnemonicExpr SETNAE => nameof(SETNAE);
+        public static AsmMnemonic SETNAE => nameof(SETNAE);
 
-        public static AsmMnemonicExpr SETNB => nameof(SETNB);
+        public static AsmMnemonic SETNB => nameof(SETNB);
 
-        public static AsmMnemonicExpr SETNBE => nameof(SETNBE);
+        public static AsmMnemonic SETNBE => nameof(SETNBE);
 
-        public static AsmMnemonicExpr SETNC => nameof(SETNC);
+        public static AsmMnemonic SETNC => nameof(SETNC);
 
-        public static AsmMnemonicExpr SETNE => nameof(SETNE);
+        public static AsmMnemonic SETNE => nameof(SETNE);
 
-        public static AsmMnemonicExpr SETNG => nameof(SETNG);
+        public static AsmMnemonic SETNG => nameof(SETNG);
 
-        public static AsmMnemonicExpr SETNGE => nameof(SETNGE);
+        public static AsmMnemonic SETNGE => nameof(SETNGE);
 
-        public static AsmMnemonicExpr SETNL => nameof(SETNL);
+        public static AsmMnemonic SETNL => nameof(SETNL);
 
-        public static AsmMnemonicExpr SETNLE => nameof(SETNLE);
+        public static AsmMnemonic SETNLE => nameof(SETNLE);
 
-        public static AsmMnemonicExpr SETNO => nameof(SETNO);
+        public static AsmMnemonic SETNO => nameof(SETNO);
 
-        public static AsmMnemonicExpr SETNP => nameof(SETNP);
+        public static AsmMnemonic SETNP => nameof(SETNP);
 
-        public static AsmMnemonicExpr SETNS => nameof(SETNS);
+        public static AsmMnemonic SETNS => nameof(SETNS);
 
-        public static AsmMnemonicExpr SETNZ => nameof(SETNZ);
+        public static AsmMnemonic SETNZ => nameof(SETNZ);
 
-        public static AsmMnemonicExpr SETO => nameof(SETO);
+        public static AsmMnemonic SETO => nameof(SETO);
 
-        public static AsmMnemonicExpr SETP => nameof(SETP);
+        public static AsmMnemonic SETP => nameof(SETP);
 
-        public static AsmMnemonicExpr SETPE => nameof(SETPE);
+        public static AsmMnemonic SETPE => nameof(SETPE);
 
-        public static AsmMnemonicExpr SETPO => nameof(SETPO);
+        public static AsmMnemonic SETPO => nameof(SETPO);
 
-        public static AsmMnemonicExpr SETS => nameof(SETS);
+        public static AsmMnemonic SETS => nameof(SETS);
 
-        public static AsmMnemonicExpr SETZ => nameof(SETZ);
+        public static AsmMnemonic SETZ => nameof(SETZ);
 
-        public static AsmMnemonicExpr SGDT => nameof(SGDT);
+        public static AsmMnemonic SGDT => nameof(SGDT);
 
-        public static AsmMnemonicExpr SHLD => nameof(SHLD);
+        public static AsmMnemonic SHLD => nameof(SHLD);
 
-        public static AsmMnemonicExpr SHRD => nameof(SHRD);
+        public static AsmMnemonic SHRD => nameof(SHRD);
 
-        public static AsmMnemonicExpr SHUFPD => nameof(SHUFPD);
+        public static AsmMnemonic SHUFPD => nameof(SHUFPD);
 
-        public static AsmMnemonicExpr VSHUFPD => nameof(VSHUFPD);
+        public static AsmMnemonic VSHUFPD => nameof(VSHUFPD);
 
-        public static AsmMnemonicExpr SHUFPS => nameof(SHUFPS);
+        public static AsmMnemonic SHUFPS => nameof(SHUFPS);
 
-        public static AsmMnemonicExpr VSHUFPS => nameof(VSHUFPS);
+        public static AsmMnemonic VSHUFPS => nameof(VSHUFPS);
 
-        public static AsmMnemonicExpr SIDT => nameof(SIDT);
+        public static AsmMnemonic SIDT => nameof(SIDT);
 
-        public static AsmMnemonicExpr SLDT => nameof(SLDT);
+        public static AsmMnemonic SLDT => nameof(SLDT);
 
-        public static AsmMnemonicExpr SMSW => nameof(SMSW);
+        public static AsmMnemonic SMSW => nameof(SMSW);
 
-        public static AsmMnemonicExpr SQRTPD => nameof(SQRTPD);
+        public static AsmMnemonic SQRTPD => nameof(SQRTPD);
 
-        public static AsmMnemonicExpr VSQRTPD => nameof(VSQRTPD);
+        public static AsmMnemonic VSQRTPD => nameof(VSQRTPD);
 
-        public static AsmMnemonicExpr SQRTPS => nameof(SQRTPS);
+        public static AsmMnemonic SQRTPS => nameof(SQRTPS);
 
-        public static AsmMnemonicExpr VSQRTPS => nameof(VSQRTPS);
+        public static AsmMnemonic VSQRTPS => nameof(VSQRTPS);
 
-        public static AsmMnemonicExpr SQRTSD => nameof(SQRTSD);
+        public static AsmMnemonic SQRTSD => nameof(SQRTSD);
 
-        public static AsmMnemonicExpr VSQRTSD => nameof(VSQRTSD);
+        public static AsmMnemonic VSQRTSD => nameof(VSQRTSD);
 
-        public static AsmMnemonicExpr SQRTSS => nameof(SQRTSS);
+        public static AsmMnemonic SQRTSS => nameof(SQRTSS);
 
-        public static AsmMnemonicExpr VSQRTSS => nameof(VSQRTSS);
+        public static AsmMnemonic VSQRTSS => nameof(VSQRTSS);
 
-        public static AsmMnemonicExpr STMXCSR => nameof(STMXCSR);
+        public static AsmMnemonic STMXCSR => nameof(STMXCSR);
 
-        public static AsmMnemonicExpr VSTMXCSR => nameof(VSTMXCSR);
+        public static AsmMnemonic VSTMXCSR => nameof(VSTMXCSR);
 
-        public static AsmMnemonicExpr STOS => nameof(STOS);
+        public static AsmMnemonic STOS => nameof(STOS);
 
-        public static AsmMnemonicExpr STR => nameof(STR);
+        public static AsmMnemonic STR => nameof(STR);
 
-        public static AsmMnemonicExpr SUB => nameof(SUB);
+        public static AsmMnemonic SUB => nameof(SUB);
 
-        public static AsmMnemonicExpr SUBPD => nameof(SUBPD);
+        public static AsmMnemonic SUBPD => nameof(SUBPD);
 
-        public static AsmMnemonicExpr VSUBPD => nameof(VSUBPD);
+        public static AsmMnemonic VSUBPD => nameof(VSUBPD);
 
-        public static AsmMnemonicExpr SUBPS => nameof(SUBPS);
+        public static AsmMnemonic SUBPS => nameof(SUBPS);
 
-        public static AsmMnemonicExpr VSUBPS => nameof(VSUBPS);
+        public static AsmMnemonic VSUBPS => nameof(VSUBPS);
 
-        public static AsmMnemonicExpr SUBSD => nameof(SUBSD);
+        public static AsmMnemonic SUBSD => nameof(SUBSD);
 
-        public static AsmMnemonicExpr VSUBSD => nameof(VSUBSD);
+        public static AsmMnemonic VSUBSD => nameof(VSUBSD);
 
-        public static AsmMnemonicExpr SUBSS => nameof(SUBSS);
+        public static AsmMnemonic SUBSS => nameof(SUBSS);
 
-        public static AsmMnemonicExpr VSUBSS => nameof(VSUBSS);
+        public static AsmMnemonic VSUBSS => nameof(VSUBSS);
 
-        public static AsmMnemonicExpr SYSEXIT => nameof(SYSEXIT);
+        public static AsmMnemonic SYSEXIT => nameof(SYSEXIT);
 
-        public static AsmMnemonicExpr SYSRET => nameof(SYSRET);
+        public static AsmMnemonic SYSRET => nameof(SYSRET);
 
-        public static AsmMnemonicExpr TEST => nameof(TEST);
+        public static AsmMnemonic TEST => nameof(TEST);
 
-        public static AsmMnemonicExpr TZCNT => nameof(TZCNT);
+        public static AsmMnemonic TZCNT => nameof(TZCNT);
 
-        public static AsmMnemonicExpr UCOMISD => nameof(UCOMISD);
+        public static AsmMnemonic UCOMISD => nameof(UCOMISD);
 
-        public static AsmMnemonicExpr VUCOMISD => nameof(VUCOMISD);
+        public static AsmMnemonic VUCOMISD => nameof(VUCOMISD);
 
-        public static AsmMnemonicExpr UCOMISS => nameof(UCOMISS);
+        public static AsmMnemonic UCOMISS => nameof(UCOMISS);
 
-        public static AsmMnemonicExpr VUCOMISS => nameof(VUCOMISS);
+        public static AsmMnemonic VUCOMISS => nameof(VUCOMISS);
 
-        public static AsmMnemonicExpr UNPCKHPD => nameof(UNPCKHPD);
+        public static AsmMnemonic UNPCKHPD => nameof(UNPCKHPD);
 
-        public static AsmMnemonicExpr VUNPCKHPD => nameof(VUNPCKHPD);
+        public static AsmMnemonic VUNPCKHPD => nameof(VUNPCKHPD);
 
-        public static AsmMnemonicExpr UNPCKHPS => nameof(UNPCKHPS);
+        public static AsmMnemonic UNPCKHPS => nameof(UNPCKHPS);
 
-        public static AsmMnemonicExpr VUNPCKHPS => nameof(VUNPCKHPS);
+        public static AsmMnemonic VUNPCKHPS => nameof(VUNPCKHPS);
 
-        public static AsmMnemonicExpr UNPCKLPD => nameof(UNPCKLPD);
+        public static AsmMnemonic UNPCKLPD => nameof(UNPCKLPD);
 
-        public static AsmMnemonicExpr VUNPCKLPD => nameof(VUNPCKLPD);
+        public static AsmMnemonic VUNPCKLPD => nameof(VUNPCKLPD);
 
-        public static AsmMnemonicExpr UNPCKLPS => nameof(UNPCKLPS);
+        public static AsmMnemonic UNPCKLPS => nameof(UNPCKLPS);
 
-        public static AsmMnemonicExpr VUNPCKLPS => nameof(VUNPCKLPS);
+        public static AsmMnemonic VUNPCKLPS => nameof(VUNPCKLPS);
 
-        public static AsmMnemonicExpr VBROADCASTSS => nameof(VBROADCASTSS);
+        public static AsmMnemonic VBROADCASTSS => nameof(VBROADCASTSS);
 
-        public static AsmMnemonicExpr VBROADCASTSD => nameof(VBROADCASTSD);
+        public static AsmMnemonic VBROADCASTSD => nameof(VBROADCASTSD);
 
-        public static AsmMnemonicExpr VBROADCASTF128 => nameof(VBROADCASTF128);
+        public static AsmMnemonic VBROADCASTF128 => nameof(VBROADCASTF128);
 
-        public static AsmMnemonicExpr VCVTPH2PS => nameof(VCVTPH2PS);
+        public static AsmMnemonic VCVTPH2PS => nameof(VCVTPH2PS);
 
-        public static AsmMnemonicExpr VCVTPS2PH => nameof(VCVTPS2PH);
+        public static AsmMnemonic VCVTPS2PH => nameof(VCVTPS2PH);
 
-        public static AsmMnemonicExpr VERR => nameof(VERR);
+        public static AsmMnemonic VERR => nameof(VERR);
 
-        public static AsmMnemonicExpr VERW => nameof(VERW);
+        public static AsmMnemonic VERW => nameof(VERW);
 
-        public static AsmMnemonicExpr VEXTRACTF128 => nameof(VEXTRACTF128);
+        public static AsmMnemonic VEXTRACTF128 => nameof(VEXTRACTF128);
 
-        public static AsmMnemonicExpr VEXTRACTI128 => nameof(VEXTRACTI128);
+        public static AsmMnemonic VEXTRACTI128 => nameof(VEXTRACTI128);
 
-        public static AsmMnemonicExpr VFMADD132PD => nameof(VFMADD132PD);
+        public static AsmMnemonic VFMADD132PD => nameof(VFMADD132PD);
 
-        public static AsmMnemonicExpr VFMADD213PD => nameof(VFMADD213PD);
+        public static AsmMnemonic VFMADD213PD => nameof(VFMADD213PD);
 
-        public static AsmMnemonicExpr VFMADD231PD => nameof(VFMADD231PD);
+        public static AsmMnemonic VFMADD231PD => nameof(VFMADD231PD);
 
-        public static AsmMnemonicExpr VFMADD132PS => nameof(VFMADD132PS);
+        public static AsmMnemonic VFMADD132PS => nameof(VFMADD132PS);
 
-        public static AsmMnemonicExpr VFMADD213PS => nameof(VFMADD213PS);
+        public static AsmMnemonic VFMADD213PS => nameof(VFMADD213PS);
 
-        public static AsmMnemonicExpr VFMADD231PS => nameof(VFMADD231PS);
+        public static AsmMnemonic VFMADD231PS => nameof(VFMADD231PS);
 
-        public static AsmMnemonicExpr VFMADD132SD => nameof(VFMADD132SD);
+        public static AsmMnemonic VFMADD132SD => nameof(VFMADD132SD);
 
-        public static AsmMnemonicExpr VFMADD213SD => nameof(VFMADD213SD);
+        public static AsmMnemonic VFMADD213SD => nameof(VFMADD213SD);
 
-        public static AsmMnemonicExpr VFMADD231SD => nameof(VFMADD231SD);
+        public static AsmMnemonic VFMADD231SD => nameof(VFMADD231SD);
 
-        public static AsmMnemonicExpr VFMADD132SS => nameof(VFMADD132SS);
+        public static AsmMnemonic VFMADD132SS => nameof(VFMADD132SS);
 
-        public static AsmMnemonicExpr VFMADD213SS => nameof(VFMADD213SS);
+        public static AsmMnemonic VFMADD213SS => nameof(VFMADD213SS);
 
-        public static AsmMnemonicExpr VFMADD231SS => nameof(VFMADD231SS);
+        public static AsmMnemonic VFMADD231SS => nameof(VFMADD231SS);
 
-        public static AsmMnemonicExpr VFMADDSUB132PD => nameof(VFMADDSUB132PD);
+        public static AsmMnemonic VFMADDSUB132PD => nameof(VFMADDSUB132PD);
 
-        public static AsmMnemonicExpr VFMADDSUB213PD => nameof(VFMADDSUB213PD);
+        public static AsmMnemonic VFMADDSUB213PD => nameof(VFMADDSUB213PD);
 
-        public static AsmMnemonicExpr VFMADDSUB231PD => nameof(VFMADDSUB231PD);
+        public static AsmMnemonic VFMADDSUB231PD => nameof(VFMADDSUB231PD);
 
-        public static AsmMnemonicExpr VFMADDSUB132PS => nameof(VFMADDSUB132PS);
+        public static AsmMnemonic VFMADDSUB132PS => nameof(VFMADDSUB132PS);
 
-        public static AsmMnemonicExpr VFMADDSUB213PS => nameof(VFMADDSUB213PS);
+        public static AsmMnemonic VFMADDSUB213PS => nameof(VFMADDSUB213PS);
 
-        public static AsmMnemonicExpr VFMADDSUB231PS => nameof(VFMADDSUB231PS);
+        public static AsmMnemonic VFMADDSUB231PS => nameof(VFMADDSUB231PS);
 
-        public static AsmMnemonicExpr VFMSUBADD132PD => nameof(VFMSUBADD132PD);
+        public static AsmMnemonic VFMSUBADD132PD => nameof(VFMSUBADD132PD);
 
-        public static AsmMnemonicExpr VFMSUBADD213PD => nameof(VFMSUBADD213PD);
+        public static AsmMnemonic VFMSUBADD213PD => nameof(VFMSUBADD213PD);
 
-        public static AsmMnemonicExpr VFMSUBADD231PD => nameof(VFMSUBADD231PD);
+        public static AsmMnemonic VFMSUBADD231PD => nameof(VFMSUBADD231PD);
 
-        public static AsmMnemonicExpr VFMSUBADD132PS => nameof(VFMSUBADD132PS);
+        public static AsmMnemonic VFMSUBADD132PS => nameof(VFMSUBADD132PS);
 
-        public static AsmMnemonicExpr VFMSUBADD213PS => nameof(VFMSUBADD213PS);
+        public static AsmMnemonic VFMSUBADD213PS => nameof(VFMSUBADD213PS);
 
-        public static AsmMnemonicExpr VFMSUBADD231PS => nameof(VFMSUBADD231PS);
+        public static AsmMnemonic VFMSUBADD231PS => nameof(VFMSUBADD231PS);
 
-        public static AsmMnemonicExpr VFMSUB132PD => nameof(VFMSUB132PD);
+        public static AsmMnemonic VFMSUB132PD => nameof(VFMSUB132PD);
 
-        public static AsmMnemonicExpr VFMSUB213PD => nameof(VFMSUB213PD);
+        public static AsmMnemonic VFMSUB213PD => nameof(VFMSUB213PD);
 
-        public static AsmMnemonicExpr VFMSUB231PD => nameof(VFMSUB231PD);
+        public static AsmMnemonic VFMSUB231PD => nameof(VFMSUB231PD);
 
-        public static AsmMnemonicExpr VFMSUB132PS => nameof(VFMSUB132PS);
+        public static AsmMnemonic VFMSUB132PS => nameof(VFMSUB132PS);
 
-        public static AsmMnemonicExpr VFMSUB213PS => nameof(VFMSUB213PS);
+        public static AsmMnemonic VFMSUB213PS => nameof(VFMSUB213PS);
 
-        public static AsmMnemonicExpr VFMSUB231PS => nameof(VFMSUB231PS);
+        public static AsmMnemonic VFMSUB231PS => nameof(VFMSUB231PS);
 
-        public static AsmMnemonicExpr VFMSUB132SD => nameof(VFMSUB132SD);
+        public static AsmMnemonic VFMSUB132SD => nameof(VFMSUB132SD);
 
-        public static AsmMnemonicExpr VFMSUB213SD => nameof(VFMSUB213SD);
+        public static AsmMnemonic VFMSUB213SD => nameof(VFMSUB213SD);
 
-        public static AsmMnemonicExpr VFMSUB231SD => nameof(VFMSUB231SD);
+        public static AsmMnemonic VFMSUB231SD => nameof(VFMSUB231SD);
 
-        public static AsmMnemonicExpr VFMSUB132SS => nameof(VFMSUB132SS);
+        public static AsmMnemonic VFMSUB132SS => nameof(VFMSUB132SS);
 
-        public static AsmMnemonicExpr VFMSUB213SS => nameof(VFMSUB213SS);
+        public static AsmMnemonic VFMSUB213SS => nameof(VFMSUB213SS);
 
-        public static AsmMnemonicExpr VFMSUB231SS => nameof(VFMSUB231SS);
+        public static AsmMnemonic VFMSUB231SS => nameof(VFMSUB231SS);
 
-        public static AsmMnemonicExpr VFNMADD132PD => nameof(VFNMADD132PD);
+        public static AsmMnemonic VFNMADD132PD => nameof(VFNMADD132PD);
 
-        public static AsmMnemonicExpr VFNMADD213PD => nameof(VFNMADD213PD);
+        public static AsmMnemonic VFNMADD213PD => nameof(VFNMADD213PD);
 
-        public static AsmMnemonicExpr VFNMADD231PD => nameof(VFNMADD231PD);
+        public static AsmMnemonic VFNMADD231PD => nameof(VFNMADD231PD);
 
-        public static AsmMnemonicExpr VFNMADD132PS => nameof(VFNMADD132PS);
+        public static AsmMnemonic VFNMADD132PS => nameof(VFNMADD132PS);
 
-        public static AsmMnemonicExpr VFNMADD213PS => nameof(VFNMADD213PS);
+        public static AsmMnemonic VFNMADD213PS => nameof(VFNMADD213PS);
 
-        public static AsmMnemonicExpr VFNMADD231PS => nameof(VFNMADD231PS);
+        public static AsmMnemonic VFNMADD231PS => nameof(VFNMADD231PS);
 
-        public static AsmMnemonicExpr VFNMADD132SD => nameof(VFNMADD132SD);
+        public static AsmMnemonic VFNMADD132SD => nameof(VFNMADD132SD);
 
-        public static AsmMnemonicExpr VFNMADD213SD => nameof(VFNMADD213SD);
+        public static AsmMnemonic VFNMADD213SD => nameof(VFNMADD213SD);
 
-        public static AsmMnemonicExpr VFNMADD231SD => nameof(VFNMADD231SD);
+        public static AsmMnemonic VFNMADD231SD => nameof(VFNMADD231SD);
 
-        public static AsmMnemonicExpr VFNMADD132SS => nameof(VFNMADD132SS);
+        public static AsmMnemonic VFNMADD132SS => nameof(VFNMADD132SS);
 
-        public static AsmMnemonicExpr VFNMADD213SS => nameof(VFNMADD213SS);
+        public static AsmMnemonic VFNMADD213SS => nameof(VFNMADD213SS);
 
-        public static AsmMnemonicExpr VFNMADD231SS => nameof(VFNMADD231SS);
+        public static AsmMnemonic VFNMADD231SS => nameof(VFNMADD231SS);
 
-        public static AsmMnemonicExpr VFNMSUB132PD => nameof(VFNMSUB132PD);
+        public static AsmMnemonic VFNMSUB132PD => nameof(VFNMSUB132PD);
 
-        public static AsmMnemonicExpr VFNMSUB213PD => nameof(VFNMSUB213PD);
+        public static AsmMnemonic VFNMSUB213PD => nameof(VFNMSUB213PD);
 
-        public static AsmMnemonicExpr VFNMSUB231PD => nameof(VFNMSUB231PD);
+        public static AsmMnemonic VFNMSUB231PD => nameof(VFNMSUB231PD);
 
-        public static AsmMnemonicExpr VFNMSUB132PS => nameof(VFNMSUB132PS);
+        public static AsmMnemonic VFNMSUB132PS => nameof(VFNMSUB132PS);
 
-        public static AsmMnemonicExpr VFNMSUB213PS => nameof(VFNMSUB213PS);
+        public static AsmMnemonic VFNMSUB213PS => nameof(VFNMSUB213PS);
 
-        public static AsmMnemonicExpr VFNMSUB231PS => nameof(VFNMSUB231PS);
+        public static AsmMnemonic VFNMSUB231PS => nameof(VFNMSUB231PS);
 
-        public static AsmMnemonicExpr VFNMSUB132SD => nameof(VFNMSUB132SD);
+        public static AsmMnemonic VFNMSUB132SD => nameof(VFNMSUB132SD);
 
-        public static AsmMnemonicExpr VFNMSUB213SD => nameof(VFNMSUB213SD);
+        public static AsmMnemonic VFNMSUB213SD => nameof(VFNMSUB213SD);
 
-        public static AsmMnemonicExpr VFNMSUB231SD => nameof(VFNMSUB231SD);
+        public static AsmMnemonic VFNMSUB231SD => nameof(VFNMSUB231SD);
 
-        public static AsmMnemonicExpr VFNMSUB132SS => nameof(VFNMSUB132SS);
+        public static AsmMnemonic VFNMSUB132SS => nameof(VFNMSUB132SS);
 
-        public static AsmMnemonicExpr VFNMSUB213SS => nameof(VFNMSUB213SS);
+        public static AsmMnemonic VFNMSUB213SS => nameof(VFNMSUB213SS);
 
-        public static AsmMnemonicExpr VFNMSUB231SS => nameof(VFNMSUB231SS);
+        public static AsmMnemonic VFNMSUB231SS => nameof(VFNMSUB231SS);
 
-        public static AsmMnemonicExpr VGATHERDPD => nameof(VGATHERDPD);
+        public static AsmMnemonic VGATHERDPD => nameof(VGATHERDPD);
 
-        public static AsmMnemonicExpr VGATHERQPD => nameof(VGATHERQPD);
+        public static AsmMnemonic VGATHERQPD => nameof(VGATHERQPD);
 
-        public static AsmMnemonicExpr VGATHERDPS => nameof(VGATHERDPS);
+        public static AsmMnemonic VGATHERDPS => nameof(VGATHERDPS);
 
-        public static AsmMnemonicExpr VGATHERQPS => nameof(VGATHERQPS);
+        public static AsmMnemonic VGATHERQPS => nameof(VGATHERQPS);
 
-        public static AsmMnemonicExpr VPGATHERDD => nameof(VPGATHERDD);
+        public static AsmMnemonic VPGATHERDD => nameof(VPGATHERDD);
 
-        public static AsmMnemonicExpr VPGATHERQD => nameof(VPGATHERQD);
+        public static AsmMnemonic VPGATHERQD => nameof(VPGATHERQD);
 
-        public static AsmMnemonicExpr VPGATHERDQ => nameof(VPGATHERDQ);
+        public static AsmMnemonic VPGATHERDQ => nameof(VPGATHERDQ);
 
-        public static AsmMnemonicExpr VPGATHERQQ => nameof(VPGATHERQQ);
+        public static AsmMnemonic VPGATHERQQ => nameof(VPGATHERQQ);
 
-        public static AsmMnemonicExpr VINSERTF128 => nameof(VINSERTF128);
+        public static AsmMnemonic VINSERTF128 => nameof(VINSERTF128);
 
-        public static AsmMnemonicExpr VINSERTI128 => nameof(VINSERTI128);
+        public static AsmMnemonic VINSERTI128 => nameof(VINSERTI128);
 
-        public static AsmMnemonicExpr VMASKMOVPS => nameof(VMASKMOVPS);
+        public static AsmMnemonic VMASKMOVPS => nameof(VMASKMOVPS);
 
-        public static AsmMnemonicExpr VMASKMOVPD => nameof(VMASKMOVPD);
+        public static AsmMnemonic VMASKMOVPD => nameof(VMASKMOVPD);
 
-        public static AsmMnemonicExpr VPBLENDD => nameof(VPBLENDD);
+        public static AsmMnemonic VPBLENDD => nameof(VPBLENDD);
 
-        public static AsmMnemonicExpr VPBROADCASTB => nameof(VPBROADCASTB);
+        public static AsmMnemonic VPBROADCASTB => nameof(VPBROADCASTB);
 
-        public static AsmMnemonicExpr VPBROADCASTW => nameof(VPBROADCASTW);
+        public static AsmMnemonic VPBROADCASTW => nameof(VPBROADCASTW);
 
-        public static AsmMnemonicExpr VPBROADCASTD => nameof(VPBROADCASTD);
+        public static AsmMnemonic VPBROADCASTD => nameof(VPBROADCASTD);
 
-        public static AsmMnemonicExpr VPBROADCASTQ => nameof(VPBROADCASTQ);
+        public static AsmMnemonic VPBROADCASTQ => nameof(VPBROADCASTQ);
 
-        public static AsmMnemonicExpr VBROADCASTI128 => nameof(VBROADCASTI128);
+        public static AsmMnemonic VBROADCASTI128 => nameof(VBROADCASTI128);
 
-        public static AsmMnemonicExpr VPERMD => nameof(VPERMD);
+        public static AsmMnemonic VPERMD => nameof(VPERMD);
 
-        public static AsmMnemonicExpr VPERMPD => nameof(VPERMPD);
+        public static AsmMnemonic VPERMPD => nameof(VPERMPD);
 
-        public static AsmMnemonicExpr VPERMPS => nameof(VPERMPS);
+        public static AsmMnemonic VPERMPS => nameof(VPERMPS);
 
-        public static AsmMnemonicExpr VPERMQ => nameof(VPERMQ);
+        public static AsmMnemonic VPERMQ => nameof(VPERMQ);
 
-        public static AsmMnemonicExpr VPERM2I128 => nameof(VPERM2I128);
+        public static AsmMnemonic VPERM2I128 => nameof(VPERM2I128);
 
-        public static AsmMnemonicExpr VPERMILPD => nameof(VPERMILPD);
+        public static AsmMnemonic VPERMILPD => nameof(VPERMILPD);
 
-        public static AsmMnemonicExpr VPERMILPS => nameof(VPERMILPS);
+        public static AsmMnemonic VPERMILPS => nameof(VPERMILPS);
 
-        public static AsmMnemonicExpr VPERM2F128 => nameof(VPERM2F128);
+        public static AsmMnemonic VPERM2F128 => nameof(VPERM2F128);
 
-        public static AsmMnemonicExpr VPMASKMOVD => nameof(VPMASKMOVD);
+        public static AsmMnemonic VPMASKMOVD => nameof(VPMASKMOVD);
 
-        public static AsmMnemonicExpr VPMASKMOVQ => nameof(VPMASKMOVQ);
+        public static AsmMnemonic VPMASKMOVQ => nameof(VPMASKMOVQ);
 
-        public static AsmMnemonicExpr VPSLLVD => nameof(VPSLLVD);
+        public static AsmMnemonic VPSLLVD => nameof(VPSLLVD);
 
-        public static AsmMnemonicExpr VPSLLVQ => nameof(VPSLLVQ);
+        public static AsmMnemonic VPSLLVQ => nameof(VPSLLVQ);
 
-        public static AsmMnemonicExpr VPSRAVD => nameof(VPSRAVD);
+        public static AsmMnemonic VPSRAVD => nameof(VPSRAVD);
 
-        public static AsmMnemonicExpr VPSRLVD => nameof(VPSRLVD);
+        public static AsmMnemonic VPSRLVD => nameof(VPSRLVD);
 
-        public static AsmMnemonicExpr VPSRLVQ => nameof(VPSRLVQ);
+        public static AsmMnemonic VPSRLVQ => nameof(VPSRLVQ);
 
-        public static AsmMnemonicExpr VTESTPS => nameof(VTESTPS);
+        public static AsmMnemonic VTESTPS => nameof(VTESTPS);
 
-        public static AsmMnemonicExpr VTESTPD => nameof(VTESTPD);
+        public static AsmMnemonic VTESTPD => nameof(VTESTPD);
 
-        public static AsmMnemonicExpr WRFSBASE => nameof(WRFSBASE);
+        public static AsmMnemonic WRFSBASE => nameof(WRFSBASE);
 
-        public static AsmMnemonicExpr WRGSBASE => nameof(WRGSBASE);
+        public static AsmMnemonic WRGSBASE => nameof(WRGSBASE);
 
-        public static AsmMnemonicExpr XABORT => nameof(XABORT);
+        public static AsmMnemonic XABORT => nameof(XABORT);
 
-        public static AsmMnemonicExpr XADD => nameof(XADD);
+        public static AsmMnemonic XADD => nameof(XADD);
 
-        public static AsmMnemonicExpr XBEGIN => nameof(XBEGIN);
+        public static AsmMnemonic XBEGIN => nameof(XBEGIN);
 
-        public static AsmMnemonicExpr XCHG => nameof(XCHG);
+        public static AsmMnemonic XCHG => nameof(XCHG);
 
-        public static AsmMnemonicExpr XLAT => nameof(XLAT);
+        public static AsmMnemonic XLAT => nameof(XLAT);
 
-        public static AsmMnemonicExpr XOR => nameof(XOR);
+        public static AsmMnemonic XOR => nameof(XOR);
 
-        public static AsmMnemonicExpr XORPD => nameof(XORPD);
+        public static AsmMnemonic XORPD => nameof(XORPD);
 
-        public static AsmMnemonicExpr VXORPD => nameof(VXORPD);
+        public static AsmMnemonic VXORPD => nameof(VXORPD);
 
-        public static AsmMnemonicExpr XORPS => nameof(XORPS);
+        public static AsmMnemonic XORPS => nameof(XORPS);
 
-        public static AsmMnemonicExpr VXORPS => nameof(VXORPS);
+        public static AsmMnemonic VXORPS => nameof(VXORPS);
 
-        public static AsmMnemonicExpr XRSTOR => nameof(XRSTOR);
+        public static AsmMnemonic XRSTOR => nameof(XRSTOR);
 
-        public static AsmMnemonicExpr XRSTOR64 => nameof(XRSTOR64);
+        public static AsmMnemonic XRSTOR64 => nameof(XRSTOR64);
 
-        public static AsmMnemonicExpr XSAVE => nameof(XSAVE);
+        public static AsmMnemonic XSAVE => nameof(XSAVE);
 
-        public static AsmMnemonicExpr XSAVE64 => nameof(XSAVE64);
+        public static AsmMnemonic XSAVE64 => nameof(XSAVE64);
 
-        public static AsmMnemonicExpr XSAVEOPT => nameof(XSAVEOPT);
+        public static AsmMnemonic XSAVEOPT => nameof(XSAVEOPT);
 
-        public static AsmMnemonicExpr XSAVEOPT64 => nameof(XSAVEOPT64);
+        public static AsmMnemonic XSAVEOPT64 => nameof(XSAVEOPT64);
     }
 }

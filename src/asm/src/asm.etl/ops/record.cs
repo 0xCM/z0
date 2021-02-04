@@ -9,12 +9,13 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmExpr;
 
     partial struct AsmEtl
     {
 
         [MethodImpl(Inline), Op]
-        public static AsmSpecifierRecord record(AsmSpecifierExpr src)
+        public static AsmSpecifierRecord record(OperationSpec src)
         {
             var dst = new AsmSpecifierRecord();
             dst.Seq = src.Seq;

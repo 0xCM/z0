@@ -14,8 +14,6 @@ namespace Z0
     {
         Type HostType {get;}
 
-        bool IsDataType => false;
-
         string Name
             => Uri.Name;
 
@@ -25,7 +23,7 @@ namespace Z0
         PartId PartId
             => HostType.Assembly.Id();
 
-        MethodInfo[] Methods
+        Index<MethodInfo> Methods
             => HostType.DeclaredMethods();
     }
 }

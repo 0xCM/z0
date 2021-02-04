@@ -24,7 +24,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> or(Vector128<T> a, Vector128<T> b)
-                => gvec.vor(a,b);
+                => gcpu.vor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> xor(Vector128<T> a, Vector128<T> b)

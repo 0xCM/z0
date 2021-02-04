@@ -8,19 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmExpr;
 
     partial struct AsmDocParts
     {
         public readonly struct SemanticComment
         {
-            public AsmSigExpr Sig {get;}
+            public Signature Sig {get;}
 
             public AsmOpCodeExprLegacy OpCode {get;}
 
             public EncodedStatement Encoded {get;}
 
             [MethodImpl(Inline)]
-            public SemanticComment(AsmSigExpr sig, AsmOpCodeExprLegacy oc, EncodedStatement encoded)
+            public SemanticComment(Signature sig, AsmOpCodeExprLegacy oc, EncodedStatement encoded)
             {
                 Sig = sig;
                 OpCode = oc;

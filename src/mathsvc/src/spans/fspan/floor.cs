@@ -39,6 +39,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> floor<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => floor(src, Spans.alloc<T>(src.Length));
+                => floor(src, memory.span<T>(src.Length));
     }
 }

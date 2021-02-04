@@ -154,7 +154,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedDirect(in CaptureExchange exchange, DirectApiGroup[] groups, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedDirect(in CaptureExchange exchange, ApiGroupNG[] groups, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(RefinementClass.Unrefined))
@@ -202,7 +202,7 @@ namespace Z0.Asm
                 EmitBinary(exchange, src, imm8, dst);
         }
 
-        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, DirectApiMethod[] methods, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, ApiMethodNG[] methods, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
             foreach(var f in methods)
@@ -218,7 +218,7 @@ namespace Z0.Asm
             }
         }
 
-        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, DirectApiMethod[] methods, Imm8R[] imm8, IAsmImmWriter dst)
+        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, ApiMethodNG[] methods, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
 

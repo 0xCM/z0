@@ -25,9 +25,33 @@ namespace Z0
         MethodInfo Method {get;}
 
         /// <summary>
+        /// Specifies whether the method is closed generic
+        /// </summary>
+        bool IsClosedGeneric
+            => Method.IsClosedGeneric();
+
+        /// <summary>
+        /// Specifies whether the method is open generic
+        /// </summary>
+        bool IsOpenGeneric
+            => Method.IsOpenGeneric();
+
+        /// <summary>
+        /// Specifies whether the method either open or clsed generic
+        /// </summary>
+        bool IsGeneric
+            => IsOpenGeneric || IsClosedGeneric;
+
+        /// <summary>
+        /// Specifies whether the method is nongeneric
+        /// </summary>
+        bool IsNonGeneric
+            => Method.IsNonGeneric();
+
+        /// <summary>
         /// The metadata uri
         /// </summary>
-        ApiArtifactUri MetaUri => Method;
+        ApiArtifactKey MetaUri => Method;
 
         /// <summary>
         /// The method's kind identifier if it exists

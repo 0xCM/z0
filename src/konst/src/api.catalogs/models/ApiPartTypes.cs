@@ -16,7 +16,7 @@ namespace Z0
     {
         public PartId Part {get;}
 
-        public Type[] Types {get;}
+        public Index<Type> Types {get;}
 
         [MethodImpl(Inline)]
         public ApiPartTypes(PartId part, Type[] types)

@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct ByteSpans
     {
         [MethodImpl(Inline), Op]
-        public static string property(CodeBlock src, ApiArtifactUri uri)
+        public static string property(CodeBlock src, ApiArtifactKey uri)
             => comment(new ByteSpanProperty(uri.Identifier, src).Format());
 
         [MethodImpl(Inline), Op]

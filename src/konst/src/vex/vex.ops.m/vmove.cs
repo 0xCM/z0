@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N3 i, N0 j)
-            => vmovelo(cpu.vpermlo4x16(src,Perm4L.DBCA), w);
+            => vint16u(cpu.vpermlo4x16(src,Perm4L.DBCA));
 
         /// <summary>
         /// src[2] -> r/m16
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N2 i, N0 j)
-            => vmovelo(cpu.vpermlo4x16(src,Perm4L.CBDA), w);
+            => vint16u(cpu.vpermlo4x16(src,Perm4L.CBDA));
 
         /// <summary>
         /// src[1] -> r/m16
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="j">THe target component index</param>
         [MethodImpl(Inline), Op]
         public static ushort vmove(Vector128<ushort> src, W16 w, N1 i, N0 j)
-            => vmovelo(cpu.vpermlo4x16(src,Perm4L.BCDA), w);
+            => vint16u(cpu.vpermlo4x16(src,Perm4L.BCDA));
 
         /// <summary>
         /// src[0..31] -> dst[0..64]
@@ -445,33 +445,6 @@ namespace Z0
         public static Vector256<short> vmove16x16i(Vector128<sbyte> src, W256 w)
             => ConvertToVector256Int16(src);
 
-        /// <summary>
-        /// __m128i _mm_cvtepi8_epi32 (__m128i a) PMOVSXBD xmm, xmm/m32
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<int> vconvert32i(Vector128<sbyte> src, W128 w)
-            => ConvertToVector128Int32(src);
 
-        /// <summary>
-        /// __m256i _mm256_cvtepu8_epi32 (__m128i a) VPMOVZXBD ymm, xmm
-        /// 8x16i -> 8x32u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<uint> vconvert32u(Vector128<short> src, W256 w)
-            => v32u(ConvertToVector256Int32(src));
-
-        /// <summary>
-        /// __m256i _mm256_cvtepu16_epi32 (__m128i a) VPMOVZXWD ymm, xmm
-        /// 8x16u -> 8x32i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<int> vconvert32i(Vector128<ushort> src, W256 w)
-            => ConvertToVector256Int32(src);
     }
 }

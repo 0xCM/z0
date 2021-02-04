@@ -64,7 +64,7 @@ namespace Z0
             const byte SegCount = 6;
 
             var parser = SeqSplitters.create<ushort>(Delimiter);
-            var input = Spans.s16u(edit(span(Input)));
+            var input = memory.uint16(edit(span(Input)));
             SeqSplitters.run(parser, input, out var segments);
             return segments;
         }

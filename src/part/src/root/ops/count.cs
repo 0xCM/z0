@@ -37,5 +37,22 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint count<T>(Span<T> src)
             => (uint)src.Length;
+
+        /// <summary>
+        /// Counts the number of values in the source that satisfy the predicate
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <param name="f">The predicate to evaluate over each element</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static int count<T>(ReadOnlySpan<T> src, Func<T,bool> f)
+        {
+            int count = 0;
+            for(var i=0u; i<src.Length; i++)
+                if(f(memory.skip(src,i)))
+                    count++;
+            return count;
+        }
+
     }
 }

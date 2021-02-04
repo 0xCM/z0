@@ -12,6 +12,11 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> recover<T>(ReadOnlySpan<byte> src, int offset, int length)
+            where T : unmanaged
+                => recover<byte,T>(slice(src,offset, (int)(length * size<T>())));
+
         /// <summary>
         /// Presents a span of S-cells as a span of T-cells
         /// </summary>

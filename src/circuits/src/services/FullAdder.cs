@@ -65,7 +65,7 @@ namespace Z0
             var b0 = gvec.vand(a0,cin);
             var c0 = gvec.vand(a,b);
             sum = gvec.vxor(a0, cin);
-            cout = gvec.vor(b0, c0);
+            cout = gcpu.vor(b0, c0);
         }
 
         [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
@@ -84,7 +84,7 @@ namespace Z0
             var b0 = gvec.vand(a0,cin);
             var c0 = gvec.vand(a,b);
             sum = gvec.vxor(a0, cin);
-            cout = gvec.vor(b0, c0);
+            cout = gcpu.vor(b0, c0);
         }
 
         [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]

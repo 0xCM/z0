@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static z;
+    using static Root;
+    using static memory;
 
     public readonly struct ApiHosts : IIndexedView<ApiHosts,uint,IApiHost>
     {

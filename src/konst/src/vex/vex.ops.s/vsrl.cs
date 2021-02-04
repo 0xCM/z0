@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(cpu.vinflate16i(src, w256),count));
+            var x = v16u(ShiftRightLogical(cpu.vinflate256x16i(src, w256),count));
             var y = vand(x,v16u(cpu.vbroadcast(w256, byte.MaxValue)));
             return v8i(cpu.vcompact8u(y,n128));
         }
@@ -110,8 +110,8 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(cpu.vinflate16i(vlo(src), w256),count));
-            var y = v16u(ShiftRightLogical(cpu.vinflate16i(cpu.vhi(src), w256),count));
+            var x = v16u(ShiftRightLogical(cpu.vinflate256x16i(vlo(src), w256),count));
+            var y = v16u(ShiftRightLogical(cpu.vinflate256x16i(cpu.vhi(src), w256),count));
             var m = v16u(cpu.vbroadcast(n256, byte.MaxValue));
             return v8i(cpu.vcompact8u(vand(x,m), vand(y,m), w256));
         }

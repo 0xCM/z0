@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct ApiPartCatalogs : IIndexedView<ApiPartCatalogs,uint,IApiPartCatalog>
     {
-        readonly IndexedView<IApiPartCatalog> Data;
+        readonly Index<IApiPartCatalog> Data;
 
         [MethodImpl(Inline)]
         public ApiPartCatalogs(IApiPartCatalog[] src)

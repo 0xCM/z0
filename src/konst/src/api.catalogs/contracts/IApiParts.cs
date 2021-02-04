@@ -26,6 +26,6 @@ namespace Z0
 
         Assembly[] PartComponents {get;}
 
-        ISystemApiCatalog Api {get;}
+        IGlobalApiCatalog ApiGlobal {get;}
     }
 }

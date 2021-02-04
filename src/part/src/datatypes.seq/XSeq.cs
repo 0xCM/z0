@@ -9,8 +9,11 @@ namespace Z0
 
     using static Part;
 
-    public static class XSeq
+    [ApiHost]
+    public static partial class XSeq
     {
+        const NumericKind Closure = Integers;
+
         public static DelimitedIndex<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
             => Seq.delimit(src, delimiter);
 

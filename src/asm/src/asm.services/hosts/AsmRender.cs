@@ -111,7 +111,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(in LineLabel src, out string dst)
+        public static string format(in AsmLineLabel src, out string dst)
             => dst = src.Width switch{
                 DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
                 DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,

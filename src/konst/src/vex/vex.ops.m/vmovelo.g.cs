@@ -29,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return generic<T>(cpu.vmovelo(v8u(x), w8));
+                 return generic<T>(cpu.vint8u(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                 return generic<T>(cpu.vmovelo(v16u(x), w16));
+                 return generic<T>(cpu.vint16u(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                 return generic<T>(cpu.vmovelo(v32u(x), w32));
+                 return generic<T>(cpu.vint32u(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                 return generic<T>(cpu.vmovelo(v64u(x), w64));
+                 return generic<T>(cpu.vint64u(v64u(x)));
             else
                 return vmovelo_i(x);
         }
@@ -45,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(cpu.vmovelo(v8i(x), w8));
+                 return generic<T>(cpu.vint8i(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(cpu.vmovelo(v16i(x), w16));
+                 return generic<T>(cpu.vint16i(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(cpu.vmovelo(v32i(x), w32));
+                 return generic<T>(cpu.vint32i(v32i(x)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(cpu.vmovelo(v64i(x), w64));
+                 return generic<T>(cpu.vint64i(v64i(x)));
             else
                 throw no<T>();
         }

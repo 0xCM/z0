@@ -15,8 +15,8 @@ namespace Z0.Asm
         {
             public TextLine Text {get;}
 
-            public PartKind Kind
-                => PartKind.BlockHeaderLine;
+            public AsmDocPartKind Kind
+                => AsmDocPartKind.BlockHeaderLine;
 
             [MethodImpl(Inline)]
             public HeaderLine(TextLine text)

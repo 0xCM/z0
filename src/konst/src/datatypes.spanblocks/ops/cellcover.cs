@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial struct SpanBlocks
     {
@@ -21,7 +22,7 @@ namespace Z0
         public static int cells<W,T>()
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => (int)((NatCalc.div(default(W), default(N8)))/memory.size<T>());
+                => (int)((NatCalc.div(default(W), default(N8)))/size<T>());
 
         /// <summary>
         /// Computes the minimum number of 8-bit blocks required to cover a specified number of cells
@@ -34,8 +35,8 @@ namespace Z0
         public static ulong cellcover<T>(W8 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>
@@ -49,8 +50,8 @@ namespace Z0
         public static ulong cellcover<T>(W16 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>
@@ -79,8 +80,8 @@ namespace Z0
         public static ulong cellcover<T>(W64 w, ulong cellcount)
             where T : unmanaged
         {
-            var blockcount = cellcount / (ulong)memory.cells<T>(w);
-            return cellcount % (ulong)memory.cells<T>(w) == 0 ? blockcount : blockcount + 1;
+            var blockcount = cellcount / (ulong)cells<T>(w);
+            return cellcount % (ulong)cells<T>(w) == 0 ? blockcount : blockcount + 1;
         }
 
         /// <summary>

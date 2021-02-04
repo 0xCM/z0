@@ -7,7 +7,7 @@ namespace Z0.Asm
     using SQ = AsmSizeQualifier;
     using N = AsmKeywordNames;
 
-    partial struct AsmSyntaxNodes
+    partial struct AsmSyntax
     {
         public readonly struct AsmByte : IAsmDataType<AsmByte>
         {

@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Describes an api host
@@ -20,7 +19,7 @@ namespace Z0
 
         public PartId PartId {get;}
 
-        public MethodInfo[] Methods {get;}
+        public Index<MethodInfo> Methods {get;}
 
         public Type HostType {get;}
 

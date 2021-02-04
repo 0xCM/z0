@@ -53,7 +53,7 @@ namespace Z0.Asm
             => emath.oneof(src.Byte0, REX.Rex40, REX.RexWRXB);
 
         [MethodImpl(Inline), Op]
-        public static RegDigit digit(uint3 src)
-            => new RegDigit(src);
+        public static AsmRegDigit digit(uint3 src)
+            => new AsmRegDigit(src);
     }
 }

@@ -26,8 +26,8 @@ namespace Z0.Asm
 
             public ExtractTermCode TermCode {get;}
 
-            public PartKind Kind
-                => PartKind.BlockHeader;
+            public AsmDocPartKind Kind
+                => AsmDocPartKind.BlockHeader;
 
             [MethodImpl(Inline)]
             public BlockHeader(string sep, OpUri uri, ClrDisplaySig sig, CodeBlock code, ExtractTermCode term)

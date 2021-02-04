@@ -6,12 +6,12 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Konst;
+    using static AsmExpr;
     using static z;
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
-        void emit(ReadOnlySpan<AsmSigExpr> src)
+        void emit(ReadOnlySpan<AsmExpr.Signature> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();

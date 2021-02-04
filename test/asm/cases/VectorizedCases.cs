@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vor<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
-                => gvec.vor(a,b);
+                => gcpu.vor(a,b);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vxor<T>(Vector256<T> a, Vector256<T> b)

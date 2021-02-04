@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public static CapturedApiRes[] capture(IAsmContext context, ApiHostUri host, FS.FilePath dst)
-            => capture(context, host, Resources.accessors(context.ContextRoot.Api.PartComponents), dst);
+            => capture(context, host, Resources.accessors(context.ContextRoot.ApiGlobal.PartComponents), dst);
 
         public static CapturedApiRes[] capture(IAsmContext context, ApiHostUri host, ReadOnlySpan<ApiMemberRes> src, FS.FilePath dst)
         {

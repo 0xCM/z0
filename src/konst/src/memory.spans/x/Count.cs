@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XSpan
+    public static partial class XSpan
     {
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static int Count<T>(this ReadOnlySpan<T> src, Func<T,bool> f)
-            => Spans.count(src, f);
+            => root.count(src, f);
 
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate

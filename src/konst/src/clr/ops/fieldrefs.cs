@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
     using static memory;
 
     partial struct Clr
@@ -48,7 +47,7 @@ namespace Z0
         }
 
         [Op]
-        public static FieldRef[] fieldrefs(params Type[] src)
+        public static FieldRef[] fieldrefs(Index<Type> src)
         {
             var dst = root.list<FieldRef>();
             var count = src.Length;

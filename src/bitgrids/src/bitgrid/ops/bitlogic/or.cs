@@ -57,10 +57,9 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vor(gx[i],gy[i]);
+                gz[i] = gcpu.vor(gx[i],gy[i]);
             return ref gz;
         }
-
 
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids of natural dimensions
@@ -112,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vor<T>(gx,gy);
+                => gcpu.vor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise OR between fixed-width bitgrids of natural dimensions
@@ -125,7 +124,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vor<T>(gx,gy);
+                => gcpu.vor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise OR between natural bitgrids and stores the result to a caller-supplied target
@@ -142,7 +141,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vor(gx[i],gy[i]);
+                gz[i] = gcpu.vor(gx[i],gy[i]);
             return ref gz;
         }
 

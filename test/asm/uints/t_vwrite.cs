@@ -51,7 +51,7 @@ namespace Z0
         {
             var src = Random.Span<byte>(16);
             var dst = gcpu.vcover<uint>(w128, ref first(src));
-            var a = Spans.alloc<uint>(4);
+            var a = memory.span<uint>(4);
             cpu.vstore(dst, ref first(a));
             var b = memory.uint32(src);
 

@@ -54,7 +54,7 @@ namespace Z0
         {
             var u = vxor(a,b);
             var lo = vxor(u,c);
-            var hi = vor(vand(a,b), vand(u,c));
+            var hi = gcpu.vor(vand(a,b), vand(u,c));
             return(lo,hi);
         }
     }

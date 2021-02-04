@@ -27,7 +27,7 @@ namespace Z0
             var control = controller();
             var controlId = control.Id();
             var dbRoot = WfEnv.dbRoot();
-            var partIdList = parts.Api.PartIdentities;
+            var partIdList = parts.ApiGlobal.PartIdentities;
             var appLogConfig = Loggers.configure(controlId, dbRoot);
             IWfAppPaths _paths = new WfPaths(dbRoot);
             status.PathConfigTime = clock.Elapsed;

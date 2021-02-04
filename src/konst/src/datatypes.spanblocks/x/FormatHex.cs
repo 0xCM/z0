@@ -7,10 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BXTend
     {
+        /// <summary>
+        /// The default hex value delimiter
+        /// </summary>
+        const char HexDelimiter = Chars.Space;
+
         /// <summary>
         /// Formats blocked content as a sequence of hex values
         /// </summary>

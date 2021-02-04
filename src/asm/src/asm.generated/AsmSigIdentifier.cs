@@ -9,9 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Generated from the fields defined by <see cref='AsmSigIdentifierNames'/>
-    /// </summary>
     public enum AsmSigIdentifier : ushort
     {
 

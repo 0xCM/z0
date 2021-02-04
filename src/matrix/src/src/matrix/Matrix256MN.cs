@@ -222,7 +222,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix256<M,N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix256<M,N,U>(SpanBlocks.convert<T,U>(data));
+               => new Matrix256<M,N,U>(SpanBlocks.force<T,U>(data));
 
         /// <summary>
         /// Converts the entries of the matrix to a specified type and
@@ -233,7 +233,7 @@ namespace Z0
         public ref Matrix256<M,N,U> Convert<U>(out Matrix256<M,N,U> dst)
             where U : unmanaged
         {
-            dst = new Matrix256<M,N,U>(SpanBlocks.convert<T,U>(data));
+            dst = new Matrix256<M,N,U>(SpanBlocks.force<T,U>(data));
             return ref dst;
         }
 

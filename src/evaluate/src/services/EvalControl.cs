@@ -20,7 +20,7 @@ namespace Z0
 
         readonly IPartCapturePaths CodeArchive;
 
-        readonly ISystemApiCatalog ApiSet;
+        readonly IGlobalApiCatalog ApiSet;
 
         internal EvalControl(IWfShell wf, IPolyrand random, FS.FolderPath root, uint buffersize)
         {

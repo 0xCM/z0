@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial class BitVector
@@ -21,7 +21,7 @@ namespace Z0
         public static BitVector<T> or<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.or(x.Data,y.Data);
- 
+
         /// <summary>
         /// Computes the bitvector z := x ^ y from bitvectors x and y
         /// </summary>
@@ -44,7 +44,7 @@ namespace Z0
         public static BitVector128<N,T> or<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vor(x.Data,y.Data);
+                => gcpu.vor(x.Data,y.Data);
 
         /// <summary>
         /// Computes the bitvector z := x | y from bitvectors x and y

@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost(ApiNames.WfShell, true)]
     public partial class WfShell : IWfShell
@@ -35,7 +34,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public ISystemApiCatalog Api {get;}
+        public IGlobalApiCatalog Api {get;}
 
         public string AppName {get;}
 
@@ -62,7 +61,7 @@ namespace Z0
             Init = config;
             Context = Init.Shell;
             Id = Init.ControlId;
-            Ct = correlate(Init.ControlId);
+            Ct = root.correlate(Init.ControlId);
             WfSink = Loggers.events(Init.LogConfig);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
@@ -72,7 +71,7 @@ namespace Z0
             Args = Init.Shell.Args;
             Settings = Init.Shell.Settings;
             ApiParts = Init.ApiParts;
-            Api = Init.ApiParts.Api;
+            Api = Init.ApiParts.ApiGlobal;
             Controller = Init.Control;
             AppName = Init.Shell.AppName;
             Router = new CmdRouter(this);
@@ -88,7 +87,7 @@ namespace Z0
             Paths = Init.Shell.Paths;
             Settings = Init.Shell.Settings;
             ApiParts = Init.ApiParts;
-            Api = Init.ApiParts.Api;
+            Api = Init.ApiParts.ApiGlobal;
             Controller = Init.Control;
             AppName = Init.Shell.AppName;
             Ct = ct;

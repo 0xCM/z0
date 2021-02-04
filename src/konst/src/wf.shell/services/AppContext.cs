@@ -8,7 +8,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        public ISystemApiCatalog Api {get;}
+        public IGlobalApiCatalog ApiGlobal {get;}
 
         public IJsonSettings Settings {get;}
 
@@ -22,14 +22,14 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IWfAppPaths paths, ISystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
+        public AppContext(IWfAppPaths paths, IGlobalApiCatalog catalog, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
         {
             Paths = paths;
             Next = msg => {};
             Random = random;
             Settings = settings ?? JsonSettings.Load(Paths.AppConfigPath);
             MessageQueue = queue;
-            Api = parts;
+            ApiGlobal = catalog;
             ApiParts = WfShell.parts();
         }
     }

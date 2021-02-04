@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a catalog over <see cref='ApiMember'/> values for a specified <see cref='IApiHost'/>

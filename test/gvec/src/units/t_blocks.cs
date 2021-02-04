@@ -14,26 +14,26 @@ namespace Z0
     {
         public  void check_cellsize()
         {
-            Claim.eq(1, SpanBlocks.cellsize<sbyte>());
-            Claim.eq(1, SpanBlocks.cellsize<byte>());
-            Claim.eq(2, SpanBlocks.cellsize<short>());
-            Claim.eq(4, SpanBlocks.cellsize<int>());
-            Claim.eq(4, SpanBlocks.cellsize<uint>());
-            Claim.eq(4, SpanBlocks.cellsize<float>());
-            Claim.eq(8, SpanBlocks.cellsize<ulong>());
-            Claim.eq(8, SpanBlocks.cellsize<double>());
-            Claim.eq(8, SpanBlocks.cellsize<long>());
+            Claim.eq(1, size<sbyte>());
+            Claim.eq(1, size<byte>());
+            Claim.eq(2, size<short>());
+            Claim.eq(4, size<int>());
+            Claim.eq(4, size<uint>());
+            Claim.eq(4, size<float>());
+            Claim.eq(8, size<ulong>());
+            Claim.eq(8, size<double>());
+            Claim.eq(8, size<long>());
 
 
-            Claim.eq(1, SpanBlocks.cellsize<sbyte>());
-            Claim.eq(1, SpanBlocks.cellsize<byte>());
-            Claim.eq(2, SpanBlocks.cellsize<short>());
-            Claim.eq(4, SpanBlocks.cellsize<int>());
-            Claim.eq(4, SpanBlocks.cellsize<uint>());
-            Claim.eq(4, SpanBlocks.cellsize<float>());
-            Claim.eq(8, SpanBlocks.cellsize<ulong>());
-            Claim.eq(8, SpanBlocks.cellsize<double>());
-            Claim.eq(8, SpanBlocks.cellsize<long>());
+            Claim.eq(1, size<sbyte>());
+            Claim.eq(1, size<byte>());
+            Claim.eq(2, size<short>());
+            Claim.eq(4, size<int>());
+            Claim.eq(4, size<uint>());
+            Claim.eq(4, size<float>());
+            Claim.eq(8, size<ulong>());
+            Claim.eq(8, size<double>());
+            Claim.eq(8, size<long>());
         }
 
 

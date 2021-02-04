@@ -32,6 +32,12 @@ namespace Z0
         public NumericKind[] Kinds {get;}
 
         /// <summary>
+        /// Classifies the method as generic
+        /// </summary>
+        public bool IsGeneric
+            => true;
+
+        /// <summary>
         /// The generalized identity
         /// </summary>
         public OpIdentity Id

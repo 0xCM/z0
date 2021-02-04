@@ -33,19 +33,19 @@ namespace Z0
         /// </summary>
         /// <param name="paths">The source paths</param>
         [Op]
-        public static ISystemApiCatalog create(FS.Files paths)
-            => new SystemApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
+        public static IGlobalApiCatalog create(FS.Files paths)
+            => new GlobalApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         /// <summary>
         /// Creates a system-level api catalog over a specified component set
         /// </summary>
         /// <param name="src">The source components</param>
         [Op]
-        public static ISystemApiCatalog create(Assembly[] src)
+        public static IGlobalApiCatalog create(Assembly[] src)
         {
             var candidates = src.Where(Q.isPart);
             var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
-            return new SystemApiCatalog(parts);
+            return new GlobalApiCatalog(parts);
         }
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace Z0
             => new ApiPartCatalog(src.Id(), src, apitypes(src), apiHosts(src), svcHostTypes(src));
 
         [Op]
-        public static ISystemApiCatalog siblings(Assembly src, PartId[] parts)
+        public static IGlobalApiCatalog siblings(Assembly src, PartId[] parts)
         {
             var path = FS.path(src.Location).FolderPath;
             var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            return parts.Length != 0 ? new SystemApiCatalog(create(managed).Parts.Where(x => parts.Contains(x.Id))) : create(managed);
+            return parts.Length != 0 ? new GlobalApiCatalog(create(managed).Parts.Where(x => parts.Contains(x.Id))) : create(managed);
         }
 
         /// <summary>
@@ -147,12 +147,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         [Op]
-        static ApiTypeInfo[] apitypes(Assembly src)
+        static ApiRuntimeType[] apitypes(Assembly src)
         {
             var part = src.Id();
             var types = span(src.GetTypes().Where(t => t.Tagged<ApiDeepAttribute>()));
             var count = types.Length;
-            var buffer = alloc<ApiTypeInfo>(count);
+            var buffer = alloc<ApiRuntimeType>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -160,7 +160,7 @@ namespace Z0
                 var attrib = type.Tag<ApiDeepAttribute>();
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
-                seek(dst,i) = new ApiTypeInfo(type, name, part, uri);
+                seek(dst,i) = new ApiRuntimeType(type, name, part, uri);
             }
             return buffer;
         }

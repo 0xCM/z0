@@ -13,7 +13,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<ClosedApiMethod> Close(this ApiMethodG op)
+        public static IEnumerable<ApiMethodClosure> Close(this ApiMethodG op)
              => Identity.Closures(op);
     }
 }

@@ -371,19 +371,6 @@ namespace Z0
 
         }
 
-        void ShowApiClasses()
-        {
-            var service = ApiCatalogs.classes(Wf);
-            var classifiers = service.Classifiers();
-            var formatter = Records.formatter<EnumLiteral>();
-            foreach(var c in classifiers)
-            {
-                foreach(var l in c.Literals)
-                {
-                    Wf.Row(formatter.Format(l));
-                }
-            }
-        }
 
         // void LoadImportRows()
         // {
@@ -410,7 +397,7 @@ namespace Z0
 
 
 
-        void GenerateCodes(ReadOnlySpan<AsmMnemonicExpr> src, FS.FilePath dst)
+        void GenerateCodes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
             var buffer = text.buffer();
             var margin = 0u;
@@ -428,7 +415,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Content, i+1));
+                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Name, i+1));
                 buffer.AppendLine();
             }
             margin -= 4;
@@ -442,7 +429,7 @@ namespace Z0
             writer.Write(buffer.Emit());
         }
 
-        void GenerateExpressions(ReadOnlySpan<AsmMnemonicExpr> src, FS.FilePath dst)
+        void GenerateExpressions(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
             var buffer = text.buffer();
             var margin = 0u;
@@ -457,7 +444,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Content));
+                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Name));
                 buffer.AppendLine();
             }
             margin -= 4;
@@ -492,7 +479,7 @@ namespace Z0
             var etl = AsmCatalogEtl.create(Wf);
             var records = etl.TransformSource();
             var monics = etl.Mnemonics();
-            var maxlen = monics.Select(x => x.Content.Length).Max();
+            var maxlen = monics.Select(x => x.Name.Length).Max();
             Wf.Status(maxlen);
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));

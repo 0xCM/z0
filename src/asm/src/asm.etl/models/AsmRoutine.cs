@@ -47,10 +47,10 @@ namespace Z0.Asm
         /// <summary>
         /// The operation metadata uri
         /// </summary>
-        public ApiArtifactUri MetaUri {get;}
+        public ApiArtifactKey MetaUri {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(ApiArtifactUri meta, OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
+        public AsmRoutine(ApiArtifactKey meta, OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
         {
             MetaUri = meta;
             Uri = uri;
@@ -86,6 +86,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(ApiArtifactUri.Empty, OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
+            => new AsmRoutine(ApiArtifactKey.Empty, OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
     }
 }

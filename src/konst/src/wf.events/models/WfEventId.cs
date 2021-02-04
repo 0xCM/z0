@@ -26,7 +26,7 @@ namespace Z0
         WfEventId(Type type)
         {
             Ts = timestamp();
-            Ct = correlate(Runtime.EntryAssembly.Part);
+            Ct = root.correlate(Runtime.EntryAssembly.Part);
             Identifier = text.format(RPCommon, Ts, Ct, type.Name);
         }
 
@@ -34,7 +34,7 @@ namespace Z0
         WfEventId(string name, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = correlate(Runtime.EntryAssembly.Part);
+            Ct = root.correlate(Runtime.EntryAssembly.Part);
             Identifier = text.format(RPCommon, Ts, Ct, name);
         }
 

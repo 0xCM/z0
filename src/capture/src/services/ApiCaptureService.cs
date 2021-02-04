@@ -93,7 +93,7 @@ namespace Z0
             Wf.Ran(flow, api.Name);
         }
 
-        void Capture(Index<ApiTypeInfo> src)
+        void Capture(Index<ApiRuntimeType> src)
         {
             var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
@@ -117,7 +117,7 @@ namespace Z0
             }
         }
 
-        ApiMemberExtract[] Extract(Index<ApiTypeInfo> types)
+        ApiMemberExtract[] Extract(Index<ApiRuntimeType> types)
         {
             try
             {

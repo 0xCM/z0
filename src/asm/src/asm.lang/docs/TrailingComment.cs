@@ -15,8 +15,8 @@ namespace Z0.Asm
         {
             public TextBlock Text {get;}
 
-            public PartKind Kind
-                => PartKind.BlockHeaderLine;
+            public AsmDocPartKind Kind
+                => AsmDocPartKind.BlockHeaderLine;
 
             [MethodImpl(Inline)]
             public TrailingComment(TextBlock text)

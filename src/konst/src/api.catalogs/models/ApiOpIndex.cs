@@ -8,9 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public readonly struct ApiOpIndex<T> : IEnumerable<KeyedValue<OpIdentity,T>>, IApiOpIndex<T>
     {
@@ -18,7 +15,7 @@ namespace Z0
 
         public readonly OpIdentity[] Duplicates;
 
-        public ApiOpIndex(Dictionary<OpIdentity, T> index, OpIdentity[] duplicates)
+        public ApiOpIndex(Dictionary<OpIdentity,T> index, OpIdentity[] duplicates)
         {
             HashTable = index;
             Duplicates = duplicates;

@@ -47,17 +47,17 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
-            => memory.recover<char>(memory.bytes(vlo(vinflate16u(vbytes(w128, src.Storage)))));
+            => memory.recover<char>(memory.bytes(vlo(vinflate256x16u(vbytes(w128, src.Storage)))));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => memory.recover<char>(memory.bytes(vinflate16u(src.Storage)));
+            => memory.recover<char>(memory.bytes(vinflate256x16u(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
-            var lo = vinflate16u(src.Storage, n0);
-            var hi = vinflate16u(src.Storage, n1);
+            var lo = vinflatelo256x16u(src.Storage, n0);
+            var hi = vinflatehi256x16u(src.Storage, n1);
             return memory.recover<char>(memory.bytes(new Seg512(lo,hi)));
         }
 
@@ -65,24 +65,24 @@ namespace Z0
         public static ReadOnlySpan<char> decode(in asci64 src)
         {
             var x = src.Storage;
-            var x0 = vinflate16u(x.Lo,n0);
-            var x1 = vinflate16u(x.Lo,n1);
-            var x2 = vinflate16u(x.Hi,n0);
-            var x3 = vinflate16u(x.Hi,n1);
+            var x0 = vinflatelo256x16u(x.Lo,n0);
+            var x1 = vinflatehi256x16u(x.Lo,n1);
+            var x2 = vinflatelo256x16u(x.Hi,n0);
+            var x3 = vinflatehi256x16u(x.Hi,n1);
             return memory.recover<char>(memory.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci8 src, ref char dst)
         {
-            var decoded = vinflate16u(cpu.vbytes(w128, src.Storage));
+            var decoded = vinflate256x16u(cpu.vbytes(w128, src.Storage));
             cpu.vstore(decoded.GetLower(), ref @as<char,ushort>(dst));
         }
 
         [MethodImpl(Inline), Op]
         public static void decode(in asci16 src, ref char dst)
         {
-           var decoded = vinflate16u(src.Storage);
+           var decoded = vinflate256x16u(src.Storage);
            cpu.vstore(decoded, ref @as<char,ushort>(dst));
         }
 

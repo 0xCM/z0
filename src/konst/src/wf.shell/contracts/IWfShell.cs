@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Threading.Tasks;
 
-    using static z;
+    using static memory;
     using static WfEvents;
 
     public partial interface IWfShell : IDisposable, ITextual
@@ -27,7 +27,7 @@ namespace Z0
 
         WfController Controller {get;}
 
-        ISystemApiCatalog Api {get;}
+        IGlobalApiCatalog Api {get;}
 
         IWfContext Context {get;}
 

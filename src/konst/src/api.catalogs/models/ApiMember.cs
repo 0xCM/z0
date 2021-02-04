@@ -31,7 +31,7 @@ namespace Z0
 
         public CliSig CliSig {get;}
 
-        public ApiArtifactUri MetaUri
+        public ApiArtifactKey MetaUri
             => Method;
 
         public ApiMember Zero

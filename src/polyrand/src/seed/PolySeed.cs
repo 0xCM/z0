@@ -85,7 +85,7 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return Spans.cast<T>(Bytes, offset, length);
+            return memory.recover<T>(Bytes, offset, length);
         }
 
         /// <summary>

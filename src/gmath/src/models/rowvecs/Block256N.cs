@@ -112,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<N,U> Convert<U>()
             where U : unmanaged
-               => new Block256<N,U>(SpanBlocks.convert<T,U>(Data));
+               => new Block256<N,U>(SpanBlocks.force<T,U>(Data));
 
         [MethodImpl(Inline)]
         public string Format()

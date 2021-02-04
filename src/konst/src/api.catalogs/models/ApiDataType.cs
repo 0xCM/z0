@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    public readonly struct ApiDataType
+    {
+        public Identifier Name {get;}
+
+        public ApiTypeKind Kind {get;}
+    }
+
+    public enum ApiTypeKind : ulong
+    {
+
+    }
+}

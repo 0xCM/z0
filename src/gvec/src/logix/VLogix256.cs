@@ -111,7 +111,7 @@ namespace Z0
                 case BLK.False: return gvec.vfalse(a,b);
                 case BLK.And: return gvec.vand(a,b);
                 case BLK.Nand: return gvec.vnand(a,b);
-                case BLK.Or: return gvec.vor(a,b);
+                case BLK.Or: return gcpu.vor(a,b);
                 case BLK.Nor: return gvec.vnor(a,b);
                 case BLK.Xor: return gvec.vxor(a,b);
                 case BLK.Xnor: return gvec.vxnor(a,b);
@@ -154,7 +154,7 @@ namespace Z0
                 case BLK.False: return gvec.vfalse;
                 case BLK.And: return gvec.vand;
                 case BLK.Nand: return gvec.vnand;
-                case BLK.Or: return gvec.vor;
+                case BLK.Or: return gcpu.vor;
                 case BLK.Nor: return gvec.vnor;
                 case BLK.Xor: return gvec.vxor;
                 case BLK.Xnor: return gvec.vxnor;
@@ -219,7 +219,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f01<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-            => gvec.vnor(a, gvec.vor(b,c));
+            => gvec.vnor(a, gcpu.vor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f02<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
@@ -273,7 +273,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gvec.vor(gcpu.vnot(b),  c));
+                => gvec.vand(gcpu.vnot(a), gcpu.vor(gcpu.vnot(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -285,13 +285,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0d<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gvec.vor(b, gcpu.vnot(c)));
+                => gvec.vand(gcpu.vnot(a), gcpu.vor(b, gcpu.vnot(c)));
 
         // not a and (b or c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0e<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gvec.vor(b,c));
+                => gvec.vand(gcpu.vnot(a), gcpu.vor(b,c));
 
         // not a
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -345,7 +345,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f17<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(gvec.vselect(a, gvec.vor(b,c), gvec.vand(b,c)));
+                => gcpu.vnot(gvec.vselect(a, gcpu.vor(b,c), gvec.vand(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]

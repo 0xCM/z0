@@ -19,7 +19,7 @@ namespace Z0
         {
             vload(in a, out Vector128<T> vA);
             vload(in b, out Vector128<T> vB);
-            return gvec.vor(vA,vB);
+            return gcpu.vor(vA,vB);
         }
 
         [MethodImpl(Inline), Or, Closures(Closure)]
@@ -28,7 +28,7 @@ namespace Z0
         {
             vload(in a, out Vector256<T> vA);
             vload(in b, out Vector256<T> vB);
-            return gvec.vor(vA,vB);
+            return gcpu.vor(vA,vB);
         }
     }
 }

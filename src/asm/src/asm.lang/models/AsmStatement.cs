@@ -9,37 +9,15 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmStatement : IEquatable<AsmStatement>
-    {
-        public TextBlock Content {get;}
-
-        [MethodImpl(Inline)]
-        public AsmStatement(TextBlock content)
-            => Content = content;
-
-        [MethodImpl(Inline)]
-        public bool Equals(AsmStatement src)
-            => Content.Equals(src.Content);
-
-        public override int GetHashCode()
-            => Content.GetHashCode();
-
-        public override bool Equals(object src)
-            => src is AsmStatement x && Equals(x);
-
-        public int CompareTo(AsmStatement src)
-            => Content.CompareTo(src.Content);
-    }
-
     public readonly struct AsmStatement<A> : IAsmStatement<A>
         where A : unmanaged, IAsmOperand
     {
-        public AsmMnemonicExpr Mnemonic {get;}
+        public AsmMnemonic Mnemonic {get;}
 
         public Args<A> Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, A a)
+        public AsmStatement(AsmMnemonic mnemonic, A a)
         {
             Mnemonic = mnemonic;
             Args = a;
@@ -50,19 +28,19 @@ namespace Z0.Asm
         where A : unmanaged
         where B : unmanaged
     {
-        public AsmMnemonicExpr Mnemonic {get;}
+        public AsmMnemonic Mnemonic {get;}
 
         public Args<A,B> Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, A a, B b)
+        public AsmStatement(AsmMnemonic mnemonic, A a, B b)
         {
             Mnemonic = mnemonic;
             Args = (a,b);
         }
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, Args<A,B> args)
+        public AsmStatement(AsmMnemonic mnemonic, Args<A,B> args)
         {
             Mnemonic = mnemonic;
             Args = args;
@@ -74,19 +52,19 @@ namespace Z0.Asm
         where B : unmanaged
         where C : unmanaged
     {
-        public AsmMnemonicExpr Mnemonic {get;}
+        public AsmMnemonic Mnemonic {get;}
 
         public Args<A,B,C> Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, A a, B b, C c)
+        public AsmStatement(AsmMnemonic mnemonic, A a, B b, C c)
         {
             Mnemonic = mnemonic;
             Args = (a,b,c);
         }
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, Args<A,B,C> args)
+        public AsmStatement(AsmMnemonic mnemonic, Args<A,B,C> args)
         {
             Mnemonic = mnemonic;
             Args = args;
@@ -99,19 +77,19 @@ namespace Z0.Asm
         where C : unmanaged
         where D : unmanaged
     {
-        public AsmMnemonicExpr Mnemonic {get;}
+        public AsmMnemonic Mnemonic {get;}
 
         public Args<A,B,C,D> Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, Args<A,B,C,D> args)
+        public AsmStatement(AsmMnemonic mnemonic, Args<A,B,C,D> args)
         {
             Mnemonic = mnemonic;
             Args = args;
         }
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicExpr mnemonic, A a, B b, C c, D d)
+        public AsmStatement(AsmMnemonic mnemonic, A a, B b, C c, D d)
         {
             Mnemonic = mnemonic;
             Args = (a,b,c,d);

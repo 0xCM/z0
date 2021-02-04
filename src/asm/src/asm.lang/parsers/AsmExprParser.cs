@@ -13,7 +13,6 @@ namespace Z0.Asm
     using static Rules;
     using static TextRules;
     using static AsmExpr;
-    using static AsmOpCodeModel;
 
     using api = AsmExpr;
 
@@ -57,7 +56,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public ref readonly AsmSigOpToken ParseSigOp(AsmSigOpExpr src)
+        public ref readonly AsmSigOpToken ParseSigOp(SigOperand src)
         {
             if(SigOpLookup.Index(src.Content, out var index))
                 return ref SigOpTokens[index];
@@ -66,7 +65,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool Mnemonic(AsmSigExpr src, out AsmMnemonicExpr dst)
+        public bool Mnemonic(api.Signature src, out AsmMnemonic dst)
         {
             var i = Query.index(src.Content, MnemonicTerminator);
             if(i != NotFound && i > 0)
@@ -76,25 +75,25 @@ namespace Z0.Asm
             }
             else
             {
-                dst = AsmMnemonicExpr.Empty;
+                dst = AsmMnemonic.Empty;
                 return false;
             }
         }
 
-        public Index<AsmSigOpExpr> Operands(string src)
+        public Index<SigOperand> Operands(string src)
             => Transform.apply(SigOpSplitRule, src).Map(sigop);
 
         [Op]
-        public Index<AsmSigOpExpr> Operands(AsmSigExpr src)
+        public Index<SigOperand> Operands(api.Signature src)
         {
             if(Mnemonic(src, out var monic))
-                if(Parse.after(src.Content, monic.Content, out var remainder))
+                if(Parse.after(src.Content, monic.Name, out var remainder))
                     return Operands(remainder);
-            return Index<AsmSigOpExpr>.Empty;
+            return Index<SigOperand>.Empty;
         }
 
         [Op]
-        public bool IsDigit(AsmOpCodeExpr src)
+        public bool IsDigit(OpCode src)
         {
             var s = src.Content;
             return s.Length >= 2
@@ -103,13 +102,13 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool IsComposite(AsmSigOpExpr src)
+        public bool IsComposite(SigOperand src)
         {
             return Query.contains(src.Content, CompoundSignifier);
         }
 
         [Op]
-        public bool Decompose(AsmSigOpExpr src, out Pair<AsmSigOpExpr> dst)
+        public bool Decompose(SigOperand src, out Pair<SigOperand> dst)
         {
             if(IsComposite(src))
             {
@@ -127,7 +126,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool RegisterDigit(string src, out RegDigit dst)
+        public bool RegisterDigit(string src, out AsmRegDigit dst)
         {
             dst = default;
             if(Parse.rule(src, RegDigitRule, out var result) &&

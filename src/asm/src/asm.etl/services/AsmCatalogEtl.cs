@@ -11,6 +11,9 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static TextRules;
+    using static AsmExpr;
+
+    using X = AsmExpr;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {
@@ -28,9 +31,9 @@ namespace Z0.Asm
 
         public uint ImportRowCount {get; private set;}
 
-        public Index<AsmMnemonicExpr> Mnemonics()
+        public Index<AsmMnemonic> Mnemonics()
         {
-            var dst = root.hashset<AsmMnemonicExpr>();
+            var dst = root.hashset<AsmMnemonic>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
             var parser = AsmExprParser.create(Wf);
@@ -98,7 +101,7 @@ namespace Z0.Asm
             return imports;
         }
 
-        public void Emit(ReadOnlySpan<AsmSpecifierExpr> src)
+        public void Emit(ReadOnlySpan<OperationSpec> src)
         {
             var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
             var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
@@ -106,11 +109,11 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        public ReadOnlySpan<AsmSpecifierExpr> Specifiers()
+        public ReadOnlySpan<OperationSpec> Specifiers()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
-            var buffer = span<AsmSpecifierExpr>(count);
+            var buffer = span<OperationSpec>(count);
             var j=0u;
             var k=0u;
             for(var i=0; i<count; i++)
@@ -158,7 +161,7 @@ namespace Z0.Asm
         }
 
 
-        public uint Denormalize(AsmSpecifierExpr src, Span<AsmSpecifierExpr> dst, uint offset)
+        public uint Denormalize(OperationSpec src, Span<OperationSpec> dst, uint offset)
         {
             var index = offset;
             var input = AsmExpr.specifier((ushort)index, src.OpCode, src.Sig);
@@ -169,15 +172,15 @@ namespace Z0.Asm
             return index - offset;
         }
 
-        public Pair<AsmSpecifierExpr> Denormalize(AsmSpecifierExpr src)
+        public Pair<OperationSpec> Denormalize(OperationSpec src)
         {
-            var a0 = AsmSpecifierExpr.Empty;
-            var a1 = AsmSpecifierExpr.Empty;
+            var a0 = OperationSpec.Empty;
+            var a1 = OperationSpec.Empty;
             var sigs = Denormalize(src.Sig);
             return (a0,a1);
         }
 
-        public Pair<AsmSig> Denormalize(AsmSigExpr src)
+        public Pair<AsmSig> Denormalize(X.Signature src)
         {
             var a0 = AsmSig.Empty;
             var a1 = AsmSig.Empty;
