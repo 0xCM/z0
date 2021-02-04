@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
+
+    using static Part;
 
 	/// <summary>
 	/// Represents a complex value with signed 16-bit integer components
@@ -17,7 +17,7 @@ namespace Z0
 	public struct ComplexI16 : IEquatable<ComplexI16>
 	{
 		/// <summary>
-		/// Loads a span of span of complext values from a source span where adjacent 
+		/// Loads a span of span of complext values from a source span where adjacent
 		/// entries (i,i+j) are shorterpreted respectively as real and imaginary components
 		/// </summary>
 		/// <param name="src">The source span, which must contain an even number of elements</param>
@@ -129,7 +129,7 @@ namespace Z0
 		{
 			re = this.re;
 			im = this.im;
-		}		
+		}
 
         /// <summary>
         /// Formats the real and imaginar parts of a complex number in one of two canonical forms
@@ -145,7 +145,7 @@ namespace Z0
         public bool Equals(ComplexI16 src)
             => this == src;
 
-		public override string ToString() 
+		public override string ToString()
 			=>  Format();
 
         public override bool Equals(object src)

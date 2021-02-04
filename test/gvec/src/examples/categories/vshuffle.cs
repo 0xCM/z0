@@ -133,33 +133,33 @@ namespace Z0
             var w = w128;
             var x0 = gcpu.vinc<byte>(w);
             var x0Spec = cpu.vload(w, z.first(IdentityPattern));
-            var x0Dst = z.vshuf16x8(x0,x0Spec);
+            var x0Dst = cpu.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
             var x1 = gcpu.vinc<byte>(w);
             var x1Spec = cpu.vload(w, z.first(ReversalPattern));
-            var x1Dst = vshuf16x8(x1,x1Spec);
+            var x1Dst = cpu.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
             var x2 = gcpu.vinc<byte>(w);
             var x2Spec = cpu.vrotl(n128, n8);
-            var x2Dst = vshuf16x8(x2,x2Spec);
+            var x2Dst = cpu.vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
             var x3 = gcpu.vinc<byte>(w);
             var x3Spec = cpu.vrotr(n128, n8);
-            var x3Dst = vshuf16x8(x3,x3Spec);
+            var x3Dst = cpu.vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
             var x4 = gcpu.vinc<byte>(w);
             var x4Spec1 = cpu.vrotl(n128, n8);
             var x4Spec2 = cpu.vrotr(n128, n8);
-            var x4Dst = vshuf16x8(vshuf16x8(x4,x4Spec1), x4Spec2);
+            var x4Dst = cpu.vshuf16x8(cpu.vshuf16x8(x4,x4Spec1), x4Spec2);
             Claim.veq(x4,x4Dst);
 
             var x5 = Random.CpuVector<byte>(w);
             var x5Spec = cpu.vbroadcast(w,(byte)0b10000000);
-            var x5Dst = z.vshuf16x8(x5, x5Spec);
+            var x5Dst = cpu.vshuf16x8(x5, x5Spec);
             Claim.veq(x5Dst, cpu.vbroadcast(w,(byte)0));
         }
 
@@ -173,7 +173,7 @@ namespace Z0
 
             var increments = gcpu.vinc<byte>(w128);
             var spec = perm.ToShuffleSpec();
-            var dst = z.vshuf16x8(increments, spec);
+            var dst = cpu.vshuf16x8(increments, spec);
             var expect = gcpu.vdec<byte>(w128);
             Claim.veq(expect, dst);
 
@@ -181,7 +181,7 @@ namespace Z0
             for(var i=0; i<CycleCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);
-                var y = z.vshuf16x8(x, identity);
+                var y = cpu.vshuf16x8(x, identity);
                 Claim.veq(x,y);
             }
         }

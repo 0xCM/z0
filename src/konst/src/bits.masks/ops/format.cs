@@ -29,22 +29,22 @@ namespace Z0
 
         [Op]
         public static string format(Blend8x16 spec)
-            => vblendformat(spec,8);
+            => vblendformat(spec, 8);
 
         [Op]
         public static string format(Blend4x32 spec)
-            => vblendformat(spec,4);
+            => vblendformat(spec, 4);
 
         [Op]
         public static string format(Blend8x32 spec)
-            => vblendformat(spec,8);
+            => vblendformat(spec, 8);
 
         [Op]
         public static string format(Blend2x64 spec)
-            => vblendformat(spec,2);
+            => vblendformat(spec, 2);
 
         [Op]
         public static string format(Blend4x64 spec)
-            => vblendformat(spec,4);
+            => vblendformat(spec, 4);
     }
 }

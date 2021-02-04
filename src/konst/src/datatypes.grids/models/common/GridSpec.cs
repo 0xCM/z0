@@ -6,14 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
     /// <summary>
     /// Characterizes the memory layout of a 2-d grid
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Datatype]
     public readonly struct GridSpec : IDataType<GridSpec>
     {
         /// <summary>

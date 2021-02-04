@@ -25,6 +25,12 @@ namespace Z0
         MethodInfo Method {get;}
 
         /// <summary>
+        /// The apiset to which the method belongs, if any
+        /// </summary>
+        ApiSetKind ApiSet
+            => Method.Tag<ApiHostAttribute>().MapValueOrDefault(x => x.ApiSet, ApiSetKind.None);
+
+        /// <summary>
         /// Specifies whether the method is closed generic
         /// </summary>
         bool IsClosedGeneric

@@ -13,10 +13,10 @@ namespace Z0
     {
         public MemoryAddress Base {get;}
 
-        public ApiMembers Members {get;}
+        public Index<ApiMember> Members {get;}
 
         [MethodImpl(Inline)]
-        public BasedApiMembers(MemoryAddress @base, ApiMembers members)
+        public BasedApiMembers(MemoryAddress @base, Index<ApiMember> members)
         {
             Base = @base;
             Members = members;

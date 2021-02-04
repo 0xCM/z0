@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
 	/// <summary>
 	/// Represents a complex value with unsigned 64-bit integer components
@@ -17,7 +17,7 @@ namespace Z0
 	public struct ComplexU64 : IEquatable<ComplexU64>
 	{
 		/// <summary>
-		/// Loads a span of span of complext values from a source span where adjacent 
+		/// Loads a span of span of complext values from a source span where adjacent
 		/// entries (i,i+j) are interpreted respectively as real and imaginary components
 		/// </summary>
 		/// <param name="src">The source span, which must contain an even number of elements</param>
@@ -127,7 +127,7 @@ namespace Z0
 		{
 			re = this.re;
 			im = this.im;
-		}		
+		}
 
         /// <summary>
         /// Formats the real and imaginar parts of a complex number in one of two canonical forms
@@ -139,8 +139,8 @@ namespace Z0
         public override int GetHashCode()
              => Complex<ulong>.Hash(re,im);
 
-		public override string ToString() 
-			=>  Format();        
+		public override string ToString()
+			=>  Format();
 
         public override bool Equals(object src)
             => src is ComplexU64 c ? (c == this) : false;

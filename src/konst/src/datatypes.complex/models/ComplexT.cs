@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a complex number parameterized over the primal types
     /// </summary>
+	[StructLayout(LayoutKind.Sequential)]
     public readonly struct Complex<T> : IEquatable<Complex<T>>
         where T : unmanaged
     {

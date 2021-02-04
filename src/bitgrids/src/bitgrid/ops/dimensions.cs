@@ -30,11 +30,11 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         public static IEnumerable<Pair<ulong>> dims(N16 w)
         {
-            yield return dim(n1,n16);
-            yield return dim(n16,n1);
-            yield return dim(n2,n8);
-            yield return dim(n8,n2);
-            yield return dim(n4,n4);
+            yield return dim(n1, n16);
+            yield return dim(n16 ,n1);
+            yield return dim(n2, n8);
+            yield return dim(n8, n2);
+            yield return dim(n4, n4);
         }
 
         /// <summary>
@@ -43,12 +43,12 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         public static IEnumerable<Pair<ulong>> dims(N32 w)
         {
-            yield return dim(n1,n32);
-            yield return dim(n32,n1);
-            yield return dim(n2,n16);
-            yield return dim(n16,n2);
-            yield return dim(n8,n4);
-            yield return dim(n4,n8);
+            yield return dim(n1, n32);
+            yield return dim(n32, n1);
+            yield return dim(n2, n16);
+            yield return dim(n16, n2);
+            yield return dim(n8, n4);
+            yield return dim(n4, n8);
         }
 
         /// <summary>

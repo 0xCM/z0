@@ -10,8 +10,6 @@ namespace Z0
     {
         LocatedMethod Jit(IdentifiedMethod src);
 
-        BasedApiMembers JitApi(FS.FilePath dst);
-
         BasedApiMembers JitApi();
 
         ApiMembers Jit(IPart src);
@@ -20,6 +18,5 @@ namespace Z0
 
         ApiMember[] Jit(Index<ApiRuntimeType> src);
 
-        Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst);
     }
 }

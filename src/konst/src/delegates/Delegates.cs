@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.Delegates)]
     public partial class Delegates

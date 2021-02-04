@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static Numeric;
 
-    [Datatype]
     public readonly struct Imm<W,T> : IImmediate<Imm<W,T>,W,T>
         where W : unmanaged, INumericWidth
         where T : unmanaged

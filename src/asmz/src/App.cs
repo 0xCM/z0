@@ -38,12 +38,50 @@ namespace Z0.Asm
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
+        [Op]
+        Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
+        {
+            var count = members.Length;
+            var buffer = alloc<ApiAddressRecord>(count);
+            ref var dst = ref first(buffer);
+            var rebase = first(members).BaseAddress;
+            for(uint seq=0; seq<count; seq++)
+            {
+                ref var record = ref seek(dst,seq);
+                ref readonly var member = ref skip(members, seq);
+                record.Sequence = seq;
+                record.ProcessBase = @base;
+                record.MemberBase = member.BaseAddress;
+                record.MemberOffset = member.BaseAddress - @base;
+                record.MemberRebase = member.BaseAddress - rebase;
+                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
+                record.HostName = member.Host.Name;
+                record.PartName = member.Host.Owner.Format();
+                record.Identifier = member.Id;
+            }
+            return buffer;
+        }
+
+        public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src, FS.FilePath dst)
+        {
+            var summaries = Summarize(src.Base, src.Members.View);
+            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
+            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
+            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
+            return summaries;
+        }
 
         void Jit()
         {
             var jitter = ApiServices.create(Wf).ApiJit();
+            var members = jitter.JitApi();
+
+            var cpuset = ApiQuery.set(members.Members, ApiSetKind.Cpu).Sort();
+            var @base = cpuset.First.BaseAddress;
+            var based = new BasedApiMembers(@base, cpuset);
+
             var dst = Db.IndexFile(ApiAddressRecord.TableId);
-            var members = jitter.JitApi(dst);
+            var records = EmitCatalog(based,dst);
         }
 
         void EmitApiClasses()
@@ -146,7 +184,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitApiClasses();
+            Jit();
 
         }
 

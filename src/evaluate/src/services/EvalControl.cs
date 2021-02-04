@@ -20,7 +20,7 @@ namespace Z0
 
         readonly IPartCapturePaths CodeArchive;
 
-        readonly IGlobalApiCatalog ApiSet;
+        readonly IGlobalApiCatalog ApiGlobal;
 
         internal EvalControl(IWfShell wf, IPolyrand random, FS.FolderPath root, uint buffersize)
         {
@@ -29,7 +29,7 @@ namespace Z0
             BufferSize = buffersize;
             Dispatcher = Evaluate.dispatcher(Wf, random, BufferSize);
             CodeArchive = Archives.capture(root);
-            ApiSet = wf.Api;
+            ApiGlobal = wf.Api;
         }
 
         [Op]
@@ -74,7 +74,7 @@ namespace Z0
         public void Execute(params PartId[] parts)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
-            iter(ApiSet.PartCatalogs(parts), ExecuteCatalog);
+            iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
         }
     }
 }

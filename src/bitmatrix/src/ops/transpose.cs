@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static BitMasks.Literals;
 
     partial class BitMatrix
@@ -18,7 +18,7 @@ namespace Z0
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
             var vec = gcpu.vload(n128,A.Bytes);
-            cpu.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
+            cpu.vstore(cpu.vshuf16x8(vec, Tr8x16Mask), ref first(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Content);
         }
 
@@ -40,7 +40,7 @@ namespace Z0
             var x = cpu.vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
-                Z[i] = (byte)cpu.vtakemask(v8u(x));
+                Z[i] = (byte)cpu.vtakemask(cpu.v8u(x));
                 x = cpu.vsll(x,1);
             }
             return ref Z;
@@ -95,7 +95,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<width; i++)
                 data |= ((ulong)A.Col(i) << i*width);
-            z.uint64(ref Z.Head) = data;
+            memory.uint64(ref Z.Head) = data;
         }
 
         /// <summary>

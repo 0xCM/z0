@@ -37,9 +37,9 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(cpu.vinflate256x16i(src, w256),count));
-            var y = vand(x,v16u(cpu.vbroadcast(w256, byte.MaxValue)));
-            return v8i(cpu.vcompact8u(y,n128));
+            var x = v16u(ShiftRightLogical(vinflate256x16i(src, w256),count));
+            var y = vand(x,v16u(vbroadcast(w256, byte.MaxValue)));
+            return v8i(vcompact8u(y,n128));
         }
 
         /// <summary>
@@ -110,10 +110,10 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(cpu.vinflate256x16i(vlo(src), w256),count));
-            var y = v16u(ShiftRightLogical(cpu.vinflate256x16i(cpu.vhi(src), w256),count));
-            var m = v16u(cpu.vbroadcast(n256, byte.MaxValue));
-            return v8i(cpu.vcompact8u(vand(x,m), vand(y,m), w256));
+            var x = v16u(ShiftRightLogical(vinflate256x16i(vlo(src), w256),count));
+            var y = v16u(ShiftRightLogical(vinflate256x16i(vhi(src), w256),count));
+            var m = v16u(vbroadcast(w256, byte.MaxValue));
+            return v8i(vcompact8u(vand(x,m), vand(y,m), w256));
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = vlsb(n256, n8, (byte)(8 - count), z8);
+            var m = vlsb(w256, n8, (byte)(8 - count), z8);
             return vand(y,m);
         }
 

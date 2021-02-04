@@ -31,6 +31,8 @@ namespace Z0
 
         public CliSig CliSig {get;}
 
+        public ApiSetKind ApiSet {get;}
+
         public ApiArtifactKey MetaUri
             => Method;
 
@@ -48,6 +50,7 @@ namespace Z0
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(BaseAddress, uri, method);
             CliSig = sig ?? CliSig.Empty;
+            ApiSet = Method.Tag<ApiHostAttribute>().MapValueOrDefault(x => x.ApiSet, ApiSetKind.None);
         }
 
         [MethodImpl(Inline)]

@@ -8,14 +8,14 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost("scalar")]
+    [ApiHost(ApiSetKind.Bits)]
     public partial class Bits
     {
         const NumericKind Closure = Konst.UnsignedInts;
 
     }
 
-    [ApiHost("generic")]
+    [ApiHost(ApiSetKind.Bits | ApiSetKind.Generic)]
     public partial class gbits
     {
         const NumericKind Closure = UnsignedInts;

@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Encloses a finite set of structural values
@@ -21,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DataSet(IEnumerable<T> src)
-            => Data = z.hashset(src);
+            => Data = root.hashset(src);
 
         [MethodImpl(Inline)]
         public DataSet(HashSet<T> src)
@@ -29,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public DataSet(T[] src)
-            => Data = z.hashset(src);
+            => Data = root.hashset(src);
 
         public IEnumerable<T> Next()
             => Data;

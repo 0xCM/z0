@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
 
     using static Root;
 
     public readonly struct ApiRuntimeType : IApiHost, IComparable<ApiRuntimeType>
     {
-        public static HashSet<string> Ignore
-            => root.hashset("ToString","GetHashCode", "Equals", "ToString");
-
         public PartId PartId {get;}
 
         public Type HostType {get;}
@@ -68,6 +64,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(ApiRuntimeType a, ApiRuntimeType b)
             => !a.Equals(b);
-
     }
 }

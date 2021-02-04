@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
 	/// <summary>
 	/// Represents a complex value with unsigned 32-bit integer components
@@ -17,7 +17,7 @@ namespace Z0
 	public struct ComplexU32 : IEquatable<ComplexU32>
 	{
 		/// <summary>
-		/// Loads a span of span of complext values from a source span where adjacent 
+		/// Loads a span of span of complext values from a source span where adjacent
 		/// entries (i,i+j) are interpreted respectively as real and imaginary components
 		/// </summary>
 		/// <param name="src">The source span, which must contain an even number of elements</param>
@@ -111,18 +111,18 @@ namespace Z0
 		{
 			re = this.re;
 			im = this.im;
-		}		
+		}
 
         /// <summary>
         /// Renders the value as a string per supplied options
         /// </summary>
         /// <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
 		public string Format(bool tupleize = false)
-			=> tupleize ? $"({re}, {im})" : $"{re} + {im}i";			
+			=> tupleize ? $"({re}, {im})" : $"{re} + {im}i";
 
-		public override string ToString() 
+		public override string ToString()
 			=>  Format();
-        
+
         public override int GetHashCode()
             => $"{re}{im}".GetHashCode();
 

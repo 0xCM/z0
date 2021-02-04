@@ -6,14 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
     /// <summary>
     /// Specifies the memory storage required for a specified grid
     /// </summary>
-    [StructLayout(LayoutKind.Sequential), Datatype]
     public readonly struct GridStorage : IDataTypeEquatable<GridStorage>
     {
         /// <summary>

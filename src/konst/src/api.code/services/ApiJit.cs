@@ -85,22 +85,6 @@ namespace Z0
             return members;
         }
 
-        public BasedApiMembers JitApi(FS.FilePath dst)
-        {
-            var members = JitApi();
-            EmitAddresses(members, dst);
-            return members;
-        }
-
-        public Index<ApiAddressRecord> EmitAddresses(BasedApiMembers src, FS.FilePath dst)
-        {
-            var summaries = Summarize(src.Base, src.Members.View);
-            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
-            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
-            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
-            return summaries;
-        }
-
         public ApiMembers Jit(IApiHost src)
         {
             var direct = JitDirect(src);
@@ -113,7 +97,7 @@ namespace Z0
         {
             var dst = root.list<ApiMember>();
             var count = src.Count;
-            var exclusions = ApiRuntimeType.Ignore;
+            var exclusions = Ignore;
             ref var lead = ref src.First;
             for(var i=0u; i<count; i++)
                 dst.AddRange(Jit(skip(lead,i), exclusions));
@@ -137,8 +121,8 @@ namespace Z0
             return dst.ToArray();
         }
 
-        ApiMember[] Jit(ApiRuntimeType src)
-            => Jit(src, ApiRuntimeType.Ignore);
+        public Index<ApiMember> Jit(ApiRuntimeType src)
+            => Jit(src, Ignore);
 
         [Op]
         ApiMember[] Jit(ApiRuntimeType src, HashSet<string> exclusions)
@@ -272,30 +256,6 @@ namespace Z0
         }
 
         [Op]
-        Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
-        {
-            var count = members.Length;
-            var buffer = alloc<ApiAddressRecord>(count);
-            ref var dst = ref first(buffer);
-            var rebase = first(members).BaseAddress;
-            for(uint seq=0; seq<count; seq++)
-            {
-                ref var record = ref seek(dst,seq);
-                ref readonly var member = ref skip(members, seq);
-                record.Sequence = seq;
-                record.ProcessBase = @base;
-                record.MemberBase = member.BaseAddress;
-                record.MemberOffset = member.BaseAddress - @base;
-                record.MemberRebase = member.BaseAddress - rebase;
-                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
-                record.HostName = member.Host.Name;
-                record.PartName = member.Host.Owner.Format();
-                record.Identifier = member.Id;
-            }
-            return buffer;
-        }
-
-        [Op]
         static JittedMethod[] GenericMethods(IApiHost host)
             => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGeneric).Select(m => new JittedMethod(host.Uri, m));
 
@@ -310,6 +270,9 @@ namespace Z0
         [Op]
         static bool IsDirect(MethodInfo src)
             => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
+
+        static HashSet<string> Ignore
+            => root.hashset("ToString","GetHashCode", "Equals", "ToString");
 
     }
 

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
+    using static Part;
 
     public readonly struct TableSpan<T> : ITableSpan<T>, ITextual
         where T : struct

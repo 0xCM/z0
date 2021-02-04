@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential), Record]
+    [Record]
     public struct GridStats : IRecord<GridStats>
     {
         public asci16 Name;

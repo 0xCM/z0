@@ -179,12 +179,12 @@ namespace Z0
         {
             var src = gcpu.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return z.vload(n, in z.first(src));
+            return gcpu.vload(n, in z.first(src));
         }
 
         [MethodImpl(Inline)]
         public static Vector128<byte> vswap(Vector128<byte> src, params Swap[] swaps)
-            => z.vshuf16x8(src, vswapspec<byte>(w128, swaps));
+            => cpu.vshuf16x8(src, vswapspec<byte>(w128, swaps));
 
         public void perm_swaps()
         {

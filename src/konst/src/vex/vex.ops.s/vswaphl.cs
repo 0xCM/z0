@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vswaphl(Vector128<sbyte> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vswaphl(Vector128<byte> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vswaphl(Vector128<short> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline)]
         public static Vector128<ushort> vswaphl(Vector128<ushort> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<int> vswaphl(Vector128<int> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<uint> vswaphl(Vector128<uint> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vswaphl(Vector128<ulong> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
 
         /// <summary>
         /// Swaps 64-bit hi/lo segments of the source vector
@@ -138,6 +138,6 @@ namespace Z0
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<long> vswaphl(Vector128<long> x)
-            => cpu.vshuf2x64(x, Arrange2L.BA);
+            => vshuf2x64(x, Arrange2L.BA);
     }
 }

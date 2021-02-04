@@ -67,6 +67,10 @@ namespace Z0
         public static implicit operator ApiMember[](ApiMembers src)
             => src.Data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Index<ApiMember>(ApiMembers src)
+            => src.Data;
+
         public static ApiMembers Empty
             => new ApiMembers(TableSpan<ApiMember>.Empty);
     }

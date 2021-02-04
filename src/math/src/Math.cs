@@ -7,7 +7,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [ApiHost, Free]
+    [ApiHost(ApiSetKind.Math), Free]
     public partial class math
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;

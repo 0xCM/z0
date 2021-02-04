@@ -19,8 +19,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsplit32x8x1(uint src)
         {
-            var a = cpu.vbroadcast(w256, src);
-            var b = cpu.vbroadcast(w256, BitMasks.Literals.Msb32x8x7);
+            var a = vbroadcast(w256, src);
+            var b = vbroadcast(w256, BitMasks.Literals.Msb32x8x7);
             return v8u(vand(a,b));
         }
     }

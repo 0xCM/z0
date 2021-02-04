@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost(ApiNames.gmath)]
+    [ApiHost(ApiSetKind.Math | ApiSetKind.Generic)]
     public partial class gmath
     {
 

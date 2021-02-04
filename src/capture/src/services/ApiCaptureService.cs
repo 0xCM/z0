@@ -66,23 +66,17 @@ namespace Z0
             if(src.IsEmpty)
                 return;
 
-            Capture(src.ApiTypes);
-            Capture(src.OperationHosts);
+            CaptureTypes(src.ApiTypes);
+            CaptureOps(src.OperationHosts);
         }
 
-        void Capture(ReadOnlySpan<ApiHost> src)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                Capture(skip(src, i));
-        }
 
         void Capture(IApiHost api)
         {
             var flow = Wf.Running(api.Name);
             try
             {
-                var extracted = Extract(api);
+                var extracted = ExtractOps(api);
                 var emitter = ApiCaptureEmitter.create(Wf, Asm, api.Uri, extracted);
                 emitter.Emit();
             }
@@ -93,9 +87,21 @@ namespace Z0
             Wf.Ran(flow, api.Name);
         }
 
-        void Capture(Index<ApiRuntimeType> src)
+        void CaptureOps(ReadOnlySpan<ApiHost> src)
         {
-            var extracted = @readonly(Extract(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Capture(skip(src, i));
+        }
+
+        void CaptureTypes(ReadOnlySpan<ApiHost> src)
+        {
+
+        }
+
+        void CaptureTypes(Index<ApiRuntimeType> src)
+        {
+            var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
@@ -104,7 +110,7 @@ namespace Z0
             }
         }
 
-        ApiMemberExtract[] Extract(IApiHost host)
+        ApiMemberExtract[] ExtractOps(IApiHost host)
         {
             try
             {
@@ -117,7 +123,7 @@ namespace Z0
             }
         }
 
-        ApiMemberExtract[] Extract(Index<ApiRuntimeType> types)
+        ApiMemberExtract[] ExtractTypes(Index<ApiRuntimeType> types)
         {
             try
             {

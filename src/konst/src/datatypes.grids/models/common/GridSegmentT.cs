@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
     using static data.tchars;
 
-    [StructLayout(LayoutKind.Sequential), Datatype]
     public readonly struct GridSegment<T> : IDataType<T>
         where T : unmanaged
     {

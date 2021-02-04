@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
+    using static Part;
     using static Demands;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a tabular span of dimension MxN
@@ -30,13 +30,13 @@ namespace Z0
         /// The number of rows in the structure
         /// </summary>
         public static int RowCount
-            => z.nat32i<M>();
+            => TypeNats.nat32i<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
         public static int ColCount
-            => z.nat32i<N>();
+            => TypeNats.nat32i<N>();
 
         /// <summary>
         /// The number of cells in each row
@@ -55,18 +55,6 @@ namespace Z0
         /// </summary>
         public static int CellCount
             => RowLength * ColLength;
-
-        public static implicit operator TableSpan<M,N,T>(T[] src)
-            => new TableSpan<M,N,T>(src);
-
-        public static implicit operator TableSpan<M,N,T>(Span<T> src)
-            => new TableSpan<M,N,T>(src);
-
-        public static implicit operator Span<T>(TableSpan<M,N,T> src)
-            => src.data;
-
-        public static implicit operator ReadOnlySpan<T> (TableSpan<M,N,T> src)
-            => src.data;
 
         /// <summary>
         /// Verifies correct source span length prior to backing store assignment
@@ -224,5 +212,17 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        public static implicit operator TableSpan<M,N,T>(T[] src)
+            => new TableSpan<M,N,T>(src);
+
+        public static implicit operator TableSpan<M,N,T>(Span<T> src)
+            => new TableSpan<M,N,T>(src);
+
+        public static implicit operator Span<T>(TableSpan<M,N,T> src)
+            => src.data;
+
+        public static implicit operator ReadOnlySpan<T> (TableSpan<M,N,T> src)
+            => src.data;
     }
 }
