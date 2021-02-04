@@ -13,7 +13,7 @@ namespace Z0
             var x = Random.Span<ulong>(RepCount, z32, uint.MaxValue);
             var y = Random.Span<ulong>(RepCount, z32, uint.MaxValue);
             Span<Pair<ulong>> z = new Pair<ulong>[RepCount];
-            mtuples.mul64x128(x,y,z);
+            Math128.mul(x,y,z);
             for(var i=0; i<RepCount; i++)
                 Claim.eq(x[i] * y[i], z[i].Left);
         }

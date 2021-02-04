@@ -70,5 +70,22 @@ namespace Z0
         public static ref readonly SpanBlock256<T> negate<T>(in SpanBlock256<T> a, in SpanBlock256<T> dst)
             where T : unmanaged
                 => ref BSvc.negate<T>(w256).Invoke(a, dst);
+
+        /// <summary>
+        /// Computes z[i] := x[i] - y[i] for i = 0...N-1
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        /// <param name="z">The target vector</param>
+        /// <typeparam name="N">The length type</typeparam>
+        /// <typeparam name="T">The component type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref Block256<N,T> sub<N,T>(Block256<N,T> x, Block256<N,T> y, ref Block256<N,T> z)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            sub(x.Data, y.Data, z.Data);
+            return ref z;
+        }
     }
 }

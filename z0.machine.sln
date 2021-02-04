@@ -171,6 +171,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.cmdexec", "src\cmdexec\z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asmz", "src\asmz\z0.asmz.csproj", "{286771C1-D912-4CB0-AF15-38133E1E3022}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.bitmasks", "src\bitmasks\z0.bitmasks.csproj", "{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -460,6 +462,10 @@ Global
 		{286771C1-D912-4CB0-AF15-38133E1E3022}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{286771C1-D912-4CB0-AF15-38133E1E3022}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{286771C1-D912-4CB0-AF15-38133E1E3022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -533,6 +539,7 @@ Global
 		{D8F108B5-A2DC-4923-B67D-FD932BA67215} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{20783C4F-2926-4FE6-90F8-752D8345F1F3} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{286771C1-D912-4CB0-AF15-38133E1E3022} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

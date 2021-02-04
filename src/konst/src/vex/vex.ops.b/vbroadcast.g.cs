@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct gcpu
     {
@@ -28,6 +28,7 @@ namespace Z0
 
         /// <summary>
         /// Projects a scalar value onto each component of a 128-bit vector
+        /// gcpu::vbroadcast[T]:w128->T->v256x8u
         /// </summary>
         /// <param name="w">The bitness selector</param>
         /// <param name="src">The source value</param>

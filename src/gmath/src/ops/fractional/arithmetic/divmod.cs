@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return Tuples.generic<T>(fmath.divmod(float32(a), float32(b)));
+                return Tuples.generic<T>(fmath.RefOps.divmod(float32(a), float32(b)));
             else if(typeof(T) == typeof(float))
-                return Tuples.generic<T>(fmath.divmod(float64(a), float64(b)));
+                return Tuples.generic<T>(fmath.RefOps.divmod(float64(a), float64(b)));
             else
                 throw no<T>();
         }

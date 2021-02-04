@@ -6,27 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    using System.Runtime.Intrinsics;
 
     using static math;
 
-    [StructLayout(LayoutKind.Explicit, Size = 16)]
+    [ApiDeep]
     public struct BitsF128
     {
-        [FieldOffset(0)]
-        public decimal Data;
+        Vector128<ulong> Data;
 
-        [FieldOffset(0)]
-        public ulong LoBits;
+        public ulong LoBits
+        {
+            [MethodImpl(Inline)]
+            get => Data.GetElement(0);
+        }
 
-        [FieldOffset(8)]
-        public ulong HiBits;
+        public ulong HiBits
+        {
+            [MethodImpl(Inline)]
+            get => Data.GetElement(1);
+        }
 
         [MethodImpl(Inline)]
-        public BitsF128(decimal src)
-            : this()
+        internal BitsF128(decimal src)
         {
-            Data = src;
+            Data = memory.@as<decimal,Vector128<ulong>>(src);
         }
     }
 }

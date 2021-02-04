@@ -21,17 +21,17 @@ namespace Z0
                 var y = Random.Next<uint>(2, Pow2.T08);
                 var z = Random.Next<uint>(2, Pow2.T08);
 
-                var lo = math.mullo(x,y);
+                var lo = Math128.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = math.mulhi(x,y);
+                var hi = Math128.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                math.mul(x,y, out uint a, out uint b);
+                Math128.mul(x,y, out uint a, out uint b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                math.mul(z,MAX, out uint c, out uint d);
+                Math128.mul(z,MAX, out uint c, out uint d);
                 CheckNumeric.gt(c,0u);
                 CheckNumeric.gt(d,0u);
 
@@ -44,7 +44,7 @@ namespace Z0
                 var xi = Random.Next<uint>();
                 var yi = Random.Next<uint>();
                 var z = (ulong)xi * (ulong)yi;
-                Claim.eq(z, math.mul64(xi,yi));
+                Claim.eq(z, Math128.mul(xi,yi));
             }
         }
 
@@ -79,19 +79,19 @@ namespace Z0
                 var y = Random.Next<ulong>(2, Pow2.T08);
                 var z = Random.Next<ulong>(2, Pow2.T08);
 
-                var lo = math.mullo(x,y);
+                var lo = Math128.mullo(x,y);
                 Claim.eq(x*y,lo);
 
-                var hi = math.mulhi(x,y);
+                var hi = Math128.mulhi(x,y);
                 Claim.eq(0,hi);
 
-                ClaimNumeric.nonzero(math.mulhi(z,MAX));
+                ClaimNumeric.nonzero(Math128.mulhi(z,MAX));
 
-                math.mul(x,y, out ulong a, out ulong b);
+                Math128.mul(x,y, out ulong a, out ulong b);
                 Claim.eq(lo, a);
                 Claim.eq(hi, b);
 
-                math.mul(z,MAX, out ulong c, out ulong d);
+                Math128.mul(z,MAX, out ulong c, out ulong d);
                 ClaimNumeric.gt(c,0ul);
                 ClaimNumeric.gt(d,0ul);
             }
@@ -106,7 +106,7 @@ namespace Z0
             {
                 var a = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
                 var b = Random.Next<ulong>(uint.MaxValue, ulong.MaxValue);
-                Claim.eq(lo_ref(a,b), math.mullo(a,b));
+                Claim.eq(lo_ref(a,b), Math128.mullo(a,b));
             }
         }
     }

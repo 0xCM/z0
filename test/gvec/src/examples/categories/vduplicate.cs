@@ -15,8 +15,8 @@ namespace Z0
         [Op(ExampleGroups.Duplicate)]
         public void vduplicate()
         {
-            var n = n256;
-            var width = n32;
+            var n = w256;
+            var width = w32;
 
             var x0 = cpu.vparts(n, 0,1,2,3,4,5,6,(uint)7);
             var y0 = cpu.vduplicate(n0,width,x0);
@@ -35,8 +35,8 @@ namespace Z0
                 ulong.MaxValue & 0xCCCCCCCC88888888,
                 ulong.MaxValue & 0x3333333377777777,
                 ulong.MaxValue & 0x2222222244444444);
-            var y2 = cpu.vduplicate(n0, n64, x2);
-            var z2 = cpu.vduplicate(n1,n64, x2);
+            var y2 = cpu.vduplicate(n0, w64, x2);
+            var z2 = cpu.vduplicate(n1, w64, x2);
         }
     }
 }

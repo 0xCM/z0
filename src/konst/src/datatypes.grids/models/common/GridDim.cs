@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
     using static data.tchars;
 
     /// <summary>
@@ -78,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Pair<uint>(GridDim src)
-            => pair(src.RowCount, src.ColCount);
+            => root.pair(src.RowCount, src.ColCount);
 
         public static GridDim Empty
             => default;

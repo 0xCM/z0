@@ -12,6 +12,10 @@ namespace Z0
 
     public sealed class BitMaskServices : WfService<BitMaskServices, BitMaskServices>
     {
+        [Op]
+        public static BitMaskFormatter formatter()
+            => new BitMaskFormatter();
+
         public Index<BitMaskInfo> Load()
             => Load(DefaultProvider);
 
@@ -33,11 +37,11 @@ namespace Z0
         {
             var flow = Wf.EmittingTable<BitMaskInfo>(dst);
             var count = src.Length;
-            var formatter = BitMasks.formatter();
+            var f= formatter();
             using var writer = dst.Writer();
-            writer.WriteLine(formatter.HeaderText);
+            writer.WriteLine(f.HeaderText);
             for(var i=0u; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(src, i)));
+                writer.WriteLine(f.Format(skip(src, i)));
             return Wf.EmittedTable<BitMaskInfo>(flow, count, dst);
         }
 

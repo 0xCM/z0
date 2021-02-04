@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a 16-bit grid of caller-interpreted dimension
@@ -29,29 +29,46 @@ namespace Z0
         /// </summary>
         public byte BitCount => 16;
 
+        [MethodImpl(Inline)]
+        public BitGrid16(ushort data)
+            => Data = data;
+
         /// <summary>
         /// The number of grid cells := {1 | 2}
         /// </summary>
-        public uint CellCount { [MethodImpl(Inline)] get => 2/size<T>(); }
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => 2/size<T>();
+        }
 
         /// <summary>
         /// Covers grid content with a span that defines cells of width := {1 | 2}
         /// </summary>
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Recover<T>();}
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Bytes().Recover<T>();
+        }
 
         /// <summary>
         /// Yields a mutable reference to the grid's leading storage cell
         /// </summary>
-        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
+        public ref T Head
+        {
+             [MethodImpl(Inline)]
+             get => ref first(Cells);
+        }
 
         /// <summary>
         /// Manipulates an index-identified cell, where index := {0 | 1}
         /// </summary>
-        public ref T this[int index] { [MethodImpl(Inline)] get => ref Cell(index);}
+        public ref T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cell(index);
+        }
 
-        [MethodImpl(Inline)]
-        internal BitGrid16(ushort data)
-            => Data = data;
 
         /// <summary>
         /// Reads/writes an index-identified cell

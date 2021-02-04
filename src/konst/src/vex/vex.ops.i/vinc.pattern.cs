@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static KonstBytes;
+    using static CpuBytes;
 
     partial struct gcpu
     {

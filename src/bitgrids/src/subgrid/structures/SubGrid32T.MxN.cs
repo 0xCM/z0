@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= W := 32
@@ -31,14 +31,13 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 4;
 
-
         [MethodImpl(Inline)]
-        internal SubGrid32(uint src)
-            => this.Data = src;
+        public SubGrid32(uint src)
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal SubGrid32(SpanBlock32<T> src)
-            => this.Data = src.As<uint>().First;
+            => Data = src.As<uint>().First;
 
         /// <summary>
         /// The exposed grid state

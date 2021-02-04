@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
     using static HexConst;
-    using static KonstBytes;
+    using static CpuBytes;
 
     partial struct cpu
     {

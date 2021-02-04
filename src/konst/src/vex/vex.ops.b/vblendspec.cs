@@ -9,12 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static KonstBytes;
+    using static CpuBytes;
 
     partial struct cpu
     {
         /// <summary>
         /// Defines a blend specification for combining 2 256-bit vectors that selects the odd components from each vector
+        /// cpu::vblend2x64[T]:w256->bool->v256x8u
         /// </summary>
         /// <param name="w">The vector width selector</param>
         /// <param name="odd">Whether to select odd or even components</param>

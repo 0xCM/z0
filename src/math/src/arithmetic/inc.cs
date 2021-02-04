@@ -88,5 +88,115 @@ namespace Z0
         [MethodImpl(Inline), Inc]
         public static double inc(double src)
             => ++src;
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref sbyte inc(ref sbyte io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref byte inc(ref byte io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref short inc(ref short io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref ushort inc(ref ushort io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref int inc(ref int io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref uint inc(ref uint io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref long inc(ref long io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref ulong inc(ref ulong io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref float inc(ref float io)
+        {
+            ++io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Inc]
+        public static ref double inc(ref double io)
+        {
+            ++io;
+            return ref io;
+        }
     }
 }

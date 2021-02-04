@@ -13,7 +13,7 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline), Divides, Closures(Integers)]
-        public static Bit32 divides<T>(T a, T b)
+        public static bit divides<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte)
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 divides_i<T>(T a, T b)
+        static bit divides_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 divides_u<T>(T a, T b)
+        static bit divides_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vlane<T>(Vector256<T> src, N0 index)
             where T : unmanaged
-             => Vector256.GetLower(src);
+                => Vector256.GetLower(src);
 
         /// <summary>
         /// Extracts the lower 128-bit lane from a source vector

@@ -13,8 +13,13 @@ namespace Z0
     {
         public void nonzero_create()
         {
-            Claim.nonzero(nonzero.create(0u).Value);
-            Claim.eq(nonzero.create(5), 5);
+            Nonzero<uint> a = 0u;
+            Nonzero<byte> b = 5;
+            Claim.nonzero(a.Value);
+            Claim.eq(b, (byte)5);
+
+            // Claim.nonzero(nonzero.create(0u).Value);
+            // Claim.eq(nonzero.create(5), 5);
         }
     }
 }

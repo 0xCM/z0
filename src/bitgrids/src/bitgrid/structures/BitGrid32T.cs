@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a 32-bit grid
@@ -39,11 +39,20 @@ namespace Z0
             get => 4/size<T>();
         }
 
-        public uint Content { [MethodImpl(Inline)] get => Data; }
+        public Span<T> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Bytes().Recover<T>();
+        }
 
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Recover<T>(); }
-
-        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
+        /// <summary>
+        /// Yields a mutable reference to the grid's leading storage cell
+        /// </summary>
+        public ref T Head
+        {
+             [MethodImpl(Inline)]
+             get => ref first(Cells);
+        }
 
         /// <summary>
         /// Reads/writes an index-identified cell

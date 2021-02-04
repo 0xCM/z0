@@ -22,6 +22,8 @@ public enum PartId : ulong
 
     Api = 9,
 
+    BitMasks = 10,
+
     Domain = 18,
 
     Check = 19,

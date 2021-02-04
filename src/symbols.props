@@ -26,6 +26,7 @@
     <BitMatrix>$(Src)bitmatrix/z0.bitmatrix.csproj</BitMatrix>
     <BitSvc>$(Src)bitsvc/z0.bitsvc.csproj</BitSvc>
     <Blocked>$(Src)blocked/z0.blocked.csproj</Blocked>
+    <BitMasks>$(Src)bitmasks/z0.bitmasks.csproj</BitMasks>
 
     <Capture>$(Src)capture/z0.capture.csproj</Capture>
     <Check>$(Src)check/z0.check.csproj</Check>

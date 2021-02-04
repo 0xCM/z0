@@ -21,7 +21,7 @@ namespace Z0
         public ulong Bits;
 
         [MethodImpl(Inline)]
-        public BitsF64(double src)
+        internal BitsF64(double src)
             : this()
         {
             Data = src;

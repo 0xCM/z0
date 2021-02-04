@@ -17,6 +17,7 @@ namespace Z0
     {
         /// <summary>
         /// __m128d _mm_blend_pd (__m128d a, __m128d b, const int imm8) BLENDPD xmm, xmm/m128, imm8
+        /// cpu::vblend2x64:v128x8i->v128x8i->imm8->v128x8i
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

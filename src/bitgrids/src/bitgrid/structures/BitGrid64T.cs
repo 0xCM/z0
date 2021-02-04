@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a 64-bit grid
@@ -30,13 +30,26 @@ namespace Z0
         /// </summary>
         public int BitCount => 64;
 
-        public ulong Content { [MethodImpl(Inline)] get => Data; }
+        public uint CellCount
+        {
+            [MethodImpl(Inline)]
+            get => 8/size<T>();
+        }
 
-        public uint CellCount { [MethodImpl(Inline)] get => 8/size<T>(); }
+        public Span<T> Cells
+        {
+             [MethodImpl(Inline)]
+             get => Data.Bytes().Recover<T>();
+        }
 
-        public Span<T> Cells { [MethodImpl(Inline)] get => Data.Bytes().Recover<T>(); }
-
-        public ref T Head { [MethodImpl(Inline)] get => ref first(Cells); }
+        /// <summary>
+        /// Yields a mutable reference to the grid's leading storage cell
+        /// </summary>
+        public ref T Head
+        {
+             [MethodImpl(Inline)]
+             get => ref first(Cells);
+        }
 
         /// <summary>
         /// Reads/writes an index-identified cell

@@ -15,6 +15,7 @@ namespace Z0
     {
         /// <summary>
         /// Applies a leftward shift over the full 128 vector bits at byte-level resolution
+        /// gcpu::vbsll[T]:v128xT->imm8->v128xT
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
@@ -26,6 +27,7 @@ namespace Z0
 
         /// <summary>
         /// Applies a leftward shift to each 128-bit lane at byte-level resolution
+        /// gcpu::vbsll[T]:v256xT->imm8->v256xT
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>

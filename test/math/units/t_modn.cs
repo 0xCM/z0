@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public sealed class t_modn : UnitTest<t_modn>
     {
         public void mod16()
         {
-            var ops = math.modn(16);
+            var ops = ModN.create(16);
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();
@@ -25,7 +23,7 @@ namespace Z0
 
         public void mod18()
         {
-            var ops = math.modn(18);
+            var ops = ModN.create(18);
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<uint>();

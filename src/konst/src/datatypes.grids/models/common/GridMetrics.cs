@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential), Datatype]
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct GridMetrics : IDataType<GridMetrics>
     {
         /// <summary>

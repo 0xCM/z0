@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 16
@@ -32,14 +32,13 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 2;
 
-
         [MethodImpl(Inline)]
         internal BitGrid16(ushort src)
             => this.Data = src;
 
         [MethodImpl(Inline)]
         internal BitGrid16(SpanBlock16<T> src)
-            => this.Data = src.As<ushort>().First;
+            => Data = src.As<ushort>().First;
 
         /// <summary>
         /// The exposed grid state

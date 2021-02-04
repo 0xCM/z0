@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         [MethodImpl(Inline), Fma]
@@ -39,6 +39,14 @@ namespace Z0
 
         [MethodImpl(Inline), Fma]
         public static ulong fma(ulong x, ulong y, ulong z)
-            => x*y + z;  
+            => x*y + z;
+
+        [MethodImpl(Inline), Fma]
+        public static float fma(float x, float y, float z)
+            => MathF.FusedMultiplyAdd(x, y, z);
+
+        [MethodImpl(Inline), Fma]
+        public static double fma(double x, double y, double z)
+            => Math.FusedMultiplyAdd(x, y, z);
     }
 }

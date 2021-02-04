@@ -68,9 +68,9 @@ namespace Z0
         [MethodImpl(Inline), AddH]
         public static Vector256<sbyte> vhadd(Vector256<sbyte> x, Vector256<sbyte> y)
         {
-            (var x0, var x1) = cpu.vinflate512x16i(x, w512);
-            (var y0, var y1) = cpu.vinflate512x16i(x, w512);
-            return cpu.vcompact8i(vhadd(x0,y0), vhadd(x1,y1), w256);
+            (var x0, var x1) = vinflate512x16i(x, w512);
+            (var y0, var y1) = vinflate512x16i(x, w512);
+            return vcompact8i(vhadd(x0,y0), vhadd(x1,y1), w256);
         }
 
         /// <summary>

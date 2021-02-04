@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> Bytes(this uint src)
-            => ByteReader.read4(src);
+            => memory.bytes2(src);
     }
 }

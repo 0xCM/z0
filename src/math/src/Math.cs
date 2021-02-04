@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System.Runtime.CompilerServices;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [ApiHost(ApiSetKind.Math), Free]

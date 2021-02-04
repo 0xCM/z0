@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
-
     partial class math
     {
         [MethodImpl(Inline), Sub]
@@ -42,20 +40,5 @@ namespace Z0
         [MethodImpl(Inline), Sub]
         public static ulong sub(ulong a, ulong b)
             => a - b;
-
-        /// <summary>
-        /// Computes the difference c := a - b between 128-bit unsigned integers a and b
-        /// </summary>
-        /// <param name="a">A reference to the left 128-bits</param>
-        /// <param name="b">A reference to the right 128-bits</param>
-        /// <param name="c">A reference to the target 128-bits</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
-        [MethodImpl(Inline), Op]
-        public static void sub(in ulong a, in ulong b, ref ulong c)
-        {
-            c = a - b;
-            var borrow = a < c;
-            seek(c, 1) = skip(in a, 1) - skip(in b, 1) - z.@uint(borrow);
-        }
     }
 }

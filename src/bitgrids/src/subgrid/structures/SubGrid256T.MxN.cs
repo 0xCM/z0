@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N <= W := 256
@@ -37,33 +37,14 @@ namespace Z0
         /// </summary>
         public static W256 W => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Vector256<T>(in SubGrid256<M,N,T> src)
-            => src.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SpanBlock256<T>(in SubGrid256<M,N,T> src)
-            => src.Data.ToBlock();
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid256<M,N,T>(in SpanBlock256<T> src)
-            => new SubGrid256<M, N, T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid256<M,N,T>(Vector256<T> src)
-            => new SubGrid256<M,N,T>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SubGrid256<M,N,T>(Vector256<byte> src)
-            => new SubGrid256<M,N,T>(src.As<byte,T>());
 
         [MethodImpl(Inline)]
         internal SubGrid256(Vector256<T> data)
-            => this.Data = data;
+            => Data = data;
 
         [MethodImpl(Inline)]
         internal SubGrid256(in SpanBlock256<T> src)
-            => this.Data = src.LoadVector();
+            => Data = src.LoadVector();
 
         /// <summary>
         /// The exposed grid state
@@ -126,5 +107,25 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector256<T>(in SubGrid256<M,N,T> src)
+            => src.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock256<T>(in SubGrid256<M,N,T> src)
+            => src.Data.ToBlock();
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid256<M,N,T>(in SpanBlock256<T> src)
+            => new SubGrid256<M, N, T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid256<M,N,T>(Vector256<T> src)
+            => new SubGrid256<M,N,T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SubGrid256<M,N,T>(Vector256<byte> src)
+            => new SubGrid256<M,N,T>(src.As<byte,T>());
     }
 }

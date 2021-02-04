@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline), Op]
         internal static ulong contract(ulong src, ulong max)
-            => math.mulhi(src,max);
+            => Math128.mulhi(src,max);
 
         [MethodImpl(Inline), Op]
         public static IPolyrand @default()

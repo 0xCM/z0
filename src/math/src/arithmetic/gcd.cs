@@ -64,11 +64,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int gcd(int a, int b)
         {
-            var x = math.abs(a);
-            var y = math.abs(b);
+            var x = abs(a);
+            var y = abs(b);
             while (y != 0)
             {
-                var rem = math.mod(x,y);
+                var rem = mod(x,y);
                 x = y;
                 y = rem;
             }

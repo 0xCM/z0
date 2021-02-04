@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         [MethodImpl(Inline), Div]
@@ -39,6 +39,14 @@ namespace Z0
 
         [MethodImpl(Inline), Div]
         public static ulong div(ulong a, ulong b)
-            => a / b; 
+            => a / b;
+
+        [MethodImpl(Inline), Div]
+        public static float div(float a, float b)
+            => a / b;
+
+        [MethodImpl(Inline), Div]
+        public static double div(double a, double b)
+            => a / b;
    }
 }

@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(BitMasks)" />
   </ItemGroup>
 
 </Project>

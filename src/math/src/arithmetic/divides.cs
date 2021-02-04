@@ -6,39 +6,39 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         [MethodImpl(Inline), Divides]
-        public static bool divides(sbyte a, sbyte b)
+        public static bit divides(sbyte a, sbyte b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(byte a, byte b)
+        public static bit divides(byte a, byte b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(short a, short b)
+        public static bit divides(short a, short b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(ushort a, ushort b)
+        public static bit divides(ushort a, ushort b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(int a, int b)
+        public static bit divides(int a, int b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(uint a, uint b)
+        public static bit divides(uint a, uint b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(long a, long b)
+        public static bit divides(long a, long b)
             => b % a == 0;
 
         [MethodImpl(Inline), Divides]
-        public static bool divides(ulong a, ulong b)
+        public static bit divides(ulong a, ulong b)
             => b % a == 0;
     }
 }

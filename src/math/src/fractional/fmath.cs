@@ -13,5 +13,18 @@ namespace Z0
     public partial class fmath
     {
         internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+
+        [ApiHost("fmath.refops")]
+        public readonly partial struct RefOps
+        {
+
+        }
+
+        [ApiHost("fmath.stageops")]
+        public readonly partial struct StageOps
+        {
+
+        }
+
     }
 }

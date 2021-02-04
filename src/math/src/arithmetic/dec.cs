@@ -10,7 +10,7 @@ namespace Z0
     partial class math
     {
         /// <summary>
-        /// Decrements the source value
+        /// math::dec:i8->i8 Decrements the source value
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Dec]
@@ -88,5 +88,115 @@ namespace Z0
         [MethodImpl(Inline), Dec]
         public static double dec(double src)
             => --src;
+
+        /// <summary>
+        /// math::dec:ref(i8)-> ref(i8) Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref sbyte dec(ref sbyte io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref byte dec(ref byte io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref short dec(ref short io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref ushort dec(ref ushort io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref int dec(ref int io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref uint dec(ref uint io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref long dec(ref long io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref ulong dec(ref ulong io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref float dec(ref float io)
+        {
+            --io;
+            return ref io;
+        }
+
+        /// <summary>
+        /// Decrements the input value
+        /// </summary>
+        /// <param name="io">The input value</param>
+        [MethodImpl(Inline), Dec]
+        public static ref double dec(ref double io)
+        {
+            --io;
+            return ref io;
+        }
     }
 }

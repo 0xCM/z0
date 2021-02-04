@@ -21,7 +21,7 @@ namespace Z0
         public uint Bits;
 
         [MethodImpl(Inline)]
-        public BitsF32(float src)
+        internal BitsF32(float src)
         {
             Bits = 0;
             Data = src;

@@ -34,9 +34,9 @@ namespace Z0
         public static ulong next(ref G g)
         {
             g.State += X1;
-            math.mul(g.State, X2, out Pair<ulong> Y1);
+            Math128.mul(g.State, X2, out Pair<ulong> Y1);
             var m1 = Y1.Left ^ Y1.Right;
-            math.mul(m1, X3, out Pair<ulong> Y2);
+            Math128.mul(m1, X3, out Pair<ulong> Y2);
             var m2 = Y2.Left ^ Y2.Right;
             return m2;
         }
