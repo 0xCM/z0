@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences
     /// </summary>
-    [ApiType]
+    [ApiDeep]
     public class Collector
     {
         int count;

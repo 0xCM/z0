@@ -23,7 +23,7 @@ namespace Z0
         public const string json = nameof(json);
     }
 
-    [ApiType]
+    [ApiDeep]
     public readonly struct MimeTypes
     {
         const string sep = "-";

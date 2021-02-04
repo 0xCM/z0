@@ -8,23 +8,23 @@ using System;
 /// Marks a type as an api data type
 /// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-public class ApiTypeAttribute : ApiProviderAttribute
+public class ApiDeepAttribute : ApiProviderAttribute
 {
     public string Name {get;}
 
-    public ApiTypeAttribute()
+    public ApiDeepAttribute()
         : base(ApiProviderKind.DataType)
     {
         Name = string.Empty;
     }
 
-    public ApiTypeAttribute(string name)
+    public ApiDeepAttribute(string name)
         : base(ApiProviderKind.DataType)
     {
         Name = name;
     }
 
-    public ApiTypeAttribute(string name, bool global)
+    public ApiDeepAttribute(string name, bool global)
         : base(ApiProviderKind.DataType, global)
     {
         Name = name;

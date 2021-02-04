@@ -66,7 +66,7 @@ namespace Z0
 
         }
 
-        [ApiType("text.rules.data")]
+        [ApiDeep("text.rules.data")]
         public readonly partial struct Data
         {
 

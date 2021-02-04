@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Root;
 
     using BLK = BinaryBitLogicKind;
 
@@ -28,18 +28,18 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static LiteralExpr<Vector128<T>> @true<T>(N128 n)
+        public static LiteralExpr<Vector128<T>> @true<T>(W128 w)
             where T : unmanaged
-                => literal(gcpu.vones<T>(n));
+                => literal(gcpu.vones<T>(w));
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on
         /// </summary>
         /// <typeparam name="T">The literal type</typeparam>
         [MethodImpl(Inline)]
-        public static LiteralExpr<Vector256<T>> @true<T>(N256 n)
+        public static LiteralExpr<Vector256<T>> @true<T>(W256 w)
             where T : unmanaged
-                => literal(gcpu.vones<T>(n));
+                => literal(gcpu.vones<T>(w));
 
         /// <summary>
         /// Defines a typed literal where all bits are off

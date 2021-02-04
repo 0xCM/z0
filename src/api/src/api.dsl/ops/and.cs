@@ -4,18 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public readonly partial struct PredicateLogic
+    partial struct Api
     {
-
-        public readonly struct And<K,T>
-            where K : unmanaged
-        {
-
-
-        }
 
     }
 }

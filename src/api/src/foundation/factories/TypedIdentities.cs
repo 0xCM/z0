@@ -10,8 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Root;
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
@@ -20,15 +19,15 @@ namespace Z0
     {
         public static IEnumerable<ComparisonExpr<T>> ScalarIdentities<T>()
             where T : unmanaged
-                => seq(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
+                => root.seq(AndOverOr<T>(), AndOverXOr<T>(), OrOverAnd<T>(), NotOverAnd<T>(), NotOverXOr<T>());
 
         public static IEnumerable<ComparisonExpr<Vector128<T>>> Vec128Identities<T>()
             where T : unmanaged
-                => seq(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
+                => root.seq(AndOverOr128<T>(), AndOverXOr128<T>(), OrOverAnd128<T>(), NotOverAnd128<T>(), NotOverXOr128<T>());
 
         public static IEnumerable<ComparisonExpr<Vector256<T>>> Vec256Identities<T>()
             where T : unmanaged
-                => seq(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
+                => root.seq(AndOverOr256<T>(), AndOverXOr256<T>(), OrOverAnd256<T>(), NotOverAnd256<T>(), NotOverXOr256<T>());
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))
@@ -84,10 +83,10 @@ namespace Z0
         public static ComparisonExpr<T> NotOverXOr<T>()
             where T : unmanaged
         {
-                (var a, var b) = vars2<T>();
-                var lhs = not(xor(a,b));
-                var rhs = xor(not(a),b);
-                return equals(lhs,rhs,a,b);
+            (var a, var b) = vars2<T>();
+            var lhs = not(xor(a,b));
+            var rhs = xor(not(a),b);
+            return equals(lhs,rhs,a,b);
         }
 
         public static ComparisonExpr<Vector128<T>> AndOverOr128<T>()

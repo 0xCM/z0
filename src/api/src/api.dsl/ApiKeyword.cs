@@ -35,7 +35,6 @@ namespace Z0
             => new ApiKeyword(name);
     }
 
-
     /// <summary>
     /// Defines a parametric keyword
     /// </summary>

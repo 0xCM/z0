@@ -7,7 +7,7 @@ namespace Z0
 
     partial struct Cil
     {
-        [ApiType]
+        [ApiDeep]
         public readonly struct OpCodeSpecs
         {
             //

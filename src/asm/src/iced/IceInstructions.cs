@@ -13,7 +13,7 @@ namespace Z0.Ice
 
     using B = IceInstructionBytes;
 
-    [ApiType]
+    [ApiDeep]
     public readonly ref struct IceInstructions
     {
         [Ignore]

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Reflection;
 
-    [ApiType]
+    [ApiDeep]
     readonly partial struct Msg
     {
         public static RenderPattern<ToolId> ToolHelpNotFound => "Tool {0} help not found";

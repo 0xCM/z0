@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiClasses;
-
-    partial struct Api
+    partial struct ApiClasses
     {
         [KindFactory]
         public static Sub sub()

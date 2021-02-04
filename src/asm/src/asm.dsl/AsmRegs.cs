@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using R = AsmDsl;
 
-    [ApiType]
+    [ApiDeep]
     public readonly partial struct AsmRegs
     {
         public static R.al al => default;

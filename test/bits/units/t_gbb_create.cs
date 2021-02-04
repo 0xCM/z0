@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static CallingMember;
 
-    [ApiType]
+    [ApiDeep]
     public class t_gbb_create : t_bitspans<t_gbb_create>
     {
         CallingMember Caller;

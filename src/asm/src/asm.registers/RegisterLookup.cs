@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    [ApiType]
+    [ApiDeep]
     public struct RegisterLookup
     {
         Index<Register> _Gp8;

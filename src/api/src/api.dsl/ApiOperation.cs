@@ -9,8 +9,12 @@ namespace Z0
 
     using static Part;
 
-    public readonly partial struct ApiExpr
+    public readonly struct ApiOperation
     {
+        public Identifier Name {get;}
 
+        public ulong Kind {get;}
+
+        public Index<ApiOperand> Operands {get;}
     }
 }

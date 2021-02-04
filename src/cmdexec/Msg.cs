@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    [ApiType]
+    [ApiDeep]
     partial struct Msg
     {
         public static RenderPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";

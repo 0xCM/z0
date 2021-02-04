@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Root;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [ApiHost]
-    public partial struct TypedLogicSpec
+    using static Part;
+
+    public readonly partial struct ApiExpr
     {
-        const NumericKind Closure = UInt64k;
+
+        public Index<ApiOperand> Operands {get;}
+
     }
 }

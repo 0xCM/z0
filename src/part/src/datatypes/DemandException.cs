@@ -36,9 +36,9 @@ namespace Z0
 
         public DemandException(string constraint, (ulong x, ulong y) relation)
         {
-            this.Constraint = constraint;
-            this.Expect = $"({relation.x}, {relation.y})";
-            this.Actual = string.Empty;
+            Constraint = constraint;
+            Expect = $"({relation.x}, {relation.y})";
+            Actual = string.Empty;
         }
 
         public override string Message

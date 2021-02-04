@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     /// <summary>
     /// Captures a binary bitwise operator along with with its operands

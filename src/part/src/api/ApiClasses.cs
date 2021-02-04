@@ -6,6 +6,6 @@ namespace Z0
 {
     public readonly partial struct ApiClasses
     {
-
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }

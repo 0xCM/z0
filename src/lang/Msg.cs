@@ -6,7 +6,7 @@ using System.Reflection;
 using System;
 using Z0;
 
-[ApiType]
+[ApiDeep]
 struct Msg
 {
 

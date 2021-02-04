@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static AsciCharCode;
     using static root;
 
-    [ApiType]
+    [ApiDeep]
     public readonly struct EFlagSymbols
     {
         /// <summary>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     public sealed class VariableExpr<T> : IVarExpr<T>
         where T : unmanaged

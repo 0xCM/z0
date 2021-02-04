@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="name">The variable's single-character name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable lvar(char name, Bit32 init = default)
+        public static LogicVariable lvar(char name, bit init = default)
             => new LogicVariable((uint)name, init);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="symbol">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable lvar(uint symbol, Bit32 init = default)
+        public static LogicVariable lvar(uint symbol, bit init = default)
             => new LogicVariable(symbol, init);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="symbol">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable<T> lvar<T>(char symbol, Bit32 init = default)
+        public static LogicVariable<T> lvar<T>(char symbol, bit init = default)
             where T : unmanaged
                 => new LogicVariable<T>((uint)symbol, init);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="symbol">The variable's name</param>
         /// <param name="init">The variable's initial value</param>
         [MethodImpl(Inline)]
-        public static LogicVariable<T> lvar<T>(uint symbol, Bit32 init = default)
+        public static LogicVariable<T> lvar<T>(uint symbol, bit init = default)
             where T : unmanaged
                 => new LogicVariable<T>(symbol, init);
 

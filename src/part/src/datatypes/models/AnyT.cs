@@ -8,32 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     /// <summary>
-    /// A parametric T-equatable value
+    /// Any value, parametrically
     /// </summary>
-    public readonly struct Any<T>
+    public struct Any<T>
     {
-        public readonly T Value;
+        public T Value;
 
         [MethodImpl(Inline)]
-        public static Any<T> From<S>(in S src)
-            => new Any<T>(Unsafe.As<S,T>(ref edit(src)));
-
-        [MethodImpl(Inline)]
-        public Any(T src)
+        public Any(in T src)
             => Value = src;
-
-        public T Content
-        {
-            [MethodImpl(Inline)]
-            get => Value;
-        }
-
-        [MethodImpl(Inline)]
-        public Any<S> As<S>()
-            => new Any<S>(Unsafe.As<T,S>(ref Unsafe.AsRef(in Value)));
 
         [MethodImpl(Inline)]
         public bool Equals(T src)
@@ -56,7 +41,6 @@ namespace Z0
         public override bool Equals(object src)
             => src is Any<T> a && Equals(a);
 
-
         [MethodImpl(Inline)]
         public static bool operator ==(Any<T> x, Any<T> y)
             => x.Equals(y);
@@ -72,5 +56,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator T(Any<T> src)
             => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Any(Any<T> src)
+            => new Any(src.Value);
     }
 }

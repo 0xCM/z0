@@ -13,7 +13,7 @@ namespace Z0
 
     using BL = ScalarBitLogic;
 
-    [ApiType]
+    [ApiDeep]
     public readonly ref struct Switch16
     {
         readonly Span<MemoryAddress> Slots;

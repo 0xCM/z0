@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiType]
+    [ApiDeep]
     public readonly struct EnabledSynonyms
     {
         public static string On() => "on";

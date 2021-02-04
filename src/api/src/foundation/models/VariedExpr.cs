@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public readonly struct VariedExpr
     {
         public static void Set<T>(IVariedExpr<T> expr, params IExpr<T>[] values)

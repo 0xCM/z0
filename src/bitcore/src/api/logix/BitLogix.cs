@@ -13,6 +13,7 @@ namespace Z0
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using ULK = UnaryBitLogicKind;
+    using K = ApiClasses;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -29,11 +30,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bit Nand_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, Api.nand());
+            => BitLogixOps.eval(a, b, K.nand());
 
         [MethodImpl(Inline), Op]
         public bit Xor_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, Api.xor());
+            => BitLogixOps.eval(a, b, K.xor());
 
         /// <summary>
         /// Advertises the supported unary operators

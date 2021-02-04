@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Canonical
     {
-        [ApiType]
+        [ApiDeep]
         public readonly struct ResourceBuffers
         {
             public static Span<byte> buffer(int index)

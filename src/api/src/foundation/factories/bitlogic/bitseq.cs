@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial struct BitLogicSpec
     {
@@ -28,7 +28,6 @@ namespace Z0
         public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
             where N : unmanaged, ITypeNat
         {
-            z.insist<N>(terms.Length);
             return new LiteralLogicSeqExpr<N>(terms);
         }
     }

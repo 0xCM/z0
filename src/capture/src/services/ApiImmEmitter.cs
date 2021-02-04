@@ -107,7 +107,7 @@ namespace Z0.Asm
         }
     }
 
-    [ApiType]
+    [ApiDeep]
     public readonly partial struct Msg
     {
         public static RenderPattern<OpIdentity> IoError => "I/O error during emission of {0} immediate closures";

@@ -9,15 +9,14 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Root;
     using static BitLogicSpec;
 
     [ApiHost]
     public readonly struct LogicIdentities
     {
         public static IEnumerable<ComparisonExpr> All
-            => seq(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
+            => root.seq(AndOverOr, AndOverXOr, OrOverAnd, NotOverAnd, NotOverXOr);
 
         /// <summary>
         /// Specifies the identity and(a,or(b,c)) == or(and(a,b), and(a,c))

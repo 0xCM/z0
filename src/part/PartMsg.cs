@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    [ApiType]
+    [ApiDeep]
     partial struct Msg
     {
 
     }
 
-    [ApiType]
+    [ApiDeep]
     public readonly partial struct PartMsg
     {
         public static RenderPattern<Type,Type> ContractMismatch => "The source type {0} does not reify {1}";

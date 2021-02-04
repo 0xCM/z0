@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static ReflectionFlags;
 
-    [ApiType]
+    [ApiDeep]
     public readonly struct EmptyVessels
     {
         const byte _EmptyField = 0;

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static Spans;
 
-    [ApiType]
+    [ApiDeep]
     public ref struct CpuBuffer
     {
         readonly Span<byte> Data;

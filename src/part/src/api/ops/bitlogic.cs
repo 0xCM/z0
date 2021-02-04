@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ApiClasses;
-
-    partial struct Api
+    partial struct ApiClasses
     {
         [KindFactory]
         public static And and()
@@ -103,6 +101,5 @@ namespace Z0
         [KindFactory, Closures(Closure)]
         public static Select<T> select<T>()
             => default;
-
     }
 }

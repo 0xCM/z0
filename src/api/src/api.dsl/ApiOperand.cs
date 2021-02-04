@@ -9,7 +9,9 @@ namespace Z0
 
     using static Part;
 
-    [Datatype]
+    /// <summary>
+    /// Describes an operand defined by an api operation
+    /// </summary>
     public readonly struct ApiOperand : IDataType<ApiOperand>
     {
         public byte Position {get;}

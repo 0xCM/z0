@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiType]
+    [ApiDeep]
     public class ParseFunctions
     {
         Dictionary<ClrToken,IParseFunction> Parsers;
