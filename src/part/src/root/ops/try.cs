@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Evaluates a function within a try block and returns the value of the computation if
@@ -55,10 +55,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void OnTryFail(Exception e)
-            => term.error(e);
+            => Console.WriteLine(e.ToString()); //term.error(e);
 
         [MethodImpl(Inline)]
         static void OnTryFail<X>(X x, Exception e)
-            => term.error(e);
+            => Console.WriteLine(e.ToString()); //term.error(e);
     }
 }

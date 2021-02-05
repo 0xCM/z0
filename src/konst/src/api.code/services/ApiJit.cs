@@ -55,7 +55,8 @@ namespace Z0
         public static DynamicPointer jit(DynamicDelegate src)
         {
             RuntimeHelpers.PrepareDelegate(src.Operation);
-            return ClrDynamic.pointer(src, ClrDynamic.pointer(src.Target));
+            return ClrDynamic.pointer(src);
+            //return ClrDynamic.pointer(src, ClrDynamic.pointer(src.Target));
         }
 
         [MethodImpl(Inline)]
@@ -109,7 +110,7 @@ namespace Z0
         public ApiMembers Jit(IPart src)
         {
             var dst = root.list<ApiMember>();
-            var catalog = ApiCatalogs.create(src);
+            var catalog = ApiCatalogs.part(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 

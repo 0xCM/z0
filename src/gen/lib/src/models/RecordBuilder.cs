@@ -64,7 +64,7 @@ namespace Z0
             return fb;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static ModuleBuilder module(Name name)
         {
             var ab = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(name), AssemblyBuilderAccess.Run);

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static z;
-
     partial class Enums
     {
         /// <summary>
@@ -21,7 +19,7 @@ namespace Z0
         {
             var src = details<E,T>();
             var count = src.Length;
-            var token = ClrToken.from<E>();
+            var token = ClrTokens.from<E>();
             var datatype = ClrEnums.@base<E>();
             var description = string.Empty;
             var indices = sys.alloc<uint>(count);

@@ -12,6 +12,7 @@ namespace Z0
 
     partial struct Clr
     {
+        [Op]
         public static ClrTypeSigInfo siginfo(ParameterInfo src)
         {
             var dst = new ClrTypeSigInfo();
@@ -27,6 +28,7 @@ namespace Z0
             return dst;
         }
 
+        [Op]
         public static ClrTypeSigInfo siginfo(Type type)
         {
             var dst = new ClrTypeSigInfo();
@@ -40,6 +42,5 @@ namespace Z0
             dst.Modifier = dst.IsIn ? "in " : dst.IsOut ? "out " : dst.IsByRef ? "ref " : EmptyString;
             return dst;
         }
-
     }
 }

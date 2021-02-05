@@ -68,10 +68,11 @@ namespace Z0
 
         void RunImm()
         {
-            var flow = Wf.Running(nameof(ImmClosureEmitter));
-            using var step = new ImmClosureEmitter(Wf, Asm);
-            step.ClearArchive(Parts);
-            step.EmitRefined(Parts);
+            var flow = Wf.Running(nameof(ApiImmEmitter));
+            var service = ApiImmEmitter.create(Wf);
+            //using var step = new ImmClosureEmitter(Wf, Asm);
+            service.ClearArchive(Parts);
+            service.EmitRefined(Parts);
             Wf.Ran(flow);
         }
 

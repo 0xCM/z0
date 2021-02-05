@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Identifies a metadata element
@@ -16,50 +16,6 @@ namespace Z0
     public readonly struct ClrToken : ITextual, IEquatable<ClrToken>, INullity
     {
         readonly uint Data;
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data == 0;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data != 0;
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Data.FormatHex();
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(Type src)
-            => new ClrToken(src);
-
-        [MethodImpl(Inline)]
-        public static ClrToken from<T>()
-            => new ClrToken(typeof(T));
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(FieldInfo src)
-            => new ClrToken(src);
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(PropertyInfo src)
-            => new ClrToken(src);
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(MethodInfo src)
-            => new ClrToken(src);
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(ParameterInfo src)
-            => new ClrToken(src);
-
-        [MethodImpl(Inline)]
-        public static ClrToken from(Assembly src)
-            => new ClrToken(src);
 
         [MethodImpl(Inline)]
         internal ClrToken(Type src)
@@ -117,6 +73,23 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ClrToken(uint token)
             => Data = token;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data != 0;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Data.FormatHex();
+
 
         public override string ToString()
             => Format();

@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    [Datatype]
     public readonly struct ClrHandle
     {
         public ClrToken Token {get;}

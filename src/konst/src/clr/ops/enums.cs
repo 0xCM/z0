@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -23,7 +22,6 @@ namespace Z0
             return dst;
         }
 
-        [Op]
         public static void enums(Type src, Span<EnumLiteral> dst)
         {
             var fields = span(src.LiteralFields());

@@ -13,7 +13,6 @@ namespace Z0.Dynamics.Operators
     using static z;
     using static Part;
     using static LinqXPress;
-    using static SFx;
 
     public static class LtEq<T>
     {
@@ -24,7 +23,7 @@ namespace Z0.Dynamics.Operators
             => _OPSafe.Require();
 
         static Option<Func<T,T,bool>> TryConstruct()
-            => @try(() =>
+            => root.@try(() =>
                 {
                     switch (sys.typecode<T>())
                     {

@@ -16,14 +16,14 @@ namespace Z0.Dynamics.Operators
 
     public static class Gt<T>
     {
-        static readonly Option<Func<T, T, bool>> _OPSafe
+        static readonly Option<Func<T,T,bool>> _OPSafe
             = TryConstruct();
 
         static Func<T, T, bool> _OP
             => _OPSafe.Require();
 
-        static Option<Func<T, T, bool>> TryConstruct()
-            => @try(() =>
+        static Option<Func<T,T,bool>> TryConstruct()
+            => root.@try(() =>
             {
                 switch (sys.typecode<T>())
                 {

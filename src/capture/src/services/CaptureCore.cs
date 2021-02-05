@@ -49,11 +49,12 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = jit(src);
-                var summary = capture(exchange, id, pSrc);
+                //var pSrc = jit(src);
+                var address = ApiJit.jit(src);
+                var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
-                Demands.insist((MemoryAddress)pSrc, captured.BaseAddress);
+                Demands.insist(address, captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -67,7 +68,7 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = jit(src).Handle;
+                var pSrc = ApiJit.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
                 var captured = new ApiCaptureBlock(id, src.Source, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
@@ -99,11 +100,11 @@ namespace Z0.Asm
         {
             try
             {
-                var pSrc = jit(src);
+                var pSrc = ApiJit.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
-                Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
+                //Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
@@ -310,18 +311,18 @@ namespace Z0.Asm
             return src.MethodHandle.GetFunctionPointer();
         }
 
-        [MethodImpl(Inline)]
-        static IntPtr jit(Delegate src)
-        {
-            RuntimeHelpers.PrepareDelegate(src);
-            return src.Method.MethodHandle.GetFunctionPointer();
-        }
+        // [MethodImpl(Inline)]
+        // static IntPtr jit(Delegate src)
+        // {
+        //     RuntimeHelpers.PrepareDelegate(src);
+        //     return src.Method.MethodHandle.GetFunctionPointer();
+        // }
 
-        [MethodImpl(Inline)]
-        static DynamicPointer jit(DynamicDelegate src)
-        {
-            RuntimeHelpers.PrepareDelegate(src.Operation);
-            return ClrDynamic.pointer(src);
-        }
+        // [MethodImpl(Inline)]
+        // static DynamicPointer jit(DynamicDelegate src)
+        // {
+        //     RuntimeHelpers.PrepareDelegate(src.Operation);
+        //     return ClrDynamic.pointer(src);
+        // }
     }
 }

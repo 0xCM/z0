@@ -13,14 +13,14 @@ namespace Z0
 
     partial struct Clr
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void offsets(Type src, Span<ushort> dst)
         {
             var fields = span(src.DeclaredFields());
             offsets(src,fields,dst);
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void offsets(Type src, ReadOnlySpan<FieldInfo> fields, Span<ushort> dst)
         {
             var count = fields.Length;
@@ -31,8 +31,8 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op]
-        public static ushort[] offsets(Type host, FieldInfo[] fields)
+        [Op]
+        public static ushort[] offsets(Type host, Index<FieldInfo> fields)
             => fields.Select(f => offset(host,f));
     }
 }

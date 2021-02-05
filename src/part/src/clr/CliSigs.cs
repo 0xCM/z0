@@ -12,6 +12,7 @@ namespace Z0
     using static memory;
     using static root;
 
+    [ApiHost]
     public readonly struct CliSigs
     {
         /// <summary>

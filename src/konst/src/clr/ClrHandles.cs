@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct ClrHandles
     {
         [Op]
-        public static void project(ReadOnlySpan<ClrHandle> src, Span<ClrHandleRecord> dst)
+        public static void load(ReadOnlySpan<ClrHandle> src, Span<ClrHandleRecord> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -29,23 +29,13 @@ namespace Z0
             }
         }
 
-        public static ReadOnlySpan<byte> HandleRenderWidths
-            => new byte[3]{16, 16, 16};
-
         [Op]
-        public static uint project(ReadOnlySpan<ClrHandleRecord> src,  StreamWriter dst)
+        public static void emit(ReadOnlySpan<ClrHandleRecord> src,  StreamWriter dst)
         {
             var count = src.Length;
-            var counter = 0u;
-            var formatter = TableFormatter.row<ClrHandleRecord>(HandleRenderWidths);
+            var formatter = Records.formatter<ClrHandleRecord>();
             for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(src,i);
-                var row = formatter.FormatRow(record);
-                dst.WriteLine(row);
-                counter++;
-            }
-            return counter;
+                dst.WriteLine(formatter.Format(skip(src, i)));
         }
 
         [Op]
@@ -71,7 +61,7 @@ namespace Z0
         [Op]
         public static ReadOnlySpan<ClrHandle<RuntimeMethodHandle>> methods(Assembly src)
         {
-            var catalog = ApiCatalogs.create(src);
+            var catalog = ApiCatalogs.part(src);
             var metadata = catalog.ConcreteOperations;
             var count = metadata.Length;
             var buffer = alloc<ClrHandle<RuntimeMethodHandle>>(count);
@@ -79,29 +69,29 @@ namespace Z0
             return buffer;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void fields(ReadOnlySpan<FieldInfo> src, Module module, Span<ClrHandle<RuntimeFieldHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = field(module, ClrToken.from(skip(src,i)));
+                seek(dst,i) = field(module, ClrTokens.from(skip(src,i)));
         }
 
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void types(ReadOnlySpan<Type> src, Module module, Span<ClrHandle<RuntimeTypeHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = type(module, ClrToken.from(skip(src,i)));
+                seek(dst,i) = type(module, ClrTokens.from(skip(src,i)));
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void methods(ReadOnlySpan<MethodInfo> src, Module module, Span<ClrHandle<RuntimeMethodHandle>> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, ClrToken.from(skip(src,i)));
+                seek(dst,i) = method(module, ClrTokens.from(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]

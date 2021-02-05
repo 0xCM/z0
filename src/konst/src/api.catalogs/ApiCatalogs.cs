@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static z;
+    using static memory;
 
     using Q = ApiQuery;
 
@@ -29,11 +29,27 @@ namespace Z0
         }
 
         /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified part
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static IApiPartCatalog part(IPart src)
+            => part(src.Owner);
+
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static IApiPartCatalog part(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, apitypes(src), apiHosts(src), svcHostTypes(src));
+
+        /// <summary>
         /// Creates a system-level api catalog over a set of path-identified components
         /// </summary>
         /// <param name="paths">The source paths</param>
         [Op]
-        public static IGlobalApiCatalog create(FS.Files paths)
+        public static IGlobalApiCatalog global(FS.Files paths)
             => new GlobalApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         /// <summary>
@@ -41,36 +57,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source components</param>
         [Op]
-        public static IGlobalApiCatalog create(Assembly[] src)
+        public static IGlobalApiCatalog global(Assembly[] src)
         {
             var candidates = src.Where(Q.isPart);
             var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
             return new GlobalApiCatalog(parts);
         }
 
-        /// <summary>
-        /// Defines a <see cref='ApiPartCatalog'/> over a specified part
-        /// </summary>
-        /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog create(IPart src)
-            => create(src.Owner);
-
-        /// <summary>
-        /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
-        /// </summary>
-        /// <param name="src">The source assembly</param>
-        [Op]
-        public static IApiPartCatalog create(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, apitypes(src), apiHosts(src), svcHostTypes(src));
-
-        [Op]
-        public static IGlobalApiCatalog siblings(Assembly src, PartId[] parts)
+        public static IGlobalApiCatalog global(FS.FolderPath src, PartId[] parts)
         {
-            var path = FS.path(src.Location).FolderPath;
-            var managed = path.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            return parts.Length != 0 ? new GlobalApiCatalog(create(managed).Parts.Where(x => parts.Contains(x.Id))) : create(managed);
+            var managed = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
+            return parts.Length != 0 ? new GlobalApiCatalog(global(managed).Parts.Where(x => parts.Contains(x.Id))) : global(managed);
         }
+
+        [Op]
+        public static IGlobalApiCatalog global(Assembly src, PartId[] parts)
+            => global(FS.path(src.Location).FolderPath, parts);
 
         /// <summary>
         /// Attempts to resolve a part resolution type
@@ -117,7 +120,7 @@ namespace Z0
         /// </summary>
         [Op]
         static Option<IPart> resolve(PropertyInfo src)
-            => @try(src, x => (IPart)x.GetValue(null));
+            => root.@try(src, x => (IPart)x.GetValue(null));
 
         /// <summary>
         /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
@@ -160,7 +163,7 @@ namespace Z0
                 var attrib = type.Tag<ApiDeepAttribute>();
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
-                seek(dst,i) = new ApiRuntimeType(type, name, part, uri);
+                seek(dst, i) = new ApiRuntimeType(type, name, part, uri);
             }
             return buffer;
         }

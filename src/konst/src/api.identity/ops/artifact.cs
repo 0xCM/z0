@@ -21,9 +21,9 @@ namespace Z0
             var component = type.Assembly;
             var id = text.format(RP.SlotDot4,
                 "method",
-                ClrToken.from(component),
-                ClrToken.from(type),
-                ClrToken.from(src)
+                ClrTokens.from(component),
+                ClrTokens.from(type),
+                ClrTokens.from(src)
                 );
 
             return OpIdentity.define(id);

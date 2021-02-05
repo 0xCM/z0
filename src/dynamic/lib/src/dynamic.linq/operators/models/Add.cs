@@ -26,7 +26,7 @@ namespace Z0
                 => _OPSafe.Require();
 
             static Option<Func<T,T,T>> TryConstruct()
-                => @try(() =>
+                => root.@try(() =>
                 {
                     switch (sys.typecode<T>())
                     {
