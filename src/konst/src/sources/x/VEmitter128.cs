@@ -16,7 +16,7 @@ namespace Z0
     {
         public const string Name = "vemitter";
 
-        public Vec128Kind<T> VKind => default;
+        static Vec128Kind<T> Kind => default;
 
         readonly IDataSource Source;
 
@@ -25,10 +25,10 @@ namespace Z0
             => Source = source;
 
         public OpIdentity Id
-            => ApiIdentify.sfunc(Name, VKind);
+            => ApiIdentify.sfunc(Name, Kind);
 
         [MethodImpl(Inline)]
         public Vector128<T> Invoke()
-            => Source.CpuVector<T>(VKind);
+            => Source.CpuVector<T>(Kind);
     }
 }

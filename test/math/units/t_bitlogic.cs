@@ -12,6 +12,106 @@ namespace Z0
 
     public class t_bitlogic : t_mathsvc<t_bitlogic>
     {
+        void and_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.and<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void or_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.or<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void xor_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.xor<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void nand_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.nand<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void nor_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.nor<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void xnor_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.xnor<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void not_check<T>(S.UnaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.not<T>();
+            var validator = this.UnaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+
+        void impl_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.impl<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void nonimpl_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.nonimpl<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void cimpl_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.cimpl<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        void cnonimpl_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.cnonimpl<T>();
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
         public void and_check()
         {
             const string name = "and";
@@ -24,15 +124,6 @@ namespace Z0
             and_check(S.binary(BL.and, name, z32i));
             and_check(S.binary(BL.and, name, z64));
             and_check(S.binary(BL.and, name, z64i));
-        }
-
-        void and_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.and(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
         }
 
         public void or_check()
@@ -49,14 +140,6 @@ namespace Z0
             or_check(S.binary(BL.or, name, z64i));
         }
 
-        void or_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.or(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void xor_check()
         {
@@ -73,14 +156,6 @@ namespace Z0
 
         }
 
-        void xor_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.xor(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void nand_check()
         {
@@ -96,14 +171,6 @@ namespace Z0
             nand_check(S.binary(BL.nand, name, z64i));
         }
 
-        void nand_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.nand(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void nor_check()
         {
@@ -119,14 +186,6 @@ namespace Z0
             nor_check(S.binary(BL.nor, name, z64i));
         }
 
-        void nor_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.nor(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void xnor_check()
         {
@@ -142,14 +201,6 @@ namespace Z0
             xnor_check(S.binary(BL.xnor, name, z64i));
         }
 
-        void xnor_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.xnor(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void not_check()
         {
@@ -163,15 +214,6 @@ namespace Z0
             not_check(S.unary(BL.not, name, z32i));
             not_check(S.unary(BL.not, name, z64));
             not_check(S.unary(BL.not, name, z64i));
-        }
-
-        void not_check<T>(S.UnaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.not(t);
-            var validator = this.UnaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
         }
 
         public void impl_check()
@@ -188,15 +230,6 @@ namespace Z0
             impl_check(S.binary(BL.impl, name, z64i));
         }
 
-        void impl_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.impl(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
-
         public void nonimpl_check()
         {
             const string name = "nonimpl";
@@ -211,14 +244,6 @@ namespace Z0
             nonimpl_check(S.binary(BL.nonimpl, name, z64i));
         }
 
-        void nonimpl_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.nonimpl(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void cimpl_check()
         {
@@ -232,15 +257,6 @@ namespace Z0
             cimpl_check(S.binary(BL.cimpl, name, z32i));
             cimpl_check(S.binary(BL.cimpl, name, z64));
             cimpl_check(S.binary(BL.cimpl, name, z64i));
-        }
-
-        void cimpl_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.cimpl(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
         }
 
         public void cnonimpl_check()
@@ -257,13 +273,6 @@ namespace Z0
             cnonimpl_check(S.binary(BL.cnonimpl, name, z64i));
         }
 
-        void cnonimpl_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.cnonimpl(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
+
     }
 }

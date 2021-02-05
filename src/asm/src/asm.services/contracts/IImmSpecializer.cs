@@ -7,6 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
 
+    using static SFx;
+
     public interface IImmSpecializer
     {
         Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, byte imm);

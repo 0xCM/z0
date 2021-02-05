@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static SFx;
 
     public interface ICheckSF<T0,T1,T2,R> : ICheckSF

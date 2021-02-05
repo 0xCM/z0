@@ -30,6 +30,11 @@ namespace Z0
             Append(string.Format(pattern, args));
         }
 
+        void AppendLineFormat(string pattern, params object[] args)
+        {
+            AppendLine(string.Format(pattern, args));
+        }
+
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
 

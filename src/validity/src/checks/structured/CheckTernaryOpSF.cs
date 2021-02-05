@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
-    using static SFx;
 
     public readonly struct CheckTernaryOpSF<T> : ICheckSF<T,T,T,T>
         where T : unmanaged

@@ -8,39 +8,41 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
-    public readonly struct ProjectorProxy<S,T> : IValueProjector<S,T>
-        where S : struct
-        where T : struct
+    partial struct SFx
     {
-        readonly Func<S,T> Delegate;
-
-        /// <summary>
-        /// Captures a projected value
-        /// </summary>
-        readonly T[] Dst;
-
-        [MethodImpl(Inline)]
-        public ProjectorProxy(Func<S,T> f, T[] dst)
+        public readonly struct ProjectorProxy<S,T> : IValueProjector<S,T>
+            where S : struct
+            where T : struct
         {
-            Delegate = f;
-            Dst = dst;
+            readonly Func<S,T> Delegate;
+
+            /// <summary>
+            /// Captures a projected value
+            /// </summary>
+            readonly T[] Dst;
+
+            [MethodImpl(Inline)]
+            public ProjectorProxy(Func<S,T> f, T[] dst)
+            {
+                Delegate = f;
+                Dst = dst;
+            }
+
+            [MethodImpl(Inline)]
+            public ref T Project(in S src)
+            {
+                ref var dst = ref Dst[0];
+                dst = Delegate(src);
+                return ref dst;
+            }
+
+            ValueType IValueProjector.Project(ValueType src)
+                => Project(memory.unbox<S>(src));
+
+            [MethodImpl(Inline)]
+            public static implicit operator ValueMap<S,T>(ProjectorProxy<S,T> src)
+                => src.Project;
         }
-
-        [MethodImpl(Inline)]
-        public ref T Project(in S src)
-        {
-            ref var dst = ref Dst[0];
-            dst = Delegate(src);
-            return ref dst;
-        }
-
-        ValueType IValueProjector.Project(ValueType src)
-            => Project(z.unbox<S>(src));
-
-        [MethodImpl(Inline)]
-        public static implicit operator ValueMap<S,T>(ProjectorProxy<S,T> src)
-            => src.Project;
     }
 }

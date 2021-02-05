@@ -4,9 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
     [ApiHost(ApiSetKind.Math | ApiSetKind.Generic)]
     public partial class gmath
     {
+
+        [MethodImpl(Inline)]
+        public static NumericBitLogic<T> bitlogic<T>()
+            where T : unmanaged
+                => default(NumericBitLogic<T>);
 
     }
 

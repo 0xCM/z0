@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using K = VK;
+    using static SFx;
 
     public readonly struct VImm8UnaryResolvers
     {
@@ -37,14 +37,14 @@ namespace Z0
         }
 
         public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
-            => Dynop.EmbedVUnaryOpImm<T>(K.vk128<T>(), id, gApiMethod(K.vk128<T>(), id.Name),count);
+            => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(), id, gApiMethod(VK.vk128<T>(), id.Name),count);
 
         static string name(ApiClass k)
             => $"v{k.Format()}";
 
         public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, ApiClass kind)
-            => Dynop.EmbedVUnaryOpImm<T>(K.vk128<T>(),
-                ApiIdentify.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(K.vk128<T>(), name(kind)),imm8);
+            => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(),
+                ApiIdentify.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(VK.vk128<T>(), name(kind)),imm8);
 
 
         MethodInfo gApiMethod(Vec128Type hk, string name)
@@ -64,7 +64,7 @@ namespace Z0
         OpIdentity id => default;
 
         public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-            => Dynop.EmbedVUnaryOpImm<T>(K.vk256<T>(), id, gApiMethod(K.vk256<T>(), id.Name),count);
+            => Dynop.EmbedVUnaryOpImm<T>(VK.vk256<T>(), id, gApiMethod(VK.vk256<T>(), id.Name),count);
 
 
         MethodInfo gApiMethod(Vec256Type hk, string name)

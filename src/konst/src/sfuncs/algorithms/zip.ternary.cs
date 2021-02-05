@@ -17,7 +17,7 @@ namespace Z0
             where F : ITernaryOp128<T>
         {
             var blocks = dst.BlockCount;
-            for(var block = 0; block < blocks; block++)
+            for(var block = 0; block<blocks; block++)
                 f.Invoke(a.LoadVector(block), b.LoadVector(block), c.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
         }

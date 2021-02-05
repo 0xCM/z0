@@ -54,7 +54,7 @@ namespace Z0
         static Bit32 vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            var svc = MSvc.bitlogic<T>();
+            var svc = gmath.bitlogic<T>();
             var v1 = VSvc.vbitlogic<T>(w128).and(x,y);
 
             var buffer = gcells.alloc<Cell128>();

@@ -53,6 +53,25 @@ namespace Z0
         }
 
 
+        public RuntimeMethodHandle MethodHandle
+        {
+            [MethodImpl(Inline)]
+            get => Definition.MethodHandle;
+        }
+
+        public MemoryAddress HandleAddress
+        {
+            [MethodImpl(Inline)]
+            get => Definition.MethodHandle.Value;
+        }
+
+        public MemoryAddress PointerAddress
+        {
+            [MethodImpl(Inline)]
+            get => MethodHandle.GetFunctionPointer();
+        }
+
+
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;

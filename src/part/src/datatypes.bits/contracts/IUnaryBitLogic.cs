@@ -8,7 +8,6 @@ namespace Z0
 
     [Free]
     public interface IUnaryBitLogic<T>
-        where T : struct
     {
        T not(T a);
 

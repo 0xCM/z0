@@ -8,7 +8,6 @@ namespace Z0
 
     [Free]
     public interface ITernaryBitLogic<T>
-        where T : struct
     {
         T select(T a, T b, T c);
     }

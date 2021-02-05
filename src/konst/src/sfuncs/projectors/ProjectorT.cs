@@ -8,18 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
-    public readonly struct Projector<T> : IProjector<T>
+    partial struct SFx
     {
-        readonly System.Func<T,T> Fx;
+        public readonly struct Projector<T> : IProjector<T>
+        {
+            readonly System.Func<T,T> Fx;
 
-        [MethodImpl(Inline)]
-        public Projector(System.Func<T,T> fx)
-            => Fx = fx;
+            [MethodImpl(Inline)]
+            public Projector(System.Func<T,T> fx)
+                => Fx = fx;
 
-        [MethodImpl(Inline)]
-        public T Invoke(T a)
-            => Fx(a);
+            [MethodImpl(Inline)]
+            public T Invoke(T a)
+                => Fx(a);
+        }
     }
 }

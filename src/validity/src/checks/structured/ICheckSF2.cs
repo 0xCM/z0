@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
     using static SFx;
+    using static memory;
 
     public interface ICheckSF<T0,T1,R> : ICheckSF
         where T0 : unmanaged
@@ -60,13 +60,13 @@ namespace Z0
             var clock = Time.counter(false);
 
             var lhs = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
-            ref readonly var leftIn = ref z.first(lhs);
+            ref readonly var leftIn = ref first(lhs);
 
             var rhs = (ExcludeZero ? Random.NonZeroSpan<T1>(count) : Random.Span<T1>(count)).ReadOnly();
-            ref readonly var rightIn = ref z.first(rhs);
+            ref readonly var rightIn = ref first(rhs);
 
-            var dst = z.span<R>(count);
-            ref var target = ref z.first(dst);
+            var dst = span<R>(count);
+            ref var target = ref first(dst);
 
             clock.Start();
 
@@ -74,7 +74,7 @@ namespace Z0
             {
                 apply(g, lhs, rhs, dst);
                 for(var i=0u; i<count; i++)
-                    eq(f.Invoke(z.skip(leftIn, i), z.skip(rightIn, i)), z.skip(target, i));
+                    eq(f.Invoke(skip(leftIn, i), skip(rightIn, i)), skip(target, i));
             }
             catch(Exception e)
             {

@@ -8,7 +8,6 @@ namespace Z0
 
     [Free]
     public interface IBinaryBitLogic<T>
-        where T : struct
     {
         T and(T a, T b);
 

@@ -17,17 +17,17 @@ namespace Z0
 
         readonly IDataSource Source;
 
-        public Vec512Kind<T> VKind => default;
+        static Vec512Kind<T> Kind => default;
 
         [MethodImpl(Inline)]
         public VEmitter512(IDataSource src)
             => Source = src;
 
         public OpIdentity Id
-            => ApiIdentify.sfunc(Name, VKind);
+            => ApiIdentify.sfunc(Name, Kind);
 
         [MethodImpl(Inline)]
         public Vector512<T> Invoke()
-            => Source.CpuVector<T>(VKind);
+            => Source.CpuVector<T>(Kind);
     }
 }

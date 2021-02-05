@@ -8,36 +8,38 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
-    public readonly struct ValueProjector<T> : IValueProjector<T>
-        where T : struct
+    partial struct SFx
     {
-        readonly BoxedValueMap<T> Delegate;
-
-        [MethodImpl(Inline)]
-        public ValueProjector(BoxedValueMap<T> src)
-            => Delegate = src;
-
-        internal BoxedValueMap<T> Actor
+        public readonly struct ValueProjector<T> : IValueProjector<T>
+            where T : struct
         {
+            readonly BoxedValueMap<T> Delegate;
+
             [MethodImpl(Inline)]
-            get => Delegate;
+            public ValueProjector(BoxedValueMap<T> src)
+                => Delegate = src;
+
+            internal BoxedValueMap<T> Actor
+            {
+                [MethodImpl(Inline)]
+                get => Delegate;
+            }
+
+            [MethodImpl(Inline)]
+            public ref T Project(object src)
+                => ref memory.unbox<T>(Delegate((ValueType)src));
+
+            [MethodImpl(Inline)]
+            public ref T Project(ValueType src)
+                => ref memory.unbox<T>(Delegate(src));
+
+            ValueType IValueProjector.Project(ValueType src)
+                => Delegate(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator BoxedValueMap<T>(ValueProjector<T> src)
+                => src.Delegate;
         }
-
-        [MethodImpl(Inline)]
-        public ref T Project(object src)
-            => ref z.unbox<T>(Delegate((ValueType)src));
-
-        [MethodImpl(Inline)]
-        public ref T Project(ValueType src)
-            => ref z.unbox<T>(Delegate(src));
-
-        ValueType IValueProjector.Project(ValueType src)
-            => Delegate(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BoxedValueMap<T>(ValueProjector<T> src)
-            => src.Delegate;
     }
 }

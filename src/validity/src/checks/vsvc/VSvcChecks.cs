@@ -187,7 +187,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w128;
-            var mSvc = MSvc.bitlogic<T>();
+            var mSvc = gmath.bitlogic<T>();
             var vSvc = VSvc.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);
@@ -205,7 +205,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = w256;
-            var mSvc = MSvc.bitlogic<T>();
+            var mSvc = gmath.bitlogic<T>();
             var vSvc = VSvc.vbitlogic<T>(w);
             var buffer = Cells.alloc(w);
             ref var dst = ref Cells.first<T>(buffer);

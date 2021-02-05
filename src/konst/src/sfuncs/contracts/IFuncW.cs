@@ -31,5 +31,57 @@ namespace Z0
         {
 
         }
+
+        [Free, SFx]
+        public interface IFunc8<T> : IFuncW<W8>
+            where T : unmanaged
+        {
+
+
+        }
+
+        [Free, SFx]
+        public interface IFunc16<T> : IFuncW<W16>
+            where T : unmanaged
+        {
+
+
+        }
+
+        [Free, SFx]
+        public interface IFunc32<T> : IFuncW<W32>
+            where T : unmanaged
+        {
+
+
+        }
+
+        [Free, SFx]
+        public interface IFunc64<T> : IFuncW<W64>
+            where T : unmanaged
+        {
+
+
+        }
+
+        [Free, SFx]
+        public interface IFunc128<T> : IFuncW<W128>
+            where T : unmanaged
+        {
+
+        }
+
+        [Free, SFx]
+        public interface IFunc256<T> : IFuncW<W256>
+            where T : unmanaged
+        {
+
+        }
+
+        [Free, SFx]
+        public interface IFunc512<T> : IFuncW<W512>
+            where T : unmanaged
+        {
+        }
     }
 }

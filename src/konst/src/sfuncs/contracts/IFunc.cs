@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct SFx
     {
-        [Free]
+        [Free, SFx]
         public interface IOperation
         {
             string Name
