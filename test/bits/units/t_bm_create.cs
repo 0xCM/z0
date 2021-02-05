@@ -52,7 +52,7 @@ namespace Z0
         public void bm_create_fromfixed_16x16x16()
         {
             var data = Random.Span<ushort>(16);
-            var src = Cells.alloc<Cell256>();
+            var src = gcells.alloc<Cell256>();
             Cells.store(first(data), ref src);
             var A = BitMatrix.primal(n16, Cells.byteview(src));
             var B = BitMatrix.primal(n16, data);

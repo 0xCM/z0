@@ -26,6 +26,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(Cell64 src)
             => src.Content.FormatHexData();
-
     }
 }

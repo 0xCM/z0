@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an 8-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm8")]
     public readonly struct Imm8 : IImmediate<I,W,byte>
     {
         public byte Content {get;}

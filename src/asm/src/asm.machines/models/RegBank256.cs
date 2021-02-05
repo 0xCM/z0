@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ref Cell128 r128(byte i)
-            => ref c128(ref r256(i));
+            => ref lo128(ref r256(i));
 
         [MethodImpl(Inline)]
         public ref Cell256 r256(byte i)

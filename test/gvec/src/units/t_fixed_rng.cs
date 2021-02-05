@@ -20,9 +20,9 @@ namespace Z0
         {
             const ulong tolerance = 5;
             var total = 0ul;
-            var emit = CellOps.define(next<byte>);
+            var emit = CellOps.cellop8(next<byte>);
             for(var i=0; i<RepCount; i++ )
-                total += Cells.primal(emit());
+                total += Cells.uint8(emit());
 
             var expect = (ulong)(Numeric.maxval<byte>()/2);
             var actual = total/(ulong)RepCount;
@@ -51,7 +51,7 @@ namespace Z0
                 {
                     var a = lhs[i];
                     var b = rhs[i];
-                    var x = Cells.cell(f(a.Content, b.Content));
+                    var x = Cells.cell32(f(a.Content, b.Content));
                     var y = g(a,b);
                     Claim.eq(x,y);
                 }

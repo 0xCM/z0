@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 32-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm32r")]
     public readonly struct Imm32<E> : IImmediate<Imm32<E>,W, E>
         where E : unmanaged
     {

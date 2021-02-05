@@ -16,7 +16,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where T : unmanaged, IDataCell<T>
     {
-        readonly TableSpan<CellW<W,T>> Data;
+        readonly Index<CellW<W,T>> Data;
 
         [MethodImpl(Inline)]
         public Cells(CellW<W,T>[] data)

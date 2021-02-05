@@ -11,6 +11,7 @@ namespace Z0
 
     using api = Cells;
 
+    [Datatype("m32")]
     public readonly struct Cell32 : IDataCell<Cell32,W32,uint>
     {
         public uint Content {get;}

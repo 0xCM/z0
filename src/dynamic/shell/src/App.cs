@@ -183,7 +183,7 @@ namespace Z0
             using var runner = new ToolRunner(Wf, Host);
             root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
 
-            var pipe = Pipes.pipe<ushort>();
+            var pipe = Pipes.pipe<ushort>(Wf);
             var count = 10;
             var input = Wf.PolyStream.Span<ushort>(count);
             for(var i=0; i<count; i++)

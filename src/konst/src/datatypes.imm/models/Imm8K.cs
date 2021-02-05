@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 8-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm8r")]
     public readonly struct Imm8<E> : IImmediate<Imm8<E>,W,E>
         where E : unmanaged
     {

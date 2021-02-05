@@ -11,6 +11,7 @@ namespace Z0
 
     using api = Cells;
 
+    [Datatype("m16")]
     public readonly struct Cell16 : IDataCell<Cell16,W16,ushort>
     {
         readonly ushort Data;

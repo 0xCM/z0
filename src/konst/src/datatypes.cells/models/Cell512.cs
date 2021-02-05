@@ -12,6 +12,7 @@ namespace Z0
     using F = Cell512;
     using api = Cells;
 
+    [Datatype("m512")]
     public readonly struct Cell512  : IDataCell<Cell512,W512,Vector512<ulong>>
     {
         readonly Cell256 X0;

@@ -12,15 +12,15 @@ namespace Z0
 
     partial class XCell
     {
-         /// <summary>
+        /// <summary>
         /// Presents a 128-bit vector as a 128-bit fixed block
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Cell128 ToCell<T>(this in Vector128<T> x)
+        public static ref Cell128 ToCell<T>(this in Vector128<T> src)
             where T : unmanaged
-                => ref Z0.Cells.cell(x);
+                => ref gcells.cell128(src);
 
         /// <summary>
         /// Presents a 256-bit vector as a 256-bit fixed block
@@ -28,14 +28,14 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Cell256 ToCell<T>(this in Vector256<T> x)
+        public static ref Cell256 ToCell<T>(this in Vector256<T> src)
             where T : unmanaged
-                => ref Z0.Cells.cell(x);
+                => ref gcells.cell256(src);
 
         [MethodImpl(Inline)]
-        public static Cell512 ToCell<T>(this Vector512<T> x)
+        public static ref Cell512 ToCell<T>(this in Vector512<T> src)
             where T : unmanaged
-                => Unsafe.As<Vector512<T>,Cell512>(ref x);
+                => ref gcells.cell512(src);
 
         [MethodImpl(Inline), Op]
         public static Cell8 ToCell(this byte x)

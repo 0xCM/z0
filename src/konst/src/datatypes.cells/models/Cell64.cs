@@ -11,6 +11,7 @@ namespace Z0
 
     using api = Cells;
 
+    [Datatype("m64")]
     public readonly struct Cell64 : IDataCell<Cell64,W64,ulong>
     {
         public ulong Content {get;}

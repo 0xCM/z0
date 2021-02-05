@@ -13,6 +13,7 @@ namespace Z0
     using F = Cell128;
     using api = Cells;
 
+    [Datatype("m128")]
     public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
     {
         readonly Vector128<ulong> Data;
@@ -86,31 +87,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128((ulong x0, ulong x1) x)
-            => api.cell(x);
+            => api.cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)
-            => api.cell(x);
+            => api.cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
-            => api.cell(x);
-
-        [MethodImpl(Inline)]
-        public static explicit operator Cell128(ushort src)
-            => api.init(cpu.vscalar(w128, src));
-
-        [MethodImpl(Inline)]
-        public static explicit operator ushort(Cell128 src)
-            => gcpu.vcell(gcpu.v16u(src.Data), 0);
+            => gcells.cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)
-            => api.cell(x);
+            => gcells.cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<uint> x)
-            => api.cell(x);
+            => gcells.cell128(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ulong> x)

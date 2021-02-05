@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines an indexed sequence of <typeparamref name='T'/> cells
     /// </summary>
+    [Datatype("m(n)")]
     public readonly struct Cells<T> : ITableSpan<Cells<T>,T>
         where T : struct, IDataCell<T>
     {

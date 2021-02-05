@@ -16,6 +16,7 @@ namespace Z0
     using F = Cell256;
     using api = Cells;
 
+    [Datatype("m256")]
     public readonly struct Cell256 : IDataCell<Cell256,W256,Vector256<ulong>>
     {
         public Vector256<ulong> Content {get;}

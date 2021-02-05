@@ -12,15 +12,6 @@ namespace Z0
     partial class Cells
     {
         /// <summary>
-        /// Creates a fixed-type value of parametric type
-        /// </summary>
-        /// <typeparam name="F">The fixed type</typeparam>
-        [MethodImpl(Inline)]
-        public static F alloc<F>()
-            where F : unmanaged, IDataCell
-                => default(F);
-
-        /// <summary>
         /// Creates an 8-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>

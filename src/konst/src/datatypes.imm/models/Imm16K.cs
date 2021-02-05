@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 16-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm16r")]
     public readonly struct Imm16<E> : IImmediate<Imm16<E>, W, E>
         where E : unmanaged
     {
@@ -24,9 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Imm16(E value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         [MethodImpl(Inline)]
         public string Format()

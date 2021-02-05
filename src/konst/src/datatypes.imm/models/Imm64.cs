@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm64")]
     public readonly struct Imm64 : IImmediate<I,W64,ulong>
     {
         public ulong Content {get;}

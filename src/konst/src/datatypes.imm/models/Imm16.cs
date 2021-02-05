@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16-bit immediate value
     /// </summary>
-    [Datatype]
+    [Datatype("imm16")]
     public readonly struct Imm16 : IImmediate<I,W16,ushort>
     {
         public ushort Content {get;}

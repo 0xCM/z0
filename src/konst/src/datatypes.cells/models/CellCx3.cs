@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
 
+    [Datatype("mx3")]
     public struct Cell<A,B,C> : IDataCell<Cell<A,B,C>>
         where A : struct, IDataCell<A>
         where B : struct, IDataCell<B>

@@ -30,12 +30,6 @@ namespace Z0
             where T : struct
                 => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));
 
-        [MethodImpl(Inline)]
-        internal static unsafe ReadOnlySpan<T> view<F,T>(in F src)
-            where F : unmanaged, IDataCell
-            where T : unmanaged
-                => new ReadOnlySpan<T>(Unsafe.AsPointer(ref Unsafe.AsRef(in src)), Unsafe.SizeOf<F>());
-
         /// <summary>
         /// Writes a specified number of source elements to a fixed target
         /// </summary>
