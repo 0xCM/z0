@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static ApiSigs;
 
     /// <summary>
     /// Describes an operand defined by an api operation
@@ -20,10 +21,10 @@ namespace Z0
 
         public OperandName Name {get;}
 
-        public ApiOperandModifier Modifier {get;}
+        public SigModifier Modifier {get;}
 
         [MethodImpl(Inline)]
-        public ApiOperand(byte pos, ApiType type, OperandName name, ApiOperandModifier modifier)
+        public ApiOperand(byte pos, ApiType type, OperandName name, SigModifier modifier)
         {
             Position = pos;
             Type = type;

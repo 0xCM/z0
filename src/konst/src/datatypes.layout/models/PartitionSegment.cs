@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static NumericCast;
+    using static memory;
 
     /// <summary>
     /// Defines a <see cref='Partition{T}'/> segment
@@ -32,7 +32,7 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => force<ulong>(Max) - force<ulong>(Min);
+            get => uint64(Max) - uint64(Min);
         }
 
         [MethodImpl(Inline)]

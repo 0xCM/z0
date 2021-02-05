@@ -16,8 +16,6 @@ namespace Z0
 
     partial struct cpu
     {
-
-
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>

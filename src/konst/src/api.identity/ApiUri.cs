@@ -8,9 +8,8 @@ namespace Z0
     using System.Reflection;
 
     using static ApiUriDelimiters;
-    using static Konst;
+    using static Part;
     using static SFx;
-    using static z;
 
     [ApiHost]
     public readonly struct ApiUri
@@ -23,7 +22,7 @@ namespace Z0
 
         public static ParseResult<ApiHostUri> host(string src)
         {
-            var failure = unparsed<ApiHostUri>(src);
+            var failure = root.unparsed<ApiHostUri>(src);
             if(text.blank(src))
                 return failure;
 
@@ -40,7 +39,7 @@ namespace Z0
             if(text.blank(host))
                 return failure.WithReason("Host unspecified");
 
-            return parsed(src, new ApiHostUri(owner, host));
+            return root.parsed(src, new ApiHostUri(owner, host));
         }
 
         [Op]
@@ -64,7 +63,7 @@ namespace Z0
             var parts = src.SplitClean(UriEndOfScheme);
             var msg = string.Empty;
             if(parts.Length != 2)
-                return unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
+                return root.unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
 
             var scheme = ApiUri.scheme(parts[0]);
             var rest = parts[1];
@@ -76,7 +75,7 @@ namespace Z0
             var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
             var uri = ApiIdentity.uri(scheme, path.Value, group, id);
-            return parsed(src, uri);
+            return root.parsed(src, uri);
         }
 
         /// <summary>

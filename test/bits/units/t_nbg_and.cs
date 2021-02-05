@@ -80,7 +80,7 @@ namespace Z0
             BitGrid.and(gx,gy,gz);
 
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);
+                Claim.veq(gcpu.vand(gx[block], gy[block]), gz[block]);
         }
    }
 }

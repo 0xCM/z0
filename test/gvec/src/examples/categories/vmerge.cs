@@ -79,7 +79,7 @@ namespace Z0
             var x = gcpu.vinc<byte>(n128);
             var y = cpu.vadd(x, cpu.vbroadcast(n128, (byte)16));
 
-            var lo = gvec.vmergelo(x,y);
+            var lo = gcpu.vmergelo(x,y);
             var hi = gcpu.vmergehi(x,y);
 
             Notify($"vmerge_hilo");

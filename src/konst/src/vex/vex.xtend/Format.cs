@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
 
     partial class XVex
     {
@@ -77,7 +76,6 @@ namespace Z0
                 => text.concat(
                     src.GetLower().Format(sep, pad), Chars.Space,
                     src.GetUpper().Format(sep, pad));
-
 
         [Op, Closures(Closure)]
         public static string FormatAsmHex<T>(this Vector128<T> src)

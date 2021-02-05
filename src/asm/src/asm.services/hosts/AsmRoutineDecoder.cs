@@ -24,7 +24,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = apiblock(src.CodeBlock, i.Storage, src.TermCode)
-                select routine(src.MetaUri, src.OpUri, src.Method.Metadata().DisplaySig, block);
+                select routine(src.ArtifactKey, src.OpUri, src.Method.Metadata().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
             => Decode(src.Code, src.BaseAddress).TryMap(x => icelist(x, src));
@@ -161,7 +161,7 @@ namespace Z0.Asm
         static AsmRoutine routine(ApiCaptureBlock captured, IceInstructionList src)
         {
             var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
-            return new AsmRoutine(captured.MetaUri, captured.OpUri, captured.Method.Metadata().DisplaySig, code, captured.TermCode, src);
+            return new AsmRoutine(captured.ArtifactKey, captured.OpUri, captured.Method.Metadata().DisplaySig, code, captured.TermCode, src);
         }
 
         static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)

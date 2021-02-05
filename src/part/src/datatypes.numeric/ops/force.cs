@@ -8,9 +8,23 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Numeric
     {
+        [MethodImpl(Inline)]
+        public static Span<T> force<S,T>(Span<S> src)
+            where T : unmanaged
+            where S : unmanaged
+        {
+            var count =src.Length;
+            ref readonly var input = ref first(src);
+            ref var output = ref @as<S,T>(first(src));
+            for(var i=0; i<count; i++)
+                seek(output,i) = force<S,T>(skip(input,i));
+            return cover(output,count);
+        }
+
         /// <summary>
         /// If possible, applies the conversion S -> T
         /// </summary>
@@ -119,5 +133,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(char src)
             => NumericCast.force<T>(src);
+
     }
 }

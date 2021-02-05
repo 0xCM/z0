@@ -21,10 +21,6 @@ namespace Z0
         public IntPtr Handle {get;}
 
         [MethodImpl(Inline)]
-        public static DynamicPointer From(DynamicDelegate src)
-            => new DynamicPointer(src, pointer(src.Target));
-
-        [MethodImpl(Inline)]
         internal DynamicPointer(DynamicDelegate op, IntPtr handle)
         {
             Op = op;

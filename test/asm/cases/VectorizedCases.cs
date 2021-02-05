@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vand<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
-                => gvec.vand(a,b);
+                => gcpu.vand(a,b);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vor<T>(Vector256<T> a, Vector256<T> b)

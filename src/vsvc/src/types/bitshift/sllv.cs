@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static SFx;
 
     partial class VServices
@@ -19,11 +18,11 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets)
-                => gvec.vsllv(x,offsets);
+                => gcpu.vsllv(x,offsets);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, force<T,byte>(offset));
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
         }
 
         public readonly struct Sllv256<T> : IBinaryOp256D<T>
@@ -31,11 +30,11 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offsets)
-                => gvec.vsllv(x,offsets);
+                => gcpu.vsllv(x,offsets);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T offset)
-                => gmath.sll(a, force<T,byte>(offset));
+                => gmath.sll(a, Numeric.force<T,byte>(offset));
         }
     }
 }

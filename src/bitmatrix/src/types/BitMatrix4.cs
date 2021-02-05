@@ -49,7 +49,7 @@ namespace Z0
         public BitEdit<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => Bit.editor(Data);
+            get => new BitEdit<ushort>(Data);
         }
 
         /// <summary>

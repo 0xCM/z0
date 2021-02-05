@@ -36,11 +36,6 @@ namespace Z0.Asm
 
         ICaptureAlt CaptureService {get;}
 
-        ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src);
-
-        Span<LocatedMethod> Locate(ReadOnlySpan<MethodInfo> src);
-
-        Span<LocatedMethod> Locate(ReadOnlySpan<IdentifiedMethod> src);
 
         ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target);
 

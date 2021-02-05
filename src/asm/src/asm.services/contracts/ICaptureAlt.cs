@@ -9,19 +9,15 @@ namespace Z0
 
     public interface ICaptureAlt
     {
-        ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src);
-
-        Span<LocatedMethod> Locate(ReadOnlySpan<IdentifiedMethod> src);
-
         ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<MethodInfo> src);
 
         ReadOnlySpan<ApiCaptureBlock> Capture(Type src);
 
         ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src);
 
-        ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> buffer);
+        ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> dst);
 
-        ApiCaptureBlock Capture(MethodInfo src);
+        ApiCaptureBlock Capture(MethodInfo src, Span<byte> dst);
 
         ApiCaptureBlock Capture(IdentifiedMethod src);
 

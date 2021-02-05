@@ -277,7 +277,7 @@ namespace Z0
 
             var spec = pattern.LoadVector();
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), Z0.z.one(t)));
+            var y = gcpu.vadd(x, gmath.add(x.LastCell(), Z0.z.one(t)));
             var z = gvec.vblendp(x,y,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
@@ -342,7 +342,7 @@ namespace Z0
             Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
-            var right = gvec.vadd(left, gmath.add(left.LastCell(), z.one(t)));
+            var right = gcpu.vadd(left, gmath.add(left.LastCell(), z.one(t)));
             var blend = gvec.vblendp(left,right,spec);
 
 
@@ -447,9 +447,9 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = memory.@as(z.vbroadcast(w, pattern), t);
+            var spec = memory.@as(gcpu.vbroadcast(w, pattern), t);
             var a = gvec.vinc(w, t);
-            var b = gvec.vadd(a, gmath.add(a.LastCell(), z.one(t)));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
             var c = gvec.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
@@ -475,9 +475,9 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = memory.@as(z.vbroadcast(w, pattern),t);
+            var spec = memory.@as(gcpu.vbroadcast(w, pattern),t);
             var a = gvec.vinc(w, t);
-            var b = gvec.vadd(a, gmath.add(a.LastCell(), z.one(t)));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
             var c = gvec.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);

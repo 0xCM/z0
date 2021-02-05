@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort vpack16<T>(Vector128<T> src, byte index)
             where T : unmanaged
-                => vtakemask(src, index);
+                => vmask16u(src, index);
     }
 }

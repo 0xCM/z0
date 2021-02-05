@@ -36,12 +36,6 @@ namespace Z0.Asm
             CaptureService = CaptureAlt.service(Wf, Asm);
         }
 
-        public ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<MethodInfo> src)
-            => CaptureAlt.identify(src);
-
-        public Span<LocatedMethod> Locate(ReadOnlySpan<IdentifiedMethod> src)
-            => CaptureAlt.locate(src);
-
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
             => Decode(CaptureAlt.capture(src), target);
 
@@ -81,8 +75,5 @@ namespace Z0.Asm
             }
             return dst;
         }
-
-        public Span<LocatedMethod> Locate(ReadOnlySpan<MethodInfo> src)
-            => CaptureAlt.locate(CaptureAlt.identify(src));
     }
 }

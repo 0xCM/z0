@@ -227,7 +227,7 @@ namespace Z0
                 {
                     ref readonly var t = ref skip(types, i);
                     var reified = src.Method.MakeGenericMethod(t);
-                    var address = z.address(Jit(reified));
+                    var address = memory.address(Jit(reified));
                     var id = Diviner.Identify(reified);
                     var uri = ApiIdentity.uri(ApiUriScheme.Located, src.Host, method.Name, id);
                     seek(dst,i) = new ApiMember(uri, reified, @class, address);

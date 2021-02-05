@@ -54,6 +54,5 @@ namespace Z0
          [MethodImpl(Inline), Op]
          public static BitSpan load(double src)
             => BitSpans.create(src);
-
     }
 }

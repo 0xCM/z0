@@ -13,11 +13,6 @@ namespace Z0
     {
         public Identifier Name {get;}
 
-        public ApiTypeKind Kind {get;}
     }
 
-    public enum ApiTypeKind : ulong
-    {
-
-    }
 }

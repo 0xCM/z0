@@ -17,6 +17,14 @@ namespace Z0.Asm
 
         public string[] Formatted {get;}
 
+        [MethodImpl(Inline)]
+        public CapturedBlock(CapturedCodeBlock encoded, IceInstructionList fxList, string[] formatted)
+        {
+            Encoded = encoded;
+            Decoded = fxList;
+            Formatted = formatted;
+        }
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -39,15 +47,6 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => Encoded.IsNonEmpty;
-        }
-
-
-        [MethodImpl(Inline)]
-        public CapturedBlock(CapturedCodeBlock encoded, IceInstructionList fxList, string[] formatted)
-        {
-            Encoded = encoded;
-            Decoded = fxList;
-            Formatted = formatted;
         }
 
         [MethodImpl(Inline)]

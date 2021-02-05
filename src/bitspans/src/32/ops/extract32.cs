@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte extract32(in BitSpan32 src, N8 count, int offset)
         {
-            var v0 = cpu.vload(n256, first(extract32(src, offset, count)));
+            var v0 = cpu.vload(w256, first(extract32(src, offset, count)));
             return (byte)gcpu.vpacklsb(cpu.vcompact8u(v0, w128));
         }
 

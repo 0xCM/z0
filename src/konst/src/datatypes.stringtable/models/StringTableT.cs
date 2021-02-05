@@ -40,8 +40,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe ReadOnlySpan<char> Lookup(uint index)
         {
-            var @base = BaseAddress + NumericCast.force<ulong>(skip(Offsets, index));
-            var length = NumericCast.force<uint>(skip(Lengths, index));
+            var @base = BaseAddress + uint32(skip(Offsets, index));
+            var length = uint32(skip(Lengths, index));
             return cover(@base.Pointer<char>(), length);
         }
     }

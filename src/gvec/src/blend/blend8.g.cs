@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vblend<T>(Vector128<T> x, Vector128<T> y, ushort spec)
             where T : unmanaged
-                => vblend(x,y, cpu.vmakemask(spec));
+                => vblend(x,y, cpu.vmask128(spec));
 
         /// <summary>
         /// Forms a vector z[i] = testbit(spec,i) ? x[i] : y[i] where i = 0,...31
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vblend<T>(Vector256<T> x, Vector256<T> y, uint spec)
             where T : unmanaged
-                => vblend(x,y, cpu.vmakemask(spec));
+                => vblend(x,y, cpu.vmask256(spec));
 
         [MethodImpl(Inline)]
         static Vector256<T> vblend_u<T>(Vector256<T> x, Vector256<T> y, Vector256<byte> spec)

@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint vpack32<T>(Vector256<T> src, byte index)
             where T : unmanaged
-                => vtakemask(src, index);
+                => vmask32u(src, index);
     }
 }

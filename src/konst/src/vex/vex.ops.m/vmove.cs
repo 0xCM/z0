@@ -444,7 +444,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmove16x16i(Vector128<sbyte> src, W256 w)
             => ConvertToVector256Int16(src);
-
-
     }
 }

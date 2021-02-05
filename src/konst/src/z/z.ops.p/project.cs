@@ -81,7 +81,7 @@ namespace Z0
             where T : unmanaged
         {
             @as<T,S>(dst) = src;
-            return ref z.add(src, size<S>());
+            return ref memory.add(src, size<S>());
         }
     }
 }

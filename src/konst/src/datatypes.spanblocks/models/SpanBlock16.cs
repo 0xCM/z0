@@ -93,7 +93,7 @@ namespace Z0
         public ref T this[int cell]
         {
             [MethodImpl(Inline)]
-            get => ref z.add(First, cell);
+            get => ref memory.add(First, cell);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref z.add(First, BlockLength*block + segment);
+            => ref memory.add(First, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => z.slice(Data, block * BlockLength, BlockLength);
+            => memory.slice(Data, block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)

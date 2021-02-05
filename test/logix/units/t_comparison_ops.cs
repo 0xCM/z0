@@ -143,7 +143,7 @@ namespace Z0.Logix
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = z.vbroadcast(n,Random.Next<T>());
+                var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);
             }
@@ -162,7 +162,7 @@ namespace Z0.Logix
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = z.vbroadcast(n,Random.Next<T>());
+                var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);
             }
@@ -182,7 +182,7 @@ namespace Z0.Logix
                 actual = gvec.vgt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = z.vbroadcast(n,Random.Next<T>());
+                var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);
             }
@@ -202,7 +202,7 @@ namespace Z0.Logix
                 actual = gvec.vgt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = z.vbroadcast(n,Random.Next<T>());
+                var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
                 y = gvec.vxor(y,a);
             }

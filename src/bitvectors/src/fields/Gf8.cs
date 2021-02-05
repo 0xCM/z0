@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public readonly struct Gf8
     {
@@ -34,7 +33,7 @@ namespace Z0
             byte index = 0;
             for(byte i=min; i<= max; i++)
             for(byte j=min; j<= max; j++)
-                add(dst, index++) = clmul(i,j);
+                memory.add(dst, index++) = clmul(i,j);
         }
 
         [MethodImpl(Inline), Op]

@@ -40,7 +40,7 @@ namespace Z0
             var x = cpu.vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
-                Z[i] = (byte)cpu.vtakemask(cpu.v8u(x));
+                Z[i] = (byte)cpu.vmask16u(cpu.v8u(x));
                 x = cpu.vsll(x,1);
             }
             return ref Z;

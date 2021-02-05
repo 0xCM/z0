@@ -73,14 +73,6 @@ namespace Z0
         public static ParseResult<T> fail<T>(string source, object reason = null)
             => ParseResult<T>.Fail(source, reason);
 
-        [MethodImpl(Inline)]
-        public static ParseResult<T> win<T>(char source, T value)
-            => ParseResult<T>.Success(source.ToString(), value);
-
-        [MethodImpl(Inline)]
-        public static ParseResult<T> fail<T>(char source, object reason = null)
-            => ParseResult<T>.Fail(source.ToString(), reason);
-
         /// <summary>
         /// Defines a successful parse result
         /// </summary>

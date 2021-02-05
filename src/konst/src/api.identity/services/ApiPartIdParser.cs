@@ -46,11 +46,11 @@ namespace Z0
         {
             try
             {
-                return ParseResult.win(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
+                return root.parsed(name, Enum.Parse<E>(text.remove(name, Chars.Dot),true));
             }
             catch(Exception e)
             {
-                return ParseResult.fail<E>(name, e);
+                return root.unparsed<E>(name, e);
             }
         }
     }

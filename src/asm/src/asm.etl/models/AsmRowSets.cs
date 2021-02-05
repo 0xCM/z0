@@ -14,7 +14,7 @@ namespace Z0.Asm
         readonly Index<AsmRowSet<T>> Data;
 
         [MethodImpl(Inline)]
-        public AsmRowSets(params AsmRowSet<T>[] src)
+        public AsmRowSets(AsmRowSet<T>[] src)
             => Data = src;
 
         public ReadOnlySpan<AsmRowSet<T>> View

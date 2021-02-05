@@ -11,7 +11,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Part;
-    using static z;
+    using static memory;
     using static ExtractTermCode;
 
     [ApiHost]
@@ -19,23 +19,7 @@ namespace Z0
     {
         [Op]
         public static ICaptureAlt service(IWfShell wf, IAsmContext asm)
-            => CaptureAltService.create(wf, asm);
-
-        [Op]
-        public static ReadOnlySpan<IdentifiedMethod> identify(ReadOnlySpan<MethodInfo> src)
-            => src.Map(m =>  new IdentifiedMethod(m.Identify(), m));
-
-        [Op]
-        public static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
-        {
-            var count = src.Length;
-            var buffer = alloc<LocatedMethod>(count);
-            ref var located = ref first(span(buffer));
-            for(var i=0u; i<count; i++)
-                seek(located, i) = ApiJit.jit(skip(src, i));
-            Array.Sort(buffer);
-            return buffer;
-        }
+            => default(CaptureAltService);
 
         [Op]
         public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<MethodInfo> src)
@@ -54,28 +38,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         /// <param name="id">The identity to confer to the captured result</param>
-        /// <param name="buffer">The target buffer</param>
+        /// <param name="dst">The target buffer</param>
         [Op]
-        public static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
+        public static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> dst)
         {
-            var summary = capture(buffer, id, ApiJit.jit(src));
+            var summary = capture(dst, id, ApiJit.jit(src));
             var outcome = summary.Outcome;
             return block(id, src, summary.Encoded, outcome.TermCode);
         }
 
-        /// <summary>
-        /// Captures a concrete method for the truly lazy programmer
-        /// </summary>
-        /// <param name="src">The source method</param>
-        /// <param name="id">The identity to confer to the captured result, if specified</param>
-        /// <param name="buffersize">The target buffer size to allocate,</param>
-        [Op]
-        public static ApiCaptureBlock capture(MethodInfo src, OpIdentity? id = null, uint buffersize = Pow2.T14)
+        public static ApiCaptureBlock capture(MethodInfo src, Span<byte> dst)
         {
-            var _id = id ?? OpIdentity.define(src.MetadataToken.ToString());
-            var summary = capture(alloc<byte>(buffersize), _id, ApiJit.jit(src));
+            var id = src.Identify();
+            var summary = capture(dst, id, ApiJit.jit(src));
             var outcome = summary.Outcome;
-            return block(_id, src, summary.Encoded, outcome.TermCode);
+            return block(id, src, summary.Encoded, outcome.TermCode);
         }
 
         [Op]
@@ -185,7 +162,7 @@ namespace Z0
         }
 
         [Op]
-        static ExtractTermCode CalcTerm(in Span<byte> buffer, int offset, int? ret_offset, out int delta)
+        static ExtractTermCode CalcTerm(Span<byte> buffer, int offset, int? ret_offset, out int delta)
         {
             delta = 0;
 
@@ -281,14 +258,26 @@ namespace Z0
         {
             var result = true;
             ref readonly var x = ref first(buffer);
-            result &= regress(x,0) == ZED;
-            result &= regress(x,1) == ZED;
-            result &= regress(x,2) == ZED;
-            result &= regress(x,3) == ZED;
-            result &= regress(x,4) == ZED;
-            result &= regress(x,5) == ZED;
-            result &= regress(x,6) == ZED;
+            result &= sub(x,0) == ZED;
+            result &= sub(x,1) == ZED;
+            result &= sub(x,2) == ZED;
+            result &= sub(x,3) == ZED;
+            result &= sub(x,4) == ZED;
+            result &= sub(x,5) == ZED;
+            result &= sub(x,6) == ZED;
             return result;
         }
+
+        static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<LocatedMethod>(count);
+            ref var located = ref first(span(buffer));
+            for(var i=0u; i<count; i++)
+                seek(located, i) = ApiJit.jit(skip(src, i));
+            Array.Sort(buffer);
+            return buffer;
+        }
+
     }
 }

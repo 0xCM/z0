@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct RelativeAddress<BW,RW,B,R>
         where BW: unmanaged, INumericWidth
@@ -29,7 +30,7 @@ namespace Z0
         public MemoryAddress Absolute
         {
             [MethodImpl(Inline)]
-            get => NumericCast.force<ulong>(Base) + NumericCast.force<ulong>(Offset);
+            get => uint64(Base) + uint64(Offset);
         }
 
         NumericWidth BaseWidth

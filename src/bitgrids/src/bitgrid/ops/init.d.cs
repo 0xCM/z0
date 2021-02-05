@@ -55,7 +55,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitGrid16<M,N,T>(broadcast<T,ushort>(d));
+                => new BitGrid16<M,N,T>(gcpu.broadcast<T,ushort>(d));
 
         /// <summary>
         /// Initializes a 32-bit grid of natural dimensions

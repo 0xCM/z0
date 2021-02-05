@@ -39,7 +39,7 @@ namespace Z0
 
             var parser = Numeric.parser<int>();
             var seq = parser.Parse(fields[0]).ValueOrDefault();
-            var address = z.address(HexParsers.scalar().Parse(fields[1]).ValueOrDefault());
+            var address = memory.address(HexParsers.scalar().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();
             var uri = ApiUri.parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];

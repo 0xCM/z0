@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan32 or(in BitSpan32 x, in BitSpan32 y)
-            => or(x,y, alloc32(y.Length));
+            => or(x, y, alloc32(y.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 xor(in BitSpan32 x, in BitSpan32 y, in BitSpan32 z)
@@ -54,7 +54,7 @@ namespace Z0
         public static ref readonly BitSpan32 not(in BitSpan32 x, in BitSpan32 z)
         {
             var bitcount = z.Length;
-            for(var i=0; i< bitcount; i++)
+            for(var i=0; i<bitcount; i++)
                 z[i] = ~ x[i];
             return ref z;
         }

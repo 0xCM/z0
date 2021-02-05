@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-    using static SFx;
+    using static Part;
 
     partial class VServices
     {
@@ -19,7 +17,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke()
-                => gvec.vones<T>(w128);
+                => gcpu.vones<T>(w128);
         }
 
         public readonly struct Ones256<T> : SFx.IEmitter256<T>
@@ -27,7 +25,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke()
-                => gvec.vones<T>(w256);
+                => gcpu.vones<T>(w256);
         }
     }
 }

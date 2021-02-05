@@ -10,13 +10,12 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
         public static BinaryRes binary(PartId owner, string id, ReadOnlySpan<byte> src)
-            => new BinaryRes(owner, id, src.Length, address(src));
+            => new BinaryRes(owner, id, src.Length, memory.address(src));
 
         [MethodImpl(Inline), Op]
         public static BinaryRes binary(PartId owner, string id, ByteSize size, MemoryAddress address)

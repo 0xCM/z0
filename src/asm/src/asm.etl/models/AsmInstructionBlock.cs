@@ -11,7 +11,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines an *unbased* sequence of instructions

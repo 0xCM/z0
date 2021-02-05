@@ -68,12 +68,12 @@ namespace Z0
                 var y = cpu.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());
-                Trace("valignr/3",gvec.valignr(x,y, 3).Format());
-                Trace("valignr/4",gvec.valignr(x,y, 4).Format());
-                Trace("valignr/5",gvec.valignr(x,y, 5).Format());
-                Trace("valignr/6",gvec.valignr(x,y, 6).Format());
-                Trace("valignr/7",gvec.valignr(x,y, 7).Format());
-                Trace("valignr/8",gvec.valignr(x,y, 8).Format());
+                Trace("valignr/3", gcpu.valignr(x,y, 3).Format());
+                Trace("valignr/4", gcpu.valignr(x,y, 4).Format());
+                Trace("valignr/5", gcpu.valignr(x,y, 5).Format());
+                Trace("valignr/6", gcpu.valignr(x,y, 6).Format());
+                Trace("valignr/7", gcpu.valignr(x,y, 7).Format());
+                Trace("valignr/8", gcpu.valignr(x,y, 8).Format());
             }
 
             void example2()
@@ -83,12 +83,12 @@ namespace Z0
                 var y = cpu.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.FormatLanes());
                 Trace($"y{n}", y.FormatLanes());
-                Trace("valignr/3", gvec.valignr(x,y, 3).FormatLanes());
-                Trace("valignr/4", gvec.valignr(x,y, 4).FormatLanes());
-                Trace("valignr/5", gvec.valignr(x,y, 5).FormatLanes());
-                Trace("valignr/6", gvec.valignr(x,y, 6).FormatLanes());
-                Trace("valignr/7", gvec.valignr(x,y, 7).FormatLanes());
-                Trace("valignr/8", gvec.valignr(x,y, 8).FormatLanes());
+                Trace("valignr/3", gcpu.valignr(x,y, 3).FormatLanes());
+                Trace("valignr/4", gcpu.valignr(x,y, 4).FormatLanes());
+                Trace("valignr/5", gcpu.valignr(x,y, 5).FormatLanes());
+                Trace("valignr/6", gcpu.valignr(x,y, 6).FormatLanes());
+                Trace("valignr/7", gcpu.valignr(x,y, 7).FormatLanes());
+                Trace("valignr/8", gcpu.valignr(x,y, 8).FormatLanes());
             }
         }
 

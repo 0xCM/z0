@@ -62,8 +62,8 @@ namespace Z0
             where T : unmanaged
         {
             var a0 = gvec.vxor(a,b);
-            var b0 = gvec.vand(a0,cin);
-            var c0 = gvec.vand(a,b);
+            var b0 = gcpu.vand(a0,cin);
+            var c0 = gcpu.vand(a,b);
             sum = gvec.vxor(a0, cin);
             cout = gcpu.vor(b0, c0);
         }
@@ -81,8 +81,8 @@ namespace Z0
             where T : unmanaged
         {
             var a0 = gvec.vxor(a,b);
-            var b0 = gvec.vand(a0,cin);
-            var c0 = gvec.vand(a,b);
+            var b0 = gcpu.vand(a0,cin);
+            var c0 = gcpu.vand(a,b);
             sum = gvec.vxor(a0, cin);
             cout = gcpu.vor(b0, c0);
         }

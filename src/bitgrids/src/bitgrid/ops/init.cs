@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<T> init<T>(N16 w, T data)
             where T : unmanaged
-                => new BitGrid16<T>(broadcast<T,ushort>(data));
+                => new BitGrid16<T>(gcpu.broadcast<T,ushort>(data));
 
         /// <summary>
         /// Creates a 32-bit generic grid initialized with a specified fill-value
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<T> init<T>(N32 w, T data)
             where T : unmanaged
-                => new BitGrid32<T>(broadcast<T,uint>(data));
+                => new BitGrid32<T>(gcpu.broadcast<T,uint>(data));
 
         /// <summary>
         /// Creates a 64-bit generic grid initialized with a specified fill-value
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline), Init, Closures(Closure)]
         public static BitGrid64<T> init<T>(N64 w, T data)
             where T : unmanaged
-                => new BitGrid64<T>(broadcast<T,ulong>(data));
+                => new BitGrid64<T>(gcpu.broadcast<T,ulong>(data));
 
         /// <summary>
         /// Creates a populated 1x16 grid

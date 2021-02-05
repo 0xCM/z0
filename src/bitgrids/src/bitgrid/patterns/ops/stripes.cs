@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class GridPatterns
     {
@@ -17,6 +16,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => z.vbroadcast(w, BitMasks.lsb(n64, n2, n1, t));
+                => gcpu.vbroadcast(w, BitMasks.lsb(n64, n2, n1, t));
     }
 }

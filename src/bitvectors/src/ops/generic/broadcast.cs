@@ -15,6 +15,6 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => z.vbroadcast(w,a);
+                => gcpu.vbroadcast(w,a);
     }
 }

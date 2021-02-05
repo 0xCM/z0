@@ -25,7 +25,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => broadcast<T,uint>(cell);
+                => gcpu.broadcast<T,uint>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -40,7 +40,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => broadcast<T,ulong>(cell);
+                => gcpu.broadcast<T,ulong>(cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -55,7 +55,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => vbroadcast(n128,cell);
+                => gcpu.vbroadcast(n128,cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -70,7 +70,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => vbroadcast(n256,cell);
+                => gcpu.vbroadcast(n256,cell);
 
         /// <summary>
         /// Fills a caller-allocated natural grid

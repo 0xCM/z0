@@ -48,5 +48,11 @@ namespace Z0
 
         public static implicit operator ApiInstructionBlock(ApiInstruction[] src)
             => new ApiInstructionBlock(src);
+
+        public static ApiInstructionBlock Empty
+        {
+            [MethodImpl(Inline)]
+            get => sys.empty<ApiInstruction>();
+        }
     }
 }

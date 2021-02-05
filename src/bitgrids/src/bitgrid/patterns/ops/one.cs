@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static gvec;
+    using static Part;
     using static BitGrid;
 
     partial class GridPatterns
@@ -58,9 +56,9 @@ namespace Z0
         public static BitGrid256<N16,N16,T> one<T>(N256 w, N16 m, N16 n, T t = default)
             where T : unmanaged
         {
-            var x = gcpu.vmakemask<T>(BitMasks.lsb(n2,n1,Konst.z32),0);
+            var x = gcpu.vmask256<T>(BitMasks.lsb(n2, n1, z32),0);
             var offsets = gcpu.vinc<T>(w);
-            var pattern = vsllv(x,offsets);
+            var pattern = gcpu.vsllv(x,offsets);
             return pattern;
         }
     }

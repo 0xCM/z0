@@ -21,7 +21,7 @@ namespace Z0
             var src = cpu.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {
-                dst.Cell(i) = (byte)cpu.vtakemask(v8u(src));
+                dst.Cell(i) = (byte)cpu.vmask16u(v8u(src));
                 src = cpu.vsll(src,1);
             }
             return dst.As<T>();
@@ -70,7 +70,7 @@ namespace Z0
             const uint E = BitMasks.Literals.Even32;
             const uint O = BitMasks.Literals.Odd32;
 
-            var mask = gcpu.vtakemask(src, (byte)i);
+            var mask = gcpu.vmask32u(src, (byte)i);
             var gT = gcell(g0, i, force<T>(BitMasks.gather(mask, E)));
             gT = gcell(gT, j, force<T>(BitMasks.gather(mask, O)));
             return gT;

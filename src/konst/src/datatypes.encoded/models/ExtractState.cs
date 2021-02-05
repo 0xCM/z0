@@ -45,7 +45,7 @@ namespace Z0
         public ExtractState(uint index, long location, byte captured, ExtractTermCode term = default)
         {
             Index = index - 1u;
-            Address = z.address((ulong)location - 1ul);
+            Address = memory.address((ulong)location - 1ul);
             Captured = captured;
             TermCode = term;
         }

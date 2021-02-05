@@ -57,7 +57,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                dst[i] = gvec.vand(a[i],b[i]);
+                dst[i] = gcpu.vand(a[i],b[i]);
             return ref dst;
         }
 
@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(a,b);
+                => gcpu.vand<T>(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between fixed-width natural bitgrids
@@ -124,7 +124,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vand<T>(a,b);
+                => gcpu.vand<T>(a,b);
 
         /// <summary>
         /// Computes the bitwise AND between natural bitgrids and stores the result to a caller-supplied target
@@ -141,7 +141,7 @@ namespace Z0
         {
             var blocks = dst.BlockCount;
             for(var i=0; i<blocks; i++)
-                dst[i] = gvec.vand(a[i],b[i]);
+                dst[i] = gcpu.vand(a[i],b[i]);
             return ref dst;
         }
     }

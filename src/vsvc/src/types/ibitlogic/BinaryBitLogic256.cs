@@ -20,7 +20,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> and(Vector256<T> a, Vector256<T> b)
-                => gvec.vand(a,b);
+                => gcpu.vand(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> or(Vector256<T> a, Vector256<T> b)
@@ -72,7 +72,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> @true()
-                => gvec.vones<T>(n256);
+                => gcpu.vones<T>(n256);
 
             [MethodImpl(Inline)]
             public Vector256<T> xnor(Vector256<T> a, Vector256<T> b)

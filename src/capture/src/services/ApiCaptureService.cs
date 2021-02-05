@@ -94,11 +94,6 @@ namespace Z0
                 Capture(skip(src, i));
         }
 
-        void CaptureTypes(ReadOnlySpan<ApiHost> src)
-        {
-
-        }
-
         void CaptureTypes(Index<ApiRuntimeType> src)
         {
             var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());

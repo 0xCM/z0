@@ -24,7 +24,6 @@ namespace Z0
             where T : unmanaged
                 => generic<T>(cpu.vscalar(w128, gcpu.vcell(v64u(src),1)));
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vhi<T>(Vector256<T> src)
             where T : unmanaged

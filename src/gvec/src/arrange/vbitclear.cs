@@ -25,7 +25,7 @@ namespace Z0
         {
             var cellmask = gbits.eraser<T>(start,count);
             var vmask = gcpu.vbroadcast(w128, cellmask);
-            return vand(vmask,src);
+            return gcpu.vand(vmask,src);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
             var n = n256;
             var cellmask = gbits.eraser<T>(start,count);
             var vmask = gcpu.vbroadcast(w256, cellmask);
-            return vand(vmask,src);
+            return gcpu.vand(vmask,src);
         }
     }
 }

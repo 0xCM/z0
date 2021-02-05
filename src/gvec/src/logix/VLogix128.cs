@@ -206,7 +206,7 @@ namespace Z0
         {
             switch(kind)
             {
-                case BAR.Add: return gvec.vadd(x,y);
+                case BAR.Add: return gcpu.vadd(x,y);
                 case BAR.Sub: return gvec.vsub(x,y);
                 default: throw Unsupported.value(sig<T>(kind));
             }
@@ -227,7 +227,7 @@ namespace Z0
             {
                 case BLK.True: return gvec.vtrue(a,b);
                 case BLK.False: return gvec.vfalse(a,b);
-                case BLK.And: return gvec.vand(a,b);
+                case BLK.And: return gcpu.vand(a,b);
                 case BLK.Nand: return gvec.vnand(a,b);
                 case BLK.Or: return gcpu.vor(a,b);
                 case BLK.Nor: return gvec.vnor(a,b);
@@ -258,7 +258,7 @@ namespace Z0
             {
                 case BLK.True: return gvec.vtrue;
                 case BLK.False: return gvec.vfalse;
-                case BLK.And: return gvec.vand;
+                case BLK.And: return gcpu.vand;
                 case BLK.Nand: return gvec.vnand;
                 case BLK.Or: return gcpu.vor;
                 case BLK.Nor: return gvec.vnor;
@@ -340,7 +340,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f02<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(c, gvec.vnor(b,a));
+                => gcpu.vand(c, gvec.vnor(b,a));
 
          // b nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -352,7 +352,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f04<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(b, gvec.vnor(a,c));
+                => gcpu.vand(b, gvec.vnor(a,c));
 
         // c nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -364,19 +364,19 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f06<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gvec.vxor(b,c));
+                => gcpu.vand(gcpu.vnot(a), gvec.vxor(b,c));
 
         // not a and (b xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f07<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vnor(a, gvec.vand(b,c));
+                => gvec.vnor(a, gcpu.vand(b,c));
 
         // (not a and b) and c
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f08<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gvec.vand(gcpu.vnot(a),b), c);
+                => gcpu.vand(gcpu.vand(gcpu.vnot(a),b), c);
 
         // a nor (b xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -388,31 +388,31 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f0a<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(c, gcpu.vnot(a));
+                => gcpu.vand(c, gcpu.vnot(a));
 
         // not a and ((b xor 1) or c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f0b<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gcpu.vor(gcpu.vnot(b),  c));
+                => gcpu.vand(gcpu.vnot(a), gcpu.vor(gcpu.vnot(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f0c<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(b, gcpu.vnot(a));
+                => gcpu.vand(b, gcpu.vnot(a));
 
         // not a and (b or (c xor 1))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f0d<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gcpu.vor(b, gcpu.vnot(c)));
+                => gcpu.vand(gcpu.vnot(a), gcpu.vor(b, gcpu.vnot(c)));
 
         // not a and (b or c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f0e<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(a), gcpu.vor(b,c));
+                => gcpu.vand(gcpu.vnot(a), gcpu.vor(b,c));
 
         // not a
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -424,7 +424,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f10<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(a, gvec.vnor(b, c));
+                => gcpu.vand(a, gvec.vnor(b, c));
 
         // c nor b
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -436,25 +436,25 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f12<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(b), gvec.vxor(a,c));
+                => gcpu.vand(gcpu.vnot(b), gvec.vxor(a,c));
 
         // b nor (a and c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f13<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vnor(b, gvec.vand(a,c));
+                => gvec.vnor(b, gcpu.vand(a,c));
 
         // not c and (a xor b)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f14<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gcpu.vnot(c), gvec.vxor(a,b));
+                => gcpu.vand(gcpu.vnot(c), gvec.vxor(a,b));
 
         // c nor (b and a)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f15<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vnor(c, gvec.vand(a,b));
+                => gvec.vnor(c, gcpu.vand(a,b));
 
         // a ? (b nor c) : (b xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -466,25 +466,25 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f17<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gcpu.vnot(gvec.vselect(a, gcpu.vor(b,c), gvec.vand(b,c)));
+                => gcpu.vnot(gvec.vselect(a, gcpu.vor(b,c), gcpu.vand(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f18<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vand(gvec.vxor(a,b), gvec.vxor(a,c));
+                => gcpu.vand(gvec.vxor(a,b), gvec.vxor(a,c));
 
         // ((b xor c) xor (a and (b and c))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f19<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gvec.vxor(gvec.vxor(b,c), gvec.vand(a, gvec.vand(b,c)));
+                => gvec.vxor(gvec.vxor(b,c), gcpu.vand(a, gcpu.vand(b,c)));
 
         // not ((a and b)) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> f1a<T>(Vector128<T> a, Vector128<T> b, Vector128<T> c)
             where T : unmanaged
-                => gcpu.vnot(gvec.vand(gvec.vand(a,b), gvec.vxor(a, c)));
+                => gcpu.vnot(gcpu.vand(gcpu.vand(a,b), gvec.vxor(a, c)));
 
         // c ? not a : not b
         [MethodImpl(Inline), Op, Closures(Integers)]

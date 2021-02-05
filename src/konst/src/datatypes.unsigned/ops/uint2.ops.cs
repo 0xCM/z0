@@ -132,7 +132,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)
-            => !x.IsMax ? new U(z.add(x.data, 1), false) : U.Min;
+            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
 
         /// <summary>
         /// Converts a source integral value to an enum value

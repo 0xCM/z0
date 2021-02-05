@@ -146,7 +146,7 @@ namespace Z0
             where T : unmanaged
         {
             for(var i=0u; i<a.BlockCount; i++)
-                gcpu.vstore(gvec.vand<T>(a.LoadVector(i), b.LoadVector(i)), ref dst.BlockRef(i));
+                gcpu.vstore(gcpu.vand<T>(a.LoadVector(i), b.LoadVector(i)), ref dst.BlockRef(i));
             return dst;
         }
 

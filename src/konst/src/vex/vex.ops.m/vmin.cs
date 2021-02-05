@@ -164,5 +164,41 @@ namespace Z0
         [MethodImpl(Inline), Min]
         public static Vector256<long> vmin(Vector256<long> x, Vector256<long> y)
             => vblendv(y, x, v8u(vlt(x,y)));
+
+        /// <summary>
+        /// __m128 _mm_min_ps (__m128 a, __m128 b) MINPS xmm, xmm/m128
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vmin(Vector128<float> x, Vector128<float> y)
+            => Min(x, y);
+
+        /// <summary>
+        /// __m128d _mm_min_pd (__m128d a, __m128d b) MINPD xmm, xmm/m128
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vmin(Vector128<double> x, Vector128<double> y)
+            => Min(x, y);
+
+        /// <summary>
+        /// __m256 _mm256_min_ps (__m256 a, __m256 b) VMINPS ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<float> vmin(Vector256<float> x, Vector256<float> y)
+            => Min(x, y);
+
+        /// <summary>
+        /// __m256d _mm256_min_pd (__m256d a, __m256d b) VMINPD ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x">The left vector</param>
+        /// <param name="y">The right vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vmin(Vector256<double> x, Vector256<double> y)
+            => Min(x, y);
     }
 }

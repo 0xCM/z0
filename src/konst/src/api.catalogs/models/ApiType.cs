@@ -18,48 +18,11 @@ namespace Z0
 
         public ApiTypeCharacter Character {get;}
 
-    }
-
-    public readonly struct ApiTypeCharacter
-    {
-        readonly ulong Data;
-
-        public bool Primitive => default;
-
-        public bool FixedWidth => default;
-
-        public bool SystemDefined => default;
-
-        public bool UserDefined => default;
-
-        public bool Class => default;
-
-        public bool Delegate => default;
-
-        public bool Struct => default;
-
-        public bool Interface => default;
-
-        public bool Event => default;
-
-        public bool Enum => default;
-
-        public bool CpuVector => default;
-
-        public bool Index => default;
-
-        public bool Tuple => default;
-
-        public bool NonGeneric => default;
-
-        public bool OpenGeneric => default;
-
-        public bool ClosedGeneric => default;
-
-        public bool Abstract => default;
-
-        public bool Unmanaged => default;
-
-        public uint5 GenericArity => default;
+        [MethodImpl(Inline)]
+        public ApiType(Identifier name, ApiTypeCharacter c)
+        {
+            Name = name;
+            Character = c;
+        }
     }
 }

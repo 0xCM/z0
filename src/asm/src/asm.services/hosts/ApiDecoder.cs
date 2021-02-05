@@ -45,7 +45,7 @@ namespace Z0.Asm
                         {
                             Wf.Status($"Decoding {members.Count} {host} members");
 
-                            var fx = DecodeBlocks(members);
+                            var fx = DecodeRoutines(members);
                             hostFx.Add(fx);
                             stats.HostCount++;
                             stats.MemberCount += fx.RoutineCount;
@@ -67,7 +67,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public ApiHostRoutines DecodeBlocks(ApiHostCode src)
+        public ApiHostRoutines DecodeRoutines(ApiHostCode src)
         {
             var instructions = list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Zero;
