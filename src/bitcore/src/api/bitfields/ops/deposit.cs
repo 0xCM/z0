@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial class BitFields
+    readonly partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T deposit<T>(in BitFieldSegment seg, in T src, ref T dst)
@@ -60,17 +60,6 @@ namespace Z0
             var len = spec.Segments.Length;
             for(var i=0u; i<len; i++)
                 seek(dst,i) = extract(skip(spec.Segments,i), src);
-        }
-
-        [MethodImpl(Inline)]
-        public static void deposit<E,W,T>(in BitField64<E,W> field, T src, Span<T> dst)
-            where E : unmanaged, Enum
-            where W : unmanaged, Enum
-            where T : unmanaged
-        {
-            var len = field.Spec.Segments.Length;
-            for(var i=0u; i<len; i++)
-                seek(dst,i) = extract(skip(field.Spec.Segments,i), src);
         }
 
         [MethodImpl(Inline)]

@@ -10,6 +10,14 @@ namespace Z0
     using static Part;
     using static z;
 
+    public readonly struct BitBrokers
+    {
+        [MethodImpl(Inline)]
+        public static BitBroker<K,T> broker64<K,T>(K kind = default, T rep = default)
+            where K : unmanaged, Enum
+                => new BitBroker<K,T>(kind);
+    }
+
     /// <summary>
     /// Mediates parametric data exchange for up to 64 enumeration-predicated classifiers
     /// </summary>
@@ -18,7 +26,7 @@ namespace Z0
     {
         readonly DataHandler<T>[] _Handlers;
 
-        readonly BitField64<K> Bits;
+        readonly K Bits;
 
         Span<DataHandler<T>> Handlers
         {
@@ -38,7 +46,7 @@ namespace Z0
         public BitBroker(K kind, DataHandler<T>[] handlers)
             : this(handlers)
         {
-            Bits = BitFields.bf64(kind);
+            Bits = kind;
         }
 
         [MethodImpl(Inline)]
@@ -48,22 +56,18 @@ namespace Z0
 
         }
 
-        // [MethodImpl(Inline)]
-        // public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
-        // {
-        //     ref var dst = ref seek(Handlers, Bits.Index(kind));
-        //     dst = handler;
-        //     return ref dst;
-        // }
+        [MethodImpl(Inline)]
+        static byte Index(K src)
+            => (byte)Pow2.log2(uint64(src));
 
         [MethodImpl(Inline)]
         public ref readonly DataHandler<T> Get(K kind)
-            => ref skip(Handlers, Bits.Index(kind));
+            => ref skip(Handlers, Index(kind));
 
         public ref DataHandler<T> this[K kind]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Handlers, Bits.Index(kind));
+            get => ref seek(Handlers, Index(kind));
         }
 
         [MethodImpl(Inline)]

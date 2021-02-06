@@ -9,14 +9,15 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
+    using static memory;
 
     public struct BitField256<E,T>
         where E : unmanaged
         where T : unmanaged
     {
-        internal Vector256<T> State;
+        public Vector256<T> State;
 
-        internal readonly BitFieldSpec256<E> Spec;
+        public readonly BitFieldSpec256<E> Spec;
 
         [MethodImpl(Inline)]
         public BitField256(BitFieldSpec256<E> spec, Vector256<T> state)
@@ -35,7 +36,24 @@ namespace Z0
         public T this[E index]
         {
             [MethodImpl(Inline)]
-            get => BitFields.read(this, index);
+            get => Read(index);
+        }
+
+        [MethodImpl(Inline)]
+        public T Mask(E index)
+            => BitMasks.lo<T>(Spec[index]);
+
+        [MethodImpl(Inline)]
+        public T Read(E index)
+            => gmath.and(cpu.vcell(State, @as<E,byte>(index)), Mask(index));
+
+        [MethodImpl(Inline)]
+        public void Write(T src, E index)
+        {
+            var mask = Mask(index);
+            var conformed = gmath.and(src,mask);
+            var i  = EnumValue.scalar<E,byte>(index);
+            State = gcpu.vset(conformed, i, State);
         }
     }
 }

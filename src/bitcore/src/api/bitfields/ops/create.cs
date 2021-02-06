@@ -6,36 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    partial class BitFields
+    partial struct BitFields
     {
-        [MethodImpl(Inline), Op]
-        public static BitField32 create(W32 w, byte[] data)
-            => new BitField32(data);
-
-        [MethodImpl(Inline), Op]
-        public static BitField32 create(W32 w)
-            => new BitField32(sys.alloc<uint1>(32));
-
         [MethodImpl(Inline)]
-        public static BitField32<E> create<E>(W32 w, E e = default)
+        public static BitField64<E> bf64<E>(E state)
             where E : unmanaged
-                => new BitField32<E>(create(w));
-
-        [MethodImpl(Inline)]
-        public static BitField32<E> create<E>(W32 w, byte[] data, E e = default)
-            where E : unmanaged
-                => new BitField32<E>(create(w, data));
-
-        [MethodImpl(Inline)]
-        public static BitField256<F,T> create<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
-            where F : unmanaged, Enum
-            where T : unmanaged
-                => new BitField256<F,T>(spec, state);
+                => new BitField64<E>(state);
 
         /// <summary>
         /// Creates a stateful bitfield api surface
@@ -61,6 +40,7 @@ namespace Z0
             where W : unmanaged, Enum
                 => new BitField<E,T>(BitFieldModels.specify<E,T,W>());
 
+
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
         /// </summary>
@@ -74,6 +54,24 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
                 => new BitField<S,E,T>(spec);
+
+
+        /// <summary>
+        /// Creates a stateful numeric bitfield api surface
+        /// </summary>
+        /// <param name="spec">The bitfield definition</param>
+        /// <typeparam name="S">The type over which the bitfield is defined</typeparam>
+        /// <typeparam name="E">A index-defining enumeration</typeparam>
+        /// <typeparam name="T">The numeric type</typeparam>
+        /// <typeparam name="W">A width-defining enumeration</typeparam>
+        [MethodImpl(Inline)]
+        public static BitField<S,E,T> create<S,E,T,W>()
+            where S : IScalarBitField<T>
+            where E : unmanaged, Enum
+            where W : unmanaged, Enum
+            where T : unmanaged
+                => new BitField<S,E,T>(BitFieldModels.specify<E,T,W>());
+
 
         internal static FixedBits<T> fixedalloc<T>(uint bitcount)
             where T : unmanaged
@@ -96,21 +94,5 @@ namespace Z0
             var spec = new BitFieldSpec<E,W>(BitFieldModels.specify<E,T,W>(), bitcount);
             return new FixedBits<E,T,W>(data, spec);
         }
-
-        /// <summary>
-        /// Creates a stateful numeric bitfield api surface
-        /// </summary>
-        /// <param name="spec">The bitfield definition</param>
-        /// <typeparam name="S">The type over which the bitfield is defined</typeparam>
-        /// <typeparam name="E">A index-defining enumeration</typeparam>
-        /// <typeparam name="T">The numeric type</typeparam>
-        /// <typeparam name="W">A width-defining enumeration</typeparam>
-        [MethodImpl(Inline)]
-        public static BitField<S,E,T> create<S,E,T,W>()
-            where S : IScalarBitField<T>
-            where E : unmanaged, Enum
-            where W : unmanaged, Enum
-            where T : unmanaged
-                => new BitField<S,E,T>(BitFieldModels.specify<E,T,W>());
     }
 }

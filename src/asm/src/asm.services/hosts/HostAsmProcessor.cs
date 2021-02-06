@@ -24,7 +24,7 @@ namespace Z0
         public HostAsmProcessor(IWfShell context, ApiHostRoutines src)
         {
             Wf = context;
-            Broker = BitFields.broker64<AsmHandlerKind,ApiHostRoutines>();
+            Broker = BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>();
             Source = src;
             (this as IWfDataProcessor).Connect();
         }

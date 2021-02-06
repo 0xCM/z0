@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using api = BitFields;
 
@@ -30,7 +30,7 @@ namespace Z0
         readonly ReadOnlySpan<BitFieldSegment> Segments;
 
         [MethodImpl(Inline)]
-        internal BitField(in BitFieldSpec spec)
+        public BitField(in BitFieldSpec spec)
         {
             Spec = spec;
             Segments = spec.Segments;
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
         public ref readonly BitFieldSegment Segment(E index)
-            => ref skip(Segments, z.@as<E,uint>(index));
+            => ref skip(Segments, @as<E,uint>(index));
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the segment specification

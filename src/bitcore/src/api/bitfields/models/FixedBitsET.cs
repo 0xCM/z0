@@ -19,7 +19,7 @@ namespace Z0
         readonly BitFieldSpec<E,W> Spec;
 
         [MethodImpl(Inline)]
-        internal FixedBits(FixedBits<T> data, BitFieldSpec<E,W> spec)
+        public FixedBits(FixedBits<T> data, BitFieldSpec<E,W> spec)
         {
             Data = data;
             Spec = spec;

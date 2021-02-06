@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class BitFields
+    partial struct BitFields
     {
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
@@ -64,6 +64,5 @@ namespace Z0
             var data = EnumValue.scalar<E,T>(src);
             return text.concat(name, Chars.Colon, Hex.formatter<T>().FormatItem(data));
         }
-
     }
 }

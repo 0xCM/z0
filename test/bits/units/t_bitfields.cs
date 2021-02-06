@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq((byte)2, spec[2].Width);
             Claim.eq((byte)2, spec[3].Width);
 
-            var bf = BitFields.create<byte>(spec);
+            var bf = new BitField<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
@@ -78,6 +78,7 @@ namespace Z0
             BFB_3 = 3,
         }
 
+
         public void bitfield_b()
         {
             var spec = BitFieldModels.specify(
@@ -86,7 +87,7 @@ namespace Z0
                 BitFieldModels.segment(BFB_I.BFB_2, 8, 9),
                 BitFieldModels.segment(BFB_I.BFB_3, 10, 15)
                 );
-            var dst = z.alloc<ushort>(spec.FieldCount);
+            var dst = memory.alloc<ushort>(spec.FieldCount);
             var bf = BitFields.create<ushort>(spec);
 
             Claim.eq((byte)4,spec.FieldCount);

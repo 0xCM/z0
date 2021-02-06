@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class BitFields
+    readonly partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public T extract<T>(in BitField<T> field, in BitFieldSegment seg, T src)
@@ -63,5 +63,6 @@ namespace Z0
             where S : IScalarBitField<T>
             where T : unmanaged
                 => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);
+
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly ref struct FixedBits<T>
         where T : unmanaged
@@ -29,7 +29,7 @@ namespace Z0
             get => Data.Bytes;
         }
 
-        internal FixedBits(SpanBlock64<T> src, uint bitcount)
+        public FixedBits(SpanBlock64<T> src, uint bitcount)
         {
             Data = src;
             BitCount = bitcount;
