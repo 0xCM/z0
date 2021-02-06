@@ -40,5 +40,23 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static ulong mul(ulong a, ulong b)
             => a * b;
+
+        /// <summary>
+        /// Computes the arithmetic product of the operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mul]
+        public static float mul(float a, float b)
+            => a * b;
+
+        /// <summary>
+        /// Computes the arithmetic product of the operands
+        /// </summary>
+        /// <param name="a">The first operand</param>
+        /// <param name="b">The second operand</param>
+        [MethodImpl(Inline), Mul]
+        public static double mul(double a, double b)
+            => a * b;
     }
 }

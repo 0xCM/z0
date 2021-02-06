@@ -142,7 +142,7 @@ namespace Z0
                 var sample = stream.TakeArray(segment);
                 sw.Stop();
                 for(var j=0; j< segment; j++)
-                    stats.Collect(force<T,double>(sample[j]));
+                    stats.Collect(Numeric.force<T,double>(sample[j]));
             }
 
             var opname = $"{caller}<{typeof(T).DisplayName()}>";

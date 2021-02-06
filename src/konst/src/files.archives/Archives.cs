@@ -20,29 +20,29 @@ namespace Z0
         public static IApiHexReader hexreader<H>(H rep = default)
             where H : struct, IArchiveReader
         {
-            if(typeof(H) == typeof(ApiHexReader))
-                return new ApiHexReader();
+            if(typeof(H) == typeof(ApiExtractReader))
+                return new ApiExtractReader();
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline)]
-        public static ApiHexWriter hexwriter<H>(FS.FilePath dst, H rep = default)
+        public static ApiExtractWriter hexwriter<H>(FS.FilePath dst, H rep = default)
             where H : struct, IArchiveWriter<H>
         {
-            if(typeof(H) == typeof(ApiHexWriter))
-                return new ApiHexWriter(dst);
+            if(typeof(H) == typeof(ApiExtractWriter))
+                return new ApiExtractWriter(dst);
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(IWfShell wf)
-            => new ApiHexArchive(wf.Db().CapturedHexDir());
+        public static ApiExtractArchive extract(IWfShell wf)
+            => new ApiExtractArchive(wf);
 
         [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(FS.FolderPath root)
-            => new ApiHexArchive(root);
+        public static ApiExtractArchive extract(IWfShell wf, FS.FolderPath root)
+            => new ApiExtractArchive(wf, root);
 
         /// <summary>
         /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path

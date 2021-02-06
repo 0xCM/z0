@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<T> counted<T>(Interval<T> src, int count)
             where T : unmanaged
-                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), force<T>(count - 1)));
+                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), Numeric.force<T>(count - 1)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition count
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<Interval<T>> counted<S,T>(Interval<T> src, int count)
             where T : unmanaged
-                => width(src,gmath.div(gmath.sub(src.Right, src.Left), force<T>(count)));
+                => width(src,gmath.div(gmath.sub(src.Right, src.Left), Numeric.force<T>(count)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition width

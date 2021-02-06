@@ -26,7 +26,7 @@ namespace Z0
         public static GfPoly<N,T> Zero => default;
 
         public static implicit operator T(GfPoly<N,T> src)
-            => force<T>(src.Data);
+            => Numeric.force<T>(src.Data);
 
         public GfPoly(params byte[] exponents)
         {
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GfPoly(T src)
         {
-            Data = force<T,ulong>(src);;
+            Data = Numeric.force<T,ulong>(src);;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public T Scalar
         {
             [MethodImpl(Inline)]
-            get => force<T>(Data);
+            get => Numeric.force<T>(Data);
         }
 
         /// <summary>

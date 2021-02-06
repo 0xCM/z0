@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
     public class t_collector : t_gmath<t_collector>
     {
@@ -15,7 +14,7 @@ namespace Z0
         public static uint avg(uint a, uint b)
         {
             var sum = a + b;
-            var carry = z.@uint(math.lt(sum,  a));
+            var carry = u32(math.lt(sum,  a));
             var result = (sum >> 1) | (carry << 31);
             return result;
         }
@@ -23,7 +22,7 @@ namespace Z0
         public static ulong avg(ulong a, ulong b)
         {
             var sum = a + b;
-            var carry = z.@ulong(math.lt(sum,  a));
+            var carry = u64(math.lt(sum,  a));
             var result = (sum >> 1) | (carry << 63);
             return result;
         }

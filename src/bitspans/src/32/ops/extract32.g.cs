@@ -46,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(SB.extract32(src, n8, offset));
+                return Numeric.force<T>(SB.extract32(src, n8, offset));
             else if(typeof(T) == typeof(short))
-                return force<T>(SB.extract32(src, n16, offset));
+                return Numeric.force<T>(SB.extract32(src, n16, offset));
             else if(typeof(T) == typeof(int))
-                return force<T>(SB.extract32(src, n32, offset));
+                return Numeric.force<T>(SB.extract32(src, n32, offset));
             else if(typeof(T) == typeof(long))
-                return force<T>(SB.extract32(src, n64, offset));
+                return Numeric.force<T>(SB.extract32(src, n64, offset));
             else
                 throw no<T>();
         }

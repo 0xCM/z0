@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static SFx;
     using static CheckNumeric;
 
@@ -68,10 +68,8 @@ namespace Z0
             var succeeded = true;
             var count = context.RepCount;
             var clock = Time.counter(false);
-
             var lhs = (nonz ? context.Random.NonZeroSpan<T>(count) : context.Random.Span<T>(count)).ReadOnly();
             ref readonly var leftIn = ref first(lhs);
-
             var dst = span<R>(count);
             ref var target = ref first(dst);
 

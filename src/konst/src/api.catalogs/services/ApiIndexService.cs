@@ -46,9 +46,9 @@ namespace Z0
             {
                 ref readonly var path = ref skip(parsed,i);
                 var result = ApiHexRows.load(path);
-                if(result)
+                if(result.Count != 0)
                 {
-                    var blocks = result.Value;
+                    var blocks = result.View;
                     Include(blocks);
                     Wf.Status(Msg.AbsorbedCodeBlocks.Format(blocks.Length, path));
                 }

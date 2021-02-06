@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static TypeNats;
-    using static z;
+    using static Part;
+    using static memory;
 
     public static class PolyNats
     {
@@ -79,7 +78,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)z.nat64u(n), Interval<T>.Full);
+                => create<T>(src, (int)nat64u(n), Interval<T>.Full);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -90,7 +89,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)z.nat64u(n), (min, max));
+                => create<T>(src, (int)nat64u(n), (min, max));
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -101,7 +100,6 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)z.nat64u(n), domain);
-
+                => create<T>(src, (int)nat64u(n), domain);
     }
 }

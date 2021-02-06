@@ -17,9 +17,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.add(float32(a), float32(b)));
+                return generic<T>(math.add(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.add(float64(a), float64(b)));
+                return generic<T>(math.add(float64(a), float64(b)));
             else
                 throw no<T>();
         }

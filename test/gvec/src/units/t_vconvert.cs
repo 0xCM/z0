@@ -131,7 +131,7 @@ namespace Z0
                 for(var j = 0; j < tb.BlockLength; j++, i++)
                 {
                     var m  = tb[block,j];
-                    var x = z.force<byte>(m);
+                    var x = Numeric.force<byte>(m);
                     Claim.eq(sb[i], x);
                 }
             }

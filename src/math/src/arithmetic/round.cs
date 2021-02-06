@@ -7,13 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    partial struct z
+    partial class math
     {
-        [MethodImpl(Inline)]
-        public static unsafe uint @uint(bool src)
-            => memory.u32(src);
+        [MethodImpl(Inline), Round]
+        public static float round(float src, int scale)
+            => MathF.Round(src, scale);
 
+        [MethodImpl(Inline), Round]
+        public static double round(double src, int scale)
+            => Math.Round(src, scale);
     }
 }

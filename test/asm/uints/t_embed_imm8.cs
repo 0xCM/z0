@@ -10,7 +10,6 @@ namespace Z0.Asm
     using System.Linq;
     using System.IO;
 
-    using static Konst;
     using static z;
 
     using K = VK;
@@ -163,7 +162,7 @@ namespace Z0.Asm
             var name = nameof(cpu.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
             var vKind = K.vk256<ushort>();
-            var src = typeof(z).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
+            var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
 
             var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
             var x = Random.CpuVector<ushort>(w);

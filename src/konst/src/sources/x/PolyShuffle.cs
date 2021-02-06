@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public static class PolyShuffle
@@ -21,7 +21,7 @@ namespace Z0
         public static Span<T> Shuffle<T>(this IDomainSource src, Span<T> io)
         {
             for (var i = 0u; i < io.Length; i++)
-                swap(ref seek(io,i), ref seek(io,(uint)(i + src.Next(0, io.Length - i))));
+                Swaps.swap(ref seek(io,i), ref seek(io,(uint)(i + src.Next(0, io.Length - i))));
             return io;
         }
 
@@ -34,7 +34,7 @@ namespace Z0
         public static T[] Shuffle<T>(this IDomainSource src, T[] io)
         {
             for (var i = 0u; i < io.Length; i++)
-                swap(ref io[i], ref io[i + src.Next(0,io.Length - i)]);
+                Swaps.swap(ref io[i], ref io[i + src.Next(0,io.Length - i)]);
             return io;
         }
 

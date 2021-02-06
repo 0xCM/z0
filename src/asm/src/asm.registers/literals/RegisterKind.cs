@@ -19,6 +19,10 @@ namespace Z0.Asm
     using G32 = Gp32Kind;
     using G64 = Gp64Kind;
     using M = MaskRegKind;
+    using C = ControlRegKind;
+    using D = DebugRegKind;
+    using I = IpRegKind;
+
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
@@ -253,15 +257,15 @@ namespace Z0.Asm
 
         XMM26 = X.XMM26,
 
-        XMM27 = r27 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM27 = r27 | XMM << ClassField | W128 << WidthField,
 
-        XMM28 = r28 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM28 = r28 | XMM << ClassField | W128 << WidthField,
 
-        XMM29 = r29 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM29 = r29 | XMM << ClassField | W128 << WidthField,
 
-        XMM30 = r30 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM30 = r30 | XMM << ClassField | W128 << WidthField,
 
-        XMM31 = r31 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM31 = r31 | XMM << ClassField | W128 << WidthField,
 
         // ~ 256-bit vectorized registers
         // ~ ------------------------------------------------------------------
@@ -288,9 +292,9 @@ namespace Z0.Asm
 
         YMM10 = Y.YMM10,
 
-        YMM11 = r11 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM11 = r11 | YMM << ClassField | W256 << WidthField,
 
-        YMM12 = r12 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM12 = r12 | YMM << ClassField | W256 << WidthField,
 
         YMM13 = Y.YMM13,
 
@@ -300,35 +304,35 @@ namespace Z0.Asm
 
         YMM16 = Y.YMM16,
 
-        YMM17 = r17 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM17 = r17 | YMM << ClassField | W256 << WidthField,
 
-        YMM18 = r18 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM18 = r18 | YMM << ClassField | W256 << WidthField,
 
-        YMM19 = r19 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM19 = r19 | YMM << ClassField | W256 << WidthField,
 
-        YMM20 = r20 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM20 = r20 | YMM << ClassField | W256 << WidthField,
 
-        YMM21 = r21 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM21 = r21 | YMM << ClassField | W256 << WidthField,
 
-        YMM22 = r22 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM22 = r22 | YMM << ClassField | W256 << WidthField,
 
-        YMM23 = r23 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM23 = r23 | YMM << ClassField | W256 << WidthField,
 
-        YMM24 = r24 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM24 = r24 | YMM << ClassField | W256 << WidthField,
 
-        YMM25 = r25 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM25 = r25 | YMM << ClassField | W256 << WidthField,
 
-        YMM26 = r26 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM26 = r26 | YMM << ClassField | W256 << WidthField,
 
-        YMM27 = r27 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM27 = r27 | YMM << ClassField | W256 << WidthField,
 
-        YMM28 = r28 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM28 = r28 | YMM << ClassField | W256 << WidthField,
 
-        YMM29 = r29 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM29 = r29 | YMM << ClassField | W256 << WidthField,
 
-        YMM30 = r30 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM30 = r30 | YMM << ClassField | W256 << WidthField,
 
-        YMM31 = r31 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM31 = r31 | YMM << ClassField | W256 << WidthField,
 
         // ~ 512-bit vectorized registers
         // ~ ------------------------------------------------------------------
@@ -359,43 +363,43 @@ namespace Z0.Asm
 
         ZMM12 = Z.ZMM12,
 
-        ZMM13 = r13 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM13 = r13 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM14 = r14 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM14 = r14 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM15 = r15 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM15 = r15 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM16 = RegIndex.r16 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM16 = RegIndex.r16 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM17 = r17 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM17 = r17 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM18 = r18 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM18 = r18 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM19 = r19 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM19 = r19 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM20 = r20 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM20 = r20 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM21 = r21 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM21 = r21 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM22 = r22 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM22 = r22 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM23 = r23 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM23 = r23 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM24 = r24 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM24 = r24 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM25 = r25 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM25 = r25 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM26 = r26 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM26 = r26 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM27 = r27 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM27 = r27 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM28 = r28 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM28 = r28 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM29 = r29 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM29 = r29 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM30 = r30 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM30 = r30 | ZMM << ClassField | W512 << WidthField,
 
-        ZMM31 = r31 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM31 = r31 | ZMM << ClassField | W512 << WidthField,
 
         // ~ 64-bit mask registers
         // ~ ------------------------------------------------------------------
@@ -410,10 +414,47 @@ namespace Z0.Asm
 
         K4 = M.K4,
 
-        K5 = r5 | Mask << ClassIndex | W64 << WidthIndex,
+        K5 = M.K5,
 
-        K6 = r6 | Mask << ClassIndex | W64 << WidthIndex,
+        K6 = M.K6,
 
-        K7 = r7 | Mask << ClassIndex | W64 << WidthIndex,
+        K7 = M.K7,
+
+        // ~ Control registers
+        // ~ ------------------------------------------------------------------
+
+        CR0 = C.CR0,
+
+        CR2 = C.CR2,
+
+        CR3 = C.CR3,
+
+        CR4 = C.CR4,
+
+        CR8 = C.CR8,
+
+        // ~ Debug registers
+        // ~ ------------------------------------------------------------------
+
+        DR0 = D.DR0,
+
+        DR1 = D.DR1,
+
+        DR2 = D.DR2,
+
+        DR3 = D.DR3,
+
+        DR6 = D.DR6,
+
+        DR7 = D.DR7,
+
+        // ~ Intruction pointer registers
+        // ~ ------------------------------------------------------------------
+
+        IP = I.IP,
+
+        EIP = I.EIP,
+
+        RIP = I.RIP,
     }
 }

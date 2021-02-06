@@ -14,16 +14,16 @@ namespace Z0.Asm
     /// </summary>
     public enum DebugRegKind : uint
     {
-        DR0 = r0 | Debug << ClassIndex | W64 << WidthIndex,
+        DR0 = r0 | Debug << ClassField | W64 << WidthField,
 
-        DR1 = r1 | Debug << ClassIndex | W64 << WidthIndex,
+        DR1 = r1 | Debug << ClassField | W64 << WidthField,
 
-        DR2 = r2 | Debug << ClassIndex | W64 << WidthIndex,
+        DR2 = r2 | Debug << ClassField | W64 << WidthField,
 
-        DR3 = r3 | Debug << ClassIndex | W64 << WidthIndex,
+        DR3 = r3 | Debug << ClassField | W64 << WidthField,
 
-        DR6 = r6 | Debug << ClassIndex | W64 << WidthIndex,
+        DR6 = r6 | Debug << ClassField | W64 << WidthField,
 
-        DR7 = r7 | Debug << ClassIndex | W64 << WidthIndex,
+        DR7 = r7 | Debug << ClassField | W64 << WidthField,
     }
 }

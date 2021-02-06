@@ -17,16 +17,16 @@ namespace Z0.Asm
         /// <summary>
         /// Indicates the 16-bit FLAGS register
         /// </summary>
-        Flags = r0 | FLAG << ClassIndex | W16 << WidthIndex,
+        Flags = r0 | FLAG << ClassField | W16 << WidthField,
 
         /// <summary>
         /// Indicates the 32-bit EFLAGS register
         /// </summary>
-        EFlags = r0 | FLAG << ClassIndex | W32 << WidthIndex,
+        EFlags = r0 | FLAG << ClassField | W32 << WidthField,
 
         /// <summary>
         /// Indicates the 64-bit RFLAGS register
         /// </summary>
-        RFlags = r0 | FLAG << ClassIndex | W64 << WidthIndex,
+        RFlags = r0 | FLAG << ClassField | W64 << WidthField,
     }
 }

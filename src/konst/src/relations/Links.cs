@@ -76,7 +76,7 @@ namespace Z0
         {
             Span<Node<V>> dst = new Node<V>[count];
             for(var i=0; i<count; i++)
-                dst[i] = new Node<V>(force<V>(i));
+                dst[i] = new Node<V>(Numeric.force<V>(i));
             return dst;
         }
 
@@ -90,11 +90,11 @@ namespace Z0
             where V : unmanaged
             where T : unmanaged
         {
-            var start = force<V,ulong>(s0);
+            var start = Numeric.force<V,ulong>(s0);
             Span<Node<V,T>> dst = new Node<V,T>[data.Length];
 
             for(var i=0; i<data.Length; i++, start++)
-                dst[i] = new Node<V,T>(force<V>(start),data[i]);
+                dst[i] = new Node<V,T>(Numeric.force<V>(start),data[i]);
             return dst;
         }
 

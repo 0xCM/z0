@@ -31,12 +31,28 @@ namespace Z0.Asm
             var gSrc = ApiQuery.uri(typeof(gmath));
             var id = PartId.GMath;
             var paths = AppPaths.ForApp();
-            var capture = Archives.capture(paths.AppCaptureRoot);
-            var archive = Archives.hex(FS.dir(capture.HexDir.Name));
-            var direct = archive.Read(dSrc).ToArray();
-            var generic = archive.Read(gSrc).ToArray();
-            check_unary_ops(direct);
-            check_unary_ops(generic);
+            var dir = Wf.Db().CaptureRoot();
+            var capture = Archives.capture(dir);
+            var archive = Archives.extract(Wf);
+            var files = archive.List();
+            using var writer = CaseWriter(FS.ext("csv"));
+            root.iter(files, f => writer.WriteLine(f));
+
+            Claim.nonzero(files.Count);
+
+            var direct = archive.Read(dSrc);
+            Claim.nonzero(direct.Count);
+
+
+            //var direct = archive.Read(dSrc);
+            //Claim.nonzero(direct.Length);
+            // var generic = archive.Read(gSrc);
+
+            // Claim.nonzero(generic.Length);
+            // Claim.nonzero(direct.Length);
+
+            // check_unary_ops(direct);
+            // check_unary_ops(generic);
         }
 
         void check_unary_ops(ApiCodeBlock[] src)

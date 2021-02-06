@@ -47,5 +47,4 @@ namespace Z0
         public static implicit operator Hash32(Hash32<T> src)
             => new Hash32(src.Primitive);
     }
-
 }

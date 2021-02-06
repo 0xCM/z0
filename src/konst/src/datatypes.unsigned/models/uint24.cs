@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using U = uint24;
     using W = W24;
@@ -107,16 +107,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static U @bool(bool x)
-            => z.@as<uint,U>(z.@uint(x));
+            => @as<uint,U>(memory.u32(x));
 
 
         /// <summary>
         /// Queries the state of an index-identified bit
         /// </summary>
-        public BitState this[byte pos]
+        public bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => z.test(data, pos);
+            get => bit.test(data, pos);
         }
 
         public K Kind

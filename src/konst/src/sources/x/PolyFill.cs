@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static z;
+    using static memory;
 
     public static class PolyFill
     {
@@ -70,7 +70,6 @@ namespace Z0
             where T : unmanaged
                 => source.Fill(ClosedInterval<T>.Full, dst.Length, ref memory.first(dst));
 
-
         /// <summary>
         /// Fills a caller-allocated span with random values
         /// </summary>
@@ -85,7 +84,6 @@ namespace Z0
             source.Fill((min,max), dst.Length, ref first(dst), filter);
             return dst;
         }
-
 
         /// <summary>
         /// Fills a caller-allocated span with random values

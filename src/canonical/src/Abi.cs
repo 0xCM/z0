@@ -5,15 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct z
+    partial struct Canonical
     {
-        [MethodImpl(Inline)]
-        public static unsafe ulong @ulong(bool src)
-            => memory.u64(src);
 
     }
 }

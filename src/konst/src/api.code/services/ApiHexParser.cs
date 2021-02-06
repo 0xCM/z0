@@ -5,29 +5,46 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
-    using static root;
+    using static memory;
 
     public readonly struct ApiHexParser
     {
-        public static ParseResult<ApiCodeBlock> extracts(string src)
+        [Op]
+        public static bool parse(string src, out ApiHexRow dst)
         {
+            dst = new ApiHexRow();
             try
             {
-                var parts = src.SplitClean(FieldDelimiter);
-                var parser = HexParsers.bytes();
-                if(parts.Length != 3)
-                    return unparsed<ApiCodeBlock>(src, $"components = {parts.Length} != 3");
+                if(text.empty(src))
+                {
+                    term.error("No text!");
+                    return false;
+                }
 
-                var address = HexParsers.scalar().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
-                var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
-                var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                return parsed(src, new ApiCodeBlock(address, uri, bytes));
+                var fields = text.slice(src,1).SplitClean(FieldDelimiter);
+                if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
+                {
+                    term.error($"Found {fields.Length} but {ApiHexRowSpec.FieldCount} are required");
+                    return false;
+                }
+
+                var index = 0;
+                dst.Seq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+                dst.SourceSeq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+                dst.Address = MemoryAddressParser.succeed(fields[index++]);
+                dst.Length = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+                dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
+                dst.Uri = ApiUri.parse(fields[index++]).Require();
+                dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));
+                return true;
             }
             catch(Exception e)
             {
-                return unparsed<ApiCodeBlock>(src,e);
+                term.error(e);
+                return false;
             }
         }
     }

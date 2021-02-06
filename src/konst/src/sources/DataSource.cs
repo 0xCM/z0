@@ -16,4 +16,13 @@ namespace Z0
 
     }
 
+
+    public enum SourceKind
+    {
+        None,
+
+        Opaque,
+
+        Parametric,
+    }
 }

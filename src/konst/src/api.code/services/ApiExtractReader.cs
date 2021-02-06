@@ -8,9 +8,9 @@ namespace Z0
 
     using static memory;
 
-    public readonly struct ApiHexReader : IApiHexReader
+    public readonly struct ApiExtractReader : IApiHexReader
     {
-        public static IApiHexReader Service => default(ApiHexReader);
+        public static IApiHexReader Service => default(ApiExtractReader);
 
         public ApiCodeBlock[] Read(FS.FilePath src)
             => read(FS.path(src.Name));
@@ -24,7 +24,7 @@ namespace Z0
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-                var block = ApiHexParser.extracts(line);
+                var block = ApiExtractParser.extracts(line);
                 if(block)
                     seek(dst,i) = block.Value;
                  else

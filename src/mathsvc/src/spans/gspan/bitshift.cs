@@ -44,7 +44,6 @@ namespace Z0
             ref readonly var input = ref first(src);
             ref readonly var count = ref first(counts);
             ref var target = ref first(dst);
-
             for(var i=0; i < len; i++)
                 seek(target,i) = gmath.sll(skip(input,i), skip(count,i));
             return dst;

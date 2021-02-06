@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(fmath.abs(float32(src)));
+                return generic<T>(math.abs(float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(fmath.abs(float64(src)));
+                return generic<T>(math.abs(float64(src)));
             else
                 throw no<T>();
         }

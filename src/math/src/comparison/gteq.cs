@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         /// <summary>
@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(sbyte a, sbyte b)
+        public static bit gteq(sbyte a, sbyte b)
             => a >= b;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(byte a, byte b)
+        public static bit gteq(byte a, byte b)
             => a >= b;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(short a, short b)
+        public static bit gteq(short a, short b)
             => a >= b;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(ushort a, ushort b)
+        public static bit gteq(ushort a, ushort b)
             => a >= b;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(int a, int b)
+        public static bit gteq(int a, int b)
             => a >= b;
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(uint a, uint b)
+        public static bit gteq(uint a, uint b)
             => a >= b;
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(long a, long b)
+        public static bit gteq(long a, long b)
             => a >= b;
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="a">The second operand</param>
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(ulong a, ulong b)
+        public static bit gteq(ulong a, ulong b)
             => a >= b;
     }
 }

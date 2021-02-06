@@ -32,11 +32,11 @@ namespace Z0
         {
             var count = lhs.Length;
             var dst = span<T>(count);
-            ref readonly var lSrc = ref first(lhs);
-            ref readonly var rSrc = ref first(rhs);
+            ref readonly var a = ref first(lhs);
+            ref readonly var b = ref first(rhs);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
-                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));
+                seek(target, i) = f.Invoke(skip(a, i), skip(b, i));
             return dst;
         }
 
@@ -66,11 +66,11 @@ namespace Z0
             where F : IFunc<T0,T1,T2>
         {
             var count = dst.Length;
-            ref readonly var lSrc = ref first(lhs);
-            ref readonly var rSrc = ref first(rhs);
+            ref readonly var a = ref first(lhs);
+            ref readonly var b = ref first(rhs);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
-                seek(target, i) = f.Invoke(skip(lSrc, i), skip(rSrc, i));
+                seek(target, i) = f.Invoke(skip(a, i), skip(b, i));
             return dst;
         }
 
@@ -79,10 +79,10 @@ namespace Z0
             where F : IFunc<T1,T2>
         {
             var count = dst.Length;
-            ref readonly var input = ref first(src);
+            ref readonly var a = ref first(src);
             ref var target = ref first(dst);
             for(var i=0u; i<count; i++)
-                seek(target, i) = f.Invoke(skip(input, i));
+                seek(target, i) = f.Invoke(skip(a, i));
             return dst;
         }
     }

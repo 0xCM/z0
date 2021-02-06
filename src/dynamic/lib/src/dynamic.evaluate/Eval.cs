@@ -50,26 +50,6 @@ namespace Z0
             where T : unmanaged
                 => new PairEvalResults<T>(labels, dst);
 
-        [Op]
-        public static string format(in EvalResult src, char delimiter = FieldDelimiter)
-        {
-            var dst = Table.formatter(delimiter, src.FieldKind);
-            emit(src,dst);
-            return dst.Format();
-        }
-
-        [Op]
-        public static ref readonly DatasetFieldFormatter<K> emit(in EvalResult src, in DatasetFieldFormatter<K> dst)
-        {
-            dst.Append(K.Sequence, src.Sequence);
-            dst.Delimit(K.CaseName, src.CaseName);
-            dst.Delimit(K.Status, src.Status);
-            dst.Delimit(K.Duration, src.Duration);
-            dst.Delimit(K.Timestamp, src.Timestamp);
-            dst.Delimit(K.Message, src.Message);
-            return ref dst;
-        }
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryEvaluations<T> unary<T>(in Span<T> src, in PairEvalResults<T> dst)
             where T : unmanaged

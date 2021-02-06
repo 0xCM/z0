@@ -1,0 +1,19 @@
+| Value | Bit Setting | Meaning                                |
+| FZ    | 0x8000      | Flush to zero                          |
+| RC=RN | 0x0000      | To nearest rounding mode               |
+| RC=R- | 0x2000      | Toward negative infinity rounding mode |
+| RC=R+ | 0x4000      | Toward positive infinity rounding mode |
+| RC=RZ | 0x6000      | Toward zero rounding mode              |
+| EM=PM | 0x1000      | Precision mask                         |
+| EM=UM | 0x0800      | Underflow mask                         |
+| EM=OM | 0x0400      | Overflow mask                          |
+| EM=ZM | 0x0200      | Divide-by-zero mask                    |
+| EM=DM | 0x0100      | Denormal mask                          |
+| EM=IM | 0x0080      | Invalid operation mask                 |
+| DAZ   | 0x0040      | Denormals are zeros                    |
+| EF=PE | 0x0020      | Precision flag                         |
+| EF=UE | 0x0010      | Underflow flag                         |
+| EF=OE | 0x0008      | Overflow flag                          |
+| EF=ZE | 0x0004      | Divide-by-zero flag                    |
+| EF=DE | 0x0002      | Denormal flag                          |
+| EF=IE | 0x0001      | Invalid operation flag                 |

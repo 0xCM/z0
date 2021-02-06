@@ -119,12 +119,12 @@ namespace Z0.Logix
         void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
-            var a = force<T>(0b1111_0000);
-            var b = force<T>(0b1100_1100);
-            var c = force<T>(0b1010_1010);
-            var d = force<T>(0b1111_1111);
+            var a = Numeric.force<T>(0b1111_0000);
+            var b = Numeric.force<T>(0b1100_1100);
+            var c = Numeric.force<T>(0b1010_1010);
+            var d = Numeric.force<T>(0b1111_1111);
             var f = NumericLogixHost.lookup<T>(id);
-            var actual = force<T,byte>(gmath.and(f(a,b,c), d));
+            var actual = Numeric.force<T,byte>(gmath.and(f(a,b,c), d));
             var expect = (byte)id;
             Claim.ClaimEq(expect.FormatHex(), actual.FormatHex());
         }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(T src, byte i0, byte i1, byte count)
             where T : unmanaged
-                => force<T>(Bits.replicate(force<T,ulong>(src), i0, i1, count));
+                => Numeric.force<T>(Bits.replicate(Numeric.force<T,ulong>(src), i0, i1, count));
 
         /// <summary>
         /// [000...000101] -> [101101...101101]
@@ -37,8 +37,8 @@ namespace Z0
         {
             var index = hipos(src);
             var count = (byte)((int)bitwidth<T>() / (index + 1) +  1);
-            var replicated = Bits.replicate(force<T,ulong>(src), 0, index, count);
-            return force<T>(replicated);
+            var replicated = Bits.replicate(Numeric.force<T,ulong>(src), 0, index, count);
+            return Numeric.force<T>(replicated);
         }
 
         /// <summary>
@@ -50,6 +50,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T replicate<T>(byte src)
             where T : unmanaged
-                => force<T>(Bits.replicate((ulong)src, 0, 7, (byte)(bitwidth<T>() / 8)));
+                => Numeric.force<T>(Bits.replicate((ulong)src, 0, 7, (byte)(bitwidth<T>() / 8)));
     }
 }

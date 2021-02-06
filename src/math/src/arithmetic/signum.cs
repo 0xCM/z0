@@ -46,5 +46,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static SignKind signum(ulong src)
             => (SignKind)@byte(src != 0);
+
+        /// <summary>
+        /// Computes the sign of the operand
+        /// </summary>
+        /// <param name="src">The operand</param>
+        [MethodImpl(Inline), Op]
+        public static SignKind signum(float src)
+            => (SignKind)MathF.Sign(src);
+
+        /// <summary>
+        /// Computes the sign of the operand
+        /// </summary>
+        /// <param name="src">The operand</param>
+        [MethodImpl(Inline), Op]
+        public static SignKind signum(double src)
+            => (SignKind)Math.Sign(src);
     }
 }

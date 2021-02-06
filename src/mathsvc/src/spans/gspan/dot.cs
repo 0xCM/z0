@@ -23,12 +23,11 @@ namespace Z0
             where T : unmanaged
         {
             var count = lhs.Length;
-            ref readonly var lSrc = ref first(lhs);
-            ref readonly var rSrc = ref first(rhs);
+            ref readonly var a = ref first(lhs);
+            ref readonly var b = ref first(rhs);
             var dst = default(T);
-
             for(var i = 0; i< count; i++)
-                dst = gmath.fma(skip(lSrc, i), skip(rSrc,i), dst);
+                dst = gmath.fma(skip(a, i), skip(b,i), dst);
             return dst;
         }
     }

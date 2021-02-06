@@ -37,19 +37,19 @@ namespace Z0.Asm
         {
 
             var dstPath = TargetArchive.HexPath(FS.file(caller, FileExtensions.Hex));
-            return Archives.hexwriter<ApiHexWriter>(FS.path(dstPath.Name));
+            return Archives.hexwriter<ApiExtractWriter>(dstPath);
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
             => AsmServices.writer(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
-        protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
+        protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {
             var paths = AppPaths.ForApp();
             var root = paths.AppCaptureRoot;
             var capture = Archives.capture(root);
-            var archive = Archives.hex(FS.dir(root.Name));
-            return archive.Read(capture.HexPath(host)).ToArray();
+            var archive = Archives.extract(Wf, root);
+            return archive.Read(capture.HexPath(host));
         }
 
         protected IceInstructionList[] DecodeHostBits(ApiHostUri[] hosts)
@@ -70,7 +70,7 @@ namespace Z0.Asm
             foreach(var host in hosts)
             {
                 hostCount = 0;
-                var bits = ReadHostBits(host).ToArray();
+                var bits = ReadHostBits(host);
                 foreach(var f in bits)
                     decoder.Decode(f, Decoded).OnSome(i => dst.Add(i));
             }

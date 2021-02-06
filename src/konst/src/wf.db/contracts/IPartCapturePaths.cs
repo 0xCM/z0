@@ -8,8 +8,8 @@ namespace Z0
 
     public interface IPartCapturePaths : IPartFilePaths, IPartImmPaths
     {
-        FS.FolderPath HexDir
-            => X86DirPath(Root);
+        FS.FolderPath HexDir()
+            => HexDir(Root);
 
         FS.FilePath HexPath(FS.FileName name)
             => HexFilePath(Root, name);

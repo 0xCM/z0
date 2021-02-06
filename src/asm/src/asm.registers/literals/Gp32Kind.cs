@@ -10,40 +10,40 @@ namespace Z0.Asm
     using static RegWidth;
 
     /// <summary>
-    /// Defines classifiers for <see cref='GP'/> and <see cref='GPN'/> registers of width <see cref='W32'/>
+    /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W32'/>
     /// </summary>
     public enum Gp32Kind : uint
     {
-        EAX = r0 | GP << ClassIndex | W32 << WidthIndex,
+        EAX = r0 | GP << ClassField | W32 << WidthField,
 
-        ECX = r1 | GP << ClassIndex | W32 << WidthIndex,
+        ECX = r1 | GP << ClassField | W32 << WidthField,
 
-        EDX = r2 | GP << ClassIndex | W32 << WidthIndex,
+        EDX = r2 | GP << ClassField | W32 << WidthField,
 
-        EBX = r3 | GP << ClassIndex | W32 << WidthIndex,
+        EBX = r3 | GP << ClassField | W32 << WidthField,
 
-        ESP = r4 | GP << ClassIndex | W32 << WidthIndex,
+        ESP = r4 | GP << ClassField | W32 << WidthField,
 
-        EBP = r5 | GP << ClassIndex | W32 << WidthIndex,
+        EBP = r5 | GP << ClassField | W32 << WidthField,
 
-        ESI = r6 | GP << ClassIndex | W32 << WidthIndex,
+        ESI = r6 | GP << ClassField | W32 << WidthField,
 
-        EDI = r7 | GP << ClassIndex | W32 << WidthIndex,
+        EDI = r7 | GP << ClassField | W32 << WidthField,
 
-        R8D = r0 | GPN << ClassIndex | W32 << WidthIndex,
+        R8D = r8 | GP << ClassField | W32 << WidthField,
 
-        R9D = r1 | GPN << ClassIndex | W32 << WidthIndex,
+        R9D = r9 | GP << ClassField | W32 << WidthField,
 
-        R10D = r2 | GPN << ClassIndex | W32 << WidthIndex,
+        R10D = r10 | GP << ClassField | W32 << WidthField,
 
-        R11D = r3 | GPN << ClassIndex | W32 << WidthIndex,
+        R11D = r11 | GP << ClassField | W32 << WidthField,
 
-        R12D = r4 | GPN << ClassIndex | W32 << WidthIndex,
+        R12D = r12 | GP << ClassField | W32 << WidthField,
 
-        R13D = r5 | GPN << ClassIndex | W32 << WidthIndex,
+        R13D = r13 | GP << ClassField | W32 << WidthField,
 
-        R14D = r6 | GPN << ClassIndex | W32 << WidthIndex,
+        R14D = r14 | GP << ClassField | W32 << WidthField,
 
-        R15D = r7 | GPN << ClassIndex | W32 << WidthIndex,
+        R15D = r15 | GP << ClassField | W32 << WidthField,
     }
 }

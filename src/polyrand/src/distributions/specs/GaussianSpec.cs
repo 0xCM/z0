@@ -59,10 +59,10 @@ namespace Z0
             [MethodImpl(Inline)]
             get
             {
-                var sig = force<T,double>(StdDev);
+                var sig = Numeric.force<T,double>(StdDev);
                 insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
-                return force<T>(sig*sig);
+                return Numeric.force<T>(sig*sig);
             }
         }
 
@@ -71,11 +71,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get
             {
-                var sig = force<T,double>(StdDev);
+                var sig = Numeric.force<T,double>(StdDev);
                 insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
                 var prec = MathUtil.recip(sig*sig);
-                return force<T>(prec);
+                return Numeric.force<T>(prec);
             }
         }
 
@@ -87,11 +87,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public GaussianSpec<float> ToFloat32()
-            => new GaussianSpec<float>(force<T,float>(Mean), force<T,float>(StdDev));
+            => new GaussianSpec<float>(Numeric.force<T,float>(Mean), Numeric.force<T,float>(StdDev));
 
         [MethodImpl(Inline)]
         public GaussianSpec<double> ToFloat64()
-            => new GaussianSpec<double>(force<T,double>(Mean), force<T,double>(StdDev));
+            => new GaussianSpec<double>(Numeric.force<T,double>(Mean), Numeric.force<T,double>(StdDev));
     }
-
 }

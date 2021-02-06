@@ -14,14 +14,14 @@ namespace Z0.Asm
     /// </summary>
     public enum ControlRegKind : uint
     {
-        CR0 = r0 | Control << ClassIndex | W64 << WidthIndex,
+        CR0 = r0 | Control << ClassField | W64 << WidthField,
 
-        CR2 = r2 | Control << ClassIndex | W64 << WidthIndex,
+        CR2 = r2 | Control << ClassField | W64 << WidthField,
 
-        CR3 = r3 | Control << ClassIndex | W64 << WidthIndex,
+        CR3 = r3 | Control << ClassField | W64 << WidthField,
 
-        CR4 = r4 | Control << ClassIndex | W64 << WidthIndex,
+        CR4 = r4 | Control << ClassField | W64 << WidthField,
 
-        CR8 = r8 | Control << ClassIndex | W64 << WidthIndex,
+        CR8 = r8 | Control << ClassField | W64 << WidthField,
     }
 }

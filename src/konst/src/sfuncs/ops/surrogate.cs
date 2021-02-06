@@ -27,8 +27,8 @@ namespace Z0
             => new S.Action<A0,A1,A3>(name, src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static S.Func<T,T,bool> surrogate<T>(S.BinaryPredicate8<T> src)
-            => new S.Func<T,T,bool>(Delegates.func(src.Subject), src.Id);
+        public static S.Func<T,T,bit> surrogate<T>(S.BinaryPredicate8<T> src)
+            => new S.Func<T,T,bit>(Delegates.func(src.Subject), src.Id);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static S.Func<T> surrogate<T>(S.Emitter<T> src)

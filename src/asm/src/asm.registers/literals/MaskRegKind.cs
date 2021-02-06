@@ -14,20 +14,20 @@ namespace Z0.Asm
     /// </summary>
     public enum MaskRegKind : uint
     {
-        K0 = r0 | Mask << ClassIndex | W64 << WidthIndex,
+        K0 = r0 | Mask << ClassField | W64 << WidthField,
 
-        K1 = r1 | Mask << ClassIndex | W64 << WidthIndex,
+        K1 = r1 | Mask << ClassField | W64 << WidthField,
 
-        K2 = r2 | Mask << ClassIndex | W64 << WidthIndex,
+        K2 = r2 | Mask << ClassField | W64 << WidthField,
 
-        K3 = r3 | Mask << ClassIndex | W64 << WidthIndex,
+        K3 = r3 | Mask << ClassField | W64 << WidthField,
 
-        K4 = r4 | Mask << ClassIndex | W64 << WidthIndex,
+        K4 = r4 | Mask << ClassField | W64 << WidthField,
 
-        K5 = r5 | Mask << ClassIndex | W64 << WidthIndex,
+        K5 = r5 | Mask << ClassField | W64 << WidthField,
 
-        K6 = r6 | Mask << ClassIndex | W64 << WidthIndex,
+        K6 = r6 | Mask << ClassField | W64 << WidthField,
 
-        K7 = r7 | Mask << ClassIndex | W64 << WidthIndex,
+        K7 = r7 | Mask << ClassField | W64 << WidthField,
     }
 }

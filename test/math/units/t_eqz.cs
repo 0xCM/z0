@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     public sealed class t_eqz : UnitTest<t_eqz>
     {
         public void check_eqz_u32()

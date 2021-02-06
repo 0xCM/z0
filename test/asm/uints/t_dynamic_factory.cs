@@ -87,7 +87,7 @@ namespace Z0.Asm
         {
             const byte imm8 = 9;
 
-            var resolver = default(VImm8UnaryResolver128<uint>);
+            var resolver = VImm8UnaryResolvers.create<uint>(typeof(gcpu), w128);
             var vbsll = resolver.inject(imm8, ApiClass.Bsll).Operation;
 
             for(var i=0; i<RepCount; i++)
@@ -129,7 +129,7 @@ namespace Z0.Asm
         {
             var dId = ApiIdentify.build(name, w, kind, false);
             var gId = ApiIdentify.build(name, w, kind, true);
-            var archive = Archives.hex(FS.dir(TargetArchive.HexDir.Name));
+            var archive = Archives.extract(Wf, TargetArchive.HexDir());
             var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.hostinfo<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(OperatorClasses.binary(), w, dBits, gBits, dst);
@@ -137,9 +137,9 @@ namespace Z0.Asm
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)
         {
-            var names = z.array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
+            var names = root.array("vxor", "vand", "vor", "vnor", "vxnor", "vnand", "vcimpl");
             var kinds = NumericKind.Integers.DistinctKinds();
-            var widths = z.array(TypeWidth.W128, TypeWidth.W256);
+            var widths = root.array(TypeWidth.W128, TypeWidth.W256);
             var dst = new TestCaseRecord[names.Length * widths.Length * kinds.Count];
             var i = 0;
             foreach(var n in names)

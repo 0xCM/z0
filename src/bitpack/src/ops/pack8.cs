@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static BitMasks.Literals;
     using static BitMasks;
-    using static z;
+    using static memory;
 
     partial class BitPack
     {
@@ -42,6 +42,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in SpanBlock64<T> src, uint block)
             where T : unmanaged
-                => pack8(force<T,ulong>(src.BlockRef((int)block)));
+                => pack8(Numeric.force<T,ulong>(src.BlockRef((int)block)));
     }
 }

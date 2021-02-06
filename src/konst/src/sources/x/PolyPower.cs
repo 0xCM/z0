@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public static class PolyPower
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Power<T>(this IDomainSource src, T t = default)
             where T : unmanaged
-                => force<ulong,T>(Pow2.pow(src.Log2(t)));
+                => Numeric.force<ulong,T>(Pow2.pow(src.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values
@@ -35,7 +35,7 @@ namespace Z0
             where T : unmanaged
         {
             var exp = src.Next((byte)minexp, (byte)(maxexp + 1));
-            return force<ulong,T>(Pow2.pow(exp));
+            return Numeric.force<ulong,T>(Pow2.pow(exp));
         }
 
         /// <summary>

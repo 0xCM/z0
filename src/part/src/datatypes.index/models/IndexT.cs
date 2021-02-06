@@ -148,6 +148,17 @@ namespace Z0
         public Index<T> Where(Func<T,bool> predicate)
             => Index.filter(Data, predicate);
 
+        public T Single()
+            => Count == 1 ? this[0] : throw new Exception("More than one - or perhaps none");
+
+        [MethodImpl(Inline)]
+        public T[] ToArray()
+            => Storage;
+
+        [MethodImpl(Inline)]
+        public Span<T> ToSpan()
+            => Storage;
+
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Index<T> src)
             => src.Edit;

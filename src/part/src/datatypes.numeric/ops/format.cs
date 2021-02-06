@@ -13,22 +13,22 @@ namespace Z0
     partial struct Numeric
     {
         [MethodImpl(Inline), Op,Closures(Integers)]
-        public string format<T>(T src, Base2 b, int? digits = null)
+        public static string format<T>(T src, Base2 b, int? digits = null)
             where T : unmanaged
                 => Format_u(src,b, digits);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public string format<T>(T src, Base8 b, int? digits = null)
+        public static string format<T>(T src, Base8 b, int? digits = null)
             where T : unmanaged
                 => Format_u(src,b, digits);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public string format<T>(T src, Base16 b, int? digits = null)
+        public static string format<T>(T src, Base16 b, int? digits = null)
             where T : unmanaged
                 => Format_u(src,b, digits);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public string format<T>(T src, Base10 b, int? digits = null)
+        public static string format<T>(T src, Base10 b, int? digits = null)
             where T : unmanaged
                 => Format_u(src,b, digits);
 
@@ -233,7 +233,7 @@ namespace Z0
             };
 
         [MethodImpl(Inline)]
-        string Format_u<T>(T src, Base10 b, int? digits = null)
+        static string Format_u<T>(T src, Base10 b, int? digits = null)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -249,7 +249,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        string Format_i<T>(T src, Base10 b, int? digits = null)
+        static string Format_i<T>(T src, Base10 b, int? digits = null)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -265,7 +265,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        string Format_u<T>(T src, Base16 b, int? digits = null)
+        static string Format_u<T>(T src, Base16 b, int? digits = null)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -281,7 +281,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        string Format_i<T>(T src, Base16 n, int? digits = null)
+        static string Format_i<T>(T src, Base16 n, int? digits = null)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

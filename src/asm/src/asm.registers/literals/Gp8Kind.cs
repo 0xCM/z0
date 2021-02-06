@@ -10,48 +10,48 @@ namespace Z0.Asm
     using static RegWidth;
 
     /// <summary>
-    /// Defines classifiers for <see cref='GP'/> and <see cref='GPN'/> registers of width <see cref='W8'/>
+    /// Defines classifiers for <see cref='GP'/> registers of width <see cref='W8'/>
     /// </summary>
     public enum Gp8Kind : uint
     {
-        AL = r0 | GP << ClassIndex | W8 << WidthIndex,
+        AL = r0 | GP << ClassField | W8 << WidthField,
 
-        AH = r0 | GP << ClassIndex | W8 << WidthIndex | Hi,
+        AH = r0 | GP << ClassField | W8 << WidthField | Hi,
 
-        CL = r1 | GP << ClassIndex | W8 << WidthIndex,
+        CL = r1 | GP << ClassField | W8 << WidthField,
 
-        CH = r1 | GP << ClassIndex | W8 << WidthIndex | Hi,
+        CH = r1 | GP << ClassField | W8 << WidthField | Hi,
 
-        DL = r2 | GP << ClassIndex | W8 << WidthIndex,
+        DL = r2 | GP << ClassField | W8 << WidthField,
 
-        DH = r2 | GP << ClassIndex | W8 << WidthIndex | Hi,
+        DH = r2 | GP << ClassField | W8 << WidthField | Hi,
 
-        BL = r3 | GP << ClassIndex | W8 << WidthIndex,
+        BL = r3 | GP << ClassField | W8 << WidthField,
 
-        BH = r3 | GP << ClassIndex | W8 << WidthIndex | Hi,
+        BH = r3 | GP << ClassField | W8 << WidthField | Hi,
 
-        SPL = r4 | GP << ClassIndex | W8 << WidthIndex,
+        SPL = r4 | GP << ClassField | W8 << WidthField,
 
-        BPL = r5 | GP << ClassIndex | W8 << WidthIndex,
+        BPL = r5 | GP << ClassField | W8 << WidthField,
 
-        SIL = r6 | GP << ClassIndex | W8 << WidthIndex,
+        SIL = r6 | GP << ClassField | W8 << WidthField,
 
-        DIL = r7 | GP << ClassIndex | W8 << WidthIndex,
+        DIL = r7 | GP << ClassField | W8 << WidthField,
 
-        R8L = r0 | GPN << ClassIndex | W8 << WidthIndex,
+        R8L = r8 | GP << ClassField | W8 << WidthField,
 
-        R9L = r1 | GPN << ClassIndex | W8 << WidthIndex,
+        R9L = r9 | GP << ClassField | W8 << WidthField,
 
-        R10L = r2 | GPN << ClassIndex | W8 << WidthIndex,
+        R10L = r10 | GP << ClassField | W8 << WidthField,
 
-        R11L = r3 | GPN << ClassIndex | W8 << WidthIndex,
+        R11L = r11 | GP << ClassField | W8 << WidthField,
 
-        R12L = r4 | GPN << ClassIndex | W8 << WidthIndex,
+        R12L = r12 | GP << ClassField | W8 << WidthField,
 
-        R13L = r5 | GPN << ClassIndex | W8 << WidthIndex,
+        R13L = r13 | GP << ClassField | W8 << WidthField,
 
-        R14L = r6 | GPN << ClassIndex | W8 << WidthIndex,
+        R14L = r14 | GP << ClassField | W8 << WidthField,
 
-        R15L = r7 | GPN << ClassIndex | W8 << WidthIndex,
+        R15L = r15 | GP << ClassField | W8 << WidthField,
     }
 }

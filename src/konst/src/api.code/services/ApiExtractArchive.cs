@@ -11,13 +11,25 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiHexArchive : IFileArchive
+    public readonly struct ApiExtractArchive : IFileArchive
     {
+        readonly IWfShell Wf {get;}
+
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public ApiHexArchive(FS.FolderPath root)
-            => Root = root;
+        public ApiExtractArchive(IWfShell wf, FS.FolderPath root)
+        {
+            Wf = wf;
+            Root = root;
+        }
+
+        [MethodImpl(Inline)]
+        public ApiExtractArchive(IWfShell wf)
+        {
+            Wf = wf;
+            Root = wf.Db().CapturedHexDir();
+        }
 
         public FS.FileExt DefaultExt
             => FileExtensions.Hex;
@@ -25,15 +37,23 @@ namespace Z0
         /// <summary>
         /// Reads the archived files owned by a specified host
         /// </summary>
-        public ApiCodeBlock[] Read(ApiHostUri host)
+        public Index<ApiCodeBlock> Read(ApiHostUri host)
         {
-            var hfn = FS.file(host.Owner, host.Name, DefaultExt);
-            var path = paths(Root, DefaultExt).Where(f => f.FileName.Name == hfn.Name).FirstOrDefault(FS.FilePath.Empty);
-            return read(path);
+            var filename = FS.file(host.Owner, host.Name, DefaultExt);
+            var path = paths(Root, DefaultExt).Where(f => f.FileName.Name == filename.Name).FirstOrDefault(FS.FilePath.Empty);
+            if(path.IsEmpty)
+            {
+                Wf.Warn($"The {host} file {path} does not exist");
+                return sys.empty<ApiCodeBlock>();
+            }
+            var flow = Wf.Processing(path, host);
+            var data = read(path);
+            Wf.Processed(flow, path, data.Length);
+            return data;
         }
 
-        public ApiCodeBlock[] Read(FS.FilePath src)
-            => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
+        public Index<ApiCodeBlock> Read(FS.FilePath src)
+            => ApiExtractReader.read(src).Where(x => x.IsNonEmpty);
 
         public ListedFiles List()
             => FS.list(Root.Files(DefaultExt));
@@ -44,24 +64,8 @@ namespace Z0
         /// <summary>
         /// Enumerates the archived files owned by a specified part
         /// </summary>
-        public FS.FilePath[] Files(PartId owner)
+        public FS.Files Files(PartId owner)
             => Root.Files(owner, DefaultExt, true);
-
-        // /// <summary>
-        // /// Enumerates the content of all archived files
-        // /// </summary>
-        // public IEnumerable<ApiCodeBlock> ApiCode()
-        // {
-        //     var list = List();
-        //     var iCount = list.Count;
-        //     for(var i=0; i<iCount; i++)
-        //     {
-        //         var path = list[i].Path;
-        //         var items = Z0.ApiCode.extracts(path);
-        //         var jCount = items.Length;
-        //         for(var j=0; j<jCount; j++)
-        //             yield return items[j];            }
-        // }
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
@@ -87,24 +91,10 @@ namespace Z0
             }
         }
 
-        // public ApiHostCode Index(FS.FilePath src)
-        // {
-        //     var uri = ApiUri.host(src.FileName);
-        //     if(uri.Failed || uri.Value.IsEmpty)
-        //         return default;
-
-        //     var dst = z.list<ApiCodeBlock>();
-        //     foreach(var item in ApiCode())
-        //         if(item.IsNonEmpty)
-        //             dst.Add(item);
-
-        //     return new ApiHostCode(uri.Value, dst.Array());
-        // }
-
         static Index<FS.FilePath> paths(FS.FolderPath root, FS.FileExt ext)
             => root.Files(ext, true);
 
         static ApiCodeBlock[] read(FS.FilePath src)
-            => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
+            => ApiExtractReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

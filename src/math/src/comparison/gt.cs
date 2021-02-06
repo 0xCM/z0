@@ -15,7 +15,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(sbyte a, sbyte b)
+        public static bit gt(sbyte a, sbyte b)
             => a > b;
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(byte a, byte b)
+        public static bit gt(byte a, byte b)
             => a > b;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(short a, short b)
+        public static bit gt(short a, short b)
             => a > b;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(ushort a, ushort b)
+        public static bit gt(ushort a, ushort b)
             => a > b;
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(int a, int b)
+        public static bit gt(int a, int b)
             => a > b;
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(uint a, uint b)
+        public static bit gt(uint a, uint b)
             => a > b;
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(long a, long b)
+        public static bit gt(long a, long b)
             => a > b;
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Gt]
-        public static bool gt(ulong a, ulong b)
+        public static bit gt(ulong a, ulong b)
             => a > b;
     }
 }

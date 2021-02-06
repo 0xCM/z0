@@ -10,13 +10,16 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    /// <summary>
+    /// Characterizes a point emitter
+    /// </summary>
     [Free]
     public interface IDataSource
     {
         /// <summary>
-        /// Retrieves the next point from the source, bound only by the domain of the type
+        /// Retrieves the next value from the source
         /// </summary>
-        /// <typeparam name="T">The point type</typeparam>
+        /// <typeparam name="T">The value type</typeparam>
         T Next<T>();
 
         bool Next<T>(out T dst)
@@ -38,7 +41,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes an unlimited emitter that produces one element at a time
+    /// Characterizes an unlimited emitter
     /// </summary>
     /// <typeparam name="T">The production element type</typeparam>
     [Free]
@@ -59,15 +62,17 @@ namespace Z0
         /// Fills the span, from stem-to-stern with <typeparamref name='T'/> cells from the reifying source
         /// </summary>
         /// <param name="dst">The target spen</param>
-        void Fill(Span<T> dst)
+        int Fill(Span<T> dst)
         {
             var count = dst.Length;
             if(count != 0)
             {
                 ref var target = ref first(dst);
                 for(var i=0; i<count; i++)
-                    seek(target,i) = Next();
+                    if(!Next(out target))
+                        return i;
             }
+            return count;
         }
     }
 }

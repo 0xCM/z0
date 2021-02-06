@@ -89,7 +89,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
-            var archive = Archives.hex(wf);
+            var archive = Archives.extract(wf);
             var rootdir = archive.Root;
             var files = @readonly(archive.ArchiveFiles().Array());
             var empty = Index<ApiCodeDescriptor>.Empty;
@@ -108,7 +108,7 @@ namespace Z0
                 ref readonly var file = ref skip(files,i);
                 wf.Processing(file, "apihex");
 
-                var content = @readonly(archive.Read(file));
+                var content = archive.Read(file).View;
                 var blocks = content.Length;
                 if(blocks == 0)
                     wf.Warn($"No content found in {file.ToUri()}");
@@ -135,9 +135,9 @@ namespace Z0
             {
                 ref readonly var file = ref skip(files,i);
                 var rows = ApiHexRows.load(file);
-                if(rows)
+                if(rows.Count != 0)
                 {
-                    var content = @readonly(rows.Value);
+                    var content = rows.View;
                     var kBlock = content.Length;
                     var buffer = alloc<ApiCodeDescriptor>(kBlock);
                     var target = span(buffer);
@@ -152,9 +152,9 @@ namespace Z0
         }
 
         [Op]
-        public static Index<ApiCodeDescriptor> descriptors(FS.FolderPath src)
+        public static Index<ApiCodeDescriptor> descriptors(IWfShell wf, FS.FolderPath src)
         {
-            var archive = Archives.hex(src);
+            var archive = Archives.extract(wf, src);
             var files = archive.List();
             var dst = root.list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)

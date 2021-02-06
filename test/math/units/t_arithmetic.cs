@@ -14,6 +14,147 @@ namespace Z0
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
     {
+        void signum_check<T>(T t = default)
+            where T : unmanaged
+        {
+            var zero = Numeric.zero<T>();
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.Next<T>();
+                var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
+                var actual = gmath.signum(x);
+                Claim.eq(expect,actual);
+            }
+        }
+
+        [MethodImpl(Inline)]
+        void add_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            if(DiagnosticMode)
+                term.print(text.concat("Executing", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
+
+            var g = MSvc.add(t);
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+
+            if(DiagnosticMode)
+                term.print(text.concat("Execututed", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
+        }
+
+        [MethodImpl(Inline)]
+        void sub_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.sub(t);
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void mul_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.mul(t);
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void div_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.div(t);
+            var validator = this.BinaryOpMatch(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void mod_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.mod(t);
+            var validator = this.BinaryOpMatch(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void modmul_check<T>(S.TernaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.modmul(t);
+            var validator = this.TernaryOpMatch(true,t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void clamp_check<T>(S.BinaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.clamp(t);
+            var validator = this.BinaryOpMatch(t);
+            validator.CheckMatch(f,g);
+            validator.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void inc_check<T>(S.UnaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.inc(t);
+            var comparer = this.UnaryOpMatch(t);
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpanMatch(f, g);
+        }
+
+        [MethodImpl(Inline)]
+        void dec_check<T>(S.UnaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.dec(t);
+            var comparer = this.UnaryOpMatch(t);
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpanMatch(f,g);
+        }
+
+        [MethodImpl(Inline)]
+        void negate_check<T>(S.UnaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.negate(t);
+            var comparer = this.UnaryOpMatch(t);
+            comparer.CheckMatch(f, g);
+            comparer.CheckSpanMatch(f, g);
+        }
+
+        [MethodImpl(Inline)]
+        void abs_check<T>(S.UnaryOp<T> f, T t = default)
+            where  T : unmanaged
+        {
+            var g = MSvc.abs(t);
+            var comparer = this.UnaryOpMatch(t);
+            comparer.CheckMatch(f,g);
+            comparer.CheckSpanMatch(f,g);
+        }
+
+        void check_increments<T>(T first = default)
+            where T : unmanaged
+        {
+            var count = Random.Next(21u, 256u);
+            Span<T> data = new T[count];
+            ref var src = ref z.first(data);
+            gmath.increments(first, count, ref src);
+
+            for(var i=0; i < count; i++)
+                Claim.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);
+        }
+
         public void add_check()
         {
             const string name = "add";
@@ -33,21 +174,6 @@ namespace Z0
             add_check(S.binary(fmath.add, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void add_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            if(DiagnosticMode)
-                term.print(text.concat("Executing", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
-
-            var g = MSvc.add(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-
-            if(DiagnosticMode)
-                term.print(text.concat("Execututed", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
-        }
 
         public void sub_check()
         {
@@ -63,16 +189,6 @@ namespace Z0
             sub_check(S.binary(math.sub, name, z64i));
             sub_check(S.binary(fmath.sub, name, z32f));
             sub_check(S.binary(fmath.sub, name, z64f));
-        }
-
-        [MethodImpl(Inline)]
-        void sub_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.sub(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
         }
 
         public void mul_check()
@@ -91,16 +207,6 @@ namespace Z0
             mul_check(S.binary(fmath.mul, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void mul_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.mul(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
-
         public void div_check()
         {
             const string name = "div";
@@ -115,16 +221,6 @@ namespace Z0
             div_check(S.binary(math.div, name, z64i));
             div_check(S.binary(fmath.div, name, z32f));
             div_check(S.binary(fmath.div, name, z64f));
-        }
-
-        [MethodImpl(Inline)]
-        void div_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.div(t);
-            var validator = this.BinaryOpMatch(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
         }
 
         public void mod_check()
@@ -143,15 +239,6 @@ namespace Z0
             mod_check(S.binary(fmath.mod, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void mod_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.mod(t);
-            var validator = this.BinaryOpMatch(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void modmul_check()
         {
@@ -169,15 +256,6 @@ namespace Z0
             modmul_check(S.ternary(fmath.modmul, name, z32f));
         }
 
-        [MethodImpl(Inline)]
-        void modmul_check<T>(S.TernaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.modmul(t);
-            var validator = this.TernaryOpMatch(true,t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void clamp_check()
         {
@@ -195,15 +273,6 @@ namespace Z0
             clamp_check(S.binary(fmath.clamp, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void clamp_check<T>(S.BinaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.clamp(t);
-            var validator = this.BinaryOpMatch(t);
-            validator.CheckMatch(f,g);
-            validator.CheckSpanMatch(f,g);
-        }
 
         public void inc_check()
         {
@@ -219,16 +288,6 @@ namespace Z0
             inc_check(S.unary(math.inc, name, z64i));
             inc_check(S.unary(fmath.inc, name, z32f));
             inc_check(S.unary(fmath.inc, name, z64f));
-        }
-
-        [MethodImpl(Inline)]
-        void inc_check<T>(S.UnaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.inc(t);
-            var comparer = this.UnaryOpMatch(t);
-            comparer.CheckMatch(f, g);
-            comparer.CheckSpanMatch(f, g);
         }
 
         public void dec_check()
@@ -247,16 +306,6 @@ namespace Z0
             dec_check(S.unary(fmath.dec, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void dec_check<T>(S.UnaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.dec(t);
-            var comparer = this.UnaryOpMatch(t);
-            comparer.CheckMatch(f,g);
-            comparer.CheckSpanMatch(f,g);
-        }
-
         public void negate_check()
         {
             const string name = "negate";
@@ -273,16 +322,6 @@ namespace Z0
             negate_check(S.unary(fmath.negate, name, z64f));
         }
 
-        [MethodImpl(Inline)]
-        void negate_check<T>(S.UnaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.negate(t);
-            var comparer = this.UnaryOpMatch(t);
-            comparer.CheckMatch(f, g);
-            comparer.CheckSpanMatch(f, g);
-        }
-
         public void abs_check()
         {
             const string name = "abs";
@@ -293,16 +332,6 @@ namespace Z0
             abs_check(S.unary(Math.Abs, name, z64i));
             abs_check(S.unary(MathF.Abs, name, z32f));
             abs_check(S.unary(Math.Abs, name, z64f));
-        }
-
-        [MethodImpl(Inline)]
-        void abs_check<T>(S.UnaryOp<T> f, T t = default)
-            where  T : unmanaged
-        {
-            var g = MSvc.abs(t);
-            var comparer = this.UnaryOpMatch(t);
-            comparer.CheckMatch(f,g);
-            comparer.CheckSpanMatch(f,g);
         }
 
         public void check_increments()
@@ -316,18 +345,6 @@ namespace Z0
             CheckAction(() => check_increments(z32i), CaseName(name, z32i));
             CheckAction(() => check_increments(z64), CaseName(name, z64));
             CheckAction(() => check_increments(z64i), CaseName(name, z64i));
-        }
-
-        void check_increments<T>(T first = default)
-            where T : unmanaged
-        {
-            var count = Random.Next(21u, 256u);
-            Span<T> data = new T[count];
-            ref var src = ref z.first(data);
-            gmath.increments(first, count, ref src);
-
-            for(var i=0; i < count; i++)
-                Claim.eq(gmath.add(first, force<T>(i)), data[i]);
         }
 
         public void signum_8i()
@@ -347,18 +364,5 @@ namespace Z0
 
         public void signum_64f()
             => signum_check<double>();
-
-        protected void signum_check<T>(T t = default)
-            where T : unmanaged
-        {
-            var zero = Numeric.zero<T>();
-            for(var i=0; i<RepCount; i++)
-            {
-                var x = Random.Next<T>();
-                var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
-                var actual = gmath.signum(x);
-                Claim.eq(expect,actual);
-            }
-        }
     }
 }

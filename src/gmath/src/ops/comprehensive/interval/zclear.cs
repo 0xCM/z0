@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zclear<T>(T src)
             where T : unmanaged
-                => sub(src, NumericCast.force<T>((uint)eq(src,zero<T>())));
+                => sub(src, Numeric.force<T>((uint)eq(src,zero<T>())));
     }
 }

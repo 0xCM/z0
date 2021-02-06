@@ -119,10 +119,10 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T force<S,T>(S src)
-            => convert_u<S,T>(src);
+            => force_u<S,T>(src);
 
         [MethodImpl(Inline)]
-        static T convert_u<S,T>(S src)
+        static T force_u<S,T>(S src)
         {
             if(typeof(S) == typeof(byte))
                 return force<T>(uint8(src));
@@ -133,11 +133,11 @@ namespace Z0
             else if(typeof(S) == typeof(ulong))
                 return force<T>(uint64(src));
             else
-                return convert_i<S,T>(src);
+                return force_i<S,T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert_i<S,T>(S src)
+        static T force_i<S,T>(S src)
         {
             if(typeof(S) == typeof(sbyte))
                 return force<T>(int8(src));
@@ -148,11 +148,11 @@ namespace Z0
             else if(typeof(S) == typeof(long))
                 return force<T>(int64(src));
             else
-                return convert_x<S,T>(src);
+                return force_x<S,T>(src);
         }
 
         [MethodImpl(Inline)]
-        static T convert_x<S,T>(S src)
+        static T force_x<S,T>(S src)
         {
             if(typeof(S) == typeof(float))
                 return force<T>(float32(src));

@@ -56,7 +56,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegIndex code(RegisterKind src)
-            => (RegIndex)((byte)src >> CodeIndex);
+            => (RegIndex)((byte)src >> CodeField);
 
         /// <summary>
         /// Determines the register class from the kind
@@ -64,7 +64,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegisterKind src)
-            => (RegClass)((uint)src >> ClassIndex);
+            => (RegClass)((uint)src >> ClassField);
 
         /// <summary>
         /// Determines the register width from the kind
@@ -72,7 +72,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegisterKind src)
-            => (RegWidth)((uint)src >> WidthIndex);
+            => (RegWidth)((uint)src >> WidthField);
 
         /// <summary>
         /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegisterKind'/>
@@ -82,7 +82,7 @@ namespace Z0.Asm
         /// <param name="w">The register width</param>
         [MethodImpl(Inline), Op]
         public static RegisterKind join(RegIndex i, RegClass k, RegWidth w)
-            => (RegisterKind)((uint)i  << CodeIndex | (uint)k << ClassIndex | (uint)w << WidthIndex);
+            => (RegisterKind)((uint)i  << CodeField | (uint)k << ClassField | (uint)w << WidthField);
 
         /// <summary>
         /// Determines whether an upper register is selected
@@ -120,56 +120,68 @@ namespace Z0.Asm
         public static Index<Register> Gp8()
             => All().Where(r => width(r) == W.W8);
 
+        [MethodImpl(Inline), Op]
+        public static bool IsGp(Register r)
+            => @class(r) == RegClass.GP;
+
+        [MethodImpl(Inline), Op]
+        public static bool IsGp(Register r, RegWidth w)
+            => w == r.Width && IsGp(r);
+
         [Op]
         public static Index<Register> Gp8(Index<Register> src)
-            => src.Where(r => width(r) == W.W8);
+            => src.Where(r => IsGp(r, RegWidth.W8));
 
         [Op]
         public static Index<Register> Gp16()
-            => All().Where(r => width(r) == W.W16);
+            => All().Where(r => IsGp(r, RegWidth.W16));
 
         [Op]
         public static Index<Register> Gp16(Index<Register> src)
-            => src.Where(r => width(r) == W.W16);
+            => src.Where(r => IsGp(r, RegWidth.W16));
 
         [Op]
         public static Index<Register> Gp32()
-            => All().Where(r => width(r) == W.W32);
+            => All().Where(r => IsGp(r, RegWidth.W32));
 
         [Op]
         public static Index<Register> Gp32(Index<Register> src)
-            => src.Where(r => width(r) == W.W32);
+            => src.Where(r => IsGp(r, RegWidth.W32));
 
         [Op]
         public static Index<Register> Gp64()
-            => All().Where(r => width(r) == W.W64);
+            => All().Where(r => IsGp(r, RegWidth.W64));
 
         [Op]
         public static Index<Register> Gp64(Index<Register> src)
-            => src.Where(r => width(r) == W.W64);
+            => src.Where(r => IsGp(r, RegWidth.W64));
+
+        [Op]
+        public static Index<Register> Gp()
+            => All().Where(IsGp);
 
         [Op]
         public static Index<Register> Xmm()
-            => All().Where(r => width(r) == W.W128);
+            => All().Where(r => @class(r) == RegClass.XMM);
 
         [Op]
         public static Index<Register> Xmm(Index<Register> src)
-            => src.Where(r => width(r) == W.W128);
+            => src.Where(r => @class(r) == RegClass.XMM);
 
         [Op]
         public static Index<Register> Ymm()
-            => All().Where(r => width(r) == W.W256);
+            => All().Where(r => @class(r) == RegClass.YMM);
 
         [Op]
         public static Index<Register> Ymm(Index<Register> src)
-            => src.Where(r => width(r) == W.W256);
+            => src.Where(r => @class(r) == RegClass.YMM);
 
         [Op]
         public static Index<Register> Zmm()
-            => All().Where(r => width(r) == W.W512);
+            => All().Where(r => @class(r) == RegClass.ZMM);
 
         public static Index<Register> Zmm(Index<Register> src)
-            => src.Where(r => width(r) == W.W512);
+            => src.Where(r => @class(r) == RegClass.ZMM);
 
         [MethodImpl(Inline)]
         public static void split(RegisterKind src, out RegIndex c, out RegClass k, out RegWidth w)
@@ -183,10 +195,10 @@ namespace Z0.Asm
         public static string format(Register src)
         {
             const string Sep = " | ";
-            var seg0 = BitFields.format<RegIndex,byte>(src.Code);
-            var seg1 = BitFields.format<RegClass,byte>(src.Class);
-            var seg2 = BitFields.format<RegWidth,ushort>(src.Width);
-            var dst = text.bracket(text.concat(seg2, Sep, seg1, Sep, seg0));
+            var index = BitFields.format<RegIndex,byte>(src.Code, "Index", 5);
+            var @class = BitFields.format<RegClass,byte>(src.Class, "Class", 4);
+            var width = BitFields.format<RegWidth,ushort>(src.Width, base10, "Width");
+            var dst = text.bracket(text.join(Sep, index, @class, width));
             return dst;
         }
     }

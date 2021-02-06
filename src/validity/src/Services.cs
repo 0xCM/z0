@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ICheckSF<T,T,T> BinaryOpMatch<T>(this ITestContext context, bool xzero, T t = default)
             where T : unmanaged
-            => new CheckBinaryOpSF<T>(context,xzero);
+                => new CheckBinaryOpSF<T>(context,xzero);
 
         [MethodImpl(Inline)]
         public static ICheckSF<T,T,T,T> TernaryOpMatch<T>(this ITestContext context, bool xzero = false, T t = default)

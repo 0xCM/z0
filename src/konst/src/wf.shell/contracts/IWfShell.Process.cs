@@ -37,7 +37,6 @@ namespace Z0
         void Processed<T>(ApiHostUri uri, T content)
         {
             signal(this).Processed(uri,content);
-
         }
 
         WfExecToken Processed<T>(WfExecFlow flow, T content)

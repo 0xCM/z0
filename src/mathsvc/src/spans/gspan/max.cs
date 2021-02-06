@@ -25,16 +25,14 @@ namespace Z0
             if(count == 0)
                 return default;
 
-            ref readonly var input = ref first(src);
-            var result = input;
-
+            ref readonly var a = ref first(src);
+            var result = a;
             for(var i=1; i<count; i++)
             {
-                ref readonly var test = ref skip(input, i);
+                ref readonly var test = ref skip(a, i);
                 if(gmath.gt(test, result))
                     result = test;
             }
-
             return result;
         }
     }

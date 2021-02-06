@@ -13,10 +13,10 @@ namespace Z0.Asm
     /// </summary>
     public enum IpRegKind : uint
     {
-        IP = IPTR << ClassIndex | W16 << WidthIndex,
+        IP = IPTR << ClassField | W16 << WidthField,
 
-        EIP = IPTR << ClassIndex | W32 << WidthIndex,
+        EIP = IPTR << ClassField | W32 << WidthField,
 
-        RIP = IPTR << ClassIndex | W64 << WidthIndex,
+        RIP = IPTR << ClassField | W64 << WidthField,
     }
 }

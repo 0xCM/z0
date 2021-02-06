@@ -8,12 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
-
-    using F = ApiHexField;
+    using static memory;
 
     [ApiHost]
-    public readonly partial struct ApiHexRows
+    public readonly struct ApiHexRows
     {
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
@@ -49,27 +47,30 @@ namespace Z0
         {
             var count = src.Length;
             if(count != 0)
-            {
-                var formatter = Table.formatter<F>(FieldDelimiter);
-                using var writer = dst.Writer();
-                writer.WriteLine(Table.header53<ApiHexField>());
-
-                ref readonly var row = ref first(src);
-                for(var i=0; i<count; i++)
-                    writer.WriteLine(format(skip(row,i), formatter));
-            }
+                Records.emit(src,dst);
         }
 
         [Op]
-        public static ParseResult<ApiHexRow[]> load(FS.FilePath src)
+        public static Index<ApiHexRow> load(FS.FilePath src)
         {
-            var attempts = src.ReadLines().Storage.Skip(1).Select(row);
-            var failed = attempts.Where(r => !r.Succeeded);
-            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
-            if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.fail<ApiHexRow[]>(src.Name, failed[0].Message);
-            else
-                return ParseResult.win<ApiHexRow[]>(src.Name, success);
+            var data = @readonly(src.ReadLines().Storage.Skip(1));
+            var count = data.Length;
+            var buffer = root.list<ApiHexRow>(count);
+            for(var i=0; i<count; i++)
+            {
+                if(ApiHexParser.parse(skip(data,i), out var dst))
+                {
+                    buffer.Add(dst);
+                }
+            }
+            return buffer.ToArray();
+            // var attempts = src.ReadLines().Storage.Skip(1).Select(row);
+            // var failed = attempts.Where(r => !r.Succeeded);
+            // var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            // if(failed.Length != 0 && success.Length == 0)
+            //     return root.unparsed<ApiHexRow[]>(src.Name, failed[0].Message?.ToString() ?? EmptyString);
+            // else
+            //     return root.parsed<ApiHexRow[]>(src.Name, success);
         }
 
         [Op]
@@ -100,42 +101,30 @@ namespace Z0
             return dst;
         }
 
-        static string format(in ApiHexRow src, DatasetFieldFormatter<F> dst)
-        {
-            dst.Delimit(F.Seq, src.Seq);
-            dst.Delimit(F.SourceSeq, src.SourceSeq);
-            dst.Delimit(F.Address, src.Address);
-            dst.Delimit(F.Length, src.Length);
-            dst.Delimit(F.TermCode, src.TermCode);
-            dst.Delimit(F.Uri, src.Uri);
-            dst.Delimit(F.Data, src.Data.Format());
-            return dst.Emit();
-        }
+        // [Op]
+        // static ParseResult<ApiHexRow> row(string src)
+        // {
+        //     try
+        //     {
+        //         var fields = src.SplitClean(FieldDelimiter);
+        //         if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
+        //             return root.unparsed<ApiHexRow>(src,"No data");
 
-        [Op]
-        static ParseResult<ApiHexRow> row(string src)
-        {
-            try
-            {
-                var fields = src.SplitClean(FieldDelimiter);
-                if(fields.Length !=  (uint)ApiHexRowSpec.FieldCount)
-                    return ParseResult.fail<ApiHexRow>(src,"No data");
-
-                var dst = new ApiHexRow();
-                var index = 0;
-                dst.Seq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.SourceSeq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.Address = MemoryAddressParser.succeed(fields[index++]);
-                dst.Length = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
-                dst.Uri = ApiUri.parse(fields[index++]).Require();
-                dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));
-                return ParseResult.win(src, dst);
-            }
-            catch(Exception e)
-            {
-                return ParseResult.fail<ApiHexRow>(src, e);
-            }
-        }
+        //         var dst = new ApiHexRow();
+        //         var index = 0;
+        //         dst.Seq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+        //         dst.SourceSeq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+        //         dst.Address = MemoryAddressParser.succeed(fields[index++]);
+        //         dst.Length = Numeric.parse<int>(fields[index++]).ValueOrDefault();
+        //         dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
+        //         dst.Uri = ApiUri.parse(fields[index++]).Require();
+        //         dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));
+        //         return root.parsed(src, dst);
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         return root.unparsed<ApiHexRow>(src, e);
+        //     }
+        // }
     }
 }

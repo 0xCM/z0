@@ -38,7 +38,7 @@ namespace Z0.Asm
             get => _Gp16.View;
         }
 
-        public IndexedView<Register> Gp32
+        public ReadOnlySpan<Register> Gp32
         {
             [MethodImpl(Inline)]
             get => _Gp32;

@@ -36,10 +36,10 @@ namespace Z0
         public static T avgz<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
-            ref readonly var reader = ref first(src);
-            T result = reader;
+            ref readonly var a = ref first(src);
+            var result = a;
             for(var i=1; i<src.Length; i++)
-                result = gmath.avgz(result, skip(reader, i));
+                result = gmath.avgz(result, skip(a, i));
             return result;
         }
 
@@ -79,6 +79,5 @@ namespace Z0
             else
                 return fspan.avg(src, @checked);
         }
-
     }
 }

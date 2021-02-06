@@ -158,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(T i, T j)
         {
-            swap(ref terms[iVal(i)], ref terms[iVal(j)]);
+            Swaps.swap(ref terms[iVal(i)], ref terms[iVal(j)]);
             return this;
         }
 
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(int i, int j)
         {
-            swap(ref seek(Head, i), ref seek(Head,j));
+            Swaps.swap(ref seek(Head, i), ref seek(Head,j));
             return this;
         }
 
@@ -179,7 +179,7 @@ namespace Z0
         public Perm<T> Swap(params (T i, T j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
+                Swaps.swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
             return this;
         }
 
@@ -189,7 +189,7 @@ namespace Z0
         public Perm<T> Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -199,7 +199,7 @@ namespace Z0
         public Perm<T> Swap(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -288,7 +288,7 @@ namespace Z0
         {
             var dst = new Perm<T>(new T[Length]);
             for(var i=0; i< Length; i++)
-                dst[terms[i]] = NumericCast.force<T>(i);
+                dst[terms[i]] = Numeric.force<T>(i);
             return dst;
         }
 
@@ -335,7 +335,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static int iVal(T src)
-            => force<T,int>(src);
+            => Numeric.force<T,int>(src);
 
         public string Format(int? colwidth = null)
             => Terms.FormatAsPerm(colwidth);

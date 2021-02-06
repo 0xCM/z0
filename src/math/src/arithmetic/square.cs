@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     partial class math
     {
         [MethodImpl(Inline), Square]
@@ -39,6 +39,14 @@ namespace Z0
 
         [MethodImpl(Inline), Square]
         public static ulong square(ulong src)
-            => src*src;                 
+            => src*src;
+
+        [MethodImpl(Inline), Square]
+        public static float square(float src)
+            => mul(src,src);
+
+        [MethodImpl(Inline), Square]
+        public static double square(double src)
+            => mul(src,src);
     }
 }

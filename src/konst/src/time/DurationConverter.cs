@@ -14,11 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public T Convert<T>(Duration src)
-            => NumericCast.force<T>(src.Ticks);
+            => Numeric.force<T>(src.Ticks);
 
         [MethodImpl(Inline)]
         public Duration Convert<T>(T src)
-            => force<T,long>(src);
+            => Numeric.force<T,long>(src);
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
             => Option.Try(() => Numeric.rebox(((Duration)incoming).Ticks, dst.NumericKind()));

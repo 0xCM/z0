@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct Rowset<T> : IIndex<T>
         where T : struct
     {
-        readonly T[] Data;
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
         public Rowset(T[] data)
@@ -24,25 +24,25 @@ namespace Z0
         public T[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Edit;
         }
 
-        public Count Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data.Count;
         }
 
         public int Length

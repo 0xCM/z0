@@ -12,38 +12,38 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct BinaryPredicate8<T> : IFunc<T,T,bool>
+        public readonly struct BinaryPredicate8<T> : IFunc<T,T,bit>
         {
-            readonly Z0.BinaryBooleanPredicate<T> F;
+            readonly Z0.BinaryPredicate<T> F;
 
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate8(Z0.BinaryBooleanPredicate<T> f, OpIdentity id)
+            internal BinaryPredicate8(Z0.BinaryPredicate<T> f, OpIdentity id)
             {
                 F = f;
                 Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate8(Z0.BinaryBooleanPredicate<T> f, string name)
+            internal BinaryPredicate8(Z0.BinaryPredicate<T> f, string name)
             {
                 F = f;
                 Id = ApiIdentify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public bool Invoke(T a, T b)
+            public bit Invoke(T a, T b)
                 => F(a,b);
 
-            public Z0.BinaryBooleanPredicate<T> Subject
+            public Z0.BinaryPredicate<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T,bool> AsFunc()
+            public Func<T,T,bit> AsFunc()
                 => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0
                 => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,bool>(BinaryPredicate8<T> src)
+            public static implicit operator Func<T,T,bit>(BinaryPredicate8<T> src)
                 => src.AsFunc();
         }
     }

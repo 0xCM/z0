@@ -16,7 +16,7 @@ namespace Z0
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged
         {
-            for(var i=0; i< src.Length; i++)
+            for(var i=0; i<src.Length; i++)
                 src[i] = gfp.sqrt(src[i]);
             return src;
         }

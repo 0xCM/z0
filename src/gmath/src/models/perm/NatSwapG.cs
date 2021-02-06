@@ -159,8 +159,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deconstruct(out T i, out T j)
         {
-            i = NumericCast.force<T>(this.i.State);
-            j = NumericCast.force<T>(this.j.State);
+            i = Numeric.force<T>(this.i.State);
+            j = Numeric.force<T>(this.j.State);
         }
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="j">The second term index</param>
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple()
-            => (NumericCast.force<T>(i.State), NumericCast.force<T>(j.State));
+            => (Numeric.force<T>(i.State), Numeric.force<T>(j.State));
 
         /// <summary>
         /// Creates a copy

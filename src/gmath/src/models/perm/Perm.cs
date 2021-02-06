@@ -57,7 +57,7 @@ namespace Z0
             for(var k = 0u; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
-                z.swap(ref seek(srcmem, i), ref seek(srcmem, j));
+               Swaps.swap(ref seek(srcmem, i), ref seek(srcmem, j));
             }
             return src;
         }
@@ -87,7 +87,7 @@ namespace Z0
             for(var k = 0u; k<len; k++)
             {
                 ref readonly var x = ref skip(exchange, k);
-                swap(ref seek(input, x.i), ref seek(input, x.j));
+                Swaps.swap(ref seek(input, x.i), ref seek(input, x.j));
             }
         }
 
@@ -304,7 +304,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm Swap(int i, int j)
         {
-            z.swap(ref terms[i], ref terms[j]);
+            Swaps.swap(ref terms[i], ref terms[j]);
             return this;
         }
 
@@ -314,7 +314,7 @@ namespace Z0
         public Perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                z.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -324,7 +324,7 @@ namespace Z0
         public Perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                z.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                Swaps.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -415,7 +415,7 @@ namespace Z0
         {
             var dst = new T[terms.Length];
             for(var i=0; i<terms.Length; i++)
-                dst[i] = NumericCast.force<T>(terms[i]);
+                dst[i] = Numeric.force<T>(terms[i]);
             return new Perm<T>(dst);
         }
 

@@ -153,9 +153,7 @@ namespace Z0
                 sb.AppendLine();
             }
             return sb.ToString();
-
         }
-
 
         protected void mod_mul_check<N>(N n = default)
             where N : unmanaged, ITypeNat

@@ -42,7 +42,7 @@ namespace Z0
             var idx = ApiQuery.index(catalog);
             var archive =  Archives.capture(root);
             var paths =  Archives.capture(FS.dir(root.Name), host);
-            var code = ApiHexReader.Service.Read(paths.HostX86Path);
+            var code = ApiExtractReader.Service.Read(paths.HostHexPath);
             var opIndex =  ApiQuery.index(code);
             return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
         }
@@ -50,7 +50,7 @@ namespace Z0
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
             var capture = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
-            if(capture.HostX86Path.Exists)
+            if(capture.HostHexPath.Exists)
             {
 
                 var code = EvalControl.code(Wf, host.Uri, CodeArchive.Root).Members;

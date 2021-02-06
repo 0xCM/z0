@@ -43,6 +43,5 @@ namespace Z0
                 Claim.eq(expect, ival);
             }
         }
-
     }
 }

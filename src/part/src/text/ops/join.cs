@@ -18,7 +18,15 @@ namespace Z0
             => Format.join(delimiter, src);
 
         [MethodImpl(Inline)]
+        public static string join<T>(string delimiter, params T[] src)
+            => Format.join(delimiter, src);
+
+        [MethodImpl(Inline)]
         public static string join<T>(char delimiter, IEnumerable<T> src)
+            => Format.join(delimiter,src);
+
+        [MethodImpl(Inline)]
+        public static string join<T>(char delimiter, params T[] src)
             => Format.join(delimiter,src);
     }
 }

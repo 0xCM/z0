@@ -161,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple<T>()
             where T : unmanaged
-                => (z.force<T>(i), z.force<T>(j));
+                => (Numeric.force<T>(i), Numeric.force<T>(j));
 
         /// <summary>
         /// Creates a copy

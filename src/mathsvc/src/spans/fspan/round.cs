@@ -16,7 +16,7 @@ namespace Z0
             where T : unmanaged
         {
             var count = math.min(src.Length, dst.Length);
-            for(var i = 0; i< count; i++)
+            for(var i = 0; i<count; i++)
                 dst[i] = gfp.round(src[i], scale);
             return dst;
         }
