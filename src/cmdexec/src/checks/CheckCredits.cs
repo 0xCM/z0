@@ -117,7 +117,6 @@ namespace Z0
             return result;
         }
 
-        [Op]
         ReadOnlySpan<bit> CheckLiterals()
         {
             var index = z8;
@@ -128,7 +127,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         void Check(ReadOnlySpan<BinaryLiteral<ulong>> src, Span<bit> dst)
         {
             var count = src.Length;

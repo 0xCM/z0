@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
     using static AppErrorMsg;
 
     using api = ClaimValidator;
@@ -18,15 +19,13 @@ namespace Z0
     [ApiHost(ApiNames.CheckClose)]
     public readonly struct CheckClose : ICheckClose
     {
-        public static ICheckClose Checker => default(CheckClose);
-
         internal const double Tolerance = .1;
 
         internal const float Res32 = .0000001f;
 
         internal const double Res64 = .0000001;
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static bool almost(float lhs, float rhs)
         {
             var dist = fmath.dist(lhs,rhs);
@@ -38,11 +37,11 @@ namespace Z0
             return err < tolerance ? true : throw api.exception(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static bool almost(double lhs, double rhs)
         {
             var dist = fmath.dist(lhs,rhs);
-            if(dist.IsNaN() || dist.Infinite() || dist < Res64)
+            if(dist.IsNaN() || dist.Infinite() || dist<Res64)
                 return true;
 
             var err = fmath.relerr(lhs,rhs);
@@ -50,14 +49,14 @@ namespace Z0
             return err < tolerance ? true : throw api.exception(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
         }
 
-        [MethodImpl(Inline), Op, Closures(Floats)]
+        [Op, Closures(Floats)]
         public static void close<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                almost(z.float32(lhs), z.float32(rhs));
+                almost(float32(lhs), float32(rhs));
             else if(typeof(T) == typeof(double))
-                almost(z.float64(lhs), z.float64(rhs));
+                almost(float64(lhs), float64(rhs));
             else
                 throw no<T>();
         }
@@ -72,12 +71,13 @@ namespace Z0
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< CheckLengths.length(lhs,rhs); i++)
-                if(!gmath.within(lhs[i],rhs[i],tolerance))
+            var count = CheckLengths.length(lhs,rhs);
+            for(var i=0; i<count; i++)
+                if(!gmath.within(skip(lhs,i), skip(rhs,i),tolerance))
                     throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
         }
     }

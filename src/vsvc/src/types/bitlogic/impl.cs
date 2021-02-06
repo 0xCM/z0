@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     partial class VServices
@@ -22,7 +22,8 @@ namespace Z0
                 => gvec.vimpl(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.impl(a,b);
+            public T Invoke(T a, T b)
+                => gmath.impl(a,b);
         }
 
         [Closures(Integers), Impl]
@@ -30,7 +31,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vimpl(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+                => gvec.vimpl(x,y);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.impl(a,b);

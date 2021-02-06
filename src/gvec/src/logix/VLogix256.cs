@@ -121,7 +121,7 @@ namespace Z0
                 case BLK.RNot: return gvec.vrnot(a,b);
                 case BLK.Impl: return gvec.vimpl(a,b);
                 case BLK.NonImpl: return gvec.vnonimpl(a,b);
-                case BLK.CImpl: return gvec.vcimpl(a,b);
+                case BLK.CImpl: return gcpu.vcimpl(a,b);
                 case BLK.CNonImpl: return gcpu.vcnonimpl(a,b);
                 default: throw Unsupported.value(sig<T>(kind));
             }
@@ -164,7 +164,7 @@ namespace Z0
                 case BLK.RNot: return gvec.vrnot;
                 case BLK.Impl: return gvec.vimpl;
                 case BLK.NonImpl: return gvec.vnonimpl;
-                case BLK.CImpl: return gvec.vcimpl;
+                case BLK.CImpl: return gcpu.vcimpl;
                 case BLK.CNonImpl: return gcpu.vcnonimpl;
                 default: throw Unsupported.value(sig<T>(kind));
             }

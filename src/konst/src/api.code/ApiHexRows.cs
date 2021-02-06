@@ -64,13 +64,6 @@ namespace Z0
                 }
             }
             return buffer.ToArray();
-            // var attempts = src.ReadLines().Storage.Skip(1).Select(row);
-            // var failed = attempts.Where(r => !r.Succeeded);
-            // var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
-            // if(failed.Length != 0 && success.Length == 0)
-            //     return root.unparsed<ApiHexRow[]>(src.Name, failed[0].Message?.ToString() ?? EmptyString);
-            // else
-            //     return root.parsed<ApiHexRow[]>(src.Name, success);
         }
 
         [Op]

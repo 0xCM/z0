@@ -130,12 +130,18 @@ namespace Z0
             var index = z8;
             Check(Part.base2);
             CheckLoMasks(ref index, ref results);
-            Himask(w8);
-            Himask(w16);
-            Himask(w32);
-            Himask(w64);
+            CheckHiMasks();
             Counts = (SuccessCount,FailureCount);
             Wf.Ran(flow, Counts);
+        }
+
+        [Op]
+        void CheckHiMasks()
+        {
+            CheckHiMask(w8, z8, HiMaskResults8);
+            CheckHiMask(w16, z16, HiMaskResults16);
+            CheckHiMask(w32, z32, HiMaskResults32);
+            CheckHiMask(w64,z64, HiMaskResults64);
         }
 
         [Op]
@@ -264,7 +270,7 @@ namespace Z0
                 dst.Count = skip(cases, i);
                 dst.Mask = BitMasks.hi(dst.Count,t);
                 dst.PopCount = (byte)gbits.pop(dst.Mask);
-                dst.Check1 = dst.PopCount  != dst.Count;
+                dst.Check1 = dst.PopCount != dst.Count;
                 dst.Check1 = eq(dst.Count, gbits.pop(dst.Mask));
                 dst.Lowered = gmath.srl(dst.Mask, (byte)(bitwidth<T>() -  dst.Count));
                 dst.EffectiveWidth = (byte)gbits.effwidth(dst.Lowered);

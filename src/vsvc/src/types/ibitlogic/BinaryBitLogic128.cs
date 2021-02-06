@@ -32,7 +32,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> cimpl(Vector128<T> a, Vector128<T> b)
-                => gvec.vcimpl(a,b);
+                => gcpu.vcimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cnonimpl(Vector128<T> a, Vector128<T> b)

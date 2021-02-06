@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     partial class VServices
@@ -18,10 +18,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vnand(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => gvec.vnand(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.nand(a,b);
+            public T Invoke(T a, T b)
+                => gmath.nand(a,b);
         }
 
         [Closures(Integers), Nand]

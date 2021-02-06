@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static cpu;
     using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Computes the converse implication, ~x | y for vectors x and y
@@ -108,7 +107,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(cpu.vcimpl(v64i(x), v64i(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
        }
     }
 }
