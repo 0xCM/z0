@@ -15,14 +15,14 @@ namespace Z0
 
     partial struct UI
     {
+        [MethodImpl(Inline), Op]
+        public static string format(U src)
+            => BitFormatter.format(src.data, BitFormatter.limited(U.Width, U.Width));
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in U src)
             where S : unmanaged
                 => ref @as<U,S>(src);
-
-        [MethodImpl(Inline), Op]
-        public static string format(U src)
-            => BitFormatter.format(src.data, BitFormatter.limited(U.Width, U.Width));
 
         /// <summary>
         /// Promotes a <see cref='U'/> to a <see cref='Z0.uint3'/>, as indicated by the <see cref='W3'/> selector
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         [MethodImpl(Inline)]
         internal static U wrap(W w, int src)
@@ -344,18 +344,6 @@ namespace Z0
             => wrap(w2, (byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data | rhs.data));
-
-        [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data & rhs.data));
-
-        [MethodImpl(Inline), Op]
-        public static U xor(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data ^ rhs.data));
-
-        [MethodImpl(Inline), Op]
         public static U srl(U lhs, byte rhs)
             => create(w2, lhs.data >> rhs);
 
@@ -379,6 +367,82 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool eq(U x, U y)
             => x.data == y.data;
+
+        [MethodImpl(Inline), False]
+        public static U @false(U a, U b)
+            => U.Min;
+
+        [MethodImpl(Inline), True]
+        public static U @true(U a, U b)
+            => U.Max;
+
+        [MethodImpl(Inline), Op]
+        public static U and(U lhs, U rhs)
+            => wrap(w2, (byte)(lhs.data & rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static U or(U lhs, U rhs)
+            => wrap(w2, (byte)(lhs.data | rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static U xor(U lhs, U rhs)
+            => wrap(w2, (byte)(lhs.data ^ rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static U not(U a)
+            => wrap2(~a.data & U.MaxLiteral);
+
+        [MethodImpl(Inline), Nand]
+        public static U nand(U a, U b)
+            => ~(a & b);
+
+        [MethodImpl(Inline), Nor]
+        public static U nor(U a, U b)
+            => ~(a | b);
+
+        [MethodImpl(Inline), Xnor]
+        public static U xnor(U a, U b)
+            => ~(a ^ b);
+
+        [MethodImpl(Inline), Impl]
+        public static U impl(U a, U b)
+            => a | ~b;
+
+        [MethodImpl(Inline), NonImpl]
+        public static U nonimpl(U a, U b)
+            => ~a & b;
+
+        [MethodImpl(Inline), Left]
+        public static U left(U a, U b)
+            => a;
+
+        [MethodImpl(Inline), Right]
+        public static U right(U a, U b)
+            => b;
+
+        [MethodImpl(Inline), LNot]
+        public static U lnot(U a, U b)
+            => ~a;
+
+        [MethodImpl(Inline), RNot]
+        public static U rnot(U a, U b)
+            => ~b;
+
+        [MethodImpl(Inline), CImpl]
+        public static U cimpl(U a, U b)
+            => ~a | b;
+
+        [MethodImpl(Inline), CNonImpl]
+        public static U cnonimpl(U a, U b)
+            => a & ~b;
+
+        [MethodImpl(Inline), Same]
+        public static U same(U a, U b)
+            => @byte(a == b);
+
+        [MethodImpl(Inline), Select]
+        public static U select(U a, U b, U c)
+            => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline)]
         internal static byte crop2(byte x)

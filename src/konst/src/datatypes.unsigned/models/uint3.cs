@@ -72,69 +72,6 @@ namespace Z0
             => data = (byte)src;
 
         /// <summary>
-        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MinLiteral = 0;
-
-        /// <summary>
-        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MaxLiteral = 7;
-
-        /// <summary>
-        /// Specifies the bit-width represented by <see cref='U'/>
-        /// </summary>
-        public const byte Width = 3;
-
-        /// <summary>
-        /// Specifies the count of unique values representable by a <see cref='U'/>
-        /// </summary>
-        public const byte Mod = (byte)MaxLiteral + 1;
-
-        /// <summary>
-        /// Specifies the <see cref='Width'/> values as a type-level natural
-        /// </summary>
-        public static N N => default;
-
-        public static W W => default;
-
-        /// <summary>
-        /// Specifies the minimum <see cref='U'/> value
-        /// </summary>
-        public static U Min
-        {
-            [MethodImpl(Inline)]
-            get => new U(MinLiteral,true);
-        }
-
-        /// <summary>
-        /// Specifies the maximum <see cref='U'/> value
-        /// </summary>
-        public static U Max
-        {
-            [MethodImpl(Inline)]
-            get => new U(MaxLiteral,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> zero value
-        /// </summary>
-        public static U Zero
-        {
-            [MethodImpl(Inline)]
-            get => new U(0,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> one value
-        /// </summary>
-        public static U One
-        {
-            [MethodImpl(Inline)]
-            get => new U(1,true);
-        }
-
-        /// <summary>
         /// Queries an index-identified bit
         /// </summary>
         public bit this[byte pos]
@@ -307,20 +244,20 @@ namespace Z0
             => uint3(src);
 
         [MethodImpl(Inline)]
-        public static U @bool(bool x)
-            => uint3(x);
+        public static U @bool(bool a)
+            => uint3(a);
 
         [MethodImpl(Inline)]
-        public static bool operator true(U x)
-            => x.data != 0;
+        public static bool operator true(U a)
+            => a.data != 0;
 
         [MethodImpl(Inline)]
-        public static bool operator false(U x)
-            => x.data == 0;
+        public static bool operator false(U a)
+            => a.data == 0;
 
         [MethodImpl(Inline)]
-        public static U operator + (U x, U y)
-            => add(x,y);
+        public static U operator + (U a, U b)
+            => add(a,b);
 
         [MethodImpl(Inline)]
         public static U operator - (U x, U y)
@@ -371,27 +308,90 @@ namespace Z0
             => dec(x);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(U lhs, U rhs)
-            => eq(lhs,rhs);
+        public static bool operator ==(U a, U rhs)
+            => eq(a,rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(U lhs, U rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(U a, U rhs)
+            => !a.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static U operator < (U lhs, U rhs)
-            => @bool(lhs.data < rhs.data);
+        public static U operator < (U a, U rhs)
+            => @bool(a.data < rhs.data);
 
         [MethodImpl(Inline)]
-        public static U operator <= (U lhs, U rhs)
-            => @bool(lhs.data <= rhs.data);
+        public static U operator <= (U a, U rhs)
+            => @bool(a.data <= rhs.data);
 
         [MethodImpl(Inline)]
-        public static U operator > (U lhs, U rhs)
-            => @bool(lhs.data > rhs.data);
+        public static U operator > (U a, U rhs)
+            => @bool(a.data > rhs.data);
 
         [MethodImpl(Inline)]
-        public static U operator >= (U lhs, U rhs)
-            => @bool(lhs.data >= rhs.data);
+        public static U operator >= (U a, U rhs)
+            => @bool(a.data >= rhs.data);
+
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MinLiteral = 0;
+
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MaxLiteral = 7;
+
+        /// <summary>
+        /// Specifies the bit-width represented by <see cref='U'/>
+        /// </summary>
+        public const byte Width = 3;
+
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='U'/>
+        /// </summary>
+        public const byte Mod = (byte)MaxLiteral + 1;
+
+        /// <summary>
+        /// Specifies the <see cref='Width'/> values as a type-level natural
+        /// </summary>
+        public static N N => default;
+
+        public static W W => default;
+
+        /// <summary>
+        /// Specifies the minimum <see cref='U'/> value
+        /// </summary>
+        public static U Min
+        {
+            [MethodImpl(Inline)]
+            get => new U(MinLiteral,true);
+        }
+
+        /// <summary>
+        /// Specifies the maximum <see cref='U'/> value
+        /// </summary>
+        public static U Max
+        {
+            [MethodImpl(Inline)]
+            get => new U(MaxLiteral,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> zero value
+        /// </summary>
+        public static U Zero
+        {
+            [MethodImpl(Inline)]
+            get => new U(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> one value
+        /// </summary>
+        public static U One
+        {
+            [MethodImpl(Inline)]
+            get => new U(1,true);
+        }
    }
 }

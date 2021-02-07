@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct BitString
     {
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> storeseq<T>(T src)
             where T : unmanaged
-                => BitStore.bitseq(src);
+                => BitStringStore.bitseq(src);
 
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
-                => BitStore.bitchars(src,dst,offset);
+                => BitStringStore.bitchars(src,dst,offset);
 
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]

@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref U edit<S>(in S src, W dst)
             where S : unmanaged
-                => ref z.@as<S,U>(src);
+                => ref @as<S,U>(src);
 
         /// <summary>
         /// Converts a source integral value to an enum value
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in U src)
             where K : unmanaged, Enum
-                => ref z.@as<U,K>(src);
+                => ref @as<U,K>(src);
 
         /// <summary>
         /// Converts an to sized integral value
@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         [MethodImpl(Inline), Op]
         public static U maxval(W w)
@@ -197,16 +197,20 @@ namespace Z0
             => wrap3((byte)(lhs.data % rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap3((byte)(lhs.data | rhs.data));
-
-        [MethodImpl(Inline), Op]
         public static U and(U lhs, U rhs)
             => wrap3((byte)(lhs.data & rhs.data));
 
         [MethodImpl(Inline), Op]
+        public static U or(U lhs, U rhs)
+            => wrap3((byte)(lhs.data | rhs.data));
+
+        [MethodImpl(Inline), Op]
         public static U xor(U lhs, U rhs)
             => wrap3((byte)(lhs.data ^ rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static U not(U a)
+            => wrap3(~a.data & U.MaxLiteral);
 
         [MethodImpl(Inline), Op]
         public static U srl(U lhs, byte rhs)
@@ -219,6 +223,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)
             => bit.test(src,pos);
+
 
         [MethodImpl(Inline), Op]
         public static U set(U src, byte pos, bit state)

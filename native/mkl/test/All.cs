@@ -168,7 +168,7 @@ namespace Z0.Mkl
             var n = 10;
             var incx = 1;
             Span<float> x = new float[]{1.0f,  -2.0f,  3.0f,  4.0f,  -5.0f,  6.0f,  -7.0f,  8.0f,  -9.0f,  10.0f};
-            input(x.FormatAsVector());
+            input(x.FormatVector());
 
             var sw = Time.stopwatch();
             var result = CBLAS.cblas_sasum(n, ref x[0], incx);
@@ -187,7 +187,7 @@ namespace Z0.Mkl
             var n = 4;
             var incx = 1;
             var x =  ComplexF64.Load(new double[]{1.2, 2.5, 3.0, 1.7, 4.0, 0.53, -5.5, -0.29});
-            msg += input(x.FormatAsVector(),silent);
+            msg += input(x.FormatVector(),silent);
 
             var expect = x.Map(z => Math.Abs(z.re) + Math.Abs(z.im)).Reduce((a,b) => a + b);
             expected(expect);
@@ -208,13 +208,13 @@ namespace Z0.Mkl
             var alpha = .5f;
             Span<float> x = new float[]{1, 2, 3, 4, 5};
             Span<float> y = new float[]{.5f, .5f, .5f, .5f, .5f};
-            input($"alpha={alpha}, x = {x.FormatAsVector()}, y = {y.FormatAsVector()}");
+            input($"alpha={alpha}, x = {x.FormatVector()}, y = {y.FormatVector()}");
 
             var sw = Time.stopwatch();
             CBLAS.cblas_saxpy(n, alpha, ref x[0], incx, ref y[0], incy);
             var ss = snap(sw);
 
-            output(y.FormatAsVector());
+            output(y.FormatVector());
             conclude(ss);
         }
 

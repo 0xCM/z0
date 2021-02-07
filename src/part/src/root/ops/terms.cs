@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
     using static memory;
 
     partial struct root
     {
+        [Op, Closures(Closure)]
         public static Index<SeqTerm<T>> terms<T>(ReadOnlySpan<T> src)
         {
             var count = src.Length;
@@ -22,6 +21,5 @@ namespace Z0
                 seek(dst,i) = new SeqTerm<T>(i,skip(src,i));
             return buffer;
         }
-
     }
 }

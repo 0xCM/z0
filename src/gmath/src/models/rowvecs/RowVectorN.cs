@@ -149,7 +149,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => data.Format();
+            => data.FormatList();
 
         public override bool Equals(object rhs)
             => rhs is RowVector<N,T> x && Equals(x);

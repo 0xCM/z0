@@ -71,71 +71,6 @@ namespace Z0
         internal uint2(BitState src)
             => data = (byte)src;
 
-        /// <summary>
-        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MinLiteral = 0;
-
-        /// <summary>
-        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MaxLiteral = 3;
-
-        /// <summary>
-        /// Specifies the bit-width of the <see cref='U'/> data type
-        /// </summary>
-        public const byte Width = 2;
-
-        /// <summary>
-        /// Specifies the count of unique values representable by a <see cref='U'/>
-        /// </summary>
-        public const uint Mod = MaxLiteral + 1;
-
-        /// <summary>
-        /// Specifies a <see cref='U'/> bitwidth <see ref='W'/> representative
-        /// </summary>
-        public static W W => default;
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> bit-width as a natural number
-        /// </summary>
-        public static N N => default;
-
-        /// <summary>
-        /// Specifies the minimum <see cref='U'/> value
-        /// </summary>
-        public static U Min
-        {
-            [MethodImpl(Inline)]
-            get => new U(MinLiteral,true);
-        }
-
-        /// <summary>
-        /// Specifies the maximum <see cref='U'/> value
-        /// </summary>
-        public static U Max
-        {
-            [MethodImpl(Inline)]
-            get => new U(MaxLiteral,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> zero value
-        /// </summary>
-        public static U Zero
-        {
-            [MethodImpl(Inline)]
-            get => new U(0,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> one value
-        /// </summary>
-        public static U One
-        {
-            [MethodImpl(Inline)]
-            get => new U(1,true);
-        }
 
 
         /// <summary>
@@ -413,7 +348,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static U operator ~(U src)
-            => wrap2(~src.data & MaxLiteral);
+            => not(src);
 
         [MethodImpl(Inline)]
         public static U operator ++(U x)
@@ -446,5 +381,71 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U operator >= (U lhs, U rhs)
             => @bool(lhs.data >= rhs.data);
+
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MinLiteral = 0;
+
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MaxLiteral = 3;
+
+        /// <summary>
+        /// Specifies the bit-width of the <see cref='U'/> data type
+        /// </summary>
+        public const byte Width = 2;
+
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='U'/>
+        /// </summary>
+        public const uint Mod = MaxLiteral + 1;
+
+        /// <summary>
+        /// Specifies a <see cref='U'/> bitwidth <see ref='W'/> representative
+        /// </summary>
+        public static W W => default;
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> bit-width as a natural number
+        /// </summary>
+        public static N N => default;
+
+        /// <summary>
+        /// Specifies the minimum <see cref='U'/> value
+        /// </summary>
+        public static U Min
+        {
+            [MethodImpl(Inline)]
+            get => new U(MinLiteral,true);
+        }
+
+        /// <summary>
+        /// Specifies the maximum <see cref='U'/> value
+        /// </summary>
+        public static U Max
+        {
+            [MethodImpl(Inline)]
+            get => new U(MaxLiteral,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> zero value
+        /// </summary>
+        public static U Zero
+        {
+            [MethodImpl(Inline)]
+            get => new U(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> one value
+        /// </summary>
+        public static U One
+        {
+            [MethodImpl(Inline)]
+            get => new U(1,true);
+        }
     }
 }

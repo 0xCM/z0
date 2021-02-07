@@ -4,16 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum BitSectionStyle : byte
+    /// <summary>
+    /// Defines literals corresponding to parity state
+    /// </summary>
+    public enum ParityKind : byte
     {
         /// <summary>
-        /// Indicates a <see cref='BitSection'/ is presented as [max:min]
+        /// Even
         /// </summary>
-        Intel = 0,
+        Even = BitSeq1.b0,
 
         /// <summary>
-        /// Indicates a <see cref='BitSection'/ is presented as [min,max]
+        /// Enabled
         /// </summary>
-        Interval = 1,
+        Odd = BitSeq1.b1,
     }
 }

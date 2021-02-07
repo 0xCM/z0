@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-
+    using static Part;
     using static memory;
     using static TextRules;
     using static AsmExpr;
@@ -181,9 +181,28 @@ namespace Z0.Asm
             }
         }
 
-        public void Run()
+        public void GenBits()
         {
+            var factory = BitStoreFactory.create(Wf);
+            var blocks = factory.ByteCharBlocks().View;
+            var count = blocks.Length;
+            var buffer = alloc<ByteSpanProp>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                var b = @bytes(block.Data);
+                seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
+                //Wf.Row(prop.Format());
+            }
+            var merge = ByteSpans.merge(buffer, "CharBytes");
+            var s0 = recover<char>(merge.Segment(16,16));
+            Wf.Row(s0.ToString());
+        }
 
+        public unsafe void Run()
+        {
+            GenBits();
         }
 
         public static void Main(params string[] args)

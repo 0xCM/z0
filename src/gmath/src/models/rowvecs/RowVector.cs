@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="sep">The component delimiter</param>
         [MethodImpl(Inline)]
         public string Format()
-            => data.Format();
+            => data.FormatList();
 
         /// <summary>
         /// Copies vector content into a caller-provided span

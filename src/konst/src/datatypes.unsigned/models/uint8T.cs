@@ -35,44 +35,80 @@ namespace Z0
         internal uint8T(BitState src)
             => data = (byte)src;
 
-        public const T MinLiteral = 0;
-
-        public const T MaxLiteral = byte.MaxValue;
-
         /// <summary>
-        /// Specifies the bit-width represented by <see cref='S'/>
+        /// Queries the state of an index-identified bit
         /// </summary>
-        public const byte Width = 8;
-
-        public const uint Mod = 256;
-
-        public static W W => default;
-
-        public static N N => default;
-
-        public static S Zero => 0;
-
-        public static S One => 1;
-
-        /// <summary>
-        /// Specifies the minimum <see cref='S'/> value
-        /// </summary>
-        public static S Min
+        public bit this[byte pos]
         {
             [MethodImpl(Inline)]
-            get => new S(MinLiteral);
+            get => test(this, pos);
+        }
+
+        public K Kind
+        {
+            [MethodImpl(Inline)]
+            get => (K) data;
+        }
+
+        public T Content
+        {
+            [MethodImpl(Inline)]
+            get => data;
+        }
+
+        public bool IsZero
+        {
+            [MethodImpl(Inline)]
+            get => data == 0;
+        }
+
+        public bool IsNonZero
+        {
+            [MethodImpl(Inline)]
+            get => data != 0;
         }
 
         /// <summary>
-        /// Specifies the maximum <see cref='S'/> value
+        /// Specifies whether the current value is the maximum value
         /// </summary>
-        public static S Max
+        public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => new S(MaxLiteral);
+            get => data == MaxLiteral;
+        }
+
+        /// <summary>
+        /// Specifies whether the current value is the minimum value
+        /// </summary>
+        public bool IsMin
+        {
+            [MethodImpl(Inline)]
+            get => data == MinLiteral;
+        }
+
+        public uint Hash
+        {
+            [MethodImpl(Inline)]
+            get => data;
         }
 
         [MethodImpl(Inline)]
+        public bool Equals(S y)
+            => data == y.data;
+
+
+        public override int GetHashCode()
+            => (int)Hash;
+
+        public override bool Equals(object y)
+            => data.Equals(y);
+        public string Format()
+            => data.FormatAsmHex();
+
+        public override string ToString()
+            => data.ToString();
+
+       [MethodImpl(Inline)]
         public static implicit operator S(K src)
             => new S(src);
 
@@ -232,81 +268,47 @@ namespace Z0
         public static S operator ++ (S src)
             => inc(src);
 
+       public const T MinLiteral = 0;
+
+        public const T MaxLiteral = byte.MaxValue;
+
         /// <summary>
-        /// Queries the state of an index-identified bit
+        /// Specifies the bit-width represented by <see cref='S'/>
         /// </summary>
-        public BitState this[byte pos]
-        {
-            [MethodImpl(Inline)]
-            get => test(this, pos);
-        }
+        public const byte Width = 8;
 
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => (K) data;
-        }
+        public const uint Mod = 256;
 
-        public T Content
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
+        public static W W => default;
 
-        public bool IsZero
-        {
-            [MethodImpl(Inline)]
-            get => data == 0;
-        }
+        public static N N => default;
 
-        public bool IsNonZero
+        public static S Zero => 0;
+
+        public static S One => 1;
+
+
+        /// <summary>
+        /// Specifies the minimum <see cref='S'/> value
+        /// </summary>
+        public static S Min
         {
             [MethodImpl(Inline)]
-            get => data != 0;
+            get => new S(MinLiteral);
         }
 
         /// <summary>
-        /// Specifies whether the current value is the maximum value
+        /// Specifies the maximum <see cref='S'/> value
         /// </summary>
-        public bool IsMax
+        public static S Max
         {
             [MethodImpl(Inline)]
-            get => data == MaxLiteral;
+            get => new S(MaxLiteral);
         }
-
-        /// <summary>
-        /// Specifies whether the current value is the minimum value
-        /// </summary>
-        public bool IsMin
-        {
-            [MethodImpl(Inline)]
-            get => data == MinLiteral;
-        }
-
 
         [MethodImpl(Inline)]
         static S wrap(int x)
             => new S((byte)x);
 
-        [MethodImpl(Inline)]
-        public bool Equals(S y)
-            => data == y.data;
-
-        public uint Hash
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
-
-        public override int GetHashCode()
-            => (int)Hash;
-
-        public override bool Equals(object y)
-            => data.Equals(y);
-        public string Format()
-            => data.FormatAsmHex();
-
-        public override string ToString()
-            => data.ToString();
     }
 }

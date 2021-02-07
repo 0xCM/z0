@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    static class BitStore
+    static class BitStringStore
     {
         const NumericKind Closure = UnsignedInts;
 

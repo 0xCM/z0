@@ -52,21 +52,21 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this Vector128<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => gcpu.vspan(src).Format(sep,0,pad,true);
+                => gcpu.vspan(src).FormatList(sep,0,pad,true);
 
         [Op, Closures(Closure)]
         public static string Format<T>(this Vector256<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
-                => gcpu.vspan(src).Format(sep, 0, pad, true);
+                => gcpu.vspan(src).FormatList(sep, 0, pad, true);
 
         [Op, Closures(Closure)]
         public static string Format<T>(this Vector512<T> src, char sep = Chars.Comma, int pad = 2)
             where T : unmanaged
                 => text.bracket(
                         text.concat(
-                            gcpu.vspan(src).Format(sep, 0, pad, false),
+                            gcpu.vspan(src).FormatList(sep, 0, pad, false),
                             sep, Chars.Space,
-                            gcpu.vspan(src).Format(sep, 0, pad, false)
+                            gcpu.vspan(src).FormatList(sep, 0, pad, false)
                         )
                     );
 

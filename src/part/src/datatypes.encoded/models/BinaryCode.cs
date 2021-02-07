@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source
@@ -23,10 +24,28 @@ namespace Z0
         public BinaryCode(byte[] bytes)
             => Data = bytes;
 
+        public ByteSize Size
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
+
+        public BitSize Width
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length*8;
+        }
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;
+        }
+
+        public ref byte First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Data);
         }
 
         /// <summary>

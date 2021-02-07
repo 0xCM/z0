@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock8<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock16<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock32<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock64<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock128<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock256<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
 
         /// <summary>
         /// Formats blocked content
@@ -98,6 +98,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this SpanBlock512<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
-                => src.Storage.Format(delimiter, 0, pad, true);
+                => src.Storage.FormatList(delimiter, 0, pad, true);
     }
 }

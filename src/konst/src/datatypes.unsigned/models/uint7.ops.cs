@@ -192,12 +192,12 @@ namespace Z0
             => reduce7((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap7((byte)(lhs.data | rhs.data));
-
-        [MethodImpl(Inline), Op]
         public static U and(U lhs, U rhs)
             => wrap7((byte)(lhs.data & rhs.data));
+
+        [MethodImpl(Inline), Op]
+        public static U or(U lhs, U rhs)
+            => wrap7((byte)(lhs.data | rhs.data));
 
         [MethodImpl(Inline), Op]
         public static U xor(U lhs, U rhs)
@@ -210,7 +210,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static U sll(U lhs, byte rhs)
             => uint7(lhs.data << rhs);
-
 
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)

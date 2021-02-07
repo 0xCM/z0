@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public readonly struct Unsigned
     {
         public byte EffectiveWidth {get;}
@@ -14,7 +13,5 @@ namespace Z0
         public ulong MaxValue => Pow2.pow(EffectiveWidth);
 
         public ulong Modulus => MaxValue + 1;
-
     }
-
 }

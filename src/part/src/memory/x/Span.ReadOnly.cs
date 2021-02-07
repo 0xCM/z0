@@ -19,5 +19,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> ReadOnly<T>(this Span<T> src)
             => src;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> Invert<T>(this Span<T> src)
+        {
+            src.Reverse();
+            return src;
+        }
     }
 }

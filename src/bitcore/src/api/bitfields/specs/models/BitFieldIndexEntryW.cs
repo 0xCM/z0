@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Associates the declaration order of an enum literal with the corresponding literal value
@@ -21,10 +21,6 @@ namespace Z0
         public string FieldName {get;}
 
         public W FieldWidth {get;}
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(BitFieldIndexEntry<W> lhs, BitFieldIndexEntry<W> rhs)
-            => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
         public BitFieldIndexEntry(uint index, string name, W width)
@@ -56,5 +52,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator ==(BitFieldIndexEntry<W> a, BitFieldIndexEntry<W> b)
             => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(BitFieldIndexEntry<W> lhs, BitFieldIndexEntry<W> rhs)
+            => !lhs.Equals(rhs);
+
     }
 }

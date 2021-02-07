@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));
+                => new BitString(BitStringStore.bitseq(src, maxbits ?? bitsize<T>()));
 
         /// <summary>
         /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
@@ -82,7 +82,7 @@ namespace Z0
         public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
             where T : unmanaged
         {
-            var bitseq = BitStore.bitseq(src, maxbits ?? bitsize<T>());
+            var bitseq = BitStringStore.bitseq(src, maxbits ?? bitsize<T>());
             bitseq.CopyTo(storage);
             return new BitString(storage);
         }
@@ -115,7 +115,7 @@ namespace Z0
 
             for(int i=0; i<src.Length; i++)
             {
-                var bits = BitStore.bitseq(skip(src,i));
+                var bits = BitStringStore.bitseq(skip(src,i));
                 for(var j=0u; j<cellbits && k<bitcount; j++, k++)
                     seek(dst, k) = skip(bits,j);
             }

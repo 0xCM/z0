@@ -52,7 +52,6 @@ namespace Z0.Generate
             dst.WriteLine(level(i, LBrace));
         }
 
-
         void DeclareFields(int i, TextWriter dst)
         {
             dst.WriteLine(level(i,"bit Processed;"));

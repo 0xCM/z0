@@ -25,9 +25,9 @@ namespace Z0
             => new U(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref S edit<S>(in uint4 src)
+        public static ref S edit<S>(in U src)
             where S : unmanaged
-                => ref @as<uint4,S>(src);
+                => ref @as<U,S>(src);
 
         /// <summary>
         /// Reinterprets an input reference as as a mutable <see cref='Z0.uint3'/> reference cell
@@ -203,12 +203,28 @@ namespace Z0
             => reduce4((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
+        public static U and(U lhs, U rhs)
+            => wrap4(lhs.data & rhs.data);
+
+        [MethodImpl(Inline), Op]
+        public static U or(U lhs, U rhs)
+            => wrap4(lhs.data | rhs.data);
+
+        [MethodImpl(Inline), Op]
+        public static U xor(U lhs, U rhs)
+            => wrap4(lhs.data ^ rhs.data);
+
+        [MethodImpl(Inline), Op]
+        public static U not(U a)
+            => wrap4(~a.data & U.MaxLiteral);
+
+        [MethodImpl(Inline), Op]
         public static U hi(U src)
-            => wrap4((byte)(src.data >> 2 & 0b11));
+            => wrap4(src.data >> 2 & 0b11);
 
         [MethodImpl(Inline), Op]
         public static U lo(U src)
-            => wrap4((byte)(src.data & 0b11));
+            => wrap4(src.data & 0b11);
 
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)
@@ -232,8 +248,8 @@ namespace Z0
             => (byte)(x % U.Mod);
 
         [MethodImpl(Inline)]
-        internal static U wrap4(byte src)
-            => new U(src, false);
+        internal static U wrap4(int src)
+            => new U((byte)src, false);
 
         [MethodImpl(Inline)]
         internal static byte crop4(byte x)
@@ -245,5 +261,66 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format(U src)
             => BitFormatter.format(src.data, FormatConfig4);
+
+
+        [MethodImpl(Inline), Op]
+        public static U @false(U a, U b)
+            => U.Min;
+
+        [MethodImpl(Inline), Op]
+        public static U @true(U a, U b)
+            => U.Max;
+
+        [MethodImpl(Inline), Op]
+        public static U nand(U a, U b)
+            => ~(a & b);
+
+        [MethodImpl(Inline), Op]
+        public static U nor(U a, U b)
+            => ~(a | b);
+
+        [MethodImpl(Inline), Op]
+        public static U xnor(U a, U b)
+            => ~(a ^ b);
+
+        [MethodImpl(Inline), Op]
+        public static U impl(U a, U b)
+            => a | ~b;
+
+        [MethodImpl(Inline), Op]
+        public static U nonimpl(U a, U b)
+            => ~a & b;
+
+        [MethodImpl(Inline), Op]
+        public static U left(U a, U b)
+            => a;
+
+        [MethodImpl(Inline), Op]
+        public static U right(U a, U b)
+            => b;
+
+        [MethodImpl(Inline), Op]
+        public static U lnot(U a, U b)
+            => ~a;
+
+        [MethodImpl(Inline), RNot]
+        public static U rnot(U a, U b)
+            => ~b;
+
+        [MethodImpl(Inline), Op]
+        public static U cimpl(U a, U b)
+            => ~a | b;
+
+        [MethodImpl(Inline), Op]
+        public static U cnonimpl(U a, U b)
+            => a & ~b;
+
+        [MethodImpl(Inline)]
+        public static U same(U a, U b)
+            => @byte(a == b);
+
+        [MethodImpl(Inline), Select]
+        public static U select(U a, U b, U c)
+            => or(and(a,b), nonimpl(a,c));
     }
 }

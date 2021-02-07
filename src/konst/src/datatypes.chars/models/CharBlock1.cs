@@ -39,11 +39,18 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Length
+        public uint Count
         {
             [MethodImpl(Inline)]
             get => CharCount;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Data.ToString();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator CharBlock1(string src)

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint3;
 
@@ -82,7 +83,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static U same(U a, U b)
-                => z.@byte(a == b);
+                => @byte(a == b);
 
             [MethodImpl(Inline), Select]
             public static U select(U a, U b, U c)

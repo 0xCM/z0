@@ -23,30 +23,6 @@ namespace Z0
     {
         internal readonly T data;
 
-        /// <summary>
-        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MinLiteral = 0;
-
-        /// <summary>
-        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const T MaxLiteral = 1;
-
-        /// <summary>
-        /// Specifies the count of unique values representable by a <see cref='U'/>
-        /// </summary>
-        public const uint Count = MaxLiteral + 1;
-
-        /// <summary>
-        /// Specifies the bit-width represented by <see cref='U'/>
-        /// </summary>
-        public const byte Width = 1;
-
-        public static W W => default;
-
-        public static N N => default;
-
         [MethodImpl(Inline)]
         internal uint1(uint8T src)
             => data = (byte)(src & MaxLiteral);
@@ -397,6 +373,31 @@ namespace Z0
             => @bool(x.data >= y.data);
 
         /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MinLiteral = 0;
+
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const T MaxLiteral = 1;
+
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='U'/>
+        /// </summary>
+        public const uint Count = MaxLiteral + 1;
+
+        /// <summary>
+        /// Specifies the bit-width represented by <see cref='U'/>
+        /// </summary>
+        public const byte Width = 1;
+
+        public static W W => default;
+
+        public static N N => default;
+
+
+       /// <summary>
         /// Specifies the minimum <see cref='U'/> value
         /// </summary>
         public static U Min

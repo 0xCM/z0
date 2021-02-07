@@ -42,6 +42,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public string Format()
+            => Data.ToString();
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
         public static implicit operator CharBlock8(string src)
             => api.init(src, out CharBlock8 dst);
 

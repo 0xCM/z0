@@ -40,66 +40,6 @@ namespace Z0
             => data = (byte)src;
 
         /// <summary>
-        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const byte MinLiteral = 0;
-
-        /// <summary>
-        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
-        /// </summary>
-        public const byte MaxLiteral = 0xF;
-
-        /// <summary>
-        /// Specifies the count of unique values representable by a <see cref='U'/>
-        /// </summary>
-        public const byte Mod = (byte)MaxLiteral + 1;
-
-        /// <summary>
-        /// Specifies the represented data type bit-width
-        /// </summary>
-        public const byte Width = 4;
-
-        public static W W => default;
-
-        public static N N => default;
-
-        /// <summary>
-        /// Specifies the minimum <see cref='U'/> value
-        /// </summary>
-        public static U Min
-        {
-            [MethodImpl(Inline)]
-            get => new U(MinLiteral, true);
-        }
-
-        /// <summary>
-        /// Specifies the maximum <see cref='U'/> value
-        /// </summary>
-        public static U Max
-        {
-            [MethodImpl(Inline)]
-            get => new U(MaxLiteral,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> zero value
-        /// </summary>
-        public static U Zero
-        {
-            [MethodImpl(Inline)]
-            get => new U(0,true);
-        }
-
-        /// <summary>
-        /// Specifies the <see cref='U'/> one value
-        /// </summary>
-        public static U One
-        {
-            [MethodImpl(Inline)]
-            get => new U(1,true);
-        }
-
-        /// <summary>
         /// Queries an index-identified bit
         /// </summary>
         public bit this[byte pos]
@@ -351,5 +291,65 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U operator >= (U x, U y)
             => @bool(x.data >= y.data);
+
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const byte MinLiteral = 0;
+
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='U'/> data type as a literal value
+        /// </summary>
+        public const byte MaxLiteral = 0xF;
+
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='U'/>
+        /// </summary>
+        public const byte Mod = (byte)MaxLiteral + 1;
+
+        /// <summary>
+        /// Specifies the represented data type bit-width
+        /// </summary>
+        public const byte Width = 4;
+
+        public static W W => default;
+
+        public static N N => default;
+
+        /// <summary>
+        /// Specifies the minimum <see cref='U'/> value
+        /// </summary>
+        public static U Min
+        {
+            [MethodImpl(Inline)]
+            get => new U(MinLiteral, true);
+        }
+
+        /// <summary>
+        /// Specifies the maximum <see cref='U'/> value
+        /// </summary>
+        public static U Max
+        {
+            [MethodImpl(Inline)]
+            get => new U(MaxLiteral,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> zero value
+        /// </summary>
+        public static U Zero
+        {
+            [MethodImpl(Inline)]
+            get => new U(0,true);
+        }
+
+        /// <summary>
+        /// Specifies the <see cref='U'/> one value
+        /// </summary>
+        public static U One
+        {
+            [MethodImpl(Inline)]
+            get => new U(1,true);
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
             {
                 var a = Random.Next<T>();
                 var bits = bit.unpack(a);
-                var s1 = bits.Format();
+                var s1 = bits.FormatList();
                 var s2 = formatter.Format(a);
                 Claim.ClaimEq(s1,s1);
             }

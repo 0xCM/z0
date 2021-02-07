@@ -7,16 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static memory;
 
-    public interface ICharBlock<T>
+    public interface ICharBlock<T> : ITextual
         where T : unmanaged, ICharBlock<T>
     {
         Span<char> Data {get;}
 
-        ref char First => ref first(Data);
+        string ITextual.Format()
+            => Data.ToString();
+        ref char First
+            => ref first(Data);
 
-        uint Length => (uint)Data.Length;
+        int Length
+            => Data.Length;
+
+        uint Count
+            => (uint)Data.Length;
     }
 }

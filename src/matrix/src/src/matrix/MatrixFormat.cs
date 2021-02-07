@@ -123,6 +123,6 @@ namespace Z0
         public static string Fomat<N,T>(this Block256<N,T> src)
             where T : unmanaged
             where N: unmanaged, ITypeNat
-                => src.Unsized.Format();
+                => src.Unsized.FormatList();
     }
 }

@@ -21,15 +21,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes<T>(in T src)
             where T : struct
-                => AsBytes(CreateSpan(ref edit(src), 1));
+                => cover(@as<T,byte>(src), size<T>());
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes2<T>(in T src)
             where T : struct
-        {
-            ref readonly var b = ref @as<T,byte>(src);
-            return cover(b, size<T>());
-        }
+                => cover(@as<T,byte>(src), size<T>());
 
         /// <summary>
         /// Presents a span of generic values as bytespan
@@ -39,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes<T>(Span<T> src)
             where T : struct
-                => AsBytes(src);
+                => cover<byte>(u8<T>(first(src)), src.Length*size<T>());
 
         /// <summary>
         /// Presents a readonly span over T-cells as a readonly bytespan
@@ -49,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct
-                => cover<byte>(u8<T>(first(src)), src.Length*SizeOf<T>());
+                => cover<byte>(u8<T>(first(src)), src.Length*size<T>());
 
         /// <summary>
         /// Presents a selected segment of T-cells from a source span as a readonly bytespan

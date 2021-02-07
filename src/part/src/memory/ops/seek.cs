@@ -263,5 +263,9 @@ namespace Z0
 
             public byte Data;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public unsafe static ref char seek(char* pSrc, int i)
+            =>  ref @ref(pSrc + size<char>()*i);
     }
 }

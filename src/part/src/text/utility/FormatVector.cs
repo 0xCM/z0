@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static TextRules;
+
     partial class XText
     {
         /// <summary>
@@ -16,10 +18,10 @@ namespace Z0
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
         [TextUtility, Closures(Closure)]
-        public static string FormatAsVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
+        public static string FormatVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
         {
             var body = src.Map(x => x.ToString()).Concat(sep);
-            return Chars.Lt + body + Chars.Gt;
+            return Format.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
         }
 
         /// <summary>
@@ -29,7 +31,7 @@ namespace Z0
         /// <param name="sep">The item separator</param>
         /// <typeparam name="T">The item type</typeparam>
         [TextUtility, Closures(Closure)]
-        public static string FormatAsVector<T>(this Span<T> src, char sep = Chars.Comma)
-            => src.ReadOnly().FormatAsVector(sep);
+        public static string FormatVector<T>(this Span<T> src, char sep = Chars.Comma)
+            => src.ReadOnly().FormatVector(sep);
     }
 }

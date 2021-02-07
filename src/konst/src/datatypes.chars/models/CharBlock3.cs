@@ -49,7 +49,7 @@ namespace Z0
         public static implicit operator B(string src)
             => api.init(src, out B dst);
 
-        public uint Length
+        public uint Count
         {
             [MethodImpl(Inline)]
             get => CharCount;

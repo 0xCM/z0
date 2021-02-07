@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Represents a sequence of bits
@@ -560,7 +560,7 @@ namespace Z0
         public T Scalar<T>(int offset = 0, int? count = null)
             where T : unmanaged
         {
-            var len = min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);
+            var len = root.min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);
             var bits = BitSeq.Slice(offset, len);
             return bits.Take<T>();
         }

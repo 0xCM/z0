@@ -8,85 +8,87 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint2;
+    using api = UI;
 
     partial struct UI
     {
         [ApiHost(ApiNames.U2, true)]
         public readonly struct U2
         {
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), False]
             public static U @false(U a, U b)
-                => U.Min;
+                => api.@false(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), True]
             public static U @true(U a, U b)
-                => U.Max;
+                => api.@true(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), And]
             public static U and(U a, U b)
-                => a & b;
+                => api.and(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Nand]
             public static U nand(U a, U b)
-                => ~(a & b);
+                => api.nand(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Or]
             public static U or(U a, U b)
-                => a | b;
+                => api.or(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Nor]
             public static U nor(U a, U b)
-                => ~(a | b);
+                => api.nor(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Xor]
             public static U xor(U a, U b)
-                => a ^ b;
+                => api.xor(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Xnor]
             public static U xnor(U a, U b)
-                => ~(a ^ b);
+                => api.xnor(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Impl]
             public static U impl(U a, U b)
-                => a | ~b;
+                => api.impl(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), NonImpl]
             public static U nonimpl(U a, U b)
-                => ~a & b;
+                => api.nonimpl(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Left]
             public static U left(U a, U b)
-                => a;
+                => api.left(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), Right]
             public static U right(U a, U b)
-                => b;
+                => api.right(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), LNot]
             public static U lnot(U a, U b)
-                => ~a;
+                => api.lnot(a,b);
 
             [MethodImpl(Inline), RNot]
             public static U rnot(U a, U b)
-                => ~b;
+                => api.rnot(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), CImpl]
             public static U cimpl(U a, U b)
-                => ~a | b;
+                => api.cimpl(a,b);
 
-            [MethodImpl(Inline), Op]
+            [MethodImpl(Inline), CNonImpl]
             public static U cnonimpl(U a, U b)
-                => a & ~b;
+                => api.cnonimpl(a,b);
 
-            [MethodImpl(Inline)]
+            [MethodImpl(Inline), Same]
             public static U same(U a, U b)
-                => z.@byte(a == b);
+                => api.same(a,b);
 
             [MethodImpl(Inline), Select]
             public static U select(U a, U b, U c)
-                => or(and(a,b), nonimpl(a,c));
+                => api.select(a,b,c);
         }
     }
 }

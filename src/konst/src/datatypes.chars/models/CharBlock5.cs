@@ -47,7 +47,7 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public uint Length
+        public uint Count
         {
             [MethodImpl(Inline)]
             get => CharCount;

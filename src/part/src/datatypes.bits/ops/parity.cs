@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct bit
     {
@@ -19,5 +20,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte parity(uint i, bit p)
             => (byte)(i*2 + (uint)p);
+
+        [MethodImpl(Inline), Op]
+        public static ParityKind parity(byte src)
+            => (ParityKind)u8(src % 2 == 0);
+
+        [MethodImpl(Inline), Op]
+        public static ParityKind parity(ushort src)
+            => (ParityKind)u8(src % 2 == 0);
+
+        [MethodImpl(Inline), Op]
+        public static ParityKind parity(uint src)
+            => (ParityKind)u8(src % 2 == 0);
+
+        [MethodImpl(Inline), Op]
+        public static ParityKind parity(ulong src)
+            => (ParityKind)u8(src % 2 == 0);
     }
 }

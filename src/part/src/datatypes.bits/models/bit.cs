@@ -68,27 +68,14 @@ namespace Z0
         public bit(ulong state)
             => State = state != 0;
 
-        /// <summary>
-        /// Constructs a disabled bit
-        /// </summary>
-        public static bit Off
-        {
-             [MethodImpl(Inline)]
-             get => false;
-        }
 
-        /// <summary>
-        /// Constructs an enabled bit
-        /// </summary>
-        public static bit On
-        {
-             [MethodImpl(Inline)]
-             get => true;
-        }
+        // [MethodImpl(Inline), Op]
+        // public char ToChar()
+        //     => (char)(u8(State) + 48);
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public char ToChar()
-            => (char)(u8(State) + 48);
+            => State ? '1' : '0';
 
         [MethodImpl(Inline)]
         public string Format()
@@ -305,11 +292,33 @@ namespace Z0
             => new bit((byte)src);
 
         [MethodImpl(Inline)]
+        public static implicit operator bit(ParityKind src)
+            => new bit((byte)src);
+
+        [MethodImpl(Inline)]
         public static bool operator ==(bit a, bit b)
             => a.State == b.State;
 
         [MethodImpl(Inline)]
         public static bool operator !=(bit a, bit b)
             => a.State != b.State;
+
+        /// <summary>
+        /// Constructs a disabled bit
+        /// </summary>
+        public static bit Off
+        {
+             [MethodImpl(Inline)]
+             get => false;
+        }
+
+        /// <summary>
+        /// Constructs an enabled bit
+        /// </summary>
+        public static bit On
+        {
+             [MethodImpl(Inline)]
+             get => true;
+        }
     }
 }
