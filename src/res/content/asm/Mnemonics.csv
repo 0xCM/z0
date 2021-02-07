@@ -1,5 +1,4 @@
-# MnemonicIndex - https://www.felixcloutier.com/x86/index.html
-----------------------------------------------------------------------------------------------------------------------------------------
+# Mnemonics - https://www.felixcloutier.com/x86/index.html
 | Mnemonic             | Summary                                                                                                            |
 | AAA                  | ASCII Adjust After Addition                                                                                        |
 | AAD                  | ASCII Adjust AX Before Division                                                                                    |

@@ -1,6 +1,3 @@
-# ADD — Add
-# *In 64-bit mode, r/m8 can not be encoded to access the following byte registers if a REX prefix is used: AH, BH, CH, DH.
-----------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-bit Mode | Compat/Leg Mode | Description                                   |
 | 04 ib            | ADD AL, imm8      | I     | Valid       | Valid           | Add imm8 to AL.                               |
 | 05 iw            | ADD AX, imm16     | I     | Valid       | Valid           | Add imm16 to AX.                              |

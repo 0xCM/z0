@@ -1,5 +1,3 @@
-# PSHUFLW — Shuffle Packed Low Words
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode                      | Instruction                            | Op/En | 64/32 bit Mode Support | CPUID Feature Flag | Description                                                                                                        |
 | F2 0F 70 / r ib             | PSHUFLW xmm1, xmm2/m128, imm8          | A     | V/V                    | SSE2               | Shuffle the low words in xmm2/m128 based on the encoding in imm8 and store the result in xmm1 .                    |
 | VEX.128.F2.0F.WIG 70 /r ib  | VPSHUFLW xmm1, xmm2/m128, imm8         | A     | V/V                    | AVX                | Shuffle the low words in xmm2/m128 based on the encoding in imm8 and store the result in xmm1 .                    |

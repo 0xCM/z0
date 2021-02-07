@@ -12,14 +12,14 @@ namespace Z0
 
     partial struct gcells
     {
-       [MethodImpl(Inline), Op, Closures(Closure)]
+       [MethodImpl(Inline)]
         public static Cell<T> load<T>(ReadOnlySpan<byte> src)
-            where T : struct, IDataCell<T>
+            where T : struct
                 => load8x64<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static Cell<T> load8x64<T>(ReadOnlySpan<byte> src)
-            where T : struct, IDataCell<T>
+            where T : struct
         {
             if(size<T>() == 1)
                 return @as<T>(Cells.cell(src, w8));
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static Cell<T> load128x512<T>(ReadOnlySpan<byte> src)
-            where T : struct, IDataCell<T>
+            where T : struct
         {
             if(size<T>() == 16)
                 return @as<Cell128,Cell<T>>(Cells.cell(src, w128));

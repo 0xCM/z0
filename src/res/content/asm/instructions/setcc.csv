@@ -1,5 +1,3 @@
-# SETcc — Set Byte on Condition
-------------------------------------------------------------------------------------------------------------------------
 | Opcode      | Instruction  | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                     |
 | 0F 97       | SETA r/m8    | M     | Valid       | Valid           | Set byte if above (CF=0 and ZF=0).              |
 | 0F 93       | SETAE r/m8   | M     | Valid       | Valid           | Set byte if above or equal (CF=0).              |

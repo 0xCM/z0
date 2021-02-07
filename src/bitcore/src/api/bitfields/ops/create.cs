@@ -40,7 +40,6 @@ namespace Z0
             where W : unmanaged, Enum
                 => new BitField<E,T>(BitFieldModels.specify<E,T,W>());
 
-
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
         /// </summary>
@@ -71,7 +70,6 @@ namespace Z0
             where W : unmanaged, Enum
             where T : unmanaged
                 => new BitField<S,E,T>(BitFieldModels.specify<E,T,W>());
-
 
         internal static FixedBits<T> fixedalloc<T>(uint bitcount)
             where T : unmanaged

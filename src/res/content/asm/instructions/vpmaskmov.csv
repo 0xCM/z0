@@ -1,4 +1,3 @@
-# VPMASKMOV — Conditional SIMD Integer Packed Loads and Stores
 | Opcode                   | Instruction                 | Op/En | 64/32 -bit Mode | CPUID Feature Flag | Description                                                                      |
 | VEX.128.66.0F38.W0 8C /r | VPMASKMOVD xmm1, xmm2, m128 | RVM   | V/V             | AVX2               | Conditionally load dword values from m128 using mask in xmm2 and store in xmm1 . |
 | VEX.256.66.0F38.W0 8C /r | VPMASKMOVD ymm1, ymm2, m256 | RVM   | V/V             | AVX2               | Conditionally load dword values from m256 using mask in ymm2 and store in ymm1 . |

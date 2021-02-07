@@ -1,4 +1,3 @@
-# POP — Pop a Value from the Stack
 | Opcode | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                             |
 | 8F /0  | POP r/ m16  | M     | Valid       | Valid           | Pop top of stack into m16 ; increment stack pointer.                                    |
 | 8F /0  | POP r/ m32  | M     | N.E.        | Valid           | Pop top of stack into m32 ; increment stack pointer.                                    |

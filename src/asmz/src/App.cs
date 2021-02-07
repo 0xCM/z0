@@ -62,9 +62,12 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src, FS.FilePath dst)
+        public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src)
         {
+            var dst = Db.IndexTable<ApiAddressRecord>();
+            Wf.Status($"Summarizing {src.MemberCount} members");
             var summaries = Summarize(src.Base, src.Members.View);
+            Wf.Status($"Summarized {summaries.Count} members");
             var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
             var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
             Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
@@ -75,13 +78,8 @@ namespace Z0.Asm
         {
             var jitter = ApiServices.create(Wf).ApiJit();
             var members = jitter.JitApi();
-
-            var cpuset = ApiQuery.set(members.Members, ApiSetKind.Cpu).Sort();
-            var @base = cpuset.First.BaseAddress;
-            var based = new BasedApiMembers(@base, cpuset);
-
-            var dst = Db.IndexFile(ApiAddressRecord.TableId);
-            var records = EmitCatalog(based,dst);
+            Wf.Status($"Jitted {members.MemberCount}");
+            var records = EmitCatalog(members);
         }
 
         void EmitApiClasses()

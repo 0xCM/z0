@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-
     partial struct FS
     {
         [Op]
@@ -14,7 +13,7 @@ namespace Z0
         {
             var name = src.FileName.WithoutExtension;
             var ext = src.Ext;
-            var stamped = file(Z0.text.format("{0}.{1}.{2}", name, z.timestamp(), ext));
+            var stamped = file(Z0.text.format("{0}.{1}.{2}", name, root.timestamp(), ext));
             return src.FolderPath + stamped;
         }
     }

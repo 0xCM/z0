@@ -38,7 +38,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit locked(OpCodeEncoding src)
-            => emath.eq(L.Lock, src.Byte0);
+            => emath.same(L.Lock, src.Byte0);
 
         [MethodImpl(Inline), Op]
         public static bit rep(OpCodeEncoding src)

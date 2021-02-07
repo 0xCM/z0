@@ -77,8 +77,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Extract(in BitFieldSegment segment, in T src, bool offset)
-            => api.extract(segment, src, offset);
+        public T Offset(in BitFieldSegment segment, in T src)
+            => api.offset(segment, src);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -87,8 +87,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Extract(E index, in T src, bool offset)
-            => api.extract(Segment(index), src, offset);
+        public T Offset(E index, in T src)
+            => api.offset(Segment(index), src);
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment

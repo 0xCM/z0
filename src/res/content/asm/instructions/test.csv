@@ -1,5 +1,3 @@
-# TEST - Logical Compare
----------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                         |
 | A8 ib            | TEST AL, imm8     | I     | Valid       | Valid           | AND imm8 with AL; set SF, ZF, PF according to result.                               |
 | A9 iw            | TEST AX, imm16    | I     | Valid       | Valid           | AND imm16 with AX; set SF, ZF, PF according to result.                              |

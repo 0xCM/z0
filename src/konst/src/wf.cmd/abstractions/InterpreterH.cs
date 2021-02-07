@@ -83,7 +83,7 @@ namespace Z0
         protected abstract FS.FilePath ExePath {get;}
 
 
-        IProcessLog WorkerLog;
+        IWorkerLog WorkerLog;
 
         Process Worker;
 
@@ -108,7 +108,7 @@ namespace Z0
             try
             {
                 Wf = wf.WithHost(Host);
-                WorkerLog = Loggers.process(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
+                WorkerLog = Loggers.worker(Loggers.configure(wf.Controller.Id, wf.Db().Root, "processes"));
                 Worker = new Process();
 
                 var start = new ProcessStartInfo(ExePath.Name, StartupArgs)

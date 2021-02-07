@@ -1,5 +1,3 @@
-# CMP - Compare Two Operands
-------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                        |
 | 3C ib            | CMP AL, imm8      | I     | Valid       | Valid           | Compare imm8 with AL.                              |
 | 3D iw            | CMP AX, imm16     | I     | Valid       | Valid           | Compare imm16 with AX.                             |

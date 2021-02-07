@@ -21,8 +21,8 @@ namespace Z0
                 );
 
         [MethodImpl(Inline), Op]
-        public static IProcessLog process(WfLogConfig config)
-            => new ProcessLog(config);
+        public static IWorkerLog worker(WfLogConfig config)
+            => new WorkerLog(config);
 
         [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)

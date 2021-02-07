@@ -126,6 +126,7 @@ namespace Z0
         {
             Broker.Dispose();
             WfSink.Dispose();
+            Services.Dispose();
         }
 
         string ITextual.Format()

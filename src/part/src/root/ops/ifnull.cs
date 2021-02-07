@@ -13,7 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T ifnull<T>(T input, T replace)
-            where T : class
-                => input ?? replace;
+            => input ?? replace;
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     [Datatype("m")]
     public struct Cell<T> : IDataCell<Cell<T>>
-        where T : struct, IDataCell<T>
+        where T : struct
     {
         T Content;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.Format();
+            => Content.ToString();
 
         [MethodImpl(Inline)]
         public static ref Cell<T> assign(in T src, ref Cell<T> dst)

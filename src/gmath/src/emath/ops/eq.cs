@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static bit eq<E,T>(E e, T s)
+        public static bit same<E,T>(E e, T s)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.eq(@as<E,T>(e), s);
@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
-        public static bit eq<E,T>(T s, E e)
+        public static bit same<E,T>(T s, E e)
             where E : unmanaged, Enum
             where T : unmanaged
                 => gmath.eq(@as<E,T>(e), s);
@@ -189,6 +189,6 @@ namespace Z0
         public static bit oneof<E,T>(T s, E e0, E e1)
             where E : unmanaged, Enum
             where T : unmanaged
-                => eq(e0, s) || eq(e1, s);
+                => same(e0, s) || same(e1, s);
     }
 }

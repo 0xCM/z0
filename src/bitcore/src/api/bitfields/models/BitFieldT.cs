@@ -66,8 +66,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Extract(in BitFieldSegment segment, T src, bool offset)
-            => api.extract(segment, src, offset);
+        public T Offset(in BitFieldSegment segment, T src)
+            => api.offset(segment, src);
 
         [MethodImpl(Inline)]
         public ref T Deposit(in BitFieldSegment segment, T src, ref T dst)

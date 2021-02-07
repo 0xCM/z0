@@ -12,14 +12,14 @@ namespace Z0
     readonly partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public T extract<T>(in BitField<T> field, in BitFieldSegment seg, T src)
+        public static T extract<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
-                => field.Extract(seg, src);
+                => gbits.bitslice(src, (byte)seg.StartPos, (byte)seg.Width);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public T extract<T>(in BitField<T> field,in BitFieldSegment seg, T src, bool offset)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T offset<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
-                => field.Extract(seg, src, offset);
+                => gmath.sll(extract(seg, src), (byte)seg.StartPos);
 
         /// <summary>
         /// Extracts a primal bitfield segment
@@ -42,16 +42,6 @@ namespace Z0
             where I : unmanaged, Enum
                 => extract<F,T>(f, EnumValue.e8u(i0), EnumValue.e8u(i1));
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T extract<T>(in BitFieldSegment seg, T src)
-            where T : unmanaged
-                => gbits.bitslice(src, (byte)seg.StartPos, (byte)seg.Width);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T extract<T>(in BitFieldSegment seg, T src, bool offset)
-            where T : unmanaged
-            => offset ? gmath.sll(extract(seg, src), (byte)seg.StartPos) : extract(seg,src);
-
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitFieldSegment segment, in S src)
             where S : IScalarBitField<T>
@@ -63,6 +53,5 @@ namespace Z0
             where S : IScalarBitField<T>
             where T : unmanaged
                 => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);
-
     }
 }

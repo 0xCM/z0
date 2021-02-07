@@ -1,5 +1,3 @@
-# MOVAPS — Move Aligned Packed Single-Precision Floating-Point Value
---------------------------------------------------------------------------------------------------------------------
 | Opcode               | Instruction                     | Op/En | 64/32 bit Mode Support | CPUID Feature Flag | Description                                                                                           |
 | NP 0F 28 /r          | MOVAPS xmm1, xmm2/m128          | A     | V/V                    | SSE                | Move aligned packed single-precision floating-point values from xmm2/mem to xmm1.                     |
 | NP 0F 29 /r          | MOVAPS xmm2/m128, xmm1          | B     | V/V                    | SSE                | Move aligned packed single-precision floating-point values from xmm1 to xmm2/mem.                     |

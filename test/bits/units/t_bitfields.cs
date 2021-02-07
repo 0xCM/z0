@@ -154,10 +154,10 @@ namespace Z0
                     );
 
                 var result2 = gmath.or(
-                    bf.Extract(spec[0], src, true),
-                    bf.Extract(spec[1], src, true),
-                    bf.Extract(spec[2], src, true),
-                    bf.Extract(spec[3], src, true)
+                    bf.Offset(spec[0], src),
+                    bf.Offset(spec[1], src),
+                    bf.Offset(spec[2], src),
+                    bf.Offset(spec[3], src)
                     );
 
                 Claim.eq(src,result1);

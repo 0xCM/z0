@@ -1,5 +1,3 @@
-# JCC - Jump if Condition Is Met
----------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode   | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                    |
 | 77 cb    | JA rel8     | D     | Valid       | Valid           | Jump short if above (CF=0 and ZF=0).                                           |
 | 73 cb    | JAE rel8    | D     | Valid       | Valid           | Jump short if above or equal (CF=0).                                           |

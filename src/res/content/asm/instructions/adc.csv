@@ -1,5 +1,3 @@
-# ADC — Add with Carry
-----------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-bit Mode | Compat/Leg Mode | Description                                           |
 | 14 ib            | ADC AL, imm8      | I     | Valid       | Valid           | Add with carry imm8 to AL.                            |
 | 15 iw            | ADC AX, imm16     | I     | Valid       | Valid           | Add with carry imm16 to AX.                           |

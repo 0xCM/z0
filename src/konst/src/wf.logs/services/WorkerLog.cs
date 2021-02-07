@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    struct ProcessLog : IProcessLog
+    struct WorkerLog : IWorkerLog
     {
         readonly FS.FilePath StatusPath;
 
@@ -18,7 +18,7 @@ namespace Z0
 
         readonly FileStream Status;
 
-        internal ProcessLog(WfLogConfig config)
+        internal WorkerLog(WfLogConfig config)
         {
             config.StatusLog.Delete();
             config.ErrorLog.Delete();

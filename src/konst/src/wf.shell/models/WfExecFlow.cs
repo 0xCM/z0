@@ -52,13 +52,20 @@ namespace Z0
 
         public FS.FilePath Target {get;}
 
+        public Count EmissionCount {get;}
+
         [MethodImpl(Inline)]
-        internal WfTableFlow(IWfShell wf, FS.FilePath dst, in WfExecToken token)
+        internal WfTableFlow(IWfShell wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
         {
             Wf = wf;
             Token = token;
             Target = dst;
+            EmissionCount = count;
         }
+
+        [MethodImpl(Inline)]
+        public WfTableFlow<T> WithCount(Count count)
+            => new WfTableFlow<T>(Wf, Target, Token, count);
 
         [MethodImpl(Inline)]
         public static implicit operator WfExecFlow<T>(WfTableFlow<T> src)

@@ -1,5 +1,3 @@
-# PMOVZX — Packed Move with Zero Extend
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode                     | Instruction                       | Op / En | 64/32 bit Mode Support | CPUID Feature Flag | Description                                                                                                                      |
 | 66 0f 38 30 /r             | PMOVZXBW xmm1, xmm2/m64           | A       | V/V                    | SSE4_1             | Zero extend 8 packed 8-bit integers in the low 8 bytes of xmm2/m64 to 8 packed 16-bit integers in xmm1.                          |
 | 66 0f 38 31 /r             | PMOVZXBD xmm1, xmm2/m32           | A       | V/V                    | SSE4_1             | Zero extend 4 packed 8-bit integers in the low 4 bytes of xmm2/m32 to 4 packed 32-bit integers in xmm1.                          |

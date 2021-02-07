@@ -1,5 +1,3 @@
-# SBB - Integer Subtraction with Borrow
--------------------------------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction      | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                     |
 | 1C ib            | SBB AL, imm8     | I     | Valid       | Valid           | Subtract with borrow imm8 from AL.                              |
 | 1D iw            | SBB AX, imm16    | I     | Valid       | Valid           | Subtract with borrow imm16 from AX.                             |

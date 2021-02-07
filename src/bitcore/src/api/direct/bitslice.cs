@@ -15,6 +15,7 @@ namespace Z0
     {
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -25,6 +26,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -35,6 +37,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -45,6 +48,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -55,6 +59,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -65,6 +70,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -75,6 +81,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned __int64 _bextr_u64 (unsigned __int64 a, unsigned int start, unsigned int len) BEXTR r64a, reg/m64, r64b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>
@@ -85,6 +92,7 @@ namespace Z0
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source
+        /// unsigned __int64 _bextr_u64 (unsigned __int64 a, unsigned int start, unsigned int len) BEXTR r64a, reg/m64, r64b
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="start">The bit position within the source where extraction should benin</param>

@@ -1,5 +1,3 @@
-# AND - Logical And
-----------------------------------------------------------------------------------------------------------------------------
 | Opcode           | Instruction       | Op/En | 64-bit Mode | Compat/Leg Mode | Description                               |
 | 24 ib            | AND AL, imm8      | I     | Valid       | Valid           | AL AND imm8.                              |
 | 25 iw            | AND AX, imm16     | I     | Valid       | Valid           | AX AND i mm16.                            |
