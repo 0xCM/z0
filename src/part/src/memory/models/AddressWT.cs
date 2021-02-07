@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Address(ulong absolute)
-            => Location = NumericCast.force<ulong,T>(absolute);
+            => Location = Numeric.force<ulong,T>(absolute);
 
         public string Format()
             => Identifier;

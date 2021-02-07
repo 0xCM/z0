@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static In;
+    using static Part;
+    using static memory;
 
     using BL = ByteLogic64;
 
@@ -23,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               return BL.testz(in uint8(in a), in uint8(in b));
+               return BL.testz(u8(a), u8(b));
             else if(typeof(T) == typeof(ushort))
-               return testz(w, in a, in b);
+               return testz(w, a, b);
             else if(typeof(T) == typeof(uint))
-               return testz(w, 4, 8, in uint32(in a), in uint32(in b));
+               return testz(w, 4, 8, u32(a), u32(b));
             else if(typeof(T) == typeof(ulong))
-               return testz(w, 16, 4, in uint64(in a), in uint64(in b));
+               return testz(w, 16, 4, u64(a), u64(in b));
             else
                 throw no<T>();
         }

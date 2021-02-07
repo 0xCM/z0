@@ -21,9 +21,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vsllv(Vector128<sbyte> src, Vector128<sbyte> counts)
         {
-            var x = vinflate256x16i(src, w256);
-            var y = vinflate256x16i(counts, w256);
-            return vcompact8i(vsllv(x,y), w128);
+            var x = vinflate256x16i(src);
+            var y = vinflate256x16i(counts);
+            return vpack128x8i(vsllv(x,y));
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vsllv(Vector128<byte> src, Vector128<byte> counts)
         {
-            var x = vinflate256x16u(src, w256);
-            var y = vinflate256x16u(counts, w256);
-            return vcompact8u(vsllv(x,y), w128);
+            var x = vinflate256x16u(src);
+            var y = vinflate256x16u(counts);
+            return vpack128x8u(vsllv(x,y));
         }
 
         /// <summary>
@@ -47,10 +47,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<short> vsllv(Vector128<short> src, Vector128<short> counts)
         {
-            var a = vinflate256x32i(src, w256);
-            var b = v32u(vinflate256x32i(counts, w256));
+            var a = vinflate256x32i(src);
+            var b = v32u(vinflate256x32i(counts));
             var x = ShiftLeftLogicalVariable(a,b);
-            return vcompact16i(x,w128);
+            return vpack128x16i(x);
         }
 
         /// <summary>
@@ -61,10 +61,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vsllv(Vector128<ushort> src, Vector128<ushort> counts)
         {
-            var a = vinflate256x32u(src, w256);
-            var b = vinflate256x32u(counts, w256);
+            var a = vinflate256x32u(src);
+            var b = vinflate256x32u(counts);
             var c = ShiftLeftLogicalVariable(a,b);
-            return vcompact16u(c, n128);
+            return vpack128x16u(c);
         }
 
         /// <summary>
@@ -115,9 +115,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsllv(Vector256<sbyte> src, Vector256<sbyte> counts)
         {
-            (var x0, var x1) = vinflate512x16i(src, w512);
-            (var s0, var s1) = vinflate512x16i(counts, w512);
-            return vcompact8i(vsllv(x0,s0), vsllv(x1,s1), w256);
+            (var x0, var x1) = vinflate512x16i(src);
+            (var s0, var s1) = vinflate512x16i(counts);
+            return vpack256x8i(vsllv(x0,s0), vsllv(x1,s1));
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsllv(Vector256<byte> src, Vector256<byte> counts)
         {
-            (var x0, var x1) = vinflate512x16u(src, w512);
-            (var s0, var s1) = vinflate512x16u(counts, w512);
-            return vcompact8u(vsllv(x0,s0),vsllv(x1,s1), w256);
+            (var x0, var x1) = vinflate512x16u(src);
+            (var s0, var s1) = vinflate512x16u(counts);
+            return vpack256x8u(vsllv(x0,s0),vsllv(x1,s1));
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<short> vsllv(Vector256<short> src, Vector256<short> counts)
         {
-            (var x0, var x1) = vinflate512x32i(src, w512);
-            (var s0, var s1) = vinflate512x32i(counts, w512);
-            return vcompact16i(vsllv(x0,s0),vsllv(x1,s1), w256);
+            (var x0, var x1) = vinflate512x32i(src);
+            (var s0, var s1) = vinflate512x32i(counts);
+            return vpack256x16i(vsllv(x0,s0),vsllv(x1,s1));
         }
 
         /// <summary>
@@ -154,9 +154,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsllv(Vector256<ushort> src, Vector256<ushort> counts)
         {
-            (var x0, var x1) = vinflate512x32u(src, w512);
-            (var s0, var s1) = vinflate512x32u(counts, w512);
-            return vcompact16u(vsllv(x0,s0), vsllv(x1,s1), w256);
+            (var x0, var x1) = vinflate512x32u(src);
+            (var s0, var s1) = vinflate512x32u(counts);
+            return vpack256x16u(vsllv(x0,s0), vsllv(x1,s1));
         }
 
         /// <summary>

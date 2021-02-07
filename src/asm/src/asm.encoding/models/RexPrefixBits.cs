@@ -93,7 +93,7 @@ namespace Z0.Asm
         public RexPrefixCode Code
         {
             [MethodImpl(Inline)]
-            get => (RexPrefixCode)Bits.bitslice(Scalar, 4, (byte)RFW.Code);
+            get => (RexPrefixCode)Bits.extract(Scalar, 4, (byte)RFW.Code);
 
             [MethodImpl(Inline)]
             set => Update(gbits.copy((byte)value, 4, (byte)RFW.Code, Scalar));

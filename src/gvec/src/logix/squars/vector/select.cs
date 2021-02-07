@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class LogicSquare
     {
@@ -17,20 +17,20 @@ namespace Z0
         public static Vector128<T> vselect<T>(W128 n, in T a, in T b, in T c)
             where T : unmanaged
         {
-            vload(a, out Vector128<T> vA);
-            vload(b, out Vector128<T> vB);
-            vload(c, out Vector128<T> vC);
-            return gvec.vselect(vA,vB,vC);
+            gcpu.vload(a, out Vector128<T> vA);
+            gcpu.vload(b, out Vector128<T> vB);
+            gcpu.vload(c, out Vector128<T> vC);
+            return gcpu.vselect(vA,vB,vC);
         }
 
         [MethodImpl(Inline), Select, Closures(Closure)]
         public static Vector256<T> vselect<T>(W256 n, in T a, in T b, in T c)
             where T : unmanaged
         {
-            vload(a, out Vector256<T> vA);
-            vload(b, out Vector256<T> vB);
-            vload(c, out Vector256<T> vC);
-            return gvec.vselect(vA,vB,vC);
+            gcpu.vload(a, out Vector256<T> vA);
+            gcpu.vload(b, out Vector256<T> vB);
+            gcpu.vload(c, out Vector256<T> vC);
+            return gcpu.vselect(vA,vB,vC);
         }
 
         [MethodImpl(Inline), Select, Closures(Closure)]

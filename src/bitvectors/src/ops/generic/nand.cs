@@ -43,6 +43,6 @@ namespace Z0
         public static BitVector128<N,T> nand<N,T>(BitVector128<N,T> x, BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vnand(x.Data, y.Data);
+                => gcpu.vnand(x.Data, y.Data);
    }
 }

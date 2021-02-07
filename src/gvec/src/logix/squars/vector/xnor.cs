@@ -8,20 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class LogicSquare
     {
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static Vector128<T> vxnor<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vxnor(vload(w, in a),vload(w, in b));
+                => gcpu.vxnor(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static Vector256<T> vxnor<T>(W256 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vxnor(vload(w, in a),vload(w, in b));
+                => gcpu.vxnor(gcpu.vload(w, a), gcpu.vload(w, in b));
 
         [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static void xnor<T>(W128 n, in T a, in T b, ref T z)

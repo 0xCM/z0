@@ -8,15 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class LogicSquare
     {
         [MethodImpl(Inline), And, Closures(Closure)]
         public static Vector128<T> and<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gcpu.vand(gcpu.vload(w, in a), gcpu.vload(w, in b));
+                => gcpu.vand(gcpu.vload(w, a), gcpu.vload(w, b));
+
+
+        [MethodImpl(Inline), And, Closures(Closure)]
+        public static Vector256<T> and<T>(W256 w, in T a, in T b)
+            where T : unmanaged
+                => gcpu.vand(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W128 n, in T a, in T b, ref T dst)
@@ -30,11 +36,6 @@ namespace Z0
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
                 and(n, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
-
-        [MethodImpl(Inline), And, Closures(Closure)]
-        public static Vector256<T> and<T>(W256 w, in T a, in T b)
-            where T : unmanaged
-                => gcpu.vand(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W256 w, in T a, in T b, ref T dst)

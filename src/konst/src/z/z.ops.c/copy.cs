@@ -48,7 +48,7 @@ namespace Z0
         public static void copy<S,T>(in S src, ref T dst, uint srcCount, uint dstOffset = 0)
             where S: unmanaged
             where T :unmanaged
-                => sys.copy(In.uint8(src),  ref uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
+                => sys.copy(memory.u8(src),  ref uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
 
         /// <summary>
         /// Copies a specified number source cells to the target and returns the count of copied bytes
@@ -64,7 +64,7 @@ namespace Z0
         public static void copy<S,T>(ReadOnlySpan<S> src, uint start, uint count, Span<T> dst, uint offset = 0)
             where S: unmanaged
             where T :unmanaged
-                => sys.copy(uint8(edit(skip(src, start))),ref uint8(ref seek(first(dst), offset)),count*size<S>());
+                => sys.copy(uint8(edit(skip(src, start))), ref uint8(ref seek(first(dst), offset)),count*size<S>());
 
         /// <summary>
         /// Copies a specified number source cells to the target and returns the count of copied bytes

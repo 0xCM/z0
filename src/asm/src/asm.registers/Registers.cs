@@ -94,11 +94,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static RegIndex code1(RegisterKind src)
-            => (RegIndex)Bits.bitslice((uint)src, (byte)FI.C, (byte)FW.C);
+            => (RegIndex)Bits.extract((uint)src, (byte)FI.C, (byte)FW.C);
 
         [MethodImpl(Inline), Op]
         public static RegClass @class1(RegisterKind src)
-            => (RegClass)Bits.bitslice((uint)src, (byte)FI.K, (byte)FW.K);
+            => (RegClass)Bits.extract((uint)src, (byte)FI.K, (byte)FW.K);
 
         [MethodImpl(Inline), Op]
         public static RegisterKind code(RegIndex src, RegisterKind dst)

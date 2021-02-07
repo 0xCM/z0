@@ -57,7 +57,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnand(x[i],y[i]);
+                gz[i] = gcpu.vnand(x[i],y[i]);
             return ref gz;
         }
 
@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnand<T>(x,y);
+                => gcpu.vnand<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids
@@ -124,7 +124,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnand<T>(x,y);
+                => gcpu.vnand<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise NAND between natural bitgrids and stores the result to a caller-supplied target
@@ -141,7 +141,7 @@ namespace Z0
         {
             var blocks = (int)GridCalcs.blocks<M,N,T>(W256.W);
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnand(x[i],y[i]);
+                gz[i] = gcpu.vnand(x[i],y[i]);
             return ref gz;
         }
 

@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<byte> vzip(Vector256<uint> x, Vector256<uint> y, W8 w)
-            => vcompact8u(vcompact16u(x, y, n256), w128);
+            => vpack128x8u(vpack256x16u(x, y, n256), w128);
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<uint> vzip(Vector256<ulong> x, Vector256<ulong> y, W32 w)
-            => vconcat(vcompact32u(x, w128), vcompact32u(y, w128));
+            => vconcat(vpack128x32u(x, w128), vpack128x32u(y, w128));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<byte> vzip(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, W8 w)
-            => vcompact8u(vcompact16u(x0, x1, w128), vcompact16u(x2, x3, w128), w128);
+            => vpack128x8u(vpack128x16u(x0, x1, w128), vpack128x16u(x2, x3, w128), w128);
 
         /// <summary>
         /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
@@ -195,6 +195,6 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector256<byte> vzip(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, W8 w)
-            => vcompact8u(vcompact16u(x0, x1, w256), vcompact16u(x2, x3, w256), w256);
+            => vpack256x8u(vpack256x16u(x0, x1, w256), vpack256x16u(x2, x3, w256), w256);
     }
 }

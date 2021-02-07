@@ -18,17 +18,17 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), Nor, Closures(Closure)]
-        public static void nor<T>(in T A, in T B, ref T Z)
+        public static void nor<T>(in T a, in T b, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.nor(u8(A), u8(B), ref u8(Z));
+               BL.nor(u8(a), u8(b), ref u8(dst));
             else if(typeof(T) == typeof(ushort))
-                nor(w, A, B, ref Z);
+                nor(w, a, b, ref dst);
             else if(typeof(T) == typeof(uint))
-                nor(w, 4, 8, A, B, ref Z);
+                nor(w, 4, 8, a, b, ref dst);
             else if(typeof(T) == typeof(ulong))
-                nor(w, 16, 4, A, B, ref Z);
+                nor(w, 16, 4, a, b, ref dst);
             else
                 throw no<T>();
         }

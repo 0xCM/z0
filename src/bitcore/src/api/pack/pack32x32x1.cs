@@ -22,14 +22,27 @@ namespace Z0
         {
             var v0 = cpu.vload(w256, skip(src,0*8));
             var v1 = cpu.vload(w256, skip(src,1*8));
-            var x = cpu.vcompact16u(v0, v1, w256);
+            var x = cpu.vpack256x16u(v0, v1, w256);
 
             v0 = cpu.vload(w256, skip(src,2*8));
             v1 = cpu.vload(w256, skip(src,3*8));
-            var y = cpu.vcompact16u(v0,v1, w256);
+            var y = cpu.vpack256x16u(v0,v1, w256);
 
-            dst = gcpu.vpacklsb(cpu.vcompact8u(x, y, w256));
+            dst = gcpu.vpacklsb(cpu.vpack256x8u(x, y, w256));
             return ref dst;
         }
+
+        /// <summary>
+        /// Packs the least significant bit from <see cref='n32'/> <see cref='w32'/> <see cref='uint'/> source values to a <see cref='w32'/> bit <see cref='uint'/> target
+        /// </summary>
+        /// <param name="src">The intput sequence</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref uint pack32x32x1(in NatSpan<N32,uint> src, ref uint dst)
+        {
+            dst = pack32x32x1(src.First, ref dst);
+            return ref dst;
+        }
+
     }
 }

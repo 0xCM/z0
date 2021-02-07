@@ -26,7 +26,7 @@ namespace Z0
         {
             var a = vinflate256x16i(x, w256);
             var b = vinflate256x16i(y, w256);
-            return vcompact8i(vhadd(a,b), w128);
+            return vpack128x8i(vhadd(a,b));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         {
             var c = vinflate256x16i(a, w256);
             var d = vinflate256x16i(b, w256);
-            return vcompact8u(vhadd(c,d), w128);
+            return vpack128x8u(vhadd(c,d), w128);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         {
             (var x0, var x1) = vinflate512x16i(x, w512);
             (var y0, var y1) = vinflate512x16i(x, w512);
-            return vcompact8i(vhadd(x0,y0), vhadd(x1,y1), w256);
+            return vpack256x8i(vhadd(x0,y0), vhadd(x1,y1), w256);
         }
 
         /// <summary>

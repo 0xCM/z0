@@ -44,7 +44,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid16<M, N, T>(NumericCast.force<T,ushort>(data));
+                => new SubGrid16<M, N, T>(Numeric.force<T,ushort>(data));
 
         /// <summary>
         /// Allocates a 0-filled 32-bit subgrid
@@ -78,7 +78,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid32<M, N, T>(NumericCast.force<T,uint>(data));
+                => new SubGrid32<M, N, T>(Numeric.force<T,uint>(data));
 
         /// <summary>
         /// Allocates a 0-filled 64-bitsubgrid
@@ -112,7 +112,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid64<M, N, T>(NumericCast.force<T,ulong>(data));
+                => new SubGrid64<M, N, T>(Numeric.force<T,ulong>(data));
 
         /// <summary>
         /// Allocates a 0-filled 128-bit subgrid

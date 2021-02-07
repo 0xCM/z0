@@ -94,11 +94,11 @@ namespace Z0
 
          [MethodImpl(Inline), Op]
          public static BitSpan32 ToBitSpan32(this float src)
-            => BitSpans.from32<uint>(NumericCast.force<uint>(src));
+            => BitSpans.from32<uint>(Numeric.force<uint>(src));
 
          [MethodImpl(Inline), Op]
          public static BitSpan32 ToBitSpan32(this double src)
-            => BitSpans.from32<ulong>(NumericCast.force<ulong>(src));
+            => BitSpans.from32<ulong>(Numeric.force<ulong>(src));
 
         /// <summary>
         /// Loads a bitspan from a packed span of scalars

@@ -56,47 +56,47 @@ namespace Z0
 
             var i2x2 = cpu.vparts(n256, 2, 4, 8, 16);
             var v2x2 = cpu.vgather(n128, in src32, i2x2);
-            Claim.veq(cpu.vcompact32u(i2x2, n128), v2x2);
+            Claim.veq(cpu.vpack128x32u(i2x2, n128), v2x2);
 
             var i3x3 = cpu.vparts(n256, 3, 6, 12, 24);
             var v3x3 = cpu.vgather(n128, in src32, i3x3);
-            Claim.veq(cpu.vcompact32u(i3x3, n128), v3x3);
+            Claim.veq(cpu.vpack128x32u(i3x3), v3x3);
 
             var i3_3 = cpu.vparts(n256, 3, 6, 9, 12);
             var v3_3 = cpu.vgather(n128, in src32, i3_3);
-            Claim.veq(cpu.vcompact32u(i3_3, n128), v3_3);
+            Claim.veq(cpu.vpack128x32u(i3_3), v3_3);
 
             var i4x2 = cpu.vparts(n256, 4, 8, 16, 32);
             var v4x2 = cpu.vgather(n128, in src32, i4x2);
-            Claim.veq(cpu.vcompact32u(i4x2, n128), v4x2);
+            Claim.veq(cpu.vpack128x32u(i4x2), v4x2);
 
             var i5_5 =cpu.vparts(n256, 5, 10, 15, 20);
             var v5_5 = cpu.vgather(n128, in src32, i5_5);
-            Claim.veq(cpu.vcompact32u(i5_5, n128), v5_5);
+            Claim.veq(cpu.vpack128x32u(i5_5, n128), v5_5);
 
             var i9_9 = cpu.vparts(n256, 9, 18, 27, 36);
             var v9_9 = cpu.vgather(n128, in src32, i9_9);
-            Claim.veq(cpu.vcompact32u(i9_9, n128), v9_9);
+            Claim.veq(cpu.vpack128x32u(i9_9), v9_9);
 
             var i10_10 = cpu.vparts(n256, 10, 20, 30, 40);
             var v10_10 = cpu.vgather(n128, in src32, i10_10);
-            Claim.veq(cpu.vcompact32u(i10_10, n128), v10_10);
+            Claim.veq(cpu.vpack128x32u(i10_10), v10_10);
 
             var i16x2 = cpu.vparts(n256, 16, 32, 64, 128);
             var v16x2 = cpu.vgather(n128, in src32, i16x2);
-            Claim.veq(cpu.vcompact32u(i16x2, n128), v16x2);
+            Claim.veq(cpu.vpack128x32u(i16x2), v16x2);
 
             var i20_5 = cpu.vparts(n256, 20, 25, 30, 35);
             var v20_5 = cpu.vgather(n128, in src32, i20_5);
-            Claim.veq(cpu.vcompact32u(i20_5, n128), v20_5);
+            Claim.veq(cpu.vpack128x32u(i20_5), v20_5);
 
             var i40_3 = cpu.vparts(n256, 40, 43, 46, 49);
             var v40_3 = cpu.vgather(n128, in src32, i40_3);
-            Claim.veq(cpu.vcompact32u(i40_3, n128), v40_3);
+            Claim.veq(cpu.vpack128x32u(i40_3), v40_3);
 
             var i4x128 = cpu.vparts(w256i, 0, 128 - 1, 128*2 - 1, 128*4 - 1);
             var v4x128 = cpu.vgather(n128, in src32, v512idx);
-            Claim.veq(cpu.vcompact32i(i4x128, n128), v32i(v4x128));
+            Claim.veq(cpu.vpack128x32i(i4x128), v32i(v4x128));
         }
 
         [Op(ExampleGroups.Gather)]

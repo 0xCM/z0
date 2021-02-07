@@ -11,7 +11,6 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitGrids)" />
     <ProjectReference Include="$(BitMatrix)" />
-    <ProjectReference Include="$(BitPack)" />
     <ProjectReference Include="$(BitSpans)" />
     <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitSvc)" />

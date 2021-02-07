@@ -24,7 +24,7 @@ namespace Z0
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length - offset);
             memory.copy(src.Edit, offset, len, dst);
-            return BitPack.pack<T>(dst);
+            return BitPack32.pack<T>(dst);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length);
             memory.copy(src.Edit, 0, len, dst);
-            return BitPack.pack<T>(dst);
+            return BitPack32.pack<T>(dst);
         }
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(count, src.Length - offset);
             memory.copy(src.Edit, offset, len, dst);
-            return BitPack.pack<T>(dst);
+            return BitPack32.pack<T>(dst);
         }
    }
 }

@@ -26,5 +26,9 @@ namespace Z0
         {
             Data = src;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(BitsF64 src)
+            => src.Bits;
     }
 }

@@ -52,7 +52,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> nand(Vector256<T> a, Vector256<T> b)
-                => gvec.vnand(a,b);
+                => gcpu.vnand(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nonimpl(Vector256<T> a, Vector256<T> b)

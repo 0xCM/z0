@@ -3,8 +3,6 @@
 // See the LICENSE file in the project root for more information.
 namespace Z0
 {
-    using System.Diagnostics;
-
     /// <summary>
     /// A representation of CLR's CLRDATA_ADDRESS, which is a signed 64bit integer.
     /// Unfortunately this can cause issues when inspecting 32bit processes, since

@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static sbyte extract(sbyte src, BitExtractSpec spec)
             => (sbyte)BitFieldExtract((uint)src, spec);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static byte extract(byte src, BitExtractSpec spec)
             => (byte)BitFieldExtract(src, spec);
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static short extract(short src, BitExtractSpec spec)
             => (short)BitFieldExtract((uint)src, spec);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static ushort extract(ushort src, BitExtractSpec spec)
             => (ushort)BitFieldExtract(src, spec);
 
@@ -59,7 +59,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static int extract(int src, BitExtractSpec spec)
             => (int)BitFieldExtract((uint)src, spec);
 
@@ -69,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static uint extract(uint src, BitExtractSpec spec)
             => BitFieldExtract(src, spec);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static long extract(long src, BitExtractSpec spec)
             => (long)BitFieldExtract((ulong)src, spec);
 
@@ -89,8 +89,116 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="spec">The selection specifier</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Extract]
         public static ulong extract(ulong src, BitExtractSpec spec)
             => BitFieldExtract(src, spec);
+
+        /// <summary>
+        /// Extracts a contiguous sequence of bits from the source
+        /// unsigned int _bextr2_u32 (unsigned int a, unsigned int control) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="spec">The selection specifier</param>
+        [MethodImpl(Inline), Extract]
+        public static uint extract(float src, BitExtractSpec spec)
+            => BitFieldExtract(fmath.bits(src), spec);
+
+        /// <summary>
+        /// Extracts a contiguous sequence of bits from the source
+        /// unsigned __int64 _bextr2_u64 (unsigned __int64 a, unsigned __int64 control) BEXTR r64a, reg/m64, r64b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="spec">The selection specifier</param>
+        [MethodImpl(Inline), Extract]
+        public static ulong extract(double src, BitExtractSpec spec)
+            => BitFieldExtract(fmath.bits(src), spec);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static sbyte extract(sbyte src, byte start, byte length)
+            => (sbyte)BitFieldExtract((uint)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static byte extract(byte src, byte start, byte length)
+            => (byte)BitFieldExtract((uint)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static short extract(short src, byte start, byte length)
+            => (short)BitFieldExtract((uint)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static ushort extract(ushort src, byte start, byte length)
+            => (ushort)BitFieldExtract((uint)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static int extract(int src, byte start, byte length)
+            => (int)BitFieldExtract((uint)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned int _bextr_u32 (unsigned int a, unsigned int start, unsigned int len) BEXTR r32a, reg/m32, r32b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static uint extract(uint src, byte start, byte length)
+            => BitFieldExtract(src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned __int64 _bextr_u64 (unsigned __int64 a, unsigned int start, unsigned int len) BEXTR r64a, reg/m64, r64b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static long extract(long src, byte start, byte length)
+            => (long)BitFieldExtract((ulong)src, start, length);
+
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source
+        /// unsigned __int64 _bextr_u64 (unsigned __int64 a, unsigned int start, unsigned int len) BEXTR r64a, reg/m64, r64b
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="start">The bit position within the source where extraction should benin</param>
+        /// <param name="length">The number of bits that should be extracted</param>
+        [MethodImpl(Inline), Extract]
+        public static ulong extract(ulong src, byte start, byte length)
+            => BitFieldExtract(src, start, length);
     }
 }

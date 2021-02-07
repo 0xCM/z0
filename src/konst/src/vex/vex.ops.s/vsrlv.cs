@@ -63,7 +63,7 @@ namespace Z0
         {
             var x = cpu.vinflate256x16i(src, w256);
             var y = cpu.vinflate256x16i(counts, w256);
-            return cpu.vcompact8i(vsrlv(x,y), w128);
+            return cpu.vpack128x8i(vsrlv(x,y), w128);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         {
             var x = cpu.vinflate256x16u(src, w256);
             var y = cpu.vinflate256x16u(counts, w256);
-            return cpu.vcompact8u(vsrlv(x,y), w128);
+            return cpu.vpack128x8u(vsrlv(x,y), w128);
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         {
             var x = cpu.vinflate256x32i(src, w256);
             var y = v32u(cpu.vinflate256x32i(counts, w256));
-            return cpu.vcompact16i(ShiftRightLogicalVariable(x,y), w128);
+            return cpu.vpack128x16i(ShiftRightLogicalVariable(x,y), w128);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         {
             var x = cpu.vinflate256x32u(src, w256);
             var y = cpu.vinflate256x32u(counts, w256);
-            return cpu.vcompact16u(ShiftRightLogicalVariable(x,y), w128);
+            return cpu.vpack128x16u(ShiftRightLogicalVariable(x,y), w128);
         }
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate512x16i(src, w512);
             (var s0, var s1) = cpu.vinflate512x16i(counts, w512);
-            return cpu.vcompact8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
+            return cpu.vpack256x8i(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate512x16u(src, w512);
             (var s0, var s1) = cpu.vinflate512x16u(counts, w512);
-            return cpu.vcompact8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
+            return cpu.vpack256x8u(vsrlv(x0,s0), vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate512x32i(src, w512);
             (var s0, var s1) = cpu.vinflate512x32i(counts, w512);
-            return cpu.vcompact16i(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
+            return cpu.vpack256x16i(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Z0
         {
             (var x0, var x1) = cpu.vinflate512x32u(src, w512);
             (var s0, var s1) = cpu.vinflate512x32u(counts, w512);
-            return cpu.vcompact16u(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
+            return cpu.vpack256x16u(cpu.vsrlv(x0,s0), cpu.vsrlv(x1,s1), w256);
         }
     }
 }

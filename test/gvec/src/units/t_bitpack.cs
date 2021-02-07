@@ -37,10 +37,10 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = SpanBlocks.alloc<byte>(n128);
 
-                Bits.unpack1x8x16(src, dst, 0);
+                BitPack.unpack1x8x16(src, dst, 0);
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack16x8x1(dst);
+                var rebound = gpack.pack16x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -55,7 +55,7 @@ namespace Z0
 
                 unpack_check(src,dst);
 
-                var rebound = BitPack.pack32x8x1(dst);
+                var rebound = gpack.pack32x8x1(dst);
                 Claim.eq(src,rebound);
             }
         }
@@ -70,7 +70,7 @@ namespace Z0
 
                 unpack_check(src,dst.Storage);
 
-                var rebound = BitPack.pack64x8x1(dst,0);
+                var rebound = gpack.pack64x8x1(dst,0);
                 Claim.eq(src,rebound);
             }
         }
@@ -97,7 +97,7 @@ namespace Z0
             for(var rep = 0; rep < RepCount; rep++)
             {
                 var src = Random.Next<ulong>();
-                gbits.unpack1x32<ulong>(src, dst);
+                gpack.unpack1x32<ulong>(src, dst);
                 for(var i=0; i< dst.Length; i++)
                     Claim.eq((uint)Bit32.test(src,i), dst[i]);
             }
@@ -112,7 +112,7 @@ namespace Z0
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);
-                uint packed = BitPack.pack32x8x1(bitseq);
+                uint packed = gpack.pack32x8x1(bitseq);
                 for(var i=0; i< count; i++)
                     Claim.eq(bs[i], (byte)Bit32.test(packed, i));
             }
@@ -132,7 +132,7 @@ namespace Z0
 
                 buffer.Clear();
                 bits.CopyTo(buffer);
-                var result = BitPack.pack<uint>(buffer);
+                var result = BitPack32.pack<uint>(buffer);
 
                 Claim.eq(expect, result);
 
@@ -145,7 +145,7 @@ namespace Z0
             {
                 var src = SpanBlocks.alloc<byte>(n256);
                 gcpu.vones<byte>(n256).StoreTo(src);
-                var dst = BitPack.pack32x8x1(src);
+                var dst = gpack.pack32x8x1(src);
                 Claim.eq(dst,uint.MaxValue);
 
             }
@@ -154,7 +154,7 @@ namespace Z0
             {
                 var src = SpanBlocks.alloc<byte>(n128);
                 gcpu.vones<byte>(n128).StoreTo(src);
-                var dst = BitPack.pack16x8x1(src);
+                var dst = gpack.pack16x8x1(src);
                 Claim.eq(dst,ushort.MaxValue);
             }
 

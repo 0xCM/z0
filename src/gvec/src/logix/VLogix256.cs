@@ -110,7 +110,7 @@ namespace Z0
                 case BLK.True: return gvec.vtrue(a,b);
                 case BLK.False: return gvec.vfalse(a,b);
                 case BLK.And: return gcpu.vand(a,b);
-                case BLK.Nand: return gvec.vnand(a,b);
+                case BLK.Nand: return gcpu.vnand(a,b);
                 case BLK.Or: return gcpu.vor(a,b);
                 case BLK.Nor: return gvec.vnor(a,b);
                 case BLK.Xor: return gvec.vxor(a,b);
@@ -153,7 +153,7 @@ namespace Z0
                 case BLK.True: return gvec.vtrue;
                 case BLK.False: return gvec.vfalse;
                 case BLK.And: return gcpu.vand;
-                case BLK.Nand: return gvec.vnand;
+                case BLK.Nand: return gcpu.vnand;
                 case BLK.Or: return gcpu.vor;
                 case BLK.Nor: return gvec.vnor;
                 case BLK.Xor: return gvec.vxor;
@@ -219,40 +219,40 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f01<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-            => gvec.vnor(a, gcpu.vor(b,c));
+            => gcpu.vnor(a, gcpu.vor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f02<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(c, gvec.vnor(b,a));
+                => gcpu.vand(c, gcpu.vnor(b,a));
 
          // b nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f03<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(b,a);
+                => gcpu.vnor(b,a);
 
        // b and (a nor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f04<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(b, gvec.vnor(a,c));
+                => gcpu.vand(b, gcpu.vnor(a,c));
 
         // c nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f05<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(c,a);
+                => gcpu.vnor(c,a);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f06<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(a), gvec.vxor(b,c));
+                => gcpu.vand(gcpu.vnot(a), gcpu.vxor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f07<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(a, gcpu.vand(b,c));
+                => gcpu.vnor(a, gcpu.vand(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f08<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
@@ -262,7 +262,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f09<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(a, gvec.vxor(b,c));
+                => gcpu.vnor(a, gcpu.vxor(b,c));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0a<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
@@ -303,78 +303,78 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f10<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(a, gvec.vnor(b, c));
+                => gcpu.vand(a, gcpu.vnor(b, c));
 
         // c nor b
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f11<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(c,b);
+                => gcpu.vnor(c,b);
 
         // not b and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f12<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(b), gvec.vxor(a,c));
+                => gcpu.vand(gcpu.vnot(b), gcpu.vxor(a,c));
 
         // b nor (a and c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f13<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(b, gcpu.vand(a,c));
+                => gcpu.vnor(b, gcpu.vand(a,c));
 
         // not c and (a xor b)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f14<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gcpu.vnot(c), gvec.vxor(a,b));
+                => gcpu.vand(gcpu.vnot(c), gcpu.vxor(a,b));
 
         // c nor (b and a)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f15<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vnor(c, gcpu.vand(a,b));
+                => gcpu.vnor(c, gcpu.vand(a,b));
 
         // a ? (b nor c) : (b xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f16<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vselect(a, gvec.vnor(b,c), gvec.vxor(b,c));
+                => gcpu.vselect(a, gcpu.vnor(b,c), gcpu.vxor(b,c));
 
         // not(a ? (b or c) : (b and c))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f17<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(gvec.vselect(a, gcpu.vor(b,c), gcpu.vand(b,c)));
+                => gcpu.vnot(gcpu.vselect(a, gcpu.vor(b,c), gcpu.vand(b,c)));
 
         // (a xor b) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f18<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vand(gvec.vxor(a,b), gvec.vxor(a,c));
+                => gcpu.vand(gcpu.vxor(a,b), gcpu.vxor(a,c));
 
         // ((b xor c) xor (a and (b and c))
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f19<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vxor(gvec.vxor(b,c), gcpu.vand(a, gcpu.vand(b,c)));
+                => gcpu.vxor(gcpu.vxor(b,c), gcpu.vand(a, gcpu.vand(b,c)));
 
         // not ((a and b)) and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f1a<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gcpu.vnot(gcpu.vand(gcpu.vand(a,b), gvec.vxor(a, c)));
+                => gcpu.vnot(gcpu.vand(gcpu.vand(a,b), gcpu.vxor(a, c)));
 
         // c ? not a : not b
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f1b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vselect(c, gcpu.vnot(a), gcpu.vnot(b));
+                => gcpu.vselect(c, gcpu.vnot(a), gcpu.vnot(b));
 
         // a ? (b xnor c) : (b nand c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f97<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vselect(c, gvec.vxnor(b,c), gvec.vnand(b,c));
+                => gcpu.vselect(c, gcpu.vxnor(b,c), gcpu.vnand(b,c));
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     public static partial class XTend
     {
-        const NumericKind Closure = Integers;
+        const NumericKind Closure = UnsignedInts;
 
         const MethodImplOptions Options = MethodImplOptions.AggressiveInlining;
     }

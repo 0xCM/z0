@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericCast;
+    using static Numeric;
 
     public static class GammaSpec
     {
@@ -78,7 +78,7 @@ namespace Z0
         {
             var x = force<T,double>(value);
             var r = 1.0/x;
-            return force<T>(r);
+            return Numeric.force<T>(r);
         }
     }
 }

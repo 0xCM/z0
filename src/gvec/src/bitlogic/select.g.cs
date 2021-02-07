@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Integers)]
         public static Vector128<T> vselect<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
-                => gcpu.vor(gcpu.vand(x,y), vnonimpl(x,z));
+                => gcpu.vor(gcpu.vand(x,y), gcpu.vnonimpl(x,z));
 
         /// <summary>
         /// Defines the ternary bitwise select operator over three vectors,
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Integers)]
         public static Vector256<T> vselect<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
-                => gcpu.vor(gcpu.vand(x,y), vnonimpl(x,z));
+                => gcpu.vor(gcpu.vand(x,y), gcpu.vnonimpl(x,z));
 
         /// <summary>
         /// Defines the ternary bitwise select operator over three vectors,

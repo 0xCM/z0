@@ -35,24 +35,36 @@ namespace Z0
         {
             var v0 = cpu.vload(w256, skip(src, 0*8));
             var v1 = cpu.vload(w256, skip(src, 1*8));
-            var x = cpu.vcompact16u(v0, v1, w256);
+            var x = cpu.vpack256x16u(v0, v1);
             v0 = cpu.vload(w256, skip(src,2*8));
             v1 = cpu.vload(w256, skip(src,3*8));
 
-            var y = cpu.vcompact16u(v0, v1, w256);
-            var packed = (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,w256));
+            var y = cpu.vpack256x16u(v0, v1);
+            var packed = (ulong)gcpu.vpacklsb(cpu.vpack256x8u(x,y,w256));
 
             v0 = cpu.vload(w256, skip(src,4*8));
             v1 = cpu.vload(w256, skip(src,5*8));
-            x = cpu.vcompact16u(v0,v1,w256);
+            x = cpu.vpack256x16u(v0,v1);
 
             v0 = cpu.vload(w256, skip(src,6*8));
             v1 = cpu.vload(w256, skip(src,7*8));
-            y = cpu.vcompact16u(v0,v1,w256);
+            y = cpu.vpack256x16u(v0,v1);
 
-            packed |= (ulong)gcpu.vpacklsb(cpu.vcompact8u(x,y,w256)) << 32;
+            packed |= (ulong)gcpu.vpacklsb(cpu.vpack256x8u(x,y)) << 32;
 
             dst = packed;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Packs the least significant bit from <see cref='n64'/> <see cref='w32'/> <see cref='uint'/> source values to a <see cref='w64'/>  <see cref='ulong'/> target
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static ref ulong pack64x32x1(in NatSpan<N64,uint> src, ref ulong dst)
+        {
+            dst = pack64x32x1(src.First, n64, w64);
             return ref dst;
         }
     }

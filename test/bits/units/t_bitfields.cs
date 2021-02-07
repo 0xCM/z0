@@ -53,10 +53,10 @@ namespace Z0
                 var seg2 = bf.Extract(spec[2], input);
                 var seg3 = bf.Extract(spec[3], input);
 
-                Claim.eq(Bits.bitslice(input, 0, 2), seg0);
-                Claim.eq(Bits.bitslice(input, 2, 2), seg1);
-                Claim.eq(Bits.bitslice(input, 4, 2), seg2);
-                Claim.eq(Bits.bitslice(input, 6, 2), seg3);
+                Claim.eq(Bits.extract(input, 0, 2), seg0);
+                Claim.eq(Bits.extract(input, 2, 2), seg1);
+                Claim.eq(Bits.extract(input, 4, 2), seg2);
+                Claim.eq(Bits.extract(input, 6, 2), seg3);
 
                 var output =  gmath.or(
                     gmath.sll(seg0, (byte)spec[0].StartPos),
@@ -235,7 +235,7 @@ namespace Z0
                 dst.Clear();
                 tmp.Clear();
 
-                var expect = gbits.bitslice(src,0, (byte)spec.TotalWidth);
+                var expect = gbits.extract(src,0, (byte)spec.TotalWidth);
 
                 bf.Deposit(src, dst);
                 gspan.sllv(dst, positions, tmp);

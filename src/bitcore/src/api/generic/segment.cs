@@ -60,14 +60,14 @@ namespace Z0
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
             var firstCount = ScalarCast.uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
-            var part1 = gbits.bitslice(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
+            var part1 = gbits.extract(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = ScalarCast.uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(gbits.bitslice(bitcell(src,i1), 0, lastCount), firstCount));
+                return gmath.or(part1, gmath.sal(gbits.extract(bitcell(src,i1), 0, lastCount), firstCount));
             }
         }
 

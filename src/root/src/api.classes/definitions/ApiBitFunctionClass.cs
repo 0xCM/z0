@@ -54,7 +54,7 @@ namespace Z0
 
         LoSeg = Id.LoSeg,
 
-        ZHi = Id.ZHi,
+        MsbOff = Id.MsbOff,
 
         Pack = Id.Pack,
 
@@ -84,8 +84,8 @@ namespace Z0
 
         Byteswap = Id.Byteswap,
 
-        Blsr = Id.Blsr,
+        LsbOff = Id.LsbOff,
 
-        Blsi = Id.Blsi,
+        XLsb = Id.XLsb,
     }
 }

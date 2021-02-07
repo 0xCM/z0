@@ -13,6 +13,7 @@ namespace Z0
 
     partial struct gcpu
     {
+
         [MethodImpl(Inline), Abs, Closures(SignedInts)]
         public static Vector128<T> vabs<T>(Vector128<T> x)
             where T : unmanaged

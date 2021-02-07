@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static In;
+    using static Part;
+    using static memory;
     using static SFx;
 
     using BL = ByteLogic64;
@@ -25,7 +24,7 @@ namespace Z0
             public void Invoke(in T src, ref T dst)
             {
                 if(typeof(W) == typeof(W64))
-                    BL.not(in uint8(in src), ref z.uint8(ref dst));
+                    BL.not(in u8(src), ref u8(dst));
                 else if(typeof(W) == typeof(W128))
                     LS.not(w128, src, ref dst);
                 else if(typeof(W) == typeof(W256))

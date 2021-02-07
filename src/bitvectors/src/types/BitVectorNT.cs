@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static NumericCast;
+    using static Numeric;
 
     /// <summary>
     /// Defines a natural bitvector over a primal cell
@@ -42,7 +42,8 @@ namespace Z0
         /// <summary>
         /// The physical width of the vector
         /// </summary>
-        public static int MaxWidth => BitSize.measure<T>();
+        public static int MaxWidth
+            => BitSize.measure<T>();
 
         /// <summary>
         /// The maximum arithmetic value of the vector, constrained by the natural width

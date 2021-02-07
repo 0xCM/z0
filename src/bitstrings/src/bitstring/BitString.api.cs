@@ -13,6 +13,16 @@ namespace Z0
     partial struct BitString
     {
         /// <summary>
+        /// Constructs a bitsequence via the bitstore and populates an allocated target with the result
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The primal source type</typeparam>
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<byte> storeseq<T>(T src)
+            where T : unmanaged
+                => BitStore.bitseq(src);
+
+        /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
         /// over the domain {'0','1'} according to whether the bit in the i'th
         /// position of the source is respectively disabled/enabled

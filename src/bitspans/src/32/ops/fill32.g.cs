@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return ref SB.fill32(NumericCast.force<T,byte>(src),dst);
+                return ref SB.fill32(Numeric.force<T,byte>(src),dst);
             else if(typeof(T) == typeof(short))
-                return ref SB.fill32(NumericCast.force<T,ushort>(src),dst);
+                return ref SB.fill32(Numeric.force<T,ushort>(src),dst);
             else if(typeof(T) == typeof(int))
-                return ref SB.fill32(NumericCast.force<T,uint>(src),dst);
+                return ref SB.fill32(Numeric.force<T,uint>(src),dst);
             else if(typeof(T) == typeof(long))
-                return ref SB.fill32(NumericCast.force<T,ulong>(src),dst);
+                return ref SB.fill32(Numeric.force<T,ulong>(src),dst);
             else
                 throw no<T>();
         }

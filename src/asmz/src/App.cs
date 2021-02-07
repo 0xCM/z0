@@ -38,6 +38,7 @@ namespace Z0.Asm
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
+
         [Op]
         Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
@@ -182,7 +183,6 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Jit();
 
         }
 

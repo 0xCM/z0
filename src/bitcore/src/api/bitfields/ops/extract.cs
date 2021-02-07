@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T extract<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
-                => gbits.bitslice(src, (byte)seg.StartPos, (byte)seg.Width);
+                => gbits.extract(src, (byte)seg.StartPos, (byte)seg.Width);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T offset<T>(in BitFieldSegment seg, T src)
@@ -46,7 +46,7 @@ namespace Z0
         public static T extract<S,T>(in BitFieldSegment segment, in S src)
             where S : IScalarBitField<T>
             where T : unmanaged
-                => gbits.bitslice(src.Scalar, (byte)segment.StartPos, (byte)segment.Width);
+                => gbits.extract(src.Scalar, (byte)segment.StartPos, (byte)segment.Width);
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -16,18 +16,18 @@ namespace Z0
         /// Disables the least set bit in the source and is logically equivalent to the composite operation (src - 1) & src
         /// </summary>
         /// <param name="src">The bit source</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T blsr<T>(T src)
+        [MethodImpl(Inline), LsbOff, Closures(Closure)]
+        public static T lsboff<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.blsr(uint8(src)));
+                return generic<T>(Bits.lsboff(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.blsr(uint16(src)));
+                return generic<T>(Bits.lsboff(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.blsr(uint32(src)));
+                return generic<T>(Bits.lsboff(uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.blsr(uint64(src)));
+                return generic<T>(Bits.lsboff(uint64(src)));
             else
                 throw no<T>();
         }

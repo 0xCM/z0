@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Characterizes a bernouli distribution
-    /// </summary>    
+    /// </summary>
     /// <typeparam name="T">The sample value type</typeparam>
     public readonly struct ChiSquareSpec<T> : IDistributionSpec<T>
         where T : unmanaged
-    {        
+    {
         [MethodImpl(Inline)]
         public static implicit operator ChiSquareSpec<T>(int freedom)
             => Define(freedom);
@@ -28,13 +27,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ChiSquareSpec<T> Define(int freedom)
             => new ChiSquareSpec<T>(freedom);
-        
+
         [MethodImpl(Inline)]
         public ChiSquareSpec(int freedom)
         {
             this.Freedom = freedom;
         }
-        
+
         /// <summary>
         /// The number of degrees of freedom
         /// </summary>
@@ -43,7 +42,7 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Chi2;
     }
 }

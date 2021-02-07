@@ -26,5 +26,9 @@ namespace Z0
             Bits = 0;
             Data = src;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator uint(BitsF32 src)
+            => src.Bits;
     }
 }

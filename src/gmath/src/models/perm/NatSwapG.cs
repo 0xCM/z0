@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
@@ -127,8 +127,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSwap((T i, T j) src)
         {
-            this.i = NumericCast.force<T,uint>(src.i);
-            this.j = NumericCast.force<T,uint>(src.j);
+            this.i = Numeric.force<T,uint>(src.i);
+            this.j = Numeric.force<T,uint>(src.j);
         }
 
         [MethodImpl(Inline)]

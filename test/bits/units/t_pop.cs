@@ -7,26 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public class t_pop : t_bitcore<t_pop>
     {
-        static Span<byte> unpack8x1(ReadOnlySpan<byte> src, Span<byte> dst)
-        {
-            var offset = 0;
-            for(var i = 0; i<src.Length; i++, offset += 8)
-                BitStore.select(src[i]).CopyTo(dst.Slice(offset));
-            return dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static Span<byte> Unpack(Span<byte> src)
-            => unpack8x1(src, new byte[src.Length*8]);
-
-        [MethodImpl(Inline)]
-        public static void Unpack(Span<byte> src, Span<byte> dst)
-            => unpack8x1(src, dst);
-
         public void sb_pop_popcnt()
         {
             var buffer16x8 = SpanBlocks.alloc<byte>(n128);
@@ -46,7 +30,8 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
-                Unpack(y,buffer64x8);
+
+                Bits.unpack1x8x8(y, buffer64x8);
                 Claim.eq(buffer64x8.Storage.PopCount(), y.PopCount());
             }
 

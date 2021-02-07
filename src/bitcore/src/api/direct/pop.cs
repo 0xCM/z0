@@ -9,19 +9,10 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Popcnt;
     using static System.Runtime.Intrinsics.X86.Popcnt.X64;
-
     using static Part;
 
     partial class Bits
     {
-        const ulong k1 = 0x5555555555555555;
-
-        const ulong k2 = 0x3333333333333333;
-
-        const ulong k4 = 0x0f0f0f0f0f0f0f0f;
-
-        const ulong kf = 0x0101010101010101;
-
         /// <summary>
         /// Counts the enabled bits in the source
         /// </summary>
@@ -128,5 +119,12 @@ namespace Z0
         public static uint pop(ulong x0, ulong x1, ulong x2, ulong x3, ulong x4, ulong x5)
             => pop(x0,x1,x2) + pop(x3,x4,x5);
 
+        const ulong k1 = 0x5555555555555555;
+
+        const ulong k2 = 0x3333333333333333;
+
+        const ulong k4 = 0x0f0f0f0f0f0f0f0f;
+
+        const ulong kf = 0x0101010101010101;
     }
 }

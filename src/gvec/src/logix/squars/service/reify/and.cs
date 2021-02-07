@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static In;
+    using static Part;
+    using static memory;
     using static SFx;
 
     using BL = ByteLogic64;
@@ -25,7 +24,7 @@ namespace Z0
             public void Invoke(in T a, in T b, ref T dst)
             {
                 if(typeof(W) == typeof(W64))
-                    BL.and(in uint8(in a), in uint8(in b), ref z.uint8(ref dst));
+                    BL.and(u8(a), u8(b), ref u8(dst));
                 else if(typeof(W) == typeof(W128))
                     LS.and(w128, a, b, ref dst);
                 else if(typeof(W) == typeof(W256))

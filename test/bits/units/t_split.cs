@@ -98,23 +98,6 @@ namespace Z0
             }
         }
 
-        public void sb_unpack_8x1()
-        {
-            Span<byte> up2 = stackalloc byte[8];
-            for(var i=0; i<= 255; i++)
-            {
-                up2.Clear();
-
-                byte b = (byte)i;
-                var x = BitStore.bitseq(b);
-                var y = BitStore.select(b);
-                ClaimNumeric.ClaimEq(x,y);
-
-                var up1 = BitStore.select((byte)i);
-                Bits.unpack1x8x8(b, up2);
-                Claim.eq(BitString.load(up1.ToArray()), BitString.load(up2.ToArray()));
-            }
-        }
 
         public void sb_unpack_64x1()
         {

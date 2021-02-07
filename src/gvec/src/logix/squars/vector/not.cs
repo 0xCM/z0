@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class LogicSquare
     {
@@ -17,7 +17,7 @@ namespace Z0
         public static Vector128<T> vnot<T>(W128 w, in T src)
             where T : unmanaged
         {
-            vload(src, out Vector128<T> dst);
+            gcpu.vload(src, out Vector128<T> dst);
             return gcpu.vnot(dst);
         }
 
@@ -25,7 +25,7 @@ namespace Z0
         public static Vector256<T> vnot<T>(W256 w, in T src)
             where T : unmanaged
         {
-            vload(src, out Vector256<T> dst);
+            gcpu.vload(src, out Vector256<T> dst);
             return gcpu.vnot(dst);
         }
 

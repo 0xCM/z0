@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T As<T>()
              where T : struct
-               => In.generic<F,T>(this);
+               => memory.@as<F,T>(this);
        public string Format()
             => Content.ToString();
 

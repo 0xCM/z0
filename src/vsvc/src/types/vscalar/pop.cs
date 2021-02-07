@@ -18,10 +18,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => gvec.vpop(x,y,z);
+            public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z)
+                => gcpu.vpop(x,y,z);
 
             [MethodImpl(Inline)]
-            public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
+            public uint Invoke(T a, T b, T c)
+                => gbits.pop(a,b,c);
         }
 
         [Closures(Integers), Pop]
@@ -29,10 +31,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z) => gvec.vpop(x,y,z);
+            public uint Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z)
+                => gcpu.vpop(x,y,z);
 
             [MethodImpl(Inline)]
-            public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
+            public uint Invoke(T a, T b, T c)
+                => gbits.pop(a,b,c);
         }
     }
 }

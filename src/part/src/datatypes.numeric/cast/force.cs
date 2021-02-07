@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(sbyte src)
+        internal static T force<T>(sbyte src)
             => convert8i_u<T>(src);
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(byte src)
+        internal static T force<T>(byte src)
             => convert8u_u<T>(src);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(short src)
+        internal static T force<T>(short src)
             => convert16i_u<T>(src);
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(int src)
+        internal static T force<T>(int src)
             => convert32i_u<T>(src);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(uint src)
+        internal static T force<T>(uint src)
             => convert32u_u<T>(src);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(long src)
+        internal static T force<T>(long src)
             => convert64i_u<T>(src);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(ulong src)
+        internal static T force<T>(ulong src)
             => convert64u_u<T>(src);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(float src)
+        internal static T force<T>(float src)
             => convert32f_u<T>(src);
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(double src)
+        internal static T force<T>(double src)
             => convert64f_u<T>(src);
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T force<T>(char src)
+        internal static T force<T>(char src)
             => convert16c_u<T>(src);
 
         /// <summary>

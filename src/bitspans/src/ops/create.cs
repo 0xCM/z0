@@ -13,19 +13,19 @@ namespace Z0
     {
         public static BitSpan create<T>(T src)
             where T : unmanaged
-                => gbits.unpack(src);
+                => gpack.unpack(src);
 
         public static BitSpan create<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => gbits.unpack(src);
+                => gpack.unpack(src);
 
         public static BitSpan create<T>(Span<T> src)
             where T : unmanaged
-                => gbits.unpack(src.ReadOnly());
+                => gpack.unpack(src.ReadOnly());
 
         [MethodImpl(Inline), Op]
         public static BitSpan create<T>(ReadOnlySpan<T> src, Span<bit> buffer)
             where T : unmanaged
-                => gbits.unpack(src, buffer);
+                => gpack.unpack(src, buffer);
     }
 }

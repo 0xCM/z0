@@ -27,7 +27,9 @@ namespace Z0
 
     public sealed class RankAttribute : A { public RankAttribute() : base(K.Rank) {} }
 
-    public sealed class Segment : A { public Segment() : base(K.Extract) {} }
+    public sealed class SegmentAttribute : A { public SegmentAttribute() : base(K.Extract) {} }
+
+    public sealed class ExtractAttribute : A { public ExtractAttribute() : base(K.Extract) {} }
 
     public sealed class TestBitAttribute : A { public TestBitAttribute() : base(K.TestBit) {} }
 
@@ -47,7 +49,7 @@ namespace Z0
 
     public sealed class LoSegAttribute : A { public LoSegAttribute() : base(K.LoSeg) {} }
 
-    public sealed class ZHiAttribute : A { public ZHiAttribute() : base(K.ZHi) {} }
+    public sealed class MsbOffAttribute : A { public MsbOffAttribute() : base(K.MsbOff) {} }
 
     public sealed class PackAttribute : A { public PackAttribute() : base(K.Pack) {} }
 
@@ -77,7 +79,7 @@ namespace Z0
 
     public sealed class ByteswapAttribute : A { public ByteswapAttribute() : base(K.Byteswap) {} }
 
-    public sealed class BlsrAttribute : A { public BlsrAttribute() : base(K.Blsr) {} }
+    public sealed class LsbOffAttribute : A { public LsbOffAttribute() : base(K.LsbOff) {} }
 
-    public sealed class BlsiAttribute : A { public BlsiAttribute() : base(K.Blsi) {} }
+    public sealed class XLsbAttribute : A { public XLsbAttribute() : base(K.XLsb) {} }
 }

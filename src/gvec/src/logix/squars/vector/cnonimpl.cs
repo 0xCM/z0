@@ -8,20 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class LogicSquare
     {
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static Vector128<T> vcnonimpl<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gcpu.vcnonimpl(vload(w, in a),vload(w, in b));
+                => gcpu.vcnonimpl(gcpu.vload(w, in a), gcpu.vload(w, in b));
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static Vector256<T> vcnonimpl<T>(W256 w, in T a, in T b)
             where T : unmanaged
-                => gcpu.vcnonimpl(vload(w, in a),vload(w, in b));
+                => gcpu.vcnonimpl(gcpu.vload(w, a),gcpu.vload(w, b));
 
         [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(W128 w, in T a, in T b, ref T dst)

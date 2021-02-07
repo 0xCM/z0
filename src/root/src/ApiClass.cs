@@ -310,7 +310,7 @@ public enum ApiClass : ushort
 
     LoSeg,
 
-    ZHi,
+    MsbOff,
 
     Log2,
 
@@ -411,9 +411,9 @@ public enum ApiClass : ushort
 
     ParseFunction,
 
-    Blsr,
+    LsbOff,
 
-    Blsi,
+    XLsb,
 
     AddAssign,
 
