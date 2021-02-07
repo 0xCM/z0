@@ -47,10 +47,10 @@ namespace Z0
 
 
             var dst = new uint[cells];
-            cpu.vstore(a, ref head(dst), step*0);
-            cpu.vstore(b, ref head(dst), step*1);
-            cpu.vstore(c, ref head(dst), step*2);
-            cpu.vstore(d, ref head(dst), step*3);
+            cpu.vstore(a, ref first(dst), step*0);
+            cpu.vstore(b, ref first(dst), step*1);
+            cpu.vstore(c, ref first(dst), step*2);
+            cpu.vstore(d, ref first(dst), step*3);
 
             var A = Matrix.load(order, src.Storage.ToArray());
             var B = Matrix.load(order, dst);

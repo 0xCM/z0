@@ -41,10 +41,10 @@ namespace Z0
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
 
-            var bs1 = BitSpans.parse32(bsSrc);
+            var bs1 = BitSpans32.parse32(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
-            var bs2 = BitSpans.from32(x);
+            var bs2 = BitSpans32.from32(x);
             CheckBitSpans.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
@@ -97,7 +97,7 @@ namespace Z0
             {
                 Random.Fill(packed);
                 gpack.unpack1x32(packed, unpacked);
-                var bitspan = BitSpans.load32(unpacked.As<Bit32>());
+                var bitspan = BitSpans32.load32(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
             }
         }
@@ -222,7 +222,7 @@ namespace Z0
         {
             var length = bitwidth<T>();
             var src = BitMasks.even(n2, n1, t);
-            var bitspan = BitSpans.from32<T>(src);
+            var bitspan = BitSpans32.from32<T>(src);
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
@@ -250,7 +250,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(buffer);
-                var bitspan = BitSpans.load32(buffer);
+                var bitspan = BitSpans32.load32(buffer);
                 bitspan_check(buffer.Bytes(),bitspan);
             }
         }
@@ -264,7 +264,7 @@ namespace Z0
                 for(var i=0; i < RepCount; i++)
                 {
                     var src = Random.Next<T>();
-                    var bitspan = BitSpans.from32(src);
+                    var bitspan = BitSpans32.from32(src);
                     Sinks.deposit(src, bytes);
                     bitspan_check(bytes, bitspan);
                 }
@@ -281,8 +281,8 @@ namespace Z0
                 for(var i=0; i< RepCount; i++)
                 {
                     var a = Random.Next<T>();
-                    var b = BitSpans.from32(a);
-                    var c = BitSpans.extract32<T>(b);
+                    var b = BitSpans32.from32(a);
+                    var c = BitSpans32.extract32<T>(b);
                     Claim.eq(a,c);
                 }
             }
@@ -298,9 +298,9 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x0 = Random.Next<T>();
-                    var x1 = BitSpans.from32(x0);
+                    var x1 = BitSpans32.from32(x0);
                     var x2 = x1.Format();
-                    var x3 = BitSpans.parse32(x2);
+                    var x3 = BitSpans32.parse32(x2);
                     var x4 = x3.Convert<T>();
                     Claim.eq(x0,x4);
                 }

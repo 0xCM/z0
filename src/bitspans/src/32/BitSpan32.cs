@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BitSpans;
+    using static BitSpans32;
 
     /// <summary>
     /// Defines an anti-succinct data structure for bit representation
@@ -64,7 +64,7 @@ namespace Z0
         public byte this[int offset, int count, byte t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice32<byte>(this, offset, count);
+            get => BitSpans32.bitslice32<byte>(this, offset, count);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         public ushort this[int offset, int count, ushort t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice32<ushort>(this, offset, count);
+            get => BitSpans32.bitslice32<ushort>(this, offset, count);
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         public uint this[int offset, int count, uint t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice32<uint>(this, offset, count);
+            get => BitSpans32.bitslice32<uint>(this, offset, count);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0
         public ulong this[int offset, int count, ulong t]
         {
             [MethodImpl(Inline)]
-            get => BitSpans.bitslice32<ulong>(this, offset, count);
+            get => BitSpans32.bitslice32<ulong>(this, offset, count);
         }
 
         [MethodImpl(Inline)]
@@ -110,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitSpan32 operator +(in BitSpan32 head, in BitSpan32 tail)
-            => BitSpans.concat32(head,tail);
+            => BitSpans32.concat32(head,tail);
 
         [MethodImpl(Inline)]
         public static BitSpan32 operator &(in BitSpan32 x, in BitSpan32 y)

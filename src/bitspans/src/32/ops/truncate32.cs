@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Clamps a specified <see cref='BitSpan32'/> to a <see cref='BitSpan32'/> of a specified maximum length, discarding any excess

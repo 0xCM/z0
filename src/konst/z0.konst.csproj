@@ -9,6 +9,7 @@
     <ProjectReference Include="$(External)" />
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(BitMasks)" />
+    <ProjectReference Include="$(Math)" />
   </ItemGroup>
 
 </Project>

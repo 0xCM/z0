@@ -26,9 +26,9 @@ namespace Z0.Mkl
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-               VSL.vslsSSEditTask(task, param, ref z.float32(ref value)).AutoThrow(file,line);
+               VSL.vslsSSEditTask(task, param, ref memory.float32(ref value)).AutoThrow(file,line);
             else if(typeof(T) == typeof(double))
-                VSL.vsldSSEditTask(task, param, ref z.float64(ref value)).AutoThrow(file,line);
+                VSL.vsldSSEditTask(task, param, ref memory.float64(ref value)).AutoThrow(file,line);
             else
                 throw no<T>();
         }

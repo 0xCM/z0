@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T sqrt<T>(T src)
             where T : unmanaged
         {
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.sqrt(float64(src)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ConstSet(T[] src)
-            => Data = z.hashset(src);
+            => Data = root.hashset(src);
 
         public IEnumerable<T> Next()
             => Data;

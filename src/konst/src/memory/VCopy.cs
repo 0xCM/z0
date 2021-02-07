@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static gcpu;
+    using static memory;
 
     public readonly struct VCopy
     {
@@ -25,13 +26,13 @@ namespace Z0
         public static void vcopy<T>(W128 w, ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            var seg = (uint)cpu.vcount<T>(w);
+            var seg = (uint)vcount<T>(w);
             var blocks = root.length(src,dst)/seg;
             for(var i=0u; i<blocks; i++)
             {
                 var offset = i*seg;
                 var vSrc = vload(w, skip(src, offset));
-                gcpu.vstore(vSrc, ref seek(dst,offset));
+                vstore(vSrc, ref seek(dst,offset));
             }
         }
 
@@ -46,13 +47,13 @@ namespace Z0
         public static void vcopy<T>(W256 w, ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
-            var seg = (uint)cpu.vcount<T>(w);
+            var seg = (uint)vcount<T>(w);
             var blocks = root.length(src,dst)/seg;
             for(var i=0u; i<blocks; i++)
             {
                 var offset = i*seg;
                 var vSrc = vload(w, skip(src, offset));
-                gcpu.vstore(vSrc, ref seek(dst,offset));
+                vstore(vSrc, ref seek(dst,offset));
             }
         }
     }

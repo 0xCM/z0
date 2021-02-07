@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Replicates the content of a source bitspan into a new bitspan

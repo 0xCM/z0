@@ -27,7 +27,7 @@ namespace Z0
             const string Buffer = "                                                                                                                                ";
 
             var pDst = z.pchar(Buffer);
-            var pSrc = z.gptr(first(src));
+            var pSrc = memory.gptr(first(src));
             var count = Math.Min(src.Length, Buffer.Length);
             for(var i=0; i<count; i++)
                 *pDst++ = *pSrc++;

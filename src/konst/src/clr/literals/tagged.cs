@@ -5,28 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     partial struct ClrLiterals
     {
-        public static LiteralInfo tagged(FieldInfo target)
-        {
-            var tagged = target.Tagged<LiteralAttribute>();
-            if(tagged)
-            {
-                var attrib = (LiteralAttribute)target.GetCustomAttribute(typeof(LiteralAttribute));
-                var data = attrib.Description;
-                if(!string.IsNullOrWhiteSpace(data))
-                    return describe(target.Name,
-                    target.GetRawConstantValue(), data,
-                    Type.GetTypeCode(target.FieldType),
-                    target.FieldType.IsEnum,
-                    false);
-            }
-            return LiteralInfo.Empty;
-        }
-
         /// <summary>
         /// Selects the binary literals declared by a type that are of a specified parametric primal type
         /// </summary>
@@ -37,7 +18,7 @@ namespace Z0
                 => from f in src.LiteralFields()
                    where f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select z.literal(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
+                   select Numeric.binary(@base, f.Name, (T)f.GetRawConstantValue(), a.Text);
 
         /// <summary>
         /// Selects the binary literals declared by a type
@@ -47,6 +28,6 @@ namespace Z0
             => from f in src.LiteralFields()
                where f.Tagged<BinaryLiteralAttribute>()
                let a = f.Tag<BinaryLiteralAttribute>().Require()
-               select z.literal(@base, f.Name, f.GetRawConstantValue(), a.Text);
+               select Numeric.binary(@base, f.Name, f.GetRawConstantValue(), a.Text);
     }
 }

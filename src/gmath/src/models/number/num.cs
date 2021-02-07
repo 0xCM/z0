@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct num
@@ -18,17 +17,17 @@ namespace Z0
             where T : unmanaged
                 => new num<T>(value);
 
-        [MethodImpl(Inline), Const, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static num<T> zero<T>()
             where T : unmanaged
                 => new num<T>(Numeric.zero<T>());
 
-        [MethodImpl(Inline), Const, Closures(AllNumeric)]
+        [MethodImpl(Inline), One, Closures(AllNumeric)]
         public static num<T> one<T>()
             where T : unmanaged
                 => new num<T>(Numeric.one<T>());
 
-        [MethodImpl(Inline), Const, Closures(AllNumeric)]
+        [MethodImpl(Inline), Ones, Closures(AllNumeric)]
         public static num<T> ones<T>()
             where T : unmanaged
                 => new num<T>(Numeric.ones<T>());

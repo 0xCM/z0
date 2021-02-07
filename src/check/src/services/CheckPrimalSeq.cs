@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool TestEq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-            => z.eq(lhs,rhs);
+            => Seq.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool TestEq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
-            => z.eq(lhs,rhs);
+            => Seq.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool TestEq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)
-            => z.eq(lhs,rhs);
+            => Seq.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool TestEq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)
-            => z.eq(lhs,rhs);
+            => Seq.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="rhs">The right operand</param>
         [MethodImpl(Inline), Op]
         public static bool TestEq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)
-            => z.eq(lhs,rhs);
+            => Seq.eq(lhs,rhs);
 
         /// <summary>
         /// Asserts the equality of two boolean arrays

@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref byte write(ulong src, ref byte dst)
         {
-             *(z.gptr<ulong>(dst)) = src;
+             *(memory.gptr<ulong>(dst)) = src;
              return ref dst;
         }
 

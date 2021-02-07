@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [Isomorphic(typeof(MemoryScaleFactor))]
     public readonly struct MemoryScale : ITextual
     {
         public MemoryScaleFactor Factor {get;}

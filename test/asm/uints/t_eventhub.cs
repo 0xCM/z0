@@ -28,7 +28,7 @@ namespace Z0
 
         public void test_1()
         {
-            var received = z.hashset<IDataEvent>();
+            var received = root.hashset<IDataEvent>();
             void Receiver(IDataEvent e)
             {
                 received.Add(e);

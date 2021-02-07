@@ -26,7 +26,15 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte* liberate(Span<byte> src)
-            => liberate((byte*)memory.pointer(ref memory.first(src)), src.Length);
+            => liberate((byte*)pointer(ref first(src)), src.Length);
+
+        /// <summary>
+        /// Can this ever be a good way to solve your problem?
+        /// </summary>
+        /// <param name="src">The buffer to let it be what it wants</param>
+        [MethodImpl(Inline), Op]
+        public static Span<char> liberate(ReadOnlySpan<char> src)
+            => cover(first(edit(src)),src.Length);
 
         /// <summary>
         /// This may not be the best idea to solve your problem
@@ -34,7 +42,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline)]
         public static unsafe byte* liberate(ReadOnlySpan<byte> src)
-            => liberate<byte>(ref memory.edit(memory.first(src)), src.Length);
+            => liberate<byte>(ref edit(first(src)), src.Length);
 
         /// <summary>
         /// Enables execution over a reference-identified memory segment of specified length
@@ -42,7 +50,7 @@ namespace Z0
         /// <param name="src">The buffer to let it be what it wants</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte* liberate(ref byte src, int length)
-            => liberate((byte*)memory.pointer(ref src), length);
+            => liberate((byte*)pointer(ref src), length);
 
         /// <summary>
         /// Enables execution over a specified memory range

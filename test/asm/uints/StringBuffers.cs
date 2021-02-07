@@ -17,7 +17,7 @@ namespace Z0
         static Span<char> Buffer
         {
             [MethodImpl(Inline)]
-            get => liberate(Storage);
+            get => memory.liberate(Storage);
         }
 
         public static uint Capacity
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<T>()
         {
-            var dst = liberate(chars(Storage));
+            var dst = memory.liberate(chars(Storage));
             var name = chars(typeof(T).Name);
             var first = (uint)Part0.Length;
             var last = Math.Min(first + (uint)name.Length,Storage.Length);

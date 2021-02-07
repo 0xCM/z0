@@ -43,7 +43,7 @@ namespace Z0
             where T : struct, ICmdToolModel<T>
                 => describe(typeof(T));
 
-        [Projector]
+        [Op]
         static ref CmdOptionSpec extract(MemberInfo src, out CmdOptionSpec dst)
         {
             var tag = src.RequiredTag<SlotAttribute>();

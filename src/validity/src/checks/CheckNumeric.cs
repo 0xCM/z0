@@ -70,12 +70,12 @@ namespace Z0
         [Op, Closures(Closure)]
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
             where T : unmanaged
-                => iter(lhs, rhs, (a,b) => eq(a,b));
+                => root.iter(lhs, rhs, (a,b) => eq(a,b));
 
         [Op, Closures(Closure)]
         public static void eq<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-                => iter(lhs,rhs, (a,b) => eq(a,b));
+                => root.iter(lhs,rhs, (a,b) => eq(a,b));
 
         /// <summary>
         /// Asserts content equality for two natural spans of coincident length

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using SB = SpannedBits;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Extracts a scalar value from a bitspan

@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Seq
     {
@@ -28,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static DelimitedIndex<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedIndex<T>(array(src), delimiter);
+            => new DelimitedIndex<T>(src.ToArray(), delimiter);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DelimitedIndex<T> delimit<T>(Span<T> src, char delimiter = FieldDelimiter)
@@ -36,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static DelimitedIndex<T> delimit<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedIndex<T>(array(src), delimiter);
+            => new DelimitedIndex<T>(src.ToArray(), delimiter);
     }
 }

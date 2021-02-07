@@ -22,7 +22,7 @@ namespace Z0
         public static FPtr<Mul> testFptr()
         {
             Mul f = mul;
-            return z.fptr(f);
+            return memory.fptr(f);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

@@ -14,6 +14,7 @@ namespace Z0
 
     public interface ICheckSpanBlocks : ICheckNumeric
     {
+
         /// <summary>
         /// Asserts content equality for two 128-bit blocks
         /// </summary>
@@ -43,7 +44,7 @@ namespace Z0
         void eq<T>(SpanBlock256<T> xb, SpanBlock256<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< z.length(xb,yb); i++)
+            for(var i = 0; i<length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
@@ -60,9 +61,39 @@ namespace Z0
         void eq<T>(SpanBlock512<T> xb, SpanBlock512<T> yb, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
-            for(var i = 0; i< z.length(xb,yb); i++)
+            for(var i = 0; i< length(xb,yb); i++)
                 if(!gmath.eq(xb[i],yb[i]))
                     throw AppErrors.ItemsNotEqual(i, xb[i], yb[i], caller, file, line);
         }
+
+        /// <summary>
+        /// Returns the length of equal-length blocks; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        private static int length<S,T>(in SpanBlock128<S> lhs, in SpanBlock128<T> rhs)
+            where T : unmanaged
+            where S : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
+
+        /// <summary>
+        /// Returns the length of equal-length blocks; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        private static int length<S,T>(in SpanBlock256<S> lhs, in SpanBlock256<T> rhs)
+            where T : unmanaged
+            where S : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
+
+        /// <summary>
+        /// Returns the length of equal-length blocks; otherwise raises an error
+        /// </summary>
+        /// <param name="lhs">The left span</param>
+        /// <param name="rhs">The right span</param>
+        private static int length<S,T>(in SpanBlock512<S> lhs, in SpanBlock512<T> rhs)
+            where T : unmanaged
+            where S : unmanaged
+                => lhs.CellCount == rhs.CellCount ? lhs.CellCount : sys.@throw<int>(AppErrors.LengthMismatch(lhs.CellCount, rhs.CellCount));
     }
 }

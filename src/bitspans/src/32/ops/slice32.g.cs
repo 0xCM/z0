@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Materializes an integral value from a bitspan segment

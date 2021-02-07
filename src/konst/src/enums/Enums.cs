@@ -66,7 +66,7 @@ namespace Z0
                 => from f in typeof(E).LiteralFields().ToArray()
                    where f.Tagged<BinaryLiteralAttribute>()
                    let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select z.literal(base2, f.Name, EnumValue.scalar<E,T>((E)f.GetValue(null)), a.Text);
+                   select Numeric.binary(base2, f.Name, EnumValue.scalar<E,T>((E)f.GetValue(null)), a.Text);
 
         /// <summary>
         /// Gets the literals defined by an enumeration

@@ -248,7 +248,7 @@ namespace Z0
             var libs = deps.Libs();
             var options = deps.Options();
             var target = deps.Target();
-            iter(libs, lib => Wf.Row(lib.Name));
+            root.iter(libs, lib => Wf.Row(lib.Name));
         }
 
 

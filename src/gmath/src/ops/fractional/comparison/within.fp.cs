@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Bit32 within<T>(T a, T b, T delta)
+        public static bit within<T>(T a, T b, T delta)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return fmath.within(float64(a), float64(b), float64(delta));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

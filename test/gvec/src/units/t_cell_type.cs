@@ -14,8 +14,8 @@ namespace Z0
     {
         public void check_cell_types()
         {
-            iter(VK.Types128(), t => check_cell_type(t,n128));
-            iter(VK.Types256(), t => check_cell_type(t,n256));
+            root.iter(VK.Types128(), t => check_cell_type(t,n128));
+            root.iter(VK.Types256(), t => check_cell_type(t,n256));
         }
 
         void check_cell_type(Type tVector, N128 w)

@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static gcpu;
+    using static memory;
 
     /// <summary>
     /// Generates the data presented by VData

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T sin<T>(T src)
             where T : unmanaged
         {
@@ -24,7 +24,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T cos<T>(T src)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T tan<T>(T src)
             where T : unmanaged
         {
@@ -48,7 +48,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T sinh<T>(T src)
             where T : unmanaged
         {
@@ -60,7 +60,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T cosh<T>(T src)
             where T : unmanaged
         {
@@ -72,7 +72,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T tanh<T>(T src)
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T asin<T>(T src)
             where T : unmanaged
         {
@@ -97,7 +97,7 @@ namespace Z0
         }
 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T acos<T>(T src)
             where T : unmanaged
         {
@@ -109,7 +109,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T atan<T>(T src)
             where T : unmanaged
         {
@@ -121,7 +121,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T asinh<T>(T src)
             where T : unmanaged
         {
@@ -133,7 +133,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T acosh<T>(T src)
             where T : unmanaged
         {
@@ -145,7 +145,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T atanh<T>(T src)
             where T : unmanaged
         {

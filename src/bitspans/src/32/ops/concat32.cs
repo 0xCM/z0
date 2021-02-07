@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Forms the bitspan z := [head,tail] via concatentation
@@ -22,7 +22,7 @@ namespace Z0
             Span<Bit32> dst = new Bit32[head.Length + tail.Length];
             head.Data.CopyTo(dst);
             tail.Data.CopyTo(dst, head.Length);
-            return BitSpans.load32(dst);
+            return BitSpans32.load32(dst);
         }
     }
 }

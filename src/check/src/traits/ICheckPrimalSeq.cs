@@ -14,20 +14,20 @@ namespace Z0
 
     public interface ICheckPrimalSeq : ICheckLengths, ICheckInvariant, ICheckPrimal
     {
-        bool TestEq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-            => api.TestEq(lhs,rhs);
+        bool TestEq(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => api.TestEq(a, b);
 
-        bool TestEq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
-            => api.TestEq(lhs,rhs);
+        bool TestEq(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
+            => api.TestEq(a,b);
 
-        bool TestEq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)
-            => api.TestEq(lhs,rhs);
+        bool TestEq(ReadOnlySpan<int> a, ReadOnlySpan<int> b)
+            => api.TestEq(a,b);
 
-        bool TestEq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)
-            => api.TestEq(lhs,rhs);
+        bool TestEq(ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
+            => api.TestEq(a, b);
 
-        bool TestEq(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)
-            => api.TestEq(lhs,rhs);
+        bool TestEq(ReadOnlySpan<ulong> a, ReadOnlySpan<ulong> b)
+            => api.TestEq(a,b);
 
         void ClaimEq(bool[] lhs, bool[] rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => api.ClaimEq(lhs, rhs, caller, file, line);

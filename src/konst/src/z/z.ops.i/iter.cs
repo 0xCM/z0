@@ -15,17 +15,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void iter<T>(IEnumerable<T> src, Action<T> action, bool pll = false)
             => root.iter(src, action, pll);
-
-        [MethodImpl(Inline)]
-        public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
-            => root.iter(src, action);
-
-        [MethodImpl(Inline)]
-        public static void iter<S,T>(ReadOnlySpan<S> a, ReadOnlySpan<T> b, Action<S,T> f)
-            => root.iter(a, b, f);
-
-        [MethodImpl(Inline)]
-        public static void iter<S,T>(Span<S> a, Span<T> b, Action<S,T> f)
-            => root.iter(a, b, f);
     }
 }

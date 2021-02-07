@@ -13,7 +13,7 @@ namespace Z0
     partial class gfp
     {
         [MethodImpl(Inline), Lt, Closures(Closure)]
-        public static Bit32 lt<T>(T lhs, T rhs)
+        public static bit lt<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), LtEq, Closures(Closure)]
-        public static Bit32 lteq<T>(T lhs, T rhs)
+        public static bit lteq<T>(T lhs, T rhs)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))

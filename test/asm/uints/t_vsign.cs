@@ -20,7 +20,7 @@ namespace Z0
 
         public void check_vsign_8i()
         {
-            var fp = fptr<D.BinaryOp8>(add);
+            var fp = memory.fptr<D.BinaryOp8>(add);
             term.print(fp.P);
         }
     }

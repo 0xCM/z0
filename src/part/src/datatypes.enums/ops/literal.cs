@@ -58,12 +58,12 @@ namespace Z0
         /// <summary>
         /// Envisions a c16 value as a value of an enum of like u16 kind
         /// </summary>
-        /// <param name="src">The source value</param>
+        /// <param name="tVal">The source value</param>
         /// <typeparam name="E">The enum target type of primal u16-kind</typeparam>
         [MethodImpl(Inline)]
-        public static E literal<E>(char src)
+        public static ref E literal<E>(in char src)
             where E : unmanaged, Enum
-                => literal<E,ushort>((ushort)src);
+                 => ref literal<E,char>(src);
 
         /// <summary>
         /// Envisions an i32 value as a value of an enum of like primal kind

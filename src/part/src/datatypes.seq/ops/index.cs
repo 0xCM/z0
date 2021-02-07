@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IndexedSeq<I,T> index<I,T>(IEnumerable<T> src)
             where I : unmanaged
-                => new IndexedSeq<I,T>(array(src));
+                => new IndexedSeq<I,T>(src.ToArray());
 
         /// <summary>
         /// Creates an indexed sequence from a parameter array

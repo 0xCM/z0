@@ -12,7 +12,7 @@ namespace Z0
 
     using SB = SpannedBits;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Fills a bitspan from a primal source

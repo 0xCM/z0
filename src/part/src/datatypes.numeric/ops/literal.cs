@@ -15,6 +15,15 @@ namespace Z0
     partial struct Numeric
     {
         [MethodImpl(Inline), Op]
+        public static BinaryLiteral binary(Base2 @base2, string name, object value, string text)
+            => new BinaryLiteral(name,value,text);
+
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public static BinaryLiteral<T> binary<T>(Base2 @base2, string name, T value, string text)
+            where T : unmanaged
+                => new BinaryLiteral<T>(name, value, text);
+
+        [MethodImpl(Inline), Op]
         public static NumericLiteral literal(string Name, object Value, string Text, NBK @base)
             => new NumericLiteral(Name,Value,Text, @base);
 

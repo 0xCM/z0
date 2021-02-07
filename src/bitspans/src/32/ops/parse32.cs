@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Creates a bitspan from text encoding of a binary number
@@ -25,7 +25,7 @@ namespace Z0
             Span<Bit32> bits = new Bit32[len];
             for(var i=0; i<= lastix; i++)
                bits[lastix - i] = data[i] == Bit32.Zero ? Bit32.Off : Bit32.On;
-            return BitSpans.load32(bits);
+            return BitSpans32.load32(bits);
         }
     }
 }

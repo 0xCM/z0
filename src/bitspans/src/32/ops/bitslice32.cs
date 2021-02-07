@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         /// <summary>
         /// Materializes a bitspan segment as a scalar value

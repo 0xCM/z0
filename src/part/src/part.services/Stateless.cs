@@ -6,17 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
     [ApiHost]
     public readonly struct Stateless : IStateless<object>
     {
-        [Op]
-        public static Type[] hosts(Assembly src)
-            => src.GetTypes().Where(t => Attribute.IsDefined(t,typeof(StatelessAttribute)));
-
         [Op]
         public static Stateless<C> activate<C>(Type host)
             => new Stateless<C>(host, typeof(C), (C)Activator.CreateInstance(host));

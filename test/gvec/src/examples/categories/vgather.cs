@@ -168,14 +168,14 @@ namespace Z0
         static Vector256<long> VGather4x64iIndex
         {
             [MethodImpl(Inline)]
-            get => cpu.vload(n256, in memory.first64i(VGather256x64x256IndexData));
+            get => cpu.vload(w256, in memory.first64i(VGather256x64x256IndexData));
         }
 
         //[0, 7, 15, 31, 63, 127, 255, 511]
         static Vector256<uint> VGather256x32x512Index
         {
             [MethodImpl(Inline)]
-            get => z.vload<uint>(n256, in memory.first32(VGather256x32x512IndexData));
+            get => gcpu.vload<uint>(w256, in memory.first32(VGather256x32x512IndexData));
         }
 
         //[0, 63, 127, 255]

@@ -19,58 +19,58 @@ namespace Z0
             /// <summary>
             /// Defines the (uniform) bitfield segment width
             /// </summary>
-            [FieldSeg("[11111111]")]
+            [BitFieldSeg("[11111111]")]
             SegWidth = b11111111,
 
             /// <summary>
             /// Defines the Vendor bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 00000000 00000000 00000000 11111111]")]
+            [BitFieldSeg("[00000000 00000000 00000000 00000000 00000000 00000000 11111111]")]
             Vendor = SegWidth << P.Vendor,
 
             /// <summary>
             /// Defines the Volume bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 00000000 00000000 11111111 00000000]")]
+            [BitFieldSeg("[00000000 00000000 00000000 00000000 00000000 11111111 00000000]")]
             Volume = SegWidth << P.Volume,
 
             /// <summary>
             /// Defines the Division bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
+            [BitFieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
             Division = SegWidth << P.Division,
 
             /// <summary>
             /// Defines the Chapter bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
+            [BitFieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
             Chapter = Division,
 
             /// <summary>
             /// Defines the Appendix bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
+            [BitFieldSeg("[00000000 00000000 00000000 00000000 11111111 00000000 00000000]")]
             Appendix = Division,
 
             /// <summary>
             /// Defines the Section bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 00000000 11111111 00000000 00000000 00000000]")]
+            [BitFieldSeg("[00000000 00000000 00000000 11111111 00000000 00000000 00000000]")]
             Section = SegWidth << P.Section,
 
             /// <summary>
             /// Defines the Topic bitfield segment
             /// </summary>
-            [FieldSeg("[00000000 00000000 11111111 00000000 00000000 00000000 00000000]")]
+            [BitFieldSeg("[00000000 00000000 11111111 00000000 00000000 00000000 00000000]")]
             Topic = SegWidth << P.Topic,
 
-            [FieldSeg("[11111111 11111111]")]
+            [BitFieldSeg("[11111111 11111111]")]
             ContentWidth = ushort.MaxValue,
 
             /// <summary>
             /// Defines the Content bitfield segment
             /// </summary>
-            [FieldSeg("[11111111 11111111 00000000 00000000 00000000 00000000 00000000]")]
+            [BitFieldSeg("[11111111 11111111 00000000 00000000 00000000 00000000 00000000]")]
             Content = ContentWidth << P.Content,
         }
     }

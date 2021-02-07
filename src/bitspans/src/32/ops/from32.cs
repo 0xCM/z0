@@ -23,7 +23,7 @@ namespace Z0
 
             Bits.unpack1x8x8(src, ref tmp);
             distribute32(tmp, 0, ref target);
-            return BitSpans.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
+            return BitSpans32.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
         }
 
         [MethodImpl(Inline), Op]
@@ -38,7 +38,7 @@ namespace Z0
             Bits.unpack1x8x16(src, ref tmp);
             distribute32(tmp, 0, ref target);
             distribute32(tmp, 1, ref target);
-            return BitSpans.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
+            return BitSpans32.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
         }
 
         [MethodImpl(Inline), Op]
@@ -55,7 +55,7 @@ namespace Z0
             distribute32(tmp, 1, ref target);
             distribute32(tmp, 2, ref target);
             distribute32(tmp, 3, ref target);
-            return BitSpans.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
+            return BitSpans32.load32(MemoryStacks.span<uint>(ref storage).Recover<Bit32>());
         }
 
         [MethodImpl(Inline), Op]
@@ -76,7 +76,7 @@ namespace Z0
             distribute32(tmp, 5, ref target);
             distribute32(tmp, 6, ref target);
             distribute32(tmp, 7, ref target);
-            return BitSpans.load32(storage.Recover<Bit32>());
+            return BitSpans32.load32(storage.Recover<Bit32>());
         }
     }
 }

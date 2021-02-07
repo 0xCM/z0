@@ -63,7 +63,7 @@ namespace Z0
 
             for(byte i=0; i< count; i++)
                 seek(dst, i) = svc.and(vcell(x,i), vcell(y,i));
-            var v2 = z.vload(w128, dst);
+            var v2 = gcpu.vload(w128, dst);
             return gvec.vsame(v1,v2);
         }
 

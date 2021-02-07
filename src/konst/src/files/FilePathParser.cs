@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost(ApiNames.FilePathParser, true), ParserHost]
+    [ApiHost(ApiNames.FilePathParser, true)]
     public readonly struct FilePathParser : ITextParser<FS.FilePath>
     {
         public static IParser service()

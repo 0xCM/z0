@@ -10,8 +10,8 @@ namespace Z0
 
     public interface ICheckLengths : IClaimValidator
     {
-        int length<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
-            => api.length(lhs, rhs);
+        int length<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
+            => api.length(a, b);
 
         int length<T>(T[] lhs, T[] rhs)
              => api.length(lhs, rhs);

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BitSpans;
+    using static BitSpans32;
 
     public static partial class XBitSpans
     {
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Extract<T>(this in BitSpan32 src, T t = default)
             where T : unmanaged
-                => BitSpans.extract32<T>(src);
+                => BitSpans32.extract32<T>(src);
 
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Convert<T>(this in BitSpan32 src)
             where T : unmanaged
-                => BitSpans.bitslice32<T>(src);
+                => BitSpans32.bitslice32<T>(src);
 
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source segment [offset,..,offset - (bitsize[T] - 1)]
@@ -92,12 +92,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan32 src, int offset)
             where T : unmanaged
-                => BitSpans.bitslice32<T>(src, offset);
+                => BitSpans32.bitslice32<T>(src, offset);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T BitSlice<T>(this in BitSpan32 src, int offset, int count)
             where T : unmanaged
-                => BitSpans.bitslice32<T>(src, offset, count);
+                => BitSpans32.bitslice32<T>(src, offset, count);
 
         /// <summary>
         /// Eliminates leading zeroes, if any, from the source
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Trim(this in BitSpan32 src)
-            => BitSpans.trim32(src);
+            => BitSpans32.trim32(src);
 
         /// <summary>
         /// Clamps the source bitstring to one of a specified maximum length, discarding any excess
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Truncate(this in BitSpan32 src, int maxbits)
-            => BitSpans.truncate32(src,maxbits);
+            => BitSpans32.truncate32(src,maxbits);
 
         /// <summary>
         /// Concatenates two bitspans
@@ -123,6 +123,6 @@ namespace Z0
         /// <param name="tail">The trailing bits</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 Concat(this in BitSpan32 head, in BitSpan32 tail)
-            => BitSpans.concat32(head,tail);
+            => BitSpans32.concat32(head,tail);
     }
 }

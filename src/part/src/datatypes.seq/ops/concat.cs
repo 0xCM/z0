@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
     using static memory;

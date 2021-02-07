@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class BitSpans
+    partial class BitSpans32
     {
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 reverse32(in BitSpan32 src)
