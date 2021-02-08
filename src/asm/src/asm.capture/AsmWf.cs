@@ -31,7 +31,7 @@ namespace Z0.Asm
             Wf = wf;
             Asm = asm;
             FormatConfig = AsmFormatConfig.DefaultStreamFormat;
-            Decoder = AsmServices.Decoder(FormatConfig);
+            Decoder = AsmServices.decoder(FormatConfig);
             Formatter = new AsmFormatter(FormatConfig);
             CaptureService = CaptureAlt.service(Wf, Asm);
         }

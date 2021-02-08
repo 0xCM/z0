@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiMemberRes : ITextual
+    public readonly struct ApiResAccessor : ITextual
     {
         public ApiHostUri Host {get;}
 
@@ -19,7 +19,7 @@ namespace Z0
         public ApiResKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public ApiMemberRes(ApiHostUri host, MethodInfo member, ApiResKind format)
+        public ApiResAccessor(ApiHostUri host, MethodInfo member, ApiResKind format)
         {
             Host = host;
             Member = member;

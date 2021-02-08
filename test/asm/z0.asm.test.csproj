@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(Blocked)" />

@@ -9,11 +9,13 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct CaptureServices : TCaptureServices
+    public readonly struct Capture
     {
-        public static ICaptureServices Service => default(CaptureServices);
+        public static ICaptureServices Services
+            => default(CaptureServices);
 
-        public ICaptureCore CaptureCore
-            => Asm.CaptureCore.Service;
+        [MethodImpl(Inline)]
+        public static CaptureExchange exchange(IAsmContext context)
+            => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
     }
 }

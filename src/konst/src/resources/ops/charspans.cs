@@ -15,13 +15,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         [Op]
-        public static Index<ApiMemberRes> charspans(Type src)
+        public static Index<ApiResAccessor> charspans(Type src)
             => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(CharSpanAcessorType)
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ApiMemberRes(ApiQuery.uri(src), x, ApiAccessorKind(x.ReturnType)));
+                  .Select(x => new ApiResAccessor(ApiQuery.uri(src), x, ApiAccessorKind(x.ReturnType)));
     }
 }

@@ -8,7 +8,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />

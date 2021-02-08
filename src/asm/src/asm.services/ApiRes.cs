@@ -28,7 +28,7 @@ namespace Z0
         public static CapturedApiRes[] capture(IAsmContext context, ApiHostUri host, FS.FilePath dst)
             => capture(context, host, Resources.accessors(context.ContextRoot.ApiGlobal.PartComponents), dst);
 
-        public static CapturedApiRes[] capture(IAsmContext context, ApiHostUri host, ReadOnlySpan<ApiMemberRes> src, FS.FilePath dst)
+        public static CapturedApiRes[] capture(IAsmContext context, ApiHostUri host, ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
         {
             var count = src.Length;
             var codes = span(alloc<ApiCaptureBlock>(count));
@@ -61,7 +61,7 @@ namespace Z0
             var indices = Resources.apires(resdll).View;
             var count = indices.Length;
 
-            var results = list<CapturedApiRes>();
+            var results = root.list<CapturedApiRes>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var index = ref skip(indices, i);
@@ -79,7 +79,7 @@ namespace Z0
             if(decoded)
                 return new AsmRoutineCode(decoded.Value, capture);
             else
-                return z.none<AsmRoutineCode>();
+                return root.none<AsmRoutineCode>();
         }
 
         static void save(IAsmContext context, ApiCaptureBlock capture, StreamWriter dst)

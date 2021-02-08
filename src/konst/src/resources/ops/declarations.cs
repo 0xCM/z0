@@ -18,9 +18,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static Index<ApiResMembers> apires(Assembly src)
+        public static Index<ApiResAccessors> apires(Assembly src)
             => (from a in accessors(src).Storage
                 let t = a.Member.DeclaringType
-                group a by t).Map(x => new ApiResMembers(x.Key, x.ToArray()));
+                group a by t).Map(x => new ApiResAccessors(x.Key, x.ToArray()));
     }
 }

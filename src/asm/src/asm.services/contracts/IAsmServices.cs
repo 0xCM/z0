@@ -13,6 +13,8 @@ namespace Z0.Asm
     {
         IAsmDecoder Decoder();
 
+        ICaptureAlt Alt();
+
         IAsmImmWriter ImmWriter(ApiHostUri host);
 
         AsmSemanticRender SemanticRender();

@@ -17,7 +17,7 @@ namespace Z0
 
         PartId[] PartIdentities {get;}
 
-        Assembly[] PartComponents {get;}
+        Index<Assembly> PartComponents {get;}
 
         ApiPartCatalogs Catalogs {get;}
 

@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         public IPart[] Parts {get;}
 
-        public Assembly[] PartComponents {get;}
+        public Index<Assembly> PartComponents {get;}
 
         public ApiPartCatalogs Catalogs {get;}
 

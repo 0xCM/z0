@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public ApiHostUri ApiHost {get;}
 
-        public ApiMemberRes Accessor {get;}
+        public ApiResAccessor Accessor {get;}
 
         public AsmRoutineCode Code {get;}
 
         [MethodImpl(Inline)]
-        public CapturedApiRes(ApiHostUri host, in ApiMemberRes accessor, in AsmRoutineCode code)
+        public CapturedApiRes(ApiHostUri host, in ApiResAccessor accessor, in AsmRoutineCode code)
         {
             ApiHost = host;
             Accessor = accessor;

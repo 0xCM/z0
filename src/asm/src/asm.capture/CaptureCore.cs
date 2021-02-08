@@ -25,7 +25,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiParseResult>();
+                return root.none<ApiParseResult>();
             }
         }
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiMemberCapture>();
+                return root.none<ApiMemberCapture>();
             }
         }
 
@@ -104,7 +104,6 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
-                //Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
