@@ -9,17 +9,9 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmOp : IAsmOp<AsmOpContent>
+    public interface IApiCaptureArchive : IDisposable
     {
-        public AsmOpKind OpKind {get;}
-
-        public AsmOpContent Content {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOp(AsmOpKind kind, AsmOpContent content)
-        {
-            OpKind = kind;
-            Content = content;
-        }
+        void Clear();
     }
+
 }

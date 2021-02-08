@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmDsl;
+    using static AsmRegs;
 
     public class CpuModel
     {

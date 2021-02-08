@@ -16,9 +16,13 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
+        public Index<AsmOp> Operands {get;}
 
-        public int X {get;}
-
+        [MethodImpl(Inline)]
+        public AsmInstruction(AsmMnemonicCode mnemonic, Index<AsmOp> operands)
+        {
+            Mnemonic = mnemonic;
+            Operands = operands;
+        }
     }
-
 }

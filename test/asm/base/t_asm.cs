@@ -20,7 +20,8 @@ namespace Z0.Asm
 
         public t_asm()
         {
-            Context = new AsmContext(Apps.context());
+            Context = AsmServices.context(Wf);
+            //Context = new AsmContext(Apps.context(), Wf);
             AsmCheck = Z0.AsmChecks.tester(Context);
             UnitDataDir.Clear();
         }
