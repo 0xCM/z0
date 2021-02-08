@@ -15,9 +15,6 @@ namespace Z0
 
     public struct ApiCaptureService : IDisposable
     {
-        public static ApiCaptureService create(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureService(wf, WfShell.host(typeof(ApiCaptureService)), asm);
-
         readonly IWfShell Wf;
 
         readonly IAsmContext Asm;
@@ -29,9 +26,9 @@ namespace Z0
         readonly IApiJit Jitter;
 
         [MethodImpl(Inline)]
-        public ApiCaptureService(IWfShell wf, WfHost host, IAsmContext asm)
+        public ApiCaptureService(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
+            Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
             Asm = asm;
             Wf.Created();
@@ -76,8 +73,8 @@ namespace Z0
             try
             {
                 var extracted = ExtractOps(api);
-                var emitter = Capture.emitter(Wf, Asm, api.Uri, extracted);
-                emitter.Emit();
+                var emitter = Capture.emitter(Wf, Asm);
+                emitter.Emit(api.Uri, extracted);
             }
             catch(Exception e)
             {
@@ -99,8 +96,8 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                var emititter = Capture.emitter(Wf, Asm, x.Key, x.Value);
-                emititter.Emit();
+                var emititter = Capture.emitter(Wf, Asm);
+                emititter.Emit(x.Key, x.Value);
             }
         }
 

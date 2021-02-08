@@ -16,116 +16,90 @@ namespace Z0
 
     public struct ApiCaptureEmitter : IApiCaptureEmitter
     {
-        readonly CorrelationToken Ct;
-
-        readonly Index<ApiMemberExtract> Extracts;
-
-        readonly ApiHostUri HostUri;
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
         readonly IAsmContext Asm;
 
-        public ApiCaptureEmitter(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
+        public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
-            Wf = wf.WithHost(host);
+            Host = WfSelfHost.create();
+            Wf = wf.WithHost(Host);
             Asm = asm;
-            Ct = Wf.Ct;
-            HostUri = src;
-            Extracts = extracts;
         }
 
-        public void Emit()
+        public void Emit(ApiHostUri host, Index<ApiMemberExtract> src)
         {
-            var flow = Wf.Running();
-            var x0 = run(Wf, Extracts, Emit);
-            if(x0)
+            try
             {
-                var x1 = run(Wf, Extracts, ParseExtracts);
-                if(x1)
+                var flow = Wf.Running();
+                EmitExtracts(host,src);
+                var code = ParseExtracts(host, src);
+                if(code.Length != 0)
                 {
-                    var code = x1.Data;
-                    if(code.Length != 0)
-                    {
-                        run(Wf, code, EmitApiHex);
-                        run(Wf, code, EmitCil);
-                        run(Wf, code, DecodeMembers);
-                    }
+                    EmitApiHex(host, code);
+                    EmitCil(host, code);
+                    DecodeMembers(host, code, src);
                 }
+                Wf.Ran(flow);
             }
-            Wf.Ran(flow);
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
         }
 
-        public Index<ApiCodeExtract> Emit(Index<ApiMemberExtract> src)
+        public Index<ApiCodeExtract> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
             var emitted = sys.empty<ApiCodeExtract>();
             var count = src.Length;
             var blocks = src.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded));
-            var dst = Wf.Db().ApiExtractFile(HostUri);
+            var dst = Wf.Db().ApiExtractFile(host);
             var flow = Wf.EmittingTable<ApiCodeExtract>(dst);
             emitted = ApiCodeExtracts.emit(blocks, dst);
             Wf.EmittedTable(flow, count);
             return emitted;
         }
 
-        Index<ApiMemberCode> ParseExtracts(Index<ApiMemberExtract> src)
+        Index<ApiMemberCode> ParseExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
             if(src.Length != 0)
             {
                 var parser = ApiCodeExtractors.parser();
                 var parsed = parser.ParseMembers(src);
-                Wf.Status(string.Format("Parsed {0} {1} extract blocks", parsed.Count, HostUri));
+                Wf.Status(string.Format("Parsed {0} {1} extract blocks", parsed.Count, host));
                 return parsed;
             }
             else
                 return Index<ApiMemberCode>.Empty;
         }
 
-        public Index<ApiHexRow> EmitApiHex(Index<ApiMemberCode> src)
-            => ApiHexRows.emit(Wf, HostUri, src.View);
+        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
+            => ApiHexRows.emit(Wf, host, src.View);
 
-        public Count EmitCil(Index<ApiMemberCode> src)
+        public Count EmitCil(ApiHostUri host, Index<ApiMemberCode> src)
         {
             if(src.Count != 0)
             {
                 var emitter = CilEmitter.create(Wf);
-                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(HostUri));
-                emitter.EmitCilData(src, Wf.Db().CilDataFile(HostUri));
+                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(host));
+                emitter.EmitCilData(src, Wf.Db().CilDataFile(host));
             }
 
             return src.Count;
         }
 
-        AsmRoutines DecodeMembers(Index<ApiMemberCode> src)
+        AsmRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
         {
-            var service = ApiHostAsmEmitter.service(Wf, Asm, HostUri);
-            service.Emit(src, out var decoded);
+            var emitter = AsmServices.HostEmitter(Wf, Asm);
+            emitter.Emit(host, src, out var decoded);
             if(decoded.Count != 0)
             {
-                using var match = new AsmAddressMatcher(Wf, Host, Extracts, decoded.Storage, Ct);
+                using var match = new AsmAddressMatcher(Wf, Host, extracts, decoded.Storage, Wf.Ct);
                 match.Run();
             }
             return decoded;
        }
-
-        static Outcome<T> run<S,T>(IWfShell wf, S src, Func<S,T> f, [CallerMemberName] string caller = null)
-        {
-            var flow = wf.Running(caller);
-            var result = default(Outcome<T>);
-            try
-            {
-                result = f(src);
-            }
-            catch(Exception e)
-            {
-                wf.Error(e.Message);
-                result = e;
-            }
-            wf.Ran(flow, caller);
-            return result;
-        }
     }
 }

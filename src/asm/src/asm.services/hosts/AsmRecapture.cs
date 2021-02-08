@@ -31,7 +31,7 @@ namespace Z0.Asm
             var resfile = ResBytesCompiled;
             var captured =Capture(resfile, ResBytesUncompiled);
             var csvfile = ResIndexDir + FS.file("z0.res.bytes", FileExtensions.Csv);
-            AsmWriter.emit(captured, csvfile);
+            CapturedResEmitter.emit(captured, csvfile);
         }
 
         public FS.FolderPath ResIndexDir

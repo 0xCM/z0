@@ -21,8 +21,9 @@ namespace Z0
         public static ICaptureCore core(IWfShell wf, IAsmContext asm)
             => new CaptureCore(wf, asm);
 
-        public static ApiCaptureEmitter emitter(IWfShell wf, IAsmContext asm, ApiHostUri src, ApiMemberExtract[] extracts)
-            => new ApiCaptureEmitter(wf, WfShell.host(typeof(ApiCaptureEmitter)), asm, src, extracts);
+        [MethodImpl(Inline), Op]
+        public static ApiCaptureEmitter emitter(IWfShell wf, IAsmContext asm)
+            => new ApiCaptureEmitter(wf, asm);
 
         [Op]
         public static IApiCaptureArchive archive(IWfShell wf)
@@ -37,7 +38,7 @@ namespace Z0
             => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
 
         public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureRunner(wf, asm, WfShell.host(typeof(ApiCaptureRunner)));
+            => new ApiCaptureRunner(wf, asm);
 
 
         public static void run(string[] args)

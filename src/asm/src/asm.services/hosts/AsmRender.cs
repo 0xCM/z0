@@ -111,8 +111,8 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(in AsmLineLabel src, out string dst)
-            => dst = src.Width switch{
+        public static string format(in AsmLineLabel src)
+            => src.Width switch{
                 DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
                 DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,
                 DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex() + CharText.Space,
@@ -120,13 +120,12 @@ namespace Z0.Asm
                 _ => EmptyString
             };
 
-
         [MethodImpl(Inline), Op]
         public static string format(AsmInstructionSpecExprLegacy src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
 
         [Op]
-        public static string format(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config)
+        public static string format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config)
         {
             var dst = text.build();
             format(@base, src, config, dst);
@@ -134,12 +133,15 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void format(in MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, StringBuilder dst)
+        public static void format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, StringBuilder dst)
         {
             var label = asm.label(w16, src.Offset);
             var absolute = @base + src.Offset;
-            dst.Append(text.concat(format(label, out _), src.Formatted.PadRight(config.InstructionPad, Space)));
-            dst.Append(asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
+            const string StatementPattern = "{0} {1} {2}";
+            var statement = string.Format(StatementPattern, absolute.Format(), format(label), src.Formatted.PadRight(config.InstructionPad, Space));
+            dst.Append(statement);
+            var comment = asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter));
+            dst.Append(comment);
         }
 
         [Op]

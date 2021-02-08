@@ -6,32 +6,29 @@ namespace Z0.Asm
 {
     using System;
 
+    using static Part;
+    using static memory;
+
     public struct ApiHostAsmEmitter
     {
-        public static ApiHostAsmEmitter service(IWfShell wf, IAsmContext asm, ApiHostUri uri)
-            => new ApiHostAsmEmitter(wf, WfShell.host(typeof(ApiHostAsmEmitter)), asm, uri);
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
         readonly IAsmContext Asm;
 
-        readonly ApiHostUri Uri;
-
-        public ApiHostAsmEmitter(IWfShell wf, WfHost host, IAsmContext asm, ApiHostUri uri)
+        public ApiHostAsmEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
+            Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
             Asm = asm;
-            Uri = uri;
         }
 
-        public ref AsmRoutines Emit(ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
+        public ref AsmRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
         {
             var flow = Wf.Running();
-            Decode(src, out dst);
-            var emitted = AsmWriter.emit(Wf, Uri, dst.Storage, Asm.Formatter.Config);
+            Decode(host, src, out dst);
+            var emitted = emit(Wf, host, dst.Storage, Asm.Formatter.Config);
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 
@@ -39,10 +36,31 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        void Decode(ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
+        void Decode(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
         {
-            var decoder = ApiHostDecoder.create(Wf, Asm.RoutineDecoder);
-            dst = decoder.Decode(Uri, src);
+            var decoder = AsmServices.HostDecoder(Wf, Asm.RoutineDecoder);
+            dst = decoder.Decode(host, src);
+        }
+
+        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var path = wf.Db().CapturedAsmFile(uri);
+                using var writer = path.Writer();
+                var buffer = Buffers.text();
+
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var routine = ref skip(src,i);
+                    AsmRender.format(routine, format, buffer);
+                    writer.Write(buffer.Emit());
+                }
+                return path;
+            }
+            else
+                return FS.FilePath.Empty;
         }
     }
 }

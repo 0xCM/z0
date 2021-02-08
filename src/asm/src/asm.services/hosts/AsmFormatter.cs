@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmFormatter : IAsmFormatter
+    readonly struct AsmFormatter : IAsmFormatter
     {
         public AsmFormatConfig Config {get;}
 

@@ -12,9 +12,6 @@ namespace Z0.Asm
 
     public readonly struct ApiHostDecoder
     {
-        public static ApiHostDecoder create(IWfShell wf, IAsmDecoder decoder)
-            => new ApiHostDecoder(wf, WfShell.host(typeof(ApiHostDecoder)), decoder);
-
         public IWfShell Wf {get;}
 
         readonly WfHost Host;
@@ -22,10 +19,10 @@ namespace Z0.Asm
         readonly IAsmDecoder Decoder;
 
         [MethodImpl(Inline)]
-        internal ApiHostDecoder(IWfShell wf, WfHost host, IAsmDecoder decoder)
+        internal ApiHostDecoder(IWfShell wf, IAsmDecoder decoder)
         {
-            Wf = wf;
-            Host = host;
+            Host = WfSelfHost.create();
+            Wf = wf.WithHost(Host);
             Decoder = decoder;
         }
 

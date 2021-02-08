@@ -13,32 +13,56 @@ namespace Z0.Asm
     public sealed class AsmServices : IAsmServices
     {
         [Op]
+        public static IAsmContext context(IWfShell wf)
+            => new AsmContext(Apps.context(wf), wf);
+
+        [Op]
         public static IAsmWf workflow(IWfShell wf)
             => new AsmWf(wf, context(wf));
 
         [Op]
-        public static IAsmContext context(IWfShell wf)
-            => new AsmContext(Apps.context(wf), wf);
-
-        [MethodImpl(Inline), Op]
         public static IAsmServices init(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static IAsmDecoder decoder(in AsmFormatConfig config)
             => new AsmRoutineDecoder(config);
 
-        [MethodImpl(Inline), Op]
-        public static AsmWriter writer(FS.FilePath dst)
-            => new AsmWriter(dst, new AsmFormatter());
+        [Op]
+        public static ApiCaptureService ApiCapture(IWfShell wf, IAsmContext asm)
+            => new ApiCaptureService(wf, asm);
+
+        [Op]
+        public static ApiCaptureService ApiCapture(IAsmWf wf)
+            => new ApiCaptureService(wf.Wf, wf.Asm);
+
+        [Op]
+        public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
+            => new ApiHostDecoder(wf, decoder);
+
+        [Op]
+        public static ApiHostAsmEmitter HostEmitter(IWfShell wf, IAsmContext asm)
+            => new ApiHostAsmEmitter(wf, asm);
 
         [MethodImpl(Inline), Op]
-        public static AsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, new AsmFormatter(config));
+        public static IAsmWriter writer(FS.FilePath dst)
+            => new AsmWriter(dst, formatter());
 
         [MethodImpl(Inline), Op]
-        public static AsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
-            => new AsmWriter(dst, formatter);
+        public static IAsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, formatter(config));
+
+        [MethodImpl(Inline), Op]
+        public static IAsmFormatter formatter(in AsmFormatConfig config)
+            => new AsmFormatter(config);
+
+        [MethodImpl(Inline), Op]
+        public static IAsmFormatter formatter()
+            => new AsmFormatter(null);
+
+        [MethodImpl(Inline), Op]
+        public static IAsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
+            => new AsmWriter(dst,formatter);
 
         [MethodImpl(Inline), Op]
         public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)

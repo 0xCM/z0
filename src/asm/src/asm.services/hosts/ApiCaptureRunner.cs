@@ -8,18 +8,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static z;
-
     public readonly struct ApiCaptureRunner : IDisposable
     {
-        // public static void run(string[] args)
-        // {
-        //     using var wf = Configure(WfShell.create(args));
-        //     var app = Apps.context(wf, Rng.@default());
-        //     using var control = Capture.runner(wf, new AsmContext(app, wf));
-        //     control.Run();
-        // }
-
         readonly WfHost Host;
 
         readonly IWfShell Wf;
@@ -30,9 +20,9 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        internal ApiCaptureRunner(IWfShell wf, IAsmContext asm, WfHost host)
+        internal ApiCaptureRunner(IWfShell wf, IAsmContext asm)
         {
-            Host = host;
+            Host = WfSelfHost.create();
             Wf = wf.WithHost(Host);
             App = asm.ContextRoot;
             Asm = asm;
@@ -57,15 +47,15 @@ namespace Z0
 
         void RunPrimary()
         {
-            var flow = Wf.Running(nameof(ApiCaptureService));
-            using var step = ApiCaptureService.create(Wf, Asm);
+            var flow = Wf.Running("ApiCapture");
+            using var step = AsmServices.ApiCapture(Wf, Asm);
             step.Run();
             Wf.Ran(flow);
         }
 
         void RunImm()
         {
-            var flow = Wf.Running(nameof(ApiImmEmitter));
+            var flow = Wf.Running("ImmEmitter");
             var service = ApiImmEmitter.create(Wf);
             service.ClearArchive(Parts);
             service.EmitRefined(Parts);
@@ -74,7 +64,7 @@ namespace Z0
 
         void RunEvaluate()
         {
-            var flow = Wf.Running(nameof(Evaluate));
+            var flow = Wf.Running("Evaluator");
             var evaluate = Evaluate.control(Wf, App.Random, Wf.Paths.AppCaptureRoot, Pow2.T14);
             evaluate.Execute();
             Wf.Ran(flow);
@@ -90,17 +80,5 @@ namespace Z0
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
             Wf.Ran(flow, "Emitted process dump");
         }
-
-
-        static IWfShell describe(IWfShell wf)
-        {
-            iter(wf.Settings, s => wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
-            return wf;
-        }
-
-        internal static IWfShell Configure(IWfShell wf)
-            => describe(wf.WithRandom(Rng.@default())
-                 .WithHost(WfShell.host(typeof(ApiCaptureRunner)))
-                 .WithVerbosity(LogLevel.Babble));
     }
 }
