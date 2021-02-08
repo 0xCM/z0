@@ -12,21 +12,19 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an 8-bit register and its content
     /// </summary>
-    public readonly struct R8 : IRegister<R8,W8,byte>
+    public readonly struct R8 : IRegister<R8,W8,byte>, IRegOp<byte>
     {
         public byte Content  {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
+
 
         [MethodImpl(Inline)]
         public R8(byte value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
-
-        public RegClass Class
-            => RegClass.GP;
 
         [MethodImpl(Inline)]
         public static implicit operator byte(R8 src)

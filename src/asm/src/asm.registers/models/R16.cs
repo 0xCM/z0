@@ -12,21 +12,18 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 16-bit register and its content
     /// </summary>
-    public readonly struct R16 : IRegister<R16,W16,ushort>
+    public readonly struct R16 : IRegister<R16,W16,ushort>, IRegOp<ushort>
     {
         public ushort Content  {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
         public R16(ushort value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
-
-        public RegClass Class
-            => RegClass.GP;
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(R16 src)

@@ -12,28 +12,18 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an asm operand
     /// </summary>
-    public readonly struct AsmOp<T> : IAsmOperand<T>
-        where T : unmanaged, IAsmOperand<T>
+    public readonly struct AsmOp<T> : IAsmOp<T>
+        where T : struct, IAsmOpContent
     {
-        public byte Position {get;}
-
         public T Content {get;}
 
-        public AsmOperandClass Kind => Content.Kind;
+        public AsmOpKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public AsmOp(byte pos, T value)
+        public AsmOp(AsmOpKind kind, T value)
         {
-            Position = pos;
+            OpKind = kind;
             Content = value;
         }
-
-        [MethodImpl(Inline)]
-        public AsmOp<T> Reposition(byte pos)
-            => new AsmOp<T>(pos, Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmOp<T>(T src)
-            => new AsmOp<T>(0,src);
     }
 }

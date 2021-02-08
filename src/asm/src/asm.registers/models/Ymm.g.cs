@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Ymm<R> : IRegister<Ymm<R>,W256,Cell256>, IAsmOperand<RegisterKind, Cell256>
+    public readonly struct Ymm<R> : IRegister<Ymm<R>,W256,Cell256>, IRegOp<Cell256>
         where R : unmanaged, IRegister
     {
         public Cell256 Content {get;}
@@ -18,11 +18,11 @@ namespace Z0.Asm
         public Ymm(Cell256 value)
             => Content = value;
 
-        public RegisterKind Kind
+        public RegisterKind RegKind
             => default;
 
         [MethodImpl(Inline)]
         public static implicit operator Ymm(Ymm<R> src)
-            => new Ymm(src.Content, src.Kind);
+            => new Ymm(src.Content, src.RegKind);
     }
 }

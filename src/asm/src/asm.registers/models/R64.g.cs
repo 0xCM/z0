@@ -9,29 +9,23 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct R64<R> : IRegister<R64<R>,W64,ulong>
+    public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp<ulong>
         where R : unmanaged, IRegister
     {
-        public ulong Data;
+        public ulong Content {get;}
 
         [MethodImpl(Inline)]
         public R64(ulong src)
-            => Data = src;
+            => Content= src;
 
-        public ulong Content
+        public RegisterKind RegKind
         {
             [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public RegisterKind Kind
-        {
-            [MethodImpl(Inline)]
-            get => default(R).Kind;
+            get => default(R).RegKind;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator R64(R64<R> src)
-            => new R64(src.Content, src.Kind);
+            => new R64(src.Content, src.RegKind);
     }
 }

@@ -19,21 +19,21 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 32-bit gp register
         /// </summary>
-        public struct r32 : IRegister<r32,W,T>, IAsmOperand<K,T>
+        public struct r32 : IRegister<r32,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
-            public K Kind {get;}
+            public K RegKind {get;}
 
             [MethodImpl(Inline)]
             public r32(T src, K kind)
             {
                 Content = src;
-                Kind = kind;
+                RegKind = kind;
             }
         }
 
-        public struct eax : IRegister<eax,W,T>
+        public struct eax : IRegister<eax,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -41,12 +41,12 @@ namespace Z0.Asm
             public eax(T value)
                 => Content = value;
 
-            public K Kind => K.EAX;
+            public K RegKind => K.EAX;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
 
             [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct ecx : IRegister<ecx,W,T>
+        public struct ecx : IRegister<ecx,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -66,16 +66,16 @@ namespace Z0.Asm
             public ecx(T value)
                 => Content = value;
 
-            public K Kind => K.ECX;
+            public K RegKind => K.ECX;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get => new G(Content, Kind);
+                get => new G(Content, RegKind);
             }
         }
 
-        public struct edx : IRegister<edx,W,T>
+        public struct edx : IRegister<edx,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -88,16 +88,16 @@ namespace Z0.Asm
             public edx(T value)
                 => Content = value;
 
-            public K Kind => K.EDX;
+            public K RegKind => K.EDX;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct ebx : IRegister<ebx,W,T>
+        public struct ebx : IRegister<ebx,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -109,16 +109,16 @@ namespace Z0.Asm
             public ebx(T value)
                 => Content = value;
 
-            public K Kind => K.EBX;
+            public K RegKind => K.EBX;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct esi : IRegister<esi,W,T>
+        public struct esi : IRegister<esi,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -130,16 +130,16 @@ namespace Z0.Asm
             public esi(T value)
                 => Content = value;
 
-            public K Kind => K.ESI;
+            public K RegKind => K.ESI;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct edi : IRegister<edi,W,T>
+        public struct edi : IRegister<edi,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -151,16 +151,16 @@ namespace Z0.Asm
             public edi(T value)
                 => Content = value;
 
-            public K Kind => K.EDI;
+            public K RegKind => K.EDI;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct esp : IRegister<esp,W,T>
+        public struct esp : IRegister<esp,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -172,16 +172,16 @@ namespace Z0.Asm
             public esp(T value)
                 => Content = value;
 
-            public K Kind => K.ESP;
+            public K RegKind => K.ESP;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct ebp : IRegister<ebp,W,T>
+        public struct ebp : IRegister<ebp,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -195,16 +195,16 @@ namespace Z0.Asm
                 Content = value;
             }
 
-            public K Kind => K.EBP;
+            public K RegKind => K.EBP;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r8d : IRegister<r8d,W,T>
+        public struct r8d : IRegister<r8d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -212,16 +212,16 @@ namespace Z0.Asm
             public r8d(T value)
                 => Content = value;
 
-            public K Kind => K.R8D;
+            public K RegKind => K.R8D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r9d : IRegister<r9d,W,T>
+        public struct r9d : IRegister<r9d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -231,16 +231,16 @@ namespace Z0.Asm
                 Content = value;
             }
 
-            public K Kind => K.R9D;
+            public K RegKind => K.R9D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r10d : IRegister<r10d,W,T>
+        public struct r10d : IRegister<r10d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -248,16 +248,16 @@ namespace Z0.Asm
             public r10d(T value)
                 => Content = value;
 
-            public K Kind => K.R10D;
+            public K RegKind => K.R10D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r11d : IRegister<r11d,W,T>
+        public struct r11d : IRegister<r11d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -265,16 +265,16 @@ namespace Z0.Asm
             public r11d(T value)
                 => Content = value;
 
-            public K Kind => K.R11D;
+            public K RegKind => K.R11D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r12d : IRegister<r12d,W,T>
+        public struct r12d : IRegister<r12d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -282,16 +282,16 @@ namespace Z0.Asm
             public r12d(T value)
                 => Content = value;
 
-            public K Kind => K.R12D;
+            public K RegKind => K.R12D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r13d : IRegister<r13d,W,T>
+        public struct r13d : IRegister<r13d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -301,16 +301,16 @@ namespace Z0.Asm
                 Content = value;
             }
 
-            public K Kind => K.R13D;
+            public K RegKind => K.R13D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r14d : IRegister<r14d,W,T>
+        public struct r14d : IRegister<r14d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -319,16 +319,16 @@ namespace Z0.Asm
             public r14d(T value)
                 => Content = value;
 
-            public K Kind => K.R14D;
+            public K RegKind => K.R14D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
 
-        public struct r15d : IRegister<r15d,W,T>
+        public struct r15d : IRegister<r15d,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -336,12 +336,12 @@ namespace Z0.Asm
             public r15d(T value)
                 => Content = value;
 
-            public K Kind => K.R15D;
+            public K RegKind => K.R15D;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
         }
     }

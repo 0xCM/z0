@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct imm<T> : IAsmOperand<T>
+        public readonly struct imm<T> : IImmOp<T>
             where T : unmanaged
         {
             public T Content {get;}
@@ -22,7 +22,7 @@ namespace Z0.Asm
                 Content = src;
             }
 
-            public AsmOperandClass Kind => AsmOperandClass.Imm;
+            public AsmOpClass OpClass => AsmOpClass.Imm;
 
             [MethodImpl(Inline)]
             public static implicit operator imm<T>(T src)

@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct imm8 : IAsmOperand<Imm8>
+        public readonly struct imm8 : IImmOp<Imm8>
         {
             public Imm8 Content {get;}
 
@@ -19,12 +19,12 @@ namespace Z0.Asm
             public imm8(byte value)
                 => Content = value;
 
-            public AsmOperandClass Kind
-                => AsmOperandClass.Imm;
+            public AsmOpKind OpKind
+                => AsmOpKind.Imm | AsmOpKind.W8;
 
             [MethodImpl(Inline)]
             public static implicit operator Arg8(imm8 src)
-                => new Arg8(src.Content, src.Kind);
+                => new Arg8(src.Content, src.OpKind);
         }
     }
 }

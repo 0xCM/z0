@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct R8<R> : IRegister<R8<R>,W8,byte>
+    public struct R8<R> : IRegister<R8<R>,W8,byte>, IRegOp<byte>
         where R : unmanaged, IRegister
     {
         public byte Data;
@@ -24,14 +24,14 @@ namespace Z0.Asm
             get => Data;
         }
 
-        public RegisterKind Kind
+        public RegisterKind RegKind
         {
             [MethodImpl(Inline)]
-            get => default(R).Kind;
+            get => default(R).RegKind;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator R8(R8<R> src)
-            => new R8(src.Content, src.Kind);
+            => new R8(src.Content, src.RegKind);
     }
 }

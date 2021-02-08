@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct imm64 : IAsmOperand<Imm64>
+        public readonly struct imm64 : IImmOp<Imm64>
         {
             public Imm64 Content {get;}
 
@@ -19,12 +19,12 @@ namespace Z0.Asm
             public imm64(ulong value)
                 => Content = value;
 
-            public AsmOperandClass Kind
-                => AsmOperandClass.Imm;
+            public AsmOpKind OpKind
+                => AsmOpKind.Imm | AsmOpKind.W64;
 
             [MethodImpl(Inline)]
             public static implicit operator Arg64(imm64 src)
-                => new Arg64(src.Content, src.Kind);
+                => new Arg64(src.Content, src.OpKind);
         }
     }
 }

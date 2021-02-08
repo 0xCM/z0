@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Arg<W,T> : IAsmOperand<Arg<W,T>,W,T>
+    public readonly struct Arg<W,T> : IAsmOp<Arg<W,T>,W,T>
         where T : unmanaged
         where W : unmanaged, IDataWidth
     {
@@ -17,17 +17,14 @@ namespace Z0.Asm
 
         public T Content {get;}
 
-        public AsmOperandClass Kind {get;}
-
-        public uint Width {get;}
+        public AsmOpKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public Arg(byte pos, T value, AsmOperandClass kind, uint width)
+        public Arg(byte pos, T value, AsmOpKind kind)
         {
             Position = pos;
             Content = value;
-            Width =  width;
-            Kind = kind;
+            OpKind = kind;
         }
     }
 }

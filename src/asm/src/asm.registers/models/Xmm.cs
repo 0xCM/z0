@@ -9,27 +9,24 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Xmm : IXmmReg
+    public readonly struct Xmm : IXmmReg, IRegOp<Cell128>
     {
         public Cell128 Content {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
 
         public RegIndex Index
         {
             [MethodImpl(Inline)]
-            get => Registers.code(Kind);
+            get => Registers.code(RegKind);
         }
 
         [MethodImpl(Inline)]
         public Xmm(Cell128 value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
-
-        public RegClass Class
-            => RegClass.XMM;
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Xmm src)

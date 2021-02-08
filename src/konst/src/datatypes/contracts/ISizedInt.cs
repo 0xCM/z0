@@ -32,7 +32,7 @@ namespace Z0
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
-        BitSize ISized.DataWidth
+        BitSize ISized.Width
             => default(W).BitWidth;
     }
 

@@ -2,20 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct TypeSystem<K> : ITypeSystem<K,TypeSystem<K>>
-        where K : unmanaged, Enum, IEquatable<K>
+    /// <summary>
+    /// Defines a fully-specified instruction
+    /// </summary>
+    public readonly struct AsmInstruction
     {
-        public Index<K> Kinds {get;}
+        public AsmMnemonicCode Mnemonic {get;}
+
+
+        public int X {get;}
+
     }
 
-    public readonly struct TypeSystem : ITypeSystem<TypeSystem>
-    {
-
-    }
 }

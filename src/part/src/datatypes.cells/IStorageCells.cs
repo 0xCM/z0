@@ -20,13 +20,10 @@ namespace Z0
         ByteSize CellSize
             => size<T>();
 
-        ByteSize ISized.StorageSize
-            => CellSize * CellCount;
-
         Index<T> IDataType<Index<T>>.Content
             => Cells;
 
-        BitSize ISized.StorageWidth
+        BitSize ISized.Width
             => (ulong)CellCount*CellWidth;
     }
 }

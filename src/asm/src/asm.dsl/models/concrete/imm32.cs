@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct imm32 : IAsmOperand<Imm32>
+        public readonly struct imm32 : IImmOp<Imm32>
         {
             public Imm32 Content {get;}
 
@@ -19,12 +19,12 @@ namespace Z0.Asm
             public imm32(uint value)
                 => Content = value;
 
-            public AsmOperandClass Kind
-                => AsmOperandClass.Imm;
+            public AsmOpKind OpKind
+                => AsmOpKind.Imm | AsmOpKind.W32;
 
             [MethodImpl(Inline)]
             public static implicit operator Arg32(imm32 src)
-                => new Arg32(src.Content, src.Kind);
+                => new Arg32(src.Content, src.OpKind);
         }
     }
 }

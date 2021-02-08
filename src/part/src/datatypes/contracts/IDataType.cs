@@ -36,7 +36,7 @@ namespace Z0
         T Content
             => (T)this;
 
-        BitSize ISized.StorageWidth
+        BitSize ISized.Width
             => Unsafe.SizeOf<T>()*8;
 
         string ITextual.Format()

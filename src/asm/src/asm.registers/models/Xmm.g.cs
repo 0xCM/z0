@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>, IAsmOperand<RegisterKind, Cell128>
+    public struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>, IRegOp<Cell128>
         where R : unmanaged, IRegister
     {
         public Cell128 Content {get;}
@@ -18,11 +18,11 @@ namespace Z0.Asm
         public Xmm(Cell128 value)
             => Content = value;
 
-        public RegisterKind Kind
-            => default(R).Kind;
+        public RegisterKind RegKind
+            => default(R).RegKind;
 
         [MethodImpl(Inline)]
         public static implicit operator Xmm(Xmm<R> src)
-            => new Xmm(src.Content, src.Kind);
+            => new Xmm(src.Content, src.RegKind);
     }
 }

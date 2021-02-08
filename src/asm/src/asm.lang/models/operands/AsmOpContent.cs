@@ -9,21 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Ymm : IYmmReg, IRegOp<Cell256>
+    public readonly struct AsmOpContent : IAsmOpContent<DataWidth,BinaryCode>
     {
-        public Cell256 Content {get;}
-
-        public RegisterKind RegKind {get;}
+        public BinaryCode Data {get;}
 
         [MethodImpl(Inline)]
-        public Ymm(Cell256 value, RegisterKind kind)
+        public AsmOpContent(BinaryCode data)
         {
-            Content = value;
-            RegKind = kind;
+            Data = data;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Cell256(Ymm src)
-            => src.Content;
+        public DataWidth Width
+        {
+            [MethodImpl(Inline)]
+            get => (DataWidth)(Data.Count * 8);
+        }
     }
 }

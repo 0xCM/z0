@@ -25,22 +25,22 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static r8 reg<R>(R r, byte data = default)
             where R : unmanaged, IRegister
-                => new r8(data, r.Kind);
+                => new r8(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r16 reg<R>(R r, ushort data = default)
             where R : unmanaged, IRegister
-                => new r16(data, r.Kind);
+                => new r16(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r32 reg<R>(R r, uint data = default)
             where R : unmanaged, IRegister
-                => new r32(data, r.Kind);
+                => new r32(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static r64 reg<R>(R r, ulong data = default)
             where R : unmanaged, IRegister
-                => new r64(data, r.Kind);
+                => new r64(data, r.RegKind);
 
         [MethodImpl(Inline)]
         public static Xmm<R> reg<R>(R r, Cell128 data = default)

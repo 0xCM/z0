@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct imm16 : IAsmOperand<Imm16>
+        public readonly struct imm16 : IImmOp<Imm16>
         {
             public Imm16 Content {get;}
 
@@ -19,12 +19,12 @@ namespace Z0.Asm
             public imm16(ushort value)
                 => Content = value;
 
-            public AsmOperandClass Kind
-                => AsmOperandClass.Imm;
+            public AsmOpKind OpKind
+                => AsmOpKind.Imm | AsmOpKind.W16;
 
             [MethodImpl(Inline)]
             public static implicit operator Arg16(imm16 src)
-                => new Arg16(src.Content, src.Kind);
+                => new Arg16(src.Content, src.OpKind);
         }
     }
 }

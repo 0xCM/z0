@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct reg<T> : IAsmOperand<T>
+        public readonly struct reg<T> : IRegOp<T>
             where T : unmanaged, IRegister
         {
             public T Content {get;}
@@ -22,8 +22,6 @@ namespace Z0.Asm
                 Content = src;
             }
 
-            public AsmOperandClass Kind => AsmOperandClass.R;
-
             [MethodImpl(Inline)]
             public reg<T> Reposition(byte pos)
                 => new reg<T>(Content);
@@ -32,6 +30,5 @@ namespace Z0.Asm
             public static implicit operator reg<T>(T src)
                 => new reg<T>(src);
         }
-
     }
 }

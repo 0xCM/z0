@@ -17,7 +17,7 @@ namespace Z0
     [Free]
     public interface ISizedOperand<T> : ISizedOperand, IOperand<T>
     {
-        BitSize ISized.StorageWidth
+        BitSize ISized.Width
             => memory.bitwidth<T>();
     }
 }

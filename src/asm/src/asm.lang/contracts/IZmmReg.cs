@@ -8,8 +8,6 @@ namespace Z0.Asm
 
     public interface IZmmReg : IRegister<W512,Cell512>
     {
-        RegClass IRegister.Class
-            => RegClass.ZMM;
     }
 
     /// <summary>

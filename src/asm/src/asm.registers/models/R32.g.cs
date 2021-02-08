@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct R32<R> : IRegister<R32<R>,W32,uint>
+    public readonly struct R32<R> : IRegister<R32<R>,W32,uint>, IRegOp<uint>
         where R : unmanaged, IRegister
     {
         public uint Content {get;}
@@ -18,14 +18,14 @@ namespace Z0.Asm
         public R32(uint value)
             => Content = value;
 
-        public RegisterKind Kind
+        public RegisterKind RegKind
         {
             [MethodImpl(Inline)]
-            get => default(R).Kind;
+            get => default(R).RegKind;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator R32(R32<R> src)
-            => new R32(src.Content, src.Kind);
+            => new R32(src.Content, src.RegKind);
     }
 }

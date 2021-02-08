@@ -9,20 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Zmm : IZmmReg
+    public readonly struct Zmm : IZmmReg, IRegOp<Cell512>
     {
         public Cell512 Content {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
         public Zmm(Cell512 value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
 
-        public RegClass Class
-            => RegClass.ZMM;
     }
 }

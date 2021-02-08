@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
 
     public readonly struct AsmStatement<A> : IAsmStatement<A>
-        where A : unmanaged, IAsmOperand
+        where A : unmanaged, IAsmOp
     {
         public AsmMnemonic Mnemonic {get;}
 

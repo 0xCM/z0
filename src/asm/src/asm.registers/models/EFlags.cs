@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         public K Content  {get; private set;}
 
-        public RegisterKind Kind => RegisterKind.EFLAGS;
+        public RegisterKind RegKind => RegisterKind.EFLAGS;
 
         public bit CF
         {

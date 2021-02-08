@@ -12,21 +12,18 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 32-bit register and its content
     /// </summary>
-    public readonly struct R32 : IRegister<R32,W32,uint>
+    public readonly struct R32 : IRegister<R32,W32,uint>, IRegOp<uint>
     {
         public uint Content  {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
         public R32(uint value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
-
-        public RegClass Class
-            => RegClass.GP;
 
         [MethodImpl(Inline)]
         public static implicit operator uint(R32 src)

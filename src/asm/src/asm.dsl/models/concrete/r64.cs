@@ -19,17 +19,17 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 64-bit gp register
         /// </summary>
-        public struct r64 : IRegister<r64,W,T>, IAsmOperand<K,T>
+        public struct r64 : IRegister<r64,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
-            public K Kind {get;}
+            public K RegKind {get;}
 
             [MethodImpl(Inline)]
             public r64(T src, K kind)
             {
                 Content = src;
-                Kind = kind;
+                RegKind = kind;
             }
         }
 
@@ -39,7 +39,7 @@ namespace Z0.Asm
         /// <remarks>
         /// | 000  | rax    | eax    | ax     | al    |
         /// </remarks>
-        public struct rax : IRegister<rax,W,T>
+        public struct rax : IRegister<rax,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -65,17 +65,17 @@ namespace Z0.Asm
                 get => new al((byte)Content);
             }
 
-            public K Kind => K.RAX;
+            public K RegKind => K.RAX;
 
             [MethodImpl(Inline)]
             public static implicit operator G(rax src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
         /// <summary>
         /// Register C Extended
         /// </summary>
-        public struct rcx : IRegister<rcx,W,T>
+        public struct rcx : IRegister<rcx,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -87,25 +87,25 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(rcx src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
             [MethodImpl(Inline)]
             public rcx(T value)
                 => Data = value;
 
-            public K Kind => K.RAX;
+            public K RegKind => K.RAX;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get => new G(Content, Kind);
+                get => new G(Content, RegKind);
             }
         }
 
         /// <summary>
         /// Register D Extended
         /// </summary>
-        public struct rdx : IRegister<rdx,W,T>
+        public struct rdx : IRegister<rdx,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -117,19 +117,19 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(rdx src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
             [MethodImpl(Inline)]
             public rdx(T value)
                 => Data = value;
 
-            public K Kind => K.RDX;
+            public K RegKind => K.RDX;
         }
 
         /// <summary>
         /// Register B Extended
         /// </summary>
-        public struct rbx : IRegister<rbx,W,T>
+        public struct rbx : IRegister<rbx,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -141,19 +141,19 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(rbx src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
             [MethodImpl(Inline)]
             public rbx(T value)
                 => Data = value;
 
-            public K Kind => K.RBX;
+            public K RegKind => K.RBX;
         }
 
         /// <summary>
         /// Register Source Index: Specifies the source for data copies
         /// </summary>
-        public struct rsi : IRegister<rsi,W,T>
+        public struct rsi : IRegister<rsi,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -165,20 +165,20 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public static implicit operator G(rsi src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
             [MethodImpl(Inline)]
             public rsi(T value)
                 => Data = value;
 
-            public K Kind => K.RSI;
+            public K RegKind => K.RSI;
 
         }
 
         /// <summary>
         /// Register Destination Index: Specifies the target for data copies
         /// </summary>
-        public struct rdi : IRegister<rdi,W,T>
+        public struct rdi : IRegister<rdi,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -192,23 +192,23 @@ namespace Z0.Asm
             public rdi(T value)
                 => Data = value;
 
-            public K Kind => K.RDI;
+            public K RegKind => K.RDI;
 
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, Kind);
+                get =>new G(Content, RegKind);
             }
 
             [MethodImpl(Inline)]
             public static implicit operator G(rdi src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
         /// <summary>
         /// Register Stack Pointer: Specifies the current location in stack and grows downwards
         /// </summary>
-        public struct rsp : IRegister<rsp,W,T>
+        public struct rsp : IRegister<rsp,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -222,17 +222,17 @@ namespace Z0.Asm
             public rsp(T value)
                  => Data = value;
 
-            public K Kind => K.RSP;
+            public K RegKind => K.RSP;
 
             [MethodImpl(Inline)]
             public static implicit operator G(rsp src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
         /// <summary>
         /// Register Base Pointer: Specifies the top of the stack
         /// </summary>
-        public struct rbp : IRegister<rbp,W,T>
+        public struct rbp : IRegister<rbp,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -246,14 +246,14 @@ namespace Z0.Asm
             public rbp(T value)
                 => Data = value;
 
-            public K Kind => K.RBP;
+            public K RegKind => K.RBP;
 
             [MethodImpl(Inline)]
             public static implicit operator G(rbp src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
-        public struct r8q : IRegister<r8q,W,T>
+        public struct r8q : IRegister<r8q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -267,14 +267,14 @@ namespace Z0.Asm
             public r8q(T value)
                 => Data = value;
 
-            public K Kind => K.R8Q;
+            public K RegKind => K.R8Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r8q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
-        public struct r9q : IRegister<r9q,W,T>
+        public struct r9q : IRegister<r9q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -288,15 +288,15 @@ namespace Z0.Asm
             public r9q(T value)
                 => Data = value;
 
-            public K Kind => K.R9Q;
+            public K RegKind => K.R9Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r9q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
         }
 
-        public struct r10q : IRegister<r10q,W,T>
+        public struct r10q : IRegister<r10q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -310,15 +310,15 @@ namespace Z0.Asm
             public r10q(T value)
                 => Data = value;
 
-            public K Kind => K.R10Q;
+            public K RegKind => K.R10Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r10q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
         }
 
-        public struct r11q : IRegister<r11q,W,T>
+        public struct r11q : IRegister<r11q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -332,14 +332,14 @@ namespace Z0.Asm
             public r11q(T value)
                 => Data = value;
 
-            public K Kind => K.R11Q;
+            public K RegKind => K.R11Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r11q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
-        public struct r12q : IRegister<r12q,W,T>
+        public struct r12q : IRegister<r12q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -353,15 +353,15 @@ namespace Z0.Asm
             public r12q(T value)
                 => Data = value;
 
-            public K Kind => K.R12Q;
+            public K RegKind => K.R12Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r12q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
 
         }
 
-        public struct r13q : IRegister<r13q,W,T>
+        public struct r13q : IRegister<r13q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -375,14 +375,14 @@ namespace Z0.Asm
             public r13q(T value)
                 => Data = value;
 
-            public K Kind => K.R13Q;
+            public K RegKind => K.R13Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r13q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
-        public struct r14q : IRegister<r14q,W,T>
+        public struct r14q : IRegister<r14q,W,T>, IRegOp<T>
         {
             public T Data;
 
@@ -396,14 +396,14 @@ namespace Z0.Asm
             public r14q(T value)
                 => Data = value;
 
-            public K Kind => K.R14Q;
+            public K RegKind => K.R14Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r14q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
 
-        public struct r15q : IRegister<r15q,W,T>
+        public struct r15q : IRegister<r15q,W,T>, IRegOp<T>
         {
             public T Content {get;}
 
@@ -411,11 +411,11 @@ namespace Z0.Asm
             public r15q(T value)
                 => Content = value;
 
-            public K Kind => K.R15Q;
+            public K RegKind => K.R15Q;
 
             [MethodImpl(Inline)]
             public static implicit operator G(r15q src)
-                => new G(src.Content, src.Kind);
+                => new G(src.Content, src.RegKind);
         }
     }
 }

@@ -12,13 +12,11 @@ namespace Z0.Asm
         /// <summary>
         /// The register's kind classifier
         /// </summary>
-        RegisterKind Kind {get;}
+        RegisterKind RegKind {get;}
 
         RegIndex Index
-            => (RegIndex)((byte)Kind);
+            => (RegIndex)((byte)RegKind);
 
-        RegClass Class
-            => default;
     }
 
     public interface IRegister<T> : IRegister, IContented<T>

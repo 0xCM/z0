@@ -11,12 +11,12 @@ namespace Z0.Asm
 
     partial struct AsmDsl
     {
-        public readonly struct MemOp<T> : IAsmOperand<T>
+        public readonly struct MemOp<T> : IMemOp<T>
             where T : unmanaged, IMemOp
         {
             public T Content {get;}
 
-            public AsmOperandClass Kind => AsmOperandClass.M;
+            public AsmOpClass OpClass => AsmOpClass.M;
 
             [MethodImpl(Inline)]
             public MemOp(T src)

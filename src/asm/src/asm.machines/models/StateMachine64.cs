@@ -9,14 +9,16 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines a fully-specified instruction
-    /// </summary>
-    public readonly struct AsmInstruction
+    public interface IStateMachine<T,S>
     {
-
-
+        S Next(T input);
     }
 
+    public readonly partial struct StateMachines
+    {
+        public sealed class Cpu : WfService<Cpu,Cpu>
+        {
 
+        }
+    }
 }

@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public DataType(IDataType rep)
         {
-            StorageWidth = rep.StorageWidth;
+            StorageWidth = rep.Width;
             ContainerType = rep.ContainerType;
             ContentType = rep.ContentType;
             Formatter = rep.Format;
@@ -62,7 +62,7 @@ namespace Z0
 
         public Type ContainerType => typeof(void);
 
-        public BitSize StorageWidth => 0;
+        public BitSize Width => 0;
 
         public string Format()
             => "<empty>";

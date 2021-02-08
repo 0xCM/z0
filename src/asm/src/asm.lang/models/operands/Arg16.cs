@@ -12,17 +12,17 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 16-bit operand
     /// </summary>
-    public readonly struct Arg16 : IAsmOperand<Arg16,W16,ushort>
+    public readonly struct Arg16 : IAsmOp<Arg16,W16,ushort>
     {
         public ushort Content {get;}
 
-        public AsmOperandClass Kind {get;}
+        public AsmOpKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public Arg16(ushort value, AsmOperandClass kind)
+        public Arg16(ushort value, AsmOpKind kind)
         {
             Content = value;
-            Kind = kind;
+            OpKind = kind;
         }
     }
 }

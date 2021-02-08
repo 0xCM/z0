@@ -9,20 +9,17 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines an 8-bit operand
-    /// </summary>
-    public readonly struct Arg8 : IAsmOp<Arg8,W8,byte>
+    public readonly struct AsmOp : IAsmOp<AsmOpContent>
     {
-        public byte Content {get;}
-
         public AsmOpKind OpKind {get;}
 
-        [MethodImpl(Inline)]
-        public Arg8(byte value, AsmOpKind kind)
+        public AsmOpContent Content {get;}
+
+        public AsmOp(AsmOpKind kind, AsmOpContent content)
         {
-            Content = value;
             OpKind = kind;
+            Content = content;
         }
+
     }
 }

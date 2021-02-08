@@ -18,6 +18,7 @@ namespace Z0.Asm
         {
             public Cell512 Content {get;}
 
+
             [MethodImpl(Inline)]
             public m512(Cell512 src)
                 => Content = src;

@@ -12,21 +12,18 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 64-bit register and its content
     /// </summary>
-    public readonly struct R64 : IRegister<R64,W64,ulong>
+    public readonly struct R64 : IRegister<R64,W64,ulong>, IRegOp<ulong>
     {
         public ulong Content {get;}
 
-        public RegisterKind Kind {get;}
+        public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
         public R64(ulong value, RegisterKind kind)
         {
             Content = value;
-            Kind = kind;
+            RegKind = kind;
         }
-
-        public RegClass Class
-            => RegClass.GP;
 
         [MethodImpl(Inline)]
         public static implicit operator ulong(R64 src)

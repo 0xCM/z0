@@ -7,24 +7,26 @@ namespace Z0.Asm
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IMemOp : IAsmOp
+    public interface IImmOp : IAsmOp
     {
-
+        RegisterKind RegKind => default;
     }
 
     [Free]
-    public interface IMemOp<T> : IMemOp, IAsmOp<T>
+    public interface IImmOp<T> : IImmOp, IAsmOp<T>
         where T : unmanaged
     {
         AsmOpKind IAsmOp.OpKind
-            => AsmOpKind.M | (AsmOpKind)memory.size<T>();
+            => AsmOpKind.Imm | (AsmOpKind)memory.size<T>();
+        BitSize ISized.Width
+            => memory.size<T>();
     }
 
 
     [Free]
-    public interface IMemOp<F,W,T> : IMemOp<T>
+    public interface IImmOp<F,W,T> : IImmOp<T>
         where T : unmanaged
-        where F : unmanaged, IMemOp<F,W,T>
+        where F : unmanaged, IImmOp<F,W,T>
         where W : unmanaged, ITypeWidth
     {
         new W Width => default(W);
