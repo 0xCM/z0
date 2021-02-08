@@ -181,6 +181,16 @@ namespace Z0.Asm
             }
         }
 
+        public void DescribeHosts()
+        {
+            var catalog = ApiCatalogs.host(Wf,typeof(ScalarBitLogic));
+            var records = catalog.Describe();
+            var dst = Db.IndexTable<ApiMemberInfo>();
+            var flow = Wf.EmittingTable<ApiMemberInfo>(dst);
+            var count = Records.emit(records,dst);
+            Wf.EmittedTable(flow,count);
+        }
+
         public void GenBits()
         {
             var factory = BitStoreFactory.create(Wf);
@@ -193,7 +203,6 @@ namespace Z0.Asm
                 ref readonly var block = ref skip(blocks,i);
                 var b = @bytes(block.Data);
                 seek(dst,i) = ByteSpans.property(string.Format("Block{0:X2}", i), b.ToArray());
-                //Wf.Row(prop.Format());
             }
             var merge = ByteSpans.merge(buffer, "CharBytes");
             var s0 = recover<char>(merge.Segment(16,16));
@@ -202,7 +211,7 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            GenBits();
+            DescribeHosts();
         }
 
         public static void Main(params string[] args)

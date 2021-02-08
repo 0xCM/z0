@@ -43,13 +43,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get =>  z.bytes(Data);
-        }
-
-        public BitEdit<ushort> Content
-        {
-            [MethodImpl(Inline)]
-            get => new BitEdit<ushort>(Data);
+            get =>  memory.bytes(Data);
         }
 
         /// <summary>

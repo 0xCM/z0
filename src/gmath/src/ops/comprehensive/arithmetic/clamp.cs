@@ -59,7 +59,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.clamp(float64(a), float64(b)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

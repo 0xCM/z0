@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.or(a,b);
+                => gbits.or(a,b);
         }
 
         [Closures(Integers), Or]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.or(a,b);
+                => gbits.or(a,b);
         }
     }
 }

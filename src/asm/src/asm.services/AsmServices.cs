@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
-            => CaptureAlt.service(wf,asm);
+            => Capture.alt(wf,asm);
 
         [Op]
         public static QuickCapture quick(IAsmContext asm)

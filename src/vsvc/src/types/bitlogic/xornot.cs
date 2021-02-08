@@ -22,7 +22,8 @@ namespace Z0
                 => gvec.vxornot(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.xornot(a,b);
+            public T Invoke(T a, T b)
+                => gbits.xornot(a,b);
         }
 
         [NumericClosures(Integers)]
@@ -34,7 +35,8 @@ namespace Z0
                 => gvec.vxornot(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.xornot(a,b);
+            public T Invoke(T a, T b)
+                => gbits.xornot(a,b);
         }
     }
 }

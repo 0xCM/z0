@@ -6,9 +6,12 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Reflection;
 
     using static Part;
     using static z;
+
+    using Q = ApiQuery;
 
     [ApiHost(ApiNames.ApiRuntime, true)]
     public readonly struct ApiRuntime
@@ -17,6 +20,76 @@ namespace Z0
 
         public static string format(in ApiRuntimeMember src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil);
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="src">The reifying type</param>
+        [Op]
+        public static ApiHost ApiHost(Type src)
+        {
+            var part = src.Assembly.Id();
+            var name =  HostName(src);
+            return new ApiHost(src, name, part, new ApiHostUri(part, name));
+        }
+
+        [Op]
+        public static Identifier HostName(Type src)
+        {
+            var attrib = src.Tag<ApiHostAttribute>();
+            return text.ifempty(attrib.MapValueOrDefault(a => a.HostName, src.Name), src.Name).ToLower();
+        }
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        public static Type[] ApiHostTypes(Assembly src)
+            => src.GetTypes().Where(ApiRuntime.IsApiHost);
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="ApiDeepAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        public static ApiRuntimeType[] ApiTypes(Assembly src)
+        {
+            var part = src.Id();
+            var types = span(src.GetTypes().Where(t => t.Tagged<ApiDeepAttribute>()));
+            var count = types.Length;
+            var buffer = alloc<ApiRuntimeType>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var type = ref skip(types,i);
+                var attrib = type.Tag<ApiDeepAttribute>();
+                var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
+                var uri = new ApiHostUri(part, name);
+                seek(dst, i) = new ApiRuntimeType(type, name, part, uri);
+            }
+            return buffer;
+        }
+
+        /// <summary>
+        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
+        /// </summary>
+        /// <param name="src">The assembly to search</param>
+        [Op]
+        public static Type[] ServiceHostTypes(Assembly src)
+            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
+
+        [Op]
+        public static ApiHost[] ApiHosts(Assembly src)
+        {
+            var _id = Q.id(src);
+            return ApiHostTypes(src).Select(h => host(_id, h));
+        }
+
+        [Op]
+        public static bool IsApiHost(Type src)
+            => src.Tagged<ApiHostAttribute>();
 
         [Op]
         public static Outcome<FS.FilePath> EmitIndex(IWfShell wf)
@@ -84,6 +157,19 @@ namespace Z0
             dst.Sig = ClrDisplaySig.from(method.Metadata());
             dst.Cil = src.Cil;
             return ref dst;
+        }
+
+        /// <summary>
+        /// Describes an api host
+        /// </summary>
+        /// <param name="part">The defining part</param>
+        /// <param name="t">The reifying type</param>
+        [Op]
+        static ApiHost host(PartId part, Type t)
+        {
+            var attrib = t.Tag<ApiHostAttribute>();
+            var name =  ApiRuntime.HostName(t);
+            return new ApiHost(t, name, part, new ApiHostUri(part, name));
         }
     }
 }

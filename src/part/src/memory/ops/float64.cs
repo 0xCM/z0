@@ -21,6 +21,20 @@ namespace Z0
             => ref As<T,double>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T float64<T>(in double src, out T dst)
+        {
+            dst = @as<double,T>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref double float64<T>(in T src, out double dst)
+        {
+            dst = @as<T,double>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static double? float64<T>(T? src)
             where T : unmanaged
                 => As<T?, double?>(ref src);

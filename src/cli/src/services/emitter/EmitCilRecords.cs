@@ -31,7 +31,7 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                     writer.WriteLine(format(skip(methods,i)));
 
-                Wf.EmittedTable<CilDataRow>(flow, count, dst);
+                Wf.EmittedTable<CilDataRow>(flow, count);
             }
 
             Wf.Processed(processing, srcPath, src);

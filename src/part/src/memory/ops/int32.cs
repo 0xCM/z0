@@ -25,6 +25,20 @@ namespace Z0
         public static ref int int32<T>(ref T src)
             => ref As<T,int>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T int32<T>(in int src, out T dst)
+        {
+            dst = @as<int,T>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref int int32<T>(in T src, out int dst)
+        {
+            dst = @as<T,int>(src);
+            return ref dst;
+        }
+
         /// <summary>
         /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='int'/> cells
         /// </summary>

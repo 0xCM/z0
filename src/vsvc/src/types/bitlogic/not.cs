@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a)
-                => gmath.not(a);
+                => gbits.not(a);
         }
 
         [NumericClosures(Integers), Not]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a)
-                => gmath.not(a);
+                => gbits.not(a);
         }
    }
 }

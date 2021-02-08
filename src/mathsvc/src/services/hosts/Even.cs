@@ -17,7 +17,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.even(a);
+            public readonly bit Invoke(T a)
+                => gmath.even(a);
 
             [MethodImpl(Inline)]
             public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)

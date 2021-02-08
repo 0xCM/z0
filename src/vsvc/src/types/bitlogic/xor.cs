@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     partial class VServices
@@ -18,10 +18,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vxor(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => gvec.vxor(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.xor(a,b);
+            public T Invoke(T a, T b)
+                => gbits.xor(a,b);
         }
 
         [Closures(Integers), Xor]
@@ -29,10 +31,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vxor(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+                => gvec.vxor(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.xor(a,b);
+            public T Invoke(T a, T b)
+                => gbits.xor(a,b);
         }
    }
 }

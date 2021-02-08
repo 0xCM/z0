@@ -20,16 +20,29 @@ namespace Z0
         public static IApiClassCatalog classes(IWfShell wf)
             => ApiClassCatalog.create(wf);
 
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
         [Op]
         public static ApiHostCatalog host(IWfShell wf, IApiHost src)
         {
-            var jitter = wf.ApiServices.ApiJit();
-            var members = jitter.Jit(src);
+            var members = wf.ApiServices.ApiJit().Jit(src);
             return members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members);
         }
 
         /// <summary>
-        /// Defines a <see cref='ApiPartCatalog'/> over a specified part
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public static ApiHostCatalog host(IWfShell wf, Type src)
+            => host(wf, ApiRuntime.ApiHost(src));
+
+        /// <summary>
+        /// Defines a <see cref='ApiPartCatalog'/> for a specified part
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
@@ -42,7 +55,7 @@ namespace Z0
         /// <param name="src">The source assembly</param>
         [Op]
         public static IApiPartCatalog part(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, apitypes(src), apiHosts(src), svcHostTypes(src));
+            => new ApiPartCatalog(src.Id(), src, ApiRuntime.ApiTypes(src), ApiRuntime.ApiHosts(src), ApiRuntime.ServiceHostTypes(src));
 
         /// <summary>
         /// Creates a system-level api catalog over a set of path-identified components
@@ -57,10 +70,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source components</param>
         [Op]
-        public static IGlobalApiCatalog global(Assembly[] src)
+        public static IGlobalApiCatalog global(Index<Assembly> src)
         {
             var candidates = src.Where(Q.isPart);
-            var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
+            var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id).Array();
             return new GlobalApiCatalog(parts);
         }
 
@@ -122,63 +135,5 @@ namespace Z0
         static Option<IPart> resolve(PropertyInfo src)
             => root.@try(src, x => (IPart)x.GetValue(null));
 
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        static Type[] apiHostTypes(Assembly src)
-            => src.GetTypes().Where(t => t.Tagged<ApiHostAttribute>());
-
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        static Type[] svcHostTypes(Assembly src)
-            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
-
-        [Op]
-        static ApiHost[] apiHosts(Assembly src)
-        {
-            var _id = Q.id(src);
-            return apiHostTypes(src).Select(h => host(_id, h));
-        }
-
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="ApiDeepAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        static ApiRuntimeType[] apitypes(Assembly src)
-        {
-            var part = src.Id();
-            var types = span(src.GetTypes().Where(t => t.Tagged<ApiDeepAttribute>()));
-            var count = types.Length;
-            var buffer = alloc<ApiRuntimeType>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var type = ref skip(types,i);
-                var attrib = type.Tag<ApiDeepAttribute>();
-                var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
-                var uri = new ApiHostUri(part, name);
-                seek(dst, i) = new ApiRuntimeType(type, name, part, uri);
-            }
-            return buffer;
-        }
-
-        /// <summary>
-        /// Describes an api host
-        /// </summary>
-        /// <param name="part">The defining part</param>
-        /// <param name="t">The reifying type</param>
-        [Op]
-        static ApiHost host(PartId part, Type t)
-        {
-            var attrib = t.Tag<ApiHostAttribute>();
-            var name =  text.ifempty(attrib.MapValueOrDefault(a => a.HostName, t.Name), t.Name).ToLower();
-            return new ApiHost(t, name, part, new ApiHostUri(part, name));
-        }
     }
 }

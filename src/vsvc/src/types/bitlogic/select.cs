@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c)
-                => gmath.select(a,b,c);
+                => gbits.select(a,b,c);
         }
 
         [Closures(Integers), Select]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c)
-                => gmath.select(a,b,c);
+                => gbits.select(a,b,c);
         }
     }
 }

@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static Bit;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct NumericLogix
@@ -19,52 +18,52 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T identity<T>(T a)
             where T : unmanaged
-                => gmath.identity(a);
+                => gbits.identity(a);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @false<T>()
             where T:unmanaged
-                => gmath.@false<T>();
+                => gbits.@false<T>();
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @false<T>(T a)
             where T:unmanaged
-                => gmath.@false(a);
+                => gbits.@false(a);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @false<T>(T a, T b)
             where T:unmanaged
-                => gmath.@false(a,b);
+                => gbits.@false(a,b);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @false<T>(T a, T b, T c)
             where T:unmanaged
-                => gmath.@false(a,b,c);
+                => gbits.@false(a,b,c);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => gmath.@true<T>();
+                => gbits.@true<T>();
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>(T a)
             where T:unmanaged
-                => gmath.@true(a);
+                => gbits.@true(a);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>(T a, T b)
             where T:unmanaged
-                => gmath.@true(a, b);
+                => gbits.@true(a, b);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T @true<T>(T a, T b, T c)
             where T:unmanaged
-                => gmath.@true(a, b, c);
+                => gbits.@true(a, b, c);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T not<T>(T a)
             where T : unmanaged
-                => gmath.not(a);
+                => gbits.not(a);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T xor1<T>(T a)
@@ -90,77 +89,77 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T and<T>(T a, T b)
             where T : unmanaged
-                => gmath.and(a,b);
+                => gbits.and(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T nand<T>(T a, T b)
             where T : unmanaged
-                => gmath.nand(a,b);
+                => gbits.nand(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T or<T>(T a, T b)
             where T : unmanaged
-                => gmath.or(a,b);
+                => gbits.or(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T nor<T>(T a, T b)
             where T : unmanaged
-                => gmath.nor(a,b);
+                => gbits.nor(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T xor<T>(T a, T b)
             where T : unmanaged
-                => gmath.xor(a,b);
+                => gbits.xor(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T xnor<T>(T a, T b)
             where T : unmanaged
-                => gmath.xnor(a,b);
+                => gbits.xnor(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T left<T>(T a, T b)
             where T : unmanaged
-                => gmath.left(a,b);
+                => gbits.left(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T right<T>(T a, T b)
             where T : unmanaged
-                => gmath.right(a,b);
+                => gbits.right(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lnot<T>(T a, T b)
             where T : unmanaged
-                => gmath.lnot(a,b);
+                => gbits.lnot(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T rnot<T>(T a, T b)
             where T : unmanaged
-                => gmath.rnot(a,b);
+                => gbits.rnot(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T impl<T>(T a, T b)
             where T : unmanaged
-                => gmath.impl(a,b);
+                => gbits.impl(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T nonimpl<T>(T a, T b)
             where T : unmanaged
-                => gmath.nonimpl(a,b);
+                => gbits.nonimpl(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
-                => gmath.cimpl(a,b);
+                => gbits.cimpl(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
-                => gmath.cnonimpl(a,b);
+                => gbits.cnonimpl(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T xornot<T>(T a, T b)
             where T : unmanaged
-                => gmath.xornot(a,b);
+                => gbits.xornot(a,b);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T add<T>(T a, T b)
@@ -200,32 +199,32 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T equals<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.eq(a,b));
+                => bit.promote<T>(gmath.eq(a,b));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T neq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.neq(a,b));
+                => bit.promote<T>(gmath.neq(a,b));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lt<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.lt(a,b));
+                => bit.promote<T>(gmath.lt(a,b));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lteq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.lteq(a,b));
+                => bit.promote<T>(gmath.lteq(a,b));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T gt<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.gt(a,b));
+                => bit.promote<T>(gmath.gt(a,b));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T gteq<T>(T a, T b)
             where T : unmanaged
-                => promote<T>(gmath.gteq(a,b));
+                => bit.promote<T>(gmath.gteq(a,b));
 
         [MethodImpl(Inline)]
         public static bit same<T>(T a, T b)
@@ -255,7 +254,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-                => gmath.select(a,b,c);
+                => gbits.select(a,b,c);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T f00<T>(T a, T b, T c)

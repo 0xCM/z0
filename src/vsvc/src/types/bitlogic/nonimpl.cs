@@ -20,11 +20,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
-                => gvec.vnonimpl(x,y);
+                => gcpu.vnonimpl(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.nonimpl(a,b);
-
+            public T Invoke(T a, T b)
+                => gbits.nonimpl(a,b);
         }
 
         [Closures(Integers), NonImpl]
@@ -32,10 +32,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) => gvec.vnonimpl(x,y);
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
+                => gcpu.vnonimpl(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.cnonimpl(a,b);
+            public T Invoke(T a, T b)
+                => gbits.cnonimpl(a,b);
        }
     }
 }

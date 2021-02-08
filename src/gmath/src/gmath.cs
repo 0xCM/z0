@@ -13,10 +13,7 @@ namespace Z0
     public partial class gmath
     {
 
-        [MethodImpl(Inline)]
-        public static NumericBitLogic<T> bitlogic<T>()
-            where T : unmanaged
-                => default(NumericBitLogic<T>);
+
 
     }
 

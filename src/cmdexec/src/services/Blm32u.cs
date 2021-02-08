@@ -8,117 +8,254 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static z;
     using static Part;
     using static BinaryBitLogicKind;
+    using static memory;
+    using static ScalarBitLogic;
 
-    using BL = ScalarBitLogic;
 
-    [ApiDeep]
-    public unsafe readonly struct Blm32u
+    readonly struct BitLogicOps
     {
-        static MethodInfo[] Methods;
+        readonly Index<MemberAddress> Members;
 
-        static MemoryAddress Address;
+        readonly Index<ClrMemberName> MemberNames;
 
-        static MemberAddress[] MethodAddressData;
-
-        static Blm32u()
+        public static BitLogicOps init()
         {
-            Methods = typeof(Blm32u).DeclaredStaticMethods();
-            Address = typeof(Blm32u).TypeHandle.Value.ToPointer();
-            MethodAddressData = Methods.Select(Addresses.member);
-            Array.Sort(MethodAddressData);
+            var methods = typeof(ScalarBitLogic).DeclaredStaticMethods().Prepare();
+            return new BitLogicOps(methods);
         }
 
-        [MethodImpl(Inline)]
-        public MemoryAddress TypeAddress()
-            => Address;
+        BitLogicOps(MethodInfo[] src)
+        {
+            Members = src.Select(Addresses.member);
+            Array.Sort(Members);
+            var count = Members.Length;
+            MemberNames = alloc<ClrMemberName>(count);
+            ref var name = ref MemberNames.First;
+            for(var i=0; i<count; i++)
+                seek(name,i) = Members[i].Member.Name;
+        }
+
+    }
+    [ApiHost]
+    public unsafe readonly struct BitLogicEvaluator
+    {
+        readonly BitLogicOps Cache;
 
         [MethodImpl(Inline)]
-        public MemberAddress method(N0 n)
-            => MethodAddressData[0];
+        internal BitLogicEvaluator(BitLogicOps cache)
+        {
+            Cache = cache;
+        }
 
-        [MethodImpl(Inline)]
-        public MemberAddress method(N1 n)
-            => MethodAddressData[1];
+        public sbyte Eval(sbyte a, sbyte b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
 
-        [MethodImpl(Inline)]
-        public MemberAddress method(N2 n)
-            => MethodAddressData[2];
+            return 0;
+        }
 
-        [MethodImpl(Inline)]
-        public MemberAddress method(N3 n)
-            => MethodAddressData[3];
+        public byte Eval(byte a, byte b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
 
-        [MethodImpl(Inline)]
-        public MemberAddress method(N4 n)
-            => MethodAddressData[4];
+            return 0;
+        }
 
-        [MethodImpl(Inline)]
-        public MemberAddress method(N5 n)
-            => MethodAddressData[5];
+        public short Eval(short a, short b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
 
-        [MethodImpl(NotInline)]
-        static uint @false(uint a, uint b)
-            => BL.@false(a,b);
+            return 0;
+        }
 
-        [MethodImpl(NotInline)]
-        static uint and(uint a, uint b)
-            => BL.and(a,b);
+        public ushort Eval(ushort a, ushort b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
 
-        [MethodImpl(NotInline)]
-        static uint cnonimpl(uint a, uint b)
-            => BL.cnonimpl(a,b);
+            return 0;
+        }
 
-        [MethodImpl(NotInline)]
-        static uint left(uint a, uint b)
-            => BL.left(a,b);
+        [Op]
+        public int Eval(int a, int b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
 
-        [MethodImpl(NotInline)]
-        static uint nonimpl(uint a, uint b)
-            => BL.nonimpl(a,b);
+            return 0;
+        }
 
-        [MethodImpl(NotInline)]
-        static uint right(uint a, uint b)
-            => BL.right(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint xor(uint a, uint b)
-            => BL.xor(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint or(uint a, uint b)
-            => BL.or(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint nor(uint a, uint b)
-            => BL.nor(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint xnor(uint a, uint b)
-            => BL.xnor(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint rnot(uint a, uint b)
-            => BL.rnot(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint impl(uint a, uint b)
-            => BL.impl(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint lnot(uint a, uint b)
-            => BL.lnot(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint cimpl(uint a, uint b)
-            => BL.cimpl(a,b);
-
-        [MethodImpl(NotInline)]
-        static uint nand(uint a, uint b)
-            => BL.nand(a,b);
-
+        [Op]
         public uint Eval(uint a, uint b, BinaryBitLogicKind k)
         {
             switch(k)
@@ -153,6 +290,92 @@ namespace Z0
                     return cimpl(a,b);
                 case Nand:
                     return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
+
+            return 0;
+        }
+
+        [Op]
+        public long Eval(long a, long b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
+            }
+
+            return 0;
+        }
+
+        [Op]
+        public ulong Eval(ulong a, ulong b, BinaryBitLogicKind k)
+        {
+            switch(k)
+            {
+                case False:
+                    return @false(a,b);
+                case And:
+                    return and(a,b);
+                case CNonImpl:
+                    return cnonimpl(a,b);
+                case LProject:
+                    return left(a,b);
+                case NonImpl:
+                    return nonimpl(a,b);
+                case RProject:
+                    return right(a,b);
+                case Xor:
+                    return xor(a,b);
+                case Or:
+                    return or(a,b);
+                case Nor:
+                    return nor(a,b);
+                case Xnor:
+                    return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
+                case True:
+                    return @true(a,b);
             }
 
             return 0;

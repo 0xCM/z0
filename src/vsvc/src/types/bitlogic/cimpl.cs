@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.cimpl(a,b);
+                => gbits.cimpl(a,b);
         }
 
         [Closures(Integers), CImpl]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.cimpl(a,b);
+                => gbits.cimpl(a,b);
         }
     }
 }

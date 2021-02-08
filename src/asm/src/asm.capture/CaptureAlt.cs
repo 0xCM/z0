@@ -18,10 +18,6 @@ namespace Z0
     public readonly unsafe struct CaptureAlt
     {
         [Op]
-        public static ICaptureAlt service(IWfShell wf, IAsmContext asm)
-            => default(CaptureAltService);
-
-        [Op]
         public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<MethodInfo> src)
             => capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
 

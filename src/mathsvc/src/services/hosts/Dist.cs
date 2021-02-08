@@ -17,7 +17,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly ulong Invoke(T a, T b) => gmath.dist(a,b);
+            public readonly ulong Invoke(T a, T b)
+                => gmath.dist(a,b);
         }
     }
 }

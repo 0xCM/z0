@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.impl(a,b);
+                => gbits.impl(a,b);
         }
 
         [Closures(Integers), Impl]
@@ -35,7 +35,8 @@ namespace Z0
                 => gvec.vimpl(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.impl(a,b);
+            public T Invoke(T a, T b)
+                => gbits.impl(a,b);
         }
     }
 }

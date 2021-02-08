@@ -41,7 +41,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContent>(flow, lines, dst);
+            Wf.EmittedTable<ImageContent>(flow, lines);
             return (@base, @base + offset);
         }
 

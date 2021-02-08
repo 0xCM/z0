@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0; i<kRows; i++)
                 writer.WriteLine(formatter.Format(rows[i]));
 
-            return wf.EmittedTable<EnumLiteral>(flow, rows.Length, target);
+            return wf.EmittedTable<EnumLiteral>(flow, rows.Length);
         }
 
         public static WfExecToken emit(IWfShell wf, FS.FilePath target)

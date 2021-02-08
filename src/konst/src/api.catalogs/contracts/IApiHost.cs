@@ -14,7 +14,7 @@ namespace Z0
     {
         Type HostType {get;}
 
-        string Name
+        Identifier Name
             => Uri.Name;
 
         ApiHostUri Uri

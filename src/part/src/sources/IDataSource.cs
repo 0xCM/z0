@@ -75,4 +75,11 @@ namespace Z0
             return count;
         }
     }
+
+    [Free]
+    public interface IDataSource<H,T> : IDataSource<T>
+        where H : struct, IDataSource<H,T>
+    {
+
+    }
 }

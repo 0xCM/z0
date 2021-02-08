@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                 => gmath.nor(a,b);
+                 => gbits.nor(a,b);
         }
 
         [Closures(Integers)]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.nor(a,b);
+                => gbits.nor(a,b);
         }
     }
 }

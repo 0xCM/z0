@@ -65,6 +65,17 @@ namespace Z0
             return result;
         }
 
+        public ApiMemberInfo Describe()
+        {
+            var dst = new ApiMemberInfo();
+            dst.Address = BaseAddress;
+            dst.Host = Host.UriText;
+            dst.Member = Method.DisplayName();
+            dst.ApiKind = ApiKind;
+            dst.Uri = OpUri.UriText;
+            return dst;
+        }
+
         [MethodImpl(Inline)]
         public int CompareTo(ApiMember src)
             => BaseAddress.CompareTo(src.BaseAddress);

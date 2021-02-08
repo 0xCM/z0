@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.nand(a,b);
+                => gbits.nand(a,b);
         }
 
         [Closures(Integers), Nand]
@@ -37,7 +37,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.nand(a,b);
+                => gbits.nand(a,b);
 
         }
     }

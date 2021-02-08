@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = Numeric.maxval<T>();
-            var view = Bit.editor(src);
+            var view = Bits.editor(src);
             var bytecount = size<T>();
 
             for(var i=0; i<bytecount; i++)

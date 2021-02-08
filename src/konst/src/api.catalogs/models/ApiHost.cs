@@ -19,7 +19,7 @@ namespace Z0
 
         public Type HostType {get;}
 
-        public string Name {get;}
+        public Identifier Name {get;}
 
         public ApiHostUri Uri {get;}
 
@@ -28,8 +28,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
         {
-            Name = name;
             HostType = type;
+            Name = name;
             PartId = part;
             Uri = uri;
             Methods = HostType.DeclaredMethods();

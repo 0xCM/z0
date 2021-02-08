@@ -12,9 +12,6 @@ namespace Z0
 
     partial class BitSpans
     {
-
-
-
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan and(in BitSpan x, in BitSpan y, in BitSpan z)
         {

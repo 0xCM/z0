@@ -84,7 +84,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageContent>(flow, LineCount, TargetPath);
+            Wf.EmittedTable<ImageContent>(flow, LineCount);
         }
 
         public MemoryAddress OffsetAddress

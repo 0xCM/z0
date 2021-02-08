@@ -13,12 +13,27 @@ namespace Z0
     {
         const NumericKind Closure = Konst.UnsignedInts;
 
+        /// <summary>
+        /// Wraps a bitview around a generic reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The generic type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitEditor<T> editor<T>(in T src)
+            where T : unmanaged
+                => new BitEditor<T>(src);
     }
 
     [ApiHost(ApiSetKind.Bits | ApiSetKind.Generic)]
     public partial class gbits
     {
         const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline)]
+        public static NumericBitLogic<T> bitlogic<T>()
+            where T : unmanaged
+                => default(NumericBitLogic<T>);
+
     }
 
     [ApiHost]

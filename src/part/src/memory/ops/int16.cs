@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static System.Runtime.CompilerServices.Unsafe;
-
     using static Part;
 
     partial struct memory
@@ -25,6 +24,20 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref short int16<T>(ref T src)
             => ref As<T,short>(ref src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T int16<T>(in short src, out T dst)
+        {
+            dst = @as<short,T>(src);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref short int16<T>(in T src, out short dst)
+        {
+            dst = @as<T,short>(src);
+            return ref dst;
+        }
 
         /// <summary>
         /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='short'/> cells

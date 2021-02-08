@@ -41,7 +41,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(rows,i)));
 
-            return Wf.EmittedTable<BlobRow>(flow, rows.Length, dst);
+            return Wf.EmittedTable<BlobRow>(flow, rows.Length);
         }
 
         public WfExecToken EmitBlobs(Assembly src)

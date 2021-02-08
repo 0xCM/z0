@@ -23,7 +23,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.and(a,b);
+                => gbits.and(a,b);
         }
 
         [Closures(Integers), And]
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.and(a,b);
+                => gbits.and(a,b);
         }
     }
 }

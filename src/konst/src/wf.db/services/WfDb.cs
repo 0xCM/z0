@@ -45,7 +45,7 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(src,i)));
-            return Wf.EmittedTable<T>(flow, count, dst);
+            return Wf.EmittedTable<T>(flow, count);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(UInt8x16k)]
         public static BitGrid16<T> nand<T>(BitGrid16<T> x, BitGrid16<T> y)
             where T : unmanaged
-                => init16<T>(math.nand(x,y));
+                => init16<T>(ScalarBitLogic.nand(x,y));
 
         /// <summary>
         /// Computes the bitwise nand between generic bitgrids
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(UInt8x16x32k)]
         public static BitGrid32<T> nand<T>(BitGrid32<T> x, BitGrid32<T> y)
             where T : unmanaged
-                => init32<T>(math.nand(x,y));
+                => init32<T>(ScalarBitLogic.nand(x,y));
 
         /// <summary>
         /// Computes the bitwise nand between generic bitgrids
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Nand, Closures(UnsignedInts)]
         public static BitGrid64<T> nand<T>(BitGrid64<T> x, BitGrid64<T> y)
             where T : unmanaged
-                => init64<T>(math.nand(x,y));
+                => init64<T>(ScalarBitLogic.nand(x,y));
 
         /// <summary>
         /// Computes the bitwise NAND between generic bitgrids and stores the result to a caller-supplied target
@@ -72,7 +72,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.nand(x,y);
+                => ScalarBitLogic.nand(x,y);
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids
@@ -85,7 +85,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.nand(x,y);
+                => ScalarBitLogic.nand(x,y);
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids
@@ -98,7 +98,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.nand(x,y);
+                => ScalarBitLogic.nand(x,y);
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids

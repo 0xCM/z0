@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct ValueCycle<T> : IValueSource<ValueCycle<T>,T>
+    public struct ValueCycle<T> : IDataSource<ValueCycle<T>,T>
         where T : struct
     {
         readonly Index<T> Data;

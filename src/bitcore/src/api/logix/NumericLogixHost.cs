@@ -23,16 +23,6 @@ namespace Z0
     using BSK = ApiBitShiftClass;
 
     /// <summary>
-    /// Defines the canonical shape of a 2-argument function over a parametric domain and boolean codomain
-    /// </summary>
-    /// <param name="a">The first operand</param>
-    /// <param name="b">The second operand</param>
-    /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
-    [Free]
-    public delegate bit BinaryPred<T>(T a, T b)
-        where T : unmanaged;
-
-    /// <summary>
     /// Defines the canonical shape of a bitwise shift function
     /// </summary>
     /// <param name="a">The source value</param>
@@ -97,7 +87,7 @@ namespace Z0
         }
 
         [Op, Closures(Integers)]
-        public static BinaryPred<T> lookup<T>(BCK kind)
+        public static BinaryPredicate<T> lookup<T>(BCK kind)
             where T : unmanaged
         {
             switch(kind)
