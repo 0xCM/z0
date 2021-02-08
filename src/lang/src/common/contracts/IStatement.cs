@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    public interface IStatement
+    public interface IStatement : IExpr
     {
 
     }

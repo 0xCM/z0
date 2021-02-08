@@ -11,7 +11,7 @@ namespace Z0
     {
         ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<MethodInfo> src);
 
-        ReadOnlySpan<ApiCaptureBlock> Capture(Type src);
+        ReadOnlySpan<ApiCaptureBlock> Capture(ApiHostCatalog src);
 
         ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src);
 

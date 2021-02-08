@@ -8,10 +8,4 @@ namespace Z0
     {
         ApiCodeBlock[] Read(FS.FilePath src);
     }
-
-    public interface IApiHexReader<H> : IApiHexReader, IArchiveReader<H>
-        where H : struct, IApiHexReader<H>
-    {
-
-    }
 }

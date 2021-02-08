@@ -16,7 +16,6 @@ namespace Z0
 
         ApiMembers Jit(IApiHost src);
 
-        ApiMember[] Jit(Index<ApiRuntimeType> src);
-
+        ApiMembers Jit(Index<ApiRuntimeType> src);
     }
 }

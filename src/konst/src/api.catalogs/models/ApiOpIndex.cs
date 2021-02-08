@@ -50,7 +50,7 @@ namespace Z0
         IEnumerable<KeyedValue<OpIdentity,T>> KeyedValues
             => HashTable.Select(x => KeyedValue.define(x.Key, x.Value));
 
-        public IEnumerator<KeyedValue<OpIdentity, T>> GetEnumerator()
+        public IEnumerator<KeyedValue<OpIdentity,T>> GetEnumerator()
             => KeyedValues.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()

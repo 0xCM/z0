@@ -9,18 +9,16 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Call
+    public readonly struct Loop : ILoop
     {
-        public Function Target {get;}
+        public CodeBlock Block {get;}
 
-        public Index<Operand> Operands {get;}
+        public Index<LoopVar> Vars {get;}
 
-        [MethodImpl(Inline)]
-        public Call(Function f, params Operand[] args)
+        public Loop(CodeBlock block, Index<LoopVar> vars)
         {
-            Target = f;
-            Operands = args;
+            Block = block;
+            Vars = vars;
         }
     }
-
 }

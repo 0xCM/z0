@@ -134,6 +134,5 @@ namespace Z0
         [Op]
         static Option<IPart> resolve(PropertyInfo src)
             => root.@try(src, x => (IPart)x.GetValue(null));
-
     }
 }

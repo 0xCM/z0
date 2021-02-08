@@ -9,20 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Function : IDeclaration<Function>
+    public readonly struct ScalarDec : IExpr<ScalarDec>
     {
-        public Identifier Name {get;}
-
-        public Index<Operand> Operands {get;}
-
-        public Index<Statement> Statements {get;}
+        public long Step {get;}
 
         [MethodImpl(Inline)]
-        public Function(Identifier name, Index<Operand> operands, Index<Statement> statements)
+        public ScalarDec(long step)
         {
-            Name = name;
-            Operands = operands;
-            Statements = statements;
+            Step = step;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct ApiMemberIndex : IApiOpIndex<ApiMember>
     {
-        readonly Dictionary<OpIdentity, ApiMember> Data;
+        readonly Dictionary<OpIdentity,ApiMember> Data;
 
         readonly OpIdentity[] Duplicates;
 

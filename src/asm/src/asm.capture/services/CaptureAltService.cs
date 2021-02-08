@@ -14,7 +14,7 @@ namespace Z0
         public ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<MethodInfo> src)
             => CaptureAlt.capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
 
-        public ReadOnlySpan<ApiCaptureBlock> Capture(Type src)
+        public ReadOnlySpan<ApiCaptureBlock> Capture(ApiHostCatalog src)
             => CaptureAlt.capture(src);
 
         public ReadOnlySpan<ApiCaptureBlock> Capture(ReadOnlySpan<IdentifiedMethod> src)

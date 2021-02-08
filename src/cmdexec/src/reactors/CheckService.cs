@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using Z0.Asm;
 
     sealed class CheckService : CmdReactor<CheckServiceCmd>
     {
@@ -19,7 +19,8 @@ namespace Z0
 
         void CheckBitMasks()
         {
-            var asmWf = AsmWorkflows.create(Wf);
+
+            var asmWf = AsmServices.workflow(Wf);
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
             var dst = Wf.AppData + FS.file("bitmasks", FileExtensions.Asm);
             var routines = asmWf.Decode(methods, dst);

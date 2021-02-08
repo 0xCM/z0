@@ -21,6 +21,24 @@ namespace Z0
         public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<MethodInfo> src)
             => capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
 
+        public static ReadOnlySpan<ApiCaptureBlock> capture(ApiHostCatalog src)
+        {
+            var members = src.Members.View;
+            var count = members.Length;
+            var blocks = sys.alloc<ApiCaptureBlock>(count);
+            ref var b = ref first(blocks);
+            var buffer = sys.alloc<byte>(Pow2.T14);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var member = ref skip(members, i);
+                var address = member.BaseAddress;
+                var id = member.Id;
+                var summary = capture(buffer, id, address);
+                var outcome = summary.Outcome;
+                seek(b,i) = block(id, member.Method, summary.Encoded, outcome.TermCode);
+            }
+            return blocks;
+        }
         [Op]
         public static ReadOnlySpan<ApiCaptureBlock> capture(Type src)
             => capture(src.DeclaredMethods());

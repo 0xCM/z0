@@ -16,8 +16,9 @@ namespace Z0.Lang
 
     public readonly struct ByteBlockValue
     {
-        public byte[] Content {get;}
+        public BinaryCode Content {get;}
 
+        [MethodImpl(Inline)]
         public ByteBlockValue(byte[] content)
         {
             Content = content;

@@ -9,20 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Function : IDeclaration<Function>
+    public readonly struct LoopVar
     {
-        public Identifier Name {get;}
+        public ILoop Loop {get;}
 
-        public Index<Operand> Operands {get;}
-
-        public Index<Statement> Statements {get;}
+        public Var Variable {get;}
 
         [MethodImpl(Inline)]
-        public Function(Identifier name, Index<Operand> operands, Index<Statement> statements)
+        public LoopVar(ILoop loop, Var var)
         {
-            Name = name;
-            Operands = operands;
-            Statements = statements;
+            Loop = loop;
+            Variable = var;
         }
     }
 }

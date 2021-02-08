@@ -39,7 +39,7 @@ namespace Z0
         public void Emit()
         {
             var flow = Wf.Running();
-            var x0 = run(Wf, Extracts, EmitExtracts);
+            var x0 = run(Wf, Extracts, Emit);
             if(x0)
             {
                 var x1 = run(Wf, Extracts, ParseExtracts);
@@ -57,7 +57,7 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        Index<ApiCodeExtract> EmitExtracts(Index<ApiMemberExtract> src)
+        public Index<ApiCodeExtract> Emit(Index<ApiMemberExtract> src)
         {
             var emitted = sys.empty<ApiCodeExtract>();
             var count = src.Length;
@@ -82,10 +82,10 @@ namespace Z0
                 return Index<ApiMemberCode>.Empty;
         }
 
-        Index<ApiHexRow> EmitApiHex(Index<ApiMemberCode> src)
+        public Index<ApiHexRow> EmitApiHex(Index<ApiMemberCode> src)
             => ApiHexRows.emit(Wf, HostUri, src.View);
 
-        Count EmitCil(Index<ApiMemberCode> src)
+        public Count EmitCil(Index<ApiMemberCode> src)
         {
             if(src.Count != 0)
             {

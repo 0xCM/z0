@@ -17,13 +17,14 @@ namespace Z0.Lang
 
         public Identifier Name => "block";
 
-        public BitSize Width => throw new NotImplementedException();
+        public BitSize Width {get;}
 
         [MethodImpl(Inline)]
-        public DataBlock(SegmentKind kind, uint count)
+        public DataBlock(SegmentKind kind, uint count, BitSize width)
         {
             SegKind = kind;
             SegCount = count;
+            Width = width;
         }
     }
 }

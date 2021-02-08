@@ -23,7 +23,7 @@ namespace Z0.Asm
             Etl = AsmEtl.catalog(Wf);
             AsmParser = AsmExpr.parser(Wf);
             TextBuffer = text.buffer();
-
+            Asm = AsmServices.context(Wf);
         }
 
         AsmCatalogEtl Etl;
@@ -31,6 +31,8 @@ namespace Z0.Asm
         AsmExprParser AsmParser;
 
         ITextBuffer TextBuffer;
+
+        IAsmContext Asm;
 
         void ShowSigOpTokens()
         {
@@ -160,9 +162,7 @@ namespace Z0.Asm
                         else
                             TextBuffer.AppendFormat(" | {0}", op.Content);
                     }
-
                 }
-
             }
 
             Wf.Row(TextBuffer.Emit());
@@ -181,14 +181,30 @@ namespace Z0.Asm
             }
         }
 
-        public void DescribeHosts()
+        public void EmitHostAsm(Type host)
         {
-            var catalog = ApiCatalogs.host(Wf,typeof(ScalarBitLogic));
-            var records = catalog.Describe();
-            var dst = Db.IndexTable<ApiMemberInfo>();
-            var flow = Wf.EmittingTable<ApiMemberInfo>(dst);
-            var count = Records.emit(records,dst);
-            Wf.EmittedTable(flow,count);
+            var catalog = ApiCatalogs.host(Wf,host);
+            var svc = AsmServices.alt(Wf,Asm);
+            var blocks = svc.Capture(catalog);
+            var bk = blocks.Length;
+            var decoder = Asm.RoutineDecoder;
+            var formatter = Asm.Formatter;
+            var buffer = text.buffer();
+            var path = Db.AppLog($"{host.Name}", FileExtensions.Asm);
+            var flow = Wf.EmittingFile(path);
+            using var writer = path.Writer();
+            var count = 0;
+            for(var i=0; i<bk; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+                if(decoder.Decode(block, out var routine))
+                {
+                    formatter.Format(routine, buffer);
+                    writer.Write(buffer.Emit());
+                    count++;
+                }
+            }
+            Wf.EmittedFile(flow, $"{count} routines", path);
         }
 
         public void GenBits()
@@ -211,7 +227,9 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            DescribeHosts();
+            var host = typeof(gmath);
+
+            EmitHostAsm(host);
         }
 
         public static void Main(params string[] args)

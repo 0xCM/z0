@@ -84,7 +84,13 @@ namespace Z0
     struct App
     {
         public static void run(string[] args)
-            => app(wf(args)).Run();
+            => app(shell(args)).Run();
+
+        static App app(IWfShell wf)
+            => new App(wf, AsmServices.context(wf));
+
+        static IWfShell shell(string[] args)
+            => WfShell.create(args).WithRandom(Rng.@default());
 
         IWfShell Wf;
 
@@ -95,13 +101,6 @@ namespace Z0
             Wf = wf;
             Asm = asm;
         }
-
-        static App app(IWfShell wf)
-            => new App(wf, AsmWorkflows.context(wf));
-
-
-        static IWfShell wf(string[] args)
-            => WfShell.create(args).WithRandom(Rng.@default());
 
         void Run()
         {

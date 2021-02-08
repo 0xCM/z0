@@ -12,8 +12,16 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmServices : IAsmServices
     {
+        [Op]
+        public static IAsmWf workflow(IWfShell wf)
+            => new AsmWf(wf, context(wf));
+
+        [Op]
+        public static IAsmContext context(IWfShell wf)
+            => new AsmContext(Apps.context(wf), wf);
+
         [MethodImpl(Inline), Op]
-        public static AsmServices init(IWfShell wf, IAsmContext asm)
+        public static IAsmServices init(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
 
         [MethodImpl(Inline), Op]

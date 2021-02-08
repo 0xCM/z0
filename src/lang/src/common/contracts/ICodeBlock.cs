@@ -4,18 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-
-    public interface ILanguage
+    public interface ICodeBlock
     {
-        Type Metatype {get;}
+
     }
 
-    public interface ILanguage<L> : ILanguage
-    {
-        Name Id {get;}
-
-        Type ILanguage.Metatype
-            => typeof(L);
-    }
 }

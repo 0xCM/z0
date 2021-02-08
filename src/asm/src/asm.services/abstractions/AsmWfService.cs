@@ -11,11 +11,11 @@ namespace Z0.Asm
     {
         protected IAsmWf AsmWf {get; private set;}
 
-        protected AsmServices Services {get; private set;}
+        protected IAsmServices Services {get; private set;}
 
         protected override void OnInit()
         {
-            AsmWf = AsmWorkflows.create(Wf);
+            AsmWf = AsmServices.workflow(Wf);
             Services = AsmServices.init(Wf, AsmWf.Asm);
         }
 

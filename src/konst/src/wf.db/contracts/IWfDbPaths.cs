@@ -70,6 +70,15 @@ namespace Z0
         FS.FolderPath LogRoot()
             => Root + FS.folder(logs);
 
+        FS.FolderPath AppLogRoot()
+            => LogRoot() + FS.folder("apps");
+
+        FS.FilePath AppLog(string id)
+            =>  AppLogRoot() + FS.file(id,Log);
+
+        FS.FilePath AppLog(string id, FS.FileExt ext)
+            => AppLogRoot() + FS.file(id,ext);
+
         FS.FolderPath BuildLogRoot()
             => LogRoot() + FS.folder("build");
 

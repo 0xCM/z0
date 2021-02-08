@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
+    using System;
     using static Prototypes.Branch01;
+
 
     partial struct Prototypes
     {

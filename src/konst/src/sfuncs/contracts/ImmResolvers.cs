@@ -16,9 +16,6 @@ namespace Z0
             NumericKind ImmKind
                 => NumericKind.None;
 
-            ArityValue ResolvedArity
-                => ArityValue.Nullary;
-
             TypeWidth OperandWidth
                 => TypeWidth.None;
         }
@@ -47,9 +44,6 @@ namespace Z0
 
             TypeWidth IImmResover.OperandWidth
                 => Widths.type<W>();
-
-            ArityValue IImmResover.ResolvedArity
-                => ArityValue.Unary;
         }
 
         [Free, SFx]
@@ -61,9 +55,6 @@ namespace Z0
 
             TypeWidth IImmResover.OperandWidth
                 => Widths.type<W>();
-
-            ArityValue IImmResover.ResolvedArity
-                => ArityValue.Binary;
         }
 
         [Free, SFx]

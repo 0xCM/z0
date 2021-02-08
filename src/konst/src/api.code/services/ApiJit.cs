@@ -94,7 +94,7 @@ namespace Z0
             return all.OrderBy(x => x.BaseAddress);
         }
 
-        public ApiMember[] Jit(Index<ApiRuntimeType> src)
+        public ApiMembers Jit(Index<ApiRuntimeType> src)
         {
             var dst = root.list<ApiMember>();
             var count = src.Count;

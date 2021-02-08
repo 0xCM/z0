@@ -70,7 +70,6 @@ namespace Z0
             CaptureOps(src.OperationHosts);
         }
 
-
         void Capture(IApiHost api)
         {
             var flow = Wf.Running(api.Name);

@@ -9,8 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct CellStore
+    public readonly struct ScalarInc : IExpr<ScalarInc>
     {
+        public long Step {get;}
 
+        [MethodImpl(Inline)]
+        public ScalarInc(long step)
+        {
+            Step = step;
+        }
     }
 }

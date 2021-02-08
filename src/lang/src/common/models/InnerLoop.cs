@@ -9,20 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Function : IDeclaration<Function>
+    public readonly struct InnerLoop : ILoop
     {
-        public Identifier Name {get;}
+        public ILoop Outer {get;}
 
-        public Index<Operand> Operands {get;}
-
-        public Index<Statement> Statements {get;}
+        public CodeBlock Block {get;}
 
         [MethodImpl(Inline)]
-        public Function(Identifier name, Index<Operand> operands, Index<Statement> statements)
+        public InnerLoop(ILoop outer, CodeBlock block)
         {
-            Name = name;
-            Operands = operands;
-            Statements = statements;
+            Outer = outer;
+            Block = block;
         }
     }
 }

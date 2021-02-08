@@ -30,6 +30,7 @@ namespace Z0
         public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
             => new ApiCaptureRunner(wf, asm, WfShell.host(typeof(ApiCaptureRunner)));
 
+
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
