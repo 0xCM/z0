@@ -20,7 +20,7 @@ namespace Z0
             var src = gcpu.vinc<byte>(w);
             var lut = VLut.init(src);
 
-            var content = gvec.vinc<byte>(w, 64);
+            var content = gcpu.vinc<byte>(w, 64);
             var selected =  VLut.select(lut,content); //dvec.vshuf16x8(items, table);
             Claim.veq(content, selected);
         }
@@ -32,7 +32,7 @@ namespace Z0
             var src = gcpu.vinc<byte>(w);
             var lut = VLut.init(src);
 
-            var content = gvec.vinc<byte>(w, 64);
+            var content = gcpu.vinc<byte>(w, 64);
             var selected =  VLut.select(lut,content); //dvec.vshuf32x8(items, table);
             Claim.veq(content, selected);
         }

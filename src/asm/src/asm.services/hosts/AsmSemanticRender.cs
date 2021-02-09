@@ -118,7 +118,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
-                var size = (uint)instruction.Size;
+                var size = instruction.ByteLength;
                 Render(instruction, address, offset, sequence);
                 address += size;
                 offset += size;
@@ -200,7 +200,7 @@ namespace Z0.Asm
         [Op]
         void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
         {
-            var @base = src.Base;
+            var @base = src.BaseAddress;
             var fx = src.Instruction;
             var encoded = Format(src.Encoded);
             var location = LineLocation(fx, address, offset, seq);
@@ -237,16 +237,11 @@ namespace Z0.Asm
                 text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
-        static string format(AsmInstructionSpecExprLegacy src)
-        {
-            return src.Format();
-        }
-
         [Op]
         string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSequence seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
-            var right = text.concat(src.FormattedInstruction, SpecifierSep, format(src.Specifier), EncodingSep, Format(src.Encoded));
+            var right = text.concat(src.FormattedInstruction, SpecifierSep, src.Specifier.Format(), EncodingSep, Format(src.Encoded));
             return text.concat(left, ColSep, right);
         }
 

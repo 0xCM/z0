@@ -10,16 +10,16 @@ namespace Z0
 
     using static Part;
 
-    partial class gvec
+    partial struct gcpu
     {
-        [MethodImpl(Inline), LNot, Closures(Integers)]
-        public static Vector128<T> vlnot<T>(Vector128<T> a, Vector128<T> b)
+        [MethodImpl(Inline), LProject, Closures(Integers)]
+        public static Vector128<T> vleft<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
-                => gcpu.vnot(a);
+                => a;
 
-        [MethodImpl(Inline), LNot, Closures(Integers)]
-        public static Vector256<T> vlnot<T>(Vector256<T> a, Vector256<T> b)
+        [MethodImpl(Inline), LProject, Closures(Integers)]
+        public static Vector256<T> vleft<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
-                => gcpu.vnot(a);
+                => a;
     }
 }

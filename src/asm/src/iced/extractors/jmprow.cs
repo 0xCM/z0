@@ -15,11 +15,11 @@ namespace Z0.Asm
         public static ref AsmJmpRow jmprow(in ApiInstruction src, JccKind jk, out AsmJmpRow dst)
         {
             dst.Kind = jk;
-            dst.Base = src.Base;
+            dst.Base = src.BaseAddress;
             dst.Source = src.IP;
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
-            dst.Target = branch(src.Base, src.Instruction, 0).Target.Address;
+            dst.Target = branch(src.BaseAddress, src.Instruction, 0).Target.Address;
             dst.Asm = src.FormattedInstruction;
             return ref dst;
         }

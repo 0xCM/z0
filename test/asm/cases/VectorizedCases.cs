@@ -25,6 +25,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vxor<T>(Vector256<T> a, Vector256<T> b)
             where T : unmanaged
-                => gvec.vxor(a,b);
+                => gcpu.vxor(a,b);
     }
 }

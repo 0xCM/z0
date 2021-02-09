@@ -22,11 +22,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                random.MarkovSpan(Spans.s32f(dst));
+                random.MarkovSpan(memory.float32(dst));
             else if(typeof(T) == typeof(double))
-                random.MarkovSpan(Spans.s64f(dst));
+                random.MarkovSpan(memory.float64(dst));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return random.MarkovBlock(length, 1.0, length << 4).As<T>();
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

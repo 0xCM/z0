@@ -28,7 +28,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> xor(Vector256<T> a, Vector256<T> b)
-                => gvec.vxor(a,b);
+                => gcpu.vxor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> cimpl(Vector256<T> a, Vector256<T> b)
@@ -48,7 +48,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> impl(Vector256<T> a, Vector256<T> b)
-                => gvec.vimpl(a,b);
+                => gcpu.vimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nand(Vector256<T> a, Vector256<T> b)
@@ -56,11 +56,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> nonimpl(Vector256<T> a, Vector256<T> b)
-                => gvec.vnonimpl(a,b);
+                => gcpu.vnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> nor(Vector256<T> a, Vector256<T> b)
-                => gvec.vnor(a,b);
+                => gcpu.vnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> not(Vector256<T> a)
@@ -68,7 +68,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> select(Vector256<T> a, Vector256<T> b, Vector256<T> c)
-                => gvec.vselect(a,b,c);
+                => gcpu.vselect(a,b,c);
 
             [MethodImpl(Inline)]
             public Vector256<T> @true()
@@ -76,7 +76,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> xnor(Vector256<T> a, Vector256<T> b)
-                => gvec.vxnor(a,b);
+                => gcpu.vxnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, K f = default)

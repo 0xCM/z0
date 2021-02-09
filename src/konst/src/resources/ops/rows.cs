@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct Resources
     {
-        public static TableSpan<BinaryResRow> rows(BinaryResLookup src)
+        public static Index<BinaryResRow> rows(BinaryResLookup src)
         {
             var view = src.View;
             var count = view.Length;
@@ -36,7 +36,6 @@ namespace Z0
             ref readonly var target = ref first(dst);
             ref readonly var source = ref first(view);
             var start = target.Address;
-
             for(var i=0u; i<count; i++)
             {
                 ref var x = ref seek(target,i);

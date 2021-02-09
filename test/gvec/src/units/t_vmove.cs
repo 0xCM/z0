@@ -12,7 +12,7 @@ namespace Z0
     {
         public void vmove_128x16u()
         {
-            var src = gvec.vinc(w128,z16);
+            var src = gcpu.vinc(w128,z16);
             Claim.eq((ushort)3, cpu.vmove(src, w16, n3, n0));
             Claim.eq((ushort)2, cpu.vmove(src, w16, n2, n0));
             Claim.eq((ushort)1, cpu.vmove(src, w16, n1, n0));

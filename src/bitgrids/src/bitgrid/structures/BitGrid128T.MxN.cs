@@ -88,7 +88,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BitGrid128<M,N,T> rhs)
-            => gvec.vtestc(gvec.veq(Data,rhs));
+            => gcpu.vtestc(gcpu.veq(Data,rhs));
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

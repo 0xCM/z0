@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
     using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Decrements each component by unit value
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Vector128<T> vdec<T>(N128 n, T first)
             where T : unmanaged
-                => vsub(first, gcpu.vdec<T>(n));
+                => vsub(first, vdec<T>(n));
 
         /// <summary>
         /// Creates a 256-bit vector with components that decrease by unit step from an initial value
@@ -54,7 +54,7 @@ namespace Z0
         [MethodImpl(Inline), Dec, Closures(Integers)]
         public static Vector256<T> vdec<T>(N256 n, T first)
             where T : unmanaged
-                => vsub(first, gcpu.vdec<T>(n));
+                => vsub(first, vdec<T>(n));
 
         [MethodImpl(Inline)]
         static Vector128<T> vdec_u<T>(Vector128<T> src)

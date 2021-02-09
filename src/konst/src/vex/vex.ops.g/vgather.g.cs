@@ -12,7 +12,7 @@ namespace Z0
     using static cpu;
     using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)

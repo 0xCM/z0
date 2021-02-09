@@ -37,10 +37,10 @@ namespace Z0
         public void vpack_128()
         {
             var w = w128;
-            var a = gvec.vinc<uint>(w,0);
-            var b = gvec.vinc<uint>(w,4);
-            var c = gvec.vinc<uint>(w,8);
-            var d = gvec.vinc<uint>(w,12);
+            var a = gcpu.vinc<uint>(w,0);
+            var b = gcpu.vinc<uint>(w,4);
+            var c = gcpu.vinc<uint>(w,8);
+            var d = gcpu.vinc<uint>(w,12);
             Vector512<uint> v512 = (a,b,c,d);
             var abActual = cpu.vpack128x16u(a,b, w);
             var abExpect = gcpu.vinc<ushort>(w);
@@ -58,10 +58,10 @@ namespace Z0
 
             var vsmax = cpu.vbroadcast(w, (ushort)cellmax);
             var vtmax = cpu.vbroadcast(w,cellmax);
-            var expect = cpu.vsub(vtmax, gvec.vinc(w,z8));
+            var expect = cpu.vsub(vtmax, gcpu.vinc(w,z8));
 
-            var x = cpu.vsub(vsmax, gvec.vinc(w, z16));
-            var y = cpu.vsub(vsmax, gvec.vinc(w, (ushort)8));
+            var x = cpu.vsub(vsmax, gcpu.vinc(w, z16));
+            var y = cpu.vsub(vsmax, gcpu.vinc(w, (ushort)8));
             var actual = cpu.vpack128x8u(x, y, w128);
 
             Claim.veq(expect,actual);
@@ -74,10 +74,10 @@ namespace Z0
 
             var vsmax = cpu.vbroadcast(w, (ushort)cellmax);
             var vtmax = cpu.vbroadcast(w,cellmax);
-            var expect = cpu.vsub(vtmax, gvec.vinc(w,z8));
+            var expect = cpu.vsub(vtmax, gcpu.vinc(w,z8));
 
-            var x = cpu.vsub(vsmax, gvec.vinc(w, z16));
-            var y = cpu.vsub(vsmax, gvec.vinc(w, (ushort)16));
+            var x = cpu.vsub(vsmax, gcpu.vinc(w, z16));
+            var y = cpu.vsub(vsmax, gcpu.vinc(w, (ushort)16));
             var actual = cpu.vpack256x8u(x, y,w256);
 
             Claim.veq(expect,actual);
@@ -90,10 +90,10 @@ namespace Z0
 
             var vsmax = cpu.vbroadcast(w, (uint)cellmax);
             var vtmax = cpu.vbroadcast(w,cellmax);
-            var expect = cpu.vsub(vtmax, gvec.vinc(w,z16));
+            var expect = cpu.vsub(vtmax, gcpu.vinc(w,z16));
 
-            var x = cpu.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = cpu.vsub(vsmax, gvec.vinc(w, 4u));
+            var x = cpu.vsub(vsmax, gcpu.vinc(w, 0u));
+            var y = cpu.vsub(vsmax, gcpu.vinc(w, 4u));
             var actual = cpu.vpack128x16u(x,y, w128);
 
             Claim.veq(expect,actual);
@@ -107,10 +107,10 @@ namespace Z0
             var vsmax = gcpu.vbroadcast<uint>(w, (uint)cellmax);
             var vtmax = cpu.vbroadcast(w,cellmax);
 
-            var x = cpu.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = cpu.vsub(vsmax, gvec.vinc(w, 8u));
+            var x = cpu.vsub(vsmax, gcpu.vinc(w, 0u));
+            var y = cpu.vsub(vsmax, gcpu.vinc(w, 8u));
             var v = cpu.vpack256x16u(x,y,n256);
-            var expect = cpu.vsub(vtmax, gvec.vinc(w, z16));
+            var expect = cpu.vsub(vtmax, gcpu.vinc(w, z16));
             Claim.veq(expect,v);
         }
 

@@ -155,20 +155,21 @@ namespace Z0.Asm
             if(check)
                 CheckBlockLength(src);
 
-            return new AsmRoutine(meta, uri, sig, src.Encoded, src.TermCode, icelist(src.Decoded, src.Encoded.Code));
-        }
-
-        static AsmRoutine routine(ApiCaptureBlock captured, IceInstructionList src)
-        {
-            var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
-            return new AsmRoutine(captured.ArtifactKey, captured.OpUri, captured.Method.Metadata().DisplaySig, code, captured.TermCode, src);
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, AsmEtl.ApiInstructions(src.Encoded, src.Decoded));
+            //return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, icelist(src.Decoded, src.Encoded.Code));
         }
 
         static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
-            return new AsmRoutine(member.MetaUri, member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));
+            return new AsmRoutine(member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, AsmEtl.ApiInstructions(code, asm));
         }
+
+        // static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
+        // {
+        //     var code = new ApiCodeBlock(member.OpUri, member.Encoded);
+        //     return new AsmRoutine(member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, new IceInstructionList(asm, member.Encoded));
+        // }
 
         [MethodImpl(Inline), Op]
         static IceInstructionList icelist(IceInstruction[] src, CodeBlock data)

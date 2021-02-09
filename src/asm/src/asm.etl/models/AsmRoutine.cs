@@ -37,26 +37,32 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public IceInstructionList Instructions {get;}
+        public Index<ApiInstruction> Instructions {get;}
 
         /// <summary>
         /// Specifies the reason for capture termination
         /// </summary>
         public ExtractTermCode TermCode {get;}
 
-        /// <summary>
-        /// The operation metadata uri
-        /// </summary>
-        public ApiArtifactKey MetaUri {get;}
+        // [MethodImpl(Inline)]
+        // public AsmRoutine(OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
+        // {
+        //     Uri = uri;
+        //     OpId = uri.OpId;
+        //     DisplaySig = sig;
+        //     Instructions = instructions;
+        //     Code = code;
+        //     TermCode =term;
+        // }
 
         [MethodImpl(Inline)]
-        public AsmRoutine(ApiArtifactKey meta, OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
+        public AsmRoutine(OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, Index<ApiInstruction> instructions)
         {
-            MetaUri = meta;
             Uri = uri;
             OpId = uri.OpId;
             DisplaySig = sig;
             Instructions = instructions;
+            //Instructions = new IceInstructionList(instructions.Map(x => x.Instruction), code);
             Code = code;
             TermCode =term;
         }
@@ -86,6 +92,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(ApiArtifactKey.Empty, OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, IceInstructionList.Empty);
+            => new AsmRoutine(OpUri.Empty, ClrDisplaySig.Empty, ApiCodeBlock.Empty, 0, Index<ApiInstruction>.Empty);
     }
 }

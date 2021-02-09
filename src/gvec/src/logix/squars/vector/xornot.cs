@@ -17,12 +17,12 @@ namespace Z0
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static Vector128<T> vxornot<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vxornot(vload(w, in a), vload(w, in b));
+                => gcpu.vxornot(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static Vector256<T> vxornot<T>(W256 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vxornot(vload(w, in a),vload(w, in b));
+                => gcpu.vxornot(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), XorNot, Closures(Closure)]
         public static void xornot<T>(W128 w, in T a, in T b, ref T c)

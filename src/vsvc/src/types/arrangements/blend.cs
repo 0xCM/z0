@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, [Imm] byte spec)
-                => gvec.vblend2x64(x,y,spec);
+                => gcpu.vblend2x64(x,y,spec);
         }
 
         [Closures(Integers)]
@@ -28,7 +28,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, [Imm] byte spec)
-                => gvec.vblend4x64(x,y,spec);
+                => gcpu.vblend4x64(x,y,spec);
         }
 
         [Closures(Integers)]
@@ -37,7 +37,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, [Imm] byte spec)
-                => gvec.vblend4x32(x,y,spec);
+                => gcpu.vblend4x32(x,y,spec);
         }
 
         [Closures(Integers)]
@@ -46,7 +46,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, [Imm] byte spec)
-                => gvec.vblend8x32(x,y,spec);
+                => gcpu.vblend8x32(x,y,spec);
         }
 
         [Closures(Integers)]

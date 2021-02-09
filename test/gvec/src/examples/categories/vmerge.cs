@@ -39,8 +39,8 @@ namespace Z0
             var w = n256;
             var t = z32;
             var count = cpu.vcount(w,t);
-            var a = gvec.vinc(w,t);
-            var b = gvec.vinc(w, (a.LastCell() + 1));
+            var a = gcpu.vinc(w,t);
+            var b = gcpu.vinc(w, (a.LastCell() + 1));
             var c = cpu.vmergelo(a,b);
             var fmt = $"({a.Format()},{b.Format()}) -> {c.Format()}";
         }
@@ -50,8 +50,8 @@ namespace Z0
         {
             var w = n256;
             var t = z8;
-            var x = gvec.vinc(w,t);
-            var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
+            var x = gcpu.vinc(w,t);
+            var y = gcpu.vinc(w, (byte)(x.LastCell() + 1));
             var _z = cpu.vmerge(x,y);
             Notify($"vmerge_256");
             Notify(x.Format());
@@ -64,8 +64,8 @@ namespace Z0
         {
             var w = n256;
             var t = z8;
-            var x = gvec.vinc(w,t);
-            var y = gvec.vinc(w, (byte)(x.LastCell() + 1));
+            var x = gcpu.vinc(w,t);
+            var y = gcpu.vinc(w, (byte)(x.LastCell() + 1));
             var _z = cpu.vmergehi(x,y);
             Notify($"vmerge_hi");
             Notify(x.Format());

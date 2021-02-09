@@ -139,13 +139,13 @@ namespace Z0.Logix
             var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
-                expect = gvec.vlt(x,y);
-                actual = gvec.vlt(x,y);
-                Claim.Require(gvec.vsame(expect,actual));
+                expect = gcpu.vlt(x,y);
+                actual = gcpu.vlt(x,y);
+                Claim.Require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
-                x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);
+                x = gcpu.vxor(x,a);
+                y = gcpu.vxor(y,a);
             }
         }
 
@@ -158,13 +158,13 @@ namespace Z0.Logix
             var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
-                expect = gvec.vlt(x,y);
-                actual = gvec.vlt(x,y);
-                Claim.Require(gvec.vsame(expect,actual));
+                expect = gcpu.vlt(x,y);
+                actual = gcpu.vlt(x,y);
+                Claim.Require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
-                x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);
+                x = gcpu.vxor(x,a);
+                y = gcpu.vxor(y,a);
             }
 
         }
@@ -178,9 +178,9 @@ namespace Z0.Logix
             var actual = gcpu.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
             {
-                expect = gvec.vgt(x,y);
-                actual = gvec.vgt(x,y);
-                Claim.Require(gvec.vsame(expect,actual));
+                expect = gcpu.vgt(x,y);
+                actual = gcpu.vgt(x,y);
+                Claim.Require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
@@ -198,13 +198,13 @@ namespace Z0.Logix
             var actual = gcpu.vzero<T>(n);
             for(var i=0; i<RepCount; i++)
             {
-                expect = gvec.vgt(x,y);
-                actual = gvec.vgt(x,y);
-                Claim.Require(gvec.vsame(expect,actual));
+                expect = gcpu.vgt(x,y);
+                actual = gcpu.vgt(x,y);
+                Claim.Require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
-                x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);
+                x = gcpu.vxor(x,a);
+                y = gcpu.vxor(y,a);
             }
 
         }

@@ -92,7 +92,6 @@ namespace Z0.Asm
             var @base = src.BaseAddress;
             var view = src.Instructions.View;
             var dst = span(buffer);
-
             for(var i=0u; i<count; i++)
             {
                 ref readonly var instruction = ref skip(view,i);
@@ -104,7 +103,7 @@ namespace Z0.Asm
                     continue;
                 }
 
-                seek(dst, i) = IceExtractors.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
+                seek(dst, i) = IceExtractors.summarize(@base, instruction.Instruction, src.Code.Code, instruction.FormattedInstruction, offset);
                 offset += size;
             }
             return dst;

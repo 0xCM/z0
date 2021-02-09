@@ -19,7 +19,7 @@ namespace Z0.Asm
             var fx = src.Instructions.View;
             var count = fx.Length;
             for(var i=0u; i<count; i++)
-                hander.Handle(skip(fx, i));
+                hander.Handle(skip(fx, i).Instruction);
             return hander.Collected;
         }
     }

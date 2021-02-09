@@ -47,7 +47,7 @@ namespace Z0.Asm
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => slice(bytes2(Data),0, 3);
+            get => slice(bytes(Data),0, 3);
         }
 
         public bit IsEscaped

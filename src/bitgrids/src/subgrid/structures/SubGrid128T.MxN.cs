@@ -120,7 +120,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(SubGrid128<M,N,T> rhs)
-            => gvec.vsame(Data,rhs.Data);
+            => gcpu.vsame(Data,rhs.Data);
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();

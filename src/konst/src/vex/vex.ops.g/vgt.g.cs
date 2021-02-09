@@ -12,7 +12,7 @@ namespace Z0
     using static cpu;
     using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Gt, Closures(Integers)]
         public static Vector128<T> vgt<T>(Vector128<T> x, Vector128<T> y)

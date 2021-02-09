@@ -65,7 +65,7 @@ namespace Z0
             for(var i = 0; i<RepCount; i++)
             {
                 var vidx = Random.CpuVector(w,domain);
-                var x = gvec.vgather(src, vidx);
+                var x = gcpu.vgather(src, vidx);
                 Claim.veq(vidx,x);
             }
         }
@@ -82,7 +82,7 @@ namespace Z0
             for(var i = 0; i<RepCount; i++)
             {
                 var vidx = Random.CpuVector(w,domain);
-                var x = gvec.vgather(src, vidx);
+                var x = gcpu.vgather(src, vidx);
                 Claim.veq(vidx,x);
             }
         }

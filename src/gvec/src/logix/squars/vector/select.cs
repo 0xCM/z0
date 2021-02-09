@@ -34,29 +34,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Select, Closures(Closure)]
-        public static void select<T>(W128 n, in T a, in T b, in T c, ref T z)
+        public static void select<T>(W128 n, in T a, in T b, in T c, ref T dst)
             where T : unmanaged
-                => gcpu.vstore(vselect(n, in a, in b, in c), ref z);
+                => gcpu.vstore(vselect(n, a, b, c), ref dst);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
-        public static void select<T>(W256 n, in T a, in T b, in T c, ref T z)
+        public static void select<T>(W256 n, in T a, in T b, in T c, ref T dst)
             where T : unmanaged
-                => gcpu.vstore(vselect(n, in a, in b, in c), ref z);
+                => gcpu.vstore(vselect(n, a, b, c), ref dst);
 
         [MethodImpl(Inline), Select, Closures(Closure)]
-        public static void select<T>(W128 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
+        public static void select<T>(W128 n, int vcount, int blocklen, in T a, in T b, in T c, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(z, offset));
+                select(n, skip(a, offset), skip(b, offset), skip(c, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), Select, Closures(Closure)]
-        public static void select<T>(W256 n, int vcount, int blocklen, in T a, in T b, in T c, ref T z)
+        public static void select<T>(W256 n, int vcount, int blocklen, in T a, in T b, in T c, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i<vcount; i++, offset += blocklen)
-                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(z, offset));
+                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(dst, offset));
         }
     }
 }

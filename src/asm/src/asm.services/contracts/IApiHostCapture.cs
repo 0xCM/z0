@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
 
+    using static Part;
     using static memory;
 
-    partial struct Resources
+    public interface IApiHostCapture
     {
-
+        ApiHostCaptureSet EmitCaptureSet(Type host);
     }
 }

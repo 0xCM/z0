@@ -80,7 +80,7 @@ namespace Z0.Asm
         public Count InstructionCount
             => (uint)Data.Storage.Sum(i => (long)i.InstructionCount);
 
-        public ApiInstructionBlock Instructions()
+        public ApiInstructions Instructions()
             => Data.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
     }
 }

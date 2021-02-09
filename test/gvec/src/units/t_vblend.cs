@@ -29,10 +29,10 @@ namespace Z0
         public void vblend_256x8u_outline()
         {
             var w = n256;
-            var a = gvec.vinc(w, z8);
-            var b = gvec.vdec(w, Max8u);
+            var a = gcpu.vinc(w, z8);
+            var b = gcpu.vdec(w, Max8u);
             var spec = z.v8u(cpu.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
-            var c = gvec.vblend(a,b,spec);
+            var c = gcpu.vblend(a,b,spec);
         }
 
         public void vblend_128x16u_outline()
@@ -40,9 +40,9 @@ namespace Z0
             var w = n128;
             var alt = (uint)M.Msb16x8x1 << 16;
             cpu.vcover(z.v16u(cpu.vbroadcast(w,alt)), out Vector128<byte> spec);
-            var a = gvec.vinc(w,z16);
-            var b = gvec.vdec(w,Max16u);
-            var c = gvec.vblend(a,b,spec);
+            var a = gcpu.vinc(w,z16);
+            var b = gcpu.vdec(w,Max16u);
+            var c = gcpu.vblend(a,b,spec);
         }
 
         public void vblend_256x16u_outline()
@@ -51,9 +51,9 @@ namespace Z0
             var altOdd = (uint)M.Msb16x8x1 << 16;
             var altEven = (uint)M.Msb16x8x1;
             cpu.vcover(z.v16u(gcpu.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
-            var a = gvec.vinc(w,z16);
-            var b = gvec.vdec(w,Max16u);
-            var c = gvec.vblend(a,b,spec);
+            var a = gcpu.vinc(w,z16);
+            var b = gcpu.vdec(w,Max16u);
+            var c = gcpu.vblend(a,b,spec);
         }
 
         public void valignr_examples()
@@ -171,8 +171,8 @@ namespace Z0
             var o = cpu.vparts(8,1,A,3,C,5,E,7);
             var mEven = cpu.vblendspec(n,false,n32);
             var mOdd = cpu.vblendspec(n,true,n32);
-            Claim.veq(e,gvec.vblend(x,y,mEven));
-            Claim.veq(o,gvec.vblend(x,y,mOdd));
+            Claim.veq(e, gcpu.vblend(x,y,mEven));
+            Claim.veq(o, gcpu.vblend(x,y,mOdd));
         }
 
         public void vblend_32x8_256x64u_basecase()
@@ -184,8 +184,8 @@ namespace Z0
             var o = cpu.vparts(n,4,1,6,3);
             var mEven = cpu.vblendspec(n,false,n64);
             var mOdd = cpu.vblendspec(n,true,n64);
-            Claim.veq(e,gvec.vblend(x,y,mEven));
-            Claim.veq(o,gvec.vblend(x,y,mOdd));
+            Claim.veq(e, gcpu.vblend(x,y,mEven));
+            Claim.veq(o, gcpu.vblend(x,y,mOdd));
         }
 
         public void vblend_32x8_256x64u()
@@ -209,7 +209,7 @@ namespace Z0
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = gmath.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();
-                var actual = gvec.vblend(x,y,m);
+                var actual = gcpu.vblend(x,y,m);
 
                 Claim.veq(expect,actual);
             }

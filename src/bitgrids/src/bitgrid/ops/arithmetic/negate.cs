@@ -53,7 +53,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnegate(x[i]);
+                gz[i] = gcpu.vnegate(x[i]);
             return ref gz;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => math.negate(x);
- 
+
         /// <summary>
         /// Computes the two's complement negation of the source grid
         /// </summary>
@@ -84,7 +84,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
                 => math.negate(x);
- 
+
         /// <summary>
         /// Computes the two's complement negation of the source grid
         /// </summary>
@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnegate<T>(x);    
+                => gcpu.vnegate<T>(x);
 
         /// <summary>
         /// Computes the two's complement negation of the source grid
@@ -125,8 +125,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnegate<T>(x);    
-
+                => gcpu.vnegate<T>(x);
 
         /// <summary>
         /// Computes the two's complement negation of the first grid and deposits the result into the second
@@ -144,7 +143,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnegate(x[i]);
+                gz[i] = gcpu.vnegate(x[i]);
             return ref gz;
         }
 

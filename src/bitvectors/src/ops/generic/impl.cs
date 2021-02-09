@@ -41,6 +41,6 @@ namespace Z0
         public static BitVector128<N,T> impl<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vimpl(x.Data, y.Data);
+                => gcpu.vimpl(x.Data, y.Data);
    }
 }

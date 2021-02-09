@@ -26,6 +26,6 @@ namespace Z0
         public static bit eq<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vsame(x.Content, y.Content);
+                => gcpu.vsame(x.Content, y.Content);
     }
 }

@@ -104,8 +104,8 @@ namespace Z0
             var t = z64;
             var count = cpu.vcount(ws,s);
 
-            var a0 = gvec.vinc(ws,1u);
-            var a1 = gvec.vinc(ws,a0.LastCell() + 1);
+            var a0 = gcpu.vinc(ws,1u);
+            var a1 = gcpu.vinc(ws,a0.LastCell() + 1);
             var b0 = cpu.vmul(a0,a1);
             var b1 = cpu.vmul(cpu.vswaphl(a0), cpu.vswaphl(a1));
             Trace("x", a0.Format());

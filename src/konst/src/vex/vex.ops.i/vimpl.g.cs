@@ -12,7 +12,7 @@ namespace Z0
     using static cpu;
     using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Computes the material implication, x | ~y for vectors x and y

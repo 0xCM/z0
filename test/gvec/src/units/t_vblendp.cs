@@ -109,11 +109,11 @@ namespace Z0
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval<ulong>());
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,5,2,7,4,1,6,3);
-            Claim.Require(gvec.vsame(expect,target));
+            Claim.Require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -130,11 +130,11 @@ namespace Z0
             var w = n512;
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n4,n1,t);
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,1,2,7,4,5,6,3);
-            Claim.Require(gvec.vsame(expect,target));
+            Claim.Require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -152,11 +152,11 @@ namespace Z0
             var t = z64;
             var maskspec = BitMasks.LsbSpec(n2,n1,t);
 
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,1,6,3,0,5,2,7);
-            Claim.Require(gvec.vsame(expect,target));
+            Claim.Require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -174,11 +174,11 @@ namespace Z0
             var t = z64;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,5,2,3,0,1,6,7);
-            Claim.Require(gvec.vsame(expect,target));
+            Claim.Require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -195,11 +195,11 @@ namespace Z0
             var w = n512;
             var t = z32;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
-            Claim.Require(gvec.vsame(expect,target));
+            Claim.Require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
@@ -217,9 +217,9 @@ namespace Z0
             var t = z16;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
@@ -239,9 +239,9 @@ namespace Z0
             var t = z8;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
-            var source = gvec.vinc(w,t);
+            var source = gcpu.vinc(w,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
-            var target = gvec.vblendp(source, blendspec);
+            var target = gcpu.vblendp(source, blendspec);
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
@@ -259,7 +259,7 @@ namespace Z0
             for(var samples=0; samples< RepCount; samples++)
             {
                 var source = Random.CpuVector(w,t);
-                var target = gvec.vblendp(source,blendspec);
+                var target = gcpu.vblendp(source,blendspec);
             }
 
         }
@@ -276,9 +276,9 @@ namespace Z0
                 pattern[i] = (i % tf == 0) ? pick : t;
 
             var spec = pattern.LoadVector();
-            var x = gvec.vinc(w, t);
+            var x = gcpu.vinc(w, t);
             var y = gcpu.vadd(x, gmath.add(x.LastCell(), Z0.z.one(t)));
-            var z = gvec.vblendp(x,y,spec);
+            var z = gcpu.vblendp(x,y,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
             gcpu.vlo(z).StoreTo(dst,0);
@@ -341,9 +341,9 @@ namespace Z0
 
             Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
-            var left = gvec.vinc(w, t);
+            var left = gcpu.vinc(w, t);
             var right = gcpu.vadd(left, gmath.add(left.LastCell(), z.one(t)));
-            var blend = gvec.vblendp(left,right,spec);
+            var blend = gcpu.vblendp(left,right,spec);
 
 
             var dst = SpanBlocks.alloc(w,2,t);
@@ -448,9 +448,9 @@ namespace Z0
             where P : unmanaged, ITypeNat
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern), t);
-            var a = gvec.vinc(w, t);
+            var a = gcpu.vinc(w, t);
             var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
-            var c = gvec.vblendp(a,b,spec);
+            var c = gcpu.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
             gcpu.vlo(c).StoreTo(dst,0);
@@ -476,9 +476,9 @@ namespace Z0
             where P : unmanaged, ITypeNat
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern),t);
-            var a = gvec.vinc(w, t);
+            var a = gcpu.vinc(w, t);
             var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
-            var c = gvec.vblendp(a,b,spec);
+            var c = gcpu.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
             c.Lo.StoreTo(dst,0);

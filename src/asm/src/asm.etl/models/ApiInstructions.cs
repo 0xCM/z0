@@ -11,12 +11,12 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiInstructionBlock
+    public readonly struct ApiInstructions : IIndex<ApiInstruction>
     {
         readonly Index<ApiInstruction> Data;
 
         [MethodImpl(Inline)]
-        internal ApiInstructionBlock(ApiInstruction[] src)
+        internal ApiInstructions(ApiInstruction[] src)
             => Data = src;
 
         public uint Count
@@ -43,13 +43,10 @@ namespace Z0
             get => Data;
         }
 
-        public ApiInstruction[] All
-            => Data;
+        public static implicit operator ApiInstructions(ApiInstruction[] src)
+            => new ApiInstructions(src);
 
-        public static implicit operator ApiInstructionBlock(ApiInstruction[] src)
-            => new ApiInstructionBlock(src);
-
-        public static ApiInstructionBlock Empty
+        public static ApiInstructions Empty
         {
             [MethodImpl(Inline)]
             get => sys.empty<ApiInstruction>();

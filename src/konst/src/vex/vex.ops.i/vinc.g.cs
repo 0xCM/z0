@@ -10,9 +10,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Increments each component by unit value

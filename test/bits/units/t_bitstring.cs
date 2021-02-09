@@ -249,7 +249,7 @@ namespace Z0
 
 
             var byx = BitConverter.GetBytes(x).ToSpan();
-            var byy = ByteWriter.write(x);
+            var byy = memory.bytes(x);
             ClaimNumeric.eq(byx,byy);
         }
 

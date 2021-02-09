@@ -102,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
-            => cpu.vpack256x8u(src, gvec.vinc(w256, ScalarCast.uint16(16)),n256);
+            => cpu.vpack256x8u(src, gcpu.vinc(w256, ScalarCast.uint16(16)),n256);
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
@@ -112,7 +112,7 @@ namespace Z0
         public void vshuf16x16()
         {
             var w = n256;
-            var x = gvec.vinc(w,z16);
+            var x = gcpu.vinc(w,z16);
             var reverse = gcpu.vdec<ushort>(w);
             var identity = gcpu.vinc<ushort>(w);
             var pairswap = cpu.vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);

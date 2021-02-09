@@ -28,7 +28,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> xor(Vector128<T> a, Vector128<T> b)
-                => gvec.vxor(a,b);
+                => gcpu.vxor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> cimpl(Vector128<T> a, Vector128<T> b)
@@ -48,7 +48,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> impl(Vector128<T> a, Vector128<T> b)
-                => gvec.vimpl(a,b);
+                => gcpu.vimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nand(Vector128<T> a, Vector128<T> b)
@@ -56,11 +56,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> nonimpl(Vector128<T> a, Vector128<T> b)
-                => gvec.vnonimpl(a,b);
+                => gcpu.vnonimpl(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> nor(Vector128<T> a, Vector128<T> b)
-                => gvec.vnor(a,b);
+                => gcpu.vnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> not(Vector128<T> a)
@@ -68,7 +68,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> select(Vector128<T> a, Vector128<T> b, Vector128<T> c)
-                => gvec.vselect(a,b,c);
+                => gcpu.vselect(a,b,c);
 
             [MethodImpl(Inline)]
             public Vector128<T> @true()
@@ -76,7 +76,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> xnor(Vector128<T> a, Vector128<T> b)
-                => gvec.vxnor(a,b);
+                => gcpu.vxnor(a,b);
 
             [MethodImpl(Inline)]
             public Vector128<T> eval<K>(Vector128<T> a, K f = default)

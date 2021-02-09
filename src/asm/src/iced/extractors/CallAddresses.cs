@@ -19,14 +19,14 @@ namespace Z0.Asm
         /// <param name="src">The source functions</param>
         public static MemoryAddress[] CallAddresses(AsmRoutine src)
             => (from i in src.Instructions
-                where i.FlowControl == IceFlowControl.Call
-                    select (MemoryAddress)i.MemoryAddress64).Array();
+                where i.Instruction.FlowControl == IceFlowControl.Call
+                    select (MemoryAddress)i.Instruction.MemoryAddress64).Array();
 
         /// <summary>
         /// Selects a (non-distinct) sequence of addresses targeted by functions in the source
         /// </summary>
         /// <param name="src">The source functions</param>
         public static MemoryAddress[] CallAddresses(AsmRoutines src)
-            => src.Data.SelectMany(CallAddresses).Array();
+            => src.SelectMany(CallAddresses).Array();
     }
 }

@@ -13,7 +13,6 @@ namespace Z0.Asm
 
     partial struct AsmEtl
     {
-
         [MethodImpl(Inline), Op]
         public static AsmSpecifierRecord record(OperationSpec src)
         {

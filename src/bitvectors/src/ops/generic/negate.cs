@@ -41,6 +41,6 @@ namespace Z0
         public static BitVector128<N,T> negate<N,T>(in BitVector128<N,T> x)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vnegate(x.Data);
+                => gcpu.vnegate(x.Data);
     }
 }

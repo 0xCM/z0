@@ -196,7 +196,7 @@ namespace Z0
                 seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
             var v1 = gcpu.vload(w, dst);
             var v2 = vSvc.eval(x,y,f);
-            return gvec.vsame(v2,v1);
+            return gcpu.vsame(v2,v1);
         }
 
         [MethodImpl(Inline)]
@@ -214,7 +214,7 @@ namespace Z0
                 seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), f);
             var v1 = gcpu.vload(w, dst);
             var v2 = vSvc.eval(x,y,f);
-            return gvec.vsame(v2,v1);
+            return gcpu.vsame(v2,v1);
         }
     }
 }

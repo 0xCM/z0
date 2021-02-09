@@ -31,7 +31,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes2(Content);
+            get => memory.bytes(Content);
         }
 
         [MethodImpl(Inline)]

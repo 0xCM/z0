@@ -22,7 +22,7 @@ namespace Z0.Asm
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => slice(bytes2(Value), 0, Length);
+            get => slice(bytes(Value), 0, Length);
         }
 
         public byte this[N0 n]

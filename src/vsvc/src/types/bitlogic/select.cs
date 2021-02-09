@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y, Vector128<T> z)
-                => gvec.vselect(x,y,z);
+                => gcpu.vselect(x,y,z);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c)
@@ -32,7 +32,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y, Vector256<T> z)
-                => gvec.vselect(x,y,z);
+                => gcpu.vselect(x,y,z);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c)

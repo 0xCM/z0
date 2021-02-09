@@ -18,8 +18,8 @@ namespace Z0.Asm
         /// <param name="src">The data sourde</param>
         /// <param name="mnemonic">The mnemonic of interest</param>
         [Op]
-        static ApiInstructionBlock filter(ApiInstructionBlock src, IceMnemonic mnemonic)
-            => from a in src.All
+        static ApiInstructions filter(ApiInstructions src, IceMnemonic mnemonic)
+            => from a in src.Storage
                 let i = a.Instruction
                 where i.Mnemonic == mnemonic
                 select a;
@@ -36,7 +36,7 @@ namespace Z0.Asm
             => new AsmCallSummary(targets, bases, hosted, unhosted);
 
         [Op]
-        public static Index<AsmCallRow> calls(ApiInstructionBlock src)
+        public static Index<AsmCallRow> calls(ApiInstructions src)
         {
             var calls = filter(src, IceMnemonic.Call).View;
             var count = calls.Length;
@@ -51,7 +51,7 @@ namespace Z0.Asm
                 var target = call.NextIp + offset;
                 dst.Source = call.IP;
                 dst.Target = target;
-                dst.InstructionSize = call.Size;
+                dst.InstructionSize = call.ByteLength;
                 dst.TargetOffset = target - (call.IP + src.Length);
                 dst.Instruction = call.FormattedInstruction;
                 dst.Encoded = call.Encoded.Storage;

@@ -15,22 +15,22 @@ namespace Z0
         [MethodImpl(Inline), TestC, Closures(Closure)]
         public static bit vtestc<T>(W128 w, in T a)
             where T : unmanaged
-                => gvec.vtestc(gcpu.vload(w, a));
+                => gcpu.vtestc(gcpu.vload(w, a));
 
         [MethodImpl(Inline), TestC, Closures(Closure)]
         public static bit vtestc<T>(W128 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vtestc(gcpu.vload(w, a), gcpu.vload(w, b));
+                => gcpu.vtestc(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), TestC, Closures(Closure)]
         public static bit vtestc<T>(W256 w, in T a)
             where T : unmanaged
-                => gvec.vtestc(gcpu.vload(w, a));
+                => gcpu.vtestc(gcpu.vload(w, a));
 
         [MethodImpl(Inline), TestC, Closures(Closure)]
         public static bit vtestc<T>(W256 w, in T a, in T b)
             where T : unmanaged
-                => gvec.vtestc(gcpu.vload(w, a), gcpu.vload(w, b));
+                => gcpu.vtestc(gcpu.vload(w, a), gcpu.vload(w, b));
 
         [MethodImpl(Inline), TestC, Closures(Closure)]
         public static bit testc<T>(W128 n, int vcount, int blocklen, in T a)

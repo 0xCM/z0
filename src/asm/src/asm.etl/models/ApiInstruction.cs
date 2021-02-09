@@ -18,7 +18,24 @@ namespace Z0.Asm
 
         public IceInstruction Instruction {get;}
 
-        public MemoryAddress Base {get;}
+        [MethodImpl(Inline)]
+        public ApiInstruction(IceInstruction fx, ApiCodeBlock encoded)
+        {
+            Instruction = fx;
+            Encoded = encoded;
+        }
+
+        public byte ByteLength
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Instruction.ByteLength;
+        }
+
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.BaseAddress;
+        }
 
         public string OpId
             => Encoded.OpId;
@@ -27,7 +44,10 @@ namespace Z0.Asm
             => Encoded.Data;
 
         public string FormattedInstruction
-            => Instruction.FormattedInstruction;
+        {
+            [MethodImpl(Inline)]
+            get => Instruction.FormattedInstruction;
+        }
 
         public AsmInstructionSpecExprLegacy Specifier
             => Instruction.Specifier;
@@ -46,13 +66,5 @@ namespace Z0.Asm
         /// </summary>
         public int Size
             => Instruction.ByteLength;
-
-        [MethodImpl(Inline)]
-        public ApiInstruction(MemoryAddress @base, IceInstruction fx, ApiCodeBlock encoded)
-        {
-            Base = @base;
-            Instruction = fx;
-            Encoded = encoded;
-        }
     }
 }

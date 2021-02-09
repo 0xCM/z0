@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static cpu;
     using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         [MethodImpl(Inline), Max, Closures(AllNumeric)]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)

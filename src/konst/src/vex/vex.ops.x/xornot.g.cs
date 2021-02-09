@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Computes x ^ ~y for vectors x and y

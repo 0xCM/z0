@@ -5,11 +5,13 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
     using static TextRules;
     using static AsmExpr;
+
 
     class App : WfService<App,App>
     {
@@ -181,37 +183,39 @@ namespace Z0.Asm
             }
         }
 
-        public void EmitHostAsm(Type host)
-        {
-            var catalog = ApiCatalogs.host(Wf,host);
 
+        public ApiHostCaptureSet EmitHostAsm(Type host)
+        {
+            const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
+            var catalog = ApiCatalogs.host(Wf,host);
             var capture = AsmServices.alt(Wf,Asm);
             var blocks = capture.Capture(catalog);
-            var start = catalog.MinAddress;
-            var end = catalog.MaxAddress + blocks.Last.OutputSize;
-            var range = memory.range(start,end);
             var count = blocks.Length;
-            var blockview = blocks.View;
+            var set = new ApiHostCaptureSet(catalog, blocks, alloc<AsmRoutine>(count));
+            var blockview = set.Blocks.View;
+            var buffer = text.buffer();
+            var asmpath = Db.AppLog($"{host.Name}", FileExtensions.Asm);
+            var flow = Wf.EmittingFile(asmpath);
+            var header = string.Format(HeaderFormatPattern, set.StartAddress, set.EndAddress, set.Range.Size, set.ExtractSize, set.ParsedSize);
+            using var writer = asmpath.Writer();
+            writer.WriteLine(header);
+            var emitted = 0;
+            var routines = set.Routines.Edit;
             var decoder = Asm.RoutineDecoder;
             var formatter = Asm.Formatter;
-            var buffer = text.buffer();
-            var path = Db.AppLog($"{host.Name}", FileExtensions.Asm);
-            var flow = Wf.EmittingFile(path);
-            using var writer = path.Writer();
-            writer.WriteLine(string.Format("; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}",
-                start, end, range.Size, blocks.ExtractSize, blocks.ParsedSize));
-            var emitted = 0;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(blockview,i);
                 if(decoder.Decode(block, out var routine))
                 {
+                    seek(routines, i) = routine;
                     formatter.Format(routine, buffer);
                     writer.Write(buffer.Emit());
                     emitted++;
                 }
             }
-            Wf.EmittedFile(flow, $"{emitted} routines", path);
+            Wf.EmittedFile(flow, $"{emitted} routines", asmpath);
+            return set;
         }
 
         public void GenBits()
@@ -234,9 +238,9 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            var host = typeof(math);
-
-            EmitHostAsm(host);
+            var host = typeof(gcpu);
+            var capture = AsmServices.HostCapture(Wf);
+            var set = capture.EmitCaptureSet(host);
         }
 
         public static void Main(params string[] args)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Returns 1 if the left vector is identical to the right vector and 0 otherwise

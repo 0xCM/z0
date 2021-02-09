@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public string OpId {get;}
 
-        public ApiInstructionBlock Instructions {get;}
+        public ApiInstructions Instructions {get;}
 
         public MemoryAddress BaseAddress {get;}
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
                 OpId = i.OpId;
                 Instructions = src;
                 HostAddress = @base;
-                BaseAddress = i.Base;
+                BaseAddress = i.BaseAddress;
             }
             else
             {

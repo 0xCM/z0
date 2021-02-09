@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct AsmRoutines : IIndex<AsmRoutine>
     {
-        public readonly AsmRoutine[] Data;
+        readonly Index<AsmRoutine> Data;
 
         [MethodImpl(Inline)]
         public AsmRoutines(AsmRoutine[] src)
@@ -20,25 +20,31 @@ namespace Z0.Asm
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => Data.Count;
         }
 
         public ref AsmRoutine First
         {
             [MethodImpl(Inline)]
-            get => ref Data[0];
+            get => ref Data.First;
         }
 
         public ReadOnlySpan<AsmRoutine> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
+        }
+
+        public Span<AsmRoutine> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
         }
 
         public AsmRoutine[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         [MethodImpl(Inline)]

@@ -62,7 +62,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                success &= gvec.vtestc(gvec.veq(f(x,y), g.Apply(x,y)));
+                success &= gcpu.vtestc(gcpu.veq(f(x,y), g.Apply(x,y)));
             }
 
             return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);
@@ -81,7 +81,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
-                success &= gvec.vtestc(gvec.veq(f(x,y), g.Apply(x,y)));
+                success &= gcpu.vtestc(gcpu.veq(f(x,y), g.Apply(x,y)));
             }
 
             return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);

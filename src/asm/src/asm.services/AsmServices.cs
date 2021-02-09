@@ -52,6 +52,10 @@ namespace Z0.Asm
         public static ApiHostAsmEmitter HostEmitter(IAsmWf wf)
             => new ApiHostAsmEmitter(wf.Wf, wf.Asm);
 
+        [Op]
+        public static IApiHostCapture HostCapture(IWfShell wf)
+            => ApiHostCapture.create(wf);
+
         /// <summary>
         /// Creates an asm processor
         /// </summary>

@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
     using static cpu;
 
-    partial class gvec
+    partial struct gcpu
     {
         /// <summary>
         /// Computes the component-wise difference between two vectors

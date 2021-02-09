@@ -27,7 +27,7 @@ namespace Z0.Logix
                 case IOperatorExpr<Vector128<T>> x:
                     return eval(x);
                 case IComparisonExpr<Vector128<T>> x:
-                    return gvec.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return gcpu.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
         }
@@ -47,7 +47,7 @@ namespace Z0.Logix
                 case IOperatorExpr<Vector256<T>> x:
                     return eval(x);
                 case IComparisonExpr<Vector256<T>> x:
-                    return gvec.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
+                    return gcpu.vxnor(eval(x.LeftArg).Value, eval(x.RightArg).Value);
                 default: throw new NotSupportedException(expr.GetType().Name);
             }
         }

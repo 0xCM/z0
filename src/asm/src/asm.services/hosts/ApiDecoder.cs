@@ -11,6 +11,26 @@ namespace Z0.Asm
 
     public sealed class ApiDecoder : WfService<ApiDecoder,IApiDecoder,IAsmContext>, IApiDecoder
     {
+        public static ApiInstruction[] ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)
+        {
+            var @base = code.BaseAddress;
+            var offseq = AsmOffsetSequence.Zero;
+            var count = src.Length;
+            var dst = new ApiInstruction[count];
+
+            for(ushort i=0; i<count; i++)
+            {
+                var fx = src[i];
+                var len = fx.ByteLength;
+                var data = span(code.Storage);
+                var slice = data.Slice((int)offseq.Offset, len).ToArray();
+                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice);
+                dst[i] = new ApiInstruction(fx, recoded);
+                offseq = offseq.AccrueOffset((uint)len);
+            }
+            return dst;
+        }
+
         public Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index)
         {
             var decoder = Context.RoutineDecoder;
@@ -90,27 +110,7 @@ namespace Z0.Asm
         }
 
         ApiRoutineObsolete Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiRoutineObsolete(@base, Load(code, src));
-
-        ApiInstruction[] Load(ApiCodeBlock code, IceInstruction[] src)
-        {
-            var @base = code.BaseAddress;
-            var offseq = AsmOffsetSequence.Zero;
-            var count = src.Length;
-            var dst = new ApiInstruction[count];
-
-            for(ushort i=0; i<count; i++)
-            {
-                var fx = src[i];
-                var len = fx.ByteLength;
-                var data = span(code.Storage);
-                var slice = data.Slice((int)offseq.Offset, len).ToArray();
-                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice);
-                dst[i] = new ApiInstruction(@base, fx, recoded);
-                offseq = offseq.AccrueOffset((uint)len);
-            }
-            return dst;
-        }
+            => new ApiRoutineObsolete(@base, AsmEtl.ApiInstructions(code, src));
     }
 
     readonly struct WfProgress
