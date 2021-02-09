@@ -11,19 +11,18 @@ namespace Z0.Lang
 
     public readonly struct Var : IDeclaration<Var>
     {
+        public IScope Scope {get;}
+
         public Identifier Name {get;}
 
         public DataType Type {get;}
 
         [MethodImpl(Inline)]
-        public Var(Identifier name, DataType type)
+        public Var(IScope scope, Identifier name, DataType type)
         {
+            Scope = scope;
             Type = type;
             Name = name;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Var((string name, DataType type) src)
-            => new Var(src.name, src.type);
     }
 }

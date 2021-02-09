@@ -9,19 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    /// <summary>
-    /// Identifies a language
-    /// </summary>
-    public readonly struct LanguageSpec
+    public readonly struct IntValue : INumericValue<IntegerKind>
     {
-        public Name Id {get;}
+        public IntegerKind Kind {get;}
+
+        public BinaryCode Content {get;}
 
         [MethodImpl(Inline)]
-        public LanguageSpec(string id)
-            => Id  = id;
-
-        [MethodImpl(Inline)]
-        public static implicit operator LanguageSpec(string id)
-            => new LanguageSpec(id);
+        public IntValue(IntegerKind kind, BinaryCode def)
+        {
+            Kind = kind;
+            Content = def;
+        }
     }
 }

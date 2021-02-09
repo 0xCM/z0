@@ -9,11 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    public interface IApiCaptureEmitter
-    {
-
-    }
-
     public struct ApiCaptureEmitter : IApiCaptureEmitter
     {
         readonly IWfShell Wf;
@@ -29,18 +24,19 @@ namespace Z0
             Asm = asm;
         }
 
-        public void Emit(ApiHostUri host, Index<ApiMemberExtract> src)
+        public AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
         {
+            var routines = AsmRoutines.Empty;
             try
             {
                 var flow = Wf.Running();
-                EmitExtracts(host,src);
+                EmitExtracts(host, src);
                 var code = ParseExtracts(host, src);
                 if(code.Length != 0)
                 {
                     EmitApiHex(host, code);
                     EmitCil(host, code);
-                    DecodeMembers(host, code, src);
+                    routines = DecodeMembers(host, code, src);
                 }
                 Wf.Ran(flow);
             }
@@ -48,9 +44,25 @@ namespace Z0
             {
                 Wf.Error(e);
             }
+            return routines;
         }
 
-        public Index<ApiCodeExtract> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
+        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
+            => ApiHexRows.emit(Wf, host, src.View);
+
+        public Count EmitCil(ApiHostUri host, Index<ApiMemberCode> src)
+        {
+            if(src.Count != 0)
+            {
+                var emitter = CilEmitter.create(Wf);
+                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(host));
+                emitter.EmitCilData(src, Wf.Db().CilDataFile(host));
+            }
+
+            return src.Count;
+        }
+
+        Index<ApiCodeExtract> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
             var emitted = sys.empty<ApiCodeExtract>();
             var count = src.Length;
@@ -75,20 +87,6 @@ namespace Z0
                 return Index<ApiMemberCode>.Empty;
         }
 
-        public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
-            => ApiHexRows.emit(Wf, host, src.View);
-
-        public Count EmitCil(ApiHostUri host, Index<ApiMemberCode> src)
-        {
-            if(src.Count != 0)
-            {
-                var emitter = CilEmitter.create(Wf);
-                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(host));
-                emitter.EmitCilData(src, Wf.Db().CilDataFile(host));
-            }
-
-            return src.Count;
-        }
 
         AsmRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
         {

@@ -9,15 +9,19 @@ namespace Z0.Lang
 
     using static Part;
 
-
-    public readonly struct DataType : IDataType
+    /// <summary>
+    /// Identifies a language
+    /// </summary>
+    public readonly struct Language
     {
-        public Identifier Name {get;}
+        public Name Id {get;}
 
         [MethodImpl(Inline)]
-        public DataType(Identifier name)
-        {
-            Name = name;
-        }
+        public Language(string id)
+            => Id  = id;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Language(string id)
+            => new Language(id);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => new CpuBuffer<N,W,T>(new T[z.nat64u<N>()]);
+                => new CpuBuffer<N,W,T>(new T[nat64u<N>()]);
 
         readonly CpuBuffer<N64,W8,HexCode> step;
 

@@ -11,12 +11,12 @@ namespace Z0.Lang
 
     public readonly struct Languages
     {
-        public static LanguageSpec csharp => nameof(csharp);
+        public static Language csharp => nameof(csharp);
 
-        public static LanguageSpec asm => nameof(asm);
+        public static Language asm => nameof(asm);
 
-        public static LanguageSpec cpp => nameof(cpp);
+        public static Language cpp => nameof(cpp);
 
-        public static LanguageSpec typescript => nameof(typescript);
+        public static Language typescript => nameof(typescript);
     }
 }

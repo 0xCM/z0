@@ -29,9 +29,9 @@ namespace Z0
         public static IApiCaptureArchive archive(IWfShell wf)
             => new ApiCaptureArchive(wf);
 
-        [Op]
+        [MethodImpl(Inline)]
         public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
-            => default(CaptureAltService);
+            => new CaptureAlt(wf,asm);
 
         [MethodImpl(Inline)]
         public static CaptureExchange exchange(IAsmContext context)
@@ -39,7 +39,6 @@ namespace Z0
 
         public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
             => new ApiCaptureRunner(wf, asm);
-
 
         public static void run(string[] args)
         {

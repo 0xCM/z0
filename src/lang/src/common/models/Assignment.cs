@@ -12,25 +12,21 @@ namespace Z0.Lang
     /// <summary>
     /// Represents an assignment A := B
     /// </summary>
-    public readonly struct Assignment<A,B>
+    public readonly struct VarAssignment
     {
-        public A Left {get;}
+        public Var Variable {get;}
 
-        public B Right {get;}
+        public Value Value {get;}
 
         [MethodImpl(Inline)]
-        public Assignment(A left, B right)
+        public VarAssignment(Var var, Value value)
         {
-            Left = left;
-            Right = right;
+            Variable = var;
+            Value = value;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Assignment<A,B>(Paired<A,B> src)
-            => new Assignment<A,B>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Assignment<A,B>((A Left, B Right) src)
-            => new Assignment<A,B>(src.Left, src.Right);
+        public static implicit operator VarValue(VarAssignment src)
+            => new VarValue(src.Variable, src.Value);
     }
 }

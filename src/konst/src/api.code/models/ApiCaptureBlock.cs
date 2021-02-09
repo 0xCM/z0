@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
@@ -34,13 +33,12 @@ namespace Z0
         public ApiArtifactKey ArtifactKey
             => Method;
 
-        [MethodImpl(Inline)]
         public ApiCaptureBlock(OpIdentity id, MethodInfo method, CodeBlock extracted, CodeBlock parsed, ExtractTermCode term)
         {
             Extracted = extracted;
             Parsed = parsed;
             Method = method;
-            insist(extracted.BaseAddress, parsed.BaseAddress);
+            root.require(extracted.BaseAddress == parsed.BaseAddress, () => $"Parsed address {parsed.BaseAddress} does not match the extracted base address {extracted.BaseAddress}");
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = ClrDynamic.cil(parsed.BaseAddress, OpUri, method);

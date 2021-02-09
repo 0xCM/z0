@@ -13,8 +13,6 @@ namespace Z0.Lang
     {
         public Var Var {get;}
 
-        public DataType Type => Var.Type;
-
         public Value Content {get;}
 
         public VarValue(Var var, Value value)
@@ -22,5 +20,7 @@ namespace Z0.Lang
             Var = var;
             Content = value;
         }
+
+        public DataType Type => Var.Type;
     }
 }

@@ -41,67 +41,65 @@ namespace Z0
             Wf.Disposed();
         }
 
-        public void Run()
+        public void CaptureApi()
         {
             using var flow = Wf.Running();
             ClearArchive();
+            RunCapture();
+            Wf.Ran(flow);
+        }
+
+        void RunCapture()
+        {
+            using var flow = Wf.Running();
             var catalogs = Wf.Api.Catalogs.View;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));
-            Wf.Ran(flow);
-        }
+            Wf.Ran(flow, count);
 
+        }
         void ClearArchive()
         {
             using var archive = Capture.archive(Wf);
             archive.Clear();
         }
 
-        void CapturePart(IApiPartCatalog src)
+        public void CapturePart(IApiPartCatalog src)
         {
             if(src.IsEmpty)
                 return;
 
             CaptureTypes(src.ApiTypes);
-            CaptureOps(src.OperationHosts);
+            CaptureHosts(src.OperationHosts);
         }
 
-        void CaptureHost(IApiHost api)
-        {
-            var flow = Wf.Running(api.Name);
-            try
-            {
-                var extracted = ExtractOps(api);
-                var emitter = Capture.emitter(Wf, Asm);
-                emitter.Emit(api.Uri, extracted);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-            Wf.Ran(flow, api.Name);
-        }
-
-        void CaptureOps(ReadOnlySpan<ApiHost> src)
+        public void CaptureHosts(ReadOnlySpan<ApiHost> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 CaptureHost(skip(src, i));
         }
 
-        void CaptureTypes(Index<ApiRuntimeType> src)
+        public AsmRoutines CaptureHost(IApiHost api)
         {
-            var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
-            for(var i=0; i<extracted.Length; i++)
+            var routines = AsmRoutines.Empty;
+            var flow = Wf.Running(api.Name);
+            try
             {
-                ref readonly var x = ref skip(extracted,i);
-                var emititter = Capture.emitter(Wf, Asm);
-                emititter.Emit(x.Key, x.Value);
+                var ops = ExtractHostOps(api);
+                var emitter = Capture.emitter(Wf, Asm);
+                routines = emitter.Emit(api.Uri, ops);
             }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            Wf.Ran(flow, api.Name);
+            return routines;
         }
 
-        ApiMemberExtract[] ExtractOps(IApiHost host)
+        public Index<ApiMemberExtract> ExtractHostOps(IApiHost host)
         {
             try
             {
@@ -114,7 +112,20 @@ namespace Z0
             }
         }
 
-        ApiMemberExtract[] ExtractTypes(Index<ApiRuntimeType> types)
+        public AsmRoutines CaptureTypes(Index<ApiRuntimeType> src)
+        {
+            var dst = root.list<AsmRoutine>();
+            var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
+            for(var i=0; i<extracted.Length; i++)
+            {
+                ref readonly var x = ref skip(extracted,i);
+                var emititter = Capture.emitter(Wf, Asm);
+                dst.AddRange(emititter.Emit(x.Key, x.Value));
+            }
+            return dst.ToArray();
+        }
+
+        Index<ApiMemberExtract> ExtractTypes(Index<ApiRuntimeType> types)
         {
             try
             {

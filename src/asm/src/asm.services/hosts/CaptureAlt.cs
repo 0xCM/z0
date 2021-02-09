@@ -15,13 +15,57 @@ namespace Z0
     using static ExtractTermCode;
 
     [ApiHost]
-    public readonly unsafe struct CaptureAlt
+    unsafe readonly struct CaptureAlt : ICaptureAlt
     {
-        [Op]
-        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<MethodInfo> src)
+        readonly IWfShell Wf;
+
+        readonly IAsmContext Asm;
+
+        [MethodImpl(Inline)]
+        public CaptureAlt(IWfShell wf, IAsmContext asm)
+        {
+            Wf = wf;
+            Asm = asm;
+        }
+
+        public ApiCaptureBlocks Capture(Type src)
+            => Capture(src.DeclaredMethods());
+
+        public ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src)
             => capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
 
-        public static ReadOnlySpan<ApiCaptureBlock> capture(ApiHostCatalog src)
+        public static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src)
+            => capture(src, sys.alloc<byte>(Pow2.T14));
+
+        public ApiCaptureBlocks Capture(in ApiHostCatalog src)
+            => capture(src);
+
+        public ApiCaptureBlocks Capture(ReadOnlySpan<IdentifiedMethod> src)
+            => capture(src, sys.alloc<byte>(Pow2.T14));
+
+        public ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
+            => capture(src,id,buffer);
+
+        public ApiCaptureBlock Capture(MethodInfo src, Span<byte> dst)
+            => capture(src, dst);
+
+        public ApiCaptureBlock Capture(IdentifiedMethod src)
+            => capture(src);
+
+        public ApiCaptureBlocks Capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
+            => capture(src, buffer);
+
+        public ApiMemberCapture Capture(in ApiMember src, Span<byte> dst)
+            => capture(src, dst);
+
+        public ApiCaptureBlock Capture(LocatedMethod src, Span<byte> dst)
+            => capture(src, dst);
+
+        public ApiCaptureBlock Capture(IdentifiedMethod src, Span<byte> dst)
+            => capture(src, dst);
+
+        [Op]
+        static ApiCaptureBlocks capture(in ApiHostCatalog src)
         {
             var members = src.Members.View;
             var count = members.Length;
@@ -39,13 +83,6 @@ namespace Z0
             }
             return blocks;
         }
-        [Op]
-        public static ReadOnlySpan<ApiCaptureBlock> capture(Type src)
-            => capture(src.DeclaredMethods());
-
-        [Op]
-        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src)
-            => capture(src, sys.alloc<byte>(Pow2.T14));
 
         /// <summary>
         /// Captures a concrete method
@@ -54,14 +91,15 @@ namespace Z0
         /// <param name="id">The identity to confer to the captured result</param>
         /// <param name="dst">The target buffer</param>
         [Op]
-        public static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> dst)
+        static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> dst)
         {
             var summary = capture(dst, id, ApiJit.jit(src));
             var outcome = summary.Outcome;
             return block(id, src, summary.Encoded, outcome.TermCode);
         }
 
-        public static ApiCaptureBlock capture(MethodInfo src, Span<byte> dst)
+        [Op]
+        static ApiCaptureBlock capture(MethodInfo src, Span<byte> dst)
         {
             var id = src.Identify();
             var summary = capture(dst, id, ApiJit.jit(src));
@@ -70,12 +108,12 @@ namespace Z0
         }
 
         [Op]
-        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
+        static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
         {
             var located = locate(src);
             var count = located.Length;
-            var captured = span<ApiCaptureBlock>(count);
-
+            var captured = alloc<ApiCaptureBlock>(count);
+            ref var dst = ref first(captured);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var method = ref skip(located, i);
@@ -83,7 +121,7 @@ namespace Z0
                 {
                     var summary = capture(buffer, method.Id, method.Address);
                     var outcome = summary.Outcome;
-                    seek(captured,i) = block(method.Id, method.Method, summary.Encoded, outcome.TermCode);
+                    seek(dst, i) = block(method.Id, method.Method, summary.Encoded, outcome.TermCode);
                 }
                 catch(Exception e)
                 {
@@ -94,7 +132,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
+        static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
             var summary = capture(buffer, src.Id, ApiJit.jit(src));
             var size = summary.Data.Length;
@@ -103,14 +141,14 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCaptureBlock capture(LocatedMethod located, Span<byte> buffer)
+        static ApiCaptureBlock capture(LocatedMethod located, Span<byte> buffer)
         {
             var summary = capture(buffer, located.Id, located.Address);
             return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
         [Op]
-        public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
+        static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
             var located = ApiJit.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
@@ -118,7 +156,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCaptureBlock capture(IdentifiedMethod src)
+        static ApiCaptureBlock capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline), Op]

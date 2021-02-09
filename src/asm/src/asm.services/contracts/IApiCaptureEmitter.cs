@@ -2,23 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using Z0.Asm;
 
-    public readonly struct Text : IDataType<Text>
+    public interface IApiCaptureEmitter
     {
-        public TextKind Kind {get;}
-
-        public string Content {get;}
-
-        public Text(TextKind kind, string content)
-        {
-            Kind = kind;
-            Content = content;
-        }
+        AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src);
     }
 }

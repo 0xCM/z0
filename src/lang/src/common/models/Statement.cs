@@ -11,6 +11,6 @@ namespace Z0.Lang
 
     public readonly struct Statement : IStatement
     {
-
+        public IScope Scope {get;}
     }
 }

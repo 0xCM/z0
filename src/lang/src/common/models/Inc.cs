@@ -9,16 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct Inc : IExpr<Inc>
     {
         public IScope Scope {get;}
 
-        public CodeBlock Body {get;}
+        public long Step {get;}
 
-        public Loop(IScope scope, CodeBlock block)
+        [MethodImpl(Inline)]
+        public Inc(IScope scope, long step)
         {
             Scope = scope;
-            Body = block;
+            Step = step;
         }
     }
 }

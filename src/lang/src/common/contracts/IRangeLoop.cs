@@ -5,14 +5,11 @@
 namespace Z0.Lang
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial struct lang
+    public interface IRangeLoop : ILoop
     {
-        [MethodImpl(Inline), Op]
-        public static Assignment<A,B> assign<A,B>(A a, B b)
-            => new Assignment<A,B>(a,b);
+        Range Range {get;}
+
+        RangeIterator Iterator {get;}
     }
 }

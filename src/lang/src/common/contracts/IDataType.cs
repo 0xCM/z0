@@ -5,8 +5,8 @@
 namespace Z0.Lang
 {
 
-    public interface IDataType
+    public interface IDataType : IType
     {
-        Identifier Name {get;}
+
     }
 }

@@ -22,12 +22,19 @@ namespace Z0
         readonly Vector128<ulong> Segment;
 
         [MethodImpl(Inline)]
-        public unsafe MemorySegment(byte* src, ByteSize length)
-            => Segment = Create((ulong)src, (ulong)length);
+        public unsafe MemorySegment(byte* src, ByteSize size)
+            => Segment = Create((ulong)src, (ulong)size);
 
         [MethodImpl(Inline)]
         public MemorySegment(MemoryAddress src, ByteSize size)
             => Segment = Create((ulong)src, (ulong)size);
+
+        [MethodImpl(Inline)]
+        public MemorySegment(MemoryRange range)
+            : this(range.Min, range.Size)
+        {
+
+        }
 
         public MemoryAddress BaseAddress
         {

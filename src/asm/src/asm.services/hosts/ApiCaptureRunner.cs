@@ -49,7 +49,7 @@ namespace Z0
         {
             var flow = Wf.Running("ApiCapture");
             using var step = AsmServices.ApiCapture(Wf, Asm);
-            step.Run();
+            step.CaptureApi();
             Wf.Ran(flow);
         }
 

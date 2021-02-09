@@ -9,16 +9,19 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct Switch : IStatement
     {
         public IScope Scope {get;}
 
-        public CodeBlock Body {get;}
+        public Index<SwitchCase> Cases {get;}
 
-        public Loop(IScope scope, CodeBlock block)
+        public Index<CodeBlock> Blocks {get;}
+
+        public Switch(IScope scope, Index<SwitchCase> cases, Index<CodeBlock> blocks)
         {
             Scope = scope;
-            Body = block;
+            Cases = cases;
+            Blocks = blocks;
         }
     }
 }

@@ -9,19 +9,19 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct ByteBlock
+    public readonly struct SwitchCase
     {
-        public ByteSize Length {get;}
-    }
+        public uint Group {get;}
 
-    public readonly struct ByteBlockValue
-    {
-        public BinaryCode Content {get;}
+        public Identifier Name {get;}
 
-        [MethodImpl(Inline)]
-        public ByteBlockValue(byte[] content)
+        public Value Match {get;}
+
+        public SwitchCase(uint group, Name name, Value test)
         {
-            Content = content;
+            Group = group;
+            Name = name;
+            Match = test;
         }
     }
 }

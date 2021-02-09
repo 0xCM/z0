@@ -48,6 +48,12 @@ namespace Z0
             get => ref first(Data);
         }
 
+        public ref byte Last
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Data, Length - 1);
+        }
+
         /// <summary>
         /// Covers the encoded content with a readonly span
         /// </summary>

@@ -37,7 +37,7 @@ namespace Z0.Asm
         }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
-            => Decode(CaptureAlt.capture(src), target);
+            => Decode(CaptureService.Capture(src), target);
 
         public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
         {

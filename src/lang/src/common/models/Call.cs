@@ -11,16 +11,15 @@ namespace Z0.Lang
 
     public readonly struct Call
     {
-        public Function Target {get;}
+        public Operation Target {get;}
 
         public Index<Operand> Operands {get;}
 
         [MethodImpl(Inline)]
-        public Call(Function f, params Operand[] args)
+        public Call(Operation target, params Operand[] args)
         {
-            Target = f;
+            Target = target;
             Operands = args;
         }
     }
-
 }

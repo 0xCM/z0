@@ -44,5 +44,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmRoutines(AsmRoutine[] src)
             => new AsmRoutines(src);
+
+        public static AsmRoutines Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmRoutines(sys.empty<AsmRoutine>());
+        }
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    public interface IExpr
+    public interface IExpr : IScoped
     {
 
     }

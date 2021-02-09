@@ -8,10 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Part;
-    using static memory;
-    using static AsmRegs;
-
     public class CpuModel
     {
         readonly IWfShell Wf;

@@ -12,7 +12,6 @@ namespace Z0
     [ApiHost]
     public struct Fsm32
     {
-
         public static Fsm32 init(Index<uint> terms, Index<uint> rules, uint s0, uint s1)
             => new Fsm32(terms, rules, s0, s1);
 
@@ -21,12 +20,7 @@ namespace Z0
         {
             var term = 0u;
             while(fsm.Accepting)
-            {
                 fsm.Process(term++);
-                // if(fsm.Processed % 100 == 0)
-                //     wf.Status($"Processed {fsm.Processed} inputs");
-            }
-
         }
 
         readonly Index<uint> Terms;
@@ -54,6 +48,13 @@ namespace Z0
 
         public uint Processed => Counter;
 
+        public void Run()
+        {
+            var term = 0u;
+            while(Accepting)
+                Process(term++);
+
+        }
         [Op]
         public bool Process(uint term)
         {

@@ -251,7 +251,8 @@ namespace Z0
         {
             Run89(Parts.Konst.Assembly, Parts.Asm.Assembly);
 
-            var blocks = CaptureAlt.capture(typeof(Switch16));
+            var alt = Capture.alt(Wf, Asm);
+            var blocks = alt.Capture(typeof(Switch16));
             var count = blocks.Length;
             Wf.Row((Count)count);
 

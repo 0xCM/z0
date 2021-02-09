@@ -12,33 +12,21 @@ namespace Z0
 
     partial interface IWfShell
     {
-        WfExecFlow Running()
-        {
-            signal(this).Running();
-            return Flow();
-        }
+        // WfExecFlow Running()
+        // {
+        //     signal(this).Running();
+        //     return Flow();
+        // }
 
-        WfExecFlow Running(string operation)
+        WfExecFlow Running([Caller] string operation = null)
         {
             signal(this).Running(operation);
-            return Flow();
-        }
-
-        WfExecFlow Running(MethodInfo operation)
-        {
-            signal(this).Running(operation.Name);
             return Flow();
         }
 
         WfExecFlow Running<T>(string operation, T data)
         {
             signal(this).Running(operation, data);
-            return Flow();
-        }
-
-        WfExecFlow Running<T>(MethodInfo operation, T data)
-        {
-            signal(this).Running(operation.Name, data);
             return Flow();
         }
 
@@ -54,10 +42,11 @@ namespace Z0
             return Flow();
         }
 
-        WfExecToken Ran(WfExecFlow flow, WfStepId step)
+        WfExecFlow Running<T>(ICmd<T> cmd)
+            where T : struct, ICmd<T>
         {
-            signal(this).Ran(step);
-            return Ran(flow);
+            signal(this).Running(cmd);
+            return Flow();
         }
 
         WfExecToken Ran<H,T>(WfExecFlow flow, H host, T data)
@@ -71,13 +60,6 @@ namespace Z0
         {
             signal(this).Ran(data);
             return Ran(flow);
-        }
-
-        WfExecFlow Running<T>(ICmd<T> cmd)
-            where T : struct, ICmd<T>
-        {
-            signal(this).Running(cmd);
-            return Flow();
         }
 
         WfExecToken Ran(WfExecFlow flow, CmdResult result)

@@ -9,7 +9,6 @@ namespace Z0.Lang
 
     using static Part;
 
-
     public readonly struct CodeBlock : ICodeBlock
     {
         public Identifier Label {get;}

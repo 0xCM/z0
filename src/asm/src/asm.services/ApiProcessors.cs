@@ -46,7 +46,7 @@ namespace Z0
         {
             var count = Decoded.Length;
             for(var i=0; i<count; i++)
-                AsmProcessors.parts(Wf).Process(Decoded[i]);
+                new PartAsmProcessor(Wf).Process(Decoded[i]);
         }
 
         public void EmitSemantic()

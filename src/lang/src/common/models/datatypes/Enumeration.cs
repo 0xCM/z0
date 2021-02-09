@@ -12,7 +12,7 @@ namespace Z0.Lang
     /// <summary>
     /// Defines a c/c++/c# style enumeration
     /// </summary>
-    public struct Enumeration
+    public struct Enumeration : IDataType
     {
         public Name Namespace;
 
@@ -23,9 +23,12 @@ namespace Z0.Lang
         public TextBlock Description;
 
         public Index<EnumLiteral> Literals;
+
+        Identifier IType.Name
+            => Name;
     }
 
-    public struct Enumeration<T>
+    public struct Enumeration<T> : IDataType
     {
         public Name Namespace;
 
@@ -36,6 +39,9 @@ namespace Z0.Lang
         public TextBlock Description;
 
         public Index<EnumLiteral<T>> Literals;
+
+        Identifier IType.Name
+            => Name;
 
         public static implicit operator Enumeration(Enumeration<T> src)
             => lang.untype(src);

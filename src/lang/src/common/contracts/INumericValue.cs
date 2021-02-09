@@ -5,18 +5,15 @@
 namespace Z0.Lang
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public readonly struct ScalarDec : IExpr<ScalarDec>
+    public interface INumericValue
     {
-        public long Step {get;}
+        BinaryCode Content {get;}
+    }
 
-        [MethodImpl(Inline)]
-        public ScalarDec(long step)
-        {
-            Step = step;
-        }
+    public interface INumericValue<K> : INumericValue
+        where K : unmanaged
+    {
+        K Kind {get;}
     }
 }

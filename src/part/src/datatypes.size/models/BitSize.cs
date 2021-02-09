@@ -84,13 +84,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Content/8;
         }
+        public string Format()
+            => Content.ToString();
 
         [MethodImpl(Inline)]
         public bool Equals(BitSize rhs)
             => Content == rhs.Content;
 
         public override string ToString()
-            => Content.ToString();
+            => Format();
 
         public override int GetHashCode()
             => (int)Content;

@@ -41,8 +41,28 @@ namespace Z0.Asm
             => new ApiHostDecoder(wf, decoder);
 
         [Op]
+        public static ApiHostDecoder HostDecoder(IAsmWf wf)
+            => new ApiHostDecoder(wf.Wf, wf.Decoder);
+
+        [Op]
         public static ApiHostAsmEmitter HostEmitter(IWfShell wf, IAsmContext asm)
             => new ApiHostAsmEmitter(wf, asm);
+
+        [Op]
+        public static ApiHostAsmEmitter HostEmitter(IAsmWf wf)
+            => new ApiHostAsmEmitter(wf.Wf, wf.Asm);
+
+        /// <summary>
+        /// Creates an asm processor
+        /// </summary>
+        /// <param name="context">The process context</param>
+        [MethodImpl(Inline), Op]
+        public static IApiAsmProcessor processor(IWfShell wf)
+        {
+            var processor = new WfAsmProcessor(wf) as IApiAsmProcessor;
+            processor.Connect();
+            return processor;
+        }
 
         [MethodImpl(Inline), Op]
         public static IAsmWriter writer(FS.FilePath dst)

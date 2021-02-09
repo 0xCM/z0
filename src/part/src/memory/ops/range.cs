@@ -2,23 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    partial struct memory
     {
-        public IScope Scope {get;}
-
-        public CodeBlock Body {get;}
-
-        public Loop(IScope scope, CodeBlock block)
-        {
-            Scope = scope;
-            Body = block;
-        }
+        [MethodImpl(Inline), Op]
+        public static MemoryRange range(MemoryAddress min, MemoryAddress max)
+            => new MemoryRange(min, max);
     }
 }

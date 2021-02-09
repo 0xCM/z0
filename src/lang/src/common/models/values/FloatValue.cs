@@ -9,16 +9,17 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct FloatValue : INumericValue<FloatKind>
     {
-        public IScope Scope {get;}
+        public FloatKind Kind {get;}
 
-        public CodeBlock Body {get;}
+        public BinaryCode Content {get;}
 
-        public Loop(IScope scope, CodeBlock block)
+        [MethodImpl(Inline)]
+        public FloatValue(FloatKind kind, BinaryCode def)
         {
-            Scope = scope;
-            Body = block;
+            Kind = kind;
+            Content = def;
         }
     }
 }

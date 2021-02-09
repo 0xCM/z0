@@ -9,16 +9,20 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct Operator
     {
-        public IScope Scope {get;}
+        public Identifier Name {get;}
 
-        public CodeBlock Body {get;}
+        public Name Notation {get;}
 
-        public Loop(IScope scope, CodeBlock block)
+        public OperatorKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Operator(Identifier name, Name notation, OperatorKind kind)
         {
-            Scope = scope;
-            Body = block;
+            Name = name;
+            Notation  = notation;
+            Kind = kind;
         }
     }
 }

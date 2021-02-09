@@ -11,15 +11,17 @@ namespace Z0.Lang
 
     public readonly struct InnerLoop : ILoop
     {
+        public IScope Scope => Outer;
+
         public ILoop Outer {get;}
 
-        public CodeBlock Block {get;}
+        public CodeBlock Body {get;}
 
         [MethodImpl(Inline)]
-        public InnerLoop(ILoop outer, CodeBlock block)
+        public InnerLoop(ILoop outer, CodeBlock body)
         {
             Outer = outer;
-            Block = block;
+            Body = body;
         }
     }
 }

@@ -5,18 +5,21 @@
 namespace Z0.Lang
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public readonly struct ScalarInc : IExpr<ScalarInc>
+    public interface IOperation : IScope
     {
-        public long Step {get;}
+        Index<Operand> Input {get;}
 
-        [MethodImpl(Inline)]
-        public ScalarInc(long step)
-        {
-            Step = step;
-        }
+        Index<Statement> Definition {get;}
+    }
+
+    public interface IFunction : IOperation
+    {
+        Operand Output {get;}
+    }
+
+    public interface IAction : IOperation
+    {
+
     }
 }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
     using static Asci;
-    using static z;
 
     /// <summary>
     /// Defines operations over character digits

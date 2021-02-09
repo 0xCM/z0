@@ -39,7 +39,7 @@ namespace Z0
             if(catalog.IsEmpty)
                 return ApiHostMemberCode.Empty;
 
-            var idx = ApiQuery.index(catalog);
+            var idx = catalog.Index();
             var archive =  Archives.capture(root);
             var paths =  Archives.capture(FS.dir(root.Name), host);
             var code = ApiExtractReader.Service.Read(paths.HostHexPath);

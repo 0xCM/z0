@@ -21,13 +21,6 @@ namespace Z0
             => index(src.Select(x => (x.OpUri.OpId, x)),true);
 
         [Op]
-        public static ApiMemberIndex index(ApiHostCatalog src)
-        {
-            var ix = index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
-        }
-
-        [Op]
         public static ApiMemberCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
         {
             var apicode = from pair in intersect(members, code).Enumerated

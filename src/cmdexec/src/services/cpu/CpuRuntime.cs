@@ -62,10 +62,5 @@ namespace Z0
         }
 
 
-        int Run(ReadOnlySpan<HexCode> src)
-        {
-
-            return src.Length;
-        }
     }
 }

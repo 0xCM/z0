@@ -12,7 +12,7 @@ namespace Z0.Lang
     [ApiHost("lang.sharp")]
     public readonly partial struct CSharp : ILanguage<CSharp>
     {
-        public LanguageSpec Specifier => Languages.csharp;
+        public Language Specifier => Languages.csharp;
 
         public Name Id => Specifier.Id;
    }

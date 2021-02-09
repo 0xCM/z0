@@ -14,15 +14,30 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostCatalog
     {
+        public static ApiHostCatalog create(IApiHost host, ApiMembers members)
+            => new ApiHostCatalog(host, members.Sort());
+
         public IApiHost Host {get;}
 
         public ApiMembers Members {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostCatalog(IApiHost host, ApiMembers src)
+        ApiHostCatalog(IApiHost host, ApiMembers src)
         {
             Host = host;
             Members = src;
+        }
+
+        public MemoryAddress MinAddress
+        {
+            [MethodImpl(Inline)]
+            get => IsNonEmpty ? Members[0].BaseAddress : 0;
+        }
+
+        public MemoryAddress MaxAddress
+        {
+            [MethodImpl(Inline)]
+            get =>  IsNonEmpty ? Members[MemberCount - 1].BaseAddress : 0;
         }
 
         /// <summary>
@@ -34,6 +49,12 @@ namespace Z0
             get => Host.PartId;
         }
 
+        public Count MemberCount
+        {
+            [MethodImpl(Inline)]
+            get => Members.Count;
+        }
+
         /// <summary>
         /// The defining part
         /// </summary>
@@ -43,10 +64,10 @@ namespace Z0
             get => Host.HostType;
         }
 
-        public ApiMember[] Storage
+        public ReadOnlySpan<ApiMember> MemberView
         {
             [MethodImpl(Inline)]
-            get => Members.Storage;
+            get => Members.View;
         }
 
         public bool IsEmpty
@@ -59,6 +80,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Members.Count != 0;
+        }
+
+        public ApiMemberIndex Index()
+        {
+            var ix = ApiQuery.index(Members.Storage.Select(h => (h.Id, h)),true);
+            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
         }
 
         public Index<ApiMemberInfo> Describe()

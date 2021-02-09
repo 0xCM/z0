@@ -19,6 +19,21 @@ namespace Z0
         public static ApiPartCode combine(PartId part, ApiHostCode[] src)
             => new ApiPartCode(part,src);
 
+        [MethodImpl(Inline), Op]
+        public static Pair<ByteSize> sizes(ReadOnlySpan<ApiCaptureBlock> src)
+        {
+            var input = ByteSize.Zero;
+            var output = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                input += block.InputSize;
+                output += block.OutputSize;
+            }
+            return (input,output);
+        }
+
         /// <summary>
         /// Determines whether an operation accepts an argument of specified numeric kind
         /// </summary>

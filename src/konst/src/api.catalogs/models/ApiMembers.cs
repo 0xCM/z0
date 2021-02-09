@@ -56,6 +56,12 @@ namespace Z0
             get => ref Data[index];
         }
 
+        public ApiMembers Sort()
+        {
+            Data.Sort();
+            return this;
+        }
+
         public ApiMembers Where(Func<ApiMember,bool> predicate)
             => Data.Storage.Where(predicate);
 

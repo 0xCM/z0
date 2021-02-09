@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    public interface ICodeBlock
+    public interface ICodeBlock : IScope
     {
 
     }
-
 }

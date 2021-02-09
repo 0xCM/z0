@@ -8,16 +8,16 @@ namespace Z0.Lang
 
     public interface IType
     {
-
+        Identifier Name {get;}
     }
 
-    public interface IType<T>
+    public interface IType<T> : IType
         where T : struct, IType<T>
     {
 
     }
 
-    public interface IType<K,T>
+    public interface IType<K,T> : IType<T>
         where T : struct, IType<T>
         where K : unmanaged, Enum, IEquatable<K>
     {

@@ -9,8 +9,10 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct RangeLoop
+    public readonly struct RangeLoop : IRangeLoop
     {
+        public IScope Scope {get;}
+
         public Range Range {get;}
 
         public RangeIterator Iterator {get;}
@@ -18,8 +20,9 @@ namespace Z0.Lang
         public CodeBlock Body {get;}
 
         [MethodImpl(Inline)]
-        public RangeLoop(Range range, RangeIterator iterator, CodeBlock body)
+        public RangeLoop(IScope scope, Range range, RangeIterator iterator, CodeBlock body)
         {
+            Scope = scope;
             Range = range;
             Iterator = iterator;
             Body = body;

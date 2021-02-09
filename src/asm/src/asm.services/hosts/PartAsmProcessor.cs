@@ -33,7 +33,7 @@ namespace Z0
         {
             uint count = src.HostCount;
             for(var i=0u; i<count; i++)
-                AsmProcessors.hosts(Wf, src[i]).Process();
+                new HostAsmProcessor(Wf, src[i]).Process();
         }
     }
 }

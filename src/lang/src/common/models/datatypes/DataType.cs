@@ -9,16 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct DataType : IDataType
     {
-        public IScope Scope {get;}
+        public Identifier Name {get;}
 
-        public CodeBlock Body {get;}
-
-        public Loop(IScope scope, CodeBlock block)
+        [MethodImpl(Inline)]
+        public DataType(Identifier name)
         {
-            Scope = scope;
-            Body = block;
+            Name = name;
         }
     }
 }

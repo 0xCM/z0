@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-
-    public interface ILoop : IScope, IScoped
+    public enum OperatorKind
     {
-        CodeBlock Body {get;}
+        None  = 0,
     }
 }

@@ -9,11 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct IntegerValue
+    public readonly struct Operation
     {
-        public IntegerKind Kind {get;}
+        public Identifier Name {get;}
 
-        public BinaryCode Value {get;}
+        public Index<Operand> Input {get;}
+
+        public Operand? Output {get;}
+
+        public Index<Statement> Definition {get;}
     }
-
 }

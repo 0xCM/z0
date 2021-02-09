@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process()
         {
-            var processor = AsmProcessors.create(Wf);
+            var processor = AsmServices.processor(Wf);
             var count = Source.RoutineCount;
             var routines = @readonly(Source.Routines);
             for(var j=0; j<count; j++)
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(ApiHostRoutines src)
         {
-            var processor = AsmProcessors.create(Wf);
+            var processor = AsmServices.processor(Wf);
             var routines = @readonly(src.Routines);
             var count = routines.Length;
             for(var j=0; j<count; j++)

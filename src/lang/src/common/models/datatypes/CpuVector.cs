@@ -9,16 +9,16 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Loop : ILoop
+    public readonly struct CpuVector : IDataType
     {
-        public IScope Scope {get;}
+        public VectorKind Kind {get;}
 
-        public CodeBlock Body {get;}
+        public Identifier Name => Kind.ToString();
 
-        public Loop(IScope scope, CodeBlock block)
+        [MethodImpl(Inline)]
+        public CpuVector(VectorKind kind)
         {
-            Scope = scope;
-            Body = block;
+            Kind = kind;
         }
     }
 }

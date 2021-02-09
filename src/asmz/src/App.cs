@@ -184,27 +184,34 @@ namespace Z0.Asm
         public void EmitHostAsm(Type host)
         {
             var catalog = ApiCatalogs.host(Wf,host);
-            var svc = AsmServices.alt(Wf,Asm);
-            var blocks = svc.Capture(catalog);
-            var bk = blocks.Length;
+
+            var capture = AsmServices.alt(Wf,Asm);
+            var blocks = capture.Capture(catalog);
+            var start = catalog.MinAddress;
+            var end = catalog.MaxAddress + blocks.Last.OutputSize;
+            var range = memory.range(start,end);
+            var count = blocks.Length;
+            var blockview = blocks.View;
             var decoder = Asm.RoutineDecoder;
             var formatter = Asm.Formatter;
             var buffer = text.buffer();
             var path = Db.AppLog($"{host.Name}", FileExtensions.Asm);
             var flow = Wf.EmittingFile(path);
             using var writer = path.Writer();
-            var count = 0;
-            for(var i=0; i<bk; i++)
+            writer.WriteLine(string.Format("; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}",
+                start, end, range.Size, blocks.ExtractSize, blocks.ParsedSize));
+            var emitted = 0;
+            for(var i=0; i<count; i++)
             {
-                ref readonly var block = ref skip(blocks,i);
+                ref readonly var block = ref skip(blockview,i);
                 if(decoder.Decode(block, out var routine))
                 {
                     formatter.Format(routine, buffer);
                     writer.Write(buffer.Emit());
-                    count++;
+                    emitted++;
                 }
             }
-            Wf.EmittedFile(flow, $"{count} routines", path);
+            Wf.EmittedFile(flow, $"{emitted} routines", path);
         }
 
         public void GenBits()
@@ -227,7 +234,7 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            var host = typeof(gmath);
+            var host = typeof(math);
 
             EmitHostAsm(host);
         }
