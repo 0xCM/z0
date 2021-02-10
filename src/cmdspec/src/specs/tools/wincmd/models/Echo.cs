@@ -8,10 +8,9 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
-    [ApiHost]
-    public readonly partial struct WinCmd
+
+    partial struct WinCmd
     {
         public enum EchoMode
         {
@@ -27,24 +26,6 @@ namespace Z0.Tools
             public utf8 Message;
 
             public EchoMode Mode;
-        }
-
-        [MethodImpl(Inline)]
-        public static Echo echo(bit on)
-        {
-            var cmd = new Echo();
-            cmd.On = on;
-            cmd.Mode = EchoMode.Enable;
-            return cmd;
-        }
-
-        [MethodImpl(Inline)]
-        public static Echo echo(utf8 message)
-        {
-            var cmd = new Echo();
-            cmd.Message = message;
-            cmd.Mode = EchoMode.Emit;
-            return cmd;
         }
     }
 }

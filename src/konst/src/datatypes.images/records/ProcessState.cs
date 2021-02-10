@@ -47,7 +47,7 @@ namespace Z0
         /// <summary>
         /// The process image version
         /// </summary>
-        public VersionId ImageVersion;
+        public VersionInfo ImageVersion;
 
         /// <summary>
         /// The address of the entry point

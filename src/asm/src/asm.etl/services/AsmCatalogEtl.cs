@@ -7,13 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
     using static TextRules;
     using static AsmExpr;
-
-    using X = AsmExpr;
+    using static EnumSymbols;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {
@@ -21,15 +21,73 @@ namespace Z0.Asm
 
         readonly Index<StokeAsmImportRow> RowBuffer;
 
+        readonly Table<AsmMnemonicCode> MnemonicSymbols;
+
         const uint MaxRowCount = 2500;
 
         public AsmCatalogEtl()
         {
             SourceFormat = TextDocFormat.Structured(Chars.Tab);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
+            MnemonicSymbols = EnumSymbols.table<AsmMnemonicCode>();
         }
 
         public uint ImportRowCount {get; private set;}
+
+        public ReadOnlySpan<Entry<AsmMnemonicCode>> MnemonicLiterals()
+            => MnemonicSymbols.Entries;
+
+        public Index<AsmCatRow> LoadCatalogRows()
+        {
+            var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
+            var doc = TextDocs.parse(src).Require();
+            var data = doc.Rows;
+            var count = data.Length;
+            var buffer = alloc<AsmCatRow>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                var input = default(StokeAsmImportRow);
+                Fill(skip(data,i), ref input);
+                Fill(input, ref seek(dst,i));
+            }
+            return buffer;
+        }
+
+        void Fill(in StokeAsmImportRow src, ref AsmCatRow dst)
+        {
+            dst.Sequence = src.Sequence;
+            dst.OpCode = AsmExpr.opcode(src.OpCode);
+            dst.AttMnemonic = src.AttMnemonic;
+            dst.Cpuid = src.Cpuid;
+            dst.Description = src.Description;
+
+        }
+
+        void Fill(in TextRow src, ref StokeAsmImportRow dst, ushort? seq = null)
+        {
+            var i = 0;
+            var cells = src.Cells.View;
+            if(seq == null)
+                ScalarParser.parse(skip(cells,i++), out dst.Sequence);
+            else
+                dst.Sequence = seq.Value;
+            dst.OpCode = skip(cells, i++);
+            dst.Instruction = skip(cells, i++);
+            dst.EncodingKind = skip(cells, i++);
+            dst.Properties = skip(cells, i++);
+            dst.ImplicitRead = skip(cells, i++);
+            dst.ImplicitWrite = skip(cells, i++);
+            dst.ImplicitUndef = skip(cells, i++);
+            dst.Useful = skip(cells, i++);
+            dst.Protected = skip(cells, i++);
+            dst.Mode64 = skip(cells, i++);
+            dst.LegacyMode = skip(cells, i++);
+            dst.Cpuid = skip(cells, i++);
+            dst.AttMnemonic = skip(cells, i++);
+            dst.Preferred = skip(cells, i++);
+            dst.Description = skip(cells, i++);
+        }
 
         public Index<AsmMnemonic> Mnemonics()
         {
@@ -47,6 +105,21 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
+        public Index<Name> EncodingKindNames()
+        {
+            var rows = ImportedStokeRows();
+            var count = rows.Length;
+            var dst = root.hashset<Name>();
+            project(rows, (i,n) => dst.Add(n.EncodingKind));
+            return dst.Index().Sort();
+        }
+
+        static void project<S,T>(ReadOnlySpan<S> rows, Func<uint,S,T> f)
+        {
+            var count = rows.Length;
+            for(var i=0u; i<count; i++)
+                f(i, skip(rows,i));
+        }
         public ReadOnlySpan<StokeAsmImportRow> ImportedStokeRows()
         {
             if(ImportRowCount != 0)
@@ -66,7 +139,7 @@ namespace Z0.Asm
                 var count = lines.Length;
                 var buffer = RowBuffer.Edit;
                 ref var dst = ref first(buffer);
-                var j = 0u;
+                var j = z16;
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var line = ref skip(lines,i);
@@ -128,31 +201,30 @@ namespace Z0.Asm
             return buffer;
         }
 
-
-        bool parse(uint seq, in TextLine src, ref StokeAsmImportRow dst)
+        bool parse(ushort seq, in TextLine src, ref StokeAsmImportRow dst)
         {
             if(Parse.row(src, SourceFormat, out var row))
             {
                 if(row.CellCount == 15)
                 {
-                    var cells = row.Cells.View;
-                    var i = 0;
-                    dst.Sequence = (ushort)(seq + 1);
-                    dst.OpCode = skip(cells, i++);
-                    dst.Instruction = skip(cells, i++);
-                    dst.EncodingKind = skip(cells, i++);
-                    dst.Properties = skip(cells, i++);
-                    dst.ImplicitRead = skip(cells, i++);
-                    dst.ImplicitWrite = skip(cells, i++);
-                    dst.ImplicitUndef = skip(cells, i++);
-                    dst.Useful = skip(cells, i++);
-                    dst.Protected = skip(cells, i++);
-                    dst.Mode64 = skip(cells, i++);
-                    dst.LegacyMode = skip(cells, i++);
-                    dst.Cpuid = skip(cells, i++);
-                    dst.AttMnemonic = skip(cells, i++);
-                    dst.Preferred = skip(cells, i++);
-                    dst.Description = skip(cells, i++);
+                    Fill(row, ref dst, (ushort)(seq + 1));
+                    // var cells = row.Cells.View;
+                    // var i = 0;
+                    // dst.OpCode = skip(cells, i++);
+                    // dst.Instruction = skip(cells, i++);
+                    // dst.EncodingKind = skip(cells, i++);
+                    // dst.Properties = skip(cells, i++);
+                    // dst.ImplicitRead = skip(cells, i++);
+                    // dst.ImplicitWrite = skip(cells, i++);
+                    // dst.ImplicitUndef = skip(cells, i++);
+                    // dst.Useful = skip(cells, i++);
+                    // dst.Protected = skip(cells, i++);
+                    // dst.Mode64 = skip(cells, i++);
+                    // dst.LegacyMode = skip(cells, i++);
+                    // dst.Cpuid = skip(cells, i++);
+                    // dst.AttMnemonic = skip(cells, i++);
+                    // dst.Preferred = skip(cells, i++);
+                    // dst.Description = skip(cells, i++);
                     return true;
                 }
             }
@@ -160,40 +232,6 @@ namespace Z0.Asm
             return false;
         }
 
-
-        public uint Denormalize(OperationSpec src, Span<OperationSpec> dst, uint offset)
-        {
-            var index = offset;
-            var input = AsmExpr.specifier((ushort)index, src.OpCode, src.Sig);
-            var pair = Denormalize(input);
-            seek(dst,index++) = pair.Left;
-            if(pair.Right.IsNonEmpty)
-                seek(dst,index++) = pair.Right;
-            return index - offset;
-        }
-
-        public Pair<OperationSpec> Denormalize(OperationSpec src)
-        {
-            var a0 = OperationSpec.Empty;
-            var a1 = OperationSpec.Empty;
-            var sigs = Denormalize(src.Sig);
-            return (a0,a1);
-        }
-
-        public Pair<AsmSig> Denormalize(X.Signature src)
-        {
-            var a0 = AsmSig.Empty;
-            var a1 = AsmSig.Empty;
-
-            // var operands = src.Operands;
-            // var opcount = operands.Count;
-            // for(var i=0; i<opcount; i++)
-            // {
-
-            // }
-
-            return (a0,a1);
-        }
 
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
     }

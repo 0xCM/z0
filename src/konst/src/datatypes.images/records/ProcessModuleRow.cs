@@ -17,7 +17,7 @@ namespace Z0
 
         public MemoryAddress EntryAddress;
 
-        public VersionId Version;
+        public VersionInfo Version;
 
         public FS.FilePath ImagePath;
     }

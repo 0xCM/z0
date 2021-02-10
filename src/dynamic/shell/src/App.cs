@@ -397,93 +397,24 @@ namespace Z0
 
 
 
-        void GenerateCodes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
-        {
-            var buffer = text.buffer();
-            var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine("{");
-            margin += 4;
-            buffer.IndentLine(margin, "public enum AsmMnemonicCode : ushort");
-            buffer.IndentLine(margin, "{");
-            margin += 4;
+        // void ShowSpecifiers(AsmCatalogEtl etl)
+        // {
+        //     var parser = AsmExprParser.create(Wf);
+        //     var specifiers = etl.Specifiers();
+        //     for(var i=0; i<specifiers.Length; i++)
+        //     {
+        //         ref readonly var spec = ref skip(specifiers,i);
+        //         parser.Mnemonic(spec.Sig, out var monic);
+        //         var operands = parser.Operands(spec.Sig).View;
+        //         var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
+        //         Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
 
-            buffer.IndentLine(margin, "None = 0,");
-            buffer.AppendLine();
-
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Name, i+1));
-                buffer.AppendLine();
-            }
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceCodeHeader);
-            writer.Write(buffer.Emit());
-        }
-
-        void GenerateExpressions(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
-        {
-            var buffer = text.buffer();
-            var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine("{");
-            margin += 4;
-            buffer.IndentLine(margin, "public readonly struct AsmMnemonics");
-            buffer.IndentLine(margin, "{");
-            margin += 4;
-
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Name));
-                buffer.AppendLine();
-            }
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceCodeHeader);
-            writer.Write(buffer.Emit());
-        }
-
-        void ShowSpecifiers(AsmCatalogEtl etl)
-        {
-            var parser = AsmExprParser.create(Wf);
-            var specifiers = etl.Specifiers();
-            for(var i=0; i<specifiers.Length; i++)
-            {
-                ref readonly var spec = ref skip(specifiers,i);
-                parser.Mnemonic(spec.Sig, out var monic);
-                var operands = parser.Operands(spec.Sig).View;
-                var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
-                Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
-
-            }
-        }
+        //     }
+        // }
 
         public void Run()
         {
 
-            var etl = AsmCatalogEtl.create(Wf);
-            var records = etl.TransformSource();
-            var monics = etl.Mnemonics();
-            var maxlen = monics.Select(x => x.Name.Length).Max();
-            Wf.Status(maxlen);
-            GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
-            GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
-            ShowSpecifiers(etl);
 
             // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
             // root.iter(terms, r => Wf.Row(r));

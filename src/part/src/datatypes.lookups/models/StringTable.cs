@@ -15,6 +15,9 @@ namespace Z0
         public static StringTable create(Index<string> src)
             => new StringTable(src);
 
+        public static StringTable create(Index<Name> src)
+            => new StringTable(src.Select(x => x.Content));
+
         readonly Index<string> Data;
 
         readonly Dictionary<string,Paired<uint,string>> Keys;
@@ -31,6 +34,7 @@ namespace Z0
                 Keys.Add(item, (i,item));
             }
         }
+
 
         [MethodImpl(Inline)]
         public bool Contains(string item)

@@ -16,12 +16,24 @@ namespace Z0
     partial struct ClrPrimitives
     {
         [Op]
-        public static ReadOnlySpan<EnumLiteral> enums(ClrAssemblyName assembly, Type src)
+        public static Index<EnumLiteral> enums(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = span<EnumLiteral>(fields.Length);
+            var dst = alloc<EnumLiteral>(fields.Length);
             var ecode = ClrPrimitives.ecode(src);
-            fill(assembly, src, ecode, fields, dst);
+            fill(src, ecode, fields, dst);
+            return dst;
+        }
+
+        [Op]
+        public static Index<EnumLiteral<E>> enums<E>()
+            where E : unmanaged, Enum
+        {
+            var src = typeof(E);
+            var fields = span(src.LiteralFields());
+            var dst = alloc<EnumLiteral<E>>(fields.Length);
+            var ecode = ClrPrimitives.ecode(src);
+            fill(src, ecode, fields, span(dst));
             return dst;
         }
 
@@ -40,16 +52,17 @@ namespace Z0
             };
 
         [Op]
-        static void fill(ClrAssemblyName assembly, Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral> dst)
+        static void fill(Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral> dst)
         {
+            ClrAssemblyName assname = type.Assembly;
             var count = fields.Length;
             var typeAddress = type.TypeHandle.Value;
-            var asmName = assembly.SimpleName;
+            var simple = assname.SimpleName;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
-                row.Component = asmName;
+                row.Component = simple;
                 row.Type = type.Name;
                 row.DataType = ecode;
                 row.LiteraIndex = (ushort)i;
@@ -57,6 +70,28 @@ namespace Z0
                 row.ScalarValue = unbox(ecode, f.GetRawConstantValue());
                 row.NameAddress = memory.address(f.Name);
                 row.TypeAddress = typeAddress;
+            }
+        }
+
+        [Op]
+        static void fill<E>(Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral<E>> dst)
+            where E : unmanaged, Enum
+        {
+            ClrAssemblyName assname = type.Assembly;
+            var count = fields.Length;
+            var typeAddress = type.TypeHandle.Value;
+            var simple = assname.SimpleName;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                ref var row = ref seek(dst,i);
+                row.Index = (ushort)i;
+                row.Component = simple;
+                row.Type = type.Name;
+                row.DataType = ecode;
+                row.Name = f.Name;
+                row.LiteralValue = (E)f.GetRawConstantValue();
+                row.ScalarValue = unbox(ecode, row.LiteralValue);
             }
         }
     }

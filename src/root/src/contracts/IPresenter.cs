@@ -2,17 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    [ApiHost]
-    public readonly partial struct AsmEtl
+    public interface IPresenter<S,T>
     {
-        public static AsmCatalogEtl catalog(IWfShell wf)
-            => AsmCatalogEtl.create(wf);
+        T Present(S src);
+
+        void Present(in S src, out T dst)
+            => dst = Present(src);
+    }
+
+    public interface ITextPresenter<S> : IPresenter<S,string>
+    {
+
     }
 }

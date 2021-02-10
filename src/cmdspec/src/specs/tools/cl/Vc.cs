@@ -2,17 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static Part;
+    using System.IO;
 
     [ApiHost]
-    public readonly partial struct AsmEtl
+    public readonly partial struct Vc
     {
-        public static AsmCatalogEtl catalog(IWfShell wf)
-            => AsmCatalogEtl.create(wf);
+
     }
 }

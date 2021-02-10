@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -41,7 +42,6 @@ namespace Z0.Asm
             var tokens = AsmExpr.SigOpTokens();
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
-
 
         [Op]
         Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
@@ -123,7 +123,20 @@ namespace Z0.Asm
                         Wf.Error($"Empty token has a nonzero index!");
                 }
             }
+        }
 
+        void ShowMnemonicLiterals()
+        {
+            const string FormatPattern = "{0, -8} | {1, -8} | {2}";
+            var literals = Etl.MnemonicLiterals();
+            var count = literals.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var literal = ref skip(literals, i);
+                var format = string.Format(FormatPattern, literal.Index, literal.Scalar, literal.Name);
+                Wf.Row(format);
+
+            }
         }
 
         void ShowSpecifiers()
@@ -183,41 +196,6 @@ namespace Z0.Asm
             }
         }
 
-
-        public ApiHostCaptureSet EmitHostAsm(Type host)
-        {
-            const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
-            var catalog = ApiCatalogs.host(Wf,host);
-            var capture = AsmServices.alt(Wf,Asm);
-            var blocks = capture.Capture(catalog);
-            var count = blocks.Length;
-            var set = new ApiHostCaptureSet(catalog, blocks, alloc<AsmRoutine>(count));
-            var blockview = set.Blocks.View;
-            var buffer = text.buffer();
-            var asmpath = Db.AppLog($"{host.Name}", FileExtensions.Asm);
-            var flow = Wf.EmittingFile(asmpath);
-            var header = string.Format(HeaderFormatPattern, set.StartAddress, set.EndAddress, set.Range.Size, set.ExtractSize, set.ParsedSize);
-            using var writer = asmpath.Writer();
-            writer.WriteLine(header);
-            var emitted = 0;
-            var routines = set.Routines.Edit;
-            var decoder = Asm.RoutineDecoder;
-            var formatter = Asm.Formatter;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blockview,i);
-                if(decoder.Decode(block, out var routine))
-                {
-                    seek(routines, i) = routine;
-                    formatter.Format(routine, buffer);
-                    writer.Write(buffer.Emit());
-                    emitted++;
-                }
-            }
-            Wf.EmittedFile(flow, $"{emitted} routines", asmpath);
-            return set;
-        }
-
         public void GenBits()
         {
             var factory = BitStoreFactory.create(Wf);
@@ -236,11 +214,113 @@ namespace Z0.Asm
             Wf.Row(s0.ToString());
         }
 
-        public unsafe void Run()
+        void ShowSpecifiers(AsmCatalogEtl etl)
+        {
+            var parser = AsmExprParser.create(Wf);
+            var specifiers = etl.Specifiers();
+            for(var i=0; i<specifiers.Length; i++)
+            {
+                ref readonly var spec = ref skip(specifiers,i);
+                parser.Mnemonic(spec.Sig, out var monic);
+                var operands = parser.Operands(spec.Sig).View;
+                var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
+                Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
+
+            }
+        }
+
+        void GenerateCodes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        {
+            var buffer = text.buffer();
+            var margin = 0u;
+            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine("{");
+            margin += 4;
+            buffer.IndentLine(margin, "public enum AsmMnemonicCode : ushort");
+            buffer.IndentLine(margin, "{");
+            margin += 4;
+
+            buffer.IndentLine(margin, "None = 0,");
+            buffer.AppendLine();
+
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var monic = ref skip(src,i);
+                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Name, i+1));
+                buffer.AppendLine();
+            }
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceCodeHeader);
+            writer.Write(buffer.Emit());
+        }
+
+        void GenerateExpressions(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        {
+            var buffer = text.buffer();
+            var margin = 0u;
+            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine("{");
+            margin += 4;
+            buffer.IndentLine(margin, "public readonly struct AsmMnemonics");
+            buffer.IndentLine(margin, "{");
+            margin += 4;
+
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var monic = ref skip(src,i);
+                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Name));
+                buffer.AppendLine();
+            }
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceCodeHeader);
+            writer.Write(buffer.Emit());
+        }
+
+
+        void ProcessCatalog()
+        {
+            var records = Etl.TransformSource();
+            var monics = Etl.Mnemonics();
+            var maxlen = monics.Select(x => x.Name.Length).Max();
+            Wf.Status(maxlen);
+            GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
+            GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
+            ShowSpecifiers(Etl);
+
+        }
+
+
+        void ShowEncodingKindNames()
+        {
+            root.iter(Etl.EncodingKindNames(), Wf.Row);
+        }
+
+
+        void RunCapture()
         {
             var host = typeof(gcpu);
             var capture = AsmServices.HostCapture(Wf);
             var set = capture.EmitCaptureSet(host);
+
+        }
+        public unsafe void Run()
+        {
+            //ShowMnemonicLiterals();
+            ProcessCatalog();
         }
 
         public static void Main(params string[] args)

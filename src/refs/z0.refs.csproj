@@ -31,6 +31,7 @@
     <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.9" />
 
+
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
 
@@ -42,6 +43,7 @@
     <PackageReference Include="System.Reflection.Metadata" Version="5.0.0" />
 
     <PackageReference Include="System.Runtime.InteropServices.RuntimeInformation" Version="4.3.0" />
+
   </ItemGroup>
 
 </Project>

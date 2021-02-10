@@ -13,7 +13,6 @@ namespace Z0.Tools
 
         readonly FS.FolderPath SrcRoot;
 
-
         internal Llvm(IWfShell wf)
         {
             Wf= wf;

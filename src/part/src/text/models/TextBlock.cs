@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct TextBlock : IDataTypeComparable<TextBlock>
     {
@@ -62,7 +62,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => alg.hash.calc(Data);
+            get => (uint)(Data?.GetHashCode() ?? 0);
         }
 
         [MethodImpl(Inline)]
