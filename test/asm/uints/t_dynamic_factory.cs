@@ -131,7 +131,7 @@ namespace Z0.Asm
             var gId = ApiIdentify.build(name, w, kind, true);
             var archive = Archives.extract(Wf, TargetArchive.HexDir());
             var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
-            var gBits = archive.Read(ApiQuery.hostinfo<gvec>().Uri).Where(x => x.Id == gId).Single();
+            var gBits = archive.Read(ApiQuery.hostinfo<gcpu>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(OperatorClasses.binary(), w, dBits, gBits, dst);
         }
 

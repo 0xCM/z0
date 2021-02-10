@@ -67,19 +67,19 @@ namespace Z0.Tools
             return this;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         protected Clang AppendArg(dynamic a, dynamic b)
             => AppendArg(text.adjacent(a,b));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         protected Clang AppendArg(dynamic a, dynamic b, dynamic c)
             => AppendArg(text.adjacent(a, b, c));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         protected Clang AppendArg(dynamic a, dynamic b, dynamic c, dynamic d)
             => AppendArg(text.adjacent(a, b, c, d));
 
-        [MethodImpl(Inline), Op]
+        [Op]
         protected Clang AppendArg(dynamic a, dynamic b, dynamic c, dynamic d, dynamic e)
             => AppendArg(text.adjacent(a, b, c, d, e));
 

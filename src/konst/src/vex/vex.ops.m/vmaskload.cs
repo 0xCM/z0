@@ -80,6 +80,7 @@ namespace Z0
             => MaskLoad(ptr(src), mask);
 
         /// <summary>
+        /// Conditionally loads source cells per a specified mask
         /// __m256i _mm256_maskload_epi32 (int const* mem_addr, __m256i mask) VPMASKMOVD ymm, ymm, m256
         /// </summary>
         /// <param name="src">The memory source</param>

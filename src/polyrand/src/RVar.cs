@@ -8,19 +8,19 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
+
+    using static Part;
 
     /// <summary>
     /// Defines a random variable
     /// </summary>
     public readonly struct RVar<T>
         where T : unmanaged
-    {        
+    {
         readonly IEnumerable<T> stream;
 
         public readonly Interval<T> Domain;
-        
+
         public RVar(Interval<T> domain, IPolyrand random)
         {
             Domain = domain;

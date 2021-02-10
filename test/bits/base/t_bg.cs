@@ -46,7 +46,7 @@ namespace Z0
             BitGrid.xor(gx,gy,gz);
 
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);
+                Claim.veq(gcpu.vxor(gx[block], gy[block]), gz[block]);
         }
     }
 }

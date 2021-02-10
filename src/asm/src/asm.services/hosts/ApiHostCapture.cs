@@ -15,11 +15,9 @@ namespace Z0.Asm
         {
             const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
             var catalog = ApiCatalogs.host(Wf,host);
-            var capture = AsmServices.alt(Wf,Asm);
-            var blocks = capture.Capture(catalog);
+            var blocks = CaptureHost(catalog);
             var count = blocks.Length;
-            var set = new ApiHostCaptureSet(catalog, blocks, alloc<AsmRoutine>(count));
-            var blockview = set.Blocks.View;
+            var set = Capture.set(Asm, catalog,blocks);
             var buffer = text.buffer();
             var asmpath = Db.AppLog($"{host.Name}", FileExtensions.Asm);
             var flow = Wf.EmittingFile(asmpath);
@@ -28,21 +26,25 @@ namespace Z0.Asm
             writer.WriteLine(header);
             var emitted = 0;
             var routines = set.Routines.Edit;
-            var decoder = Asm.RoutineDecoder;
             var formatter = Asm.Formatter;
             for(var i=0; i<count; i++)
             {
-                ref readonly var block = ref skip(blockview,i);
-                if(decoder.Decode(block, out var routine))
+                ref readonly var routine = ref skip(routines,i);
+                if(routine.IsNonEmpty)
                 {
-                    seek(routines, i) = routine;
                     formatter.Format(routine, buffer);
                     writer.Write(buffer.Emit());
                     emitted++;
                 }
             }
-            Wf.EmittedFile(flow, $"{emitted} routines", asmpath);
+            Wf.EmittedFile(flow, (Count)emitted , asmpath);
             return set;
+        }
+
+        public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)
+        {
+            var capture = AsmServices.alt(Wf, Asm);
+            return capture.CaptureHost(src);
         }
     }
 }

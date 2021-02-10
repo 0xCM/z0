@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The random source</param>
         /// <param name="exclusions">Enum literals to exclude</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolyStream src, params E[] exclusions)
+        public static IEnumerable<E> EnumValues<E>(this IDomainSource src, params E[] exclusions)
             where E : unmanaged, Enum
         {
             var excluded = exclusions.Select(x => x.ToString()).ToHashSet();

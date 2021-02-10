@@ -8,17 +8,50 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Sources
     {
         /// <summary>
-        /// Creates a deferral over a specified value source
+        /// Produces an interminable stream of random bytes
         /// </summary>
-        /// <param name="source">The value source</param>
+        /// <param name="src">The data source</param>
+        public static IEnumerable<byte> bytes(IDataSource src)
+        {
+            var cache = new byte[8];
+            while(true)
+            {
+                var value = src.Next<ulong>();
+                Sinks.deposit(value,cache);
+                for(var i=0; i < cache.Length; i++)
+                    yield return cache[i];
+            }
+        }
+
+        /// <summary>
+        /// Produces a limited stream of random bytes
+        /// </summary>
+        /// <param name="source">The data source</param>
+        /// <param name="count">The maximum number of bytes to produce</param>
         [Op]
-        public static Deferred<byte> bytes(IDataSource source)
-            => Seq.defer(stream(w8, source));
+        public static IEnumerable<byte> bytes(IDataSource source, int count)
+        {
+            var counter = 0;
+            var bytes = new byte[8];
+            for(var j=0; j<count; j+=8)
+            {
+                var src = source.Next<ulong>();
+                Sinks.deposit(src, bytes);
+                for(var k=0; k<8; k++, counter++)
+                {
+                    if(counter == count)
+                        break;
+
+                    yield return bytes[k];
+                }
+            }
+        }
 
         [Op]
         static IEnumerable<byte> stream(W8 w, IDataSource source)

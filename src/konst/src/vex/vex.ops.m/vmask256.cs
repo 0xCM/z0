@@ -33,5 +33,9 @@ namespace Z0
             var hi = v8u(cpu.vparts(maskpart(src, 16, m), maskpart(src, 24, m)));
             return cpu.vconcat(lo,hi);
         }
+
+        [MethodImpl(Inline), Op]
+        static ulong maskpart(uint src, int offset, ulong mask)
+            => BitMasks.scatter((ulong)((byte)(src >> offset)), mask);
     }
 }

@@ -63,7 +63,8 @@ namespace Z0.Asm
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
                 Demands.insist(address, captured.BaseAddress);
-                return exchange.CaptureComplete(outcome.State, captured);
+                return captured;
+                //return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -81,7 +82,8 @@ namespace Z0.Asm
                 var outcome =  summary.Outcome;
                 var captured = new ApiCaptureBlock(id, src.Source, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
-                return exchange.CaptureComplete(outcome.State, captured);
+                return captured;
+                //return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -112,7 +114,8 @@ namespace Z0.Asm
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
-                return exchange.CaptureComplete(outcome.State, captured);
+                return captured;
+                //return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -162,16 +165,15 @@ namespace Z0.Asm
             while(offset < limit)
             {
                 state = Step(exchange, id, ref offset, ref end, ref pSrc);
-                exchange.CaptureStep(state);
 
                 if(ret_offset == null && state.Captured == RET)
                     ret_offset = offset;
 
                 var tc = CalcTerm(exchange, offset, ret_offset, out var delta);
                 if(tc != null)
-                    return SummarizeParse(exchange, state, id, tc.Value, start, end, delta);
+                    return SummarizeParse(exchange, id, tc.Value, start, end, delta);
             }
-            return SummarizeParse(exchange, state, id, CTC_BUFFER_OUT, start, end, 0);
+            return SummarizeParse(exchange, id, CTC_BUFFER_OUT, start, end, 0);
         }
 
         [MethodImpl(Inline)]
@@ -180,17 +182,17 @@ namespace Z0.Asm
             var code = Unsafe.Read<byte>(pSrc++);
             exchange[offset++] = code;
             location = (long)pSrc;
-            return new ExtractState((uint)offset, location, code);
+            return new ExtractState(code);
         }
 
         [MethodImpl(Inline)]
-        static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, long start, long end, int delta)
-            => new CaptureOutcome(state, ((ulong)start, (ulong)(end + delta)), tc);
+        static CaptureOutcome Complete(ExtractTermCode tc, long start, long end, int delta)
+            => new CaptureOutcome(((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static ApiParseResult SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ApiParseResult SummarizeParse(in CaptureExchange exchange, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
-            var outcome = Complete(state, tc, start, end, delta);
+            var outcome = Complete(tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
             var bits = new Z0.CapturedCodeBlock((MemoryAddress)start, raw, trimmed);

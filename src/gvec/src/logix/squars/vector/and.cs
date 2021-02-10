@@ -18,7 +18,6 @@ namespace Z0
             where T : unmanaged
                 => gcpu.vand(gcpu.vload(w, a), gcpu.vload(w, b));
 
-
         [MethodImpl(Inline), And, Closures(Closure)]
         public static Vector256<T> and<T>(W256 w, in T a, in T b)
             where T : unmanaged
@@ -27,14 +26,14 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W128 n, in T a, in T b, ref T dst)
             where T : unmanaged
-                => gcpu.vstore(and(n, in a, in b), ref dst);
+                => gcpu.vstore(and(n, a, b), ref dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
+                and(n, skip(a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), And, Closures(Closure)]

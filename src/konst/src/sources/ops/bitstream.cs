@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using static Part;
+    using static memory;
 
     partial struct Sources
     {
@@ -40,6 +42,33 @@ namespace Z0
                 var data = src.Next<ulong>();
                 for(byte i=0; i<64; i++)
                     yield return Numeric.force<byte,T>((byte)bit.test(data,i));
+            }
+        }
+
+        /// <summary>
+        /// Transforms an primal source stream into a bitstream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        public static IEnumerable<bit> bitstream<T>(IEnumerable<T> src)
+            where T : struct
+                => bitstream<T>(src.GetEnumerator());
+
+        /// <summary>
+        /// Transforms an primal enumerator into a bitstream
+        /// </summary>
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The primal type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static IEnumerable<bit> bitstream<T>(IEnumerator<T> src)
+            where T : struct
+        {
+            var buffer = alloc<bit>(size<T>());
+            while(src.MoveNext())
+            {
+                bit.unpack(src.Current, buffer.Clear());
+                foreach(var b in buffer)
+                    yield return b;
             }
         }
     }

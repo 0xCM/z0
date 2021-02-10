@@ -30,8 +30,11 @@ namespace Z0
                 try
                 {
                     ref var emission = ref seek(emissions,i);
+                    var innerFlow = wf.EmittingFile(emission.Target);
+
                     emission = emit(skip(descriptors,i), root);
-                    wf.EmittedFile((uint)emission.Source.Size, emission.Target);
+
+                    wf.EmittedFile(innerFlow, emission.Target);
                 }
                 catch(Exception e)
                 {
@@ -67,7 +70,7 @@ namespace Z0
                 ref readonly var descriptor = ref skip(sources,i);
                 var size = descriptor.Size;
                 seek(emission,i) = emit(descriptor, root);
-                wf.EmittedFile((uint)size, emission.Target);
+                wf.Status($"Emitted {emission.Target}");
             }
 
             wf.Ran(flow);

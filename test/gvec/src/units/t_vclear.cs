@@ -38,8 +38,8 @@ namespace Z0
                 byte length = (byte)(bitwidth<T>() - start);
                 var cellcount = n/bitwidth(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = gvec.vbitclear(x, start, length);
-                var x2 = gvec.vsrl(x1,start);
+                var x1 = gbits.vbitclear(x, start, length);
+                var x2 = gcpu.vsrl(x1,start);
                 Claim.nea(gcpu.vnonz(x2));
             }
         }
@@ -53,8 +53,8 @@ namespace Z0
                 byte length = (byte)(bitwidth<T>() - start);
                 var cellcount = n/bitwidth(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = gvec.vbitclear(x, start, length);
-                var x2 = gvec.vsrl(x1,start);
+                var x1 = gbits.vbitclear(x, start, length);
+                var x2 = gcpu.vsrl(x1,start);
                 Claim.nea(gcpu.vnonz(x2));
             }
         }

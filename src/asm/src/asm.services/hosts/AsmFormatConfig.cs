@@ -10,13 +10,7 @@ namespace Z0.Asm
 
         public bool EmitFileHeader;
 
-        public bool EmitFunctionHeaderEncoding;
-
         public bool EmitBaseAddress;
-
-        public bool EmitFunctionHeader;
-
-        public bool EmitFunctionTimestamp;
 
         public bool EmitSectionDelimiter;
 
@@ -27,6 +21,8 @@ namespace Z0.Asm
         public string FieldDelimiter;
 
         public string SectionDelimiter;
+
+        public bool AbsoluteLabels;
 
         public HexFormatOptions HeaderEncodingFormat;
 
@@ -46,50 +42,42 @@ namespace Z0.Asm
         public static AsmFormatConfig create(
            bool EmitCaptureTermCode = true,
            bool EmitFileHeader = true,
-           bool EmitFunctionHeaderEncoding = true,
            bool EmitBaseAddress = true,
-           bool EmitFunctionHeader = true,
-           bool EmitFunctionTimestamp = false,
            bool EmitSectionDelimiter = false,
            byte InstructionPad = 40,
            bool ShowLineAddresses = true,
+           bool AbsoluteLabels = false,
            int SectionDelimiterWidth = 120
            ) => new AsmFormatConfig(
                EmitCaptureTermCode,
                EmitFileHeader,
-               EmitFunctionHeaderEncoding,
                EmitBaseAddress,
-               EmitFunctionHeader,
-               EmitFunctionTimestamp,
                EmitSectionDelimiter,
                InstructionPad,
                ShowLineAddresses,
+               AbsoluteLabels,
                SectionDelimiterWidth);
 
         public AsmFormatConfig(
            bool EmitCaptureTermCode,
            bool EmitFileHeader,
-           bool EmitFunctionHeaderEncoding,
            bool EmitLocation,
-           bool EmitFunctionHeader,
-           bool EmitFunctionTimestamp,
            bool EmitSectionDelimiter,
            byte InstructionPad,
            bool ShowLineAddresses,
-          int SectionDelimiterWidth
+           bool AbsoluteLabels,
+           int SectionDelimiterWidth
            )
        {
            this.EmitCaptureTermCode = EmitCaptureTermCode;
            this.EmitFileHeader = EmitFileHeader;
-           this.EmitFunctionHeaderEncoding = EmitFunctionHeaderEncoding;
            this.EmitBaseAddress = EmitLocation;
-           this.EmitFunctionHeader = EmitFunctionHeader;
-           this.EmitFunctionTimestamp = EmitFunctionTimestamp;
            this.EmitSectionDelimiter = EmitSectionDelimiter;
            this.InstructionPad = InstructionPad;
            this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = FieldSep;
            this.SectionDelimiter  = SectionSep;
+           this.AbsoluteLabels = AbsoluteLabels;
            this.HeaderEncodingFormat = HexFormatSpecs.options();
        }
     }

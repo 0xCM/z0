@@ -11,9 +11,9 @@ namespace Z0
     {
         ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src);
 
-        ApiCaptureBlocks Capture(in ApiHostCatalog src);
+        ApiCaptureBlocks CaptureHost(in ApiHostCatalog src);
 
-        ApiCaptureBlocks Capture(ReadOnlySpan<IdentifiedMethod> src);
+        ApiCaptureBlocks CaptureMethods(ReadOnlySpan<IdentifiedMethod> src);
 
         ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> dst);
 

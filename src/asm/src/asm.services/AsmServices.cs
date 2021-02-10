@@ -101,12 +101,12 @@ namespace Z0.Asm
             => Capture.alt(wf,asm);
 
         [Op]
-        public static QuickCapture quick(IAsmContext asm)
+        public static QuickCapture quick(IWfShell wf, IAsmContext asm)
         {
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
             var service = AsmServices.capture(asm.CaptureCore, exchange);
-            return new QuickCapture(asm, buffer, tokens, service);
+            return new QuickCapture(wf, asm, buffer, tokens, service);
         }
 
         IWfShell Wf {get;}

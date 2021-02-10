@@ -44,7 +44,7 @@ namespace Z0
         public static BitVector128<N,T> xnor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vxnor(x.Data,y.Data);
+                => gcpu.vxnor(x.Data,y.Data);
 
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y

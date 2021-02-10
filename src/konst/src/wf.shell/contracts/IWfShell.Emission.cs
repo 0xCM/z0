@@ -11,12 +11,6 @@ namespace Z0
     partial interface IWfShell
     {
 
-        WfExecFlow EmittingFile<T>(T source, FS.FilePath dst)
-        {
-            signal(this).EmittingFile(source, dst);
-            return Flow();
-        }
-
         WfExecFlow EmittingFile(FS.FilePath dst)
         {
             signal(this).EmittingFile(dst);
@@ -29,30 +23,20 @@ namespace Z0
             return Ran(flow);
         }
 
-        void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-        {
-            signal(this).EmittedFile(source, count, dst);
-        }
-
-        WfExecToken EmittedFile<T>(WfExecFlow flow, T source, FS.FilePath dst)
-        {
-            signal(this).EmittedFile(source, dst);
-            return Ran(flow);
-        }
-
         void EmittedFile(Count count, FS.FilePath dst)
         {
             signal(this).EmittedFile(count, dst);
         }
 
-        void EmittedFile(FS.FilePath dst)
-        {
-            signal(this).EmittedFile(dst);
-        }
-
         WfExecToken EmittedFile(WfExecFlow flow, Count count, FS.FilePath dst)
         {
             signal(this).EmittedFile(count, dst);
+            return Ran(flow);
+        }
+
+        WfExecToken EmittedFile(WfExecFlow<FS.FilePath> flow, Count count)
+        {
+            signal(this).EmittedFile(count, flow.Data);
             return Ran(flow);
         }
     }

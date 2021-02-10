@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     using Z0.Asm;
 
+    using static Part;
+
+    [ApiHost]
     public readonly struct Capture
     {
         [MethodImpl(Inline), Op]
@@ -29,23 +30,42 @@ namespace Z0
         public static IApiCaptureArchive archive(IWfShell wf)
             => new ApiCaptureArchive(wf);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
-            => new CaptureAlt(wf,asm);
+            => new CaptureAlt(wf, asm);
 
-        [MethodImpl(Inline)]
+        [Op]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
 
+        [Op]
         public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
             => new ApiCaptureRunner(wf, asm);
 
+        [Op]
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
             var app = Apps.context(wf, Rng.@default());
             using var control = Capture.runner(wf, new AsmContext(app, wf));
             control.Run();
+        }
+
+        internal static ApiHostCaptureSet set(IAsmContext asm, in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
+        {
+            var count = blocks.Length;
+            var set = new ApiHostCaptureSet(catalog, blocks, memory.alloc<AsmRoutine>(count));
+            var blockview = set.Blocks.View;
+            var routines = set.Routines.Edit;
+            var decoder = asm.RoutineDecoder;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref memory.skip(blockview,i);
+                if(decoder.Decode(block, out var routine))
+                    memory.seek(routines, i) = routine;
+            }
+
+            return set;
         }
 
         static IWfShell describe(IWfShell wf)

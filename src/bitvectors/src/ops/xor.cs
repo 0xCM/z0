@@ -44,7 +44,7 @@ namespace Z0
         public static BitVector128<N,T> xor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vxor(x.Data,y.Data);
+                => gcpu.vxor(x.Data,y.Data);
 
         /// <summary>
         /// Computes  z := x ^ y from bitvectors x and y

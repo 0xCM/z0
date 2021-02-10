@@ -233,6 +233,14 @@ namespace Z0
             => new MemoryAddress(a.Location + size);
 
         [MethodImpl(Inline)]
+        public static MemoryAddress operator++(MemoryAddress a)
+            => new MemoryAddress(a.Location + 1);
+
+        [MethodImpl(Inline)]
+        public static MemoryAddress operator--(MemoryAddress a)
+            => new MemoryAddress(a.Location - 1);
+
+        [MethodImpl(Inline)]
         public static MemoryAddress operator+(MemoryAddress a, uint size)
             => new MemoryAddress(a.Location + size);
 

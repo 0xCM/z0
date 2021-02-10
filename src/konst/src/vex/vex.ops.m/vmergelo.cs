@@ -104,7 +104,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmergelo(Vector256<byte> x, Vector256<byte> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -114,7 +114,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi8 (__m256i a, __m256i b) VPUNPCKLBW ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmergelo(Vector256<sbyte> x, Vector256<sbyte> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -124,7 +124,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vmergelo(Vector256<short> x, Vector256<short> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -134,7 +134,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi16 (__m256i a, __m256i b) VPUNPCKLWD ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vmergelo(Vector256<ushort> x, Vector256<ushort> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -144,7 +144,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<int> vmergelo(Vector256<int> x, Vector256<int> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -154,7 +154,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi32 (__m256i a, __m256i b) VPUNPCKLDQ ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vmergelo(Vector256<uint> x, Vector256<uint> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -164,7 +164,7 @@ namespace Z0
         /// <remarks>__m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<long> vmergelo(Vector256<long> x, Vector256<long> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
 
         /// <summary>
         /// ([A,B,C,D], [E,F,G,H]) -> [A,E,B,F]
@@ -174,6 +174,6 @@ namespace Z0
         /// <remarks> __m256i _mm256_unpacklo_epi64 (__m256i a, __m256i b) VPUNPCKLQDQ ymm, ymm, ymm/m256</remarks>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vmergelo(Vector256<ulong> x, Vector256<ulong> y)
-           => UnpackLow(cpu.vperm4x64(x, Perm4L.ACBD), cpu.vperm4x64(y, Perm4L.ACBD));
+           => UnpackLow(vperm4x64(x, Perm4L.ACBD), vperm4x64(y, Perm4L.ACBD));
     }
 }

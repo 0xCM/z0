@@ -51,14 +51,6 @@ namespace Z0.Asm
         public Span<byte> Target(int start, int length)
             => TargetBuffer.Slice(start, length);
 
-        [MethodImpl(Inline)]
-        public ref readonly ApiCaptureBlock CaptureComplete(in ExtractState state, in ApiCaptureBlock captured)
-            => ref captured;
-
-        [MethodImpl(Inline)]
-        public ref readonly ExtractState CaptureStep(in ExtractState state)
-            => ref state;
-
         public int BufferLength
         {
             [MethodImpl(Inline)]

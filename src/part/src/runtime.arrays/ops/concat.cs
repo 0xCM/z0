@@ -30,17 +30,6 @@ namespace Z0
             return items;
         }
 
-        // /// <summary>
-        // /// Concatenates an array sequence
-        // /// </summary>
-        // /// <param name="src">The source arrays</param>
-        // public static T[] concat<T>(T[][] src)
-        // {
-        //     var dst = sys.alloc<T>(cells(src));
-        //     concat(src,dst);
-        //     return dst;
-        // }
-
         /// <summary>
         /// Concatenates a sequence of arrays
         /// </summary>

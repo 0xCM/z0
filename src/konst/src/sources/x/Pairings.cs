@@ -43,7 +43,7 @@ namespace Z0
                 dst[i] = values.First();
         }
 
-       /// <summary>
+        /// <summary>
         /// Yields a stream of source-provided heterogenous pairs
         /// </summary>
         /// <param name="src">The data source</param>

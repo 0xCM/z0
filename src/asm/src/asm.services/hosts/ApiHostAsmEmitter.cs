@@ -30,7 +30,7 @@ namespace Z0.Asm
             Decode(host, src, out dst);
             var emitted = emit(Wf, host, dst.Storage, Asm.Formatter.Config);
             if(emitted.IsNonEmpty)
-                Wf.EmittedFile(dst, dst.Count, emitted);
+                Wf.EmittedFile(dst.Count, emitted);
 
             Wf.Ran(flow);
             return ref dst;

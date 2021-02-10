@@ -16,6 +16,7 @@ namespace Z0
             var archive = Archives.create(cmd.SourceDir);
             var files = archive.ArchiveFiles(cmd.Extensions, true).Where(f => !f.Name.EndsWith(".resources.dll"));
             var counter = 0;
+            var flow =wf.EmittingFile(cmd.TargetPath);
             using var writer = cmd.TargetPath.Writer();
 
             foreach(var file in files)
@@ -24,7 +25,7 @@ namespace Z0
                 writer.WriteLine(listed.Format());
             }
 
-            wf.EmittedFile(counter, cmd.TargetPath);
+            wf.EmittedFile(flow, counter, cmd.TargetPath);
 
             return Cmd.ok(cmd);
         }

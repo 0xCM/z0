@@ -81,14 +81,14 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = gvec.vselect(a,b,c);
+                var x = gcpu.vselect(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
                 var sc = c.ToSpan();
                 var sx = x.ToSpan();
 
-                for(var j=0; j< sx.Length; j++)
+                for(var j=0; j<sx.Length; j++)
                     Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 
@@ -103,14 +103,14 @@ namespace Z0.Logix
                 var a = Random.CpuVector<T>(n);
                 var b = Random.CpuVector<T>(n);
                 var c = Random.CpuVector<T>(n);
-                var x = gvec.vselect(a,b,c);
+                var x = gcpu.vselect(a,b,c);
 
                 var sa = a.ToSpan();
                 var sb = b.ToSpan();
                 var sc = c.ToSpan();
                 var sx = x.ToSpan();
 
-                for(var j=0; j< sx.Length; j++)
+                for(var j=0; j<sx.Length; j++)
                     Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
             }
 

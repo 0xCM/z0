@@ -20,7 +20,7 @@ namespace Z0
             => Load(DefaultProvider);
 
         public Index<BitMaskInfo> Load(Type src)
-            => BitMasks.rows(src);
+            => BitMasks.descriptions(src);
 
         public Index<BitMaskInfo> Emit()
             => Emit(Db.IndexTable<BitMaskInfo>());

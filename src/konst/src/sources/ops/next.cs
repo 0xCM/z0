@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Sources
     {
-
         [MethodImpl(Inline)]
         public static ref readonly T next<T>(in CellCycle<T> src)
             where T : unmanaged, IDataCell<T>

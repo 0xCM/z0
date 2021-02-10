@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static gvec;
+    using static Part;
 
     partial class GridPatterns
     {
@@ -28,7 +26,7 @@ namespace Z0
         {
             var x = gcpu.vmask256<T>(BitMasks.msb<uint>(n2,n1));
             var offsets = gcpu.vinc<T>(w);
-            var pattern = vsrlv(x,offsets);
+            var pattern = gcpu.vsrlv(x,offsets);
             return pattern;
         }
     }

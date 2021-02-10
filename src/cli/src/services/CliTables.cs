@@ -29,14 +29,14 @@ namespace Z0
         {
             try
             {
-                var flow = Wf.EmittingFile(src, dst);
+                var flow = Wf.EmittingFile(dst);
                 using var stream = File.OpenRead(src.Name);
                 using var peFile = new PEReader(stream);
                 using var target = dst.Writer();
                 var reader = peFile.GetMetadataReader();
                 var viz = new MetadataTraverser(reader, target);
                 viz.Visualize();
-                Wf.EmittedFile(flow, src, dst);
+                Wf.EmittedFile(flow, dst);
                 return dst;
             }
             catch(Exception e)

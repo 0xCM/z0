@@ -11,13 +11,16 @@ namespace Z0.Asm
 
     public readonly struct AsmRecapture
     {
-        readonly IAsmContext Context;
+        readonly IWfShell Wf;
+
+        readonly IAsmContext Asm;
 
         [MethodImpl(Inline)]
-        public AsmRecapture(IAsmContext context)
+        public AsmRecapture(IWfShell wf, IAsmContext asm)
         {
-            Context = context;
-            Context.Paths.AppDataRoot.Clear();
+            Wf = wf;
+            Asm = asm;
+            Asm.Paths.AppDataRoot.Clear();
             ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
@@ -35,13 +38,13 @@ namespace Z0.Asm
         }
 
         public FS.FolderPath ResIndexDir
-            => Context.Paths.ResIndexDir;
+            => Asm.Paths.ResIndexDir;
 
         public FS.FolderPath ResBytesDir
-            => Context.Paths.AppDataDir + FS.folder("resbytes");
+            => Asm.Paths.AppDataDir + FS.folder("resbytes");
 
         public CapturedApiRes[] Capture(FS.FilePath src, FS.FolderPath dst)
-            => ApiRes.capture(Context, src, dst);
+            => ApiResCapture.capture(Wf, Asm, src, dst);
 
         /// <summary>
         /// The x86 resource assembly output path - which was created by disassembling most of z0

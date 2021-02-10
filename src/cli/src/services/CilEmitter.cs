@@ -33,7 +33,7 @@ namespace Z0
                     writer.WriteLine(cil.Formatted);
                 }
 
-                Wf.EmittedFile(flow, count, dst);
+                Wf.EmittedFile(flow, (Count)count, dst);
             }
 
         }
@@ -53,32 +53,9 @@ namespace Z0
                     writer.WriteLine(cil.Format());
                 }
 
-                Wf.EmittedFile(flow, count, dst);
+                Wf.EmittedFile(flow, (Count)count, dst);
             }
         }
 
-        // public ref FS.FilePath EmitDecoded(ApiHostUri uri, in ApiMemberCodeBlocks src, out FS.FilePath dst)
-        // {
-        //     dst = Wf.Db().CapturedAsmFile(uri).ChangeExtension(FileExtensions.Il);
-        //     if(src.Count != 0)
-        //     {
-        //         var module = src.First.Method.DeclaringType.Assembly.ManifestModule;
-        //         var count = src.Count;
-        //         var methods = src.Storage.Map(x => new LocatedMethod(x.OpUri.OpId, x.Method, x.Address));
-        //         var cilFx = Cil.functions(module, methods).View;
-        //         using var writer = dst.Writer();
-        //         for(var i=0u; i<count; i++)
-        //         {
-        //             ref readonly var fx = ref skip(cilFx,i);
-        //             if(fx.IsNonEmpty)
-        //                 writer.WriteLine(fx.Formatted);
-        //             else
-        //                 writer.WriteLine("!!Empty!!");
-        //         }
-
-        //         Wf.EmittedFile(src, count, dst);
-        //     }
-        //     return ref dst;
-        // }
     }
 }

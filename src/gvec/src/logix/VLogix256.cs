@@ -34,9 +34,9 @@ namespace Z0
             switch(kind)
             {
                 case ULK.Not: return gcpu.vnot(a);
-                case ULK.Identity: return gvec.videntity(a);
-                case ULK.False: return gvec.vfalse(a);
-                case ULK.True: return gvec.vtrue(a);
+                case ULK.Identity: return gcpu.videntity(a);
+                case ULK.False: return gcpu.vfalse(a);
+                case ULK.True: return gcpu.vtrue(a);
                 default: throw Unsupported.value(sig<T>(kind));
              }
         }
@@ -87,8 +87,8 @@ namespace Z0
             switch(kind)
             {
                 case BSK.Sll: return gcpu.vsll(a,count);
-                case BSK.Srl: return gvec.vsrl(a,count);
-                case BSK.Rotl: return gvec.vrotl(a,count);
+                case BSK.Srl: return gcpu.vsrl(a,count);
+                case BSK.Rotl: return gcpu.vrotl(a,count);
                 case BSK.Rotr: return gcpu.vrotr(a,count);
                 default: throw Unsupported.value(sig<T>(kind));
             }
@@ -107,8 +107,8 @@ namespace Z0
         {
             switch(kind)
             {
-                case BLK.True: return gvec.vtrue(a,b);
-                case BLK.False: return gvec.vfalse(a,b);
+                case BLK.True: return gcpu.vtrue(a,b);
+                case BLK.False: return gcpu.vfalse(a,b);
                 case BLK.And: return gcpu.vand(a,b);
                 case BLK.Nand: return gcpu.vnand(a,b);
                 case BLK.Or: return gcpu.vor(a,b);
@@ -116,11 +116,11 @@ namespace Z0
                 case BLK.Xor: return gcpu.vxor(a,b);
                 case BLK.Xnor: return gcpu.vxnor(a,b);
                 case BLK.LProject: return gcpu.vleft(a,b);
-                case BLK.RProject: return gvec.vright(a,b);
+                case BLK.RProject: return gcpu.vright(a,b);
                 case BLK.LNot: return gcpu.vlnot(a,b);
-                case BLK.RNot: return gvec.vrnot(a,b);
+                case BLK.RNot: return gcpu.vrnot(a,b);
                 case BLK.Impl: return gcpu.vimpl(a,b);
-                case BLK.NonImpl: return gvec.vnonimpl(a,b);
+                case BLK.NonImpl: return gcpu.vnonimpl(a,b);
                 case BLK.CImpl: return gcpu.vcimpl(a,b);
                 case BLK.CNonImpl: return gcpu.vcnonimpl(a,b);
                 default: throw Unsupported.value(sig<T>(kind));
@@ -150,8 +150,8 @@ namespace Z0
         {
             switch(kind)
             {
-                case BLK.True: return gvec.vtrue;
-                case BLK.False: return gvec.vfalse;
+                case BLK.True: return gcpu.vtrue;
+                case BLK.False: return gcpu.vfalse;
                 case BLK.And: return gcpu.vand;
                 case BLK.Nand: return gcpu.vnand;
                 case BLK.Or: return gcpu.vor;
@@ -159,11 +159,11 @@ namespace Z0
                 case BLK.Xor: return gcpu.vxor;
                 case BLK.Xnor: return gcpu.vxnor;
                 case BLK.LProject: return gcpu.vleft;
-                case BLK.RProject: return gvec.vright;
+                case BLK.RProject: return gcpu.vright;
                 case BLK.LNot: return gcpu.vlnot;
-                case BLK.RNot: return gvec.vrnot;
+                case BLK.RNot: return gcpu.vrnot;
                 case BLK.Impl: return gcpu.vimpl;
-                case BLK.NonImpl: return gvec.vnonimpl;
+                case BLK.NonImpl: return gcpu.vnonimpl;
                 case BLK.CImpl: return gcpu.vcimpl;
                 case BLK.CNonImpl: return gcpu.vcnonimpl;
                 default: throw Unsupported.value(sig<T>(kind));

@@ -6,11 +6,10 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     public interface IApiHostCapture
     {
+        ApiCaptureBlocks CaptureHost(in ApiHostCatalog src);
+
         ApiHostCaptureSet EmitCaptureSet(Type host);
     }
 }

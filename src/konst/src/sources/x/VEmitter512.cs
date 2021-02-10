@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     public readonly struct VEmitter512<T> : IEmitter512<T>

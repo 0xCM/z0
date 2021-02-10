@@ -22,7 +22,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(view,i).Format());
 
-            Wf.EmittedFile(flow, count, dst);
+            Wf.EmittedFile(flow, (Count)count, dst);
 
         }
         [Op]

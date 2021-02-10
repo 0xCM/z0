@@ -183,8 +183,8 @@ namespace Z0.Logix
                 Claim.Require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
-                x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);
+                x = gcpu.vxor(x,a);
+                y = gcpu.vxor(y,a);
             }
 
         }

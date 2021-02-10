@@ -25,6 +25,30 @@ namespace Z0
             Code = code;
         }
 
+        public OpUri Uri
+        {
+            [MethodImpl(Inline)]
+            get => Member.OpUri;
+        }
+
+        public CodeBlock Parsed
+        {
+            [MethodImpl(Inline)]
+            get => Code.Parsed;
+        }
+
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => Code.BaseAddress;
+        }
+
+        public ExtractTermCode TermCode
+        {
+            [MethodImpl(Inline)]
+            get => Code.TermCode;
+        }
+
         [MethodImpl(Inline)]
         public int CompareTo(ApiMemberCapture src)
             => Code.Compare(src.Code);

@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         public static IEnumerable<bit> BitStream<T>(this IEnumerator<T> src)
             where T : struct
-                => BitStreams.create(src);
+                => Sources.bitstream(src);
 
         /// <summary>
         /// Transforms an primal source stream into a bitstream
@@ -56,6 +56,6 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         public static IEnumerable<bit> BitStream<T>(this IEnumerable<T> src)
             where T : struct
-                => BitStreams.create(src);
+                => Sources.bitstream(src);
     }
 }

@@ -73,7 +73,7 @@ namespace Z0.Asm
                 Buffer.Clear();
                 ref readonly var routines = ref skip(view,i);
                 var path = Emit(routines, dst);
-                Wf.EmittedFile(routines, routines.RoutineCount, path);
+                Wf.EmittedFile(routines.RoutineCount, path);
             }
         }
 
@@ -160,13 +160,13 @@ namespace Z0.Asm
             var kind = IceExtractors.opkind(src, i);
             var desc = EmptyString;
 
-            if(AsmTest.isRegister(kind))
+            if(IceOpTest.isRegister(kind))
                 desc = format(register(src,i));
-            else if(AsmTest.isMem(kind))
+            else if(IceOpTest.isMem(kind))
                 desc = format(meminfo(src, i));
-            else if (AsmTest.isBranch(kind))
+            else if (IceOpTest.isBranch(kind))
                 desc = format(IceExtractors.branch(@base, src, i));
-            else if(AsmTest.isImm(kind))
+            else if(IceOpTest.isImm(kind))
                 desc = format(IceExtractors.imminfo(src, i));
             else
                 desc = kind.ToString();
@@ -181,7 +181,7 @@ namespace Z0.Asm
         [Op]
         static string footer(ApiInstruction src)
         {
-            if(AsmTest.isCall(src.Instruction))
+            if(IceOpTest.isCall(src.Instruction))
             {
                 var bytes = span(src.Encoded.Data);
                 if(bytes.Length >= 5)
@@ -376,11 +376,11 @@ namespace Z0.Asm
         {
             var k = IceExtractors.opkind(src, (byte)index);
 
-            if(AsmTest.isMem(k))
+            if(IceOpTest.isMem(k))
             {
-                var direct = AsmTest.isMemDirect(k);
-                var segBase = AsmTest.isSegBase(k);
-                var mem64 = AsmTest.isMem64(k);
+                var direct = IceOpTest.isMemDirect(k);
+                var segBase = IceOpTest.isSegBase(k);
+                var mem64 = IceOpTest.isMem64(k);
                 var info = new IceMemoryInfo();
                 var sz = src.MemorySize;
                 var memdirect = direct ? memDirect(src) : IceMemDirect.Empty;

@@ -172,7 +172,7 @@ namespace Z0
 
         void Run(in BuildProjectCmd cmd)
         {
-            cmd.Save(Db.JobQueue()).OnSuccess(data => Wf.EmittedFile(data)).OnFailure(msg => Wf.Error(msg));
+            cmd.Save(Db.JobQueue());
         }
 
         void Run(in ShowConfigCmd cmd)

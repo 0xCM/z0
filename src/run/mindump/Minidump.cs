@@ -11,7 +11,6 @@ namespace Z0
 
     using W = Windows;
 
-
     partial class Minidump
     {
         [Record(TableId)]
@@ -72,5 +71,4 @@ namespace Z0
             Source.Dispose();
         }
     }
-
 }

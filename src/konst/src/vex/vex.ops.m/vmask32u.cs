@@ -86,5 +86,21 @@ namespace Z0
         [MethodImpl(Inline), MoveMask]
         public static uint vmask32u(Vector256<ulong> src, [Imm] byte index)
             => vmask32u(vsll(src, (byte)(7 - index)));
+
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmask32u(Vector256<byte> src, [Imm] byte offset, [Imm] byte index)
+            => vmask32u(vsllx(src, offset), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmask32u(Vector256<ushort> src, [Imm] byte offset, [Imm] byte index)
+            => vmask32u(vsllx(src, offset), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmask32u(Vector256<uint> src, Vector256<uint> offsets, [Imm] byte index)
+            => vmask32u(vsllv(src, offsets), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static uint vmask32u(Vector256<ulong> src, Vector256<ulong> offsets, [Imm] byte index)
+            => vmask32u(vsllv(src, offsets), index);
     }
 }

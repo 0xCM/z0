@@ -32,9 +32,9 @@ namespace Z0
         ApiHostRes Emit(in ApiHostCode src, FS.FolderPath dst)
         {
             var target = dst + ApiIdentity.file(src.Host, FileExtensions.Cs);
-            Wf.EmittingFile(Host, target);
+            var flow = Wf.EmittingFile(target);
             var emission = Emit(src, target);
-            Wf.EmittedFile(Host, emission.Count, target);
+            Wf.EmittedFile(flow, (Count)emission.Count, target);
             return emission;
         }
 

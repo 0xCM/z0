@@ -44,6 +44,6 @@ namespace Z0
         public static BitVector128<N,T> nor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gvec.vnor(x.Data,y.Data);
+                => gcpu.vnor(x.Data,y.Data);
     }
 }

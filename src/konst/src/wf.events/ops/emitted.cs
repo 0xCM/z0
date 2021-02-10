@@ -12,8 +12,8 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static EmittingFileEvent<T> emittingFile<T>(WfStepId step, T paylaod, FS.FilePath dst, CorrelationToken ct)
-            => new EmittingFileEvent<T>(step, paylaod, dst, ct);
+        public static EmittingFileEvent<T> emittingFile<T>(WfStepId step, T payload, FS.FilePath dst, CorrelationToken ct)
+            => new EmittingFileEvent<T>(step, payload, dst, ct);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static EmittedFileEvent<T> emittedFile<T>(WfStepId step, T payload, Count count, FS.FilePath dst, CorrelationToken ct)

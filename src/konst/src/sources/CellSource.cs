@@ -18,7 +18,6 @@ namespace Z0
 
         readonly IDataSource Provider;
 
-
         [MethodImpl(Inline), Op]
         public static Cell8 next(IDataSource source, W8 w)
             => source.Next<byte>();

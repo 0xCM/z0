@@ -10,12 +10,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using Z0.Asm;
 
-    public readonly struct QuickCapture : IDisposable
+    using api = Capture;
+
+    public readonly struct QuickCapture : IDisposable, IApiHostCapture
     {
-        readonly IAsmContext Context;
+        readonly IWfShell Wf;
+
+        readonly IAsmContext Asm;
 
         readonly NativeBuffer Buffer;
 
@@ -24,25 +29,52 @@ namespace Z0
         readonly ICaptureServiceProxy Service;
 
         [MethodImpl(Inline)]
-        internal QuickCapture(IAsmContext context, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        internal QuickCapture(IWfShell wf, IAsmContext context, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {
-            Context = context;
+            Wf = wf;
+            Asm = context;
             Tokens = tokens;
             Service = capture;
             Buffer =  buffer;
         }
 
-        [MethodImpl(Inline)]
         public Option<ApiCaptureBlock> Capture(MethodInfo src)
-            => Service.Capture(z.insist(src).Identify(), src);
+            => Service.Capture(src.Identify(), src);
 
-        [MethodImpl(Inline)]
         public Option<ApiMemberCapture> Capture(ApiMember src)
             => Service.Capture(src);
 
-        [MethodImpl(Inline)]
-        public Option<ApiCaptureBlock> Capture(ApiHostUri hos, MethodInfo src)
-            => Service.Capture(z.insist(src).Identify(),src);
+        public Option<ApiCaptureBlock> Capture(ApiHostUri host, MethodInfo src)
+            => Service.Capture(src.Identify(),src);
+
+        public ApiHostCaptureSet EmitCaptureSet(Type host)
+        {
+            var catalog = ApiCatalogs.host(Wf, host);
+            return api.set(Asm, catalog, CaptureHost(catalog));
+        }
+
+        [Op]
+        public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)
+        {
+            var members = src.Members.View;
+            var count = members.Length;
+            var blocks = sys.alloc<ApiCaptureBlock>(count);
+            ref var b = ref first(blocks);
+            var buffer = sys.alloc<byte>(Pow2.T14);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var member = ref skip(members, i);
+                var address = member.BaseAddress;
+                var id = member.Id;
+                var captured = Service.Capture(member);
+                if(captured)
+                {
+                    var data = captured.Value;
+                    seek(b,i) = data.Code;
+                }
+            }
+            return blocks;
+        }
 
         public void Dispose()
         {

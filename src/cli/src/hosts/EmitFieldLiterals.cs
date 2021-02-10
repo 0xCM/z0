@@ -92,7 +92,7 @@ namespace Z0
 
         void Emit(FieldRef[] src, FS.FilePath dst)
         {
-            Wf.EmittingFile(nameof(FieldRef), dst);
+            var flow = Wf.EmittingFile(dst);
             var input = span(src);
             var count = input.Length;
 
@@ -112,7 +112,7 @@ namespace Z0
                 }
             }
 
-            Wf.EmittedFile(nameof(FieldRef), count, dst);
+            Wf.EmittedFile(flow, (Count)count, dst);
         }
     }
 }

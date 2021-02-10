@@ -310,20 +310,58 @@ namespace Z0.Asm
         }
 
 
-        void RunCapture()
+        ApiHostCaptureSet RunCapture(Type host)
         {
-            var host = typeof(gcpu);
             var capture = AsmServices.HostCapture(Wf);
-            var set = capture.EmitCaptureSet(host);
-
+            return capture.EmitCaptureSet(host);
         }
+
+
+        public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
+
+        public static bool TestJmpRax(ReadOnlySpan<byte> src, int offset, out byte delta)
+        {
+            delta = 0;
+            if(offset >= 3)
+            {
+                ref readonly var s2 = ref skip(src,offset - 2);
+                ref readonly var s1 = ref skip(src,offset - 1);
+                ref readonly var s0 = ref skip(src,offset - 0);
+                if(s2 == 0x48 && s1 == 0xff && s0 == 0xe0)
+                {
+                    delta = 2;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int TestJmpRax()
+        {
+            var tc = TestCase01;
+            var count = tc.Length;
+            var address = MemoryAddress.Zero;
+            for(var i=0; i<count; i++)
+            {
+                var result = TestJmpRax(tc, i, out var delta);
+                if(result)
+                {
+                    var location = address - delta;
+                    Wf.Status($"Jmp RAX found at {location.Format(NumericWidth.W16)}");
+                    break;
+                }
+                address++;
+            }
+            return 0;
+        }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
             //ProcessCatalog();
-
-            var clang = Clang.create(Wf);
-            Wf.Status(clang.print_targets().Format());
+            //var clang = Clang.create(Wf);
+            //Wf.Status(clang.print_targets().Format());
+            var set = RunCapture(typeof(Clang));
         }
 
         public static void Main(params string[] args)

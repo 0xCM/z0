@@ -59,7 +59,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnor(gx[i],gy[i]);
+                gz[i] = gcpu.vnor(gx[i],gy[i]);
             return ref gz;
         }
 
@@ -113,7 +113,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnor<T>(gx,gy);
+                => gcpu.vnor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise NOR between 256-bit fixed-width natural bitgrids
@@ -126,7 +126,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnor<T>(gx,gy);
+                => gcpu.vnor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise NOR between natural bitgrids and stores the result to a caller-supplied target
@@ -143,7 +143,7 @@ namespace Z0
         {
             var blocks = gz.BlockCount;
             for(var i=0; i<blocks; i++)
-                gz[i] = gvec.vnor(gx[i],gy[i]);
+                gz[i] = gcpu.vnor(gx[i],gy[i]);
             return ref gz;
         }
 

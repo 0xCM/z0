@@ -66,7 +66,7 @@ namespace Z0.Asm
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
         [Op]
-        public static ReadOnlySpan<string> lines(in AsmRoutine src, in AsmFormatConfig config)
+        public static ReadOnlySpan<string> instructions(in AsmRoutine src, in AsmFormatConfig config)
         {
             var summaries = summarize(src);
             var count = summaries.Length;
@@ -112,10 +112,10 @@ namespace Z0.Asm
         [Op]
         public static string format(in AsmLineLabel src)
             => src.Width switch{
-                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex() + CharText.Space,
-                DataWidth.W64 => src.Offset.FormatAsmHex() + CharText.Space,
+                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
+                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
+                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
+                DataWidth.W64 => src.Offset.FormatAsmHex(),
                 _ => EmptyString
             };
 
@@ -134,11 +134,17 @@ namespace Z0.Asm
         [Op]
         public static void format(MemoryAddress @base, in AsmInstructionSummary src, in AsmFormatConfig config, StringBuilder dst)
         {
+            const string AbsolutePattern = "{0} {1} {2}";
+            const string RelativePattern = "{0} {1}";
+
             var label = asm.label(w16, src.Offset);
-            var absolute = @base + src.Offset;
-            const string StatementPattern = "{0} {1} {2}";
-            var statement = string.Format(StatementPattern, absolute.Format(), format(label), src.Formatted.PadRight(config.InstructionPad, Space));
-            dst.Append(statement);
+            var address = @base + src.Offset;
+
+            if(config.AbsoluteLabels)
+                dst.Append(string.Format(AbsolutePattern, address.Format(), format(label), src.Formatted.PadRight(config.InstructionPad, Space)));
+            else
+                dst.Append(string.Format(RelativePattern, format(label), src.Formatted.PadRight(config.InstructionPad, Space)));
+
             var comment = asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter));
             dst.Append(comment);
         }
@@ -152,7 +158,7 @@ namespace Z0.Asm
                 ref var x = ref src.First;
                 for(var i=0; i<count; i++)
                 {
-                    var l = lines(skip(x,i), config);
+                    var l = instructions(skip(x,i), config);
                     dst.Append(l.Concat(Eol));
                     dst.AppendLine();
                 }
@@ -170,22 +176,19 @@ namespace Z0.Asm
         [Op]
         public static void format(in AsmRoutine src, in AsmFormatConfig config, StringBuilder dst)
         {
-            if(config.EmitFunctionHeader)
-                foreach(var line in header(src))
-                    dst.AppendLine(line);
+            foreach(var line in header(src))
+                dst.AppendLine(line);
 
-            dst.AppendLine(lines(src, config).Concat(Eol));
+            dst.AppendLine(instructions(src, config).Concat(Eol));
         }
 
         [Op]
         public static void format(in AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
         {
+            foreach(var line in header(src))
+                dst.AppendLine(line);
 
-            if(config.EmitFunctionHeader)
-                foreach(var line in header(src))
-                    dst.AppendLine(line);
-
-            dst.AppendLine(lines(src, config).Concat(Eol));
+            dst.AppendLine(instructions(src, config).Concat(Eol));
         }
     }
 }

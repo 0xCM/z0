@@ -22,11 +22,11 @@ namespace Z0.Asm
         public static Func<Vector256<uint>,Vector256<uint>,Vector256<uint>> And256
             => Avx2.And;
 
-        public static IEnumerable<MethodInfo> vand => 
-            typeof(gvec).DeclaredStaticMethods()
+        public static IEnumerable<MethodInfo> vand =>
+            typeof(gcpu).DeclaredStaticMethods()
                         .OpenGeneric()
                         .WithName("vand")
                         .Select(m => m.GetGenericMethodDefinition().MakeGenericMethod(typeof(uint)))
-                        .ToArray();            
+                        .ToArray();
     }
 }

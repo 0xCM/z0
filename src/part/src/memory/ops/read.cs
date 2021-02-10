@@ -48,43 +48,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte read8<T>(in T src)
-            => u8(src);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ushort read16<T>(in T src)
-        {
-            if(size<T>() >= 16)
-                return u16(src);
-            else
-                return u8(src);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint read32<T>(in T src)
-        {
-            if(size<T>() >= 32)
-                return u32(src);
-            else  if(size<T>() >= 16)
-                return u16(src);
-            else
-                return u8(src);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong read64<T>(in T src)
-        {
-            if(size<T>() >= 64)
-                return u64(src);
-            else  if(size<T>() >= 32)
-                return u32(src);
-            else  if(size<T>() >= 16)
-                return u16(src);
-            else
-                return u8(src);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte read<T>(in T src, ref byte dst)
         {
             dst = read8(src);

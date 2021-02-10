@@ -34,13 +34,10 @@ namespace Z0
         public ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src)
             => capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
 
-        public static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src)
-            => capture(src, sys.alloc<byte>(Pow2.T14));
-
-        public ApiCaptureBlocks Capture(in ApiHostCatalog src)
+        public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)
             => capture(src);
 
-        public ApiCaptureBlocks Capture(ReadOnlySpan<IdentifiedMethod> src)
+        public ApiCaptureBlocks CaptureMethods(ReadOnlySpan<IdentifiedMethod> src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         public ApiCaptureBlock Capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
@@ -63,6 +60,9 @@ namespace Z0
 
         public ApiCaptureBlock Capture(IdentifiedMethod src, Span<byte> dst)
             => capture(src, dst);
+
+        static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src)
+            => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [Op]
         static ApiCaptureBlocks capture(in ApiHostCatalog src)
@@ -164,54 +164,45 @@ namespace Z0
             => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline), Op]
-        static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)
-            => capture(buffer, id, src.Pointer<byte>());
+        static CapturedOperation capture(Span<byte> dst, OpIdentity id, MemoryAddress src)
+            => capture(src.Pointer<byte>(), id, dst);
 
         [MethodImpl(Inline), Op]
-        static CapturedOperation capture(Span<byte> buffer, OpIdentity id, byte* pSrc)
+        static CapturedOperation capture(byte* pSrc, OpIdentity id, Span<byte> dst)
         {
-            var limit = buffer.Length - 1;
+            var limit = dst.Length - 1;
             var start = (MemoryAddress)pSrc;
             var offset = 0;
             int? ret_offset = null;
             var end = (MemoryAddress)pSrc;
-            var state = default(ExtractState);
+            var state = ExtractState.Empty;
 
             while(offset < limit)
             {
-                state = Step(buffer, id, ref offset, ref end, ref pSrc);
+                var code = *pSrc++;
+                seek(dst, offset++) = code;
+                end = pSrc;
+                state = new ExtractState(code);
 
                 if(ret_offset == null && state.Captured == RET)
                     ret_offset = offset;
 
-                var tc = CalcTerm(buffer, offset, ret_offset, out var delta);
+                var tc = CalcTerm(dst, offset, ret_offset, out var delta);
                 if(tc != 0)
-                    return SummarizeParse(buffer, state, id, tc, start, end, delta);
+                    return complete(dst, id, tc, start, end, delta);
             }
-            return SummarizeParse(buffer, state, id, CTC_BUFFER_OUT, start, end, 0);
+            return complete(dst, id, CTC_BUFFER_OUT, start, end, 0);
         }
 
-        [MethodImpl(Inline)]
-        static ExtractState Step(Span<byte> buffer, OpIdentity id, ref int offset, ref MemoryAddress location, ref byte* pSrc)
+        static CapturedOperation complete(Span<byte> buffer, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
         {
-            var code = Unsafe.Read<byte>(pSrc++);
-            buffer[offset++] = code;
-            location = pSrc;
-            return new ExtractState((uint)offset, location, code);
-        }
-
-        [MethodImpl(Inline)]
-        static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
-            => new CaptureOutcome(state, (start, (ulong)(end + delta)), tc);
-
-        static CapturedOperation SummarizeParse(Span<byte> buffer, in ExtractState state, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
-        {
-            var outcome = Complete(state, tc, start, end, delta);
+            var outcome = new CaptureOutcome((start, (ulong)(end + delta)), tc);
             var raw = buffer.Slice(0, (int)(end - start)).ToArray();
             var trimmed = buffer.Slice(0, outcome.ByteCount).ToArray();
             var bits = new CapturedCodeBlock(start, raw, trimmed);
             return new CapturedOperation(id, outcome, bits);
         }
+
 
         [Op]
         static ExtractTermCode CalcTerm(Span<byte> buffer, int offset, int? ret_offset, out int delta)
@@ -330,6 +321,5 @@ namespace Z0
             Array.Sort(buffer);
             return buffer;
         }
-
     }
 }

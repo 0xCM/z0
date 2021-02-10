@@ -83,7 +83,9 @@ namespace Z0
 
         public void Emit(CmdScript script)
         {
-            Wf.EmittedFile(script.GetType(), script.Length, Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
+            var dst = Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db());
+            var flow = Wf.EmittingFile(dst);
+            Wf.EmittedFile(flow, (Count)script.Length, dst);
         }
 
         public ToolHelp Help(ToolId tool)
@@ -98,9 +100,9 @@ namespace Z0
         [Op]
         public static void emit(IWfShell wf, CmdScript script)
         {
-            wf.EmittedFile(script.GetType(),
-                script.Length,
-                Cmd.enqueue(Cmd.job(script.Id, script), wf.Db()));
+            var dst = Cmd.enqueue(Cmd.job(script.Id, script), wf.Db());
+            wf.Status($"Emitted {dst}");
+            //wf.EmittedFile((Count)script.Length, Cmd.enqueue(Cmd.job(script.Id, script), wf.Db()));
         }
     }
 }

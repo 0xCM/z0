@@ -28,7 +28,7 @@ namespace Z0
         {
             try
             {
-                var flow = wf.EmittingFile(src, dst);
+                var flow = wf.EmittingFile(dst);
                 using var writer = dst.Writer();
 
                 var f1 = Records.formatter<ProcessState>(16);
@@ -49,7 +49,7 @@ namespace Z0
                 for(var i=0; i<icount; i++)
                     writer.WriteLine(f2.Format(skip(images,i)));
 
-                return wf.EmittedFile(flow, src, dst);
+                return wf.EmittedFile(flow, dst);
 
             }
             catch(Exception e)

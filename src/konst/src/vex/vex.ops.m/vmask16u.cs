@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
@@ -86,5 +87,21 @@ namespace Z0
         [MethodImpl(Inline), MoveMask]
         public static ushort vmask16u(Vector128<ulong> src, [Imm] byte index)
             => vmask16u(vsll(v64u(src), (byte)(7 - index)));
+
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmask16u(Vector128<byte> src, byte offset, [Imm] byte index)
+            => vmask16u(vsllx(src, offset), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmask16u(Vector128<ushort> src, byte offset, [Imm] byte index)
+            => vmask16u(vsllx(src, offset), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmask16u(Vector128<uint> src, Vector128<uint> offsets, [Imm] byte index)
+            => vmask16u(vsllv(src, offsets), index);
+
+        [MethodImpl(Inline), MoveMask]
+        public static ushort vmask16u(Vector128<ulong> src, Vector128<ulong> offsets, [Imm] byte index)
+            => vmask16u(vsllv(src, offsets), index);
     }
 }

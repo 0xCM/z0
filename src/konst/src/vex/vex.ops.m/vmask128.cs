@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+
     using static Part;
     using static BitMasks.Literals;
 
@@ -31,5 +32,9 @@ namespace Z0
             var m = Lsb64x8x1 << index;
             return v8u(cpu.vparts(maskpart(src,0, m), maskpart(src,8, m)));
         }
+
+        [MethodImpl(Inline), Op]
+        static ulong maskpart(uint src, int offset)
+            => BitMasks.scatter((ulong)((byte)(src >> offset)), Msb64x8x1);
     }
 }
