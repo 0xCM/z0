@@ -25,7 +25,7 @@ namespace Z0
                 var tc = Type.GetTypeCode(field.FieldType);
                 var vRaw = field.GetRawConstantValue();
                 if(IsMultiLiteral(field))
-                    dst.AddRange(rows(multiliteral(field), vRaw));
+                    dst.AddRange(rows(polymorphic(field), vRaw));
                 else if(IsBinaryLiteral(field))
                     dst.Add(BitMasks.row(binaryliteral(field,vRaw)));
                 else
@@ -36,7 +36,7 @@ namespace Z0
 
         public static Index<BitMaskInfo> rows(LiteralInfo src, object value)
         {
-            if(src.MultiLiteral)
+            if(src.Polymorphic)
             {
                 var input = src.Text;
                 var fence = Rules.fence(Chars.LBracket, Chars.RBracket);

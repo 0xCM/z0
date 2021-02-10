@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using Z0.Tools;
 
     using static Part;
     using static memory;
@@ -300,7 +301,6 @@ namespace Z0.Asm
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
             ShowSpecifiers(Etl);
-
         }
 
 
@@ -320,7 +320,10 @@ namespace Z0.Asm
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
-            ProcessCatalog();
+            //ProcessCatalog();
+
+            var clang = Clang.create(Wf);
+            Wf.Status(clang.print_targets().Format());
         }
 
         public static void Main(params string[] args)

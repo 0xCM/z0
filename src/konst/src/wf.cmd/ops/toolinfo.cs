@@ -9,39 +9,17 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static z;
+    using static memory;
 
-    [ApiHost]
-    public partial struct CmdTools
+    partial struct Cmd
     {
-        const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline)]
-        public static ToolWorkspace<T> workspace<T>(ToolId tool, FS.FolderPath root, ToolArchiveKind kind)
-            where T : struct, ITool<T>
-                => new ToolWorkspace<T>(tool, root, kind);
-
-        /// <summary>
-        /// Creates a <see cref='ToolSpec'/>
-        /// </summary>
-        /// <param name="tool">The tool identifier</param>
-        /// <param name="verbs"></param>
-        [MethodImpl(Inline), Op]
-        public static ToolSpec specify(ToolId tool, CmdFlagSpec[] flags, CmdOptionSpec[] options, ToolUsage syntax)
-            => new ToolSpec(tool, flags, options, syntax);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ToolSpec specify<T>(CmdFlagSpec[] flags, CmdOptionSpec[] options, ToolUsage syntax)
-            where T : unmanaged
-                => new ToolSpec(typeof(T).Name, flags, options, syntax);
-
-        [MethodImpl(Inline), Op]
-        public static ToolHelp help(ToolId tool, string src)
-            => new ToolHelp(tool, src);
-
-        public static ToolInfo describe<T>()
+        public static ToolInfo toolinfo<T>()
             where T : struct, ICmdToolModel<T>
                 => describe(typeof(T));
+
+        [MethodImpl(Inline), Op]
+        public static ToolHelp toolhelp(ToolId tool, string src)
+            => new ToolHelp(tool, src);
 
         [Op]
         static ref CmdOptionSpec extract(MemberInfo src, out CmdOptionSpec dst)

@@ -19,7 +19,7 @@ namespace Z0
 
         public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = WfSelfHost.create();
+            Host = WfShell.host(nameof(ApiCaptureEmitter));
             Wf = wf.WithHost(Host);
             Asm = asm;
         }

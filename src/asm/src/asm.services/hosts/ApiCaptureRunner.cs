@@ -22,7 +22,7 @@ namespace Z0
 
         internal ApiCaptureRunner(IWfShell wf, IAsmContext asm)
         {
-            Host = WfSelfHost.create();
+            Host = WfShell.host(nameof(ApiCaptureRunner));
             Wf = wf.WithHost(Host);
             App = asm.ContextRoot;
             Asm = asm;

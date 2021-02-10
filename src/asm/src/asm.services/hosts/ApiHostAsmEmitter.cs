@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public ApiHostAsmEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = WfSelfHost.create();
+            Host = WfShell.host(nameof(ApiHostAsmEmitter));
             Wf = wf.WithHost(Host);
             Asm = asm;
         }

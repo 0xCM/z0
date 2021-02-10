@@ -15,6 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         internal static IWfShell clone(IWfShell src, WfHost host, IPolyStream random, LogLevel verbosity)
             => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity, src.Router, src.Services);
-
     }
 }

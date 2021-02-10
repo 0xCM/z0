@@ -34,19 +34,13 @@ namespace Z0
             signal(this).Error(body);
         }
 
-        WfExecToken Error(WfExecFlow flow, WfStepId step, Exception e)
-        {
-            signal(this).Error(step, e);
-            return Ran(flow);
-        }
-
-        WfExecToken Error<T>(WfExecFlow flow, T body)
-        {
-            signal(this).Error(body);
-            return Ran(flow);
-        }
-
         WfExecToken Error(WfExecFlow flow, Exception e)
+        {
+            signal(this).Error(e);
+            return Ran(flow);
+        }
+
+        WfExecToken Error<T>(WfExecFlow<T> flow, Exception e)
         {
             signal(this).Error(e);
             return Ran(flow);

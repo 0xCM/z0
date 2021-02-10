@@ -4,24 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class TextFile<F,C> : Document<F,C,FileLocation>
+    public abstract class TextFile<F,C> : Document<F,C,FS.FilePath>
         where F : TextFile<F,C>, new()
         where C : struct, ITextual
     {
-
         public TextFile()
-            : base(FileLocation.Empty, default(C))
+            : base(FS.FilePath.Empty, default(C))
         {
 
         }
 
         public TextFile(C content)
-            : base(FileLocation.Empty, content)
+            : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public TextFile(FileLocation src, C content)
+        public TextFile(FS.FilePath src, C content)
             : base(src, content)
         {
 
@@ -33,18 +32,18 @@ namespace Z0
     {
 
         public TextFile()
-            : base(FileLocation.Empty, TextBlock.Empty)
+            : base(FS.FilePath.Empty, TextBlock.Empty)
         {
 
         }
 
         public TextFile(TextBlock content)
-            : base(FileLocation.Empty, content)
+            : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public TextFile(FileLocation src, TextBlock content)
+        public TextFile(FS.FilePath src, TextBlock content)
             : base(src, content)
         {
 
@@ -54,24 +53,24 @@ namespace Z0
     public sealed class TextFile : TextFile<TextFile>
     {
         public TextFile()
-            : base(FileLocation.Empty, TextBlock.Empty)
+            : base(FS.FilePath.Empty, TextBlock.Empty)
         {
 
         }
 
         public TextFile(TextBlock content)
-            : base(FileLocation.Empty, content)
+            : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public TextFile(FileLocation src, TextBlock content)
+        public TextFile(FS.FilePath src, TextBlock content)
             : base(src, content)
         {
 
         }
 
-        public override TextFile Load(FileLocation location)
-            => new TextFile(location, location.Locator.ReadText());
+        public override TextFile Load(FS.FilePath location)
+            => new TextFile(location, location.ReadText());
     }
 }

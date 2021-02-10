@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FilePath : IFsEntry<FilePath>, IComparable<FilePath>
+        public readonly struct FilePath : IFsEntry<FilePath>, IComparable<FilePath>, ILocation<FilePath>
         {
             public PathPart Name {get;}
 

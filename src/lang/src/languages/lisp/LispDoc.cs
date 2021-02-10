@@ -4,27 +4,27 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    public sealed class LispDoc : Document<LispDoc,TextBlock,FileLocation>
+    public sealed class LispDoc : Document<LispDoc,TextBlock,FS.FilePath>
     {
         public LispDoc()
-            : base(FileLocation.Empty, TextBlock.Empty)
+            : base(FS.FilePath.Empty, TextBlock.Empty)
         {
 
         }
 
         public LispDoc(TextBlock content)
-            : base(FileLocation.Empty, content)
+            : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public LispDoc(FileLocation src, TextBlock content)
+        public LispDoc(FS.FilePath src, TextBlock content)
             : base(src, content)
         {
 
         }
 
-        public override LispDoc Load(FileLocation location)
-            => new LispDoc(location, location.Locator.ReadText());
+        public override LispDoc Load(FS.FilePath location)
+            => new LispDoc(location, location.ReadText());
     }
 }

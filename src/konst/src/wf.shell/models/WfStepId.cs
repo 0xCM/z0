@@ -17,11 +17,16 @@ namespace Z0
         public string HostName {get;}
 
         public string HostIdentifier
-            => HostName.LeftOfFirst(Chars.Comma).RightOfLast(Chars.Dot);
+            => HostName.Contains(Chars.Comma) && HostName.Contains(Chars.Dot) ?
+                HostName.LeftOfFirst(Chars.Comma).RightOfLast(Chars.Dot)
+                : HostName;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepId(Type control)
-            => new WfStepId(control);
+        public WfStepId(Name name)
+        {
+            HostName = name;
+            HostKey = ClrToken.Empty;
+        }
 
         [MethodImpl(Inline)]
         public WfStepId(Type control)
@@ -80,5 +85,12 @@ namespace Z0
 
         public static WfStepId Empty
             => new WfStepId(typeof(void));
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(Type control)
+            => new WfStepId(control);
+
+        public static implicit operator WfStepId(Name name)
+            => new WfStepId(name);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         internal ApiHostDecoder(IWfShell wf, IAsmDecoder decoder)
         {
-            Host = WfSelfHost.create();
+            Host = WfShell.host(nameof(ApiHostDecoder));
             Wf = wf.WithHost(Host);
             Decoder = decoder;
         }

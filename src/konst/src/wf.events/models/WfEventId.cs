@@ -18,16 +18,16 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        const string RPName = "{2,-18}";
+        const string RPName = "{1,-18}";
 
-        const string RPCommon = "{0} | {1} | " + RPName;
+        const string RPCommon = "{0} | " + RPName;
 
         [MethodImpl(Inline)]
         WfEventId(Type type)
         {
             Ts = timestamp();
             Ct = root.correlate(Runtime.EntryAssembly.Part);
-            Identifier = text.format(RPCommon, Ts, Ct, type.Name);
+            Identifier = text.format(RPCommon, Ts, type.Name);
         }
 
         [MethodImpl(Inline)]
@@ -35,7 +35,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = root.correlate(Runtime.EntryAssembly.Part);
-            Identifier = text.format(RPCommon, Ts, Ct, name);
+            Identifier = text.format(RPCommon, Ts, name);
         }
 
         [MethodImpl(Inline)]
@@ -43,7 +43,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon, Ts, Ct, name);
+            Identifier = text.format(RPCommon, Ts, name);
         }
 
         [MethodImpl(Inline)]
@@ -51,7 +51,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3} | {4}", Ts, Ct, name, label, step);
+            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, name, label, step);
         }
 
         [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3}", Ts, Ct, name, label);
+            Identifier = text.format(RPCommon + " | {2}", Ts, name, label);
         }
 
         [MethodImpl(Inline)]
@@ -67,7 +67,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3}", Ts, Ct, name, cmd);
+            Identifier = text.format(RPCommon + " | {2}", Ts, name, cmd);
         }
 
         [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3}", Ts, Ct, name, step);
+            Identifier = text.format(RPCommon + " | {2}", Ts, name, step);
         }
 
         [MethodImpl(Inline)]
@@ -83,7 +83,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3} | {4}", Ts, Ct, name, level, step);
+            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, name, level, step);
         }
 
         [MethodImpl(Inline)]
@@ -91,7 +91,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3} | {4}", Ts, Ct, kind, level, step);
+            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, kind, level, step);
         }
 
         [MethodImpl(Inline)]
@@ -99,7 +99,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format(RPCommon + " | {3}", Ts, Ct, type.Name, step);
+            Identifier = text.format(RPCommon + " | {2}", Ts, type.Name, step);
         }
 
         /// <summary>

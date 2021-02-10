@@ -10,16 +10,18 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public readonly struct NamedValues
+    {
+        public static NamedValues<T> empty<T>()
+            => new NamedValues<T>(NamedValue.empty<T>());
+    }
+
     public readonly struct NamedValues<T>
     {
         public NamedValue<T>[] Data {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator NamedValues<T>(NamedValue<T>[] src)
-            => new NamedValues<T>(src);
-
-        [MethodImpl(Inline)]
-        public NamedValues(NamedValue<T>[] src)
+        public NamedValues(params NamedValue<T>[] src)
             => Data = src;
 
         public Count Count
@@ -87,5 +89,9 @@ namespace Z0
             }
             return 0;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator NamedValues<T>(NamedValue<T>[] src)
+            => new NamedValues<T>(src);
     }
 }

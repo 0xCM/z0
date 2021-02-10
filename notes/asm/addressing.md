@@ -1,3 +1,9 @@
+# Addressing
+
+* <https://stackoverflow.com/questions/34058101/referencing-the-contents-of-a-memory-location-x86-addressing-modes>
+* <https://stackoverflow.com/questions/27936196/a-couple-of-questions-about-base-indexscale-disp>
+* <https://stackoverflow.com/questions/27466597/how-to-fix-x86-64-memory-offsets-gas>
+
 # RIP register usage
 
 Taken from <https://stackoverflow.com/questions/42215105/understanding-rip-register-in-intel-assembly>

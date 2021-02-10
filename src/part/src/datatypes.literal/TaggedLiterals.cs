@@ -24,7 +24,7 @@ namespace Z0
             => new LiteralInfo(Name,Data, Text, TypeCode, IsEnum, MultiLiteral);
 
         [MethodImpl(Inline), Op]
-        public static LiteralInfo multiliteral(FieldInfo target, string Text)
+        public static LiteralInfo polymorphic(FieldInfo target, string Text)
             => describe(
                 Name: target.Name,
                 Data: target.GetRawConstantValue(),
@@ -35,9 +35,8 @@ namespace Z0
                 );
 
         [Op]
-        public static LiteralInfo multiliteral(FieldInfo target)
-            => target.Tag<MultiLiteralAttribute>()
-                     .MapValueOrDefault(tag => multiliteral(target, tag.Data), LiteralInfo.Empty);
+        public static LiteralInfo polymorphic(FieldInfo target)
+            => target.Tag<MultiLiteralAttribute>().MapValueOrDefault(tag => polymorphic(target, tag.Data), LiteralInfo.Empty);
 
         public static bool IsBinaryLiteral(FieldInfo target)
             => Attribute.IsDefined(target, typeof(BinaryLiteralAttribute));

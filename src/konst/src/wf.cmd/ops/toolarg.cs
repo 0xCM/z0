@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
 
-    partial struct FS
+    partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static FileLocation location(FS.FilePath src)
-            => new FileLocation(src);
+        public static ToolCmdArg toolarg(string content)
+            => new ToolCmdArg(content);
     }
 }

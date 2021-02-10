@@ -24,12 +24,23 @@ namespace Z0
 
         public bool IsEnum {get;}
 
-        public bool MultiLiteral {get;}
+        public bool Polymorphic {get;}
+
+        [MethodImpl(Inline)]
+        public LiteralInfo(string name, object data, string text, TypeCode tc, bool isEnum, bool polymorphic)
+        {
+            Name = name;
+            Data = data;
+            Text = text;
+            TypeCode = tc;
+            IsEnum = isEnum;
+            Polymorphic = polymorphic;
+        }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == null || (Data is string s && string.IsNullOrWhiteSpace(s));
+            get => Data == null || text.empty(Text);
         }
 
         public bool IsNonEmpty
@@ -54,18 +65,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data?.GetType() ?? typeof(void);
-        }
-
-
-        [MethodImpl(Inline)]
-        public LiteralInfo(string name, object data, string text, TypeCode tc, bool isEnum, bool polymorphic)
-        {
-            Name = name;
-            Data = data;
-            Text = text;
-            TypeCode = tc;
-            IsEnum = isEnum;
-            MultiLiteral = polymorphic;
         }
 
         [MethodImpl(Inline)]

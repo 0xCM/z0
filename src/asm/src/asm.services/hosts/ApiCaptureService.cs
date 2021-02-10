@@ -28,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiCaptureService(IWfShell wf, IAsmContext asm)
         {
-            Host = WfSelfHost.create();
+            Host = WfShell.host(nameof(ApiCaptureService));
             Wf = wf.WithHost(Host);
             Asm = asm;
             Wf.Created();

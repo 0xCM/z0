@@ -9,17 +9,17 @@ namespace Z0
     using System.Diagnostics;
     using System.Threading.Tasks;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct Cmd
     {
-        public static async Task<int> start(ToolExecSpec spec, WfStatusRelay dst)
+        public static async Task<int> start(ToolCmdSpec spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {
                 FileName = spec.CmdPath.Name,
-                Arguments = spec.Args,
+                Arguments = spec.Args.Format(),
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true
@@ -30,7 +30,7 @@ namespace Z0
             if (!spec.WorkingDir.IsNonEmpty)
                 process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
 
-            iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+            root.iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
 
             process.OutputDataReceived += (s,d) => dst.OnInfo(d.Data ?? EmptyString);
             process.ErrorDataReceived += (s,d) => dst.OnError(d.Data ?? EmptyString);

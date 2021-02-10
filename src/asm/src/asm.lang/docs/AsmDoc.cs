@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static TextRules;
     using static memory;
 
-    public sealed class AsmDoc : Document<AsmDoc,Index<DocLine>,FileLocation>
+    public sealed class AsmDoc : Document<AsmDoc,Index<DocLine>,FS.FilePath>
     {
         public static AsmDoc parse(string src)
         {
@@ -27,26 +27,26 @@ namespace Z0.Asm
         }
 
         public AsmDoc()
-            : base(FileLocation.Empty, Index<DocLine>.Empty)
+            : base(FS.FilePath.Empty, Index<DocLine>.Empty)
         {
 
         }
 
         public AsmDoc(Index<DocLine> content)
-            : base(FileLocation.Empty, content)
+            : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public AsmDoc(FileLocation src, Index<DocLine> content)
+        public AsmDoc(FS.FilePath src, Index<DocLine> content)
             : base(src, content)
         {
 
         }
 
-        public override AsmDoc Load(FileLocation location)
+        public override AsmDoc Load(FS.FilePath location)
         {
-           var doc = parse(location.Locator.ReadText());
+           var doc = parse(location.ReadText());
            return new AsmDoc(location, doc.Content);
         }
 

@@ -11,10 +11,13 @@ namespace Z0
 
     }
 
-    public interface IAddress<T> : IAddress
+    public interface IAddress<T> : IAddress, ILocation<T>
         where T : unmanaged
     {
         T Location {get;}
+
+        T ILocation<T>.Locator
+            => Location;
 
         bool INullity.IsEmpty
             => Location.Equals(default(T));

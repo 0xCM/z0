@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public struct ToolExecSpec
+    public struct ToolCmdSpec
     {
         /// <summary>
         /// The path to the tool executable
@@ -17,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The arguments to pass to the tool
         /// </summary>
-        public string Args;
+        public ToolCmdArgs Args;
 
         /// <summary>
         /// The working folder, if any
@@ -28,5 +25,8 @@ namespace Z0
         /// Environment variables to use, if any
         /// </summary>
         public NamedValues<string> Vars;
+
+        public string Format()
+            => string.Format("{0} {0}", CmdPath.Format(PathSeparator.BS), Args.Format());
     }
 }

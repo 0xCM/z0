@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static z;
 
     public sealed class WfSelfHost : WfHost<WfSelfHost>
@@ -17,15 +17,30 @@ namespace Z0
 
         Type HostType;
 
+        Name HostName;
+
         public override WfStepId Id
-            => HostType;
+            => HostName;
 
         [MethodImpl(Inline)]
         public WfSelfHost()
-            => HostType = typeof(WfSelfHost);
+        {
+            HostType = typeof(WfSelfHost);
+            HostName = "<no-proxy-specified>";
+        }
 
         [MethodImpl(Inline)]
         public WfSelfHost(Type host)
-            => HostType = host;
+        {
+            HostType = host;
+            HostName = host.Name;
+        }
+
+        [MethodImpl(Inline)]
+        public WfSelfHost(Name name)
+        {
+            HostType = typeof(WfSelfHost);
+            HostName = name;
+        }
     }
 }

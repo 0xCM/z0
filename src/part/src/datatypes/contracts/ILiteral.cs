@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         string Text {get;}
 
-        bool MultiLiteral
+        bool Polymorphic
              => false;
 
         Type SystemType

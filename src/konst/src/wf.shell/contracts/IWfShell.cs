@@ -64,8 +64,8 @@ namespace Z0
         WfExecFlow Flow()
             => new WfExecFlow(this, NextExecToken());
 
-        WfExecFlow<T> Flow<T>()
-            => new WfExecFlow<T>(this, NextExecToken());
+        WfExecFlow<T> Flow<T>(string operation, T data)
+            => new WfExecFlow<T>(this, operation, data, NextExecToken());
 
         WfTableFlow<T> TableFlow<T>(FS.FilePath dst)
             where T : struct, IRecord<T>

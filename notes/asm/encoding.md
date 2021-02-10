@@ -1,3 +1,8 @@
+# Encoding
+
+* <https://pyokagan.name/blog/2019-09-20-x86encoding/>
+* <https://sandpile.org/>
+
 # REX Prefix
 
 REX prefixes are instruction-prefix bytes used in 64-bit mode. They do the following:
