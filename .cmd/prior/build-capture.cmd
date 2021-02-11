@@ -1,9 +1,10 @@
 @echo off
 
-set ZCmd=%ZControl%\.cmd
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
 set ProjectId=control
 echo ProjectId:%ProjectId%
 
 call %ZCmd%\build-project.cmd
-call %ZCmd%\deploy-tool.cmd
+call .cmd\deploy.cmd

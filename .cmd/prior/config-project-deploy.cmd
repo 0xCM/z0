@@ -1,9 +1,9 @@
 @echo off
 
-set ZCmd=%ZControl%\.cmd
+set ZCmd=%ZDev%\.cmd
 echo ZCmd:%ZCmd%
 
-call %ZCmd%\config-project-bin.cmd
+call %ZCmd%\config-project-bin
 
 set DeploySrc=%ProjectBinRoot%
 echo DeploySrc:%DeploySrc%

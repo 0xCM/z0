@@ -1,8 +1,6 @@
 @echo off
 
-set ZCmd=%ZControl%\.cmd
-echo ZCmd=%ZControl%
-
+set ZCmd=%ZDev%\.cmd
 set SlnId=machine
 call %ZCmd%\build-config.cmd
 
@@ -12,3 +10,4 @@ echo BuildCmd:%BuildCmd% >> %CmdLog%
 
 echo on
 call %BuildCmd%
+

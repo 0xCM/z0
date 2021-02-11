@@ -1,5 +1,7 @@
 @echo off
 
+set ZCmd=%ZDev%\.cmd
+echo ZCmd:%ZCmd%
 
 echo ProjectId:%ProjectId%
 echo SlnId:%SlnId%
@@ -15,3 +17,5 @@ echo ProjectPath:%ProjectPath% >> %CmdLog%
 
 set BuildLogPath="%ZDb%\logs\build\z0.%ProjectId%.log"
 echo BuildLogPath:%BuildLogPath%
+
+
