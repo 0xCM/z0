@@ -11,8 +11,6 @@ namespace Z0
 
     public interface IApiIndexDecoder : IWfService
     {
-        ApiAsmDataset Decode();
-
         ApiAsmDataset Decode(ApiCodeBlocks src);
 
         ApiHostRoutines Decode(ApiHostCode src);

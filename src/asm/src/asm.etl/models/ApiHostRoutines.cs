@@ -28,7 +28,7 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public ApiRoutineObsolete[] Routines {get;}
+        public ApiInstructionSet[] Routines {get;}
 
         /// <summary>
         /// The total instruction count
@@ -36,7 +36,7 @@ namespace Z0.Asm
         public uint InstructionCount {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostRoutines(ApiHostUri host, ApiRoutineObsolete[] src)
+        public ApiHostRoutines(ApiHostUri host, ApiInstructionSet[] src)
         {
             Uri = host;
             Routines = src.OrderBy(x => x.BaseAddress).ToArray();
@@ -56,7 +56,7 @@ namespace Z0.Asm
         /// <summary>
         /// Indexes into the member instruction content
         /// </summary>
-        public ref ApiRoutineObsolete this[int index]
+        public ref ApiInstructionSet this[int index]
         {
             [MethodImpl(Inline)]
              get => ref Routines[index];

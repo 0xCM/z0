@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Specifies the asm routine determined by an api member
     /// </summary>
-    public readonly struct ApiRoutineObsolete
+    public readonly struct ApiInstructionSet
     {
         public string OpId {get;}
 
@@ -47,7 +47,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ApiRoutineObsolete(MemoryAddress @base, ApiInstruction[] src)
+        public ApiInstructionSet(MemoryAddress @base, ApiInstruction[] src)
         {
             if(src.Length != 0)
             {

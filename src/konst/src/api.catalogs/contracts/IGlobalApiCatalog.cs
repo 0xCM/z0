@@ -29,6 +29,8 @@ namespace Z0
 
         Option<Assembly> FindComponent(PartId id);
 
+        bool FindMethod(OpUri uri, out MethodInfo method);
+
         IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts);
 
         IEnumerable<IApiHost> PartHosts(params PartId[] parts);

@@ -12,9 +12,16 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmServices : IAsmServices
     {
+        public static AsmServices create(IWfShell wf, IAsmContext asm)
+            => new AsmServices(wf, asm);
+
         [Op]
         public static IAsmContext context(IWfShell wf)
             => new AsmContext(Apps.context(wf), wf);
+
+        [Op]
+        public static AsmServices create(IWfShell wf)
+            => new AsmServices(wf, context(wf));
 
         [Op]
         public static IAsmWf workflow(IWfShell wf)
@@ -31,10 +38,6 @@ namespace Z0.Asm
         [Op]
         public static ApiCaptureService ApiCapture(IWfShell wf, IAsmContext asm)
             => new ApiCaptureService(wf, asm);
-
-        [Op]
-        public static ApiCaptureService ApiCapture(IAsmWf wf)
-            => new ApiCaptureService(wf.Wf, wf.Asm);
 
         [Op]
         public static IApiResCapture ResCapture(IWfShell wf)
@@ -55,7 +58,6 @@ namespace Z0.Asm
         public static ApiHostAsmEmitter HostEmitter(IWfShell wf, IAsmContext asm)
             => new ApiHostAsmEmitter(wf, asm);
 
-
         /// <summary>
         /// Creates an asm processor
         /// </summary>
@@ -67,10 +69,6 @@ namespace Z0.Asm
             processor.Connect();
             return processor;
         }
-
-        [MethodImpl(Inline), Op]
-        public static IAsmWriter Writer(FS.FilePath dst)
-            => new AsmWriter(dst, Formatter());
 
         [MethodImpl(Inline), Op]
         public static IAsmWriter Writer(FS.FilePath dst, in AsmFormatConfig config)
@@ -117,16 +115,27 @@ namespace Z0.Asm
         }
 
         public ICaptureAlt Alt()
-            => CaptureAlt(Wf, Asm);
+            => Capture.alt(Wf, Asm);
 
-        public IAsmDecoder Decoder()
+        public IAsmDecoder RoutineDecoder()
             => new AsmRoutineDecoder(Asm.FormatConfig);
+
+        public IApiIndexDecoder IndexDecoder()
+            => ApiIndexDecoder.create(Wf);
 
         public IAsmImmWriter ImmWriter(ApiHostUri host, FS.FolderPath dst)
             => new AsmImmWriter(host, Asm.Formatter, dst);
 
         public AsmSemanticRender SemanticRender()
             => new AsmSemanticRender(Wf);
+
+        [MethodImpl(Inline), Op]
+        public IAsmWriter AsmWriter(FS.FilePath dst)
+            => new AsmWriter(dst, Formatter());
+
+        [MethodImpl(Inline), Op]
+        public IAsmWriter AsmWriter(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, Formatter(config));
 
         public IAsmImmWriter ImmWriter(ApiHostUri host)
             => ImmWriter(host, Wf.Db().ImmRoot());

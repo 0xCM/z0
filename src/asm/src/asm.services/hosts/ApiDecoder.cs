@@ -11,9 +11,6 @@ namespace Z0.Asm
 
     public sealed class ApiIndexDecoder : AsmWfService<ApiIndexDecoder>, IApiIndexDecoder
     {
-        public ApiAsmDataset Decode()
-            => Decode(ApiIndex.service(Wf).CreateApiBlocks());
-
         public ApiAsmDataset Decode(ApiCodeBlocks src)
         {
             var decoder = Asm.RoutineDecoder;
@@ -23,7 +20,7 @@ namespace Z0.Asm
             var hostFx = root.list<ApiHostRoutines>();
             var stats = ApiDecoderStats.init();
 
-            Wf.Status($"Decoding {partCount} parts");
+            var flow = Wf.Running($"Decoding {partCount} parts");
 
             for(var i=0; i<partCount; i++)
             {
@@ -33,54 +30,61 @@ namespace Z0.Asm
                     dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
                 else
                 {
-                    var hosts = src.Hosts.Where(h => h.Owner == part);
+                    var hosts = src.Hosts.Where(h => h.Owner == part).View;
                     var hostCount = hosts.Length;
 
-                    Wf.Status($"Decoding {hostCount} {part} hosts");
+                    var inner = Wf.Running($"Decoding {hostCount} {part} hosts");
 
                     for(var j=0; j<hostCount; j++)
                     {
-                        var host = hosts[j];
-                        Wf.Status($"Decoding {host}");
-
-                        var members = src.HostCodeBlocks(host);
-                        if(members.IsNonEmpty)
+                        ref readonly var host = ref skip(hosts,j);
+                        var blocks = src.HostCodeBlocks(host);
+                        if(blocks.IsNonEmpty)
                         {
-                            Wf.Status($"Decoding {members.Count} {host} members");
-
-                            var fx = Decode(members);
-                            hostFx.Add(fx);
+                            var routines = Decode(blocks);
+                            hostFx.Add(routines);
                             stats.HostCount++;
-                            stats.MemberCount += fx.RoutineCount;
-                            stats.InstructionCount += fx.InstructionCount;
+                            stats.MemberCount += routines.RoutineCount;
+                            stats.InstructionCount += routines.InstructionCount;
                         }
                         else
                             Wf.Warn($"The host {host} has no members");
                     }
-
-                    Wf.Status(text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()));
                     dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
-
                     stats.PartCount++;
-                    Wf.Status(stats.Format());
+
+                    Wf.Ran(inner, string.Format("{0} | {1}",
+                        text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()),
+                        stats.Format()));
                 }
             }
 
-            Wf.Status(text.format(WfProgress.DecodedMachine, src.EntryCount, src.Parts.Length));
+            Wf.Ran(flow, text.format(WfProgress.DecodedMachine, src.EntryCount, src.Parts.Length));
             return new ApiAsmDataset(src, dst);
         }
 
         public ApiHostRoutines Decode(ApiHostCode src)
         {
-            var instructions = root.list<ApiRoutineObsolete>();
+            var host = src.Host;
+            var flow = Wf.Running($"Decoding {host} routines");
+            var routines = DecodeRoutines(src);
+            Wf.Ran(flow, $"Decoded {routines.Length} {host} routines");
+            return routines;
+        }
+
+        ApiHostRoutines DecodeRoutines(ApiHostCode src)
+        {
+            var host = src.Host;
+            var view = src.Blocks.View;
+            var count = view.Length;
+            var instructions = root.list<ApiInstructionSet>();
             var ip = MemoryAddress.Zero;
             var target = root.list<IceInstruction>();
-            var count = src.Length;
             var decoder = Asm.RoutineDecoder;
             for(var i=0; i<count; i++)
             {
                 target.Clear();
-                ref readonly var block = ref src[i];
+                ref readonly var block = ref skip(view,i);
                 decoder.Decode(block, x => target.Add(x));
 
                 if(i == 0)
@@ -89,11 +93,11 @@ namespace Z0.Asm
                 instructions.Add(Load(ip, block, target.ToArray()));
             }
 
-            return new ApiHostRoutines(src.Host, instructions.ToArray());
+            return new ApiHostRoutines(host, instructions.ToArray());
         }
 
-        ApiRoutineObsolete Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiRoutineObsolete(@base, AsmEtl.ApiInstructions(code, src));
+        ApiInstructionSet Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
+            => new ApiInstructionSet(@base, AsmEtl.ApiInstructions(code, src));
     }
 
     readonly struct WfProgress

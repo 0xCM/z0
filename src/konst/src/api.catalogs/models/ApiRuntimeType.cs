@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -16,9 +17,13 @@ namespace Z0
 
         public Type HostType {get;}
 
+        public Index<MethodInfo> Methods {get;}
+
         public string Name {get;}
 
         public ApiHostUri Uri {get;}
+
+        Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
         public ApiRuntimeType(Type type, string name, PartId part, ApiHostUri uri)
@@ -27,10 +32,13 @@ namespace Z0
             Name = name;
             PartId = part;
             Uri = uri;
+            Methods = HostType.DeclaredMethods();
+            Index = ApiHost.index(Methods);
         }
 
-        public Index<MethodInfo> Methods
-            => HostType.DeclaredMethods();
+
+        public bool FindMethod(OpUri uri, out MethodInfo method)
+            => Index.TryGetValue(uri.OpId.Identifier, out method);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -52,6 +60,7 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is ApiRuntimeType t && Equals(t);
+
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiRuntimeType src)

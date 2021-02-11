@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     partial struct WfEvents
     {
         [Op, Closures(Closure)]
@@ -17,7 +16,6 @@ namespace Z0
         {
             var dst = new EventLogEntry();
             dst.Identifier = src.EventId.Format();
-            dst.Correlation = src.EventId.Ct;
             dst.Time = src.EventId.Ts;
             dst.EventName = src.EventId.Name;
             dst.Level = LogLevel.Error;
@@ -31,12 +29,9 @@ namespace Z0
         {
             var dst = new EventLogEntry();
             dst.Identifier = src.EventId.Format();
-            dst.Correlation = src.EventId.Ct;
             dst.Time = src.EventId.Ts;
             dst.EventName = src.EventId.Name;
             dst.Level = LogLevel.Error;
-            // dst.Source = src.Source.Format();
-            // dst.Message = src.;
             return dst;
         }
 
@@ -46,12 +41,10 @@ namespace Z0
         {
             var dst = new EventLogEntry();
             dst.Identifier = src.EventId.Format();
-            dst.Correlation = src.EventId.Ct;
             dst.Time = src.EventId.Ts;
             dst.EventName = src.EventId.Name;
             dst.Level = LogLevel.Error;
-            // dst.Source = src.Source.Format();
-             dst.Message = src.Payload.Format();
+            dst.Message = src.Payload.Format();
             return dst;
         }
     }

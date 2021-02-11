@@ -14,6 +14,8 @@ namespace Z0
     {
         Type HostType {get;}
 
+        bool FindMethod(OpUri uri, out MethodInfo method);
+
         Identifier Name
             => Uri.Name;
 

@@ -102,7 +102,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        void Render(ApiRoutineObsolete src, StreamWriter dst, ref MemoryAddress offset)
+        void Render(ApiInstructionSet src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
 

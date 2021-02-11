@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -23,6 +24,8 @@ namespace Z0
 
         public Type HostType {get;}
 
+        Dictionary<string,MethodInfo> Index {get;}
+
         [MethodImpl(Inline)]
         internal ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods)
         {
@@ -30,6 +33,10 @@ namespace Z0
             Uri = uri;
             PartId = part;
             Methods = methods;
+            Index = ApiHost.index(methods);
         }
+
+        public bool FindMethod(OpUri uri, out MethodInfo method)
+            => Index.TryGetValue(uri.OpId.Identifier, out method);
     }
 }

@@ -36,7 +36,6 @@ namespace Z0
             return Flow();
         }
 
-
         WfExecToken Ran<H,T>(WfExecFlow flow, H host, T data)
             where H : IWfHost<H>, new()
         {
@@ -53,19 +52,6 @@ namespace Z0
         WfExecToken Ran<T,D>(WfExecFlow<T> flow, D data)
         {
             signal(this).Ran(data);
-            return Ran(flow);
-        }
-
-        WfExecToken Ran(WfExecFlow flow, CmdResult result)
-        {
-            signal(this).Ran(result);
-            return Ran(flow);
-        }
-
-        WfExecToken Ran<C>(WfExecFlow flow, CmdResult<C> result)
-            where C : struct, ICmd<C>
-        {
-            signal(this).Ran(result);
             return Ran(flow);
         }
     }

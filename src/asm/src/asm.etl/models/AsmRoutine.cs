@@ -44,17 +44,6 @@ namespace Z0.Asm
         /// </summary>
         public ExtractTermCode TermCode {get;}
 
-        // [MethodImpl(Inline)]
-        // public AsmRoutine(OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, IceInstructionList instructions)
-        // {
-        //     Uri = uri;
-        //     OpId = uri.OpId;
-        //     DisplaySig = sig;
-        //     Instructions = instructions;
-        //     Code = code;
-        //     TermCode =term;
-        // }
-
         [MethodImpl(Inline)]
         public AsmRoutine(OpUri uri, ClrDisplaySig sig, ApiCodeBlock code, ExtractTermCode term, Index<ApiInstruction> instructions)
         {
@@ -62,7 +51,6 @@ namespace Z0.Asm
             OpId = uri.OpId;
             DisplaySig = sig;
             Instructions = instructions;
-            //Instructions = new IceInstructionList(instructions.Map(x => x.Instruction), code);
             Code = code;
             TermCode =term;
         }

@@ -41,14 +41,8 @@ namespace Z0
         public void EmittingTable<T>(FS.FilePath dst)
             => Raise(emittingTable<T>(Host, dst, Ct));
 
-        public void Ran()
-            => Raise(new RanEvent(Host, Ct));
-
         public void Ran<T>(T data)
             => Raise(ran(Host, data, Ct));
-
-        public void Ran(WfStepId step)
-            => Raise(ran(step, Ct));
 
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));

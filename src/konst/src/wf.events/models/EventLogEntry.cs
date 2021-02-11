@@ -18,8 +18,6 @@ namespace Z0
 
         public string EventName;
 
-        public CorrelationToken Correlation;
-
         public EventLevel Level;
 
         public string Source;

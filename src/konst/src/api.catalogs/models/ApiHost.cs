@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Root;
 
@@ -15,6 +16,13 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHost : IApiHost, IComparable<ApiHost>
     {
+        internal static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
+        {
+            var index = new Dictionary<string, MethodInfo>();
+            root.iter(methods, m => index.TryAdd(Identity.identify(m).Identifier, m));
+            return index;
+        }
+
         public PartId PartId {get;}
 
         public Type HostType {get;}
@@ -25,6 +33,8 @@ namespace Z0
 
         public Index<MethodInfo> Methods {get;}
 
+        Dictionary<string,MethodInfo> Index {get;}
+
         [MethodImpl(Inline)]
         public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
         {
@@ -33,7 +43,11 @@ namespace Z0
             PartId = part;
             Uri = uri;
             Methods = HostType.DeclaredMethods();
+            Index = index(Methods);
         }
+
+        public bool FindMethod(OpUri uri, out MethodInfo method)
+            => Index.TryGetValue(uri.OpId.Identifier, out method);
 
         public bool IsEmpty
         {

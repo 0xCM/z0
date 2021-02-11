@@ -16,90 +16,76 @@ namespace Z0
 
         public Timestamp Ts {get;}
 
-        public CorrelationToken Ct {get;}
-
-        const string RPName = "{1,-18}";
-
-        const string RPCommon = "{0} | " + RPName;
+        const string PatternBase = "{0} | {1,-18}";
 
         [MethodImpl(Inline)]
         WfEventId(Type type)
         {
             Ts = timestamp();
-            Ct = root.correlate(Runtime.EntryAssembly.Part);
-            Identifier = text.format(RPCommon, Ts, type.Name);
+            Identifier = text.format(PatternBase, Ts, type.Name);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = root.correlate(Runtime.EntryAssembly.Part);
-            Identifier = text.format(RPCommon, Ts, name);
+            Identifier = text.format(PatternBase, Ts, name);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon, Ts, name);
+            Identifier = text.format(PatternBase, Ts, name);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, string label, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, name, label, step);
+            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, name, label, step);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, string label, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2}", Ts, name, label);
+            Identifier = text.format(PatternBase + " | {2}", Ts, name, label);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, CmdId cmd, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2}", Ts, name, cmd);
+            Identifier = text.format(PatternBase + " | {2}", Ts, name, cmd);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2}", Ts, name, step);
+            Identifier = text.format(PatternBase + " | {2}", Ts, name, step);
         }
 
         [MethodImpl(Inline)]
         WfEventId(string name, WfStepId step, EventLevel level, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, name, level, step);
+            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, name, level, step);
         }
 
         [MethodImpl(Inline)]
         WfEventId(EventKind kind, WfStepId step, EventLevel level, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2} | {3}", Ts, kind, level, step);
+            Identifier = text.format(PatternBase + " | {2} | {3}", Ts, kind, level, step);
         }
 
         [MethodImpl(Inline)]
         WfEventId(Type type, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
-            Ct = ct;
-            Identifier = text.format(RPCommon + " | {2}", Ts, type.Name, step);
+            Identifier = text.format(PatternBase + " | {2}", Ts, type.Name, step);
         }
 
         /// <summary>

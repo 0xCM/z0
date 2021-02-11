@@ -52,6 +52,12 @@ namespace Z0
         public Option<IApiHost> FindHost(ApiHostUri uri)
             => root.option(ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
 
+        public bool FindHost(ApiHostUri uri, out IApiHost host)
+        {
+            host = ApiHosts.Where(h => h.Uri == uri).FirstOrDefault();
+            return host != null;
+        }
+
         public IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
@@ -60,6 +66,14 @@ namespace Z0
                 return from c in Catalogs.Storage
                        where parts.Contains(c.PartId)
                        select c;
+        }
+
+        public bool FindMethod(OpUri uri, out MethodInfo method)
+        {
+            if(FindHost(uri.Host, out var host))
+                return host.FindMethod(uri, out method);
+            method = default;
+            return false;
         }
 
         public IEnumerable<IApiHost> PartHosts(params PartId[] parts)

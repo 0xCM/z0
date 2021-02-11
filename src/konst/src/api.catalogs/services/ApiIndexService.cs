@@ -14,7 +14,7 @@ namespace Z0
     using api = ApiIndex;
 
     [Service(typeof(IApiIndex))]
-    class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
+    public class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
     {
         public ApiCodeBlocks Product;
 
@@ -34,23 +34,23 @@ namespace Z0
             Product = ApiCodeBlocks.Empty;
         }
 
-        public ApiCodeBlocks CreateApiBlocks()
+        public ApiCodeBlocks IndexApiBlocks()
         {
             var src = Wf.Db().PartFiles();
-            Wf.Status(src);
             var parsed = src.Parsed.View;
             var count = parsed.Length;
-            Wf.Status(Msg.IndexingPartFiles.Format(count));
+            var flow = Wf.Running(Msg.IndexingPartFiles.Format(count));
 
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(parsed,i);
+                var inner = Wf.Running($"Indexing blocks from {path}");
                 var result = ApiHexRows.load(path);
                 if(result.Count != 0)
                 {
                     var blocks = result.View;
                     Include(blocks);
-                    Wf.Status(Msg.AbsorbedCodeBlocks.Format(blocks.Length, path));
+                    Wf.Ran(inner, Msg.AbsorbedCodeBlocks.Format(blocks.Length, path));
                 }
                 else
                     Wf.Error(Msg.Unparsed(path));
@@ -60,7 +60,7 @@ namespace Z0
             Wf.Status(IndexStatus.Format());
             Product = Freeze();
 
-            Wf.Status(api.metrics(Product));
+            Wf.Ran(flow, api.metrics(Product));
             return Product;
         }
 

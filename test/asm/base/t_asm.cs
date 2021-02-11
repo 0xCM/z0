@@ -18,12 +18,14 @@ namespace Z0.Asm
 
         protected new IAsmContext Context;
 
+        AsmServices Services;
+
         public t_asm()
         {
             Context = AsmServices.context(Wf);
-            //Context = new AsmContext(Apps.context(), Wf);
             AsmCheck = Z0.AsmChecks.tester(Context);
             UnitDataDir.Clear();
+            Services = AsmServices.create(Wf,Context);
         }
 
         protected readonly IAsmChecker AsmCheck;
@@ -42,7 +44,7 @@ namespace Z0.Asm
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-            => AsmServices.Writer(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
+            => Services.AsmWriter(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {

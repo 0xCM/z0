@@ -6,6 +6,6 @@ namespace Z0
 {
     public interface IApiIndex : IWfService
     {
-        ApiCodeBlocks CreateApiBlocks();
+        ApiCodeBlocks IndexApiBlocks();
     }
 }

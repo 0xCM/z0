@@ -15,6 +15,17 @@ namespace Z0
     [ApiHost(ApiNames.ApiCode, true)]
     public readonly struct ApiCode
     {
+        public static ApiMemberCode match(IGlobalApiCatalog src, ApiCodeBlock code)
+        {
+            if(src.FindMethod(code.OpUri, out var method))
+            {
+                var member = new ApiMember(code.OpUri, method, default, method.MethodHandle.GetFunctionPointer());
+                return new ApiMemberCode(member, code);
+            }
+            else
+                return ApiMemberCode.Empty;
+        }
+
         [MethodImpl(Inline), Op]
         public static ApiPartCode combine(PartId part, ApiHostCode[] src)
             => new ApiPartCode(part,src);
@@ -64,7 +75,7 @@ namespace Z0
                 var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
                 var flow = wf.EmittingFile(dst);
                 var svc = ApiIndex.service(wf);
-                var api = svc.CreateApiBlocks();
+                var api = svc.IndexApiBlocks();
                 emit(wf, api, dst);
                 wf.EmittedFile(flow, dst);
                 return dst;
