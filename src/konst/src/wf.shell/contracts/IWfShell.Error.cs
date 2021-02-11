@@ -8,41 +8,38 @@ namespace Z0
     using System.Reflection;
     using System.Threading.Tasks;
 
-    using static z;
     using static WfEvents;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     partial interface IWfShell
     {
-        void Error<T>(WfStepId step, T body)
+        void Error(WfStepId step, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {
-            signal(this).Error(step, body);
+            signal(this).Error(step, e, WfEvents.originate("WorkflowError", caller, file, line));
         }
 
-        void Error(WfStepId step, Exception e)
+        void Error(Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {
-            signal(this).Error(step, e);
+            signal(this).Error(e, WfEvents.originate("WorkflowError", caller, file, line));
         }
 
-        void Error(Exception e)
+        void Error<T>(T data, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {
-            signal(this).Error(e);
+            signal(this).Error(data, WfEvents.originate("WorkflowError", caller, file, line));
         }
 
-        void Error<T>(T body)
+        WfExecToken Error(WfExecFlow flow, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {
-            signal(this).Error(body);
-        }
-
-        WfExecToken Error(WfExecFlow flow, Exception e)
-        {
-            signal(this).Error(e);
+            signal(this).Error(e, WfEvents.originate("WorkflowError", caller, file, line));
             return Ran(flow);
         }
 
-        WfExecToken Error<T>(WfExecFlow<T> flow, Exception e)
+        WfExecToken Error<T>(WfExecFlow<T> flow, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
         {
-            signal(this).Error(e);
+            signal(this).Error(e, WfEvents.originate("WorkflowError", caller, file, line));
             return Ran(flow);
         }
     }

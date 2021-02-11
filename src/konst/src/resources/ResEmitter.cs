@@ -20,7 +20,7 @@ namespace Z0
         [Op]
         public static ResEmission[] reference(IWfShell wf)
         {
-            var flow = wf.Running("Emitting reference data");
+            var outer = wf.Running("Emitting reference data");
             var descriptors = Resources.descriptors(Parts.Res.Assembly).Descriptors();
             var count = descriptors.Length;
             var root = wf.Db().RefDataRoot();
@@ -30,18 +30,15 @@ namespace Z0
                 try
                 {
                     ref var emission = ref seek(emissions,i);
-                    var innerFlow = wf.EmittingFile(emission.Target);
-
-                    emission = emit(skip(descriptors,i), root);
-
-                    wf.EmittedFile(innerFlow, emission.Target);
+                    ref readonly var descriptor = ref skip(descriptors,i);
+                    emission = emit(descriptor, root);
                 }
                 catch(Exception e)
                 {
                     wf.Error(e);
                 }
             }
-            wf.Ran(flow);
+            wf.Ran(outer);
             return emissions;
         }
 

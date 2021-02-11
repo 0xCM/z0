@@ -9,33 +9,22 @@ namespace Z0
 
     using static Part;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ErrorEvent<T> error<T>(string cmd, T content, [Caller] string caller = null, [File] string file= null, [Line] int? line = null)
-            => new ErrorEvent<T>(cmd, content, CorrelationToken.Default, source(caller,file,line));
+        public static ErrorEvent<T> error<T>(string cmd, T data,  EventOrigin source)
+            => new ErrorEvent<T>(cmd, data, source);
 
         [Op, Closures(UInt64k)]
-        public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => new ErrorEvent<T>(step, content, ct, source(caller,file,line));
+        public static ErrorEvent<T> error<T>(WfStepId step, T data, EventOrigin source)
+            => new ErrorEvent<T>(step, data, source);
 
         [Op]
-        public static ErrorEvent<Exception> error(WfHost host, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-        {
-            const string Pattern = "{0}" + Eol + "{1}";
-            var where = text.format(CallerPattern, caller, line, file);
-            var what = e?.ToString() ?? EmptyString;
-            var msg = text.format(Pattern, where, what);
-            var origin = source(caller,file,line);
-            return new ErrorEvent<Exception>(e, e, ct, origin);
-        }
+        public static ErrorEvent<WfHost> error(WfHost host, Exception e, EventOrigin source)
+            => new ErrorEvent<WfHost>(e, host, source);
 
         [Op]
-        public static ErrorEvent<string> missing(CmdId cmd, [Caller] string caller = null, [File] string file= null, [Line] int? line = null)
-            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), CorrelationToken.Default, source(caller,file,line));
+        public static ErrorEvent<string> missing(CmdId cmd, EventOrigin source)
+            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), source);
     }
 }

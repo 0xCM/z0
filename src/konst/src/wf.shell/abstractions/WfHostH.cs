@@ -40,7 +40,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                wf.Error(Id,e);
+                wf.Error(Id, e);
             }
         }
 

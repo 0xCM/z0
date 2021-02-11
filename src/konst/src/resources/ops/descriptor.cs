@@ -23,13 +23,11 @@ namespace Z0
         public static ResDescriptor descriptor(Name name, MemoryAddress address, ByteSize size)
             => new ResDescriptor(name, address, size);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ResDescriptor<T> descriptor<T>(Name name, MemoryAddress address, ByteSize size)
-            => new ResDescriptor<T>(name, new MemorySegment(address, size));
-
         [Op]
         public static unsafe bool descriptor(Assembly src, string id, out ResDescriptor dst)
         {
+            root.require(text.nonempty(id), () => $"The id given for {src} is null");
+            root.require(src != null, () => $"The assembly for {id} is null");
             var resnames = Resources.names(src, id);
             if(resnames.Length != 1)
             {
@@ -40,6 +38,7 @@ namespace Z0
             {
                 var name = memory.first(resnames);
                 var stream = (UnmanagedMemoryStream)src.GetManifestResourceStream(name);
+                root.require(stream != null, () => $"The resource stream for {name} is null");
                 dst = descriptor(name, stream.PositionPointer, stream.Length);
                 return true;
             }

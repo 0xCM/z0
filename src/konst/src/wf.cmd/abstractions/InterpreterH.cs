@@ -156,7 +156,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogError(e.Data);
-                TermLog.Deposit(WfEvents.error(Host, e.Data, Wf.Ct));
+                TermLog.Deposit(WfEvents.error(Host, e.Data, WfEvents.originate("InterpreterError")));
             }
         }
 

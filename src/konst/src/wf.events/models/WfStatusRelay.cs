@@ -29,6 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public void OnError(string data)
-            => Wf.Error(Step, data);
+            => Wf.Error(data);
     }
 }

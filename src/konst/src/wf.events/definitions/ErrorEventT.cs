@@ -21,7 +21,7 @@ namespace Z0
 
         public Option<Exception> Exception {get;}
 
-        public AppMsgSource Source {get;}
+        public EventOrigin Source {get;}
 
         public EventPayload<T> Payload {get;}
 
@@ -30,19 +30,19 @@ namespace Z0
         public string Summary {get;}
 
         [MethodImpl(Inline)]
-        public ErrorEvent(CmdId cmd, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(CmdId cmd, T data, EventOrigin source)
         {
-            EventId = (Kind, cmd, ct);
-            Exception = none<Exception>();
+            EventId = (Kind, cmd, CorrelationToken.Default);
+            Exception = root.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();
         }
 
         [MethodImpl(Inline)]
-        public ErrorEvent(Exception error, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(Exception error, T data, EventOrigin source)
         {
-            EventId = (EventName, ct);
+            EventId = (EventName, CorrelationToken.Default);
             Exception = error;
             Payload = data;
             Source = source;
@@ -50,20 +50,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ErrorEvent(string label, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(string label, T data,  EventOrigin source)
         {
-            EventId = (EventName, label, ct);
-            Exception = none<Exception>();
+            EventId = (EventName, label, CorrelationToken.Default);
+            Exception = root.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();
         }
 
         [MethodImpl(Inline)]
-        public ErrorEvent(WfStepId step, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(WfStepId step, T data, EventOrigin source)
         {
-            EventId = (EventName, step, ct);
-            Exception = none<Exception>();
+            EventId = (EventName, step, CorrelationToken.Default);
+            Exception = root.none<Exception>();
             Payload = data;
             Source = source;
             Summary = Payload.Format();

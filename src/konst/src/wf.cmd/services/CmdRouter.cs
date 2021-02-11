@@ -63,7 +63,7 @@ namespace Z0
                 }
                 else
                 {
-                    Wf.Error(WfEvents.missing(cmd.CmdId));
+                    Wf.Error(WfEvents.missing(cmd.CmdId,WfEvents.originate(nameof(CmdRouter) + "Error")));
                     return Cmd.fail(cmd);
                 }
             }

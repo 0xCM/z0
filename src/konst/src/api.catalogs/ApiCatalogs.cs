@@ -100,7 +100,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(WfEvents.error(nameof(ApiCatalogs), text.format("Assembly {0} | {1}", src.GetSimpleName(), e)));
+                term.error(text.format("Assembly {0} | {1}", src.GetSimpleName(), e));
                 return root.none<IPart>();
             }
         }

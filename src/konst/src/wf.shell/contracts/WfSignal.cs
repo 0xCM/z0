@@ -134,17 +134,17 @@ namespace Z0
         public void Babble<T>(T data)
             => Babble(Host, data);
 
-        public void Error<T>(WfStepId step, T body)
-            => Raise(error(step, body, Ct));
+        public void Error<T>(WfStepId step, T body, EventOrigin source)
+            => Raise(error(step, body, source));
 
-        public void Error(WfStepId step, Exception e)
-            => Raise(error(step, e, Ct));
+        public void Error(WfStepId step, Exception e, EventOrigin source)
+            => Raise(error(step, e, source));
 
-        public void Error(Exception e)
-            => Raise(error(Host, e, Ct));
+        public void Error(Exception e, EventOrigin source)
+            => Raise(error(Host, e, source));
 
-        public void Error<T>(T body)
-            => Error(Host, body);
+        public void Error<T>(T body, EventOrigin source)
+            => Error(Host, body, source);
 
         public void Warn<T>(WfStepId step, T content)
             => Raise(warn(step, content, Ct));
