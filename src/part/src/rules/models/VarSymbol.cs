@@ -9,35 +9,37 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdVarSymbol : ICmdVarSymbol
+    using api = Rules;
+
+    public readonly struct VarSymbol : IVarSymbol
     {
         public string Name {get;}
 
         [MethodImpl(Inline)]
-        public CmdVarSymbol(string name)
+        public VarSymbol(string name)
             => Name = name;
 
         [MethodImpl(Inline)]
-        public CmdVarSymbol(char name)
+        public VarSymbol(char name)
             => Name = name.ToString();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => api.format(this);
+
+        [MethodImpl(Inline)]
+        public string Format(VarContextKind vck)
+            => api.format(vck, this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdVarSymbol(string name)
-            => new CmdVarSymbol(name);
+        public static implicit operator VarSymbol(string name)
+            => new VarSymbol(name);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdVarSymbol(char name)
-            => new CmdVarSymbol(name);
-
-        [MethodImpl(Inline)]
-        public static CmdVarSymbol operator + (CmdVarSymbol a, CmdVarSymbol b)
-            => Cmd.combine(a,b);
+        public static implicit operator VarSymbol(char name)
+            => new VarSymbol(name);
     }
 }

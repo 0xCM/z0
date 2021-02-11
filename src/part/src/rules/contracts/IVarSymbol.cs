@@ -7,15 +7,15 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdVarSymbol
+    public interface IVarSymbol
     {
         string Name {get;}
     }
 
     [Free]
-    public interface ICmdVarSymbol<T> : ICmdVarSymbol, IIdentified<T>
+    public interface IVarSymbol<T> : IVarSymbol, IIdentified<T>
     {
-        string ICmdVarSymbol.Name
+        string IVarSymbol.Name
             => Id?.ToString() ?? string.Empty;
     }
 }

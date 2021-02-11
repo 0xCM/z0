@@ -27,7 +27,7 @@ namespace Z0
         IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
             => sys.empty<IAppMsg>();
 
-        void IAppMsgQueue.Emit(FilePath dst)
+        void IAppMsgQueue.Emit(FS.FilePath dst)
         {}
 
         IReadOnlyList<IAppMsg> IAppMsgQueue.Flush(Exception e)

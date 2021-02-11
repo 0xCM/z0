@@ -11,12 +11,6 @@ namespace Z0.Asm
 
     public interface IAsmServices
     {
-        IAsmDecoder Decoder();
-
-        ICaptureAlt Alt();
-
         IAsmImmWriter ImmWriter(ApiHostUri host);
-
-        AsmSemanticRender SemanticRender();
     }
 }

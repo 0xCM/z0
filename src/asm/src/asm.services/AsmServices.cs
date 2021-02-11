@@ -25,7 +25,7 @@ namespace Z0.Asm
             => new AsmServices(wf, asm);
 
         [Op]
-        public static IAsmDecoder decoder(in AsmFormatConfig config)
+        public static IAsmDecoder Decoder(in AsmFormatConfig config)
             => new AsmRoutineDecoder(config);
 
         [Op]
@@ -37,31 +37,31 @@ namespace Z0.Asm
             => new ApiCaptureService(wf.Wf, wf.Asm);
 
         [Op]
-        public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
-            => new ApiHostDecoder(wf, decoder);
+        public static IApiResCapture ResCapture(IWfShell wf)
+            => ApiResCapture.create(wf);
 
         [Op]
-        public static ApiHostDecoder HostDecoder(IAsmWf wf)
-            => new ApiHostDecoder(wf.Wf, wf.Decoder);
+        public static IApiHostCapture HostCapture(IWfShell wf)
+            => ApiHostCapture.create(wf);
+
+        public static IAsmDataEmitter DataEmitter(IWfShell wf)
+            => AsmDataEmitter.create(wf);
+
+        [Op]
+        public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
+            => new ApiHostDecoder(wf, decoder);
 
         [Op]
         public static ApiHostAsmEmitter HostEmitter(IWfShell wf, IAsmContext asm)
             => new ApiHostAsmEmitter(wf, asm);
 
-        [Op]
-        public static ApiHostAsmEmitter HostEmitter(IAsmWf wf)
-            => new ApiHostAsmEmitter(wf.Wf, wf.Asm);
-
-        [Op]
-        public static IApiHostCapture HostCapture(IWfShell wf)
-            => ApiHostCapture.create(wf);
 
         /// <summary>
         /// Creates an asm processor
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IApiAsmProcessor processor(IWfShell wf)
+        public static IApiAsmProcessor ApiProcessor(IWfShell wf)
         {
             var processor = new WfAsmProcessor(wf) as IApiAsmProcessor;
             processor.Connect();
@@ -69,43 +69,39 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter writer(FS.FilePath dst)
-            => new AsmWriter(dst, formatter());
+        public static IAsmWriter Writer(FS.FilePath dst)
+            => new AsmWriter(dst, Formatter());
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, formatter(config));
+        public static IAsmWriter Writer(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, Formatter(config));
 
         [MethodImpl(Inline), Op]
-        public static IAsmFormatter formatter(in AsmFormatConfig config)
+        public static IAsmFormatter Formatter(in AsmFormatConfig config)
             => new AsmFormatter(config);
 
         [MethodImpl(Inline), Op]
-        public static IAsmFormatter formatter()
+        public static IAsmFormatter Formatter()
             => new AsmFormatter(null);
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
+        public static IAsmWriter Writer(FS.FilePath dst, IAsmFormatter formatter)
             => new AsmWriter(dst,formatter);
 
         [MethodImpl(Inline), Op]
-        public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)
+        public static ICaptureExchange Exchange(ICaptureCore service, BufferToken capture)
             => new CaptureExchangeProxy(service, capture);
 
         [MethodImpl(Inline), Op]
-        public static ICaptureServiceProxy capture(ICaptureCore service, ICaptureExchange exchange)
-            => new CaptureServiceProxy(service, exchange);
-
-        [MethodImpl(Inline), Op]
-        public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
+        public static ICaptureAlt CaptureAlt(IWfShell wf, IAsmContext asm)
             => Capture.alt(wf,asm);
 
         [Op]
-        public static QuickCapture quick(IWfShell wf, IAsmContext asm)
+        public static QuickCapture CaptureQuick(IWfShell wf, IAsmContext asm)
         {
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = AsmServices.exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
-            var service = AsmServices.capture(asm.CaptureCore, exchange);
+            var exchange = Exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
+            var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
             return new QuickCapture(wf, asm, buffer, tokens, service);
         }
 
@@ -121,7 +117,7 @@ namespace Z0.Asm
         }
 
         public ICaptureAlt Alt()
-            => alt(Wf, Asm);
+            => CaptureAlt(Wf, Asm);
 
         public IAsmDecoder Decoder()
             => new AsmRoutineDecoder(Asm.FormatConfig);

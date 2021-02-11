@@ -47,7 +47,7 @@ namespace Z0.Asm
         /// The context formatter
         /// </summary>
         IAsmFormatter Formatter
-            => AsmServices.formatter(FormatConfig);
+            => AsmServices.Formatter(FormatConfig);
 
         /// <summary>
         /// The context decoder

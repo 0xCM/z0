@@ -361,7 +361,12 @@ namespace Z0.Asm
             //ProcessCatalog();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
-            var set = RunCapture(typeof(Clang));
+            //var set = RunCapture(typeof(Clang));
+            var package = Db.Package("z0/respack");
+            var dllpath = package + FS.file("z0.respack.dll");
+
+            var exists = dllpath.Exists ? "Exists" : "Missing";
+            Wf.Status($"{dllpath} | {exists}");
         }
 
         public static void Main(params string[] args)

@@ -48,6 +48,8 @@ namespace Z0
 
         public WfServices Services {get;}
 
+        public Env Env => Services.Env;
+
         long StartToken;
 
         long EndToken;

@@ -2,126 +2,156 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static Part;
-    using static z;
+    using static memory;
 
-    public class AsmDataEmitter
+    public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>, IAsmDataEmitter
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-        readonly IWfShell Wf;
+        public ApiCodeBlocks Blocks {get; private set;}
 
-        readonly IAsmContext Asm;
+        public Index<ApiPartRoutines> Routines {get; private set;}
 
-        public ApiCodeBlocks CodeBlocks {get; private set;}
+        public ApiAsmDataset Dataset {get; private set;}
 
-        public Index<ApiPartRoutines> Decoded {get; private set;}
+        int Sequence;
 
-        readonly int[] Sequence;
-
-        readonly uint[] Offset;
+        uint Offset;
 
         public AsmDataEmitter()
         {
-            Sequence = sys.alloc<int>(1);
-            Offset = sys.alloc<uint>(1);
+            Sequence = 0;
+            Offset = 0;
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
+            Blocks = ApiCodeBlocks.Empty;
+            Dataset = ApiAsmDataset.Empty;
         }
 
-        [MethodImpl(Inline)]
-        public AsmDataEmitter(IWfShell wf, IAsmContext asm)
-            : this()
+        protected override void OnInit()
         {
-            Wf = wf;
-            Asm = asm;
-            Init();
+            base.OnInit();
+            Blocks = ApiIndex.service(Wf).CreateApiBlocks();
+            Dataset.With(Blocks);
+            Routines = ApiIndexDecoder.create(Wf).DecodeIndex(Blocks);
+            Dataset.With(Routines);
         }
 
-        void Init()
+        public ApiAsmDataset Run()
         {
-            CodeBlocks = ApiIndex.service(Wf).CreateApiBlocks();
-            Decoded = ApiDecoder.init(Wf,Asm).DecodeIndex(CodeBlocks);
+            EmitAsmRows();
+            EmitCallRows();
+            EmitJmpRows();
+            EmitSemantic();
+            EmitResBytes();
+            return Dataset;
         }
 
-        public AsmRowSets<IceMnemonic> Emit()
-        {
-            using var flow = Wf.Running();
-            var addresses = CodeBlocks.Addresses.View;
-            var count = addresses.Length;
-            for(var i=0u; i<count; i++)
-                CreateRecords(CodeBlocks[skip(addresses, i)]);
-
-            Wf.Ran(flow);
-
-            return Rowsets();
-        }
-
-        public void EmitAsmRows()
+        public AsmRowSets<IceMnemonic> EmitAsmRows()
         {
             try
             {
-                var rowsets = Emit();
+                var rowsets = EmitRowsets();
                 var records = 0u;
                 var sets = rowsets.View;
                 var count = rowsets.Count;
-
                 var flow = Wf.Running(Msg.EmittingInstructionRecords.Format(count));
                 for(var i=0; i<count; i++)
                     records += AsmEtl.emit(Wf, skip(sets,i));
 
                 Wf.Ran(flow, Msg.EmittedInstructionRecords.Format(records, count));
 
+                Dataset.With(rowsets);
+                return rowsets;
+
             }
             catch(Exception e)
             {
                 Wf.Error(e);
+                return AsmRowSets<IceMnemonic>.Empty;
             }
         }
 
-        public void EmitJmpRows()
+        public Index<AsmJmpRow> EmitJmpRows()
         {
-            var count = Decoded.Length;
+            var dst = root.list<AsmJmpRow>();
+            var count = Routines.Length;
             for(var i=0; i<count; i++)
-                EmitJumpRows(Decoded[i]);
+                dst.AddRange(EmitJumpRows(Routines[i]));
+            var rows = dst.ToArray();
+            Dataset.With(rows);
+            return rows;
         }
 
-        public void EmitJumpRows(ApiPartRoutines src)
+        public void EmitSemantic()
+        {
+            using var service = AsmSemanticRender.create(Wf);
+            var count = Routines.Length;
+            for(var i=0; i<count; i++)
+                service.Render(Routines[i]);
+        }
+
+        public void EmitResBytes()
+        {
+            var dst = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
+            ResBytesEmitter.create(Wf).Emit(Blocks, dst);
+        }
+
+        public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
         {
             var collector = AsmJmpCollector.create(Wf);
             var rows = collector.Collect(src);
-            var emitter = AsmJmpEmitter.create(Wf);
-            var dst = Wf.Db().Table(AsmJmpRow.TableId, src.Part);
-            emitter.Emit(rows, dst);
+            Emit(rows, Wf.Db().Table(AsmJmpRow.TableId, src.Part));
+            return rows;
         }
 
-        public void EmitCallRows()
+        void Emit(ReadOnlySpan<AsmJmpRow> src, FS.FilePath dst)
         {
-            var count = Decoded.Length;
-            for(var i=0; i<count; i++)
-                EmitCallRows(Decoded[i]);
+            if(src.Length != 0)
+            {
+                var flow = Wf.EmittingTable<AsmJmpRow>(dst);
+                var formatter = Records.formatter<AsmJmpRow>();
+                using var writer = dst.Writer();
+                writer.WriteLine(formatter.FormatHeader());
+                var count = src.Length;
+                for(var i=0u; i<count; i++)
+                    writer.WriteLine(formatter.Format(skip(src,i)));
+                Wf.EmittedTable<AsmJmpRow>(flow, count, dst);
+            }
         }
 
-        public void EmitCallRows(ApiPartRoutines src)
+        public Index<AsmCallRow> EmitCallRows()
+        {
+            var dst = root.list<AsmCallRow>();
+            var count = Routines.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(EmitCallRows(Routines[i]));
+            var rows = dst.ToArray();
+            Dataset.With(rows);
+            return rows;
+        }
+
+        public Index<AsmCallRow> EmitCallRows(ApiPartRoutines src)
         {
             var dst = Wf.Db().Table(AsmCallRow.TableId, src.Part);
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
-            var calls = AsmEtl.calls(src.Instructions()).View;
-            var count = calls.Length;
+            var calls = AsmEtl.calls(src.Instructions());
+            var view = calls.View;
+            var count = view.Length;
             var formatter = Records.formatter<AsmCallRow>();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(calls,i)));
+                writer.WriteLine(formatter.Format(skip(view,i)));
             Wf.EmittedTable(flow, count);
+            return calls;
         }
 
         void CreateRecords(in ApiCodeBlock src)
@@ -175,7 +205,19 @@ namespace Z0
             }
         }
 
-        AsmRowSets<IceMnemonic> Rowsets()
+        AsmRowSets<IceMnemonic> EmitRowsets()
+        {
+            using var flow = Wf.Running();
+            var addresses = Blocks.Addresses.View;
+            var count = addresses.Length;
+            for(var i=0u; i<count; i++)
+                CreateRecords(Blocks[skip(addresses, i)]);
+            Wf.Ran(flow);
+
+            return LoadRowSets();
+        }
+
+        AsmRowSets<IceMnemonic> LoadRowSets()
         {
             var keys = Index.Keys.ToArray();
             var count = keys.Length;
@@ -191,13 +233,13 @@ namespace Z0
         int NextSequence
         {
             [MethodImpl(Inline)]
-            get => Sequence[0]++;
+            get => Sequence++;
         }
 
         Address32 NextOffset
         {
             [MethodImpl(Inline)]
-            get => Offset[0]++;
+            get => Offset++;
         }
     }
 
@@ -206,6 +248,5 @@ namespace Z0
         public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";
 
         public static RenderPattern<Count,Count> EmittedInstructionRecords => "Emitted a total of {0} records for {1} instruction tables";
-
     }
 }

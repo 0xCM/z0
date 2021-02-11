@@ -11,6 +11,15 @@ namespace Z0
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
+        public static ApiHostUri from(Type src)
+        {
+            var typename = src.Name;
+            var partName = typename.LeftOfFirst('_');
+            var part = ApiPartIdParser.single(partName);
+            var host = text.ifempty(typename.RightOfFirst('_'), "anonymous");
+            return new ApiHostUri(part, host);
+        }
+
         public PartId Owner {get;}
 
         public string Name {get;}

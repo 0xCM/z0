@@ -42,7 +42,7 @@ namespace Z0
             => src is EnvVar<T> v && Equals(v);
 
         public static implicit operator EnvVar(EnvVar<T> src)
-            => EnvVars.define(src.Name, src.Value.ToString());
+            => Environs.define(src.Name, src.Value.ToString());
 
         [MethodImpl(Inline)]
         public static implicit operator EnvVar<T>((string name, T value) src)

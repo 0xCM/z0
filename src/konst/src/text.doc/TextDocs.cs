@@ -24,18 +24,15 @@ namespace Z0
         }
 
         public static ParseResult<string,TextDoc> parse(FS.FilePath src, TextDocFormat? format = null)
-            => parse(FilePath.Define(src.Name), format);
-
-        public static ParseResult<string,TextDoc> parse(FilePath src, TextDocFormat? format = null)
         {
             if(!src.Exists)
             {
                 term.error($"No such file {src}");
-                return root.unparsed(src.Name, default(TextDoc));
+                return root.unparsed(src.Name.Format(), default(TextDoc));
             };
 
             using var reader = src.Reader();
-            return parse(reader, format).Select(doc => parsed(src.Name, doc)).Value;
+            return parse(reader, format).Select(doc => parsed(src.Name.Format(), doc)).Value;
         }
 
         /// <summary>

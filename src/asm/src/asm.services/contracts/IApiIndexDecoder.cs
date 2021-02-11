@@ -4,18 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface ICmdVars
+    using Z0.Asm;
+
+    public interface IApiIndexDecoder : IWfService
     {
-        Index<ICmdVar> Members();
-    }
+        ApiHostRoutines DecodeRoutines(ApiHostCode src);
 
-    [Free]
-    public interface ICmdVars<H> : ICmdVars
-        where H : ICmdVars<H>, new()
-    {
-
+        Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index);
     }
 }

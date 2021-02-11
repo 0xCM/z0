@@ -14,21 +14,22 @@ namespace Z0
 
     static class MklListGenerator
     {
-        static void WriteText(string text, FileName filename, [CallerFilePath] string caller = null)
+        static void WriteText(string text, FS.FileName filename, [CallerFilePath] string caller = null)
         {
-            var dir = FolderPath.Define(Path.GetDirectoryName(caller));
+            var dir = FS.dir(Path.GetDirectoryName(caller));
             var path = dir + filename;
             using var writer = path.Writer();
             writer.Write(text);
 
         }
+
         static void EmitNames()
         {
             var methods = typeof(LAPACK).DeclaredMethods().Select(x => x.Name).ToReadOnlyList();
             var sb = text.build();
             methods.Iter(m => sb.AppendLine(m));
 
-            WriteText(sb.ToString(), FileName.define("lapacke.list"));
+            WriteText(sb.ToString(), FS.file("lapacke.list"));
         }
     }
 

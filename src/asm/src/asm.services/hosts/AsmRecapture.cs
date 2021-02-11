@@ -15,12 +15,15 @@ namespace Z0.Asm
 
         readonly IAsmContext Asm;
 
+        readonly IApiResCapture ResCapture;
+
         [MethodImpl(Inline)]
         public AsmRecapture(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;
             Asm.Paths.AppDataRoot.Clear();
+            ResCapture = AsmServices.ResCapture(wf);
             ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
@@ -34,7 +37,7 @@ namespace Z0.Asm
             var resfile = ResBytesCompiled;
             var captured =Capture(resfile, ResBytesUncompiled);
             var csvfile = ResIndexDir + FS.file("z0.res.bytes", FileExtensions.Csv);
-            CapturedResEmitter.emit(captured, csvfile);
+           ResCapture.Emit(captured, csvfile);
         }
 
         public FS.FolderPath ResIndexDir
@@ -43,8 +46,8 @@ namespace Z0.Asm
         public FS.FolderPath ResBytesDir
             => Asm.Paths.AppDataDir + FS.folder("resbytes");
 
-        public CapturedApiRes[] Capture(FS.FilePath src, FS.FolderPath dst)
-            => ApiResCapture.capture(Wf, Asm, src, dst);
+        public Index<CapturedApiRes> Capture(FS.FilePath src, FS.FolderPath dst)
+            => ResCapture.CaptureApiRes(src,dst);
 
         /// <summary>
         /// The x86 resource assembly output path - which was created by disassembling most of z0

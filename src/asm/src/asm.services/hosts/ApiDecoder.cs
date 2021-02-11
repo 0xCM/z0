@@ -7,37 +7,17 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
 
-    public sealed class ApiDecoder : WfService<ApiDecoder,IApiDecoder,IAsmContext>, IApiDecoder
+    public sealed class ApiIndexDecoder : AsmWfService<ApiIndexDecoder>, IApiIndexDecoder
     {
-        public static ApiInstruction[] ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)
-        {
-            var @base = code.BaseAddress;
-            var offseq = AsmOffsetSequence.Zero;
-            var count = src.Length;
-            var dst = new ApiInstruction[count];
-
-            for(ushort i=0; i<count; i++)
-            {
-                var fx = src[i];
-                var len = fx.ByteLength;
-                var data = span(code.Storage);
-                var slice = data.Slice((int)offseq.Offset, len).ToArray();
-                var recoded = new ApiCodeBlock(fx.IP, code.Uri, slice);
-                dst[i] = new ApiInstruction(fx, recoded);
-                offseq = offseq.AccrueOffset((uint)len);
-            }
-            return dst;
-        }
-
         public Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index)
         {
-            var decoder = Context.RoutineDecoder;
+            var decoder = Asm.RoutineDecoder;
             var parts = index.Parts;
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
-            var hostFx = list<ApiHostRoutines>();
+            var hostFx = root.list<ApiHostRoutines>();
             var stats = ApiDecoderStats.init();
 
             Wf.Status($"Decoding {partCount} parts");
@@ -89,11 +69,11 @@ namespace Z0.Asm
 
         public ApiHostRoutines DecodeRoutines(ApiHostCode src)
         {
-            var instructions = list<ApiRoutineObsolete>();
+            var instructions = root.list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Zero;
-            var target = list<IceInstruction>();
+            var target = root.list<IceInstruction>();
             var count = src.Length;
-            var decoder = Context.RoutineDecoder;
+            var decoder = Asm.RoutineDecoder;
             for(var i=0; i<count; i++)
             {
                 target.Clear();

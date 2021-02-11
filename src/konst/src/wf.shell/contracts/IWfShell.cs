@@ -55,6 +55,8 @@ namespace Z0
 
         WfServices Services {get;}
 
+        Env Env {get;}
+
         ApiServices ApiServices
             => Services.ApiServices;
 

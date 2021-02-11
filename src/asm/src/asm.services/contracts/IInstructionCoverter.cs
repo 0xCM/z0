@@ -2,14 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-    using System.IO;
-
-    partial class XTend
+    public interface IApiInstructionCoverter
     {
-        public static FilePath CreateParentIfMissing(this FilePath src)
-            => FileOps.CreateParent(src);
+        Index<ApiInstruction> Convert(ApiCodeBlock code, Index<IceInstruction> src);
     }
 }

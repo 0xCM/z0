@@ -165,9 +165,9 @@ namespace Z0
             public int CompareTo(FilePath src)
                 => Name.CompareTo(src.Name);
 
-            [MethodImpl(Inline)]
-            public static implicit operator Z0.FilePath(FilePath src)
-                => Z0.FilePath.Define(src.Name);
+            // [MethodImpl(Inline)]
+            // public static implicit operator Z0.FilePath(FilePath src)
+            //     => Z0.FilePath.Define(src.Name);
 
             [MethodImpl(Inline)]
             public static FilePath operator +(FilePath a, FileExt b)

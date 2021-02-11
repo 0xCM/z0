@@ -15,6 +15,8 @@ namespace Z0
     {
         public K Id {get;}
 
+        public VarContextKind VarContext => VarContextKind.Workflow;
+
         Cell128 _Value;
 
         bool IsString;

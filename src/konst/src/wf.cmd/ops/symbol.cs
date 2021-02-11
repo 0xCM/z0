@@ -12,7 +12,7 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdVarSymbol symbol(string name)
-            => new CmdVarSymbol(name);
+        public static VarSymbol symbol(string name)
+            => new VarSymbol(name);
     }
 }

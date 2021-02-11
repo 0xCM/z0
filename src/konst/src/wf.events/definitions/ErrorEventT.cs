@@ -46,7 +46,7 @@ namespace Z0
             Exception = error;
             Payload = data;
             Source = source;
-            Summary = Exception ? Exception.Value.Message : Payload.Format();
+            Summary = Exception ? Exception.Value.ToString() : Payload.Format();
         }
 
         [MethodImpl(Inline)]

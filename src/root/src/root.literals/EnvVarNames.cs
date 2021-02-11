@@ -4,13 +4,19 @@
 //-----------------------------------------------------------------------------
 public readonly partial struct EnvVarNames
 {
-    public const string ZDev = nameof(ZDev);
+    public const string Dev = "ZDev";
 
-    public const string ZDb = nameof(ZDb);
+    public const string Db = "ZDb";
 
-    public const string ZTools = nameof(ZTools);
+    public const string Control = "ZControl";
 
-    public const string ZControl = nameof(ZControl);
+    public const string Archives = "ZArchive";
 
-    public const string ZArchive = nameof(ZArchive);
+    public const string Tools = "ZToolRoot";
+
+    public const string Packages = "ZPack";
+
+    public const string AppLogs = "ZLogs";
+
+    public const string DotNetSdk = "DOTNET_ROOT";
 }

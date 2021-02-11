@@ -9,15 +9,17 @@ namespace Z0
 
     using static Part;
 
+    using api = Rules;
+
     /// <summary>
     /// Defines a script variable
     /// </summary>
-    public struct CmdScriptVar : ICmdVar
+    public struct ScriptVar : IScriptVar
     {
         /// <summary>
         /// The variable symbol
         /// </summary>
-        public CmdVarSymbol Symbol {get;}
+        public VarSymbol Symbol {get;}
 
         /// <summary>
         /// The variable value, possibly empty
@@ -25,14 +27,14 @@ namespace Z0
         public string Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdScriptVar(CmdVarSymbol name, string value)
+        public ScriptVar(VarSymbol name, string value)
         {
             Symbol = name;
             Value = value;
         }
 
         [MethodImpl(Inline)]
-        public CmdScriptVar(CmdVarSymbol name)
+        public ScriptVar(VarSymbol name)
         {
             Symbol = name;
             Value = EmptyString;
@@ -40,13 +42,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => api.format(this);
+
+        [MethodImpl(Inline)]
+        public string Format(VarContextKind vck)
+            => api.format(vck, this);
 
         public override string ToString()
             => Format();
 
+        public string Resolve(VarContextKind vck)
+            => api.resolve(vck, this);
+
         [MethodImpl(Inline)]
-        public static implicit operator CmdScriptVar((CmdVarSymbol symbol, string value) src)
-            => new CmdScriptVar(src.symbol, src.value);
+        public static implicit operator ScriptVar((VarSymbol symbol, string value) src)
+            => new ScriptVar(src.symbol, src.value);
     }
 }

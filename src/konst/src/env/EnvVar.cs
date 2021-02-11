@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a nonparametric environment variable
     /// </summary>
-    public readonly struct EnvVar : ITextual
+    public readonly struct EnvVar : IEnvVar
     {
         /// <summary>
         /// The environment variable name
@@ -31,6 +31,9 @@ namespace Z0
             Value = value;
         }
 
+        public VarSymbol Symbol
+            => new VarSymbol(Name);
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -44,7 +47,7 @@ namespace Z0
         }
 
         public EnvVar<T> Transform<T>(Func<string,T> f)
-            => EnvVars.define(Name, f(Value));
+            => Environs.define(Name, f(Value));
 
         [MethodImpl(Inline)]
         public string Format()
@@ -65,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator EnvVar((string name, string value) src)
-            => EnvVars.define(src.name, src.value);
+            => Environs.define(src.name, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator string(EnvVar src)

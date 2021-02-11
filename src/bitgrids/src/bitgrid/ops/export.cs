@@ -190,7 +190,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => ((EnvVars.Common.LogRoot + FS.folder("grids")) + filename(label,w,m,n,t)).Writer();
+                => ((Environs.Common.LogRoot + FS.folder("grids")) + filename(label,w,m,n,t)).Writer();
 
         /// <summary>
         /// Exports grid data to a file

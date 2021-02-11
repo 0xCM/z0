@@ -24,7 +24,6 @@ namespace Z0
         public static JsonText json(Assembly src)
         {
             var path = FS.path(src.Location).ChangeExtension(Ext);
-            insist(path);
             return path.ReadText();
         }
 

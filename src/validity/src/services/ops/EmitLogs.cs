@@ -34,10 +34,10 @@ namespace Z0
 
         }
 
-        static FilePath EmitTestCaseLog(FS.FilePath dst, TestCaseRecord[] records)
+        static FS.FilePath EmitTestCaseLog(FS.FilePath dst, TestCaseRecord[] records)
         {
             if(records.Length == 0)
-                return FilePath.Empty;
+                return FS.FilePath.Empty;
 
             Emit(records, dst, default(TestCaseField));
             return dst;

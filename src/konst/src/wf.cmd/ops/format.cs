@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-    using static CmdVarTypes;
+    using static Part;
+    using static memory;
 
     partial struct Cmd
     {
@@ -58,11 +57,6 @@ namespace Z0
             return buffer.Emit();
         }
 
-
-        [Op]
-        public static string format(CmdScriptVar src)
-            => string.Format("{0}={1}",src.Symbol, src.Value);
-
         [Op]
         public static string format(in CmdScript src)
         {
@@ -103,26 +97,9 @@ namespace Z0
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
-        [Op, Closures(Closure)]
-        public static string format<T>(CmdVarSymbol<T> src)
-            => string.Format("{0}", src.Name);
-
         [Op]
         public static string format(CmdVarValue src)
             => src.Content ?? EmptyString;
-
-        [Op]
-        public static string format(ICmdVar src)
-            => string.Format("{0}={1}", src.Symbol, src.Value);
-
-        [Op]
-        public static string format(ICmdVars src)
-        {
-            var dst = text.build();
-            foreach(var member in src.Members())
-                dst.AppendLine(format(member));
-            return dst.ToString();
-        }
 
         public static string format<K,T>(in CmdArgs<K,T> src)
             where K : unmanaged
@@ -134,7 +111,6 @@ namespace Z0
                 dst.AppendLine(skip(src,i).Format());
             return dst.ToString();
         }
-
 
         [MethodImpl(Inline)]
         public static string Format(in CmdArg src)
@@ -164,10 +140,6 @@ namespace Z0
                 return new string(content);
             }
         }
-
-        [Op]
-        public static string format(CmdVarSymbol src)
-            => string.Format("$({0})",src.Name ?? EmptyString);
 
         /// <summary>
         /// Renders a specified option as text
@@ -211,15 +183,6 @@ namespace Z0
             var parts = src.View;
             for(var i=0; i<count; i++)
                 dst.AppendLine(skip(parts,i).Format());
-        }
-
-        [Op]
-        public static void render(DirVars src, ITextBuffer dst)
-        {
-            var members = src.Members().View;
-            var count = members.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(format(skip(members,i)));
         }
 
         [Op]

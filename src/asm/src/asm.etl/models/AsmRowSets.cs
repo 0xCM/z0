@@ -34,5 +34,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Data.Length;
         }
+
+        public static AsmRowSets<T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmRowSets<T>(sys.empty<AsmRowSet<T>>());
+        }
     }
 }

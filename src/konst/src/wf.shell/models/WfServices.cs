@@ -19,9 +19,12 @@ namespace Z0
 
         public IWfEmissionLog EmissionLog {get;}
 
+        public Env Env {get;}
+
         internal WfServices(IWfShell wf, Assembly[] components)
         {
             Wf = wf;
+            Env = Z0.Env.create();
             Models = new ConcurrentDictionary<Type, IWfService>();
             var hosts = components.Types().Realize<IWfService>().Concrete().Select(x => (IWfService)Activator.CreateInstance(x));
             root.iter(hosts, host => Models.TryAdd(host.ContractType, host));

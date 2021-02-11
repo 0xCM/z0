@@ -8,8 +8,10 @@ namespace Z0
 
     using static DbNames;
 
-    public interface IWfDbPaths : IFileArchive
+    public interface IWfDbPaths : IWfService, IFileArchive
     {
+        Env Env => Wf.Env;
+
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
 
@@ -19,8 +21,14 @@ namespace Z0
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
 
+        FS.FolderPath PackageRoot()
+            => Env.Vars.Packages.Value;
+
+        FS.FolderPath Package(string id)
+            => PackageRoot() + FS.folder(id);
+
         FS.FolderPath DevRoot()
-            => EnvVars.Common.DevRoot;
+            => Env.Vars.Dev.Value;
 
         FS.FolderPath DevDataRoot()
             => DevRoot() +FS.folder(data);
@@ -29,7 +37,7 @@ namespace Z0
             => DevDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath ArchiveRoot()
-            => EnvVars.Common.ArchiveRoot;
+            => Env.Vars.Archives.Value;
 
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);

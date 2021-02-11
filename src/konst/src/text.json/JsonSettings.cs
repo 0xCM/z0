@@ -123,7 +123,7 @@ namespace Z0
             where S : ISettingSource<S>, new()
                 => PropSettings<S>(src).Union(FieldSettings<S>(src));
 
-        public static void Save<S>(S src, FilePath dst)
+        public static void Save<S>(S src, FS.FilePath dst)
             where S : ISettingSource<S>, new()
         {
             const string indent = "    ";

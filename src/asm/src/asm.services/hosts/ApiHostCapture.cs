@@ -43,7 +43,7 @@ namespace Z0.Asm
 
         public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)
         {
-            var capture = AsmServices.alt(Wf, Asm);
+            var capture = AsmServices.CaptureAlt(Wf, Asm);
             return capture.CaptureHost(src);
         }
     }

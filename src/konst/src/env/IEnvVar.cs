@@ -6,18 +6,17 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface ICmdVar<T>
-    {
-        CmdVarSymbol Symbol {get;}
 
-        T Value {get;}
+    [Free]
+    public interface IEnvVar : IVar
+    {
+
     }
 
     [Free]
-    public interface ICmdVar : ICmdVar<string>
+    public interface IEnvVar<T> : IEnvVar, IVar<T>
+        where T : struct
     {
-
 
     }
 }

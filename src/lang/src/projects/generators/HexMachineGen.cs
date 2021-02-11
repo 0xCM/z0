@@ -32,7 +32,7 @@ namespace Z0.Generate
             dst.WriteLine(Generate());
         }
 
-        public void Generate(byte min, byte max, FolderPath dst)
+        public void Generate(byte min, byte max, FS.FolderPath dst)
         {
             var path = dst + FS.file($"HexMachine{Identifier(min)}", FileExtensions.Cs);
             using var writer = path.Writer();

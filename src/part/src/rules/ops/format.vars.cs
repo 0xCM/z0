@@ -7,14 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct Cmd
+    using static Part;
+
+    partial struct Rules
     {
         [Op]
-        public static CmdVarSymbol combine(CmdVarSymbol a, CmdVarSymbol b)
-            => new CmdVarSymbol(string.Format("{0}{1}", a, b));
+        public static string format(IVar var)
+            => string.Format("{0}:{1}",format(var.Symbol), var.Value);
 
         [Op]
-        public static CmdVarSymbol combine<T>(CmdVarSymbol<T> a, CmdVarSymbol<T> b)
-            => new CmdVarSymbol(string.Format("{0}{1}", a,b));
+        public static string format(VarContextKind vck, IVar var)
+            => string.Format("{0}:{1}",format(vck, var.Symbol), var.Value);
     }
 }

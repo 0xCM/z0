@@ -29,7 +29,7 @@ namespace Z0
         }
 
         FS.FolderPath OutputFolder
-            => EnvVars.Common.LogRoot;
+            => Environs.Common.LogRoot;
 
         public FS.FolderPath LogDir(LogArea target)
             => OutputFolder + FS.folder(target.ToString().ToLower());

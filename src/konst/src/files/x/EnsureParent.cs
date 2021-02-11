@@ -11,7 +11,9 @@ namespace Z0
     {
         public static FS.FilePath EnsureParentExists(this FS.FilePath src)
         {
-            FileOps.CreateParent(src.Name.Format());
+            var dir = Path.GetDirectoryName(src.Name.Format());
+            if(!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
             return src;
         }
 
@@ -20,7 +22,6 @@ namespace Z0
             if(!src.Exists)
                 src.Create();
             return src;
-
         }
     }
 }

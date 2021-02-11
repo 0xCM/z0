@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using static Part;
 
-    public interface IApiDecoder : IWfService
+    partial struct Rules
     {
-        ApiHostRoutines DecodeRoutines(ApiHostCode src);
-
-        Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index);
+        [MethodImpl(Inline), Op]
+        public static ScriptVar assign(ScriptVar src, string value)
+            => var(src.Symbol, value);
     }
 }

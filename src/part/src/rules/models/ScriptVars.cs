@@ -10,20 +10,25 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct CmdScriptVars : ICmdVars<CmdScriptVars>
+    public struct ScriptVars : IScriptVars<ScriptVars>
     {
-        readonly Index<CmdScriptVar> Data;
+        readonly Index<ScriptVar> Data;
 
         [MethodImpl(Inline)]
-        internal CmdScriptVars(CmdScriptVar[] src)
+        internal ScriptVars(ScriptVar[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public Index<ICmdVar> Members()
-            => new Index<ICmdVar>(Data.Storage.Select(x => cast<ICmdVar>(x)));
+        public Index<IScriptVar> Members()
+            => Data.Cast<IScriptVar>();
 
         public string Format()
-            => Cmd.format(this);
+        {
+            var dst = text.build();
+            foreach(var member in Data)
+                dst.AppendLine(member.Format());
+            return dst.ToString();
+        }
 
         public override string ToString()
             => Format();

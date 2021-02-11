@@ -65,13 +65,7 @@ namespace Z0
                 EmitFieldLiterals.create().Run(Wf);
                 BitMaskServices.create(Wf).Emit();
 
-                var processors = ApiProcessors.create(Wf, Asm);
-                processors.EmitAsmRows();
-                processors.EmitCallRows();
-                processors.EmitJmpRows();
-                processors.ProcessEnlisted();
-                processors.EmitSemantic();
-                processors.EmitResBytes();
+                AsmDataEmitter.create(Wf).Run();
 
             }
             catch(Exception e)

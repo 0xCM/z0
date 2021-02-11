@@ -110,7 +110,7 @@ namespace Z0
         public void Flush(Exception e, IAppMsgSink target)
             => Queue.Flush(e, target);
 
-        public void Emit(FilePath dst)
+        public void Emit(FS.FilePath dst)
             => Queue.Emit(dst);
 
         /// <summary>

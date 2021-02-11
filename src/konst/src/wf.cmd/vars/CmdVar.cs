@@ -13,6 +13,8 @@ namespace Z0
     {
         public string Name {get;}
 
+        public VarContextKind VarContext => VarContextKind.Workflow;
+
         string _Value;
 
         [MethodImpl(Inline)]

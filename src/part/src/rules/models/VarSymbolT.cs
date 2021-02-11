@@ -7,15 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
-    using static Konst;
+    using static Part;
 
-    public readonly struct CmdVarSymbol<T> : ICmdVarSymbol<T>
+    using api = Rules;
+
+    public readonly struct VarSymbol<T> : IVarSymbol<T>
     {
         public T Id {get;}
 
         [MethodImpl(Inline)]
-        public CmdVarSymbol(T id)
+        public VarSymbol(T id)
             => Id= id;
 
         public string Name
@@ -26,17 +27,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => api.format(this);
+
+        [MethodImpl(Inline)]
+        public string Format(VarContextKind vck)
+            => api.format(vck, this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdVarSymbol<T>(T id)
-            => new CmdVarSymbol<T>(id);
-
-        [MethodImpl(Inline)]
-        public static CmdVarSymbol operator + (CmdVarSymbol<T> a, CmdVarSymbol<T> b)
-            => Cmd.combine(a,b);
+        public static implicit operator VarSymbol<T>(T id)
+            => new VarSymbol<T>(id);
     }
 }
