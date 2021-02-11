@@ -28,6 +28,7 @@ namespace Z0
             dst.Archives = read(N.Archives);
             dst.DotNetSdk = read(N.DotNetSdk);
             dst.AppLogs = read(N.AppLogs);
+            dst.GenRoot = read(N.GenRoot);
         }
 
         public EnvDirVar Dev;
@@ -46,6 +47,7 @@ namespace Z0
 
         public EnvDirVar AppLogs;
 
+        public EnvDirVar GenRoot;
         public string Format()
         {
             var dst = text.buffer();

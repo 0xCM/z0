@@ -175,8 +175,8 @@ namespace Z0
                 => Name.Format();
 
             [MethodImpl(Inline)]
-            public string Format(PathSeparator sep)
-                => Name.Format(sep);
+            public string Format(PathSeparator sep, bool quote = false)
+                => quote ? TextRules.Format.enquote(Name.Format(sep)) : Name.Format(sep);
 
             public override string ToString()
                 => Format();

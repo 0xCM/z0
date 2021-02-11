@@ -6,12 +6,23 @@ namespace Z0.Tools
 {
     using static Part;
 
-    public struct WinSdkInfo
+    public struct WinSdkInfo : ITextual
     {
         public string Version;
 
-        public Index<FS.FolderPath> IncPaths;
+        public IncludePath IncPaths;
 
-        public Index<FS.FolderPath> LibPaths;
+        public IncludePath LibPaths;
+        public string Format()
+        {
+            var dst = text.buffer();
+            dst.AppendLineFormat("SdkVer:{0}", Version);
+            dst.AppendLineFormat("/I{0}", IncPaths.Format());
+            dst.AppendLineFormat("/LIBPATH {0}", LibPaths.Format());
+            return dst.Emit();
+        }
+
+        public override string ToString()
+            => Format();
     }
 }

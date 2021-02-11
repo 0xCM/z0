@@ -21,6 +21,15 @@ namespace Z0
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
 
+        FS.FolderPath GenRoot()
+            => Env.Vars.GenRoot.Value;
+
+        FS.FolderPath GenDir(FS.FolderName folder)
+            => GenRoot() + folder;
+
+        FS.FilePath GenSln(FS.FolderName folder)
+            => GenDir(folder) + FS.file(string.Format("z0.{0}", folder), Sln);
+
         FS.FolderPath PackageRoot()
             => Env.Vars.Packages.Value;
 

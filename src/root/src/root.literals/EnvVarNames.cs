@@ -18,5 +18,7 @@ public readonly partial struct EnvVarNames
 
     public const string AppLogs = "ZLogs";
 
+    public const string GenRoot = "ZGenRoot";
+
     public const string DotNetSdk = "DOTNET_ROOT";
 }

@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using static Part;
+    using static memory;
 
-    public interface IApiIndexDecoder : IWfService
+
+    [ApiHost]
+    public readonly partial struct Includes
     {
-        ApiAsmDataset Decode();
 
-        ApiAsmDataset Decode(ApiCodeBlocks src);
-
-        ApiHostRoutines Decode(ApiHostCode src);
     }
 }

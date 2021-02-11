@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    using api = FileRoles;
+    using static Part;
 
     public readonly struct HeaderFile : IFsEntry<HeaderFile>
     {
@@ -27,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Path.Format(PathSeparator.BS);
 
         public override string ToString()
             => Format();

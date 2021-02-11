@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
-    public readonly struct InputFile<T> : IFsEntry<InputFile<T>,T>
-        where T : unmanaged
+    public readonly struct ExeFile : IFsEntry<ExeFile>
     {
         public FS.FilePath Path {get;}
-
-        public T Kind {get;}
 
         public FS.PathPart Name
         {
@@ -24,20 +20,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public InputFile(FS.FilePath src, T kind)
-        {
-            Path = src;
-            Kind = kind;
-        }
+        public ExeFile(FS.FilePath src)
+            => Path = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator FS.FilePath(InputFile<T> src)
-            => src.Path;
+        public static implicit operator ExeFile(FS.FilePath src)
+            => new ExeFile(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator InputFile(InputFile<T> src)
+        public static implicit operator FS.FilePath(ExeFile src)
             => src.Path;
     }
-
-
 }

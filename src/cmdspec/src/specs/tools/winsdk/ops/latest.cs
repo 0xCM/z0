@@ -5,7 +5,6 @@
 namespace Z0.Tools
 {
     using Microsoft.Win32;
-
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -33,11 +32,11 @@ namespace Z0.Tools
                 }
 
                 // Find the latest version of the SDK.
-                foreach (var tgtVerMaybe in versions)
+                foreach (var version in versions)
                 {
                     // WinSDK inc and lib paths
-                    var incDir = FS.dir(Path.Combine(win10sdkRoot, "Include", tgtVerMaybe.Value));
-                    var libDir = FS.dir(Path.Combine(win10sdkRoot, "Lib", tgtVerMaybe.Value));
+                    var incDir = FS.dir(Path.Combine(win10sdkRoot, "Include", version.Value));
+                    var libDir = FS.dir(Path.Combine(win10sdkRoot, "Lib", version.Value));
                     if (!incDir.Exists || !libDir.Exists)
                         continue;
 
@@ -49,7 +48,7 @@ namespace Z0.Tools
 
                     return new WinSdkInfo()
                     {
-                        Version = tgtVerMaybe.Value,
+                        Version = version.Value,
                         IncPaths = root.array(sharedIncDir, umIncDir, ucrtIncDir),
                         LibPaths = root.array(umLibDir, ucrtLibDir),
                     };

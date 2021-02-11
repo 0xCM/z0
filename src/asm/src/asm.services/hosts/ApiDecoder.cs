@@ -11,10 +11,13 @@ namespace Z0.Asm
 
     public sealed class ApiIndexDecoder : AsmWfService<ApiIndexDecoder>, IApiIndexDecoder
     {
-        public Index<ApiPartRoutines> DecodeIndex(ApiCodeBlocks index)
+        public ApiAsmDataset Decode()
+            => Decode(ApiIndex.service(Wf).CreateApiBlocks());
+
+        public ApiAsmDataset Decode(ApiCodeBlocks src)
         {
             var decoder = Asm.RoutineDecoder;
-            var parts = index.Parts;
+            var parts = src.Parts;
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
             var hostFx = root.list<ApiHostRoutines>();
@@ -30,7 +33,7 @@ namespace Z0.Asm
                     dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
                 else
                 {
-                    var hosts = index.Hosts.Where(h => h.Owner == part);
+                    var hosts = src.Hosts.Where(h => h.Owner == part);
                     var hostCount = hosts.Length;
 
                     Wf.Status($"Decoding {hostCount} {part} hosts");
@@ -40,12 +43,12 @@ namespace Z0.Asm
                         var host = hosts[j];
                         Wf.Status($"Decoding {host}");
 
-                        var members = index.HostCodeBlocks(host);
+                        var members = src.HostCodeBlocks(host);
                         if(members.IsNonEmpty)
                         {
                             Wf.Status($"Decoding {members.Count} {host} members");
 
-                            var fx = DecodeRoutines(members);
+                            var fx = Decode(members);
                             hostFx.Add(fx);
                             stats.HostCount++;
                             stats.MemberCount += fx.RoutineCount;
@@ -63,11 +66,11 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.Status(text.format(WfProgress.DecodedMachine, index.EntryCount, index.Parts.Length));
-            return dst;
+            Wf.Status(text.format(WfProgress.DecodedMachine, src.EntryCount, src.Parts.Length));
+            return new ApiAsmDataset(src, dst);
         }
 
-        public ApiHostRoutines DecodeRoutines(ApiHostCode src)
+        public ApiHostRoutines Decode(ApiHostCode src)
         {
             var instructions = root.list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Zero;

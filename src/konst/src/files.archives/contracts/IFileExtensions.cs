@@ -64,5 +64,7 @@ namespace Z0
         FileExt Dmp => X.Dmp;
 
         FileExt Zip => X.Zip;
+
+        FileExt Sln => X.Sln;
     }
 }

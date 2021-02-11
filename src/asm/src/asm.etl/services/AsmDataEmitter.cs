@@ -16,11 +16,9 @@ namespace Z0.Asm
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-        public ApiCodeBlocks Blocks {get; private set;}
-
-        public Index<ApiPartRoutines> Routines {get; private set;}
-
         public ApiAsmDataset Dataset {get; private set;}
+
+        public AsmRecords Recordset {get; private set;}
 
         int Sequence;
 
@@ -31,18 +29,19 @@ namespace Z0.Asm
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
-            Blocks = ApiCodeBlocks.Empty;
             Dataset = ApiAsmDataset.Empty;
+            Recordset = AsmRecords.Empty;
         }
 
         protected override void OnInit()
         {
             base.OnInit();
-            Blocks = ApiIndex.service(Wf).CreateApiBlocks();
-            Dataset.With(Blocks);
-            Routines = ApiIndexDecoder.create(Wf).DecodeIndex(Blocks);
-            Dataset.With(Routines);
+            Dataset = ApiIndexDecoder.create(Wf).Decode();
         }
+
+        ApiCodeBlocks Blocks => Dataset.Blocks;
+
+        Index<ApiPartRoutines> Routines  => Dataset.Routines;
 
         public ApiAsmDataset Run()
         {
@@ -68,7 +67,7 @@ namespace Z0.Asm
 
                 Wf.Ran(flow, Msg.EmittedInstructionRecords.Format(records, count));
 
-                Dataset.With(rowsets);
+                Recordset.With(rowsets);
                 return rowsets;
 
             }
@@ -86,7 +85,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitJumpRows(Routines[i]));
             var rows = dst.ToArray();
-            Dataset.With(rows);
+            Recordset.With(rows);
             return rows;
         }
 
@@ -134,7 +133,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitCallRows(Routines[i]));
             var rows = dst.ToArray();
-            Dataset.With(rows);
+            Recordset.With(rows);
             return rows;
         }
 

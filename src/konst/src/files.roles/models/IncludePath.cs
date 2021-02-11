@@ -7,42 +7,58 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    using api = FileRoles;
+    using api = Includes;
 
-    /// <summary>
-    /// Represents a native executable
-    /// </summary>
-    public readonly struct IncludePath : IFsEntry<IncludePath>
+    public readonly struct IncludePath : ITextual, IIndex<FS.FolderPath>
     {
-        public FS.FolderPath Path {get;}
+        internal readonly Index<FS.FolderPath> Data;
 
         [MethodImpl(Inline)]
-        public IncludePath(FS.FolderPath src)
-            => Path = src;
+        public IncludePath(params FS.FolderPath[] src)
+            => Data = src;
 
-        public FS.PathPart Name
+        public ReadOnlySpan<FS.FolderPath> Entries
         {
             [MethodImpl(Inline)]
-            get => Path.Name;
+            get =>  Data;
         }
 
-        [MethodImpl(Inline)]
+        public uint EntryCount
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        public FS.FolderPath[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
         public string Format()
-            => api.format(this);
+            => api.format(this, PathSeparator.BS, true);
+
+        public string Format(PathSeparator sep, bool quote)
+            => api.format(this, sep,quote);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator IncludePath(FS.FolderPath src)
-            => new IncludePath(src);
+        public static IncludePath operator +(IncludePath a, IncludePath b)
+            => api.concat(a,b);
 
-        public static IncludePath Empty
-        {
-            [MethodImpl(Inline)]
-            get => new IncludePath(FS.FolderPath.Empty);
-        }
+        [MethodImpl(Inline)]
+        public static IncludePath operator +(IncludePath a, FS.FolderPath b)
+            => api.concat(a,b);
+
+        [MethodImpl(Inline)]
+        public static IncludePath operator +(FS.FolderPath a, IncludePath b)
+            => api.concat(a,b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator IncludePath(FS.FolderPath[] src)
+            => new IncludePath(src);
     }
 }

@@ -355,6 +355,14 @@ namespace Z0.Asm
             return 0;
         }
 
+        void CheckResPack()
+        {
+            var package = Db.Package("z0/respack");
+            var dllpath = package + FS.file("z0.respack.dll");
+            var exists = dllpath.Exists ? "Exists" : "Missing";
+            Wf.Status($"{dllpath} | {exists}");
+
+        }
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -362,11 +370,13 @@ namespace Z0.Asm
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
-            var package = Db.Package("z0/respack");
-            var dllpath = package + FS.file("z0.respack.dll");
 
-            var exists = dllpath.Exists ? "Exists" : "Missing";
-            Wf.Status($"{dllpath} | {exists}");
+            var sdk = WinSdk.latest();
+            Wf.Row(sdk);
+
+            // Wf.Row(ver);
+            // root.iter(includes, i => Wf.Row(i.Format(PathSeparator.BS, true)));
+            // root.iter(libs, l => Wf.Row(l.Format(PathSeparator.BS, true)));
         }
 
         public static void Main(params string[] args)
