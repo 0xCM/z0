@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class BitSpans32
+    using static Part;
+
+    partial struct memory
     {
-        /// <summary>
-        /// Allocates a bitspan with a specified length
-        /// </summary>
-        /// <param name="len">The length of the bitstring</param>
-        [Op]
-        public static BitSpan32 alloc32(int len)
-            => new BitSpan32(sys.alloc<Bit32>(len));
+        [MethodImpl(Inline)]
+        public static T one<T>()
+            where T : unmanaged
+                => Numeric.one<T>();
     }
 }

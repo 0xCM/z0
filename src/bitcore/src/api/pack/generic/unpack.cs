@@ -50,7 +50,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(bit))
-                return memory.recover<bit,T>(unpack(src, memory.recover<T,bit>(dst)));
+                return recover<bit,T>(unpack(src, recover<T,bit>(dst)));
             else
             {
                 var wCell = width<S>(w32);
@@ -75,7 +75,6 @@ namespace Z0
             where T : unmanaged
                 => unpack(src.ReadOnly(), dst.AsSpan());
 
-        [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => unpack(src, alloc<bit>(width<T>()*src.Length));

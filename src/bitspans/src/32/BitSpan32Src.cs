@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-
     public static class BitSpan32Src
     {
         /// <summary>
@@ -18,7 +16,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         [Op]
         public static BitSpan32 BitSpan32(this IDataSource source, int length)
-            => BitSpans32.load32(source.BitStream32().Take(length).ToArray());
+            => BitSpans32.load(source.BitStream32().Take(length).ToArray());
 
 
         /// <summary>
@@ -27,7 +25,6 @@ namespace Z0
         /// <param name="source">The random source</param>
         [Op]
         public static BitSpan32 BitSpan32(this IDataSource source, uint length)
-            => BitSpans32.load32(source.BitStream32().Take(length).ToArray());
-
+            => BitSpans32.load(source.BitStream32().Take(length).ToArray());
     }
 }

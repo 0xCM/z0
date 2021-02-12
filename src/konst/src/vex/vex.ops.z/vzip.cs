@@ -13,16 +13,6 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
-        /// (8x16i,8x16i) -> 16x8i
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector128<sbyte> vzip(Vector128<short> x, Vector128<short> y, W8 w)
-            => vpackss(x,y);
-
-        /// <summary>
         /// (8x16i,8x16i) -> 16x8u
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -73,24 +63,6 @@ namespace Z0
         public static Vector128<short> vzip(Vector128<int> x, Vector128<int> y, W16 w)
             => vpackss(x,y);
 
-        /// <summary>
-        /// (8x32i,8x32i) -> 16x16i
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector256<short> vzip(Vector256<int> x, Vector256<int> y, W16 w)
-            => vperm4x64(vpackss(x,y), Perm4L.ACBD);
-
-        /// <summary>
-        /// (4x32u,4x32u) -> 8x16u
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector128<ushort> vzip(Vector128<uint> x, Vector128<uint> y, W16 w)
-            => vpackus(x,y);
 
         /// <summary>
         ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128
@@ -151,7 +123,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), VZip]
         public static Vector128<byte> vzip(Vector256<uint> x, Vector256<uint> y, W8 w)
-            => vpack128x8u(vpack256x16u(x, y, n256), w128);
+            => vpack128x8u(vpack256x16u(x, y));
 
         /// <summary>
         /// (2x64w,2x64w) -> 4x32w
@@ -163,38 +135,5 @@ namespace Z0
         public static Vector128<uint> vzip(Vector128<ulong> x, Vector128<ulong> y, W32 w)
             => vparts(n128, (uint)vcell(x, 0),(uint)vcell(x, 1),(uint)vcell(y, 0),(uint)vcell(y, 1));
 
-        /// <summary>
-        /// (4x64w,4x64w) -> 8x32w
-        /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector256<uint> vzip(Vector256<ulong> x, Vector256<ulong> y, W32 w)
-            => vconcat(vpack128x32u(x, w128), vpack128x32u(y, w128));
-
-        /// <summary>
-        /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
-        /// </summary>
-        /// <param name="x0">The first source vector</param>
-        /// <param name="x1">The second source vector</param>
-        /// <param name="x2">The third source vector</param>
-        /// <param name="x3">The fourth source vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector128<byte> vzip(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, W8 w)
-            => vpack128x8u(vpack128x16u(x0, x1, w128), vpack128x16u(x2, x3, w128), w128);
-
-        /// <summary>
-        /// (8x32u,8x32u,8x32u,8x32u) -> 32x8w
-        /// </summary>
-        /// <param name="x0">The first source vector</param>
-        /// <param name="x1">The second source vector</param>
-        /// <param name="x2">The third source vector</param>
-        /// <param name="x3">The fourth source vector</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), VZip]
-        public static Vector256<byte> vzip(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, W8 w)
-            => vpack256x8u(vpack256x16u(x0, x1, w256), vpack256x16u(x2, x3, w256), w256);
     }
 }

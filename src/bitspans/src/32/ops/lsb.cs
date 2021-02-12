@@ -7,15 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitSpans32
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan32 reverse32(in BitSpan32 src)
+        public static int lsb(in BitSpan32 src)
         {
-            src.Edit.Reverse();
-            return ref src;
+            var len = src.Length;
+            for(var i = 0; i <len;  i++)
+                if(src[i])
+                    return i;
+            return -1;
         }
     }
 }

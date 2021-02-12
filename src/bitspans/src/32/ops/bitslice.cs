@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitSpans32
     {
@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice32<T>(in BitSpan32 src, int offset)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T bitslice<T>(in BitSpan32 src, int offset)
             where T : unmanaged
         {
             var dst = span<Bit32>(width<T>());
@@ -32,8 +32,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice32<T>(in BitSpan32 src)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T bitslice<T>(in BitSpan32 src)
             where T : unmanaged
         {
             var dst = span<Bit32>(width<T>());
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="offset">The source index to begin extraction</param>
         /// <param name="count">The number of source bits that contribute to the extract</param>
         /// <typeparam name="T">The scalar type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T bitslice32<T>(in BitSpan32 src, int offset, int count)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T bitslice<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             var dst = span<Bit32>(width<T>());

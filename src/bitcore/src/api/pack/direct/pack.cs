@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct BitPack
     {
-        [Op]
         public static Span<byte> pack(ReadOnlySpan<byte> src, uint offset = 0, int? minlen = null)
         {
             const byte M = 8;

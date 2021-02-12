@@ -19,7 +19,7 @@ namespace Z0
 
             if(results.Any())
             {
-                var dst = AppPaths.SortedCaseLogPath();
+                var dst = Db.SortedCaseLogPath();
                 Wf.Status($"Emitting case log to {dst.ToUri()}");
                 EmitTestCaseLog(dst, results);
             }

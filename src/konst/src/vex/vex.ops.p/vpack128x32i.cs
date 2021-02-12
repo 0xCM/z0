@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vpack128x32i(Vector256<long> src, W128 w = default)
+        public static Vector128<int> vpack128x32i(Vector256<long> src)
             => vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
     }
 }

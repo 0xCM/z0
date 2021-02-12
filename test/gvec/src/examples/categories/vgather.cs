@@ -56,7 +56,7 @@ namespace Z0
 
             var i2x2 = cpu.vparts(n256, 2, 4, 8, 16);
             var v2x2 = cpu.vgather(n128, in src32, i2x2);
-            Claim.veq(cpu.vpack128x32u(i2x2, n128), v2x2);
+            Claim.veq(cpu.vpack128x32u(i2x2), v2x2);
 
             var i3x3 = cpu.vparts(n256, 3, 6, 12, 24);
             var v3x3 = cpu.vgather(n128, in src32, i3x3);
@@ -72,7 +72,7 @@ namespace Z0
 
             var i5_5 =cpu.vparts(n256, 5, 10, 15, 20);
             var v5_5 = cpu.vgather(n128, in src32, i5_5);
-            Claim.veq(cpu.vpack128x32u(i5_5, n128), v5_5);
+            Claim.veq(cpu.vpack128x32u(i5_5), v5_5);
 
             var i9_9 = cpu.vparts(n256, 9, 18, 27, 36);
             var v9_9 = cpu.vgather(n128, in src32, i9_9);

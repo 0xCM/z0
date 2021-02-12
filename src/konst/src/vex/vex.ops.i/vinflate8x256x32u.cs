@@ -22,12 +22,17 @@ namespace Z0
         /// 8x8u -> 8x32u
         /// Zero extends 8 packed 8-bit integers in the low 8 bytes of xmm2/m64 to 8 packed 32-bit integers in ymm1
         /// </summary>
-        /// <param name="wSrc">The number of bits covered by the source reference</param>
         /// <param name="src">The source reference</param>
-        /// <param name="wDst">The target vector width</param>
-        /// <param name="n">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vinflate8x256x32u(in byte src)
             => v32u(ConvertToVector256Int32(gptr(src)));
+
+        [MethodImpl(Inline), Op]
+        public static void vinflate8x256x32u(in byte src, int step, ref uint dst)
+            => vstore(vinflate8x256x32u(skip(src, step*8)), ref seek(dst, step*8));
+
+        [MethodImpl(Inline), Op]
+        public static void vinflate8x256x32u(in byte src, int srcStep, ref uint dst, int dstStep)
+            => vstore(vinflate8x256x32u(skip(src, srcStep*8)), ref seek(dst, dstStep*8));
     }
 }

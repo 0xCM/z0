@@ -15,11 +15,11 @@ namespace Z0
         /// <summary>
         /// (4x64w,4x64w) -> 8x32w
         /// </summary>
-        /// <param name="a">The first source vector</param>
-        /// <param name="b">The second source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
+        /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vpack256x32u(Vector256<ulong> a, Vector256<ulong> b, W256 w = default)
-            => vconcat(vpack128x32u(a, w128), vpack128x32u(b, w128));
+        public static Vector256<uint> vpack256x32u(Vector256<ulong> a, Vector256<ulong> b)
+            => vconcat(vpack128x32u(a), vpack128x32u(b));
     }
 }

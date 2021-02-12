@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitSpans32
     {
@@ -16,17 +16,17 @@ namespace Z0
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan32 load32<T>(Span<T> packed)
+        public static BitSpan32 load<T>(Span<T> packed)
             where T : unmanaged
-                => load32(packed.Bytes());
+                => load(packed.Bytes());
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of primal values
         /// </summary>
         /// <param name="packed">The packed data source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan32 load32<T>(ReadOnlySpan<T> packed)
+        public static BitSpan32 load<T>(ReadOnlySpan<T> packed)
             where T : unmanaged
-                => load32(packed.Bytes());
+                => load(packed.Bytes());
     }
 }

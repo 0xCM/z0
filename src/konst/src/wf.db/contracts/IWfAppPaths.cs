@@ -26,19 +26,13 @@ namespace Z0
             => WfEnv.dbRoot();
 
         ITestLogPaths TestPaths
-            => new TestLogPaths(Root + FS.folder("tests"));
+            => new TestLogPaths(Root + FS.folder("logs") + FS.folder("tests"));
 
         /// <summary>
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataDir
             => (Root + FS.folder(AppsFolder)) + FS.folder(AppName);
-
-        FS.FolderPath SortedCaseLogRoot()
-            => Root + FS.folder("tests") + FS.folder("sorted");
-
-        FS.FilePath SortedCaseLogPath()
-            => SortedCaseLogRoot() + FS.file(AppName, Csv);
 
         /// <summary>
         /// The name of an application configuration file

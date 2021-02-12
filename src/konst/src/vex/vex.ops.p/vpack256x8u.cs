@@ -31,7 +31,8 @@ namespace Z0
         /// <param name="d">The fourth source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vpack256x8u(Vector256<uint> a, Vector256<uint> b, Vector256<uint> c, Vector256<uint> d, W256 w = default)
-            => vpack256x8u(vpack256x16u(a, b), vpack256x16u(c, d), w);
+        public static Vector256<byte> vpack256x8u(Vector256<uint> a, Vector256<uint> b, Vector256<uint> c, Vector256<uint> d)
+            => vpack256x8u(vpack256x16u(a, b), vpack256x16u(c, d));
+
     }
 }

@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    static class Tracing
+    static class XTrace
     {
         public static int CasePadding
             => Datasets.width(TestCaseField.CaseName);

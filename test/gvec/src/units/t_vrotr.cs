@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public class t_vrotr : t_inx<t_vrotr>
     {
@@ -16,6 +16,29 @@ namespace Z0
             vrotr_check(n128);
             vrotr_check(n256);
         }
+
+        public void vrotr_bench()
+        {
+            vrotr_bench(w128);
+            vrotr_bench(w256);
+        }
+
+        void vrotr_bench(W128 w)
+        {
+            vshift_bench(w, VSvc.vrotr(w, z8), z8);
+            vshift_bench(w, VSvc.vrotr(w, z16),z16);
+            vshift_bench(w, VSvc.vrotr(w, z32), z32);
+            vshift_bench(w, VSvc.vrotr(w, z64), z64);
+        }
+
+        void vrotr_bench(W256 w)
+        {
+            vshift_bench(w, VSvc.vrotr(w, z8), z8);
+            vshift_bench(w, VSvc.vrotr(w, z16),z16);
+            vshift_bench(w, VSvc.vrotr(w, z32), z32);
+            vshift_bench(w, VSvc.vrotr(w, z64), z64);
+        }
+
 
         void vrotr_check(N128 w)
         {

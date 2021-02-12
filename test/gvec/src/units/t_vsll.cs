@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vsll : t_inx<t_vsll>
     {
@@ -18,9 +18,32 @@ namespace Z0
             vsll_check(w256);
         }
 
+        public void vsll_bench()
+        {
+            vsll_bench(w128);
+            vsll_bench(w256);
+        }
+
+        void vsll_bench(W128 w)
+        {
+            vshift_bench(w,VSvc.vsll(w, z8), z8);
+            vshift_bench(w,VSvc.vsll(w, z16), z16);
+            vshift_bench(w,VSvc.vsll(w, z32), z32);
+            vshift_bench(w,VSvc.vsll(w, z64), z64);
+        }
+
+        void vsll_bench(N256 w)
+        {
+
+            vshift_bench(w,VSvc.vsll(w, z8), z8);
+            vshift_bench(w,VSvc.vsll(w, z16), z16);
+            vshift_bench(w,VSvc.vsll(w, z32), z32);
+            vshift_bench(w,VSvc.vsll(w, z64), z64);
+        }
+
         void vsll_check(W128 w)
         {
-            vsll_check(w, z8);                
+            vsll_check(w, z8);
             vsll_check(w, z8i);
             vsll_check(w, z16);
             vsll_check(w, z16i);
@@ -32,7 +55,7 @@ namespace Z0
 
         void vsll_check(W256 w)
         {
-            vsll_check(w, z8);                
+            vsll_check(w, z8);
             vsll_check(w, z8i);
             vsll_check(w, z16);
             vsll_check(w, z16i);
@@ -45,7 +68,7 @@ namespace Z0
         void vsll_check<T>(W128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);
-            
+
         void vsll_check<T>(W256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckShiftOp(VSvc.vsll(w,t),w,t);

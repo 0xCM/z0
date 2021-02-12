@@ -5,11 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     using static DbNames;
 
     public interface IWfDbPaths : IWfService, IFileArchive
     {
+        string AppName
+            => Assembly.GetEntryAssembly().GetSimpleName();
+
         Env Env => Wf.Env;
 
         FS.FolderName SubjectFolder<S>(S src)
@@ -90,8 +94,23 @@ namespace Z0
         FS.FolderPath AppLogRoot()
             => LogRoot() + FS.folder("apps");
 
+        FS.FolderPath TestLogRoot()
+            => LogRoot() + FS.folder("tests");
+
+        FS.FolderPath TestLogDir(PartId id)
+            => TestLogRoot() + FS.folder(id.Format());
+
+        FS.FolderPath TestLogDir(FS.FolderName folder)
+            => TestLogRoot() + folder;
+
+        FS.FolderPath SortedCaseLogRoot()
+            => Root + FS.folder("logs") + FS.folder("sorted");
+
+        FS.FilePath SortedCaseLogPath()
+            => SortedCaseLogRoot() + FS.file(AppName, Csv);
+
         FS.FilePath AppLog(string id)
-            =>  AppLogRoot() + FS.file(id,Log);
+            =>  AppLogRoot() + FS.file(id, Log);
 
         FS.FilePath AppLog(string id, FS.FileExt ext)
             => AppLogRoot() + FS.file(id,ext);

@@ -37,9 +37,9 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector128<sbyte> vsrl(Vector128<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate256x16i(src, w256),count));
-            var y = vand(x,v16u(vbroadcast(w256, byte.MaxValue)));
-            return v8i(vpack128x8u(y,n128));
+            var x = v16u(ShiftRightLogical(vinflate256x16i(src),count));
+            var y = vand(x, v16u(vbroadcast(w256, byte.MaxValue)));
+            return v8i(vpack128x8u(y));
         }
 
         /// <summary>

@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit testc<T>(T a)
             where T : unmanaged
-                => gbits.pop(a) == bitwidth<T>();
+                => gbits.pop(a) == width<T>();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T and<T>(T a, T b)

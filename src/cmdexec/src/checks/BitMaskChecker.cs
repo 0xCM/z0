@@ -76,10 +76,10 @@ namespace Z0
         [Op]
         void Init()
         {
-            Cases8 = DataSource.Fill(z8, (byte)bitwidth<byte>(), index<byte>(Reps));
-            Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), index<byte>(Reps));
-            Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), index<byte>(Reps));
-            Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), index<byte>(Reps));
+            Cases8 = DataSource.Fill(z8, width<byte>(w8), index<byte>(Reps));
+            Cases16 = DataSource.Fill(z8, width<ushort>(w8), index<byte>(Reps));
+            Cases32 = DataSource.Fill(z8, width<uint>(w8), index<byte>(Reps));
+            Cases64 = DataSource.Fill(z8, width<uint>(w8), index<byte>(Reps));
             Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMasks.Literals));
             Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMasks.Literals));
             Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMasks.Literals));
@@ -235,7 +235,7 @@ namespace Z0
             var literals = Lit<T>();
             foreach(var m in literals.Storage)
             {
-                var bits = BitSpans32.parse32(m.Text);
+                var bits = BitSpans32.parse(m.Text);
                 var bitval = bits.Convert<T>();
                 var ok = gmath.eq(bitval,m.Data);
 
@@ -260,7 +260,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth<W>
         {
             var mincount = (byte)1;
-            var maxcount = (byte)bitwidth<T>();
+            var maxcount = (byte)width<T>();
             var cases = Cases(w);
 
             for(var i=0u; i<Reps; i++)
@@ -272,7 +272,7 @@ namespace Z0
                 dst.PopCount = (byte)gbits.pop(dst.Mask);
                 dst.Check1 = dst.PopCount != dst.Count;
                 dst.Check1 = eq(dst.Count, gbits.pop(dst.Mask));
-                dst.Lowered = gmath.srl(dst.Mask, (byte)(bitwidth<T>() -  dst.Count));
+                dst.Lowered = gmath.srl(dst.Mask, (byte)(width<T>() -  dst.Count));
                 dst.EffectiveWidth = (byte)gbits.effwidth(dst.Lowered);
                 dst.Check3 = dst.Count == dst.EffectiveWidth;
             }

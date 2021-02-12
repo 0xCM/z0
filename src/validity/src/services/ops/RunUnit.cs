@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-
     partial class TestApp<A>
     {
         public void RunUnit(Type host, IUnitTest unit)
@@ -28,7 +26,7 @@ namespace Z0
                     ExecExplicit(et, host.Name,results);
                 else
                 {
-                    z.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
+                    root.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
                     PostBenchResult(unit.TakeBenchmarks().Array());
                 }
 
@@ -40,7 +38,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error($"Harness execution failed: {e}");
+                Wf.Error(e, $"Harness execution failed while running {unit.GetType().Name}");
             }
             finally
             {

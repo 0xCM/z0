@@ -85,11 +85,11 @@ namespace Z0
         public static string format<T>(RelativeAddress<T> src)
             where T : unmanaged
         {
-            if(bitwidth<T>() == 8)
+            if(width<T>() == 8)
                 return string.Format("{0} + {1}", src.Base, @as<T,byte>(src.Offset).FormatAsmHex());
-            else if(bitwidth<T>() == 16)
+            else if(width<T>() == 16)
                 return string.Format("{0} + {1}", src.Base, @as<T,ushort>(src.Offset).FormatAsmHex());
-            else if(bitwidth<T>() == 32)
+            else if(width<T>() == 32)
                 return string.Format("{0} + {1}", src.Base, @as<T,uint>(src.Offset).FormatAsmHex());
             else
                 return string.Format("{0} + {1}", src.Base, @as<T,ulong>(src.Offset).FormatAsmHex());

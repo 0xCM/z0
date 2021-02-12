@@ -7,21 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    using SB = SpannedBits;
+    using SB = BitSpan32Scalars;
 
-    public partial class BitSpans32
+    partial class BitSpans32
     {
         /// <summary>
         /// Creates a bitspan from a primal source
         /// </summary>
         /// <param name="src">The packed source bits</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan32 from32<T>(T src)
+        public static BitSpan32 from<T>(T src)
             where T : unmanaged
-                => from32_u(src);
+                => from_u(src);
 
         /// <summary>
         /// Creates a bitspan from a primal source, or portion thereof
@@ -29,43 +29,44 @@ namespace Z0
         /// <param name="src">The packed source bits</param>
         /// <param name="maxbits">The maximum number of bits to draw from the source</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static BitSpan32 from32<T>(T src, int maxbits)
+        public static BitSpan32 from<T>(T src, int maxbits)
             where T : unmanaged
         {
-            var dst = from32(src);
-            return (dst.Length > maxbits && maxbits != 0) ? load32(dst.Data.Slice(0, maxbits)) : dst;
+            var dst = from(src);
+            return (dst.Length > maxbits && maxbits != 0) ? load(dst.Data.Slice(0, maxbits)) : dst;
         }
 
         [MethodImpl(Inline)]
-        static BitSpan32 from32_u<T>(T src)
+        static BitSpan32 from_u<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return SB.from32(uint8(src));
+                return SB.from(uint8(src));
             else if(typeof(T) == typeof(ushort))
-                return SB.from32(uint16(src));
+                return SB.from(uint16(src));
             else if(typeof(T) == typeof(uint))
-                return SB.from32(uint32(src));
+                return SB.from(uint32(src));
             else if(typeof(T) == typeof(ulong))
-                return SB.from32(uint64(src));
+                return SB.from(uint64(src));
             else
-                return from32_i(src);
+                return from_i(src);
         }
 
         [MethodImpl(Inline)]
-        static BitSpan32 from32_i<T>(T src)
+        static BitSpan32 from_i<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return SB.from32(Numeric.force<T,byte>(src));
+                return SB.from(Numeric.force<T,byte>(src));
             else if(typeof(T) == typeof(short))
-                return SB.from32(Numeric.force<T,ushort>(src));
+                return SB.from(Numeric.force<T,ushort>(src));
             else if(typeof(T) == typeof(int))
-                return SB.from32(Numeric.force<T,uint>(src));
+                return SB.from(Numeric.force<T,uint>(src));
             else if(typeof(T) == typeof(long))
-                return SB.from32(Numeric.force<T,ulong>(src));
+                return SB.from(Numeric.force<T,ulong>(src));
             else
                 throw no<T>();
         }
+
     }
 }

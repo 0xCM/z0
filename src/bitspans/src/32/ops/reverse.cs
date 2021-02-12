@@ -12,13 +12,10 @@ namespace Z0
     partial class BitSpans32
     {
         [MethodImpl(Inline), Op]
-        public static int lsb32(in BitSpan32 src)
+        public static ref readonly BitSpan32 reverse(in BitSpan32 src)
         {
-            var len = src.Length;
-            for(var i = 0; i <len;  i++)
-                if(src[i])
-                    return i;
-            return -1;
+            src.Edit.Reverse();
+            return ref src;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan32 and(in BitSpan32 x, in BitSpan32 y)
-            => and(x,y, alloc32(y.Length));
+            => and(x,y, alloc(y.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 or(in BitSpan32 x, in BitSpan32 y, in BitSpan32 z)
@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan32 or(in BitSpan32 x, in BitSpan32 y)
-            => or(x, y, alloc32(y.Length));
+            => or(x, y, alloc(y.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 xor(in BitSpan32 x, in BitSpan32 y, in BitSpan32 z)
@@ -48,7 +48,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan32 xor(in BitSpan32 x, in BitSpan32 y)
-            => xor(x,y, alloc32(y.Length));
+            => xor(x,y, alloc(y.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 not(in BitSpan32 x, in BitSpan32 z)
@@ -61,12 +61,12 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static BitSpan32 not(in BitSpan32 x)
-            => not(x,alloc32(x.Length));
+            => not(x,alloc(x.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 select(in BitSpan32 a, in BitSpan32 b, in BitSpan32 c, in BitSpan32 z)
         {
-            var tmp = alloc32(z.Length);
+            var tmp = alloc(z.Length);
             not(a,tmp);
             and(a,b,z);
             and(tmp,c, tmp);
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
         public static BitSpan32 select(in BitSpan32 a, in BitSpan32 b, in BitSpan32 c)
-            => select(a,b,c, alloc32(c.Length));
+            => select(a,b,c, alloc(c.Length));
 
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan32 sll(in BitSpan32 a, int offset, in BitSpan32 z)

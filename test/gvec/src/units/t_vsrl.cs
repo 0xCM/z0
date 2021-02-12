@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     public class t_vsrl : t_inx<t_vsrl>
     {
@@ -15,6 +15,28 @@ namespace Z0
         {
             vsrl_check(n128);
             vsrl_check(n256);
+        }
+
+        public void vsrl_bench()
+        {
+            vsrl_bench(w128);
+            vsrl_bench(w256);
+        }
+
+        void vsrl_bench(N256 w)
+        {
+            vshift_bench(w,VSvc.vsrl(w, z8), z8);
+            vshift_bench(w,VSvc.vsrl(w, z16), z16);
+            vshift_bench(w,VSvc.vsrl(w, z32), z32);
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);
+        }
+
+        void vsrl_bench(W128 w)
+        {
+            vshift_bench(w,VSvc.vsrl(w, z8), z8);
+            vshift_bench(w,VSvc.vsrl(w, z16), z16);
+            vshift_bench(w,VSvc.vsrl(w, z32), z32);
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);
         }
 
         void vsrl_check(N128 w)

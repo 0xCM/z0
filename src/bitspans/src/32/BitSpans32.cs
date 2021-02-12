@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct memory
+    using SB = BitSpan32Scalars;
+
+    [ApiHost]
+    public partial class BitSpans32
     {
-        [MethodImpl(Inline)]
-        public static T zero<T>()
-            where T : unmanaged
-                => Numeric.zero<T>();
-    }
+        const NumericKind Closure = UnsignedInts;
+   }
 }

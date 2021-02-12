@@ -171,7 +171,7 @@ namespace Z0
             (var v0, var v1) = vinflate512x32u(vidx);
             var x0 = GatherVector256(p32u(src), v32i(v0), 1);
             var x1 = GatherVector256(p32u(src), v32i(v1), 1);
-            return vpack128x8u(x0, x1, w128);
+            return vpack128x8u(x0, x1);
         }
 
         [MethodImpl(Inline), Op]

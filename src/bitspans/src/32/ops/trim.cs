@@ -12,13 +12,13 @@ namespace Z0
     partial class BitSpans32
     {
         [MethodImpl(Inline), Op]
-        public static int msb32(in BitSpan32 src)
+        public static BitSpan32 trim(in BitSpan32 src)
         {
-            var len = src.Length;
-            for(var i = len - 1; i >=0; i--)
-                if(src[i])
-                    return i;
-            return 0;
+            var pos = msb(src);
+            if(pos != 0 && pos != src.Length - 1)
+                return load(src.Data.Slice(0, pos + 1));
+            else
+                return src;
         }
     }
 }

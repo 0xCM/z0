@@ -20,18 +20,8 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vpack128x16i(Vector128<int> x, Vector128<int> y, N128 w = default)
+        public static Vector128<short> vpack128x16i(Vector128<int> x, Vector128<int> y)
             => vpackss(x,y);
-
-        /// <summary>
-        /// 8x32i -> 8x16i
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target vector width</param>
-        /// <param name="t">A target component type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<short> vpack128x16i(Vector256<int> src, N128 w = default)
-            => vpack128x16i(vlo(src), vhi(src),w);
 
         /// <summary>
         /// 8x32i -> 8x16i
@@ -39,6 +29,6 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<short> vpack128x16i(Vector256<int> src)
-            => vpack128x16i(vlo(src), vhi(src), w128);
+            => vpack128x16i(vlo(src), vhi(src));
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsllr(vinflate256x16u(src), y);
-            return vpack128x8u(dst, w128);
+            return vpack128x8u(dst);
         }
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsllr(vinflate256x16i(vlo(src)), y);
             var hi = vsllr(vinflate256x16i(vhi(src)), y);
-            return vpack256x8i(lo,hi, w256);
+            return vpack256x8i(lo,hi);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsllr(vinflate256x16u(vlo(src)), y);
             var hi = vsllr(vinflate256x16u(vhi(src)), y);
-            return vpack256x8u(lo, hi, w256);
+            return vpack256x8u(lo, hi);
         }
 
         /// <summary>

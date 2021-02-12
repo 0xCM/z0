@@ -47,10 +47,6 @@ namespace Z0
         public FS.FilePath CasePath(FS.FileExt? ext = null, [Caller] string caller = null)
             => CasePath(FS.file(caller,  ext ?? DefaultExt));
 
-        [MethodImpl(Inline)]
-        public FS.FilePath CasePath(string @case, FS.FileExt? ext = null)
-            => CasePath(FS.file(@case, ext ?? FileExtensions.Csv));
-
         FS.FileExt DefaultExt
         {
             [MethodImpl(Inline)]

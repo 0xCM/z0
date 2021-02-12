@@ -21,8 +21,8 @@ namespace Z0
         {
             try
             {
-                Context.TestPaths.ErrorLogPath.Delete();
-                Context.TestPaths.StatusLogPath.Delete();
+                ErroLogPath.Delete();
+                StatusLogPath.Delete();
 
                 RunTests(false, filters);
                 Wf.Status("Completed test execution");

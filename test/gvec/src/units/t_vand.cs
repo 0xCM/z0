@@ -17,13 +17,18 @@ namespace Z0
             vand_check(n128);
             vand_check(n256);
 
-
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector(n128,z32);
                 var y = Random.CpuVector(n128,z32);
                 Claim.Require(vand(x,y));
             }
+        }
+
+        public void vand_bench()
+        {
+            vand_bench(w128);
+            vand_bench(w256);
         }
 
         void vand_check(N128 w)
@@ -50,6 +55,30 @@ namespace Z0
             vand_check(w, z64);
             vand_check(w, z64i);
         }
+
+        void vand_bench(W128 w)
+        {
+            vand_bench(w, z8);
+            vand_bench(w, z16);
+            vand_bench(w, z32);
+            vand_bench(w, z64);
+        }
+
+        void vand_bench<T>(W128 w, T t)
+            where T : unmanaged
+                => vbinop_bench(w, VSvc.vand(w,t),t);
+
+        void vand_bench(W256 w)
+        {
+            vand_bench(w, z8);
+            vand_bench(w, z16);
+            vand_bench(w, z32);
+            vand_bench(w, z64);
+        }
+
+        void vand_bench<T>(W256 w, T t)
+            where T : unmanaged
+                => vbinop_bench(w, VSvc.vand(w,t),t);
 
         static Bit32 vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged

@@ -12,7 +12,7 @@ namespace Z0
     using System.Reflection;
     using System.IO;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
@@ -23,13 +23,14 @@ namespace Z0
 
         protected IWfShell Wf {get; private set;}
 
+        public void InjectShell(IWfShell wf)
+            => Wf = wf;
+
         protected IWfDb Db => Wf.Db();
 
         public void SetMode(bool diagnostic)
             => DiagnosticMode = diagnostic;
 
-        public void InjectShell(IWfShell wf)
-            => Wf = wf;
 
         protected TestContext()
         {
@@ -159,22 +160,19 @@ namespace Z0
             => AppPaths.TestPaths;
 
         protected PartId TestedPart
-        {
-            [MethodImpl(Inline)]
-            get => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
-        }
+            => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
+
+        protected FS.FilePath StatusLogPath
+            => TestRoot + FS.file(TestedPart.Format() + "test" + "." + "status" + "log");
+
+        protected FS.FilePath ErroLogPath
+            => TestRoot + FS.file(TestedPart.Format() + "test" + "." + "errors" + "log");
 
         FS.FolderPath TestRoot
-        {
-             [MethodImpl(Inline)]
-             get => TestPaths.DataRoot + FS.folder(TestedPart.Format());
-        }
+            => Db.TestLogDir(TestedPart);
 
         protected FS.FolderPath UnitDataDir
-        {
-             [MethodImpl(Inline)]
-             get => TestRoot + FS.folder(GetType().Name);
-        }
+            => TestRoot + FS.folder(GetType().Name);
 
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
@@ -191,8 +189,15 @@ namespace Z0
         protected string CaseName(IFunc f)
             => ApiTestIdentity.name(f);
 
+
+        CasePaths GetCasePaths()
+        {
+            root.require(Db != null, () => $"Db for {GetType().Name} is null");
+            return new CasePaths(Db.TestLogRoot(), TestedPart, GetType());
+        }
+
         public CasePaths Paths
-            => new CasePaths(TestPaths.DataRoot, TestedPart, GetType());
+            => GetCasePaths();
 
         [MethodImpl(Inline)]
         protected FS.FilePath UnitPath(FS.FileName name)

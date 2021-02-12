@@ -80,7 +80,7 @@ namespace Z0
         public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => bitwidth<T>();
+            get => width<T>();
         }
 
         public uint BitCount

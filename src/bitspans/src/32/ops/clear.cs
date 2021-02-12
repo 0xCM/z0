@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitSpans32
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan32 clear32(in BitSpan32 src)
+        public static ref readonly BitSpan32 clear(in BitSpan32 src)
         {
             src.Data.Clear();
             return ref src;
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
-        public ref readonly BitSpan32 clear32(in BitSpan32 src, int maxbits)
+        public ref readonly BitSpan32 clear(in BitSpan32 src, int maxbits)
         {
             if(src.Length <= maxbits)
                 return ref src;
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="i0">The index of the first bit to clear</param>
         /// <param name="i1">The index of the last bit to clear</param>
         [MethodImpl(Inline), Op]
-        public static ref readonly BitSpan32 clear32(in BitSpan32 src, int i0, int i1)
+        public static ref readonly BitSpan32 clear(in BitSpan32 src, int i0, int i1)
         {
             src.Data.Slice(i0, i0 - i1 + 1).Clear();
             return ref src;

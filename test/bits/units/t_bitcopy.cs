@@ -38,8 +38,8 @@ namespace Z0
                     var actual = gbits.copy(lit, range.Left, count, zed);
                     if(gmath.neq(expect,actual))
                     {
-                        Trace("expect", BitSpans32.from32(expect).Format());
-                        Trace("actual", BitSpans32.from32(actual).Format());
+                        Trace("expect", BitSpans32.from(expect).Format());
+                        Trace("actual", BitSpans32.from(actual).Format());
                         Claim.eq(expect, actual);
                     }
                 }

@@ -20,38 +20,38 @@ namespace Z0
         /// <param name="count">The number of bits, at most bitsize[T], to pull</param>
         /// <typeparam name="T">The integral numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static T slice32<T>(in BitSpan32 src, int offset, int count)
+        public static T slice<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
-                => slice32_u<T>(src,offset,count);
+                => slice_u<T>(src,offset,count);
 
         [MethodImpl(Inline)]
-        static T slice32_u<T>(in BitSpan32 src, int offset, int count)
+        static T slice_u<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(slice32(src, w8, offset, count));
+                return generic<T>(slice(src, w8, offset, count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(slice32(src, w16, offset, count));
+                return generic<T>(slice(src, w16, offset, count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(slice32(src, w32, offset, count));
+                return generic<T>(slice(src, w32, offset, count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(slice32(src, w64, offset, count));
+                return generic<T>(slice(src, w64, offset, count));
             else
-                return slice32_i<T>(src,offset,count);
+                return slice_i<T>(src,offset,count);
         }
 
         [MethodImpl(Inline)]
-        static T slice32_i<T>(in BitSpan32 src, int offset, int count)
+        static T slice_i<T>(in BitSpan32 src, int offset, int count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(slice32(src, w8i, offset, count));
+                return generic<T>(slice(src, w8i, offset, count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(slice32(src, w16i, offset,count));
+                return generic<T>(slice(src, w16i, offset,count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(slice32(src, w32i, offset,count));
+                return generic<T>(slice(src, w32i, offset,count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(slice32(src, w64i, offset, count));
+                return generic<T>(slice(src, w64i, offset, count));
             else
                 throw no<T>();
         }
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 8, to pull</param>
         [MethodImpl(Inline), Op]
-        public static byte slice32(in BitSpan32 src, W8 w, int offset, int count)
+        public static byte slice(in BitSpan32 src, W8 w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w64);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 16, to pull</param>
         [MethodImpl(Inline), Op]
-        public static ushort slice32(in BitSpan32 src, W16 w, int offset, int count)
+        public static ushort slice(in BitSpan32 src, W16 w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w128);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 32, to pull</param>
         [MethodImpl(Inline), Op]
-        public static uint slice32(in BitSpan32 src, W32 w, int offset, int count)
+        public static uint slice(in BitSpan32 src, W32 w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w256);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -115,7 +115,7 @@ namespace Z0
         /// <param name="offset">The bit position at which the slice begins</param>
         /// <param name="count">The number of bits, at most 64, to pull</param>
         [MethodImpl(Inline), Op]
-        public static ulong slice32(in BitSpan32 src, W64 w, int offset, int count)
+        public static ulong slice(in BitSpan32 src, W64 w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w512);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -125,7 +125,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static sbyte slice32(in BitSpan32 src, W8i w, int offset, int count)
+        public static sbyte slice(in BitSpan32 src, W8i w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w64);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -135,7 +135,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static short slice32(in BitSpan32 src, W16i w, int offset, int count)
+        public static short slice(in BitSpan32 src, W16i w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w128);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -145,7 +145,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static int slice32(in BitSpan32 src, W32i w, int offset, int count)
+        public static int slice(in BitSpan32 src, W32i w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w256);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
@@ -155,7 +155,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static long slice32(in BitSpan32 src, W64i w, int offset, int count)
+        public static long slice(in BitSpan32 src, W64i w, int offset, int count)
         {
             var buffer = MemoryStacks.alloc(w512);
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);

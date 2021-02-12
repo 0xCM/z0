@@ -15,12 +15,12 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="count">The number of source copies to produce</param>
         [Op]
-        public static BitSpan32 replicate32(in BitSpan32 src, int count = 1)
+        public static BitSpan32 replicate(in BitSpan32 src, int count = 1)
         {
             Span<Bit32> data = new Bit32[src.Length * count];
             for(var i=0; i<count; i++)
                 src.Data.CopyTo(data, i*src.Length);
-            return load32(data);
+            return load(data);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         /// <param name="count">The number of source copies to produce</param>
         [Op]
-        public static ref readonly BitSpan32 replicate32(in BitSpan32 src, in BitSpan32 dst)
+        public static ref readonly BitSpan32 replicate(in BitSpan32 src, in BitSpan32 dst)
         {
             if(src.Length == dst.Length)
                 src.Data.CopyTo(dst.Data);

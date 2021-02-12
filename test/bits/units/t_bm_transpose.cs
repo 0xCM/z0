@@ -11,7 +11,7 @@ namespace Z0
 
     public class t_bm_transpose : t_bitmatrix<t_bm_transpose>
     {
-        public void bm_transpose_8x8x8_v2()
+        void bm_transpose_8x8x8_v2()
         {
             var n = n8;
             var m1 = Random.BitMatrix(n);
@@ -24,7 +24,7 @@ namespace Z0
             Claim.Require(m3 == m1);
         }
 
-        public void bm_transpose_8x8x8()
+        void bm_transpose_8x8x8()
         {
             var n = n8;
             var m1 = Random.BitMatrix(n);

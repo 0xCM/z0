@@ -17,6 +17,66 @@ namespace Z0
             vpop_check(n256);
         }
 
+        public void vpop_bench()
+        {
+            vpop_bench_ref();
+            vpop_bench(w128);
+            vpop_bench(w256);
+        }
+
+        void vpop_bench(N256 n, SystemCounter counter = default)
+        {
+            var total = 0ul;
+            var opcount = 0;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
+                var z = Random.CpuVector<ulong>(n);
+                counter.Start();
+                for(var i=0; i<RepCount; i++)
+                    total += cpu.vpop(x,y,z);
+                counter.Stop();
+                opcount += (4 * 3 * RepCount);
+            }
+            ReportBenchmark($"vpop_3x256", opcount,counter);
+        }
+
+        void vpop_bench(W128 n, SystemCounter counter = default)
+        {
+            var total = 0ul;
+            var opcount = 0;
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                var x = Random.CpuVector<ulong>(n);
+                var y = Random.CpuVector<ulong>(n);
+                var z = Random.CpuVector<ulong>(n);
+                counter.Start();
+                for(var i=0; i<RepCount; i++)
+                    total += cpu.vpop(x,y,z);
+                counter.Stop();
+                opcount += (2 * 3 * RepCount);
+            }
+            ReportBenchmark($"vpop_3x128", opcount,counter);
+        }
+
+        void vpop_bench_ref(SystemCounter counter = default)
+        {
+            var total = 0u;
+            var opcount = 0;
+            Span<ulong> samples = stackalloc ulong[RepCount];
+            ref readonly var src = ref first(samples);
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                Random.Fill(RepCount, ref first(samples));
+                counter.Start();
+                for(var i=0; i<RepCount; i++)
+                    total += Bits.pop(skip(first(samples), i));
+                counter.Stop();
+                opcount += RepCount;
+            }
+            ReportBenchmark($"vpop_1x64_ref", opcount, counter);
+        }
         void vpop_check(N128 w)
         {
             vpop_check(w,z8);

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpack128x16u(Vector256<uint> src, W128 w = default)
-            => vpack128x16u(vlo(src), cpu.vhi(src), w);
+            => vpack128x16u(vlo(src), vhi(src));
 
         /// <summary>
         /// (4x32u,4x32u) -> 8x16u
@@ -30,7 +30,8 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vpack128x16u(Vector128<uint> x, Vector128<uint> y, N128 w = default)
+        public static Vector128<ushort> vpack128x16u(Vector128<uint> x, Vector128<uint> y)
             => vpackus(x,y);
+
     }
 }

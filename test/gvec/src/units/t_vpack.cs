@@ -42,11 +42,11 @@ namespace Z0
             var c = gcpu.vinc<uint>(w,8);
             var d = gcpu.vinc<uint>(w,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = cpu.vpack128x16u(a,b, w);
+            var abActual = cpu.vpack128x16u(a,b);
             var abExpect = gcpu.vinc<ushort>(w);
             Claim.veq(abExpect, abActual);
 
-            var abcdActual = cpu.vpack128x8u(a, b, c, d, w);
+            var abcdActual = cpu.vpack128x8u(a, b, c, d);
             var abcdExpect = gcpu.vinc<byte>(w);
             Claim.veq(abcdExpect, abcdActual);
         }
@@ -62,7 +62,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gcpu.vinc(w, z16));
             var y = cpu.vsub(vsmax, gcpu.vinc(w, (ushort)8));
-            var actual = cpu.vpack128x8u(x, y, w128);
+            var actual = cpu.vpack128x8u(x, y);
 
             Claim.veq(expect,actual);
         }
@@ -94,7 +94,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gcpu.vinc(w, 0u));
             var y = cpu.vsub(vsmax, gcpu.vinc(w, 4u));
-            var actual = cpu.vpack128x16u(x,y, w128);
+            var actual = cpu.vpack128x16u(x,y);
 
             Claim.veq(expect,actual);
         }
@@ -119,7 +119,7 @@ namespace Z0
             var w = w128;
             var x0 = cpu.vparts(w, 25, 50);
             var x1 = cpu.vparts(w, 75, 10);
-            var dst = cpu.vpack128x32u(x0, x1, w);
+            var dst = cpu.vpack128x32u(x0, x1);
             var expect = cpu.vparts(w, 25, 50, 75, 10);
             Claim.veq(expect,dst);
         }

@@ -41,7 +41,7 @@ namespace Z0
             {
                 var source = skip(src,i);
                 ref var target = ref seek(dst,i);
-                var bits = BitSpans32.parse32(target.Text);
+                var bits = BitSpans32.parse(target.Text);
                 var converted = bits.Convert<T>();
                 var same = gmath.eq(converted, source.Data);
                 target.Mask = source.Data;

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-
     partial class TestApp<A>
     {
         public MethodInfo[] FindTests(Type host)

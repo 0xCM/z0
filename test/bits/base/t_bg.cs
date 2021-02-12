@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
-
     public abstract class t_bitgrids<X> : t_bitgrids_base<X>
         where X : t_bitgrids<X>, new()
     {

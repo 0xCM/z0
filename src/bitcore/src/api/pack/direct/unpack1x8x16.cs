@@ -24,6 +24,20 @@ namespace Z0
         }
 
         /// <summary>
+        /// Distributes each packed source bit to the least significant bit of the corresponding target byte
+        /// </summary>
+        /// <param name="src">The packed source bits</param>
+        /// <param name="dst">The blocked target</param>
+        /// <param name="block">The block index</param>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static ref readonly SpanBlock128<byte> unpack1x8x16(ushort src, in SpanBlock128<byte> dst, int block)
+        {
+            unpack(src, dst.Block(block));
+            return ref dst;
+        }
+
+        /// <summary>
         /// Distributes each packed source bit to the least significant bit of 16 corresponding target bytes
         /// </summary>
         /// <param name="src">The packed source bits</param>

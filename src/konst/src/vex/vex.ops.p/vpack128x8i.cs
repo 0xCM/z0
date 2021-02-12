@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vpack128x8i(Vector128<short> x, Vector128<short> y, N128 w = default)
+        public static Vector128<sbyte> vpack128x8i(Vector128<short> x, Vector128<short> y)
             => vpackss(x,y);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vpack128x8i(Vector256<short> src, W128 w = default)
+        public static Vector128<sbyte> vpack128x8i(Vector256<short> src)
             => vpackss(vlo(src), vhi(src));
 
     }

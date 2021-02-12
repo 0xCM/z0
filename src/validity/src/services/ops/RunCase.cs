@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
 
     partial class TestApp<A>
     {

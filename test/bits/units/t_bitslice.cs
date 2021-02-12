@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
-
     public class t_bitslice : t_bitcore<t_bitslice>
     {
         public void bitslice_32u()
@@ -39,6 +36,5 @@ namespace Z0
             var y3 = bsx3.TakeScalar<uint>();
             Claim.eq(x3,y3);
         }
-
     }
 }

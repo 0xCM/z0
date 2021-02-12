@@ -17,7 +17,7 @@ namespace Z0.Test
 
         public t_matrix_writer()
         {
-            UnitDataDir.Clear();
+            //UnitDataDir.Clear();
         }
 
         public void check_matrix_emission_n12xn14x64i()

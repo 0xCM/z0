@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitSpans32
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         /// <param name="maxbits">The maximum length of the target bitstring</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan32 truncate32(in BitSpan32 src, int maxbits)
+        public static BitSpan32 truncate(in BitSpan32 src, int maxbits)
             => src.Length <= maxbits ? src : new BitSpan32(src.Data.Slice(0, maxbits));
     }
 }

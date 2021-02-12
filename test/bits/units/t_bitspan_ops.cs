@@ -6,11 +6,31 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitspan_ops : t_bitcore<t_bitspan_ops>
     {
+        public override bool Enabled => true;
+
+        public void bitspan_scalar32_bench()
+        {
+            var clock = counter();
+            var last = 0u;
+            var ops = 0;
+
+            for(var cycle = 0; cycle<Pow2.T12; cycle++)
+            {
+                var data = Random.BitSpan32(Pow2.T10);
+                clock.Start();
+                for(var i=0; i<data.Length; i+= 32, ops++)
+                    last = BitSpans32.extract<uint>(data, i);
+                clock.Stop();
+            }
+
+            ReportBenchmark("bitspan_scalar/32", ops, clock);
+        }
+
         public void bsequals()
         {
             for(var i=0; i<RepCount; i++)
@@ -41,29 +61,17 @@ namespace Z0
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
 
-            var bs1 = BitSpans32.parse32(bsSrc);
+            var bs1 = BitSpans32.parse(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
-            var bs2 = BitSpans32.from32(x);
+            var bs2 = BitSpans32.from(x);
             CheckBitSpans.eq(bs1.Trim(),bs2.Trim());
 
             var y = bs1.Convert<uint>();
             Claim.eq(x,y);
         }
 
-        public void bsand_8()
-            => bsand_check(z8);
-
-        public void bsand_16()
-            => bsand_check(z16);
-
-        public void bsand_32()
-            => bsand_check(z32);
-
-        public void bsand_64()
-            => bsand_check(z64);
-
-        public void bsor_8()
+        public void or_8()
             => bsor_check(z8);
 
         public void bsor_16()
@@ -97,7 +105,7 @@ namespace Z0
             {
                 Random.Fill(packed);
                 gpack.unpack1x32(packed, unpacked);
-                var bitspan = BitSpans32.load32(unpacked.As<Bit32>());
+                var bitspan = BitSpans32.load(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
             }
         }
@@ -142,6 +150,37 @@ namespace Z0
             Claim.eq(0b00,z3);
         }
 
+        public void bitpack_bench()
+        {
+            bitpack_bench(z8);
+            bitpack_bench(z16);
+            bitpack_bench(z32);
+            bitpack_bench(z64);
+        }
+
+        void bitpack_bench<T>(T t = default)
+            where T : unmanaged
+        {
+            var n = width<T>(w32);
+            var ops = 0;
+            var composite = default(T);
+            var clock = counter();
+            var packed = Random.Span<T>(RepCount);
+
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
+                clock.Start();
+                var bs =  BitSpans32.load(packed);
+                for(var j=0u; j < bs.Length; j+= n, ops++)
+                    gmath.or(composite, BitSpans32.extract<T>(bs,(int)j));
+                clock.Stop();
+
+                Random.Fill(packed);
+            }
+
+            ReportBenchmark($"bitspan_pack/{n}", ops, clock);
+        }
+
         public void loadscalar()
         {
             bscreate_check(z8);
@@ -166,27 +205,10 @@ namespace Z0
             bsextract_check(z64i);
         }
 
-        void bsand_check<T>(T t = default)
-            where T : unmanaged
-        {
-            var n = width<T>();
-
-            for(var rep = 0u; rep <= RepCount; rep++)
-            {
-                var x = Random.BitSpan32(n);
-                var y = Random.BitSpan32(n);
-                var z = x & y;
-                var a = x.Extract(t);
-                var b = y.Extract(t);
-                var c = gmath.and(a, b);
-                Claim.eq(c, z.Extract(t));
-            }
-        }
-
         void bsor_check<T>(T t = default)
             where T : unmanaged
         {
-            var n = width(t);
+            var n = width<T>();
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
@@ -203,7 +225,7 @@ namespace Z0
         void bsxor_check<T>(T t = default)
             where T : unmanaged
         {
-            var n = width(t);
+            var n = width<T>();
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
@@ -222,7 +244,7 @@ namespace Z0
         {
             var length = width<T>();
             var src = BitMasks.even(n2, n1, t);
-            var bitspan = BitSpans32.from32<T>(src);
+            var bitspan = BitSpans32.from<T>(src);
             var format = bitspan.Format();
 
             Claim.eq(length, bitspan.Length);
@@ -250,7 +272,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 Random.Fill(buffer);
-                var bitspan = BitSpans32.load32(buffer);
+                var bitspan = BitSpans32.load(buffer);
                 bitspan_check(buffer.Bytes(),bitspan);
             }
         }
@@ -264,7 +286,7 @@ namespace Z0
                 for(var i=0; i < RepCount; i++)
                 {
                     var src = Random.Next<T>();
-                    var bitspan = BitSpans32.from32(src);
+                    var bitspan = BitSpans32.from(src);
                     Sinks.deposit(src, bytes);
                     bitspan_check(bytes, bitspan);
                 }
@@ -281,8 +303,8 @@ namespace Z0
                 for(var i=0; i< RepCount; i++)
                 {
                     var a = Random.Next<T>();
-                    var b = BitSpans32.from32(a);
-                    var c = BitSpans32.extract32<T>(b);
+                    var b = BitSpans32.from(a);
+                    var c = BitSpans32.extract<T>(b);
                     Claim.eq(a,c);
                 }
             }
@@ -298,9 +320,9 @@ namespace Z0
                 for(var i=0; i<RepCount; i++)
                 {
                     var x0 = Random.Next<T>();
-                    var x1 = BitSpans32.from32(x0);
+                    var x1 = BitSpans32.from(x0);
                     var x2 = x1.Format();
-                    var x3 = BitSpans32.parse32(x2);
+                    var x3 = BitSpans32.parse(x2);
                     var x4 = x3.Convert<T>();
                     Claim.eq(x0,x4);
                 }

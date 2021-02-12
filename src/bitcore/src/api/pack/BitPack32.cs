@@ -61,7 +61,7 @@ namespace Z0
         public static byte pack(Span<Bit32> src, N8 count)
         {
             var v0 = cpu.vload(w256, first(convert(src, 0, width<byte>(w8))));
-            return (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0, w128));
+            return (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0));
         }
 
         /// <summary>
@@ -102,7 +102,6 @@ namespace Z0
             var buffer = z64;
             return BitPack.pack64x32x1(unpacked, ref buffer);
         }
-
 
         [MethodImpl(Inline)]
         static Span<uint> convert(Span<Bit32> src, int offset, int count)

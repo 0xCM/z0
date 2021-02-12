@@ -21,7 +21,7 @@ namespace Z0
             var v128x16u_b = cpu.vhi(v256x16u);
             var v128x16u_a_expect = gcpu.vinc<ushort>(n128,0);
             var v128x16u_b_expect = gcpu.vinc<ushort>(n128,8);
-            var v128x8u_output = cpu.vpack128x8u(v128x16u_a, v128x16u_b, w128);
+            var v128x8u_output = cpu.vpack128x8u(v128x16u_a, v128x16u_b);
 
             Claim.veq(v128x16u_a_expect, v128x16u_a);
             Claim.veq(v128x16u_b_expect, v128x16u_b);
@@ -52,8 +52,8 @@ namespace Z0
             var u16inc = gcpu.vinc<ushort>(w,0);
             var u8inc = gcpu.vinc<byte>(w,0);
 
-            var c8 = cpu.vpack256x8u(a0, b0, c0, d0, w256);
-            var c16 = cpu.vpack256x16u(a0, b0, w256);
+            var c8 = cpu.vpack256x8u(a0, b0, c0, d0);
+            var c16 = cpu.vpack256x16u(a0, b0);
             var v1024x32u = cpu.vinflate1024x32u(c8);
             Claim.veq(u16inc, c16);
             Claim.veq(u8inc, c8);

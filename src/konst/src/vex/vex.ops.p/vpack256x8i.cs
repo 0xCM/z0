@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The first source vector</param>
         /// <param name="b">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<sbyte> vpack256x8i(Vector256<short> a, Vector256<short> b, N256 w = default)
+        public static Vector256<sbyte> vpack256x8i(Vector256<short> a, Vector256<short> b)
             => vperm4x64(vpackss(a,b), Perm4L.ACBD);
     }
 }

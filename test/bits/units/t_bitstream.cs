@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public sealed class t_bitstream : UnitTest<t_bitstream>
     {
         public void check_singletons()
@@ -21,7 +19,7 @@ namespace Z0
         void check_singletons<T>()
             where T : unmanaged
         {
-            var formatter =  BitFormatter.create<T>();
+            var formatter = BitFormatter.create<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.Next<T>();

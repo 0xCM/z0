@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class BitSpans32
     {
-
         [Op]
-        public static string format32(in BitSpan32 src, BitFormat? fmt = null)
+        public static string format(in BitSpan32 src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormatter.configure();
             var bitcount = (uint)src.Length;
