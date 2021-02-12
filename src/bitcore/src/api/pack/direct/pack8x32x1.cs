@@ -20,9 +20,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte pack8x32x1(in uint src, ref byte dst)
         {
-            var v0 = cpu.vload(w256, skip(src,0*8));
-            dst = (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0, w128));
+            var v0 = cpu.vload(w256, src);
+            dst = (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0));
             return ref dst;
+        }
+
+        /// <summary>
+        /// Packs the leading 8 source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="count">The number of bits to pack</param>
+        [MethodImpl(Inline), Op]
+        public static byte pack8x32x1(Span<uint> src)
+        {
+            var v0 = cpu.vload(w256, first(src));
+            return (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0));
         }
 
         /// <summary>
@@ -35,7 +47,6 @@ namespace Z0
             var buffer = z8;
             return pack8x32x1(src, ref buffer);
         }
-
 
         /// <summary>
         /// Packs the least significant bit from <see cref='n8'/> <see cref='w32'/> <see cref='uint'/> source values to a <see cref='w8'/> bit <see cref='byte'/> target

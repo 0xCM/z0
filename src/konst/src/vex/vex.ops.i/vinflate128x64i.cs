@@ -1,0 +1,48 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+    using static Part;
+    using static memory;
+
+    partial struct cpu
+    {
+        /// <summary>
+        /// PMOVSXBQ xmm, m16
+        /// 2x8i -> 2x64i
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<sbyte> src)
+            => ConvertToVector128Int64(gptr(src.First));
+
+        /// <summary>
+        /// PMOVZXBQ xmm, m16
+        /// 2x8u -> 2x64i
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<byte> src)
+            => ConvertToVector128Int64(gptr(src.First));
+
+        /// <summary>
+        /// PMOVSXWQ xmm, m32
+        /// 2x16i -> 2x64u
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock32<short> src)
+            => ConvertToVector128Int64(gptr(src.First));
+    }
+}

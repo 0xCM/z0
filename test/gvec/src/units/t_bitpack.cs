@@ -22,7 +22,7 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 Claim.eq(bitseq.CellCount,n4);
 
-                var packed = Bits.pack4x8x1(bitseq,0);
+                var packed = gpack.pack4x8x1(bitseq,0);
                 Trace("bitstring", bs, FlairKind.Running);
                 Trace("bitseq", bitseq.Format(), FlairKind.Running);
 
@@ -51,7 +51,7 @@ namespace Z0
             {
                 var src = Random.Next<uint>();
                 var dst = SpanBlocks.alloc<byte>(n256);
-                Bits.unpack1x8x32(src, dst,0);
+                BitPack.unpack1x8x32(src, dst,0);
 
                 unpack_check(src,dst);
 
@@ -66,7 +66,7 @@ namespace Z0
             {
                 var src = Random.Next<ulong>();
                 var dst = SpanBlocks.alloc<byte>(n512);
-                Bits.unpack1x8x64(src, dst,0);
+                BitPack.unpack1x8x64(src, dst,0);
 
                 unpack_check(src,dst.Storage);
 

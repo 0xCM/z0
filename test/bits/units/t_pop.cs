@@ -19,7 +19,7 @@ namespace Z0
             var srcPop = Bits.pop(src);
             Claim.eq(6,srcPop);
 
-            Bits.unpack1x8x16(src,buffer16x8);
+            BitPack.unpack1x8x16(src,buffer16x8);
 
             var bytes = z.bytes(src);
             Claim.eq(2, bytes.Length);
@@ -31,7 +31,7 @@ namespace Z0
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
 
-                Bits.unpack1x8x8(y, buffer64x8);
+                BitPack.unpack1x8x8(y, buffer64x8);
                 Claim.eq(buffer64x8.Storage.PopCount(), y.PopCount());
             }
 

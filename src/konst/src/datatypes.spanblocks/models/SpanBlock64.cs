@@ -84,7 +84,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)size<T>()*8;
+            get => (ulong)CellCount * (ulong)width<T>();
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => @bytes(Data);
+            get => bytes(Data);
         }
 
         /// <summary>
@@ -130,6 +130,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
             => slice(Data, block * BlockLength, BlockLength);
+
+        [MethodImpl(Inline)]
+        public ref T BlockRef(int index)
+            => ref add(First, index*BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)

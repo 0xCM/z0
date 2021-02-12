@@ -9,21 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static BitMasks.Literals;
 
-    partial class Bits
+    partial struct BitPack
     {
-        /// <summary>
-        /// Packs 4 1-bit values taken from the least significant bit of each source byte of an index-identified block
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="mod">The bit selection modulus</param>
-        /// <param name="block">The index of the block to pack</param>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte pack4x8x1<T>(in SpanBlock32<T> src, int block)
-            where T : unmanaged
-                => (byte)gather(uint32(src.BlockRef(block)), Lsb32x8x1);
-
         /// <summary>
         /// Packs 2 source bits into the least 2 bits of a byte
         /// </summary>

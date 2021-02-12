@@ -9,8 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static cpu;
 
-    partial class Bits
+    partial struct BitPack
     {
         /// <summary>
         /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
@@ -19,11 +20,19 @@ namespace Z0
         /// <param name="n">The number of bits to pack</param>
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
-        public static ulong pack64x32x1(in uint src, N64 n, W64 w)
+        public static ulong pack64x32x1(in uint src)
         {
             var buffer = z64;
             return pack64x32x1(src, ref buffer);
         }
+
+        /// <summary>
+        /// Packs the 64 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        [MethodImpl(Inline), Op]
+        public static ulong pack64x32x1(Span<uint> src)
+            => pack64x32x1(first(src));
 
         /// <summary>
         /// Packs the least significant bit from 64 32-bit unsigned integers to a 64-bit target
@@ -33,24 +42,25 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong pack64x32x1(in uint src, ref ulong dst)
         {
-            var v0 = cpu.vload(w256, skip(src, 0*8));
-            var v1 = cpu.vload(w256, skip(src, 1*8));
-            var x = cpu.vpack256x16u(v0, v1);
-            v0 = cpu.vload(w256, skip(src,2*8));
-            v1 = cpu.vload(w256, skip(src,3*8));
+            var w = w256;
+            var v0 = vload(w, skip(src, 0*8));
+            var v1 = vload(w, skip(src, 1*8));
+            var x = vpack256x16u(v0, v1);
+            v0 = vload(w, skip(src,2*8));
+            v1 = vload(w, skip(src,3*8));
 
-            var y = cpu.vpack256x16u(v0, v1);
-            var packed = (ulong)gcpu.vpacklsb(cpu.vpack256x8u(x,y,w256));
+            var y = vpack256x16u(v0, v1);
+            var packed = (ulong)gcpu.vpacklsb(vpack256x8u(x,y,w));
 
-            v0 = cpu.vload(w256, skip(src,4*8));
-            v1 = cpu.vload(w256, skip(src,5*8));
-            x = cpu.vpack256x16u(v0,v1);
+            v0 = vload(w, skip(src,4*8));
+            v1 = vload(w, skip(src,5*8));
+            x = vpack256x16u(v0,v1);
 
-            v0 = cpu.vload(w256, skip(src,6*8));
-            v1 = cpu.vload(w256, skip(src,7*8));
-            y = cpu.vpack256x16u(v0,v1);
+            v0 = vload(w, skip(src,6*8));
+            v1 = vload(w, skip(src,7*8));
+            y = vpack256x16u(v0,v1);
 
-            packed |= (ulong)gcpu.vpacklsb(cpu.vpack256x8u(x,y)) << 32;
+            packed |= (ulong)gcpu.vpacklsb(vpack256x8u(x,y)) << 32;
 
             dst = packed;
             return ref dst;
@@ -64,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ulong pack64x32x1(in NatSpan<N64,uint> src, ref ulong dst)
         {
-            dst = pack64x32x1(src.First, n64, w64);
+            dst = pack64x32x1(src.First);
             return ref dst;
         }
     }

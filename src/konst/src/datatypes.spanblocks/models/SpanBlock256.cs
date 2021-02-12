@@ -69,7 +69,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 32/Unsafe.SizeOf<T>();
+            get => (int)(32/size<T>());
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * (ulong)width<T>();
         }
 
         /// <summary>
@@ -96,7 +96,7 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref First, index);
+            get => ref add(First, index);
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data.Bytes();
+            get => bytes(Data);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref First, BlockLength*block + segment);
+            => ref add(First, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -132,7 +132,11 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => Data.Slice(block * BlockLength, BlockLength);
+            => slice(Data, block * BlockLength, BlockLength);
+
+        [MethodImpl(Inline)]
+        public ref T BlockRef(int index)
+            => ref add(First, index*BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -172,7 +176,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock256<S> As<S>()
             where S : unmanaged
-                => new SpanBlock256<S>(memory.recover<T,S>(Data));
+                => new SpanBlock256<S>(recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

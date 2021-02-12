@@ -13,7 +13,7 @@ namespace Z0
     partial struct gpack
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T pack32x1<T>(Span<uint> src, T t = default)
+        public static T pack32x1<T>(Span<uint> src)
             where T : unmanaged
                 => pack32x1_u<T>(src);
 
@@ -102,13 +102,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Numeric.force<T>(pack(src, n8));
+                return Numeric.force<T>(BitPack.pack8x32x1(src));
             else if(typeof(T) == typeof(short))
-                return Numeric.force<T>(pack(src, n16));
+                return Numeric.force<T>(BitPack.pack16x32x1(src));
             else if(typeof(T) == typeof(int))
-                return Numeric.force<T>(pack(src, n32));
+                return Numeric.force<T>(BitPack.pack32x32x1(src));
             else if(typeof(T) == typeof(long))
-                return Numeric.force<T>(pack(src, n64));
+                return Numeric.force<T>(BitPack.pack64x32x1(src));
             else
                 throw no<T>();
         }
@@ -146,9 +146,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static uint pack(Span<uint> src, N32 n)
         {
-            ref readonly var unpacked = ref first(convert(src, 0, width<uint>(w8)));
+            ref readonly var unpacked = ref first(src);
             var buffer = z32;
-            return Bits.pack32x32x1(unpacked, ref buffer);
+            return BitPack.pack32x32x1(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<ulong>(w8)));
             var buffer = z64;
-            return Bits.pack64x32x1(unpacked, ref buffer);
+            return BitPack.pack64x32x1(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline)]

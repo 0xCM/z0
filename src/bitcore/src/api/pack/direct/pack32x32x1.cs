@@ -9,8 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static cpu;
 
-    partial class Bits
+    partial struct BitPack
     {
         /// <summary>
         /// Packs the least significant bit from 32 32-bit unsigned integers to a 32-bit target
@@ -20,16 +21,28 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref uint pack32x32x1(in uint src, ref uint dst)
         {
-            var v0 = cpu.vload(w256, skip(src,0*8));
-            var v1 = cpu.vload(w256, skip(src,1*8));
-            var x = cpu.vpack256x16u(v0, v1, w256);
+            var v0 = vload(w256, skip(src,0*8));
+            var v1 = vload(w256, skip(src,1*8));
+            var x = vpack256x16u(v0, v1);
 
-            v0 = cpu.vload(w256, skip(src,2*8));
-            v1 = cpu.vload(w256, skip(src,3*8));
-            var y = cpu.vpack256x16u(v0,v1, w256);
+            v0 = vload(w256, skip(src,2*8));
+            v1 = vload(w256, skip(src,3*8));
+            var y = vpack256x16u(v0,v1);
 
-            dst = gcpu.vpacklsb(cpu.vpack256x8u(x, y, w256));
+            dst = gcpu.vpacklsb(vpack256x8u(x, y));
             return ref dst;
+        }
+
+        /// <summary>
+        /// Packs the 32 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
+        [MethodImpl(Inline), Op]
+        public static uint pack32x32x1(Span<uint> src)
+        {
+            var buffer = z32;
+            return pack32x32x1(first(src), ref buffer);
         }
 
         /// <summary>
@@ -43,6 +56,5 @@ namespace Z0
             dst = pack32x32x1(src.First, ref dst);
             return ref dst;
         }
-
     }
 }

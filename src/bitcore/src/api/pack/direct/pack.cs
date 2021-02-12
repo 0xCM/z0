@@ -48,15 +48,5 @@ namespace Z0
                 }
             }
         }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T pack<T>(ReadOnlySpan<byte> src, out T dst, uint offset = 0)
-            where T : unmanaged
-        {
-            dst = default;
-            var buffer = bytes(dst);
-            pack(src, offset, ref first(buffer));
-            return ref dst;
-        }
     }
 }

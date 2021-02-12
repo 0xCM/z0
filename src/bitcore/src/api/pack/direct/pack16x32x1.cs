@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static cpu;
 
     partial struct BitPack
     {
@@ -20,10 +21,22 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref ushort pack16x32x1(in uint src, ref ushort dst)
         {
-            var v0 = cpu.vload(w256, skip(src, 0*8));
-            var v1 = cpu.vload(w256, skip(src, 1*8));
-            dst = gcpu.vpacklsb(cpu.vpack128x8u(v0, v1, w128));
+            var v0 = vload(w256, skip(src, 0*8));
+            var v1 = vload(w256, skip(src, 1*8));
+            dst = gcpu.vpacklsb(vpack128x8u(v0, v1));
             return ref dst;
+        }
+
+        /// <summary>
+        /// Packs the 16 leading source bits
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="n">The number of bits to pack</param>
+        [MethodImpl(Inline), Op]
+        public static ushort pack16x32x1(ReadOnlySpan<uint> src)
+        {
+            var buffer = z16;
+            return pack16x32x1(first(src), ref buffer);
         }
 
         /// <summary>
@@ -62,6 +75,5 @@ namespace Z0
             dst = pack16x32x1(skip(src, offset));
             return ref dst;
         }
-
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in T src)
             where T : unmanaged
-                => (byte)BitMasks.gather(Numeric.force<T,ulong>(src), Lsb64x8x1);
+                => (byte)Bits.gather(Numeric.force<T,ulong>(src), Lsb64x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte

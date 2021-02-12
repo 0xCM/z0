@@ -145,7 +145,7 @@ namespace Z0
         static SpanBlock256<T> and<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, SpanBlock256<T> dst)
             where T : unmanaged
         {
-            for(var i=0u; i<a.BlockCount; i++)
+            for(var i=0; i<a.BlockCount; i++)
                 gcpu.vstore(gcpu.vand<T>(a.LoadVector(i), b.LoadVector(i)), ref dst.BlockRef(i));
             return dst;
         }

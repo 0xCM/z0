@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpack128x8u(Vector128<ushort> x)
-            => vpack128x8u(x, default, w128);
+            => vpack128x8u(x, default);
 
         /// <summary>
         /// 16x16u -> 16x8u
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpack128x8u(Vector256<uint> src)
-            => vpack128x8u(vpack128x16u(src, w128), w128);
+            => vpack128x8u(vpack128x16u(src));
 
         /// <summary>
         /// 16x32u -> 16x8u
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpack128x8u(in Vector512<uint> src)
-            => vpack128x8u(src.Lo, src.Hi, w128);
+            => vpack128x8u(src.Lo, src.Hi);
 
         /// <summary>
         /// (8x16i,8x16i) -> 16x8u
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vpack128x8u(Vector128<short> x, Vector128<short> y, N128 w = default)
+        public static Vector128<byte> vpack128x8u(Vector128<short> x, Vector128<short> y)
             => vpackus(x,y);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpack128x8u(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, N128 w = default)
-            => vpack128x8u(vpack128x16u(x0, x1, w128), vpack128x16u(x2, x3, w128), w);
+            => vpack128x8u(vpack128x16u(x0, x1), vpack128x16u(x2, x3));
 
         /// <summary>
         /// 16x32u -> 16x8u

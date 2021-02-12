@@ -63,7 +63,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 4/(int)z.size<T>();
+            get => 4/(int)size<T>();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * z.width<T>();
+            get => (ulong)CellCount * width<T>();
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data.Bytes();
+            get => bytes(Data);
         }
 
         /// <summary>
@@ -127,6 +127,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
             => slice(Data, block * BlockLength,BlockLength);
+
+        [MethodImpl(Inline)]
+        public ref T BlockRef(int index)
+            => ref add(First, index*BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -162,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock32<S> As<S>()
             where S : unmanaged
-                => new SpanBlock32<S>(z.recover<T,S>(Data));
+                => new SpanBlock32<S>(recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

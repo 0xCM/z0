@@ -36,7 +36,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(extract32(src, offset, count));
             var buffer = z32;
-            return Bits.pack32x32x1(unpacked, ref buffer);
+            return BitPack.pack32x32x1(unpacked, ref buffer);
         }
 
         [MethodImpl(Inline), Op]
@@ -44,7 +44,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(extract32(src, offset, count));
             var buffer = z64;
-            return Bits.pack64x32x1(unpacked, ref buffer);
+            return BitPack.pack64x32x1(unpacked, ref buffer);
         }
     }
 }

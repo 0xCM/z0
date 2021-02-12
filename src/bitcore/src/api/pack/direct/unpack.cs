@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack(byte src, Span<bit> dst)
-            => Bits.unpack1x8x8(src, ref u8(first(dst)));
+            => BitPack.unpack1x8x8(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes 16 packed source bits to 16 corresponding target bits
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack(ushort src, Span<bit> dst)
-            => Bits.unpack1x8x16(src, ref u8(first(dst)));
+            => BitPack.unpack1x8x16(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes 32 packed source bits to 32 corresponding target bits
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack(uint src, Span<bit> dst)
-            => Bits.unpack1x8x32(src, ref u8(first(dst)));
+            => BitPack.unpack1x8x32(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes 64 packed source bits to 64 corresponding target bits
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         [MethodImpl(Inline), Op]
         public static void unpack(ulong src, Span<bit> dst)
-            => Bits.unpack1x8x64(src, ref u8(first(dst)));
+            => BitPack.unpack1x8x64(src, ref u8(first(dst)));
 
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte
@@ -83,10 +83,10 @@ namespace Z0
         {
             var buffer = z64;
             ref var tmp = ref uint8(ref buffer);
-            for(var i=0; i < count; i++)
+            for(var i=0; i<count; i++)
             {
-                Bits.unpack1x8x8(skip(src, i), ref tmp);
-                cpu.vconvert32u(n64, in tmp, n256).StoreTo(ref seek(dst, i*8));
+                BitPack.unpack1x8x8(skip(src, i), ref tmp);
+                cpu.vinflate8x256x32u(tmp).StoreTo(ref seek(dst, i*8));
             }
         }
 

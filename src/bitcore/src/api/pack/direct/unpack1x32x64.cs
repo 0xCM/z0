@@ -9,10 +9,11 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static cpu;
 
-    partial class Bits
+    partial struct BitPack
     {
-        /// <summary>
+       /// <summary>
         /// Unpacks 64 source bits over 64 32-bit target segments
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -27,21 +28,21 @@ namespace Z0
             var wSrc = w64;
             var wDst = w256;
             unpack1x8x8((byte)src, ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead);
+            vinflate8x256x32u(tmp).StoreTo(ref lead);
             unpack1x8x8((byte)(src >> 8), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 8);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 8);
             unpack1x8x8((byte)(src >> 16), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 16);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 16);
             unpack1x8x8((byte)(src >> 24), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 24);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 24);
             unpack1x8x8((byte)(src >> 32), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 32);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 32);
             unpack1x8x8((byte)(src >> 40), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 40);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 40);
             unpack1x8x8((byte)(src >> 48), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 48);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 48);
             unpack1x8x8((byte)(src >> 56), ref tmp);
-            cpu.vconvert32u(wSrc, tmp, wDst).StoreTo(ref lead, 56);
+            vinflate8x256x32u(tmp).StoreTo(ref lead, 56);
         }
     }
 }

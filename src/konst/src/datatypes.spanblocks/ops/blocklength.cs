@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static int blocklength<T>(W8 w, T t = default)
+        public static int blocklength<T>(W8 w)
             where T : unmanaged
                 => (int)size<T>();
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static int blocklength<T>(W16 w, T t = default)
+        public static int blocklength<T>(W16 w)
             where T : unmanaged
                 => 2/(int)size<T>();
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static int blocklength<T>(W32 w, T t = default)
+        public static int blocklength<T>(W32 w)
             where T : unmanaged
                 => 4/(int)size<T>();
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int blocklength<T>(W64 w, T t = default)
+        public static int blocklength<T>(W64 w)
             where T : unmanaged
                 => 8/(int)size<T>();
 
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static int blocklength<T>(W128 w, T t = default)
+        public static int blocklength<T>(W128 w)
             where T : unmanaged
                 => 16/(int)size<T>();
 
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int blocklength<T>(W256 w, T t = default)
+        public static int blocklength<T>(W256 w)
             where T : unmanaged
                 => 32/(int)size<T>();
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static int blocklength<T>(W512 w, T t = default)
+        public static int blocklength<T>(W512 w)
             where T : unmanaged
                 => 64/(int)size<T>();
 

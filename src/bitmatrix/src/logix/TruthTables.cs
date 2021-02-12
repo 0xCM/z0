@@ -100,8 +100,8 @@ namespace Z0
         {
             var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
-            table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(off), off));
-            table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(on), on));
+            table[0] = BitBlocks.single<N2,byte>(BitPack.pack2x1(f(off), off));
+            table[1] = BitBlocks.single<N2,byte>(BitPack.pack2x1(f(on), on));
             return table;
         }
 
@@ -111,26 +111,27 @@ namespace Z0
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
-            tt[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, off), off, off));
-            tt[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, off), off, on));
-            tt[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, on), on, off));
-            tt[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, on),  on, on));
+            tt[0] = BitBlocks.single<N3,byte>(BitPack.pack3x1(f(off, off), off, off));
+            tt[1] = BitBlocks.single<N3,byte>(BitPack.pack3x1(f(on, off), off, on));
+            tt[2] = BitBlocks.single<N3,byte>(BitPack.pack3x1(f(off, on), on, off));
+            tt[3] = BitBlocks.single<N3,byte>(BitPack.pack3x1(f(on, on),  on, on));
             return tt;
         }
+
 
         [Op]
         public static BitMatrix<N8,N4,byte> table(TernaryBitLogicKind kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = bitlogix.Lookup(kind);
-            tt[0] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, off, off), off, off, off));
-            tt[1] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, off, on), off, off, on));
-            tt[2] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, on, off), off, on, off));
-            tt[3] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(off, on, on), off, on, on));
-            tt[4] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(on, off, off), on, off, off));
-            tt[5] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(on, off, on), on, off, on));
-            tt[6] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(on, on, off), off, on, on));
-            tt[7] = BitBlocks.single<N4,byte>((byte)Bits.pack(f(on, on, on), on, on, on));
+            tt[0] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(off, off, off), off, off, off));
+            tt[1] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(off, off, on), off, off, on));
+            tt[2] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(off, on, off), off, on, off));
+            tt[3] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(off, on, on), off, on, on));
+            tt[4] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(on, off, off), on, off, off));
+            tt[5] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(on, off, on), on, off, on));
+            tt[6] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(on, on, off), off, on, on));
+            tt[7] = BitBlocks.single<N4,byte>(BitPack.pack4x1(f(on, on, on), on, on, on));
             return tt;
         }
 
@@ -183,8 +184,8 @@ namespace Z0
             {
                 BitVector4 result = (byte)i;
                 var table = BitMatrix.alloc<N2,N2,byte>();
-                table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(result[0], off));
-                table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(result[1], on));
+                table[0] = BitBlocks.single<N2,byte>(BitPack.pack2x1(result[0], off));
+                table[1] = BitBlocks.single<N2,byte>(BitPack.pack2x1(result[1], on));
                 dst.Write(table);
             }
         }
@@ -197,10 +198,10 @@ namespace Z0
                 var bbResult = BitBlocks.init(result);
 
                 var table = BitMatrix.alloc<N4,N3,byte>();
-                table[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[0], off, off));
-                table[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[1], off, on));
-                table[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[2], on, off));
-                table[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[3], on, on));
+                table[0] = BitBlocks.single<N3,byte>(BitPack.pack3x1(result[0], off, off));
+                table[1] = BitBlocks.single<N3,byte>(BitPack.pack3x1(result[1], off, on));
+                table[2] = BitBlocks.single<N3,byte>(BitPack.pack3x1(result[2], on, off));
+                table[3] = BitBlocks.single<N3,byte>(BitPack.pack3x1(result[3], on, on));
                 Demands.insist(table.GetCol(2) == bbResult);
                 dst.Write(table);
             }
@@ -214,14 +215,14 @@ namespace Z0
                 var bbResult = BitBlocks.init(result);
 
                 var table = BitMatrix.alloc<N8,N4,byte>();
-                table[0] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[0], off, off, off));
-                table[1] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[1], off, off, on));
-                table[2] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[2], off, on, off));
-                table[3] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[3], off, on, on));
-                table[4] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[4], on, off, off));
-                table[5] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[5], on, off, on));
-                table[6] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[6], on, on, off));
-                table[7] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[7], on, on, on));
+                table[0] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[0], off, off, off));
+                table[1] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[1], off, off, on));
+                table[2] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[2], off, on, off));
+                table[3] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[3], off, on, on));
+                table[4] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[4], on, off, off));
+                table[5] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[5], on, off, on));
+                table[6] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[6], on, on, off));
+                table[7] = BitBlocks.single<N4,byte>(BitPack.pack4x1(result[7], on, on, on));
                 Demands.insist(table.GetCol(3) == bbResult);
                 dst.Write(table);
             }

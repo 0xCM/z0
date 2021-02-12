@@ -66,7 +66,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => (int)z.size<T>();
+            get => (int)size<T>();
         }
 
         /// <summary>
@@ -84,13 +84,13 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * z.width<T>();
+            get => (ulong)CellCount * width<T>();
         }
 
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => (int)z.size<T>() * CellCount;
+            get => (int)size<T>() * CellCount;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => memory.bytes(Data);
+            get => bytes(Data);
         }
 
         /// <summary>

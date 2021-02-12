@@ -87,7 +87,7 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<uint>(w8)));
             var buffer = z32;
-            return Bits.pack32x32x1(unpacked, ref buffer);
+            return BitPack.pack32x32x1(unpacked, ref buffer);
         }
 
         /// <summary>
@@ -100,8 +100,9 @@ namespace Z0
         {
             ref readonly var unpacked = ref first(convert(src, 0, width<ulong>(w8)));
             var buffer = z64;
-            return Bits.pack64x32x1(unpacked, ref buffer);
+            return BitPack.pack64x32x1(unpacked, ref buffer);
         }
+
 
         [MethodImpl(Inline)]
         static Span<uint> convert(Span<Bit32> src, int offset, int count)
