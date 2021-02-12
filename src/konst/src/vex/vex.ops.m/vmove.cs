@@ -333,58 +333,6 @@ namespace Z0
                 v32u(ConvertToVector256Int32(gptr(src, 8))));
 
         /// <summary>
-        /// VPMOVSXWD ymm, m128
-        /// 16x16u ->16x32u
-        /// Projects 16 signed 16-bit integers onto 16 signed 32-bit integers
-        /// </summary>
-        /// <param name="src">The input component source</param>
-        /// <param name="n">The source component count</param>
-        /// <param name="w">The target component width</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<int> vmove16x32i(in short src)
-            => (ConvertToVector256Int32(gptr(in src)),
-                ConvertToVector256Int32(gptr(in src, 8)));
-
-        /// <summary>
-        /// VPMOVZXBW ymm, m128
-        /// 32x8u -> 32x16u
-        /// Projects 32 unsigned 8-bit integers onto 32 unsigned 16-bit integers
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="lo">The lo target</param>
-        /// <param name="hi">The hi target</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ushort> vmove32x16u(in byte src)
-            => (v16u(ConvertToVector256Int16(gptr(src))),
-                v16u(ConvertToVector256Int16(gptr(src,16))));
-
-        /// <summary>
-        /// VPMOVZXWQ ymm, m64
-        /// 8x16u -> 8x64u
-        /// Projects 8 unsigned 16-bit integers onto 8 unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower target</param>
-        /// <param name="hi">The upper target</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vmove8x64u(in ushort src)
-            => (v64u(ConvertToVector256Int64(gptr(src))),
-                v64u(ConvertToVector256Int64(gptr(src,4))));
-
-        /// <summary>
-        /// VPMOVZXDQ ymm, m128
-        /// 8x32u -> 8x64u
-        /// Projects 8 unsigned 32-bit integers onto 8 unsigned 64-bit integers
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower target</param>
-        /// <param name="hi">The upper target</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vmove8x64u(in uint src)
-            => (v64u(ConvertToVector256Int64(gptr(src))),
-                v64u(ConvertToVector256Int64(gptr(src,4))));
-
-        /// <summary>
         /// __m256i _mm256_cvtepi32_epi64 (__m128i a) VPMOVSXDQ ymm, xmm/m128
         /// 4x32i -> 4x64i
         /// </summary>

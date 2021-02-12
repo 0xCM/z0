@@ -2,30 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    readonly struct ApiCaptureArchive : IApiCaptureArchive
+    class ApiCaptureArchive : WfService<ApiCaptureArchive, IApiCaptureArchive>, IApiCaptureArchive
     {
-        readonly IWfShell Wf;
-
-        readonly WfHost Host;
-
-        [MethodImpl(Inline)]
-        public ApiCaptureArchive(IWfShell wf)
+        public ApiCaptureArchive()
         {
-            Host = WfShell.host(typeof(ApiCaptureArchive));
-            Wf = wf.WithHost(Host);
-            Wf.Created();
-        }
 
-        public void Dispose()
-        {
-            Wf.Disposed();
         }
 
         public void Clear()
@@ -33,6 +21,10 @@ namespace Z0.Asm
             foreach(var part in Wf.Api.PartIdentities)
                 Clear(part);
         }
+
+        IApiCaptureArchive Archive
+            => this;
+
 
         void Clear(PartId part)
         {
@@ -61,7 +53,7 @@ namespace Z0.Asm
         Outcome<uint> ClearExtracts(PartId part)
         {
             var kind = FileExtensions.XCsv;
-            var files = Wf.Db().ApiExtractFiles(part);
+            var files = Archive.ApiExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -73,7 +65,7 @@ namespace Z0.Asm
         Outcome<uint> ClearParsed(PartId part)
         {
             var kind = FileExtensions.PCsv;
-            var files = Wf.Db().ParsedExtractFiles(part);
+            var files = Archive.ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -85,7 +77,7 @@ namespace Z0.Asm
         Outcome<uint> ClearAsm(PartId part)
         {
             var kind = FileExtensions.Asm;
-            var files = Wf.Db().CapturedAsmFiles(part);
+            var files = Archive.AsmFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -97,7 +89,7 @@ namespace Z0.Asm
         Outcome<uint> ClearHex(PartId part)
         {
             var kind = FileExtensions.Hex;
-            var files = Wf.Db().CapturedHexFiles(part);
+            var files = Archive.ApiHexFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -109,7 +101,7 @@ namespace Z0.Asm
         Outcome<uint> ClearCil(PartId part)
         {
             var kind = FileExtensions.IlData;
-            var files = Wf.Db().CilDataFiles(part);
+            var files = Archive.CilDataFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);

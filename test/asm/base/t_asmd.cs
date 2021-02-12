@@ -9,6 +9,10 @@ namespace Z0.Asm
     {
         protected t_asmd()
         {
+        }
+
+        protected override void OnShellInjected()
+        {
             UnitDataDir.Clear();
         }
     }

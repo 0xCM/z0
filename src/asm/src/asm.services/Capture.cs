@@ -26,10 +26,6 @@ namespace Z0
         public static ApiCaptureEmitter emitter(IWfShell wf, IAsmContext asm)
             => new ApiCaptureEmitter(wf, asm);
 
-        [Op]
-        public static IApiCaptureArchive archive(IWfShell wf)
-            => new ApiCaptureArchive(wf);
-
         [MethodImpl(Inline), Op]
         public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
             => new CaptureAlt(wf, asm);

@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaphi256x16i(Vector256<sbyte> src, W256 w = default)
+        public static Vector256<short> vmaphi256x16i(Vector256<sbyte> src)
             => ConvertToVector256Int16(cpu.vhi(src));
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaphi256x64i(Vector128<short> src, W256 w = default)
+        public static Vector256<long> vmaphi256x64i(Vector128<short> src)
             => ConvertToVector256Int64(vshi(src));
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vmaphi256x64u(Vector128<ushort> src, W256 w = default)
+        public static Vector256<ulong> vmaphi256x64u(Vector128<ushort> src)
             => v64u(ConvertToVector256Int64(vshi(src)));
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vmaphi256x16u(Vector256<byte> src, W256 wDst = default)
+        public static Vector256<ushort> vmaphi256x16u(Vector256<byte> src)
             => v16u(ConvertToVector256Int16(cpu.vhi(src)));
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="wDst">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vmaphi256x16i(Vector256<byte> src, W256 wDst = default)
+        public static Vector256<short> vmaphi256x16i(Vector256<byte> src)
             => ConvertToVector256Int16(cpu.vhi(src));
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vmaphi256x32i(Vector256<short> src, W256 w = default)
+        public static Vector256<int> vmaphi256x32i(Vector256<short> src)
             => ConvertToVector256Int32(cpu.vhi(src));
 
         /// <summary>
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vmaphi256x16u(Vector256<ushort> src, W256 w = default)
+        public static Vector256<uint> vmaphi256x16u(Vector256<ushort> src)
             => v32u(ConvertToVector256Int32(cpu.vhi(src)));
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<long> vmaphi256x64i(Vector256<int> src, W256 w = default)
+        public static Vector256<long> vmaphi256x64i(Vector256<int> src)
             => ConvertToVector256Int64(cpu.vhi(src));
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vmaphi256x64u(Vector256<uint> src, W256 w = default)
+        public static Vector256<ulong> vmaphi256x64u(Vector256<uint> src)
             => v64u(ConvertToVector256Int64(cpu.vhi(src)));
     }
 }

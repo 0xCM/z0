@@ -28,7 +28,7 @@ namespace Z0
             BufferCount = 3;
             BufferSize = buffersize;
             Dispatcher = Evaluate.dispatcher(Wf, random, BufferSize);
-            CodeArchive = Archives.capture(root);
+            CodeArchive = ApiArchives.capture(root);
             ApiGlobal = wf.Api;
         }
 
@@ -40,8 +40,8 @@ namespace Z0
                 return ApiHostMemberCode.Empty;
 
             var idx = catalog.Index();
-            var archive =  Archives.capture(root);
-            var paths =  Archives.capture(FS.dir(root.Name), host);
+            var archive =  ApiArchives.capture(root);
+            var paths =  ApiArchives.capture(FS.dir(root.Name), host);
             var code = ApiExtractReader.Service.Read(paths.HostHexPath);
             var opIndex =  ApiQuery.index(code);
             return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
@@ -49,7 +49,7 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var capture = Archives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
+            var capture = ApiArchives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
             if(capture.HostHexPath.Exists)
             {
 

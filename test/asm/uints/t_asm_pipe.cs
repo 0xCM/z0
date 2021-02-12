@@ -16,14 +16,7 @@ namespace Z0.Asm
     {
         public t_asm_pipe()
         {
-            OnDispose += HandleDispose;
         }
-
-        void HandleDispose()
-        {
-
-        }
-
 
         public void check_math()
         {
@@ -32,8 +25,8 @@ namespace Z0.Asm
             var id = PartId.GMath;
             var paths = AppPaths.ForApp();
             var dir = Wf.Db().CaptureRoot();
-            var capture = Archives.capture(dir);
-            var archive = Archives.extract(Wf);
+            var capture = ApiArchives.capture(dir);
+            var archive = ApiArchives.extract(Wf);
             var files = archive.List();
             using var writer = CaseWriter(FS.ext("csv"));
             root.iter(files, f => writer.WriteLine(f));

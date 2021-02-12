@@ -115,7 +115,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
-            var archive = Archives.extract(wf);
+            var archive = ApiArchives.extract(wf);
             var rootdir = archive.Root;
             var files = @readonly(archive.ArchiveFiles().Array());
             var empty = Index<ApiCodeDescriptor>.Empty;
@@ -180,7 +180,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf, FS.FolderPath src)
         {
-            var archive = Archives.extract(wf, src);
+            var archive = ApiArchives.extract(wf, src);
             var files = archive.List();
             var dst = root.list<ApiCodeDescriptor>();
             foreach(var file in files.Storage)

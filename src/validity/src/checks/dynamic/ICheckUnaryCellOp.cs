@@ -22,7 +22,7 @@ namespace Z0
             var w = w8;
             void check()
             {
-                for(var i=0; i < RepCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Cell(w);
                     var y = Random.Cell(w);

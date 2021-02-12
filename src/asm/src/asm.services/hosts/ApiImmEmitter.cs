@@ -24,7 +24,7 @@ namespace Z0.Asm
         {
             base.OnInit();
             var services = Capture.services(Wf, Asm);
-            CodeArchive = Archives.capture(Wf.Db().CaptureRoot());
+            CodeArchive = ApiArchives.capture(Wf.Db().CaptureRoot());
             Specializer = services.ImmSpecializer();
         }
 

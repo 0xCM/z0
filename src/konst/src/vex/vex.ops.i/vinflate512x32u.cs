@@ -34,7 +34,17 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<uint> vinflate512x32u(Vector128<byte> src, W512 w = default)
-            => vmap512x32u(src);
+        public static Vector512<uint> vinflate512x32u(Vector128<byte> src)
+            => (vmaplo256x32u(src), vmaphi256x32u(src));
+
+        /// <summary>
+        /// VPMOVZXWD ymm, m128
+        /// 16x16u ->16x32u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector512<uint> vinflate512x32u(in SpanBlock256<ushort> src)
+            => (v32u(ConvertToVector256Int32(gptr(src.First))),
+                v32u(ConvertToVector256Int32(gptr(src.First, 8))));
     }
 }

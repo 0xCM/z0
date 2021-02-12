@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public t_enum_datasets()
         {
-            UnitDataDir.Clear();
+
         }
 
         FS.FilePath EnumDatasetPath<E>()

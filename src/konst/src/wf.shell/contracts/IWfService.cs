@@ -13,6 +13,8 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
+        IWfDb Db => Wf.Db();
+
         void Init(IWfShell wf);
 
 

@@ -45,8 +45,6 @@ namespace Z0
         public static unsafe Vector128<ulong> vconvert64u(in SpanBlock32<ushort> src, N128 w)
             => v64u(ConvertToVector128Int64(gptr(src.First)));
 
-
-
         /// <summary>
         /// VPMOVZXWD ymm, m128
         /// 8x16u -> 8x32i
@@ -116,27 +114,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vconvert64i(in SpanBlock128<int> src, N256 w)
             => ConvertToVector256Int64(gptr(src.First));
-
-        /// <summary>
-        /// VPMOVZXWD ymm, m128
-        /// 16x16u ->16x32u
-        /// </summary>
-        /// <param name="src">The blocked memory source</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<uint> vinflate512x32u(in SpanBlock256<ushort> src)
-            => (v32u(ConvertToVector256Int32(gptr(src.First))),
-                v32u(ConvertToVector256Int32(gptr(src.First, 8))));
-
-        /// <summary>
-        /// VPMOVSXWD ymm, m128
-        /// 16x16u ->16x32u
-        /// </summary>
-        /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe Vector512<int> vinflate512x32i(in SpanBlock128<short> src)
-            => (ConvertToVector256Int32(gptr(src.First)),
-                ConvertToVector256Int32(gptr(src.First, 8)));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128

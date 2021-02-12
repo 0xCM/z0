@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class BitBlocks
     {
@@ -22,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Segment, Closures(Closure)]
         public static T segment<T>(in SpanBlock256<T> src, BitPos<T> i0, BitPos<T> i1)
             where T : unmanaged
-                => gbits.segment(src.Storage, i0,i1);
+                => gbits.segment(src.Storage, i0, i1);
 
         /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive linear index range

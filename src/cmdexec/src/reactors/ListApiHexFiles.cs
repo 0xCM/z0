@@ -12,7 +12,7 @@ namespace Z0
         [Op]
         static CmdResult react(IWfShell wf, ListApiHexFilesCmd cmd)
         {
-            var archive = Archives.extract(wf);
+            var archive = ApiArchives.extract(wf);
             var files = archive.List();
             wf.Status(string.Format("Discovered {0} files in {1}", files.Count, archive.Root));
             z.iter(archive.List().Storage, file => wf.Status(file));

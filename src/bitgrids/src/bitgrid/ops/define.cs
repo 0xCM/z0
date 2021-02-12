@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {                
+    {
         [MethodImpl(Inline), Op, Closures(UInt8x16k)]
         public static BitGrid16<T> define<T>(N16 w, ushort data)
             where T : unmanaged

@@ -8,9 +8,8 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static TextRules;
-    using static z;
 
     public readonly struct BitMatrixWriter : IBitMatrixWriter<BitMatrixWriter>
     {

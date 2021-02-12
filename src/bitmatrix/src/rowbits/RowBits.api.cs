@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines primary api surface for rowbit manipulation
@@ -31,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
-                => new RowBits<T>(z.recover<T>(src));
+                => new RowBits<T>(recover<T>(src));
 
         /// <summary>
         /// Loads loads rows from a span

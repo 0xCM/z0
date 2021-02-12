@@ -36,7 +36,7 @@ namespace Z0
 
         protected WfHost Host {get; private set;}
 
-        protected IWfDb Db {get; private set;}
+        public IWfDb Db {get; private set;}
 
         public abstract Type ContractType {get;}
 
@@ -48,7 +48,6 @@ namespace Z0
             Wf = wf.WithHost(Host);
             Db = wf.Db();
             Events = EventCache.init(wf);
-
             OnInit();
         }
 

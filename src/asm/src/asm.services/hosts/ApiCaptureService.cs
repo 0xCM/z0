@@ -61,7 +61,7 @@ namespace Z0
         }
         void ClearArchive()
         {
-            using var archive = Capture.archive(Wf);
+            using var archive = ApiArchives.capture(Wf);
             archive.Clear();
         }
 

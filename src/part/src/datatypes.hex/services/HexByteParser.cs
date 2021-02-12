@@ -14,8 +14,12 @@ namespace Z0
 
     using P = TextRules.Parse;
 
+    [ApiHost]
     public readonly struct HexByteParser : IHexParser<byte>
     {
+        public static HexByteParser Service
+            => default(HexByteParser);
+
         [Op]
         public static bool parse(string src, out byte[] dst)
         {
@@ -38,20 +42,44 @@ namespace Z0
             }
         }
 
+        /// <summary>
+        /// Parses a single hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out byte dst)
+        {
+            if(HexTest.scalar(c))
+            {
+                dst = (byte)((byte)c - MinScalarCode);
+                return true;
+            }
+            else if(HexTest.upper(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeU + 0xA);
+                return true;
+            }
+            else if(HexTest.lower(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeL + 0xa);
+                return true;
+            }
+            dst = byte.MaxValue;
+            return false;
+        }
+
         [Op]
         public static bool parse(char c0, char c1, out byte dst)
         {
-            if(parse(c0, out var d1) && parse(c1, out var d2))
+            if(parse(c0, out var d0) && parse(c1, out var d1))
             {
-                dst = (byte)(d1 | (d2 << 8));
+                dst = (byte)(d0 | (d1 << 8));
                 return true;
             }
             dst = 0;
             return false;
         }
 
-        public static HexByteParser Service
-            => default(HexByteParser);
 
         public ParseResult<byte> Parse(string src)
         {
@@ -80,33 +108,6 @@ namespace Z0
             else
                 return unparsed<byte>(c);
         }
-
-        /// <summary>
-        /// Parses a single hex digit
-        /// </summary>
-        /// <param name="c">The source character</param>
-        [Op]
-        public static bool parse(char c, out byte dst)
-        {
-            if(HexTest.scalar(c))
-            {
-                dst = (byte)((byte)c - MinScalarCode);
-                return true;
-            }
-            else if(HexTest.upper(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeU + 0xA);
-                return true;
-            }
-            else if(HexTest.lower(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeL + 0xa);
-                return true;
-            }
-            dst = byte.MaxValue;
-            return false;
-        }
-
 
         /// <summary>
         /// Parses a space-delimited sequence of hex text

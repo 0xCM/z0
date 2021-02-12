@@ -313,7 +313,7 @@ namespace Z0
 
         void ShowApiHex()
         {
-            var archive = Archives.extract(Wf);
+            var archive = ApiArchives.extract(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
                 Wf.Warn(Host, $"No files found in archive with root {archive.Root}");

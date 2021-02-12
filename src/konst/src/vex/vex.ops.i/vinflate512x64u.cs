@@ -18,6 +18,16 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
+        /// 8x16x -> (4x64u,4x64u)
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The lo target</param>
+        /// <param name="hi">The hi target</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<ulong> vinflate512x64u(Vector128<ushort> src)
+            => (vmaplo256x64u(src), vmaphi256x64u(src));
+
+        /// <summary>
         /// 8x32u -> 8x64u
         /// </summary>
         [MethodImpl(Inline), Op]

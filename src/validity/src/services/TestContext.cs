@@ -24,8 +24,15 @@ namespace Z0
         protected IWfShell Wf {get; private set;}
 
         public void InjectShell(IWfShell wf)
-            => Wf = wf;
+        {
+            Wf = wf;
+            OnShellInjected();
+        }
 
+        protected virtual void OnShellInjected()
+        {
+
+        }
         protected IWfDb Db => Wf.Db();
 
         public void SetMode(bool diagnostic)

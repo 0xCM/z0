@@ -21,15 +21,13 @@ namespace Z0
     {
         readonly Span<T> data;
 
-        [MethodImpl(Inline)]
         internal BitBlock(Span<T> src)
         {
             var allocated = CellWidth * (uint)src.Length;
-            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));
+            root.require(allocated >= BitCount, () => Format(allocated, BitCount));
             data = src;
         }
 
-        [MethodImpl(Inline)]
         internal BitBlock(params T[] src)
             : this(src.AsSpan())
         {
@@ -53,28 +51,34 @@ namespace Z0
             => nat32u<N>();
 
         public static uint WholeCells
-            => BitCount/CellWidth;
+        {
+            [MethodImpl(Inline)]
+            get => BitCount/CellWidth;
+        }
 
         public static bool EvenlyCovered
-            => BitCount % CellWidth == 0;
+        {
+            [MethodImpl(Inline)]
+            get => BitCount % CellWidth == 0;
+        }
 
         /// <summary>
         /// The minimum number of cells needed to cover a block
         /// </summary>
         public static uint RequiredCells
-            => WholeCells + (EvenlyCovered ? 0u : 1u);
+        {
+            [MethodImpl(Inline)]
+            get => WholeCells + (EvenlyCovered ? 0u : 1u);
+        }
 
         /// <summary>
         /// The storage capacity needed to cover N-bits distributed over a contiguous T-cell sequence
         /// </summary>
         public static uint RequiredWidth
-            => RequiredCells * CellWidth;
-
-        const string CapacityExceeded = "The required bit count exceeds allocated capacity";
-
-        static string Format(uint capacity, uint needed)
-            => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace,
-                    "CellWidth*CellCount", Space, Chars.Eq, Space, capacity, Chars.Space, Chars.Lt, Chars.Space, needed);
+        {
+            [MethodImpl(Inline)]
+            get => RequiredCells * CellWidth;
+        }
 
         /// <summary>
         /// The data over which the bitvector is constructed
@@ -175,13 +179,13 @@ namespace Z0
             => data.Identical(rhs.data);
 
         public override bool Equals(object obj)
-            => throw new NotImplementedException();
+            => false;
 
         public override int GetHashCode()
-            => throw new NotImplementedException();
+            => -3;
 
         public override string ToString()
-            => throw new NotImplementedException();
+            => "%";
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
@@ -247,5 +251,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => !x.Equals(y);
+
+        const string CapacityExceeded = "The required bit count exceeds allocated capacity";
+
+        static string Format(uint capacity, uint needed)
+            => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace,
+                    "CellWidth*CellCount", Space, Chars.Eq, Space, capacity, Chars.Space, Chars.Lt, Chars.Space, needed);
     }
 }

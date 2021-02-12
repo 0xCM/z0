@@ -303,9 +303,6 @@ namespace Z0
         FS.FolderPath CapturedExtractDir()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.Files ExtractFiles()
-            => CapturedExtractDir().AllFiles;
-
         FS.FolderPath ParsedExtractDir()
             => CaptureRoot() + FS.folder(parsed);
 
@@ -354,7 +351,6 @@ namespace Z0
         FS.FolderPath CilDataDir()
             => CaptureRoot() + FS.folder(cildata);
 
-
         FS.FilePath CilDataFile(FS.FileName name)
             => CilDataDir() + name;
 
@@ -388,8 +384,11 @@ namespace Z0
         FS.FilePath ApiExtractFile(FS.FileName name)
             => CapturedExtractDir() + name;
 
+        FS.Files ApiExtractFiles()
+            => CapturedExtractDir().AllFiles;
+
         FS.Files ApiExtractFiles(PartId part)
-            => ExtractFiles().Where(f => f.IsOwner(part));
+            => ApiExtractFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath ParsedExtractFile(FS.FileName name)
             => ParsedExtractDir() + name;

@@ -14,21 +14,27 @@ namespace Z0.Asm
         where U : t_asm<U>
     {
         protected IPartCapturePaths TargetArchive
-            => Archives.capture(UnitDataDir);
+            => ApiArchives.capture(UnitDataDir);
 
         protected new IAsmContext Context;
 
         AsmServices Services;
 
-        public t_asm()
+        protected IAsmChecker AsmCheck;
+
+        protected override void OnShellInjected()
         {
             Context = AsmServices.context(Wf);
             AsmCheck = Z0.AsmChecks.tester(Context);
-            UnitDataDir.Clear();
             Services = AsmServices.create(Wf,Context);
+            UnitDataDir.Clear();
         }
 
-        protected readonly IAsmChecker AsmCheck;
+        public t_asm()
+        {
+
+        }
+
 
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);
@@ -50,8 +56,8 @@ namespace Z0.Asm
         {
             var paths = AppPaths.ForApp();
             var root = paths.AppCaptureRoot;
-            var capture = Archives.capture(root);
-            var archive = Archives.extract(Wf, root);
+            var capture = ApiArchives.capture(root);
+            var archive = ApiArchives.extract(Wf, root);
             return archive.Read(capture.HexPath(host));
         }
 

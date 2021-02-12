@@ -36,34 +36,6 @@ namespace Z0
                 throw no<H>();
         }
 
-        [MethodImpl(Inline), Op]
-        public static ApiExtractArchive extract(IWfShell wf)
-            => new ApiExtractArchive(wf);
-
-        [MethodImpl(Inline), Op]
-        public static ApiExtractArchive extract(IWfShell wf, FS.FolderPath root)
-            => new ApiExtractArchive(wf, root);
-
-        /// <summary>
-        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static ICaptureArchive capture(FS.FolderPath root)
-            => new CaptureArchive(root);
-
-        /// <summary>
-        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path and specialized for an identified <see cref='PartId'/>
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static ICaptureArchive capture(FS.FolderPath root, PartId part)
-            => new CaptureArchive(root + FS.folder(part.Format()));
-
-        [MethodImpl(Inline), Op]
-        public static IHostCaptureArchive capture(FS.FolderPath root, ApiHostUri host)
-            => new HostCaptureArchive(root, host);
-
         /// <summary>
         /// Creates an archive over the output of a build
         /// </summary>

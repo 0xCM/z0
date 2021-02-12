@@ -13,17 +13,6 @@ namespace Z0
 
     public sealed class t_tools_models : t_tools<t_tools_models>
     {
-        public void check_pdb2xml()
-        {
-            var model = Cmd.toolinfo<Pdb2Xml>();
-            Check.eq(Pdb2Xml.Usage, model.Syntax);
-            var options = model.Options;
-            var count = options.Count;
-            for(ushort i=0; i<count; i++)
-            {
-                ref readonly var option = ref options[i];
-                Trace($"{i}:{option.Format()}");
-            }
-        }
+
     }
 }

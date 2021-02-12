@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static SFx;
-    using static z;
+    using static Part;
 
     public readonly struct CheckSVF : ICheckSVF
     {
