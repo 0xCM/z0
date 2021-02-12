@@ -37,7 +37,7 @@ namespace Z0
         public static string FormatBlock(this Perm4L src, bool bracketed = true)
         {
             var bs = BitString.scalar((byte)src);
-            var data = bs.Format(false,false,2, Chars.Space);
+            var data = bs.Format(false, false,2, Chars.Space);
             return bracketed ? text.bracket(data) : data;
         }
 

@@ -11,7 +11,7 @@ namespace Z0
     partial struct ApiSigs
     {
         [Flags]
-        public enum SigModifier : ushort
+        public enum ModifierKind : ushort
         {
             None,
 

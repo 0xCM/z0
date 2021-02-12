@@ -50,6 +50,9 @@ namespace Z0
             => new ArgQualifier(src);
 
         public static ArgQualifier Empty
+            => new ArgQualifier(AsciCharCode.Null);
+
+        public static ArgQualifier Space
             => new ArgQualifier(AsciCharCode.Space);
 
         public static ArgQualifier Colon

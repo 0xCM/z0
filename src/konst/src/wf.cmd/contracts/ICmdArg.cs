@@ -15,14 +15,9 @@ namespace Z0
         ushort Position {get;}
 
         /// <summary>
-        /// The (required) argument value
+        /// Defines prefix characteristics and/or operand situation
         /// </summary>
-        string Value {get;}
-
-        /// <summary>
-        /// The argument prefix, if any; typically either '-', '--', or '/'
-        /// </summary>
-        ArgPrefix Prefix {get;}
+        ArgProtocol Protocol {get;}
 
         /// <summary>
         /// The argument name, if any
@@ -30,16 +25,32 @@ namespace Z0
         string Name {get;}
 
         /// <summary>
-        /// The delimiter between an argument name/value pair, typically '=' or ':' if present
+        /// The (required) argument value
         /// </summary>
-        ArgQualifier Qualifier {get;}
+        dynamic Value {get;}
 
         /// <summary>
         /// Specifies the extant argument components
         /// </summary>
         ArgPartKind Classifier {get;}
+
+        /// <summary>
+        /// The argument prefix, if any; typically either '-', '--', or '/'
+        /// </summary>
+        ArgPrefix Prefix => Protocol.Prefix;
+
+        /// <summary>
+        /// The delimiter between an argument name/value pair, typically '=' or ':' if present
+        /// </summary>
+        ArgQualifier Qualifier => Protocol.Qualifier;
+
+        /// <summary>
+        /// Specifies whether the argument is a flag and thus the name is the value and conversely
+        /// </summary>
+        bool IsFlag => false;
+
         string ITextual.Format()
-            => TextFormatter.setting(Name,Value);
+            => TextFormatter.setting(Name, Value);
     }
 
     [Free]
@@ -47,7 +58,7 @@ namespace Z0
     {
         new T Value {get;}
 
-        string ICmdArg.Value
-            => Value?.ToString() ?? string.Empty;
+        dynamic ICmdArg.Value
+            => Value;
     }
 }

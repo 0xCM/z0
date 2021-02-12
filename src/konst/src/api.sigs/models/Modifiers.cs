@@ -4,7 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ApiSigs.SigModifier;
+    using K = ApiSigs.ModifierKind;
+
+    using System;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
 
     partial struct ApiSigs
     {
@@ -25,7 +31,7 @@ namespace Z0
             public static Imm imm()
                 => default;
 
-            public readonly struct In : IApiSigModifier<In>
+            public readonly struct In : ISigModifier<In>
             {
                 public Name Name => "in";
 
@@ -36,9 +42,13 @@ namespace Z0
 
                 public override string ToString()
                     => Name;
+
+                [MethodImpl(Inline)]
+                public static implicit operator Modifier(In src)
+                    => new Modifier(src.Name,src.Kind);
             }
 
-            public readonly struct Out : IApiSigModifier<Out>
+            public readonly struct Out : ISigModifier<Out>
             {
                 public Name Name => "out";
 
@@ -49,9 +59,13 @@ namespace Z0
 
                 public override string ToString()
                     => Name;
+
+                [MethodImpl(Inline)]
+                public static implicit operator Modifier(Out src)
+                    => new Modifier(src.Name,src.Kind);
             }
 
-            public readonly struct Ref : IApiSigModifier<Ref>
+            public readonly struct Ref : ISigModifier<Ref>
             {
                 public Name Name => "ref";
 
@@ -62,9 +76,14 @@ namespace Z0
 
                 public override string ToString()
                     => Name;
+
+                [MethodImpl(Inline)]
+                public static implicit operator Modifier(Ref src)
+                    => new Modifier(src.Name,src.Kind);
+
             }
 
-            public readonly struct Ptr : IApiSigModifier<Ptr>
+            public readonly struct Ptr : ISigModifier<Ptr>
             {
                 public Name Name => "ptr";
 
@@ -75,9 +94,15 @@ namespace Z0
 
                 public override string ToString()
                     => Name;
+
+
+                [MethodImpl(Inline)]
+                public static implicit operator Modifier(Ptr src)
+                    => new Modifier(src.Name,src.Kind);
+
             }
 
-            public readonly struct Imm : IApiSigModifier<Imm>
+            public readonly struct Imm : ISigModifier<Imm>
             {
                 public Name Name => "imm";
 
@@ -88,8 +113,12 @@ namespace Z0
 
                 public override string ToString()
                     => Name;
+
+                [MethodImpl(Inline)]
+                public static implicit operator Modifier(Imm src)
+                    => new Modifier(src.Name,src.Kind);
+
             }
         }
-
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a tool flag argument
     /// </summary>
-    public readonly struct CmdFlagArg : ICmdArg
+    public readonly struct CmdFlagArg<T> : ICmdArg<T>
     {
         /// <summary>
         /// The argument's relative position
@@ -27,28 +27,38 @@ namespace Z0
         /// <summary>
         /// The argument value
         /// </summary>
-        public dynamic Value {get;}
+        public T Value {get;}
 
         public ArgProtocol Protocol {get;}
 
         public ArgPartKind Classifier {get;}
 
         [MethodImpl(Inline)]
-        public CmdFlagArg(ushort pos, string name, ArgPrefix? prefix = null)
+        public CmdFlagArg(ushort pos, string name, T value, ArgPrefix? prefix = null)
         {
             Position = pos;
             Name = name;
-            Value = EmptyString;
+            Value = value;
             Protocol = prefix ?? ArgPrefix.DoubleDash;
             Classifier = ArgPartKind.Name | ArgPartKind.Position;
         }
 
         [MethodImpl(Inline)]
-        public CmdFlagArg(string name, ArgPrefix? prefix = null)
+        public CmdFlagArg(string name, T value, ArgPrefix? prefix = null)
         {
             Position = 0;
             Name = name;
-            Value = EmptyString;
+            Value = value;
+            Protocol = prefix ?? ArgPrefix.DoubleDash;
+            Classifier = ArgPartKind.Name;
+        }
+
+        [MethodImpl(Inline)]
+        public CmdFlagArg(T value, ArgPrefix? prefix = null)
+        {
+            Position = 0;
+            Name = value.ToString();
+            Value = value;
             Protocol = prefix ?? ArgPrefix.DoubleDash;
             Classifier = ArgPartKind.Name;
         }
@@ -60,8 +70,11 @@ namespace Z0
         public ArgQualifier Qualifier => Protocol.Qualifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg(CmdFlagArg src)
-            => new CmdArg(src.Position, src.Name, src.Value, src.Prefix, true);
+        public static implicit operator CmdFlagArg(CmdFlagArg<T> src)
+            => new CmdFlagArg(src.Position, src.Name, src.Prefix);
 
+        [MethodImpl(Inline)]
+        public static implicit operator CmdArg(CmdFlagArg<T> src)
+            => new CmdArg(src.Position, src.Name, src.Value, src.Prefix, true);
     }
 }

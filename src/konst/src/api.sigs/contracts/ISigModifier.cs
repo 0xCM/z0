@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
 
-    using static ApiSigs;
-
-    public interface IApiSigModifier<T> : ITextual
-        where T : struct, IApiSigModifier<T>
+    partial struct ApiSigs
     {
-        Name Name {get;}
+        public interface ISigModifier<T> : ITextual
+            where T : struct, ISigModifier<T>
+        {
+            Name Name {get;}
 
-        SigModifier Kind {get;}
+            ModifierKind Kind {get;}
+        }
     }
 }

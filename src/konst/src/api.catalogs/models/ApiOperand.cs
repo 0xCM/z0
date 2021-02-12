@@ -21,10 +21,10 @@ namespace Z0
 
         public OperandName Name {get;}
 
-        public SigModifier Modifier {get;}
+        public ModifierKind Modifier {get;}
 
         [MethodImpl(Inline)]
-        public ApiOperand(byte pos, ApiType type, OperandName name, SigModifier modifier)
+        public ApiOperand(byte pos, ApiType type, OperandName name, ModifierKind modifier)
         {
             Position = pos;
             Type = type;

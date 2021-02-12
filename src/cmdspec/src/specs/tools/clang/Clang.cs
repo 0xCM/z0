@@ -11,15 +11,12 @@ namespace Z0.Tools
 
     public partial class Clang : ToolCmdBuilder<Clang>
     {
-        const string DefaultPrefix = "--";
-
         const PathSeparator DefaultSep = PathSeparator.FS;
 
         public Clang()
-            : base(FS.path("clang.exe"))
+            : base(nameof(Clang).ToLower())
         {
-            Args = memory.alloc<ToolCmdArg>(256);
-            ToolPath = FS.path("clang.exe");
+
         }
 
         /// <summary>
@@ -27,53 +24,53 @@ namespace Z0.Tools
         /// </summary>
         /// <param name="value">The directory path</param>
         public Clang config_system_dir(FS.FolderPath value)
-            => AppendArg(DefaultPrefix, "config-system-dir", "=", value.Format(DefaultSep));
+            => AppendArg("config-system-dir", value, Eq);
 
         /// <summary>
         /// System directory for configuration files
         /// </summary>
         /// <param name="value">The directory path</param>
         public Clang config_user_dir(FS.FolderPath value)
-            => AppendArg(DefaultPrefix, "config-user-dir", "=", value.Format(DefaultSep));
+            => AppendArg("config-user-dir", value, Eq);
 
         /// <summary>
         /// Specifies configuration file
         /// </summary>
         /// <param name="value">The file path</param>
         public Clang config(FS.FilePath value)
-            => AppendArg(DefaultPrefix, "config", Space, value.Format(DefaultSep));
+            => AppendArg("config", value, Space);
 
         public Clang dependency_dot(FS.FilePath value)
-            => AppendArg(DefaultPrefix, "dependency-dot", Space, value.Format(DefaultSep));
+            => AppendArg("dependency-dot", value, Space);
 
         /// <summary>
         /// Use the LLVM representation for assembler and object files
         /// </summary>
         public Clang emit_llvm()
-            => AppendArg(DefaultPrefix, "emit-llvm");
+            => AppendFlag("emit-llvm");
 
         /// <summary>
         /// Emit Clang AST files for source inputs
         /// </summary>
         public Clang emit_ast()
-            => AppendArg(DefaultPrefix, "emit-ast");
+            => AppendFlag("emit-ast");
 
         /// <summary>
         /// Enable full Microsoft Visual C++ compatibility
         /// </summary>
         public Clang fms_compatibility()
-            => AppendArg(DefaultPrefix, "fms-compatibility");
+            => AppendFlag("fms-compatibility");
 
         public Clang output(FS.FilePath value)
-            => AppendArg(DefaultPrefix, "o", Space, value.Format(DefaultSep));
+            => AppendArg("o", value, Space);
 
         public Clang print_target_triple()
-            => AppendArg(DefaultPrefix, "print-target-triple");
+            => AppendFlag("print-target-triple");
 
         public Clang print_effective_triple()
-            => AppendArg(DefaultPrefix, "print-effective-triple");
+            => AppendFlag("print-effective-triple");
 
         public Clang print_targets()
-            => AppendArg(DefaultPrefix, "print-targets");
+            => AppendFlag("print-targets");
     }
 }

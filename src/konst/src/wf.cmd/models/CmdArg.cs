@@ -20,85 +20,84 @@ namespace Z0
         public ushort Position {get;}
 
         /// <summary>
-        /// The (required) argument value
-        /// </summary>
-        public string Value {get;}
-
-        /// <summary>
-        /// The argument prefix, if any; typically either '-', '--', or '/'
-        /// </summary>
-        public ArgPrefix Prefix {get;}
-
-        /// <summary>
         /// The argument name, if any
         /// </summary>
         public string Name {get;}
 
         /// <summary>
-        /// The delimiter between an argument name/value pair, typically ' ' or ':'
+        /// The argument value
         /// </summary>
-        public ArgQualifier Qualifier {get;}
+        public dynamic Value {get;}
+
+        public ArgProtocol Protocol {get;}
 
         /// <summary>
         /// The argument classifier
         /// </summary>
         public ArgPartKind Classifier {get;}
 
+        public bool IsFlag {get;}
+
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, ArgPrefix prefix, string name, string value)
+        public CmdArg(ushort pos, string name, dynamic value, ArgPrefix prefix, bool flag = false)
         {
             Position = pos;
             Name = name;
             Value = value;
-            Prefix = prefix;
-            Qualifier = ArgQualifier.Empty;
+            Protocol = prefix;
             Classifier = ArgPartKind.Position | ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Value;
+            IsFlag = flag;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, ArgPrefix prefix, string name, ArgQualifier qualifier, string value)
+        public CmdArg(ushort pos, string name, dynamic value, ArgProtocol protocol, bool flag = false)
         {
             Position = pos;
             Name = name;
             Value = value;
-            Prefix = prefix;
-            Qualifier = qualifier;
+            Protocol = protocol;
             Classifier = ArgPartKind.Position | ArgPartKind.Prefix | ArgPartKind.Name | ArgPartKind.Qualifier | ArgPartKind.Value;
+            IsFlag = flag;
         }
 
         [MethodImpl(Inline)]
-        public CmdArg(string name, string value)
+        public CmdArg(string name, dynamic value, bool flag = false)
         {
             Position = 0;
             Name = name;
             Value = value;
-            Prefix = EmptyString;
-            Qualifier = ArgQualifier.Empty;
+            Protocol = (ArgPrefix.Space, ArgQualifier.Space);
             Classifier = ArgPartKind.Name | ArgPartKind.Value;
+            IsFlag = flag;
         }
 
+
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, string name, string value)
+        public CmdArg(ushort pos, string name, dynamic value, bool flag = false)
         {
             Position = pos;
             Name = name;
             Value = value;
-            Prefix = EmptyString;
-            Qualifier = ArgQualifier.Empty;
+            Protocol = (ArgPrefix.Space, ArgQualifier.Space);
             Classifier = ArgPartKind.Position | ArgPartKind.Name | ArgPartKind.Value;
+            IsFlag = flag;
         }
 
 
         [MethodImpl(Inline)]
-        public CmdArg(ushort pos, string value)
+        public CmdArg(ushort pos, dynamic value, bool flag = false)
         {
             Position = pos;
             Name = EmptyString;
             Value = value;
-            Prefix = EmptyString;
-            Qualifier = ArgQualifier.Empty;
+            Protocol = (ArgPrefix.Space, ArgQualifier.Space);
             Classifier = ArgPartKind.Position | ArgPartKind.Value;
+            IsFlag = flag;
         }
+
+        public ArgPrefix Prefix => Protocol.Prefix;
+
+        public ArgQualifier Qualifier => Protocol.Qualifier;
 
         public bool IsEmpty
         {

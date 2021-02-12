@@ -316,7 +316,6 @@ namespace Z0.Asm
             return capture.EmitCaptureSet(host);
         }
 
-
         public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
 
         public static bool TestJmpRax(ReadOnlySpan<byte> src, int offset, out byte delta)
@@ -355,6 +354,21 @@ namespace Z0.Asm
             return 0;
         }
 
+        void CheckApiSigs()
+        {
+            var t0 = ApiSigs.type("uint");
+            var t1 = ApiSigs.type("uint");
+            var t2 = ApiSigs.type("bool");
+
+            var op0 = ApiSigs.operand("a", t0);
+            var op1 = ApiSigs.operand("b", t1);
+            var r = ApiSigs.ret(t2);
+
+            var operation = ApiSigs.operation("equals", r, op0, op1);
+            Wf.Row(operation);
+
+        }
+
         void CheckResPack()
         {
             var package = Db.Package("z0/respack");
@@ -370,6 +384,13 @@ namespace Z0.Asm
 
         }
 
+        void CheckIndexDecoder()
+        {
+            var blocks = ApiIndexService.create(Wf).IndexApiBlocks();
+            var decoder = AsmServices.create(Wf).IndexDecoder();
+            var dataset = decoder.Decode(blocks);
+        }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -377,10 +398,7 @@ namespace Z0.Asm
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
-            var blocks = ApiIndexService.create(Wf).IndexApiBlocks();
-            var decoder = AsmServices.create(Wf).IndexDecoder();
-            var dataset = decoder.Decode(blocks);
-            var catalog = Wf.Api;
+            CheckApiSigs();
         }
 
         public static void Main(params string[] args)

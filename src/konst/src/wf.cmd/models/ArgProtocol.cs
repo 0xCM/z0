@@ -29,8 +29,31 @@ namespace Z0
             Qualifier = AsciCharCode.Space;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Prefix.IsEmpty && Qualifier.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ArgProtocol(ArgPrefix prefix)
             => new ArgProtocol(prefix);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ArgProtocol((ArgPrefix prefix, ArgQualifier qualifier) src)
+            => new ArgProtocol(src.prefix, src.qualifier);
+
+        public static ArgProtocol Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ArgProtocol(ArgPrefix.Empty, ArgQualifier.Space);
+        }
+
     }
 }

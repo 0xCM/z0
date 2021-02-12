@@ -22,5 +22,16 @@ namespace Z0
             dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
             return dst;
         }
+
+        [Op]
+        public static ToolCmdSpec toolcmd(FS.FilePath path, params CmdArg[] args)
+        {
+            var dst = new ToolCmdSpec();
+            dst.CmdPath = path;
+            dst.Args = args.Select(x => x.Format());
+            dst.Vars = NamedValues.empty<string>();
+            dst.WorkingDir = FS.dir(Environment.CurrentDirectory);
+            return dst;
+        }
     }
 }

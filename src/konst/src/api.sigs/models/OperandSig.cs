@@ -18,14 +18,26 @@ namespace Z0
 
             public TypeSig Type {get;}
 
-            public SigModifier Modifier {get;}
+            public Index<ModifierKind> Modifiers {get;}
 
             [MethodImpl(Inline)]
-            public OperandSig(Name name, TypeSig type, SigModifier modifier)
+            public OperandSig(Name name, TypeSig type, Index<ModifierKind> modifiers)
             {
                 Name = name;
                 Type = type;
-                Modifier = modifier;
+                Modifiers = modifiers;
+            }
+
+            public bool IsReturn
+            {
+                [MethodImpl(Inline)]
+                get => Name == ReturnIndicator;
+            }
+
+            public bool IsVoid
+            {
+                [MethodImpl(Inline)]
+                get => Type.IsVoid;
             }
         }
     }

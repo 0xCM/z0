@@ -152,8 +152,8 @@ namespace Z0
                 => Name.Format();
 
             [MethodImpl(Inline)]
-            public string Format(PathSeparator sep)
-                => Name.Format(sep);
+            public string Format(PathSeparator sep, bool quote = false)
+                => quote ? TextRules.Format.enquote(Name.Format(sep)) : Name.Format(sep);
 
             [MethodImpl(Inline)]
             public FileUri ToUri()
@@ -165,9 +165,6 @@ namespace Z0
             public int CompareTo(FilePath src)
                 => Name.CompareTo(src.Name);
 
-            // [MethodImpl(Inline)]
-            // public static implicit operator Z0.FilePath(FilePath src)
-            //     => Z0.FilePath.Define(src.Name);
 
             [MethodImpl(Inline)]
             public static FilePath operator +(FilePath a, FileExt b)

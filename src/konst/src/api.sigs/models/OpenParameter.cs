@@ -5,27 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
 
     partial struct ApiSigs
     {
-        public readonly struct MethodSig
+        /// <summary>
+        /// Represents a type parameter in a generic artifact definition
+        /// </summary>
+        public readonly struct OpenParameter : IOpenParameter
         {
+            public ushort Position {get;}
+
             public Name Name {get;}
 
-            public Index<OperandSig> Operands {get;}
-
-            public OperandSig Return {get;}
-
             [MethodImpl(Inline)]
-            public MethodSig(Name name, Index<OperandSig> operands, OperandSig @return)
+            public OpenParameter(ushort position, string name)
             {
+                Position = position;
                 Name = name;
-                Operands = operands;
-                Return = @return;
             }
         }
     }

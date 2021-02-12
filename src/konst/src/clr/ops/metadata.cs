@@ -49,7 +49,7 @@ namespace Z0
             dst.DeclaringType = siginfo(src.DeclaringType);
             dst.ReturnType = siginfo(src.ReturnType);
             dst.ValueParams = src.GetParameters().Select(p => new ClrParamInfo(siginfo(p), p.RefKind(), p.Name, (ushort)p.Position));
-            dst.TypeParams = src.TypeParameters();
+            dst.TypeParams = src.GenericParameters(false).Mapi((i,t) => t.DisplayName());
             return dst;
         }
     }

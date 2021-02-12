@@ -98,6 +98,9 @@ namespace Z0
         public static ArgPrefix FSlash
             => new ArgPrefix(AsciCharCode.FSlash);
 
+        public static ArgPrefix Space
+            => new ArgPrefix(AsciCharCode.Space);
+
         public static ArgPrefix Default
             => DoubleDash;
     }

@@ -24,7 +24,7 @@ namespace Z0
 
         public Index<ClrParamInfo> ValueParams;
 
-        public Index<TypeParameter> TypeParams;
+        public Index<string> TypeParams;
 
         public ClrDisplaySig DisplaySig
             => ClrDisplaySig.from(this);
