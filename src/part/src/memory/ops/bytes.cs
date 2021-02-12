@@ -21,11 +21,6 @@ namespace Z0
             where T : struct
                 => cover(@as<T,byte>(src), size<T>());
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<byte> bytes2<T>(in T src)
-            where T : struct
-                => cover(@as<T,byte>(src), size<T>());
-
         /// <summary>
         /// Presents a span of generic values as bytespan
         /// </summary>

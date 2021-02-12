@@ -359,7 +359,7 @@ namespace Z0
         /// <param name="offset">The magnitude of the rotation</param>
         public static BitString rotl(BitString bs, uint offset)
         {
-            var dst = bs.data.Replicate();
+            var dst = bs.Data.Replicate();
             var shift = (int)offset;
             Span<byte> src = stackalloc byte[bs.Length];
             dst.CopyTo(src);

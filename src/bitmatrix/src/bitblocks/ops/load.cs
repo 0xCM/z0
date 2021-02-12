@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitBlocks
     {
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitBlock<T> load<T>(params T[] src)
             where T : unmanaged
-                => new BitBlock<T>(src, bitwidth<T>()*(uint)src.Length);
+                => new BitBlock<T>(src, width<T>()*(uint)src.Length);
 
         /// <summary>
         /// Loads a natural bitcell container from a span

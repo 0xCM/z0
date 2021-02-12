@@ -38,11 +38,11 @@ namespace Z0
         public static ulong mincells<T>(ulong bc)
             where T : unmanaged
         {
-            if(bitwidth<T>() >= bc)
+            if(width<T>() >= bc)
                 return 1;
 
-            var q = bc / (uint)bitwidth<T>();
-            var r = bc % (uint)bitwidth<T>();
+            var q = bc / (uint)width<T>();
+            var r = bc % (uint)width<T>();
             return q + (r != 0u ? 1u : 0u);
         }
     }

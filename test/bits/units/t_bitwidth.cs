@@ -50,7 +50,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var actual = gbits.effwidth(x);
-                var expect = bitwidth<T>() - gbits.nlz(x);
+                var expect = width<T>() - gbits.nlz(x);
                 Claim.eq(expect, actual);
             }
         }

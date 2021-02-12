@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vsrlv : t_inx<t_vsrlv>
     {
@@ -44,7 +44,7 @@ namespace Z0
         void vsrlv_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(z.zero(t), Numeric.force<uint,T>((uint)bitwidth(t) - 1));
+            var domain = Interval.closed(z.zero(t), Numeric.force<uint,T>((uint)width<T>() - 1));
 
             Pair<Vector128<T>> @case(uint i)
             {
@@ -59,7 +59,7 @@ namespace Z0
         void vsrlv_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(z.zero(t), Numeric.force<uint,T>((uint)bitwidth(t) - 1));
+            var domain = Interval.closed(z.zero(t), Numeric.force<uint,T>((uint)width<T>() - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {

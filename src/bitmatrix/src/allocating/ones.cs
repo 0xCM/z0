@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitMatrixA
     {
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var dst = zero<T>();
-            var len = bitwidth<T>();
+            var len = width<T>();
             var one = Numeric.one<T>();
             for(var i=0; i < len; i++)
                 dst[i] = gmath.sll(one,(byte)i);

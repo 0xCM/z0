@@ -17,10 +17,10 @@ namespace Z0.Lang
 
         public Identifier Name => "block";
 
-        public BitSize Width {get;}
+        public BitWidth Width {get;}
 
         [MethodImpl(Inline)]
-        public DataBlock(SegmentKind kind, uint count, BitSize width)
+        public DataBlock(SegmentKind kind, uint count, BitWidth width)
         {
             SegKind = kind;
             SegCount = count;

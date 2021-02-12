@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// The partition width determined by <see cref='Right'/> - <see cref='Left'/>
         /// </summary>
-        public BitSize Width
+        public BitWidth Width
         {
             [MethodImpl(Inline)]
             get => Range.Width;

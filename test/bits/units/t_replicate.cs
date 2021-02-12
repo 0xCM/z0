@@ -12,7 +12,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var pattern = Random.Next(z8);
+                var pattern = Random.Next<byte>();
                 (var x0, var x1, var x2, var x3) = Bits.split(gbits.replicate<uint>(pattern),n4);
                 Claim.eq(x0, pattern);
                 Claim.eq(x1, pattern);
@@ -38,7 +38,6 @@ namespace Z0
 
         public void replicate_64u()
         {
-
             var src = 0b111000ul;
             var actual = gbits.replicate(src).ToBitVector64();
 

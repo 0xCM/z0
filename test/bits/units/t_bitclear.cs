@@ -22,7 +22,7 @@ namespace Z0
         void clearbits_check<T>(byte first, byte count)
             where T : unmanaged
         {
-            var n = bitwidth<T>();
+            var n = width<T>();
             var dst = gbits.disable(Numeric.maxval<T>(), first, count);
             var bs = BitSpans.create(dst);
             var len = bs.Length;

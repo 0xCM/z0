@@ -144,7 +144,7 @@ namespace Z0
         {
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
-            var opname = $"vblock_sub_{n}x{bitwidth<T>()}";
+            var opname = $"vblock_sub_{n}x{width<T>()}";
             var dst = RowVectors.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {

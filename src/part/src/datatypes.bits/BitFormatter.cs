@@ -41,7 +41,6 @@ namespace Z0
         {
             var dst = text.buffer();
             var cells = src.Length;
-            var wCell = bitwidth<T>();
             var cfg = config ?? configure();
             for(var i=0; i<cells; i++)
                 dst.Append(_format<T>(skip(src,i), cfg));

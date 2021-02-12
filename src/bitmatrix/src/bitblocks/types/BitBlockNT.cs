@@ -44,7 +44,7 @@ namespace Z0
         /// The number of bits covered by a cell
         /// </summary>
         public static uint CellWidth
-            => bitwidth<T>();
+            => width<T>();
 
         /// <summary>
         /// The total number of bits covered by the block

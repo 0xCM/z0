@@ -118,7 +118,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = root.min(dst.CellCount, bitsize<S>());
+            var length = root.min(dst.CellCount, width<S>());
             for(var i=0; i<length; i++)
                 dst[i] = gbits.testbit(src, (byte)i) ? enabled : default;
             return ref dst;
@@ -137,7 +137,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = root.min(dst.CellCount, bitsize<S>());
+            var length = root.min(dst.CellCount, width<S>());
             for(var i=0; i<length; i++)
                 dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;

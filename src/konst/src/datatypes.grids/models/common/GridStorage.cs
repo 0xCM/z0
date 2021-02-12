@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The the total number of segment-aligned bits allocated for storage
         /// </summary>
-        public BitSize BitCount {get;}
+        public BitWidth BitCount {get;}
 
         /// <summary>
         /// The number of bits in each segment
@@ -30,7 +30,7 @@ namespace Z0
         public uint SegCount {get;}
 
         [MethodImpl(Inline)]
-        public GridStorage(BitSize bits, uint segwdith)
+        public GridStorage(BitWidth bits, uint segwdith)
         {
             BitCount = bits;
             SegWidth = segwdith;
@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The count of remaining unaligned bits
         /// </summary>
-        public BitSize Remainder
+        public BitWidth Remainder
         {
             [MethodImpl(Inline)]
             get => SegCount % SegWidth;

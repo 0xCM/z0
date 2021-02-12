@@ -20,12 +20,12 @@ namespace Z0
         const ulong BitsToKbFactor = KbFactor * BitFactor;
 
         [MethodImpl(Inline), Op]
-        public static BitSize bits(ulong src)
-            => new BitSize(src);
+        public static BitWidth bits(ulong src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline), Op]
-        public static BitSize bits(long src)
-            => new BitSize(src);
+        public static BitWidth bits(long src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline), Op]
         public static ByteSize bytes(ulong src)
@@ -36,7 +36,7 @@ namespace Z0
             => new ByteSize(src);
 
         [MethodImpl(Inline), Op]
-        public static Kb kb(BitSize src)
+        public static Kb kb(BitWidth src)
         {
             var kb = uint32(src.Content/BitsToKbFactor);
             var rem = uint32(src.Content % BitsToKbFactor);
@@ -44,11 +44,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSize bits(Kb src)
+        public static BitWidth bits(Kb src)
         {
             var bits = (ulong)bytes(src).Bits;
             var rem = (ulong)src.Rem;
-            return new BitSize(bits + rem);
+            return new BitWidth(bits + rem);
         }
 
         [MethodImpl(Inline), Op]

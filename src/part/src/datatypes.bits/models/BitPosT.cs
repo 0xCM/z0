@@ -39,7 +39,7 @@ namespace Z0
 		/// Specifies the number of bits that can be placed in one segment
 		/// </summary>
 		public static ushort CellWidth
-			=> ScalarCast.uint16(bitwidth<T>());
+			=> width<T>(w16);
 
 		/// <summary>
 		/// Constructs a bit position from a linear/absolute index

@@ -18,7 +18,7 @@ namespace Z0.Asm
     {
         AsmOpKind IAsmOp.OpKind
             => AsmOpKind.Imm | (AsmOpKind)memory.size<T>();
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => memory.size<T>();
     }
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
     {
         new W Width => default(W);
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => Width.BitWidth;
     }
 }

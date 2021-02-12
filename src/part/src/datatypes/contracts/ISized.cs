@@ -11,7 +11,9 @@ namespace Z0
     [Free]
     public interface ISized
     {
-        BitSize Width {get;}
+        BitWidth Width {get;}
+
+        ByteSize Size => Width.Bytes;
     }
 
     public interface ISized<T> : ISized
@@ -19,7 +21,7 @@ namespace Z0
     {
         new T Width {get;}
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => memory.size<T>();
     }
 }

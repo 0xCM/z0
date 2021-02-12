@@ -80,7 +80,7 @@ namespace Z0
         void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
             where F : unmanaged
         {
-            var shift = bitsize<F>()/2;
+            var shift = width<F>()/2;
             var width = uint32(field) >> shift;
             Append(text.rspace(c));
             Append($"{value}".PadRight((int)width));

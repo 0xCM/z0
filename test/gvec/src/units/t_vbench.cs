@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static SFx;
 
     public class t_vbench : t_inx<t_vbench>
@@ -191,7 +191,6 @@ namespace Z0
             var last = gcpu.vzero<T>(w);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitwidth(t);
             var ops = 0;
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -215,7 +214,6 @@ namespace Z0
             var last = gcpu.vzero<T>(w);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitwidth(t);
             var ops = 0;
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -239,7 +237,7 @@ namespace Z0
             var last = gcpu.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitwidth(t);
+            var bitlen = width<T>(w8);
             var ops = 0;
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -263,7 +261,7 @@ namespace Z0
             var last = gcpu.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitwidth(t);
+            var bitlen = width<T>(w8);
             var ops = 0;
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -301,7 +299,7 @@ namespace Z0
         void bitpack_bench<T>(T t = default)
             where T : unmanaged
         {
-            var n = bitwidth(t);
+            var n = width<T>(w32);
             var ops = 0;
             var composite = default(T);
             var clock = counter();

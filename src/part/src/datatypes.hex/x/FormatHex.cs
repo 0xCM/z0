@@ -7,17 +7,21 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XTend
+    partial class XHex
     {
+        [Op]
         public static string FormatHex(this byte[] src)
             => HexFormat.format(src, HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHex(this ReadOnlySpan<byte> src)
             => HexFormat.format(src, HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHex(this Span<byte> src)
             => HexFormat.format(src, HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHex(this byte[] src, HexFormatOptions config)
             => HexFormat.format(src, config);
 
@@ -29,6 +33,7 @@ namespace Z0
         /// <param name="sep">The character to use when separating digits</param>
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this Span<T> src, char sep, bool specifier)
             where T : unmanaged
                 => HexFormat.format(src.ReadOnly(), sep, specifier);
@@ -38,6 +43,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this Span<T> src)
             where T : unmanaged
                 => HexFormat.format(src.ReadOnly(),Chars.Space, false);
@@ -47,6 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this ReadOnlySpan<T> src)
             where T : unmanaged
                 => HexFormat.format(src, Chars.Space, false);
@@ -59,6 +66,7 @@ namespace Z0
         /// <param name="sep">The character to use when separating digits</param>
         /// <param name="specifier">Whether to prefix each number with the canonical hex specifier, "0x"</param>
         /// <typeparam name="T">The primal type</typeparam>
+        [Op, Closures(Closure)]
         public static string FormatHex<T>(this IEnumerable<T> src, char sep, bool specifier)
             where T : unmanaged
                 => src.ToSpan().FormatHex(sep, specifier);

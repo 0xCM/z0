@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitpack : t_inx<t_bitpack>
     {
@@ -165,7 +165,7 @@ namespace Z0
         void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged
         {
-            var count = math.min(bitwidth<T>(), y.Length);
+            var count = math.min(width<T>(), y.Length);
             for(var i=0; i<count; i++)
                 Claim.eq((byte)gbits.testbit(src, (byte)i), y[i]);
 

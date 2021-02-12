@@ -46,7 +46,7 @@ namespace Z0
         public SymbolSpec(ushort symwidth, ClrToken symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
-            SegWidth = (ushort)bitwidth<S>();
+            SegWidth = (ushort)width<S>();
             SegCapacity = (ushort)(SegWidth/SymWidth);
             SegDomain = typeof(S);
             SymDomain = symdomain;

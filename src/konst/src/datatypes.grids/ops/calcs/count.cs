@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint cellcount<T>(uint rows, uint cols)
             where T : unmanaged
-                => cellcount(rows, cols, bitwidth<T>());
+                => cellcount(rows, cols, width<T>());
 
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
@@ -52,6 +52,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => cellcount((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
+                => cellcount((uint)nat64u(m), (uint)nat64u(n), width<T>());
     }
 }

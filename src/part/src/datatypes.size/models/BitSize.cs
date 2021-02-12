@@ -9,18 +9,19 @@ namespace Z0
 
     using static Part;
 
+    using api = Sizes;
+
     /// <summary>
     /// Specifies data size in bits
     /// </summary>
     [Datatype]
-    public readonly struct BitSize : IDataType<ulong>
+    public readonly struct BitWidth : IDataType<ulong>
     {
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
         /// Specifies a bit count
         /// </summary>
-        [Ignore]
         public ulong Content {get;}
 
         /// <summary>
@@ -52,32 +53,38 @@ namespace Z0
                 => a % (Unsafe.SizeOf<T>()*8);
 
         [MethodImpl(Inline)]
-        public BitSize(sbyte bits)
+        public BitWidth(sbyte bits)
             => Content = (ulong)bits;
 
         [MethodImpl(Inline)]
-        public BitSize(byte bits)
+        public BitWidth(byte bits)
             => Content = bits;
 
         [MethodImpl(Inline)]
-        public BitSize(ushort bits)
+        public BitWidth(ushort bits)
             => Content = bits;
 
         [MethodImpl(Inline)]
-        public BitSize(int bits)
+        public BitWidth(int bits)
             => Content = (ulong)bits;
 
         [MethodImpl(Inline)]
-        public BitSize(uint bits)
+        public BitWidth(uint bits)
             => Content = bits;
 
         [MethodImpl(Inline)]
-        public BitSize(long bits)
+        public BitWidth(long bits)
             => Content = (ulong)bits;
 
         [MethodImpl(Inline)]
-        public BitSize(ulong bits)
+        public BitWidth(ulong bits)
             => Content = bits;
+
+        public Kb Kb
+        {
+            [MethodImpl(Inline)]
+            get => api.kb(this);
+        }
 
         public ByteSize Bytes
         {
@@ -88,7 +95,7 @@ namespace Z0
             => Content.ToString();
 
         [MethodImpl(Inline)]
-        public bool Equals(BitSize rhs)
+        public bool Equals(BitWidth rhs)
             => Content == rhs.Content;
 
         public override string ToString()
@@ -98,126 +105,126 @@ namespace Z0
             => (int)Content;
 
         public override bool Equals(object obj)
-            => obj is BitSize x && Equals(x);
+            => obj is BitWidth x && Equals(x);
 
         [MethodImpl(Inline)]
-        public static implicit operator long(BitSize src)
+        public static implicit operator long(BitWidth src)
             => (long)src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(BitSize src)
+        public static implicit operator ulong(BitWidth src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(long src)
-            => new BitSize(src);
+        public static implicit operator BitWidth(long src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(ulong src)
-            => new BitSize(src);
+        public static implicit operator BitWidth(ulong src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator ByteSize(BitSize src)
+        public static explicit operator ByteSize(BitWidth src)
             => src.Bytes;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(DataWidth src)
-            => new BitSize((uint)src);
+        public static implicit operator BitWidth(DataWidth src)
+            => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator DataWidth(BitSize src)
+        public static implicit operator DataWidth(BitWidth src)
             => (DataWidth)src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(TypeWidth src)
-            => new BitSize((uint)src);
+        public static implicit operator BitWidth(TypeWidth src)
+            => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator TypeWidth(BitSize src)
+        public static implicit operator TypeWidth(BitWidth src)
             => (TypeWidth)src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(VectorWidth src)
-            => new BitSize((uint)src);
+        public static implicit operator BitWidth(VectorWidth src)
+            => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(NumericWidth src)
-            => new BitSize((uint)src);
+        public static implicit operator BitWidth(NumericWidth src)
+            => new BitWidth((uint)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator NumericWidth(BitSize src)
+        public static implicit operator NumericWidth(BitWidth src)
             => (NumericWidth)src.Content;
 
         [MethodImpl(Inline)]
-        public static explicit operator BitSize(byte src)
-            => new BitSize(src);
+        public static explicit operator BitWidth(byte src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator BitSize(ushort src)
-            => new BitSize(src);
+        public static explicit operator BitWidth(ushort src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(uint src)
-            => new BitSize(src);
+        public static implicit operator BitWidth(uint src)
+            => new BitWidth(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(BitSize src)
+        public static implicit operator byte(BitWidth src)
             => (byte)src.Content;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(BitSize src)
+        public static explicit operator int(BitWidth src)
             => (int)src.Content;
 
         [MethodImpl(Inline)]
-        public static explicit operator uint(BitSize src)
+        public static explicit operator uint(BitWidth src)
             => (uint)src.Content;
 
         [MethodImpl(Inline)]
-        public static explicit operator double(BitSize src)
+        public static explicit operator double(BitWidth src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSize(ByteSize src)
-            => new BitSize(src.Content * 8);
+        public static implicit operator BitWidth(ByteSize src)
+            => new BitWidth(src.Content * 8);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitSize lhs, BitSize rhs)
+        public static bool operator ==(BitWidth lhs, BitWidth rhs)
             => lhs.Content == rhs.Content;
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitSize lhs, BitSize rhs)
+        public static bool operator !=(BitWidth lhs, BitWidth rhs)
             => lhs.Content != rhs.Content;
 
         [MethodImpl(Inline)]
-        public static BitSize operator +(BitSize lhs, BitSize rhs)
+        public static BitWidth operator +(BitWidth lhs, BitWidth rhs)
             => lhs.Content + rhs.Content;
 
         [MethodImpl(Inline)]
-        public static BitSize operator -(BitSize lhs, BitSize rhs)
+        public static BitWidth operator -(BitWidth lhs, BitWidth rhs)
             => lhs.Content - rhs.Content;
 
         [MethodImpl(Inline)]
-        public static BitSize operator *(BitSize lhs, BitSize rhs)
+        public static BitWidth operator *(BitWidth lhs, BitWidth rhs)
             => lhs.Content * rhs.Content;
 
         [MethodImpl(Inline)]
-        public static BitSize operator /(BitSize lhs, BitSize rhs)
+        public static BitWidth operator /(BitWidth lhs, BitWidth rhs)
             => lhs.Content / rhs.Content;
 
         [MethodImpl(Inline)]
-        public static BitSize operator %(BitSize lhs, BitSize rhs)
+        public static BitWidth operator %(BitWidth lhs, BitWidth rhs)
             => lhs.Content % rhs.Content;
 
         /// <summary>
         /// The bit with no size
         /// </summary>
-        public static BitSize Empty
+        public static BitWidth Empty
             => default;
 
         /// <summary>
         /// The bit with no size
         /// </summary>
-        public static BitSize Zero
+        public static BitWidth Zero
             => default;
     }
 }

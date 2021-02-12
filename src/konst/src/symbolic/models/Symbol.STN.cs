@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using api = Symbolic;
 
@@ -59,7 +59,7 @@ namespace Z0
         public static ushort SegWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)bitwidth<T>();
+            get => (ushort)width<T>();
         }
 
         /// <summary>

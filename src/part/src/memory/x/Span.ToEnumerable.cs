@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XSpan
+    partial class XMem
     {
         /// <summary>
         /// Lifts span content into the LINQ monad

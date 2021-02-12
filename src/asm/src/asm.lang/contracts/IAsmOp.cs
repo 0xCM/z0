@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     public interface IAsmOp : ISizedOperand, IAsmOpContent
     {
         AsmOpKind OpKind {get;}
@@ -27,7 +26,7 @@ namespace Z0.Asm
     {
         new W Width => default(W);
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => Width.BitWidth;
     }
 }

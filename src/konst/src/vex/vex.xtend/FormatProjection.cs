@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
 
     partial class XVex
     {
@@ -19,8 +19,8 @@ namespace Z0
             var srcCount = x.Length();
             var dstType = TypeIdentity.numeric<T>();
             var dstCount = y.Length();
-            var srcWidth = srcCount * BitSize.measure<S>();
-            var dstWidth = dstCount * BitSize.measure<T>();
+            var srcWidth = srcCount * BitWidth.measure<S>();
+            var dstWidth = dstCount * BitWidth.measure<T>();
             var srcLabel = $"v{srcWidth}x{srcType}";
             var dstLabel = $"v{dstWidth}x{dstType}";
             var label = $"{srcLabel}_{dstLabel}";
@@ -37,8 +37,8 @@ namespace Z0
             var srcCount = x.CellCount;
             var dstType = TypeIdentity.numeric<T>();
             var dstCount = y.Length();
-            var srcWidth = srcCount * BitSize.measure<S>();
-            var dstWidth = dstCount * BitSize.measure<T>();
+            var srcWidth = srcCount * BitWidth.measure<S>();
+            var dstWidth = dstCount * BitWidth.measure<T>();
             var srcLabel = $"m{srcWidth}x{srcType}";
             var dstLabel = $"v{dstWidth}x{dstType}";
             var label = $"{srcLabel}_{dstLabel}";

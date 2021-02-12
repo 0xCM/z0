@@ -16,12 +16,11 @@ namespace Z0
         public static ref T parse<T>(ReadOnlySpan<char> src, byte offset, out T dst)
             where T : unmanaged
         {
-            var last = math.min(bitwidth<T>(), src.Length) - 1;
+            var last = math.min(width<T>(), src.Length) - 1;
             ref readonly var input = ref first(src);
             dst = default;
-
             for(byte i=offset, pos = 0; i<= last; i++, pos++)
-                if(skip(input,i) == Bit32.One)
+                if(skip(input,i) == bit.One)
                     dst = gbits.enable(dst, pos);
             return ref dst;
         }

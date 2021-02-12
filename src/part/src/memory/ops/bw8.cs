@@ -20,11 +20,11 @@ namespace Z0
         public static byte bw8<T>(T src)
             where T : unmanaged
         {
-            if(bitwidth<T>() == 8)
+            if(width<T>() == 8)
                 return uint8(src);
-            else if(bitwidth<T>() == 16)
+            else if(width<T>() == 16)
                 return (byte)uint16(src);
-            else if(bitwidth<T>() == 32)
+            else if(width<T>() == 32)
                 return (byte)uint32(src);
             else
                 return (byte)uint64(src);

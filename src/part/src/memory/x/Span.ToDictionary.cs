@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XMem
     {
         /// <summary>
         /// Creates a dictionary from a span using the element indices as keys

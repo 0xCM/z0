@@ -93,7 +93,7 @@ namespace Z0
         public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref First, index);
+            get => ref add(First, index);
         }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data.Bytes();
+            get => @bytes(Data);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref First, BlockLength*block + segment);
+            => ref add(First, BlockLength*block + segment);
 
         /// <summary>
         /// Produces a span that covers the cells of an index-identified block
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => Data.Slice(block * BlockLength, BlockLength);
+            => slice(Data, block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)

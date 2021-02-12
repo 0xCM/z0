@@ -8,61 +8,60 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     partial struct memory
     {
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W8'/>
+        /// Computes the bit-width of a parametrically-identified type, returning the result as a <see cref='BitWidth'/> value
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W8 w)
-            => size<T>() == 1;
+        public static BitWidth width<T>()
+            => Unsafe.SizeOf<T>()*8;
 
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W16'/>
+        /// Computes the bit-width of a parametrically-identified type, returning the result as a <see cref='uint'/> value
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W16 w)
-            => size<T>() == 2;
+        public static uint bitwidth<T>()
+            => (uint)SizeOf<T>() * 8;
 
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W32'/>
+        /// Computes the bit-width of a parametrically-identified type
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W32 w)
-            => size<T>() == 4;
+        public static byte width<T>(W8 w)
+            => (byte)(SizeOf<T>() * 8);
 
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W64'/>
+        /// Computes the bit-width of a parametrically-identified type
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W64 w)
-            => size<T>() == 8;
+        public static ushort width<T>(W16 w)
+            => (ushort)(SizeOf<T>() * 8);
 
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W128'/>
+        /// Computes the bit-width of a parametrically-identified type
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W128 w)
-            => size<T>() == 16;
+        public static uint width<T>(W32 w)
+            => (uint)(SizeOf<T>() * 8);
 
         /// <summary>
-        /// Determines wheter a parametrically-identified type if of bit-width <see cref='W256'/>
+        /// Computes the bit-width of a parametrically-identified type
         /// </summary>
-        /// <param name="w">The width selector</param>
-        /// <typeparam name="T">The type to test</typeparam>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bit width<T>(W256 w)
-            => size<T>() == 32;
+        public static ulong width<T>(W64 w)
+            => (ulong)(SizeOf<T>() * 8);
     }
 }

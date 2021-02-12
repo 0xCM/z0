@@ -62,7 +62,7 @@ namespace Z0
 
         public Type ContainerType => typeof(void);
 
-        public BitSize Width => 0;
+        public BitWidth Width => 0;
 
         public string Format()
             => "<empty>";

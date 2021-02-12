@@ -25,7 +25,7 @@ namespace Z0
         void msboff_check<T>()
             where T : unmanaged
         {
-            var width = bitwidth<T>();
+            var width = width<T>();
             for(byte i=0; i<width; i++)
                 msboff_check<T>(i);
         }
@@ -33,7 +33,7 @@ namespace Z0
         void msboff_check<T>(byte maxlen, T t = default)
             where T : unmanaged
         {
-            var width = bitwidth<T>();
+            var width = width<T>();
 
             var bs0 = BitString.scalar(Numeric.maxval(t));
             var bv0 = bs0.ToBitVector<T>();

@@ -48,7 +48,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = Random.Span<T>(RepCount);
-            var tLen = bitwidth<T>();
+            var tLen = width<T>();
             var srcLen = src.Length;
             for(var i = 0; i< srcLen; i++)
             {
@@ -67,16 +67,16 @@ namespace Z0
 
         public void bitsize()
         {
-            Claim.eq(8, bitwidth<byte>());
-            Claim.eq(8, bitwidth<sbyte>());
-            Claim.eq(16, bitwidth<short>());
-            Claim.eq(16, bitwidth<ushort>());
-            Claim.eq(32, bitwidth<int>());
-            Claim.eq(32, bitwidth<uint>());
-            Claim.eq(64, bitwidth<long>());
-            Claim.eq(64, bitwidth<ulong>());
-            Claim.eq(32, bitwidth<float>());
-            Claim.eq(64, bitwidth<double>());
+            Claim.eq(8, width<byte>());
+            Claim.eq(8, width<sbyte>());
+            Claim.eq(16, width<short>());
+            Claim.eq(16, width<ushort>());
+            Claim.eq(32, width<int>());
+            Claim.eq(32, width<uint>());
+            Claim.eq(64, width<long>());
+            Claim.eq(64, width<ulong>());
+            Claim.eq(32, width<float>());
+            Claim.eq(64, width<double>());
         }
 
         public void testbit_outline()

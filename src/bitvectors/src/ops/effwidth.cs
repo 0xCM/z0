@@ -48,6 +48,6 @@ namespace Z0
         [MethodImpl(Inline), EffWidth, Closures(Closure)]
         public static int effwidth<T>(BitVector<T> x)
             where T : unmanaged
-                => (int)bitwidth<T>() - nlz(x);
+                => (int)width<T>() - nlz(x);
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
         public static Span<bit> unpack<T>(T src)
             where T : unmanaged
         {
-            var count = bitwidth<T>();
+            var count = width<T>(w8);
             var dst = span<bit>(count);
             for(byte i=0; i<count; i++)
                 seek(dst,i) = gbits.testbit(src,i);
@@ -28,8 +28,8 @@ namespace Z0
             where T : unmanaged
         {
             var kCell = src.Length;
-            var wCell = bitsize<T>();
-            var bitcount = bitsize<T>()*kCell;
+            var wCell = width<T>(w8);
+            var bitcount = width<T>()*kCell;
             ref var target = ref first(dst);
             var k = 0;
             for(var i=0; i<kCell; i++)
@@ -53,7 +53,7 @@ namespace Z0
                 return memory.recover<bit,T>(unpack(src, memory.recover<T,bit>(dst)));
             else
             {
-                var wCell = bitwidth<S>();
+                var wCell = width<S>(w32);
                 var cells = (uint)src.Length;
                 var wSource = wCell*(uint)cells;
                 var k = 0u;
@@ -78,7 +78,7 @@ namespace Z0
         [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => unpack(src, alloc<bit>(bitsize<T>()*src.Length));
+                => unpack(src, alloc<bit>(width<T>()*src.Length));
 
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index
@@ -92,7 +92,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var count = root.min(bitsize<S>(), dst.Length);
+            var count = root.min(width<S>(), dst.Length);
             for(var i=0u; i<count; i++)
                 seek(dst, i) = gbits.testbit(src, (byte)i) == bit.On ? Numeric.one<T>() : zero<T>();
             return dst;

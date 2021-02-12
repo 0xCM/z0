@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct SpanBlocks
     {
@@ -27,6 +28,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint bitcount<T>(uint cellcount)
-            => bitcount(cellcount, z.bitwidth<T>()*8);
+            => bitcount(cellcount, width<T>()*8);
     }
 }

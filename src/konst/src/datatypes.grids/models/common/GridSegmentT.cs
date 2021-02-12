@@ -34,7 +34,7 @@ namespace Z0
         {
             Dim = dim;
             SegWidth = segwidth;
-            CellWidth = (uint)bitwidth<T>();
+            CellWidth = width<T>();
         }
 
         /// <summary>

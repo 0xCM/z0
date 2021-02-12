@@ -69,7 +69,7 @@ namespace Z0
             => src;
 
         public static uint CellWidth
-            => bitwidth<T>();
+            => width<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator Cells<T>(T[] src)

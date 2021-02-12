@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte pack(Span<Bit32> src, N8 count)
         {
-            var v0 = cpu.vload(w256, first(convert(src, 0, bitwidth<byte>(w8))));
+            var v0 = cpu.vload(w256, first(convert(src, 0, width<byte>(w8))));
             return (byte)gcpu.vpacklsb(cpu.vpack128x8u(v0, w128));
         }
 
@@ -72,7 +72,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort pack(Span<Bit32> src, N16 count)
         {
-            ref readonly var unpacked = ref first(convert(src, 0, bitwidth<ushort>(w8)));
+            ref readonly var unpacked = ref first(convert(src, 0, width<ushort>(w8)));
             var buffer = z16;
             return BitPack.pack16x32x1(unpacked, ref buffer);
         }
@@ -85,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint pack(Span<Bit32> src, N32 count)
         {
-            ref readonly var unpacked = ref first(convert(src, 0, bitwidth<uint>(w8)));
+            ref readonly var unpacked = ref first(convert(src, 0, width<uint>(w8)));
             var buffer = z32;
             return Bits.pack32x32x1(unpacked, ref buffer);
         }
@@ -98,7 +98,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ulong pack(Span<Bit32> src, N64 count)
         {
-            ref readonly var unpacked = ref first(convert(src, 0, bitwidth<ulong>(w8)));
+            ref readonly var unpacked = ref first(convert(src, 0, width<ulong>(w8)));
             var buffer = z64;
             return Bits.pack64x32x1(unpacked, ref buffer);
         }

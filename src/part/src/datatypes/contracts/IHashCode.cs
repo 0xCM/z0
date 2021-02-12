@@ -21,8 +21,8 @@ namespace Z0
 
         ReadOnlySpan<byte> IHashCode.Data
             => memory.bytes(Value);
-         BitSize Width
-            => memory.bitsize<T>();
+         BitWidth Width
+            => memory.width<T>();
      }
 
     [Free]

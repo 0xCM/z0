@@ -51,16 +51,7 @@ namespace Z0
         public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => bitwidth<T>();
-        }
-
-        /// <summary>
-        /// The bit width of a storage block
-        /// </summary>
-        public uint BlockWidth
-        {
-            [MethodImpl(Inline)]
-            get => bitwidth<T>();
+            get => width<T>();
         }
 
         /// <summary>

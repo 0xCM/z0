@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XSpan
+    partial class XSeq
     {
         /// <summary>
         /// Creates a new span by interposing a specified element between each element of an existing span

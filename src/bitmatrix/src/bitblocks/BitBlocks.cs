@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public static partial class XBitBlocks
@@ -30,12 +30,12 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static ref readonly X readcell<X>(in X src, uint bitpos)
             where X : unmanaged
-                => ref skip(in src, bitpos / bitwidth<X>());
+                => ref skip(in src, bitpos / width<X>());
 
         [MethodImpl(Inline)]
         internal static bit readbit<X>(in X src, uint bitpos)
             where X : unmanaged
-                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<X>()));
+                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % width<X>()));
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -46,6 +46,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         internal static ref X cell<X>(ref X src, uint bitpos)
             where X : unmanaged
-                => ref seek(src, bitpos / bitwidth<X>());
+                => ref seek(src, bitpos / width<X>());
    }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitBlocks
     {
@@ -36,6 +36,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static void setbit<X>(uint bitpos, bit state, ref X dst)
             where X : unmanaged
-                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<X>()), state);
+                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % width<X>()), state);
     }
 }

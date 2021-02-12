@@ -21,7 +21,7 @@ namespace Z0
         public static bit[] unpack<T>(T src)
             where T : struct
         {
-            var buffer = sys.alloc<bit>(bitsize<T>());
+            var buffer = sys.alloc<bit>(width<T>());
             unpack(src, buffer);
             return buffer;
         }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a set of S-symbol values, each of bit-width N and covered by a T-storage cell
@@ -39,7 +39,7 @@ namespace Z0
         public ushort SegWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)bitwidth<T>();
+            get => (ushort)width<T>();
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         public ushort SegCapacity
         {
             [MethodImpl(Inline)]
-            get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
+            get => (ushort)((ushort)width<T>()/(ushort)Widths.data<W>());
         }
 
         public ClrToken SegDomain

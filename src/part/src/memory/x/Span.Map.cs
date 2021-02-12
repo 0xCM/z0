@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XMem
     {
         /// <summary>
         /// Projects a source span to target span via a supplied transformation

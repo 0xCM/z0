@@ -84,7 +84,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * z.bitwidth<T>();
+            get => (ulong)CellCount * z.width<T>();
         }
 
         public int ByteCount
@@ -175,7 +175,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock8<S> As<S>()
             where S : unmanaged
-                => new SpanBlock8<S>(z.recover<T,S>(Data));
+                => new SpanBlock8<S>(recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()

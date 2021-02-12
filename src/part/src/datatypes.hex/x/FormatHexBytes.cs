@@ -6,24 +6,32 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    using static memory;
+
+    partial class XHex
     {
+        [Op]
         public static string FormatHexBytes(this ushort src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHexBytes(this short src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHexBytes(this int src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHexBytes(this uint src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHexBytes(this long src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
 
+        [Op]
         public static string FormatHexBytes(this ulong src)
-            => HexFormat.format(memory.bytes2(src), HexFormatSpecs.HexData);
+            => HexFormat.format(bytes(src), HexFormatSpecs.HexData);
     }
 }

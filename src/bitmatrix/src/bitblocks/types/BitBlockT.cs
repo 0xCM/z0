@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// A data structure that covers and arbitrary number of 256-bit blocks of packed bits
@@ -30,7 +30,7 @@ namespace Z0
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
         public static uint CellWidth
-            => bitwidth<T>();
+            => width<T>();
 
         [MethodImpl(Inline)]
         internal BitBlock(T src, uint bitcount)
@@ -133,11 +133,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(Span<T> src)
-            => new BitBlock<T>(src, bitwidth<T>());
+            => new BitBlock<T>(src, width<T>());
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(T src)
-            => new BitBlock<T>(src, bitwidth<T>());
+            => new BitBlock<T>(src, width<T>());
 
         [MethodImpl(Inline)]
         public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)

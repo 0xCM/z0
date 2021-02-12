@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static cpu;
     using static SFx;
-    using static z;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -22,6 +22,7 @@ namespace Z0
             => Context = context;
     }
 
+    [Free]
     public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>
         where T : unmanaged
     {
@@ -33,13 +34,13 @@ namespace Z0
         [MethodImpl(Inline)]
         int CellCount<W>(W w = default)
             where W : struct, ITypeWidth
-                => ((int)default(W).TypeWidth)/BitSize.measure<T>();
+                => ((int)default(W).TypeWidth)/BitWidth.measure<T>();
 
         void ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>.CheckSVF(IBinaryOp128D<T> f)
         {
             var t = default(T);
             var w = w128;
-            var cells = cpu.vcount(w,t);
+            var cells = vcount(w,t);
             var succeeded = true;
             var casename = ApiTestIdentity.name(f);
             var clock = Time.counter(true);
@@ -52,7 +53,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     var z = f.Invoke(x,y);
                     for(byte j=0; j< cells; j++)
-                        eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
+                        eq(f.Invoke(vcell(x,j), vcell(y,j)), vcell(z,j));
                 }
             }
             catch(Exception e)
@@ -264,7 +265,7 @@ namespace Z0
             where F : IShiftOp128D<T>
         {
             var t = default(T);
-            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitWidth.measure<T>() - 1));
 
             void run()
             {
@@ -286,7 +287,7 @@ namespace Z0
             where F : IShiftOp256D<T>
         {
             var t = default(T);
-            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitSize.measure<T>() - 1));
+            ClosedInterval<byte> bounds = ((byte)0, (byte)(BitWidth.measure<T>() - 1));
 
             void run()
             {

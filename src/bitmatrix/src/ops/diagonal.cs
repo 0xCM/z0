@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class BitMatrix
     {
@@ -21,7 +21,7 @@ namespace Z0
         public static BitVector<T> diagonal<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
-            var n = bitwidth<T>();
+            var n = width<T>();
             var dst = default(T);
             for(byte i=0; i< n; i++)
                 dst = gbits.setbit(dst, i,A[i,i]);

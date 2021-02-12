@@ -56,7 +56,7 @@ namespace Z0
         public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => (int)bitwidth<T>();
+            get => (int)width<T>();
         }
 
         /// <summary>

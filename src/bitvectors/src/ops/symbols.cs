@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
-
     partial class BitVector
     {
         /// <summary>
@@ -27,7 +25,7 @@ namespace Z0
             where T : unmanaged
         {
             var index = Enums.dictionary<E,T>();
-            var bitcount = maxbits ?? BitSize.measure<T>();
+            var bitcount = maxbits ?? BitWidth.measure<T>();
             var count = GridCalcs.mincells((ulong)segwidth, (ulong)bitcount);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)

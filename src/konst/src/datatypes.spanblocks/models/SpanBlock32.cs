@@ -81,7 +81,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * z.bitwidth<T>();
+            get => (ulong)CellCount * z.width<T>();
         }
 
         /// <summary>

@@ -50,7 +50,7 @@ namespace Z0
         void vbitblend_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var count = w/z.bitwidth<T>();
+            var count = w/z.width<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
 
@@ -85,7 +85,7 @@ namespace Z0
         void vbitblend_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = w/z.bitwidth<T>();
+            var count = w/z.width<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector(w,t);

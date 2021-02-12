@@ -55,7 +55,7 @@ namespace Z0
             nbb_disable_check(n707, (ulong)0);
         }
 
-        void gbb_disable_check<T>(BitSize n)
+        void gbb_disable_check<T>(BitWidth n)
             where T : unmanaged
         {
             for(var k=0; k<RepCount; k++)

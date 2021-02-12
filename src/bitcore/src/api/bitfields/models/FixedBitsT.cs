@@ -33,7 +33,7 @@ namespace Z0
         {
             Data = src;
             BitCount = bitcount;
-            CellWidth = (byte)bitwidth<T>();
+            CellWidth = width<T>(w8);
             BlockCount = (uint)src.BlockCount;
             CellCount = (uint)src.CellCount;
         }

@@ -24,7 +24,6 @@ namespace Z0
         public static uint size(string src)
             => (uint)src.Length*scale<char>();
 
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte size<T>(W8 w)
             => (byte)SizeOf<T>();

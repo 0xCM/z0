@@ -57,8 +57,8 @@ namespace Z0
             where T : unmanaged
         {
             var last = Bit32.Off;
-            int M = (int)z.bitwidth<T>();
-            int N = (int)z.bitwidth<T>();
+            int M = (int)z.width<T>();
+            int N = (int)z.width<T>();
             for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitMatrix<T>();

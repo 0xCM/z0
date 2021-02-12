@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vblock_add : UnitTest<t_vblock_add>
     {
@@ -102,7 +102,7 @@ namespace Z0
         {
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
-            var opname = $"vblock_add_{n}x{bitwidth<T>()}";
+            var opname = $"vblock_add_{n}x{width<T>()}";
             var dst = RowVectors.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {

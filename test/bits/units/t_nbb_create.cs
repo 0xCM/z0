@@ -32,7 +32,7 @@ namespace Z0
             Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
 
             var totalcap = BitBlock<N,T>.RequiredWidth;
-            var segcap = bitwidth<T>();
+            var segcap = width<T>();
             Claim.eq(BitBlock<N,T>.CellWidth, (BitVector32)segcap);
 
             var src = Random.Span<T>(RepCount);

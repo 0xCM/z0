@@ -30,7 +30,7 @@ namespace Z0
             get => Data.Length;
         }
 
-        public BitSize Width
+        public BitWidth Width
         {
             [MethodImpl(Inline)]
             get => Data.Length*8;

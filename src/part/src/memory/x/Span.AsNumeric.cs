@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XMem
     {
         /// <summary>
         /// Presents a span of generic values as a span of signed 8-bit integers

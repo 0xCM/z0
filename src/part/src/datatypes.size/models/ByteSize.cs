@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = Sizes;
+
     /// <summary>
     /// Specifies data size in bytes
     /// </summary>
@@ -36,10 +38,16 @@ namespace Z0
         public ByteSize(ulong count)
             => Content = count;
 
-        public BitSize Bits
+        public BitWidth Bits
         {
             [MethodImpl(Inline)]
             get => Content*8;
+        }
+
+        public Kb Kb
+        {
+            [MethodImpl(Inline)]
+            get => api.kb(this);
         }
 
 

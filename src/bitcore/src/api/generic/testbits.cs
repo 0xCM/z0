@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -22,7 +22,7 @@ namespace Z0
         public static Span<bit> testbits<T>(T src, Span<bit> dst, int offset = 0)
             where T : unmanaged
         {
-            var n = bitwidth<T>();
+            var n = width<T>();
             ref var loc = ref seek(first(dst), offset);
             for(var i=0; i<n; i++)
                 seek(loc, i) = (byte)testbit(src, (byte)i);
@@ -37,7 +37,7 @@ namespace Z0
         public static Span<bit> testbits<T>(T src)
             where T : unmanaged
         {
-            var dst = sys.alloc<bit>(bitwidth<T>());
+            var dst = sys.alloc<bit>(width<T>());
             testbits(src,dst);
             return dst;
         }

@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using static BitMasks.Literals;
+    using static Part;
+    using static memory;
 
-    using static z;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     public class t_vblendp : t_permute<t_vblendp>
     {
@@ -52,7 +53,7 @@ namespace Z0
             var count = cpu.vcount(w, enabled);
             var buffer = gcpu.vzero<T>(w);
             ref var dst = ref gcpu.vref(ref buffer);
-            var length = min(count, bitsize<S>());
+            var length = root.min(count, width<S>());
             for(var i=0u; i<length; i++)
                 seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
@@ -73,7 +74,7 @@ namespace Z0
             var count = cpu.vcount(w, enabled);
             var buffer = gcpu.vzero<T>(w);
             ref var dst = ref gcpu.vref(ref buffer);
-            var length = min(count, bitsize<S>());
+            var length = root.min(count, width<S>());
             for(var i=0u; i<length; i++)
                 seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
@@ -88,7 +89,7 @@ namespace Z0
             var description = text.build();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
-            var header = $"{indent}512x{bitwidth(default(T))}, {maskspec}, {bits}";
+            var header = $"{indent}512x{width<T>()}, {maskspec}, {bits}";
             var sfk = SequenceFormatKind.List;
             var sep = Chars.Comma;
             var pad = 2;

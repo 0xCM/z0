@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static GridSpec grid<T>(ushort rows, ushort cols)
             where T : unmanaged
-                => grid(rows, cols, (ushort)bitwidth<T>());
+                => grid(rows, cols, width<T>(w16));
 
         [MethodImpl(Inline)]
         public static GridSpec grid<M,N,T>(M m = default, N n = default, T zero = default)

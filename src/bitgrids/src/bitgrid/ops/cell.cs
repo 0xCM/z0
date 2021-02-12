@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitGrid
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref T src, int bitpos)
             where T : unmanaged
-                => ref seek(src, bitpos / (int)bitwidth<T>());
+                => ref seek(src, bitpos / (int)width<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(in BitGrid<T> src, int bitpos)
             where T : unmanaged
-                => ref seek(src.Head, bitpos / bitwidth<T>());
+                => ref seek(src.Head, bitpos / width<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -47,7 +47,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ref seek(src.Head, bitpos / bitwidth<T>());
+                => ref seek(src.Head, bitpos / width<T>());
 
         [MethodImpl(Inline)]
         public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, uint row)

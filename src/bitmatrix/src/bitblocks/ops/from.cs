@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitBlock<T> init<T>(BitVector<T> src)
             where T : unmanaged
-                => new BitBlock<T>((T)src, bitsize<T>());
+                => new BitBlock<T>((T)src, width<T>());
 
         /// <summary>
         /// Loads a bitblock from a bitstring

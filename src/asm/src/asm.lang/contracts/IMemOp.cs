@@ -29,7 +29,7 @@ namespace Z0.Asm
     {
         new W Width => default(W);
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => Width.BitWidth;
     }
 }

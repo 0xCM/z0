@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitMatrix
     {
@@ -21,8 +21,8 @@ namespace Z0
         public static BitMatrix<T> from<T>(in RowBits<T> src)
             where T : unmanaged
         {
-            if(src.RowCount != bitwidth<T>())
-                AppErrors.Throw($"{bitwidth<T>()} != {src.RowCount}");
+            if(src.RowCount != width<T>())
+                AppErrors.Throw($"{width<T>()} != {src.RowCount}");
 
             return load(src.data);
         }

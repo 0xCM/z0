@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
             where T : unmanaged
-                => slice(bitseq(src), 0, root.min(bitsize<T>(), count));
+                => slice(bitseq(src), 0, root.min(width<T>(), count));
 
         /// <summary>
         /// Constructs a span of bytes where each byte, ordered from lo to hi,
@@ -64,7 +64,7 @@ namespace Z0
         public static ReadOnlySpan<byte> bitseq<T>(T src)
             where T : unmanaged
         {
-            var dst = sys.alloc(bitsize<T>());
+            var dst = sys.alloc(width<T>());
             bitseq(src, dst);
             return dst;
         }

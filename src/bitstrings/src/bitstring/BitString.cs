@@ -15,24 +15,24 @@ namespace Z0
     /// </summary>
     public partial struct BitString : IEquatable<BitString>
     {
-        byte[] data;
+        byte[] Data;
 
         [MethodImpl(Inline)]
         internal BitString(byte[] src)
-            => data = src;
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal BitString(ReadOnlySpan<byte> src)
         {
-            data = src.ToArray();
+            Data = src.ToArray();
         }
 
         [MethodImpl(Inline)]
         internal BitString(ReadOnlySpan<bit> src)
         {
-            data = new byte[src.Length];
+            Data = new byte[src.Length];
             for(var i=0; i<src.Length; i++)
-                data[i] = (byte)src[i];
+                Data[i] = (byte)src[i];
         }
 
         /// <summary>
@@ -41,10 +41,10 @@ namespace Z0
         public bit this[int index]
         {
             [MethodImpl(Inline)]
-            get => data[index] == 1;
+            get => Data[index] == 1;
 
             [MethodImpl(Inline)]
-            set => data[index] = (byte)value;
+            set => Data[index] = (byte)value;
         }
 
         /// <summary>
@@ -68,19 +68,19 @@ namespace Z0
         public readonly int Length
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Data.Length;
         }
 
         public uint Width
         {
             [MethodImpl(Inline)]
-            get => (uint)data.Length;
+            get => (uint)Data.Length;
         }
 
         public readonly bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (data?.Length ?? 0) == 0;
+            get => (Data?.Length ?? 0) == 0;
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         public Span<byte> BitSeq
         {
             [MethodImpl(Inline)]
-            get => data ?? Span<byte>.Empty;
+            get => Data ?? Span<byte>.Empty;
         }
 
         /// <summary>
@@ -179,22 +179,22 @@ namespace Z0
         /// <param name="minlen">The the minimum length of the produced span</param>
         [MethodImpl(Inline)]
         public readonly Span<byte> Pack()
-            => PackedBits(data, 0, null);
+            => PackedBits(Data, 0, null);
 
         [MethodImpl(Inline)]
         public readonly Span<byte> Pack(int offset, int minlen)
-            => PackedBits(data, offset, minlen);
+            => PackedBits(Data, offset, minlen);
 
         /// <summary>
         /// Counts the number of leading zero bits
         /// </summary>
         public int Nlz()
         {
-            var lastix = data.Length - 1;
+            var lastix = Data.Length - 1;
             var result = 0;
             for(var i=lastix; i>= 0; i--)
             {
-                if(data[i] != 0)
+                if(Data[i] != 0)
                     break;
                 else
                     result++;
@@ -208,9 +208,9 @@ namespace Z0
         /// <param name="offset">The number of bits to shift</param>
         public BitString Sll(int offset)
         {
-            Array.Copy(data, 0, data, offset, offset);
+            Array.Copy(Data, 0, Data, offset, offset);
             for(var i=0; i<offset; i++)
-                data[i] = 0;
+                Data[i] = 0;
             return this;
         }
 
@@ -220,8 +220,8 @@ namespace Z0
         public int PopCount()
         {
             var count = 0;
-            for(var i=0; i<data.Length; i++)
-                if(data[i] != 0)
+            for(var i=0; i<Data.Length; i++)
+                if(Data[i] != 0)
                     count++;
             return count;
         }
@@ -232,7 +232,7 @@ namespace Z0
         public BitString Replicate()
         {
             var dst = new byte[Length];
-            data.CopyTo(dst);
+            Data.CopyTo(dst);
             return new BitString(dst);
         }
 
@@ -246,7 +246,7 @@ namespace Z0
             Span<byte> dst = storage;
 
             for(var i=0; i<n; i++)
-                data.CopyTo(dst.Slice(i*Length));
+                Data.CopyTo(dst.Slice(i*Length));
             return new BitString(storage);
         }
 
@@ -296,8 +296,8 @@ namespace Z0
         public BitString Truncate(int maxlen)
         {
             if(Length <= maxlen)
-                return new BitString(data);
-            var dst = data.AsSpan().Slice(0, maxlen).ToArray();
+                return new BitString(Data);
+            var dst = Data.AsSpan().Slice(0, maxlen).ToArray();
             return new BitString(dst);
         }
 
@@ -308,9 +308,9 @@ namespace Z0
         public BitString Pad(uint minlen)
         {
             if(Length >= minlen)
-                return new BitString(data);
+                return new BitString(Data);
 
-            Span<byte> src = data;
+            Span<byte> src = Data;
             var dst = new byte[minlen];
             src.CopyTo(dst);
             return new BitString(dst);
@@ -321,23 +321,23 @@ namespace Z0
         /// </summary>
         public Span<bit> ToBits()
         {
-            Span<bit> dst = new bit[data.Length];
-            for(var i=0; i< data.Length; i++)
-                dst[i] = (bit)data[i];
+            Span<bit> dst = new bit[Data.Length];
+            for(var i=0; i< Data.Length; i++)
+                dst[i] = (bit)Data[i];
             return dst;
         }
 
         [MethodImpl(Inline)]
         public BitString Slice(int offset)
         {
-            Span<byte> bits = data;
+            Span<byte> bits = Data;
             return new BitString(bits.Slice(offset));
         }
 
         [MethodImpl(Inline)]
         public BitString Slice(int offset, int length)
         {
-            Span<byte> bits = data;
+            Span<byte> bits = Data;
             return new BitString(bits.Slice(offset,length));
         }
 
@@ -348,8 +348,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = NatSpan.alloc<N,bit>();
-            for(var i=0; i< data.Length; i++)
-                dst[i] = (bit)data[i];
+            for(var i=0; i< Data.Length; i++)
+                dst[i] = (bit)Data[i];
             return dst;
         }
 
@@ -357,7 +357,7 @@ namespace Z0
         /// Packs the bitsequence into a bytespan
         /// </summary>
         public Span<byte> ToPackedBytes()
-            => PackedBits(data);
+            => PackedBits(Data);
 
         /// <summary>
         /// Determines whether this bitstring represents the same value as another, ignoring
@@ -376,9 +376,9 @@ namespace Z0
             }
 
             for(var i=0; i< x.Length; i++)
-                if(x.data[i] != y.data[i])
+                if(x.Data[i] != y.Data[i])
                 {
-                    trace?.Invoke($"x[{i}] = {x.data[i]} != {y.data[i]} = y[{i}]");
+                    trace?.Invoke($"x[{i}] = {x.Data[i]} != {y.Data[i]} = y[{i}]");
                     return false;
                 }
             return true;
@@ -400,7 +400,7 @@ namespace Z0
             }
 
             for(var i=0; i< x.Length; i++)
-                if(x.data[i] != y.data[i])
+                if(x.Data[i] != y.Data[i])
                     return false;
 
             return true;
@@ -413,9 +413,9 @@ namespace Z0
         /// <param name="width">The maximum block width</param>
         public BitString[] Partition(int width)
         {
-            var minCount = Math.DivRem(data.Length, width, out int remainder);
+            var minCount = Math.DivRem(Data.Length, width, out int remainder);
             var count = remainder != 0 ? minCount + 1 : minCount;
-            Span<byte> src = data;
+            Span<byte> src = Data;
             var dst = new BitString[count];
             var lastix = dst.Length - 1;
             for(int i=0, offset = 0; i< dst.Length; i++, offset += width)
@@ -434,13 +434,13 @@ namespace Z0
 
         readonly string FormatUnblocked(bool tlz, bool specifier)
         {
-            if(data == null || data.Length == 0)
+            if(Data == null || Data.Length == 0)
                 return string.Empty;
 
-            Span<char> dst = stackalloc char[data.Length];
+            Span<char> dst = stackalloc char[Data.Length];
             var lastix = dst.Length - 1;
             for(var i=0; i< dst.Length; i++)
-                dst[lastix - i] = data[i] == 0 ? '0' : '1';
+                dst[lastix - i] = Data[i] == 0 ? '0' : '1';
 
             var result = new string(dst);
             if(tlz)
@@ -547,7 +547,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => data.GetHashCode();
+            => Data.GetHashCode();
 
         public override bool Equals(object rhs)
             => rhs is BitString x && Equals(x);
@@ -560,7 +560,7 @@ namespace Z0
         public T Scalar<T>(int offset = 0, int? count = null)
             where T : unmanaged
         {
-            var len = root.min((count == null ? (int)bitsize<T>() : count.Value), Length - offset);
+            var len = root.min((count == null ? (int)width<T>() : count.Value), Length - offset);
             var bits = BitSeq.Slice(offset, len);
             return bits.Take<T>();
         }
@@ -570,7 +570,7 @@ namespace Z0
             where T : unmanaged
         {
             var src = View;
-            var packed = PackedBits(src, offset, bitsize<T>());
+            var packed = PackedBits(src, offset, width<T>());
             return packed.Length != 0
                 ? packed.Singleton<byte,T>()
                 : default;
@@ -579,7 +579,7 @@ namespace Z0
         ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
         }
 
         /// <summary>

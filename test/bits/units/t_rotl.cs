@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_rotl : t_bitcore<t_rotl>
     {
@@ -31,7 +31,7 @@ namespace Z0
         void rotl_check<T>(T t = default)
             where T : unmanaged
         {
-            var offset = Random.Next(1, bitwidth<T>());
+            var offset = Random.Next(1, width<T>(w32));
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

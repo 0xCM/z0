@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XSpan
+    partial class XSeq
     {
         /// <summary>
         /// Formats a span as a table

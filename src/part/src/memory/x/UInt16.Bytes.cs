@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XMem
     {
         [MethodImpl(Inline), Op]
         public static unsafe Span<byte> Bytes(this ushort src)

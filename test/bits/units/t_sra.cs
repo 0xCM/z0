@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_sra : t_bitcore<t_sra>
     {
@@ -91,7 +91,7 @@ namespace Z0
         {
 
             var signed = NumericKinds.signed<T>();
-            BitSize bitsize = bitwidth<T>();
+            BitWidth bitsize = bitwidth<T>();
             var bs10 = BitString.parse("1" + Arrays.replicate('0', bitsize - 1).Concat());
             var x10 = bs10.TakeScalar<T>();
             var bs11 = BitString.parse("11" + Arrays.replicate('0', bitsize - 2).Concat());

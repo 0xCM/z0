@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
-    using static BitMasks;
 
     partial struct BitPack
     {
@@ -21,10 +19,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ref readonly SpanBlock64<byte> unpack1x8x8(byte src, in SpanBlock64<byte> dst, int block)
-        {
-            unpack(src, dst.Block(block));
-            return ref dst;
-        }
+        public static void unpack1x8x8(byte src, in SpanBlock64<byte> dst, int block)
+            => unpack(src, dst.Block(block));
     }
 }

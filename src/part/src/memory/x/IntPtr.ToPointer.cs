@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XMem
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* ToPointer<T>(this IntPtr src)
             where T : unmanaged
                 => (T*)src.ToPointer();
@@ -20,7 +20,7 @@ namespace Z0
         /// Gets the void* for the identified field
         /// </summary>
         /// <param name="src">The runtime field handle</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void* ToPointer<T>(this RuntimeFieldHandle src)
             where T : unmanaged
                 => src.Value.ToPointer<T>();
@@ -30,7 +30,7 @@ namespace Z0
         /// present said source as a void*
         /// </summary>
         /// <param name="src">The source pointer representative</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static unsafe void* ToVoid(this IntPtr src)
             => (void*)src;
     }

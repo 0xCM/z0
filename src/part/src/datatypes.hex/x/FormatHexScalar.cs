@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static HexFormatSpecs;
 
-    partial class XTend
+    partial class XHex
     {
         /// <summary>
         /// Renders a number as a hexadecimal string
@@ -146,63 +146,63 @@ namespace Z0
         public static string FormatHex(this byte src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this sbyte src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this short src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this ushort src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this int src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this uint src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this ulong src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHex(this long src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this byte src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this sbyte src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this short src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this ushort src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this int src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this uint src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this ulong src)
             => src.FormatHex(HexFormatSpecs.HexData);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatHexData(this long src)
             => src.FormatHex(HexFormatSpecs.HexData);
     }

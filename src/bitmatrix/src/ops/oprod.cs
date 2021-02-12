@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitMatrix
     {
@@ -32,7 +32,7 @@ namespace Z0
         public static ref BitMatrix<T> oprod<T>(BitVector<T> x, BitVector<T> y, ref BitMatrix<T> dst)
             where T : unmanaged
         {
-            int order = (int)bitwidth<T>();
+            int order = (int)width<T>();
             var rhs = (T)y;
             ref var href = ref dst.Head;
             for(byte i=0; i<order; i++)

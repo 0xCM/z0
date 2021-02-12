@@ -56,7 +56,7 @@ namespace Z0
             get => ref Data[index];
         }
 
-        public BitSize Width
+        public BitWidth Width
         {
             [MethodImpl(Inline)]
             get => api.width(Partitions);

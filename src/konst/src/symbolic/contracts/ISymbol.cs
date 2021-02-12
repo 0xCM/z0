@@ -39,7 +39,7 @@ namespace Z0
         /// The <typeparamref name='T' /> cell bit-width
         /// </summary>
         ushort SegWidth
-            => (ushort)bitwidth<T>();
+            => (ushort)width<T>();
 
     }
 

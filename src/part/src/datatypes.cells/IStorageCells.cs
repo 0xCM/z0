@@ -14,8 +14,8 @@ namespace Z0
         Count CellCount
             => Cells.Count;
 
-        BitSize CellWidth
-            => bitsize<T>();
+        BitWidth CellWidth
+            => width<T>();
 
         ByteSize CellSize
             => size<T>();
@@ -23,7 +23,7 @@ namespace Z0
         Index<T> IDataType<Index<T>>.Content
             => Cells;
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => (ulong)CellCount*CellWidth;
     }
 }

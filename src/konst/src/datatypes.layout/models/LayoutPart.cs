@@ -52,7 +52,7 @@ namespace Z0
             get => Range.Max;
         }
 
-        public BitSize Width
+        public BitWidth Width
         {
             [MethodImpl(Inline)]
             get => Range.Width;

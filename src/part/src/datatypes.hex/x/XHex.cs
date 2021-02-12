@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static memory;
 
-    partial class XTend
+    [ApiHost]
+    public static partial class XHex
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this ulong src)
-            => memory.bytes(src);
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 }

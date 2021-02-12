@@ -28,7 +28,7 @@ namespace Z0
         public DataWidth Grain
         {
             [MethodImpl(Inline)]
-            get => memory.bitsize<T>();
+            get => memory.width<T>();
         }
 
         public bool IsEmpty

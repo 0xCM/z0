@@ -41,7 +41,7 @@ namespace Z0
             if(NumericKinds.unsigned<T>())
             {
                 var src = Numeric.maxval(t);
-                for(var i=0; i< bitwidth<T>(); i++)
+                for(var i=0; i< width<T>(); i++)
                     Claim.Require(gbits.testbit(src,(byte)i));
             }
         }

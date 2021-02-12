@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public readonly ref struct Segments<C,T>
         where C : struct, IDataCell
         where T : unmanaged
      {
         public static uint SegWidth
-            => bitwidth<C>();
+            => width<C>();
 
         public static uint CellWidth
-            => bitwidth<T>();
+            => width<T>();
 
         readonly Span<C> Data;
 

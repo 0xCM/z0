@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    using static memory;
+    using static Part;
     [Free]
     public interface IRegOp : IAsmOp
     {
@@ -17,11 +19,11 @@ namespace Z0.Asm
         where T : unmanaged
     {
         AsmOpKind IAsmOp.OpKind
-            => AsmOpKind.R | (AsmOpKind)memory.size<T>();
-        BitSize ISized.Width
-            => memory.size<T>();
-    }
+            => AsmOpKind.R | (AsmOpKind)width<T>(w16);
 
+        BitWidth ISized.Width
+            => width<T>();
+    }
 
     [Free]
     public interface IRegOp<F,W,T> : IRegOp<T>
@@ -31,7 +33,7 @@ namespace Z0.Asm
     {
         new W Width => default(W);
 
-        BitSize ISized.Width
+        BitWidth ISized.Width
             => Width.BitWidth;
     }
 }

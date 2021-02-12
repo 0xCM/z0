@@ -33,10 +33,10 @@ namespace Z0
         T Content {get;}
 
         Span<byte> IBitVector.Bytes
-            => memory.bytes2(Content);
+            => bytes(Content);
 
         TypeWidth Width
-            => (TypeWidth)bitwidth<T>();
+            => (TypeWidth)width<T>();
     }
 
     public interface IBitVector<V,T> : IBitVector<T>, IEquatable<V>

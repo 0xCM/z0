@@ -36,7 +36,7 @@ namespace Z0
             => bytes((T)this);
 
         uint IDataCell.Width
-            => bitsize<T>();
+            => width<T>();
 
         ByteSize IDataCell.Size
             => size<T>();

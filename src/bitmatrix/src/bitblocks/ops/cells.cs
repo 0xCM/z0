@@ -21,7 +21,7 @@ namespace Z0
         public static int cells<T>(int bitcount)
             where T : unmanaged
         {
-            var q = Math.DivRem(bitcount, (int)bitwidth<T>(), out int r);
+            var q = Math.DivRem(bitcount, width<T>(), out int r);
             return r == 0 ? q : q + 1;
         }
     }

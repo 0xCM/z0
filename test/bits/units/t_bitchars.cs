@@ -45,7 +45,7 @@ namespace Z0
         protected void bitchars_check<T>(T t = default)
             where T : unmanaged
         {
-            Span<char> s0 = stackalloc char[(int)bitwidth<T>()];
+            Span<char> s0 = stackalloc char[(int)width<T>()];
             ReadOnlySpan<char> s1 = default;
             for(var i=0; i<RepCount; i++)
             {

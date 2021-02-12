@@ -40,7 +40,7 @@ namespace Z0
             get => api.bytes(this);
         }
 
-        public BitSize Bits
+        public BitWidth Bits
         {
             [MethodImpl(Inline)]
             get => api.bits(this);
@@ -67,12 +67,12 @@ namespace Z0
             => api.bytes(src);
 
         [MethodImpl(Inline)]
-        public static explicit operator BitSize(Kb src)
+        public static explicit operator BitWidth(Kb src)
             => api.bits(src);
 
         [MethodImpl(Inline)]
         public static implicit operator Kb(DataWidth src)
-            => api.kb((BitSize)src);
+            => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]
         public static implicit operator DataWidth(Kb src)
@@ -80,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Kb(TypeWidth src)
-            => api.kb((BitSize)src);
+            => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]
         public static implicit operator TypeWidth(Kb src)
@@ -88,11 +88,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Kb(VectorWidth src)
-            => api.kb((BitSize)src);
+            => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]
         public static implicit operator Kb(NumericWidth src)
-            => api.kb((BitSize)src);
+            => api.kb((BitWidth)src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(Kb a, Kb b)

@@ -74,7 +74,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.BitVector<T>();
-            var pos = Random.Next(1,bitwidth<T>() - 2);
+            var pos = Random.Next(1,width<T>() - 2);
 
             var actual = gbits.rank(x.Content,(int)pos);
             var expect = 0u;

@@ -4,15 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
 
-    partial class XTend
+    [ApiHost]
+    public static partial class XMem
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> Bytes(this uint src)
-            => memory.bytes2(src);
+        const NumericKind Closure = Integers;
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a model of an enum literal that is parametric in both the declaring enum
@@ -37,7 +37,7 @@ namespace Z0
         public DataWidth Width
         {
             [MethodImpl(Inline)]
-            get => (DataWidth)bitwidth<T>();
+            get => (DataWidth)width<T>();
         }
 
         [MethodImpl(Inline)]

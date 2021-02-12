@@ -55,11 +55,11 @@ namespace Z0
             where T : unmanaged
         {
             var bitcount = (uint)(i1 - i0);
-            if(bitcount > bitwidth<T>())
+            if(bitcount > width<T>())
                 return Numeric.maxval<T>();
 
             var sameSeg = i0.CellIndex == i1.CellIndex;
-            var firstCount = ScalarCast.uint8(sameSeg ? bitcount : bitwidth<T>() - i0.BitOffset);
+            var firstCount = ScalarCast.uint8(sameSeg ? bitcount : width<T>() - i0.BitOffset);
             var part1 = gbits.extract(bitcell(src,i0), (byte)i0.BitOffset, firstCount);
 
             if(sameSeg)

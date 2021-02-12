@@ -20,11 +20,11 @@ namespace Z0
         public static ushort bw16<T>(T src)
             where T : unmanaged
         {
-            if(bitwidth<T>() == 8)
+            if(width<T>() == 8)
                 return uint8(src);
-            if(bitwidth<T>() == 16)
+            if(width<T>() == 16)
                 return uint16(src);
-            else if(bitwidth<T>() == 32)
+            else if(width<T>() == 32)
                 return (ushort)uint32(src);
             else
                 return (ushort)uint64(src);

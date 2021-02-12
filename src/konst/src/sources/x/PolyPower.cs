@@ -49,6 +49,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int Log2<T>(this IDomainSource src, T t = default)
             where T : unmanaged
-                => src.Next(0, BitSize.measure<T>());
+                => src.Next(0, (int)width<T>());
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct DataLayouts
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source sequence</param>
         [MethodImpl(Inline), Op]
-        public static BitSize width(ReadOnlySpan<DataLayout> src)
+        public static BitWidth width(ReadOnlySpan<DataLayout> src)
         {
             var total = 0ul;
             var count = src.Length;
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source sequence</param>
         [MethodImpl(Inline), Op]
-        public static BitSize width(ReadOnlySpan<LayoutPart> src)
+        public static BitWidth width(ReadOnlySpan<LayoutPart> src)
         {
             var total = 0ul;
             var count = src.Length;
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source sequence</param>
         /// <typeparam name="T">The partition kind</typeparam>
         [MethodImpl(Inline), Op]
-        public static BitSize width<T>(ReadOnlySpan<LayoutPart<T>> src)
+        public static BitWidth width<T>(ReadOnlySpan<LayoutPart<T>> src)
             where T : unmanaged
         {
             var total = 0ul;
@@ -61,7 +61,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static BitSize width<T,R>(ReadOnlySpan<LayoutPart<T,R>> src)
+        public static BitWidth width<T,R>(ReadOnlySpan<LayoutPart<T,R>> src)
             where T : unmanaged
             where R : unmanaged
         {
@@ -72,6 +72,5 @@ namespace Z0
                 total += skip(item,i).Width;
             return total;
         }
-
     }
 }

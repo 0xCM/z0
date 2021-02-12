@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial class XSpan
+    partial class XSeq
     {
         /// <summary>
         /// Constructs a hash set from span content

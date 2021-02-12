@@ -43,7 +43,7 @@ namespace Z0
         /// The physical width of the vector
         /// </summary>
         public static int MaxWidth
-            => BitSize.measure<T>();
+            => BitWidth.measure<T>();
 
         /// <summary>
         /// The maximum arithmetic value of the vector, constrained by the natural width

@@ -37,10 +37,10 @@ namespace Z0
         /// <summary>
         /// The total number of represented bits
         /// </summary>
-        public BitSize BitCount
+        public BitWidth BitCount
         {
             [MethodImpl(Inline)]
-            get => (BitSize)ByteCount;
+            get => (BitWidth)ByteCount;
         }
 
         /// <summary>

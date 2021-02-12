@@ -6,8 +6,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type
@@ -21,7 +21,7 @@ namespace Z0
         readonly internal Span<T> data;
 
         public static int Width
-            => (int)bitwidth<T>();
+            => (int)width<T>();
 
 
         [MethodImpl(Inline)]

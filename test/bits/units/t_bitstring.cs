@@ -289,7 +289,7 @@ namespace Z0
                     var x0 = src[i];
                     var x1 = BitString.storeseq(x0);
                     var seqlen = x1.Length;
-                    Claim.eq(seqlen, bitwidth<T>());
+                    Claim.eq(seqlen, width<T>());
 
                     for(byte j = 0; j < seqlen; j++)
                         Claim.eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));

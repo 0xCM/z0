@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), HiPos]
         public static byte hipos(byte src)
-            => (byte)(bitwidth<byte>() - 1 - nlz(src));
+            => (byte)(width<byte>(w8) - 1 - nlz(src));
 
         /// <summary>
         /// Computes the position of the highest enabled source bit, a number between 0 and 15
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), HiPos]
         public static byte hipos(ushort src)
-            => (byte)(bitwidth<ushort>() - 1 - nlz(src));
+            => (byte)(width<ushort>(w8) - 1 - nlz(src));
 
         /// <summary>
         /// Computes the position of the highest enabled source bit, a number between 0 and 31
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), HiPos]
         public static byte hipos(uint src)
-            => (byte)(bitwidth<uint>() - 1 - nlz(src));
+            => (byte)(width<uint>(w8) - 1 - nlz(src));
 
         /// <summary>
         /// Computes the position of the highest enabled source bit, a number between 0 and 63
@@ -42,6 +42,6 @@ namespace Z0
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), HiPos]
         public static byte hipos(ulong src)
-            => (byte)(bitwidth<ulong>() - 1 - nlz(src));
+            => (byte)(width<ulong>(w8) - 1 - nlz(src));
     }
 }

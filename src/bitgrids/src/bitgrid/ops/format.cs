@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitGrid
     {
@@ -25,11 +25,11 @@ namespace Z0
 
         public static string format<T>(BitGrid32<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
-                => src.Cells.FormatMatrixBits(cols ?? (int)bitwidth<T>(), maxbits, showrow);
+                => src.Cells.FormatMatrixBits(cols ?? (int)width<T>(), maxbits, showrow);
 
         public static string format<T>(BitGrid64<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
-                => src.Cells.FormatMatrixBits(cols ?? (int)bitwidth<T>(), maxbits, showrow);
+                => src.Cells.FormatMatrixBits(cols ?? (int)width<T>(), maxbits, showrow);
 
         public static string format<M,N,T>(BitGrid16<M,N,T> src, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat

@@ -81,7 +81,7 @@ namespace Z0
         /// <summary>
         /// Specifies the size, in bits of the fields data
         /// </summary>
-        public BitSize Width
+        public BitWidth Width
         {
             [MethodImpl(Inline)]
             get => Segment.Length;

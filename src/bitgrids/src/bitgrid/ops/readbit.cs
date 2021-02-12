@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class BitGrid
     {
         [MethodImpl(Inline)]
         public static bit readbit<T>(in T src, int bitpos)
             where T : unmanaged
-                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<T>()));
+                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % width<T>()));
 
         /// <summary>
         /// Reads a cell determined by a linear bit position
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly T readcell<T>(in T src, int bitpos)
             where T : unmanaged
-                => ref skip(in src, bitpos / bitwidth<T>());
+                => ref skip(in src, bitpos / width<T>());
 
         /// <summary>
         /// Reads a bit from a grid
