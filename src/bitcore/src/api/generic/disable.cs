@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -22,38 +22,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T disable<T>(T src, byte index, byte count)
             where T : unmanaged
-                => disable_u(src,index,count);
-
-        [MethodImpl(Inline)]
-        static T disable_u<T>(T src, byte index, byte count)
-            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                 return generic<T>(Bits.disable(uint8(src), index, count));
-            else if(typeof(T) == typeof(ushort))
+            else if (size<T>() == 2)
                 return generic<T>(Bits.disable(uint16(src), index, count));
-            else if(typeof(T) == typeof(uint))
+            else if (size<T>() == 4)
                 return generic<T>(Bits.disable(uint32(src), index, count));
-            else if(typeof(T) == typeof(ulong))
+            else
                 return generic<T>(Bits.disable(uint64(src), index, count));
-            else
-                return disable_i(src,index,count);
-        }
-
-        [MethodImpl(Inline)]
-        static T disable_i<T>(T src, byte index, byte count)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.disable(int8(src), index, count));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.disable(int16(src), index, count));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.disable(int32(src), index, count));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.disable(int64(src), index, count));
-            else
-                throw no<T>();
         }
 
         /// <summary>
@@ -66,58 +43,14 @@ namespace Z0
         public static T disable<T>(T src, int pos)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte)
-            || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(ulong))
-                return disable_u(src,pos);
-            else if(typeof(T) == typeof(sbyte)
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(long))
-                return disable_i(src,pos);
-            else
-                return disable_f(src,pos);
-        }
-
-        [MethodImpl(Inline)]
-        static T disable_i<T>(T src, int pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.disable(int8(src), pos));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.disable(int16(src), pos));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.disable(int32(src), pos));
-            else
-                 return generic<T>(Bits.disable(int64(src), pos));
-        }
-
-        [MethodImpl(Inline)]
-        static T disable_u<T>(T src, int pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                  return generic<T>(Bits.disable(uint8(src), pos));
-            else if(typeof(T) == typeof(ushort))
+            else if (size<T>() == 2)
                  return generic<T>(Bits.disable(uint16(src), pos));
-            else if(typeof(T) == typeof(uint))
+            else if (size<T>() == 4)
                  return generic<T>(Bits.disable(uint32(src), pos));
             else
                  return generic<T>(Bits.disable(uint64(src), pos));
-        }
-
-        [MethodImpl(Inline)]
-        static T disable_f<T>(T src, int pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.disable(float32(src), pos));
-            else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.disable(float64(src), pos));
-            else
-                throw no<T>();
         }
     }
 }

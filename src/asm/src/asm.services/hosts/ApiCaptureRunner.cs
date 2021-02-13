@@ -48,7 +48,7 @@ namespace Z0
         void RunPrimary()
         {
             var flow = Wf.Running("ApiCapture");
-            using var step = AsmServices.ApiCapture(Wf, Asm);
+            using var step = AsmServices.apicapture(Wf, Asm);
             step.CaptureApi();
             Wf.Ran(flow);
         }

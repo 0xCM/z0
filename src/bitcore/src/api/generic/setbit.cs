@@ -12,6 +12,12 @@ namespace Z0
 
     partial class gbits
     {
+        [MethodImpl(Inline)]
+        public static T setbit<T,I>(T src, I index, bit state)
+            where T : unmanaged
+            where I : unmanaged
+                => setbit<T>(src, memory.u8(index), state);
+
         /// <summary>
         /// Sets an identified bit to a supplied value
         /// </summary>

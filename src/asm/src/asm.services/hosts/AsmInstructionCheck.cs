@@ -11,7 +11,7 @@ namespace Z0.Asm
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct AsmFxCheck
+    public readonly struct AsmInstructionCheck
     {
         public static void CheckInstructionSize(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
         {

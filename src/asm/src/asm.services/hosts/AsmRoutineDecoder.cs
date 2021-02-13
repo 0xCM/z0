@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmFxCheck;
+    using static AsmInstructionCheck;
     using static z;
 
     using Iced = Iced.Intel;

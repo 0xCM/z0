@@ -11,14 +11,14 @@ namespace Z0
 
     using static Part;
 
-    public struct WfAsmProcessor : IApiAsmProcessor
+    public struct ApiAsmProcessor : IApiAsmProcessor
     {
         public IWfShell Wf {get;}
 
         public IWfDataBroker<IceMnemonic,ApiInstruction> Broker {get;}
 
         [MethodImpl(Inline)]
-        public WfAsmProcessor(IWfShell wf)
+        public ApiAsmProcessor(IWfShell wf)
         {
             Wf = wf;
             Broker = WfBrokers.create<IceMnemonic,ApiInstruction>((int)IceMnemonic.LAST);

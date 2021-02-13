@@ -26,7 +26,7 @@ namespace Z0.Asm
             => new ImmSpecializer(Wf, Asm);
 
         public IAsmDecoder RoutineDecoder(in AsmFormatConfig? format)
-            => AsmServices.Decoder(format ?? AsmFormatConfig.Default);
+            => AsmServices.decoder(format ?? AsmFormatConfig.Default);
 
         public ICaptureCore CaptureCore
             => Capture.core(Wf,Asm);

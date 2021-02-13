@@ -32,11 +32,11 @@ namespace Z0.Asm
             => new AsmServices(wf, asm);
 
         [Op]
-        public static IAsmDecoder Decoder(in AsmFormatConfig config)
+        public static IAsmDecoder decoder(in AsmFormatConfig config)
             => new AsmRoutineDecoder(config);
 
         [Op]
-        public static ApiCaptureService ApiCapture(IWfShell wf, IAsmContext asm)
+        public static ApiCaptureService apicapture(IWfShell wf, IAsmContext asm)
             => new ApiCaptureService(wf, asm);
 
         [Op]
@@ -47,8 +47,6 @@ namespace Z0.Asm
         public static IApiHostCapture HostCapture(IWfShell wf)
             => ApiHostCapture.create(wf);
 
-        public static IAsmDataEmitter DataEmitter(IWfShell wf)
-            => AsmDataEmitter.create(wf);
 
         [Op]
         public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
@@ -65,40 +63,32 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static IApiAsmProcessor ApiProcessor(IWfShell wf)
         {
-            var processor = new WfAsmProcessor(wf) as IApiAsmProcessor;
+            var processor = new ApiAsmProcessor(wf) as IApiAsmProcessor;
             processor.Connect();
             return processor;
         }
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter Writer(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, Formatter(config));
+        public static IAsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, formatter(config));
 
         [MethodImpl(Inline), Op]
-        public static IAsmFormatter Formatter(in AsmFormatConfig config)
+        public static IAsmFormatter formatter(in AsmFormatConfig config)
             => new AsmFormatter(config);
 
         [MethodImpl(Inline), Op]
-        public static IAsmFormatter Formatter()
-            => new AsmFormatter(null);
-
-        [MethodImpl(Inline), Op]
-        public static IAsmWriter Writer(FS.FilePath dst, IAsmFormatter formatter)
+        public static IAsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
             => new AsmWriter(dst,formatter);
 
         [MethodImpl(Inline), Op]
-        public static ICaptureExchange Exchange(ICaptureCore service, BufferToken capture)
+        public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)
             => new CaptureExchangeProxy(service, capture);
-
-        [MethodImpl(Inline), Op]
-        public static ICaptureAlt CaptureAlt(IWfShell wf, IAsmContext asm)
-            => Capture.alt(wf,asm);
 
         [Op]
         public static QuickCapture CaptureQuick(IWfShell wf, IAsmContext asm)
         {
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = Exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
+            var exchange = AsmServices.exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
             var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
             return new QuickCapture(wf, asm, buffer, tokens, service);
         }
@@ -114,17 +104,25 @@ namespace Z0.Asm
             Asm = asm;
         }
 
-        public ICaptureAlt Alt()
-            => Capture.alt(Wf, Asm);
-
         public IAsmDecoder RoutineDecoder()
             => new AsmRoutineDecoder(Asm.FormatConfig);
+
+        public IAsmDecoder RoutineDecoder(in AsmFormatConfig config)
+            => new AsmRoutineDecoder(config);
 
         public IApiIndexDecoder IndexDecoder()
             => ApiIndexDecoder.create(Wf);
 
         public IAsmImmWriter ImmWriter(ApiHostUri host, FS.FolderPath dst)
             => new AsmImmWriter(host, Asm.Formatter, dst);
+
+        [MethodImpl(Inline), Op]
+        public IAsmFormatter Formatter()
+            => new AsmFormatter(Asm.FormatConfig);
+
+        [MethodImpl(Inline), Op]
+        public IAsmFormatter Formatter(in AsmFormatConfig config)
+            => new AsmFormatter(config);
 
         public AsmSemanticRender SemanticRender()
             => new AsmSemanticRender(Wf);
@@ -135,9 +133,16 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public IAsmWriter AsmWriter(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, Formatter(config));
+            => new AsmWriter(dst, formatter(config));
 
         public IAsmImmWriter ImmWriter(ApiHostUri host)
             => ImmWriter(host, Wf.Db().ImmRoot());
+
+        public IAsmDataEmitter DataEmitter()
+            => AsmDataEmitter.create(Wf);
+
+        [MethodImpl(Inline), Op]
+        public ICaptureAlt CaptureAlt()
+            => Capture.alt(Wf, Asm);
     }
 }

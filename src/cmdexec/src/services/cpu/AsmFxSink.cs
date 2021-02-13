@@ -9,6 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public delegate void AsmFxHandler(in IceInstruction src);
+
     public readonly struct AsmFxSink
     {
         readonly AsmFxHandler Receiver;

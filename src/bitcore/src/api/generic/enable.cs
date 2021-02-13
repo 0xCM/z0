@@ -21,39 +21,17 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T enable<T>(T src, byte index, byte count)
             where T : unmanaged
-                => enable_u(src,index,count);
-
-        [MethodImpl(Inline)]
-        static T enable_u<T>(T src, byte index, byte count)
-            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                 return generic<T>(Bits.enable(uint8(src), index, count));
-            else if(typeof(T) == typeof(ushort))
+            else if (size<T>() == 2)
                 return generic<T>(Bits.enable(uint16(src), index, count));
-            else if(typeof(T) == typeof(uint))
+            else if (size<T>() == 4)
                 return generic<T>(Bits.enable(uint32(src), index, count));
-            else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.enable(uint64(src), index, count));
             else
-                return enable_i(src,index,count);
+                return generic<T>(Bits.enable(uint64(src), index, count));
         }
 
-        [MethodImpl(Inline)]
-        static T enable_i<T>(T src, byte index, byte count)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.enable(int8(src), index, count));
-            else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.enable(int16(src), index, count));
-            else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.enable(int32(src), index, count));
-            else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.enable(int64(src), index, count));
-            else
-                throw no<T>();
-        }
         /// <summary>
         /// Enables an index-identified source bit
         /// </summary>
@@ -64,58 +42,14 @@ namespace Z0
         public static T enable<T>(T src, byte pos)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte)
-            || typeof(T) == typeof(ushort)
-            || typeof(T) == typeof(uint)
-            || typeof(T) == typeof(ulong))
-                return enable_u(src,pos);
-            else if(typeof(T) == typeof(sbyte)
-            || typeof(T) == typeof(short)
-            || typeof(T) == typeof(int)
-            || typeof(T) == typeof(long))
-                return enable_i(src,pos);
-            else
-                return enable_f(src,pos);
-        }
-
-        [MethodImpl(Inline)]
-        static T enable_i<T>(T src, byte pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return generic<T>(Bits.enable(int8(src), pos));
-            else if(typeof(T) == typeof(short))
-                 return generic<T>(Bits.enable(int16(src), pos));
-            else if(typeof(T) == typeof(int))
-                 return generic<T>(Bits.enable(int32(src), pos));
-            else
-                 return generic<T>(Bits.enable(int64(src), pos));
-        }
-
-        [MethodImpl(Inline)]
-        static T enable_u<T>(T src, byte pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                  return generic<T>(Bits.enable(uint8(src), pos));
-            else if(typeof(T) == typeof(ushort))
+            else if (size<T>() == 2)
                  return generic<T>(Bits.enable(uint16(src), pos));
-            else if(typeof(T) == typeof(uint))
+            else if (size<T>() == 4)
                  return generic<T>(Bits.enable(uint32(src), pos));
             else
                  return generic<T>(Bits.enable(uint64(src), pos));
-        }
-
-        [MethodImpl(Inline)]
-        static T enable_f<T>(T src, byte pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                 return generic<T>(Bits.enable(float32(src), pos));
-            else if(typeof(T) == typeof(double))
-                 return generic<T>(Bits.enable(float64(src), pos));
-            else
-                throw no<T>();
         }
     }
 }

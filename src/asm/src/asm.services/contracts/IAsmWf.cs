@@ -20,11 +20,6 @@ namespace Z0.Asm
         IAsmContext Asm {get;}
 
         /// <summary>
-        /// The default asm formatting configuration
-        /// </summary>
-        AsmFormatConfig FormatConfig {get;}
-
-        /// <summary>
         /// The context formatter
         /// </summary>
         IAsmFormatter Formatter {get;}
@@ -35,7 +30,6 @@ namespace Z0.Asm
         IAsmDecoder Decoder {get;}
 
         ICaptureAlt CaptureService {get;}
-
 
         ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target);
 

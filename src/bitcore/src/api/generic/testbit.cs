@@ -8,10 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class gbits
     {
+        [MethodImpl(Inline)]
+        public static bit testbit<T,I>(T src, I index)
+            where T : unmanaged
+            where I : unmanaged
+                => testbit<T>(src, memory.u8(index));
+
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
         /// </summary>
@@ -20,50 +26,15 @@ namespace Z0
         [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
         public static bit testbit<T>(T src, byte pos)
             where T : unmanaged
-                => testbit_u(src,pos);
-
-        [MethodImpl(Inline)]
-        static bit testbit_u<T>(T src, byte pos)
-            where T : unmanaged
         {
-            if(typeof(T) == typeof(byte))
+            if(size<T>() == 1)
                  return Bits.testbit(uint8(src), pos);
-            else if(typeof(T) == typeof(ushort))
+            else if(size<T>() == 2)
                  return Bits.testbit(uint16(src), pos);
-            else if(typeof(T) == typeof(uint))
+            else if(size<T>() == 4)
                  return Bits.testbit(uint32(src), pos);
-            else if(typeof(T) == typeof(ulong))
-                 return Bits.testbit(uint64(src), pos);
             else
-                return testbit_i(src,pos);
-        }
-
-        [MethodImpl(Inline)]
-        static bit testbit_i<T>(T src, byte pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                 return Bits.testbit(int8(src), pos);
-            else if(typeof(T) == typeof(short))
-                 return Bits.testbit(int16(src), pos);
-            else if(typeof(T) == typeof(int))
-                 return Bits.testbit(int32(src), pos);
-            else if(typeof(T) == typeof(long))
-                 return Bits.testbit(int64(src), pos);
-            else
-                return testbit_f(src,pos);
-        }
-
-        [MethodImpl(Inline)]
-        static bit testbit_f<T>(T src, byte pos)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                 return Bits.testbit(float32(src), pos);
-            else if(typeof(T) == typeof(double))
-                 return Bits.testbit(float64(src), pos);
-            else
-                throw no<T>();
+                return Bits.testbit(uint64(src), pos);
         }
     }
 }

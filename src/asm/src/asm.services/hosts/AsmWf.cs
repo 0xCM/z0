@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         public IAsmContext Asm {get;}
 
-        public AsmFormatConfig FormatConfig {get;}
+        public AsmServices Services {get;}
 
         public IAsmDecoder Decoder {get;}
 
@@ -30,10 +30,11 @@ namespace Z0.Asm
         {
             Wf = wf;
             Asm = asm;
-            FormatConfig = AsmFormatConfig.DefaultStreamFormat;
-            Decoder = AsmServices.Decoder(FormatConfig);
-            Formatter = AsmServices.Formatter(FormatConfig);
-            CaptureService = Capture.alt(Wf, Asm);
+            Services = AsmServices.create(wf,asm);
+            var config = AsmFormatConfig.DefaultStreamFormat;
+            Decoder = Services.RoutineDecoder(config);
+            Formatter = Services.Formatter(config);
+            CaptureService = Services.CaptureAlt();
         }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
