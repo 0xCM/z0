@@ -37,6 +37,12 @@ namespace Z0.Asm
                 get => default(R).RegKind;
             }
 
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => Registers.code(RegKind);
+            }
+
             [MethodImpl(Inline)]
             public static implicit operator r8(R8<R> src)
                 => new r8(src.Content, src.RegKind);

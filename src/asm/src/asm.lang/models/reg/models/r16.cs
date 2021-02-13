@@ -31,6 +31,13 @@ namespace Z0.Asm
                 Content = src;
                 RegKind = kind;
             }
+
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => Registers.code(RegKind);
+            }
+
         }
 
         public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>, IRegOp16<ushort>
@@ -46,6 +53,12 @@ namespace Z0.Asm
             {
                 [MethodImpl(Inline)]
                 get => default(R).RegKind;
+            }
+
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => Registers.code(RegKind);
             }
 
             [MethodImpl(Inline)]

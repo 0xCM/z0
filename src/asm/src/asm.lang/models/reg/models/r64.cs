@@ -31,6 +31,12 @@ namespace Z0.Asm
                 Content = src;
                 RegKind = kind;
             }
+
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => Registers.code(RegKind);
+            }
         }
 
         public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp64<ulong>
@@ -46,6 +52,12 @@ namespace Z0.Asm
             {
                 [MethodImpl(Inline)]
                 get => default(R).RegKind;
+            }
+
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => Registers.code(RegKind);
             }
 
             [MethodImpl(Inline)]
