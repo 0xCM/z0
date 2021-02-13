@@ -66,7 +66,7 @@ namespace Z0
             => BitFormatOptions.bitblock(width, sep, maxbits, specifier);
 
         [Op]
-        public static int Format(in byte src, int length, uint maxbits, Span<char> dst)
+        public static int render(in byte src, int length, uint maxbits, Span<char> dst)
             => _format(src, length,maxbits,dst);
 
         [Op]
@@ -75,17 +75,16 @@ namespace Z0
 
         [Op]
         public void Format(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
-            => Format(first(src), src.Length, maxbits, dst);
+            => render(first(src), src.Length, maxbits, dst);
 
         [Op]
         public static int format(byte src, uint maxbits, Span<char> dst, ref int k)
-            => _format(src, maxbits, dst, ref k);
+            => render8(src, maxbits, dst, ref k);
 
         [Op]
         public static string format(params bit[] src)
             => format(src.ToReadOnlySpan());
 
-        [Op]
         public static string format(ReadOnlySpan<bit> src)
         {
             var count = src.Length;
@@ -94,9 +93,16 @@ namespace Z0
 
             var terms = src;
             Span<char> dst = stackalloc char[count];
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = skip(terms,i).ToChar();
+            render(src, dst);
             return new string(dst);
+        }
+
+        [Op]
+        public static void render(ReadOnlySpan<bit> src, Span<char> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(src,i).ToChar();
         }
 
         [Op]
@@ -138,13 +144,13 @@ namespace Z0
         public static string format(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
-                return create<byte>().Format((byte)Numeric.rebox(src, NumericKind.U8));
+                return format8(src);
             else if(type == TypeCode.UInt16 || type == TypeCode.Int16)
-                return create<ushort>().Format((ushort)Numeric.rebox(src, NumericKind.U16));
+                return format16(src);
             else if(type == TypeCode.UInt32  || type == TypeCode.Int32 || type == TypeCode.Single)
-                return create<uint>().Format((uint)Numeric.rebox(src, NumericKind.U32));
+                return format32(src);
             else if(type == TypeCode.UInt64 || type == TypeCode.Int64 || type == TypeCode.Double)
-                return create<ulong>().Format((ulong)Numeric.rebox(src, NumericKind.U64));
+                return format64(src);
             else
                 return EmptyString;
         }
@@ -179,7 +185,20 @@ namespace Z0
         }
 
         [Op]
-        static int _format(byte src, uint maxbits, Span<char> dst, ref int k)
+        static int _format(in byte src, int length, uint maxbits, Span<char> dst)
+        {
+            var k=0;
+            for(var i=0u; i<length; i++)
+            {
+                render8(skip(src,i), maxbits, dst, ref k);
+                if(k >= maxbits)
+                    break;
+            }
+            return k;
+        }
+
+        [Op]
+        static int render8(byte src, uint maxbits, Span<char> dst, ref int k)
         {
             for(byte j=0; j<8; j++, k++)
             {
@@ -191,16 +210,19 @@ namespace Z0
         }
 
         [Op]
-        static int _format(in byte src, int length, uint maxbits, Span<char> dst)
-        {
-            var k=0;
-            for(var i=0u; i<length; i++)
-            {
-                _format(skip(src,i), maxbits, dst, ref k);
-                if(k >= maxbits)
-                    break;
-            }
-            return k;
-        }
+        static string format8(object src)
+            => create<byte>().Format((byte)Numeric.rebox(src, NumericKind.U8));
+
+        [Op]
+        static string format16(object src)
+            => create<ushort>().Format((ushort)Numeric.rebox(src, NumericKind.U16));
+
+        [Op]
+        static string format32(object src)
+            => create<uint>().Format((uint)Numeric.rebox(src, NumericKind.U32));
+
+        [Op]
+        static string format64(object src)
+            => create<ulong>().Format((ulong)Numeric.rebox(src, NumericKind.U64));
     }
 }

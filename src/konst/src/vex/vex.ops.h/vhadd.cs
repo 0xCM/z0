@@ -16,6 +16,16 @@ namespace Z0
 
     partial struct cpu
     {
+        // public static byte vhexbin(byte src)
+        // {
+        //     if(src <= 0xF)
+        //         return 0;
+        //     var a = vbroadcast(w128, src);
+        //     var b = VMask.hexbins(w128);
+        //     var c = vand(a,b);
+        //     return 0;
+        // }
+
         /// <summary>
         /// Computes the horizontal sum of the source vectors
         /// </summary>

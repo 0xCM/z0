@@ -50,7 +50,7 @@ namespace Z0
             v1 = vload(w, skip(src,3*8));
 
             var y = vpack256x16u(v0, v1);
-            var packed = (ulong)gcpu.vpacklsb(vpack256x8u(x,y,w));
+            var packed = (ulong)gcpu.vpacklsb(vpack256x8u(x,y));
 
             v0 = vload(w, skip(src,4*8));
             v1 = vload(w, skip(src,5*8));

@@ -19,115 +19,115 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcentral(N128 w, W8 t, N4 f, N2 d)
+        public static Vector128<byte> vcentral(W128 w, W8 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central8x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vcentral(N128 w, W16 t, N4 f, N2 d)
+        public static Vector128<ushort> vcentral(W128 w, W16 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central16x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vcentral(N128 w, W32 t, N4 f, N2 d)
+        public static Vector128<uint> vcentral(W128 w, W32 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central32x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vcentral(N128 w, W64 t, N4 f, N2 d)
+        public static Vector128<ulong> vcentral(W128 w, W64 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central64x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcentral(N128 w, W8 t, N8 f, N4 d)
+        public static Vector128<byte> vcentral(W128 w, W8 t, N8 f, N4 d)
             => cpu.vbroadcast(w, Central8x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vcentral(N128 w, W16 t, N8 f, N4 d)
+        public static Vector128<ushort> vcentral(W128 w, W16 t, N8 f, N4 d)
             => cpu.vbroadcast(w, Central16x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vcentral(N128 w, W32 t, N8 f, N4 d)
+        public static Vector128<uint> vcentral(W128 w, W32 t, N8 f, N4 d)
             => cpu.vbroadcast(w, Central32x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vcentral(N128 w, W64 t, N8 f, N4 d)
+        public static Vector128<ulong> vcentral(W128 w, W64 t, N8 f, N4 d)
             => cpu.vbroadcast(w,  Central64x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vcentral(N128 w, W16 t, N16 f, N8 d)
+        public static Vector128<ushort> vcentral(W128 w, W16 t, N16 f, N8 d)
             => cpu.vbroadcast(w, Central16x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vcentral(N128 w, W32 t, N16 f, N8 d)
+        public static Vector128<uint> vcentral(W128 w, W32 t, N16 f, N8 d)
             => cpu.vbroadcast(w, Central32x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vcentral(N128 w, W64 t, N16 f, N8 d)
+        public static Vector128<ulong> vcentral(W128 w, W64 t, N16 f, N8 d)
             => cpu.vbroadcast(w, Central64x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<uint> vcentral(N128 w, W32 t, N32 f, N16 d)
+        public static Vector128<uint> vcentral(W128 w, W32 t, N32 f, N16 d)
             => cpu.vbroadcast(w, Central32x32x16);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vcentral(N128 w, W64 t, N32 f, N16 d)
+        public static Vector128<ulong> vcentral(W128 w, W64 t, N32 f, N16 d)
             => cpu.vbroadcast(w, Central64x32x16);
 
         [MethodImpl(Inline), Op]
-        public static Vector128<ulong> vcentral(N128 w, W64 t, N64 f, N32 d)
+        public static Vector128<ulong> vcentral(W128 w, W64 t, N64 f, N32 d)
             => cpu.vbroadcast(w, Central64x64x32);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vcentral(N256 w, W8 t, N4 f, N2 d)
+        public static Vector256<byte> vcentral(W256 w, W8 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central8x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vcentral(N256 w, W16 t, N4 f, N2 d)
+        public static Vector256<ushort> vcentral(W256 w, W16 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central16x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vcentral(N256 w, W32 t, N4 f, N2 d)
+        public static Vector256<uint> vcentral(W256 w, W32 t, N4 f, N2 d)
             => gcpu.vbroadcast<uint>(w,  Central32x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vcentral(N256 w, W64 t, N4 f, N2 d)
+        public static Vector256<ulong> vcentral(W256 w, W64 t, N4 f, N2 d)
             => cpu.vbroadcast(w, Central64x4x2);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vcentral(N256 w, W8 t, N4 f, N4 d)
+        public static Vector256<byte> vcentral(W256 w, W8 t, N4 f, N4 d)
             => cpu.vbroadcast(w,  Central8x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vcentral(N256 w, W16 t, N4 f, N4 d)
+        public static Vector256<ushort> vcentral(W256 w, W16 t, N4 f, N4 d)
             => cpu.vbroadcast(w,  Central16x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vcentral(N256 w, W32 t, N4 f, N4 d)
+        public static Vector256<uint> vcentral(W256 w, W32 t, N4 f, N4 d)
             => gcpu.vbroadcast<uint>(w,  Central32x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vcentral(N256 w, W64 t, N4 f, N4 d)
+        public static Vector256<ulong> vcentral(W256 w, W64 t, N4 f, N4 d)
             => cpu.vbroadcast(w, Central64x8x4);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vcentral(N256 w, W16 t, N16 f, N8 d)
+        public static Vector256<ushort> vcentral(W256 w, W16 t, N16 f, N8 d)
             => cpu.vbroadcast(w, Central16x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vcentral(N256 w, W32 t, N16 f, N8 d)
+        public static Vector256<uint> vcentral(W256 w, W32 t, N16 f, N8 d)
             => gcpu.vbroadcast<uint>(w,  Central32x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vcentral(N256 w, W64 t, N16 f, N8 d)
+        public static Vector256<ulong> vcentral(W256 w, W64 t, N16 f, N8 d)
             => cpu.vbroadcast(w, Central64x16x8);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vcentral(N256 w, W32 t, N32 f, N16 d)
+        public static Vector256<uint> vcentral(W256 w, W32 t, N32 f, N16 d)
             => gcpu.vbroadcast<uint>(w,  Central32x32x16);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vcentral(N256 w, W64 t, N32 f, N16 d)
+        public static Vector256<ulong> vcentral(W256 w, W64 t, N32 f, N16 d)
             => cpu.vbroadcast(w, Central64x32x16);
 
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vcentral(N256 w, W64 t, N64 f, N32 d)
+        public static Vector256<ulong> vcentral(W256 w, W64 t, N64 f, N32 d)
             => cpu.vbroadcast(w, Central64x64x32);
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N1 f, N1 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N1 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d,t));
 
@@ -153,7 +153,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N2 f, N1 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb<T>(f,d,t));
 
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N4 f, N1 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N1 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -195,7 +195,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N16 f, N1 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<ulong>(w, lsb64(f, d)));
 
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N2 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N3 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N4 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N5 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb(f,d,t));
 
@@ -264,7 +264,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N6 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb(f,d,t));
 
@@ -277,7 +277,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, N7 d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -288,7 +288,7 @@ namespace Z0
         /// <param name="n">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N1 f, N1 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N1 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -300,7 +300,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N2 f, N1 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb(f,d,t));
 
@@ -311,7 +311,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N4 f, N1 d,T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N4 f, N1 d,T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d,t));
 
@@ -322,7 +322,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N1 d,T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N1 d,T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d,t));
 
@@ -333,7 +333,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N16 f, N1 d,T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N16 f, N1 d,T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<ulong>(w, lsb64(f, d)));
 
@@ -346,7 +346,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N2 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d));
 
@@ -358,7 +358,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N3 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d));
 
@@ -370,7 +370,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N4 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb<T>(f,d));
 
@@ -382,7 +382,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N5 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w,lsb<T>(f,d));
 
@@ -394,7 +394,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N6 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d));
 
@@ -406,7 +406,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, N7 d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, lsb<T>(f,d));
 
@@ -418,7 +418,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
+        public static Vector128<T> vlsb<T>(W128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
 
@@ -430,7 +430,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
+        public static Vector256<T> vlsb<T>(W256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
 
@@ -439,7 +439,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(n1,n1,t));
 
@@ -450,7 +450,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N2 f, N1 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -461,7 +461,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N4 f, N1 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -472,7 +472,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N1 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -483,7 +483,7 @@ namespace Z0
         /// <param name="f">The repetition frequency</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N16 f, N1 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<ulong>(w, msb(n64, f, d)));
 
@@ -496,7 +496,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N2 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -509,7 +509,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N3 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -522,7 +522,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N4 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -535,7 +535,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N5 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -548,7 +548,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N6 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -561,7 +561,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, N7 d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -573,7 +573,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> vmsb<T>(N128 w, N8 f, byte d, T t = default)
+        public static Vector128<T> vmsb<T>(W128 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, msb8f(d)));
 
@@ -584,7 +584,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(n1,n1,t));
 
@@ -597,7 +597,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N2 f, N1 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -610,7 +610,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N4 f, N1 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N4 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f, d, t));
 
@@ -623,7 +623,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N1 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -636,7 +636,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The component data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N16 f, N1 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N16 f, N1 d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<ulong>(w, msb(n64, f, d)));
 
@@ -649,7 +649,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N2 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -662,7 +662,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N3 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N3 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb(f,d,t));
 
@@ -674,7 +674,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N4 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N4 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -686,7 +686,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N5 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N5 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -698,7 +698,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N6 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N6 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -710,7 +710,7 @@ namespace Z0
         /// <param name="d">The bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, N7 d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, N7 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, msb<T>(f,d));
 
@@ -722,7 +722,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> vmsb<T>(N256 w, N8 f, byte d, T t = default)
+        public static Vector256<T> vmsb<T>(W256 w, N8 f, byte d, T t = default)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, msb8f(d)));
 
@@ -735,7 +735,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> veven<F,D,T>(N128 w, F f = default, D d = default, T t = default)
+        public static Vector128<T> veven<F,D,T>(W128 w, F f = default, D d = default, T t = default)
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
@@ -757,7 +757,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> veven<F,D,T>(N256 w, F f = default, D d = default, T t = default)
+        public static Vector256<T> veven<F,D,T>(W256 w, F f = default, D d = default, T t = default)
             where F : unmanaged, ITypeNat
             where D : unmanaged, ITypeNat
             where T : unmanaged
@@ -779,7 +779,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
+        public static Vector128<T> veven<T>(W128 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -792,7 +792,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> veven<T>(N256 w, N2 f = default, N1 d = default, T t = default)
+        public static Vector256<T> veven<T>(W256 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -805,7 +805,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> veven<T>(N128 w, N2 f = default, N2 d = default, T t = default)
+        public static Vector128<T> veven<T>(W128 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -818,8 +818,25 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> veven<T>(N256 w, N2 f = default, N2 d = default, T t = default)
+        public static Vector256<T> veven<T>(W256 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> hexbins(W128 w)
+            => gcpu.vload(w, HexBins128);
+
+        [MethodImpl(Inline), Op]
+        public static Vector256<byte> hexbins(W256 w)
+            => gcpu.vload(w, HexBins256);
+
+        static ReadOnlySpan<byte> HexBins128 => new byte[16]{
+            0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xA0, 0xB0, 0xC0, 0xD0,0xE0, 0xF0,
+            };
+
+        static ReadOnlySpan<byte> HexBins256 => new byte[32]{
+            0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xA0, 0xB0, 0xC0, 0xD0,0xE0, 0xF0,
+            0x00, 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0xA0, 0xB0, 0xC0, 0xD0,0xE0, 0xF0,
+            };
     }
 }

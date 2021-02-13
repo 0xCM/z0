@@ -28,6 +28,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<sbyte> vpack128x8i(Vector256<short> src)
             => vpackss(vlo(src), vhi(src));
-
     }
 }

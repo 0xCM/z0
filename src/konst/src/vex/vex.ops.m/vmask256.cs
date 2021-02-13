@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmask256(uint src)
-            => cpu.vconcat(vmask128((ushort)src), vmask128((ushort)(src >> 16)));
+            => vconcat(vmask128((ushort)src), vmask128((ushort)(src >> 16)));
 
         /// <summary>
         /// Distributes each bit of the source to to a specified bit of each byte in a 256-bit target vector
@@ -29,8 +29,8 @@ namespace Z0
         public static Vector256<byte> vmask256(uint src, byte index)
         {
             var m = Lsb64x8x1 << index;
-            var lo = v8u(cpu.vparts(maskpart(src, 0, m), maskpart(src, 8, m)));
-            var hi = v8u(cpu.vparts(maskpart(src, 16, m), maskpart(src, 24, m)));
+            var lo = v8u(vparts(maskpart(src, 0, m), maskpart(src, 8, m)));
+            var hi = v8u(vparts(maskpart(src, 16, m), maskpart(src, 24, m)));
             return cpu.vconcat(lo,hi);
         }
 

@@ -13,9 +13,8 @@ namespace Z0
     [ApiHost]
     public readonly struct Iter
     {
-
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public unsafe static void example<T>(Span<T> src, Action<T> f)
+        public unsafe static void run<T>(Span<T> src, Action<T> f)
             where T : unmanaged
         {
             fixed(T* pSrc = src)

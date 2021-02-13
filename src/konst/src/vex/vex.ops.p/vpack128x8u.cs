@@ -67,32 +67,30 @@ namespace Z0
         /// <summary>
         /// (8x16u,8x16u) -> 16x8u
         /// </summary>
-        /// <param name="x">The first source vector</param>
-        /// <param name="y">The second source vector</param>
+        /// <param name="a">The first source vector</param>
+        /// <param name="b">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vpack128x8u(Vector128<ushort> x, Vector128<ushort> y)
-            => vpackus(x,y);
+        public static Vector128<byte> vpack128x8u(Vector128<ushort> a, Vector128<ushort> b)
+            => vpackus(a,b);
 
         /// <summary>
         /// (8x32u, 8x32u) -> 16x8u
         /// </summary>
-        /// <param name="x0">The first source vector</param>
-        /// <param name="x1">The second source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="a">The first source vector</param>
+        /// <param name="b">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vpack128x8u(Vector256<uint> x0, Vector256<uint> x1)
-            => vpack128x8u(vpack256x16u(x0, x1));
+        public static Vector128<byte> vpack128x8u(Vector256<uint> a, Vector256<uint> b)
+            => vpack128x8u(vpack256x16u(a, b));
 
         /// <summary>
         /// (4x32u,4x32u,4x32u,4x32u) -> 16x8u
         /// </summary>
-        /// <param name="x0">The first source vector</param>
-        /// <param name="x1">The second source vector</param>
-        /// <param name="x2">The third source vector</param>
-        /// <param name="x3">The fourth source vector</param>
-        /// <param name="dst">The target vector</param>
+        /// <param name="a">The first source vector</param>
+        /// <param name="b">The second source vector</param>
+        /// <param name="c">The third source vector</param>
+        /// <param name="d">The fourth source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vpack128x8u(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3)
-            => vpack128x8u(vpack128x16u(x0, x1), vpack128x16u(x2, x3));
+        public static Vector128<byte> vpack128x8u(Vector128<uint> a, Vector128<uint> b, Vector128<uint> c, Vector128<uint> d)
+            => vpack128x8u(vpack128x16u(a, b), vpack128x16u(c, d));
     }
 }

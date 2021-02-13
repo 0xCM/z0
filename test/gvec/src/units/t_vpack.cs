@@ -78,7 +78,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gcpu.vinc(w, z16));
             var y = cpu.vsub(vsmax, gcpu.vinc(w, (ushort)16));
-            var actual = cpu.vpack256x8u(x, y,w256);
+            var actual = cpu.vpack256x8u(x, y);
 
             Claim.veq(expect,actual);
         }
@@ -109,7 +109,7 @@ namespace Z0
 
             var x = cpu.vsub(vsmax, gcpu.vinc(w, 0u));
             var y = cpu.vsub(vsmax, gcpu.vinc(w, 8u));
-            var v = cpu.vpack256x16u(x,y,n256);
+            var v = cpu.vpack256x16u(x,y);
             var expect = cpu.vsub(vtmax, gcpu.vinc(w, z16));
             Claim.veq(expect,v);
         }

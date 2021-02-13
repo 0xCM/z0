@@ -12,38 +12,91 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiDeep]
-    public readonly struct EnabledSynonyms
-    {
-        public static string On() => "on";
-
-        public static string One() => "1";
-
-        public static string Enabled() => "enabled";
-
-        public static string True() => "true";
-
-        public static string Yes() => "yes";
-
-        static string[] OnLabels
-            => new string[]{On(), One(), Enabled(), True(), Yes()};
-    }
-
     [ApiHost(ApiNames.BitParser,true)]
     public readonly struct BitParser
     {
-        public static bit Parse(string src)
-            => OnLabels.Contains(src.Trim().ToLower());
+        [Op]
+        public static bool parse(string src, out bit dst)
+        {
+            const string On1 = "1";
+            const string On2 = "true";
+            const string On3 = "yes";
+            const string On4 = "on";
+
+            const string Off1 = "0";
+            const string Off2 = "false";
+            const string Off3 = "no";
+            const string Off4 = "off";
+
+            if(matches(src, On1))
+            {
+                dst = 1;
+                return true;
+            }
+
+            if(matches(src, On2))
+            {
+                dst = 1;
+                return true;
+            }
+
+            if(matches(src, On3))
+            {
+                dst = 1;
+                return true;
+            }
+
+            if(matches(src, On4))
+            {
+                dst = 1;
+                return true;
+            }
+
+            if(matches(src, Off1))
+            {
+                dst = 0;
+                return true;
+            }
+
+            if(matches(src, Off2))
+            {
+                dst = 0;
+                return true;
+            }
+
+            if(matches(src, Off3))
+            {
+                dst = 0;
+                return true;
+            }
+
+            if(matches(src, Off4))
+            {
+                dst = 0;
+                return true;
+            }
+
+            dst = default;
+            return false;
+        }
+
+        [MethodImpl(Inline), Op]
+        static bool matches(ReadOnlySpan<char> left,  ReadOnlySpan<char> right)
+        {
+            var count = left.Length;
+            if(count != right.Length)
+                return false;
+            for(var i=0; i<count; i++)
+                if(skip(left,i) != skip(right, i))
+                    return false;
+            return true;
+        }
 
         static string[] OnLabels
             => new string[]{"on", "1", "enabled", "true", "yes"};
 
         static ReadOnlySpan<AsciCharCode> Filter
             => new AsciCharCode[]{LBracket, RBracket, AsciCharCode.Space, Underscore, b};
-
-        [MethodImpl(Inline), Op]
-        static string OnLabel(byte index)
-            => memory.skip(OnLabels, index);
 
         /// <summary>
         /// Creates a bitspan from the text encoding of a binary number

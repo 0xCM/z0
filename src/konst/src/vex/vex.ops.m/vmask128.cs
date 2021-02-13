@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vmask128(ushort src)
-            => v8u(cpu.vparts(maskpart(src,0), maskpart(src,8)));
+            => v8u(vparts(maskpart(src,0), maskpart(src,8)));
 
         /// <summary>
         /// Distributes each source bit to an index-identified bit of each byte in a 128-bit target vector
@@ -30,7 +30,7 @@ namespace Z0
         public static Vector128<byte> vmask128(ushort src, byte index)
         {
             var m = Lsb64x8x1 << index;
-            return v8u(cpu.vparts(maskpart(src,0, m), maskpart(src,8, m)));
+            return v8u(vparts(maskpart(src,0, m), maskpart(src,8, m)));
         }
 
         [MethodImpl(Inline), Op]

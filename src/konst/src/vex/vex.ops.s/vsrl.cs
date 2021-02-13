@@ -25,7 +25,7 @@ namespace Z0
         public static Vector128<byte> vsrl(Vector128<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = vlsb(n128, n8, (byte)(8 - count),z8);
+            var m = vlsb<byte>(n128, n8, (byte)(8 - count));
             return vand(y,m);
         }
 
@@ -110,10 +110,10 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static Vector256<sbyte> vsrl(Vector256<sbyte> src, [Imm] byte count)
         {
-            var x = v16u(ShiftRightLogical(vinflate256x16i(vlo(src), w256),count));
-            var y = v16u(ShiftRightLogical(vinflate256x16i(vhi(src), w256),count));
+            var x = v16u(ShiftRightLogical(vinflate256x16i(vlo(src)),count));
+            var y = v16u(ShiftRightLogical(vinflate256x16i(vhi(src)),count));
             var m = v16u(vbroadcast(w256, byte.MaxValue));
-            return v8i(vpack256x8u(vand(x,m), vand(y,m), w256));
+            return v8i(vpack256x8u(vand(x,m), vand(y,m)));
         }
 
         /// <summary>
@@ -125,7 +125,7 @@ namespace Z0
         public static Vector256<byte> vsrl(Vector256<byte> src, [Imm] byte count)
         {
             var y = v8u(ShiftRightLogical(v64u(src), count));
-            var m = vlsb(w256, n8, (byte)(8 - count), z8);
+            var m = vlsb<byte>(w256, n8, (byte)(8 - count));
             return vand(y,m);
         }
 
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
+        static Vector128<T> vlsb<T>(N128 w, N8 f, byte d)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
 
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="d">A value in the range [2,7] that defines the bit density</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
+        static Vector256<T> vlsb<T>(N256 w, N8 f, byte d)
             where T : unmanaged
                 => generic<T>(gcpu.vbroadcast<byte>(w, lsb8f(d)));
     }
