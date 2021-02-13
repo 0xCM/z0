@@ -23,7 +23,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nand(A.Head, B.Head, ref Z.Head);
+            vlogic.nand(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.nand(A.Head, B.Head, ref Z.Head);
+            vlogic.nand(A.Head, B.Head, ref Z.Head);
             return Z;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
         public static unsafe BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -64,7 +64,7 @@ namespace Z0
         public static unsafe BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -77,7 +77,7 @@ namespace Z0
         public static unsafe BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -90,7 +90,7 @@ namespace Z0
         public static unsafe BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

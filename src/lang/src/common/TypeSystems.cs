@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
 
-    public readonly partial struct TypeSystems
+    public readonly struct TypeSystems
     {
 
     }

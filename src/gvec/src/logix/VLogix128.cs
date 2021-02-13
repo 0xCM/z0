@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static LogicSig;
 
     using ULK = UnaryBitLogicKind;

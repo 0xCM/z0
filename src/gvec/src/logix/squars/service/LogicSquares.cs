@@ -7,8 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static SFx;
+
+    [FunctionalService]
+    public partial class LogicSquares : ISFxHost<LogicSquares>
+    {
+        const NumericKind Closure = UnsignedInts;
+    }
+
+    [ApiHost]
+    public partial class LogicSquared
+    {
+        const NumericKind Closure = UnsignedInts;
+
+    }
 
     public partial class LogicSquares
     {

@@ -10,9 +10,9 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static BitMasks.Literals;
-    using static z;
+    using static memory;
 
     partial class Permute
     {
@@ -110,7 +110,6 @@ namespace Z0
         /// <param name="maxbits">The maximum number bits to use if less than the bit width of the vector</param>
         /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
         public static ReadOnlySpan<char> symbols<E,T>(T src, uint segwidth, uint maxbits)
             where E : unmanaged, Enum
             where T : unmanaged
@@ -132,32 +131,5 @@ namespace Z0
         static void ThrowKeyNotFound<T>(T key)
             where T : unmanaged
                 => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => cpu.vload(n128, (byte)first(src.Terms));
-
-        /// <summary>
-        /// Shuffles the permutation in-place using a provided random source.
-        /// </summary>
-        /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static ref readonly Perm shuffle(in Perm src, IPolyStream random)
-        {
-            random.Shuffle(src.Terms);
-            return ref src;
-        }
-
-        /// <summary>
-        /// Shuffles the permutation in-place using a provided random source.
-        /// </summary>
-        /// <param name="random">The random source</param>
-        [MethodImpl(Inline)]
-        public static ref readonly Perm<T> shuffle<T>(in Perm<T> src, IPolyStream random)
-            where T : unmanaged
-        {
-            random.Shuffle(src.Terms);
-            return ref src;
-        }
     }
 }

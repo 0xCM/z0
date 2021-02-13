@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return Z;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         public static BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return Z;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         public static BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return Z;
         }
 
@@ -66,7 +66,7 @@ namespace Z0
         public static BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return Z;
         }
 
@@ -80,7 +80,7 @@ namespace Z0
         public static BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return Z;
         }
     }

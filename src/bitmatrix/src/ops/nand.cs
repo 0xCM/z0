@@ -22,7 +22,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> nand<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static ref readonly BitMatrix8 nand(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 Z)
         {
-             LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+             vlogic.nand(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static ref readonly BitMatrix16 nand(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 Z)
         {
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static ref readonly BitMatrix32 nand(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static ref readonly BitMatrix64 nand(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 Z)
         {
-            LogicSquare.nand(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nand(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
     }

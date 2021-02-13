@@ -22,7 +22,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> select<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> C, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static ref readonly BitMatrix8 select(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 C, in BitMatrix8 Z)
         {
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static ref readonly BitMatrix16 select(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 C, in BitMatrix16 Z)
         {
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static ref readonly BitMatrix32 select(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 C, in BitMatrix32 Z)
         {
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static ref readonly BitMatrix64 select(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 C, in BitMatrix64 Z)
         {
-            LogicSquare.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
+            vlogic.select(in A.Head, in B.Head, in C.Head, ref Z.Head);
             return ref Z;
         }
     }

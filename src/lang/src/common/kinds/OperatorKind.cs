@@ -6,6 +6,28 @@ namespace Z0.Lang
 {
     public enum OperatorKind
     {
-        None  = 0,
+        None = 0,
+
+        Not,
+
+        And,
+
+        Assign,
+
+        Add,
+
+        Sub,
+
+        Eq,
+
+        Neq,
+
+        Gt,
+
+        GtEq,
+
+        Lt,
+
+        LtEq,
     }
 }

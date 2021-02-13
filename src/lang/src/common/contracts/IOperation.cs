@@ -8,18 +8,12 @@ namespace Z0.Lang
 
     public interface IOperation : IScope
     {
+        Identifier Name {get;}
+
         Index<Operand> Input {get;}
 
+        Operand? Output {get;}
+
         Index<Statement> Definition {get;}
-    }
-
-    public interface IFunction : IOperation
-    {
-        Operand Output {get;}
-    }
-
-    public interface IAction : IOperation
-    {
-
     }
 }

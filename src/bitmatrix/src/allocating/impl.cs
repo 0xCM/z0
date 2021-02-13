@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.cimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.cimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         public static BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.impl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         public static BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.impl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
         public static BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.impl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         public static BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.impl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.impl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

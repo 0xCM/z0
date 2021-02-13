@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static cpu;
     using static memory;
 
     partial struct gcpu

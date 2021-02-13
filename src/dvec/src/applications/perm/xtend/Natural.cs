@@ -90,6 +90,6 @@ namespace Z0
         /// <param name="src">The defining permutation</param>
         [MethodImpl(Inline)]
         public static Vector128<byte> ToShuffleSpec(this NatPerm<N16> src)
-            => api.shuffles(src);
+            => NatPerm.shuffles(src);
     }
 }

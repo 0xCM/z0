@@ -11,12 +11,12 @@ namespace Z0.Lang
 
     public readonly struct CallSite
     {
-        public Call Call {get;}
+        public ICall Call {get;}
 
         public Var Receiver {get;}
 
         [MethodImpl(Inline)]
-        public CallSite(Call call, Var receiver)
+        public CallSite(ICall call, Var receiver)
         {
             Call = call;
             Receiver = receiver;

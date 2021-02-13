@@ -9,14 +9,14 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Call
+    public readonly struct Call : ICall
     {
-        public Operation Target {get;}
+        public IOperation Target {get;}
 
-        public Index<Operand> Operands {get;}
+        public Index<OperandValue> Operands {get;}
 
         [MethodImpl(Inline)]
-        public Call(Operation target, params Operand[] args)
+        public Call(IOperation target, params OperandValue[] args)
         {
             Target = target;
             Operands = args;

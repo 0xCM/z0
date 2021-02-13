@@ -22,7 +22,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            vlogic.impl(A.Head, B.Head, ref Z.Head);
             return Z;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> impl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            vlogic.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Impl]
         public static ref readonly BitMatrix8 impl(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 Z)
         {
-             LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+             vlogic.impl(A.Head, B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Impl]
         public static ref readonly BitMatrix16 impl(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 Z)
         {
-            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            vlogic.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         [MethodImpl(Inline), Impl]
         public static ref readonly BitMatrix32 impl(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
-            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            vlogic.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline), Impl]
         public static ref readonly BitMatrix64 impl(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 Z)
         {
-            LogicSquare.impl(A.Head, B.Head, ref Z.Head);
+            vlogic.impl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
     }

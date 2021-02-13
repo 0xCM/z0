@@ -26,5 +26,9 @@ namespace Z0.Lang
             dst.Literals = src.Literals.Select(untype);
             return dst;
         }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static OperandValue untype<T>(OperandValue<T> src)
+            => new OperandValue(src.Operand, new Value(src.Operand.Type, src.Value));
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    public static partial class XTend
     {
         public static Swap[] Unsized<N>(this NatSwap<N>[] src)
             where N : unmanaged, ITypeNat

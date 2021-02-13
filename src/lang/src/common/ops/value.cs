@@ -11,8 +11,12 @@ namespace Z0.Lang
 
     partial struct lang
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Value<T> value<T>(DataType type, T content)
             => new Value<T>(type,content);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static OperandValue value<T>(Operand operand, T value)
+            => new OperandValue<T>(operand,value);
     }
 }

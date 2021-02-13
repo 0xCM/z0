@@ -32,7 +32,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> not<T>(in BitMatrix<T> A, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
         public static BitMatrix8 not(in BitMatrix8 A)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static ref BitMatrix8 not(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -76,7 +76,7 @@ namespace Z0
         public static BitMatrix16 not(in BitMatrix16 A)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static ref BitMatrix16 not(in BitMatrix16 A, ref BitMatrix16 Z)
         {
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -100,7 +100,7 @@ namespace Z0
         public static BitMatrix32 not(in BitMatrix32 A)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -112,7 +112,7 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static ref BitMatrix32 not(in BitMatrix32 A, ref BitMatrix32 Z)
         {
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -124,7 +124,7 @@ namespace Z0
         public static BitMatrix64 not(in BitMatrix64 A)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static ref BitMatrix64 not(in BitMatrix64 A, ref BitMatrix64 Z)
         {
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return ref Z;
         }
     }

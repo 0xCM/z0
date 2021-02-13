@@ -23,7 +23,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+             vlogic.or(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
         public static BitMatrix8 or(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix16 or(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
         public static BitMatrix16 or(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix32 or(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -114,7 +114,7 @@ namespace Z0
         public static BitMatrix32 or(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -127,7 +127,7 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static ref BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -140,7 +140,7 @@ namespace Z0
         public static BitMatrix64 or(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

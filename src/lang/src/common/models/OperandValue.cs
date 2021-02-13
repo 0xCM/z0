@@ -22,4 +22,22 @@ namespace Z0.Lang
             Value = value;
         }
     }
+
+    public readonly struct OperandValue<T>
+    {
+        public Operand  Operand {get;}
+
+        public T Value {get;}
+
+        [MethodImpl(Inline)]
+        public OperandValue(Operand op, T value)
+        {
+            Operand = op;
+            Value = value;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator OperandValue(OperandValue<T> src)
+            => lang.untype(src);
+    }
 }

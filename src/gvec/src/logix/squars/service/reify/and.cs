@@ -12,7 +12,7 @@ namespace Z0
     using static SFx;
 
     using BL = ByteLogic64;
-    using LS = LogicSquare;
+    using LS = vlogic;
 
     partial class LogicSquares
     {

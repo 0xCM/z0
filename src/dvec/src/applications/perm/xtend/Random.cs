@@ -13,13 +13,16 @@ namespace Z0
     public static class PRngX
     {
         /// <summary>
-        /// Produces a random permutation of a specified length
+        /// Shuffles the permutation in-place using a provided random source.
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static Perm Perm(this IPolyrand random, int n)
-            => Permute.shuffle(Z0.Perm.Identity(n), random);
+        public static ref readonly Perm<T> Shuffle<T>(this IDomainSource random, in Perm<T> src)
+            where T : unmanaged
+        {
+            random.Shuffle(src.Terms);
+            return ref src;
+        }
 
         /// <summary>
         /// Produces a random permutation of a specified length
@@ -27,7 +30,16 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The permutation length</param>
         [MethodImpl(Inline)]
-        public static Perm Perm(this IPolyrand random, uint n)
+        public static Perm Perm(this IDomainSource random, int n)
+            => shuffle(Z0.Perm.Identity(n), random);
+
+        /// <summary>
+        /// Produces a random permutation of a specified length
+        /// </summary>
+        /// <param name="random">The random source</param>
+        /// <param name="n">The permutation length</param>
+        [MethodImpl(Inline)]
+        public static Perm Perm(this IDomainSource random, uint n)
             => random.Perm((int)n);
 
         /// <summary>
@@ -39,7 +51,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Perm> Perms(this IPolyrand random, int len)
+        public static IEnumerable<Perm> Perms(this IDomainSource random, int len)
         {
             while(true)
                 yield return random.Perm(len);
@@ -49,10 +61,10 @@ namespace Z0
         /// Shuffles the permutation in-place using a provided random source.
         /// </summary>
         /// <param name="random">The random source</param>
-        static NatPerm<N> Shuffle22<N>(NatPerm<N> perm, IPolyrand random)
+        static NatPerm<N> Shuffle22<N>(NatPerm<N> perm, IDomainSource random)
             where N : unmanaged, ITypeNat
         {
-            Permute.shuffle(perm, random);
+            shuffle(perm, random);
             return perm;
         }
 
@@ -65,7 +77,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
         [MethodImpl(Inline)]
-        public static NatPerm<N> Perm<N>(this IPolyrand random, N n = default)
+        public static NatPerm<N> Perm<N>(this IDomainSource random, N n = default)
             where N : unmanaged, ITypeNat
                 => Shuffle22(Z0.Permute.natural(n), random);
 
@@ -77,7 +89,7 @@ namespace Z0
         /// <param name="rep">A primal type representative</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The primal symbol type</typeparam>
-        public static IEnumerable<NatPerm<N>> Perms<N>(this IPolyrand random, N n = default)
+        public static IEnumerable<NatPerm<N>> Perms<N>(this IDomainSource random, N n = default)
             where N : unmanaged, ITypeNat
         {
             while(true)
@@ -90,10 +102,10 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="src">The permutation</param>
         [MethodImpl(Inline)]
-        public static Perm Shuffle(this IPolyrand random, in Perm src)
+        public static Perm Shuffle(this IDomainSource random, in Perm src)
         {
             var copy = src.Replicate();
-            Permute.shuffle(copy, random);
+            shuffle(copy, random);
             return copy;
         }
 
@@ -104,11 +116,11 @@ namespace Z0
         /// <param name="src">The permutation</param>
         /// <typeparam name="N">The permutation length</typeparam>
         [MethodImpl(Inline)]
-        public static NatPerm<N> Shuffle<N>(this IPolyrand random, in NatPerm<N> src)
+        public static NatPerm<N> Shuffle<N>(this IDomainSource random, in NatPerm<N> src)
             where N : unmanaged, ITypeNat
         {
             var copy = src.Replicate();
-            Shuffle(copy, random);
+            shuffle(copy, random);
             return copy;
         }
 
@@ -116,11 +128,11 @@ namespace Z0
         /// Shuffles the permutation in-place using a provided random source.
         /// </summary>
         /// <param name="random">The random source</param>
-        public static NatPerm<N> Shuffle<N>(NatPerm<N> perm, IPolyrand random)
-            where N : unmanaged, ITypeNat
+        [MethodImpl(Inline)]
+        static ref readonly Perm shuffle(in Perm src, IDomainSource random)
         {
-            Permute.shuffle(perm, random);
-            return perm;
+            random.Shuffle(src.Terms);
+            return ref src;
         }
     }
 }

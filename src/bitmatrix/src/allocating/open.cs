@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.and(in A.Head, in B.Head, ref Z.Head);
+            vlogic.and(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -57,7 +57,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.or(in A.Head, in B.Head, ref Z.Head);
+            vlogic.or(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -72,7 +72,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -86,7 +86,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.not(in A.Head, ref Z.Head);
+            vlogic.not(in A.Head, ref Z.Head);
             return Z;
         }
 
@@ -95,7 +95,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.xornot(in A.Head, in B.Head, ref Z.Head);
+            vlogic.xornot(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -115,7 +115,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.cnonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.cnonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -143,7 +143,7 @@ namespace Z0
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
-            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -158,7 +158,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
     }

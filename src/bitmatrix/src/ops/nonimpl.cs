@@ -23,7 +23,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nonimpl(A.Head, B.Head, ref Z.Head);
+            vlogic.nonimpl(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl]
         public static ref BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B, ref BitMatrix8 Z)
         {
-             LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+             vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         public static BitMatrix8 nonimpl(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl]
         public static unsafe ref BitMatrix16 nonimpl(in BitMatrix16 A, in BitMatrix16 B, ref BitMatrix16 Z)
         {
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -75,7 +75,7 @@ namespace Z0
         public static unsafe BitMatrix16 nonimpl(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl]
         public static unsafe ref BitMatrix32 nonimpl(in BitMatrix32 A, in BitMatrix32 B, ref BitMatrix32 Z)
         {
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -101,7 +101,7 @@ namespace Z0
         public static unsafe BitMatrix32 nonimpl(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -114,7 +114,7 @@ namespace Z0
         [MethodImpl(Inline), NonImpl]
         public static unsafe ref BitMatrix64 nonimpl(in BitMatrix64 A, in BitMatrix64 B, ref BitMatrix64 Z)
         {
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -127,7 +127,7 @@ namespace Z0
         public static unsafe BitMatrix64 nonimpl(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.nonimpl(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nonimpl(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
     }

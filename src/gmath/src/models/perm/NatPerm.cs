@@ -9,7 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
+
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -19,7 +20,7 @@ namespace Z0
     {
         readonly Perm perm;
 
-        static int n => (int)nat64u<N>();
+        static int n => nat32i<N>();
 
         /// <summary>
         /// The canonical identity permutation of length N

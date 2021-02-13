@@ -6,11 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
+    using static memory;
 
     public readonly struct NatPerm
     {
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> shuffles(NatPerm<N16> src)
+            => cpu.vload(w128, (byte)first(src.Terms));
+
         [MethodImpl(Inline), Op]
         public static Perm32 unsize(in NatPerm<N32,byte> spec)
             => new Perm32(gcpu.vload(w256, spec.Terms));

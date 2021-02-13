@@ -25,7 +25,7 @@ namespace Z0
         public static ref readonly BitMatrix<T> nor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
-            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Nor]
         public static ref readonly BitMatrix8 nor(in BitMatrix8 A, in BitMatrix8 B, in BitMatrix8 Z)
         {
-             LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
+             vlogic.nor(in A.Head, in B.Head, ref Z.Head);
              return ref Z;
         }
 
@@ -64,7 +64,7 @@ namespace Z0
         public static BitMatrix8 nor(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
-            LogicSquare.nor(in A.Head, in B.Head, ref Z.Head);
+            vlogic.nor(in A.Head, in B.Head, ref Z.Head);
             return Z;
         }
 
@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline), Nor]
         public static ref readonly BitMatrix16 nor(in BitMatrix16 A, in BitMatrix16 B, in BitMatrix16 Z)
         {
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -90,7 +90,7 @@ namespace Z0
         public static BitMatrix16 nor(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return Z;
         }
 
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline), Nor]
         public static ref readonly BitMatrix32 nor(in BitMatrix32 A, in BitMatrix32 B, in BitMatrix32 Z)
         {
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -116,7 +116,7 @@ namespace Z0
         public static BitMatrix32 nor(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return Z;
         }
 
@@ -129,7 +129,7 @@ namespace Z0
         [MethodImpl(Inline), Nor]
         public static ref readonly BitMatrix64 nor(in BitMatrix64 A, in BitMatrix64 B, in BitMatrix64 Z)
         {
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return ref Z;
         }
 
@@ -142,7 +142,7 @@ namespace Z0
         public static BitMatrix64 nor(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
-            LogicSquare.nor(A.Head, B.Head, ref Z.Head);
+            vlogic.nor(A.Head, B.Head, ref Z.Head);
             return Z;
         }
     }
