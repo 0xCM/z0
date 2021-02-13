@@ -23,11 +23,11 @@ namespace Z0
                 var tsStart = Time.now();
 
                 if(unit is IExplicitTest et)
-                    ExecExplicit(et, host.Name,results);
+                    ExecExplicit(et, host.Name, results);
                 else
                 {
                     root.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
-                    PostBenchResult(unit.TakeBenchmarks().Array());
+                    BenchmarkQueue.Enqueue(unit.TakeBenchmarks().Array());
                 }
 
                 clock.Stop();
@@ -42,7 +42,7 @@ namespace Z0
             }
             finally
             {
-                PostTestResults(results);
+                TestResultQueue.Enqueue(results);
             }
         }
 

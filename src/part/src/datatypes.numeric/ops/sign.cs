@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Numeric
     {
+
         /// <summary>
         /// Determines the <see cref='Sign'/> of the source operand
         /// </summary>

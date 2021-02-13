@@ -1,7 +1,6 @@
 .stack-work/
 alpha.cabal
 *~
-libs/
 bin/
 .vs/
 .work/

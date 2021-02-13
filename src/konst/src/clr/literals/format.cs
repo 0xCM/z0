@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static z;
 
-    using PK = PrimalTypeCode;
+    using PK = PrimalCode;
 
     partial struct ClrLiterals
     {
@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
                 => HexFormat.format(src, false, false);
         [Op]
-        public static string format(object data, PrimalTypeCode code)
+        public static string format(object data, PrimalCode code)
             => code switch {
                 PK.String => cast<string>(data),
                 PK.C16 => cast<char>(data).ToString(),

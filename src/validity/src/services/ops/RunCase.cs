@@ -12,7 +12,7 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        public Duration RunCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
+        public Duration RunCase(IUnitTest unit, MethodInfo method, List<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
             var casename = ApiUri.TestCase(method);
@@ -57,7 +57,7 @@ namespace Z0
             finally
             {
                 term.print(messages);
-                cases.WithItems(outcomes);
+                cases.AddRange(outcomes);
             }
 
             return exectime;

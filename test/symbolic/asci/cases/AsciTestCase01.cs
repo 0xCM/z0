@@ -25,9 +25,12 @@ namespace Z0
         static string[] StringData
             => new string[4]{s0,s1,s2,s3};
 
+        static Index<TextBlock> Blocks
+            => root.map(StringData, s => new TextBlock(s));
+
         [MethodImpl(Inline)]
         public static implicit operator AsciTestCase(AsciTestCase01 src)
-            => new AsciTestCase(nameof(AsciTestCase01), S, StringData);
+            => new AsciTestCase(nameof(AsciTestCase01), S, Blocks);
 
         public ReadOnlySpan<string> Strings
             => StringData;
@@ -35,7 +38,7 @@ namespace Z0
         public ReadOnlySpan<char> Chars
             => S;
 
-        public string Text
+        public TextBlock Text
             => S;
 
         public int StringCount
@@ -43,5 +46,15 @@ namespace Z0
 
         public int CharCount
             => Chars.Length;
+
+
+        ReadOnlySpan<TextBlock> IAsciTestCase.Strings
+            => Blocks.View;
+
+        public Name CaseName => nameof(AsciTestCase01);
+
+
+        public Index<TextBlock> CaseData
+            => Blocks;
     }
 }

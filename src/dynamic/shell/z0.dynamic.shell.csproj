@@ -10,9 +10,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Tools)" />
-    <ProjectReference Include="$(Dsl)" />
     <ProjectReference Include="$(CmdSpec)" />
   </ItemGroup>
 

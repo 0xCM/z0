@@ -12,7 +12,7 @@ namespace Z0
     partial class ClrQuery
     {
         [MethodImpl(Inline)]
-        public static PrimalTypeCode ToKind(this TypeCode src)
-            => (PrimalTypeCode)src;
+        public static PrimalCode ToKind(this TypeCode src)
+            => (PrimalCode)src;
     }
 }

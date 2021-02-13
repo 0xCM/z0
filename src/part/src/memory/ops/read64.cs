@@ -11,9 +11,6 @@ namespace Z0
 
     partial struct memory
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static byte read8<T>(in T src)
-            => u8(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong read64<T>(in T src)

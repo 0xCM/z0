@@ -7,34 +7,34 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct AsciTestCase : IAsciTestCase
-    {        
-        public string Text {get;}
+    {
+        public TextBlock Text {get;}
 
-        public string CaseName {get;}
+        public Name CaseName {get;}
 
-        readonly string[] StringData;
+        readonly Index<TextBlock> StringData;
 
         [MethodImpl(Inline)]
-        public AsciTestCase(string name, string text, string[] strings)
+        public AsciTestCase(Name name, TextBlock text, Index<TextBlock> strings)
         {
             Text = text;
             CaseName = name;
             StringData = strings;
         }
-        
-        public ReadOnlySpan<string> Strings
+
+        public ReadOnlySpan<TextBlock> Strings
         {
             [MethodImpl(Inline)]
             get => StringData;
         }
 
-        public ReadOnlySpan<char> Chars 
+        public ReadOnlySpan<char> Chars
         {
             [MethodImpl(Inline)]
-            get => Text;
+            get => Text.View;
         }
 
         public int StringCount
@@ -42,11 +42,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Strings.Length;
         }
-        
+
         public int CharCount
         {
             [MethodImpl(Inline)]
             get => Chars.Length;
         }
+
+        public static implicit operator TestCase<TextBlock>(AsciTestCase src)
+            => new TestCase<TextBlock>(src.CaseName, src.StringData);
     }
 }

@@ -50,5 +50,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Section.EndPos;
         }
+
+        public BitFieldSegment Untyped
+        {
+            [MethodImpl(Inline)]
+            get => new BitFieldSegment(Name, Section.Untyped);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BitFieldSegment(BitFieldSegment<T> src)
+            => src.Untyped;
     }
 }

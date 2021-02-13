@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ClrPrimitiveInfo describe(ClrPrimalKind src)
-            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalTypeCode)ClrPrimitives.code(src));
+            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalCode)ClrPrimitives.code(src));
     }
 }

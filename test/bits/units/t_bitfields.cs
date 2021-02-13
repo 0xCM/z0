@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitfields : t_bitcore<t_bitfields>
     {
@@ -87,6 +87,9 @@ namespace Z0
                 BitFieldModels.segment(BFB_I.BFB_2, 8, 9),
                 BitFieldModels.segment(BFB_I.BFB_3, 10, 15)
                 );
+            using var writer = CaseWriter(FileExtensions.Log);
+            writer.WriteLine(spec);
+
             var dst = memory.alloc<ushort>(spec.FieldCount);
             var bf = BitFields.create<ushort>(spec);
 
@@ -136,6 +139,8 @@ namespace Z0
             var spec = BitFieldModels.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
+            using var writer = CaseWriter(FileExtensions.Log);
+            writer.WriteLine(spec);
 
             Claim.eq((byte)4, spec.FieldCount);
 
@@ -165,7 +170,6 @@ namespace Z0
             }
         }
 
-        //[F1(0):0..7, F2(1):8..11, F3(2):12..13, F4(3):14..15, F5(4):16..18, F6(5):19..21, F7(6):22..26, F8(7):27..31, F9(8):32..40]
         enum BFD_W : byte
         {
             F0_Width = 8,
@@ -214,7 +218,7 @@ namespace Z0
         {
             var result = default(T);
             for(var i=0; i<src.Length; i++)
-                result = MSvc.or<T>().Invoke(result, z.skip(src,(uint)i));
+                result = MSvc.or<T>().Invoke(result, skip(src,(uint)i));
             return result;
         }
 
@@ -225,8 +229,8 @@ namespace Z0
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
             var positions = spec.Segments.Map(s => (byte)s.StartPos);
-
-            Trace(spec);
+            using var writer = CaseWriter(FileExtensions.Log);
+            writer.WriteLine(spec);
 
             for(var rep=0; rep<RepCount; rep++)
             {
@@ -268,22 +272,23 @@ namespace Z0
         public void fixed_bits()
         {
             var bf = BitFields.create<BFD_I,byte,BFD_W>(64);
-            bf.Content.Bytes.FormatBits(32);
-
             bf[3] = byte.MaxValue;
 
-            Trace(bf.Content.Bytes.FormatBits(32));
         }
 
         public void bitfield_model()
         {
-            var m = BitFieldModels.model("BitField1", new string[]{"Field1","Field2","Field3"}, new byte[]{4,8,3});
-            Claim.eq((byte)0, m.Position(0));
-            Claim.eq((byte)4, m.Position(1));
-            Claim.eq((byte)12, m.Position(2));
-            Claim.eq((byte)4, m.Width(0));
-            Claim.eq((byte)8, m.Width(1));
-            Claim.eq((byte)3, m.Width(2));
+            var model = BitFieldModels.model("BitField1", new string[]{"Field0","Field1","Field2"}, new byte[]{4,8,3});
+            Claim.eq(model.SegCount,3);
+
+            ref readonly var seg0 = ref model.Segment(0);
+            Claim.eq(seg0.Name, "Field0");
+
+            ref readonly var seg1 = ref model.Segment(1);
+            Claim.eq(seg1.Name, "Field1");
+
+            ref readonly var seg2 = ref model.Segment(2);
+            Claim.eq(seg2.Name, "Field2");
         }
     }
 }

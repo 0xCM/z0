@@ -31,39 +31,27 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source segment</param>
         /// <typeparam name="T">The type over which the segment is defined</typeparam>
-        public static string format<S,T>(ReadOnlySpan<S> src)
-            where T : unmanaged
-            where S : IBitFieldSegment<T>
-        {
-            var count = src.Length;
-            var last = count - 1;
-            var formatted = text.build();
-            formatted.Append(Chars.LBracket);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var seg = ref skip(src,i);
-                formatted.Append(format<S,T>(seg));
-                if(i != last)
-                    formatted.Append(SegSep);
-            }
-
-            formatted.Append(Chars.RBracket);
-            return formatted.ToString();
-        }
-
-        [Op, Closures(Closure)]
         public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
-                => BitFieldModels.format<BitFieldSegment<T>,T>(src);
+        {
+            var dst = text.buffer();
+            dst.Append(OpenField);
+            var count = src.Length;
+            var last = count - 1;
+            for(var i=last; i>=0; i--)
+            {
+                render(skip(src,i), dst);
+                if(i != 0)
+                    dst.Append(SegSep);
+            }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format(in BitFieldSegment src)
-            => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
+            dst.Append(CloseField);
+            return dst.Emit();
+        }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(in BitFieldSegment<T> src)
-            where T : unmanaged
-                => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
+        [MethodImpl(Inline), Op]
+        public static void render(in BitFieldSegment src, ITextBuffer dst)
+            => dst.Append(format(src));
 
         /// <summary>
         /// Computes the canonical format for a contiguous field segment sequence
@@ -73,32 +61,42 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
         {
-            const char Left = Chars.LBracket;
-            const char Right = Chars.RBracket;
-
-            var dst = text.build();
+            var dst = text.buffer();
+            dst.Append(OpenField);
             var count = src.Length;
             var last = count - 1;
-            dst.Append(Left);
-            for(var i=0; i<count; i++)
+            for(var i=last; i>=0; i--)
             {
-                ref readonly var seg = ref skip(src,i);
-                dst.Append(string.Format(SegRenderPattern, seg.StartPos, seg.EndPos));
-                if(i != last)
+                render(skip(src,i), dst);
+                if(i != 0)
                     dst.Append(SegSep);
             }
 
-            dst.Append(Right);
-            return dst.ToString();
+            dst.Append(CloseField);
+            return dst.Emit();
         }
 
-        static string format<S,T>(S src)
-            where T : unmanaged
-            where S : IBitFieldSegment<T>
-                => $"[{src.Width}:{src.StartPos}..{src.EndPos}]";
+        [Op]
+        public static string format(in BitFieldSegment seg)
+        {
+            var dst = EmptyString;
+            var name = seg.Name;
+            if(name.IsNonEmpty)
+                dst = seg.Name;
+            return dst + format(seg.Section);
+            //string.Format(SegPattern, seg.StartPos, seg.EndPos);
+        }
 
-        const string SegRenderPattern = "[{0},{1}]";
+        [Op]
+        public static string format(in BitSection src)
+            => string.Format(SegPattern, src.StartPos, src.EndPos);
 
-        const string SegSep = ", ";
+        const string SegPattern = "[{1}:{0}]";
+
+        const string SegSep = RP.SpacedPipe;
+
+        const char OpenField = Chars.LBracket;
+
+        const char CloseField = Chars.RBracket;
     }
 }

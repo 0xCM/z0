@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
-
     partial class TestApp<A>
     {
         public Type[] FindHosts()

@@ -12,7 +12,7 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        Duration ExecExplicit(IExplicitTest unit, string hostpath, IList<TestCaseRecord> results)
+        Duration ExecExplicit(IExplicitTest unit, string hostpath, List<TestCaseRecord> results)
         {
             var clock = Time.counter(false);
             var messages = sys.empty<IAppMsg>();
@@ -25,14 +25,14 @@ namespace Z0
                 clock.Stop();
 
                 messages = CollectMessages(unit, casename,clock);
-                results.WithItems(CollectResults(unit, casename, clock));
+                results.AddRange(CollectResults(unit, casename, clock));
 
             }
             catch(Exception e)
             {
                 clock.Stop();
                 messages = CollectMessages(unit, casename, clock, e);
-                results.WithItems(CollectResults(unit,casename, clock,e));
+                results.AddRange(CollectResults(unit,casename, clock,e));
             }
             finally
             {

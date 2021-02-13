@@ -8,17 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
-    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MathSvc)" />
-
-    <ProjectReference Include="$(AsmTest)" />
-    <ProjectReference Include="$(BitsTest)" />
-    <ProjectReference Include="$(MathTest)" />
-    <ProjectReference Include="$(GVecTest)" />
-    <ProjectReference Include="$(LogixTest)" />
-    <ProjectReference Include="$(SymbolicTest)" />
-
   </ItemGroup>
 
 </Project>

@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static BitSections;
+
+    using api = BitFieldModels;
 
     /// <summary>
     /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
@@ -38,6 +39,12 @@ namespace Z0
             get => EndPos - StartPos;
         }
 
+        public string Format()
+            => api.format(this);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator BitSection((ushort min, ushort max) src)
             => new BitSection(src.min, src.max);
@@ -45,53 +52,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitSection(Pair<ushort> src)
             => new BitSection(src.Left, src.Right);
-    }
-
-    /// <summary>
-    /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
-    /// </summary>
-    public readonly struct BitSection<T> : IBitSection<T>
-        where T : unmanaged
-    {
-        /// <summary>
-        /// The index of the first bit in the section
-        /// </summary>
-        public T StartPos {get;}
-
-        /// <summary>
-        /// The index of the last bit in the section
-        /// </summary>
-        public T EndPos {get;}
 
         [MethodImpl(Inline)]
-        public BitSection(T min, T max)
-        {
-            StartPos = min;
-            EndPos = max;
-        }
-
-        public uint Width
-        {
-            [MethodImpl(Inline)]
-            get => width(this);
-        }
-
-        public string Format()
-            => format(this);
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>((T min, T max) src)
-            => new BitSection<T>(src.min, src.max);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>(Pair<T> src)
-            => new BitSection<T>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>(ClosedInterval<T> src)
-            => new BitSection<T>(src.Min, src.Max);
+        public static implicit operator BitSection<uint>(BitSection src)
+            => new BitSection(src.StartPos, src.EndPos);
     }
 }

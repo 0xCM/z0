@@ -14,6 +14,7 @@
     <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(Dynamic)" />
+    <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Fsm)" />
 

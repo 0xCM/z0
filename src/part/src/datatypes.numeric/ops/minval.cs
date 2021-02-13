@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T minval<T>(T t = default)
+        public static T minval<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte)
@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(z8i);
+                return force<T>(sbyte.MinValue);
             else if(typeof(T) == typeof(short))
-                return force<T>(z16i);
+                return force<T>(short.MinValue);
             else if(typeof(T) == typeof(int))
-                return force<T>(z32i);
+                return force<T>(int.MinValue);
             else
-                return force<T>(z64i);
+                return force<T>(long.MinValue);
         }
 
         [MethodImpl(Inline)]
@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(z8);
+                return force<T>(byte.MinValue);
             else if(typeof(T) == typeof(ushort))
-                return force<T>(z16);
+                return force<T>(ushort.MinValue);
             else if(typeof(T) == typeof(uint))
-                return force<T>(z32);
+                return force<T>(uint.MinValue);
             else
-                return force<T>(z64);
+                return force<T>(ulong.MinValue);
         }
 
         [MethodImpl(Inline)]
@@ -66,12 +66,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return force<T>(z32f);
+                return force<T>(float.MinValue);
             else if(typeof(T) == typeof(double))
-                return force<T>(z64f);
+                return force<T>(double.MinValue);
             else
                 throw no<T>();
         }
-
     }
 }

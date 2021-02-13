@@ -24,12 +24,12 @@ namespace Z0
             }
             else if(HexTest.upper(src))
             {
-                dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), Numeric.unsigned(0xA));
+                dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), Numeric.u8(0xA));
                 return true;
             }
             else if(HexTest.lower(src))
             {
-                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.unsigned(0xa));
+                dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.u8(0xa));
                 return true;
             }
             else

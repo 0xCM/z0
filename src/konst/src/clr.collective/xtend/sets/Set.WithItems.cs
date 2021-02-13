@@ -5,6 +5,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     partial class XTend
     {
@@ -58,16 +59,5 @@ namespace Z0
             return dst;
         }
 
-        /// <summary>
-        /// Adds items to a list
-        /// </summary>
-        /// <param name="dst">The list to modify</param>
-        /// <param name="src">The items to add</param>
-        /// <typeparam name="T">The item type</typeparam>
-        public static IList<T> WithItems<T>(this IList<T> dst, IEnumerable<T> src)
-        {
-            src.Iter(item => dst.Add(item));
-            return dst;
-        }
     }
 }

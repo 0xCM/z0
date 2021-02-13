@@ -17,10 +17,10 @@ namespace Z0
 
         public SignKind Sign {get;}
 
-        public PrimalTypeCode TypeCode {get;}
+        public PrimalCode TypeCode {get;}
 
         [MethodImpl(Inline)]
-        public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
+        public ClrPrimitiveInfo(ClrPrimalKind kind, TypeWidth width, SignKind sign, PrimalCode tc)
         {
             Kind = kind;
             Width = width;

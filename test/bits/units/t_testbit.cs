@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_testbit : t_bitcore<t_testbit>
     {
@@ -35,15 +35,13 @@ namespace Z0
         public void testbit_64i()
             => testbit_check(z64i);
 
+
         protected void testbit_check<T>(T t = default)
             where T : unmanaged
         {
-            if(NumericKinds.unsigned<T>())
-            {
-                var src = Numeric.maxval(t);
-                for(var i=0; i< width<T>(); i++)
-                    Claim.Require(gbits.testbit(src,(byte)i));
-            }
+            var src = Numeric.ones<T>();
+            for(var i=0; i<width<T>(); i++)
+                Claim.Require(gbits.testbit(src,i));
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using static Log2x8;
     using static Sign8Kind;
 
-    using K = PrimalTypeCode;
+    using K = PrimalCode;
     using I = PrimalBits.SegPos;
 
     /// <summary>

@@ -11,6 +11,10 @@ namespace Z0
 
     partial struct memory
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T read<T>(ReadOnlySpan<byte> src)
+            => Unsafe.ReadUnaligned<T>(ref first(edit(src)));
+
         /// <summary>
         /// Deposits a source value, identified by pointer and offset, into a target reference
         /// </summary>

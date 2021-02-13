@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Domain)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />

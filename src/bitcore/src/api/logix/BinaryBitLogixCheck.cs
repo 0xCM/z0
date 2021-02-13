@@ -8,8 +8,8 @@ namespace Z0.Logix
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public ref struct BinaryBitLogixCheck
     {
@@ -74,8 +74,6 @@ namespace Z0.Logix
                 var actual = Service.Evaluate(Kind, a, b);
                 ref var judgement = ref seek(target, i);
                 judgement = new BinaryEval<bit>(a,b, expect == actual);
-
-                // ref var judgement = ref Check(a,b, ref seek(target, i));
                 result &= judgement.Result;
             }
             return Result;

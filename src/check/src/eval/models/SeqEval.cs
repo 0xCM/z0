@@ -12,7 +12,6 @@ namespace Z0
 
     public readonly struct SeqEval
     {
-        [MethodImpl(NotInline)]
         public static SeqEval<T> alloc<T>(uint count, bit result)
             => new SeqEval<T>(new BinaryEval<T>[count], result);
     }

@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     partial class TestApp<A>
     {
         const int CasePad = (int)((ulong)TestCaseField.CaseName >> 32);

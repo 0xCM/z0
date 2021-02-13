@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public readonly struct AsmExprTestCase : ITestCase<AsmExprTestCase>
+    public readonly struct AsmExprTestCase
     {
 
     }

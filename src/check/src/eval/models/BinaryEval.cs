@@ -9,6 +9,17 @@ namespace Z0
 
     using static Part;
 
+    public struct BinaryEval<K,T,R>
+    {
+        public K Kind;
+
+        public T A;
+
+        public T B;
+
+        public R Result;
+    }
+
     public struct BinaryEval<T> : IBinaryEval<T>
     {
         public T A {get;}

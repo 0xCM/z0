@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct AsciTestCase02 : ITestCase<AsciTestCase02>
+    public readonly struct AsciTestCase02 :  IAsciTestCase<AsciTestCase02>
     {
         [MethodImpl(Inline)]
         public static AsciTestCase02 Create(AsciCharCode c0 = AsciCharCode.Bang)
@@ -40,5 +40,15 @@ namespace Z0
         public readonly asci32 A32;
 
         public readonly asci64 A64;
+
+        public TextBlock Text => EmptyString;
+
+        public ReadOnlySpan<TextBlock> Strings
+            => CaseData;
+
+        public Index<TextBlock> CaseData
+            => root.array<TextBlock>(A2.Format(), A4.Format(), A8.Format(), A16.Format(), A32.Format(), A64.Format());
+
+        public Name CaseName => nameof(AsciTestCase02);
     }
 }

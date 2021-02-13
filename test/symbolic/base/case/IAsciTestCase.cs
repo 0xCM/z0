@@ -7,13 +7,13 @@ namespace Z0
     using System;
 
     public interface IAsciTestCase : ITestCase
-    {        
-        string Text {get;}
-        
-        ReadOnlySpan<string> Strings {get;}
+    {
+        TextBlock Text {get;}
 
-        ReadOnlySpan<char> Chars 
-            => Text;
+        ReadOnlySpan<TextBlock> Strings {get;}
+
+        ReadOnlySpan<char> Chars
+            => Text.View;
 
         int StringCount
             => Strings.Length;
@@ -23,9 +23,9 @@ namespace Z0
     }
 
 
-    public interface IAsciTestCase<T> : IAsciTestCase, ITestCase<T>
+    public interface IAsciTestCase<T> : IAsciTestCase, ITestCase<TextBlock>
         where T: unmanaged, IAsciTestCase<T>
-    {        
-        
+    {
+
     }
 }

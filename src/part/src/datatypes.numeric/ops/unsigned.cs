@@ -12,19 +12,21 @@ namespace Z0
     partial struct Numeric
     {
         /// <summary>
-        /// This function exists to remediate, in certain situations, the compiler's blindly illogical devotion to signed 32-bit integers
+        /// Returns 1 if <typeparamref name='T'/> is an unsigned integral type and 0 otherwise
         /// </summary>
-        /// <param name="src">The source value that the compiler cannot interpret an unsigned 8-bit integer</param>
+        /// <typeparam name="T">The test type</typeparam>
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static bit usigned<T>()
+            where T : unmanaged
+                => typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint) || typeof(T) == typeof(ulong);
+
+
         [MethodImpl(Inline), Op]
-        public static byte unsigned(byte src)
+        public static byte u8(byte src)
             => src;
 
-        /// <summary>
-        /// This function exists to remediate, in certain situations, the compiler's blindly illogical devotion to signed 32-bit integers
-        /// </summary>
-        /// <param name="src">The source value that the compiler cannot interpret an unsigned 16-bit integer</param>
         [MethodImpl(Inline), Op]
-        public static ushort unsigned(ushort src)
+        public static ushort u16(ushort src)
             => src;
     }
 }

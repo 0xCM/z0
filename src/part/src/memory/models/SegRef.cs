@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.InteropServices.MemoryMarshal;
-    using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
+    using static memory;
 
     public readonly struct SegRef : ISegRef<byte>
     {
@@ -31,7 +30,7 @@ namespace Z0
         public Span<byte> Edit
         {
             [MethodImpl(Inline)]
-            get => cover(BaseAddress, Length);
+            get => cover<byte>(BaseAddress, Length);
         }
 
         public uint Length
@@ -103,24 +102,20 @@ namespace Z0
         public static bool operator !=(SegRef a, SegRef b)
             => !a.Equals(b);
 
-        [MethodImpl(Inline)]
-        static uint size<T>()
-            => (uint)SizeOf<T>();
+        // [MethodImpl(Inline)]
+        // static unsafe Span<byte> cover(MemoryAddress location, uint count)
+        //     => cover<byte>((void*)location, count);
 
-        [MethodImpl(Inline)]
-        static unsafe Span<byte> cover(MemoryAddress location, uint count)
-            => cover<byte>((void*)location, count);
+        // [MethodImpl(Inline)]
+        // static unsafe Span<T> cover<T>(ulong location, uint count)
+        //     => cover<T>((void*)location, count);
 
-        [MethodImpl(Inline)]
-        static unsafe Span<T> cover<T>(ulong location, uint count)
-            => cover<T>((void*)location, count);
+        // [MethodImpl(Inline)]
+        // static unsafe Span<T> cover<T>(void* pSrc, uint count)
+        //     => CreateSpan(ref @as<T>(pSrc), (int)count);
 
-        [MethodImpl(Inline)]
-        static unsafe Span<T> cover<T>(void* pSrc, uint count)
-            => CreateSpan(ref @as<T>(pSrc), (int)count);
-
-        [MethodImpl(Inline)]
-        static unsafe ref T @as<T>(void* pSrc)
-            => ref AsRef<T>(pSrc);
+        // [MethodImpl(Inline)]
+        // static unsafe ref T @as<T>(void* pSrc)
+        //     => ref AsRef<T>(pSrc);
     }
 }

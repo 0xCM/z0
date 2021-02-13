@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a content-parametric memory reference
@@ -48,7 +49,7 @@ namespace Z0
         public uint CellSize
         {
             [MethodImpl(Inline)]
-            get => (uint)Unsafe.SizeOf<T>();
+            get => (uint)size<T>();
         }
 
         public uint CellCount
@@ -71,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public unsafe ref T Cell(int index)
-            => ref Unsafe.AsRef<T>((void*)(BaseAddress + (ulong)index*CellSize));
+            => ref @ref<T>((void*)(BaseAddress + (ulong)index*CellSize));
 
         public ref T this[int index]
         {

@@ -41,97 +41,97 @@ namespace Z0
         /// <summary>
         /// 0
         /// </summary>
-        readonly PrimalTypeCode @null;
+        readonly PrimalCode @null;
 
         /// <summary>
         /// 1
         /// </summary>
-        readonly PrimalTypeCode obj;
+        readonly PrimalCode obj;
 
         /// <summary>
         /// 2
         /// </summary>
-        readonly PrimalTypeCode dbnull;
+        readonly PrimalCode dbnull;
 
         /// <summary>
         /// 3
         /// </summary>
-        readonly PrimalTypeCode u1;
+        readonly PrimalCode u1;
 
         /// <summary>
         /// 4
         /// </summary>
-        readonly PrimalTypeCode c16;
+        readonly PrimalCode c16;
 
         /// <summary>
         /// 5
         /// </summary>
-        readonly PrimalTypeCode i8;
+        readonly PrimalCode i8;
 
         /// <summary>
         /// 6
         /// </summary>
-        readonly PrimalTypeCode u8;
+        readonly PrimalCode u8;
 
         /// <summary>
         /// 7
         /// </summary>
-        readonly PrimalTypeCode i16;
+        readonly PrimalCode i16;
 
         /// <summary>
         /// 8
         /// </summary>
-        readonly PrimalTypeCode u16;
+        readonly PrimalCode u16;
 
         /// <summary>
         /// 9
         /// </summary>
-        readonly PrimalTypeCode i32;
+        readonly PrimalCode i32;
 
         /// <summary>
         /// 10
         /// </summary>
-        readonly PrimalTypeCode u32;
+        readonly PrimalCode u32;
 
         /// <summary>
         /// 11
         /// </summary>
-        readonly PrimalTypeCode i64;
+        readonly PrimalCode i64;
 
         /// <summary>
         /// 12
         /// </summary>
-        readonly PrimalTypeCode u64;
+        readonly PrimalCode u64;
 
         /// <summary>
         /// 13
         /// </summary>
-        readonly PrimalTypeCode f32;
+        readonly PrimalCode f32;
 
         /// <summary>
         /// 14
         /// </summary>
-        readonly PrimalTypeCode f64;
+        readonly PrimalCode f64;
 
         /// <summary>
         /// 15
         /// </summary>
-        readonly PrimalTypeCode f128;
+        readonly PrimalCode f128;
 
         /// <summary>
         /// 16
         /// </summary>
-        readonly PrimalTypeCode dt;
+        readonly PrimalCode dt;
 
         /// <summary>
         /// 17
         /// </summary>
-        readonly PrimalTypeCode _;
+        readonly PrimalCode _;
 
         /// <summary>
         /// 18
         /// </summary>
-        readonly PrimalTypeCode s;
+        readonly PrimalCode s;
 
         internal readonly Type[] Types;
 
@@ -155,7 +155,7 @@ namespace Z0
             f128 = TypeCode.Decimal.ToKind();
             c16 = TypeCode.Char.ToKind();
             dt = TypeCode.DateTime.ToKind();
-            _ = (PrimalTypeCode)17;
+            _ = (PrimalCode)17;
             s = TypeCode.String.ToKind();
             Types = CodedTypes;
         }

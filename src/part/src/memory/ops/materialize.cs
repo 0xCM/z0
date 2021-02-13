@@ -17,6 +17,7 @@ namespace Z0
             var m = src.Length;
             var n = dst.Length;
             var o = 0u;
+            var d = delimiter ?? 0;
             for(var i=0u; i<m; i++)
             {
                 var c = skip(src,i).Edit;
@@ -26,7 +27,7 @@ namespace Z0
                     seek(dst,o) = skip(c,j);
 
                 if(delimiter != null)
-                    seek(dst, ++o) = delimiter.Value;
+                    seek(dst, ++o) = d;
             }
         }
     }

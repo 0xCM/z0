@@ -13,7 +13,8 @@ namespace Z0
     {
         void RunTests(bool concurrent, params string[] filters)
         {
-            var hosts = FindHosts();
+
+            var hosts = SelectedHosts.IsNonEmpty ? SelectedHosts.Storage : FindHosts();
             iter(hosts, h =>  RunUnit(h,filters), concurrent);
         }
 

@@ -220,10 +220,10 @@ namespace Z0
         /// <summary>
         /// Specifies the field's primal kind, if applicable; otherwise, none
         /// </summary>
-        public PrimalTypeCode KindId
+        public PrimalCode KindId
         {
             [MethodImpl(Inline)]
-            get => (PrimalTypeCode)Type.GetTypeCode(Field.FieldType);
+            get => (PrimalCode)Type.GetTypeCode(Field.FieldType);
         }
 
         public bool IsEmpty
