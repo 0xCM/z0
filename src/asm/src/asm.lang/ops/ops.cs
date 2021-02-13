@@ -56,7 +56,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<R32,R32> ops(R32 dst, R32 src)
+        public Args<r32,r32> ops(r32 dst, r32 src)
             => args(dst,src);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<m32,R32> ops(m32 dst, R32 src)
+        public Args<m32,r32> ops(m32 dst, r32 src)
             => args(dst,src);
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<R64,R64> ops(R64 dst, R64 src)
+        public Args<r64,r64> ops(r64 dst, r64 src)
             => args(dst,src);
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<R64,m64> ops(R64 dst, m64 src)
+        public Args<r64,m64> ops(r64 dst, m64 src)
             => args(dst,src);
     }
 }

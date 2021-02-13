@@ -12,10 +12,36 @@ namespace Z0.Asm
     using K = RegisterKind;
     using W = W8;
     using T = System.Byte;
-    using G = R8;
+    using G = AsmRegs.r8;
 
     partial struct AsmRegs
     {
+        public struct R8<R> : IRegister<R8<R>,W8,byte>, IRegOp8<byte>
+            where R : unmanaged, IRegOp8
+        {
+            public byte Data;
+
+            [MethodImpl(Inline)]
+            public R8(byte src)
+                => Data = src;
+
+            public byte Content
+            {
+                [MethodImpl(Inline)]
+                get => Data;
+            }
+
+            public RegisterKind RegKind
+            {
+                [MethodImpl(Inline)]
+                get => default(R).RegKind;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator r8(R8<R> src)
+                => new r8(src.Content, src.RegKind);
+        }
+
         /// <summary>
         /// Defines an operand that specifies an 8-bit gp register
         /// </summary>

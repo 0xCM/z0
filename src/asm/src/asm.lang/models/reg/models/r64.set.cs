@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegisterKind;
     using W = W64;
     using T = System.UInt64;
-    using G = R64;
+    using G = AsmRegs.r64;
 
     partial struct AsmRegs
     {
@@ -31,6 +31,26 @@ namespace Z0.Asm
                 Content = src;
                 RegKind = kind;
             }
+        }
+
+        public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp64<ulong>
+            where R : unmanaged, IRegOp64
+        {
+            public ulong Content {get;}
+
+            [MethodImpl(Inline)]
+            public R64(ulong src)
+                => Content= src;
+
+            public RegisterKind RegKind
+            {
+                [MethodImpl(Inline)]
+                get => default(R).RegKind;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator r64(R64<R> src)
+                => new r64(src.Content, src.RegKind);
         }
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegisterKind;
     using W = W16;
     using T = System.UInt16;
-    using G = R16;
+    using G = AsmRegs.r16;
 
     partial struct AsmRegs
     {
@@ -31,6 +31,26 @@ namespace Z0.Asm
                 Content = src;
                 RegKind = kind;
             }
+        }
+
+        public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>, IRegOp16<ushort>
+            where R : unmanaged, IRegOp16
+        {
+            public ushort Content {get;}
+
+            [MethodImpl(Inline)]
+            public R16(ushort value)
+                => Content = value;
+
+            public RegisterKind RegKind
+            {
+                [MethodImpl(Inline)]
+                get => default(R).RegKind;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator r16(R16<R> src)
+                => new r16(src.Content, src.RegKind);
         }
 
         public struct ax : IRegister<ax,W,T>, IRegOp16<T>

@@ -11,18 +11,16 @@ namespace Z0.Asm
 
     public readonly struct AsmOpContent : IAsmOpContent<DataWidth,BinaryCode>
     {
-        public BinaryCode Data {get;}
+        public BinaryCode Content {get;}
 
         [MethodImpl(Inline)]
         public AsmOpContent(BinaryCode data)
-        {
-            Data = data;
-        }
+            => Content = data;
 
         public DataWidth Width
         {
             [MethodImpl(Inline)]
-            get => (DataWidth)(Data.Count * 8);
+            get => (DataWidth)(Content.Count * 8);
         }
     }
 }

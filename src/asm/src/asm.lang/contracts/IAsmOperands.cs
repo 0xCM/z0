@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     public interface IAsmOperands<F,A> : IAsmOpererands
         where F : struct, IAsmOperands<F,A>
-        where A : unmanaged
+        where A : unmanaged, IAsmOp
     {
         byte IAsmOpererands.Count
             => 1;
@@ -28,8 +28,8 @@ namespace Z0.Asm
 
     public interface IAsmOperands<F,A,B> : IAsmOpererands
         where F : struct, IAsmOperands<F,A,B>
-        where A : unmanaged
-        where B : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
     {
 
         byte IAsmOpererands.Count
@@ -39,16 +39,16 @@ namespace Z0.Asm
 
         B this[N1 n] {get;}
 
-        A First  => this[n0];
+        A First => this[n0];
 
-        B Second  => this[n1];
+        B Second => this[n1];
     }
 
     public interface IAsmOperands<F,A,B,C> : IAsmOpererands
         where F : struct, IAsmOperands<F,A,B,C>
-        where A : unmanaged
-        where B : unmanaged
-        where C : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
+        where C : unmanaged, IAsmOp
     {
         byte IAsmOpererands.Count
             => 3;
@@ -68,10 +68,10 @@ namespace Z0.Asm
 
     public interface IAsmOperands<F,A,B,C,D> : IAsmOpererands
         where F : struct, IAsmOperands<F,A,B,C,D>
-        where A : unmanaged
-        where B : unmanaged
-        where C : unmanaged
-        where D : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
+        where C : unmanaged, IAsmOp
+        where D : unmanaged, IAsmOp
     {
         byte IAsmOpererands.Count
             => 4;

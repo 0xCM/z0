@@ -9,9 +9,61 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct Args
+    public struct Args : IIndex<IAsmOp>
     {
+        readonly Index<IAsmOp> Data;
 
+        [MethodImpl(Inline)]
+        public Args(params IAsmOp[] src)
+            => Data = src;
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
+        public ReadOnlySpan<IAsmOp> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
+
+        public Span<IAsmOp> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public IAsmOp[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        public static Args Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Args(sys.empty<IAsmOp>());
+        }
     }
 
     /// <summary>
@@ -35,6 +87,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Args<A>(A src)
             => new Args<A>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Args(Args<A> src)
+            => new Args(src._A);
     }
 
     /// <summary>
@@ -81,6 +137,11 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Args<A,B>(Paired<A,B> src)
             => new Args<A,B>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Args(Args<A,B> src)
+            => new Args(src._A, src._B);
+
     }
 
     /// <summary>
@@ -138,6 +199,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Args<A,B,C>((A a, B b, C c) src)
             => new Args<A,B,C>(src.a, src.b, src.c);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Args(Args<A,B,C> src)
+            => new Args(src._A, src._B, src._C);
    }
 
     /// <summary>
@@ -202,5 +267,9 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Args<A,B,C,D>((A a, B b, C c, D d) src)
             => new Args<A,B,C,D>(src.a, src.b, src.c, src.d);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Args(Args<A,B,C,D> src)
+            => new Args(src._A, src._B, src._C, src._D);
     }
 }

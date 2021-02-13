@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static AsmMnemonicCode;
     using static AsmMem;
+    using static AsmRegs;
 
     partial struct AsmInstructions
     {
@@ -47,7 +48,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R16,R8> movzx(R16 dst, R8 src)
+        public static AsmStatement<r16,r8> movzx(r16 dst, r8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Z0.Asm
         /// <param name="src">The memory source</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R16,m8> movzx(R16 dst, m8 src)
+        public static AsmStatement<r16,m8> movzx(r16 dst, m8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R32,R8> movzx(R32 dst, R8 src)
+        public static AsmStatement<r32,r8> movzx(r32 dst, r8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -110,7 +111,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R32,m8> movzx(R32 dst, m8 src)
+        public static AsmStatement<r32,m8> movzx(r32 dst, m8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -133,7 +134,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R64,R8> movzx(R64 dst, R8 src)
+        public static AsmStatement<r64,r8> movzx(r64 dst, r8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -153,7 +154,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R64,m8> movzx<T>(R64 dst, m8 src)
+        public static AsmStatement<r64,m8> movzx<T>(r64 dst, m8 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R32,R16> movzx(R32 dst, R16 src)
+        public static AsmStatement<r32,r16> movzx(r32 dst, r16 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -196,7 +197,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R32,m16> movzx(R32 dst, m16 src)
+        public static AsmStatement<r32,m16> movzx(r32 dst, m16 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -219,7 +220,7 @@ namespace Z0.Asm
         /// <typeparam name="T">The target register type</typeparam>
         /// <typeparam name="S">The source register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R64,R16> movzx<T,S>(R64 dst, R16 src)
+        public static AsmStatement<r64,r16> movzx<T,S>(r64 dst, r16 src)
             => asm.statement(movzx(), dst, src);
 
         /// <summary>
@@ -239,7 +240,7 @@ namespace Z0.Asm
         /// <param name="src">The source register</param>
         /// <typeparam name="T">The target register type</typeparam>
         [MethodImpl(Inline), Op]
-        public static AsmStatement<R64,m16> movzx(R64 dst, m16 src)
+        public static AsmStatement<r64,m16> movzx(r64 dst, m16 src)
             => asm.statement(movzx(), dst, src);
     }
 }

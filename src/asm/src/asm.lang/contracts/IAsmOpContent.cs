@@ -6,13 +6,16 @@ namespace Z0.Asm
 {
     public interface IAsmOpContent : ISized
     {
-
+        dynamic Content {get;}
     }
 
     public interface IAsmOpContent<T> : IAsmOpContent
         where T : struct
     {
-        T Data {get;}
+        new T Content {get;}
+
+        dynamic IAsmOpContent.Content
+            => Content;
     }
 
     public interface IAsmOpContent<W,T> : IAsmOpContent<T>, ISized<W>
@@ -21,5 +24,4 @@ namespace Z0.Asm
     {
 
     }
-
 }

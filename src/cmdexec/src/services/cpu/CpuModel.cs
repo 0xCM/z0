@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using static AsmRegs;
     public class CpuModel
     {
         readonly IWfShell Wf;
@@ -22,9 +23,9 @@ namespace Z0.Asm
             Wf = wf;
         }
 
-        public void push(R64 r)
+        public void push(r64 r)
         {
-            CallStack.Push(r);
+            CallStack.Push(r.Content);
         }
     }
 }

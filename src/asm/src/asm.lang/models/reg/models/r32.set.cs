@@ -12,7 +12,7 @@ namespace Z0.Asm
     using K = RegisterKind;
     using W = W32;
     using T = System.UInt32;
-    using G = R32;
+    using G = AsmRegs.r32;
 
     partial struct AsmRegs
     {
@@ -33,6 +33,25 @@ namespace Z0.Asm
             }
         }
 
+        public readonly struct R32<R> : IRegister<R32<R>,W32,uint>, IRegOp32<uint>
+            where R : unmanaged, IRegOp32
+        {
+            public uint Content {get;}
+
+            [MethodImpl(Inline)]
+            public R32(uint value)
+                => Content = value;
+
+            public RegisterKind RegKind
+            {
+                [MethodImpl(Inline)]
+                get => default(R).RegKind;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator r32(R32<R> src)
+                => new r32(src.Content, src.RegKind);
+        }
         public struct eax : IRegister<eax,W,T>, IRegOp32<T>
         {
             public T Content {get;}
@@ -46,11 +65,11 @@ namespace Z0.Asm
             public G Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new G(Content, RegKind);
+                get => new G(Content, RegKind);
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator R32(eax src)
+            public static implicit operator G(eax src)
                 => src.Generalized;
         }
 
@@ -58,9 +77,6 @@ namespace Z0.Asm
         {
             public T Content {get;}
 
-            [MethodImpl(Inline)]
-            public static implicit operator G(ecx src)
-                => src.Generalized;
 
             [MethodImpl(Inline)]
             public ecx(T value)
@@ -73,16 +89,15 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => new G(Content, RegKind);
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(ecx src)
+                => src.Generalized;
         }
 
         public struct edx : IRegister<edx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
-
-
-            [MethodImpl(Inline)]
-            public static implicit operator G(edx src)
-                => src.Generalized;
 
             [MethodImpl(Inline)]
             public edx(T value)
@@ -95,15 +110,16 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get =>new G(Content, RegKind);
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(edx src)
+                => src.Generalized;
         }
 
         public struct ebx : IRegister<ebx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
-            [MethodImpl(Inline)]
-            public static implicit operator G(ebx src)
-                => src.Generalized;
 
             [MethodImpl(Inline)]
             public ebx(T value)
@@ -116,6 +132,10 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get =>new G(Content, RegKind);
             }
+
+            [MethodImpl(Inline)]
+            public static implicit operator G(ebx src)
+                => src.Generalized;
         }
 
         public struct esi : IRegister<esi,W,T>, IRegOp32<T>

@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     }
 
-    public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>
+    public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>, IAsmOpContent<T>
         where T : struct
     {
 
