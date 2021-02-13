@@ -415,7 +415,7 @@ namespace Z0
         public void Run()
         {
 
-
+            ToolRunner.run(Wf, WinCmd.script(FS.path(@"J:\control\tools\clang\codegen.cmd")));
             // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
             // root.iter(terms, r => Wf.Row(r));
         }

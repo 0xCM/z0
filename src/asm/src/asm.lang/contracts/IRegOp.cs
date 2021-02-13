@@ -6,112 +6,117 @@ namespace Z0.Asm
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IMemOp : IAsmOp
-    {
+    using static memory;
+    using static Part;
 
+    [Free]
+    public interface IRegOp : IAsmOp
+    {
+        RegisterKind RegKind => default;
     }
 
     [Free]
-    public interface IMemOp<T> : IMemOp, IAsmOp<T>
+    public interface IRegOp<T> : IRegOp, IAsmOp<T>
         where T : unmanaged
     {
         AsmOpKind IAsmOp.OpKind
-            => AsmOpKind.M | (AsmOpKind)memory.size<T>();
+            => AsmOpKind.R | (AsmOpKind)width<T>(w16);
+
+        BitWidth ISized.Width
+            => width<T>();
     }
 
-    public interface IMemOp8 : IMemOp
+    [Free]
+    public interface IRegOp8 : IRegOp
     {
         // BitWidth ISized.Width
         //     => 8;
     }
 
-    public interface IMemOp8<T> : IMemOp8, IMemOp<T>
+    [Free]
+    public interface IRegOp8<T> : IRegOp8, IRegOp<T>
         where T : unmanaged
     {
+
     }
 
-    public interface IMemOp16 : IMemOp
+    [Free]
+    public interface IRegOp16 : IRegOp
     {
         // BitWidth ISized.Width
         //     => 16;
-
     }
 
-    public interface IMemOp16<T> : IMemOp16, IMemOp<T>
-        where T : unmanaged
-    {
-    }
-
-    public interface IMemOp32 : IMemOp
-    {
-        // BitWidth ISized.Width
-        //     => 32;
-
-    }
-
-    public interface IMemOp32<T> : IMemOp32, IMemOp<T>
-        where T : unmanaged
-    {
-    }
-
-    public interface IMemOp64 : IMemOp
-    {
-        // BitWidth ISized.Width
-        //     => 64;
-
-    }
-
-    public interface IMemOp64<T> : IMemOp64, IMemOp<T>
-        where T : unmanaged
-    {
-    }
-
-    public interface IMemOp128 : IMemOp
-    {
-        // BitWidth ISized.Width
-        //     => 128;
-
-    }
-
-    public interface IMemOp128<T> : IMemOp128, IMemOp<T>
-        where T : unmanaged
-    {
-    }
-
-    public interface IMemOp256 : IMemOp
-    {
-        // BitWidth ISized.Width
-        //     => 256;
-
-    }
-
-    public interface IMemOp256<T> :  IMemOp256, IMemOp<T>
-        where T : unmanaged
-    {
-    }
-
-    public interface IMemOp512 : IMemOp
-    {
-        // BitWidth ISized.Width
-        //     => 512;
-
-    }
-
-    public interface IMemOp512<T> : IMemOp512, IMemOp<T>
+    [Free]
+    public interface IRegOp16<T> : IRegOp16, IRegOp<T>
         where T : unmanaged
     {
     }
 
     [Free]
-    public interface IMemOp<F,W,T> : IMemOp<T>
-        where T : unmanaged
-        where F : unmanaged, IMemOp<F,W,T>
-        where W : unmanaged, ITypeWidth
+    public interface IRegOp32 : IRegOp
     {
-        new W Width => default(W);
+        // BitWidth ISized.Width
+        //     => 32;
+    }
 
-        BitWidth ISized.Width
-            => Width.BitWidth;
+    [Free]
+    public interface IRegOp32<T> : IRegOp32, IRegOp<T>
+        where T : unmanaged
+    {
+
+    }
+
+    [Free]
+    public interface IRegOp64 : IRegOp
+    {
+        // BitWidth ISized.Width
+        //     => 64;
+    }
+
+
+    [Free]
+    public interface IRegOp64<T> : IRegOp64, IRegOp<T>
+        where T : unmanaged
+    {
+    }
+
+    [Free]
+    public interface IRegOp128 : IRegOp
+    {
+        // BitWidth ISized.Width
+        //     => 128;
+    }
+
+    [Free]
+    public interface IRegOp128<T> : IRegOp128, IRegOp<T>
+        where T : unmanaged
+    {
+    }
+
+    [Free]
+    public interface IRegOp256 : IRegOp
+    {
+        // BitWidth ISized.Width
+        //     => 256;
+    }
+
+    [Free]
+    public interface IRegOp256<T> : IRegOp256, IRegOp<T>
+        where T : unmanaged
+    {
+    }
+
+    [Free]
+    public interface IRegOp512 : IRegOp
+    {
+        // BitWidth ISized.Width
+        //     => 512;
+    }
+
+    [Free]
+    public interface IRegOp512<T> : IRegOp512, IRegOp<T>
+        where T : unmanaged
+    {
     }
 }

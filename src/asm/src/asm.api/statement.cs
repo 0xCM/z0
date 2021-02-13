@@ -17,31 +17,31 @@ namespace Z0.Asm
             => new Statement(src.Trim());
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A> statement<A>(AsmMnemonic mnemonic, A a)
+        public static AsmStatement<A> statement<A>(AsmMnemonicCode mnemonic, A a)
             where A : unmanaged, IAsmOp
                 => new AsmStatement<A>(mnemonic,a);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B> statement<A,B>(AsmMnemonic mnemonic, A a, B b)
+        public static AsmStatement<A,B> statement<A,B>(AsmMnemonicCode mnemonic, A a, B b)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
                 => new AsmStatement<A,B>(mnemonic,a,b);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B> statement<A,B>(AsmMnemonic mnemonic, Args<A,B> args)
+        public static AsmStatement<A,B> statement<A,B>(AsmMnemonicCode mnemonic, Args<A,B> args)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
                 => new AsmStatement<A,B>(mnemonic, args);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonic mnemonic, A a, B b, C c)
+        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonicCode mnemonic, A a, B b, C c)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
             where C : unmanaged, IAsmOp
                 => new AsmStatement<A,B,C>(mnemonic,a,b,c);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonic mnemonic, Args<A,B,C> args)
+        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonicCode mnemonic, Args<A,B,C> args)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
             where C : unmanaged, IAsmOp

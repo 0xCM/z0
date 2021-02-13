@@ -10,23 +10,23 @@ namespace Z0.Asm
     using static Part;
 
     /// <summary>
-    /// Defines a 64-bit register and its content
+    /// Defines a 32-bit register and its content
     /// </summary>
-    public readonly struct R64 : IRegister<R64,W64,ulong>, IRegOp<ulong>
+    public readonly struct R32 : IRegister<R32,W32,uint>, IRegOp32<uint>
     {
-        public ulong Content {get;}
+        public uint Content  {get;}
 
         public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
-        public R64(ulong value, RegisterKind kind)
+        public R32(uint value, RegisterKind kind)
         {
             Content = value;
             RegKind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(R64 src)
+        public static implicit operator uint(R32 src)
             => src.Content;
     }
 }

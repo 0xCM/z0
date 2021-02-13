@@ -72,7 +72,7 @@ namespace Z0.Tools
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value)
         {
-            Args[Index] = Cmd.flag(Index, value, DefaultPrefix);
+            Args[Index] = Cmd.flag(Index, value, Dash);
             Index++;
             return (T)this;
         }
@@ -97,6 +97,14 @@ namespace Z0.Tools
         protected T AppendFlag<A>(string name, A value)
         {
             Args[Index] = Cmd.flag(Index, name, value, DefaultPrefix);
+            Index++;
+            return (T)this;
+        }
+
+        [MethodImpl(Inline)]
+        protected T AppendArg<A>(string name, A value)
+        {
+            Args[Index] = Cmd.arg(Index, name, value, DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }

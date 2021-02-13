@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an 8-bit memory operand
         /// </summary>
-        public struct m8 : IMemOp<m8,W8,byte>
+        public struct m8 : IMemOp<m8,W8,byte>, IMemOp8<byte>
         {
             public byte Content {get;}
 

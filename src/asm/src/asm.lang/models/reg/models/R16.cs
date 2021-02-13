@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 16-bit register and its content
     /// </summary>
-    public readonly struct R16 : IRegister<R16,W16,ushort>, IRegOp<ushort>
+    public readonly struct R16 : IRegister<R16,W16,ushort>, IRegOp16<ushort>
     {
         public ushort Content  {get;}
 

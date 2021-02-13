@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 16-bit gp register
         /// </summary>
-        public struct r16 : IRegister<r16,W,T>, IRegOp<T>
+        public struct r16 : IRegister<r16,W,T>, IRegOp16<T>
         {
             public T Content {get;}
 
@@ -33,7 +33,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct ax : IRegister<ax,W,T>, IRegOp<T>
+        public struct ax : IRegister<ax,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -56,7 +56,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct cx : IRegister<cx,W,T>, IRegOp<T>
+        public struct cx : IRegister<cx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -79,7 +79,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct dx : IRegister<dx,W,T>, IRegOp<T>
+        public struct dx : IRegister<dx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -102,7 +102,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct bx : IRegister<bx,W,T>, IRegOp<T>
+        public struct bx : IRegister<bx,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -125,7 +125,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct si : IRegister<si,W,T>, IRegOp<T>
+        public struct si : IRegister<si,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -149,7 +149,7 @@ namespace Z0.Asm
 
         }
 
-        public struct di : IRegister<di,W,T>, IRegOp<T>
+        public struct di : IRegister<di,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -172,7 +172,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct sp : IRegister<sp,W,T>, IRegOp<T>
+        public struct sp : IRegister<sp,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -195,7 +195,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct bp : IRegister<bp,W,T>, IRegOp<T>
+        public struct bp : IRegister<bp,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -218,7 +218,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r8w : IRegister<r8w,W,T>, IRegOp<T>
+        public struct r8w : IRegister<r8w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -242,7 +242,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r9w : IRegister<r9w,W,T>, IRegOp<T>
+        public struct r9w : IRegister<r9w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -265,7 +265,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r10w : IRegister<r10w,W,T>, IRegOp<T>
+        public struct r10w : IRegister<r10w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -288,7 +288,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r11w : IRegister<r11w,W,T>, IRegOp<T>
+        public struct r11w : IRegister<r11w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -311,7 +311,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r12w : IRegister<r12w,W,T>, IRegOp<T>
+        public struct r12w : IRegister<r12w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -334,7 +334,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r13w : IRegister<r13w,W,T>, IRegOp<T>
+        public struct r13w : IRegister<r13w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -357,7 +357,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r14w : IRegister<r14w,W,T>, IRegOp<T>
+        public struct r14w : IRegister<r14w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 
@@ -380,7 +380,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r15w : IRegister<r15w,W,T>, IRegOp<T>
+        public struct r15w : IRegister<r15w,W,T>, IRegOp16<T>
         {
             public T Content  {get;}
 

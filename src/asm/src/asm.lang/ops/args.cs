@@ -13,28 +13,28 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline)]
         public static Args<A> args<A>(A a)
-            where A : unmanaged
+            where A : unmanaged, IAsmOp
                 => new Args<A>(a);
 
         [MethodImpl(Inline)]
         public static Args<A,B> args<A,B>(A a, B b)
-            where A : unmanaged
-            where B : unmanaged
+            where A : unmanaged, IAsmOp
+            where B : unmanaged, IAsmOp
                 => new Args<A,B>(a, b);
 
         [MethodImpl(Inline)]
         public static Args<A,B,C> args<A,B,C>(A a, B b, C c)
-            where A : unmanaged
-            where B : unmanaged
-            where C : unmanaged
+            where A : unmanaged, IAsmOp
+            where B : unmanaged, IAsmOp
+            where C : unmanaged, IAsmOp
                 => new Args<A,B,C>(a, b, c);
 
         [MethodImpl(Inline)]
         public static Args<A,B,C,D> args<A,B,C,D>(A a, B b, C c, D d)
-            where A : unmanaged
-            where B : unmanaged
-            where C : unmanaged
-            where D : unmanaged
+            where A : unmanaged, IAsmOp
+            where B : unmanaged, IAsmOp
+            where C : unmanaged, IAsmOp
+            where D : unmanaged, IAsmOp
                 => new Args<A,B,C,D>(a, b, c, d);
     }
 }

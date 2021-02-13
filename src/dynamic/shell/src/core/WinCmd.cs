@@ -18,5 +18,13 @@ namespace Z0
             const string Pattern = "cmd /c dir {0}";
             return string.Format(Pattern, src.Format(PathSeparator.BS));
         }
+
+
+        public static CmdLine script(FS.FilePath src)
+        {
+            const string Pattern = "cmd /c {0}";
+            return string.Format(Pattern, src.Format(PathSeparator.BS));
+        }
+
     }
 }

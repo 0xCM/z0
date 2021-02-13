@@ -22,16 +22,48 @@ namespace Z0.Asm
             => memory.size<T>();
     }
 
-
-    [Free]
-    public interface IImmOp<F,W,T> : IImmOp<T>
-        where T : unmanaged
-        where F : unmanaged, IImmOp<F,W,T>
-        where W : unmanaged, ITypeWidth
+    public interface IImmOp8 : IImmOp
     {
-        new W Width => default(W);
 
-        BitWidth ISized.Width
-            => Width.BitWidth;
     }
+
+    public interface IImmOp8<T> : IImmOp8, IImmOp<T>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IImmOp16 : IImmOp
+    {
+
+    }
+
+    public interface IImmOp16<T> : IImmOp16, IImmOp<T>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IImmOp32 : IImmOp
+    {
+
+    }
+
+    public interface IImmOp32<T> : IImmOp32, IImmOp<T>
+        where T : unmanaged
+    {
+
+    }
+
+    public interface IImmOp64 : IImmOp
+    {
+
+    }
+
+    public interface IImmOp64<T> : IImmOp64, IImmOp<T>
+        where T : unmanaged
+    {
+
+    }
+
 }

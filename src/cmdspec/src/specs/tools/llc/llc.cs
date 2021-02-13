@@ -2,24 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Zmm : IZmmReg, IRegOp<Cell512>
+    public partial class llc : ToolCmdBuilder<llc>
     {
-        public Cell512 Content {get;}
-
-        public RegisterKind RegKind {get;}
-
-        [MethodImpl(Inline)]
-        public Zmm(Cell512 value, RegisterKind kind)
+        public llc()
+            : base(nameof(llc))
         {
-            Content = value;
-            RegKind = kind;
+
         }
 
     }

@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 512-bit memory operand
         /// </summary>
-        public struct m512 : IMemOp<m512,W512,Cell512>
+        public struct m512 : IMemOp<m512,W512,Cell512>, IMemOp512<Cell512>
         {
             public Cell512 Content {get;}
 

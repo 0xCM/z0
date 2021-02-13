@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 32-bit memory operand
         /// </summary>
-        public struct m32 : IMemOp<m32,W32,uint>
+        public struct m32 : IMemOp<m32,W32,uint>, IMemOp32<uint>
         {
             public uint Content {get;}
 

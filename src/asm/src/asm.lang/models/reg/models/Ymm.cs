@@ -9,24 +9,21 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines a 32-bit register and its content
-    /// </summary>
-    public readonly struct R32 : IRegister<R32,W32,uint>, IRegOp<uint>
+    public readonly struct Ymm : IYmmReg, IRegOp256<Cell256>
     {
-        public uint Content  {get;}
+        public Cell256 Content {get;}
 
         public RegisterKind RegKind {get;}
 
         [MethodImpl(Inline)]
-        public R32(uint value, RegisterKind kind)
+        public Ymm(Cell256 value, RegisterKind kind)
         {
             Content = value;
             RegKind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(R32 src)
+        public static implicit operator Cell256(Ymm src)
             => src.Content;
     }
 }

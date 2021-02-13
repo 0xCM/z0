@@ -9,27 +9,24 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct Xmm : IXmmReg, IRegOp<Cell128>
+    /// <summary>
+    /// Defines a 64-bit register and its content
+    /// </summary>
+    public readonly struct R64 : IRegister<R64,W64,ulong>, IRegOp64<ulong>
     {
-        public Cell128 Content {get;}
+        public ulong Content {get;}
 
         public RegisterKind RegKind {get;}
 
-        public RegIndex Index
-        {
-            [MethodImpl(Inline)]
-            get => Registers.code(RegKind);
-        }
-
         [MethodImpl(Inline)]
-        public Xmm(Cell128 value, RegisterKind kind)
+        public R64(ulong value, RegisterKind kind)
         {
             Content = value;
             RegKind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Cell128(Xmm src)
+        public static implicit operator ulong(R64 src)
             => src.Content;
     }
 }

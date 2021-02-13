@@ -15,7 +15,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 128-bit memory operand
         /// </summary>
-        public struct m128 : IMemOp<m128,W128,Cell128>
+        public struct m128 : IMemOp<m128,W128,Cell128>, IMemOp128<Cell128>
         {
             public Cell128 Content {get;}
 

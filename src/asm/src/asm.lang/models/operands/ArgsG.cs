@@ -9,11 +9,16 @@ namespace Z0.Asm
 
     using static Part;
 
+    public struct Args
+    {
+
+    }
+
     /// <summary>
     /// Captures an operand
     /// </summary>
     public struct Args<A> : IAsmOperands<Args<A>,A>
-        where A : unmanaged
+        where A : unmanaged, IAsmOp
     {
         public A _A;
 
@@ -36,8 +41,8 @@ namespace Z0.Asm
     /// Captures an operand pair
     /// </summary>
     public struct Args<A,B>: IAsmOperands<Args<A,B>,A,B>
-        where A : unmanaged
-        where B : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
     {
         A _A;
 
@@ -82,9 +87,9 @@ namespace Z0.Asm
     /// Captures an operand triple
     /// </summary>
     public struct Args<A,B,C> : IAsmOperands<Args<A,B,C>,A,B,C>
-        where A : unmanaged
-        where B : unmanaged
-        where C : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
+        where C : unmanaged, IAsmOp
     {
         A _A;
 
@@ -139,10 +144,10 @@ namespace Z0.Asm
     /// Captures an operand quartet
     /// </summary>
     public struct Args<A,B,C,D> : IAsmOperands<Args<A,B,C,D>,A,B,C,D>
-        where A : unmanaged
-        where B : unmanaged
-        where C : unmanaged
-        where D : unmanaged
+        where A : unmanaged, IAsmOp
+        where B : unmanaged, IAsmOp
+        where C : unmanaged, IAsmOp
+        where D : unmanaged, IAsmOp
     {
         A _A;
 

@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 64-bit memory operand
         /// </summary>
-        public struct m64 : IMemOp<m64,W64,ulong>
+        public struct m64 : IMemOp<m64,W64,ulong>, IMemOp64<ulong>
         {
             public ulong Content {get;}
 

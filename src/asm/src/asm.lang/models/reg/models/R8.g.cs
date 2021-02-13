@@ -9,14 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>, IRegOp<ushort>
-        where R : unmanaged, IRegister
+    public struct R8<R> : IRegister<R8<R>,W8,byte>, IRegOp8<byte>
+        where R : unmanaged, IRegOp8
     {
-        public ushort Content {get;}
+        public byte Data;
 
         [MethodImpl(Inline)]
-        public R16(ushort value)
-            => Content = value;
+        public R8(byte src)
+            => Data = src;
+
+        public byte Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         public RegisterKind RegKind
         {
@@ -25,7 +31,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator R16(R16<R> src)
-            => new R16(src.Content, src.RegKind);
+        public static implicit operator R8(R8<R> src)
+            => new R8(src.Content, src.RegKind);
     }
 }

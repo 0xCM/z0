@@ -9,25 +9,27 @@ namespace Z0.Asm
 
     using static Part;
 
-    /// <summary>
-    /// Defines an 8-bit register and its content
-    /// </summary>
-    public readonly struct R8 : IRegister<R8,W8,byte>, IRegOp<byte>
+    public readonly struct Xmm : IXmmReg, IRegOp128<Cell128>
     {
-        public byte Content  {get;}
+        public Cell128 Content {get;}
 
         public RegisterKind RegKind {get;}
 
+        public RegIndex Index
+        {
+            [MethodImpl(Inline)]
+            get => Registers.code(RegKind);
+        }
 
         [MethodImpl(Inline)]
-        public R8(byte value, RegisterKind kind)
+        public Xmm(Cell128 value, RegisterKind kind)
         {
             Content = value;
             RegKind = kind;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(R8 src)
+        public static implicit operator Cell128(Xmm src)
             => src.Content;
     }
 }

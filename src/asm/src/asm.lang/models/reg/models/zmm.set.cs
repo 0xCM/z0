@@ -10,15 +10,16 @@ namespace Z0.Asm
     using static Part;
 
     using K = RegisterKind;
+    using T = Cell512;
 
     partial struct AsmRegs
     {
-        public readonly struct zmm0 : IZmmReg<zmm0,N0>
+        public readonly struct zmm0 : IZmmReg<zmm0,N0>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm0(Cell512 value)
+            public zmm0(T value)
             {
                 Content = value;
             }
@@ -27,12 +28,12 @@ namespace Z0.Asm
                 => K.ZMM0;
         }
 
-        public readonly struct zmm1 : IZmmReg<zmm1,N1>
+        public readonly struct zmm1 : IZmmReg<zmm1,N1>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm1(Cell512 value)
+            public zmm1(T value)
             {
                 Content = value;
             }
@@ -41,12 +42,12 @@ namespace Z0.Asm
                 => K.ZMM1;
         }
 
-        public readonly struct zmm2 : IZmmReg<zmm2,N2>
+        public readonly struct zmm2 : IZmmReg<zmm2,N2>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm2(Cell512 value)
+            public zmm2(T value)
             {
                 Content = value;
             }
@@ -55,12 +56,12 @@ namespace Z0.Asm
                 => K.ZMM2;
         }
 
-        public readonly struct zmm3 : IZmmReg<zmm3,N3>
+        public readonly struct zmm3 : IZmmReg<zmm3,N3>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm3(Cell512 value)
+            public zmm3(T value)
             {
                 Content = value;
             }
@@ -68,13 +69,13 @@ namespace Z0.Asm
             public K RegKind => K.ZMM3;
         }
 
-        public readonly struct zmm4 : IZmmReg<zmm4,N4>
+        public readonly struct zmm4 : IZmmReg<zmm4,N4>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
 
             [MethodImpl(Inline)]
-            public zmm4(Cell512 value)
+            public zmm4(T value)
             {
                 Content = value;
             }
@@ -82,12 +83,12 @@ namespace Z0.Asm
             public K RegKind => K.ZMM4;
         }
 
-        public readonly struct zmm5 : IZmmReg<zmm5,N5>
+        public readonly struct zmm5 : IZmmReg<zmm5,N5>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm5(Cell512 value)
+            public zmm5(T value)
             {
                 Content = value;
             }
@@ -95,12 +96,12 @@ namespace Z0.Asm
             public K RegKind => K.ZMM5;
         }
 
-        public readonly struct zmm6 : IZmmReg<zmm6,N6>
+        public readonly struct zmm6 : IZmmReg<zmm6,N6>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm6(Cell512 value)
+            public zmm6(T value)
             {
                 Content = value;
             }
@@ -108,12 +109,12 @@ namespace Z0.Asm
             public K RegKind => K.ZMM6;
         }
 
-        public readonly struct zmm7 : IZmmReg<zmm7,N7>
+        public readonly struct zmm7 : IZmmReg<zmm7,N7>, IRegOp512<T>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm7(Cell512 value)
+            public zmm7(T value)
             {
                 Content = value;
             }
@@ -123,10 +124,10 @@ namespace Z0.Asm
 
         public readonly struct zmm8 : IZmmReg<zmm8,N8>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm8(Cell512 value)
+            public zmm8(T value)
             {
                 Content = value;
             }
@@ -136,10 +137,10 @@ namespace Z0.Asm
 
         public readonly struct zmm9 : IZmmReg<zmm9,N9>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm9(Cell512 value)
+            public zmm9(T value)
             {
                 Content = value;
             }
@@ -149,10 +150,10 @@ namespace Z0.Asm
 
         public readonly struct zmm10 : IZmmReg<zmm10,N10>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm10(Cell512 value)
+            public zmm10(T value)
             {
                 Content = value;
             }
@@ -162,10 +163,10 @@ namespace Z0.Asm
 
         public readonly struct zmm11 : IZmmReg<zmm11,N11>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm11(Cell512 value)
+            public zmm11(T value)
             {
                 Content = value;
             }
@@ -175,10 +176,10 @@ namespace Z0.Asm
 
         public readonly struct zmm12 : IZmmReg<zmm12,N12>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm12(Cell512 value)
+            public zmm12(T value)
             {
                 Content = value;
             }
@@ -188,10 +189,10 @@ namespace Z0.Asm
 
         public readonly struct zmm13 : IZmmReg<zmm13,N13>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm13(Cell512 value)
+            public zmm13(T value)
             {
                 Content = value;
             }
@@ -201,10 +202,10 @@ namespace Z0.Asm
 
         public readonly struct zmm14 : IZmmReg<zmm14,N14>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm14(Cell512 value)
+            public zmm14(T value)
             {
                 Content = value;
             }
@@ -214,10 +215,10 @@ namespace Z0.Asm
 
         public readonly struct zmm15 : IZmmReg<zmm15,N15>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm15(Cell512 value)
+            public zmm15(T value)
             {
                 Content = value;
             }
@@ -226,10 +227,10 @@ namespace Z0.Asm
 
         public readonly struct zmm16 : IZmmReg<zmm16,N16>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm16(Cell512 value)
+            public zmm16(T value)
             {
                 Content = value;
             }
@@ -240,10 +241,10 @@ namespace Z0.Asm
 
         public readonly struct zmm17 : IZmmReg<zmm17,N17>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm17(Cell512 value)
+            public zmm17(T value)
             {
                 Content = value;
             }
@@ -253,10 +254,10 @@ namespace Z0.Asm
 
         public readonly struct zmm18 : IZmmReg<zmm18,N18>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm18(Cell512 value)
+            public zmm18(T value)
             {
                 Content = value;
             }
@@ -266,10 +267,10 @@ namespace Z0.Asm
 
         public readonly struct zmm19 : IZmmReg<zmm19,N19>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm19(Cell512 value)
+            public zmm19(T value)
             {
                 Content = value;
             }
@@ -279,10 +280,10 @@ namespace Z0.Asm
 
         public readonly struct zmm20 : IZmmReg<zmm20,N20>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm20(Cell512 value)
+            public zmm20(T value)
             {
                 Content = value;
             }
@@ -292,10 +293,10 @@ namespace Z0.Asm
 
         public readonly struct zmm21 : IZmmReg<zmm21,N21>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm21(Cell512 value)
+            public zmm21(T value)
             {
                 Content = value;
             }
@@ -305,10 +306,10 @@ namespace Z0.Asm
 
         public readonly struct zmm22 : IZmmReg<zmm22,N22>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm22(Cell512 value)
+            public zmm22(T value)
             {
                 Content = value;
             }
@@ -318,10 +319,10 @@ namespace Z0.Asm
 
         public readonly struct zmm23 : IZmmReg<zmm23,N23>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm23(Cell512 value)
+            public zmm23(T value)
             {
                 Content = value;
             }
@@ -331,11 +332,11 @@ namespace Z0.Asm
 
         public readonly struct zmm24 : IZmmReg<zmm24,N24>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
 
             [MethodImpl(Inline)]
-            public zmm24(Cell512 value)
+            public zmm24(T value)
             {
                 Content = value;
             }
@@ -345,10 +346,10 @@ namespace Z0.Asm
 
         public readonly struct zmm25 : IZmmReg<zmm25,N25>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm25(Cell512 value)
+            public zmm25(T value)
             {
                 Content = value;
             }
@@ -358,10 +359,10 @@ namespace Z0.Asm
 
         public readonly struct zmm26 : IZmmReg<zmm26,N26>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm26(Cell512 value)
+            public zmm26(T value)
             {
                 Content = value;
             }
@@ -371,10 +372,10 @@ namespace Z0.Asm
 
         public readonly struct zmm27 : IZmmReg<zmm27,N27>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm27(Cell512 value)
+            public zmm27(T value)
             {
                 Content = value;
             }
@@ -384,10 +385,10 @@ namespace Z0.Asm
 
         public readonly struct zmm28 : IZmmReg<zmm28,N28>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm28(Cell512 value)
+            public zmm28(T value)
             {
                 Content = value;
             }
@@ -397,10 +398,10 @@ namespace Z0.Asm
 
         public readonly struct zmm29 : IZmmReg<zmm29,N29>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm29(Cell512 value)
+            public zmm29(T value)
             {
                 Content = value;
             }
@@ -410,10 +411,10 @@ namespace Z0.Asm
 
         public readonly struct zmm30 : IZmmReg<zmm30,N30>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm30(Cell512 value)
+            public zmm30(T value)
             {
                 Content = value;
             }
@@ -423,10 +424,10 @@ namespace Z0.Asm
 
         public readonly struct zmm31 : IZmmReg<zmm31,N31>
         {
-            public Cell512 Content {get;}
+            public T Content {get;}
 
             [MethodImpl(Inline)]
-            public zmm31(Cell512 value)
+            public zmm31(T value)
             {
                 Content = value;
             }

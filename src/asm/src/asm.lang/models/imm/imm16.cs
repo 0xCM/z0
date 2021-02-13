@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmImm
     {
-        public readonly struct imm16 : IImmOp<Imm16>
+        public readonly struct imm16 : IImmOp16<Imm16>
         {
             public Imm16 Content {get;}
 

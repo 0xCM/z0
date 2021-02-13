@@ -12,11 +12,6 @@ namespace Z0.Tools
         {
             public const string Analysis = nameof(Analysis);
 
-            public const string AsmParser = nameof(AsmParser);
-
-            public const string BinaryFormat = nameof(BinaryFormat);
-
-            public const string BitCode = nameof(BitCode);
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines an operand that specifies a 32-bit gp register
         /// </summary>
-        public struct r32 : IRegister<r32,W,T>, IRegOp<T>
+        public struct r32 : IRegister<r32,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -33,7 +33,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct eax : IRegister<eax,W,T>, IRegOp<T>
+        public struct eax : IRegister<eax,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -54,7 +54,7 @@ namespace Z0.Asm
                 => src.Generalized;
         }
 
-        public struct ecx : IRegister<ecx,W,T>, IRegOp<T>
+        public struct ecx : IRegister<ecx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -75,7 +75,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct edx : IRegister<edx,W,T>, IRegOp<T>
+        public struct edx : IRegister<edx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -97,7 +97,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct ebx : IRegister<ebx,W,T>, IRegOp<T>
+        public struct ebx : IRegister<ebx,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -118,7 +118,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct esi : IRegister<esi,W,T>, IRegOp<T>
+        public struct esi : IRegister<esi,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -139,7 +139,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct edi : IRegister<edi,W,T>, IRegOp<T>
+        public struct edi : IRegister<edi,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -160,7 +160,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct esp : IRegister<esp,W,T>, IRegOp<T>
+        public struct esp : IRegister<esp,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -181,7 +181,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct ebp : IRegister<ebp,W,T>, IRegOp<T>
+        public struct ebp : IRegister<ebp,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -204,7 +204,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r8d : IRegister<r8d,W,T>, IRegOp<T>
+        public struct r8d : IRegister<r8d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -221,7 +221,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r9d : IRegister<r9d,W,T>, IRegOp<T>
+        public struct r9d : IRegister<r9d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -240,7 +240,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r10d : IRegister<r10d,W,T>, IRegOp<T>
+        public struct r10d : IRegister<r10d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -257,7 +257,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r11d : IRegister<r11d,W,T>, IRegOp<T>
+        public struct r11d : IRegister<r11d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -274,7 +274,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r12d : IRegister<r12d,W,T>, IRegOp<T>
+        public struct r12d : IRegister<r12d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -291,7 +291,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r13d : IRegister<r13d,W,T>, IRegOp<T>
+        public struct r13d : IRegister<r13d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -310,7 +310,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r14d : IRegister<r14d,W,T>, IRegOp<T>
+        public struct r14d : IRegister<r14d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 
@@ -328,7 +328,7 @@ namespace Z0.Asm
             }
         }
 
-        public struct r15d : IRegister<r15d,W,T>, IRegOp<T>
+        public struct r15d : IRegister<r15d,W,T>, IRegOp32<T>
         {
             public T Content {get;}
 

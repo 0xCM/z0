@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp<ulong>
-        where R : unmanaged, IRegister
+    public struct R64<R> : IRegister<R64<R>,W64,ulong>, IRegOp64<ulong>
+        where R : unmanaged, IRegOp64
     {
         public ulong Content {get;}
 

@@ -15,7 +15,7 @@ namespace Z0.Asm
         /// <summary>
         /// Defines a 256-bit memory operand
         /// </summary>
-        public struct m256 : IMemOp<m256,W256,Cell256>
+        public struct m256 : IMemOp<m256,W256,Cell256>, IMemOp256<Cell256>
         {
             public Cell256 Content {get;}
 

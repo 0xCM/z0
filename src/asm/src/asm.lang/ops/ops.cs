@@ -10,6 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static AsmRegs;
     using static AsmMem;
+    using static AsmImm;
 
     partial struct asm
     {
@@ -19,7 +20,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<al,Imm8> ops(al dst, Imm8 src)
+        public Args<al,imm8> ops(al dst, imm8 src)
             => args(dst,src);
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline),Op]
-        public Args<m8,Imm8> ops(m8 dst, Imm8 src)
+        public Args<m8,imm8> ops(m8 dst, imm8 src)
             => args(dst,src);
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<eax,Imm32> ops(eax dst, Imm32 src)
+        public Args<eax,imm32> ops(eax dst, imm32 src)
             => args(dst,src);
 
         /// <summary>
@@ -46,7 +47,7 @@ namespace Z0.Asm
         /// <param name="dst">The target operand</param>
         /// <param name="src">The source operand</param>
         [MethodImpl(Inline), Op]
-        public Args<rax,Imm32> ops(rax dst, Imm32 src)
+        public Args<rax,imm32> ops(rax dst, imm32 src)
             => args(dst,src);
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static AsmRegs;
     using static AsmMem;
-    using M = AsmMnemonics;
+    using M = AsmMnemonicCode;
 
     using static asm;
 
