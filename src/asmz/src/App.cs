@@ -391,6 +391,12 @@ namespace Z0.Asm
             var dataset = decoder.Decode(blocks);
         }
 
+        // 001fh call 7ffeaba07750h                      ; CALL rel32                       | E8 cd                            | 5   | e8 5c c4 b4 5a
+        void TestRel32()
+        {
+
+        }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();

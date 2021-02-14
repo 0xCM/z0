@@ -46,17 +46,10 @@ namespace Z0.Asm
            bool EmitSectionDelimiter = false,
            byte InstructionPad = 40,
            bool ShowLineAddresses = true,
-           bool AbsoluteLabels = false,
+           bool AbsoluteLabels = true,
            int SectionDelimiterWidth = 120
-           ) => new AsmFormatConfig(
-               EmitCaptureTermCode,
-               EmitFileHeader,
-               EmitBaseAddress,
-               EmitSectionDelimiter,
-               InstructionPad,
-               ShowLineAddresses,
-               AbsoluteLabels,
-               SectionDelimiterWidth);
+           ) => new AsmFormatConfig(EmitCaptureTermCode, EmitFileHeader, EmitBaseAddress, EmitSectionDelimiter,
+                    InstructionPad, ShowLineAddresses, AbsoluteLabels, SectionDelimiterWidth);
 
         public AsmFormatConfig(
            bool EmitCaptureTermCode,

@@ -61,11 +61,11 @@ namespace Z0
         public ApiCaptureBlock Capture(IdentifiedMethod src, Span<byte> dst)
             => capture(src, dst);
 
-        static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src)
+        ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [Op]
-        static ApiCaptureBlocks capture(in ApiHostCatalog src)
+        ApiCaptureBlocks capture(in ApiHostCatalog src)
         {
             var members = src.Members.View;
             var count = members.Length;
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="id">The identity to confer to the captured result</param>
         /// <param name="dst">The target buffer</param>
         [Op]
-        static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> dst)
+        ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> dst)
         {
             var summary = capture(dst, id, ApiJit.jit(src));
             var outcome = summary.Outcome;
@@ -99,7 +99,7 @@ namespace Z0
         }
 
         [Op]
-        static ApiCaptureBlock capture(MethodInfo src, Span<byte> dst)
+        ApiCaptureBlock capture(MethodInfo src, Span<byte> dst)
         {
             var id = src.Identify();
             var summary = capture(dst, id, ApiJit.jit(src));
@@ -108,7 +108,7 @@ namespace Z0
         }
 
         [Op]
-        static ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
+        ApiCaptureBlocks capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
         {
             var located = locate(src);
             var count = located.Length;
@@ -132,7 +132,7 @@ namespace Z0
         }
 
         [Op]
-        static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
+        ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
             var summary = capture(buffer, src.Id, ApiJit.jit(src));
             var size = summary.Data.Length;
@@ -141,14 +141,14 @@ namespace Z0
         }
 
         [Op]
-        static ApiCaptureBlock capture(LocatedMethod located, Span<byte> buffer)
+        ApiCaptureBlock capture(LocatedMethod located, Span<byte> buffer)
         {
             var summary = capture(buffer, located.Id, located.Address);
             return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
         [Op]
-        static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
+        ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
             var located = ApiJit.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
@@ -156,19 +156,19 @@ namespace Z0
         }
 
         [Op]
-        static ApiCaptureBlock capture(IdentifiedMethod src)
+        ApiCaptureBlock capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline), Op]
-        static ApiCaptureBlock block(OpIdentity id, MethodInfo src, CapturedCodeBlock bits, ExtractTermCode term)
+        ApiCaptureBlock block(OpIdentity id, MethodInfo src, CapturedCodeBlock bits, ExtractTermCode term)
             => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline), Op]
-        static CapturedOperation capture(Span<byte> dst, OpIdentity id, MemoryAddress src)
+        CapturedOperation capture(Span<byte> dst, OpIdentity id, MemoryAddress src)
             => capture(src.Pointer<byte>(), id, dst);
 
         [MethodImpl(Inline), Op]
-        static CapturedOperation capture(byte* pSrc, OpIdentity id, Span<byte> dst)
+        CapturedOperation capture(byte* pSrc, OpIdentity id, Span<byte> dst)
         {
             var limit = dst.Length - 1;
             var start = (MemoryAddress)pSrc;
@@ -194,7 +194,7 @@ namespace Z0
             return complete(dst, id, CTC_BUFFER_OUT, start, end, 0);
         }
 
-        static CapturedOperation complete(Span<byte> buffer, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
+        CapturedOperation complete(Span<byte> buffer, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
         {
             var outcome = new CaptureOutcome((start, (ulong)(end + delta)), tc);
             var raw = buffer.Slice(0, (int)(end - start)).ToArray();
@@ -205,7 +205,7 @@ namespace Z0
 
 
         [Op]
-        static ExtractTermCode CalcTerm(Span<byte> buffer, int offset, int? ret_offset, out int delta)
+        ExtractTermCode CalcTerm(Span<byte> buffer, int offset, int? ret_offset, out int delta)
         {
             delta = 0;
 
@@ -252,7 +252,7 @@ namespace Z0
         const byte J48 = 0x48;
 
         [MethodImpl(Inline), Op]
-        static ExtractTermCode Scan4(Span<byte> buffer, int offset, out int delta)
+        ExtractTermCode Scan4(Span<byte> buffer, int offset, out int delta)
         {
             var result = true;
             delta = -2;
@@ -278,7 +278,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static ExtractTermCode Scan5(Span<byte> buffer, int offset, out int delta)
+        ExtractTermCode Scan5(Span<byte> buffer, int offset, out int delta)
         {
             var result = true;
             delta = 0;
@@ -293,11 +293,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        static bool match(ReadOnlySpan<byte> src, int index, byte test)
+        bool match(ReadOnlySpan<byte> src, int index, byte test)
             => skip(src,index) == test;
 
         [MethodImpl(Inline), Op]
-        static bool Zx7(ReadOnlySpan<byte> buffer, int offset)
+        bool Zx7(ReadOnlySpan<byte> buffer, int offset)
         {
             var result = true;
             ref readonly var x = ref first(buffer);
@@ -311,7 +311,7 @@ namespace Z0
             return result;
         }
 
-        static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
+        Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
         {
             var count = src.Length;
             var buffer = alloc<LocatedMethod>(count);
