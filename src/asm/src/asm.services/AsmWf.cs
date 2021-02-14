@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Part;
-    using static z;
+    using static memory;
 
     readonly struct AsmWf : IAsmWf
     {

@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(FVec)" />
   </ItemGroup>
 
 </Project>

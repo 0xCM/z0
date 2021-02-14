@@ -254,5 +254,6 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector512<ushort> vbroadcast(W512 w, ushort src)
             => (BroadcastScalarToVector256(&src), BroadcastScalarToVector256(&src));
+
     }
 }

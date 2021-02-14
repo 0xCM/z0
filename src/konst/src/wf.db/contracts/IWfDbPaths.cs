@@ -9,21 +9,15 @@ namespace Z0
 
     using static DbNames;
 
-    public interface IWfDbPaths : IWfService, IFileArchive
+
+
+    public interface IWfDbPaths : IApiPathProvider
     {
-        string AppName
-            => Assembly.GetEntryAssembly().GetSimpleName();
-
-        Env Env => Wf.Env;
-
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
 
         FS.FolderName SubjecFolder<A,B>(A s1, B s2)
             => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
-
-        FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
-            => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
 
         FS.FolderPath GenRoot()
             => Env.Vars.GenRoot.Value;
@@ -222,12 +216,6 @@ namespace Z0
         FS.FolderPath Notebooks()
             => Root + FS.folder(notebooks);
 
-        FS.FolderPath CaptureRoot()
-            => Root + FS.folder(capture);
-
-        FS.FolderPath ImmRoot()
-            => CaptureRoot() + FS.folder(imm);
-
         FS.FolderPath JobRoot()
             => Root + FS.folder(jobs);
 
@@ -285,12 +273,6 @@ namespace Z0
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), Dmp);
 
-        FS.FolderPath CapturedHexRoot()
-            => (CaptureRoot() + FS.folder(hex));
-
-        FS.FilePath CapturedHexPath(FS.FileName name)
-            => CapturedHexRoot() + name;
-
         FS.FolderPath Tools(ToolId id)
             => ToolExeRoot() + FS.folder(id.Format());
 
@@ -299,115 +281,5 @@ namespace Z0
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
-
-        FS.FolderPath CapturedExtractDir()
-            => CaptureRoot() + FS.folder(extracts);
-
-        FS.FolderPath ParsedExtractDir()
-            => CaptureRoot() + FS.folder(parsed);
-
-        FS.FolderPath CapturedHexDir()
-            => CaptureRoot() + FS.folder(hex);
-
-        FS.FolderPath CapturedAsmDir()
-            => CaptureRoot() + FS.folder(asm);
-
-        FS.Files CapturedAsmFiles()
-            => CapturedAsmDir().Files(Asm,true);
-
-        FS.Files CapturedAsmFiles(PartId part)
-            => CapturedAsmFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath CapturedAsmFile(FS.FileName name)
-            => CapturedAsmDir() + name;
-
-        FS.FilePath CapturedAsmFile(ApiHostUri host)
-            => CapturedAsmFile(ApiIdentity.file(host, FileExtensions.Asm));
-
-        FS.FilePath CapturedAsmFile(PartId part, string api)
-            => CapturedAsmDir() + ApiFileName(part, api, Asm);
-
-        FS.FilePath CapturedAsmFile(Type host)
-            => CapturedAsmFile(ApiQuery.hosturi(host));
-
-        FS.FilePath CapturedAsmFile<T>()
-            => CapturedAsmFile(ApiQuery.hosturi<T>());
-
-        FS.Files CapturedHexFiles()
-            => CapturedHexDir().Files(Hex);
-
-        FS.Files CapturedHexFiles(PartId part)
-            => CapturedHexFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath CapturedHexFile(FS.FileName name)
-            => CapturedHexDir() + name;
-
-        FS.FilePath CapturedHexFile(PartId part, string api)
-            => CapturedHexDir() + ApiFileName(part, api, Hex);
-
-        FS.FilePath CapturedHexFile(ApiHostUri host)
-            => CapturedHexFile(ApiIdentity.file(host, Hex));
-
-        FS.FolderPath CilDataDir()
-            => CaptureRoot() + FS.folder(cildata);
-
-        FS.FilePath CilDataFile(FS.FileName name)
-            => CilDataDir() + name;
-
-        FS.FilePath CilDataFile(ApiHostUri host)
-            => CilDataFile(ApiIdentity.file(host, IlData));
-
-        FS.Files CilDataFiles()
-            => CilDataDir().Files(Csv);
-
-        FS.Files CilDataFiles(PartId part)
-            => CilDataFiles().Where(f => f.IsOwner(part));
-
-        FS.FolderPath CilCodeDir()
-            => CaptureRoot() + FS.folder(cil);
-
-        FS.FilePath CilCodeFile(FS.FileName name)
-            => CilCodeDir() + name;
-
-        FS.FilePath CilCodeFile(ApiHostUri host)
-            => CilCodeFile(ApiIdentity.file(host, Il));
-
-        FS.Files CilCodeFiles()
-            => CilCodeDir().Files(Csv);
-
-        FS.Files CilCodeFiles(PartId part)
-            => CilCodeFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath ApiExtractFile(ApiHostUri host)
-            => ApiExtractFile(ApiIdentity.file(host, XCsv));
-
-        FS.FilePath ApiExtractFile(FS.FileName name)
-            => CapturedExtractDir() + name;
-
-        FS.Files ApiExtractFiles()
-            => CapturedExtractDir().AllFiles;
-
-        FS.Files ApiExtractFiles(PartId part)
-            => ApiExtractFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath ParsedExtractFile(FS.FileName name)
-            => ParsedExtractDir() + name;
-
-        FS.FilePath ParsedExtractFile(ApiHostUri host)
-            => ParsedExtractFile(ApiIdentity.file(host, PCsv));
-
-        FS.Files ParsedExtractFiles()
-            => ParsedExtractDir().AllFiles;
-
-        FS.Files ParsedExtractFiles(PartId part)
-            => ParsedExtractFiles().Where(f => f.IsOwner(part));
-
-        PartFiles PartFiles()
-        {
-            var parsed = ParsedExtractFiles();
-            var hex = CapturedHexFiles();
-            var asm = CapturedAsmFiles();
-            return new PartFiles(parsed, hex, asm);
-        }
-    }
+   }
 }

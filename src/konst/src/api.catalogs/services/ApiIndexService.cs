@@ -45,7 +45,7 @@ namespace Z0
             {
                 ref readonly var path = ref skip(parsed,i);
                 var inner = Wf.Running($"Indexing blocks from {path}");
-                var result = ApiHexRows.load(path);
+                var result = ApiCode.hexrows(path);
                 if(result.Count != 0)
                 {
                     var blocks = result.View;

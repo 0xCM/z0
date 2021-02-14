@@ -62,7 +62,6 @@ namespace Z0
             return captured;
         }
 
-
         public void Emit(ReadOnlySpan<CapturedApiRes> src, FS.FilePath dst)
         {
             const ulong Cut = 0x55005500550;
@@ -83,11 +82,11 @@ namespace Z0
                 var host = captured.ApiHost;
                 var accessor = captured.Accessor;
                 var uri = OpUri.hex(host, accessor.Member.Name, code.Code.MemberId);
-                var moves = AsmAnalyzer.moves(code.Routine);
-                var movecount = moves.Length;
+                var movements = moves(code.Routine);
+                var movecount = movements.Length;
                 for(var j=0u; j<movecount; j++)
                 {
-                    ref readonly var move = ref skip(moves,j);
+                    ref readonly var move = ref skip(movements,j);
                     if(move.Source < Cut)
                         writer.WriteLine(text.concat(move.Source.ToAddress().Format().PadRight(Col0Width), Sep, uri));
                 }
@@ -108,6 +107,16 @@ namespace Z0
             var asm = Asm.RoutineDecoder.Decode(capture).Require();
             var formatted = Asm.Formatter.FormatFunction(asm);
             dst.Write(formatted);
+        }
+
+        static ReadOnlySpan<Link<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
+        {
+            var hander = new AsmMovHandler(capacity);
+            var fx = src.Instructions.View;
+            var count = fx.Length;
+            for(var i=0u; i<count; i++)
+                hander.Handle(skip(fx, i).Instruction);
+            return hander.Collected;
         }
     }
 }

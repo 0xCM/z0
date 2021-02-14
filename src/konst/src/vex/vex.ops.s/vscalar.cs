@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
     using static Part;
 
     partial struct cpu
@@ -171,5 +173,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vscalar(W256 w, double a)
             => Vector256.CreateScalarUnsafe(a);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<float> vscalar(float src)
+            => LoadScalarVector128(&src);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<double> vscalar(double src)
+            => LoadScalarVector128(&src);
     }
 }

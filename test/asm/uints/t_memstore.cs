@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static z;
+    using static memory;
     using static Cil;
 
     using Z0.Asm;
@@ -68,7 +68,7 @@ namespace Z0
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.Length);
 
-            var dstB = MemoryStore.Service.load(src);
+            var dstB = MemoryStore.Service.Load(src);
             Claim.eq(count, dstB.Length);
 
             for(var i=0u; i<count; i++)

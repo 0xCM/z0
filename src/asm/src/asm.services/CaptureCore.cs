@@ -57,14 +57,12 @@ namespace Z0.Asm
         {
             try
             {
-                //var pSrc = jit(src);
                 var address = ApiJit.jit(src);
                 var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
                 var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
                 Demands.insist(address, captured.BaseAddress);
                 return captured;
-                //return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {
@@ -83,7 +81,6 @@ namespace Z0.Asm
                 var captured = new ApiCaptureBlock(id, src.Source, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return captured;
-                //return exchange.CaptureComplete(outcome.State, captured);
             }
             catch(Exception e)
             {

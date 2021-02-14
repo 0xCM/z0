@@ -18,8 +18,6 @@ namespace Z0
 
         readonly IEvalDispatcher Dispatcher;
 
-        readonly IPartCapturePaths CodeArchive;
-
         readonly IGlobalApiCatalog ApiGlobal;
 
         internal EvalControl(IWfShell wf, IPolyrand random, FS.FolderPath root, uint buffersize)
@@ -28,7 +26,6 @@ namespace Z0
             BufferCount = 3;
             BufferSize = buffersize;
             Dispatcher = Evaluate.dispatcher(Wf, random, BufferSize);
-            CodeArchive = ApiArchives.capture(root);
             ApiGlobal = wf.Api;
         }
 
@@ -41,7 +38,7 @@ namespace Z0
 
             var idx = catalog.Index();
             var archive =  ApiArchives.capture(root);
-            var paths =  ApiArchives.capture(FS.dir(root.Name), host);
+            var paths =  ApiArchives.host(FS.dir(root.Name), host);
             var code = ApiExtractReader.Service.Read(paths.HostHexPath);
             var opIndex =  ApiQuery.index(code);
             return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
@@ -49,11 +46,12 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var capture = ApiArchives.capture(FS.dir(CodeArchive.Root.Name), host.Uri);
+            var dir = Wf.Db().ParsedExtractDir();
+            var capture = ApiArchives.host(dir, host.Uri);
             if(capture.HostHexPath.Exists)
             {
 
-                var code = EvalControl.code(Wf, host.Uri, CodeArchive.Root).Members;
+                var code = EvalControl.code(Wf, host.Uri, dir).Members;
                 Wf.Status($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)

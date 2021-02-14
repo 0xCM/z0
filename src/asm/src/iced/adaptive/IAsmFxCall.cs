@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmAspectLabels;
-
     /// <summary>
     /// Defines call-related instruction aspects
     /// </summary>
@@ -14,12 +12,10 @@ namespace Z0.Asm
         //
         // Summary:
         //     Checks if it's a call near instruction
-        [Label(near)]
         bool IsCallNear {get;}
         //
         // Summary:
         //     Checks if it's a call far instruction
-        [Label(far)]
         bool IsCallFar {get;}
 
         //

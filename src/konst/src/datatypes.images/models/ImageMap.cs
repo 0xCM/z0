@@ -15,12 +15,12 @@ namespace Z0
 
         public Index<LocatedImage> Images {get;}
 
-        public MemoryAddresses Locations {get;}
+        public Index<MemoryAddress> Locations {get;}
 
         public Index<ProcessModuleRow> Modules {get;}
 
         [MethodImpl(Inline)]
-        public ImageMap(ProcessState state, LocatedImage[] images, MemoryAddresses locations, ProcessModuleRow[] modules)
+        public ImageMap(ProcessState state, LocatedImage[] images, Index<MemoryAddress> locations, ProcessModuleRow[] modules)
         {
             Process = state;
             Images = images;

@@ -6,12 +6,15 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
-    using static AsmInstructionCheck;
-    using static z;
+    using static memory;
 
     using Iced = Iced.Intel;
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     readonly struct AsmRoutineDecoder : IAsmDecoder
     {
@@ -118,7 +121,7 @@ namespace Z0.Asm
             if(result)
                 return routine(src, result.Value);
             else
-                return none<AsmRoutine>();
+                return root.none<AsmRoutine>();
         }
 
         public bool Decode(ApiCaptureBlock src, out AsmRoutine dst)
@@ -175,5 +178,38 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static ApiBlockAsm apiblock(ApiCodeBlock encoded, IceInstruction[] decoded, ExtractTermCode term)
             => new ApiBlockAsm(encoded, decoded, term);
+
+        static void CheckInstructionSize(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
+        {
+            if(src.Encoded.Length < offset + instruction.ByteLength)
+                throw SizeMismatch(instruction, offset, src);
+        }
+
+        static void CheckBlockLength(in ApiBlockAsm src)
+        {
+            var blocklen = (uint)src.Decoded.Select(i => i.ByteLength).Sum();
+            if(blocklen != src.Encoded.Length)
+                throw BadBlockLength(src,blocklen);
+        }
+
+        static AppException BadBlockLength(in ApiBlockAsm src, uint computedLength)
+            => new AppException(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
+
+        static AppException SizeMismatch(in IceInstruction instruction, uint offset, in ApiBlockAsm src)
+            => new AppException(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
+
+        static AppMsg InstructionSizeMismatch(MemoryAddress ip, uint offset, uint actual, uint reported,
+            [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction length does not match the reported instruction length:",
+                    $"address = {ip}, datalen = {reported}, offset = {offset}, bytelen = {reported}"),
+                        caller, file, line);
+
+        static AppMsg InstructionBlockSizeMismatch(MemoryAddress @base, int actual, uint reported,
+            [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+                => AppMsg.error(text.concat(
+                    $"The encoded instruction block length does not match the reported total instruction length:",
+                    $"@base = {@base}, block length = {reported}, reported length = {reported}"),
+                        caller, file, line);
     }
 }

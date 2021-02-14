@@ -109,18 +109,15 @@ namespace Z0.Asm
             AsmCheck.WriteAsm(case4Out, dst);
 
             var case5In = CaptureCases.vand;
-            z.iter(case5In,
+            root.iter(case5In,
                 src => AsmCheck.WriteAsm(AsmCheck.Capture(src.Identify(), src).Require(), dst));
         }
 
         public void read_library()
         {
             var exchange = Capture.exchange(Context);
-            //var exchange = CaptureServices.create(Context).CaptureExchange;
             var ops  = exchange.Service;
-
             var src = typeof(math).StaticMethods().Where(m => m.Name == "xor").ToArray();
-
             for(var i=0; i<src.Length; i++)
             {
                 var capture = AsmCheck.Capture(src[i].Identify(), src[i]);

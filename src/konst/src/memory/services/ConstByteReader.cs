@@ -35,7 +35,7 @@ namespace Z0
 
         [Op]
         public ReadOnlySpan<MemoryAddress> Locations(MemorySegments store)
-            => api.locations(Data, store);
+            => api.addresses(Data, store);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Span(byte n)

@@ -23,7 +23,6 @@ namespace Z0.Asm
             00007FFEBEF560F4 E9 47 03 00 00       jmp         ThePreStub (07FFEBEF56440h)
             */
 
-
         }
 
     }

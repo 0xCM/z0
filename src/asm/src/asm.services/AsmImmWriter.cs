@@ -27,7 +27,7 @@ namespace Z0.Asm
             Uri = host;
             ImmRoot = root;
             AsmFormatter = formatter;
-            HostArchive = ApiArchives.capture(FS.dir(root.Name), host);
+            HostArchive = ApiArchives.host(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
         }
 

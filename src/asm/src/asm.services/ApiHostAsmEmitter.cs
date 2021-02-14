@@ -47,7 +47,7 @@ namespace Z0.Asm
             var count = src.Length;
             if(count != 0)
             {
-                var path = wf.Db().CapturedAsmFile(uri);
+                var path = wf.Db().AsmFile(uri);
                 using var writer = path.Writer();
                 var buffer = Buffers.text();
 

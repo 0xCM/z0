@@ -33,15 +33,7 @@ namespace Z0
             => new CaptureArchive(root);
 
         [MethodImpl(Inline), Op]
-        public static IHostCaptureArchive capture(FS.FolderPath root, ApiHostUri host)
-            => new HostCaptureArchive(root, host);
-
-        /// <summary>
-        /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path and specialized for an identified <see cref='PartId'/>
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static ICaptureArchive capture(FS.FolderPath root, PartId part)
-            => new CaptureArchive(root + FS.folder(part.Format()));
+        public static IHostCaptureArchive host(FS.FolderPath root, ApiHostUri uri)
+            => new HostCaptureArchive(root, uri);
     }
 }

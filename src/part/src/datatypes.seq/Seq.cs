@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
-
     using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.Seq, true)]
     public readonly partial struct Seq
@@ -18,50 +14,5 @@ namespace Z0
 
         public static string format<T>(T[] src)
             => delimit(src).Format();
-
-        /// <summary>
-        /// Creates an indexed sequence from a stream
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MutableSeq<T> mutable<T>(IEnumerable<T> src)
-            => new MutableSeq<T>(src.Array());
-
-        /// <summary>
-        /// Creates a mutable sequence from a parameter array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MutableSeq<T> mutable<T>(params T[] src)
-            => new MutableSeq<T>(src, true);
-
-        /// <summary>
-        /// Creates a <see cref='IndexedView{T}'/> from a <see cref ='IEnumerable{T}'/>
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IndexedView<T> view<T>(IEnumerable<T> src)
-            => new IndexedView<T>(src.Array());
-
-        /// <summary>
-        /// Creates a <see cref='IndexedView{T}'/> from an array
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IndexedView<T> view<T>(T[] src)
-            => new IndexedView<T>(src);
-
-        /// <summary>
-        /// All of your streams belong to us
-        /// </summary>
-        /// <param name="src">The source streams</param>
-        /// <typeparam name="T">The streamed element type</typeparam>
-        [Op, Closures(Closure)]
-        public static Deferred<T> join<T>(params IEnumerable<T>[] src)
-            => src.SelectMany(x => x);
    }
 }

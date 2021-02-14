@@ -125,7 +125,7 @@ namespace Z0.Asm
             => new AsmFormatter(config);
 
         public AsmSemanticRender SemanticRender()
-            => new AsmSemanticRender(Wf);
+            => AsmSemanticRender.create(Wf);
 
         [MethodImpl(Inline), Op]
         public IAsmWriter AsmWriter(FS.FilePath dst)

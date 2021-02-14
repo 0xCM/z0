@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using static AsmOpCodeModel;
-
     using R = RepeatPrefixCode;
     using L = LockPrefixCode;
     using S = SizeOverrideCode;

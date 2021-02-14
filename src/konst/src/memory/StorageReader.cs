@@ -17,11 +17,37 @@ namespace Z0
         public static MemorySegment[] refs(ConstBytes256 src)
              => src.SegRefs();
 
+        [Op]
+        public static void addresses(MemorySegments src, Span<MemoryAddress> dst)
+        {
+            var view = src.View;
+            var kSegs = view.Length;
+            for(var i=0u; i<kSegs; i++)
+            {
+                ref readonly var segment = ref skip(view,i);
+                var length = segment.Length;
+                var data = segment.Load();
+                if(data.Length == length)
+                {
+                    for(var j = 0u; j<length; j++)
+                    {
+                        ref readonly var cell = ref skip(data,j);
+                        if(j == 0)
+                        {
+                            var a = memory.address(cell);
+                            if(segment.BaseAddress == a)
+                                seek(dst,i) = a;
+                        }
+                    }
+                }
+            }
+        }
+
         [MethodImpl(Inline), Op]
         public static ref readonly byte cell(ConstBytes256 src, byte n, int i)
         {
             if(n == 0)
-                return ref cell(src, n0,i);
+                return ref cell(src, n0, i);
             else if(n == 1)
                 return ref cell(src, n1, i);
             else if(n == 2)
@@ -41,23 +67,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref readonly byte cell<N>(ConstBytes256 src, N n, int i) where N : unmanaged, ITypeNat
-            => ref memory.skip(span(src, n),(uint)i);
+        public static ref readonly byte cell<N>(ConstBytes256 src, N n, int i)
+            where N : unmanaged, ITypeNat
+                => ref skip(span(src, n),(uint)i);
 
         [MethodImpl(Inline)]
-        public static ref readonly byte first<N>(ConstBytes256 src, N n) where N : unmanaged, ITypeNat
-            => ref memory.first(span(src, n));
+        public static ref readonly byte first<N>(ConstBytes256 src, N n)
+            where N : unmanaged, ITypeNat
+                => ref memory.first(span(src, n));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> leads(ConstBytes256 src)
             => src.SegLeads();
 
         [Op]
-        public static ReadOnlySpan<MemoryAddress> locations(ConstBytes256 src, MemorySegments store)
+        public static ReadOnlySpan<MemoryAddress> addresses(ConstBytes256 src, MemorySegments store)
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
-            Addresses.locations(store,results);
+            addresses(store,results);
             return results;
         }
 
@@ -121,7 +149,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<byte> span<N>(ConstBytes256 src, N n) where N : unmanaged, ITypeNat
+        public static ReadOnlySpan<byte> span<N>(ConstBytes256 src, N n)
+            where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N0))
                 return src.Seg(n6, n0);
@@ -141,6 +170,248 @@ namespace Z0
                 return src.Seg(n8, n0);
             else
                 return src.SegZ;
+        }
+
+        [ApiDeep("storage.reader.cache")]
+        public readonly struct Cache
+        {
+            [MethodImpl(Inline)]
+            internal Cache(ConstBytesReader reader)
+            {
+                Refs = reader.Refs;
+                Storage = MemorySegments.create(Refs);
+                Stores = MemoryStore.Service;
+                Reader = reader;
+            }
+
+            readonly ConstBytesReader Reader;
+
+            readonly MemorySegment[] Refs;
+
+            readonly MemorySegments Storage;
+
+            readonly MemoryStore Stores;
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N0 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N0 n)
+                => ref Stores.Cell(Refs, 0,0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N1 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N1 n)
+                => ref Stores.Cell(Refs, 1, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N2 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N2 n)
+                => ref Stores.Cell(Refs, 2, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N3 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N3 n)
+                => ref Stores.Cell(Refs, 3, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N4 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N4 n)
+                => ref Stores.Cell(Refs, 4, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N5 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N5 n)
+                => ref Stores.Cell(Refs, 5, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N6 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N6 n)
+                => ref Stores.Cell(Refs, 6, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first_d(N7 n)
+                => ref Reader.First(n);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte first(N7 n)
+                => ref Stores.Cell(Refs, 7, 0);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N0 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N0 n, int i)
+                => ref Stores.Cell(Refs, 0, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N1 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N1 n, int i)
+                => ref Stores.Cell(Refs, 1, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N2 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N2 n, int i)
+                => ref Stores.Cell(Refs, 2, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N3 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N3 n, int i)
+                => ref Stores.Cell(Refs, 3, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N4 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N4 n, int i)
+                => ref Stores.Cell(Refs, 4, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N5 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N5 n, int i)
+                => ref Stores.Cell(Refs, 5, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N6 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N6 n, int i)
+                => ref Stores.Cell(Refs, 6, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(N7 n, int i)
+                => ref Reader.Cell(n, i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(N7 n, int i)
+                => ref Stores.Cell(Refs, 7, i);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N0 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N0 n)
+                => Stores.Load(Refs, 0);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N1 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N1 n)
+                => Stores.Load(Refs, 1);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N2 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N2 n)
+                => Stores.Load(Refs, 2);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N3 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N3 n)
+                => Stores.Load(Refs, 3);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N4 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N4 n)
+                => Stores.Load(Refs, 4);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N5 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N5 n)
+                => Stores.Load(Refs, 5);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N6 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N6 n)
+                => Stores.Load(Refs, 6);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load_d(N7 n)
+                => Reader.Span(n);
+
+            [MethodImpl(Inline)]
+            public ReadOnlySpan<byte> load(N7 n)
+                => Stores.Load(Refs, 7);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell_d(MemorySlot n, int i)
+                => ref Reader.Cell(n,i);
+
+            [MethodImpl(Inline)]
+            public ref readonly byte cell(MemorySlot n, int i)
+                => ref Stores.Cell(Refs, n,i);
+
+            [MethodImpl(Inline)]
+            public ulong sib_d<N>(N n, int i, byte scale, ushort offset)
+                where N : unmanaged, ITypeNat
+                    => ((ulong)scale)*Reader.Cell(n, i) + (ulong)offset;
+
+            [MethodImpl(Inline)]
+            public ulong sib_d(N0 n, int i, byte scale, ushort offset)
+                => sib_d<N0>(n, i, scale, offset);
+
+            [MethodImpl(Inline)]
+            public ulong sib_d(N1 n, int i, byte scale, ushort offset)
+                => sib_d<N1>(n, i, scale, offset);
+
+            [MethodImpl(Inline)]
+            public ulong sib_d(MemorySlot n, int i, byte scale, ushort offset)
+                => ((ulong)scale)*Reader.Cell(n, i) + (ulong)offset;
+
+            [MethodImpl(Inline)]
+            public ulong sib(MemorySlot n, int i, byte scale, ushort offset)
+                => Stores.Sib(Refs, n,i,scale,offset);
         }
     }
 }

@@ -11,21 +11,13 @@ namespace Z0.Asm
     using System.Text;
 
     using static Part;
-    using static z;
+    using static memory;
     using static AsmSemanticDefaults;
     using static Z0.Asm.IceOpKind;
 
     [ApiHost(ApiNames.AsmSemanticRender, true)]
     public readonly struct AsmSemanticRender : IDisposable
     {
-        public static void exec(IWfShell wf, ReadOnlySpan<ApiPartRoutines> src)
-        {
-            using var service = new AsmSemanticRender(wf);
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                service.Render(skip(src,i));
-        }
-
         [MethodImpl(Inline), Op]
         public static AsmSemanticRender create(IWfShell wf)
             => new AsmSemanticRender(wf);
@@ -43,7 +35,7 @@ namespace Z0.Asm
         {
             Host = WfShell.host(typeof(AsmSemanticRender));
             Wf = wf.WithHost(Host);
-            Buffer = list<string>();
+            Buffer = root.list<string>();
             DataFormat = HexFormatSpecs.HexData;
             Wf.Created();
         }
@@ -91,11 +83,9 @@ namespace Z0.Asm
             var functions = span(src.Routines);
             var count = src.RoutineCount;
             var offset = MemoryAddress.Zero;
-
             for(var i=0; i<count; i++)
             {
                 Render(skip(functions,i), dst, ref offset);
-
                 if(i != count - 1)
                     dst.WriteLine();
             }

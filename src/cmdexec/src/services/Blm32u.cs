@@ -28,7 +28,7 @@ namespace Z0
 
         BitLogicOps(MethodInfo[] src)
         {
-            Members = src.Select(Addresses.member);
+            Members = src.Select(MemberAddress.from);
             Array.Sort(Members);
             var count = Members.Length;
             MemberNames = alloc<ClrMemberName>(count);

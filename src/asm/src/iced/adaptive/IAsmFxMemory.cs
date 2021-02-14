@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmAspectLabels;
 
     public interface IAsmFxMemory
     {
@@ -19,21 +18,18 @@ namespace Z0.Asm
         //     Gets the RIP/EIP relative address ((Iced.Intel.Instruction.NextIP or Iced.Intel.Instruction.NextIP32)
         //     + Iced.Intel.Instruction.MemoryDisplacement). This property is only valid if
         //     there's a memory operand with RIP/EIP relative addressing.
-        [Label(rel)]
         MemoryAddress IPRelativeMemoryAddress {get;}
 
         //
         // Summary:
         //     Gets the memory operand's base register or Iced.Intel.Register.None if none.
         //     Use this property if the operand has kind Iced.Intel.OpKind.Memory
-        [Label(@base)]
         IceRegister MemoryBase {get;}
 
         //
         // Summary:
         //     Gets the memory operand's index register or Iced.Intel.Register.None if none.
         //     Use this property if the operand has kind Iced.Intel.OpKind.Memory
-        [Label(index)]
         IceRegister MemoryIndex {get;}
 
         //
@@ -43,14 +39,12 @@ namespace Z0.Asm
         //     Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64, Iced.Intel.OpKind.MemorySegSI,
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI, Iced.Intel.OpKind.MemoryESDI,
         //     Iced.Intel.OpKind.MemoryESEDI, Iced.Intel.OpKind.MemoryESRDI
-        [Label(size)]
         IceMemorySize MemorySize {get;}
 
         //
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
-        [Label(scale)]
         MemoryScale MemoryIndexScale {get;}
         //
         // Summary:
@@ -66,7 +60,6 @@ namespace Z0.Asm
         //     property if the operand has kind Iced.Intel.OpKind.Memory
         //int MemoryDisplSize {get;}
 
-        [Label(dx)]
         AsmDisplacement MemDx {get;}
 
         //
@@ -74,7 +67,6 @@ namespace Z0.Asm
         //     Gets the effective segment register used to reference the memory location. Use
         //     this property if the operand has kind Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64,
         //     Iced.Intel.OpKind.MemorySegSI, Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI
-        [Label(seg)]
         IceRegister MemorySegment {get;}
         //
         // Summary:
@@ -82,7 +74,6 @@ namespace Z0.Asm
         //     Iced.Intel.Instruction.MemorySegment. Use this property if the operand has kind
         //     Iced.Intel.OpKind.Memory, Iced.Intel.OpKind.Memory64, Iced.Intel.OpKind.MemorySegSI,
         //     Iced.Intel.OpKind.MemorySegESI, Iced.Intel.OpKind.MemorySegRSI
-        [Label(prefix)]
         IceRegister SegmentPrefix {get;}
 
         //

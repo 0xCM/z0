@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static z;
     using static Part;
 
-    public ref struct AsmMovHandler
+    ref struct AsmMovHandler
     {
         readonly Span<Link<Imm64,IceRegister>> Buffer;
 

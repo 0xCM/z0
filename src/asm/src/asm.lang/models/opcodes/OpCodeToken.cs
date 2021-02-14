@@ -9,26 +9,15 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmOpCodeModel
+    partial struct AsmOpCodeTokens
     {
-        public readonly struct OpCodeToken
-        {
-            public TextBlock Expression {get;}
-
-            [MethodImpl(Inline)]
-            public OpCodeToken(string src)
-            {
-                Expression = src;
-            }
-        }
-
         public readonly struct VEX
         {
             public string Name => "VEX";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(VEX src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(VEX src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct x128
@@ -36,8 +25,8 @@ namespace Z0.Asm
             public string Name => "128";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(x128 src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(x128 src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct x256
@@ -45,8 +34,8 @@ namespace Z0.Asm
             public string Name => "256";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(x256 src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(x256 src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct NDS
@@ -54,8 +43,8 @@ namespace Z0.Asm
             public string Name => "NDS";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(NDS src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(NDS src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct LIG
@@ -63,8 +52,8 @@ namespace Z0.Asm
             public string Name => "LIG";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(LIG src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(LIG src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct REX
@@ -72,8 +61,8 @@ namespace Z0.Asm
             public string Name => "REX";
 
             [MethodImpl(Inline)]
-            public static implicit operator OpCodeToken(REX src)
-                => new OpCodeToken(src.Name);
+            public static implicit operator AsmOpCodeToken(REX src)
+                => new AsmOpCodeToken(src.Name);
         }
 
         public readonly struct HexLiteral

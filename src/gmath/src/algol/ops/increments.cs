@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
     using static gmath;
-    using static z;
+    using static memory;
 
     partial struct gAlg
     {

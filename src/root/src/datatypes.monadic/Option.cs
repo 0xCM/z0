@@ -11,8 +11,11 @@ namespace Z0
 
     using static Root;
 
+    [ApiHost]
     public static class Option
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Creates an option from a reference type instance, returning a valued option if the
         /// refernce is not null; otherwise, returns none
@@ -30,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Option<T> from<T>(T? src)
             where T : struct
                 => src.HasValue ? some(src.Value) : none<T>();
@@ -48,7 +51,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value</param>
         /// <typeparam name="T">The type of the extant value</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Option<T> some<T>(T value)
             => Option<T>.Some(value);
 
@@ -67,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type of value</typeparam>
         /// <param name="value">The value to lift into option-space</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Option<T> eval<T>(T? value)
             where T : struct
                 => value.HasValue ? some(value.Value) : none<T>();
@@ -78,6 +81,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
         /// <param name="f">The function to evaluate</param>
+        [Op,Closures(Closure)]
         public static Option<T> Try<T>(Func<T> f, Action<Exception> handler = null)
         {
             try
@@ -97,6 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function to evaluate</param>
         /// <typeparam name="T">The function result type, if successful</typeparam>
+        [Op,Closures(Closure)]
         public static Option<T> Try<T>(Func<Option<T>> f, Action<Exception> handler = null)
         {
             try
@@ -117,6 +122,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The action to invoke</param>
         /// <param name="onerror">The error handler to call, if specified</param>
+        [Op]
         public static void Try(Action f, Action<Exception> handler = null)
         {
             try
@@ -188,10 +194,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Y ifNotNull<X,Y>(X x, Func<X,Y> f1, Y @default = default)
             => x != null ? f1(x) : @default;
-
-        [MethodImpl(Inline)]
-        public static IEnumerable<T> seq<T>(params T[] src)
-            => src;
 
         [MethodImpl(Inline)]
         public static T[] array<T>(params T[] src)

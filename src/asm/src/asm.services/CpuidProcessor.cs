@@ -9,20 +9,17 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly struct DataProcessor
     {
-        public delegate void SegmentProcessed(Vector128<byte> src);
-
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> process(ReadOnlySpan<IceCpuidFeature> src, SegmentProcessed step)
+        public static Vector128<byte> process(ReadOnlySpan<IceCpuidFeature> src, Action<Vector128<byte>> step)
         {
             var srcCount = src.Length;
             var storage = default(Vector128<byte>);
             ref var dst = ref gcpu.vfirst(storage);
-
             var consumed = 0;
             var remaining = asci16.Size;
 
@@ -43,15 +40,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static int Capture(in IceCpuidFeature src, int remaining, int consumed, ref byte dst)
+        static int Capture(IceCpuidFeature src, int remaining, int consumed, ref byte dst)
         {
-            var name = src.ToString();
-            ReadOnlySpan<char> rendered = name;
-
-            var take = math.min(rendered.Length, remaining);
-            var source = slice(rendered,0,take);
-            ref var target = ref Unsafe.Add(ref dst, consumed);
-            Asci.encode(source, ref target);
+            var name = @span(src.ToString());
+            var take = root.min(name.Length, remaining);
+            var source = slice(name, 0, take);
+            Asci.encode(source, ref @add(dst, consumed));
             return take;
         }
     }

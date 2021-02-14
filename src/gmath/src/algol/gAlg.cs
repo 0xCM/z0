@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
-    using static memory;
 
     [ApiHost]
     public readonly partial struct gAlg

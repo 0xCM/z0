@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(FVec)" />
     <ProjectReference Include="$(DVec)" />
   </ItemGroup>
 
