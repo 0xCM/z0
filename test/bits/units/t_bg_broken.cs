@@ -85,7 +85,7 @@ namespace Z0
             Span<byte> data = stackalloc byte[8];
             data.Fill(0b10101010);
 
-            ref readonly var src = ref memory.first64(data);
+            ref readonly var src = ref memory.first64u(data);
             var spec = GridCalcs.grid(n8, n8, byte.MinValue);
             var map = spec.Map();
             var state = bit.Off;

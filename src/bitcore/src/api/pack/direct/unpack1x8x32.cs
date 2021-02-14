@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static void unpack1x8x32(uint src, Span<byte> dst)
-            => unpack1x8x32(src, ref first64(dst));
+            => unpack1x8x32(src, ref first64u(dst));
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

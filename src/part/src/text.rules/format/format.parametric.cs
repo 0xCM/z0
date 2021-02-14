@@ -14,33 +14,14 @@ namespace Z0
         partial struct Format
         {
             /// <summary>
-            /// Formats a character span
+            /// Formats a <see cref='ITextual'/>
             /// </summary>
-            /// <param name="src"></param>
-            [Op]
-            public static string format(ReadOnlySpan<char> src)
-                => new string(src);
-
-            /// <summary>
-            /// Formats a pattern using an arbitrary kind/number of arguments
-            /// </summary>
-            /// <param name="pattern">The source pattern</param>
-            /// <param name="args">The pattern arguments</param>
-            [MethodImpl(Inline), Op]
-            public static string format(string pattern, params object[] args)
-                => string.Format(pattern, args);
-
-            /// <summary>
-            /// Formats anything
-            /// </summary>
-            /// <param name="rest">The formattables to be rendered and concatenated</param>
-            [MethodImpl(Inline), Op]
-            public static string format(object first)
-                => first is ITextual t ? t.Format() : first?.ToString() ?? "!!null!!";
-
-            [Op]
-            public static string format(object src, Type t, char delimiter, RenderWidth width)
-                => text.rpad(text.format("{0} {1}", delimiter, text.format(src)), width);
+            /// <param name="src">The source element</param>
+            /// <typeparam name="T">The element type</typeparam>
+            [MethodImpl(Inline)]
+            public static string format<T>(T src)
+                where T : struct, ITextual
+                    => src.Format();
 
             /// <summary>
             /// Formats a pattern using a parametric argument
@@ -177,15 +158,7 @@ namespace Z0
                                 g is ITextual t6 ? t6.Format() : $"{g}"
                                 );
 
-            /// <summary>
-            /// Formats a <see cref='ITextual'/>
-            /// </summary>
-            /// <param name="src">The source element</param>
-            /// <typeparam name="T">The element type</typeparam>
-            [MethodImpl(Inline)]
-            public static string format<T>(T src)
-                where T : struct, ITextual
-                    => src.Format();
-            }
+
+        }
     }
 }

@@ -7,9 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     using FK = AsmFragmentKind;
 
     public readonly struct AsmFragmentWriter : IAsmFragmentWriter
@@ -31,7 +28,7 @@ namespace Z0.Asm
         string FormatLabelAddress(string src)
         {
             var hex = HexScalarParser.parse(src).ValueOrDefault();
-            return (hex - (ulong)Base).FormatSmallHex(true);
+            return (hex - (ulong)Base).FormatAsmHex(4);
         }
 
         [MethodImpl(Options), Op]

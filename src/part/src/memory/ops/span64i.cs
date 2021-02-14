@@ -13,14 +13,14 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Creates a u32 span from a T-cell reference
+        /// Creates a u64 span from a T-cell reference
         /// </summary>
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<uint> span32u<T>(in T src)
+        public static Span<long> span64i<T>(in T src)
             where T : struct
-                => recover<uint>(AsBytes(CreateSpan(ref edit(src), 1)));
+                => recover<long>(AsBytes(CreateSpan(ref edit(src), 1)));
 
         /// <summary>
         /// Creates a u32 span from a bytespan
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The reference cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<uint> span32u(ReadOnlySpan<byte> src)
-            => recover<uint>(src);
+        public static ReadOnlySpan<long> span64i(ReadOnlySpan<byte> src)
+            => recover<long>(src);
     }
 }

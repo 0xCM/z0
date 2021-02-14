@@ -34,7 +34,7 @@ namespace Z0.Asm
             => new AsmOffsetSequence((ushort)(Seq + 1), Offset + dx);
 
         public string Format(int seqpad)
-            => text.concat(Seq.ToString().PadLeft(seqpad, Chars.D0), Chars.Space,  Offset.FormatSmallHex(true));
+            => text.concat(Seq.ToString().PadLeft(seqpad, Chars.D0), Chars.Space,  Offset.FormatAsmHex(4));
 
         public string Format()
             => Format(3);

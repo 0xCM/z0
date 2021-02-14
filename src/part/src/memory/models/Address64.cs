@@ -51,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Location, W);
+            => HexFormat.format(Location, W, true);
 
         public override string ToString()
             => Format();

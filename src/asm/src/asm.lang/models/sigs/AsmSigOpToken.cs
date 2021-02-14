@@ -8,7 +8,6 @@ namespace Z0.Asm
 
     using static Part;
 
-
     public readonly struct AsmSigOpToken : ITextual, INullity
     {
         public byte Index {get;}

@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    partial struct asm
     {
-        [MethodImpl(Inline)]
-        public static string embrace<T>(T content)
-            => Format.embrace(content);
+        [MethodImpl(Inline), Op]
+        public static AsmSymbol symbol(string data)
+            => new AsmSymbol(data);
     }
 }

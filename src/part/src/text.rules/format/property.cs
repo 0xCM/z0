@@ -13,13 +13,13 @@ namespace Z0
     {
         partial struct Format
         {
-            /// <summary>
-            /// Encloses text content between left and right braces
-            /// </summary>
-            /// <param name="content">The content to be embraced</param>
-            [MethodImpl(Inline), Op]
-            public static string embrace<T>(T content)
-                => $"{Chars.LBrace}{content}{Chars.RBrace}";
+            [MethodImpl(Inline), Op, Closures(Closure)]
+            public static PropertyFormat<T> property<T>(string name, T value)
+                => new PropertyFormat<T>(name, value, RP.PropertyPad);
+
+            [MethodImpl(Inline), Op, Closures(Closure)]
+            public static PropertyFormat<T> property<T>(string name, T value, sbyte pad)
+                => new PropertyFormat<T>(name, value, pad);
         }
     }
 }

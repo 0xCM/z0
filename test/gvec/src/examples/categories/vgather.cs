@@ -161,7 +161,7 @@ namespace Z0
         static Vector256<ulong> VGather4x64uIndex
         {
             [MethodImpl(Inline)]
-            get => cpu.vload(n256, in memory.first64(VGather256x64x256IndexData));
+            get => cpu.vload(n256, in memory.first64u(VGather256x64x256IndexData));
         }
 
         //[0, 63, 127, 255]
@@ -175,7 +175,7 @@ namespace Z0
         static Vector256<uint> VGather256x32x512Index
         {
             [MethodImpl(Inline)]
-            get => gcpu.vload<uint>(w256, in memory.first32(VGather256x32x512IndexData));
+            get => gcpu.vload<uint>(w256, in memory.first32u(VGather256x32x512IndexData));
         }
 
         //[0, 63, 127, 255]

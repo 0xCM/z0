@@ -2,18 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static TextRules;
 
-    partial class text
+    [ApiHost]
+    public readonly partial struct AsmCases
     {
-        [MethodImpl(Inline)]
-        public static string embrace<T>(T content)
-            => Format.embrace(content);
+
     }
 }

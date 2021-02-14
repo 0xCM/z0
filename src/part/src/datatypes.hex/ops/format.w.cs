@@ -13,18 +13,18 @@ namespace Z0
     partial struct HexFormat
     {
         [MethodImpl(Inline), Op]
-        public static string format<W,T>(T value, W w = default)
+        public static string format<W,T>(T value, W w = default, bool postspec = false)
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return SmallHex.format(Numeric.force<T,byte>(value));
+                return SmallHex.format(Numeric.force<T,byte>(value), postspec);
             else if(typeof(W) == typeof(W16))
-                return SmallHex.format(Numeric.force<T,ushort>(value));
+                return SmallHex.format(Numeric.force<T,ushort>(value), postspec);
             else if(typeof(W) == typeof(W32))
-                return SmallHex.format(Numeric.force<T,uint>(value));
+                return SmallHex.format(Numeric.force<T,uint>(value), postspec);
             else
-                return SmallHex.format(Numeric.force<T,ulong>(value));
+                return SmallHex.format(Numeric.force<T,ulong>(value), postspec);
         }
 
         [Op]

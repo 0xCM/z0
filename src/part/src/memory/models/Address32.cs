@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => HexFormat.format(Location, W);
+            => HexFormat.format(Location, W, true);
 
         public override string ToString()
             => Format();
@@ -73,6 +73,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator Address32(IntPtr src)
             => (uint)src.ToInt32();
+
+        [MethodImpl(Inline)]
+        public static explicit operator Address32(MemoryAddress src)
+            => new Address32((uint)src);
 
         [MethodImpl(Inline)]
         public static explicit operator Address32(int src)

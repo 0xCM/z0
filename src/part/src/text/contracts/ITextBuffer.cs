@@ -35,6 +35,27 @@ namespace Z0
             AppendLine(string.Format(pattern, args));
         }
 
+
+        void AppendPropLine<T>(PropertyFormat<T> src)
+        {
+            AppendLine(src.Format());
+        }
+
+        void AppendPropLine<T>(PropertyFormat<T> src, char delimiter)
+        {
+            AppendLine(src.Format(delimiter));
+        }
+
+        void AppendProp<T>(PropertyFormat<T> src)
+        {
+            Append(src.Format());
+        }
+
+        void AppendProp<T>(PropertyFormat<T> src, char delimiter)
+        {
+            Append(src.Format(delimiter));
+        }
+
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
 

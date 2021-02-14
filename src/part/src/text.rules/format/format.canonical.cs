@@ -14,12 +14,13 @@ namespace Z0
         partial struct Format
         {
             /// <summary>
-            /// Encloses text content between left and right braces
+            /// Formats a pattern using an arbitrary kind/number of arguments
             /// </summary>
-            /// <param name="content">The content to be embraced</param>
+            /// <param name="pattern">The source pattern</param>
+            /// <param name="args">The pattern arguments</param>
             [MethodImpl(Inline), Op]
-            public static string embrace<T>(T content)
-                => $"{Chars.LBrace}{content}{Chars.RBrace}";
+            public static string format(string pattern, params object[] args)
+                => string.Format(pattern, args);
         }
     }
 }

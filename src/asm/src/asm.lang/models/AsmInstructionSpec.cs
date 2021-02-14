@@ -18,6 +18,7 @@ namespace Z0.Asm
 
         public AsmSig Sig {get;}
 
+        [MethodImpl(Inline)]
         public AsmInstructionSpec(AsmOpCode oc, AsmSig sig)
         {
             OpCode = oc;

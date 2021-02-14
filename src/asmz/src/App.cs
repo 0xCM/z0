@@ -346,7 +346,7 @@ namespace Z0.Asm
                 if(result)
                 {
                     var location = address - delta;
-                    Wf.Status($"Jmp RAX found at {location.Format(NumericWidth.W16)}");
+                    Wf.Status($"Jmp RAX found at {location.Format()}");
                     break;
                 }
                 address++;
@@ -391,10 +391,22 @@ namespace Z0.Asm
             var dataset = decoder.Decode(blocks);
         }
 
-        // 001fh call 7ffeaba07750h                      ; CALL rel32                       | E8 cd                            | 5   | e8 5c c4 b4 5a
         void TestRel32()
         {
+            var cases = AsmCases.load(AsmInstructions.call(), AsmSigTokenList.Rel32).View;
+            var count = cases.Length;
+            var errors = text.buffer();
+            for(var i=0; i< count; i++)
+            {
+                ref readonly var c = ref skip(cases,i);
+                Wf.Row(c.Format());
+                Wf.Row(RP.PageBreak40);
+                Wf.Row(c.Instruction.Format());
+                if(!c.Validate(errors))
+                    Wf.Error(errors.Emit());
 
+
+            }
         }
 
         public unsafe void Run()
@@ -404,7 +416,7 @@ namespace Z0.Asm
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
-            CheckApiSigs();
+            TestRel32();
         }
 
         public static void Main(params string[] args)

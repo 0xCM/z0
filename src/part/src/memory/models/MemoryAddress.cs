@@ -36,43 +36,14 @@ namespace Z0
         public string Identifier
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
-        /// <summary>
-        /// Computes the bit-width of the smallest numeric type that can represent the address
-        /// </summary>
-        public NumericWidth MinWidth
-        {
-            [MethodImpl(Inline)]
-            get
-            {
-                if(Location <= byte.MaxValue)
-                    return NumericWidth.W8;
-                else if(Location <= ushort.MaxValue)
-                    return NumericWidth.W16;
-                else if(Location <= uint.MaxValue)
-                    return NumericWidth.W32;
-                else
-                    return NumericWidth.W64;
-            }
-        }
-
         public string Format()
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
-        public string Format(NumericWidth width)
-        {
-            return width switch{
-                    NumericWidth.W8 => ((byte)Location).FormatAsmHex(2),
-                    NumericWidth.W16 => ((ushort)Location).FormatAsmHex(4),
-                    NumericWidth.W32 => ((uint)Location).FormatAsmHex(8),
-                    _ => Location.FormatAsmHex(12),
-            };
-        }
-
-        [MethodImpl(Inline)]
         public string FormatMinimal()
-            => Format(MinWidth);
+            => Location.FormatLeastAsmHex();
 
-        [MethodImpl(Inline)]
+            //Location.FormatAsmHex(Numeric.effwidth(Location));
+
         public string Format(byte pad)
             => Location.FormatAsmHex(pad);
 
@@ -171,6 +142,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator uint(MemoryAddress src)
             => (uint)src.Location;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(MemoryAddress src)
+            => new ByteSize((ulong)src.Location);
 
         [MethodImpl(Inline)]
         public static bool operator==(MemoryAddress a, MemoryAddress b)

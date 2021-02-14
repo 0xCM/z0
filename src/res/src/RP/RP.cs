@@ -15,6 +15,10 @@ namespace Z0
         public static string pad(int pad)
             => "{0," + pad.ToString() + "}";
 
+        public const char PropertySep = Chars.Colon;
+
+        public const sbyte PropertyPad = -16;
+
         /// <summary>
         /// Defines the literal '{0} -> {1}'
         /// </summary>

@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    [ApiHost]
-    public readonly partial struct AsmInstructions
+    public readonly partial struct AsmSigs
     {
 
     }

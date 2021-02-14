@@ -17,7 +17,10 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Fsm)" />
-
   </ItemGroup>
+
+   <ItemGroup>
+    <EmbeddedResource Include="src/asm.cases/**/*.asm" />
+   </ItemGroup>
 
 </Project>

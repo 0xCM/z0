@@ -14,12 +14,16 @@ namespace Z0
         partial struct Format
         {
             /// <summary>
-            /// Encloses text content between left and right braces
+            /// Formats anything
             /// </summary>
-            /// <param name="content">The content to be embraced</param>
+            /// <param name="rest">The formattables to be rendered and concatenated</param>
             [MethodImpl(Inline), Op]
-            public static string embrace<T>(T content)
-                => $"{Chars.LBrace}{content}{Chars.RBrace}";
+            public static string format(object src)
+                => src is ITextual t ? t.Format() : src?.ToString() ?? "!!null!!";
+
+            [Op]
+            public static string format(object src, Type t, char delimiter, RenderWidth width)
+                => text.rpad(text.format("{0} {1}", delimiter, text.format(src)), width);
         }
     }
 }

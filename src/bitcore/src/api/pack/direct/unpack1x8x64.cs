@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static void unpack1x8x64(ulong src, Span<byte> dst)
-            => unpack1x8x64(src, ref first64(dst));
+            => unpack1x8x64(src, ref first64u(dst));
 
         /// <summary>
         /// Distributes each packed source bit to the least significant bit of the corresponding target byte

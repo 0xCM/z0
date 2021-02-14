@@ -54,28 +54,25 @@ namespace Z0.Asm
         Imm64,
 
         /// <summary>
-        /// One of the byte general-purpose registers: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL};
-        /// or one of the byte registers (R8L-R15L) available when using REX.R and 64-bit mode.
+        /// One of the byte general-purpose registers {AL CL DL BL AH CH DH BH BPL SPL DIL SIL} or one of the byte registers (R8L-R15L) when using REX.R and 64-bit mode.
         /// </summary>
         [Symbol("r8")]
         R8,
 
         /// <summary>
-        /// One of the word general-purpose registers: {AX CX DX BX SP BP SI DI}; or one of the word registers
-        /// (R8-R15) available when using REX.R and 64-bit mode
+        /// One of the word general-purpose registers {AX CX DX BX SP BP SI DI} or one of the word registers (R8-R15) when using REX.R and 64-bit mode
         /// </summary>
         [Symbol("r16")]
         R16,
 
         /// <summary>
-        ///One of the doubleword general-purpose registers: {EAX ECX EDX EBX ESP EBP ESI EDI}; or one of the doubleword registers
-        /// (R8D - R15D) available when using REX.R in 64-bit mode
+        /// One of the doubleword general-purpose registers {EAX ECX EDX EBX ESP EBP ESI EDI} or one of the doubleword registers (R8D - R15D) when using REX.R in 64-bit mode
         /// </summary>
         [Symbol("r32")]
         R32,
 
         /// <summary>
-        /// One of the quadword general-purpose registers: {RAX RBX RCX RDX RDI RSI RBP RSP R8–R15}, are available when using REX.R and 64-bit mode
+        /// One of the quadword general-purpose registers {RAX RBX RCX RDX RDI RSI RBP RSP} or one of the (R8 - R15) registers when using REX.R and 64-bit mode
         /// </summary>
         [Symbol("r64")]
         R64,
@@ -105,8 +102,8 @@ namespace Z0.Asm
         Rm32,
 
         /// <summary>
-        /// A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits
-        /// when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15;
+        /// A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W.
+        /// Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15;
         /// these are available only in 64-bit mode. The contents of memory are found at the address provided by the
         /// effective address computation
         /// </summary>
@@ -295,21 +292,19 @@ namespace Z0.Asm
         Rel8,
 
         /// <summary>
-        /// A relative address within the same code segment as the instruction assembled. The rel16 symbol applies to instructions
-        /// with an operand-size attribute of 16 bits
+        /// A relative address within the same code segment as the instruction assembled and applicable to instructions with an operand-size attribute of 16 bits
         /// </summary>
         [Symbol("rel16")]
         Rel16,
 
         /// <summary>
-        /// A relative address within the same code segment as the instruction assembled. The rel32 symbol applies to instructions
-        /// with an operand-size attribute of 32 bits
+        /// A relative address within the same code segment as the instruction assembled; applicable to instructions with an operand-size attribute of 32 bits
         /// </summary>
         [Symbol("rel32")]
         Rel32,
 
         /// <summary>
-        /// A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5
+        /// A segment register, where the register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5
         /// </summary>
         [Symbol("Sreg")]
         Sreg,

@@ -12,12 +12,24 @@ namespace Z0
     partial class XHex
     {
         [Op]
+        public static string FormatAsmHex(this sbyte src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2")) + PostSpec;
+
+        [Op]
         public static string FormatAsmHex(this byte src, int? digits = null)
             => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x2")) + PostSpec;
 
         [Op]
+        public static string FormatAsmHex(this short src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4")) + PostSpec;
+
+        [Op]
         public static string FormatAsmHex(this ushort src, int? digits = null)
             => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x4")) + PostSpec;
+
+        [Op]
+        public static string FormatAsmHex(this int src, int? digits = null)
+            => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
 
         [Op]
         public static string FormatAsmHex(this uint src, int? digits = null)
@@ -28,19 +40,27 @@ namespace Z0
             => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
 
         [Op]
-        public static string FormatAsmHex(this int src, int? digits = null)
+        public static string FormatAsmHex(this long src, int? digits = null)
             => digits.Map(n => src.ToString($"x{n}"), () => src.ToString("x")) + PostSpec;
 
-        [Op]
-        public static string FormatSmallHex(this ulong src, bool postspec = false)
-            => src.ToString("x4") + (postspec ? $"{PostSpec}" : string.Empty);
 
         [Op]
-        public static string FormatSmallHex(this uint src, bool postspec = false)
-            => ((ulong)src).FormatSmallHex(postspec);
+        public static string FormatAsmHex(this ulong src, NumericWidth width)
+        {
+            return width switch{
+                    NumericWidth.W8 => ((byte)src).FormatAsmHex(2),
+                    NumericWidth.W16 => ((ushort)src).FormatAsmHex(4),
+                    NumericWidth.W32 => ((uint)src).FormatAsmHex(8),
+                    _ => src.FormatAsmHex(12),
+            };
+        }
 
         [Op]
-        public static string FormatSmallHex(this ushort src, bool postspec = false)
-            => ((ulong)src).FormatSmallHex(postspec);
+        public static string FormatLeastAsmHex(this ulong src)
+            => src.FormatAsmHex(Numeric.effwidth(src));
+
+        // [Op]
+        // public static string FormatSmallHex(this ulong src, bool postspec = false)
+        //     => src.ToString("x4") + (postspec ? $"{PostSpec}" : string.Empty);
     }
 }

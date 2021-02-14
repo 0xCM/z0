@@ -17,7 +17,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len >= 2)
-                return first16(src);
+                return first16u(src);
             else if(len > 0)
                 return first(src);
             else
@@ -29,7 +29,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len >= 4)
-                return first32(src);
+                return first32u(src);
             else
                 return take16u(src);
         }
@@ -39,7 +39,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len >= 8)
-                return first64(src);
+                return first64u(src);
             else
                 return take32u(src);
         }

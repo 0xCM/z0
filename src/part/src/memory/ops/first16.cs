@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
@@ -19,9 +17,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ushort first16<T>(Span<T> src)
+        public static ref ushort first16u<T>(Span<T> src)
             where T : unmanaged
-                => ref As<T,ushort>(ref GetReference(src));
+                => ref first(recover<T,ushort>(src));
 
         /// <summary>
         /// Presents the span head as a readonly reference to an unsigned 16-bit integer
@@ -29,8 +27,8 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ushort first16<T>(ReadOnlySpan<T> src)
+        public static ref readonly ushort first16u<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ref As<T,ushort>(ref GetReference(src));
+                => ref first(recover<T,ushort>(src));
     }
 }

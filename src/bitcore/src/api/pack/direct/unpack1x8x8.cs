@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static ref ulong unpack1x8x8(byte src, Span<byte> dst)
-            => ref unpack1x8x8(src, ref first64(dst));
+            => ref unpack1x8x8(src, ref first64u(dst));
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

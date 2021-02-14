@@ -14,32 +14,43 @@ namespace Z0
     partial struct memory
     {
         /// <summary>
-        /// Presents the span head as a reference to an unsigned 64-bit integer
+        /// Presents the span head as a reference to a <see cref='ulong'/>
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref ulong first64<T>(Span<T> src)
+        public static ref ulong first64u<T>(Span<T> src)
             where T : unmanaged
-                => ref first(src.AsUInt64());
+                => ref first(recover<T,ulong>(src));
 
         /// <summary>
-        /// Presents the span head as a readonly reference to an unsigned 64-bit integer
+        /// Presents the span head as a readonly reference to a <see cref='ulong'/>
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ulong first64<T>(ReadOnlySpan<T> src)
+        public static ref readonly ulong first64u<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ref As<T,ulong>(ref GetReference(src));
+                => ref first(recover<T,ulong>(src));
 
         /// <summary>
-        /// Presents the span head as a reference to a signed 64-bit integer
+        /// Presents the span head as a reference to a <see cref='long'/>
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op]
-        public static ref readonly long first64i(ReadOnlySpan<byte> src)
-            => ref first(src.AsInt64());
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref long first64i<T>(Span<T> src)
+            where T : unmanaged
+                => ref first(recover<T,long>(src));
+
+        /// <summary>
+        /// Presents the span head as a readonly reference to a <see cref='long'/>
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly long first64i<T>(ReadOnlySpan<T> src)
+            where T : unmanaged
+                => ref first(recover<T,long>(src));
     }
 }

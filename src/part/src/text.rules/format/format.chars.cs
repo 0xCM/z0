@@ -8,12 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static TextRules;
 
-    partial class text
+    partial struct TextRules
     {
-        [MethodImpl(Inline)]
-        public static string embrace<T>(T content)
-            => Format.embrace(content);
+        partial struct Format
+        {
+            /// <summary>
+            /// Formats a character span
+            /// </summary>
+            /// <param name="src"></param>
+            [Op]
+            public static string format(ReadOnlySpan<char> src)
+                => new string(src);
+        }
     }
 }

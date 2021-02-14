@@ -82,7 +82,7 @@ namespace Z0.Asm
             static string label(string src, ulong baseaddress)
             {
                 var hex = HexNumericParser.parse(src).ValueOrDefault();
-                return (hex - baseaddress).FormatSmallHex(true);
+                return (hex - baseaddress).FormatAsmHex(4);
             }
 
             public override void Write(string text, Iced.FormatterOutputTextKind kind)

@@ -79,7 +79,7 @@ namespace Z0
 
         [Op]
         public static string format(RelativeAddress src)
-            => src.Offset.FormatSmallHex(true);
+            => src.Offset.FormatAsmHex(4);
 
         [Op, Closures(Closure)]
         public static string format<T>(RelativeAddress<T> src)

@@ -22,5 +22,14 @@ namespace Z0
             where T : struct
                 => recover<ushort>(AsBytes(CreateSpan(ref edit(src), 1)));
 
+        /// <summary>
+        /// Creates a u16 span from a T-cell reference
+        /// </summary>
+        /// <param name="src">The reference cell</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<ushort> span16u(ReadOnlySpan<byte> src)
+            => recover<ushort>(src);
+
     }
 }
