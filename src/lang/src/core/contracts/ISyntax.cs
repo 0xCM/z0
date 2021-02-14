@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    public interface ISyntax : ITextual
+    {
 
-    [ApiHost]
-    public readonly partial struct AsciTest
+    }
+
+    public interface ISyntax<X> : ISyntax
+        where X : ISyntax<X>, new()
     {
 
     }

@@ -12,8 +12,8 @@ namespace Z0.Lang
     partial struct lang
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SyntaxSymbol<K> symbol<K>(uint order, K kind, string name, string desc = EmptyString)
+        public static SyntaxToken<K> token<K>(string symbol, K kind, string desc = EmptyString)
             where K : unmanaged
-                => new SyntaxSymbol<K>(order, kind, name, desc);
+                => new SyntaxToken<K>(symbol, kind, desc);
     }
 }

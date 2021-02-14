@@ -2,15 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
-    public interface ISyntax : ITextual
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    public interface IScope
     {
 
     }
 
-    public interface ISyntax<X> : ISyntax
-        where X : ISyntax<X>, new()
+    public interface IScope<T> : IScope
+        where T : IScope<T>
     {
 
     }

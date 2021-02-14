@@ -15,6 +15,14 @@ namespace Z0.Asm
 
     partial struct IceExtractors
     {
+        [MethodImpl(Inline), Op]
+        static AsmBranchTarget target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size, Address16 selector)
+            => new AsmBranchTarget(dst, kind, size, selector);
+
+        [MethodImpl(Inline), Op]
+        static AsmBranchTarget target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size)
+            => new AsmBranchTarget(dst,kind, size);
+
         /// <summary>
         /// Defines an IP offset relative to a specified base address, instruction size and target address
         /// </summary>
@@ -40,15 +48,15 @@ namespace Z0.Asm
             switch(k)
             {
                 case NearBranch16:
-                    return asm.target(BTK.Near, src.NearBranch16, BTW.Branch16);
+                    return target(BTK.Near, src.NearBranch16, BTW.Branch16);
                 case NearBranch32:
-                    return asm.target(BTK.Near, src.NearBranch32, BTW.Branch32);
+                    return target(BTK.Near, src.NearBranch32, BTW.Branch32);
                 case NearBranch64:
-                    return asm.target(BTK.Near, src.NearBranch64, BTW.Branch64);
+                    return target(BTK.Near, src.NearBranch64, BTW.Branch64);
                 case FarBranch16:
-                    return asm.target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
+                    return target(BTK.Far, src.FarBranch16, BTW.Branch16, (Address16)src.FarBranchSelector);
                 case FarBranch32:
-                    return asm.target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
+                    return target(BTK.Far, src.FarBranch32, BTW.Branch32, (Address16)src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }

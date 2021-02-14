@@ -56,11 +56,7 @@ namespace Z0
         }
 
         [Op]
-        public static string FormatLeastAsmHex(this ulong src)
+        public static string FormatTrimmedAsmHex(this ulong src)
             => src.FormatAsmHex(Numeric.effwidth(src));
-
-        // [Op]
-        // public static string FormatSmallHex(this ulong src, bool postspec = false)
-        //     => src.ToString("x4") + (postspec ? $"{PostSpec}" : string.Empty);
     }
 }

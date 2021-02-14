@@ -15,7 +15,7 @@ namespace Z0.Asm
     partial struct AsmCases
     {
         [Op]
-        public static string format(in CallRel32Case src)
+        public static string format(in CallRel32 src)
         {
             var dst = text.buffer();
             dst.AppendPropLine(property(nameof(src.Caller), src.Caller.Format()));
@@ -23,7 +23,7 @@ namespace Z0.Asm
             dst.AppendPropLine(property(nameof(src.NextIp), src.NextIp.Format()));
             dst.AppendPropLine(property(nameof(src.Target), src.Target.Format()));
             dst.AppendPropLine(property(nameof(src.RelTarget), src.RelTarget.Format()));
-            dst.AppendPropLine(property(nameof(src.Encoding), src.Encoding.FormatAsmHex()));
+            dst.AppendPropLine(property(nameof(src.Encoding), src.Encoding.Format()));
             return dst.Emit();
         }
     }

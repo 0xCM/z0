@@ -62,6 +62,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmSigToken(AsmSigToken<T> src)
             => new AsmSigToken(src.Symbol, src.Kind, src.Description);
-
     }
 }

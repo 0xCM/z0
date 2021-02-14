@@ -11,13 +11,26 @@ namespace Z0.Asm
 
     partial struct AsmCases
     {
+        /// <summary>
+        /// Validates the integrity of the case itself
+        /// </summary>
+        /// <param name="src">The case to validate</param>
+        /// <param name="errors">An error receiver</param>
         [Op]
-        public static bool validate(in CallRel32Case src, ITextBuffer errors)
+        public static bool validate(in CallRel32 src, ITextBuffer errors)
         {
             var valid = true;
-            if(src.IpDelta != 5)
+            const byte fxsize = 5;
+
+            if(src.IpDelta != fxsize)
             {
-                errors.AppendLineFormat($"{nameof(src.IpDelta)} = ${src.IpDelta} != 5");
+                errors.AppendLineFormat($"{nameof(src.IpDelta)} = ${src.IpDelta} != {fxsize}");
+                valid = false;
+            }
+
+            if(src.Encoding.Size != fxsize)
+            {
+                errors.AppendLineFormat($"{nameof(src.Encoding.Size)} = ${src.Encoding.Size} != {fxsize}");
                 valid = false;
             }
 

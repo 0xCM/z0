@@ -10,7 +10,9 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
+    using static TextRules;
     using static root;
+    using static memory;
 
     using P = TextRules.Parse;
 
@@ -21,7 +23,7 @@ namespace Z0
             => default(HexByteParser);
 
         [Op]
-        public static bool parse(string src, out byte[] dst)
+        public bool Parse(string src, out byte[] dst)
         {
             try
             {
@@ -42,12 +44,88 @@ namespace Z0
             }
         }
 
+        public ParseResult<byte> Parse(string src)
+        {
+            try
+            {
+                return parsed(src, ParseByte(src));
+            }
+            catch(Exception e)
+            {
+                return unparsed<byte>(src, e);
+            }
+        }
+
+        public int Parse(string src, Span<byte> dst)
+        {
+            const char Null = (char)0;
+            try
+            {
+                var input = span(src);
+                var maxbytes = dst.Length;
+                var j=0;
+                var count = input.Length;
+                var c0 = Null;
+                var c1 = Null;
+                for(var i=0; i<count; i++)
+                {
+                    if(j == maxbytes)
+                        return j;
+
+                    ref readonly var c = ref skip(input,i);
+                    if(Query.whitespace(c))
+                    {
+                        if(c0 != Null || c1 != Null)
+                        {
+                            if(Parse(c0, c1, out seek(dst,j)))
+                                j++;
+                            c0 = Null;
+                            c1 = Null;
+                        }
+                    }
+
+                    else
+                    {
+                        if(c0 == Null)
+                            c0 = c;
+                        else if(c1 == Null)
+                            c1 = c;
+                        else
+                        {
+                            if(Parse(c0, c1, out seek(dst,j)))
+                                j++;
+                            c0 = Null;
+                            c1 = Null;
+                        }
+                    }
+                }
+
+                return j;
+            }
+            catch(Exception)
+            {
+                return 0;
+            }
+        }
+
+        [Op]
+        public bool Parse(char c0, char c1, out byte dst)
+        {
+            if(Parse(c0, out var d0) && Parse(c1, out var d1))
+            {
+                dst = (byte)(d0 | (d1 << 8));
+                return true;
+            }
+            dst = 0;
+            return false;
+        }
+
         /// <summary>
         /// Parses a single hex digit
         /// </summary>
         /// <param name="c">The source character</param>
         [MethodImpl(Inline), Op]
-        public static bool parse(char c, out byte dst)
+        public bool Parse(char c, out byte dst)
         {
             if(HexTest.scalar(c))
             {
@@ -66,31 +144,6 @@ namespace Z0
             }
             dst = byte.MaxValue;
             return false;
-        }
-
-        [Op]
-        public static bool parse(char c0, char c1, out byte dst)
-        {
-            if(parse(c0, out var d0) && parse(c1, out var d1))
-            {
-                dst = (byte)(d0 | (d1 << 8));
-                return true;
-            }
-            dst = 0;
-            return false;
-        }
-
-
-        public ParseResult<byte> Parse(string src)
-        {
-            try
-            {
-                return parsed(src, ParseByte(src));
-            }
-            catch(Exception e)
-            {
-                return unparsed<byte>(src, e);
-            }
         }
 
         /// <summary>

@@ -115,7 +115,7 @@ namespace Z0
             /// <summary>
             /// [10000000 10000000]
             /// </summary>
-            [BinaryLiteral ("[10000000 10000000]")]
+            [BinaryLiteral("[10000000 10000000]")]
             public const ushort Index16x8x7 = (ushort) Index8x8x7 | (ushort) Index8x8x7 << 8;
 
             // ~ Index32x8

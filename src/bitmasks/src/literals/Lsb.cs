@@ -343,13 +343,13 @@ namespace Z0
             /// <summary>
             /// [00000000 00000000 00000000 00000001]
             /// </summary>
-            [BitMask ("[00000000 00000000 00000000 00000001]")]
+            [BitMask("[00000000 00000000 00000000 00000001]")]
             public const uint Lsb32x32x1 = 1;
 
             /// <summary>
             /// [00000000 00000000 00000000 00000001 00000000 00000000 00000000 00000001]
             /// </summary>
-            [BitMask ("[00000000 00000000 00000000 00000001 00000000 00000000 00000000 00000001]")]
+            [BitMask("[00000000 00000000 00000000 00000001 00000000 00000000 00000000 00000001]")]
             public const ulong Lsb64x32x1 = (ulong) Lsb32x32x1 | (ulong) Lsb32x32x1 << 32;
 
             // ~ 64x1: The least bit of each 64-bit segment is enabled
@@ -358,7 +358,7 @@ namespace Z0
             /// <summary>
             /// [00000000 00000000 00000000 0000000 00000000 00000000 00000000 0000001]
             /// </summary>
-            [BitMask ("[00000000 00000000 00000000 0000000 00000000 00000000 00000000 0000001]")]
+            [BitMask("[00000000 00000000 00000000 0000000 00000000 00000000 00000000 0000001]")]
             public const ulong Lsb64x64x1 = 1;
 
             // ~ Lsb8x2: The least 2 bits of each 8-bit segment are enabled
@@ -367,25 +367,25 @@ namespace Z0
             /// <summary>
             /// [00000011]
             /// </summary>
-            [BitMask ("[00000011]")]
+            [BitMask("[00000011]")]
             public const byte Lsb8x8x2 = 1 | 1 << 1;
 
             /// <summary>
             /// [00000011 00000011]
             /// </summary>
-            [BitMask ("[00000011 00000011]")]
+            [BitMask("[00000011 00000011]")]
             public const ushort Lsb16x8x2 = (ushort) Lsb8x8x2 | (ushort) Lsb8x8x2 << 8;
 
             /// <summary>
             /// [00000011 00000011 00000011 00000011]
             /// </summary>
-            [BitMask ("[00000011 00000011 00000011 00000011]")]
+            [BitMask("[00000011 00000011 00000011 00000011]")]
             public const uint Lsb32x8x2 = (uint) Lsb16x8x2 | (uint) Lsb16x8x2 << 16;
 
             /// <summary>
             /// [00000011 00000011 00000011 00000011 00000011 00000011 00000011 00000011]
             /// </summary>
-            [BitMask ("[00000011 00000011 00000011 00000011 00000011 00000011 00000011 00000011]")]
+            [BitMask("[00000011 00000011 00000011 00000011 00000011 00000011 00000011 00000011]")]
             public const ulong Lsb64x8x2 = (ulong) Lsb32x8x2 | (ulong) Lsb32x8x2 << 32;
 
             // ~ Lsb8x3: The least 3 bits of each 8-bit segment are enabled
@@ -394,25 +394,25 @@ namespace Z0
             /// <summary>
             /// [00000111]
             /// </summary>
-            [BitMask ("[00000111]")]
+            [BitMask("[00000111]")]
             public const byte Lsb8x8x3 = Lsb8x8x2 << 1 | 1;
 
             /// <summary>
             /// [00000111 00000111]
             /// </summary>
-            [BitMask ("[00000111 00000111]")]
+            [BitMask("[00000111 00000111]")]
             public const ushort Lsb16x8x3 = (ushort) Lsb8x8x3 | (ushort) Lsb8x8x3 << 8;
 
             /// <summary>
             /// [00000111 00000111 00000111 00000111]
             /// </summary>
-            [BitMask ("[00000111 00000111 00000111 00000111]")]
+            [BitMask("[00000111 00000111 00000111 00000111]")]
             public const uint Lsb32x8x3 = (uint) Lsb16x8x3 | (uint) Lsb16x8x3 << 16;
 
             /// <summary>
             /// [00000111 00000111 00000111 00000111 00000111 00000111 00000111 00000111]
             /// </summary>
-            [BitMask ("[00000111 00000111 00000111 00000111 00000111 00000111 00000111 00000111]")]
+            [BitMask("[00000111 00000111 00000111 00000111 00000111 00000111 00000111 00000111]")]
             public const ulong Lsb64x8x3 = (ulong) Lsb32x8x3 | (ulong) Lsb32x8x3 << 32;
 
             // ~ 8x4: The least 4 bits of each 8-bit segment are enabled
@@ -421,11 +421,13 @@ namespace Z0
             /// <summary>
             /// 0x0f = [00001111]
             /// </summary>
+            [BitMask("[00001111]")]
             public const byte Lsb8x8x4 = Lsb8x8x3 << 1 | 1;
 
             /// <summary>
             /// 0x0f0f = [00001111 00001111]
             /// </summary>
+            [BitMask("[00001111 00001111]")]
             public const ushort Lsb16x8x4 = (ushort) Lsb8x8x4 | (ushort) Lsb8x8x4 << 8;
 
             /// <summary>
@@ -459,16 +461,19 @@ namespace Z0
             /// <summary>
             /// [00011111 00011111 00011111 00011111]
             /// </summary>
+            [BitMask("[00011111 00011111 00011111 00011111]")]
             public const uint Lsb32x8x5 = (uint) Lsb16x8x5 | (uint) Lsb16x8x5 << 16;
 
             /// <summary>
             /// [00011111 00011111 00011111 00011111 00011111]
             /// </summary>
+            [BitMask("[00011111 00011111 00011111 00011111 00011111]")]
             public const ulong Lsb40x8x5 = (ulong) Lsb32x8x5 | (ulong) Lsb8x8x5 << 32;
 
             /// <summary>
             /// [00011111 00011111 00011111 00011111 00011111 00011111 00011111 00011111]
             /// </summary>
+            [BitMask("[00011111 00011111 00011111 00011111 00011111 00011111 00011111 00011111]")]
             public const ulong Lsb64x8x5 = (ulong) Lsb32x8x5 | (ulong) Lsb32x8x5 << 32;
 
             // ~ 8x6: The least 6 bits of each 8-bit segment are enabled
@@ -487,11 +492,13 @@ namespace Z0
             /// <summary>
             /// [00111111 00111111 00111111 00111111]
             /// </summary>
+            [BitMask("[00111111 00111111 00111111 00111111]")]
             public const uint Lsb32x8x6 = (uint) Lsb16x8x6 | (uint) Lsb16x8x6 << 16;
 
             /// <summary>
             /// [00111111 00111111 00111111 00111111 00111111 00111111 00111111 00111111]
             /// </summary>
+            [BitMask("[00111111 00111111 00111111 00111111 00111111 00111111 00111111 00111111]")]
             public const ulong Lsb64x8x6 = (ulong) Lsb32x8x6 | (ulong) Lsb32x8x6 << 32;
 
             // ~ 8x4: The least 7 bits of each 8-bit segment are enabled
@@ -500,21 +507,25 @@ namespace Z0
             /// <summary>
             /// [01111111]
             /// </summary>
+            [BitMask("[01111111]")]
             public const byte Lsb8x8x7 = Lsb8x8x6 << 1 | 1;
 
             /// <summary>
             /// [01111111 01111111]
             /// </summary>
+            [BitMask("[01111111 01111111]")]
             public const ushort Lsb16x8x7 = (ushort) Lsb8x8x7 | (ushort) Lsb8x8x7 << 8;
 
             /// <summary>
             /// [01111111 01111111 01111111 01111111]
             /// </summary>
+            [BitMask("[01111111 01111111 01111111 01111111]")]
             public const uint Lsb32x8x7 = (uint) Lsb16x8x7 | (uint) Lsb16x8x7 << 16;
 
             /// <summary>
             /// [01111111 01111111 01111111 01111111 01111111 01111111 01111111 01111111]
             /// </summary>
+            [BitMask("[01111111 01111111 01111111 01111111 01111111 01111111 01111111 01111111]")]
             public const ulong Lsb64x8x7 = (ulong) Lsb32x8x7 | (ulong) Lsb32x8x7 << 32;
 
             // ~ 16x3: The least 3 bits of each 16-bit segment are enabled
@@ -523,52 +534,55 @@ namespace Z0
             /// <summary>
             /// [00000000 00000111]
             /// </summary>
+            [BitMask("[00000000 00000111]")]
             public const ushort Lsb16x16x3 = (ushort) Lsb8x8x3;
 
             /// <summary>
             /// [00000000 00000111 00000000 00000111]
             /// </summary>
+            [BitMask("[00000000 00000111 00000000 00000111]")]
             public const uint Lsb32x16x3 = (uint) Lsb16x16x3 | (uint) Lsb16x16x3 << 16;
 
             /// <summary>
             /// [01111111 11111111]
             /// </summary>
+            [BitMask("[01111111 11111111]")]
             public const ushort Lsb16x16x15 = ushort.MaxValue >> 1;
 
             [BitMask ("[1]")]
             public const ulong Lsb64x1 = 0b1;
 
-            [BitMask ("[11]")]
+            [BitMask("[11]")]
             public const ulong Lsb64x2 = Lsb64x1 | Lsb64x1 << 1;
 
-            [BitMask ("[111]")]
+            [BitMask("[111]")]
             public const ulong Lsb64x3 = Lsb64x2 | Lsb64x1 << 2;
 
-            [BitMask ("[1111]")]
+            [BitMask("[1111]")]
             public const ulong Lsb64x4 = Lsb64x3 | Lsb64x1 << 3;
 
-            [BitMask ("[11111]")]
+            [BitMask("[11111]")]
             public const ulong Lsb64x5 = Lsb64x4 | Lsb64x1 << 4;
 
-            [BitMask ("[111111]")]
+            [BitMask("[111111]")]
             public const ulong Lsb64x6 = Lsb64x5 | Lsb64x1 << 5;
 
-            [BitMask ("[1111111]")]
+            [BitMask("[1111111]")]
             public const ulong Lsb64x7 = Lsb64x6 | Lsb64x1 << 6;
 
-            [BitMask ("[11111111]")]
+            [BitMask("[11111111]")]
             public const ulong Lsb64x8 = Lsb64x7 | Lsb64x1 << 7;
 
-            [BitMask ("[1 11111111]")]
+            [BitMask("[1 11111111]")]
             public const ulong Lsb64x9 = Lsb64x8 | Lsb64x1 << 8;
 
-            [BitMask ("[11 11111111]")]
+            [BitMask("[11 11111111]")]
             public const ulong Lsb64x10 = Lsb64x9 | Lsb64x1 << 9;
 
-            [BitMask ("[111 11111111]")]
+            [BitMask("[111 11111111]")]
             public const ulong Lsb64x11 = Lsb64x10 | Lsb64x1 << 10;
 
-            [BitMask ("[1111 11111111]")]
+            [BitMask("[1111 11111111]")]
             public const ulong Lsb64x12 = Lsb64x11 | Lsb64x1 << 11;
 
             [BitMask ("[11111 11111111]")]

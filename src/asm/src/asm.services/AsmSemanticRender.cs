@@ -364,8 +364,12 @@ namespace Z0.Asm
             => IceExtractors.identify(src).Format();
 
         [MethodImpl(Inline), Op]
+        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
+            => new AsmDisplacement(value, (AsmDisplacementSize)size);
+
+        [MethodImpl(Inline), Op]
         public static IceMemDirect memDirect(in IceInstruction src)
-            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, asm.dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
+            => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
         [MethodImpl(Inline), Op]
         public static IceMemoryInfo meminfo(IceRegister sReg, IceRegister prefix, IceMemDirect mem, MemoryAddress address, IceMemorySize size)

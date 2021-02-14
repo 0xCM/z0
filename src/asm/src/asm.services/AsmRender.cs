@@ -15,26 +15,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmRender
     {
-        [MethodImpl(Inline), Op]
-        public static string format(in AsmCallTarget src)
-            => text.concat(src.Base.Format(), Chars.Colon, Chars.Space, text.ifempty(src.Name, "target"));
-
-        /// <summary>
-        /// Computes the call-site offset relative to the base address of the client
-        /// </summary>
-        /// <param name="src">The invocation</param>
-        [MethodImpl(Inline), Op]
-        public static string format(in AsmCallInfo src)
-        {
-            var site = src.InstructionAddress;
-            var target =  src.CalledTarget.Base;
-            var o = (site - target).Location;
-            var delta = (src.ActualTarget.Base - site).Location;
-            var actual = src.ActualTarget.Name;
-            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));
-            return $"{client_field} | {target} | {o} | {actual} | {delta}";
-        }
-
         /// <summary>
         /// Formats the function header
         /// </summary>

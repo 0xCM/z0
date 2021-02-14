@@ -40,9 +40,7 @@ namespace Z0
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
         public string FormatMinimal()
-            => Location.FormatLeastAsmHex();
-
-            //Location.FormatAsmHex(Numeric.effwidth(Location));
+            => Location.FormatTrimmedAsmHex();
 
         public string Format(byte pad)
             => Location.FormatAsmHex(pad);

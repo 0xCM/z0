@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmSigToken : ITextual
+    public interface IAsmSigToken : ISyntaxToken<AsmSigOpKind>
     {
-        AsmSigOpKind Kind {get;}
 
-        string Symbol {get;}
-
-        string Description {get;}
-
-        string ITextual.Format()
-            => Symbol;
     }
 
     public interface IAsmSigToken<T> : IAsmSigToken

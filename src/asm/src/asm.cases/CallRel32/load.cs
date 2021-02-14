@@ -15,22 +15,24 @@ namespace Z0.Asm
     partial struct AsmCases
     {
         [Op]
-        public static Index<CallRel32Case> load(Call call, Rel32 rel32)
+        public static Index<CallRel32> load(Call call, Rel32 rel32)
         {
-            var callerAddress = 0x7ffe6818a0e0ul;
-            var callerName = "canonical/abi2/Run";
             var caller = new AsmCaller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
-            var cases = alloc<CallRel32Case>(4);
+            var cases = alloc<CallRel32>(4);
             var buffer = span(cases);
             var index = 0;
-            define(caller, 0x7ffe6818a108, 0x7ffe6818a10d, 0x7ffe65135260, Numeric.join64u(0xfc, 0xfa, 0xb1, 0x53, 0xe8), ref seek(buffer,index++));
-            define(caller, 0x7ffe6818a120, 0x7ffe6818a125, 0x7ffe65135268, Numeric.join64u(0xfc, 0xfa, 0xb1, 0x43, 0xe8), ref seek(buffer,index++));
-            define(caller, 0x7ffe6818a13b, 0x7ffe6818a140, 0x7ffe65135270, Numeric.join64u(0xfc, 0xfa, 0xb1, 0x30, 0xe8), ref seek(buffer,index++));
-            define(caller, 0x7ffe6818a154, 0x7ffe6818a159, 0x7ffe65135278, Numeric.join64u(0xfc, 0xfa, 0xb1, 0x1f, 0xe8), ref seek(buffer,index++));
+            // 7ffe6818a108h 0028h call 7ffe65135260h | E8 cd | e8 53 b1 fa fc
+            load(caller, 0x7ffe6818a108, 0x7ffe6818a10d, 0x7ffe65135260, asm.encoding("e8 53 b1 fa fc"), ref seek(buffer,index++));
+            // 7ffe6818a120h 0040h call 7ffe65135268h | E8 cd | e8 43 b1 fa fc
+            load(caller, 0x7ffe6818a120, 0x7ffe6818a125, 0x7ffe65135268, asm.encoding("e8 43 b1 fa fc"), ref seek(buffer,index++));
+            // 7ffe6818a13bh 005bh call 7ffe65135270h | E8 cd |  e8 30 b1 fa fc
+            load(caller, 0x7ffe6818a13b, 0x7ffe6818a140, 0x7ffe65135270, asm.encoding("e8 30 b1 fa fc"), ref seek(buffer,index++));
+            // 7ffe6818a154h 0074h call 7ffe65135278h | E8 cd | e8 1f b1 fa fc
+            load(caller, 0x7ffe6818a154, 0x7ffe6818a159, 0x7ffe65135278, asm.encoding("e8 1f b1 fa fc"), ref seek(buffer,index++));
             return cases;
         }
 
-        static ref CallRel32Case define(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, ulong encoding, ref CallRel32Case dst)
+        static ref CallRel32 load(AsmCaller caller, MemoryAddress ip, MemoryAddress next, MemoryAddress target, EncodingSegment encoding, ref CallRel32 dst)
         {
             dst.Caller= caller;
             dst.Ip = ip;

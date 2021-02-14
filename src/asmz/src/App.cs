@@ -401,7 +401,6 @@ namespace Z0.Asm
                 ref readonly var c = ref skip(cases,i);
                 Wf.Row(c.Format());
                 Wf.Row(RP.PageBreak40);
-                Wf.Row(c.Instruction.Format());
                 if(!c.Validate(errors))
                     Wf.Error(errors.Emit());
 

@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
+    using static BitMasks.Literals;
 
     partial struct cpu
     {
@@ -20,7 +21,7 @@ namespace Z0
         public static Vector256<byte> vsplit32x8x1(uint src)
         {
             var a = vbroadcast(w256, src);
-            var b = vbroadcast(w256, BitMasks.Literals.Msb32x8x7);
+            var b = vbroadcast(w256, Msb32x8x7);
             return v8u(vand(a,b));
         }
     }

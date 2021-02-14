@@ -15,9 +15,25 @@ namespace Z0.Asm
     public struct AsmCallInfo
     {
         /// <summary>
+        /// Computes the call-site offset relative to the base address of the client
+        /// </summary>
+        /// <param name="src">The invocation</param>
+        [MethodImpl(Inline), Op]
+        public static string format(in AsmCallInfo src)
+        {
+            var site = src.InstructionAddress;
+            var target =  src.CalledTarget.Base;
+            var o = (site - target).Location;
+            var delta = (src.ActualTarget.Base - site).Location;
+            var actual = src.ActualTarget.Identity;
+            var client_field = text.concat(src.Client.Identity, text.embrace(site.Format()));
+            return $"{client_field} | {target} | {o} | {actual} | {delta}";
+        }
+
+        /// <summary>
         /// The invoking operation
         /// </summary>
-        public AsmCallClient Client;
+        public AsmCaller Client;
 
         /// <summary>
         /// The base-relative address that captures the offset follows the client call instruction
@@ -27,15 +43,15 @@ namespace Z0.Asm
         /// <summary>
         /// The argument supplied to the call instruction
         /// </summary>
-        public AsmCallTarget CalledTarget;
+        public AsmCallee CalledTarget;
 
         /// <summary>
         /// The base address of the intended target
         /// </summary>
-        public AsmCallTarget ActualTarget;
+        public AsmCallee ActualTarget;
 
         [MethodImpl(Inline)]
-        public AsmCallInfo(AsmCallClient client, Address16 site, AsmCallTarget called, AsmCallTarget actual)
+        public AsmCallInfo(AsmCaller client, Address16 site, AsmCallee called, AsmCallee actual)
         {
             Client = client;
             CallSite = site;
@@ -62,7 +78,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

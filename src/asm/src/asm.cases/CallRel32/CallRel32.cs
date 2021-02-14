@@ -10,11 +10,9 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using static AsmInstructions;
-
     partial struct AsmCases
     {
-        public struct CallRel32Case
+        public struct CallRel32
         {
             public AsmCaller Caller;
 
@@ -26,13 +24,11 @@ namespace Z0.Asm
 
             public Address32 RelTarget;
 
-            public ulong Encoding;
+            public EncodingSegment Encoding;
 
             public Address32 Offset => (Address32)(Target - NextIp);
 
             public ByteSize IpDelta => (ByteSize)(NextIp - Ip);
-
-            public CallRel32 Instruction => new CallRel32(Ip, RelTarget);
 
             public string Format()
                 => format(this);

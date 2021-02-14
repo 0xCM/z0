@@ -9,34 +9,33 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct AsmCallTarget
+    /// <summary>
+    /// Represents the target of an invocation
+    /// </summary>
+    public struct AsmCallee
     {
-        /// <summary>
-        /// The target's identifier
-        /// </summary>
-        public Identifier Name;
+        public static string format(in AsmCallee src)
+            => text.concat(src.Base.Format(), Chars.Colon, Chars.Space, src.Identity);
 
         /// <summary>
         /// The target's base address
         /// </summary>
-        public MemoryAddress Base;
+        public MemoryAddress Base {get;}
+
+        /// <summary>
+        /// The target's identifier
+        /// </summary>
+        public AsmSymbol Identity {get;}
 
         [MethodImpl(Inline)]
-        public AsmCallTarget(MemoryAddress @base)
+        public AsmCallee(MemoryAddress @base, AsmSymbol identity)
         {
-            Name = EmptyString;
-            Base = @base;
-        }
-
-        [MethodImpl(Inline)]
-        public AsmCallTarget(string id, MemoryAddress @base)
-        {
-            Name = id;
+            Identity = identity;
             Base = @base;
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => format(this);
 
         public override string ToString()
             => Format();

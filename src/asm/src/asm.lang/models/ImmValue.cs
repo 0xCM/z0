@@ -40,15 +40,9 @@ namespace Z0
             get => Bits.effwidth(Data);
         }
 
-        public byte Size
-        {
-            [MethodImpl(Inline)]
-            get => Bits.effsize(Data);
-        }
-
         [MethodImpl(Inline)]
         public string Format()
-            => Data.ToString(text.format(RenderPattern, Size*2));
+            => Data.FormatHex(false);
 
         [MethodImpl(Inline)]
         public static implicit operator ImmValue(byte src)
