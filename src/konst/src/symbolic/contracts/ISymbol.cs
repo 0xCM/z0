@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static memory;
 
     /// <summary>
@@ -40,7 +37,6 @@ namespace Z0
         /// </summary>
         ushort SegWidth
             => (ushort)width<T>();
-
     }
 
     public interface ISymbol<S,T,N> : ISymbol<S,T>

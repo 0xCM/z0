@@ -10,7 +10,7 @@ namespace Z0
     using static memory;
     using static ApiKeywordNames;
 
-    [ApiDeep]
+    [ApiComplete]
     public unsafe struct ApiKeywords
     {
         const NumericKind Closure = UnsignedInts;

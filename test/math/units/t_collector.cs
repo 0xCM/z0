@@ -60,7 +60,7 @@ namespace Z0
 
         public void collect_32i_check()
         {
-            var c = Collector.Create(0);
+            var c = StatCollector.Create(0);
 
             var data = Random.Span<int>(Pow2.T10);
 
@@ -79,7 +79,7 @@ namespace Z0
 
         public void collect_32u_check()
         {
-            var c = Collector.Create(0);
+            var c = StatCollector.Create(0);
 
             var data = Random.Span<uint>(Pow2.T10, 0, uint.MaxValue/2);
 
@@ -103,7 +103,7 @@ namespace Z0
 
         public void collect_64u_check()
         {
-            var c = Collector.Create(0);
+            var c = StatCollector.Create(0);
 
             var data = Random.Span<ulong>(Pow2.T10, 0, uint.MaxValue);
 
@@ -127,7 +127,7 @@ namespace Z0
 
         public void collect_64i_check()
         {
-            var c = Collector.Create(0);
+            var c = StatCollector.Create(0);
 
             var data = Random.Span<long>(Pow2.T10, int.MinValue, int.MaxValue);
 

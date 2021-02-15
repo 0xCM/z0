@@ -13,15 +13,15 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static EncodingSegment encoding(ulong src)
+        public static AsmHexCode encoding(ulong src)
             => src;
 
         [Op]
-        public static EncodingSegment encoding(ReadOnlySpan<byte> src)
+        public static AsmHexCode encoding(ReadOnlySpan<byte> src)
         {
             var count = root.min(8,src.Length);
             if(count == 0)
-                return EncodingSegment.Empty;
+                return AsmHexCode.Empty;
 
             if(count >= 8)
                 return encoding(first64u(src));
@@ -63,7 +63,7 @@ namespace Z0.Asm
 
 
         [Op]
-        public static bool encoding(string src, out EncodingSegment dst)
+        public static bool encoding(string src, out AsmHexCode dst)
         {
             var parser = HexByteParser.Service;
             if(parser.Parse(src, out var data))
@@ -73,15 +73,15 @@ namespace Z0.Asm
             }
             else
             {
-                dst = EncodingSegment.Empty;
+                dst = AsmHexCode.Empty;
                 return false;
             }
         }
 
         [Op]
-        public static EncodingSegment encoding(string src)
+        public static AsmHexCode encoding(string src)
         {
-            var dst = EncodingSegment.Empty;
+            var dst = AsmHexCode.Empty;
             encoding(src, out dst);
             return dst;
         }

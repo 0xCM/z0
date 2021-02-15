@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ICaptureArchive : IPartCapturePaths
+    public interface ICaptureArchive : IApiPartPaths
     {
 
     }

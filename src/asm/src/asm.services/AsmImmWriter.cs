@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        readonly IHostCapturePaths HostArchive;
+        readonly IApiHostPaths HostArchive;
 
         [MethodImpl(Inline)]
         public AsmImmWriter(ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)

@@ -42,7 +42,7 @@ namespace Z0
         Generic = P2ᐞ40,
     }
 
-    [ApiDeep]
+    [ApiComplete]
     public readonly struct ApiSets
     {
         [MethodImpl(Inline)]

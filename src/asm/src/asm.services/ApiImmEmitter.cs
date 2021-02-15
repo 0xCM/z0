@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public class ApiImmEmitter :  AsmWfService<ApiImmEmitter>, IImmEmitter
     {
-        IPartCapturePaths CodeArchive;
+        IApiPartPaths CodeArchive;
 
         IImmSpecializer Specializer;
 

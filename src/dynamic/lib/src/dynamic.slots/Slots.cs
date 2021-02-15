@@ -38,7 +38,7 @@ namespace Z0
             return z;
         }
 
-        [ApiDeep]
+        [ApiComplete]
         public readonly struct Slots_n16x8x8x8
         {
             [Op]

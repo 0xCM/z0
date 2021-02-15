@@ -39,20 +39,6 @@ namespace Z0
             return NotFound;
         }
 
-        /// <summary>
-        /// Defines a symbol spec
-        /// </summary>
-        /// <param name="symbols"></param>
-        /// <typeparam name="S">The symbol data type</typeparam>
-        /// <typeparam name="T">The symbol domain type</typeparam>
-        /// <typeparam name="W">The symbol bit-width type</typeparam>
-        [MethodImpl(Inline)]
-        public static SymbolSpec<S,T,W> symbol<S,T,W>(params S[] symbols)
-            where S : unmanaged
-            where T : unmanaged
-            where W : unmanaged, IDataWidth
-                => new SymbolSpec<S,T,W>(symbols);
-
         [MethodImpl(Inline)]
         public static string @string<A>(in A src)
             where A : unmanaged, IByteSeq

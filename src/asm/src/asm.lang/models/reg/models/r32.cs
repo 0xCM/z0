@@ -35,9 +35,8 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => Registers.code(RegKind);
+                get => index(RegKind);
             }
-
         }
 
         public readonly struct R32<R> : IRegister<R32<R>,W32,uint>, IRegOp32<uint>
@@ -58,13 +57,14 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => Registers.code(RegKind);
+                get => index(RegKind);
             }
 
             [MethodImpl(Inline)]
             public static implicit operator r32(R32<R> src)
                 => new r32(src.Content, src.RegKind);
         }
+
         public struct eax : IRegister<eax,W,T>, IRegOp32<T>
         {
             public T Content {get;}

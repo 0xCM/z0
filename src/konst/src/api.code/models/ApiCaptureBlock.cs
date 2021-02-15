@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
-    [ApiDeep]
+    [ApiComplete]
     public struct ApiCaptureBlock
     {
         readonly CodeBlock Extracted;

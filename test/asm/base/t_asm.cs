@@ -13,7 +13,7 @@ namespace Z0.Asm
     public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_asm<U>
     {
-        protected IPartCapturePaths TargetArchive
+        protected IApiPartPaths TargetArchive
             => ApiArchives.capture(UnitDataDir);
 
         protected new IAsmContext Context;

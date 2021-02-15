@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    [ApiDeep]
+    [ApiComplete]
     public readonly struct EventLevels
     {
         public static EventLevel Babble => LogLevel.Babble;

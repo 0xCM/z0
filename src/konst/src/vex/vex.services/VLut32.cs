@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Implements a parallel 32-way lookup
     /// </summary>
-    [ApiDeep]
+    [ApiComplete]
     public readonly struct VLut32
     {
         internal readonly Vector256<byte> Mask;

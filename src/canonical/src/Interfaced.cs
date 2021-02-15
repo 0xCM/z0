@@ -9,10 +9,9 @@ namespace Z0
 
     using static Part;
 
-    [ApiDeep]
+    [ApiComplete]
     public readonly struct Interfaced : IChronic<Interfaced>, ICorrelated<Interfaced>, ITextual
     {
-
         public Timestamp Ts
             => root.now();
 

@@ -10,7 +10,6 @@ namespace Z0
     using static DbNames;
 
 
-
     public interface IWfDbPaths : IApiPathProvider
     {
         FS.FolderName SubjectFolder<S>(S src)

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Represents a value as an ordered sequence of bits/bytes
     /// </summary>
-    [ApiDeep]
+    [ApiComplete]
     public unsafe ref struct BitView
     {
         /// <summary>

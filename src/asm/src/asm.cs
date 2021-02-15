@@ -33,7 +33,7 @@ namespace Z0.Asm
         }
     }
 
-    [ApiDeep]
+    [ApiComplete]
     partial struct Msg
     {
 

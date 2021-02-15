@@ -80,6 +80,13 @@ namespace Z0.Asm
             }
         }
 
+        [Op]
+        public bool ParseAddress(string src, out MemoryAddress dst)
+        {
+            dst = HexScalarParser.Service.Parse(src,ulong.MaxValue);
+            return dst != ulong.MaxValue;
+        }
+
         public Index<SigOperand> Operands(string src)
             => Transform.apply(SigOpSplitRule, src).Map(sigop);
 

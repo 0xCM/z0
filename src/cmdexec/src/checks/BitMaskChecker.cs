@@ -76,10 +76,10 @@ namespace Z0
         [Op]
         void Init()
         {
-            Cases8 = DataSource.Fill(z8, width<byte>(w8), index<byte>(Reps));
-            Cases16 = DataSource.Fill(z8, width<ushort>(w8), index<byte>(Reps));
-            Cases32 = DataSource.Fill(z8, width<uint>(w8), index<byte>(Reps));
-            Cases64 = DataSource.Fill(z8, width<uint>(w8), index<byte>(Reps));
+            Cases8 = DataSource.Fill(z8, width<byte>(w8), alloc<byte>(Reps));
+            Cases16 = DataSource.Fill(z8, width<ushort>(w8), alloc<byte>(Reps));
+            Cases32 = DataSource.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
+            Cases64 = DataSource.Fill(z8, width<uint>(w8), alloc<byte>(Reps));
             Literals8 = ClrLiterals.tagged<byte>(Part.base2, typeof(BitMasks.Literals));
             Literals16 = ClrLiterals.tagged<ushort>(Part.base2, typeof(BitMasks.Literals));
             Literals32 = ClrLiterals.tagged<uint>(Part.base2, typeof(BitMasks.Literals));

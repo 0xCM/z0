@@ -29,6 +29,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator uint(m32 src)
                 => src.Content;
+
+            [MethodImpl(Inline)]
+            public static implicit operator m32(Cell32 src)
+                => new m32(src.Content);
+
         }
     }
 }

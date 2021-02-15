@@ -24,7 +24,7 @@ namespace Z0.Asm
 
             public Address32 RelTarget;
 
-            public EncodingSegment Encoding;
+            public AsmHexCode Encoding;
 
             public Address32 Offset => (Address32)(Target - NextIp);
 

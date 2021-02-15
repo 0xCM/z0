@@ -57,6 +57,6 @@ namespace Z0.Asm
         where N : unmanaged, ITypeNat
     {
         RegIndex IRegister.Index
-            => (RegIndex)z.nat8u<N>();
+            => (RegIndex)TypeNats.nat8u<N>();
     }
 }

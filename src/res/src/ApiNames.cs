@@ -240,7 +240,7 @@ public readonly struct ApiNames
 
     public const string SymbolicHex = symbolic + dot + hex;
 
-    public const string SymbolStore = symbolic + dot + store;
+    public const string SymbolStores = symbolic + dot + stores;
 
     public const string SymbolicDigits = symbolic + dot + digits;
 

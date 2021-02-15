@@ -19,53 +19,74 @@ namespace Z0
         FS.FolderPath ImmRoot()
             => CaptureRoot() + FS.folder(imm);
 
-        FS.FolderPath CapturedHexRoot()
-            => (CaptureRoot() + FS.folder(hex));
-
-        FS.FilePath CapturedHexPath(FS.FileName name)
-            => CapturedHexRoot() + name;
-
-        FS.FolderPath CapturedExtractDir()
+        FS.FolderPath ExtractRoot()
             => CaptureRoot() + FS.folder(extracts);
 
-        FS.FolderPath ParsedExtractDir()
+        FS.FolderPath ParsedExtractRoot()
             => CaptureRoot() + FS.folder(parsed);
 
-        FS.FolderPath CapturedHexDir()
+        FS.FolderPath ApiHexRoot()
             => CaptureRoot() + FS.folder(hex);
 
-        FS.FolderPath CapturedAsmDir()
+        FS.FolderPath AsmRoot()
             => CaptureRoot() + FS.folder(asm);
 
-        FS.FolderPath AsmDir(FS.FolderPath root)
-            => (root + FS.folder(L.Asm));
-
         FS.Files AsmFiles()
-            => CapturedAsmDir().Files(Asm,true);
+            => AsmRoot().Files(Asm,true);
 
         FS.Files AsmFiles(PartId part)
             => AsmFiles().Where(f => f.IsOwner(part));
 
-        FS.FilePath AsmFile(FS.FileName name)
-            => CapturedAsmDir() + name;
-
         FS.FilePath AsmFile(ApiHostUri host)
-            => AsmFile(ApiIdentity.file(host, FileExtensions.Asm));
+            => AsmRoot() + ApiIdentity.file(host, Asm);
 
         FS.FilePath AsmFile(PartId part, string api)
-            => CapturedAsmDir() + ApiFileName(part, api, Asm);
+            => AsmRoot() + ApiFileName(part, api, Asm);
 
         FS.FilePath AsmFile(Type host)
             => AsmFile(ApiQuery.hosturi(host));
 
-        FS.FilePath AsmFile(FS.FolderPath root, FS.FileName name)
-            => AsmDir(root) + name;
-
         FS.FilePath AsmFile<T>()
             => AsmFile(ApiQuery.hosturi<T>());
 
+        FS.FolderPath[] ImmDirs(PartId part)
+            => ImmRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
+
+        FS.FolderPath[] ImmHostDirs(PartId part)
+            => ImmDirs(part).SelectMany(path => path.SubDirs());
+
+        FS.FolderPath[] ImmHostDirs(params PartId[] parts)
+            => parts.SelectMany(ImmHostDirs);
+
+        FS.FolderPath ImmSubDir(FS.FolderName name)
+            => (ImmRoot() + name);
+
+        FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
+            => FS.file(id.ToFileName(ext).Name);
+
+        FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+
+        FS.FileName AsmFileName(OpIdentity id)
+            => LegalFileName(id, Asm);
+
+        FS.FileName HexFileName(OpIdentity id)
+            => LegalFileName(id, Hex);
+
+        FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + HexFileName(id);
+
+        FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + AsmFileName(id);
+
+        FS.FilePath ApiHexPath(FS.FileName name)
+            => ApiHexRoot() + name;
+
+        FS.FilePath ApiHexPath(ApiHostUri host)
+            => ApiHexRoot()  + FS.file(host.Name, Hex);
+
         FS.Files ApiHexFiles()
-            => CapturedHexDir().Files(Hex);
+            => ApiHexRoot().Files(Hex);
 
         FS.FolderPath ApiHexDir(FS.FolderPath root)
             => (root + FS.folder(L.Hex));
@@ -80,40 +101,40 @@ namespace Z0
             => ApiHexDir(root) + FS.file(host.Name, Hex);
 
         FS.FilePath ApiHexFile(FS.FileName name)
-            => CapturedHexDir() + name;
+            => ApiHexRoot() + name;
 
         FS.FilePath ApiHexFile(PartId part, string api)
-            => CapturedHexDir() + ApiFileName(part, api, Hex);
+            => ApiHexRoot() + ApiFileName(part, api, Hex);
 
         FS.FilePath ApiHexFile(ApiHostUri host)
             => ApiHexFile(ApiIdentity.file(host, Hex));
 
-        FS.FolderPath CilDataDir()
+        FS.FolderPath CilDataRoot()
             => CaptureRoot() + FS.folder(cildata);
 
         FS.FilePath CilDataFile(FS.FileName name)
-            => CilDataDir() + name;
+            => CilDataRoot() + name;
 
         FS.FilePath CilDataFile(ApiHostUri host)
             => CilDataFile(ApiIdentity.file(host, IlData));
 
         FS.Files CilDataFiles()
-            => CilDataDir().Files(Csv);
+            => CilDataRoot().Files(Csv);
 
         FS.Files CilDataFiles(PartId part)
             => CilDataFiles().Where(f => f.IsOwner(part));
 
-        FS.FolderPath CilCodeDir()
+        FS.FolderPath CilCodeRoot()
             => CaptureRoot() + FS.folder(cil);
 
         FS.FilePath CilCodeFile(FS.FileName name)
-            => CilCodeDir() + name;
+            => CilCodeRoot() + name;
 
         FS.FilePath CilCodeFile(ApiHostUri host)
             => CilCodeFile(ApiIdentity.file(host, Il));
 
         FS.Files CilCodeFiles()
-            => CilCodeDir().Files(Csv);
+            => CilCodeRoot().Files(Csv);
 
         FS.Files CilCodeFiles(PartId part)
             => CilCodeFiles().Where(f => f.IsOwner(part));
@@ -122,22 +143,22 @@ namespace Z0
             => ApiExtractFile(ApiIdentity.file(host, XCsv));
 
         FS.FilePath ApiExtractFile(FS.FileName name)
-            => CapturedExtractDir() + name;
+            => ExtractRoot() + name;
 
         FS.Files ApiExtractFiles()
-            => CapturedExtractDir().AllFiles;
+            => ExtractRoot().AllFiles;
 
         FS.Files ApiExtractFiles(PartId part)
             => ApiExtractFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath ParsedExtractFile(FS.FileName name)
-            => ParsedExtractDir() + name;
+            => ParsedExtractRoot() + name;
 
         FS.FilePath ParsedExtractFile(ApiHostUri host)
             => ParsedExtractFile(ApiIdentity.file(host, PCsv));
 
         FS.Files ParsedExtractFiles()
-            => ParsedExtractDir().AllFiles;
+            => ParsedExtractRoot().AllFiles;
 
         FS.Files ParsedExtractFiles(PartId part)
             => ParsedExtractFiles().Where(f => f.IsOwner(part));

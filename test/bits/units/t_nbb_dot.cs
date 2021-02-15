@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDeep]
+    [ApiComplete]
     public class t_nbb_dot : t_bitspans<t_nbb_dot>
     {
 

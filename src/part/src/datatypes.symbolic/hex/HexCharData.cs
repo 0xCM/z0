@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines codes and symbol datasets for hex digits
     /// </summary>
-    [ApiDeep]
+    [ApiComplete]
     public readonly struct HexCharData
     {
         /// <summary>

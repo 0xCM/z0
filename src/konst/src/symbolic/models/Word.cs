@@ -19,61 +19,32 @@ namespace Z0
         where S : unmanaged, IEquatable<S>
     {
         /// <summary>
-        /// Represents the empty word, with an invariant length of 0
-        /// </summary>
-        /// <typeparam name="A">The alphabet type</typeparam>
-        public static Word<S> Empty => new Word<S>(Symbol<S>.Empty);
-
-        /// <summary>
         /// The symbols that comprise the word
         /// </summary>
-        public readonly Symbol<S>[] Symbols;
+        public Index<Symbol<S>> Symbols {get;}
 
-        /// <summary>
-        /// Determines whether two words are equivalent
-        /// </summary>
-        /// <param name="lhs">The first word</param>
-        /// <param name="rhs">The second word</param>
-        public static bool operator == (Word<S> lhs, Word<S> rhs)
-            => lhs.Symbols == rhs.Symbols;
+        [MethodImpl(Inline)]
+        public Word(params Word<S>[] src)
+        {
+            var len = src.Sum(s => s.Length);
+            Symbols = new Symbol<S>[len];
+            var symidx = 0;
+            for(var i=0; i< src.Length; i++)
+            {
+                var word = src[i];
+                for(var j = 0; j< word.Length; j++)
+                    Symbols[symidx++] = word.Symbols[j];
+            }
+        }
 
-        /// <summary>
-        /// Determines whether two words are unequal
-        /// </summary>
-        /// <param name="lhs">The first word</param>
-        /// <param name="rhs">The second word</param>
-        public static bool operator != (Word<S> lhs, Word<S> rhs)
-            => lhs != rhs;
-
-        /// <summary>
-        /// Converts the word to a string via a canonical format
-        /// </summary>
-        /// <param name="src">The source word</param>
-        public static implicit operator string(Word<S> src)
-            => src.Format();
-
-        /// <summary>
-        /// Encloses an array of symbols by a word
-        /// </summary>
-        /// <param name="src">The source symbols</param>
-        /// <typeparam name="A">The alphabet</typeparam>
-        public static implicit operator Word<S>(Symbol<S>[] src)
-            => new Word<S>(src);
-
-        /// <summary>
-        /// Converts a word to its equivalent symbolic representation
-        /// </summary>
-        /// <param name="src">The source word</param>
-        public static implicit operator Symbol<S>[](Word<S> src)
-            => src.Symbols;
-
-        /// <summary>
-        /// Concatenates a word w1 with a word w2 to form a word w' = w1w2
-        /// </summary>
-        /// <param name="w1">The first word</param>
-        /// <param name="w2">The second word</param>
-        public static Word<S> operator +(Word<S> w1, Word<S> w2)
-            => new Word<S>(w1,w2);
+        [MethodImpl(Inline)]
+        public Word(params Symbol<S>[] src)
+        {
+            if(src.Length == 1 && src[0].Value.Equals(Symbol<S>.Empty))
+                Symbols = new Symbol<S>[]{};
+            else
+                Symbols = src;
+        }
 
         /// <summary>
         /// The empty word containing no symbols
@@ -86,30 +57,6 @@ namespace Z0
         /// </summary>
         public int Length
             => Symbols.Length;
-
-        [MethodImpl(Inline)]
-        public Word(params Word<S>[] Words)
-        {
-
-            var len = Words.Sum(s => s.Length);
-            this.Symbols = new Symbol<S>[len];
-            var symidx = 0;
-            for(var i=0; i< Words.Length; i++)
-            {
-                var word = Words[i];
-                for(var j = 0; j< word.Length; j++)
-                    this.Symbols[symidx++] = word.Symbols[j];
-            }
-        }
-
-        [MethodImpl(Inline)]
-        public Word(params Symbol<S>[] Symbols)
-        {
-            if(Symbols.Length == 1 && Symbols[0].Value.Equals(Symbol<S>.Empty))
-                this.Symbols = new Symbol<S>[]{};
-            else
-                this.Symbols = Symbols;
-        }
 
         public Symbol<S> this[int index]
         {
@@ -156,5 +103,57 @@ namespace Z0
         /// <param name="w2">The word to concatenate with the current word</param>
         public Word<S> Concat(Word<S> w2)
             => new Word<S>(this,w2);
+
+        /// <summary>
+        /// Determines whether two words are equivalent
+        /// </summary>
+        /// <param name="lhs">The first word</param>
+        /// <param name="rhs">The second word</param>
+        public static bool operator == (Word<S> lhs, Word<S> rhs)
+            => lhs.Symbols.View.SequenceEqual(rhs.Symbols.View);
+
+        /// <summary>
+        /// Determines whether two words are unequal
+        /// </summary>
+        /// <param name="lhs">The first word</param>
+        /// <param name="rhs">The second word</param>
+        public static bool operator != (Word<S> lhs, Word<S> rhs)
+            => lhs != rhs;
+
+        /// <summary>
+        /// Converts the word to a string via a canonical format
+        /// </summary>
+        /// <param name="src">The source word</param>
+        public static implicit operator string(Word<S> src)
+            => src.Format();
+
+        /// <summary>
+        /// Encloses an array of symbols by a word
+        /// </summary>
+        /// <param name="src">The source symbols</param>
+        /// <typeparam name="A">The alphabet</typeparam>
+        public static implicit operator Word<S>(Symbol<S>[] src)
+            => new Word<S>(src);
+
+        /// <summary>
+        /// Converts a word to its equivalent symbolic representation
+        /// </summary>
+        /// <param name="src">The source word</param>
+        public static implicit operator Symbol<S>[](Word<S> src)
+            => src.Symbols;
+
+        /// <summary>
+        /// Concatenates a word w1 with a word w2 to form a word w' = w1w2
+        /// </summary>
+        /// <param name="w1">The first word</param>
+        /// <param name="w2">The second word</param>
+        public static Word<S> operator +(Word<S> w1, Word<S> w2)
+            => new Word<S>(w1,w2);
+
+        /// <summary>
+        /// Represents the empty word, with an invariant length of 0
+        /// </summary>
+        /// <typeparam name="A">The alphabet type</typeparam>
+        public static Word<S> Empty => new Word<S>(Symbol<S>.Empty);
     }
 }

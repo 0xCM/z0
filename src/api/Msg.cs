@@ -6,7 +6,7 @@ namespace Z0
 {
     using System.Reflection;
 
-    [ApiDeep]
+    [ApiComplete]
     struct Msg
     {
 

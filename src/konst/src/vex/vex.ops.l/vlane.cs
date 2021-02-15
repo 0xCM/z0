@@ -207,6 +207,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vlane(Vector128<double> src, Vector256<double> dst, N1 index)
             => InsertVector128(dst, src, 1);
-
     }
 }

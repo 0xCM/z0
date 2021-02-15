@@ -17,10 +17,10 @@ namespace Z0
     {
         public S Value {get;}
 
-        public SymbolName Name {get;}
+        public StringRef Name {get;}
 
         [MethodImpl(Inline)]
-        public NamedSymbol(S symbol, SymbolName name)
+        public NamedSymbol(S symbol, StringRef name)
         {
             Name = name;
             Value = symbol;

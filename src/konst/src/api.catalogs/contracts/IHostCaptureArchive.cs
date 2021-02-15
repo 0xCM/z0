@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IHostCaptureArchive : IHostCapturePaths
+    public interface IHostCaptureArchive : IApiHostPaths
     {
 
     }

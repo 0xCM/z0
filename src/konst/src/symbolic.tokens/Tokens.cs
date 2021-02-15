@@ -58,7 +58,7 @@ namespace Z0
             var cellsize = size<T>();
             for(var i=0u; i<cellsize; i++)
             {
-                var symbols = SymbolStore.hex(skip(b,i), LowerCase);
+                var symbols = SymbolStores.hex(skip(b,i), LowerCase);
                 for(var j=0u; j<cellsize; j++)
                     seek(dst,j) = skip(symbols, j);
             }

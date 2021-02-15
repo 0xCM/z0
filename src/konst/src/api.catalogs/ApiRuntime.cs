@@ -50,21 +50,21 @@ namespace Z0
             => src.GetTypes().Where(ApiRuntime.IsApiHost);
 
         /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="ApiDeepAttribute"/>
+        /// Searches an assembly for types tagged with the <see cref="ApiCompleteAttribute"/>
         /// </summary>
         /// <param name="src">The assembly to search</param>
         [Op]
         public static ApiRuntimeType[] ApiTypes(Assembly src)
         {
             var part = src.Id();
-            var types = span(src.GetTypes().Where(t => t.Tagged<ApiDeepAttribute>()));
+            var types = span(src.GetTypes().Where(t => t.Tagged<ApiCompleteAttribute>()));
             var count = types.Length;
             var buffer = alloc<ApiRuntimeType>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var type = ref skip(types,i);
-                var attrib = type.Tag<ApiDeepAttribute>();
+                var attrib = type.Tag<ApiCompleteAttribute>();
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
                 seek(dst, i) = new ApiRuntimeType(type, name, part, uri);

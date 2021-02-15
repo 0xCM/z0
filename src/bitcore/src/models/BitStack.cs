@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiDeep]
+    [ApiComplete]
     public struct BitStack
     {
         ulong State;

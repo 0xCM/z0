@@ -44,6 +44,15 @@ namespace Z0
             Description = description;
         }
 
+        [MethodImpl(Inline)]
+        public static implicit operator SyntaxToken<K>((string symbol, K kind, string description) src)
+            => new SyntaxToken<K>(src.symbol, src.kind, src.description);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SyntaxToken<K>((string symbol, K kind) src)
+            => new SyntaxToken<K>(src.symbol, src.kind, EmptyString);
+
+        [MethodImpl(Inline)]
         public static implicit operator SyntaxToken(SyntaxToken<K> src)
             => new SyntaxToken(src.Symbol, read64(src.Kind), src.Description);
     }

@@ -14,5 +14,8 @@ namespace Z0
 
         public ParseResult<ulong> Parse(string src)
             => HexNumericParser.parse(src);
+
+        public ulong Parse(string src, ulong @default)
+            => HexNumericParser.parse(src, @default);
     }
 }

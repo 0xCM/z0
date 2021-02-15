@@ -70,6 +70,8 @@ public readonly struct ApiNameParts
 
     public const string hex = nameof(hex);
 
+    public const string stores = nameof(stores);
+
     public const string kinds = nameof(kinds);
 
     public const string lang = nameof(lang);

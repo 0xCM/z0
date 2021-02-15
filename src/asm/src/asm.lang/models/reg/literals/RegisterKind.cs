@@ -7,7 +7,7 @@ namespace Z0.Asm
     using static RegIndex;
     using static RegClass;
     using static RegWidth;
-    using static RegisterBits;
+    using static AsmRegBits;
 
     using SR = SegRegKind;
     using F = FlagRegKind;
@@ -22,7 +22,6 @@ namespace Z0.Asm
     using C = ControlRegKind;
     using D = DebugRegKind;
     using I = IpRegKind;
-
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]

@@ -9,9 +9,6 @@ namespace Z0
 
     using Z0.Mkl;
 
-    using static Konst;
-    using static z;
-
     public class t_rngfactory : UnitTest<t_rngfactory>
     {
         const uint Seed = 0x78941u;
@@ -134,7 +131,7 @@ namespace Z0
         {
             var segment = Pow2.T08;
             var total = Pow2.T17;
-            var stats = Collector.Create(0.0);
+            var stats = StatCollector.Create(0.0);
             var sw = stopwatch(false);
             for(var i=0; i< total; i+= segment)
             {

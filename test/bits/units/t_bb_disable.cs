@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    [ApiDeep]
+    [ApiComplete]
     public class t_bb_disable : t_bitspans<t_bb_disable>
     {
         public void bb_disable_16x16()

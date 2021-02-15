@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     partial struct AsmCaseCode
     {
-        [ApiDeep("casecode.callrel32")]
+        [ApiComplete("casecode.callrel32")]
         public readonly ref struct CallRel32
         {
             readonly ReadOnlySpan<byte> A;

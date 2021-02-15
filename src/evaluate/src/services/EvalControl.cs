@@ -46,7 +46,7 @@ namespace Z0
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dir = Wf.Db().ParsedExtractDir();
+            var dir = Wf.Db().ParsedExtractRoot();
             var capture = ApiArchives.host(dir, host.Uri);
             if(capture.HostHexPath.Exists)
             {

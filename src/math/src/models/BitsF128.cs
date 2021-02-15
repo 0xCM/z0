@@ -10,7 +10,7 @@ namespace Z0
 
     using static math;
 
-    [ApiDeep]
+    [ApiComplete]
     public struct BitsF128
     {
         Vector128<ulong> Data;

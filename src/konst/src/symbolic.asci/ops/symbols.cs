@@ -11,8 +11,5 @@ namespace Z0
 
     partial struct Asci
     {
-        [MethodImpl(Inline), Op]
-        public static SymbolSpec<AsciCharCode,byte,W8> symbols(params AsciCharCode[] src)
-            => AsciG.symbol<AsciCharCode,byte,W8>(src);
     }
 }

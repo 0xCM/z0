@@ -172,7 +172,7 @@ namespace Z0
                 return src.SegZ;
         }
 
-        [ApiDeep("storage.reader.cache")]
+        [ApiComplete("storage.reader.cache")]
         public readonly struct Cache
         {
             [MethodImpl(Inline)]

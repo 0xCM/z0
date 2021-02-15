@@ -40,7 +40,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => Registers.code(RegKind);
+                get => index(RegKind);
             }
 
             [MethodImpl(Inline)]
@@ -62,6 +62,12 @@ namespace Z0.Asm
             {
                 Content = src;
                 RegKind = kind;
+            }
+
+            public RegIndex Index
+            {
+                [MethodImpl(Inline)]
+                get => index(RegKind);
             }
         }
 

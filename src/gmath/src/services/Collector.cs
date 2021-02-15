@@ -14,9 +14,17 @@ namespace Z0
     /// <summary>
     /// A basic statistical accumulator that accrues information over an arbitrary number of input sequences
     /// </summary>
-    [ApiDeep]
-    public class Collector
+    [ApiComplete]
+    public class StatCollector
     {
+        /// <summary>
+        /// Creates a collector seeded with the first value
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static StatCollector Create<T>(T seed = default)
+            where T : unmanaged
+                => new StatCollector(Numeric.force<T,double>(seed));
+
         int count;
 
         double min;
@@ -31,317 +39,309 @@ namespace Z0
 
         double s1;
 
-        /// <summary>
-        /// Creates a collector seeded with the first value
-        /// </summary>
         [MethodImpl(Inline)]
-        public static Collector Create<T>(T seed = default)
-            where T : unmanaged
-                => new Collector(Numeric.force<T,double>(seed));
-
-        [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, byte value)
+        public static StatCollector operator +(StatCollector a, byte value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<byte> value)
+        public static StatCollector operator +(StatCollector a, Span<byte> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, byte[] value)
+        public static StatCollector operator +(StatCollector a, byte[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<byte> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<byte> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, short value)
+        public static StatCollector operator +(StatCollector a, short value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<short> value)
+        public static StatCollector operator +(StatCollector a, Span<short> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, short[] value)
+        public static StatCollector operator +(StatCollector a, short[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<short> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<short> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<short> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<short> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ushort value)
+        public static StatCollector operator +(StatCollector a, ushort value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<ushort> value)
+        public static StatCollector operator +(StatCollector a, Span<ushort> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ushort[] value)
+        public static StatCollector operator +(StatCollector a, ushort[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<ushort> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<ushort> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<ushort> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<ushort> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, int value)
+        public static StatCollector operator +(StatCollector a, int value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<int> value)
+        public static StatCollector operator +(StatCollector a, Span<int> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, int[] value)
+        public static StatCollector operator +(StatCollector a, int[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<int> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<int> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<int> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<int> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, uint value)
+        public static StatCollector operator +(StatCollector a, uint value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<uint> value)
+        public static StatCollector operator +(StatCollector a, Span<uint> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, uint[] value)
+        public static StatCollector operator +(StatCollector a, uint[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<uint> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<uint> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<uint> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<uint> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, long value)
+        public static StatCollector operator +(StatCollector a, long value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<long> value)
+        public static StatCollector operator +(StatCollector a, Span<long> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, long[] value)
+        public static StatCollector operator +(StatCollector a, long[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<long> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<long> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<long> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<long> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ulong value)
+        public static StatCollector operator +(StatCollector a, ulong value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<ulong> value)
+        public static StatCollector operator +(StatCollector a, Span<ulong> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ulong[] value)
+        public static StatCollector operator +(StatCollector a, ulong[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<ulong> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<ulong> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<ulong> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<ulong> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, float value)
+        public static StatCollector operator +(StatCollector a, float value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<float> value)
+        public static StatCollector operator +(StatCollector a, Span<float> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, float[] value)
+        public static StatCollector operator +(StatCollector a, float[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<float> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<float> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<float> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<float> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, double value)
+        public static StatCollector operator +(StatCollector a, double value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, Span<double> value)
+        public static StatCollector operator +(StatCollector a, Span<double> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, double[] value)
+        public static StatCollector operator +(StatCollector a, double[] value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, ReadOnlySpan<double> value)
+        public static StatCollector operator +(StatCollector a, ReadOnlySpan<double> value)
         {
             a.Collect(value);
             return a;
         }
 
         [MethodImpl(Inline)]
-        public static Collector operator +(Collector a, IEnumerable<double> value)
+        public static StatCollector operator +(StatCollector a, IEnumerable<double> value)
         {
             a.Collect(value);
             return a;
@@ -423,31 +423,28 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline)]
+        [Closures(AllNumeric)]
         public void Collect<T>(IEnumerable<T> src)
             where T : unmanaged
         {
-            //Collect(src.ToSpan());
             foreach(var cell in src)
                 Collect(cell);
         }
 
         /// <summary>
-        /// Accumulates a span of values
+        /// Accumulates a stream of values
         /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source cell type</typeparam>
-        [MethodImpl(Inline)]
-        public void CollectItems<T>(params T[] src)
+        /// <param name="src">The source stream</param>
+        /// <typeparam name="T">The source element type</typeparam>
+        [Closures(AllNumeric)]
+        public void Collect<T>(T[] src)
             where T : unmanaged
         {
-            var count = src.Length;
-            if(count == 0)
-                return;
-
-            ref readonly var data = ref memory.first(src);
-            for(var i=0u; i<count; i++)
-                Collect(skip(in data, i));
+            var count = src?.Length ?? 0;
+            if(count != 0)
+            {
+                Collect(@readonly(src));
+            }
         }
 
         /// <summary>
@@ -455,7 +452,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The source cell type</typeparam>
-        [MethodImpl(Inline)]
+        [Closures(AllNumeric)]
+        public void Collect<T>(Span<T> src)
+            where T : unmanaged
+                => Collect(@readonly(src));
+
+        /// <summary>
+        /// Accumulates a span of values
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source cell type</typeparam>
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public void Collect<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
@@ -465,23 +472,8 @@ namespace Z0
                 Collect(skip(cells, i));
         }
 
-        /// <summary>
-        /// Accumulates a span of values
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The source cell type</typeparam>
         [MethodImpl(Inline)]
-        public void Collect<T>(Span<T> src)
-            where T : unmanaged
-        {
-            var count = src.Length;
-            ref readonly var cells = ref first(src);
-            for(var i=0u; i<count; i++)
-                Collect(skip(cells, i));
-        }
-
-        [MethodImpl(Inline)]
-        Collector(double seed)
+        StatCollector(double seed)
         {
             s1 = 0;
             s0 = 0;

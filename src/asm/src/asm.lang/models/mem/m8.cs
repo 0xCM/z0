@@ -29,6 +29,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator byte(m8 src)
                 => src.Content;
+
+            [MethodImpl(Inline)]
+            public static implicit operator m8(Cell8 src)
+                => new m8(src.Content);
+
         }
     }
 }

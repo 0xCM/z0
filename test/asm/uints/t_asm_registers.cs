@@ -18,7 +18,7 @@ namespace Z0.Asm
         {
             const string HeaderPattern = "{0} - {1}";
             const string PageBreak = RP.PageBreak80;
-            var lookup = Registers.lookup();
+            var lookup = AsmRegs.lookup();
             var dst = CasePath(FS.ext("csv"));
             using var writer = dst.Writer();
 

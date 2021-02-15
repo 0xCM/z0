@@ -28,7 +28,7 @@ namespace Z0
         public ApiExtractArchive(IWfShell wf)
         {
             Wf = wf;
-            Root = wf.Db().CapturedHexDir();
+            Root = wf.Db().ApiHexRoot();
         }
 
         public FS.FileExt DefaultExt

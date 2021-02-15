@@ -29,6 +29,11 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator ushort(m16 src)
                 => src.Content;
+
+            [MethodImpl(Inline)]
+            public static implicit operator m16(Cell16 src)
+                => new m16(src.Content);
+
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Z0.Asm
     using T = System.UInt16;
     using G = AsmRegs.r16;
 
+
     partial struct AsmRegs
     {
         /// <summary>
@@ -35,7 +36,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => Registers.code(RegKind);
+                get => index(RegKind);
             }
 
         }
@@ -58,7 +59,7 @@ namespace Z0.Asm
             public RegIndex Index
             {
                 [MethodImpl(Inline)]
-                get => Registers.code(RegKind);
+                get => index(RegKind);
             }
 
             [MethodImpl(Inline)]

@@ -15,7 +15,7 @@ namespace Z0.Asm
 
     partial struct AsmRegs
     {
-        [ApiDeep("regs.eflags")]
+        [ApiComplete("regs.eflags")]
         public struct eflags : IRegister<eflags,W32,K>, IRegOp32<K>
         {
             K Data;

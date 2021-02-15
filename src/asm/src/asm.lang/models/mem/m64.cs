@@ -30,12 +30,13 @@ namespace Z0.Asm
                 => new m64(src);
 
             [MethodImpl(Inline)]
+            public static implicit operator ulong(m64 src)
+                => src.Content;
+
+            [MethodImpl(Inline)]
             public static implicit operator m64(Cell64 src)
                 => new m64(src.Content);
 
-            [MethodImpl(Inline)]
-            public static implicit operator ulong(m64 src)
-                => src.Content;
         }
     }
 }
