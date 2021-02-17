@@ -5,24 +5,24 @@
 namespace Z0
 {
     [LiteralProvider]
-    public readonly struct ArchiveFolderNames
+    public readonly struct ArchiveFolders
     {
         public const string AppsFolder = "apps";
 
-        public const string Hex = "hex";
+        public const string HexFolder = "hex";
 
-        public const string Respack = "respack";
+        public const string RespackFolder = "respack";
 
         public const string ContentFolder = "content";
 
-        public const string Asm = "asm";
+        public const string AsmFolder = "asm";
 
-        public const string ErrorLog = "errors";
+        public const string ErrorFolder = "errors";
 
-        public const string StatusLog = "status";
+        public const string StatusFolder = "status";
 
-        public const string Capture = "capture";
+        public const string CaptureFolder = "capture";
 
-        public const string RespackContent = Respack + "/" + ContentFolder;
+        public const string RespackContent = RespackFolder + "/" + ContentFolder;
     }
 }

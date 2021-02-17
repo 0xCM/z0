@@ -128,6 +128,8 @@ namespace Z0
         /// </summary>
         public const NK Int8x64k = NK.I8 | NK.U8 | NK.I64 | NK.U64;
 
+        public const NK Integers8x16x32k = UInt8k | Int8k | UInt16k | Int16k | UInt32k | Int32k;
+
         public const NK Integers8x64k = Int8x64k;
 
         public const NK Numeric8x16k = Int8x16k;

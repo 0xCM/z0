@@ -36,14 +36,13 @@ namespace Z0
 
         public ApiCodeBlocks IndexApiBlocks()
         {
-            var src = Wf.Db().PartFiles();
-            var parsed = src.Parsed.View;
-            var count = parsed.Length;
+            var src = Wf.Db().ParsedExtractFiles().View;
+            var count = src.Length;
             var flow = Wf.Running(Msg.IndexingPartFiles.Format(count));
 
             for(var i=0; i<count; i++)
             {
-                ref readonly var path = ref skip(parsed,i);
+                ref readonly var path = ref skip(src,i);
                 var inner = Wf.Running($"Indexing blocks from {path}");
                 var result = ApiCode.hexrows(path);
                 if(result.Count != 0)

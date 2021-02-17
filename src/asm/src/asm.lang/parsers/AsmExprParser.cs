@@ -13,6 +13,7 @@ namespace Z0.Asm
     using static Rules;
     using static TextRules;
     using static AsmExpr;
+    using static AsmOpCodes;
 
     using api = AsmExpr;
 
@@ -133,7 +134,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool RegisterDigit(string src, out AsmRegDigit dst)
+        public bool RegisterDigit(string src, out RegDigit dst)
         {
             dst = default;
             if(Parse.rule(src, RegDigitRule, out var result) &&

@@ -4,11 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiSection : ITextual
+    /// <summary>
+    /// Classifies elementary binary arithmetic operations
+    /// </summary>
+    public enum BinaryArithmeticKind : byte
     {
-        string Name {get;}
+        None,
 
-        string ITextual.Format()
-            => Name ?? string.Empty;
+        Add,
+
+        Sub,
+
+        Mul,
+
+        Div,
+
+        Mod,
     }
 }

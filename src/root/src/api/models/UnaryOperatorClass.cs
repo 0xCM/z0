@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct UnaryOperatorClass : IOperatorClassHost<UnaryOperatorClass,OperatorArity>
+    public readonly struct UnaryOperatorClass : IOperatorClass<UnaryOperatorClass,OperatorArity>
     {
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass(UnaryOperatorClass src)
@@ -25,7 +25,7 @@ namespace Z0
         }
     }
 
-    public readonly struct UnaryOperatorClass<T> : IOperatorClassHost<UnaryOperatorClass<T>, OperatorArity,T>
+    public readonly struct UnaryOperatorClass<T> : IOperatorClass<UnaryOperatorClass<T>, OperatorArity,T>
     {
         public OperatorArity Kind
             => OperatorArity.UnaryOp;

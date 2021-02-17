@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class Hex
     {
@@ -29,7 +29,7 @@ namespace Z0
         {
             Span<T> index = dst;
             ReadOnlySpan<T> view = src;
-            var count = min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
 
             for(var i=0u; i<count; i++)
             {
@@ -74,7 +74,7 @@ namespace Z0
         {
             Span<T> index = dst;
             var input = @readonly(src);
-            var count = min(src.Length, dst.Length);
+            var count = root.min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
                 seek(index, uint8(skip(input,i).Key)) = skip(input,i).Value;
             return new HexLookup<K,T>(dst);

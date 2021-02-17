@@ -47,8 +47,11 @@ namespace Z0.Asm
             }
         }
 
-        AsmImmWriter HostArchiver(ApiHostUri host, IAsmFormatter formatter, FS.FolderPath dst)
-            => new AsmImmWriter(host, formatter, dst);
+        public void EmitUnrefined(params PartId[] parts)
+        {
+            var defaults = new byte[]{2,4,6,8};
+            EmitLiteral(defaults, parts);
+        }
 
         public void EmitRefined(params PartId[] parts)
             => EmitRefined(Capture.exchange(Asm), parts);
@@ -64,7 +67,7 @@ namespace Z0.Asm
 
         void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
-            var groups = ApiImmediates.direct(host,RefinementClass.Refined);
+            var groups = ApiQuery.ImmDirect(host,RefinementClass.Refined);
             var uri = host.Uri;
             var generic = false;
             foreach(var g in groups)
@@ -137,7 +140,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var groups = ApiImmediates.direct(host, RefinementClass.Unrefined);
+                var groups = ApiQuery.ImmDirect(host, RefinementClass.Unrefined);
                 EmitUnrefinedDirect(exchange, groups,imm8, archive);
             }
         }
@@ -164,7 +167,7 @@ namespace Z0.Asm
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var specs = ApiImmediates.generic(host, RefinementClass.Unrefined);
+                var specs = ApiQuery.ImmGeneric(host, RefinementClass.Unrefined);
                 foreach(var spec in specs)
                     EmitUnrefinedGeneric(exchange, spec, imm8, archive);
             }
@@ -172,7 +175,7 @@ namespace Z0.Asm
 
         void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
-            var specs = ApiImmediates.generic(host, RefinementClass.Refined);
+            var specs = ApiQuery.ImmGeneric(host, RefinementClass.Refined);
             foreach(var f in specs)
             {
                 if(f.Method.IsVectorizedUnaryImm(RefinementClass.Refined))
@@ -209,7 +212,6 @@ namespace Z0.Asm
         void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, ApiMethodNG[] methods, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
-
             foreach(var f in methods)
             {
                 var host = f.Host;

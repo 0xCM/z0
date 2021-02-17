@@ -8,26 +8,33 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmOpCodeTokens;
 
-    public readonly struct AsmOpCodeToken
+    partial struct AsmOpCodes
     {
-        public string Symbol {get;}
-
-        public TokenKind Kind {get;}
-
-        public string Description {get;}
-
-        [MethodImpl(Inline)]
-        public AsmOpCodeToken(string symbol, TokenKind kind, string description)
+        public readonly struct AsmOpCodeToken
         {
-            Symbol = symbol;
-            Kind  = kind;
-            Description = description;
-        }
+            public string Symbol {get;}
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeToken((string symbol, TokenKind kind) src)
-            => new AsmOpCodeToken(src.symbol, src.kind, EmptyString);
+            public OpCodeTokenKind Kind {get;}
+
+            public string Description {get;}
+
+            [MethodImpl(Inline)]
+            public AsmOpCodeToken(string symbol, OpCodeTokenKind kind, string description)
+            {
+                Symbol = symbol;
+                Kind  = kind;
+                Description = description;
+            }
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsmOpCodeToken((string symbol, OpCodeTokenKind kind) src)
+                => new AsmOpCodeToken(src.symbol, src.kind, EmptyString);
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsmOpCodeToken((string symbol, OpCodeTokenKind kind, string description) src)
+                => new AsmOpCodeToken(src.symbol, src.kind, src.description);
+
+        }
     }
 }

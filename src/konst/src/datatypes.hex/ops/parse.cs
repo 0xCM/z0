@@ -10,6 +10,7 @@ namespace Z0
     using static Part;
     using static HexFormatSpecs;
 
+
     using C = AsciChar;
 
     partial class Hex

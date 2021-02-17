@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct EmitterClass : IOperatorClassHost<EmitterClass,OperatorArity>
+    public readonly struct EmitterClass : IOperatorClass<EmitterClass,OperatorArity>
     {
         public OperatorArity Kind
             => OperatorArity.Emitter;
@@ -25,7 +25,7 @@ namespace Z0
         }
     }
 
-    public readonly struct EmitterClass<T> : IOperatorClassHost<EmitterClass<T>,OperatorArity,T>
+    public readonly struct EmitterClass<T> : IOperatorClass<EmitterClass<T>,OperatorArity,T>
     {
         public OperatorArity Kind
             => OperatorArity.Emitter;

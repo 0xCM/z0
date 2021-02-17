@@ -59,6 +59,10 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator Cell8(I src)
+            => new Cell8(src.Content);
+
+        [MethodImpl(Inline)]
         public static implicit operator I(byte src)
             => new I(src);
 

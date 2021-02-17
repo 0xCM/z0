@@ -9,8 +9,21 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly partial struct Expr
+    partial struct Expr
     {
+        public readonly struct UnaryArithmetic
+        {
 
+        }
+
+        public readonly struct BinaryArithmetic
+        {
+
+        }
+
+        public readonly struct BooleanComparison
+        {
+            public ComparisonKind Kind {get;}
+        }
     }
 }

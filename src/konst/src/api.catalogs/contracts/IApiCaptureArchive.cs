@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using L = ArchiveFolderNames;
-
-
     public interface IApiCaptureArchive : IWfService, IFileExtensions
     {
         void Clear();
@@ -20,7 +17,7 @@ namespace Z0
             => Db.ApiHexFiles();
 
         FS.Files ApiExtractFiles(PartId part)
-            => Db.ApiExtractFiles(part);
+            => Db.RawExtractFiles(part);
 
         FS.Files ParsedExtractFiles(PartId part)
             => Db.ParsedExtractFiles(part);

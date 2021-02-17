@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct ShiftOperatorClass : IOperatorClassHost<ShiftOperatorClass,OperatorArity>
+    public readonly struct ShiftOperatorClass : IOperatorClass<ShiftOperatorClass,OperatorArity>
     {
         public static implicit operator OperatorClass(ShiftOperatorClass src)
             => src.Classifier;
@@ -21,7 +21,7 @@ namespace Z0
             => new OperatorClass(Kind);
     }
 
-    public readonly struct ShiftOperatorClass<T> : IOperatorClassHost<ShiftOperatorClass<T>,OperatorArity,T>
+    public readonly struct ShiftOperatorClass<T> : IOperatorClass<ShiftOperatorClass<T>,OperatorArity,T>
     {
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass<T>(ShiftOperatorClass<T> src)

@@ -62,6 +62,10 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator Cell16(I src)
+            => new Cell16(src.Content);
+
+        [MethodImpl(Inline)]
         public static implicit operator I(ushort src)
             => new I(src);
 

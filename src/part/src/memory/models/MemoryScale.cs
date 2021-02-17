@@ -9,12 +9,25 @@ namespace Z0
 
     using static Part;
 
+    public enum ScaleFactor : byte
+    {
+        None = 0,
+
+        S1 = 1,
+
+        S2 = 2,
+
+        S4 = 4,
+
+        S8 = 8
+    }
+
     public readonly struct MemoryScale : ITextual
     {
-        public MemoryScaleFactor Factor {get;}
+        public ScaleFactor Factor {get;}
 
         [MethodImpl(Inline)]
-        public MemoryScale(MemoryScaleFactor kind)
+        public MemoryScale(ScaleFactor kind)
             => Factor = kind;
 
         [MethodImpl(Inline)]
@@ -39,7 +52,7 @@ namespace Z0
         public bool NonUnital
         {
              [MethodImpl(Inline)]
-             get => Factor != MemoryScaleFactor.S1;
+             get => Factor != ScaleFactor.S1;
         }
 
         public bool NonZero
@@ -62,18 +75,18 @@ namespace Z0
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryScale(MemoryScaleFactor src)
+        public static implicit operator MemoryScale(ScaleFactor src)
             => new MemoryScale(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator MemoryScaleFactor(MemoryScale src)
+        public static implicit operator ScaleFactor(MemoryScale src)
             => src.Factor;
 
         [MethodImpl(Inline)]
         public static MemoryScale From(int value)
         {
             if(value == 1 || value == 2 || value == 4 || value == 8)
-                return new MemoryScale((MemoryScaleFactor)value);
+                return new MemoryScale((ScaleFactor)value);
             else
                 return new MemoryScale(0);
         }

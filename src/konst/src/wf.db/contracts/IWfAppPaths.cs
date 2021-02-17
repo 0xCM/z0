@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static ArchiveFolderNames;
+    using static ArchiveFolders;
 
     [Free]
     public interface IWfAppPaths : IFileArchive
@@ -38,7 +38,7 @@ namespace Z0
         /// The name of an application configuration file
         /// </summary>
         FS.FileName ConfigFileName
-            =>  FS.file(AppName, JsonConfig);
+            => FS.file(AppName, JsonConfig);
 
         /// <summary>
         /// The executing application's configuration file path
@@ -74,7 +74,7 @@ namespace Z0
         /// The application-relative capture directory
         /// </summary>
         FS.FolderPath AppCaptureRoot
-            => AppDataRoot + FS.folder(Capture);
+            => AppDataRoot + FS.folder(CaptureFolder);
 
         /// <summary>
         /// Creates a path provider for the controlling application

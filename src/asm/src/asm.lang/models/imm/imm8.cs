@@ -25,6 +25,10 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator Arg8(imm8 src)
                 => new Arg8(src.Content, src.OpKind);
+
+            [MethodImpl(Inline)]
+            public static implicit operator Imm8(imm8 src)
+                => src.Content;
         }
     }
 }

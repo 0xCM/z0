@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using S = HexSequenceParser.ParserState;
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
             Source = recover<char,AsciChar>(span(src));
             Target = dst;
             CurrentPos = 0;
-            LastPos = min(src.Length, dst.Length) - 1;
+            LastPos = root.min(src.Length, dst.Length) - 1;
             States = new S[2]{0,0};
         }
 
@@ -66,9 +66,7 @@ namespace Z0.Asm
         void Parse(AsciChar c)
         {
             if(Hex.parse(c, out var d))
-            {
                 ParsingDigits();
-            }
         }
 
         void Parse()
@@ -82,7 +80,7 @@ namespace Z0.Asm
 
         public ByteSize Parse(string src, Span<byte> dst)
         {
-            Init(src,dst);
+            Init(src, dst);
             Parse();
             return ParsedSize;
         }

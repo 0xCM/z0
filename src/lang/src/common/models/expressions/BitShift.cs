@@ -2,29 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public enum AsmRegDigitKind : byte
+    partial struct Expr
     {
-        R0 = 0,
+        public readonly struct BitShift
+        {
 
-        R1 = 1,
-
-        R2 = 2,
-
-        R3 = 3,
-
-        R4 = 4,
-
-        R5 = 5,
-
-        R6 = 6,
-
-        R7 = 7
+        }
     }
 }

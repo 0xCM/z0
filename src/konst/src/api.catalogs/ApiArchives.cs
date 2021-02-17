@@ -12,7 +12,6 @@ namespace Z0
 
     public readonly struct ApiArchives
     {
-
         [Op]
         public static IApiPathProvider ApiPaths(IWfShell wf)
             => ApiPathProvider.create(wf);

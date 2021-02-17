@@ -23,9 +23,6 @@ namespace Z0
         public static string sig(TLK kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
-        public static string sig(ApiBitLogicClass kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
-
         public static string sig<T>(ULK kind)
              where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, Numeric.keyword<T>());

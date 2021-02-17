@@ -2,15 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public readonly partial struct Expr
+    public enum BitShiftKind : byte
     {
+        None,
 
+        Srl,
+
+        Sll,
+
+        Rotl,
+
+        Rotr,
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static ArchiveFolderNames;
+    using static ArchiveFolders;
 
     public interface ITestLogPaths : IFileArchive
     {
@@ -30,16 +30,16 @@ namespace Z0
             => TestLogRoot + FS.folder("data");
 
         FS.FilePath ErrorLogPath
-            => TestLogRoot + FS.folder(ErrorLog) + FS.file($"{AppName}.errors", FileExtensions.Log);
+            => TestLogRoot + FS.folder(ErrorFolder) + FS.file($"{AppName}.errors", FileExtensions.Log);
 
         FS.FilePath StatusLogPath
-            => TestLogRoot + FS.folder(StatusLog) + FS.file($"{AppName}.stdout", FileExtensions.Log);
+            => TestLogRoot + FS.folder(StatusFolder) + FS.file($"{AppName}.stdout", FileExtensions.Log);
 
         FS.FilePath CaseLogPath
-            => TestLogRoot + FS.folder(StatusLog) + FS.file($"{AppName}.cases", FileExtensions.Csv);
+            => TestLogRoot + FS.folder(StatusFolder) + FS.file($"{AppName}.cases", FileExtensions.Csv);
 
         FS.FilePath BenchLogPath
-            => TestLogRoot + FS.folder(StatusLog) + FS.file($"{AppName}.bench", FileExtensions.Csv);
+            => TestLogRoot + FS.folder(StatusFolder) + FS.file($"{AppName}.bench", FileExtensions.Csv);
 
         /// <summary>
         /// Defines a test-specific data folder

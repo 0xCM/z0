@@ -199,7 +199,7 @@ namespace Z0
         /// <param name="vidx">The index vector</param>
         /// <param name="scale">The amount by which to scale each index component value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<long> vgather(in long src, Vector256<long> vidx, [Imm] MemoryScaleFactor scale)
+        public static unsafe Vector256<long> vgather(in long src, Vector256<long> vidx, [Imm] ScaleFactor scale)
             => GatherVector256(gptr(src), vidx, (byte)scale);
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Z0
         ///	    dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+63:m])*scale]
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vgather(in ulong src, Vector256<long> vidx, [Imm] MemoryScaleFactor scale)
+        public static unsafe Vector256<ulong> vgather(in ulong src, Vector256<long> vidx, [Imm] ScaleFactor scale)
             => GatherVector256(gptr(src), vidx, (byte)scale);
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace Z0
 	    ///     dst[i+63:i] := MEM[base_addr + SignExtend(vindex[m+31:m])*scale]
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vgather(in ulong src, Vector128<int> vidx, [Imm] MemoryScaleFactor scale)
+        public static unsafe Vector256<ulong> vgather(in ulong src, Vector128<int> vidx, [Imm] ScaleFactor scale)
             => GatherVector256(gptr(src), vidx, (byte)scale);
 
         [MethodImpl(Inline), Op]

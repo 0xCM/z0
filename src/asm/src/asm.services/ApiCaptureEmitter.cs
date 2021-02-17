@@ -67,7 +67,7 @@ namespace Z0
             var emitted = sys.empty<ApiCodeExtract>();
             var count = src.Length;
             var blocks = src.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded));
-            var dst = Wf.Db().ApiExtractFile(host);
+            var dst = Wf.Db().RawExtractFile(host);
             var flow = Wf.EmittingTable<ApiCodeExtract>(dst);
             emitted = ApiCodeExtracts.emit(blocks, dst);
             Wf.EmittedTable(flow, count);

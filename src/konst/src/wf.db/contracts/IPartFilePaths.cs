@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using L = ArchiveFolderNames;
+    using static ArchiveFolders;
 
     public interface IPartFilePaths : IPartFileNames, IFileArchive
     {
         FS.FolderPath HexDir(FS.FolderPath root)
-            => (root + FS.folder(L.Hex));
+            => (root + FS.folder(HexFolder));
 
         FS.FolderPath AsmDirPath(FS.FolderPath root)
-            => (root + FS.folder(L.Asm));
+            => (root + FS.folder(AsmFolder));
 
         FS.FilePath HexFilePath(FS.FolderPath root, FS.FileName name)
             => HexDir(root) + name;

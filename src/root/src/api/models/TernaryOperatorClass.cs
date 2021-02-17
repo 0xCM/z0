@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TernaryOperatorClass : IOperatorClassHost<TernaryOperatorClass,OperatorArity>
+    public readonly struct TernaryOperatorClass : IOperatorClass<TernaryOperatorClass,OperatorArity>
     {
         public static implicit operator OperatorClass(TernaryOperatorClass src)
             => src.Classifier;
@@ -24,7 +24,7 @@ namespace Z0
         }
     }
 
-    public readonly struct TernaryOperatorClass<T> : IOperatorClassHost<TernaryOperatorClass<T>,OperatorArity,T>
+    public readonly struct TernaryOperatorClass<T> : IOperatorClass<TernaryOperatorClass<T>,OperatorArity,T>
     {
         public OperatorArity Kind
             => OperatorArity.TernaryOp;

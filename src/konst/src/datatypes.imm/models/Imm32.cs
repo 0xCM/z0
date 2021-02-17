@@ -60,6 +60,10 @@ namespace Z0
             => src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator Cell32(I src)
+            => new Cell32(src.Content);
+
+        [MethodImpl(Inline)]
         public static implicit operator I(uint src)
             => new I(src);
 

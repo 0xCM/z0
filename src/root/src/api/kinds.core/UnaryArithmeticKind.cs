@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum MemoryScaleFactor : byte
+    /// <summary>
+    /// Classifies elementary unary arithmetic operations
+    /// </summary>
+    public enum UnaryArithmeticKind : byte
     {
-        S1 = 1,
+        None,
 
-        S2 = 2,
+        Inc,
 
-        S4 = 4,
-
-        S8 = 8
+        Dec,
     }
 }

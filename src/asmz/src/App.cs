@@ -14,7 +14,6 @@ namespace Z0.Asm
     using static TextRules;
     using static AsmExpr;
 
-
     class App : WfService<App,App>
     {
         public App()
@@ -406,6 +405,11 @@ namespace Z0.Asm
 
 
             }
+        }
+
+        void TestHexSeqParser()
+        {
+
         }
 
         public unsafe void Run()

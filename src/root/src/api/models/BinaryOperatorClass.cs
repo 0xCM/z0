@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a type-level lift for the <see cref='OperatorArity.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOperatorClass : IOperatorClassHost<BinaryOperatorClass,OperatorArity>
+    public readonly struct BinaryOperatorClass : IOperatorClass<BinaryOperatorClass,OperatorArity>
     {
         public static implicit operator OperatorClass(BinaryOperatorClass src)
             => src.Classifier;
@@ -30,7 +30,7 @@ namespace Z0
     /// <summary>
     /// Defines an operand-parametric type-level lift for the <see cref='OperatorArity.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOperatorClass<T> : IOperatorClassHost<BinaryOperatorClass<T>,OperatorArity,T>
+    public readonly struct BinaryOperatorClass<T> : IOperatorClass<BinaryOperatorClass<T>,OperatorArity,T>
     {
         public OperatorArity Kind
             => OperatorArity.BinaryOp;
