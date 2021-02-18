@@ -70,7 +70,7 @@ namespace Z0
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
             ref var dst = ref MemoryStacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
-            return BitPack32.pack(unpacked,Konst.z8);
+            return BitPack32.pack<byte>(unpacked);
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace Z0
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
             ref var dst = ref MemoryStacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
-            return BitPack32.pack(unpacked, z16);
+            return BitPack32.pack<ushort>(unpacked);
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
             var take = math.min(src.Edit.Length -offset, count);
             src.Edit.Slice(offset,take).CopyTo(unpacked);
-            return BitPack32.pack(unpacked, z32);
+            return BitPack32.pack<uint>(unpacked);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
             ref var dst = ref MemoryStacks.head<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
-            return BitPack32.pack(unpacked, z64);
+            return BitPack32.pack<ulong>(unpacked);
         }
 
         [MethodImpl(Inline), Op]
@@ -131,7 +131,7 @@ namespace Z0
             var unpacked = MemoryStacks.span<Bit32>(ref buffer);
             ref var dst = ref MemoryStacks.head<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
-            return BitPack32.pack(unpacked, z8i);
+            return BitPack32.pack<sbyte>(unpacked);
         }
 
         [MethodImpl(Inline), Op]

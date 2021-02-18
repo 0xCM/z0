@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static BitMasks.Literals;
     using static memory;
     using static Part;
 
@@ -52,7 +51,6 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => pack_u<S,T>(src.ReadOnly(), mod, offset);
-
 
         [MethodImpl(Inline)]
         static T pack_u<S,T>(ReadOnlySpan<S> src, N8 mod, uint offset)

@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Lang)" />
   </ItemGroup>

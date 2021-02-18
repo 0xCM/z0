@@ -18,7 +18,7 @@ namespace Z0
         {
             var src = new Seg512(lo,hi);
             var dst = alloc(w8, n32);
-            copy(z.bytes(src), ref dst);
+            copy(bytes(src), ref dst);
             return dst;
         }
 

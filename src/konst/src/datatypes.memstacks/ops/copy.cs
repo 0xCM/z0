@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void copy(in StackBlock64 src, ref StackBlock128 dst, byte offset)
         {
-            seek(@as<StackBlock128,StackBlock64>(dst),offset) = src;
+            seek(@as<StackBlock128,StackBlock64>(dst), offset) = src;
         }
     }
 }

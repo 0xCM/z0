@@ -28,6 +28,5 @@ namespace Z0
             unpack1x8x8(src, ref tmp);
             vinflate8x256x32u(tmp).StoreTo(ref lead);
         }
-
     }
 }

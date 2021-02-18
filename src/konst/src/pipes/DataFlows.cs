@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.DataFlows, true)]
     public readonly struct DataFlows
@@ -33,17 +33,6 @@ namespace Z0
         public static string identifier<S,T>(DataFlow<S,T> flow)
             => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string identifier<T>(DataFlow<T> flow)
-            => Relations.RenderLink<T>().Format(flow.Source, flow.Target);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(DataFlow<T> flow)
-            => Relations.RenderLink<T>().Format(flow.Source, flow.Target);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static LinkType type<T>(DataFlow<T> flow)
-            => Graphs.type<T>();
 
         [MethodImpl(Inline)]
         public static string format<S,T>(DataFlow<S,T> flow)

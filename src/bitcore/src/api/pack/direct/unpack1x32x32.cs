@@ -37,5 +37,21 @@ namespace Z0
             vinflate8x256x32u(tmp).StoreTo(ref lead, 24);
         }
 
+        [MethodImpl(Inline), Op]
+        public static Span<uint> unpack1x32x32(uint src)
+        {
+            var buffer = MemoryStacks.alloc(w256);
+            ref var tmp = ref MemoryStacks.head<byte>(ref buffer);
+
+            var storage = MemoryStacks.alloc(w1024);
+            ref var target = ref MemoryStacks.head<uint>(ref storage);
+
+            unpack1x8x32(src, ref tmp);
+            cpu.vinflate8x256x32u(tmp, 0, ref target);
+            cpu.vinflate8x256x32u(tmp, 1, ref target);
+            cpu.vinflate8x256x32u(tmp, 2, ref target);
+            cpu.vinflate8x256x32u(tmp, 3, ref target);
+            return MemoryStacks.span<uint>(ref storage);
+        }
     }
 }

@@ -61,5 +61,30 @@ namespace Z0
         public static unsafe Span<T> span<T>(ref BitBlock1024 src)
             where T : unmanaged
                 => recover<T>(cover(u8(src), 128));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(ref StackBlock32 src)
+            where T : unmanaged
+                => cover(u8(src), 32).Recover<byte,T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> span<T>(ref StackBlock64 src)
+            where T : unmanaged
+                => recover<T>(cover(u8(src), 64));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> span<T>(ref StackBlock8 src)
+            where T : unmanaged
+                => cover(u8(src), 8).Recover<byte,T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(ref StackBlock16 src)
+            where T : unmanaged
+                => cover(u8(src), 16).Recover<byte,T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> span<T>(ref StackBlock128 src)
+            where T : unmanaged
+                => recover<T>(cover(u8(src), 128));
     }
 }

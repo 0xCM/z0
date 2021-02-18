@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    readonly struct SystemHexFormatters
+    public readonly struct SystemHexFormatters
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ISystemFormatter<T> create<T>()
@@ -60,7 +61,6 @@ namespace Z0
                 throw no<T>();
         }
 
-
         readonly struct HexFormatter8i : ISystemFormatter<HexFormatter8i,sbyte>
         {
             public static HexFormatter8i Service => default;
@@ -76,7 +76,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(byte src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter16i : ISystemFormatter<HexFormatter16i,short>
@@ -85,7 +85,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(short src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter16u : ISystemFormatter<HexFormatter16u,ushort>
@@ -94,7 +94,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(ushort src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter32i : ISystemFormatter<HexFormatter32i,int>
@@ -103,7 +103,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(int src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter32u : ISystemFormatter<HexFormatter32u,uint>
@@ -112,7 +112,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(uint src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter64i : ISystemFormatter<HexFormatter64i,long>
@@ -121,7 +121,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(long src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter64u : ISystemFormatter<HexFormatter64u,ulong>
@@ -130,7 +130,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(ulong src, string format = null)
-                => src.ToString(format ?? string.Empty);
+                => src.ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter32f : ISystemFormatter<HexFormatter32f,float>
@@ -139,7 +139,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(float src, string format = null)
-                => BitConverter.SingleToInt32Bits(src).ToString(format ?? string.Empty);
+                => BitConverter.SingleToInt32Bits(src).ToString(format ?? EmptyString);
         }
 
         readonly struct HexFormatter64f : ISystemFormatter<HexFormatter64f,double>
@@ -148,12 +148,12 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format(double src, string format = null)
-                => BitConverter.DoubleToInt64Bits(src).ToString(format ?? string.Empty);
+                => BitConverter.DoubleToInt64Bits(src).ToString(format ?? EmptyString);
         }
 
         [MethodImpl(Inline)]
         static ref readonly F generalize<X,F>(in X src)
             where X : struct
-                => ref Unsafe.As<X,F>(ref z.edit(src));
+                => ref @as<X,F>(src);
     }
 }

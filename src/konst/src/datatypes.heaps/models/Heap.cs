@@ -8,8 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct Heap<T>
+        where T : unmanaged
     {
         readonly Index<T> Content;
 
@@ -26,8 +28,8 @@ namespace Z0
         public Span<T> Segment(uint index)
         {
             ref readonly var segment = ref Segments[index];
-            ref var t0 = ref Content[segment.Offset];
-            return memory.cover<T>(t0, segment.Count);
+            ref var lead = ref Content[segment.Offset];
+            return cover<T>(lead, segment.Count);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     partial struct BitParts
     {
         /// <summary>
-        /// Partitions the first 63 bits of a 64 bit source value into 21 8-bit target segments
+        /// Partitions the first 63 bits of a 64 bit source value into 21 target segments each of effective width 3
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="dst">The receiving buffer</param>

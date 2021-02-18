@@ -11,11 +11,6 @@ namespace Z0
 
     partial class MemoryStacks
     {
-        // ~ asm(value<T>)
-        // ~ movxsd rax,edx
-        // ~ lea rax, [rcx + rax * sizeof(T)]
-        // ~ ------------------------------------------------------------------
-
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
         /// </summary>

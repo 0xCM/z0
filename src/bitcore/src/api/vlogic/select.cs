@@ -74,7 +74,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i<vcount; i++, offset += blocklen)
-                select(n, in skip(in a, offset), in skip(in b, offset), in skip(in c, offset), ref seek(dst, offset));
+                select(n, skip(a, offset), skip(b, offset), skip(c, offset), ref seek(dst, offset));
         }
     }
 }
