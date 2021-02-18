@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct DataCell : IDataType<DataCell>
+    public readonly struct DataCell
     {
         public DataWidth Width {get;}
 

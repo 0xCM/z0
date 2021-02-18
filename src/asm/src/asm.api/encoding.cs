@@ -19,7 +19,7 @@ namespace Z0.Asm
         [Op]
         public static AsmHexCode encoding(ReadOnlySpan<byte> src)
         {
-            var count = root.min(8,src.Length);
+            var count = root.min(8, src.Length);
             if(count == 0)
                 return AsmHexCode.Empty;
 
@@ -60,7 +60,6 @@ namespace Z0.Asm
             }
             return encoding(dst);
         }
-
 
         [Op]
         public static bool encoding(string src, out AsmHexCode dst)

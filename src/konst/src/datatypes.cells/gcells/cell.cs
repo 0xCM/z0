@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static CellDelegates;
     using static Cells;
     using static memory;
 
@@ -32,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell16 cell16<T>(T src)
             where T : unmanaged
-                => Cell16.init(@as<T,ushort>(src));
+                => new Cell16(@as<T,ushort>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell32 cell32<T>(T src)

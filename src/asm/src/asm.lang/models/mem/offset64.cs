@@ -69,6 +69,9 @@ namespace Z0.Asm
 
         }
 
+        /// <summary>
+        /// Represents an offset in 64-bit mode with an 8-bit displacement
+        /// </summary>
         public readonly struct offset64x8
         {
             public Cell8 Dx {get;}
@@ -89,6 +92,9 @@ namespace Z0.Asm
             }
        }
 
+        /// <summary>
+        /// Represents an offset in 64-bit mode with a 16-bit displacement
+        /// </summary>
         public readonly struct offset64x16
         {
             public Cell16 Dx {get;}
@@ -109,6 +115,9 @@ namespace Z0.Asm
             }
        }
 
+        /// <summary>
+        /// Represents an offset in 64-bit mode with a 32-bit displacement
+        /// </summary>
         public readonly struct offset64x32
         {
             public Cell32 Dx {get;}

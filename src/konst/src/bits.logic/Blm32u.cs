@@ -13,7 +13,6 @@ namespace Z0
     using static memory;
     using static ScalarBitLogic;
 
-
     readonly struct BitLogicOps
     {
         readonly Index<MemberAddress> Members;

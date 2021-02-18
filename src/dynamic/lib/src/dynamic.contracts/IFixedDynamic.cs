@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static CellDelegates;
+
     public interface IFixedDynamic
     {
         /// <summary>

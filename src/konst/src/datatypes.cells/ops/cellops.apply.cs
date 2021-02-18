@@ -10,6 +10,8 @@ namespace Z0
 
     using static Part;
 
+    using D = CellDelegates;
+
     partial struct CellOps
     {
         /// <summary>
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> apply<T>(UnaryOp128 f, Vector128<T> x)
+        public static Vector128<T> apply<T>(D.UnaryOp128 f, Vector128<T> x)
             where T : unmanaged
                 => f(x.ToCell()).ToVector<T>();
 
@@ -30,7 +32,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> apply<T>(UnaryOp256 f, Vector256<T> x)
+        public static Vector256<T> apply<T>(D.UnaryOp256 f, Vector256<T> x)
             where T : unmanaged
                 => f(x.ToCell()).ToVector<T>();
 
@@ -41,7 +43,7 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector512<T> apply<T>(UnaryOp512 f, in Vector512<T> x)
+        public static Vector512<T> apply<T>(D.UnaryOp512 f, in Vector512<T> x)
             where T : unmanaged
                 => f(x.ToCell()).ToVector<T>();
 
@@ -53,7 +55,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> apply<T>(BinaryOp128 f, Vector128<T> x, Vector128<T> y)
+        public static Vector128<T> apply<T>(D.BinaryOp128 f, Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => f(x.ToCell(), y.ToCell()).ToVector<T>();
 
@@ -65,7 +67,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> apply<T>(BinaryOp256 f, Vector256<T> x, Vector256<T> y)
+        public static Vector256<T> apply<T>(D.BinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => f(x.ToCell(), y.ToCell()).ToVector<T>();
 
@@ -77,7 +79,7 @@ namespace Z0
         /// <param name="y">The second vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
+        public static Vector512<T> apply<T>(D.BinaryOp512 f, Vector512<T> x, Vector512<T> y)
             where T : unmanaged
                 => f(x.ToCell(), y.ToCell()).ToVector<T>();
     }

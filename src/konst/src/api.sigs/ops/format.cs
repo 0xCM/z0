@@ -27,6 +27,5 @@ namespace Z0
             render(src,dst);
             return dst.Emit();
         }
-
     }
 }

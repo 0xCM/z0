@@ -8,8 +8,6 @@ namespace Z0.Asm
     {
         ICaptureCore CaptureCore {get;}
 
-        IImmSpecializer ImmSpecializer();
-
         /// <summary>
         /// Creates a function decoder
         /// </summary>

@@ -12,6 +12,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static CellDelegates;
 
     partial class Dynop
     {

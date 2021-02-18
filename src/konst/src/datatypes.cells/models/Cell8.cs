@@ -39,16 +39,11 @@ namespace Z0
             get => Data;
         }
 
-        [MethodImpl(Inline)]
-        public static Cell8 init(byte src)
-            => new Cell8(src);
-
         public Cell8 Zero
         {
             [MethodImpl(Inline)]
             get => Empty;
         }
-
 
         [MethodImpl(Inline)]
         public T As<T>()

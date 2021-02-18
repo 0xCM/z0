@@ -10,7 +10,6 @@ namespace Z0.Asm
 
         AsmOpClass OpClass
             => (AsmOpClass)OpKind;
-
     }
 
     public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>, IAsmOpContent<T>

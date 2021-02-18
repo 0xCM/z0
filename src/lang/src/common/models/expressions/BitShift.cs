@@ -13,7 +13,7 @@ namespace Z0.Lang
     {
         public readonly struct BitShift
         {
-
+            public BitShiftKind Kind {get;}
         }
     }
 }

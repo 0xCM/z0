@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct DataType : IDataType
+    public readonly struct DataType
     {
         public Identifier Name {get;}
 

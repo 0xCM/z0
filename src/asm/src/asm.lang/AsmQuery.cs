@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
     using static RexPrefixFacets;
 
     [ApiHost]
@@ -16,5 +17,10 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bit IsRexPrefix(byte src)
             => emath.between(src, MinRex, MaxRex);
+
+        [MethodImpl(Inline), Op]
+        public static bool IsCallRel32(ReadOnlySpan<byte> src, uint offset)
+            => skip(src,offset) == 0xE8 && (offset + 4) <= src.Length;
+
     }
 }

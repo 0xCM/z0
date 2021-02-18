@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static BufferSeqId;
+    using static CellDelegates;
 
     class EvalExecutor : IEvalExecutor
     {

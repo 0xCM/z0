@@ -13,12 +13,12 @@ namespace Z0.Lang
     {
         public readonly struct UnaryArithmetic
         {
-
+            public UnaryArithmeticKind Kind {get;}
         }
 
         public readonly struct BinaryArithmetic
         {
-
+            public BinaryArithmeticKind Kind {get;}
         }
 
         public readonly struct BooleanComparison

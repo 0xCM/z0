@@ -17,7 +17,7 @@ namespace Z0.Asm
         [Op]
         public static Index<CallRel32> load(Call call, Rel32 rel32)
         {
-            var caller = new AsmCaller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
+            var caller = new AsmCaller(0x7ffe6818a0e0ul, asm.symbol("canonical/abi2/Run"));
             var cases = alloc<CallRel32>(4);
             var buffer = span(cases);
             var index = 0;

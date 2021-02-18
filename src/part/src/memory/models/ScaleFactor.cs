@@ -5,14 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Direct vectorized intrinsics over floating-point domains
-    /// </summary>
-    [ApiHost]
-    public static class fcpu
+    public enum ScaleFactor : byte
     {
+        None = 0,
 
+        S1 = 1,
+
+        S2 = 2,
+
+        S4 = 4,
+
+        S8 = 8
     }
-
 }

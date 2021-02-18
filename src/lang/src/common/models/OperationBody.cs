@@ -2,24 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0.Lang
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public interface ICaptureExchange
+    public readonly struct OperationBody
     {
-        /// <summary>
-        /// The buffer that receives the captured data
-        /// </summary>
-        BufferToken TargetBuffer {get;}
+        public IScope Scope {get;}
 
-        CaptureExchange Context
+        public Index<Statement> Definition {get;}
+
+        [MethodImpl(Inline)]
+        public OperationBody(IScope scope, Index<Statement> statements)
         {
-            [MethodImpl(Inline)]
-            get => new CaptureExchange(Buffers.cover(TargetBuffer));
+            Scope = scope;
+            Definition = statements;
         }
     }
 }

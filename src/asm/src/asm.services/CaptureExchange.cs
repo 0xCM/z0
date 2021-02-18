@@ -14,47 +14,12 @@ namespace Z0.Asm
         /// <summary>
         /// The buffer that receives the captured data
         /// </summary>
-        readonly Span<byte> TargetBuffer;
-
-        /// <summary>
-        /// The juncture-coincident operation set
-        /// </summary>
-        public ICaptureCore Service {get;}
+        internal readonly Span<byte> TargetBuffer;
 
         [MethodImpl(Inline)]
-        public CaptureExchange(ICaptureCore service, Span<byte> capture)
+        public CaptureExchange(Span<byte> capture)
         {
             TargetBuffer = capture;
-            Service = service;
-        }
-
-        /// <summary>
-        /// Queries and manipulates an index-identified target buffer byte
-        /// </summary>
-        /// <param name="index">The cell index to query/manipulate</param>
-        [MethodImpl(Inline)]
-        public ref byte Target(int index)
-            => ref memory.seek(TargetBuffer, index);
-
-        public ref byte this[int index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Target(index);
-        }
-
-        /// <summary>
-        /// Slices a section of the target buffer
-        /// </summary>
-        /// <param name="start">The start index</param>
-        /// <param name="length">The slice length</param>
-        [MethodImpl(Inline)]
-        public Span<byte> Target(int start, int length)
-            => TargetBuffer.Slice(start, length);
-
-        public int BufferLength
-        {
-            [MethodImpl(Inline)]
-            get => TargetBuffer.Length;
         }
     }
 }

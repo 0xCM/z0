@@ -16,7 +16,16 @@ namespace Z0
     {
         readonly ushort Data;
 
-        public CellKind Kind => CellKind.Cell16;
+        [MethodImpl(Inline)]
+        public Cell16(ushort src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public Cell16(short src)
+            => Data = (ushort)src;
+
+        public CellKind Kind
+            => CellKind.Cell16;
 
         public ushort Content
         {
@@ -47,26 +56,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Empty;
         }
-
-        [MethodImpl(Inline)]
-        public static Cell16 init(byte src)
-            => new Cell16(src);
-
-        [MethodImpl(Inline)]
-        public static Cell16 init(ushort src)
-            => new Cell16(src);
-
-        [MethodImpl(Inline)]
-        public static Cell16 init(uint src)
-            => new Cell16((ushort)src);
-
-        [MethodImpl(Inline)]
-        public Cell16(ushort src)
-            => Data = src;
-
-        [MethodImpl(Inline)]
-        public Cell16(short src)
-            => Data = (ushort)src;
 
         [MethodImpl(Inline)]
         public T As<T>()
@@ -107,7 +96,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell16(ushort x)
-            => init(x);
+            => new Cell16(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell16(Cell8 x)
@@ -135,7 +124,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator Cell16(uint x)
-            => init(x);
+            => new Cell16((ushort)x);
 
         [MethodImpl(Inline)]
         public static explicit operator sbyte(Cell16 x)

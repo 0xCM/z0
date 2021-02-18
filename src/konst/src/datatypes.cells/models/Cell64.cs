@@ -16,6 +16,14 @@ namespace Z0
     {
         public ulong Content {get;}
 
+        [MethodImpl(Inline)]
+        public Cell64(ulong x0)
+            => Content = x0;
+
+        [MethodImpl(Inline)]
+        public Cell64(long x0)
+            => Content = (uint)x0;
+
         public CellKind Kind
             => CellKind.Cell64;
 
@@ -43,13 +51,6 @@ namespace Z0
             get => Empty;
         }
 
-        [MethodImpl(Inline)]
-        public Cell64(ulong x0)
-            => Content = x0;
-
-        [MethodImpl(Inline)]
-        public Cell64(long x0)
-            => Content = (uint)x0;
 
         [MethodImpl(Inline)]
         public T As<T>()

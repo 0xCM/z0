@@ -27,6 +27,9 @@ namespace Z0.Asm
         public static IAsmWf workflow(IWfShell wf)
             => new AsmWf(wf, context(wf));
 
+        public static IImmSpecializer ImmSpecializer(IWfShell wf, IAsmContext asm)
+            => new ImmSpecializer(wf, asm);
+
         [Op]
         public static IAsmServices init(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
@@ -46,7 +49,6 @@ namespace Z0.Asm
         [Op]
         public static IApiHostCapture HostCapture(IWfShell wf)
             => ApiHostCapture.create(wf);
-
 
         [Op]
         public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
@@ -69,26 +71,18 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, formatter(config));
-
-        [MethodImpl(Inline), Op]
         public static IAsmFormatter formatter(in AsmFormatConfig config)
             => new AsmFormatter(config);
 
         [MethodImpl(Inline), Op]
-        public static IAsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
-            => new AsmWriter(dst,formatter);
-
-        [MethodImpl(Inline), Op]
-        public static ICaptureExchange exchange(ICaptureCore service, BufferToken capture)
-            => new CaptureExchangeProxy(service, capture);
+        public static ICaptureExchange exchange(BufferToken capture)
+            => new CaptureExchangeProxy(capture);
 
         [Op]
         public static QuickCapture CaptureQuick(IWfShell wf, IAsmContext asm)
         {
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = AsmServices.exchange(asm.CaptureCore, tokens[BufferSeqId.Aux3]);
+            var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
             var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
             return new QuickCapture(wf, asm, buffer, tokens, service);
         }
@@ -137,6 +131,9 @@ namespace Z0.Asm
 
         public IAsmImmWriter ImmWriter(ApiHostUri host)
             => ImmWriter(host, Wf.Db().ImmRoot());
+
+        public IImmSpecializer ImmSpecializer()
+            => new ImmSpecializer(Wf, Asm);
 
         public IAsmDataEmitter DataEmitter()
             => AsmDataEmitter.create(Wf);

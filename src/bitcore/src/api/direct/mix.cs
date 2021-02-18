@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static BitMasks.Literals;
 
-    partial class BitMasks
+    partial class Bits
     {
         /// <summary>
         /// Blends alternating even operand bits

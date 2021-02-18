@@ -9,6 +9,8 @@ namespace Z0
 
     using Z0.Asm;
 
+
+    using static CellDelegates;
     using static z;
 
     public readonly struct CheckDynamicVectors

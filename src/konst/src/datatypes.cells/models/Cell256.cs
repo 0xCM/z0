@@ -9,9 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-
     using static Part;
-    using static z;
 
     using F = Cell256;
     using api = Cells;
@@ -59,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Cell256 init<T>(Vector256<T> src)
             where T : unmanaged
-                => new Cell256(v64u(src));
+                => new Cell256(cpu.v64u(src));
 
         [MethodImpl(Inline)]
         public static Cell256 init<T>(Vector128<T> a, Vector128<T> b)

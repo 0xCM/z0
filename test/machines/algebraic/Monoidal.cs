@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Canonical;
+    using static Part;
     using static z;
 
     public static class MonoidialX

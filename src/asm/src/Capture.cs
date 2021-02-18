@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ICaptureCore core(IWfShell wf, IAsmContext asm)
-            => new CaptureCore(wf, asm);
+            => CaptureCore.create(wf);
 
         [MethodImpl(Inline), Op]
         public static ApiCaptureEmitter emitter(IWfShell wf, IAsmContext asm)
@@ -32,7 +32,7 @@ namespace Z0
 
         [Op]
         public static CaptureExchange exchange(IAsmContext context)
-            => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
+            => new CaptureExchange(new byte[context.DefaultBufferLength]);
 
         [Op]
         public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)

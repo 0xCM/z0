@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct Operation : IOperation
+    public class Operation : IOperation
     {
         public Identifier Name {get;}
 
@@ -17,7 +17,7 @@ namespace Z0.Lang
 
         public Operand? Output {get;}
 
-        public Index<Statement> Definition {get;}
+        public OperationBody Definition {get;}
 
         [MethodImpl(Inline)]
         public Operation(Identifier name, Index<Operand> operands, Operand? output, Index<Statement> statements)
@@ -25,7 +25,7 @@ namespace Z0.Lang
             Name = name;
             Input = operands;
             Output = output;
-            Definition = statements;
+            Definition = new OperationBody(this, statements);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static CellDelegates;
-    using static Cells;
+
+    using D = CellDelegates;
 
     partial struct gcells
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp64 cellop64<T>(Func<T,T> f)
+        public static D.UnaryOp64 cellop64<T>(Func<T,T> f)
             where T : unmanaged
                 => (Cell64 a) => cell64(f(a.As<T>()));
 
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp64 cellop64<T>(Func<T,T,T> f)
+        public static D.BinaryOp64 cellop64<T>(Func<T,T,T> f)
             where T : unmanaged
                 => (Cell64 a, Cell64 b) => cell64(f(a.As<T>(), b.As<T>()));
     }

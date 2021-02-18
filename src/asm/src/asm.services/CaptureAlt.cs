@@ -175,16 +175,16 @@ namespace Z0
             var offset = 0;
             int? ret_offset = null;
             var end = (MemoryAddress)pSrc;
-            var state = ExtractState.Empty;
+            var state = byte.MinValue;
 
             while(offset < limit)
             {
                 var code = *pSrc++;
                 seek(dst, offset++) = code;
                 end = pSrc;
-                state = new ExtractState(code);
+                state = code;
 
-                if(ret_offset == null && state.Captured == RET)
+                if(ret_offset == null && state == RET)
                     ret_offset = offset;
 
                 var tc = CalcTerm(dst, offset, ret_offset, out var delta);
@@ -202,7 +202,6 @@ namespace Z0
             var bits = new CapturedCodeBlock(start, raw, trimmed);
             return new CapturedOperation(id, outcome, bits);
         }
-
 
         [Op]
         ExtractTermCode CalcTerm(Span<byte> buffer, int offset, int? ret_offset, out int delta)

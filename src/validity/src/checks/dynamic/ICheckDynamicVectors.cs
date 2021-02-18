@@ -9,6 +9,7 @@ namespace Z0
 
     using static z;
     using static BufferSeqId;
+    using static CellDelegates;
 
     public interface ICheckDynamicVectors : ICheckAction, ITestDynamic, IBufferedChecker
     {

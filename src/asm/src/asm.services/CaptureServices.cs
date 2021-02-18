@@ -22,9 +22,6 @@ namespace Z0.Asm
             Asm = asm;
         }
 
-        public IImmSpecializer ImmSpecializer()
-            => new ImmSpecializer(Wf, Asm);
-
         public IAsmDecoder RoutineDecoder(in AsmFormatConfig? format)
             => AsmServices.decoder(format ?? AsmFormatConfig.Default);
 

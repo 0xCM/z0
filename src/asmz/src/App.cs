@@ -276,7 +276,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("public static AsmMnemonicExpr {0} => nameof({0});", monic.Name));
+                buffer.IndentLine(margin, string.Format("public static AsmMnemonic {0} => nameof({0});", monic.Name));
                 buffer.AppendLine();
             }
             margin -= 4;
@@ -290,6 +290,58 @@ namespace Z0.Asm
             writer.Write(buffer.Emit());
         }
 
+        /*
+        public readonly struct Movzx : IAsmInstruction<Movzx>
+        {
+            public AsmMnemonicCode Mnemonic => MOVZX;
+
+            public static implicit operator AsmMnemonicCode(Movzx src) => src.Mnemonic;
+        }
+        */
+
+        void GenerateAsmStructs(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
+        {
+            const string Line0 = "public readonly struct {0} : IAsmInstruction<{0}>";
+            const string Line1 = "{";
+            const string Line2 = "public AsmMnemonicCode Mnemonic => AsmMnemonicCode.{0};";
+            const string Line3 = "public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;";
+            const string Line4 = "}";
+
+            var buffer = text.buffer();
+            var margin = 0u;
+            buffer.AppendLine("namespace Z0.Asm");
+            buffer.AppendLine("{");
+            margin += 4;
+            buffer.IndentLine(margin, "public readonly partial struct AsmInstructions");
+            buffer.IndentLine(margin, "{");
+            margin += 4;
+
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var monic = ref skip(src,i);
+                buffer.IndentLine(margin, string.Format(Line0, monic.Name));
+                buffer.IndentLine(margin, Line1);
+                margin += 4;
+                buffer.IndentLine(margin, string.Format(Line2, monic.Name));
+                buffer.AppendLine();
+                buffer.IndentLine(margin, string.Format(Line3, monic.Name));
+                margin -= 4;
+                buffer.IndentLine(margin, Line4);
+                buffer.AppendLine();
+            }
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            margin -= 4;
+            buffer.IndentLine(margin, "}");
+
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceCodeHeader);
+            writer.Write(buffer.Emit());
+
+        }
 
         void ProcessCatalog()
         {
@@ -300,6 +352,7 @@ namespace Z0.Asm
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
             ShowSpecifiers(Etl);
+            GenerateAsmStructs(monics, Db.Doc("AsmInstructions", FileExtensions.Cs));
         }
 
 
@@ -419,7 +472,7 @@ namespace Z0.Asm
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
-            TestRel32();
+            ProcessCatalog();
         }
 
         public static void Main(params string[] args)

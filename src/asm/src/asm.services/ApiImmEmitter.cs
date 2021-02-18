@@ -23,9 +23,8 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             base.OnInit();
-            var services = Capture.services(Wf, Asm);
             CodeArchive = ApiArchives.capture(Wf.Db().CaptureRoot());
-            Specializer = services.ImmSpecializer();
+            Specializer = AsmServices.ImmSpecializer(Wf,Asm);
         }
 
         bool Append = true;

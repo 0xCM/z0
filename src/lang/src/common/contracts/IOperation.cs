@@ -14,6 +14,6 @@ namespace Z0.Lang
 
         Operand? Output {get;}
 
-        Index<Statement> Definition {get;}
+        OperationBody Definition {get;}
     }
 }

@@ -54,6 +54,19 @@ namespace Z0.Asm
                 => (src.Symbol, src.Kind, src.Description);
         }
 
+        public readonly struct Rd3
+        {
+            public string Symbol => "/3";
+
+            public OpCodeTokenKind Kind => K.Rd3;
+
+            public string Description => M.Rd3;
+
+            [MethodImpl(Inline)]
+            public static implicit operator AsmOpCodeToken(Rd3 src)
+                => (src.Symbol, src.Kind, src.Description);
+        }
+
         public readonly struct Vex
         {
             public string Symbol => "VEX";

@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct CpuVector : IDataType
+    public readonly struct CpuVector
     {
         public VectorKind Kind {get;}
 

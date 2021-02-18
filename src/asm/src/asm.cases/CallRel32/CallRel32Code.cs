@@ -30,7 +30,6 @@ namespace Z0.Asm
                 seek(R,i) = (ulong)f0(skip(A,i)) & f1(skip(B,i)) | f2(skip(C,i)) ^ f3(skip(D,i)) ;
             }
 
-
             [MethodImpl(NotInline)]
             public byte f0(byte a)
                 => (byte)(a & 0xF0);

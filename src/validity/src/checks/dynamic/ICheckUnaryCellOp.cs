@@ -5,6 +5,7 @@
 namespace Z0
 {
     using static Part;
+    using static CellDelegates;
 
     using Eq = CheckEquatable;
 

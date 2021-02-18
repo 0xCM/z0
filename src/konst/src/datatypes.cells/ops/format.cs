@@ -11,20 +11,31 @@ namespace Z0
 
     partial class Cells
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(Cell8 src)
             => src.Content.FormatHexData();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(Cell16 src)
             => src.Content.FormatHexData();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(Cell32 src)
             => src.Content.FormatHexData();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(Cell64 src)
             => src.Content.FormatHexData();
+
+        public static string format(CellQ src)
+            => src.Kind switch{
+                CellKind.Cell8 => "",
+                CellKind.Cell16 => "",
+                CellKind.Cell32 => "",
+                CellKind.Cell64 => "",
+                _ => ""
+            };
+
+
     }
 }

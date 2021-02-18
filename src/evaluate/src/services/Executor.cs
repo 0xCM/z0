@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static z;
+    using static CellDelegates;
     using static BufferSeqId;
 
     public readonly struct Executor

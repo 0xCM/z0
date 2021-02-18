@@ -36,7 +36,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator m64(Cell64 src)
                 => new m64(src.Content);
-
         }
     }
 }

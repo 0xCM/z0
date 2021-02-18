@@ -12,6 +12,10 @@ namespace Z0.Lang
 
         And,
 
+        Or,
+
+        Xor,
+
         Assign,
 
         Add,
@@ -29,5 +33,9 @@ namespace Z0.Lang
         Lt,
 
         LtEq,
+
+        Inc,
+
+        Dec,
     }
 }

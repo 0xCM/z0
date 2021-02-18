@@ -279,7 +279,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vlsb<T>(W128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
-                => gcpu.vbroadcast(w,lsb(f,d,t));
+                => gcpu.vbroadcast(w, lsb(f,d,t));
 
         /// <summary>
         /// [00....01]

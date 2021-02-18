@@ -12,20 +12,14 @@ namespace Z0.Asm
     public readonly struct CaptureExchangeProxy : ICaptureExchange
     {
         /// <summary>
-        /// The juncture-coincident operation set
-        /// </summary>
-        public ICaptureCore Service {get;}
-
-        /// <summary>
         /// The buffer that receives the captured data
         /// </summary>
         public BufferToken TargetBuffer {get;}
 
         [MethodImpl(Inline)]
-        internal CaptureExchangeProxy(ICaptureCore service, BufferToken target)
+        internal CaptureExchangeProxy(BufferToken target)
         {
             TargetBuffer = target;
-            Service = service;
         }
     }
 }

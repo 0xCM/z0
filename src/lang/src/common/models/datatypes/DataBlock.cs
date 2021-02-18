@@ -9,7 +9,7 @@ namespace Z0.Lang
 
     using static Part;
 
-    public readonly struct DataBlock : IDataType
+    public readonly struct DataBlock
     {
         public SegmentKind SegKind {get;}
 

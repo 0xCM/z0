@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static z;
+    using static Part;
 
     public interface IAsmOpererands
     {
@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         A this[N0 n] {get;}
 
-        A First  => this[n0];
+        A First => this[n0];
     }
 
     public interface IAsmOperands<F,A,B> : IAsmOpererands
@@ -59,11 +59,11 @@ namespace Z0.Asm
 
         C this[N2 n] {get;}
 
-        A First  => this[n0];
+        A First => this[n0];
 
-        B Second  => this[n1];
+        B Second => this[n1];
 
-        C Third  => this[n2];
+        C Third => this[n2];
     }
 
     public interface IAsmOperands<F,A,B,C,D> : IAsmOpererands
@@ -84,12 +84,12 @@ namespace Z0.Asm
 
         D this[N3 n] {get;}
 
-        A First  => this[n0];
+        A First => this[n0];
 
-        B Second  => this[n1];
+        B Second => this[n1];
 
-        C Third  => this[n2];
+        C Third => this[n2];
 
-        D Fourth  => this[n3];
+        D Fourth => this[n3];
     }
 }

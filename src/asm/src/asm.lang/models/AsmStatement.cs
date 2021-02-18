@@ -9,6 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
+    public readonly struct AsmStatement
+    {
+        public AsmMnemonicCode Mnemonic {get;}
+
+        public Args Args {get;}
+
+        [MethodImpl(Inline)]
+        public AsmStatement(AsmMnemonicCode monic, Args src)
+        {
+            Mnemonic = monic;
+            Args = src;
+        }
+    }
+
     public readonly struct AsmStatement<A> : IAsmStatement<A>
         where A : unmanaged, IAsmOp
     {
@@ -22,6 +36,10 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = a;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatement(AsmStatement<A> src)
+            => new AsmStatement(src.Mnemonic, src.Args);
     }
 
     public readonly struct AsmStatement<A,B> : IAsmStatement<A,B>
@@ -45,6 +63,10 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = args;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatement(AsmStatement<A,B> src)
+            => new AsmStatement(src.Mnemonic, src.Args);
     }
 
     public readonly struct AsmStatement<A,B,C> : IAsmStatement<A,B,C>
@@ -69,6 +91,10 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = args;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatement(AsmStatement<A,B,C> src)
+            => new AsmStatement(src.Mnemonic, src.Args);
     }
 
     public readonly struct AsmStatement<A,B,C,D> : IAsmStatement<A,B,C,D>
@@ -94,5 +120,9 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = (a,b,c,d);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatement(AsmStatement<A,B,C,D> src)
+            => new AsmStatement(src.Mnemonic, src.Args);
     }
 }
