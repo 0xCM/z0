@@ -12,41 +12,8 @@ namespace Z0
     partial struct z
     {
         [MethodImpl(Inline)]
-        public static ref byte seek8<T>(in T src, uint count)
-            => ref memory.seek8(src,count);
-
-        [MethodImpl(Inline)]
-        public static ref byte seek8<T>(Span<T> src, uint count)
-             => ref memory.seek8(src,count);
-
-        [MethodImpl(Inline)]
-        public static ref ushort seek16<T>(in T src, uint count)
-            => ref memory.seek16(src, count);
-
-        [MethodImpl(Inline)]
-        public static ref ushort seek16<T>(Span<T> src, uint count)
-            => ref memory.seek16(src, count);
-
-        [MethodImpl(Inline)]
-        public static ref uint seek32<T>(in T src, uint count)
-            => ref memory.seek32(src, count);
-
-        [MethodImpl(Inline)]
-        public static ref uint seek32<T>(Span<T> src, uint count)
-            => ref memory.seek32(src, count);
-
-
-        [MethodImpl(Inline)]
         public static ref ulong seek64<T>(in T src, uint count)
             => ref memory.seek64(src,count);
-
-        [MethodImpl(Inline)]
-        public static ref ulong seek64<T>(Span<T> src, uint count)
-            => ref memory.seek64(src, count);
-
-        [MethodImpl(Inline)]
-        public static ref T seek<S,T>(in S src, uint count)
-            => ref memory.seek<S,T>(src,count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, byte count)

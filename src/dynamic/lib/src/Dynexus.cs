@@ -16,7 +16,6 @@ namespace Z0
     using static CellDelegates;
 
     using I = Z0;
-
     using U = UnaryOperatorClass;
     using B = BinaryOperatorClass;
     using T = TernaryOperatorClass;
@@ -44,20 +43,17 @@ namespace Z0
 
         T Ternary => default;
 
-        DynamicFactories FactorySource
-            => DynamicFactories.Service;
-
-        IImmInjector IDynamicImmediate.UnaryInjector<W>()
+        IImmInjector IDynexus.UnaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
                 return ImmInjector.create(Diviner, I.VK.v128, K.unary());
             else if(typeof(W) == typeof(W256))
                 return ImmInjector.create(Diviner, I.VK.v256, K.unary());
             else
-                throw Unsupported.define<W>();
+                throw no<W>();
         }
 
-        IImmInjector IDynamicImmediate.BinaryInjector<W>()
+        IImmInjector IDynexus.BinaryInjector<W>()
         {
             if(typeof(W) == typeof(W128))
                 return ImmInjector.create(Diviner, I.VK.v128, K.binary());
@@ -67,32 +63,31 @@ namespace Z0
                 throw no<W>();
         }
 
-        DynamicDelegate<UnaryOp<Vector128<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
+        DynamicDelegate<UnaryOp<Vector128<T>>> IDynexus.CreateUnaryOp<T>(MethodInfo src, W128 w, byte imm)
             => Dynop.EmbedVUnaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
-        DynamicDelegate<BinaryOp<Vector128<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W128 w, byte imm)
+        DynamicDelegate<BinaryOp<Vector128<T>>> IDynexus.CreateBinaryOp<T>(MethodInfo src, W128 w, byte imm)
             => Dynop.EmbedVBinaryOpImm(VK.vk128<T>(), Identify(src), src, imm);
 
-        DynamicDelegate<UnaryOp<Vector256<T>>> IDynamicImmediate.CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)
+        DynamicDelegate<UnaryOp<Vector256<T>>> IDynexus.CreateUnaryOp<T>(MethodInfo src, W256 w, byte imm)
             => Dynop.EmbedVUnaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
-        DynamicDelegate<BinaryOp<Vector256<T>>> IDynamicImmediate.CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
+        DynamicDelegate<BinaryOp<Vector256<T>>> IDynexus.CreateBinaryOp<T>(MethodInfo src, W256 w, byte imm)
             => Dynop.EmbedImmVBinaryOpImm(VK.vk256<T>(), Identify(src), src, imm);
 
-        [MethodImpl(Inline)]
-        IEmitterOpFactory<T> IDynamicFactories.Factory<T>(EmitterClass<T> k)
-            => FactorySource.Factory(k);
+        IEmitterOpFactory<T> IDynexus.Factory<T>(EmitterClass<T> k)
+            => EmitterFactory<T>.Service;
 
-        IUnaryOpFactory<T> IDynamicFactories.Factory<T>(UnaryOperatorClass<T> k)
-            => FactorySource.Factory(k);
+        IUnaryOpFactory<T> IDynexus.Factory<T>(UnaryOperatorClass<T> k)
+            => UnaryOpFactory<T>.Service;
 
-        IBinaryOpFactory<T> IDynamicFactories.Factory<T>(BinaryOperatorClass<T> k)
-            => FactorySource.Factory(k);
+        IBinaryOpFactory<T> IDynexus.Factory<T>(BinaryOperatorClass<T> k)
+            => BinaryOpFactory<T>.Service;
 
-        ITernaryOpFactory<T> IDynamicFactories.Factory<T>(TernaryOperatorClass<T> k)
-            => FactorySource.Factory(k);
+        ITernaryOpFactory<T> IDynexus.Factory<T>(TernaryOperatorClass<T> k)
+            => TernaryOpFactory<T>.Service;
 
-        Option<DynamicDelegate> IDynamicImmediate.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)
+        Option<DynamicDelegate> IDynexus.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)
         {
             if(w == TypeWidth.W128)
                 return DynamicImmediate.EmbedVUnaryOpImm(w128, src,imm8, Identify(src));
@@ -102,7 +97,7 @@ namespace Z0
                 return root.none<DynamicDelegate>();
         }
 
-        Option<DynamicDelegate> IDynamicImmediate.CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm8)
+        Option<DynamicDelegate> IDynexus.CreateBinaryOp(TypeWidth w, MethodInfo src, byte imm8)
         {
             if(w == TypeWidth.W128)
                 return DynamicImmediate.EmbedVBinaryOpImm(w128, src, imm8, Identify(src));
@@ -154,61 +149,61 @@ namespace Z0
             where T : unmanaged
                 => ImmInjector.from(Diviner, I.V256BinaryOpImmInjector.Create<T>(Diviner));
 
-        UnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)
+        UnaryOp<F> IDynexus.EmitFixedUnary<F>(BufferToken dst, ApiCodeBlock src)
             => (UnaryOp<F>)Emit(src.Id, typeof(UnaryOp<F>), typeof(F),
                     sys.array(typeof(F)), dst.Load(src.Encoded).Handle);
 
-        BinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, ApiCodeBlock src)
+        BinaryOp<F> IDynexus.EmitFixedBinary<F>(BufferToken dst, ApiCodeBlock src)
             => (BinaryOp<F>)Emit(src.Id, typeof(BinaryOp<F>), typeof(F),
                     sys.array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
-        TernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src)
+        TernaryOp<F> IDynexus.EmitFixedTernary<F>(BufferToken dst, ApiCodeBlock src)
             => (TernaryOp<F>)Emit(src.Id, typeof(TernaryOp<F>), typeof(F),
                     sys.array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
-        UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, ApiCodeBlock src)
+        UnaryOp8 IDynexus.EmitFixedUnary(BufferToken dst, W8 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        UnaryOp16 IFixedDynamic.EmitFixedUnary(BufferToken dst, W16 w, ApiCodeBlock src)
+        UnaryOp16 IDynexus.EmitFixedUnary(BufferToken dst, W16 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        UnaryOp32 IFixedDynamic.EmitFixedUnary(BufferToken dst, W32 w, ApiCodeBlock src)
+        UnaryOp32 IDynexus.EmitFixedUnary(BufferToken dst, W32 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        UnaryOp64 IFixedDynamic.EmitFixedUnary(BufferToken dst, W64 w, ApiCodeBlock src)
+        UnaryOp64 IDynexus.EmitFixedUnary(BufferToken dst, W64 w, ApiCodeBlock src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
-        UnaryOp128 IFixedDynamic.EmitFixedUnary(BufferToken dst, W128 w, ApiCodeBlock src)
+        UnaryOp128 IDynexus.EmitFixedUnary(BufferToken dst, W128 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
-        UnaryOp256 IFixedDynamic.EmitFixedUnary(BufferToken dst, W256 w, ApiCodeBlock src)
+        UnaryOp256 IDynexus.EmitFixedUnary(BufferToken dst, W256 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
-        BinaryOp8 IFixedDynamic.EmitFixedBinary(BufferToken dst, W8 w, ApiCodeBlock src)
+        BinaryOp8 IDynexus.EmitFixedBinary(BufferToken dst, W8 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        BinaryOp16 IFixedDynamic.EmitFixedBinary(BufferToken dst, W16 w, ApiCodeBlock src)
+        BinaryOp16 IDynexus.EmitFixedBinary(BufferToken dst, W16 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        BinaryOp32 IFixedDynamic.EmitFixedBinary(BufferToken dst, W32 w, ApiCodeBlock src)
+        BinaryOp32 IDynexus.EmitFixedBinary(BufferToken dst, W32 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        BinaryOp64 IFixedDynamic.EmitFixedBinary(BufferToken dst, W64 w, ApiCodeBlock src)
+        BinaryOp64 IDynexus.EmitFixedBinary(BufferToken dst, W64 w, ApiCodeBlock src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
-        BinaryOp128 IFixedDynamic.EmitFixedBinary(BufferToken dst, W128 w, ApiCodeBlock src)
+        BinaryOp128 IDynexus.EmitFixedBinary(BufferToken dst, W128 w, ApiCodeBlock src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
-        BinaryOp256 IFixedDynamic.EmitFixedBinary(BufferToken dst, W256 w, ApiCodeBlock src)
+        BinaryOp256 IDynexus.EmitFixedBinary(BufferToken dst, W256 w, ApiCodeBlock src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
-        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(BufferToken dst, ApiCodeBlock src)
+        UnaryOp<T> IDynexus.EmitUnaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitUnaryOp<T>(src.Id, dst.Load(src.Encoded));
 
-        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(BufferToken dst, ApiCodeBlock src)
+        BinaryOp<T> IDynexus.EmitBinaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitBinaryOp<T>(src.Id, dst.Load(src.Encoded));
 
-        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(BufferToken dst, ApiCodeBlock src)
+        TernaryOp<T> IDynexus.EmitTernaryOp<T>(BufferToken dst, ApiCodeBlock src)
             => EmitTernaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]

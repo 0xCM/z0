@@ -30,7 +30,7 @@ namespace Z0
         }
 
         ICheckAction ActionTest
-            => z.cast<ICheckBinaryCellOp>(this);
+            => cast<ICheckBinaryCellOp>(this);
 
         ITestCaseIdentity Identity
             => ActionTest;
@@ -40,6 +40,7 @@ namespace Z0
 
         ICheckEquatable Claim
             => CheckEquatable.Checker;
+
 
         /// <summary>
         /// Verifies that two 8-bit binary operators agree over a random set of points
@@ -54,11 +55,11 @@ namespace Z0
 
             void check()
             {
-                for(var i=0; i < RepCount; i++)
+                for(var i=0; i<RepCount; i++)
                 {
                     var x = Random.Cell(w);
                     var y = Random.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.Eq(f(x,y), g(x,y));
                 }
             }
 

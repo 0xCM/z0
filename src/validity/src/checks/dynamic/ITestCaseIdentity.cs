@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">Identifies the operation under test</param>
         string CaseName(OpIdentity id)
-            => ApiTestIdentity.name(HostType,id);
+            => TestCaseIdentity.service(HostType).CaseName(id);
 
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -26,22 +26,22 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         string CaseName<T>([Caller] string label = null)
             where T : unmanaged
-                => ApiTestIdentity.name<T>(HostType, label);
+                => TestCaseIdentity.service(HostType).CaseName<T>(label);
 
         string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(ApiTestIdentity.name(f)), true);
+                => TestCaseIdentity.service(HostType).CaseName<W,T>(f);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(GetType(), label, generic);
+                => TestCaseIdentity.service(HostType).CaseName<W,T>(HostType, label, generic);
 
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => ApiTestIdentity.name<W,C>(host, label, generic);
+                => TestCaseIdentity.service(HostType).CaseName<W,C>(host, label, generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -49,6 +49,6 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         string MatchCaseName(OpIdentity f, OpIdentity g)
-            => ApiTestIdentity.match(HostType, f, g);
+            => TestCaseIdentity.service(HostType).MatchCaseName(f, g);
     }
 }

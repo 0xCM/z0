@@ -12,6 +12,29 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Parameter)]
     public class ImmAttribute : Attribute
     {
+        public ImmAttribute()
+        {
+            Min = 0;
+            Max = 0;
+        }
 
+        public ImmAttribute(byte max)
+        {
+            Min = 0;
+            Max = max;
+        }
+
+        public ImmAttribute(byte min, byte max)
+        {
+            Min = min;
+            Max = max;
+        }
+
+        public byte Min {get;}
+
+        public byte Max {get;}
+
+        public bool Bounded
+            => Max != 0;
     }
 }
