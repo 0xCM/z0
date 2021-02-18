@@ -68,6 +68,5 @@ namespace Z0
             unpack1x8x32(src, dst.Block(block));
             return ref dst;
         }
-
     }
 }

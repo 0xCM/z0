@@ -27,7 +27,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid16<M, N, T>(z16);
+                => new SubGrid16<M,N,T>(z16);
 
         /// <summary>
         /// Allocates a populated 16-bit subgrid

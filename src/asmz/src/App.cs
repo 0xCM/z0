@@ -465,6 +465,18 @@ namespace Z0.Asm
             Wf.Row($"Loaded {descriptors.Count} descriptors");
         }
 
+        void ShowMemory()
+        {
+            var info = memory.basic();
+            var buffer = text.buffer();
+            buffer.AppendLine(text.property(nameof(info.BaseAddress), info.BaseAddress));
+            buffer.AppendLine(text.property(nameof(info.AllocationBase), info.AllocationBase));
+            buffer.AppendLine(text.property(nameof(info.RegionSize), info.RegionSize));
+            buffer.AppendLine(text.property(nameof(info.StackSize), info.StackSize));
+            buffer.AppendLine(text.property(nameof(info.Protection), info.Protection));
+            Wf.Row(buffer.Emit());
+        }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -473,7 +485,7 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            ProcessCatalog();
+            ShowMemory();
         }
 
         public static void Main(params string[] args)

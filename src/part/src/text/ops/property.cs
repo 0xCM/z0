@@ -7,15 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XTend
+    partial class text
     {
         [MethodImpl(Inline)]
-        public static BitVector<N,T> Row<M,N,T>(this BitGrid64<M,N,T> g, int index)
-            where T : unmanaged
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-                => BitGrid.row(g,index);
+        public static PropertyFormat<T> property<T>(string name, T value, sbyte pad = RP.PropertyPad)
+            => new PropertyFormat<T>(name, value, pad);
     }
 }

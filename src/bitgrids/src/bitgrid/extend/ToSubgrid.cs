@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
-    {   
+    {
         /// <summary>
         /// Creates a subgrid of dimensions 2x12 from a 24-bit bitvector
         /// </summary>

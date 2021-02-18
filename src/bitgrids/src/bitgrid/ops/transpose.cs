@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitGrid
     {
@@ -21,12 +21,11 @@ namespace Z0
             var src = cpu.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {
-                dst.Cell(i) = (byte)cpu.vmask16u(v8u(src));
+                dst.Cell(i) = (byte)cpu.vmask16u(cpu.v8u(src));
                 src = cpu.vsll(src,1);
             }
             return dst.As<T>();
         }
-
 
         [MethodImpl(Inline), Op]
         public static BitGrid64<N4,N16,ulong> transpose2(BitGrid64<N16,N4,ulong> A)
@@ -81,7 +80,6 @@ namespace Z0
         {
             var gT = default(Vector256<ushort>);
             var src = g.Content;
-
             gT = vT16x16step(src, gT, 0, 8);
             gT = vT16x16step(src, gT, 1, 9);
             gT = vT16x16step(src, gT, 2, 10);
@@ -90,7 +88,6 @@ namespace Z0
             gT = vT16x16step(src, gT, 5, 13);
             gT = vT16x16step(src, gT, 6, 14);
             gT = vT16x16step(src, gT, 7, 15);
-
             return load(gT,n16,n16);
         }
     }

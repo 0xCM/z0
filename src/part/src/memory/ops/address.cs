@@ -77,7 +77,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
         public static unsafe MemoryAddress address<T>(T[] src)
-            => pvoid(in first(src));
+            => pvoid(first(src));
 
         /// <summary>
         /// Determines the address of a cell in an array

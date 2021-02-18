@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
@@ -107,7 +107,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
- 
+
         /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>
@@ -121,7 +121,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => g.Data.ToBitString(g.BitCount);
- 
+
          /// <summary>
         /// Converts a grid to an equivalent linear bitstring representation
         /// </summary>

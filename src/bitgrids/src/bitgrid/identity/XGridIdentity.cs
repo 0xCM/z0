@@ -7,8 +7,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static GridKind;
 
     [ApiHost]
@@ -74,7 +74,7 @@ namespace Z0
         {
             var def =  src.GenericDefinition2();
             if(def == typeof(void))
-                return none<GridKind>();
+                return root.none<GridKind>();
 
             if(def == typeof(BitGrid<>))
                 return Z0.GridKind.NumericGeneric;
@@ -107,7 +107,7 @@ namespace Z0
             else if(def == typeof(SubGrid256<,,>))
                 return Z0.GridKind.Subgrid256;
             else
-                return none<GridKind>();
+                return root.none<GridKind>();
         }
 
         [MethodImpl(Inline), Op]

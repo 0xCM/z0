@@ -23,14 +23,6 @@ namespace Z0
         internal readonly SpanBlock256<T> Data;
 
         [MethodImpl(Inline)]
-        public static Bit32 operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
-            => BitGrid.same(g1,g2);
-
-        [MethodImpl(Inline)]
-        public static Bit32 operator !=(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
-            => !BitGrid.same(g1,g2);
-
-        [MethodImpl(Inline)]
         internal BitGrid(in SpanBlock256<T> src)
             => Data = src;
 
@@ -142,5 +134,13 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => BitGrid.same(g1,g2);
+
+        [MethodImpl(Inline)]
+        public static Bit32 operator !=(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
+            => !BitGrid.same(g1,g2);
     }
 }

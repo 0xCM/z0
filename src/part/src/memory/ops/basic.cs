@@ -27,6 +27,5 @@ namespace Z0
 
         [DllImport("kernel32")]
         static unsafe extern IntPtr VirtualQuery(void* address, ref MEMORY_BASIC_INFORMATION buffer, IntPtr length);
-
     }
 }

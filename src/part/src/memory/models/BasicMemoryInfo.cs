@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     public struct BasicMemoryInfo
     {
         public MemoryAddress BaseAddress;

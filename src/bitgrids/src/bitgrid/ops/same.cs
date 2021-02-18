@@ -14,24 +14,24 @@ namespace Z0
         /// <summary>
         /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static bit same<T>(BitGrid32<T> gx, BitGrid32<T> gy)
+        public static bit same<T>(BitGrid32<T> a, BitGrid32<T> b)
             where T : unmanaged
-                => math.eq(gx,gy);
+                => math.eq(a,b);
 
         /// <summary>
         /// Returns 1 if the source grids have identical content and 0 otherwise
         /// </summary>
-        /// <param name="gx">The left grid</param>
-        /// <param name="gy">The right grid</param>
+        /// <param name="a">The left grid</param>
+        /// <param name="b">The right grid</param>
         /// <typeparam name="T">The grid cell type</typeparam>
         [MethodImpl(Inline)]
-        public static bit same<T>(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static bit same<T>(BitGrid64<T> a, BitGrid64<T> b)
             where T : unmanaged
-                => math.eq(gx,gy);
+                => math.eq(a,b);
 
         /// <summary>
         /// Returns 1 if the source grids have identical content and 0 otherwise

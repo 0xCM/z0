@@ -32,6 +32,9 @@ namespace Z0
 
         public string Format()
             => Format(RP.PropertySep);
+
+        public override string ToString()
+            => Format();
     }
 
     public readonly struct PropertyFormat<T> : ITextual
@@ -64,6 +67,8 @@ namespace Z0
          public string Format()
             => Format(RP.PropertySep);
 
+        public override string ToString()
+            => Format();
         [MethodImpl(Inline)]
         public static implicit operator PropertyFormat<T>((string name, T value) src)
             => new PropertyFormat<T>(src.name, src.value);
