@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -13,12 +12,8 @@ namespace Z0
     public readonly struct ApiArchives
     {
         [Op]
-        public static IApiPathProvider ApiPaths(IWfShell wf)
+        public static IApiPathProvider paths(IWfShell wf)
             => ApiPathProvider.create(wf);
-
-        [Op]
-        public static IApiCaptureArchive capture(IWfShell wf)
-            => ApiCaptureArchive.create(wf);
 
         [MethodImpl(Inline), Op]
         public static ApiExtractArchive extract(IWfShell wf)

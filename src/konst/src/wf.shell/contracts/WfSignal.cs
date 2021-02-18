@@ -80,10 +80,6 @@ namespace Z0
         public void Processed<T>(ApiHostUri uri, T content)
             => Raise(processed(Host, Seq.delimit(uri,content), Ct));
 
-        public void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
-            where T : struct
-                => Raise(emittedTable<T>(step, count, dst, Ct));
-
         public void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct
                 => Raise(emittedTable<T>(Host, count, dst, Ct));

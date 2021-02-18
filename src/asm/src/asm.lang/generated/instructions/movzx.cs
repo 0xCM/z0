@@ -8,19 +8,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmMnemonicCode;
     using static AsmMem;
     using static AsmRegs;
 
     partial struct AsmInstructions
     {
-        public readonly struct Movzx : IAsmInstruction<Movzx>
-        {
-            public AsmMnemonicCode Mnemonic => MOVZX;
-
-            public static implicit operator AsmMnemonicCode(Movzx src) => src.Mnemonic;
-        }
-
         /// <summary>
         /// MOVZX
         /// </summary>

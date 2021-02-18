@@ -320,12 +320,13 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format(Line0, monic.Name));
+                var type = monic.Format(AsmMnemonicCase.Captialized);
+                buffer.IndentLine(margin, string.Format(Line0, type));
                 buffer.IndentLine(margin, Line1);
                 margin += 4;
                 buffer.IndentLine(margin, string.Format(Line2, monic.Name));
                 buffer.AppendLine();
-                buffer.IndentLine(margin, string.Format(Line3, monic.Name));
+                buffer.IndentLine(margin, string.Format(Line3, type));
                 margin -= 4;
                 buffer.IndentLine(margin, Line4);
                 buffer.AppendLine();
@@ -455,14 +456,13 @@ namespace Z0.Asm
                 Wf.Row(RP.PageBreak40);
                 if(!c.Validate(errors))
                     Wf.Error(errors.Emit());
-
-
             }
         }
 
-        void TestHexSeqParser()
+        void ListDescriptors()
         {
-
+            var descriptors = ApiCode.descriptors(Wf);
+            Wf.Row($"Loaded {descriptors.Count} descriptors");
         }
 
         public unsafe void Run()
@@ -472,6 +472,7 @@ namespace Z0.Asm
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
+            //ProcessCatalog();
             ProcessCatalog();
         }
 

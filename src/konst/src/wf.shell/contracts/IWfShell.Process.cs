@@ -29,11 +29,6 @@ namespace Z0
             return Ran(flow);
         }
 
-        void Processed<T>(T content)
-        {
-            signal(this).Processed(content);
-        }
-
         void Processed<T>(ApiHostUri uri, T content)
         {
             signal(this).Processed(uri,content);
@@ -42,12 +37,6 @@ namespace Z0
         WfExecToken Processed<T>(WfExecFlow flow, T content)
         {
             signal(this).Processed(content);
-            return Ran(flow);
-        }
-
-        WfExecToken Processed<T>(WfExecFlow flow, ApiHostUri uri, T content)
-        {
-            signal(this).Processed(uri,content);
             return Ran(flow);
         }
 

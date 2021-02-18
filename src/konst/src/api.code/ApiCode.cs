@@ -69,17 +69,6 @@ namespace Z0
             return buffer.ToArray();
         }
 
-        public static ApiMemberCode match(IGlobalApiCatalog src, ApiCodeBlock code)
-        {
-            if(src.FindMethod(code.OpUri, out var method))
-            {
-                var member = new ApiMember(code.OpUri, method, default, method.MethodHandle.GetFunctionPointer());
-                return new ApiMemberCode(member, code);
-            }
-            else
-                return ApiMemberCode.Empty;
-        }
-
         [MethodImpl(Inline), Op]
         public static ApiPartCode combine(PartId part, ApiHostCode[] src)
             => new ApiPartCode(part,src);
@@ -129,8 +118,7 @@ namespace Z0
                 var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
                 var flow = wf.EmittingFile(dst);
                 var svc = ApiIndex.service(wf);
-                var api = svc.IndexApiBlocks();
-                emit(wf, api, dst);
+                index(wf, svc.IndexApiBlocks(), dst);
                 wf.EmittedFile(flow, dst);
                 return dst;
             }
@@ -141,14 +129,6 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op]
-        public static void emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            if(count != 0)
-                Records.emit(src,dst);
-        }
-
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
@@ -157,28 +137,35 @@ namespace Z0
 
             if(count != 0)
             {
-                var rows = ApiCode.rows(uri, src);
-                if(rows.Length != count)
-                {
-                    wf.Error($"The distilled row count of {rows.Length} does not match the input count of {count}");
-                }
+                var content = rows(uri, src);
+                if(content.Length != count)
+                    wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
                 else
                 {
-                    var f1 = wf.Db().ApiHexFile(uri);
-                    wf.EmittingTable<ApiHexRow>(f1);
-                    ApiCode.emit(rows, f1);
+                    var a = wf.Db().ApiHexFile(uri);
+                    var fa = wf.EmittingTable<ApiHexRow>(a);
+                    emit(content, a);
+                    wf.EmittedTable(fa,count);
 
-                    var f2 = wf.Db().ParsedExtractFile(uri);
-                    wf.EmittingTable<ApiHexRow>(f2);
-                    ApiCode.emit(rows, f2);
+                    var b = wf.Db().ParsedExtractFile(uri);
+                    var fb = wf.EmittingTable<ApiHexRow>(b);
+                    emit(content, b);
+                    wf.EmittedTable(fb,count);
                 }
-                return rows;
+                return content;
             }
             else
                 return Index<ApiHexRow>.Empty;
         }
 
-        public static Outcome emit(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
+        static void emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            if(count != 0)
+                Records.emit(src, dst);
+        }
+
+        static Outcome index(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
         {
             var svc = ApiIndex.service(wf);
             Array.Sort(src.Blocks.Storage);
@@ -206,89 +193,39 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
-            var archive = ApiArchives.capture(wf);
-            var files = archive.ApiHexFiles().View;
+            var paths = ApiArchives.paths(wf);
+            var files = paths.ApiHexFiles().View;
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)
             {
-                wf.Warn($"No code found");
+                wf.Warn($"No code found in {paths.ApiHexRoot()}");
                 return empty;
             }
+
             var count = files.Length;
-
-            wf.Status($"Processing {count} api hex files");
-
+            var flow = wf.Running(Msg.ProcessingApiHexFiles.Format(count));
             var dst = root.list<ApiCodeDescriptor>();
             for(var i=0u; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
-                wf.Processing(file, "apihex");
-                var content = ApiCode.hexrows(file).View;
-                var blocks = content.Length;
+                var inner = wf.Processing(file, "apihex");
+                var rows = hexrows(file).View;
+                var blocks = rows.Length;
                 if(blocks == 0)
                     wf.Warn($"No content found in {file.ToUri()}");
                 else
                 {
-                    wf.Status($"Accumulating {blocks} descriptors from {file.ToUri()}");
                     var buffer = alloc<ApiCodeDescriptor>(blocks);
                     var target = span(buffer);
                     for(var j=0u; j<blocks; j++)
-                        store(skip(content,j), ref seek(target,j));
+                        store(skip(rows,j), ref seek(target,j));
                     dst.AddRange(buffer);
+                    wf.Processed(inner, file, blocks);
                 }
             }
 
-            wf.Status($"Accumulated {dst.Count} descriptors");
+            wf.Ran(flow, $"Accumulated a total of {dst.Count} descriptors");
             return dst.OrderBy(x => x.Base).ToArray();
-        }
-
-        public static Index<ApiCodeDescriptor> descriptors(ReadOnlySpan<FS.FilePath> files)
-        {
-            var dst = root.list<ApiCodeDescriptor>();
-            var count = files.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var file = ref skip(files,i);
-                var rows = hexrows(file);
-                if(rows.Count != 0)
-                {
-                    var content = rows.View;
-                    var kBlock = content.Length;
-                    var buffer = alloc<ApiCodeDescriptor>(kBlock);
-                    var target = span(buffer);
-                    for(var j=0u; j<kBlock; j++)
-                        store(skip(content,j), ref seek(target,j));
-                    dst.AddRange(buffer);
-
-                }
-
-            }
-            return dst.OrderBy(x => x.Base).ToArray();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ApiCodeDescriptor descriptor(in ApiCodeBlock src)
-        {
-            var dst = new ApiCodeDescriptor();
-            dst.Part = src.Uri.Part;
-            dst.Host = src.Uri.Host.Name;
-            dst.Base = src.Code.BaseAddress;
-            dst.Size = src.Code.Length;
-            dst.Uri = src.Identifier;
-            dst.Encoded = src.Encoded;
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref ApiCodeDescriptor store(in ApiCodeBlock src, ref ApiCodeDescriptor dst)
-        {
-            dst.Part = src.Uri.Part;
-            dst.Host = src.Uri.Host.Name;
-            dst.Base = src.Code.BaseAddress;
-            dst.Size = src.Code.Length;
-            dst.Uri = src.Identifier;
-            dst.Encoded = src.Encoded;
-            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -298,7 +235,7 @@ namespace Z0
             dst.Host = src.Uri.Host.Name;
             dst.Base = src.Address;
             dst.Size = src.Data.Length;
-            dst.Uri = src.Uri.OpId.Identifier;
+            dst.Uri = src.Uri.UriText;
             dst.Encoded = src.Data;
             return ref dst;
         }
@@ -330,5 +267,13 @@ namespace Z0
             dst.Data = src.Encoded;
             return dst;
         }
+    }
+
+    partial struct Msg
+    {
+        public static RenderPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
+
+       public static RenderPattern<Count,FS.FileUri> CollectedApiHexDescriptors => "Collected {0} api hex blocks from {1}";
+
     }
 }

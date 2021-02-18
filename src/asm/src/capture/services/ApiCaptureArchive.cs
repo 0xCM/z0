@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     class ApiCaptureArchive : WfService<ApiCaptureArchive, IApiCaptureArchive>, IApiCaptureArchive
     {
         public ApiCaptureArchive()
@@ -22,9 +17,14 @@ namespace Z0
                 Clear(part);
         }
 
-        IApiCaptureArchive Archive
-            => this;
+        IApiPathProvider Paths;
 
+        protected override void OnInit()
+        {
+            base.OnInit();
+
+            Paths = ApiArchives.paths(Wf);
+        }
 
         void Clear(PartId part)
         {
@@ -53,7 +53,7 @@ namespace Z0
         Outcome<uint> ClearExtracts(PartId part)
         {
             var kind = FileExtensions.XCsv;
-            var files = Archive.ApiExtractFiles(part);
+            var files = Paths.RawExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -65,7 +65,7 @@ namespace Z0
         Outcome<uint> ClearParsed(PartId part)
         {
             var kind = FileExtensions.PCsv;
-            var files = Archive.ParsedExtractFiles(part);
+            var files = Paths.ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -77,7 +77,7 @@ namespace Z0
         Outcome<uint> ClearAsm(PartId part)
         {
             var kind = FileExtensions.Asm;
-            var files = Archive.AsmFiles(part);
+            var files = Paths.AsmFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -89,7 +89,7 @@ namespace Z0
         Outcome<uint> ClearHex(PartId part)
         {
             var kind = FileExtensions.Hex;
-            var files = Archive.ApiHexFiles(part);
+            var files = Paths.ApiHexFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -101,7 +101,7 @@ namespace Z0
         Outcome<uint> ClearCil(PartId part)
         {
             var kind = FileExtensions.IlData;
-            var files = Archive.CilDataFiles(part);
+            var files = Paths.CilDataFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);

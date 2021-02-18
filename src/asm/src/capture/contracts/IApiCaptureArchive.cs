@@ -2,16 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    partial struct AsmInstructions
+    public interface IApiCaptureArchive : IWfService, IFileExtensions
     {
-
-        [Op]
-        public static Call call()
-            => default;
+        void Clear();
     }
 }

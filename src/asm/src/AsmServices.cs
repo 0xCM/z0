@@ -108,7 +108,7 @@ namespace Z0.Asm
             => ApiIndexDecoder.create(Wf);
 
         public IAsmImmWriter ImmWriter(ApiHostUri host, FS.FolderPath dst)
-            => new AsmImmWriter(host, Asm.Formatter, dst);
+            => new AsmImmWriter(Wf, host, Asm.Formatter, dst);
 
         [MethodImpl(Inline), Op]
         public IAsmFormatter Formatter()

@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using static DbNames;
+    using static Part;
 
     partial interface IApiPathProvider
     {
@@ -31,10 +32,11 @@ namespace Z0
         FS.FolderPath ImmSubDir(FS.FolderName name)
             => (ImmRoot() + name);
 
-        FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + ApiHexFileName(id);
+        FS.FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, Hex);
 
-        FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id)
-            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + AsmFileName(id);
+        FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
+            => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, Asm);
+
     }
 }

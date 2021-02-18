@@ -9,7 +9,12 @@ namespace Z0
     partial class XApi
     {
         [Op]
-        public static FileName ToFileName(this OpIdentity src, FS.FileExt ext)
+        public static FS.FileName ToFileName(this OpIdentity src, FS.FileExt ext)
             => FS.file(LegalIdentityBuilder.file(src), ext);
+
+        [Op]
+        public static FS.FileName ToFileName(this OpIdentity src, string suffix, FS.FileExt ext)
+            => FS.file(LegalIdentityBuilder.file(src) + suffix, ext);
+
     }
 }

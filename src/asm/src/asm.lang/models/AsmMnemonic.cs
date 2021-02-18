@@ -42,6 +42,25 @@ namespace Z0.Asm
         public string Format()
             => Name.Format();
 
+        [MethodImpl(Inline)]
+        public string Format(AsmMnemonicCase @case)
+        {
+            if(IsEmpty)
+                return EmptyString;
+
+            var data = Name.Content;
+            switch(@case)
+            {
+                case AsmMnemonicCase.Captialized:
+                    return string.Format("{0}{1}",Char.ToUpperInvariant(Name.Content[0]), data.ToLowerInvariant().Substring(1));
+                case AsmMnemonicCase.Lowercase:
+                    return data.ToLowerInvariant();
+                case AsmMnemonicCase.Uppercase:
+                    return data.ToUpperInvariant();
+            }
+            return data;
+        }
+
         public override string ToString()
             => Format();
 

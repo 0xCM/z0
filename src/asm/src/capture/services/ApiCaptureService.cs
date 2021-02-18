@@ -59,9 +59,10 @@ namespace Z0
             Wf.Ran(flow, count);
 
         }
+
         void ClearArchive()
         {
-            using var archive = ApiArchives.capture(Wf);
+            using var archive = ApiCaptureArchive.create(Wf);
             archive.Clear();
         }
 

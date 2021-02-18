@@ -19,22 +19,22 @@ namespace Z0.Asm
 
         readonly ICilFunctionFormatter CilFormatter;
 
-        readonly IApiHostPaths HostArchive;
+        readonly IApiPathProvider Paths;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)
+        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)
         {
             Uri = host;
             ImmRoot = root;
             AsmFormatter = formatter;
-            HostArchive = ApiArchives.host(FS.dir(root.Name), host);
             CilFormatter =  Cil.formatter();
+            Paths = ApiArchives.paths(wf);
         }
 
-        public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append)
+        public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
-            var dst = HostArchive.AsmImmPath(Uri.Owner, Uri, id);
-            using var writer = dst.Writer();
+            var dst = Paths.AsmImmPath(Uri.Owner, Uri, id, refined);
+            using var writer = dst.Writer(append);
             for(var i=0; i<src.Length; i++)
             {
                 ref readonly var f = ref src[i];
@@ -44,10 +44,10 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
+        public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
-            var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
-            ApiCodeExtracts.emit(src.Map(x => x.Code), FS.path(path.Name),append);
+            var path = Paths.HexImmPath(Uri.Owner, Uri, id, refined);
+            ApiCodeExtracts.emit(src.Map(x => x.Code), FS.path(path.Name), append);
             return path;
         }
     }
