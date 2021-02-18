@@ -10,12 +10,11 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static AsmSigTokens;
-    using static AsmInstructions;
 
     partial struct AsmCases
     {
         [Op]
-        public static Index<CallRel32> load(Call call, Rel32 rel32)
+        public static Index<CallRel32> callrel32(Rel32 rel32)
         {
             var caller = new AsmCaller(0x7ffe6818a0e0ul, asm.symbol("canonical/abi2/Run"));
             var cases = alloc<CallRel32>(4);

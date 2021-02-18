@@ -86,7 +86,7 @@ namespace Z0
         void IndentLine<T>(uint margin, T src)
         {
             var indent = new string(Chars.Space, (int)margin);
-            AppendLine(string.Format("{0}{1}",indent, src));
+            AppendLine(string.Format("{0}{1}", indent, src));
         }
 
         void AppendDelimited(char delimiter, params string[] src)

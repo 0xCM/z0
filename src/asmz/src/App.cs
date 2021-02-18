@@ -297,46 +297,73 @@ namespace Z0.Asm
 
             public static implicit operator AsmMnemonicCode(Movzx src) => src.Mnemonic;
         }
+
+        /// <summary>
+        /// MOVZX
+        /// </summary>
+        [Op]
+        public static Movzx movzx()
+            => default;
+
+
         */
 
+        string FactoryName(AsmMnemonic src)
+        {
+            var identifier = src.Format(AsmMnemonicCase.Lowercase);
+            return identifier switch{
+                "in" => "@in",
+                "out" => "@out",
+                "int" => "@int",
+                _ => identifier
+            };
+
+        }
+        string TypeName(AsmMnemonic src)
+            => src.Format(AsmMnemonicCase.Captialized);
+
+        //public static implicit operator AsmMnemonic(Aad src) => AsmMnemonics.AAD;
         void GenerateAsmStructs(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
-            const string Line0 = "public readonly struct {0} : IAsmInstruction<{0}>";
-            const string Line1 = "{";
-            const string Line2 = "public AsmMnemonicCode Mnemonic => AsmMnemonicCode.{0};";
-            const string Line3 = "public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;";
-            const string Line4 = "}";
+            const byte Indent = 4;
+            const string Open = "{";
+            const string Close = "}";
 
             var buffer = text.buffer();
             var margin = 0u;
             buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine("{");
-            margin += 4;
-            buffer.IndentLine(margin, "public readonly partial struct AsmInstructions");
-            buffer.IndentLine(margin, "{");
-            margin += 4;
+            buffer.AppendLine(Open);
+            margin += Indent;
+            buffer.IndentLine(margin, "public readonly struct AsmInstructions");
+            buffer.IndentLine(margin, Open);
+            margin += Indent;
 
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var monic = ref skip(src,i);
-                var type = monic.Format(AsmMnemonicCase.Captialized);
-                buffer.IndentLine(margin, string.Format(Line0, type));
-                buffer.IndentLine(margin, Line1);
-                margin += 4;
-                buffer.IndentLine(margin, string.Format(Line2, monic.Name));
+                var type = TypeName(monic);
+                var factory = FactoryName(monic);
+                buffer.IndentLine(margin, string.Format("public readonly struct {0} : IAsmInstruction<{0}>", type));
+                buffer.IndentLine(margin, Open);
+                margin += Indent;
+                buffer.IndentLine(margin, string.Format("public AsmMnemonicCode Mnemonic => AsmMnemonicCode.{0};", monic.Name));
                 buffer.AppendLine();
-                buffer.IndentLine(margin, string.Format(Line3, type));
-                margin -= 4;
-                buffer.IndentLine(margin, Line4);
+                buffer.IndentLine(margin, string.Format("public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;", type));
+                buffer.AppendLine();
+                buffer.IndentLine(margin, string.Format("public static implicit operator AsmMnemonic({0} src) => AsmMnemonics.{1};", type, monic.Name));
+                margin -= Indent;
+                buffer.IndentLine(margin, Close);
+                buffer.AppendLine();
+                buffer.IndentLine(margin, string.Format("public static {0} {1}() => default;", type, factory));
                 buffer.AppendLine();
             }
 
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
+            margin -= Indent;
+            buffer.IndentLine(margin, Close);
 
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
+            margin -= Indent;
+            buffer.IndentLine(margin, Close);
 
             using var writer = dst.Writer();
             writer.Write(Dev.SourceCodeHeader);
@@ -446,7 +473,7 @@ namespace Z0.Asm
 
         void TestRel32()
         {
-            var cases = AsmCases.load(AsmInstructions.call(), AsmSigTokenList.Rel32).View;
+            var cases = AsmCases.callrel32(AsmSigTokenList.Rel32).View;
             var count = cases.Length;
             var errors = text.buffer();
             for(var i=0; i< count; i++)
@@ -485,7 +512,7 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            ShowMemory();
+            ProcessCatalog();
         }
 
         public static void Main(params string[] args)

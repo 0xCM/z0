@@ -8,6 +8,8 @@ namespace Z0.Lang
 
     partial struct CSharp
     {
+
+
         [Op]
         public static Abstract @abstract()
             => default;
