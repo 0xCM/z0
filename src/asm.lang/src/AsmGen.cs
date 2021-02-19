@@ -4,17 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     [ApiHost]
     public sealed partial class AsmGen : WfService<AsmGen,AsmGen>
     {
-        public string StatementFactories(Index<AsmSpecInfo> src)
+        [Op]
+        public void GenerateModels(Index<AsmMnemonic> src)
         {
-            return EmptyString;
+            var flow = Wf.Running();
+            EmitInstructionContracts();
+            EmitMonicExpressions(src);
+            EmitMonicEnum(src);
+            EmitInstructionTypes(src);
+            Wf.Ran(flow);
         }
+
+        const byte Indent = 4;
+
+        const string Open = "{";
+
+        const string Close = "}";
     }
 }

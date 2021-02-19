@@ -228,67 +228,6 @@ namespace Z0.Asm
             }
         }
 
-        void GenerateCodes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
-        {
-            var buffer = text.buffer();
-            var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine("{");
-            margin += 4;
-            buffer.IndentLine(margin, "public enum AsmMnemonicCode : ushort");
-            buffer.IndentLine(margin, "{");
-            margin += 4;
-
-            buffer.IndentLine(margin, "None = 0,");
-            buffer.AppendLine();
-
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Name, i+1));
-                buffer.AppendLine();
-            }
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceCodeHeader);
-            writer.Write(buffer.Emit());
-        }
-
-        void GenerateExpressions(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
-        {
-            var buffer = text.buffer();
-            var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine("{");
-            margin += 4;
-            buffer.IndentLine(margin, "public readonly struct AsmMnemonics");
-            buffer.IndentLine(margin, "{");
-            margin += 4;
-
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var monic = ref skip(src,i);
-                buffer.IndentLine(margin, string.Format("public static AsmMnemonic {0} => nameof({0});", monic.Name));
-                buffer.AppendLine();
-            }
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            margin -= 4;
-            buffer.IndentLine(margin, "}");
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceCodeHeader);
-            writer.Write(buffer.Emit());
-        }
-
         /*
         public readonly struct Movzx : IAsmInstruction<Movzx>
         {
@@ -307,78 +246,11 @@ namespace Z0.Asm
 
         */
 
-        string FactoryName(AsmMnemonic src)
-        {
-            var identifier = src.Format(AsmMnemonicCase.Lowercase);
-            return identifier switch{
-                "in" => "@in",
-                "out" => "@out",
-                "int" => "@int",
-                _ => identifier
-            };
-
-        }
-        string TypeName(AsmMnemonic src)
-            => src.Format(AsmMnemonicCase.Captialized);
-
-        //public static implicit operator AsmMnemonic(Aad src) => AsmMnemonics.AAD;
-        void GenerateAsmStructs(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
-        {
-            const byte Indent = 4;
-            const string Open = "{";
-            const string Close = "}";
-
-            var buffer = text.buffer();
-            var margin = 0u;
-            buffer.AppendLine("namespace Z0.Asm");
-            buffer.AppendLine(Open);
-            margin += Indent;
-            buffer.IndentLine(margin, "public readonly struct AsmInstructions");
-            buffer.IndentLine(margin, Open);
-            margin += Indent;
-
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var monic = ref skip(src,i);
-                var type = TypeName(monic);
-                var factory = FactoryName(monic);
-                buffer.IndentLine(margin, string.Format("public readonly struct {0} : IAsmInstruction<{0}>", type));
-                buffer.IndentLine(margin, Open);
-                margin += Indent;
-                buffer.IndentLine(margin, string.Format("public AsmMnemonicCode Mnemonic => AsmMnemonicCode.{0};", monic.Name));
-                buffer.AppendLine();
-                buffer.IndentLine(margin, string.Format("public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;", type));
-                buffer.AppendLine();
-                buffer.IndentLine(margin, string.Format("public static implicit operator AsmMnemonic({0} src) => AsmMnemonics.{1};", type, monic.Name));
-                margin -= Indent;
-                buffer.IndentLine(margin, Close);
-                buffer.AppendLine();
-                buffer.IndentLine(margin, string.Format("public static {0} {1}() => default;", type, factory));
-                buffer.AppendLine();
-            }
-
-            margin -= Indent;
-            buffer.IndentLine(margin, Close);
-
-            margin -= Indent;
-            buffer.IndentLine(margin, Close);
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceCodeHeader);
-            writer.Write(buffer.Emit());
-
-        }
 
         void ProcessCatalog()
         {
             //var records = Etl.TransformSource();
             var monics = Etl.Mnemonics();
-            var maxlen = monics.Select(x => x.Name.Length).Max();
-
-            GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
-            GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
-            GenerateAsmStructs(monics, Db.Doc("AsmInstructions", FileExtensions.Cs));
         }
 
 
@@ -510,7 +382,8 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            ProcessCatalog();
+            var monics = Etl.Mnemonics();
+            AsmGen.create(Wf).GenerateModels(monics);
         }
 
         public static void Main(params string[] args)

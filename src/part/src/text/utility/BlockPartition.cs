@@ -8,8 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Part;
-
     partial class XText
     {
         /// <summary>

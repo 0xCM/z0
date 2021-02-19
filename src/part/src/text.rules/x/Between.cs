@@ -4,16 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Text;
+    using static TextRules;
 
     partial class XText
     {
         [TextUtility]
-        public static void Append<T>(this StringBuilder sb, T content, Padding pad)
-            where T : ITextual
-        {
-            sb.Append($"{content.Format()}".PadRight((int)pad));
-        }
+        public static string Between(this string src, char left, char right)
+            => Parse.between(src, left, right);
     }
 }

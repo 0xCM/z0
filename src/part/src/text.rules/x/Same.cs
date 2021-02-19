@@ -13,11 +13,11 @@ namespace Z0
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [TextUtility]
-        public static bool Same(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-             => Query.equals(lhs, rhs);
+        public static bool Same(this ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+             => Query.equals(a, b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise

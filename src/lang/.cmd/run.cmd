@@ -1,1 +1,0 @@
-dotnet run %ZDev%\src\lang\z0.lang.csproj -c Release

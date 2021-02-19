@@ -8,8 +8,4 @@
       <ProjectReference Include="$(Part)" />
   </ItemGroup>
 
-   <ItemGroup>
-    <EmbeddedResource Include="assets/**/*.*" />
-   </ItemGroup>
-
 </Project>

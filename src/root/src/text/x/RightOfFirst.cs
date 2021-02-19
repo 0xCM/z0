@@ -4,31 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     partial class XText
     {
         /// <summary>
         /// Gets the string to the right of, but not including, the first instance of a specified character
         /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="c">The character</param>
+        /// <param name="src">The string to search</param>
+        /// <param name="match">The character to match</param>
         [TextUtility]
-        public static string RightOfFirst(this string s, char c)
-            => s.RightOfIndex(s.IndexOf(c));
+        public static string RightOfFirst(this string src, char match)
+            => src.RightOfIndex(src.IndexOf(match));
 
         /// <summary>
         /// Gets the string to the right of, but not including, a specified substring
         /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="substring">The substring to match</param>
+        /// <param name="src">The string to search</param>
+        /// <param name="match">The substring to match</param>
         [TextUtility]
-        public static string RightOfFirst(this string s, string substring)
+        public static string RightOfFirst(this string src, string match)
         {
-            var idx = s.IndexOf(substring);
+            var idx = src.IndexOf(match);
             if (idx != -1)
-                return s.RightOfIndex(idx + substring.Length - 1);
+                return src.RightOfIndex(idx + match.Length - 1);
             else
                 return string.Empty;
         }

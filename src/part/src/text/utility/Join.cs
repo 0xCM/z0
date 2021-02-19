@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static TextRules;
-
     partial class XText
     {
         [TextUtility]

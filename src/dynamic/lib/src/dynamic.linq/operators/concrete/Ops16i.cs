@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct DynamicOps
     {
-        public class Ops16i
+        public readonly struct Ops16i
         {
             public static Expression<Func<short, short>> Abs
                 => f((short x) => x);

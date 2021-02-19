@@ -1,5 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// Generated   :  20210219.04.04.06.5130
+// Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
@@ -1803,5 +1804,6 @@ namespace Z0.Asm
         public static AsmMnemonic XSAVEOPT => nameof(XSAVEOPT);
 
         public static AsmMnemonic XSAVEOPT64 => nameof(XSAVEOPT64);
+
     }
 }

@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
     partial class XText
     {
         /// <summary>
-        /// Removes a substring from the source string if it exists
+        /// Encloses text between less than and greater than characters
         /// </summary>
-        /// <param name="s">The string to manipulate</param>
-        /// <param name="substring">The substring to remove</param>
+        /// <param name="content">The content to enclose</param>
         [TextUtility]
-        public static string Remove(this string s, string substring)
-            => s.Replace(substring, EmptyString);
+        public static string Angled(this string content)
+            => String.IsNullOrWhiteSpace(content) ? "" : $"<{content}>";
     }
 }

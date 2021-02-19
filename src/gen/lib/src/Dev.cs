@@ -163,12 +163,20 @@ namespace Z0
             return ref dst;
         }
 
-        public const string SourceCodeHeader =
+        public static string SourceHeader(bool ts = true) => ts ?
+$@"//-----------------------------------------------------------------------------
+// Generated   :  {root.timestamp()}
+// Copyright   :  (c) Chris Moore, 2021
+// License     :  MIT
+//-----------------------------------------------------------------------------
+"
+:
+
 @"//-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
+// Generated
+// Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
 ";
-
     }
 }

@@ -12,11 +12,11 @@ namespace Z0
        /// <summary>
         /// Gets the string to the left of, but not including, the first instance of a specified character
         /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="c">The character</param>
+        /// <param name="src">The string to search</param>
+        /// <param name="match">The character</param>
         [TextUtility]
-        public static string LeftOfFirst(this string s, char c)
-            => s.Substring(0, root.apply(s.IndexOf(c), idx => idx == -1 ? s.Length - 1 : idx));
+        public static string LeftOfFirst(this string src, char match)
+            => src.Substring(0, Root.apply(src.IndexOf(match), idx => idx == -1 ? src.Length - 1 : idx));
 
         /// <summary>
         /// Gets the string to the left of, but not including, a specified substring

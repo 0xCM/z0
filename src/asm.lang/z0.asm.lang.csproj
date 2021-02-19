@@ -8,8 +8,8 @@
       <ProjectReference Include="$(AsmLangG)" />
       <ProjectReference Include="$(Konst)" />
       <ProjectReference Include="$(BitCore)" />
+      <ProjectReference Include="$(Gen)" />
   </ItemGroup>
-
 
    <ItemGroup>
     <EmbeddedResource Include="assets/**/*.*" />

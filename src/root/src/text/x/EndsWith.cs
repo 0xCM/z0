@@ -9,29 +9,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     partial class XText
     {
         /// <summary>
         /// Determines whether a string ends with a specific character
         /// </summary>
-        /// <param name="s">The string to search</param>
-        /// <param name="c">The character to match</param>
+        /// <param name="src">The string to search</param>
+        /// <param name="match">The character to match</param>
         [TextUtility]
-        public static bool EndsWith(this string s, char c)
-            => ! string.IsNullOrWhiteSpace(s) ? s.EndsWith(c.ToString()) : false;
+        public static bool EndsWith(this string src, char match)
+            => ! string.IsNullOrWhiteSpace(src) ? src.EndsWith(match.ToString()) : false;
 
         /// <summary>
         /// Determines whether a string terminates with a value from a supplied set
         /// </summary>
         /// <param name="src">The string to examine</param>
-        /// <param name="values">The characters for which to search</param>
+        /// <param name="matches">The characters for which to search</param>
         [TextUtility]
-        public static bool EndsWithAny(this string src, IEnumerable<string> values)
+        public static bool EndsWithAny(this string src, IEnumerable<string> matches)
         {
-            foreach (var v in values)
-                if (src.EndsWith(v))
+            foreach (var match in matches)
+                if (src.EndsWith(match))
                     return true;
             return false;
         }
@@ -39,9 +39,9 @@ namespace Z0
         /// <summary>
         /// Determines whether a string ends with a digit
         /// </summary>
-        /// <param name="s">The string to search</param>
+        /// <param name="src">The string to search</param>
         [MethodImpl(Inline), TextUtility]
-        public static bool EndsWithDigit(this string s)
-            => ! string.IsNullOrWhiteSpace(s) ? Char.IsDigit(s.Last()) : false;
+        public static bool EndsWithDigit(this string src)
+            => !string.IsNullOrWhiteSpace(src) ? Char.IsDigit(src.Last()) : false;
     }
 }

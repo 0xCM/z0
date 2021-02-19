@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XText
     {
         /// <summary>
         /// Gets the string to the left of, but not including, a specified index
         /// </summary>
-        /// <param name="s">The string to search</param>
+        /// <param name="src">The string to search</param>
         /// <param name="idx">The index</param>
         [TextUtility]
-        public static string LeftOfIndex(this string s, int idx)
-            => (idx >= s.Length - 1) ? EmptyString : s.Substring(0, idx);
+        public static string LeftOfIndex(this string src, int idx)
+            => (idx >= src.Length - 1) ? EmptyString : src.Substring(0, idx);
     }
 }

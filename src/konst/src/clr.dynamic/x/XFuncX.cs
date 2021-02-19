@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq.Expressions;
-    using System.Runtime.CompilerServices;
 
     using static Part;
 
@@ -15,6 +14,7 @@ namespace Z0
     public static partial class XFuncX
     {
         const NumericKind Closure = UnsignedInts;
+
         public static NamedValue<T> Evaluate<T>(this Expression<Func<T>> fx)
             => LinqXPress.evaluate(fx);
 

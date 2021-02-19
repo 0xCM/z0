@@ -7,16 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     partial class XText
     {
         [TextUtility]
-        public static string LeftOfLast(this string s, string match)
+        public static string LeftOfLast(this string src, string match)
         {
-            var idx = s.LastIndexOf(match);
+            var idx = src.LastIndexOf(match);
             if (idx != -1)
-                return s.Substring(0, idx);
+                return src.Substring(0, idx);
             else
                 return string.Empty;
         }
@@ -24,14 +22,14 @@ namespace Z0
         /// <summary>
         /// Retrieves the substring that precedes the last occurrence of a marker
         /// </summary>
-        /// <param name="s">The string to search</param>
+        /// <param name="src">The string to search</param>
         /// <param name="match">The substring to match</param>
         [TextUtility]
-        public static string LeftOfLast(this string s, char match)
+        public static string LeftOfLast(this string src, char match)
         {
-            var idx = s.LastIndexOf(match);
+            var idx = src.LastIndexOf(match);
             if (idx != -1)
-                return s.Substring(0, idx);
+                return src.Substring(0, idx);
             else
                 return string.Empty;
         }

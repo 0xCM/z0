@@ -32,7 +32,10 @@ namespace Z0
             => DevRoot() + FS.folder("src") + FS.folder("z0." + id);
 
         FS.FolderPath PartDir(PartId id)
-            => DevRoot() + FS.folder("src") + FS.folder("z0." + id.Componentize().Join('.'));
+            => DevRoot() + FS.folder("src") + FS.folder(id.Componentize().Join('.'));
+
+        FS.FilePath SourceFile(PartId id, FS.FileName name)
+            => PartDir(id) + FS.folder("src") + name;
 
         FS.FolderPath DevDataRoot()
             => DevRoot() +FS.folder(data);

@@ -13,7 +13,7 @@ namespace Z0
     public readonly partial struct Root
     {
         [MethodImpl(Inline)]
-        internal static ref T @as<S,T>(in S src)
+        public static ref T @as<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
 
         /// <summary>
@@ -27,106 +27,21 @@ namespace Z0
         public static uint hash(PartId src)
             => (uint)src;
 
-        [MethodImpl(Inline), Op]
-        public static bool isSvc(PartId a)
-            => (a & PartId.Svc) != 0;
-
-        [MethodImpl(Inline), Op]
-        public static bool isTest(PartId a)
-            => (a & PartId.Test) != 0;
-
         public static T[] array<T>(params T[] src)
             => src;
 
-        [Op]
-        public static bool test(Assembly src)
-            => Attribute.IsDefined(src, typeof(PartIdAttribute));
-
         /// <summary>
-        /// Retrieves the part identifier, if any, of a specified assembly
+        /// Applies a function to a value
         /// </summary>
-        /// <param name="src">The source assembly</param>
-        public static PartId id(Assembly src)
-        {
-            if(src != null && test(src))
-                return ((PartIdAttribute)Attribute.GetCustomAttribute(src, typeof(PartIdAttribute))).Id;
-            else
-                return PartId.None;
-        }
+        /// <param name="x">The source value</param>
+        /// <param name="f">The function to apply</param>
+        /// <typeparam name="X">The source value type</typeparam>
+        /// <typeparam name="Y">The output value type</typeparam>
+         [MethodImpl(Inline)]
+         public static Y apply<X,Y>(X x, Func<X,Y> f)
+            => f(x);
 
-        [MethodImpl(Inline), Op]
-        public static PartId withoutTest(PartId a)
-            => a & ~ PartId.Test;
 
-        [MethodImpl(Inline), Op]
-        public static PartId withTest(PartId a)
-            => a | PartId.Test;
-
-        [MethodImpl(Inline), Op]
-        public static PartId withoutSvc(PartId a)
-            => a & ~ PartId.Svc;
-
-        [MethodImpl(Inline), Op]
-        public static PartId withSvc(PartId a)
-            => a | PartId.Svc;
-
-        [MethodImpl(Inline), Op]
-        public static PartId @base(PartId a)
-            => withoutTest(withoutSvc(a));
-
-        [Op]
-        public static string name(Assembly src)
-            => src.GetName().Name;
-
-        [Op]
-        public static string format(PartId src)
-        {
-            var baseId = @base(src);
-            var dst = baseId.ToString().ToLower();
-            if(isTest(src))
-                return dst + TestSuffix;
-            else if(isSvc(src))
-                return dst + SvcSuffix;
-            else
-                return dst + BaseSuffix;
-        }
-
-        [Op]
-        public static string format(PartId src, byte pad)
-            => string.Format("{0,-" + pad.ToString() + "}", format(src));
-
-        [Op]
-        public static string[] componentize(PartId src)
-        {
-            var components = new List<string>();
-            var current = EmptyString;
-            var literal = @base(src).ToString();
-            var length = literal.Length;
-            for(var i=0; i<length; i++)
-            {
-                var c = literal[i];
-                if(i == 0)
-                    current += c;
-                else
-                {
-                    if(Char.IsLower(c))
-                        current += c;
-                    else
-                    {
-                        if(!string.IsNullOrEmpty(current))
-                        {
-                            components.Add(current);
-                            current = EmptyString;
-                            current += Char.ToLowerInvariant(c);
-                        }
-                    }
-                }
-            }
-
-            if(isTest(src))
-                components.Add("test");
-            return components.ToArray();
-        }
 
         [MethodImpl(Inline), Op]
         public static string format(ExternId id)
@@ -143,6 +58,13 @@ namespace Z0
 
     [ApiHost]
     public static partial class XTend
+    {
+        const NumericKind Closure = Root.UnsignedInts;
+
+    }
+
+    [ApiHost]
+    public static partial class XText
     {
         const NumericKind Closure = Root.UnsignedInts;
 

@@ -1,8 +1,6 @@
 echo off
 
-set ConfigPath=%ZDev%\src\%ProjectId%\.cmd\config.cmd
-echo ConfigPath:%ConfigPath%
-
-call %ConfigPath%
+set ProjectPath=%ZDev%\src\%ProjectId%\z0.%ProjectId%.csproj
+echo ProjectPath:%ProjectPath%
 
 dotnet build %ProjectPath% -c Release

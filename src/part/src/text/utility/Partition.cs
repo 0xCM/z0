@@ -19,18 +19,20 @@ namespace Z0
         public static IEnumerable<string> Partition(this string src, int maxlen)
         {
             Span<char> buffer = stackalloc char[maxlen];
-            for(int i = 0, j=0; i< src.Length; i++, j++)
+            for(int i = 0, j=0; i<src.Length; i++, j++)
             {
                 if(j < maxlen)
                     buffer[j] = src[i];
                 else
                 {
                     yield return new string(buffer);
+
                     buffer = new char[maxlen];
                     j = 0;
                     buffer[j] = src[i];
                 }
             }
+
             var trim = buffer.Trim();
             if(trim.Length != 0)
                 yield return new string(trim);
