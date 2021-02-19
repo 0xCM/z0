@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(AsmLang)" />
+      <ProjectReference Include="$(Lang)" />
   </ItemGroup>
-
-
 
 </Project>

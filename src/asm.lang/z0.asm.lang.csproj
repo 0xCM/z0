@@ -5,7 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Lang)" />
+      <ProjectReference Include="$(AsmLangG)" />
+      <ProjectReference Include="$(Konst)" />
+      <ProjectReference Include="$(BitCore)" />
   </ItemGroup>
 
 
