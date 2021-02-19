@@ -17,6 +17,8 @@
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Fsm)" />
+    <ProjectReference Include="$(AsmLang)" />
+    <ProjectReference Include="$(AsmLangG)" />
   </ItemGroup>
 
    <ItemGroup>

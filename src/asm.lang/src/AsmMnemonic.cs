@@ -7,11 +7,11 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct AsmMnemonic
     {
-        public Name Name {get;}
+        public string Name {get;}
 
         [MethodImpl(Inline)]
         public AsmMnemonic(string src)
@@ -20,19 +20,19 @@ namespace Z0.Asm
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Name.Length;
+            get => Name?.Length ?? 0;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsEmpty;
+            get => Length == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Name.IsNonEmpty;
+            get => Length != 0;
         }
 
         public override int GetHashCode()
@@ -40,7 +40,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name.Format();
+            => Name;
 
         [MethodImpl(Inline)]
         public string Format(AsmMnemonicCase @case)
@@ -48,11 +48,11 @@ namespace Z0.Asm
             if(IsEmpty)
                 return EmptyString;
 
-            var data = Name.Content;
+            var data = Name;
             switch(@case)
             {
                 case AsmMnemonicCase.Captialized:
-                    return string.Format("{0}{1}",Char.ToUpperInvariant(Name.Content[0]), data.ToLowerInvariant().Substring(1));
+                    return string.Format("{0}{1}",Char.ToUpperInvariant(Name[0]), data.ToLowerInvariant().Substring(1));
                 case AsmMnemonicCase.Lowercase:
                     return data.ToLowerInvariant();
                 case AsmMnemonicCase.Uppercase:
@@ -86,7 +86,7 @@ namespace Z0.Asm
         public static AsmMnemonic Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmMnemonic(TextBlock.Empty);
+            get => new AsmMnemonic(EmptyString);
         }
     }
 }

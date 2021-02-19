@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
-{
+[assembly: PartId(PartId.AsmLangG)]
 
-    /// <summary>
-    /// Represents a parsed expression as described in https://en.wikipedia.org/wiki/Parse_tree
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class ParseTree<T>
+namespace Z0.Parts
+{
+    public sealed class AsmLangG : Part<AsmLangG>
     {
 
     }

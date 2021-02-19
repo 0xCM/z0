@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Lang
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     /// <summary>
     /// Represents an abstract syntax tree as described by https://en.wikipedia.org/wiki/Abstract_syntax_tree

@@ -4,8 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    public enum AsmMnemonicCase
+    {
+        Lowercase = 0,
 
+        Uppercase = 1,
 
+        Captialized = 2
+    }
 }

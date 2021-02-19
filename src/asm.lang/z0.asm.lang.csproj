@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="$(Part)" />
+      <ProjectReference Include="$(Lang)" />
   </ItemGroup>
+
 
    <ItemGroup>
     <EmbeddedResource Include="assets/**/*.*" />

@@ -2,13 +2,10 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
 
-    public interface ICall
-    {
-        IOperation Target {get;}
 
-        Index<OperandValue> Operands {get;}
-    }
 }
