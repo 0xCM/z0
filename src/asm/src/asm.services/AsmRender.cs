@@ -24,20 +24,8 @@ namespace Z0.Asm
         {
             var dst = span<string>(8);
             const string Separator = "; " + RP.PageBreak160;
-            var count = lines(new BlockHeader(Separator, src.Code.Uri, src.DisplaySig, src.Code, src.TermCode), dst);
+            var count = AsmDocParts.lines(new BlockHeader(Separator, src.Code.Uri, src.DisplaySig, src.Code, src.TermCode), dst);
             return slice(dst, 0, count);
-        }
-
-        [Op]
-        public static byte lines(in BlockHeader src, Span<string> dst)
-        {
-            var i = z8;
-            seek(dst, i++) = src.Separator;
-            seek(dst, i++) = asm.comment($"{src.DisplaySig}::{src.Uri}");
-            seek(dst, i++) = ByteSpans.property(src.CodeBlock, src.Uri.OpId);
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.CodeBlock.BaseAddress), text.spaced(Chars.Eq), src.CodeBlock.BaseAddress));
-            seek(dst, i++) = asm.comment(text.concat(nameof(src.TermCode), text.spaced(Chars.Eq), src.TermCode.ToString()));
-            return i;
         }
 
         /// <summary>
@@ -89,16 +77,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        [Op]
-        public static string format(in AsmLineLabel src)
-            => src.Width switch{
-                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
-                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
-                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
-                DataWidth.W64 => src.Offset.FormatAsmHex(),
-                _ => EmptyString
-            };
-
         [MethodImpl(Inline), Op]
         public static string format(AsmInstructionSpecExprLegacy src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
@@ -121,9 +99,9 @@ namespace Z0.Asm
             var address = @base + src.Offset;
 
             if(config.AbsoluteLabels)
-                dst.Append(string.Format(AbsolutePattern, address.Format(), format(label), src.Formatted.PadRight(config.InstructionPad, Space)));
+                dst.Append(string.Format(AbsolutePattern, address.Format(), label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
             else
-                dst.Append(string.Format(RelativePattern, format(label), src.Formatted.PadRight(config.InstructionPad, Space)));
+                dst.Append(string.Format(RelativePattern, label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
 
             var comment = asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter));
             dst.Append(comment);

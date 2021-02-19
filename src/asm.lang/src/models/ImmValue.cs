@@ -14,8 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct ImmValue : ITextual
     {
-        const string RenderPattern = "x{0}";
-
         readonly ulong Data;
 
         [MethodImpl(Inline)]

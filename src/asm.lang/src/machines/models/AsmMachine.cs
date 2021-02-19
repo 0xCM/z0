@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
     using static AsmMem;
     using static AsmRegs;
     using static AsmImm;

@@ -30,13 +30,7 @@ namespace Z0.Asm
 
         SeqSplit<char> SigOpSplitRule;
 
-        const char MnemonicTerminator = Chars.Space;
-
-        const char OperandSeparator = Comma;
-
         const char DigitQualifier = FSlash;
-
-        const char CompoundSignifier = FSlash;
 
         public AsmExprParser()
         {
@@ -44,7 +38,7 @@ namespace Z0.Asm
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
             SigOpTokens = api.SigOpTokens();
             SigOpLookup = SymbolTables.create(SigOpTokens, t => t.Symbol);
-            SigOpSplitRule = Rules.splitter(OperandSeparator);
+            SigOpSplitRule = Rules.splitter(AsmExprFacets.OperandDelimiter);
         }
 
         [MethodImpl(Inline), Op]
@@ -57,12 +51,18 @@ namespace Z0.Asm
         }
 
         [Op]
-        public ref readonly Token<AsmSigOpKind> ParseSigOp(SigOperand src)
+        public bool ParseToken(SigOperand src, out Token<AsmSigOpKind> token)
         {
             if(SigOpLookup.Index(src.Content, out var index))
-                return ref SigOpTokens[index];
+            {
+                token = SigOpTokens[index];
+                return true;
+            }
             else
-                return ref SigOpTokens[0];
+            {
+                token = default;
+                return false;
+            }
         }
 
         [Op]
@@ -72,7 +72,7 @@ namespace Z0.Asm
             {
                 if(ParseMnemonic(src, out var monic))
                 {
-                    var i = Query.index(src,MnemonicTerminator);
+                    var i = Query.index(src, AsmExprFacets.MnemonicTerminator);
                     var operands = i > 0 ? src.Substring(i).Split(SigOpSplitRule.Delimiter).Map(sigop) : sys.empty<SigOperand>();
                     dst = new Signature(monic, operands);
                     return true;
@@ -89,7 +89,7 @@ namespace Z0.Asm
             if(text.empty(sig))
                 return false;
 
-            var i = Query.index(sig, MnemonicTerminator);
+            var i = Query.index(sig, AsmExprFacets.MnemonicTerminator);
             if(i > 0)
                 dst = mnemonic(Parse.segment(sig, 0, i - 1));
             else
@@ -129,7 +129,7 @@ namespace Z0.Asm
         [Op]
         public bool IsComposite(SigOperand src)
         {
-            return Query.contains(src.Content, CompoundSignifier);
+            return Query.contains(src.Content, AsmExprFacets.CompositeIndicator);
         }
 
         [Op]
@@ -137,7 +137,7 @@ namespace Z0.Asm
         {
             if(IsComposite(src))
             {
-                var parts = src.Content.Split(CompoundSignifier);
+                var parts = src.Content.Split(AsmExprFacets.CompositeIndicator);
                 if(parts.Length != 2)
                     root.@throw(new Exception($"Composition logic wrong for {src.Content}"));
 
@@ -151,7 +151,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool RegisterDigit(string src, out RegDigit dst)
+        public bool ParseDigit(string src, out RegDigit dst)
         {
             dst = default;
             if(Parse.rule(src, RegDigitRule, out var result) &&

@@ -9,13 +9,20 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmLabel
+    public readonly struct AsmComment
     {
-        public Identifier Name {get;}
+        public TextBlock Text {get;}
 
-        public AsmLabel(Identifier name)
-        {
-            Name = name;
-        }
+
+        [MethodImpl(Inline)]
+        public AsmComment(TextBlock text)
+            => Text = text;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Text;
+
+        public override string ToString()
+            => Format();
     }
 }

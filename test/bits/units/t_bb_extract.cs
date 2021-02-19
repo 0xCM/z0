@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bb_extract : t_bitspans<t_bb_extract>
     {

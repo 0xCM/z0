@@ -21,9 +21,9 @@ namespace Z0.Asm
 
             public AsmLineLabel Label {get;}
 
-            public Statement Statement {get;}
+            public AsmStatement Statement {get;}
 
-            public StatementLine(uint number, AsmLineLabel label, Statement statement)
+            public StatementLine(uint number, AsmLineLabel label, AsmStatement statement)
             {
                 LineNumber = number;
                 Label = label;
@@ -35,7 +35,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public string Format()
-                => Statement.Format();
+                => "";
 
             public override string ToString()
                 => Format();

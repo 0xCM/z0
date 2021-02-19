@@ -14,9 +14,6 @@ namespace Z0.Asm
     /// </summary>
     public struct AsmCallee
     {
-        public static string format(in AsmCallee src)
-            => text.concat(src.Base.Format(), Chars.Colon, Chars.Space, src.Identity);
-
         /// <summary>
         /// The target's base address
         /// </summary>
@@ -35,7 +32,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => format(this);
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, Identity);
 
         public override string ToString()
             => Format();

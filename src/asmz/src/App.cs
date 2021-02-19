@@ -188,6 +188,25 @@ namespace Z0.Asm
             root.iter(Etl.EncodingKindNames(), Wf.Row);
         }
 
+        void ParseSigTokens()
+        {
+            var specs = Etl.Specifiers();
+            Wf.Status(specs.Length);
+            var parser = AsmExprParser.create(Wf);
+            var counter = 0;
+            foreach(var spec in specs)
+            {
+                var sig = spec.Sig;
+                foreach(var op in sig.Operands)
+                {
+                    if(!(parser.ParseToken(op.Content, out var token)))
+                        Wf.Warn($"Failed to parse {op}");
+                    else
+                        counter++;
+                }
+            }
+            Wf.Status($"Successfully parsed {counter} sig operands");
+        }
 
         ApiHostCaptureSet RunCapture(Type host)
         {
@@ -304,24 +323,15 @@ namespace Z0.Asm
         }
 
 
-        public void LoadDoc()
-        {
-            var src = Db.AsmFile(typeof(math));
-            var flow = Wf.Processing(src);
-            var doc = AsmDoc.parse(src);
-            var content = doc.Content;
-            root.iter(content, line => Wf.Row(line));
-            Wf.Processed(flow, src);
-        }
         public unsafe void Run()
         {
+            //ParseSigTokens();
             //ShowMnemonicLiterals();
-            //ProcessCatalog();
+            ProcessCatalog();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            LoadDoc();
         }
 
         public static void Main(params string[] args)

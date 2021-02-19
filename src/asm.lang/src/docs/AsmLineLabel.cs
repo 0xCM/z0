@@ -9,8 +9,18 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmLineLabel
+    public readonly struct AsmLineLabel : IAsmDocPart<AsmLineLabel>
     {
+        [Op]
+        public static string format(in AsmLineLabel src)
+            => src.Width switch{
+                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
+                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
+                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
+                DataWidth.W64 => src.Offset.FormatAsmHex(),
+                _ => EmptyString
+            };
+
         public ulong Offset {get;}
 
         public DataWidth Width {get;}
@@ -45,6 +55,12 @@ namespace Z0.Asm
             Offset = offset;
             Width = DataWidth.W64;
         }
+
+        public string Format()
+            => format(this);
+
+        public override string ToString()
+            => Format();
     }
 
 }

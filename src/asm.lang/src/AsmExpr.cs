@@ -22,11 +22,11 @@ namespace Z0.Asm
 
         [Op]
         public static Index<SigOperand> decompose(SigOperand src)
-            => src.IsComposite ? src.Content.SplitClean(CompositeOperandPartition).Map(sigop) : array(src);
+            => src.IsComposite ? src.Content.SplitClean(CompositeIndicator).Map(sigop) : array(src);
 
         [Op]
         public static bool composite(SigOperand operand)
-            => operand.Content.Contains(CompositeOperandPartition);
+            => operand.Content.Contains(CompositeIndicator);
 
         [Op]
         public static bool composite(Signature src)

@@ -20,7 +20,7 @@ namespace Z0
             => new PolySystem(random);
 
         public PolySystem(IPolyStream random)
-            => this.Random = random;
+            => Random = random;
 
         readonly IPolyStream Random;
 

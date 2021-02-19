@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     partial class AsmGen
     {
         void EmitMonicExpressions(Index<AsmMnemonic> src)
@@ -25,6 +24,5 @@ namespace Z0.Asm
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
         }
-
     }
 }

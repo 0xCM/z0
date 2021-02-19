@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     readonly struct AsmExprFacets
     {
-        public const char CompositeOperandPartition = Chars.FSlash;
+        public const char CompositeIndicator = Chars.FSlash;
 
         public const char OperandDelimiter = Chars.Comma;
+
+        public const char MnemonicTerminator = Chars.Space;
     }
 }
