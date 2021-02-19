@@ -56,7 +56,7 @@ namespace Z0.Asm
 
 		public AsmOpCodeExprLegacy OpCode;
 
-        public Signature Instruction;
+        public string Instruction;
 
         public asci64 Statement;
 

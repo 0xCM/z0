@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static memory;
 
-    public class AsmBlocks : AsmWfService<AsmBlocks>
+    public class AsmBlocks : WfService<AsmBlocks, AsmBlocks>
     {
         public const string LocatedMarker = "located://";
 
@@ -27,7 +27,6 @@ namespace Z0.Asm
         {
             var fail = ParseResult.fail<AsmBlockHeader>(src.Join(Chars.NL));
             dst = default;
-
 
             if(src.Length < 3)
                 return false;

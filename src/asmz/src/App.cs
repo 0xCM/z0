@@ -156,45 +156,6 @@ namespace Z0.Asm
             Etl.Emit(specifiers);
         }
 
-        void ParseSpec(OperationSpec src)
-        {
-            var sig = src.Sig;
-            TextBuffer.Clear();
-            TextBuffer.AppendFormat("{0,-12}", src.Seq);
-            if(AsmParser.Mnemonic(sig, out var monic))
-            {
-                TextBuffer.AppendFormat(" | {0,-16}", monic);
-                if(Parse.after(sig.Content, monic.Name, out var remainder))
-                {
-                    var operands = AsmParser.Operands(remainder).View;
-                    var count = operands.Length;
-                    for(var i=0; i<count; i++)
-                    {
-                        ref readonly var op = ref skip(operands,i);
-
-                        if(AsmParser.Decompose(op, out var pair))
-                            TextBuffer.AppendFormat(" | (({0} // {1}))", pair.Left, pair.Right);
-                        else
-                            TextBuffer.AppendFormat(" | {0}", op.Content);
-                    }
-                }
-            }
-
-            Wf.Row(TextBuffer.Emit());
-        }
-
-        void ParseSigs()
-        {
-            var specifiers = Etl.Specifiers();
-            var tokens = AsmExpr.SigOpTokens();
-            var count = specifiers.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var spec = ref skip(specifiers, i);
-                var sig = spec.Sig;
-                ParseSpec(spec);
-            }
-        }
 
         public void GenBits()
         {
@@ -213,38 +174,6 @@ namespace Z0.Asm
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
         }
-
-        void ShowSpecifiers(AsmCatalogEtl etl)
-        {
-            var parser = AsmExprParser.create(Wf);
-            var specifiers = etl.Specifiers();
-            for(var i=0; i<specifiers.Length; i++)
-            {
-                ref readonly var spec = ref skip(specifiers,i);
-                parser.Mnemonic(spec.Sig, out var monic);
-                var operands = parser.Operands(spec.Sig).View;
-                var opformat = operands.Map(x => x.Format()).Join(RP.SpacePipe);
-                Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
-            }
-        }
-
-        /*
-        public readonly struct Movzx : IAsmInstruction<Movzx>
-        {
-            public AsmMnemonicCode Mnemonic => MOVZX;
-
-            public static implicit operator AsmMnemonicCode(Movzx src) => src.Mnemonic;
-        }
-
-        /// <summary>
-        /// MOVZX
-        /// </summary>
-        [Op]
-        public static Movzx movzx()
-            => default;
-
-
-        */
 
 
         void ProcessCatalog()
@@ -343,7 +272,7 @@ namespace Z0.Asm
 
         void TestRel32()
         {
-            var cases = AsmCases.callrel32(AsmSigTokenList.Rel32).View;
+            var cases = AsmCases.load(AsmInstructions.call(), AsmSigTokenList.Rel32).View;
             var count = cases.Length;
             var errors = text.buffer();
             for(var i=0; i< count; i++)
@@ -382,8 +311,10 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            var monics = Etl.Mnemonics();
-            AsmGen.create(Wf).GenerateModels(monics);
+            EmitSpecifiers();
+
+            // var monics = Etl.Mnemonics();
+            // AsmGen.create(Wf).GenerateModels(monics);
         }
 
         public static void Main(params string[] args)

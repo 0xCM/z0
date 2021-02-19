@@ -26,9 +26,18 @@ namespace Z0.Asm
         {
             readonly TextBlock Data;
 
+            public AsmMnemonic Mnemonic {get;}
+
+            public Index<SigOperand> Operands {get;}
+
             [MethodImpl(Inline)]
-            public Signature(string src)
-                => Data = src;
+            public Signature(AsmMnemonic monic, params SigOperand[] operands)
+                : this()
+            {
+                Mnemonic = monic;
+                Operands = operands;
+                Data = format(this);
+            }
 
             public string Content
             {
@@ -59,11 +68,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public string Format()
-                => Data.Format();
-
-            [MethodImpl(Inline)]
-            public string Format(int pad)
-                => Data.Format(pad);
+                => Data;
 
             public override string ToString()
                 => Format();
@@ -88,8 +93,7 @@ namespace Z0.Asm
                 => !a.Equals(b);
 
             public static Signature Empty
-                => new Signature(EmptyString);
+                => default;
         }
-
     }
 }

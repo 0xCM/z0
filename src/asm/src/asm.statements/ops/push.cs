@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using M = AsmMnemonicCode;
 
-    partial struct AsmBuilder
+    partial struct Asmstatements
     {
         [MethodImpl(Inline), Op]
         public static AsmStatement<r16> push(r16 r)

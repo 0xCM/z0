@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmExpr;
 
     /// <summary>
     /// Captures an asm opcode together with an instruction signature
@@ -17,10 +16,10 @@ namespace Z0.Asm
     {
         public AsmOpCodeExprLegacy OpCode {get;}
 
-        public Signature Sig {get;}
+        public string Sig {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSpecExprLegacy(in AsmOpCodeExprLegacy opcode, in Signature sig)
+        public AsmInstructionSpecExprLegacy(in AsmOpCodeExprLegacy opcode, string sig)
         {
             OpCode = opcode;
             Sig = sig;

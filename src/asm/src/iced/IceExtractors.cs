@@ -53,9 +53,9 @@ namespace Z0.Asm
         public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src, BinaryCode encoded)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
+            //var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
             //var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString(), encoded);
-            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(iceOpCode.ToOpCodeString()), sig);
+            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
         }
 
         [MethodImpl(Inline), Op]

@@ -19,6 +19,12 @@ namespace Z0.Asm
             public SigOperand(string src)
                 => Data = src;
 
+            public bool IsComposite
+            {
+                [MethodImpl(Inline)]
+                get => composite(this);
+            }
+
             public string Content
             {
                 [MethodImpl(Inline)]
@@ -50,10 +56,6 @@ namespace Z0.Asm
             public string Format()
                 => Data.Format();
 
-            [MethodImpl(Inline)]
-            public string Format(int pad)
-                => Data.Format(pad);
-
             public override string ToString()
                 => Format();
 
@@ -71,6 +73,5 @@ namespace Z0.Asm
             public static SigOperand Empty
                 => new SigOperand(EmptyString);
         }
-
     }
 }

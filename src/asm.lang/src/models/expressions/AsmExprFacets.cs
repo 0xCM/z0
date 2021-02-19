@@ -7,11 +7,10 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public sealed class AsmSourceParser : WfService<AsmSourceParser,AsmSourceParser>
+    readonly struct AsmExprFacets
     {
+        public const char CompositeOperandPartition = Chars.FSlash;
 
+        public const char OperandDelimiter = Chars.Comma;
     }
-
 }

@@ -9,10 +9,28 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static TextRules;
+    using static AsmExprFacets;
 
     [ApiHost]
     public readonly partial struct AsmExpr
     {
+        public static bool composite(SigOperand operand)
+            => operand.Content.Contains(CompositeOperandPartition);
+
+        public static string format(Signature src)
+        {
+            var buffer = text.buffer();
+            buffer.Append(src.Mnemonic.Format(AsmMnemonicCase.Uppercase));
+            var opcount = src.Operands.Length;
+            if(opcount != 0)
+            {
+                buffer.Append(Chars.Space);
+                buffer.Append(Format.join(OperandDelimiter, src.Operands));
+            }
+            return buffer.Emit();
+        }
+
         [Op]
         public static AsmExprParser parser(IWfShell wf)
             => AsmExprParser.create(wf);
@@ -74,24 +92,8 @@ namespace Z0.Asm
         public static OpCode opcode(string src)
             => new OpCode(src);
 
-        /// <summary>
-        /// Defines a signature expression
-        /// </summary>
-        /// <param name="src">The source text</param>
-        /// <remarks>
-        /// Instruction signatures are of the form
-        /// 0 operands: {Mnemonic}
-        /// 1 operand: {Mnemonic}{ }{op1}
-        /// 2 operands: {Mnemonic}{ }{op1}{,}{op2}
-        /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
-        /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
-        /// <remarks>
-        [MethodImpl(Inline), Op]
-        public static Signature sig(string src)
-            => new Signature(src);
-
         [MethodImpl(Inline), Op]
         public static OperationSpec specifier(ushort seq, OpCode op, Signature sig)
-            => new OperationSpec(seq, op,sig);
+            => new OperationSpec(seq, op, sig);
     }
 }

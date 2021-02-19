@@ -13,7 +13,9 @@ namespace Z0.Asm
 
         public uint Seq;
 
-        public AsmExpr.Signature Sig;
+        public Signature Sig;
+
+        public bool Composite;
 
         public OpCode OpCode;
     }

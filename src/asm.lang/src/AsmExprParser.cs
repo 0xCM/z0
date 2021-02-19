@@ -66,19 +66,36 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool Mnemonic(api.Signature src, out AsmMnemonic dst)
+        public bool ParseSig(string src, out Signature dst)
         {
-            var i = Query.index(src.Content, MnemonicTerminator);
-            if(i != NotFound && i > 0)
+            if(text.nonempty(src))
             {
-                dst = mnemonic(Parse.segment(src.Content, 0, i - 1));
-                return true;
+                if(ParseMnemonic(src, out var monic))
+                {
+                    var i = Query.index(src,MnemonicTerminator);
+                    var operands = i > 0 ? src.Substring(i).Split(SigOpSplitRule.Delimiter).Map(sigop) : sys.empty<SigOperand>();
+                    dst = new Signature(monic, operands);
+                    return true;
+                }
             }
-            else
-            {
-                dst = AsmMnemonic.Empty;
+            dst = Signature.Empty;
+            return false;
+        }
+
+        [Op]
+        public bool ParseMnemonic(string sig, out AsmMnemonic dst)
+        {
+            dst = AsmMnemonic.Empty;
+            if(text.empty(sig))
                 return false;
-            }
+
+            var i = Query.index(sig, MnemonicTerminator);
+            if(i > 0)
+                dst = mnemonic(Parse.segment(sig, 0, i - 1));
+            else
+                dst = mnemonic(sig);
+
+            return true;
         }
 
         [Op]
@@ -92,9 +109,9 @@ namespace Z0.Asm
             => Transform.apply(SigOpSplitRule, src).Map(sigop);
 
         [Op]
-        public Index<SigOperand> Operands(api.Signature src)
+        public Index<SigOperand> Operands(Signature src)
         {
-            if(Mnemonic(src, out var monic))
+            if(ParseMnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return Operands(remainder);
             return Index<SigOperand>.Empty;

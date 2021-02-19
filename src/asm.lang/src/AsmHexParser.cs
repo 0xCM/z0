@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using S = HexSequenceParser.ParserState;
+    using S = AsmHexParser.ParserState;
 
-    public ref struct HexSequenceParser
+    public ref struct AsmHexParser
     {
         public enum ParserState : byte
         {

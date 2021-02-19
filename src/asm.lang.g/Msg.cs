@@ -7,7 +7,7 @@ namespace Z0
     using System.Reflection;
 
     [ApiComplete]
-    struct Msg
+    partial struct Msg
     {
 
     }

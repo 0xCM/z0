@@ -96,8 +96,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                var sig = AsmExpr.sig(row.Instruction);
-                if(parser.Mnemonic(sig, out var monic))
+                if(parser.ParseMnemonic(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -178,20 +177,38 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
+        public Index<OperationSpec> Denormalize(ReadOnlySpan<OperationSpec> src)
+        {
+            var count = src.Length;
+            var dst = root.list<OperationSpec>(count*2);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var spec = ref skip(src,i);
+                var sig = spec.Sig;
+            }
+
+            return dst.ToArray();
+        }
+
         public ReadOnlySpan<OperationSpec> Specifiers()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
             var buffer = span<OperationSpec>(count);
+            var parser = AsmExprParser.create(Wf);
             var j=0u;
             var k=0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = AsmExpr.opcode(row.OpCode);
-                var sig = AsmExpr.sig(row.Instruction);
-                var spec = AsmExpr.specifier(row.Sequence, oc, sig);
-                seek(buffer, k++) = spec;
+                if(parser.ParseSig(row.Instruction, out var sig))
+                    seek(buffer, k++) = AsmExpr.specifier(row.Sequence, oc, sig);
+                else
+                {
+                    seek(buffer, k++) = OperationSpec.Empty;
+                    Wf.Warn($"The opcode row {row.OpCode} could not be parsed");
+                }
             }
 
             return buffer;
@@ -204,23 +221,6 @@ namespace Z0.Asm
                 if(row.CellCount == 15)
                 {
                     Fill(row, ref dst, (ushort)(seq + 1));
-                    // var cells = row.Cells.View;
-                    // var i = 0;
-                    // dst.OpCode = skip(cells, i++);
-                    // dst.Instruction = skip(cells, i++);
-                    // dst.EncodingKind = skip(cells, i++);
-                    // dst.Properties = skip(cells, i++);
-                    // dst.ImplicitRead = skip(cells, i++);
-                    // dst.ImplicitWrite = skip(cells, i++);
-                    // dst.ImplicitUndef = skip(cells, i++);
-                    // dst.Useful = skip(cells, i++);
-                    // dst.Protected = skip(cells, i++);
-                    // dst.Mode64 = skip(cells, i++);
-                    // dst.LegacyMode = skip(cells, i++);
-                    // dst.Cpuid = skip(cells, i++);
-                    // dst.AttMnemonic = skip(cells, i++);
-                    // dst.Preferred = skip(cells, i++);
-                    // dst.Description = skip(cells, i++);
                     return true;
                 }
             }
@@ -234,11 +234,13 @@ namespace Z0.Asm
             var dst = new AsmSpecifierRecord();
             dst.Seq = src.Seq;
             dst.Sig = src.Sig;
+            dst.Composite = src.Sig.Operands.Any(o => o.IsComposite);
             dst.OpCode = src.OpCode;
             return dst;
         }
 
-        internal static ReadOnlySpan<byte> AsmSpecifierWidths => new byte[]{8,48,32};
+        internal static ReadOnlySpan<byte> AsmSpecifierWidths => new byte[]{8,48,12,32};
+
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
     }
 }

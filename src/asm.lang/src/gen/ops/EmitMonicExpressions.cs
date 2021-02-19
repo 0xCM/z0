@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Part;
-    using static memory;
 
     partial class AsmGen
     {
@@ -27,26 +21,6 @@ namespace Z0.Asm
             var margin = 0u;
             MonicExpressionModel model = src.Storage;
             model.Render(margin,buffer);
-            // buffer.AppendLine("namespace Z0.Asm");
-            // buffer.AppendLine("{");
-            // margin += 4;
-            // buffer.IndentLine(margin, "public readonly struct AsmMnemonics");
-            // buffer.IndentLine(margin, "{");
-            // margin += 4;
-
-            // var count = src.Length;
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var monic = ref skip(src,i);
-            //     buffer.IndentLine(margin, string.Format("public static AsmMnemonic {0} => nameof({0});", monic.Name));
-            //     buffer.AppendLine();
-            // }
-            // margin -= 4;
-            // buffer.IndentLine(margin, "}");
-
-            // margin -= 4;
-            // buffer.IndentLine(margin, "}");
-
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());

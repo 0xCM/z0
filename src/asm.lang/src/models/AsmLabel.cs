@@ -12,5 +12,10 @@ namespace Z0.Asm
     public readonly struct AsmLabel
     {
         public Identifier Name {get;}
+
+        public AsmLabel(Identifier name)
+        {
+            Name = name;
+        }
     }
 }
