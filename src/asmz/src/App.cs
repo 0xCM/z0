@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Etl = AsmEtl.catalog(Wf);
+            Etl = AsmCatalogEtl.create(Wf);
             AsmParser = AsmExpr.parser(Wf);
             TextBuffer = text.buffer();
             Asm = AsmServices.context(Wf);
@@ -223,9 +223,8 @@ namespace Z0.Asm
                 ref readonly var spec = ref skip(specifiers,i);
                 parser.Mnemonic(spec.Sig, out var monic);
                 var operands = parser.Operands(spec.Sig).View;
-                var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
+                var opformat = operands.Map(x => x.Format()).Join(RP.SpacePipe);
                 Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
-
             }
         }
 
@@ -373,13 +372,12 @@ namespace Z0.Asm
 
         void ProcessCatalog()
         {
-            var records = Etl.TransformSource();
+            //var records = Etl.TransformSource();
             var monics = Etl.Mnemonics();
             var maxlen = monics.Select(x => x.Name.Length).Max();
-            Wf.Status(maxlen);
+
             GenerateExpressions(monics, Db.Doc("AsmMnemonics", FileExtensions.Cs));
             GenerateCodes(monics, Db.Doc("AsmMnemonicCode", FileExtensions.Cs));
-            ShowSpecifiers(Etl);
             GenerateAsmStructs(monics, Db.Doc("AsmInstructions", FileExtensions.Cs));
         }
 

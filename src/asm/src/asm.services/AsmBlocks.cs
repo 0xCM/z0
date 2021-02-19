@@ -25,7 +25,7 @@ namespace Z0.Asm
         [Op]
         public bool ParseHeader(ReadOnlySpan<string> src, out AsmBlockHeader dst)
         {
-            var fail = ParseResult.fail<AsmBlockHeader>(src.Concat(Chars.NL));
+            var fail = ParseResult.fail<AsmBlockHeader>(src.Join(Chars.NL));
             dst = default;
 
 

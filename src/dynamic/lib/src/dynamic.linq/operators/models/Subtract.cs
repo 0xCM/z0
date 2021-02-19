@@ -8,11 +8,9 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static LinqXPress;
-
-    using Z0.Dynamics.Operators;
 
     partial struct DynamicOps
     {

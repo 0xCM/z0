@@ -8,10 +8,6 @@ namespace Z0
     {
         public const string OpCodeSpecs = "OpCodeSpecs";
 
-        public static ContentName IntelIntinsics => "intrinsics.xml";
-
-        public static ContentName AsmCatalog => "AsmCatalog.csv";
-
         public static ContentName MsvcCompilerIntrinsicsX64 = "CompilerIntrinsics.MsvcX64.csv";
 
         public static ContentName MsvcCompilerIntrinsicsX86 = "CompilerIntrinsics.MsvcX86.csv";

@@ -6,7 +6,6 @@ namespace Z0.Dynamics
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Represents a logical disjunction; i.e., the or connective that evaluates to true if and only if one or more of it's operands are true

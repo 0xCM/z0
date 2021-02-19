@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Dynamics
 {
-    using System;
-    using System.Collections.Generic;
-
-
     public enum SortDirection
     {
         Ascending,
+
         Descending
     }
-
 }

@@ -194,7 +194,7 @@ namespace Z0.Asm
                 record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
                 record.Statement = src.FormattedInstruction;
                 record.Instruction = src.Specifier.Sig;
-                record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(","));
+                record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
                 record.OpCodeId = (IceOpCodeId)src.Code;
 
                 if(Index.TryGetValue(mnemonic, out var builder))

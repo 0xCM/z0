@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using Z0.Dynamics.Operators;
 
-    using static Konst;
+    using static Part;
     using static LinqXPress;
     using static DynamicOps;
 

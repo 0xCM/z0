@@ -30,7 +30,6 @@ namespace Z0
                     dst.Add(skip(src,i));
                 return dst;
             }
-
         }
     }
 }

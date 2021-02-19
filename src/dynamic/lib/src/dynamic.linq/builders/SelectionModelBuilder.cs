@@ -13,7 +13,7 @@ namespace Z0.Dynamics
     using X = System.Linq.Expressions;
     using G = System.Collections.Generic;
 
-    using static Konst;
+    using static DynamicFacet;
     using static z;
 
     public class SelectionModelBuilder

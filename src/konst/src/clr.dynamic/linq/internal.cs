@@ -7,10 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
 
-    using static Konst;
+    using static Part;
     using static ReflectionFlags;
 
     partial class LinqXPress

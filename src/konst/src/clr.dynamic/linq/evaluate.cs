@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
-
 
     partial class LinqXPress
     {

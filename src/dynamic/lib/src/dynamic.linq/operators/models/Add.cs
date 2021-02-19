@@ -9,9 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Reflection;
 
-    using Z0.Dynamics.Operators;
-
-    using static z;
+    using static memory;
     using static Z0.LinqXPress;
     using static Z0.LinqXFunc;
 
@@ -32,7 +30,7 @@ namespace Z0
                     {
 
                         case TypeCode.String:
-                            return fx(LinqDynamic.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
+                            return fx(LinqDynamic.method<T,T,T>("Concat").Require().Func<T,T,T>()).Compile();
                         case TypeCode.Byte:
                             return cast<Func<T,T,T>>(Ops8u.Add.Compile());
                         case TypeCode.SByte:

@@ -2,14 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0
 {
-    public sealed class InversionFacet : SelectionFacet<InversionFacet, bool>
+    partial struct DynamicFacet
     {
-        public InversionFacet(bool Enabled = true)
-            : base("Invert", Enabled)
+        public sealed class InversionFacet : SelectionFacet<InversionFacet, bool>
         {
-            
+            public InversionFacet(bool Enabled = true)
+                : base("Invert", Enabled)
+            {
+
+            }
         }
     }
 }

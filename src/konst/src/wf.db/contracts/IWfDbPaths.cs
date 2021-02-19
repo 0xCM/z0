@@ -18,14 +18,6 @@ namespace Z0
         FS.FolderName SubjecFolder<A,B>(A s1, B s2)
             => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
 
-        FS.FolderPath GenRoot()
-            => Env.Vars.GenRoot.Value;
-
-        FS.FolderPath GenDir(FS.FolderName folder)
-            => GenRoot() + folder;
-
-        FS.FilePath GenSln(FS.FolderName folder)
-            => GenDir(folder) + FS.file(string.Format("z0.{0}", folder), Sln);
 
         FS.FolderPath PackageRoot()
             => Env.Vars.Packages.Value;
@@ -35,6 +27,12 @@ namespace Z0
 
         FS.FolderPath DevRoot()
             => Env.Vars.Dev.Value;
+
+        FS.FolderPath PartDir(string id)
+            => DevRoot() + FS.folder("src") + FS.folder("z0." + id);
+
+        FS.FolderPath PartDir(PartId id)
+            => DevRoot() + FS.folder("src") + FS.folder("z0." + id.Componentize().Join('.'));
 
         FS.FolderPath DevDataRoot()
             => DevRoot() +FS.folder(data);

@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="sep">The block separator</param>
         [TextUtility]
         public static string BlockPartition(this string src, int blocklen, string sep)
-            => src.Partition(blocklen).Concat(sep);
+            => src.Partition(blocklen).Join(sep);
 
         /// <summary>
         /// Block-formats a string using specified block length and separator
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="sep">The block separator</param>
         [TextUtility]
         public static string BlockPartition(this string src, int blocklen, char sep)
-            => src.Partition(blocklen).Concat(sep.ToString());
+            => src.Partition(blocklen).Join(sep.ToString());
 
         /// <summary>
         /// Block-formats a string using specified block length, separator and block prefix

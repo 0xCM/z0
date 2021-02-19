@@ -6,7 +6,6 @@ namespace Z0.Dynamics
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
 
     public class PredicateApplication<F,T> : IPredicateApplication
         where F : Operator<F>

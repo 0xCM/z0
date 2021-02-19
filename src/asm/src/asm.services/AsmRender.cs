@@ -139,7 +139,7 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     var l = instructions(skip(x,i), config);
-                    dst.Append(l.Concat(Eol));
+                    dst.Append(l.Join(Eol));
                     dst.AppendLine();
                 }
             }
@@ -159,7 +159,7 @@ namespace Z0.Asm
             foreach(var line in header(src))
                 dst.AppendLine(line);
 
-            dst.AppendLine(instructions(src, config).Concat(Eol));
+            dst.AppendLine(instructions(src, config).Join(Eol));
         }
 
         [Op]
@@ -168,7 +168,7 @@ namespace Z0.Asm
             foreach(var line in header(src))
                 dst.AppendLine(line);
 
-            dst.AppendLine(instructions(src, config).Concat(Eol));
+            dst.AppendLine(instructions(src, config).Join(Eol));
         }
     }
 }

@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
 
     using static LinqXFunc;
 
-    public readonly partial struct DLinq
+    public readonly struct DLinq
     {
         public static Expression<Func<ushort, ushort>> abs16u()
             => f((ushort x) => x);

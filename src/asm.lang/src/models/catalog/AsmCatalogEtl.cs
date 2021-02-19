@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -61,7 +60,6 @@ namespace Z0.Asm
             dst.AttMnemonic = src.AttMnemonic;
             dst.Cpuid = src.Cpuid;
             dst.Description = src.Description;
-
         }
 
         void Fill(in TextRow src, ref StokeAsmImportRow dst, ushort? seq = null)
@@ -120,6 +118,7 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
                 f(i, skip(rows,i));
         }
+
         public ReadOnlySpan<StokeAsmImportRow> ImportedStokeRows()
         {
             if(ImportRowCount != 0)
@@ -130,36 +129,33 @@ namespace Z0.Asm
 
         ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
-            if(Resources.descriptor(Parts.Res.Assembly, ContentNames.AsmCatalog, out var descriptor))
+            var descriptor = Assets.create(Wf).AsmCatalog();
+            var content = Resources.utf8(descriptor);
+            var srcFormat = TextDocFormat.Structured(Chars.Tab);
+            var foundheader = false;
+            var lines = Parse.lines(content).View;
+            var count = lines.Length;
+            var buffer = RowBuffer.Edit;
+            ref var dst = ref first(buffer);
+            var j = z16;
+            for(var i=0; i<count; i++)
             {
-                var content = Resources.utf8(descriptor);
-                var srcFormat = TextDocFormat.Structured(Chars.Tab);
-                var foundheader = false;
-                var lines = Parse.lines(content).View;
-                var count = lines.Length;
-                var buffer = RowBuffer.Edit;
-                ref var dst = ref first(buffer);
-                var j = z16;
-                for(var i=0; i<count; i++)
+                ref readonly var line = ref skip(lines,i);
+                if(foundheader)
                 {
-                    ref readonly var line = ref skip(lines,i);
-                    if(foundheader)
-                    {
-                        var row = default(StokeAsmImportRow);
-                        if(parse(j, line, ref row))
-                            seek(dst, j++) = row;
-                    }
-                    else
-                    {
-                        if(line.Content.Equals(SourceHeader))
-                            foundheader = true;
-                    }
+                    var row = default(StokeAsmImportRow);
+                    if(parse(j, line, ref row))
+                        seek(dst, j++) = row;
                 }
-                ImportRowCount = j;
-                return slice(buffer,0, ImportRowCount);
+                else
+                {
+                    if(line.Content.Equals(SourceHeader))
+                        foundheader = true;
+                }
             }
-            else
-                return Index<StokeAsmImportRow>.Empty;
+            ImportRowCount = j;
+            return slice(buffer,0, ImportRowCount);
+
         }
 
         FS.FolderName TargetFolder => FS.folder("asmcat");
@@ -178,7 +174,7 @@ namespace Z0.Asm
         {
             var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
             var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
-            var count = Records.emit(src.Map(AsmEtl.record), dst, AsmEtl.AsmSpecifierWidths);
+            var count = Records.emit(src.Map(record), dst, AsmSpecifierWidths);
             Wf.EmittedTable(flow, count);
         }
 
@@ -232,7 +228,17 @@ namespace Z0.Asm
             return false;
         }
 
+        [MethodImpl(Inline), Op]
+        public static AsmSpecifierRecord record(OperationSpec src)
+        {
+            var dst = new AsmSpecifierRecord();
+            dst.Seq = src.Seq;
+            dst.Sig = src.Sig;
+            dst.OpCode = src.OpCode;
+            return dst;
+        }
 
+        internal static ReadOnlySpan<byte> AsmSpecifierWidths => new byte[]{8,48,32};
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.LinqXPress, true)]
     public partial class LinqXPress

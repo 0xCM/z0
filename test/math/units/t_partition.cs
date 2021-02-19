@@ -50,7 +50,7 @@ namespace Z0
         {
             var src = Interval.closed(5,12);
             var dst = Partition.measured(src,1);
-            var fmt = dst.Map(x => x.ToString()).Concat(", ");
+            var fmt = dst.Map(x => x.ToString()).Join(", ");
             Claim.eq(src.Length() + 1, dst.Length);
             ClaimNumeric.eq(Arrays.from(5,6,7,8,9,10,11,12).ToSpan(),dst);
         }
@@ -59,7 +59,7 @@ namespace Z0
         {
             var src = Interval.closedL(5,20);
             var dst = Partition.width(src,1);
-            var fmt = dst.Map(x => x.ToString()).Concat(" + ");
+            var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(Interval.closedL(5,6), dst.First());
             Claim.eq(Interval.closedL(19,20), dst.Last());
@@ -70,7 +70,7 @@ namespace Z0
         {
             var src = Interval.closed(5,20);
             var dst = Partition.width(src,1);
-            var fmt = dst.Map(x => x.ToString()).Concat(" + ");
+            var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(Interval.closedL(5,6), dst.First());
             Claim.eq(Interval.closed(19,20), dst.Last());
@@ -80,7 +80,7 @@ namespace Z0
         {
             var src = Interval.open(5,20);
             var dst = Partition.width(src,1);
-            var fmt = dst.Map(x => x.ToString()).Concat(" + ");
+            var fmt = dst.Map(x => x.ToString()).Join(" + ");
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(Interval.open(5,6), dst.First());
             Claim.eq(Interval.closedL(19,20), dst.Last());
@@ -100,7 +100,7 @@ namespace Z0
         {
             var src = Interval.closed(1,103);
             var dst = Partition.width(src,13);
-            var fmt = dst.Map(x => x.Format()).Concat(" + ");
+            var fmt = dst.Map(x => x.Format()).Join(" + ");
             Claim.Require(dst.Last().Closed);
         }
 

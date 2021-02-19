@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(ReadOnlySpan<T> src)
-            => FormatItems(src).Concat(Config.Delimiter);
+            => FormatItems(src).Join(Config.Delimiter);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)

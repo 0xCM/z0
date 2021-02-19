@@ -6,7 +6,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     /// <summary>
     /// Provides access to high-level dynamic contract capabilities

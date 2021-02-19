@@ -15,19 +15,19 @@ namespace Z0
     /// Represents a relative folder name
     /// </summary>
     public class RelativeLocation : PathComponent<RelativeLocation>
-    {        
+    {
         [MethodImpl(Inline)]
         public static RelativeLocation Define(params FolderName[] folders)
-            => Define(folders.Select(s => s.Name).Concat(Path.DirectorySeparatorChar));
+            => Define(folders.Select(s => s.Name).Join(Path.DirectorySeparatorChar));
 
         [MethodImpl(Inline)]
         public static RelativeLocation Define(params string[] parts)
-            => Define(parts.Concat(Path.DirectorySeparatorChar));
+            => Define(parts.Join(Path.DirectorySeparatorChar));
 
         [MethodImpl(Inline)]
         public static RelativeLocation Define(string name)
             => new RelativeLocation(name);
-        
+
         public static RelativeLocation operator + (RelativeLocation a, RelativeLocation b)
             => RelativeLocation.Define(Path.Join(a.Name, b.Name));
 
@@ -38,7 +38,7 @@ namespace Z0
         {
 
         }
-        
+
         public RelativeLocation(string name)
             : base(name)
         {

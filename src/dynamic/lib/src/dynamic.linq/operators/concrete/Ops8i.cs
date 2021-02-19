@@ -2,13 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics.Operators
+namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
 
-    using static Konst;
     using static LinqXFunc;
 
     public readonly struct Ops8i
@@ -52,4 +50,5 @@ namespace Z0.Dynamics.Operators
         public static Expression<Func<sbyte, sbyte, bool>> LtEq
             => f((sbyte x, sbyte y) => x <= y);
     }
+
 }

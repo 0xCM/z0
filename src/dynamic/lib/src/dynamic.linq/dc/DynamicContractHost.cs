@@ -10,7 +10,6 @@ namespace Z0
     using System.Reflection;
     using System.Diagnostics;
 
-
     public sealed class DynamicContractHost<T> : IDynamicContract
     {
         readonly IDynamicContractMessenger messenger;
@@ -30,10 +29,10 @@ namespace Z0
 
             readonly IDynamicContract Contract;
 
-            static MethodInfo GetContractMethod(MethodBase implementation) 
+            static MethodInfo GetContractMethod(MethodBase implementation)
                 => typeof(T).GetMethod(implementation.Name, implementation.GetParameters().Select(x => x.ParameterType).ToArray());
 
-            static string AccessorName(MethodBase m) 
+            static string AccessorName(MethodBase m)
                 => m.Name.Replace("get_", string.Empty).Replace("set_", string.Empty);
 
             public MessengerImplementation(IDynamicContract contract)
@@ -41,7 +40,7 @@ namespace Z0
                 this.Contract = contract;
             }
 
-            public string ImplementationName 
+            public string ImplementationName
                 => Contract.ImplementationName;
 
             [DebuggerStepThrough]
@@ -49,40 +48,40 @@ namespace Z0
                 Contract.GetPropertyValue(typeof(T).GetProperty(AccessorName(getter)));
 
             [DebuggerStepThrough]
-            public void SetPropertyValue(MethodBase setter, object[] value) 
+            public void SetPropertyValue(MethodBase setter, object[] value)
                 => Contract.SetPropertyValue(typeof(T).GetProperty(AccessorName(setter)), value[0]);
 
             [DebuggerStepThrough]
-            public void InvokeAction(MethodBase method) 
+            public void InvokeAction(MethodBase method)
                 =>  Contract.InvokeAction(GetContractMethod(method), EmptyParameters);
 
             [DebuggerStepThrough]
-            public void InvokeActionWithParameters(MethodBase method, object[] parameters) 
+            public void InvokeActionWithParameters(MethodBase method, object[] parameters)
                 => Contract.InvokeAction(GetContractMethod(method), parameters);
 
             [DebuggerStepThrough]
-            public object InvokeFunction(MethodBase method)  
+            public object InvokeFunction(MethodBase method)
                 => Contract.InvokeFunction(GetContractMethod(method), EmptyParameters);
 
             [DebuggerStepThrough]
-            public object InvokeFunctionWithParameters(MethodBase method, object[] parameters) 
+            public object InvokeFunctionWithParameters(MethodBase method, object[] parameters)
                 => Contract.InvokeFunction(GetContractMethod(method), parameters);
 
         }
 
-        string IDynamicContract.ImplementationName 
+        string IDynamicContract.ImplementationName
             =>  Contract.ImplementationName;
 
-        object IDynamicContract.GetPropertyValue(PropertyInfo property) 
+        object IDynamicContract.GetPropertyValue(PropertyInfo property)
             =>  Contract.GetPropertyValue(property);
 
-        void IDynamicContract.InvokeAction(MethodInfo method, object[] parameters) 
+        void IDynamicContract.InvokeAction(MethodInfo method, object[] parameters)
             => Contract.InvokeAction(method, parameters);
 
-        object IDynamicContract.InvokeFunction(MethodInfo method, object[] parameters) 
+        object IDynamicContract.InvokeFunction(MethodInfo method, object[] parameters)
             => Contract.InvokeFunction(method, parameters);
 
-        void IDynamicContract.SetPropertyValue(PropertyInfo property, object value) 
+        void IDynamicContract.SetPropertyValue(PropertyInfo property, object value)
             => Contract.SetPropertyValue(property, value);
     }
 }

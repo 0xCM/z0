@@ -9,8 +9,9 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using static Part;
     using Msil;
+
+    using static Part;
 
     partial struct ClrDynamic
     {

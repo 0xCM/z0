@@ -10,13 +10,14 @@ namespace Z0.Dynamics
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static DynamicFacet;
 
     public class SelectionBuilder<T,X,R>
-    {        
+    {
         readonly Dictionary<T,Func<X,R>> functions;
-        
+
         readonly T t;
-        
+
         readonly X x;
 
         [MethodImpl(Inline)]
@@ -57,11 +58,11 @@ namespace Z0.Dynamics
     public class SelectionBuilder<T,R>
     {
         readonly Dictionary<T,Func<R>> functions;
-        
+
         readonly T t;
 
         [MethodImpl(Inline)]
-        public static implicit operator Selector<T,R>(SelectionBuilder<T,R> builder) 
+        public static implicit operator Selector<T,R>(SelectionBuilder<T,R> builder)
             => builder.Finish();
 
         [MethodImpl(Inline)]

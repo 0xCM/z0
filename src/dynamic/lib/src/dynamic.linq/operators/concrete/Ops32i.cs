@@ -6,15 +6,14 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
-    using System.Reflection;
 
-    using static Konst;
+    using static Part;
     using static LinqXFunc;
 
     partial struct DynamicOps
     {
+        [ApiComplete("dynamic.ops.32i")]
         public class Ops32i
         {
             public static Expression<Func<int, int>> Abs

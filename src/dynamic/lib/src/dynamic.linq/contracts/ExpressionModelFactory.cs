@@ -5,9 +5,10 @@
 namespace Z0.Dynamics
 {
     using System;
-    using System.Linq;
     using System.Linq.Expressions;
- 
+
+     using static DynamicFacet;
+
     /// <summary>
     /// Defines contract for functions that create models from LINQ expression trees
     /// </summary>

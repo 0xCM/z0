@@ -2,50 +2,46 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
-    public abstract class SelectionFacet
+    partial struct DynamicFacet
     {
-
-        protected SelectionFacet(string Name)
+        public abstract class SelectionFacet
         {
-            this.Name = Name;
+            protected SelectionFacet(string Name)
+            {
+                this.Name = Name;
+            }
+
+            public string Name { get; }
+
         }
 
-        public string Name { get; }
-
-    }
-
-    public abstract class SelectionFacet<F,V> : SelectionFacet
-        where F : SelectionFacet<F,V>
-    {
-        protected SelectionFacet(string Name, V Value)
-            : base(Name)
+        public abstract class SelectionFacet<F,V> : SelectionFacet
+            where F : SelectionFacet<F,V>
         {
-            this.Value = Value;
+            protected SelectionFacet(string Name, V Value)
+                : base(Name)
+            {
+                this.Value = Value;
+            }
+
+            public V Value { get; }
+
+            public override string ToString()
+                => $"{Name}({Value})";
         }
 
-        public V Value { get; }
+        public class SelectionFacets
+        {
+            public static DistinctFacet Distinct()
+                =>  new DistinctFacet();
 
-        public override string ToString()
-            => $"{Name}({Value})";
+            public static InversionFacet Invert()
+                => new InversionFacet();
 
-
-    }
-
-    public class SelectionFacets
-    {
-        public static DistinctFacet Distinct() 
-            =>  new DistinctFacet();
-
-        public static InversionFacet Invert()
-            => new InversionFacet();
-
-        public static TopFacet Top(int Count) 
-            => new TopFacet(Count);
+            public static TopFacet Top(int Count)
+                => new TopFacet(Count);
+        }
     }
 }

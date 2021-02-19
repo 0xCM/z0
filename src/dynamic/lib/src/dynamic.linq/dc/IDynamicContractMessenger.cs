@@ -26,7 +26,6 @@ namespace Z0
         /// Sends an n-argument function invocation through the channel and returns the result
         /// </summary>
         /// <param name="method">The method to invoke</param>
-        /// <returns></returns>
         object InvokeFunctionWithParameters(MethodBase method, object[] parameters);
 
         /// <summary>

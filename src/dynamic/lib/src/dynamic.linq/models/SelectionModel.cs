@@ -9,12 +9,13 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Linq.Expressions;
 
-    using Z0;    
+
+    using static DynamicFacet;
 
     /// <summary>
     /// Defines a set of members together with the criteria used to determine a selected collection
     /// </summary>
-    public class SelectionModel 
+    public class SelectionModel
     {
         readonly Expression X;
 
@@ -39,10 +40,10 @@ namespace Z0.Dynamics
         /// </summary>
         public IReadOnlyList<SelectionFacet> Facets { get; }
 
-        public SelectionModel(Expression X, 
-            MemberSelection SelectedMembers, 
-            Option<MemberOrdering> Order, 
-            IEnumerable<Junction> Junctions, 
+        public SelectionModel(Expression X,
+            MemberSelection SelectedMembers,
+            Option<MemberOrdering> Order,
+            IEnumerable<Junction> Junctions,
             params SelectionFacet[] Facets)
         {
             this.X = X;
@@ -57,5 +58,5 @@ namespace Z0.Dynamics
     {
         public static SelectionModel BuildSelectionModel<T>(this IQueryable<T> queryable, params SelectionFacet[] facets)
             => SelectionModelBuilder.CreateModel(queryable);
-    }    
+    }
 }

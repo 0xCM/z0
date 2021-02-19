@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost(ApiNames.LinqXFuncX)]
     public static partial class XFuncX

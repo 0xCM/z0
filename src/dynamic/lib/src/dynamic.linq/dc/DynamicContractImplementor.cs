@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection.Emit;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Generates an implementation of a specified interface type that delegates to an implementation

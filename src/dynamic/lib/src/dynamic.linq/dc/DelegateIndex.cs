@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// Indexes a collection of delegates that (potentially) specify a <see cref="IDynamicContractMessenger"/> realization
     /// </summary>
     public class DelegateIndex
     {
-        public static DelegateIndexBuilder<T> Build<T>() 
+        public static DelegateIndexBuilder<T> Build<T>()
             => new DelegateIndexBuilder<T>();
 
         public DelegateIndex()
@@ -38,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="name">The name of the property get method</param>
         /// <param name="f">The get delegate</param>
-        public void Getter<T>(string name, Func<T> f) 
+        public void Getter<T>(string name, Func<T> f)
             => getters.Add(name, () => f());
 
         /// <summary>
@@ -46,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The name of the get method</param>
         /// <returns></returns>
-        public Func<object> Getter(string name) 
+        public Func<object> Getter(string name)
             => getters[name];
 
         /// <summary>
@@ -55,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The property type</typeparam>
         /// <param name="name">The name of the property set method</param>
         /// <param name="a">The set action</param>
-        public void Setter<T>(string name, Action<T> a) 
+        public void Setter<T>(string name, Action<T> a)
             => setters.Add(name, (x) => a((T)x));
 
         /// <summary>
@@ -63,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The name of the get method</param>
         /// <returns></returns>
-        public Action<object> Setter(string name) 
+        public Action<object> Setter(string name)
             => setters[name];
 
         /// <summary>
@@ -71,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The method</param>
         /// <param name="f">The delegate</param>
-        public void Function(string name, Delegate f) 
+        public void Function(string name, Delegate f)
             => functions.Add(name, f);
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace Z0
         /// </summary>
         /// <param name="name">The name of the action</param>
         /// <param name="a">The action</param>
-        public void Action(string name, Delegate a) 
+        public void Action(string name, Delegate a)
             => actions.Add(name, a);
 
         /// <summary>
@@ -87,14 +86,14 @@ namespace Z0
         /// </summary>
         /// <param name="name">The name of the action</param>
         /// <returns></returns>
-        public Delegate Action(string name) 
+        public Delegate Action(string name)
             => actions[name];
 
         /// <summary>
         /// Retrieves a function delegate
         /// </summary>
         /// <param name="name">The name of the function</param>
-        public Delegate Function(string name) 
+        public Delegate Function(string name)
             => functions[name];
     }
 }

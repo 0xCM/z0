@@ -36,7 +36,7 @@ namespace Z0.Asm
 
             public string Format()
             {
-                var operands =  Operands is null ? string.Empty : Operands.Length != 0 ?Operands.Concat(Chars.Comma) : string.Empty;
+                var operands =  Operands is null ? string.Empty : Operands.Length != 0 ?Operands.Join(Chars.Comma) : string.Empty;
                 var mnemonic = Mnemonic.ToString().ToLower();
                 return text.concat(mnemonic, Chars.Space, operands);
             }

@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Diagnostics;
 
     /// <summary>
     /// Implementation of a builder pattern that constructs <see cref="DelegateIndex"/> instances
-    /// based on supplied expressions and upon completion emits an implementation of the specified 
+    /// based on supplied expressions and upon completion emits an implementation of the specified
     /// contract type, returning an instance to this implementation to the caller
     /// </summary>
     /// <typeparam name="TContract">The contract type</typeparam>
@@ -164,7 +162,7 @@ namespace Z0
         /// to the caller
         /// </summary>
         /// <returns></returns>
-        public TContract Realize() 
+        public TContract Realize()
             => DelegatedContract.Realize<TContract>(typeof(TContract).Name + "Implementation", delegates);
     }
 }

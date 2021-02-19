@@ -20,7 +20,7 @@ namespace Z0
         [TextUtility, Closures(Closure)]
         public static string FormatVector<T>(this ReadOnlySpan<T> src, char sep = Chars.Comma)
         {
-            var body = src.Map(x => x.ToString()).Concat(sep);
+            var body = src.Map(x => x.ToString()).Join(sep);
             return Format.enclose(body, Rules.fence(Chars.Lt, Chars.Gt));
         }
 

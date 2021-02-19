@@ -14,36 +14,6 @@ namespace Z0
     partial class XText
     {
         /// <summary>
-        /// Joins the strings provided by the enumerable with an optional separator
-        /// </summary>
-        /// <param name="src">The source strings</param>
-        /// <param name="sep">The separator, if any</param>
-        [TextUtility]
-        public static string Concat(this IEnumerable<string> src, string sep = null)
-            => string.Join(sep ?? string.Empty, src);
-
-        [TextUtility]
-        public static string Concat(this IEnumerable<string> src, char sep)
-            => string.Join(sep, src);
-
-        [TextUtility]
-        public static string Concat(this ReadOnlySpan<string> src, string sep = null)
-            => text.concat(src,sep);
-
-        [TextUtility]
-        public static string Concat(this ReadOnlySpan<string> src, char? sep)
-            => text.concat(src, sep);
-
-        /// <summary>
-        /// Joins a sequence of source characters interspersed with a supplied separator
-        /// </summary>
-        /// <param name="chars">The characters to join</param>
-        /// <param name="sep">The character to intersperse</param>
-        [TextUtility]
-        public static string Concat(this IEnumerable<char> chars, char sep)
-            => new string(chars.Intersperse(sep).ToSpan());
-
-        /// <summary>
         /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
@@ -80,12 +50,17 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         [TextUtility]
-        public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-            => lhs.Concat() + rhs.Concat();
+        public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => a.Concat() + b.Concat();
 
+        /// <summary>
+        /// Joins the strings provided by the enumerable with an optional separator
+        /// </summary>
+        /// <param name="src">The source strings</param>
+        /// <param name="sep">The separator, if any</param>
         [TextUtility]
-        public static string Concat(this Span<string> src, string sep)
-            => TextRules.Format.concat(src,sep);
+        public static string Concat(this IEnumerable<string> src)
+            => string.Join(string.Empty, src);
 
         /// <summary>
         /// Sequentially concatenates each indexed cell to the next without deimiters/interspersal
@@ -93,14 +68,6 @@ namespace Z0
         /// <param name="src">The source text</param>
         [TextUtility]
         public static string Concat(this Span<string> src)
-            => src.Concat(string.Empty);
-
-        /// <summary>
-        /// Sequentially concatenates each indexed cell to the next, separated by a specified character
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [TextUtility]
-        public static string Concat(this Span<string> src, char sep)
-            => src.Concat(sep.ToString());
+            => src.Join(string.Empty);
     }
 }

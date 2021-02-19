@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Dynamics
+namespace Z0
 {
-    public sealed class DistinctFacet : SelectionFacet<DistinctFacet,bool>
+    partial struct DynamicFacet
     {
-        public DistinctFacet(bool Enabled = true)
-            : base("Distinct", Enabled)
+        public sealed class DistinctFacet : SelectionFacet<DistinctFacet,bool>
         {
+            public DistinctFacet(bool Enabled = true)
+                : base("Distinct", Enabled)
+            {
 
+            }
         }
-
     }
-
-
-
 }

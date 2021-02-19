@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-
     public sealed class AsmRecords
     {
         public AsmRowSets<IceMnemonic> RowSets {get;private set;}

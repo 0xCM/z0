@@ -12,10 +12,12 @@ namespace Z0.Dynamics
 
     using X = System.Linq.Expressions;
 
+    using static DynamicFacet;
+
     public abstract class ModelQueryProvider : IModelQueryProvider
     {
         static Type GetElementType(Type stype)
-            => stype.CloseEnumerableType().Map(                
+            => stype.CloseEnumerableType().Map(
                     t => t.GetGenericArguments()[0], () => stype);
 
         protected ModelQueryProvider()
@@ -25,7 +27,7 @@ namespace Z0.Dynamics
 
         protected abstract IQueryable<T> CreateQuery<T>(Expression X);
 
-        IQueryable<T> IQueryProvider.CreateQuery<T>(Expression X) 
+        IQueryable<T> IQueryProvider.CreateQuery<T>(Expression X)
             => CreateQuery<T>(X);
 
         IQueryable IQueryProvider.CreateQuery(Expression X)

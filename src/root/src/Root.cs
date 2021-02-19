@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     [ApiHost]
     public readonly partial struct Root
@@ -82,7 +83,6 @@ namespace Z0
         {
             var baseId = @base(src);
             var dst = baseId.ToString().ToLower();
-
             if(isTest(src))
                 return dst + TestSuffix;
             else if(isSvc(src))
@@ -94,6 +94,39 @@ namespace Z0
         [Op]
         public static string format(PartId src, byte pad)
             => string.Format("{0,-" + pad.ToString() + "}", format(src));
+
+        [Op]
+        public static string[] componentize(PartId src)
+        {
+            var components = new List<string>();
+            var current = EmptyString;
+            var literal = @base(src).ToString();
+            var length = literal.Length;
+            for(var i=0; i<length; i++)
+            {
+                var c = literal[i];
+                if(i == 0)
+                    current += c;
+                else
+                {
+                    if(Char.IsLower(c))
+                        current += c;
+                    else
+                    {
+                        if(!string.IsNullOrEmpty(current))
+                        {
+                            components.Add(current);
+                            current = EmptyString;
+                            current += Char.ToLowerInvariant(c);
+                        }
+                    }
+                }
+            }
+
+            if(isTest(src))
+                components.Add("test");
+            return components.ToArray();
+        }
 
         [MethodImpl(Inline), Op]
         public static string format(ExternId id)
