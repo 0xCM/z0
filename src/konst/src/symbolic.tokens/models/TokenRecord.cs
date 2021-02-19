@@ -12,19 +12,19 @@ namespace Z0
     [Record]
     public struct TokenRecord : IRecord<TokenRecord>
     {
-        public Sequential Index;
+        public ushort Index;
 
-        public string Identifier;
+        public Identifier Name;
 
         public string Value;
 
         public string Description;
 
         [MethodImpl(Inline)]
-        public TokenRecord(uint index, string id, string value, string description)
+        public TokenRecord(ushort index, string id, string value, string description)
         {
             Index = index;
-            Identifier = id ?? EmptyString;
+            Name = id ?? EmptyString;
             Value = value ?? EmptyString;
             Description = description ?? EmptyString;
         }

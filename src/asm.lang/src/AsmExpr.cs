@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -15,8 +16,21 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmExpr
     {
+        [MethodImpl(Inline), Op]
+        public static OperationSpec resig(OperationSpec spec, byte index, Signature sig)
+            => new OperationSpec((byte)((uint)spec.Seq | (uint)index << 8), spec.OpCode, sig);
+
+        [Op]
+        public static Index<SigOperand> decompose(SigOperand src)
+            => src.IsComposite ? src.Content.SplitClean(CompositeOperandPartition).Map(sigop) : array(src);
+
+        [Op]
         public static bool composite(SigOperand operand)
             => operand.Content.Contains(CompositeOperandPartition);
+
+        [Op]
+        public static bool composite(Signature src)
+            => src.Operands.Any(o => o.IsComposite);
 
         public static string format(Signature src)
         {
@@ -54,19 +68,19 @@ namespace Z0.Asm
         /// <param name="name">The identifer name</param>
         /// <param name="kind">The identifier kind</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOpToken token(byte index, Identifier name, AsmSigOpKind kind, string symbol)
-            => new AsmSigOpToken(index, name, kind, symbol);
+        public static Token<AsmSigOpKind> token(byte index, Identifier name, AsmSigOpKind kind, string symbol)
+            => Tokens.token(index, name, kind, symbol);
 
         /// <summary>
         /// Creates a <see cref='AsmSigOpToken'/> index
         /// </summary>
         /// <param name="k">An identifier representative</param>
         [Op]
-        public static Index<AsmSigOpToken> SigOpTokens()
+        public static Index<Token<AsmSigOpKind>> SigOpTokens()
         {
             var details = Enums.details<AsmSigOpKind,ushort>().View;
             var count = AsmSigOpKindFacets.IdentifierCount + 1;
-            var buffer = alloc<AsmSigOpToken>(count);
+            var buffer = alloc<Token<AsmSigOpKind>>(count);
             ref var dst = ref first(buffer);
             for(byte i=1; i<count; i++)
             {

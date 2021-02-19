@@ -36,6 +36,19 @@ namespace Z0.Asm
         public ReadOnlySpan<Entry<AsmMnemonicCode>> MnemonicLiterals()
             => MnemonicSymbols.Entries;
 
+        public Index<AsmMnemonicInfo> MnemonicInfo()
+        {
+            var descriptor = Assets.create(Wf).AsmMnemonicInfo();
+            if(Resources.document(descriptor, TextDocFormat.Structured(), out var doc))
+            {
+                var buffer = alloc<AsmMnemonicInfo>(doc.RowCount);
+                doc.Parse(buffer, row => new AsmMnemonicInfo(row[0].Text, row[1].Text));
+                return buffer;
+            }
+            else
+                throw new Exception();
+        }
+
         public Index<AsmCatRow> LoadCatalogRows()
         {
             var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
@@ -177,14 +190,33 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        public Index<OperationSpec> Denormalize(ReadOnlySpan<OperationSpec> src)
+        public Index<OperationSpec> Decompose(ReadOnlySpan<OperationSpec> src)
         {
             var count = src.Length;
             var dst = root.list<OperationSpec>(count*2);
             for(var i=0; i<count; i++)
             {
                 ref readonly var spec = ref skip(src,i);
-                var sig = spec.Sig;
+                if(spec.IsComposite)
+                {
+                    var decomposed = OperationSpec.Empty;
+                    var operands = spec.Sig.Operands.View;
+                    var oc = operands.Length;
+                    for(var j=0; j<oc; j++)
+                    {
+                        ref readonly var operand = ref skip(operands,j);
+                        if(operand.IsComposite)
+                        {
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }
+                else
+                    dst.Add(spec);
             }
 
             return dst.ToArray();

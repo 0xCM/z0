@@ -303,6 +303,16 @@ namespace Z0.Asm
             Wf.Row(buffer.Emit());
         }
 
+
+        public void LoadDoc()
+        {
+            var src = Db.AsmFile(typeof(math));
+            var flow = Wf.Processing(src);
+            var doc = AsmDoc.parse(src);
+            var content = doc.Content;
+            root.iter(content, line => Wf.Row(line));
+            Wf.Processed(flow, src);
+        }
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -311,10 +321,7 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
-            EmitSpecifiers();
-
-            // var monics = Etl.Mnemonics();
-            // AsmGen.create(Wf).GenerateModels(monics);
+            LoadDoc();
         }
 
         public static void Main(params string[] args)

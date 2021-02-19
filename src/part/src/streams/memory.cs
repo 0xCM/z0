@@ -20,6 +20,6 @@ namespace Z0
         /// <param name="encoding">The text encoding</param>
         [Op]
         public static MemoryStream memory(string src, Encoding encoding = null)
-            => new MemoryStream((encoding ?? Encoding.UTF8).GetBytes(src ?? string.Empty));
+            => new MemoryStream((encoding ?? Encoding.UTF8).GetBytes(src ?? EmptyString));
     }
 }

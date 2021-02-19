@@ -14,6 +14,9 @@ namespace Z0.Asm
 
     public sealed class AsmDoc : Document<AsmDoc,Index<DocLine>,FS.FilePath>
     {
+        public static AsmDoc parse(FS.FilePath src)
+            => parse(src.ReadText());
+
         public static AsmDoc parse(string src)
         {
             var lines = Parse.lines(src);

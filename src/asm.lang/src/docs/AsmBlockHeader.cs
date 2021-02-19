@@ -19,7 +19,6 @@ namespace Z0.Asm
 
         public MemoryAddress BaseAddress;
 
-
         [MethodImpl(Inline)]
         public AsmBlockHeader(OpUri uri, string sig, string prop, MemoryAddress @base)
         {

@@ -48,8 +48,8 @@ namespace Z0
         /// Joins the enclosed cells to produce a line of text
         /// </summary>
         /// <param name="delimiter">The separator to apply to delimit the cell data in the line </param>
-        public string Format(char? delimiter = null)
-            => string.Join(ColSep(delimiter),  Data.Select(x => x.Format()));
+        public string Format(char? delimiter = null, int? pad = null)
+            => string.Join(ColSep(delimiter),  Data.Select(x => x.Format(pad)));
 
         public override string ToString()
             => Format();

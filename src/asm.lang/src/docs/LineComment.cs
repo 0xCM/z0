@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmDocParts
     {
-        public readonly struct LineComment
+        public readonly struct LineComment : IAsmDocPart<LineComment>
         {
             public TextBlock Text {get;}
 

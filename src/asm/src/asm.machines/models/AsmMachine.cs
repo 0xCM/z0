@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static AsmMem;
     using static AsmRegs;
     using static AsmImm;
-    using static AsmRegBanks;
 
     [ApiComplete]
     public readonly ref partial struct AsmMachine

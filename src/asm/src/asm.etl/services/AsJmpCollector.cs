@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public sealed class AsmJmpCollector : WfService<AsmJmpCollector,AsmJmpCollector>
     {

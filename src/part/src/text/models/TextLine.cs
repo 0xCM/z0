@@ -73,7 +73,7 @@ namespace Z0
             => IsNonEmpty && Content.StartsWith(match);
 
         public string[] Split(in TextDocFormat spec)
-            => IsNonEmpty ? Content.Split(spec.Delimiter) : sys.empty<string>();
+            => IsNonEmpty ? Content.SplitClean(spec.Delimiter) : sys.empty<string>();
 
         public string Format()
             => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";

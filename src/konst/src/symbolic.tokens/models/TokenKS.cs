@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a kinded token
     /// </summary>
-    public readonly struct Token<K,S> : IToken<K,S>
+    public readonly struct Token<K,S>
         where K : unmanaged
         where S : unmanaged, ISymbol
     {

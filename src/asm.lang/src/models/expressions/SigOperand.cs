@@ -25,6 +25,9 @@ namespace Z0.Asm
                 get => composite(this);
             }
 
+            public Index<SigOperand> Decompose()
+                => decompose(this);
+
             public string Content
             {
                 [MethodImpl(Inline)]

@@ -69,8 +69,8 @@ namespace Z0
         public string Format()
             => Data;
 
-        public string Format(int pad)
-            => string.Format(RP.pad(pad), Data);
+        public string Format(int? pad)
+            => pad != null ? string.Format(RP.pad(pad.Value), Data) : Data;
 
         [MethodImpl(Inline)]
         public TextBlock Trim()

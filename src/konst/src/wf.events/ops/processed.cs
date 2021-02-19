@@ -19,6 +19,10 @@ namespace Z0
         public static ProcessedFileEvent<T> processed<T>(WfStepId step, FS.FilePath src, T data, CorrelationToken ct)
             => new ProcessedFileEvent<T>(step, src, data, ct);
 
+        [MethodImpl(Inline), Op]
+        public static ProcessedFileEvent processed(WfStepId step, FS.FilePath src, CorrelationToken ct)
+            => new ProcessedFileEvent(step, src, ct);
+
         [MethodImpl(Inline)]
         public static ProcessedFileEvent<T,M> processed<T,M>(WfStepId step, FS.FilePath src, T data, M metric, CorrelationToken ct)
             => new ProcessedFileEvent<T,M>(step, src, data, metric, ct);

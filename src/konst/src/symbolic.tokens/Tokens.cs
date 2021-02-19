@@ -13,16 +13,10 @@ namespace Z0
     [ApiHost]
     public readonly struct Tokens
     {
-        [MethodImpl(Inline)]
-        public static Token<S> token<S>(params S[] symbols)
-            where S : unmanaged, ISymbol
-                => new Token<S>(symbols);
-
-        [MethodImpl(Inline)]
-        public static Token<K,S> token<K,S>(K kind, params S[] symbols)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Token<K> token<K>(ushort index, Identifier name, K kind, Name symbol)
             where K : unmanaged
-            where S : unmanaged, ISymbol
-                => new Token<K,S>(kind, symbols);
+                => new Token<K>(index,name,kind,symbol);
 
         [MethodImpl(Inline)]
         public static Tokens<I,K,S> tokens<I,K,S>(Token<K,S>[] src, I i = default)
@@ -31,10 +25,6 @@ namespace Z0
             where I : unmanaged
                 => new Tokens<I,K,S>(src);
 
-        [MethodImpl(Inline)]
-        public static TokenRecord record<T>(T index, string id, string value, string description)
-            where T : unmanaged, Enum
-                => new TokenRecord(EnumValue.e32u(index), id, value, description);
         [Op]
         public static void emit(ReadOnlySpan<TokenRecord> src, FS.FilePath dst)
         {
@@ -45,7 +35,7 @@ namespace Z0
             for(var i=1; i<count; i++)
             {
                 ref readonly var token = ref skip(src,i);
-                var line = text.concat(token.Identifier.PadRight(20), "| ", token.Value.PadRight(20), "| ", token.Description);
+                var line = text.concat(token.Name.Format().PadRight(20), "| ", token.Value.PadRight(20), "| ", token.Description);
                 writer.WriteLine(line);
             }
         }

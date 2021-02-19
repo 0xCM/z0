@@ -9,23 +9,22 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToken
+    public interface IToken : ITextual, INullity
     {
+        ushort Index {get;}
 
+        Identifier Name {get;}
+
+        Name Symbol {get;}
+
+        string ITextual.Format()
+            => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));
     }
 
     [Free]
-    public interface IToken<S> : IToken
-        where S : unmanaged, ISymbol
-    {
-        ReadOnlySpan<S> Symbols {get;}
-
-    }
-
-    [Free]
-    public interface IToken<K,S> : IToken<S>, IKinded<K>
-        where S : unmanaged, ISymbol
+    public interface IToken<K> : IToken
         where K : unmanaged
     {
+        K Kind {get;}
     }
 }

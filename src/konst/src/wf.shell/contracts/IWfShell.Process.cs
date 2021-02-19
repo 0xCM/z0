@@ -17,6 +17,12 @@ namespace Z0
             return Flow();
         }
 
+        WfExecFlow Processing(FS.FilePath src)
+        {
+            signal(this).Processing(src);
+            return Flow();
+        }
+
         WfExecToken Processed<T>(WfExecFlow flow, FS.FilePath src, T data)
         {
             signal(this).Processed(src, data);
@@ -37,6 +43,12 @@ namespace Z0
         WfExecToken Processed<T>(WfExecFlow flow, T content)
         {
             signal(this).Processed(content);
+            return Ran(flow);
+        }
+
+        WfExecToken Processed(WfExecFlow flow, FS.FilePath path)
+        {
+            signal(this).Processed(path);
             return Ran(flow);
         }
 

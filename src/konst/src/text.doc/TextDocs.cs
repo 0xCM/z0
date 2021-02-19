@@ -8,7 +8,7 @@ namespace Z0
     using System.IO;
 
     using static Part;
-    using static z;
+    using static memory;
     using static TextRules;
 
     [ApiHost]
@@ -32,7 +32,14 @@ namespace Z0
             };
 
             using var reader = src.Reader();
-            return parse(reader, format).Select(doc => parsed(src.Name.Format(), doc)).Value;
+            return parse(reader, format).Select(doc => root.parsed(src.Name.Format(), doc)).Value;
+        }
+
+        public static ParseResult<TextDoc> parse(string data, TextDocFormat? format = null)
+        {
+            using var stream = data.Stream();
+            using var reader = new StreamReader(stream);
+            return parse(reader, format);
         }
 
         /// <summary>
@@ -85,7 +92,7 @@ namespace Z0
                 }
 
                 var doc = new TextDoc(fmt, docheader, counter, rows.ToArray());
-                return parsed(string.Empty, doc);
+                return root.parsed(string.Empty, doc);
             }
             catch(Exception e)
             {

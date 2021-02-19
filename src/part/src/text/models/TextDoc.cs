@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
+    using static memory;
 
     public readonly struct TextDoc : IIndex<TextRow>
     {
@@ -45,17 +46,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => RowData.Map(r => r.Format()).Join(Eol);
-        }
-
-        public Option<TextRow> Next(int index, Func<TextRow,bool> f)
-        {
-            for(var i=index; i<Rows.Length; i++)
-            {
-                var row = this[i];
-                if(f(row))
-                    return row;
-            }
-            return root.none<TextRow>();
         }
 
         public ref readonly TextRow this[int index]
@@ -96,6 +86,14 @@ namespace Z0
                 else
                     part.Add(row);
             }
+        }
+
+        public void Parse<T>(Span<T> dst, Func<TextRow,T> parser)
+        {
+            var rows = RowData.View;
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+               seek(dst,i) = parser(skip(rows,i));
         }
 
         public static TextDoc Empty

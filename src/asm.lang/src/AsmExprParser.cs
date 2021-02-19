@@ -24,9 +24,9 @@ namespace Z0.Asm
 
         Adjacent<char, OneOf<char>> RegDigitRule;
 
-        Index<AsmSigOpToken> SigOpTokens;
+        Index<Token<AsmSigOpKind>> SigOpTokens;
 
-        SymbolTable<AsmSigOpToken> SigOpLookup;
+        SymbolTable<Token<AsmSigOpKind>> SigOpLookup;
 
         SeqSplit<char> SigOpSplitRule;
 
@@ -48,7 +48,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public ref readonly AsmSigOpToken Token(AsmSigOpKind kind)
+        public ref readonly Token<AsmSigOpKind> Token(AsmSigOpKind kind)
         {
             if(kind <= AsmSigOpKindFacets.LastClass)
                 return ref SigOpTokens[(byte)kind];
@@ -57,7 +57,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public ref readonly AsmSigOpToken ParseSigOp(SigOperand src)
+        public ref readonly Token<AsmSigOpKind> ParseSigOp(SigOperand src)
         {
             if(SigOpLookup.Index(src.Content, out var index))
                 return ref SigOpTokens[index];

@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     public readonly struct AsmSigOpToken : ITextual, INullity
     {
-        public byte Index {get;}
+        public ushort Index {get;}
 
         public Identifier Name {get;}
 
@@ -19,7 +19,7 @@ namespace Z0.Asm
         public Name Symbol {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOpToken(byte index, Identifier name, AsmSigOpKind kind, string symbol)
+        public AsmSigOpToken(ushort index, Identifier name, AsmSigOpKind kind, string symbol)
         {
             Index = index;
             Name = name;
@@ -40,7 +40,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => string.Format("{0,-4} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));
+            => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));
 
         public override string ToString()
             => Format();

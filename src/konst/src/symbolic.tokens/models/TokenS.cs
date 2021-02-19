@@ -9,54 +9,47 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbolic;
-
     /// <summary>
     /// Defines a kinded token
     /// </summary>
-    public readonly struct Token<S> : IToken<S>
-        where S : unmanaged, ISymbol
+    public readonly struct Token<K> : IToken<K>
+        where K : unmanaged
     {
-        readonly Index<S> Data;
+        public ushort Index {get;}
+
+        public Identifier Name {get;}
+
+        public K Kind {get;}
+
+        public Name Symbol {get;}
 
         [MethodImpl(Inline)]
-        public Token(S[] src)
-            => Data = src;
-
-        public ReadOnlySpan<S> Symbols
+        public Token(ushort index, Identifier name, K kind, Name symbol)
         {
-            [MethodImpl(Inline)]
-            get => Data.View;
+            Index = index;
+            Name = name;
+            Kind = kind;
+            Symbol = symbol;
         }
 
-        public byte Length
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (byte)Data.Count;
+            get => Index == 0;
         }
 
-        public ref readonly S FirstSymbol
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => ref Data.First;
+            get => Index != 0;
         }
 
-        public ref readonly S this[byte index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[(byte)index];
-        }
-
-        [MethodImpl(Inline)]
-        public ReadOnlySpan<char> Render()
-            => api.render<S>(Data.Storage);
-
-        [MethodImpl(Inline)]
         public string Format()
-            => new string(Render());
+            => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));
 
-        [MethodImpl(Inline)]
-        public static implicit operator Token<S>(S[] src)
-            => new Token<S>(src);
+        public override string ToString()
+            => Format();
+
+        public static Token<K> Empty => default;
     }
 }

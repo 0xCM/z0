@@ -68,6 +68,9 @@ namespace Z0
         public void Processing<T>(FS.FilePath src, T data)
             => Raise(processing(Host, src, data, Ct));
 
+        public void Processing(FS.FilePath src)
+            => Raise(processing(Host, src, Ct));
+
         public void Processed<T>(FS.FilePath src, T data)
             => Raise(processed(Host, src, data, Ct));
 
@@ -76,6 +79,9 @@ namespace Z0
 
         public void Processed<T>(T content)
             => Raise(processed(Host, content, Ct));
+
+        public void Processed(FS.FilePath path)
+            => Raise(processed(Host, path, Ct));
 
         public void Processed<T>(ApiHostUri uri, T content)
             => Raise(processed(Host, Seq.delimit(uri,content), Ct));
