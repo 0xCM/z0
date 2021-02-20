@@ -264,11 +264,11 @@ namespace Z0
         FS.FolderPath ScriptRoot()
             => ControlRoot() + FS.folder("tools");
 
-        FS.FolderPath ScriptDir(string id)
-            => ScriptRoot() + FS.folder(id);
+        FS.FolderPath ScriptDir<K>(K kind)
+            => ScriptRoot() + FS.folder(kind.ToString());
 
-        FS.FilePath ScriptFile(string id, FS.FileName name)
-            => ScriptDir(id) + name;
+        FS.FilePath ScriptFile<K>(K kind, Name name, FS.FileExt? ext = null)
+            => ScriptDir(kind) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
 
         FS.FolderPath ToolDbRoot()
             => Root + FS.folder("tooldb");

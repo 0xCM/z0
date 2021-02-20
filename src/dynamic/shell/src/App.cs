@@ -55,7 +55,7 @@ namespace Z0
             var llvm = Llvm.service(wf);
             var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
-            using var runner = WfToolRunner.create(wf);
+            using var runner = ToolRunner.create(wf);
             runner.Run(cmd);
             //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
             //run(wf, new CmdLine("llvm-mc --help"));
@@ -180,7 +180,7 @@ namespace Z0
         public void RunPipes()
         {
             using var flow = Wf.Running();
-            using var runner = WfToolRunner.create(Wf);
+            using var runner = ToolRunner.create(Wf);
             root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
 
             var pipe = Pipes.pipe<ushort>(Wf);
@@ -251,7 +251,6 @@ namespace Z0
             root.iter(libs, lib => Wf.Row(lib.Name));
         }
 
-
         void ShowCmdModels()
         {
             var models = @readonly(Cmd.cmdtypes(Wf));
@@ -270,7 +269,7 @@ namespace Z0
             public const string Case0 = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
         }
 
-       void ShowOptions()
+        void ShowOptions()
         {
             var result = Cmd.parse(CmdCases.Case0);
             if(result.Succeeded)
@@ -298,7 +297,6 @@ namespace Z0
                 }
             }
         }
-
 
         void Summarize(ApiCodeBlock src)
         {
@@ -347,10 +345,10 @@ namespace Z0
             Wf.Router.Dispatch(cmd);
         }
 
-        public void LoadAsmStore()
+        public void LoadXedSummaries()
         {
-            var store = AsmDataStore.create(Wf);
-            var patterns = store.XedSummaries();
+            var catalog = Wf.AsmCatalog();
+            var patterns = catalog.XedSummaries();
             Wf.Status($"{patterns.Length}");
         }
 
@@ -368,21 +366,36 @@ namespace Z0
                 };
                 Wf.Row(info.ToString());
             }
-
         }
 
+        // public void RunCmdScript(string kind, Name name)
+        // {
+        //     var file = Db.ScriptFile(kind, name);
+        //     var script = WinCmd.script(file);
+        //     using var runner = ToolRunner.create(Wf);
+        //     var result = runner.Run(script);
+        //     if(result)
+        //         root.iter(result.Data, line => Wf.Row(line));
+
+        // }
+
+        // public void RunPsScript(string kind, Name name)
+        // {
+        //     var file = Db.ScriptFile(kind, name, FS.Extensions.Ps1);
+        //     var script = Pwsh.script(file);
+        //     using var runner = ToolRunner.create(Wf);
+        //     var result = runner.Run(script);
+        //     if(result)
+        //         root.iter(result.Data, line => Wf.Row(line));
+        // }
 
         public void Run()
         {
-            var file = Db.ScriptFile("clang", FS.file("codegen.cmd"));
-            var script = WinCmd.script(file);
-            using var runner = WfToolRunner.create(Wf);
-            var result = runner.Run(script);
-            if(result)
-                root.iter(result.Data, line => Wf.Row(line));
-
-            // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
-            // root.iter(terms, r => Wf.Row(r));
+            using var runner = ToolRunner.create(Wf);
+            runner.RunCmdScript("clang", "codegen");
+            runner.RunCmdScript("clang", "parse");
+            runner.RunPsScript("clang-query", "fast-math");
+            runner.RunPsScript("clang-query", "sse-builtins");
         }
     }
 

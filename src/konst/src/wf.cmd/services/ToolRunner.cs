@@ -9,7 +9,7 @@ namespace Z0
     using static TextRules;
     using static memory;
 
-    public sealed class WfToolRunner : WfService<WfToolRunner,IWfToolRunner>, IWfToolRunner
+    public sealed class ToolRunner : WfService<ToolRunner,IToolRunner>, IToolRunner
     {
         public Index<CmdTypeInfo> Intrinsics()
             => Cmd.cmdtypes(Wf);
@@ -50,5 +50,28 @@ namespace Z0
                 return e;
             }
         }
+
+        public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)
+        {
+            var file = Db.ScriptFile(kind, name);
+            var script = WinCmd.script(file);
+            using var runner = ToolRunner.create(Wf);
+            var result = runner.Run(script);
+            if(result)
+                root.iter(result.Data, line => Wf.Row(line));
+            return result;
+        }
+
+        public Outcome<TextLines> RunPsScript<K>(K kind, Name name)
+        {
+            var file = Db.ScriptFile(kind, name, FS.Extensions.Ps1);
+            var script = Pwsh.script(file);
+            using var runner = ToolRunner.create(Wf);
+            var result = runner.Run(script);
+            if(result)
+                root.iter(result.Data, line => Wf.Row(line));
+            return result;
+        }
+
     }
 }

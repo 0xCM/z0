@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static TextRules;
-    using static memory;
-
-    public interface IWfToolRunner : IWfService
+    public interface IToolRunner : IWfService
     {
         Outcome<TextLines> Run(CmdLine cmd);
 
-        Index<CmdTypeInfo> Intrinsics();
+        Outcome<TextLines> RunCmdScript<K>(K kind, Name name);
+
+        Outcome<TextLines> RunPsScript<K>(K kind, Name name);
     }
 }
