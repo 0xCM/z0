@@ -51,27 +51,59 @@ namespace Z0
             }
         }
 
-        public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)
+        public FS.FilePath ScriptFile<K>(K kind, Name name, ToolShellKind shell)
         {
-            var file = Db.ScriptFile(kind, name);
-            var script = WinCmd.script(file);
-            using var runner = ToolRunner.create(Wf);
-            var result = runner.Run(script);
+            var x = shell switch{
+                ToolShellKind.Cmd => FS.Extensions.Cmd,
+                ToolShellKind.Ps => FS.Extensions.Ps1,
+                _ => FS.FileExt.Empty
+            };
+            return Db.ScriptFile(kind,name,x);
+        }
+
+        public CmdLine CmdLine(FS.FilePath script, ToolShellKind shell)
+        {
+            return shell switch{
+                ToolShellKind.Cmd => WinCmd.script(script),
+                ToolShellKind.Ps => Pwsh.script(script),
+                _ => Z0.CmdLine.Empty
+            };
+        }
+
+        public Outcome<TextLines> RunScript<K>(K kind, Name name, ToolShellKind shell)
+        {
+            var file = ScriptFile(kind,name, shell);
+            var command = CmdLine(file,shell);
+            var result = Run(command);
             if(result)
                 root.iter(result.Data, line => Wf.Row(line));
             return result;
         }
 
+        public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)
+            => RunScript(kind,name, ToolShellKind.Cmd);
+        // {
+        //     var file = Db.ScriptFile(kind, name);
+        //     var command = WinCmd.script(file);
+        //     using var runner = ToolRunner.create(Wf);
+        //     var result = runner.Run(command);
+        //     if(result)
+        //         root.iter(result.Data, line => Wf.Row(line));
+        //     return result;
+        // }
+
         public Outcome<TextLines> RunPsScript<K>(K kind, Name name)
-        {
-            var file = Db.ScriptFile(kind, name, FS.Extensions.Ps1);
-            var script = Pwsh.script(file);
-            using var runner = ToolRunner.create(Wf);
-            var result = runner.Run(script);
-            if(result)
-                root.iter(result.Data, line => Wf.Row(line));
-            return result;
-        }
+            => RunScript(kind,name, ToolShellKind.Ps);
+
+        // {
+        //     var file = Db.ScriptFile(kind, name, FS.Extensions.Ps1);
+        //     var script = Pwsh.script(file);
+        //     using var runner = ToolRunner.create(Wf);
+        //     var result = runner.Run(script);
+        //     if(result)
+        //         root.iter(result.Data, line => Wf.Row(line));
+        //     return result;
+        // }
 
     }
 }

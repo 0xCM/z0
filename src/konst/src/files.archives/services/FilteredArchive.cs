@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct FilteredArchive : IFileArchive
+    public readonly struct FilteredArchive : IFilteredArchive
     {
         public FS.FolderPath Root {get;}
 
@@ -34,13 +33,12 @@ namespace Z0
             ExtFilter = ext;
         }
 
-        public IEnumerable<FS.FolderPath> Directories()
+        public Deferred<FS.FolderPath> Directories()
             => Root.SubDirs(true);
 
         public Deferred<FS.FilePath> Enumerate()
             =>  ExtFilter.IsNonEmpty
             ?  Root.EnumerateFiles(ExtFilter, true)
             :  Root.EnumerateFiles(TextFilter, true);
-
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
     using System.Linq;
 
     using Z0.Tools;
-    using Z0.Asm;
 
-    using static z;
+    using static Part;
+    using static memory;
     using static Tools.Llvm;
 
     class App : IDisposable
@@ -57,8 +57,6 @@ namespace Z0
             var cmd = WinCmd.dir(cases);
             using var runner = ToolRunner.create(wf);
             runner.Run(cmd);
-            //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
-            //run(wf, new CmdLine("llvm-mc --help"));
         }
 
         void ShowHandlers()
@@ -93,12 +91,6 @@ namespace Z0
             var process = Cmd.process(wf,cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
-        }
-
-        static void ListFiles(IWfShell wf, FS.Files src, StreamWriter dst)
-        {
-            foreach(var file in src)
-                wf.Status(file.ToUri().Format());
         }
 
         public void ShowCommands()
@@ -136,69 +128,38 @@ namespace Z0
             Wf.Disposed();
         }
 
-        [Op]
-        public static FS.FilePath[] match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
-        {
-            var files = Archives.create(root, ext).ArchiveFiles().Take(max).Array();
-            Array.Sort(files);
-            return files;
-        }
-
-        [Op]
-        public static FS.FilePath[] match(FS.FolderPath root, params FS.FileExt[] ext)
-        {
-            var files = Archives.create(root, ext).ArchiveFiles().Array();
-            Array.Sort(files);
-            return files;
-        }
-
-        [Op]
-        public static CmdResult exec(ListFilesCmd cmd)
-        {
-            var archive = Archives.create(cmd.SourceDir, cmd.Extensions);
-            var id = cmd.CmdId();
-            var list = cmd.EmissionLimit != 0 ? match(cmd.SourceDir, cmd.EmissionLimit, cmd.Extensions) : match(cmd.SourceDir, cmd.Extensions);
-            var outcome = Archives.emit(list, cmd.FileUriMode, cmd.TargetPath);
-            return outcome ? Cmd.ok(cmd) : Cmd.fail(cmd,outcome.Format());
-        }
-
-        public static ListFilesCmd EmitFileListCmdSample(IWfShell wf)
+        public ListFilesCmd EmitFileListCmdSample()
         {
             var cmd = new ListFilesCmd();
             cmd.ListName = "tests";
-            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug");
-            cmd.TargetPath = wf.Db().JobPath(FS.file("coreclr.tests", FileExtensions.Cmd));
-            cmd.FileUriMode = false;
+            cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
+            cmd.TargetPath = Db.IndexTable("clrtests");
+            cmd.FileUriMode = true;
             cmd.WithExt(FileExtensions.Cmd);
-            cmd.WithLimit(20);
+            //cmd.WithLimit(20);
             return cmd;
         }
 
         CmdResult EmitFileList()
-            => exec(EmitFileListCmdSample(Wf));
+            => Wf.Router.Dispatch(EmitFileListCmdSample());
+
+        void ListCommands()
+        {
+            root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
+
+        }
 
         public void RunPipes()
         {
             using var flow = Wf.Running();
-            using var runner = ToolRunner.create(Wf);
-            root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
+            var data = Wf.PolyStream.Span<ushort>(2400);
 
-            var pipe = Pipes.pipe<ushort>(Wf);
-            var count = 10;
-            var input = Wf.PolyStream.Span<ushort>(count);
-            for(var i=0; i<count; i++)
-                pipe.Deposit(skip(input,i));
+            var input = Pipes.pipe<ushort>(Wf);
+            var incount = Pipes.flow(data, input);
+            var output = Pipes.pipe<ushort>(Wf);
+            var outcount = Pipes.flow(input,output);
 
-            var output = root.hashset<ushort>();
-            while(pipe.Next(out var dst))
-                output.Add(dst);
-
-            root.require(output.Count == count, () => $"{output.Count} != {count}");
-
-            for(var i=0; i<count; i++)
-                root.require(output.Contains(skip(input,i)), () => $"Containment failure at {i}");
-
-            Wf.Ran(flow, $"Ran {count} values through pipe");
+            Wf.Ran(flow, $"Ran {incount} -> {outcount} values through pipe");
         }
 
         void EmitImageHeaders()
@@ -219,7 +180,6 @@ namespace Z0
             var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
             ImageArchives.pipe(Wf, path, dst);
         }
-
 
         void ShowLetters()
         {
@@ -262,21 +222,14 @@ namespace Z0
             }
         }
 
-        public readonly struct CmdCases
-        {
-            public const string CoreClrBuildLog = "CoreCLR_Windows_NT__x64__Debug.log";
-
-            public const string Case0 = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-        }
-
         void ShowOptions()
         {
-            var result = Cmd.parse(CmdCases.Case0);
+            const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
+            var result = Cmd.parse(@case);
             if(result.Succeeded)
             {
                 var value = result.Value;
                 Wf.Status(Cmd.format(value));
-
             }
             else
                 Wf.Error(result.Message);
@@ -284,7 +237,8 @@ namespace Z0
 
         void ShowCases()
         {
-            var descriptors = Resources.descriptors(Wf.Controller, CmdCases.CoreClrBuildLog);
+            const string LogName = "CoreCLR_Windows_NT__x64__Debug.log";
+            var descriptors = Resources.descriptors(Wf.Controller, LogName);
             if(descriptors.ResourceCount == 1)
             {
                 var data = descriptors[0].Utf8();
@@ -323,10 +277,9 @@ namespace Z0
         {
             var archive = RuntimeArchive.create();
             var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
-            var rows = map(src, f => Seq.delimit(f.GetSimpleName(), Seq.delimit(f.DebugFlags())));
+            var rows = root.map(src, f => Seq.delimit(f.GetSimpleName(), Seq.delimit(f.DebugFlags())));
             Wf.Rows(rows);
         }
-
 
         void ShowPartSummary()
         {
@@ -336,13 +289,6 @@ namespace Z0
 
             foreach(var p in api.ManagedSources)
                 Wf.Row(string.Format("Managed: {0}", p));
-        }
-
-
-        public void EmitAmsOpCodes()
-        {
-            var cmd = CmdBuilder.EmitAsmOpCodes(Db.Table("asmopcodes"));
-            Wf.Router.Dispatch(cmd);
         }
 
         public void LoadXedSummaries()
@@ -368,34 +314,19 @@ namespace Z0
             }
         }
 
-        // public void RunCmdScript(string kind, Name name)
-        // {
-        //     var file = Db.ScriptFile(kind, name);
-        //     var script = WinCmd.script(file);
-        //     using var runner = ToolRunner.create(Wf);
-        //     var result = runner.Run(script);
-        //     if(result)
-        //         root.iter(result.Data, line => Wf.Row(line));
-
-        // }
-
-        // public void RunPsScript(string kind, Name name)
-        // {
-        //     var file = Db.ScriptFile(kind, name, FS.Extensions.Ps1);
-        //     var script = Pwsh.script(file);
-        //     using var runner = ToolRunner.create(Wf);
-        //     var result = runner.Run(script);
-        //     if(result)
-        //         root.iter(result.Data, line => Wf.Row(line));
-        // }
-
-        public void Run()
+        void RunScripts()
         {
             using var runner = ToolRunner.create(Wf);
             runner.RunCmdScript("clang", "codegen");
             runner.RunCmdScript("clang", "parse");
             runner.RunPsScript("clang-query", "fast-math");
             runner.RunPsScript("clang-query", "sse-builtins");
+            runner.RunPsScript("llvm-ml", "lex");
+
+        }
+        public void Run()
+        {
+
         }
     }
 

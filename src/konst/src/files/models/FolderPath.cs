@@ -115,7 +115,7 @@ namespace Z0
                 => Seq.defer(EnumerateFiles(this, ext, recurse));
 
             public Deferred<FilePath> EnumerateFiles(string pattern, bool recurse)
-                => Seq.defer(EnumerateFiles(this,pattern, recurse));
+                => Seq.defer(EnumerateFiles(this, pattern, recurse));
 
             /// <summary>
             /// Nonrecursively enumerates part-owned folder files
@@ -214,7 +214,7 @@ namespace Z0
                         from x in ext
                         where src.Exists
                         from f in Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))
-                        select  path(f);
+                        select path(f);
                 return selected;
             }
 

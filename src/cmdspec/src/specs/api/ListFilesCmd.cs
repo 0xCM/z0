@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [Cmd(CmdName)]
     public struct ListFilesCmd : ICmd<ListFilesCmd>
     {

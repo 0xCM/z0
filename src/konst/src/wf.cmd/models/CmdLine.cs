@@ -44,5 +44,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator string(CmdLine src)
             => src.Format();
+
+        public static CmdLine Empty
+        {
+            [MethodImpl(Inline)]
+            get => new CmdLine(sys.empty<string>());
+        }
     }
 }

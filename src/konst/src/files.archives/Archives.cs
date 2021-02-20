@@ -9,6 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly partial struct Archives
@@ -57,19 +58,25 @@ namespace Z0
             => new ModuleArchive(root);
 
         [Op]
-        public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
+        public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).ArchiveFiles().Array();
+            var files = filtered(root, ext).Enumerate().Take(max).Array();
             Array.Sort(files);
             return files;
         }
 
         [Op]
-        public static FS.Files match(FS.FolderPath root, uint max, params FS.FileExt[] ext)
+        public static FS.Files match(FS.FolderPath root, params FS.FileExt[] ext)
         {
-            var files = create(root, ext).ArchiveFiles().Take(max).Array();
+            var files = filtered(root, ext).Enumerate().Array();
             Array.Sort(files);
             return files;
+        }
+
+        public static FS.Files list(FS.FolderPath src, FS.FileExt[] ext, uint limit = 0)
+        {
+            var list = limit != 0 ? match(src, limit, ext) : match(src, ext);
+            return list;
         }
 
         [Op]
@@ -81,11 +88,11 @@ namespace Z0
             => new FileArchive(root);
 
         [MethodImpl(Inline), Op]
-        public static IFileArchive create(FS.FolderPath root, string filter)
+        public static IFilteredArchive filtered(FS.FolderPath root, string filter)
             => new FilteredArchive(root, filter);
 
         [MethodImpl(Inline), Op]
-        public static IFileArchive create(FS.FolderPath root, params FS.FileExt[] ext)
+        public static IFilteredArchive filtered(FS.FolderPath root, params FS.FileExt[] ext)
             => new FilteredArchive(root, ext);
 
         [MethodImpl(Inline)]
@@ -93,15 +100,17 @@ namespace Z0
             => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
         [Op]
-        public static Outcome<FileEmission> emit(FS.FilePath[] src, bool uri, FS.FilePath dst)
+        public static Outcome<FileEmission> emit(FS.Files src, bool uri, FS.FilePath dst)
         {
             var counter  = 0;
             try
             {
-                var count = src.Length;
+                var view = src.View;
+                var count = view.Length;
                 using var writer = dst.Writer();
-                foreach(var file in src)
+                for(var i=0; i<count; i++)
                 {
+                    ref readonly var file = ref skip(view,i);
                     var line = uri ? file.ToUri().Format() : file.Format();
                     writer.WriteLine(line);
                     counter++;

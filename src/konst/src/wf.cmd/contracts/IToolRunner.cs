@@ -11,5 +11,9 @@ namespace Z0
         Outcome<TextLines> RunCmdScript<K>(K kind, Name name);
 
         Outcome<TextLines> RunPsScript<K>(K kind, Name name);
+
+        CmdLine CmdLine(FS.FilePath script, ToolShellKind shell);
+
+        Outcome<TextLines> RunScript<K>(K kind, Name name, ToolShellKind shell);
     }
 }
