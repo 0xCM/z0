@@ -77,6 +77,9 @@ namespace Z0
                 case EmitResDataCmd.CmdName:
                     Builder.EmitResData().RunTask(Wf);
                     break;
+                case RunScriptCmd.CmdName:
+                    Builder.RunScript(FS.path(a0)).RunDirect(Wf);
+                    break;
                 case ShowProcessMemoryCmd.CmdName:
                     Builder.ShowProcessMemory().RunTask(Wf);
                     break;

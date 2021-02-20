@@ -28,6 +28,12 @@ namespace Z0
         public Symbol(S src)
             => Value = src;
 
+        public Identifier Name
+        {
+            [MethodImpl(Inline)]
+            get => Value.ToString();
+        }
+
         /// <summary>
         /// The symbol value, from storage cell perspective
         /// </summary>

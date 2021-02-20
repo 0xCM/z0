@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class RunPart : CmdReactor<RunPartCmd>
+    sealed class RunScript : CmdReactor<RunScriptCmd>
     {
-        protected override CmdResult Run(RunPartCmd cmd)
+        protected override CmdResult Run(RunScriptCmd cmd)
         {
-            Wf.Warn(string.Format("{0} unimplemented", cmd.Format()));
-            return Cmd.ok(cmd);
+            return default;
         }
     }
 }

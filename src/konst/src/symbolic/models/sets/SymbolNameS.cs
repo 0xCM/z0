@@ -12,25 +12,22 @@ namespace Z0
     /// <summary>
     /// Defines the name of a symbol
     /// </summary>
-    public readonly struct SymbolName<K>
-        where K : unmanaged
+    public readonly struct SymbolName<S>
+        where S : unmanaged
     {
-        readonly ISymbolSet<K> Symbols;
+        readonly ISymbolSet<S> Symbols;
 
         readonly ushort Index;
 
         [MethodImpl(Inline)]
-        internal SymbolName(ISymbolSet<K> src, ushort index)
+        internal SymbolName(ISymbolSet<S> src, ushort index)
         {
             Symbols = src;
             Index = index;
         }
 
-        // [MethodImpl(Inline)]
-        // public string Format()
-        //     => Symbols[Index].Name;
-
-        // public override string ToString()
-        //     => Format();
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolName(SymbolName<S> src)
+            => new SymbolName(src.Symbols, src.Index);
     }
 }

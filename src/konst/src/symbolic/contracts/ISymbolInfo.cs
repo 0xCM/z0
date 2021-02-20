@@ -19,8 +19,6 @@ namespace Z0
         PrimalCode SymDomain {get;}
 
         SymbolInfo Description
-        {
-            get => new SymbolInfo(SymWidth, SegWidth, SegDomain, SymDomain);
-        }
+            => new SymbolInfo(SymWidth, SegWidth, SegDomain, SymDomain);
     }
 }

@@ -30,7 +30,6 @@ namespace Z0
             return (int)j;
         }
 
-
         [Op]
         public static Span<int> indices(ReadOnlySpan<byte> src, byte match)
         {

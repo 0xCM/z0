@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     partial struct Symbolic
     {
-       [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static char render<S>(S src)
             where S : unmanaged
                 => (char)@as<S,ushort>(src);

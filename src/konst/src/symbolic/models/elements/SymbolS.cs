@@ -26,6 +26,12 @@ namespace Z0
         public Symbol(S src)
             => Value = src;
 
+        public Identifier Name
+        {
+            [MethodImpl(Inline)]
+            get => Value.ToString();
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(Symbol<S> src)
             => Value.Equals(src.Value);

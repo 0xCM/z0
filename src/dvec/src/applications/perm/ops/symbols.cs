@@ -114,7 +114,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = Symbolic.index<E,T>();
+            var index = Symbolic.lookup<E,T>();
             var count = mincells((ulong)segwidth, (ulong)maxbits);
             Span<char> symbols = new char[count];
             for(uint i=0, bitpos = 0; i<count; i++, bitpos += segwidth)

@@ -11,9 +11,9 @@ namespace Z0
     using static memory;
 
     public readonly struct SymbolSet<S> : ISymbolSet<SymbolSet<S>,S>
-        where S : unmanaged
+        where S : unmanaged, ISymbol
     {
-        public S[] Symbols {get;}
+        public Index<S> Symbols {get;}
 
         public ushort SymWidth {get;}
 
@@ -53,16 +53,31 @@ namespace Z0
             Symbols = symbols;
         }
 
+        public ref readonly S this[ushort index]
+        {
+             [MethodImpl(Inline)]
+             get => ref Symbols[index];
+        }
+
+        /// <summary>
+        /// The member count
+        /// </summary>
+        public ushort SymCount
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Symbols.Count;
+        }
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols != null  && Symbols.Length != 0;
+            get => Symbols.IsNonEmpty;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => !IsNonEmpty;
+            get => Symbols.IsEmpty;
         }
 
         public SymbolInfo Description
@@ -70,5 +85,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new SymbolInfo(SymWidth, SegWidth, SegDomain, SymDomain);
         }
+
+        [MethodImpl(Inline)]
+        public SymbolName<S> SymName(ushort index)
+            => Symbolic.name(this, index);
+
+        [MethodImpl(Inline)]
+        public Identifier SymId(ushort index)
+            => default;
+
     }
 }

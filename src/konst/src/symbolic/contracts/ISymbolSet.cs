@@ -4,15 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    public interface ISymbolSet : ISymbolInfo
+    {
+        ushort SymCount {get;}
+    }
 
-    public interface ISymbolSet<S> : ISymbolInfo
+    public interface ISymbolSet<S> : ISymbolSet
         where S : unmanaged
     {
-        S[] Symbols {get;}
+        Index<S> Symbols {get;}
+
+        Identifier SymId(ushort index);
+
+        SymbolName<S> SymName(ushort index);
 
         ref readonly S this[ushort index]
-             => ref memory.seek(Symbols,index);
+             => ref Symbols[index];
     }
 
     public interface ISymbolSet<H,S> : ISymbolSet<S>

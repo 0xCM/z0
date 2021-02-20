@@ -8,13 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Attaches a classifier to a symbol
     /// </summary>
-    public readonly struct KindedSymbol<K,S> : IKindedSymbol<K,S>
+    public readonly struct KindedSymbol<K,S,T,N> : IKindedSymbol<K,S,T>
         where K : unmanaged
         where S : unmanaged
+        where T : unmanaged
+        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// The symbol kind
@@ -33,20 +36,21 @@ namespace Z0
             Value = value;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator Symbol<S>(KindedSymbol<K,S> src)
-            => new Symbol<S>(src.Value);
+        /// <summary>
+        /// The symbol value, from storage cell perspective
+        /// </summary>
+        public T Cell
+        {
+            [MethodImpl(Inline)]
+            get => @as<S,T>(Value);
+        }
 
         [MethodImpl(Inline)]
-        public static implicit operator KindedSymbol<K,S>(Paired<K,S> src)
-            => new KindedSymbol<K,S>(src.Left, src.Right);
+        public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)
+            => new KindedSymbol<K,S,T,N>(src.kind, src.value);
 
         [MethodImpl(Inline)]
-        public static implicit operator KindedSymbol<K,S>((K kind, S value) src)
-            => new KindedSymbol<K,S>(src.kind, src.value);
-
-        [MethodImpl(Inline)]
-        public static implicit operator K(KindedSymbol<K,S> src)
-            => src.Kind;
+        public static implicit operator KindedSymbol<K,S,T,N>(Paired<K,S> src)
+            => new KindedSymbol<K,S,T,N>(src.Left, src.Right);
     }
 }

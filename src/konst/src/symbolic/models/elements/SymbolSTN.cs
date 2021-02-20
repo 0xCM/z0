@@ -29,6 +29,12 @@ namespace Z0
         public Symbol(S src)
             => Value = src;
 
+        public Identifier Name
+        {
+            [MethodImpl(Inline)]
+            get => Value.ToString();
+        }
+
         public Symbol<S> Simplified
         {
             [MethodImpl(Inline)]

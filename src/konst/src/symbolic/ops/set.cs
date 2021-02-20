@@ -9,12 +9,11 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct SymbolSets
+    partial struct Symbolic
     {
         [MethodImpl(Inline), Op]
-        public static SymbolSet<AsciCharCode,byte,W8> define(params AsciCharCode[] src)
-            => define<AsciCharCode,byte,W8>(src);
+        public static SymbolSet<Symbol<AsciCharCode>,byte,W8> set(params AsciCharCode[] src)
+            => set<Symbol<AsciCharCode>,byte,W8>(symbols(src));
 
         /// <summary>
         /// Defines a symbol set
@@ -24,8 +23,8 @@ namespace Z0
         /// <typeparam name="T">The symbol domain type</typeparam>
         /// <typeparam name="W">The symbol bit-width type</typeparam>
         [MethodImpl(Inline)]
-        public static SymbolSet<S,T,W> define<S,T,W>(params S[] symbols)
-            where S : unmanaged
+        public static SymbolSet<S,T,W> set<S,T,W>(params S[] symbols)
+            where S : unmanaged, ISymbol
             where T : unmanaged
             where W : unmanaged, IDataWidth
                 => new SymbolSet<S,T,W>(symbols);

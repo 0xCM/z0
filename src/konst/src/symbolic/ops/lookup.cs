@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static IDictionary<T,char> index<E,T>()
+        public static IDictionary<T,char> lookup<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
         {

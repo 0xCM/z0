@@ -13,13 +13,13 @@ namespace Z0
     /// Specifies symbol characteristics
     /// </summary>
     public readonly struct SymbolSet<S,W> : ISymbolSet<S>
-        where S : unmanaged
+        where S : unmanaged, ISymbol
         where W : unmanaged, IDataWidth
     {
         /// <summary>
         /// The specified symbols
         /// </summary>
-        public S[] Symbols {get;}
+        public Index<S> Symbols {get;}
 
         /// <summary>
         /// The bit-width of a storage cell
@@ -37,6 +37,21 @@ namespace Z0
             SegDomain = dSeg;
             SegWidth = wSeg;
             Symbols = symbols;
+        }
+
+        public ref readonly S this[ushort index]
+        {
+             [MethodImpl(Inline)]
+             get => ref Symbols[index];
+        }
+
+        /// <summary>
+        /// The member count
+        /// </summary>
+        public ushort SymCount
+        {
+            [MethodImpl(Inline)]
+            get => (ushort)Symbols.Count;
         }
 
         /// <summary>
@@ -66,13 +81,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols == null  || Symbols.Length == 0;
+            get => Symbols.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Symbols != null  && Symbols.Length != 0;
+            get => Symbols.IsNonEmpty;
         }
 
         public SymbolInfo Description
@@ -80,6 +95,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new SymbolInfo(SymWidth, SegWidth, SegDomain, SymDomain);
         }
+
+        [MethodImpl(Inline)]
+        public SymbolName<S> SymName(ushort index)
+            => Symbolic.name(this, index);
+
+        [MethodImpl(Inline)]
+        public Identifier SymId(ushort index)
+            => default;
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolInfo(SymbolSet<S,W> src)

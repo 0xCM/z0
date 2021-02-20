@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
+
+    using api = Symbolic;
+
 
     /// <summary>
     /// Attaches a classifier to a symbol
     /// </summary>
-    public readonly struct KindedSymbol<K,S,T,N>
+    public readonly struct KindedSymbol<K,S> : IKindedSymbol<K,S>
         where K : unmanaged
         where S : unmanaged
-        where T : unmanaged
-        where N : unmanaged, ITypeNat
     {
         /// <summary>
         /// The symbol kind
@@ -36,21 +36,25 @@ namespace Z0
             Value = value;
         }
 
-        /// <summary>
-        /// The symbol value, from storage cell perspective
-        /// </summary>
-        public T Cell
+        public Identifier Name
         {
-            [MethodImpl(Inline)]
-            get => @as<S,T>(Value);
+            get => Kind is Enum e ? e.ToString("g") : Kind.ToString();
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)
-            => new KindedSymbol<K,S,T,N>(src.kind, src.value);
+        public static implicit operator Symbol<S>(KindedSymbol<K,S> src)
+            => new Symbol<S>(src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator KindedSymbol<K,S,T,N>(Paired<K,S> src)
-            => new KindedSymbol<K,S,T,N>(src.Left, src.Right);
+        public static implicit operator KindedSymbol<K,S>(Paired<K,S> src)
+            => new KindedSymbol<K,S>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator KindedSymbol<K,S>((K kind, S value) src)
+            => new KindedSymbol<K,S>(src.kind, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(KindedSymbol<K,S> src)
+            => src.Kind;
     }
 }

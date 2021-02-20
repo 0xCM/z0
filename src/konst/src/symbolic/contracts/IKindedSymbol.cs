@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
 
+    using api = Symbolic;
+
     /// <summary>
     /// Characterizes a classified symbol
     /// </summary>
@@ -19,6 +21,9 @@ namespace Z0
         /// The symbol kind
         /// </summary>
         K Kind {get;}
+
+        Identifier ISymbol.Name
+            => api.name(this);
     }
 
     /// <summary>

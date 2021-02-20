@@ -6,12 +6,14 @@ namespace Z0
 {
     using static memory;
 
+    using api = Symbolic;
+
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
     /// </summary>
     public interface ISymbol : ITextual
     {
-
+        Identifier Name {get;}
     }
 
     /// <summary>
@@ -19,17 +21,21 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The symbol value type</typeparam>
     public interface ISymbol<S> : ISymbol
+        where S : unmanaged
     {
         /// <summary>
         /// The symbol value
         /// </summary>
         S Value {get;}
 
+        Identifier ISymbol.Name
+            => api.name(this);
         string ITextual.Format()
             => string.Format("{0}", Value);
     }
 
     public interface ISymbol<S,T> : ISymbol<S>
+        where S : unmanaged
         where T : unmanaged
     {
         /// <summary>
@@ -40,6 +46,7 @@ namespace Z0
     }
 
     public interface ISymbol<S,T,N> : ISymbol<S,T>
+        where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
