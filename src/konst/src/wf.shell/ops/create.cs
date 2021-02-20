@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class WfShell
     {
@@ -29,7 +29,7 @@ namespace Z0
             var dbRoot = WfEnv.dbRoot();
             var partIdList = parts.ApiGlobal.PartIdentities;
             var appLogConfig = Loggers.configure(controlId, dbRoot);
-            IWfAppPaths _paths = new WfPaths(dbRoot);
+            IAppPaths _paths = new AppPaths(dbRoot);
             status.PathConfigTime = clock.Elapsed;
 
             msg = $"[{clock.Elapsed}] | Initialized paths";
@@ -66,7 +66,7 @@ namespace Z0
                 term.inform(msg);
 
             status.ShellCreateTime = clock.Elapsed;
-            status.FinishTS = now();
+            status.FinishTS = root.now();
             status.Args = args;
             status.Controller = controlId;
             status.LogConfig = appLogConfig;
@@ -80,7 +80,7 @@ namespace Z0
         public static IWfShell create(string[] args, bool verbose = true)
         {
             var status = new WfInitStatus();
-            status.StartTS = now();
+            status.StartTS = root.now();
 
             var msg = $"[{status.StartTS}] | Initiating shell creation steps";
             if(verbose)

@@ -20,7 +20,7 @@ namespace Z0
 
         public EventPayload<T> Payload {get;}
 
-        public FlairKind Flair => FlairKind.Ran;
+        public FlairKind Flair => FlairKind.Data;
 
         [MethodImpl(Inline)]
         public RowEvent(T data)

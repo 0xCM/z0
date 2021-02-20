@@ -13,7 +13,7 @@ namespace Z0
 
     public partial interface IWfShell : IDisposable, ITextual
     {
-        IWfAppPaths Paths {get;}
+        IAppPaths Paths {get;}
 
         IJsonSettings Settings {get;}
 

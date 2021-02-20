@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
-    /// Provides the canonical <see cref='IWfAppPaths'/> implementation
+    /// Provides the canonical <see cref='IAppPaths'/> implementation
     /// </summary>
-    public readonly struct WfPaths : IWfAppPaths
+    public readonly struct AppPaths : IAppPaths
     {
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public WfPaths(FS.FolderPath root)
+        public AppPaths(FS.FolderPath root)
             => Root = root;
     }
 }

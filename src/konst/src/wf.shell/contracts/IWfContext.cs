@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IWfContext : ITextual
     {
-        IWfAppPaths Paths {get;}
+        IAppPaths Paths {get;}
 
         IJsonSettings Settings {get;}
 
@@ -15,9 +15,6 @@ namespace Z0
         WfController Controller {get;}
 
         string[] Args {get;}
-
-        CorrelationToken Ct
-            => root.correlate(Controller.Id);
 
         string AppName
             => Controller.Name;

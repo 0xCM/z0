@@ -12,7 +12,7 @@ namespace Z0
         partial struct Parse
         {
             [Op]
-            public static Index<TextLine> lines(string src)
+            public static TextLines lines(string src, bool keepblank = false)
             {
                 var lines = root.list<TextLine>();
                 var lineNumber = 0u;
@@ -21,7 +21,15 @@ namespace Z0
                     var next = reader.ReadLine();
                     while (next != null)
                     {
-                        lines.Add(new TextLine(++lineNumber, next));
+                        var blank = Query.blank(next);
+                        if(blank)
+                        {
+                            if(keepblank)
+                                lines.Add(new TextLine(++lineNumber, next));
+                        }
+                        else
+                            lines.Add(new TextLine(++lineNumber, next));
+
                         next = reader.ReadLine();
                     }
                 }

@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static TextRules;
+    using static Part;
 
     partial class text
     {
-        [Op]
-        public static Index<TextLine> lines(string src)
-            => Parse.lines(src);
+        [MethodImpl(Inline)]
+        public static TextLines lines(params TextLine[] src)
+            => src;
     }
 }

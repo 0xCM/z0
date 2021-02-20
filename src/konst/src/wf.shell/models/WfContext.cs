@@ -6,7 +6,7 @@ namespace Z0
 {
     public struct WfContext : IWfContext
     {
-        public IWfAppPaths Paths {get; internal set;}
+        public IAppPaths Paths {get; internal set;}
 
         public IApiParts ApiParts {get; internal set;}
 

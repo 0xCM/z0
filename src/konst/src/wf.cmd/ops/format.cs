@@ -172,7 +172,7 @@ namespace Z0
         public static string format(CmdTypeInfo src)
         {
             var buffer = Buffers.text();
-            render(src,buffer);
+            render(src, buffer);
             return buffer.Emit();
         }
 

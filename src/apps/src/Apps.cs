@@ -19,7 +19,7 @@ namespace Z0
         public static IAppContext context()
             => context(WfShell.parts(Assembly.GetEntryAssembly(), WfEnv.args()), WfShell.paths());
 
-        static IAppContext context(ApiPartSet src, IWfAppPaths paths)
+        static IAppContext context(ApiPartSet src, IAppPaths paths)
             => new AppContext(paths, src.ApiGlobal, Rng.@default(), WfShell.json(paths.AppConfigPath), AppMsgExchange.Create());
     }
 }

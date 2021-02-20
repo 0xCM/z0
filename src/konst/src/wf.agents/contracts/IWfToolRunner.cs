@@ -6,8 +6,13 @@ namespace Z0
 {
     using System;
 
-    public interface IStorageService : IWfService
-    {
+    using static TextRules;
+    using static memory;
 
+    public interface IWfToolRunner : IWfService
+    {
+        Outcome<TextLines> Run(CmdLine cmd);
+
+        Index<CmdTypeInfo> Intrinsics();
     }
 }

@@ -55,10 +55,10 @@ namespace Z0
             var llvm = Llvm.service(wf);
             var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
+            using var runner = WfToolRunner.create(wf);
+            runner.Run(cmd);
             //run(wf, WinCmd.dir(FS.dir(paths.Test.Root)));
             //run(wf, new CmdLine("llvm-mc --help"));
-
-            ToolRunner.run(wf, cmd);
         }
 
         void ShowHandlers()
@@ -180,7 +180,7 @@ namespace Z0
         public void RunPipes()
         {
             using var flow = Wf.Running();
-            using var runner = new ToolRunner(Wf, Host);
+            using var runner = WfToolRunner.create(Wf);
             root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
 
             var pipe = Pipes.pipe<ushort>(Wf);
@@ -193,10 +193,10 @@ namespace Z0
             while(pipe.Next(out var dst))
                 output.Add(dst);
 
-            z.insist(output.Count, count);
+            root.require(output.Count == count, () => $"{output.Count} != {count}");
 
             for(var i=0; i<count; i++)
-                z.insist(output.Contains(skip(input,i)));
+                root.require(output.Contains(skip(input,i)), () => $"Containment failure at {i}");
 
             Wf.Ran(flow, $"Ran {count} values through pipe");
         }
@@ -372,50 +372,15 @@ namespace Z0
         }
 
 
-        // void LoadImportRows()
-        // {
-        //     var etl = AsmCatalogEtl.create(Wf);
-        //     var rows = etl.ImportedRows();
-        //     var count = rows.Length;
-        //     var formatter = Records.formatter<AsmCatalogImportRow>();
-        //     var parser = AsmSigParser.create(Wf);
-        //     var mnemonics = root.hashset<AsmMnemonicExpr>();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var row = ref skip(rows,i);
-
-        //         var sigex = AsmExpr.sig(row.Instruction);
-        //         if(parser.ParseMnemonic(sigex, out var mnemonic))
-        //             mnemonics.Add(mnemonic);
-
-        //     }
-
-        //     var terms = root.terms(mnemonics.OrderBy(x => x.Content).Index().View);
-
-        //     root.iter(terms, r => Wf.Row(r));
-        // }
-
-
-
-        // void ShowSpecifiers(AsmCatalogEtl etl)
-        // {
-        //     var parser = AsmExprParser.create(Wf);
-        //     var specifiers = etl.Specifiers();
-        //     for(var i=0; i<specifiers.Length; i++)
-        //     {
-        //         ref readonly var spec = ref skip(specifiers,i);
-        //         parser.Mnemonic(spec.Sig, out var monic);
-        //         var operands = parser.Operands(spec.Sig).View;
-        //         var opformat = operands.Map(x => x.Format()).Concat(RP.SpacePipe);
-        //         Wf.Row(string.Format(RP.PSx3, spec.OpCode, monic, opformat));
-
-        //     }
-        // }
-
         public void Run()
         {
+            var file = Db.ScriptFile("clang", FS.file("codegen.cmd"));
+            var script = WinCmd.script(file);
+            using var runner = WfToolRunner.create(Wf);
+            var result = runner.Run(script);
+            if(result)
+                root.iter(result.Data, line => Wf.Row(line));
 
-            ToolRunner.run(Wf, WinCmd.script(FS.path(@"J:\control\tools\clang\codegen.cmd")));
             // var terms = root.terms(monic.OrderBy(x => x.Content).Index().View);
             // root.iter(terms, r => Wf.Row(r));
         }

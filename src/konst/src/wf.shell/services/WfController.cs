@@ -8,19 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct WfController
     {
         public Assembly Component {get;}
 
-        public FS.FilePath ImagePath => FS.path(Component.Location);
-
-        public FS.FolderPath ImageDir => ImagePath.FolderPath;
-
         [MethodImpl(Inline)]
         public WfController(Assembly src)
             => Component = src;
+
+        public FS.FilePath ImagePath
+            => FS.path(Component.Location);
+
+        public FS.FolderPath ImageDir
+            => ImagePath.FolderPath;
 
         public string Name
         {

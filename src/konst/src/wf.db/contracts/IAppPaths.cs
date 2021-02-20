@@ -11,7 +11,7 @@ namespace Z0
     using static ArchiveFolders;
 
     [Free]
-    public interface IWfAppPaths : IFileArchive
+    public interface IAppPaths : IFileArchive
     {
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
@@ -79,7 +79,7 @@ namespace Z0
         /// <summary>
         /// Creates a path provider for the controlling application
         /// </summary>
-        IWfAppPaths ForApp()
+        IAppPaths ForApp()
             => WfShell.paths();
     }
 }

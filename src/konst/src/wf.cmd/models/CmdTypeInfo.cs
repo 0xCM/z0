@@ -32,5 +32,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Fields.Count;
         }
+
+        public string Format()
+            => Cmd.format(this);
+
+        public override string ToString()
+            => Format();
     }
 }

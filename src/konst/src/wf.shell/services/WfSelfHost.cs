@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     public sealed class WfSelfHost : WfHost<WfSelfHost>
     {
         protected override void Execute(IWfShell shell)
-            => missing();
+            => AppErrors.missing();
 
         Type HostType;
 

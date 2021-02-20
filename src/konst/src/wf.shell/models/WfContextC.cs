@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     internal struct WfContext<C> : IWfContext<C>
     {
@@ -22,7 +22,7 @@ namespace Z0
             State = state;
         }
 
-        public IWfAppPaths Paths
+        public IAppPaths Paths
             => Root.Paths;
 
         public IJsonSettings Settings

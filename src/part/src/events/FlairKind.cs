@@ -24,11 +24,11 @@ namespace Z0
 
         Status = ConsoleColor.Green,
 
-        Trace = ConsoleColor.DarkMagenta,
+        Trace = ConsoleColor.DarkGray,
 
         Warning = ConsoleColor.Yellow,
 
-        Data = ConsoleColor.DarkCyan,
+        Data = ConsoleColor.DarkGray,
 
         Error = ConsoleColor.Red,
     }
