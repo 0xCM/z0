@@ -16,7 +16,7 @@ namespace Z0
 
         public BitMaskServices()
         {
-            Formatter = new BitMaskFormatter();
+            Formatter = BitMaskFormatter.create();
         }
 
         public Index<BitMaskInfo> Load()

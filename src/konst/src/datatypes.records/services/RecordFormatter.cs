@@ -9,16 +9,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public enum RecordFormatKind
-    {
-        None = 0,
-
-        Tablular = 1,
-
-        KeyValuePairs = 2
-
-    }
-
     public readonly struct RecordFormatter<T> : IRecordFormatter<T>
         where T : struct, IRecord<T>
     {

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public interface IRowType : ITextual
     {
         TableId Table {get;}
@@ -29,6 +26,7 @@ namespace Z0
         where I : unmanaged
     {
         new TableId<I,T> Table {get;}
+
         I TableIndex {get;}
 
         TableId<T> IRowType<T>.Table

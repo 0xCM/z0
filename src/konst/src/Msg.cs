@@ -15,10 +15,6 @@ namespace Z0
 
         public static RenderPattern<Assembly,utf8> NoMatchingResources => "No {0} resources found that match {1}";
 
-        public static RenderPattern<ApiHostUri,uint,uint> IndexedHost => "{0,-30} | {1}/{2}";
-
-        public static RenderPattern<uint> IndexingHosts => "Indexing {0} hosts";
-
         public static RenderPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
     }

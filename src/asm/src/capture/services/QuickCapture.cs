@@ -49,7 +49,7 @@ namespace Z0
 
         public ApiHostCaptureSet EmitCaptureSet(Type host)
         {
-            var catalog = ApiCatalogs.host(Wf, host);
+            var catalog = ApiCatalogs.HostCatalog(Wf, host);
             return api.set(Asm, catalog, CaptureHost(catalog));
         }
 

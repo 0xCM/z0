@@ -38,4 +38,3 @@ namespace Z0.Asm
         public TextBlock Description;
     }
 }
-

@@ -12,5 +12,9 @@ namespace Z0
     public interface IApiServices : IWfService
     {
         IApiJit ApiJit();
+
+        Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src);
+
+        void EmitApiClasses();
     }
 }

@@ -7,8 +7,10 @@ namespace Z0
     using System.Reflection;
 
     [ApiComplete]
-    struct Msg
+    readonly partial struct Msg
     {
+        public static RenderPattern<ApiHostUri,uint,uint> IndexedHost => "{0,-30} | {1}/{2}";
 
+        public static RenderPattern<uint> IndexingHosts => "Indexing {0} hosts";
     }
 }

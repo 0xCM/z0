@@ -16,4 +16,5 @@ call %ZCmd%\archive-app-logs.cmd
 call %ZCmd%\archive-dumps.cmd
 call %ZCmd%\archive-tools.cmd
 call %ZCmd%\archive-etl-logs.cmd
+call %ZCmd%\archive-control.cmd
 

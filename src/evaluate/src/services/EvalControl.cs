@@ -32,7 +32,7 @@ namespace Z0
         [Op]
         public static ApiHostMemberCode code(IWfShell wf, ApiHostUri host, FS.FolderPath root)
         {
-            var catalog = ApiCatalogs.host(wf, wf.Api.FindHost(host).Require());
+            var catalog = ApiCatalogs.HostCatalog(wf, wf.Api.FindHost(host).Require());
             if(catalog.IsEmpty)
                 return ApiHostMemberCode.Empty;
 

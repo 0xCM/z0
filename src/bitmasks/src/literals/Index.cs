@@ -130,11 +130,13 @@ namespace Z0
             /// <summary>
             /// [00000010 00000010 00000010 00000010]
             /// </summary>
+            [BinaryLiteral ("[00000010 00000010 00000010 00000010]")]
             public const uint Index32x8x1 = (uint) Index16x8x1 | (uint) Index16x8x1 << 16;
 
             /// <summary>
             /// [00000100 00000100 00000100 00000100]
             /// </summary>
+            [BinaryLiteral ("[00000100 00000100 00000100 00000100]")]
             public const uint Index32x8x2 = (uint) Index16x8x2 | (uint) Index16x8x2 << 16;
 
             /// <summary>
@@ -220,12 +222,14 @@ namespace Z0
             /// <summary>
             /// [00001000 00000100 00000010 00000001]
             /// </summary>
+            [BinaryLiteral("[00001000 00000100 00000010 00000001]")]
             public const ulong Increment32 =
                 (ulong) Index8x8x0 << 0 | (ulong) Index8x8x1 << 8 | (ulong) Index8x8x2 << 16 | (ulong) Index8x8x3 << 24;
 
             /// <summary>
             /// [00010000 00001000 00000100 00000010 00000001]
             /// </summary>
+            [BinaryLiteral("[00010000 00001000 00000100 00000010 00000001]")]
             public const ulong Increment40 =
                 (ulong) Index8x8x0 << 0 | (ulong) Index8x8x1 << 8 | (ulong) Index8x8x2 << 16 | (ulong) Index8x8x3 << 24 |
                 (ulong) Index8x8x4 << 32;
@@ -233,6 +237,7 @@ namespace Z0
             /// <summary>
             /// [00100000 00010000 00001000 00000100 00000010 00000001]
             /// </summary>
+            [BinaryLiteral("[00100000 00010000 00001000 00000100 00000010 00000001]")]
             public const ulong Increment48 =
                 (ulong) Index8x8x0 << 0 | (ulong) Index8x8x1 << 8 | (ulong) Index8x8x2 << 16 | (ulong) Index8x8x3 << 24 |
                 (ulong) Index8x8x4 << 32 | (ulong) Index8x8x5 << 40;
@@ -240,6 +245,7 @@ namespace Z0
             /// <summary>
             /// [01000000 00100000 00010000 00001000 00000100 00000010 00000001]
             /// </summary>
+            [BinaryLiteral("[01000000 00100000 00010000 00001000 00000100 00000010 00000001]")]
             public const ulong Increment56 =
                 (ulong) Index8x8x0 << 0 | (ulong) Index8x8x1 << 8 | (ulong) Index8x8x2 << 16 | (ulong) Index8x8x3 << 24 |
                 (ulong) Index8x8x4 << 32 | (ulong) Index8x8x5 << 40 | (ulong) Index8x8x6 << 48;
@@ -247,6 +253,7 @@ namespace Z0
             /// <summary>
             /// [10000000 01000000 00100000 00010000 00001000 00000100 00000010 00000001]
             /// </summary>
+            [BinaryLiteral("[10000000 01000000 00100000 00010000 00001000 00000100 00000010 00000001]")]
             public const ulong Increment64 =
                 (ulong) Index8x8x0 << 0 | (ulong) Index8x8x1 << 8 | (ulong) Index8x8x2 << 16 | (ulong) Index8x8x3 << 24 |
                 (ulong) Index8x8x4 << 32 | (ulong) Index8x8x5 << 40 | (ulong) Index8x8x6 << 48 | (ulong) Index8x8x7 << 56;

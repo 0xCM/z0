@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// Indicates whether the first line of the data is a header row
         /// </summary>
-        public bool HasDataHeader;
+        public bool HasHeader;
 
         /// <summary>
         /// Specifes whether the file contains regular delimited contetn
@@ -69,14 +69,17 @@ namespace Z0
         /// </summary>
         public uint? LastLine;
 
+        public bool SplitClean;
+
         [MethodImpl(Inline)]
         public static TextDocFormat Structured()
             => define();
 
         [MethodImpl(Inline)]
-        public static TextDocFormat Structured(char delimiter)
+        public static TextDocFormat Structured(char Delimiter, bool SplitClean = true)
             => define(
-                Delimiter: delimiter
+                Delimiter: Delimiter,
+                SplitClean: SplitClean
                 );
 
         public static TextDocFormat Unstructured()
@@ -90,17 +93,20 @@ namespace Z0
             char CommentPrefix = DefaultCommentPrefix,
             uint? ColWidth = null,
             uint? FirstLine = null,
-            uint? LastLine = null)
+            uint? LastLine = null,
+            bool SplitClean = true
+            )
         {
             var dst = default(TextDocFormat);
             dst.RowBlockSep = DefaultRowBlockSep;
-            dst.HasDataHeader = HasHeader;
+            dst.HasHeader = HasHeader;
             dst.IsDelimited = Delimited;
             dst.Delimiter = Delimiter;
             dst.CommentPrefix = CommentPrefix;
             dst.ColWidth = ColWidth;
             dst.FirstLine = FirstLine ?? 0;
             dst.LastLine = LastLine;
+            dst.SplitClean = SplitClean;
             return dst;
         }
 

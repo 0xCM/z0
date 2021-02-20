@@ -79,7 +79,7 @@ namespace Z0
                     if(line.Content.StartsWith(rowsep))
                         continue;
 
-                    if(fmt.HasDataHeader && docheader.IsNone() && rows.Count == 0)
+                    if(fmt.HasHeader && docheader.IsNone() && rows.Count == 0)
                     {
                         if(Parse.header(line, fmt, out var _docheader))
                             docheader = _docheader;

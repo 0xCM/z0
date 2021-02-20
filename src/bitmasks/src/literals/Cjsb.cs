@@ -68,21 +68,25 @@ namespace Z0
             /// <summary>
             /// [10111101]
             /// </summary>
+            [BitMask("[10111101]")]
             public const byte CJsb8x8x4x1 = Central8x8x4 | Jsb8x8x1;
 
             /// <summary>
             /// [10111101 10111101]
             /// </summary>
+            [BitMask("[10111101 10111101]")]
             public const ushort CJsb16x8x4x1 = (ushort)CJsb8x8x4x1 | (ushort)CJsb8x8x2x1 << 8;
 
             /// <summary>
             /// [10111101 10111101 10111101 10111101]
             /// </summary>
+            [BitMask("[10111101 10111101 10111101 10111101]")]
             public const uint CJsb32x8x4x1 = (uint)CJsb16x8x4x1 | (uint)CJsb16x8x2x1 << 16;
 
             /// <summary>
-            /// [10111101 10111101 10111101 10111101]
+            /// [10111101 10111101 10111101 10111101 10111101 10111101 10111101 10111101]
             /// </summary>
+            [BitMask("[10111101 10111101 10111101 10111101 10111101 10111101 10111101 10111101]")]
             public const ulong CJsb64x8x4x1 = (ulong)CJsb32x8x4x1 | (ulong)CJsb32x8x2x1 << 32;
         }
     }

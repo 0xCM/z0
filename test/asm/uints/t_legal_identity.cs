@@ -12,7 +12,7 @@ namespace Z0.Asm
     {
         public void check_code_identity()
         {
-            var catalog = ApiCatalogs.part(Parts.Math.Resolved);
+            var catalog = ApiCatalogs.PartCatalog(Parts.Math.Resolved);
             var ops = catalog.Operations.View;
             var count = ops.Length;
             var path = Paths.CasePath();

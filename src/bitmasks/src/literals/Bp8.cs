@@ -41,6 +41,7 @@ namespace Z0
             [BitMask("[01010101]")]
             public const byte b01010101x8 = 0x55;
 
+            [BitMask("[00110011]")]
             public const byte b00110011x8 = 0x33;
         }
    }

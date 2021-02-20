@@ -34,7 +34,7 @@ namespace Z0
             Source = src;
             ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             PartComponents = ApiQuery.components(ManagedSources);
-            ApiGlobal = ApiCatalogs.global(ManagedSources);
+            ApiGlobal = ApiCatalogs.GlobalCatalog(ManagedSources);
         }
 
         public ApiPartSet(Assembly control, PartId[] parts)
@@ -42,7 +42,7 @@ namespace Z0
             Control = control;
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiGlobal = ApiCatalogs.global(control, parts);
+            ApiGlobal = ApiCatalogs.GlobalCatalog(control, parts);
             PartComponents = ApiGlobal.PartComponents;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
             Control = control;
             Source = FS.path(control.Location).FolderPath;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiGlobal =  ApiCatalogs.global(ManagedSources);
+            ApiGlobal =  ApiCatalogs.GlobalCatalog(ManagedSources);
             PartComponents = ApiGlobal.PartComponents;
         }
     }

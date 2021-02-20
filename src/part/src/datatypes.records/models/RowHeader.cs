@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = RecordUtilities;
+
     public readonly struct RowHeader : IIndex<HeaderCell>, ITextual
     {
         public HeaderCell[] Cells {get;}
@@ -53,7 +55,7 @@ namespace Z0
         }
 
         public string Format()
-            => Records.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

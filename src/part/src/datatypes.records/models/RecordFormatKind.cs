@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public interface IRecordFieldValue
+    public enum RecordFormatKind
     {
-        ushort FieldIndex {get;}
+        None = 0,
 
-        object FieldValue {get;}
+        Tablular = 1,
+
+        KeyValuePairs = 2
     }
 }

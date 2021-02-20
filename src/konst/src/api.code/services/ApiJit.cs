@@ -110,7 +110,7 @@ namespace Z0
         public ApiMembers Jit(IPart src)
         {
             var dst = root.list<ApiMember>();
-            var catalog = ApiCatalogs.part(src);
+            var catalog = ApiCatalogs.PartCatalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 

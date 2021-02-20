@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api =RecordUtilities;
+
     /// <summary>
     /// Defines formatting specifications for each cell in a row
     /// </summary>
@@ -25,7 +27,7 @@ namespace Z0
         {
             Header = header;
             Cells = src;
-            Pattern = Records.pattern(Cells, Header.Delimiter);
+            Pattern = api.pattern(Cells, Header.Delimiter);
         }
 
         public uint CellCount

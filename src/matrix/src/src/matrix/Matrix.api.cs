@@ -240,7 +240,7 @@ namespace Z0
             var rows = (int)nat64u<M>();
             var cols = (int)nat64u<N>();
             dst.WriteLine($"{options.CommentPrefix} {typeof(T).Name}[{rows}x{cols}]");
-            if(options.HasDataHeader)
+            if(options.HasHeader)
             {
                 for(var i = 0; i<cols; i++)
                 {

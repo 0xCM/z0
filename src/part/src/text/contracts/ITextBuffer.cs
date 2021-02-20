@@ -89,7 +89,16 @@ namespace Z0
             AppendLine(string.Format("{0}{1}", indent, src));
         }
 
-        void AppendDelimited(char delimiter, params string[] src)
+        void AppendDelimited(char delimiter, params object[] src)
+        {
+            var count = src.Length;
+            var terms = @readonly(src);
+            var sep = string.Format("{0} ", delimiter);
+            for(var i=0; i<src.Length; i++)
+                Append(string.Format("{0}{1}", sep, skip(terms,i)));
+        }
+
+        void AppendDelimited(string delimiter, params object[] src)
         {
             var count = src.Length;
             var terms = @readonly(src);

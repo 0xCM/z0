@@ -14,6 +14,9 @@ namespace Z0
     {
         partial struct Parse
         {
+            public static bool skipline(TextLine src, in TextDocFormat spec)
+                => src.IsEmpty || src.StartsWith(spec.CommentPrefix) || src.StartsWith(spec.RowBlockSep);
+
             /// <summary>
             /// Parses a row from a line of text
             /// </summary>
@@ -21,14 +24,14 @@ namespace Z0
             /// <param name="spec">The text format spec</param>
             public static bool row(TextLine src, in TextDocFormat spec, out TextRow dst)
             {
-                if(src.IsEmpty || src.StartsWith(spec.CommentPrefix) || src.StartsWith(spec.RowBlockSep))
+                if(skipline(src, spec))
                 {
                     dst = TextRow.Empty;
                     return false;
                 }
                 else
                 {
-                    if(spec.HasDataHeader)
+                    if(spec.HasHeader)
                     {
                         var parts = src.Split(spec);
                         var count = parts.Length;

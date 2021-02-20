@@ -14,7 +14,7 @@ namespace Z0.Asm
         public ApiHostCaptureSet EmitCaptureSet(Type host)
         {
             const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
-            var catalog = ApiCatalogs.host(Wf,host);
+            var catalog = ApiCatalogs.HostCatalog(Wf,host);
             var blocks = CaptureHost(catalog);
             var count = blocks.Length;
             var set = Capture.set(Asm, catalog,blocks);

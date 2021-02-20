@@ -24,9 +24,11 @@ namespace Z0.Asm
 
         const uint MaxRowCount = 2500;
 
+        const char AsmCatDelimiter = Chars.Tab;
+
         public AsmCatalogEtl()
         {
-            SourceFormat = TextDocFormat.Structured(Chars.Tab);
+            SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicSymbols = EnumSymbols.table<AsmMnemonicCode>();
         }
@@ -139,38 +141,62 @@ namespace Z0.Asm
                 return ImportStokeRows();
         }
 
+        void Sample(ReadOnlySpan<TextLine> src)
+        {
+            var count = src.Length;
+            var sample = root.min(30,count);
+            for(var i=0; i<sample; i++)
+                Wf.Row(skip(src,i).Content);
+        }
+
         ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
             var descriptor = Assets.create(Wf).AsmCatalog();
             var content = Resources.utf8(descriptor);
-            var srcFormat = TextDocFormat.Structured(Chars.Tab);
+            ByteSize sz = content.Length*2;
+            Wf.Status($"Loaded source catalog data of size {sz} bytes");
+
             var foundheader = false;
             var lines = Parse.lines(content).View;
+
+            Wf.Status($"Parsing {lines.Length} source catalog lines");
+
             var count = lines.Length;
             var buffer = RowBuffer.Edit;
             ref var dst = ref first(buffer);
             var j = z16;
+            var failed = false;
             for(var i=0; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
                 if(foundheader)
                 {
                     var row = default(StokeAsmImportRow);
-                    if(parse(j, line, ref row))
-                        seek(dst, j++) = row;
+                    if(line.IsNonEmpty)
+                    {
+                        if(parse(j, line, ref row))
+                            seek(dst, j++) = row;
+                        else
+                        {
+                            failed = true;
+                            break;
+                        }
+                    }
                 }
                 else
                 {
                     if(line.Content.Equals(SourceHeader))
+                    {
                         foundheader = true;
+                        Wf.Status($"Detected source catalog header with fields: {SourceHeaderFields.FormatList()}");
+                    }
                 }
             }
-            ImportRowCount = j;
-            return slice(buffer,0, ImportRowCount);
 
+            ImportRowCount = j;
+            return slice(buffer, 0, ImportRowCount);
         }
 
-        FS.FolderName TargetFolder => FS.folder("asmcat");
 
         public ReadOnlySpan<StokeAsmImportRow> TransformSource()
         {
@@ -255,13 +281,23 @@ namespace Z0.Asm
                     Fill(row, ref dst, (ushort)(seq + 1));
                     return true;
                 }
+                else
+                {
+                    Wf.Error($"Row content parse failure: {nameof(row.CellCount)} = {row.CellCount} != 15; Line: {src}");
+                    return false;
+                }
             }
-
-            return false;
+            else
+            {
+                Wf.Error($"Row parse failure: {src.Content}");
+                return false;
+            }
         }
 
+        FS.FolderName TargetFolder => FS.folder("asmcat");
+
         [MethodImpl(Inline), Op]
-        public static AsmSpecifierRecord record(OperationSpec src)
+        static AsmSpecifierRecord record(OperationSpec src)
         {
             var dst = new AsmSpecifierRecord();
             dst.Seq = src.Seq;
@@ -271,8 +307,12 @@ namespace Z0.Asm
             return dst;
         }
 
-        internal static ReadOnlySpan<byte> AsmSpecifierWidths => new byte[]{8,48,12,32};
+        static ReadOnlySpan<byte> AsmSpecifierWidths
+            => new byte[]{8,48,12,32};
 
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
+
+        static ReadOnlySpan<string> SourceHeaderFields
+            => SourceHeader.Split(AsmCatDelimiter);
     }
 }

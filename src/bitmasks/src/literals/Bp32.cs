@@ -8,10 +8,13 @@ namespace Z0
     {
         partial struct Literals
         {
+            [BitMask("[00000001 00000001 00000001 00000001]")]
             public const uint b00000001x32 = (uint)b00000001x16 << 16 | (uint)b00000001x16;
 
+            [BitMask("[00000010 00000010 00000010 00000010]")]
             public const uint b00000010x32 = (uint)b00000010x16 << 16 | (uint)b00000010x16;
 
+            [BitMask("[00000100 00000100 00000100 00000100]")]
             public const uint b00000100x32 = (uint)b00000100x16 << 16 | (uint)b00000100x16;
 
             public const uint b00001000x32 = (uint)b00001000x16 << 16 | (uint)b00001000x16;

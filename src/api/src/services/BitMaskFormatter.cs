@@ -10,34 +10,35 @@ namespace Z0
     using static Part;
 
     using R = BitMaskInfo;
-    using F = NumericLiteralField;
 
-    public readonly struct BitMaskFormatter : ITextValueFormatter<F,R>
+    public readonly struct BitMaskFormatter
     {
-        public void Format(in R src, DatasetFormatter<F> dst)
-            => render(src,dst);
+        readonly IRecordFormatter<R> Formatter;
+
+        readonly ITextBuffer Buffer;
+
+        public static BitMaskFormatter create()
+            => new BitMaskFormatter(Records.formatter<R>());
+
+        BitMaskFormatter(IRecordFormatter<R> formatter)
+        {
+            Formatter = formatter;
+            Buffer = text.buffer();
+        }
 
         public string Format(in R src)
         {
-            var dst = Table.dsformatter<F>();
-            Format(src, dst);
-            return dst.Render();
+            Buffer.Clear();
+            Buffer.AppendDelimited(Formatter.FormatSpec.Header.Delimiter,
+                string.Format("{0,-30}", src.Name),
+                string.Format("{0,-10}", src.Base),
+                string.Format("{0,-80}", format(base2, src)),
+                string.Format("{0,-80}", src.Text));
+            return Buffer.Emit();
         }
 
         public string HeaderText
-            => Table.dsformatter<F>().HeaderText;
-
-        void ITextValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
-            => render(src,dst);
-
-        [MethodImpl(Inline), Op]
-        static void render(in BitMaskInfo src, IDatasetFormatter<F> dst)
-        {
-            dst.Delimit(F.Name, src.Name);
-            dst.Delimit(F.Base, src.Base);
-            dst.Delimit(F.Data, format(base2, src));
-            dst.Delimit(F.Text, src.Text);
-        }
+            => Formatter.FormatHeader();
 
         static string format(Base2 @base, BitMaskInfo src)
             => BitFormatter.format(src.Data, src.TypeCode);

@@ -73,7 +73,9 @@ namespace Z0
             => IsNonEmpty && Content.StartsWith(match);
 
         public string[] Split(in TextDocFormat spec)
-            => IsNonEmpty ? Content.SplitClean(spec.Delimiter) : sys.empty<string>();
+            => IsNonEmpty
+            ? spec.SplitClean ? Content.SplitClean(spec.Delimiter) : Content.Split(spec.Delimiter)
+            : sys.empty<string>();
 
         public string Format()
             => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
@@ -91,7 +93,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TextLine((uint index, string text) src)
             =>  new TextLine(src.index, src.text);
-
 
         public static TextLine Empty
             => new TextLine(0, EmptyString);

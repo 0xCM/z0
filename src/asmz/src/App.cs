@@ -27,6 +27,7 @@ namespace Z0.Asm
             AsmParser = AsmExpr.parser(Wf);
             TextBuffer = text.buffer();
             Asm = AsmServices.context(Wf);
+            ApiServices = Wf.ApiServices();
         }
 
         AsmCatalogEtl Etl;
@@ -37,67 +38,25 @@ namespace Z0.Asm
 
         IAsmContext Asm;
 
+        IApiServices ApiServices;
+
         void ShowSigOpTokens()
         {
             var tokens = AsmExpr.SigOpTokens();
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
-        [Op]
-        Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
-        {
-            var count = members.Length;
-            var buffer = alloc<ApiAddressRecord>(count);
-            ref var dst = ref first(buffer);
-            var rebase = first(members).BaseAddress;
-            for(uint seq=0; seq<count; seq++)
-            {
-                ref var record = ref seek(dst,seq);
-                ref readonly var member = ref skip(members, seq);
-                record.Sequence = seq;
-                record.ProcessBase = @base;
-                record.MemberBase = member.BaseAddress;
-                record.MemberOffset = member.BaseAddress - @base;
-                record.MemberRebase = member.BaseAddress - rebase;
-                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
-                record.HostName = member.Host.Name;
-                record.PartName = member.Host.Owner.Format();
-                record.Identifier = member.Id;
-            }
-            return buffer;
-        }
-
-        public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src)
-        {
-            var dst = Db.IndexTable<ApiAddressRecord>();
-            Wf.Status($"Summarizing {src.MemberCount} members");
-            var summaries = Summarize(src.Base, src.Members.View);
-            Wf.Status($"Summarized {summaries.Count} members");
-            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
-            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
-            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
-            return summaries;
-        }
 
         void Jit()
         {
-            var jitter = Wf.ApiServices().ApiJit();
+            var jitter = ApiServices.ApiJit();
             var members = jitter.JitApi();
             Wf.Status($"Jitted {members.MemberCount}");
-            var records = EmitCatalog(members);
+            var records = ApiServices.EmitCatalog(members);
         }
 
         void EmitApiClasses()
-        {
-            var dst = Db.IndexTable("api.classes");
-            var flow = Wf.EmittingTable<EnumLiteral>(dst);
-            var service = ApiCatalogs.classes(Wf);
-            var formatter = Records.formatter<EnumLiteral>();
-            var classifiers = service.Classifiers();
-            var literals = classifiers.SelectMany(x => x.Literals);
-            var count = Records.emit(literals,dst);
-            Wf.EmittedTable(flow, count);
-        }
+            => ApiServices.EmitApiClasses();
 
         void CreateLookup()
         {
@@ -150,12 +109,17 @@ namespace Z0.Asm
             }
         }
 
+        void LoadCatalogRows()
+        {
+            var rows = Etl.LoadCatalogRows();
+            Wf.Status($"Loaded {rows.Length} catalog rows");
+        }
+
         void EmitSpecifiers()
         {
             var specifiers = Etl.Specifiers();
             Etl.Emit(specifiers);
         }
-
 
         public void GenBits()
         {
@@ -327,7 +291,8 @@ namespace Z0.Asm
         {
             //ParseSigTokens();
             //ShowMnemonicLiterals();
-            ProcessCatalog();
+            //ShowSpecifiers();
+            LoadCatalogRows();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));

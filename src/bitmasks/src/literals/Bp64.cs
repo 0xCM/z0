@@ -8,8 +8,10 @@ namespace Z0
     {
         partial struct Literals
         {
+            [BitMask("[00000001 00000001 00000001 00000001 00000001 00000001 00000001 00000001]")]
             public const ulong b00000001x64 = (ulong)b00000001x32 << 32 | (ulong)b00000001x32;
 
+            [BitMask("[00000010 00000010 00000010 00000010 00000010 00000010 00000010 00000010]")]
             public const ulong b00000010x64 = (ulong)b00000010x32 << 32 | (ulong)b00000010x32;
 
             public const ulong b00000100x64 = (ulong)b00000100x32 << 32 | (ulong)b00000100x32;
