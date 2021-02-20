@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <MklLibs>$(ZPack)\mkl\</MklLibs>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,27 +13,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ContentWithTargetPath Include="lib\dll\z0-vml-clib.dll">
+    <ContentWithTargetPath Include="$(MklLibs)z0-vml-clib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>z0-vml-clib.dll</TargetPath>
     </ContentWithTargetPath>
 
-    <ContentWithTargetPath Include="lib\dll\z0-vsl-clib.dll">
+    <ContentWithTargetPath Include="$(MklLibs)z0-vsl-clib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>z0-vsl-clib.dll</TargetPath>
     </ContentWithTargetPath>
 
-    <ContentWithTargetPath Include="lib\dll\z0-cblas-clib.dll">
+    <ContentWithTargetPath Include="$(MklLibs)z0-cblas-clib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>z0-cblas-clib.dll</TargetPath>
     </ContentWithTargetPath>
 
-    <ContentWithTargetPath Include="lib\dll\z0-lapack-clib.dll">
+    <ContentWithTargetPath Include="$(MklLibs)z0-lapack-clib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>z0-lapack-clib.dll</TargetPath>
     </ContentWithTargetPath>
 
-    <ContentWithTargetPath Include="lib\dll\z0-lapacke-clib.dll">
+    <ContentWithTargetPath Include="$(MklLibs)z0-lapacke-clib.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>z0-lapacke-clib.dll</TargetPath>
     </ContentWithTargetPath>

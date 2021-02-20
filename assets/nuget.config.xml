@@ -1,7 +1,7 @@
 <configuration>
   <packageSources>
-    <add key="zcache" value="j:/cache/nuget/cache"/>
-    <add key="zcustom" value="j:/packages/nuget"/>
+    <add key="zcache" value="$(NUGET_PACKAGES)"/>
+    <add key="zpack" value="$(ZPack)"/>
     <add key="dotnet-tools" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" />
     <add key="dotnet-eng" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-eng/nuget/v3/index.json" />
     <add key="dotnet3.1" value="https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet3.1/nuget/v3/index.json" />
