@@ -15,8 +15,6 @@ namespace Z0
 
         ConcurrentDictionary<Type,IWfService> Models {get;}
 
-        public ApiServices ApiServices {get;}
-
         public IWfEmissionLog EmissionLog {get;}
 
         public Env Env {get;}
@@ -28,7 +26,6 @@ namespace Z0
             Models = new ConcurrentDictionary<Type, IWfService>();
             var hosts = components.Types().Realize<IWfService>().Concrete().Select(x => (IWfService)Activator.CreateInstance(x));
             root.iter(hosts, host => Models.TryAdd(host.ContractType, host));
-            ApiServices = Z0.ApiServices.create(Wf);
             EmissionLog = new WfEmissionLog(wf.Db().LogRoot());
         }
 

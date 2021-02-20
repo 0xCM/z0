@@ -33,7 +33,9 @@ namespace Z0
             Asm = asm;
             Wf.Created();
             Extractor = ApiCodeExtractors.service();
-            Jitter = Wf.ApiServices.ApiJit();
+            var services = wf.ApiServices();
+
+            Jitter = services.ApiJit();
         }
 
         public void Dispose()

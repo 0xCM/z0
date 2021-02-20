@@ -27,7 +27,8 @@ namespace Z0
         [Op]
         public static ApiHostCatalog host(IWfShell wf, IApiHost src)
         {
-            var members = wf.ApiServices.ApiJit().Jit(src);
+            var jit = ApiJit.create(wf);
+            var members = jit.Jit(src);
             return members.Length == 0 ? ApiHostCatalog.Empty : ApiHostCatalog.create(src, members);
         }
 

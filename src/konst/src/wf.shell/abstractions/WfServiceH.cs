@@ -38,9 +38,11 @@ namespace Z0
 
         public IWfDb Db {get; private set;}
 
-        public abstract Type ContractType {get;}
+        public virtual Type ContractType
+            => typeof(H);
 
-        protected CmdBuilder CmdBuilder => Wf.CmdBuilder();
+        protected CmdBuilder CmdBuilder
+            => Wf.CmdBuilder();
 
         public void Init(IWfShell wf)
         {

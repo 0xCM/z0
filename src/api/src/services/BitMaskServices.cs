@@ -10,11 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class BitMaskServices : WfService<BitMaskServices, BitMaskServices>
+    public sealed class BitMaskServices : WfService<BitMaskServices>
     {
-        [Op]
-        public static BitMaskFormatter formatter()
-            => new BitMaskFormatter();
+        readonly BitMaskFormatter Formatter;
+
+        public BitMaskServices()
+        {
+            Formatter = new BitMaskFormatter();
+        }
 
         public Index<BitMaskInfo> Load()
             => Load(DefaultProvider);
@@ -37,14 +40,12 @@ namespace Z0
         {
             var flow = Wf.EmittingTable<BitMaskInfo>(dst);
             var count = src.Length;
-            var f= formatter();
             using var writer = dst.Writer();
-            writer.WriteLine(f.HeaderText);
+            writer.WriteLine(Formatter.HeaderText);
             for(var i=0u; i<count; i++)
-                writer.WriteLine(f.Format(skip(src, i)));
+                writer.WriteLine(Formatter.Format(skip(src, i)));
             return Wf.EmittedTable<BitMaskInfo>(flow, count, dst);
         }
-
 
         static Type DefaultProvider => typeof(BitMasks.Literals);
     }

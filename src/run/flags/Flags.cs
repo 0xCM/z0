@@ -31,6 +31,20 @@ namespace Z0
             return buffer.Emit();
         }
 
+        public static string format<E>(Flags16<E> src, bool enabledOnly = true)
+            where E : unmanaged, Enum
+        {
+            var fields = Clr.fields<E>();
+            var count = root.min(fields.Length, Flags16<E>.Width);
+            var buffer = Buffers.text();
+            for(byte i=0; i<count; i++)
+            {
+                var state = src[(Pow2x16)i];
+                render(skip(fields,i), state, buffer, enabledOnly);
+            }
+            return buffer.Emit();
+        }
+
         public static string format<E>(Flags64<E> src, bool enabledOnly = true)
             where E : unmanaged, Enum
         {

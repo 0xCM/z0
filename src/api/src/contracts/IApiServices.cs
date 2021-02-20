@@ -2,14 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
-[assembly: PartId(PartId.Merge)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class Merge : Part<Merge>
-    {
+    using System;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
+
+    public interface IApiServices : IWfService
+    {
+        IApiJit ApiJit();
     }
 }
-

@@ -9,9 +9,11 @@ namespace Z0
 
     using static Part;
 
-    public sealed class ApiServices : WfService<ApiServices, ApiServices>
+    [ApiHost]
+    public static partial class XApi
     {
-        public IApiJit ApiJit()
-            => Z0.ApiJit.create(Wf);
+        [Op]
+        public static IApiServices ApiServices(this IWfShell wf)
+            => Z0.ApiServices.create(wf);
     }
 }

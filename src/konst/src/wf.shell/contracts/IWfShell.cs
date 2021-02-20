@@ -57,9 +57,6 @@ namespace Z0
 
         Env Env {get;}
 
-        ApiServices ApiServices
-            => Services.ApiServices;
-
         string ITextual.Format()
             => AppName;
 

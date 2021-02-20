@@ -81,7 +81,7 @@ namespace Z0.Asm
 
         void Jit()
         {
-            var jitter = ApiServices.create(Wf).ApiJit();
+            var jitter = Wf.ApiServices().ApiJit();
             var members = jitter.JitApi();
             Wf.Status($"Jitted {members.MemberCount}");
             var records = EmitCatalog(members);

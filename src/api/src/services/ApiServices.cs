@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Api
-    {
+    using System;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
+
+    sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
+    {
+        public IApiJit ApiJit()
+            => Z0.ApiJit.create(Wf);
     }
 }
