@@ -11,35 +11,33 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using EC = ClrEnumCode;
+    using EC = ClrPrimalKind;
 
     partial struct ClrPrimitives
     {
         [Op]
-        public static Index<EnumLiteral> enums(Type src)
+        public static Index<SymbolicLiteral> enums(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = alloc<EnumLiteral>(fields.Length);
-            var ecode = ClrPrimitives.ecode(src);
-            fill(src, ecode, fields, dst);
+            var dst = alloc<SymbolicLiteral>(fields.Length);
+            fill(src, kind(src), fields, dst);
             return dst;
         }
 
         [Op]
-        public static Index<EnumLiteral<E>> enums<E>()
+        public static Index<SymbolicLiteral<E>> enums<E>()
             where E : unmanaged, Enum
         {
             var src = typeof(E);
             var fields = span(src.LiteralFields());
-            var dst = alloc<EnumLiteral<E>>(fields.Length);
-            var ecode = ClrPrimitives.ecode(src);
-            fill(src, ecode, fields, span(dst));
+            var dst = alloc<SymbolicLiteral<E>>(fields.Length);
+            fill(src, kind(src), fields, span(dst));
             return dst;
         }
 
         [Op]
-        public static ulong unbox(EC ec, object src)
-            => ec switch {
+        public static ulong unbox(ClrPrimalKind kind, object src)
+            => kind switch {
                 EC.U8 => (ulong)(byte)src,
                 EC.I8 => (ulong)(sbyte)src,
                 EC.U16 => (ulong)(ushort)src,
@@ -52,7 +50,7 @@ namespace Z0
             };
 
         [Op]
-        static void fill(Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral> dst)
+        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral> dst)
         {
             ClrAssemblyName assname = type.Assembly;
             var count = fields.Length;
@@ -64,17 +62,17 @@ namespace Z0
                 ref var row = ref seek(dst,i);
                 row.Component = simple;
                 row.Type = type.Name;
-                row.DataType = ecode;
+                row.DataType = kind;
                 row.LiteraIndex = (ushort)i;
                 row.LiteralName = f.Name;
-                row.ScalarValue = unbox(ecode, f.GetRawConstantValue());
+                row.ScalarValue = unbox(kind, f.GetRawConstantValue());
                 row.NameAddress = memory.address(f.Name);
                 row.TypeAddress = typeAddress;
             }
         }
 
         [Op]
-        static void fill<E>(Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral<E>> dst)
+        static void fill<E>(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral<E>> dst)
             where E : unmanaged, Enum
         {
             ClrAssemblyName assname = type.Assembly;
@@ -88,10 +86,10 @@ namespace Z0
                 row.Index = (ushort)i;
                 row.Component = simple;
                 row.Type = type.Name;
-                row.DataType = ecode;
+                row.DataType = kind;
                 row.Name = f.Name;
                 row.LiteralValue = (E)f.GetRawConstantValue();
-                row.ScalarValue = unbox(ecode, row.LiteralValue);
+                row.ScalarValue = unbox(kind, row.LiteralValue);
             }
         }
     }

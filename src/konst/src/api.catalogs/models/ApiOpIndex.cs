@@ -48,7 +48,7 @@ namespace Z0
             => Duplicates;
 
         IEnumerable<KeyedValue<OpIdentity,T>> KeyedValues
-            => HashTable.Select(x => KeyedValue.define(x.Key, x.Value));
+            => HashTable.Select(x => root.kv(x.Key, x.Value));
 
         public IEnumerator<KeyedValue<OpIdentity,T>> GetEnumerator()
             => KeyedValues.GetEnumerator();

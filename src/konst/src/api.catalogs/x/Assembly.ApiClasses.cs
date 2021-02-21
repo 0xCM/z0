@@ -10,7 +10,7 @@ namespace Z0
     partial class XApi
     {
         [Op]
-        public static Index<EnumLiteral> ApiClasses(this Assembly src)
+        public static Index<SymbolicLiteral> ApiClasses(this Assembly src)
             => Clr.enums(src.Enums().Tagged<ApiClassAttribute>());
     }
 }

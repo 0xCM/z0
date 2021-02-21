@@ -12,6 +12,13 @@ namespace Z0
     [ApiHost]
     public readonly struct TableSpans
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T entry<T>(in TableSpan<N256,N256,T> src, byte i, byte j)
+            where T : unmanaged
+                => ref src[i,j];
+
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> alloc<M,N,T>(M m = default, N n = default, T fill = default)
             where M : unmanaged, ITypeNat

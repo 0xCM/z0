@@ -14,25 +14,25 @@ namespace Z0
     partial struct Clr
     {
         [Op]
-        public static Index<EnumLiteral> enums(Type src)
+        public static Index<SymbolicLiteral> enums(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = alloc<EnumLiteral>(fields.Length);
+            var dst = alloc<SymbolicLiteral>(fields.Length);
             enums(src, dst);
             return dst;
         }
 
-        public static void enums(Type src, Span<EnumLiteral> dst)
+        public static void enums(Type src, Span<SymbolicLiteral> dst)
         {
             var fields = span(src.LiteralFields());
-            var ecode = ClrPrimitives.ecode(src);
+            var ecode = ClrPrimitives.kind(src);
             fill(src, ecode, fields, dst);
         }
 
         [Op]
-        public static Index<EnumLiteral> enums(Index<Type> src)
+        public static Index<SymbolicLiteral> enums(Index<Type> src)
         {
-            var dst = root.list<EnumLiteral>();
+            var dst = root.list<SymbolicLiteral>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
             {
@@ -44,11 +44,11 @@ namespace Z0
         }
 
         [Op]
-        public static Index<EnumLiteral> enums(params Assembly[] src)
+        public static Index<SymbolicLiteral> enums(params Assembly[] src)
         {
             var kvTypes = ClrEnums.types(src);
             var partCount = kvTypes.Length;
-            var dst = root.list<EnumLiteral>();
+            var dst = root.list<SymbolicLiteral>();
             for(var i=0; i<partCount; i++)
             {
                 var types = kvTypes[i];
@@ -67,7 +67,7 @@ namespace Z0
         }
 
         [Op]
-        static void fill(Type type, ClrEnumCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteral> dst)
+        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral> dst)
         {
             var count = fields.Length;
             var typeAddress = type.TypeHandle.Value;
@@ -78,10 +78,10 @@ namespace Z0
                 ref var row = ref seek(dst,i);
                 row.Component = asmName;
                 row.Type = type.Name;
-                row.DataType = ecode;
+                row.DataType = kind;
                 row.LiteraIndex = (ushort)i;
                 row.LiteralName = f.Name;
-                row.ScalarValue = ClrEnums.unbox(ecode, f.GetRawConstantValue());
+                row.ScalarValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
                 row.NameAddress = memory.address(f.Name);
                 row.TypeAddress = typeAddress;
             }

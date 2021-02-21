@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using EC = ClrEnumCode;
+    using EC = ClrPrimalKind;
 
     partial struct ClrEnums
     {
@@ -21,6 +21,5 @@ namespace Z0
                 EC.U64 => (ulong)src,
                 _ => 0ul,
             };
-
     }
 }

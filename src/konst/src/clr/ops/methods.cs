@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    using static Part;
+    using static Root;
 
     partial struct Clr
     {

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Defines an entry in a <see cref='LookupTable{T,K}'/>
+    /// Defines an entry in a <see cref='LookupEntries{T,K}'/>
     /// </summary>
     public readonly struct LookupEntry<K,V>
         where K : unmanaged

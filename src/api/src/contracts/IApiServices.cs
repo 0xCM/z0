@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
@@ -16,5 +17,7 @@ namespace Z0
         Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src);
 
         void EmitApiClasses();
+
+        Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst);
     }
 }

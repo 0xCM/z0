@@ -5,8 +5,6 @@ namespace Z0
     using System.Reflection;
     using System.Reflection.Metadata;
 
-    using static Part;
-
     partial struct Clr
     {
         /// <summary>

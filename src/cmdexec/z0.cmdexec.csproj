@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(GVec)" />

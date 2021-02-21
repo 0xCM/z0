@@ -11,8 +11,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static TextRules;
-    using static AsmExpr;
 
     class App : WfService<App,App>
     {
@@ -42,10 +40,9 @@ namespace Z0.Asm
 
         void ShowSigOpTokens()
         {
-            var tokens = AsmExpr.SigOpTokens();
+            var tokens = AsmSigs.tokens();
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
-
 
         void Jit()
         {
@@ -58,36 +55,10 @@ namespace Z0.Asm
         void EmitApiClasses()
             => ApiServices.EmitApiClasses();
 
-        void CreateLookup()
-        {
-            var tokens = AsmExpr.SigOpTokens();
-            var lu = SymbolTables.create(tokens, t => t.Symbol);
-            var count = tokens.Count;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var token = ref tokens[i];
-                if(token.IsNonEmpty)
-                {
-                    if(!lu.Index(token.Symbol, out var index))
-                    {
-                        Wf.Error($"Index for {token.Name} not found");
-                    }
-                    ref readonly var found = ref lu.Entry(index);
-
-                    Wf.Row(found.Format());
-                }
-                else
-                {
-                    if(token.Index!=0)
-                        Wf.Error($"Empty token has a nonzero index!");
-                }
-            }
-        }
-
-        void ShowMnemonicLiterals()
+        void ShowMnemonicSymbols()
         {
             const string FormatPattern = "{0, -8} | {1, -8} | {2}";
-            var literals = Etl.MnemonicLiterals();
+            var literals = Etl.MnemonicSymbols();
             var count = literals.Length;
             for(var i=0; i<count; i++)
             {
@@ -137,13 +108,6 @@ namespace Z0.Asm
             var merge = ByteSpans.merge(buffer, "CharBytes");
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
-        }
-
-
-        void ProcessCatalog()
-        {
-            //var records = Etl.TransformSource();
-            var monics = Etl.Mnemonics();
         }
 
 
@@ -221,14 +185,10 @@ namespace Z0.Asm
             var t0 = ApiSigs.type("uint");
             var t1 = ApiSigs.type("uint");
             var t2 = ApiSigs.type("bool");
-
             var op0 = ApiSigs.operand("a", t0);
             var op1 = ApiSigs.operand("b", t1);
             var r = ApiSigs.ret(t2);
-
-            var operation = ApiSigs.operation("equals", r, op0, op1);
-            Wf.Row(operation);
-
+            Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
         void CheckResPack()

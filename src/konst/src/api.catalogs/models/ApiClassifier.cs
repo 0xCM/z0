@@ -13,10 +13,10 @@ namespace Z0
     {
         public Name Type {get;}
 
-        public Index<EnumLiteral> Literals {get;}
+        public Index<SymbolicLiteral> Literals {get;}
 
         [MethodImpl(Inline)]
-        public ApiClassifier(Name type, Index<EnumLiteral> literals)
+        public ApiClassifier(Name type, Index<SymbolicLiteral> literals)
         {
             Type = type;
             Literals = literals;

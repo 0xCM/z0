@@ -15,10 +15,8 @@ namespace Z0.Asm
     using static AsmExpr;
     using static AsmOpCodes;
 
-    using api = AsmExpr;
-
     [ApiHost]
-    public sealed partial class AsmExprParser : WfService<AsmExprParser, AsmExprParser>
+    public sealed class AsmExprParser : WfService<AsmExprParser>
     {
         Index<char> RegDigits;
 
@@ -36,7 +34,7 @@ namespace Z0.Asm
         {
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
-            SigOpTokens = api.SigOpTokens();
+            SigOpTokens = AsmSigs.tokens();
             SigOpLookup = SymbolTables.create(SigOpTokens, t => t.Symbol);
             SigOpSplitRule = Rules.splitter(AsmExprFacets.OperandDelimiter);
         }
@@ -73,7 +71,7 @@ namespace Z0.Asm
                 if(ParseMnemonic(src, out var monic))
                 {
                     var i = Query.index(src, AsmExprFacets.MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(SigOpSplitRule.Delimiter).Map(sigop) : sys.empty<SigOperand>();
+                    var operands = i > 0 ? src.Substring(i).Split(SigOpSplitRule.Delimiter).Map(AsmSigs.sigop) : sys.empty<SigOperand>();
                     dst = new Signature(monic, operands);
                     return true;
                 }
@@ -106,7 +104,7 @@ namespace Z0.Asm
         }
 
         public Index<SigOperand> Operands(string src)
-            => Transform.apply(SigOpSplitRule, src).Map(sigop);
+            => Transform.apply(SigOpSplitRule, src).Map(AsmSigs.sigop);
 
         [Op]
         public Index<SigOperand> Operands(Signature src)
@@ -141,8 +139,8 @@ namespace Z0.Asm
                 if(parts.Length != 2)
                     root.@throw(new Exception($"Composition logic wrong for {src.Content}"));
 
-                var left = api.sigop(parts[0]);
-                var right = api.sigop(parts[1]);
+                var left = AsmSigs.sigop(parts[0]);
+                var right = AsmSigs.sigop(parts[1]);
                 dst = root.pair(left,right);
                 return true;
             }

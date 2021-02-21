@@ -8,7 +8,8 @@ namespace Z0
     {
         protected override CmdResult Run(EmitEnumCatalogCmd cmd)
         {
-            ClrEnumCatalogs.emit(Wf, cmd.Target);
+            var services = Wf.ApiServices();
+            services.EmitSymbolicLiterals(Wf.Components, cmd.Target);
             return Cmd.ok(cmd);
         }
     }
