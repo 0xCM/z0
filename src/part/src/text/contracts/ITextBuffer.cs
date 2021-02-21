@@ -36,22 +36,22 @@ namespace Z0
         }
 
 
-        void AppendPropLine<T>(PropertyFormat<T> src)
+        void AppendPropLine<T>(PropFormat<T> src)
         {
             AppendLine(src.Format());
         }
 
-        void AppendPropLine<T>(PropertyFormat<T> src, char delimiter)
+        void AppendPropLine<T>(PropFormat<T> src, char delimiter)
         {
             AppendLine(src.Format(delimiter));
         }
 
-        void AppendProp<T>(PropertyFormat<T> src)
+        void AppendProp<T>(PropFormat<T> src)
         {
             Append(src.Format());
         }
 
-        void AppendProp<T>(PropertyFormat<T> src, char delimiter)
+        void AppendProp<T>(PropFormat<T> src, char delimiter)
         {
             Append(src.Format(delimiter));
         }

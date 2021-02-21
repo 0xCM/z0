@@ -18,12 +18,12 @@ namespace Z0.Asm
         public static string format(in CallRel32 src)
         {
             var dst = text.buffer();
-            dst.AppendPropLine(property(nameof(src.Caller), src.Caller.Format()));
-            dst.AppendPropLine(property(nameof(src.Ip), src.Ip.Format()));
-            dst.AppendPropLine(property(nameof(src.NextIp), src.NextIp.Format()));
-            dst.AppendPropLine(property(nameof(src.Target), src.Target.Format()));
-            dst.AppendPropLine(property(nameof(src.RelTarget), src.RelTarget.Format()));
-            dst.AppendPropLine(property(nameof(src.Encoding), src.Encoding.Format()));
+            dst.AppendPropLine(prop(nameof(src.Caller), src.Caller.Format()));
+            dst.AppendPropLine(prop(nameof(src.Ip), src.Ip.Format()));
+            dst.AppendPropLine(prop(nameof(src.NextIp), src.NextIp.Format()));
+            dst.AppendPropLine(prop(nameof(src.Target), src.Target.Format()));
+            dst.AppendPropLine(prop(nameof(src.RelTarget), src.RelTarget.Format()));
+            dst.AppendPropLine(prop(nameof(src.Encoding), src.Encoding.Format()));
             return dst.Emit();
         }
     }

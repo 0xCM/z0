@@ -11,8 +11,8 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
-        public static PropertyFormat<T> property<T>(string name, T value, sbyte pad = RP.PropertyPad)
-            => new PropertyFormat<T>(name, value, pad);
+        [MethodImpl(Inline), Op]
+        public static TextProp prop(Name name, TextBlock value)
+            => new TextProp(name,value);
     }
 }

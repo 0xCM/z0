@@ -11,7 +11,7 @@ namespace Z0
 
     using api = TextRules.Format;
 
-    public readonly struct PropertyFormat : ITextual
+    public readonly struct PropFormat : ITextual
     {
         public Name Name {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
         public sbyte Pad {get;}
 
         [MethodImpl(Inline)]
-        internal PropertyFormat(Name name, dynamic value, sbyte pad)
+        internal PropFormat(Name name, dynamic value, sbyte pad)
         {
             Name = name;
             Value = value;
@@ -37,7 +37,7 @@ namespace Z0
             => Format();
     }
 
-    public readonly struct PropertyFormat<T> : ITextual
+    public readonly struct PropFormat<T> : ITextual
     {
         public Name Name {get;}
 
@@ -46,7 +46,7 @@ namespace Z0
         public sbyte Pad {get;}
 
         [MethodImpl(Inline)]
-        public PropertyFormat(Name name, T value, sbyte pad)
+        public PropFormat(Name name, T value, sbyte pad)
         {
             Name = name;
             Value = value;
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public PropertyFormat(Name name, T value)
+        public PropFormat(Name name, T value)
         {
             Name = name;
             Value = value;
@@ -70,15 +70,15 @@ namespace Z0
         public override string ToString()
             => Format();
         [MethodImpl(Inline)]
-        public static implicit operator PropertyFormat<T>((string name, T value) src)
-            => new PropertyFormat<T>(src.name, src.value);
+        public static implicit operator PropFormat<T>((string name, T value) src)
+            => new PropFormat<T>(src.name, src.value);
 
         [MethodImpl(Inline)]
-        public static implicit operator PropertyFormat<T>((string name, T value, int pad) src)
-            => new PropertyFormat<T>(src.name, src.value, (sbyte)src.pad);
+        public static implicit operator PropFormat<T>((string name, T value, int pad) src)
+            => new PropFormat<T>(src.name, src.value, (sbyte)src.pad);
 
         [MethodImpl(Inline)]
-        public static implicit operator PropertyFormat(PropertyFormat<T> src)
-            => new PropertyFormat(src.Name, src.Value, src.Pad);
+        public static implicit operator PropFormat(PropFormat<T> src)
+            => new PropFormat(src.Name, src.Value, src.Pad);
     }
 }

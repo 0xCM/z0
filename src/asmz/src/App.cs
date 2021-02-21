@@ -7,10 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+
     using Z0.Tools;
 
     using static Part;
     using static memory;
+
+    using static TextRules;
 
     class App : WfService<App,App>
     {
@@ -234,15 +237,21 @@ namespace Z0.Asm
             Wf.Row($"Loaded {descriptors.Count} descriptors");
         }
 
+        void TestTextProps()
+        {
+            var a0 = text.prop("name0", "value0");
+            Wf.Row(a0);
+        }
+
         void ShowMemory()
         {
             var info = memory.basic();
             var buffer = text.buffer();
-            buffer.AppendLine(text.property(nameof(info.BaseAddress), info.BaseAddress));
-            buffer.AppendLine(text.property(nameof(info.AllocationBase), info.AllocationBase));
-            buffer.AppendLine(text.property(nameof(info.RegionSize), info.RegionSize));
-            buffer.AppendLine(text.property(nameof(info.StackSize), info.StackSize));
-            buffer.AppendLine(text.property(nameof(info.Protection), info.Protection));
+            buffer.AppendLine(Format.prop(nameof(info.BaseAddress), info.BaseAddress));
+            buffer.AppendLine(Format.prop(nameof(info.AllocationBase), info.AllocationBase));
+            buffer.AppendLine(Format.prop(nameof(info.RegionSize), info.RegionSize));
+            buffer.AppendLine(Format.prop(nameof(info.StackSize), info.StackSize));
+            buffer.AppendLine(Format.prop(nameof(info.Protection), info.Protection));
             Wf.Row(buffer.Emit());
         }
 

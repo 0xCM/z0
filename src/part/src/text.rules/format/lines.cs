@@ -5,11 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
 
     partial struct TextRules
     {
         partial struct Format
         {
+
             /// <summary>
             /// Appends each source items to a target stream, appending an EOL after each
             /// </summary>

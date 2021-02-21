@@ -14,12 +14,12 @@ namespace Z0
         partial struct Format
         {
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static PropertyFormat<T> property<T>(string name, T value)
-                => new PropertyFormat<T>(name, value, RP.PropertyPad);
+            public static PropFormat<T> prop<T>(string name, T value)
+                => new PropFormat<T>(name, value, RP.PropertyPad);
 
             [MethodImpl(Inline), Op, Closures(Closure)]
-            public static PropertyFormat<T> property<T>(string name, T value, sbyte pad)
-                => new PropertyFormat<T>(name, value, pad);
+            public static PropFormat<T> prop<T>(string name, T value, sbyte pad)
+                => new PropFormat<T>(name, value, pad);
         }
     }
 }
