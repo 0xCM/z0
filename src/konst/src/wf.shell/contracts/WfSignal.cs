@@ -77,14 +77,20 @@ namespace Z0
         public void Processed<T,M>(FS.FilePath src, T data, M metric)
             => Raise(processed(Host, src, data, metric, Ct));
 
-        public void Processed<T>(T content)
-            => Raise(processed(Host, content, Ct));
+        public void Processed<T>(T data)
+            => Raise(processed(Host, data, Ct));
 
         public void Processed(FS.FilePath path)
             => Raise(processed(Host, path, Ct));
 
-        public void Processed<T>(ApiHostUri uri, T content)
-            => Raise(processed(Host, Seq.delimit(uri,content), Ct));
+        public void Processed<T>(ApiHostUri uri, T data)
+            => Raise(processed(Host, Seq.delimit(uri,data), Ct));
+
+        public void Creating<T>(T data)
+            => Raise(creating(Host, data, Ct));
+
+        public void Created<T>(T data)
+            => Raise(created(Host, data, Ct));
 
         public void EmittedTable<T>(Count count, FS.FilePath dst)
             where T : struct

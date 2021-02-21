@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static TextRules;
 
     /// <summary>
     /// Represents a line of text in the context of a line-oriented text data source
@@ -46,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TextBlock Segment(uint i0, uint i1)
-            => text.segment(Content, i0, i1);
+            => Parse.segment(Content, i0, i1);
 
         [MethodImpl(Inline)]
         public TextBlock Slice(uint offset, uint length)

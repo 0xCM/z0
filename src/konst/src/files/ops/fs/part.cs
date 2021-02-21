@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static Part;
+    using static TextRules;
 
     partial struct FS
     {
@@ -15,7 +15,7 @@ namespace Z0
             if(i == NotFound)
                 return default;
             else
-                return ApiPartIdParser.single(Z0.text.segment(src.Name.Text,0, i - 1));
+                return ApiPartIdParser.single(Parse.segment(src.Name.Text,0, i - 1));
         }
     }
 }

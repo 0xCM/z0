@@ -20,6 +20,8 @@ namespace Z0
 
         Error = MsgFlair.Error,
 
+        Creating = ConsoleColor.DarkGray,
+
         Created = ConsoleColor.DarkGray,
 
         Disposed = ConsoleColor.DarkGray,

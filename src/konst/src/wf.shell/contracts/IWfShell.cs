@@ -101,7 +101,7 @@ namespace Z0
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
         IWfDb Db()
-            => WfDb.create(this);
+            => new WfDb(this, Env.DbRoot);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

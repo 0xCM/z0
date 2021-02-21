@@ -12,13 +12,11 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Creates a <see cref='TextSegment'/> from an index-identifed segment of a <see cref='TextLine'/>
+        /// Creates a <see cref='TextBlock'/>
         /// </summary>
-        /// <param name="src">The source line</param>
-        /// <param name="i0">The index of the first included character</param>
-        /// <param name="i1">The index of the last included character</param>
+        /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static TextSegment segment(TextLine src, uint i0, uint i1)
-            => new TextSegment(src,i0, i1);
+        public static TextBlock block(string src)
+            => new TextBlock(src);
     }
 }

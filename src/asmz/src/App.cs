@@ -5,8 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using Z0.Tools;
 
@@ -15,7 +13,7 @@ namespace Z0.Asm
 
     using static TextRules;
 
-    class App : WfService<App,App>
+    class App : WfService<App>
     {
         public App()
         {
@@ -24,11 +22,23 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
+            var flow = Wf.Creating(nameof(Etl));
             Etl = AsmCatalogEtl.create(Wf);
+            Wf.Created(flow, nameof(Etl));
+
+            flow = Wf.Creating(nameof(AsmParser));
             AsmParser = AsmExpr.parser(Wf);
+            Wf.Created(flow, nameof(AsmParser));
+
             TextBuffer = text.buffer();
+
+            flow = Wf.Creating(nameof(Asm));
             Asm = AsmServices.context(Wf);
+            Wf.Created(flow, nameof(Asm));
+
+            flow = Wf.Creating(nameof(ApiServices));
             ApiServices = Wf.ApiServices();
+            Wf.Created(flow, nameof(ApiServices));
         }
 
         AsmCatalogEtl Etl;
@@ -68,7 +78,6 @@ namespace Z0.Asm
                 ref readonly var literal = ref skip(literals, i);
                 var format = string.Format(FormatPattern, literal.Index, literal.Scalar, literal.Name);
                 Wf.Row(format);
-
             }
         }
 
@@ -266,6 +275,8 @@ namespace Z0.Asm
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
+
+            CheckIndexDecoder();
         }
 
         public static void Main(params string[] args)
@@ -273,7 +284,10 @@ namespace Z0.Asm
             try
             {
                 using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
-                App.create(wf).Run();
+                wf.Status("Creating application");
+                var app = App.create(wf);
+                wf.Status("Created application");
+                app.Run();
 
             }
             catch(Exception e)

@@ -5,18 +5,28 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    [WfService]
     public sealed class WfDb : WfService<WfDb,IWfDb>, IWfDb
     {
-        public FS.FolderPath Root {get;}
+        public FS.FolderPath Root {get; private set;}
 
         public WfDb()
         {
+
+        }
+
+        internal WfDb(IWfShell wf, FS.FolderPath root)
+            : base(wf)
+        {
+            Root = root;
+        }
+
+        protected override void OnInit()
+        {
+            base.OnInit();
             Root = Environs.dbRoot();
         }
 

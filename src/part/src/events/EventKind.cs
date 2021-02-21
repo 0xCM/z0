@@ -36,6 +36,8 @@ namespace Z0
 
         EmittedFile,
 
+        Creating,
+
         Created,
 
         Disposed,

@@ -6,6 +6,8 @@ namespace Z0
 {
     public readonly struct GlobalEvents
     {
+        public const string Creating = nameof(Creating);
+
         public const string Created = nameof(Created);
 
         public const string Disposed = nameof(Disposed);

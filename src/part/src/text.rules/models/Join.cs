@@ -8,18 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct TextRules
     {
-        partial struct Factory
+        public readonly struct Join<T>
         {
-            /// <summary>
-            /// Creates a <see cref='TextBlock'/>
-            /// </summary>
-            /// <param name="src">The source text</param>
-            [MethodImpl(Inline), Op]
-            public static TextBlock block(string src)
-                => new TextBlock(src);
+            public string Delimiter {get;}
+
+            public Index<T> Terms {get;}
+
+            [MethodImpl(Inline)]
+            public Join(string delimiter, Index<T> terms)
+            {
+                Delimiter = delimiter;
+                Terms = terms;
+            }
         }
     }
 }

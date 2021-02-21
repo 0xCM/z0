@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Part;
-    using static memory;
+    using static TextRules;
 
     partial class WfShell
     {
         [Op]
+        public static IWfShell create(string[] args, bool verbose = true)
+            => create(WfShell.parts(controller(), args), args, verbose);
+
+        [Op]
         public static IWfShell create(ApiPartSet parts, string[] args, bool verbose = true)
         {
-
             var status = new WfInitStatus();
             status.StartTS = root.now();
 
@@ -33,7 +32,14 @@ namespace Z0
 
             var partIdList = parts.ApiGlobal.PartIdentities;
             if(verbose)
-                term.inform(AppMsg.status(text.prop("Parts", text.join(", ", partIdList))));
+            {
+                var fence = text.fence(Chars.LBrace, Chars.RBrace);
+                var enclosed = Rules.enclose(text.join(RP.CommaJoin, partIdList), fence);
+                var content = Format.format(enclosed);
+                var prop = text.prop("Parts", content);
+                var msg = AppMsg.status(prop);
+                term.inform(msg);
+            }
 
             IAppPaths _paths = new AppPaths(dbRoot);
             status.PathConfigTime = clock.Elapsed;
@@ -81,28 +87,6 @@ namespace Z0
             status.AppConfigPath = _paths.AppConfigPath;
 
             return wf;
-        }
-
-        [Op]
-        public static IWfShell create(string[] args, bool verbose = true)
-        {
-            var status = new WfInitStatus();
-            status.StartTS = root.now();
-
-            var msg = $"[{status.StartTS}] | Initiating shell creation steps";
-            if(verbose)
-                term.inform(msg);
-
-            var clock = Time.counter(true);
-            var control = controller();
-            var parts = WfShell.parts(control, args);
-
-            msg = $"[{clock.Elapsed}] | Created partset with {parts.PartComponents.Length} components";
-
-            if(verbose)
-                term.inform(msg);
-
-            return create(parts, args, verbose);
         }
     }
 }

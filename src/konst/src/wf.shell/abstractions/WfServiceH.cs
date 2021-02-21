@@ -48,9 +48,10 @@ namespace Z0
         {
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
-            Db = wf.Db();
+            Db = new WfDb(wf, wf.Env.DbRoot);
             Events = EventCache.init(wf);
             OnInit();
+            wf.Babble($"Initialized {typeof(H).Name}");
         }
 
         protected WfService()
