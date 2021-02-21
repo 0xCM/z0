@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     public readonly struct Apps
@@ -15,7 +14,7 @@ namespace Z0
             try
             {
                 var parts = WfShell.parts(Index<PartId>.Empty);
-                term.inform(string.Format("PartCount:{0}", parts.PartComponents.Length));
+                term.inform(AppMsg.status(text.prop("PartCount", parts.PartComponents.Length)));
                 var rng = Rng.@default();
                 using var wf = WfShell.create(parts, args).WithRandom(rng);
                 if(args.Length == 0)

@@ -16,26 +16,6 @@ namespace Z0
         partial struct Format
         {
             /// <summary>
-            /// Concatenates a sequence of <typeparamref name='T'/> cells from a source span using a specified delimiter
-            /// </summary>
-            /// <param name="delimiter">The cell delimiter</param>
-            /// <param name="src">The cell source</param>
-            /// <typeparam name="T">The cell type</typeparam>
-            [MethodImpl(Inline), Op, Closures(Closure)]
-            public static string join<T>(string delimiter, ReadOnlySpan<T> src)
-            {
-                var dst = text.buffer();
-                var count = src.Length;
-                for(var i=0u; i<count; i++)
-                {
-                    dst.AppendCell(skip(src, i));
-                    if(i != count-1)
-                        dst.Append(delimiter);
-                }
-                return dst.ToString();
-            }
-
-            /// <summary>
             /// Functional equivalalent of <see cref="string.Join(string, object[])"/>
             /// </summary>
             /// <param name="values">The values to be rendered as text</param>
@@ -52,6 +32,24 @@ namespace Z0
             [MethodImpl(Inline), Op, Closures(Closure)]
             public static string join<T>(char sep, IEnumerable<T> values)
                 => string.Join(sep, values);
+
+            [Op, Closures(Closure)]
+            public static string join<T>(string sep, ReadOnlySpan<T> src)
+            {
+                var dst = text.buffer();
+                var count = src.Length;
+                for(var i=0; i<count; i++)
+                {
+                    if(i != 0)
+                        dst.Append(sep);
+                    dst.AppendItem(skip(src,i));
+                }
+                return dst.ToString();
+            }
+
+            [Op, Closures(Closure)]
+            public static string join<T>(string sep, T[] src)
+                => join(sep, @readonly(src));
         }
     }
 }

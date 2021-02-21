@@ -26,35 +26,13 @@ namespace Z0
             => Append(Eol);
 
         void AppendFormat(string pattern, params object[] args)
-        {
-            Append(string.Format(pattern, args));
-        }
+            => Append(string.Format(pattern, args));
 
         void AppendLineFormat(string pattern, params object[] args)
-        {
-            AppendLine(string.Format(pattern, args));
-        }
+            => AppendLine(string.Format(pattern, args));
 
-
-        void AppendPropLine<T>(PropFormat<T> src)
-        {
-            AppendLine(src.Format());
-        }
-
-        void AppendPropLine<T>(PropFormat<T> src, char delimiter)
-        {
-            AppendLine(src.Format(delimiter));
-        }
-
-        void AppendProp<T>(PropFormat<T> src)
-        {
-            Append(src.Format());
-        }
-
-        void AppendProp<T>(PropFormat<T> src, char delimiter)
-        {
-            Append(src.Format(delimiter));
-        }
+        void AppendLine<T>(PropFormat<T> src)
+            => AppendLine(src.Format());
 
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
@@ -65,8 +43,8 @@ namespace Z0
         void Append(char c)
             => Append(c.ToString());
 
-        void AppendCell<T>(T src)
-            => Append(src?.ToString());
+        void AppendItem<T>(T src)
+            => Append(src?.ToString() ?? "!<null>!");
 
         void AppendLine<T>(T src)
         {
@@ -78,25 +56,10 @@ namespace Z0
         }
 
         void Indent<T>(uint margin, T src)
-        {
-            var indent = new string(Chars.Space, (int)margin);
-            Append(string.Format("{0}{1}",indent, src));
-        }
+            => Append(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
 
         void IndentLine<T>(uint margin, T src)
-        {
-            var indent = new string(Chars.Space, (int)margin);
-            AppendLine(string.Format("{0}{1}", indent, src));
-        }
-
-        void AppendDelimited(char delimiter, params object[] src)
-        {
-            var count = src.Length;
-            var terms = @readonly(src);
-            var sep = string.Format("{0} ", delimiter);
-            for(var i=0; i<src.Length; i++)
-                Append(string.Format("{0}{1}", sep, skip(terms,i)));
-        }
+            => AppendLine(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
 
         void AppendDelimited(string delimiter, params object[] src)
         {
@@ -134,12 +97,6 @@ namespace Z0
 
         void AppendFormatted(string pattern, params object[] args)
             => Append(string.Format(pattern, args));
-
-        void AppendSettingLine(string name, object value)
-        {
-            AppendFormatted("{0}:{1}", name, value);
-            AppendLine();
-        }
     }
 
     public interface ITextBuffer<H> : ITextBuffer, IService<H,ITextBuffer>

@@ -12,7 +12,7 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline), Op]
-        public static TextProp prop(Name name, TextBlock value)
-            => new TextProp(name,value);
+        public static TextProp prop<T>(Name name, T value)
+            => new TextProp(name, string.Format("{0}", value));
     }
 }

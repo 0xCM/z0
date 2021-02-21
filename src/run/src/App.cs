@@ -11,6 +11,9 @@ namespace Z0
 
     class Runner
     {
+        public static void Main(params string[] args)
+            => Apps.react(args);
+
         readonly WfHost Host;
 
         readonly IWfShell Wf;
@@ -27,8 +30,6 @@ namespace Z0
             Db = wf.Db();
         }
 
-        public static void Main(params string[] args)
-            => Apps.react(args);
 
         void CheckFlags()
         {

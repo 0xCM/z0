@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct MsgId : ITextual
     {
-        const string RenderPattern = "{0} | {1,-18}";
+        const string RenderPattern = "[{0}] | {1,-18}";
 
         public MsgLevel Level {get;}
 

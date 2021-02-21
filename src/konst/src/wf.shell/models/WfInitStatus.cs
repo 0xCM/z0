@@ -24,6 +24,5 @@ namespace Z0
 
         public PartId[] Parts;
 
-        public WfLogConfig LogConfig;
     }
 }

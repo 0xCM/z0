@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
     using static memory;
@@ -19,24 +20,28 @@ namespace Z0
             var status = new WfInitStatus();
             status.StartTS = root.now();
 
-            var msg = $"[{status.StartTS}] | Creating shell and associated dependencies";
             if(verbose)
-                term.inform(msg);
+                term.inform(AppMsg.status("Creating shell"));
 
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
             var dbRoot = Environs.dbRoot();
 
+            if(verbose)
+                term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));
+
             var partIdList = parts.ApiGlobal.PartIdentities;
-            var appLogConfig = Loggers.configure(controlId, dbRoot);
+            if(verbose)
+                term.inform(AppMsg.status(text.prop("Parts", text.join(", ", partIdList))));
+
             IAppPaths _paths = new AppPaths(dbRoot);
             status.PathConfigTime = clock.Elapsed;
 
-            msg = $"[{clock.Elapsed}] | Initialized paths";
             clock.Restart();
+
             if(verbose)
-                term.inform(msg);
+                term.inform(AppMsg.status("Initialized paths"));
 
             var ctx = new WfContext();
             ctx.ApiParts = parts;
@@ -45,32 +50,33 @@ namespace Z0
             ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
             ctx.Controller = control;
             status.InitConfigTime = clock.Elapsed;
-            msg = $"[{clock.Elapsed}] | Created context";
 
             clock.Restart();
 
             if(verbose)
-                term.inform(msg);
+                term.inform(AppMsg.status("Created context"));
 
-            IWfShell wf = new WfShell(new WfInit(dbRoot, ctx, appLogConfig, partIdList));
+            var init = new WfInit(dbRoot, ctx, Loggers.configure(controlId, dbRoot), partIdList);
 
-            msg = $"[{clock.Elapsed}] | Created shell";
             if(verbose)
-                term.inform(msg);
+                term.inform(AppMsg.status("Creating shell"));
+
+            IWfShell wf = new WfShell(init);
+
+            if(verbose)
+                term.inform(AppMsg.status("Created shell"));
 
             var reactors = WfShell.reactors(wf);
             if(reactors.IsNonEmpty)
                 wf.Router.Enlist(reactors);
 
-            msg =  $"[{clock.Elapsed}] | Enlisted {reactors.Count} routers";
             if(verbose)
-                term.inform(msg);
+                term.inform(AppMsg.status($"Enlisted {reactors.Count} routers"));
 
             status.ShellCreateTime = clock.Elapsed;
             status.FinishTS = root.now();
             status.Args = args;
             status.Controller = controlId;
-            status.LogConfig = appLogConfig;
             status.Parts = partIdList;
             status.AppConfigPath = _paths.AppConfigPath;
 

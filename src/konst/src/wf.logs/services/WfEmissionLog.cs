@@ -22,9 +22,10 @@ namespace Z0
 
         readonly FileStream Emissions;
 
-        internal WfEmissionLog(FS.FolderPath root)
+        internal WfEmissionLog(Env src)
         {
-            LogPath = (root + FS.file("emissions", FS.Extensions.Csv)).EnsureParentExists().Delete();
+            LogPath = src.LogRoot + FS.file("emissions", FS.Extensions.Csv);
+            LogPath.EnsureParentExists().Delete();
             Emissions = LogPath.Stream();
         }
 

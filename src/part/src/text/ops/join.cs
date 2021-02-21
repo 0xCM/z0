@@ -23,10 +23,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string join<T>(char delimiter, IEnumerable<T> src)
-            => Format.join(delimiter,src);
+            => Format.join(delimiter, src);
 
         [MethodImpl(Inline)]
         public static string join<T>(char delimiter, params T[] src)
-            => Format.join(delimiter,src);
+            => Format.join(delimiter, src);
     }
 }

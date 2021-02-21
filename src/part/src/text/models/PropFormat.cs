@@ -64,11 +64,12 @@ namespace Z0
         public string Format(char sep)
             => api.format(this, sep);
 
-         public string Format()
+        public string Format()
             => Format(RP.PropertySep);
 
         public override string ToString()
             => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator PropFormat<T>((string name, T value) src)
             => new PropFormat<T>(src.name, src.value);

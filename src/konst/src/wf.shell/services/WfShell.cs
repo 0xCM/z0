@@ -48,7 +48,7 @@ namespace Z0
 
         public WfServices Services {get;}
 
-        public Env Env => Services.Env;
+        public Env Env {get;}
 
         long StartToken;
 
@@ -61,37 +61,39 @@ namespace Z0
         public WfShell(IWfInit config)
         {
             Init = config;
-            Context = Init.Shell;
-            Id = Init.ControlId;
-            Ct = root.correlate(Init.ControlId);
-            WfSink = Loggers.events(Init.LogConfig);
+            Env = Environs.Common;
+            Context = config.Shell;
+            Id = config.ControlId;
+            Ct = root.correlate(config.ControlId);
+            WfSink = Loggers.events(config.LogConfig);
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             PolyStream = default;
             Verbosity = LogLevel.Status;
-            Paths = Init.Shell.Paths;
-            Args = Init.Shell.Args;
-            Settings = Init.Shell.Settings;
-            ApiParts = Init.ApiParts;
-            Api = Init.ApiParts.ApiGlobal;
-            Controller = Init.Control;
-            AppName = Init.Shell.AppName;
+            Paths = config.Shell.Paths;
+            Args = config.Shell.Args;
+            Settings = config.Shell.Settings;
+            ApiParts = config.ApiParts;
+            Api = config.ApiParts.ApiGlobal;
+            Controller = config.Control;
+            AppName = config.Shell.AppName;
             Router = new CmdRouter(this);
-            Services = new WfServices(this, Api.PartComponents);
+            Services = new WfServices(this, Env, Api.PartComponents);
         }
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
+            Env = Environs.Common;
             Init = config;
-            Context = Init.Shell;
-            Id = Init.ControlId;
-            Args = Init.Shell.Args;
-            Paths = Init.Shell.Paths;
-            Settings = Init.Shell.Settings;
-            ApiParts = Init.ApiParts;
-            Api = Init.ApiParts.ApiGlobal;
-            Controller = Init.Control;
-            AppName = Init.Shell.AppName;
+            Context = config.Shell;
+            Id = config.ControlId;
+            Args = config.Shell.Args;
+            Paths = config.Shell.Paths;
+            Settings = config.Shell.Settings;
+            ApiParts = config.ApiParts;
+            Api = config.ApiParts.ApiGlobal;
+            Controller = config.Control;
+            AppName = config.Shell.AppName;
             Ct = ct;
             WfSink = sink;
             Broker = broker;

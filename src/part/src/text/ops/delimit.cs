@@ -18,10 +18,6 @@ namespace Z0
             => Format.delimit(src, delimiter);
 
         [MethodImpl(Inline)]
-        public static string delimit<T>(ReadOnlySpan<T> src, char delimiter)
-            => Format.delimit(src, delimiter);
-
-        [MethodImpl(Inline)]
         public static string delimit<T>(IEnumerable<T> src, char delimiter)
             => Format.delimit(src, delimiter);
 

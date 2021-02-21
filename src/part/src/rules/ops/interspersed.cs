@@ -12,11 +12,7 @@ namespace Z0
     partial struct Rules
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Intersperse<T> intersperse<T>(T insert)
-            => new Intersperse<T>(insert);
-
-        [Op, Closures(Closure)]
-        public static Interspersed<T> apply<T>(Intersperse<T> rule, Index<T> src)
-            => interspersed(src.Storage.Intersperse(rule.Element), rule);
+        public static Interspersed<T> interspersed<T>(Index<T> terms, Intersperse<T> rule)
+            => new Interspersed<T>(terms, rule);
     }
 }

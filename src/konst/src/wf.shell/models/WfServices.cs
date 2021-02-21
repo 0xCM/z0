@@ -13,20 +13,18 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-        ConcurrentDictionary<Type,IWfService> Models {get;}
+        ConcurrentDictionary<Type,IWfService> Lookup {get;}
 
         public IWfEmissionLog EmissionLog {get;}
 
         public Env Env {get;}
 
-        internal WfServices(IWfShell wf, Assembly[] components)
+        internal WfServices(IWfShell wf, Env env, Assembly[] components)
         {
             Wf = wf;
-            Env = Z0.Env.create();
-            Models = new ConcurrentDictionary<Type, IWfService>();
-            var hosts = components.Types().Realize<IWfService>().Concrete().Select(x => (IWfService)Activator.CreateInstance(x));
-            root.iter(hosts, host => Models.TryAdd(host.ContractType, host));
-            EmissionLog = new WfEmissionLog(wf.Db().LogRoot());
+            Env = env;
+            Lookup = WfShell.services(components);
+            EmissionLog = new WfEmissionLog(env);
         }
 
         public void Dispose()

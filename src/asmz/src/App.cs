@@ -247,11 +247,11 @@ namespace Z0.Asm
         {
             var info = memory.basic();
             var buffer = text.buffer();
-            buffer.AppendLine(Format.prop(nameof(info.BaseAddress), info.BaseAddress));
-            buffer.AppendLine(Format.prop(nameof(info.AllocationBase), info.AllocationBase));
-            buffer.AppendLine(Format.prop(nameof(info.RegionSize), info.RegionSize));
-            buffer.AppendLine(Format.prop(nameof(info.StackSize), info.StackSize));
-            buffer.AppendLine(Format.prop(nameof(info.Protection), info.Protection));
+            buffer.AppendLine<PropFormat<MemoryAddress>>(Format.prop(nameof(info.BaseAddress), info.BaseAddress));
+            buffer.AppendLine<PropFormat<MemoryAddress>>(Format.prop(nameof(info.AllocationBase), info.AllocationBase));
+            buffer.AppendLine<PropFormat<ByteSize>>(Format.prop(nameof(info.RegionSize), info.RegionSize));
+            buffer.AppendLine<PropFormat<ByteSize>>(Format.prop(nameof(info.StackSize), info.StackSize));
+            buffer.AppendLine<PropFormat<PageProtection>>(Format.prop(nameof(info.Protection), info.Protection));
             Wf.Row(buffer.Emit());
         }
 
