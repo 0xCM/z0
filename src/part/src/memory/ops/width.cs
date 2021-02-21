@@ -21,14 +21,6 @@ namespace Z0
             => Unsafe.SizeOf<T>()*8;
 
         /// <summary>
-        /// Computes the bit-width of a parametrically-identified type, returning the result as a <see cref='uint'/> value
-        /// </summary>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static uint bitwidth<T>()
-            => (uint)SizeOf<T>() * 8;
-
-        /// <summary>
         /// Computes the bit-width of a parametrically-identified type
         /// </summary>
         /// <param name="w">The result width selector</param>

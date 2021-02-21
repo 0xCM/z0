@@ -8,7 +8,6 @@ namespace Z0
 
     using static memory;
 
-    [WfHost]
     public sealed class CilEmitter : WfService<CilEmitter, CilEmitter>
     {
         const string CilDataLine = "{0,-16} | {1, -80} | {2}";
@@ -35,7 +34,6 @@ namespace Z0
 
                 Wf.EmittedFile(flow, (Count)count, dst);
             }
-
         }
 
         public void EmitCilData(Index<ApiMemberCode> src, FS.FilePath dst)
@@ -56,6 +54,5 @@ namespace Z0
                 Wf.EmittedFile(flow, (Count)count, dst);
             }
         }
-
     }
 }

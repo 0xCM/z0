@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil

@@ -12,7 +12,6 @@ namespace Z0
 
     using static Part;
 
-    [Service]
     public readonly struct CliTables : IWfStateless<CliTables>
     {
         public IWfShell Wf {get;}

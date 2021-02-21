@@ -13,6 +13,7 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Api)" />
+    <ProjectReference Include="$(Apps)" />
   </ItemGroup>
 
 </Project>

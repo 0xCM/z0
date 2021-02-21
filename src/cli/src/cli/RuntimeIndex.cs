@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct Cil
     {
@@ -31,7 +31,7 @@ namespace Z0
 
             internal RuntimeIndex(params Module[] modules)
             {
-                iter(modules, Index);
+                root.iter(modules, Index);
             }
 
             public Option<Type> FindType(int id)
@@ -45,18 +45,18 @@ namespace Z0
 
             void Index(MethodInfo src)
             {
-                insist(MethodIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
+                z.insist(MethodIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
             }
 
             void Index(Type src)
             {
-                insist(TypeIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
-                iter(src.DeclaredMethods(), Index);
+                z.insist(TypeIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
+                root.iter(src.DeclaredMethods(), Index);
             }
 
             void Index(Module mod)
             {
-                iter(mod.GetTypes(), Index);
+                root.iter(mod.GetTypes(), Index);
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly struct CliFileReader : IDisposable
     {
@@ -56,7 +56,7 @@ namespace Z0
                  var hType = skip(types, k);
                  var hMethods = reader.GetTypeDefinition(hType).GetMethods().Array();
                  var methodCount = hMethods.Length;
-                 var methodDefs = map(hMethods, m=> reader.GetMethodDefinition(m));
+                 var methodDefs = root.map(hMethods, m=> reader.GetMethodDefinition(m));
                  var view = @readonly(methodDefs);
                  var buffer = alloc<CilDataRow>(methodCount);
                  var target = span(buffer);
@@ -78,7 +78,6 @@ namespace Z0
                     }
                  }
             }
-
             return dst.ToArray();
         }
     }

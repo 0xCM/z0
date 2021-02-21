@@ -35,13 +35,14 @@ namespace Z0
         }
 
         [Op]
-        public static Index<DataType> search(ReadOnlySpan<Assembly> src)
+        public static Index<DataType> search(params Assembly[] src)
         {
             var count = src.Length;
             var dst = root.list<DataType>(128);
+            var view = @readonly(src);
             var found = 0u;
             for(var i=0; i<count; i++)
-                found += search(skip(src,i),dst);
+                found += search(skip(view,i),dst);
             return dst.ToArray();
         }
 

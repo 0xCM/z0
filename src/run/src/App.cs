@@ -29,39 +29,10 @@ namespace Z0
         }
 
         public static void Main(params string[] args)
-        {
-            try
-            {
-                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
-                var app = new Runner(wf);
-                if(args.Length == 0)
-                {
-                    wf.Status("usage: run <command> [options]");
-                    var settings = wf.Settings;
-                    wf.Row(settings.Format());
-                }
-                else
-                {
-                    if(args.Length == 1 && (args[0] == "tests" || args[0] == "test"))
-                        app.RunTests();
-                    else
-                    {
-                        wf.Status("Dispatching");
-                        Reactor.init(wf).Dispatch(args);
-                    }
-                }
-
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-            }
-        }
-
+            => Apps.react(args);
 
         void CheckFlags()
         {
-
             var flags = Clr.@enum<Windows.MinidumpType>();
             var summary = flags.Summary();
             var count = summary.FieldCount;
@@ -78,50 +49,6 @@ namespace Z0
             }
         }
 
-        void SummarizeDataTypes()
-        {
-            var types = DataTypes.search(Wf.Components);
-            var count = types.Count;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var current = ref types[i];
-                var content = current.ContentType;
-                var container = current.ContainerType;
-                var width = current.StorageWidth;
-                var description = string.Format("{0,-24} | {1}", container.Name, width);
-                Wf.Row(description);
-            }
-        }
-
-        void SummarizeDump()
-        {
-            var src = Db.DumpFilePath("capture");
-            if(src.Exists)
-            {
-                var formatter = Records.formatter<Minidump.FileHeader>();
-                using var md = Minidump.open(Wf, src);
-                var header = formatter.Format(md.Header, RecordFormatKind.KeyValuePairs);
-                Wf.Row(header);
-
-                // using var file = MemoryFiles.map(src);
-                // Wf.Status($"Mapped file {file.Path} to process memory based at {file.BaseAddress}");
-                // ref readonly var header = ref file.One<W.MINIDUMP_HEADER>(0);
-                // asci4 sig = header.Signature;
-                // Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
-                //     sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
-            }
-            else
-                Wf.Error($"The file {src} does not exist");
-        }
-
-        public void LoadDocs()
-        {
-            // const string TestCase = @"J:\lang\lisp\acl2\books\projects\x86isa\machine\linear-memory.lisp";
-            // var doc = LispDocs.load(FS.path(TestCase));
-            // Wf.Row(doc.Format());
-        }
-
-
         static Address32 displacement(BinaryCode instruction)
         {
             var opcode = instruction[0];
@@ -129,7 +56,6 @@ namespace Z0
             var len = instruction.Length - 1;
             var bytes = slice(instruction.View, 1);
             return Numeric.take32u(bytes);
-
         }
 
         void CalcAddress()
@@ -151,26 +77,7 @@ namespace Z0
             MemoryAddress target = next + CallDisplacement;
             MemoryAddress encoded = 0x7ffc52e94420;
 
-
             Wf.Status($"Computed:{target} | Expected:{Expected} | Encoded:{encoded} | Computed2:{dx}");
-
-
-        }
-
-        void EmitBitMasks()
-        {
-            var service = BitMaskServices.create(Wf);
-            var masks = service.Emit();
-            Wf.Status($"Emitted {masks.Count} masks");
-        }
-
-        public void RunTests()
-        {
-            // const ushort Assign = '←';
-            // const char Test = (char)127;
-            // Wf.Row(Assign.ToString());
-            CalcAddress();
-            //EmitBitMasks();
         }
     }
 }

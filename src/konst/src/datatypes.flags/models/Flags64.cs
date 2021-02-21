@@ -10,7 +10,9 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct Flags64<E> : ITextual
+    using api = Flags;
+
+    public readonly struct Flags64<E> : IFlags<Flags64<E>,E,Pow2x64>
         where E : unmanaged, Enum
     {
         public const byte Width = 64;
@@ -18,19 +20,22 @@ namespace Z0
         readonly E Data;
 
         [MethodImpl(Inline)]
-        internal Flags64(E value)
+        public Flags64(E value)
             => Data = value;
+
+        public byte DataWidth
+            => Width;
 
         public bit this[E flag]
         {
             [MethodImpl(Inline)]
-            get => (bw64(Data) & bw64(flag)) != 0;
+            get => api.state(this, flag);
         }
 
         public bit this[Pow2x64 flag]
         {
             [MethodImpl(Inline)]
-            get => (bw64(Data) & bw64(flag)) != 0;
+            get => api.state(this, flag);
         }
 
         public E Value
@@ -40,7 +45,7 @@ namespace Z0
         }
 
         public string Format()
-            => Flags.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();

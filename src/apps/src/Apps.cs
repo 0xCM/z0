@@ -10,6 +10,30 @@ namespace Z0
 
     public readonly struct Apps
     {
+        public static void react(params string[] args)
+        {
+            try
+            {
+                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
+                if(args.Length == 0)
+                {
+                    wf.Status("usage: run <command> [options]");
+                    var settings = wf.Settings;
+                    wf.Row(settings.Format());
+                }
+                else
+                {
+                    wf.Status("Dispatching");
+                    Reactor.init(wf).Dispatch(args);
+                }
+
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+        }
+
         public static IAppContext context(IWfShell wf)
             => new AppContext(wf.Paths, wf.Api, Rng.@default(), WfShell.json(wf.Paths.AppConfigPath), WfMsgExchange.Create(wf));
 

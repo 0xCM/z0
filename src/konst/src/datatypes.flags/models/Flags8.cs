@@ -10,37 +10,36 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct Flags8<E> : ITextual
+    using api = Flags;
+
+    public readonly struct Flags8<E> : IFlags<Flags8<E>,E,Pow2x8>
         where E : unmanaged, Enum
     {
-         public const byte Width = 8;
+        public const byte Width = 8;
 
-         readonly E Data;
+        public E Value {get;}
 
         [MethodImpl(Inline)]
-        internal Flags8(E value)
-            => Data = value;
+        public Flags8(E value)
+            => Value = value;
+
+        public byte DataWidth
+            => Width;
 
         public bit this[E flag]
         {
             [MethodImpl(Inline)]
-            get => bit.test(u8(Data), Pow2.log2(u8(flag)));
+            get => api.state(this, flag);
         }
 
         public bit this[Pow2x8 flag]
         {
             [MethodImpl(Inline)]
-            get => bit.test(u8(Data), Pow2.log2(flag));
-        }
-
-        public E Value
-        {
-            [MethodImpl(Inline)]
-            get => Data;
+            get => api.state(this, flag);
         }
 
         public string Format()
-            => Flags.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
@@ -51,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator E(Flags8<E> src)
-            => src.Data;
+            => src.Value;
     }
 }

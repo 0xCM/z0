@@ -15,6 +15,9 @@ namespace Z0
         public IApiJit ApiJit()
             => Z0.ApiJit.create(Wf);
 
+        public Index<DataType> DataTypes()
+            => Z0.DataTypes.search(Wf.Components);
+
         public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src)
         {
             var dst = Db.IndexTable<ApiAddressRecord>();

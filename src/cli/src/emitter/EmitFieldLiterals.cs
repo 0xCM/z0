@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
 
     [WfHost]
     public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>

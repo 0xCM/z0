@@ -54,10 +54,6 @@ namespace Z0
             Wf = wf;
             Source = MemoryFiles.map(src);
             Wf.Status($"Mapped file {Source.Path} to process memory based at {Source.BaseAddress}");
-            // asci4 sig = header.Signature;
-            // Wf.Row(string.Format("Sig:{0}, Version:{1}, NumerOfStreams:{2}, Flags:{3}",
-            //     sig, header.Version & ushort.MaxValue, header.NumberOfStreams, header.Flags));
-
         }
 
         public ref readonly FileHeader Header
@@ -69,6 +65,20 @@ namespace Z0
         public void Dispose()
         {
             Source.Dispose();
+        }
+
+        public void Summarize()
+        {
+            var src = Wf.Db().DumpFilePath("capture");
+            if(src.Exists)
+            {
+                var formatter = Records.formatter<Minidump.FileHeader>();
+                using var md = Minidump.open(Wf, src);
+                var header = formatter.Format(md.Header, RecordFormatKind.KeyValuePairs);
+                Wf.Row(header);
+            }
+            else
+                Wf.Error($"The file {src} does not exist");
         }
     }
 }
