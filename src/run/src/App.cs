@@ -7,8 +7,7 @@ namespace Z0
     using System;
 
     using static Part;
-    using static z;
-    using static TextRules;
+    using static memory;
 
     class Runner
     {
@@ -72,7 +71,6 @@ namespace Z0
 
             MemoryAddress Expected = 0x7ffc56862310;
             MemoryAddress Encoded =  0x7ffc52e94420;
-
             MemoryAddress next = FunctionBase + CallOffset + CallInstructionSize;
             MemoryAddress target = next + CallDisplacement;
             MemoryAddress encoded = 0x7ffc52e94420;

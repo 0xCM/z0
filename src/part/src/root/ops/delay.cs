@@ -9,9 +9,9 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Returns after specified duration has elapsed

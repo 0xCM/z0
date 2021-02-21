@@ -9,11 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
-    using System.Threading;
     using System.Threading.Tasks;
-
-    using static Konst;
-    using static z;
 
     public static class TimeSeries
     {
@@ -105,7 +101,7 @@ namespace Z0
                     let status = evolve.ContinueWith(t => receiver(t.Result))
                     select evolve;
 
-            await task(() => Task.WaitAll(variations.ToArray()));
+            await root.task(() => Task.WaitAll(variations.ToArray()));
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Z0
 
         internal WfEmissionLog(FS.FolderPath root)
         {
-            LogPath = (root + FS.file("emissions", FileExtensions.Csv)).EnsureParentExists().Delete();
+            LogPath = (root + FS.file("emissions", FS.Extensions.Csv)).EnsureParentExists().Delete();
             Emissions = LogPath.Stream();
         }
 

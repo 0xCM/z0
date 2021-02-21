@@ -97,14 +97,11 @@ namespace Z0
         FS.FolderPath AppData
             => FS.dir(Context.Paths.AppDataRoot.Name);
 
-        FS.FolderPath DbRoot
-            => Init.DbRoot;
-
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
         IWfDb Db()
-            => new WfDb(this);
+            => WfDb.create(this);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

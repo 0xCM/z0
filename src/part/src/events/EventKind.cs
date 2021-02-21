@@ -10,15 +10,15 @@ namespace Z0
     {
         None = 0,
 
-        Babble = 1,
+        Babble = MsgLevel.Babble,
 
-        Trace = 2,
+        Trace = MsgLevel.Trace,
 
-        Status = 4,
+        Status = MsgLevel.Status,
 
-        Warn = 8,
+        Warn = MsgLevel.Warn,
 
-        Error = 16,
+        Error = MsgLevel.Error,
 
         Running,
 

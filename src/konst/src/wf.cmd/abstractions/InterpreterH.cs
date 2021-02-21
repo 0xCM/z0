@@ -10,7 +10,6 @@ namespace Z0
     using System.Threading.Tasks;
 
     using static Part;
-    using static z;
 
     public abstract class Interpreter<H> : IWfService<H,IInterpreter>, IInterpreter
         where H : Interpreter<H>, new()
@@ -100,7 +99,7 @@ namespace Z0
             Worker.BeginOutputReadLine();
             Worker.BeginErrorReadLine();
             Running = true;
-            SpinTask = task(() => Spin());
+            SpinTask = root.task(() => Spin());
         }
 
         public void Init(IWfShell wf)
@@ -188,7 +187,7 @@ namespace Z0
             while(true && Running)
             {
                 Dispatch();
-                delay(Frequency);
+                root.delay(Frequency);
             }
         }
 

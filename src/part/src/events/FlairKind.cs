@@ -10,6 +10,16 @@ namespace Z0
     {
         None = LogLevel.None,
 
+        Babble = MsgFlair.Babble,
+
+        Status = MsgFlair.Status,
+
+        Trace = MsgFlair.Trace,
+
+        Warning = MsgFlair.Warning,
+
+        Error = MsgFlair.Error,
+
         Created = ConsoleColor.DarkGray,
 
         Disposed = ConsoleColor.DarkGray,
@@ -20,16 +30,6 @@ namespace Z0
 
         Processed = ConsoleColor.Magenta,
 
-        Babble = ConsoleColor.DarkGray,
-
-        Status = ConsoleColor.Green,
-
-        Trace = ConsoleColor.DarkGray,
-
-        Warning = ConsoleColor.Yellow,
-
         Data = ConsoleColor.DarkGray,
-
-        Error = ConsoleColor.Red,
     }
 }

@@ -13,23 +13,11 @@ namespace Z0
     [WfService]
     public sealed class WfDb : WfService<WfDb,IWfDb>, IWfDb
     {
-        public FS.FolderPath Root {get; private set;}
+        public FS.FolderPath Root {get;}
 
         public WfDb()
         {
-
-        }
-
-        [MethodImpl(Inline)]
-        internal WfDb(IWfShell wf)
-            : base(wf)
-        {
-            Root = Wf.DbRoot;
-        }
-
-        protected override void OnInit()
-        {
-            Root = Wf.DbRoot;
+            Root = Environs.dbRoot();
         }
 
         IWfDb Service => this;

@@ -261,7 +261,7 @@ namespace Z0.Asm
             //ParseSigTokens();
             //ShowMnemonicLiterals();
             //ShowSpecifiers();
-            LoadCatalogRows();
+            TestTextProps();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));

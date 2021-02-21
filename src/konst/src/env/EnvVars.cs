@@ -20,14 +20,14 @@ namespace Z0
         EnvVars()
         {
             var dst = this;
-            dst.Dev = read(N.Dev);
+            dst.Dev = read(N.ZDev);
             dst.Db = read(N.Db);
             dst.Control = read(N.Control);
             dst.Packages = read(N.Packages);
             dst.Tools = read(N.Tools);
             dst.Archives = read(N.Archives);
             dst.DotNetSdk = read(N.DotNetSdk);
-            dst.AppLogs = read(N.AppLogs);
+            dst.Logs = read(N.Logs);
         }
 
         public EnvDirVar Dev;
@@ -44,7 +44,7 @@ namespace Z0
 
         public EnvDirVar DotNetSdk;
 
-        public EnvDirVar AppLogs;
+        public EnvDirVar Logs;
 
         public string Format()
         {
@@ -70,9 +70,14 @@ namespace Z0
         public Index<IEnvVar> Provided
             => Members(this);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         static EnvDirVar read(string name)
-            => (name, FS.dir(Environment.GetEnvironmentVariable(name)));
+        {
+            var value = Environment.GetEnvironmentVariable(name);
+            if(text.blank(value))
+                root.@throw($"The environment variable '{name}' is undefined");
+            return (name, FS.dir(value));
+        }
 
         static Index<IEnvVar> Members(EnvVars src)
             => typeof(EnvVars).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Select(x => (IEnvVar)x.GetValue(src));

@@ -26,7 +26,8 @@ namespace Z0
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
-            var dbRoot = WfEnv.dbRoot();
+            var dbRoot = Environs.dbRoot();
+
             var partIdList = parts.ApiGlobal.PartIdentities;
             var appLogConfig = Loggers.configure(controlId, dbRoot);
             IAppPaths _paths = new AppPaths(dbRoot);

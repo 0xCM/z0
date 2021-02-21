@@ -6,18 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
-    partial class WfShell
+    partial class AppMsg
     {
-        [MethodImpl(Inline), Op]
-        public static Assembly controller()
-            => Assembly.GetEntryAssembly();
-
-        [MethodImpl(Inline)]
-        public static Assembly controller<A>()
-            => typeof(A).Assembly;
+        public static StatusMsg<T> status<T>(T data)
+            => new StatusMsg<T>(data);
     }
 }

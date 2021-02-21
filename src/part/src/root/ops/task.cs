@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
 
-    using static Konst;
+    using static Part;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Executes a worker that computes a value within the context of a new task

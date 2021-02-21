@@ -19,8 +19,6 @@ namespace Z0
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
 
-        Env Env => Wf.Env;
-
         void Init(IWfShell wf);
 
 

@@ -20,7 +20,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public PathPart(string name)
-                => Text = name;
+                => Text = name ?? EmptyString;
 
             [MethodImpl(Inline)]
             public PathPart(params char[] name)

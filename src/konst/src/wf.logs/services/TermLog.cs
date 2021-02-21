@@ -20,7 +20,7 @@ namespace Z0
         public TermLog(string source)
         {
             Source = source ?? EmptyString;
-            term.print(PartMsg.SourceLoggerCreated.Format(Source ?? EmptyString));
+            term.print(PartMsg.SourceLoggerCreated.Format(Source));
         }
 
         [MethodImpl(Inline)]

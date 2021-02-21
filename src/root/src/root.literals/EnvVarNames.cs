@@ -4,7 +4,9 @@
 //-----------------------------------------------------------------------------
 public readonly partial struct EnvVarNames
 {
-    public const string Dev = "ZDev";
+    public const string DevRoot = "DevRoot";
+
+    public const string ZDev = "ZDev";
 
     public const string Db = "ZDb";
 
@@ -12,13 +14,11 @@ public readonly partial struct EnvVarNames
 
     public const string Archives = "ZArchive";
 
-    public const string Tools = "ZToolRoot";
+    public const string Tools = "ZTools";
 
     public const string Packages = "ZPack";
 
-    public const string AppLogs = "ZLogs";
-
-    public const string GenRoot = "ZGenRoot";
+    public const string Logs = "ZLogs";
 
     public const string DotNetSdk = "DOTNET_ROOT";
 }

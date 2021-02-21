@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IWfInit

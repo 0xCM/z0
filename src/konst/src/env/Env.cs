@@ -22,17 +22,21 @@ namespace Z0
 
         public FS.FolderPath DbRoot;
 
+        public FS.FolderPath ControlRoot;
+
         public EnvVars Vars;
 
         [MethodImpl(Inline), Op]
         public static Env create()
         {
             var dst = new Env();
-            dst.Vars = EnvVars.read();
-            dst.LogRoot = read(EnvVarNames.AppLogs).Transform(FS.dir);
-            dst.DevRoot = read(EnvVarNames.Dev).Transform(FS.dir);
-            dst.DbRoot = read(EnvVarNames.Db).Transform(FS.dir);
-            dst.ArchiveRoot = read(EnvVarNames.Archives).Transform(FS.dir);
+            var vars = EnvVars.read();
+            dst.Vars = vars;
+            dst.LogRoot = vars.Logs.Value;
+            dst.DevRoot = vars.Dev.Value;
+            dst.DbRoot = vars.Db.Value;
+            dst.ArchiveRoot = vars.Archives.Value;
+            dst.ControlRoot = vars.Control.Value;
             return dst;
         }
 
@@ -41,15 +45,5 @@ namespace Z0
 
         public EnvVars Variables
             => Vars;
-
-        [MethodImpl(Inline), Op]
-        static EnvVar read(string name)
-        {
-            var v = Environment.GetEnvironmentVariable(name);
-            if(text.nonempty(v))
-                return new EnvVar(name, v);
-            else
-                return EnvVar.Empty;
-        }
     }
 }

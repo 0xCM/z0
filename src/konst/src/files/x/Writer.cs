@@ -25,8 +25,13 @@ namespace Z0
         public static StreamWriter Writer(this FS.FilePath dst)
             => FS.writer(dst);
 
+        /// <summary>
+        /// Appends a line to a specified text file
+        /// </summary>
+        /// <param name="dst">The target file</param>
+        /// <param name="src">The data to append</param>
         public static void AppendLine(this FS.FilePath dst, string src)
-            => File.AppendAllLines(dst.Name, z.array(src));
+            => File.AppendAllLines(dst.EnsureParentExists().Name, root.array(src));
 
         /// <summary>
         /// Opens a <see cref='FileStream'/>
@@ -36,6 +41,6 @@ namespace Z0
         /// <param name="access"></param>
         /// <param name="share"></param>
         public static FileStream Stream(this FS.FilePath path, FileMode mode = FileMode.OpenOrCreate, FileAccess access = FileAccess.Write, FileShare share = FileShare.Read)
-            => FS.stream(path,mode,access,share);
+            => FS.stream(path, mode, access, share);
     }
 }

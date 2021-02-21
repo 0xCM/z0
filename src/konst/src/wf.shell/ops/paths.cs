@@ -13,14 +13,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IAppPaths paths()
-            => new AppPaths(WfEnv.dbRoot());
+            => new AppPaths(Environs.dbRoot());
 
         [MethodImpl(Inline), Op]
         public static IAppPaths paths(FS.FolderPath root)
             => new AppPaths(root);
-
-        [MethodImpl(Inline), Op]
-        public static IAppPaths paths<A>()
-            => new AppPaths(WfEnv.dbRoot() + FS.folder(controller<A>().Id().Format()));
     }
 }

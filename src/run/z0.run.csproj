@@ -8,11 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(CmdSpec)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Apps)" />
   </ItemGroup>
 

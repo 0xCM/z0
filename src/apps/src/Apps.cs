@@ -14,7 +14,10 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
+                var parts = WfShell.parts(Index<PartId>.Empty);
+                term.inform(string.Format("PartCount:{0}", parts.PartComponents.Length));
+                var rng = Rng.@default();
+                using var wf = WfShell.create(parts, args).WithRandom(rng);
                 if(args.Length == 0)
                 {
                     wf.Status("usage: run <command> [options]");
@@ -41,7 +44,7 @@ namespace Z0
             => new AppContext(wf.Paths, wf.Api, random, WfShell.json(wf.Paths.AppConfigPath), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-            => context(WfShell.parts(Assembly.GetEntryAssembly(), WfEnv.args()), WfShell.paths());
+            => context(WfShell.parts(Assembly.GetEntryAssembly(), Environs.args()), WfShell.paths());
 
         static IAppContext context(ApiPartSet src, IAppPaths paths)
             => new AppContext(paths, src.ApiGlobal, Rng.@default(), WfShell.json(paths.AppConfigPath), AppMsgExchange.Create());

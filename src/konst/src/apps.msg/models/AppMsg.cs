@@ -17,7 +17,7 @@ namespace Z0
     /// Defines a message that encapsulates application diagnostic/status/error message content
     /// </summary>
     [ApiHost(ApiNames.AppMsg, true)]
-    public class AppMsg : IAppMsg
+    public partial class AppMsg : IAppMsg
     {
         public AppMsgData Data {get;}
 
