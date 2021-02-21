@@ -1,4 +1,5 @@
 @echo off
+set ZCmd=%ZControl%\.cmd
 
 set GitLogPath=%ZDb%\logs\git\control-git.log
 echo GitLogPath:%GitLogPath%
