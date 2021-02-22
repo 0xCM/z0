@@ -5,11 +5,9 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    using System.Linq;
 
     using static Part;
 
@@ -129,7 +127,7 @@ namespace Z0.Asm
         {
             var dId = ApiIdentify.build(name, w, kind, false);
             var gId = ApiIdentify.build(name, w, kind, true);
-            var archive = ApiArchives.apihex(Wf, TargetArchive.HexDir());
+            var archive = ApiArchives.hex(Wf, TargetArchive.HexDir());
             var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.hostinfo<gcpu>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(OperatorClasses.binary(), w, dBits, gBits, dst);

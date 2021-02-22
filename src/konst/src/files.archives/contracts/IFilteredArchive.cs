@@ -8,7 +8,7 @@ namespace Z0
 
     public interface IFilteredArchive
     {
-        Deferred<FS.FolderPath> Directories();
+        Index<FS.FolderPath> Directories();
 
         Deferred<FS.FilePath> Enumerate();
     }

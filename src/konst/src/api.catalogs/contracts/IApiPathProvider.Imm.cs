@@ -37,6 +37,5 @@ namespace Z0
 
         FS.FilePath AsmImmPath(PartId owner, ApiHostUri host, OpIdentity id, bool refined)
             => ImmSubDir(FS.folder(owner.Format(), host.Name)) + id.ToFileName(refined ? "r" : EmptyString, Asm);
-
     }
 }

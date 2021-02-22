@@ -22,6 +22,12 @@ namespace Z0
             public Files(FilePath[] src)
                 => Data = src;
 
+            public int Length
+            {
+                [MethodImpl(Inline)]
+                get => Data.Length;
+            }
+
             public uint Count
             {
                 [MethodImpl(Inline)]

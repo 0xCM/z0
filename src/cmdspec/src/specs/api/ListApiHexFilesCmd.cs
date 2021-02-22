@@ -8,7 +8,5 @@ namespace Z0
     public struct ListApiHexFilesCmd : ICmd<ListApiHexFilesCmd>
     {
         public const string CmdName = "list-apihex-files";
-
-        public Index<PartId> Parts;
     }
 }

@@ -7,15 +7,9 @@ namespace Z0
     sealed class ListApiHexFiles : CmdReactor<ListApiHexFilesCmd,CmdResult>
     {
         protected override CmdResult Run(ListApiHexFilesCmd cmd)
-            => react(Wf,cmd);
-
-        [Op]
-        static CmdResult react(IWfShell wf, ListApiHexFilesCmd cmd)
         {
-            var archive = ApiArchives.extract(wf);
-            var files = archive.List();
-            wf.Status(string.Format("Discovered {0} files in {1}", files.Count, archive.Root));
-            z.iter(archive.List().Storage, file => wf.Status(file));
+            var archive = ApiArchives.hex(Wf);
+            root.iter(archive.Files(), file => Wf.Row(file.ToUri()));
             return Cmd.ok(cmd);
         }
     }

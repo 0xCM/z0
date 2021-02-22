@@ -33,7 +33,7 @@ namespace Z0
             ExtFilter = ext;
         }
 
-        public Deferred<FS.FolderPath> Directories()
+        public Index<FS.FolderPath> Directories()
             => Root.SubDirs(true);
 
         public Deferred<FS.FilePath> Enumerate()

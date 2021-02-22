@@ -100,23 +100,6 @@ namespace Z0
                 ? files(Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(path))
                 : FS.Files.Empty;
 
-            public FolderPath[] SubDirs(bool recurse = false)
-                => Directory.Exists(Name)
-                ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(dir)
-                : sys.empty<FolderPath>();
-
-            public Deferred<FilePath> EnumerateFiles(bool recurse)
-                => Seq.defer(EnumerateFiles(this, recurse));
-
-            public Deferred<FilePath> EnumerateFiles(FileExt[] ext, bool recurse)
-                => Seq.defer(EnumerateFiles(this, recurse, ext));
-
-            public Deferred<FilePath> EnumerateFiles(FileExt ext, bool recurse)
-                => Seq.defer(EnumerateFiles(this, ext, recurse));
-
-            public Deferred<FilePath> EnumerateFiles(string pattern, bool recurse)
-                => Seq.defer(EnumerateFiles(this, pattern, recurse));
-
             /// <summary>
             /// Nonrecursively enumerates part-owned folder files
             /// </summary>
@@ -138,8 +121,26 @@ namespace Z0
             /// </summary>
             /// <param name="part">The owning part</param>
             /// <param name="ext">The extension to match</param>
-            public FS.Files Files(ApiHostUri host, FileExt ext)
-                => Files(ext).Where(f => f.IsHost(host));
+            public FS.Files Files(ApiHostUri host, FileExt ext, bool recurse)
+                => Files(ext, recurse).Where(f => f.IsHost(host));
+
+            public Index<FolderPath> SubDirs(bool recurse = false)
+                => Directory.Exists(Name)
+                ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(dir)
+                : sys.empty<FolderPath>();
+
+            public Deferred<FilePath> EnumerateFiles(bool recurse)
+                => Seq.defer(EnumerateFiles(this, recurse));
+
+            public Deferred<FilePath> EnumerateFiles(FileExt[] ext, bool recurse)
+                => Seq.defer(EnumerateFiles(this, recurse, ext));
+
+            public Deferred<FilePath> EnumerateFiles(FileExt ext, bool recurse)
+                => Seq.defer(EnumerateFiles(this, ext, recurse));
+
+            public Deferred<FilePath> EnumerateFiles(string pattern, bool recurse)
+                => Seq.defer(EnumerateFiles(this, pattern, recurse));
+
 
             /// <summary>
             /// Just the one

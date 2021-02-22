@@ -16,19 +16,11 @@ namespace Z0
             => ApiPathProvider.create(wf);
 
         [MethodImpl(Inline), Op]
-        public static ApiExtractArchive extract(IWfShell wf)
-            => new ApiExtractArchive(wf);
-
-        [MethodImpl(Inline), Op]
-        public static ApiExtractArchive extract(IWfShell wf, FS.FolderPath root)
-            => new ApiExtractArchive(wf, root);
-
-        [MethodImpl(Inline), Op]
-        public static ApiHexArchive apihex(IWfShell wf)
+        public static ApiHexArchive hex(IWfShell wf)
             => new ApiHexArchive(wf);
 
         [MethodImpl(Inline), Op]
-        public static ApiHexArchive apihex(IWfShell wf, FS.FolderPath root)
+        public static ApiHexArchive hex(IWfShell wf, FS.FolderPath root)
             => new ApiHexArchive(wf, root);
 
         /// <summary>

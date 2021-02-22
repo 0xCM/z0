@@ -257,6 +257,11 @@ namespace Z0.Asm
             Wf.Row(buffer.Emit());
         }
 
+        void CheckApiHexArchive()
+        {
+            var archive = ApiArchives.hex(Wf);
+
+        }
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -267,7 +272,7 @@ namespace Z0.Asm
             //ProcessCatalog();
             //CheckIndexDecoder();
 
-            TestRel32();
+            CheckApiHexArchive();
         }
 
         public static void Main(params string[] args)

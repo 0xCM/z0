@@ -263,16 +263,6 @@ namespace Z0
                 Wf.Row(src[i]);
         }
 
-        void ShowApiHex()
-        {
-            var archive = ApiArchives.extract(Wf);
-            var listing = archive.List();
-            if(listing.Count == 0)
-                Wf.Warn(Host, $"No files found in archive with root {archive.Root}");
-            Show(listing);
-        }
-
-
         void ShowDebugFlags()
         {
             var archive = RuntimeArchive.create();

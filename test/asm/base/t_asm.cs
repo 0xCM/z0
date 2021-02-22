@@ -35,7 +35,6 @@ namespace Z0.Asm
 
         }
 
-
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
             => CaseWriter(FileExtensions.Asm,caller);
 
@@ -56,7 +55,6 @@ namespace Z0.Asm
             var paths = AppPaths.ForApp();
             var root = paths.AppCaptureRoot;
             var capture = ApiArchives.capture(root);
-            var archive = ApiArchives.extract(Wf, root);
             var rows = ApiCode.hexrows(capture.HexPath(host));
             var code = rows.Map(row => new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data)));
             return code;
@@ -69,7 +67,7 @@ namespace Z0.Asm
             var totalCount = 0ul;
             var hostCount = 0ul;
 
-            var dst = z.list<IceInstructionList>();
+            var dst = root.list<IceInstructionList>();
 
             void Decoded(IceInstruction i)
             {

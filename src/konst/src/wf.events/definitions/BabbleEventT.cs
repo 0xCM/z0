@@ -30,13 +30,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BabbleEvent(WfStepId step, string label, T data, CorrelationToken ct)
-        {
-            EventId = (EventName, label, step, ct);
-            Payload = data;
-        }
-
-        [MethodImpl(Inline)]
         public string Format()
             => TextFormatter.format(EventId, Payload);
     }
