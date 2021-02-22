@@ -2,17 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tooling
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using Z0.Tooling;
+    using static Part;
 
-    using Check = CheckPrimal;
-
-
-    public sealed class t_tools_models : t_tools<t_tools_models>
+    public partial class llc : ToolCmdBuilder<llc>
     {
+        public llc()
+            : base(nameof(llc))
+        {
+
+        }
 
     }
 }

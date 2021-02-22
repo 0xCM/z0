@@ -22,12 +22,12 @@ namespace Z0.Asm
         /// <summary>
         /// The target classifier, near or far
         /// </summary>
-        public BranchTargetKind Kind;
+        public AsmBranchTargetKind Kind;
 
         /// <summary>
         /// The target size
         /// </summary>
-        public BranchTargetWidth Size;
+        public AsmBranchTargetWidth Size;
 
         /// <summary>
         /// Specifies a branch target selector, if far
@@ -35,7 +35,7 @@ namespace Z0.Asm
         public Address16 Selector;
 
         [MethodImpl(Inline)]
-        public AsmBranchTarget(MemoryAddress dst, BranchTargetKind kind, BranchTargetWidth size,  Address16? selector = null)
+        public AsmBranchTarget(MemoryAddress dst, AsmBranchTargetKind kind, AsmBranchTargetWidth size,  Address16? selector = null)
         {
             Kind = kind;
             Size = size;

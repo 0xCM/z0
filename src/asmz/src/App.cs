@@ -6,8 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using Z0.Tools;
-
     using static Part;
     using static memory;
 
@@ -203,12 +201,6 @@ namespace Z0.Asm
             Wf.Status($"{dllpath} | {exists}");
         }
 
-        void CheckWinSdk()
-        {
-            var sdk = WinSdk.latest();
-            Wf.Row(sdk);
-
-        }
 
         void CheckIndexDecoder()
         {

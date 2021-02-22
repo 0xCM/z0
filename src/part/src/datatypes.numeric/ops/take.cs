@@ -24,6 +24,7 @@ namespace Z0
                 return 0;
         }
 
+
         [MethodImpl(Inline), Op]
         public static uint take32u(ReadOnlySpan<byte> src)
         {

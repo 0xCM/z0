@@ -10,17 +10,17 @@ namespace Z0.Asm
     using static Part;
     using static Asm.IceOpKind;
 
-    using BTK = BranchTargetKind;
-    using BTW = BranchTargetWidth;
+    using BTK = AsmBranchTargetKind;
+    using BTW = AsmBranchTargetWidth;
 
     partial struct IceExtractors
     {
         [MethodImpl(Inline), Op]
-        static AsmBranchTarget target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size, Address16 selector)
+        static AsmBranchTarget target(AsmBranchTargetKind kind, MemoryAddress dst, AsmBranchTargetWidth size, Address16 selector)
             => new AsmBranchTarget(dst, kind, size, selector);
 
         [MethodImpl(Inline), Op]
-        static AsmBranchTarget target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size)
+        static AsmBranchTarget target(AsmBranchTargetKind kind, MemoryAddress dst, AsmBranchTargetWidth size)
             => new AsmBranchTarget(dst,kind, size);
 
         /// <summary>

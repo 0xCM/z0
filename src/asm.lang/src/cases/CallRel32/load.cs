@@ -15,6 +15,16 @@ namespace Z0.Asm
     partial struct AsmCases
     {
         [Op]
+        static Address32 rel32dx(BinaryCode src)
+        {
+            var opcode = src[0];
+            root.require(opcode == 0xe8, () => $"Expected an opcode of e8h, but instead there is {opcode.FormatAsmHex()}");
+            var len = src.Length - 1;
+            var bytes = slice(src.View, 1);
+            return Numeric.u32(bytes);
+        }
+
+        [Op]
         public static Index<CallRel32> load(Call call, Rel32 rel32)
         {
             var caller = asm.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");

@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using Z0.Tooling;
+    using static Part;
+    using static memory;
 
-    using Check = CheckPrimal;
-
-
-    public sealed class t_tools_models : t_tools<t_tools_models>
+    partial struct Numeric
     {
-
+        [MethodImpl(Inline), Op]
+        public static byte u8(ReadOnlySpan<byte> src, uint offset)
+            => skip(src, offset);
     }
 }

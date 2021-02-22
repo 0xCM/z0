@@ -9,11 +9,11 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using Z0.Tools;
+    using Z0.Tooling;
 
     using static Part;
     using static memory;
-    using static Tools.Llvm;
+    using static Tooling.Llvm;
 
     class App : IDisposable
     {

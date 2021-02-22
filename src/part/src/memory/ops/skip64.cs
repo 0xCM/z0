@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
 
     partial struct memory
@@ -18,8 +19,8 @@ namespace Z0
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The (arbitrary) source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte skip8u<T>(in T src, uint count)
-            => ref add(@as<T,byte>(edit(src)), (int)count);
+        public static ref readonly ulong skip64u<T>(in T src, ulong count)
+            => ref Add(ref As<T,ulong>(ref edit(src)), (int)count);
 
         /// <summary>
         /// Adds an offset to the head of a span, measured relative to 8-bit segments, and returns the resulting reference
@@ -28,7 +29,7 @@ namespace Z0
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte skip8u<T>(ReadOnlySpan<T> src, uint count)
-            => ref add(@as<T,byte>(first(src)), (int)count);
+        public static ref readonly ulong skip64u<T>(ReadOnlySpan<T> src, ulong count)
+            => ref Add(ref As<T,ulong>(ref edit(first(src))), (int)count);
     }
 }
