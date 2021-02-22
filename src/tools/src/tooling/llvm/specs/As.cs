@@ -11,7 +11,7 @@ namespace Z0.Tooling
         [Tool]
         public readonly struct As : ITool<As>
         {
-            public Name ToolName => ToolNames.@as;
+            public ToolId Id => ToolNames.@as;
         }
 
         [Cmd]

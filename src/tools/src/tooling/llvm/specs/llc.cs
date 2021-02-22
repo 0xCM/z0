@@ -2,22 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0.Tooling
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    // [ApiHost]
-    // public readonly struct lisp
-    // {
-    //     [Op]
-    //     public static LispDoc doc(FS.FilePath src)
-    //         => LispDoc.load(src);
+    public partial class llc : ToolCmdBuilder<llc>
+    {
+        public llc()
+            : base(Toolsets.llvm.llc)
+        {
 
-    //     [Op]
-    //     public static LispDoc doc(TextBlock src)
-    //         => LispDoc.load(src);
-    // }
+        }
+    }
 }

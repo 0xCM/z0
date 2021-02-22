@@ -6,10 +6,9 @@ namespace Z0.Tooling
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public partial struct DumpBin

@@ -10,8 +10,7 @@ namespace Z0
     public interface IToolCmd<C> : ICmd, ICmd<C>
         where C : struct, IToolCmd<C>
     {
-        ToolId ICmd.ToolId
-            => Cmd.toolid<C>();
+
     }
 
     [Free]
@@ -19,7 +18,6 @@ namespace Z0
         where C : struct, IToolCmd<C>
         where T : struct, ITool<T>
     {
-        ToolId ICmd.ToolId
-            => Cmd.toolid<C>();
+
     }
 }

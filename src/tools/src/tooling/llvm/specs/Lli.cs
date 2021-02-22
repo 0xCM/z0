@@ -10,7 +10,7 @@ namespace Z0.Tooling
         [Tool]
         public readonly struct Lli : ITool<Lli>
         {
-            public Name ToolName => "lli";
+            public ToolId Id => "lli";
         }
 
         [Cmd]

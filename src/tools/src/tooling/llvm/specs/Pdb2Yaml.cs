@@ -11,7 +11,7 @@ namespace Z0.Tooling
         [Tool]
         public readonly struct PdbToYaml : ITool<PdbToYaml>
         {
-            public Name ToolName => ToolNames.pdb2yaml;
+            public ToolId Id => ToolNames.pdb2yaml;
         }
 
         [Cmd]

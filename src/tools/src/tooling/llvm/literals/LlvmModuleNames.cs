@@ -11,7 +11,6 @@ namespace Z0.Tooling
         public readonly struct ModuleNames
         {
             public const string Analysis = nameof(Analysis);
-
         }
     }
 }

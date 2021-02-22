@@ -11,13 +11,13 @@ namespace Z0
     [Free]
     public interface ITool
     {
-
+        ToolId Id {get;}
     }
 
     [Free]
     public interface ITool<T> : ITool
         where T : struct, ITool<T>
     {
-        Name ToolName {get;}
+
     }
 }

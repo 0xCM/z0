@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [ApiHost]
     public readonly partial struct Llvm
     {

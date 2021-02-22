@@ -9,7 +9,7 @@ namespace Z0
 
     using N = EnvVarNames;
 
-    public class Env : IEnvVarProvider
+    public class Env : IEnvProvider
     {
         public static Env create()
             => new Env();
@@ -17,7 +17,7 @@ namespace Z0
         Env()
         {
             var dst = this;
-            dst.Dev = read(N.ZDev);
+            dst.ZDev = read(N.ZDev);
             dst.Db = read(N.Db);
             dst.Control = read(N.Control);
             dst.Packages = read(N.Packages);
@@ -25,9 +25,12 @@ namespace Z0
             dst.Archives = read(N.Archives);
             dst.Logs = read(N.Logs);
             dst.ZBin = read(N.ZBin);
+            dst.DevRoot = read(N.DevRoot);
         }
 
-        public EnvDirVar Dev;
+        public EnvDirVar ZDev;
+
+        public EnvDirVar DevRoot;
 
         public EnvDirVar Db;
 

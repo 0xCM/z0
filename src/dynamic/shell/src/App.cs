@@ -12,6 +12,7 @@ namespace Z0
     using Z0.Tooling;
 
     using static Part;
+    using static Toolsets;
     using static memory;
     using static Tooling.Llvm;
 
@@ -55,7 +56,7 @@ namespace Z0
             var llvm = Llvm.service(wf);
             var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
-            using var runner = ToolShellRunner.create(wf);
+            using var runner = ToolScriptRunner.create(wf);
             runner.Run(cmd);
         }
 
@@ -306,14 +307,14 @@ namespace Z0
 
         void RunScripts()
         {
-            using var runner = ToolShellRunner.create(Wf);
-            runner.RunCmdScript("clang", "codegen");
-            runner.RunCmdScript("clang", "parse");
-            runner.RunPsScript("clang-query", "fast-math");
-            runner.RunPsScript("clang-query", "sse-builtins");
-            runner.RunPsScript("llvm-ml", "lex");
-
+            using var runner = ToolScriptRunner.create(Wf);
+            runner.RunCmdScript(ToolNames.clang, "codegen");
+            runner.RunCmdScript(ToolNames.clang, "parse");
+            runner.RunPsScript(clang.query, "fast-math");
+            runner.RunPsScript(clang.query, "sse-builtins");
+            runner.RunPsScript(llvm.ml, "lex");
         }
+
         public void Run()
         {
 

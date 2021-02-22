@@ -4,11 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System;
 
-    [Free]
-    public interface IToolDb
+    [Flags]
+    public enum ToolScriptKind : ushort
     {
-        FS.FolderPath Root {get;}
+        None = 0,
+
+        Cmd = 1,
+
+        Ps = 2,
+
+        Bash = 4,
+
+        Z = 128
     }
 }

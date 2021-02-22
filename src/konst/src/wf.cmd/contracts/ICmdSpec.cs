@@ -9,9 +9,6 @@ namespace Z0
     [Free]
     public interface ICmd : ITextual
     {
-        ToolId ToolId
-            => new ToolId("ztool");
-
         CmdId CmdId {get;}
 
         Name CmdName

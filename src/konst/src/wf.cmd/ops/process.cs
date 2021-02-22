@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
 
@@ -23,5 +24,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CmdProcess process(IWfShell wf,  CmdLine commandLine)
             => new CmdProcess(wf, commandLine, new CmdProcessOptions());
+
+        [MethodImpl(Inline), Op]
+        public static CmdProcess process(IWfShell wf,  CmdLine commandLine, TextWriter output)
+            => new CmdProcess(wf, commandLine, new CmdProcessOptions(output));
     }
 }

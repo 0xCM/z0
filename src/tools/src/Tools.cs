@@ -2,20 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public partial class llc : ToolCmdBuilder<llc>
+    [ApiHost]
+    public readonly struct Tools
     {
-        public llc()
-            : base(nameof(llc))
-        {
-
-        }
-
+        [Op]
+        public static ToolCatalog catalog(IWfShell wf)
+            => ToolCatalog.create(wf);
     }
 }

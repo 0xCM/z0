@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IToolShellRunner : IWfService
+    public interface IToolScriptRunner : IWfService
     {
         Outcome<TextLines> Run(CmdLine cmd);
 
@@ -12,8 +12,8 @@ namespace Z0
 
         Outcome<TextLines> RunPsScript<K>(K kind, Name name);
 
-        CmdLine CmdLine(FS.FilePath script, ToolShellKind shell);
+        CmdLine CmdLine(FS.FilePath script, ToolScriptKind shell);
 
-        Outcome<TextLines> RunScript<K>(K kind, Name name, ToolShellKind shell);
+        Outcome<TextLines> RunScript<K>(K kind, Name name, ToolScriptKind shell);
     }
 }

@@ -4,20 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    [Flags]
-    public enum ToolShellKind : ushort
+    public interface IEnvProvider
     {
-        None = 0,
-
-        Cmd = 1,
-
-        Ps = 2,
-
-        Bash = 4,
-
-        Z = 128
+        Index<IEnvVar> Provided {get;}
     }
-
 }

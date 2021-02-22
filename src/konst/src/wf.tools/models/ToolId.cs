@@ -12,18 +12,12 @@ namespace Z0
     /// <summary>
     /// Identifies an internal or external tool
     /// </summary>
-    [Datatype]
     public struct ToolId : IIdentified<ToolId,string>
     {
-        [Ignore]
         public string Id {get;}
 
         [MethodImpl(Inline)]
         public ToolId(string id)
-            => Id = id;
-
-        [MethodImpl(Inline)]
-        public ToolId(utf8 id)
             => Id = id;
 
         public bool IsEmpty
@@ -57,10 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ToolId(string src)
-            => new ToolId(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ToolId(utf8 src)
             => new ToolId(src);
 
         [MethodImpl(Inline)]

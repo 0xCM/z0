@@ -9,27 +9,13 @@ namespace Z0
     using static TextRules;
     using static memory;
 
-    public sealed class ToolShellRunner : WfService<ToolShellRunner,IToolShellRunner>, IToolShellRunner
+    public sealed class ToolScriptRunner : WfService<ToolScriptRunner,IToolScriptRunner>, IToolScriptRunner
     {
-        public Index<CmdTypeInfo> Intrinsics()
-            => Cmd.cmdtypes(Wf);
-
-        string Format(int i, in CmdTypeInfo src)
-            => string.Format("{0,-3} {1}", i, src.DataType.Name);
-
         void Render(ReadOnlySpan<CmdTypeInfo> src, ITextBuffer dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 dst.AppendLine(skip(src,i).Format());
-        }
-
-        public void ShowIntrinsics()
-        {
-            var types = Intrinsics();
-            var buffer = text.buffer();
-            Render(Intrinsics(), buffer);
-            Wf.Row(buffer.Emit());
         }
 
         public Outcome<TextLines> Run(CmdLine cmd)
@@ -51,26 +37,46 @@ namespace Z0
             }
         }
 
-        public FS.FilePath ScriptFile<K>(K kind, Name name, ToolShellKind shell)
+        public FS.FilePath ScriptFile(ToolId tool, Name script, ToolScriptKind shell)
         {
             var x = shell switch{
-                ToolShellKind.Cmd => FS.Extensions.Cmd,
-                ToolShellKind.Ps => FS.Extensions.Ps1,
+                ToolScriptKind.Cmd => FS.Extensions.Cmd,
+                ToolScriptKind.Ps => FS.Extensions.Ps1,
                 _ => FS.FileExt.Empty
             };
-            return Db.ScriptFile(kind,name,x);
+            return Db.ToolScriptFile(tool, script, x);
         }
 
-        public CmdLine CmdLine(FS.FilePath script, ToolShellKind shell)
+        public FS.FilePath ScriptFile<K>(K kind, Name script, ToolScriptKind shell)
+        {
+            var x = shell switch{
+                ToolScriptKind.Cmd => FS.Extensions.Cmd,
+                ToolScriptKind.Ps => FS.Extensions.Ps1,
+                _ => FS.FileExt.Empty
+            };
+            return Db.ToolScriptFile(kind, script, x);
+        }
+
+        public CmdLine CmdLine(FS.FilePath script, ToolScriptKind shell)
         {
             return shell switch{
-                ToolShellKind.Cmd => WinCmd.script(script),
-                ToolShellKind.Ps => Pwsh.script(script),
+                ToolScriptKind.Cmd => WinCmd.script(script),
+                ToolScriptKind.Ps => Pwsh.script(script),
                 _ => Z0.CmdLine.Empty
             };
         }
 
-        public Outcome<TextLines> RunScript<K>(K kind, Name name, ToolShellKind shell)
+        public Outcome<TextLines> RunScript(ToolId tool, Name name, ToolScriptKind shell)
+        {
+            var file = ScriptFile(tool,name, shell);
+            var command = CmdLine(file,shell);
+            var result = Run(command);
+            if(result)
+                root.iter(result.Data, line => Wf.Row(line));
+            return result;
+        }
+
+        public Outcome<TextLines> RunScript<K>(K kind, Name name, ToolScriptKind shell)
         {
             var file = ScriptFile(kind,name, shell);
             var command = CmdLine(file,shell);
@@ -81,9 +87,9 @@ namespace Z0
         }
 
         public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)
-            => RunScript(kind,name, ToolShellKind.Cmd);
+            => RunScript(kind, name, ToolScriptKind.Cmd);
 
         public Outcome<TextLines> RunPsScript<K>(K kind, Name name)
-            => RunScript(kind,name, ToolShellKind.Ps);
+            => RunScript(kind, name, ToolScriptKind.Ps);
     }
 }

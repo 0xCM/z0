@@ -58,11 +58,11 @@ namespace Z0
 
         [Op]
         static FS.FilePath ProjectPath(this CmdBuilder src, in BuildCmdVars vars)
-            => src.Env.Dev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.CsProj);
+            => src.Env.ZDev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.CsProj);
 
         [Op]
         static FS.FilePath SolutionPath(this CmdBuilder src, in BuildCmdVars vars)
-            => src.Env.Dev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Extensions.Sln);
+            => src.Env.ZDev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Extensions.Sln);
 
         [Op]
         static FS.FilePath LogPath(this CmdBuilder src, in BuildCmdVars vars)

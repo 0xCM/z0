@@ -20,8 +20,5 @@ public readonly partial struct EnvVarNames
 
     public const string Logs = "ZLogs";
 
-    public const string DotNetSdk = "DOTNET_ROOT";
-
     public const string ZBin = "ZBin";
-
 }

@@ -23,19 +23,25 @@ namespace Z0
             => PackageRoot() + FS.folder(id);
 
         FS.FolderPath DevRoot()
-            => Wf.Env.Dev.Value;
+            => Wf.Env.DevRoot.Value;
+
+        FS.FolderPath DevRoot(string id)
+            => DevRoot() + FS.folder(id);
+
+        FS.FolderPath ZRoot()
+            => DevRoot("z0");
 
         FS.FolderPath PartDir(string id)
-            => DevRoot() + FS.folder("src") + FS.folder("z0." + id);
+            => ZRoot() + FS.folder("src") + FS.folder("z0." + id);
 
         FS.FolderPath PartDir(PartId id)
-            => DevRoot() + FS.folder("src") + FS.folder(id.Componentize().Join('.'));
+            => ZRoot() + FS.folder("src") + FS.folder(id.Componentize().Join('.'));
 
         FS.FilePath SourceFile(PartId id, FS.FileName name)
             => PartDir(id) + FS.folder("src") + name;
 
         FS.FolderPath DevDataRoot()
-            => DevRoot() +FS.folder(data);
+            => ZRoot() +FS.folder(data);
 
         FS.FolderPath DevData<S>(S subject)
             => DevDataRoot() + SubjectFolder(subject);
@@ -44,7 +50,7 @@ namespace Z0
             => Wf.Env.Archives.Value;
 
         FS.FolderPath SourceBuildRoot()
-            => DevRoot() + FS.folder(build);
+            => ZRoot() + FS.folder(build);
 
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);
@@ -264,17 +270,23 @@ namespace Z0
         FS.FolderPath ControlCmdRoot()
             => ControlRoot() + FS.folder(".cmd");
 
-        FS.FolderPath ScriptRoot()
-            => ControlRoot() + FS.folder("tools");
+        FS.FolderPath ToolScriptRoot()
+            => DevRoot("tooling") + FS.folder("scripts");
 
-        FS.FolderPath ScriptDir<K>(K kind)
-            => ScriptRoot() + FS.folder(kind.ToString());
+        FS.FolderPath ToolScriptDir(ToolId tool)
+            => ToolScriptRoot() + FS.folder(tool.Format());
 
-        FS.FilePath ScriptFile<K>(K kind, Name name, FS.FileExt? ext = null)
-            => ScriptDir(kind) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
+        FS.FilePath ToolScriptFile(ToolId tool, Name name, FS.FileExt? ext = null)
+            => ToolScriptDir(tool) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
 
-        FS.FolderPath ToolDbRoot()
-            => Root + FS.folder("tooldb");
+        FS.FolderPath ToolScriptDir<K>(K kind)
+            => ToolScriptRoot() + FS.folder(kind.ToString());
+
+        FS.FilePath ToolScriptFile<K>(K kind, Name name, FS.FileExt? ext = null)
+            => ToolScriptDir(kind) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
+
+        FS.FolderPath ToolCatalogRoot()
+            => DevRoot("tooling") + FS.folder("catalog");
 
         FS.FolderPath ToolExeRoot()
             => Root + FS.folder(tools);
@@ -296,11 +308,9 @@ namespace Z0
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
+
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;
-
-        IToolDb ToolDb()
-            => new ToolDb(Wf);
 
         ITableArchive TableArchive<S>(S subject)
             => new DbTables<S>(this, subject);

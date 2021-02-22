@@ -39,8 +39,6 @@ namespace Z0.Asm
             flow = Wf.Creating(nameof(AsmServices));
             AsmServices = Wf.AsmServices();
             Wf.Created(flow, nameof(ApiServices));
-
-
         }
 
         AsmCatalogEtl Etl;
@@ -252,8 +250,8 @@ namespace Z0.Asm
         void CheckApiHexArchive()
         {
             var archive = ApiArchives.hex(Wf);
-
         }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();

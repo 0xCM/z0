@@ -54,6 +54,12 @@ namespace Z0
             timeoutMSec = 600000;
         }
 
+        public CmdProcessOptions(TextWriter output)
+            : this()
+        {
+            OutputStream = output;
+        }
+
         /// <summary>
         /// Return a copy an existing set of command options.
         /// </summary>

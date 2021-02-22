@@ -14,10 +14,6 @@ namespace Z0.Tooling
 
             public const string tblgen = "llvm-tblgen";
 
-            public const string mc = "llvm-mc";
-
-            public const string opt = "opt";
-
             public const string pdb2yaml = "pdb2yaml";
         }
     }

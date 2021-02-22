@@ -27,28 +27,45 @@ namespace Z0.Tooling
         {
             Args = memory.alloc<CmdArg>(256);
             Index = 0;
-            ToolName = FS.file(tool.Format(), FileExtensions.Exe);
+            ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
         }
 
-        protected virtual PathSeparator PathSeparator => PathSeparator.FS;
+        public ToolCmdBuilder(ToolId tool)
+        {
+            Args = memory.alloc<CmdArg>(256);
+            Index = 0;
+            ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
+        }
 
-        protected ArgPrefix Dash => ArgPrefix.Dash;
+        protected virtual PathSeparator PathSeparator
+            => PathSeparator.FS;
 
-        protected ArgPrefix DoubleDash => ArgPrefix.DoubleDash;
+        protected ArgPrefix Dash
+            => ArgPrefix.Dash;
 
-        protected ArgPrefix Slash => ArgPrefix.FSlash;
+        protected ArgPrefix DoubleDash
+            => ArgPrefix.DoubleDash;
 
-        protected ArgQualifier Space => ArgQualifier.Space;
+        protected ArgPrefix Slash
+            => ArgPrefix.FSlash;
 
-        protected ArgQualifier Colon => ArgQualifier.Colon;
+        protected ArgQualifier Space
+            => ArgQualifier.Space;
 
-        protected ArgQualifier Eq => ArgQualifier.Eq;
+        protected ArgQualifier Colon
+            => ArgQualifier.Colon;
 
-        protected virtual ArgPrefix DefaultPrefix => DoubleDash;
+        protected ArgQualifier Eq
+            => ArgQualifier.Eq;
 
-        protected virtual ArgQualifier DefaultQualifier => Eq;
+        protected virtual ArgPrefix DefaultPrefix
+            => DoubleDash;
 
-        protected virtual bool QuotePaths => true;
+        protected virtual ArgQualifier DefaultQualifier
+            => Eq;
+
+        protected virtual bool QuotePaths
+            => true;
 
         protected virtual FS.FolderPath ToolDir => FS.FolderPath.Empty;
 
