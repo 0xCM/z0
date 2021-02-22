@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
 
     using static CodeGenerator;
-    using static z;
+    using static memory;
 
     public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>, IResBytesEmitter
     {
@@ -34,7 +33,7 @@ namespace Z0
             var target = dst + ApiIdentity.file(src.Host, FS.Extensions.Cs);
             var flow = Wf.EmittingFile(target);
             var emission = Emit(src, target);
-            Wf.EmittedFile(flow, (Count)emission.Count, target);
+            Wf.EmittedFile(flow, emission.Count);
             return emission;
         }
 

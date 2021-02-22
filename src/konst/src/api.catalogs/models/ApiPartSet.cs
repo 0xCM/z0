@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using static memory;
+
     /// <summary>
     /// Associates a collection of components along with a<see cref = 'IGlobalApiCatalog'/>
     /// </summary>
@@ -53,6 +55,23 @@ namespace Z0
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
             ApiGlobal =  ApiCatalogs.GlobalCatalog(ManagedSources);
             PartComponents = ApiGlobal.PartComponents;
+        }
+
+        public bool Component(PartId part, out Assembly component)
+        {
+            var components = @readonly(PartComponents);
+            var count = PartComponents.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var candidate = ref skip(components,i);
+                if(candidate.Id() == part)
+                {
+                    component = candidate;
+                    return true;
+                }
+            }
+            component = default;
+            return false;
         }
     }
 }

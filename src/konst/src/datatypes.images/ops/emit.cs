@@ -49,7 +49,7 @@ namespace Z0
                 for(var i=0; i<icount; i++)
                     writer.WriteLine(f2.Format(skip(images,i)));
 
-                return wf.EmittedFile(flow, dst);
+                return wf.EmittedFile(flow, icount);
 
             }
             catch(Exception e)

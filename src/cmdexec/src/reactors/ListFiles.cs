@@ -25,7 +25,7 @@ namespace Z0
                 writer.WriteLine(listed.Format());
             }
 
-            wf.EmittedFile(flow, counter, cmd.TargetPath);
+            wf.EmittedFile(flow, counter);
 
             return Cmd.ok(cmd);
         }

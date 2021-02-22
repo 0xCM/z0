@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Reflection;
 
     using static WfEvents;
 
@@ -12,16 +11,16 @@ namespace Z0
 
     partial interface IWfShell
     {
-        WfExecFlow Running([Caller]string operation = null)
+        WfExecFlow Running([Caller] string operation = null)
         {
             signal(this).Running(operation);
             return Flow();
         }
 
-        WfExecFlow<T> Running<T>(T data, [Caller]string operation = null)
+        WfExecFlow<T> Running<T>(T data, [Caller] string operation = null)
         {
             signal(this).Running(operation, data);
-            return Flow(operation, data);
+            return Flow(data);
         }
 
         WfExecFlow Running(WfHost host, [Caller] string operation = null)

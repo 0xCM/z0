@@ -112,7 +112,7 @@ namespace Z0
                 }
             }
 
-            Wf.EmittedFile(flow, (Count)count, dst);
+            Wf.EmittedFile(flow, count);
         }
     }
 }

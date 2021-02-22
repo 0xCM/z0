@@ -5,8 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
     using static memory;
@@ -18,7 +16,7 @@ namespace Z0.Asm
             var dst = GetTargetPath(AsmGenTarget.InstructionType);
             var flow = Wf.EmittingFile(dst);
             EmitInstructionTypes(src,dst);
-            Wf.EmittedFile(flow,src.Count, dst);
+            Wf.EmittedFile(flow, src.Count);
         }
 
         void EmitInstructionContracts()
@@ -33,7 +31,7 @@ namespace Z0.Asm
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
 
-            Wf.EmittedFile(flow, dst);
+            Wf.EmittedFile(flow);
         }
 
         [Op]

@@ -11,7 +11,7 @@ namespace Z0.Asm
             var dst = GetTargetPath(AsmGenTarget.MonicExpression);
             var flow = Wf.EmittingFile(dst);
             EmitMonicExpressions(src,dst);
-            Wf.EmittedFile(flow,src.Count, dst);
+            Wf.EmittedFile(flow, src.Count);
         }
 
         void EmitMonicExpressions(Index<AsmMnemonic> src, FS.FilePath dst)

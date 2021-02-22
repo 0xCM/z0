@@ -29,22 +29,23 @@ namespace Z0
     public readonly struct WfExecFlow<T>: IDisposable
     {
         readonly IWfShell Wf;
-        public Name Operation {get;}
 
         public T Data {get;}
 
         public WfExecToken Token {get;}
 
         [MethodImpl(Inline)]
-        internal WfExecFlow(IWfShell wf, Name operation, T data, in WfExecToken token)
+        internal WfExecFlow(IWfShell wf, T data, in WfExecToken token)
         {
             Wf = wf;
-            Operation = operation;
             Data = data;
             Token = token;
         }
 
         public void Dispose()
             => Wf.Ran(this);
+
+        public static implicit operator WfExecFlow(WfExecFlow<T> src)
+            => new WfExecFlow(src.Wf, src.Token);
     }
 }

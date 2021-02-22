@@ -8,7 +8,6 @@ namespace Z0
     using System.Reflection;
     using System.Threading.Tasks;
 
-    using static memory;
     using static WfEvents;
 
     public partial interface IWfShell : IDisposable, ITextual
@@ -63,8 +62,8 @@ namespace Z0
         WfExecFlow Flow()
             => new WfExecFlow(this, NextExecToken());
 
-        WfExecFlow<T> Flow<T>(string operation, T data)
-            => new WfExecFlow<T>(this, operation, data, NextExecToken());
+        WfExecFlow<T> Flow<T>(T data)
+            => new WfExecFlow<T>(this, data, NextExecToken());
 
         WfTableFlow<T> TableFlow<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
@@ -123,14 +122,10 @@ namespace Z0
             => signal(this).Babble(step, data);
 
         void Warn<T>(WfStepId step, T data)
-        {
-            signal(this).Warn(step, data);
-        }
+            => signal(this).Warn(step, data);
 
         void Warn<T>(T content)
-        {
-            signal(this).Warn(content);
-        }
+            => signal(this).Warn(content);
 
         IWfService Service(Type host)
         {
@@ -161,23 +156,5 @@ namespace Z0
 
         void Disposed()
             => Disposed(Host);
-
-        void Row<T>(T data)
-            => Raise(row(data));
-
-        void Rows<T>(T[] src)
-            => Rows(@readonly(src));
-
-        void Rows<T>(ReadOnlySpan<T> src)
-        {
-            if(src.Length != 0)
-            {
-                var buffer = Buffers.text();
-                var count = src.Length;
-                for(var i=0; i<count; i++)
-                    buffer.AppendLine(skip(src,i));
-                Raise(rows(buffer.Emit()));
-            }
-        }
     }
 }

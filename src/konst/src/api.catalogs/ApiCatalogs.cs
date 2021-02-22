@@ -11,12 +11,45 @@ namespace Z0
 
     using static memory;
 
-
     using Q = ApiQuery;
 
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
+        [Op]
+        internal static bool host(ApiHosts src, ApiHostUri uri, out IApiHost host)
+        {   var count = src.Count;
+            for(var i=0; i<count; i++)
+            {
+                var terms = src.View;
+                ref readonly var candidate = ref skip(terms,i);
+                if(candidate.Uri == uri)
+                {
+                    host = candidate;
+                    return true;
+                }
+            }
+            host = null;
+            return false;
+        }
+
+        [Op]
+        internal static bool host(ApiHosts src, Type t, out IApiHost host)
+        {   var count = src.Count;
+            for(var i=0; i<count; i++)
+            {
+                var terms = src.View;
+                ref readonly var candidate = ref skip(terms,i);
+                if(candidate.GetType() == t)
+                {
+                    host = candidate;
+                    return true;
+                }
+            }
+            host = null;
+            return false;
+        }
+
         [Op]
         public static IApiClassCatalog classes(IWfShell wf)
             => ApiClassCatalog.create(wf);
@@ -35,7 +68,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiHost[] ApiHosts(Assembly src)
+        public static Index<ApiHost> ApiHosts(Assembly src)
         {
             var _id = Q.id(src);
             return ApiHostTypes(src).Select(h => ApiHost(_id, h));
@@ -49,7 +82,6 @@ namespace Z0
         [Op]
         public static ApiHost ApiHost(PartId part, Type t)
         {
-            var attrib = t.Tag<ApiHostAttribute>();
             var name =  HostName(t);
             return new ApiHost(t, name, part, new ApiHostUri(part, name));
         }
@@ -66,7 +98,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The assembly to search</param>
         [Op]
-        public static Type[] ApiHostTypes(Assembly src)
+        public static Index<Type> ApiHostTypes(Assembly src)
             => src.GetTypes().Where(IsApiHost);
 
         /// <summary>
@@ -219,6 +251,5 @@ namespace Z0
         [Op]
         static bool IsApiHost(Type src)
             => src.Tagged<ApiHostAttribute>();
-
     }
 }

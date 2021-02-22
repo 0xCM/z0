@@ -32,7 +32,7 @@ namespace Z0
                     writer.WriteLine(cil.Formatted);
                 }
 
-                Wf.EmittedFile(flow, (Count)count, dst);
+                Wf.EmittedFile(flow, count);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Z0
                     writer.WriteLine(cil.Format());
                 }
 
-                Wf.EmittedFile(flow, (Count)count, dst);
+                Wf.EmittedFile(flow, count);
             }
         }
     }

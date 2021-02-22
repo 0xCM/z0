@@ -151,7 +151,7 @@ namespace Z0
                 var flow = Wf.EmittingFile(target);
                 var service = MemoryEmitter.create(Wf);
                 service.Emit(file.BaseAddress, file.Size, target);
-                Wf.EmittedFile(flow, target);
+                Wf.EmittedFile(flow);
             }
         }
 

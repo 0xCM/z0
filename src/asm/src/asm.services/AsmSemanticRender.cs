@@ -64,17 +64,17 @@ namespace Z0.Asm
             {
                 Buffer.Clear();
                 ref readonly var routines = ref skip(view,i);
-                var path = Emit(routines, dst);
-                Wf.EmittedFile(routines.RoutineCount, path);
+                var path = dst.SemanticPath(routines.Uri);
+                var flow = Wf.EmittingFile(path);
+                Emit(routines, path);
+                Wf.EmittedFile(flow, routines.RoutineCount);
             }
         }
 
-        FS.FilePath Emit(in ApiHostRoutines src, ISemanticArchive dst)
+        void Emit(in ApiHostRoutines src, FS.FilePath dst)
         {
-            var path = dst.SemanticPath(src.Uri);
-            using var writer = path.Writer();
+            using var writer = dst.Writer();
             Render(src, writer);
-            return path;
         }
 
         [Op]

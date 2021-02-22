@@ -9,8 +9,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using static TextRules;
-
     class App : WfService<App>
     {
         public App()
@@ -249,8 +247,23 @@ namespace Z0.Asm
 
         void CheckApiHexArchive()
         {
+            var part = PartId.Math;
+            var component = Wf.Api.FindComponent(part).Require();
+            var catalog = ApiCatalogs.PartCatalog(component);
+            var hosts = catalog.ApiHosts;
+
+            void accept(in ApiCodeBlock block)
+            {
+                if(hosts.Host(block.Uri.Host, out var host))
+                {
+                    Wf.Row(string.Format("{0} | {1}", host.Uri, block.OpUri));
+                }
+            }
+
             var archive = ApiArchives.hex(Wf);
+            archive.CodeBlocks(part, accept);
         }
+
 
         public unsafe void Run()
         {

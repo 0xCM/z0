@@ -9,7 +9,6 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static memory;
     using static Msg;
 
     public class ToolCatalog : WfService<ToolCatalog>
@@ -55,22 +54,11 @@ namespace Z0
                 root.iter(Cmd.search(a), spec => term.print(spec.CmdId));
         }
 
-        // [Op]
-        // public static Toolsets toolsets()
-        // {
-        //     var data = array(
-        //         toolset("Llvm", FS.dir("j:/lang/tools/llvm-project/build/Release/bin")),
-        //         toolset("CoreRoot", FS.dir("j:/lang/net/runtime/artifacts/tests/coreclr/Windows_NT.x64.Debug/Tests/Core_Root")),
-        //         toolset("Msys64", FS.dir("j:/tools/msys64/usr/bin"))
-        //     );
-        //     return new Toolsets(data);
-        // }
-
         public void Emit(CmdScript script)
         {
             var dst = Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db());
             var flow = Wf.EmittingFile(dst);
-            Wf.EmittedFile(flow, (Count)script.Length, dst);
+            Wf.EmittedFile(flow, script.Length);
         }
 
         FS.FolderPath HelpDir

@@ -27,5 +27,12 @@ namespace Z0
         Assembly[] PartComponents {get;}
 
         IGlobalApiCatalog ApiGlobal {get;}
+
+        /// <summary>
+        /// Searches for a component with a specified identity
+        /// </summary>
+        /// <param name="part">The part id</param>
+        /// <param name="component">The corresponding component, if found</param>
+        bool Component(PartId part, out Assembly component);
     }
 }

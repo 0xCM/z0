@@ -10,6 +10,8 @@ namespace Z0
     using static Root;
     using static memory;
 
+    using api = ApiCatalogs;
+
     public readonly struct ApiHosts : IIndexedView<ApiHosts,uint,IApiHost>
     {
         readonly IApiHost[] Data;
@@ -48,22 +50,11 @@ namespace Z0
             get => Data;
         }
 
-        [MethodImpl(Inline)]
         public bool Host(Type t, out IApiHost host)
-        {   var count = Count;
-            for(var i=0; i<count; i++)
-            {
-                var terms = @readonly(Data);
-                ref readonly var candidate = ref skip(terms,i);
-                if(candidate.GetType() == t)
-                {
-                    host = candidate;
-                    return true;
-                }
-            }
-            host = null;
-            return false;
-        }
+            => api.host(this, t, out host);
+
+        public bool Host(ApiHostUri uri, out IApiHost host)
+            => api.host(this, uri, out host);
 
         public string Format()
             => Seq.format(Storage);

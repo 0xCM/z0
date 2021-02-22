@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static memory;
 
     [ApiHost]
     public sealed class RenderPatternEmitter : WfService<RenderPatternEmitter, RenderPatternEmitter>
@@ -22,7 +22,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(view,i).Format());
 
-            Wf.EmittedFile(flow, (Count)count, dst);
+            Wf.EmittedFile(flow, count);
 
         }
         [Op]
@@ -51,12 +51,13 @@ namespace Z0
         public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd cmd)
         {
             using var writer = cmd.Target.Writer();
+            var flow = wf.EmittingFile(cmd.Target);
             var patterns = sources(cmd.Source);
             var view = patterns.View;
             var count = view.Length;
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(view,i).Format());
-            wf.EmittedFile(count, cmd.Target);
+            wf.EmittedFile(flow, count);
             return Cmd.ok(cmd);
         }
     }

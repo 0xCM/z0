@@ -37,7 +37,8 @@ namespace Z0.Asm
                     emitted++;
                 }
             }
-            Wf.EmittedFile(flow, (Count)emitted , asmpath);
+
+            Wf.EmittedFile(flow, emitted);
             return set;
         }
 

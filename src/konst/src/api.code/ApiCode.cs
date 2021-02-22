@@ -185,7 +185,7 @@ namespace Z0
                 var flow = wf.EmittingFile(dst);
                 var svc = ApiIndex.service(wf);
                 index(wf, svc.IndexApiBlocks(), dst);
-                wf.EmittedFile(flow, dst);
+                wf.EmittedFile(flow);
                 return dst;
             }
             catch(Exception e)

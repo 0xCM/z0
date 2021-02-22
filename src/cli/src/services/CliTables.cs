@@ -35,7 +35,7 @@ namespace Z0
                 var reader = peFile.GetMetadataReader();
                 var viz = new MetadataTraverser(reader, target);
                 viz.Visualize();
-                Wf.EmittedFile(flow, dst);
+                Wf.EmittedFile(flow);
                 return dst;
             }
             catch(Exception e)
