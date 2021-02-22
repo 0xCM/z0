@@ -95,7 +95,7 @@ namespace Z0
             => TestLogRoot() + folder;
 
         FS.FolderPath SortedCaseLogRoot()
-            => Root + FS.folder("logs") + FS.folder("sorted");
+            => Root + FS.folder("logs") + FS.folder("tests");
 
         FS.FilePath SortedCaseLogPath()
             => SortedCaseLogRoot() + FS.file(AppName, Csv);

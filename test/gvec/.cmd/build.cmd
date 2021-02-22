@@ -1,6 +1,6 @@
 @echo off
 
-set ProjectId=bits
+set ProjectId=gvec
 echo ProjectId:%ProjectId%
 
 set ZCmd=%ZDev%\.cmd
