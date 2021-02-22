@@ -67,7 +67,8 @@ namespace Z0
             var address = src.BaseAddress;
             var length = extract(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
-            return new ApiMemberExtract(src, new CodeBlock(address, extracted));
+            var block = new ApiExtractBlock(address,src.OpUri, extracted);
+            return new ApiMemberExtract(src, block);
         }
 
         [Op]

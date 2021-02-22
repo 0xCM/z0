@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum ApiCodeField : byte
+    public enum ApiExtractField : byte
     {
         Base = 0,
 

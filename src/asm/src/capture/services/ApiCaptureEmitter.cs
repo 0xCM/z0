@@ -62,14 +62,14 @@ namespace Z0
             return src.Count;
         }
 
-        Index<ApiCodeExtract> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
+        Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
-            var emitted = sys.empty<ApiCodeExtract>();
+            var emitted = sys.empty<ApiExtractRow>();
             var count = src.Length;
-            var blocks = src.Map(x => new ApiCodeBlock(x.Address, x.OpUri, x.Encoded));
+            var blocks = src.Map(x => new ApiExtractBlock(x.Address, x.OpUri, x.Encoded));
             var dst = Wf.Db().RawExtractFile(host);
-            var flow = Wf.EmittingTable<ApiCodeExtract>(dst);
-            emitted = ApiCodeExtracts.emit(blocks, dst);
+            var flow = Wf.EmittingTable<ApiExtractRow>(dst);
+            emitted = ApiExtracts.emit(blocks, dst);
             Wf.EmittedTable(flow, count);
             return emitted;
         }

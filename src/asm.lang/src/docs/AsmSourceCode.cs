@@ -28,5 +28,4 @@ namespace Z0.Asm
         public static implicit operator AsmSourceCode(string src)
             => new AsmSourceCode(src);
     }
-
 }

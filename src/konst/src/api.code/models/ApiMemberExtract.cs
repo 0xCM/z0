@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ApiMemberExtract
     {
-        public CodeBlock Encoded {get;}
+        public ExtractBlock Encoded {get;}
 
         public OpIdentity Id {get;}
 
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, CodeBlock encoded)
+        public ApiMemberExtract(OpIdentity id, OpUri uri, ApiMember member, ExtractBlock encoded)
         {
             Id = id;
             OpUri = uri;
@@ -66,7 +66,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberExtract(ApiMember member, CodeBlock encoded)
+        public ApiMemberExtract(ApiMember member, ExtractBlock encoded)
             : this(member.Id, member.OpUri, member, encoded)
             {
 
@@ -96,6 +96,6 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public static ApiMemberExtract Empty
-            => new ApiMemberExtract(ApiMember.Empty, CodeBlock.Empty);
+            => new ApiMemberExtract(ApiMember.Empty, ExtractBlock.Empty);
     }
 }

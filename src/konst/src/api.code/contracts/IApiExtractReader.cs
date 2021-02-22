@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    public interface IApiExtractReader : IArchiveReader
+    {
+        ApiExtractBlock[] Read(FS.FilePath src);
+    }
+
     public interface IApiHexReader : IArchiveReader
     {
-        ApiCodeBlock[] Read(FS.FilePath src);
+        Index<ApiCodeBlock> Read(FS.FilePath src);
     }
 }

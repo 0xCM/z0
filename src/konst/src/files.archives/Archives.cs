@@ -18,7 +18,7 @@ namespace Z0
             => RuntimeArchive.create(wf.Controller.ImageDir);
 
         [MethodImpl(Inline)]
-        public static IApiHexReader hexreader<H>(H rep = default)
+        public static IApiExtractReader hexreader<H>(H rep = default)
             where H : struct, IArchiveReader
         {
             if(typeof(H) == typeof(ApiExtractReader))

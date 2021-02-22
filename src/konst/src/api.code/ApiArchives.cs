@@ -23,6 +23,14 @@ namespace Z0
         public static ApiExtractArchive extract(IWfShell wf, FS.FolderPath root)
             => new ApiExtractArchive(wf, root);
 
+        [MethodImpl(Inline), Op]
+        public static ApiHexArchive apihex(IWfShell wf)
+            => new ApiHexArchive(wf);
+
+        [MethodImpl(Inline), Op]
+        public static ApiHexArchive apihex(IWfShell wf, FS.FolderPath root)
+            => new ApiHexArchive(wf, root);
+
         /// <summary>
         /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
         /// </summary>

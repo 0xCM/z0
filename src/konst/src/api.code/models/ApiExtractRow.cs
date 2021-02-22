@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct ApiCodeExtract : IRecord<ApiCodeExtract>
+    public struct ApiExtractRow : IRecord<ApiExtractRow>
     {
         public const string TableId = "extract";
 

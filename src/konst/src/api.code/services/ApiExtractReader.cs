@@ -8,18 +8,18 @@ namespace Z0
 
     using static memory;
 
-    public readonly struct ApiExtractReader : IApiHexReader
+    public readonly struct ApiExtractReader : IApiExtractReader
     {
-        public static IApiHexReader Service => default(ApiExtractReader);
+        public static IApiExtractReader Service => default(ApiExtractReader);
 
-        public ApiCodeBlock[] Read(FS.FilePath src)
+        public ApiExtractBlock[] Read(FS.FilePath src)
             => read(FS.path(src.Name));
 
-        public static ApiCodeBlock[] read(FS.FilePath src)
+        public static ApiExtractBlock[] read(FS.FilePath src)
         {
             var lines = src.ReadLines().View;
             var count = lines.Length;
-            var buffer = sys.alloc<ApiCodeBlock>(count);
+            var buffer = sys.alloc<ApiExtractBlock>(count);
             var dst = span(buffer);
             for(var i=1u; i<count; i++)
             {

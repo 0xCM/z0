@@ -11,6 +11,8 @@ namespace Z0.Asm
 
     public readonly struct AsmImmWriter : IAsmImmWriter
     {
+        public IWfShell Wf {get;}
+
         public ApiHostUri Uri {get;}
 
         public FS.FolderPath ImmRoot {get;}
@@ -24,6 +26,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)
         {
+            Wf = wf;
             Uri = host;
             ImmRoot = root;
             AsmFormatter = formatter;
@@ -47,7 +50,8 @@ namespace Z0.Asm
         public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
             var path = Paths.HexImmPath(Uri.Owner, Uri, id, refined);
-            ApiCodeExtracts.emit(src.Map(x => x.Code), FS.path(path.Name), append);
+            var code = src.Map(x => x.Code);
+            ApiCode.emit(Wf, Uri, code, path, append);
             return path;
         }
     }

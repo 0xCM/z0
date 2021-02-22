@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static z;
-
     public class EvalControl : IEvalControl
     {
         readonly IWfShell Wf;
@@ -39,7 +37,7 @@ namespace Z0
             var idx = catalog.Index();
             var archive =  ApiArchives.capture(root);
             var paths =  ApiArchives.host(FS.dir(root.Name), host);
-            var code = ApiExtractReader.Service.Read(paths.HostHexPath);
+            var code = ApiCode.reader(wf).Read(paths.HostHexPath);
             var opIndex =  ApiQuery.index(code);
             return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
         }
@@ -72,7 +70,7 @@ namespace Z0
         public void Execute(params PartId[] parts)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
-            iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
+            root.iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
         }
     }
 }

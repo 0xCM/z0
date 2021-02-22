@@ -46,13 +46,17 @@ namespace Z0
             return count;
         }
 
-        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null)
+        public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
             where T : struct, IRecord<T>
         {
             var count = src.Length;
             var formatter = Records.formatter<T>(fieldwidth ?? DefaultFieldWidth);
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
+            var header = (dst.Exists && append) ? false : true;
+
+            using var writer = dst.Writer(append);
+            if(header)
+                writer.WriteLine(formatter.FormatHeader());
+
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(src,i)));
 

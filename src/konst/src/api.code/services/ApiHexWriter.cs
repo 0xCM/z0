@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ApiExtractWriter : IApiHexWriter<ApiExtractWriter>
+    public readonly struct ApiHexWriter : IApiHexWriter
     {
         /// <summary>
         /// The writer's target path
@@ -20,7 +20,7 @@ namespace Z0
         readonly StreamWriter StreamOut;
 
         [MethodImpl(Inline)]
-        public ApiExtractWriter(FS.FilePath path)
+        public ApiHexWriter(FS.FilePath path)
         {
             TargetPath = path;
             StreamOut = new StreamWriter(TargetPath.EnsureParentExists().Name,false);

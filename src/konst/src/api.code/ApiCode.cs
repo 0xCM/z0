@@ -15,6 +15,72 @@ namespace Z0
     [ApiHost(ApiNames.ApiCode, true)]
     public readonly struct ApiCode
     {
+        public static IApiHexWriter writer(IWfShell wf, FS.FilePath dst)
+            => new ApiHexWriter(dst);
+
+        public static IApiHexReader reader(IWfShell wf)
+            => ApiHexReader.create(wf);
+
+        public static void emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
+        {
+            var count = src.Length;
+            if(count != 0)
+                Records.emit(src, dst);
+        }
+
+        public static void emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst, bool append)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return;
+
+            var flow = wf.EmittingTable<ApiHexRow>(dst);
+            var buffer = alloc<ApiHexRow>(count);
+            ref var row = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                row.Seq = i;
+                row.SourceSeq = i;
+                row.Address = block.BaseAddress;
+                row.Length = block.Code.Length;
+                row.Uri = block.Uri;
+                row.Data = block.Code;
+            }
+
+            var emitted = Records.emit(@readonly(buffer), dst);
+            wf.EmittedTable(flow, emitted);
+        }
+
+        public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                wf.Warn($"No {uri} records were provided");
+
+            if(count != 0)
+            {
+                var content = rows(uri, src);
+                if(content.Length != count)
+                    wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
+                else
+                {
+                    var a = wf.Db().ApiHexFile(uri);
+                    var fa = wf.EmittingTable<ApiHexRow>(a);
+                    emit(content, a);
+                    wf.EmittedTable(fa,count);
+
+                    var b = wf.Db().ParsedExtractFile(uri);
+                    var fb = wf.EmittingTable<ApiHexRow>(b);
+                    emit(content, b);
+                    wf.EmittedTable(fb,count);
+                }
+                return content;
+            }
+            else
+                return Index<ApiHexRow>.Empty;
+        }
+
         [Op]
         public static bool parse(string src, out ApiHexRow dst)
         {
@@ -129,42 +195,6 @@ namespace Z0
             }
         }
 
-        public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
-        {
-            var count = src.Length;
-            if(count == 0)
-                wf.Warn($"No {uri} records were provided");
-
-            if(count != 0)
-            {
-                var content = rows(uri, src);
-                if(content.Length != count)
-                    wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
-                else
-                {
-                    var a = wf.Db().ApiHexFile(uri);
-                    var fa = wf.EmittingTable<ApiHexRow>(a);
-                    emit(content, a);
-                    wf.EmittedTable(fa,count);
-
-                    var b = wf.Db().ParsedExtractFile(uri);
-                    var fb = wf.EmittingTable<ApiHexRow>(b);
-                    emit(content, b);
-                    wf.EmittedTable(fb,count);
-                }
-                return content;
-            }
-            else
-                return Index<ApiHexRow>.Empty;
-        }
-
-        static void emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            if(count != 0)
-                Records.emit(src, dst);
-        }
-
         static Outcome index(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
         {
             var svc = ApiIndex.service(wf);
@@ -274,6 +304,5 @@ namespace Z0
         public static RenderPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
 
        public static RenderPattern<Count,FS.FileUri> CollectedApiHexDescriptors => "Collected {0} api hex blocks from {1}";
-
     }
 }

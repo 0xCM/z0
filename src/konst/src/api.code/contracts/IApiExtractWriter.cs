@@ -7,19 +7,13 @@ namespace Z0
     /// <summary>
     /// Defines service contract for persting text-formatted x86 encoded assembly
     /// </summary>
-    public interface IApiHexWriter : IArchiveWriter
+    public interface IApiExtractWriter : IArchiveWriter
     {
         /// <summary>
         /// Write host bits with a specified uri identifier padding
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="idpad">The padding amount</param>
-        void Write(ApiCodeBlock src, int idpad = 60);
-    }
-
-    public interface IApiHexWriter<H> : IApiHexWriter, IArchiveWriter<H>
-        where H : struct, IApiHexWriter<H>
-    {
-
+        void Write(ApiExtractBlock src, int idpad = 60);
     }
 }

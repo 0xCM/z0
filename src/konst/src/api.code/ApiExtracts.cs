@@ -11,10 +11,10 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct ApiCodeExtracts
+    public readonly struct ApiExtracts
     {
         [Op]
-        public static ApiCodeExtract[] emit(ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst, bool append = false)
+        public static ApiExtractRow[] emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst, bool append = false)
         {
             var count = src.Length;
             var header = (dst.Exists && append) ? false : true;
@@ -25,9 +25,9 @@ namespace Z0
 
             using var writer = dst.Writer(append);
             if(header)
-                writer.WriteLine(string.Format(pattern, nameof(ApiCodeExtract.Base), nameof(ApiCodeExtract.Uri), nameof(ApiCodeExtract.Encoded)));
+                writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));
 
-            var buffer = alloc<ApiCodeExtract>(count);
+            var buffer = alloc<ApiExtractRow>(count);
             var records = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -35,17 +35,16 @@ namespace Z0
                 if(code.IsNonEmpty)
                 {
                     var extract = row(code, ref seek(records,i));
-                    var formatted = string.Format(pattern, extract.Base, extract.Uri, extract.Encoded);
-                    writer.WriteLine(formatted);
+                    writer.WriteLine(string.Format(pattern, extract.Base, extract.Uri, extract.Encoded));
                 }
             }
             return buffer;
         }
 
         [MethodImpl(Inline), Op]
-        static ref ApiCodeExtract row(in ApiCodeBlock src, ref ApiCodeExtract dst)
+        static ref ApiExtractRow row(in ApiExtractBlock src, ref ApiExtractRow dst)
         {
-            dst.Base = src.Code.BaseAddress;
+            dst.Base = src.Extract.BaseAddress;
             dst.Encoded = src.Storage;
             dst.Uri = src.Uri.Format();
             return ref dst;
