@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static TextRules;
     using static memory;
 
-    public sealed class AsmDoc : Document<AsmDoc,Index<DocLine>,FS.FilePath>
+    public sealed class AsmDoc : Document<AsmDoc,Index<AsmDocLine>,FS.FilePath>
     {
         public static AsmDoc parse(FS.FilePath src)
             => parse(src.ReadText());
@@ -21,27 +21,27 @@ namespace Z0.Asm
         {
             var lines = Parse.lines(src);
             var count = lines.Count;
-            var dst = alloc<DocLine>(count);
+            var dst = alloc<AsmDocLine>(count);
             ref var target = ref first(dst);
             ref readonly var source = ref lines.First;
             for(var i=0u; i<count; i++)
-                seek(target,i) = new DocLine(i, skip(source, i).Content);
+                seek(target,i) = new AsmDocLine(i, skip(source, i).Content);
             return new AsmDoc(dst);
         }
 
         public AsmDoc()
-            : base(FS.FilePath.Empty, Index<DocLine>.Empty)
+            : base(FS.FilePath.Empty, Index<AsmDocLine>.Empty)
         {
 
         }
 
-        public AsmDoc(Index<DocLine> content)
+        public AsmDoc(Index<AsmDocLine> content)
             : base(FS.FilePath.Empty, content)
         {
 
         }
 
-        public AsmDoc(FS.FilePath src, Index<DocLine> content)
+        public AsmDoc(FS.FilePath src, Index<AsmDocLine> content)
             : base(src, content)
         {
 

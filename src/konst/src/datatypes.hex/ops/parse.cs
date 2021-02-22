@@ -12,6 +12,7 @@ namespace Z0
 
 
     using C = AsciChar;
+    using D = HexDigit;
 
     partial class Hex
     {
@@ -41,41 +42,70 @@ namespace Z0
         }
 
         [Op]
-        public static bool parse(AsciChar src, out HexCode dst)
+        public static bool parse(AsciChar src, out HexDigit dst)
         {
             switch(src)
             {
                 case C.d0:
+                    dst = D.x0;
+                    break;
                 case C.d1:
+                    dst = D.x1;
+                    break;
                 case C.d2:
+                    dst = D.x2;
+                    break;
                 case C.d3:
+                    dst = D.x3;
+                    break;
                 case C.d4:
+                    dst = D.x4;
+                    break;
                 case C.d5:
+                    dst = D.x5;
+                    break;
                 case C.d6:
+                    dst = D.x6;
+                    break;
                 case C.d7:
+                    dst = D.x7;
+                    break;
                 case C.d8:
+                    dst = D.x8;
+                    break;
                 case C.d9:
+                    dst = D.x9;
+                    break;
                 case C.a:
-                case C.b:
-                case C.c:
-                case C.d:
-                case C.e:
-                case C.f:
                 case C.A:
+                    dst = D.A;
+                    break;
+                case C.b:
                 case C.B:
+                    dst = D.B;
+                    break;
+                case C.c:
                 case C.C:
+                    dst = D.C;
+                    break;
+                case C.d:
                 case C.D:
+                    dst = D.D;
+                    break;
+                case C.e:
                 case C.E:
+                    dst = D.E;
+                    break;
+                case C.f:
                 case C.F:
-                    dst = (HexCode)src;
+                    dst = D.F;
                 break;
                 default:
-                    dst = HexCode.None;
-                break;
-
+                    dst = 0;
+                    return false;
             }
 
-            return dst != HexCode.None;
+            return true;
         }
     }
 }

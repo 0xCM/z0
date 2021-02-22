@@ -63,16 +63,13 @@ namespace Z0.Asm
                 if(token.IsNonEmpty)
                 {
                     if(!table.Index(token.Symbol, out var index))
-                    {
                         wf.Error($"Index for {token.Name} not found");
-                    }
-                    ref readonly var found = ref table.Entry(index);
-
-                    wf.Row(found.Format());
+                    // else
+                    //     wf.Row(table.Entry(index).Format());
                 }
                 else
                 {
-                    if(token.Index!=0)
+                    if(token.Index !=0)
                         wf.Error($"Empty token has a nonzero index!");
                 }
             }

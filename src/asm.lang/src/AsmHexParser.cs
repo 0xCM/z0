@@ -10,20 +10,23 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using S = AsmHexParser.ParserState;
-
+    [ApiHost]
     public ref struct AsmHexParser
     {
+        public static AsmHexParser create()
+            => new AsmHexParser(alloc<HexDigit>(32));
         public enum ParserState : byte
         {
             None,
 
-            ParsingDigits,
+            ParsedDigit,
         }
 
         ReadOnlySpan<AsciChar> Source;
 
         Span<byte> Target;
+
+        Span<HexDigit> Digits;
 
         Span<ParserState> States;
 
@@ -31,56 +34,73 @@ namespace Z0.Asm
 
         int LastPos;
 
+        int DigitPos;
+
         ByteSize ParsedSize;
 
-        [MethodImpl(Inline)]
-        ref S Current()
+        AsmHexParser(Span<HexDigit> buffer)
+        {
+            Digits = buffer;
+            Source = default;
+            Target = default;
+            CurrentPos = 0;
+            LastPos = 0;
+            ParsedSize = 0;
+            DigitPos = 0;
+            States = new ParserState[2]{0,0};
+        }
+
+        [MethodImpl(Inline), Op]
+        ref ParserState Current()
             => ref seek(States, 0);
 
-        [MethodImpl(Inline)]
-        void Current(S state)
+        [MethodImpl(Inline), Op]
+        void Current(ParserState state)
             => Current() = state;
 
-        [MethodImpl(Inline)]
-        ref S Next()
+        [MethodImpl(Inline), Op]
+        ref ParserState Next()
             => ref seek(States, 1);
 
-        [MethodImpl(Inline)]
-        void Next(S state)
+        [MethodImpl(Inline), Op]
+        void Next(ParserState state)
             => Next() = state;
 
         [MethodImpl(Inline)]
-        void Init(string src, Span<byte> dst)
+        void Reset(string src, Span<byte> dst)
         {
             Source = recover<char,AsciChar>(span(src));
             Target = dst;
             CurrentPos = 0;
+            DigitPos = 0;
             LastPos = root.min(src.Length, dst.Length) - 1;
-            States = new S[2]{0,0};
         }
 
-        [MethodImpl(Inline)]
-        void ParsingDigits()
-            => Current() = S.ParsingDigits;
+        [MethodImpl(Inline), Op]
+        void ParsedDigit()
+            => Current() = ParserState.ParsedDigit;
 
+        [MethodImpl(Inline), Op]
         void Parse(AsciChar c)
         {
             if(Hex.parse(c, out var d))
-                ParsingDigits();
-        }
-
-        void Parse()
-        {
-            while(CurrentPos <= LastPos)
             {
-                ref readonly var c = ref skip(Source, CurrentPos++);
-                Parse(c);
+                seek(Digits, DigitPos++) = d;
+                ParsedDigit();
             }
         }
 
+        [Op]
+        void Parse()
+        {
+            while(CurrentPos <= LastPos)
+                Parse(skip(Source, CurrentPos++));
+        }
+
+        [Op]
         public ByteSize Parse(string src, Span<byte> dst)
         {
-            Init(src, dst);
+            Reset(src, dst);
             Parse();
             return ParsedSize;
         }

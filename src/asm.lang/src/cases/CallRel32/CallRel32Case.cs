@@ -14,6 +14,8 @@ namespace Z0.Asm
     {
         public struct CallRel32
         {
+            public AsmDocLine AsmSource;
+
             public AsmCaller Caller;
 
             public MemoryAddress Ip;
@@ -26,9 +28,11 @@ namespace Z0.Asm
 
             public AsmHexCode Encoding;
 
-            public Address32 Offset => (Address32)(Target - NextIp);
+            public Address32 Offset
+                => (Address32)(Target - NextIp);
 
-            public ByteSize IpDelta => (ByteSize)(NextIp - Ip);
+            public ByteSize IpDelta
+                => (ByteSize)(NextIp - Ip);
 
             public string Format()
                 => format(this);

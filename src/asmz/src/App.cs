@@ -30,8 +30,6 @@ namespace Z0.Asm
             AsmParser = AsmExpr.parser(Wf);
             Wf.Created(flow, nameof(AsmParser));
 
-            TextBuffer = text.buffer();
-
             flow = Wf.Creating(nameof(Asm));
             Asm = AsmServices.context(Wf);
             Wf.Created(flow, nameof(Asm));
@@ -39,17 +37,23 @@ namespace Z0.Asm
             flow = Wf.Creating(nameof(ApiServices));
             ApiServices = Wf.ApiServices();
             Wf.Created(flow, nameof(ApiServices));
+
+            flow = Wf.Creating(nameof(AsmServices));
+            AsmServices = Wf.AsmServices();
+            Wf.Created(flow, nameof(ApiServices));
+
+
         }
 
         AsmCatalogEtl Etl;
 
         AsmExprParser AsmParser;
 
-        ITextBuffer TextBuffer;
-
         IAsmContext Asm;
 
         IApiServices ApiServices;
+
+        AsmServices AsmServices;
 
         void ShowSigOpTokens()
         {
@@ -128,24 +132,12 @@ namespace Z0.Asm
             root.iter(Etl.EncodingKindNames(), Wf.Row);
         }
 
-        void ParseSigTokens()
+
+        void CheckAsmSymbols()
         {
-            var specs = Etl.Specifiers();
-            Wf.Status(specs.Length);
-            var parser = AsmExprParser.create(Wf);
-            var counter = 0;
-            foreach(var spec in specs)
-            {
-                var sig = spec.Sig;
-                foreach(var op in sig.Operands)
-                {
-                    if(!(parser.ParseToken(op.Content, out var token)))
-                        Wf.Warn($"Failed to parse {op}");
-                    else
-                        counter++;
-                }
-            }
-            Wf.Status($"Successfully parsed {counter} sig operands");
+            var symbols = AsmSigs.table(Wf);
+            var entries = symbols.Entries;
+            root.iter(entries, e => Wf.Row(e));
         }
 
         ApiHostCaptureSet RunCapture(Type host)
@@ -220,11 +212,8 @@ namespace Z0.Asm
 
         void CheckIndexDecoder()
         {
-            var apisvc = Wf.ApiServices();
-            var asmsvc = Wf.AsmServices();
-            var decoder = asmsvc.IndexDecoder();
-            var indexer = apisvc.IndexService();
-
+            var decoder = AsmServices.IndexDecoder();
+            var indexer = ApiServices.IndexService();
             var blocks = indexer.IndexApiBlocks();
             var dataset = decoder.Decode(blocks);
         }
@@ -234,7 +223,7 @@ namespace Z0.Asm
             var cases = AsmCases.load(AsmInstructions.call(), AsmSigTokenList.Rel32).View;
             var count = cases.Length;
             var errors = text.buffer();
-            for(var i=0; i< count; i++)
+            for(var i=0; i<count; i++)
             {
                 ref readonly var c = ref skip(cases,i);
                 Wf.Row(c.Format());
@@ -260,25 +249,25 @@ namespace Z0.Asm
         {
             var info = memory.basic();
             var buffer = text.buffer();
-            buffer.AppendLine<PropFormat<MemoryAddress>>(Format.prop(nameof(info.BaseAddress), info.BaseAddress));
-            buffer.AppendLine<PropFormat<MemoryAddress>>(Format.prop(nameof(info.AllocationBase), info.AllocationBase));
-            buffer.AppendLine<PropFormat<ByteSize>>(Format.prop(nameof(info.RegionSize), info.RegionSize));
-            buffer.AppendLine<PropFormat<ByteSize>>(Format.prop(nameof(info.StackSize), info.StackSize));
-            buffer.AppendLine<PropFormat<PageProtection>>(Format.prop(nameof(info.Protection), info.Protection));
+            buffer.AppendLine(text.prop(nameof(info.BaseAddress), info.BaseAddress));
+            buffer.AppendLine(text.prop(nameof(info.AllocationBase), info.AllocationBase));
+            buffer.AppendLine(text.prop(nameof(info.RegionSize), info.RegionSize));
+            buffer.AppendLine(text.prop(nameof(info.StackSize), info.StackSize));
+            buffer.AppendLine(text.prop(nameof(info.Protection), info.Protection));
             Wf.Row(buffer.Emit());
         }
 
         public unsafe void Run()
         {
-            //ParseSigTokens();
             //ShowMnemonicLiterals();
             //ShowSpecifiers();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));
             //ProcessCatalog();
+            //CheckIndexDecoder();
 
-            CheckIndexDecoder();
+            TestRel32();
         }
 
         public static void Main(params string[] args)
@@ -286,9 +275,7 @@ namespace Z0.Asm
             try
             {
                 using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
-                wf.Status("Creating application");
                 var app = App.create(wf);
-                wf.Status("Created application");
                 app.Run();
 
             }
