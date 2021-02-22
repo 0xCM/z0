@@ -12,11 +12,7 @@ namespace Z0
     partial struct ApiSigs
     {
         [MethodImpl(Inline), Op]
-        public static TypeParameter parameter(ushort position, Name name)
-            => new TypeParameter(position, name);
-
-        [MethodImpl(Inline), Op]
-        public static TypeParameter parameter(ushort position, Name name, TypeSig closure)
-            => new TypeParameter(position, name, closure);
+        public static OperandSig @return(TypeSig type, params ModifierKind[] modifiers)
+            => new OperandSig(ReturnIndicator, type, modifiers);
     }
 }

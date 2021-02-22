@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RunningEvent(WfStepId step, T data, CorrelationToken ct)
         {
-            EventId = (EventName, step, Level, ct);
+            EventId = WfEventId.define(EventName, step);
             StepId = step;
             Payload = data;
         }
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RunningEvent(WfStepId step, string operation, T data, CorrelationToken ct)
         {
-            EventId = (EventName, step, Level, ct);
+            EventId = WfEventId.define(EventName, step);
             Operation = operation;
             StepId = step;
             Payload = data;

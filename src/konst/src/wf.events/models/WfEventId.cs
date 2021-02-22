@@ -12,6 +12,14 @@ namespace Z0
 
     public readonly struct WfEventId : IWfEventId<WfEventId>
     {
+        [MethodImpl(Inline)]
+        public static WfEventId define(string name, WfStepId step, EventLevel level)
+            => new WfEventId(name, step, level, CorrelationToken.Default);
+
+        [MethodImpl(Inline)]
+        public static WfEventId define(string name, WfStepId step)
+            => new WfEventId(name, step, CorrelationToken.Default);
+
         public string Identifier {get;}
 
         public Timestamp Ts {get;}

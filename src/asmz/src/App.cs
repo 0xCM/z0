@@ -199,7 +199,7 @@ namespace Z0.Asm
             var t2 = ApiSigs.type("bool");
             var op0 = ApiSigs.operand("a", t0);
             var op1 = ApiSigs.operand("b", t1);
-            var r = ApiSigs.ret(t2);
+            var r = ApiSigs.@return(t2);
             Wf.Row(ApiSigs.operation("equals", r, op0, op1));
         }
 
@@ -220,8 +220,12 @@ namespace Z0.Asm
 
         void CheckIndexDecoder()
         {
-            var blocks = ApiIndexService.create(Wf).IndexApiBlocks();
-            var decoder = AsmServices.create(Wf).IndexDecoder();
+            var apisvc = Wf.ApiServices();
+            var asmsvc = Wf.AsmServices();
+            var decoder = asmsvc.IndexDecoder();
+            var indexer = apisvc.IndexService();
+
+            var blocks = indexer.IndexApiBlocks();
             var dataset = decoder.Decode(blocks);
         }
 
@@ -264,13 +268,11 @@ namespace Z0.Asm
             Wf.Row(buffer.Emit());
         }
 
-
         public unsafe void Run()
         {
             //ParseSigTokens();
             //ShowMnemonicLiterals();
             //ShowSpecifiers();
-            TestTextProps();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
             //var set = RunCapture(typeof(Clang));

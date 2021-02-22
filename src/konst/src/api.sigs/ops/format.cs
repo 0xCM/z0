@@ -4,19 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     partial struct ApiSigs
     {
         [Op]
         public static string format(OperationSig src)
         {
             var dst = buffer();
-            render(src,dst);
+            render(src, dst);
             return dst.Emit();
         }
 
@@ -24,8 +18,12 @@ namespace Z0
         public static string format(TypeSig src)
         {
             var dst = buffer();
-            render(src,dst);
+            render(src, dst);
             return dst.Emit();
         }
+
+        [Op]
+        static ITextBuffer buffer(uint capacity = 120)
+            => text.buffer(capacity);
     }
 }

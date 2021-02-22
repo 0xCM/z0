@@ -6,8 +6,6 @@ namespace Z0
 {
     using K = ApiSigs.ModifierKind;
 
-    using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Root;

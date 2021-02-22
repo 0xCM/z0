@@ -25,14 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public StatusEvent(WfStepId step, T data, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
-            Payload = data;
-        }
-
-        [MethodImpl(Inline)]
-        public StatusEvent(WfStepId step, string label, T data, CorrelationToken ct)
-        {
-            EventId = (EventName, label, step, ct);
+            EventId = WfEventId.define(EventName, step);
             Payload = data;
         }
 

@@ -68,15 +68,15 @@ namespace Z0
 
         [Op]
         public static AppException NotTrue(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppException(AppErrorMsg.NotTrue(msg,caller,file,line));
+            => new AppException(AppErrorMsg.NotTrue(msg, caller, file, line));
 
         [Op]
         public static AppException NotFalse(string msg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppException(AppErrorMsg.NotFalse(msg,caller,file,line));
+            => new AppException(AppErrorMsg.NotFalse(msg, caller, file, line));
 
         [Op]
         public static AppException LengthMismatch(int lhs, int rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppException(AppErrorMsg.LengthMismatch(lhs,rhs,caller,file,line));
+            => new AppException(AppErrorMsg.LengthMismatch(lhs, rhs, caller, file, line));
 
         [Op]
         public static AppException NonGenericMethod(MethodInfo method, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

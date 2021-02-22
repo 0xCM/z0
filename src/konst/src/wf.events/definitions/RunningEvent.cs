@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RunningEvent(WfStepId step, CorrelationToken ct)
         {
-            EventId = (EventName, step, Level, ct);
+            EventId = WfEventId.define(EventName, step);
         }
 
         [MethodImpl(Inline)]

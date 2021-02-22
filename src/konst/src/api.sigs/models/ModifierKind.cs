@@ -40,6 +40,5 @@ namespace Z0
             /// </summary>
             Imm = P2ᐞ04,
         }
-
     }
 }

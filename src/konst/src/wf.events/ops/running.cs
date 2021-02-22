@@ -16,7 +16,7 @@ namespace Z0
             => new RunningEvent(step, ct);
 
         [MethodImpl(Inline)]
-        public static RunningEvent<T> running<T>(WfHost host, string operation, T data, CorrelationToken ct)
+        public static RunningEvent<T> running<T>(WfHost host, string operation, T    data, CorrelationToken ct)
             => new RunningEvent<T>(host, operation, data, ct);
 
         [MethodImpl(Inline)]

@@ -11,6 +11,12 @@ namespace Z0
 
     using static Part;
 
+    partial class XTend
+    {
+        public static AsmServices AsmServices(this IWfShell wf)
+            => Z0.Asm.AsmServices.create(wf);
+    }
+
     [ApiHost]
     public readonly struct Capture
     {

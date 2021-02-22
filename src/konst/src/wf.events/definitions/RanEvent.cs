@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RanEvent(WfStepId step, T data, CorrelationToken ct)
         {
-            EventId = (EventName, step, Level, ct);
+            EventId = WfEventId.define(EventName, step);
             StepId = step;
             Payload = data;
         }

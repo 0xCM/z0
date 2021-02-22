@@ -4,30 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
     using static memory;
 
     partial struct ApiSigs
     {
-         [Op]
+        [Op]
         public static void render(OperationSig src, ITextBuffer dst)
         {
             dst.Append(src.Name);
-            dst.Append(Chars.Colon);
-            dst.Append(Chars.Colon);
+            dst.Append(OperandLead);
             var opcount = src.OperandCount;
             var operands = src.Operands.View;
             for(var i=0; i<opcount; i++)
             {
                 ref readonly var operand = ref skip(operands,i);
                 render(operand, dst);
-                dst.Append(Chars.Space);
-                dst.Append(Chars.Dash);
-                dst.Append(Chars.Gt);
-                dst.Append(Chars.Space);
+                dst.Append(Arrow);
             }
             render(src.Return, dst);
         }
@@ -36,7 +28,7 @@ namespace Z0
         public static void render(OperandSig src, ITextBuffer dst)
         {
             if(src.IsReturn)
-                dst.Append("@return");
+                dst.Append(ReturnIndicator);
             else
                 dst.Append(src.Name);
             dst.Append(Chars.Colon);
@@ -60,18 +52,15 @@ namespace Z0
             {
                 var count = src.ParameterCount;
                 var parameters = src.Parameters.View;
-                dst.Append(Chars.LBrace);
+                dst.Append(TypeParamOpen);
                 for(var i=0; i<count; i++)
                 {
                     render(skip(parameters,i), dst);
                     if(i != count - 1)
-                    {
-                        dst.Append(Chars.Comma);
-                        dst.Append(Chars.Space);
-                    }
+                        dst.Append(TypeParamSep);
                 }
 
-                dst.Append(Chars.RBrace);
+                dst.Append(TypeParamClose);
             }
         }
     }

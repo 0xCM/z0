@@ -9,14 +9,10 @@ namespace Z0
 
     using static Part;
 
-    partial struct ApiSigs
+    partial class AppMsg
     {
         [MethodImpl(Inline), Op]
-        public static TypeParameter parameter(ushort position, Name name)
-            => new TypeParameter(position, name);
-
-        [MethodImpl(Inline), Op]
-        public static TypeParameter parameter(ushort position, Name name, TypeSig closure)
-            => new TypeParameter(position, name, closure);
+        public static AppMsg babble(object content)
+            => new AppMsg(content, LogLevel.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
     }
 }

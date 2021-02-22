@@ -27,7 +27,7 @@ namespace Z0
             where E : unmanaged, Enum
                 => ecode<E>() switch {
                     NK.U8 => Numeric.Format(e8u(src), n, digits),
-                    NK.I8 => Numeric.Format(e8i(src), n, digits),
+                    NK.I8 => Numeric.format(e8i(src), n, digits),
                     NK.I16 => Numeric.Format(e16i(src), n, digits),
                     NK.U16 => Numeric.Format(e16u(src), n, digits),
                     NK.I32 => Numeric.Format(e32i(src), n, digits),
@@ -41,7 +41,7 @@ namespace Z0
             where E : unmanaged, Enum
                 => ecode<E>() switch {
                     NK.U8 => Numeric.Format(e8u(src), n),
-                    NK.I8 => Numeric.Format(e8i(src), n),
+                    NK.I8 => Numeric.format(e8i(src), n),
                     NK.I16 => Numeric.Format(e16i(src), n),
                     NK.U16 => Numeric.Format(e16u(src), n),
                     NK.I32 => Numeric.Format(e32i(src), n),
@@ -55,7 +55,7 @@ namespace Z0
             where E : unmanaged, Enum
                 => ecode<E>() switch {
                     NK.U8 => Numeric.Format(e8u(src), n, digits),
-                    NK.I8 => Numeric.Format(e8i(src), n, digits),
+                    NK.I8 => Numeric.format(e8i(src), n, digits),
                     NK.I16 => Numeric.Format(e16i(src), n, digits),
                     NK.U16 => Numeric.Format(e16u(src), n, digits),
                     NK.I32 => Numeric.Format(e32i(src), n, digits),
@@ -69,7 +69,7 @@ namespace Z0
             where E : unmanaged, Enum
                 => ecode<E>() switch {
                     NK.U8 => Numeric.Format(e8u(src), b, digits),
-                    NK.I8 => Numeric.Format(e8i(src), b, digits),
+                    NK.I8 => Numeric.format(e8i(src), b, digits),
                     NK.I16 => Numeric.Format(e16i(src), b, digits),
                     NK.U16 => Numeric.Format(e16u(src), b, digits),
                     NK.I32 => Numeric.Format(e32i(src), b, digits),
@@ -83,7 +83,7 @@ namespace Z0
             where E : unmanaged, Enum
                 => ecode<E>() switch {
                     NK.U8 => Numeric.Format(e8u(src), b, digits),
-                    NK.I8 => Numeric.Format(e8i(src), b, digits),
+                    NK.I8 => Numeric.format(e8i(src), b, digits),
                     NK.I16 => Numeric.Format(e16i(src), b, digits),
                     NK.U16 => Numeric.Format(e16u(src), b, digits),
                     NK.I32 => Numeric.Format(e32i(src), b, digits),

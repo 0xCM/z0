@@ -18,6 +18,9 @@ namespace Z0
         public Index<DataType> DataTypes()
             => Z0.DataTypes.search(Wf.Components);
 
+        public IApiIndex IndexService()
+            => ApiIndexService.create(Wf);
+
         public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src)
         {
             var dst = Db.IndexTable<ApiAddressRecord>();
@@ -111,6 +114,7 @@ namespace Z0
             }
             return dst;
         }
+
         void EmitSymbolicLiterals(IWfShell wf)
         {
             var target = Db.IndexTable(SymbolicLiteral.TableId);

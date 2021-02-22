@@ -14,6 +14,8 @@ namespace Z0
     {
         IApiJit ApiJit();
 
+        IApiIndex IndexService();
+
         Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src);
 
         void EmitApiClasses();

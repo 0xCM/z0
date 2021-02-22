@@ -11,6 +11,8 @@ namespace Z0
     {
         public static RenderPattern<Count> IndexingPartFiles => "Indexing {0} partfile datasets";
 
+        public static RenderPattern<FS.FilePath> IndexingCodeBlocks => "Indexing code blocks from {0}";
+
         public static RenderPattern<Count,FS.FilePath> AbsorbedCodeBlocks => "Absorbed {0} code blocks from {1}";
 
         public static RenderPattern<OpUri> Unbased => "The block {0} has no base addressed";

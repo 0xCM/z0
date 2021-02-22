@@ -43,7 +43,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var path = ref skip(src,i);
-                var inner = Wf.Running($"Indexing blocks from {path}");
+                var inner = Wf.Running(Msg.IndexingCodeBlocks.Format(path));
                 var result = ApiCode.hexrows(path);
                 if(result.Count != 0)
                 {
@@ -56,7 +56,6 @@ namespace Z0
             }
 
             IndexStatus = Status();
-            Wf.Status(IndexStatus.Format());
             Product = Freeze();
 
             Wf.Ran(flow, api.metrics(Product));

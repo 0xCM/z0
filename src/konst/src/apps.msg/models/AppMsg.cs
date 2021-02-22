@@ -9,10 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
     /// <summary>
     /// Defines a message that encapsulates application diagnostic/status/error message content
     /// </summary>
@@ -24,10 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AppMsgSource source(string caller, string file, int? line)
             => new AppMsgSource(PartId.None, caller, file, line);
-
-        [MethodImpl(Inline), Op]
-        public static AppMsg called(object content, LogLevel kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, (FlairKind)kind, caller, file, line);
 
         [MethodImpl(Inline), Op]
         public static AppMsg define(object content, LogLevel kind)
@@ -46,20 +38,8 @@ namespace Z0
             => new AppMsg(content, LogLevel.Status, FlairKind.Status, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
-        public static AppMsg babble(object content)
-            => new AppMsg(content, LogLevel.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
-
-        [MethodImpl(Inline), Op]
         public static AppMsg warn(object content)
             => new AppMsg(content, LogLevel.Warning, FlairKind.Warning, EmptyString, EmptyString, null);
-
-        [MethodImpl(Inline), Op]
-        public static AppMsg error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => define($"{content} {caller} {line} {file}", LogLevel.Error);
-
-        [MethodImpl(Inline), Op]
-        public static AppMsg error(Exception e)
-            => define(e.ToString(), LogLevel.Error);
 
         [MethodImpl(Inline)]
         AppMsg(object content, LogLevel kind, FlairKind color, string caller, string file, int? line)

@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
+
     [ApiHost]
     public sealed class AsmServices : IAsmServices
     {
