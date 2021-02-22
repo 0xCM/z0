@@ -26,7 +26,7 @@ namespace Z0
         }
 
         public string Format()
-            => $"{Name}:={Value}";
+            => $"{Name}={Value}";
 
         public override string ToString()
             => Format();
@@ -42,7 +42,7 @@ namespace Z0
             => src is EnvVar<T> v && Equals(v);
 
         public static implicit operator EnvVar(EnvVar<T> src)
-            => Environs.define(src.Name, src.Value.ToString());
+            => new EnvVar(src.Name, src.Value.ToString());
 
         [MethodImpl(Inline)]
         public static implicit operator EnvVar<T>((string name, T value) src)

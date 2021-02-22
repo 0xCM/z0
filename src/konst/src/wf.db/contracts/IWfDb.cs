@@ -17,13 +17,13 @@ namespace Z0
             => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
 
         FS.FolderPath PackageRoot()
-            => Wf.Env.Vars.Packages.Value;
+            => Wf.Env.Packages.Value;
 
         FS.FolderPath Package(string id)
             => PackageRoot() + FS.folder(id);
 
         FS.FolderPath DevRoot()
-            => Wf.Env.Vars.Dev.Value;
+            => Wf.Env.Dev.Value;
 
         FS.FolderPath PartDir(string id)
             => DevRoot() + FS.folder("src") + FS.folder("z0." + id);
@@ -41,7 +41,10 @@ namespace Z0
             => DevDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath ArchiveRoot()
-            => Wf.Env.Vars.Archives.Value;
+            => Wf.Env.Archives.Value;
+
+        FS.FolderPath SourceBuildRoot()
+            => DevRoot() + FS.folder(build);
 
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);
@@ -256,7 +259,7 @@ namespace Z0
             => RefDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath ControlRoot()
-            => EnvVars.read().Control.Value;
+            => Env.create().Control.Value;
 
         FS.FolderPath ControlCmdRoot()
             => ControlRoot() + FS.folder(".cmd");

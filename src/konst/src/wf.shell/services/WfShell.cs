@@ -61,7 +61,7 @@ namespace Z0
         public WfShell(IWfInit config)
         {
             Init = config;
-            Env = Environs.Common;
+            Env = Z0.Env.create();
             Context = config.Shell;
             Id = config.ControlId;
             Ct = root.correlate(config.ControlId);
@@ -83,7 +83,7 @@ namespace Z0
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
-            Env = Environs.Common;
+            Env = Z0.Env.create();
             Init = config;
             Context = config.Shell;
             Id = config.ControlId;

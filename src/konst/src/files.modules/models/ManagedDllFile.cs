@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Identifies and represents and managaged module that lacks an entry point
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         public FS.FileExt DefaultExt
-            =>  FileExtensions.Dll;
+            =>  FS.Extensions.Dll;
 
         public FileModuleKind ModuleKind
             => FileModuleKind.ManagedDll;

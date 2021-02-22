@@ -47,7 +47,7 @@ namespace Z0
         }
 
         public EnvVar<T> Transform<T>(Func<string,T> f)
-            => Environs.define(Name, f(Value));
+            => new EnvVar<T>(Name, f(Value));
 
         [MethodImpl(Inline)]
         public string Format()
@@ -68,7 +68,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator EnvVar((string name, string value) src)
-            => Environs.define(src.name, src.value);
+            => new EnvVar(src.name, src.value);
 
         [MethodImpl(Inline)]
         public static implicit operator string(EnvVar src)

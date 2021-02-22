@@ -33,7 +33,7 @@ namespace Z0
         }
 
         FS.FileExt Ext
-            => FileExtensions.Hex;
+            => FS.Extensions.Hex;
 
         public FS.Files Files()
             => Root.Files(Ext);

@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface INativeModule : IDisposable, IAddressable
+    sealed class ShowEnv : CmdReactor<ShowEnvCmd>
     {
-        string Name {get;}
+        protected override CmdResult Run(ShowEnvCmd cmd)
+        {
+            Wf.Row(Wf.Env.Format());
+            return Cmd.ok(cmd);
+        }
     }
 }

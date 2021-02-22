@@ -12,11 +12,19 @@ namespace Z0
     partial struct Rules
     {
         [Op]
+        public static string format(IVar var, char assign)
+            => string.Format("{0}{1}{2}", format(var.Symbol), assign, var.Value);
+
+        [Op]
         public static string format(IVar var)
-            => string.Format("{0}:{1}",format(var.Symbol), var.Value);
+            => format(var, Chars.Eq);
+
+        [Op]
+        public static string format(VarContextKind vck, IVar var, char assign)
+            => string.Format("{0}{1}{2}", format(vck, var.Symbol), assign, var.Value);
 
         [Op]
         public static string format(VarContextKind vck, IVar var)
-            => string.Format("{0}:{1}",format(vck, var.Symbol), var.Value);
+            => format(vck,var, Chars.Eq);
     }
 }

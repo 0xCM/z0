@@ -44,7 +44,7 @@ namespace Z0
              StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();
              Console.CancelKeyPress += OnCancelKeyPressed;
-             ErrorLogPath = Env.create().LogRoot + FS.file("term.errors.log");
+             ErrorLogPath = Env.create().Logs.Value + FS.file("term.errors.log");
         }
 
         /// <summary>

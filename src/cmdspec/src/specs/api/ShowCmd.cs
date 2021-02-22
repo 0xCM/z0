@@ -21,7 +21,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public ShowCmd(string target)
             => Target = target;
-
     }
 
     partial class XCmd

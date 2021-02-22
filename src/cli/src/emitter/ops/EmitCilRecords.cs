@@ -23,7 +23,7 @@ namespace Z0
             var count = (uint)methods.Length;
             if(count != 0)
             {
-                var dst = Wf.Db().Table<CilDataRow>(src.GetSimpleName(), FileExtensions.Csv);
+                var dst = Wf.Db().Table<CilDataRow>(src.GetSimpleName());
                 var flow = Wf.EmittingTable<CilDataRow>(dst);
                 using var writer = dst.Writer();
                 writer.WriteLine(CilRowHeader);

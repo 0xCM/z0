@@ -29,5 +29,13 @@ namespace Z0
             cmd.Target = dst;
             return cmd;
         }
+
+        [MethodImpl(Inline), Op]
+        public static DumpImagesCmd DumpImages(this CmdBuilder builder)
+        {
+            var cmd = new DumpImagesCmd();
+            return cmd;
+        }
+
     }
 }

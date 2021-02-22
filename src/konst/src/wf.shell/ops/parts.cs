@@ -14,7 +14,7 @@ namespace Z0
     {
         [Op]
         public static ApiPartSet parts()
-            => parts(WfShell.controller(), Environs.args());
+            => parts(WfShell.controller(), Environment.GetCommandLineArgs());
 
         [Op]
         public static ApiPartSet parts(Assembly control, FS.FolderPath src)

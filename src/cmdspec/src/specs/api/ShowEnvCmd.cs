@@ -4,19 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial class WfShell
+    [Cmd(CmdName)]
+    public readonly struct ShowEnvCmd : ICmd<ShowEnvCmd>
+    {
+        public const string CmdName = "show-env";
+    }
+
+    partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static IAppPaths paths()
-            => new AppPaths(Env.create().Db.Value);
-
-        [MethodImpl(Inline), Op]
-        public static IAppPaths paths(FS.FolderPath root)
-            => new AppPaths(root);
+        public static ShowEnvCmd ShowEnv(this CmdBuilder builder)
+        {
+            var dst = new ShowEnvCmd();
+            return dst;
+        }
     }
 }

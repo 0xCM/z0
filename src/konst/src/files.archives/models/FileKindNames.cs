@@ -187,5 +187,10 @@ namespace Z0
         /// Defines the 'zip' literal
         /// </summary>
         public const string zip = nameof(zip);
+
+        /// <summary>
+        /// Defines the 'sh' literal
+        /// </summary>
+        public const string sh = nameof(sh);
     }
 }

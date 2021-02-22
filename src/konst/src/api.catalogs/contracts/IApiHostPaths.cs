@@ -12,7 +12,7 @@ namespace Z0
         ApiHostUri Host {get;}
 
         FS.FileName HexFileName
-            => LegalFileName(Host, FileExtensions.Hex);
+            => LegalFileName(Host, FS.Extensions.Hex);
 
         FS.FilePath HostHexPath
             => HexDir() + HexFileName;

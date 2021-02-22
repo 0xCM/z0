@@ -36,19 +36,19 @@ namespace Z0.Asm
         }
 
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
-            => CaseWriter(FileExtensions.Asm,caller);
+            => CaseWriter(FS.Extensions.Asm,caller);
 
         protected BufferSeqId Main
             => BufferSeqId.Main;
 
         protected IApiHexWriter HexWriter([Caller] string caller = null)
         {
-            var dstPath = TargetArchive.HexPath(FS.file(caller, FileExtensions.Hex));
+            var dstPath = TargetArchive.HexPath(FS.file(caller, FS.Extensions.Hex));
             return ApiCode.writer(Wf,dstPath);
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
-            => Services.AsmWriter(TargetArchive.AsmPath(FS.file($"{caller}", FileExtensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
+            => Services.AsmWriter(TargetArchive.AsmPath(FS.file($"{caller}", FS.Extensions.Asm)), AsmFormatConfig.DefaultStreamFormat);
 
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {

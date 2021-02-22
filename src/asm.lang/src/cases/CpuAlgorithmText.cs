@@ -8,7 +8,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly partial struct CpuAlgorithmText
+    public readonly struct CpuAlgorithmText
     {
         /// <summary>
         /// unsigned int _bextr2_u32 (unsigned int a, unsigned int control)

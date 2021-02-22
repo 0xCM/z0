@@ -22,17 +22,11 @@ namespace Z0
             Value = value;
         }
 
-        [MethodImpl(Inline)]
-        public EnvDirVar(VarSymbol name)
-        {
-            Symbol = name;
-            Value = FS.FolderPath.Empty;
-        }
-
         public string Format()
             => Rules.format(this);
+
         public string Format(VarContextKind vck)
-            => Rules.format(vck,this);
+            => Rules.format(vck, this);
 
         [MethodImpl(Inline)]
         public static implicit operator EnvDirVar((VarSymbol symbol, FS.FolderPath value) src)

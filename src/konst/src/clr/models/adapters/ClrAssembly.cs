@@ -51,14 +51,14 @@ namespace Z0
 
         ref readonly FS.FilePath GetDocPath(out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FileExtensions.Xml.Name));
+            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FS.Extensions.Xml.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }
 
         ref readonly FS.FilePath GetPdbPath(out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FileExtensions.Pdb.Name));
+            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FS.Extensions.Pdb.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }

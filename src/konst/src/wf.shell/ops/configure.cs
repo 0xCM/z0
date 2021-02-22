@@ -9,11 +9,12 @@ namespace Z0
         [Op]
         public static ref WfConfig configure(ref WfConfig dst)
         {
-            var paths = WfShell.paths(Environs.dbRoot());
+            var dbroot = Env.create().Db.Value;
+            var paths = WfShell.paths(dbroot);
             var control = controller();
             var runroot = FS.path(control.CodeBase).FolderPath;
             dst.Controller = control.GetSimpleName();
-            dst.DbRoot = Environs.dbRoot();
+            dst.DbRoot = dbroot;
             dst.ConfigPath = paths.AppConfigPath;
             dst.RuntimeRoot = runroot;
             dst.Components = parts(control, runroot).PartComponents.Select(ClrAssemblyNames.from);

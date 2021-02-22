@@ -5,45 +5,78 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using N = EnvVarNames;
 
-    /// <summary>
-    /// Reifies an application environment service predicated on environment variables
-    /// </summary>
-    public struct Env : IEnv<EnvVars>
+    public class Env : IEnvVarProvider
     {
-        public FS.FolderPath LogRoot;
-
-        public FS.FolderPath DevRoot;
-
-        public FS.FolderPath ArchiveRoot;
-
-        public FS.FolderPath DbRoot;
-
-        public FS.FolderPath ControlRoot;
-
-        public EnvVars Vars;
-
-        [MethodImpl(Inline), Op]
         public static Env create()
+            => new Env();
+
+        Env()
         {
-            var dst = new Env();
-            var vars = EnvVars.read();
-            dst.Vars = vars;
-            dst.LogRoot = vars.Logs.Value;
-            dst.DevRoot = vars.Dev.Value;
-            dst.DbRoot = vars.Db.Value;
-            dst.ArchiveRoot = vars.Archives.Value;
-            dst.ControlRoot = vars.Control.Value;
-            return dst;
+            var dst = this;
+            dst.Dev = read(N.ZDev);
+            dst.Db = read(N.Db);
+            dst.Control = read(N.Control);
+            dst.Packages = read(N.Packages);
+            dst.Tools = read(N.Tools);
+            dst.Archives = read(N.Archives);
+            dst.Logs = read(N.Logs);
+            dst.ZBin = read(N.ZBin);
         }
 
-        public Index<IEnvVar> Provided
-            => Vars.Provided;
+        public EnvDirVar Dev;
 
-        public EnvVars Variables
-            => Vars;
+        public EnvDirVar Db;
+
+        public EnvDirVar Control;
+
+        public EnvDirVar Packages;
+
+        public EnvDirVar Tools;
+
+        public EnvDirVar Archives;
+
+        public EnvDirVar Logs;
+
+        public EnvDirVar ZBin;
+
+        public string Format()
+        {
+            var dst = text.buffer();
+            var vars = Provided;
+            var count = vars.Count;
+            root.iter(vars, var => dst.AppendLine(var.Format()));
+            return dst.Emit();
+        }
+
+        public string Format(VarContextKind vck)
+        {
+            var dst = text.buffer();
+            var vars = Provided;
+            var count = vars.Count;
+            root.iter(vars, var => dst.AppendLine(var.Format(vck)));
+            return dst.Emit();
+        }
+
+        public override string ToString()
+            => Format();
+
+        public Index<IEnvVar> Provided
+            => Members(this);
+
+        [Op]
+        static EnvDirVar read(string name)
+        {
+            var value = Environment.GetEnvironmentVariable(name);
+            if(text.blank(value))
+                root.@throw($"The environment variable '{name}' is undefined");
+            return (name, FS.dir(value));
+        }
+
+        static Index<IEnvVar> Members(Env src)
+            => typeof(Env).GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Select(x => (IEnvVar)x.GetValue(src));
     }
 }

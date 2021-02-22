@@ -55,7 +55,7 @@ namespace Z0
             var llvm = Llvm.service(wf);
             var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
-            using var runner = ToolRunner.create(wf);
+            using var runner = ToolShellRunner.create(wf);
             runner.Run(cmd);
         }
 
@@ -135,7 +135,7 @@ namespace Z0
             cmd.SourceDir = FS.dir(@"J:\lang\net\runtime\artifacts\tests\coreclr\windows.x64.Debug");
             cmd.TargetPath = Db.IndexTable("clrtests");
             cmd.FileUriMode = true;
-            cmd.WithExt(FileExtensions.Cmd);
+            cmd.WithExt(FS.Extensions.Cmd);
             //cmd.WithLimit(20);
             return cmd;
         }
@@ -306,7 +306,7 @@ namespace Z0
 
         void RunScripts()
         {
-            using var runner = ToolRunner.create(Wf);
+            using var runner = ToolShellRunner.create(Wf);
             runner.RunCmdScript("clang", "codegen");
             runner.RunCmdScript("clang", "parse");
             runner.RunPsScript("clang-query", "fast-math");

@@ -12,7 +12,7 @@ namespace Z0
         public static FS.FilePath enqueue<T>(CmdJob<T> job, IWfDb db)
             where T : struct, ITextual
         {
-            var dst = db.JobQueue() + FS.file(job.Name.Format(), FileExtensions.Cmd);
+            var dst = db.JobQueue() + FS.file(job.Name.Format(), FS.Extensions.Cmd);
             dst.Overwrite(job.Format());
             return dst;
         }

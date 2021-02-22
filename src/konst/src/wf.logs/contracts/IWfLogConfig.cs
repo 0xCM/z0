@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using X = FileExtensions;
+    using X = FS.Extensions;
     using api = Loggers;
 
     public interface IWfLogConfig : ITextual

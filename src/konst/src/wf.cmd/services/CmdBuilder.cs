@@ -15,14 +15,11 @@ namespace Z0
 
         readonly IWfDb _Db;
 
-        readonly Env _Env;
-
         [MethodImpl(Inline)]
         public CmdBuilder(IWfShell wf)
         {
             _Wf = wf;
             _Db = wf.Db();
-            _Env = Env.create();
         }
 
         public IWfShell Wf
@@ -37,11 +34,6 @@ namespace Z0
             get => _Db;
         }
 
-        public Env Env
-        {
-            [MethodImpl(Inline)]
-            get => _Env;
-        }
-
+        public Env Env => Wf.Env;
     }
 }

@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Reflection;
 
-    using static z;
-    using static Konst;
-    using static FileExtensions;
+    using static Part;
+    using static FS.Extensions;
 
     [ApiHost]
     public readonly struct RuntimeArchive : IRuntimeArchive

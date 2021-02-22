@@ -11,7 +11,7 @@ namespace Z0
     [Free]
     public interface INativeFunction : IAddressable
     {
-        StringRef Name {get;}
+        string Name {get;}
 
         NativeModule Source {get;}
     }

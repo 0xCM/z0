@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = NativeModules;
 
@@ -26,7 +26,7 @@ namespace Z0
             => Path = path;
 
         public FS.FileExt DefaultExt
-            =>  FileExtensions.Dll;
+            => FS.Extensions.Dll;
 
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeDllFile src)

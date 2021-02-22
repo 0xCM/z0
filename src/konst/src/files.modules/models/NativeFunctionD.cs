@@ -16,7 +16,7 @@ namespace Z0
 
         public NativeModule Source {get;}
 
-        public StringRef Name {get;}
+        public string Name {get;}
 
         public readonly D Invoke {get;}
 

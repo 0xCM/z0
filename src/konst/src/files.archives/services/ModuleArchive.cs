@@ -8,8 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static FileExtensions;
+    using static Part;
+    using static FS.Extensions;
 
     [Service]
     public struct ModuleArchive : IModuleArchive

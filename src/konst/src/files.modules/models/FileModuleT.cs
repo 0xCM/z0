@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct FileModule<T> : IFileModule<FileModule<T>,T>
         where T : struct, IFileModule<T>
@@ -25,9 +25,9 @@ namespace Z0
 
         public FS.FileExt DefaultExt
             => ModuleKind switch {
-                FileModuleKind.Dll => FileExtensions.Dll,
-                FileModuleKind.Exe => FileExtensions.Exe,
-                FileModuleKind.Lib => FileExtensions.Lib,
+                FileModuleKind.Dll => FS.Extensions.Dll,
+                FileModuleKind.Exe => FS.Extensions.Exe,
+                FileModuleKind.Lib => FS.Extensions.Lib,
                 _ =>  FS.FileExt.Empty
             };
         [MethodImpl(Inline)]

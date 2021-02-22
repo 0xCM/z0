@@ -63,6 +63,8 @@ namespace Z0
 
         public const string builds = nameof(builds);
 
+        public const string build = ".build";
+
         public const string tmp = nameof(tmp);
 
         public const string data = nameof(data);

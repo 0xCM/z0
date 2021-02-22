@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using X = FileExtensions;
+    using X = FS.Extensions;
     using api = Loggers;
 
     public readonly struct WfLogConfig : IWfLogConfig

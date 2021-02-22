@@ -11,7 +11,6 @@ namespace Z0
 
     [Event(Kind)]
     public readonly struct RowsEvent<T> : IWfEvent<RowsEvent<T>,T>
-        where T : ITextual
     {
         public const string EventName = GlobalEvents.Rows;
 

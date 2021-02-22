@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a native executable
@@ -24,7 +24,7 @@ namespace Z0
             => FileModuleKind.NativeExe;
 
         public FS.FileExt DefaultExt
-            =>  FileExtensions.Exe;
+            => FS.Extensions.Exe;
 
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeExeFile src)

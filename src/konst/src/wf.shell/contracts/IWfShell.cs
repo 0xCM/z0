@@ -101,7 +101,7 @@ namespace Z0
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>
         IWfDb Db()
-            => new WfDb(this, Env.DbRoot);
+            => new WfDb(this, Env.Db.Value);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -165,7 +165,7 @@ namespace Z0
         void Row<T>(T data)
             => Raise(row(data));
 
-        void Rows<T>(params T[] src)
+        void Rows<T>(T[] src)
             => Rows(@readonly(src));
 
         void Rows<T>(ReadOnlySpan<T> src)
@@ -173,14 +173,10 @@ namespace Z0
             if(src.Length != 0)
             {
                 var buffer = Buffers.text();
-                buffer.AppendLine("Rows");
                 var count = src.Length;
                 for(var i=0; i<count; i++)
-                {
-                    ref readonly var row = ref skip(src,i);
-                    buffer.AppendLine(row is ITextual t ? t.Format() : row.ToString());
-                }
-                Raise(status(Host, buffer.Emit(), Ct));
+                    buffer.AppendLine(skip(src,i));
+                Raise(rows(buffer.Emit()));
             }
         }
     }

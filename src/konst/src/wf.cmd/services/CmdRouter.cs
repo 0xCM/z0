@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Part;
-    using static z;
+    //using static z;
 
     public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
     {
@@ -42,7 +41,7 @@ namespace Z0
                 if(Nodes.TryAdd(reactor.CmdId, reactor))
                     count++;
             }
-            iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
+            root.iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
         public CmdResult Dispatch(ICmd cmd)

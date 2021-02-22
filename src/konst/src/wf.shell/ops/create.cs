@@ -25,7 +25,7 @@ namespace Z0
             var clock = Time.counter(true);
             var control = controller();
             var controlId = control.Id();
-            var dbRoot = Environs.dbRoot();
+            var dbRoot = Env.create().Db.Value;
 
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));

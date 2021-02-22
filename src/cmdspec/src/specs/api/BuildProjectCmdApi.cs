@@ -58,16 +58,15 @@ namespace Z0
 
         [Op]
         static FS.FilePath ProjectPath(this CmdBuilder src, in BuildCmdVars vars)
-            => src.Env.DevRoot + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FileExtensions.CsProj);
+            => src.Env.Dev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.CsProj);
 
         [Op]
         static FS.FilePath SolutionPath(this CmdBuilder src, in BuildCmdVars vars)
-            => src.Env.DevRoot + FS.file(string.Format("z0.{0}", vars.SlnId), FileExtensions.Sln);
+            => src.Env.Dev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Extensions.Sln);
 
         [Op]
         static FS.FilePath LogPath(this CmdBuilder src, in BuildCmdVars vars)
-            => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FileExtensions.Log));
-
+            => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.Log));
 
         [Op]
         public static string Identifier(this BuildProjectCmd src)
@@ -78,7 +77,7 @@ namespace Z0
         [Op]
         public static Outcome<FS.FilePath> Save(this BuildProjectCmd src, FS.FolderPath dst)
         {
-            var path = dst + FS.file(src.Identifier(), FileExtensions.Cmd);
+            var path = dst + FS.file(src.Identifier(), FS.Extensions.Cmd);
             var result = path.Save(src.Format());
             if(result)
                 return path;

@@ -16,14 +16,7 @@ namespace Z0
             => new RowEvent<T>(data);
 
         [MethodImpl(Inline)]
-        public static RowsEvent<T> rows<T>(T content)
-            where T : ITextual
-                => new RowsEvent<T>(content);
-
-        [MethodImpl(Inline)]
-        public static RowsEvent<T,K> rows<T,K>(K kind, T content)
-            where T : ITextual
-             where K : unmanaged
-                => new RowsEvent<T,K>(content, kind);
+        public static RowsEvent<T> rows<T>(T data)
+            => new RowsEvent<T>(data);
     }
 }

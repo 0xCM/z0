@@ -81,7 +81,7 @@ namespace Z0
 
         public void Resource_Prop_Cil()
         {
-            var summary = CaseWriter(FileExtensions.Csv);
+            var summary = CaseWriter(FS.Extensions.Csv);
             var header = text.concat("Type".PadRight(20), "| ", "Property".PadRight(30), "| ", "Cil Bytes");
             summary.WriteLine(header);
 
@@ -100,7 +100,7 @@ namespace Z0
 
             var getters = props.Getters();
             var decoded = Cil.decode(mod, getters);
-            var path = FS.path(CasePath(FileExtensions.Il).Name);
+            var path = FS.path(CasePath(FS.Extensions.Il).Name);
             var cilWriter = new FunctionWriter(path);
             cilWriter.Write(decoded);
         }

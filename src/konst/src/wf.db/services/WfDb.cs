@@ -27,7 +27,7 @@ namespace Z0
         protected override void OnInit()
         {
             base.OnInit();
-            Root = Environs.dbRoot();
+            Root = Env.create().Db.Value;
         }
 
         IWfDb Service => this;

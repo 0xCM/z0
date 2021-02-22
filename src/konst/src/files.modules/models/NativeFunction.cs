@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public readonly struct NativeFunction : INativeFunction
     {
@@ -15,7 +15,7 @@ namespace Z0
 
         public NativeModule Source {get;}
 
-        public StringRef Name {get;}
+        public string Name {get;}
 
         [MethodImpl(Inline)]
         public NativeFunction(NativeModule src, MemoryAddress @base, string name)

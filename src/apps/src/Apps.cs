@@ -43,7 +43,7 @@ namespace Z0
             => new AppContext(wf.Paths, wf.Api, random, WfShell.json(wf.Paths.AppConfigPath), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-            => context(WfShell.parts(Assembly.GetEntryAssembly(), Environs.args()), WfShell.paths());
+            => context(WfShell.parts(Assembly.GetEntryAssembly(), Environment.GetCommandLineArgs()), WfShell.paths());
 
         static IAppContext context(ApiPartSet src, IAppPaths paths)
             => new AppContext(paths, src.ApiGlobal, Rng.@default(), WfShell.json(paths.AppConfigPath), AppMsgExchange.Create());

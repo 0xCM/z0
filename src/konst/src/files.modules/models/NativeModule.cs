@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct NativeModule : INativeModule
     {
-        public StringRef Name {get;}
+        public string Name {get;}
 
         readonly IntPtr Handle;
 
@@ -21,7 +21,7 @@ namespace Z0
             => src.Handle;
 
         [MethodImpl(Inline)]
-        public NativeModule(string name,IntPtr handle)
+        public NativeModule(string name, IntPtr handle)
         {
             Name = name;
             Handle = handle;

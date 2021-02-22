@@ -52,7 +52,7 @@ namespace Z0
 
         Outcome<uint> ClearExtracts(PartId part)
         {
-            var kind = FileExtensions.XCsv;
+            var kind = FS.Extensions.XCsv;
             var files = Paths.RawExtractFiles(part);
             var result = Clear(files);
             if(result)
@@ -64,7 +64,7 @@ namespace Z0
 
         Outcome<uint> ClearParsed(PartId part)
         {
-            var kind = FileExtensions.PCsv;
+            var kind = FS.Extensions.PCsv;
             var files = Paths.ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
@@ -76,7 +76,7 @@ namespace Z0
 
         Outcome<uint> ClearAsm(PartId part)
         {
-            var kind = FileExtensions.Asm;
+            var kind = FS.Extensions.Asm;
             var files = Paths.AsmFiles(part);
             var result = Clear(files);
             if(result)
@@ -88,7 +88,7 @@ namespace Z0
 
         Outcome<uint> ClearHex(PartId part)
         {
-            var kind = FileExtensions.Hex;
+            var kind = FS.Extensions.Hex;
             var files = Paths.ApiHexFiles(part);
             var result = Clear(files);
             if(result)
@@ -100,7 +100,7 @@ namespace Z0
 
         Outcome<uint> ClearCil(PartId part)
         {
-            var kind = FileExtensions.IlData;
+            var kind = FS.Extensions.IlData;
             var files = Paths.CilDataFiles(part);
             var result = Clear(files);
             if(result)

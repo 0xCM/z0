@@ -48,7 +48,7 @@ namespace Z0
         {
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
-            Db = new WfDb(wf, wf.Env.DbRoot);
+            Db = new WfDb(wf, wf.Env.Db.Value);
             Events = EventCache.init(wf);
             OnInit();
             wf.Babble($"Initialized {typeof(H).Name}");
