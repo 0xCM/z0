@@ -1,10 +1,11 @@
-echo off
+@echo off
 
-set CleanDir=%ZDev%\.build
+set CleanDir=%ZDb%\tables
 echo CleanDir:%CleanDir%
 
 set CleanCmd=rmdir %CleanDir% /s/q
 echo CleanCmd:%CleanCmd%
 
 echo on
-call %CleanDirCmd%
+
+call %CleanCmd%

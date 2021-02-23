@@ -1,31 +1,10 @@
 @echo off
 
-set ZC=%ZControl%
-echo ZC:%ZC%
-
-set ZCmd=%ZC%\.cmd
-echo ZCmd=%ZC%
-
-call %ZCmd%\commit-control.cmd
-
-set TargetId=z0.control
-echo TargetId:%TargetId%
-
-set Archive=%ZArchive%
-
-set ArchiveSrc=%ZC%
-echo ArchiveSrc:%ArchiveSrc%
-
-set ArchiveDst=%Archive%\bin\source\%TargetId%.zip
-echo ArchiveDst:%ArchiveDst%
-
-set ArchiveLog=%ZDb%\etl\archive-repo-%TargetId%.log
-cd %ArchiveSrc%
+call %~dp0\archive-control-config.cmd
+cd %RepoSrc%
 
 echo on
 
-git archive -v -o %ArchiveDst% HEAD 2> %ArchiveLog%
-
-
-
-
+git add -A -v
+git commit -v -am "."
+git archive -v -o %RepoDst% HEAD

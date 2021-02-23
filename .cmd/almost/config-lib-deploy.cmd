@@ -3,12 +3,12 @@
 set ZCmd=%ZControl%\.cmd
 echo ZCmd:%ZCmd%
 
-call %ZCmd%\config-project-bin.cmd
+call %ZCmd%\config-project-lib.cmd
 
 set DeploySrc=%ProjectBinRoot%
 echo DeploySrc:%DeploySrc%
 
-set DeployDst=%ZTools%\z
+set DeployDst=%ZTools%
 echo DeployDst:%DeployDst%
 
 set DeployLog=%ZDb%\etl\deploy-%ProjectId%.log

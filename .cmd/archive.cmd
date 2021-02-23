@@ -1,20 +1,11 @@
 @echo off
 
-set ZC=%ZControl%
-echo ZC:%ZC%
-
-set ZCmd=%ZC%\.cmd
-echo ZCmd=%ZCmd%
-
-call %ZCmd%\update-dev-scripts.cmd
-call %ZCmd%\archive-capture.cmd
-call %ZCmd%\archive-build.cmd
-call %ZCmd%\archive-tables.cmd
-call %ZCmd%\archive-generated.cmd
-call %ZCmd%\archive-source.cmd
-call %ZCmd%\archive-app-logs.cmd
-call %ZCmd%\archive-dumps.cmd
-call %ZCmd%\archive-tools.cmd
-call %ZCmd%\archive-etl-logs.cmd
-call %ZCmd%\archive-control.cmd
-
+call %~dp0\archive-capture.cmd
+call %~dp0\archive-dumps.cmd
+call %~dp0\archive-zbin.cmd
+call %~dp0\archive-tables.cmd
+call %~dp0\archive-build.cmd
+call %~dp0\archive-z0-source.cmd
+call %~dp0\archive-applogs.cmd
+call %~dp0\archive-etllogs.cmd
+call %~dp0\archive-control.cmd

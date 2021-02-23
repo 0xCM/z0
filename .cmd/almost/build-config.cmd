@@ -1,5 +1,6 @@
 @echo off
 
+
 echo ProjectId:%ProjectId%
 echo SlnId:%SlnId%
 

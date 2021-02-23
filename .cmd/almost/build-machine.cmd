@@ -1,9 +1,10 @@
 @echo off
 
+set ZCmd=%ZControl%\.cmd
 set ProjectId=machine
 set SlnId=z0.machine
 
-call %~dp0\build-config.cmd
+call %ZCmd%\build-config.cmd
 echo %CmdSep%
 echo %CmdSep% >> %CmdLog%
 
@@ -18,4 +19,4 @@ echo BuildCmdLine:%BuildCmdLine% >> %CmdLog%
 
 call %BuildCmdLine%
 
-call %~dp0\deploy-tool.cmd
+call %ZCmd%\deploy-tool.cmd

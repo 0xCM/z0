@@ -3,7 +3,9 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 
-    <!-- <TargetFramework>net5.0</TargetFramework> -->
+    <TieredCompilation>false</TieredCompilation>
+    <TieredCompilationQuickJit>false</TieredCompilationQuickJit>
+    <PublishReadyToRun>true</PublishReadyToRun>
 
     <Deterministic>true</Deterministic>
     <Optimize>true</Optimize>
