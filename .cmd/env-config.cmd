@@ -1,13 +1,7 @@
 @echo off
 
-set WsRoot=c:\control
-echo WsRoot%WsRoot%
-
 set Tools=c:\tools
 echo Tools:%Tools%
-
-set ConfigCmd=%WSRoot%\config.cmd
-echo ConfigCmd:%ConfigCmd%
 
 @echo off
 set VarName=ZTools
@@ -128,3 +122,22 @@ set VarName=path_netsdk
 set VarVal=%Tools%\netsdk
 echo on
 setx /M  %VarName% %VarVal%
+
+@echo off
+set VarName=path_windebug
+set VarVal=C:\Program Files (x86)\Windows Kits\10\Debuggers\x64
+echo on
+setx /M  %VarName% "%VarVal%"
+
+@echo off
+set VarName=path_winptk
+set VarVal=C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit
+echo on
+setx /M  %VarName% "%VarVal%"
+
+@echo off
+set VarName=path_llvm
+set VarVal=J:\lang\tools\llvm-project\build\bin
+echo on
+setx /M  %VarName% %VarVal%
+
