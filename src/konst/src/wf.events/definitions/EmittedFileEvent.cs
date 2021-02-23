@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedFileEvent(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
         {
-            EventId = (Kind, step, Status, ct);
+            EventId = WfEventId.define(EventName, step);
             SegmentCount = segments;
             Path = path;
         }
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedFileEvent(WfStepId step, FS.FilePath path, CorrelationToken ct)
         {
-            EventId = (Kind, step, Status, ct);
+            EventId = WfEventId.define(EventName, step);
             SegmentCount = 0;
             Path = path;
         }

@@ -14,6 +14,8 @@ namespace Z0
     {
         public const EventKind Kind = EventKind.ProcessedFile;
 
+        public const string EventName = GlobalEvents.ProcessedFile;
+
         public WfEventId EventId {get;}
 
         public FS.FilePath SourcePath {get;}

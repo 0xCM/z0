@@ -10,6 +10,12 @@ call %AddCmd%
 set Id=asm
 call %AddCmd%
 
+set Id=asm.lang
+call %AddCmd%
+
+set Id=asm.lang.g
+call %AddCmd%
+
 set Id=bitcore
 call %AddCmd%
 
@@ -37,6 +43,9 @@ call %AddCmd%
 set Id=blocked
 call %AddCmd%
 
+set Id=check
+call %AddCmd%
+
 set Id=circuits
 call %AddCmd%
 
@@ -47,9 +56,6 @@ set Id=cmdexec
 call %AddCmd%
 
 set Id=cmdspec
-call %AddCmd%
-
-set Id=domain
 call %AddCmd%
 
 set Id=dvec

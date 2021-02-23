@@ -27,10 +27,8 @@ namespace Z0
             if(benchmarks.Any())
             {
                 Wf.Status("Emitting benchmarks");
-
                 Write(benchmarks, TestPaths.BenchLogPath);
             }
-
         }
 
         static FS.FilePath EmitTestCaseLog(FS.FilePath dst, TestCaseRecord[] records)
@@ -43,7 +41,7 @@ namespace Z0
         }
 
         static void Emit<R,F>(R[] records, FS.FilePath dst, F f = default, char delimiter = FieldDelimiter)
-            where R : struct, ITabular
+            where R : struct, ITextual
             where F : unmanaged, Enum
         {
             if(records.Length == 0)
@@ -52,7 +50,7 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(Table.header53<F>(delimiter));
             var formatter = Table.formatter<F>(delimiter);
-            z.iter(records, r => writer.WriteLine(r.DelimitedText(delimiter)));
+            root.iter(records, r => writer.WriteLine(r.Format()));
         }
 
         FS.FilePath Write(BenchmarkRecord[] src, FS.FilePath path)

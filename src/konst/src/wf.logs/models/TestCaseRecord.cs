@@ -6,11 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
-
-    using F = TestCaseField;
-    using R = TestCaseRecord;
+    using static Part;
+    using static memory;
 
     public enum TestCaseField : uint
     {
@@ -27,19 +24,31 @@ namespace Z0
 
     public readonly struct TestCaseRecords
     {
-        public static void render(in TestCaseRecord src, ITextBuffer dst, char delimiter = FieldDelimiter)
+        const string Delimiter = "| ";
+
+        public const uint CasePad = (uint)TestCaseField.CaseName >> WidthOffset;
+
+        public const uint FinishedPad = (uint)TestCaseField.Finished >> WidthOffset;
+
+        public const uint DurationPad = (uint)TestCaseField.Duration >> WidthOffset;
+
+        public const uint PassedPad = (uint)TestCaseField.Passed >> WidthOffset;
+
+        public const uint MessagePad = (uint)TestCaseField.Message >> WidthOffset;
+
+        public static void render(in TestCaseRecord src, ITextBuffer dst)
         {
-            dst.AppendValue(src.CaseName, 60u, delimiter);
-            dst.AppendValue(src.Passed, 14u, delimiter);
-            dst.AppendValue(src.Duration, 14u, delimiter);
-            dst.AppendValue(src.Finished, 26u, delimiter);
-            dst.Append(src.Message, 32u, delimiter);
+            dst.AppendPadded(src.CaseName, CasePad, Delimiter);
+            dst.AppendPadded(src.Passed, PassedPad, Delimiter);
+            dst.AppendPadded(src.Duration, DurationPad, Delimiter);
+            dst.AppendPadded(src.Finished, FinishedPad, Delimiter);
+            dst.AppendPadded(src.Message, MessagePad, Delimiter);
         }
 
         public static string format(in TestCaseRecord src, char delimiter = FieldDelimiter)
         {
             var dst = Buffers.text();
-            render(src, dst, delimiter);
+            render(src, dst);
             return dst.Emit();
         }
     }
@@ -47,7 +56,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public struct TestCaseRecord : ITabular<F,R>
+    public struct TestCaseRecord : IRecord<TestCaseRecord>, ITextual
     {
         public utf8 CaseName;
 
@@ -82,12 +91,12 @@ namespace Z0
             CaseName = name ?? "<missing_name>";
             Passed = succeeded;
             Duration = duration;
-            Started = now();
+            Started = root.now();
             Message = msg;
-            Finished = now();
+            Finished = root.now();
         }
 
-        public string DelimitedText(char delimiter)
-            => TestCaseRecords.format(this, delimiter);
+        public string Format()
+            => TestCaseRecords.format(this);
     }
 }

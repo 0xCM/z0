@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public struct Loop<I>
+    public struct Loop<I> : ITextual
         where I : unmanaged, IComparable<I>
     {
         public I LowerBound;
@@ -19,5 +18,17 @@ namespace Z0
         public bit UpperInclusive;
 
         public I Step;
+
+        public string Format()
+        {
+            var dst = text.buffer();
+            dst.Append(LowerInclusive ? $"[{LowerBound}" : $"({LowerBound}");
+            dst.Append(UpperInclusive ? $", {UpperBound}]" : $", {UpperBound})");
+            dst.Append($" step({Step})");
+            return dst.Emit();
+        }
+
+        public override string ToString()
+            => Format();
     }
 }

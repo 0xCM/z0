@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittingFileEvent(WfStepId step, T source, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             Source = source;
             Target = target;
         }

@@ -6,14 +6,12 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_natmath : UnitTest<t_natmath>
     {
         public void add_check()
         {
-
             add_check(50, n20, n30);
             add_check(n20 + n30, n20, n30);
         }

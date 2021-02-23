@@ -12,7 +12,33 @@ namespace Z0
 
     partial struct gAlg
     {
-        [Op, Closures(AllNumeric)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref Accrue<I> run<I>(Loop<I> loop, ref Accrue<I> dst)
+            where I : unmanaged, IComparable<I>
+        {
+            var min = int64(loop.LowerBound) + (loop.LowerInclusive ? 0 : -1);
+            var max = int64(loop.UpperBound) + (loop.UpperInclusive ? 1 : 0);
+            for(var a=min; a<max; a++)
+                dst.Next(@as<long,I>(a));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Loop<I> loop<I>(Interval<I> bounds, I? step = null)
+            where I : unmanaged, IComparable<I>
+       {
+            var dst = new Loop<I>();
+            dst.LowerBound = bounds.Left;
+            dst.UpperBound = bounds.Right;
+            dst.LowerInclusive = bounds.LeftClosed;
+            dst.UpperInclusive = bounds.RightClosed;
+            dst.Step = step ?? Numeric.one<I>();
+            return dst;
+       }
+
+       [Op, Closures(AllNumeric)]
         public static void loop<T>(Pair<T> limits, Func<T,T> f, Action<T> g)
             where T : unmanaged
         {

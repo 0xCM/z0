@@ -8,6 +8,5 @@ namespace Z0
         where X : t_mathsvc<X>, new()
     {
 
-
     }
 }

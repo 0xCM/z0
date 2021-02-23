@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             SourcePath = src;
             FileKind = kind;
         }

@@ -49,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static CaseLog<F,T> cases<F,T>(FS.FilePath dst)
-            where T : struct, ITabular
+            where T : struct, ITextual
             where F : unmanaged, Enum
                 => new CaseLog<F,T>(dst);
     }

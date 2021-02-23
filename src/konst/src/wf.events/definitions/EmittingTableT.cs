@@ -12,6 +12,8 @@ namespace Z0
     [Event(Kind)]
     public readonly struct EmittingTableEvent<T> : IWfEvent<EmittingTableEvent<T>>
     {
+        public const string EventName = GlobalEvents.EmittingTable;
+
         public const EventKind Kind = EventKind.EmittingTable;
 
         public WfEventId EventId {get;}
@@ -25,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittingTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (Kind, step, ct);
+            EventId = WfEventId.define(EventName, step);
             Target = target;
         }
 

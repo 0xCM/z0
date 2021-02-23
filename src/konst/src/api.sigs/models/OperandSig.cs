@@ -38,6 +38,24 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Type.IsVoid;
             }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsNonEmpty;
+            }
+
+            public static OperandSig Empty
+            {
+                [MethodImpl(Inline)]
+                get => new OperandSig(Name.Empty, TypeSig.Empty, sys.empty<ModifierKind>());
+            }
         }
     }
 }

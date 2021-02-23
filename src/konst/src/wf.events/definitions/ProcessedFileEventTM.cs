@@ -12,8 +12,9 @@ namespace Z0
     [Event(Kind)]
     public readonly struct ProcessedFileEvent<T,M> : IWfEvent<ProcessedFileEvent<T,M>>
     {
-
         public const EventKind Kind = EventKind.ProcessedFile;
+
+        public const string EventName = GlobalEvents.ProcessedFile;
 
         public WfEventId EventId {get;}
 

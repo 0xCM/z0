@@ -5,10 +5,8 @@
 namespace Z0
 {
     using System;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_natmod : t_gmath<t_natmod>
     {
@@ -198,7 +196,6 @@ namespace Z0
             }
 
             TypeCaseEnd<N>();
-
         }
 
         protected void mod_inc_check<N>(N n = default)
@@ -231,10 +228,6 @@ namespace Z0
             TypeCaseEnd<N>();
         }
 
-        protected void TypeCaseStart<C>([Caller] string caller = null)
-            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> executing", LogLevel.Status));
 
-        protected void TypeCaseEnd<C>([Caller] string caller = null)
-            => Trace(AppMsg.define($"{GetType().DisplayName()}/{caller}<{typeof(C).DisplayName()}> succeeded", LogLevel.Status));
     }
 }

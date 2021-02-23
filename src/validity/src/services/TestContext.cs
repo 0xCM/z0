@@ -33,6 +33,7 @@ namespace Z0
         {
 
         }
+
         protected IWfDb Db => Wf.Db();
 
         public void SetMode(bool diagnostic)
@@ -196,7 +197,6 @@ namespace Z0
         protected string CaseName(IFunc f)
             => ApiTestIdentity.name(f);
 
-
         CasePaths GetCasePaths()
         {
             root.require(Db != null, () => $"Db for {GetType().Name} is null");
@@ -258,6 +258,17 @@ namespace Z0
 
         protected void Trace(ITextual msg)
             => Notify(msg.Format());
+
+        const string TypeCasePattern = "{0}/{1}<{2}> {3}";
+
+        string TypeCaseFormat<C>(string caller, string action)
+            => string.Format(TypeCasePattern, GetType().DisplayName(), caller, typeof(C).DisplayName(), action);
+
+        protected void TypeCaseStart<C>([Caller] string caller = null)
+            => Trace(AppMsg.define(TypeCaseFormat<C>(caller, "running"), LogLevel.Status));
+
+        protected void TypeCaseEnd<C>([Caller] string caller = null)
+            => Trace(AppMsg.define(TypeCaseFormat<C>(caller, "ran"), LogLevel.Status));
 
         /// <summary>
         /// Allocates and optionally starts a system counter

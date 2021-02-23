@@ -23,9 +23,9 @@ namespace Z0
         public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public EmittingFileEvent(WfStepId step,FS.FilePath target, CorrelationToken ct)
+        public EmittingFileEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             Target = target;
         }
 

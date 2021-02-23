@@ -1,2 +1,2 @@
-call .cmd/build.cmd
+call %~dp0\build.cmd
 call %TestExe%

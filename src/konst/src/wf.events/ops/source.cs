@@ -25,7 +25,6 @@ namespace Z0
         public static AppMsgSource source([Caller]string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsgSource(PartId.None, caller, file, line);
 
-
         [MethodImpl(Inline), Op]
         public static CallingMember caller([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new CallingMember(caller, file, line ?? 0);

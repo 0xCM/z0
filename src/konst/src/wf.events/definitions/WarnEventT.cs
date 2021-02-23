@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WarnEvent(WfStepId step, T content, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             Payload = content;
             StepId = step;
         }

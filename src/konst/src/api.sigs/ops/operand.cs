@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static OperandSig operand(Name name, TypeSig type, params ModifierKind[] modifiers)
-            => new OperandSig(name,type, modifiers);
+            => new OperandSig(name, type, modifiers);
     }
 }

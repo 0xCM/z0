@@ -39,11 +39,28 @@ namespace Z0
                 get => Return.IsVoid;
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsNonEmpty;
+            }
             public string Format()
                 => format(this);
 
             public override string ToString()
                 => Format();
+
+            public static OperationSig Empty
+            {
+                [MethodImpl(Inline)]
+               get => new OperationSig(Name.Empty, OperandSig.Empty, Index<OperandSig>.Empty);
+            }
         }
     }
 }

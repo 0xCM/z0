@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_natproof : UnitTest<t_natproof>
     {
@@ -15,7 +14,7 @@ namespace Z0
         {
             NatRequire.eq<N16>(16);
             NatRequire.eq<N512>(512);
-            NatRequire.eq<NatSeq<N8, N2, N1>>(821);
+            NatRequire.eq<NatSeq<N8,N2,N1>>(821);
         }
 
         public void smaller()

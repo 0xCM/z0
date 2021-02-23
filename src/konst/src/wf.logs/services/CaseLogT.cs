@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     class CaseLog<F,R> : ICaseLog<R>
-        where R : struct, ITabular
+        where R : struct, ITextual
         where F : unmanaged, Enum
     {
         object Locker;
@@ -43,7 +43,7 @@ namespace Z0
                 lock(Locker)
                 {
                     for(var i=0; i<count; i++)
-                        FS.write(skip(records,i).DelimitedText(FieldDelimiter), Status);
+                        FS.write(skip(records,i).Format(), Status);
                 }
             }
             catch(Exception e)

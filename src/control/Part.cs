@@ -3,11 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 [assembly: PartId(PartId.Control)]
-
 namespace Z0.Parts
-{ 
-    using System;
-    
+{
     public sealed class Control : Part<Control>
     {
 

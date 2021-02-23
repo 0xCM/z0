@@ -70,6 +70,14 @@ namespace Z0
                 Append(string.Format("{0}{1}", sep, skip(terms,i)));
         }
 
+        void AppendPadded<T>(T value, uint width, string delimiter = EmptyString)
+        {
+            if(text.nonempty(delimiter))
+                Append(delimiter);
+
+            Append(string.Format(RP.pad(-(int)width), value));
+        }
+
         void AppendDelimited<F,T>(F field, T value, char c = FieldDelimiter)
             where F : unmanaged
         {

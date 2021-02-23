@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             RowCount = count;
             Target = target;
         }
@@ -37,7 +37,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittedTableEvent(WfStepId step, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (EventName, step, ct);
+            EventId = WfEventId.define(EventName, step);
             RowCount = 0;
             Target = target;
         }

@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
-
-    using static Konst;
 
     partial class TestApp<A>
     {

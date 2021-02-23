@@ -12,7 +12,7 @@ namespace Z0
     }
 
     public interface ICaseLog<R> : ICaseLog
-        where R : ITabular
+        where R : ITextual
     {
         void Deposit(params R[] src);
 

@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     partial class TestApp<A>
     {
@@ -15,20 +14,19 @@ namespace Z0
         {
 
             var hosts = SelectedHosts.IsNonEmpty ? SelectedHosts.Storage : FindHosts();
-            iter(hosts, h =>  RunUnit(h,filters), concurrent);
+            root.iter(hosts, h =>  RunUnit(h,filters), concurrent);
         }
 
         protected virtual void RunTests(params string[] filters)
         {
             try
             {
+                var flow = Wf.Running(typeof(A).Name + " tests");
                 ErroLogPath.Delete();
                 StatusLogPath.Delete();
-
                 RunTests(false, filters);
-                Wf.Status("Completed test execution");
-
                 EmitLogs();
+                Wf.Ran(flow);
             }
             catch (Exception e)
             {

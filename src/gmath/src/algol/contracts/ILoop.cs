@@ -7,7 +7,7 @@ namespace Z0
     public interface ILoop<I>
         where I : unmanaged
     {
-        void Step(I i);
+        void Next(I i);
     }
 
     public interface ILoop<H,I> : ILoop<I>

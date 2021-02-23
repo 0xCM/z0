@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmittingTableEvent(WfStepId step, Type type, FS.FilePath target, CorrelationToken ct)
         {
-            EventId = (Kind, step, ct);
+            EventId = WfEventId.define(EventName, step);
             TableId = Records.tableid(type);
             Target = target;
         }
