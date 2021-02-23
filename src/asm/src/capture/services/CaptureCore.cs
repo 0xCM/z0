@@ -9,11 +9,11 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     unsafe sealed class CaptureCore : AsmWfService<CaptureCore>, ICaptureCore
     {
-        public Option<ApiParseResult> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
+        public Option<ApiParseResult> Capture(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiCaptureBlock>();
+                return root.none<ApiCaptureBlock>();
             }
         }
 
@@ -75,7 +75,7 @@ namespace Z0.Asm
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<ApiCaptureBlock>();
+                return root.none<ApiCaptureBlock>();
             }
         }
 
@@ -88,7 +88,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiParseResult>();
+                return root.none<ApiParseResult>();
             }
         }
 
@@ -105,7 +105,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiCaptureBlock>();
+                return root.none<ApiCaptureBlock>();
             }
         }
 

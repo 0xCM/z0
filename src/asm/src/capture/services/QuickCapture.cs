@@ -14,9 +14,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using api = Capture;
-
-    public readonly struct QuickCapture : IDisposable, IApiHostCapture
+    public readonly struct QuickCapture : IDisposable
     {
         readonly IWfShell Wf;
 
@@ -47,11 +45,23 @@ namespace Z0
         public Option<ApiCaptureBlock> Capture(ApiHostUri host, MethodInfo src)
             => Service.Capture(src.Identify(),src);
 
-        public ApiHostCaptureSet EmitCaptureSet(Type host)
-        {
-            var catalog = ApiCatalogs.HostCatalog(Wf, host);
-            return api.set(Asm, catalog, CaptureHost(catalog));
-        }
+        public Option<ApiCaptureBlock> Capture(OpIdentity id, MethodInfo src)
+            => Service.Capture(id,src);
+
+        public Option<ApiCaptureBlock> Capture(MethodInfo src, params Type[] args)
+            => Service.Capture(src,args);
+
+        public Option<ApiCaptureBlock> Capture(OpIdentity id, in DynamicDelegate src)
+            => Service.Capture(id,src);
+
+        public Option<ApiCaptureBlock> Capture(OpIdentity id, Delegate src)
+            => Service.Capture(id,src);
+
+        public Option<ApiParseResult> Capture(OpIdentity id, Span<byte> src)
+            => Service.Capture(id,src);
+
+        public Option<ApiCaptureBlock> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
+            where D : Delegate => Service.Capture(id, src);
 
         [Op]
         public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)

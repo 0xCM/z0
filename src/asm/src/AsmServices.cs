@@ -78,15 +78,6 @@ namespace Z0.Asm
         public static ICaptureExchange exchange(BufferToken capture)
             => new CaptureExchangeProxy(capture);
 
-        [Op]
-        public static QuickCapture CaptureQuick(IWfShell wf, IAsmContext asm)
-        {
-            var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
-            var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
-            var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
-            return new QuickCapture(wf, asm, buffer, tokens, service);
-        }
-
         IWfShell Wf {get;}
 
         IAsmContext Asm {get;}

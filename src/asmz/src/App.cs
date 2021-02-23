@@ -280,7 +280,7 @@ namespace Z0.Asm
             //ProcessCatalog();
             //CheckIndexDecoder();
 
-            CheckInterfaceMaps();
+            var captured = RunCapture(typeof(math));
         }
 
         public static void Main(params string[] args)

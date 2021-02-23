@@ -21,6 +21,15 @@ namespace Z0
     public readonly struct Capture
     {
         [Op]
+        public static QuickCapture quick(IWfShell wf, IAsmContext asm)
+        {
+            var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
+            var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
+            var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
+            return new QuickCapture(wf, asm, buffer, tokens, service);
+        }
+
+        [Op]
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
@@ -52,8 +61,6 @@ namespace Z0
         [Op]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(new byte[context.DefaultBufferLength]);
-
-
 
         internal static ApiHostCaptureSet set(IAsmContext asm, in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
         {

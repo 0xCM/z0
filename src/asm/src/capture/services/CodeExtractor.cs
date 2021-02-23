@@ -51,13 +51,6 @@ namespace Z0
             InstructionLimit = (byte)(Instruction.Length - 1);
         }
 
-        public CodeExtractor(uint size)
-            : this(alloc<byte>(size))
-        {
-
-
-        }
-
         void Reset(MemoryAddress src)
         {
             Buffer.Clear();
@@ -74,6 +67,22 @@ namespace Z0
             Reset(src);
             Advance();
             return ref skip(Buffer, BufferPos);
+        }
+
+        [Op]
+        public bool Next(out byte dst)
+        {
+            if(!Finished)
+            {
+                Advance();
+                if(ZeroCount < MaxZeroCount && BufferPos < BufferLimit)
+                {
+                    dst = Current;
+                    return true;
+                }
+            }
+            dst = z8;
+            return false;
         }
 
         ref readonly byte Current
@@ -97,22 +106,6 @@ namespace Z0
 
         bool InstructionComplete()
         {
-            return false;
-        }
-
-        [Op]
-        public bool Next(out byte dst)
-        {
-            if(!Finished)
-            {
-                Advance();
-                if(ZeroCount < MaxZeroCount && BufferPos < BufferLimit)
-                {
-                    dst = Current;
-                    return true;
-                }
-            }
-            dst = z8;
             return false;
         }
     }
