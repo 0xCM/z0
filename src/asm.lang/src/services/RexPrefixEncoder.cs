@@ -14,7 +14,7 @@ namespace Z0.Asm
     using W = RexFieldWidth;
 
     [ApiHost]
-    public sealed class RexPrefixEncoder : WfService<RexPrefixEncoder,RexPrefixEncoder>
+    public sealed class RexPrefixEncoder : WfService<RexPrefixEncoder>
     {
         readonly BitFieldSpec FieldSpec;
 

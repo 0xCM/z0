@@ -264,6 +264,12 @@ namespace Z0.Asm
         }
 
 
+        void CheckInterfaceMaps()
+        {
+            var imap = Clr.imap(typeof(BitLogicEvaluator), typeof(IBitLogicEvaluator));
+            Wf.Row(imap.Format());
+        }
+
         public unsafe void Run()
         {
             //ShowMnemonicLiterals();
@@ -274,7 +280,7 @@ namespace Z0.Asm
             //ProcessCatalog();
             //CheckIndexDecoder();
 
-            CheckApiHexArchive();
+            CheckInterfaceMaps();
         }
 
         public static void Main(params string[] args)

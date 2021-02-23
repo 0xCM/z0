@@ -34,7 +34,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public static implicit operator AsmOpCodeToken((string symbol, OpCodeTokenKind kind, string description) src)
                 => new AsmOpCodeToken(src.symbol, src.kind, src.description);
-
         }
     }
 }

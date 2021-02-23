@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-
     partial struct AsmOpCodes
     {
         /// <summary>
@@ -41,6 +40,5 @@ namespace Z0.Asm
             public static implicit operator RegDigit(byte src)
                 => new RegDigit(src);
         }
-
     }
 }
