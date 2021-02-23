@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
     using static memory;
+
     using K = OperatorClasses;
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
