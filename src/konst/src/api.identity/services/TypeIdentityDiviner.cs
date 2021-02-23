@@ -151,8 +151,8 @@ namespace Z0
         static PrimalIdentity primal(Type src)
             => src.IsSystemDefined() ?
                (NumericKinds.test(src)
-               ? new PrimalIdentity(src.NumericKind(), ApiIdentify.keyword(src))
-               : new PrimalIdentity(ApiIdentify.keyword(src))
+               ? new PrimalIdentity(src.NumericKind(), ClrDisplaySig.keyword(src))
+               : new PrimalIdentity(ClrDisplaySig.keyword(src))
                ) : PrimalIdentity.Empty;
     }
 }

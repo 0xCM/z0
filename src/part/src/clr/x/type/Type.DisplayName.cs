@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.ComponentModel;
 
-    partial class XApi
+    partial class ClrQuery
     {
         /// <summary>
         /// Constructs a display name for a type
@@ -38,7 +38,7 @@ namespace Z0
 
                 if(src.IsSystemDefined())
                 {
-                    var kw = ApiIdentify.keyword(src);
+                    var kw = ClrDisplaySig.keyword(src);
                     return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
                 }
 

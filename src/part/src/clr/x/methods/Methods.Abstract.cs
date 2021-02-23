@@ -6,12 +6,15 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     partial class ClrQuery
     {
+        /// <summary>
+        /// Selects the abstract methods from a stream
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
         [Op]
-        public static Type[] Enums(this Assembly a)
-            => a.GetTypes().Enums();
+        public static MethodInfo[] Abstract(this MethodInfo[] src)
+            => src.Where(t => t.IsAbstract);
     }
 }

@@ -61,11 +61,10 @@ namespace Z0
         [Op]
         public static ReadOnlySpan<ClrHandle<RuntimeMethodHandle>> methods(Assembly src)
         {
-            var catalog = ApiCatalogs.PartCatalog(src);
-            var metadata = catalog.ConcreteOperations;
-            var count = metadata.Length;
+            var methods = src.Methods().Concrete();
+            var count = methods.Length;
             var buffer = alloc<ClrHandle<RuntimeMethodHandle>>(count);
-            methods(metadata, catalog.ManifestModule, buffer);
+            ClrHandles.methods(methods, src.ManifestModule, buffer);
             return buffer;
         }
 

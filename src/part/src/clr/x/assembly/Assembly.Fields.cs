@@ -10,11 +10,7 @@ namespace Z0
     partial class ClrQuery
     {
         [Op]
-        public static GenericState GenericPartition(this MethodInfo src)
-            => src.IsNonGeneric() ? GenericStateKind.Nongeneric : GenericStateKind.OpenGeneric;
-
-        [Op]
-        public static bool IsMemberOf(this MethodInfo src, GenericState g)
-            => src.GenericPartition().State == g.State;
+        public static FieldInfo[] Fields(this Assembly a)
+            => a.GetTypes().SelectMany(x => x.Fields());
     }
 }

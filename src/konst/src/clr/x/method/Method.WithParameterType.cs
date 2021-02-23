@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
 
     partial class ClrQuery
     {
@@ -37,6 +36,5 @@ namespace Z0
         [Op]
         public static MethodInfo[] WithParameterTypes(this MethodInfo[] src, params Type[] types)
             => from m in src where m.ParameterTypes(true).Intersect(types).Count() == types.Length select m;
-
     }
 }

@@ -50,6 +50,9 @@ namespace Z0
         /// </summary>
         Index<MethodInfo> Operations {get;}
 
+        bool Host(ApiHostUri uri, out IApiHost host)
+            => ApiHosts.Host(uri, out host);
+
         /// <summary>
         /// The component's manifest module
         /// </summary>
@@ -73,8 +76,5 @@ namespace Z0
         /// </summary>
         bool IsEmpty
             => (OperationHosts.Length + ApiTypes.Count) == 0;
-
-        MethodInfo[] ConcreteOperations
-            => Operations.Storage.Concrete();
     }
 }

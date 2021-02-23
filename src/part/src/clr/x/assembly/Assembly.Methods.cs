@@ -15,7 +15,16 @@ namespace Z0
         /// <param name="src">The source assembly</param>
         /// <param name="pred">The adjudicating predicate</param>
         [Op]
+        public static MethodInfo[] Methods(this Assembly src)
+            => src.Types().Methods();
+
+        /// <summary>
+        /// Selects the methods from an assembly that satisfy a specified predicate
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        /// <param name="pred">The adjudicating predicate</param>
+        [Op]
         public static MethodInfo[] Methods(this Assembly src, Func<MethodInfo,bool> pred)
-            => src.Types().Methods().Where(pred);
+            => src.Methods().Where(pred);
     }
 }

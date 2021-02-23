@@ -10,11 +10,11 @@ namespace Z0
     partial class ClrQuery
     {
         /// <summary>
-        /// Deterines the source assembly <see cref='Module'/> definitions
+        /// Selects the instance methods from a stream
         /// </summary>
-        /// <param name="src">The assembly to query</param>
+        /// <param name="src">The methods to examine</param>
         [Op]
-        public static Module[] Modules(this Assembly src)
-            => src.Modules.Array();
+        public static MethodInfo[] Instance(this MethodInfo[] src)
+            => src.Where(t => !t.IsStatic);
     }
 }

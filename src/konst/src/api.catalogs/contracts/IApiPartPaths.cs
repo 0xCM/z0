@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IApiPartPaths : IPartFilePaths
     {
         FS.FolderPath HexDir()

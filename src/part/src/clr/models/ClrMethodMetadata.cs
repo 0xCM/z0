@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     public struct ClrMethodMetadata : ITextual
     {
         public ClrToken Token;

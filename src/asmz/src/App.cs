@@ -250,11 +250,10 @@ namespace Z0.Asm
             var part = PartId.Math;
             var component = Wf.Api.FindComponent(part).Require();
             var catalog = ApiCatalogs.PartCatalog(component);
-            var hosts = catalog.ApiHosts;
 
             void accept(in ApiCodeBlock block)
             {
-                if(hosts.Host(block.Uri.Host, out var host))
+                if(catalog.Host(block.Uri.Host, out var host))
                 {
                     Wf.Row(string.Format("{0} | {1}", host.Uri, block.OpUri));
                 }

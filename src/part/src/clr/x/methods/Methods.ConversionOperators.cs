@@ -24,29 +24,5 @@ namespace Z0
         [Op]
         public static MethodInfo[] WithoutConversionOperators(this MethodInfo[] src)
             => src.Where(m => !m.IsConversionOperator());
-
-        /// <summary>
-        /// Selects the abstract methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        [Op]
-        public static MethodInfo[] Abstract(this MethodInfo[] src)
-            => src.Where(t => t.IsAbstract);
-
-        /// <summary>
-        /// Selects the instance methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        [Op]
-        public static MethodInfo[] Instance(this MethodInfo[] src)
-            => src.Where(t => !t.IsStatic);
-
-        /// <summary>
-        /// Selects the non-public methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        [Op]
-        public static MethodInfo[] NonPublic(this MethodInfo[] src)
-            => src.Where(t => !t.IsPublic);
     }
 }
