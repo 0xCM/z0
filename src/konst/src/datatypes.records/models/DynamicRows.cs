@@ -39,12 +39,6 @@ namespace Z0
             get => Data.View;
         }
 
-        public Rowset<DynamicRow<T>> Rowset
-        {
-            [MethodImpl(Inline)]
-            get => new Rowset<DynamicRow<T>>(Data);
-        }
-
         public ref DynamicRow<T> this[ulong index]
         {
             [MethodImpl(Inline)]

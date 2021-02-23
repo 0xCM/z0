@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using M = AsmSyntaxMeaning;
 
     /// <summary>
@@ -70,44 +67,43 @@ namespace Z0.Asm
 
         Nds,
 
-
         /// <summary>
-        /// <see cref='M.Cb'/>
+        /// <see cref='M.cb'/>
         /// </summary>
         Cb,
 
         /// <summary>
-        /// <see cref='M.Cw'/>
+        /// <see cref='M.cw'/>
         /// </summary>
         Cw,
 
         /// <summary>
-        /// <see cref='M.Cd'/>
+        /// <see cref='M.cd'/>
         /// </summary>
         Cd,
 
         /// <summary>
-        /// <see cref='M.Cp'/>
+        /// <see cref='M.cp'/>
         /// </summary>
         Cp,
 
         /// <summary>
-        /// <see cref='M.Co'/>
+        /// <see cref='M.co'/>
         /// </summary>
         Co,
 
         /// <summary>
-        /// <see cref='M.Ct'/>
+        /// <see cref='M.ct'/>
         /// </summary>
         Ct,
 
         /// <summary>
-        /// <see cref='M.Ib'/>
+        /// <see cref='M.ib'/>
         /// </summary>
         Ib,
 
         /// <summary>
-        /// <see cref='M.Iw'/>
+        /// <see cref='M.iw'/>
         /// </summary>
         Iw,
 
@@ -117,12 +113,28 @@ namespace Z0.Asm
         Id,
 
         /// <summary>
-        /// <see cref='M.Io'/>
+        /// <see cref='M.io'/>
         /// </summary>
         Io,
 
+        /// <summary>
+        /// <see cref='M.ᕀrb'/>
+        /// </summary>
         Rb,
 
+        /// <summary>
+        /// <see cref='M.ᕀrw'/>
+        /// </summary>
         Rw,
+
+        /// <summary>
+        /// <see cref='M.ᕀrd'/>
+        /// </summary>
+        Rd,
+
+        /// <summary>
+        /// <see cref='M.ᕀro'/>
+        /// </summary>
+        Ro,
     }
 }

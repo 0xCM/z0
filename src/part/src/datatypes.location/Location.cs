@@ -26,16 +26,4 @@ namespace Z0
         public string Format()
             => Locator?.ToString() ?? EmptyString;
     }
-
-    public abstract class Location<T> : ILocation<T>
-        where T : struct
-    {
-        public T Locator {get;}
-
-        [MethodImpl(Inline)]
-        protected Location(T locator)
-            => Locator = locator;
-        public string Format()
-            => Locator.ToString();
-    }
 }

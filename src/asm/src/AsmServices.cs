@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-
     [ApiHost]
     public sealed class AsmServices : IAsmServices
     {
@@ -108,8 +107,11 @@ namespace Z0.Asm
         public IApiIndexDecoder IndexDecoder()
             => ApiIndexDecoder.create(Wf);
 
-        public IAsmImmWriter ImmWriter(ApiHostUri host, FS.FolderPath dst)
-            => new AsmImmWriter(Wf, host, Asm.Formatter, dst);
+        public static IAsmImmWriter immwriter(IWfShell wf, IAsmContext context, ApiHostUri host)
+            => new AsmImmWriter(wf, host, context.Formatter);
+
+        public IAsmImmWriter ImmWriter(ApiHostUri host)
+            => new AsmImmWriter(Wf, host, Asm.Formatter);
 
         [MethodImpl(Inline), Op]
         public IAsmFormatter Formatter()
@@ -129,9 +131,6 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public IAsmWriter AsmWriter(FS.FilePath dst, in AsmFormatConfig config)
             => new AsmWriter(dst, formatter(config));
-
-        public IAsmImmWriter ImmWriter(ApiHostUri host)
-            => ImmWriter(host, Wf.Db().ImmRoot());
 
         public IImmSpecializer ImmSpecializer()
             => new ImmSpecializer(Wf, Asm);

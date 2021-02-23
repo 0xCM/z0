@@ -9,28 +9,22 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Part;
-    using static z;
     using static SFx;
+    using static memory;
 
     class ImmSpecializer : IImmSpecializer
     {
         readonly IAsmDecoder Decoder;
 
-        readonly ICaptureCore CapCore;
+        readonly ICaptureCore Core;
 
         readonly IDynexus Dynamic;
-
-        static void OnCaptureFailed(OpIdentity id)
-            => term.error($"Capture failure for {id}");
-
-        static void OnEmbeddingFailure(MethodInfo src)
-            => term.error($"Embedding failure for {src.Name}");
 
         [MethodImpl(Inline)]
         public ImmSpecializer(IWfShell wf, IAsmContext asm)
         {
             Decoder = asm.RoutineDecoder;
-            CapCore = Capture.core(wf,asm);
+            Core = Capture.core(wf,asm);
             Dynamic = Dynops.Dynexus;
         }
 
@@ -40,119 +34,137 @@ namespace Z0.Asm
             var f = Dynamic.CreateUnaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return
-                    from c in CapCore.Capture(exchange, f.Value.Id, f.Value)
+                    from c in Core.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
             else
-                return none<AsmRoutine>();
+                return root.none<AsmRoutine>();
         }
 
-        public Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
+        public Option<AsmRoutine> UnaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm8)
         {
             var width = VK.width(src.ReturnType);
-            var f = Dynamic.CreateUnaryOp(width, src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.CreateUnaryOp(width, src, imm8).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return
-                    from c in CapCore.Capture(exchange, f.Value.Id, f.Value)
+                    from c in Core.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
             else
-                return none<AsmRoutine>();
+                return root.none<AsmRoutine>();
         }
 
-        public AsmRoutine[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm)
+        public AsmRoutine[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm8r)
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8r.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref readonly var imm = ref first(imm8r);
+            ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
-                dst[i] = UnaryOp(exchange,src, id, imm[i]).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = UnaryOp(exchange,src, id, skip(imm,i)).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
 
-        public Option<AsmRoutine> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm)
+        public Option<AsmRoutine> BinaryOp(in CaptureExchange exchange, MethodInfo src, OpIdentity id, byte imm8)
         {
             var width = VK.width(src.ReturnType);
-            var f = Dynamic.CreateBinaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
+            var f = Dynamic.CreateBinaryOp(width,src, imm8).OnNone(() => OnEmbeddingFailure(src));
             if(f)
               return
-                    from c in CapCore.Capture(exchange, f.Value.Id, f.Value)
+                    from c in Core.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
             else
-                return none<AsmRoutine>();
+                return root.none<AsmRoutine>();
         }
 
-        public AsmRoutine[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm)
+        public AsmRoutine[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm8r)
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8r.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var imm = ref first(imm8r);
             for(var i=0; i<count; i++)
-                dst[i] = BinaryOp(exchange,src,id,imm[i]).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = BinaryOp(exchange, src, id, skip(imm,i)).OnNone(() => OnCaptureFailed(id)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, byte imm)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, byte imm8)
             where T : unmanaged
-                => from c in CapCore.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
+                => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, params byte[] imm)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, params byte[] imm8)
             where T : unmanaged
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                dst[i] = Single(exchange, resolver, imm[i]).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, byte imm)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, byte imm8)
             where T : unmanaged
-                => from c in CapCore.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
+                => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, params byte[] imm)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, params byte[] imm8)
             where T : unmanaged
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                dst[i] = Single(exchange, resolver, imm[i]).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, byte imm)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, byte imm8)
             where T : unmanaged
-                => from c in CapCore.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
+                => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, params byte[] imm)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, params byte[] imm8)
             where T : unmanaged
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                dst[i] = Single(exchange, resolver, imm[i]).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, byte imm)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, byte imm8)
             where T : unmanaged
-                => from c in CapCore.Capture(exchange, resolver.Id.WithImm8(imm), resolver.@delegate(imm))
+                => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, params byte[] imm)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, params byte[] imm8)
             where T : unmanaged
         {
-            var count = imm.Length;
-            var dst = new AsmRoutine[count];
+            var count = imm8.Length;
+            var buffer = alloc<AsmRoutine>(count);
+            ref var dst = ref first(buffer);
+            ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                dst[i] = Single(exchange, resolver, imm[i]).ValueOrDefault(AsmRoutine.Empty);
-            return dst;
+                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+            return buffer;
         }
+
+        static void OnCaptureFailed(OpIdentity id)
+            => term.error($"Capture failure for {id}");
+
+        static void OnEmbeddingFailure(MethodInfo src)
+            => term.error($"Embedding failure for {src.Name}");
     }
 }

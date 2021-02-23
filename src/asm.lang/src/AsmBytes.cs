@@ -2,18 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct Records
+    [ApiHost]
+    public readonly partial struct AsmBytes
     {
-        [MethodImpl(Inline)]
-        public static Rowset<T> rowset<T>(FS.FilePath location, T[] rows)
-            where T : struct, IRecord<T>
-                => new Rowset<T>(location,rows);
+        [MethodImpl(Inline), Op]
+        public static bit IsRexPrefix(AsmByte src)
+            => (src & 0x40) != 0;
     }
 }

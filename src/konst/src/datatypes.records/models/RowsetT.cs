@@ -9,58 +9,60 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Defines a <typeparamref name='T'/> row index
-    /// </summary>
-    public readonly struct Rowset<T> : IIndex<T>
-        where T : struct
+    public readonly struct Rowset<T> : IRowset<T>
+        where T : struct, IRecord<T>
     {
-        readonly Index<T> Data;
+        public Index<T> Rows {get;}
+
+        public FS.FilePath Location {get;}
 
         [MethodImpl(Inline)]
-        public Rowset(T[] data)
-            => Data = data;
+        public Rowset(FS.FilePath location, T[] data)
+        {
+            Location = location;
+            Rows = data;
+        }
 
         public T[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data.Storage;
+            get => Rows.Storage;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get => Data.View;
+            get => Rows.View;
         }
 
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => Rows.Edit;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => Rows.Count;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Rows.Length;
         }
 
         public ref T this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Rows[index];
         }
 
         public ref T this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Rows[index];
         }
     }
 }

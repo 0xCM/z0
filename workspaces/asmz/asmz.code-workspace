@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../src/asmz"
+		},
+		{
+			"path": "../../src/asm"
+		},
+		{
+			"path": "../../src/asm.lang"
+		},
+		{
+			"path": "../../src/asm.lang.g"
+		},
+		{
+			"path": "../../src/konst"
+		},
+		{
+			"path": "../../src/part"
+		},
+	],
+	"settings": {}
+}

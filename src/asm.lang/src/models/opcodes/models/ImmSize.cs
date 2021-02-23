@@ -14,12 +14,12 @@ namespace Z0.Asm
         public enum ImmSize : byte
         {
             /// <summary>
-            /// A size of one byte as described by <see cref='M.Ib'/>
+            /// A size of one byte as described by <see cref='M.ib'/>
             /// </summary>
             ib = 1,
 
             /// <summary>
-            /// A size of two bytes as described by <see cref='M.Iw'/>
+            /// A size of two bytes as described by <see cref='M.iw'/>
             /// </summary>
             iw = 2,
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
             id = 4,
 
             /// <summary>
-            /// A size of eiqht bytes as described by <see cref='M.Io'/>
+            /// A size of eiqht bytes as described by <see cref='M.io'/>
             /// </summary>
             io = 8,
         }

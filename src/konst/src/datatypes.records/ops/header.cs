@@ -41,7 +41,7 @@ namespace Z0
             var buffer = alloc<HeaderCell>(count);
             var cells = span(buffer);
             for(var i=0u; i<count; i++)
-                seek(cells,i) = new HeaderCell(i, skip(_fields,i).Name, fieldwidth);
+                seek(cells, i) = new HeaderCell(i, skip(_fields,i).Name, fieldwidth);
             return new RowHeader(buffer, delimiter);
         }
 

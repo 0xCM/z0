@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct AsmImmWriter : IAsmImmWriter
     {
@@ -17,26 +18,23 @@ namespace Z0.Asm
 
         public FS.FolderPath ImmRoot {get;}
 
+        readonly IWfDb Db;
+
         readonly IAsmFormatter AsmFormatter;
 
-        readonly ICilFunctionFormatter CilFormatter;
-
-        readonly IApiPathProvider Paths;
-
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmFormatter formatter, FS.FolderPath root)
+        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmFormatter formatter)
         {
             Wf = wf;
             Uri = host;
-            ImmRoot = root;
+            Db = Wf.Db();
+            ImmRoot = Db.ImmRoot();
             AsmFormatter = formatter;
-            CilFormatter =  Cil.formatter();
-            Paths = ApiArchives.paths(wf);
         }
 
         public Option<FS.FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
-            var dst = Paths.AsmImmPath(Uri.Owner, Uri, id, refined);
+            var dst = Db.AsmImmPath(Uri.Owner, Uri, id, refined);
             using var writer = dst.Writer(append);
             for(var i=0; i<src.Length; i++)
             {
@@ -47,12 +45,27 @@ namespace Z0.Asm
             return dst;
         }
 
-        public Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
+        public ApiCodeset SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined)
         {
-            var path = Paths.HexImmPath(Uri.Owner, Uri, id, refined);
-            var code = src.Map(x => x.Code);
-            ApiCode.emit(Wf, Uri, code, path, append);
-            return path;
+            if(src.Length == 0)
+                return ApiCodeset.Empty;
+
+            var path = Db.HexImmPath(Uri.Owner, Uri, id, refined);
+            var count = src.Length;
+            var view = @readonly(src);
+            var blocks = alloc<ApiCodeBlock>(count);
+            ref var block = ref first(blocks);
+            using var writer = path.Writer(append);
+            for(var i=0; i<count; i++)
+            {
+                var code = skip(view,i).Code;
+                seek(block,i) = skip(view,i).Code;
+                writer.WriteLine(string.Format("{0,-16} | {1,-80} | {2}", code.BaseAddress, code.Uri, code.Encoded.Format()));
+            }
+            return ApiCode.codeset(path,blocks);
+            // for(var i=0; i<count; i++)
+            //     seek(block,i) = skip(view,i).Code;
+            //return ApiCode.emit(Wf, Uri, blocks, path, append);
         }
     }
 }

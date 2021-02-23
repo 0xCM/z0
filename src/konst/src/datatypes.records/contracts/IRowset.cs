@@ -9,11 +9,15 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    public interface IRowset<T>: IIndex<T>, ILocated<FS.FilePath>
+        where T : struct, IRecord<T>
     {
-        [MethodImpl(Inline)]
-        public static Rowset<T> rowset<T>(FS.FilePath location, T[] rows)
-            where T : struct, IRecord<T>
-                => new Rowset<T>(location,rows);
+        Index<T> Rows {get;}
+
+        TableId TableId
+            => default(T).TableId;
+
+        T[] IIndex<T>.Storage
+            => Rows.Storage;
     }
 }

@@ -12,10 +12,11 @@ namespace Z0.Asm
     using static Part;
 
     [ApiHost]
-    public readonly partial struct AsmLang  : ILanguage<AsmLang>
+    public readonly struct AsmLang : ILanguage<AsmLang>
     {
         const Z0.NumericKind Closure = UnsignedInts;
 
         public Name Id => "asm";
+
     }
 }

@@ -4,17 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using Z0.Lang;
+    using System;
 
-    public interface IAsmKeyword : IKeyword
+    public enum AsmByteKind : uint
     {
+        None = 0,
 
-    }
-
-    public interface IAsmKeyword<T,K> : IAsmKeyword, IKeyword<AsmLang,K>
-        where T : unmanaged, IAsmKeyword<T,K>
-        where K : unmanaged
-    {
+        RexPrefix,
 
     }
 }

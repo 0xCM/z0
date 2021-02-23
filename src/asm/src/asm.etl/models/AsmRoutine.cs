@@ -52,7 +52,7 @@ namespace Z0.Asm
             DisplaySig = sig;
             Instructions = instructions;
             Code = code;
-            TermCode =term;
+            TermCode = term;
         }
 
         /// <summary>

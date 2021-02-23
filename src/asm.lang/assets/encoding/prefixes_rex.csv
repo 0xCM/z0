@@ -1,8 +1,7 @@
 # RexPrefixFields - [BITS: 0100WRXB], Intel Vol2A, Table 2.4
--------------------------------------------------------------------------------------------------------
 | Field  | Bits   | Description                                                                               |
-| B      | 0      | Extension of the ModR/M r/m field, SIB base field, or Opcode reg field                    |
+| REX.B  | 0      | Extension of the ModR/M r/m field, SIB base field, or Opcode reg field                    |
 | X      | 1      | Extension of the SIB index field                                                          |
 | R      | 2      | Extension of the ModR/M reg field                                                         |
-| W      | 3      | If bit is disabled, operand size determined by CS.D; if enabled, operand size is 64 bits) |
+| REX.W  | 3      | If bit is disabled, operand size determined by CS.D; if enabled, operand size is 64 bits) |
 | Marker | [4..7] | 0100                                                                                      |

@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [Op]
-        public static AsmByte @byte()
+        public static AsmSyntax.Byte @byte()
             => default;
 
         [Op]

@@ -1,5 +1,3 @@
-# AsmTLegacyPrefixes - Intel Vol2A
------------------------------------------------------------------------------------------------
 | Prefix   | Code | Group | Class              | Description                                                                                                                                |
 | LOCK     | F0   | 1     | Lock               | Causes certain kinds of memory read-modify-write instructions to occur atomically                                                          |
 | REPNE    | F2   | 1     | Repeat             |                                                                                                                                            |

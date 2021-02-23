@@ -20,6 +20,19 @@ namespace Z0
     [ApiHost]
     public readonly struct Capture
     {
+        [Op]
+        public static void run(string[] args)
+        {
+            using var wf = configure(WfShell.create(args));
+            var app = Apps.context(wf, Rng.@default());
+            using var control = Capture.runner(wf, new AsmContext(app, wf));
+            control.Run();
+        }
+
+        [Op]
+        public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
+            => new ApiCaptureRunner(wf, asm);
+
         [MethodImpl(Inline), Op]
         public static ICaptureServices services(IWfShell wf, IAsmContext asm)
             => new CaptureServices(wf, asm);
@@ -40,18 +53,7 @@ namespace Z0
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(new byte[context.DefaultBufferLength]);
 
-        [Op]
-        public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureRunner(wf, asm);
 
-        [Op]
-        public static void run(string[] args)
-        {
-            using var wf = configure(WfShell.create(args));
-            var app = Apps.context(wf, Rng.@default());
-            using var control = Capture.runner(wf, new AsmContext(app, wf));
-            control.Run();
-        }
 
         internal static ApiHostCaptureSet set(IAsmContext asm, in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
         {

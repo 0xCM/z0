@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct SpecializedImmEvent : IWfEvent<SpecializedImmEvent>
     {
-        public const string EventName = nameof(SpecializedImmEvent);
+        public const string EventName = "SpecializedImm";
 
         public WfEventId EventId {get;}
 
@@ -28,15 +28,15 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FS.FilePath dst, CorrelationToken ct)
+        public static SpecializedImmEvent refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FS.FilePath dst, CorrelationToken ct)
             => new SpecializedImmEvent(step, uri, generic, RefinementClass.Refined, refinement, dst, ct);
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent literal(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, CorrelationToken ct)
+        public static SpecializedImmEvent literal(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, CorrelationToken ct)
             => new SpecializedImmEvent(step, uri, generic, RefinementClass.Unrefined, typeof(void), dst, ct);
 
         [MethodImpl(Inline)]
-        public SpecializedImmEvent define(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, Type refinement, CorrelationToken ct)
+        public static SpecializedImmEvent define(WfStepId step, ApiHostUri uri, bool generic, FS.FilePath dst, Type refinement, CorrelationToken ct)
             => new SpecializedImmEvent(step, uri, generic,
                 refinement != null ? RefinementClass.Refined : RefinementClass.Unrefined,
                 refinement,

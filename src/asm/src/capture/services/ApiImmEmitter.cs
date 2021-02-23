@@ -9,11 +9,13 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Linq;
 
-    public class ApiImmEmitter :  AsmWfService<ApiImmEmitter>, IImmEmitter
-    {
-        IImmSpecializer Specializer;
+    using E = SpecializedImmEvent;
 
-        IApiPathProvider ApiPaths;
+    public class ApiImmEmitter :  WfService<ApiImmEmitter>, IImmEmitter
+    {
+        IAsmContext Asm;
+
+        IImmSpecializer Specializer;
 
         public ApiImmEmitter()
         {
@@ -22,9 +24,8 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            base.OnInit();
+            Asm = AsmServices.context(Wf);
             Specializer = AsmServices.ImmSpecializer(Wf, Asm);
-            ApiPaths = ApiArchives.paths(Wf);
         }
 
         bool Append = true;
@@ -32,9 +33,9 @@ namespace Z0.Asm
         public void ClearArchive(params PartId[] parts)
         {
             if(parts.Length != 0)
-                ApiPaths.ImmHostDirs(parts).Delete();
+                Db.ImmHostDirs(parts).Delete();
             else
-                ApiPaths.ImmRoot().Delete();
+                Db.ImmRoot().Delete();
         }
 
         public void EmitLiteral(byte[] imm8, params PartId[] parts)
@@ -83,10 +84,13 @@ namespace Z0.Asm
                             var functions = Specializer.UnaryOps(exchange, member.Method, member.Id, imm8);
                             if(functions.Length != 0)
                             {
-                                dst.SaveHexImm(gid, functions, Append, true)
-                                    .OnSome(path => Wf.Raise(default(SpecializedImmEvent).refined(Host, uri, generic, rft, path, Wf.Ct)));
+                                var hex = dst.SaveHexImm(gid, functions, Append, true);
+                                Wf.Raise(E.refined(Host, uri, generic, rft, hex.Location, Wf.Ct));
+
+                                    //.OnSome(path => Wf.Raise(E.refined(Host, uri, generic, rft, path, Wf.Ct)));
+
                                 dst.SaveAsmImm(gid, functions, Append, true)
-                                    .OnSome(path => Wf.Raise(default(SpecializedImmEvent).refined(Host, uri, generic, rft, path, Wf.Ct)));
+                                    .OnSome(path => Wf.Raise(E.refined(Host, uri, generic, rft, path, Wf.Ct)));
                             }
                         }
                     }
@@ -99,10 +103,13 @@ namespace Z0.Asm
                             var functions = Specializer.BinaryOps(exchange, member.Method, member.Id, values);
                             if(functions.Length != 0)
                             {
-                                dst.SaveHexImm(gid, functions, Append, true)
-                                    .OnSome(path => Wf.Raise(default(SpecializedImmEvent).refined(Host, uri, generic, rft, path, Wf.Ct)));
+                                var hex = dst.SaveHexImm(gid, functions, Append, true);
+                                Wf.Raise(E.refined(Host, uri, generic, rft, hex.Location, Wf.Ct));
+
+                                    //.OnSome(path => Wf.Raise(E.refined(Host, uri, generic, rft, path, Wf.Ct)));
+
                                 dst.SaveAsmImm(gid, functions, Append, true)
-                                    .OnSome(path => Wf.Raise(default(SpecializedImmEvent).refined(Host, uri, generic, rft, path, Wf.Ct)));
+                                    .OnSome(path => Wf.Raise(E.refined(Host, uri, generic, rft, path, Wf.Ct)));
                             }
                         }
                     }
@@ -116,7 +123,7 @@ namespace Z0.Asm
                 select (ApiHost)h).Array();
 
         IAsmImmWriter Archive(IApiHost host)
-            => Services.ImmWriter(host.Uri);
+            => AsmServices.immwriter(Wf, Asm, host.Uri);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
         {
@@ -202,8 +209,10 @@ namespace Z0.Asm
                 var functions = Specializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append, false).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append, false).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
+                    var hex = dst.SaveHexImm(gid, functions, Append, false);
+                    Wf.Raise(E.literal(Host, uri, generic, hex.Location, Wf.Ct));
+
+                    dst.SaveAsmImm(gid, functions, Append, false).OnSome(path => Wf.Raise(E.literal(Host, uri, generic, path, Wf.Ct)));
                 }
             }
         }
@@ -218,8 +227,12 @@ namespace Z0.Asm
                 var functions = Specializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append, false).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append, false).OnSome(path => Wf.Raise(default(SpecializedImmEvent).literal(Host, uri, generic, path, Wf.Ct)));
+                    var hex = dst.SaveHexImm(gid, functions, Append, false);
+                    Wf.Raise(E.literal(Host, uri, generic, hex.Location, Wf.Ct));
+
+                    //dst.SaveHexImm(gid, functions, Append, false).OnSome(path => Wf.Raise(E.literal(Host, uri, generic, path, Wf.Ct)));
+
+                    dst.SaveAsmImm(gid, functions, Append, false).OnSome(path => Wf.Raise(E.literal(Host, uri, generic, path, Wf.Ct)));
                 }
             }
         }
@@ -229,13 +242,19 @@ namespace Z0.Asm
             var gid = src.Id;
             var uri = src.Host.Uri;
             var generic = true;
-            foreach(var closure in src.Close())
+            var closures = src.Close();
+            var count = closures.Length;
+            foreach(var closure in closures)
             {
                 var functions = Specializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, uri, generic, path, refinement, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, uri, generic, path, refinement, Wf.Ct)));
+                    var hex = dst.SaveHexImm(gid, functions, Append, refinement != null);
+                    Wf.Raise(E.literal(Host, uri, generic, hex.Location, Wf.Ct));
+
+                    //dst.SaveHexImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(E.define(Host, uri, generic, path, refinement, Wf.Ct)));
+
+                    dst.SaveAsmImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(E.define(Host, uri, generic, path, refinement, Wf.Ct)));
                 }
             }
         }
@@ -245,13 +264,19 @@ namespace Z0.Asm
             var gid = src.Id;
             var host = src.Host.Uri;
             var generic = true;
-            foreach(var closure in src.Close())
+            var closures = src.Close();
+            var count = closures.Length;
+            foreach(var closure in closures)
             {
                 var functions = Specializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, host, generic, path, refinement, Wf.Ct)));
-                    dst.SaveAsmImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(default(SpecializedImmEvent).define(Host, host, generic, path, refinement, Wf.Ct)));
+                    var hex = dst.SaveHexImm(gid, functions, Append, refinement != null);
+                    Wf.Raise(E.define(Host, host, generic, hex.Location, refinement, Wf.Ct));
+
+                    //dst.SaveHexImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(E.define(Host, host, generic, path, refinement, Wf.Ct)));
+
+                    dst.SaveAsmImm(gid, functions, Append, refinement != null).OnSome(path => Wf.Raise(E.define(Host, host, generic, path, refinement, Wf.Ct)));
                 }
             }
         }

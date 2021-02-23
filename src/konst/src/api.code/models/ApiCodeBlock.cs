@@ -154,12 +154,6 @@ namespace Z0
         public int CompareTo(ApiCodeBlock src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
-        /// <summary>
-        /// No code, no identity, no life
-        /// </summary>
-        public static ApiCodeBlock Empty
-            => default;
-
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(ApiCodeBlock src)
             => src.Code;
@@ -167,5 +161,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CodeBlock(ApiCodeBlock src)
             => src.Code;
+
+        /// <summary>
+        /// No code, no identity, no life
+        /// </summary>
+        public static ApiCodeBlock Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ApiCodeBlock(MemoryAddress.Zero, OpUri.Empty, BinaryCode.Empty);
+        }
     }
 }

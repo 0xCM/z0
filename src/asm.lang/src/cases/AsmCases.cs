@@ -10,6 +10,16 @@ namespace Z0.Asm
 
     }
 
+    public sealed class AsmCaseRunner : WfService<AsmCaseRunner>
+    {
+        public void Run()
+        {
+            var flow = Wf.Running();
+
+            Wf.Ran(flow);
+        }
+    }
+
     public readonly partial struct AsmCaseCode
     {
 

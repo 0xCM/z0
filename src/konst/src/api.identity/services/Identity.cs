@@ -105,7 +105,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static IEnumerable<ApiMethodClosure> Closures(ApiMethodG op)
+        public static Index<ApiMethodClosure> Closures(ApiMethodG op)
              => from k in op.Kinds
                 let pt = k.ToSystemType().ToOption() where pt.IsSome()
                 let id = Identity.identify(op.Method, k) where !id.IsEmpty

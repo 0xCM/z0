@@ -21,13 +21,13 @@ namespace Z0
         /// <param name="src">The source header</param>
         internal static string format(RowHeader src)
         {
-            var dst = text.build();
+            var dst = text.buffer();
             for(var i=0; i<src.Count; i++)
             {
                 dst.Append(src.Delimiter);
                 dst.Append(src[i].Format());
             }
-            return dst.ToString();
+            return dst.Emit();
         }
 
         [Op]

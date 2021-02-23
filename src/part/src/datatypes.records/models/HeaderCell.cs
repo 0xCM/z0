@@ -13,7 +13,7 @@ namespace Z0
     {
         public uint Index {get;}
 
-        public string Name {get;}
+        public Name Name {get;}
 
         public RenderWidth Width {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         public HeaderCell(uint index, string name, RenderWidth width)
         {
             Index = index;
-            Name = name;
+            Name = name ?? Null.Indicator;
             Width = width;
             CellFormat = new CellFormatSpec("{0}", width);
         }

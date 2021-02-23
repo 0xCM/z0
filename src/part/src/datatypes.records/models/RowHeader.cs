@@ -13,13 +13,14 @@ namespace Z0
 
     public readonly struct RowHeader : IIndex<HeaderCell>, ITextual
     {
-        public HeaderCell[] Cells {get;}
+        public Index<HeaderCell> Cells {get;}
 
         public string Delimiter {get;}
 
         [MethodImpl(Inline)]
         public RowHeader(HeaderCell[] data, string delimiter)
         {
+            root.require(data != null, () => "Null header cells");
             Cells = data;
             Delimiter = delimiter;
         }

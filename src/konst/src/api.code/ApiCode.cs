@@ -15,59 +15,32 @@ namespace Z0
     [ApiHost(ApiNames.ApiCode, true)]
     public readonly struct ApiCode
     {
+        [MethodImpl(Inline)]
+        public static ApiCodeset codeset(FS.FilePath location, Index<ApiCodeBlock> blocks)
+            => new ApiCodeset(location, blocks);
+
         public static IApiHexWriter writer(IWfShell wf, FS.FilePath dst)
             => new ApiHexWriter(dst);
 
         public static IApiHexReader reader(IWfShell wf)
             => ApiHexReader.create(wf);
 
-        public static void emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            if(count != 0)
-                Records.emit(src, dst);
-        }
-
-        public static void emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst, bool append)
-        {
-            var count = src.Length;
-            if(count == 0)
-                return;
-
-            var flow = wf.EmittingTable<ApiHexRow>(dst);
-            var buffer = alloc<ApiHexRow>(count);
-            ref var row = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                row.Seq = i;
-                row.SourceSeq = i;
-                row.Address = block.BaseAddress;
-                row.Length = block.Code.Length;
-                row.Uri = block.Uri;
-                row.Data = block.Code;
-            }
-
-            var emitted = Records.emit(@readonly(buffer), dst);
-            wf.EmittedTable(flow, emitted);
-        }
+        public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
+            => src.Length != 0 ? Records.emit(src,dst) : 0;
 
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
-            if(count == 0)
-                wf.Warn($"No {uri} records were provided");
-
             if(count != 0)
             {
                 var content = rows(uri, src);
+                var hexpath = wf.Db().ApiHexFile(uri);
                 if(content.Length != count)
                     wf.Error($"The distilled row count of {content.Length} does not match the input count of {count}");
                 else
                 {
-                    var a = wf.Db().ApiHexFile(uri);
-                    var fa = wf.EmittingTable<ApiHexRow>(a);
-                    emit(content, a);
+                    var fa = wf.EmittingTable<ApiHexRow>(hexpath);
+                    emit(content, hexpath);
                     wf.EmittedTable(fa,count);
 
                     var b = wf.Db().ParsedExtractFile(uri);
@@ -78,7 +51,7 @@ namespace Z0
                 return content;
             }
             else
-                return Index<ApiHexRow>.Empty;
+                return sys.empty<ApiHexRow>();
         }
 
         [Op]

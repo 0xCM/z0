@@ -27,14 +27,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public CodeBlock(MemoryAddress src, byte[] data)
         {
-            BaseAddress = root.require(src, x => x.IsNonEmpty);
-            Code = new BinaryCode(root.require(data));
+            BaseAddress = src;
+            Code = new BinaryCode(data ?? sys.empty<byte>());
         }
 
         [MethodImpl(Inline)]
         public CodeBlock(MemoryAddress src, BinaryCode code)
         {
-            BaseAddress = root.require(src, x => x.IsNonEmpty);
+            BaseAddress = src;
             Code = code;
         }
 

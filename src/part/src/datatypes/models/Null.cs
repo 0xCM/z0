@@ -16,6 +16,8 @@ namespace Z0
 
         public const string Label = "null";
 
+        public const string Indicator = "!!null!!";
+
         public const string NullField = Identifier + nameof(NullField) + Identifier;
 
         public const string NullMethod = Identifier + nameof(NullMethod) + Identifier;

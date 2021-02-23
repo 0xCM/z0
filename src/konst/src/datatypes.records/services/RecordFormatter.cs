@@ -54,6 +54,7 @@ namespace Z0
 
             return dst.Emit();
         }
+
         public string FormatHeader()
             => FormatSpec.Header.Format();
     }

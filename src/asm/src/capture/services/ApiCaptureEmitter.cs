@@ -20,11 +20,14 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
+        readonly CilEmitter CilSvc;
+
         public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
             Host = WfShell.host(nameof(ApiCaptureEmitter));
             Wf = wf.WithHost(Host);
             Asm = asm;
+            CilSvc = CilEmitter.create(Wf);
         }
 
         public AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -57,9 +60,8 @@ namespace Z0
         {
             if(src.Count != 0)
             {
-                var emitter = CilEmitter.create(Wf);
-                emitter.EmitCilCode(src, Wf.Db().CilCodeFile(host));
-                emitter.EmitCilData(src, Wf.Db().CilDataFile(host));
+                CilSvc.EmitCilCode(src, Wf.Db().CilCodeFile(host));
+                CilSvc.EmitCilData(src, Wf.Db().CilDataFile(host));
             }
 
             return src.Count;

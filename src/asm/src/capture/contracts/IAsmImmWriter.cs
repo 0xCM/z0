@@ -31,6 +31,6 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        Option<FS.FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined);
+        ApiCodeset SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append, bool refined);
     }
 }

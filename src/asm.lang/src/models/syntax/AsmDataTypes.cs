@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     partial struct AsmSyntax
     {
-        public readonly struct AsmByte : IAsmDataType<AsmByte>
+        public readonly struct Byte : IAsmDataType<Byte>
         {
             public AsmSizeQualifier Kind => SQ.Byte;
 
@@ -58,5 +58,4 @@ namespace Z0.Asm
             public Name Name => N.ZmmWord;
         }
     }
-
 }
