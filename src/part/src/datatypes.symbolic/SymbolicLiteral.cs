@@ -4,31 +4,56 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    /// <summary>
+    /// Defines a symbolized literal
+    /// </summary>
     [Record(TableId)]
     public struct SymbolicLiteral : IComparableRecord<SymbolicLiteral>
     {
         public const string TableId = "symbolic.literals";
 
+        /// <summary>
+        /// The component that defines the literal
+        /// </summary>
         public Name Component;
 
-        public Name Type;
+        /// <summary>
+        /// The literal's declaring type
+        /// </summary>
+        public Identifier Type;
 
+        /// <summary>
+        /// The container-relative declaration order of the literal
+        /// </summary>
+        public ushort Position;
+
+        /// <summary>
+        /// The literal name
+        /// </summary>
+        public Identifier Name;
+
+        /// <summary>
+        /// A global identifier
+        /// </summary>
+        public Name UniqueName;
+
+        /// <summary>
+        /// The literal's primitive classifier
+        /// </summary>
         public ClrPrimalKind DataType;
 
-        public ushort LiteraIndex;
+        /// <summary>
+        /// The encoded literal, possibly an invariant address to a string resource
+        /// </summary>
+        public ulong EncodedValue;
 
-        public Name LiteralName;
-
-        public ulong ScalarValue;
-
-        public MemoryAddress NameAddress;
-
-        public MemoryAddress TypeAddress;
-
-        static string Identifier(in SymbolicLiteral src)
-            => text.format(RP.SlotDot3, src.Component, src.Type, src.LiteraIndex);
-
+        [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral src)
-            => Identifier(this).CompareTo(Identifier(src));
+            => UniqueName.Content.CompareTo(src.UniqueName);
     }
 }

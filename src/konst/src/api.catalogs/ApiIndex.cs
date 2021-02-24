@@ -9,8 +9,8 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiIndex
     {
-        public static IApiIndex service(IWfShell wf)
-            => ApiIndexService.create(wf);
+        public static IApiHexIndex service(IWfShell wf)
+            => ApiHexIndex.create(wf);
 
         [Op]
         public static ApiIndexMetrics metrics(ApiCodeBlocks src)

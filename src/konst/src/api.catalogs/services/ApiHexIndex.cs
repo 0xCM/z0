@@ -13,8 +13,8 @@ namespace Z0
 
     using api = ApiIndex;
 
-    [Service(typeof(IApiIndex))]
-    public class ApiIndexService : WfService<ApiIndexService,IApiIndex>, IApiIndex
+    [Service(typeof(IApiHexIndex))]
+    public class ApiHexIndex : WfService<ApiHexIndex,IApiHexIndex>, IApiHexIndex
     {
         public ApiCodeBlocks Product;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         Dictionary<OpUri,ApiCodeBlock> Locations;
 
-        public ApiIndexService()
+        public ApiHexIndex()
         {
             CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
             UriAddress = root.dict<MemoryAddress,OpUri>();

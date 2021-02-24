@@ -11,31 +11,45 @@ namespace Z0
 
     public struct SymbolicLiteral<E> : IComparableRecord<SymbolicLiteral<E>>
     {
-        public ushort Index;
-
+        /// <summary>
+        /// The component that defines the literal
+        /// </summary>
         public Name Component;
 
-        public Name Type;
+        /// <summary>
+        /// The literal's declaring type
+        /// </summary>
+        public Identifier Type;
 
+        /// <summary>
+        /// The container-relative declaration order of the literal
+        /// </summary>
+        public ushort Position;
+
+        /// <summary>
+        /// The literal name
+        /// </summary>
+        public Identifier Name;
+
+        /// <summary>
+        /// A global identifier
+        /// </summary>
+        public Identifier UniqueName;
+
+        /// <summary>
+        /// The literal's primitive classifier
+        /// </summary>
         public ClrPrimalKind DataType;
 
-        public Name Name;
+        /// <summary>
+        /// The encoded literal, possibly an invariant address to a string resource
+        /// </summary>
+        public ulong EncodedValue;
 
-        public ulong ScalarValue;
-
-        public E LiteralValue;
-
-        public Identifier Identity
-            => text.format(RP.SlotDot3, Component, Type, Index);
+        public E DirectValue;
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Name;
-
-        public override string ToString()
-            => Format();
-
         public int CompareTo(SymbolicLiteral<E> src)
-            => Identity.CompareTo(src.Identity);
+            => UniqueName.CompareTo(src.UniqueName);
     }
 }

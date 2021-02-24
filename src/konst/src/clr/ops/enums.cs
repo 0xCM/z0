@@ -79,11 +79,9 @@ namespace Z0
                 row.Component = asmName;
                 row.Type = type.Name;
                 row.DataType = kind;
-                row.LiteraIndex = (ushort)i;
-                row.LiteralName = f.Name;
-                row.ScalarValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
-                row.NameAddress = memory.address(f.Name);
-                row.TypeAddress = typeAddress;
+                row.Position = (ushort)i;
+                row.Name = f.Name;
+                row.EncodedValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
             }
         }
     }

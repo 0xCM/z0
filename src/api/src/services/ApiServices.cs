@@ -18,19 +18,24 @@ namespace Z0
         public Index<DataType> DataTypes()
             => Z0.DataTypes.search(Wf.Components);
 
-        public IApiIndex IndexService()
-            => ApiIndexService.create(Wf);
+        public IApiHexIndex HexIndexService()
+            => ApiHexIndex.create(Wf);
 
-        public Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src)
+        public BasedApiMemberCatalog RebaseMembers()
         {
-            var dst = Db.IndexTable<ApiAddressRecord>();
-            Wf.Status($"Summarizing {src.MemberCount} members");
-            var summaries = Summarize(src.Base, src.Members.View);
-            Wf.Status($"Summarized {summaries.Count} members");
-            var emitting = Wf.EmittingTable<ApiAddressRecord>(dst);
-            var emitted = Records.emit<ApiAddressRecord>(summaries, dst);
-            Wf.EmittedTable<ApiAddressRecord>(emitting, emitted, dst);
-            return summaries;
+            var jitter = ApiJit();
+            var members = jitter.JitApi();
+            return RebaseMembers(members);
+        }
+
+        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src)
+        {
+            var dst = Db.IndexTable<ApiCatalogRecord>(root.timestamp().Format());
+            var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
+            var records = CatalogRecords(src.Base, src.Members.View);
+            var count = Records.emit<ApiCatalogRecord>(records, dst, 16);
+            Wf.EmittedTable<ApiCatalogRecord>(flow, count, dst);
+            return new BasedApiMemberCatalog(dst, src, records);
         }
 
         public void EmitApiClasses()
@@ -38,35 +43,18 @@ namespace Z0
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
             var service = ApiCatalogs.classes(Wf);
-            var formatter = Records.formatter<SymbolicLiteral>();
+            var formatter = Z0.Records.formatter<SymbolicLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);
-            var count = Records.emit(literals,dst);
+            var count = Records.emit(literals, dst);
             Wf.EmittedTable(flow, count);
         }
 
-        [Op]
-        Index<ApiAddressRecord> Summarize(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
+        void EmitSymbolicLiterals(IWfShell wf)
         {
-            var count = members.Length;
-            var buffer = alloc<ApiAddressRecord>(count);
-            ref var dst = ref first(buffer);
-            var rebase = first(members).BaseAddress;
-            for(uint seq=0; seq<count; seq++)
-            {
-                ref var record = ref seek(dst,seq);
-                ref readonly var member = ref skip(members, seq);
-                record.Sequence = seq;
-                record.ProcessBase = @base;
-                record.MemberBase = member.BaseAddress;
-                record.MemberOffset = member.BaseAddress - @base;
-                record.MemberRebase = member.BaseAddress - rebase;
-                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
-                record.HostName = member.Host.Name;
-                record.PartName = member.Host.Owner.Format();
-                record.Identifier = member.Id;
-            }
-            return buffer;
+            var target = Db.IndexTable(SymbolicLiteral.TableId);
+            var components = wf.Components;
+            EmitSymbolicLiterals(wf.Components, target);
         }
 
         public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
@@ -115,11 +103,28 @@ namespace Z0
             return dst;
         }
 
-        void EmitSymbolicLiterals(IWfShell wf)
+        [Op]
+        Index<ApiCatalogRecord> CatalogRecords(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
-            var target = Db.IndexTable(SymbolicLiteral.TableId);
-            var components = wf.Components;
-            EmitSymbolicLiterals(wf.Components, target);
+            var count = members.Length;
+            var buffer = alloc<ApiCatalogRecord>(count);
+            ref var dst = ref first(buffer);
+            var rebase = first(members).BaseAddress;
+            for(uint seq=0; seq<count; seq++)
+            {
+                ref var record = ref seek(dst,seq);
+                ref readonly var member = ref skip(members, seq);
+                record.Sequence = seq;
+                record.ProcessBase = @base;
+                record.MemberBase = member.BaseAddress;
+                record.MemberOffset = member.BaseAddress - @base;
+                record.MemberRebase = (uint)(member.BaseAddress - rebase);
+                record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
+                record.HostName = member.Host.Name;
+                record.PartName = member.Host.Owner.Format();
+                record.OpId = member.Id;
+            }
+            return buffer;
         }
     }
 }

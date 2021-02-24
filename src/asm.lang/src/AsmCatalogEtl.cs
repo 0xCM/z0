@@ -29,7 +29,7 @@ namespace Z0.Asm
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
-            MnemonicCodes = Lookups.entries<AsmMnemonicCode>();
+            MnemonicCodes = SymbolTables.entries<AsmMnemonicCode>();
         }
 
         public uint ImportRowCount {get; private set;}

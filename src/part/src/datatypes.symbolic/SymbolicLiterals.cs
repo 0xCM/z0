@@ -12,6 +12,7 @@ namespace Z0
 
     public readonly struct SymbolicLiterals
     {
-
+        public static Name identity(Name component, Name type, ushort position, Name name)
+            => text.format(RP.SlotDot4, component, type, position, name);
     }
 }

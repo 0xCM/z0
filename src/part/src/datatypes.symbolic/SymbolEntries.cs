@@ -11,7 +11,6 @@ namespace Z0
     using static Part;
 
     public readonly struct SymbolEntries<E>
-        where E : unmanaged
     {
         readonly Index<SymbolEntry<E>> Data;
 

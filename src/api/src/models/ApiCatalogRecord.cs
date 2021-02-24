@@ -5,9 +5,9 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct ApiAddressRecord : IRecord<ApiAddressRecord>
+    public struct ApiCatalogRecord : IRecord<ApiCatalogRecord>
     {
-        public const string TableId = "api.address";
+        public const string TableId = "api.catalog";
 
         public uint Sequence;
 
@@ -17,7 +17,7 @@ namespace Z0
 
         public MemoryAddress MemberOffset;
 
-        public MemoryAddress MemberRebase;
+        public Address32 MemberRebase;
 
         public ByteSize MaxSize;
 
@@ -25,6 +25,6 @@ namespace Z0
 
         public Name HostName;
 
-        public OpIdentity Identifier;
+        public OpIdentity OpId;
     }
 }

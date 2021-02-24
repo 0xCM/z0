@@ -19,7 +19,7 @@ namespace Z0
         readonly Span<T> Values;
 
         [MethodImpl(Inline)]
-        internal HexLookup(Span<T> src)
+        public HexLookup(Span<T> src)
             => Values = src;
 
         [MethodImpl(Inline)]

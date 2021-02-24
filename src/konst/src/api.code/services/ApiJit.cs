@@ -56,7 +56,6 @@ namespace Z0
         {
             RuntimeHelpers.PrepareDelegate(src.Operation);
             return ClrDynamic.pointer(src);
-            //return ClrDynamic.pointer(src, ClrDynamic.pointer(src.Target));
         }
 
         [MethodImpl(Inline)]
@@ -74,12 +73,7 @@ namespace Z0
             var all = root.list<ApiMembers>();
             var total = 0u;
             foreach(var part in parts)
-            {
-                var subflow = Wf.Running(Msg.JittingPart.Format(part.Id));
-                var partMembers = Jit(part);
-                all.Add(partMembers);
-                Wf.Ran(subflow, Msg.JittedPart.Format(partMembers.Length, part.Id));
-            }
+                all.Add(Jit(part));
 
             var members = new BasedApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
             Wf.Ran(flow, Msg.JittedParts.Format(members.MemberCount, parts.Length));
@@ -109,15 +103,18 @@ namespace Z0
 
         public ApiMembers Jit(IPart src)
         {
+            var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var dst = root.list<ApiMember>();
             var catalog = ApiCatalogs.PartCatalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 
-            foreach(var t in types.Storage)
+            foreach(var t in types)
                 dst.AddRange(Jit(t));
-            foreach(var h in hosts.Storage)
-                dst.AddRange(Jit(h).Storage);
+            foreach(var h in hosts)
+                dst.AddRange(Jit(h));
+
+            Wf.Ran(flow, Msg.JittedPart.Format(dst.Count, src.Id));
 
             return dst.ToArray();
         }

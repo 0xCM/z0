@@ -36,7 +36,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             base.OnInit();
-            Dataset = AsmServices.create(Wf).IndexDecoder().Decode(ApiIndexService.create(Wf).IndexApiBlocks());
+            Dataset = AsmServices.create(Wf).IndexDecoder().Decode(ApiHexIndex.create(Wf).IndexApiBlocks());
         }
 
         ApiCodeBlocks Blocks => Dataset.Blocks;

@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-
-    using static Part;
 
     public interface IApiServices : IWfService
     {
         IApiJit ApiJit();
 
-        IApiIndex IndexService();
+        IApiHexIndex HexIndexService();
 
-        Index<ApiAddressRecord> EmitCatalog(BasedApiMembers src);
+        BasedApiMemberCatalog RebaseMembers(BasedApiMembers src);
+
+        BasedApiMemberCatalog RebaseMembers();
 
         void EmitApiClasses();
 

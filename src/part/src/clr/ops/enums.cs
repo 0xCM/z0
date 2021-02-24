@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [Op]
-        public static ulong unbox(ClrPrimalKind kind, object src)
+        public static ulong encode(ClrPrimalKind kind, object src)
             => kind switch {
                 EC.U8 => (ulong)(byte)src,
                 EC.I8 => (ulong)(sbyte)src,
@@ -63,11 +63,10 @@ namespace Z0
                 row.Component = simple;
                 row.Type = type.Name;
                 row.DataType = kind;
-                row.LiteraIndex = (ushort)i;
-                row.LiteralName = f.Name;
-                row.ScalarValue = unbox(kind, f.GetRawConstantValue());
-                row.NameAddress = memory.address(f.Name);
-                row.TypeAddress = typeAddress;
+                row.Position = (ushort)i;
+                row.Name = f.Name;
+                row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
+                row.EncodedValue = encode(kind, f.GetRawConstantValue());
             }
         }
 
@@ -83,13 +82,14 @@ namespace Z0
             {
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
-                row.Index = (ushort)i;
+                row.Position = (ushort)i;
                 row.Component = simple;
                 row.Type = type.Name;
                 row.DataType = kind;
                 row.Name = f.Name;
-                row.LiteralValue = (E)f.GetRawConstantValue();
-                row.ScalarValue = unbox(kind, row.LiteralValue);
+                row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
+                row.DirectValue = (E)f.GetRawConstantValue();
+                row.EncodedValue = encode(kind, row.DirectValue);
             }
         }
     }

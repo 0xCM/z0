@@ -9,9 +9,28 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Part;
+    using static memory;
 
     public readonly struct SymbolTables
     {
+        public static SymbolEntries<E> entries<E>()
+            where E : unmanaged, Enum
+        {
+            var literals = ClrPrimitives.enums<E>();
+            var view = literals.View;
+            var count = view.Length;
+            var entries = memory.alloc<SymbolEntry<E>>(count);
+            ref var entry = ref memory.first(entries);
+            var index = new Dictionary<string,SymbolEntry<E>>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var literal = ref skip(view, i);
+                seek(entry, i) = new SymbolEntry<E>(i, literal);
+                index.Add(literal.Name, skip(entry, i));
+            }
+            return new SymbolEntries<E>(entries, index);
+        }
+
         public static SymbolTable<T> create<T>(Index<T> src, Action<string,Paired<uint,T>> error = null)
             => create<T>(src, t => t.ToString(), error);
 

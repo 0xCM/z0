@@ -8,22 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly struct SymbolEntry<E>
-        where E : unmanaged
     {
         public uint Index {get;}
 
         public string Key {get;}
 
-        public SymbolicLiteral<E> Value {get;}
+        SymbolicLiteral<E> Value {get;}
 
         [MethodImpl(Inline)]
-        public SymbolEntry(uint index, string key, SymbolicLiteral<E> value)
+        internal SymbolEntry(uint index, SymbolicLiteral<E> value)
         {
             Index = index;
-            Key = key;
+            Key = value.UniqueName;
             Value = value;
         }
 
@@ -33,16 +31,16 @@ namespace Z0
             get => Value.Name;
         }
 
-        public E Literal
+        public E DirectValue
         {
             [MethodImpl(Inline)]
-            get => Value.LiteralValue;
+            get => Value.DirectValue;
         }
 
-        public ulong Scalar
+        public ulong EncodedValue
         {
             [MethodImpl(Inline)]
-            get => Value.ScalarValue;
+            get => Value.EncodedValue;
         }
 
         public ClrPrimalKind DataType

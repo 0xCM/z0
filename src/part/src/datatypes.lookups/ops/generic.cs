@@ -12,6 +12,8 @@ namespace Z0
 
     partial struct Lookups
     {
+
+
         [MethodImpl(Inline)]
         static ref LookupEntry<K,V> generic<K,V>(in LookupEntry<byte,V> src)
             where K : unmanaged

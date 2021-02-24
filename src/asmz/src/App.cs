@@ -55,13 +55,12 @@ namespace Z0.Asm
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
-        void Jit()
-        {
-            var jitter = ApiServices.ApiJit();
-            var members = jitter.JitApi();
-            Wf.Status($"Jitted {members.MemberCount}");
-            var records = ApiServices.EmitCatalog(members);
-        }
+        // BasedApiMemberCatalog EmitBasedCatalog()
+        // {
+        //     var jitter = ApiServices.ApiJit();
+        //     var members = jitter.JitApi();
+        //     return ApiServices.RebaseMembers(members);
+        // }
 
         void EmitApiClasses()
             => ApiServices.EmitApiClasses();
@@ -74,7 +73,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var literal = ref skip(literals, i);
-                var format = string.Format(FormatPattern, literal.Index, literal.Scalar, literal.Name);
+                var format = string.Format(FormatPattern, literal.Index, literal.EncodedValue, literal.Name);
                 Wf.Row(format);
             }
         }
@@ -201,7 +200,7 @@ namespace Z0.Asm
         void CheckIndexDecoder()
         {
             var decoder = AsmServices.IndexDecoder();
-            var indexer = ApiServices.IndexService();
+            var indexer = ApiServices.HexIndexService();
             var blocks = indexer.IndexApiBlocks();
             var dataset = decoder.Decode(blocks);
         }
@@ -272,7 +271,10 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            //ShowMnemonicLiterals();
+            //EmitBasedCatalog();
+            ApiServices.RebaseMembers();
+            ApiServices.RebaseMembers();
+
             //ShowSpecifiers();
             //var clang = Clang.create(Wf);
             //Wf.Status(clang.print_targets().Format());
@@ -280,7 +282,7 @@ namespace Z0.Asm
             //ProcessCatalog();
             //CheckIndexDecoder();
 
-            var captured = RunCapture(typeof(math));
+            //var captured = RunCapture(typeof(math));
         }
 
         public static void Main(params string[] args)

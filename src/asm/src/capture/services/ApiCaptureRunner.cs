@@ -18,6 +18,8 @@ namespace Z0
 
         readonly IAppContext App;
 
+        readonly IApiServices Api;
+
         readonly PartId[] Parts;
 
         internal ApiCaptureRunner(IWfShell wf, IAsmContext asm)
@@ -27,6 +29,7 @@ namespace Z0
             App = asm.ContextRoot;
             Asm = asm;
             Parts = Wf.Api.PartIdentities;
+            Api = wf.ApiServices();
             Wf.Created();
         }
 
@@ -42,6 +45,7 @@ namespace Z0
             RunPrimary();
             RunImm();
             RunEvaluate();
+            RebaseMembers();
             EmitDump();
         }
 
@@ -68,6 +72,13 @@ namespace Z0
             var flow = Wf.Running("Evaluator");
             var evaluate = Evaluate.control(Wf, App.Random, Wf.Paths.AppCaptureRoot, Pow2.T14);
             evaluate.Execute();
+            Wf.Ran(flow);
+        }
+
+        void RebaseMembers()
+        {
+            var flow = Wf.Running();
+            Api.RebaseMembers();
             Wf.Ran(flow);
         }
 

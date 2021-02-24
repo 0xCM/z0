@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         public string Identifier {get;}
 
-       /// <summary>
+        /// <summary>
         /// The unqualified operation name
         /// </summary>
         public string Name {get;}

@@ -15,7 +15,7 @@ namespace Z0
 
         //const string Pattern = "yyyyMMdd.HH.mm.ss.ffff";
 
-        const string Pattern = "yyyy-MM-dd HH.mm.ss.ffff";
+        const string Pattern = "yyyy-MM-dd.HH.mm.ss.ffff";
 
         [MethodImpl(Inline)]
         public Timestamp(ulong ticks)

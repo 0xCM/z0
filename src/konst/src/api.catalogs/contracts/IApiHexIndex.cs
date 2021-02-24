@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiIndex : IWfService
+    public interface IApiHexIndex : IWfService
     {
         ApiCodeBlocks IndexApiBlocks();
     }

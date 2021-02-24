@@ -10,20 +10,20 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Hex
+    partial struct Lookups
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HexLookup<Hex5Seq,T> lookup<T>(N5 n, HexLookupEntry<Hex5Seq,T>[] src)
+        public static HexLookup<Hex5Seq,T> hex<T>(N5 n, HexLookupEntry<Hex5Seq,T>[] src)
             where T : struct
-                => lookup<Hex5Seq,T>(src, sys.alloc<T>(32));
+                => hex<Hex5Seq,T>(src, sys.alloc<T>(32));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HexLookup<Hex8Seq,T> lookup<T>(N8 n, HexLookupEntry<Hex8Seq,T>[] src)
+        public static HexLookup<Hex8Seq,T> hex<T>(N8 n, HexLookupEntry<Hex8Seq,T>[] src)
             where T : struct
-                => lookup<Hex8Seq,T>(src, sys.alloc<T>(256));
+                => hex<Hex8Seq,T>(src, sys.alloc<T>(256));
 
         [MethodImpl(Inline)]
-        public static HexLookup<K,T> lookup<K,T>(Func<T,K> f, T[] src, T[] dst)
+        public static HexLookup<K,T> hex<K,T>(Func<T,K> f, T[] src, T[] dst)
             where T : struct
             where K : unmanaged, Enum
         {
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The values to correlate</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        public static HexLookup<K,T> lookup<K,T>(HexLookupEntry<K,T>[] src)
+        public static HexLookup<K,T> hex<K,T>(HexLookupEntry<K,T>[] src)
             where T : struct
             where K : unmanaged, Enum
         {
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The values to correlate</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline)]
-        static HexLookup<K,T> lookup<K,T>(HexLookupEntry<K,T>[] src, T[] dst)
+        static HexLookup<K,T> hex<K,T>(HexLookupEntry<K,T>[] src, T[] dst)
             where T : struct
             where K : unmanaged, Enum
         {

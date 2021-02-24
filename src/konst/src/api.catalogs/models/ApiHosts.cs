@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static memory;
 
     using api = ApiCatalogs;
 
-    public readonly struct ApiHosts : IIndexedView<ApiHosts,uint,IApiHost>
+    public readonly struct ApiHosts : IIndex<IApiHost>
     {
-        readonly IApiHost[] Data;
+        readonly Index<IApiHost> Data;
 
         [MethodImpl(Inline)]
         public ApiHosts(IApiHost[] src)
@@ -23,25 +22,31 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)(Data?.Length ?? 0);
+            get => Data.Count;
+        }
+
+        public Span<IApiHost> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
         }
 
         public ReadOnlySpan<IApiHost> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
-        public ref readonly IApiHost First
+        public ref IApiHost First
         {
             [MethodImpl(Inline)]
-            get => ref Data[0];
+            get => ref Data.First;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Count == 0;
+            get => Data.IsEmpty;
         }
 
         public IApiHost[] Storage

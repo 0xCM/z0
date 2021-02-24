@@ -164,6 +164,12 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
 
+        string TableId(Type t)
+            => t.Tag<RecordAttribute>().MapValueOrElse(a => a.TableId, () => t.Name);
+
+        string TableId<T>()
+            => TableId(typeof(T));
+
         FS.FilePath Table(string id, PartId part)
             => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
 
@@ -203,6 +209,13 @@ namespace Z0
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
             => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
 
+        FS.FolderPath IndexDir(Type t)
+            => IndexRoot() + FS.folder(TableId(t));
+
+        FS.FolderPath IndexDir<T>()
+            where T : struct, IRecord<T>
+                => IndexRoot() + FS.folder(TableId<T>());
+
         FS.FilePath IndexTable(string id)
             => IndexRoot() + FS.file(id, DefaultTableExt);
 
@@ -212,6 +225,13 @@ namespace Z0
         FS.FilePath IndexTable<T>()
             where T : struct, IRecord<T>
                 => IndexTable(typeof(T));
+
+        FS.FilePath IndexTable(Type t, string discriminator)
+                => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
+
+        FS.FilePath IndexTable<T>(string discriminator)
+            where T : struct, IRecord<T>
+                => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);
 
         FS.FolderPath ListRoot()
             => Root + FS.folder(lists);
