@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     public class t_vperm2x128 : t_inx<t_vperm2x128>
     {

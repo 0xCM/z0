@@ -9,20 +9,21 @@ namespace Z0
 
     using static Part;
 
-    using api = EvalResults;
-
-    public struct CmpEval<T>
+    public struct UnaryEval<K,T>
     {
-        public ComparisonKind Kind;
+        public K Kind;
 
         public T A;
 
-        public T B;
+        public T Result;
+    }
 
-        public bit Result;
+    public struct UnaryEval<K,T,R>
+    {
+        public K Kind;
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryEval<ComparisonKind,T,bit>(CmpEval<T> src)
-            => api.binary(src.Kind, src.A, src.B, src.Result);
+        public T A;
+
+        public R Result;
     }
 }

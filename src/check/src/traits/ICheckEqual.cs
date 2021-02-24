@@ -14,16 +14,16 @@ namespace Z0
 
     public interface ICheckEqual : IClaimValidator
     {
-        void Eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void Eq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            if(!object.Equals(lhs,rhs))
-                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+            if(!object.Equals(a,b))
+                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
-        void Neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void Neq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
-            if(object.Equals(lhs,rhs))
-                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+            if(object.Equals(a,b))
+                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
     }
 }

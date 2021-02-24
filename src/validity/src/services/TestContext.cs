@@ -210,22 +210,22 @@ namespace Z0
         protected FS.FilePath UnitPath(FS.FileName name)
             => UnitDataDir + name;
 
-        protected StreamWriter UnitWriter(FS.FileName filename)
-            => UnitPath(filename).Writer();
+        protected StreamWriter UnitWriter(FS.FileName filename, bool append = false)
+            => UnitPath(filename).Writer(append);
 
         [MethodImpl(Inline)]
-        protected FS.FilePath CasePath(FS.FileExt ext, [CallerMemberName] string caller = null)
-            => UnitPath(FS.file(caller,  ext));
+        protected FS.FilePath CasePath(FS.FileExt ext, [CallerMemberName] string caller = null, bool append = false)
+            => UnitPath(FS.file(caller, ext));
 
         [MethodImpl(Inline)]
         protected FS.FilePath CasePath(string CaseName, FS.FileExt? ext = null)
             => UnitPath(FS.file(CaseName, ext ?? FS.ext("csv")));
 
-        protected StreamWriter CaseWriter(FS.FileExt ext, [Caller] string caller = null)
-            => CasePath(caller, ext).Writer();
+        protected StreamWriter CaseWriter(FS.FileExt ext, [Caller] string caller = null, bool append = false)
+            => CasePath(caller, ext).Writer(append);
 
-        protected StreamWriter CaseWriter(string CaseName, FS.FileExt? ext = null)
-            => CasePath(CaseName, ext).Writer();
+        protected StreamWriter CaseWriter(string CaseName, FS.FileExt? ext = null, bool append = false)
+            => CasePath(CaseName, ext).Writer(append);
 
         protected BenchmarkRecord Benchmark(long opcount, Duration time, [Caller] string label = null)
             => Context.Benchmark(opcount, time, label);

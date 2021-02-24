@@ -18,7 +18,7 @@ namespace Z0.Asm
     using static CreditTypes.ContentNumber;
     using static CreditTypes.ContentType;
 
-    public class t_docref : t_asmd<t_docref>
+    public class t_docref : t_asm<t_docref>
     {
         public void t_component_encode()
         {

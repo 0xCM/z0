@@ -247,21 +247,6 @@ namespace Z0
                 EmitEnums.create().Run(Wf, src[i]);
         }
 
-        public void Run93()
-        {
-            Run89(Parts.Konst.Assembly, Parts.Asm.Assembly);
-
-            var alt = Capture.alt(Wf, Asm);
-            var blocks = alt.Capture(typeof(Switch16));
-            var count = blocks.Length;
-            Wf.Row((Count)count);
-
-            for(var i=0; i<count; i++)
-            {
-
-            }
-        }
-
         public void Run233()
         {
             var src = @readonly(Resources.strings<uint>(typeof(EnvVarNames)));

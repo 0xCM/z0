@@ -12,7 +12,7 @@ namespace Z0.Asm
     {
         public readonly OpIdentity Id;
 
-        public readonly CapturedCodeBlock DataFlow;
+        public readonly CapturedCodeBlock Code;
 
         public readonly CaptureOutcome Outcome;
 
@@ -21,7 +21,7 @@ namespace Z0.Asm
         {
             Id = id;
             Outcome = info;
-            DataFlow = encoded;
+            Code = encoded;
         }
     }
 }

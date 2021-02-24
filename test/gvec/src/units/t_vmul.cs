@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     public class tv_mul : t_inx<tv_mul>
     {

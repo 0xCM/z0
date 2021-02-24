@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_vnonz : t_inx<t_vnonz>
     {
         public void vnonz_check()
         {
-            vnonz_check(n128);
-            vnonz_check(n256);
+            vnonz_check(w128);
+            vnonz_check(w256);
         }
 
         void vnonz_check(N128 w)
@@ -41,12 +40,12 @@ namespace Z0
             vnonz_check(w,z64);
         }
 
-        protected void vnonz_check<T>(N128 w, T t = default)
+        protected void vnonz_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var min = one(t);
+            var min = Numeric.one<T>();
             var max = Numeric.maxval(t);
-            var domain = Interval.closed(one(t), Numeric.maxval(t));
+            var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
             var f = VSvc.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero(w,t)));
@@ -55,12 +54,12 @@ namespace Z0
                 Claim.Require(f.Invoke(Random.CpuVector(w, domain)));
         }
 
-        protected void vnonz_check<T>(N256 w, T t = default)
+        protected void vnonz_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var min = one(t);
+            var min = Numeric.one<T>();
             var max = Numeric.maxval(t);
-            var domain = Interval.closed(one(t), Numeric.maxval(t));
+            var domain = Interval.closed(Numeric.one<T>(), Numeric.maxval<T>());
             var f = VSvc.vnonz(w,t);
 
             Claim.nea(gcpu.vnonz(gcpu.vzero<T>(w)));

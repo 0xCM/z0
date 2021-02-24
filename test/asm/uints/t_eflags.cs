@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
     using static z;
 
-    public class t_eflags : t_asmd<t_eflags>
+    public class t_eflags : t_asm<t_eflags>
     {
         public void modrm_encode()
         {

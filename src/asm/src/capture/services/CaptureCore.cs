@@ -31,8 +31,8 @@ namespace Z0.Asm
             try
             {
                 var summary = capture(exchange, src.Id, src.BaseAddress);
-                var size = summary.DataFlow.Length;
-                var code = new ApiCaptureBlock(src.Id, src.Method, summary.DataFlow.Input, summary.DataFlow.Output, summary.Outcome.TermCode);
+                var size = summary.Code.Length;
+                var code = new ApiCaptureBlock(src.Id, src.Method, summary.Code.Input, summary.Code.Output, summary.Outcome.TermCode);
                 return new ApiMemberCapture(src, code);
             }
             catch(Exception e)
@@ -49,7 +49,7 @@ namespace Z0.Asm
                 var address = ApiJit.jit(src);
                 var summary = capture(exchange, id, address);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
+                var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
                 Demands.insist(address, captured.BaseAddress);
                 return captured;
             }
@@ -67,7 +67,7 @@ namespace Z0.Asm
                 var pSrc = ApiJit.jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new ApiCaptureBlock(id, src.Source, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
+                var captured = new ApiCaptureBlock(id, src.Source, summary.Code.Input, summary.Code.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return captured;
             }
@@ -99,7 +99,7 @@ namespace Z0.Asm
                 var pSrc = ApiJit.jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
+                var captured = DefineMember(id, src, summary.Code, outcome.TermCode);
                 return captured;
             }
             catch(Exception e)

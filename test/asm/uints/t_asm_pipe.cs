@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
     using static memory;
@@ -46,22 +47,50 @@ namespace Z0.Asm
             check_unary_ops(mblocks);
         }
 
+        void log<F>(UnaryEval<UnaryOperatorClass,F> a, UnaryEval<UnaryOperatorClass,F> b, bit matched, StreamWriter dst)
+        {
+            dst.WriteLine($"f({a.A}) = {a.Result} | g({b.A}) = {b.Result} | {matched}");
+        }
+
         void check_unary_ops(ReadOnlySpan<ApiCodeBlock> src)
         {
+            using var writer = CaseWriter(FS.Extensions.Log);
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var code = ref skip(src,i);
+                var uri = code.OpUri;
                 if(ApiCode.arity(code) == 1)
                 {
+                    writer.WriteLine($"Validating {uri}");
                     if(ApiCode.accepts(code, NumericKind.U8))
-                        AsmCheck.CheckFixedMatch<Cell8>(K.unary(), code, code);
+                    {
+                        writer.WriteLine($"{uri} is an 8-bit unary operator");
+                        var results = AsmCheck.EvalEquality<Cell8>(K.unary(), code, code);
+                        root.iter(results,result => log(result.A, result.B, result.Result, writer));
+                    }
                     else if(ApiCode.accepts(code, NumericKind.U16))
-                        AsmCheck.CheckFixedMatch<Cell16>(K.unary(), code, code);
+                    {
+                        writer.WriteLine($"{uri} is a 16-bit unary operator");
+                        var results = AsmCheck.EvalEquality<Cell16>(K.unary(), code, code);
+                        root.iter(results,result => log(result.A, result.B, result.Result, writer));
+                    }
                     else if(ApiCode.accepts(code, NumericKind.U32))
-                        AsmCheck.CheckFixedMatch<Cell32>(K.unary(), code, code);
+                    {
+                        writer.WriteLine($"{uri} is a 32-bit unary operator");
+                        var results = AsmCheck.EvalEquality<Cell32>(K.unary(), code, code);
+                        root.iter(results,result => log(result.A, result.B, result.Result, writer));
+                    }
                     else if(ApiCode.accepts(code, NumericKind.U64))
-                        AsmCheck.CheckFixedMatch<Cell64>(K.unary(), code, code);
+                    {
+                        writer.WriteLine($"{uri} is a 64-bit unary operator");
+                        var results = AsmCheck.EvalEquality<Cell64>(K.unary(), code, code);
+                        root.iter(results,result => log(result.A, result.B, result.Result, writer));
+                    }
+                    else
+                    {
+                        writer.WriteLine($"{uri} form unrecognized");
+                    }
                 }
             }
         }

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vpatterns : t_inx<t_vpatterns>
     {
@@ -73,18 +73,18 @@ namespace Z0
 
         void vunits_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vunits(w,t), gcpu.vbroadcast(w, one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), gcpu.vbroadcast(w, Numeric.one<T>()));
 
         void vunits_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vunits(w,t), gcpu.vbroadcast(w, one(t)));
+                => CheckSVF.CheckPattern(VSvc.vunits(w,t), gcpu.vbroadcast(w, Numeric.one<T>()));
 
         void vones_check<T>(N128 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vones(w,t), gcpu.vbroadcast(w, ones(t)));
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), gcpu.vbroadcast(w, Numeric.ones<T>()));
 
         void vones_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckPattern(VSvc.vones(w,t), gcpu.vbroadcast(w, ones(t)));
+                => CheckSVF.CheckPattern(VSvc.vones(w,t), gcpu.vbroadcast(w, Numeric.ones<T>()));
    }
 }

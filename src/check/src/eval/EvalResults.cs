@@ -26,6 +26,26 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline)]
+        public static UnaryEval<K,T> unary<K,T>(K kind, T a, T result)
+        {
+            var dst = new UnaryEval<K,T>();
+            dst.Kind = kind;
+            dst.A = a;
+            dst.Result = result;
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static UnaryPairEval<K,T,R> pair<K,T,R>(UnaryEval<K,T> a, UnaryEval<K,T> b, R result)
+        {
+            var dst = new UnaryPairEval<K,T,R>();
+            dst.A = a;
+            dst.B = b;
+            dst.Result = result;
+            return dst;
+        }
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmpEval<T> eq<T>(T a, T b, bit equal)
         {
@@ -80,6 +100,5 @@ namespace Z0
             dst.Result = result;
             return dst;
         }
-
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    public class t_memstore : t_asmd<t_memstore>
+    public class t_memstore : t_asm<t_memstore>
     {
         public void read_ref_1()
         {

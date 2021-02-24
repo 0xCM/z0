@@ -25,6 +25,41 @@ namespace Z0
             root.iter(src, dst, check);
         }
 
+        static unsafe string format(ReadOnlySpan<char> src)
+        {
+            const string Buffer = "                                                                                                                                ";
+            var pDst = pchar(Buffer);
+            var pSrc = memory.gptr(first(src));
+            var count = Math.Min(src.Length, Buffer.Length);
+            for(var i=0; i<count; i++)
+                *pDst++ = *pSrc++;
+
+            return Buffer;
+        }
+
+        public unsafe void check_ref_data()
+        {
+            const string A = "abcdefghijklmnopqrstuvwxyz";
+
+            var src = A;
+            var r = StringRef.view(src);
+            Claim.eq(A.Length, r.Length);
+
+            for(var i=0; i<src.Length; i++)
+                Claim.eq(r[i], src[i]);
+        }
+
+        public void test_asci_format()
+        {
+            var a0 = AsciFormatter.format((asci2)"01");
+            var a1 = AsciFormatter.format((asci4)"1234");
+            var a2 = AsciFormatter.format((asci8)"abcdefg");
+            var a3 = AsciFormatter.format((asci16)"abcdefghijklmnop");
+            var a4 = AsciFormatter.format((asci32)"abcdefghijklmnopqrstuvwxyz");
+            var a5 = AsciFormatter.format((asci64)"abcdefghijklmnopqrstuvwxyzABCdDEghijklmnopqrstuvwxyz");
+            var a6 = AsciFormatter.format((asci64)"ABCdDEghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz");
+        }
+
         public void test_case_01()
         {
             var tc = default(AsciTestCase01);
@@ -77,7 +112,5 @@ namespace Z0
             // var a64c = asci.codes((sbyte)c0, (sbyte)asci64.Size);
             // Claim.yea(asci.eq(a64d,a64c));
         }
-
-
     }
 }

@@ -36,7 +36,7 @@ namespace Z0.Asm
         }
 
         protected StreamWriter AsmCaseWriter([Caller] string caller = null)
-            => CaseWriter(FS.Extensions.Asm,caller);
+            => CaseWriter(FS.Extensions.Asm, caller);
 
         protected BufferSeqId Main
             => BufferSeqId.Main;

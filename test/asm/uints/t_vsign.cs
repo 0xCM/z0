@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
-    using static Konst;
-    using static z;
 
     using D = CellDelegates;
 
@@ -21,7 +15,6 @@ namespace Z0
         public void check_vsign_8i()
         {
             var fp = memory.fptr<D.BinaryOp8>(add);
-            term.print(fp.P);
         }
     }
 }

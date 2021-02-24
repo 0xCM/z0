@@ -55,8 +55,8 @@ namespace Z0
             => new ApiCaptureEmitter(wf, asm);
 
         [MethodImpl(Inline), Op]
-        public static ICaptureAlt alt(IWfShell wf, IAsmContext asm)
-            => new CaptureAlt(wf, asm);
+        public static CaptureAlt alt(IWfShell wf, IAsmContext asm)
+            => CaptureAlt.create(wf);
 
         [Op]
         public static CaptureExchange exchange(IAsmContext context)

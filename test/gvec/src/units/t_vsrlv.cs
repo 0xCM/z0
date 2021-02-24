@@ -12,13 +12,10 @@ namespace Z0
 
     public class t_vsrlv : t_inx<t_vsrlv>
     {
-        public override bool Enabled
-            => true;
-
         public void vsrlv_check()
         {
-            vsrlv_check(n128);
-            vsrlv_check(n256);
+            vsrlv_check(w128);
+            vsrlv_check(w256);
         }
 
         void vsrlv_check(N128 w)
@@ -59,7 +56,7 @@ namespace Z0
         void vsrlv_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(z.zero(t), Numeric.force<uint,T>((uint)width<T>() - 1));
+            var domain = Interval.closed(default(T), Numeric.force<uint,T>((uint)width<T>() - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {
