@@ -272,8 +272,13 @@ namespace Z0.Asm
         public unsafe void Run()
         {
             //EmitBasedCatalog();
-            ApiServices.RebaseMembers();
-            ApiServices.RebaseMembers();
+            //ApiServices.RebaseMembers();
+            //ApiServices.RebaseMembers();
+            var entries = ApiServices.LoadRebaseEntries();
+            Wf.Status($"Loaded {entries.Length} entries");
+            var format = Records.formatFx<ApiCatalogRecord>();
+            var rows = entries.Select(format);
+            Wf.Rows(rows.Take(20).Array());
 
             //ShowSpecifiers();
             //var clang = Clang.create(Wf);

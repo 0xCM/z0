@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static System.StringSplitOptions;
 
     partial struct TextRules
     {
@@ -19,8 +20,8 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="sep">The delimiter</param>
             [Op]
-            public static Index<string> split(string src, char sep)
-                => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            public static Index<string> split(string src, char sep, bool clean = true)
+                => src.Split(sep,  clean ? RemoveEmptyEntries : None);
 
             /// <summary>
             /// Splits the string, removing empty entries
@@ -28,8 +29,8 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="sep">The delimiter</param>
             [Op]
-            public static Index<string> split(string src, string sep)
-                => src.Split(sep, StringSplitOptions.RemoveEmptyEntries);
+            public static Index<string> split(string src, string sep, bool clean = true)
+                => src.Split(sep, clean ? RemoveEmptyEntries : None);
         }
     }
 }

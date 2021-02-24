@@ -87,7 +87,7 @@ namespace Z0
             => new AppException(AppErrorMsg.GenericMethod(method,caller,file,line));
 
         [Op]
-        public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppException FileDoesNotExist(string path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppException(AppErrorMsg.FileDoesNotExist(path, caller, file, line));
 
         [Op]

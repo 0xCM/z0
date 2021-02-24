@@ -7,13 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial struct Records
+    public interface IOutcome : ITextual
     {
-        [MethodImpl(Inline)]
-        public static Rowset<T> rowset<T>(FS.FilePath location, T[] rows)
-            where T : struct, IRecord<T>
-                => new Rowset<T>(location,rows);
+        bool Ok {get;}
+
+        string Message {get;}
+    }
+
+    public interface IOutcome<T> : IOutcome
+    {
+        T Data {get;}
     }
 }

@@ -45,5 +45,16 @@ namespace Z0
             where E : unmanaged, Enum
             where T : struct, IRecord<T>
                 => formatter<T>(rowspec<T>(Enums.numeric<E,byte>()));
+
+        public static Func<T,string> formatFx<T>(byte? fieldwidth = null)
+            where T : struct, IRecord<T>
+        {
+            string fx(T input)
+            {
+                var formatter = Records.formatter<T>(fieldwidth ?? DefaultFieldWidth);
+                return formatter.Format(input);
+            }
+            return fx;
+        }
     }
 }

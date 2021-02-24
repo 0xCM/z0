@@ -7,15 +7,38 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
+    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
+
     using static Part;
 
     /// <summary>
     /// Defines a message that encapsulates application diagnostic/status/error message content
     /// </summary>
     [ApiHost(ApiNames.AppMsg, true)]
-    public partial class AppMsg : IAppMsg
+    public class AppMsg : IAppMsg
     {
         public AppMsgData Data {get;}
+
+        public static StatusMsg<T> status<T>(T data)
+            => new StatusMsg<T>(data);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsg called(object content, LogLevel kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new AppMsg(content, kind, (FlairKind)kind, caller, file, line);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsg error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => define($"{content} {caller} {line} {file}", LogLevel.Error);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsg error(Exception e)
+            => define(e.ToString(), LogLevel.Error);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsg babble(object content)
+            => new AppMsg(content, LogLevel.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsgSource source(string caller, string file, int? line)

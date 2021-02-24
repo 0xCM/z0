@@ -7,20 +7,27 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Parsers;
     using static Part;
 
-    public readonly struct Parser<T> : IParseFunction<T>
+    public readonly struct RowParser<T> : IRowParser<T>
+        where T : struct, IRecord<T>
     {
+        public char FieldDelimiter {get;}
+
         readonly ParseFunction<T> F;
 
         [MethodImpl(Inline)]
-        internal Parser(ParseFunction<T> f)
+        public RowParser(ParseFunction<T> f, char Delimiter)
         {
+            FieldDelimiter = Delimiter;
             F = f;
         }
 
-        [MethodImpl(Inline)]
-        public Outcome Parse(string src, out T dst)
+        public Outcome ParseHeader(string src, out RowHeader dst)
+            => RecordUtilities.ParseHeader(src, FieldDelimiter, out dst);
+
+        public Outcome ParseRow(string src, out T dst)
             => F(src, out dst);
     }
 }

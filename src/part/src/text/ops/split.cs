@@ -13,11 +13,11 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline)]
-        public static Index<string> split(string src, char sep)
-            => Parse.split(src, sep);
+        public static Index<string> split(string src, char sep, bool clean = true)
+            => Parse.split(src, sep, clean);
 
         [MethodImpl(Inline)]
-        public static Index<string> split(string src, string sep)
-            => Parse.split(src, sep);
+        public static Index<string> split(string src, string sep, bool clean = true)
+            => Parse.split(src, sep, clean);
     }
 }

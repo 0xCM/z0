@@ -9,25 +9,22 @@ namespace Z0
 
     using static Part;
 
-    partial struct Parsers
+    public readonly struct Parser<T,K> : IParseFunction<T,K>
+        where K : unmanaged
     {
-        public readonly struct Parser<T,K> : IParseFunction<T,K>
-            where K : unmanaged
+        readonly ParseFunction<T> F;
+
+        public K Kind {get;}
+
+        [MethodImpl(Inline)]
+        public Parser(ParseFunction<T> f, K kind)
         {
-            readonly ParseFunction<T> F;
-
-            public K Kind {get;}
-
-            [MethodImpl(Inline)]
-            internal Parser(ParseFunction<T> f, K kind)
-            {
-                F = f;
-                Kind = kind;
-            }
-
-            [MethodImpl(Inline)]
-            public bool Parse(string src, out T dst)
-                => F(src, out dst);
+            F = f;
+            Kind = kind;
         }
+
+        [MethodImpl(Inline)]
+        public Outcome Parse(string src, out T dst)
+            => F(src, out dst);
     }
 }

@@ -11,6 +11,36 @@ namespace Z0
 
     partial struct Addresses
     {
+        public static Outcome parse(string src, out MemoryAddress dst)
+        {
+            var attempt = HexNumericParser.parse(src);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                dst = MemoryAddress.Zero;
+                return false;
+            }
+        }
+
+        public static Outcome parse(string src, out Address32 dst)
+        {
+            var attempt = HexNumericParser.parse(src);
+            if(attempt)
+            {
+                dst = (uint)attempt.Value;
+                return true;
+            }
+            else
+            {
+                dst = (uint)MemoryAddress.Zero;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Defines a <see cref='RelativeAddress'/> offset with a specified offset
         /// </summary>

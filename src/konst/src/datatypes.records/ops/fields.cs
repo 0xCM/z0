@@ -9,10 +9,19 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static z;
+    using static memory;
+    using static TextRules;
 
     partial struct Records
     {
+        public static Index<string> fields(string src, char delimiter)
+        {
+            var input = text.trim(src);
+            var ix = Query.index(input, delimiter);
+            var normalized = ix != 0 ? text.slice(input, ix + 1) : input;
+            return text.split(normalized, delimiter);
+        }
+
         /// <summary>
         /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
         /// </summary>

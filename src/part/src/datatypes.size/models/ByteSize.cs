@@ -17,6 +17,21 @@ namespace Z0
     [Datatype]
     public readonly struct ByteSize : IDataType<ulong>
     {
+        public static Outcome parse(string src, out ByteSize dst)
+        {
+            var result = Numeric.parse<ulong>(src);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = 0;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Specifies a byte count
         /// </summary>

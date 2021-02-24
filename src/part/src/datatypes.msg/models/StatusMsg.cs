@@ -29,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(MsgId, Payload);
+            => string.Format("{0} | {1}", MsgId, Payload);
 
         public override string ToString()
             => Format();

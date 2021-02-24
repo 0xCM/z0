@@ -12,8 +12,10 @@ namespace Z0
     public readonly struct NumericParser<T> : ITextParser<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
         public ParseResult<T> Parse(string src)
             => Numeric.parse<T>(src);
+
+        public Outcome Parse(string src, out T dst)
+            => Numeric.parse<T>(src, out dst);
     }
 }

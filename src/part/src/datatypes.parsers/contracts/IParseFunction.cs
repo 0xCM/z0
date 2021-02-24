@@ -16,7 +16,7 @@ namespace Z0
 
     public interface IParseFunction<T> : IParseFunction
     {
-        bool Parse(string src, out T dst);
+        Outcome Parse(string src, out T dst);
 
         Type IParseFunction.TargetType
             => typeof(T);
@@ -28,5 +28,12 @@ namespace Z0
             dst = target;
             return result;
         }
+    }
+
+
+    public interface IParseFunction<T,K> : IParseFunction<T>
+        where K : unmanaged
+    {
+        K Kind {get;}
     }
 }

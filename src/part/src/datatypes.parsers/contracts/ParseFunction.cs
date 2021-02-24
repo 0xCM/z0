@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct Parsers
-    {
-        public delegate bool ParseFunction<T>(string src, out T dst);
-    }
+    public delegate Outcome ParseFunction<T>(string src, out T dst);
+
+    public delegate Outcome ParseFunction<S,T>(in S src, out T dst);
+
 }

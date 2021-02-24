@@ -28,12 +28,6 @@ namespace Z0
             Formatter = formatter;
         }
 
-        public void Dispose()
-        {
-            Writer?.Flush();
-            Writer?.Dispose();
-        }
-
         public void EmitHeader()
         {
             Writer.WriteLine(Formatter.FormatHeader());
@@ -48,6 +42,12 @@ namespace Z0
         {
             for(var i=0; i<src.Length; i++)
                 Writer.WriteLine(Formatter.Format(skip(src,i)));
+        }
+
+        public void Dispose()
+        {
+            Writer?.Flush();
+            Writer?.Dispose();
         }
     }
 }

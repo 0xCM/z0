@@ -7,17 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public interface IOutcome : ITextual
+    partial struct Records
     {
-        bool Ok {get;}
-
-        string Message {get;}
-    }
-
-    public interface IOutcome<T> : IOutcome
-    {
-        T Data {get;}
+        [MethodImpl(Inline)]
+        public static Report<T> report<T>(Index<T> rows, FS.FilePath location)
+            where T : struct, IRecord<T>
+                => new Report<T>(rows,location);
     }
 }

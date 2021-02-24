@@ -21,6 +21,9 @@ namespace Z0
         void Rows<T>(T[] src, string label)
             => Rows(@readonly(src), label);
 
+        void Rows<T>(ReadOnlySpan<T> src)
+            => Rows(src, EmptyString);
+
         void Rows<T>(ReadOnlySpan<T> src, string label)
         {
             if(src.Length != 0)
@@ -28,9 +31,7 @@ namespace Z0
                 var buffer = Buffers.text();
                 var count = src.Length;
                 if(text.nonempty(label))
-                {
                     buffer.AppendLineFormat("Rowset {0}", label);
-                }
 
                 for(var i=0; i<count; i++)
                     buffer.AppendLine(skip(src,i));

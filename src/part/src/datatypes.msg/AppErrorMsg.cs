@@ -124,7 +124,7 @@ namespace Z0
             => Fail($"fail: The number of bytes, {requested} exceeds the maximum available, {available}", caller, file, line);
 
         [Op]
-        public static AppMsg FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg FileDoesNotExist(string path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => Fail($"fail: The file {path} does not exist", caller, file, line);
     }
 }

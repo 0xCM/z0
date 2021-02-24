@@ -25,6 +25,14 @@ namespace Z0
             Delimiter = delimiter;
         }
 
+        [MethodImpl(Inline)]
+        public RowHeader(HeaderCell[] data, char delimiter)
+        {
+            root.require(data != null, () => "Null header cells");
+            Cells = data;
+            Delimiter = delimiter.ToString();
+        }
+
         public HeaderCell[] Storage
         {
             [MethodImpl(Inline)]
@@ -56,7 +64,7 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => api.FormatHeader(this);
 
         public override string ToString()
             => Format();

@@ -9,10 +9,15 @@ namespace Z0
 
     using static Part;
 
-    partial class AppMsg
+    public interface IReport<T>: IIndex<T>, ILocated<FS.FilePath>
+        where T : struct, IRecord<T>
     {
-        [MethodImpl(Inline), Op]
-        public static AppMsg babble(object content)
-            => new AppMsg(content, LogLevel.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
+        Index<T> Rows {get;}
+
+        TableId TableId
+            => default(T).TableId;
+
+        T[] IIndex<T>.Storage
+            => Rows.Storage;
     }
 }

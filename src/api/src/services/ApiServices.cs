@@ -9,6 +9,8 @@ namespace Z0
     using System.Reflection;
 
     using static memory;
+    using static Part;
+    using static TextRules;
 
     sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
     {
@@ -43,7 +45,7 @@ namespace Z0
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
             var service = ApiCatalogs.classes(Wf);
-            var formatter = Z0.Records.formatter<SymbolicLiteral>();
+            var formatter = Records.formatter<SymbolicLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);
             var count = Records.emit(literals, dst);
@@ -125,6 +127,66 @@ namespace Z0
                 record.OpId = member.Id;
             }
             return buffer;
+        }
+
+        public Index<ApiCatalogRecord> LoadRebaseEntries()
+        {
+            var dir = Db.IndexDir<ApiCatalogRecord>();
+            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
+            var parser = Records.parser<ApiCatalogRecord>(parse);
+            var rows = root.list<ApiCatalogRecord>();
+            if(files.Length != 0)
+            {
+                var src = files[files.Length - 1];
+                using var reader = src.Reader();
+                var index = uint.MaxValue;
+                reader.ReadLine();
+                var line = reader.ReadLine();
+                while(line != null)
+                {
+                    var outcome = parser.ParseRow(line, out var row);
+                    if(outcome)
+                        rows.Add(row);
+                    else
+                    {
+                        Wf.Error(outcome.Message);
+                        return sys.empty<ApiCatalogRecord>();
+                    }
+                    line = reader.ReadLine();
+                }
+            }
+
+            return rows.ToArray();
+        }
+
+        static Outcome parse(string src, out ApiCatalogRecord dst)
+        {
+            const char Delimiter = FieldDelimiter;
+            const byte FieldCount = ApiCatalogRecord.FieldCount;
+
+            var fields = Records.fields(src,Delimiter).View;
+            if(fields.Length != FieldCount)
+            {
+                dst = default;
+                return (false, Msg.FieldCountMismatch.Format(fields.Length, FieldCount, Format.delimit(fields, Delimiter)));
+            }
+
+            var i = 0;
+            Numeric.parser<uint>().Parse(skip(fields, i++), out dst.Sequence);
+            Addresses.parse(skip(fields, i++), out dst.ProcessBase);
+            Addresses.parse(skip(fields, i++), out dst.MemberBase);
+            Addresses.parse(skip(fields, i++), out dst.MemberOffset);
+            Addresses.parse(skip(fields, i++), out dst.MemberRebase);
+            ByteSize.parse(skip(fields, i++), out dst.MaxSize);
+            dst.PartName = skip(fields, i++);
+            dst.HostName = skip(fields, i++);
+            dst.OpId = OpIdentity.define(skip(fields, i++));
+            return true;
+        }
+
+        partial struct Msg
+        {
+            public static RenderPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
         }
     }
 }

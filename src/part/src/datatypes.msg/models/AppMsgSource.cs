@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
 
@@ -27,7 +28,7 @@ namespace Z0
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public FS.FilePath File {get;}
+        public string File {get;}
 
         /// <summary>
         /// The source file line number on which the message originated
@@ -39,16 +40,16 @@ namespace Z0
         {
             Part = part;
             Caller = caller;
-            File = FS.path(file ?? EmptyString);
+            File =file ?? EmptyString;
             Line = (uint)(line ?? 0);
         }
 
         public string Format()
         {
             if(Part != 0)
-                return text.format(KnownPartPattern, Part.Format(), File.FileName, Caller, Line, File);
+                return text.format(KnownPartPattern, Part.Format(), Path.GetFileName(File), Caller, Line, File);
             else
-                return text.format(UnknownPartPattern, File.FileName, Caller, Line, File);
+                return text.format(UnknownPartPattern, Path.GetFileName(File), Caller, Line, File);
         }
 
         public override string ToString()

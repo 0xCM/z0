@@ -17,6 +17,8 @@ namespace Z0
 
         BasedApiMemberCatalog RebaseMembers();
 
+        Index<ApiCatalogRecord> LoadRebaseEntries();
+
         void EmitApiClasses();
 
         Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst);

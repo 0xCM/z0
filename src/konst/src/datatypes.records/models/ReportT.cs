@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Rowset<T> : IRowset<T>
+    public readonly struct Report<T> : IReport<T>
         where T : struct, IRecord<T>
     {
         public Index<T> Rows {get;}
@@ -17,10 +17,10 @@ namespace Z0
         public FS.FilePath Location {get;}
 
         [MethodImpl(Inline)]
-        public Rowset(FS.FilePath location, T[] data)
+        public Report(T[] data, FS.FilePath location)
         {
-            Location = location;
             Rows = data;
+            Location = location;
         }
 
         public T[] Storage
