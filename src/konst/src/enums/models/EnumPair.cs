@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Captures name-corellated literals values
     /// </summary>
-    public readonly struct EnumPair<E1,E2> : ITextual<EnumPair<E1,E2>>
+    public readonly struct EnumPair<E1,E2>
         where E1: unmanaged, Enum
         where E2: unmanaged, Enum
     {
@@ -40,11 +40,5 @@ namespace Z0
             First = first;
             Second = second;
         }
-
-        public string Format()
-            => api.format(this);
-
-        public override string ToString()
-            => Format();
     }
 }

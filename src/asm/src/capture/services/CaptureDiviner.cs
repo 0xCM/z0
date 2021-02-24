@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static ExtractTermCode;
 
     [ApiHost]
-    readonly unsafe struct CaptureCalcs
+    readonly unsafe struct CaptureDiviner
     {
         const byte ZED = 0;
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         const byte J48 = 0x48;
 
         [Op]
-        public static ApiParseResult capture(Span<byte> dst, OpIdentity id, byte* pSrc)
+        public static ApiParseResult divine(Span<byte> dst, OpIdentity id, byte* pSrc)
         {
             var limit = dst.Length - 1;
             var start = (long)pSrc;
@@ -44,9 +44,9 @@ namespace Z0.Asm
                     ret_offset = offset;
                 var tc = CalcTerm(dst, offset, ret_offset, out var delta);
                 if(tc != null)
-                    return SummarizeParse(dst, id, tc.Value, start, end, delta);
+                    return summarize(dst, id, tc.Value, start, end, delta);
             }
-            return SummarizeParse(dst, id, CTC_BUFFER_OUT, start, end, 0);
+            return summarize(dst, id, CTC_BUFFER_OUT, start, end, 0);
         }
 
         [Op, MethodImpl(Inline)]
@@ -63,7 +63,7 @@ namespace Z0.Asm
             => new CaptureOutcome(((ulong)start, (ulong)(end + delta)), tc);
 
         [Op, MethodImpl(Inline)]
-        static ApiParseResult SummarizeParse(Span<byte> src, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ApiParseResult summarize(Span<byte> src, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(tc, start, end, delta);
             var raw = src.Slice(0, (int)(end - start)).ToArray();

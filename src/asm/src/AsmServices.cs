@@ -12,6 +12,23 @@ namespace Z0.Asm
     [ApiHost]
     public sealed class AsmServices
     {
+        public static ApiHostCaptureSet decode(IAsmContext asm, in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
+        {
+            var count = blocks.Length;
+            var set = new ApiHostCaptureSet(catalog, blocks, memory.alloc<AsmRoutine>(count));
+            var blockview = set.Blocks.View;
+            var routines = set.Routines.Edit;
+            var decoder = asm.RoutineDecoder;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref memory.skip(blockview,i);
+                if(decoder.Decode(block, out var routine))
+                    memory.seek(routines, i) = routine;
+            }
+
+            return set;
+        }
+
         public static AsmServices create(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
 

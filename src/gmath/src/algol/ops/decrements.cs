@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    partial class gmath
+    partial struct gAlg
     {
         /// <summary>
         /// Populates a memory target with consecutive values count-1, count - 2, ..., 0

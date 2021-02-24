@@ -32,6 +32,5 @@ namespace Z0
                     NK.U64 => EnumValue.e64u(src),
                     _ => 0ul,
                 };
-
     }
 }

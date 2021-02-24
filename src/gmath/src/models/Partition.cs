@@ -5,40 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public partial class Partition
     {
-        /// <summary>
-        /// Slices an interval into manageable pieces, disjoint even
-        /// </summary>
-        /// <param name="src">The source interval</param>
-        /// <param name="width">The partition width</param>
-        /// <param name="precision">The precision with which the calculations are carried out</param>
-        /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
-        [Op, Closures(AllNumeric)]
-        public static IEnumerable<T> stream<T>(Interval<T> src, T width, int? precision = null)
-            where T : unmanaged
-        {
-            var scale = precision ?? 4;
-            if(src.LeftClosed)
-                yield return src.Left;
-
-            var next = gfp.round(gmath.add(src.Left, width), scale);
-            while(gmath.lt(next,src.Right))
-            {
-                yield return next;
-                next = gfp.round(gmath.add(next, width), scale);
-            }
-
-            if(src.RightClosed)
-                yield return src.Right;
-        }
-
         /// <summary>
         /// Computes the points that determine a partitioning predicated on partition width
         /// </summary>
@@ -115,7 +86,7 @@ namespace Z0
         static Span<T> integral<T>(Interval<T> src, T width)
             where T : unmanaged
         {
-            var len =  gmath.length(src);
+            var len =  gAlg.length(src);
             var count = Numeric.force<T,int>(gmath.div(len, width));
             var dst = memory.span<T>(count + 1);
             var point = src.Left;
@@ -142,7 +113,7 @@ namespace Z0
             where T : unmanaged
         {
             var scale = 4;
-            var len =  gfp.round(gmath.length(src), scale);
+            var len =  gfp.round(gAlg.length(src), scale);
             var fcount = gfp.div(len, width);
             var count = Numeric.force<T,int>(gfp.ceil(fcount));
             var dst = memory.span<T>(count + 1);

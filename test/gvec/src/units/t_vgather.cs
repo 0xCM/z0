@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vgather : t_inx<t_vgather>
     {
@@ -59,7 +58,7 @@ namespace Z0
             var cells = BufferSize/size<T>();
             var domain = bounds<T>(cells);
 
-            var data = gmath.increments(span<T>(cells));
+            var data = gAlg.increments(span<T>(cells));
             ref readonly var src = ref first(data);
 
             for(var i = 0; i<RepCount; i++)
@@ -76,7 +75,7 @@ namespace Z0
             var count = BufferSize/size<T>();
             var domain = bounds<T>(count);
 
-            var data = gmath.increments(span<T>(count));
+            var data = gAlg.increments(span<T>(count));
             ref readonly var src = ref first(data);
 
             for(var i = 0; i<RepCount; i++)

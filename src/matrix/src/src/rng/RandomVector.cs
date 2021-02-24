@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -263,7 +263,7 @@ namespace Z0
         {
             var dst = Z0.NatSpan.alloc<N,T>();
             for(var i=0; i<dst.Count; i++)
-                dst[i] = gmath.squeeze(src[i],max[i]);
+                dst[i] = gAlg.squeeze(src[i],max[i]);
             return dst;
         }
 
@@ -282,7 +282,7 @@ namespace Z0
             Demands.insist(len == max.Length);
             var dst = Z0.RowVectors.blockalloc<T>(len);
             for(var i=0; i<dst.Length; i++)
-                dst[i] = gmath.squeeze(src[i],max[i]);
+                dst[i] = gAlg.squeeze(src[i],max[i]);
             return dst;
         }
     }

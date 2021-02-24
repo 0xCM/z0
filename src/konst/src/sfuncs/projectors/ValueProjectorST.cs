@@ -40,6 +40,5 @@ namespace Z0
             public static implicit operator ValueMap<S,T>(ValueProjector<S,T> src)
                 => src.Delegate;
         }
-
     }
 }

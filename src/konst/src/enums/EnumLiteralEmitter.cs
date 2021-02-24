@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     using F = EnumDatasetField;
 
     public readonly struct EnumLiteralEmitter : IEnumLiteralEmitter
     {
-        public static IEnumLiteralEmitter Service => default(EnumLiteralEmitter);
-
         public static EnumDataset<E,T> emit<E,T>(LiteralEmissionKind kind, FS.FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged

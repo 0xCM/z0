@@ -19,27 +19,35 @@ namespace Z0.Asm
             Asm = AsmServices.context(Wf);
         }
 
-        public ApiHostCaptureSet EmitCaptureSet(Type host)
+        public ApiHostCaptureSet Capture(Type host)
         {
             var asmpath = Db.AppLog($"{host.Name}", FileExtensions.Asm);
-            return EmitCaptureSet(host, asmpath);
+            return Capture(host, asmpath);
         }
 
-        public ApiHostCaptureSet EmitCaptureSet(Type host, FS.FilePath dst)
+        public ApiHostCaptureSet Capture(Type host, FS.FilePath dst)
+        {
+            var catalog = ApiCatalogs.HostCatalog(Wf, host);
+            using var service = Z0.Capture.quick(Wf, Asm);
+            var blocks = service.CaptureHost(catalog);
+            var count = blocks.Length;
+            var decoded = AsmServices.decode(Asm, catalog,blocks);
+            Emit(decoded, dst);
+            return decoded;
+        }
+
+        void Emit(ApiHostCaptureSet src, FS.FilePath dst)
         {
             const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
-            var catalog = ApiCatalogs.HostCatalog(Wf, host);
-            var blocks = CaptureHost(catalog);
-            var count = blocks.Length;
-            var set = Capture.set(Asm, catalog,blocks);
             var buffer = text.buffer();
             var flow = Wf.EmittingFile(dst);
-            var header = string.Format(HeaderFormatPattern, set.StartAddress, set.EndAddress, set.Range.Size, set.ExtractSize, set.ParsedSize);
+            var header = string.Format(HeaderFormatPattern, src.StartAddress, src.EndAddress, src.Range.Size, src.ExtractSize, src.ParsedSize);
+            var emitted = 0;
+            var routines = src.Routines.Edit;
+            var count = routines.Length;
+            var formatter = Asm.Formatter;
             using var writer = dst.Writer();
             writer.WriteLine(header);
-            var emitted = 0;
-            var routines = set.Routines.Edit;
-            var formatter = Asm.Formatter;
             for(var i=0; i<count; i++)
             {
                 ref readonly var routine = ref skip(routines,i);
@@ -52,13 +60,6 @@ namespace Z0.Asm
             }
 
             Wf.EmittedFile(flow, emitted);
-            return set;
-        }
-
-        public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)
-        {
-            using var service = Capture.quick(Wf,Asm);
-            return service.CaptureHost(src);
         }
     }
 }

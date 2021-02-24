@@ -9,8 +9,9 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static gmath;
 
-    partial class gmath
+    partial struct gAlg
     {
         /// <summary>
         /// Determines whether an interval contains a specified point
@@ -78,22 +79,22 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bit test8<T>(in T src, T match, uint index)
             where T : unmanaged
-                =>  eq(match, memory.add(src, index + 0)) ||
-                    eq(match, memory.add(src, index + 1)) ||
-                    eq(match, memory.add(src, index + 2)) ||
-                    eq(match, memory.add(src, index + 3)) ||
-                    eq(match, memory.add(src, index + 4)) ||
-                    eq(match, memory.add(src, index + 5)) ||
-                    eq(match, memory.add(src, index + 6)) ||
-                    eq(match, memory.add(src, index + 7)
+                => eq(match, memory.add(src, index + 0)) ||
+                   eq(match, memory.add(src, index + 1)) ||
+                   eq(match, memory.add(src, index + 2)) ||
+                   eq(match, memory.add(src, index + 3)) ||
+                   eq(match, memory.add(src, index + 4)) ||
+                   eq(match, memory.add(src, index + 5)) ||
+                   eq(match, memory.add(src, index + 6)) ||
+                   eq(match, memory.add(src, index + 7)
                     );
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bit test4<T>(in T src, T match, uint index)
             where T : unmanaged
-                =>  eq(match, memory.add(src, index + 0)) ||
-                    eq(match, memory.add(src, index + 1)) ||
-                    eq(match, memory.add(src, index + 2)) ||
-                    eq(match, memory.add(src, index + 3));
+                => eq(match, memory.add(src, index + 0)) ||
+                   eq(match, memory.add(src, index + 1)) ||
+                   eq(match, memory.add(src, index + 2)) ||
+                   eq(match, memory.add(src, index + 3));
     }
 }

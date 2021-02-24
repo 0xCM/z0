@@ -8,8 +8,6 @@ namespace Z0.Asm
 
     public interface IApiHostCapture
     {
-        ApiCaptureBlocks CaptureHost(in ApiHostCatalog src);
-
-        ApiHostCaptureSet EmitCaptureSet(Type host);
+        ApiHostCaptureSet Capture(Type host);
     }
 }

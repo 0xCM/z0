@@ -93,7 +93,6 @@ namespace Z0
             ref readonly var codes = ref first(UpperHexDigits);
             var storage = CharStacks.alloc(n2);
             ref var dst = ref storage.C0;
-
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
             return CharStacks.span(ref storage);
@@ -110,7 +109,6 @@ namespace Z0
             ref readonly var codes = ref first(UpperHexDigits);
             var storage = CharStacks.alloc(n4);
             ref var dst = ref storage.C0;
-
             for(var i=0; i < count; i++)
                 CharStacks.cell(ref dst, i) = (char)skip(codes, (uint)((src >> i*4) & 0xF));
             return CharStacks.span(ref storage);
@@ -127,7 +125,6 @@ namespace Z0
             ref readonly var codes = ref first(UpperHexDigits);
             var storage = CharStacks.alloc(n8);
             ref var dst = ref storage.C0;
-
             for(byte i=0; i < count; i++)
                 CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return CharStacks.span(ref storage);
@@ -144,7 +141,6 @@ namespace Z0
             ref readonly var codes = ref first(UpperHexDigits);
             var storage = CharStacks.alloc(n16);
             ref var dst = ref storage.C0;
-
             for(byte i=0; i<count; i++)
                 CharStacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return CharStacks.span(ref storage);
@@ -155,7 +151,6 @@ namespace Z0
         {
             ref readonly var codes = ref first(UpperHexDigits);
             ref var target = ref first(dst);
-
             seek(target, offset + 0) = (char)skip(in codes, (byte)(src & 0xF));
             seek(target, offset + 1) = (char)skip(in codes, (byte)((src >> 4) & 0xF));
         }

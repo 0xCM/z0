@@ -85,7 +85,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Hex1(bool src)
-            => new Hex1(z.@byte(src));
+            => new Hex1(memory.@byte(src));
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)

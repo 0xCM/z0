@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Part;
@@ -21,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Length<T>(this Interval<T> src)
             where T : unmanaged
-                => gmath.length(src);
+                => gAlg.length(src);
     }
 }

@@ -9,8 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines a permutation over the integers [0, 1, ..., n - 1] where n is the permutation length
@@ -56,7 +56,7 @@ namespace Z0
             ref var swapmem = ref memory.first(swaps);
             for(var k = 0u; k < len; k++)
             {
-                (var i, var j) = skip(in swapmem, k);
+                (var i, var j) = skip(swapmem, k);
                Swaps.swap(ref seek(srcmem, i), ref seek(srcmem, j));
             }
             return src;
@@ -251,19 +251,25 @@ namespace Z0
             terms = src;
         }
 
-        [MethodImpl(Inline)]
+        [Op]
+        void Absorb(ReadOnlySpan<int> src)
+        {
+            var n = terms.Length;
+            var m = src.Length;
+            ref var dst = ref first(terms);
+
+            for(var i=0; i<m; i++)
+                seek(dst, i) = skip(src,i);
+
+            var identity = Identity(n);
+            for(var i=m; i<n; i++)
+                seek(dst, i) = identity[i - m];
+        }
+
         public Perm(int n, int[] src)
         {
             terms = new int[n];
-
-            var m = src.Length;
-
-            for(var i=0; i< m; i++)
-                terms[i] = src[i];
-
-            var identity = Identity(n);
-            for(var i=m; i< n; i++)
-                terms[i] = identity[i - m];
+            Absorb(src);
         }
 
         [MethodImpl(Inline)]

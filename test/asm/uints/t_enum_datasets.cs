@@ -48,6 +48,5 @@ namespace Z0.Asm
             var enums = @readonly(Enums.describe<AsmOpCodeField,byte>());
             EnumTables.emit(enums,path);
         }
-
     }
 }

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
         [MethodImpl(Inline)]
         public static bool Contains<T>(this ClosedInterval<T> src, T point)
             where T : unmanaged
-                => gmath.contains(src, point);
+                => gAlg.contains(src, point);
 
         /// <summary>
         /// Determines whether an interval contains a specified point
@@ -25,7 +25,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool Contains<T>(this Interval<T> src, T point)
             where T : unmanaged
-                => gmath.contains(src,point);
-
+                => gAlg.contains(src,point);
     }
 }

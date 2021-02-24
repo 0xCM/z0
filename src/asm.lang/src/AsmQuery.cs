@@ -10,10 +10,27 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static RexPrefixFacets;
+    using static AsmSigTokens;
+    using static AsmInstructions;
 
     [ApiHost]
     public readonly partial struct AsmQuery
     {
+        public static bit test(AsmHexCode src, Jmp jmp, Rel8 rel8)
+        {
+
+            return false;
+
+        }
+
+        public static bit test(AsmHexCode src, Jmp jmp, Rel32 rel8)
+        {
+
+            return false;
+
+        }
+
+
         [MethodImpl(Inline), Op]
         public static bit IsRexPrefix(byte src)
             => emath.between(src, MinRex, MaxRex);

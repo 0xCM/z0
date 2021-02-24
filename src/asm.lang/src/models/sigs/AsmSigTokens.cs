@@ -260,7 +260,6 @@ namespace Z0.Asm
             public string Description => "A segment register, where the register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5";
         }
 
-
         public readonly struct Moffs8 : IAsmSigToken<Moffs8>
         {
             public K Kind => K.Moffs8;

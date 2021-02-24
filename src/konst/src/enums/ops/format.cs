@@ -13,11 +13,6 @@ namespace Z0
 
     partial class Enums
     {
-        public static string format<E1,E2>(in EnumPair<E1,E2> src)
-            where E1: unmanaged, Enum
-            where E2: unmanaged, Enum
-                => $"{src.Name}([{EnumValue.scalar<E1,ulong>(src.First)}: {typeof(E1).Name}], [{EnumValue.scalar<E2,ulong>(src.Second)}: {typeof(E2).Name}])";
-
         [MethodImpl(Inline)]
         public static string format<E,T>(in EnumDatasetEntry<E,T> src, char delimiter = FieldDelimiter)
             where E : unmanaged, Enum

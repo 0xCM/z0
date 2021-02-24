@@ -25,8 +25,8 @@ namespace Z0
         {
             var tokens = Buffers.sequence(asm.DefaultBufferLength, 5, out var buffer).Tokenize();
             var exchange = AsmServices.exchange(tokens[BufferSeqId.Aux3]);
-            var service = new CaptureServiceProxy(asm.CaptureCore, exchange);
-            return new QuickCapture(wf, asm, buffer, tokens, service);
+            var proxy = new CaptureServiceProxy(asm.CaptureCore, exchange);
+            return new QuickCapture(wf, asm, buffer, tokens, proxy);
         }
 
         [Op]
@@ -61,23 +61,6 @@ namespace Z0
         [Op]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(new byte[context.DefaultBufferLength]);
-
-        internal static ApiHostCaptureSet set(IAsmContext asm, in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
-        {
-            var count = blocks.Length;
-            var set = new ApiHostCaptureSet(catalog, blocks, memory.alloc<AsmRoutine>(count));
-            var blockview = set.Blocks.View;
-            var routines = set.Routines.Edit;
-            var decoder = asm.RoutineDecoder;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref memory.skip(blockview,i);
-                if(decoder.Decode(block, out var routine))
-                    memory.seek(routines, i) = routine;
-            }
-
-            return set;
-        }
 
         static IWfShell describe(IWfShell wf)
         {

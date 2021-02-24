@@ -28,5 +28,4 @@ namespace Z0
 
     [Free]
     public delegate ref T RefMap<S,T>(in S src, ref T dst);
-
 }

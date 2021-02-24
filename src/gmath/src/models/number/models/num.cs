@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct num<T>
         where T : unmanaged
@@ -110,6 +110,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator num<T>(T src)
             => new num<T>(src);
-
     }
 }

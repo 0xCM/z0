@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly struct HexDataFormatter : IHexDataFormatter
     {
@@ -100,7 +100,7 @@ namespace Z0
             const char delimiter = Chars.Space;
 
             var dst = root.list<string>();
-            var line = Buffers.text();
+            var line = text.buffer();
             var count = src.Length;
 
             for(var i=0; i<count; i++)
