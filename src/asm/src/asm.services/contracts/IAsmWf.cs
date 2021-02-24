@@ -29,11 +29,7 @@ namespace Z0.Asm
         /// </summary>
         IAsmDecoder Decoder {get;}
 
-        ICaptureAlt CaptureService {get;}
-
         ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target);
-
-        void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst);
 
         ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target);
     }

@@ -46,7 +46,7 @@ namespace Z0
             => Service.Capture(src.Identify(),src);
 
         public Option<ApiCaptureBlock> Capture(OpIdentity id, MethodInfo src)
-            => Service.Capture(id,src);
+            => Service.Capture(id, src);
 
         public Option<ApiCaptureBlock> Capture(MethodInfo src, params Type[] args)
             => Service.Capture(src,args);
@@ -62,6 +62,36 @@ namespace Z0
 
         public Option<ApiCaptureBlock> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
             where D : Delegate => Service.Capture(id, src);
+
+        public ApiCaptureBlocks Capture(ReadOnlySpan<MethodInfo> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<ApiCaptureBlock>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var method = ref skip(src,i);
+                var identified = method.Identify();
+                var result = Capture(identified,method);
+                if(result)
+                    seek(dst,i) = result.Value;
+                else
+                    seek(dst,i) = ApiCaptureBlock.Empty;
+            }
+            return buffer;
+
+        }
+
+        Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<LocatedMethod>(count);
+            ref var located = ref first(span(buffer));
+            for(var i=0u; i<count; i++)
+                seek(located, i) = ApiJit.jit(skip(src, i));
+            Array.Sort(buffer);
+            return buffer;
+        }
 
         [Op]
         public ApiCaptureBlocks CaptureHost(in ApiHostCatalog src)

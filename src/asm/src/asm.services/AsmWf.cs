@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         public IAsmFormatter Formatter {get;}
 
-        public ICaptureAlt CaptureService {get;}
+        readonly QuickCapture CaptureService;
 
         [MethodImpl(Inline), Op]
         public AsmWf(IWfShell wf, IAsmContext asm)
@@ -34,7 +34,7 @@ namespace Z0.Asm
             var config = AsmFormatConfig.DefaultStreamFormat;
             Decoder = Services.RoutineDecoder(config);
             Formatter = Services.Formatter(config);
-            CaptureService = Services.CaptureAlt();
+            CaptureService = Capture.quick(wf,asm);
         }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)
@@ -62,7 +62,6 @@ namespace Z0.Asm
             var dst = span<AsmRoutineCode>(count);
             var decoder = Decoder;
             var formatter = Formatter;
-
             using var writer = target.Writer();
             for(var i=0u; i<count; i++)
             {
