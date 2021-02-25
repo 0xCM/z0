@@ -13,8 +13,6 @@ namespace Z0.Asm
 
         public ushort Sequence;
 
-        public string AttMnemonic;
-
         public string OpCode;
 
         public string Instruction;
@@ -36,6 +34,8 @@ namespace Z0.Asm
         public string Protected;
 
         public string Cpuid;
+
+        public string AttMnemonic;
 
         public string Description;
     }

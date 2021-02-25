@@ -259,15 +259,14 @@ namespace Z0.Asm
             // Wf.Ran(flow);
         }
 
-        void CheckExportRows()
+        void ExportAsmCatRows()
         {
-            var rows = Catalog.CreateExportRows();
-            root.iter(rows, row => Wf.Row(row.AttMnemonic));
+            Catalog.CreateExportRows();
         }
 
         void CheckInterfaceMaps()
         {
-            var imap = Clr.imap(typeof(BitLogicEvaluator), typeof(IBitLogicEvaluator));
+            var imap = Clr.imap(typeof(Prototypes.ContractedEvaluator), typeof(Prototypes.IEvaluator));
             Wf.Row(imap.Format());
         }
 
@@ -287,7 +286,7 @@ namespace Z0.Asm
             // var rows = entries.Select(format);
             // Wf.Rows(rows.Take(20).Array());
 
-            RunEvaluate();
+            ExportAsmCatRows();
         }
 
         public static void Main(params string[] args)

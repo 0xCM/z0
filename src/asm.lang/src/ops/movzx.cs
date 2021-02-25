@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     using I = AsmInstructions;
 
-    partial struct Asmstatements
+    partial struct asm
     {
         /// <summary>
         /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.
@@ -230,4 +230,15 @@ namespace Z0.Asm
         public static AsmStatement<r64,m16> movzx(r64 dst, m16 src)
             => asm.statement(I.movzx(), dst, src);
     }
+
+/*
+ | 1020     | 0F B6 /r                          | MOVZX r16, r/m8                         | V      | V          | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move byte to word with zero-extension.                                                                                                                                                                                                                       |
+ | 1021     | REX+ 0F B6 /r                     | MOVZX r16, r/m8                         | V      | V          | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move byte to word with zero-extension.                                                                                                                                                                                                                       |
+ | 1022     | 0F B6 /r                          | MOVZX r32, r/m8                         | V      | V          | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move byte to doubleword, zero-extension.                                                                                                                                                                                                                     |
+ | 1023     | REX+ 0F B6 /r                     | MOVZX r32, r/m8                         | V      | V          | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move byte to doubleword, zero-extension.                                                                                                                                                                                                                     |
+ | 1024     | REX.W+ 0F B6 /r                   | MOVZX r64, r/m8                         | V      | NE         | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move byte to quadword, zero-extension.                                                                                                                                                                                                                       |
+ | 1025     | 0F B7 /r                          | MOVZX r32, r/m16                        | V      | V          | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move word to doubleword, zero-extension.                                                                                                                                                                                                                     |
+ | 1026     | REX.W+ 0F B7 /r                   | MOVZX r64, r/m16                        | V      | NE         | RM           | W, R         |                                                                   |                                             |                                                                                                       |           |               | Move word to quadword, zero-extension.                                                                                                                                                                                                                       |
+
+*/
 }

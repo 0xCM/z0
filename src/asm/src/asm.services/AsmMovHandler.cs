@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
     using static Part;
+    using static memory;
 
     ref struct AsmMovHandler
     {

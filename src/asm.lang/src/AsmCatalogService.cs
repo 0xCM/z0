@@ -84,7 +84,6 @@ namespace Z0.Asm
         void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
             dst.Sequence = src.Sequence;
-            dst.AttMnemonic = src.AttMnemonic;
             dst.OpCode = src.OpCode;
             dst.Instruction = src.Instruction;
             dst.Mode64 = src.Mode64;
@@ -96,6 +95,7 @@ namespace Z0.Asm
             dst.ImplicitUndef = src.ImplicitUndef;
             dst.Protected = src.Protected;
             dst.Cpuid = src.Cpuid;
+            dst.AttMnemonic = src.AttMnemonic;
             dst.Description = src.Description;
         }
 
