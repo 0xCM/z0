@@ -156,7 +156,7 @@ namespace Z0
             {
                 var dst = wf.Db().IndexFile(ApiHexIndexRow.TableId);
                 var flow = wf.EmittingFile(dst);
-                var svc = ApiIndex.service(wf);
+                var svc = ApiHexIndex.create(wf);
                 index(wf, svc.IndexApiBlocks(), dst);
                 wf.EmittedFile(flow);
                 return dst;
@@ -170,7 +170,7 @@ namespace Z0
 
         static Outcome index(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
         {
-            var svc = ApiIndex.service(wf);
+            var svc = ApiHexIndex.create(wf);
             Array.Sort(src.Blocks.Storage);
             var blocks = src.Blocks.View;
             var count = blocks.Length;

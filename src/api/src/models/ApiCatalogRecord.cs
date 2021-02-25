@@ -27,6 +27,6 @@ namespace Z0
 
         public Name HostName;
 
-        public OpIdentity OpId;
+        public string OpUri;
     }
 }

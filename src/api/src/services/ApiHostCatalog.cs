@@ -14,15 +14,12 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHostCatalog
     {
-        public static ApiHostCatalog create(IApiHost host, ApiMembers members)
-            => new ApiHostCatalog(host, members.Sort());
-
         public IApiHost Host {get;}
 
         public ApiMembers Members {get;}
 
         [MethodImpl(Inline)]
-        ApiHostCatalog(IApiHost host, ApiMembers src)
+        internal ApiHostCatalog(IApiHost host, ApiMembers src)
         {
             Host = host;
             Members = src;
@@ -80,12 +77,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Members.Count != 0;
-        }
-
-        public ApiMemberIndex Index()
-        {
-            var ix = ApiQuery.index(Members.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
         }
 
         public Index<ApiMemberInfo> Describe()

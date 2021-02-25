@@ -83,7 +83,6 @@ namespace Z0
             get => Encoded.IsNonEmpty;
         }
 
-
         [MethodImpl(Inline)]
         public ApiMemberCode(ApiMember member, ApiCodeBlock code, uint seq = 0, ExtractTermCode term = 0)
         {
@@ -92,6 +91,10 @@ namespace Z0
             Encoded = code;
             TermCode = term;
         }
+
+        [MethodImpl(Inline)]
+        public ApiMemberCode Resequence(uint seq)
+            => new ApiMemberCode(Member, Encoded, seq, TermCode);
 
         [MethodImpl(Inline)]
         ApiMemberCode(ApiMember member, BinaryCode code)

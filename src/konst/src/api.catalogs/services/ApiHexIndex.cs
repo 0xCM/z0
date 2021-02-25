@@ -11,8 +11,6 @@ namespace Z0
 
     using static memory;
 
-    using api = ApiIndex;
-
     [Service(typeof(IApiHexIndex))]
     public class ApiHexIndex : WfService<ApiHexIndex,IApiHexIndex>, IApiHexIndex
     {
@@ -32,6 +30,19 @@ namespace Z0
             UriAddress = root.dict<MemoryAddress,OpUri>();
             Locations = root.dict<OpUri,ApiCodeBlock>();
             Product = ApiCodeBlocks.Empty;
+        }
+
+        [Op]
+        static ApiIndexMetrics metrics(ApiCodeBlocks src)
+        {
+            var stats = default(ApiIndexMetrics);
+            stats.PartCount = src.Parts.Count;
+            stats.HostCount = src.Hosts.Count;
+            stats.AddressCount = src.Addresses.Count;
+            stats.FunctionCount = src.Blocks.Count;
+            stats.IdentityCount = src.Identities.Count;
+            stats.ByteCount = src.Blocks.Storage.Sum(x => x.Length);
+            return stats;
         }
 
         public ApiCodeBlocks IndexApiBlocks()
@@ -58,7 +69,7 @@ namespace Z0
             IndexStatus = Status();
             Product = Freeze();
 
-            Wf.Ran(flow, api.metrics(Product));
+            Wf.Ran(flow, metrics(Product));
             return Product;
         }
 

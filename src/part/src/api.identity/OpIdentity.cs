@@ -52,20 +52,20 @@ namespace Z0
         /// </summary>
         public string[] Components {get;}
 
-        public OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
+        public OpIdentity(string data, string name, string suffix, bool generic, bool imm, string[] components)
         {
-            Identifier = Safe(text);
-            Name = name;
-            Suffix = suffix;
+            Identifier = text.trim(Safe(data));
+            Name = text.trim(name);
+            Suffix = text.trim(suffix);
             IsGeneric = generic;
             HasImm = imm;
             Components = components;
         }
 
         [MethodImpl(Inline)]
-        OpIdentity(string text)
+        OpIdentity(string data)
         {
-            Identifier = Safe(text);
+            Identifier = Safe(data);
             Name = EmptyString;
             Suffix = EmptyString;
             IsGeneric = false;
@@ -73,20 +73,26 @@ namespace Z0
             Components = sys.empty<string>();
         }
 
-        IIdentifiedOperation<OpIdentity> Identified
-            => this;
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => text.empty(Identifier);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.nonempty(Identifier);
         }
 
         public override int GetHashCode()
-            => Identified.HashCode;
+            => (int)alg.hash.calc(Identifier);
 
-        public override bool Equals(object obj)
-            => Identified.Same(obj);
+        public bool Equals(OpIdentity src)
+            => text.equals(Identifier, src.Identifier);
+
+        public override bool Equals(object src)
+            => src is OpIdentity x && Equals(x);
 
         public string Format()
             => Identifier;

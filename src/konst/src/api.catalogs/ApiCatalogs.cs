@@ -110,28 +110,6 @@ namespace Z0
             => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
 
         /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public static ApiHostCatalog HostCatalog(IWfShell wf, IApiHost src)
-        {
-            var jit = ApiJit.create(wf);
-            var members = jit.Jit(src);
-            return members.Length == 0 ? ApiHostCatalog.Empty : ApiHostCatalog.create(src, members);
-        }
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public static ApiHostCatalog HostCatalog(IWfShell wf, Type src)
-            => HostCatalog(wf, ApiHost(src));
-
-        /// <summary>
         /// Defines a <see cref='ApiPartCatalog'/> for a specified part
         /// </summary>
         /// <param name="src">The source assembly</param>

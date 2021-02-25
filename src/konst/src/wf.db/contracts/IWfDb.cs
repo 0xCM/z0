@@ -212,6 +212,9 @@ namespace Z0
         FS.FolderPath IndexDir(Type t)
             => IndexRoot() + FS.folder(TableId(t));
 
+        FS.FolderPath IndexDir(string subject)
+            => IndexRoot() + FS.folder(subject);
+
         FS.FolderPath IndexDir<T>()
             where T : struct, IRecord<T>
                 => IndexRoot() + FS.folder(TableId<T>());
@@ -250,6 +253,9 @@ namespace Z0
 
         FS.FilePath IndexFile(string id)
             => IndexRoot() + FS.file(id, Idx);
+
+        FS.FilePath IndexFile(string subject, string id)
+            => IndexDir(subject) + FS.file(id, Idx);
 
         FS.Files IndexFiles()
             => IndexRoot().Files(Idx);

@@ -43,6 +43,32 @@ namespace Z0
         public static TypeIdentity define(string id)
             => new TypeIdentity(id);
 
+
+        [MethodImpl(Inline)]
+        public TypeIdentity(string id)
+            => Identifier = id;
+
+        IIdentifiedType<TypeIdentity> Identified => this;
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => string.IsNullOrWhiteSpace(Identifier);
+        }
+
+        public override int GetHashCode()
+            => (int)alg.hash.calc(Identifier);
+
+        public override bool Equals(object obj)
+            => Identified.Same(obj);
+
+        public override string ToString()
+            => Identified.Format();
+
+        [MethodImpl(Inline)]
+        public Option<TypeIdentity> ToOption()
+            => IsEmpty ? root.none<TypeIdentity>() : root.some(this);
+
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
             => define($"{lhs}{rhs}");
@@ -62,31 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(TypeIdentity a, TypeIdentity b)
             => !a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public TypeIdentity(string id)
-            => Identifier = id;
-
-        IIdentifiedType<TypeIdentity> Identified => this;
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
-        }
-
-        public override int GetHashCode()
-            => Identified.HashCode;
-
-        public override bool Equals(object obj)
-            => Identified.Same(obj);
-
-        public override string ToString()
-            => Identified.Format();
-
-        [MethodImpl(Inline)]
-        public Option<TypeIdentity> ToOption()
-            => IsEmpty ? root.none<TypeIdentity>() : root.some(this);
 
         public static TypeIdentity Empty
             => define(EmptyString);

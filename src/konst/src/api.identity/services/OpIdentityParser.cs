@@ -25,6 +25,5 @@ namespace Z0
 
         ParseResult<string, OpIdentity> IParser<string, OpIdentity>.Parse(string src)
             => root.parsed(src, Parse(src));
-
     }
 }

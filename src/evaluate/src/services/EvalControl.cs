@@ -27,40 +27,55 @@ namespace Z0
             ApiGlobal = wf.Api;
         }
 
-        public ApiHostMemberCode Code(ApiHostUri host, FS.FilePath src)
+        void ExecuteHost(BufferTokens buffers, ApiHostUri host)
         {
-            var catalog = ApiCatalogs.HostCatalog(Wf, Wf.Api.FindHost(host).Require());
-            if(catalog.IsEmpty)
-                return ApiHostMemberCode.Empty;
-            else
-                return new ApiHostMemberCode(host, ApiQuery.index(catalog.Index(), ApiQuery.index(ApiCode.reader(Wf).Read(src))));
-        }
-
-        void ExecuteHost(BufferTokens buffers, IApiHost host)
-        {
-            var src = Wf.Db().ApiHexFile(host.Uri);
+            var src = Wf.Db().ApiHexFile(host);
             if(!src.Exists)
-            {
-                Wf.Error($"The host hex file {src} does not exist");
                 return;
-            }
 
-            var flow = Wf.Running($"Evaluating {host.Uri.Format()}");
-            var code = Code(host.Uri, src).Members;
+            var flow = Wf.Running($"Running {host.Format()} evaluaton workflow");
+            var catalog = ApiRuntime.catalog(Wf, Wf.Api.FindHost(host).Require());
+            if(catalog.IsEmpty)
+                return;
 
-            var count = code.EntryCount;
-            if(count == 0)
-                Wf.Status($"The host {host.Uri} has no executable members");
-            else
-            {
-                Wf.Status($"Evaluating {count} {host} operations");
+            var members = ApiIndex.create(catalog);
+            Wf.Status($"Indexed {members.EntryCount} {host} members");
 
-                foreach(var api in code.UnaryOperators)
-                    Dispatcher.Dispatch(buffers, api, OperatorClasses.unary());
+            var blocks = ApiCode.reader(Wf).Read(src);
+            Wf.Status($"Read {blocks.Count} {host} operations from {src}");
 
-                foreach(var api in code.BinaryOperators)
-                    Dispatcher.Dispatch(buffers, api, OperatorClasses.binary());
-            }
+            var api = Wf.ApiServices();
+            //var correlated = api.Correlate(catalog, blocks);
+            //Wf.Status($"Correlated {correlated.Count} members with executable code");
+
+            //correlate(catalog.Members, blocks);
+
+            var operations = ApiIndex.create(blocks);
+            Wf.Status($"Hydrated {operations.EntryCount} {host} operations from {blocks.Count} blocks");
+
+            var identities =  members.Keys.ToHashSet();
+            identities.IntersectWith(operations.Keys);
+
+            Wf.Status($"Found {identities.Count} common operation identifiers");
+
+            // var joined = ApiIndex.join(members,operations);
+            // Wf.Status($"Joined {joined.Count} members with executable code");
+
+            // var code = ops.CreateIndex(members, operations);
+            // var count = code.EntryCount;
+
+            // Wf.Status($"Created code index with {count} members");
+
+            // if(count != 0)
+            // {
+            //     Wf.Status($"Evaluating {count} {host} operations");
+
+            //     foreach(var api in code.UnaryOperators)
+            //         Dispatcher.Dispatch(buffers, api, OperatorClasses.unary());
+
+            //     foreach(var api in code.BinaryOperators)
+            //         Dispatcher.Dispatch(buffers, api, OperatorClasses.binary());
+            // }
 
             Wf.Ran(flow);
         }
@@ -74,16 +89,22 @@ namespace Z0
             Wf.Ran(flow);
         }
 
+        bool Enabled => false;
+
         public void Execute(params PartId[] parts)
         {
-            var catalogs = ApiGlobal.PartCatalogs(parts).View;
-            var count = catalogs.Length;
-            var flow = Wf.Running($"Evaluating {count} parts");
-            using var buffers = Buffers.sequence(BufferSize, BufferCount);
-            for(var i=0; i<count; i++)
-                ExecuteCatalog(memory.skip(catalogs,i));
+            if(Enabled)
+            {
 
-            root.iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
+                var catalogs = ApiGlobal.PartCatalogs(parts).View;
+                var count = catalogs.Length;
+                var flow = Wf.Running($"Evaluating {count} parts");
+                using var buffers = Buffers.sequence(BufferSize, BufferCount);
+                for(var i=0; i<count; i++)
+                    ExecuteCatalog(memory.skip(catalogs,i));
+
+                root.iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
+            }
         }
     }
 }

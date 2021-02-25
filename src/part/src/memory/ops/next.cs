@@ -191,26 +191,6 @@ namespace Z0
         public static ref ulong next(in ulong src, ref ulong dst)
             => ref gNext(src, ref dst);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Sequential<T> next<T>(in Sequential<T> src)
-            where T : unmanaged
-        {
-            ref var dst = ref @edit(src);
-            ref var value = ref dst.Value;
-
-            if(size<T>() == 1)
-                uint8(ref value) = (byte)(uint8(value) + 1);
-            else if(size<T>() == 2)
-                uint16(ref value) = (ushort)(uint16(value) + 1);
-            else if(size<T>() == 4)
-                uint32(ref value) = uint32(value) + 1u;
-            else if(size<T>() == 8)
-                uint64(ref value) = uint64(value) + 1ul;
-            else
-                throw no<T>();
-
-            return ref dst;
-        }
 
         [MethodImpl(Inline)]
         static ref  S gNext<S,T>(in S src, ref T dst)

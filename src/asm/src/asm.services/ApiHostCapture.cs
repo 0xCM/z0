@@ -27,7 +27,7 @@ namespace Z0.Asm
 
         public ApiHostCaptureSet Capture(Type host, FS.FilePath dst)
         {
-            var catalog = ApiCatalogs.HostCatalog(Wf, host);
+            var catalog = ApiRuntime.catalog(Wf, host);
             using var service = Z0.Capture.quick(Wf, Asm);
             var blocks = service.CaptureHost(catalog);
             var count = blocks.Length;

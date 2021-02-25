@@ -13,7 +13,7 @@ namespace Z0
         where K : unmanaged
         where S : unmanaged, ISymbol
     {
-        public readonly Sequential Index;
+        public readonly uint Index;
 
         public readonly Kind<K> Kind;
 
@@ -50,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(Index, Kind, Identifier);
+            => string.Format(RP.PSx3, Index, Kind, Identifier);
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
             Wf.Status(Seq.enclose(Wf.Api.PartIdentities));
             RunPrimary();
             RunImm();
-            RunEvaluate();
+            //RunEvaluate();
             RebaseMembers();
             EmitDump();
         }
@@ -84,13 +84,13 @@ namespace Z0
 
         void EmitDump()
         {
-            var flow = Wf.Running("Emitting process dump");
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var dst = Wf.Db().ProcDumpPath(name).EnsureParentExists();
+            var flow = Wf.EmittingFile(dst);
             dst.Delete();
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
-            Wf.Ran(flow, "Emitted process dump");
+            Wf.Ran(flow);
         }
     }
 }

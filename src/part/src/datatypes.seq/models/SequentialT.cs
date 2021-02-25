@@ -14,41 +14,62 @@ namespace Z0
     public struct Sequential<T> : IDataType<T>
         where T : unmanaged
     {
-        const ulong Step = 1;
+        const long Step = 1;
 
-        public T Value;
+        public T Lo;
+
+        public T Hi;
 
         [MethodImpl(Inline)]
         public Sequential(T src)
-            => Value = src;
-
-        public void Increment()
         {
-            ref var x = ref @as<T,ulong>(Value);
-            x += Step;
-        }
-
-        public void Decrement()
-        {
-            ref var x = ref @as<T,ulong>(Value);
-            x -= Step;
+            Lo = src;
+            Hi = default;
         }
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Value.ToString();
+        public Sequential(T src, T hi)
+        {
+            Lo = src;
+            Hi = hi;
+        }
+
+        public void IncLo()
+        {
+            ref var x = ref @as<T,long>(Lo);
+            x += Step;
+        }
+
+        public void IncHi()
+        {
+            ref var x = ref @as<T,long>(Hi);
+            x += Step;
+        }
+
+        public void DecLo()
+        {
+            ref var x = ref @as<T,long>(Lo);
+            x -= Step;
+        }
+
+        public void DecHi()
+        {
+            ref var x = ref @as<T,long>(Hi);
+            x -= Step;
+        }
+
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator ++(Sequential<T> src)
         {
-            src.Increment();
+            src.IncLo();
             return src;
         }
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator --(Sequential<T> src)
         {
-            src.Decrement();
+            src.DecLo();
             return src;
         }
 
@@ -58,6 +79,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator T(Sequential<T> src)
-            => src.Value;
+            => src.Lo;
     }
 }

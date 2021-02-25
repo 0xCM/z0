@@ -22,12 +22,15 @@ namespace Z0
 
         readonly CilEmitter CilSvc;
 
+        readonly AsmAddressMatcher AddressMatcher;
+
         public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
             Host = WfShell.host(nameof(ApiCaptureEmitter));
             Wf = wf.WithHost(Host);
             Asm = asm;
             CilSvc = CilEmitter.create(Wf);
+            AddressMatcher = AsmAddressMatcher.create(wf);
         }
 
         public AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -35,8 +38,8 @@ namespace Z0
             var routines = AsmRoutines.Empty;
             try
             {
-                var flow = Wf.Running();
-                EmitExtracts(host, src);
+                var flow = Wf.Running($"Running {host} emissiong workflow for {src.Count} members");
+                var emitted = EmitExtracts(host, src);
                 var code = ParseExtracts(host, src);
                 if(code.Length != 0)
                 {
@@ -69,12 +72,11 @@ namespace Z0
 
         Index<ApiExtractRow> EmitExtracts(ApiHostUri host, Index<ApiMemberExtract> src)
         {
-            var emitted = sys.empty<ApiExtractRow>();
             var count = src.Length;
             var blocks = src.Map(x => new ApiExtractBlock(x.Address, x.OpUri, x.Encoded));
             var dst = Wf.Db().RawExtractFile(host);
             var flow = Wf.EmittingTable<ApiExtractRow>(dst);
-            emitted = emit(blocks, dst);
+            var emitted = Emit(blocks, dst);
             Wf.EmittedTable(flow, count);
             return emitted;
         }
@@ -83,29 +85,26 @@ namespace Z0
         {
             if(src.Length != 0)
             {
+                var flow = Wf.Running();
                 var parser = ApiCodeExtractors.parser();
                 var parsed = parser.ParseMembers(src);
-                Wf.Status(string.Format("Parsed {0} {1} extract blocks", parsed.Count, host));
+                Wf.Ran(flow, string.Format("Parsed {0} {1} extract blocks", parsed.Count, host));
                 return parsed;
             }
             else
                 return Index<ApiMemberCode>.Empty;
         }
 
-
         AsmRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
         {
             var emitter = AsmServices.HostEmitter(Wf, Asm);
             emitter.Emit(host, src, out var decoded);
             if(decoded.Count != 0)
-            {
-                using var match = new AsmAddressMatcher(Wf, Host, extracts, decoded.Storage, Wf.Ct);
-                match.Run();
-            }
+                AddressMatcher.Match(extracts, decoded.Storage);
             return decoded;
        }
 
-        static ApiExtractRow[] emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst, bool append = false)
+        Index<ApiExtractRow> Emit(ReadOnlySpan<ApiExtractBlock> src, FS.FilePath dst, bool append = false)
         {
             var count = src.Length;
             var header = (dst.Exists && append) ? false : true;
@@ -113,7 +112,6 @@ namespace Z0
             ref readonly var w1 = ref skip(X86TableWidths, 1);
             ref readonly var w2 = ref skip(X86TableWidths, 2);
             var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe + text.embrace($"1,-{w1}") + RP.SpacedPipe + text.embrace($"2,-{w2}");
-
             using var writer = dst.Writer(append);
             if(header)
                 writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));

@@ -45,7 +45,7 @@ namespace Z0.Asm
 
         IAsmContext Asm;
 
-        IApiServices ApiServices;
+        ApiServices ApiServices;
 
         AsmServices AsmServices;
 
@@ -251,10 +251,12 @@ namespace Z0.Asm
 
         void RunEvaluate()
         {
-            var flow = Wf.Running("Evaluator");
-            var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
-            evaluate.Execute(Wf.Api.PartIdentities);
-            Wf.Ran(flow);
+            var catalogs = Wf.Api.PartCatalogs();
+            ApiServices.Correlate(catalogs);
+            // var flow = Wf.Running("Evaluator");
+            // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
+            // evaluate.Execute(Wf.Api.PartIdentities);
+            // Wf.Ran(flow);
         }
 
         void CheckExportRows()

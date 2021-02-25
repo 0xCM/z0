@@ -17,27 +17,30 @@ namespace Z0
     /// </summary>
     public readonly struct ApiMemberCodeIndex
     {
-        readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
+        readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> CodeIndex;
 
-        public ApiOpIndex<ApiMemberCode> Source {get;}
+        readonly IReadOnlyDictionary<OpIdentity,ApiCodeBlock> BlockIndex;
+
+        readonly ApiOpIndex<ApiCodeBlock> Blocks;
 
         [MethodImpl(Inline)]
-        internal ApiMemberCodeIndex(in ApiOpIndex<ApiMemberCode> code)
+        public ApiMemberCodeIndex(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code, Index<ApiMemberCode> mc)
         {
-            Source = code;
-            Hashtable = code.Enumerated.ToDictionary();
+            Blocks = code;
+            CodeIndex = mc.Select(x => (x.Id, x)).ToDictionary();
+            BlockIndex = code.Enumerated.Select(x => (x.Item1,  x.Item2)).ToDictionary();
         }
 
-        public ApiMemberCode this[OpIdentity id]
+        public ApiCodeBlock this[OpIdentity id]
         {
             [MethodImpl(Inline)]
-            get => Hashtable[id];
+            get => BlockIndex[id];
         }
 
         public int EntryCount
         {
             [MethodImpl(Inline)]
-            get => Hashtable?.Count ?? 0;
+            get => CodeIndex?.Count ?? 0;
         }
 
         public bool IsEmpty
@@ -47,10 +50,13 @@ namespace Z0
         }
 
         public IEnumerable<OpIdentity> Keys
-            => Hashtable.Keys;
+            => CodeIndex.Keys;
 
         IEnumerable<ApiMemberCode> Values
-            => Hashtable.Values;
+            => CodeIndex.Values;
+
+        IEnumerable<ApiCodeBlock> Values2
+            => BlockIndex.Values;
 
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
@@ -98,10 +104,5 @@ namespace Z0
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
 
-        public static ApiMemberCodeIndex Empty
-        {
-            [MethodImpl(Inline)]
-            get => new ApiMemberCodeIndex(ApiOpIndex<ApiMemberCode>.Empty);
-        }
     }
 }

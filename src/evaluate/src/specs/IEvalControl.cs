@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IEvalControl : IExeModule<PartId>
+    public interface IEvalControl
     {
-
+        void Execute(params PartId[] parts);
     }
 }

@@ -184,7 +184,7 @@ namespace Z0.Asm
             if(mnemonic != 0)
             {
                 var record = new AsmRow();
-                record.Sequence = NextSequence;
+                record.Sequence = (uint)NextSequence;
                 record.BlockAddress = code.BaseAddress;
                 record.IP = src.IP;
                 record.LocalOffset = offset;

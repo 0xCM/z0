@@ -7,13 +7,88 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static memory;
     using static Part;
     using static TextRules;
+    using static Sequential;
 
-    sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
+    public sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
     {
+        public ApiMemberCodeBlocks Correlate(Index<IApiPartCatalog> src)
+        {
+            var flow = Wf.Running($"Correlating parts across {src.Count} catalogs");
+            var reader = ApiCode.reader(Wf);
+            var count = src.Length;
+            var dst = root.list<ApiMemberCode>();
+            var records = root.list<ApiCorrelationEntry>();
+            for(var i=0; i<count; i++)
+            {
+                var part = src[i];
+                var inner = Wf.Running($"Correlating {part.PartId.Format()} operations");
+                var hosts = part.ApiHosts.View;
+                var kHost = hosts.Length;
+                for(var j=0; j<kHost; j++)
+                {
+                    ref readonly var host = ref skip(hosts,j);
+                    var hexpath = Wf.Db().ApiHexFile(host.Uri);
+                    if(hexpath.Exists)
+                    {
+                        var blocks = ApiCode.reader(Wf).Read(hexpath);
+                        var catalog = ApiRuntime.catalog(Wf, Wf.Api.FindHost(host.Uri).Require());
+                        Correlate(catalog, blocks, dst, records);
+                    }
+                }
+                Wf.Ran(inner);
+            }
+
+            var path = Db.IndexTable<ApiCorrelationEntry>();
+            var emitting = Wf.EmittingTable<ApiCorrelationEntry>(path);
+            var output = @readonly(records.OrderBy(x => x.RuntimeAddress).Array());
+            Records.emit(output, path);
+            Wf.EmittedTable(emitting, output.Length);
+
+            Wf.Ran(flow);
+            return dst.ToArray();
+        }
+
+        public int Correlate(ApiHostCatalog src, Index<ApiCodeBlock> blocks, List<ApiMemberCode> dst, List<ApiCorrelationEntry> records)
+        {
+            var part = src.Host.PartId;
+            var members = src.Members.OrderBy(x => x.Id).Array();
+            var targets = blocks.Where(x => x.IsNonEmpty && x.OpId.IsNonEmpty).OrderBy(x => x.OpId).Array();
+            var correlated = (
+                from m in members
+                join t in targets on m.Id equals t.OpId orderby m.Id
+                select root.paired(m, t)).Array();
+
+            var count = correlated.Length;
+            if(count > 0)
+            {
+                var view = @readonly(correlated);
+                var seq = Sequential.create(0, (ushort)(part));
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var pair = ref skip(view,i);
+                    fill(seq++, pair.Left, pair.Right, out var record);
+                    records.Add(record);
+                    dst.Add(new ApiMemberCode(pair.Left, pair.Right, i));
+                }
+            }
+            return count;
+        }
+
+        static ref ApiCorrelationEntry fill(Seq16x2 seq, ApiMember member, ApiCodeBlock code, out ApiCorrelationEntry dst)
+        {
+            dst.Sequence = seq;
+            dst.CaptureAddress = code.BaseAddress;
+            dst.RuntimeAddress = member.BaseAddress;
+            dst.Id = code.Uri;
+            return ref dst;
+        }
+
         public IApiJit ApiJit()
             => Z0.ApiJit.create(Wf);
 
@@ -124,7 +199,7 @@ namespace Z0
                 record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
                 record.HostName = member.Host.Name;
                 record.PartName = member.Host.Owner.Format();
-                record.OpId = member.Id;
+                record.OpUri = member.OpUri.UriText;
             }
             return buffer;
         }
@@ -180,7 +255,7 @@ namespace Z0
             ByteSize.parse(skip(fields, i++), out dst.MaxSize);
             dst.PartName = skip(fields, i++);
             dst.HostName = skip(fields, i++);
-            dst.OpId = OpIdentity.define(skip(fields, i++));
+            dst.OpUri = skip(fields, i++);
             return true;
         }
 

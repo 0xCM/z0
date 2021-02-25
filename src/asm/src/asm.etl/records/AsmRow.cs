@@ -41,7 +41,7 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.rows";
 
-        public Sequential Sequence;
+        public uint Sequence;
 
         public MemoryAddress BlockAddress;
 

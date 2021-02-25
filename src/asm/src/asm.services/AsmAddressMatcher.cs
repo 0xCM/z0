@@ -9,56 +9,31 @@ namespace Z0
 
     using Z0.Asm;
 
-    public struct AsmAddressMatcher : IDisposable
+    public class AsmAddressMatcher : WfService<AsmAddressMatcher>
     {
-        readonly IWfShell Wf;
-
-        readonly ApiMemberExtract[] Extracted;
-
-        readonly AsmRoutine[] Decoded;
-
-        readonly WfHost Host;
-
-        public AsmAddressMatcher(IWfShell wf, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public void Match(ApiMemberExtract[] extracted, AsmRoutine[] decoded)
         {
-            Host = host;
-            Wf = wf.WithHost(host);
-            Extracted = extracted;
-            Decoded = decoded;
-            Wf.Created();
-        }
-
-
-        public void Dispose()
-        {
-           Wf.Disposed();
-        }
-
-        public void Run()
-        {
-            var flow = Wf.Running(Seq.delimit(Extracted.Length, Decoded.Length));
-
             try
             {
-                var a = Extracted.Select(x => x.Address).ToHashSet();
-                if(a.Count != Extracted.Length)
-                    Wf.Error(Host, $"count(Extracted) = {Extracted.Length} != {a.Count} = count(set(Extracted))");
+                var flow = Wf.Running(Seq.delimit(extracted.Length, decoded.Length));
+                var a = extracted.Select(x => x.Address).ToHashSet();
+                if(a.Count != extracted.Length)
+                    Wf.Error(Host, $"count(Extracted) = {extracted.Length} != {a.Count} = count(set(Extracted))");
 
-                var b = Decoded.Select(f => f.BaseAddress).ToHashSet();
-                if(b.Count != Decoded.Length)
-                    Wf.Error(Host, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(set(Decoded))");
+                var b = decoded.Select(f => f.BaseAddress).ToHashSet();
+                if(b.Count != decoded.Length)
+                    Wf.Error(Host, $"count(Decoded) = {decoded.Length} != {b.Count} = count(set(Decoded))");
 
                 b.IntersectWith(a);
-                if(b.Count != Decoded.Length)
-                    Wf.Error(Host, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
+                if(b.Count != decoded.Length)
+                    Wf.Error(Host, $"count(Decoded) = {decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
 
+                Wf.Ran(flow);
             }
             catch(Exception e)
             {
                 Wf.Error(Host, e);
             }
-
-            Wf.Ran(flow, Seq.delimit(Extracted.Length, Decoded.Length));
         }
     }
 }

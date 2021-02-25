@@ -47,20 +47,6 @@ namespace Z0
         public PartId Part
             => Host.Owner;
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Scheme == 0 && Host.IsEmpty && text.blank(GroupName) && OpId.IsEmpty;
-        }
-
-        [MethodImpl(Inline)]
-        public static bool operator==(OpUri a, OpUri b)
-            => a.Equals(b);
-
-        [MethodImpl(Inline)]
-        public static bool operator!=(OpUri a, OpUri b)
-            => !a.Equals(b);
-
         [MethodImpl(Inline)]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
             => new OpUri(ApiUriScheme.Hex, host, group, opid);
@@ -77,6 +63,11 @@ namespace Z0
                 : FullUriText(scheme, host.Owner, host.Name, GroupName, opid)).Trim();
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Scheme == 0 && Host.IsEmpty && text.blank(GroupName) && OpId.IsEmpty;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
@@ -101,6 +92,15 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+
+        [MethodImpl(Inline)]
+        public static bool operator==(OpUri a, OpUri b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator!=(OpUri a, OpUri b)
+            => !a.Equals(b);
 
         /// <summary>
         /// Emptiness of nothing

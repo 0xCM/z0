@@ -34,7 +34,7 @@ namespace Z0
         {
             using var wf = configure(WfShell.create(args));
             var app = Apps.context(wf, Rng.@default());
-            using var control = Capture.runner(wf, new AsmContext(app, wf));
+            using var control = runner(wf, new AsmContext(app, wf));
             control.Run();
         }
 

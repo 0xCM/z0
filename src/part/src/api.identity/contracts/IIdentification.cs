@@ -18,17 +18,14 @@ namespace Z0
         protected string DenullifiedIdentity
             => text.denullify(Identifier);
 
-        int HashCode
-            => DenullifiedIdentity.GetHashCode();
-
         bool Same(object src)
-            => src is IIdentification t && string.Equals(DenullifiedIdentity, t.DenullifiedIdentity, StringComparison.InvariantCultureIgnoreCase);
+            => src is IIdentification t && string.Equals(Identifier, t.Identifier, StringComparison.InvariantCultureIgnoreCase);
 
         string ITextual.Format()
             => text.denullify(Identifier);
 
         int IComparable.CompareTo(object src)
-            => DenullifiedIdentity.CompareTo((src as IIdentified)?.Identifier);
+            => text.denullify(Identifier).CompareTo((src as IIdentified)?.Identifier);
     }
 
     /// <summary>
@@ -39,9 +36,9 @@ namespace Z0
         where T : IIdentification<T>, new()
     {
         bool IEquatable<T>.Equals(T src)
-            => DenullifiedIdentity.Equals(src.DenullifiedIdentity);
+            => Same(src);
 
         int IComparable<T>.CompareTo(T src)
-            => DenullifiedIdentity.CompareTo(src.DenullifiedIdentity);
+            => text.denullify(Identifier).CompareTo(src.Identifier);
     }
 }

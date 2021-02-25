@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
 
-    using Z0.Tooling;
+    using static Part;
 
-    using Check = CheckPrimal;
-
-
-    public sealed class t_tools_models : t_tools<t_tools_models>
+    partial class XTend
     {
-
+        public static Dictionary<K,V> ToDictionary<K,V>(this Paired<K,V>[] src)
+            => src.Select(x => (x.Left, x.Right)).ToDictionary();
     }
 }

@@ -23,9 +23,8 @@ namespace Z0
         public OpIdentityG(string src)
             => Identifier = src ?? EmptyString;
 
-
         public override int GetHashCode()
-            => Identified.HashCode;
+            => (int)alg.hash.calc(Identifier);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);

@@ -18,6 +18,31 @@ namespace Z0
         public static string format(in ApiRuntimeMember src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil);
 
+        public static ApiHostCatalog catalog(IApiHost host, ApiMembers members)
+            => new ApiHostCatalog(host, members.Sort());
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public static ApiHostCatalog catalog(IWfShell wf, IApiHost src)
+        {
+            var jit = ApiJit.create(wf);
+            var members = jit.Jit(src);
+            return members.Length == 0 ? ApiHostCatalog.Empty : catalog(src, members);
+        }
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public static ApiHostCatalog catalog(IWfShell wf, Type src)
+            => catalog(wf, ApiCatalogs.ApiHost(src));
+
         [Op]
         public static Outcome<FS.FilePath> EmitRuntimeIndex(IWfShell wf)
         {
@@ -25,8 +50,7 @@ namespace Z0
             {
                 var hosts = wf.Api.ApiHosts;
                 var kHost = (uint)hosts.Length;
-                var members = index(wf);
-                var view  = @readonly(members);
+                var view  = @readonly(members(wf));
                 var target = wf.Db().IndexFile("api.members");
                 using var writer = target.Writer();
                 var count = view.Length;
@@ -41,7 +65,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiRuntimeMember[] index(IWfShell wf)
+        public static ApiRuntimeMember[] members(IWfShell wf)
         {
             var db = wf.Db();
             var hosts = @readonly(wf.Api.ApiHosts);
@@ -54,9 +78,9 @@ namespace Z0
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var catalog = ApiCatalogs.HostCatalog(wf, host);
+                var hostcat = catalog(wf, host);
                 var component = host.HostType.Assembly;
-                var members = @readonly(catalog.Members.Storage);
+                var members = @readonly(hostcat.Members.Storage);
                 var apicount = (uint)members.Length;
                 if(apicount != 0)
                 {
@@ -67,7 +91,7 @@ namespace Z0
                         buffer.Add(member);
                     }
 
-                    wf.Status(Msg.IndexedHost.Format(catalog.Host.Uri, apicount, counter));
+                    wf.Status(Msg.IndexedHost.Format(hostcat.Host.Uri, apicount, counter));
                 }
             }
 

@@ -8,7 +8,7 @@ namespace Z0
     public static partial class XApi
     {
         [Op]
-        public static IApiServices ApiServices(this IWfShell wf)
+        public static ApiServices ApiServices(this IWfShell wf)
             => Z0.ApiServices.create(wf);
     }
 }
