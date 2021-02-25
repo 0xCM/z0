@@ -9,8 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
 
     public sealed class t_classify : t_identity<t_classify>
     {

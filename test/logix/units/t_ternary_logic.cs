@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
 
@@ -150,7 +150,6 @@ namespace Z0.Logix
                     Notify($"Equivalence failed for ternary op {kind}:{ApiIdentify.numeric<T>()}");
 
                 Claim.eq(u,v);
-
             }
         }
     }

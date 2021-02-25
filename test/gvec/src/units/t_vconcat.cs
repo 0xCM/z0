@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public class t_vconcat : t_inx<t_vconcat>
-    {     
+    {
         public void vconcat_check()
         {
             var w = n128;

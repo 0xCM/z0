@@ -10,7 +10,7 @@ namespace Z0
 
     using Z0.Schemas.Ecma;
 
-    using static z;
+    using static memory;
 
     partial class ImageDataEmitter
     {

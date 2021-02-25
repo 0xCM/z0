@@ -9,7 +9,6 @@ namespace Z0.Logix
     using System.Collections.Generic;
     using System.Reflection;
 
-    using static Konst;
     using static TypedLogicSpec;
 
     public class t_variables : LogixTest<t_variables>

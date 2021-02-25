@@ -5,10 +5,7 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
 
-    using static Konst;
     using static BinaryBitLogicKind;
 
     using BLK = BinaryBitLogicKind;

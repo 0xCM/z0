@@ -11,8 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-
-    public ref struct EmitPartImageData
+    public ref struct ImageLocationEmitter
     {
         readonly IWfShell Wf;
 
@@ -39,9 +38,9 @@ namespace Z0
         readonly HexDataFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public EmitPartImageData(IWfShell wf, IPart part)
+        public ImageLocationEmitter(IWfShell wf, IPart part)
         {
-            Host = WfShell.host(typeof(EmitPartImageData));
+            Host = WfShell.host(typeof(ImageLocationEmitter));
             Wf = wf.WithHost(Host);
             Part = part;
             PartId = part.Id;
@@ -62,7 +61,28 @@ namespace Z0
             Wf.Disposed();
         }
 
-        public void Run()
+        public static Index<LocatedPart> emit(IWfShell wf)
+        {
+            var src = wf.Api.Parts;
+            var count = src.Length;
+            var emitter = ImageDataEmitter.create(wf);
+            var buffer = alloc<LocatedPart>(count);
+            ref var located = ref first(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var part = ref skip(src, i);
+                using var step = new ImageLocationEmitter(wf, part);
+                step.EmitContent();
+                var @base = ImageMaps.@base(part);
+                seek(located,i) = new LocatedPart(part, @base, (ulong)step.OffsetAddress - (ulong)@base);
+            }
+            var dst = wf.Db().IndexRoot() + FS.file("imagemaps", FileExtensions.Csv);
+            var images = ImageMaps.index();
+            ImageMaps.emit(images, dst);
+            return buffer;
+        }
+
+        void EmitContent()
         {
             Wf.Running();
             using var stream = SourcePath.Reader();

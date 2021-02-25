@@ -2,12 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
-    
+
+
     public class t_vector_ops : UnitTest<t_vector_ops>
     {
         protected override int CycleCount => Pow2.T08;
@@ -49,7 +49,7 @@ namespace Z0.Logix
                 }
             }
             else
-            {                
+            {
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)
@@ -91,7 +91,7 @@ namespace Z0.Logix
             }
             else
             {
-                
+
                 for(var i=0; i<CycleCount; i++)
                 for(var sample=0; sample< RepCount; sample++)
                 for(var k=0; k< kinds.Length; k++, opcount++)

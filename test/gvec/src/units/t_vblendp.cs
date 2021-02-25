@@ -21,22 +21,22 @@ namespace Z0
             => false;
 
         public void vblendp_perm32_g128x8u()
-            => vblendp_check(n128, n32, Msb16x16x1, z8);
+            => vblendp_check(w128, n32, Msb16x16x1, z8);
 
         public void vblendp_perm16_g128x16u()
-            => vblendp_check(n128, n16, Msb32x32x1, z16);
+            => vblendp_check(w128, n16, Msb32x32x1, z16);
 
         public void vblendp_perm8_g128x32u()
-            => vblendp_check(n128, n8, Msb64x64x1, z32);
+            => vblendp_check(w128, n8, Msb64x64x1, z32);
 
         public void vblendp_perm64_g256x8u()
-            => vblendp_check(n256, n64, Msb16x16x1, z8);
+            => vblendp_check(w256, n64, Msb16x16x1, z8);
 
         public void vblendp_perm32_g256x16u()
-            => vblendp_check(n256, n32, Msb32x32x1, z16);
+            => vblendp_check(w256, n32, Msb32x32x1, z16);
 
         public void vblendp_perm16_g256x32u()
-            => vblendp_check(n256, n16, Msb64x64x1, z32);
+            => vblendp_check(w256, n16, Msb64x64x1, z32);
 
         /// <summary>
         /// Expands a bit-level S-pattern to a vector-level T-pattern
@@ -106,7 +106,7 @@ namespace Z0
         /// </summary>
         public void vblendp_512x64_Msb2x1()
         {
-            var w = n512;
+            var w = w512;
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
@@ -128,11 +128,11 @@ namespace Z0
         /// </summary>
         public void vblendp_512x64_Msb4x1()
         {
-            var w = n512;
+            var w = w512;
             var t = z64;
             var maskspec = BitMasks.MsbSpec(n4,n1,t);
             var source = gcpu.vinc(w,t);
-            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,1,2,7,4,5,6,3);
             Claim.Require(gcpu.vsame(expect,target));
@@ -149,12 +149,12 @@ namespace Z0
         /// </summary>
         public void vblendp_512x64_Lsb2x1()
         {
-            var w = n512;
+            var w = w512;
             var t = z64;
             var maskspec = BitMasks.LsbSpec(n2,n1,t);
 
             var source = gcpu.vinc(w,t);
-            var blendspec = vbroadcast(n256, BitMasks.mask(maskspec), Numeric.maxval(t));
+            var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,1,6,3,0,5,2,7);
             Claim.Require(gcpu.vsame(expect,target));
@@ -251,7 +251,7 @@ namespace Z0
 
         public void vblendp_512x8_Jsb8x2()
         {
-            var w = n512;
+            var w = w512;
             var t = z8;
             var maskspec = BitMasks.JsbSpec(n8,n2,t);
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
@@ -267,7 +267,7 @@ namespace Z0
 
         public void vblendp_perm64_256x8u()
         {
-            var w = n256;
+            var w = w256;
             var t = z8;
             var n = n64;
             var tf = 4;
@@ -298,7 +298,7 @@ namespace Z0
             }
         }
 
-        static Vector128<T> swaps_pattern<T>(N128 w, int tf, T t = default)
+        static Vector128<T> swaps_pattern<T>(W128 w, int tf, T t = default)
             where T : unmanaged
         {
             var pick = BitMasks.msb(n1,n1,t);

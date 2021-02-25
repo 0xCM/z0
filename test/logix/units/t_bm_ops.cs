@@ -2,11 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static BinaryBitLogicKind;
 
@@ -314,7 +312,6 @@ namespace Z0.Logix
                 Random.BitMatrix(ref B);
             }
         }
-
 
         void bm_api_bench<T>(BinaryBitLogicKind op, SystemCounter clock = default)
             where T : unmanaged

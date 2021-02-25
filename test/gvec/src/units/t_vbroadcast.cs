@@ -5,22 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-
+    using static Part;
 
     public class t_vbroadcast : t_inx<t_vbroadcast>
     {
         public void vbroadcast_check()
         {
-            vbroadcast_check(n128);
-            vbroadcast_check(n256);
+            vbroadcast_check(w128);
+            vbroadcast_check(w256);
         }
 
-        void vbroadcast_check(N128 w)
+        void vbroadcast_check(W128 w)
         {
             vbroadcast_check(w,z8);
             vbroadcast_check(w,z8i);
@@ -34,7 +30,7 @@ namespace Z0
             vbroadcast_check(w,z64f);
         }
 
-        void vbroadcast_check(N256 w)
+        void vbroadcast_check(W256 w)
         {
             vbroadcast_check(w,z8);
             vbroadcast_check(w,z8i);
@@ -48,11 +44,11 @@ namespace Z0
             vbroadcast_check(w,z64f);
         }
 
-        protected void vbroadcast_check<T>(N128 w, T t = default)
+        protected void vbroadcast_check<T>(W128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);
 
-        protected void vbroadcast_check<T>(N256 w, T t = default)
+        protected void vbroadcast_check<T>(W256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckFactory(w, VSvc.vbroadcast(w,t,t), VChecks.vbroadcast(w,t,t),t,t);
     }

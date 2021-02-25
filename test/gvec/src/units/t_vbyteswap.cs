@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-    using static z;
 
     public class t_vbyteswap : t_inx<t_vbyteswap>
     {

@@ -57,8 +57,7 @@ namespace Z0
                 images.EmitConstants();
                 images.EmitApiBlobs();
 
-                EmitFieldMetadata.create().Run(Wf);
-                EmitLocatedParts.create().Run(Wf);
+                ImageLocationEmitter.emit(Wf);
 
                 Commands.EmitEnumCatalog().RunTask(Wf);
 

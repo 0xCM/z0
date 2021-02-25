@@ -2,17 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Logix
+namespace Z0
 {
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static z;
-
     using static BitLogicSpec;
-    using static LogicEngine;
-    using static BinaryBitLogicKind;
+    using static Z0.Logix.LogicEngine;
 
     using BLK = BinaryBitLogicKind;
 

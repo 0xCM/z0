@@ -6,7 +6,6 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Konst;
     using static TypedLogicSpec;
 
     using L = AsciLetterLo;
