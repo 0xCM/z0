@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct Token<K> : IToken<K>
         where K : unmanaged
     {
-        public ushort Index {get;}
+        public uint Index {get;}
 
         public Identifier Name {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         public Name Symbol {get;}
 
         [MethodImpl(Inline)]
-        public Token(ushort index, Identifier name, K kind, Name symbol)
+        public Token(uint index, Identifier name, K kind, Name symbol)
         {
             Index = index;
             Name = name;

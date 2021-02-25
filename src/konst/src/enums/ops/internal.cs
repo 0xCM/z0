@@ -18,7 +18,6 @@ namespace Z0
         static ConcurrentDictionary<Type,object> ValueCache {get;}
             = new ConcurrentDictionary<Type,object>();
 
-
         /// <summary>
         /// Gets the literals defined by an enumeration
         /// </summary>

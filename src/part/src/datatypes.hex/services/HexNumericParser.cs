@@ -19,12 +19,24 @@ namespace Z0
         /// Attempts to parse a hex string as an unsigned long
         /// </summary>
         /// <param name="src">The source text</param>
-        public static ParseResult<ulong> parse(string src)
+        public static ParseResult<ulong> parse64u(string src)
         {
             if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
-                return ParseResult.win(src,value);
+                return root.parsed(src,value);
             else
-                return ParseResult.fail<ulong>(src);
+                return root.unparsed<ulong>(src);
+        }
+
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<uint> parse32u(string src)
+        {
+            if(uint.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out uint value))
+                return root.parsed(src,value);
+            else
+                return root.unparsed<uint>(src);
         }
 
         [Op, Closures(UnsignedInts)]

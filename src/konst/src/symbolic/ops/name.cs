@@ -11,6 +11,16 @@ namespace Z0
 
     partial struct Symbolic
     {
+        /// <summary>
+        /// Defines a <see cref='NamedSymbol{S}'/> sequence
+        /// </summary>
+        /// <param name="src">The source symbols</param>
+        /// <typeparam name="S">The symbol type</typeparam>
+        [MethodImpl(Inline)]
+        public static NamedSymbols<S> names<S>(params NamedSymbol<S>[] src)
+            where S : unmanaged, ISymbol<S>
+                => new NamedSymbols<S>(src);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolName<S> name<S>(ISymbolSet<S> src, ushort index)
             where S : unmanaged

@@ -13,40 +13,16 @@ namespace Z0
     {
         public uint Index {get;}
 
-        public string Key {get;}
+        public Name Name {get;}
 
-        SymbolicLiteral<E> Value {get;}
+        public E Kind {get;}
 
         [MethodImpl(Inline)]
         internal SymbolEntry(uint index, SymbolicLiteral<E> value)
         {
             Index = index;
-            Key = value.UniqueName;
-            Value = value;
-        }
-
-        public Name Name
-        {
-            [MethodImpl(Inline)]
-            get => Value.Name;
-        }
-
-        public E DirectValue
-        {
-            [MethodImpl(Inline)]
-            get => Value.DirectValue;
-        }
-
-        public ulong EncodedValue
-        {
-            [MethodImpl(Inline)]
-            get => Value.EncodedValue;
-        }
-
-        public ClrPrimalKind DataType
-        {
-            [MethodImpl(Inline)]
-            get => Value.DataType;
+            Kind = value.DirectValue;
+            Name = value.Name;
         }
     }
 }

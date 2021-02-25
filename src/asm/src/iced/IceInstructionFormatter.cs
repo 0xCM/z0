@@ -81,7 +81,7 @@ namespace Z0.Asm
 
             static string label(string src, ulong baseaddress)
             {
-                var hex = HexNumericParser.parse(src).ValueOrDefault();
+                var hex = HexNumericParser.parse64u(src).ValueOrDefault();
                 return (hex - baseaddress).FormatAsmHex(4);
             }
 

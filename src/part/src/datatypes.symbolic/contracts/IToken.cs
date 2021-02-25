@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IToken : ITextual, INullity
     {
-        ushort Index {get;}
+        uint Index {get;}
 
         Identifier Name {get;}
 

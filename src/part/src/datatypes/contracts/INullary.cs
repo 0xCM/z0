@@ -38,7 +38,7 @@ namespace Z0
         /// <summary>
         /// Specifies the zero value
         /// </summary>
-        T Zero {get;}
+        T Zero => default;
     }
 
     [Free]

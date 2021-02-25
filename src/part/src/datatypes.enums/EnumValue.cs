@@ -13,6 +13,21 @@ namespace Z0
     [ApiHost]
     public readonly partial struct EnumValue
     {
+        public static Index<E> literals<E>()
+            where E : unmanaged, Enum
+        {
+            var fields = @readonly(typeof(E).LiteralFields());
+            var count = fields.Length;
+            var buffer = alloc<E>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var field = ref skip(fields,i);
+                seek(dst, i) = (E)field.GetRawConstantValue();
+            }
+            return buffer;
+        }
+
         const NumericKind Closure = Integers;
 
         [MethodImpl(Inline)]

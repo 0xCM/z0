@@ -13,29 +13,32 @@ namespace Z0.Asm
     using static TextRules;
     using static AsmExpr;
 
-    public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
+    public sealed class AsmCatalogService : WfService<AsmCatalogService,AsmCatalogService>
     {
         readonly TextDocFormat SourceFormat;
 
         readonly Index<StokeAsmImportRow> RowBuffer;
 
-        readonly SymbolEntries<AsmMnemonicCode> MnemonicCodes;
+        readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
 
         const uint MaxRowCount = 2500;
 
         const char AsmCatDelimiter = Chars.Tab;
 
-        public AsmCatalogEtl()
+        public AsmCatalogService()
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
-            MnemonicCodes = SymbolTables.entries<AsmMnemonicCode>();
+            MnemonicCodes = SymbolTables.create<AsmMnemonicCode>();
+            CatalogSymbols = AsmCatalogSymbols.create();
         }
 
         public uint ImportRowCount {get; private set;}
 
-        public ReadOnlySpan<SymbolEntry<AsmMnemonicCode>> MnemonicSymbols()
-            => MnemonicCodes.Entries;
+        public ReadOnlySpan<Token<AsmMnemonicCode>> MnemonicSymbols()
+            => MnemonicCodes.Tokens;
+
+        public AsmCatalogSymbols CatalogSymbols {get;}
 
         public Index<AsmMnemonicInfo> MnemonicInfo()
         {
@@ -50,28 +53,48 @@ namespace Z0.Asm
                 throw new Exception();
         }
 
-        public Index<AsmCatRow> LoadCatalogRows()
+        public Index<StokeAsmExportRow> CreateExportRows()
         {
             var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
             var doc = TextDocs.parse(src).Require();
             var data = doc.Rows;
             var count = data.Length;
-            var buffer = alloc<AsmCatRow>(count);
+            var buffer = alloc<StokeAsmExportRow>(count);
             ref var dst = ref first(buffer);
             for(var i=0; i<count; i++)
             {
-                var input = default(StokeAsmImportRow);
-                Fill(skip(data,i), ref input);
-                Fill(input, ref seek(dst,i));
+                var export = default(StokeAsmExportRow);
+                var import = default(StokeAsmImportRow);
+                Fill(skip(data,i), ref import);
+                Fill(import, ref seek(dst,i));
             }
+
+            Emit(buffer);
             return buffer;
         }
 
-        void Fill(in StokeAsmImportRow src, ref AsmCatRow dst)
+        void Emit(Index<StokeAsmExportRow> src)
+        {
+            var dst = Wf.Db().Table<StokeAsmExportRow>(TargetFolder);
+            var flow = Wf.EmittingTable<StokeAsmExportRow>(dst);
+            var count = Records.emit(src, dst, 32);
+            Wf.EmittedTable(flow,count);
+        }
+
+        void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
             dst.Sequence = src.Sequence;
-            dst.OpCode = AsmExpr.opcode(src.OpCode);
             dst.AttMnemonic = src.AttMnemonic;
+            dst.OpCode = src.OpCode;
+            dst.Instruction = src.Instruction;
+            dst.Mode64 = src.Mode64;
+            dst.LegacyMode = src.LegacyMode;
+            dst.EncodingKind = src.EncodingKind;
+            dst.Properties = src.Properties;
+            dst.ImplicitRead = src.ImplicitRead;
+            dst.ImplicitWrite = src.ImplicitWrite;
+            dst.ImplicitUndef = src.ImplicitUndef;
+            dst.Protected = src.Protected;
             dst.Cpuid = src.Cpuid;
             dst.Description = src.Description;
         }

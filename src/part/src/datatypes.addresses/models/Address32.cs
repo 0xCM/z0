@@ -35,10 +35,10 @@ namespace Z0
              get => Location != 0;
         }
 
-        public A Zero
+        public static A Zero
         {
              [MethodImpl(Inline)]
-             get => Empty;
+             get => default;
         }
 
         [MethodImpl(Inline)]

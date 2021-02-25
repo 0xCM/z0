@@ -52,28 +52,27 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public static SymbolTable<Token<AsmSigOpKind>> table(IWfShell wf)
+        public static SymbolTable<AsmSigOpKind> table(IWfShell wf)
         {
             var tokens = AsmSigs.tokens();
-            var table = SymbolTables.create(tokens, t => t.Symbol);
-            var count = tokens.Count;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var token = ref tokens[i];
-                if(token.IsNonEmpty)
-                {
-                    if(!table.Index(token.Symbol, out var index))
-                        wf.Error($"Index for {token.Name} not found");
-                    // else
-                    //     wf.Row(table.Entry(index).Format());
-                }
-                else
-                {
-                    if(token.Index !=0)
-                        wf.Error($"Empty token has a nonzero index!");
-                }
-            }
-            return table;
+            return SymbolTables.create(AsmSigs.tokens());
+            // var table = SymbolTables.create(tokens, t => t.Symbol);
+            // var count = tokens.Count;
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var token = ref tokens[i];
+            //     if(token.IsNonEmpty)
+            //     {
+            //         if(!table.Index(token.Symbol, out var index))
+            //             wf.Error($"Index for {token.Name} not found");
+            //     }
+            //     else
+            //     {
+            //         if(token.Index !=0)
+            //             wf.Error($"Empty token has a nonzero index!");
+            //     }
+            // }
+            // return table;
         }
     }
 }

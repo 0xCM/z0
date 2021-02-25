@@ -7,13 +7,13 @@ namespace Z0
     public readonly struct HexScalarParser : ITextParser<ulong>
     {
         public static ParseResult<ulong> parse(string src)
-            => HexNumericParser.parse(src);
+            => HexNumericParser.parse64u(src);
 
         public static HexScalarParser Service
             => default(HexScalarParser);
 
         public ParseResult<ulong> Parse(string src)
-            => HexNumericParser.parse(src);
+            => HexNumericParser.parse64u(src);
 
         public ulong Parse(string src, ulong @default)
             => HexNumericParser.parse(src, @default);

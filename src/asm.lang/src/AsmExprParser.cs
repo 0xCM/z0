@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         Index<Token<AsmSigOpKind>> SigOpTokens;
 
-        SymbolTable<Token<AsmSigOpKind>> SigOpLookup;
+        SymbolTable<AsmSigOpKind> SigOpLookup;
 
         SeqSplit<char> SigOpSplitRule;
 
@@ -35,7 +35,7 @@ namespace Z0.Asm
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
             SigOpTokens = AsmSigs.tokens();
-            SigOpLookup = SymbolTables.create(SigOpTokens, t => t.Symbol);
+            SigOpLookup = SymbolTables.create(SigOpTokens);
             SigOpSplitRule = Rules.splitter(AsmExprFacets.OperandDelimiter);
         }
 

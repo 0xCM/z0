@@ -34,7 +34,7 @@ namespace Z0.Asm
     [Record(TableId)]
     public struct StokeAsmImportRow : IRecord<StokeAsmImportRow>
     {
-        public const string TableId = "stoke-asmcat";
+        public const string TableId = "stoke.import";
 
         public ushort Sequence;
 

@@ -20,15 +20,12 @@ namespace Z0
             var count = fields.Length;
             var buffer = memory.alloc<EnumLiteralDetail<E>>(count);
             ref var dst = ref memory.first(buffer);
-            //var indices = root.list<EnumLiteralDetail<E>>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(fields, i);
                 seek(dst,i) = new EnumLiteralDetail<E>(field, type, i, field.Name, (E)field.GetRawConstantValue());
-                //indices.Add(new EnumLiteralDetail<E>(field, type, i, field.Name, value));
             }
             return buffer;
-            //return indices.ToIndex();
         }
 
         /// <summary>
@@ -47,7 +44,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var literal = ref src[i];
-                seek(dst,i) =  evalue(literal, EnumValue.scalar<E,T>(literal.LiteralValue));
+                seek(dst,i) = evalue(literal, EnumValue.scalar<E,T>(literal.LiteralValue));
             }
             return buffer;
         }

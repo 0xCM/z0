@@ -18,9 +18,9 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            var flow = Wf.Creating(nameof(Etl));
-            Etl = AsmCatalogEtl.create(Wf);
-            Wf.Created(flow, nameof(Etl));
+            var flow = Wf.Creating(nameof(Catalog));
+            Catalog = AsmCatalogService.create(Wf);
+            Wf.Created(flow, nameof(Catalog));
 
             flow = Wf.Creating(nameof(AsmParser));
             AsmParser = AsmExpr.parser(Wf);
@@ -39,7 +39,7 @@ namespace Z0.Asm
             Wf.Created(flow, nameof(ApiServices));
         }
 
-        AsmCatalogEtl Etl;
+        AsmCatalogService Catalog;
 
         AsmExprParser AsmParser;
 
@@ -55,32 +55,25 @@ namespace Z0.Asm
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
-        // BasedApiMemberCatalog EmitBasedCatalog()
-        // {
-        //     var jitter = ApiServices.ApiJit();
-        //     var members = jitter.JitApi();
-        //     return ApiServices.RebaseMembers(members);
-        // }
-
         void EmitApiClasses()
             => ApiServices.EmitApiClasses();
 
         void ShowMnemonicSymbols()
         {
             const string FormatPattern = "{0, -8} | {1, -8} | {2}";
-            var literals = Etl.MnemonicSymbols();
+            var literals = Catalog.MnemonicSymbols();
             var count = literals.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var literal = ref skip(literals, i);
-                var format = string.Format(FormatPattern, literal.Index, literal.EncodedValue, literal.Name);
+                var format = string.Format(FormatPattern, literal.Index, literal.Kind, literal.Name);
                 Wf.Row(format);
             }
         }
 
         void ShowSpecifiers()
         {
-            var specifiers = Etl.Specifiers();
+            var specifiers = Catalog.Specifiers();
             var count = specifiers.Length;
             for(var i=0; i<count; i++)
             {
@@ -89,16 +82,10 @@ namespace Z0.Asm
             }
         }
 
-        void LoadCatalogRows()
-        {
-            var rows = Etl.LoadCatalogRows();
-            Wf.Status($"Loaded {rows.Length} catalog rows");
-        }
-
         void EmitSpecifiers()
         {
-            var specifiers = Etl.Specifiers();
-            Etl.Emit(specifiers);
+            var specifiers = Catalog.Specifiers();
+            Catalog.Emit(specifiers);
         }
 
         public void GenBits()
@@ -122,15 +109,15 @@ namespace Z0.Asm
 
         void ShowEncodingKindNames()
         {
-            root.iter(Etl.EncodingKindNames(), Wf.Row);
+            root.iter(Catalog.EncodingKindNames(), Wf.Row);
         }
 
 
         void CheckAsmSymbols()
         {
-            var symbols = AsmSigs.table(Wf);
-            var entries = symbols.Entries;
-            root.iter(entries, e => Wf.Row(e));
+            var table = AsmSigs.table(Wf);
+            var tokens = table.Tokens;;
+            root.iter(tokens, e => Wf.Row(e));
         }
 
         ApiHostCaptureSet RunCapture(Type host)
@@ -263,31 +250,35 @@ namespace Z0.Asm
         }
 
 
+        void CheckExportRows()
+        {
+            var rows = Catalog.CreateExportRows();
+            root.iter(rows, row => Wf.Row(row.AttMnemonic));
+        }
+
         void CheckInterfaceMaps()
         {
             var imap = Clr.imap(typeof(BitLogicEvaluator), typeof(IBitLogicEvaluator));
             Wf.Row(imap.Format());
         }
 
+        void ShowCatalogSymbols()
+        {
+            var symbols =  Catalog.CatalogSymbols;
+            root.iter(symbols.Flags, f => Wf.Row(f));
+        }
+
         public unsafe void Run()
         {
-            //EmitBasedCatalog();
             //ApiServices.RebaseMembers();
-            //ApiServices.RebaseMembers();
-            var entries = ApiServices.LoadRebaseEntries();
-            Wf.Status($"Loaded {entries.Length} entries");
-            var format = Records.formatFx<ApiCatalogRecord>();
-            var rows = entries.Select(format);
-            Wf.Rows(rows.Take(20).Array());
 
-            //ShowSpecifiers();
-            //var clang = Clang.create(Wf);
-            //Wf.Status(clang.print_targets().Format());
-            //var set = RunCapture(typeof(Clang));
-            //ProcessCatalog();
-            //CheckIndexDecoder();
+            // var entries = ApiServices.LoadRebaseEntries();
+            // Wf.Status($"Loaded {entries.Length} entries");
+            // var format = Records.formatFx<ApiCatalogRecord>();
+            // var rows = entries.Select(format);
+            // Wf.Rows(rows.Take(20).Array());
 
-            //var captured = RunCapture(typeof(math));
+            CheckExportRows();
         }
 
         public static void Main(params string[] args)

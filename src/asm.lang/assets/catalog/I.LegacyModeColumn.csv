@@ -1,5 +1,4 @@
 | Identifier | Value | Description   |
-| Yea        | V     | Supported     |
-| Nea        | I     | Not supported |
+| Valid      | V     | Supported     |
+| Invalid    | I     | Not supported |
 | NE         | N.E.  | Not encodable |
-
