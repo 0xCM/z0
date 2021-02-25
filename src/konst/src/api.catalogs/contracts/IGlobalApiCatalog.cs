@@ -31,9 +31,9 @@ namespace Z0
 
         bool FindMethod(OpUri uri, out MethodInfo method);
 
-        IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts);
+        Index<IApiPartCatalog> PartCatalogs(params PartId[] parts);
 
-        IEnumerable<IApiHost> PartHosts(params PartId[] parts);
+        Index<IApiHost> PartHosts(params PartId[] parts);
 
         MethodInfo[] Operations {get;}
     }

@@ -211,7 +211,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var file = ref skip(files,i);
-                var inner = wf.Processing(file, "apihex");
+                var inner = wf.Running(file, "apihex");
                 var rows = hexrows(file).View;
                 var blocks = rows.Length;
                 if(blocks == 0)
@@ -223,7 +223,7 @@ namespace Z0
                     for(var j=0u; j<blocks; j++)
                         store(skip(rows,j), ref seek(target,j));
                     dst.AddRange(buffer);
-                    wf.Processed(inner, file, blocks);
+                    wf.Ran(inner, blocks);
                 }
             }
 

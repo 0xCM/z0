@@ -21,7 +21,7 @@ namespace Z0
             {
                 var emitted = Emit(index.HostCodeBlocks(host), dst);
                 emissions.Add(emitted);
-                Wf.Processed(host, emitted.Count);
+                Wf.Status(emitted.Count);
                 counter += emitted.Count;
             }
             Wf.Ran(flow);

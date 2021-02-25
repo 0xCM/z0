@@ -177,7 +177,7 @@ namespace Z0
 
         void IceStuff()
         {
-            var flow = Wf.Running(Host);
+            var flow = Wf.Running();
 
             var bitfield = Ice.IceInstructions.init();
             var indices = bitfield.Indices;
@@ -185,7 +185,7 @@ namespace Z0
             foreach(var i in info)
                 Wf.Row(i);
 
-            Wf.Ran(flow, Host);
+            Wf.Ran(flow);
         }
 
 

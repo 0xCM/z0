@@ -30,7 +30,7 @@ namespace Z0.Asm
         {
             try
             {
-                Wf.Running(Host, uri);
+                var flow = Wf.Running(uri);
                 var count = src.Length;
                 var dst = alloc<AsmRoutine>(count);
                 for(var i=0; i<count; i++)
@@ -43,7 +43,7 @@ namespace Z0.Asm
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Wf.Status(string.Format("Decoded {0} {1} functions", dst.Length, uri));
+                Wf.Ran(flow, string.Format("Decoded {0} {1} functions", dst.Length, uri));
                 return dst;
             }
             catch(Exception e)

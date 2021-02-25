@@ -42,12 +42,12 @@ namespace Z0
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
             Decoder = asm.RoutineDecoder;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         [MethodImpl(Inline)]
@@ -59,7 +59,7 @@ namespace Z0
 
         public CapturedBlock Capture(MemoryAddress src)
         {
-            var flow = Wf.Running(Host, src);
+            var flow = Wf.Running(src);
 
             ClearBuffers();
 
@@ -92,7 +92,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran(flow, Host, captured);
+            Wf.Ran(flow, captured);
 
             return captured;
         }

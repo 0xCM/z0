@@ -18,7 +18,7 @@ namespace Z0
         public uint EmitCilRecords(Assembly src)
         {
             var srcPath = FS.path(src.Location);
-            var processing = Wf.Processing(srcPath, src);
+            var processing = Wf.Running(srcPath);
             var methods = CliFileReader.cil(srcPath);
             var count = (uint)methods.Length;
             if(count != 0)
@@ -34,7 +34,7 @@ namespace Z0
                 Wf.EmittedTable<CilDataRow>(flow, count);
             }
 
-            Wf.Processed(processing, srcPath, src);
+            Wf.Ran(processing, src);
 
             return count;
         }

@@ -114,6 +114,15 @@ namespace Z0
         public WfExecToken Ran<T>(WfExecFlow<T> src)
         {
             var token = CloseExecToken(src.Token);
+            WfEvents.signal(this).Ran(src.Data);
+            Tokens.TryAdd(token.Started, token);
+            return token;
+        }
+
+        public WfExecToken Ran<T,D>(WfExecFlow<T> src, D data)
+        {
+            var token = CloseExecToken(src.Token);
+            WfEvents.signal(this).Ran(data);
             Tokens.TryAdd(token.Started, token);
             return token;
         }

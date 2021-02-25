@@ -20,23 +20,23 @@ namespace Z0.Asm
         {
             var flow = Wf.Creating(nameof(Catalog));
             Catalog = AsmCatalogService.create(Wf);
-            Wf.Created(flow, nameof(Catalog));
+            Wf.Created(flow);
 
             flow = Wf.Creating(nameof(AsmParser));
             AsmParser = AsmExpr.parser(Wf);
-            Wf.Created(flow, nameof(AsmParser));
+            Wf.Created(flow);
 
             flow = Wf.Creating(nameof(Asm));
             Asm = AsmServices.context(Wf);
-            Wf.Created(flow, nameof(Asm));
+            Wf.Created(flow);
 
             flow = Wf.Creating(nameof(ApiServices));
             ApiServices = Wf.ApiServices();
-            Wf.Created(flow, nameof(ApiServices));
+            Wf.Created(flow);
 
             flow = Wf.Creating(nameof(AsmServices));
             AsmServices = Wf.AsmServices();
-            Wf.Created(flow, nameof(ApiServices));
+            Wf.Created(flow);
         }
 
         AsmCatalogService Catalog;
@@ -249,6 +249,13 @@ namespace Z0.Asm
             archive.CodeBlocks(part, accept);
         }
 
+        void RunEvaluate()
+        {
+            var flow = Wf.Running("Evaluator");
+            var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
+            evaluate.Execute(Wf.Api.PartIdentities);
+            Wf.Ran(flow);
+        }
 
         void CheckExportRows()
         {
@@ -278,7 +285,7 @@ namespace Z0.Asm
             // var rows = entries.Select(format);
             // Wf.Rows(rows.Take(20).Array());
 
-            CheckExportRows();
+            RunEvaluate();
         }
 
         public static void Main(params string[] args)

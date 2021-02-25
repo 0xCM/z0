@@ -44,8 +44,5 @@ namespace Z0
 
         public void Dispose()
             => Wf.Ran(this);
-
-        public static implicit operator WfExecFlow(WfExecFlow<T> src)
-            => new WfExecFlow(src.Wf, src.Token);
     }
 }

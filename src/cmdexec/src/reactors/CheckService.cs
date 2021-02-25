@@ -40,8 +40,7 @@ namespace Z0
 
 
             {
-                var flow = Wf.Running(Host);
-
+                var flow = Wf.Running();
                 using var kernel = NativeModules.kernel32();
                 Wf.Row(kernel);
 
@@ -51,7 +50,7 @@ namespace Z0
                 var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
                 Wf.Row(a);
 
-                Wf.Ran(flow, Host);
+                Wf.Ran(flow);
             }
         }
     }

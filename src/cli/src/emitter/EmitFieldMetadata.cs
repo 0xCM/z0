@@ -36,7 +36,7 @@ namespace Z0
             Host = host;
             Parts = wf.Api.Parts;
             TargetDir = wf.ResourceRoot + FS.folder("fields");
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public static ReadOnlySpan<byte> RenderWidths
@@ -45,7 +45,7 @@ namespace Z0
         public void Run()
         {
             var count = 0u;
-            var flow = Wf.Running(Host, Parts.Length);
+            var flow = Wf.Running(Parts.Length);
 
             foreach(var part in Parts)
             {
@@ -59,7 +59,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran(flow, Host, count);
+            Wf.Ran(flow, count);
         }
 
         uint Emit(IPart part)
@@ -84,7 +84,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(Host.Id);
+            Wf.Disposed();
         }
     }
 }

@@ -73,7 +73,7 @@ namespace Z0
         public void Dispose()
         {
             Disposing();
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
     }
 }

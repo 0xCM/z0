@@ -19,16 +19,17 @@ namespace Z0
 
         public WfExecToken Run(in DynamicAction fx)
         {
-            var flow = Wf.Running(fx.Id);
-            try
-            {
-                fx.Invoke();
-                return Wf.Ran(flow, fx.Id);
-            }
-            catch(Exception e)
-            {
-                return Wf.Error(flow, e);
-            }
+            // var flow = Wf.Running(fx.Id);
+            // try
+            // {
+            //     fx.Invoke();
+            //     return Wf.Ran(flow, fx.Id);
+            // }
+            // catch(Exception e)
+            // {
+            //     return Wf.Error(flow, e);
+            // }
+            return default;
         }
 
         public EvalResult Measure(in DynamicAction fx)

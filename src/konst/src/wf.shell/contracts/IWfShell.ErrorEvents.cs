@@ -28,17 +28,5 @@ namespace Z0
         {
             signal(this).Error(data, WfEvents.originate("WorkflowError", caller, file, line));
         }
-
-        WfExecToken Error(WfExecFlow flow, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-        {
-            signal(this).Error(e, WfEvents.originate("WorkflowError", caller, file, line));
-            return Ran(flow);
-        }
-
-        WfExecToken Error<T>(WfExecFlow<T> flow, Exception e, [Caller] string caller = null, [File] string file = null, [Line]int? line = null)
-        {
-            signal(this).Error(e, WfEvents.originate("WorkflowError", caller, file, line));
-            return Ran(flow);
-        }
     }
 }

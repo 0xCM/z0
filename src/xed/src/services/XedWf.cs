@@ -54,7 +54,7 @@ namespace Z0
             const string kind = "instructions";
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
-            var flow = Wf.Processing(file, kind);
+            var flow = Wf.Running(file);
             var parsed = span(parser.ParseInstructions(file));
             for(var j = 0; j<parsed.Length; j++)
             {
@@ -62,7 +62,7 @@ namespace Z0
                 Xed.emit(parsed, Config.InstructionDir + file.FileName);
                 patterns.AddRange(p.Patterns);
             }
-            Wf.Processed(flow, FS.path(file.Name), kind, parsed.Length);
+            Wf.Ran(flow, parsed.Length);
             return patterns.ToArray();
         }
 

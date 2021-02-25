@@ -48,19 +48,12 @@ namespace Z0
 
         WfExecToken CloseExecToken(WfExecToken src);
 
-        WfExecToken Ran(WfExecFlow src);
-
-        WfExecToken Ran<T>(WfExecFlow<T> src);
-
         WfServices Services {get;}
 
         Env Env {get;}
 
         string ITextual.Format()
             => AppName;
-
-        WfExecFlow Flow()
-            => new WfExecFlow(this, NextExecToken());
 
         WfExecFlow<T> Flow<T>(T data)
             => new WfExecFlow<T>(this, data, NextExecToken());
@@ -126,35 +119,5 @@ namespace Z0
 
         void Warn<T>(T content)
             => signal(this).Warn(content);
-
-        IWfService Service(Type host)
-        {
-            var service = (IWfService)Activator.CreateInstance(host);
-            service.Init(this);
-            return service;
-        }
-
-        H Service<H>()
-            where H : IWfService<H>, new()
-        {
-            var svc = new H();
-            svc.Init(this);
-            return svc;
-        }
-
-        void Disposed(WfStepId step)
-        {
-            if(Verbosity.IsBabble())
-                Raise(disposed(step, Ct));
-        }
-
-        void Disposed(WfHost host)
-        {
-            if(Verbosity.IsBabble())
-                Raise(disposed(host.Id, Ct));
-        }
-
-        void Disposed()
-            => Disposed(Host);
     }
 }

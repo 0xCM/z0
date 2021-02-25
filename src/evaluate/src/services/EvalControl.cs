@@ -27,30 +27,33 @@ namespace Z0
             ApiGlobal = wf.Api;
         }
 
-        [Op]
-        public static ApiHostMemberCode code(IWfShell wf, ApiHostUri host, FS.FolderPath root)
+        public ApiHostMemberCode Code(ApiHostUri host, FS.FilePath src)
         {
-            var catalog = ApiCatalogs.HostCatalog(wf, wf.Api.FindHost(host).Require());
+            var catalog = ApiCatalogs.HostCatalog(Wf, Wf.Api.FindHost(host).Require());
             if(catalog.IsEmpty)
                 return ApiHostMemberCode.Empty;
-
-            var idx = catalog.Index();
-            var archive =  ApiArchives.capture(root);
-            var paths =  ApiArchives.host(FS.dir(root.Name), host);
-            var code = ApiCode.reader(wf).Read(paths.HostHexPath);
-            var opIndex =  ApiQuery.index(code);
-            return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
+            else
+                return new ApiHostMemberCode(host, ApiQuery.index(catalog.Index(), ApiQuery.index(ApiCode.reader(Wf).Read(src))));
         }
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)
         {
-            var dir = Wf.Db().ParsedExtractRoot();
-            var capture = ApiArchives.host(dir, host.Uri);
-            if(capture.HostHexPath.Exists)
+            var src = Wf.Db().ApiHexFile(host.Uri);
+            if(!src.Exists)
             {
+                Wf.Error($"The host hex file {src} does not exist");
+                return;
+            }
 
-                var code = EvalControl.code(Wf, host.Uri, dir).Members;
-                Wf.Status($"Correlated {code.EntryCount} {host} implemented operations with executable code");
+            var flow = Wf.Running($"Evaluating {host.Uri.Format()}");
+            var code = Code(host.Uri, src).Members;
+
+            var count = code.EntryCount;
+            if(count == 0)
+                Wf.Status($"The host {host.Uri} has no executable members");
+            else
+            {
+                Wf.Status($"Evaluating {count} {host} operations");
 
                 foreach(var api in code.UnaryOperators)
                     Dispatcher.Dispatch(buffers, api, OperatorClasses.unary());
@@ -58,18 +61,28 @@ namespace Z0
                 foreach(var api in code.BinaryOperators)
                     Dispatcher.Dispatch(buffers, api, OperatorClasses.binary());
             }
+
+            Wf.Ran(flow);
         }
 
         void ExecuteCatalog(IApiPartCatalog catalog)
         {
+            var flow = Wf.Running($"Evaluating {catalog.PartId.Format()}");
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
             foreach(var host in catalog.OperationHosts)
                 ExecuteHost(buffers.Tokenize(), host);
+            Wf.Ran(flow);
         }
 
         public void Execute(params PartId[] parts)
         {
+            var catalogs = ApiGlobal.PartCatalogs(parts).View;
+            var count = catalogs.Length;
+            var flow = Wf.Running($"Evaluating {count} parts");
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
+            for(var i=0; i<count; i++)
+                ExecuteCatalog(memory.skip(catalogs,i));
+
             root.iter(ApiGlobal.PartCatalogs(parts), ExecuteCatalog);
         }
     }

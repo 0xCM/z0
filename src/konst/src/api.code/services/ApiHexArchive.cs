@@ -62,9 +62,9 @@ namespace Z0
                 Wf.Warn(Msg.HostFileMissing.Format(host,path));
                 return sys.empty<ApiCodeBlock>();
             }
-            var flow = Wf.Processing(path, host);
+            var flow = Wf.Running(path);
             var data = Read(path);
-            Wf.Processed(flow, path, data.Length);
+            Wf.Ran(flow, data.Length);
             return data;
         }
 

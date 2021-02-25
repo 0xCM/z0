@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Part;
 
@@ -58,7 +57,7 @@ namespace Z0
             return host != null;
         }
 
-        public IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts)
+        public Index<IApiPartCatalog> PartCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return Catalogs.Storage;
@@ -76,7 +75,7 @@ namespace Z0
             return false;
         }
 
-        public IEnumerable<IApiHost> PartHosts(params PartId[] parts)
+        public Index<IApiHost> PartHosts(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return ApiHosts;

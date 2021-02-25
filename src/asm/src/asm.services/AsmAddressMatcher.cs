@@ -25,18 +25,18 @@ namespace Z0
             Wf = wf.WithHost(host);
             Extracted = extracted;
             Decoded = decoded;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
 
         public void Dispose()
         {
-           Wf.Disposed(Host);
+           Wf.Disposed();
         }
 
         public void Run()
         {
-            var flow = Wf.Running(Host, Seq.delimit(Extracted.Length, Decoded.Length));
+            var flow = Wf.Running(Seq.delimit(Extracted.Length, Decoded.Length));
 
             try
             {
@@ -58,7 +58,7 @@ namespace Z0
                 Wf.Error(Host, e);
             }
 
-            Wf.Ran(flow, Host, Seq.delimit(Extracted.Length, Decoded.Length));
+            Wf.Ran(flow, Seq.delimit(Extracted.Length, Decoded.Length));
         }
     }
 }

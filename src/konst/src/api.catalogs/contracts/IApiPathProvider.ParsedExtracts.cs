@@ -13,7 +13,6 @@ namespace Z0
         FS.FolderPath ParsedExtractRoot()
             => CaptureRoot() + FS.folder(parsed);
 
-
         FS.FilePath ParsedExtractFile(FS.FileName name)
             => ParsedExtractRoot() + name;
 

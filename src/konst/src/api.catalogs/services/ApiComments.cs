@@ -63,13 +63,13 @@ namespace Z0
             var t = default(ApiComment);
             foreach(var xmlfile in paths)
             {
-                var flow = wf.Processing(xmlfile, "Processing XML documentation comment file");
+                var flow = wf.Running(xmlfile);
                 var data = xmlfile.ReadText();
                 var parsed = parse(data);
                 if(parsed.Count != 0)
                     dst[xmlfile] = parsed;
 
-                wf.Processed(flow, xmlfile, t, parsed.Count);
+                wf.Ran(flow, parsed.Count);
             }
             return dst;
         }

@@ -30,7 +30,7 @@ namespace Z0
             Wf = wf.WithHost(Host).WithVerbosity(LogLevel.Babble);
         }
 
-        WfExecToken Ran<C,T>(WfExecFlow flow, C @case, T data)
+        WfExecToken Ran<C,T>(WfExecFlow<string> flow, C @case, T data)
             => Wf.Ran(flow, Seq.delimit(@case, data));
 
         [Op]

@@ -10,15 +10,27 @@ namespace Z0
 
     partial interface IWfShell
     {
-        WfExecFlow Creating<T>(T data)
+        void Created()
         {
-            signal(this).Creating(data);
-            return Flow();
+            if(Verbosity.IsBabble())
+                Raise(created(Host.Id, Ct));
         }
 
-        WfExecToken Created<T>(WfExecFlow flow, T data)
+        void Disposed()
         {
-            signal(this).Created(data);
+            if(Verbosity.IsBabble())
+                Raise(disposed(Host.Id, Ct));
+        }
+
+        WfExecFlow<T> Creating<T>(T data)
+        {
+            signal(this).Creating(data);
+            return Flow(data);
+        }
+
+        WfExecToken Created<T>(WfExecFlow<T> flow)
+        {
+            signal(this).Created(flow.Data);
             return Ran(flow);
         }
     }

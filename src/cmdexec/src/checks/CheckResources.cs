@@ -36,14 +36,14 @@ namespace Z0
             Wf = wf;
             Host = host;
             Source = src;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Run()
         {
-            var flow = Wf.Running(Host);
+            var flow = Wf.Running();
             TryRun();
-            Wf.Ran(flow, Host);
+            Wf.Ran(flow);
         }
 
         void Execute()
@@ -68,7 +68,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
     }
 }
