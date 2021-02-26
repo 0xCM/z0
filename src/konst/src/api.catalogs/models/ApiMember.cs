@@ -21,7 +21,7 @@ namespace Z0
 
         public MethodInfo Method {get;}
 
-        public ApiClass ApiKind {get;}
+        public ApiClass ApiClass {get;}
 
         public MemoryAddress BaseAddress {get;}
 
@@ -44,7 +44,7 @@ namespace Z0
         {
             Id = uri.OpId;
             OpUri = uri;
-            ApiKind = kindId;
+            ApiClass = kindId;
             Method = z.insist(method);
             BaseAddress = address;
             Host = OpUri.Host;
@@ -59,7 +59,7 @@ namespace Z0
             var result = Id.Equals(src.Id);
             result &= OpUri.Equals(src.OpUri);
             result &= Method.Equals(src.Method);
-            result &= ApiKind.Equals(src.ApiKind);
+            result &= ApiClass.Equals(src.ApiClass);
             result &= BaseAddress.Equals(src.BaseAddress);
             result &= Host.Equals(src.Host);
             return result;
@@ -71,7 +71,7 @@ namespace Z0
             dst.Address = BaseAddress;
             dst.Host = Host.UriText;
             dst.Member = Method.DisplayName();
-            dst.ApiKind = ApiKind;
+            dst.ApiKind = ApiClass;
             dst.Uri = OpUri.UriText;
             return dst;
         }

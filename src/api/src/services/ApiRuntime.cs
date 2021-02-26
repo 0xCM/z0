@@ -29,9 +29,12 @@ namespace Z0
         [Op]
         public static ApiHostCatalog catalog(IWfShell wf, IApiHost src)
         {
+            var flow = wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
             var jit = ApiJit.create(wf);
             var members = jit.Jit(src);
-            return members.Length == 0 ? ApiHostCatalog.Empty : catalog(src, members);
+            var result = members.Length == 0 ? ApiHostCatalog.Empty : catalog(src, members);
+            wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
+            return result;
         }
 
         /// <summary>

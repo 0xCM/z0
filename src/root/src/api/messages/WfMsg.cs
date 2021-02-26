@@ -4,11 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [Cmd]
-    public struct EmitHostHexCmd : ICmd<EmitHostHexCmd>
-    {
-        public ApiHostUri ApiHost;
+    using System;
+    using System.Runtime.CompilerServices;
 
-        public ApiMemberCodeBlocks Source;
+    using static Root;
+
+    public readonly struct WfMsg
+    {
+
     }
 }

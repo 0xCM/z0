@@ -12,12 +12,12 @@ namespace Z0
     /// <summary>
     /// Defines a sequence of <see cref='ApiMemberCode'/> records
     /// </summary>
-    public readonly struct ApiMemberCodeBlocks : IIndex<ApiMemberCode>
+    public readonly struct ApiMemberBlocks : IIndex<ApiMemberCode>
     {
         readonly Index<ApiMemberCode> Data;
 
         [MethodImpl(Inline)]
-        public ApiMemberCodeBlocks(ApiMemberCode[] src)
+        public ApiMemberBlocks(ApiMemberCode[] src)
             => Data = src;
 
         public ReadOnlySpan<ApiMemberCode> View
@@ -56,18 +56,25 @@ namespace Z0
             get => ref Data[index];
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ApiMemberCodeBlocks(ApiMemberCode[] src)
-            => new ApiMemberCodeBlocks(src);
+        public ApiMemberBlocks Filter(ApiClass @class)
+            => Data.Where(b => b.Member.ApiClass == @class);
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiMemberCode[](ApiMemberCodeBlocks src)
+        public static implicit operator ApiMemberBlocks(ApiMemberCode[] src)
+            => new ApiMemberBlocks(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMemberBlocks(Index<ApiMemberCode> src)
+            => new ApiMemberBlocks(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMemberCode[](ApiMemberBlocks src)
             => src.Storage;
 
-        public static ApiMemberCodeBlocks Empty
+        public static ApiMemberBlocks Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiMemberCodeBlocks(sys.empty<ApiMemberCode>());
+            get => new ApiMemberBlocks(sys.empty<ApiMemberCode>());
         }
     }
 }

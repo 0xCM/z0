@@ -76,6 +76,6 @@ namespace Z0
 
     partial struct Msg
     {
-        public static RenderPattern<CmdId,string> DispatchingCmd => "Dispatching {0} command to {1}";
+        public static MsgPattern<CmdId,string> DispatchingCmd => "Dispatching {0} command to {1}";
     }
 }

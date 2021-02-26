@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static ApiSigs;
-
     partial struct ApiSigs
     {
         public interface ITypeParameter

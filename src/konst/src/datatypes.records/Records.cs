@@ -17,7 +17,7 @@ namespace Z0
 
     partial struct Msg
     {
-        public static RenderPattern<uint,uint> RecordFieldWidthMismatch
+        public static MsgPattern<uint,uint> RecordFieldWidthMismatch
             => "The record field count of {0} does not match the supplied width count of {1}";
     }
 }

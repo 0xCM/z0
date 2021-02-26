@@ -119,6 +119,6 @@ namespace Z0
 
     partial struct Msg
     {
-        public static RenderPattern<ApiHostUri,FS.FilePath> HostFileMissing => "The {0} file {1} does not exist";
+        public static MsgPattern<ApiHostUri,FS.FilePath> HostFileMissing => "The {0} file {1} does not exist";
     }
 }

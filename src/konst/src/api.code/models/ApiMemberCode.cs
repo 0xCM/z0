@@ -47,12 +47,6 @@ namespace Z0
             get => Encoded.OpUri;
         }
 
-        public ApiArtifactKey MetaUri
-        {
-            [MethodImpl(Inline)]
-            get => Member.MetaUri;
-        }
-
         public byte[] Storage
         {
             [MethodImpl(Inline)]
@@ -93,10 +87,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberCode Resequence(uint seq)
-            => new ApiMemberCode(Member, Encoded, seq, TermCode);
-
-        [MethodImpl(Inline)]
         ApiMemberCode(ApiMember member, BinaryCode code)
         {
             Sequence = 0;
@@ -112,7 +102,7 @@ namespace Z0
         }
 
         public ApiClass KindId
-             => Member.ApiKind;
+             => Member.ApiClass;
 
         public OpIdentity Id
             => Member.Id;

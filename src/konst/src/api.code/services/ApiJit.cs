@@ -276,12 +276,12 @@ namespace Z0
 
     partial struct Msg
     {
-        public static RenderPattern<int> JittingParts => "Jitting {0} parts";
+        public static MsgPattern<int> JittingParts => "Jitting {0} parts";
 
-        public static RenderPattern<PartId> JittingPart => "Jitting {0} members";
+        public static MsgPattern<PartId> JittingPart => "Jitting {0} members";
 
-        public static RenderPattern<int,PartId> JittedPart => "Jitted {0} {1} members";
+        public static MsgPattern<int,PartId> JittedPart => "Jitted {0} {1} members";
 
-        public static RenderPattern<dynamic,dynamic> JittedParts => "Jitted {0} members from {1} parts";
+        public static MsgPattern<dynamic,dynamic> JittedParts => "Jitted {0} members from {1} parts";
     }
 }

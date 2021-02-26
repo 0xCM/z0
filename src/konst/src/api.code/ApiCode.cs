@@ -227,7 +227,7 @@ namespace Z0
                 }
             }
 
-            wf.Ran(flow, $"Accumulated a total of {dst.Count} descriptors");
+            wf.Ran(flow, Msg.AccumulatedDescriptors.Format(dst.Count));
             return dst.OrderBy(x => x.Base).ToArray();
         }
 
@@ -274,8 +274,9 @@ namespace Z0
 
     partial struct Msg
     {
-        public static RenderPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
+        public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
 
-       public static RenderPattern<Count,FS.FileUri> CollectedApiHexDescriptors => "Collected {0} api hex blocks from {1}";
+        public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";
+
     }
 }

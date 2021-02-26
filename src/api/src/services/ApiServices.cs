@@ -17,7 +17,13 @@ namespace Z0
 
     public sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
     {
-        public ApiMemberCodeBlocks Correlate(Index<IApiPartCatalog> src)
+        public ApiMemberBlocks Correlate()
+        {
+            var catalogs = Wf.Api.PartCatalogs();
+            return Correlate(catalogs);
+        }
+
+        public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
         {
             var flow = Wf.Running($"Correlating parts across {src.Count} catalogs");
             var reader = ApiCode.reader(Wf);
@@ -36,7 +42,7 @@ namespace Z0
                     var hexpath = Wf.Db().ApiHexFile(host.Uri);
                     if(hexpath.Exists)
                     {
-                        var blocks = ApiCode.reader(Wf).Read(hexpath);
+                        var blocks = reader.Read(hexpath);
                         var catalog = ApiRuntime.catalog(Wf, Wf.Api.FindHost(host.Uri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }
@@ -54,7 +60,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public int Correlate(ApiHostCatalog src, Index<ApiCodeBlock> blocks, List<ApiMemberCode> dst, List<ApiCorrelationEntry> records)
+        int Correlate(ApiHostCatalog src, Index<ApiCodeBlock> blocks, List<ApiMemberCode> dst, List<ApiCorrelationEntry> records)
         {
             var part = src.Host.PartId;
             var members = src.Members.OrderBy(x => x.Id).Array();
@@ -261,7 +267,7 @@ namespace Z0
 
         partial struct Msg
         {
-            public static RenderPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
+            public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
         }
     }
 }

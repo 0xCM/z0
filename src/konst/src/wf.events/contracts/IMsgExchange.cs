@@ -8,9 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-
-    public interface IWfMsgExchange : IAppMsgQueue
+    public interface IMsgExchange : IAppMsgQueue
     {
         void IAppMsgSink.Deposit(IEnumerable<IAppMsg> msg)
         {}
@@ -24,6 +22,7 @@ namespace Z0
 
         void ISink<IAppMsg>.Deposit(IAppMsg src)
         {}
+
         IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()
             => sys.empty<IAppMsg>();
 
@@ -35,24 +34,5 @@ namespace Z0
 
         void IAppMsgQueueFlush(Exception e, IAppMsgSink target)
         {}
-    }
-
-    public sealed class WfMsgExchange : IWfMsgExchange
-    {
-        readonly IWfShell Wf;
-
-        public event Action<IAppMsg> Next;
-
-        /// <summary>
-        /// Creates an exchange and underlying queue
-        /// </summary>
-        public static IWfMsgExchange Create(IWfShell wf)
-            => new WfMsgExchange(wf);
-
-        public WfMsgExchange(IWfShell wf)
-        {
-            Wf = wf;
-            Next = x => {};
-        }
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-
+    using static memory;
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly partial struct ClrEnums
     {

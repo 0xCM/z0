@@ -323,10 +323,10 @@ namespace Z0
 
     readonly struct Msg
     {
-        public static RenderPattern<T> Dispatching<T>()
+        public static MsgPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
 
-        public static RenderPattern<CmdId> Dispatching() => "Dispatching {0}";
+        public static MsgPattern<CmdId> Dispatching() => "Dispatching {0}";
     }
 
     public static partial class XTend { }

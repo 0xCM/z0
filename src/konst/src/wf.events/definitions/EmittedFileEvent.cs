@@ -6,7 +6,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static EventLevels;
 
     [Event(Kind)]
     public readonly struct EmittedFileEvent : IWfEvent<EmittedFileEvent>

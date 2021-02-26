@@ -98,7 +98,7 @@ namespace Z0
         public bit EvalCellOperator(BufferTokens buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
-            var kid = api.Member.ApiKind;
+            var kid = api.Member.ApiClass;
             var count = 128;
             var n = n2;
 
@@ -193,7 +193,7 @@ namespace Z0
 
         public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOperatorClass k)
         {
-            var kid = api.Member.ApiKind;
+            var kid = api.Member.ApiClass;
             int count = 128;
             if(kid == 0 || kid == ApiClass.Div || kid == ApiClass.Mod)
                 return;
@@ -245,7 +245,7 @@ namespace Z0
 
         public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOperatorClass k)
         {
-            var kid = api.Member.ApiKind;
+            var kid = api.Member.ApiClass;
             int count = 128;
             if(kid == 0 || kid == ApiClass.Div || kid == ApiClass.Mod)
                 return;

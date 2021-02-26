@@ -241,6 +241,13 @@ namespace Z0.Asm
             Wf.Row(buffer.Emit());
         }
 
+        void FilterApiBlocks()
+        {
+            var blocks = ApiServices.Correlate();
+            var f1 = blocks.Filter(ApiClass.And);
+            root.iter(f1,f => Wf.Row(f.Uri));
+        }
+
         void CheckApiHexArchive()
         {
             var part = PartId.Math;
@@ -289,7 +296,7 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
-            CheckResPack();
+            FilterApiBlocks();
 
             //Resources.accessors()
         }
