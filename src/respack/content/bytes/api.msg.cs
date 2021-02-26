@@ -1,0 +1,19 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+// Generated   : 2021-02-25 19:10:08 -06:00
+//-----------------------------------------------------------------------------
+namespace Z0.ByteCode
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+
+    public static class api_msg
+    {
+        public static ReadOnlySpan<byte> get_IndexedHost_ᐤᐤ  =>  new byte[19]{0x0f,0x1f,0x44,0x00,0x00,0x48,0xb8,0xc8,0x65,0x46,0xe7,0x8f,0x02,0x00,0x00,0x48,0x8b,0x00,0xc3};
+
+        public static ReadOnlySpan<byte> get_IndexingHosts_ᐤᐤ  =>  new byte[19]{0x0f,0x1f,0x44,0x00,0x00,0x48,0xb8,0xd0,0x65,0x46,0xe7,0x8f,0x02,0x00,0x00,0x48,0x8b,0x00,0xc3};
+
+    }
+}

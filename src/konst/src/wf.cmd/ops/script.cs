@@ -35,14 +35,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CmdScript script(string id, params CmdScriptExpr[] src)
             => new CmdScript(id, src);
-
-        /// <summary>
-        /// Creates an identifiable <see cref='CmdScript'/> from a <see cref='CmdScriptExpr'/> sequence
-        /// </summary>
-        /// <param name="id">The identifier to assign</param>
-        /// <param name="src">The source expressions</param>
-        [MethodImpl(Inline), Op]
-        public static CmdScript script(in asci32 id, params CmdScriptExpr[] expr)
-            => new CmdScript(id,expr);
     }
 }

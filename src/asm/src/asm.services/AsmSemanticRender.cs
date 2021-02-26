@@ -16,13 +16,11 @@ namespace Z0.Asm
     using static Z0.Asm.IceOpKind;
 
     [ApiHost(ApiNames.AsmSemanticRender, true)]
-    public readonly struct AsmSemanticRender : IDisposable
+    public readonly struct AsmSemanticRender
     {
         [MethodImpl(Inline), Op]
         public static AsmSemanticRender create(IWfShell wf)
             => new AsmSemanticRender(wf);
-
-        readonly WfHost Host;
 
         readonly IWfShell Wf;
 
@@ -30,19 +28,11 @@ namespace Z0.Asm
 
         readonly List<string> Buffer;
 
-        [MethodImpl(Inline)]
         internal AsmSemanticRender(IWfShell wf)
         {
-            Host = WfShell.host(typeof(AsmSemanticRender));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Buffer = root.list<string>();
             DataFormat = HexFormatSpecs.HexData;
-            Wf.Created();
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed();
         }
 
         public void Render(in ApiPartRoutines src)
@@ -95,7 +85,6 @@ namespace Z0.Asm
         void Render(ApiInstructionSet src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
-
             Buffer.Add(src.OpId);
             Buffer.Add(SectionSep);
 
@@ -116,32 +105,6 @@ namespace Z0.Asm
             }
 
             render(Buffer.ToArray(), dst);
-        }
-
-        /// <summary>
-        /// Extracts register information, should it exist, from an index-identified register operand
-        /// </summary>
-        /// <param name="src">The source instruction</param>
-        /// <param name="index">The operand index</param>
-        [Op]
-		static IceRegister register(in IceInstruction src, byte index)
-        {
-			switch (index)
-            {
-                case 0: return src.Op0Register;
-                case 1: return src.Op1Register;
-                case 2: return src.Op2Register;
-                case 3: return src.Op3Register;
-                case 4: return src.Op4Register;
-			}
-            return 0;
-		}
-
-        static void render(ReadOnlySpan<string> src, StreamWriter dst)
-        {
-            var count = src.Length;
-            for(var j=0; j<count; j++)
-                dst.WriteLine(skip(src,j));
         }
 
         [Op]
@@ -169,25 +132,6 @@ namespace Z0.Asm
             => src.Storage.FormatHex(DataFormat);
 
         [Op]
-        static string footer(ApiInstruction src)
-        {
-            if(IceOpTest.isCall(src.Instruction))
-            {
-                var bytes = span(src.Encoded.Data);
-                if(bytes.Length >= 5)
-                {
-                    var encoded = bytes.Slice(1,4);
-                    var offset = encoded.TakeUInt32();
-                    var target = src.NextIp + offset;
-                    var delta = target - src.IP;
-                    return text.concat(delta.FormatMinimal(), " | ", offset.FormatAsmHex(), " | ", target.Format());
-                }
-            }
-
-            return EmptyString;
-        }
-
-        [Op]
         void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
         {
             var @base = src.BaseAddress;
@@ -204,10 +148,8 @@ namespace Z0.Asm
                 var kind = IceExtractors.opkind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(SubColPad);
                 var kindLabel = Render(kind).PadRight(OpKindPad);
-                var col03 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
-                var desc = Format(@base, fx, (byte)i);
-
-                summaries.Add(col03 + desc);
+                var col02 = text.concat(col01, ColSep, kindLabel, Chars.Pipe, Chars.Space);
+                summaries.Add(col02 + Format(@base, fx, i));
             }
 
             foreach(var s in summaries)
@@ -222,18 +164,18 @@ namespace Z0.Asm
         }
 
         [Op]
-        string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
-            => text.concat(FormatAddress(src, AddressPad),
-                text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
-                seq.Format(InstructionCountPad));
-
-        [Op]
         string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  AsmOffsetSequence seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
             var right = text.concat(src.FormattedInstruction, SpecifierSep, src.Specifier.Format(), EncodingSep, Format(src.Encoded));
             return text.concat(left, ColSep, right);
         }
+
+        [Op]
+        static string LineLocation(IceInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
+            => text.concat(FormatAddress(src, AddressPad),
+                text.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                seq.Format(InstructionCountPad));
 
         [Op]
         static string format(MemoryAddress src)
@@ -350,23 +292,38 @@ namespace Z0.Asm
             => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         [Op]
+        static string footer(ApiInstruction src)
+        {
+            if(IceOpTest.isCall(src.Instruction))
+            {
+                var bytes = span(src.Encoded.Data);
+                if(bytes.Length >= 5)
+                {
+                    var encoded = bytes.Slice(1,4);
+                    var offset = encoded.TakeUInt32();
+                    var target = src.NextIp + offset;
+                    var delta = target - src.IP;
+                    return text.concat(delta.FormatMinimal(), " | ", offset.FormatAsmHex(), " | ", target.Format());
+                }
+            }
+
+            return EmptyString;
+        }
+
+        [Op]
         static string format(IceMemorySize src)
             => IceExtractors.identify(src).Format();
 
         [MethodImpl(Inline), Op]
-        public static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
+        static AsmDisplacement dx(ulong value, AsmDisplacementSize size)
             => new AsmDisplacement(value, (AsmDisplacementSize)size);
 
         [MethodImpl(Inline), Op]
-        public static IceMemDirect memDirect(in IceInstruction src)
+        static IceMemDirect memDirect(in IceInstruction src)
             => new IceMemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (AsmDisplacementSize)src.MemoryDisplSize));
 
-        [MethodImpl(Inline), Op]
-        public static IceMemoryInfo meminfo(IceRegister sReg, IceRegister prefix, IceMemDirect mem, MemoryAddress address, IceMemorySize size)
-            => new IceMemoryInfo(sReg, prefix, mem, address, size);
-
         [Op]
-        public static IceMemoryInfo meminfo(IceInstruction src, byte index)
+        static IceMemoryInfo meminfo(IceInstruction src, byte index)
         {
             var k = IceExtractors.opkind(src, (byte)index);
 
@@ -414,8 +371,34 @@ namespace Z0.Asm
             return builder;
         }
 
+        /// <summary>
+        /// Extracts register information, should it exist, from an index-identified register operand
+        /// </summary>
+        /// <param name="src">The source instruction</param>
+        /// <param name="index">The operand index</param>
+        [Op]
+		static IceRegister register(in IceInstruction src, byte index)
+        {
+			switch (index)
+            {
+                case 0: return src.Op0Register;
+                case 1: return src.Op1Register;
+                case 2: return src.Op2Register;
+                case 3: return src.Op3Register;
+                case 4: return src.Op4Register;
+			}
+            return 0;
+		}
+
         [Op]
         static string format(IceMemoryInfo src)
             => Render(src, text.build()).ToString();
+
+        static void render(ReadOnlySpan<string> src, StreamWriter dst)
+        {
+            var count = src.Length;
+            for(var j=0; j<count; j++)
+                dst.WriteLine(skip(src,j));
+        }
     }
 }

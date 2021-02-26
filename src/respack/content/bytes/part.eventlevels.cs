@@ -1,0 +1,25 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+// Generated   : 2021-02-25 19:10:09 -06:00
+//-----------------------------------------------------------------------------
+namespace Z0.ByteCode
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+
+    public static class part_eventlevels
+    {
+        public static ReadOnlySpan<byte> get_Babble_ᐤᐤ  =>  new byte[11]{0x0f,0x1f,0x44,0x00,0x00,0xb8,0x08,0x00,0x00,0x00,0xc3};
+
+        public static ReadOnlySpan<byte> get_Status_ᐤᐤ  =>  new byte[11]{0x0f,0x1f,0x44,0x00,0x00,0xb8,0x0b,0x00,0x00,0x00,0xc3};
+
+        public static ReadOnlySpan<byte> get_Trace_ᐤᐤ  =>  new byte[11]{0x0f,0x1f,0x44,0x00,0x00,0xb8,0x05,0x00,0x00,0x00,0xc3};
+
+        public static ReadOnlySpan<byte> get_Warning_ᐤᐤ  =>  new byte[11]{0x0f,0x1f,0x44,0x00,0x00,0xb8,0x0e,0x00,0x00,0x00,0xc3};
+
+        public static ReadOnlySpan<byte> get_Error_ᐤᐤ  =>  new byte[11]{0x0f,0x1f,0x44,0x00,0x00,0xb8,0x0c,0x00,0x00,0x00,0xc3};
+
+    }
+}

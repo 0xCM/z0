@@ -18,15 +18,15 @@ namespace Z0
         /// <param variable="commandLine">The command line to run as a subprocess</param>
         /// <param variable="options">Options for the process</param>
         [MethodImpl(Inline), Op]
-        public static CmdProcess process(IWfShell wf, CmdLine command, CmdProcessOptions config)
+        public static CmdProcess run(IWfShell wf, CmdLine command, CmdProcessOptions config)
             => new CmdProcess(wf, command, config);
 
         [MethodImpl(Inline), Op]
-        public static CmdProcess process(IWfShell wf,  CmdLine commandLine)
-            => new CmdProcess(wf, commandLine, new CmdProcessOptions());
+        public static CmdProcess run(IWfShell wf,  CmdLine command)
+            => new CmdProcess(wf, command, new CmdProcessOptions());
 
         [MethodImpl(Inline), Op]
-        public static CmdProcess process(IWfShell wf,  CmdLine commandLine, TextWriter output)
-            => new CmdProcess(wf, commandLine, new CmdProcessOptions(output));
+        public static CmdProcess run(IWfShell wf,  CmdLine command, TextWriter output)
+            => new CmdProcess(wf, command, new CmdProcessOptions(output));
     }
 }

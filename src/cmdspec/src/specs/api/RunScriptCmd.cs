@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     [Cmd(CmdName)]
     public struct RunScriptCmd : ICmd<RunScriptCmd>
     {
@@ -19,7 +18,6 @@ namespace Z0
         /// The script path
         /// </summary>
         public FS.FilePath ScriptPath;
-
    }
 
     partial class XCmd
@@ -31,6 +29,5 @@ namespace Z0
             cmd.ScriptPath = path;
             return cmd;
         }
-
     }
 }

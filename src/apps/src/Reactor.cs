@@ -25,7 +25,7 @@ namespace Z0
 
         public void Run(CmdLine src)
         {
-            var process = Cmd.process(Wf, src).Wait();
+            var process = Cmd.run(Wf, src).Wait();
             var output = process.Output;
             Wf.Status(output);
         }
@@ -33,13 +33,9 @@ namespace Z0
         void CmdShell(FS.FilePath target, string args)
         {
             var cmd = new CmdLine($"cmd /c {target.Format(PathSeparator.BS)} {args}");
-            var process = Cmd.process(Wf, cmd);
+            var process = Cmd.run(Wf, cmd);
             var output = process.Output;
             Wf.Status(output);
-            // var cmd2 = new CmdLine("llvm-mc --help");
-            // var process = Cmd.process(wf,cmd2).Wait();
-            // var output = process.Output;
-            // wf.Status(output);
         }
 
         void VsCode(string arg)
@@ -50,7 +46,7 @@ namespace Z0
             var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
             Wf.Status(string.Format("Launching {0} for {1}", app, path));
             Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
-            var process = Cmd.process(Wf,cmd);
+            var process = Cmd.run(Wf,cmd);
             Wf.Status(string.Format("Launched process {0}", process.ProcessId));
         }
 
@@ -168,13 +164,6 @@ namespace Z0
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
         }
 
-        void Run(in JitApiCmd cmd)
-        {
-            Run(Builder.EmitImageMaps("pre-jit"));
-            cmd.Dispatch(Wf).Wait();
-            Run(Builder.EmitImageMaps("post-jit"));
-            EmitProcessDump();
-        }
 
         void Run(in BuildProjectCmd cmd)
         {

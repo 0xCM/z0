@@ -64,7 +64,7 @@ namespace Z0
                 EmitFieldLiterals.create().Run(Wf);
                 BitMaskServices.create(Wf).Emit();
 
-                AsmDataEmitter.create(Wf).Run();
+                Wf.AsmDataEmitter().Run();
 
             }
             catch(Exception e)

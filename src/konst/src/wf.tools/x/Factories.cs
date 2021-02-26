@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Threading.Tasks;
 
-    using Z0.Asm;
+    using static Part;
 
-    partial class XTend
+    partial class XWf
     {
-        public static AsmCatalog AsmCatalog(this IWfShell wf)
-            => Z0.Asm.AsmCatalog.create(wf);
+        public static ToolScriptRunner ScriptRunner(this IWfShell wf)
+            => ToolScriptRunner.create(wf);
     }
 }

@@ -278,15 +278,7 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            //ApiServices.RebaseMembers();
 
-            // var entries = ApiServices.LoadRebaseEntries();
-            // Wf.Status($"Loaded {entries.Length} entries");
-            // var format = Records.formatFx<ApiCatalogRecord>();
-            // var rows = entries.Select(format);
-            // Wf.Rows(rows.Take(20).Array());
-
-            ExportAsmCatRows();
         }
 
         public static void Main(params string[] args)

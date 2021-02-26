@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using C = CalculatorCode;
     using I = CalcOpIndex;
@@ -40,16 +41,10 @@ namespace Z0
             Offset = 0;
         }
 
-        public BinaryOps(int count)
-        {
-            Operators = new BinaryOp<T>[256];
-            Offset = 0;
-        }
-
         public ref BinaryOp<T> this[CalcOpIndex index]
         {
             [MethodImpl(Inline)]
-            get => ref z.seek(Operators,(byte)index);
+            get => ref seek(Operators,(byte)index);
         }
     }
 }

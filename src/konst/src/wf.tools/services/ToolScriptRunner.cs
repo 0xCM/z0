@@ -18,12 +18,15 @@ namespace Z0
                 dst.AppendLine(skip(src,i).Format());
         }
 
+        public Outcome<TextLines> RunControlScript(FS.FileName script)
+            => RunScript(Db.ControlScript(script));
+
         public Outcome<TextLines> Run(CmdLine cmd)
         {
             var flow = Wf.Running(cmd);
             try
             {
-                var process = Cmd.process(Wf, cmd).Wait();
+                var process = Cmd.run(Wf, cmd).Wait();
                 var output = process.Output;
                 var lines = Parse.lines(output);
                 Wf.Ran(flow, lines.Count);
@@ -64,6 +67,16 @@ namespace Z0
                 ToolScriptKind.Ps => Pwsh.script(script),
                 _ => Z0.CmdLine.Empty
             };
+        }
+
+        public Outcome<TextLines> RunScript(FS.FilePath src)
+        {
+            var kind = src.FileName.FileExt.Equals(FS.Extensions.Ps1) ? ToolScriptKind.Ps : ToolScriptKind.Cmd;
+            var command = new CmdLine(src.Format(PathSeparator.BS));
+            var result = Run(command);
+            if(result)
+                root.iter(result.Data, line => Wf.Row(line));
+            return result;
         }
 
         public Outcome<TextLines> RunScript(ToolId tool, Name name, ToolScriptKind shell)

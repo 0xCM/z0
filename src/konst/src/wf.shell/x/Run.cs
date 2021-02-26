@@ -17,6 +17,5 @@ namespace Z0
         public static CmdResult RunDirect<T>(this T cmd, IWfShell wf)
             where T : struct, ICmd
                 => wf.Execute(cmd);
-
     }
 }

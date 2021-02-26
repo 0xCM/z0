@@ -32,7 +32,7 @@ namespace Z0
             => DevRoot("z0");
 
         FS.FolderPath PartDir(string id)
-            => ZRoot() + FS.folder("src") + FS.folder("z0." + id);
+            => ZRoot() + FS.folder("src") + FS.folder(id);
 
         FS.FolderPath PartDir(PartId id)
             => ZRoot() + FS.folder("src") + FS.folder(id.Componentize().Join('.'));
@@ -295,6 +295,9 @@ namespace Z0
 
         FS.FolderPath ControlCmdRoot()
             => ControlRoot() + FS.folder(".cmd");
+
+        FS.FilePath ControlScript(FS.FileName src)
+            => ControlCmdRoot() + src;
 
         FS.FolderPath ToolScriptRoot()
             => DevRoot("tooling") + FS.folder("scripts");

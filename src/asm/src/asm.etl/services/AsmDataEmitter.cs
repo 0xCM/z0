@@ -16,9 +16,11 @@ namespace Z0.Asm
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-        public ApiAsmDataset Dataset {get; private set;}
+        ApiAsmDataset Dataset;
 
-        public AsmRecords Recordset {get; private set;}
+        AsmRecords Recordset;
+
+        ApiCodeBlocks CodeBlocks;
 
         int Sequence;
 
@@ -31,17 +33,15 @@ namespace Z0.Asm
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
             Dataset = ApiAsmDataset.Empty;
             Recordset = AsmRecords.Empty;
+            CodeBlocks = ApiCodeBlocks.Empty;
         }
 
         protected override void OnInit()
         {
             base.OnInit();
-            Dataset = AsmServices.create(Wf).IndexDecoder().Decode(ApiHexIndex.create(Wf).IndexApiBlocks());
+            CodeBlocks = ApiHexIndex.create(Wf).IndexApiBlocks();
+            Dataset = AsmServices.create(Wf).IndexDecoder().Decode(CodeBlocks);
         }
-
-        ApiCodeBlocks Blocks => Dataset.Blocks;
-
-        Index<ApiPartRoutines> Routines  => Dataset.Routines;
 
         public ApiAsmDataset Run()
         {
@@ -81,9 +81,10 @@ namespace Z0.Asm
         public Index<AsmJmpRow> EmitJmpRows()
         {
             var dst = root.list<AsmJmpRow>();
-            var count = Routines.Length;
+            var routines = Dataset.Routines;
+            var count = routines.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(EmitJumpRows(Routines[i]));
+                dst.AddRange(EmitJumpRows(routines[i]));
             var rows = dst.ToArray();
             Recordset.With(rows);
             return rows;
@@ -91,23 +92,27 @@ namespace Z0.Asm
 
         public void EmitSemantic()
         {
-            using var service = AsmSemanticRender.create(Wf);
-            var count = Routines.Length;
+            var routines = Dataset.Routines;
+            var render = Wf.AsmSemanticRender();
+            var count = routines.Length;
             for(var i=0; i<count; i++)
-                service.Render(Routines[i]);
+                render.Render(routines[i]);
         }
+
+        FS.FolderPath RespackDir
+            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
 
         public void EmitResBytes()
         {
-            var dst = FS.dir(@"J:\dev\projects\z0.generated\respack\content\bytes");
-            ResBytesEmitter.create(Wf).Emit(Blocks, dst);
+            Wf.ResBytesEmitter().Emit(Dataset.Blocks, RespackDir);
+            Wf.ScriptRunner().RunControlScript(FS.file("build-respack", FS.Extensions.Cmd));
         }
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
         {
-            var collector = AsmJmpCollector.create(Wf);
+            var collector = Wf.AsmJmpCollector();
             var rows = collector.Collect(src);
-            Emit(rows, Wf.Db().Table(AsmJmpRow.TableId, src.Part));
+            Emit(rows, Db.Table(AsmJmpRow.TableId, src.Part));
             return rows;
         }
 
@@ -129,9 +134,10 @@ namespace Z0.Asm
         public Index<AsmCallRow> EmitCallRows()
         {
             var dst = root.list<AsmCallRow>();
-            var count = Routines.Length;
+            var routines = Dataset.Routines;
+            var count = routines.Length;
             for(var i=0; i<count; i++)
-                dst.AddRange(EmitCallRows(Routines[i]));
+                dst.AddRange(EmitCallRows(routines[i]));
             var rows = dst.ToArray();
             Recordset.With(rows);
             return rows;
@@ -207,10 +213,11 @@ namespace Z0.Asm
         AsmRowSets<IceMnemonic> EmitRowsets()
         {
             using var flow = Wf.Running();
-            var addresses = Blocks.Addresses.View;
+            var blocks = Dataset.Blocks;
+            var addresses = blocks.Addresses.View;
             var count = addresses.Length;
             for(var i=0u; i<count; i++)
-                CreateRecords(Blocks[skip(addresses, i)]);
+                CreateRecords(blocks[skip(addresses, i)]);
             Wf.Ran(flow);
 
             return LoadRowSets();

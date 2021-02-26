@@ -1,9 +1,9 @@
 <Project>
   <PropertyGroup>
-    <PlatformTarget>x64</PlatformTarget>    
+    <PlatformTarget>x64</PlatformTarget>
     <Optimize>true</Optimize>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>pdbonly</DebugType>    
+    <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>preview</LangVersion>
@@ -13,15 +13,27 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TopDir>$(MSBuildThisFileDirectory)</TopDir>    
-    <BuildRootDir>$(TopDir)bin\</BuildRootDir>        
+    <TopDir>$(MSBuildThisFileDirectory)</TopDir>
+    <BuildRootDir>$(TopDir)bin\</BuildRootDir>
     <IntermediateBuildDir>$(BuildRootDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
     <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
-    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>            
+    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>
     <DocumentationFile>$(LibBuildDir)$(MsBuildProjectName).xml</DocumentationFile>
     <OutputDir>$(LibBuildDir)</OutputDir>
-    <OutputPath>$(LibBuildDir)</OutputPath>    
+    <OutputPath>$(LibBuildDir)</OutputPath>
+  </PropertyGroup>
+
+
+  <PropertyGroup>
+    <TopDir>$(MsBuildThisFileDirectory)</TopDir>
+    <BuildDir>$(TopDir).build\</BuildDir>
+    <IntermediateBuildDir>$(BuildDir)obj\$(MSBuildProjectName)\</IntermediateBuildDir>
+    <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
+    <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
+    <AppBinDir>$(BuildDir)bin\</AppBinDir>
+    <OutputDir>$(AppBinDir)</OutputDir>
+    <OutputPath>$(AppBinDir)</OutputPath>
   </PropertyGroup>
 
 </Project>

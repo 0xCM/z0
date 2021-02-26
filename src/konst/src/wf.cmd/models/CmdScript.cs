@@ -23,13 +23,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdScript(asci32 id, CmdScriptExpr[] src)
-        {
-            Id = id;
-            Data = src;
-        }
-
-        [MethodImpl(Inline)]
         public CmdScript(string id, CmdScriptExpr[] src)
         {
             Id = id;

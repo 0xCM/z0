@@ -8,7 +8,8 @@ namespace Z0
     {
         protected override CmdResult Run(RunScriptCmd cmd)
         {
-            return default;
+            var result = Cmd.run(Wf, WinCmd.script(cmd.ScriptPath)).Wait();
+            return Cmd.ok(cmd);
         }
     }
 }

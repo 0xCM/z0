@@ -147,9 +147,8 @@ namespace Z0
                 HeaderLine1,
                 HeaderLine2,
                 HeaderLine3,
-                string.Format(HeaderLine4, root.now(),
-                HeaderLine5)
-                );
+                string.Format(HeaderLine4, root.now()),
+                HeaderLine5);
 
         public static void EmitFileHeader(TextWriter dst)
         {

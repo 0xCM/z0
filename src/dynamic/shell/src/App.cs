@@ -89,7 +89,7 @@ namespace Z0
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
             using var wf = WfShell.create(args).WithRandom(Rng.@default());
-            var process = Cmd.process(wf,cmd2).Wait();
+            var process = Cmd.run(wf,cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
         }
