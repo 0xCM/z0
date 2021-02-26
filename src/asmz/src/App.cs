@@ -186,16 +186,11 @@ namespace Z0.Asm
             Wf.Status($"{dllpath} | {dll}");
             Wf.Status($"{exepath} | {exe}");
             var capture = Wf.ApiResCapture();
-            capture.CaptureApiRes(exepath, Db.AppLog("resbytes", FS.Extensions.Asm));
-            // var data = capture.Load(exepath);
-            // Wf.Status($"Loaded {data.Count} accessors");
+            var assembly = Assembly.LoadFrom(exepath.Name);
+            var accessors = Resources.accessors(assembly);
+            var definitions = Resources.definitions(accessors);
+            Wf.Status(definitions.BlockCount);
 
-            // var assembly = Assembly.LoadFrom(exepath.Name);
-            // var accessors = Resources.accessors(assembly);
-            // Wf.Status($"Loaded {accessors.Count} accessors");
-
-            // var address = capture.ContentAddress(accessors.First);
-            // Wf.Status(address);
         }
 
 

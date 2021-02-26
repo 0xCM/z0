@@ -12,6 +12,7 @@ namespace Z0
     using Z0.Asm;
 
     using static memory;
+    using static Part;
 
     public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
@@ -35,9 +36,6 @@ namespace Z0
             Wf.Ran(flow,captured.Count);
             return captured;
         }
-
-        // public Index<CapturedApiRes> CaptureApiRes(ApiHostUri host, FS.FilePath dst)
-        //     => CaptureAccessors(host, Resources.accessors(Wf.Api.PartComponents), dst);
 
         public Index<CapturedApiRes> CaptureAccessors(ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
         {

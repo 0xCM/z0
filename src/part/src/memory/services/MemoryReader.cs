@@ -50,8 +50,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public int Read(int offset, int requested, ref byte dst)
+        {
+            int count = root.min(requested, State.Remaining);
+            memory.read(Source, offset, ref dst, count);
+            Advance((uint)count);
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
         public int ReadAll(Span<byte> dst)
             => Read(0, CellCount, dst);
+
+        [MethodImpl(Inline), Op]
+        public int ReadAll(ref byte dst)
+            => Read(0, CellCount, ref dst);
 
         [MethodImpl(Inline), Op]
         public bool Seek(uint pos)

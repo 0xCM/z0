@@ -14,6 +14,35 @@ namespace Z0
     partial struct Resources
     {
         /// <summary>
+        /// Loades the corresponding method definitions
+        /// </summary>
+        /// <param name="src"></param>
+        /// <remarks>
+        /// Each method is 29 bytes in length and similar to:
+        /// 0000h nop dword ptr [rax+rax]        ; NOP r/m32           | 0F 1F /0        | 5   | 0f 1f 44 00 00
+        /// 0005h mov rax,228ab7d8e44h           ; MOV r64, imm64      | REX.W B8+ro io  | 10  | 48 b8 44 8e 7d ab 28 02 00 00
+        /// 000fh mov [rcx],rax                  ; MOV r/m64, r64      | REX.W 89 /r     | 3   | 48 89 01
+        /// 0012h mov dword ptr [rcx+8],91h      ; MOV r/m32, imm32    | C7 /0 id        | 7   | c7 41 08 91 00 00 00
+        /// 0019h mov rax,rcx                    ; MOV r64, r/m64      | REX.W 8B /r     | 3   | 48 8b c1
+        /// 001ch ret                            ; RET                 | C3              | 1   | c3
+        /// </remarks>
+        public static unsafe SpanBlock256<byte> definitions(ReadOnlySpan<ApiResAccessor> src)
+        {
+            var count = src.Length;
+            var blocks = SpanBlocks.alloc<byte>(w256,count);
+            for(var i=0; i<count; i++)
+            {
+                var offset = i*32;
+                ref readonly var accessor = ref skip(src,i);
+                var pMethod = accessor.Member.MethodHandle.GetFunctionPointer().ToPointer<byte>();
+                var reader = memory.reader(pMethod, 29);
+                reader.ReadAll(blocks.Block(i));
+            }
+
+            return blocks;
+        }
+
+        /// <summary>
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assemblies to query</param>
