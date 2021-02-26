@@ -15,7 +15,8 @@ namespace Z0
     {
         public abstract ref C Augment(ref C cmd);
 
-        public CmdBuilder Builder=> Wf.CmdBuilder();
+        public CmdBuilder Builder
+            => Wf.CmdBuilder();
     }
 
     public class CmdAugmenterAttribute : Attribute

@@ -7,7 +7,6 @@ namespace Z0
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using System;
-    using System.Reflection;
 
     [Free]
     public interface IWfService : IService, IDisposable
@@ -15,9 +14,6 @@ namespace Z0
         IWfShell Wf {get;}
 
         IWfDb Db => Wf.Db();
-
-        string AppName
-            => Assembly.GetEntryAssembly().GetSimpleName();
 
         void Init(IWfShell wf);
 

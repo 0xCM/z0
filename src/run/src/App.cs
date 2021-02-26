@@ -12,7 +12,36 @@ namespace Z0
     class Runner
     {
         public static void Main(params string[] args)
-            => Apps.react(args);
+        {
+            var count = args.Length;
+            if(count != 0)
+                term.inform(string.Format("Command-line: {0}", args.Delimit()));
+
+            if(count != 0 && args[0] == "--control")
+            {
+                var paths = DbPaths.create();
+                for(var i=1; i<count; i++)
+                {
+                    var name = FS.file(args[i]);
+                    term.inform(name);
+
+                    if(!name.HasExtension)
+                        name = name.WithExtension(FS.Extensions.Cmd);
+
+                    var script = paths.ControlScript(name);
+                    if(script.Exists)
+                    {
+                        term.inform($"Running {script.ToUri()}");
+                    }
+                    else
+                    {
+                        term.error($"The script {script.ToUri()} does not exist");
+                    }
+                }
+            }
+            else
+                Apps.react(args);
+        }
 
         readonly WfHost Host;
 

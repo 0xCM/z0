@@ -14,7 +14,7 @@ namespace Z0
     using System.Text.RegularExpressions;
     using System.Threading;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Command represents a running of a command lineNumber process.  It is basically
@@ -24,8 +24,6 @@ namespace Z0
     /// </summary>
     public sealed class CmdProcess : ICmdProcess
     {
-        IWfShell Wf;
-
         readonly CmdLine _commandLine;
 
         readonly StringBuilder _output;
@@ -129,9 +127,8 @@ namespace Z0
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// <param variable="options">Additional qualifiers that control how the process is run</param>
         /// <returns>A Command structure that can be queried to determine ExitCode, Output, etc.</returns>
-        public CmdProcess(IWfShell wf, CmdLine commandLine, CmdProcessOptions options)
+        public CmdProcess(CmdLine commandLine, CmdProcessOptions options)
         {
-            Wf = wf;
             Options = options;
             _commandLine = commandLine;
 
@@ -245,8 +242,8 @@ namespace Z0
         /// Create a subprocess to run 'commandLine' with no special options.
         /// <param variable="commandLine">The command lineNumber to run as a subprocess</param>
         /// </summary>
-        public CmdProcess(IWfShell wf, string commandLine)
-            : this(wf, commandLine, new CmdProcessOptions())
+        public CmdProcess(string commandLine)
+            : this(commandLine, new CmdProcessOptions())
         {
         }
 
@@ -339,7 +336,7 @@ namespace Z0
             Debug.WriteLine("Killing process tree " + ProcessId + " Cmd: " + _commandLine);
             try
             {
-                Cmd.run(Wf, "taskkill /f /t /pid " + Process.Id).Wait();
+                ToolCmd.run("taskkill /f /t /pid " + Process.Id).Wait();
             }
             catch (Exception e)
             {

@@ -74,5 +74,15 @@ namespace Z0
         public const string bin = nameof(bin);
 
         public const string source = nameof(source);
+
+        public const string src = nameof(src);
+
+        public const string commands = nameof(commands);
+
+        public const string apps = nameof(apps);
+
+        public const string tests = nameof(tests);
+
+        public const string z0 = nameof(z0);
     }
 }

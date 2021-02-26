@@ -8,8 +8,10 @@ namespace Z0
 
     using static DbNames;
 
-    public interface IWfDb :  IApiPathProvider, IFileArchive
+    public interface IDbPaths : IApiPathProvider, IFileArchive, IService
     {
+        Env Env {get;}
+
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
 
@@ -17,28 +19,28 @@ namespace Z0
             => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
 
         FS.FolderPath PackageRoot()
-            => Wf.Env.Packages.Value;
+            => Env.Packages.Value;
 
         FS.FolderPath Package(string id)
             => PackageRoot() + FS.folder(id);
 
         FS.FolderPath DevRoot()
-            => Wf.Env.DevRoot.Value;
+            => Env.DevRoot.Value;
 
         FS.FolderPath DevRoot(string id)
             => DevRoot() + FS.folder(id);
 
         FS.FolderPath ZRoot()
-            => DevRoot("z0");
+            => DevRoot(z0);
 
         FS.FolderPath PartDir(string id)
-            => ZRoot() + FS.folder("src") + FS.folder(id);
+            => ZRoot() + FS.folder(src) + FS.folder(id);
 
         FS.FolderPath PartDir(PartId id)
-            => ZRoot() + FS.folder("src") + FS.folder(id.Componentize().Join('.'));
+            => ZRoot() + FS.folder(src) + FS.folder(id.Componentize().Join('.'));
 
         FS.FilePath SourceFile(PartId id, FS.FileName name)
-            => PartDir(id) + FS.folder("src") + name;
+            => PartDir(id) + FS.folder(src) + name;
 
         FS.FolderPath DevDataRoot()
             => ZRoot() +FS.folder(data);
@@ -47,7 +49,7 @@ namespace Z0
             => DevDataRoot() + SubjectFolder(subject);
 
         FS.FolderPath ArchiveRoot()
-            => Wf.Env.Archives.Value;
+            => Env.Archives.Value;
 
         FS.FolderPath SourceBuildRoot()
             => ZRoot() + FS.folder(build);
@@ -91,11 +93,20 @@ namespace Z0
         FS.FolderPath LogRoot()
             => Root + FS.folder(logs);
 
+        FS.FolderPath CmdLogRoot()
+            => LogRoot() + FS.folder(commands);
+
+        FS.FilePath CmdLog(string id)
+            => CmdLogRoot() + FS.file(id, Log);
+
+        FS.FolderPath EtlRoot()
+            => Root + FS.folder(etl);
+
         FS.FolderPath AppLogRoot()
-            => LogRoot() + FS.folder("apps");
+            => LogRoot() + FS.folder(apps);
 
         FS.FolderPath TestLogRoot()
-            => LogRoot() + FS.folder("tests");
+            => LogRoot() + FS.folder(tests);
 
         FS.FolderPath TestLogDir(PartId id)
             => TestLogRoot() + FS.folder(id.Format());
@@ -104,7 +115,7 @@ namespace Z0
             => TestLogRoot() + folder;
 
         FS.FolderPath SortedCaseLogRoot()
-            => Root + FS.folder("logs") + FS.folder("tests");
+            => TestLogRoot();
 
         FS.FilePath SortedCaseLogPath()
             => SortedCaseLogRoot() + FS.file(AppName, Csv);
@@ -230,7 +241,7 @@ namespace Z0
                 => IndexTable(typeof(T));
 
         FS.FilePath IndexTable(Type t, string discriminator)
-                => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
+            => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
 
         FS.FilePath IndexTable<T>(string discriminator)
             where T : struct, IRecord<T>
@@ -338,6 +349,10 @@ namespace Z0
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
 
+    }
+
+    public interface IWfDb : IDbPaths
+    {
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;
 

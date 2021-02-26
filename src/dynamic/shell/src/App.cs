@@ -56,7 +56,7 @@ namespace Z0
             var llvm = Llvm.service(wf);
             var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
             var cmd = WinCmd.dir(cases);
-            using var runner = ToolScriptRunner.create(wf);
+            var runner = ScriptRunner.create();
             runner.Run(cmd);
         }
 
@@ -89,7 +89,7 @@ namespace Z0
             var cmd1 = new CmdLine("cmd /c dir j:\\");
             var cmd2 = new CmdLine("llvm-mc --help");
             using var wf = WfShell.create(args).WithRandom(Rng.@default());
-            var process = Cmd.run(wf,cmd2).Wait();
+            var process = ToolCmd.run(cmd2).Wait();
             var output = process.Output;
             wf.Status(output);
         }
@@ -226,7 +226,7 @@ namespace Z0
         void ShowOptions()
         {
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-            var result = Cmd.parse(@case);
+            var result = ToolCmd.parse(@case);
             if(result.Succeeded)
             {
                 var value = result.Value;
@@ -307,7 +307,7 @@ namespace Z0
 
         void RunScripts()
         {
-            using var runner = ToolScriptRunner.create(Wf);
+            var runner = ScriptRunner.create(Wf.Env);
             runner.RunCmdScript(ToolNames.clang, "codegen");
             runner.RunCmdScript(ToolNames.clang, "parse");
             runner.RunPsScript(clang.query, "fast-math");

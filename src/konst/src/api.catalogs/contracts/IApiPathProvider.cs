@@ -8,7 +8,7 @@ namespace Z0
 
     using static DbNames;
 
-    public partial interface IApiPathProvider : IWfService, IFileArchive
+    public partial interface IApiPathProvider : IFileArchive
     {
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(capture);

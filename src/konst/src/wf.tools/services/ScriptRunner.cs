@@ -5,12 +5,30 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
     using static TextRules;
     using static memory;
 
-    public sealed class ToolScriptRunner : WfService<ToolScriptRunner,IToolScriptRunner>, IToolScriptRunner
+    public sealed class ScriptRunner
     {
+        [MethodImpl(Inline)]
+        public static ScriptRunner create(Env env)
+            => new ScriptRunner(DbPaths.create(env));
+
+        [MethodImpl(Inline)]
+        public static ScriptRunner create()
+            => new ScriptRunner(DbPaths.create());
+
+        readonly IDbPaths Db;
+
+        [MethodImpl(Inline)]
+        public ScriptRunner(IDbPaths db)
+        {
+            Db = db;
+        }
+
         void Render(ReadOnlySpan<CmdTypeInfo> src, ITextBuffer dst)
         {
             var count = src.Length;
@@ -19,23 +37,27 @@ namespace Z0
         }
 
         public Outcome<TextLines> RunControlScript(FS.FileName script)
-            => RunScript(Db.ControlScript(script));
+        {
+            var result = RunScript(Db.ControlScript(script));
+            if(result)
+            {
+                using var writer = Db.CmdLog(script.Name).Writer();
+                root.iter(result.Data, line => writer.WriteLine(line));
+            }
+            return result;
+        }
 
         public Outcome<TextLines> Run(CmdLine cmd)
         {
-            var flow = Wf.Running(cmd);
             try
             {
-                var process = Cmd.run(Wf, cmd).Wait();
+                var process = ToolCmd.run(cmd).Wait();
                 var output = process.Output;
-                var lines = Parse.lines(output);
-                Wf.Ran(flow, lines.Count);
-                return lines;
+                return Parse.lines(output);
             }
             catch(Exception e)
             {
-                Wf.Error(e);
-                Wf.Ran(flow);
+                term.error(e);
                 return e;
             }
         }
@@ -73,30 +95,21 @@ namespace Z0
         {
             var kind = src.FileName.FileExt.Equals(FS.Extensions.Ps1) ? ToolScriptKind.Ps : ToolScriptKind.Cmd;
             var command = new CmdLine(src.Format(PathSeparator.BS));
-            var result = Run(command);
-            if(result)
-                root.iter(result.Data, line => Wf.Row(line));
-            return result;
+            return Run(command);
         }
 
         public Outcome<TextLines> RunScript(ToolId tool, Name name, ToolScriptKind shell)
         {
             var file = ScriptFile(tool,name, shell);
             var command = CmdLine(file,shell);
-            var result = Run(command);
-            if(result)
-                root.iter(result.Data, line => Wf.Row(line));
-            return result;
+            return Run(command);
         }
 
         public Outcome<TextLines> RunScript<K>(K kind, Name name, ToolScriptKind shell)
         {
             var file = ScriptFile(kind,name, shell);
             var command = CmdLine(file,shell);
-            var result = Run(command);
-            if(result)
-                root.iter(result.Data, line => Wf.Row(line));
-            return result;
+            return Run(command);
         }
 
         public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)

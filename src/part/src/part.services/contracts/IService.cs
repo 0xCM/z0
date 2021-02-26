@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -14,11 +15,14 @@ namespace Z0
     [Free]
     public interface IService
     {
-        Type HostType {get;}
+        Type HostType => GetType();
 
-        Type ContractType {get;}
+        Type ContractType => GetType();
 
         Type[] ContractArgs => new Type[]{};
+
+        string AppName
+            => Assembly.GetEntryAssembly().GetSimpleName();
 
         uint Discriminator => 0;
 

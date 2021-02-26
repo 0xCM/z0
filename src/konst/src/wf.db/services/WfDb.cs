@@ -13,6 +13,8 @@ namespace Z0
     {
         public FS.FolderPath Root {get; private set;}
 
+        public Env Env {get; private set;}
+
         public WfDb()
         {
 
@@ -21,21 +23,21 @@ namespace Z0
         internal WfDb(IWfShell wf, FS.FolderPath root)
             : base(wf)
         {
+            Env = wf.Env;
             Root = root;
         }
 
         protected override void OnInit()
         {
             base.OnInit();
-            Root = Env.create().Db.Value;
+            Env = Env.create();
+            Root = Env.Db.Value;
         }
-
-        IWfDb Service => this;
 
         public WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>
         {
-            var dst = Service.Table<T>(name);
+            var dst = (this as IWfDb).Table<T>(name);
             var flow = Wf.EmittingTable<T>(dst);
             var count = (uint)src.Length;
             var formatter = Records.formatter<T>();

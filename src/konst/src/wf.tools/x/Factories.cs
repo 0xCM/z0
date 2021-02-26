@@ -12,7 +12,6 @@ namespace Z0
 
     partial class XWf
     {
-        public static ToolScriptRunner ScriptRunner(this IWfShell wf)
-            => ToolScriptRunner.create(wf);
+
     }
 }

@@ -12,11 +12,10 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>, IAsmDataEmitter
+    public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-        ApiAsmDataset Dataset;
 
         AsmRecords Recordset;
 
@@ -25,6 +24,8 @@ namespace Z0.Asm
         int Sequence;
 
         uint Offset;
+
+        public ApiAsmDataset Dataset {get; private set;}
 
         public AsmDataEmitter()
         {
@@ -99,13 +100,17 @@ namespace Z0.Asm
                 render.Render(routines[i]);
         }
 
-        FS.FolderPath RespackDir
-            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
-
-        public void EmitResBytes()
+        public Index<ApiHostRes> EmitResBytes()
         {
-            Wf.ResBytesEmitter().Emit(Dataset.Blocks, RespackDir);
-            Wf.ScriptRunner().RunControlScript(FS.file("build-respack", FS.Extensions.Cmd));
+            var apires = Wf.ResBytesEmitter().Emit(Dataset.Blocks, RespackDir);
+            var runner = ScriptRunner.create(Wf.Env);
+
+            var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
+            root.iter(build, line => Wf.Row(line));
+
+            var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
+            root.iter(pack, line => Wf.Row(line));
+            return apires;
         }
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
@@ -168,6 +173,10 @@ namespace Z0.Asm
 
         void CreateRecords(in CodeBlock code, in IceInstructionList asm)
             => CreateRecords(code, asm.Storage);
+
+        FS.FolderPath RespackDir
+            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
+
 
         void CreateRecords(in CodeBlock code, IceInstruction[] src)
         {

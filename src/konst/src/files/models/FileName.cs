@@ -55,6 +55,9 @@ namespace Z0
                 get => FS.file(Path.GetFileNameWithoutExtension(Name));
             }
 
+            public FileName WithExtension(FS.FileExt ext)
+                => this + ext;
+
             /// <summary>
             /// Specifies the file's owning part, if any
             /// </summary>

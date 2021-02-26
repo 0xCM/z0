@@ -9,10 +9,11 @@ namespace Z0
 
     using static Part;
 
-    partial struct Cmd
+
+    public readonly struct ControlScriptNames
     {
-        [MethodImpl(Inline), Factory]
-        public ArgProtocol protocol(ArgPrefix prefix, AsciCharCode? qualifier = null)
-            => new ArgProtocol(prefix, qualifier ?? AsciCharCode.Space);
+        public static FS.FileName BuildRespack => FS.file("build-respack", FS.Extensions.Cmd);
+
+        public static FS.FileName PackRespack => FS.file("pack-respack", FS.Extensions.Cmd);
     }
 }

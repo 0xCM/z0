@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tooling
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -84,12 +84,12 @@ namespace Z0.Tooling
         }
 
         protected ToolCmdSpec CreateSpec()
-            => Cmd.toolcmd(ToolPath, Args);
+            => ToolCmd.specify(ToolPath, Args);
 
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value)
         {
-            Args[Index] = Cmd.flag(Index, value, Dash);
+            Args[Index] = ToolCmd.flag(Index, value, Dash);
             Index++;
             return (T)this;
         }
@@ -97,7 +97,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(A value, ArgPrefix prefix)
         {
-            Args[Index] = Cmd.flag(Index, value, prefix);
+            Args[Index] = ToolCmd.flag(Index, value, prefix);
             Index++;
             return (T)this;
         }
@@ -105,7 +105,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(string name, A value, ArgPrefix prefix)
         {
-            Args[Index] = Cmd.flag(Index, name, value, prefix);
+            Args[Index] = ToolCmd.flag(Index, name, value, prefix);
             Index++;
             return (T)this;
         }
@@ -113,7 +113,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendFlag<A>(string name, A value)
         {
-            Args[Index] = Cmd.flag(Index, name, value, DefaultPrefix);
+            Args[Index] = ToolCmd.flag(Index, name, value, DefaultPrefix);
             Index++;
             return (T)this;
         }
@@ -121,7 +121,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value)
         {
-            Args[Index] = Cmd.arg(Index, name, value, DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value, DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }
@@ -129,7 +129,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgPrefix prefix)
         {
-            Args[Index] = Cmd.arg(Index, name, value, prefix);
+            Args[Index] = ToolCmd.arg(Index, name, value, prefix);
             Index++;
             return (T)this;
         }
@@ -137,7 +137,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value, DefaultPrefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value, DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -145,7 +145,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value, prefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value, prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -153,7 +153,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), prefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -161,7 +161,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -169,7 +169,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }
@@ -177,7 +177,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), prefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -185,7 +185,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value, ArgQualifier qualifier)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, qualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -193,7 +193,7 @@ namespace Z0.Tooling
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value)
         {
-            Args[Index] = Cmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }

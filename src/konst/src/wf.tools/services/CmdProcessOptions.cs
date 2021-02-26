@@ -52,6 +52,7 @@ namespace Z0
         public CmdProcessOptions()
         {
             timeoutMSec = 600000;
+            noThrow = true;
         }
 
         public CmdProcessOptions(TextWriter output)

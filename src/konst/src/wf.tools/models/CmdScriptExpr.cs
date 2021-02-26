@@ -66,7 +66,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(CmdPattern src)
-            => Cmd.expr(src);
+            => ToolCmd.expr(src);
 
         [MethodImpl(Inline)]
         public static implicit operator string(CmdScriptExpr src)
@@ -74,11 +74,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScriptExpr(Paired<CmdPattern,CmdVarIndex> src)
-            => Cmd.expr(src);
+            => ToolCmd.expr(src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => ToolCmd.format(this);
 
         public override string ToString()
             => Format();

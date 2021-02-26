@@ -65,7 +65,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => ToolCmd.format(this);
 
         public override string ToString()
             => Format();
@@ -76,7 +76,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ArgPrefix(string src)
-            => Cmd.prefix(src);
+            => ToolCmd.prefix(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ArgPrefix a, ArgPrefix b)

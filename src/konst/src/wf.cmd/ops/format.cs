@@ -57,41 +57,6 @@ namespace Z0
             return buffer.Emit();
         }
 
-        [Op]
-        public static string format(in CmdScript src)
-        {
-            var dst = Buffers.text();
-            render(src, dst);
-            return dst.Emit();
-        }
-
-        [Op]
-        public static string format(in CmdScriptExpr src)
-            => format(src.Pattern, src.Variables.Storage);
-
-        [Op]
-        public static string format<K>(in CmdScriptExpr<K> src)
-            where K : unmanaged
-            => format(src.Pattern, src.Variables.Storage);
-
-        [Op]
-        public static CmdScriptExpr format(in CmdPattern pattern, params CmdVar[] args)
-            => string.Format(pattern.Content, args.Select(a => a.Format()));
-
-        [Op, Closures(Closure)]
-        public static CmdScriptExpr format<K>(in CmdPattern<K> pattern, params CmdVar[] args)
-            where K : unmanaged
-                => string.Format(pattern.Content, args.Select(a => a.Format()));
-
-        [Op, Closures(Closure)]
-        public static CmdScriptExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
-            where K : unmanaged
-                => string.Format(pattern.Content, args.Select(a => a.Format()));
-
-        [Op]
-        public static string format(in CmdFlagSpec src)
-            => src.Name.IsEmpty ? src.Index.ToString() : string.Format("{0}:{1}", src.Name, src.Index);
-
         [MethodImpl(Inline), Formatter, Closures(Closure)]
         public static string format<K>(in CmdOptionSpec<K> src)
             where K : unmanaged
@@ -122,24 +87,6 @@ namespace Z0
         [MethodImpl(Inline), Formatter]
         public static string format(CmdOptionSpec src)
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
-        [Formatter]
-        public static string format(ArgPrefix src)
-        {
-            var len = src.Length;
-            if(len == 0)
-                return EmptyString;
-            else if(len == 1)
-            {
-                Span<char> content = stackalloc char[1]{(char)src.C0};
-                return new string(content);
-            }
-            else
-            {
-                Span<char> content = stackalloc char[2]{(char)src.C0, (char)src.C1};
-                return new string(content);
-            }
-        }
 
         /// <summary>
         /// Renders a specified option as text
@@ -174,27 +121,6 @@ namespace Z0
             var buffer = Buffers.text();
             render(src, buffer);
             return buffer.Emit();
-        }
-
-        [Op]
-        public static void render(CmdScript src, ITextBuffer dst)
-        {
-            var count = src.Length;
-            var parts = src.View;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(parts,i).Format());
-        }
-
-        [Op]
-        public static void render(CmdArgs src, ITextBuffer dst)
-        {
-            var count = src.Count;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(Cmd.format(src[i]));
-                if(i != count - 1)
-                    dst.Append(Space);
-            }
         }
 
         [Op]

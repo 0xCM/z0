@@ -219,7 +219,6 @@ namespace Z0.Asm
             return slice(buffer, 0, ImportRowCount);
         }
 
-
         public ReadOnlySpan<StokeAsmImportRow> TransformSource()
         {
             var dst = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);

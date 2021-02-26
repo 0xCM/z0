@@ -56,7 +56,7 @@ namespace Z0
 
         public void Emit(CmdScript script)
         {
-            var dst = Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db());
+            var dst = ToolCmd.enqueue(ToolCmd.job(script.Id, script), Wf.Db());
             var flow = Wf.EmittingFile(dst);
             Wf.EmittedFile(flow, script.Length);
         }

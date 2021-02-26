@@ -25,7 +25,7 @@ namespace Z0
 
         public void Run(CmdLine src)
         {
-            var process = Cmd.run(Wf, src).Wait();
+            var process = ToolCmd.run(src).Wait();
             var output = process.Output;
             Wf.Status(output);
         }
@@ -33,7 +33,7 @@ namespace Z0
         void CmdShell(FS.FilePath target, string args)
         {
             var cmd = new CmdLine($"cmd /c {target.Format(PathSeparator.BS)} {args}");
-            var process = Cmd.run(Wf, cmd);
+            var process = ToolCmd.run(cmd);
             var output = process.Output;
             Wf.Status(output);
         }
@@ -46,7 +46,7 @@ namespace Z0
             var cmd = new CmdLine(string.Format("{0} \"{1}\"", app.Format(), path));
             Wf.Status(string.Format("Launching {0} for {1}", app, path));
             Wf.Status(string.Format("CmdLine: {0}", cmd.Format()));
-            var process = Cmd.run(Wf,cmd);
+            var process = ToolCmd.run(cmd);
             Wf.Status(string.Format("Launched process {0}", process.ProcessId));
         }
 

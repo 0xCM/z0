@@ -10,18 +10,15 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdLogger : IDisposable
+    public readonly struct ToolCmdLogger : IDisposable
     {
-        public IWfShell Wf {get;}
-
         readonly FS.FilePath Target;
 
         readonly Stream LogStream;
 
         [MethodImpl(Inline)]
-        public CmdLogger(IWfShell wf, FS.FilePath dst)
+        public ToolCmdLogger(FS.FilePath dst)
         {
-            Wf = wf;
             Target = dst;
             LogStream = new FileStream(dst.EnsureParentExists().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
         }

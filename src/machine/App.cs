@@ -33,6 +33,18 @@ namespace Z0
             Wf.Disposed();
         }
 
+        bool RunXed => false;
+
+        bool EmitCliData => false;
+
+        bool EmitPeData => false;
+
+        bool EmitResourceData => false;
+
+        bool CollectApiDocs => false;
+
+        bool EmitAsmData => true;
+
         public void Run()
         {
             using var flow = Wf.Running();
@@ -40,31 +52,52 @@ namespace Z0
             try
             {
                 ApiCode.EmitHexIndex(Wf);
-
-                var resources = ResDataService.create(Wf);
-                resources.EmitContentIndex();
-                resources.EmitReferenceData();
-                EmitComments.create().Run(Wf);
                 AsmCatalogService.create(Wf).TransformSource();
-
-                //XedEtlWfHost.create().Run(Wf);
-
-                var images = ImageDataEmitter.create(Wf);
-                images.EmitSectionHeaders();
-                images.EmitCilRecords();
-                images.EmitUserStrings();
-                images.EmitSystemStrings();
-                images.EmitConstants();
-                images.EmitApiBlobs();
-
-                ImageLocationEmitter.emit(Wf);
-
                 Commands.EmitEnumCatalog().RunTask(Wf);
-
-                EmitFieldLiterals.create().Run(Wf);
                 BitMaskServices.create(Wf).Emit();
 
-                Wf.AsmDataEmitter().Run();
+                if(CollectApiDocs)
+                {
+                    EmitComments.create().Run(Wf);
+                }
+
+                if(EmitResourceData)
+                {
+                    var resources = ResDataService.create(Wf);
+                    resources.EmitContentIndex();
+                    resources.EmitReferenceData();
+                }
+
+                if(RunXed)
+                    XedEtlWfHost.create().Run(Wf);
+
+                if(EmitCliData)
+                {
+                    var images = ImageDataEmitter.create(Wf);
+                    images.EmitSectionHeaders();
+                    images.EmitCilRecords();
+                    images.EmitUserStrings();
+                    images.EmitSystemStrings();
+                    images.EmitConstants();
+                    images.EmitApiBlobs();
+                    EmitFieldLiterals.create().Run(Wf);
+                }
+
+                if(EmitPeData)
+                {
+                    ImageLocationEmitter.emit(Wf);
+                }
+
+
+                if(EmitAsmData)
+                {
+                    var asm = Wf.AsmDataEmitter();
+                    asm.EmitAsmRows();
+                    asm.EmitCallRows();
+                    asm.EmitJmpRows();
+                    asm.EmitSemantic();
+                    asm.EmitResBytes();
+                }
 
             }
             catch(Exception e)

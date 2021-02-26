@@ -15,7 +15,7 @@ namespace Z0
         public void t_cmd_parse_01()
         {
             var src = Cases[0];
-            var result = Cmd.parse(src);
+            var result = ToolCmd.parse(src);
             require(result);
             Trace(result.Value.Format());
         }
