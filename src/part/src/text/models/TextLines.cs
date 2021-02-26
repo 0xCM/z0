@@ -60,5 +60,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator TextLine[](TextLines src)
             => src.Storage;
+
+        public static TextLines Empty
+        {
+            [MethodImpl(Inline)]
+            get => new TextLines(sys.empty<TextLine>());
+        }
     }
 }

@@ -10,10 +10,8 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static System.Reflection.TypeAttributes;
-
     using static Part;
-    using static z;
-
+    using static memory;
     using static GenSpecs;
 
     partial struct RecordBuilder

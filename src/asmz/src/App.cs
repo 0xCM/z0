@@ -297,9 +297,33 @@ namespace Z0.Asm
         {
             Wf.ResBytesEmitter().Emit();
         }
+
+        void ReadIntrinsics()
+        {
+            // var assets = Parts.AsmLang.Assets;
+            // root.iter(assets.All().View, asset => Wf.Row(asset.Name));
+
+            var doc = IntelIntrinsics.doc();
+            Db.AppLog("intrinsics", FS.Extensions.Xml).Overwrite(doc.Content);
+
+            var elements = IntelIntrinsics.parse(doc).View;
+            var count = elements.Length;
+            using var writer = Db.AppLog("intrinsics").Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var instrinsic = ref skip(elements,i);
+                var name = instrinsic.name;
+                var algorithm = instrinsic.operation;
+                writer.WriteLine(name);
+                writer.WriteLine(RP.PageBreak120);
+                writer.WriteLine(algorithm);
+            }
+
+        }
+
         public unsafe void Run()
         {
-            EmitResBytes();
+            ReadIntrinsics();
 
             //FilterApiBlocks();
 

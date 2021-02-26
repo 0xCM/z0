@@ -2,49 +2,42 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Linq;
     using System.IO;
+    using System.Collections.Generic;
 
     using static Part;
 
-    using M = IntelIntrinsicsDoc;
-
-    public interface IIntelAlgorithms
-    {
-
-    }
+    using M = IntelIntrinsicsModel;
 
     [ApiHost]
-    public sealed class IntelAlgorithms : WfService<IntelAlgorithms,IIntelAlgorithms>, IIntelAlgorithms
+    public sealed class IntelAlgorithms : WfService<IntelAlgorithms>
     {
-        [Op]
-        public static string fxlabel(string name)
-            => name.StartsWith("_mm512") ? "_mm512"  :
-            name.StartsWith("_mm256") ? "_mm256" :
-            (name.StartsWith("_mm_") || name.StartsWith("_MM_")) ? "_mm" :
-            name.StartsWith("_bnd") ? "_bnd" :
-            name.StartsWith("_cast") ? "_cast" :
-            name.StartsWith("_cvt") ? "_cvt" :
-            "_unknown";
+        Index<string> DataTypes {get;}
 
-        static string[] TechLables
-            => new string[]{"AVX-512","AVX","AMX", "SVML", "AVX2"};
+        HashSet<string> TechLabels {get;}
 
-        [Op]
-        public static FS.FileName filename(M.intrinsic src, FS.FileExt kind)
+        public IntelAlgorithms()
         {
-            var identifier = src.identifier;
-            if(TechLables.Contains(src.tech))
+            DataTypes = root.array("__m128i", "unsigned char", "unsigned __int64", "unsigned __int64 *");
+            TechLabels = root.hashset("AVX-512","AVX","AMX", "SVML", "AVX2");
+        }
+
+        [Op]
+        public FS.FileName filename(M.Intrinsic src, FS.FileExt kind)
+        {
+            var id = IntelIntrinsics.identifier(src);
+            if(TechLabels.Contains(src.tech))
                 return FS.file("_" + src.tech, kind);
             else if(src.tech == "AVX-512/KNC")
                 return FS.file("_AVX-512-KNC", kind);
             else if(src.instructions.Count == 0)
                 return FS.file("_Other", kind);
             else
-                return FS.file($"{identifier[0]}", kind);
+                return FS.file($"{id[0]}", kind);
         }
 
         [Op]
@@ -73,21 +66,13 @@ namespace Z0
         }
 
         [Op]
-        static string label(M.intrinsic src)
-            => text.concat("## ",
-                src.instructions.Count != 0
-                ? text.concat(src.identifier, Space, Chars.Dash, Space, src.name)
-                : src.identifier);
-
-        [Op]
-        public void Emit()
+        public void Emit(XmlDoc src)
         {
-            var list = IntelIntrinsicsDocReader.read();
+            var list = IntelIntrinsicsDocReader.read(src);
             var target = WfShell.paths().ResourceRoot + FS.folder("intrinsics") + FS.folder("algorithms");
             var kind = FS.ext("md");
             var folder = IntelIntrinsicsDocReader.folder(kind);
             target.Clear();
-
             term.print($"Emitting intrinsics algorithms");
 
             var pagewidth = (uint)RP.PageBreak120.Length;
@@ -95,7 +80,6 @@ namespace Z0
             for(var i=0; i<list.Length; i++)
             {
                 ref readonly var current = ref list[i];
-
                 var name = filename(current, kind);
                 var writer = default(StreamWriter);
                 if(!writers.TryGetValue(name.Name, out writer))
@@ -119,9 +103,10 @@ namespace Z0
                         described.Append(next);
                 }
 
-                var algorithm = (current.operation.Content ?? EmptyString).Trim().Replace("\t", "    ");
+                //var algorithm = (current.operation.Content ?? EmptyString).Trim().Replace("\t", "    ");
+                var algorithm = current.operation.Format();
                 writer.WriteLine();
-                writer.WriteLine(label(current));
+                writer.WriteLine(IntelIntrinsics.label(current));
                 writer.WriteLine();
 
                 if(current.instructions.Count != 0)

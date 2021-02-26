@@ -29,7 +29,7 @@ namespace Z0
             root.require(text.nonempty(id), () => $"The id given for {src} is null");
             root.require(src != null, () => $"The assembly for {id} is null");
             var resnames = Resources.names(src, id);
-            if(resnames.Length != 1)
+            if(resnames.Length == 0)
             {
                 dst = ResDescriptor.Empty;
                 return false;

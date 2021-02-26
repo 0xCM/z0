@@ -10,7 +10,7 @@ namespace Z0
 
          public ResDescriptor AsmMnemonicInfo() => Asset("AsmMnemonicInfo.csv");
 
-         public ResDescriptor IntelIntrinsicsData() => Asset("intel-intrinsics.xml");
+         public ResDescriptor InstrinsicXml() => Asset("intel-intrinsics.xml");
 
          public ResDescriptor AsmJitOpCodes() => Asset("asmjit-opcodes.asm");
 

@@ -19,7 +19,6 @@ namespace Z0
     {
         const string NetSdk = "Microsoft.NET.Sdk";
 
-
         [Op]
         public static Project resbytes()
         {

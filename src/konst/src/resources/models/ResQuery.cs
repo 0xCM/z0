@@ -46,10 +46,6 @@ namespace Z0
             => ref Data[index];
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<ResDescriptor> Descriptors()
-            => Data.View;
-
-        [MethodImpl(Inline)]
         public ResDescriptors Filter(string match)
             => new ResDescriptors(Source, Data.Storage.Where(x => x.NameLike(match)));
 

@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         public Index<AsmMnemonicInfo> MnemonicInfo()
         {
-            var descriptor = Assets.create(Wf).AsmMnemonicInfo();
+            var descriptor = Assets.create().AsmMnemonicInfo();
             if(Resources.document(descriptor, TextDocFormat.Structured(), out var doc))
             {
                 var buffer = alloc<AsmMnemonicInfo>(doc.RowCount);
@@ -173,7 +173,7 @@ namespace Z0.Asm
 
         ReadOnlySpan<StokeAsmImportRow> ImportStokeRows()
         {
-            var descriptor = Assets.create(Wf).AsmCatalog();
+            var descriptor = Assets.create().AsmCatalog();
             var content = Resources.utf8(descriptor);
             ByteSize sz = content.Length*2;
             Wf.Status($"Loaded source catalog data of size {sz} bytes");

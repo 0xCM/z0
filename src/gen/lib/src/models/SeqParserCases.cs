@@ -69,7 +69,6 @@ namespace Z0
             return segments;
         }
 
-
         [Op]
         BufferSegments<AsciCharCode> test(N2 n)
         {

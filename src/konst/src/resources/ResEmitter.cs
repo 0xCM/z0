@@ -21,7 +21,7 @@ namespace Z0
         public static ResEmission[] reference(IWfShell wf)
         {
             var outer = wf.Running("Emitting reference data");
-            var descriptors = Resources.descriptors(Parts.Res.Assembly).Descriptors();
+            var descriptors = Resources.descriptors(Parts.Res.Assembly).View;
             var count = descriptors.Length;
             var root = wf.Db().RefDataRoot();
             var emissions = sys.alloc<ResEmission>(count);
