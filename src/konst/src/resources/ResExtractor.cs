@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly struct ResExtractor
     {
@@ -47,7 +47,7 @@ namespace Z0
                 term.error(e);
             }
 
-            return unparsed<AppResDoc>(name);
+            return root.unparsed<AppResDoc>(name);
         }
 
         public AppResDoc MatchDocument(string doc)

@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Reflection;
 
     using static Part;
     using static memory;
@@ -177,10 +178,24 @@ namespace Z0.Asm
 
         void CheckResPack()
         {
-            var package = Db.Package("z0/respack");
+            var package = Db.Package("respack");
             var dllpath = package + FS.file("z0.respack.dll");
-            var exists = dllpath.Exists ? "Exists" : "Missing";
-            Wf.Status($"{dllpath} | {exists}");
+            var exepath = package + FS.file("z0.respack.dll");
+            var dll = dllpath.Exists ? "Exists" : "Missing";
+            var exe = exepath.Exists ? "Exists"  : "Missing";
+            Wf.Status($"{dllpath} | {dll}");
+            Wf.Status($"{exepath} | {exe}");
+            var capture = Wf.ApiResCapture();
+            capture.CaptureApiRes(exepath, Db.AppLog("resbytes", FS.Extensions.Asm));
+            // var data = capture.Load(exepath);
+            // Wf.Status($"Loaded {data.Count} accessors");
+
+            // var assembly = Assembly.LoadFrom(exepath.Name);
+            // var accessors = Resources.accessors(assembly);
+            // Wf.Status($"Loaded {accessors.Count} accessors");
+
+            // var address = capture.ContentAddress(accessors.First);
+            // Wf.Status(address);
         }
 
 
@@ -279,6 +294,9 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
+            CheckResPack();
+
+            //Resources.accessors()
         }
 
         public static void Main(params string[] args)

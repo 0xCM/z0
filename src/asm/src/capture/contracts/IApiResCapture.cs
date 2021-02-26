@@ -10,8 +10,6 @@ namespace Z0.Asm
     {
         Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FolderPath dst);
 
-        Index<CapturedApiRes> CaptureApiRes(ApiHostUri host, FS.FilePath dst);
-
         void Emit(ReadOnlySpan<CapturedApiRes> src, FS.FilePath dst);
     }
 

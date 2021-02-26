@@ -25,5 +25,8 @@ namespace Z0
 
         public static AsmJmpCollector AsmJmpCollector(this IWfShell wf)
             => Z0.AsmJmpCollector.create(wf);
+
+        public static ApiResCapture ApiResCapture(this IWfShell wf)
+            => Z0.ApiResCapture.create(wf);
     }
 }

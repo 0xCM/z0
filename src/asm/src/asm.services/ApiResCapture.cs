@@ -13,29 +13,33 @@ namespace Z0
 
     using static memory;
 
-    sealed class ApiResCapture : AsmWfService<ApiResCapture>, IApiResCapture
+    public sealed class ApiResCapture : AsmWfService<ApiResCapture>
     {
-        public Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FolderPath dst)
+        public Index<CapturedApiRes> CaptureApiRes(FS.FilePath src, FS.FilePath dst)
         {
-            var resdll = Assembly.LoadFrom(src.Name);
-            var indices = Resources.apires(resdll).View;
-            var count = indices.Length;
-            var results = root.list<CapturedApiRes>();
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var index = ref skip(indices, i);
-                var host = ApiHostUri.from(index.DeclaringType);
-                var path = dst + ApiIdentity.file(host, FileExtensions.Asm);
-                results.AddRange(CaptureAccessors(host, index.View, path));
-            }
-
-            return results.ToArray();
+            var flow = Wf.EmittingFile(dst);
+            var res = Assembly.LoadFrom(src.Name);
+            var accessors = Resources.accessors(res).View;
+            var captured = CaptureAccessors(accessors, dst);
+            Wf.EmittedFile(flow, captured.Count);
+            return captured;
         }
 
-        public Index<CapturedApiRes> CaptureApiRes(ApiHostUri host, FS.FilePath dst)
-            => CaptureAccessors(host, Resources.accessors(Wf.Api.PartComponents), dst);
+        public Index<ApiRes> Load(FS.FilePath src)
+        {
+            var flow = Wf.Running(src.ToUri());
+            var res = Assembly.LoadFrom(src.Name);
+            var accessors = Resources.accessors(res).View;
+            var count = accessors.Length;
+            var captured = Load(accessors);
+            Wf.Ran(flow,captured.Count);
+            return captured;
+        }
 
-        public Index<CapturedApiRes> CaptureAccessors(ApiHostUri host, ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
+        // public Index<CapturedApiRes> CaptureApiRes(ApiHostUri host, FS.FilePath dst)
+        //     => CaptureAccessors(host, Resources.accessors(Wf.Api.PartComponents), dst);
+
+        public Index<CapturedApiRes> CaptureAccessors(ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
         {
             var count = src.Length;
             var codes = span(alloc<ApiCaptureBlock>(count));
@@ -54,8 +58,46 @@ namespace Z0
                 if(code.IsNonEmpty)
                 {
                     ref readonly var data = ref skip(codes,i);
-                    seek(target, i) = new CapturedApiRes(host, accessor, DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty));
-                    Save(data, writer);
+                    var decoded = DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty);
+                    var formatted = Asm.Formatter.FormatFunction(decoded.Routine);
+                    seek(target, i) = new CapturedApiRes(accessor.Host, accessor, decoded);
+                    writer.Write(formatted);
+                }
+            }
+
+            return captured;
+        }
+
+        public Index<ApiRes> Load(ReadOnlySpan<ApiResAccessor> src)
+        {
+            const ulong Cut = 0x55005500550;
+            var count = src.Length;
+            var codes = span(alloc<ApiCaptureBlock>(count));
+            var captured = alloc<ApiRes>(count);
+            var target = span(captured);
+            using var quick = Capture.quick(Wf, Asm);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var accessor = ref skip(src,i);
+                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
+                seek(codes, i) = code;
+
+                if(code.IsNonEmpty)
+                {
+                    ref readonly var data = ref skip(codes,i);
+                    var routine = DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty);
+                    var movements = moves(routine.Routine);
+                    var movecount = movements.Length;
+                    for(var j=0u; j<movecount; j++)
+                    {
+                        ref readonly var move = ref skip(movements,j);
+                        if(move.Source < Cut)
+                        {
+                            var capture = new CapturedApiRes(accessor.Host, accessor, routine);
+                            seek(target, i) = new ApiRes(accessor, move.Source.ToAddress(), 10);
+                            break;
+                        }
+                    }
                 }
             }
 

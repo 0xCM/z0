@@ -52,6 +52,10 @@ namespace Z0
             => new OpUri(ApiUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
+        public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
+            => new OpUri(ApiUriScheme.Located, host, group, opid);
+
+        [MethodImpl(Inline)]
         internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             Scheme = scheme;

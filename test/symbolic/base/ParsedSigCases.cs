@@ -20,7 +20,7 @@ namespace Z0
         {
             var providers = Resources.BinaryProviders<ParsedSigCases>();
             var count = providers.Length;
-            Data = z.alloc<BinaryRes>(count);
+            Data = memory.alloc<BinaryRes>(count);
 
             var index = 0;
             Register(index++, OpIdentityParser.parse(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);
