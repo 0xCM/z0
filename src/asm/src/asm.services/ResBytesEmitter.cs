@@ -9,9 +9,31 @@ namespace Z0
     using static CodeGenerator;
     using static memory;
 
-    public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>, IResBytesEmitter
+    public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>
     {
-        public Index<ApiHostRes> Emit(ApiCodeBlocks index, FS.FolderPath dst)
+        FS.FolderPath RespackDir
+            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
+
+        public Index<ApiHostRes> Emit()
+        {
+            var blocks = Wf.ApiHexIndexer().IndexApiBlocks();
+            return Emit(blocks);
+        }
+
+        public Index<ApiHostRes> Emit(ApiCodeBlocks src)
+        {
+            var apires = Emit(src, RespackDir);
+            var runner = ScriptRunner.create(Wf.Env);
+
+            var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
+            root.iter(build, line => Wf.Row(line));
+
+            var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
+            root.iter(pack, line => Wf.Row(line));
+            return apires;
+        }
+
+        Index<ApiHostRes> Emit(ApiCodeBlocks index, FS.FolderPath dst)
         {
             var emissions = root.list<ApiHostRes>();
             var flow = Wf.Running();

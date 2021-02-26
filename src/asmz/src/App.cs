@@ -293,10 +293,15 @@ namespace Z0.Asm
             root.iter(symbols.Flags, f => Wf.Row(f));
         }
 
+        void EmitResBytes()
+        {
+            Wf.ResBytesEmitter().Emit();
+        }
         public unsafe void Run()
         {
+            EmitResBytes();
 
-            FilterApiBlocks();
+            //FilterApiBlocks();
 
             //Resources.accessors()
         }

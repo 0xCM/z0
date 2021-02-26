@@ -16,7 +16,6 @@ namespace Z0.Asm
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-
         AsmRecords Recordset;
 
         ApiCodeBlocks CodeBlocks;
@@ -40,7 +39,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             base.OnInit();
-            CodeBlocks = ApiHexIndex.create(Wf).IndexApiBlocks();
+            CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
             Dataset = AsmServices.create(Wf).IndexDecoder().Decode(CodeBlocks);
         }
 
@@ -100,17 +99,32 @@ namespace Z0.Asm
                 render.Render(routines[i]);
         }
 
+        // public Index<ApiHostRes> EmitResBytes(ApiCodeBlocks src)
+        // {
+        //     var apires = Wf.ResBytesEmitter().Emit(src, RespackDir);
+        //     var runner = ScriptRunner.create(Wf.Env);
+
+        //     var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
+        //     root.iter(build, line => Wf.Row(line));
+
+        //     var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
+        //     root.iter(pack, line => Wf.Row(line));
+        //     return apires;
+
+        // }
+
         public Index<ApiHostRes> EmitResBytes()
         {
-            var apires = Wf.ResBytesEmitter().Emit(Dataset.Blocks, RespackDir);
-            var runner = ScriptRunner.create(Wf.Env);
+            return Wf.ResBytesEmitter().Emit(CodeBlocks);
+            // var apires = Wf.ResBytesEmitter().Emit(CodeBlocks, RespackDir);
+            // var runner = ScriptRunner.create(Wf.Env);
 
-            var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
-            root.iter(build, line => Wf.Row(line));
+            // var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
+            // root.iter(build, line => Wf.Row(line));
 
-            var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
-            root.iter(pack, line => Wf.Row(line));
-            return apires;
+            // var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
+            // root.iter(pack, line => Wf.Row(line));
+            // return apires;
         }
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)

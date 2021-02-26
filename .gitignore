@@ -17,3 +17,4 @@ mkl.redist/
 .index
 .logs
 .antlr
+src/respack/content/
