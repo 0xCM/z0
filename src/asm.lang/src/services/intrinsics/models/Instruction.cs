@@ -9,12 +9,9 @@ namespace Z0.Asm
 
     using static Part;
 
-    public partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
-        /// <summary>
-        /// [instruction name="ADCX" form="r32, r32" xed="ADCX_GPR32d_GPR32d"
-        /// </summary>
-        public struct Instruction
+        public struct Instruction : ITextual
         {
             public const string ElementName = "instruction";
 
@@ -31,6 +28,12 @@ namespace Z0.Asm
                 this.form = form;
                 this.xed = xed;
             }
+
+            public string Format()
+                => string.Format("{0,-24} | {1}", string.Format("{0} {1}", name, form), xed);
+
+            public override string ToString()
+                => Format();
 
             public static Instruction Empty
                 => new Instruction(EmptyString, EmptyString, EmptyString);

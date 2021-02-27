@@ -317,11 +317,8 @@ namespace Z0.Asm
             }
         }
 
-        void ReadIntrinsics()
+        void EmitIntrinsicsInfo()
         {
-            // var assets = Parts.AsmLang.Assets;
-            // root.iter(assets.All().View, asset => Wf.Row(asset.Name));
-
             var doc = IntelIntrinsics.doc();
             Db.AppLog("intrinsics", FS.Extensions.Xml).Overwrite(doc.Content);
             var intrinsics = Wf.IntelIntrinsics();
@@ -331,21 +328,15 @@ namespace Z0.Asm
             using var writer = Db.AppLog("intrinsics").Writer();
             for(var i=0; i<count; i++)
             {
-                ref readonly var instrinsic = ref skip(elements,i);
-                var name = instrinsic.name;
-                var algorithm = instrinsic.operation;
-                writer.WriteLine(name);
-                writer.WriteLine(RP.PageBreak120);
-                writer.WriteLine(algorithm);
+                ref readonly var element = ref skip(elements,i);
+                writer.WriteLine(element.Format());
             }
-
         }
 
         public unsafe void Run()
         {
-            //ReadIntrinsics();
+            EmitIntrinsicsInfo();
 
-            Wf.ImmEmitter().Emit();
 
             //var test = "adfadfaldfkadsf&>";
 

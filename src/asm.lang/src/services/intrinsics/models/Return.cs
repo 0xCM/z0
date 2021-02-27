@@ -4,20 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
 
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
-        public const string ReturnElement = "return";
-
         /// <summary>
         /// [return type="unsigned char" varname="c_in" etype="UI8"]
         /// </summary>
-        public struct Return
+        public struct Return : ITextual
         {
+            public const string ElementName = "return";
+
             public string varname;
 
             public string type;
@@ -25,6 +22,12 @@ namespace Z0.Asm
             public string etype;
 
             public string memwidth;
+
+            public string Format()
+                => format(this);
+
+            public override string ToString()
+                => Format();
 
             public static Return Empty
             {

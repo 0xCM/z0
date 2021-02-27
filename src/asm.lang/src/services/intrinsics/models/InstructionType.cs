@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
         public struct InstructionType
         {

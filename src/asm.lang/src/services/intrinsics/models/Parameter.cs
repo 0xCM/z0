@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
         /// <summary>
         /// [parameter type="unsigned char" varname="c_in" etype="UI8"]
@@ -23,11 +23,10 @@ namespace Z0.Asm
 
             public string Format()
             {
-                var dst = text.buffer();
                 if(text.nonempty(memwidth))
                     return string.Format("{0}:w{1}", varname, memwidth);
                 else
-                    return string.Format("{0}:{1}", varname, etype);
+                    return string.Format("{0}:{1}", varname, type);
             }
 
             public override string ToString()

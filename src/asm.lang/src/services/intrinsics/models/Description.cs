@@ -9,10 +9,8 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
-        public const string DescriptionElement = "description";
-
         public struct Description : ITextual
         {
             public const string ElementName = "description";

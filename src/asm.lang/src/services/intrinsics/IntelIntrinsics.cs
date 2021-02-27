@@ -8,28 +8,19 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Xml;
     using System.IO;
-    using System.Collections.Generic;
 
     using static Part;
-    using static IntelIntrinsicsModel;
     using static memory;
-    using static TextRules;
 
     public partial class IntelIntrinsics : WfService<IntelIntrinsics>
     {
-        public static string identifier(Intrinsic src)
+        public static string format(Return src)
         {
-            var count = src.instructions.Count;
-            if(count != 0)
-                return src.instructions[0].name;
+            if(text.nonempty(src.memwidth))
+                return src.memwidth;
             else
-                return EmptyString;
+                return src.type;
         }
-
-        public static string label(Intrinsic src)
-            => text.concat("## ", src.instructions.Count != 0
-            ? text.concat(identifier(src), Space, Chars.Dash, Space, src.name)
-            : identifier(src));
 
         public static XmlDoc doc()
             => text.xml(Resources.utf8(Assets.create().InstrinsicXml()));
@@ -37,6 +28,47 @@ namespace Z0.Asm
         public Index<Intrinsic> Parse()
             => Parse(doc());
 
+        static Intrinsic create()
+        {
+            var dst = new Intrinsic();
+            dst.tech = EmptyString;
+            dst.name = EmptyString;
+            dst.content = EmptyString;
+            dst.types = new InstructionTypes();
+            dst.CPUID = EmptyString;
+            dst.category = EmptyString;
+            dst.@return = Return.Empty;
+            dst.parameters = new Parameters();
+            dst.description = EmptyString;
+            dst.operation = new Operation(root.list<TextLine>());
+            dst.instructions = new Instructions();
+            dst.header = EmptyString;
+            return dst;
+        }
+
+        public static string format(Intrinsic src)
+        {
+            var dst = text.buffer();
+            dst.AppendLine(string.Format("# Intrinsic: {0} {1}({2})", src.@return,  src.name, src.parameters));
+
+            var classes = root.list<string>(3);
+            if(text.nonempty(src.tech))
+                classes.Add(src.tech);
+            if(src.CPUID.IsNonEmpty)
+                classes.Add(src.CPUID.Format());
+            if(src.category.IsNonEmpty)
+                classes.Add(src.category.Format());
+            if(classes.Count != 0)
+                dst.AppendLineFormat("# Classification: {0}", TextRules.Format.join(", ", classes));
+
+            dst.AppendLineFormat("# Header: {0}", src.header);
+            dst.Append(src.instructions.Format());
+            dst.AppendLineFormat("# Description: {0}", src.description);
+            dst.AppendLine("BEGIN");
+            dst.Append(src.operation.Format());
+            dst.AppendLine("END");
+            return dst.Emit();
+        }
 
         public Index<Intrinsic> Parse(XmlDoc src)
         {
@@ -50,9 +82,9 @@ namespace Z0.Asm
                 {
                     switch(reader.Name)
                     {
-                        case IntrinsicElement:
+                        case Intrinsic.ElementName:
                             i++;
-                            entries[i] = Intrinsic.create();
+                            entries[i] = create();
                             entries[i].content = reader.Value;
                             entries[i].tech = reader[nameof(Intrinsic.tech)];
                             entries[i].name = reader[nameof(Intrinsic.name)];
@@ -66,11 +98,11 @@ namespace Z0.Asm
                             read(reader, ref entries[i].description);
                         break;
 
-                        case ReturnElement:
+                        case Return.ElementName:
                             read(reader, ref entries[i].@return);
                         break;
 
-                        case CpuIdElement:
+                        case CpuId.ElementName:
                             read(reader, ref entries[i].CPUID);
                         break;
 
@@ -89,7 +121,7 @@ namespace Z0.Asm
                         case Parameter.ElementName:
                             read(reader, entries[i].parameters);
                         break;
-                        case HeaderElement:
+                        case Header.ElementName:
                             read(reader, ref entries[i].header);
                         break;
                     }
@@ -101,8 +133,7 @@ namespace Z0.Asm
 
         static void read(XmlReader reader, ref Operation dst)
         {
-            var content = reader.ReadInnerXml();
-            content = content.Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
+            var content = reader.ReadInnerXml().Replace(XmlEntities.gt, ">").Replace(XmlEntities.lt, "<");
             var lines = TextRules.Parse.lines(content).View;
             var count = lines.Length;
             if(count != 0)
@@ -118,17 +149,17 @@ namespace Z0.Asm
 
         static void read(XmlReader reader, ref CpuId dst)
         {
-            dst.Content = reader.Value;
+            dst.Content = reader.ReadInnerXml();
         }
 
         static void read(XmlReader reader, ref Category dst)
         {
-            dst.Content = reader.Value;
+            dst.Content = reader.ReadInnerXml();
         }
 
         static void read(XmlReader reader, ref Header dst)
         {
-            dst.Content = reader.Value;
+            dst.Content = reader.ReadInnerXml();
         }
 
         static void read(XmlReader reader, ref Description dst)
@@ -143,9 +174,9 @@ namespace Z0.Asm
             dst.memwidth =  reader[nameof(Parameter.memwidth)];
         }
 
-        static void read(XmlReader reader, List<Parameter> dst)
+        static void read(XmlReader reader, Parameters dst)
         {
-            var element = default(Parameter);
+            var element = new Parameter();
             element.varname = reader[nameof(Parameter.varname)];
             element.etype = reader[nameof(Parameter.etype)];
             element.type = reader[nameof(Parameter.type)];
@@ -153,14 +184,14 @@ namespace Z0.Asm
             dst.Add(element);
         }
 
-        static void read(XmlReader reader, List<InstructionType> dst)
+        static void read(XmlReader reader, InstructionTypes dst)
         {
-            var element = default(InstructionType);
+            var element = new InstructionType();
             element.Content = reader.ReadInnerXml();
             dst.Add(element);
         }
 
-        static void read(XmlReader reader, List<Instruction> dst)
+        static void read(XmlReader reader, Instructions dst)
         {
             var element = Instruction.Empty;
             element.name = reader[nameof(Instruction.name)];

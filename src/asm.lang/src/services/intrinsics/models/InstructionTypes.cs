@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public partial struct IntelIntrinsicsModel
-    {
+    using System;
+    using System.Collections.Generic;
 
+    partial class IntelIntrinsics
+    {
+        public class InstructionTypes : List<InstructionType>
+        {
+
+        }
     }
 }

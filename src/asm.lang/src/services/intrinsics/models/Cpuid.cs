@@ -9,12 +9,12 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
-        public const string CpuIdElement = "CPUID";
-
         public struct CpuId : ITextual
         {
+            public const string ElementName = "CPUID";
+
             public string Content;
 
             [MethodImpl(Inline)]
@@ -23,6 +23,10 @@ namespace Z0.Asm
                 Content = src;
             }
 
+            public bool IsNonEmpty
+            {
+                get => text.nonempty(Content);
+            }
             public string Format()
                 => Content;
 

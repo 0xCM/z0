@@ -12,33 +12,23 @@ namespace Z0.Asm
 
     partial class IntelIntrinsics
     {
-        public struct Operation : ITextual
+        public class Instructions : List<Instruction>, ITextual
         {
-            public const string ElementName = "operation";
-
-            public List<TextLine> Content;
-
-            [MethodImpl(Inline)]
-            public Operation(List<TextLine> src)
-            {
-                Content = src;
-            }
-
-            public override string ToString()
-                => Format();
-
             public string Format()
             {
-                if(Content != null)
+                var count = Count;
+                if(count != 0)
                 {
                     var dst = text.buffer();
-                    foreach(var line in Content)
-                        dst.AppendLine(line);
+                    root.iter(this, x => dst.AppendLineFormat("# {0}",x));
                     return dst.Emit();
                 }
                 else
                     return EmptyString;
             }
+
+            public override string ToString()
+                => Format();
         }
     }
 }

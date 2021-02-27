@@ -4,38 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-
-    using static Part;
-
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
-        public const string IntrinsicElement = "intrinsic";
-
-        /// <summary>
-        /// [intrinsic tech="Other" name="_addcarryx_u32">]
-        /// </summary>
         public struct Intrinsic
         {
-            public static Intrinsic create()
-            {
-                var dst = default(Intrinsic);
-                dst.tech = EmptyString;
-                dst.name = EmptyString;
-                dst.content = EmptyString;
-                dst.types = root.list<InstructionType>();
-                dst.CPUID = EmptyString;
-                dst.category = EmptyString;
-                dst.@return = Return.Empty;
-                dst.parameters = root.list<Parameter>();
-                dst.description = EmptyString;
-                dst.operation = new Operation(root.list<TextLine>());
-                dst.instructions = root.list<Instruction>();
-                dst.header = EmptyString;
-                return dst;
-            }
+            public const string ElementName = "intrinsic";
 
             public string tech;
 
@@ -43,7 +16,7 @@ namespace Z0.Asm
 
             public string content;
 
-            public List<InstructionType> types;
+            public InstructionTypes types;
 
             public CpuId CPUID;
 
@@ -51,15 +24,21 @@ namespace Z0.Asm
 
             public Return @return;
 
-            public List<Parameter> parameters;
+            public Parameters parameters;
 
             public Description description;
 
             public Operation operation;
 
-            public List<Instruction> instructions;
+            public Instructions instructions;
 
             public Header header;
+
+            public string Format()
+                => IntelIntrinsics.format(this);
+
+            public override string ToString()
+                => Format();
         }
     }
 }

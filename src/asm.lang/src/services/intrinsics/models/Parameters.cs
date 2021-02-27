@@ -6,32 +6,27 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
 
     partial class IntelIntrinsics
     {
-        public struct Header : ITextual
+        public class Parameters : List<Parameter>
         {
-            public const string ElementName = "header";
-
-            public string Content;
-
-            [MethodImpl(Inline)]
-            public Header(string src)
-            {
-                Content = src;
-            }
+            const string Delimiter = ", ";
 
             public string Format()
-                => Content;
+            {
+                var count = Count;
+                if(count != 0)
+                    return TextRules.Format.join(Delimiter, this);
+                else
+                    return EmptyString;
+            }
 
             public override string ToString()
-                => Content;
-
-            [MethodImpl(Inline)]
-            public static implicit operator Header(string src)
-                => new Header(src);
+                => Format();
         }
     }
 }

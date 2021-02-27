@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct IntelIntrinsicsModel
+    partial class IntelIntrinsics
     {
         public struct Category : ITextual
         {
@@ -21,6 +21,12 @@ namespace Z0.Asm
             public Category(string src)
             {
                 Content = src;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => text.nonempty(Content);
             }
 
             public string Format()

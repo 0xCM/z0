@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static TextRules;
 
-
     partial class XText
     {
         [TextUtility]
