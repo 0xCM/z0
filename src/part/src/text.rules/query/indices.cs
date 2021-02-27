@@ -71,10 +71,8 @@ namespace Z0
             [Op]
             public static Span<int> indices(string src, char match, Span<int> buffer)
             {
-                var dst = root.list<int>();
                 var count = src.Length;
                 var max = buffer.Length;
-
                 ref readonly var c = ref @char(src);
                 var j = 0;
                 for(var i=0; i<count && j<max; i++)
@@ -82,6 +80,28 @@ namespace Z0
                         seek(buffer, j++) = i;
 
                 return j != 0 ? slice(buffer,0,j) : Span<int>.Empty;
+            }
+
+            /// <summary>
+            /// Returns the indicies of all locations of a specified character within specified text
+            /// </summary>
+            /// <param name="src">The source text</param>
+            /// <param name="match">The character to match</param>
+            /// <param name="buffer">The matched index buffer</param>
+            [Op]
+            public static int indices(string src, string match, Span<int> buffer)
+            {
+                var count = src.Length;
+                var max = buffer.Length;
+                var j = 0;
+                var i = src.IndexOf(match);
+                while(i != NotFound && j<max)
+                {
+                    seek(buffer,j++) = i;
+                    i = src.IndexOf(match, i + 1);
+                }
+
+                return j;
             }
         }
     }

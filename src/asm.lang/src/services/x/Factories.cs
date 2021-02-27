@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
+    using System.Xml;
 
-    using static Part;
+    using Z0.Asm;
 
-
-    [ApiComplete]
-    partial struct Msg
+    partial class XTend
     {
-
+        public static IntelIntrinsics IntelIntrinsics(this IWfShell wf)
+            => Z0.Asm.IntelIntrinsics.create(wf);
     }
 }

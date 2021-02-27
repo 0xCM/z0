@@ -60,10 +60,11 @@ namespace Z0
         void RunImm()
         {
             var flow = Wf.Running("ImmEmitter");
-            var service = ApiImmEmitter.create(Wf);
-            service.ClearArchive(Parts);
-            service.EmitUnrefined(Parts);
-            service.EmitRefined(Parts);
+            Wf.ImmEmitter().Emit(Parts);
+            //service.Emit(Parts);
+            // service.ClearArchive(Parts);
+            // service.EmitUnrefined(Parts);
+            // service.EmitRefined(Parts);
             Wf.Ran(flow);
         }
 

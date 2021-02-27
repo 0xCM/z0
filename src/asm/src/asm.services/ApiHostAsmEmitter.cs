@@ -26,10 +26,10 @@ namespace Z0.Asm
 
         public ref AsmRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
         {
-            var flow = Wf.Running();
+            var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
             Decode(host, src, out dst);
             var emitted = emit(Wf, host, dst.Storage, Asm.Formatter.Config);
-            Wf.Ran(flow, emitted.ToUri());
+            Wf.Ran(flow, Msg.EmittedHostRoutines.Format(src.Length, host, emitted.ToUri()));
             return ref dst;
         }
 

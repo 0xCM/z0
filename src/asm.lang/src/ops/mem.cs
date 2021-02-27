@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The defining source value</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static mem<T> mem<T>(T src)
             where T : unmanaged, IMemOp
                 => new mem<T>(src);

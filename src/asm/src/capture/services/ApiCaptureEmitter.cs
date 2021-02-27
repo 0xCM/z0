@@ -38,7 +38,7 @@ namespace Z0
             var routines = AsmRoutines.Empty;
             try
             {
-                var flow = Wf.Running($"Running {host} emissiong workflow for {src.Count} members");
+                var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
                 var emitted = EmitExtracts(host, src);
                 var code = ParseExtracts(host, src);
                 if(code.Length != 0)
@@ -88,7 +88,7 @@ namespace Z0
                 var flow = Wf.Running();
                 var parser = ApiCodeExtractors.parser();
                 var parsed = parser.ParseMembers(src);
-                Wf.Ran(flow, string.Format("Parsed {0} {1} extract blocks", parsed.Count, host));
+                Wf.Ran(flow, Msg.ParsedExtractBlocks.Format(parsed.Count, host));
                 return parsed;
             }
             else
@@ -111,7 +111,10 @@ namespace Z0
             ref readonly var w0 = ref skip(X86TableWidths, 0);
             ref readonly var w1 = ref skip(X86TableWidths, 1);
             ref readonly var w2 = ref skip(X86TableWidths, 2);
-            var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe + text.embrace($"1,-{w1}") + RP.SpacedPipe + text.embrace($"2,-{w2}");
+            var pattern = text.embrace($"0,-{w0}") + RP.SpacedPipe
+                        + text.embrace($"1,-{w1}") + RP.SpacedPipe
+                        + text.embrace($"2,-{w2}");
+
             using var writer = dst.Writer(append);
             if(header)
                 writer.WriteLine(string.Format(pattern, nameof(ApiExtractRow.Base), nameof(ApiExtractRow.Uri), nameof(ApiExtractRow.Encoded)));

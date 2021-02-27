@@ -298,6 +298,25 @@ namespace Z0.Asm
             Wf.ResBytesEmitter().Emit();
         }
 
+
+
+        static void indices(string src)
+        {
+            Span<int> dst = stackalloc int[12];
+            var gt = TextRules.Query.indices(src, ">", dst);
+            for(var i=0; i<gt; i++)
+            {
+
+            }
+
+            dst.Clear();
+            var lt = TextRules.Query.indices(src, "<", dst);
+            for(var i=0; i<gt; i++)
+            {
+
+            }
+        }
+
         void ReadIntrinsics()
         {
             // var assets = Parts.AsmLang.Assets;
@@ -305,8 +324,9 @@ namespace Z0.Asm
 
             var doc = IntelIntrinsics.doc();
             Db.AppLog("intrinsics", FS.Extensions.Xml).Overwrite(doc.Content);
+            var intrinsics = Wf.IntelIntrinsics();
 
-            var elements = IntelIntrinsics.parse(doc).View;
+            var elements = intrinsics.Parse(doc).View;
             var count = elements.Length;
             using var writer = Db.AppLog("intrinsics").Writer();
             for(var i=0; i<count; i++)
@@ -323,7 +343,11 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            ReadIntrinsics();
+            //ReadIntrinsics();
+
+            Wf.ImmEmitter().Emit();
+
+            //var test = "adfadfaldfkadsf&>";
 
             //FilterApiBlocks();
 

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
@@ -20,6 +19,10 @@ namespace Z0
         const MethodImplOptions Options = NotInline;
 
         public const StringComparison InvariantCulture = StringComparison.InvariantCulture;
+
+        [Op]
+        public static RuleParser parser(string src)
+            => new RuleParser(src);
 
         /// <summary>
         /// Inserts a string into the intern pool if it is not already there and, in any case, returns the string's address

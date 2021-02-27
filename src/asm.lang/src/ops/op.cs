@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static AsmOp<T> op<T>(AsmOpKind kind, T content)
             where T : struct, IAsmOpContent
                 => new AsmOp<T>(kind, content);

@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using E = SpecializedImmEvent;
 
-    public class ApiImmEmitter :  WfService<ApiImmEmitter>, IImmEmitter
+    public class ApiImmEmitter :  WfService<ApiImmEmitter>
     {
         IAsmContext Asm;
 
@@ -30,7 +30,15 @@ namespace Z0.Asm
 
         bool Append = true;
 
-        public void ClearArchive(params PartId[] parts)
+        public void Emit(params PartId[] parts)
+        {
+            var selected = parts.Length == 0 ? Wf.Api.PartIdentities : parts;
+            ClearArchive(selected);
+            EmitUnrefined(selected);
+            EmitRefined(selected);
+        }
+
+        void ClearArchive(params PartId[] parts)
         {
             if(parts.Length != 0)
                 Db.ImmHostDirs(parts).Delete();
@@ -38,7 +46,7 @@ namespace Z0.Asm
                 Db.ImmRoot().Delete();
         }
 
-        public void EmitLiteral(byte[] imm8, params PartId[] parts)
+        void EmitLiteral(byte[] imm8, params PartId[] parts)
         {
             if(imm8.Length != 0)
             {
@@ -47,7 +55,7 @@ namespace Z0.Asm
             }
         }
 
-        public void EmitUnrefined(params PartId[] parts)
+        void EmitUnrefined(params PartId[] parts)
         {
             var defaults = new byte[]{2,4,6,8};
             EmitLiteral(defaults, parts);

@@ -34,7 +34,7 @@ namespace Z0.Asm
             var config = AsmFormatConfig.DefaultStreamFormat;
             Decoder = Services.RoutineDecoder(config);
             Formatter = Services.Formatter(config);
-            CaptureService = Capture.quick(wf,asm);
+            CaptureService = wf.CaptureQuick(asm);
         }
 
         public ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<MethodInfo> src, FS.FilePath target)

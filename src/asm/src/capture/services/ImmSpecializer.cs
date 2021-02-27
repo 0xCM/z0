@@ -24,7 +24,7 @@ namespace Z0.Asm
         public ImmSpecializer(IWfShell wf, IAsmContext asm)
         {
             Decoder = asm.RoutineDecoder;
-            Core = Capture.core(wf,asm);
+            Core = wf.CaptureCore(asm);
             Dynamic = Dynops.Dynexus;
         }
 

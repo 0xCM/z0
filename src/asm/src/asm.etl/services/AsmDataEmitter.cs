@@ -271,11 +271,4 @@ namespace Z0.Asm
             get => Offset++;
         }
     }
-
-    partial struct Msg
-    {
-        public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";
-
-        public static RenderPattern<Count,Count> EmittedInstructionRecords => "Emitted a total of {0} records for {1} instruction tables";
-    }
 }

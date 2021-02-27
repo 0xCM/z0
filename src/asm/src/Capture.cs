@@ -11,12 +11,6 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
-    {
-        public static AsmServices AsmServices(this IWfShell wf)
-            => Z0.Asm.AsmServices.create(wf);
-    }
-
     [ApiHost]
     public readonly struct Capture
     {
@@ -34,25 +28,9 @@ namespace Z0
         {
             using var wf = configure(WfShell.create(args));
             var app = Apps.context(wf, Rng.@default());
-            using var control = runner(wf, new AsmContext(app, wf));
+            using var control = wf.CaptureRunner(new AsmContext(app, wf));
             control.Run();
         }
-
-        [Op]
-        public static ApiCaptureRunner runner(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureRunner(wf, asm);
-
-        [MethodImpl(Inline), Op]
-        public static ICaptureServices services(IWfShell wf, IAsmContext asm)
-            => new CaptureServices(wf, asm);
-
-        [MethodImpl(Inline), Op]
-        public static ICaptureCore core(IWfShell wf, IAsmContext asm)
-            => CaptureCore.create(wf);
-
-        [MethodImpl(Inline), Op]
-        public static ApiCaptureEmitter emitter(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureEmitter(wf, asm);
 
         [MethodImpl(Inline), Op]
         public static CaptureAlt alt(IWfShell wf, IAsmContext asm)

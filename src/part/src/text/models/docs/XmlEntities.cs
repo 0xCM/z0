@@ -2,11 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct AsmSemantic
-    {
+    using System;
+    using System.Runtime.CompilerServices;
 
+    using static memory;
+
+    public readonly struct XmlEntities
+    {
+        public const string gt = "&gt;";
+
+        public const string lt = "&lt;";
     }
 }

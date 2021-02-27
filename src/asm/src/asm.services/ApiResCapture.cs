@@ -45,7 +45,7 @@ namespace Z0
             var target = span(captured);
 
             using var writer = dst.Writer();
-            using var quick = Capture.quick(Wf, Asm);
+            using var quick = Wf.CaptureQuick(Asm);
 
             for(var i=0u; i<count; i++)
             {
@@ -73,7 +73,7 @@ namespace Z0
             var codes = span(alloc<ApiCaptureBlock>(count));
             var captured = alloc<ApiRes>(count);
             var target = span(captured);
-            using var quick = Capture.quick(Wf, Asm);
+            using var quick = Wf.CaptureQuick(Asm);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);

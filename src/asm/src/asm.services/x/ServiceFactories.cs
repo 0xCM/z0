@@ -28,5 +28,26 @@ namespace Z0
 
         public static ApiResCapture ApiResCapture(this IWfShell wf)
             => Z0.ApiResCapture.create(wf);
+
+        public static ApiImmEmitter ImmEmitter(this IWfShell wf)
+            => ApiImmEmitter.create(wf);
+
+        public static AsmServices AsmServices(this IWfShell wf)
+            => Z0.Asm.AsmServices.create(wf);
+
+        public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf, IAsmContext asm)
+            => new ApiCaptureEmitter(wf, asm);
+
+        public static ApiCaptureRunner CaptureRunner(this IWfShell wf, IAsmContext asm)
+            => new ApiCaptureRunner(wf, asm);
+
+        public static QuickCapture CaptureQuick(this IWfShell wf, IAsmContext asm)
+            => Capture.quick(wf,asm);
+
+        public static ICaptureServices CaptureServices(this IWfShell wf, IAsmContext asm)
+            => new CaptureServices(wf, asm);
+
+        public static ICaptureCore CaptureCore(this IWfShell wf, IAsmContext asm)
+            => Z0.Asm.CaptureCore.create(wf);
     }
 }

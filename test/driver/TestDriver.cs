@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using Z0.Asm;
 
     sealed class TestDriver : WfHost<TestDriver>
     {
@@ -18,7 +19,8 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                CaptureTool.run(wf);
+                using var control = wf.CaptureRunner(new AsmContext(Apps.context(wf), wf));
+                control.Run();
             }
             catch(Exception e)
             {

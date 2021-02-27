@@ -11,7 +11,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public struct ApiCaptureService : IDisposable
     {
@@ -91,7 +91,7 @@ namespace Z0
             try
             {
                 var ops = ExtractHostOps(api);
-                var emitter = Capture.emitter(Wf, Asm);
+                var emitter = Wf.CaptureEmitter(Asm);
                 routines = emitter.Emit(api.Uri, ops);
             }
             catch(Exception e)
@@ -122,7 +122,7 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                var emititter = Capture.emitter(Wf, Asm);
+                var emititter = Wf.CaptureEmitter(Asm);
                 dst.AddRange(emititter.Emit(x.Key, x.Value));
             }
             return dst.ToArray();

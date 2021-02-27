@@ -26,6 +26,6 @@ namespace Z0.Asm
             => AsmServices.decoder(format ?? AsmFormatConfig.Default);
 
         public ICaptureCore CaptureCore
-            => Capture.core(Wf,Asm);
+            => Wf.CaptureCore(Asm);
     }
 }
