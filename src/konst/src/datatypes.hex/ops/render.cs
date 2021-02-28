@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static z;
+    using static memory;
 
     partial class Hex
     {
@@ -29,11 +29,11 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var current = ref skip(cell,i);
-                var formatted = HexFormat.format(current, config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+                var formatted = HexFormat.format(current, config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec);
                 dst.Append(formatted);
 
                 if(i != last)
-                    dst.Append(config.Delimiter);
+                    dst.Append(config.SegDelimiter);
             }
         }
     }

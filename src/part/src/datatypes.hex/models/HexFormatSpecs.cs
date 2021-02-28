@@ -57,24 +57,74 @@ namespace Z0
         public const char DataDelimiter = Chars.Space;
 
         /// <summary>
-        /// The maximum number of hex characters required to represent an 8-bit number
+        /// The maximum number of hex characters required to represent an 4-bit segment
         /// </summary>
-        public const int HexPad8 = 2;
+        public const int Hex4Width = 1;
 
         /// <summary>
-        /// The maximum number of hex characters required to represent a 16-bit number
+        /// The maximum number of hex characters required to represent an 8-bit segment
         /// </summary>
-        public const int HexPad16 = 4;
+        public const int Hex8Width = 2;
 
         /// <summary>
-        /// The maximum number of hex characters required to represent a 32-bit number
+        /// The maximum number of hex characters required to represent a 12-bit segment
         /// </summary>
-        public const int HexPad32 = 8;
+        public const int Hex12Width = 3;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 16-bit segment
+        /// </summary>
+        public const int Hex16Width = 4;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 20-bit segment
+        /// </summary>
+        public const int Hex20Width = 5;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 24-bit segment
+        /// </summary>
+        public const int Hex24Width = 6;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 28-bit segment
+        /// </summary>
+        public const int Hex28Width = 7;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 32-bit segment
+        /// </summary>
+        public const int Hex32Width = 8;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 36-bit segment
+        /// </summary>
+        public const int Hex36Width = 9;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 40-bit segment
+        /// </summary>
+        public const int Hex40Width = 10;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 40-bit segment
+        /// </summary>
+        public const int Hex44Width = 11;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 40-bit segment
+        /// </summary>
+        public const int Hex48Width = 12;
+
+        /// <summary>
+        /// The maximum number of hex characters required to represent a 40-bit segment
+        /// </summary>
+        public const int Hex52Width = 13;
 
         /// <summary>
         /// The maximum number of hex characters required to represent a 64-bit number
         /// </summary>
-        public const int HexPad64 = 16;
+        public const int Hex64Width = 16;
 
         /// <summary>
         /// Standard hex specifier that leads the numeric content
@@ -88,49 +138,77 @@ namespace Z0
 
         public const string SmallHexSpec = "x4";
 
-        public const string Hex4 = "x1";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex4Width"/>
+        /// </summary>
+        public const string Hex4Spec = "x1";
 
-        public const string Hex8 = "x2";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex8Width"/>
+        /// </summary>
+        public const string Hex8Spec = "x2";
 
-        public const string Hex12 = "x3";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex12Width"/>
+        /// </summary>
+        public const string Hex12Spec = "x3";
 
-        public const string Hex16 = "x4";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex16Width"/>
+        /// </summary>
+        public const string Hex16Spec = "x4";
 
-        public const string Hex20 = "x5";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex20Width"/>
+        /// </summary>
+        public const string Hex20Spec = "x5";
 
-        public const string Hex24 = "x6";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex24Width"/>
+        /// </summary>
+        public const string Hex24Spec = "x6";
 
-        public const string Hex28 = "x7";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex28Width"/>
+        /// </summary>
+        public const string Hex28Spec = "x7";
 
-        public const string Hex32 = "x8";
+        public const string Hex32Spec = "x8";
 
-        public const string Hex36 = "x9";
+        public const string Hex36Spec = "x9";
 
-        public const string Hex40 = "x10";
+        public const string Hex40Spec = "x10";
 
-        public const string Hex44 = "x11";
+        public const string Hex44Spec = "x11";
 
-        public const string Hex48 = "x12";
+        public const string Hex48Spec = "x12";
 
-        public const string Hex52 = "x13";
+        public const string Hex52Spec = "x13";
 
-        public const string Hex56 = "x14";
+        public const string Hex56Spec = "x14";
 
-        public const string Hex60 = "x15";
+        public const string Hex60Spec = "x15";
 
-        public const string Hex64 = "x16";
+        /// <summary>
+        /// Lowercase format specifier for a segment of width <see cref="Hex16Width"/>
+        /// </summary>
+        public const string Hex64Spec = "x16";
 
         /// <summary>
         /// Specifies the default configuration for hex data emission
         /// </summary>
         public static HexFormatOptions HexData
-            => new HexFormatOptions(true, false, false, false, DataDelimiter);
+        {
+            get => options(true, false, false, false, DataDelimiter);
+        }
 
         /// <summary>
         /// The default configuration for array initialization content
         /// </summary>
         public static HexFormatOptions HexArray
-            => new HexFormatOptions(true, true, false, true, Chars.Comma);
+        {
+            get => options(true, true, false, true, Chars.Comma);
+        }
 
         /// <summary>
         /// Selects either the uppercase format code 'X' or lowercase format code 'x'
@@ -150,11 +228,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? DataDelimiter);
+        {
+            var dst = new HexFormatOptions();
+            dst.ZeroPad = zpad;
+            dst.CaseFormatChar = CaseSpec(uppercase);
+            dst.Specifier = specifier;
+            dst.Uppercase = uppercase;
+            dst.PreSpec = prespec;
+            dst.SegDelimiter = delimiter ?? DataDelimiter;
+            dst.DelimitBlocks = false;
+            dst.BlockDelimiter = Chars.Null;
+            dst.BlockWidth = null;
+            return dst;
+        }
 
         [MethodImpl(Inline)]
         public static HexSeqFormat seq(in HexFormatOptions hex, string delimiter = null)
-            => new HexSeqFormat(hex, delimiter ?? hex.Delimiter.ToString());
+            => new HexSeqFormat(hex, delimiter ?? hex.SegDelimiter.ToString());
 
         /// <summary>
         /// Defines the asci character codes for uppercase hex digits 1,2, ..., 9, A, ..., F

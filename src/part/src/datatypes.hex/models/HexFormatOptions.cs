@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// Indicates whether the numeric content should be left-padded with zeros
         /// </summary>
-        public bool ZPad;
+        public bool ZeroPad;
 
         /// <summary>
         /// Indicates whether a hex specifier, either prefixing or suffixing the numeric content, should be emitted
@@ -40,26 +40,35 @@ namespace Z0
         public char CaseFormatChar;
 
         /// <summary>
-        /// The character with which to intersperse hex number sequences
+        /// Specifies whether segments should be delimited
         /// </summary>
-        public char Delimiter;
+        public bool DelimitSegs;
+
+        /// <summary>
+        /// Sepcifies the segment delimiter, if applicable
+        /// </summary>
+        public char SegDelimiter;
+
+        /// <summary>
+        /// Specifies blocks, comprised of segments, should be delimited
+        /// </summary>
+        public bool DelimitBlocks;
+
+        /// <summary>
+        /// The block delimiter, if applicable
+        /// </summary>
+        public char BlockDelimiter;
+
+        /// <summary>
+        /// The width of a block, if applicable
+        /// </summary>
+        public uint? BlockWidth;
 
         /// <summary>
         /// The hex format string as determined by configuration
         /// </summary>
         public string FormatCode
             => $"{CaseFormatChar}";
-
-        [MethodImpl(Inline)]
-        public HexFormatOptions(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
-        {
-            ZPad = zpad;
-            Specifier = specifier;
-            Uppercase = uppercase;
-            PreSpec = prespec;
-            CaseFormatChar = HexFormatSpecs.CaseSpec(uppercase);
-            Delimiter = delimiter;
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator HexSeqFormat(in HexFormatOptions src)

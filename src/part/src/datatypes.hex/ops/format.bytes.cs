@@ -9,16 +9,50 @@ namespace Z0
 
     using static Part;
     using static HexFormatSpecs;
+    using static memory;
 
     partial struct HexFormat
     {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
-            => format(src, config.Delimiter, config.ZPad, config.Specifier);
+            => format(src, config.SegDelimiter, config.ZeroPad, config.Specifier);
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true)
             => format(src, sep, zpad, specifier, false, true, null);
+
+        [Op]
+        public static string format2(ReadOnlySpan<byte> src, in HexFormatOptions config)
+        {
+            int? blockwidth = null;
+            var dst = text.build();
+            var count = src.Length;
+            var pre = (config.Specifier && config.PreSpec) ? "0x" : EmptyString;
+            var post = (config.Specifier && !config.PreSpec) ? "h" : EmptyString;
+            var spec = CaseSpec(config.Uppercase).ToString();
+            var width = config.BlockWidth ?? uint.MaxValue;
+            var counter = 0;
+
+            for(var i=0; i<count; i++)
+            {
+                var value = skip(src,i).ToString(spec);
+                var padded = config.ZeroPad ? value.PadLeft(2, Chars.D0) : value;
+                dst.Append(string.Concat(pre, padded, post));
+                if(config.DelimitSegs && i != count - 1)
+                    dst.Append(config.SegDelimiter);
+
+                if(++counter >= width && config.DelimitBlocks)
+                {
+                    if(config.BlockDelimiter == Chars.NL || config.BlockDelimiter == Chars.LineFeed)
+                        dst.AppendLine();
+                    else
+                        dst.Append(config.BlockDelimiter);
+                    counter = 0;
+                }
+            }
+
+            return dst.ToString();
+        }
 
         [Op]
         public static string format(ReadOnlySpan<byte> src, char sep, bool zpad, bool specifier, bool uppercase, bool prespec, int? segwidth)

@@ -114,8 +114,7 @@ namespace Z0.Asm
             else
                 dst.Append(string.Format(RelativePattern, label.Format(), src.Formatted.PadRight(config.InstructionPad, Space)));
 
-            var comment = asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter));
-            dst.Append(comment);
+            dst.Append(asm.comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
         }
 
         [Op]

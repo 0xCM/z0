@@ -26,7 +26,7 @@ namespace Z0
         public string FormatItem(T src, in HexFormatOptions hex)
             => string.Concat(
                 hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
-                hex.ZPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
+                hex.ZeroPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
                 hex.Specifier && !hex.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
@@ -44,7 +44,7 @@ namespace Z0
 
             for(var i = 0; i<src.Length; i++)
             {
-                var formatted = HexFormat.format(src[i], hex.ZPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
+                var formatted = HexFormat.format(src[i], hex.ZeroPad, hex.Specifier, hex.Uppercase, hex.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);
@@ -60,7 +60,7 @@ namespace Z0
 
             for(var i=0; i<src.Length; i++)
             {
-                var formatted = HexFormat.format(src[i], config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+                var formatted = HexFormat.format(src[i], config.ZeroPad, config.Specifier, config.Uppercase, config.PreSpec);
                 result.Append(formatted);
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);

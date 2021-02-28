@@ -8,6 +8,60 @@ namespace Z0
 
     using Z0.Asm;
 
+    public struct MachineOptions
+    {
+        public bool RunXed;
+
+        public bool EmitResourceData;
+
+        public bool CollectApiDocs;
+
+        public bool EmitPeData;
+
+        public bool EmitSectionHeaders;
+
+        public bool EmitCilRecords;
+
+        public bool EmitCliStrings;
+
+        public bool EmitCliBlobs;
+
+        public bool EmitCliConstants;
+
+        public bool EmitLiteralCatalogs;
+
+        public bool EmitAsmCatalogs;
+
+        public bool EmitAsmSemantic;
+
+        public bool EmitAsmRows;
+
+        public bool EmitResBytes;
+
+        public bool EmitAsmBranches;
+
+        public static MachineOptions @default()
+        {
+            var dst = new MachineOptions();
+            dst.RunXed = false;
+            dst.EmitResourceData = false;
+            dst.CollectApiDocs = false;
+            dst.EmitPeData = true;
+            dst.EmitSectionHeaders = true;
+            dst.EmitCilRecords = true;
+            dst.EmitCliStrings = true;
+            dst.EmitCliBlobs = true;
+            dst.EmitCliConstants = true;
+            dst.EmitLiteralCatalogs = true;
+            dst.EmitAsmCatalogs = true;
+            dst.EmitAsmSemantic = false;
+            dst.EmitAsmRows = true;
+            dst.EmitResBytes = true;
+            dst.EmitAsmBranches = true;
+            return dst;
+        }
+    }
+
     class Machine : IDisposable
     {
         readonly IWfShell Wf;
@@ -18,6 +72,8 @@ namespace Z0
 
         readonly CmdBuilder Commands;
 
+        MachineOptions Options;
+
         internal Machine(IWfShell wf, IAsmContext asm)
         {
             Host = WfShell.host(typeof(Machine));
@@ -25,6 +81,7 @@ namespace Z0
             Asm = asm;
             Commands = Wf.CmdBuilder();
             Wf.Created();
+            Options = MachineOptions.@default();
         }
 
 
@@ -33,18 +90,6 @@ namespace Z0
             Wf.Disposed();
         }
 
-        bool RunXed => false;
-
-        bool EmitCliData => false;
-
-        bool EmitPeData => false;
-
-        bool EmitResourceData => false;
-
-        bool CollectApiDocs => false;
-
-        bool EmitAsmData => true;
-
         public void Run()
         {
             using var flow = Wf.Running();
@@ -52,52 +97,73 @@ namespace Z0
             try
             {
                 ApiCode.EmitHexIndex(Wf);
-                AsmCatalogService.create(Wf).TransformSource();
-                Commands.EmitEnumCatalog().RunTask(Wf);
-                BitMaskServices.create(Wf).Emit();
 
-                if(CollectApiDocs)
+                if(Options.EmitAsmCatalogs)
+                    AsmCatalogService.create(Wf).TransformSource();
+
+                if(Options.EmitLiteralCatalogs)
+                {
+                    EmitFieldLiterals.create().Run(Wf);
+                    Commands.EmitEnumCatalog().RunTask(Wf);
+                    BitMaskServices.create(Wf).Emit();
+                }
+
+                if(Options.CollectApiDocs)
                 {
                     EmitComments.create().Run(Wf);
                 }
 
-                if(EmitResourceData)
+                if(Options.EmitResourceData)
                 {
                     var resources = ResDataService.create(Wf);
                     resources.EmitContentIndex();
                     resources.EmitReferenceData();
                 }
 
-                if(RunXed)
+                if(Options.RunXed)
                     XedEtlWfHost.create().Run(Wf);
 
-                if(EmitCliData)
-                {
-                    var images = ImageDataEmitter.create(Wf);
+                var images = ImageDataEmitter.create(Wf);
+
+                if(Options.EmitSectionHeaders)
                     images.EmitSectionHeaders();
+
+                if(Options.EmitCilRecords)
                     images.EmitCilRecords();
+
+                if(Options.EmitCliStrings)
+                {
                     images.EmitUserStrings();
                     images.EmitSystemStrings();
+                }
+
+                if(Options.EmitCliConstants)
                     images.EmitConstants();
+
+                if(Options.EmitCliBlobs)
                     images.EmitApiBlobs();
-                    EmitFieldLiterals.create().Run(Wf);
-                }
 
-                if(EmitPeData)
-                {
+
+                if(Options.EmitPeData)
                     ImageLocationEmitter.emit(Wf);
-                }
 
 
-                if(EmitAsmData)
-                {
-                    var asm = Wf.AsmDataEmitter();
+                var asm = Wf.AsmDataEmitter();
+
+                if(Options.EmitAsmRows)
                     asm.EmitAsmRows();
+
+                if(Options.EmitAsmBranches)
+                {
                     asm.EmitCallRows();
                     asm.EmitJmpRows();
-                    asm.EmitSemantic();
-                    asm.EmitResBytes();
                 }
+
+                if(Options.EmitAsmSemantic)
+                    asm.EmitSemantic();
+
+                if(Options.EmitResBytes)
+                    asm.EmitResBytes();
 
             }
             catch(Exception e)

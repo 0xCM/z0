@@ -85,12 +85,16 @@ namespace Z0.Asm
             {
                 target.Clear();
                 ref readonly var block = ref skip(view,i);
-                decoder.Decode(block, x => target.Add(x));
+                var decoded = decoder.Decode(block, x => target.Add(x));
+                if(decoded)
+                {
+                    if(i == 0)
+                        ip = target[0].IP;
+                     instructions.Add(Load(ip, block, target.ToArray()));
+                }
+                else
+                    Wf.Warn($"Decoder failure for {block.OpUri}");
 
-                if(i == 0)
-                    ip = target[0].IP;
-
-                instructions.Add(Load(ip, block, target.ToArray()));
             }
 
             return new ApiHostRoutines(host, instructions.ToArray());
