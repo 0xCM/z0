@@ -50,7 +50,7 @@ namespace Z0
         bool IsFlag => false;
 
         string ITextual.Format()
-            => TextFormatter.setting(Name, Value);
+            => Settings.format(Name, Value);
     }
 
     [Free]

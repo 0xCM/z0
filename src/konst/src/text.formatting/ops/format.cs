@@ -24,17 +24,6 @@ namespace Z0
             => string.Concat(a,b);
 
         /// <summary>
-        /// Renders a k/v pair as a setting
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <typeparam name="K"></typeparam>
-        /// <typeparam name="V"></typeparam>
-        [MethodImpl(Inline), Op]
-        public static string setting<K,V>(K key, V value)
-            => string.Format(RP.Setting, key, value);
-
-        /// <summary>
         /// Renders a variable assignment as '<paramref name='name'/>=</paramref name='value'/>;
         /// </summary>
         /// <param name="name">The variable name</param>

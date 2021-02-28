@@ -42,12 +42,6 @@ namespace Z0
         FS.FilePath SourceFile(PartId id, FS.FileName name)
             => PartDir(id) + FS.folder(src) + name;
 
-        FS.FolderPath DevDataRoot()
-            => ZRoot() +FS.folder(data);
-
-        FS.FolderPath DevData<S>(S subject)
-            => DevDataRoot() + SubjectFolder(subject);
-
         FS.FolderPath ArchiveRoot()
             => Env.Archives.Value;
 
@@ -57,11 +51,11 @@ namespace Z0
         FS.FolderPath BuildArchiveRoot()
             => BinaryRoot() + FS.folder(builds);
 
-        FS.FolderPath SourceArchiveDir()
+        FS.FolderPath RepoArchiveDir()
             => BinaryRoot() + FS.folder(source);
 
-        FS.Files SourceArchives()
-            => SourceArchiveDir().Files(Zip);
+        FS.Files RepoArchives()
+            => RepoArchiveDir().Files(Zip);
 
         FS.FileExt DefaultTableExt
              => Csv;
@@ -289,18 +283,6 @@ namespace Z0
         FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
             => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
-        FS.FilePath RefDataPath(string id, FS.FileExt? ext = null)
-            => RefDataRoot() + FS.file(id, ext ?? DefaultTableExt);
-
-        FS.FilePath RefDataPath<S>(S subject, string id, FS.FileExt? ext = null)
-            => RefDataRoot() + SubjectFolder(subject) + FS.file(id, ext ?? DefaultTableExt);
-
-        FS.FilePath RefDataPath<S>(S subject, FS.FileName file)
-            => RefDataRoot() + SubjectFolder(subject) + file;
-
-        FS.FolderPath RefData<S>(S subject)
-            => RefDataRoot() + SubjectFolder(subject);
-
         FS.FolderPath ControlRoot()
             => Env.create().Control.Value;
 
@@ -349,6 +331,11 @@ namespace Z0
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
 
+        FS.FolderPath Sources()
+            => Root + FS.folder("sources");
+
+        FS.FolderPath Source(string id)
+            => Sources() + FS.folder(id);
     }
 
     public interface IWfDb : IDbPaths

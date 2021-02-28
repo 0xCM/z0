@@ -14,15 +14,4 @@ namespace Z0
     {
         public FS.FilePath Target;
     }
-
-    partial class XCmd
-    {
-        [MethodImpl(Inline), Op]
-        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder, FS.FilePath? dst = null)
-        {
-            var cmd = new EmitAsmOpCodesCmd();
-            cmd.Target = dst ?? builder.Db.RefDataPath("asm.opcodes");
-            return cmd;
-        }
-    }
 }

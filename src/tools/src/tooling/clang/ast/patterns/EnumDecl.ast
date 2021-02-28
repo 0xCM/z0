@@ -1,0 +1,32 @@
+TranslationUnitDecl 0x1a165831df8 <<invalid sloc>> <invalid sloc>
+|-EnumDecl 0x1a1658ea408 <C:/Dev/labs/xed/kit/include\xed/xed-address-width-enum.h:31:9, line:37:1> line:31:9
+| |-EnumConstantDecl 0x1a1658ea518 <line:32:3, col:29> col:3 XED_ADDRESS_WIDTH_INVALID 'xed_address_width_enum_t'
+| | `-ConstantExpr 0x1a1658ea4f8 <col:29> 'int'
+| |   |-value: Int 0
+| |   `-IntegerLiteral 0x1a1658ea4d0 <col:29> 'int' 0
+| |-EnumConstantDecl 0x1a1658ea5b8 <line:33:3, col:25> col:3 XED_ADDRESS_WIDTH_16b 'xed_address_width_enum_t'
+| | |-ConstantExpr 0x1a1658ea598 <col:25> 'int'
+| | | |-value: Int 2
+| | | `-IntegerLiteral 0x1a1658ea570 <col:25> 'int' 2
+| | `-FullComment 0x1a1664bcf30 <col:32, col:46>
+| |   `-ParagraphComment 0x1a1664bcf08 <col:32, col:46>
+| |     `-TextComment 0x1a1664bcee0 <col:32, col:46> Text=" 16b addressing"
+| |-EnumConstantDecl 0x1a1658ea688 <line:34:3, col:25> col:3 XED_ADDRESS_WIDTH_32b 'xed_address_width_enum_t'
+| | |-ConstantExpr 0x1a1658ea668 <col:25> 'int'
+| | | |-value: Int 4
+| | | `-IntegerLiteral 0x1a1658ea640 <col:25> 'int' 4
+| | `-FullComment 0x1a1664bcfe0 <col:32, col:46>
+| |   `-ParagraphComment 0x1a1664bcfb8 <col:32, col:46>
+| |     `-TextComment 0x1a1664bcf90 <col:32, col:46> Text=" 32b addressing"
+| |-EnumConstantDecl 0x1a1658ea758 <line:35:3, col:25> col:3 XED_ADDRESS_WIDTH_64b 'xed_address_width_enum_t'
+| | |-ConstantExpr 0x1a1658ea738 <col:25> 'int'
+| | | |-value: Int 8
+| | | `-IntegerLiteral 0x1a1658ea710 <col:25> 'int' 8
+| | `-FullComment 0x1a1664bd090 <col:32, col:46>
+| |   `-ParagraphComment 0x1a1664bd068 <col:32, col:46>
+| |     `-TextComment 0x1a1664bd040 <col:32, col:46> Text=" 64b addressing"
+| `-EnumConstantDecl 0x1a1658ea7e0 <line:36:3> col:3 XED_ADDRESS_WIDTH_LAST 'xed_address_width_enum_t'
+|-TypedefDecl 0x1a1658ea898 <line:31:1, line:37:3> col:3 referenced xed_address_width_enum_t 'enum xed_address_width_enum_t':'xed_address_width_enum_t'
+| `-ElaboratedType 0x1a1658ea840 'enum xed_address_width_enum_t' sugar
+|   `-EnumType 0x1a1658ea4b0 'xed_address_width_enum_t'
+|     `-Enum 0x1a1658ea408 ''

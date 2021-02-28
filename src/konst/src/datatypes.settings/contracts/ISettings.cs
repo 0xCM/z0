@@ -11,13 +11,4 @@ namespace Z0
         Func<ISettings> Factory {get;}
     }
 
-    public interface ISettings<S> : ISettings
-        where S : ISettings<S>, new()
-    {
-        new Func<S> Factory
-            => () => new S();
-
-        Func<ISettings> ISettings.Factory
-            => () => new S();
-    }
 }

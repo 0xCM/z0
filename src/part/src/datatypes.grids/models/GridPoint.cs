@@ -61,5 +61,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (uint row, uint col)(GridPoint src)
             => (src.Row, src.Col);
+
+        public static GridPoint Empty
+            => new GridPoint(uint.MaxValue,uint.MaxValue);
     }
 }

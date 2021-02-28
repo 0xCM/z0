@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     using F = XedSummaryField;
     using R = XedSummaryRow;
@@ -52,7 +53,7 @@ namespace Z0
         public XedPattern[] EmitInstructions(FS.FilePath file)
         {
             const string kind = "instructions";
-            var patterns = list<XedPattern>();
+            var patterns = root.list<XedPattern>();
             var parser = XedSourceParser.Service;
             var flow = Wf.Running(file);
             var parsed = span(parser.ParseInstructions(file));
@@ -69,7 +70,7 @@ namespace Z0
         public XedPattern[] ExtractPatterns()
         {
             WfStepId step = typeof(XedWf);
-            var patterns = list<XedPattern>();
+            var patterns = root.list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = Source.InstructionFiles.View;
             const string kind = "instructions";

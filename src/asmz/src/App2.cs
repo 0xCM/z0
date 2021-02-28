@@ -299,7 +299,6 @@ namespace Z0.Asm
         }
 
 
-
         static void indices(string src)
         {
             Span<int> dst = stackalloc int[12];
@@ -335,7 +334,9 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            EmitIntrinsicsInfo();
+            //EmitIntrinsicsInfo();
+
+
 
 
             //var test = "adfadfaldfkadsf&>";

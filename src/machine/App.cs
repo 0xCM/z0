@@ -8,59 +8,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    public struct MachineOptions
-    {
-        public bool RunXed;
-
-        public bool EmitResourceData;
-
-        public bool CollectApiDocs;
-
-        public bool EmitPeData;
-
-        public bool EmitSectionHeaders;
-
-        public bool EmitCilRecords;
-
-        public bool EmitCliStrings;
-
-        public bool EmitCliBlobs;
-
-        public bool EmitCliConstants;
-
-        public bool EmitLiteralCatalogs;
-
-        public bool EmitAsmCatalogs;
-
-        public bool EmitAsmSemantic;
-
-        public bool EmitAsmRows;
-
-        public bool EmitResBytes;
-
-        public bool EmitAsmBranches;
-
-        public static MachineOptions @default()
-        {
-            var dst = new MachineOptions();
-            dst.RunXed = false;
-            dst.EmitResourceData = false;
-            dst.CollectApiDocs = false;
-            dst.EmitPeData = true;
-            dst.EmitSectionHeaders = true;
-            dst.EmitCilRecords = true;
-            dst.EmitCliStrings = true;
-            dst.EmitCliBlobs = true;
-            dst.EmitCliConstants = true;
-            dst.EmitLiteralCatalogs = true;
-            dst.EmitAsmCatalogs = true;
-            dst.EmitAsmSemantic = false;
-            dst.EmitAsmRows = true;
-            dst.EmitResBytes = true;
-            dst.EmitAsmBranches = true;
-            return dst;
-        }
-    }
 
     class Machine : IDisposable
     {
@@ -72,7 +19,7 @@ namespace Z0
 
         readonly CmdBuilder Commands;
 
-        MachineOptions Options;
+        EtlSettings Options;
 
         internal Machine(IWfShell wf, IAsmContext asm)
         {
@@ -81,7 +28,7 @@ namespace Z0
             Asm = asm;
             Commands = Wf.CmdBuilder();
             Wf.Created();
-            Options = MachineOptions.@default();
+            Options = EtlSettings.@default();
         }
 
 
@@ -121,7 +68,10 @@ namespace Z0
                 }
 
                 if(Options.RunXed)
-                    XedEtlWfHost.create().Run(Wf);
+                {
+                    using var xed = XedWf.create(Wf);
+                    xed.Run();
+                }
 
                 var images = ImageDataEmitter.create(Wf);
 

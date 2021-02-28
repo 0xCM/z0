@@ -1,0 +1,7 @@
+TranslationUnitDecl 0x1a165831df8 <<invalid sloc>> <invalid sloc>
+|-CXXRecordDecl 0x1a1658326d8 <<invalid sloc>> <invalid sloc> implicit struct _GUID
+| `-TypeVisibilityAttr 0x1a165832790 <<invalid sloc>> Implicit Default
+|-TypedefDecl 0x1a165832808 <<invalid sloc>> <invalid sloc> implicit __int128_t '__int128'
+| `-BuiltinType 0x1a165832390 '__int128'
+|-TypedefDecl 0x1a165832878 <<invalid sloc>> <invalid sloc> implicit __uint128_t 'unsigned __int128'
+| `-BuiltinType 0x1a1658323b0 'unsigned __int128'

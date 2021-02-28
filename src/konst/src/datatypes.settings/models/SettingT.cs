@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a value-parametric application setting
     /// </summary>
-    public readonly struct SettingValue<T>
+    public readonly struct Setting<T>
     {
         /// <summary>
         /// The setting name
@@ -25,12 +25,7 @@ namespace Z0
         public readonly T Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator SettingValue(SettingValue<T> src)
-            => src.NonGeneric;
-
-
-        [MethodImpl(Inline)]
-        public SettingValue(string name, T value)
+        public Setting(string name, T value)
         {
             Name = name ?? EmptyString;
             Value = value;
@@ -43,12 +38,34 @@ namespace Z0
         }
 
         public string Format()
-            => Format(false);
+            => text.format(Value);
 
-        public string Format(bool json)
-            => json ? text.format(RP.JsonProp, Name, Value) : text.format(Value);
+        public string Json()
+            => text.format(RP.JsonProp, Name, Value);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator SettingValue(Setting<T> src)
+            => src.NonGeneric;
+
+        [MethodImpl(Inline)]
+        public static implicit operator T(Setting<T> src)
+            => src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Setting<T>(T src)
+            => new Setting<T>(EmptyString, src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Setting<T>((string name, T value) src)
+            => new Setting<T>(src.name, src.value);
+
+        public static Setting<T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Setting<T>(String.Empty, root.empty<T>());
+        }
     }
 }

@@ -7,36 +7,30 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public readonly struct Settings
+    [ApiHost]
+    public readonly partial struct Settings
     {
-        [MethodImpl(Inline)]
-        public static Settings<S> create<S>(S settings = default)
-            where S : ISettings<S>, new()
-                => new Settings<S>(settings ?? new S());
+        const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]
-        public static Settings<S> create<S>(Func<S> factory)
-            where S : ISettings<S>, new()
-                => new Settings<S>(factory());
-    }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Setting<T> empty<T>()
+            => Setting<T>.Empty;
 
-    public readonly struct Settings<S> : ISettings<S>
-        where S : ISettings<S>, new()
-    {
-        public S Content {get;}
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Setting<T> define<T>(string name, T value)
+            => new Setting<T>(name,value);
 
-        [MethodImpl(Inline)]
-        public Settings(S src)
-            => Content = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator S(Settings<S> src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Settings<S>(S src)
-            => new Settings<S>(src);
+        /// <summary>
+        /// Renders a k/v pair as a setting
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="K"></typeparam>
+        /// <typeparam name="V"></typeparam>
+        [MethodImpl(Inline), Op]
+        public static string format<K,V>(K key, V value)
+            => string.Format(RP.Setting, key, value);
     }
 }

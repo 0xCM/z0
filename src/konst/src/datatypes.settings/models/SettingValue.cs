@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a nonparametric kvp application setting
@@ -36,7 +36,7 @@ namespace Z0
             if(json)
                 return string.Concat(Name.Enquote(), Chars.Colon, Chars.Space, Value.Enquote());
             else
-                return TextFormatter.setting(Name,Value);
+                return Settings.format(Name,Value);
         }
 
         public string Format()

@@ -7,17 +7,32 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static System.Runtime.CompilerServices.Unsafe;
     using static Part;
 
     partial struct root
     {
         /// <summary>
-        /// Tests whether an array is empty
+        /// Returns a canonical non-null empty value
         /// </summary>
-        /// <param name="src">The array to test</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool empty<T>(T[] src)
-            => src == null || src.Length == 0;
+        /// <typeparam name="T">The value type</typeparam>
+        [MethodImpl(Inline)]
+        public static T empty<T>()
+        {
+            if(typeof(T) == typeof(string))
+                return generic<T>(EmptyString);
+            else if(typeof(T) == typeof(Type))
+                return generic<T>(typeof(void));
+            else
+                return default;
+        }
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(string src)
+            => As<string,T>(ref src);
+
+        [MethodImpl(Inline)]
+        public static T generic<T>(Type src)
+            => As<Type,T>(ref src);
     }
 }

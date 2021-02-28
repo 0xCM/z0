@@ -26,7 +26,7 @@ namespace Z0
             => new SettingValue(Name, Value).Format(json);
 
         public string Format()
-            => Format(true);
+            => Format(false);
 
         public override string ToString()
             => Format();

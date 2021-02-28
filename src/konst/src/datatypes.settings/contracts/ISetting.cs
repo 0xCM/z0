@@ -39,7 +39,7 @@ namespace Z0
             => Value.ToString();
 
         string ITextual.Format()
-            => TextFormatter.setting(Name, Value);
+            => Settings.format(Name, Value);
     }
 
     public interface ISetting<H,K,V> : ISetting<K,V>
