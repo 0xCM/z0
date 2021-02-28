@@ -8,20 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public readonly struct TextSpan
+    public sealed class ByteGrid : Grid<byte>
     {
-        public TextBlock Text {get;}
-
-        public ReadOnlySpan<char> Data
+        public ByteGrid(GridDim dim)
+            : base(dim)
         {
-            [MethodImpl(Inline)]
-            get => Text.View;
+
         }
 
         [MethodImpl(Inline)]
-        public TextSpan(TextBlock src)
-            => Text = src;
+        public ByteGrid(GridDim dim, byte[] storage)
+            : base(dim, storage)
+        {
+
+        }
     }
 }

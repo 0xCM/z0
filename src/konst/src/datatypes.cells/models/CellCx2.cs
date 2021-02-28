@@ -11,8 +11,8 @@ namespace Z0
 
     [Datatype("mx2")]
     public struct Cell<A,B> : IDataCell<Cell<A,B>>
-        where A : struct, IDataCell<A>
-        where B : struct, IDataCell<B>
+        where A : struct, IDataCell
+        where B : struct, IDataCell
     {
         public A C0;
 

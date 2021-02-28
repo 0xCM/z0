@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline)]
         public int Position(int row, int col)
-            => GridCalcs.linear(this, row, col);
+            => row*ColCount + col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate

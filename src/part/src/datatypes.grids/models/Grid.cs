@@ -19,14 +19,14 @@ namespace Z0
         public Grid(GridDim dim)
         {
             Dim = dim;
-            Data = sys.alloc<T>(Dim.RowCount*Dim.ColCount);
+            Data = alloc<T>(Dim.RowCount*Dim.ColCount);
         }
 
         [MethodImpl(Inline)]
-        internal Grid(GridDim dim, T[] storage)
+        public Grid(GridDim dim, T[] data)
         {
             Dim = dim;
-            Data = storage;
+            Data = data;
         }
 
         ref T First
@@ -37,16 +37,21 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref T Cell(uint row, uint col)
-            => ref seek(First, GridCalcs.linear(Dim, row, col));
+            => ref seek(First, linear(Dim, (row, col)));
 
         [MethodImpl(Inline)]
         public ref T Cell(GridPoint point)
-            => ref seek(First, GridCalcs.linear(Dim, point));
+            => ref seek(First, linear(Dim, point));
 
         public ref T this[uint row, uint col]
         {
             [MethodImpl(Inline)]
             get => ref Cell(row,col);
         }
+
+        [MethodImpl(Inline)]
+        static uint linear(GridDim dim, GridPoint point)
+            => point.Row*dim.ColCount+ point.Col;
+
     }
 }

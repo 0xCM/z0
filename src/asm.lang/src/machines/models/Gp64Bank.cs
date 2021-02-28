@@ -23,15 +23,15 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public ref Cell8 r8(RegIndex i)
-                => ref lo8(ref r64(i));
+                => ref lo8(r64(i));
 
             [MethodImpl(Inline)]
             public ref Cell16 r16(RegIndex i)
-                => ref lo16(ref r64(i));
+                => ref lo16(r64(i));
 
             [MethodImpl(Inline)]
             public ref Cell32 r32(RegIndex i)
-                => ref lo32(ref r64(i));
+                => ref lo32(r64(i));
 
             [MethodImpl(Inline)]
             public ref Cell64 r64(RegIndex i)

@@ -80,5 +80,11 @@ namespace Z0
         public static ref T first<T>(in Cell512 src)
             where T : unmanaged
                 => ref first(src, default(T));
+
+        [MethodImpl(Inline)]
+        static ref T first<F,T>(in F src, T t)
+            where F : unmanaged, IDataCell
+            where T : unmanaged
+                => ref Unsafe.As<F,T>(ref memory.edit(src));
     }
 }

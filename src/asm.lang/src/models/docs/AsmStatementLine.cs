@@ -12,24 +12,40 @@ namespace Z0.Asm
     // 0008h movzx edx,dl                            ; MOVZX r32, r/m8                  | 0F B6 /r                         | 3   | 0f b6 d2
     public readonly struct AsmStatementLine : IAsmDocPart<AsmStatementLine>
     {
-        /// <summary>
-        /// The document-relative line number
-        /// </summary>
-        public uint LineNumber {get;}
+        public MemoryAddress Address {get;}
 
         public AsmLineLabel Label {get;}
 
         public AsmStatement Statement {get;}
 
-        public AsmStatementLine(uint number, AsmLineLabel label, AsmStatement statement)
+        public AsmComment Comment {get;}
+
+        [MethodImpl(Inline)]
+        public AsmStatementLine(AsmLineLabel label, AsmStatement statement)
         {
-            LineNumber = number;
+            Address= 0;
             Label = label;
             Statement = statement;
+            Comment = AsmComment.Empty;
         }
 
-        public AsmDocPartKind Kind
-            => AsmDocPartKind.BlockHeaderLine;
+        [MethodImpl(Inline)]
+        public AsmStatementLine(MemoryAddress address, AsmLineLabel label, AsmStatement statement, AsmComment comment)
+        {
+            Address= address;
+            Label = label;
+            Statement = statement;
+            Comment = comment;
+        }
+
+        [MethodImpl(Inline)]
+        public AsmStatementLine(MemoryAddress address, AsmLineLabel label, AsmStatement statement)
+        {
+            Address= address;
+            Label = label;
+            Statement = statement;
+            Comment = AsmComment.Empty;
+        }
 
         [MethodImpl(Inline)]
         public string Format()

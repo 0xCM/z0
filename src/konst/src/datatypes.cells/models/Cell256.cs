@@ -12,7 +12,6 @@ namespace Z0
     using static Part;
 
     using F = Cell256;
-    using api = Cells;
 
     [Datatype("m256")]
     public readonly struct Cell256 : IDataCell<Cell256,W256,Vector256<ulong>>
@@ -23,13 +22,13 @@ namespace Z0
         public Cell256(Vector256<ulong> src)
             => Content = src;
 
-        public CellKind Kind => CellKind.Cell256;
-
+        public CellKind Kind
+            => CellKind.Cell256;
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => api.bytes(this);
+            get => memory.bytes(this);
         }
 
         public Cell128 Lo

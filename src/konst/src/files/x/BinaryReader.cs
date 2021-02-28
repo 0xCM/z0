@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Text;
 
     partial class XFs
     {
@@ -15,5 +16,8 @@ namespace Z0
 
         public static BinaryReader BinaryReader(this StreamReader src)
             => new BinaryReader(src.BaseStream);
+
+        public static BinaryReader BinaryReader(this StreamReader src, Encoding encoding)
+            => new BinaryReader(src.BaseStream, encoding);
     }
 }

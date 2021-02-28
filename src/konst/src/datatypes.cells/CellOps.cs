@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+
+    using D = CellDelegates;
 
     [ApiHost(ApiNames.CellOps, true)]
     public readonly partial struct CellOps
@@ -54,5 +57,110 @@ namespace Z0
         internal static BinaryOp<T> bFx<T>(MethodInfo src, BinaryOperatorClass<T> K)
             where T : unmanaged
                 => Delegates.binary<T>(src);
+
+        /// <summary>
+        /// Evaluates a 128-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> apply<T>(D.UnaryOp128 f, Vector128<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 256-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> apply<T>(D.UnaryOp256 f, Vector256<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 512-bit unary operator over a vector
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector512<T> apply<T>(D.UnaryOp512 f, in Vector512<T> x)
+            where T : unmanaged
+                => f(x.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 128-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector128<T> apply<T>(D.BinaryOp128 f, Vector128<T> x, Vector128<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 256-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector256<T> apply<T>(D.BinaryOp256 f, Vector256<T> x, Vector256<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
+        /// <summary>
+        /// Evaluates a 512-bit binary operator over a pair of vectors
+        /// </summary>
+        /// <param name="f">The operator</param>
+        /// <param name="x">The first vector</param>
+        /// <param name="y">The second vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Vector512<T> apply<T>(D.BinaryOp512 f, Vector512<T> x, Vector512<T> y)
+            where T : unmanaged
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter1 cellop1(Emitter<bit> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter8 cellop8(Emitter<sbyte> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter8 cellop8(Emitter<byte> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter16 cellop16(Emitter<short> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter16 cellop16(Emitter<ushort> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter32 cellop32(Emitter<int> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter32 cellop32(Emitter<uint> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter64 cellop64(Emitter<long> f)
+            => () => f();
+
+        [MethodImpl(Inline), Op]
+        public static D.Emitter64 cellop64(Emitter<ulong> f)
+            => () => f();
     }
 }

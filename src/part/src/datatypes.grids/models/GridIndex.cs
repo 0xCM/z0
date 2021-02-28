@@ -45,7 +45,7 @@ namespace Z0
         public int ColIndex;
 
         [MethodImpl(Inline)]
-        internal GridIndex(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
+        public GridIndex(ushort CellIndex, ushort RowCellCount, byte BitOffset, uint BitIndex, int RowIndex, int ColIndex)
         {
             this.CellIndex = CellIndex;
             this.RowCellCount = RowCellCount;

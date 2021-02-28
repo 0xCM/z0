@@ -22,7 +22,7 @@ namespace Z0.Asm
         // REX.W 8B /r
         OpCode,
 
-        // 48 8b 01
+        // 48 8b 01 | 488b01 | ...
         StatementEncoding,
 
         // ; ...

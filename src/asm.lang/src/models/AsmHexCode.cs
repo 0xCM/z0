@@ -58,7 +58,6 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(ulong src)
             => new AsmHexCode(src);

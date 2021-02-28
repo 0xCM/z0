@@ -23,7 +23,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public ref Cell128 r128(RegIndex i)
-                => ref lo128(ref r256(i));
+                => ref lo128(r256(i));
 
             [MethodImpl(Inline)]
             public ref Cell256 r256(RegIndex i)

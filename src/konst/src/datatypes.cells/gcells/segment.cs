@@ -26,10 +26,10 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T segment<F,T>(ref F src, byte index)
+        public static ref T segment<F,T>(in F src, byte index)
             where F : unmanaged, IDataCell
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<F,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<F,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within an 8-bit storage block
@@ -38,9 +38,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static ref T segment<T>(ref Cell8 src, byte index)
+        public static ref T segment<T>(in Cell8 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell8,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell8,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 16-bit storage block
@@ -49,9 +49,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static ref T segment<T>(ref Cell16 src, byte index)
+        public static ref T segment<T>(in Cell16 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell16,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell16,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 32-bit storage block
@@ -60,9 +60,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static ref T segment<T>(ref Cell32 src, byte index)
+        public static ref T segment<T>(in Cell32 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell32,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell32,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 64-bit storage block
@@ -71,9 +71,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T segment<T>(ref Cell64 src, byte index)
+        public static ref T segment<T>(in Cell64 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell64,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell64,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 128-bit storage block
@@ -82,9 +82,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T segment<T>(ref Cell128 src, byte index)
+        public static ref T segment<T>(in Cell128 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell128,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell128,T>(src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 256-bit storage block
@@ -93,9 +93,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T segment<T>(ref Cell256 src, byte index)
+        public static ref T segment<T>(in Cell256 src, byte index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Cell256,T>(ref src), index);
+                => ref Unsafe.Add(ref @as<Cell256,T>(src), index);
 
         [MethodImpl(Inline)]
         static ref T seg1<C,T,W>(in C src, W w, out T dst)

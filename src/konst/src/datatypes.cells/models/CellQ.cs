@@ -16,9 +16,7 @@ namespace Z0
         readonly Index<byte> Data;
 
         internal CellQ(byte[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         public CellKind Kind
         {

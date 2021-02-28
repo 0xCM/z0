@@ -23,6 +23,15 @@ namespace Z0
             => row*colwidth + col;
 
         /// <summary>
+        /// Computes the 0-based linear index determined by a row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static int linear(in GridMetrics src, int row, int col)
+            => linear(src.ColCount, row, col);
+
+        /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
         /// </summary>
         /// <param name="colwidth">The bit-width of a grid column</param>
@@ -40,7 +49,7 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
         public static uint linear(GridDim dim, GridPoint point)
-            => point.Row*dim.ColCount+ point.Col;
+            => point.Row*dim.ColCount + point.Col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
@@ -52,14 +61,6 @@ namespace Z0
         public static uint linear(GridDim dim, uint row, uint col)
             => linear(dim, (row,col));
 
-        /// <summary>
-        /// Computes the 0-based linear index determined by a row/col coordinate
-        /// </summary>
-        /// <param name="row">The 0-based row index</param>
-        /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline), Op]
-        public static int linear(in GridMetrics src, int row, int col)
-            => linear(src.ColCount, row, col);
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width

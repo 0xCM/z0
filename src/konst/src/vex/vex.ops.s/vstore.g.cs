@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector256<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref memory.first(dst), offset);
+                => vstore(src, ref first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -125,7 +125,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vstore<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => vstore(src, ref memory.first(dst), offset);
+                => vstore(src, ref first(dst), offset);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void vstore<T>(Vector128<T> src, ref Cell128 dst)

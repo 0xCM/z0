@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public abstract class AsmDocPart<T>
-        where T : AsmDocPart<T>
+    public interface IAsmDocPart : ITextual
+    {
+
+    }
+
+    public interface IAsmDocPart<T> : IAsmDocPart
+        where T : IAsmDocPart<T>
     {
 
     }

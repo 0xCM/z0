@@ -13,7 +13,6 @@ namespace Z0.Asm
     {
         public TextBlock Text {get;}
 
-
         [MethodImpl(Inline)]
         public AsmComment(TextBlock text)
             => Text = text;
@@ -24,5 +23,11 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
+
+        public static AsmComment Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmComment(TextBlock.Empty);
+        }
     }
 }

@@ -9,20 +9,8 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
-    public readonly struct GridPoints
+    partial struct Grids
     {
-        const NumericKind Closure = UnsignedInts;
-
-        [MethodImpl(Inline), Op]
-        public static GridPoint point(uint row, uint col)
-            => new GridPoint(row, col);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static GridPoint<T> point<T>(T row, T col)
-            where T : unmanaged
-                => new GridPoint<T>(row, col);
-
         [MethodImpl(Inline), Op]
         public static GridRegion region(GridPoint upper, GridPoint lower)
             => new GridRegion(upper, lower);

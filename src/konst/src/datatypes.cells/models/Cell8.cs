@@ -30,7 +30,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => api.bytes(this);
+            get => memory.bytes(this);
         }
 
         public byte Content
@@ -59,7 +59,7 @@ namespace Z0
             => Data == src;
 
         public string Format()
-            => Data.ToString();
+            => api.format(this);
 
         public override string ToString()
             => Format();

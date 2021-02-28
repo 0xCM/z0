@@ -88,5 +88,11 @@ namespace Z0
         public static Span<T> span<T>(in Cell512 src)
             where T : unmanaged
                 => span<Cell512,T>(ref memory.edit(src));
+
+        [MethodImpl(Inline)]
+        static unsafe Span<T> span<F,T>(ref F src)
+            where F : unmanaged, IDataCell
+            where T : unmanaged
+                => new Span<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
     }
 }

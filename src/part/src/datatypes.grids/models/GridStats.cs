@@ -12,7 +12,37 @@ namespace Z0
     [Record]
     public struct GridStats : IRecord<GridStats>
     {
-        public asci16 Name;
+        [MethodImpl(Inline), Op]
+        public static uint remainder(in GridMetrics src, W128 w)
+            => src.StoreSize % 16;
+
+        [MethodImpl(Inline), Op]
+        public static uint remainder(in GridMetrics src, W256 w)
+            => src.StoreSize % 32;
+
+        [MethodImpl(Inline), Op]
+        public static uint coverage(in GridMetrics src, W128 w)
+        {
+            var r = remainder(src,w);
+            return r != 0 ? r + 1 : r;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint coverage(in GridMetrics src, W256 w)
+        {
+            var r = remainder(src,w);
+            return r != 0 ? r + 1 : r;
+        }
+
+        /// <summary>
+        /// Computes the grid cell count
+        /// </summary>
+        /// <param name="src">The grid dimension</param>
+        [MethodImpl(Inline), Op]
+        public static ulong points(GridDim src)
+            => (ulong)src.RowCount*(ulong)src.ColCount;
+
+        public string Name;
 
         /// <summary>
         /// The number of grid rows
@@ -78,11 +108,11 @@ namespace Z0
                 StorageSegs : src.CellCount,
                 StorageBits : src.StoreWidth,
                 StorageBytes : src.StoreSize,
-                PointCount : (uint)GridCalcs.points(src.Dim),
-                Vec128Count : GridCalcs.coverage(src,W128.W),
-                Vec128Remainder : GridCalcs.remainder(src,W128.W),
-                Vec256Count : GridCalcs.coverage(src,W256.W),
-                Vec256Remainder : GridCalcs.remainder(src,W256.W)
+                PointCount : (uint)points(src.Dim),
+                Vec128Count : coverage(src, W128.W),
+                Vec128Remainder : remainder(src, W128.W),
+                Vec256Count : coverage(src, W256.W),
+                Vec256Remainder : remainder(src, W256.W)
             );
 
         public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, uint PointCount,
