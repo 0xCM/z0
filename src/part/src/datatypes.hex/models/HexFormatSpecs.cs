@@ -57,6 +57,11 @@ namespace Z0
         public const char DataDelimiter = Chars.Space;
 
         /// <summary>
+        /// The delimiter used to separate hex numbers when rendering a list of hex values
+        /// </summary>
+        public const char ListDelimiter = Chars.Comma;
+
+        /// <summary>
         /// The maximum number of hex characters required to represent an 4-bit segment
         /// </summary>
         public const int Hex4Width = 1;
@@ -199,7 +204,7 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexData
         {
-            get => options(true, false, false, false, DataDelimiter);
+            get => options(true, false, false, false, true, DataDelimiter);
         }
 
         /// <summary>
@@ -207,7 +212,7 @@ namespace Z0
         /// </summary>
         public static HexFormatOptions HexArray
         {
-            get => options(true, true, false, true, Chars.Comma);
+            get => options(true, true, false, true, true, ListDelimiter);
         }
 
         /// <summary>
@@ -227,17 +232,19 @@ namespace Z0
             => src.Remove("0x").RemoveAny('h');
 
         [MethodImpl(Inline)]
-        public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
+        public static HexFormatOptions options(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true,
+            bool delimitsegs = true, char? segsep = null, bool delimitblocks = false, char? blocksep = null)
         {
             var dst = new HexFormatOptions();
             dst.ZeroPad = zpad;
-            dst.CaseFormatChar = CaseSpec(uppercase);
+            dst.CaseIndicator = CaseSpec(uppercase);
             dst.Specifier = specifier;
             dst.Uppercase = uppercase;
             dst.PreSpec = prespec;
-            dst.SegDelimiter = delimiter ?? DataDelimiter;
-            dst.DelimitBlocks = false;
-            dst.BlockDelimiter = Chars.Null;
+            dst.DelimitSegs = delimitsegs;
+            dst.SegDelimiter = segsep ?? DataDelimiter;
+            dst.DelimitBlocks = delimitblocks;
+            dst.BlockDelimiter = blocksep ?? Chars.Null;
             dst.BlockWidth = null;
             return dst;
         }

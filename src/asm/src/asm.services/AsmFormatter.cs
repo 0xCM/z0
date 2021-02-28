@@ -22,19 +22,19 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
-        public string FormatFunction(AsmRoutine src)
+        public string Format(AsmRoutine src)
             => AsmRender.format(src, Config);
 
         [MethodImpl(Inline)]
-        public string FormatInstruction(in MemoryAddress @base, in AsmInstructionSummary src)
+        public string Format(in MemoryAddress @base, in AsmInstructionSummary src)
             => AsmRender.format(@base, src, Config);
 
         [MethodImpl(Inline)]
-        public void Format(in AsmRoutines src, ITextBuffer dst)
+        public void Render(in AsmRoutines src, ITextBuffer dst)
             => AsmRender.format(src, Config, dst);
 
         [MethodImpl(Inline)]
-        public void Format(in AsmRoutine src, ITextBuffer dst)
+        public void Render(in AsmRoutine src, ITextBuffer dst)
             => AsmRender.format(src, Config, dst);
     }
 }

@@ -99,33 +99,9 @@ namespace Z0.Asm
                 render.Render(routines[i]);
         }
 
-        // public Index<ApiHostRes> EmitResBytes(ApiCodeBlocks src)
-        // {
-        //     var apires = Wf.ResBytesEmitter().Emit(src, RespackDir);
-        //     var runner = ScriptRunner.create(Wf.Env);
-
-        //     var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
-        //     root.iter(build, line => Wf.Row(line));
-
-        //     var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
-        //     root.iter(pack, line => Wf.Row(line));
-        //     return apires;
-
-        // }
 
         public Index<ApiHostRes> EmitResBytes()
-        {
-            return Wf.ResBytesEmitter().Emit(CodeBlocks);
-            // var apires = Wf.ResBytesEmitter().Emit(CodeBlocks, RespackDir);
-            // var runner = ScriptRunner.create(Wf.Env);
-
-            // var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
-            // root.iter(build, line => Wf.Row(line));
-
-            // var pack = runner.RunControlScript(ControlScriptNames.PackRespack).Data;
-            // root.iter(pack, line => Wf.Row(line));
-            // return apires;
-        }
+            => Wf.ResBytesEmitter().Emit(CodeBlocks);
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
         {

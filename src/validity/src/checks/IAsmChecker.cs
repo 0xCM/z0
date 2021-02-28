@@ -27,7 +27,7 @@ namespace Z0.Asm
         void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();
-            var formatted = Formatter.FormatFunction(asm);
+            var formatted = Formatter.Format(asm);
             dst.Write(formatted);
         }
 
@@ -44,7 +44,7 @@ namespace Z0.Asm
         }
 
         void WriteAsm(AsmRoutine f, StreamWriter dst)
-            => dst.WriteLine(Formatter.FormatFunction(f));
+            => dst.WriteLine(Formatter.Format(f));
 
 
         Option<AsmRoutine> CaptureAsm<D>(DynamicDelegate<D> src)

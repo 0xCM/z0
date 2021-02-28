@@ -25,7 +25,7 @@ namespace Z0.Asm
         public void WriteAsm(params AsmRoutine[] src)
         {
             foreach(var f in src)
-                StreamOut.Write(Formatter.FormatFunction(f));
+                StreamOut.Write(Formatter.Format(f));
         }
 
         public void Dispose()

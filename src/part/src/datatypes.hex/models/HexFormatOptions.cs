@@ -37,7 +37,7 @@ namespace Z0
         /// <summary>
         /// The case format character, either 'X' or 'x'
         /// </summary>
-        public char CaseFormatChar;
+        public char CaseIndicator;
 
         /// <summary>
         /// Specifies whether segments should be delimited
@@ -68,7 +68,7 @@ namespace Z0
         /// The hex format string as determined by configuration
         /// </summary>
         public string FormatCode
-            => $"{CaseFormatChar}";
+            => $"{CaseIndicator}";
 
         [MethodImpl(Inline)]
         public static implicit operator HexSeqFormat(in HexFormatOptions src)

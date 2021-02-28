@@ -33,9 +33,6 @@ namespace Z0.Asm
         public static AsmFormatConfig Default
             => create();
 
-        public static AsmFormatConfig WithSectionDelimiter
-            => create(EmitSectionDelimiter : true);
-
         public static AsmFormatConfig DefaultStreamFormat
             => create(EmitSectionDelimiter : true, EmitBaseAddress : true);
 

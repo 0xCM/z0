@@ -50,7 +50,7 @@ namespace Z0.Asm
                 ref readonly var captured = ref skip(src,i);
                 if(decoder.Decode(captured, out var fx))
                 {
-                    var asm = formatter.FormatFunction(fx);
+                    var asm = formatter.Format(fx);
                     seek(dst,i) = new AsmRoutineCode(fx,captured);
                 }
             }
@@ -69,7 +69,7 @@ namespace Z0.Asm
                 if(decoder.Decode(captured, out var fx))
                 {
                     seek(dst,i) = new AsmRoutineCode(fx,captured);
-                    var asm = formatter.FormatFunction(fx);
+                    var asm = formatter.Format(fx);
                     writer.Write(asm);
                 }
             }

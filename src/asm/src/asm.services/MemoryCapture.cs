@@ -84,7 +84,7 @@ namespace Z0
                         ref readonly var fx = ref skip(fxView, i);
                         var size = (byte)fx.ByteLength;
                         var summary = IceExtractors.Summarize(src, fx, new CodeBlock(src + offset, slice(parsedView, offset, size).ToArray()), fx.FormattedInstruction, offset);
-                        seek(formatTarget,i) = Formatter.FormatInstruction(src, summary);
+                        seek(formatTarget,i) = Formatter.Format(src, summary);
                         offset += size;
                     }
 

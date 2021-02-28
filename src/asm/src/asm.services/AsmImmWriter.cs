@@ -40,7 +40,7 @@ namespace Z0.Asm
             {
                 ref readonly var f = ref src[i];
                 if(f.IsNonEmpty)
-                    writer.Write(AsmFormatter.FormatFunction(f));
+                    writer.Write(AsmFormatter.Format(f));
             }
             return dst;
         }

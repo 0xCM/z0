@@ -53,7 +53,7 @@ namespace Z0.Asm
                 ref readonly var routine = ref skip(routines,i);
                 if(routine.IsNonEmpty)
                 {
-                    formatter.Format(routine, buffer);
+                    formatter.Render(routine, buffer);
                     writer.Write(buffer.Emit());
                     emitted++;
                 }

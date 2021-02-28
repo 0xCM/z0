@@ -57,7 +57,7 @@ namespace Z0
                 {
                     ref readonly var data = ref skip(codes,i);
                     var decoded = DecodeRoutine(data).ValueOrDefault(AsmRoutineCode.Empty);
-                    var formatted = Asm.Formatter.FormatFunction(decoded.Routine);
+                    var formatted = Asm.Formatter.Format(decoded.Routine);
                     seek(target, i) = new CapturedApiRes(accessor.Host, accessor, decoded);
                     writer.Write(formatted);
                 }
@@ -145,7 +145,7 @@ namespace Z0
         void Save(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Asm.RoutineDecoder.Decode(capture).Require();
-            var formatted = Asm.Formatter.FormatFunction(asm);
+            var formatted = Asm.Formatter.Format(asm);
             dst.Write(formatted);
         }
 
