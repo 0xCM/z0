@@ -9,50 +9,60 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static Msg;
+    using static memory;
 
     public class ToolCatalog : WfService<ToolCatalog>
     {
-        public FS.FolderPath Root => Wf.Db().ToolCatalogRoot();
+        FS.FolderPath Root;
 
-        public ToolCatalog()
+        protected override void OnInit()
         {
-
+            Root = Wf.Db().ToolCatalogRoot();
         }
 
-        public FS.Files Help()
-            => HelpDir.Files(FS.ext("help"));
+        public Index<ToolHelpEntry> UpdateHelpIndex()
+        {
+            var path = Root + FS.file("help", FS.Extensions.Csv);
+            var files = HelpFiles();
+            var flow = Wf.EmittingFile(path);
+            var count = files.Count;
+            var buffer = sys.alloc<ToolHelpEntry>(count);
+            var entries = span(buffer);
+            var formatter = Records.formatter<ToolHelpEntry>(46);
+            using var index = path.Writer();
+            index.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count;  i++)
+            {
+                var file = files[i];
+                var components = file.FileName.Format().Split(Chars.Dot);
+                ref var entry = ref seek(entries,i);
+                entry.Tool = components[0];
+                entry.HelpPath = file.ToUri();
+
+                index.WriteLine(formatter.Format(entry));
+            }
+            Wf.EmittedFile(flow, files.Count);
+            return buffer;
+        }
+
+        public FS.Files HelpFiles()
+            => HelpDir.Files(FS.ext("help"), true);
 
         [MethodImpl(Inline), Op]
-        public static Toolset toolset(string id, FS.FolderPath location)
+        Toolset Toolset(ToolId id, FS.FolderPath location)
             => new Toolset(id, location);
 
-        public FS.FilePath Help(ToolId tool)
+        public FS.FilePath HelpFile(ToolId tool)
         {
             var match = FS.file(tool.Format());
-            var path = HelpDir.Files(FS.ext("help")).Where(f => f.FileName.WithoutExtension.Equals(match)).FirstOrDefault();
-            return path;
+            return HelpDir.Files(FS.ext("help")).Where(f => f.FileName.WithoutExtension.Equals(match)).FirstOrDefault();
         }
 
-        public void ListToolHelpFiles()
-        {
-            root.iter(Help(), file => term.print(file));
-        }
+        public bool HasHelp(ToolId tool)
+            => HelpFile(tool).Exists;
 
-        public void ShowHelp(ToolId tool)
-        {
-            var help = Help(tool);
-            if(help.IsEmpty)
-                Wf.Warn(ToolHelpNotFound.Format(tool));
-            else
-                Wf.Row(help);
-        }
-
-        public void ListCommands()
-        {
-            foreach(var a in Wf.Components)
-                root.iter(Cmd.search(a), spec => term.print(spec.CmdId));
-        }
+        public Index<TextLine> HelpText(ToolId tool)
+            => HelpFile(tool).ReadTextLines();
 
         public void Emit(CmdScript script)
         {

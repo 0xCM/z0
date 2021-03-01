@@ -7,19 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    public readonly struct Toolset
+    public readonly struct N120 : INativeNatural, INatSeq<N120,N1,N2,N0>
     {
-        public ToolId Id {get;}
-
-        public FS.FolderPath Location {get;}
+        public const ulong Value = 120;
 
         [MethodImpl(Inline)]
-        public Toolset(ToolId id, FS.FolderPath root)
-        {
-            Id = id;
-            Location = root;
-        }
+        public static implicit operator int(N120 src)
+            => (int)Value;
+
+        public ulong NatValue => Value;
+
+
+        public override string ToString()
+            => Value.ToString();
     }
 }

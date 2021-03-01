@@ -336,7 +336,9 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            IntelIntrinsics.create(Wf).Emit();
+            var catalog = Tools.catalog(Wf);
+            var index = catalog.UpdateHelpIndex();
+            root.iter(index, entry => Wf.Row(entry.HelpPath));
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

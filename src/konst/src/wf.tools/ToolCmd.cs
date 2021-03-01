@@ -496,10 +496,6 @@ namespace Z0
             where T : struct, ICmdToolModel<T>
                 => describe(typeof(T));
 
-        [MethodImpl(Inline), Op]
-        public static ToolHelp toolhelp(ToolId tool, string src)
-            => new ToolHelp(tool, src);
-
         [Op]
         static ref CmdOptionSpec extract(MemberInfo src, out CmdOptionSpec dst)
         {
