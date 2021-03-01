@@ -5,19 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct RuleOperand
+    partial class XTend
     {
-        public TextBlock Value {get;}
-
-        [MethodImpl(Inline)]
-        public RuleOperand(string value)
-            => Value = value;
-
-        public string Format()
-            => Value.Format();
+        public static SymbolTable<E> ToSymbolTable<E>(this Index<Token<E>> src)
+            where E : unmanaged, Enum
+                => SymbolTables.create(src);
     }
 }

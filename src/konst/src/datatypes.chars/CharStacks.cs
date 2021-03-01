@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static MemoryStacks;
 
     [ApiHost]
     public readonly partial struct CharStacks

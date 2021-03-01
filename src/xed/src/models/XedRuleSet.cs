@@ -7,12 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public struct XedRuleSet : IXedRule<XedRuleSet>
     {
-        public XedRuleKind RuleKind => XedRuleKind.Ruleset;
-
         public FS.FileName SourceFile;
 
         public FS.FileName TargetFile;
@@ -35,5 +33,8 @@ namespace Z0
             Terms = terms;
             Description =  text.concat("# ", SourceFile, Chars.FSlash, XedSourceMarkers.RuleHeader(Name), ReturnType);
         }
+
+        public XedRuleKind RuleKind
+            => XedRuleKind.Ruleset;
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+
     partial struct SpanBlocks
     {
         /// <summary>
@@ -31,7 +32,7 @@ namespace Z0
 
         public static SpanBlock8<T> safeload<T>(W8 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads a sequence of 16-bit blocks from an unblocked span, reallocating if the source span isn't properly blocked
@@ -55,7 +56,7 @@ namespace Z0
 
         public static SpanBlock16<T> safeload<T>(W16 w, T[] src)
             where T : unmanaged
-                => safeload(w, z.span(src));
+                => safeload(w, memory.span(src));
 
         /// <summary>
         /// Loads 32-bit blocked span from an unblocked span, reallocating if the source span isn't properly blocked

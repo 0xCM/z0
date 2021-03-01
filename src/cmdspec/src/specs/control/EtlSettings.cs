@@ -41,7 +41,7 @@ namespace Z0
         public static EtlSettings @default()
         {
             var dst = new EtlSettings();
-            dst.RunXed = true;
+            dst.RunXed = false;
             dst.EmitResourceData = false;
             dst.CollectApiDocs = false;
             dst.EmitPeData = true;

@@ -11,8 +11,8 @@ namespace Z0
 
     using static System.Reflection.TypeAttributes;
     using static GenSpecs;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.CilTables, true)]
     public readonly partial struct RecordBuilder

@@ -20,6 +20,8 @@ namespace Z0
 
         public TextBlock IsaSet;
 
+        public TextBlock IForm;
+
         public BinaryCode BaseCode;
 
         public TextBlock Mod;

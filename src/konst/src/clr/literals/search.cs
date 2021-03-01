@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static z;
 
     partial struct ClrLiterals
     {

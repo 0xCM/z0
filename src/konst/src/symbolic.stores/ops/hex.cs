@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
         public static SymbolStore<Hex6Seq,byte,N6> hex(N6 n)
-            => create<Hex6Seq,byte,N6>();
+            => Symbolic.store<Hex6Seq,byte,N6>();
 
         /// <summary>
         /// Creates a store covering each <see cref='Hex7Seq'/> member
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
         public static SymbolStore<Hex7Seq,byte,N7> hex(N7 n)
-            => create<Hex7Seq,byte,N7>();
+            => Symbolic.store<Hex7Seq,byte,N7>();
 
         /// <summary>
         /// Creates a store covering each <see cref='Hex8Seq'/> member
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
         public static SymbolStore<Hex8Seq,byte,N8> hex(N8 n)
-            => create<Hex8Seq,byte,N8>();
+            => Symbolic.store<Hex8Seq,byte,N8>();
 
         /// <summary>
         /// Presents the source value as a sequence of hex symbols

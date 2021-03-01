@@ -23,7 +23,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            tVal = z.@as<E,T>(eVal);
+            tVal = memory.@as<E,T>(eVal);
             return ref tVal;
         }
 

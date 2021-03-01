@@ -18,13 +18,15 @@ namespace Z0
 
         IsaSet = 3 | 14u << WidthOffset,
 
-        BaseCode = 4 | 12u << WidthOffset,
+        IForm = 4 | 32u << WidthOffset,
 
-        Mod = 5 | 10u << WidthOffset,
+        BaseCode = 5 | 12u << WidthOffset,
 
-        Reg = 6 | 10u << WidthOffset,
+        Mod = 6 | 10u << WidthOffset,
 
-        Pattern = 7 | 100u << WidthOffset,
+        Reg = 7 | 10u << WidthOffset,
+
+        Pattern = 8 | 100u << WidthOffset,
 
         Operands = 9 | 0u << WidthOffset,
     }

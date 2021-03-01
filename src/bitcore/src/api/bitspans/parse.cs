@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class BitSpans
     {
@@ -35,7 +35,7 @@ namespace Z0
         {
             ref var target = ref dst.First;
             var input = span(src);
-            var count = min(input.Length, dst.BitCount);
+            var count = root.min(input.Length, dst.BitCount);
             var lastix = count - 1;
             for(var i=0; i<=lastix; i++)
             {

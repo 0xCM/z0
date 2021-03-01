@@ -10,7 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.Vector128;
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// A string?
@@ -183,7 +183,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static uint length(Vector128<ulong> src)
         {
-            unpack(vcell(src,1), out var size, out var _);
+            unpack(cpu.vcell(src,1), out var size, out var _);
             return size/memory.scale<char>();
         }
 
@@ -310,6 +310,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringRef(string src)
-            => @ref(src);
+            => z.@ref(src);
    }
 }

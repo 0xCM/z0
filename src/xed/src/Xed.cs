@@ -23,7 +23,7 @@ namespace Z0
         [Op]
         public static Index<XedSummaryRow> summaries(ITableArchive archive)
         {
-            var src = archive.TablePath(FS.file(XedSummaryRow.TableId, FileExtensions.Csv));
+            var src = archive.TablePath(FS.file(XedSummaryRow.TableId, FS.Extensions.Csv));
             var doc = archive.Document(src).Require();
             var count = doc.RowCount;
             var buffer = sys.alloc<XedSummaryRow>(count);
@@ -60,6 +60,7 @@ namespace Z0
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
             dst.Delimit(F.IsaSet, src.IsaSet);
+            dst.Delimit(F.IForm, src.IForm);
             dst.Delimit(F.BaseCode, Xed.code(src));
             dst.Delimit(F.Mod, Xed.mod(src));
             dst.Delimit(F.Reg, Xed.reg(src));
@@ -75,6 +76,7 @@ namespace Z0
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
             dst.Delimit(F.IsaSet, src.IsaSet);
+            dst.Delimit(F.IForm, src.IForm);
             dst.Delimit(F.BaseCode, src.BaseCode);
             dst.Delimit(F.Mod, src.Mod);
             dst.Delimit(F.Reg, src.Reg);
@@ -86,13 +88,14 @@ namespace Z0
         [Op]
         static bool load(in TextRow src, ref XedSummaryRow dst)
         {
-            if(src.CellCount == 9)
+            if(src.CellCount == 10)
             {
                 var i=0;
                 dst.Class = src[i++];
                 dst.Category = src[i++];
                 dst.Extension = src[i++];
                 dst.IsaSet = src[i++];
+                dst.IForm = src[i++];
                 dst.BaseCode = HexByteParser.Service.ParseData(src[i++]).Value ?? BinaryCode.Empty;
                 dst.Mod = src[i++];
                 dst.Reg = src[i++];
@@ -113,6 +116,7 @@ namespace Z0
             dst.Category = src.Category;
             dst.Extension =  src.Extension;
             dst.IsaSet =  src.IsaSet;
+            dst.IForm = src.IForm;
             dst.BaseCode =  Xed.code(src);
             dst.Mod =  Xed.mod(src);
             dst.Reg =  Xed.reg(src);
@@ -128,14 +132,6 @@ namespace Z0
         [Op]
         internal static FS.FileName rulefile(FS.FileName src, string name)
             => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FileExtensions.Csv);
-
-        [Op]
-        internal static XedSummaryRow[] filter(XedSummaryRow[] src, XedExtension match)
-            => src.Where(p => p.Extension  == XedConst.Name(match));
-
-        [Op]
-        internal static XedSummaryRow[] filter(XedSummaryRow[] src, XedCategory match)
-            => src.Where(p => p.Category == XedConst.Name(match));
 
         [Op]
         internal static string pattern(XedInstructionDoc src, string name)
@@ -157,15 +153,16 @@ namespace Z0
         [Op]
         static ref XedPattern pattern(in XedInstructionDoc src, int index, ref XedPattern dst)
         {
-            dst.Class = src.Class ?? string.Empty;
-            dst.Category = src.Category ?? string.Empty;
-            dst.Extension = src.Extension ?? string.Empty;
-            dst.IsaSet = src.IsaSet ?? string.Empty;
+            dst.Class = src.Class ?? EmptyString;
+            dst.Category = src.Category ?? EmptyString;
+            dst.Extension = src.Extension ?? EmptyString;
+            dst.IsaSet = src.IsaSet ?? EmptyString;
+            dst.IForm = src.IForm ?? EmptyString;
             var patternText = src.ExtractProp(index);
             var operandText = src.ExtractProp(index + 1);
-            dst.PatternText = patternText ?? string.Empty;
+            dst.PatternText = patternText ?? EmptyString;
             dst.Parts = patternText.SplitClean(Space);
-            dst.OperandText = operandText ?? string.Empty;
+            dst.OperandText = operandText ?? EmptyString;
             dst.Operands = operandText.SplitClean(Space);
             return ref dst;
         }
@@ -195,11 +192,6 @@ namespace Z0
             dst = patterns.ToArray();
             return ref dst;
         }
-
-
-        [MethodImpl(Inline), Op]
-        static RuleOperand operand(string value)
-            => new RuleOperand(value);
 
         [Op]
         public static void emit(ReadOnlySpan<XedRuleSet> src, FS.FilePath dst)

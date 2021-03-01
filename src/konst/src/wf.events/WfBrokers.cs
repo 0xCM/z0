@@ -76,8 +76,13 @@ namespace Z0
                 => new DataBroker<K,C,T>(wf, capacity, xf);
 
         [MethodImpl(Inline)]
+        static ulong e64u<E>(E e)
+            where E : unmanaged, Enum
+                => EnumValue.e64u(e);
+
+        [MethodImpl(Inline)]
         public static DataBroker<K,T> create<K,T>(int capacity, WfDelegates.Indexer<K> @if = null)
             where K : unmanaged, Enum
-                => new DataBroker<K,T>(capacity, @if ?? Enums.e64u);
+                => new DataBroker<K,T>(capacity, @if ?? e64u);
     }
 }

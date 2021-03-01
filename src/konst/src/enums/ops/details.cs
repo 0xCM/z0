@@ -18,8 +18,8 @@ namespace Z0
             var type = ClrEnums.@base<E>();
             var fields = @readonly(typeof(E).LiteralFields());
             var count = fields.Length;
-            var buffer = memory.alloc<EnumLiteralDetail<E>>(count);
-            ref var dst = ref memory.first(buffer);
+            var buffer = alloc<EnumLiteralDetail<E>>(count);
+            ref var dst = ref first(buffer);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(fields, i);

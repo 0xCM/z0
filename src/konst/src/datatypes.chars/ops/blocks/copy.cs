@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged, ICharBlock<T>
         {
             var length = (uint)root.min(src.Length, size<T>()/2);
-            z.copy(first(src), ref @as<T,char>(dst), length);
+            memory.copy(first(src), ref @as<T,char>(dst), length);
             return ref dst;
         }
 

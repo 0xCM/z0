@@ -26,7 +26,6 @@ namespace Z0
             }
         }
 
-
         [MethodImpl(Inline)]
         public static TokenSpec<K,S> token<K,S>(uint index, K kind, string id, params S[] symbols)
             where K : unmanaged

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class Enums
     {
@@ -37,9 +37,9 @@ namespace Z0
             where E : unmanaged, Enum
         {
             if(Enum.TryParse(name, true, out E result))
-                return parsed(name, result);
+                return root.parsed(name, result);
             else
-                return unparsed<E>(name);
+                return root.unparsed<E>(name);
         }
     }
 }

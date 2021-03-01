@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
     using static XedSourceMarkers;
 
     readonly struct XedSourceParser
@@ -21,7 +21,7 @@ namespace Z0
 
         public XedInstructionDoc ParseInstruction(XedDocRows src, in int idxStart, ref int ix)
         {
-            var rows = list<TextRow>();
+            var rows = root.list<TextRow>();
             var parsing = false;
             var count = src.RowCount;
             for(var i = idxStart; i<count; i++, ix++)
@@ -48,7 +48,7 @@ namespace Z0
 
         XedInstructionDoc[] ParseInstructions(XedDocRows data, int ix)
         {
-            var dst = list<XedInstructionDoc>();
+            var dst = root.list<XedInstructionDoc>();
             for(var i=0; i<data.RowCount; i++)
             {
                 var parsed = ParseInstruction(data, ++i, ref i);
@@ -78,7 +78,7 @@ namespace Z0
         XedRuleSet ParseFunction(XedDocRows rows, ref int ix)
         {
             var title = rows[ix].RowText.LeftOfFirst(RuleMarker);
-            var body = list<string>();
+            var body = root.list<string>();
             var first = ix;
             for(var i = ix; i<rows.RowCount; i++)
             {
@@ -118,7 +118,7 @@ namespace Z0
 
         public XedRuleSet[] ParseFunctions(FS.FilePath src)
         {
-            var dst = list<XedRuleSet>();
+            var dst = root.list<XedRuleSet>();
             var data = LoadSource(src);
             var count = data.RowCount;
             for(var i=0; i<count; i++)

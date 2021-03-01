@@ -11,8 +11,6 @@ namespace Z0
 
     public readonly struct XedSeq : IXedRule<XedSeq>
     {
-        public XedRuleKind RuleKind => XedRuleKind.Sequence;
-
         public string Name {get;}
 
         public Index<string> Terms {get;}
@@ -23,5 +21,8 @@ namespace Z0
             Name = name;
             Terms = terms;
         }
+
+        public XedRuleKind RuleKind
+            => XedRuleKind.Sequence;
     }
 }

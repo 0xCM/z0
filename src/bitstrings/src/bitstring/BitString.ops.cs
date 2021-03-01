@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial struct BitString
     {
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStringStore.bitseq(src, maxbits ?? bitsize<T>()));
+                => new BitString(BitStringStore.bitseq(src, maxbits ?? width<T>()));
 
         /// <summary>
         /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
@@ -82,7 +82,7 @@ namespace Z0
         public static BitString scalar<T>(T src, byte[] storage, int? maxbits = null)
             where T : unmanaged
         {
-            var bitseq = BitStringStore.bitseq(src, maxbits ?? bitsize<T>());
+            var bitseq = BitStringStore.bitseq(src, maxbits ?? width<T>());
             bitseq.CopyTo(storage);
             return new BitString(storage);
         }
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? width<T>());
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values
@@ -107,7 +107,7 @@ namespace Z0
         public static BitString scalars<T>(ReadOnlySpan<T> src, int? maxbits = null)
             where T : unmanaged
         {
-            var cellbits = bitsize<T>();
+            var cellbits = width<T>();
             var bitcount = maxbits ?? cellbits*src.Length;
             var k = 0u;
             var buffer = sys.alloc(bitcount);

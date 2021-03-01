@@ -117,7 +117,7 @@ namespace Z0.Asm
 
         void CheckAsmSymbols()
         {
-            var table = AsmSigs.table(Wf);
+            var table = AsmSigs.table();
             var tokens = table.Tokens;;
             root.iter(tokens, e => Wf.Row(e));
         }
@@ -191,7 +191,6 @@ namespace Z0.Asm
             var accessors = Resources.accessors(assembly);
             var definitions = Resources.definitions(accessors);
             Wf.Status(definitions.BlockCount);
-
         }
 
 
@@ -355,7 +354,10 @@ namespace Z0.Asm
         public unsafe void Run()
         {
             //EmitIntrinsicsInfo();
-            RunScripts();
+            //RunScripts();
+
+            using var xed = XedWf.create(Wf);
+            xed.Run();
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

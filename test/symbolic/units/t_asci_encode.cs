@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static memory;
     using static Asci;
 
     using C = AsciCharCode;
@@ -19,7 +19,7 @@ namespace Z0
             void check(char x, AsciCharCode y)
                 => Claim.eq(encode(x), y);
 
-            var src = span(z.array('1','2','3','4'));
+            var src = span(root.array('1','2','3','4'));
             var dst = span(alloc<AsciCharCode>(4));
             encode(src,dst);
             root.iter(src, dst, check);

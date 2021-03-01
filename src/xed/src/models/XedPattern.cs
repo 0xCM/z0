@@ -18,6 +18,8 @@ namespace Z0
 
         public string OperandText;
 
+        public string IForm;
+
         public string[] Parts;
 
         public string[] Operands;

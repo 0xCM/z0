@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class gbits
     {
@@ -17,8 +17,8 @@ namespace Z0
         public static Span<Bit32> unpack32<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
             where T : unmanaged
         {
-            var srcsize = bitsize<T>();
-            var bitcount = bitsize<T>()*src.Length;
+            var srcsize = width<T>();
+            var bitcount = width<T>()*src.Length;
             ref var target = ref first(dst);
             var k = 0;
             for(var i=0; i<src.Length; i++)
@@ -65,8 +65,8 @@ namespace Z0
                 return MemoryMarshal.Cast<Bit32,T>(unpack32(src, MemoryMarshal.Cast<T,Bit32>(dst)));
             else
             {
-                var srcsize = bitsize<S>();
-                var bitcount = bitsize<S>()*src.Length;
+                var srcsize = width<S>();
+                var bitcount = width<S>()*src.Length;
                 var k = 0u;
                 for(var i=0; i<src.Length; i++)
                 for(byte j=0; j<srcsize; j++)

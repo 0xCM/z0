@@ -12,7 +12,6 @@ namespace Z0
 
     readonly partial struct CharBlocks
     {
-
         [MethodImpl(Inline), Op]
         public static ref char @char(in CharBlock2 src)
             => ref c16(src);

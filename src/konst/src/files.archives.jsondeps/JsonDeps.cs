@@ -8,7 +8,7 @@ namespace Z0
 
     using M = Microsoft.Extensions.DependencyModel;
 
-    using static z;
+    using static memory;
     using static JsonDepsModel;
     using api = JsonDepsLoader;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         internal JsonDeps(M.DependencyContext src)
         {
-            Source = insist(src);
+            Source = src;
             _CompilationLibraries = src.CompileLibraries.Array();
             _RuntimeLibraries = src.RuntimeLibraries.Array();
             _Options = src.CompilationOptions;

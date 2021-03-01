@@ -15,16 +15,6 @@ namespace Z0.Asm
     public readonly struct AsmSigs
     {
         /// <summary>
-        /// Defines a <see cref='AsmSigOpToken'/>
-        /// </summary>
-        /// <param name="index">The identifier index that serves as a surrogate key for lookups</param>
-        /// <param name="name">The identifer name</param>
-        /// <param name="kind">The identifier kind</param>
-        [MethodImpl(Inline), Op]
-        public static Token<AsmSigOpKind> token(byte index, Identifier name, AsmSigOpKind kind, string symbol)
-            => Tokens.token(index, name, kind, symbol);
-
-        /// <summary>
         /// Defines a <see cref='SigOperand'/>
         /// </summary>
         /// <param name="src">The source text</param>
@@ -47,32 +37,12 @@ namespace Z0.Asm
             {
                 ref readonly var detail = ref skip(details,i);
                 var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, EmptyString);
-                seek(dst,i) = token(i, detail.Name, detail.LiteralValue, symbol);
+                seek(dst,i) = Tokens.token(i, detail.Name, detail.LiteralValue, symbol);
             }
             return buffer;
         }
 
-        public static SymbolTable<AsmSigOpKind> table(IWfShell wf)
-        {
-            var tokens = AsmSigs.tokens();
-            return SymbolTables.create(AsmSigs.tokens());
-            // var table = SymbolTables.create(tokens, t => t.Symbol);
-            // var count = tokens.Count;
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var token = ref tokens[i];
-            //     if(token.IsNonEmpty)
-            //     {
-            //         if(!table.Index(token.Symbol, out var index))
-            //             wf.Error($"Index for {token.Name} not found");
-            //     }
-            //     else
-            //     {
-            //         if(token.Index !=0)
-            //             wf.Error($"Empty token has a nonzero index!");
-            //     }
-            // }
-            // return table;
-        }
+        public static SymbolTable<AsmSigOpKind> table()
+            => AsmSigs.tokens().ToSymbolTable();
     }
 }

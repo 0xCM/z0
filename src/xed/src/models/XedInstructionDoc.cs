@@ -13,8 +13,6 @@ namespace Z0
 
     public readonly struct XedInstructionDoc : IXedRule<XedInstructionDoc>
     {
-        public XedRuleKind RuleKind => XedRuleKind.Instruction;
-
         public Index<TextRow> Content {get;}
 
         [MethodImpl(Inline)]
@@ -39,6 +37,9 @@ namespace Z0
             get => !IsEmpty;
         }
 
+        public XedRuleKind RuleKind
+            => XedRuleKind.Instruction;
+
         public int RowCount
             => Content.Length;
 
@@ -59,6 +60,9 @@ namespace Z0
 
         public string RealOpCode
             => Xed.pattern(this, M.REAL_OPCODE);
+
+        public string IForm
+            => Xed.pattern(this, M.IFORM);
 
         public XedPattern[] Patterns
             => Xed.patterns(this);

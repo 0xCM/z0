@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [ApiHost]
     public readonly struct Histograms
@@ -205,6 +205,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T grain<T>(in ClosedInterval<T> src, ulong width = 100ul)
             where T : unmanaged
-                => generic<T>(src.Width/min(src.Width, 100ul));
+                => generic<T>(src.Width/root.min(src.Width, 100ul));
     }
 }

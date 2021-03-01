@@ -50,6 +50,16 @@ namespace Z0
             Wf.Disposed();
         }
 
+        public void Run()
+        {
+            Target.Clear();
+
+            var patterns = ExtractPatterns();
+            var summaries = Emit(patterns);
+            SaveMnemonics(summaries);
+            Xed.emit(Wf, Config, Source);
+        }
+
         public XedPattern[] EmitInstructions(FS.FilePath file)
         {
             const string kind = "instructions";
@@ -69,14 +79,14 @@ namespace Z0
 
         public XedPattern[] ExtractPatterns()
         {
-            WfStepId step = typeof(XedWf);
             var patterns = root.list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = Source.InstructionFiles.View;
             const string kind = "instructions";
+            var count = files.Length;
             try
             {
-                for(var i=0; i<files.Length; i++)
+                for(var i=0; i<count; i++)
                 {
                     ref readonly var file = ref skip(files,i);
                     patterns.AddRange(EmitInstructions(file));
@@ -105,15 +115,5 @@ namespace Z0
         }
 
 
-        public void Run()
-        {
-            Target.Clear();
-
-            var patterns = ExtractPatterns();
-            var summaries = Emit(patterns);
-            SaveMnemonics(summaries);
-            Xed.emit(Wf, Config, Source);
-
-        }
     }
 }

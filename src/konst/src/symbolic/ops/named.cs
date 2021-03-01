@@ -10,13 +10,13 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct SymbolStores
+    partial struct Symbolic
     {
         [MethodImpl(Inline)]
         public static NamedSymbols<S,T> named<S,T>()
             where S : unmanaged, Enum
             where T : unmanaged
-                => named(symbols<S,T>());
+                => named(Symbolic.store<S,T>());
 
         [MethodImpl(Inline)]
         public static NamedSymbols<S,T> named<S,T>(in SymbolStore<S,T> src)
@@ -33,7 +33,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var symbols = create<S,T,N>();
+            var symbols = store<S,T,N>();
             var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(symbols.Count));
             return new NamedSymbols<S,T,N>(symbols, names);
         }
