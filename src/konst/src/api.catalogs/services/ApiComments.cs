@@ -22,7 +22,7 @@ namespace Z0
             foreach(var part in src.Keys)
             {
                 var id = part.FileName.WithoutExtension.Name;
-                var path = wf.Db().Table<ApiComment>(id, FileExtensions.Csv);
+                var path = wf.Db().Table<ApiComment>(id, FS.Extensions.Csv);
                 var flow = wf.EmittingTable<ApiComment>(path);
 
                 var docs = new Dictionary<string, ApiComment>();

@@ -76,7 +76,7 @@ namespace Z0
                 var @base = ImageMaps.@base(part);
                 seek(located,i) = new LocatedPart(part, @base, (ulong)step.OffsetAddress - (ulong)@base);
             }
-            var dst = wf.Db().IndexRoot() + FS.file("imagemaps", FileExtensions.Csv);
+            var dst = wf.Db().IndexRoot() + FS.file("imagemaps", FS.Extensions.Csv);
             var images = ImageMaps.index();
             ImageMaps.emit(images, dst);
             return buffer;

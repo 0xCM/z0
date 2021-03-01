@@ -26,7 +26,7 @@ namespace Z0
         {
             var dst = new EmitILTablesCmd();
             dst.Source = src;
-            dst.Target = wf.Db.Doc(src.FileName.WithoutExtension.Name, FileExtensions.Csv);
+            dst.Target = wf.Db.Doc(src.FileName.WithoutExtension.Name, FS.Extensions.Csv);
             return dst;
         }
     }

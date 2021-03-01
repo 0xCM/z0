@@ -12,7 +12,7 @@ namespace Z0
     {
         public static void Emit(FS.FolderPath root)
         {
-            var dst = root + FS.file("asci", FileExtensions.Txt);
+            var dst = root + FS.file("asci", FS.Extensions.Txt);
             using var writer = dst.Writer();
             writer.Write(BuildAsciData(false));
             writer.Write(BuildAsciData(true));

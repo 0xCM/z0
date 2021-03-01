@@ -20,14 +20,5 @@ namespace Z0
             dst.Components = parts(control, runroot).PartComponents.Select(ClrAssemblyNames.from);
             return ref dst;
         }
-
-        [Op]
-        public static WfConfig configure(string[] args)
-        {
-            var dst = new WfConfig();
-            dst.Args = root.mapi(args, (i,arg) => new CmdArg((ushort)i, arg));
-            configure(ref dst);
-            return dst;
-        }
     }
 }

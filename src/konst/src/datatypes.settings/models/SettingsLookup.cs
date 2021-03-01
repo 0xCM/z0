@@ -10,9 +10,11 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct SettingsLookup : IIndex<Setting>, ILookup<string,Setting>
+    using api = Settings;
+
+    public readonly struct SettingsLookup : IIndex<Setting>, ILookup<string,Setting>, ISettingsSet<SettingsLookup>
     {
-        readonly IndexedSeq<Setting> Data;
+        readonly Index<Setting> Data;
 
         [MethodImpl(Inline)]
         public SettingsLookup(Setting[] src)
@@ -40,6 +42,12 @@ namespace Z0
             value = Setting.Empty;
             return false;
         }
+
+        public string Format()
+            => api.format(Data);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator SettingsLookup(Setting[] src)

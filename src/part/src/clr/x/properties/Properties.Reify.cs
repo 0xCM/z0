@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
     partial class ClrQuery
@@ -15,16 +14,16 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static object[] LiteralValues(this FieldInfo[] src)
-            => src.Literals().Select(f => f.GetRawConstantValue());
+        public static PropertyInfo[] Reify(this PropertyInfo[] src, Type t)
+            => src.Where(x => x.PropertyType.Reifies(t));
 
         /// <summary>
-        /// Queries literal fields for values of parametric type
+        /// Queries literal fields for their values
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static IEnumerable<T> LiteralValues<T>(this FieldInfo[] src)
-            where T : unmanaged
-                => src.LiteralValues().Select(v => (T)v);
+        public static PropertyInfo[] Reify<T>(this PropertyInfo[] src)
+            where T : class
+                => src.Reify(typeof(T));
     }
 }

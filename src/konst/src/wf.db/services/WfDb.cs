@@ -47,5 +47,13 @@ namespace Z0
                 writer.WriteLine(formatter.Format(skip(src,i)));
             return Wf.EmittedTable<T>(flow, count);
         }
+
+        public FS.FilePath EmitSettings<T>(T settings)
+            where T : ISettingsSet<T>, new()
+        {
+            var dst = (this as IDbPaths).SettingsPath(typeof(T).Name);
+            dst.Overwrite(settings.Format());
+            return dst;
+        }
     }
 }

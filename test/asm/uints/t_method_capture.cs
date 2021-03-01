@@ -32,7 +32,7 @@ namespace Z0.Asm
             var closures = NumericKind.UnsignedInts.DistinctTypes();
             var defintions = typeof(VectorizedCases).StaticMethods().OpenGeneric(1).Select(m => m.GetGenericMethodDefinition());
 
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
             foreach(var closure in closures)
             {
                 foreach(var definition in defintions)
@@ -47,7 +47,7 @@ namespace Z0.Asm
 
         public void capture_quick()
         {
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
             using var quick = Wf.CaptureQuick(Context);
             foreach(var m in typeof(z).DeclaredMethods().Public().Static().NonGeneric())
             {
@@ -58,14 +58,14 @@ namespace Z0.Asm
 
         public void capture_direct()
         {
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
             foreach(var m in typeof(DirectMethodCases).DeclaredMethods().Public().Static().NonGeneric())
                 AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));
         }
 
         void capture_dynamic_delegates()
         {
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
             var xor = LD.xor<uint>();
             var alt = Capture.alt(Wf, Context);
             AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(Identity.identify(xor.Method), xor.Method)), dst);
@@ -75,7 +75,7 @@ namespace Z0.Asm
 
         void capture_dynamic_delegate_batch()
         {
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
             var methods = z.array(
                 LD.xor<byte>().Method, LD.xor<ushort>().Method, LD.xor<uint>().Method, LD.xor<ulong>().Method
                 );
@@ -90,7 +90,7 @@ namespace Z0.Asm
 
         public void capture_delegates()
         {
-            using var dst = CaseWriter(FileExtensions.Asm);
+            using var dst = CaseWriter(FS.Extensions.Asm);
 
             var case1In = CaptureCases.And256;
             var case1Out = AsmCheck.Capture(case1In.Identify(), case1In).Require();

@@ -87,7 +87,7 @@ namespace Z0
                 BitFieldModels.segment(BFB_I.BFB_2, 8, 9),
                 BitFieldModels.segment(BFB_I.BFB_3, 10, 15)
                 );
-            using var writer = CaseWriter(FileExtensions.Log);
+            using var writer = CaseWriter(FS.Extensions.Log);
             writer.WriteLine(spec);
 
             var dst = memory.alloc<ushort>(spec.FieldCount);
@@ -139,7 +139,7 @@ namespace Z0
             var spec = BitFieldModels.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
-            using var writer = CaseWriter(FileExtensions.Log);
+            using var writer = CaseWriter(FS.Extensions.Log);
             writer.WriteLine(spec);
 
             Claim.eq((byte)4, spec.FieldCount);
@@ -229,7 +229,7 @@ namespace Z0
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
             var positions = spec.Segments.Map(s => (byte)s.StartPos);
-            using var writer = CaseWriter(FileExtensions.Log);
+            using var writer = CaseWriter(FS.Extensions.Log);
             writer.WriteLine(spec);
 
             for(var rep=0; rep<RepCount; rep++)

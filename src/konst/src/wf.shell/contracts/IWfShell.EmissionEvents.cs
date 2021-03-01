@@ -10,16 +10,39 @@ namespace Z0
 
     partial interface IWfShell
     {
-        WfExecFlow<FS.FilePath> EmittingFile(FS.FilePath dst)
+        IWfEmissionLog Emissions
+            => Services.EmissionLog;
+
+        WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)
+            where T : struct, IRecord<T>
         {
-            signal(this).EmittingFile(dst);
-            return Flow(dst);
+            signal(this).EmittingTable<T>(dst);
+            return Emissions.LogEmission(TableFlow<T>(dst));
         }
 
-        WfExecToken EmittedFile(WfExecFlow<FS.FilePath> flow, Count count = default)
+        WfExecToken EmittedTable<T>(WfTableFlow<T> flow, Count count, FS.FilePath? dst = null)
+            where T : struct, IRecord<T>
         {
-            signal(this).EmittedFile(count, flow.Data);
-            return Ran(flow);
+            var completed = Ran(flow);
+            var counted = flow.WithCount(count).WithToken(completed);
+            signal(this).EmittedTable<T>(count, counted.Target);
+            Emissions.LogEmission(counted);
+            return completed;
+        }
+
+        WfFileFlow EmittingFile(FS.FilePath dst)
+        {
+            signal(this).EmittingFile(dst);
+            return Emissions.LogEmission(Flow(dst));
+        }
+
+        WfExecToken EmittedFile(WfFileFlow flow, Count count = default)
+        {
+            var completed = Ran(flow);
+            var counted = flow.WithCount(count).WithToken(completed);
+            signal(this).EmittedFile(count, counted.Target);
+            Emissions.LogEmission(counted);
+            return completed;
         }
     }
 }

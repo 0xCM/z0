@@ -29,93 +29,59 @@ namespace Z0
             Db = db;
         }
 
-        void Render(ReadOnlySpan<CmdTypeInfo> src, ITextBuffer dst)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(src,i).Format());
-        }
+        public Outcome<TextLines> RunControlScript(FS.FileName name)
+            => RunScript(Db.ControlScript(name), new ScriptId(name.Name));
 
-        public Outcome<TextLines> RunControlScript(FS.FileName script)
-        {
-            var result = RunScript(Db.ControlScript(script));
-            if(result)
-            {
-                using var writer = Db.CmdLog(script.Name).Writer();
-                root.iter(result.Data, line => writer.WriteLine(line));
-            }
-            return result;
-        }
+        public Outcome<TextLines> RunCmdScript(ToolId tool, ScriptId script)
+            => RunScript(tool, script, ToolScriptKind.Cmd);
 
-        public Outcome<TextLines> Run(CmdLine cmd)
+        public Outcome<TextLines> RunPsScript(ToolId tool, ScriptId script)
+            => RunScript(tool, script, ToolScriptKind.Ps);
+
+        public Outcome<TextLines> RunScript(ToolId tool, ScriptId script, ToolScriptKind kind)
+            => Run(CmdLine(ScriptFile(tool, script, kind), kind), script);
+
+        Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
         {
+
+            using var writer = Db.CmdLog(script).Writer();
+
             try
             {
                 var process = ToolCmd.run(cmd).Wait();
-                var output = process.Output;
-                return Parse.lines(output);
+                var lines =  Parse.lines(process.Output);
+                root.iter(lines, line => writer.WriteLine(line));
+
+                return lines;
             }
             catch(Exception e)
             {
                 term.error(e);
+                writer.WriteLine(e.ToString());
                 return e;
             }
         }
 
-        public FS.FilePath ScriptFile(ToolId tool, Name script, ToolScriptKind shell)
+        Outcome<TextLines> RunScript(FS.FilePath src, ScriptId script)
+            => Run(new CmdLine(src.Format(PathSeparator.BS)), script);
+
+        FS.FilePath ScriptFile(ToolId tool, ScriptId script, ToolScriptKind kind)
         {
-            var x = shell switch{
+            var x = kind switch{
                 ToolScriptKind.Cmd => FS.Extensions.Cmd,
                 ToolScriptKind.Ps => FS.Extensions.Ps1,
                 _ => FS.FileExt.Empty
             };
-            return Db.ToolScriptFile(tool, script, x);
+            return Db.ToolScript(tool, script, x);
         }
 
-        public FS.FilePath ScriptFile<K>(K kind, Name script, ToolScriptKind shell)
+        CmdLine CmdLine(FS.FilePath path, ToolScriptKind kind)
         {
-            var x = shell switch{
-                ToolScriptKind.Cmd => FS.Extensions.Cmd,
-                ToolScriptKind.Ps => FS.Extensions.Ps1,
-                _ => FS.FileExt.Empty
-            };
-            return Db.ToolScriptFile(kind, script, x);
-        }
-
-        public CmdLine CmdLine(FS.FilePath script, ToolScriptKind shell)
-        {
-            return shell switch{
-                ToolScriptKind.Cmd => WinCmd.script(script),
-                ToolScriptKind.Ps => Pwsh.script(script),
+            return kind switch{
+                ToolScriptKind.Cmd => WinCmd.script(path),
+                ToolScriptKind.Ps => Pwsh.script(path),
                 _ => Z0.CmdLine.Empty
             };
         }
-
-        public Outcome<TextLines> RunScript(FS.FilePath src)
-        {
-            var kind = src.FileName.FileExt.Equals(FS.Extensions.Ps1) ? ToolScriptKind.Ps : ToolScriptKind.Cmd;
-            var command = new CmdLine(src.Format(PathSeparator.BS));
-            return Run(command);
-        }
-
-        public Outcome<TextLines> RunScript(ToolId tool, Name name, ToolScriptKind shell)
-        {
-            var file = ScriptFile(tool,name, shell);
-            var command = CmdLine(file,shell);
-            return Run(command);
-        }
-
-        public Outcome<TextLines> RunScript<K>(K kind, Name name, ToolScriptKind shell)
-        {
-            var file = ScriptFile(kind,name, shell);
-            var command = CmdLine(file,shell);
-            return Run(command);
-        }
-
-        public Outcome<TextLines> RunCmdScript<K>(K kind, Name name)
-            => RunScript(kind, name, ToolScriptKind.Cmd);
-
-        public Outcome<TextLines> RunPsScript<K>(K kind, Name name)
-            => RunScript(kind, name, ToolScriptKind.Ps);
     }
 }

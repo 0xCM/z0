@@ -165,45 +165,20 @@ namespace Z0
             /// Defines the <see cref='sh'/> <see cref='FileExt'/>
             /// </summary>
             public static FileExt Sh => ext(sh);
+
+            /// <summary>
+            /// Defines the <see cref='settings'/> <see cref='FileExt'/>
+            /// </summary>
+            public static FileExt Settings => ext(settings);
         }
     }
 
     public readonly struct FileExtensions
     {
         /// <summary>
-        /// Defines the <see cref='asm'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Asm => ext(asm);
-
-        /// <summary>
         /// Defines the <see cref='csv'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Csv => ext(csv);
-
-        /// <summary>
-        /// Defines the <see cref='dll'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Dll => ext(dll);
-
-        /// <summary>
-        /// Defines the <see cref='exe'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Exe => ext(exe);
-
-        /// <summary>
-        /// Defines the <see cref='log'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Log => ext(log);
-
-        /// <summary>
-        /// Defines the <see cref='lib'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Lib => ext(lib);
-
-        /// <summary>
-        /// Defines the <see cref='txt'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Txt => ext(txt);
 
     }
 }

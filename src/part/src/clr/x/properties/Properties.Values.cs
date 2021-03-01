@@ -5,14 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.Text;
+    using System.Reflection;
 
-    partial class text
+    partial class ClrQuery
     {
         [Op]
-        public static MemoryStream stream(string data, Encoding? encoding = null)
-            => new MemoryStream((encoding ?? Encoding.UTF8).GetBytes(data));
+        public static object[] Values(this PropertyInfo[] src, object o = null)
+            => src.Select(x => x.GetValue(o));
     }
 }

@@ -66,5 +66,7 @@ namespace Z0
         FileExt Zip => X.Zip;
 
         FileExt Sln => X.Sln;
-    }
+
+        FileExt Settings => X.Settings;
+     }
 }

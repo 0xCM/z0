@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public struct EtlSettings
+    public struct EtlSettings : ISettingsSet<EtlSettings>
     {
         public Setting<bool> RunXed;
 
@@ -58,5 +58,8 @@ namespace Z0
             dst.EmitAsmBranches = true;
             return dst;
         }
+
+        public override string ToString()
+            => (this as ISettingsSet).Format();
     }
 }

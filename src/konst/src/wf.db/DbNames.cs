@@ -7,6 +7,18 @@ namespace Z0
     [LiteralProvider]
     public readonly struct DbNames
     {
+        public const string asm = nameof(asm);
+
+        public const string bin = nameof(bin);
+
+        public const string builds = nameof(builds);
+
+        public const string build = ".build";
+
+        public const string cil = nameof(cil);
+
+        public const string cildata = nameof(cil) + delimiter + data;
+
         public const string docs = nameof(docs);
 
         public const string lists = nameof(lists);
@@ -39,11 +51,6 @@ namespace Z0
 
         public const string il = nameof(il);
 
-        public const string cil = nameof(cil);
-
-        public const string cildata = nameof(cil) + delimiter + data;
-
-        public const string asm = nameof(asm);
 
         public const string hex = nameof(hex);
 
@@ -61,9 +68,6 @@ namespace Z0
 
         public const string imm = nameof(imm);
 
-        public const string builds = nameof(builds);
-
-        public const string build = ".build";
 
         public const string tmp = nameof(tmp);
 
@@ -71,7 +75,6 @@ namespace Z0
 
         public const string dumps = nameof(dumps);
 
-        public const string bin = nameof(bin);
 
         public const string source = nameof(source);
 
@@ -83,6 +86,7 @@ namespace Z0
 
         public const string tests = nameof(tests);
 
+        public const string settings = nameof(settings);
         public const string z0 = nameof(z0);
     }
 }

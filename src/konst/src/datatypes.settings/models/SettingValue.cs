@@ -22,10 +22,10 @@ namespace Z0
         /// <summary>
         /// The setting value
         /// </summary>
-        public string Value {get;}
+        public dynamic Value {get;}
 
         [MethodImpl(Inline)]
-        public SettingValue(string name, string value)
+        public SettingValue(string name, dynamic value)
         {
             Name = name;
             Value = value;
@@ -36,7 +36,7 @@ namespace Z0
             if(json)
                 return string.Concat(Name.Enquote(), Chars.Colon, Chars.Space, Value.Enquote());
             else
-                return Settings.format(Name,Value);
+                return Settings.format(text.ifempty(Name, "<anonymous>"), Value);
         }
 
         public string Format()

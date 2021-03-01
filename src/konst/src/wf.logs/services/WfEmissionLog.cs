@@ -10,23 +10,14 @@ namespace Z0
 
     using static Part;
 
-    public interface IWfEmissionLog : IDisposable
-    {
-        ref readonly WfTableFlow<T> LogEmission<T>(in WfTableFlow<T> flow)
-            where T : struct, IRecord<T>;
-    }
-
     struct WfEmissionLog : IWfEmissionLog
     {
-        readonly FS.FilePath LogPath;
-
         readonly FileStream Emissions;
 
-        internal WfEmissionLog(Env src)
+        internal WfEmissionLog(FS.FilePath dst)
         {
-            LogPath = src.Logs.Value + FS.file("emissions", FS.Extensions.Csv);
-            LogPath.EnsureParentExists().Delete();
-            Emissions = LogPath.Stream();
+            dst.EnsureParentExists().Delete();
+            Emissions = dst.Stream();
         }
 
         public void Dispose()
@@ -35,10 +26,28 @@ namespace Z0
             Emissions?.Dispose();
         }
 
+        const string FormatPattern = "{0,-24} | {1,-24} | {2,-12} | {3,-12} | {4}";
+
+        public ref readonly WfFileFlow LogEmission(in WfFileFlow flow)
+        {
+            try
+            {
+                var count = flow.EmissionCount;
+                var status = count == 0 ? "Emitting" : "Emitted";
+                var format = string.Format(FormatPattern, flow.Token, flow.Target.Ext, status, count, flow.Target.ToUri());
+                FS.write(format + Eol, Emissions);
+            }
+            catch(Exception error)
+            {
+                term.errlabel(error, "EventLogError");
+            }
+
+            return ref flow;
+        }
+
         public ref readonly WfTableFlow<T> LogEmission<T>(in WfTableFlow<T> flow)
             where T : struct, IRecord<T>
         {
-            const string FormatPattern = "{0,-24} | {1,-24} | {2,-12} | {3,-12} | {4}";
             try
             {
                 var count = flow.EmissionCount;

@@ -24,12 +24,15 @@ namespace Z0
             Wf = wf;
             Env = env;
             Lookup = WfShell.services(components);
-            EmissionLog = new WfEmissionLog(env);
+            EmissionLog = new WfEmissionLog(target(env));
         }
 
         public void Dispose()
         {
             EmissionLog?.Dispose();
         }
+
+        static FS.FilePath target(Env env)
+            => env.Logs.Value + FS.folder("emissions") + FS.file(env.AppId.Format() + ".emissions", FS.Extensions.Log);
     }
 }

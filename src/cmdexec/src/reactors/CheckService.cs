@@ -22,7 +22,7 @@ namespace Z0
 
             var asmWf = AsmServices.workflow(Wf);
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
-            var dst = Wf.AppData + FS.file("bitmasks", FileExtensions.Asm);
+            var dst = Wf.AppData + FS.file("bitmasks", FS.Extensions.Asm);
             var routines = asmWf.Decode(methods, dst);
             Wf.CmdBuilder().CheckBitmasks().RunTask(Wf);
         }

@@ -17,15 +17,15 @@ namespace Z0
         /// <summary>
         /// The setting value
         /// </summary>
-        string Value {get;}
+        dynamic Value {get;}
     }
 
     public interface ISetting<T> : ISetting
     {
         new T Value {get;}
 
-        string ISetting.Value
-            => Value?.ToString() ?? string.Empty;
+        dynamic ISetting.Value
+            => Value;
     }
 
     public interface ISetting<K,V> : ISetting<V>
@@ -34,9 +34,6 @@ namespace Z0
 
         string ISetting.Name
             => Name.ToString();
-
-        string ISetting.Value
-            => Value.ToString();
 
         string ITextual.Format()
             => Settings.format(Name, Value);

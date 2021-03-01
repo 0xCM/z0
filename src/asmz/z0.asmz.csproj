@@ -11,6 +11,8 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CmdSpec)" />
+    <ProjectReference Include="$(Tools)" />
+
   </ItemGroup>
 
 </Project>

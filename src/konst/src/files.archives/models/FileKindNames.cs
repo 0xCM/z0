@@ -192,5 +192,10 @@ namespace Z0
         /// Defines the 'sh' literal
         /// </summary>
         public const string sh = nameof(sh);
+
+        /// <summary>
+        /// Defines the 'settings' literal
+        /// </summary>
+        public const string settings = nameof(settings);
     }
 }

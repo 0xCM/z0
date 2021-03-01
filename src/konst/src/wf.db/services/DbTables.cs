@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    using X = FileExtensions;
+    using X = FS.Extensions;
 
     public struct DbTables<S> : ITableArchive
     {

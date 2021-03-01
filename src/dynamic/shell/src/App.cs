@@ -51,14 +51,6 @@ namespace Z0
             Args = wf.Args;
         }
 
-        static void Run32(IWfShell wf)
-        {
-            var llvm = Llvm.service(wf);
-            var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
-            var cmd = WinCmd.dir(cases);
-            var runner = ScriptRunner.create();
-            runner.Run(cmd);
-        }
 
         void ShowHandlers()
         {
@@ -178,7 +170,7 @@ namespace Z0
         {
             var dst = Records.sink<ImageContent>(Receive);
             var archive = ImageArchives.tables(Wf);
-            var path = archive.Root + FS.file("image.content.genapp", FileExtensions.Csv);
+            var path = archive.Root + FS.file("image.content.genapp", FS.Extensions.Csv);
             ImageArchives.pipe(Wf, path, dst);
         }
 
@@ -305,15 +297,7 @@ namespace Z0
             }
         }
 
-        void RunScripts()
-        {
-            var runner = ScriptRunner.create(Wf.Env);
-            runner.RunCmdScript(ToolNames.clang, "codegen");
-            runner.RunCmdScript(ToolNames.clang, "parse");
-            runner.RunPsScript(clang.query, "fast-math");
-            runner.RunPsScript(clang.query, "sse-builtins");
-            runner.RunPsScript(llvm.ml, "lex");
-        }
+
 
         public void Run()
         {

@@ -35,7 +35,7 @@ namespace Z0
         {
             var dst = new DumpCliTablesCmd();
             dst.Source = src;
-            dst.Target = wf.Db.Doc(src.FileName.WithoutExtension.Name, FileExtensions.Txt);
+            dst.Target = wf.Db.Doc(src.FileName.WithoutExtension.Name, FS.Extensions.Txt);
             return dst;
         }
 
@@ -44,7 +44,7 @@ namespace Z0
         {
             var dst = new DumpCliTablesCmd();
             dst.Source = FS.path(src.Location);
-            dst.Target = wf.Db.Doc(dst.Source.FileName.WithoutExtension.Name, FileExtensions.Txt);
+            dst.Target = wf.Db.Doc(dst.Source.FileName.WithoutExtension.Name, FS.Extensions.Txt);
             return dst;
         }
     }

@@ -15,8 +15,11 @@ namespace Z0
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
 
-        FS.FolderName SubjecFolder<A,B>(A s1, B s2)
-            => FS.folder(string.Format(DbNames.delimiter, SubjectFolder(s1), SubjectFolder(s2)));
+        FS.FolderPath SettingsRoot()
+            => Root + FS.folder(settings);
+
+        FS.FilePath SettingsPath(string id)
+            => SettingsRoot() + FS.file(id, Settings);
 
         FS.FolderPath PackageRoot()
             => Env.Packages.Value;
@@ -90,8 +93,10 @@ namespace Z0
         FS.FolderPath CmdLogRoot()
             => LogRoot() + FS.folder(commands);
 
-        FS.FilePath CmdLog(string id)
-            => CmdLogRoot() + FS.file(id, Log);
+        FS.FilePath CmdLog(ScriptId id)
+            => CmdLogRoot() + (id.IsDiscriminated
+                ? FS.file(string.Format("{0}-{1}", id.Id, id.Token), Log)
+                : FS.file(id.Format(), Log));
 
         FS.FolderPath EtlRoot()
             => Root + FS.folder(etl);
@@ -298,14 +303,17 @@ namespace Z0
         FS.FolderPath ToolScriptDir(ToolId tool)
             => ToolScriptRoot() + FS.folder(tool.Format());
 
-        FS.FilePath ToolScriptFile(ToolId tool, Name name, FS.FileExt? ext = null)
-            => ToolScriptDir(tool) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
+        FS.FilePath ToolScript(ToolId tool, ScriptId script, FS.FileExt? ext = null)
+            => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
+
+        FS.FilePath Script(ToolId tool, FS.FileName file)
+            => ToolScriptDir(tool) +  file;
 
         FS.FolderPath ToolScriptDir<K>(K kind)
             => ToolScriptRoot() + FS.folder(kind.ToString());
 
-        FS.FilePath ToolScriptFile<K>(K kind, Name name, FS.FileExt? ext = null)
-            => ToolScriptDir(kind) + FS.file(name.Format(), ext ?? FS.Extensions.Cmd);
+        FS.FilePath ToolScript<K>(K kind, ScriptId script, FS.FileExt? ext = null)
+            => ToolScriptDir(kind) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
 
         FS.FolderPath ToolCatalogRoot()
             => DevRoot("tooling") + FS.folder("catalog");
@@ -340,6 +348,9 @@ namespace Z0
 
     public interface IWfDb : IDbPaths
     {
+        FS.FilePath EmitSettings<T>(T settings)
+            where T : ISettingsSet<T>, new();
+
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;
 

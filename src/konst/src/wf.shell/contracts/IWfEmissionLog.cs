@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial class text
+    public interface IWfEmissionLog : IDisposable
     {
-        public static int hash(string src)
-            => (src ?? EmptyString).GetHashCode();
+        ref readonly WfTableFlow<T> LogEmission<T>(in WfTableFlow<T> flow)
+            where T : struct, IRecord<T>;
+
+        ref readonly WfFileFlow LogEmission(in WfFileFlow flow);
     }
 }

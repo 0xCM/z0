@@ -46,8 +46,6 @@ namespace Z0
 
         WfExecToken NextExecToken();
 
-        WfExecToken CloseExecToken(WfExecToken src);
-
         WfServices Services {get;}
 
         Env Env {get;}
@@ -61,6 +59,9 @@ namespace Z0
         WfTableFlow<T> TableFlow<T>(FS.FilePath dst)
             where T : struct, IRecord<T>
                 => new WfTableFlow<T>(this, dst, NextExecToken());
+
+        WfFileFlow Flow(FS.FilePath dst)
+                => new WfFileFlow(this, dst, NextExecToken());
 
         CmdBuilder CmdBuilder()
             => new CmdBuilder(this);

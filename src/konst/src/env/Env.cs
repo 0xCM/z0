@@ -11,6 +11,9 @@ namespace Z0
 
     public class Env : IEnvProvider
     {
+        public PartId AppId
+            => Assembly.GetEntryAssembly().Id();
+
         public static Env create()
             => new Env();
 

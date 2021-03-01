@@ -95,7 +95,7 @@ namespace Z0
             var count = (uint)entries.Length;
 
             var f = Table.formatter<ContentLibField>();
-            var target = wf.Db().RefDataRoot() + FS.file("index", FileExtensions.Csv);
+            var target = wf.Db().RefDataRoot() + FS.file("index", FS.Extensions.Csv);
             var emitting = wf.EmittingTable<DocLibEntry>(target);
             for(var i=0u; i<count; i++)
             {

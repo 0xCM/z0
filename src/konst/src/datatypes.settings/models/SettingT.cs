@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a value-parametric application setting
     /// </summary>
-    public readonly struct Setting<T>
+    public readonly struct Setting<T> : ISetting<T>
     {
         /// <summary>
         /// The setting name
@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The setting value
         /// </summary>
-        public readonly T Value;
+        public T Value {get;}
 
         [MethodImpl(Inline)]
         public Setting(string name, T value)

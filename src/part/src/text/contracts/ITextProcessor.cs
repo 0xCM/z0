@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
-    partial class text
+    public interface ITextProcessor<T>
     {
-        public static int hash(string src)
-            => (src ?? EmptyString).GetHashCode();
+        Outcome Parse(string src, out T dst);
+
+        void Render(in T src, ITextBuffer dst);
+
+        string Format(in T src);
     }
 }

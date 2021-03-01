@@ -15,10 +15,10 @@ namespace Z0
     {
         public string Name {get;}
 
-        public string Value {get;}
+        public dynamic Value {get;}
 
         [MethodImpl(Inline)]
-        public JsonSetting(string name, string value)
+        public JsonSetting(string name, dynamic value)
         {
             Name = name;
             Value = value;

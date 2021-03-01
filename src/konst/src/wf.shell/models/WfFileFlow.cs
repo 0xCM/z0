@@ -9,8 +9,7 @@ namespace Z0
 
     using static Part;
 
-   public readonly struct WfTableFlow<T>
-        where T : struct, IRecord<T>
+    public readonly struct WfFileFlow
     {
         readonly IWfShell Wf;
 
@@ -21,7 +20,7 @@ namespace Z0
         public Count EmissionCount {get;}
 
         [MethodImpl(Inline)]
-        internal WfTableFlow(IWfShell wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
+        internal WfFileFlow(IWfShell wf, FS.FilePath dst, in WfExecToken token, uint count = 0)
         {
             Wf = wf;
             Token = token;
@@ -30,15 +29,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfTableFlow<T> WithCount(Count count)
-            => new WfTableFlow<T>(Wf, Target, Token, count);
+        public WfFileFlow WithCount(Count count)
+            => new WfFileFlow(Wf, Target, Token, count);
 
         [MethodImpl(Inline)]
-        public WfTableFlow<T> WithToken(WfExecToken token)
-            => new WfTableFlow<T>(Wf, Target, token, EmissionCount);
+        public WfFileFlow WithToken(WfExecToken token)
+            => new WfFileFlow(Wf, Target, token, EmissionCount);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfExecFlow(WfTableFlow<T> src)
+        public static implicit operator WfExecFlow(WfFileFlow src)
             => new WfExecFlow(src.Wf, src.Token);
     }
 }

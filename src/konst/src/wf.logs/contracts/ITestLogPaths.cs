@@ -18,6 +18,6 @@ namespace Z0
             => Root + FS.folder("logs");
 
         FS.FilePath BenchLogPath
-            => TestLogRoot + FS.folder(StatusFolder) + FS.file($"{AppName}.bench", FileExtensions.Csv);
+            => TestLogRoot + FS.folder(StatusFolder) + FS.file($"{AppName}.bench", FS.Extensions.Csv);
     }
 }

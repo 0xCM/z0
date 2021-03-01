@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static Toolsets;
 
     class App : WfService<App>
     {
@@ -316,6 +317,25 @@ namespace Z0.Asm
             }
         }
 
+
+        // static void Run32(IWfShell wf)
+        // {
+        //     var llvm = Llvm.service(wf);
+        //     var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
+        //     var cmd = WinCmd.dir(cases);
+        //     var runner = ScriptRunner.create();
+        //     runner.Run(cmd);
+        // }
+
+        void RunScripts()
+        {
+            var runner = ScriptRunner.create(Wf.Env);
+            runner.RunCmdScript(clang.name, "codegen");
+            runner.RunCmdScript(clang.name, "parse");
+            runner.RunPsScript(clang.name, "fast-math");
+            runner.RunPsScript(llvm.ml, "lex");
+        }
+
         void EmitIntrinsicsInfo()
         {
             var doc = IntelIntrinsics.doc();
@@ -335,9 +355,11 @@ namespace Z0.Asm
         public unsafe void Run()
         {
             //EmitIntrinsicsInfo();
+            RunScripts();
 
-
-
+            // var settings = EtlSettings.@default();
+            // var saved = Db.EmitSettings(settings);
+            // Wf.Row(settings);
 
             //var test = "adfadfaldfkadsf&>";
 

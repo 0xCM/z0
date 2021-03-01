@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
-    using System.Text;
 
-    partial class text
+    using static Part;
+    using static memory;
+
+    partial class XTend
     {
-        [Op]
-        public static MemoryStream stream(string data, Encoding? encoding = null)
-            => new MemoryStream((encoding ?? Encoding.UTF8).GetBytes(data));
+        [MethodImpl(Inline)]
+        public static SettingsLookup Settings(this ISettingsSet src)
+            => new SettingsLookup(src.Settings);
     }
 }

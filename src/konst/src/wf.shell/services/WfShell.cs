@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
 
+
     [ApiHost(ApiNames.WfShell, true)]
     public partial class WfShell : IWfShell
     {
@@ -50,16 +51,16 @@ namespace Z0
 
         public Env Env {get;}
 
+        TokenDispenser Tokens;
+
         long StartToken;
 
         long EndToken;
 
-        ExecTokens Tokens {get;}
-            = ExecTokens.init();
-
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {
+            Tokens = TokenDispenser.acquire();
             Init = config;
             Env = Z0.Env.create();
             Context = config.Shell;
@@ -83,6 +84,7 @@ namespace Z0
 
         internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
+            Tokens = TokenDispenser.acquire();
             Env = Z0.Env.create();
             Init = config;
             Context = config.Shell;
@@ -106,34 +108,28 @@ namespace Z0
 
         public WfExecToken Ran(WfExecFlow src)
         {
-            var token = CloseExecToken(src.Token);
-            Tokens.TryAdd(token.Started, token);
+            var token = Tokens.CloseExecToken(src.Token);
             return token;
         }
 
         public WfExecToken Ran<T>(WfExecFlow<T> src)
         {
-            var token = CloseExecToken(src.Token);
+            var token = Tokens.CloseExecToken(src.Token);
             WfEvents.signal(this).Ran(src.Data);
-            Tokens.TryAdd(token.Started, token);
             return token;
         }
 
         public WfExecToken Ran<T,D>(WfExecFlow<T> src, D data)
         {
-            var token = CloseExecToken(src.Token);
+            var token = Tokens.CloseExecToken(src.Token);
             WfEvents.signal(this).Ran(data);
-            Tokens.TryAdd(token.Started, token);
             return token;
         }
 
         [MethodImpl(Inline)]
         public WfExecToken NextExecToken()
-            => new WfExecToken((ulong)root.atomic(ref StartToken));
+            => Tokens.NextExecToken();
 
-        [MethodImpl(Inline)]
-        public WfExecToken CloseExecToken(WfExecToken src)
-            => src.Complete((ulong)root.atomic(ref EndToken));
 
         public void Dispose()
         {

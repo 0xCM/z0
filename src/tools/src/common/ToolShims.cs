@@ -31,7 +31,7 @@ namespace Z0
             root.require(config.Source.Exists, () => $"The file {config.Source}, it must exist");
 
             var refs = CsLang.pe(typeof(object), typeof(Enumerable), typeof(ProcessStartInfo));
-            var dst = FS.create(config.OutDir) + FS.file(config.Name, FileExtensions.Exe);
+            var dst = FS.create(config.OutDir) + FS.file(config.Name, FS.Extensions.Exe);
             var code = new ToolShimCode(dst);
             return CsLang.compilation(config.Name, refs, CsLang.parse(code.Generate()));
         }

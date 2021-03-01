@@ -9,7 +9,7 @@ namespace Z0.Tooling
 
     using static DumpBin.Flag;
 
-    using X = FileExtensions;
+    using X = FS.Extensions;
 
     public partial struct DumpBin
     {
