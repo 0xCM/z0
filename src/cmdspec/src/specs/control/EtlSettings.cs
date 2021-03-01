@@ -38,6 +38,8 @@ namespace Z0
 
         public Setting<bool> EmitAsmBranches;
 
+        public Setting<bool> EmitIntrinsicsInfo;
+
         public static EtlSettings @default()
         {
             var dst = new EtlSettings();
@@ -56,6 +58,7 @@ namespace Z0
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;
             dst.EmitAsmBranches = true;
+            dst.EmitIntrinsicsInfo = true;
             return dst;
         }
 

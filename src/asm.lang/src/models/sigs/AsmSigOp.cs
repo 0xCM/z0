@@ -9,6 +9,9 @@ namespace Z0.Asm
 
     using static Part;
 
+    /// <summary>
+    /// Represents an operand in the context of an instruction signature
+    /// </summary>
     public readonly struct AsmSigOp
     {
         public AsmSigOpKind Kind {get;}

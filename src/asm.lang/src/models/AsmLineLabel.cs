@@ -62,5 +62,4 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
     }
-
 }

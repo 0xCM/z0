@@ -10,6 +10,7 @@ namespace Z0.Lang
 
     partial struct Prototypes
     {
+
         [Op]
         public static void loop1(Action<uint> f)
         {

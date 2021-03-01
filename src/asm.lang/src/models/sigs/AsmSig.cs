@@ -11,16 +11,13 @@ namespace Z0.Asm
 
     public readonly struct AsmSig
     {
-        public AsmSigIdentifier Identifier {get;}
-
         public AsmMnemonicCode Mnemonic {get;}
 
         public Index<AsmSigOp> Operands {get;}
 
         [MethodImpl(Inline)]
-        public AsmSig(AsmSigIdentifier identifier, AsmMnemonicCode mnenonic, Index<AsmSigOp> operands)
+        public AsmSig(AsmMnemonicCode mnenonic, Index<AsmSigOp> operands)
         {
-            Identifier = identifier;
             Mnemonic = mnenonic;
             Operands = operands;
         }

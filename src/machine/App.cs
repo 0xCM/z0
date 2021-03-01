@@ -48,6 +48,9 @@ namespace Z0
                 if(Options.EmitAsmCatalogs)
                     AsmCatalogService.create(Wf).TransformSource();
 
+                if(Options.EmitIntrinsicsInfo)
+                    IntelIntrinsics.create(Wf).Emit();
+
                 if(Options.EmitLiteralCatalogs)
                 {
                     EmitFieldLiterals.create().Run(Wf);

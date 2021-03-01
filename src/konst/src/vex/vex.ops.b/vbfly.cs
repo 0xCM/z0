@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static cpu;
     using static BitMasks.Literals;
 
     partial struct gcpu

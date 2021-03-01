@@ -14,12 +14,20 @@ namespace Z0.Asm
 
     public partial class IntelIntrinsics : WfService<IntelIntrinsics>
     {
-        public static string format(Return src)
+        public void Emit()
         {
-            if(text.nonempty(src.memwidth))
-                return src.memwidth;
-            else
-                return src.type;
+            var doc = IntelIntrinsics.doc();
+            var name = "intel-intrinsics";
+            Db.Doc(name, FS.Extensions.Xml).Overwrite(doc.Content);
+            var intrinsics = Wf.IntelIntrinsics();
+            var elements = intrinsics.Parse(doc).View;
+            var count = elements.Length;
+            var path = Db.Doc(name, FS.Extensions.Log);
+            var flow = Wf.EmittingFile(path);
+            using var writer = path.Writer();
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(elements,i).Format());
+            Wf.EmittedFile(flow, count);
         }
 
         public static XmlDoc doc()
@@ -148,30 +156,23 @@ namespace Z0.Asm
         }
 
         static void read(XmlReader reader, ref CpuId dst)
-        {
-            dst.Content = reader.ReadInnerXml();
-        }
+            => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Category dst)
-        {
-            dst.Content = reader.ReadInnerXml();
-        }
+            => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Header dst)
-        {
-            dst.Content = reader.ReadInnerXml();
-        }
+            => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Description dst)
-        {
-            dst.Content = reader.ReadInnerXml();
-        }
+            => dst.Content = reader.ReadInnerXml();
 
         static void read(XmlReader reader, ref Return dst)
         {
-            dst.varname = reader[nameof(Parameter.varname)];
-            dst.etype = reader[nameof(Parameter.etype)];
-            dst.memwidth =  reader[nameof(Parameter.memwidth)];
+            dst.varname = reader[nameof(Return.varname)];
+            dst.etype = reader[nameof(Return.etype)];
+            dst.type = reader[nameof(Return.type)];
+            dst.memwidth =  reader[nameof(Return.memwidth)];
         }
 
         static void read(XmlReader reader, Parameters dst)

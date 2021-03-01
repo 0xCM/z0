@@ -316,7 +316,6 @@ namespace Z0.Asm
             }
         }
 
-
         // static void Run32(IWfShell wf)
         // {
         //     var llvm = Llvm.service(wf);
@@ -335,29 +334,9 @@ namespace Z0.Asm
             runner.RunPsScript(llvm.ml, "lex");
         }
 
-        void EmitIntrinsicsInfo()
-        {
-            var doc = IntelIntrinsics.doc();
-            Db.AppLog("intrinsics", FS.Extensions.Xml).Overwrite(doc.Content);
-            var intrinsics = Wf.IntelIntrinsics();
-
-            var elements = intrinsics.Parse(doc).View;
-            var count = elements.Length;
-            using var writer = Db.AppLog("intrinsics").Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var element = ref skip(elements,i);
-                writer.WriteLine(element.Format());
-            }
-        }
-
         public unsafe void Run()
         {
-            //EmitIntrinsicsInfo();
-            //RunScripts();
-
-            using var xed = XedWf.create(Wf);
-            xed.Run();
+            IntelIntrinsics.create(Wf).Emit();
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

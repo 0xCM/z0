@@ -8,23 +8,20 @@ namespace Z0.Asm
 
     partial class IntelIntrinsics
     {
-        /// <summary>
-        /// [return type="unsigned char" varname="c_in" etype="UI8"]
-        /// </summary>
         public struct Return : ITextual
         {
             public const string ElementName = "return";
 
             public string varname;
 
-            public string type;
+            public DataType type;
 
             public string etype;
 
             public string memwidth;
 
             public string Format()
-                => format(this);
+                => type.Format();
 
             public override string ToString()
                 => Format();

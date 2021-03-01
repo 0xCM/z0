@@ -357,9 +357,6 @@ namespace Z0.Asm
 
         RegClass = P2ᐞ08,
 
-        MemClass = P2ᐞ09,
-
-        RmClass = RegClass | MemClass,
 
         ImmClass = P2ᐞ11,
     }

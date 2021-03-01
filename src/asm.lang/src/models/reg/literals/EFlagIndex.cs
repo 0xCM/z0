@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     /// <summary>
     /// Defines the bitfield index of the flags defined by <see cref='EFlagKind'/>
     /// </summary>
