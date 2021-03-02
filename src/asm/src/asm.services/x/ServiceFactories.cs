@@ -47,9 +47,6 @@ namespace Z0
         public static ApiCaptureService ApiCapture(this IWfShell wf, IAsmContext asm)
             => Z0.Asm.AsmServices.apicapture(wf, asm);
 
-        // public static ApiCaptureRunner CaptureRunner(this IWfShell wf, IAsmContext asm)
-        //     => ApiCaptureRunner.create(wf);
-
         public static QuickCapture CaptureQuick(this IWfShell wf, IAsmContext asm)
             => Capture.quick(wf,asm);
 

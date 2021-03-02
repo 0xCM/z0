@@ -16,8 +16,6 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly WfHost Host;
-
         readonly IAsmContext Asm;
 
         readonly CilEmitter CilSvc;
@@ -26,8 +24,7 @@ namespace Z0
 
         public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = WfShell.host(nameof(ApiCaptureEmitter));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Asm = asm;
             CilSvc = CilEmitter.create(Wf);
             AddressMatcher = AsmAddressMatcher.create(wf);

@@ -53,7 +53,7 @@ namespace Z0.Asm
 
         [Op]
         public static ApiCaptureService apicapture(IWfShell wf, IAsmContext asm)
-            => new ApiCaptureService(wf, asm);
+            => ApiCaptureService.create(wf);
 
         [Op]
         public static ApiResCapture ResCapture(IWfShell wf)

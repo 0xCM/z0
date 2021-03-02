@@ -13,34 +13,22 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct ApiCaptureService : IDisposable
+    public sealed class ApiCaptureService : WfService<ApiCaptureService>
     {
-        readonly IWfShell Wf;
+        IAsmContext Asm;
 
-        readonly IAsmContext Asm;
+        ApiMemberExtractor Extractor;
 
-        readonly WfHost Host;
+        ApiServices Services;
 
-        readonly ApiMemberExtractor Extractor;
+        ApiCaptureEmitter Emitter;
 
-        readonly IApiJit Jitter;
-
-        [MethodImpl(Inline)]
-        public ApiCaptureService(IWfShell wf, IAsmContext asm)
+        protected override void OnInit()
         {
-            Host = WfShell.host(nameof(ApiCaptureService));
-            Wf = wf.WithHost(Host);
-            Asm = asm;
-            Wf.Created();
+            Asm = Wf.AsmContext();
             Extractor = ApiCodeExtractors.service();
-            var services = wf.ApiServices();
-
-            Jitter = services.ApiJit();
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed();
+            Services = Wf.ApiServices();
+            Emitter = Wf.CaptureEmitter(Asm);
         }
 
         public Index<AsmMemberRoutine> CaptureApi()
@@ -96,9 +84,7 @@ namespace Z0
             var flow = Wf.Running(api.Name);
             try
             {
-                var ops = ExtractHostOps(api);
-                var emitter = Wf.CaptureEmitter(Asm);
-                routines = emitter.Emit(api.Uri, ops);
+                routines = Emitter.Emit(api.Uri, ExtractHostOps(api));
             }
             catch(Exception e)
             {
@@ -112,7 +98,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Jitter.Jit(host));
+                return Extractor.Extract(Services.ApiJit().Jit(host));
             }
             catch(Exception e)
             {
@@ -125,11 +111,11 @@ namespace Z0
         {
             var dst = root.list<AsmMemberRoutine>();
             var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
-            for(var i=0; i<extracted.Length; i++)
+            var count = extracted.Length;
+            for(var i=0; i<count; i++)
             {
-                ref readonly var x = ref skip(extracted,i);
-                var emititter = Wf.CaptureEmitter(Asm);
-                dst.AddRange(emititter.Emit(x.Key, x.Value));
+                ref readonly var extracts = ref skip(extracted,i);
+                dst.AddRange(Emitter.Emit(extracts.Key, extracts.Value));
             }
             return dst.ToArray();
         }
@@ -138,7 +124,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Jitter.Jit(types));
+                return Extractor.Extract(Services.ApiJit().Jit(types));
             }
             catch(Exception e)
             {
