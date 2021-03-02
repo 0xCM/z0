@@ -28,12 +28,13 @@ namespace Z0
             EmitDump();
         }
 
-        void RunPrimary(Index<PartId> parts)
+        Index<AsmRoutine> RunPrimary(Index<PartId> parts)
         {
             var flow = Wf.Running("ApiCapture");
             using var step = Wf.ApiCapture(Asm);
-            step.CaptureApi();
+            var captured = step.CaptureApi();
             Wf.Ran(flow);
+            return captured;
         }
 
         void EmitImm(Index<PartId> parts)
