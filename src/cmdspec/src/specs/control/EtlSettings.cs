@@ -54,7 +54,7 @@ namespace Z0
             dst.EmitCliConstants = true;
             dst.EmitLiteralCatalogs = true;
             dst.EmitAsmCatalogs = true;
-            dst.EmitAsmSemantic = false;
+            dst.EmitAsmSemantic = true;
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;
             dst.EmitAsmBranches = true;
