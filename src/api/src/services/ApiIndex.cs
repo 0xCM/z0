@@ -51,6 +51,9 @@ namespace Z0
         public static ApiOpIndex<ApiCodeBlock> create(ApiCodeBlock[] src)
             => distill(src.Select(x => (x.OpUri.OpId, x)));
 
+        public static ApiOpIndex<ApiCodeBlock> create(ApiCodeBlocks src)
+            => distill(src.Blocks.Storage.Select(x => (x.OpUri.OpId, x)));
+
         [Op, Closures(UInt64k)]
         public static ApiOpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)
         {

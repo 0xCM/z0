@@ -13,7 +13,7 @@ namespace Z0
         /// Closes generic operations over the set of primal types that each operation supports
         /// </summary>
         /// <param name="generics">Metadata for generic operations</param>
-        public static ApiHexIndex ApiHexIndexer(this IWfShell wf)
-             => Z0.ApiHexIndex.create(wf);
+        public static ApiHexIndexer ApiHexIndexer(this IWfShell wf)
+             => Z0.ApiHexIndexer.create(wf);
     }
 }

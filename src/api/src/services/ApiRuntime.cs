@@ -18,34 +18,6 @@ namespace Z0
         public static string format(in ApiRuntimeMember src)
             => string.Format(RenderPattern, src.Address, src.Uri, src.Sig, src.Cil);
 
-        public static ApiHostCatalog catalog(IApiHost host, ApiMembers members)
-            => new ApiHostCatalog(host, members.Sort());
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public static ApiHostCatalog catalog(IWfShell wf, IApiHost src)
-        {
-            var flow = wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
-            var jit = ApiJit.create(wf);
-            var members = jit.Jit(src);
-            var result = members.Length == 0 ? ApiHostCatalog.Empty : catalog(src, members);
-            wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
-            return result;
-        }
-
-        /// <summary>
-        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="src">The host type</param>
-        [Op]
-        public static ApiHostCatalog catalog(IWfShell wf, Type src)
-            => catalog(wf, ApiCatalogs.ApiHost(src));
-
         [Op]
         public static Outcome<FS.FilePath> EmitRuntimeIndex(IWfShell wf)
         {
@@ -74,6 +46,7 @@ namespace Z0
             var hosts = @readonly(wf.Api.ApiHosts);
             var kHost = (uint)hosts.Length;
             var buffer = root.list<ApiRuntimeMember>();
+            var services = wf.ApiServices();
 
             var flow = wf.Running(Msg.IndexingHosts.Format(kHost));
 
@@ -81,7 +54,7 @@ namespace Z0
             for(var i=0; i<kHost; i++)
             {
                 var host = skip(hosts,i);
-                var hostcat = catalog(wf, host);
+                var hostcat = services.HostCatalog(host);
                 var component = host.HostType.Assembly;
                 var members = @readonly(hostcat.Members.Storage);
                 var apicount = (uint)members.Length;
@@ -113,5 +86,11 @@ namespace Z0
             dst.Cil = src.Cil;
             return ref dst;
         }
+    }
+
+    partial struct Msg
+    {
+        public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
+
     }
 }

@@ -4,8 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiHexIndex : IWfService
+    using System;
+    using System.Collections.Generic;
+
+    using static memory;
+
+    public class UriCode : Dictionary<OpUri,ApiCodeBlock>
     {
-        ApiCodeBlocks IndexApiBlocks();
+        public static UriCode Empty => new UriCode();
     }
 }

@@ -196,10 +196,8 @@ namespace Z0.Asm
 
         void CheckIndexDecoder()
         {
-            var decoder = AsmServices.IndexDecoder();
-            var indexer = ApiServices.HexIndexService();
-            var blocks = indexer.IndexApiBlocks();
-            var dataset = decoder.Decode(blocks);
+            var blocks = ApiServices.HexIndexer().IndexApiBlocks();
+            var dataset = AsmServices.IndexDecoder().Decode(blocks);
         }
 
         void TestRel32()
@@ -266,7 +264,7 @@ namespace Z0.Asm
             archive.CodeBlocks(part, accept);
         }
 
-        void RunEvaluate()
+        void Correlate()
         {
             var catalogs = Wf.Api.PartCatalogs();
             ApiServices.Correlate(catalogs);
@@ -334,11 +332,17 @@ namespace Z0.Asm
             runner.RunPsScript(llvm.ml, "lex");
         }
 
-        public unsafe void Run()
+        void CheckToolCatalog()
         {
             var catalog = Tools.catalog(Wf);
             var index = catalog.UpdateHelpIndex();
             root.iter(index, entry => Wf.Row(entry.HelpPath));
+
+        }
+        public unsafe void Run()
+        {
+
+            Correlate();
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

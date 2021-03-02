@@ -8,33 +8,16 @@ namespace Z0
 
     using Z0.Asm;
 
-
-    class Machine : IDisposable
+    class Machine : WfService<Machine>
     {
-        readonly IWfShell Wf;
-
-        readonly WfHost Host;
-
-        readonly IAsmContext Asm;
-
-        readonly CmdBuilder Commands;
+        CmdBuilder Commands;
 
         EtlSettings Options;
 
-        internal Machine(IWfShell wf, IAsmContext asm)
+        protected override void OnInit()
         {
-            Host = WfShell.host(typeof(Machine));
-            Wf = wf.WithHost(Host);
-            Asm = asm;
             Commands = Wf.CmdBuilder();
-            Wf.Created();
             Options = EtlSettings.@default();
-        }
-
-
-        public void Dispose()
-        {
-            Wf.Disposed();
         }
 
         public void Run()
@@ -43,7 +26,9 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                ApiCode.EmitHexIndex(Wf);
+                //ApiCode.EmitHexIndex(Wf);
+
+                Wf.ApiServices().Correlate();
 
                 if(Options.EmitAsmCatalogs)
                     AsmCatalogService.create(Wf).TransformSource();
@@ -130,26 +115,23 @@ namespace Z0
             => app(shell(args)).Run();
 
         static App app(IWfShell wf)
-            => new App(wf, AsmServices.context(wf));
+            => new App(wf);
 
         static IWfShell shell(string[] args)
             => WfShell.create(args).WithRandom(Rng.@default());
 
         IWfShell Wf;
 
-        IAsmContext Asm;
-
-        App(IWfShell wf, IAsmContext asm)
+        App(IWfShell wf)
         {
             Wf = wf;
-            Asm = asm;
         }
 
         void Run()
         {
             try
             {
-                using var machine = new Machine(Wf, Asm);
+                using var machine = Machine.create(Wf);
                 machine.Run();
             }
             catch(Exception e)

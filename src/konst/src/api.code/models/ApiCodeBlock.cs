@@ -38,6 +38,10 @@ namespace Z0
             Code = code;
         }
 
+        [MethodImpl(Inline)]
+        public bool StartsWith(byte src)
+            => Code.IsNonEmpty ? Code[0] == src : false;
+
         public byte[] Storage
         {
             [MethodImpl(Inline)]

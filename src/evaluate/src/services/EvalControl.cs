@@ -33,8 +33,9 @@ namespace Z0
             if(!src.Exists)
                 return;
 
+            var services = Wf.ApiServices();
             var flow = Wf.Running($"Running {host.Format()} evaluaton workflow");
-            var catalog = ApiRuntime.catalog(Wf, Wf.Api.FindHost(host).Require());
+            var catalog = services.HostCatalog(Wf.Api.FindHost(host).Require());
             if(catalog.IsEmpty)
                 return;
 

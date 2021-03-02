@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
 
@@ -17,12 +18,27 @@ namespace Z0
 
         PartCodeIndex PartIndex;
 
+        UriCode UriCode;
+
         [MethodImpl(Inline)]
-        public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex code)
+        public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
         {
             CodeAddresses = memories;
             UriLocations = memuri;
-            PartIndex = code;
+            PartIndex = parts;
+            UriCode = code;
+        }
+
+        public ApiIndexMetrics CalcMetrics()
+        {
+            var stats = default(ApiIndexMetrics);
+            stats.PartCount = Parts.Count;
+            stats.HostCount = Hosts.Count;
+            stats.AddressCount = Addresses.Count;
+            stats.FunctionCount = Blocks.Count;
+            stats.IdentityCount = Identities.Count;
+            stats.ByteCount = Blocks.Storage.Sum(x => x.Length);
+            return stats;
         }
 
         public Index<PartId> Parts
@@ -87,6 +103,12 @@ namespace Z0
             => CodeAddresses[location];
 
         [MethodImpl(Inline)]
+        public bool Code(OpUri uri, out ApiCodeBlock dst)
+        {
+            return UriCode.TryGetValue(uri, out dst);
+        }
+
+        [MethodImpl(Inline)]
         public ApiHostCode HostCodeBlocks(ApiHostUri host)
         {
             if(PartIndex.HostCode(host, out var code))
@@ -120,7 +142,7 @@ namespace Z0
         public static ApiCodeBlocks Empty
         {
             [MethodImpl(Inline)]
-            get => new ApiCodeBlocks(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty);
+            get => new ApiCodeBlocks(PartCodeAddresses.Empty, PartUriAddresses.Empty, PartCodeIndex.Empty, UriCode.Empty);
         }
     }
 }

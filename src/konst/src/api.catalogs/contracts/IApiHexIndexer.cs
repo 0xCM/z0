@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Z0.Asm;
-
-    public interface IApiIndexDecoder : IWfService
+    public interface IApiHexIndexer : IWfService
     {
-        ApiAsmDataset Decode(ApiCodeBlocks src);
-
-        ApiHostRoutines Decode(ApiHostCode src);
+        ApiCodeBlocks IndexApiBlocks();
     }
 }

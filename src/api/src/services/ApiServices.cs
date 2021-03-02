@@ -15,17 +15,49 @@ namespace Z0
     using static TextRules;
     using static Sequential;
 
-    public sealed class ApiServices : WfService<ApiServices,IApiServices>, IApiServices
+    partial struct Msg
     {
+        public static MsgPattern<Count> CorrelatingParts => "Correlating {0} part catalogs";
+
+        public static MsgPattern<string> CorrelatingOperations => "Correlating {0} operations";
+    }
+
+    public sealed class ApiServices : WfService<ApiServices>
+    {
+        public IApiJit ApiJit {get; private set;}
+
+        public IApiHexIndexer HexIndexer()
+            => ApiHexIndexer.create(Wf);
+
         public ApiMemberBlocks Correlate()
+            => Correlate(Wf.Api.PartCatalogs());
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        public ApiHostCatalog HostCatalog(Type src)
+            => HostCatalog(ApiCatalogs.ApiHost(src));
+
+        /// <summary>
+        /// Returns a <see cref='ApiHostCatalog'/> for a specified host
+        /// </summary>
+        /// <param name="wf">The workflow context</param>
+        /// <param name="src">The host type</param>
+        [Op]
+        public ApiHostCatalog HostCatalog(IApiHost src)
         {
-            var catalogs = Wf.Api.PartCatalogs();
-            return Correlate(catalogs);
+            var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
+            var members = ApiJit.Jit(src);
+            var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
+            Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
+            return result;
         }
 
         public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
         {
-            var flow = Wf.Running($"Correlating parts across {src.Count} catalogs");
+            var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Count));
             var reader = ApiCode.reader(Wf);
             var count = src.Length;
             var dst = root.list<ApiMemberCode>();
@@ -33,7 +65,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var part = src[i];
-                var inner = Wf.Running($"Correlating {part.PartId.Format()} operations");
+                var inner = Wf.Running(Msg.CorrelatingOperations.Format(part.PartId.Format()));
                 var hosts = part.ApiHosts.View;
                 var kHost = hosts.Length;
                 for(var j=0; j<kHost; j++)
@@ -43,7 +75,7 @@ namespace Z0
                     if(hexpath.Exists)
                     {
                         var blocks = reader.Read(hexpath);
-                        var catalog = ApiRuntime.catalog(Wf, Wf.Api.FindHost(host.Uri).Require());
+                        var catalog = HostCatalog(Wf.Api.FindHost(host.Uri).Require());
                         Correlate(catalog, blocks, dst, records);
                     }
                 }
@@ -95,19 +127,19 @@ namespace Z0
             return ref dst;
         }
 
-        public IApiJit ApiJit()
-            => Z0.ApiJit.create(Wf);
+
+        protected override void OnInit()
+        {
+            ApiJit = Z0.ApiJit.create(Wf);
+        }
 
         public Index<DataType> DataTypes()
             => Z0.DataTypes.search(Wf.Components);
 
-        public IApiHexIndex HexIndexService()
-            => ApiHexIndex.create(Wf);
 
         public BasedApiMemberCatalog RebaseMembers()
         {
-            var jitter = ApiJit();
-            var members = jitter.JitApi();
+            var members = ApiJit.JitApi();
             return RebaseMembers(members);
         }
 
@@ -210,7 +242,7 @@ namespace Z0
             return buffer;
         }
 
-        public Index<ApiCatalogRecord> LoadRebaseEntries()
+        public Index<ApiCatalogRecord> LoadApiCatalog()
         {
             var dir = Db.IndexDir<ApiCatalogRecord>();
             var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
@@ -263,11 +295,6 @@ namespace Z0
             dst.HostName = skip(fields, i++);
             dst.OpUri = skip(fields, i++);
             return true;
-        }
-
-        partial struct Msg
-        {
-            public static MsgPattern<Count,Count,string> FieldCountMismatch => "{0} fields were found while {1} were expected: {2}";
         }
     }
 }

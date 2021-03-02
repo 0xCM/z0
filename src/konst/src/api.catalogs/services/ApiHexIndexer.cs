@@ -11,8 +11,8 @@ namespace Z0
 
     using static memory;
 
-    [Service(typeof(IApiHexIndex))]
-    public class ApiHexIndex : WfService<ApiHexIndex,IApiHexIndex>, IApiHexIndex
+    [Service(typeof(IApiHexIndexer))]
+    public class ApiHexIndexer : WfService<ApiHexIndexer,IApiHexIndexer>, IApiHexIndexer
     {
         public ApiCodeBlocks Product;
 
@@ -20,34 +20,21 @@ namespace Z0
 
         Dictionary<MemoryAddress,ApiCodeBlock> CodeAddress;
 
-        Dictionary<MemoryAddress,OpUri> UriAddress;
+        Dictionary<MemoryAddress,OpUri> AddressUri;
 
-        Dictionary<OpUri,ApiCodeBlock> Locations;
+        UriCode UriCode;
 
-        public ApiHexIndex()
+        public ApiHexIndexer()
         {
             CodeAddress = root.dict<MemoryAddress,ApiCodeBlock>();
-            UriAddress = root.dict<MemoryAddress,OpUri>();
-            Locations = root.dict<OpUri,ApiCodeBlock>();
+            AddressUri = root.dict<MemoryAddress,OpUri>();
+            UriCode = new UriCode();
             Product = ApiCodeBlocks.Empty;
-        }
-
-        [Op]
-        static ApiIndexMetrics metrics(ApiCodeBlocks src)
-        {
-            var stats = default(ApiIndexMetrics);
-            stats.PartCount = src.Parts.Count;
-            stats.HostCount = src.Hosts.Count;
-            stats.AddressCount = src.Addresses.Count;
-            stats.FunctionCount = src.Blocks.Count;
-            stats.IdentityCount = src.Identities.Count;
-            stats.ByteCount = src.Blocks.Storage.Sum(x => x.Length);
-            return stats;
         }
 
         public ApiCodeBlocks IndexApiBlocks()
         {
-            var src = Wf.Db().ParsedExtractFiles().View;
+            var src = Db.ParsedExtractFiles().View;
             var count = src.Length;
             var flow = Wf.Running(Msg.IndexingPartFiles.Format(count));
 
@@ -69,7 +56,7 @@ namespace Z0
             IndexStatus = Status();
             Product = Freeze();
 
-            Wf.Ran(flow, metrics(Product));
+            Wf.Ran(flow, Product.CalcMetrics());
             return Product;
         }
 
@@ -89,8 +76,8 @@ namespace Z0
         Triple<bool> Include(in ApiCodeBlock src)
         {
             var a = CodeAddress.TryAdd(src.BaseAddress, src);
-            var b = UriAddress.TryAdd(src.BaseAddress, src.Uri);
-            var c = Locations.TryAdd(src.Uri, src);
+            var b = AddressUri.TryAdd(src.BaseAddress, src.Uri);
+            var c = UriCode.TryAdd(src.Uri, src);
             return root.triple(a,b,c);
         }
 
@@ -104,8 +91,8 @@ namespace Z0
         ApiIndexStatus Status()
         {
             var dst = default(ApiIndexStatus);
-            dst.Parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
-            dst.Hosts = Locations.Keys.Select(x => x.Host).Distinct().Array();
+            dst.Parts = UriCode.Keys.Select(x => x.Host.Owner).Distinct().Array();
+            dst.Hosts = UriCode.Keys.Select(x => x.Host).Distinct().Array();
             dst.Addresses = CodeAddress.Keys.Array();
             dst.MemberCount = (uint)CodeAddress.Keys.Count;
             dst.Encoded = new PartCodeAddresses(dst.Parts, CodeAddress.ToKVPairs());
@@ -115,7 +102,7 @@ namespace Z0
         ApiCodeBlocks Freeze()
         {
             var memories = CodeAddress.ToKVPairs();
-            var parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
+            var parts = UriCode.Keys.Select(x => x.Host.Owner).Distinct().Array();
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
@@ -123,8 +110,10 @@ namespace Z0
 
             return new ApiCodeBlocks(
                    new PartCodeAddresses(parts, memories),
-                   new PartUriAddresses(parts, UriAddress),
-                   new PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
+                   new PartUriAddresses(parts, AddressUri),
+                   new PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()),
+                   UriCode
+                   );
         }
     }
 }

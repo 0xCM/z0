@@ -98,7 +98,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Services.ApiJit().Jit(host));
+                return Extractor.Extract(Services.ApiJit.Jit(host));
             }
             catch(Exception e)
             {
@@ -124,7 +124,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Services.ApiJit().Jit(types));
+                return Extractor.Extract(Services.ApiJit.Jit(types));
             }
             catch(Exception e)
             {
