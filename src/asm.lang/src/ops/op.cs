@@ -8,9 +8,14 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static AsmExpr;
 
     partial struct asm
     {
+        [MethodImpl(Inline), Op]
+        public static OpCode opcode(string src)
+            => new OpCode(src);
+
         /// <summary>
         /// Generalizes a <see cref='IAsmOp{T}'/> reification
         /// </summary>

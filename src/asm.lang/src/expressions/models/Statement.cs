@@ -19,6 +19,12 @@ namespace Z0.Asm
             public Statement(TextBlock content)
                 => Content = content;
 
+            public override string ToString()
+                => Format();
+
+            public string Format()
+                => Content.Format();
+
             [MethodImpl(Inline)]
             public bool Equals(Statement src)
                 => Content.Equals(src.Content);

@@ -24,11 +24,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Contains(Identifier symbol)
+        public bool Contains(TextBlock symbol)
             => Keys.ContainsKey(symbol);
 
         [MethodImpl(Inline)]
-        public bool Index(Identifier symbol, out uint index)
+        public bool Index(TextBlock symbol, out uint index)
         {
             if(Keys.TryGetValue(symbol, out var token))
             {

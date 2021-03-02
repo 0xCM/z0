@@ -21,12 +21,15 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
 
+        readonly SymbolTable<CompositeKind> Composites;
+
         const uint MaxRowCount = 2500;
 
         const char AsmCatDelimiter = Chars.Tab;
 
         public AsmCatalogService()
         {
+            Composites = AsmExpr.composites();
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicCodes = SymbolTables.create<AsmMnemonicCode>();

@@ -82,6 +82,7 @@ namespace Z0
                 row.Position = (ushort)i;
                 row.Name = f.Name;
                 row.EncodedValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
+                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
             }
         }
     }

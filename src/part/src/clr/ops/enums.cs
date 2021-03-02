@@ -65,6 +65,7 @@ namespace Z0
                 row.DataType = kind;
                 row.Position = (ushort)i;
                 row.Name = f.Name;
+                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
                 row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
                 row.EncodedValue = encode(kind, f.GetRawConstantValue());
             }
@@ -87,6 +88,7 @@ namespace Z0
                 row.Type = type.Name;
                 row.DataType = kind;
                 row.Name = f.Name;
+                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
                 row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
                 row.DirectValue = (E)f.GetRawConstantValue();
                 row.EncodedValue = encode(kind, row.DirectValue);

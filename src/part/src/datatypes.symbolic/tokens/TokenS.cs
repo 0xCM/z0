@@ -21,10 +21,10 @@ namespace Z0
 
         public K Kind {get;}
 
-        public Name Symbol {get;}
+        public TextBlock Symbol {get;}
 
         [MethodImpl(Inline)]
-        public Token(uint index, Identifier name, K kind, Name symbol)
+        public Token(uint index, Identifier name, K kind, TextBlock symbol)
         {
             Index = index;
             Name = name;

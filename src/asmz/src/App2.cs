@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -303,24 +304,6 @@ namespace Z0.Asm
             Wf.ResBytesEmitter().Emit();
         }
 
-
-        static void indices(string src)
-        {
-            Span<int> dst = stackalloc int[12];
-            var gt = TextRules.Query.indices(src, ">", dst);
-            for(var i=0; i<gt; i++)
-            {
-
-            }
-
-            dst.Clear();
-            var lt = TextRules.Query.indices(src, "<", dst);
-            for(var i=0; i<gt; i++)
-            {
-
-            }
-        }
-
         // static void Run32(IWfShell wf)
         // {
         //     var llvm = Llvm.service(wf);
@@ -346,10 +329,42 @@ namespace Z0.Asm
             root.iter(index, entry => Wf.Row(entry.HelpPath));
 
         }
+
+        void DistillStatements()
+        {
+            var processor = AsmRowProcessor.create(Wf);
+            var rows = processor.CreateAsmRows().Where(x => x.IP != 0).OrderBy(x => x.IP).Take(25000).Array();
+            var count = rows.Length;
+            var parser = AsmExpr.parser(Wf);
+            var formatter = Records.formatter<AsmStatementInfo>(32);
+            var dst = Db.IndexTable<AsmStatementInfo>();
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var input = ref skip(rows,i);
+                var output = new AsmStatementInfo();
+                output.Sequence = input.Sequence;
+                output.BlockAddress = input.BlockAddress;
+                output.IP = input.IP;
+                output.GlobalOffset = input.GlobalOffset;
+                output.LocalOffset = input.LocalOffset;
+                output.OpCode = asm.opcode(input.OpCode.Value);
+                parser.ParseSig(input.Instruction, out output.Sig);
+                output.Statement = asm.statement(input.Statement);
+                output.Encoded = input.Encoded;
+                writer.WriteLine(formatter.Format(output));
+            }
+
+        }
         public unsafe void Run()
         {
 
-            CheckDataReader();
+            var composites = AsmExpr.composites();
+            root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
+            // var dst = Db.IndexTable<AsmRow>();
+            // processor.Emit(rows, dst);
+
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

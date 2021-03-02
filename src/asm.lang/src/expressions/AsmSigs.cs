@@ -36,7 +36,7 @@ namespace Z0.Asm
             for(byte i=1; i<count; i++)
             {
                 ref readonly var detail = ref skip(details,i);
-                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, EmptyString);
+                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, detail.Name);
                 seek(dst,i) = Tokens.token(i, detail.Name, detail.LiteralValue, symbol);
             }
             return buffer;

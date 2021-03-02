@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public readonly struct OpCode
         {
-            readonly TextBlock Data;
+            readonly TextBlock<N32> Data;
 
             [MethodImpl(Inline)]
             public OpCode(string src)
@@ -48,7 +48,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public string Format()
-                => string.Format("{0,-32}", Data);
+                => Data.Format();
 
             public override string ToString()
                 => Format();
@@ -71,6 +71,5 @@ namespace Z0.Asm
             public static OpCode Empty
                 => new OpCode(EmptyString);
         }
-
     }
 }

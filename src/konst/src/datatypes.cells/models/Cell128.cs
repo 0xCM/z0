@@ -90,6 +90,10 @@ namespace Z0
             => api.cell128(x);
 
         [MethodImpl(Inline)]
+        public static implicit operator Cell128(ulong src)
+            => api.cell128(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)
             => api.cell128(x);
 

@@ -12,25 +12,21 @@ namespace Z0.Asm
 
     public struct AsmHexCode
     {
-        ulong Data;
+        Cell128 Data;
 
         [MethodImpl(Inline)]
-        public AsmHexCode(ulong src)
-            => Data = src;
+        internal AsmHexCode(Cell128 data)
+        {
+            Data = data;
+        }
 
         public byte Size
         {
             [MethodImpl(Inline)]
-            get => Bits.effsize(Data);
+            get => Cells.cell8(Data, 15);
         }
 
-        public byte Capacity
-        {
-            [MethodImpl(Inline)]
-            get => 8;
-        }
-
-        public Span<byte> Cells
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => bytes(Data);
@@ -38,19 +34,19 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public ref byte Cell(byte index)
-            => ref first(Cells);
+            => ref first(Bytes);
 
         [MethodImpl(Inline)]
         public ushort ToUInt16()
-            => (ushort)Data;
+            => (ushort)Data.Lo;
 
         [MethodImpl(Inline)]
         public uint ToUInt32()
-            => (uint)Data;
+            => (uint)Data.Lo;
 
         [MethodImpl(Inline)]
         public uint ToUInt64()
-            => (uint)Data;
+            => (uint)Data.Lo;
 
         public string Format()
             => Data.FormatHexData(Size);
@@ -59,12 +55,8 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmHexCode(ulong src)
-            => new AsmHexCode(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmHexCode(uint src)
-            => new AsmHexCode(src);
+        public static implicit operator AsmHexCode(BinaryCode src)
+            => asm.encoding(src.View);
 
         public static AsmHexCode Empty
         {

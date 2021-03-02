@@ -48,6 +48,11 @@ namespace Z0
 
         public E DirectValue;
 
+        /// <summary>
+        /// The symbol, if so attributed, otherwise, the identifier
+        /// </summary>
+        public TextBlock Symbol;
+
         [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral<E> src)
             => UniqueName.CompareTo(src.UniqueName);

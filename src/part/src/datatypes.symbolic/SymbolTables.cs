@@ -19,13 +19,14 @@ namespace Z0
             var literals = ClrPrimitives.enums<E>();
             var view = literals.View;
             var count = view.Length;
-            var entries = memory.alloc<Token<E>>(count);
-            ref var entry = ref memory.first(entries);
+            var entries = alloc<Token<E>>(count);
+            ref var entry = ref first(entries);
             var index = new Dictionary<string,Token<E>>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var literal = ref skip(view, i);
-                seek(entry, i) = new Token<E>(i, literal.Name, literal.DirectValue, symbolizer != null ? symbolizer(literal.DirectValue) : literal.Name);
+                var symbol = symbolizer != null ? symbolizer(literal.DirectValue).Format() : literal.Symbol.Format();
+                seek(entry, i) = new Token<E>(i, literal.Name, literal.DirectValue, symbol);
                 index.Add(literal.UniqueName, skip(entry, i));
             }
             return new SymbolTable<E>(entries, index);

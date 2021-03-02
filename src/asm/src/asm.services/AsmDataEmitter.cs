@@ -55,11 +55,7 @@ namespace Z0.Asm
             var count = addresses.Length;
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-            {
-                var input = blocks[skip(addresses, i)];
-                var records = CreateRecords(input);
-                rows.AddRange(records);
-            }
+                rows.AddRange(CreateRecords(blocks[skip(addresses, i)]));
             return rows.ToArray();
         }
 
@@ -193,7 +189,10 @@ namespace Z0.Asm
             if(decoded)
                 return CreateRecords(src.Code, decoded.Value);
             else
+            {
+                Wf.Error($"Error decoding {src.OpUri}");
                 return sys.empty<AsmRow>();
+            }
         }
 
         Index<AsmRow> CreateRecords(in CodeBlock code, in IceInstructionList asm)
@@ -219,30 +218,25 @@ namespace Z0.Asm
             return buffer;
         }
 
-        bool FillRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmRow record)
+        void FillRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmRow record)
         {
             var mnemonic = src.Mnemonic;
-            if(mnemonic != 0)
-            {
-                record.Sequence = (uint)NextSequence;
-                record.BlockAddress = code.BaseAddress;
-                record.IP = src.IP;
-                record.LocalOffset = offset;
-                record.GlobalOffset = NextOffset;
-                record.Mnemonic = mnemonic.ToString().ToUpper();
-                record.OpCode = src.Specifier.OpCode;
-                record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
-                record.Statement = src.FormattedInstruction;
-                record.Instruction = src.Specifier.Sig;
-                record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
-                record.OpCodeId = (IceOpCodeId)src.Code;
-                if(Index.TryGetValue(mnemonic, out var builder))
-                    builder.Include(record);
-                else
-                    Index.Add(mnemonic, ArrayBuilder.build(record));
-                return true;
-            }
-            return false;
+            record.Sequence = (uint)NextSequence;
+            record.BlockAddress = code.BaseAddress;
+            record.IP = src.IP;
+            record.LocalOffset = offset;
+            record.GlobalOffset = NextOffset;
+            record.Mnemonic = mnemonic.ToString().ToUpper();
+            record.OpCode = src.Specifier.OpCode;
+            record.Encoded = new BinaryCode(encoded.TrimEnd().ToArray());
+            record.Statement = src.FormattedInstruction;
+            record.Instruction = src.Specifier.Sig;
+            record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
+            record.OpCodeId = (IceOpCodeId)src.Code;
+            if(Index.TryGetValue(mnemonic, out var builder))
+                builder.Include(record);
+            else
+                Index.Add(mnemonic, ArrayBuilder.build(record));
         }
 
         int NextSequence

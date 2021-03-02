@@ -13,7 +13,7 @@ namespace Z0
 
         Identifier Name {get;}
 
-        Name Symbol {get;}
+        TextBlock Symbol {get;}
 
         string ITextual.Format()
             => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));

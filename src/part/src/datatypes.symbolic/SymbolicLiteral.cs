@@ -52,6 +52,11 @@ namespace Z0
         /// </summary>
         public ulong EncodedValue;
 
+        /// <summary>
+        /// The symbol, if so attributed, otherwise, the identifier
+        /// </summary>
+        public TextBlock Symbol;
+
         [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral src)
             => UniqueName.Content.CompareTo(src.UniqueName);
