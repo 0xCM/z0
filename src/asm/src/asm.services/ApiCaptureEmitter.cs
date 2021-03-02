@@ -94,7 +94,7 @@ namespace Z0
 
         AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
         {
-            var emitter = AsmServices.HostEmitter(Wf, Asm);
+            var emitter = Wf.AsmHostEmitter(Asm);
             emitter.Emit(host, src, out var decoded);
             if(decoded.Count != 0)
                 AddressMatcher.Match(extracts, decoded.AsmRoutines);

@@ -29,7 +29,7 @@ namespace Z0.Asm
             Wf.Created(flow);
 
             flow = Wf.Creating(nameof(Asm));
-            Asm = AsmServices.context(Wf);
+            Asm = Wf.AsmContext();
             Wf.Created(flow);
 
             flow = Wf.Creating(nameof(ApiServices));
@@ -197,7 +197,7 @@ namespace Z0.Asm
         void CheckIndexDecoder()
         {
             var blocks = ApiServices.HexIndexer().IndexApiBlocks();
-            var dataset = AsmServices.IndexDecoder().Decode(blocks);
+            var dataset = Wf.ApiIndexDecoder().Decode(blocks);
         }
 
         void TestRel32()
@@ -274,6 +274,13 @@ namespace Z0.Asm
             // Wf.Ran(flow);
         }
 
+        void CheckDataReader()
+        {
+            var reader = Wf.AsmDataReader();
+            var calls = reader.LoadCallRows();
+            Wf.Status($"Loaded {calls.Count} call rows");
+        }
+
         void ExportAsmCatRows()
         {
             Catalog.CreateExportRows();
@@ -342,7 +349,7 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
-            Correlate();
+            CheckDataReader();
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

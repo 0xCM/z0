@@ -24,8 +24,8 @@ namespace Z0.Asm
 
         protected override void OnInit()
         {
-            Asm = AsmServices.context(Wf);
-            Specializer = AsmServices.ImmSpecializer(Wf, Asm);
+            Asm = Wf.AsmContext();
+            Specializer = Wf.ImmSpecializer(Asm);
         }
 
         bool Append = true;
@@ -120,11 +120,6 @@ namespace Z0.Asm
                 }
             }
         }
-
-        // ApiHost[] Hosts(params PartId[] parts)
-        //     => (from h in Wf.Api.PartHosts(parts)
-        //         where h is ApiHost
-        //         select (ApiHost)h).Array();
 
         IApiHost[] Hosts(params PartId[] parts)
             => Wf.Api.PartHosts(parts);

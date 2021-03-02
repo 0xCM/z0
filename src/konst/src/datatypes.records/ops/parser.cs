@@ -15,5 +15,61 @@ namespace Z0
         public static RowParser<T> parser<T>(ParseFunction<T> f, char delimiter = FieldDelimiter)
             where T : struct, IRecord<T>
                 => new RowParser<T>(f,delimiter);
+
+        [Op]
+        public static bool parse(string src, out MemoryAddress dst)
+            => Addresses.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out byte dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out short dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out ushort dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out int dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out uint dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out long dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out ulong dst)
+            => Numeric.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out bit dst)
+            => bit.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out ByteSize dst)
+            => ByteSize.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out BinaryCode dst)
+        {
+            var result = HexByteParser.Service.ParseData(src);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = BinaryCode.Empty;
+                return false;
+            }
+        }
     }
 }

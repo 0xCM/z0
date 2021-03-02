@@ -9,6 +9,8 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.calls";
 
+        public const byte FieldCount = 6;
+
         public MemoryAddress Source;
 
         public MemoryAddress Target;

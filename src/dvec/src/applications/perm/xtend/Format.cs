@@ -15,21 +15,21 @@ namespace Z0
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm4L src)
-            => api.symbols(src).ToString();
+            => BitFields.symbols(src).ToString();
 
         /// <summary>
         /// Formats a permutation literal as one would hope
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm8L src)
-            => api.symbols(src).ToString();
+            => BitFields.symbols(src).ToString();
 
         /// <summary>
         /// Formats a permutation literal as one would hope
         /// </summary>
         /// <param name="src">The literal definition</param>
         public static string Format(this Perm16L src)
-            => api.symbols(src).ToString();
+            => BitFields.symbols(src).ToString();
 
         public static string FormatBlock(this Perm4L src, bool bracketed = true)
         {

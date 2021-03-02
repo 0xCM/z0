@@ -10,11 +10,8 @@ namespace Z0
 
     public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
-        IAsmContext Asm;
-
         protected override void OnInit()
         {
-            Asm = Wf.AsmContext();
         }
 
         public void Run()
@@ -31,7 +28,7 @@ namespace Z0
         Index<AsmMemberRoutine> RunPrimary(Index<PartId> parts)
         {
             var flow = Wf.Running("ApiCapture");
-            using var step = Wf.ApiCapture(Asm);
+            using var step = Wf.ApiCapture();
             var captured = step.CaptureApi();
             Wf.Ran(flow);
             return captured;

@@ -17,8 +17,8 @@ namespace Z0
             var sfk = SequenceFormatKind.List;
             var sep = Chars.Comma;
             var pad = 2;
-            var sym0 = Permute.symbols(p0).ToString();
-            var sym1 = Permute.symbols(p1).ToString();
+            var sym0 = BitFields.symbols(p0).ToString();
+            var sym1 = BitFields.symbols(p1).ToString();
             var description = $"{src.Format()} |> {sym0}{sym1} = {gcpu.vperm2x128(src, p0, p1).Format()}";
             return description;
         }
@@ -132,7 +132,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            if(terms.Length != z.nat32i(n))
+            if(terms.Length != TypeNats.nat32i(n))
                 AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
             return new NatPerm<N,T>(Perm.Init(terms));
         }

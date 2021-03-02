@@ -44,32 +44,9 @@ namespace Z0.Asm
         public static IAsmWf workflow(IWfShell wf)
             => new AsmWf(wf, context(wf));
 
-        public static IImmSpecializer ImmSpecializer(IWfShell wf, IAsmContext asm)
-            => new ImmSpecializer(wf, asm);
-
-        [Op]
-        public static IAsmDecoder decoder(in AsmFormatConfig config)
-            => new AsmRoutineDecoder(config);
-
-        [Op]
-        public static ApiCaptureService apicapture(IWfShell wf, IAsmContext asm)
-            => ApiCaptureService.create(wf);
-
-        [Op]
-        public static ApiResCapture ResCapture(IWfShell wf)
-            => ApiResCapture.create(wf);
-
         [Op]
         public static IApiHostCapture HostCapture(IWfShell wf)
             => ApiHostCapture.create(wf);
-
-        [Op]
-        public static ApiHostDecoder HostDecoder(IWfShell wf, IAsmDecoder decoder)
-            => new ApiHostDecoder(wf, decoder);
-
-        [Op]
-        public static ApiHostAsmEmitter HostEmitter(IWfShell wf, IAsmContext asm)
-            => new ApiHostAsmEmitter(wf, asm);
 
         /// <summary>
         /// Creates an asm processor
@@ -105,18 +82,8 @@ namespace Z0.Asm
             Asm = asm;
         }
 
-        public IAsmDecoder RoutineDecoder(in AsmFormatConfig config)
-            => new AsmRoutineDecoder(config);
-
-        public IApiIndexDecoder IndexDecoder()
-            => ApiIndexDecoder.create(Wf);
-
         [MethodImpl(Inline), Op]
         public IAsmFormatter Formatter(in AsmFormatConfig config)
             => new AsmFormatter(config);
-
-        [MethodImpl(Inline), Op]
-        public IAsmWriter AsmWriter(FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, formatter(config));
     }
 }

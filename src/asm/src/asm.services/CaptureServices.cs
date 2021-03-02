@@ -23,7 +23,7 @@ namespace Z0.Asm
         }
 
         public IAsmDecoder RoutineDecoder(in AsmFormatConfig? format)
-            => AsmServices.decoder(format ?? AsmFormatConfig.Default);
+            => Wf.AsmDecoder(format ?? AsmFormatConfig.Default);
 
         public ICaptureCore CaptureCore
             => Wf.CaptureCore(Asm);

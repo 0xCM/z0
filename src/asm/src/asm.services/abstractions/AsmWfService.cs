@@ -11,7 +11,7 @@ namespace Z0.Asm
     {
         protected override void OnInit()
         {
-            Asm = AsmServices.context(Wf);
+            Asm = Wf.AsmContext();
         }
 
         protected IAsmContext Asm {get; private set;}

@@ -63,9 +63,6 @@ namespace Z0.Asm
                 writer.WriteLine(string.Format("{0,-16} | {1,-80} | {2}", code.BaseAddress, code.Uri, code.Encoded.Format()));
             }
             return ApiCode.codeset(path,blocks);
-            // for(var i=0; i<count; i++)
-            //     seek(block,i) = skip(view,i).Code;
-            //return ApiCode.emit(Wf, Uri, blocks, path, append);
         }
     }
 }

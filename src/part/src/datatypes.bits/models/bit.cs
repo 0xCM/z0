@@ -32,6 +32,30 @@ namespace Z0
         public static bit parse(string src)
             => parse(text.ifempty(src, "0")[0]);
 
+        [MethodImpl(Inline), Op]
+        public static bool parse(string src, out bit dst)
+        {
+            dst = 0;
+            if(text.nonempty(src))
+            {
+                var c = src[0];
+                if(c == Zero)
+                {
+                    return true;
+                }
+                else if(c == One)
+                {
+                    dst = 1;
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
+
         [MethodImpl(Inline)]
         public bit(bool state)
             => State = state;

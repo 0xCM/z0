@@ -35,7 +35,7 @@ namespace Z0.Asm
 
         void Decode(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmMemberRoutines dst)
         {
-            var decoder = AsmServices.HostDecoder(Wf, Asm.RoutineDecoder);
+            var decoder = Wf.ApiHostDecoder(Asm.RoutineDecoder);
             dst = decoder.Decode(host, src);
         }
 

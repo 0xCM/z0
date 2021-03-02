@@ -21,7 +21,7 @@ namespace Z0
         protected override void OnInit()
         {
             base.OnInit();
-            Asm = AsmServices.context(Wf);
+            Asm = Wf.AsmContext();
         }
         public CaptureAlt()
         {

@@ -40,7 +40,7 @@ namespace Z0.Asm
         {
             base.OnInit();
             CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
-            Dataset = AsmServices.create(Wf).IndexDecoder().Decode(CodeBlocks);
+            Dataset = Wf.ApiIndexDecoder().Decode(CodeBlocks);
         }
 
         public ApiAsmDataset Run()
@@ -140,7 +140,7 @@ namespace Z0.Asm
 
         public Index<AsmCallRow> EmitCallRows(ApiPartRoutines src)
         {
-            var dst = Wf.Db().Table(AsmCallRow.TableId, src.Part);
+            var dst = Db.Table(AsmCallRow.TableId, src.Part);
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
             using var writer = dst.Writer();
             var calls = AsmEtl.calls(src.Instructions());

@@ -32,7 +32,7 @@ namespace Z0.Asm
             Asm = asm;
             Services = AsmServices.create(wf,asm);
             var config = AsmFormatConfig.DefaultStreamFormat;
-            Decoder = Services.RoutineDecoder(config);
+            Decoder = Wf.AsmDecoder(config);
             Formatter = Services.Formatter(config);
             CaptureService = wf.CaptureQuick(asm);
         }

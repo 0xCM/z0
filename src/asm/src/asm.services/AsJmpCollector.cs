@@ -80,6 +80,7 @@ namespace Z0
             }
             return ref kind;
         }
+
         public Index<AsmJmpRow> Collect(ApiPartRoutines src)
         {
             var collection = root.list<AsmJmpRow>();

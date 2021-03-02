@@ -23,7 +23,7 @@ namespace Z0.Asm
             Wf = wf;
             Asm = asm;
             Asm.Paths.AppDataRoot.Clear();
-            ResCapture = AsmServices.ResCapture(wf);
+            ResCapture = Wf.ApiResCapture();
             ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
