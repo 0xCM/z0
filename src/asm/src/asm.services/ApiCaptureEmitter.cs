@@ -33,9 +33,9 @@ namespace Z0
             AddressMatcher = AsmAddressMatcher.create(wf);
         }
 
-        public AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
+        public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
         {
-            var routines = AsmRoutines.Empty;
+            var routines = AsmMemberRoutines.Empty;
             try
             {
                 var flow = Wf.Running(Msg.RunningHostEmissionWorkflow.Format(host,src.Count));
@@ -95,12 +95,12 @@ namespace Z0
                 return Index<ApiMemberCode>.Empty;
         }
 
-        AsmRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
+        AsmMemberRoutines DecodeMembers(ApiHostUri host, Index<ApiMemberCode> src, Index<ApiMemberExtract> extracts)
         {
             var emitter = AsmServices.HostEmitter(Wf, Asm);
             emitter.Emit(host, src, out var decoded);
             if(decoded.Count != 0)
-                AddressMatcher.Match(extracts, decoded.Storage);
+                AddressMatcher.Match(extracts, decoded.AsmRoutines);
             return decoded;
        }
 

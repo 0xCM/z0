@@ -9,41 +9,52 @@ namespace Z0.Asm
 
     using static Part;
 
-    public struct AsmMemberRoutine : IComparable<AsmMemberRoutine>
+    public readonly struct AsmMemberRoutine : IComparable<AsmMemberRoutine>
     {
         /// <summary>
         /// The defining member
         /// </summary>
-        public IdentifiedMethod Member;
-
-        /// <summary>
-        /// The x86 encoded content
-        /// </summary>
-        public ApiCaptureBlock Encoded;
+        public ApiMember Member {get;}
 
         /// <summary>
         /// The assembly routine
         /// </summary>
-        public AsmRoutine Routine;
+        public AsmRoutine Routine {get;}
+
+        public AsmMemberRoutine(in ApiMember member, AsmRoutine routine)
+        {
+            Member = member;
+            Routine = routine;
+        }
+
+        public Index<ApiInstruction> Instructions
+            => Routine.Instructions;
 
         /// <summary>
-        /// The formatted assembly instructions
+        /// The x86 encoded content
         /// </summary>
-        public string Asm;
+        public ApiCodeBlock Code
+            => Routine.Code;
 
         public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => Encoded.BaseAddress;
+            get => Code.BaseAddress;
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Encoded.Length;
+            get => Code.Length;
         }
 
         public int CompareTo(AsmMemberRoutine src)
             => Base.CompareTo(src.Base);
+
+        public static AsmMemberRoutine Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmMemberRoutine(ApiMember.Empty, AsmRoutine.Empty);
+        }
     }
 }

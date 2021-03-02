@@ -26,21 +26,21 @@ namespace Z0.Asm
             Decoder = decoder;
         }
 
-        public AsmRoutine[] Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
+        public AsmMemberRoutines Decode(ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             try
             {
                 var flow = Wf.Running(uri);
                 var count = src.Length;
-                var dst = alloc<AsmRoutine>(count);
+                var dst = alloc<AsmMemberRoutine>(count);
                 for(var i=0; i<count; i++)
                 {
-                    ref readonly var member = ref skip(src, i);
-                    var decoded = Decoder.Decode(member);
+                    ref readonly var code = ref skip(src, i);
+                    var decoded = Decoder.Decode(code);
                     if(!decoded)
-                        HandleFailure(member);
+                        HandleFailure(code);
 
-                    dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
+                    dst[i] = decoded ? new AsmMemberRoutine(code.Member, decoded.Value) : AsmMemberRoutine.Empty;
                 }
 
                 Wf.Ran(flow, string.Format("Decoded {0} {1} functions", dst.Length, uri));
@@ -49,7 +49,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 Wf.Error(Host, $"{uri}: {e}");
-                return sys.empty<AsmRoutine>();
+                return sys.empty<AsmMemberRoutine>();
             }
         }
 

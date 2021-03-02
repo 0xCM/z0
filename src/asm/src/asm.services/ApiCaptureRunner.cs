@@ -22,13 +22,13 @@ namespace Z0
             var parts = Wf.Api.PartIdentities;
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts));
-            RunPrimary(parts);
+            var captured = RunPrimary(parts);
             EmitImm(parts);
             RebaseMembers();
             EmitDump();
         }
 
-        Index<AsmRoutine> RunPrimary(Index<PartId> parts)
+        Index<AsmMemberRoutine> RunPrimary(Index<PartId> parts)
         {
             var flow = Wf.Running("ApiCapture");
             using var step = Wf.ApiCapture(Asm);

@@ -11,6 +11,6 @@ namespace Z0
 
     public interface IApiCaptureEmitter
     {
-        AsmRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src);
+        AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src);
     }
 }

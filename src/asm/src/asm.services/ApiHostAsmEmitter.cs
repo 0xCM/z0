@@ -24,7 +24,7 @@ namespace Z0.Asm
             Asm = asm;
         }
 
-        public ref AsmRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
+        public ref AsmMemberRoutines Emit(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmMemberRoutines dst)
         {
             var flow = Wf.Running(Msg.EmittingHostRoutines.Format(host));
             Decode(host, src, out dst);
@@ -33,13 +33,13 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        void Decode(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmRoutines dst)
+        void Decode(ApiHostUri host, ReadOnlySpan<ApiMemberCode> src, out AsmMemberRoutines dst)
         {
             var decoder = AsmServices.HostDecoder(Wf, Asm.RoutineDecoder);
             dst = decoder.Decode(host, src);
         }
 
-        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
+        static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmMemberRoutine> src, in AsmFormatConfig format)
         {
             var count = src.Length;
             if(count != 0)
@@ -50,8 +50,8 @@ namespace Z0.Asm
 
                 for(var i=0; i<count; i++)
                 {
-                    ref readonly var routine = ref skip(src,i);
-                    AsmRender.format(routine, format, buffer);
+                    ref readonly var item = ref skip(src,i);
+                    AsmRender.format(item.Routine, format, buffer);
                     writer.Write(buffer.Emit());
                 }
                 return path;

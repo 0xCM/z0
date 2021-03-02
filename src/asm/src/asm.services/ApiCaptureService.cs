@@ -43,7 +43,7 @@ namespace Z0
             Wf.Disposed();
         }
 
-        public Index<AsmRoutine> CaptureApi()
+        public Index<AsmMemberRoutine> CaptureApi()
         {
             using var flow = Wf.Running();
             ClearArchive();
@@ -52,9 +52,9 @@ namespace Z0
             return captured.SelectMany(x => x.Storage);
         }
 
-        Index<AsmRoutines> RunCapture()
+        Index<AsmMemberRoutines> RunCapture()
         {
-            var dst = root.list<AsmRoutines>();
+            var dst = root.list<AsmMemberRoutines>();
             using var flow = Wf.Running();
             var catalogs = Wf.Api.Catalogs.View;
             var count = catalogs.Length;
@@ -70,29 +70,29 @@ namespace Z0
             archive.Clear();
         }
 
-        public Index<AsmRoutines> CapturePart(IApiPartCatalog src)
+        public Index<AsmMemberRoutines> CapturePart(IApiPartCatalog src)
         {
             if(src.IsEmpty)
-                return sys.empty<AsmRoutines>();
+                return sys.empty<AsmMemberRoutines>();
 
-            var dst = root.list<AsmRoutines>();
+            var dst = root.list<AsmMemberRoutines>();
             dst.Add(CaptureTypes(src.ApiTypes));
             dst.AddRange(CaptureHosts(src.OperationHosts));
             return dst.ToArray();
         }
 
-        public Index<AsmRoutines> CaptureHosts(ReadOnlySpan<ApiHost> src)
+        public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<ApiHost> src)
         {
             var count = src.Length;
-            var dst = root.list<AsmRoutines>();
+            var dst = root.list<AsmMemberRoutines>();
             for(var i=0; i<count; i++)
                 dst.Add(CaptureHost(skip(src, i)));
             return dst.ToArray();
         }
 
-        public AsmRoutines CaptureHost(IApiHost api)
+        public AsmMemberRoutines CaptureHost(IApiHost api)
         {
-            var routines = AsmRoutines.Empty;
+            var routines = AsmMemberRoutines.Empty;
             var flow = Wf.Running(api.Name);
             try
             {
@@ -121,9 +121,9 @@ namespace Z0
             }
         }
 
-        public AsmRoutines CaptureTypes(Index<ApiRuntimeType> src)
+        public AsmMemberRoutines CaptureTypes(Index<ApiRuntimeType> src)
         {
-            var dst = root.list<AsmRoutine>();
+            var dst = root.list<AsmMemberRoutine>();
             var extracted = @readonly(ExtractTypes(src).GroupBy(x => x.Host).Select(x => root.kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
