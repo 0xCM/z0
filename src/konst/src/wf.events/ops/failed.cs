@@ -12,23 +12,23 @@ namespace Z0
     partial struct WfEvents
     {
         /// <summary>
-        /// Defines a <see cref='CmdRanEvent{T}'/> event indicating failure
+        /// Defines a <see cref='ToolRanEvent{T}'/> event indicating failure
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdRanEvent fail(CmdExecSpec spec, CorrelationToken ct)
-            => new CmdRanEvent(spec, false, ct);
+        public static ToolRanEvent fail(ToolExecSpec spec, CorrelationToken ct)
+            => new ToolRanEvent(spec, false, ct);
 
         /// <summary>
-        /// Defines a <see cref='CmdRanEvent{T}'/> event indicating failure
+        /// Defines a <see cref='ToolRanEvent{T}'/> event indicating failure
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static CmdRanEvent<T> fail<T>(CmdExecSpec spec, CorrelationToken ct)
-            => new CmdRanEvent<T>(spec, false, default(T), ct);
+        public static ToolRanEvent<T> fail<T>(ToolExecSpec spec, CorrelationToken ct)
+            => new ToolRanEvent<T>(spec, false, default(T), ct);
     }
 }

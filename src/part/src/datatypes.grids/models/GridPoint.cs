@@ -8,21 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
+
+    using api = Grids;
 
     /// <summary>
     /// Locates a cell within a grid
     /// </summary>
-     public readonly struct GridPoint : IGridPoint<GridPoint>
+     public struct GridPoint : IGridPoint<GridPoint>
      {
         /// <summary>
         /// The cell row
         /// </summary>
-        public uint Row {get;}
+        public uint Row {get; private set;}
 
         /// <summary>
         /// The cell column
         /// </summary>
-        public uint Col {get;}
+        public uint Col {get; private set;}
 
         [MethodImpl(Inline)]
         public GridPoint(uint row, uint col)
@@ -31,10 +34,32 @@ namespace Z0
             Col = col;
         }
 
-        public uint Hashed
+        [MethodImpl(Inline)]
+        public GridPoint IncRow()
         {
-            [MethodImpl(Inline)]
-            get => alg.hash.combine(Row,Col);
+            Row = add(Row,1);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public GridPoint DecRow()
+        {
+            Row = sub(Row,1);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public GridPoint IncCol()
+        {
+            Col = add(Col,1);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public GridPoint DecCol()
+        {
+            Col = sub(Col,1);
+            return this;
         }
 
         [MethodImpl(Inline)]
@@ -42,17 +67,25 @@ namespace Z0
             => Row == src.Row && Col == src.Col;
 
         public override int GetHashCode()
-            => (int)Hashed;
+            => (int)alg.hash.combine(Row,Col);
 
         public override bool Equals(object src)
             => src is GridPoint x && Equals(x);
 
         public string Format()
-            => $"({Row},{Col})";
+            => api.format(this);
 
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static GridPoint operator++(GridPoint src)
+            => src.IncRow();
+
+        [MethodImpl(Inline)]
+        public static GridPoint operator--(GridPoint src)
+            => src.DecRow();
 
         [MethodImpl(Inline)]
         public static implicit operator GridPoint((uint row, uint col) src)
@@ -61,6 +94,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator (uint row, uint col)(GridPoint src)
             => (src.Row, src.Col);
+
+        [MethodImpl(Inline)]
+        public static implicit operator GridPoint<uint>(GridPoint src)
+            => new GridPoint<uint>(src.Row, src.Col);
+
+
+        public static GridPoint Zero
+            => new GridPoint(0, 0);
 
         public static GridPoint Empty
             => new GridPoint(uint.MaxValue,uint.MaxValue);

@@ -42,11 +42,11 @@ namespace Z0
             => new CmdArg<K,T>(src.Left, src.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg(CmdArg<K,T> src)
-            => new CmdArg(src.Kind.ToString(), src.Value?.ToString() ?? EmptyString);
+        public static implicit operator ToolCmdArg(CmdArg<K,T> src)
+            => new ToolCmdArg(src.Kind.ToString(), src.Value?.ToString() ?? EmptyString);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArg<T>(CmdArg<K,T> src)
-            => new CmdArg<T>(src.Kind.ToString(), src.Value);
+        public static implicit operator ToolCmdArg<T>(CmdArg<K,T> src)
+            => new ToolCmdArg<T>(src.Kind.ToString(), src.Value);
     }
 }

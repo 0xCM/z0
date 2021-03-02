@@ -15,33 +15,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ToolCmdArgs(ToolCmdArg[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
-        public string Format(string sep)
-            => string.Join(sep, Data.Storage);
-        public string Format()
-            => Format(" ");
-
-        public override string ToString()
-            => Format();
-        public uint Count
+        public ref ToolCmdArg this[int index]
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => ref Data[index];
         }
 
-        public ReadOnlySpan<ToolCmdArg> View
+        public ref ToolCmdArg this[uint index]
         {
             [MethodImpl(Inline)]
-            get => Data.View;
-        }
-
-        public Span<ToolCmdArg> Edit
-        {
-            [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => ref Data[index];
         }
 
         public ToolCmdArg[] Storage
@@ -50,16 +35,38 @@ namespace Z0
             get => Data.Storage;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ToolCmdArgs(string[] src)
-            => new ToolCmdArgs(src.Select(x => new ToolCmdArg(x)));
+        public Span<ToolCmdArg> Terms
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Data.Length;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator ToolCmdArgs(ToolCmdArg[] src)
             => new ToolCmdArgs(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator ToolCmdArg[](ToolCmdArgs src)
-            => src.Data;
+        public static ToolCmdArgs Empty
+        {
+            [MethodImpl(Inline)]
+            get => new ToolCmdArgs(sys.empty<ToolCmdArg>());
+        }
     }
 }

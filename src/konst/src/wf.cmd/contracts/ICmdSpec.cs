@@ -14,7 +14,7 @@ namespace Z0
         Name CmdName
             => CmdId;
 
-        CmdArgs Args {get;}
+        ToolCmdArgs Args {get;}
 
         string ITextual.Format()
             => Cmd.format(this);
@@ -27,7 +27,7 @@ namespace Z0
         CmdId ICmd.CmdId
             => Cmd.id<T>();
 
-        CmdArgs ICmd.Args
+        ToolCmdArgs ICmd.Args
             => Cmd.args((T)this);
 
         string ITextual.Format()

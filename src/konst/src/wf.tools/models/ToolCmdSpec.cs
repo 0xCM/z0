@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The arguments to pass to the tool
         /// </summary>
-        public ToolCmdArgs Args;
+        public Index<string> Args;
 
         /// <summary>
         /// The working folder, if any

@@ -53,5 +53,11 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
+
+        public static AsmStatementLine Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmStatementLine(AsmLineLabel.Empty, AsmStatement.Empty);
+        }
     }
 }

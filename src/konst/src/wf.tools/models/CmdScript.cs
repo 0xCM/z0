@@ -13,17 +13,17 @@ namespace Z0
     {
         public asci32 Id {get;}
 
-        readonly Index<CmdScriptExpr> Data;
+        readonly Index<ScriptExpr> Data;
 
         [MethodImpl(Inline)]
-        public CmdScript(CmdScriptExpr[] src)
+        public CmdScript(ScriptExpr[] src)
         {
             Id = EmptyString;
             Data = src;
         }
 
         [MethodImpl(Inline)]
-        public CmdScript(string id, CmdScriptExpr[] src)
+        public CmdScript(string id, ScriptExpr[] src)
         {
             Id = id;
             Data = src;
@@ -35,13 +35,13 @@ namespace Z0
             get => Data.Length;
         }
 
-        public Span<CmdScriptExpr> Edit
+        public Span<ScriptExpr> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<CmdScriptExpr> View
+        public ReadOnlySpan<ScriptExpr> View
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -49,7 +49,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdScript(CmdScriptExpr[] src)
+        public static implicit operator CmdScript(ScriptExpr[] src)
             => new CmdScript(src);
 
         public string Format()

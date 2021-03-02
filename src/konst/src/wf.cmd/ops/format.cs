@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Formatter, Closures(Closure)]
-        public static string format<K>(in CmdOptionSpec<K> src)
+        public static string format<K>(in ToolOptionSpec<K> src)
             where K : unmanaged
                 => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
@@ -78,14 +78,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static string Format(in CmdArg src)
+        public static string Format(in ToolCmdArg src)
             => text.nonempty(src.Name)
              ? string.Format(RP.Setting, src.Name, src.Value)
              : src.Value?.ToString() ?? EmptyString;
 
 
         [MethodImpl(Inline), Formatter]
-        public static string format(CmdOptionSpec src)
+        public static string format(ToolOptionSpec src)
             => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static string format(in CmdArg src)
+        public static string format(in ToolCmdArg src)
             => TextFormatter.assign(src.Name, src.Value);
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(in CmdArg<T> src)
+        public static string format<T>(in ToolCmdArg<T> src)
             => TextFormatter.assign(src.Name, src.Value);
 
         /// <summary>

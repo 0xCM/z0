@@ -10,7 +10,7 @@ namespace Z0
     partial struct Cmd
     {
         [Op]
-        public static bool lookup(CmdArgs src, string name, out CmdArg dst)
+        public static bool lookup(ToolCmdArgs src, string name, out ToolCmdArg dst)
         {
             var count = src.Count;
             for(var i=0; i<count; i++)
@@ -22,7 +22,7 @@ namespace Z0
                     return true;
                 }
             }
-            dst = CmdArg.Empty;
+            dst = ToolCmdArg.Empty;
             return false;
         }
     }

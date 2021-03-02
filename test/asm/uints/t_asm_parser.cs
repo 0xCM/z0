@@ -15,23 +15,23 @@ namespace Z0.Asm
     {
         ITextBuffer Buffer;
 
-        public void part_memory_copy()
-        {
-            Buffer = text.buffer();
-            var src = Db.AsmFile<memory>();
-            var doc = AsmDoc.load(src);
-            var lines = doc.Content;
-            using var target = AsmCaseWriter();
-            foreach(var line in lines)
-            {
-                Parse(line);
-                target.WriteLine(Buffer.Emit());
-            }
-        }
+        // public void part_memory_copy()
+        // {
+        //     Buffer = text.buffer();
+        //     var src = Db.AsmFile<memory>();
+        //     var doc = AsmCodeDoc.load(src);
+        //     var lines = doc.Content;
+        //     using var target = AsmCaseWriter();
+        //     foreach(var line in lines)
+        //     {
+        //         Parse(line);
+        //         target.WriteLine(Buffer.Emit());
+        //     }
+        // }
 
-        void Parse(in AsmDocLine src)
-        {
-            Buffer.Append(src.Content);
-        }
+        // void Parse(in AsmCodeLine src)
+        // {
+        //     Buffer.Append(src.Content);
+        // }
     }
 }

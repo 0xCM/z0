@@ -13,6 +13,6 @@ namespace Z0
 
         public ToolUsage Syntax;
 
-        public CmdOptionSpecs Options;
+        public ToolOptionSpecs Options;
     }
 }

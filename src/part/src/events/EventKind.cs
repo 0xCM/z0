@@ -57,5 +57,9 @@ namespace Z0
         Row,
 
         Rows,
+
+       ToolRunning,
+
+        ToolRan,
     }
 }

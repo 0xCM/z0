@@ -21,6 +21,24 @@ namespace Z0.Asm
             Mnemonic = monic;
             Args = src;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic != 0;
+        }
+
+        public static AsmStatement Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmStatement(0, Args.Empty);
+        }
     }
 
     public readonly struct AsmStatement<A> : IAsmStatement<A>
@@ -40,6 +58,12 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmStatement(AsmStatement<A> src)
             => new AsmStatement(src.Mnemonic, src.Args);
+
+        public static AsmStatement<A> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmStatement<A>(0, default);
+        }
     }
 
     public readonly struct AsmStatement<A,B> : IAsmStatement<A,B>
@@ -67,6 +91,13 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator AsmStatement(AsmStatement<A,B> src)
             => new AsmStatement(src.Mnemonic, src.Args);
+
+        public static AsmStatement<A,B> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmStatement<A,B>(0, default, default);
+        }
+
     }
 
     public readonly struct AsmStatement<A,B,C> : IAsmStatement<A,B,C>

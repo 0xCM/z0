@@ -31,7 +31,14 @@ namespace Z0
                     var script = paths.ControlScript(name);
                     if(script.Exists)
                     {
-                        term.inform($"Running {script.ToUri()}");
+                        //term.inform($"Running {script.ToUri()}");
+                        var runner = ScriptRunner.create();
+                        var outcome = runner.RunControlScript(name);
+                        if(outcome)
+                        {
+                            term.inform("Response");
+                            root.iter(outcome.Data, x => term.babble(x));
+                        }
                     }
                     else
                     {
@@ -46,18 +53,6 @@ namespace Z0
         readonly WfHost Host;
 
         readonly IWfShell Wf;
-
-        readonly CmdBuilder Builder;
-
-        readonly IWfDb Db;
-
-        Runner(IWfShell wf)
-        {
-            Host = WfShell.host(typeof(Runner));
-            Wf = wf.WithHost(Host);
-            Builder = wf.CmdBuilder();
-            Db = wf.Db();
-        }
 
 
         void CheckFlags()

@@ -36,7 +36,7 @@ namespace Z0
         protected override void Execute(IWfShell wf)
             => Execute(wf, Spec());
 
-        public virtual CmdResult Run(IWfShell wf, CmdExecSpec spec)
+        public virtual CmdResult Run(IWfShell wf, ToolExecSpec spec)
             => Execute(wf, Spec());
 
     }

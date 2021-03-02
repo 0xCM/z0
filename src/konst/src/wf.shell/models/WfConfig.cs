@@ -19,6 +19,6 @@ namespace Z0
 
         public Index<ClrAssemblyName> Components;
 
-        public CmdArgs Args;
+        public ToolCmdArgs Args;
     }
 }

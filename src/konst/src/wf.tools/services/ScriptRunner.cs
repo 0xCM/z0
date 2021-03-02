@@ -9,10 +9,10 @@ namespace Z0
 
     using static Part;
     using static TextRules;
-    using static memory;
 
     public sealed class ScriptRunner
     {
+
         [MethodImpl(Inline)]
         public static ScriptRunner create(Env env)
             => new ScriptRunner(DbPaths.create(env));
@@ -43,7 +43,6 @@ namespace Z0
 
         Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
         {
-
             using var writer = Db.CmdLog(script).Writer();
 
             try

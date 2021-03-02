@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public sealed class CmdParser : WfService<CmdParser,ICmdParser>, ICmdParser
+    public sealed class CmdParser : WfService<CmdParser,IToolCmdParser>, IToolCmdParser
     {
         readonly Index<ArgPrefix> Prefixes;
 
@@ -23,18 +23,50 @@ namespace Z0
 
         }
 
-        public Outcome Parse(CmdLine src, out CmdExecSpec dst)
+        const string InvalidOption = "Option text invalid";
+
+        [Op]
+        public static ParseResult<ToolExecSpec> parse(string src, string delimiter = EmptyString, char qualifier = ' ')
+        {
+            var fail = root.unparsed<ToolExecSpec>(src);
+            var parts = text.split(src, delimiter).View;
+            var count = parts.Length;
+            ushort pos = 0;
+            if(count != 0)
+            {
+                ref readonly var part = ref first(parts);
+                var id = Cmd.id(part);
+                var options = root.list<ToolCmdArg>();
+                for(var i=1; i<count; i++)
+                {
+                    ref readonly var next = ref skip(parts,i);
+                    if(!text.blank(next))
+                    {
+                        var option = ToolCmd.arg(pos++,next, qualifier);
+                        if(option)
+                            options.Add(option.Value);
+                        else
+                            return fail.WithReason(InvalidOption);
+                    }
+                }
+                return root.parsed(src, new ToolExecSpec(id, options.ToArray()));
+            }
+
+            return fail;
+        }
+
+        public Outcome Parse(CmdLine src, out ToolExecSpec dst)
             => parse(Prefixes, src, out dst);
 
         public Outcome Parse(ReadOnlySpan<char> src, out ArgPrefix dst)
             => parse(Prefixes, src, out dst);
 
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out CmdExecSpec dst)
+        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out ToolExecSpec dst)
         {
             var parts = src.Parts;
             var count = parts.Length;
-            var args = z.list<CmdArg>();
+            var args = root.list<ToolCmdArg>();
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var part = ref skip(parts,i);
@@ -43,18 +75,18 @@ namespace Z0
                     args.Add(arg);
                 }
             }
-            dst = new CmdExecSpec(Cmd.id(""), args.Array());
+            dst = new ToolExecSpec(Cmd.id(""), args.Array());
             return false;
         }
 
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, ushort index, CmdLinePart part, out CmdArg arg)
+        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, ushort index, CmdLinePart part, out ToolCmdArg arg)
         {
             var data = part.Chars;
             if(parse(prefixes, part.Chars, out ArgPrefix prefix))
             {
                 var length = prefix.Length;
-                arg = new CmdArg(index, prefix, "name", "value");
+                arg = new ToolCmdArg(index, prefix, "name", "value");
                 return true;
             }
             arg = default;

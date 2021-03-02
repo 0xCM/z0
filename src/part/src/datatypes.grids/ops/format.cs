@@ -12,6 +12,21 @@ namespace Z0
     partial struct Grids
     {
 
+        [Op]
+        public static string format(GridPoint src)
+        {
+            const string Pattern = "({0},{1})";
+            return string.Format(Pattern, src.Row, src.Col);
+        }
+
+        [Op]
+        public static string format<T>(GridPoint<T> src)
+            where T : unmanaged
+        {
+            const string Pattern = "({0},{1})";
+            return string.Format(Pattern, src.Row, src.Col);
+        }
+
         /// <summary>
         /// Defines a standard header for a grid map summary line
         /// </summary>

@@ -218,7 +218,7 @@ namespace Z0
         void ShowOptions()
         {
             const string @case = @"llvm-pdbutil dump --streams J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64\z0.math.pdb > z0.math.pdb.streams.log";
-            var result = ToolCmd.parse(@case);
+            var result = CmdParser.parse(@case);
             if(result.Succeeded)
             {
                 var value = result.Value;

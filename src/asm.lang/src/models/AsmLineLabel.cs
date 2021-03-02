@@ -56,10 +56,35 @@ namespace Z0.Asm
             Width = DataWidth.W64;
         }
 
+        [MethodImpl(Inline)]
+        AsmLineLabel(ulong offset, DataWidth width)
+        {
+            Offset = offset;
+            Width = width;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Width == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Width != 0;
+        }
+
         public string Format()
             => format(this);
 
         public override string ToString()
             => Format();
+
+        public static AsmLineLabel Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmLineLabel(0, DataWidth.None);
+        }
     }
 }

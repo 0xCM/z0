@@ -47,7 +47,7 @@ namespace Z0.Tooling
         public CmdScript Script(string name, CmdId id, FileModule[] src)
             => script(this, name, id, src);
 
-        public CmdScriptExpr Command(CmdId id, FS.FilePath src)
+        public ScriptExpr Command(CmdId id, FS.FilePath src)
         {
             var subdir = OutputDir + FS.folder(src.FileName.WithoutExtension.Name);
             subdir.Create();
@@ -55,7 +55,7 @@ namespace Z0.Tooling
             var output = subdir + src.FileName.ChangeExtension(x);
             var source = src.Format(PS);
             var target = output.Format(PS);
-            var pattern = CmdPattern.Empty;
+            var pattern = ScriptPattern.Empty;
             switch(id)
             {
                 case CmdId.EmitAsm:

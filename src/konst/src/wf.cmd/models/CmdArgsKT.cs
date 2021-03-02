@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct CmdArgs<K,T> : IIndex<CmdArg<K,T>>
         where K : unmanaged
     {
-        readonly TableSpan<CmdArg<K,T>> Data;
+        readonly Index<CmdArg<K,T>> Data;
 
         [MethodImpl(Inline)]
         public CmdArgs(CmdArg<K,T>[] src)
@@ -47,7 +47,7 @@ namespace Z0
             => new CmdArgs<K,T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgs(CmdArgs<K,T> src)
-            => new CmdArgs(src.Storage.Select(x => (CmdArg)x));
+        public static implicit operator ToolCmdArgs(CmdArgs<K,T> src)
+            => new ToolCmdArgs(src.Storage.Select(x => (ToolCmdArg)x));
     }
 }

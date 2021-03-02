@@ -18,7 +18,6 @@ namespace Z0
 
         public const string RanCmd = nameof(RanCmd);
 
-        public const string RunningCmd = nameof(RunningCmd);
 
         public const string CmdRan = nameof(CmdRan);
 
@@ -48,6 +47,10 @@ namespace Z0
 
         public const string ToolCreated = nameof(ToolCreated);
 
+        public const string ToolRunning = nameof(ToolRunning);
+
+        public const string ToolRan = nameof(ToolRan);
+
         public const string Rows = nameof(Rows);
 
         public const string Row = nameof(Row);
@@ -55,6 +58,7 @@ namespace Z0
         public const string EmittingTable = nameof(EmittingTable);
 
         public const string CreatedToolCmd = nameof(CreatedToolCmd);
+
 
         public const string Babble = nameof(Babble);
     }

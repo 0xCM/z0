@@ -17,7 +17,7 @@ namespace Z0
     public abstract class ToolCmdBuilder<T> : WfService<T,IToolCmdBuilder>, IToolCmdBuilder
         where T : ToolCmdBuilder<T>, new()
     {
-        protected Index<CmdArg> Args;
+        protected Index<ToolCmdArg> Args;
 
         ushort Index;
 
@@ -25,14 +25,14 @@ namespace Z0
 
         public ToolCmdBuilder(Name tool)
         {
-            Args = memory.alloc<CmdArg>(256);
+            Args = memory.alloc<ToolCmdArg>(256);
             Index = 0;
             ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
         }
 
         public ToolCmdBuilder(ToolId tool)
         {
-            Args = memory.alloc<CmdArg>(256);
+            Args = memory.alloc<ToolCmdArg>(256);
             Index = 0;
             ToolName = FS.file(tool.Format(), FS.Extensions.Exe);
         }

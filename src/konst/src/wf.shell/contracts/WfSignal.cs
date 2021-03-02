@@ -47,8 +47,8 @@ namespace Z0
         public void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
 
-        public void Running(CmdExecSpec cmd)
-            => Raise(new RunningCmdEvent(cmd.CmdId, Ct));
+        public void Running(ToolExecSpec cmd)
+            => Raise(new ToolRunningEvent(cmd.CmdId, Ct));
 
         public void Running()
             => Raise(running(Host, Ct));
