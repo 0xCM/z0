@@ -15,19 +15,19 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly IPolyStream Random;
+        readonly IDomainSource Source;
 
         readonly int RepCount;
 
         EvalExecutorContext Context;
 
         [MethodImpl(Inline)]
-        internal EvalExecutor(IWfShell wf, IPolyStream random)
+        internal EvalExecutor(IWfShell wf, IDomainSource source)
         {
             Wf = wf;
             RepCount = 128;
-            Random = random;
-            Context = new EvalExecutorContext(random, 128, 0);
+            Source = source;
+            Context = new EvalExecutorContext(source, 128, 0);
         }
 
         public EvalResult MatchBinaryOps(in NativeBuffers buffers, CellWidth w, in ConstPair<ApiMemberCode> paired)
@@ -131,8 +131,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Cell(w);
-                    var y = Random.Cell(w);
+                    var x = Source.Cell(w);
+                    var y = Source.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }
@@ -154,8 +154,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Cell(w);
-                    var y = Random.Cell(w);
+                    var x = Source.Cell(w);
+                    var y = Source.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }
@@ -177,8 +177,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Cell(w);
-                    var y = Random.Cell(w);
+                    var x = Source.Cell(w);
+                    var y = Source.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }
@@ -200,8 +200,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Cell(w);
-                    var y = Random.Cell(w);
+                    var x = Source.Cell(w);
+                    var y = Source.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }
@@ -224,8 +224,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Cell(w);
-                    var y = Random.Cell(w);
+                    var x = Source.Cell(w);
+                    var y = Source.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }

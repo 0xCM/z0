@@ -19,7 +19,7 @@ namespace Z0
             try
             {
                 using var wf = WfShell.create(args).WithRandom(Rng.@default());
-                using var control = wf.CaptureRunner(new AsmContext(Apps.context(wf), wf));
+                using var control = wf.CaptureRunner();
                 control.Run();
             }
             catch(Exception e)

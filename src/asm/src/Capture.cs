@@ -27,8 +27,7 @@ namespace Z0
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
-            var app = Apps.context(wf, Rng.@default());
-            using var control = wf.CaptureRunner(new AsmContext(app, wf));
+            using var control = wf.CaptureRunner();
             control.Run();
         }
 

@@ -8,70 +8,45 @@ namespace Z0
 
     using Z0.Asm;
 
-    public readonly struct ApiCaptureRunner : IDisposable
+    public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
-        readonly WfHost Host;
+        IAsmContext Asm;
 
-        readonly IWfShell Wf;
-
-        readonly IAsmContext Asm;
-
-        readonly IAppContext App;
-
-        readonly IApiServices Api;
-
-        readonly PartId[] Parts;
-
-        internal ApiCaptureRunner(IWfShell wf, IAsmContext asm)
+        protected override void OnInit()
         {
-            Host = WfShell.host(nameof(ApiCaptureRunner));
-            Wf = wf.WithHost(Host);
-            App = asm.ContextRoot;
-            Asm = asm;
-            Parts = Wf.Api.PartIdentities;
-            Api = wf.ApiServices();
-            Wf.Created();
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed();
+            Asm = Wf.AsmContext();
         }
 
         public void Run()
         {
+            var parts = Wf.Api.PartIdentities;
             using var flow = Wf.Running();
-            Wf.Status(Seq.enclose(Wf.Api.PartIdentities));
-            RunPrimary();
-            RunImm();
-            //RunEvaluate();
+            Wf.Status(Seq.enclose(parts));
+            RunPrimary(parts);
+            EmitImm(parts);
             RebaseMembers();
             EmitDump();
         }
 
-        void RunPrimary()
+        void RunPrimary(Index<PartId> parts)
         {
             var flow = Wf.Running("ApiCapture");
-            using var step = AsmServices.apicapture(Wf, Asm);
+            using var step = Wf.ApiCapture(Asm);
             step.CaptureApi();
             Wf.Ran(flow);
         }
 
-        void RunImm()
+        void EmitImm(Index<PartId> parts)
         {
-            var flow = Wf.Running("ImmEmitter");
-            Wf.ImmEmitter().Emit(Parts);
-            //service.Emit(Parts);
-            // service.ClearArchive(Parts);
-            // service.EmitUnrefined(Parts);
-            // service.EmitRefined(Parts);
+            var flow = Wf.Running();
+            Wf.ImmEmitter().Emit(parts);
             Wf.Ran(flow);
         }
 
-        void RunEvaluate()
+        void Evaluate(Index<PartId> parts)
         {
-            var flow = Wf.Running("Evaluator");
-            var evaluate = Evaluate.control(Wf, App.Random, Wf.Paths.AppCaptureRoot, Pow2.T14);
+            var flow = Wf.Running();
+            var evaluate = Wf.EvalControl();
             evaluate.Execute();
             Wf.Ran(flow);
         }
@@ -79,7 +54,7 @@ namespace Z0
         void RebaseMembers()
         {
             var flow = Wf.Running();
-            Api.RebaseMembers();
+            var catalog = Wf.ApiServices().RebaseMembers();
             Wf.Ran(flow);
         }
 
@@ -87,7 +62,7 @@ namespace Z0
         {
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
-            var dst = Wf.Db().ProcDumpPath(name).EnsureParentExists();
+            var dst = Db.ProcDumpPath(name).EnsureParentExists();
             var flow = Wf.EmittingFile(dst);
             dst.Delete();
             DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);

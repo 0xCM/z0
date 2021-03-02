@@ -37,8 +37,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        void Relay(IAppMsg msg) => Next(msg);
-
+        void Relay(IAppMsg msg)
+            => Next(msg);
 
         public void Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);

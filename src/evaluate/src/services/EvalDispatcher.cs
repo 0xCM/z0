@@ -18,20 +18,20 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly IPolyStream DataSource;
+        readonly IDomainSource DataSource;
 
         readonly uint BufferSize;
 
         [MethodImpl(Inline)]
-        public EvalDispatcher(IWfShell wf, IPolyStream  random, uint bufferSize)
+        public EvalDispatcher(IWfShell wf, IDomainSource source, uint bufferSize)
         {
             Wf = wf;
-            DataSource = random;
+            DataSource = source;
             BufferSize = bufferSize;
         }
 
         uint PointCount<T>()
-            => (uint)z.size<T>()/BufferSize;
+            => size<T>()/BufferSize;
 
         MemberEvaluator Evaluator(BufferTokens buffers)
             => new MemberEvaluator(buffers);

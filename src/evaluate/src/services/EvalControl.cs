@@ -18,12 +18,12 @@ namespace Z0
 
         readonly IGlobalApiCatalog ApiGlobal;
 
-        internal EvalControl(IWfShell wf, IPolyrand random, FS.FolderPath root, uint buffersize)
+        internal EvalControl(IWfShell wf, IDomainSource source, FS.FolderPath root, uint buffersize)
         {
             Wf = wf;
             BufferCount = 3;
             BufferSize = buffersize;
-            Dispatcher = Evaluate.dispatcher(Wf, random, BufferSize);
+            Dispatcher = Wf.EvalDispatcher(source, BufferSize);
             ApiGlobal = wf.Api;
         }
 
