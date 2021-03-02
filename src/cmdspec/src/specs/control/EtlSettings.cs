@@ -30,13 +30,11 @@ namespace Z0
 
         public Setting<bool> EmitAsmCatalogs;
 
-        public Setting<bool> EmitAsmSemantic;
-
         public Setting<bool> EmitAsmRows;
 
         public Setting<bool> EmitResBytes;
 
-        public Setting<bool> EmitAsmBranches;
+        public Setting<bool> EmitAsmAnalysis;
 
         public Setting<bool> EmitIntrinsicsInfo;
 
@@ -54,10 +52,9 @@ namespace Z0
             dst.EmitCliConstants = true;
             dst.EmitLiteralCatalogs = true;
             dst.EmitAsmCatalogs = true;
-            dst.EmitAsmSemantic = true;
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;
-            dst.EmitAsmBranches = true;
+            dst.EmitAsmAnalysis = true;
             dst.EmitIntrinsicsInfo = true;
             return dst;
         }

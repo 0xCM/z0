@@ -44,9 +44,7 @@ namespace Z0.Asm
             return this;
         }
 
-
         public static AsmRecords Empty
             => new AsmRecords();
-
     }
 }

@@ -37,6 +37,7 @@ namespace Z0.Asm
             return count;
         }
 
+
         [Op]
         public static ref readonly DatasetFormatter<AsmRowField> format(in AsmRow src, in DatasetFormatter<AsmRowField> dst)
         {
@@ -54,5 +55,7 @@ namespace Z0.Asm
             dst.Delimit(F.OpCodeId, src.OpCodeId);
             return ref dst;
         }
+
+
     }
 }

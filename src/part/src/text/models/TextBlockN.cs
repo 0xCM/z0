@@ -14,9 +14,15 @@ namespace Z0
     {
         readonly string Data;
 
+        static int n
+        {
+            [MethodImpl(Inline)]
+            get => (int)default(N).NatValue;
+        }
+
         [MethodImpl(Inline)]
         public TextBlock(string src)
-            => Data = src;
+            => Data = text.empty(src) ? EmptyString : text.slice(src, 0, root.min(n, src.Length));
 
         public ReadOnlySpan<char> View
         {
@@ -68,7 +74,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.pad((int)default(N).NatValue),Data);
+            => string.Format(RP.pad(-n),Data);
 
         public override string ToString()
             => Format();

@@ -20,6 +20,7 @@ namespace Z0
 
         UriCode UriCode;
 
+
         [MethodImpl(Inline)]
         public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
         {
@@ -27,6 +28,18 @@ namespace Z0
             UriLocations = memuri;
             PartIndex = parts;
             UriCode = code;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parts.Count == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Parts.Count != 0;
         }
 
         public ApiIndexMetrics CalcMetrics()

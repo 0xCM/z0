@@ -89,14 +89,10 @@ namespace Z0
                 if(Options.EmitAsmRows)
                     asm.EmitAsmRows();
 
-                if(Options.EmitAsmBranches)
+                if(Options.EmitAsmAnalysis)
                 {
-                    asm.EmitCallRows();
-                    asm.EmitJmpRows();
+                    asm.EmitAnalyses();
                 }
-
-                if(Options.EmitAsmSemantic)
-                    asm.EmitSemantic();
 
                 if(Options.EmitResBytes)
                     asm.EmitResBytes();

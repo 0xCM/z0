@@ -12,45 +12,55 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+
     public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
         AsmRecords Recordset;
 
-        ApiCodeBlocks CodeBlocks;
+        ApiCodeBlocks _CodeBlocks;
 
         int Sequence;
 
         uint Offset;
-
-        public ApiAsmDataset Dataset {get; private set;}
 
         public AsmDataEmitter()
         {
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
-            Dataset = ApiAsmDataset.Empty;
             Recordset = AsmRecords.Empty;
-            CodeBlocks = ApiCodeBlocks.Empty;
+            _CodeBlocks = ApiCodeBlocks.Empty;
         }
 
-        protected override void OnInit()
+        ApiCodeBlocks CodeBlocks()
         {
-            base.OnInit();
-            CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
-            Dataset = Wf.ApiIndexDecoder().Decode(CodeBlocks);
+            if(_CodeBlocks.IsEmpty)
+                _CodeBlocks = Wf.ApiHexIndexer().IndexApiBlocks();
+            return _CodeBlocks;
         }
 
-        public ApiAsmDataset Run()
+        public void EmitAnalyses()
         {
-            EmitAsmRows();
-            EmitCallRows();
-            EmitJmpRows();
-            EmitSemantic();
-            EmitResBytes();
-            return Dataset;
+            var routines = Wf.ApiIndexDecoder().Decode(CodeBlocks()).Routines;
+            EmitCallRows(routines);
+            EmitJmpRows(routines);
+            EmitSemantic(routines);
+        }
+
+        public Index<AsmRow> CreateAsmRows(ApiCodeBlocks blocks)
+        {
+            var addresses = blocks.Addresses.View;
+            var count = addresses.Length;
+            var rows = root.list<AsmRow>();
+            for(var i=0u; i<count; i++)
+            {
+                var input = blocks[skip(addresses, i)];
+                var records = CreateRecords(input);
+                rows.AddRange(records);
+            }
+            return rows.ToArray();
         }
 
         public AsmRowSets<IceMnemonic> EmitAsmRows()
@@ -78,10 +88,32 @@ namespace Z0.Asm
             }
         }
 
-        public Index<AsmJmpRow> EmitJmpRows()
+        public AsmRowSets<IceMnemonic> EmitRowsets()
+        {
+            using var flow = Wf.Running();
+            var rows = CreateAsmRows(CodeBlocks());
+            var rowsets = CreateRowsets();
+            Wf.Ran(flow);
+            return rowsets;
+        }
+
+        AsmRowSets<IceMnemonic> CreateRowsets()
+        {
+            var keys = Index.Keys.ToArray();
+            var count = keys.Length;
+            var sets = new AsmRowSet<IceMnemonic>[count];
+            for(var i=0; i<count; i++)
+            {
+                var key = keys[i];
+                sets[i] = AsmEtl.rowset(key, Index[key].Emit());
+            }
+            return AsmEtl.rowsets(sets);
+        }
+
+        public Index<AsmJmpRow> EmitJmpRows(Index<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmJmpRow>();
-            var routines = Dataset.Routines;
+            //var routines = Dataset.Routines;
             var count = routines.Length;
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitJumpRows(routines[i]));
@@ -90,18 +122,31 @@ namespace Z0.Asm
             return rows;
         }
 
-        public void EmitSemantic()
+        public void EmitSemantic(Index<ApiPartRoutines> routines)
         {
-            var routines = Dataset.Routines;
+            //var routines = Dataset.Routines;
             var render = Wf.AsmSemanticRender();
             var count = routines.Length;
             for(var i=0; i<count; i++)
                 render.Render(routines[i]);
         }
 
+        public Index<AsmCallRow> EmitCallRows(Index<ApiPartRoutines> routines)
+        {
+            var dst = root.list<AsmCallRow>();
+            //var routines = Dataset.Routines;
+            var count = routines.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(EmitCallRows(routines[i]));
+            var rows = dst.ToArray();
+            Recordset.With(rows);
+            return rows;
+        }
 
         public Index<ApiHostRes> EmitResBytes()
-            => Wf.ResBytesEmitter().Emit(CodeBlocks);
+        {
+            return Wf.ResBytesEmitter().Emit(CodeBlocks());
+        }
 
         public Index<AsmJmpRow> EmitJumpRows(ApiPartRoutines src)
         {
@@ -126,18 +171,6 @@ namespace Z0.Asm
             }
         }
 
-        public Index<AsmCallRow> EmitCallRows()
-        {
-            var dst = root.list<AsmCallRow>();
-            var routines = Dataset.Routines;
-            var count = routines.Length;
-            for(var i=0; i<count; i++)
-                dst.AddRange(EmitCallRows(routines[i]));
-            var rows = dst.ToArray();
-            Recordset.With(rows);
-            return rows;
-        }
-
         public Index<AsmCallRow> EmitCallRows(ApiPartRoutines src)
         {
             var dst = Db.Table(AsmCallRow.TableId, src.Part);
@@ -154,41 +187,43 @@ namespace Z0.Asm
             return calls;
         }
 
-        void CreateRecords(in ApiCodeBlock src)
+        Index<AsmRow> CreateRecords(in ApiCodeBlock src)
         {
             var decoded = Asm.RoutineDecoder.Decode(src.Code);
             if(decoded)
-                CreateRecords(src.Code, decoded.Value);
+                return CreateRecords(src.Code, decoded.Value);
+            else
+                return sys.empty<AsmRow>();
         }
 
-        void CreateRecords(in CodeBlock code, in IceInstructionList asm)
+        Index<AsmRow> CreateRecords(in CodeBlock code, in IceInstructionList asm)
             => CreateRecords(code, asm.Storage);
 
         FS.FolderPath RespackDir
             => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
 
-
-        void CreateRecords(in CodeBlock code, IceInstruction[] src)
+        Index<AsmRow> CreateRecords(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             var offset = z16;
             var count = src.Length;
-
+            var buffer = alloc<AsmRow>(count);
+            var dst = span(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref src[i];
                 var size = (ushort)instruction.ByteLength;
-                CreateRecord(code, new Address16(offset), bytes.Slice(offset, size), instruction);
+                FillRecord(code, new Address16(offset), bytes.Slice(offset, size), instruction, ref seek(dst,i));
                 offset += size;
             }
+            return buffer;
         }
 
-        void CreateRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src)
+        bool FillRecord(in CodeBlock code, Address16 offset, Span<byte> encoded, in IceInstruction src, ref AsmRow record)
         {
             var mnemonic = src.Mnemonic;
             if(mnemonic != 0)
             {
-                var record = new AsmRow();
                 record.Sequence = (uint)NextSequence;
                 record.BlockAddress = code.BaseAddress;
                 record.IP = src.IP;
@@ -201,38 +236,13 @@ namespace Z0.Asm
                 record.Instruction = src.Specifier.Sig;
                 record.CpuId = text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Join(","));
                 record.OpCodeId = (IceOpCodeId)src.Code;
-
                 if(Index.TryGetValue(mnemonic, out var builder))
                     builder.Include(record);
                 else
                     Index.Add(mnemonic, ArrayBuilder.build(record));
+                return true;
             }
-        }
-
-        AsmRowSets<IceMnemonic> EmitRowsets()
-        {
-            using var flow = Wf.Running();
-            var blocks = Dataset.Blocks;
-            var addresses = blocks.Addresses.View;
-            var count = addresses.Length;
-            for(var i=0u; i<count; i++)
-                CreateRecords(blocks[skip(addresses, i)]);
-            Wf.Ran(flow);
-
-            return LoadRowSets();
-        }
-
-        AsmRowSets<IceMnemonic> LoadRowSets()
-        {
-            var keys = Index.Keys.ToArray();
-            var count = keys.Length;
-            var sets = new AsmRowSet<IceMnemonic>[count];
-            for(var i=0; i<count; i++)
-            {
-                var key = keys[i];
-                sets[i] = AsmEtl.rowset(key, Index[key].Emit());
-            }
-            return AsmEtl.rowsets(sets);
+            return false;
         }
 
         int NextSequence

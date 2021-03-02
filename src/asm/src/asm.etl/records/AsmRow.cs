@@ -36,6 +36,33 @@ namespace Z0.Asm
         OpCodeId = 11 | (20 << WidthOffset),
     }
 
+    public enum AsmRowFieldWidth : uint
+    {
+        Sequence = 10,
+
+        BlockAddress =  16,
+
+        IP = 16,
+
+        GlobalOffset = 16,
+
+        LocalOffset = 16,
+
+        Mnemonic = 16,
+
+        OpCode = 32,
+
+        Instruction = 64,
+
+        Statement = 64,
+
+        Encoded = 32,
+
+        CpuId = 64,
+
+        OpCodeId = 20,
+    }
+
     [Record(TableId)]
     public struct AsmRow : IRecord<AsmRow>, IComparable<AsmRow>
     {
@@ -51,7 +78,7 @@ namespace Z0.Asm
 
         public Address16 LocalOffset;
 
-		public asci16 Mnemonic;
+		public TextBlock<N16> Mnemonic;
 
 		public AsmOpCodeExprLegacy OpCode;
 
