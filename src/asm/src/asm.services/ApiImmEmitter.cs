@@ -265,7 +265,7 @@ namespace Z0.Asm
             var gid = src.Id;
             var uri = src.Host.Uri;
             var generic = true;
-            var closures = src.Close();
+            var closures = Identity.Closures(src);
             var count = closures.Length;
             var routines = root.list<AsmRoutine>();
             foreach(var closure in closures)
@@ -288,7 +288,7 @@ namespace Z0.Asm
             var gid = src.Id;
             var host = src.Host.Uri;
             var generic = true;
-            var closures = src.Close();
+            var closures = Identity.Closures(src);
             var count = closures.Length;
             var routines = root.list<AsmRoutine>();
 

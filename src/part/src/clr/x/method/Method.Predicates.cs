@@ -142,5 +142,49 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Type ParameterType(this MethodInfo m, int index)
             => m.ArityValue() >= index + 1 ? m.GetParameters()[index].ParameterType : typeof(void);
+
+        /// <summary>
+        /// Returns true if all non-void input/output values are of the same type
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        [Op]
+        public static bool IsHomogenous(this MethodInfo src)
+        {
+            var inputs = src.ParameterTypes().ToHashSet();
+            if(inputs.Count == 1)
+                return inputs.Single() == src.ReturnType;
+            else if(inputs.Count == 0)
+                return src.ReturnType == typeof(void);
+            else
+                return false;
+        }
+
+        /// <summary>
+        /// Determines whether a method defines an operator over a (common) domain
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        [Op]
+        public static bool IsOperator(this MethodInfo src)
+            => src.IsFunction() && src.IsHomogenous() && src.ArityValue() >= 1;
+
+        [Op, MethodImpl(Inline)]
+        public static bool IsConcrete(this MethodInfo src)
+            => !src.IsAbstract && !src.ContainsGenericParameters;
+
+        /// <summary>
+        /// Determines whether a method is a binary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsBinaryOperator(this MethodInfo m)
+            => m.IsHomogenous() && m.IsBinaryFunction();
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsBinaryFunction(this MethodInfo m)
+            => m.IsFunction() && m.HasArityValue(2);
     }
 }

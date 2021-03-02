@@ -16,5 +16,4 @@ namespace Z0
         public static ApiHexIndex ApiHexIndexer(this IWfShell wf)
              => Z0.ApiHexIndex.create(wf);
     }
-
 }

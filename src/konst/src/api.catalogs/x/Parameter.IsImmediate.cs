@@ -10,7 +10,7 @@ namespace Z0
 
     using static ImmFunctionClass;
 
-    partial class XApi
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a parameters is an immediate
@@ -60,14 +60,6 @@ namespace Z0
         [Op]
         public static bool IsRefinedImmediate(this ParameterInfo src)
             => src.Tagged<ImmAttribute>() && src.ParameterType.IsEnum;
-
-        /// <summary>
-        /// Returns a method's immediate parameter types
-        /// </summary>
-        /// <param name="m">The method to examine</param>
-        [Op]
-        public static Type[] ImmParameterTypes(this MethodInfo src, RefinementClass kind)
-            => src.ImmParameters(kind).Select(p => p.ParameterType);
 
         [Op]
         internal static ImmFunctionClass ImmSlot(this ParameterInfo p)

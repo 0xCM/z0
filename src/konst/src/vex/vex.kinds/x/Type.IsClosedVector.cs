@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Returns true if a type is a closed 128-bit intrinsic vector

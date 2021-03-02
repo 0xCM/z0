@@ -12,10 +12,6 @@ namespace Z0
     partial class XApi
     {
         [MethodImpl(Inline)]
-        public static BinaryOperatorClass<W> Fixed<W>(this BinaryOperatorClass src)
-            where W : unmanaged, ITypeWidth => default;
-
-        [MethodImpl(Inline)]
         public static BinaryOperatorClass<T> As<T>(this BinaryOperatorClass src)
              where T : unmanaged => default;
     }

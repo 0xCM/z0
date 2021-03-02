@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
 
-    partial class XVex
+    partial class ClrQuery
     {
         /// <summary>
-        /// Determines whether a method produces, but does not accept, vector values
+        /// Selects binary operators from a stream
         /// </summary>
-        /// <param name="m">The method to examine</param>
+        /// <param name="src">The methods to examine</param>
         [Op]
-        public static bool IsVectorFactory(this MethodInfo m)
-            => m.ParameterTypes(true).Where(t => t.IsVector()).Count() == 0 && m.ReturnType.IsVector();
+        public static MethodInfo[] BinaryOperators(this MethodInfo[] src)
+            => src.Where(x => x.IsBinaryOperator());
     }
 }

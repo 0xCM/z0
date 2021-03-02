@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind

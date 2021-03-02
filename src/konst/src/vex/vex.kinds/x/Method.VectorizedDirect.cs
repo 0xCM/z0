@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
-    partial class XApi
+    partial class XVex
     {
         /// <summary>
         /// Selects nongeneric source methods that have at least one 128-bit vector parameter

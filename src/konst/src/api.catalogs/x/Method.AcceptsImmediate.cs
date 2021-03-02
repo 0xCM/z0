@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XApi
+    partial class ClrQuery
     {
         /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
@@ -33,7 +33,7 @@ namespace Z0
         [Op]
         public static bool AcceptsImmediate(this MethodInfo m, int index, RefinementClass refinement)
         {
-            var parameters = m.GetParameters().ToArray();
+            var parameters = m.GetParameters();
             return parameters.Length > index && parameters[index].IsImmediate(refinement);
         }
     }

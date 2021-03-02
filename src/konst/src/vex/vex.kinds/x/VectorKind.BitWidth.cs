@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Specifies the bit-width of a classified cpu vector

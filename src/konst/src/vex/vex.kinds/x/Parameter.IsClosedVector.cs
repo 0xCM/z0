@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Returns true if a method parameter is a closed 128-bit intrinsic vector

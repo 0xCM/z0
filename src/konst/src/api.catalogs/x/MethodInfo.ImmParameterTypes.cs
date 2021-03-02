@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
 
-    partial class XVex
+    partial class ClrQuery
     {
         /// <summary>
-        /// Determines whether a method produces, but does not accept, vector values
+        /// Returns a method's immediate parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static bool IsVectorFactory(this MethodInfo m)
-            => m.ParameterTypes(true).Where(t => t.IsVector()).Count() == 0 && m.ReturnType.IsVector();
+        public static Type[] ImmParameterTypes(this MethodInfo src, RefinementClass kind)
+            => src.ImmParameters(kind).Select(p => p.ParameterType);
     }
 }

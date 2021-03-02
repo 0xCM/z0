@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XApi
+    partial class ClrQuery
     {
         /// <summary>
         /// Selects parameters from a method, if any, that acceptrequire an immediate value

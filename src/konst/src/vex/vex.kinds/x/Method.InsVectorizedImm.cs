@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Determines whether a method is (partially) vectorized and accepts an immediate value

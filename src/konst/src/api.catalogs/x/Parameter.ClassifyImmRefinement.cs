@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XApi
+    partial class ClrQuery
     {
         [Op]
         public static RefinementClass ClassifyImmRefinement(this ParameterInfo src)

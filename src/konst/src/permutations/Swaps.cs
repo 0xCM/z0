@@ -122,11 +122,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Swap[] chain(Swap s0, int len)
         {
-            var dst = new Swap[len];
-            dst[0]  = s0;
-            for(var k = 1; k < len; k++)
-                dst[k] = ++s0;
-            return dst;
+            var buffer = alloc<Swap>(len);
+            ref var dst = ref first(buffer);
+            seek(dst,0)  = s0;
+            for(var k = 1; k<len; k++)
+                seek(dst,k) = ++s0;
+            return buffer;
         }
 
         /// <summary>

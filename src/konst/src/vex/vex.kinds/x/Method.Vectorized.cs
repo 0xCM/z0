@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
+    using static Part;
 
-    partial class XApi
+    partial class XVex
     {
         /// <summary>
         /// selects vectorized methods from a source stream
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] Vectorized(this MethodInfo[] src, W256 w, bool generic = false)
             => generic ? src.VectorizedGeneric(w) : src.VectorizedDirect(w);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] Vectorized(this MethodInfo[] src, W512 w, bool generic = false)
             => generic ? src.VectorizedGeneric(w) : src.VectorizedDirect(w);
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] Vectorized(this MethodInfo[] src, W128 w, string name, bool generic = false)
             => src.Vectorized(w,generic).WithName(name);
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="g">The generic partition to which the considered members belong</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] Vectorized(this MethodInfo[] src, W256 w, string name, bool generic = false)
             => src.Vectorized(w,generic).WithName(name);
 
@@ -71,7 +71,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="name">The name to match</param>
         /// <param name="generic">The generic partition to which the considered members belong</param>
-        [MethodImpl(NotInline), Op]
+        [Op]
         public static MethodInfo[] Vectorized(this MethodInfo[] src, W512 w, string name, bool generic = false)
             => src.Vectorized(w,generic).WithName(name);
     }

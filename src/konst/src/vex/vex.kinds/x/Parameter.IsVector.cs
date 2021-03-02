@@ -6,10 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
 
-    partial class XVKinds
+    partial class XVex
     {
         /// <summary>
         /// Determines whether a parameter is of intrinsic vector type

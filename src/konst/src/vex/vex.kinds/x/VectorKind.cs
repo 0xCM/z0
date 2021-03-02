@@ -9,11 +9,8 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
-    public static partial class XVKinds
+    partial class XVex
     {
-        const NumericKind Closure = AllNumeric;
-
         /// <summary>
         /// Classifies a 128-bit vector
         /// </summary>
