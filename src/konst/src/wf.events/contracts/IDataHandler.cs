@@ -9,18 +9,15 @@ namespace Z0
     [Free]
     public interface IDataHandler
     {
-
+        void Handle(dynamic src);
     }
 
     [Free]
     public interface IDataHandler<T> : IDataHandler
     {
-        void Handle(T data);
-    }
+        void Handle(T src);
 
-    [Free]
-    public interface IDataHandler<C,T> : IDataHandler
-    {
-        void Handle(C context, T data);
+        void IDataHandler.Handle(dynamic src)
+            => Handle(src);
     }
 }

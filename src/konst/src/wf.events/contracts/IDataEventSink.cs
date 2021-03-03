@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataSink : ISink
+    public interface IDataEventSink : ISink
     {
        void Deposit(IDataEvent e);
 

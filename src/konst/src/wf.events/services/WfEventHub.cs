@@ -15,11 +15,11 @@ namespace Z0
 
     public readonly struct WfEventHub : IWfEventHub
     {
-        internal readonly Dictionary<Type,IDataSink> Index;
+        internal readonly Dictionary<Type,IDataEventSink> Index;
 
         [MethodImpl(Inline)]
         internal WfEventHub(int capacity)
-            => Index = new Dictionary<Type,IDataSink>(capacity);
+            => Index = new Dictionary<Type,IDataEventSink>(capacity);
 
         [MethodImpl(Inline)]
         public void Subscribe<E>(E e, EventReceiver<E> receiver)

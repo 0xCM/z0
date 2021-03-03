@@ -8,7 +8,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IWfHubClient : IDataSink
+    public interface IWfHubClient : IDataEventSink
     {
         IWfEventHub Hub {get;}
 

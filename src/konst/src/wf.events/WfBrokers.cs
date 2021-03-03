@@ -19,7 +19,7 @@ namespace Z0
             => new WfEventHub(capacity);
 
         [MethodImpl(Inline), Op]
-        public static WfHubClient client(IWfEventHub hub, IDataSink sink, Action connect, Action exec)
+        public static WfHubClient client(IWfEventHub hub, IDataEventSink sink, Action connect, Action exec)
             => new WfHubClient(hub, sink, connect, exec);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool subscribe<S,E>(WfEventHub hub, S sink, E model)
             where E : struct, IDataEvent
-            where S : IDataSink
+            where S : IDataEventSink
                 => hub.Index.TryAdd(typeof(E), sink);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

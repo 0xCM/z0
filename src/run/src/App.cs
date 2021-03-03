@@ -8,6 +8,198 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static Toolsets;
+
+
+    public interface IScriptResultHandlder
+    {
+        ToolId Tool => default;
+
+        bool CanHandle(TextLine src);
+
+        bool Handle(TextLine src);
+
+    }
+
+    class DefaultResultHandler : IScriptResultHandlder
+    {
+        readonly IDbPaths Paths;
+
+        public ToolId Tool => msbuild;
+
+        void Status(TextLine src)
+            => term.babble(src);
+
+        public DefaultResultHandler(IDbPaths paths)
+        {
+            Paths = paths;
+        }
+
+        public bool Handle(TextLine src)
+        {
+            Status(src);
+            return true;
+        }
+
+        public bool CanHandle(TextLine src)
+            => true;
+
+    }
+
+    class MsBuildResultHandler : IScriptResultHandlder
+    {
+        readonly IDbPaths Paths;
+
+        public ToolId Tool => msbuild;
+
+        void Status(TextLine src)
+            => term.babble(src);
+
+        void Found(string marker)
+            => term.inform(marker);
+
+        public MsBuildResultHandler(IDbPaths paths)
+        {
+            Paths = paths;
+        }
+
+        public bool Handle(TextLine src)
+        {
+            var content = src.Content;
+            var @continue = true;
+
+            if(content.Contains(BuildSucceededMarker))
+            {
+                Found(nameof(BuildSucceededMarker));
+                Status(src);
+                @continue = false;
+            }
+            else
+            {
+                Status(src);
+            }
+
+            return @continue;
+
+        }
+
+        public bool CanHandle(TextLine src)
+            => src.Content.Contains(Logo);
+
+        const string BuildSucceededMarker = "Build Succeeded";
+
+        const string Logo = "Microsoft (R) Build Engine";
+
+    }
+
+    public class RobocopyResultHandler : IScriptResultHandlder
+    {
+        readonly IDbPaths Paths;
+
+        public ToolId Tool => robocopy;
+
+        void Status(TextLine src)
+            => term.babble(src);
+
+        void Found(string marker)
+            => term.inform(marker);
+
+        public RobocopyResultHandler(IDbPaths paths)
+        {
+            Paths = paths;
+        }
+
+        public bool Handle(TextLine src)
+        {
+            var @continue = true;
+            var content = src.Content;
+            if(content.Contains(CopySummaryMarker))
+            {
+                Found(nameof(CopySummaryMarker));
+                Status(src);
+            }
+            else if(content.Contains(CopyFinishedMarker))
+            {
+                Found(nameof(CopyFinishedMarker));
+                Status(src);
+
+                @continue = false;
+            }
+            else
+                Status(src);
+
+
+            return @continue;
+        }
+
+        public bool CanHandle(TextLine src)
+            => src.Content.Contains(Logo);
+
+        const string Logo = "Robust File Copy for Windows";
+
+        const string CopySummaryMarker = "Total    Copied   Skipped  Mismatch    FAILED    Extras";
+
+        const string CopyFinishedMarker = "Ended :";
+
+    }
+
+    class ResultProcessor
+    {
+        readonly IDbPaths Paths;
+
+        public FS.FilePath ScriptPath {get;}
+
+        IScriptResultHandlder CurrentHandler;
+
+        IScriptResultHandlder DefaultHandler;
+
+        Index<IScriptResultHandlder> KnownHandlers;
+
+        public ResultProcessor(IDbPaths paths, FS.FilePath script)
+        {
+            Paths = paths;
+            ScriptPath = script;
+            DefaultHandler = new DefaultResultHandler(Paths);
+            CurrentHandler = DefaultHandler;
+            KnownHandlers = sys.alloc<IScriptResultHandlder>(2);
+            KnownHandlers[0] = new MsBuildResultHandler(Paths);
+            KnownHandlers[1] = new RobocopyResultHandler(Paths);
+        }
+
+        void Switch(IScriptResultHandlder handler)
+        {
+            CurrentHandler = handler;
+            term.inform($"Beginning {CurrentHandler.Tool} result processing");
+        }
+
+        void Revert()
+        {
+            CurrentHandler = DefaultHandler;
+        }
+
+        bool Handle(TextLine src)
+            => CurrentHandler.Handle(src);
+
+        public TextLine Process(TextLine src)
+        {
+            if(!Handle(src))
+            {
+                Revert();
+            }
+
+            foreach(var handler in KnownHandlers)
+            {
+                if(handler.CanHandle(src))
+                {
+                    Switch(handler);
+                    break;
+                }
+            }
+
+            return src;
+        }
+
+    }
 
     class Runner
     {
@@ -31,13 +223,13 @@ namespace Z0
                     var script = paths.ControlScript(name);
                     if(script.Exists)
                     {
-                        //term.inform($"Running {script.ToUri()}");
                         var runner = ScriptRunner.create();
                         var outcome = runner.RunControlScript(name);
                         if(outcome)
                         {
+                            var processor = new ResultProcessor(paths,script);
                             term.inform("Response");
-                            root.iter(outcome.Data, x => term.babble(x));
+                            root.iter(outcome.Data, x => processor.Process(x));
                         }
                     }
                     else
@@ -49,8 +241,6 @@ namespace Z0
             else
                 Apps.react(args);
         }
-
-        readonly WfHost Host;
 
         readonly IWfShell Wf;
 

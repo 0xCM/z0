@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct DataHandler<C,T> : IDataHandler<C,T>
+    public readonly struct DataHandler<C,T>
     {
         readonly DataReceiver<C,T> Receiver;
 

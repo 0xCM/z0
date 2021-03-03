@@ -13,14 +13,14 @@ namespace Z0
     {
         public IWfEventHub Hub {get;}
 
-        readonly IDataSink Sink;
+        readonly IDataEventSink Sink;
 
         readonly Action Connector;
 
         readonly Action Executor;
 
         [MethodImpl(Inline)]
-        public WfHubClient(IWfEventHub hub, IDataSink sink, Action connect, Action exec)
+        public WfHubClient(IWfEventHub hub, IDataEventSink sink, Action connect, Action exec)
         {
             Hub = hub;
             Sink = sink;

@@ -10,9 +10,13 @@ namespace Z0
     using static Part;
     using static TextRules;
 
-    public sealed class ScriptRunner
+    public readonly struct ScriptResultProcessor
     {
 
+    }
+
+    public sealed class ScriptRunner
+    {
         [MethodImpl(Inline)]
         public static ScriptRunner create(Env env)
             => new ScriptRunner(DbPaths.create(env));

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a sink that forwards deposits to a receiver
     /// </summary>
-    public readonly struct HubRelay<E> : IDataSink
+    public readonly struct HubRelay<E> : IDataEventSink
         where E : struct, IDataEvent
     {
         readonly EventReceiver<E> Receiver;
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal HubRelay(EventReceiver<E> receiver)
             => Receiver = receiver;
-        
+
         [MethodImpl(Inline)]
         public void Deposit(in E e)
             => Receiver(e);
