@@ -14,7 +14,7 @@ namespace Z0.Asm
         /// <summary>
         /// Represents a register digit 0..7 that occurs within an op code expression
         /// </summary>
-        public readonly struct RegDigit : IOpCodeModel<RegDigit>
+        public readonly struct RegDigit
         {
             public uint3 Value {get;}
 

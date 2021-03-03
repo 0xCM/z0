@@ -6,37 +6,44 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
-    using static memory;
     using static Chars;
+    using static AsmExpr;
+    using static memory;
     using static Rules;
     using static TextRules;
-    using static AsmExpr;
     using static AsmOpCodes;
 
     [ApiHost]
-    public sealed class AsmExprParser : WfService<AsmExprParser>
+    public class AsmSigs : WfService<AsmSigs>
     {
+        const char DigitQualifier = FSlash;
+
+        const char OperandDelimiter = Chars.Comma;
+
+        const char MnemonicTerminator = Chars.Space;
+
+        const char CompositeIndicator = Chars.FSlash;
+
         Index<char> RegDigits;
 
         Adjacent<char, OneOf<char>> RegDigitRule;
 
-        Index<Token<AsmSigOpKind>> SigOpTokens;
+        readonly SymbolTable<AsmSigOpKind> SigOpSymbols;
 
-        SymbolTable<AsmSigOpKind> SigOpLookup;
+        readonly Index<Token<AsmSigOpKind>> SigOpTokens;
 
-        SeqSplit<char> SigOpSplitRule;
+        readonly SymbolTable<AsmSigCompositeKind> Composites;
 
-        const char DigitQualifier = FSlash;
-
-        public AsmExprParser()
+        public AsmSigs()
         {
+            SigOpTokens = tokens();
+            SigOpSymbols = SigOpTokens.ToSymbolTable();
+            Composites = SymbolTables.create<AsmSigCompositeKind>();
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
-            SigOpTokens = AsmSigs.tokens();
-            SigOpLookup = SymbolTables.create(SigOpTokens);
-            SigOpSplitRule = Rules.splitter(AsmExprFacets.OperandDelimiter);
         }
 
         [MethodImpl(Inline), Op]
@@ -51,7 +58,7 @@ namespace Z0.Asm
         [Op]
         public bool ParseToken(SigOperand src, out Token<AsmSigOpKind> token)
         {
-            if(SigOpLookup.Index(src.Content, out var index))
+            if(SigOpSymbols.Index(src.Content, out var index))
             {
                 token = SigOpTokens[index];
                 return true;
@@ -70,8 +77,8 @@ namespace Z0.Asm
             {
                 if(ParseMnemonic(src, out var monic))
                 {
-                    var i = Query.index(src, AsmExprFacets.MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(SigOpSplitRule.Delimiter).Map(AsmSigs.sigop) : sys.empty<SigOperand>();
+                    var i = Query.index(src, MnemonicTerminator);
+                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<SigOperand>();
                     dst = new Signature(monic, operands);
                     return true;
                 }
@@ -87,32 +94,13 @@ namespace Z0.Asm
             if(text.empty(sig))
                 return false;
 
-            var i = Query.index(sig, AsmExprFacets.MnemonicTerminator);
+            var i = Query.index(sig, MnemonicTerminator);
             if(i > 0)
                 dst = mnemonic(Parse.segment(sig, 0, i - 1));
             else
                 dst = mnemonic(sig);
 
             return true;
-        }
-
-        [Op]
-        public bool ParseAddress(string src, out MemoryAddress dst)
-        {
-            dst = HexScalarParser.Service.Parse(src,ulong.MaxValue);
-            return dst != ulong.MaxValue;
-        }
-
-        public Index<SigOperand> Operands(string src)
-            => Transform.apply(SigOpSplitRule, src).Map(AsmSigs.sigop);
-
-        [Op]
-        public Index<SigOperand> Operands(Signature src)
-        {
-            if(ParseMnemonic(src.Content, out var monic))
-                if(Parse.after(src.Content, monic.Name, out var remainder))
-                    return Operands(remainder);
-            return Index<SigOperand>.Empty;
         }
 
         [Op]
@@ -127,7 +115,19 @@ namespace Z0.Asm
         [Op]
         public bool IsComposite(SigOperand src)
         {
-            return Query.contains(src.Content, AsmExprFacets.CompositeIndicator);
+            return Query.contains(src.Content, CompositeIndicator);
+        }
+
+        public Index<SigOperand> Operands(string src)
+            => src.Split(Chars.Comma).Map(sigop);
+
+        [Op]
+        public Index<SigOperand> Operands(Signature src)
+        {
+            if(ParseMnemonic(src.Content, out var monic))
+                if(Parse.after(src.Content, monic.Name, out var remainder))
+                    return Operands(remainder);
+            return Index<SigOperand>.Empty;
         }
 
         [Op]
@@ -135,7 +135,7 @@ namespace Z0.Asm
         {
             if(IsComposite(src))
             {
-                var parts = src.Content.Split(AsmExprFacets.CompositeIndicator);
+                var parts = src.Content.Split(CompositeIndicator);
                 if(parts.Length != 2)
                     root.@throw(new Exception($"Composition logic wrong for {src.Content}"));
 
@@ -156,6 +156,55 @@ namespace Z0.Asm
                 Parse.digit(result.B, out var digit))
                     return assign(digit, out dst);
             return false;
+        }
+
+        /// <summary>
+        /// Defines a <see cref='SigOperand'/>
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [MethodImpl(Inline), Op]
+        public static SigOperand sigop(string src)
+            => new SigOperand(src);
+
+        [Op]
+        public static bool composite(SigOperand src)
+            => src.Content.Contains(CompositeIndicator);
+
+        [Op]
+        public static bool composite(Signature src)
+            => src.Operands.Any(o => o.IsComposite);
+
+        [MethodImpl(Inline), Op]
+        public static AsmMnemonic mnemonic(string src)
+            => new AsmMnemonic(src);
+
+        public static string format(Signature src)
+        {
+            var buffer = text.buffer();
+            buffer.Append(src.Mnemonic.Format(AsmMnemonicCase.Uppercase));
+            var opcount = src.Operands.Length;
+            if(opcount != 0)
+            {
+                buffer.Append(Chars.Space);
+                buffer.Append(Format.join(OperandDelimiter, src.Operands));
+            }
+            return buffer.Emit();
+        }
+
+        [Op]
+        public static Index<Token<AsmSigOpKind>> tokens()
+        {
+            var details = Enums.details<AsmSigOpKind,ushort>().View;
+            var count = AsmSigOpKindFacets.IdentifierCount + 1;
+            var buffer = alloc<Token<AsmSigOpKind>>(count);
+            ref var dst = ref first(buffer);
+            for(byte i=1; i<count; i++)
+            {
+                ref readonly var detail = ref skip(details,i);
+                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, detail.Name);
+                seek(dst,i) = Tokens.token(i, detail.Name, detail.LiteralValue, symbol);
+            }
+            return buffer;
         }
     }
 }

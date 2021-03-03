@@ -21,7 +21,6 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
 
-        readonly SymbolTable<CompositeKind> Composites;
 
         const uint MaxRowCount = 2500;
 
@@ -29,7 +28,6 @@ namespace Z0.Asm
 
         public AsmCatalogService()
         {
-            Composites = AsmExpr.composites();
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicCodes = SymbolTables.create<AsmMnemonicCode>();
@@ -132,11 +130,11 @@ namespace Z0.Asm
             var dst = root.hashset<AsmMnemonic>();
             var rows = ImportedStokeRows();
             var count = rows.Length;
-            var parser = AsmExprParser.create(Wf);
+            var sigs = AsmSigs.create(Wf);
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                if(parser.ParseMnemonic(row.Instruction, out var monic))
+                if(sigs.ParseMnemonic(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -277,15 +275,15 @@ namespace Z0.Asm
             var imported = ImportedStokeRows();
             var count = imported.Length;
             var buffer = span<OperationSpec>(count);
-            var parser = AsmExprParser.create(Wf);
+            var sigs = AsmSigs.create(Wf);
             var j=0u;
             var k=0u;
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(imported, i);
-                var oc = AsmExpr.opcode(row.OpCode);
-                if(parser.ParseSig(row.Instruction, out var sig))
-                    seek(buffer, k++) = AsmExpr.operation(row.Sequence, oc, sig);
+                var oc = asm.opcode(row.OpCode);
+                if(sigs.ParseSig(row.Instruction, out var sig))
+                    seek(buffer, k++) = asm.operation(row.Sequence, oc, sig);
                 else
                 {
                     seek(buffer, k++) = OperationSpec.Empty;

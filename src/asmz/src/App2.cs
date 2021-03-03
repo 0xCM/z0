@@ -25,10 +25,6 @@ namespace Z0.Asm
             Catalog = AsmCatalogService.create(Wf);
             Wf.Created(flow);
 
-            flow = Wf.Creating(nameof(AsmParser));
-            AsmParser = AsmExpr.parser(Wf);
-            Wf.Created(flow);
-
             flow = Wf.Creating(nameof(Asm));
             Asm = Wf.AsmContext();
             Wf.Created(flow);
@@ -44,7 +40,6 @@ namespace Z0.Asm
 
         AsmCatalogService Catalog;
 
-        AsmExprParser AsmParser;
 
         IAsmContext Asm;
 
@@ -118,9 +113,9 @@ namespace Z0.Asm
 
         void CheckAsmSymbols()
         {
-            var table = AsmSigs.table();
-            var tokens = table.Tokens;;
-            root.iter(tokens, e => Wf.Row(e));
+            // var table = AsmSigs.table();
+            // var tokens = table.Tokens;;
+            // root.iter(tokens, e => Wf.Row(e));
         }
 
         ApiHostCaptureSet RunCapture(Type host)
@@ -335,7 +330,7 @@ namespace Z0.Asm
             var processor = AsmRowProcessor.create(Wf);
             var rows = processor.CreateAsmRows().Where(x => x.IP != 0).OrderBy(x => x.IP).Take(25000).Array();
             var count = rows.Length;
-            var parser = AsmExpr.parser(Wf);
+            var sigs = AsmSigs.create(Wf);
             var formatter = Records.formatter<AsmStatementInfo>(32);
             var dst = Db.IndexTable<AsmStatementInfo>();
             using var writer = dst.Writer();
@@ -350,18 +345,34 @@ namespace Z0.Asm
                 output.GlobalOffset = input.GlobalOffset;
                 output.LocalOffset = input.LocalOffset;
                 output.OpCode = asm.opcode(input.OpCode.Value);
-                parser.ParseSig(input.Instruction, out output.Sig);
+                sigs.ParseSig(input.Instruction, out output.Sig);
                 output.Statement = asm.statement(input.Statement);
                 output.Encoded = input.Encoded;
                 writer.WriteLine(formatter.Format(output));
             }
 
         }
+
         public unsafe void Run()
         {
 
-            var composites = AsmExpr.composites();
-            root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
+            var limit = new Mb(15);
+            var root = Db.ToolOutDir(dia2dump);
+            var descriptions = Db.ToolOutFiles(dia2dump).Descriptions().Where(f => f.Size.Mb >= limit).Array();
+            var splitter = TextFileSplitter.create(Wf);
+            foreach(var description in descriptions)
+            {
+                var path = description.Path;
+                var target = root + FS.folder(path.FileName.WithoutExtension.Name);
+                target.Delete();
+                var spec = new FileSplitSpec(path, 50000, target);
+                splitter.Run(spec);
+            }
+
+
+            // var composites = AsmExpr.composites();
+            // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
+
             // var dst = Db.IndexTable<AsmRow>();
             // processor.Emit(rows, dst);
 

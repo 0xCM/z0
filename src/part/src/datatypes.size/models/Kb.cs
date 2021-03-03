@@ -11,12 +11,11 @@ namespace Z0
 
     using api = Sizes;
 
-    /// <summary>
-    /// Specifies data size in bits
-    /// </summary>
     [Datatype]
     public readonly struct Kb
     {
+        const string UOM = " kb";
+
         /// <summary>
         /// Specifies a kilobyte count
         /// </summary>
@@ -46,15 +45,22 @@ namespace Z0
             get => api.bits(this);
         }
 
+        public Mb Mb
+        {
+            [MethodImpl(Inline)]
+            get => api.mb(this);
+        }
+
         public string Format()
-            => api.format(this);
+            => (Count != 0 ? Count.ToString("#,#") : "0") + UOM;
+
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public bool Equals(Kb rhs)
             => api.eq(this, rhs);
-
-        public override string ToString()
-            => Format();
 
         public override int GetHashCode()
             => (int)api.hash(this);
@@ -101,26 +107,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(Kb a, Kb b)
             => api.neq(a,b);
-
-        // [MethodImpl(Inline)]
-        // public static Kb operator +(Kb lhs, Kb rhs)
-        //     => lhs.Count + rhs.Count;
-
-        // [MethodImpl(Inline)]
-        // public static Kb operator -(Kb lhs, Kb rhs)
-        //     => lhs.Count - rhs.Count;
-
-        // [MethodImpl(Inline)]
-        // public static Kb operator *(Kb lhs, Kb rhs)
-        //     => lhs.Count * rhs.Count;
-
-        // [MethodImpl(Inline)]
-        // public static Kb operator /(Kb lhs, Kb rhs)
-        //     => lhs.Count / rhs.Count;
-
-        // [MethodImpl(Inline)]
-        // public static Kb operator %(Kb lhs, Kb rhs)
-        //     => lhs.Count % rhs.Count;
 
         /// <summary>
         /// The bit with no size

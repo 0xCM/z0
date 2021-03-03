@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     [LiteralProvider]
     public readonly struct AsmRegBits
     {

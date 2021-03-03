@@ -20,7 +20,6 @@ namespace Z0.Asm
             return false;
         }
 
-
         public Outcome ParseCode(string src, out AsmCodeDoc dst)
         {
             dst = AsmCodeDoc.Empty;

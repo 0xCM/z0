@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct ToolNames
-    {
-        public static ToolId clang => "clang";
-    }
-
     public readonly struct Toolsets
     {
+        public static ToolId dia2dump => "dia2dump";
+
         public readonly struct clang
         {
             public static ToolId name => "clang";

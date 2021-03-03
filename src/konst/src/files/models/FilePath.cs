@@ -124,7 +124,6 @@ namespace Z0
             public FilePath ChangeExtension(FileExt ext)
                 => WithoutExtension + ext;
 
-
             public string ReadText()
                 => File.ReadAllText(Name);
 

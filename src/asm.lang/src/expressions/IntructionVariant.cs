@@ -12,14 +12,14 @@ namespace Z0.Asm
     /// <summary>
     /// Specifies an instruction definition
     /// </summary>
-    public readonly struct AsmInstructionSpec
+    public readonly struct IntructionVariant
     {
         public AsmOpCode OpCode {get;}
 
         public AsmSig Sig {get;}
 
         [MethodImpl(Inline)]
-        public AsmInstructionSpec(AsmOpCode oc, AsmSig sig)
+        public IntructionVariant(AsmOpCode oc, AsmSig sig)
         {
             OpCode = oc;
             Sig = sig;

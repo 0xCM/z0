@@ -68,13 +68,11 @@ namespace Z0
 
         public const string imm = nameof(imm);
 
-
         public const string tmp = nameof(tmp);
 
         public const string data = nameof(data);
 
         public const string dumps = nameof(dumps);
-
 
         public const string source = nameof(source);
 
@@ -87,6 +85,8 @@ namespace Z0
         public const string tests = nameof(tests);
 
         public const string settings = nameof(settings);
+
         public const string z0 = nameof(z0);
+
     }
 }

@@ -36,7 +36,7 @@ namespace Z0.Asm
             {
                 Mnemonic = monic;
                 Operands = operands;
-                Data = format(this);
+                Data = AsmSigs.format(this);
             }
 
             public string Content
@@ -66,7 +66,7 @@ namespace Z0.Asm
             public bool IsComposite
             {
                 [MethodImpl(Inline)]
-                get => composite(this);
+                get => AsmSigs.composite(this);
             }
 
             public override int GetHashCode()

@@ -19,9 +19,6 @@ namespace Z0.Asm
 
         const string SigSplitter = "::";
 
-        // ; void mov(ref m32 dst, r32 src)::located://asm/asmmachine?mov#mov_(m32~ref,r32)
-        // ; public static ReadOnlySpan<byte> mov_ᐤm32ᕀrefㆍr32ᐤ => new byte[48]{0x0f,0x1f,0x44,0x00,0x00,0x4c,0x89,0x44,0x24,0x18,0x8b,0x44,0x24,0x1c,0x41,0xb8,0x00,0x04,0x00,0x00,0xc4,0xe2,0x38,0xf7,0xc0,0x0f,0xb6,0xc0,0x48,0x83,0xc1,0x10,0x4c,0x8b,0x01,0x8b,0x49,0x08,0x48,0x63,0xc0,0x41,0x8b,0x04,0xc0,0x89,0x02,0xc3};
-        // ; BaseAddress = 7ffe65128e00h
         [Op]
         public bool ParseHeader(ReadOnlySpan<string> src, out AsmBlockHeader dst)
         {
@@ -31,7 +28,6 @@ namespace Z0.Asm
             if(src.Length < 3)
                 return false;
 
-            var parser = AsmExprParser.create(Wf);
             var l0 = skip(src,0).RightOfFirst(CommentMarker);
             var l1 = skip(src,1).RightOfFirst(CommentMarker);
             var l2 = skip(src,2).RightOfFirst(CommentMarker);
@@ -45,11 +41,18 @@ namespace Z0.Asm
             var propParts = l1.SplitClean(Assign);
 
             var @base = MemoryAddress.Zero;
-            if(!parser.ParseAddress(l2.RightOfFirst(Assign), out @base))
+            if(!ParseAddress(l2.RightOfFirst(Assign), out @base))
                 @base = MemoryAddress.Zero;
 
             dst = new AsmBlockHeader(uri, sig, l1, @base);
             return true;
+        }
+
+        [Op]
+        public bool ParseAddress(string src, out MemoryAddress dst)
+        {
+            dst = HexScalarParser.Service.Parse(src,ulong.MaxValue);
+            return dst != ulong.MaxValue;
         }
     }
 }

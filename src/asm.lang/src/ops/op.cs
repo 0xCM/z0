@@ -16,6 +16,14 @@ namespace Z0.Asm
         public static OpCode opcode(string src)
             => new OpCode(src);
 
+        [MethodImpl(Inline), Op]
+        public static OperationSpec operation(ushort seq, OpCode op, Signature sig)
+            => new OperationSpec(seq, op, sig);
+
+        [MethodImpl(Inline), Op]
+        public static OperationSpec operation(OperationSpec spec, byte index, Signature sig)
+            => new OperationSpec((byte)((uint)spec.Seq | (uint)index << 8), spec.OpCode, sig);
+
         /// <summary>
         /// Generalizes a <see cref='IAsmOp{T}'/> reification
         /// </summary>

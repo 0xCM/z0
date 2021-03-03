@@ -300,6 +300,18 @@ namespace Z0
         FS.FolderPath ToolScriptRoot()
             => DevRoot("tooling") + FS.folder("scripts");
 
+        FS.FolderPath ToolOutRoot()
+            => Root + FS.folder(tools);
+
+        FS.FolderPath ToolOutDir(ToolId tool)
+            => ToolOutRoot() + FS.folder(tool.Format());
+
+        FS.FilePath ToolOutPath(ToolId tool, string id, FS.FileExt ext)
+            => ToolOutDir(tool) + FS.file(id, ext);
+
+        FS.Files ToolOutFiles(ToolId tool)
+            => ToolOutDir(tool).EnumerateFiles(true).Array();
+
         FS.FolderPath ToolScriptDir(ToolId tool)
             => ToolScriptRoot() + FS.folder(tool.Format());
 

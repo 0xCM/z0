@@ -22,11 +22,8 @@ namespace Z0.Asm
             public bool IsComposite
             {
                 [MethodImpl(Inline)]
-                get => composite(this);
+                get => AsmSigs.composite(this);
             }
-
-            public Index<SigOperand> Decompose()
-                => decompose(this);
 
             public string Content
             {

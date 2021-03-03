@@ -2,21 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public interface IOpCodeModel
+    partial class XFs
     {
+        public static FileDescription Description(this FS.FilePath src)
+            => FS.describe(src);
 
-    }
-
-    public interface IOpCodeModel<T> : IOpCodeModel
-        where T : unmanaged, IOpCodeModel<T>
-    {
-
+        public static Index<FileDescription> Descriptions(this FS.Files src)
+            => src.Map(FS.describe);
     }
 }

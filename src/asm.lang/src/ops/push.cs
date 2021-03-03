@@ -9,11 +9,8 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmRegs;
-    using static AsmMem;
-    using static AsmImm;
 
     using M = AsmMnemonicCode;
-
 
     partial struct asm
     {

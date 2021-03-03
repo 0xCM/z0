@@ -65,6 +65,11 @@ namespace Z0
             get => api.kb(this);
         }
 
+        public Mb Mb
+        {
+            [MethodImpl(Inline)]
+            get => Kb.Mb;
+        }
 
         [MethodImpl(Inline),Ignore]
         public string Format()

@@ -44,6 +44,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        public static Mb mb(Kb src)
+            => new Mb(src.Count/(uint)KbFactor);
+
+        [MethodImpl(Inline), Op]
         public static BitWidth bits(Kb src)
         {
             var bits = (ulong)bytes(src).Bits;
@@ -62,12 +66,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ByteSize bytes(Kb src)
             => new ByteSize((uint64(src.Count) * KbFactor) + uint64(src.Rem)/BitFactor);
-
-        [Op]
-        public static string format(Kb src)
-        {
-            return string.Format("{0}kb", src.Count);
-        }
 
         [MethodImpl(Inline), Op]
         public static bit eq(Kb a, Kb b)

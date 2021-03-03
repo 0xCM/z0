@@ -9,9 +9,9 @@ namespace Z0
     using System.IO;
 
     [Record(TableId)]
-    public struct FsEntryRecord : IRecord<FsEntryRecord>
+    public struct FileDescription : IRecord<FileDescription>
     {
-        public const string TableId = "fs.entry";
+        public const string TableId = "fs.info";
 
         public FS.FilePath Path;
 
@@ -21,6 +21,12 @@ namespace Z0
 
         public Timestamp UpdateTS;
 
-        public FileAttributes Attributes;
+        public FileAttributeSet Attributes;
+
+        public string Format()
+            => string.Format("{0,-12}{1}", Size.Kb, Path.ToUri());
+
+        public override string ToString()
+            => Format();
     }
 }
