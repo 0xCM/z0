@@ -34,6 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => TextFormatter.format(EventId, Source, Target.ToUri());
+            => TextFormatter.format(EventId, Source, Msg.EmittingFile.Capture(Target.ToUri()));
     }
 }

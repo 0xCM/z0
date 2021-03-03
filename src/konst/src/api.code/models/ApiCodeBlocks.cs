@@ -20,7 +20,6 @@ namespace Z0
 
         UriCode UriCode;
 
-
         [MethodImpl(Inline)]
         public ApiCodeBlocks(PartCodeAddresses memories, PartUriAddresses memuri, PartCodeIndex parts, UriCode code)
         {

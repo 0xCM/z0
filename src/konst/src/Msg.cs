@@ -15,5 +15,10 @@ namespace Z0
 
         public static MsgPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
+
+        public static MsgPattern<FS.FileUri> EmittingFile => "Emitting {0}";
+
+        public static MsgPattern<FS.FileUri> EmittedFile => "Emitted {0}";
+
     }
 }

@@ -12,8 +12,14 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Asm = Wf.AsmContext();
+            OnContextCreated();
         }
 
         protected IAsmContext Asm {get; private set;}
+
+        protected virtual void OnContextCreated()
+        {
+
+        }
     }
 }

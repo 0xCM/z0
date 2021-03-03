@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct RenderCapture
+    public readonly struct RenderCapture : ITextual
     {
         readonly IRenderPattern Pattern;
 

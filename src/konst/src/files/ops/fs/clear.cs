@@ -31,5 +31,20 @@ namespace Z0
             }
             return dst;
         }
+
+        public static FS.Files clear(FS.Files src)
+        {
+            var dst = root.list<FS.FilePath>();
+            foreach(var file in src)
+            {
+                if(file.Exists)
+                {
+                    file.Delete();
+                    dst.Add(file);
+                }
+            }
+            return dst.ToArray();
+        }
+
     }
 }

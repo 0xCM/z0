@@ -11,8 +11,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using static SpanBlockDelegates;
 
     public static class DynamicImmediate
@@ -86,13 +86,13 @@ namespace Z0
                 return width switch{
                     TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
                     TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),
-                    _ => none<DynamicDelegate>()
+                    _ => root.none<DynamicDelegate>()
                 };
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<DynamicDelegate>();
+                return root.none<DynamicDelegate>();
             }
         }
 

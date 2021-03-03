@@ -327,7 +327,7 @@ namespace Z0.Asm
         void DistillStatements()
         {
             var processor = AsmRowProcessor.create(Wf);
-            var rows = processor.CreateAsmRows().Where(x => x.IP != 0).OrderBy(x => x.IP).Take(25000).Array();
+            var rows = processor.CreateAsmRows().Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
             var count = rows.Length;
             var sigs = AsmSigs.create(Wf);
             var formatter = Records.formatter<AsmStatementInfo>(32);
@@ -372,7 +372,8 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
-                CheckApiHexArchive();
+            var distiller = Wf.AsmDistiller();
+            distiller.DistillStatements();
 
 
             // var composites = AsmExpr.composites();

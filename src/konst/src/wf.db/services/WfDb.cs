@@ -34,10 +34,40 @@ namespace Z0
             Root = Env.Db.Value;
         }
 
+        IDbPaths Paths => this;
+
+        public FS.Files Clear(FS.FolderName id)
+        {
+            var cleared = (Paths.TableRoot() + id).Clear(root.list<FS.FilePath>()).Array();
+            root.iter(cleared, file => Wf.Status(Msg.ClearedFile.Format(file.ToUri())));
+            return cleared;
+        }
+
+        public FS.Files Clear(string id)
+        {
+            var cleared = (Paths.TableRoot() + FS.folder(id)).Clear(root.list<FS.FilePath>()).Array();
+            root.iter(cleared, file => Wf.Status(Msg.ClearedFile.Format(file.ToUri())));
+            return cleared;
+        }
+
+        FS.Files Clear(FS.Files src)
+        {
+            var cleared = src.Clear();
+            root.iter(cleared, file => Wf.Status(Msg.ClearedFile.Format(file.ToUri())));
+            return cleared;
+        }
+
+        public FS.Files ClearTables<T>()
+            where T : struct, IRecord<T>
+        {
+            var dir = Paths.TableDir<T>();
+            return Clear(dir.EnumerateFiles(FS.Extensions.Csv, false).Array());
+        }
+
         public WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>
         {
-            var dst = (this as IWfDb).Table<T>(name);
+            var dst = Paths.Table<T>(name);
             var flow = Wf.EmittingTable<T>(dst);
             var count = (uint)src.Length;
             var formatter = Records.formatter<T>();
@@ -51,9 +81,14 @@ namespace Z0
         public FS.FilePath EmitSettings<T>(T settings)
             where T : ISettingsSet<T>, new()
         {
-            var dst = (this as IDbPaths).SettingsPath(typeof(T).Name);
+            var dst = Paths.SettingsPath(typeof(T).Name);
             dst.Overwrite(settings.Format());
             return dst;
         }
+    }
+
+    partial struct Msg
+    {
+        public static MsgPattern<FS.FileUri> ClearedFile => "Cleared {0}";
     }
 }

@@ -39,5 +39,10 @@ namespace Z0
             else
                 return FS.FilePath.Empty;
         }
+
+        [Op]
+        public static FS.Files Clear(this FS.Files src)
+            => FS.clear(src);
+
     }
 }

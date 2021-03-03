@@ -14,5 +14,8 @@ namespace Z0
     {
         public static IntelIntrinsics IntelIntrinsics(this IWfShell wf)
             => Z0.Asm.IntelIntrinsics.create(wf);
+
+        public static AsmSigs AsmSigServices(this IWfShell wf)
+            => Z0.Asm.AsmSigs.create(wf);
     }
 }
