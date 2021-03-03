@@ -66,7 +66,7 @@ namespace Z0
         {
             var bufferSize = (uint)default(F).Size;
             var totalSize = count*(bufferSize);
-            var allocated = Buffers.native(totalSize);
+            var allocated = NativeBuffer.alloc(totalSize);
             return new NativeCells<F>(allocated, count, bufferSize, totalSize);
         }
     }

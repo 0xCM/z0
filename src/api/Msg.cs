@@ -17,5 +17,6 @@ namespace Z0
 
         public static MsgPattern<ApiHostUri,Count> CreatedHostCatalog => "Created {0} catalog with {1} members";
 
+        public static MsgPattern<ApiHostUri,FS.FilePath> HostFileMissing => "The {0} file {1} does not exist";
     }
 }

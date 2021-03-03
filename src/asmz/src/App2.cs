@@ -255,7 +255,7 @@ namespace Z0.Asm
                 }
             }
 
-            var archive = ApiArchives.hex(Wf);
+            var archive = Wf.ApiHexArchive();
             archive.CodeBlocks(part, accept);
         }
 
@@ -324,34 +324,6 @@ namespace Z0.Asm
 
         }
 
-        void DistillStatements()
-        {
-            var processor = AsmRowProcessor.create(Wf);
-            var rows = processor.CreateAsmRows().Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
-            var count = rows.Length;
-            var sigs = AsmSigs.create(Wf);
-            var formatter = Records.formatter<AsmStatementInfo>(32);
-            var dst = Db.IndexTable<AsmStatementInfo>();
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var input = ref skip(rows,i);
-                var output = new AsmStatementInfo();
-                output.Sequence = input.Sequence;
-                output.BlockAddress = input.BlockAddress;
-                output.IP = input.IP;
-                output.GlobalOffset = input.GlobalOffset;
-                output.LocalOffset = input.LocalOffset;
-                output.OpCode = asm.opcode(input.OpCode.Value);
-                sigs.ParseSig(input.Instruction, out output.Sig);
-                output.Statement = asm.statement(input.Statement);
-                output.Encoded = input.Encoded;
-                writer.WriteLine(formatter.Format(output));
-            }
-
-        }
-
         void SplitFiles()
         {
             var limit = new Mb(15);
@@ -372,9 +344,10 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
-            var distiller = Wf.AsmDistiller();
-            distiller.DistillStatements();
+            // var distiller = Wf.AsmDistiller();
+            // distiller.DistillStatements();
 
+            CheckApiHexArchive();
 
             // var composites = AsmExpr.composites();
             // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));

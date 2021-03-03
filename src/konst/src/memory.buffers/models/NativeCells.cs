@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     public readonly ref struct NativeCells<F>
         where F : unmanaged, IDataCell
@@ -40,7 +40,7 @@ namespace Z0
         /// <summary>
         /// The leading buffer
         /// </summary>
-        ref F Head
+        ref F First
         {
             [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(Cover);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref F Buffer(byte index)
-            => ref seek(Head, index);
+            => ref seek(First, index);
 
         /// <summary>
         /// Presents an index-identified buffer as a span of bytes

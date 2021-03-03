@@ -8,12 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Covers a sequence of allocated buffers
     /// </summary>
     public unsafe readonly ref struct NativeBuffers
     {
+        /// <summary>
+        /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal
+        /// </summary>
+        /// <param name="size">The size of each buffer</param>
+        /// <param name="count">The number of buffers to allocate</param>
+        [MethodImpl(Inline), Op]
+        public static NativeBuffers alloc(uint size, byte count = 5, bool owns = true)
+            => new NativeBuffers(size, count, owns);
+
         internal readonly NativeBuffer Allocation;
 
         readonly Span<byte> View;
@@ -34,7 +44,7 @@ namespace Z0
             BufferCount = count;
             BufferSize = size;
             TotalSize = BufferCount*BufferSize;
-            Allocation = Buffers.native(TotalSize);
+            Allocation = NativeBuffer.alloc(TotalSize);
             View = new Span<byte>(Allocation.Handle.ToPointer(), (int)TotalSize);
             Tokens = Buffers.tokenize(Allocation.Handle, BufferSize, BufferCount);
         }
@@ -45,7 +55,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public Span<byte> Buffer(byte index)
-            => z.slice(View, index*BufferSize, BufferSize);
+            => slice(View, index*BufferSize, BufferSize);
 
         /// <summary>
         /// Covers a token-identified buffer with a span over cells of unmanaged type
@@ -62,7 +72,7 @@ namespace Z0
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
         public ref readonly BufferToken Token(byte index)
-            => ref z.skip(Tokens,index);
+            => ref skip(Tokens,index);
 
         /// <summary>
         /// Retrieves an index-identified token

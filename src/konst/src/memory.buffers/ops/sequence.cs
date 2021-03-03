@@ -12,15 +12,6 @@ namespace Z0
     partial struct Buffers
     {
         /// <summary>
-        /// Creates a buffer sequence that owns the underlying memory allocation and releases it upon disposal
-        /// </summary>
-        /// <param name="size">The size of each buffer</param>
-        /// <param name="length">The sequence length</param>
-        [MethodImpl(Inline), Op]
-        public static NativeBuffers sequence(uint size, byte length)
-            => new NativeBuffers(size, length);
-
-        /// <summary>
         /// Creates a caller-owed buffer sequence
         /// </summary>
         /// <param name="size">The size of each buffer</param>
@@ -29,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static NativeBuffers sequence(uint size, byte length, out NativeBuffer allocation)
         {
-            var buffers = new NativeBuffers(size,length,false);
+            var buffers = NativeBuffers.alloc(size,length,false);
             allocation = buffers.Allocation;
             return buffers;
         }

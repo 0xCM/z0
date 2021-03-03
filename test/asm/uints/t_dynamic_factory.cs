@@ -127,10 +127,23 @@ namespace Z0.Asm
         {
             var dId = ApiIdentify.build(name, w, kind, false);
             var gId = ApiIdentify.build(name, w, kind, true);
-            var archive = ApiArchives.hex(Wf, TargetArchive.HexDir());
-            var dBits = archive.Read(ApiQuery.hostinfo(typeof(z)).Uri).Where(x => x.Id == dId).Single();
-            var gBits = archive.Read(ApiQuery.hostinfo<gcpu>().Uri).Where(x => x.Id == gId).Single();
-            return AsmCheck.Match(OperatorClasses.binary(), w, dBits, gBits, dst);
+            var archive = Wf.ApiHexArchive();
+            var dHost = ApiQuery.hostinfo(typeof(cpu));
+            var gHost = ApiQuery.hostinfo(typeof(gcpu));
+            var dMatch = archive.Read(dHost.Uri).Where(x => x.Id == dId);
+
+            if(dMatch.Count == 0)
+                Claim.FailWith($"No matches for {dId} found in {dHost.Uri}");
+            else if(dMatch.Count > 1)
+                Claim.FailWith($"More than one match for {dId} found in {dHost.Uri}");
+
+            var gMatch = archive.Read(gHost.Uri).Where(x => x.Id == gId);
+            if(gMatch.Count == 0)
+                Claim.FailWith($"No matches for {gId} found in {gHost.Uri}");
+            else if(gMatch.Count > 1)
+                Claim.FailWith($"More than one match for {gId} found in {gHost.Uri}");
+
+            return AsmCheck.Match(OperatorClasses.binary(), w, dMatch[0], gMatch[0], dst);
         }
 
         public TestCaseRecord[] vector_bitlogic_match(BufferTokens buffers)
@@ -145,6 +158,12 @@ namespace Z0.Asm
             foreach(var k in kinds)
                 dst[i++] = TestVectorMatch(buffers, n, w, k);
             return dst;
+        }
+
+        public void vector_bitlogic_match()
+        {
+            using var buffers = NativeBuffers.alloc(Pow2.T14);
+            var results = vector_bitlogic_match(buffers.Tokenize());
         }
     }
 }

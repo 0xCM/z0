@@ -15,14 +15,6 @@ namespace Z0
         public static IApiPathProvider paths(IWfShell wf)
             => ApiPathProvider.create(wf);
 
-        [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(IWfShell wf)
-            => new ApiHexArchive(wf);
-
-        [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(IWfShell wf, FS.FolderPath root)
-            => new ApiHexArchive(wf, root);
-
         /// <summary>
         /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
         /// </summary>
@@ -30,9 +22,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ICaptureArchive capture(FS.FolderPath root)
             => new CaptureArchive(root);
-
-        [MethodImpl(Inline), Op]
-        public static IHostCaptureArchive host(FS.FolderPath root, ApiHostUri uri)
-            => new HostCaptureArchive(root, uri);
     }
 }

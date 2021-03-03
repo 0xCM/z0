@@ -19,6 +19,5 @@ namespace Z0
         public static MsgPattern<FS.FileUri> EmittingFile => "Emitting {0}";
 
         public static MsgPattern<FS.FileUri> EmittedFile => "Emitted {0}";
-
     }
 }

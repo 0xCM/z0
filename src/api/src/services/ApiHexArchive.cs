@@ -7,29 +7,17 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    public readonly struct ApiHexArchive
+    public class ApiHexArchive : WfService<ApiHexArchive>
     {
-        readonly IWfShell Wf {get;}
+        FS.FolderPath Root;
 
-        public FS.FolderPath Root {get;}
-
-        [MethodImpl(Inline)]
-        public ApiHexArchive(IWfShell wf, FS.FolderPath root)
+        protected override void OnInit()
         {
-            Wf = wf;
-            Root = root;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiHexArchive(IWfShell wf)
-        {
-            Wf = wf;
-            Root = wf.Db().ApiHexRoot();
+            Root = Db.ApiHexRoot();
         }
 
         FS.FileExt Ext
@@ -115,10 +103,5 @@ namespace Z0
 
         FS.Files Paths()
             => Root.Files(Ext, true);
-    }
-
-    partial struct Msg
-    {
-        public static MsgPattern<ApiHostUri,FS.FilePath> HostFileMissing => "The {0} file {1} does not exist";
     }
 }

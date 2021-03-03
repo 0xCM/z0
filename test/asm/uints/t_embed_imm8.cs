@@ -10,7 +10,8 @@ namespace Z0.Asm
     using System.Linq;
     using System.IO;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     using K = VK;
 
@@ -43,7 +44,7 @@ namespace Z0.Asm
             using var dst = AsmCaseWriter();
             var cases = VImmTestCases.V128UnaryShifts;
             Claim.nonzero(cases.Length);
-            iter(cases, m => check_unary_shift(m, w, dst));
+            root.iter(cases, m => check_unary_shift(m, w, dst));
             check_vbsll_imm(w, dst);
         }
 
@@ -53,7 +54,7 @@ namespace Z0.Asm
             using var dst = AsmCaseWriter();
             var cases = VImmTestCases.V256UnaryShifts;
             Claim.nonzero(cases.Length);
-            iter(cases, m => check_unary_shift(m, w, dst));
+            root.iter(cases, m => check_unary_shift(m, w, dst));
             check_vbsll_imm(w, dst);
         }
 
@@ -114,7 +115,6 @@ namespace Z0.Asm
         void check_vbsll_imm(W256 w, StreamWriter dst)
         {   const byte imm8 = 4;
 
-
             var name = "vbsll";
             var vKind = K.vk256<uint>();
             var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).Single();
@@ -163,7 +163,6 @@ namespace Z0.Asm
             var imm = (byte)Blend8x16.LRLRLRLR;
             var vKind = K.vk256<ushort>();
             var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
-
             var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
             var x = Random.CpuVector<ushort>(w);
             var y = Random.CpuVector<ushort>(w);
@@ -171,10 +170,9 @@ namespace Z0.Asm
             var v1 = f.Operation.Invoke(x,y);
             var captured = AsmCheck.Capture(f.Id, f).Require();
             var asm = AsmCheck.Decoder.Decode(captured).Require();
-            AsmCheck.WriteAsm(asm,dst);
+            AsmCheck.WriteAsm(asm, dst);
 
             var g = Dynamic.EmitFixedBinary<Cell256>(AsmCheck[Main], asm.Code);
-
             var v2 = g(x,y).ToVector<ushort>();
             Claim.veq(v1,v2);
         }

@@ -16,9 +16,17 @@ namespace Z0
     /// </summary>
     public readonly struct NativeBuffer : IDisposable
     {
-        public readonly IntPtr Handle;
+        /// <summary>
+        /// Allocates a native buffer
+        /// </summary>
+        /// <param name="size">The buffer length in bytes</param>
+        [MethodImpl(Inline), Op]
+        public static NativeBuffer alloc(uint size)
+            => new NativeBuffer((memory.liberate(Marshal.AllocHGlobal((int)size), (int)size), size));
 
-        public readonly uint Size;
+        public IntPtr Handle {get;}
+
+        public ByteSize Size {get;}
 
         [MethodImpl(Inline)]
         internal NativeBuffer(BufferToken token)

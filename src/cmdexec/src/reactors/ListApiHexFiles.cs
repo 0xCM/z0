@@ -8,7 +8,7 @@ namespace Z0
     {
         protected override CmdResult Run(ListApiHexFilesCmd cmd)
         {
-            var archive = ApiArchives.hex(Wf);
+            var archive = Wf.ApiHexArchive();
             root.iter(archive.Files(), file => Wf.Row(file.ToUri()));
             return Cmd.ok(cmd);
         }
