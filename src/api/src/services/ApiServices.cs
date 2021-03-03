@@ -71,7 +71,7 @@ namespace Z0
                 for(var j=0; j<kHost; j++)
                 {
                     ref readonly var host = ref skip(hosts,j);
-                    var hexpath = Wf.Db().ApiHexFile(host.Uri);
+                    var hexpath = Db.ApiHexFile(host.Uri);
                     if(hexpath.Exists)
                     {
                         var blocks = reader.Read(hexpath);

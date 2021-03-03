@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
-    using static z;
+    using static Part;
+    using static memory;
     using static CellDelegates;
     using static BufferSeqId;
 

@@ -189,7 +189,6 @@ namespace Z0.Asm
             Wf.Status(definitions.BlockCount);
         }
 
-
         void CheckIndexDecoder()
         {
             var blocks = ApiServices.HexIndexer().IndexApiBlocks();
@@ -263,7 +262,7 @@ namespace Z0.Asm
         void Correlate()
         {
             var catalogs = Wf.Api.PartCatalogs();
-            ApiServices.Correlate(catalogs);
+            var blocks = ApiServices.Correlate(catalogs);
             // var flow = Wf.Running("Evaluator");
             // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
             // evaluate.Execute(Wf.Api.PartIdentities);
@@ -353,9 +352,8 @@ namespace Z0.Asm
 
         }
 
-        public unsafe void Run()
+        void SplitFiles()
         {
-
             var limit = new Mb(15);
             var root = Db.ToolOutDir(dia2dump);
             var descriptions = Db.ToolOutFiles(dia2dump).Descriptions().Where(f => f.Size.Mb >= limit).Array();
@@ -368,6 +366,13 @@ namespace Z0.Asm
                 var spec = new FileSplitSpec(path, 50000, target);
                 splitter.Run(spec);
             }
+
+        }
+
+        public unsafe void Run()
+        {
+
+                CheckApiHexArchive();
 
 
             // var composites = AsmExpr.composites();

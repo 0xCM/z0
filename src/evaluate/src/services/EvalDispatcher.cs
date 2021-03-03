@@ -22,6 +22,7 @@ namespace Z0
 
         readonly uint BufferSize;
 
+
         [MethodImpl(Inline)]
         public EvalDispatcher(IWfShell wf, IDomainSource source, uint bufferSize)
         {
@@ -29,6 +30,7 @@ namespace Z0
             DataSource = source;
             BufferSize = bufferSize;
         }
+
 
         uint PointCount<T>()
             => size<T>()/BufferSize;

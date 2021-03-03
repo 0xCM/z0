@@ -74,13 +74,13 @@ namespace Z0
                 }
 
                 var index = 0;
-                dst.Seq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.SourceSeq = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.Address = MemoryAddressParser.succeed(fields[index++]);
-                dst.Length = Numeric.parse<int>(fields[index++]).ValueOrDefault();
-                dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
-                dst.Uri = ApiUri.parse(fields[index++]).Require();
-                dst.Data = new CodeBlock(dst.Address, HexParsers.bytes().ParseData(fields[index++], sys.empty<byte>()));
+                Records.parse(fields[index++], out dst.Seq);
+                Records.parse(fields[index++], out dst.SourceSeq);
+                Records.parse(fields[index++], out dst.Address);
+                Records.parse(fields[index++], out dst.Length);
+                Records.eparse(fields[index++], out dst.TermCode);
+                Records.parse(fields[index++], out dst.Uri);
+                Records.parse(fields[index++], out dst.Data);
                 return true;
             }
             catch(Exception e)

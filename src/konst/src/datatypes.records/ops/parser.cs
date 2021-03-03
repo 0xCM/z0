@@ -57,6 +57,23 @@ namespace Z0
             => ByteSize.parse(src, out dst);
 
         [Op]
+        public static bool eparse<T>(string src, out T dst)
+            where T : unmanaged, Enum
+        {
+            var result = Enums.parse<T>(src);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
+        [Op]
         public static bool parse(string src, out BinaryCode dst)
         {
             var result = HexByteParser.Service.ParseData(src);
@@ -68,6 +85,22 @@ namespace Z0
             else
             {
                 dst = BinaryCode.Empty;
+                return false;
+            }
+        }
+
+        [Op]
+        public static bool parse(string src, out OpUri dst)
+        {
+            var result = ApiUri.parse(src);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = OpUri.Empty;
                 return false;
             }
         }

@@ -41,14 +41,6 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        void Evaluate(Index<PartId> parts)
-        {
-            var flow = Wf.Running();
-            var evaluate = Wf.EvalControl();
-            evaluate.Execute();
-            Wf.Ran(flow);
-        }
-
         void RebaseMembers()
         {
             var flow = Wf.Running();

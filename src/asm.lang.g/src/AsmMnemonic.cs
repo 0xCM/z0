@@ -15,7 +15,9 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public AsmMnemonic(string src)
-            => Name = src;
+        {
+            Name = src;
+        }
 
         public int Length
         {

@@ -90,7 +90,7 @@ namespace Z0.Asm
         [Op]
         public bool ParseMnemonic(string sig, out AsmMnemonic dst)
         {
-            dst = AsmMnemonic.Empty;
+            dst = default;
             if(text.empty(sig))
                 return false;
 
@@ -173,6 +173,10 @@ namespace Z0.Asm
         [Op]
         public static bool composite(Signature src)
             => src.Operands.Any(o => o.IsComposite);
+
+        [MethodImpl(Inline), Op]
+        public static AsmMnemonicCode mnemonic2(string src)
+            => Enums.parse(src, AsmMnemonicCode.None);
 
         [MethodImpl(Inline), Op]
         public static AsmMnemonic mnemonic(string src)

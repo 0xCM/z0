@@ -46,11 +46,6 @@ namespace Z0
             Wf.Status($"Read {blocks.Count} {host} operations from {src}");
 
             var api = Wf.ApiServices();
-            //var correlated = api.Correlate(catalog, blocks);
-            //Wf.Status($"Correlated {correlated.Count} members with executable code");
-
-            //correlate(catalog.Members, blocks);
-
             var operations = ApiIndex.create(blocks);
             Wf.Status($"Hydrated {operations.EntryCount} {host} operations from {blocks.Count} blocks");
 
@@ -58,6 +53,7 @@ namespace Z0
             identities.IntersectWith(operations.Keys);
 
             Wf.Status($"Found {identities.Count} common operation identifiers");
+
 
             // var joined = ApiIndex.join(members,operations);
             // Wf.Status($"Joined {joined.Count} members with executable code");
@@ -96,7 +92,6 @@ namespace Z0
         {
             if(Enabled)
             {
-
                 var catalogs = ApiGlobal.PartCatalogs(parts).View;
                 var count = catalogs.Length;
                 var flow = Wf.Running($"Evaluating {count} parts");
