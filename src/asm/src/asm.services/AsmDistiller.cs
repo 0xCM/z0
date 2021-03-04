@@ -81,25 +81,6 @@ namespace Z0.Asm
             }
         }
 
-        ReadOnlySpan<Source> NextBlockRows()
-        {
-            if(CurrentRow < LastRow)
-            {
-                ref readonly var row = ref Rows[CurrentRow];
-                var @base = row.BlockAddress;
-                var address = @base;
-                var i = CurrentRow;
-                while(address == @base && i<LastRow)
-                    address = skip(row,i++).BlockAddress;
-
-                var next = slice(Rows.View, CurrentRow, i);
-                CurrentRow = i;
-                return next;
-
-            }
-            else
-                return default;
-        }
 
         [MethodImpl(Inline)]
         string discriminator(MemoryAddress src)

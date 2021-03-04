@@ -9,16 +9,18 @@ namespace Z0
 
     using Z0.Asm;
 
+    using Services=Z0.Asm;
+
     partial class XTend
     {
         public static AsmCatalog AsmCatalog(this IWfShell wf)
-            => Z0.Asm.AsmCatalog.create(wf);
+            => Services.AsmCatalog.create(wf);
 
         public static AsmSemanticRender AsmSemanticRender(this IWfShell wf)
-            => Z0.Asm.AsmSemanticRender.create(wf);
+            => Services.AsmSemanticRender.create(wf);
 
         public static AsmDataEmitter AsmDataEmitter(this IWfShell wf)
-            => Z0.Asm.AsmDataEmitter.create(wf);
+            => Services.AsmDataEmitter.create(wf);
 
         [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf, IAsmContext asm)
@@ -28,10 +30,10 @@ namespace Z0
             => Z0.ResBytesEmitter.create(wf);
 
         public static AsmJmpCollector AsmJmpCollector(this IWfShell wf)
-            => Z0.AsmJmpCollector.create(wf);
+            => Services.AsmJmpCollector.create(wf);
 
         public static ApiResCapture ApiResCapture(this IWfShell wf)
-            => Z0.ApiResCapture.create(wf);
+            => Services.ApiResCapture.create(wf);
 
         public static ApiImmEmitter ImmEmitter(this IWfShell wf)
             => ApiImmEmitter.create(wf);
@@ -40,7 +42,7 @@ namespace Z0
             => new AsmWriter(dst, new AsmFormatter(config));
 
         public static AsmServices AsmServices(this IWfShell wf)
-            => Z0.Asm.AsmServices.create(wf);
+            => Services.AsmServices.create(wf);
 
         public static ApiCaptureEmitter CaptureEmitter(this IWfShell wf, IAsmContext asm)
             => new ApiCaptureEmitter(wf, asm);
@@ -49,10 +51,10 @@ namespace Z0
             => ApiCaptureRunner.create(wf);
 
         public static IAsmContext AsmContext(this IWfShell wf)
-            => Z0.Asm.AsmServices.context(wf);
+            => Services.AsmServices.context(wf);
 
         public static AsmDataReader AsmDataReader(this IWfShell wf)
-            => Z0.Asm.AsmDataReader.create(wf);
+            => Services.AsmDataReader.create(wf);
 
         public static ApiCaptureService ApiCapture(this IWfShell wf)
             => Z0.ApiCaptureService.create(wf);
@@ -64,7 +66,7 @@ namespace Z0
             => new CaptureServices(wf, asm);
 
         public static ICaptureCore CaptureCore(this IWfShell wf, IAsmContext asm)
-            => Z0.Asm.CaptureCore.create(wf);
+            => Services.CaptureCore.create(wf);
 
         public static IImmSpecializer ImmSpecializer(this IWfShell wf, IAsmContext asm)
             => new ImmSpecializer(wf, asm);
@@ -73,15 +75,18 @@ namespace Z0
             => new AsmRoutineDecoder(config);
 
         public static IApiIndexDecoder ApiIndexDecoder(this IWfShell wf)
-            => Z0.Asm.ApiIndexDecoder.create(wf);
+            => Services.ApiIndexDecoder.create(wf);
 
        public static AsmRowProcessor AsmRowProcessor(this IWfShell wf)
-            => Z0.Asm.AsmRowProcessor.create(wf);
+            => Services.AsmRowProcessor.create(wf);
 
        public static AsmDistiller AsmDistiller(this IWfShell wf)
             => Z0.Asm.AsmDistiller.create(wf);
 
         public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, decoder);
+
+        public static AsmBlockReader AsmBlockReader(this IWfShell wf)
+            => Services.AsmBlockReader.create(wf);
     }
 }

@@ -22,10 +22,7 @@ namespace Z0.Asm
         }
 
         public Index<AsmRow> CreateAsmRows(ApiCodeBlocks blocks)
-        {
-            var emitter = Wf.AsmDataEmitter();
-            return emitter.CreateAsmRows(blocks);
-        }
+            => Wf.AsmDataEmitter().CreateAsmRows(blocks);
 
         public uint Emit(Index<AsmRow> src, FS.FilePath dst)
         {

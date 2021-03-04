@@ -83,6 +83,12 @@ namespace Z0
             get => CodeAddresses.Code;
         }
 
+        public uint BlockCount
+        {
+            [MethodImpl(Inline)]
+            get => CodeAddresses.Count;
+        }
+
         /// <summary>
         /// Operation identifiers, each of which are associated with one or more code blocks
         /// </summary>

@@ -24,5 +24,10 @@ namespace Z0
         public static MsgPattern<ApiHostUri> EmittingHostRoutines => "Emitting {0} routines";
 
         public static MsgPattern<Count,ApiHostUri,FS.FileUri> EmittedHostRoutines => "Emitted {0} {1} routines to {2}";
+
+        public static MsgPattern<Count> CreatingAsmRowsFromBlocks => "Creating AsmRows for {0} blocks";
+
+        public static MsgPattern<Count> CreatedAsmRowsFromBlocks => "Created {0} AsmRows";
+
     }
 }

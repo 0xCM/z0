@@ -12,7 +12,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-
     public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
@@ -49,13 +48,15 @@ namespace Z0.Asm
             EmitSemantic(routines);
         }
 
-        public Index<AsmRow> CreateAsmRows(ApiCodeBlocks blocks)
+        public Index<AsmRow> CreateAsmRows(ApiCodeBlocks src)
         {
-            var addresses = blocks.Addresses.View;
+            var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
+            var addresses = src.Addresses.View;
             var count = addresses.Length;
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-                rows.AddRange(CreateRecords(blocks[skip(addresses, i)]));
+                rows.AddRange(CreateRecords(src[skip(addresses, i)]));
+            Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
 
@@ -251,4 +252,5 @@ namespace Z0.Asm
             get => Offset++;
         }
     }
+
 }

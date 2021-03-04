@@ -349,13 +349,32 @@ namespace Z0.Asm
 
         }
 
-        public unsafe void Run()
+        void ShowCases()
         {
-
             var cases = AsmCases.mov().View;
             var count = cases.Length;
             for(var i=0; i<count; i++)
                 Wf.Row(skip(cases,i).Format());
+
+        }
+
+        void ReadBlocks()
+        {
+            var blocks = Wf.ApiHexIndexer().IndexApiBlocks();
+            var reader = Wf.AsmBlockReader().WithBlocks(blocks);
+            using var writer = Db.AppLog("rowblocks", FS.Extensions.Csv).Writer();
+
+            while(reader.NextBlock(out var rows))
+            {
+                var count = rows.Length;
+                ref readonly var row = ref first(rows);
+                writer.WriteLine(string.Format("{0:D8} | {1} | {2} | {3}", row.Sequence, row.IP, row.GlobalOffset, row.LocalOffset));
+            }
+        }
+        public unsafe void Run()
+        {
+            ReadBlocks();
+
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();
 
