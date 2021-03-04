@@ -48,6 +48,18 @@ namespace Z0.Asm
             EmitSemantic(routines);
         }
 
+        public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)
+        {
+            var count = src.Count;
+            var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.Count));
+            ref readonly var block = ref src.First;
+            var rows = root.list<AsmRow>();
+            for(var i=0u; i<count; i++)
+                rows.AddRange(CreateRecords(skip(block,i)));
+            Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
+            return rows.ToArray();
+        }
+
         public Index<AsmRow> CreateAsmRows(ApiCodeBlocks src)
         {
             var flow = Wf.Running(Msg.CreatingAsmRowsFromBlocks.Format(src.BlockCount));
@@ -110,7 +122,6 @@ namespace Z0.Asm
         public Index<AsmJmpRow> EmitJmpRows(Index<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmJmpRow>();
-            //var routines = Dataset.Routines;
             var count = routines.Length;
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitJumpRows(routines[i]));
@@ -121,7 +132,6 @@ namespace Z0.Asm
 
         public void EmitSemantic(Index<ApiPartRoutines> routines)
         {
-            //var routines = Dataset.Routines;
             var render = Wf.AsmSemanticRender();
             var count = routines.Length;
             for(var i=0; i<count; i++)

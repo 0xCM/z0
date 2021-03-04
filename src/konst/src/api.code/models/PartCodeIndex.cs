@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Part;
-    using static z;
+    using static memory;
 
     using LU = System.Collections.Generic.Dictionary<ApiHostUri,ApiHostCode>;
 
@@ -73,7 +73,7 @@ namespace Z0
 
         static PartCodeIndexEntry[] entries(in PartCodeIndex src)
         {
-            var buffer = list<PartCodeIndexEntry>(src.Data.Count);
+            var buffer = root.list<PartCodeIndexEntry>(src.Data.Count);
             foreach(var item in src.Data)
                 buffer.Add(new PartCodeIndexEntry(item.Key, item.Value));
             return buffer.ToArray();

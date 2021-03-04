@@ -358,17 +358,18 @@ namespace Z0.Asm
 
         }
 
-        void ReadBlocks()
+        void ReadAsmBlocks()
         {
-            var blocks = Wf.ApiHexIndexer().IndexApiBlocks();
-            var reader = Wf.AsmBlockReader().WithBlocks(blocks);
-            using var writer = Db.AppLog("rowblocks", FS.Extensions.Csv).Writer();
+            var reader = Wf.AsmBlockReader().WithBlocks(Wf.ApiHexIndexer().IndexApiBlocks());
+            using var index = Db.AppLog("rowblocks", FS.Extensions.Csv).Writer();
 
-            while(reader.NextBlock(out var rows))
+            while(reader.NextBlock(out var block))
             {
-                var count = rows.Length;
-                ref readonly var row = ref first(rows);
-                writer.WriteLine(string.Format("{0:D8} | {1} | {2} | {3}", row.Sequence, row.IP, row.GlobalOffset, row.LocalOffset));
+                var count = block.RowCount;
+                var uri = block.OpUri;
+                ref readonly var row = ref block.Row(0);
+                ref readonly var statement = ref block.Statement(0);
+                index.WriteLine(string.Format("{0:D8} | {1} | {2} | {3}", row.Sequence, row.IP, row.GlobalOffset, uri));
             }
         }
 
@@ -385,7 +386,7 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            ShowRexBits();
+            ReadAsmBlocks();
 
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();

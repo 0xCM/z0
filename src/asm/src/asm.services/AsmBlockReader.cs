@@ -11,14 +11,48 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using Target = AsmStatementInfo;
-    using Source = AsmRow;
+    public ref struct AsmBlockInfo
+    {
+        ReadOnlySpan<AsmRow> Rows {get;}
+
+        ReadOnlySpan<AsmStatementInfo> Statements {get;}
+
+        public ApiCodeBlock Code {get;}
+
+        public AsmBlockInfo(ReadOnlySpan<AsmRow> rows, ApiCodeBlock code, ReadOnlySpan<AsmStatementInfo> statements)
+        {
+            Rows = rows;
+            Code = code;
+            Statements = statements;
+        }
+
+        public uint RowCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Rows.Length;
+        }
+
+        public OpUri OpUri
+        {
+            [MethodImpl(Inline)]
+            get => Code.OpUri;
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly AsmStatementInfo Statement(ushort index)
+            => ref skip(Statements,index);
+
+        [MethodImpl(Inline)]
+        public ref readonly AsmRow Row(ushort index)
+            => ref skip(Rows,index);
+
+    }
 
     public class AsmBlockReader : AsmWfService<AsmBlockReader>
     {
-        Index<Source> Rows;
+        Index<AsmRow> Rows;
 
-        ApiCodeBlocks Blocks;
+        Index<ApiCodeBlock> Blocks;
 
         uint CurrentRow;
 
@@ -30,28 +64,35 @@ namespace Z0.Asm
 
         ApiIndexMetrics Metrics;
 
-        public ReadOnlySpan<Source> NextBlock()
+        public AsmBlockInfo NextBlock()
         {
             if(CurrentBlock < LastBlock)
             {
                 ref readonly var row = ref Rows[CurrentRow];
+                ref readonly var block = ref Blocks[CurrentBlock];
+                var statements = root.list<AsmStatementInfo>();
                 var @base = row.BlockAddress;
                 var address = @base;
                 var i = CurrentRow;
                 while(address == @base && i<LastRow)
-                    address = skip(row, i++).BlockAddress;
+                {
+                    var _row = skip(row, i++);
+                    address = _row.BlockAddress;
+                    var statement = default(AsmStatementInfo);
+                    Fill(_row, ref statement);
+                    statements.Add(statement);
+                }
 
                 var next = slice(Rows.View, CurrentRow, i);
                 CurrentRow = i;
                 CurrentBlock++;
-                return next;
-
+                return new AsmBlockInfo(next, block, statements.ToArray());
             }
             else
                 return default;
         }
 
-        public bool NextBlock(out ReadOnlySpan<Source> block)
+        public bool NextBlock(out AsmBlockInfo block)
         {
             if(CurrentBlock < LastBlock)
             {
@@ -69,13 +110,28 @@ namespace Z0.Asm
         {
             CurrentRow = 0;
             CurrentBlock = 0;
-            Blocks = src;
-            Metrics = Blocks.CalcMetrics();
+            Blocks = src.Blocks.OrderBy(x => x.BaseAddress).Array();
+            Metrics = src.CalcMetrics();
             var processor = Wf.AsmRowProcessor();
             Rows = AsmEtl.resequence(processor.CreateAsmRows(Blocks).OrderBy(x => x.IP).Array());
             LastRow = Rows.Count - 1;
-            LastBlock = Blocks.BlockCount - 1;
+            LastBlock = Blocks.Count - 1;
             return this;
+        }
+
+
+        ref AsmStatementInfo Fill(in AsmRow src, ref AsmStatementInfo dst)
+        {
+            dst.Sequence = src.Sequence;
+            dst.BlockAddress = src.BlockAddress;
+            dst.IP = src.IP;
+            dst.GlobalOffset = src.GlobalOffset;
+            dst.LocalOffset = src.LocalOffset;
+            dst.OpCode = asm.opcode(src.OpCode.Value);
+            AsmSigParser.sig(src.Instruction, out dst.Sig);
+            dst.Statement = asm.statement(src.Statement);
+            dst.Encoded = src.Encoded;
+            return ref dst;
         }
     }
 }

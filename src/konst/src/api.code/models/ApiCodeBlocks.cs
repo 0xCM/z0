@@ -83,6 +83,12 @@ namespace Z0
             get => CodeAddresses.Code;
         }
 
+        public ref ApiCodeBlock this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Blocks[index];
+        }
+
         public uint BlockCount
         {
             [MethodImpl(Inline)]
