@@ -50,6 +50,7 @@ namespace Z0
 
         void EmitDump()
         {
+            ImageMaps.EmitProcessLocations(Wf);
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var dst = Db.ProcDumpPath(name).EnsureParentExists();

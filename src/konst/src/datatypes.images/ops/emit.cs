@@ -10,6 +10,15 @@ namespace Z0
 
     partial struct ImageMaps
     {
+        public static Index<LocatedImageRow> EmitProcessLocations(IWfShell wf)
+        {
+            var dst = wf.Db().IndexTable<LocatedImageRow>();
+            var flow = wf.EmittingTable<LocatedImageRow>(dst);
+            var rows = ImageMaps.emit(ImageMaps.index(), dst);
+            wf.EmittedTable(flow,rows.Count);
+            return rows;
+        }
+
         public static Index<LocatedImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)
         {
             var images = index();

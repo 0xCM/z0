@@ -14,7 +14,7 @@ namespace Z0
 
         public Setting<bool> CollectApiDocs;
 
-        public Setting<bool> EmitPeData;
+        public Setting<bool> EmitImageContent;
 
         public Setting<bool> EmitSectionHeaders;
 
@@ -44,7 +44,7 @@ namespace Z0
             dst.RunXed = false;
             dst.EmitResourceData = false;
             dst.CollectApiDocs = false;
-            dst.EmitPeData = true;
+            dst.EmitImageContent = true;
             dst.EmitSectionHeaders = true;
             dst.EmitCilRecords = true;
             dst.EmitCliStrings = true;

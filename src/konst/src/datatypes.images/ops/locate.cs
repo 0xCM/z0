@@ -9,7 +9,6 @@ namespace Z0
     using System.Diagnostics;
 
     using static Part;
-    using static memory;
 
     partial struct ImageMaps
     {

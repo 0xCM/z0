@@ -81,8 +81,8 @@ namespace Z0
                 if(Options.EmitCliBlobs)
                     images.EmitApiBlobs();
 
-                if(Options.EmitPeData)
-                    ImageLocationEmitter.emit(Wf);
+                if(Options.EmitImageContent)
+                    ImageContentEmitter.emit(Wf);
 
                 var asm = Wf.AsmDataEmitter();
 
