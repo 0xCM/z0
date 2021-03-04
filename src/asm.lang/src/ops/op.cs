@@ -17,12 +17,8 @@ namespace Z0.Asm
             => new OpCode(src);
 
         [MethodImpl(Inline), Op]
-        public static OperationSpec operation(ushort seq, OpCode op, Signature sig)
-            => new OperationSpec(seq, op, sig);
-
-        [MethodImpl(Inline), Op]
-        public static OperationSpec operation(OperationSpec spec, byte index, Signature sig)
-            => new OperationSpec((byte)((uint)spec.Seq | (uint)index << 8), spec.OpCode, sig);
+        public static Form form(ushort seq, OpCode op, Signature sig)
+            => new Form(seq, op, sig);
 
         /// <summary>
         /// Generalizes a <see cref='IAsmOp{T}'/> reification

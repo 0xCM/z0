@@ -10,15 +10,50 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    [ApiHost]
     public struct AsmHexCode
     {
+        [MethodImpl(Inline), Op]
+        public static AsmHexCode load(ReadOnlySpan<byte> src)
+        {
+            var cell = Cells.alloc(w128);
+            var count = (byte)root.min(src.Length, 15);
+            var dst = bytes(cell);
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+            Cells.cell8(cell, 15) = count;
+            return new AsmHexCode(cell);
+        }
+
+        [Op]
+        public static bool parse(string src, out AsmHexCode dst)
+        {
+            var parser = HexByteParser.Service;
+            if(parser.Parse(src, out var data))
+            {
+                dst = data;
+                return true;
+            }
+            else
+            {
+                dst = AsmHexCode.Empty;
+                return false;
+            }
+        }
+
+        [Op]
+        public static AsmHexCode parse(string src)
+        {
+            var dst = AsmHexCode.Empty;
+            parse(src, out dst);
+            return dst;
+        }
+
         Cell128 Data;
 
         [MethodImpl(Inline)]
         internal AsmHexCode(Cell128 data)
-        {
-            Data = data;
-        }
+            => Data = data;
 
         public byte Size
         {
@@ -29,7 +64,7 @@ namespace Z0.Asm
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => bytes(Data);
+            get => slice(bytes(Data), 0, 15);
         }
 
         [MethodImpl(Inline)]
@@ -56,7 +91,19 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(BinaryCode src)
-            => asm.encoding(src.View);
+            => load(src.View);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmHexCode(ReadOnlySpan<byte> src)
+            => load(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmHexCode(byte[] src)
+            => load(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmHexCode(string src)
+            => parse(src);
 
         public static AsmHexCode Empty
         {

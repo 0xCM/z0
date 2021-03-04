@@ -21,7 +21,6 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
 
-
         const uint MaxRowCount = 2500;
 
         const char AsmCatDelimiter = Chars.Tab;
@@ -134,7 +133,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                if(sigs.ParseMnemonic(row.Instruction, out var monic))
+                if(AsmSigParser.mnemonic(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -230,7 +229,7 @@ namespace Z0.Asm
             return imports;
         }
 
-        public void Emit(ReadOnlySpan<OperationSpec> src)
+        public void Emit(ReadOnlySpan<Form> src)
         {
             var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
             var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
@@ -238,16 +237,16 @@ namespace Z0.Asm
             Wf.EmittedTable(flow, count);
         }
 
-        public Index<OperationSpec> Decompose(ReadOnlySpan<OperationSpec> src)
+        public Index<Form> Decompose(ReadOnlySpan<Form> src)
         {
             var count = src.Length;
-            var dst = root.list<OperationSpec>(count*2);
+            var dst = root.list<Form>(count*2);
             for(var i=0; i<count; i++)
             {
                 ref readonly var spec = ref skip(src,i);
                 if(spec.IsComposite)
                 {
-                    var decomposed = OperationSpec.Empty;
+                    var decomposed = Form.Empty;
                     var operands = spec.Sig.Operands.View;
                     var oc = operands.Length;
                     for(var j=0; j<oc; j++)
@@ -270,11 +269,11 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
-        public ReadOnlySpan<OperationSpec> Specifiers()
+        public ReadOnlySpan<Form> Specifiers()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
-            var buffer = span<OperationSpec>(count);
+            var buffer = span<Form>(count);
             var sigs = AsmSigs.create(Wf);
             var j=0u;
             var k=0u;
@@ -282,11 +281,11 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = asm.opcode(row.OpCode);
-                if(sigs.ParseSig(row.Instruction, out var sig))
-                    seek(buffer, k++) = asm.operation(row.Sequence, oc, sig);
+                if(AsmSigParser.sig(row.Instruction, out var sig))
+                    seek(buffer, k++) = asm.form(row.Sequence, oc, sig);
                 else
                 {
-                    seek(buffer, k++) = OperationSpec.Empty;
+                    seek(buffer, k++) = Form.Empty;
                     Wf.Warn($"The opcode row {row.OpCode} could not be parsed");
                 }
             }
@@ -319,10 +318,10 @@ namespace Z0.Asm
         FS.FolderName TargetFolder => FS.folder("asmcat");
 
         [MethodImpl(Inline), Op]
-        static AsmSpecifierRecord record(OperationSpec src)
+        static AsmSpecifierRecord record(Form src)
         {
             var dst = new AsmSpecifierRecord();
-            dst.Seq = src.Seq;
+            dst.Seq = src.Id;
             dst.Sig = src.Sig;
             dst.Composite = src.Sig.Operands.Any(o => o.IsComposite);
             dst.OpCode = src.OpCode;

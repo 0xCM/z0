@@ -37,6 +37,23 @@ namespace Z0
             return captured;
         }
 
+        public Index<ApiCaptureBlock> ReadBlocks(ReadOnlySpan<ApiResAccessor> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<ApiCaptureBlock>(count);
+            var blocks = span(buffer);
+            var captured = alloc<CapturedApiRes>(count);
+            using var quick = Wf.CaptureQuick(Asm);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var accessor = ref skip(src,i);
+                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
+                seek(blocks, i) = code;
+            }
+            return buffer;
+
+        }
+
         public Index<CapturedApiRes> CaptureAccessors(ReadOnlySpan<ApiResAccessor> src, FS.FilePath dst)
         {
             var count = src.Length;

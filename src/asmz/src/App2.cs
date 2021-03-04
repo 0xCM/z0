@@ -179,33 +179,21 @@ namespace Z0.Asm
             var path = package + FS.file("z0.respack.dll");
             var exists = path.Exists ? "Exists" : "Missing";
             Wf.Status($"{path} | {exists}");
-            var capture = Wf.ApiResCapture();
             var assembly = Assembly.LoadFrom(path.Name);
             var accessors = Resources.accessors(assembly).View;
             var count = accessors.Length;
-            var definitions = Resources.definitions(accessors);
-            var hextext = text.buffer();
             for(var i=0; i<count; i++)
             {
                 ref readonly var accessor = ref skip(accessors,i);
-                var definition = definitions.Block(i);
-
-                hextext.Clear();
-                hextext.Append(slice(definition, 0, 5).FormatHex());
-                hextext.Append(" | ");
-                hextext.Append(slice(definition, 6, 10).FormatHex());
-                hextext.Append(" ... ");
-                hextext.Append(definition[29].FormatHex());
-
+                var description = Resources.description(accessor);
                 var resource = Resources.resource(accessor);
-                Wf.Row(string.Format("{0,-48} | {1} ", accessor.Member.Name, hextext.Emit()));
-
-                //Wf.Row(string.Format("{0,-16} | {1} | {2}", resource.Address, resource.Size, resource.Accessor.Member.Name));
-
+                Wf.Row(string.Format("{0} | {1,-8} | {2}", resource.Address, resource.Size, resource.Accessor.Member.Name));
+                //Wf.Row(string.Format("{0} | {1} ", description.FormatHex(), accessor.Member.Name));
             }
-            var dst = Db.AppLog("respack", FS.Extensions.Asm);
 
-            //capture.CaptureAccessors(accessors,dst);
+            //var dst = Db.AppLog("respack", FS.Extensions.Asm);
+            //var capture = Wf.ApiResCapture();
+            //var captured = capture.CaptureAccessors(accessors, dst);
             //Wf.Status(definitions.BlockCount);
         }
 
@@ -364,16 +352,18 @@ namespace Z0.Asm
         public unsafe void Run()
         {
 
+            var cases = AsmCases.mov().View;
+            var count = cases.Length;
+            for(var i=0; i<count; i++)
+                Wf.Row(skip(cases,i).Format());
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();
 
-            CheckResPack();
             // var composites = AsmExpr.composites();
             // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
 
             // var dst = Db.IndexTable<AsmRow>();
             // processor.Emit(rows, dst);
-
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

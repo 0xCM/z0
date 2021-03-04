@@ -43,17 +43,19 @@ namespace Z0
             return blocks;
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static unsafe ApiRes resource(ApiResAccessor src)
         {
-            var pMethod = src.Member.MethodHandle.GetFunctionPointer().ToPointer<byte>();
-            var storage = MemoryStacks.alloc(w256);
-            var buffer = MemoryStacks.span<byte>(ref storage);
-            var reader = memory.reader(pMethod, 29);
-            reader.ReadAll(buffer);
-            var address = slice(buffer,8,8).TakeUInt64();
-            var size = slice(buffer,22,4).TakeUInt32();
+            var data = description(src);
+            var address = slice(data,8,8).TakeUInt64();
+            var size = slice(data,22,4).TakeUInt32();
             return new ApiRes(src, address, size);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<byte> description(ApiResAccessor src)
+        {
+            return cover<byte>(ApiJit.jit(src.Member),29);
         }
 
         /// <summary>

@@ -142,7 +142,7 @@ namespace Z0.Asm
             dst.GlobalOffset = src.GlobalOffset;
             dst.LocalOffset = src.LocalOffset;
             dst.OpCode = asm.opcode(src.OpCode.Value);
-            Sigs.ParseSig(src.Instruction, out dst.Sig);
+            AsmSigParser.sig(src.Instruction, out dst.Sig);
             dst.Statement = asm.statement(src.Statement);
             dst.Encoded = src.Encoded;
             return ref dst;

@@ -37,6 +37,10 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmSigCompositeKind> Composites;
 
+        [MethodImpl(Inline), Op]
+        public static AsmMnemonicCode monicode(string src)
+            => Enums.parse(src, AsmMnemonicCode.None);
+
         public AsmSigs()
         {
             SigOpTokens = tokens();
@@ -70,38 +74,6 @@ namespace Z0.Asm
             }
         }
 
-        [Op]
-        public bool ParseSig(string src, out Signature dst)
-        {
-            if(text.nonempty(src))
-            {
-                if(ParseMnemonic(src, out var monic))
-                {
-                    var i = Query.index(src, MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<SigOperand>();
-                    dst = new Signature(monic, operands);
-                    return true;
-                }
-            }
-            dst = Signature.Empty;
-            return false;
-        }
-
-        [Op]
-        public bool ParseMnemonic(string sig, out AsmMnemonic dst)
-        {
-            dst = default;
-            if(text.empty(sig))
-                return false;
-
-            var i = Query.index(sig, MnemonicTerminator);
-            if(i > 0)
-                dst = mnemonic(Parse.segment(sig, 0, i - 1));
-            else
-                dst = mnemonic(sig);
-
-            return true;
-        }
 
         [Op]
         public bool IsDigit(OpCode src)
@@ -124,7 +96,7 @@ namespace Z0.Asm
         [Op]
         public Index<SigOperand> Operands(Signature src)
         {
-            if(ParseMnemonic(src.Content, out var monic))
+            if(AsmSigParser.mnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return Operands(remainder);
             return Index<SigOperand>.Empty;
@@ -174,13 +146,6 @@ namespace Z0.Asm
         public static bool composite(Signature src)
             => src.Operands.Any(o => o.IsComposite);
 
-        [MethodImpl(Inline), Op]
-        public static AsmMnemonicCode mnemonic2(string src)
-            => Enums.parse(src, AsmMnemonicCode.None);
-
-        [MethodImpl(Inline), Op]
-        public static AsmMnemonic mnemonic(string src)
-            => new AsmMnemonic(src);
 
         public static string format(Signature src)
         {
@@ -189,7 +154,7 @@ namespace Z0.Asm
             var opcount = src.Operands.Length;
             if(opcount != 0)
             {
-                buffer.Append(Chars.Space);
+                //buffer.Append(Chars.Space);
                 buffer.Append(Format.join(OperandDelimiter, src.Operands));
             }
             return buffer.Emit();

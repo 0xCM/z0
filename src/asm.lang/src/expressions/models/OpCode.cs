@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public readonly struct OpCode
         {
-            readonly TextBlock<N32> Data;
+            readonly TextBlock Data;
 
             [MethodImpl(Inline)]
             public OpCode(string src)

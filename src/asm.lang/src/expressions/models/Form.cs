@@ -8,24 +8,23 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static AsmSigs;
 
     partial struct AsmExpr
     {
-        public readonly struct OperationSpec
+        public readonly struct Form
         {
-            public ushort Seq {get;}
+            public ushort Id {get;}
 
             public Signature Sig {get;}
 
             public OpCode OpCode {get;}
 
             [MethodImpl(Inline)]
-            internal OperationSpec(ushort seq, OpCode opcode, Signature sig)
+            internal Form(ushort id, OpCode opcode, Signature sig)
             {
                 OpCode = opcode;
                 Sig = sig;
-                Seq = seq;
+                Id = id;
             }
 
             public bool IsEmpty
@@ -47,23 +46,23 @@ namespace Z0.Asm
             }
 
             [MethodImpl(Inline)]
-            public bool Equals(OperationSpec src)
+            public bool Equals(Form src)
                 => OpCode == src.OpCode && Sig == src.Sig;
 
             public override bool Equals(object src)
-                => src is OperationSpec x && Equals(x);
+                => src is Form x && Equals(x);
 
             public override int GetHashCode()
                 => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
             public string Format()
-                => string.Format("{0,-8} | {1,-64} | {2}", Seq, Sig.Format(), OpCode.Format());
+                => string.Format("{0,-8} | {1,-64} | {2}", Id, Sig.Format(), OpCode.Format());
 
             public override string ToString()
                 => Format();
 
-            public static OperationSpec Empty
-                => new OperationSpec(0, OpCode.Empty, AsmExpr.Signature.Empty);
+            public static Form Empty
+                => new Form(0, OpCode.Empty, AsmExpr.Signature.Empty);
         }
     }
 }
