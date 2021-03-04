@@ -16,6 +16,18 @@ namespace Z0
         public static string format(ReadOnlySpan<char> src)
             => Format.format(src);
 
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, ReadOnlySpan<char> a0)
+            => Format.format(pattern, a0);
+
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1)
+            => Format.format(pattern, a0, a1);
+
+        [MethodImpl(Inline), Op]
+        public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1, ReadOnlySpan<char> a2)
+            => Format.format(pattern, a0, a1, a2);
+
         [MethodImpl(Inline)]
         public static string format(string pattern, params object[] args)
             => Format.format(pattern, args);

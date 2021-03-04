@@ -10,11 +10,6 @@ namespace Z0
     using static Part;
     using static TextRules;
 
-    public readonly struct ScriptResultProcessor
-    {
-
-    }
-
     public sealed class ScriptRunner
     {
         [MethodImpl(Inline)]

@@ -17,9 +17,11 @@ namespace Z0
             if(count != 0)
                 term.inform(string.Format("Command-line: {0}", args.Delimit()));
 
-            if(count != 0 && args[0] == "--control")
+            if(count >=2 && args[0] == "--control")
             {
                 var paths = DbPaths.create();
+                var _args = slice(span(args),1).ToArray();
+
                 for(var i=1; i<count; i++)
                 {
                     var name = FS.file(args[i]);
@@ -35,7 +37,7 @@ namespace Z0
                         var outcome = runner.RunControlScript(name);
                         if(outcome)
                         {
-                            var processor = Tools.processor(paths,script);
+                            var processor = Tools.processor(paths, script);
                             term.inform("Response");
                             root.iter(outcome.Data, x => processor.Process(x));
                         }

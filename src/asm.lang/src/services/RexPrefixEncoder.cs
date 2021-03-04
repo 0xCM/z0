@@ -33,11 +33,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        BitField<RexPrefixBits,RexFieldIndex,byte> BitField()
-            => BitFields.create<RexPrefixBits,RexFieldIndex,byte>(FieldSpec);
+        BitField<RexBits,RexFieldIndex,byte> BitField()
+            => BitFields.create<RexBits,RexFieldIndex,byte>(FieldSpec);
 
         [MethodImpl(Inline), Op]
-        public RexPrefixBits Encode(bit b, bit x, bit r, bit w, RexPrefixCode code)
+        public RexBits Encode(bit b, bit x, bit r, bit w, RexPrefixCode code)
         {
             var data = (byte)gmath.or(
                 emath.sll(b, I.B),
@@ -45,7 +45,7 @@ namespace Z0.Asm
                 emath.sll(r, I.R),
                 emath.sll(w, I.W),
                 emath.sll((uint)code, I.Code));
-            return new RexPrefixBits(data);
+            return new RexBits(data);
         }
 
         [MethodImpl(Inline), Op]
@@ -53,7 +53,7 @@ namespace Z0.Asm
             => (uint4)(src >> 4) == b0100;
 
         [MethodImpl(Inline), Op]
-        public static RexPrefixBits define(byte src)
-            => test(src) ? new RexPrefixBits(src) : RexPrefixBits.Empty;
+        public static RexBits define(byte src)
+            => test(src) ? new RexBits(src) : RexBits.Empty;
     }
 }

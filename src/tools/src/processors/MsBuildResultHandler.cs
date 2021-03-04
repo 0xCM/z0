@@ -49,7 +49,7 @@ namespace Z0
         public bool CanHandle(TextLine src)
             => src.Content.Contains(Logo);
 
-        const string BuildSucceededMarker = "Build Succeeded";
+        const string BuildSucceededMarker = "Build succeeded";
 
         const string Logo = "Microsoft (R) Build Engine";
     }

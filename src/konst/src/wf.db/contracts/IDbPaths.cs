@@ -101,6 +101,19 @@ namespace Z0
         FS.FolderPath EtlRoot()
             => Root + FS.folder(etl);
 
+        FS.FolderPath EtlDir(string subject)
+            => EtlRoot() + FS.folder(subject);
+
+        FS.FilePath EtlFile(string subject, FS.FileName file)
+            => EtlDir(subject) + file;
+
+        FS.FolderPath EtlTableRoot()
+            => EtlDir("tables");
+
+        FS.FilePath EtlTable<T>(string id)
+            where T : struct, IRecord<T>
+                => EtlTableRoot() + TableFileName<T>(id);
+
         FS.FolderPath AppLogRoot()
             => LogRoot() + FS.folder(apps);
 
@@ -193,9 +206,9 @@ namespace Z0
             where T : struct, IRecord<T>
                 => Table<T>(name, Csv);
 
-        FS.FilePath Table<T>()
+        FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
-                => Table<T>(default(T).TableId.Format(), Csv);
+                => FS.file(string.Format("{0}.{1}", Records.tableid<T>().Identifier, id), Csv);
 
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>

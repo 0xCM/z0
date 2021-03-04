@@ -14,6 +14,10 @@ namespace Z0
     partial class text
     {
         [MethodImpl(Inline)]
+        public static ReadOnlySpan<char> span(string src)
+            => src;
+
+        [MethodImpl(Inline)]
         public static string spaced(object content)
             => Format.spaced(content);
 

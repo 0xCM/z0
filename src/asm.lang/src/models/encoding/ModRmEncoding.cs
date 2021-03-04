@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         readonly uint8T Input;
 
-        public readonly ModRm Encoded;
+        public readonly ModRmBits Encoded;
 
         public readonly uint3 Rm
         {
@@ -38,7 +38,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ModRmEncoding(uint3 rm, BitSeq3 reg, BitSeq2 mod, ModRm encoded)
+        public ModRmEncoding(uint3 rm, BitSeq3 reg, BitSeq2 mod, ModRmBits encoded)
         {
             Input = or((byte)rm, sll((byte)reg,3), sll((byte)mod, 3 + 3));
             Encoded = encoded;

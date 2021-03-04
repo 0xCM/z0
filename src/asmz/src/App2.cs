@@ -371,9 +371,21 @@ namespace Z0.Asm
                 writer.WriteLine(string.Format("{0:D8} | {1} | {2} | {3}", row.Sequence, row.IP, row.GlobalOffset, row.LocalOffset));
             }
         }
+
+        void ShowRexBits()
+        {
+            var codes = RexBits.all();
+            var count = codes.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(codes,i);
+                Wf.Row(code.Format());
+            }
+        }
+
         public unsafe void Run()
         {
-            ReadBlocks();
+            ShowRexBits();
 
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();

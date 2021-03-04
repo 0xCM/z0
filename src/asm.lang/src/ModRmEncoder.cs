@@ -14,12 +14,12 @@ namespace Z0.Asm
     public readonly struct ModRmEncoder
     {
         [MethodImpl(Inline), Op]
-        public static ModRm define(byte src)
-            => new ModRm(src);
+        public static ModRmBits define(byte src)
+            => new ModRmBits(src);
 
         [MethodImpl(Inline), Op]
-        public static ModRm define(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRm(rm,reg,mod);
+        public static ModRmBits define(uint3 rm, uint3 reg, uint2 mod)
+            => new ModRmBits(rm,reg,mod);
 
         [MethodImpl(Inline), Op]
         public static uint fill(Span<ModRmEncoding> dst)

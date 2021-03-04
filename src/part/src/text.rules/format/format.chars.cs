@@ -20,6 +20,19 @@ namespace Z0
             [Op]
             public static string format(ReadOnlySpan<char> src)
                 => new string(src);
+
+            [Op]
+            public static string format(string pattern, ReadOnlySpan<char> a0)
+                => string.Format(pattern, a0.ToString());
+
+            [Op]
+            public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1)
+                => string.Format(pattern, a0.ToString(), a1.ToString());
+
+            [Op]
+            public static string format(string pattern, ReadOnlySpan<char> a0, ReadOnlySpan<char> a1, ReadOnlySpan<char> a2)
+                => string.Format(pattern, a0.ToString(), a1.ToString(), a2.ToString());
+
         }
     }
 }
