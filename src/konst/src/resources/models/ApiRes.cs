@@ -14,10 +14,9 @@ namespace Z0
     {
         public ApiResAccessor Accessor {get;}
 
-        readonly MemoryAddress Address {get;}
+        public MemoryAddress Address {get;}
 
-        readonly uint Size {get;}
-
+        public readonly uint Size {get;}
 
         [MethodImpl(Inline)]
         public ApiRes(ApiResAccessor accessor, MemoryAddress address, uint size)
@@ -32,6 +31,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => cover<byte>(Address, Size);
         }
-
     }
 }

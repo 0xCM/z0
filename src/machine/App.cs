@@ -61,7 +61,7 @@ namespace Z0
                     xed.Run();
                 }
 
-                var images = ImageDataEmitter.create(Wf);
+                var images = Wf.ImageDataEmitter();
 
                 if(Options.EmitSectionHeaders)
                     images.EmitSectionHeaders();
@@ -82,7 +82,7 @@ namespace Z0
                     images.EmitApiBlobs();
 
                 if(Options.EmitImageContent)
-                    ImageContentEmitter.emit(Wf);
+                    root.iter(Wf.Api.PartComponents, c => images.EmitImageContent(c));
 
                 var asm = Wf.AsmDataEmitter();
 

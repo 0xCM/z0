@@ -50,12 +50,7 @@ namespace Z0
                     line.Append(Space);
             }
 
-            for(var i=0u; i<count; i++)
-            {
-                line.Append(skip(data, i).FormatHex(DataConfig));
-                if(i != count - 1)
-                    line.Append(Space);
-            }
+            line.Append(data.FormatHex());
 
             return line.ToString();
         }

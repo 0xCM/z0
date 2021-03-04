@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed partial class ImageDataEmitter : WfService<ImageDataEmitter>
-    {
+    using System;
 
+    public interface IToolResultHandler
+    {
+        ToolId Tool => default;
+
+        bool CanHandle(TextLine src);
+
+        bool Handle(TextLine src);
     }
 }

@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed partial class ImageDataEmitter : WfService<ImageDataEmitter>
-    {
+    using System;
 
+    public interface IToolResultProcessor
+    {
+        TextLine Process(TextLine src);
     }
 }

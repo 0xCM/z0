@@ -4,8 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public sealed partial class ImageDataEmitter : WfService<ImageDataEmitter>
-    {
+    using System;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
+
+    partial class XSvc
+    {
+        public static ImageDataEmitter ImageDataEmitter(this IWfShell wf)
+            => Z0.ImageDataEmitter.create(wf);
     }
 }

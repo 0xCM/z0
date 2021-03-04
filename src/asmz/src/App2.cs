@@ -176,17 +176,37 @@ namespace Z0.Asm
         void CheckResPack()
         {
             var package = Db.Package("respack");
-            var dllpath = package + FS.file("z0.respack.dll");
-            var exepath = package + FS.file("z0.respack.dll");
-            var dll = dllpath.Exists ? "Exists" : "Missing";
-            var exe = exepath.Exists ? "Exists"  : "Missing";
-            Wf.Status($"{dllpath} | {dll}");
-            Wf.Status($"{exepath} | {exe}");
+            var path = package + FS.file("z0.respack.dll");
+            var exists = path.Exists ? "Exists" : "Missing";
+            Wf.Status($"{path} | {exists}");
             var capture = Wf.ApiResCapture();
-            var assembly = Assembly.LoadFrom(exepath.Name);
-            var accessors = Resources.accessors(assembly);
+            var assembly = Assembly.LoadFrom(path.Name);
+            var accessors = Resources.accessors(assembly).View;
+            var count = accessors.Length;
             var definitions = Resources.definitions(accessors);
-            Wf.Status(definitions.BlockCount);
+            var hextext = text.buffer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var accessor = ref skip(accessors,i);
+                var definition = definitions.Block(i);
+
+                hextext.Clear();
+                hextext.Append(slice(definition, 0, 5).FormatHex());
+                hextext.Append(" | ");
+                hextext.Append(slice(definition, 6, 10).FormatHex());
+                hextext.Append(" ... ");
+                hextext.Append(definition[29].FormatHex());
+
+                var resource = Resources.resource(accessor);
+                Wf.Row(string.Format("{0,-48} | {1} ", accessor.Member.Name, hextext.Emit()));
+
+                //Wf.Row(string.Format("{0,-16} | {1} | {2}", resource.Address, resource.Size, resource.Accessor.Member.Name));
+
+            }
+            var dst = Db.AppLog("respack", FS.Extensions.Asm);
+
+            //capture.CaptureAccessors(accessors,dst);
+            //Wf.Status(definitions.BlockCount);
         }
 
         void CheckIndexDecoder()
@@ -347,8 +367,7 @@ namespace Z0.Asm
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();
 
-            CheckApiHexArchive();
-
+            CheckResPack();
             // var composites = AsmExpr.composites();
             // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
 

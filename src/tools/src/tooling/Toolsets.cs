@@ -23,6 +23,8 @@ namespace Z0
 
         public static ToolId cl => msdev.cl;
 
+        public static ToolId ildasm => msdev.cl;
+
         public readonly struct clang
         {
             public static ToolId name => "clang";
@@ -55,6 +57,9 @@ namespace Z0
             public static ToolId msbuild => "msbuild";
 
             public static ToolId cl => "cl";
+
+            public static ToolId ildasm => "ildasm";
+
         }
     }
 }

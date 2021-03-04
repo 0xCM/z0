@@ -26,6 +26,7 @@ namespace Z0
         /// 0019h mov rax,rcx                    ; MOV r64, r/m64      | REX.W 8B /r     | 3   | 48 8b c1
         /// 001ch ret                            ; RET                 | C3              | 1   | c3
         /// </remarks>
+        [Op]
         public static unsafe SpanBlock256<byte> definitions(ReadOnlySpan<ApiResAccessor> src)
         {
             var count = src.Length;
@@ -40,6 +41,19 @@ namespace Z0
             }
 
             return blocks;
+        }
+
+        [Op]
+        public static unsafe ApiRes resource(ApiResAccessor src)
+        {
+            var pMethod = src.Member.MethodHandle.GetFunctionPointer().ToPointer<byte>();
+            var storage = MemoryStacks.alloc(w256);
+            var buffer = MemoryStacks.span<byte>(ref storage);
+            var reader = memory.reader(pMethod, 29);
+            reader.ReadAll(buffer);
+            var address = slice(buffer,8,8).TakeUInt64();
+            var size = slice(buffer,22,4).TakeUInt32();
+            return new ApiRes(src, address, size);
         }
 
         /// <summary>

@@ -5,9 +5,6 @@
 namespace Z0.Lang
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     public interface ISyntaxNode
     {
@@ -28,7 +25,6 @@ namespace Z0.Lang
     public interface ISyntaxNode<T,K> : ISyntaxNode<K>, IEquatable<T>
         where T : ISyntaxNode<T,K>, new()
         where K : unmanaged
-
     {
         bool IEquatable<T>.Equals(T src)
             => NodeKey.Equals(src.NodeKey);

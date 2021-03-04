@@ -5,17 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Diagnostics;
-
-    using static z;
 
     partial class ImageDataEmitter
     {
         public void EmitProcessData()
         {
             Wf.CmdBuilder().EmitImageContent(Process.GetCurrentProcess(), out var commands);
-            iter(commands, cmd => Wf.Router.Dispatch(cmd));
+            root.iter(commands, cmd => Wf.Router.Dispatch(cmd));
         }
     }
 }

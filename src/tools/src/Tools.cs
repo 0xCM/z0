@@ -14,5 +14,8 @@ namespace Z0
         [Op]
         public static ToolCatalog catalog(IWfShell wf)
             => ToolCatalog.create(wf);
+
+        public static IToolResultProcessor processor(IDbPaths paths, FS.FilePath script)
+            => new ToolResultProcessor(paths, script);
     }
 }
