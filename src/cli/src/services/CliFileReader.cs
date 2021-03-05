@@ -41,9 +41,9 @@ namespace Z0
             Stream.Dispose();
         }
 
-        public static ReadOnlySpan<CilDataRow> cil(FS.FilePath src)
+        public static ReadOnlySpan<MsilRow> cil(FS.FilePath src)
         {
-            var dst = sys.list<CilDataRow>();
+            var dst = sys.list<MsilRow>();
 
             using var stream = File.OpenRead(src.Name);
             using var pe = new PEReader(stream);
@@ -58,7 +58,7 @@ namespace Z0
                  var methodCount = hMethods.Length;
                  var methodDefs = root.map(hMethods, m=> reader.GetMethodDefinition(m));
                  var view = @readonly(methodDefs);
-                 var buffer = alloc<CilDataRow>(methodCount);
+                 var buffer = alloc<MsilRow>(methodCount);
                  var target = span(buffer);
                  for(var i=0u; i<methodCount; i++)
                  {
@@ -67,12 +67,12 @@ namespace Z0
                     if(rva != 0)
                     {
                         var body = pe.GetMethodBody(rva);
-                        dst.Add(new CilDataRow
+                        dst.Add(new MsilRow
                         {
                             MethodSig = reader.GetBlobBytes(def.Signature),
                             MethodName = reader.GetString(def.Name),
                             Rva = (Address32)rva,
-                            Cil = body.GetILBytes(),
+                            Code = body.GetILBytes(),
                             Size = body.Size
                         });
                     }

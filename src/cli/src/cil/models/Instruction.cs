@@ -17,12 +17,12 @@ namespace Z0
         /// </summary>
         public readonly struct Instruction
         {
-            public ILOpCode OpCode {get;}
+            public OpCode OpCode {get;}
 
             public Index<byte> Args {get;}
 
             [MethodImpl(Inline)]
-            public Instruction(ILOpCode op, params byte[] args)
+            public Instruction(OpCode op, params byte[] args)
             {
                 OpCode = op;
                 Args = args;

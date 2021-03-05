@@ -10,9 +10,11 @@ namespace Z0
     public class BitsTestApp : TestApp<BitsTestApp>
     {
         static void Main(params string[] args)
-            => Run(args);
-
-        // public override Index<Type> SelectedHosts
-        //     =>  root.array(typeof(t_bitfields));
+        {
+            if(args.Length != 0)
+                RunSelected(args);
+            else
+                 Run(args);
+        }
     }
 }

@@ -46,11 +46,8 @@ namespace Z0
             }
         }
 
-        public void RunUnit(Type host, string[] filters)
+        public void RunUnit(Type host)
         {
-            if(!HasTests(host, filters))
-                return;
-
             Demands.insist(Wf != null);
             using var unit = host.Instantiate<IUnitTest>();
             if(unit.Enabled)

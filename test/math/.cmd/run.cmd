@@ -1,2 +1,3 @@
-call %~dp0\build.cmd
+@echo off
+call %~dp0\config.cmd
 call %TestExe%

@@ -5,9 +5,9 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct CilDataRow : IRecord<CilDataRow>
+    public struct MsilRow : IRecord<MsilRow>
     {
-        public const string TableId = "cli.cil";
+        public const string TableId = "msil";
 
         public BinaryCode MethodSig;
 
@@ -15,7 +15,7 @@ namespace Z0
 
         public Address32 Rva;
 
-        public BinaryCode Cil;
+        public BinaryCode Code;
 
         public ByteSize Size;
     }

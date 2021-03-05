@@ -68,8 +68,8 @@ namespace Z0
                 if(Options.EmitSectionHeaders)
                     images.EmitSectionHeaders();
 
-                if(Options.EmitCilRecords)
-                    images.EmitCilRecords();
+                if(Options.EmitMsilRecords)
+                    images.EmitMsilRecords();
 
                 if(Options.EmitCliStrings)
                 {

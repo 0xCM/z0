@@ -8,14 +8,14 @@ namespace Z0
     using System.Reflection;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial class ImageDataEmitter
     {
-        public uint EmitCilRecords()
-            => EmitCilRecords(Wf.Components);
+        public uint EmitMsilRecords()
+            => EmitMsilRecords(Wf.Components);
 
-        public uint EmitCilRecords(Assembly src)
+        public uint EmitMsilRecords(Assembly src)
         {
             var srcPath = FS.path(src.Location);
             var processing = Wf.Running(srcPath);
@@ -23,15 +23,15 @@ namespace Z0
             var count = (uint)methods.Length;
             if(count != 0)
             {
-                var dst = Wf.Db().Table<CilDataRow>(src.GetSimpleName());
-                var flow = Wf.EmittingTable<CilDataRow>(dst);
+                var dst = Wf.Db().Table<MsilRow>(src.GetSimpleName());
+                var flow = Wf.EmittingTable<MsilRow>(dst);
                 using var writer = dst.Writer();
                 writer.WriteLine(CilRowHeader);
 
                 for(var i=0u; i<count; i++)
                     writer.WriteLine(format(skip(methods,i)));
 
-                Wf.EmittedTable<CilDataRow>(flow, count);
+                Wf.EmittedTable<MsilRow>(flow, count);
             }
 
             Wf.Ran(processing, src);
@@ -39,16 +39,16 @@ namespace Z0
             return count;
         }
 
-        public uint EmitCilRecords(ReadOnlySpan<Assembly> src)
+        public uint EmitMsilRecords(ReadOnlySpan<Assembly> src)
         {
             var total = 0u;
             var count = src.Length;
             for(var i=0; i<count; i++)
-                total += EmitCilRecords(skip(src,i));
+                total += EmitMsilRecords(skip(src,i));
             return total;
         }
 
-        static string format(in CilDataRow src)
+        static string format(in MsilRow src)
         {
             var dst = EmptyString.Build();
             dst.Append(FieldDelimiter);
@@ -62,7 +62,7 @@ namespace Z0
             dst.Append(src.Rva.Format().PadRight(12));
             dst.Append(FieldDelimiter);
             dst.Append(Space);
-            dst.Append(src.Cil.Format());
+            dst.Append(src.Code.Format());
             return dst.ToString();
         }
 

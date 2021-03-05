@@ -24,7 +24,5 @@ namespace Z0
         BenchmarkRecord[] SortBenchmarks();
 
         void RunUnit(Type host, IUnitTest unit);
-
-        Index<Type> SelectedHosts {get;}
     }
 }

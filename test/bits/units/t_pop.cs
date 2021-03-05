@@ -13,7 +13,7 @@ namespace Z0
     {
         public void sb_pop_popcnt()
         {
-            var buffer16x8 = SpanBlocks.alloc<byte>(n128);
+            var buffer16x8 = SpanBlocks.alloc<byte>(w128);
             var src = (ushort)0b11001111;
 
             var srcPop = Bits.pop(src);
@@ -27,7 +27,7 @@ namespace Z0
             Claim.eq(srcPop, bytes.PopCount());
             var buffer64x8 = SpanBlocks.alloc<byte>(n256,2);
 
-            for(var i=0; i< RepCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var y = BitConverter.GetBytes(Random.Next<ulong>()).ToSpan();
 

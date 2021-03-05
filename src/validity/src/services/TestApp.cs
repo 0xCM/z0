@@ -18,9 +18,6 @@ namespace Z0
 
         protected virtual string AppName {get;}
 
-        public virtual Index<Type> SelectedHosts
-            => Index<Type>.Empty;
-
         protected TestApp()
         {
             AppName = GetType().Assembly.GetSimpleName();

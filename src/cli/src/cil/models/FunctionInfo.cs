@@ -67,6 +67,5 @@ namespace Z0
                 get => new FunctionInfo(ClrToken.Empty, EmptyString, 0);
             }
         }
-
     }
 }

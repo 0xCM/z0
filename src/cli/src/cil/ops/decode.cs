@@ -8,13 +8,13 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static z;
+    using static memory;
 
     partial struct Cil
     {
         public static Index<FunctionInfo> decode(Module module, MethodInfo[] src)
         {
-            var dst = list<FunctionInfo>(src.Length);
+            var dst = root.list<FunctionInfo>(src.Length);
             var types = @readonly(module.GetTypes());
             var lookup = src.Select(x => ((uint)x.MetadataToken, x)).ToDictionary();
             var kTypes = types.Length;
@@ -45,7 +45,7 @@ namespace Z0
 
         public static Index<Instruction> decode(ReadOnlySpan<byte> src)
         {
-            var dst = list<Instruction>();
+            var dst = root.list<Instruction>();
             var count = src.Length;
             ref readonly var source = ref first(src);
             for(var i=0; i<count; i++)

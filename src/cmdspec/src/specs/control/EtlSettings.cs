@@ -18,7 +18,7 @@ namespace Z0
 
         public Setting<bool> EmitSectionHeaders;
 
-        public Setting<bool> EmitCilRecords;
+        public Setting<bool> EmitMsilRecords;
 
         public Setting<bool> EmitCliStrings;
 
@@ -48,7 +48,7 @@ namespace Z0
             dst.CollectApiDocs = false;
             dst.EmitImageContent = false;
             dst.EmitSectionHeaders = true;
-            dst.EmitCilRecords = true;
+            dst.EmitMsilRecords = true;
             dst.EmitCliStrings = true;
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;

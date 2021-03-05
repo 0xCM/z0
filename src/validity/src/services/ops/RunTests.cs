@@ -10,21 +10,20 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        void RunTests(bool concurrent, params string[] filters)
+        void RunTests(bool concurrent, Index<string> hosts)
         {
-
-            var hosts = SelectedHosts.IsNonEmpty ? SelectedHosts.Storage : FindHosts();
-            root.iter(hosts, h =>  RunUnit(h,filters), concurrent);
+            var types = hosts.IsEmpty ? FindHosts() : FindHosts(hosts);
+            root.iter(types, h =>  RunUnit(h), concurrent);
         }
 
-        protected virtual void RunTests(params string[] filters)
+        protected virtual void RunTests(params string[] hosts)
         {
             try
             {
                 var flow = Wf.Running(typeof(A).Name + " tests");
                 ErroLogPath.Delete();
                 StatusLogPath.Delete();
-                RunTests(false, filters);
+                RunTests(false, hosts);
                 EmitLogs();
                 Wf.Ran(flow);
             }

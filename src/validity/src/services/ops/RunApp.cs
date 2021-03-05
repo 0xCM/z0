@@ -13,5 +13,14 @@ namespace Z0
             app.SetMode(InDiagnosticMode);
             app.RunTests();
         }
+
+        public static void RunSelected(params string[] units)
+        {
+            var app = new A();
+            var shell = WfShell.create(WfShell.parts(Index<PartId>.Empty), sys.empty<string>());
+            app.InjectShell(shell);
+            app.SetMode(InDiagnosticMode);
+            app.RunTests(units);
+        }
     }
 }

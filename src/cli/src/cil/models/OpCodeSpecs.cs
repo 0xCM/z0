@@ -5,6 +5,8 @@ namespace Z0
 {
     using K = Cil.OpCodeValue;
 
+    using System;
+
     partial struct Cil
     {
         [ApiComplete]
@@ -36,6 +38,10 @@ namespace Z0
             public const int EndsUncondJmpBlkFlag = 0x01000000;   // 0000000X000000000000000000000000
 
             public const int StackChangeShift = 28;               // XXXX0000000000000000000000000000
+
+            public static Index<OpCode> All()
+                => typeof(OpCodeSpecs).StaticProperties().Where(p => p.PropertyType == typeof(OpCode)).Values().Cast<OpCode>();
+
 
             const int NopFlags =
                 ((int)OperandType.InlineNone) |
