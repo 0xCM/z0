@@ -22,8 +22,7 @@ namespace Z0.Asm
 
     public interface IMemOp8 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 8;
+
     }
 
     public interface IMemOp8<T> : IMemOp8, IMemOp<T>
@@ -33,8 +32,6 @@ namespace Z0.Asm
 
     public interface IMemOp16 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 16;
 
     }
 
@@ -45,8 +42,6 @@ namespace Z0.Asm
 
     public interface IMemOp32 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 32;
 
     }
 
@@ -57,8 +52,6 @@ namespace Z0.Asm
 
     public interface IMemOp64 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 64;
 
     }
 
@@ -69,8 +62,6 @@ namespace Z0.Asm
 
     public interface IMemOp128 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 128;
 
     }
 
@@ -81,8 +72,6 @@ namespace Z0.Asm
 
     public interface IMemOp256 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 256;
 
     }
 
@@ -93,8 +82,6 @@ namespace Z0.Asm
 
     public interface IMemOp512 : IMemOp
     {
-        // BitWidth ISized.Width
-        //     => 512;
 
     }
 

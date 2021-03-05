@@ -29,7 +29,6 @@ namespace Z0.Asm
         where C : unmanaged, IAsmOp
     {
         Args<A,B,C> Args {get;}
-
     }
 
     public interface IAsmStatement<A,B,C,D> : IAsmStatement

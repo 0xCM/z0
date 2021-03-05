@@ -146,17 +146,13 @@ namespace Z0.Asm
         public static bool composite(Signature src)
             => src.Operands.Any(o => o.IsComposite);
 
-
         public static string format(Signature src)
         {
             var buffer = text.buffer();
             buffer.Append(src.Mnemonic.Format(AsmMnemonicCase.Uppercase));
             var opcount = src.Operands.Length;
             if(opcount != 0)
-            {
-                //buffer.Append(Chars.Space);
                 buffer.Append(Format.join(OperandDelimiter, src.Operands));
-            }
             return buffer.Emit();
         }
 

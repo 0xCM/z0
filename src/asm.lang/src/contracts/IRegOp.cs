@@ -29,8 +29,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp8 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 8;
+
     }
 
     [Free]
@@ -43,8 +42,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp16 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 16;
+
     }
 
     [Free]
@@ -56,8 +54,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp32 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 32;
+
     }
 
     [Free]
@@ -70,10 +67,8 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp64 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 64;
-    }
 
+    }
 
     [Free]
     public interface IRegOp64<T> : IRegOp64, IRegOp<T>
@@ -84,8 +79,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp128 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 128;
+
     }
 
     [Free]
@@ -97,8 +91,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp256 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 256;
+
     }
 
     [Free]
@@ -110,8 +103,7 @@ namespace Z0.Asm
     [Free]
     public interface IRegOp512 : IRegOp
     {
-        // BitWidth ISized.Width
-        //     => 512;
+
     }
 
     [Free]

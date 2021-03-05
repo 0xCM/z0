@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static z;
-
     public interface IZmmReg : IRegister<W512,Cell512>
     {
     }
@@ -20,6 +18,6 @@ namespace Z0.Asm
         where N : unmanaged, ITypeNat
     {
         RegIndex IRegister.Index
-            => (RegIndex)nat64u<N>();
+            => (RegIndex)TypeNats.nat64u<N>();
     }
 }
