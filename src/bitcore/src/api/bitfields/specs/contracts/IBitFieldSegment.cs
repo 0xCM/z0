@@ -33,7 +33,7 @@ namespace Z0
         T EndPos {get;}
 
         BitSection<T> Section
-            => (StartPos, EndPos);
+            => new BitSection<T>(Name,StartPos, EndPos);
 
         /// <summary>
         /// The number of bits in the segment

@@ -26,8 +26,6 @@ namespace Z0
             Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
             try
             {
-                //ApiCode.EmitHexIndex(Wf);
-
                 Wf.ApiServices().Correlate();
 
                 if(Options.EmitAsmCatalogs)
@@ -90,12 +88,13 @@ namespace Z0
                     asm.EmitAsmRows();
 
                 if(Options.EmitAsmAnalysis)
-                {
                     asm.EmitAnalyses();
-                }
 
                 if(Options.EmitResBytes)
                     asm.EmitResBytes();
+
+                if(Options.EmitStatements)
+                    asm.EmitStatements();
 
             }
             catch(Exception e)

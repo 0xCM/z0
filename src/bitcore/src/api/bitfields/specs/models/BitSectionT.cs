@@ -17,6 +17,11 @@ namespace Z0
         where T : unmanaged
     {
         /// <summary>
+        /// The section anme
+        /// </summary>
+        public Identifier Name {get;}
+
+        /// <summary>
         /// The index of the first bit in the section
         /// </summary>
         public T StartPos {get;}
@@ -29,6 +34,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitSection(T min, T max)
         {
+            Name = EmptyString;
+            StartPos = min;
+            EndPos = max;
+        }
+
+        [MethodImpl(Inline)]
+        public BitSection(Identifier name, T min, T max)
+        {
+            Name = name;
             StartPos = min;
             EndPos = max;
         }
@@ -42,7 +56,7 @@ namespace Z0
         public BitSection Untyped
         {
             [MethodImpl(Inline)]
-            get => new BitSection(memory.u32(StartPos), memory.u32(EndPos));
+            get => new BitSection(Name, memory.u32(StartPos), memory.u32(EndPos));
         }
 
         public string Format()
@@ -50,18 +64,6 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>((T min, T max) src)
-            => new BitSection<T>(src.min, src.max);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>(Pair<T> src)
-            => new BitSection<T>(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection<T>(ClosedInterval<T> src)
-            => new BitSection<T>(src.Min, src.Max);
 
         [MethodImpl(Inline)]
         public static implicit operator BitSection(BitSection<T> src)

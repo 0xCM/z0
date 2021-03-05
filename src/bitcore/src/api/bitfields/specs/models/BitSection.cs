@@ -17,6 +17,11 @@ namespace Z0
     public readonly struct BitSection : IBitSection<uint>
     {
         /// <summary>
+        /// The section anme
+        /// </summary>
+        public Identifier Name {get;}
+
+        /// <summary>
         /// The index of the first bit in the section
         /// </summary>
         public uint StartPos {get;}
@@ -29,6 +34,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitSection(uint min, uint max)
         {
+            Name = EmptyString;
+            StartPos = min;
+            EndPos = max;
+        }
+
+        [MethodImpl(Inline)]
+        public BitSection(Identifier name, uint min, uint max)
+        {
+            Name = name;
             StartPos = min;
             EndPos = max;
         }
@@ -46,15 +60,7 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSection((ushort min, ushort max) src)
-            => new BitSection(src.min, src.max);
-
-        [MethodImpl(Inline)]
-        public static implicit operator BitSection(Pair<ushort> src)
-            => new BitSection(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
         public static implicit operator BitSection<uint>(BitSection src)
-            => new BitSection(src.StartPos, src.EndPos);
+            => new BitSection(src.Name, src.StartPos, src.EndPos);
     }
 }

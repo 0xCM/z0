@@ -20,8 +20,6 @@ namespace Z0.Asm
 
         AsmRowProcessor RowProcessor;
 
-        AsmSigs Sigs;
-
         Index<Source> Rows;
 
         MemoryAddress CurrentBlock;
@@ -40,26 +38,26 @@ namespace Z0.Asm
             CurrentRow = 0;
             LastRow = 0;
             CurrentBlock = 0;
+            Blocks = ApiCodeBlocks.Empty;
             Symbols = MemorySymbols.alloc(50000);
         }
 
         protected override void OnContextCreated()
         {
-            RowProcessor = Wf.AsmRowProcessor();
-            Sigs = Wf.AsmSigServices();
-            CreateIndices();
+            // RowProcessor = Wf.AsmRowProcessor();
+            // CreateIndices();
         }
 
-        void CreateIndices()
-        {
-            CurrentRow = 0;
-            var flow = Wf.Running();
-            Blocks = Wf.ApiHexIndexer().IndexApiBlocks();
-            Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
-            LastRow = Rows.Count - 1;
-            CurrentBlock = Rows[CurrentRow].BlockAddress;
-            Wf.Ran(flow, Rows.Count);
-        }
+        // void CreateIndices()
+        // {
+        //     CurrentRow = 0;
+        //     var flow = Wf.Running();
+        //     Blocks = Wf.ApiHexIndexer().IndexApiBlocks();
+        //     Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
+        //     LastRow = Rows.Count - 1;
+        //     CurrentBlock = Rows[CurrentRow].BlockAddress;
+        //     Wf.Ran(flow, Rows.Count);
+        // }
 
         bool NextRow(out Source row)
         {
@@ -80,7 +78,6 @@ namespace Z0.Asm
                 return false;
             }
         }
-
 
         [MethodImpl(Inline)]
         string discriminator(MemoryAddress src)
@@ -131,8 +128,33 @@ namespace Z0.Asm
 
         public void DistillStatements()
         {
-            Db.ClearTables<Target>();
+
+            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
+
+            // Db.ClearTables<Target>();
+            // var flow = Wf.Running();
+            // var total = 0u;
+            // var count = DistillNextSegment();
+            // while(count != 0)
+            // {
+            //     count = DistillNextSegment();
+            //     total += count;
+            // }
+            // Wf.Ran(flow,total);
+        }
+
+        public void DistillStatements(ApiCodeBlocks src)
+        {
             var flow = Wf.Running();
+            Db.ClearTables<Target>();
+
+            RowProcessor = Wf.AsmRowProcessor();
+            CurrentRow = 0;
+            Blocks = src;
+            Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
+            LastRow = Rows.Count - 1;
+            CurrentBlock = Rows[CurrentRow].BlockAddress;
+
             var total = 0u;
             var count = DistillNextSegment();
             while(count != 0)
@@ -140,6 +162,7 @@ namespace Z0.Asm
                 count = DistillNextSegment();
                 total += count;
             }
+
             Wf.Ran(flow,total);
         }
     }

@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.Linq;
 
     using static Part;
     using static memory;
@@ -358,24 +357,31 @@ namespace Z0.Asm
 
         }
 
-        void ReadAsmBlocks()
+        void DistillStatements()
         {
-            var reader = Wf.AsmBlockReader().WithBlocks(Wf.ApiHexIndexer().IndexApiBlocks());
-            using var index = Db.AppLog("rowblocks", FS.Extensions.Csv).Writer();
+            Wf.AsmDistiller().DistillStatements();
 
-            while(reader.NextBlock(out var block))
-            {
-                var count = block.RowCount;
-                var uri = block.OpUri;
-                ref readonly var row = ref block.Row(0);
-                ref readonly var statement = ref block.Statement(0);
-                index.WriteLine(string.Format("{0:D8} | {1} | {2} | {3}", row.Sequence, row.IP, row.GlobalOffset, uri));
-            }
         }
 
+    /// <summary>
+    /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
+    /// </summary>
+
+        void ShowModRmBits()
+        {
+            var parts = new byte[2]{2,5};
+            var codes = AsmBytes.modrm().View;
+            var count = codes.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(codes,i);
+                Wf.Row(string.Format("{0} | {1}", code.Encoded.FormatBits(), BitFields.format(code,parts)));
+
+            }
+        }
         void ShowRexBits()
         {
-            var codes = RexBits.all();
+            var codes = AsmBytes.rexbits();
             var count = codes.Length;
             for(var i=0; i<count; i++)
             {
@@ -386,7 +392,7 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            ReadAsmBlocks();
+            ShowModRmBits();
 
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();

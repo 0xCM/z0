@@ -44,9 +44,10 @@ namespace Z0
         }
 
         public string Format()
-            => RowCount != 0
-            ? TextFormatter.format(EventId, TableId, RowCount, Target.ToUri())
-            : TextFormatter.format(EventId, TableId, Target.ToUri());
+            => TextFormatter.format(EventId, Msg.EmittedTable.Capture(TableId, RowCount, Target));
+            //=> RowCount != 0
+            // ? TextFormatter.format(EventId, TableId, RowCount, Target.ToUri())
+            // : TextFormatter.format(EventId, TableId, Target.ToUri());
 
         public override string ToString()
             => Format();

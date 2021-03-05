@@ -19,5 +19,10 @@ namespace Z0
         public static MsgPattern<FS.FileUri> EmittingFile => "Emitting {0}";
 
         public static MsgPattern<FS.FileUri> EmittedFile => "Emitted {0}";
+
+        public static MsgPattern<TableId,FS.FileUri> EmittingTable => "Emitting {0} to {1}";
+
+        public static MsgPattern<TableId,Count,FS.FileUri> EmittedTable => "Emitted {0} {1} rows to {2}";
+
     }
 }

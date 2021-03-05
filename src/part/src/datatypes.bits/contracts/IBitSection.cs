@@ -4,7 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IBitSection<T>
+    public interface IBitSection
+    {
+        Identifier Name {get;}
+    }
+
+    public interface IBitSection<T> : IBitSection
         where T : unmanaged
     {
         T StartPos {get;}

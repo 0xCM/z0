@@ -11,6 +11,10 @@ namespace Z0
 
     partial struct BitFieldModels
     {
+        public static BitSection<T> section<T>(Identifier name, T start, T end)
+            where T : unmanaged
+                => new BitSection<T>(name, start, end);
+
         /// <summary>
         /// Defines a bitfield segment
         /// </summary>
@@ -24,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitFieldSegment segment<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => segment(id.ToString(), (startpos, endpos));
+                => segment(id.ToString(), section<uint>(id.ToString(), startpos, endpos));
 
         public static BitFieldSegment segment<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
@@ -33,7 +37,7 @@ namespace Z0
             var i = EnumValue.scalar<I,byte>(entry.FieldIndex);
             var width = EnumValue.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
-            var seg = segment(entry.FieldName, (start, end));
+            var seg = segment(entry.FieldName, section<uint>(entry.FieldName, start, end));
             start = (byte)(end + 1);
             return seg;
         }

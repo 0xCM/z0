@@ -29,7 +29,7 @@ namespace Z0
                 ref readonly var w = ref skip(widths,i);
                 ref readonly var segname = ref skip(names,i);
                 seek(positions,i) = totalWidth;
-                seek(segments,i) = new BitFieldSegment(segname, (totalWidth, totalWidth + w));
+                seek(segments,i) = new BitFieldSegment(segname, section<uint>(segname, totalWidth, totalWidth + w));
                 totalWidth += skip(fieldWidths, i);
             }
             return new BitFieldModel(name, count, totalWidth, sBuffer);

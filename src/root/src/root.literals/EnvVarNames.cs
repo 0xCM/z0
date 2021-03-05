@@ -21,4 +21,6 @@ public readonly partial struct EnvVarNames
     public const string Logs = "ZLogs";
 
     public const string ZBin = "ZBin";
+
+    public const string ZTmp = "ZTmp";
 }

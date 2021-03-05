@@ -9,7 +9,7 @@ namespace Z0
 
     using Z0.Asm;
 
-    using Services=Z0.Asm;
+    using Services = Z0.Asm;
 
     partial class XTend
     {
@@ -85,8 +85,5 @@ namespace Z0
 
         public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, decoder);
-
-        public static AsmBlockReader AsmBlockReader(this IWfShell wf)
-            => Services.AsmBlockReader.create(wf);
     }
 }

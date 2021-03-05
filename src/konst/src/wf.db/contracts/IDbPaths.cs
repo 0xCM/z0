@@ -12,6 +12,25 @@ namespace Z0
     {
         Env Env {get;}
 
+
+        FS.FolderPath PackageRoot()
+            => Env.Packages.Value;
+
+        FS.FolderPath DevRoot()
+            => Env.DevRoot.Value;
+
+        FS.FolderPath ArchiveRoot()
+            => Env.Archives.Value;
+
+        FS.FolderPath TmpRoot()
+            => Env.Tmp.Value + FS.folder(tmp);
+
+        FS.FolderPath ControlRoot()
+            => Env.Control.Value;
+
+        FS.FolderPath Package(string id)
+            => PackageRoot() + FS.folder(id);
+
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
 
@@ -20,15 +39,6 @@ namespace Z0
 
         FS.FilePath SettingsPath(string id)
             => SettingsRoot() + FS.file(id, Settings);
-
-        FS.FolderPath PackageRoot()
-            => Env.Packages.Value;
-
-        FS.FolderPath Package(string id)
-            => PackageRoot() + FS.folder(id);
-
-        FS.FolderPath DevRoot()
-            => Env.DevRoot.Value;
 
         FS.FolderPath DevRoot(string id)
             => DevRoot() + FS.folder(id);
@@ -44,9 +54,6 @@ namespace Z0
 
         FS.FilePath SourceFile(PartId id, FS.FileName name)
             => PartDir(id) + FS.folder(src) + name;
-
-        FS.FolderPath ArchiveRoot()
-            => Env.Archives.Value;
 
         FS.FolderPath SourceBuildRoot()
             => ZRoot() + FS.folder(build);
@@ -78,11 +85,11 @@ namespace Z0
         FS.FolderPath RefDataRoot()
             => Root + FS.folder(refdata);
 
-        FS.FolderPath TmpRoot()
-            => Root + FS.folder(tmp);
-
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;
+
+        FS.FilePath TmpFile(string name, FS.FileExt ext)
+            => TmpRoot() + FS.file(name, ext);
 
         FS.FolderPath TmpDir<S>(S subject)
             => TmpRoot() + SubjectFolder(subject);
@@ -100,6 +107,12 @@ namespace Z0
 
         FS.FolderPath EtlRoot()
             => Root + FS.folder(etl);
+
+        FS.FolderPath EtlLogRoot()
+            => LogRoot() + FS.folder(etl);
+
+        FS.FilePath EtlLog(string name)
+            => EtlLogRoot() + FS.file(name, Log);
 
         FS.FolderPath EtlDir(string subject)
             => EtlRoot() + FS.folder(subject);
@@ -301,8 +314,6 @@ namespace Z0
         FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
             => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
-        FS.FolderPath ControlRoot()
-            => Env.create().Control.Value;
 
         FS.FolderPath ControlCmdRoot()
             => ControlRoot() + FS.folder(".cmd");

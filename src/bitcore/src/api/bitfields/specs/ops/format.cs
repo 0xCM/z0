@@ -82,7 +82,6 @@ namespace Z0
             if(name.IsNonEmpty)
                 dst = seg.Name;
             return dst + format(seg.Section);
-            //string.Format(SegPattern, seg.StartPos, seg.EndPos);
         }
 
         [Op]

@@ -12,5 +12,12 @@ namespace Z0.Asm
 
         RexPrefix,
 
+        OpCode,
+
+        ModRm,
+
+        Sib,
+
+        EscapePrefix,
     }
 }

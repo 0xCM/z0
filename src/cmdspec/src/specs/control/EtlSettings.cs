@@ -38,13 +38,15 @@ namespace Z0
 
         public Setting<bool> EmitIntrinsicsInfo;
 
+        public Setting<bool> EmitStatements;
+
         public static EtlSettings @default()
         {
             var dst = new EtlSettings();
             dst.RunXed = false;
             dst.EmitResourceData = false;
             dst.CollectApiDocs = false;
-            dst.EmitImageContent = true;
+            dst.EmitImageContent = false;
             dst.EmitSectionHeaders = true;
             dst.EmitCilRecords = true;
             dst.EmitCliStrings = true;
@@ -56,6 +58,7 @@ namespace Z0
             dst.EmitResBytes = true;
             dst.EmitAsmAnalysis = true;
             dst.EmitIntrinsicsInfo = true;
+            dst.EmitStatements = true;
             return dst;
         }
 

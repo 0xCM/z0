@@ -29,6 +29,7 @@ namespace Z0
             dst.Logs = read(N.Logs);
             dst.ZBin = read(N.ZBin);
             dst.DevRoot = read(N.DevRoot);
+            dst.Tmp = read(N.ZTmp);
         }
 
         public EnvDirVar ZDev;
@@ -46,6 +47,8 @@ namespace Z0
         public EnvDirVar Archives;
 
         public EnvDirVar Logs;
+
+        public EnvDirVar Tmp;
 
         public EnvDirVar ZBin;
 

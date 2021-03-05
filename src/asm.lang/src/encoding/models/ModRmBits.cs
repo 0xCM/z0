@@ -18,10 +18,6 @@ namespace Z0.Asm
         readonly uint8T Data;
 
         [MethodImpl(Inline)]
-        public static ModRmBits define(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRmBits(rm, reg, mod);
-
-        [MethodImpl(Inline)]
         public ModRmBits(uint3 rm, uint3 reg, uint2 mod)
             => Data = (uint8T)rm | ((uint8T)reg << ModRmMasks.RegIndex ) | ((uint8T)mod << ModIndex);
 

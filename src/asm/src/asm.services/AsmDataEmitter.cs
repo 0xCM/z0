@@ -48,6 +48,11 @@ namespace Z0.Asm
             EmitSemantic(routines);
         }
 
+        public void EmitStatements()
+        {
+            Wf.AsmDistiller().DistillStatements(CodeBlocks());
+        }
+
         public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)
         {
             var count = src.Count;
@@ -141,7 +146,6 @@ namespace Z0.Asm
         public Index<AsmCallRow> EmitCallRows(Index<ApiPartRoutines> routines)
         {
             var dst = root.list<AsmCallRow>();
-            //var routines = Dataset.Routines;
             var count = routines.Length;
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitCallRows(routines[i]));

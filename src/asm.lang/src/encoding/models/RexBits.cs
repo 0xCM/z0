@@ -12,8 +12,7 @@ namespace Z0.Asm
     using static memory;
 
     using RFI = RexFieldIndex;
-    using RFW = RexFieldWidth;
-    using RF = RexFieldIndex;
+    using api = AsmBytes;
 
     /// <summary>
     /// REX = [ [0100] | W:4 | R:3 | X:2 | B:1 ]
@@ -21,65 +20,6 @@ namespace Z0.Asm
     [ApiHost]
     public struct RexBits : IScalarBitField<byte>
     {
-        const byte MinRexCode = 0x40;
-
-        const byte MaxRexCode = 0x4F;
-
-        [MethodImpl(Inline), Op]
-        public static RexBits first()
-            => new RexBits(MinRexCode);
-
-        [MethodImpl(Inline), Op]
-        public static RexBits last()
-            => new RexBits(MaxRexCode);
-
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<RexBits> all()
-            => recover<RexBits>(All);
-
-        [MethodImpl(Inline), Op]
-        public static RexBits next(RexBits src)
-        {
-            if(src.Data < MaxRexCode)
-                return new RexBits(++src.Data);
-            else
-                return first();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static RexBits prior(RexBits src)
-        {
-            if(src.Data > MinRexCode)
-                return new RexBits(--src.Data);
-            else
-                return last();
-        }
-
-        static Identifier symbol(RexBits src)
-        {
-            if(src.Code == RexPrefixCode.RexW)
-                return "REX.W";
-            else
-                return "";
-        }
-
-        static string hexcode(RexBits src)
-            => src.Data.FormatAsmHex();
-
-        [Op]
-        static string bits(RexBits src)
-        {
-            var bs = src.Data.FormatBits();
-            var chars = text.span(bs);
-            var lo = slice(chars,0,4);
-            var hi = slice(chars,4,4);
-            return text.format("[{0} {1}]", lo, hi);
-        }
-
-        [Op]
-        public static string format(RexBits src)
-            => $"{hexcode(src)} | {bits(src)} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B} | {symbol(src)}";
-
         [MethodImpl(Inline), Op]
         public static bit test(byte src)
             => (uint4)(src >> 4) == b0100;
@@ -88,7 +28,7 @@ namespace Z0.Asm
         public static RexBits define(byte src)
             => test(src) ? new RexBits(src) : default;
 
-        byte Data;
+        internal byte Data;
 
         [MethodImpl(Inline)]
         public RexBits(byte src)
@@ -171,23 +111,27 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static RexBits operator ++(RexBits src)
-            => next(src);
+            => api.next(src);
 
         [MethodImpl(Inline)]
         public static RexBits operator --(RexBits src)
-            => prior(src);
+            => api.prior(src);
 
         public static RexBits Empty
             => new RexBits(0);
 
-        static ReadOnlySpan<byte> All
+        internal const byte MinRexCode = 0x40;
+
+        internal const byte MaxRexCode = 0x4F;
+
+        internal static ReadOnlySpan<byte> All
             => new byte[16]{0x40,0x41,0x42,0x43,0x44,0x45,0x46,0x47,0x48,0x49,0x4A,0x4B,0x4C,0x4D,0x4E,0x4F};
     }
 }
