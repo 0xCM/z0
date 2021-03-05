@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{            
+{
     /// <summary>
     /// Defines a parition over hex digits
     /// </summary>
@@ -26,5 +26,4 @@ namespace Z0
         /// </summary>
         UpperLetter,
     }
-
 }

@@ -18,12 +18,12 @@ namespace Z0
         /// Specifies 1 base 8, asci code 49
         /// </summary>
         o1 = '1',
-        
+
         /// <summary>
         /// Specifies 2 base 8, asci code 50
         /// </summary>
         o2 = '2',
-        
+
         /// <summary>
         /// Specifies 3 base 8, asci code 51
         /// </summary>
@@ -47,21 +47,6 @@ namespace Z0
         /// <summary>
         /// Specifies 7 base 8
         /// </summary>
-        o7 = '7',    
-
-        /// <summary>
-        /// The first declared symbol
-        /// </summary>
-        First = o1,
-
-        /// <summary>
-        /// The last declared symbol
-        /// </summary>
-        Last = o7,
-
-        /// <summary>
-        /// The symbol declaration count
-        /// </summary>
-        Count = Last - First + 1                
-    }    
+        o7 = '7',
+    }
 }

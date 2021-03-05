@@ -21,7 +21,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             var flow = Wf.Creating(nameof(Catalog));
-            Catalog = AsmCatalogService.create(Wf);
+            Catalog = AsmCatalogEtl.create(Wf);
             Wf.Created(flow);
 
             flow = Wf.Creating(nameof(Asm));
@@ -37,7 +37,7 @@ namespace Z0.Asm
             Wf.Created(flow);
         }
 
-        AsmCatalogService Catalog;
+        AsmCatalogEtl Catalog;
 
 
         IAsmContext Asm;
@@ -285,7 +285,7 @@ namespace Z0.Asm
 
         void ExportAsmCatRows()
         {
-            Catalog.CreateExportRows();
+
         }
 
         void CheckInterfaceMaps()
@@ -392,16 +392,31 @@ namespace Z0.Asm
 
         public unsafe void Run()
         {
-            ShowModRmBits();
+            var cases = DigitParserCases.positive();
+            var results = DigitParserCases.run(cases).View;
+            var count = results.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var result = ref skip(results,i);
+                if(result.Passed)
+                    Wf.Status(result.Format());
+                else
+                    Wf.Error(result.Format());
+            }
+            // var rows = Catalog.ExportImport().View;
+            // var count = rows.Length;
 
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var row = ref skip(rows,i);
+
+            // }
             // var distiller = Wf.AsmDistiller();
             // distiller.DistillStatements();
 
             // var composites = AsmExpr.composites();
             // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
 
-            // var dst = Db.IndexTable<AsmRow>();
-            // processor.Emit(rows, dst);
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);
@@ -428,6 +443,7 @@ namespace Z0.Asm
                 term.error(e);
             }
         }
+
     }
 
     public static partial class XTend { }

@@ -10,6 +10,11 @@ namespace Z0
     public enum OctalDigit : byte
     {
         /// <summary>
+        /// Specifies the absence of a digit
+        /// </summary>
+        None = 0xFF,
+
+        /// <summary>
         /// Specifies 0 base 8
         /// </summary>
         o0 = 0x0,
@@ -18,12 +23,12 @@ namespace Z0
         /// Specifies 1 base 8
         /// </summary>
         o1 = 0x1,
-        
+
         /// <summary>
         /// Specifies 2 base 8
         /// </summary>
         o2 = 0x2,
-        
+
         /// <summary>
         /// Specifies 3 base 8
         /// </summary>
@@ -47,21 +52,7 @@ namespace Z0
         /// <summary>
         /// Specifies 7 base 8
         /// </summary>
-        o7 = 0x7,        
+        o7 = 0x7,
 
-        /// <summary>
-        /// The first declared digit
-        /// </summary>
-        First = o0,
-
-        /// <summary>
-        /// The last declared digit
-        /// </summary>
-        Last = o7,
-
-        /// <summary>
-        /// The digit declaration count
-        /// </summary>
-        Count = Last - First + 1        
    }
 }

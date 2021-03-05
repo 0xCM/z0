@@ -10,6 +10,11 @@ namespace Z0
     public enum HexDigit : byte
     {
         /// <summary>
+        /// Specifies the absence of a digit
+        /// </summary>
+        None = 0xFF,
+
+        /// <summary>
         /// Specifies 0 base 16
         /// </summary>
         x0 = 0x0,
@@ -18,12 +23,12 @@ namespace Z0
         /// Specifies 1 base 16
         /// </summary>
         x1 = 0x1,
-        
+
         /// <summary>
         /// Specifies 2 base 16
         /// </summary>
         x2 = 0x2,
-        
+
         /// <summary>
         /// Specifies 3 base 16
         /// </summary>
@@ -48,12 +53,12 @@ namespace Z0
         /// Specifies 7 base 16
         /// </summary>
         x7 = 0x7,
-        
+
         /// <summary>
         /// Specifies 8 base 16
         /// </summary>
         x8 = 0x8,
-        
+
         /// <summary>
         /// Specifies 9 base 16
         /// </summary>

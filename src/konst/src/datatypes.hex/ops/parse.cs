@@ -18,17 +18,17 @@ namespace Z0
         [Op]
         public static bool parse(char src, out byte dst)
         {
-            if(HexTest.scalar(src))
+            if(HexDigitTest.scalar(src))
             {
                 dst = Bytes.sub((byte)src, MinScalarCode);
                 return true;
             }
-            else if(HexTest.upper(src))
+            else if(HexDigitTest.upper(src))
             {
                 dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), Numeric.u8(0xA));
                 return true;
             }
-            else if(HexTest.lower(src))
+            else if(HexDigitTest.lower(src))
             {
                 dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), Numeric.u8(0xa));
                 return true;

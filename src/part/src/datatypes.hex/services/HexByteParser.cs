@@ -22,6 +22,33 @@ namespace Z0
         public static HexByteParser Service
             => default(HexByteParser);
 
+        /// <summary>
+        /// Parses a single hex digit
+        /// </summary>
+        /// <param name="c">The source character</param>
+        [MethodImpl(Inline), Op]
+        public static bool parse(char c, out byte dst)
+        {
+            if(HexDigitTest.scalar(c))
+            {
+                dst = (byte)((byte)c - MinScalarCode);
+                return true;
+            }
+            else if(HexDigitTest.upper(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeU + 0xA);
+                return true;
+            }
+            else if(HexDigitTest.lower(c))
+            {
+                dst = (byte)((byte)c - MinCharCodeL + 0xa);
+                return true;
+            }
+            dst = byte.MaxValue;
+            return false;
+        }
+
+
         [Op]
         public bool Parse(string src, out byte[] dst)
         {
@@ -29,9 +56,9 @@ namespace Z0
             {
                 var s0 = text.trim(src);
                 var len = s0.Length;
-                if(HexTest.HasPreSpec(s0))
+                if(HexFormat.HasPreSpec(s0))
                     s0 = text.slice(s0, len - PreSpec.Length);
-                else if(HexTest.HasPostSpec(s0))
+                else if(HexFormat.HasPostSpec(s0))
                     s0 = text.slice(s0, 0, len - PostSpec.Length);
                 var blocks = P.split(s0, Chars.Space);
                 dst = blocks.Select(x => byte.Parse(x, NumberStyles.HexNumber));
@@ -111,7 +138,7 @@ namespace Z0
         [Op]
         public bool Parse(char c0, char c1, out byte dst)
         {
-            if(Parse(c0, out var d0) && Parse(c1, out var d1))
+            if(parse(c0, out var d0) && parse(c1, out var d1))
             {
                 dst = (byte)(d0 | (d1 << 8));
                 return true;
@@ -120,31 +147,6 @@ namespace Z0
             return false;
         }
 
-        /// <summary>
-        /// Parses a single hex digit
-        /// </summary>
-        /// <param name="c">The source character</param>
-        [MethodImpl(Inline), Op]
-        public bool Parse(char c, out byte dst)
-        {
-            if(HexTest.scalar(c))
-            {
-                dst = (byte)((byte)c - MinScalarCode);
-                return true;
-            }
-            else if(HexTest.upper(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeU + 0xA);
-                return true;
-            }
-            else if(HexTest.lower(c))
-            {
-                dst = (byte)((byte)c - MinCharCodeL + 0xa);
-                return true;
-            }
-            dst = byte.MaxValue;
-            return false;
-        }
 
         /// <summary>
         /// Parses a single hex digit
@@ -154,9 +156,9 @@ namespace Z0
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
-            if(HexTest.scalar(c))
+            if(HexDigitTest.scalar(c))
                 return parsed(c, (byte)((byte)u - MinScalarCode));
-            else if(HexTest.upper(c))
+            else if(HexDigitTest.upper(c))
                 return parsed(c, (byte)((byte)u - MinCharCodeU + 0xA));
             else
                 return unparsed<byte>(c);

@@ -11,16 +11,8 @@ namespace Z0
     using static HexFormatSpecs;
 
     [ApiHost]
-    public readonly struct HexTest
+    public readonly struct HexDigitTest
     {
-        [MethodImpl(Inline)]
-        public static bool HasPreSpec(string src)
-            => src.TrimStart().StartsWith(PreSpec);
-
-        [MethodImpl(Inline)]
-        public static bool HasPostSpec(string src)
-            => src.TrimEnd().EndsWith(PostSpec);
-
         /// <summary>
         /// Determines whether a specified character is a hex digit
         /// </summary>

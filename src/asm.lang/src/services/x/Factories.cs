@@ -17,5 +17,8 @@ namespace Z0
 
         public static AsmSigs AsmSigServices(this IWfShell wf)
             => Z0.Asm.AsmSigs.create(wf);
+
+        public static AsmCatalogEtl AsmCatalogEtl(this IWfShell wf)
+            => Z0.Asm.AsmCatalogEtl.create(wf);
     }
 }

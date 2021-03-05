@@ -369,7 +369,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var part = src.Parts[i];
-                if(HexTest.HasPreSpec(part))
+                if(HexFormat.HasPreSpec(part))
                     seek8(dst, pos++) = parser.ParseByte(part);
             }
 

@@ -17,12 +17,12 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         o1 = (byte)S.o1,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         o2 = (byte)S.o2,
-        
+
         /// <summary>
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
@@ -47,20 +47,5 @@ namespace Z0
         /// Specifies the asci code for the eponymous hex digit
         /// </summary>
         o7 = (byte)S.o7,
-
-       /// <summary>
-        /// The first declared code
-        /// </summary>
-        First = o0,
-
-        /// <summary>
-        /// The last declared code
-        /// </summary>
-        Last = o7,
-
-        /// <summary>
-        /// The code declaration count
-        /// </summary>
-        Count = Last - First + 1                 
    }
 }

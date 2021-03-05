@@ -29,7 +29,11 @@ namespace Z0
                 Wf.ApiServices().Correlate();
 
                 if(Options.EmitAsmCatalogs)
-                    AsmCatalogService.create(Wf).TransformSource();
+                {
+                    var etl = Wf.AsmCatalogEtl();
+                    etl.ImportSource();
+                    etl.ExportImport();
+                }
 
                 if(Options.EmitIntrinsicsInfo)
                     IntelIntrinsics.create(Wf).Emit();

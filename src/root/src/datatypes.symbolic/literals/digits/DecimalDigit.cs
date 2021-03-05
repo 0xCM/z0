@@ -11,6 +11,11 @@ namespace Z0
     public enum DecimalDigit : byte
     {
         /// <summary>
+        /// Specifies the absence of a digit
+        /// </summary>
+        None = 0xFF,
+
+        /// <summary>
         /// Specifies 0 base 10
         /// </summary>
         d0 = 0,

@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static TextRules;
     using static AsmExpr;
 
-    public sealed class AsmCatalogService : WfService<AsmCatalogService,AsmCatalogService>
+    public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {
         readonly TextDocFormat SourceFormat;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
 
         const char AsmCatDelimiter = Chars.Tab;
 
-        public AsmCatalogService()
+        public AsmCatalogEtl()
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
@@ -53,7 +53,7 @@ namespace Z0.Asm
                 throw new Exception();
         }
 
-        public Index<StokeAsmExportRow> CreateExportRows()
+        public Index<StokeAsmExportRow> ExportImport()
         {
             var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
             var doc = TextDocs.parse(src).Require();
@@ -219,7 +219,7 @@ namespace Z0.Asm
             return slice(buffer, 0, ImportRowCount);
         }
 
-        public ReadOnlySpan<StokeAsmImportRow> TransformSource()
+        public ReadOnlySpan<StokeAsmImportRow> ImportSource()
         {
             var dst = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
             var flow = Wf.EmittingTable<StokeAsmImportRow>(dst);

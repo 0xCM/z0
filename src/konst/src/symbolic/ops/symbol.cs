@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static Symbol<OctalSym,byte,N3> symbol(OctalDigit src)
-            => symbol<OctalSym,byte,N3>((OctalSym)((byte)src + (byte)OctalSym.First));
+            => symbol<OctalSym,byte,N3>((OctalSym)((byte)src + (byte)OctalDigitFacets.MinSymbol));
 
         [MethodImpl(Inline), Op]
         public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
