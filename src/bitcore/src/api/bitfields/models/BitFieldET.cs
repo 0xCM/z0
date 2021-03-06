@@ -29,6 +29,7 @@ namespace Z0
         readonly ReadOnlySpan<BitSegment> Segments;
 
         T _State;
+
         [MethodImpl(Inline)]
         public BitField(in BitFieldSpec spec, T state)
         {

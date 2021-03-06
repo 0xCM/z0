@@ -57,16 +57,12 @@ namespace Z0
             {
                 var input = Random.Next<byte>();
                 bf = bf.State(input);
+                writer.WriteLine(bf.Format());
 
                 var seg0 = bf[0];
                 var seg1 = bf[1];
                 var seg2 = bf[2];
                 var seg3 = bf[3];
-
-                // var seg0 = BitFields.extract(spec[0], input);
-                // var seg1 = BitFields.extract(spec[1], input);
-                // var seg2 = BitFields.extract(spec[2], input);
-                // var seg3 = BitFields.extract(spec[3], input);
 
                 Claim.eq(Bits.extract(input, 0, 2), seg0);
                 Claim.eq(Bits.extract(input, 2, 2), seg1);
@@ -111,10 +107,12 @@ namespace Z0
 
             for(var rep=0; rep<RepCount; rep++)
             {
-                var src = Random.Next<ushort>();
+                var input = Random.Next<ushort>();
                 dst.Clear();
-                //bf.Deposit(src,dst);
-                BitFields.deposit(bf.Spec, src, dst);
+                bf = bf.State(input);
+                writer.WriteLine(bf.Format());
+
+                BitFields.deposit(bf.Spec, input, dst);
 
                 var output =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].StartPos),
@@ -123,7 +121,7 @@ namespace Z0
                     gmath.sll(dst[3], (byte)spec[3].StartPos)
                 );
 
-                Claim.eq(src,output);
+                Claim.eq(input,output);
             }
         }
 
@@ -161,11 +159,12 @@ namespace Z0
 
             for(var rep=0; rep<RepCount; rep++)
             {
-                var src = Random.Next<byte>();
-
+                var input = Random.Next<byte>();
+                bf = bf.State(input);
+                writer.WriteLine(bf.Format());
                 dst.Clear();
-                //bf.Deposit(src, dst);
-                BitFields.deposit(bf.Spec, src, dst);
+
+                BitFields.deposit(bf.Spec, input, dst);
 
                 var result1 =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].StartPos),
@@ -175,14 +174,14 @@ namespace Z0
                     );
 
                 var result2 = gmath.or(
-                    BitFields.offset(spec[0], src),
-                    BitFields.offset(spec[1], src),
-                    BitFields.offset(spec[2], src),
-                    BitFields.offset(spec[3], src)
+                    BitFields.offset(spec[0], input),
+                    BitFields.offset(spec[1], input),
+                    BitFields.offset(spec[2], input),
+                    BitFields.offset(spec[3], input)
                     );
 
-                Claim.eq(src,result1);
-                Claim.eq(src,result2);
+                Claim.eq(input,result1);
+                Claim.eq(input,result2);
             }
         }
 
@@ -250,15 +249,16 @@ namespace Z0
 
             for(var rep=0; rep<RepCount; rep++)
             {
-                var src = Random.Next<ulong>();
+                var input = Random.Next<ulong>();
+                bf = bf.State(input);
+                writer.WriteLine(bf.Format());
 
                 dst.Clear();
                 tmp.Clear();
 
-                var expect = gbits.extract(src,0, (byte)spec.TotalWidth);
+                var expect = gbits.extract(input,0, (byte)spec.TotalWidth);
 
-                //bf.Deposit(src, dst);
-                BitFields.deposit(bf.Spec, src, dst);
+                BitFields.deposit(bf.Spec, input, dst);
 
                 gspan.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());
@@ -271,7 +271,7 @@ namespace Z0
 
                 if(expect != result1)
                 {
-                    Trace(src.FormatBits());
+                    Trace(input.FormatBits());
                     var config = BitFormatter.configure(true);
                     for(var i=0; i<dst.Length; i++)
                         Trace(dst[i].FormatBits(config));

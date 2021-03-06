@@ -32,6 +32,5 @@ namespace Z0
             var spec = new BitFieldSpec<E,W>(specify<E,T,W>(), bitcount);
             return new FixedBits<E,T,W>(data, spec);
         }
-
     }
 }

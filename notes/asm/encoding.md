@@ -18,7 +18,7 @@
 ## 64-bit Mode Prefix Ordering
 
 Instruction = [Prefix(1..n) | OpCode | ModRM | SIB | Disp | Imm]
-ModRM = [ Mod:[7:6] | R:[5:3] | RM:[2:0] ]
+ModRM = [ Mod[7:6] | R[5:3] | RM[2:0] ]
 SIB = [ Scale:[7:6] | Index:[5:3] | Base:[2:0] ]
 REX = [ [0100] | W:4 | R:3 | X:2 | B:1 ]
 

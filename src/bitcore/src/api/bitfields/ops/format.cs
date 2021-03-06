@@ -14,34 +14,32 @@ namespace Z0
 
     partial struct BitFields
     {
-        public static string format(ReadOnlySpan<byte> bits, ReadOnlySpan<byte> parts)
+        public static string format<T>(in BitField<T> src)
+            where T : unmanaged
         {
-            var count = parts.Length;
-            if(count == 0)
-                return EmptyString;
-
             var dst = text.buffer();
-            Span<char> bitstring = stackalloc char[bits.Length];
-            BitFormatter.format(bits, bitstring);
-            var current = z8;
-            dst.Append(Chars.LBracket);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var pos = ref skip(parts,i);
-                var segment = slice(bitstring, current, pos);
-                dst.Append(segment);
-                dst.Append(Chars.Space);
-                current += (byte)segment.Length;
-            }
-            dst.Append(slice(bitstring,current));
-            dst.Append(Chars.RBracket);
-
+            render(src,dst);
             return dst.Emit();
         }
 
-        public static string format<T>(T src, ReadOnlySpan<byte> parts)
+        public static void render<T>(in BitField<T> src, ITextBuffer dst)
             where T : unmanaged
-                => format(bytes(src), parts);
+        {
+            var count = src.Spec.FieldCount;
+            var last = count - 1;
+            dst.Append(Chars.LBracket);
+
+            for(var i=last; i>=0; i--)
+            {
+                ref readonly var seg = ref src.Segment((byte)i);
+                dst.AppendFormat("{0}:{1}", seg.Name, BitFormatter.format(src.Extract((byte)i), seg.Width));
+
+                if(i != 0)
+                    dst.Append(RP.SpacedPipe);
+
+            }
+            dst.Append(Chars.RBracket);
+        }
 
         /// <summary>
         /// Formats a field segments as {typeof(V):Name}:{TrimmedBits}
@@ -102,7 +100,6 @@ namespace Z0
        public static string format<T>(BitSegment<T> src)
             where T : unmanaged
                 => Format.enclose(Format.adjacent(src.EndPos, SegmentDelimiter, src.StartPos), SegmentFence);
-
 
         [Op]
         static string[] lines(in BitFieldModel src)

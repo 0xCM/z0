@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Associates the declaration order of an enum literal with the corresponding literal value
@@ -33,8 +34,8 @@ namespace Z0
         public string Format()
         {
             var t = typeof(E).Name;
-            var i = z.@as<E,byte>(FieldIndex);
-            var w = z.@as<W,byte>(FieldWidth);
+            var i = @as<E,byte>(FieldIndex);
+            var w = @as<W,byte>(FieldWidth);
             return $"{t}[{i}:{w}] = {FieldName}";
         }
 
@@ -46,7 +47,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(BitFieldIndexEntry<E,W> other)
-            => z.@as<E,uint>(FieldIndex).CompareTo(z.@as<E,uint>(other.FieldIndex));
+            => @as<E,uint>(FieldIndex).CompareTo(@as<E,uint>(other.FieldIndex));
 
         public override string ToString()
             => Format();

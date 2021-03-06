@@ -46,5 +46,22 @@ namespace Z0
                 total += skip(segments, i).Width;
             return total;
         }
+
+        /// <summary>
+        /// Computes the aggregate width of the segments that comprise the bitfield
+        /// </summary>
+        /// <param name="src">The bitfield spec</param>
+        [MethodImpl(Inline), Op]
+        public static uint width<T>(in BitFieldModel<T> src)
+            where T : unmanaged
+        {
+            var total = 0u;
+            var count = src.SegCount;
+            var segments = src.Segments;
+            for(byte i=0; i<count; i++)
+                total += skip(segments, i).Width;
+            return total;
+        }
+
     }
 }

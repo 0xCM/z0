@@ -8,15 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    // Open = '['
-    // Close = ']'
-    // SegSep = '|'
-    // Bitfield = <FieldName> ':' Open (Seg [SegSep])* Close
-    // Seg = <SegName> ':' Open <FirstPos> ',' <LastPos> Close
-    // FirstPos = NonnegativeInteger
-    // LastPos = PositiveInteger
-    // MyField:[Part1:[0,3] | Part2:[4,5] | Part4:[6,17]]
-    public readonly struct BitFieldModel : IBitFieldModel
+    using static memory;
+
+    public readonly struct BitFieldModel<T> : IBitFieldModel<T>
+        where T : unmanaged
     {
         public Name Name {get;}
 
@@ -35,10 +30,10 @@ namespace Z0
         /// </summary>
         public uint TotalSegWidth {get;}
 
-        readonly Index<BitSegment> _Segments;
+        readonly Index<BitSegment<T>> _Segments;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitSegment> segments)
+        public BitFieldModel(Name name, uint count, uint width, Index<BitSegment<T>> segments)
         {
             Name = name;
             DataWidth = width;
@@ -48,7 +43,7 @@ namespace Z0
             TotalSegWidth = BitFields.width(this);
         }
 
-        public ReadOnlySpan<BitSegment> Segments
+        public ReadOnlySpan<BitSegment<T>> Segments
         {
             [MethodImpl(Inline)]
             get => _Segments.View;
@@ -60,10 +55,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public uint Position(int index)
-            => Segment(index).StartPos;
+            => bw32(Segment(index).StartPos);
 
         [MethodImpl(Inline)]
-        public ref readonly BitSegment Segment(int index)
+        public ref readonly BitSegment<T> Segment(int index)
             => ref _Segments[index];
     }
 }

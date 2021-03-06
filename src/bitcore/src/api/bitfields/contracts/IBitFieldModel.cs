@@ -33,4 +33,13 @@ namespace Z0
         /// </summary>
         ReadOnlySpan<BitSegment> Segments {get;}
     }
+
+    public interface IBitFieldModel<T> : IBitFieldModel
+        where T : unmanaged
+    {
+         new ReadOnlySpan<BitSegment<T>> Segments {get;}
+
+         ReadOnlySpan<BitSegment> IBitFieldModel.Segments
+            =>  Segments.Map(s => (BitSegment)s);
+    }
 }

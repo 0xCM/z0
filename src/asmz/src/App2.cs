@@ -372,12 +372,7 @@ namespace Z0.Asm
             var parts = new byte[2]{2,5};
             var codes = AsmBytes.modrm().View;
             var count = codes.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var code = ref skip(codes,i);
-                Wf.Row(string.Format("{0} | {1}", code.Encoded.FormatBits(), BitFields.format(code,parts)));
 
-            }
         }
 
         void ShowRexBits()

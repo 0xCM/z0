@@ -24,15 +24,12 @@ namespace Z0
         /// </summary>
         public readonly BitFieldSpec Spec;
 
-        readonly ReadOnlySpan<BitSegment> Segments;
-
         T _State;
 
         [MethodImpl(Inline)]
         public BitField(in BitFieldSpec spec, T state)
         {
             Spec = spec;
-            Segments = spec.Segments;
             _State = state;
         }
 
@@ -74,8 +71,8 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly BitSegment Segment(int index)
-            => ref skip(Segments, index);
+        public ref readonly BitSegment Segment(byte index)
+            => ref skip(Spec.Segments, index);
 
         public T this[byte index]
         {
@@ -85,5 +82,8 @@ namespace Z0
             [MethodImpl(Inline)]
             set => Deposit(index, value);
         }
+
+        public string Format()
+            => api.format(this);
     }
 }

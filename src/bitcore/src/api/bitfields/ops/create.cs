@@ -6,15 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
 
     partial struct BitFields
     {
         [MethodImpl(Inline)]
-        public static BitField64<E> bf64<E>(E state)
+        public static BitField64<E> create<E>(W64 w, E state)
             where E : unmanaged
                 => new BitField64<E>(state);
+
+        [MethodImpl(Inline)]
+        public static BitField256<E,T> create<E,T>(Vector256<T> state)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new BitField256<E,T>(specify<E>(w256), state);
 
         /// <summary>
         /// Creates a stateful bitfield api surface
