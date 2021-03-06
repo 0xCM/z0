@@ -145,6 +145,5 @@ namespace Z0.Asm
             fill(dst);
             return dst;
         }
-
     }
 }

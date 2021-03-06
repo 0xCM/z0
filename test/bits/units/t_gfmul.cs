@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_gfmul : t_bitvectors<t_gfmul>
     {
         public void gfmul_256()

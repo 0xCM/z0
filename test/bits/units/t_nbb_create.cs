@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="bs">The bitstring to compare</param>
         /// <typeparam name="N">The vector length type</typeparam>
         /// <typeparam name="S">The vector cell type</typeparam>
-        protected void ClaimEqual<N,S>(BitBlock<N,S> bv, BitString bs)
+        void ClaimEqual<N,S>(BitBlock<N,S> bv, BitString bs)
             where N : unmanaged, ITypeNat
             where S : unmanaged
         {

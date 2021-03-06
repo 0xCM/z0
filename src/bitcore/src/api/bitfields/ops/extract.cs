@@ -11,11 +11,22 @@ namespace Z0
 
     readonly partial struct BitFields
     {
+        /// <summary>
+        /// Extracts a contiguous range of bits from the source value per the segment specification
+        /// </summary>
+        /// <param name="segment">The segment spec</param>
+        /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T extract<T>(in BitSegment seg, T src)
             where T : unmanaged
                 => gbits.extract(src, (byte)seg.StartPos, (byte)seg.Width);
 
+        /// <summary>
+        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
+        /// </summary>
+        /// <param name="index">The segment index</param>
+        /// <param name="src">The source value</param>
+        /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T offset<T>(in BitSegment seg, T src)
             where T : unmanaged

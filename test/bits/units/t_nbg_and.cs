@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_nbg_and : t_bitgrids<t_nbg_and>
     {
@@ -65,7 +64,7 @@ namespace Z0
         public void nbg_and_1024x1024x64()
             => nbg_and_check(n1024, n1024, z64);
 
-        protected void nbg_and_check<M,N,T>(M m = default, N n = default, T t = default)
+        void nbg_and_check<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged,ITypeNat
             where N : unmanaged,ITypeNat
             where T : unmanaged

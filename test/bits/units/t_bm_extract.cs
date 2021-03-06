@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public class t_bm_extract : t_bitmatrix<t_bm_extract>
     {
         public void bm_extract_n9x9x16()
@@ -125,6 +123,23 @@ namespace Z0
                     var col = src.Column(c);
                     for(var r=0; r<src.Order; r++)
                         CheckPrimal.eq(col[r], src[r,c]);
+                }
+            }
+        }
+
+        void bm_extract_check<M,N,T>(BitMatrix<M,N,T> src)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var row=0; row< src.RowCount; row++)
+            {
+                var vector = src.ReadRow(row);
+                for(var col=0; col<vector.Width; col++)
+                {
+                    var x = vector[col];
+                    var y = src[row,col];
+                    ClaimPrimal.eq(vector[col], src[row,col]);
                 }
             }
         }

@@ -7,6 +7,6 @@ namespace Z0
     public class GVecTestApp : TestApp<GVecTestApp>
     {
         static void Main(params string[] args)
-            => Run2(args);
+            => Run(PartId.GVec, args);
     }
 }

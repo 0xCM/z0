@@ -10,14 +10,19 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct BitFieldModels
+    partial struct BitFields
     {
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static uint width<T>(BitSegment<T> src)
+            where T : unmanaged
+                => bw32(src.EndPos) - bw32(src.StartPos) + 1u;
+
         /// <summary>
         /// Computes the aggregate width of the segments that comprise the bitfield
         /// </summary>
         /// <param name="spec">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint segwidth(in BitFieldSpec spec)
+        public static uint width(in BitFieldSpec spec)
         {
             var total = 0u;
             var count = spec.FieldCount;
@@ -32,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bitfield spec</param>
         [MethodImpl(Inline), Op]
-        public static uint segwidth(in BitFieldModel src)
+        public static uint width(in BitFieldModel src)
         {
             var total = 0u;
             var count = src.SegCount;

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
     using static z;
 
     public class t_unpack : t_bitcore<t_unpack>
@@ -75,7 +74,7 @@ namespace Z0
             for(var j=0; j<RepCount; j++)
             {
                 var src = Random.Next<S>();
-                Span<T> dst = new T[bitsize<S>()];
+                Span<T> dst = new T[memory.width<S>()];
                 gpack.unpack(src,dst);
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
@@ -87,7 +86,7 @@ namespace Z0
             }
 
             var x = Random.Span<S>(RepCount);
-            Span<T> y1 = new T[x.Length * bitsize<S>()];
+            Span<T> y1 = new T[x.Length * memory.width<S>()];
             gbits.unpack32(x,y1);
             var y2 = BitString.scalars(x);
             for(var i=0; i< y1.Length; i++)
@@ -105,9 +104,9 @@ namespace Z0
             var opcount = RoundCount * CycleCount;
             var srcSign = NumericKinds.signed<S>() ? "i" : string.Empty;
             var dstSign = NumericKinds.signed<T>() ? "i" : string.Empty;
-            var opname = $"unpack_{bitsize<S>()}{srcSign}x{bitsize<T>()}{dstSign}";
+            var opname = $"unpack_{memory.width<S>()}{srcSign}x{memory.width<T>()}{dstSign}";
 
-            Span<T> dst = new T[bitsize<S>()];
+            Span<T> dst = new T[memory.width<S>()];
 
             for(var i=0; i<opcount; i++)
             {

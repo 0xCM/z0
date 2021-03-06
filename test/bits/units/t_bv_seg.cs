@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bvseg : t_bitvectors<t_bvseg>
     {
         public void bvlsbseg_8()
@@ -88,7 +83,6 @@ namespace Z0
                 Claim.eq(expect, result);
             }
         }
-
 
         public void bvmsbseg_32()
         {

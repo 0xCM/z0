@@ -144,5 +144,26 @@ namespace Z0
                 ClaimNumeric.eq(C1,C2);
             }
         }
+
+        void bm_and_bench<T>(T t = default)
+            where T : unmanaged
+        {
+            var clock = counter();
+            var a = BitMatrix.alloc<T>();
+            var b = BitMatrix.alloc<T>();
+            var c = BitMatrix.alloc<T>();
+
+            for(var i=0; i<OpCount; i++)
+            {
+                Random.BitMatrix<T>(ref a);
+                Random.BitMatrix<T>(ref b);
+                clock.Start();
+                BitMatrix.and(a, b, c);
+                clock.Stop();
+            }
+
+            var n = BitMatrix<T>.N;
+            ReportBenchmark($"bmand_{n}x{n}g", OpCount, clock);
+        }
     }
 }

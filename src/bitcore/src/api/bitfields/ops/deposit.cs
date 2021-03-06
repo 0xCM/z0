@@ -12,11 +12,22 @@ namespace Z0
 
     readonly partial struct BitFields
     {
+        /// <summary>
+        /// Overwrites an identified target segment with the bits from the corresponding source segment
+        /// </summary>
+        /// <param name="segment">The segment spec</param>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target value</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T deposit<T>(in BitSegment seg, in T src, ref T dst)
             where T : unmanaged
                 => ref gbits.copy(src, (byte)seg.StartPos, (byte)seg.Width, ref dst);
 
+        /// <summary>
+        /// Extracts all segments from the source value and deposits the result in a caller-suppled span
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target span</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void deposit<T>(in BitFieldSpec spec, T src, Span<T> dst)
             where T : unmanaged
@@ -35,21 +46,6 @@ namespace Z0
                 deposit(skip(spec.Segments,i), skip(src,i),ref dst);
             return ref dst;
         }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public void deposit<T>(in BitField<T> field, T src, Span<T> dst)
-            where T : unmanaged
-                => field.Deposit(src, dst);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public ref T deposit<T>(in BitField<T> field, in BitSegment seg, in T src, ref T dst)
-            where T : unmanaged
-                => ref field.Deposit(seg, src, ref dst);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public ref T deposit<T>(in BitField<T> field, ReadOnlySpan<T> src, ref T dst)
-            where T : unmanaged
-                => ref field.Deposit(src, ref dst);
 
         [MethodImpl(Inline)]
         public static void deposit<E,W,T>(in BitFieldSpec<E,W> spec, T src, Span<T> dst)

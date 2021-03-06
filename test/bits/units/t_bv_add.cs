@@ -51,7 +51,6 @@ namespace Z0
                 var y = Random.BitVector(n64);
                 Claim.eq(math.add(x.Content,  y.Content), (x + y).Content);
                 Claim.eq(math.add(x.Content,  1), (++x).Content);
-
             }
         }
     }

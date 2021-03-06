@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_nbg_col : t_bitgrids<t_nbg_col>
     {
         public void nbg_col_256x32x8()

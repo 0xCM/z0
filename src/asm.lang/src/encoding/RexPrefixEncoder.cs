@@ -20,7 +20,7 @@ namespace Z0.Asm
 
         public RexPrefixEncoder()
         {
-            FieldSpec = BitFieldModels.specify<I,byte,W>();
+            FieldSpec = BitFields.specify<I,byte,W>();
         }
 
         [MethodImpl(Inline), Op]

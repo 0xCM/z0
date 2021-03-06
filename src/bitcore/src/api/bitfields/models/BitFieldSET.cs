@@ -30,7 +30,7 @@ namespace Z0
         readonly ReadOnlySpan<BitSegment> Segments;
 
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec)
+        public BitField(in BitFieldSpec spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;

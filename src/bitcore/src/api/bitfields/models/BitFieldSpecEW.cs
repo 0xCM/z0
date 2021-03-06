@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using api = BitFieldModels;
+
+    using api = BitFields;
 
    public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
         where E : unmanaged
@@ -19,7 +20,7 @@ namespace Z0
         /// </summary>
         readonly BitFieldSpec Untyped;
 
-        public readonly uint TotalWidth;
+        public uint TotalWidth {get;}
 
         public ReadOnlySpan<BitSegment> Segments
         {

@@ -25,33 +25,48 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitFieldModels.specify(
-                BitFieldModels.segment(BF_A.F08_0, 0, 1),
-                BitFieldModels.segment(BF_A.F08_1, 2, 3),
-                BitFieldModels.segment(BF_A.F08_2, 4, 5),
-                BitFieldModels.segment(BF_A.F08_3, 6, 7)
+            var spec = BitFields.specify(
+                BitFields.segment(BF_A.F08_0, 0, 1),
+                BitFields.segment(BF_A.F08_1, 2, 3),
+                BitFields.segment(BF_A.F08_2, 4, 5),
+                BitFields.segment(BF_A.F08_3, 6, 7)
                 );
 
+            var segments = spec.Segments;
+            using var writer = CaseWriter(LogExt);
+            writer.WriteLine(spec);
 
             Claim.eq((byte)4, spec.FieldCount);
             Claim.eq((byte)0, spec[0].StartPos);
             Claim.eq((byte)2, spec[1].StartPos);
             Claim.eq((byte)4, spec[2].StartPos);
             Claim.eq((byte)6, spec[3].StartPos);
+
+            Claim.eq((byte)1, spec[0].EndPos);
+            Claim.eq((byte)3, spec[1].EndPos);
+            Claim.eq((byte)5, spec[2].EndPos);
+            Claim.eq((byte)7, spec[3].EndPos);
+
             Claim.eq((byte)2, spec[0].Width);
             Claim.eq((byte)2, spec[1].Width);
             Claim.eq((byte)2, spec[2].Width);
             Claim.eq((byte)2, spec[3].Width);
 
-            var bf = new BitField<byte>(spec);
+            var bf = BitFields.create<byte>(spec);
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
+                bf = bf.State(input);
 
-                var seg0 = bf.Extract(spec[0], input);
-                var seg1 = bf.Extract(spec[1], input);
-                var seg2 = bf.Extract(spec[2], input);
-                var seg3 = bf.Extract(spec[3], input);
+                var seg0 = bf[0];
+                var seg1 = bf[1];
+                var seg2 = bf[2];
+                var seg3 = bf[3];
+
+                // var seg0 = BitFields.extract(spec[0], input);
+                // var seg1 = BitFields.extract(spec[1], input);
+                // var seg2 = BitFields.extract(spec[2], input);
+                // var seg3 = BitFields.extract(spec[3], input);
 
                 Claim.eq(Bits.extract(input, 0, 2), seg0);
                 Claim.eq(Bits.extract(input, 2, 2), seg1);
@@ -63,7 +78,7 @@ namespace Z0
                     gmath.sll(seg1, (byte)spec[1].StartPos),
                     gmath.sll(seg2, (byte)spec[2].StartPos),
                     gmath.sll(seg3, (byte)spec[3].StartPos));
-                Claim.eq(input,output);
+                Claim.eq(input, output);
             }
         }
 
@@ -78,16 +93,15 @@ namespace Z0
             BFB_3 = 3,
         }
 
-
         public void bitfield_b()
         {
-            var spec = BitFieldModels.specify(
-                BitFieldModels.segment(BFB_I.BFB_0, 0, 3),
-                BitFieldModels.segment(BFB_I.BFB_1, 4, 7),
-                BitFieldModels.segment(BFB_I.BFB_2, 8, 9),
-                BitFieldModels.segment(BFB_I.BFB_3, 10, 15)
+            var spec = BitFields.specify(
+                BitFields.segment(BFB_I.BFB_0, 0, 3),
+                BitFields.segment(BFB_I.BFB_1, 4, 7),
+                BitFields.segment(BFB_I.BFB_2, 8, 9),
+                BitFields.segment(BFB_I.BFB_3, 10, 15)
                 );
-            using var writer = CaseWriter(FS.Extensions.Log);
+            using var writer = CaseWriter(LogExt);
             writer.WriteLine(spec);
 
             var dst = memory.alloc<ushort>(spec.FieldCount);
@@ -99,7 +113,8 @@ namespace Z0
             {
                 var src = Random.Next<ushort>();
                 dst.Clear();
-                bf.Deposit(src,dst);
+                //bf.Deposit(src,dst);
+                BitFields.deposit(bf.Spec, src, dst);
 
                 var output =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].StartPos),
@@ -136,10 +151,10 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var spec = BitFieldModels.specify<BFC_I,BFC_W>();
+            var spec = BitFields.specify<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
-            using var writer = CaseWriter(FS.Extensions.Log);
+            using var writer = CaseWriter(LogExt);
             writer.WriteLine(spec);
 
             Claim.eq((byte)4, spec.FieldCount);
@@ -149,7 +164,8 @@ namespace Z0
                 var src = Random.Next<byte>();
 
                 dst.Clear();
-                bf.Deposit(src, dst);
+                //bf.Deposit(src, dst);
+                BitFields.deposit(bf.Spec, src, dst);
 
                 var result1 =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].StartPos),
@@ -159,10 +175,10 @@ namespace Z0
                     );
 
                 var result2 = gmath.or(
-                    bf.Offset(spec[0], src),
-                    bf.Offset(spec[1], src),
-                    bf.Offset(spec[2], src),
-                    bf.Offset(spec[3], src)
+                    BitFields.offset(spec[0], src),
+                    BitFields.offset(spec[1], src),
+                    BitFields.offset(spec[2], src),
+                    BitFields.offset(spec[3], src)
                     );
 
                 Claim.eq(src,result1);
@@ -224,7 +240,7 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var spec = BitFieldModels.specify<BFD_I,BFD_W>();
+            var spec = BitFields.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
@@ -241,7 +257,9 @@ namespace Z0
 
                 var expect = gbits.extract(src,0, (byte)spec.TotalWidth);
 
-                bf.Deposit(src, dst);
+                //bf.Deposit(src, dst);
+                BitFields.deposit(bf.Spec, src, dst);
+
                 gspan.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());
 
@@ -265,20 +283,20 @@ namespace Z0
 
         public void bitfield_IxW()
         {
-            var spec = BitFieldModels.specify<BFD_I,BFD_W>();
+            var spec = BitFields.specify<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
         }
 
         public void fixed_bits()
         {
-            var bf = BitFields.create<BFD_I,byte,BFD_W>(64);
+            var bf = BitFields.fixedbits<BFD_I,byte,BFD_W>(64);
             bf[3] = byte.MaxValue;
 
         }
 
         public void bitfield_model()
         {
-            var model = BitFieldModels.model("BitField1", new string[]{"Field0","Field1","Field2"}, new byte[]{4,8,3});
+            var model = BitFields.model("BitField1", new string[]{"Field0","Field1","Field2"}, new byte[]{4,8,3});
             Claim.eq(model.SegCount,3);
 
             ref readonly var seg0 = ref model.Segment(0);

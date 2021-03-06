@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static CallingMember;
 
-    [ApiComplete]
     public class t_gbb_create : t_bitspans<t_gbb_create>
     {
         CallingMember Caller;
@@ -51,7 +50,6 @@ namespace Z0
         public void gbb_create_128x64()
             => check_gbb_create<ulong>(128, define(ref Caller));
 
-        [MethodImpl(Inline), Ignore]
         protected void check_gbb_create<T>(int bitcount, in CallingMember caller)
             where T : unmanaged
         {
@@ -61,7 +59,6 @@ namespace Z0
                 term.print($"Executing {caller.CallerName}: {bitcount} bits covered by {kCells} cells of kind {typeof(T).DisplayName()}");
 
             var src = Random.Span<T>(RepCount);
-
             for(var i=0; i<RepCount; i += kCells)
             {
                 var data = src.Slice(i, kCells);

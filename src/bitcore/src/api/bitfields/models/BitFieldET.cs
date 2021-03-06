@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">A indexing enumeration</typeparam>
     /// <typeparam name="T">The numeric type over which the bitfield is defined</typeparam>
-    public readonly ref struct BitField<E,T>
+    public ref struct BitField<E,T>
         where E : unmanaged
         where T : unmanaged
     {
@@ -28,11 +28,13 @@ namespace Z0
 
         readonly ReadOnlySpan<BitSegment> Segments;
 
+        T _State;
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec)
+        public BitField(in BitFieldSpec spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;
+            _State = state;
         }
 
         /// <summary>
@@ -46,39 +48,11 @@ namespace Z0
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the segment specification
         /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The value from which the segment will be extracted</param>
-        [MethodImpl(Inline)]
-        public T Extract(in BitSegment segment, in T src)
-            => api.extract(segment, src);
-
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the segment specification
-        /// </summary>
         /// <param name="index">The segment index</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Extract(E index, in T src)
             => api.extract(Segment(index), src);
-
-        /// <summary>
-        /// Extracts all segments from the source value and deposits the result in a caller-suppled span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public void Deposit(in T src, Span<T> dst)
-            => api.deposit(Spec, src, dst);
-
-        /// <summary>
-        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline)]
-        public T Offset(in BitSegment segment, in T src)
-            => api.offset(segment, src);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -97,29 +71,9 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref T Deposit(in BitSegment segment, in T src, ref T dst)
-        {
-            api.deposit(segment, src, ref dst);
-            return ref dst;
-        }
-
-        /// <summary>
-        /// Overwrites an identified target segment with the bits from the corresponding source segment
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target value</param>
-        [MethodImpl(Inline)]
         public ref T Deposit(E index, in T src, ref T dst)
         {
             api.deposit(Segment(index), src, ref dst);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public ref T Deposit(ReadOnlySpan<T> src, ref T dst)
-        {
-            api.deposit(Spec, src, ref dst);
             return ref dst;
         }
     }

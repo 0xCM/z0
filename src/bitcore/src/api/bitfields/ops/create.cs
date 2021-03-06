@@ -22,9 +22,9 @@ namespace Z0
         /// <param name="spec">The bitfield definition</param>
         /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitField<T> create<T>(in BitFieldSpec spec)
+        public static BitField<T> create<T>(in BitFieldSpec spec, T state = default)
             where T : unmanaged
-                => new BitField<T>(spec);
+                => new BitField<T>(spec, state);
 
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
@@ -34,26 +34,11 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
-        public static BitField<E,T> create<E,T,W>()
+        public static BitField<E,T> create<E,T,W>(T state = default)
             where E : unmanaged, Enum
             where T : unmanaged
             where W : unmanaged, Enum
-                => new BitField<E,T>(BitFieldModels.specify<E,T,W>());
-
-        /// <summary>
-        /// Creates a stateful numeric bitfield api surface
-        /// </summary>
-        /// <param name="spec">The bitfield definition</param>
-        /// <typeparam name="S">The type over which the bitfield is defined</typeparam>
-        /// <typeparam name="E">A index-defining enumeration</typeparam>
-        /// <typeparam name="T">The numeric type</typeparam>
-        [MethodImpl(Inline)]
-        public static BitField<S,E,T> create<S,E,T>(in BitFieldSpec spec)
-            where S : IScalarBitField<T>
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => new BitField<S,E,T>(spec);
-
+                => new BitField<E,T>(specify<E,T,W>(), state);
 
         /// <summary>
         /// Creates a stateful numeric bitfield api surface
@@ -62,35 +47,27 @@ namespace Z0
         /// <typeparam name="S">The type over which the bitfield is defined</typeparam>
         /// <typeparam name="E">A index-defining enumeration</typeparam>
         /// <typeparam name="T">The numeric type</typeparam>
+        [MethodImpl(Inline)]
+        public static BitField<S,E,T> create<S,E,T>(in BitFieldSpec spec, T state = default)
+            where S : IScalarBitField<T>
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new BitField<S,E,T>(spec, state);
+
+        /// <summary>
+        /// Creates a stateful numeric bitfield api surface
+        /// </summary>
+        /// <param name="spec">The bitfield definition</param>
+        /// <typeparam name="S">The type over which the bitfield is defined</typeparam>
+        /// <typeparam name="E">A index-defining enumeration</typeparam>
+        /// <typeparam name="T">The numeric type</typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
-        public static BitField<S,E,T> create<S,E,T,W>()
+        public static BitField<S,E,T> create<S,E,T,W>(T state = default)
             where S : IScalarBitField<T>
             where E : unmanaged, Enum
             where W : unmanaged, Enum
             where T : unmanaged
-                => new BitField<S,E,T>(BitFieldModels.specify<E,T,W>());
-
-        internal static FixedBits<T> fixedalloc<T>(uint bitcount)
-            where T : unmanaged
-                => new FixedBits<T>(SpanBlocks.alloc<T>(n64, SpanBlocks.bitcover<T>(bitcount)), bitcount);
-
-        /// <summary>
-        /// Defines and creates a fixed-width bitfield
-        /// </summary>
-        /// <param name="bitcount">The total field bit-width</param>
-        /// <typeparam name="E">A index-defining enumeration</typeparam>
-        /// <typeparam name="T">The numeric type</typeparam>
-        /// <typeparam name="W"></typeparam>
-        /// <typeparam name="W">A width-defining enumeration</typeparam>
-        public static FixedBits<E,T,W> create<E,T,W>(uint bitcount)
-            where E : unmanaged, Enum
-            where T : unmanaged
-            where W : unmanaged, Enum
-        {
-            var data = fixedalloc<T>(bitcount);
-            var spec = new BitFieldSpec<E,W>(BitFieldModels.specify<E,T,W>(), bitcount);
-            return new FixedBits<E,T,W>(data, spec);
-        }
+                => new BitField<S,E,T>(specify<E,T,W>(), state);
     }
 }

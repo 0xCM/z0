@@ -51,6 +51,6 @@ namespace Z0
         }
 
         public string Format()
-            => BitFieldModels.format(Spec.Segments);
+            => BitFields.format(Spec.Segments);
     }
 }

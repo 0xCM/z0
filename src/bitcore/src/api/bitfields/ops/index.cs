@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial struct BitFieldModels
+    using static Part;
+    using static memory;
+
+    partial struct BitFields
     {
-       public static BitFieldIndex<I,W> index<I,U,W>()
+      public static BitFieldIndex<I,W> index<I,U,W>()
             where I : unmanaged, Enum
             where U : unmanaged
             where W : unmanaged, Enum

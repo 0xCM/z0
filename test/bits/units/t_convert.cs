@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public sealed class t_convert : UnitTest<t_convert>
     {
         public void convert_32u_to_bytes_check()

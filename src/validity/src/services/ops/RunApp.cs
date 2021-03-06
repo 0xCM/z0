@@ -14,10 +14,10 @@ namespace Z0
             app.RunTests();
         }
 
-        public static void Run2(params string[] units)
+        public static void Run(PartId part, params string[] units)
         {
             var app = new A();
-            var shell = WfShell.create(WfShell.parts(Index<PartId>.Empty), sys.empty<string>());
+            var shell = WfShell.create(WfShell.parts(new PartId[1]{part}), sys.empty<string>());
             app.InjectShell(shell);
             app.SetMode(InDiagnosticMode);
             app.RunTests(units);

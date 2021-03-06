@@ -17,9 +17,11 @@ namespace Z0
 
         Duration = 2  | (14 << WidthOffset),
 
-        Finished =  3 | (26 << WidthOffset),
+        Started =  3 | (26 << WidthOffset),
 
-        Message = 4 | (32 << WidthOffset)
+        Finished =  4 | (26 << WidthOffset),
+
+        Message = 5 | (32 << WidthOffset)
     }
 
     public readonly struct TestCaseRecords
@@ -27,6 +29,8 @@ namespace Z0
         const string Delimiter = "| ";
 
         public const uint CasePad = (uint)TestCaseField.CaseName >> WidthOffset;
+
+        public const uint StartedPad = (uint)TestCaseField.Started >> WidthOffset;
 
         public const uint FinishedPad = (uint)TestCaseField.Finished >> WidthOffset;
 
@@ -41,6 +45,7 @@ namespace Z0
             dst.AppendPadded(src.CaseName, CasePad, Delimiter);
             dst.AppendPadded(src.Passed, PassedPad, Delimiter);
             dst.AppendPadded(src.Duration, DurationPad, Delimiter);
+            dst.AppendPadded(src.Started, StartedPad, Delimiter);
             dst.AppendPadded(src.Finished, FinishedPad, Delimiter);
             dst.AppendPadded(src.Message, MessagePad, Delimiter);
         }

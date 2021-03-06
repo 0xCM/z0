@@ -45,7 +45,7 @@ namespace Z0
             SegCount = count;
             Data = segments;
             TotalSegWidth = 0;
-            TotalSegWidth = BitFieldModels.segwidth(this);
+            TotalSegWidth = BitFields.width(this);
         }
 
         public ReadOnlySpan<BitSegment> Segments

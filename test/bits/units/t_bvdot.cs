@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
     using static BitVector;
 
     /// <summary>
@@ -230,7 +226,7 @@ namespace Z0
             }
         }
 
-        protected void bvdot_check_n128<N,T>(N n = default, T t = default)
+        void bvdot_check_n128<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
@@ -248,7 +244,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Verifies the natural bitvector dot product operation
         /// </summary>
@@ -256,7 +251,7 @@ namespace Z0
         /// <param name="t">A scalar representative</param>
         /// <typeparam name="N">The bitvector width type</typeparam>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void bvdot_natcheck<N,T>(N n = default, T t = default)
+        void bvdot_natcheck<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

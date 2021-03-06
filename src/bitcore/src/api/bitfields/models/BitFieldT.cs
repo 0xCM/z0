@@ -16,7 +16,7 @@ namespace Z0
     /// Defines the (stateful) bitfield api surface
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-    public readonly ref struct BitField<T>
+    public ref struct BitField<T>
         where T : unmanaged
     {
         /// <summary>
@@ -26,11 +26,47 @@ namespace Z0
 
         readonly ReadOnlySpan<BitSegment> Segments;
 
+        T _State;
+
         [MethodImpl(Inline)]
-        public BitField(in BitFieldSpec spec)
+        public BitField(in BitFieldSpec spec, T state)
         {
             Spec = spec;
             Segments = spec.Segments;
+            _State = state;
+        }
+
+        [MethodImpl(Inline)]
+        public T State()
+            => _State;
+
+        [MethodImpl(Inline)]
+        public BitField<T> State(in T src)
+        {
+            _State = src;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public T Extract(in BitSegment seg)
+            => api.extract(seg, _State);
+
+        [MethodImpl(Inline)]
+        public T Extract(byte index)
+            => api.extract(Segment(index), _State);
+
+        [MethodImpl(Inline)]
+        public BitField<T> Deposit(in BitSegment seg, in T src)
+        {
+            api.deposit(seg, src, ref _State);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitField<T> Deposit(byte index, in T src)
+        {
+            api.deposit(Segment(index), src, ref _State);
+            return this;
         }
 
         /// <summary>
@@ -41,46 +77,13 @@ namespace Z0
         public ref readonly BitSegment Segment(int index)
             => ref skip(Segments, index);
 
-        /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the segment specification
-        /// </summary>
-        /// <param name="seg">The segment spec</param>
-        /// <param name="src">The value from which the segment will be extracted</param>
-        [MethodImpl(Inline)]
-        public T Extract(in BitSegment seg, T src)
-            => api.extract(seg, src);
-
-        /// <summary>
-        /// Extracts all segments from the source value and deposits the result in a caller-suppled span
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline)]
-        public void Deposit(T src, Span<T> dst)
-            => api.deposit(Spec, src, dst);
-
-        /// <summary>
-        /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
-        /// </summary>
-        /// <param name="segment">The segment spec</param>
-        /// <param name="src">The source value</param>
-        /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline)]
-        public T Offset(in BitSegment segment, T src)
-            => api.offset(segment, src);
-
-        [MethodImpl(Inline)]
-        public ref T Deposit(in BitSegment segment, T src, ref T dst)
+        public T this[byte index]
         {
-            api.deposit(segment, src, ref dst);
-            return ref dst;
-        }
+            [MethodImpl(Inline)]
+            get => Extract(index);
 
-        [MethodImpl(Inline)]
-        public ref T Deposit(ReadOnlySpan<T> src, ref T dst)
-        {
-            api.deposit(Spec, src, ref dst);
-            return ref dst;
+            [MethodImpl(Inline)]
+            set => Deposit(index, value);
         }
     }
 }

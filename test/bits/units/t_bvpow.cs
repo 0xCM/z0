@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-
     public class t_bvpow : t_bitvectors<t_bvpow>
     {
         public void bvpow_8()
@@ -35,7 +33,6 @@ namespace Z0
         public void bvorders_Gf256()
         {
             var orders = new Dictionary<byte,int>();
-
             foreach(var v in BitVector.nonempty(n8))
             {
                 var order = v.Order();

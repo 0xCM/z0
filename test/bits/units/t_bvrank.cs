@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bvrank : t_bitvectors<t_bvrank>
     {
@@ -74,7 +74,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.BitVector<T>();
-            var pos = Random.Next(1,width<T>() - 2);
+            var pos = Random.Next(1,(uint)width<T>() - 2);
 
             var actual = gbits.rank(x.Content,(int)pos);
             var expect = 0u;

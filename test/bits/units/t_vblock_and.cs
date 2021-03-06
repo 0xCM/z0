@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vblock_and : UnitTest<t_vblock_and>
     {

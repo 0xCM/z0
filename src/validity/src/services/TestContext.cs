@@ -182,6 +182,8 @@ namespace Z0
         protected FS.FolderPath UnitDataDir
             => TestRoot + FS.folder(GetType().Name);
 
+        protected static FS.FileExt LogExt => FS.Extensions.Log;
+
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
                 => Context.CaseName<C>(root);

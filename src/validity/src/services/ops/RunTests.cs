@@ -20,12 +20,14 @@ namespace Z0
         {
             try
             {
+                var clock = counter(true);
                 var flow = Wf.Running(typeof(A).Name + " tests");
                 ErroLogPath.Delete();
                 StatusLogPath.Delete();
                 RunTests(false, hosts);
                 EmitLogs();
-                Wf.Ran(flow);
+                var runtime = clock.Stop();
+                Wf.Ran(flow, $"Test run required {runtime.TimeSpan.TotalSeconds} seconds");
             }
             catch (Exception e)
             {

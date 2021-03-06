@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public class t_bm_transpose : t_bitmatrix<t_bm_transpose>
     {
@@ -74,5 +71,20 @@ namespace Z0
 
         public void bm_transpose_n8x8x8()
             => bm_transpose_check<N8,N8,byte>();
+
+        void bm_transpose_check<M,N,T>(M m = default, N n = default, T t = default)
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var sample = 0; sample <RepCount; sample++)
+            {
+                var A = Random.BitMatrix(m,n,t);
+                var B = A.Transpose();
+                for(var i=0; i<B.RowCount; i++)
+                for(var j=0; j<B.ColCount; j++)
+                    ClaimNumeric.eq(B[i,j], A[j,i]);
+            }
+        }
     }
 }

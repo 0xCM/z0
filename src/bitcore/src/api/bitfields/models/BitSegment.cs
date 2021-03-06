@@ -9,11 +9,12 @@ namespace Z0
 
     using static Part;
 
+    using api = BitFields;
+
     /// <summary>
     /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
     /// </summary>
-    public readonly struct BitSegment<T> : IBitSegment<T>
-        where T : unmanaged
+    public readonly struct BitSegment : IBitSegment<byte>
     {
         /// <summary>
         /// The section anme
@@ -23,49 +24,35 @@ namespace Z0
         /// <summary>
         /// The index of the first bit in the section
         /// </summary>
-        public T StartPos {get;}
+        public byte StartPos {get;}
 
         /// <summary>
         /// The index of the last bit in the section
         /// </summary>
-        public T EndPos {get;}
+        public byte EndPos {get;}
 
         [MethodImpl(Inline)]
-        public BitSegment(T min, T max)
-        {
-            Name = EmptyString;
-            StartPos = min;
-            EndPos = max;
-        }
-
-        [MethodImpl(Inline)]
-        public BitSegment(Identifier name, T min, T max)
+        public BitSegment(Identifier name, byte min, byte max)
         {
             Name = name;
             StartPos = min;
             EndPos = max;
         }
 
-        public uint Width
+        public byte Width
         {
             [MethodImpl(Inline)]
-            get => BitFields.width(this);
-        }
-
-        public BitSegment Untyped
-        {
-            [MethodImpl(Inline)]
-            get => new BitSegment(Name, memory.u32(StartPos), memory.u32(EndPos));
+            get => (byte)(EndPos - StartPos + 1);
         }
 
         public string Format()
-            => BitFields.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSegment(BitSegment<T> src)
-            => src.Untyped;
+        public static implicit operator BitSegment<byte>(BitSegment src)
+            => new BitSegment(src.Name, src.StartPos, src.EndPos);
     }
 }

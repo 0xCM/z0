@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class t_nbb_pop : t_bitspans<t_nbb_pop>
     {
         public void gbb_pop_64()

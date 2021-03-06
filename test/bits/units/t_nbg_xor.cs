@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_nbg_xor : t_bitgrids<t_nbg_xor>
     {

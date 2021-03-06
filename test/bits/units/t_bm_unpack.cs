@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
 
     public class t_bm_unpack : t_bitmatrix<t_bm_unpack>
     {
@@ -40,7 +36,6 @@ namespace Z0
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
                     Claim.eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
-
             }
         }
     }

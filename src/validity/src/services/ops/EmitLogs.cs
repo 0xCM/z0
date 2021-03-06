@@ -18,15 +18,17 @@ namespace Z0
 
             if(results.Any())
             {
+                var timing = results.Sum(x => x.Duration.TimeSpan.TotalSeconds);
                 var dst = Db.SortedCaseLogPath();
-                Wf.Status($"Emitting case log to {dst.ToUri()}");
+                Wf.Status($"Emitting case log to {dst.ToUri()} with execution time of {timing} seconds");
                 EmitTestCaseLog(dst, results);
             }
 
             var benchmarks = SortBenchmarks();
             if(benchmarks.Any())
             {
-                Wf.Status("Emitting benchmarks");
+                var timing = benchmarks.Sum(x => x.Timing.TimeSpan.TotalSeconds);
+                Wf.Status($"Emitting benchmarks to {TestPaths.BenchLogPath} with execution time of {timing} seconds");
                 Write(benchmarks, TestPaths.BenchLogPath);
             }
         }

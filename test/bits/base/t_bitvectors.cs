@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public abstract class t_bitvectors<X> : t_bitcore<X>
         where X : t_bitvectors<X>, new()
     {

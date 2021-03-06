@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = BitFieldModels;
+    using api = BitFields;
 
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits
@@ -44,7 +44,7 @@ namespace Z0
         public uint TotalWidth
         {
             [MethodImpl(Inline)]
-            get => api.segwidth(this);
+            get => api.width(this);
         }
 
         public ReadOnlySpan<BitSegment> Segments
