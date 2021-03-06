@@ -16,17 +16,17 @@ namespace Z0
     /// </summary>
     public readonly struct BitFieldSpec :  ITextual
     {
-        readonly Index<BitFieldSegment> Data;
+        readonly Index<BitSegment> Data;
 
         [MethodImpl(Inline)]
-        public BitFieldSpec(BitFieldSegment[] src)
+        public BitFieldSpec(BitSegment[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldSegment Segment(int index)
+        public ref readonly BitSegment Segment(int index)
             => ref Segments[index];
 
-        public ref readonly BitFieldSegment this[int i]
+        public ref readonly BitSegment this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Segment(i);
@@ -47,7 +47,7 @@ namespace Z0
             get => api.segwidth(this);
         }
 
-        public ReadOnlySpan<BitFieldSegment> Segments
+        public ReadOnlySpan<BitSegment> Segments
         {
             [MethodImpl(Inline)]
             get => Data;

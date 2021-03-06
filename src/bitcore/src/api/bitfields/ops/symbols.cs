@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm2x4 src)
-            => symbols<Perm4Sym,byte>((byte)src, 4, width<byte>());
+            => symbols<Perm4Sym,byte>((byte)src, 4, memory.width<byte>());
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm4L src)
-            => symbols<Perm4Sym,byte>((byte)src, 2, width<byte>());
+            => symbols<Perm4Sym,byte>((byte)src, 2, memory.width<byte>());
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm16L src)
-            => symbols<Perm16L,ulong>((ulong)src, 4, width<ulong>());
+            => symbols<Perm16L,ulong>((ulong)src, 4, memory.width<ulong>());
 
         /// <summary>
         /// Computes the minimum number of cells required to store a specified number of bits

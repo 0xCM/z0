@@ -13,7 +13,7 @@ namespace Z0
     readonly partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T deposit<T>(in BitFieldSegment seg, in T src, ref T dst)
+        public static ref T deposit<T>(in BitSegment seg, in T src, ref T dst)
             where T : unmanaged
                 => ref gbits.copy(src, (byte)seg.StartPos, (byte)seg.Width, ref dst);
 
@@ -42,7 +42,7 @@ namespace Z0
                 => field.Deposit(src, dst);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public ref T deposit<T>(in BitField<T> field, in BitFieldSegment seg, in T src, ref T dst)
+        public ref T deposit<T>(in BitField<T> field, in BitSegment seg, in T src, ref T dst)
             where T : unmanaged
                 => ref field.Deposit(seg, src, ref dst);
 
@@ -72,13 +72,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref T deposit<S,T>(in BitFieldSegment segment, in S src, ref T dst)
+        public static ref T deposit<S,T>(in BitSegment segment, in S src, ref T dst)
             where S : IScalarBitField<T>
             where T : unmanaged
                 => ref gbits.copy(src.Scalar, (byte)segment.StartPos, (byte)segment.Width, ref dst);
 
         [MethodImpl(Inline)]
-        public static ref S deposit<S,T>(in BitFieldSegment segment, in S src, ref S dst)
+        public static ref S deposit<S,T>(in BitSegment segment, in S src, ref S dst)
             where S : IScalarBitField<T>
             where T : unmanaged
         {

@@ -9,12 +9,11 @@ namespace Z0
 
     using static Part;
 
-    using api = BitFieldModels;
-
     /// <summary>
     /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
     /// </summary>
-    public readonly struct BitSection : IBitSection<uint>
+    public readonly struct BitSegment<T> : IBitSegment<T>
+        where T : unmanaged
     {
         /// <summary>
         /// The section anme
@@ -24,15 +23,15 @@ namespace Z0
         /// <summary>
         /// The index of the first bit in the section
         /// </summary>
-        public uint StartPos {get;}
+        public T StartPos {get;}
 
         /// <summary>
         /// The index of the last bit in the section
         /// </summary>
-        public uint EndPos {get;}
+        public T EndPos {get;}
 
         [MethodImpl(Inline)]
-        public BitSection(uint min, uint max)
+        public BitSegment(T min, T max)
         {
             Name = EmptyString;
             StartPos = min;
@@ -40,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public BitSection(Identifier name, uint min, uint max)
+        public BitSegment(Identifier name, T min, T max)
         {
             Name = name;
             StartPos = min;
@@ -50,17 +49,23 @@ namespace Z0
         public uint Width
         {
             [MethodImpl(Inline)]
-            get => EndPos - StartPos;
+            get => BitFields.width(this);
+        }
+
+        public BitSegment Untyped
+        {
+            [MethodImpl(Inline)]
+            get => new BitSegment(Name, memory.u32(StartPos), memory.u32(EndPos));
         }
 
         public string Format()
-            => api.format(this);
+            => BitFields.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSection<uint>(BitSection src)
-            => new BitSection(src.Name, src.StartPos, src.EndPos);
+        public static implicit operator BitSegment(BitSegment<T> src)
+            => src.Untyped;
     }
 }

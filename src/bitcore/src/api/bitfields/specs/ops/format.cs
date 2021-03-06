@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source segment</param>
         /// <typeparam name="T">The type over which the segment is defined</typeparam>
-        public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
+        public static string format<T>(ReadOnlySpan<BitSegment<T>> src)
             where T : unmanaged
         {
             var dst = text.buffer();
@@ -48,8 +48,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void render(in BitFieldSegment src, ITextBuffer dst)
-            => dst.Append(format(src));
+        public static void render(in BitSegment src, ITextBuffer dst)
+            => dst.Append(src.Format());
 
         /// <summary>
         /// Computes the canonical format for a contiguous field segment sequence
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="src">The source segment</param>
         /// <typeparam name="T">The type over which the segment is defined</typeparam>
         [Op]
-        public static string format(ReadOnlySpan<BitFieldSegment> src)
+        public static string format(ReadOnlySpan<BitSegment> src)
         {
             var dst = text.buffer();
             dst.Append(OpenField);
@@ -75,18 +75,14 @@ namespace Z0
         }
 
         [Op]
-        public static string format(in BitFieldSegment seg)
+        public static string format(in BitSegment seg)
         {
             var dst = EmptyString;
             var name = seg.Name;
             if(name.IsNonEmpty)
                 dst = seg.Name;
-            return dst + format(seg.Section);
+            return dst + string.Format(SegPattern, seg.StartPos, seg.EndPos);
         }
-
-        [Op]
-        public static string format(in BitSection src)
-            => string.Format(SegPattern, src.StartPos, src.EndPos);
 
         const string SegPattern = "[{1}:{0}]";
 

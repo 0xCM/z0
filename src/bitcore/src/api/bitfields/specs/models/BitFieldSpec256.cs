@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Defines a segmented bitfield indexed by enum values
@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public byte SegWidth(T index)
-            => vcell(Widths, uint8(index));
+            => cpu.vcell(Widths, uint8(index));
 
         public byte this[T index]
         {

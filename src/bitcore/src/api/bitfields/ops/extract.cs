@@ -12,12 +12,12 @@ namespace Z0
     readonly partial struct BitFields
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T extract<T>(in BitFieldSegment seg, T src)
+        public static T extract<T>(in BitSegment seg, T src)
             where T : unmanaged
                 => gbits.extract(src, (byte)seg.StartPos, (byte)seg.Width);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T offset<T>(in BitFieldSegment seg, T src)
+        public static T offset<T>(in BitSegment seg, T src)
             where T : unmanaged
                 => gmath.sll(extract(seg, src), (byte)seg.StartPos);
 
@@ -43,13 +43,13 @@ namespace Z0
                 => extract<F,T>(f, EnumValue.e8u(i0), EnumValue.e8u(i1));
 
         [MethodImpl(Inline)]
-        public static T extract<S,T>(in BitFieldSegment segment, in S src)
+        public static T extract<S,T>(in BitSegment segment, in S src)
             where S : IScalarBitField<T>
             where T : unmanaged
                 => gbits.extract(src.Scalar, (byte)segment.StartPos, (byte)segment.Width);
 
         [MethodImpl(Inline)]
-        public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)
+        public static T extract<S,T>(in BitSegment segment, in S src, bool offset)
             where S : IScalarBitField<T>
             where T : unmanaged
                 => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);

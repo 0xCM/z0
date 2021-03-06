@@ -21,7 +21,7 @@ namespace Z0
 
         public readonly uint TotalWidth;
 
-        public ReadOnlySpan<BitFieldSegment> Segments
+        public ReadOnlySpan<BitSegment> Segments
         {
             [MethodImpl(Inline)]
             get => Untyped.Segments;

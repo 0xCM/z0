@@ -16,7 +16,6 @@ namespace Z0
     // FirstPos = NonnegativeInteger
     // LastPos = PositiveInteger
     // MyField:[Part1:[0,3] | Part2:[4,5] | Part4:[6,17]]
-    //
     public readonly struct BitFieldModel : IBitFieldModel
     {
         public Name Name {get;}
@@ -36,10 +35,10 @@ namespace Z0
         /// </summary>
         public uint TotalSegWidth {get;}
 
-        readonly Index<BitFieldSegment> Data;
+        readonly Index<BitSegment> Data;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(Name name, uint count, uint width, Index<BitFieldSegment> segments)
+        public BitFieldModel(Name name, uint count, uint width, Index<BitSegment> segments)
         {
             Name = name;
             DataWidth = width;
@@ -49,7 +48,7 @@ namespace Z0
             TotalSegWidth = BitFieldModels.segwidth(this);
         }
 
-        public ReadOnlySpan<BitFieldSegment> Segments
+        public ReadOnlySpan<BitSegment> Segments
         {
             [MethodImpl(Inline)]
             get => Data.View;
@@ -64,7 +63,7 @@ namespace Z0
             => Segment(index).StartPos;
 
         [MethodImpl(Inline)]
-        public ref readonly BitFieldSegment Segment(int index)
+        public ref readonly BitSegment Segment(int index)
             => ref Data[index];
     }
 }

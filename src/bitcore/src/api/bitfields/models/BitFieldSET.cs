@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         public readonly BitFieldSpec Spec;
 
-        readonly ReadOnlySpan<BitFieldSegment> Segments;
+        readonly ReadOnlySpan<BitSegment> Segments;
 
         [MethodImpl(Inline)]
         public BitField(in BitFieldSpec spec)
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
-        public ref readonly BitFieldSegment Segment(E index)
+        public ref readonly BitSegment Segment(E index)
             => ref skip(Segments, @as<E,uint>(index));
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="segment">The segment spec</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
-        public T Read(in BitFieldSegment segment, in S src)
+        public T Read(in BitSegment segment, in S src)
             => api.extract<S,T>(segment, src);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
-        public T Read(in BitFieldSegment segment, in S src, bool offset)
+        public T Read(in BitSegment segment, in S src, bool offset)
             => api.extract<S,T>(segment, src, offset);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref T Write(in BitFieldSegment segment, in S src, ref T dst)
+        public ref T Write(in BitSegment segment, in S src, ref T dst)
         {
             api.deposit(segment, src, ref dst);
             return ref dst;
@@ -111,7 +111,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target value</param>
         [MethodImpl(Inline)]
-        public ref S Write(in BitFieldSegment segment, in S src, ref S dst)
+        public ref S Write(in BitSegment segment, in S src, ref S dst)
         {
             api.deposit<S,T>(segment, src, ref dst);
             return ref dst;

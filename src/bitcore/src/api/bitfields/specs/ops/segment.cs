@@ -11,9 +11,9 @@ namespace Z0
 
     partial struct BitFieldModels
     {
-        public static BitSection<T> section<T>(Identifier name, T start, T end)
+        public static BitSegment<T> segment<T>(Identifier name, T start, T end)
             where T : unmanaged
-                => new BitSection<T>(name, start, end);
+                => new BitSegment<T>(name, start, end);
 
         /// <summary>
         /// Defines a bitfield segment
@@ -22,22 +22,22 @@ namespace Z0
         /// <param name="width">The segment width</param>
         /// <param name="seg">The inclusive left/right segment index boundaries</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSegment segment(Name name, BitSection<uint> section)
-            => new BitFieldSegment(name, section);
+        public static BitSegment segment(Identifier name, uint start, uint end)
+            => new BitSegment(name, start, end);
 
         [MethodImpl(Inline)]
-        public static BitFieldSegment segment<E>(E id, byte startpos, byte endpos)
+        public static BitSegment segment<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => segment(id.ToString(), section<uint>(id.ToString(), startpos, endpos));
+                => segment((Identifier)id.ToString(), startpos, (uint)endpos);
 
-        public static BitFieldSegment segment<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
+        public static BitSegment segment<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
             var i = EnumValue.scalar<I,byte>(entry.FieldIndex);
             var width = EnumValue.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
-            var seg = segment(entry.FieldName, section<uint>(entry.FieldName, start, end));
+            var seg = segment((Identifier)entry.FieldName, start, (uint)end);
             start = (byte)(end + 1);
             return seg;
         }
@@ -47,13 +47,13 @@ namespace Z0
         /// </summary>
         /// <param name="index">The source index</param>
         /// <typeparam name="W">The enum type with width-defining literals</typeparam>
-        public static BitFieldSegment[] segments<I,W>(in BitFieldIndex<I,W> index)
+        public static BitSegment[] segments<I,W>(in BitFieldIndex<I,W> index)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
             var count = index.Length;
             var start = Konst.z8;
-            var segments = new BitFieldSegment[count];
+            var segments = new BitSegment[count];
             for(var i=0; i<count; i++)
                 segments[i] = segment(index[i], ref start);
             return segments;

@@ -14,8 +14,6 @@ namespace Z0
 
     readonly partial struct BitFields
     {
-
-
         /// <summary>
         /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
         /// </summary>

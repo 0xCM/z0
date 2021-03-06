@@ -21,7 +21,7 @@ namespace Z0
             var fieldWidths = span(widths);
             var posbuffer = alloc<uint>(count);
             var positions = span(posbuffer);
-            var sBuffer = alloc<BitFieldSegment>(count);
+            var sBuffer = alloc<BitSegment>(count);
             var segments = span(sBuffer);
             uint totalWidth = 0;
             for(var i=0u; i<count; i++)
@@ -29,7 +29,7 @@ namespace Z0
                 ref readonly var w = ref skip(widths,i);
                 ref readonly var segname = ref skip(names,i);
                 seek(positions,i) = totalWidth;
-                seek(segments,i) = new BitFieldSegment(segname, section<uint>(segname, totalWidth, totalWidth + w));
+                seek(segments,i) = segment<uint>(segname, totalWidth, totalWidth + w);
                 totalWidth += skip(fieldWidths, i);
             }
             return new BitFieldModel(name, count, totalWidth, sBuffer);
@@ -53,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="segments">The defining segments</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSpec specify(params BitFieldSegment[] segments)
+        public static BitFieldSpec specify(params BitSegment[] segments)
             => new BitFieldSpec(segments);
 
         /// <summary>

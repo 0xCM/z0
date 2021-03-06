@@ -31,6 +31,6 @@ namespace Z0
         /// <summary>
         /// The defined segments
         /// </summary>
-        ReadOnlySpan<BitFieldSegment> Segments {get;}
+        ReadOnlySpan<BitSegment> Segments {get;}
     }
 }
