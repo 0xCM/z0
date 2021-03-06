@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Ntz]
         public static byte ntz(byte src)
-           => src == 0 ? 8 : (byte)TrailingZeroCount((uint)src);
+           => src == 0 ? (byte)8 : (byte)TrailingZeroCount((uint)src);
 
         /// <summary>
         /// int _mm_tzcnt_32 (unsigned int a) TZCNT reg, reg/m32

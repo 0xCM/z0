@@ -51,7 +51,7 @@ namespace Z0
         public byte Length
         {
             [MethodImpl(Inline)]
-            get => IsEmpty ? 0 : (C1 == AsciCharCode.Null ? 1 : 2);
+            get => IsEmpty ? z8 : (C1 == AsciCharCode.Null ? (byte)1 : (byte)2);
         }
 
         public bool Equals(ArgPrefix src)
