@@ -6,6 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
+    using static AsmExpr;
+
     [Record(TableId)]
     public struct StokeAsmExportRow : IRecord<StokeAsmExportRow>
     {
@@ -13,11 +15,11 @@ namespace Z0.Asm
 
         public ushort Sequence;
 
-        public string OpCode;
+        public OpCode OpCode;
 
         public string Instruction;
 
-        public string Mode64;
+        public bool Mode64;
 
         public string LegacyMode;
 

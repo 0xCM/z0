@@ -288,6 +288,9 @@ namespace Z0.Asm
 
         }
 
+        WfCmdIndex RegisterCommands()
+            => AsmWfCmdSpecs.RegisterCommands(Wf, this);
+
         void CheckInterfaceMaps()
         {
             var imap = Clr.imap(typeof(Prototypes.ContractedEvaluator), typeof(Prototypes.IEvaluator));
@@ -331,6 +334,12 @@ namespace Z0.Asm
 
         }
 
+        public void ExportStokeImports()
+        {
+            Catalog.ExportImport();
+
+        }
+
         void SplitFiles()
         {
             var limit = new Mb(15);
@@ -357,7 +366,7 @@ namespace Z0.Asm
 
         }
 
-        void DistillStatements()
+        public void DistillAsmStatements()
         {
             Wf.AsmDistiller().DistillStatements();
 
@@ -375,7 +384,7 @@ namespace Z0.Asm
 
         }
 
-        void ShowRexBits()
+        public void ShowRexBits()
         {
             var codes = AsmBytes.rexbits();
             var count = codes.Length;
@@ -402,34 +411,29 @@ namespace Z0.Asm
 
         }
 
-        void RegisterCommands()
-        {
-            WorkflowCommands.assign(WorkflowCommands.define(nameof(ShowRexBits)),ShowRexBits);
-
-        }
-
-        void EmitImmSpecializations()
+        public void EmitImmSpecializations()
         {
             var emitter = Wf.ImmEmitter();
             emitter.Emit();
 
         }
-        public unsafe void Run()
+
+        public CmdResult Run(AsmWfCmdKind kind)
+        {
+
+            if(WorkflowCommands.find(kind, out var cmd))
+                return Wf.Router.Dispatch(cmd.Enclosed);
+            else
+                return Cmd.fail(cmd.Enclosed);
+
+        }
+
+        public void Run()
         {
             RegisterCommands();
+            Run(AsmWfCmdKind.ShowRexBits);
+            Run(AsmWfCmdKind.ExportStokeImports);
 
-            if(WorkflowCommands.find(nameof(ShowRexBits), out var cmd))
-                Wf.Router.Dispatch(cmd);
-
-            // var settings = EtlSettings.@default();
-            // var saved = Db.EmitSettings(settings);
-            // Wf.Row(settings);
-
-            //var test = "adfadfaldfkadsf&>";
-
-            //FilterApiBlocks();
-
-            //Resources.accessors()
         }
 
         public static void Main(params string[] args)

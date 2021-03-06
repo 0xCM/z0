@@ -26,6 +26,10 @@ namespace Z0
         public static void run<T>(Span<T> src, IReadOnlyIterator<T> dst)
             => new IteratorRelay<T>(dst).View(src, dst);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ViewTrigger<T> trigger<T>(Receiver<T> receiver)
+            => new ViewTrigger<T>(receiver);
+
         [Op, Closures(Closure)]
         public static OutputReceiver<T> receiver<T>(ViewTrigger<T> trigger)
             => OutputReceiver<T>.create(trigger);

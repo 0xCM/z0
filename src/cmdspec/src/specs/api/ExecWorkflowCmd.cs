@@ -6,9 +6,36 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Concurrent;
 
     using static Part;
+    using static memory;
+
+    public readonly struct ExecWorkflowCmd<K>
+        where K : unmanaged
+    {
+        public K Kind {get;}
+
+        public ExecWorkflowCmd Enclosed {get;}
+
+        [MethodImpl(Inline)]
+        public ExecWorkflowCmd(K kind, ExecWorkflowCmd cmd)
+        {
+            Kind = kind;
+            Enclosed = cmd;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ExecWorkflowCmd(ExecWorkflowCmd<K> src)
+            => src.Enclosed;
+
+        [MethodImpl(Inline)]
+        public static implicit operator K(ExecWorkflowCmd<K> src)
+            => src.Kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ExecWorkflowCmd<K>((K kind, ExecWorkflowCmd cmd) src)
+            => new ExecWorkflowCmd<K>(src.kind, src.cmd);
+    }
 
     [Cmd(CmdName)]
     public struct ExecWorkflowCmd : ICmd<ExecWorkflowCmd>
@@ -48,34 +75,4 @@ namespace Z0
         public static ExecWorkflowCmd Empty => new ExecWorkflowCmd(Name.Empty);
     }
 
-    public readonly struct WorkflowCommands
-    {
-        public static ExecWorkflowCmd define(Name name)
-            => new ExecWorkflowCmd(name);
-
-        public static void assign(string name, Action handler)
-            => _Lookup.TryAdd(name, handler);
-
-        public static void assign(ExecWorkflowCmd cmd, Action handler)
-            => assign(cmd.WorkflowName, handler);
-
-        public static bool find(ExecWorkflowCmd cmd, out Action handler)
-            => _Lookup.TryGetValue(cmd.WorkflowName, out handler);
-
-        public static bool find(Name name, out ExecWorkflowCmd cmd)
-        {
-            if(_Lookup.ContainsKey(name))
-            {
-                cmd = name;
-                return true;
-            }
-            else
-            {
-                cmd = ExecWorkflowCmd.Empty;
-                return false;
-            }
-        }
-
-        static ConcurrentDictionary<string,Action> _Lookup = new ConcurrentDictionary<string, Action>();
-    }
 }

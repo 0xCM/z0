@@ -9,12 +9,20 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmMnemonicCode;
+    using K = JccKind;
 
     partial struct asm
     {
         [MethodImpl(Inline), Op]
         public static JccKind jcckind(AsmMnemonicCode src)
             => jcckind(src, out JccKind _);
+
+        [Op]
+        public static ref JccCode code(JccKind src, out JccCode code)
+        {
+            code = 0;
+            return ref code;
+        }
 
         [Op]
         public static ref JccKind jcckind(AsmMnemonicCode src, out JccKind kind)

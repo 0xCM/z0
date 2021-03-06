@@ -81,12 +81,20 @@ namespace Z0.Asm
             Wf.EmittedTable(flow,count);
         }
 
+        static bool mode64(string src)
+            => src switch
+            {
+                "V" => true,
+                _ => false
+            };
+
+
         void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
             dst.Sequence = src.Sequence;
-            dst.OpCode = src.OpCode;
+            dst.OpCode = asm.opcode(src.OpCode);
             dst.Instruction = src.Instruction;
-            dst.Mode64 = src.Mode64;
+            dst.Mode64 = mode64(src.Mode64);
             dst.LegacyMode = src.LegacyMode;
             dst.EncodingKind = src.EncodingKind;
             dst.Properties = src.Properties;
