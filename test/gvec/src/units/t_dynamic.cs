@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Runtime.Intrinsics;
 
     using static Part;
 
@@ -29,7 +30,7 @@ namespace Z0
         {   const byte imm8 = 9;
             var name = nameof(gcpu.vbsll);
             var src = typeof(gcpu).DeclaredMethods().WithName(name).OfKind(VK.v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), Z0.Identity.identify(src), src, imm8);
+            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), Identity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
             var dst = ClrDynamic.method(handle);
             Claim.ClaimEq(dst.Name, name);
@@ -46,7 +47,7 @@ namespace Z0
 
             for(var i=0; i<RepCount; i++)
             {
-                var x = Random.CpuVector<uint>(n128);
+                var x = Random.CpuVector<uint>(w128);
                 var y = vbsll(x);
                 var z = gcpu.vbsll(x,imm8);
                 Claim.veq(z,y);

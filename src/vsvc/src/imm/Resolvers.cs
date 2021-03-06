@@ -30,7 +30,6 @@ namespace Z0
 
         public Type Host {get;}
 
-
         public VImm8UnaryResolver128(Type host)
         {
             Host = host;
@@ -39,13 +38,15 @@ namespace Z0
         public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count)
             => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(), id, gApiMethod(VK.vk128<T>(), id.Name),count);
 
+        public DynamicDelegate<UnaryOp<Vector128<T>>> @delegate(byte count, OpIdentity id)
+            => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(), id, gApiMethod(VK.vk128<T>(), id.Name),count);
+
         static string name(ApiClass k)
             => $"v{k.Format()}";
 
         public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, ApiClass kind)
             => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(),
                 ApiIdentify.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(VK.vk128<T>(), name(kind)),imm8);
-
 
         MethodInfo gApiMethod(Vec128Type hk, string name)
             => Host.DeclaredMethods().WithName(name).OfKind(hk).Single();
@@ -65,7 +66,6 @@ namespace Z0
 
         public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
             => Dynop.EmbedVUnaryOpImm<T>(VK.vk256<T>(), id, gApiMethod(VK.vk256<T>(), id.Name),count);
-
 
         MethodInfo gApiMethod(Vec256Type hk, string name)
             => Host.DeclaredMethods().WithName(name).OfKind(hk).Single();

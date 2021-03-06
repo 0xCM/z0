@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
-    using static z;
-
     public class t_broadcast : t_inx<t_broadcast>
     {
         public void t_broadcast_case1()

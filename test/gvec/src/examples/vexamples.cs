@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Collects random examples
@@ -42,7 +42,7 @@ namespace Z0
         public void Run()
         {
             var examples = new VexExamples();
-            Run(examples.vduplicate);
+            Run(examples.e_duplicate);
             Run(examples.covers);
             Run(examples.vgather_128);
             Run(examples.vgather_256);
@@ -52,9 +52,9 @@ namespace Z0
             Run(examples.vmerge_hi);
             Run(examples.vmerge_hilo);
             Run(examples.vmerge_lo);
-            Run(examples.vperm4x16);
-            Run(examples.vperm4x32_128x32u_A);
-            Run(examples.vperm4x32_128x32u_B);
+            Run(examples.e_vperm4x16);
+            Run(examples.e_vperm4x32_128x32u_A);
+            Run(examples.e_vperm4x32_128x32u_B);
 
             Run(examples.vshuf16x16);
             Run(examples.vshuf16x8_128x8u);

@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         IAsmContext Asm;
 
-        IImmSpecializer Specializer;
+        ImmSpecializer Specializer;
 
         public ApiImmEmitter()
         {

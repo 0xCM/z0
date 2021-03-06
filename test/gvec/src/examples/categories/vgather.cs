@@ -142,7 +142,7 @@ namespace Z0
             }
 
             var a0 = vgather(w, in A.First, vparts(w,4*12, 4*24, 4*48, 4*64));
-            Claim.veq(a0,pattern0);
+            Claim.veq(a0, pattern0);
 
             for(var block = 0; block < BlockCount; block++)
             {

@@ -68,7 +68,7 @@ namespace Z0
         public static ICaptureCore CaptureCore(this IWfShell wf, IAsmContext asm)
             => Services.CaptureCore.create(wf);
 
-        public static IImmSpecializer ImmSpecializer(this IWfShell wf, IAsmContext asm)
+        public static ImmSpecializer ImmSpecializer(this IWfShell wf, IAsmContext asm)
             => new ImmSpecializer(wf, asm);
 
         public static IAsmDecoder AsmDecoder(this IWfShell wf, in AsmFormatConfig config)

@@ -14,7 +14,7 @@ namespace Z0
             app.RunTests();
         }
 
-        public static void RunSelected(params string[] units)
+        public static void Run2(params string[] units)
         {
             var app = new A();
             var shell = WfShell.create(WfShell.parts(Index<PartId>.Empty), sys.empty<string>());

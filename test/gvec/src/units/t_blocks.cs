@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_blocks : t_inx<t_blocks>
     {
@@ -53,8 +53,6 @@ namespace Z0
             Claim.eq(8, SpanBlocks.cellblocks<int>(n,2));
             Claim.eq(4, SpanBlocks.cellblocks<long>(n, 2));
             Claim.eq(32, SpanBlocks.cellblocks<byte>(n, 2));
-
-
         }
 
         public void check_blocklength_256()
@@ -72,7 +70,6 @@ namespace Z0
             Claim.eq(4, SpanBlocks.blocklength<double>(n));
         }
 
-
         public void check_block_slice()
         {
             var x = SpanBlocks.safeload(w128, array<int>(1,2,3,4,5,6,7,8));
@@ -85,7 +82,6 @@ namespace Z0
             var block2 = x.Block(1);
             Claim.eq(4, block2.Length);
             Claim.eq(block2, SpanBlocks.parts(w128,5,6,7,8));
-
         }
 
         public void check_safeload()

@@ -390,7 +390,7 @@ namespace Z0.Asm
             }
         }
 
-        public unsafe void Run()
+        void CheckDigitParser()
         {
             var cases = DigitParserCases.positive();
             var results = DigitParserCases.run(cases).View;
@@ -403,20 +403,27 @@ namespace Z0.Asm
                 else
                     Wf.Error(result.Format());
             }
-            // var rows = Catalog.ExportImport().View;
-            // var count = rows.Length;
 
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var row = ref skip(rows,i);
+        }
 
-            // }
-            // var distiller = Wf.AsmDistiller();
-            // distiller.DistillStatements();
+        void RegisterCommands()
+        {
+            WorkflowCommands.assign(WorkflowCommands.define(nameof(ShowRexBits)),ShowRexBits);
 
-            // var composites = AsmExpr.composites();
-            // root.iter(composites.Tokens, t => Wf.Row(string.Format("{0}:{1}", t.Name, t.Symbol)));
+        }
 
+        void EmitImmSpecializations()
+        {
+            var emitter = Wf.ImmEmitter();
+            emitter.Emit();
+
+        }
+        public unsafe void Run()
+        {
+            RegisterCommands();
+
+            if(WorkflowCommands.find(nameof(ShowRexBits), out var cmd))
+                Wf.Router.Dispatch(cmd);
 
             // var settings = EtlSettings.@default();
             // var saved = Db.EmitSettings(settings);

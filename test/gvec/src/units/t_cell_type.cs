@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-
     public class t_cell_type : t_vectors<t_cell_type>
     {
         public void check_cell_types()

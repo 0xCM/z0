@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static SFx;
     using static memory;
 
-    class ImmSpecializer : IImmSpecializer
+    public class ImmSpecializer
     {
         readonly IAsmDecoder Decoder;
 
@@ -89,13 +89,13 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, byte imm8)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, OpIdentity id, byte imm8)
             where T : unmanaged
                 => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, params byte[] imm8)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver128<T> resolver, OpIdentity id, params byte[] imm8)
             where T : unmanaged
         {
             var count = imm8.Length;
@@ -103,17 +103,17 @@ namespace Z0.Asm
             ref var dst = ref first(buffer);
             ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+                seek(dst, i) = Single(exchange, resolver, id, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
             return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, byte imm8)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, OpIdentity id, byte imm8)
             where T : unmanaged
                 => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, params byte[] imm8)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8UnaryResolver256<T> resolver, OpIdentity id, params byte[] imm8)
             where T : unmanaged
         {
             var count = imm8.Length;
@@ -121,17 +121,17 @@ namespace Z0.Asm
             ref var dst = ref first(buffer);
             ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+                seek(dst, i) = Single(exchange, resolver, id, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
             return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, byte imm8)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, OpIdentity id, byte imm8)
             where T : unmanaged
                 => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, params byte[] imm8)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver128<T> resolver, OpIdentity id, params byte[] imm8)
             where T : unmanaged
         {
             var count = imm8.Length;
@@ -139,17 +139,17 @@ namespace Z0.Asm
             ref var dst = ref first(buffer);
             ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+                seek(dst, i) = Single(exchange, resolver, id, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
             return buffer;
         }
 
-        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, byte imm8)
+        public Option<AsmRoutine> Single<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, OpIdentity id, byte imm8)
             where T : unmanaged
                 => from c in Core.Capture(exchange, resolver.Id.WithImm8(imm8), resolver.@delegate(imm8))
                    from d in Decoder.Decode(c)
                    select d;
 
-        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, params byte[] imm8)
+        public AsmRoutine[] Many<T>(in CaptureExchange exchange, IImm8BinaryResolver256<T> resolver, OpIdentity id, params byte[] imm8)
             where T : unmanaged
         {
             var count = imm8.Length;
@@ -157,7 +157,7 @@ namespace Z0.Asm
             ref var dst = ref first(buffer);
             ref readonly var imm = ref first(imm8);
             for(var i=0; i<count; i++)
-                seek(dst, i) = Single(exchange, resolver, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
+                seek(dst, i) = Single(exchange, resolver, id, skip(imm,i)).ValueOrDefault(AsmRoutine.Empty);
             return buffer;
         }
 
