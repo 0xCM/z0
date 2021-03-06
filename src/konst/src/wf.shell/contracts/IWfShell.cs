@@ -84,12 +84,6 @@ namespace Z0
         Assembly[] Components
             => Context.ApiParts.PartComponents;
 
-        FS.FolderPath ResourceRoot
-            => FS.dir(Init.ResDir.Name);
-
-        FS.FolderPath AppData
-            => FS.dir(Context.Paths.AppDataRoot.Name);
-
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
         /// </summary>

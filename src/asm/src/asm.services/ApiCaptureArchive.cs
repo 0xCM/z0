@@ -17,13 +17,13 @@ namespace Z0
                 Clear(part);
         }
 
-        IApiPathProvider Paths;
+        IDbPaths Paths;
 
         protected override void OnInit()
         {
             base.OnInit();
 
-            Paths = ApiArchives.paths(Wf);
+            Paths = Wf.Db();
         }
 
         void Clear(PartId part)

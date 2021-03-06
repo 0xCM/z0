@@ -28,8 +28,8 @@ namespace Z0
             if(benchmarks.Any())
             {
                 var timing = benchmarks.Sum(x => x.Timing.TimeSpan.TotalSeconds);
-                Wf.Status($"Emitting benchmarks to {TestPaths.BenchLogPath} with execution time of {timing} seconds");
-                Write(benchmarks, TestPaths.BenchLogPath);
+                // Wf.Status($"Emitting benchmarks to {TestPaths.BenchLogPath} with execution time of {timing} seconds");
+                // Write(benchmarks, TestPaths.BenchLogPath);
             }
         }
 

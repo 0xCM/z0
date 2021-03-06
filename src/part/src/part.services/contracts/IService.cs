@@ -21,9 +21,6 @@ namespace Z0
 
         Type[] ContractArgs => new Type[]{};
 
-        string AppName
-            => Assembly.GetEntryAssembly().GetSimpleName();
-
         uint Discriminator => 0;
 
         ServiceSpec Spec

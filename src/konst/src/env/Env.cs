@@ -20,16 +20,17 @@ namespace Z0
         Env()
         {
             var dst = this;
-            dst.ZDev = read(N.ZDev);
-            dst.Db = read(N.Db);
-            dst.Control = read(N.Control);
-            dst.Packages = read(N.Packages);
-            dst.Tools = read(N.Tools);
-            dst.Archives = read(N.Archives);
-            dst.Logs = read(N.Logs);
-            dst.ZBin = read(N.ZBin);
-            dst.DevRoot = read(N.DevRoot);
-            dst.Tmp = read(N.ZTmp);
+            dst.ZDev = dir(N.ZDev);
+            dst.Db = dir(N.Db);
+            dst.Control = dir(N.Control);
+            dst.Packages = dir(N.Packages);
+            dst.Tools = dir(N.Tools);
+            dst.Archives = dir(N.Archives);
+            dst.Logs = dir(N.Logs);
+            dst.ZBin = dir(N.ZBin);
+            dst.DevRoot = dir(N.DevRoot);
+            dst.Tmp = dir(N.ZTmp);
+            dst.CdbLogPath = path(N.CdbLogPath);
         }
 
         public EnvDirVar ZDev;
@@ -51,6 +52,8 @@ namespace Z0
         public EnvDirVar Tmp;
 
         public EnvDirVar ZBin;
+
+        public EnvPathVar CdbLogPath;
 
         public string Format()
         {
@@ -77,12 +80,21 @@ namespace Z0
             => Members(this);
 
         [Op]
-        static EnvDirVar read(string name)
+        static EnvDirVar dir(string name)
         {
             var value = Environment.GetEnvironmentVariable(name);
             if(text.blank(value))
                 root.@throw($"The environment variable '{name}' is undefined");
             return (name, FS.dir(value));
+        }
+
+        [Op]
+        static EnvPathVar path(string name)
+        {
+            var value = Environment.GetEnvironmentVariable(name);
+            if(text.blank(value))
+                root.@throw($"The environment variable '{name}' is undefined");
+            return (name, FS.path(value));
         }
 
         static Index<IEnvVar> Members(Env src)

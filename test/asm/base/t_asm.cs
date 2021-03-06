@@ -52,9 +52,7 @@ namespace Z0.Asm
 
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {
-            var paths = AppPaths.ForApp();
-            var root = paths.AppCaptureRoot;
-            var capture = ApiArchives.capture(root);
+            var capture = ApiArchives.capture(Wf.Db().CaptureRoot());
             var rows = ApiCode.hexrows(capture.HexPath(host));
             var code = rows.Map(row => new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data)));
             return code;

@@ -8,7 +8,7 @@ namespace Z0
 
     using static DbNames;
 
-    partial interface IApiPathProvider
+    partial interface IEnvPaths
     {
         FS.FolderPath ParsedExtractRoot()
             => CaptureRoot() + FS.folder(parsed);

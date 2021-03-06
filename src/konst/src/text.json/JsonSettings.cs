@@ -12,7 +12,8 @@ namespace Z0
     using System.Reflection;
     using System.Text.Json;
 
-    using static Konst;
+    using static Part;
+    using static Chars;
     using static memory;
 
     /// <summary>
@@ -32,8 +33,15 @@ namespace Z0
         public static IJsonSettings Load(FS.FilePath src)
         {
             var dst = new Dictionary<string,string>();
-            JsonData.absorb(src, dst);
-            return new JsonSettings(dst.Select(kvp => (kvp.Key, kvp.Value)));
+            if(src.Exists)
+            {
+                JsonData.absorb(src, dst);
+                return new JsonSettings(dst.Select(kvp => (kvp.Key, kvp.Value)));
+            }
+            else
+            {
+                return JsonSettings.Empty;
+            }
         }
 
         public static string format<S>(S src)

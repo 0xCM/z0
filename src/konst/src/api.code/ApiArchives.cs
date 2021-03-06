@@ -11,10 +11,6 @@ namespace Z0
 
     public readonly struct ApiArchives
     {
-        [Op]
-        public static IApiPathProvider paths(IWfShell wf)
-            => ApiPathProvider.create(wf);
-
         /// <summary>
         /// Creates a <see cref='ICaptureArchive'/> rooted at a specified path
         /// </summary>

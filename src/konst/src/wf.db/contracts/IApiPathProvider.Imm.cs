@@ -9,7 +9,7 @@ namespace Z0
     using static DbNames;
     using static Part;
 
-    partial interface IApiPathProvider
+    partial interface IEnvPaths
     {
         FS.FolderPath ImmRoot()
             => CaptureRoot() + FS.folder(imm);

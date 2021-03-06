@@ -19,10 +19,9 @@ namespace Z0
 
         void CheckBitMasks()
         {
-
             var asmWf = AsmServices.workflow(Wf);
             var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
-            var dst = Wf.AppData + FS.file("bitmasks", FS.Extensions.Asm);
+            var dst = Db.AppDataFile(FS.file("bitmasks", FS.Extensions.Asm));
             var routines = asmWf.Decode(methods, dst);
             Wf.CmdBuilder().CheckBitmasks().RunTask(Wf);
         }

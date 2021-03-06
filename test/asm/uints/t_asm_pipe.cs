@@ -24,9 +24,7 @@ namespace Z0.Asm
             var dSrc = ApiQuery.uri(typeof(math));
             var gSrc = ApiQuery.uri(typeof(gmath));
             var id = PartId.GMath;
-            var dir = Wf.Db().CaptureRoot();
-            var paths = ApiArchives.paths(Wf);
-            var parsed = paths.ParsedExtractFiles();
+            var parsed = Wf.Db().ParsedExtractFiles();
             Claim.nonzero(parsed.Count);
 
             using var writer = CaseWriter(FS.ext("csv"));

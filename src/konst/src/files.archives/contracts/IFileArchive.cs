@@ -17,25 +17,7 @@ namespace Z0
         ParseResult<TextDoc> Document(FS.FilePath src)
             => TextDocs.parse(src);
 
-        FS.Files Clear(FS.FolderName id)
-            => (Root + id).Clear(root.list<FS.FilePath>()).Array();
-
         Deferred<FS.FilePath> ArchiveFiles()
             => Root.EnumerateFiles(true);
-
-        Deferred<FS.FilePath> ArchivFiles(FS.FileExt ext)
-            => ArchiveFiles().Where(f => f.Is(ext));
-
-        FS.Files Clear(string id)
-            => Clear(FS.folder(id));
-
-        Deferred<FS.FilePath> ArchiveFiles(FS.FileExt[] ext, bool recurse)
-            => Root.EnumerateFiles(ext, recurse);
-
-        Deferred<FS.FilePath> ArchiveFiles(string pattern, bool recurse)
-            => Root.EnumerateFiles(pattern, recurse);
-
-        ListedFiles List()
-            => FS.list(ArchiveFiles().Array());
     }
 }

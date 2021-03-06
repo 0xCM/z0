@@ -27,7 +27,7 @@ namespace Z0
             Paths = paths;
             Next = msg => {};
             Random = random;
-            Settings = settings ?? JsonSettings.Load(Paths.AppConfigPath);
+            Settings = settings;
             MessageQueue = queue;
             ApiGlobal = catalog;
             ApiParts = WfShell.parts();

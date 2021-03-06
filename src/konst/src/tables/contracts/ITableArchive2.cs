@@ -8,6 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
     [Free]
     public interface ITableArchive : IFileArchive
     {
@@ -18,11 +19,10 @@ namespace Z0
         FS.FilePath TablePath(FS.FileName file)
             => Root + file;
 
-        new FS.FilePath[] Clear(FS.FolderName id)
-            => (Root + id).Clear(z.list<FS.FilePath>()).ToArray();
+        FS.FilePath[] Clear(FS.FolderName id)
+            => (Root + id).Clear(root.list<FS.FilePath>()).ToArray();
 
         void Clear()
             => Root.Clear();
     }
-
 }

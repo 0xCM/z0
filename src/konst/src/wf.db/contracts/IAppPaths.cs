@@ -8,28 +8,11 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static ArchiveFolders;
-
     [Free]
     public interface IAppPaths : IFileArchive
     {
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
-
-        /// <summary>
-        /// The name of the runtime log folder
-        /// </summary>
-        FS.FolderName AppLogFolder
-            => FS.folder(AppsFolder);
-
-        ITestLogPaths TestPaths
-            => new TestLogPaths(Root + FS.folder("logs") + FS.folder("tests"));
-
-        /// <summary>
-        /// The executing application's data directory
-        /// </summary>
-        FS.FolderPath AppDataDir
-            => (Root + FS.folder(AppsFolder)) + FS.folder(AppName);
 
         /// <summary>
         /// The name of an application configuration file
@@ -42,41 +25,5 @@ namespace Z0
         /// </summary>
         FS.FilePath AppConfigPath
             => Root + FS.folder("config") + ConfigFileName;
-
-        /// <summary>
-        /// The path to the root application resource directory
-        /// </summary>
-        FS.FolderPath ResourceRoot
-            => Root + FS.folder(RespackContent);
-
-        /// <summary>
-        /// The path to the resource index directory
-        /// </summary>
-        FS.FolderPath ResIndexDir
-            => FS.dir(ResourceRoot.Name) + FS.folder("index");
-
-        /// <summary>
-        /// The executing application's folder name
-        /// </summary>
-        FS.FolderName AppFolder
-            => FS.folder(AppName);
-
-        /// <summary>
-        /// The executing application's data directory
-        /// </summary>
-        FS.FolderPath AppDataRoot
-            => (Root + AppLogFolder) + AppFolder;
-
-        /// <summary>
-        /// The application-relative capture directory
-        /// </summary>
-        FS.FolderPath AppCaptureRoot
-            => AppDataRoot + FS.folder(CaptureFolder);
-
-        /// <summary>
-        /// Creates a path provider for the controlling application
-        /// </summary>
-        IAppPaths ForApp()
-            => WfShell.paths();
     }
 }

@@ -62,12 +62,6 @@ namespace Z0
             PartIdentities = parts;
         }
 
-        public FS.FolderPath ResDir
-            => FS.dir(Context.Paths.ResourceRoot.Name);
-
-        public FS.FolderPath IndexDir
-            => ResDir + FS.folder("index");
-
         public IWfContext Shell
             => Context;
     }

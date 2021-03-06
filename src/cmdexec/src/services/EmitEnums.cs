@@ -23,7 +23,7 @@ namespace Z0
 
         public static void run(IWfShell wf)
         {
-            wf.Db().Clear(ClrEnumRecord.TableId);
+            wf.Db().ClearTables<ClrEnumRecord>();
             var components = wf.Api.PartComponents;
             foreach(var component in components)
             {

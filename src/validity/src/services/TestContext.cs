@@ -66,12 +66,9 @@ namespace Z0
         Queue<BenchmarkRecord> Benchmarks {get;}
             = new Queue<BenchmarkRecord>();
 
-        protected IAppPaths AppPaths {get;}
-
         protected TestContext()
         {
             void Relay(IAppMsg msg) => Next(msg);
-            AppPaths = WfShell.paths();
             Context = this;
             Next += x => {};
             Queue = AppMsgExchange.Create();
@@ -163,9 +160,6 @@ namespace Z0
 
         protected ICheckNumeric ClaimNumeric
             => CheckNumeric.Checker;
-
-        public ITestLogPaths TestPaths
-            => AppPaths.TestPaths;
 
         protected PartId TestedPart
             => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);

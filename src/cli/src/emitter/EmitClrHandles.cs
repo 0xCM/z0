@@ -22,7 +22,7 @@ namespace Z0
 
         public static CmdResult run(IWfShell wf, EmitClrHandlesCmd cmd)
         {
-            wf.Db().Clear(ClrHandleRecord.TableId);
+            //wf.Db().Clear(ClrHandleRecord.TableId);
             var components = wf.Api.PartComponents;
             foreach(var component in components)
                 EmitClrHandles.create().Run(wf, component);

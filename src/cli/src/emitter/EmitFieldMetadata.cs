@@ -35,7 +35,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Parts = wf.Api.Parts;
-            TargetDir = wf.ResourceRoot + FS.folder("fields");
+            TargetDir = wf.Db().TableDir("resources") + FS.folder("fields");
             Wf.Created();
         }
 

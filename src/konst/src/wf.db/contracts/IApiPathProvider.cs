@@ -8,10 +8,10 @@ namespace Z0
 
     using static DbNames;
 
-    public partial interface IApiPathProvider : IFileArchive
+    partial interface IEnvPaths
     {
         FS.FolderPath CaptureRoot()
-            => Root + FS.folder(capture);
+            => DbRoot() + FS.folder(capture);
 
         FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
             => id.ToFileName(ext);

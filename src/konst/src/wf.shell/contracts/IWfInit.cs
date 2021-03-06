@@ -48,9 +48,5 @@ namespace Z0
         /// The parts considered by the workflow
         /// </summary>
         PartId[] PartIdentities {get;}
-
-        FS.FolderPath ResDir {get;}
-
-        FS.FolderPath IndexDir {get;}
     }
 }

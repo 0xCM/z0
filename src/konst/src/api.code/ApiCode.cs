@@ -196,7 +196,7 @@ namespace Z0
         [Op]
         public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
         {
-            var paths = ApiArchives.paths(wf);
+            var paths = wf.Db();
             var files = paths.ApiHexFiles().View;
             var empty = Index<ApiCodeDescriptor>.Empty;
             if(files.Length == 0)

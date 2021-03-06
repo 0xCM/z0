@@ -9,9 +9,6 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Provides the canonical <see cref='IAppPaths'/> implementation
-    /// </summary>
     public readonly struct AppPaths : IAppPaths
     {
         public FS.FolderPath Root {get;}

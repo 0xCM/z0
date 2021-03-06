@@ -28,6 +28,8 @@ namespace Z0
             var controlId = control.Id();
             var dbRoot = Env.create().Db.Value;
 
+            var jsonConfigPath = dbRoot + FS.folder("settings") + FS.file(controlId.Format(), FS.Extensions.JsonConfig);
+
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));
 
@@ -54,7 +56,7 @@ namespace Z0
             ctx.ApiParts = parts;
             ctx.Args = args;
             ctx.Paths = _paths;
-            ctx.Settings = JsonSettings.Load(_paths.AppConfigPath);
+            ctx.Settings = JsonSettings.Load(jsonConfigPath);
             ctx.Controller = control;
             status.InitConfigTime = clock.Elapsed;
 
@@ -85,7 +87,7 @@ namespace Z0
             status.Args = args;
             status.Controller = controlId;
             status.Parts = partIdList;
-            status.AppConfigPath = _paths.AppConfigPath;
+            status.AppConfigPath = jsonConfigPath;
 
             return wf;
         }
