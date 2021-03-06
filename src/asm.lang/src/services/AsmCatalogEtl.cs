@@ -241,7 +241,7 @@ namespace Z0.Asm
         {
             var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
             var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
-            var count = Records.emit(src.Map(record), dst, AsmSpecifierWidths);
+            var count = Records.emit(src.Map(record), dst, AsmFormWidths);
             Wf.EmittedTable(flow, count);
         }
 
@@ -336,7 +336,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        static ReadOnlySpan<byte> AsmSpecifierWidths
+        static ReadOnlySpan<byte> AsmFormWidths
             => new byte[]{8,48,12,32};
 
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";

@@ -10,7 +10,6 @@ namespace Z0
     {
         public string Symbol {get;}
 
-
         public string Description {get;}
 
         public SymbolAttribute(string symbol)

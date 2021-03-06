@@ -10,6 +10,8 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
+    using K = AsmWfCmdKind;
+
 
     class App : WfService<App>
     {
@@ -39,23 +41,42 @@ namespace Z0.Asm
 
         AsmCatalogEtl Catalog;
 
-
         IAsmContext Asm;
 
         ApiServices ApiServices;
 
         AsmServices AsmServices;
 
-        void ShowSigOpTokens()
+        [Action(K.ShowCatalogSymbols)]
+        public void ShowCatalogSymbols()
+        {
+            var symbols =  Catalog.CatalogSymbols;
+            root.iter(symbols.Flags, f => Wf.Row(f));
+        }
+
+        [Action(K.EmitResBytes)]
+        public void EmitResBytes()
+        {
+            Wf.ResBytesEmitter().Emit();
+        }
+
+        [Action(K.ShowSigOpTokens)]
+        public void ShowSigOpTokens()
         {
             var tokens = AsmSigs.tokens();
             root.iter(tokens, item => Wf.Row(item.Format()));
         }
 
-        void EmitApiClasses()
+        [Action(K.EmitApiClasses)]
+        public void EmitApiClasses()
             => ApiServices.EmitApiClasses();
 
-        void ShowMnemonicSymbols()
+        [Action(K.EmitSymbolicLiterals)]
+        public void EmitSymbolicLiterals()
+            => ApiServices.EmitSymbolicLiterals();
+
+        [Action(K.ShowMnemonicSymbols)]
+        public void ShowMnemonicSymbols()
         {
             const string FormatPattern = "{0, -8} | {1, -8} | {2}";
             var literals = Catalog.MnemonicSymbols();
@@ -68,7 +89,8 @@ namespace Z0.Asm
             }
         }
 
-        void ShowSpecifiers()
+        [Action(K.ShowAsmForms)]
+        public void ShowAsmForms()
         {
             var specifiers = Catalog.Specifiers();
             var count = specifiers.Length;
@@ -79,10 +101,83 @@ namespace Z0.Asm
             }
         }
 
-        void EmitSpecifiers()
+        [Action(K.EmitAsmForms)]
+        public void EmitAsmForms()
         {
-            var specifiers = Catalog.Specifiers();
-            Catalog.Emit(specifiers);
+            Catalog.Emit(Catalog.Specifiers());
+        }
+
+        [Action(K.ShowEncodingKindNames)]
+        public void ShowEncodingKindNames()
+        {
+            root.iter(Catalog.EncodingKindNames(), Wf.Row);
+        }
+
+        [Action(K.ExportStokeImports)]
+        public void ExportStokeImports()
+        {
+            Catalog.ExportImport();
+        }
+
+        [Action(K.DistillAsmStatements)]
+        public void DistillAsmStatements()
+        {
+            Wf.AsmDistiller().DistillStatements();
+        }
+
+        [Action(K.ShowRexBits)]
+        public void ShowRexBits()
+        {
+            var codes = AsmBytes.rexbits();
+            var count = codes.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var code = ref skip(codes,i);
+                Wf.Row(code.Format());
+            }
+        }
+
+        [Action(K.EmitImmSpecializations)]
+        public void EmitImmSpecializations()
+        {
+            var emitter = Wf.ImmEmitter();
+            emitter.Emit();
+
+        }
+
+        [Action(K.CheckDigitParser)]
+        public void CheckDigitParser()
+        {
+            var cases = DigitParserCases.positive();
+            var results = DigitParserCases.run(cases).View;
+            var count = results.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var result = ref skip(results,i);
+                if(result.Passed)
+                    Wf.Status(result.Format());
+                else
+                    Wf.Error(result.Format());
+            }
+        }
+
+        [Action(K.UpdateToolHelpIndex)]
+        public void UpdateToolHelpIndex()
+        {
+            var catalog = Tools.catalog(Wf);
+            var index = catalog.UpdateHelpIndex();
+            root.iter(index, entry => Wf.Row(entry.HelpPath));
+        }
+
+        [Action(K.CorrelateApiCode)]
+        public void CorrelateApiCode()
+        {
+            var catalogs = Wf.Api.PartCatalogs();
+            var blocks = ApiServices.Correlate(catalogs);
+            // var flow = Wf.Running("Evaluator");
+            // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
+            // evaluate.Execute(Wf.Api.PartIdentities);
+            // Wf.Ran(flow);
         }
 
         public void GenBits()
@@ -103,19 +198,6 @@ namespace Z0.Asm
             Wf.Row(s0.ToString());
         }
 
-
-        void ShowEncodingKindNames()
-        {
-            root.iter(Catalog.EncodingKindNames(), Wf.Row);
-        }
-
-
-        void CheckAsmSymbols()
-        {
-            // var table = AsmSigs.table();
-            // var tokens = table.Tokens;;
-            // root.iter(tokens, e => Wf.Row(e));
-        }
 
         ApiHostCaptureSet RunCapture(Type host)
         {
@@ -266,26 +348,13 @@ namespace Z0.Asm
             archive.CodeBlocks(part, accept);
         }
 
-        void Correlate()
-        {
-            var catalogs = Wf.Api.PartCatalogs();
-            var blocks = ApiServices.Correlate(catalogs);
-            // var flow = Wf.Running("Evaluator");
-            // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
-            // evaluate.Execute(Wf.Api.PartIdentities);
-            // Wf.Ran(flow);
-        }
+
 
         void CheckDataReader()
         {
             var reader = Wf.AsmDataReader();
             var calls = reader.LoadCallRows();
             Wf.Status($"Loaded {calls.Count} call rows");
-        }
-
-        void ExportAsmCatRows()
-        {
-
         }
 
         WfCmdIndex RegisterCommands()
@@ -297,26 +366,6 @@ namespace Z0.Asm
             Wf.Row(imap.Format());
         }
 
-        void ShowCatalogSymbols()
-        {
-            var symbols =  Catalog.CatalogSymbols;
-            root.iter(symbols.Flags, f => Wf.Row(f));
-        }
-
-        void EmitResBytes()
-        {
-            Wf.ResBytesEmitter().Emit();
-        }
-
-        // static void Run32(IWfShell wf)
-        // {
-        //     var llvm = Llvm.service(wf);
-        //     var cases = llvm.Paths.Test.ModuleDir(ModuleNames.Analysis, TestSubjects.AliasSet);
-        //     var cmd = WinCmd.dir(cases);
-        //     var runner = ScriptRunner.create();
-        //     runner.Run(cmd);
-        // }
-
         void RunScripts()
         {
             var runner = ScriptRunner.create(Wf.Env);
@@ -326,19 +375,7 @@ namespace Z0.Asm
             runner.RunPsScript(llvm.ml, "lex");
         }
 
-        void CheckToolCatalog()
-        {
-            var catalog = Tools.catalog(Wf);
-            var index = catalog.UpdateHelpIndex();
-            root.iter(index, entry => Wf.Row(entry.HelpPath));
 
-        }
-
-        public void ExportStokeImports()
-        {
-            Catalog.ExportImport();
-
-        }
 
         void SplitFiles()
         {
@@ -363,62 +400,20 @@ namespace Z0.Asm
             var count = cases.Length;
             for(var i=0; i<count; i++)
                 Wf.Row(skip(cases,i).Format());
-
         }
 
-        public void DistillAsmStatements()
-        {
-            Wf.AsmDistiller().DistillStatements();
-
-        }
-
-    /// <summary>
-    /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
-    /// </summary>
+        /// <summary>
+        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
+        /// </summary>
 
         void ShowModRmBits()
         {
             var parts = new byte[2]{2,5};
             var codes = AsmBytes.modrm().View;
             var count = codes.Length;
-
         }
 
-        public void ShowRexBits()
-        {
-            var codes = AsmBytes.rexbits();
-            var count = codes.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var code = ref skip(codes,i);
-                Wf.Row(code.Format());
-            }
-        }
-
-        void CheckDigitParser()
-        {
-            var cases = DigitParserCases.positive();
-            var results = DigitParserCases.run(cases).View;
-            var count = results.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var result = ref skip(results,i);
-                if(result.Passed)
-                    Wf.Status(result.Format());
-                else
-                    Wf.Error(result.Format());
-            }
-
-        }
-
-        public void EmitImmSpecializations()
-        {
-            var emitter = Wf.ImmEmitter();
-            emitter.Emit();
-
-        }
-
-        public CmdResult Run(AsmWfCmdKind kind)
+        public CmdResult Run(K kind)
         {
 
             if(WorkflowCommands.find(kind, out var cmd))
@@ -431,8 +426,11 @@ namespace Z0.Asm
         public void Run()
         {
             RegisterCommands();
-            Run(AsmWfCmdKind.ShowRexBits);
-            Run(AsmWfCmdKind.ExportStokeImports);
+            Run(K.ShowRexBits);
+            Run(K.ExportStokeImports);
+            Run(K.ShowSigOpTokens);
+            Run(K.ShowMnemonicSymbols);
+            Run(K.EmitSymbolicLiterals);
 
         }
 
