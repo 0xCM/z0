@@ -37,9 +37,9 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (Digital.u64(@base, c0) << 0*width);
-            packed |= (Digital.u64(@base, c1) << 1*width);
-            packed |= (Digital.u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
             return packed;
         }
 
@@ -55,10 +55,10 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (Digital.u64(@base, c0) << 0*width);
-            packed |= (Digital.u64(@base, c1) << 1*width);
-            packed |= (Digital.u64(@base, c2) << 2*width);
-            packed |= (Digital.u64(@base, c3) << 3*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c3) << 3*width);
             return packed;
         }
 
@@ -75,11 +75,11 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (Digital.u64(@base, c0) << 0*width);
-            packed |= (Digital.u64(@base, c1) << 1*width);
-            packed |= (Digital.u64(@base, c2) << 2*width);
-            packed |= (Digital.u64(@base, c3) << 3*width);
-            packed |= (Digital.u64(@base, c4) << 4*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c3) << 3*width);
+            packed |= (u64(@base, c4) << 4*width);
             return packed;
         }
 
@@ -99,14 +99,14 @@ namespace Z0
         {
             const int width = 4;
             var packed = 0ul;
-            packed |= (Digital.u64(@base, c0) << 0*width);
-            packed |= (Digital.u64(@base, c1) << 1*width);
-            packed |= (Digital.u64(@base, c2) << 2*width);
-            packed |= (Digital.u64(@base, c3) << 3*width);
-            packed |= (Digital.u64(@base, c4) << 4*width);
-            packed |= (Digital.u64(@base, c5) << 5*width);
-            packed |= (Digital.u64(@base, c6) << 6*width);
-            packed |= (Digital.u64(@base, c7) << 7*width);
+            packed |= (u64(@base, c0) << 0*width);
+            packed |= (u64(@base, c1) << 1*width);
+            packed |= (u64(@base, c2) << 2*width);
+            packed |= (u64(@base, c3) << 3*width);
+            packed |= (u64(@base, c4) << 4*width);
+            packed |= (u64(@base, c5) << 5*width);
+            packed |= (u64(@base, c6) << 6*width);
+            packed |= (u64(@base, c7) << 7*width);
             return packed;
         }
     }

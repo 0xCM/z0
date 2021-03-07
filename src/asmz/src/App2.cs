@@ -274,41 +274,52 @@ namespace Z0.Asm
             var count = codes.Length;
         }
 
-        void ProcessStatements()
-        {
-            var flow = Wf.Running($"Processing current statement set");
-            var distiller = Wf.AsmDistiller();
-            var paths = distiller.Distillations();
-            OpCodes = OpCodeLookup.create();
-            Sigs = SignatureLookup.create();
-            Forms = FormLookup.create();
-            foreach(var path in paths)
-            {
-                var loading = Wf.Running($"Loading <{path}>");
-                var data = distiller.LoadDistillation(path).View;
-                var count = data.Length;
-                Wf.Ran(loading, $"Loaded <{count}> statements from <{path.ToUri()}>");
-
-                var processing = Wf.Running($"Processing <{count}> statements from <{path.ToUri()}>");
-                ProcessStatements(data);
-                Wf.Ran(processing,$"Processed <{count}> statements from <{path.ToUri()}>");
-            }
-            Wf.Ran(flow,$"Collected {OpCodes.Count} distinct opcodes, {Sigs.Count} distinct signatures and {Forms.Count} distinct combined forms");
-
-            var sorted = Forms.Values.OrderBy(x => x.OpCode).Array();
-            var pipe = AsmFormPipe.create(Wf);
-            var target = Db.IndexTable<AsmFormRecord>();
-            pipe.Emit(sorted,target);
-            //var dst = Db.IndexTable<Form>();
-            //AsmFormPipe.create(Wf)
-
-        }
-
         OpCodeLookup OpCodes;
 
         SignatureLookup Sigs;
 
         FormLookup Forms;
+
+
+        static MsgPattern<Count,Count,Count> CollectedForms => "Collected {0} distinct opcodes, {1} distinct signatures and {2} distinct combined forms";
+
+        static MsgPattern<FS.FileUri> LoadingStatements => "Loading statements from {0}";
+
+        static MsgPattern<Count,FS.FileUri> LoadedStatments => "Loading {0} statements from {1}";
+
+        static MsgPattern<Count,FS.FileUri> ProcessingStatments => "Processing {0} statements from {1}";
+
+        static MsgPattern<Count,FS.FileUri> ProcessedStatements => "Processed {0} statements from {1}";
+
+
+
+        void ProcessStatements()
+        {
+            var distiller = Wf.AsmDistiller();
+            var paths = distiller.Distillations();
+            var flow = Wf.Running("Processing current statement set");
+            OpCodes = OpCodeLookup.create();
+            Sigs = SignatureLookup.create();
+            Forms = FormLookup.create();
+            foreach(var path in paths)
+            {
+                var loading = Wf.Running(LoadingStatements.Format(path));
+                var data = distiller.LoadDistillation(path).View;
+                var count = data.Length;
+                Wf.Ran(loading, LoadedStatments.Format(count,path));
+
+                var processing = Wf.Running(ProcessingStatments.Format(count,path));
+                ProcessStatements(data);
+                Wf.Ran(processing,ProcessedStatements.Format(count,path));
+            }
+
+            Wf.Ran(flow, CollectedForms.Format(OpCodes.Count, Sigs.Count, Forms.Count));
+            var sorted = Forms.Values.OrderBy(x => x.OpCode).Array();
+            var pipe = AsmFormPipe.create(Wf);
+            var target = Db.IndexTable<AsmFormRecord>();
+            pipe.Emit(sorted,target);
+        }
+
 
         void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src)
         {
@@ -325,8 +336,6 @@ namespace Z0.Asm
                     Forms.AddIfMissing(asm.form(statement.OpCode, statement.Sig));
                 }
             }
-
-            AsmFormPipe.create(Wf).Emit(Forms.Values.Array(), Db.IndexTable<AsmFormRecord>());
         }
 
         public void Run()

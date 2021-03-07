@@ -77,5 +77,17 @@ namespace Z0
             [MethodImpl(Inline)]
             get => memory.recover<HSL>(LowerSymData);
         }
+
+        public static byte LowerSymbolCount
+        {
+            [MethodImpl(Inline)]
+            get => (byte)LowerSymData.Length;
+        }
+
+        public static byte UpperSymbolCount
+        {
+            [MethodImpl(Inline)]
+            get => (byte)UpperSymData.Length;
+        }
     }
 }

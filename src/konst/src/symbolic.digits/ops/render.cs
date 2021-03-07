@@ -20,7 +20,7 @@ namespace Z0
         public static void render(ReadOnlySpan<BinaryDigit> src, Span<char> dst)
         {
             for(var i=0u; i<src.Length; i++)
-                seek(dst,i) =  (char)Symbolic.symbol(skip(src,i));
+                seek(dst,i) =  (char)symbol(skip(src,i));
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         public static void render(ReadOnlySpan<DecimalDigit> src, Span<char> dst)
         {
             for(var i = 0u; i< src.Length; i++)
-                seek(dst,i) = (char)Symbolic.symbol(skip(src,i));
+                seek(dst,i) = (char)symbol(skip(src,i));
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         public static void render(ReadOnlySpan<HexDigit> src, Span<char> dst)
         {
             for(var i=0u; i < src.Length; i++)
-                seek(dst,i) = (char)Symbolic.symbol(UpperCase, skip(src,i));
+                seek(dst,i) = (char)symbol(UpperCase, skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -53,14 +53,14 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var cell = ref skip(src,i);
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00000001 & cell) >> 0));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00000010 & cell) >> 1));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00000100 & cell) >> 2));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00001000 & cell) >> 3));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00010000 & cell) >> 4));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b00100000 & cell) >> 5));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b01000000 & cell) >> 6));
-                seek(dst, j++) = (char)Symbolic.symbol(@base, (byte)((0b10000000 & cell) >> 7));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000001 & cell) >> 0));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000010 & cell) >> 1));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00000100 & cell) >> 2));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00001000 & cell) >> 3));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00010000 & cell) >> 4));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b00100000 & cell) >> 5));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b01000000 & cell) >> 6));
+                seek(dst, j++) = (char)symbol(@base, (byte)((0b10000000 & cell) >> 7));
             }
         }
 
@@ -80,7 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static char hexchar(UpperCased @case, byte index)
-            => (char)Symbolic.symbol(@case, (HexDigit)index);
+            => (char)symbol(@case, (HexDigit)index);
 
         [MethodImpl(Inline), Op]
         public static int render(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src, Span<char> dst)

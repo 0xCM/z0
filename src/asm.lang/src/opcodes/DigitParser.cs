@@ -59,7 +59,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool digit(Base2 @base, char c, out BinaryDigit dst)
         {
-            if(DigitTests.test(@base, c))
+            if(Digital.test(@base, c))
             {
                 dst = (BinaryDigit)((BinaryDigitCode)c - B.MinCode);
                 return true;
@@ -74,7 +74,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool digit(Base8 @base, char c,  out OctalDigit dst)
         {
-            if(DigitTests.test(@base, c))
+            if(Digital.test(@base, c))
             {
                 dst = (OctalDigit)((OctalCode)c - O.MinCode);
                 return true;
@@ -89,7 +89,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool digit(Base10 @base, char c, out DecimalDigit dst)
         {
-            if(DigitTests.test(@base, c))
+            if(Digital.test(@base, c))
             {
                 dst = (DecimalDigit)((DecimalCode)c - D.MinCode);
                 return true;
@@ -104,17 +104,17 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool digit(Base16 @base, char c, out HexDigit dst)
         {
-            if(DigitTests.scalar(@base, c))
+            if(Digital.scalar(@base, c))
             {
                 dst = (HexDigit)((HexCode)c - X.MinScalarCode);
                 return true;
             }
-            else if(DigitTests.upper(@base, c))
+            else if(Digital.upper(@base, c))
             {
                 dst = (HexDigit)((HexCode)c - X.MinLetterCodeU + 0xA);
                 return true;
             }
-            else if(DigitTests.lower(@base,c))
+            else if(Digital.lower(@base,c))
             {
                 dst = (HexDigit)((HexCode)c - X.MinLetterCodeL + 0xa);
                 return true;

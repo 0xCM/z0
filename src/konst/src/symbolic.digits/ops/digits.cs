@@ -201,27 +201,27 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<D> digits(ReadOnlySpan<char> src, Span<D> dst)
+        public static Span<DecimalDigit> digits(ReadOnlySpan<char> src, Span<DecimalDigit> dst)
         {
-            var len = src.Length;
-            for(var i=0u; i< len; i++)
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
                 seek(dst,i) = Digital.digit(base10, skip(src,i));
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HexSymLo> src, Span<X> dst)
+        public static void digits(ReadOnlySpan<HexSymLo> src, Span<HexDigit> dst)
         {
-            var len = src.Length;
-            for(var i=0u; i<len; i++)
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
                 seek(dst,i) = Digital.digit(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<HexSymUp> src, Span<X> dst)
+        public static void digits(ReadOnlySpan<HexSymUp> src, Span<HexDigit> dst)
         {
-            var len = src.Length;
-            for(var i=0u; i<len; i++)
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
                 seek(dst,i) = Digital.digit(skip(src,i));
         }
 
@@ -236,35 +236,35 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(byte src, Span<BinaryDigit> dst)
         {
-            seek(dst,0) = (BinaryDigit)((0b00000001 & src) >> 0);
-            seek(dst,1) = (BinaryDigit)((0b00000010 & src) >> 1);
-            seek(dst,2) = (BinaryDigit)((0b00000100 & src) >> 2);
-            seek(dst,3) = (BinaryDigit)((0b00001000 & src) >> 3);
-            seek(dst,4) = (BinaryDigit)((0b00010000 & src) >> 4);
-            seek(dst,5) = (BinaryDigit)((0b00100000 & src) >> 5);
-            seek(dst,6) = (BinaryDigit)((0b01000000 & src) >> 6);
-            seek(dst,7) = (BinaryDigit)((0b10000000 & src) >> 7);
+            seek(dst, 0) = (BinaryDigit)((0b00000001 & src) >> 0);
+            seek(dst, 1) = (BinaryDigit)((0b00000010 & src) >> 1);
+            seek(dst, 2) = (BinaryDigit)((0b00000100 & src) >> 2);
+            seek(dst, 3) = (BinaryDigit)((0b00001000 & src) >> 3);
+            seek(dst, 4) = (BinaryDigit)((0b00010000 & src) >> 4);
+            seek(dst, 5) = (BinaryDigit)((0b00100000 & src) >> 5);
+            seek(dst, 6) = (BinaryDigit)((0b01000000 & src) >> 6);
+            seek(dst, 7) = (BinaryDigit)((0b10000000 & src) >> 7);
         }
 
         [MethodImpl(Inline), Op]
         public static void digits(ushort src, Span<BinaryDigit> dst)
         {
             digits((byte)src, dst);
-            digits((byte)(src >> 8), dst.Slice(8));
+            digits((byte)(src >> 8), slice(dst, 8));
         }
 
         [MethodImpl(Inline), Op]
         public static void digits(uint src, Span<BinaryDigit> dst)
         {
             digits((ushort)src,dst);
-            digits((ushort)(src >> 16),dst.Slice(16));
+            digits((ushort)(src >> 16), slice(dst,16));
         }
 
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, Span<BinaryDigit> dst)
         {
             digits((uint)src,dst);
-            digits((uint)(src >> 32), dst.Slice(32));
+            digits((uint)(src >> 32), slice(dst, 32));
         }
 
         /// <summary>
@@ -305,10 +305,10 @@ namespace Z0
             => digits(src,NatSpan.alloc<N4,byte>());
 
         [MethodImpl(Inline), Op]
-        public static void digits(ReadOnlySpan<BinarySym> src, Span<B> dst)
+        public static void digits(ReadOnlySpan<BinarySym> src, Span<BinaryDigit> dst)
         {
-            var len = src.Length;
-            for(var i=0u; i<len; i++)
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
                 seek(dst,i) = Digital.digit(skip(src,i));
         }
 
@@ -319,16 +319,25 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<OctalDigit> digits(Perm8L src, Span<OctalDigit> dst)
         {
+            return digits((uint)src, dst);
+        }
+
+        /// <summary>
+        /// Computes the digits corresponding to each 3-bit segment of a <see cref='uint'/> value
+        /// </summary>
+        /// <param name="src">The perm spec</param>
+        [MethodImpl(Inline), Op]
+        public static Span<OctalDigit> digits(uint src, Span<OctalDigit> dst)
+        {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
-            var scalar = (uint)src;
-            seek(dst,0) = (OctalDigit)BitMasks.extract(scalar, 0, 2);
-            seek(dst,1) = (OctalDigit)BitMasks.extract(scalar, 3, 5);
-            seek(dst,2) = (OctalDigit)BitMasks.extract(scalar, 6, 8);
-            seek(dst,3) = (OctalDigit)BitMasks.extract(scalar, 9, 11);
-            seek(dst,4) = (OctalDigit)BitMasks.extract(scalar, 12, 14);
-            seek(dst,5) = (OctalDigit)BitMasks.extract(scalar, 15, 17);
-            seek(dst,6) = (OctalDigit)BitMasks.extract(scalar, 18, 20);
-            seek(dst,7) = (OctalDigit)BitMasks.extract(scalar, 21, 23);
+            seek(dst,0) = (OctalDigit)BitMasks.extract(src, 0, 2);
+            seek(dst,1) = (OctalDigit)BitMasks.extract(src, 3, 5);
+            seek(dst,2) = (OctalDigit)BitMasks.extract(src, 6, 8);
+            seek(dst,3) = (OctalDigit)BitMasks.extract(src, 9, 11);
+            seek(dst,4) = (OctalDigit)BitMasks.extract(src, 12, 14);
+            seek(dst,5) = (OctalDigit)BitMasks.extract(src, 15, 17);
+            seek(dst,6) = (OctalDigit)BitMasks.extract(src, 18, 20);
+            seek(dst,7) = (OctalDigit)BitMasks.extract(src, 21, 23);
             return dst;
         }
 
@@ -337,14 +346,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         public static Span<OctalDigit> digits(Perm8L src)
-            => digits(src, z.alloc<OctalDigit>(8));
+            => digits(src, alloc<OctalDigit>(8));
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Span<HexDigit> digits(Perm16L src, Span<X> dst)
+        public static Span<HexDigit> digits(Perm16L src, Span<HexDigit> dst)
         {
             var scalar = (ulong)src;
             seek(dst,0) = (X)BitMasks.extract(scalar, 0, 3);
@@ -370,7 +379,7 @@ namespace Z0
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        public static Span<X> digits(Perm16L src)
-            => digits(src, z.alloc<X>(16));
+        public static Span<HexDigit> digits(Perm16L src)
+            => digits(src, alloc<HexDigit>(16));
     }
 }

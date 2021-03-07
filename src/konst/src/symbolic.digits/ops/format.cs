@@ -16,7 +16,6 @@ namespace Z0
     /// </summary>
     partial struct Digital
     {
-        [Op]
         public static string format(ReadOnlySpan<BinaryDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
@@ -24,7 +23,6 @@ namespace Z0
             return @string(dst);
         }
 
-        [Op]
         public static string format(ReadOnlySpan<DecimalDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
@@ -32,7 +30,6 @@ namespace Z0
             return @string(dst);
         }
 
-        [Op]
         public static string format(ReadOnlySpan<HexDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
@@ -40,7 +37,6 @@ namespace Z0
             return @string(dst);
         }
 
-        [Op]
         public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
         {
             Span<char> digits = stackalloc char[src.Length*3];
@@ -48,7 +44,6 @@ namespace Z0
             return @string(digits);
         }
 
-        [MethodImpl(Inline), Op]
         public static string format(in BinaryCode src)
         {
             var dst = span<char>(src.Length);
@@ -56,14 +51,5 @@ namespace Z0
             return sys.@string(dst);
         }
 
-        [MethodImpl(Inline), Op]
-        public static void decode(in BinaryCode src, Span<char> dst)
-        {
-            var count = src.Length;
-            var view = src.View;
-
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = (char)skip(view,i);
-        }
     }
 }

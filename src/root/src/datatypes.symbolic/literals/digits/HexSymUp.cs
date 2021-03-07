@@ -9,6 +9,8 @@ namespace Z0
     /// </summary>
     public enum HexSymUp : ushort
     {
+        None = 0,
+
         /// <summary>
         /// Specifies 0 base 16, asci code 48
         /// </summary>
@@ -18,12 +20,12 @@ namespace Z0
         /// Specifies 1 base 16, asci code 49
         /// </summary>
         x1 = '1',
-        
+
         /// <summary>
         /// Specifies 2 base 16, asci code 50
         /// </summary>
         x2 = '2',
-        
+
         /// <summary>
         /// Specifies 3 base 16, asci code 51
         /// </summary>
@@ -48,12 +50,12 @@ namespace Z0
         /// Specifies 7 base 16
         /// </summary>
         x7 = '7',
-        
+
         /// <summary>
         /// Specifies 8 base 16
         /// </summary>
         x8 = '8',
-        
+
         /// <summary>
         /// Specifies 9 base 16
         /// </summary>
@@ -88,5 +90,5 @@ namespace Z0
         /// Specifies 15 base 16, asci code 70
         /// </summary>
         F = 'F',
-    }    
+    }
 }

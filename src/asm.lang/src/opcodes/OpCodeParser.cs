@@ -9,6 +9,21 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static Chars;
+    using static Pow2x32;
+    using static Rules;
+    using static TextRules;
+
+    enum OpCodePart : uint
+    {
+        None = 0,
+
+        HexDigit,
+
+        RegDigit,
+
+        Prefix,
+    }
 
     public ref struct OpCodeParser
     {
@@ -48,7 +63,12 @@ namespace Z0.Asm
         {
             if(CurrentPos < LastPos)
             {
-                c = skip(Subject,CurrentPos++);
+                var prior = CurrentPos != 0 ? skip(Subject,CurrentPos) : Null;
+                c = skip(Subject, CurrentPos++);
+                if(prior == Null)
+                    Classify(c,Null);
+                else
+                    Classify(prior,c);
                 return true;
             }
             else
@@ -58,7 +78,12 @@ namespace Z0.Asm
             }
         }
 
+        void Classify(char c0, char c1)
+        {
+            if(c1 == Null)
+            {
 
+            }
+        }
     }
-
 }

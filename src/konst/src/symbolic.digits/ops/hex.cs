@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static HexCharData;
 
     using XF = HexSymFacet;
 
@@ -16,30 +17,35 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static HexSymLo hex(LowerCased casing, byte index)
-            => skip(HexCharData.LowerSymbols, index);
+            => index < LowerSymbolCount ? skip(LowerSymbols, index) : HexSymLo.None;
 
         [MethodImpl(Inline), Op]
         public static HexSymUp hex(UpperCased casing, byte index)
-            => skip(HexCharData.UpperSymbols, index);
+            => index < UpperSymbolCount ? skip(UpperSymbols, index) : HexSymUp.None;
 
         [MethodImpl(Inline), Op]
         public static HexSym hex(LowerCased @case, HexDigit src)
             => src <= HexDigit.x9
-                ? (HexSym)((byte)src + (byte)HexSymFacet.FirstNumber)
-                : (HexSym)((byte)src + (byte)HexSymFacet.FirstLetterLo);
+                ? (HexSym)((byte)src + (byte)XF.FirstNumber)
+                : (HexSym)((byte)src + (byte)XF.FirstLetterLo);
 
         [MethodImpl(Inline), Op]
         public static HexSym hex(UpperCased @case, HexDigit src)
             => src <= HexDigit.x9
-                ? (HexSym)((byte)src + (byte)HexSymFacet.FirstNumber)
-                : (HexSym)((byte)src + (byte)HexSymFacet.FirstLetterUp);
-
-        [MethodImpl(Inline), Op]
-        public static char hexchar(LowerCased @case, byte index)
-            => (char)Symbolic.symbol(@case, (HexDigit)index);
+                ? (HexSym)((byte)src + (byte)XF.FirstNumber)
+                : (HexSym)((byte)src + (byte)XF.FirstLetterUp);
 
         /// <summary>
-        /// Tests whether a lowercase hex symbol is a numeral
+        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
+        /// </summary>
+        /// <param name="case">The case specifier</param>
+        /// <param name="value">The digit value</param>
+        [MethodImpl(Inline), Op]
+        public static char hexchar(LowerCased @case, HexDigit value)
+            => value == HexDigit.None ? Chars.Null : (char)Symbolic.symbol(@case, value);
+
+        /// <summary>
+        /// Tests whether a <see cref='HexSymLo'/> value is one of '0',...,'9'
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
@@ -47,28 +53,12 @@ namespace Z0
             => (XF)src <= XF.LastNumber;
 
         /// <summary>
-        /// Tests whether a uppercase hex symbol is a numeral
+        /// Tests whether a <see cref='HexSymUp'/> value is one of '0',...,'9'
         /// </summary>
         /// <param name="src">The symbol to test</param>
         [MethodImpl(Inline), Op]
         public static bool number(HexSymUp src)
             => (XF)src <= XF.LastNumber;
-
-        /// <summary>
-        /// Tests whether a lowercase hex symbol is a letter
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool hex(HexSymLo src)
-            => (XF)src >= XF.FirstLetterLo;
-
-        /// <summary>
-        /// Tests whether an uppercase hex symbol is a letter
-        /// </summary>
-        /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        public static bool hex(HexSymUp src)
-            => (XF)src >= XF.FirstLetterUp;
 
         /// <summary>
         /// Determines whether a character is an upper-cased hex digit
@@ -91,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
-        public static bool hext(char c)
+        public static bool hex(char c)
             => hexscalar(c) || hexlower(c) || hexupper(c);
 
         /// <summary>
@@ -99,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool hexscalar(char c)
+        static bool hexscalar(char c)
             => (XF)c >= XF.FirstNumber && (XF)c <= XF.LastNumber;
 
         /// <summary>
@@ -107,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool hexupper(char c)
+        static bool hexupper(char c)
             => (XF)c >= XF.FirstLetterUp && (XF)c <= XF.LastLetterUp;
 
         /// <summary>
@@ -115,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline)]
-        public static bool hexlower(char c)
+        static bool hexlower(char c)
             => (XF)c >= XF.FirstLetterLo && (XF)c <= XF.LastLetterUp;
     }
 }

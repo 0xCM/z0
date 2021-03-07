@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -15,8 +15,10 @@ namespace Z0.Asm
     using B = BinaryDigitFacets;
     using X = HexDigitFacets;
 
-    [ApiHost]
-    public readonly struct DigitTests
+    /// <summary>
+    /// Defines operations over character digits
+    /// </summary>
+    partial struct Digital
     {
         /// <summary>
         /// Determines whether a character can be interpreted as a <see cref='OctalCode'/> or <see cref='OctalSym'/>
@@ -72,7 +74,7 @@ namespace Z0.Asm
         /// <param name="c">The character to test</param>
         [MethodImpl(Inline), Op]
         public static bool test(Base16 @base, char c)
-            => scalar(@base,c) || upper(@base, c) || lower(@base,c);
+            => scalar(@base, c) || upper(@base, c) || lower(@base,c);
 
         /// <summary>
         /// Determines whether a character corresponds to one of the lower hex codes

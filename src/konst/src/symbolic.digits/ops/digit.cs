@@ -11,12 +11,12 @@ namespace Z0
     using static memory;
     using static HexConst;
 
-    using D = DecimalDigit;
     using X = HexDigit;
 
 
     using DF = DecimalSymFacet;
     using BF = BinarySymFacet;
+    using XF = HexSymFacet;
 
     partial struct Digital
     {
@@ -41,9 +41,8 @@ namespace Z0
         /// Tests whether a character symbol is one of '0'..'9'
         /// </summary>
         /// <param name="src">The symbol to test</param>
-        [MethodImpl(Inline), Op]
-        static bit test(char c)
-            => (DecimalSymFacet)c >= DecimalSymFacet.First && (DecimalSymFacet)c <= DF.Last;
+        public static bit number(char c)
+            => (DF)c >= DF.First && (DF)c <= DF.Last;
 
         [MethodImpl(Inline), Op]
         public static BinaryDigit digit(BinarySym s)
@@ -65,15 +64,29 @@ namespace Z0
         public static OctalDigit digit(Base8 @base, char c)
             => (OctalDigit)((OctalSym)c - OctalSym.o0);
 
+        [MethodImpl(Inline), Op]
+        public static HexDigit digit(Base16 @base, char src)
+        {
+            if(number(src))
+                return (HexDigit)((HexSymFacet)src - XF.NumberOffset);
+            else
+            {
+                if(hex(UpperCase, src))
+                    return (HexDigit)((XF)src - XF.LetterOffsetUp);
+                else
+                    return (HexDigit)((XF)src - XF.LetterOffsetLo);
+            }
+        }
+
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
         /// </summary>
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static HexDigit digit(Base16 @base, LowerCased @case, char src)
-            => test(src)
-            ? (HexDigit)((HexSymFacet)src - HexSymFacet.NumberOffset)
-            : (HexDigit)((HexSymFacet)src - HexSymFacet.LetterOffsetLo);
+            => number(src)
+            ? (HexDigit)((XF)src - XF.NumberOffset)
+            : (HexDigit)((XF)src - XF.LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -81,9 +94,9 @@ namespace Z0
         /// <param name="src">The source symbol</param>
         [MethodImpl(Inline), Op]
         public static X digit(Base16 @base, UpperCased @case, char src)
-            => test(src)
-            ? (X)((HexSymFacet)src - HexSymFacet.NumberOffset)
-            : (X)((HexSymFacet)src - HexSymFacet.LetterOffsetUp);
+            => number(src)
+            ? (HexDigit)((XF)src - XF.NumberOffset)
+            : (HexDigit)((XF)src - XF.LetterOffsetUp);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by a lowercase hex symbol
@@ -92,8 +105,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymLo src)
             => number(src)
-            ? (HexDigit)((HexSymFacet)src - HexSymFacet.NumberOffset)
-            : (HexDigit)((HexSymFacet)src - HexSymFacet.LetterOffsetLo);
+            ? (HexDigit)((XF)src - XF.NumberOffset)
+            : (HexDigit)((XF)src - XF.LetterOffsetLo);
 
         /// <summary>
         /// Computes the numeric value in in the range [0,..F] identified by an uppercase hex symbol
@@ -102,8 +115,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymUp src)
             => number(src)
-            ? (HexDigit)((HexSymFacet)src - HexSymFacet.NumberOffset)
-            : (HexDigit)((HexSymFacet)src - HexSymFacet.LetterOffsetUp);
+            ? (HexDigit)((XF)src - XF.NumberOffset)
+            : (HexDigit)((XF)src - XF.LetterOffsetUp);
 
         [MethodImpl(Inline), Op]
         public static DecimalDigit digit(Base10 @base, char c)

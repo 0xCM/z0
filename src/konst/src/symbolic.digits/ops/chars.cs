@@ -107,19 +107,19 @@ namespace Z0
             => src.Chars(kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex1Seq kind)
-            => chars(Hex.text(n1), kind);
+        public static ReadOnlySpan<char> chars(Hex1Seq src)
+            => chars(Hex.text(n1), src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex2Seq kind)
-            => chars(Hex.text(n2), kind);
+        public static ReadOnlySpan<char> chars(Hex2Seq src)
+            => chars(Hex.text(n2), src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex3Seq kind)
-            => chars(Hex.text(n3), kind);
+        public static ReadOnlySpan<char> chars(Hex3Seq src)
+            => chars(Hex.text(n3), src);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex4Seq kind)
-            => chars(Hex.text(n4), kind);
+        public static ReadOnlySpan<char> chars(Hex4Seq src)
+            => chars(Hex.text(n4), src);
     }
 }
