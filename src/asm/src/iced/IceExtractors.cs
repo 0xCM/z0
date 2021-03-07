@@ -53,14 +53,12 @@ namespace Z0.Asm
         public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src, BinaryCode encoded)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            //var sig = AsmExpr.sig(iceOpCode.ToInstructionString());
-            //var ocs = AsmOpCodes.normalize(sig, iceOpCode.ToOpCodeString(), encoded);
-            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.create(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
+            return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.cleanse(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
         }
 
         [MethodImpl(Inline), Op]
         public static IceOpAccess[] access(Iced.InstructionInfo src)
-            => z.array(
+            => root.array(
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op2Access),

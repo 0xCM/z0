@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static WfCmd;
 
     using K = ToolWfCmdKind;
 
@@ -19,7 +18,7 @@ namespace Z0.Asm
     {
         protected override void RegisterCommands(WfCmdIndex index)
         {
-            index.Include(assign(K.UpdateToolHelpIndex, UpdateToolHelpIndex));
+            index.Include(WfCmd.assign(K.UpdateToolHelpIndex, UpdateToolHelpIndex));
         }
 
         [Action(K.UpdateToolHelpIndex)]

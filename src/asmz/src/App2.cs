@@ -325,10 +325,15 @@ namespace Z0.Asm
                     Forms.AddIfMissing(asm.form(statement.OpCode, statement.Sig));
                 }
             }
+
+            AsmFormPipe.create(Wf).Emit(Forms.Values.Array(), Db.IndexTable<AsmFormRecord>());
         }
 
         public void Run()
         {
+            // var commands = WfCmdGlobals.create(Wf);
+            // commands.Run(GlobalWfCmd.ShowByteConversions);
+
             ProcessStatements();
             //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
             //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);

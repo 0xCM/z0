@@ -38,7 +38,7 @@ namespace Z0.Asm
             public string Expression
             {
                 [MethodImpl(Inline)]
-                get => string.Format("{0}({1})", OpCode, Sig);
+                get => string.Format("{0} -> {1}", Sig, OpCode);
             }
 
             public bool IsEmpty

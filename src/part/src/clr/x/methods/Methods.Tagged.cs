@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using static memory;
+
     partial class ClrQuery
     {
         /// <summary>
@@ -17,5 +19,27 @@ namespace Z0
         public static MethodInfo[] Tagged<A>(this MethodInfo[] src)
             where A : Attribute
                 => src.Where(m => m.Tagged<A>());
+
+        /// <summary>
+        /// Selects the methods that are adorned with parametrically-identified attribute
+        /// </summary>
+        /// <param name="src">The methods to examine</param>
+        /// <typeparam name="A">The attribute type</typeparam>
+        public static int Tagged<A>(this MethodInfo[] src, out Index<TaggedMethod<A>> dst)
+            where A : Attribute
+        {
+            var count = src.Length;
+            var methods = root.list<TaggedMethod<A>>();
+            var found = 0;
+            var input = span(src);
+            for(var i=0; i<count; i++)
+            {
+                var method = skip(input,i);
+                if(method.Tag<A>(out var a))
+                    methods.Add((method,a));
+            }
+            dst = methods.ToArray();
+            return methods.Count;
+        }
     }
 }

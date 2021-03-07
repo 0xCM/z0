@@ -16,15 +16,15 @@ namespace Z0.Asm
     {
         public asci32 Value {get;}
 
-        public static AsmOpCodeExprLegacy create(string src)
-            => new AsmOpCodeExprLegacy(src.Replace("o32 ", EmptyString));
+        public static AsmOpCodeExprLegacy cleanse(string src)
+            => new AsmOpCodeExprLegacy(src);
 
         public static AsmOpCodeExprLegacy create(asci32 src)
             => new AsmOpCodeExprLegacy(src);
 
         [MethodImpl(Inline)]
         AsmOpCodeExprLegacy(string src)
-            => Value = src.Replace("o32 ", EmptyString);
+            => Value = src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString);
 
         [MethodImpl(Inline)]
         AsmOpCodeExprLegacy(asci32 src)

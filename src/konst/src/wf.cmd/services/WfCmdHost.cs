@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public abstract class WfCmdHost<H,K> : WfService<H, IWfCmdHost<K>>, IWfCmdHost<K>
+    [WfCmdHost]
+    public abstract class WfCmdHost<H,K> : WfService<H,IWfCmdHost<K>>, IWfCmdHost<K>
         where H : WfCmdHost<H,K>, new()
         where K : unmanaged
     {

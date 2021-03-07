@@ -29,7 +29,6 @@ namespace Z0
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="m">The member</param>
 
-        [MethodImpl(Inline)]
         public static bool Tag<A>(this MethodInfo t, out A dst)
             where A : Attribute
         {
@@ -39,6 +38,21 @@ namespace Z0
             else
                 dst = default;
             return a != null;
+        }
+
+        public static bool Tagged<A>(this MethodInfo src, out TaggedMethod<A> dst)
+            where A : Attribute
+        {
+            if(src.Tag<A>(out var tag))
+            {
+                dst = (src,tag);
+                return true;
+            }
+            else
+            {
+                dst = TaggedMethod<A>.Empty;
+                return false;
+            }
         }
     }
 }
