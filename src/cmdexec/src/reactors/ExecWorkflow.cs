@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static WorkflowCommands;
+    using static WfCmd;
 
-    sealed class ExecWorkflow : CmdReactor<ExecWorkflowCmd,CmdResult>
+    sealed class ExecWorkflow : CmdReactor<WfCmdExec,CmdResult>
     {
-        protected override CmdResult Run(ExecWorkflowCmd cmd)
+        protected override CmdResult Run(WfCmdExec cmd)
         {
             if(find(cmd, out var handler))
             {

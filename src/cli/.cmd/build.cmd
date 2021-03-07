@@ -1,8 +1,5 @@
 @echo off
 set ProjectId=cli
+call %ControlScripts%\build-lib.cmd
 
-set BuildCmd=%ZDev%\.cmd\build-lib.cmd
-echo BuildCmd:%BuildCmd%
-
-call %BuildCmd%
 

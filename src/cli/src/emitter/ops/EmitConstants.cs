@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static memory;
 
     using T = CliConstantInfo;
 

@@ -52,6 +52,7 @@ namespace Z0
             Db = new WfDb(wf, wf.Env.Db.Value);
             Events = EventCache.init(wf);
             OnInit();
+            Initialized();
             wf.Babble($"Initialized {typeof(H).Name}");
         }
 
@@ -66,8 +67,15 @@ namespace Z0
             Wf = wf.WithHost(Host);
         }
 
-        protected virtual void OnInit() {}
+        protected virtual void OnInit()
+        {
 
+        }
+
+        protected virtual void Initialized()
+        {
+
+        }
         protected virtual void Disposing() { }
 
         public void Dispose()

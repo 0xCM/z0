@@ -158,7 +158,7 @@ namespace Z0
         void EmitImageHeaders()
         {
             var svc = ImageDataEmitter.create(Wf);
-            svc.EmitSectionHeaders(Archives.build(Wf));
+            svc.EmitImageHeaders(Archives.build(Wf));
         }
 
         void Receive(in ImageContent src)

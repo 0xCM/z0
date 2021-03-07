@@ -5,10 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Reflection.PortableExecutable;
 
-    [StructLayout(LayoutKind.Sequential), Record(TableId)]
+    using static Part;
+
+    [Record(TableId)]
     public struct ImageSectionHeader : IRecord<ImageSectionHeader>
     {
         public const string TableId = "image.headers";

@@ -13,6 +13,9 @@ namespace Z0
 
     partial class XTend
     {
+        public static IWfCmdHost<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
+            => AsmWfCmdHost.create(wf);
+
         public static AsmCatalog AsmCatalog(this IWfShell wf)
             => Services.AsmCatalog.create(wf);
 

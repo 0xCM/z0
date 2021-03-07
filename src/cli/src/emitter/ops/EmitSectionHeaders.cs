@@ -10,29 +10,30 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
-        static ReadOnlySpan<byte> RenderWidths
+        static ReadOnlySpan<byte> SectionHeaderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
 
-        public void EmitSectionHeaders()
+        public void EmitImageHeaders()
         {
-            EmitSectionHeaders(Archives.build(Wf));
+            EmitImageHeaders(Archives.build(Wf));
         }
 
-        public void EmitSectionHeaders(IBuildArchive src)
+        public void EmitImageHeaders(IBuildArchive src)
         {
             var svc = ImageDataEmitter.create(Wf);
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
             var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
-            svc.EmitSectionHeaders(cmd.Source, cmd.Target);
+            svc.EmitImageHeaders(cmd.Source, cmd.Target);
             cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
-            svc.EmitSectionHeaders(cmd.Source, cmd.Target);
+            svc.EmitImageHeaders(cmd.Source, cmd.Target);
         }
 
-        public Outcome<Count> EmitSectionHeaders(FS.Files src, FS.FilePath dst)
+        public Outcome<Count> EmitImageHeaders(FS.Files src, FS.FilePath dst)
         {
             var total = Count.Zero;
-            var formatter = TableFormatter.row<ImageSectionHeader>(RenderWidths);
+            var formatter = TableFormatter.row<ImageSectionHeader>(SectionHeaderWidths);
+            var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
@@ -47,6 +48,7 @@ namespace Z0
                     total += count;
                 }
             }
+            Wf.EmittedFile(flow, total);
 
             return total;
         }

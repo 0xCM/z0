@@ -7,6 +7,6 @@ namespace Z0
     class EmitImageHeaders : CmdReactor<EmitImageHeadersCmd, CmdResult>
     {
         protected override CmdResult Run(EmitImageHeadersCmd cmd)
-            => ImageDataEmitter.create(Wf).EmitSectionHeaders(cmd.Source, cmd.Target).ToCmdResult(cmd);
+            => ImageDataEmitter.create(Wf).EmitImageHeaders(cmd.Source, cmd.Target).ToCmdResult(cmd);
     }
 }

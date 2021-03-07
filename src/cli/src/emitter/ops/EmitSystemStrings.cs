@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static z;
+    using static memory;
 
     partial class ImageDataEmitter
     {

@@ -7,12 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    [WfHost]
-    public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
+    using static Part;
+
+    public readonly struct SectionDescriptor
     {
-        protected override void Execute(IWfShell wf)
+        public Name Name {get;}
+
+        public ImageSectionKind Kind {get;}
+
+        [MethodImpl(Inline)]
+        public SectionDescriptor(Name name, ImageSectionKind kind)
         {
-            wf.ImageDataEmitter().EmitFieldMetadata();
+            Name = name;
+            Kind = kind;
         }
     }
 }

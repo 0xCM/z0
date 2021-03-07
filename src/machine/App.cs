@@ -66,7 +66,7 @@ namespace Z0
                 var images = Wf.ImageDataEmitter();
 
                 if(Options.EmitSectionHeaders)
-                    images.EmitSectionHeaders();
+                    images.EmitImageHeaders();
 
                 if(Options.EmitMsilRecords)
                     images.EmitMsilRecords();

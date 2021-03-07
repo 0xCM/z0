@@ -5,14 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
-    [WfHost]
-    public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
+    public interface IWfCmdHost : IWfService
     {
-        protected override void Execute(IWfShell wf)
-        {
-            wf.ImageDataEmitter().EmitFieldMetadata();
-        }
+        IEnumerable<WfCmdExec> Hosted {get;}
+    }
+
+    public interface IWfCmdHost<K> : IWfCmdHost
+        where K : unmanaged
+    {
+        CmdResult Run(K kind);
     }
 }

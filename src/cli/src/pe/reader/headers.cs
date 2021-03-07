@@ -15,7 +15,7 @@ namespace Z0
             using var stream = File.OpenRead(src.Name);
             using var reader = new PEReader(stream);
 
-            var dst = z.list<ImageSectionHeader>();
+            var dst = root.list<ImageSectionHeader>();
             var headers = reader.PEHeaders;
             var sections = headers.SectionHeaders;
 

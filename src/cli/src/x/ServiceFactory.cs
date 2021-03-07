@@ -13,5 +13,8 @@ namespace Z0
     {
         public static ImageDataEmitter ImageDataEmitter(this IWfShell wf)
             => Z0.ImageDataEmitter.create(wf);
+
+        public static IWfCmdHost<CliWfCmdKind> CliWfCmd(this IWfShell wf)
+            => CliWfCmdHost.create(wf);
     }
 }
