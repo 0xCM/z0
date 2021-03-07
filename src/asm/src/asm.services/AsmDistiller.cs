@@ -44,21 +44,59 @@ namespace Z0.Asm
 
         protected override void OnContextCreated()
         {
-            // RowProcessor = Wf.AsmRowProcessor();
-            // CreateIndices();
+
         }
 
-        // void CreateIndices()
-        // {
-        //     CurrentRow = 0;
-        //     var flow = Wf.Running();
-        //     Blocks = Wf.ApiHexIndexer().IndexApiBlocks();
-        //     Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
-        //     LastRow = Rows.Count - 1;
-        //     CurrentBlock = Rows[CurrentRow].BlockAddress;
-        //     Wf.Ran(flow, Rows.Count);
-        // }
+        public FS.Files Distillations()
+            => Db.TableDir<AsmStatementInfo>().AllFiles;
 
+        public Index<AsmStatementInfo> LoadDistillation(FS.FilePath src)
+        {
+            var attempt = TextDocs.parse(src, out var doc);
+            const byte fields = AsmStatementInfo.FieldCount;
+            if(attempt)
+            {
+                var header = doc.Header.Value;
+                if(header.Labels.Length !=fields)
+                {
+                    Wf.Error($"The header {header} has {header.Labels.Length} fields and yet {fields} were expected");
+                    return sys.empty<AsmStatementInfo>();
+                }
+                var count = doc.RowCount;
+                var rows = doc.RowData.View;
+                var buffer = sys.alloc<AsmStatementInfo>(count);
+                var dst = span(buffer);
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var row = ref skip(rows,i);
+                    if(row.CellCount == fields)
+                    {
+                        ref var target = ref seek(dst,i);
+                        if(!Parse(row, out target))
+                        {
+                            Wf.Error($"Attempt to parse {row} failed");
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Wf.Error($"The expected field count for row {i+1} is {fields} and yet {row.CellCount} were detected");
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                Wf.Error(attempt.Message);
+            }
+            return sys.empty<AsmStatementInfo>();
+        }
+
+        Outcome Parse(TextRow src, out AsmStatementInfo dst)
+        {
+            dst = default;
+            return true;
+        }
         bool NextRow(out Source row)
         {
             if(CurrentRow < LastRow)
@@ -128,19 +166,7 @@ namespace Z0.Asm
 
         public void DistillStatements()
         {
-
             DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
-
-            // Db.ClearTables<Target>();
-            // var flow = Wf.Running();
-            // var total = 0u;
-            // var count = DistillNextSegment();
-            // while(count != 0)
-            // {
-            //     count = DistillNextSegment();
-            //     total += count;
-            // }
-            // Wf.Ran(flow,total);
         }
 
         public void DistillStatements(ApiCodeBlocks src)

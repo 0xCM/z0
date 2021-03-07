@@ -31,11 +31,11 @@ namespace Z0.Asm
 
         Adjacent<char, OneOf<char>> RegDigitRule;
 
-        readonly SymbolTable<AsmSigOpKind> SigOpSymbols;
+        readonly SymbolTable<AsmSigOpKind> _SigOpSymbols;
 
-        readonly Index<Token<AsmSigOpKind>> SigOpTokens;
+        readonly Index<Token<AsmSigOpKind>> _SigOpTokens;
 
-        readonly SymbolTable<AsmSigCompositeKind> Composites;
+        readonly SymbolTable<AsmSigCompositeKind> _Composites;
 
         [MethodImpl(Inline), Op]
         public static AsmMnemonicCode monicode(string src)
@@ -43,28 +43,34 @@ namespace Z0.Asm
 
         public AsmSigs()
         {
-            SigOpTokens = tokens();
-            SigOpSymbols = SigOpTokens.ToSymbolTable();
-            Composites = SymbolTables.create<AsmSigCompositeKind>();
+            _SigOpTokens = tokens();
+            _SigOpSymbols = SymbolTables.create(_SigOpTokens);
+            _Composites = SymbolTables.create<AsmSigCompositeKind>();
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
         }
+
+        public SymbolTable<AsmSigCompositeKind> CompositeSymbols()
+            => _Composites;
+
+        public SymbolTable<AsmSigOpKind> SigOpSymbols()
+            => _SigOpSymbols;
 
         [MethodImpl(Inline), Op]
         public ref readonly Token<AsmSigOpKind> Token(AsmSigOpKind kind)
         {
             if(kind <= AsmSigOpKindFacets.LastClass)
-                return ref SigOpTokens[(byte)kind];
+                return ref _SigOpTokens[(byte)kind];
             else
-                return ref SigOpTokens[0];
+                return ref _SigOpTokens[0];
         }
 
         [Op]
         public bool ParseToken(SigOperand src, out Token<AsmSigOpKind> token)
         {
-            if(SigOpSymbols.Index(src.Content, out var index))
+            if(_SigOpSymbols.Index(src.Content, out var index))
             {
-                token = SigOpTokens[index];
+                token = _SigOpTokens[index];
                 return true;
             }
             else
@@ -86,9 +92,11 @@ namespace Z0.Asm
 
         [Op]
         public bool IsComposite(SigOperand src)
-        {
-            return Query.contains(src.Content, CompositeIndicator);
-        }
+            => _Composites.Contains(src.Content);
+
+        [Op]
+        public bool IsComposite(Signature src)
+            => src.Operands.Any(IsComposite);
 
         public Index<SigOperand> Operands(string src)
             => src.Split(Chars.Comma).Map(sigop);
@@ -138,14 +146,6 @@ namespace Z0.Asm
         public static SigOperand sigop(string src)
             => new SigOperand(src);
 
-        [Op]
-        public static bool composite(SigOperand src)
-            => src.Content.Contains(CompositeIndicator);
-
-        [Op]
-        public static bool composite(Signature src)
-            => src.Operands.Any(o => o.IsComposite);
-
         public static string format(Signature src)
         {
             var buffer = text.buffer();
@@ -166,7 +166,7 @@ namespace Z0.Asm
             for(byte i=1; i<count; i++)
             {
                 ref readonly var detail = ref skip(details,i);
-                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, detail.Name);
+                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, detail.Field.Name);
                 seek(dst,i) = Tokens.token(i, detail.Name, detail.LiteralValue, symbol);
             }
             return buffer;

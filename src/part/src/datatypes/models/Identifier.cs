@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Identifier(string src)
-            => Content = src;
+            => Content = src ?? EmptyString;
 
         [MethodImpl(Inline)]
         public Identifier(Name src)

@@ -1,4 +1,4 @@
-| Identifier | Value  | Description
+| Identifier | Symbol | Description
 | Valid      | V      | Valid
 | Invalid    | I      | Invalid
 | NE         | N.E.   | Indicates an instruction syntax is not encodable in 64-bit mode

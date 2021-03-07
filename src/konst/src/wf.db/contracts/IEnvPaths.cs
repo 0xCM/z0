@@ -244,6 +244,10 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format(), Csv);
 
+        FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
+            where T : struct, IRecord<T>
+                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format() + string.Format("-{0}", discriminator), Csv);
+
         FS.FilePath Table<T>(string name, FS.FileExt ext)
             where T : struct, IRecord<T>
         {

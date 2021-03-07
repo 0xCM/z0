@@ -49,6 +49,12 @@ namespace Z0
             get => Data.View;
         }
 
+        public Index<string> Symbols
+        {
+            [MethodImpl(Inline)]
+            get => Keys.Keys.Array();
+        }
+
         public uint TokenCount
         {
             [MethodImpl(Inline)]

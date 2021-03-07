@@ -16,6 +16,8 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.statements";
 
+        public const byte FieldCount = 9;
+
         public uint Sequence;
 
         public MemoryAddress BlockAddress;

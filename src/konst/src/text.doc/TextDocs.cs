@@ -35,6 +35,25 @@ namespace Z0
             return parse(reader, format).Select(doc => root.parsed(src.Name.Format(), doc)).Value;
         }
 
+        public static Outcome parse(FS.FilePath src, out TextDoc dst)
+        {
+            dst = TextDoc.Empty;
+            if(!src.Exists)
+                return (false, $"No such file {src}");
+
+            using var reader = src.Reader();
+            var attempt =  parse(reader);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                return (false, attempt.Message?.ToString());
+            }
+        }
+
         public static ParseResult<TextDoc> parse(string data, TextDocFormat? format = null)
         {
             using var stream = data.Stream();

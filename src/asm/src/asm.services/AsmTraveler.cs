@@ -55,6 +55,7 @@ namespace Z0.Asm
 
             return true;
         }
+
         public ReadOnlySpan<byte> Travel(byte* pSrc)
         {
             Position = 0;

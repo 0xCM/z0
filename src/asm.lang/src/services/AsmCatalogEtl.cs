@@ -21,6 +21,8 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
 
+        AsmSigs Sigs;
+
         const uint MaxRowCount = 2500;
 
         const char AsmCatDelimiter = Chars.Tab;
@@ -31,6 +33,11 @@ namespace Z0.Asm
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicCodes = SymbolTables.create<AsmMnemonicCode>();
             CatalogSymbols = AsmCatalogSymbols.create();
+        }
+
+        protected override void OnInit()
+        {
+            Sigs = Wf.AsmSigServices();
         }
 
         public uint ImportRowCount {get; private set;}
@@ -87,7 +94,6 @@ namespace Z0.Asm
                 "V" => true,
                 _ => false
             };
-
 
         void Fill(in StokeAsmImportRow src, ref StokeAsmExportRow dst)
         {
@@ -239,45 +245,17 @@ namespace Z0.Asm
 
         public void Emit(ReadOnlySpan<Form> src)
         {
-            var dst = Wf.Db().Table<AsmSpecifierRecord>(TargetFolder);
-            var flow = Wf.EmittingTable<AsmSpecifierRecord>(dst);
+            Emit(src,Db.Table<AsmFormRecord>(TargetFolder));
+        }
+
+        public void Emit(ReadOnlySpan<Form> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingTable<AsmFormRecord>(dst);
             var count = Records.emit(src.Map(record), dst, AsmFormWidths);
             Wf.EmittedTable(flow, count);
         }
 
-        public Index<Form> Decompose(ReadOnlySpan<Form> src)
-        {
-            var count = src.Length;
-            var dst = root.list<Form>(count*2);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var spec = ref skip(src,i);
-                if(spec.IsComposite)
-                {
-                    var decomposed = Form.Empty;
-                    var operands = spec.Sig.Operands.View;
-                    var oc = operands.Length;
-                    for(var j=0; j<oc; j++)
-                    {
-                        ref readonly var operand = ref skip(operands,j);
-                        if(operand.IsComposite)
-                        {
-
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                }
-                else
-                    dst.Add(spec);
-            }
-
-            return dst.ToArray();
-        }
-
-        public ReadOnlySpan<Form> Specifiers()
+        public ReadOnlySpan<Form> CatalogForms()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
@@ -323,15 +301,16 @@ namespace Z0.Asm
             }
         }
 
-        FS.FolderName TargetFolder => FS.folder("asmcat");
+        FS.FolderName TargetFolder
+            => FS.folder("asmcat");
 
         [MethodImpl(Inline), Op]
-        static AsmSpecifierRecord record(Form src)
+        AsmFormRecord record(Form src)
         {
-            var dst = new AsmSpecifierRecord();
+            var dst = new AsmFormRecord();
             dst.Seq = src.Id;
             dst.Sig = src.Sig;
-            dst.Composite = src.Sig.Operands.Any(o => o.IsComposite);
+            dst.Composite = Sigs.IsComposite(src.Sig);
             dst.OpCode = src.OpCode;
             return dst;
         }

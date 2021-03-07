@@ -39,12 +39,6 @@ namespace Z0.Asm
                 get => !IsEmpty;
             }
 
-            public bool IsComposite
-            {
-                [MethodImpl(Inline)]
-                get => Sig.IsComposite;
-            }
-
             [MethodImpl(Inline)]
             public bool Equals(Form src)
                 => OpCode == src.OpCode && Sig == src.Sig;

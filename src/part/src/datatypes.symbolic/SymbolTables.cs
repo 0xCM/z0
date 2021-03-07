@@ -27,7 +27,7 @@ namespace Z0
                 ref readonly var literal = ref skip(view, i);
                 var symbol = symbolizer != null ? symbolizer(literal.DirectValue).Format() : literal.Symbol.Format();
                 seek(entry, i) = new Token<E>(i, literal.Name, literal.DirectValue, symbol);
-                index.Add(literal.UniqueName, skip(entry, i));
+                index.Add(symbol, skip(entry, i));
             }
             return new SymbolTable<E>(entries, index);
         }
@@ -41,7 +41,9 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref skip(view, i);
-                index.Add(token.Name, token);
+                var symbol = token.Symbol;
+                if(text.nonempty(symbol))
+                    index.Add(symbol, token);
             }
             return new SymbolTable<E>(src, index);
         }

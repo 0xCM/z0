@@ -30,14 +30,16 @@ namespace Z0.Asm
             index.Include(assign(K.ShowMnemonicSymbols, ShowMnemonicSymbols));
             index.Include(assign(K.EmitApiClasses, EmitApiClasses));
             index.Include(assign(K.EmitSymbolicLiterals, EmitSymbolicLiterals));
-            index.Include(assign(K.ShowAsmForms, ShowAsmForms));
-            index.Include(assign(K.EmitAsmForms, EmitAsmForms));
+            index.Include(assign(K.ShowAsmCatForms, ShowAsmCatForms));
+            index.Include(assign(K.EmitAsmCatForms, EmitAsmCatForms));
             index.Include(assign(K.ShowEncodingKindNames, ShowEncodingKindNames));
             index.Include(assign(K.CorrelateApiCode, CorrelateApiCode));
             index.Include(assign(K.ShowCatalogSymbols, ShowCatalogSymbols));
             index.Include(assign(K.EmitResBytes, EmitResBytes));
             index.Include(assign(K.EmitImmSpecializations, EmitImmSpecializations));
             index.Include(assign(K.CheckDigitParser, CheckDigitParser));
+            index.Include(assign(K.ShowSigOpComposites, ShowSigOpComposites));
+            index.Include(assign(K.ShowSigOpSymbols, ShowSigOpSymbols));
 
         }
 
@@ -83,10 +85,10 @@ namespace Z0.Asm
             }
         }
 
-        [Action(K.ShowAsmForms)]
-        void ShowAsmForms()
+        [Action(K.ShowAsmCatForms)]
+        void ShowAsmCatForms()
         {
-            var specifiers = Catalog.Specifiers();
+            var specifiers = Catalog.CatalogForms();
             var count = specifiers.Length;
             for(var i=0; i<count; i++)
             {
@@ -95,10 +97,10 @@ namespace Z0.Asm
             }
         }
 
-        [Action(K.EmitAsmForms)]
-        void EmitAsmForms()
+        [Action(K.EmitAsmCatForms)]
+        void EmitAsmCatForms()
         {
-            Catalog.Emit(Catalog.Specifiers());
+            Catalog.Emit(Catalog.CatalogForms());
         }
 
         [Action(K.ShowEncodingKindNames)]
@@ -163,6 +165,26 @@ namespace Z0.Asm
             // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
             // evaluate.Execute(Wf.Api.PartIdentities);
             // Wf.Ran(flow);
+        }
+
+        [Action(K.ShowSigOpSymbols)]
+        void ShowSigOpSymbols()
+        {
+            var symbols = Wf.AsmSigServices().SigOpSymbols();
+            foreach(var token in symbols.Tokens)
+            {
+                Wf.Row(token);
+            }
+        }
+
+        [Action(K.ShowSigOpComposites)]
+        void ShowSigOpComposites()
+        {
+            var symbols = Wf.AsmSigServices().CompositeSymbols();
+            foreach(var token in symbols.Tokens)
+            {
+                Wf.Row(token);
+            }
         }
     }
 }

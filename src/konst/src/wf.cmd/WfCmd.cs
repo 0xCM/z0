@@ -13,14 +13,6 @@ namespace Z0
     [ApiHost]
     public readonly struct WfCmd
     {
-        [MethodImpl(Inline), Op]
-        public static WfCmdExec define(Name name)
-            => new WfCmdExec(name);
-
-        public static WfCmdExec<K> define<K>(K kind)
-            where K : unmanaged
-                => (kind, new WfCmdExec(kind.ToString()));
-
         [Op]
         public static void assign(string name, Action handler)
         {
@@ -28,23 +20,13 @@ namespace Z0
                 root.@throw(string.Format("{0}:Unable to include {1}", nameof(WfCmd), name));
         }
 
-        [Op]
-        public static WfCmdExec assign(WfCmdExec cmd, Action handler)
-        {
-            assign(cmd.WorkflowName, handler);
-            return cmd;
-        }
-
-        public static WfCmdExec<K> assign<K>(WfCmdExec<K> cmd, Action handler)
+        public static WfCmdExec<K> assign<K>(K kind, Action handler)
             where K : unmanaged
         {
+            WfCmdExec<K> cmd = (kind, new WfCmdExec(kind.ToString()));
             assign(cmd.Enclosed.WorkflowName, handler);
             return cmd;
         }
-
-        public static WfCmdExec<K> assign<K>(K kind, Action handler)
-            where K : unmanaged
-                => assign(define(kind),handler);
 
         public static bool find(WfCmdExec cmd, out Action handler)
             => _Lookup.TryGetValue(cmd.WorkflowName, out handler);

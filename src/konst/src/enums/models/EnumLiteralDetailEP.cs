@@ -46,7 +46,7 @@ namespace Z0
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Spec.Name;
+            get => Field.Name;
         }
 
         /// <summary>

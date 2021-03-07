@@ -44,8 +44,12 @@ namespace Z0
             get => Index != 0;
         }
 
+        const string FormatPattern = "{0,-8} | {1,-12} | {2}";
+
+        public static string FormatHeader => string.Format(FormatPattern, nameof(Index), nameof(Name), nameof(Symbol));
+
         public string Format()
-            => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Name, RP.EmptySymbol), text.ifempty(Symbol, RP.EmptySymbol));
+            => string.Format(FormatPattern, Index, text.ifempty(Name, "!!<empty>!!"), text.ifempty(Symbol, "!!<empty>!!"));
 
         public override string ToString()
             => Format();

@@ -7,9 +7,9 @@ namespace Z0.Asm
     using static AsmExpr;
 
     [Record(TableId)]
-    public struct AsmSpecifierRecord : IRecord<AsmSpecifierRecord>
+    public struct AsmFormRecord : IRecord<AsmFormRecord>
     {
-        public const string TableId = "asm.specifier";
+        public const string TableId = "asm.forms";
 
         public uint Seq;
 

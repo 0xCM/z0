@@ -15,7 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TextBlock(string src)
-            => Data = src;
+            => Data = src ?? EmptyString;
 
         public ReadOnlySpan<char> View
         {

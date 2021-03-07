@@ -63,11 +63,6 @@ namespace Z0.Asm
                 get => Data.IsNonEmpty;
             }
 
-            public bool IsComposite
-            {
-                [MethodImpl(Inline)]
-                get => AsmSigs.composite(this);
-            }
 
             public override int GetHashCode()
                 => Data.GetHashCode();

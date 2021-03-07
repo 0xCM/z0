@@ -272,11 +272,24 @@ namespace Z0.Asm
             var count = codes.Length;
         }
 
+        void CheckStatements()
+        {
+            var distiller = Wf.AsmDistiller();
+            var paths = distiller.Distillations();
+            foreach(var path in paths)
+            {
+                Wf.Status($"Loading {path}");
+                var data = distiller.LoadDistillation(path);
+                Wf.Status($"Loaded {data.Count} statements");
+            }
+
+        }
 
         public void Run()
         {
-            Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);
-
+            CheckStatements();
+            //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
+            //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);
         }
 
         public static void Main(params string[] args)

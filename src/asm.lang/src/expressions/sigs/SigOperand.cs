@@ -19,12 +19,6 @@ namespace Z0.Asm
             public SigOperand(string src)
                 => Data = src;
 
-            public bool IsComposite
-            {
-                [MethodImpl(Inline)]
-                get => AsmSigs.composite(this);
-            }
-
             public string Content
             {
                 [MethodImpl(Inline)]

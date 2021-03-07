@@ -22,9 +22,9 @@ namespace Z0.Asm
 
         EmitSymbolicLiterals,
 
-        ShowAsmForms,
+        ShowAsmCatForms,
 
-        EmitAsmForms,
+        EmitAsmCatForms,
 
         ShowEncodingKindNames,
 
@@ -38,6 +38,8 @@ namespace Z0.Asm
 
         CheckDigitParser,
 
-    }
+        ShowSigOpSymbols,
 
+        ShowSigOpComposites,
+    }
 }
