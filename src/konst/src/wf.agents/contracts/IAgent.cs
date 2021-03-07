@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a thread of control with independent volition
     /// </summary>
-    public interface IWfAgent : IDisposable
+    public interface IAgent : IDisposable
     {
         /// <summary>
         /// Identifies the server on which the agent is executing
@@ -49,5 +49,4 @@ namespace Z0
         AgentIdentity Identity
             => (PartId, HostId);
     }
-
 }

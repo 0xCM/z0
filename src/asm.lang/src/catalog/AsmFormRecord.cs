@@ -13,10 +13,11 @@ namespace Z0.Asm
 
         public uint Seq;
 
+        public OpCode OpCode;
+
         public Signature Sig;
 
-        public bool Composite;
+        public TextBlock Expression;
 
-        public OpCode OpCode;
     }
 }

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
     public readonly struct Pipe<S,T> : IPipe<S,T>
     {
@@ -16,10 +15,10 @@ namespace Z0
 
         readonly PipeBuffer<S> Buffer;
 
-        readonly IProjector<S,T> Projector;
+        readonly SFx.IProjector<S,T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(IWfShell wf, PipeBuffer<S> buffer, IProjector<S,T> projector)
+        internal Pipe(IWfShell wf, PipeBuffer<S> buffer, SFx.IProjector<S,T> projector)
         {
             Wf = wf;
             Buffer = buffer;

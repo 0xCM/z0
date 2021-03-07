@@ -37,6 +37,12 @@ namespace Z0.Asm
 
             public int CompareTo(Statement src)
                 => Content.CompareTo(src.Content);
+
+            public static Statement Empty
+            {
+                [MethodImpl(Inline)]
+                get => new Statement(TextBlock.Empty);
+            }
         }
     }
 }

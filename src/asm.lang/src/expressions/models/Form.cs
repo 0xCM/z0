@@ -6,25 +6,39 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Part;
 
     partial struct AsmExpr
     {
+        public sealed class FormLookup : Dictionary<string,Form>
+        {
+            public static FormLookup create()
+                => new FormLookup();
+
+            [MethodImpl(Inline)]
+            public void AddIfMissing(Form src)
+                => TryAdd(src.Expression, src);
+        }
+
         public readonly struct Form
         {
-            public ushort Id {get;}
+            public OpCode OpCode {get;}
 
             public Signature Sig {get;}
 
-            public OpCode OpCode {get;}
-
             [MethodImpl(Inline)]
-            internal Form(ushort id, OpCode opcode, Signature sig)
+            internal Form(OpCode opcode, Signature sig)
             {
                 OpCode = opcode;
                 Sig = sig;
-                Id = id;
+            }
+
+            public string Expression
+            {
+                [MethodImpl(Inline)]
+                get => string.Format("{0}({1})", OpCode, Sig);
             }
 
             public bool IsEmpty
@@ -50,13 +64,13 @@ namespace Z0.Asm
                 => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
             public string Format()
-                => string.Format("{0,-8} | {1,-64} | {2}", Id, Sig.Format(), OpCode.Format());
+                => Expression;
 
             public override string ToString()
                 => Format();
 
             public static Form Empty
-                => new Form(0, OpCode.Empty, AsmExpr.Signature.Empty);
+                => new Form(OpCode.Empty, AsmExpr.Signature.Empty);
         }
     }
 }

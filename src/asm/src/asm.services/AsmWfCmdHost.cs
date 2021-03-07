@@ -88,7 +88,7 @@ namespace Z0.Asm
         [Action(K.ShowAsmCatForms)]
         void ShowAsmCatForms()
         {
-            var specifiers = Catalog.CatalogForms();
+            var specifiers = Catalog.CatalogedForms();
             var count = specifiers.Length;
             for(var i=0; i<count; i++)
             {
@@ -100,7 +100,7 @@ namespace Z0.Asm
         [Action(K.EmitAsmCatForms)]
         void EmitAsmCatForms()
         {
-            Catalog.Emit(Catalog.CatalogForms());
+            Catalog.Emit(Catalog.CatalogedForms());
         }
 
         [Action(K.ShowEncodingKindNames)]

@@ -4,21 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public enum CmdAgentKind : byte
+    [Free]
+    public interface IEmitter<T>
     {
-        CmdExe = 1,
-
-        Bash = 2,
-
-        Custom = 4
-    }
-
-    public struct CmdAgentSettings
-    {
-        public CmdAgentKind AgentKind;
-
-        public FS.FilePath Path;
+        bool Next(out T dst);
     }
 }

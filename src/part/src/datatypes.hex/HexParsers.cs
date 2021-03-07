@@ -17,7 +17,7 @@ namespace Z0
             => HexScalarParser.Service;
 
         [MethodImpl(Inline)]
-        public static IHexParser<byte> bytes(bool bytes = true)
+        public static IHexParser<byte> bytes()
             => HexByteParser.Service;
     }
 }

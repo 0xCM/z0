@@ -8,16 +8,12 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Part;
-    using static z;
-
     /// <summary>
     /// Responsible for managing agents owned by a server
     /// </summary>
-    public class WfAgentProcess : WfAgent
+    public class AgentProcess : Agent
     {
-
-        internal WfAgentProcess(IAgentContext context, uint server, uint core, params IWfAgent[] agents)
+        internal AgentProcess(IAgentContext context, uint server, uint core, params IAgent[] agents)
             : base(context, (server, 1u))
         {
             Agents = agents.ToList();
@@ -29,15 +25,15 @@ namespace Z0
         /// <summary>
         /// Exposes a readonly stream of the agents under management on behalf of the server
         /// </summary>
-        public IEnumerable<IWfAgent> ServerAgents
+        public IEnumerable<IAgent> ServerAgents
             => Agents;
 
-        List<IWfAgent> Agents {get;}
-            = new List<IWfAgent>();
+        List<IAgent> Agents {get;}
+            = new List<IAgent>();
 
         protected override void OnStart()
         {
-            thread(CurrentProcess.OsThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
+            root.thread(CurrentProcess.OsThreadId).OnSome(t => t.IdealProcessor = CoreNumber);
             foreach(var src in Agents)
                 src.Start();
         }

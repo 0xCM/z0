@@ -17,8 +17,8 @@ namespace Z0.Asm
             => new OpCode(src);
 
         [MethodImpl(Inline), Op]
-        public static Form form(ushort seq, OpCode op, Signature sig)
-            => new Form(seq, op, sig);
+        public static Form form(OpCode op, Signature sig)
+            => new Form(op, sig);
 
         /// <summary>
         /// Generalizes a <see cref='IAsmOp{T}'/> reification

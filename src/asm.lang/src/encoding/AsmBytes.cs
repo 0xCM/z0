@@ -47,8 +47,7 @@ namespace Z0.Asm
         [Op]
         public static bool hexcode(string src, out AsmHexCode dst)
         {
-            var parser = HexByteParser.Service;
-            if(parser.Parse(src, out var data))
+            if(HexByteParser.parse(src, out var data))
             {
                 dst = data;
                 return true;

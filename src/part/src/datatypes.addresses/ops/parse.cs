@@ -42,5 +42,38 @@ namespace Z0
                 return false;
             }
         }
+
+        [Op]
+        public static Outcome parse(string src, out Address16 dst)
+        {
+            var attempt = HexNumericParser.parse16u(src);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                dst = Address16.Zero;
+                return false;
+            }
+        }
+
+        [Op]
+        public static Outcome parse(string src, out Address8 dst)
+        {
+            var attempt = HexNumericParser.parse8u(src);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                dst = Address8.Zero;
+                return false;
+            }
+        }
+
     }
 }

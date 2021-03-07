@@ -2,10 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    [ApiHost]
-    public readonly partial struct AsmExpr
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IReceiver<T>
     {
+        void Deposit(in T src);
     }
 }

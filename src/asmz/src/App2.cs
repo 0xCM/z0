@@ -6,10 +6,12 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
+    using System.Linq;
 
     using static Part;
     using static memory;
     using static Toolsets;
+    using static AsmExpr;
 
     class App : WfService<App>
     {
@@ -272,22 +274,62 @@ namespace Z0.Asm
             var count = codes.Length;
         }
 
-        void CheckStatements()
+        void ProcessStatements()
         {
+            var flow = Wf.Running($"Processing current statement set");
             var distiller = Wf.AsmDistiller();
             var paths = distiller.Distillations();
+            OpCodes = OpCodeLookup.create();
+            Sigs = SignatureLookup.create();
+            Forms = FormLookup.create();
             foreach(var path in paths)
             {
-                Wf.Status($"Loading {path}");
-                var data = distiller.LoadDistillation(path);
-                Wf.Status($"Loaded {data.Count} statements");
-            }
+                var loading = Wf.Running($"Loading <{path}>");
+                var data = distiller.LoadDistillation(path).View;
+                var count = data.Length;
+                Wf.Ran(loading, $"Loaded <{count}> statements from <{path.ToUri()}>");
 
+                var processing = Wf.Running($"Processing <{count}> statements from <{path.ToUri()}>");
+                ProcessStatements(data);
+                Wf.Ran(processing,$"Processed <{count}> statements from <{path.ToUri()}>");
+            }
+            Wf.Ran(flow,$"Collected {OpCodes.Count} distinct opcodes, {Sigs.Count} distinct signatures and {Forms.Count} distinct combined forms");
+
+            var sorted = Forms.Values.OrderBy(x => x.OpCode).Array();
+            var pipe = AsmFormPipe.create(Wf);
+            var target = Db.IndexTable<AsmFormRecord>();
+            pipe.Emit(sorted,target);
+            //var dst = Db.IndexTable<Form>();
+            //AsmFormPipe.create(Wf)
+
+        }
+
+        OpCodeLookup OpCodes;
+
+        SignatureLookup Sigs;
+
+        FormLookup Forms;
+
+        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var statement = ref skip(src,i);
+                if(statement.OpCode.IsEmpty || statement.Sig.IsEmpty)
+                    continue;
+                else
+                {
+                    OpCodes.AddIfMissing(statement.OpCode);
+                    Sigs.AddIfMissing(statement.Sig);
+                    Forms.AddIfMissing(asm.form(statement.OpCode, statement.Sig));
+                }
+            }
         }
 
         public void Run()
         {
-            CheckStatements();
+            ProcessStatements();
             //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
             //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);
         }

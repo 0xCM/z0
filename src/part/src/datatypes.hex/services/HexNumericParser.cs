@@ -39,6 +39,31 @@ namespace Z0
                 return root.unparsed<uint>(src);
         }
 
+        /// <summary>
+        /// Attempts to parse a hex string as a uint16
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<ushort> parse16u(string src)
+        {
+            if(ushort.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ushort value))
+                return root.parsed(src,value);
+            else
+                return root.unparsed<ushort>(src);
+        }
+
+        /// <summary>
+        /// Attempts to parse a hex string as a uint8
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<byte> parse8u(string src)
+        {
+            if(byte.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out byte value))
+                return root.parsed(src,value);
+            else
+                return root.unparsed<byte>(src);
+        }
+
+
         [Op, Closures(UnsignedInts)]
         public static T parse<T>(string src, T @default)
         {

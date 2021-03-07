@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static Konst;
+    using static Part;
 
     using api = CpuWorkers;
 

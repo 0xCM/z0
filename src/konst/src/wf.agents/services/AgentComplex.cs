@@ -7,52 +7,51 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Agent that manages a collection of servers
     /// </summary>
-    public class WfAgentComplex : WfAgent
+    public class AgentComplex : Agent
     {
-        WfServer[] Servers;
+        AgentServer[] Servers;
 
-        IWfAgent EventSink;
+        IAgent Controller;
 
-        internal static Option<WfAgentComplex> Complex {get; set;}
+        internal static Option<AgentComplex> Complex {get; set;}
 
         static AgentIdentity Identity
             => (UInt32.MaxValue, UInt32.MaxValue);
 
-        internal WfAgentComplex(AgentContext Context)
+        internal AgentComplex(AgentContext Context)
             : base(Context, Identity)
         {
-            Servers = new WfServer[]{};
+            Servers = new AgentServer[]{};
         }
 
-        public void Configure(IEnumerable<WfServerConfig> config, IWfAgent sink)
+        public void Configure(IEnumerable<AgentServerConfig> config, IAgent controller)
         {
             var configs = config.ToArray();
-            Servers = new WfServer[configs.Length];
+            Servers = new AgentServer[configs.Length];
             for(var i=0; i<configs.Length; i++)
-                Servers[i] = WfAgents.server(Context, configs[i]);
+                Servers[i] = Agents.server(Context, configs[i]);
 
-            EventSink = sink;
+            Controller = controller;
         }
 
         protected override async void OnStart()
         {
-            await EventSink.Start();
+            await Controller.Start();
             Servers.Select(x => x.Start()).ToList();
         }
 
         protected override async void OnStop()
         {
             Servers.Select(x => x.Stop()).ToList();
-            await EventSink?.Stop();
+            await Controller?.Stop();
         }
 
         protected override void OnTerminate()
-            => EventSink.Dispose();
+            => Controller.Dispose();
 
         public override void Dispose()
         {

@@ -245,17 +245,14 @@ namespace Z0.Asm
 
         public void Emit(ReadOnlySpan<Form> src)
         {
-            Emit(src,Db.Table<AsmFormRecord>(TargetFolder));
+            AsmFormPipe.create(Wf).Emit(src, Db.Table<AsmFormRecord>(TargetFolder));
         }
 
-        public void Emit(ReadOnlySpan<Form> src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingTable<AsmFormRecord>(dst);
-            var count = Records.emit(src.Map(record), dst, AsmFormWidths);
-            Wf.EmittedTable(flow, count);
-        }
 
-        public ReadOnlySpan<Form> CatalogForms()
+        /// <summary>
+        /// Retrieves the forms present in the catalog
+        /// </summary>
+        public ReadOnlySpan<Form> CatalogedForms()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
@@ -268,7 +265,7 @@ namespace Z0.Asm
                 ref readonly var row = ref skip(imported, i);
                 var oc = asm.opcode(row.OpCode);
                 if(AsmSigParser.sig(row.Instruction, out var sig))
-                    seek(buffer, k++) = asm.form(row.Sequence, oc, sig);
+                    seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {
                     seek(buffer, k++) = Form.Empty;
@@ -304,19 +301,6 @@ namespace Z0.Asm
         FS.FolderName TargetFolder
             => FS.folder("asmcat");
 
-        [MethodImpl(Inline), Op]
-        AsmFormRecord record(Form src)
-        {
-            var dst = new AsmFormRecord();
-            dst.Seq = src.Id;
-            dst.Sig = src.Sig;
-            dst.Composite = Sigs.IsComposite(src.Sig);
-            dst.OpCode = src.OpCode;
-            return dst;
-        }
-
-        static ReadOnlySpan<byte> AsmFormWidths
-            => new byte[]{8,48,12,32};
 
         const string SourceHeader = "Opcode	Instruction	Op/En	Properties	Implicit Read	Implicit Write	Implicit Undef	Useful	Protected	64-bit Mode	Compat/32-bit-Legacy Mode	CPUID Feature Flags	AT&T Mnemonic	Preferred 	Description";
 

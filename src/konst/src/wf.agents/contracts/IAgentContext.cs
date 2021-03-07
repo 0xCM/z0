@@ -11,10 +11,10 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-        IEnumerable<IWfAgent> Members {get;}
+        IEnumerable<IAgent> Members {get;}
 
         IAgentEventSink EventLog {get;}
 
-        void Register(IWfAgent agent);
+        void Register(IAgent agent);
     }
 }

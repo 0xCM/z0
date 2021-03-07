@@ -8,11 +8,11 @@ namespace Z0
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class WfAgentControl : AgentControl<IWfAgentControl,IAgentContext>, IWfAgentControl
+    public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
         IAgentContext AgentContext;
 
-        public WfAgentControl(IWfContext Context)
+        public AgentControl(IWfContext Context)
             : base(Context)
         {
 
@@ -27,7 +27,7 @@ namespace Z0
         protected override async Task Configure(IAgentContext context)
             => await Task.Factory.StartNew(() => UpdateAgentContext(context));
 
-        Task IWfAgentControl.Configure(IAgentContext context)
+        Task IAgentControl.Configure(IAgentContext context)
             => Configure(context);
     }
 }

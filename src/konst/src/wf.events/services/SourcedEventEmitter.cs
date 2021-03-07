@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Defines base type for event originators
     /// </summary>
-    public abstract class SourcedEventEmitter : WfAgent
+    public abstract class SourcedEventEmitter : Agent
     {
         protected SourcedEventEmitter(IAgentContext Context, AgentIdentity Identity)
             :base(Context,Identity)

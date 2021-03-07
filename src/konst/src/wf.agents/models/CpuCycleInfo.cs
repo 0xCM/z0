@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using api = CpuWorkers;
 
@@ -22,7 +22,6 @@ namespace Z0
         public ulong CompletedCycles;
 
         public ulong CpuUsage;
-
 
         [MethodImpl(Inline)]
         public string Format()

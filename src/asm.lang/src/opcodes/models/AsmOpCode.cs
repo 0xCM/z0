@@ -73,5 +73,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => T.rex(this);
         }
+
+        public static AsmOpCode Empty
+            => default;
+
     }
 }

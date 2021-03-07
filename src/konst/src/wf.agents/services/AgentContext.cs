@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Defines a shared context for a set of agents
@@ -21,8 +21,8 @@ namespace Z0
 
         public IWfShell Wf {get;}
 
-        ConcurrentDictionary<ulong,IWfAgent> Agents {get;}
-            = new ConcurrentDictionary<ulong, IWfAgent>();
+        ConcurrentDictionary<ulong,IAgent> Agents {get;}
+            = new ConcurrentDictionary<ulong, IAgent>();
 
         [MethodImpl(Inline)]
         public AgentContext(IWfShell wf, IAgentEventSink sink)
@@ -31,10 +31,10 @@ namespace Z0
             EventLog = sink;
         }
 
-        public void Register(IWfAgent agent)
+        public void Register(IAgent agent)
             => Agents.TryAdd(agent.Identity, agent);
 
-        public IEnumerable<IWfAgent> Members
+        public IEnumerable<IAgent> Members
             => Agents.Values;
     }
 }

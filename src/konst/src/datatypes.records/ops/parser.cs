@@ -21,6 +21,18 @@ namespace Z0
             => Addresses.parse(src, out dst);
 
         [Op]
+        public static bool parse(string src, out Address32 dst)
+            => Addresses.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out Address16 dst)
+            => Addresses.parse(src, out dst);
+
+        [Op]
+        public static bool parse(string src, out Address8 dst)
+            => Addresses.parse(src, out dst);
+
+        [Op]
         public static bool parse(string src, out byte dst)
             => Numeric.parse(src, out dst);
 

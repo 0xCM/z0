@@ -10,7 +10,7 @@ namespace Z0
     using System.Threading.Tasks;
     using System.Diagnostics;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct CpuWorkers
@@ -71,17 +71,11 @@ namespace Z0
             return string.Format(Pattern,  core, worker);
         }
 
-        public static CpuWorker<S,T> create<S,T>(CpuWorkerSettings spec, Func<S,T> projector, ITableExchange<S,T> exchange)
+        [Op]
+        public static CpuWorker<S,T> create<S,T>(CpuWorkerSettings settings, IEmitter<S> emitter, Func<S,T> projector, IReceiver<T> receiver)
             where S : struct
             where T : struct
-        {
-            var worker = new CpuWorker<S,T>();
-            worker.Spec = spec;
-            worker.Exchange = exchange;
-            worker.Projector = projector;
-            worker.Continue = true;
-            return worker;
-        }
+                => new CpuWorker<S,T>(settings, emitter, projector, receiver);
 
         [Op]
         public static CpuWorker<ulong> example(IWfShell wf, uint core = 3, ulong length = DefaultCycleLength,  ulong cycles = DefaultCycleCount)

@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
-    using static Konst;
+    using static Root;
 
-    partial struct z
+    partial struct root
     {
         /// <summary>
         /// Searches for a thread given an OS-assigned id, not the useless clr id

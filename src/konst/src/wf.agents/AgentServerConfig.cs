@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines a server configuration record
     /// </summary>
-    public readonly struct WfServerConfig
+    public readonly struct AgentServerConfig
     {
         /// <summary>
         /// Identifies the server to which the configuration applies
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         public readonly uint CoreNumber;
 
-        public WfServerConfig(uint id, string name, uint core)
+        public AgentServerConfig(uint id, string name, uint core)
         {
             ServerId = id;
             ServerName = name;

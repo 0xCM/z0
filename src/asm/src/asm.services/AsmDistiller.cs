@@ -10,6 +10,7 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
+    using static AsmExpr;
 
     using Target = AsmStatementInfo;
     using Source = AsmRow;
@@ -52,6 +53,9 @@ namespace Z0.Asm
 
         public Index<AsmStatementInfo> LoadDistillation(FS.FilePath src)
         {
+            var flow = Wf.Running($"Parsing {src.ToUri()}");
+            var partial = 0;
+            var full = 0;
             var attempt = TextDocs.parse(src, out var doc);
             const byte fields = AsmStatementInfo.FieldCount;
             if(attempt)
@@ -69,34 +73,61 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var row = ref skip(rows,i);
-                    if(row.CellCount == fields)
-                    {
-                        ref var target = ref seek(dst,i);
-                        if(!Parse(row, out target))
-                        {
-                            Wf.Error($"Attempt to parse {row} failed");
-                            break;
-                        }
-                    }
+                    ref var target = ref seek(dst,i);
+                    var outcome = Parse(row, out target);
+                    if(outcome.Data < fields)
+                        partial++;
                     else
-                    {
-                        Wf.Error($"The expected field count for row {i+1} is {fields} and yet {row.CellCount} were detected");
-                        break;
-                    }
+                        full++;
                 }
+
+                Wf.Ran(flow, Msg.ParsedStatements.Format(full, partial, src));
+                return buffer;
             }
             else
             {
                 Wf.Error(attempt.Message);
+                return sys.empty<AsmStatementInfo>();
             }
-            return sys.empty<AsmStatementInfo>();
         }
 
-        Outcome Parse(TextRow src, out AsmStatementInfo dst)
+        Outcome<byte> Parse(TextRow src, out AsmStatementInfo dst)
         {
+            var count = src.CellCount;
+            var i=0;
+            var cells = src.Cells.View;
             dst = default;
-            return true;
+            if(count >= 5)
+            {
+                ref readonly var cell = ref skip(cells,i);
+                Records.parse(skip(cells, i++), out dst.Sequence);
+                Records.parse(skip(cells, i++), out dst.BlockAddress);
+                Records.parse(skip(cells, i++), out dst.IP);
+                Records.parse(skip(cells, i++), out dst.GlobalOffset);
+                Records.parse(skip(cells, i++), out dst.LocalOffset);
+            }
+
+            if(count == AsmStatementInfo.FieldCount)
+            {
+                dst.OpCode = asm.opcode(skip(cells, i++));
+                AsmSigParser.sig(skip(cells, i++), out dst.Sig);
+                dst.Statement = asm.statement(skip(cells,i++));
+                if(HexByteParser.parse(skip(cells,i++), out var data))
+                    dst.Encoded = data;
+                else
+                    dst.Encoded = AsmHexCode.Empty;
+            }
+            else
+            {
+                dst.OpCode = OpCode.Empty;
+                dst.Sig = Signature.Empty;
+                dst.Statement = Statement.Empty;
+                dst.Encoded = AsmHexCode.Empty;
+            }
+
+            return (byte)i;
         }
+
         bool NextRow(out Source row)
         {
             if(CurrentRow < LastRow)

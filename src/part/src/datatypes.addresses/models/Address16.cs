@@ -35,12 +35,6 @@ namespace Z0
              get => Location != 0;
         }
 
-        public A Zero
-        {
-             [MethodImpl(Inline)]
-             get => Empty;
-        }
-
 
         [MethodImpl(Inline)]
         public string Format()
@@ -107,7 +101,13 @@ namespace Z0
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
 
-        public static A Empty
+        public static A Zero
+        {
+             [MethodImpl(Inline)]
+             get => Empty;
+        }
+
+       public static A Empty
             => new A(0);
     }
 }

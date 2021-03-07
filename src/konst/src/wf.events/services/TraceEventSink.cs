@@ -6,18 +6,15 @@ namespace Z0
 {
     using System;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
     using Microsoft.Diagnostics.Tracing;
     using Microsoft.Diagnostics.Tracing.Session;
 
-    using static Konst;
-
     using api = SourcedEvents;
 
-    public sealed class TraceEventSink : WfAgent
+    public sealed class TraceEventSink : Agent
     {
-        public static IWfAgent Define(AgentContext Context, AgentIdentity Identity)
+        public static IAgent Define(AgentContext Context, AgentIdentity Identity)
             => new TraceEventSink(Context, Identity);
 
         TraceEventSink(AgentContext Context, AgentIdentity Identity)

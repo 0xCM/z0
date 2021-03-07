@@ -10,20 +10,20 @@ namespace Z0
     /// <summary>
     /// Defines a means by which agents can be queried and directed
     /// </summary>
-    public interface IWfAgentControl : IDisposable
+    public interface IAgentControl : IDisposable
     {
         AgentStats SummaryStats {get;}
 
         Task Configure(IAgentContext config);
     }
 
-    public interface IWfAgentControl<S,C> : IWfAgentControl
-        where S : IWfAgentControl
+    public interface IAgentControl<S,C> : IAgentControl
+        where S : IAgentControl
         where C : IAgentContext
     {
         Task Configure(C config);
 
-        Task IWfAgentControl.Configure(IAgentContext context)
+        Task IAgentControl.Configure(IAgentContext context)
             => Configure(context);
 
         event Action<C> Configured;

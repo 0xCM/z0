@@ -9,20 +9,20 @@ namespace Z0
     /// <summary>
     /// Defines a logical server
     /// </summary>
-    public class WfServer : WfAgent
+    public class AgentServer : Agent
     {
-        WfServerConfig Config {get;}
+        AgentServerConfig Config {get;}
 
-        WfAgentProcess Worker {get; }
+        AgentProcess Worker {get; }
 
-        internal WfServer(IAgentContext context, WfServerConfig config)
+        internal AgentServer(IAgentContext context, AgentServerConfig config)
             : base(context, (config.ServerId, 0u))
         {
             Config = config;
             var pulse =  SourcedEvents.emitter(context,
                 AgentIdentityPool.NextAgentId(PartId),
                 new PulseEmitterConfig(new TimeSpan(0,0,1)));
-            Worker = WfAgents.process(context, PartId, config.CoreNumber, new IWfAgent[]{pulse});
+            Worker = Agents.process(context, PartId, config.CoreNumber, new IAgent[]{pulse});
         }
 
         protected override async void OnStart()
