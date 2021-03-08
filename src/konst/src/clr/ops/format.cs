@@ -5,14 +5,10 @@
 namespace Z0
 {
     using System;
-    using Msil;
 
     using static Part;
 
     partial struct Clr
     {
-        [Op]
-        public static string format(CliSig src)
-            => DefaultCilFormatProvider.Instance.SigByteArrayToString(src);
     }
 }

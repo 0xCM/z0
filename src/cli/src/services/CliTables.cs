@@ -10,21 +10,9 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.IO;
 
-    using static Part;
-
-    public readonly struct CliTables : IWfStateless<CliTables>
+    public sealed class CliTables : WfService<CliTables>
     {
-        public IWfShell Wf {get;}
-
-        [MethodImpl(Inline)]
-        public static CliTables init(IWfShell wf)
-            => new CliTables(wf);
-
-        [MethodImpl(Inline)]
-        CliTables(IWfShell wf)
-            => Wf = wf;
-
-        public Outcome<FS.FilePath> DumpTables(FS.FilePath src, FS.FilePath dst)
+        public WfExecToken DumpMetadata(FS.FilePath src, FS.FilePath dst)
         {
             try
             {
@@ -33,14 +21,14 @@ namespace Z0
                 using var peFile = new PEReader(stream);
                 using var target = dst.Writer();
                 var reader = peFile.GetMetadataReader();
-                var viz = new MetadataTraverser(reader, target);
+                var viz = new MetadataVisualizer(reader, target);
                 viz.Visualize();
-                Wf.EmittedFile(flow);
-                return dst;
+                return Wf.EmittedFile(flow);
             }
             catch(Exception e)
             {
-                return e;
+                Wf.Error(e);
+                return WfExecToken.Empty;
             }
         }
     }

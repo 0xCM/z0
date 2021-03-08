@@ -10,9 +10,15 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using Msil;
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil
     {
+
+        [Op]
+        public static string format(CliSig src)
+            => DefaultCilFormatProvider.Instance.SigByteArrayToString(src);
+
         readonly Index<OpCodeInfo> Data;
 
         [Op]

@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=api
+set ProjectId=bitcore
 call %ControlCommands%\build-lib.cmd

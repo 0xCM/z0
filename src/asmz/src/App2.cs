@@ -91,6 +91,24 @@ namespace Z0.Asm
             return false;
         }
 
+        void ShowPartComponents()
+        {
+
+            var src = Clr.adapt(Wf.Api.PartComponents);
+            for(var i=0; i<src.Length; i++)
+            {
+                ref readonly var item = ref skip(src,i);
+                var info = new {
+                    item.SimpleName,
+                    item.Location,
+                    item.PdbPath,
+                    item.DocPath,
+                    MetadataSize = ((ByteSize)item.RawMetadata.Length).Kb
+                };
+                Wf.Row(info.ToString());
+            }
+        }
+
         public int TestJmpRax()
         {
             var tc = TestCase01;
@@ -292,7 +310,6 @@ namespace Z0.Asm
         static MsgPattern<Count,FS.FileUri> ProcessedStatements => "Processed {0} statements from {1}";
 
 
-
         void ProcessStatements()
         {
             var distiller = Wf.AsmDistiller();
@@ -342,8 +359,10 @@ namespace Z0.Asm
         {
             // var commands = WfCmdGlobals.create(Wf);
             // commands.Run(GlobalWfCmd.ShowByteConversions);
-
-            ProcessStatements();
+            var src = FS.path(Parts.Math.Assembly.Location);
+            var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
+            CliTables.create(Wf).DumpMetadata(src,dst);
+            //ProcessStatements();
             //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
             //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);
         }

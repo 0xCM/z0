@@ -36,6 +36,18 @@ namespace Z0
             return this;
         }
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => StartSeq == 0 || StartSeq == ulong.MaxValue;
+        }
+
+        public static WfExecToken Empty
+        {
+            [MethodImpl(Inline)]
+            get => new WfExecToken(ulong.MaxValue);
+        }
+
         public string Format()
             => string.Format("{0} | {1} | {2}", string.Format("{0:D4}:{1:D4}", StartSeq, EndSeq), Started, Finished ?? Timestamp.Zero);
 

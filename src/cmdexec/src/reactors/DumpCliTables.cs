@@ -7,6 +7,9 @@ namespace Z0
     sealed class DumpCliTables : CmdReactor<DumpCliTablesCmd>
     {
         protected override CmdResult Run(DumpCliTablesCmd cmd)
-            => cmd.ToResult(CliTables.init(Wf).DumpTables(cmd.Source, cmd.Target));
+        {
+            CliTables.create(Wf).DumpMetadata(cmd.Source, cmd.Target);
+            return Cmd.ok(cmd);
+        }
     }
 }

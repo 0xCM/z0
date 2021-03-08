@@ -43,22 +43,22 @@ namespace Z0
         public ClrAssemblyName Name
             => Definition;
 
-        public FS.FilePath FilePath
+        public FS.FilePath Location
         {
             [MethodImpl(Inline)]
-            get => FS.path(Definition.CodeBase);
+            get => FS.path(Definition.Location);
         }
 
         ref readonly FS.FilePath GetDocPath(out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FS.Extensions.Xml.Name));
+            var candidate = FS.path(Path.ChangeExtension(Location.Name, FS.Extensions.Xml.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }
 
         ref readonly FS.FilePath GetPdbPath(out FS.FilePath dst)
         {
-            var candidate = FS.path(Path.ChangeExtension(Definition.CodeBase, FS.Extensions.Pdb.Name));
+            var candidate = FS.path(Path.ChangeExtension(Location.Name, FS.Extensions.Pdb.Name));
             dst = candidate.Exists ? candidate : FS.FilePath.Empty;
             return ref dst;
         }
@@ -79,12 +79,12 @@ namespace Z0
             => Clr.references(Definition);
 
         public ClrToken Token
-            => default;
+            => (uint)Part;
 
-        public SegRef<byte> RawMetadata
+        public ReadOnlySpan<byte> RawMetadata
         {
             [MethodImpl(Inline)]
-            get => Clr.metadata(Definition);
+            get => Clr.metaspan(Definition);
         }
 
         string IClrArtifact.Name

@@ -16,8 +16,8 @@ namespace Z0
         public static ClrMethod method(Delegate src)
             => src.Method;
 
-        [Op]
-        public static MethodBase method(Module module, ClrToken metadataToken, Type[] gTypeArgs, Type[] gMethodArgs)
-            => Msil.ModuleExtensions.ResolveMethod(module, (int)metadataToken, gTypeArgs, gMethodArgs);
+        // [Op]
+        // public static MethodBase method(Module module, ClrToken metadataToken, Type[] gTypeArgs, Type[] gMethodArgs)
+        //     => Msil.ModuleExtensions.ResolveMethod(module, (int)metadataToken, gTypeArgs, gMethodArgs);
     }
 }

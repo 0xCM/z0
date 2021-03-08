@@ -9,12 +9,8 @@ namespace Z0
     using System.IO;
     using System.Linq;
 
-    using Z0.Tooling;
-
     using static Part;
-    using static Toolsets;
     using static memory;
-    using static Tooling.Llvm;
 
     class App : IDisposable
     {
@@ -280,23 +276,6 @@ namespace Z0
             var patterns = catalog.XedSummaries();
             Wf.Status($"{patterns.Length}");
         }
-
-        void ShowPartComponents()
-        {
-            var src = Clr.adapt(Wf.Api.PartComponents);
-            for(var i=0; i<src.Length; i++)
-            {
-                ref readonly var item = ref skip(src,i);
-                var info = new {
-                    item.SimpleName,
-                    item.FilePath,
-                    item.PdbPath,
-                    item.DocPath,
-                };
-                Wf.Row(info.ToString());
-            }
-        }
-
 
 
         public void Run()

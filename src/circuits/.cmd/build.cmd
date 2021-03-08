@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=cli
+set ProjectId=circuits
 call %ControlScripts%\build-lib.cmd

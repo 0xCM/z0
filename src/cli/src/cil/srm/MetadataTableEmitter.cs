@@ -28,7 +28,7 @@ namespace System.Reflection.Metadata
                     using (var peFile = new PEReader(stream))
                     {
                         var metadataReader = peFile.GetMetadataReader();
-                        var visualizer = new MetadataTraverser(metadataReader, Console.Out);
+                        var visualizer = new MetadataVisualizer(metadataReader, Console.Out);
                         visualizer.Visualize();
                     }
                 }

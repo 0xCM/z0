@@ -17,6 +17,7 @@
     <PackageReference Include="Microsoft.CodeAnalysis" Version="3.8.0-5.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.Scripting" Version="3.8.0-5.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.8.0-5.final" />
+    <!-- <PackageReference Include="Microsoft.CodeAnalysis.Debugging" Version="3.9.0-5.21120.8" /> -->
 
     <PackageReference Include="Microsoft.SymbolStore" Version="1.0.161401" />
     <PackageReference Include="Microsoft.FileFormats" Version="1.0.161401" />

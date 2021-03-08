@@ -9,15 +9,13 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.CompilerServices;
 
-    using Msil;
-
     using static Part;
 
     partial struct ClrDynamic
     {
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicMethod src)
-            => new CilMethod(src.Name, cilbytes(src), src.GetMethodImplementationFlags(), src.GetILSig());
+            => new CilMethod(src.Name, cilbytes(src), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicDelegate src)
@@ -30,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CilMethod cil(MemoryAddress @base, OpUri uri, MethodInfo src)
-            => new CilMethod(@base, uri.Format(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags(), src.GetILSig());
+            => new CilMethod(@base, uri.Format(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376

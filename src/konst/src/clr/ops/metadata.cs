@@ -12,7 +12,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static unsafe SegRef<byte> metadata(Assembly src)
+        public static unsafe SegRef<byte> metaref(Assembly src)
         {
             if(src.TryGetRawMetadata(out var ptr, out var len))
                 return memory.segref(ptr, len);
@@ -25,11 +25,34 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static unsafe ref SegRef<byte> metadata(Assembly src, out SegRef<byte> dst)
+        public static unsafe ref SegRef<byte> metaref(Assembly src, out SegRef<byte> dst)
         {
             src.TryGetRawMetadata(out var ptr, out var len);
             dst = memory.segref(ptr, len);
             return ref dst;
+        }
+
+        /// <summary>
+        /// Returns a reference to the cli metadata for an assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static unsafe ref ReadOnlySpan<byte> metaspan(Assembly src, out ReadOnlySpan<byte> dst)
+        {
+            src.TryGetRawMetadata(out var ptr, out var size);
+            dst = memory.cover(ptr, size);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Returns a reference to the cli metadata for an assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static unsafe ReadOnlySpan<byte> metaspan(Assembly src)
+        {
+            src.TryGetRawMetadata(out var ptr, out var size);
+            return memory.cover(ptr, size);
         }
 
         /// <summary>
