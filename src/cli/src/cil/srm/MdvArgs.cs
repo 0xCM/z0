@@ -9,27 +9,42 @@ namespace System.Reflection.Metadata
 
     public sealed class MdvArgs
     {
-        public bool Recursive { get; private set; }
+        public static MdvArgs create(string src, string dst)
+            => new MdvArgs{
+                Path = src,
+                OutputPath = dst
+            };
 
-        public string Path { get; private set; }
+        public string Path { get; set; }
 
-        public IReadOnlyList<(string MetadataPath, string ILPathOpt)> EncDeltas { get; private set; }
+        public string OutputPath { get; set; }
 
-        public HashSet<int> SkipGenerations { get; private set; }
+        public bool Recursive { get; set; }
+            = false;
 
-        public bool DisplayStatistics { get; private set; }
+        public IReadOnlyList<(string MetadataPath, string ILPathOpt)> EncDeltas { get; set; }
+            = new List<(string MetadataPath, string ILPathOpt)>();
 
-        public bool DisplayAssemblyReferences { get; private set; }
+        public HashSet<int> SkipGenerations { get; set; }
+            = new HashSet<int>();
 
-        public bool DisplayIL { get; private set; }
+        public bool DisplayStatistics { get; set; }
+            = true;
 
-        public bool DisplayEmbeddedPdb { get; private set; }
+        public bool DisplayAssemblyReferences { get; set; }
+            = true;
 
-        public bool DisplayMetadata { get; private set; }
+        public bool DisplayIL { get; set; }
+            = true;
 
-        public string OutputPath { get; private set; }
+        public bool DisplayEmbeddedPdb { get; set; }
+            = false;
 
-        public ImmutableArray<string> FindRefs { get; private set; }
+        public bool DisplayMetadata { get; set; }
+            = true;
+
+        public ImmutableArray<string> FindRefs { get; set; }
+            = ImmutableArray<string>.Empty;
 
         public const string Help = @"
     Parameters:

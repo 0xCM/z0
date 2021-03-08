@@ -11,9 +11,13 @@ namespace Z0
     using static memory;
 
     using Msil;
+    using System.Reflection.Metadata;
+
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil
     {
+        public static void visualize(FS.FilePath src, FS.FilePath dst)
+            => Mdv.run(src.Name,dst.Name);
 
         [Op]
         public static string format(CliSig src)

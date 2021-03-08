@@ -873,35 +873,42 @@ namespace System.Reflection.Metadata
 
         void WriteAssembly()
         {
-            if (_reader.IsAssembly)
+            if (!_reader.IsAssembly)
             {
-                AddHeader(
-                    "Name",
-                    "Version",
-                    "Culture",
-                    "PublicKey",
-                    "Flags",
-                    "HashAlgorithm"
-                );
-
-                var entry = _reader.GetAssemblyDefinition();
-
-                AddRow(
-                    Literal(entry.Name),
-                    entry.Version.Major + "." + entry.Version.Minor + "." + entry.Version.Revision + "." + entry.Version.Build,
-                    Literal(entry.Culture),
-                    Literal(entry.PublicKey),
-                    EnumValue<int>(entry.Flags),
-                    EnumValue<int>(entry.HashAlgorithm)
-                );
-
-                WriteRows("Assembly (0x20):");
+                return;
             }
+
+            var table = new TableBuilder(
+                "Assembly (0x20):",
+                "Name",
+                "Version",
+                "Culture",
+                "PublicKey",
+                "Flags",
+                "HashAlgorithm"
+            );
+
+            var entry = _reader.GetAssemblyDefinition();
+
+            table.AddRow(
+                Literal(() => entry.Name),
+                Version(() => entry.Version),
+                Literal(() => entry.Culture),
+                Literal(() => entry.PublicKey, BlobKind.Key),
+                EnumValue<int>(() => entry.Flags),
+                EnumValue<int>(() => entry.HashAlgorithm)
+            );
+
+            WriteTable(table);
         }
+
+        string Version(Func<Version> getVersion)
+            => ToString(getVersion, version => version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision);
 
         void WriteAssemblyRef()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "AssemblyRef (0x23):",
                 "Name",
                 "Version",
                 "Culture",
@@ -913,21 +920,22 @@ namespace System.Reflection.Metadata
             {
                 var entry = _reader.GetAssemblyReference(handle);
 
-                AddRow(
-                    Literal(entry.Name),
-                    entry.Version.Major + "." + entry.Version.Minor + "." + entry.Version.Revision + "." + entry.Version.Build,
-                    Literal(entry.Culture),
-                    Literal(entry.PublicKeyOrToken),
-                    EnumValue<int>(entry.Flags)
+                table.AddRow(
+                    Literal(() => entry.Name),
+                    Version(() => entry.Version),
+                    Literal(() => entry.Culture),
+                    Literal(() => entry.PublicKeyOrToken, BlobKind.Key),
+                    EnumValue<int>(() => entry.Flags)
                 );
             }
 
-            WriteRows("AssemblyRef (0x23):");
+            WriteTable(table);
         }
 
         void WriteFile()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "File (0x26):",
                 "Name",
                 "Metadata",
                 "HashValue"
@@ -937,39 +945,74 @@ namespace System.Reflection.Metadata
             {
                 var entry = _reader.GetAssemblyFile(handle);
 
-                AddRow(
-                    Literal(entry.Name),
+                table.AddRow(
+                    Literal(() => entry.Name),
                     entry.ContainsMetadata ? "Yes" : "No",
-                    Literal(entry.HashValue)
+                    Literal(() => entry.HashValue, BlobKind.FileHash)
                 );
             }
 
-            WriteRows("File (0x26):");
+            WriteTable(table);
+        }
+
+        private string FormatAwaits(BlobHandle handle)
+        {
+            var sb = new StringBuilder();
+            var blobReader = _reader.GetBlobReader(handle);
+
+            while (blobReader.RemainingBytes > 0)
+            {
+                if (blobReader.Offset > 0)
+                {
+                    sb.Append(", ");
+                }
+
+                int value;
+                sb.Append("(");
+                sb.Append(blobReader.TryReadCompressedInteger(out value) ? value.ToString() : "?");
+                sb.Append(", ");
+                sb.Append(blobReader.TryReadCompressedInteger(out value) ? value.ToString() : "?");
+                sb.Append(", ");
+                sb.Append(blobReader.TryReadCompressedInteger(out value) ? Token(() => MetadataTokens.MethodDefinitionHandle(value)) : "?");
+                sb.Append(')');
+            }
+
+            return sb.ToString();
         }
 
         void WriteExportedType()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "ExportedType (0x27):",
                 "Name",
                 "Namespace",
-                "Assembly"
+                "Attributes",
+                "Implementation",
+                "TypeDefinitionId"
             );
+
+            const TypeAttributes TypeForwarder = (TypeAttributes)0x00200000;
 
             foreach (var handle in _reader.ExportedTypes)
             {
                 var entry = _reader.GetExportedType(handle);
-                AddRow(
-                    Literal(entry.Name),
-                    Literal(entry.Namespace),
-                    Token(entry.Implementation));
+
+                table.AddRow(
+                    Literal(() => entry.Name),
+                    Literal(() => entry.Namespace),
+                    ToString(() => ((entry.Attributes & TypeForwarder) == TypeForwarder ? "TypeForwarder, " : "") + (entry.Attributes & ~TypeForwarder).ToString()),
+                    Token(() => entry.Implementation),
+                    Int32Hex(() => entry.GetTypeDefinitionId())
+                );
             }
 
-            WriteRows("ExportedType - forwarders (0x27):");
+            WriteTable(table);
         }
 
         void WriteManifestResource()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "ManifestResource (0x28):",
                 "Name",
                 "Attributes",
                 "Offset",
@@ -980,80 +1023,84 @@ namespace System.Reflection.Metadata
             {
                 var entry = _reader.GetManifestResource(handle);
 
-                AddRow(
-                    Literal(entry.Name),
-                    entry.Attributes.ToString(),
-                    entry.Offset.ToString(),
-                    Token(entry.Implementation)
+                table.AddRow(
+                    Literal(() => entry.Name),
+                    ToString(() => entry.Attributes),
+                    ToString(() => entry.Offset),
+                    Token(() => entry.Implementation)
                 );
             }
 
-            WriteRows("ManifestResource (0x28):");
+            WriteTable(table);
         }
 
         void WriteGenericParam()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "GenericParam (0x2a):",
                 "Name",
                 "Seq#",
                 "Attributes",
+                "Parent",
                 "TypeConstraints"
             );
 
-            var count = _reader.GetTableRowCount(TableIndex.GenericParam);
-            for (int i = 1; i<=count; i++)
+            for (int i = 1, count = _reader.GetTableRowCount(TableIndex.GenericParam); i <= count; i++)
             {
                 var entry = _reader.GetGenericParameter(MetadataTokens.GenericParameterHandle(i));
-                AddRow(
-                    Literal(entry.Name),
-                    entry.Index.ToString(),
-                    EnumValue<int>(entry.Attributes),
+
+                table.AddRow(
+                    Literal(() => entry.Name),
+                    ToString(() => entry.Index),
+                    EnumValue<int>(() => entry.Attributes),
+                    Token(() => entry.Parent),
                     TokenRange(entry.GetConstraints(), h => h)
                 );
             }
 
-            WriteRows("GenericParam (0x2a):");
+            WriteTable(table);
         }
 
         void WriteMethodSpec()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "MethodSpec (0x2b):",
                 "Method",
                 "Signature"
             );
 
-            var count = _reader.GetTableRowCount(TableIndex.MethodSpec);
-            for (int i = 1; i<=count; i++)
+            for (int i = 1, count = _reader.GetTableRowCount(TableIndex.MethodSpec); i <= count; i++)
             {
                 var entry = _reader.GetMethodSpecification(MetadataTokens.MethodSpecificationHandle(i));
-                AddRow(
-                    Token(entry.Method),
-                    Literal(entry.Signature)
+
+                table.AddRow(
+                    Token(() => entry.Method),
+                    MethodSpecificationSignature(() => entry.Signature)
                 );
             }
 
-            WriteRows("MethodSpec (0x2b):");
+            WriteTable(table);
         }
 
         void WriteGenericParamConstraint()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "GenericParamConstraint (0x2c):",
                 "Parent",
                 "Type"
             );
 
-            var count = _reader.GetTableRowCount(TableIndex.GenericParamConstraint);
-            for (int i = 1; i <= count; i++)
+            for (int i = 1, count = _reader.GetTableRowCount(TableIndex.GenericParamConstraint); i <= count; i++)
             {
                 var entry = _reader.GetGenericParameterConstraint(MetadataTokens.GenericParameterConstraintHandle(i));
 
-                AddRow(
-                    Token(entry.Parameter),
-                    Token(entry.Type)
+                table.AddRow(
+                    Token(() => entry.Parameter),
+                    Token(() => entry.Type)
                 );
             }
 
-            WriteRows("GenericParamConstraint (0x2c):");
+            WriteTable(table);
         }
 
         void WriteUserStrings()
@@ -2769,5 +2816,4 @@ namespace System.Reflection.Metadata
             return unchecked((hashCode ^ ch) * Hash.FnvPrime);
         }
     }
-
 }

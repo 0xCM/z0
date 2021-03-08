@@ -359,9 +359,13 @@ namespace Z0.Asm
         {
             // var commands = WfCmdGlobals.create(Wf);
             // commands.Run(GlobalWfCmd.ShowByteConversions);
-            var src = FS.path(Parts.Math.Assembly.Location);
+            var src = FS.path(Parts.Konst.Assembly.Location);
             var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
-            CliTables.create(Wf).DumpMetadata(src,dst);
+            var flow = Wf.EmittingFile(dst);
+            Cil.visualize(src,dst);
+            Wf.EmittedFile(flow);
+
+            //CliTables.create(Wf).DumpMetadata(src,dst);
             //ProcessStatements();
             //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
             //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);

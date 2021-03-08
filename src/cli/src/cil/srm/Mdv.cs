@@ -35,6 +35,22 @@ namespace System.Reflection.Metadata
             }
         }
 
+        public static void run(string src, string dst)
+        {
+            run(MdvArgs.create(src,dst));
+        }
+
+        public static void run(MdvArgs args)
+        {
+            using (var mdv = new Mdv(args))
+            {
+                if (args.Recursive)
+                    mdv.RunRecursive();
+                else
+                    mdv.RunOne();
+            }
+        }
+
         private sealed class GenerationData
         {
             public readonly IDisposable MemoryOwner;
