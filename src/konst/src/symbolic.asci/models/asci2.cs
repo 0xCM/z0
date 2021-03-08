@@ -44,13 +44,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Null.Equals(this);
+            get => Storage == 0;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Null.Equals(this);
+            get => Storage != 0;
         }
         public A Zero
         {

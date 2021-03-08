@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static AppErrorMsg;
     using static ClaimValidator;
-    using static z;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -23,7 +22,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public static void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => CheckPrimal.eq((uint)lhs, (uint)rhs, caller, file, line);
+            => PrimalChecks.eq((uint)lhs, (uint)rhs, caller, file, line);
 
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

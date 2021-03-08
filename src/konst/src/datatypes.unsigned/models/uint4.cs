@@ -116,7 +116,7 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hash;
 
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static implicit operator uint8T(U src)
             => new uint8T(src.data);
 

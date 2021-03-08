@@ -51,7 +51,8 @@ namespace Z0
 
         public void test_asci_format()
         {
-            var a0 = AsciFormatter.format((asci2)"01");
+            //var a0 = AsciFormatter.format((asci2)"01");
+            var a0 = Asci.encode(n2,"01");
             var a1 = AsciFormatter.format((asci4)"1234");
             var a2 = AsciFormatter.format((asci8)"abcdefg");
             var a3 = AsciFormatter.format((asci16)"abcdefghijklmnop");

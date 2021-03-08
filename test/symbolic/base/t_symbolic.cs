@@ -9,14 +9,13 @@ namespace Z0
         public static TCheckSymbolic Checker => default(CheckSymbolic);
     }
 
-    public interface TCheckSymbolic : ICheckNumeric, ICheckVectors
+    public interface TCheckSymbolic : ICheckNumeric, ICheckVectors, ICheckEquatable
     {
-
     }
-    public abstract class t_symbolic<X> : UnitTest<X, CheckSymbolic, TCheckSymbolic>
+
+    public abstract class t_symbolic<X> : UnitTest<X, CheckSymbolic, TCheckSymbolic>, TCheckSymbolic
         where X : t_symbolic<X>, new()
     {
-
+        protected ICheckEquatable CheckEquatable => this;
     }
-
 }

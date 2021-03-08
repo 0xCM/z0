@@ -133,7 +133,7 @@ namespace Z0
                 {
                     var x = Source.Cell(w);
                     var y = Source.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -156,7 +156,7 @@ namespace Z0
                 {
                     var x = Source.Cell(w);
                     var y = Source.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -179,7 +179,7 @@ namespace Z0
                 {
                     var x = Source.Cell(w);
                     var y = Source.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -202,7 +202,7 @@ namespace Z0
                 {
                     var x = Source.Cell(w);
                     var y = Source.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 
@@ -226,7 +226,7 @@ namespace Z0
                 {
                     var x = Source.Cell(w);
                     var y = Source.Cell(w);
-                    Claim.Eq(f(x,y),g(x,y));
+                    Claim.eq(f(x,y),g(x,y));
                 }
             }
 

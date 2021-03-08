@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct AsmEtl
     {
         [Op]
-        public static ApiInstructionLookup deduplicate(ApiInstruction[] src, out ApiInstructionDuplication stats)
+        public static ApiInstructionLookup lookup(ApiInstruction[] src, out ApiInstructionDuplication stats)
         {
             var count = (uint)src.Length;
             var lookup = new ApiInstructionLookup((int)count);

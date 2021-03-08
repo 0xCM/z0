@@ -7,32 +7,48 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    public class t_stringref : t_symbolic<t_stringref>
+    public class t_digital : t_symbolic<t_digital>
     {
-        const string S0 = "ABCDEFG";
-
-        const string S1 ="HIJKLMN";
-
-        public void tc_literal()
+        public void t_pow2()
         {
-            var r0 = z.@ref(S0);
-            Claim.ClaimEq(r0.Text, S0);
-
-            var r1 = z.@ref(S1);
-            Claim.ClaimEq(r1.Text, S1);
-        }
-
-        public void tc_dynamic()
-        {
-            var dst = EmptyString;
-            for(var i=0; i<9; i++)
+            var path = CasePath(CsvExt);
+            var flow = Wf.EmittingFile(path);
+            using var writer = path.Writer();
+            for(byte i=0; i<64; i++)
             {
-                dst += i.ToString()[0];
+                Pow2 p = i;
+                writer.WriteLine(p.FormatSymbolic());
             }
-            var r = z.@ref(dst);
-            Claim.ClaimEq(dst, r.Text);
+            Wf.EmittedFile(flow);
         }
+
+        public void t_bits()
+        {
+            var claim = Checks().CheckEquatable;
+
+            var b1 = Digital.bits(n1);
+            claim.eq(b1.Length, 2);
+
+            var b2 = Digital.bits(n2);
+            claim.eq(b2.Length, 4);
+
+            var b3 = Digital.bits(n3);
+            claim.eq(b3.Length, 8);
+
+            var b4 = Digital.bits(n4);
+            claim.eq(b4.Length, 16);
+
+            var b5 = Digital.bits(n5);
+            claim.eq(b5.Length, 32);
+
+            var b6 = Digital.bits(n6);
+            var b7 = Digital.bits(n7);
+            var b8 = Digital.bits(n8);
+
+
+        }
+
     }
 }

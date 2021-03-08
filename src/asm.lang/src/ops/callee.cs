@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmCaller caller(MemoryAddress @base, AsmSymbol symbol)
-            => new AsmCaller(@base, symbol);
+        public static AsmCallee callee(MemoryAddress @base, AsmSymbol symbol)
+            => new AsmCallee(@base, symbol);
     }
 }

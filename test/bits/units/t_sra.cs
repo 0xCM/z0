@@ -48,7 +48,7 @@ namespace Z0
             var src = Random.Array<byte>(RepCount);
             var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)width<byte>()));
             root.iteri(RepCount,
-                i => CheckPrimal.eq((byte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));
+                i => PrimalChecks.eq((byte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));
         }
 
         public void sb_sra_8i()

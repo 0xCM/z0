@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Represents a based code block that issues a call instruction
     /// </summary>
-    public readonly struct AsmCaller
+    public readonly struct AsmCaller : ITextual
     {
         public MemoryAddress Base {get;}
 

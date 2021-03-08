@@ -15,11 +15,11 @@ namespace Z0
 
     public interface ICheckEquatable : IClaimValidator
     {
-        void Eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        void eq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : IEquatable<T>
         {
-            if(!lhs.Equals(rhs))
-                throw Failed(ClaimKind.Eq, NotEqual(lhs,rhs, caller, file, line));
+            if(!a.Equals(b))
+                throw Failed(ClaimKind.Eq, NotEqual(a, b, caller, file, line));
         }
     }
 }

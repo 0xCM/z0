@@ -28,4 +28,9 @@ namespace Z0
             where T : unmanaged
                 => CheckNumeric.eq(lhs,rhs);
     }
+
+    public readonly struct CheckSpans : ICheckSpans
+    {
+
+    }
 }

@@ -15,27 +15,27 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(in asci2 src)
-            => format(src,n2);
+            => format(src, n2);
 
         [MethodImpl(Inline), Op]
         public static string format(in asci4 src)
-            => format(src,n4);
+            => format(src, n4);
 
         [MethodImpl(Inline), Op]
         public static string format(in asci8 src)
-            => format(src,n8);
+            => format(src, n8);
 
         [MethodImpl(Inline), Op]
         public static string format(in asci16 src)
-            => format(src,n16);
+            => format(src, n16);
 
         [MethodImpl(Inline), Op]
         public static string format(in asci32 src)
-            => format(src,n32);
+            => format(src, n32);
 
         [MethodImpl(Inline), Op]
         public static string format(in asci64 src)
-            => format(src,n64);
+            => format(src, n64);
 
         [MethodImpl(Inline)]
         static unsafe string format<A,N>(in A src, N n = default)
@@ -101,8 +101,6 @@ namespace Z0
         }
 
         const string Buffer0 = "";
-
-        const string Buffer1 = " ";
 
         const string Buffer2 = "  ";
 

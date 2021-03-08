@@ -27,7 +27,7 @@ namespace Z0
                 {
                     var x = Random.Cell(w);
                     var y = Random.Cell(w);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -52,7 +52,7 @@ namespace Z0
                     var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -77,7 +77,7 @@ namespace Z0
                     var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -102,7 +102,7 @@ namespace Z0
                     var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -127,7 +127,7 @@ namespace Z0
                     var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 
@@ -152,7 +152,7 @@ namespace Z0
                     var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
-                    Eq.Checker.Eq(f(x),g(x));
+                    Eq.Checker.eq(f(x),g(x));
                 }
             }
 

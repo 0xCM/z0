@@ -24,15 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public asci4(S src)
-        {
-            Storage = src;
-        }
+            => Storage = src;
 
         [MethodImpl(Inline)]
         public asci4(string src)
-        {
-            Storage = Asci.encode(n,src).Storage;
-        }
+            => Storage = Asci.encode(n,src).Storage;
 
         public bool IsBlank
         {

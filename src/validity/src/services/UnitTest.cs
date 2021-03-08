@@ -7,6 +7,13 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
+        protected CheckProvider Checks()
+            => new CheckProvider();
+
+        protected FS.FileExt CsvExt => FS.Extensions.Csv;
+
+        protected FS.FileExt AsmExt => FS.Extensions.Asm;
+
         public static N0 n0 => default;
 
         public static N1 n1 => default;
@@ -81,5 +88,6 @@ namespace Z0
         where I : IClaimValidator
     {
         protected override I Claim => default(V);
+
     }
 }

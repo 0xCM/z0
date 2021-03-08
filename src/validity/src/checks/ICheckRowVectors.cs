@@ -11,7 +11,8 @@ namespace Z0
 
     public interface ICheckRowVectors : IClaimValidator
     {
-        static ICheckRowVectors<CheckRowVectors> Checker => default(CheckRowVectors);
+        static ICheckRowVectors<CheckRowVectors> Checker
+            => default(CheckRowVectors);
 
         [MethodImpl(Inline)]
         int length<T>(RowVector256<T> lhs, RowVector256<T> rhs)
