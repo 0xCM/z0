@@ -14,10 +14,10 @@ namespace Z0.Schemas.Ecma
 
         public FK<BlobIndex> Name;
 
-        public FK<guid> HashAlgorithm;
+        public FK<GuidIndex> HashAlgorithm;
 
         public FK<BlobIndex> Hash;
 
-        public FK<guid> Language;
+        public FK<GuidIndex> Language;
     }
 }

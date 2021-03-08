@@ -12,5 +12,4 @@ namespace Z0.Schemas.Ecma
 
         public int Field;
     }
-
 }

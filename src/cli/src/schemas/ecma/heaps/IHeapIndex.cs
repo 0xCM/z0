@@ -8,7 +8,7 @@ namespace Z0.Schemas.Ecma
     {
         HeapIndexKind Classifier {get;}
 
-        uint Value {get;}
+        uint Key {get;}
     }
 
     public interface IHeapIndex<T> : IHeapIndex

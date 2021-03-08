@@ -20,13 +20,13 @@ namespace Z0.Schemas.Ecma
     public readonly struct HeapIndex<T> : IHeapIndex<T,HeapIndex<T>>
         where T : unmanaged, IHeapIndexKind<T>
     {
-        public uint Value {get;}
+        public uint Key {get;}
 
         public HeapIndexKind Classifier
             => default(T).Classifier;
 
         [MethodImpl(Inline)]
         public HeapIndex(uint offset)
-            => Value = offset;
+            => Key = offset;
     }
 }

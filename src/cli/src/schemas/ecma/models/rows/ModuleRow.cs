@@ -14,12 +14,12 @@ namespace Z0.Schemas.Ecma
 
         public ushort Generation;
 
-        public FK<name> Name;
+        public FK<StringIndex> Name;
 
-        public FK<Guid> ModuleVersionId;
+        public FK<GuidIndex> ModuleVersionId;
 
-        public FK<Guid> EncId;
+        public FK<GuidIndex> EncId;
 
-        public FK<Guid> EncBaseId;
+        public FK<GuidIndex> EncBaseId;
     }
 }

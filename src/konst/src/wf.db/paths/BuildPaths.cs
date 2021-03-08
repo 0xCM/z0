@@ -1,0 +1,23 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Reflection;
+
+    using static DbNames;
+
+    partial interface IEnvPaths
+    {
+        FS.FolderPath BuildLogRoot()
+            => LogRoot() + FS.folder("build");
+
+        FS.FilePath BuildLogPath(FS.FileName src)
+            => BuildLogRoot() + src;
+
+        FS.FolderPath BuildArchiveRoot()
+            => BinaryRoot() + FS.folder(builds);
+    }
+}

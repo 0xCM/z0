@@ -27,7 +27,7 @@ namespace System.Reflection.Metadata
 
         readonly IReadOnlyList<MetadataReader> _readers;
 
-        readonly MetadataAggregator Aggregator;
+        readonly MetadataAggregator _aggregator;
 
         // enc map for each delta reader
         readonly ImmutableArray<ImmutableArray<EntityHandle>> EncMaps;
@@ -37,8 +37,6 @@ namespace System.Reflection.Metadata
         readonly MetadataVisualizerOptions _options;
 
         readonly SignatureVisualizer _signatureVisualizer;
-
-        readonly List<string[]> PendingRows = new List<string[]>();
 
         readonly Dictionary<BlobHandle, BlobKind> _blobKinds = new Dictionary<BlobHandle, BlobKind>();
 
@@ -52,7 +50,7 @@ namespace System.Reflection.Metadata
             if (readers.Count > 1)
             {
                 var deltaReaders = new List<MetadataReader>(readers.Skip(1));
-                Aggregator = new MetadataAggregator(readers[0], deltaReaders);
+                _aggregator = new MetadataAggregator(readers[0], deltaReaders);
                 EncMaps = ImmutableArray.CreateRange(deltaReaders.Select(reader => ImmutableArray.CreateRange(reader.GetEditAndContinueMapEntries())));
             }
         }
@@ -68,10 +66,6 @@ namespace System.Reflection.Metadata
         {
         }
 
-        public void WriteLine(string line)
-        {
-            _writer.WriteLine(line);
-        }
 
         public void VisualizeAllGenerations()
         {
@@ -116,7 +110,6 @@ namespace System.Reflection.Metadata
             WriteGenericParam();
             WriteMethodSpec();
             WriteGenericParamConstraint();
-
             WriteDocument();
             WriteMethodDebugInformation();
             WriteLocalScope();
@@ -124,97 +117,30 @@ namespace System.Reflection.Metadata
             WriteLocalConstant();
             WriteImportScope();
             WriteCustomDebugInformation();
-
-
             WriteUserStrings();
             WriteStrings();
             WriteBlobs();
             WriteGuids();
         }
 
+        public void VisualizeHeaders()
+        {
+            _reader = _readers[0];
+
+            _writer.WriteLine($"MetadataVersion: {_reader.MetadataVersion}");
+
+            if (_reader.DebugMetadataHeader != null)
+            {
+                _writer.WriteLine("Id: " + BitConverter.ToString(_reader.DebugMetadataHeader.Id.ToArray()));
+                if (!_reader.DebugMetadataHeader.EntryPoint.IsNil)
+                    _writer.WriteLine($"EntryPoint: {Token(() => _reader.DebugMetadataHeader.EntryPoint)}");
+            }
+
+            _writer.WriteLine();
+        }
+
         bool IsDelta
             => _reader.GetTableRowCount(TableIndex.EncLog) > 0;
-
-
-        void AddHeader(params string[] header)
-        {
-            Debug.Assert(PendingRows.Count == 0);
-            PendingRows.Add(header);
-        }
-
-        void AddRow(params string[] fields)
-        {
-            Debug.Assert(PendingRows.Count > 0 && PendingRows.Last().Length == fields.Length);
-            PendingRows.Add(fields);
-        }
-
-        void WriteRows(string title)
-        {
-            Debug.Assert(PendingRows.Count > 0);
-
-            if (PendingRows.Count == 1)
-            {
-                PendingRows.Clear();
-                return;
-            }
-
-            _writer.Write(title);
-            _writer.WriteLine();
-
-            const string columnSeparator = "  ";
-
-            int rowNumberWidth = PendingRows.Count.ToString("x").Length;
-
-            int[] columnWidths = new int[PendingRows.First().Length];
-            foreach (var row in PendingRows)
-            {
-                for (int c = 0; c < row.Length; c++)
-                {
-                    columnWidths[c] = Math.Max(columnWidths[c], row[c].Length + columnSeparator.Length);
-                }
-            }
-
-            int tableWidth = columnWidths.Sum() + columnWidths.Length;
-            string horizontalSeparator = new string('=', tableWidth);
-
-            for (int r = 0; r<PendingRows.Count; r++)
-            {
-                var row = PendingRows[r];
-
-                // header
-                if (r == 0)
-                {
-                    _writer.WriteLine(horizontalSeparator);
-                    _writer.Write(new string(' ', rowNumberWidth + 2));
-                }
-                else
-                {
-                    string rowNumber = r.ToString("x");
-                    _writer.Write(new string(' ', rowNumberWidth - rowNumber.Length));
-                    _writer.Write(rowNumber);
-                    _writer.Write(": ");
-                }
-
-                for (int c = 0; c < row.Length; c++)
-                {
-                    var field = row[c];
-
-                    _writer.Write(field);
-                    _writer.Write(new string(' ', columnWidths[c] - field.Length));
-                }
-
-                _writer.WriteLine();
-
-                // header
-                if (r == 0)
-                {
-                    _writer.WriteLine(horizontalSeparator);
-                }
-            }
-
-            _writer.WriteLine();
-            PendingRows.Clear();
-        }
 
         Handle GetAggregateHandle(EntityHandle generationHandle, int generation)
         {
@@ -231,10 +157,10 @@ namespace System.Reflection.Metadata
 
         TEntity Get<TEntity>(Handle handle, Func<MetadataReader, Handle, TEntity> getter)
         {
-            if (Aggregator != null)
+            if (_aggregator != null)
             {
                 int generation;
-                var generationHandle = Aggregator.GetGenerationHandle(handle, out generation);
+                var generationHandle = _aggregator.GetGenerationHandle(handle, out generation);
                 return getter(_readers[generation], generationHandle);
             }
             else
@@ -243,51 +169,22 @@ namespace System.Reflection.Metadata
             }
         }
 
-        string Literal(StringHandle handle)
+        public void WriteLine(string line)
+        {
+            _writer.WriteLine(line);
+        }
+
+        public string Literal(StringHandle handle)
             => Literal(handle, (r, h) => "'" + r.GetString((StringHandle)h) + "'");
 
-        string Literal(NamespaceDefinitionHandle handle)
+        public string Literal(NamespaceDefinitionHandle handle)
             => Literal(handle, (r, h) => "'" + r.GetString((NamespaceDefinitionHandle)h) + "'");
 
-        string Literal(GuidHandle handle)
+        public string Literal(GuidHandle handle)
             => Literal(handle, (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
 
-        string Literal(BlobHandle handle)
+        public string Literal(BlobHandle handle)
             => Literal(handle, (r, h) => BitConverter.ToString(r.GetBlobBytes((BlobHandle)h)));
-
-        string Literal(Handle handle, Func<MetadataReader, Handle, string> getValue)
-        {
-            if (handle.IsNil)
-                return "nil";
-
-            if (Aggregator != null)
-            {
-                int generation;
-                Handle generationHandle = Aggregator.GetGenerationHandle(handle, out generation);
-
-                var generationReader = _readers[generation];
-                string value = getValue(generationReader, generationHandle);
-                int offset = generationReader.GetHeapOffset(handle);
-                int generationOffset = generationReader.GetHeapOffset(generationHandle);
-
-                if (offset == generationOffset)
-                {
-                    return string.Format("{0} (#{1:x})", value, offset);
-                }
-                else
-                {
-                    return string.Format("{0} (#{1:x}/{2:x})", value, offset, generationOffset);
-                }
-            }
-
-            if (IsDelta)
-            {
-                // we can't resolve the literal without aggregate reader
-                return string.Format("#{0:x}", _reader.GetHeapOffset(handle));
-            }
-
-            return string.Format("{1:x} (#{0:x})", _reader.GetHeapOffset(handle), getValue(_reader, handle));
-        }
 
         public string Token(Handle handle, bool displayTable = true)
         {
@@ -305,12 +202,6 @@ namespace System.Reflection.Metadata
             {
                 return string.Format("0x{0:x8}", _reader.GetToken(handle));
             }
-        }
-
-        string TokenRange<THandle>(IReadOnlyCollection<THandle> handles, Func<THandle, Handle> conversion)
-        {
-            var genericHandles = handles.Select(conversion);
-            return (handles.Count == 0) ? "nil" : Token(genericHandles.First(), displayTable: false) + "-" + Token(genericHandles.Last(), displayTable: false);
         }
 
         public string TokenList(InterfaceImplementationHandleCollection handles, bool displayTable = false)
@@ -348,21 +239,23 @@ namespace System.Reflection.Metadata
             VisualizeMethodBody(body, method, methodHandle);
         }
 
-        MethodDefinition GetMethod(MethodDefinitionHandle handle)
+        public string RowId(EntityHandle handle)
+            => handle.IsNil ? "nil" : $"#{_reader.GetRowNumber(handle):x}";
+
+        public MethodDefinition GetMethod(MethodDefinitionHandle handle)
         {
             return Get(handle, (reader, h) => reader.GetMethodDefinition((MethodDefinitionHandle)h));
         }
 
-        BlobHandle GetLocalSignature(StandaloneSignatureHandle handle)
+        public BlobHandle GetLocalSignature(StandaloneSignatureHandle handle)
         {
             return Get(handle, (reader, h) => reader.GetStandaloneSignature((StandaloneSignatureHandle)h).Signature);
         }
 
-        void VisualizeMethodBody(MethodBodyBlock body, MethodDefinition method, MethodDefinitionHandle methodHandle)
+        public void VisualizeMethodBody(MethodBodyBlock body, MethodDefinition method, MethodDefinitionHandle methodHandle)
         {
             StringBuilder builder = new StringBuilder();
 
-            // TODO: Inspect EncLog to find a containing type and display qualified name.
             builder.AppendFormat("Method {0} (0x{1:X8})", Literal(() => method.Name), MetadataTokens.GetToken(methodHandle));
             builder.AppendLine();
 
@@ -373,37 +266,17 @@ namespace System.Reflection.Metadata
             }
 
             ILVisualizer.service().DumpMethod(
-                builder,
                 body.MaxStack,
-                body.GetILContent(),
-                ImmutableArray.Create<ILVisualizer.LocalInfo>(),
-                ImmutableArray.Create<ILVisualizer.HandlerSpan>());
+                body.GetILContent().AsSpan(),
+                builder);
 
             builder.AppendLine();
 
             _writer.Write(builder.ToString());
         }
 
-        public void VisualizeHeaders()
-        {
-            _reader = _readers[0];
 
-            _writer.WriteLine($"MetadataVersion: {_reader.MetadataVersion}");
-
-            if (_reader.DebugMetadataHeader != null)
-            {
-                _writer.WriteLine("Id: " + BitConverter.ToString(_reader.DebugMetadataHeader.Id.ToArray()));
-
-                if (!_reader.DebugMetadataHeader.EntryPoint.IsNil)
-                {
-                    _writer.WriteLine($"EntryPoint: {Token(() => _reader.DebugMetadataHeader.EntryPoint)}");
-                }
-            }
-
-            _writer.WriteLine();
-        }
-
-        void WriteModule()
+        public void WriteModule()
         {
             if (_reader.DebugMetadataHeader != null)
             {
@@ -431,7 +304,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteTypeRef()
+        public void WriteTypeRef()
         {
             var table = new TableBuilder(
                 "TypeRef (0x01):",
@@ -464,7 +337,7 @@ namespace System.Reflection.Metadata
             return string.Join(", ", handles.Select(h => Token(() => h, displayTable)));
         }
 
-        void WriteTypeDef()
+        public void WriteTypeDef()
         {
             var table = new TableBuilder(
                 "TypeDef (0x02):",
@@ -506,7 +379,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteField()
+        public void WriteField()
         {
             var table = new TableBuilder(
                 "Field (0x04):",
@@ -539,7 +412,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteMethod()
+        public void WriteMethod()
         {
             var table = new TableBuilder(
                 "Method (0x06, 0x1C):",
@@ -577,7 +450,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteParam()
+        public void WriteParam()
         {
             var table = new TableBuilder(
                 "Param (0x08):",
@@ -602,7 +475,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteMemberRef()
+        public void WriteMemberRef()
         {
             var table = new TableBuilder(
                 "MemberRef (0x0a):",
@@ -625,7 +498,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteConstant()
+        public void WriteConstant()
         {
             var table = new TableBuilder(
                 "Constant (0x0b):",
@@ -648,7 +521,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteCustomAttribute()
+        public void WriteCustomAttribute()
         {
             var table = new TableBuilder(
                 "CustomAttribute (0x0c):",
@@ -671,7 +544,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteDeclSecurity()
+        public void WriteDeclSecurity()
         {
             var table = new TableBuilder(
                 "DeclSecurity (0x0e):",
@@ -683,7 +556,6 @@ namespace System.Reflection.Metadata
             foreach (var handle in _reader.DeclarativeSecurityAttributes)
             {
                 var entry = _reader.GetDeclarativeSecurityAttribute(handle);
-
                 table.AddRow(
                     Token(() => entry.Parent),
                     Literal(() => entry.PermissionSet, BlobKind.PermissionSet),
@@ -694,7 +566,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteStandAloneSig()
+        public void WriteStandAloneSig()
         {
             var table = new TableBuilder(
                 "StandAloneSig (0x11):",
@@ -710,7 +582,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteEvent()
+        public void WriteEvent()
         {
             var table = new TableBuilder(
                 "Event (0x12, 0x14, 0x18):",
@@ -738,7 +610,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteProperty()
+        public void WriteProperty()
         {
             var table = new TableBuilder(
                 "Property (0x15, 0x17, 0x18):",
@@ -764,7 +636,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteMethodImpl()
+        public void WriteMethodImpl()
         {
             var table = new TableBuilder(
                 "MethodImpl (0x19):",
@@ -787,7 +659,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteModuleRef()
+        public void WriteModuleRef()
         {
             var table = new TableBuilder(
                 "ModuleRef (0x1a):",
@@ -803,7 +675,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteTypeSpec()
+        public void WriteTypeSpec()
         {
             var table = new TableBuilder(
                 "TypeSpec (0x1b):",
@@ -818,60 +690,61 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteEnCLog()
+        public void WriteEnCLog()
         {
-            AddHeader(
+            var table = new TableBuilder(
+                "EnC Log (0x1e):",
                 "Entity",
                 "Operation");
 
             foreach (var entry in _reader.GetEditAndContinueLogEntries())
             {
-                AddRow(
-                    Token(entry.Handle),
-                    EnumValue<int>(entry.Operation));
+                table.AddRow(
+                    Token(() => entry.Handle),
+                    EnumValue<int>(() => entry.Operation));
             }
 
-            WriteRows("EnC Log (0x1e):");
+            WriteTable(table);
         }
 
-        void WriteEnCMap()
+        public void WriteEnCMap()
         {
-            if (Aggregator != null)
+            TableBuilder table;
+            if (_aggregator != null)
             {
-                AddHeader("Entity", "Gen", "Row", "Edit");
+                table = new TableBuilder("EnC Map (0x1f):", "Entity", "Gen", "Row", "Edit");
             }
             else
             {
-                AddHeader("Entity");
+                table = new TableBuilder("EnC Map (0x1f):", "Entity");
             }
-
 
             foreach (var entry in _reader.GetEditAndContinueMapEntries())
             {
-                if (Aggregator != null)
+                if (_aggregator != null)
                 {
                     int generation;
-                    Handle primary = Aggregator.GetGenerationHandle(entry, out generation);
+                    EntityHandle primary = (EntityHandle)_aggregator.GetGenerationHandle(entry, out generation);
                     bool isUpdate = _readers[generation] != _reader;
 
                     var primaryModule = _readers[generation].GetModuleDefinition();
 
-                    AddRow(
-                        Token(entry),
-                        primaryModule.Generation.ToString(),
-                        "0x" + MetadataTokens.GetRowNumber((EntityHandle)primary).ToString("x6"),
+                    table.AddRow(
+                        Token(() => entry),
+                        ToString(() => primaryModule.Generation),
+                        "0x" + MetadataTokens.GetRowNumber(primary).ToString("x6"),
                         isUpdate ? "update" : "add");
                 }
                 else
                 {
-                    AddRow(Token(entry));
+                    table.AddRow(Token(() => entry));
                 }
             }
 
-            WriteRows("EnC Map (0x1f):");
+            WriteTable(table);
         }
 
-        void WriteAssembly()
+        public void WriteAssembly()
         {
             if (!_reader.IsAssembly)
             {
@@ -902,10 +775,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        string Version(Func<Version> getVersion)
-            => ToString(getVersion, version => version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision);
-
-        void WriteAssemblyRef()
+        public void WriteAssemblyRef()
         {
             var table = new TableBuilder(
                 "AssemblyRef (0x23):",
@@ -932,7 +802,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteFile()
+        public void WriteFile()
         {
             var table = new TableBuilder(
                 "File (0x26):",
@@ -955,7 +825,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        private string FormatAwaits(BlobHandle handle)
+        string FormatAwaits(BlobHandle handle)
         {
             var sb = new StringBuilder();
             var blobReader = _reader.GetBlobReader(handle);
@@ -980,7 +850,7 @@ namespace System.Reflection.Metadata
             return sb.ToString();
         }
 
-        void WriteExportedType()
+        public void WriteExportedType()
         {
             var table = new TableBuilder(
                 "ExportedType (0x27):",
@@ -1009,7 +879,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteManifestResource()
+        public void WriteManifestResource()
         {
             var table = new TableBuilder(
                 "ManifestResource (0x28):",
@@ -1034,7 +904,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteGenericParam()
+        public void WriteGenericParam()
         {
             var table = new TableBuilder(
                 "GenericParam (0x2a):",
@@ -1061,7 +931,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteMethodSpec()
+        public void WriteMethodSpec()
         {
             var table = new TableBuilder(
                 "MethodSpec (0x2b):",
@@ -1082,7 +952,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteGenericParamConstraint()
+        public void WriteGenericParamConstraint()
         {
             var table = new TableBuilder(
                 "GenericParamConstraint (0x2c):",
@@ -1103,7 +973,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        void WriteUserStrings()
+        public void WriteUserStrings()
         {
             int size = _reader.GetHeapSize(HeapIndex.UserString);
             if (size == 0)
@@ -1122,7 +992,7 @@ namespace System.Reflection.Metadata
             _writer.WriteLine();
         }
 
-        void WriteStrings()
+        public void WriteStrings()
         {
             int size = _reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
@@ -1141,7 +1011,7 @@ namespace System.Reflection.Metadata
             _writer.WriteLine();
         }
 
-        void WriteBlobs()
+        public void WriteBlobs()
         {
             int size = _reader.GetHeapSize(HeapIndex.Blob);
             if (size == 0)
@@ -1162,7 +1032,7 @@ namespace System.Reflection.Metadata
             _writer.WriteLine();
         }
 
-        void WriteGuids()
+        public void WriteGuids()
         {
             int size = _reader.GetHeapSize(HeapIndex.Guid);
             if (size == 0)
@@ -1309,7 +1179,13 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        string GetCustomDebugInformationKind(Guid guid)
+        string TokenRange<THandle>(IReadOnlyCollection<THandle> handles, Func<THandle, Handle> conversion)
+        {
+            var genericHandles = handles.Select(conversion);
+            return (handles.Count == 0) ? "nil" : Token(genericHandles.First(), displayTable: false) + "-" + Token(genericHandles.Last(), displayTable: false);
+        }
+
+        public static string GetCustomDebugInformationKind(Guid guid)
         {
             if (guid == PortableCustomDebugInfoKinds.AsyncMethodSteppingInformationBlob) return "Async Method Stepping Information";
             if (guid == PortableCustomDebugInfoKinds.StateMachineHoistedLocalScopes) return "State Machine Hoisted Local Scopes";
@@ -1423,28 +1299,7 @@ namespace System.Reflection.Metadata
             WriteTable(table);
         }
 
-        private string Literal(Func<BlobHandle> getHandle, BlobKind kind, Func<MetadataReader, BlobHandle, string> getValue)
-        {
-            BlobHandle handle;
-            try
-            {
-                handle = getHandle();
-            }
-            catch (BadImageFormatException)
-            {
-                return BadMetadataStr;
-            }
-
-            if (!handle.IsNil && kind != BlobKind.None)
-            {
-                _blobKinds[handle] = kind;
-            }
-
-            return Literal(handle, (r, h) => getValue(r, (BlobHandle)h));
-
-        }
-
-        static bool IsPrimitiveType(SignatureTypeCode typeCode)
+        public static bool IsPrimitiveType(SignatureTypeCode typeCode)
         {
             switch (typeCode)
             {
@@ -1468,7 +1323,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        SignatureTypeCode ReadConstantTypeCode(ref BlobReader sigReader, List<string> modifiers)
+        public SignatureTypeCode ReadConstantTypeCode(ref BlobReader sigReader, List<string> modifiers)
         {
             while (true)
             {
@@ -1485,7 +1340,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        string FormatLocalConstant(MetadataReader reader, BlobHandle signature)
+        public string FormatLocalConstant(MetadataReader reader, BlobHandle signature)
         {
             var sigReader = reader.GetBlobReader(signature);
 
@@ -1546,24 +1401,8 @@ namespace System.Reflection.Metadata
                 typeHandle.IsNil ? typeCode.ToString() : Token(() => typeHandle));
         }
 
-
-        private string Int32(Func<int> getValue)
-            => ToString(getValue, value => value.ToString());
-
-        private string Int32Hex(Func<int> getValue, int digits = 8)
-            => ToString(getValue, value => "0x" + value.ToString("X" + digits));
-
         public string Token(Func<Handle> getHandle, bool displayTable = true)
             => ToString(getHandle, displayTable, Token);
-
-        string Language(Func<GuidHandle> getHandle) =>
-            Literal(() => getHandle(), (r, h) => GetLanguage(r.GetGuid((GuidHandle)h)));
-
-        string HashAlgorithm(Func<GuidHandle> getHandle) =>
-            Literal(() => getHandle(), (r, h) => GetHashAlgorithm(r.GetGuid((GuidHandle)h)));
-
-        string CustomDebugInformationKind(Func<GuidHandle> getHandle) =>
-            Literal(() => getHandle(), (r, h) => GetCustomDebugInformationKind(r.GetGuid((GuidHandle)h)));
 
         void WriteTable(TableBuilder table)
         {
@@ -1573,81 +1412,6 @@ namespace System.Reflection.Metadata
                 _writer.WriteLine();
             }
         }
-
-        string SequencePoint(SequencePoint sequencePoint, bool includeDocument = true)
-        {
-            string range = sequencePoint.IsHidden ?
-                "<hidden>" :
-                $"({sequencePoint.StartLine}, {sequencePoint.StartColumn}) - ({sequencePoint.EndLine}, {sequencePoint.EndColumn})" +
-                    (includeDocument ? $" [{RowId(() => sequencePoint.Document)}]" : "");
-
-            return $"IL_{sequencePoint.Offset:X4}: " + range;
-        }
-
-        bool NoHeapReferences
-            => (_options & MetadataVisualizerOptions.NoHeapReferences) != 0;
-
-        string HeapOffset(Func<Handle> getHandle)
-            => ToString(getHandle, HeapOffset);
-
-        string HeapOffset(Handle handle)
-            => handle.IsNil ? "nil" : NoHeapReferences ? "" : $"#{_reader.GetHeapOffset(handle):x}";
-
-        public string RowId(Func<EntityHandle> getHandle)
-            => ToString(getHandle, RowId);
-
-        public string RowId(EntityHandle handle)
-            => handle.IsNil ? "nil" : $"#{_reader.GetRowNumber(handle):x}";
-
-        static readonly Guid s_CSharpGuid = new Guid("3f5162f8-07c6-11d3-9053-00c04fa302a1");
-
-        static readonly Guid s_visualBasicGuid = new Guid("3a12d0b8-c26c-11d0-b442-00a0244a1dd2");
-
-        static readonly Guid s_FSharpGuid = new Guid("ab4f38c9-b6e6-43ba-be3b-58080b2ccce3");
-
-        static string GetLanguage(Guid guid)
-        {
-            if (guid == s_CSharpGuid) return "C#";
-            if (guid == s_visualBasicGuid) return "Visual Basic";
-            if (guid == s_FSharpGuid) return "F#";
-
-            return "{" + guid + "}";
-        }
-
-        string ToString<TValue>(Func<TValue> getValue)
-        {
-            try
-            {
-                return getValue().ToString();
-            }
-            catch (BadImageFormatException)
-            {
-                return BadMetadataStr;
-            }
-        }
-
-        static string GetHashAlgorithm(Guid guid)
-        {
-            if (guid == s_sha1Guid) return "SHA-1";
-            if (guid == s_sha256Guid) return "SHA-256";
-            return "{" + guid + "}";
-        }
-
-        string Literal(Func<Handle> getHandle, Func<MetadataReader, Handle, string> getValue)
-        {
-            Handle handle;
-            try
-            {
-                handle = getHandle();
-            }
-            catch (BadImageFormatException)
-            {
-                return BadMetadataStr;
-            }
-
-            return Literal(handle, getValue);
-        }
-
 
         public void WriteImportScope()
         {
@@ -1671,6 +1435,76 @@ namespace System.Reflection.Metadata
 
             WriteTable(table);
         }
+
+        public string SequencePoint(SequencePoint sequencePoint, bool includeDocument = true)
+        {
+            string range = sequencePoint.IsHidden ?
+                "<hidden>" : $"({sequencePoint.StartLine}, {sequencePoint.StartColumn}) - ({sequencePoint.EndLine}, {sequencePoint.EndColumn})" + (includeDocument ? $" [{RowId(() => sequencePoint.Document)}]" : "");
+            return $"IL_{sequencePoint.Offset:X4}: " + range;
+        }
+
+        bool NoHeapReferences
+            => (_options & MetadataVisualizerOptions.NoHeapReferences) != 0;
+
+        static readonly Guid s_CSharpGuid = new Guid("3f5162f8-07c6-11d3-9053-00c04fa302a1");
+
+        static readonly Guid s_visualBasicGuid = new Guid("3a12d0b8-c26c-11d0-b442-00a0244a1dd2");
+
+        static readonly Guid s_FSharpGuid = new Guid("ab4f38c9-b6e6-43ba-be3b-58080b2ccce3");
+
+        string Int32(Func<int> getValue)
+            => ToString(getValue, value => value.ToString());
+
+        string Int32Hex(Func<int> getValue, int digits = 8)
+            => ToString(getValue, value => "0x" + value.ToString("X" + digits));
+
+        string HeapOffset(Func<Handle> getHandle)
+            => ToString(getHandle, HeapOffset);
+
+        string HeapOffset(Handle handle)
+            => handle.IsNil ? "nil" : NoHeapReferences ? "" : $"#{_reader.GetHeapOffset(handle):x}";
+
+        string RowId(Func<EntityHandle> getHandle)
+            => ToString(getHandle, RowId);
+
+
+        public static string GetLanguage(Guid guid)
+        {
+            if (guid == s_CSharpGuid)
+                return "C#";
+
+            if (guid == s_visualBasicGuid)
+                return "Visual Basic";
+
+            if (guid == s_FSharpGuid)
+                return "F#";
+
+            return "{" + guid + "}";
+        }
+
+        string ToString<TValue>(Func<TValue> getValue)
+        {
+            try
+            {
+                return getValue().ToString();
+            }
+            catch (BadImageFormatException)
+            {
+                return BadMetadataStr;
+            }
+        }
+
+        public static string GetHashAlgorithm(Guid guid)
+        {
+            if (guid == s_sha1Guid)
+                return "SHA-1";
+
+            if (guid == s_sha256Guid)
+                return "SHA-256";
+
+            return "{" + guid + "}";
+        }
+
 
         string FormatImports(ImportScope scope)
         {
@@ -1745,14 +1579,6 @@ namespace System.Reflection.Metadata
             return sb.ToString();
         }
 
-        string LiteralUtf8Blob(Func<BlobHandle> getHandle, BlobKind kind)
-        {
-            return Literal(getHandle, kind, (r, h) =>
-            {
-                var bytes = r.GetBlobBytes(h);
-                return "'" + Encoding.UTF8.GetString(bytes, 0, bytes.Length) + "'";
-            });
-        }
 
         public void WriteCustomDebugInformation()
         {
@@ -1834,10 +1660,12 @@ namespace System.Reflection.Metadata
         enum MetadataReferenceFlags
         {
             Assembly = 1,
+
             EmbedInteropTypes = 1 << 1,
         }
 
-        static string VisualizeCompilationMetadataReferences(BlobReader reader)
+
+        public static string VisualizeCompilationMetadataReferences(BlobReader reader)
         {
             var table = new TableBuilder(
                 title: null,
@@ -1928,17 +1756,109 @@ namespace System.Reflection.Metadata
             return builder.ToString();
         }
 
-        private static string VisualizeSourceLink(BlobReader reader)
+        static string VisualizeSourceLink(BlobReader reader)
             => reader.ReadUTF8(reader.RemainingBytes);
 
-        string Literal(Func<StringHandle> getHandle) =>
-            Literal(() => getHandle(), (r, h) => "'" + StringUtilities.EscapeNonPrintableCharacters(r.GetString((StringHandle)h)) + "'");
+        string Literal(Func<StringHandle> getHandle)
+            => Literal(() => getHandle(), (r, h) => "'" + StringUtilities.EscapeNonPrintableCharacters(r.GetString((StringHandle)h)) + "'");
 
-        string Literal(Func<NamespaceDefinitionHandle> getHandle) =>
-            Literal(() => getHandle(), (r, h) => "'" + StringUtilities.EscapeNonPrintableCharacters(r.GetString((NamespaceDefinitionHandle)h)) + "'");
+        string Literal(Func<NamespaceDefinitionHandle> getHandle)
+            => Literal(() => getHandle(), (r, h) => "'" + StringUtilities.EscapeNonPrintableCharacters(r.GetString((NamespaceDefinitionHandle)h)) + "'");
 
         string Literal(Func<GuidHandle> getHandle) =>
             Literal(() => getHandle(), (r, h) => "{" + r.GetGuid((GuidHandle)h) + "}");
+
+        string Version(Func<Version> getVersion)
+            => ToString(getVersion, version => version.Major + "." + version.Minor + "." + version.Build + "." + version.Revision);
+
+        string Literal(Func<BlobHandle> getHandle, BlobKind kind, Func<MetadataReader, BlobHandle, string> getValue)
+        {
+            BlobHandle handle;
+            try
+            {
+                handle = getHandle();
+            }
+            catch (BadImageFormatException)
+            {
+                return BadMetadataStr;
+            }
+
+            if (!handle.IsNil && kind != BlobKind.None)
+            {
+                _blobKinds[handle] = kind;
+            }
+
+            return Literal(handle, (r, h) => getValue(r, (BlobHandle)h));
+
+        }
+
+        string LiteralUtf8Blob(Func<BlobHandle> getHandle, BlobKind kind)
+        {
+            return Literal(getHandle, kind, (r, h) =>
+            {
+                var bytes = r.GetBlobBytes(h);
+                return "'" + Encoding.UTF8.GetString(bytes, 0, bytes.Length) + "'";
+            });
+        }
+
+        string Language(Func<GuidHandle> getHandle)
+            => Literal(() => getHandle(), (r, h) => GetLanguage(r.GetGuid((GuidHandle)h)));
+
+        string HashAlgorithm(Func<GuidHandle> getHandle)
+            => Literal(() => getHandle(), (r, h) => GetHashAlgorithm(r.GetGuid((GuidHandle)h)));
+
+        string CustomDebugInformationKind(Func<GuidHandle> getHandle)
+            => Literal(() => getHandle(), (r, h) => GetCustomDebugInformationKind(r.GetGuid((GuidHandle)h)));
+
+        string Literal(Func<Handle> getHandle, Func<MetadataReader, Handle, string> getValue)
+        {
+            Handle handle;
+            try
+            {
+                handle = getHandle();
+            }
+            catch (BadImageFormatException)
+            {
+                return BadMetadataStr;
+            }
+
+            return Literal(handle, getValue);
+        }
+
+        string Literal(Handle handle, Func<MetadataReader, Handle, string> getValue)
+        {
+            if (handle.IsNil)
+                return "nil";
+
+            if (_aggregator != null)
+            {
+                int generation;
+                Handle generationHandle = _aggregator.GetGenerationHandle(handle, out generation);
+
+                var generationReader = _readers[generation];
+                string value = getValue(generationReader, generationHandle);
+                int offset = generationReader.GetHeapOffset(handle);
+                int generationOffset = generationReader.GetHeapOffset(generationHandle);
+
+                if (offset == generationOffset)
+                {
+                    return string.Format("{0} (#{1:x})", value, offset);
+                }
+                else
+                {
+                    return string.Format("{0} (#{1:x}/{2:x})", value, offset, generationOffset);
+                }
+            }
+
+            if (IsDelta)
+            {
+                // we can't resolve the literal without aggregate reader
+                return string.Format("#{0:x}", _reader.GetHeapOffset(handle));
+            }
+
+            return string.Format("{1:x} (#{0:x})", _reader.GetHeapOffset(handle), getValue(_reader, handle));
+        }
+
 
         static readonly Guid s_sha1Guid = new Guid("ff1816ec-aa5e-4d10-87f7-6f4963833460");
 
@@ -1947,7 +1867,6 @@ namespace System.Reflection.Metadata
         public static readonly Guid CompilationMetadataReferences = new Guid("7E4D4708-096E-4C5C-AEDA-CB10BA6A740D");
 
         public static readonly Guid CompilationOptions = new Guid("B5FEEC05-8CD0-4A83-96DA-466284BB4BD8");
-
 
         static string ToString<TValue>(Func<TValue> getValue, Func<TValue, string> valueToString)
         {
@@ -2028,46 +1947,43 @@ namespace System.Reflection.Metadata
             return string.Format("0x{0:x8} ({1})", integralValue, value);
         }
 
-        static string Hex(ushort value)
-            => "0x" + value.ToString("X4");
+        public string MethodSignature(BlobHandle signatureHandle)
+            => Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MethodSignature));
 
-        static string Hex(int value)
-            => "0x" + value.ToString("X8");
+        public string StandaloneSignature(BlobHandle signatureHandle)
+            => Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.StandAloneSignature));
 
-        private string FieldSignature(Func<BlobHandle> getHandle) =>
-            Literal(getHandle, BlobKind.FieldSignature, (r, h) => Signature(r, h, BlobKind.FieldSignature));
+        public string MemberReferenceSignature(BlobHandle signatureHandle)
+            => Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MemberRefSignature));
 
-        private string MethodSignature(Func<BlobHandle> getHandle) =>
-            Literal(getHandle, BlobKind.MethodSignature, (r, h) => Signature(r, h, BlobKind.MethodSignature));
+        public string MethodSpecificationSignature(BlobHandle signatureHandle)
+            => Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MethodSpec));
 
-        private string StandaloneSignature(Func<BlobHandle> getHandle) =>
+        public string TypeSpecificationSignature(BlobHandle signatureHandle)
+            => Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.TypeSpec));
+
+        public string FieldSignature(BlobHandle hSig)
+            => FieldSignature(() => hSig);
+
+        string FieldSignature(Func<BlobHandle> getHandle)
+            => Literal(getHandle, BlobKind.FieldSignature, (r, h) => Signature(r, h, BlobKind.FieldSignature));
+
+        string MethodSignature(Func<BlobHandle> getHandle)
+            => Literal(getHandle, BlobKind.MethodSignature, (r, h) => Signature(r, h, BlobKind.MethodSignature));
+
+        string StandaloneSignature(Func<BlobHandle> getHandle) =>
             Literal(getHandle, BlobKind.StandAloneSignature, (r, h) => Signature(r, h, BlobKind.StandAloneSignature));
 
-        private string MemberReferenceSignature(Func<BlobHandle> getHandle) =>
+        string MemberReferenceSignature(Func<BlobHandle> getHandle) =>
             Literal(getHandle, BlobKind.MemberRefSignature, (r, h) => Signature(r, h, BlobKind.MemberRefSignature));
 
-        private string MethodSpecificationSignature(Func<BlobHandle> getHandle) =>
+        string MethodSpecificationSignature(Func<BlobHandle> getHandle) =>
             Literal(getHandle, BlobKind.MethodSpec, (r, h) => Signature(r, h, BlobKind.MethodSpec));
 
-        private string TypeSpecificationSignature(Func<BlobHandle> getHandle) =>
+        string TypeSpecificationSignature(Func<BlobHandle> getHandle) =>
             Literal(getHandle, BlobKind.TypeSpec, (r, h) => Signature(r, h, BlobKind.TypeSpec));
 
-        public string MethodSignature(BlobHandle signatureHandle) =>
-            Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MethodSignature));
-
-        public string StandaloneSignature(BlobHandle signatureHandle) =>
-            Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.StandAloneSignature));
-
-        public string MemberReferenceSignature(BlobHandle signatureHandle) =>
-            Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MemberRefSignature));
-
-        public string MethodSpecificationSignature(BlobHandle signatureHandle) =>
-            Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.MethodSpec));
-
-        public string TypeSpecificationSignature(BlobHandle signatureHandle) =>
-            Literal(signatureHandle, (r, h) => Signature(r, (BlobHandle)h, BlobKind.TypeSpec));
-
-        private string Signature(MetadataReader reader, BlobHandle signatureHandle, BlobKind kind)
+        string Signature(MetadataReader reader, BlobHandle signatureHandle, BlobKind kind)
         {
             try
             {
@@ -2272,15 +2188,21 @@ namespace System.Reflection.Metadata
             FileHash,
 
             MethodSignature,
+
             FieldSignature,
+
             MemberRefSignature,
+
             StandAloneSignature,
 
             TypeSpec,
+
             MethodSpec,
 
             ConstantValue,
+
             Marshalling,
+
             PermissionSet,
             CustomAttribute,
 
@@ -2467,8 +2389,6 @@ namespace System.Reflection.Metadata
         }
     }
 
-
-
     public enum HandlerKind
     {
         Try,
@@ -2477,23 +2397,6 @@ namespace System.Reflection.Metadata
         Finally,
         Fault
     }
-
-
-    // public struct LocalInfo
-    // {
-    //     public readonly string Name;
-    //     public readonly bool IsPinned;
-    //     public readonly bool IsByRef;
-    //     public readonly object Type; // ITypeReference or ITypeSymbol
-
-    //     public LocalInfo(string name, object type, bool isPinned, bool isByRef)
-    //     {
-    //         Name = name;
-    //         Type = type;
-    //         IsPinned = isPinned;
-    //         IsByRef = isByRef;
-    //     }
-    //}
 
     internal static class PortableCustomDebugInfoKinds
     {

@@ -12,6 +12,6 @@ namespace Z0.Schemas.Ecma
 
     public readonly struct GuidIndex : IHeapIndex<GuidIndexKind,GuidIndex>
     {
-        public uint Value {get;}
+        public uint Key {get;}
     }
 }

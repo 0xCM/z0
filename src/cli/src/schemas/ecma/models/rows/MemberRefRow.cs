@@ -12,8 +12,8 @@ namespace Z0.Schemas.Ecma
 
         public int Class;
 
-        public FK<string> Name;
+        public FK<StringIndex> Name;
 
-        public FK<byte> Signature;
+        public FK<BlobIndex> Signature;
     }
 }

@@ -12,6 +12,6 @@ namespace Z0.Schemas.Ecma
     {
         public RowKey Key;
 
-        public FK<name> Name;
+        public FK<StringIndex> Name;
     }
 }

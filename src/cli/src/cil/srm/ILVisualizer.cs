@@ -154,7 +154,7 @@ namespace System.Reflection.Metadata
         public virtual string VisualizeDouble(double @double)
             => (@double == 0 && 1 / @double < 0) ? "-0.0" : string.Format(CultureInfo.InvariantCulture, "{0:G15}", @double);
 
-        public void VisualizeHeader(StringBuilder sb, int codeSize, int maxStack, ImmutableArray<LocalInfo> locals, bool localsAreZeroed = true)
+        public void VisualizeHeader(StringBuilder sb, int codeSize, int maxStack, ReadOnlySpan<LocalInfo> locals, bool localsAreZeroed = true)
         {
             if (codeSize >= 0 && maxStack >= 0)
             {
@@ -207,40 +207,45 @@ namespace System.Reflection.Metadata
 
         public string DumpMethod(
             int maxStack,
-            ImmutableArray<byte> ilBytes,
-            ImmutableArray<LocalInfo> locals,
+            ReadOnlySpan<byte> ilBytes,
+            ReadOnlySpan<LocalInfo> locals,
             IReadOnlyList<HandlerSpan> exceptionHandlers,
             IReadOnlyDictionary<int, string> markers = null,
             bool localsAreZeroed = true)
         {
             var builder = new StringBuilder();
-            this.DumpMethod(builder, maxStack, ilBytes, locals, exceptionHandlers, markers, localsAreZeroed);
+            DumpMethod(builder, maxStack, ilBytes, locals, exceptionHandlers, markers, localsAreZeroed);
             return builder.ToString();
         }
 
         public void DumpMethod(
-            StringBuilder sb,
+            StringBuilder dst,
             int maxStack,
-            ImmutableArray<byte> ilBytes,
-            ImmutableArray<LocalInfo> locals,
+            ReadOnlySpan<byte> ilBytes,
+            ReadOnlySpan<LocalInfo> locals,
             IReadOnlyList<HandlerSpan> exceptionHandlers,
             IReadOnlyDictionary<int, string> markers = null,
             bool localsAreZeroed = true)
         {
-            sb.AppendLine("{");
-
-            VisualizeHeader(sb, ilBytes.Length, maxStack, locals, localsAreZeroed);
-            DumpILBlock(ilBytes, ilBytes.Length, sb, exceptionHandlers, 0, markers);
-
-            sb.AppendLine("}");
+            dst.AppendLine("{");
+            VisualizeHeader(dst, ilBytes.Length, maxStack, locals, localsAreZeroed);
+            DumpILBlock(ilBytes, ilBytes.Length, dst, exceptionHandlers, 0, markers);
+            dst.AppendLine("}");
         }
 
+        public void DumpMethod(int maxStack, ReadOnlySpan<byte> ilBytes, StringBuilder dst)
+        {
+            dst.AppendLine("{");
+            VisualizeHeader(dst, ilBytes.Length, maxStack, ReadOnlySpan<LocalInfo>.Empty, true);
+            DumpILBlock(ilBytes, ilBytes.Length, dst, new List<HandlerSpan>(), 0, new Dictionary<int,string>());
+            dst.AppendLine("}");
+        }
 
         /// <summary>
         /// Dumps all instructions in the stream into provided string builder.
         /// The blockOffset specifies the relative position of the block within method body (if known).
         /// </summary>
-        public void DumpILBlock(ImmutableArray<byte> ilBytes, int length, StringBuilder sb,
+        public void DumpILBlock(ReadOnlySpan<byte> ilBytes, int length, StringBuilder dst,
             IReadOnlyList<HandlerSpan> spans = null, int blockOffset = 0, IReadOnlyDictionary<int, string> markers = null)
         {
             if (ilBytes == null)
@@ -249,13 +254,13 @@ namespace System.Reflection.Metadata
             }
 
             int spanIndex = 0;
-            int curIndex = DumpILBlock(ilBytes, length, sb, spans, blockOffset, 0, spanIndex, IndentString, markers, out spanIndex);
+            int curIndex = DumpILBlock(ilBytes, length, dst, spans, blockOffset, 0, spanIndex, IndentString, markers, out spanIndex);
             Debug.Assert(curIndex == length);
             Debug.Assert(spans == null || spanIndex == spans.Count);
         }
 
         int DumpILBlock(
-            ImmutableArray<byte> ilBytes,
+            ReadOnlySpan<byte> ilBytes,
             int length,
             StringBuilder sb,
             IReadOnlyList<HandlerSpan> spans,
@@ -512,7 +517,7 @@ namespace System.Reflection.Metadata
                 spans[spanIndex].FilterHandlerStart == (uint)curIndex;
         }
 
-        static ulong ReadUInt64(ImmutableArray<byte> buffer, ref int pos)
+        static ulong ReadUInt64(ReadOnlySpan<byte> buffer, ref int pos)
         {
             ulong result =
                 buffer[pos] |
@@ -528,46 +533,46 @@ namespace System.Reflection.Metadata
             return result;
         }
 
-        static uint ReadUInt32(ImmutableArray<byte> buffer, ref int pos)
+        static uint ReadUInt32(ReadOnlySpan<byte> buffer, ref int pos)
         {
             uint result = buffer[pos] | (uint)buffer[pos + 1] << 8 | (uint)buffer[pos + 2] << 16 | (uint)buffer[pos + 3] << 24;
             pos += sizeof(int);
             return result;
         }
 
-        static int ReadInt32(ImmutableArray<byte> buffer, ref int pos)
+        static int ReadInt32(ReadOnlySpan<byte> buffer, ref int pos)
         {
             return unchecked((int)ReadUInt32(buffer, ref pos));
         }
 
-        static ushort ReadUInt16(ImmutableArray<byte> buffer, ref int pos)
+        static ushort ReadUInt16(ReadOnlySpan<byte> buffer, ref int pos)
         {
             ushort result = (ushort)(buffer[pos] | buffer[pos + 1] << 8);
             pos += sizeof(ushort);
             return result;
         }
 
-        static byte ReadByte(ImmutableArray<byte> buffer, ref int pos)
+        static byte ReadByte(ReadOnlySpan<byte> buffer, ref int pos)
         {
             byte result = buffer[pos];
             pos += sizeof(byte);
             return result;
         }
 
-        static sbyte ReadSByte(ImmutableArray<byte> buffer, ref int pos)
+        static sbyte ReadSByte(ReadOnlySpan<byte> buffer, ref int pos)
         {
             sbyte result = unchecked((sbyte)buffer[pos]);
             pos += 1;
             return result;
         }
 
-        unsafe static float ReadSingle(ImmutableArray<byte> buffer, ref int pos)
+        unsafe static float ReadSingle(ReadOnlySpan<byte> buffer, ref int pos)
         {
             uint value = ReadUInt32(buffer, ref pos);
             return *(float*)&value;
         }
 
-        unsafe static double ReadDouble(ImmutableArray<byte> buffer, ref int pos)
+        unsafe static double ReadDouble(ReadOnlySpan<byte> buffer, ref int pos)
         {
             ulong value = ReadUInt64(buffer, ref pos);
             return *(double*)&value;

@@ -21,30 +21,13 @@ namespace Z0.Schemas.Ecma
         [MethodImpl(Inline)]
         public FK(uint value)
             => Value = value;
-    }
-
-    /// <summary>
-    /// Represents a primary key
-    /// </summary>
-    public readonly struct PK<T>
-    {
-        public uint Value {get;}
 
         [MethodImpl(Inline)]
-        public PK(uint value)
-            => Value = value;
-    }
-
-    /// <summary>
-    /// Represents heap key
-    /// </summary>
-    public readonly struct HK<T>
-    {
-        public uint Value {get;}
-
+        public static implicit operator FK<T>(uint value)
+            => new FK<T>(value);
 
         [MethodImpl(Inline)]
-        public HK(uint value)
-            => Value = value;
+        public static implicit operator FK<T>(int value)
+            => new FK<T>((uint)value);
     }
 }

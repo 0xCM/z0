@@ -13,7 +13,7 @@ namespace Z0
     public struct StateBuffer<I,T>
         where T : unmanaged
     {
-        readonly IndexedSeq<T> States;
+        readonly Index<T> States;
 
         [MethodImpl(Inline)]
         public StateBuffer(uint count)

@@ -7,23 +7,23 @@ namespace Z0.Schemas.Ecma
     using System.Runtime.CompilerServices;
 
     using static Part;
+
     using static HeapIndexKinds;
 
-
-    public readonly struct BlobIndex : IHeapIndex<BlobIndexKind,BlobIndex>
+    public readonly struct StringIndex : IHeapIndex<SystemStringIndexKind,SystemStringIndex>
     {
         public uint Key {get;}
 
         [MethodImpl(Inline)]
-        public BlobIndex(uint value)
+        public StringIndex(uint value)
             => Key = value;
 
         [MethodImpl(Inline)]
-        public static implicit operator BlobIndex(uint value)
-            => new BlobIndex(value);
+        public static implicit operator StringIndex(uint value)
+            => new StringIndex(value);
 
         [MethodImpl(Inline)]
-        public static implicit operator BlobIndex(int value)
-            => new BlobIndex((uint)value);
+        public static implicit operator StringIndex(int value)
+            => new StringIndex((uint)value);
     }
 }

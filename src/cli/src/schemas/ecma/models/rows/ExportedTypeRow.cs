@@ -15,9 +15,9 @@ namespace Z0.Schemas.Ecma
 
         public Token TypeDefId;
 
-        public FK<name> TypeName;
+        public FK<StringIndex> TypeName;
 
-        public FK<name> TypeNamespace;
+        public FK<StringIndex> TypeNamespace;
 
         public int Implementation;
     }

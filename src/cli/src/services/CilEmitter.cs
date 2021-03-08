@@ -16,9 +16,12 @@ namespace Z0
 
         const string CilCodeSep = "// " + RP.PageBreak120;
 
+
         public void EmitCilCode(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
+            var visualizer = Cil.visualizer();
+            var builder = text.build();
             if(count != 0)
             {
                 var flow = Wf.EmittingFile(dst);
@@ -28,8 +31,13 @@ namespace Z0
                 {
                     var cil = skip(view,i).Member.Cil;
                     writer.WriteLine(CilCodeSep);
-                    writer.WriteLine(string.Format(CilCodeHeader,cil.Base, cil.Id));
-                    writer.WriteLine(cil.Formatted);
+                    writer.WriteLine(string.Format(CilCodeHeader, cil.Base, cil.Id));
+                    builder.Clear();
+                    visualizer.DumpILBlock(cil.Encoded, cil.Encoded.Length, builder);
+                    writer.WriteLine("{");
+                    writer.WriteLine(builder.ToString());
+                    writer.WriteLine("}");
+                    writer.WriteLine();
                 }
 
                 Wf.EmittedFile(flow, count);

@@ -9,6 +9,6 @@ namespace Z0.Schemas.Ecma
 
     public readonly struct UserStringIndex : IHeapIndex<UserStringIndexKind,UserStringIndex>
     {
-        public uint Value {get;}
+        public uint Key {get;}
     }
 }

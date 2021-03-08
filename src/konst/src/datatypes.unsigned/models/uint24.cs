@@ -69,7 +69,7 @@ namespace Z0
         public static U Min
         {
             [MethodImpl(Inline)]
-            get => z.@as<L,U>(MinVal);
+            get => @as<L,U>(MinVal);
         }
 
         public T Content
@@ -84,7 +84,7 @@ namespace Z0
         public static U Max
         {
             [MethodImpl(Inline)]
-            get => z.@as<L,U>(MaxVal);
+            get => @as<L,U>(MaxVal);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         public static U Zero
         {
             [MethodImpl(Inline)]
-            get => z.@as<T,U>(0);
+            get => @as<T,U>(0);
         }
 
         /// <summary>
@@ -102,13 +102,12 @@ namespace Z0
         public static U One
         {
             [MethodImpl(Inline)]
-            get => z.@as<T,U>(1);
+            get => @as<T,U>(1);
         }
 
         [MethodImpl(Inline)]
         public static U @bool(bool x)
             => @as<uint,U>(memory.u32(x));
-
 
         /// <summary>
         /// Queries the state of an index-identified bit

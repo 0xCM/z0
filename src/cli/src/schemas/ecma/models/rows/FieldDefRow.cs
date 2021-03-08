@@ -9,8 +9,8 @@ namespace Z0.Schemas.Ecma
 
         public FieldAttributes Flags;
 
-        public FK<name> Name;
+        public FK<StringIndex> Name;
 
-        public FK<sig> Signature;
+        public FK<BlobIndex> Signature;
     }
 }

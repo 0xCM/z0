@@ -104,5 +104,18 @@ namespace Z0.Schemas.Ecma
             public static implicit operator HeapIndexKind(SystemStringIndexKind src)
                 => src.Classifier;
         }
+
+        public readonly struct StringIndexKind : IHeapIndexKind<StringIndexKind>
+        {
+            public HeapIndexKind Classifier => HeapIndexKind.SystemString | HeapIndexKind.UserString;
+
+            /// <summary>
+            /// Projects an index onto its classifier
+            /// </summary>
+            /// <param name="src">The source index</param>
+            [MethodImpl(Inline)]
+            public static implicit operator HeapIndexKind(StringIndexKind src)
+                => src.Classifier;
+        }
     }
 }

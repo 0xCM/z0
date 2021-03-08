@@ -16,7 +16,7 @@ namespace Z0.Schemas.Ecma
 
         public ManifestResourceFlags Flags;
 
-        public FK<name> Name;
+        public FK<StringIndex> Name;
 
         public int Implementation;
     }

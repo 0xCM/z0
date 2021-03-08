@@ -28,6 +28,12 @@ namespace Z0
         FS.FolderPath ControlRoot()
             => Env.Control.Value;
 
+        FS.FilePath ControlScript(FS.FileName src)
+            => ControlCmdRoot() + src;
+
+        FS.FolderPath ControlCmdRoot()
+            => ControlRoot() + FS.folder(".cmd");
+
         FS.FolderPath Package(string id)
             => PackageRoot() + FS.folder(id);
 
@@ -66,12 +72,6 @@ namespace Z0
 
         FS.FolderPath SourceBuildRoot()
             => ZRoot() + FS.folder(build);
-
-        FS.FolderPath BuildArchiveRoot()
-            => BinaryRoot() + FS.folder(builds);
-
-        FS.FolderPath ToolExeRoot()
-            => DbRoot() + FS.folder(tools);
 
         FS.FolderPath BinaryRoot()
             => DbRoot() + FS.folder(bin);
@@ -141,7 +141,6 @@ namespace Z0
                 ? FS.file(string.Format("{0}-{1}", id.Id, id.Token), Log)
                 : FS.file(id.Format(), Log));
 
-
         FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
                 => FS.file(string.Format("{0}.{1}", Records.tableid<T>().Identifier, id), Csv);
@@ -149,15 +148,6 @@ namespace Z0
         FS.FilePath EtlTable<T>(string id)
             where T : struct, IRecord<T>
                 => EtlTableRoot() + TableFileName<T>(id);
-
-        FS.FolderPath AppLogRoot()
-            => LogRoot() + FS.folder(apps);
-
-        FS.FolderPath AppDataFolder()
-            => AppLogRoot() + FS.folder(AppName);
-
-        FS.FilePath AppDataFile(FS.FileName file)
-            => AppDataFolder() + file;
 
         FS.FolderPath TestLogRoot()
             => LogRoot() + FS.folder(tests);
@@ -171,127 +161,12 @@ namespace Z0
         FS.FolderPath SortedCaseLogRoot()
             => TestLogRoot();
 
-
-        FS.FilePath AppLog(string id)
-            =>  AppLogRoot() + FS.file(id, Log);
-
-        FS.FilePath AppLog(string id, FS.FileExt ext)
-            => AppLogRoot() + FS.file(id,ext);
-
-        FS.FolderPath BuildLogRoot()
-            => LogRoot() + FS.folder("build");
-
-        FS.FilePath BuildLogPath(FS.FileName src)
-            => BuildLogRoot() + src;
-
         /// <summary>
         /// Defines a task-specific log path
         /// </summary>
         /// <param name="subject">The subject identifier</param>
         FS.FilePath TaskLogPath(string subject, FS.FileExt ext)
             =>  LogRoot() + FS.file(subject, ext);
-
-        /// <summary>
-        /// Specifies a table root for an identified subject
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
-        FS.FolderPath TableDir(string subject)
-            => TableRoot() + FS.folder(subject);
-
-        /// <summary>
-        /// Specifies a table subdirectory
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
-        FS.FolderPath TableDir(FS.FolderName subject)
-            => TableRoot() + subject;
-
-        /// <summary>
-        /// Specifies a table root for a type-identified subject
-        /// </summary>
-        /// <param name="t">The identifying type</param>
-        FS.FolderPath TableDir(Type t)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));
-
-        /// <summary>
-        /// Specifies a table root for a parametrically-identified subject
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
-        /// <typeparam name="S">The subject type</typeparam>
-        FS.FolderPath TableDir<T>()
-            where T : struct, IRecord<T>
-                => TableDir(typeof(T));
-
-        string TableId(Type t)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => a.TableId, () => t.Name);
-
-        string TableId<T>()
-            => TableId(typeof(T));
-
-        FS.FilePath Table(string id, PartId part)
-            => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
-
-        FS.FilePath Table(string id)
-            => TableRoot() + FS.file(id, DefaultTableExt);
-
-        FS.FilePath Table(PartId part, string id, FS.FileExt ext)
-            => TableDir(id) + FS.file(part.Format(), ext);
-
-        FS.FilePath Table<T>(string name)
-            where T : struct, IRecord<T>
-                => Table<T>(name, Csv);
-
-        FS.FilePath Table<T>(FS.FolderName subject)
-            where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format(), Csv);
-
-        FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
-            where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format() + string.Format("-{0}", discriminator), Csv);
-
-        FS.FilePath Table<T>(string name, FS.FileExt ext)
-            where T : struct, IRecord<T>
-        {
-            var id = Records.tableid<T>().Identifier;
-            var dir = TableDir(id);
-            return dir + FS.file(string.Format("{0}.{1}", id, name), ext);
-        }
-
-        FS.FilePath Table(Type t, PartId part)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));
-
-        FS.FilePath Table<T>(PartId part)
-            where T : struct, IRecord<T>
-                => Table(typeof(T), part);
-
-        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
-
-        FS.FolderPath IndexDir(Type t)
-            => IndexRoot() + FS.folder(TableId(t));
-
-        FS.FolderPath IndexDir(string subject)
-            => IndexRoot() + FS.folder(subject);
-
-        FS.FolderPath IndexDir<T>()
-            where T : struct, IRecord<T>
-                => IndexRoot() + FS.folder(TableId<T>());
-
-        FS.FilePath IndexTable(string id)
-            => IndexRoot() + FS.file(id, DefaultTableExt);
-
-        FS.FilePath IndexTable(Type t)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => IndexTable(a.TableId), () => IndexTable(t.Name));
-
-        FS.FilePath IndexTable<T>()
-            where T : struct, IRecord<T>
-                => IndexTable(typeof(T));
-
-        FS.FilePath IndexTable(Type t, string discriminator)
-            => IndexDir(t) + FS.file(TableId(t) + discriminator, DefaultTableExt);
-
-        FS.FilePath IndexTable<T>(string discriminator)
-            where T : struct, IRecord<T>
-                => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);
 
         FS.FolderPath ListRoot()
             => DbRoot() + FS.folder(lists);
@@ -335,56 +210,10 @@ namespace Z0
         FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
             => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
-        FS.FolderPath ControlCmdRoot()
-            => ControlRoot() + FS.folder(".cmd");
-
-        FS.FilePath ControlScript(FS.FileName src)
-            => ControlCmdRoot() + src;
-
-        FS.FolderPath ToolScriptRoot()
-            => DevRoot("tooling") + FS.folder("scripts");
-
-        FS.FolderPath ToolOutRoot()
-            => DbRoot() + FS.folder(tools);
-
-        FS.FolderPath ToolOutDir(ToolId tool)
-            => ToolOutRoot() + FS.folder(tool.Format());
-
-        FS.FilePath ToolOutPath(ToolId tool, string id, FS.FileExt ext)
-            => ToolOutDir(tool) + FS.file(id, ext);
-
-        FS.Files ToolOutFiles(ToolId tool)
-            => ToolOutDir(tool).EnumerateFiles(true).Array();
-
-        FS.FolderPath ToolScriptDir(ToolId tool)
-            => ToolScriptRoot() + FS.folder(tool.Format());
-
-        FS.FilePath ToolScript(ToolId tool, ScriptId script, FS.FileExt? ext = null)
-            => ToolScriptDir(tool) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
-
-        FS.FilePath Script(ToolId tool, FS.FileName file)
-            => ToolScriptDir(tool) +  file;
-
-        FS.FolderPath ToolScriptDir<K>(K kind)
-            => ToolScriptRoot() + FS.folder(kind.ToString());
-
-        FS.FilePath ToolScript<K>(K kind, ScriptId script, FS.FileExt? ext = null)
-            => ToolScriptDir(kind) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
-
-        FS.FolderPath ToolCatalogRoot()
-            => DevRoot("tooling") + FS.folder("catalog");
 
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), Dmp);
 
-        FS.FolderPath Tools(ToolId id)
-            => ToolExeRoot() + FS.folder(id.Format());
-
-        FS.FolderPath Output(ToolId id)
-            => Tools(id) + FS.folder(output);
-
-        FS.FolderPath Output(ToolId tool, CmdId cmd)
-            => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
 
         FS.FolderPath Sources()
             => DbRoot() + FS.folder("sources");
@@ -397,5 +226,20 @@ namespace Z0
 
         FS.FilePath SortedCaseLogPath()
             => SortedCaseLogRoot() + FS.file(AppName, Csv);
+
+        FS.FolderPath CaptureRoot()
+            => DbRoot() + FS.folder(capture);
+
+        FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
+            => id.ToFileName(ext);
+
+        FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+
+        PartFiles PartFiles()
+            => new PartFiles(RawExtractFiles(), ParsedExtractFiles(), ApiHexFiles(), AsmFiles(), ImmHexFiles(), ImmAsmFiles());
+
+        FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
     }
 }

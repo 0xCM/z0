@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public ushort Index;
 
-        public FK<string> Name;
+        public FK<StringIndex> Name;
     }
 }

@@ -14,21 +14,21 @@ namespace Z0.Schemas.Ecma
         /// <summary>
         /// Identifies a user string index
         /// </summary>
-        UserString,
+        UserString = 1,
 
         /// <summary>
         /// Identifies a system string index
         /// </summary>
-        SystemString,
+        SystemString = 2,
 
         /// <summary>
         /// Identifies a blob index
         /// </summary>
-        Blob,
+        Blob = 4,
 
         /// <summary>
         /// Identifies a guid index
         /// </summary>
-        Guid
+        Guid = 8
     }
 }

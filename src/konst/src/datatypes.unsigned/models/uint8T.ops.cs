@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in U src)
             where K : unmanaged, Enum
-                 => ref z.@as<U,K>(src);
+                 => ref memory.@as<U,K>(src);
 
         /// <summary>
         /// Converts an enum to a width-identified integer
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(memory.@as<K,byte>(src));
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks

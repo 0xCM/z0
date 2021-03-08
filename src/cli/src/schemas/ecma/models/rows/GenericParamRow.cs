@@ -15,6 +15,6 @@ namespace Z0.Schemas.Ecma
 
         public int Owner;
 
-        public FK<string> Name;
+        public FK<StringIndex> Name;
     }
 }

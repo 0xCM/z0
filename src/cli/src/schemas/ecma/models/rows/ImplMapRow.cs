@@ -15,7 +15,7 @@ namespace Z0.Schemas.Ecma
 
         public int MemberForwarded;
 
-        public FK<name> ImportName;
+        public FK<StringIndex> ImportName;
 
         public int ImportScope;
     }

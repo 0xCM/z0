@@ -199,12 +199,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U mul(U lhs, U rhs)
-            => reduce4((byte)(lhs.data * rhs.data));
+        public static U mul(U a, U b)
+            => reduce4((byte)(a.data * b.data));
 
         [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap4(lhs.data & rhs.data);
+        public static U and(U a, U b)
+            => wrap4(a.data & b.data);
 
         [MethodImpl(Inline), Op]
         public static U or(U lhs, U rhs)

@@ -355,15 +355,72 @@ namespace Z0.Asm
             }
         }
 
+        static bool parse(string src, out CilRow dst)
+        {
+            var parts = @readonly(src.SplitClean(Chars.Pipe));
+            var count = parts.Length;
+            if(count != 3)
+            {
+                dst = default;
+                return false;
+            }
+            else
+            {
+                Records.parse(skip(parts,0), out dst.BaseAddress);
+                Records.parse(skip(parts,1), out dst.Uri);
+                Records.parse(skip(parts,2), out dst.CilCode);
+                return true;
+            }
+        }
+
+
+        void EmitCilBlocks()
+        {
+            var service = Cil.visualizer();
+            var input = Db.CilDataFiles().View;
+            var count = input.Length;
+            var builder = text.build();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(input,i);
+                var output = Db.CilCodeFile(path.FileName.WithoutExtension);
+                using var reader = path.Reader();
+                using var writer = output.Writer();
+                var flow = Wf.EmittingFile(output);
+                while(!reader.EndOfStream)
+                {
+                    builder.Clear();
+                    var line = reader.ReadLine();
+                    if(parse(line, out var row))
+                    {
+                        var code = row.CilCode;
+                        service.DumpILBlock(code, code.Length, builder);
+                        writer.WriteLine(string.Format("// {0} {1}", row.BaseAddress, row.Uri));
+                        writer.WriteLine("{");
+                        writer.WriteLine(builder.ToString());
+                        writer.WriteLine("}");
+                        writer.WriteLine();
+                    }
+                    else
+                        Wf.Warn($"The content {line} could not be parsed");
+
+                }
+                Wf.EmittedFile(flow);
+            }
+        }
+
         public void Run()
         {
             // var commands = WfCmdGlobals.create(Wf);
             // commands.Run(GlobalWfCmd.ShowByteConversions);
-            var src = FS.path(Parts.Konst.Assembly.Location);
-            var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
-            var flow = Wf.EmittingFile(dst);
-            Cil.visualize(src,dst);
-            Wf.EmittedFile(flow);
+
+            // var src = FS.path(Parts.GMath.Assembly.Location);
+            // var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
+            // var flow = Wf.EmittingFile(dst);
+            // Cli.visualize(src,dst);
+            // Wf.EmittedFile(flow);
+
+            EmitCilBlocks();
 
             //CliTables.create(Wf).DumpMetadata(src,dst);
             //ProcessStatements();
@@ -385,7 +442,6 @@ namespace Z0.Asm
                 term.error(e);
             }
         }
-
     }
 
     public static partial class XTend { }

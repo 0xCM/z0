@@ -22,8 +22,8 @@ namespace Z0.Schemas.Ecma
 
         public FK<BlobIndex> AssemblyKey;
 
-        public FK<name> AssemblyName;
+        public FK<StringIndex> AssemblyName;
 
-        public FK<name> AssemblyCulture;
+        public FK<StringIndex> AssemblyCulture;
     }
 }

@@ -17,7 +17,8 @@ namespace Z0
     {
         public Rational<T> Value;
 
-        public static Percent<T> Zero => Rational<T>.Zero;
+        public static Percent<T> Zero
+            => Rational<T>.Zero;
 
         [MethodImpl(Inline)]
         public Percent(T over, T under)

@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     /// <summary>
     /// Defines an observation sequence
@@ -61,7 +60,7 @@ namespace Z0
         {
             Dim = dim;
             Count = Math.DivRem(src.Length, dim, out int remainder);
-            insist(remainder == 0, $"The invariant k := (remainder == 0) failed");
+            root.require(remainder == 0, () => "The invariant k := (remainder == 0) failed");
             Data = src;
         }
 
@@ -70,7 +69,7 @@ namespace Z0
         {
             Dim = dim;
             Count = Math.DivRem(src.Length, dim, out int remainder);
-            insist(remainder == 0, $"The invariant k := (remainder == 0) failed");
+            root.require(remainder == 0, () => "The invariant k := (remainder == 0) failed");
             Data = src;
         }
 

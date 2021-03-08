@@ -13,7 +13,7 @@ namespace Z0.Schemas.Ecma
 
         public uint Flags;
 
-        public FK<name> FileName;
+        public FK<StringIndex> FileName;
 
         public FK<BlobIndex> HashValue;
     }

@@ -24,5 +24,20 @@ namespace Z0
 
         FS.Files CilDataFiles(PartId part)
             => CilDataFiles().Where(f => f.IsOwner(part));
+
+        FS.FolderPath CilCodeRoot()
+            => CaptureRoot() + FS.folder(cil);
+
+        FS.FilePath CilCodeFile(FS.FileName name)
+            => CilCodeRoot() + name;
+
+        FS.FilePath CilCodeFile(ApiHostUri host)
+            => CilCodeFile(ApiIdentity.file(host, Il));
+
+        FS.Files CilCodeFiles()
+            => CilCodeRoot().Files(Csv);
+
+        FS.Files CilCodeFiles(PartId part)
+            => CilCodeFiles().Where(f => f.IsOwner(part));
     }
 }

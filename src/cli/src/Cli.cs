@@ -16,8 +16,8 @@ namespace Z0
     [ApiHost(ApiNames.Cil, true)]
     public readonly partial struct Cil
     {
-        public static void visualize(FS.FilePath src, FS.FilePath dst)
-            => Mdv.run(src.Name,dst.Name);
+        public static ILVisualizer visualizer()
+            => ILVisualizer.service();
 
         [Op]
         public static string format(CliSig src)
@@ -42,7 +42,11 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Cli
     {
+        public static void visualize(FS.FilePath src, FS.FilePath dst)
+            => Mdv.run(src.Name,dst.Name);
 
+        public static IPdbSymbolStore symbols(IWfShell wf)
+            => PdbSymbolStore.create(wf);
     }
 
     [ApiHost]
@@ -55,6 +59,6 @@ namespace Z0
     {
         [ServiceFactory]
         public static IPdbSymbolStore PdbSymbolStore(this IWfShell wf)
-            => PdbSymbolStoreSvc.create(wf);
+            => Cli.symbols(wf);
     }
 }

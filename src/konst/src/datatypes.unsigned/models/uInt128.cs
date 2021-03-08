@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     using U = uint128;
     using W = W128;
@@ -43,13 +42,13 @@ namespace Z0
         public C Lo
         {
             [MethodImpl(Inline)]
-            get => vcell(data,0);
+            get => cpu.vcell(data,0);
         }
 
         public C Hi
         {
             [MethodImpl(Inline)]
-            get => vcell(data,1);
+            get => cpu.vcell(data,1);
         }
     }
 }

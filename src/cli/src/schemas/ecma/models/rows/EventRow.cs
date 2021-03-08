@@ -14,7 +14,7 @@ namespace Z0.Schemas.Ecma
 
         public ushort EventFlags;
 
-        public FK<name> Name;
+        public FK<StringIndex> Name;
 
         public int EventType;
     }

@@ -14,20 +14,17 @@ namespace Z0
     using static memory;
     using static Part;
 
-    sealed class PdbSymbolStoreSvc : WfService<PdbSymbolStoreSvc,IPdbSymbolStore>, IPdbSymbolStore
+    sealed class PdbSymbolStore : WfService<PdbSymbolStore,IPdbSymbolStore>, IPdbSymbolStore
     {
         public DirectorySymbolStore DirectoryStore(FS.FolderPath dir)
             => new DirectorySymbolStore(tracer(Wf), null, dir.Name);
 
-        [Op]
         public SymbolStoreFile SymbolFile(FS.FilePath src)
             => new SymbolStoreFile(src.Stream(), src.FileName.Name);
 
-        [Op]
         public KeyGenerator KeyGenerator(SymbolStoreFile src)
             => new PortablePDBFileKeyGenerator(tracer(Wf), src);
 
-        [Op]
         public IEnumerable<SymbolStoreKey> Identities(KeyGenerator src)
             => src.GetKeys(KeyTypeFlags.IdentityKey);
 

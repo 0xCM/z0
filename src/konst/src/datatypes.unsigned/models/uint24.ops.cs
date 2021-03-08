@@ -157,7 +157,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref U inc(in U x)
         {
-            ref var y = ref z.edit(x);
+            ref var y = ref memory.edit(x);
             y.data++;
 
             if(y.data > Mask)
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref U dec(in U x)
         {
-            ref var y = ref z.edit(x);
+            ref var y = ref memory.edit(x);
             y.data--;
 
             if(y.data > Mask)

@@ -51,7 +51,7 @@ namespace System.Reflection.Metadata
             }
         }
 
-        private sealed class GenerationData
+        sealed class GenerationData
         {
             public readonly IDisposable MemoryOwner;
 
@@ -321,6 +321,13 @@ namespace System.Reflection.Metadata
             }
 
             writer.WriteLine();
+        }
+
+
+        public static void VisualizeMethodIL(MetadataVisualizer visualizer, MetadataReader mdReader, PEReader peReader)
+        {
+            foreach (var methodHandle in mdReader.MethodDefinitions)
+                visualizer.VisualizeMethodBody(methodHandle, rva => peReader.GetMethodBody(rva));
         }
 
         static unsafe void VisualizeGenerationIL(MetadataVisualizer visualizer, int generationIndex, GenerationData generation, MetadataReader mdReader)
