@@ -12,6 +12,10 @@ namespace Z0
 
     partial struct Asci
     {
+        [MethodImpl(Inline), Op]
+        public static SymbolSet<Symbol<AsciCharCode>,byte,W8> set(params AsciCharCode[] src)
+            => SymbolStores.set<Symbol<AsciCharCode>,byte,W8>(SymbolStores.symbols(src));
+
         /// <summary>
         /// Presents a span of character codes as a bytespan
         /// </summary>

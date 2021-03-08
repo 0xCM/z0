@@ -8,31 +8,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Digital
     {
         [MethodImpl(Inline), Op]
-        public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
-            => Symbolic.symbol(src);
+        public static BinarySym symbol(BinaryDigit src)
+            => (BinarySym)(src + (byte)BinarySymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<OctalSym,byte,N3> symbol(OctalDigit src)
-            => Symbolic.symbol(src);
+        public static OctalSym symbol(OctalDigit src)
+            => (OctalSym)((byte)src + (byte)OctalSymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
-            => Symbolic.symbol(@base, src);
+        public static BinarySym symbol(Base2 @base, byte src)
+            => (BinarySym)(src + (byte)BinarySymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<DecimalSym,byte,N4> symbol(DecimalDigit src)
-            => Symbolic.symbol(src);
+        public static DecimalSym symbol(DecimalDigit src)
+            => (DecimalSym)((byte)src + DecimalSymFacet.First);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
-            => Symbolic.symbol(@case, src);
+        public static HexSym symbol(UpperCased @case, HexDigit src)
+            => (HexSym)code(@case, src);
 
         [MethodImpl(Inline), Op]
-        public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
-            => Symbolic.symbol(@case, src);
+        public static HexSym symbol(LowerCased @case, HexDigit src)
+            => (HexSym)code(@case, src);
     }
 }

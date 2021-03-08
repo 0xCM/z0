@@ -13,22 +13,22 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static char @char(BinaryDigit src)
-            => (char)symbol(src).Value;
+            => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
         public static char @char(OctalDigit src)
-            => (char)symbol(src).Value;
+            => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
         public static char @char(DecimalDigit src)
-            => (char)symbol(src).Value;
+            => (char)symbol(src);
 
         [MethodImpl(Inline), Op]
         public static char @char(UpperCased @case, HexDigit src)
-            => (char)symbol(@case, src).Value;
+            => (char)symbol(@case, src);
 
         [MethodImpl(Inline), Op]
         public static char @char(LowerCased @case, HexDigit src)
-            => (char)symbol(@case, src).Value;
+            => (char)symbol(@case, src);
     }
 }

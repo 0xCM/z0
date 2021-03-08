@@ -9,16 +9,15 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static HexFormatSpecs;
 
-    partial struct SymbolStores
+    partial struct Digital
     {
         /// <summary>
         /// Returns a readonly symbol span covering each <see cref='Hex2Seq'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<Hex2Seq,byte,N2>> hex(N2 n)
+        public static ReadOnlySpan<Symbol<Hex2Seq,byte,N2>> hexseq(N2 n)
             => Bytes.cells<Symbol<Hex2Seq,byte,N2>>(n4);
 
         /// <summary>
@@ -26,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<Hex3Seq,byte,N3>> hex(N3 n)
+        public static ReadOnlySpan<Symbol<Hex3Seq,byte,N3>> hexseq(N3 n)
             => Bytes.cells<Symbol<Hex3Seq,byte,N3>>(n8);
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<Hex4Seq,byte,N4>> hex(N4 n)
+        public static ReadOnlySpan<Symbol<Hex4Seq,byte,N4>> hexseq(N4 n)
             => Bytes.cells<Symbol<Hex4Seq,byte,N4>>(n16);
 
         /// <summary>
@@ -42,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<Symbol<Hex5Seq,byte,N5>> hex(N5 n)
+        public static ReadOnlySpan<Symbol<Hex5Seq,byte,N5>> hexseq(N5 n)
             => Bytes.cells<Symbol<Hex5Seq,byte,N5>>(n32);
 
         /// <summary>
@@ -50,16 +49,16 @@ namespace Z0
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static SymbolStore<Hex6Seq,byte,N6> hex(N6 n)
-            => Symbolic.store<Hex6Seq,byte,N6>();
+        public static SymbolStore<Hex6Seq,byte,N6> hexseq(N6 n)
+            => SymbolStores.create<Hex6Seq,byte,N6>();
 
         /// <summary>
         /// Creates a store covering each <see cref='Hex7Seq'/> member
         /// </summary>
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
-        public static SymbolStore<Hex7Seq,byte,N7> hex(N7 n)
-            => Symbolic.store<Hex7Seq,byte,N7>();
+        public static SymbolStore<Hex7Seq,byte,N7> hexseq(N7 n)
+            => SymbolStores.create<Hex7Seq,byte,N7>();
 
         /// <summary>
         /// Creates a store covering each <see cref='Hex8Seq'/> member
@@ -67,24 +66,6 @@ namespace Z0
         /// <param name="n">The sequence length selector</param>
         [MethodImpl(Inline), Op]
         public static SymbolStore<Hex8Seq,byte,N8> hex(N8 n)
-            => Symbolic.store<Hex8Seq,byte,N8>();
-
-        /// <summary>
-        /// Presents the source value as a sequence of hex symbols
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="case">The case selector</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<HexSymUp> hex(byte src, UpperCased @case)
-            => recover<byte,HexSymUp>(UpperHexDigits);
-
-        /// <summary>
-        /// Presents the source value as a sequence of hex symbols
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="case">The case selector</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<HexSymLo> hex(byte src, LowerCased @case)
-            => recover<byte,HexSymLo>(LowerHexDigits);
+            => SymbolStores.create<Hex8Seq,byte,N8>();
     }
 }

@@ -36,15 +36,6 @@ namespace Z0
                 : (HexSym)((byte)src + (byte)XF.FirstLetterUp);
 
         /// <summary>
-        /// Retrieves the character corresponding to a specified <see cref='HexDigit'/>
-        /// </summary>
-        /// <param name="case">The case specifier</param>
-        /// <param name="value">The digit value</param>
-        [MethodImpl(Inline), Op]
-        public static char hexchar(LowerCased @case, HexDigit value)
-            => value == HexDigit.None ? Chars.Null : (char)Symbolic.symbol(@case, value);
-
-        /// <summary>
         /// Tests whether a <see cref='HexSymLo'/> value is one of '0',...,'9'
         /// </summary>
         /// <param name="src">The symbol to test</param>

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Asci;
 
     /// <summary>
     /// Defines operations over character digits
@@ -19,29 +18,29 @@ namespace Z0
         public static string format(ReadOnlySpan<BinaryDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
-            Digital.render(src,dst);
-            return @string(dst);
+            render(src,dst);
+            return text.@string(dst);
         }
 
         public static string format(ReadOnlySpan<DecimalDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
-            Digital.render(src,dst);
-            return @string(dst);
+            render(src,dst);
+            return text.@string(dst);
         }
 
         public static string format(ReadOnlySpan<HexDigit> src)
         {
             Span<char> dst = stackalloc char[src.Length];
-            Digital.render(src,dst);
-            return @string(dst);
+            render(src,dst);
+            return text.@string(dst);
         }
 
         public static string format(Base16 @base, UpperCased @case, ReadOnlySpan<byte> src)
         {
             Span<char> digits = stackalloc char[src.Length*3];
-            Digital.render(@base, @case, src,digits);
-            return @string(digits);
+            render(@base, @case, src,digits);
+            return text.@string(digits);
         }
 
         public static string format(in BinaryCode src)
@@ -50,6 +49,5 @@ namespace Z0
             decode(src,dst);
             return sys.@string(dst);
         }
-
     }
 }

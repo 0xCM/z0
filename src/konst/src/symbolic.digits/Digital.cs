@@ -15,6 +15,8 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Digital
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Extracts the four lo digits
         /// </summary>

@@ -19,6 +19,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Alphabet<Symbol<AsciChar>> asci(AsciChar[] src)
-            => src.Map(s => Symbolic.symbol(s));
+            => src.Map(s => SymbolStores.symbol(s));
     }
 }

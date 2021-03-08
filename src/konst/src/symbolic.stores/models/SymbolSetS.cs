@@ -8,18 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    /// <summary>
-    /// Specifies symbol characteristics
-    /// </summary>
-    public readonly struct SymbolSet<S,W> : ISymbolSet<S>
+    public readonly struct SymbolSet<S> : ISymbolSet<SymbolSet<S>,S>
         where S : unmanaged, ISymbol
-        where W : unmanaged, IDataWidth
     {
-        /// <summary>
-        /// The specified symbols
-        /// </summary>
         public Index<S> Symbols {get;}
+
+        public ushort SymWidth {get;}
 
         /// <summary>
         /// The bit-width of a storage cell
@@ -27,15 +23,33 @@ namespace Z0
         public ushort SegWidth {get;}
 
         /// <summary>
-        /// The storage cell type identifier
+        /// The maximum number of symbols that can be stored in a segment
         /// </summary>
+        public ushort SegCapacity {get;}
+
         public PrimalCode SegDomain {get;}
 
+        public PrimalCode SymDomain {get;}
+
         [MethodImpl(Inline)]
-        public SymbolSet(ushort wSeg, PrimalCode dSeg, params S[] symbols)
+        public SymbolSet(ushort symwidth, ushort segwidth, PrimalCode segdomain, PrimalCode symdomain, params S[] symbols)
         {
-            SegDomain = dSeg;
-            SegWidth = wSeg;
+            SymWidth = symwidth;
+            SegWidth = segwidth;
+            SegCapacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = segdomain;
+            SymDomain = symdomain;
+            Symbols = symbols;
+        }
+
+        [MethodImpl(Inline)]
+        public SymbolSet(ushort symwidth, PrimalCode symdomain, params S[] symbols)
+        {
+            SymWidth = symwidth;
+            SegWidth = (ushort)width<S>();
+            SegCapacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = (PrimalCode)Type.GetTypeCode(typeof(S));
+            SymDomain = symdomain;
             Symbols = symbols;
         }
 
@@ -54,40 +68,16 @@ namespace Z0
             get => (ushort)Symbols.Count;
         }
 
-        /// <summary>
-        /// The number of bits occupied by a symbol
-        /// </summary>
-        public ushort SymWidth
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => (ushort)Widths.data<W>();
-        }
-
-        /// <summary>
-        /// The maximum number of symbols that can be stored in a segment
-        /// </summary>
-        public ushort SegCapacity
-        {
-            [MethodImpl(Inline)]
-            get => (ushort)(SegWidth/SymWidth);
-        }
-
-        public PrimalCode SymDomain
-        {
-            [MethodImpl(Inline)]
-            get => (PrimalCode)Type.GetTypeCode(typeof(S));
+            get => Symbols.IsNonEmpty;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Symbols.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Symbols.IsNonEmpty;
         }
 
         public SymbolInfo Description
@@ -98,18 +88,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public SymbolName<S> SymName(ushort index)
-            => Symbolic.name(this, index);
+            => new SymbolName<S>(this, index);
 
         [MethodImpl(Inline)]
         public Identifier SymId(ushort index)
             => default;
 
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolInfo(SymbolSet<S,W> src)
-            => src.Description;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolSet<S>(SymbolSet<S,W> src)
-            => new SymbolSet<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
     }
 }

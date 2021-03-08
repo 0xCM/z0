@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct SymbolStores
+    partial struct Digital
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<Symbol<BitSeq1,byte,N1>> bitseq(N1 n)
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq1,T,N1> bitseq<T>(N1 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq1,T,N1>();
+                => SymbolStores.create<BitSeq1,T,N1>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq2'/> member
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq2,T,N2> bitseq<T>(N2 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq2,T,N2>();
+                => SymbolStores.create<BitSeq2,T,N2>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq3'/> member
@@ -71,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq3,T,N3> bitseq<T>(N3 n)
             where T : unmanaged
-            => Symbolic.store<BitSeq3,T,N3>();
+            => SymbolStores.create<BitSeq3,T,N3>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq4'/> member
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq4,T,N4> bitseq<T>(N4 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq4,T,N4>();
+                => SymbolStores.create<BitSeq4,T,N4>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq5'/> member
@@ -91,7 +91,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq5,T,N5> bitseq<T>(N5 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq5,T,N5>();
+                => SymbolStores.create<BitSeq5,T,N5>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq6'/> member
@@ -101,7 +101,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq6,T,N6> bitseq<T>(N6 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq6,T,N6>();
+                => SymbolStores.create<BitSeq6,T,N6>();
 
         /// <summary>
         /// Creates a cell-parametric store store covering each <see cref='BitSeq8'/> member
@@ -112,6 +112,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<BitSeq8,T,N8> bitseq<T>(N8 n)
             where T : unmanaged
-                => Symbolic.store<BitSeq8,T,N8>();
+                => SymbolStores.create<BitSeq8,T,N8>();
     }
 }

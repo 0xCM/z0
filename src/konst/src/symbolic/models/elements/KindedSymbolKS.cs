@@ -9,9 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Symbolic;
-
-
     /// <summary>
     /// Attaches a classifier to a symbol
     /// </summary>
