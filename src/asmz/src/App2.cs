@@ -373,7 +373,6 @@ namespace Z0.Asm
             }
         }
 
-
         void EmitCilBlocks()
         {
             var service = Cil.visualizer();
