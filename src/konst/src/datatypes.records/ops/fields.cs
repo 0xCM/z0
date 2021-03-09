@@ -54,6 +54,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
+        static ref RecordField<T> map<T>(FieldInfo src, ushort index, ref RecordField<T> dst)
+            where T : struct, IRecord<T>
+        {
+            dst.FieldIndex = index;
+            dst.Definition = src;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
         static void map(ReadOnlySpan<FieldInfo> src, Span<RecordField> dst)
         {
             var count = (ushort)src.Length;

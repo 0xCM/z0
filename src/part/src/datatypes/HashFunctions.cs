@@ -10,6 +10,44 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public readonly struct HashCode<S,T>
+    {
+        public S Input {get;}
+
+        public T Output {get;}
+
+        [MethodImpl(Inline)]
+        public HashCode(S input, T output)
+        {
+            Input = input;
+            Output = output;
+        }
+    }
+
+    public readonly struct HashCode<S> : ITextual
+    {
+        public S Input {get;}
+
+        public uint Output {get;}
+
+        [MethodImpl(Inline)]
+        public HashCode(S input, uint output)
+        {
+            Input = input;
+            Output = output;
+        }
+
+        public string Format()
+            => string.Format("{0}: {1}", Output.FormatHex(specifier:false), Input);
+
+        public override string ToString()
+            => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator HashCode<S>((S input, uint output) src)
+            => new HashCode<S>(src.input, src.output);
+    }
+
     public readonly struct HashFunctions
     {
         public static StringHash strings()
@@ -29,6 +67,27 @@ namespace Z0
             }
 
             return count - (uint)accumulator.Count;
+        }
+
+        public static Index<HashCode<string>> perfect(Index<string> src)
+        {
+            var view = src.View;
+            var count = view.Length;
+            var buffer = alloc<HashCode<string>>(count);
+            ref var dst = ref first(buffer);
+            var accumulator = root.hashset<uint>();
+            var algorithm = strings();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var input = ref skip(view,i);
+                var computed = algorithm.Compute(input);
+                seek(dst,i) = (input,computed);
+                accumulator.Add(computed);
+            }
+            var collisions = count - (uint)accumulator.Count;
+            if(collisions != 0)
+                root.@throw("Imperfect");
+            return buffer;
         }
     }
 

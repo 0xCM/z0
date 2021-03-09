@@ -13,6 +13,19 @@ namespace Z0
     partial struct Pipes
     {
         [Op, Closures(Closure)]
+        public static void flow<T>(ReadOnlySpan<T> src, ReadOnlySpan<IReceiver<T>> dst)
+        {
+            var kSources = src.Length;
+            var kTargets = dst.Length;
+            for(var i=0; i<kSources; i++)
+            {
+                ref readonly var input = ref skip(src,i);
+                for(var j=0; j<kTargets; j++)
+                    skip(dst,j).Deposit(input);
+            }
+        }
+
+        [Op, Closures(Closure)]
         public static uint flow<T>(Pipe<T> src, Pipe<T> dst)
         {
             var count = 0u;

@@ -34,10 +34,9 @@ namespace Z0.Asm
             get => (Routine != null && Routine.IsNonEmpty) && Code.IsNonEmpty;
         }
 
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCaptureBlock code) src)
-            => new AsmRoutineCode(src.f, src.code);
+        // [MethodImpl(Inline)]
+        // public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCaptureBlock code) src)
+        //     => new AsmRoutineCode(src.f, src.code);
 
         public static AsmRoutineCode Empty
             => default;

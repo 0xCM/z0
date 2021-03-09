@@ -15,22 +15,16 @@ namespace Z0
     {
         const uint DefaultBufferSize = CpuBuffer.BufferSize;
 
-        readonly IAsmWf Asm;
-
         readonly IWfShell Wf;
 
         readonly CpuBuffers Buffers;
 
         int ProcessedCount;
 
-        readonly WfHost Host;
-
         [MethodImpl(Inline)]
-        public CpuRuntime(IAsmWf asm)
+        public CpuRuntime(IWfShell wf)
         {
-            Host = WfShell.host(typeof(CpuRuntime));
-            Asm = asm;
-            Wf = Asm.Wf.WithHost(Host);
+            Wf = wf;
             Buffers = CpuBuffers.create(DefaultBufferSize);
             ProcessedCount = 0;
             Wf.Created();
@@ -60,7 +54,5 @@ namespace Z0
             }
             Wf.Ran(flow);
         }
-
-
     }
 }

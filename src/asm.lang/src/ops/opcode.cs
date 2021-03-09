@@ -13,11 +13,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(OpCode oc, Signature sig, Statement statement)
-            => new AsmExprSet(oc,sig,statement);
-
-        [Op]
-        public static AsmExprSet pack(string oc, string sig, string statement)
-            => new AsmExprSet(asm.opcode(oc), AsmSigParser.parse(sig), asm.statement(statement));
+        public static OpCode opcode(string src)
+            => new OpCode(src);
     }
 }

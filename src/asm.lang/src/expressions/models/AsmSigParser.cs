@@ -44,14 +44,14 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static bool sig(string src, out Signature dst)
+        public static bool parse(string src, out Signature dst)
         {
             if(text.nonempty(src))
             {
                 if(mnemonic(src, out var monic))
                 {
                     var i = Query.index(src, MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<SigOperand>();
+                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(operand) : sys.empty<SigOperand>();
                     dst = new Signature(monic, operands);
                     return true;
                 }
@@ -61,9 +61,9 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Signature sig(string src)
+        public static Signature parse(string src)
         {
-            if(sig(src, out var dst))
+            if(parse(src, out var dst))
                 return dst;
             else
                 return Signature.Empty;
@@ -74,7 +74,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static SigOperand sigop(string src)
+        public static SigOperand operand(string src)
             => new SigOperand(src);
     }
 }

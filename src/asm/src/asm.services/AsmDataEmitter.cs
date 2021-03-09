@@ -137,10 +137,10 @@ namespace Z0.Asm
 
         public void EmitSemantic(Index<ApiPartRoutines> routines)
         {
-            var render = Wf.AsmSemanticRender();
-            var count = routines.Length;
-            for(var i=0; i<count; i++)
-                render.Render(routines[i]);
+            Wf.AsmSemanticRender().Render(routines);
+            // var count = routines.Length;
+            // for(var i=0; i<count; i++)
+            //     render.Render(routines[i]);
         }
 
         public Index<AsmCallRow> EmitCallRows(Index<ApiPartRoutines> routines)
@@ -213,9 +213,6 @@ namespace Z0.Asm
         Index<AsmRow> CreateRecords(in CodeBlock code, in IceInstructionList asm)
             => CreateRecords(code, asm.Storage);
 
-        FS.FolderPath RespackDir
-            => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
-
         Index<AsmRow> CreateRecords(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
@@ -266,5 +263,4 @@ namespace Z0.Asm
             get => Offset++;
         }
     }
-
 }

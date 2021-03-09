@@ -33,7 +33,6 @@ namespace Z0
         public static string identifier<S,T>(DataFlow<S,T> flow)
             => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);
 
-
         [MethodImpl(Inline)]
         public static string format<S,T>(DataFlow<S,T> flow)
             => Relations.RenderLink<S,T>().Format(flow.Source, flow.Target);

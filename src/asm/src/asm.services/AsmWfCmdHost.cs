@@ -40,7 +40,6 @@ namespace Z0.Asm
             index.Include(assign(K.CheckDigitParser, CheckDigitParser));
             index.Include(assign(K.ShowSigOpComposites, ShowSigOpComposites));
             index.Include(assign(K.ShowSigOpSymbols, ShowSigOpSymbols));
-
         }
 
         [Action(K.ShowCatalogSymbols)]

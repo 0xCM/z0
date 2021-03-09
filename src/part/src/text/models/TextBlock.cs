@@ -111,7 +111,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(TextBlock src)
-            => src.Data;
+            => src.Data ?? EmptyString;
 
         public static TextBlock Empty
         {

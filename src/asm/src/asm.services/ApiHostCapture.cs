@@ -34,12 +34,29 @@ namespace Z0.Asm
             using var service = Wf.CaptureQuick(Asm);
             var blocks = service.CaptureHost(catalog);
             var count = blocks.Length;
-            var decoded = AsmServices.decode(Asm, catalog,blocks);
+            var decoded = Decode(catalog, blocks);
             Emit(decoded, dst);
             return decoded;
         }
 
-        void Emit(ApiHostCaptureSet src, FS.FilePath dst)
+        public ApiHostCaptureSet Decode(in ApiHostCatalog catalog, ApiCaptureBlocks blocks)
+        {
+            var count = blocks.Length;
+            var set = new ApiHostCaptureSet(catalog, blocks, alloc<AsmRoutine>(count));
+            var blockview = set.Blocks.View;
+            var routines = set.Routines.Edit;
+            var decoder = Asm.RoutineDecoder;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blockview,i);
+                if(decoder.Decode(block, out var routine))
+                    seek(routines, i) = routine;
+            }
+
+            return set;
+        }
+
+        public void Emit(ApiHostCaptureSet src, FS.FilePath dst)
         {
             const string HeaderFormatPattern = "; BaseAddress:{0} | EndAddress:{1} | RangeSize:{2} | ExtractSize:{3} | ParsedSize:{4}";
             var buffer = text.buffer();

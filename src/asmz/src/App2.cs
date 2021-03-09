@@ -408,7 +408,7 @@ namespace Z0.Asm
             }
         }
 
-        public void Run()
+        void ConvertPdbXml()
         {
             var dir = Db.ToolOutDir(Toolsets.pdb2xml);
             var file = PartId.Math.Component(FS.Extensions.Pdb, FS.Extensions.Xml);
@@ -450,20 +450,27 @@ namespace Z0.Asm
             using var xml = XmlSource.create(Wf, srcPath);
             xml.Read(accept);
             Wf.EmittedFile(flow);
+        }
 
-            // var src = FS.path(Parts.GMath.Assembly.Location);
-            // var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
-            // var flow = Wf.EmittingFile(dst);
-            // Cli.visualize(src,dst);
-            // Wf.EmittedFile(flow);
+        public void Run()
+        {
+            var pipe = AsmFormPipe.create(Wf);
+            var src = Db.IndexTable<AsmFormRecord>();
+            var records = pipe.Load(src).View;
+            var count = records.Length;
+            var blocks = alloc<string>(count);
+            ref var block = ref first(blocks);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                seek(block, i) = record.Expression;
+                root.require(skip(block,i) != null, () => $"Row {i} is null");
 
+            }
 
-            //EmitCilBlocks();
+            var perfect = HashFunctions.perfect(blocks);
+            root.iter(perfect, p => Wf.Row(p));
 
-            //CliTables.create(Wf).DumpMetadata(src,dst);
-            //ProcessStatements();
-            //Wf.AsmWfCmd().Run(AsmWfCmdKind.ShowSigOpComposites);
-            //Wf.CliWfCmd().Run(CliWfCmdKind.EmitImageHeaders);
         }
 
         public static void Main(params string[] args)

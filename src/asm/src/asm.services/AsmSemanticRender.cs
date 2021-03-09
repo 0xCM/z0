@@ -35,11 +35,18 @@ namespace Z0.Asm
             DataFormat = HexFormatSpecs.HexData;
         }
 
+        public void Render(ReadOnlySpan<ApiPartRoutines> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                Render(skip(src,i));
+        }
+
         public void Render(in ApiPartRoutines src)
         {
-            var flow = Wf.Running(string.Format("Running {0} semantic render", src.Part));
+            var flow = Wf.Running(string.Format("Render semantic for <{0}> running", src.Part));
             Execute(src);
-            Wf.Ran(flow);
+            Wf.Ran(flow, string.Format("Render semantic for <{0}> completed", src.Part));
         }
 
         [Op]

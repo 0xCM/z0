@@ -264,7 +264,7 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = asm.opcode(row.OpCode);
-                if(AsmSigParser.sig(row.Instruction, out var sig))
+                if(AsmSigParser.parse(row.Instruction, out var sig))
                     seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {

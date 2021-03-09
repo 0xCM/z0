@@ -11,6 +11,8 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.forms";
 
+        public const byte FieldCount = 4;
+
         public uint Seq;
 
         public OpCode OpCode;
@@ -18,6 +20,5 @@ namespace Z0.Asm
         public Signature Sig;
 
         public TextBlock Expression;
-
     }
 }

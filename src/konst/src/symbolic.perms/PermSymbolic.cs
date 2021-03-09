@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
     using static PermLits;
@@ -14,7 +13,6 @@ namespace Z0
     [ApiHost(ApiNames.PermSymbolic, true)]
     public readonly partial struct PermSymbolic
     {
-
         [MethodImpl(Inline), Op]
         public static Perm8L permid(N8 n)
             => Perm8Identity;

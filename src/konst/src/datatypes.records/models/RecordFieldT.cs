@@ -60,5 +60,15 @@ namespace Z0
             dst.FieldIndex = src.FieldIndex;
             return dst;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator RecordField<T>(RecordField src)
+        {
+            var dst = new RecordField<T>();
+            dst.Definition = src.Definition;
+            dst.FieldIndex = src.FieldIndex;
+            return dst;
+        }
+
     }
 }
