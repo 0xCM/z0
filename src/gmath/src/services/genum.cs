@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static EnumValue;
+    using static ClrEnums;
 
     public class genum
     {
@@ -53,7 +53,7 @@ namespace Z0
             where E : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => Numeric.force<S,T>(gmath.sll(EnumValue.scalar<E,S>(src), count));
+                => Numeric.force<S,T>(gmath.sll(ClrEnums.scalar<E,S>(src), count));
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,

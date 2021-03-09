@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Enums
+    partial struct ClrEnums
     {
         /// <summary>
         /// Defines a useful representation of an enumeration literal
@@ -28,7 +28,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var dataset = Enums.dataset<E,T>();
+            var dataset = EnumDatasets.create<E,T>();
             return describe<E,T>(dataset, new EnumLiteralInfo<E,T>[dataset.EntryCount]);
         }
 

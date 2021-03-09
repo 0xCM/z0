@@ -25,6 +25,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ClrEnumDetails<CreditTypes.ContentField> summary(CreditTypes.ContentField rep)
             => summary<CreditTypes.ContentField>();
-
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    using api = EnumValue;
+    using api = ClrEnums;
 
     partial class XTend
     {
@@ -97,10 +97,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong ToUInt64<E>(this E src)
             where E : unmanaged, Enum
-                => EnumValue.e64u(src);
+                => api.e64u(src);
 
         [MethodImpl(Inline)]
         public static ClrEnumKind EnumScalarKind(this Type src)
-            => ClrEnums.@base(src);
+            => api.@base(src);
     }
 }

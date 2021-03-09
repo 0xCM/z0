@@ -6,21 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
+    using static memory;
 
-    public readonly struct ClrFieldValue<T>
+    partial struct ClrEnums
     {
-        public FieldInfo Definition {get;}
-
-        public T Value {get;}
-
         [MethodImpl(Inline)]
-        internal ClrFieldValue(FieldInfo field, T value)
-        {
-            Definition = field;
-            Value = value;
-        }
+        public static unsafe E read<E,T>(in T scalar, E e = default)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => Unsafe.Read<E>(gptr<T,E>(scalar));
     }
 }

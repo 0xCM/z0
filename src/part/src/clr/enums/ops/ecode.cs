@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct ClrPrimitives
+    partial struct ClrEnums
     {
         /// <summary>
         /// Determines an enumeration's underlying kind

@@ -29,8 +29,8 @@ namespace Z0
         {
             Storage = data;
             Key = typeof(K);
-            Keys = Enums.literals<K>();
-            _KeyIndex = Enums.index<K>().Storage;
+            Keys = ClrEnums.literals<K>();
+            _KeyIndex = ClrEnums.details<K>().Storage;
             _KeyNames = ClrEnums.names<K>();
             _KeyKind = ClrEnums.@base<K>();
         }
@@ -50,7 +50,7 @@ namespace Z0
         public ref T this[K index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[EnumValue.scalar<K,ushort>(index)];
+            get => ref Storage[ClrEnums.scalar<K,ushort>(index)];
         }
 
         public uint EntryCount

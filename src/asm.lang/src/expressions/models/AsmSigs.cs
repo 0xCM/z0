@@ -159,7 +159,7 @@ namespace Z0.Asm
         [Op]
         public static Index<Token<AsmSigOpKind>> tokens()
         {
-            var details = Enums.details<AsmSigOpKind,ushort>().View;
+            var details = ClrEnums.details<AsmSigOpKind,ushort>().View;
             var count = AsmSigOpKindFacets.IdentifierCount + 1;
             var buffer = alloc<Token<AsmSigOpKind>>(count);
             ref var dst = ref first(buffer);

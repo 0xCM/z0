@@ -10,14 +10,18 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Defines a nonparametric enum dataset entry
+    /// Defines a <see cref='EnumDataset{E,T}'/> entry
     /// </summary>
-    public struct EnumDatasetEntry
+    /// <typeparam name="E">The enum type</typeparam>
+    /// <typeparam name="T">The refined primitive type</typeparam>
+    public struct EnumDatasetEntry<E,T>
+        where E : unmanaged, Enum
+        where T : unmanaged
     {
         /// <summary>
         /// The artifact identifier of the defining literal
         /// </summary>
-        public ClrToken Id;
+        public ClrToken Token;
 
         /// <summary>
         /// The defining <see cref='Enum'/> id
@@ -32,7 +36,7 @@ namespace Z0
         /// <summary>
         /// The refined primitive value
         /// </summary>
-        public variant ScalarValue;
+        public T ScalarValue;
 
         /// <summary>
         /// The literal name
@@ -44,15 +48,31 @@ namespace Z0
         /// </summary>
         public string Description;
 
+        /// <summary>
+        /// The enum value
+        /// </summary>
+        public E EnumValue;
+
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ClrToken id, ClrToken enumId, uint index, Name name, variant scalar, string description)
+        public EnumDatasetEntry(ClrToken token, ClrToken declarer, uint index, string identifier, E literal, T numeric, string description)
         {
-            Id = id;
-            EnumId = enumId;
+            Token = token;
+            EnumId = declarer;
             Index = index;
-            Name = name;
-            ScalarValue = scalar;
+            Name = identifier;
+            EnumValue = literal;
+            ScalarValue = numeric;
             Description = description;
         }
+
+        public EnumDatasetEntry Untyped
+        {
+            [MethodImpl(Inline)]
+            get => EnumDatasets.untyped(this);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator EnumDatasetEntry(EnumDatasetEntry<E,T> src)
+            => src.Untyped;
     }
 }

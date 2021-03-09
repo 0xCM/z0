@@ -10,18 +10,14 @@ namespace Z0
     using static Part;
 
     /// <summary>
-    /// Defines a <see cref='EnumDataset{E,T}'/> entry
+    /// Defines a nonparametric enum dataset entry
     /// </summary>
-    /// <typeparam name="E">The enum type</typeparam>
-    /// <typeparam name="T">The refined primitive type</typeparam>
-    public struct EnumDatasetEntry<E,T>
-        where E : unmanaged, Enum
-        where T : unmanaged
+    public struct EnumDatasetEntry
     {
         /// <summary>
         /// The artifact identifier of the defining literal
         /// </summary>
-        public ClrToken Token;
+        public ClrToken Id;
 
         /// <summary>
         /// The defining <see cref='Enum'/> id
@@ -36,7 +32,7 @@ namespace Z0
         /// <summary>
         /// The refined primitive value
         /// </summary>
-        public T ScalarValue;
+        public ulong ScalarValue;
 
         /// <summary>
         /// The literal name
@@ -48,31 +44,15 @@ namespace Z0
         /// </summary>
         public string Description;
 
-        /// <summary>
-        /// The enum value
-        /// </summary>
-        public E EnumValue;
-
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ClrToken token, ClrToken declarer, uint index, string identifier, E literal, T numeric, string description)
+        public EnumDatasetEntry(ClrToken id, ClrToken enumId, uint index, Name name, ulong scalar, string description)
         {
-            Token = token;
-            EnumId = declarer;
+            Id = id;
+            EnumId = enumId;
             Index = index;
-            Name = identifier;
-            EnumValue = literal;
-            ScalarValue = numeric;
+            Name = name;
+            ScalarValue = scalar;
             Description = description;
         }
-
-        public EnumDatasetEntry Untyped
-        {
-            [MethodImpl(Inline)]
-            get => Enums.untyped(this);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnumDatasetEntry(EnumDatasetEntry<E,T> src)
-            => src.Untyped;
     }
 }

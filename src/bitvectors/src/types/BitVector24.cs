@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector24 FromEnum<T>(T src)
             where T : unmanaged, Enum
-                => EnumValue.scalar<T,uint>(src);
+                => ClrEnums.scalar<T,uint>(src);
 
         /// <summary>
         /// Initializes the vector

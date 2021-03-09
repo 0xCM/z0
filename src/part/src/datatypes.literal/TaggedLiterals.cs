@@ -7,11 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Linq;
 
     using static Part;
 
     public static class TaggedLiterals
     {
+        public static Index<BinaryLiteral<T>> binary<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => from f in typeof(E).LiteralFields().ToArray()
+                    where f.Tagged<BinaryLiteralAttribute>()
+                    let a = f.Tag<BinaryLiteralAttribute>().Require()
+                    select Numeric.binary(base2, f.Name, ClrEnums.scalar<E,T>((E)f.GetValue(null)), a.Text);
+
         public static NumericLiteral binaryliteral(FieldInfo target, object value)
         {
             if(!IsBinaryLiteral(target))

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Enums
+    partial struct ClrEnums
     {
         public static EnumLiteralDetails<E> details<E>()
             where E : unmanaged, Enum
@@ -44,9 +44,22 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var literal = ref src[i];
-                seek(dst,i) = evalue(literal, EnumValue.scalar<E,T>(literal.LiteralValue));
+                seek(dst,i) = strong(literal, scalar<E,T>(literal.LiteralValue));
             }
             return buffer;
         }
+
+        /// <summary>
+        /// Defines an E-V parametric enum value given an E-parametric literal an a value:V
+        /// </summary>
+        /// <param name="literal">The source literal</param>
+        /// <param name="value">The source value</param>
+        /// <typeparam name="E">The enum source type</typeparam>
+        /// <typeparam name="V">The value type</typeparam>
+        [MethodImpl(Inline)]
+        static EnumLiteralDetail<E,V> strong<E,V>(EnumLiteralDetail<E> literal, V value)
+            where E : unmanaged, Enum
+            where V : unmanaged
+                => new EnumLiteralDetail<E,V>(literal,value);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using Iced = Iced.Intel;
 
-    [ApiHost]
+    //[ApiHost]
     public readonly struct IceConverters
     {
         public static IceConverters Service => default(IceConverters);

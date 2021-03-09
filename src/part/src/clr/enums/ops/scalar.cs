@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial class Enums
+    partial struct ClrEnums
     {
         /// <summary>
         /// Reads a T-value from an E-enum value of primal T-kind.

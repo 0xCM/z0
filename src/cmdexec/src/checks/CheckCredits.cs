@@ -120,7 +120,7 @@ namespace Z0
         ReadOnlySpan<bit> CheckLiterals()
         {
             var index = z8;
-            var src = Enums.BinaryLiterals<DocField,ulong>().ToReadOnlySpan();
+            var src = TaggedLiterals.binary<DocField,ulong>().ToReadOnlySpan();
             var count = src.Length;
             var dst = span<bit>(count);
             Check(src,dst);

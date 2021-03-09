@@ -20,7 +20,7 @@ namespace Z0
         public static T sll<T,E>(T src, E offset)
             where T : unmanaged
             where E : unmanaged, Enum
-                => gmath.sll(src, EnumValue.scalar<E,byte>(offset));
+                => gmath.sll(src, ClrEnums.scalar<E,byte>(offset));
 
         [MethodImpl(Inline)]
         public static @enum<E,T> add<E,T>(@enum<E,T> a, @enum<E,T> b)

@@ -7,66 +7,52 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
     using System.Linq;
 
     using static Part;
 
     [ApiHost]
-    public partial class Enums
+    public class Enums
     {
         /// <summary>
-        /// Reads a generic enum member from a generic value
+        /// Attempts to parses an enumeration literal, ignoring case, and returns a default value if parsing failed
         /// </summary>
-        /// <param name="v">The value to reinterpret</param>
+        /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="V">The numeric value type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe E literal<E,T>(T v)
+        public static E parse<E>(string name, E @default)
             where E : unmanaged, Enum
-            where T : unmanaged
-                => EnumValue.literal<E,T>(v);
+        {
+            if(Enum.TryParse(name,true,out E result))
+                return result;
+            else
+                return @default;
+        }
 
         /// <summary>
-        /// Reads a generic numeric value from a boxed enum
+        /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed
         /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        [MethodImpl(Inline)]
-        public static V scalar_slow<V>(Enum e)
-            where V : unmanaged
-                => (V)Convert.ChangeType(e, e.GetTypeCode());
-
-        /// <summary>
-        /// Gets the literals defined by an enumeration together with their integral values
-        /// </summary>
-        /// <param name="peek">If true, extracts the content, bypassing any caching</param>
+        /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
-        /// <typeparam name="V">The numeric value type</typeparam>
-        public static EnumLiteralDetails<E,V> values<E,V>()
+        [MethodImpl(Inline)]
+        public static ParseResult<E> parse<E>(string name)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => (EnumLiteralDetails<E,V>)ValueCache.GetOrAdd(typeof(E), _ => details<E,V>());
+        {
+            if(Enum.TryParse(name, true, out E result))
+                return root.parsed(name, result);
+            else
+                return root.unparsed<E>(name);
+        }
 
         /// <summary>
-        /// Defines an E-V parametric enum value given an E-parametric literal an a value:V
+        /// Gets the declaration-order indices for each named literal
         /// </summary>
-        /// <param name="literal">The source literal</param>
-        /// <param name="value">The source value</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static EnumLiteralDetail<E,V> evalue<E,V>(EnumLiteralDetail<E> literal, V value)
+        /// <param name="peek">If true, extracts the content directly, bypassing any caching</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static EnumLiteralDetails<E> index<E>()
             where E : unmanaged, Enum
-            where V : unmanaged
-                => new EnumLiteralDetail<E,V>(literal,value);
-
-        public static IEnumerable<BinaryLiteral<T>> BinaryLiterals<E,T>()
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => from f in typeof(E).LiteralFields().ToArray()
-                   where f.Tagged<BinaryLiteralAttribute>()
-                   let a = f.Tag<BinaryLiteralAttribute>().Require()
-                   select Numeric.binary(base2, f.Name, EnumValue.scalar<E,T>((E)f.GetValue(null)), a.Text);
+                => (EnumLiteralDetails<E>)IndexCache.GetOrAdd(typeof(E), _ => ClrEnums.details<E>());
 
         /// <summary>
         /// Gets the literals defined by an enumeration
@@ -87,11 +73,34 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
         {
-            var pairs = values<E,V>();
+            var pairs = ClrEnums.details<E,V>();
             var index = new Dictionary<V,E>();
             foreach(var pair in pairs)
                 index.TryAdd(pair.PrimalValue, pair.LiteralValue);
             return index;
+        }
+
+        static ConcurrentDictionary<Type,object> IndexCache {get;}
+            = new ConcurrentDictionary<Type,object>();
+
+        static ConcurrentDictionary<Type,object> LiteralCache {get;}
+            = new ConcurrentDictionary<Type, object>();
+
+        static ConcurrentDictionary<Type,object> ValueCache {get;}
+            = new ConcurrentDictionary<Type,object>();
+
+        /// <summary>
+        /// Gets the literals defined by an enumeration
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        static E[] CreateLiteralArray<E>()
+            where E : unmanaged, Enum
+        {
+            var i = index<E>();
+            var dst = new E[i.Length];
+            for(var j = 0; j<dst.Length; j++)
+                dst[j] = i[j].LiteralValue;
+            return dst;
         }
    }
 }

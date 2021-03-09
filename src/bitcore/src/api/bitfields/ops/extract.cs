@@ -51,7 +51,7 @@ namespace Z0
             where T : unmanaged
             where F : IBitField<T>
             where I : unmanaged, Enum
-                => extract<F,T>(f, EnumValue.e8u(i0), EnumValue.e8u(i1));
+                => extract<F,T>(f, ClrEnums.e8u(i0), ClrEnums.e8u(i1));
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitSegment segment, in S src)

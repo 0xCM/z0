@@ -52,7 +52,7 @@ namespace Z0
         {
             var mask = Mask(index);
             var conformed = gmath.and(src,mask);
-            var i  = EnumValue.scalar<E,byte>(index);
+            var i  = ClrEnums.scalar<E,byte>(index);
             State = gcpu.vset(conformed, i, State);
         }
     }

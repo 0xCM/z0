@@ -34,10 +34,10 @@ namespace Z0
             => ClrEnums.names<K>();
 
         ReadOnlySpan<K> KeyValues
-            => Enums.literals<K>();
+            => ClrEnums.literals<K>();
 
         ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
-            => Enums.index<K>().View;
+            => ClrEnums.details<K>().View;
     }
 
     [Free]

@@ -10,11 +10,11 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class Enums
+    partial struct ClrEnums
     {
         [MethodImpl(Inline)]
         public static ref T store<E,T>(in E e, out T dst)
-            where E : unmanaged, Enum
+            where E : unmanaged
             where T : unmanaged
         {
             dst = @as<E,T>(e);

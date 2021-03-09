@@ -30,8 +30,8 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
         {
-            var i = EnumValue.scalar<I,byte>(entry.FieldIndex);
-            var width = EnumValue.scalar<W,byte>(entry.FieldWidth);
+            var i = ClrEnums.scalar<I,byte>(entry.FieldIndex);
+            var width = ClrEnums.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
             var seg = segment((Identifier)entry.FieldName, start, end);
             start = (byte)(end + 1);

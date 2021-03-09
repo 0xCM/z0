@@ -45,8 +45,8 @@ namespace Z0.Asm
         public void enum_dataset_convert()
         {
             var path = CasePath(FileExtensions.Csv);
-            var enums = @readonly(Enums.describe<AsmOpCodeField,byte>());
-            EnumTables.emit(enums,path);
+            var enums = @readonly(ClrEnums.describe<AsmOpCodeField,byte>());
+            Records.emit(enums,path);
         }
     }
 }

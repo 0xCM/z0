@@ -78,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ulong e64u<E>(E e)
             where E : unmanaged, Enum
-                => EnumValue.e64u(e);
+                => ClrEnums.e64u(e);
 
         [MethodImpl(Inline)]
         public static DataBroker<K,T> create<K,T>(int capacity, WfDelegates.Indexer<K> @if = null)

@@ -9,8 +9,23 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using F = EnumDatasetField;
+
     partial struct Records
     {
+        public static void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FS.FilePath dst)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            using var writer = dst.Writer();
+            writer.WriteLine(EnumDatasets.header<F>());
+            var buffer = Buffers.text();
+
+            var dataset = EnumDatasets.create<E,T>();
+            for(var i=0; i<src.Length; i++)
+                writer.WriteLine(EnumDatasets.format(src[i],buffer));
+        }
+
         /// <summary>
         /// Loads a <see cref='DynamicRows{T}' /> index from a specified source <see cref='ReadOnlySpan{T}'/>
         /// </summary>

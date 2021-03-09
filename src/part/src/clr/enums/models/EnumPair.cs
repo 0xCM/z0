@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Enums;
-
     /// <summary>
     /// Captures name-corellated literals values
     /// </summary>

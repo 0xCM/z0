@@ -6,65 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
     using static memory;
 
     using NK = NumericKind;
 
-    [ApiHost]
-    public readonly partial struct EnumValue
+    partial struct ClrEnums
     {
+        const NumericKind Closure = Integers;
+
         public static ulong untyped<E>(E src)
             where E : unmanaged, Enum
                 => typeof(E).GetEnumUnderlyingType().NumericKind() switch {
-                    NK.U8 => (ulong)EnumValue.e8u(src),
-                    NK.I8 => (ulong)EnumValue.e8i(src),
-                    NK.U16 => (ulong)EnumValue.e16u(src),
-                    NK.I16 => (ulong)EnumValue.e16i(src),
-                    NK.U32 => (ulong)EnumValue.e32u(src),
-                    NK.I32 => (ulong)EnumValue.e32i(src),
-                    NK.I64 => (ulong)EnumValue.e64i(src),
-                    NK.U64 => EnumValue.e64u(src),
+                    NK.U8 => (ulong)e8u(src),
+                    NK.I8 => (ulong)e8i(src),
+                    NK.U16 => (ulong)e16u(src),
+                    NK.I16 => (ulong)e16i(src),
+                    NK.U32 => (ulong)e32u(src),
+                    NK.I32 => (ulong)e32i(src),
+                    NK.I64 => (ulong)e64i(src),
+                    NK.U64 => e64u(src),
                     _ => 0ul,
                 };
-
-        public static Index<E> literals<E>()
-            where E : unmanaged, Enum
-        {
-            var fields = @readonly(typeof(E).LiteralFields());
-            var count = fields.Length;
-            var buffer = alloc<E>(count);
-            ref var dst = ref first(buffer);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var field = ref skip(fields,i);
-                seek(dst, i) = (E)field.GetRawConstantValue();
-            }
-            return buffer;
-        }
-
-        const NumericKind Closure = Integers;
-
-        [MethodImpl(Inline)]
-        public static E zero<E>()
-            where E : unmanaged, Enum
-                => default(E);
-
-        [MethodImpl(Inline)]
-        public static ref T store<E,T>(in E e, out T dst)
-            where E : unmanaged
-            where T : unmanaged
-        {
-            dst = @as<E,T>(e);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public static unsafe E read<E,T>(in T scalar, E e = default)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => Unsafe.Read<E>(gptr<T,E>(scalar));
 
         /// <summary>
         /// Reads a T-value from the value of an E-enum of primal T-kind
@@ -168,5 +133,6 @@ namespace Z0
         public static ref ulong e64u<E>(in E eVal)
             where E : unmanaged
                 => ref scalar<E,ulong>(eVal);
+
     }
 }

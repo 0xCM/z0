@@ -31,7 +31,7 @@ namespace Z0
         static EnumDataset<E,T> EmitInfoset<E,T>(FS.FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged
-                => emit(@readonly(Enums.describe<E,T>()),dst);
+                => emit(@readonly(ClrEnums.describe<E,T>()),dst);
 
         static EnumDataset<E,T> EmitDataset<E,T>(FS.FilePath dst)
             where E : unmanaged, Enum
@@ -40,9 +40,9 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(header<F>());
 
-            var dataset = Enums.dataset<E,T>();
+            var dataset = EnumDatasets.create<E,T>();
             for(var i=0; i<dataset.EntryCount; i++)
-                writer.WriteLine(Enums.format(dataset[i]));
+                writer.WriteLine(EnumDatasets.format(dataset[i]));
             return dataset;
         }
 
@@ -53,9 +53,9 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(header<F>());
 
-            var dataset = Enums.dataset<E,T>();
+            var dataset = EnumDatasets.create<E,T>();
             for(var i=0; i<src.Length; i++)
-                writer.WriteLine(Enums.format(src[i]));
+                writer.WriteLine(EnumDatasets.format(src[i]));
             return dataset;
         }
 

@@ -47,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BoxedNumber from<E>(E e)
             where E : unmanaged, Enum
-                => define(System.Convert.ChangeType(e, ClrPrimitives.ecode<E>().TypeCode()), ClrPrimitives.ecode<E>().NumericKind());
+                => define(System.Convert.ChangeType(e, ClrEnums.ecode<E>().TypeCode()), ClrEnums.ecode<E>().NumericKind());
 
         public static BoxedNumber from(Enum e)
         {

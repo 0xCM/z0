@@ -63,7 +63,7 @@ namespace Z0
             where T : unmanaged
         {
             var formatter = BitFormatter.create<T>();
-            var data = EnumValue.scalar<E,T>(src);
+            var data = ClrEnums.scalar<E,T>(src);
             var limit = (uint)gbits.effwidth(data);
             var config = BitFormatter.limited(limit,zpad);
             return text.concat(name, Chars.Colon, formatter.Format(data,config));
@@ -79,7 +79,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var data = EnumValue.scalar<E,T>(src);
+            var data = ClrEnums.scalar<E,T>(src);
             return text.concat(name, Chars.Colon, Numeric.format(data, @base));
         }
 
@@ -93,7 +93,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var data = EnumValue.scalar<E,T>(src);
+            var data = ClrEnums.scalar<E,T>(src);
             return text.concat(name, Chars.Colon, Hex.formatter<T>().FormatItem(data));
         }
 

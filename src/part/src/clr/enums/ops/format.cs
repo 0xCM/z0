@@ -12,17 +12,8 @@ namespace Z0
 
     using NK = ClrEnumCode;
 
-    partial struct EnumValue
+    partial struct ClrEnums
     {
-        /// <summary>
-        /// Determines an enumeration's underlying kind
-        /// </summary>
-        /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
-        public static ClrEnumCode ecode<E>(E e = default)
-            where E : unmanaged, Enum
-                => (ClrEnumCode)default(E).GetTypeCode();
-
         public static string format<E>(E src, Base2 n, int? digits = null)
             where E : unmanaged, Enum
                 => ecode<E>() switch {

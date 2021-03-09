@@ -44,7 +44,7 @@ namespace Z0
         public static IRecordFormatter<T> formatter<E,T>()
             where E : unmanaged, Enum
             where T : struct, IRecord<T>
-                => formatter<T>(rowspec<T>(Enums.numeric<E,byte>()));
+                => formatter<T>(rowspec<T>(ClrEnums.numeric<E,byte>()));
 
         public static Func<T,string> formatFx<T>(byte? fieldwidth = null)
             where T : struct, IRecord<T>

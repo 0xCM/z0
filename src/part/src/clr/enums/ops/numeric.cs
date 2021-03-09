@@ -9,13 +9,11 @@ namespace Z0
 
     using static Part;
 
-    partial class Enums
+    partial struct ClrEnums
     {
-        [MethodImpl(Inline)]
-        public static EnumDatasetEntry untyped<E,T>(in EnumDatasetEntry<E,T> src)
+        public static Index<T> numeric<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => new EnumDatasetEntry(src.Token, src.EnumId, src.Index, src.Name, Variant.from(src.ScalarValue), src.Description);
-
+                => typeof(E).Fields().Select(f => sys.constant<T>(f));
     }
 }
