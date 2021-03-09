@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using K = Pow2Literals;
+    using K = Pow2;
 
     /// <summary>
     /// Defines primal-representable powers of 2 and integers of the form 2^n - 1 where n = 0,..,64
@@ -244,22 +244,49 @@ namespace Z0
         /// </summary>
         P2ᐞ45 = 2*P2ᐞ44,
 
+        /// <summary>
+        /// 2^46
+        /// </summary>
         P2ᐞ46 = 2*P2ᐞ45,
 
+        /// <summary>
+        /// 2^47
+        /// </summary>
         P2ᐞ47 = 2*P2ᐞ46,
 
+        /// <summary>
+        /// 2^48
+        /// </summary>
         P2ᐞ48 = 2*P2ᐞ47,
 
+        /// <summary>
+        /// 2^49
+        /// </summary>
         P2ᐞ49 = 2*P2ᐞ48,
 
+        /// <summary>
+        /// 2^50
+        /// </summary>
         P2ᐞ50 = 2*P2ᐞ49,
 
+        /// <summary>
+        /// 2^51
+        /// </summary>
         P2ᐞ51 = 2*P2ᐞ50,
 
+        /// <summary>
+        /// 2^52
+        /// </summary>
         P2ᐞ52 = 2*P2ᐞ51,
 
+        /// <summary>
+        /// 2^53
+        /// </summary>
         P2ᐞ53 = 2*P2ᐞ52,
 
+        /// <summary>
+        /// 2^54
+        /// </summary>
         P2ᐞ54 = 2*P2ᐞ53,
 
         P2ᐞ55 = 2*P2ᐞ54,

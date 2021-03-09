@@ -6,12 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Part;
     using static memory;
 
     readonly partial struct BitFields
     {
+        /// <summary>
+        /// Creates value-to-symbol index
+        /// </summary>
+        /// <typeparam name="E">The enumeration type that defines the symbols</typeparam>
+        /// <typeparam name="T">The cell type</typeparam>
+        static IDictionary<T,char> lookup<E,T>()
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            var values = Enums.dictionary<E,T>();
+            var index = new Dictionary<T,char>();
+            foreach(var kvp in values)
+                index[kvp.Key] = kvp.Value.ToString().Last();
+            return index;
+        }
+
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
         /// </summary>
@@ -76,7 +94,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var index = Symbolic.lookup<E,T>();
+            var index = lookup<E,T>();
             var count = mincells((ulong)segwidth, (ulong)maxbits);
             Span<char> symbols = new char[count];
             for(uint i=0, bitpos = 0; i<count; i++, bitpos += segwidth)

@@ -30,7 +30,6 @@ namespace Z0
              get => ref Symbols[index];
         }
 
-
         /// <summary>
         /// The member count
         /// </summary>

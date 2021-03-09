@@ -210,7 +210,7 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = PermSymbolic.symbols(perm);
+                var symbols = VPerm.symbols(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
@@ -293,7 +293,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);
             Claim.eq(pbs_expect, pbs_actual);
 
-            var p_assembled = PermSymbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
+            var p_assembled = VPerm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
             Claim.eq(p, p_assembled);
 
             var pformat_actual = p.FormatMap();
@@ -308,11 +308,11 @@ namespace Z0
         void perm4_symbol_check(Perm4L perm, params Perm4L[] expect)
         {
             Claim.eq(4, expect.Length);
-            var symbol = default(Perm4L);
+            var symbol = default(Symbol<Perm4L>);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.Require(PermSymbolic.symbol(perm, i, out symbol));
-                Claim.eq(expect[i], symbol);
+                Claim.Require(VPerm.symbol(perm, i, out symbol));
+                Claim.eq(expect[i], symbol.Value);
             }
         }
 

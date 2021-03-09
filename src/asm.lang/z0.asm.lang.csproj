@@ -9,6 +9,7 @@
       <ProjectReference Include="$(Konst)" />
       <ProjectReference Include="$(BitCore)" />
       <ProjectReference Include="$(Gen)" />
+      <ProjectReference Include="$(Digital)" />
   </ItemGroup>
 
    <ItemGroup>

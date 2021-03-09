@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         public static IEnumerable<(Perm4L perm, string format)> symbols(N4 n)
             => from perm in Enums.literals<Perm4L>()
-                    where !PermSymbolic.test(perm)
+                    where !VPerm.test(perm)
                     let maps = (perm, format:perm.FormatMap())
                     orderby maps.perm descending
                     select maps;

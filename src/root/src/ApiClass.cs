@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using K = Pow2Literals;
+using K = Z0.Pow2;
 
 /// <summary>
 /// Defines operand kind identity classifiers

@@ -45,7 +45,7 @@
     <Checks>$(Src)checks/z0.checks.csproj</Checks>
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
-    <Domain>$(Src)domain/z0.domain.csproj</Domain>
+    <Digital>$(Src)digital/z0.digital.csproj</Digital>
     <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
     <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
 

@@ -8,8 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public sealed class t_perm_ops : t_permute<t_perm_ops>
     {
@@ -71,7 +70,7 @@ namespace Z0
             var pbs_actual = BitString.scalar((byte)p);
             Claim.eq(pbs_expect, pbs_actual);
 
-            var p_assembled = PermSymbolic.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
+            var p_assembled = VPerm.assemble(Perm4L.D, Perm4L.C, Perm4L.B, Perm4L.A);
             Claim.eq(p, p_assembled);
 
             var pformat_actual = p.FormatMap();
@@ -91,7 +90,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var permA = NatPerm<N>.Identity;
-            var length = (int)nat64u<N>();
+            var length = (int)TypeNats.nat64u<N>();
             Claim.eq(length, permA.Length);
             Claim.eq(length, permA.Terms.Length);
 

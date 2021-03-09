@@ -15,15 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static SymbolName<S> name<S>(ISymbolSet<S> src, ushort index)
-            where S : unmanaged
-                => new SymbolName<S>(src,index);
-
-        [MethodImpl(Inline), Op]
-        public static SymbolName name(ISymbolSet src, ushort index)
-            => new SymbolName(src,index);
-
         public static Index<Token<E>> tokens<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
@@ -42,20 +33,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Defines a symbol set
-        /// </summary>
-        /// <param name="symbols"></param>
-        /// <typeparam name="S">The symbol data type</typeparam>
-        /// <typeparam name="T">The symbol domain type</typeparam>
-        /// <typeparam name="W">The symbol bit-width type</typeparam>
-        [MethodImpl(Inline)]
-        public static SymbolSet<S,T,W> set<S,T,W>(params S[] symbols)
-            where S : unmanaged, ISymbol
-            where T : unmanaged
-            where W : unmanaged, IDataWidth
-                => new SymbolSet<S,T,W>(symbols);
-
-        /// <summary>
         /// Creates a symbol index from an unmanaged value sequence
         /// </summary>
         /// <param name="src">The source sequence</param>
@@ -64,5 +41,11 @@ namespace Z0
         public static Index<Symbol<S>> symbols<S>(params S[] src)
             where S : unmanaged
                 => src.Map(symbol);
+
+
+        [MethodImpl(Inline), Op]
+        static SymbolSet<Symbol<AsciCharCode>,byte,W8> create_symbol_set_example(params AsciCharCode[] src)
+            => set<Symbol<AsciCharCode>,byte,W8>(SymbolStores.symbols(src));
+
     }
 }

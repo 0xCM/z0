@@ -24,7 +24,7 @@ public enum PartId : ulong
 
     BitMasks = 10,
 
-    Domain = 18,
+    Digital = 18,
 
     Check = 19,
 

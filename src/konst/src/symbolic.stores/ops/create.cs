@@ -15,9 +15,9 @@ namespace Z0
         /// <summary>
         /// Defines a sequence of symbols predicated on parametric arguments
         /// </summary>
-        /// <typeparam name="E"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <typeparam name="N"></typeparam>
+        /// <typeparam name="E">An enum type</typeparam>
+        /// <typeparam name="T">The type of the enum's underlying primitive</typeparam>
+        /// <typeparam name="N">The number of bits required to store each element</typeparam>
         public static SymbolStore<E,T,N> create<E,T,N>()
             where E : unmanaged, Enum
             where T : unmanaged

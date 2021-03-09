@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(BitStrings)" />
-    <ProjectReference Include="$(Digital)" />
-
+    <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 
 </Project>
