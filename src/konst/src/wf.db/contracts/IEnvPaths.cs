@@ -9,6 +9,8 @@ namespace Z0
 
     using static DbNames;
 
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+
     public partial interface IEnvPaths : IFileExtensions
     {
         Env Env {get;}
@@ -160,6 +162,12 @@ namespace Z0
 
         FS.FolderPath SortedCaseLogRoot()
             => TestLogRoot();
+
+        FS.FolderPath ShowLogs()
+            => LogRoot() + FS.folder("show");
+
+        FS.FilePath ShowLog([Caller]string name = null, FS.FileExt? ext = null)
+            => ShowLogs() + FS.file(name, ext ?? Log);
 
         /// <summary>
         /// Defines a task-specific log path

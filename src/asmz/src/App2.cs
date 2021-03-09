@@ -411,8 +411,46 @@ namespace Z0.Asm
 
         public void Run()
         {
-            // var commands = WfCmdGlobals.create(Wf);
-            // commands.Run(GlobalWfCmd.ShowByteConversions);
+            var dir = Db.ToolOutDir(Toolsets.pdb2xml);
+            var file = PartId.Math.Component(FS.Extensions.Pdb, FS.Extensions.Xml);
+            var srcPath = dir + file;
+            var buffer = text.buffer();
+
+            var dstPath = Db.AppDataFile(file.WithExtension(FS.Extensions.Log));
+            using var writer = dstPath.Writer();
+
+            void accept(IXmlPart part)
+            {
+                if(!part.IsWhitespace)
+                {
+                    var output = part.HasName
+                        ? string.Format("{0}:{1}={2}", part.Kind, part.Name, part.Value)
+                        : string.Format("{0}:{1}", part.Kind, part.Value);
+                    writer.WriteLine(output);
+                    if(part is IXmlElement e)
+                    {
+                        var attributes = e.Attributes;
+                        var count = attributes.Count;
+                        if(count != 0)
+                        {
+                            buffer.Clear();
+                            for(var i=0; i<count; i++)
+                            {
+                                var a = attributes[i];
+                                buffer.AppendFormat("{0}={1}", a.Name, a.Value);
+                                if(i != count - 1)
+                                    buffer.Append(", ");
+                            }
+                        }
+                        writer.WriteLine(string.Format(" Attributes:{0}", buffer.Emit()));
+                    }
+                }
+            }
+
+            var flow = Wf.EmittingFile(dstPath);
+            using var xml = XmlSource.create(Wf, srcPath);
+            xml.Read(accept);
+            Wf.EmittedFile(flow);
 
             // var src = FS.path(Parts.GMath.Assembly.Location);
             // var dst = Db.AppDataFile(src.FileName.ChangeExtension(FS.Extensions.Txt));
@@ -420,7 +458,8 @@ namespace Z0.Asm
             // Cli.visualize(src,dst);
             // Wf.EmittedFile(flow);
 
-            EmitCilBlocks();
+
+            //EmitCilBlocks();
 
             //CliTables.create(Wf).DumpMetadata(src,dst);
             //ProcessStatements();

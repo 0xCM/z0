@@ -1,23 +1,36 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-namespace System
+//-----------------------------------------------------------------------------
+// Copyright   :  Licensed to the .NET Foundation under one or more agreements.
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace alg
 {
+    using System;
     using System.Diagnostics;
     using System.Numerics;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     using Z0;
+
     using static Z0.Part;
 
-    internal static class Marvin
+    partial struct hash
     {
+        const ulong DefaultMarvivSeed = 0x7ffc5cf169c0aab1;
+
         /// <summary>
         /// Compute a Marvin hash and collapse it into a 32-bit hash.
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static int hash(ReadOnlySpan<byte> data, ulong seed = 0x7ffc5cf169c0aab1)
-            => ComputeHash32(ref MemoryMarshal.GetReference(data), (uint)data.Length, (uint)seed, (uint)(seed >> 32));
+        public static uint marvin(ReadOnlySpan<byte> src, ulong seed = DefaultMarvivSeed)
+            => (uint)ComputeHash32(ref MemoryMarshal.GetReference(src), (uint)src.Length, (uint)seed, (uint)(seed >> 32));
+
+        /// <summary>
+        /// Compute a Marvin hash and collapse it into a 32-bit hash.
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static uint marvin(ReadOnlySpan<char> src, ulong seed = DefaultMarvivSeed)
+            => marvin(memory.recover<char,byte>(src), seed);
 
         /// <summary>
         /// Compute a Marvin hash and collapse it into a 32-bit hash.

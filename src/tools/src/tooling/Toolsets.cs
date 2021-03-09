@@ -25,6 +25,8 @@ namespace Z0
 
         public static ToolId ildasm => msdev.cl;
 
+        public static ToolId pdb2xml => msdev.pdb2xml;
+
         public readonly struct clang
         {
             public static ToolId name => "clang";
@@ -60,6 +62,7 @@ namespace Z0
 
             public static ToolId ildasm => "ildasm";
 
+            public static ToolId pdb2xml => "pdb2xml";
         }
     }
 }

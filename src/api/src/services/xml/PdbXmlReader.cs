@@ -6,24 +6,25 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Part;
 
-    public readonly struct XmlDoc : ITextual
+    public class PdbXmlReader : XmlSourceReader<XmlSource>
     {
-        public TextBlock Content {get;}
-
-        [MethodImpl(Inline)]
-        public XmlDoc(TextBlock content)
+        public PdbXmlReader(XmlSource src)
+            : base(src)
         {
-            Content = content;
+
         }
 
-        public string Format()
-            => Content.Format();
+        public void Dispose()
+        {
+            Source.Dispose();
+        }
+    }
 
-        public override string ToString()
-            => Format();
+    public readonly partial struct PdbXmlModel
+    {
+
     }
 }

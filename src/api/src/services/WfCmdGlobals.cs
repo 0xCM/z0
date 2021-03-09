@@ -39,10 +39,12 @@ namespace Z0
         void ShowByteConversions()
         {
             const string FormatPattern = "{0,-5} | {1,-5} | {2}";
+
             var header = string.Format(FormatPattern, "Dec", "Hex", "Bits");
+            using var logger = Db.ShowLog(ext:FS.Extensions.Csv).Writer();
             Wf.Row(header);
+            logger.WriteLine(header);
             var options = BitFormatOptions.bitblock(4, Chars.Space);
-            var buffer = text.buffer();
             for(var i=0; i<= byte.MaxValue; i++)
             {
                 byte src = (byte)i;
@@ -50,7 +52,7 @@ namespace Z0
                 var bits = src.FormatBits(options);
                 var hex = src.FormatHex(specifier:false);
                 var row = string.Format(FormatPattern, dec, hex, bits);
-                buffer.AppendLine(row);
+                logger.WriteLine(row);
                 Wf.Row(row);
             }
         }
