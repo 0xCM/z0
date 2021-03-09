@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial struct SymbolStores
     {
@@ -47,6 +46,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => new Symbol<S,T,N>(value);
-
     }
 }

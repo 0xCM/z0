@@ -64,13 +64,6 @@ namespace Z0
             get => ref Data[i];
         }
 
-        // public IEnumerator<EnumLiteralDetail<E,P>> GetEnumerator()
-        //     => ((IEnumerable<EnumLiteralDetail<E,P>>)Data).GetEnumerator();
-
-        // IEnumerator IEnumerable.GetEnumerator()
-        //     => Data.Storage.GetEnumerator();
-
-
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteralDetails<E,P>(EnumLiteralDetail<E,P>[] src)
             => new EnumLiteralDetails<E,P>(src);

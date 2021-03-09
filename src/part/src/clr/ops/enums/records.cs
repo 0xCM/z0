@@ -14,17 +14,17 @@ namespace Z0
     partial struct ClrEnums
     {
         [Op]
-        public static ClrEnumRecord[] literals(Assembly src)
+        public static ClrEnumRecord[] records(Assembly src)
         {
             var types = src.GetTypes().Where(t => t.IsEnum);
             var dst = root.list<ClrEnumRecord>();
             for(var i=0; i<types.Length; i++)
-                dst.AddRange(literals(types[i]));
+                dst.AddRange(records(types[i]));
             return dst.ToArray();
         }
 
         [Op]
-        public static ClrEnumRecord[] literals(Type src)
+        public static ClrEnumRecord[] records(Type src)
         {
             var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();

@@ -24,10 +24,16 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public ClrType Untyped
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => Clr.nested(Definition);
+            get => Untyped.NestedTypes;
         }
 
         public ClrArtifactKind Kind
@@ -45,7 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrType<T> src)
-            => src.Definition;
+            => src.Untyped;
 
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrType<T> src)

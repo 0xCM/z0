@@ -24,6 +24,7 @@ namespace Z0
             return dst;
         }
 
+
         [Op]
         public static Index<SymbolicLiteral<E>> enums<E>()
             where E : unmanaged, Enum

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
@@ -20,7 +21,7 @@ namespace Z0
         public ClrType(Type src)
             => Definition = src;
 
-        public ClrAssembly Assembly
+        public Assembly Assembly
         {
             [MethodImpl(Inline)]
             get => Definition.Assembly;
@@ -41,7 +42,7 @@ namespace Z0
         public ReadOnlySpan<ClrType> NestedTypes
         {
             [MethodImpl(Inline)]
-            get => Clr.nested(Definition);
+            get => memory.recover<Type,ClrType>(Definition.GetNestedTypes());
         }
 
         string IClrArtifact.Name

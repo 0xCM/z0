@@ -5,10 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
+
+    using static Root;
+    using static memory;
 
     partial struct ClrEnums
     {
+        [MethodImpl(Inline)]
+        static ClrAssemblyName name(Assembly src)
+            => src;
+
         /// <summary>
         /// Queries the source assemblies for enum types
         /// </summary>
@@ -19,7 +27,7 @@ namespace Z0
             var x = from part in src
                     let enums = part.Enums()
                     orderby part.FullName
-                    select Lookups.keyed(Clr.adapt(part).Name, enums);
+                    select Lookups.keyed(name(part), enums);
             return x;
         }
     }

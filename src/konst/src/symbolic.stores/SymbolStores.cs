@@ -15,6 +15,7 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+#if ABC
         public static Index<Token<E>> tokens<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
@@ -31,7 +32,7 @@ namespace Z0
             }
             return buffer;
         }
-
+#endif
         /// <summary>
         /// Creates a symbol index from an unmanaged value sequence
         /// </summary>
@@ -41,7 +42,6 @@ namespace Z0
         public static Index<Symbol<S>> symbols<S>(params S[] src)
             where S : unmanaged
                 => src.Map(symbol);
-
 
         [MethodImpl(Inline), Op]
         static SymbolSet<Symbol<AsciCharCode>,byte,W8> create_symbol_set_example(params AsciCharCode[] src)

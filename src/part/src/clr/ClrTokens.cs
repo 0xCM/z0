@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
 
-
     [ApiHost]
     public readonly struct ClrTokens
     {
