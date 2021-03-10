@@ -58,7 +58,7 @@ namespace Z0
         public ApiMemberBlocks Correlate(Index<IApiPartCatalog> src)
         {
             var flow = Wf.Running(Msg.CorrelatingParts.Format(src.Count));
-            var reader = ApiCode.reader(Wf);
+            var reader = ApiHex.reader(Wf);
             var count = src.Length;
             var dst = root.list<ApiMemberCode>();
             var records = root.list<ApiCorrelationEntry>();

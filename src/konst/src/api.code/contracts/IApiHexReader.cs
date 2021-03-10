@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiExtractReader : IArchiveReader
+    public interface IApiHexReader : IArchiveReader
     {
-        Index<ApiExtractBlock> Read(FS.FilePath src);
+        Index<ApiCodeBlock> Read(FS.FilePath src);
     }
 }

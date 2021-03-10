@@ -25,7 +25,7 @@ namespace Z0
         public ClrMember Target {get;}
 
         public string Identifier
-            => text.concat(Source.Name, Colon, Source.Name, " -> ", Target.Name, Colon, Target.Name);
+            => text.concat(Source.Name, Chars.Colon, Source.Name, " -> ", Target.Name, Chars.Colon, Target.Name);
 
         [MethodImpl(Inline)]
         public ClrLink(ClrMember s, ClrMember t)
@@ -33,8 +33,6 @@ namespace Z0
             Source = s;
             Target = t;
         }
-
-        const char Colon = ':';
 
         public string Format()
             => Identifier;

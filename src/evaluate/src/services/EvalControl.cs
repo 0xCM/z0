@@ -42,7 +42,7 @@ namespace Z0
             var members = ApiIndex.create(catalog);
             Wf.Status($"Indexed {members.EntryCount} {host} members");
 
-            var blocks = ApiCode.reader(Wf).Read(src);
+            var blocks = ApiHex.reader(Wf).Read(src);
             Wf.Status($"Read {blocks.Count} {host} operations from {src}");
 
             var api = Wf.ApiServices();

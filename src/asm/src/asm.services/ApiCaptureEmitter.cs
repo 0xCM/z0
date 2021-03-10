@@ -54,7 +54,7 @@ namespace Z0
         }
 
         public Index<ApiHexRow> EmitApiHex(ApiHostUri host, Index<ApiMemberCode> src)
-            => ApiCode.emit(Wf, host, src.View);
+            => ApiHex.emit(Wf, host, src.View);
 
         public Count EmitCil(ApiHostUri host, Index<ApiMemberCode> src)
         {

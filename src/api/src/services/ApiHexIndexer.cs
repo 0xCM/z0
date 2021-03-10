@@ -42,7 +42,7 @@ namespace Z0
             {
                 ref readonly var path = ref skip(src,i);
                 var inner = Wf.Running(Msg.IndexingCodeBlocks.Format(path));
-                var result = ApiCode.hexrows(path);
+                var result = ApiHex.rows(path);
                 if(result.Count != 0)
                 {
                     var blocks = result.View;

@@ -13,9 +13,6 @@ namespace Z0
 
     partial class XTend
     {
-        public static ApiHexIndexer HexIndexer(this IWfShell wf)
-            => ApiHexIndexer.create(wf);
-
         public static MethodInfo[] Prepare(this MethodInfo[] src)
         {
             var count = src.Length;

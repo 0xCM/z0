@@ -12,6 +12,9 @@ namespace Z0
 
     public readonly struct ApiHexWriter : IApiHexWriter
     {
+        public static IApiHexWriter create(IWfShell wf, FS.FilePath dst)
+            => new ApiHexWriter(dst);
+
         /// <summary>
         /// The writer's target path
         /// </summary>

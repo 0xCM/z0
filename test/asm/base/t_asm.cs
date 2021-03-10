@@ -44,7 +44,7 @@ namespace Z0.Asm
         protected IApiHexWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FS.file(caller, FS.Extensions.Hex));
-            return ApiCode.writer(Wf,dstPath);
+            return ApiHexWriter.create(Wf, dstPath);
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
@@ -53,7 +53,7 @@ namespace Z0.Asm
         protected Index<ApiCodeBlock> ReadHostBits(ApiHostUri host)
         {
             var capture = ApiArchives.capture(Wf.Db().CaptureRoot());
-            var rows = ApiCode.hexrows(capture.HexPath(host));
+            var rows = ApiHex.rows(capture.HexPath(host));
             var code = rows.Map(row => new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data)));
             return code;
         }

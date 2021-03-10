@@ -11,6 +11,10 @@ namespace Z0
 
     public readonly struct ApiCodeset
     {
+        [MethodImpl(Inline)]
+        public static ApiCodeset create(FS.FilePath location, Index<ApiCodeBlock> blocks)
+            => new ApiCodeset(location, blocks);
+
         public FS.FilePath Location {get;}
 
         public Index<ApiCodeBlock> Blocks {get;}

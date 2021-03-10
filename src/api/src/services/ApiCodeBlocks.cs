@@ -141,9 +141,13 @@ namespace Z0
                 return ApiHostCode.Empty;
         }
 
+        [MethodImpl(Inline), Op]
+        static ApiPartCode combine(PartId part, ApiHostCode[] src)
+            => new ApiPartCode(part,src);
+
         [MethodImpl(Inline)]
         public ApiPartCode PartCodeBlocks(PartId id)
-            => ApiCode.combine(id, Hosts.Map(HostCodeBlocks));
+            => combine(id, Hosts.Map(HostCodeBlocks));
 
         public ApiCodeBlock this[MemoryAddress location]
         {

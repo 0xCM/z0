@@ -13,5 +13,13 @@ namespace Z0
 
         public static ApiHexArchive ApiHexArchive(this IWfShell wf)
             => Z0.ApiHexArchive.create(wf);
+
+        /// <summary>
+        /// Closes generic operations over the set of primal types that each operation supports
+        /// </summary>
+        /// <param name="generics">Metadata for generic operations</param>
+        public static ApiHexIndexer ApiHexIndexer(this IWfShell wf)
+             => Z0.ApiHexIndexer.create(wf);
+
     }
 }

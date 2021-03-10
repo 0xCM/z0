@@ -6,28 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Part;
     using static memory;
 
-    [ApiHost(ApiNames.ApiCode, true)]
-    public readonly struct ApiCode
+    [ApiHost]
+    public readonly struct ApiHex
     {
-        [MethodImpl(Inline)]
-        public static ApiCodeset codeset(FS.FilePath location, Index<ApiCodeBlock> blocks)
-            => new ApiCodeset(location, blocks);
-
-        public static IApiHexWriter writer(IWfShell wf, FS.FilePath dst)
-            => new ApiHexWriter(dst);
-
+        [Op]
         public static IApiHexReader reader(IWfShell wf)
             => ApiHexReader.create(wf);
 
         public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
             => src.Length != 0 ? Records.emit(src,dst) : 0;
 
+        [Op]
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
         {
             var count = src.Length;
@@ -52,6 +45,24 @@ namespace Z0
             }
             else
                 return sys.empty<ApiHexRow>();
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ApiCodeBlock block(ApiHexRow src)
+            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
+
+        [Op]
+        public static Index<ApiHexRow> rows(FS.FilePath src)
+        {
+            var data = @readonly(src.ReadLines().Storage.Skip(1));
+            var count = data.Length;
+            var buffer = root.list<ApiHexRow>(count);
+            for(var i=0; i<count; i++)
+            {
+                if(parse(skip(data,i), out var dst))
+                    buffer.Add(dst);
+            }
+            return buffer.ToArray();
         }
 
         [Op]
@@ -90,67 +101,8 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock block(ApiHexRow src)
-            => new ApiCodeBlock(src.Address, src.Uri, src.Data);
-
         [Op]
-        public static Index<ApiHexRow> hexrows(FS.FilePath src)
-        {
-            var data = @readonly(src.ReadLines().Storage.Skip(1));
-            var count = data.Length;
-            var buffer = root.list<ApiHexRow>(count);
-            for(var i=0; i<count; i++)
-            {
-                if(parse(skip(data,i), out var dst))
-                    buffer.Add(dst);
-            }
-            return buffer.ToArray();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ApiPartCode combine(PartId part, ApiHostCode[] src)
-            => new ApiPartCode(part,src);
-
-        [MethodImpl(Inline), Op]
-        public static Pair<ByteSize> sizes(ReadOnlySpan<ApiCaptureBlock> src)
-        {
-            var input = ByteSize.Zero;
-            var output = ByteSize.Zero;
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(src,i);
-                input += block.InputSize;
-                output += block.OutputSize;
-            }
-            return (input,output);
-        }
-
-        /// <summary>
-        /// Determines whether an operation accepts an argument of specified numeric kind
-        /// </summary>
-        /// <param name="src">The encoded operation</param>
-        /// <param name="match">The kind to match</param>
-        [Op]
-        public static bool accepts(ApiCodeBlock src, NumericKind match)
-            => ApiIdentify.numeric(src.Id.Components.Skip(1)).Contains(match);
-
-        /// <summary>
-        /// Determines the arity of the encoded operation
-        /// </summary>
-        /// <param name="src">The encoded operation</param>
-        [MethodImpl(Inline), Op]
-        public static int arity(ApiCodeBlock src)
-            => src.OpUri.OpId.Components.Count() - 1;
-
-        [Op]
-        public static IEnumerable<ApiCodeBlock> withArity(IEnumerable<ApiCodeBlock> src, int count)
-            => from code in src
-                where ApiCode.arity(code) == count
-                select code;
-
-        public static Outcome<FS.FilePath> EmitHexIndex(IWfShell wf)
+        public static Outcome<FS.FilePath> index(IWfShell wf)
         {
             try
             {
@@ -168,6 +120,7 @@ namespace Z0
             }
         }
 
+        [Op]
         static Outcome index(IWfShell wf, ApiCodeBlocks src, FS.FilePath dst)
         {
             var svc = ApiHexIndexer.create(wf);
@@ -191,56 +144,6 @@ namespace Z0
                 emitter.Emit(record);
             }
             return true;
-        }
-
-        [Op]
-        public static Index<ApiCodeDescriptor> descriptors(IWfShell wf)
-        {
-            var paths = wf.Db();
-            var files = paths.ApiHexFiles().View;
-            var empty = Index<ApiCodeDescriptor>.Empty;
-            if(files.Length == 0)
-            {
-                wf.Warn($"No code found in {paths.ApiHexRoot()}");
-                return empty;
-            }
-
-            var count = files.Length;
-            var flow = wf.Running(Msg.ProcessingApiHexFiles.Format(count));
-            var dst = root.list<ApiCodeDescriptor>();
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var file = ref skip(files,i);
-                var inner = wf.Running(file, "apihex");
-                var rows = hexrows(file).View;
-                var blocks = rows.Length;
-                if(blocks == 0)
-                    wf.Warn($"No content found in {file.ToUri()}");
-                else
-                {
-                    var buffer = alloc<ApiCodeDescriptor>(blocks);
-                    var target = span(buffer);
-                    for(var j=0u; j<blocks; j++)
-                        store(skip(rows,j), ref seek(target,j));
-                    dst.AddRange(buffer);
-                    wf.Ran(inner, blocks);
-                }
-            }
-
-            wf.Ran(flow, Msg.AccumulatedDescriptors.Format(dst.Count));
-            return dst.OrderBy(x => x.Base).ToArray();
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref ApiCodeDescriptor store(in ApiHexRow src, ref ApiCodeDescriptor dst)
-        {
-            dst.Part = src.Uri.Part;
-            dst.Host = src.Uri.Host.Name;
-            dst.Base = src.Address;
-            dst.Size = src.Data.Length;
-            dst.Uri = src.Uri.UriText;
-            dst.Encoded = src.Data;
-            return ref dst;
         }
 
         [Op]
@@ -270,13 +173,5 @@ namespace Z0
             dst.Data = src.Encoded;
             return dst;
         }
-    }
-
-    partial struct Msg
-    {
-        public static MsgPattern<Count> ProcessingApiHexFiles => "Processing {0} api hex files";
-
-        public static MsgPattern<Count> AccumulatedDescriptors => "Accumulated {0} descriptors";
-
     }
 }

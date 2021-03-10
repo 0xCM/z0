@@ -13,6 +13,22 @@ namespace Z0
 
     public readonly struct ApiCaptureBlocks : IIndex<ApiCaptureBlock>
     {
+
+        [MethodImpl(Inline), Op]
+        public static Pair<ByteSize> sizes(ReadOnlySpan<ApiCaptureBlock> src)
+        {
+            var input = ByteSize.Zero;
+            var output = ByteSize.Zero;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                input += block.InputSize;
+                output += block.OutputSize;
+            }
+            return (input,output);
+        }
+
         readonly Index<ApiCaptureBlock> Data;
 
         [MethodImpl(Inline)]
@@ -52,10 +68,10 @@ namespace Z0
         }
 
         public ByteSize ExtractSize
-            => ApiCode.sizes(Data).Left;
+            => sizes(Data).Left;
 
         public ByteSize ParsedSize
-            => ApiCode.sizes(Data).Right;
+            => sizes(Data).Right;
 
         public ref readonly ApiCaptureBlock First
         {

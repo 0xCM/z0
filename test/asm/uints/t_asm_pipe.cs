@@ -32,16 +32,16 @@ namespace Z0.Asm
             root.iter(parsed, f => writer.WriteLine(f));
 
             var mHex = Db.ApiHexFile(ApiQuery.uri(typeof(math)));
-            var mHexRows = ApiCode.hexrows(mHex);
+            var mHexRows = ApiHex.rows(mHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(mHexRows, r => writer.WriteLine(r.Uri));
 
             var gHex = Db.ApiHexFile(ApiQuery.uri(typeof(gmath)));
-            var gHexRows = ApiCode.hexrows(gHex);
+            var gHexRows = ApiHex.rows(gHex);
             writer.WriteLine(RP.PageBreak120);
             root.iter(gHexRows, r => writer.WriteLine(r.Uri));
 
-            var mblocks = root.map(mHexRows.View, ApiCode.block);
+            var mblocks = root.map(mHexRows.View, ApiHex.block);
             check_unary_ops(mblocks);
         }
 

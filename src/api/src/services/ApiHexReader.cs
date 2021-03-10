@@ -8,27 +8,21 @@ namespace Z0
 
     using static memory;
 
-    public readonly struct ApiExtractReader : IApiExtractReader
+    public sealed class ApiHexReader : WfService<ApiHexReader,IApiHexReader>, IApiHexReader
     {
-        public static IApiExtractReader Service => default(ApiExtractReader);
-
-        public ApiExtractBlock[] Read(FS.FilePath src)
-            => read(FS.path(src.Name));
-
-        public static ApiExtractBlock[] read(FS.FilePath src)
+        public Index<ApiCodeBlock> Read(FS.FilePath src)
         {
             var lines = src.ReadLines().View;
             var count = lines.Length;
-            var buffer = sys.alloc<ApiExtractBlock>(count);
+            var buffer = sys.alloc<ApiCodeBlock>(count);
             var dst = span(buffer);
             for(var i=1u; i<count; i++)
             {
                 ref readonly var line = ref skip(lines,i);
-                var block = ApiExtractParser.extracts(line);
-                if(block)
-                    seek(dst,i) = block.Value;
-                 else
-                    term.error(block.Message);
+                if(ApiHex.parse(line, out var row))
+                    seek(dst,i) = new ApiCodeBlock(row.Uri, new CodeBlock(row.Address, row.Data));
+                else
+                    Wf.Error(string.Format("Could not parse line {0} from {1}", i,src.ToUri()));
             }
             return buffer;
         }

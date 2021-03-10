@@ -17,26 +17,6 @@ namespace Z0
         public static IRuntimeArchive runtime(IWfShell wf)
             => RuntimeArchive.create(wf.Controller.ImageDir);
 
-        [MethodImpl(Inline)]
-        public static IApiExtractReader hexreader<H>(H rep = default)
-            where H : struct, IArchiveReader
-        {
-            if(typeof(H) == typeof(ApiExtractReader))
-                return new ApiExtractReader();
-            else
-                throw no<H>();
-        }
-
-        [MethodImpl(Inline)]
-        public static ApiExtractWriter hexwriter<H>(FS.FilePath dst, H rep = default)
-            where H : struct, IArchiveWriter<H>
-        {
-            if(typeof(H) == typeof(ApiExtractWriter))
-                return new ApiExtractWriter(dst);
-            else
-                throw no<H>();
-        }
-
         /// <summary>
         /// Creates an archive over the output of a build
         /// </summary>

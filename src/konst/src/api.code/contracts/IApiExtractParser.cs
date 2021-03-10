@@ -4,8 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiExtractReader : IArchiveReader
+    using System;
+
+    public interface IApiExtractParser
     {
-        Index<ApiExtractBlock> Read(FS.FilePath src);
+        Outcome Parse(string src, out ApiExtractBlock dst);
     }
 }

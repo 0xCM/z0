@@ -7,6 +7,6 @@ namespace Z0
     sealed class EmitApiIndex : CmdReactor<EmitHexIndexCmd,FS.FilePath>
     {
         protected override FS.FilePath Run(EmitHexIndexCmd cmd)
-            => ApiCode.EmitHexIndex(Wf);
+            => ApiHex.index(Wf);
     }
 }
