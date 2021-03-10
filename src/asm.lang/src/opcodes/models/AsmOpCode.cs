@@ -76,6 +76,5 @@ namespace Z0.Asm
 
         public static AsmOpCode Empty
             => default;
-
     }
 }

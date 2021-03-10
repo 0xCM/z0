@@ -11,11 +11,11 @@ namespace Z0.Asm
     {
         readonly StreamWriter StreamOut;
 
-        readonly IAsmFormatter Formatter;
+        readonly IAsmRoutineFormatter Formatter;
 
         public FS.FilePath TargetPath {get;}
 
-        public AsmWriter(FS.FilePath path, IAsmFormatter formatter)
+        public AsmWriter(FS.FilePath path, IAsmRoutineFormatter formatter)
         {
             TargetPath = path;
             Formatter = formatter;

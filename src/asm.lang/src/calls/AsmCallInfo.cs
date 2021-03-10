@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => string.Format("{0} -> {2}", CallSite, Target);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

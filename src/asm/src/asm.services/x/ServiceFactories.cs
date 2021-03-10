@@ -42,7 +42,7 @@ namespace Z0
             => ApiImmEmitter.create(wf);
 
         public static IAsmWriter AsmWriter(this IWfShell wf, FS.FilePath dst, in AsmFormatConfig config)
-            => new AsmWriter(dst, new AsmFormatter(config));
+            => new AsmWriter(dst, new AsmRoutineFormatter(config));
 
         public static AsmServices AsmServices(this IWfShell wf)
             => Services.AsmServices.create(wf);

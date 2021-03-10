@@ -28,11 +28,11 @@ namespace Z0.Asm
         public MemoryAddress NextIp
         {
             [MethodImpl(Inline)]
-            get => Caller.Base + InstructionOffset + InstructionSize;
+            get => asm.nextip(this);
         }
 
         public string Format()
-            => string.Format("{0}:{1}", Caller, InstructionOffset);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

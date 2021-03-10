@@ -11,9 +11,34 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    [ApiHost]
-    public readonly struct AsmRender
+    public readonly struct AsmRoutineFormatter : IAsmRoutineFormatter
     {
+        public AsmFormatConfig Config {get;}
+
+        [MethodImpl(Inline)]
+        public AsmRoutineFormatter(AsmFormatConfig? config)
+            => Config = config ?? AsmFormatConfig.Default;
+
+        /// <summary>
+        /// Formats the assembly function detail
+        /// </summary>
+        /// <param name="src">The source function</param>
+        /// <param name="fmt">The format configuration</param>
+        public string Format(AsmRoutine src)
+            => format(src, Config);
+
+        [MethodImpl(Inline)]
+        public string Format(in MemoryAddress @base, in AsmInstructionSummary src)
+            => format(@base, src, Config);
+
+        [MethodImpl(Inline)]
+        public void Render(in AsmRoutines src, ITextBuffer dst)
+            => format(src, Config, dst);
+
+        [MethodImpl(Inline)]
+        public void Render(in AsmRoutine src, ITextBuffer dst)
+            => format(src, Config, dst);
+
         /// <summary>
         /// Formats the function header
         /// </summary>
@@ -158,5 +183,5 @@ namespace Z0.Asm
 
             dst.AppendLine(instructions(src, config).Join(Eol));
         }
-    }
+   }
 }

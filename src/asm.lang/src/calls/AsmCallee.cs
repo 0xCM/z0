@@ -32,7 +32,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => text.concat(Base.Format(), Chars.Colon, Chars.Space, Identity);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

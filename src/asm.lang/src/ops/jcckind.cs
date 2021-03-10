@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static AsmMnemonicCode;
-    using K = JccKind;
 
     partial struct asm
     {

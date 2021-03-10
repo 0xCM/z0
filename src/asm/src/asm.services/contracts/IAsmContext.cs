@@ -46,7 +46,7 @@ namespace Z0.Asm
         /// <summary>
         /// The context formatter
         /// </summary>
-        IAsmFormatter Formatter
+        IAsmRoutineFormatter Formatter
             => AsmServices.formatter(FormatConfig);
 
         /// <summary>

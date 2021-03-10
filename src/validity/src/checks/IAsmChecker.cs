@@ -15,7 +15,7 @@ namespace Z0.Asm
         IAsmDecoder Decoder
             => Context.RoutineDecoder;
 
-        IAsmFormatter Formatter
+        IAsmRoutineFormatter Formatter
             => Context.Formatter;
 
         IPolyrand IPolyrandProvider.Random

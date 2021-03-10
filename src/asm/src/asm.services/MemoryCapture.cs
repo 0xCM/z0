@@ -27,7 +27,7 @@ namespace Z0
 
         readonly IAsmDecoder Decoder;
 
-        readonly IAsmFormatter Formatter;
+        readonly IAsmRoutineFormatter Formatter;
 
         readonly byte[] ExtractBuffer;
 

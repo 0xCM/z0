@@ -20,10 +20,10 @@ namespace Z0.Asm
 
         readonly IWfDb Db;
 
-        readonly IAsmFormatter AsmFormatter;
+        readonly IAsmRoutineFormatter AsmFormatter;
 
         [MethodImpl(Inline)]
-        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmFormatter formatter)
+        public AsmImmWriter(IWfShell wf, ApiHostUri host, IAsmRoutineFormatter formatter)
         {
             Wf = wf;
             Uri = host;

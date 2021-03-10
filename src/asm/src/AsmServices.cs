@@ -30,8 +30,8 @@ namespace Z0.Asm
             => ApiHostCapture.create(wf);
 
         [MethodImpl(Inline), Op]
-        public static IAsmFormatter formatter(in AsmFormatConfig config)
-            => new AsmFormatter(config);
+        public static IAsmRoutineFormatter formatter(in AsmFormatConfig config)
+            => new AsmRoutineFormatter(config);
 
         [MethodImpl(Inline), Op]
         public static ICaptureExchange exchange(BufferToken capture)
@@ -54,8 +54,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public IAsmFormatter Formatter(in AsmFormatConfig config)
-            => new AsmFormatter(config);
+        public IAsmRoutineFormatter Formatter(in AsmFormatConfig config)
+            => new AsmRoutineFormatter(config);
 
         public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
         {

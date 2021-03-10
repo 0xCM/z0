@@ -56,6 +56,7 @@ namespace Z0.Asm
             }
             return false;
         }
+
         [MethodImpl(Inline), Op]
         public static bool digit(Base2 @base, char c, out BinaryDigit dst)
         {
