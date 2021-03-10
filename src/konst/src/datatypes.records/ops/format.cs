@@ -23,21 +23,6 @@ namespace Z0
             where T : struct
                 => string.Format(spec.Pattern, row.Cells);
 
-        /// <summary>
-        /// Formats a <see cref='RowHeader'/>
-        /// </summary>
-        /// <param name="src">The source header</param>
-        public static string format(RowHeader src)
-        {
-            var dst = text.build();
-            for(var i=0; i<src.Count; i++)
-            {
-                dst.Append(src.Delimiter);
-                dst.Append(src[i].Format());
-            }
-            return dst.ToString();
-        }
-
         [Op]
         static string format(dynamic src, CellFormatSpec spec)
         {

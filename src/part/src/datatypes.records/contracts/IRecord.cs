@@ -8,7 +8,7 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = RecordUtilities;
+    using api = RecUtil;
 
     [Free]
     public interface IRecord

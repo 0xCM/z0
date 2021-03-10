@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct RecUtil
     {
         /// <summary>
         /// Defines a <see cref='CellIndex'/> identifier

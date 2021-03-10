@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Records;
-
     /// <summary>
     /// Defines a row over a specified record type
     /// </summary>
@@ -32,14 +30,14 @@ namespace Z0
             Source = default;
             Index = 0;
             Fields = fields;
-            Row = api.row<T>(Fields.Count);
+            Row = RecUtil.row<T>(Fields.Count);
         }
 
         [MethodImpl(Inline)]
         public RowAdapter<T> Adapt(in T src)
         {
             Source = src;
-            api.load(Fields, Index++, Source, ref Row);
+            RecUtil.load(Fields, Index++, Source, ref Row);
             return this;
         }
 

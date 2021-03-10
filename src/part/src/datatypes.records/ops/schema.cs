@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    partial struct Records
+    partial struct RecUtil
     {
         [Op]
         public static RecordSchema schema(Type src)

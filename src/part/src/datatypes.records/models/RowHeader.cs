@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = RecordUtilities;
+    using api = RecUtil;
 
     public readonly struct RowHeader : IIndex<HeaderCell>, ITextual
     {

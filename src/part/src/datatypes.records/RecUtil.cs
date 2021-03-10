@@ -11,8 +11,10 @@ namespace Z0
     using static Part;
     using static memory;
 
-    readonly struct RecordUtilities
+    public readonly partial struct RecUtil
     {
+        const NumericKind Closure = UnsignedInts;
+
         public const string DefaultDelimiter = " | ";
 
         /// <summary>
@@ -24,7 +26,9 @@ namespace Z0
             var dst = text.buffer();
             for(var i=0; i<src.Count; i++)
             {
-                dst.Append(src.Delimiter);
+                if(i != 0)
+                    dst.Append(src.Delimiter);
+
                 dst.Append(src[i].Format());
             }
             return dst.Emit();
@@ -76,58 +80,9 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 var cell = skip(view,i);
-                seek(parts,i) = slot(i, cell.Width, delimiter);
+                seek(parts,i) = slot(i, cell.Width, i!=0 ? delimiter : EmptyString);
             }
             return string.Concat(parts);
-        }
-
-        /// <summary>
-        /// Computes the <see cref='TableId'/> of a specified record type
-        /// </summary>
-        /// <param name="src">The record type</typeparam>
-        [Op]
-        public static TableId tableid(Type src)
-            => src.Tag<RecordAttribute>().MapValueOrElse(
-                    a => new TableId(src, a.TableId),
-                    () => new TableId(src, src.Name));
-
-        /// <summary>
-        /// Discerns a <see cref='RecordFields'/> for a parametrically-identified record type
-        /// </summary>
-        /// <typeparam name="T">The record type</typeparam>
-        [Op, Closures(UnsignedInts)]
-        public static RecordFields fields<T>()
-            where T : struct
-                => fields(typeof(T));
-
-        /// <summary>
-        /// Discerns a <see cref='RecordFields'/> for a specified record type
-        /// </summary>
-        /// <param name="src">The record type</typeparam>
-        [Op]
-        public static RecordFields fields(Type src)
-        {
-            var fields = src.DeclaredPublicInstanceFields();
-            var count = fields.Length;
-            var dst = sys.alloc<RecordField>(count);
-            map(fields,dst);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static ref RecordField map(FieldInfo src, ushort index, ref RecordField dst)
-        {
-            dst.FieldIndex = index;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        static void map(ReadOnlySpan<FieldInfo> src, Span<RecordField> dst)
-        {
-            var count = (ushort)src.Length;
-            for(var i=z16; i<count; i++)
-                map(skip(src, i), i, ref seek(dst, i));
         }
      }
 }

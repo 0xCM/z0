@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api =RecordUtilities;
+    using api=RecUtil;
 
     /// <summary>
     /// Defines formatting specifications for each cell in a row

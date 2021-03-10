@@ -52,7 +52,7 @@ namespace Z0
             {
                 var count = flow.EmissionCount;
                 var status = count == 0 ? "Emitting" : "Emitted";
-                var format = string.Format(FormatPattern, flow.Token, Records.tableid<T>(), status, count, flow.Target.ToUri());
+                var format = string.Format(FormatPattern, flow.Token, RecUtil.tableid<T>(), status, count, flow.Target.ToUri());
                 FS.write(format + Eol, Emissions);
             }
             catch(Exception error)

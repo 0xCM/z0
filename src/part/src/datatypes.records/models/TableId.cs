@@ -31,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TableId(Type src)
-            => RecordUtilities.tableid(src);
+            => RecUtil.tableid(src);
     }
 }

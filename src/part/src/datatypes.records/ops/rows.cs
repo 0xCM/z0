@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct Records
+    partial struct RecUtil
     {
         /// <summary>
         /// Loads a <see cref='DynamicRows{T}' /> index from a specified source <see cref='ReadOnlySpan{T}'/>
@@ -17,7 +17,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static DynamicRows<T> rows<T>(ReadOnlySpan<T> src)
             where T : struct
-                => rows(Records.fields<T>(), src);
+                => rows(RecUtil.fields<T>(), src);
 
         /// <summary>
         /// Loads a <see cref='DynamicRows{T}'/> sequence from a specified source <see cref='ReadOnlySpan{T}'/>
@@ -31,7 +31,7 @@ namespace Z0
         {
             var count = (uint)src.Length;
             var buffer = rows<T>(count);
-            load(fields, src, buffer);
+            RecUtil.load(fields, src, buffer);
             return buffer;
         }
 

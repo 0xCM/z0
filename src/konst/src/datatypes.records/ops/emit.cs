@@ -37,7 +37,7 @@ namespace Z0
             var count = src.Count;
             var data = src.View;
             using var writer = dst.Writer();
-            writer.WriteLine(format(spec.Header));
+            writer.WriteLine(RecUtil.FormatHeader(spec.Header));
             var buffer = Buffers.text();
             for(var i=0; i<count; i++)
             {
@@ -54,7 +54,7 @@ namespace Z0
             var count = src.Length;
             var formatter = Records.formatter<T>(spec);
             using var writer = dst.Writer();
-            writer.WriteLine(format(spec.Header));
+            writer.WriteLine(RecUtil.FormatHeader(spec.Header));
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(src,i)));
 
@@ -88,7 +88,7 @@ namespace Z0
 
         public static Count emit<T>(Span<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
             where T : struct, IRecord<T>
-                => emit(src.ReadOnly(), dst, rowspec<T>(widths));
+                => emit(src.ReadOnly(), dst, RecUtil.rowspec<T>(widths));
 
         public static Count emit<T>(Index<T> src, FS.FilePath dst, RowFormatSpec spec)
             where T : struct, IRecord<T>
@@ -96,6 +96,6 @@ namespace Z0
 
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, ReadOnlySpan<byte> widths)
             where T : struct, IRecord<T>
-                => emit(src, dst, rowspec<T>(widths));
+                => emit(src, dst, RecUtil.rowspec<T>(widths));
     }
 }

@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using api = RecordUtilities;
+    using api = RecUtil;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
     [Free]
     public interface ITableId : ITextual
     {

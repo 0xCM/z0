@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct RecUtil
     {
         /// <summary>
         /// Computes the <see cref='TableId'/> of a parametrically-identified record
@@ -39,5 +39,6 @@ namespace Z0
             => src.Tag<RecordAttribute>().MapValueOrElse(
                     a => new TableId(src, a.TableId),
                     () => new TableId(src, src.Name));
+
     }
 }

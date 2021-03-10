@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Records
+    partial struct RecUtil
     {
         [Op, Closures(Closure)]
         public static void load<T>(in RecordFields fields, ReadOnlySpan<T> src, in DynamicRows<T> dst)

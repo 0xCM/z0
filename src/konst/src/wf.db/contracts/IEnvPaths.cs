@@ -145,7 +145,7 @@ namespace Z0
 
         FS.FileName TableFileName<T>(string id)
             where T : struct, IRecord<T>
-                => FS.file(string.Format("{0}.{1}", Records.tableid<T>().Identifier, id), Csv);
+                => FS.file(string.Format("{0}.{1}", RecUtil.tableid<T>().Identifier, id), Csv);
 
         FS.FilePath EtlTable<T>(string id)
             where T : struct, IRecord<T>

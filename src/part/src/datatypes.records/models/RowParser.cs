@@ -25,7 +25,7 @@ namespace Z0
         }
 
         public Outcome ParseHeader(string src, out RowHeader dst)
-            => RecordUtilities.ParseHeader(src, FieldDelimiter, out dst);
+            => RecUtil.ParseHeader(src, FieldDelimiter, out dst);
 
         public Outcome ParseRow(string src, out T dst)
             => F(src, out dst);

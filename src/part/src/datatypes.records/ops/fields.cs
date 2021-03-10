@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
     using static TextRules;
 
-    partial struct Records
+    partial struct RecUtil
     {
         public static Index<string> fields(string src, char delimiter)
         {

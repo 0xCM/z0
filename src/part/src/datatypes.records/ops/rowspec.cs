@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct RecUtil
     {
         /// <summary>
         /// Defines a <see cref='RowFormatSpec'/>
@@ -29,8 +29,8 @@ namespace Z0
         public static RowFormatSpec rowspec<T>(ReadOnlySpan<byte> widths)
             where T : struct
         {
-            var header = Records.header<T>(widths);
-            return Records.rowspec(header, header.Cells.Select(x => x.CellFormat));
+            var header = RecUtil.header<T>(widths);
+            return rowspec(header, header.Cells.Select(x => x.CellFormat));
         }
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Z0
         public static RowFormatSpec rowspec<T>(byte fieldwidth)
             where T : struct
         {
-            var header = header<T>(fieldwidth);
-            return Records.rowspec(header, header.Cells.Select(x => x.CellFormat));
+            var header = RecUtil.header<T>(fieldwidth);
+            return rowspec(header, header.Cells.Select(x => x.CellFormat));
         }
 
         /// <summary>
@@ -54,8 +54,8 @@ namespace Z0
         [Op, Closures(Closure)]
         public static RowFormatSpec rowspec(Type record, byte fieldwidth)
         {
-            var header = Records.header(record, fieldwidth);
-            return Records.rowspec(header, header.Cells.Select(x => x.CellFormat));
+            var header = RecUtil.header(record, fieldwidth);
+            return rowspec(header, header.Cells.Select(x => x.CellFormat));
         }
     }
 }

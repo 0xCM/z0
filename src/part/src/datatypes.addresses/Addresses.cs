@@ -10,6 +10,5 @@ namespace Z0
     public readonly partial struct Addresses
     {
         const NumericKind Closure = UnsignedInts;
-
     }
 }

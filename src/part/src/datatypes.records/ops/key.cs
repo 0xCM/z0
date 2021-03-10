@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct RecUtil
     {
         [MethodImpl(Inline)]
         public static RowKey<I,T> key<I,T>(T row, I value)

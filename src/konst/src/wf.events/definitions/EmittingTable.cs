@@ -28,7 +28,7 @@ namespace Z0
         public EmittingTableEvent(WfStepId step, Type type, FS.FilePath target, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, step);
-            TableId = Records.tableid(type);
+            TableId = RecUtil.tableid(type);
             Target = target;
         }
 
@@ -36,7 +36,6 @@ namespace Z0
         public string Format()
             => TextFormatter.format(EventId, Msg.EmittingTable.Capture(TableId, Target));
 
-            //=> TextFormatter.format(EventId, TableId, Target.ToUri());
 
         public override string ToString()
             => Format();

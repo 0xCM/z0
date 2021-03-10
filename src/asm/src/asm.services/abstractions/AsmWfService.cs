@@ -12,10 +12,15 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Asm = Wf.AsmContext();
+            _Etl = root.lazy(Wf.AsmRowEtl);
             OnContextCreated();
         }
 
         protected IAsmContext Asm {get; private set;}
+
+        Lazy<AsmEtl> _Etl;
+
+        protected AsmEtl Etl => _Etl.Value;
 
         protected virtual void OnContextCreated()
         {

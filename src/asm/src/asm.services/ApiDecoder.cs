@@ -101,7 +101,7 @@ namespace Z0.Asm
         }
 
         ApiInstructionSet Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiInstructionSet(@base, Wf.AsmRowEtl().ApiInstructions(code, src));
+            => new ApiInstructionSet(@base, Etl.ApiInstructions(code, src));
     }
 
     readonly struct WfProgress

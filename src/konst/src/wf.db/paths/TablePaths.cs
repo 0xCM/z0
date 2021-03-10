@@ -62,16 +62,16 @@ namespace Z0
 
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format(), Csv);
+                => TableDir(subject) + FS.file(RecUtil.tableid<T>().Identifier.Format(), Csv);
 
         FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(Records.tableid<T>().Identifier.Format() + string.Format("-{0}", discriminator), Csv);
+                => TableDir(subject) + FS.file(RecUtil.tableid<T>().Identifier.Format() + string.Format("-{0}", discriminator), Csv);
 
         FS.FilePath Table<T>(string name, FS.FileExt ext)
             where T : struct, IRecord<T>
         {
-            var id = Records.tableid<T>().Identifier;
+            var id = RecUtil.tableid<T>().Identifier;
             var dir = TableDir(id);
             return dir + FS.file(string.Format("{0}.{1}", id, name), ext);
         }

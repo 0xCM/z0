@@ -17,10 +17,10 @@ namespace Z0
         readonly RowAdapter<T> Adapter;
 
         [MethodImpl(Inline)]
-        internal RecordFormatter(RowFormatSpec spec)
+        public RecordFormatter(RowFormatSpec spec)
         {
             FormatSpec = spec;
-            Adapter = Records.adapter<T>();
+            Adapter = RecUtil.adapter<T>();
         }
 
         [MethodImpl(Inline)]
@@ -45,13 +45,12 @@ namespace Z0
             const char RowSep = Chars.Comma;
             const char ValSep = Chars.Eq;
             var adapter = Adapter.Adapt(src);
-            var dst = Buffers.text();
+            var dst = text.buffer();
             var cells = adapter.Cells;
             var count = cells.Length;
             var fields = adapter.Fields.View;
             for(var i=0; i<count; i++)
                 dst.AppendFormat(KVRP, skip(fields,i).Name, skip(cells,i));
-
             return dst.Emit();
         }
 

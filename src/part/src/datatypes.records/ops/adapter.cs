@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct RecUtil
     {
         /// <summary>
         /// Adapts a <see cref='RecordFields'/> sequence to a <typeparamref name='T'/> parametric row
@@ -27,6 +27,6 @@ namespace Z0
         /// <typeparam name="T">The row type</typeparam>
         public static RowAdapter<T> adapter<T>()
             where T : struct, IRecord<T>
-                => adapter<T>(fields<T>());
+                => adapter<T>(RecUtil.fields<T>());
     }
 }
