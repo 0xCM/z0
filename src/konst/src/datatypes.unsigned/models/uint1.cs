@@ -397,7 +397,7 @@ namespace Z0
         public static N N => default;
 
 
-       /// <summary>
+        /// <summary>
         /// Specifies the minimum <see cref='U'/> value
         /// </summary>
         public static U Min

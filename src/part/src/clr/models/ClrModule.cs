@@ -10,6 +10,7 @@ namespace Z0
     using R = System.Reflection;
 
     using static Part;
+    using static memory;
 
     public readonly struct ClrModule : IClrArtifact<ClrModule>
     {

@@ -15,6 +15,10 @@ namespace Z0
 
     partial struct UI
     {
+        [MethodImpl(Inline), Op]
+        public static U maxval(W w)
+            => U.Max;
+
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>
@@ -79,10 +83,6 @@ namespace Z0
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
                 => new U(@as<K,byte>(src));
-
-        [MethodImpl(Inline), Op]
-        public static U maxval(W w)
-            => U.Max;
 
         /// <summary>
         /// Creates a 3-bit unsigned integer, equal to zero or one, if the source value is respectively false or true

@@ -9,24 +9,7 @@ namespace Z0
     using System.Text;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    public interface ITextValueFormatter<F,T> : ITextValueFormatter<T>
-        where F : unmanaged, Enum
-        where T : struct
-    {
-        void Format(in T src, IDatasetFormatter<F> dst);
-
-        string ITextValueFormatter<T>.Format(in T src)
-        {
-            var dst = Table.dsformatter<F>();
-            Format(src, dst);
-            return dst.Render();
-        }
-
-        string ITextValueFormatter<T>.HeaderText
-            => Table.dsformatter<F>().HeaderText;
-    }
+    using static Part;
 
     public readonly struct DatasetFormatter<F> : IDatasetFormatter<F>
         where F : unmanaged, Enum
@@ -168,6 +151,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string[] labels()
-            => Clr.literalIndex<F>().Names;
+            => ClrPrimitives.literals<F>().Names;
     }
 }

@@ -249,12 +249,12 @@ namespace Z0
             => U.Max;
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap1((byte)(lhs.data | rhs.data));
+        public static U or(U a, U b)
+            => wrap1((byte)(a.data | b.data));
 
         [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap1((byte)(lhs.data & rhs.data));
+        public static U and(U a, U b)
+            => wrap1((byte)(a.data & b.data));
 
         [MethodImpl(Inline), Op]
         public static U xor(U lhs, U rhs)

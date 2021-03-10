@@ -16,17 +16,5 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         const BindingFlags BF = ReflectionFlags.BF_All;
-
-        [MethodImpl(Inline), Op]
-        public static Index<Type> interfaces(Type src)
-            => src.GetInterfaces();
-
-        [MethodImpl(Inline), Op]
-        public static ClrTypeLookup lookup(Type[] src)
-            => new ClrTypeLookup(src);
-
-        [MethodImpl(Inline), Op]
-        public static ClrStruct @struct(Type src)
-            => new ClrStruct(src);
     }
 }

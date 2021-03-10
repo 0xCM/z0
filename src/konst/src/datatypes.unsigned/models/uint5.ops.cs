@@ -210,12 +210,12 @@ namespace Z0
             => reduce5((byte)(lhs.data * rhs.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap5((byte)(lhs.data | rhs.data));
+        public static U or(U a, U b)
+            => wrap5((byte)(a.data | b.data));
 
         [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap5((byte)(lhs.data & rhs.data));
+        public static U and(U a, U b)
+            => wrap5((byte)(a.data & b.data));
 
         [MethodImpl(Inline), Op]
         public static U xor(U lhs, U rhs)

@@ -22,14 +22,14 @@ namespace Z0
         /// <summary>
         /// Increments a specified operand by the unit value
         /// </summary>
-        /// <param name="x">The source operand</param>
+        /// <param name="a">The source operand</param>
         [MethodImpl(Inline), Op]
-        public static U inc(U x)
-            => !x.IsMax ? new U(memory.add(x.data, 1), false) : U.Min;
+        public static U inc(U a)
+            => !a.IsMax ? new U(memory.add(a.data, 1), false) : U.Min;
 
         [MethodImpl(Inline), Op]
-        public static U dec(U x)
-            => !x.IsMin ? new U(Bytes.sub(x.data, 1), false) : U.Max;
+        public static U dec(U a)
+            => !a.IsMin ? new U(Bytes.sub(a.data, 1), false) : U.Max;
 
         /// <summary>
         /// Reinterprets an input reference as a mutable <see cref='U'/> reference cell
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline), Op]
-        public static U uint6(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default, BitState x4 = default, BitState x5 = default)
+        public static U uint6(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default, bit x5 = default)
              => wrap6((byte)(
                  ((uint)x0 << 0) |
                  ((uint)x1 << 1) |

@@ -22,7 +22,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<E,T,N>(Enums.literals<E>());
+                => create<E,T,N>(ClrEnums.literals<E>());
 
         [MethodImpl(Inline)]
         public static SymbolStore<E,T,N> create<E,T,N>(E[] src)
@@ -39,7 +39,7 @@ namespace Z0
         public static SymbolStore<E,T> create<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => create<E,T>(Enums.literals<E>());
+                => create<E,T>(ClrEnums.literals<E>());
 
         /// <summary>
         /// Creates a symbol store predicated on enumeration literals
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         public static SymbolStore<E> create<E>()
             where E : unmanaged, Enum
-                => create<E>(Enums.literals<E>());
+                => create<E>(ClrEnums.literals<E>());
 
         /// <summary>
         /// Creates a symbol store predicated on enumeration literals

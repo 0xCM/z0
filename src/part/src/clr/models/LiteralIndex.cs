@@ -20,7 +20,7 @@ namespace Z0
         public readonly F[] Values;
 
         [MethodImpl(Inline)]
-        internal LiteralIndex(FieldInfo[] fields, string[] names, F[] values)
+        public LiteralIndex(FieldInfo[] fields, string[] names, F[] values)
         {
             Fields = fields;
             Names = names;

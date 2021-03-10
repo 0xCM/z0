@@ -332,24 +332,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U mul(U lhs, U rhs)
-            => reduce2((byte)(lhs.data * rhs.data));
+        public static U mul(U a, U b)
+            => reduce2((byte)(a.data * b.data));
 
         [MethodImpl(Inline), Op]
-        public static U div (U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data / rhs.data));
+        public static U div (U a, U b)
+            => wrap(w2, (byte)(a.data / b.data));
 
         [MethodImpl(Inline), Op]
-        public static U mod (U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data % rhs.data));
+        public static U mod (U a, U b)
+            => wrap(w2, (byte)(a.data % b.data));
 
         [MethodImpl(Inline), Op]
-        public static U srl(U lhs, byte rhs)
-            => create(w2, lhs.data >> rhs);
+        public static U srl(U a, byte b)
+            => create(w2, a.data >> b);
 
         [MethodImpl(Inline), Op]
-        public static U sll(U lhs, byte rhs)
-            => create(w2, lhs.data << rhs);
+        public static U sll(U a, byte b)
+            => create(w2, a.data << b);
 
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)
@@ -377,16 +377,16 @@ namespace Z0
             => U.Max;
 
         [MethodImpl(Inline), Op]
-        public static U and(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data & rhs.data));
+        public static U and(U a, U b)
+            => wrap(w2, (byte)(a.data & b.data));
 
         [MethodImpl(Inline), Op]
-        public static U or(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data | rhs.data));
+        public static U or(U a, U b)
+            => wrap(w2, (byte)(a.data | b.data));
 
         [MethodImpl(Inline), Op]
-        public static U xor(U lhs, U rhs)
-            => wrap(w2, (byte)(lhs.data ^ rhs.data));
+        public static U xor(U a, U b)
+            => wrap(w2, (byte)(a.data ^ b.data));
 
         [MethodImpl(Inline), Op]
         public static U not(U a)

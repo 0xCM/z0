@@ -18,7 +18,7 @@ namespace Z0
         public static TableRenderSpec<F> renderspec<F>(char delimiter = FieldDelimiter)
             where F : unmanaged
         {
-            var literals = @readonly(Clr.literalIndex<F>().Literals);
+            var literals = @readonly(ClrPrimitives.literals<F>().Literals);
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
             var fieldBuffer = sys.alloc<TableColumn<F>>(count);

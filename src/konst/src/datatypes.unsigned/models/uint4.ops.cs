@@ -15,6 +15,10 @@ namespace Z0
 
     partial struct UI
     {
+        [MethodImpl(Inline), Op]
+        public static U maxval(W w)
+            => maxval<U>();
+
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
         /// </summary>
@@ -39,10 +43,6 @@ namespace Z0
         public static ref U edit<S>(in S src, W dst)
             where S : unmanaged
                 => ref @as<S,U>(src);
-
-        [MethodImpl(Inline), Op]
-        public static U maxval(W w)
-            => maxval<U>();
 
         [MethodImpl(Inline), Op]
         public static U inc(U x)

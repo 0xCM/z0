@@ -15,6 +15,8 @@ namespace Z0
 
     partial struct ClrPrimitives
     {
+        const NumericKind Closure = UnsignedInts;
+
         [Op]
         public static Index<SymbolicLiteral> enums(Type src)
         {
@@ -23,7 +25,6 @@ namespace Z0
             fill(src, kind(src), fields, dst);
             return dst;
         }
-
 
         [Op]
         public static Index<SymbolicLiteral<E>> enums<E>()
