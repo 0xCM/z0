@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="N">The enabled bit count type</typeparam>
         [MethodImpl(Inline),Op]
         public static ulong lo64(int n)
-            => lomask(Pow2.pow(n));
+            => lomask(Pow2.pow((byte)n));
 
         /// <summary>
         /// unsigned int _blsmsk_u32 (unsigned int a) BLSMSK reg, reg/m32
@@ -83,7 +83,7 @@ namespace Z0
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
         /// </summary>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T lo<T>(int n, T t = default)
+        public static T lo<T>(byte n, T t = default)
             where T : unmanaged
                 => Numeric.force<ulong,T>(lo64(n));
 

@@ -68,7 +68,7 @@ namespace Z0
         public static void split(byte src, int index, out byte x0, out byte x1)
         {
             x1 = (byte)(src >> index);
-            x0 = (byte)(src & ((byte)Pow2.pow(index) - 1));
+            x0 = (byte)(src & ((byte)Pow2.pow((byte)index) - 1));
         }
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         public static void split(ushort src, int index, out ushort x0, out ushort x1)
         {
             x1 = (ushort)(src >> index);
-            x0 = (ushort)(src & ((ushort)Pow2.pow(index) - 1));
+            x0 = (ushort)(src & ((ushort)Pow2.pow((byte)index) - 1));
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         public static void split(uint src, int index, out uint x0, out uint x1)
         {
             x1 = src >> index;
-            x0 =  src & ((uint)Pow2.pow(index) - 1);
+            x0 =  src & ((uint)Pow2.pow((byte)index) - 1);
         }
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         public static void split(ulong src, int index, out ulong x0, out ulong x1)
         {
             x1 = src >> index;
-            x0 =  src & (Pow2.pow(index) - 1);
+            x0 =  src & (Pow2.pow((byte)index) - 1);
         }
 
         /// <summary>

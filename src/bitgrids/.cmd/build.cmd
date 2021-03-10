@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=bitcore
+set ProjectId=bitgrids
 call %ControlScripts%\build-lib.cmd

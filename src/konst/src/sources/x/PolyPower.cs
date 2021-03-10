@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Power<T>(this IDomainSource src, T t = default)
             where T : unmanaged
-                => Numeric.force<ulong,T>(Pow2.pow(src.Log2(t)));
+                => Numeric.force<ulong,T>(Pow2.pow((byte)src.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values

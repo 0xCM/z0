@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
-                => gmath.xor(Numeric.maxval<T>(), gmath.sll(BitMasks.lo<T>(count - 1), start));
+                => gmath.xor(Numeric.maxval<T>(), gmath.sll(BitMasks.lo<T>((byte)(count - 1)), start));
     }
 }

@@ -231,7 +231,23 @@ namespace Z0
         /// <param name="i">The exponent</param>
         [MethodImpl(Inline), Op]
         public static ulong pow(int i)
-            =>  1ul << i;
+            => pow((byte)i);
+
+        [MethodImpl(Inline), Op]
+        public static byte pow8u(byte i)
+            => (byte)pow(i);
+
+        [MethodImpl(Inline), Op]
+        public static ushort pow16u(byte i)
+            => (ushort)pow(i);
+
+        [MethodImpl(Inline), Op]
+        public static uint pow32u(byte i)
+            => (uint)pow(i);
+
+        [MethodImpl(Inline), Op]
+        public static ulong pow64u(byte i)
+            => pow(i);
 
         [MethodImpl(Inline), Op]
         public static bool test(ulong src)

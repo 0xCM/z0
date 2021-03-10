@@ -18,7 +18,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var sep = (int)TypeNats.nat64u(n);
+            var sep = (byte)TypeNats.nat64u(n);
             var pattern = BitMasks.lo(sep, z64) << sep;
             return generic<T>(cpu.vbroadcast(w, gbits.replicate(pattern)));
         }
