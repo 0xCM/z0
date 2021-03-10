@@ -4,20 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    [CommandKind]
     public enum AsmWfCmdKind : byte
     {
         None = 0,
 
+        [Alias("show-rex-bits")]
         ShowRexBits,
 
+        [Alias("distill-statements")]
         DistillAsmStatements,
 
         ExportStokeImports,
 
         ShowSigOpTokens,
 
+        [Alias("show-monics")]
         ShowMnemonicSymbols,
 
+        [Alias("emit-api-classes")]
         EmitApiClasses,
 
         EmitSymbolicLiterals,
@@ -28,10 +33,12 @@ namespace Z0.Asm
 
         ShowEncodingKindNames,
 
+        [Alias("correlate-api")]
         CorrelateApiCode,
 
         ShowCatalogSymbols,
 
+        [Alias("emit-resbytes")]
         EmitResBytes,
 
         EmitImmSpecializations,
@@ -41,5 +48,10 @@ namespace Z0.Asm
         ShowSigOpSymbols,
 
         ShowSigOpComposites,
+
+       [Alias("emit-asm-rows")]
+       EmitAsmRows,
+
+       EmitLegacyOpCodes,
     }
 }

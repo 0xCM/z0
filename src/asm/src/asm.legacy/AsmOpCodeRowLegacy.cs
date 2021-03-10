@@ -12,7 +12,7 @@ namespace Z0.Asm
     [Record(TableId)]
     public struct AsmOpCodeRowLegacy : IRecord<AsmOpCodeRowLegacy>
     {
-        public const string TableId = "asm.opcodes";
+        public const string TableId = "asm.legacy-opcodes";
 
         public int Sequence;
 

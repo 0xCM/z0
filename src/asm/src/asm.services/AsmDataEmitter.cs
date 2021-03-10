@@ -81,13 +81,14 @@ namespace Z0.Asm
         {
             try
             {
+                var etl = Wf.AsmRowEtl();
                 var rowsets = EmitRowsets();
                 var records = 0u;
                 var sets = rowsets.View;
                 var count = rowsets.Count;
                 var flow = Wf.Running(Msg.EmittingInstructionRecords.Format(count));
                 for(var i=0; i<count; i++)
-                    records += AsmEtl.emit(Wf, skip(sets,i));
+                    records += etl.Emit(skip(sets,i));
 
                 Wf.Ran(flow, Msg.EmittedInstructionRecords.Format(records, count));
 
@@ -138,9 +139,6 @@ namespace Z0.Asm
         public void EmitSemantic(Index<ApiPartRoutines> routines)
         {
             Wf.AsmSemanticRender().Render(routines);
-            // var count = routines.Length;
-            // for(var i=0; i<count; i++)
-            //     render.Render(routines[i]);
         }
 
         public Index<AsmCallRow> EmitCallRows(Index<ApiPartRoutines> routines)
@@ -186,8 +184,9 @@ namespace Z0.Asm
         {
             var dst = Db.Table(AsmCallRow.TableId, src.Part);
             var flow = Wf.EmittingTable<AsmCallRow>(dst);
+            var etl = Wf.AsmRowEtl();
             using var writer = dst.Writer();
-            var calls = AsmEtl.calls(src.Instructions());
+            var calls = etl.Calls(src.Instructions());
             var view = calls.View;
             var count = view.Length;
             var formatter = Records.formatter<AsmCallRow>();

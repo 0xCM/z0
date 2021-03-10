@@ -13,6 +13,9 @@ namespace Z0
 
     partial class XTend
     {
+        public static AsmEtl AsmRowEtl(this IWfShell wf)
+            => AsmEtl.create(wf);
+
         public static IWfCmdHost<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
             => AsmWfCmdHost.create(wf);
 

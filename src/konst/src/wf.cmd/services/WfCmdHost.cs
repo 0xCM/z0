@@ -7,6 +7,15 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    using static Part;
+    using static memory;
+
+    [AttributeUsage(AttributeTargets.Enum)]
+    public class CommandKindAttribute : Attribute
+    {
+
+    }
+
     [WfCmdHost]
     public abstract class WfCmdHost<H,K> : WfService<H,IWfCmdHost<K>>, IWfCmdHost<K>
         where H : WfCmdHost<H,K>, new()
@@ -37,6 +46,18 @@ namespace Z0
             }
         }
 
-        protected abstract void RegisterCommands(WfCmdIndex index);
+        protected virtual void RegisterCommands(WfCmdIndex index)
+        {
+            var count = GetType().DeclaredInstanceMethods().Tagged<ActionAttribute>(out var methods);
+            if(count != 0)
+            {
+                var view = methods.View;
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var method = ref skip(view,i);
+                    index.Include(WfCmd.assign((K)method.Tag.Key, (Action)method.Method.CreateDelegate(typeof(Action),this)));
+                }
+            }
+        }
     }
 }

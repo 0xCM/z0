@@ -33,23 +33,12 @@ namespace Z0
             var cols = Fields;
             var labels = Labels;
             for(var i=0; i<cols.Length; i++)
-                service.Delimit(cols[i], labels[i]);
-            return service.Render();
-        }
-
-        /// <summary>
-        /// Formates a header row using a caller-supplied label producer
-        /// </summary>
-        /// <param name="label">The label factory</param>
-        /// <param name="delimiter">The delimiter</param>
-        /// <typeparam name="F">The field type</typeparam>
-        public string Render(Func<int,F,string> label, char delimiter = FieldDelimiter)
-        {
-            var service = Formatters.dataset<F>(delimiter);
-            var cols = Fields;
-            var labels = Labels;
-            for(var i=0; i<cols.Length; i++)
-                service.Delimit(cols[i], label(i, cols[i]));
+            {
+                if(i==0)
+                    service.Append(cols[i], labels[i]);
+                else
+                    service.Delimit(cols[i], labels[i]);
+            }
             return service.Render();
         }
     }

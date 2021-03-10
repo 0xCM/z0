@@ -158,13 +158,13 @@ namespace Z0.Asm
             if(check)
                 CheckBlockLength(src);
 
-            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, AsmEtl.ApiInstructions(src.Encoded, src.Decoded));
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode,  AsmEtl.ToApiInstructions(src.Encoded, src.Decoded));
         }
 
         static AsmRoutine routine(ApiMemberCode member, AsmInstructionBlock asm)
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
-            return new AsmRoutine(member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, AsmEtl.ApiInstructions(code, asm));
+            return new AsmRoutine(member.OpUri, member.Method.Metadata().DisplaySig, code, member.TermCode, AsmEtl.ToApiInstructions(code, asm));
         }
 
         [MethodImpl(Inline), Op]

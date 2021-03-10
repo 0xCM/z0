@@ -483,10 +483,12 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var dst = span<char>(32);
-            var vsib = AsmBytes.vsib(0b11_100_111);
-            Wf.Status(AsmBytes.format(vsib));
+            // var dst = span<char>(32);
+            // var vsib = AsmBytes.vsib(0b11_100_111);
+            // Wf.Status(AsmBytes.format(vsib));
 
+            var commands = Wf.AsmWfCmd();
+            commands.Run(AsmWfCmdKind.EmitAsmRows);
         }
 
         public static void Main(params string[] args)
