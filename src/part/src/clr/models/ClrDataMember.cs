@@ -87,7 +87,7 @@ namespace Z0
             get => IsField ? ClrArtifactKind.Field : ClrArtifactKind.Assembly;
         }
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -107,5 +107,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator MemberInfo(ClrDataMember src)
             => src.Definition;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMember(ClrDataMember src)
+            => new ClrMember(src.Definition);
     }
 }

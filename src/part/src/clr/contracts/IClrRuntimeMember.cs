@@ -16,7 +16,7 @@ namespace Z0
 
         string IClrArtifact.Name => Definition.Name;
 
-        ClrToken IClrArtifact.Token => Definition.MetadataToken;
+        ClrToken IClrArtifact.Id => Definition.MetadataToken;
     }
 
     [Free]

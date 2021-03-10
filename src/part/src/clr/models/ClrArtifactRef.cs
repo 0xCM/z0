@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Part;
 
-    [StructLayout(LayoutKind.Sequential)]
     public readonly struct ClrArtifactRef : ITextual
     {
         public ClrArtifactKind Kind {get;}

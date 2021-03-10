@@ -31,8 +31,7 @@ namespace Z0
             return this;
         }
 
-        public ClrDataLinkBuilder<S,T> Include(params
-            (Expression<Func<S,object>> SourceMember, Expression<Func<T, object>> TargetMember)[] pairs)
+        public ClrDataLinkBuilder<S,T> Include(params (Expression<Func<S,object>> SourceMember, Expression<Func<T, object>> TargetMember)[] pairs)
         {
             foreach (var association in pairs.Select(p => define(p.SourceMember, p.TargetMember)))
                 Arrows.Add(association);

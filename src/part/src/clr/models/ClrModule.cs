@@ -19,7 +19,7 @@ namespace Z0
         public ClrModule(R.Module src)
             => Subject = src;
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Subject.MetadataToken;
@@ -36,7 +36,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Subject.Name;
         }
-
 
         public string FullName
         {

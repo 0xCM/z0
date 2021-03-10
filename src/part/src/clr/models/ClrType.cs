@@ -27,7 +27,7 @@ namespace Z0
             get => Definition.Assembly;
         }
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

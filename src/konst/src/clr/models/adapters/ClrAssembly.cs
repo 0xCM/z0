@@ -78,7 +78,7 @@ namespace Z0
         public ReadOnlySpan<ClrAssemblyName> ReferencedAssemblies
             => Clr.references(Definition);
 
-        public ClrToken Token
+        public ClrToken Id
             => (uint)Part;
 
         public ReadOnlySpan<byte> RawMetadata

@@ -18,7 +18,7 @@ namespace Z0
         public ClrProperty(PropertyInfo data)
             => Definition = data;
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

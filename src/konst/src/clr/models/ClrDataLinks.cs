@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// Defines a collection of directed member associations

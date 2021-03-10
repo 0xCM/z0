@@ -22,7 +22,7 @@ namespace Z0
         public ClrMethod(MethodInfo src)
             => Definition = src;
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -34,7 +34,7 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrAssembly Assembly
+        public Assembly Assembly
         {
             [MethodImpl(Inline)]
             get => DeclaringType.Assembly;
@@ -51,7 +51,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Definition.CallingConvention;
         }
-
 
         public RuntimeMethodHandle MethodHandle
         {
@@ -76,11 +75,6 @@ namespace Z0
         public string Format()
             => Definition.Name;
 
-        [Ignore]
-        MethodInfo IClrRuntimeObject<MethodInfo>.Definition
-            => Definition;
-
-        [Ignore]
         public ClrArtifactKind Kind
             => ClrArtifactKind.Method;
 

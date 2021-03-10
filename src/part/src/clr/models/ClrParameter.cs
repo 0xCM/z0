@@ -19,7 +19,7 @@ namespace Z0
         public ClrParameter(R.ParameterInfo src)
             => Subject = src;
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Subject.MetadataToken;
@@ -45,5 +45,4 @@ namespace Z0
         public static implicit operator R.ParameterInfo(ClrParameter src)
             => src.Subject;
     }
-
 }

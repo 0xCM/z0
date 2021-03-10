@@ -41,7 +41,7 @@ namespace Z0
             get => DeclaringType.Definition.GetEnumUnderlyingType();
         }
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

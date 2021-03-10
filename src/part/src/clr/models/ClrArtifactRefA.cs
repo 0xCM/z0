@@ -23,10 +23,10 @@ namespace Z0
             get => Artifact.Kind;
         }
 
-        public ClrToken Token
+        public ClrToken Id
         {
             [MethodImpl(Inline)]
-            get => Artifact.Token;
+            get => Artifact.Id;
         }
 
         public string Name
@@ -41,7 +41,7 @@ namespace Z0
             => Artifact = artifact;
 
         public string Format()
-            => string.Format(RP.PSx3, Kind, Token, Name);
+            => string.Format(RP.PSx3, Kind, Id, Name);
 
         public override string ToString()
             => Format();
@@ -51,6 +51,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactRef(ClrArtifactRef<A> src)
-            => new ClrArtifactRef(src.Token, src.Kind, src.Name);
+            => new ClrArtifactRef(src.Id, src.Kind, src.Name);
     }
 }
