@@ -31,6 +31,9 @@ namespace Z0
             Emitter = Wf.CaptureEmitter(Asm);
         }
 
+        /// <summary>
+        /// Root capture routine that traverses and captures the apiset
+        /// </summary>
         public Index<AsmMemberRoutine> CaptureApi()
         {
             using var flow = Wf.Running();
@@ -58,6 +61,10 @@ namespace Z0
             archive.Clear();
         }
 
+        /// <summary>
+        /// Captures a catalog-specified part
+        /// </summary>
+        /// <param name="src">The part catalog</param>
         public Index<AsmMemberRoutines> CapturePart(IApiPartCatalog src)
         {
             if(src.IsEmpty)
@@ -69,7 +76,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<ApiHost> src)
+        public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src)
         {
             var count = src.Length;
             var dst = root.list<AsmMemberRoutines>();

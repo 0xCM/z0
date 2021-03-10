@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The operation hosts
         /// </summary>
-        Index<ApiHost> OperationHosts {get;}
+        Index<IApiHost> OperationHosts {get;}
 
         /// <summary>
         /// Api types

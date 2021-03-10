@@ -43,7 +43,7 @@ namespace Z0
             PartComponents = parts.Select(p => p.Owner);
             Catalogs = parts.Select(x => ApiCatalogs.PartCatalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
             ApiHosts = Catalogs.Storage.SelectMany(c => c.ApiHosts.Storage);
-            OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts.Storage).Cast<IApiHost>().Array();
+            OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts.Storage);
             PartIdentities = parts.Select(p => p.Id);
             Operations = Catalogs.Storage.SelectMany(x => x.Operations.Storage);
         }

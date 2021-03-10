@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public Index<ApiHost> OperationHosts {get;}
+        public Index<IApiHost> OperationHosts {get;}
 
         /// <summary>
         /// The api service types types defined by the assembly
@@ -56,7 +56,7 @@ namespace Z0
             PartId = part;
             Owner = component;
             ApiTypes = apitypes;
-            OperationHosts = apihosts;
+            OperationHosts = apihosts.Map(h => (IApiHost)h);
             ServiceHosts = svchosts;
             ApiHosts = apitypes.Cast<IApiHost>().Cast<IApiHost>().Concat(apihosts.Cast<IApiHost>()).Array();
             Operations = apihosts.SelectMany(x => x.Methods);

@@ -19,15 +19,15 @@ namespace Z0
             var parts = Wf.Api.PartIdentities;
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts));
-            var captured = RunPrimary(parts);
+            var captured = CaptureParts(parts);
             EmitImm(parts);
             RebaseMembers();
             EmitDump();
         }
 
-        Index<AsmMemberRoutine> RunPrimary(Index<PartId> parts)
+        Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
         {
-            var flow = Wf.Running("ApiCapture");
+            var flow = Wf.Running();
             using var step = Wf.ApiCapture();
             var captured = step.CaptureApi();
             Wf.Ran(flow);
