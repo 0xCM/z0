@@ -24,22 +24,17 @@ namespace Z0
     public readonly struct BitBroker<K,T> : IWfDataProcessor<T>, IWfDataBroker<K,T>
         where K : unmanaged, Enum
     {
-        readonly DataHandler<T>[] _Handlers;
+        const byte Slots = 64;
+
+        readonly Index<DataHandler<T>> Handlers;
 
         readonly K Bits;
-
-        Span<DataHandler<T>> Handlers
-        {
-            [MethodImpl(Inline)]
-            get => _Handlers;
-        }
 
         [MethodImpl(Inline)]
         internal BitBroker(DataHandler<T>[] handlers)
         {
             Bits = default;
-            _Handlers = handlers;
-            Handlers.Fill(DataHandler<T>.Empty);
+            Handlers = handlers;
         }
 
         [MethodImpl(Inline)]
@@ -51,23 +46,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitBroker(K kind)
-            : this(kind, new DataHandler<T>[64])
+            : this(kind, new DataHandler<T>[Slots])
         {
 
         }
 
         [MethodImpl(Inline)]
-        static byte Index(K src)
-            => (byte)Pow2.log2(uint64(src));
-
-        [MethodImpl(Inline)]
         public ref readonly DataHandler<T> Get(K kind)
-            => ref skip(Handlers, Index(kind));
+            => ref this[kind];
 
         public ref DataHandler<T> this[K kind]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Handlers, Index(kind));
+            get => ref Handlers[Pow2.log2(uint64(kind))];
         }
 
         [MethodImpl(Inline)]
@@ -76,8 +67,9 @@ namespace Z0
 
         public void Process(T src)
         {
-            ref readonly var handlers = ref first(_Handlers);
-            for(var i=0; i<_Handlers.Length; i++)
+            var count = Handlers.Length;
+            ref readonly var handlers = ref Handlers.First;
+            for(var i=0; i<count; i++)
                 skip(handlers,i).Handle(src);
         }
     }

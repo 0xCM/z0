@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,20 +10,33 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using F = VsibField;
+
     /// <summary>
     /// Represents a VSIB address
     /// </summary>
     /// <remarks>
-    /// Documentation teken from vol 4 of ADM reference manuals, p. 6
+    /// Documentation taken from vol 4 of ADM reference manuals, p. 6
     /// </remarks>
-    public struct Vsib
+    public struct VsibBits : INumericBits<byte>
     {
-        ulong Data;
+        byte Data;
 
-        ref byte VsibBits
+        [MethodImpl(Inline)]
+        public VsibBits(byte data)
+            => Data = data;
+
+        public byte Content
         {
             [MethodImpl(Inline)]
-            get => ref seek(bytes(Data),7);
+            get => Data;
+        }
+
+        [MethodImpl(Inline)]
+        public ref readonly byte Update(in byte src)
+        {
+            Data = src;
+            return ref src;
         }
 
         /// <summary>
@@ -37,9 +50,7 @@ namespace Z0
         public uint3 Base
         {
             [MethodImpl(Inline)]
-            get => (uint3)VsibBits;
-            [MethodImpl(Inline)]
-            set => VsibBits |= (byte)value;
+            get => (uint3)(Data >> (byte)F.Base);
         }
 
         /// <summary>
@@ -53,10 +64,7 @@ namespace Z0
         public uint3 Index
         {
             [MethodImpl(Inline)]
-            get => (uint3)(VsibBits >> 3);
-
-            [MethodImpl(Inline)]
-            set => VsibBits |= (byte)((byte)value << 3);
+            get => (uint3)(Data >> (byte)F.Index);
         }
 
         /// <summary>
@@ -73,32 +81,11 @@ namespace Z0
         public uint2 SS
         {
             [MethodImpl(Inline)]
-            get => (uint2)(VsibBits >> 6);
-
-            [MethodImpl(Inline)]
-            set => VsibBits |= (byte)((byte)value << 6);
+            get => (uint2)(Data >> (byte)F.SS);
         }
 
         [MethodImpl(Inline)]
         public byte Scale()
             => (byte)Pow2.pow(SS);
-
-
-        /// <summary>
-        /// Computes the effective address for an index-identified register
-        /// </summary>
-        /// <param name="index"></param>
-        /// <remarks>
-        /// Each element i of the effective address array is computed using the formula:
-        /// effective address[i] = scale * index[i] + base + displacement, where index[i]
-        /// is the ith element of the XMM/YMM register specified by {X, VSIB.index}.
-        /// An index element is either 32 or 64 bits wide and is treated as a signed integer
-        /// </remarks>
-        public MemoryAddress Effective(byte index)
-        {
-
-            return default;
-        }
-
     }
 }

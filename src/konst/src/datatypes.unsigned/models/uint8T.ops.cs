@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using U = uint8T;
     using W = W8;
@@ -35,12 +36,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref U cast<S>(in S src, W8 dst)
             where S : unmanaged
-                => ref memory.@as<S,U>(src);
+                => ref @as<S,U>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref S edit<S>(in U src)
             where S : unmanaged
-                => ref memory.@as<U,S>(src);
+                => ref @as<U,S>(src);
 
         /// <summary>
         /// Reduces the source value to a width-identified integer via modular arithmetic
@@ -59,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref K refine<K>(in U src)
             where K : unmanaged, Enum
-                 => ref memory.@as<U,K>(src);
+                 => ref @as<U,K>(src);
 
         /// <summary>
         /// Converts an enum to a width-identified integer
@@ -70,7 +71,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(memory.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks
@@ -87,7 +88,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint8(bool src)
-            => new U(BitStates.bitstate(src));
+            => new U(@byte(src));
 
         /// <summary>
         /// Creates a 8-bit unsigned integer from the least 8 source bits

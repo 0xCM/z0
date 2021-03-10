@@ -165,7 +165,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U create(W w, bool src)
-            => new U(BitStates.bitstate(src));
+            => wrap2(@byte(src));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from the least 2 source bits
@@ -242,7 +242,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static U uint2(bool src)
-            => new U(BitStates.bitstate(src));
+            => wrap2(@byte(src));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from the first two source bits
@@ -443,6 +443,18 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static U select(U a, U b, U c)
             => or(and(a,b), nonimpl(a,c));
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> bits(uint2 src)
+        {
+            var storage = 0ul;
+            var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
+            if(bit.test(src,0))
+                seek(dst,0) = bit.On;
+            if(bit.test(src,1))
+                seek(dst,1) = bit.On;
+            return dst;
+        }
 
         [MethodImpl(Inline)]
         internal static byte crop2(byte x)

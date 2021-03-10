@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiHost]
     public readonly struct WfBrokers
@@ -74,15 +74,5 @@ namespace Z0
         public static DataBroker<K,C,T> broker<K,C,T>(IWfShell wf, int capacity, WfDelegates.Indexer<K> xf)
             where K : unmanaged, Enum
                 => new DataBroker<K,C,T>(wf, capacity, xf);
-
-        [MethodImpl(Inline)]
-        static ulong e64u<E>(E e)
-            where E : unmanaged, Enum
-                => ClrEnums.e64u(e);
-
-        [MethodImpl(Inline)]
-        public static DataBroker<K,T> create<K,T>(int capacity, WfDelegates.Indexer<K> @if = null)
-            where K : unmanaged, Enum
-                => new DataBroker<K,T>(capacity, @if ?? e64u);
     }
 }

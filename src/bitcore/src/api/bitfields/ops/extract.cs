@@ -55,13 +55,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitSegment segment, in S src)
-            where S : IScalarBitField<T>
+            where S : INumericBits<T>
             where T : unmanaged
-                => gbits.extract(src.Scalar, (byte)segment.StartPos, (byte)segment.Width);
+                => gbits.extract(src.Content, (byte)segment.StartPos, (byte)segment.Width);
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitSegment segment, in S src, bool offset)
-            where S : IScalarBitField<T>
+            where S : INumericBits<T>
             where T : unmanaged
                 => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);
     }

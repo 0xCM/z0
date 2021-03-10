@@ -4,14 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IWfDataBroker<K,T>
         where K : unmanaged
     {
         ref readonly DataHandler<T> Get(K key);
-
-        //ref DataHandler<T> Set(K key, in DataHandler<T> handler);
 
         void Relay(K key, T value);
 
@@ -22,8 +18,6 @@ namespace Z0
         where K : unmanaged
     {
         ref readonly DataHandler<C,T> Get(K key);
-
-        //ref DataHandler<C,T> Set(K key, in DataHandler<C,T> handler);
 
         void Relay(K key, C context, T value);
 

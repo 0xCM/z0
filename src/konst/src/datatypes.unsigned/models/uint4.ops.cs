@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="x2">The term at index 2</param>
         /// <param name="x3">The term at index 3</param>
         [MethodImpl(Inline), Op]
-        public static U uint4(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default)
+        public static U uint4(bit x0, bit x1 = default, bit x2 = default, bit x3 = default)
              => wrap4(Bytes.or(
                  Bytes.sll((byte)x0, 0),
                  Bytes.sll((byte)x1, 1),
@@ -228,7 +228,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)
-            => bit.test(src,pos);
+            => bit.test(src, pos);
 
         [MethodImpl(Inline), Op]
         public static U set(U src, byte pos, bit state)
@@ -322,5 +322,21 @@ namespace Z0
         [MethodImpl(Inline), Select]
         public static U select(U a, U b, U c)
             => or(and(a,b), nonimpl(a,c));
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> bits(U src)
+        {
+            var storage = 0ul;
+            var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
+            if(bit.test(src,0))
+                seek(dst,0) = bit.On;
+            if(bit.test(src,1))
+                seek(dst,1) = bit.On;
+            if(bit.test(src,2))
+                seek(dst,2) = bit.On;
+            if(bit.test(src,3))
+                seek(dst,3) = bit.On;
+            return dst;
+        }
     }
 }

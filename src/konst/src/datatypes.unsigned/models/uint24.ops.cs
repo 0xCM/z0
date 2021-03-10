@@ -155,31 +155,31 @@ namespace Z0
             => x << count;
 
         [MethodImpl(Inline), Op]
-        public static ref U inc(in U x)
+        public static ref U inc(in U a)
         {
-            ref var y = ref memory.edit(x);
-            y.data++;
+            ref var b = ref memory.edit(a);
+            b.data++;
 
-            if(y.data > Mask)
-                y.data = 0;
+            if(b.data > Mask)
+                b.data = 0;
 
-            return ref y;
+            return ref b;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref U dec(in U x)
+        public static ref U dec(in U a)
         {
-            ref var y = ref memory.edit(x);
-            y.data--;
+            ref var b = ref memory.edit(a);
+            b.data--;
 
-            if(y.data > Mask)
-                y.data = Mask;
+            if(b.data > Mask)
+                b.data = Mask;
 
-            return ref y;
+            return ref b;
         }
 
         [MethodImpl(Inline), Op]
-        public static bool eq(U x, U y)
-            => x.data == y.data;
+        public static bool eq(U a, U b)
+            => a.data == b.data;
     }
 }

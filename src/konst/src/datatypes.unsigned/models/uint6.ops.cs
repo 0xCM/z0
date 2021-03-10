@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static U scalar<K>(in K src, W w)
             where K : unmanaged, Enum
-                => new U(z.@as<K,byte>(src));
+                => new U(@as<K,byte>(src));
 
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint6(bool src)
-            => new U(BitStates.bitstate(src));
+            => wrap6(@byte(src));
 
         /// <summary>
         /// Creates a 6-bit unsigned integer from the least 6 bits of the source
@@ -265,5 +265,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format(U src)
             => BitFormatter.format(src.data, FormatConfig6);
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> bits(uint6 src)
+        {
+            var storage = 0ul;
+            var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
+            if(bit.test(src,0))
+                seek(dst,0) = bit.On;
+            if(bit.test(src,1))
+                seek(dst,1) = bit.On;
+            if(bit.test(src,2))
+                seek(dst,2) = bit.On;
+            if(bit.test(src,3))
+                seek(dst,3) = bit.On;
+            if(bit.test(src,4))
+                seek(dst,4) = bit.On;
+            if(bit.test(src,5))
+                seek(dst,5) = bit.On;
+            return dst;
+        }
     }
 }

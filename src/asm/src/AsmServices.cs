@@ -29,18 +29,6 @@ namespace Z0.Asm
         public static IApiHostCapture HostCapture(IWfShell wf)
             => ApiHostCapture.create(wf);
 
-        /// <summary>
-        /// Creates an asm processor
-        /// </summary>
-        /// <param name="context">The process context</param>
-        [MethodImpl(Inline), Op]
-        public static IApiAsmProcessor ApiProcessor(IWfShell wf)
-        {
-            var processor = new ApiAsmProcessor(wf) as IApiAsmProcessor;
-            processor.Connect();
-            return processor;
-        }
-
         [MethodImpl(Inline), Op]
         public static IAsmFormatter formatter(in AsmFormatConfig config)
             => new AsmFormatter(config);

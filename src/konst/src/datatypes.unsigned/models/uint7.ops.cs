@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="x2">The third bit value, if specified; otherwise, defaults to 0</param>
         /// <param name="x3">The fourth/highest bit value, if specified; otherwise, defaults to 0</param>
         [MethodImpl(Inline), Op]
-        public static U uint7(BitState x0, BitState x1 = default, BitState x2 = default, BitState x3 = default, BitState x4 = default, BitState x5 = default, BitState x6 = default)
+        public static U uint7(bit x0, bit x1 = default, bit x2 = default, bit x3 = default, bit x4 = default, bit x5 = default, bit x6 = default)
              => wrap7(((uint)x0 << 0) | ((uint)x1 << 1) | ((uint)x2 << 2) | ((uint)x3 << 3) | ((uint)x4 << 4) | ((uint)x5 << 5) | ((uint)x6 << 6));
 
         [MethodImpl(Inline), Op]
@@ -173,9 +173,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U sub(U x, U y)
+        public static U sub(U a, U b)
         {
-            var diff = (int)x - (int)y;
+            var diff = (int)a - (int)b;
             return wrap7(diff < 0 ? (uint)(diff + U.Mod) : (uint)diff);
         }
 
@@ -259,5 +259,27 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint7 extend(W7 w, uint2 src)
             => new U(src.data);
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> bits(uint7 src)
+        {
+            var storage = 0ul;
+            var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
+            if(bit.test(src,0))
+                seek(dst,0) = bit.On;
+            if(bit.test(src,1))
+                seek(dst,1) = bit.On;
+            if(bit.test(src,2))
+                seek(dst,2) = bit.On;
+            if(bit.test(src,3))
+                seek(dst,3) = bit.On;
+            if(bit.test(src,4))
+                seek(dst,4) = bit.On;
+            if(bit.test(src,5))
+                seek(dst,5) = bit.On;
+            if(bit.test(src,6))
+                seek(dst,6) = bit.On;
+            return dst;
+        }
     }
 }

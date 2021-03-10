@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class WfBroker : IWfBroker
     {
@@ -67,12 +66,12 @@ namespace Z0
 
         void Emit(IWfEvent e)
         {
-            iter(Receivers.Values, r => r(e));
+            root.iter(Receivers.Values, r => r(e));
         }
 
         void Emit(IAppEvent e)
         {
-            iter(Receivers.Values, r => r(e));
+            root.iter(Receivers.Values, r => r(e));
         }
 
         public void Raise(IWfEvent e)

@@ -18,7 +18,7 @@ namespace Z0.Asm
     /// REX = [ [0100] | W:4 | R:3 | X:2 | B:1 ]
     /// </summary>
     [ApiHost]
-    public struct RexBits : IScalarBitField<byte>
+    public struct RexBits : INumericBits<byte>
     {
         [MethodImpl(Inline), Op]
         public static bit test(byte src)
@@ -34,7 +34,7 @@ namespace Z0.Asm
         public RexBits(byte src)
             => Data = src;
 
-        public byte Scalar
+        public byte Content
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -53,10 +53,10 @@ namespace Z0.Asm
         public bit W
         {
             [MethodImpl(Inline)]
-            get => bit.test(Scalar, (byte)RFI.W);
+            get => bit.test(Content, (byte)RFI.W);
 
             [MethodImpl(Inline)]
-            set => Update(bit.set(Scalar, (byte)RFI.W, value));
+            set => Update(bit.set(Content, (byte)RFI.W, value));
         }
 
         /// <summary>
@@ -65,10 +65,10 @@ namespace Z0.Asm
         public bit R
         {
             [MethodImpl(Inline)]
-            get => bit.test(Scalar, (byte)RFI.R);
+            get => bit.test(Content, (byte)RFI.R);
 
             [MethodImpl(Inline)]
-            set => Update(bit.set(Scalar, (byte)RFI.R, value));
+            set => Update(bit.set(Content, (byte)RFI.R, value));
         }
 
         /// <summary>
@@ -77,10 +77,10 @@ namespace Z0.Asm
         public bit X
         {
             [MethodImpl(Inline)]
-            get => bit.test(Scalar, (byte)RFI.X);
+            get => bit.test(Content, (byte)RFI.X);
 
             [MethodImpl(Inline)]
-            set => Update(bit.set(Scalar, (byte)RFI.X, value));
+            set => Update(bit.set(Content, (byte)RFI.X, value));
         }
 
         /// <summary>
@@ -89,10 +89,10 @@ namespace Z0.Asm
         public bit B
         {
             [MethodImpl(Inline)]
-            get => bit.test(Scalar,(byte)RFI.B);
+            get => bit.test(Content,(byte)RFI.B);
 
             [MethodImpl(Inline)]
-            set => Update(bit.set(Scalar,(byte)RFI.B, value));
+            set => Update(bit.set(Content,(byte)RFI.B, value));
         }
 
         public RexPrefixCode Code

@@ -90,12 +90,12 @@ namespace Z0
             var z1 = (byte)5;
             Claim.eq(y1,z1);
 
-            var x2 = uint4(BitState.On,BitState.Off,BitState.On,BitState.On);
+            var x2 = uint4(bit.On, bit.Off, bit.On, bit.On);
             byte y2 = x2;
             var z2 = (byte)0b1101;
             Claim.eq(y2,z2);
 
-            var x3 = uint4(BitState.On, BitState.Off, BitState.On, BitState.On);
+            var x3 = uint4(bit.On, bit.Off, bit.On, bit.On);
             byte y3 = x3;
             var z3 = (byte)0b1101;
             Claim.eq(y3,z3);

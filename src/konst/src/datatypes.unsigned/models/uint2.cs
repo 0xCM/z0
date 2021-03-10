@@ -21,6 +21,8 @@ namespace Z0
     /// </summary>
     public readonly struct uint2 : ISizedInt<U,W,K,T>
     {
+        public const byte BitCount = 2;
+
         internal readonly T data;
 
         [MethodImpl(Inline)]
@@ -446,6 +448,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new U(1,true);
+        }
+
+        public Span<bit> Bits
+        {
+            [MethodImpl(Inline)]
+            get => bits(this);
         }
     }
 }

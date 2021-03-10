@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint3(bool src)
-            => new U(BitStates.bitstate(src));
+            => wrap3(@byte(src));
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from the least 3 source bits
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="x1">The term at index 1</param>
         /// <param name="x2">The term at index 2</param>
         [MethodImpl(Inline), Op]
-        public static U uint3(BitState x0, BitState x1 = default, BitState x2 = default)
+        public static U uint3(bit x0, bit x1 = default, bit x2 = default)
              => wrap3((byte)(
                  ((uint)x0 << 0) |
                  ((uint)x1 << 1) |
@@ -178,9 +178,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static U sub(U x, U y)
+        public static U sub(U a, U b)
         {
-            var diff = (int)x - (int)y;
+            var diff = (int)a - (int)b;
             return wrap3(diff < 0 ? (byte)(diff + U.Mod) : (byte)diff);
         }
 
@@ -213,17 +213,16 @@ namespace Z0
             => wrap3(~a.data & U.MaxLiteral);
 
         [MethodImpl(Inline), Op]
-        public static U srl(U lhs, byte rhs)
-            => uint3(lhs.data >> rhs);
+        public static U srl(U lhs, byte offset)
+            => uint3(lhs.data >> offset);
 
         [MethodImpl(Inline), Op]
-        public static U sll(U lhs, byte rhs)
-            => uint3(lhs.data << rhs);
+        public static U sll(U lhs, byte offset)
+            => uint3(lhs.data << offset);
 
         [MethodImpl(Inline), Op]
         public static bit test(U src, byte pos)
-            => bit.test(src,pos);
-
+            => bit.test(src, pos);
 
         [MethodImpl(Inline), Op]
         public static U set(U src, byte pos, bit state)
@@ -238,14 +237,6 @@ namespace Z0
         public static bool eq(U x, U y)
             => x.data == y.data;
 
-        [MethodImpl(Inline), Op]
-        internal static byte reduce3(byte x)
-            => (byte)(x % U.Mod);
-
-        [MethodImpl(Inline)]
-        internal static U wrap3(byte src)
-            => new U(src,false);
-
         /// <summary>
         /// Injects the source value directly into the width-identified target, bypassing bounds-checks
         /// </summary>
@@ -253,6 +244,28 @@ namespace Z0
         /// <param name="w">The target bit-width</param>
         [MethodImpl(Inline)]
         public static U inject(byte src, W w)
+            => new U(src, false);
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> bits(U src)
+        {
+            var storage = 0ul;
+            var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);
+            if(bit.test(src,0))
+                seek(dst,0) = bit.On;
+            if(bit.test(src,1))
+                seek(dst,1) = bit.On;
+            if(bit.test(src,2))
+                seek(dst,2) = bit.On;
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        internal static byte reduce3(byte x)
+            => (byte)(x % U.Mod);
+
+        [MethodImpl(Inline)]
+        internal static U wrap3(byte src)
             => new U(src, false);
 
         [MethodImpl(Inline)]

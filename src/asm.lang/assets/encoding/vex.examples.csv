@@ -1,0 +1,10 @@
+| Mnemonic                               | VEX | RXB.map_select | W.vvvv.L.pp | Opcode    |
+| VCVTDQ2PD xmm1, xmm2/mem64             | C4  | RXB.01         | 0.1111.0.10 | E6 /r     |
+| VCVTDQ2PD ymm1, xmm2/mem128            | C4  | RXB.01         | 0.1111.1.10 | E6 /r     |
+| VPROTB xmm1, xmm2/mem128, xmm3         | 8F  | RXB.09         | 0.src.0.00  | 90 /r     |
+| VPROTB xmm1, xmm2, xmm3/mem128         | 8F  | RXB.09         | 1.src.0.00  | 90 /r     |
+| VPROTB xmm1, xmm2/mem128, imm8         | 8F  | RXB.08         | 0.1111.0.00 | 90 /r ib  |
+| VFMSUBPD xmm1, xmm2, xmm3/mem128, xmm4 | C4  | RXB.03         | 0.src.0.01  | 6D /r is4 |
+| VFMSUBPD ymm1, ymm2, ymm3/mem256, ymm4 | C4  | RXB.03         | 0.src.1.01  | 6D /r is4 |
+| VFMSUBPD xmm1, xmm2, xmm3, xmm4/mem128 | C4  | RXB.03         | 1.src.0.01  | 6D /r is4 |
+| VFMSUBPD ymm1, ymm2, ymm3, ymm4/mem256 | C4  | RXB.03         | 1.src.1.01  | 6D /r is4 |

@@ -53,10 +53,6 @@ namespace Z0
 
         TokenDispenser Tokens;
 
-        long StartToken;
-
-        long EndToken;
-
         [MethodImpl(Inline)]
         public WfShell(IWfInit config)
         {

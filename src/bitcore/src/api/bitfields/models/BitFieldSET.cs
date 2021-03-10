@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
     /// <typeparam name="E">A indexing enumeration</typeparam>
     public readonly ref struct BitField<S,E,T>
-        where S : IScalarBitField<T>
+        where S : INumericBits<T>
         where E : unmanaged
         where T : unmanaged
     {
@@ -146,7 +146,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(ReadOnlySpan<T> src, ref S dst)
         {
-            var data = dst.Scalar;
+            var data = dst.Content;
             dst.Update(api.deposit<S,T>(Spec, src, ref data));
             return ref dst;
         }

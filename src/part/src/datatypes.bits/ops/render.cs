@@ -10,14 +10,16 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public struct BitStates
+    partial struct bit
     {
-        /// <summary>
-        /// Converts a <see cref='bool' /> to a <see cref='BitState' />
-        /// </summary>
-        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static unsafe BitState bitstate(bool src)
-            => (BitState)@byte(src);
+        public static uint render(ReadOnlySpan<bit> src, Span<char> dst, uint offset)
+        {
+            var j = 0u;
+            var k = root.min(src.Length + offset, dst.Length);
+            for(uint i=offset; i<k; i++, j++)
+                seek(dst,i) = skip(src,j).ToChar();
+            return j;
+        }
     }
 }

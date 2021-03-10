@@ -452,24 +452,40 @@ namespace Z0.Asm
             Wf.EmittedFile(flow);
         }
 
-        public void Run()
+        Index<string> CollectFormExpressions()
         {
             var pipe = AsmFormPipe.create(Wf);
             var src = Db.IndexTable<AsmFormRecord>();
             var records = pipe.Load(src).View;
             var count = records.Length;
-            var blocks = alloc<string>(count);
-            ref var block = ref first(blocks);
+            var expressions = alloc<string>(count);
+            ref var block = ref first(expressions);
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(records,i);
                 seek(block, i) = record.Expression;
                 root.require(skip(block,i) != null, () => $"Row {i} is null");
-
             }
+            return expressions;
+        }
 
-            var perfect = HashFunctions.perfect(blocks);
+        void HashPerfect(Index<string> src)
+        {
+            var perfect = HashFunctions.perfect(src);
             root.iter(perfect, p => Wf.Row(p));
+
+        }
+
+        void HashPerfect()
+        {
+            HashPerfect(CollectFormExpressions());
+        }
+
+        public void Run()
+        {
+            var dst = span<char>(32);
+            var vsib = AsmBytes.vsib(0b11_100_111);
+            Wf.Status(AsmBytes.format(vsib));
 
         }
 

@@ -21,6 +21,8 @@ namespace Z0
     /// </summary>
     public readonly struct uint8T : ISizedInt<S,W,K,T>
     {
+        public const byte BitCount = 8;
+
         internal readonly T data;
 
         [MethodImpl(Inline)]
