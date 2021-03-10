@@ -44,9 +44,9 @@ namespace Z0
         public ParseResult<FS.FilePath> Parse(string src)
         {
             if(Parse(src, out var dst))
-                return z.parsed(src, dst);
+                return root.parsed(src, dst);
             else
-                return z.unparsed<FS.FilePath>(src);
+                return root.unparsed<FS.FilePath>(src);
         }
     }
 }

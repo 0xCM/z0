@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
     /// <summary>
     /// Defines a directed association between two data members
     /// </summary>
-    public class ClrLink : ILink<ClrMember>
+    public class ClrArrow : IArrow<ClrMember>
     {
         /// <summary>
         /// The supplier member
@@ -24,15 +25,21 @@ namespace Z0
         /// </summary>
         public ClrMember Target {get;}
 
+        const string MemberFormat = "{0}[{1}]";
+
         public string Identifier
-            => text.concat(Source.Name, Chars.Colon, Source.Name, " -> ", Target.Name, Chars.Colon, Target.Name);
+            => string.Format(RP.Arrow,
+                string.Format(MemberFormat, Source.Name, Source.Id),
+                string.Format(MemberFormat, Target.Name, Target.Id)
+                );
 
         [MethodImpl(Inline)]
-        public ClrLink(ClrMember s, ClrMember t)
+        public ClrArrow(ClrMember s, ClrMember t)
         {
             Source = s;
             Target = t;
         }
+
 
         public string Format()
             => Identifier;
@@ -40,5 +47,10 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrArrow((MemberInfo src, MemberInfo dst) a)
+            => new ClrArrow(a.src, a.dst);
     }
 }

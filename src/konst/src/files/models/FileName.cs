@@ -22,7 +22,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public FileName(PathPart name, FileExt ext)
-                => Name = Z0.text.format(ExtPattern, name, ext);
+                => Name = string.Format(ExtPattern, name, ext);
 
             public bool HasExtension
             {

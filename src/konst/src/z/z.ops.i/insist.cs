@@ -100,13 +100,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static FilePath insist(FilePath src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            insist(src.Exists, $"The file {src} does not exist", caller, file, line);
-            return src;
-        }
-
-        [MethodImpl(Inline), Op]
         public static string insist(string src, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             insist(text.nonempty(src), $"The source text was empty", caller, file, line);

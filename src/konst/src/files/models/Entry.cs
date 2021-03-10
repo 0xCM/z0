@@ -28,7 +28,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => Z0.text.format(FormatPattern, Kind, Name);
+                => string.Format(FormatPattern, Kind, Name);
 
             [MethodImpl(Inline)]
             public bool Equals(FsEntry src)

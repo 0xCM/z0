@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines kinded link
     /// </summary>
-    public readonly struct Link<S,T,K> : ILink<S,T,K>
+    public readonly struct Arrow<S,T,K> : IArrow<S,T,K>
         where K : unmanaged
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
         public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public Link(S src, T dst, K kind)
+        public Arrow(S src, T dst, K kind)
         {
             Kind = kind;
             Source = src;
@@ -39,11 +39,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Link<S,T,K>(Tripled<S,T,K> src)
-            => new Link<S,T,K>(src.First, src.Second, src.Third);
+        public static implicit operator Arrow<S,T,K>(Tripled<S,T,K> src)
+            => new Arrow<S,T,K>(src.First, src.Second, src.Third);
 
         [MethodImpl(Inline)]
-        public static implicit operator Tripled<K,S,T>(Link<S,T,K> x)
+        public static implicit operator Tripled<K,S,T>(Arrow<S,T,K> x)
             => (x.Kind, x.Source, x.Target);
     }
 }

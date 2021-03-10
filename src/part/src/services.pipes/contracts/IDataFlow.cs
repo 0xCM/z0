@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataFlow : ILink
+    public interface IDataFlow : IArrow
     {
 
     }
@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
     [Free]
-    public interface IDataFlow<S,T> : IDataFlow, ILink<S,T>
+    public interface IDataFlow<S,T> : IDataFlow, IArrow<S,T>
     {
 
     }

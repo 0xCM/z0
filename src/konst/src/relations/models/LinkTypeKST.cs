@@ -40,7 +40,7 @@ namespace Z0
             => (int)api.hash32(this);
 
         public static implicit operator Type(LinkType<S,T,K> src)
-            => typeof(Link<S,T,K>);
+            => typeof(Arrow<S,T,K>);
 
         [MethodImpl(Inline)]
         public static implicit operator LinkType(LinkType<S,T,K> src)

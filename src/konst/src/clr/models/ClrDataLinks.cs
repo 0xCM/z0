@@ -13,14 +13,14 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
-    public sealed class ClrDataLinks<S,T> : IEnumerable<ClrLink>
+    public sealed class ClrDataLinks<S,T> : IEnumerable<ClrArrow>
     {
-        HashSet<ClrLink> Associations {get;}
+        HashSet<ClrArrow> Associations {get;}
 
-        public ClrDataLinks(IEnumerable<ClrLink> associations)
+        public ClrDataLinks(IEnumerable<ClrArrow> associations)
             => Associations = associations.ToHashSet();
 
-        public IEnumerator<ClrLink> GetEnumerator()
+        public IEnumerator<ClrArrow> GetEnumerator()
             => Associations.GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()

@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Graphs;
 
-    public readonly struct Link<S,T> : ILink<S,T>
+    public readonly struct Link<S,T> : IArrow<S,T>
     {
         public S Source {get;}
 

@@ -37,9 +37,9 @@ namespace Z0
             => new Link<S,T>(src, dst);
 
         [MethodImpl(Inline)]
-        public static Link<S,T,K> link<S,T,K>(S src, T dst, K kind)
+        public static Arrow<S,T,K> link<S,T,K>(S src, T dst, K kind)
             where K : unmanaged
-                => new Link<S,T,K>(src, dst, kind);
+                => new Arrow<S,T,K>(src, dst, kind);
 
         /// <summary>
         /// Connects a source vertex to a target vertex

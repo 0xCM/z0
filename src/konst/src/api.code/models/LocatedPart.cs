@@ -16,7 +16,7 @@ namespace Z0
     {
         public IPart Part {get;}
 
-        public FilePath ImagePath {get;}
+        public FS.FilePath ImagePath {get;}
 
         public MemoryAddress BaseAddress {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         public LocatedPart(IPart part, MemoryAddress @base, ByteSize size)
         {
             Part = part;
-            ImagePath = FilePath.Define(part.Owner.Location);
+            ImagePath = FS.path(part.Owner.Location);
             BaseAddress = @base;
             Size = size;
         }

@@ -64,9 +64,6 @@ namespace Z0
         public static FilePath operator + (FolderPath path, FileName file)
             => FilePath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, FilePathSep, file.Name));
 
-        public static FolderPath operator + (FolderPath path, RelativeLocation location)
-            => FolderPath.Define(string.Concat(path.WithoutSeparatorSuffix.Name, FilePathSep, location.Name));
-
         [MethodImpl(Inline)]
         public static bool operator ==(FolderPath x, FolderPath y)
             => x.Equals(y);

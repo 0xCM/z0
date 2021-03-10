@@ -15,5 +15,10 @@ namespace Z0
         /// Defines the literal '| '
         /// </summary>
         public const string PipeJoin = "| ";
+
+        /// <summary>
+        /// Defines the literal '{0} -> {1}'
+        /// </summary>
+        public const string Arrow = "{0} -> {1}";
     }
 }

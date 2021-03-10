@@ -66,15 +66,19 @@ namespace Z0
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrMember(FieldInfo src)
-            => from(src);
+        public static implicit operator ClrMember(MemberInfo src)
+            => new ClrMember(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMember(MethodInfo src)
-            => from(src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator ClrMember(FieldInfo src)
+        //     => new ClrMember(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMember(PropertyInfo src)
-            => from(src);
+        // [MethodImpl(Inline)]
+        // public static implicit operator ClrMember(MethodInfo src)
+        //     => new ClrMember(src);
+
+        // [MethodImpl(Inline)]
+        // public static implicit operator ClrMember(PropertyInfo src)
+        //     => new ClrMember(src);
     }
 }

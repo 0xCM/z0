@@ -109,10 +109,6 @@ namespace Z0
             public static implicit operator Files(FilePath[] src)
                 => new Files(src);
 
-            [MethodImpl(Inline)]
-            public static implicit operator Files(Z0.FilePath[] src)
-                => new Files(src.Select(x => FS.path(x.Name)));
-
             public static Files Empty
                 => new Files(sys.empty<FilePath>());
         }

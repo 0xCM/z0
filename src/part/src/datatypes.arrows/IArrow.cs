@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ILink : ITextual, IIdentified
+    public interface IArrow : ITextual, IIdentified
     {
         string ITextual.Format()
             => Identifier;
@@ -19,30 +19,30 @@ namespace Z0
     /// <typeparam name="S">The first party type</typeparam>
     /// <typeparam name="T">The second party type</typeparam>
     [Free]
-    public interface ILink<S,T> : ILink
+    public interface IArrow<S,T> : IArrow
     {
         S Source {get;}
 
         T Target {get;}
 
         string IIdentified.Identifier
-            => string.Format("{0} -> {1}", Source, Target);
+            => string.Format(RP.Arrow, Source, Target);
         string ITextual.Format()
             => Identifier;
     }
 
     [Free]
-    public interface ILink<T> : ILink<T,T>
+    public interface IArrow<T> : IArrow<T,T>
     {
 
     }
 
     [Free]
-    public interface ILink<S,T,K> : ILink<S,T>, IKinded<K>
+    public interface IArrow<S,T,K> : IArrow<S,T>, IKinded<K>
         where K : unmanaged
     {
         string IIdentified.Identifier
-            => string.Format("{0} -> {1}", Source, Target);
+            => string.Format(RP.Arrow, Source, Target);
         string ITextual.Format()
             => Identifier;
    }

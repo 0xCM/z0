@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
 
     partial class XFs
     {

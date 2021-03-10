@@ -25,7 +25,7 @@ namespace Z0
         public static ResExtractor Service(Assembly src = null)
             => new ResExtractor(src ?? Assembly.GetCallingAssembly());
 
-        public ParseResult<AppResDoc> ExtractDocument(FileName name)
+        public ParseResult<AppResDoc> ExtractDocument(FS.FileName name)
             => ExtractDocument(name.Name);
 
         public string[] ResourceNames

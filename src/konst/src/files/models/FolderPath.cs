@@ -189,9 +189,9 @@ namespace Z0
             static SearchOption option(bool recurse)
                 => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-            [MethodImpl(Inline)]
-            public static implicit operator Z0.FolderPath(FolderPath src)
-                => Z0.FolderPath.Define(src.Name);
+            // [MethodImpl(Inline)]
+            // public static implicit operator Z0.FolderPath(FolderPath src)
+            //     => Z0.FolderPath.Define(src.Name);
 
             static FilePath[] Files(FolderPath src, bool recurse, params FileExt[] ext)
                 => ext.SelectMany(x => Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))).Map(FS.path);

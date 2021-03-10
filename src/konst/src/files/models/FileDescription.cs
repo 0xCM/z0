@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using System.IO;
-
     [Record(TableId)]
     public struct FileDescription : IRecord<FileDescription>
     {
