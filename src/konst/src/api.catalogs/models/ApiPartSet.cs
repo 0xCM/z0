@@ -35,7 +35,7 @@ namespace Z0
             Control = control;
             Source = src;
             ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            PartComponents = ApiQuery.components(ManagedSources);
+            PartComponents = WfShell.components(ManagedSources);
             ApiGlobal = ApiCatalogs.GlobalCatalog(ManagedSources);
         }
 

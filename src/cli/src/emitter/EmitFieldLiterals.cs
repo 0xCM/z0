@@ -50,7 +50,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Wf.Api.Parts.Map(part => ApiQuery.types(part)));
+            var parts = span(Wf.Api.Parts.Map(part => ApiPartTypes.from(part)));
             foreach(var part in parts)
             {
                 try

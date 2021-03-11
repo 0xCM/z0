@@ -14,6 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct ApiPartTypes
     {
+        [MethodImpl(Inline), Op]
+        public static ApiPartTypes from(IPart src)
+            => new ApiPartTypes(src.Id, src.Owner.Types());
+
         public PartId Part {get;}
 
         public Index<Type> Types {get;}

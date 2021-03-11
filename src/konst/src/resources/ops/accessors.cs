@@ -102,7 +102,7 @@ namespace Z0
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ApiResAccessor(ApiQuery.uri(src), x, ApiAccessorKind(x.ReturnType)));
+                  .Select(x => new ApiResAccessor(src.HostUri(), x, ApiAccessorKind(x.ReturnType)));
 
         static Type[] ResAccessorTypes
             => new Type[]{ByteSpanAcessorType, CharSpanAcessorType};

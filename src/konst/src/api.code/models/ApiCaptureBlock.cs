@@ -39,7 +39,7 @@ namespace Z0
             Parsed = parsed;
             Method = method;
             root.require(extracted.BaseAddress == parsed.BaseAddress, () => $"Parsed address {parsed.BaseAddress} does not match the extracted base address {extracted.BaseAddress}");
-            OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
+            OpUri = OpUri.hex(method.DeclaringType.HostUri(), method.Name, id);
             TermCode = term;
             Cil = ClrDynamic.cil(parsed.BaseAddress, OpUri, method);
             CliSig = CliSigs.resolve(method);

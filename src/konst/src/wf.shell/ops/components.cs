@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ApiQuery
+    partial class WfShell
     {
         /// <summary>
         /// Loads an assembly from a potential part path

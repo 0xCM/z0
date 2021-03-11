@@ -5,18 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static z;
+    using static Part;
 
-    partial struct ApiQuery
+    partial class XApi
     {
         [Op]
-        public static ApiHostUri uri(Type host)
+        public static ApiHostUri HostUri(this Type host)
         {
             if(host != null)
             {
                 var tag = host.Tag<ApiHostAttribute>();
-                var name = ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+                var name = text.ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name).ToLower();
                 var owner = host.Assembly.Id();
                 return new ApiHostUri(owner, name);
             }

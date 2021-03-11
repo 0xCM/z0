@@ -27,7 +27,7 @@ namespace Z0
         Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
-        internal ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods)
+        public ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods)
         {
             HostType = host;
             Uri = uri;

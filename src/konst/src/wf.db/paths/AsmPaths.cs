@@ -26,10 +26,10 @@ namespace Z0
             => AsmRoot() + ApiFileName(part, api, Asm);
 
         FS.FilePath AsmFile(Type host)
-            => AsmFile(ApiQuery.hosturi(host));
+            => AsmFile(host.HostUri());
 
         FS.FilePath AsmFile<T>()
-            => AsmFile(ApiQuery.hosturi<T>());
+            => AsmFile(typeof(T).HostUri());
 
         FS.FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, Asm);

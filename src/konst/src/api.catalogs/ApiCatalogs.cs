@@ -11,8 +11,6 @@ namespace Z0
 
     using static memory;
 
-    using Q = ApiQuery;
-
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
@@ -70,7 +68,7 @@ namespace Z0
         [Op]
         public static Index<ApiHost> ApiHosts(Assembly src)
         {
-            var _id = Q.id(src);
+            var _id = src.Id();
             return ApiHostTypes(src).Select(h => ApiHost(_id, h));
         }
 
@@ -173,7 +171,7 @@ namespace Z0
         /// </summary>
         [Op]
         static Option<IPart> part(FS.FilePath src)
-                => from c in Q.component(src)
+                => from c in WfShell.component(src)
                 from t in resolve(c)
                 from p in resolve(t)
                 from part in resolve(p)

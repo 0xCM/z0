@@ -23,7 +23,7 @@ namespace Z0
                 ref readonly var method = ref skip(methods,i);
                 var address = ApiJit.jit(method);
                 var located = new LocatedMethod(method.Identify(), method, address);
-                var uri = OpUri.located(ApiQuery.hosturi(method.DeclaringType), method.Name, method.Identify());
+                var uri = OpUri.located(method.DeclaringType.HostUri(), method.Name, method.Identify());
                 var body = method.GetMethodBody();
                 var sig = method.ResolveSignature();
                 if(body != null)

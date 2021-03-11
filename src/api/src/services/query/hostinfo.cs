@@ -15,10 +15,10 @@ namespace Z0
         public static ApiHostInfo hostinfo(Type t)
         {
             var ass = t.Assembly;
-            var part = id(ass);
-            var u = uri(t);
+            var part = ass.Id();
+            var uri = t.HostUri();
             var methods = t.DeclaredMethods();
-            return new ApiHostInfo(t, u, part, methods);
+            return new ApiHostInfo(t, uri, part, methods);
         }
 
         [Op]

@@ -11,7 +11,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     [ApiHost(ApiNames.ApiCode, true)]
     public readonly struct ApiCode
     {

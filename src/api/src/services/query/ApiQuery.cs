@@ -11,8 +11,6 @@ namespace Z0
 
     using static memory;
 
-    using Q = ApiQuery;
-
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly partial struct ApiQuery
     {
@@ -23,7 +21,7 @@ namespace Z0
         [Op]
         public static IGlobalApiCatalog catalog(Index<Assembly> src)
         {
-            var candidates = src.Where(Q.isPart);
+            var candidates = src.Where(x => x.IsPart());
             var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id).Array();
             return new GlobalApiCatalog(parts);
         }

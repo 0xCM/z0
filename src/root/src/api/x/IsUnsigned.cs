@@ -7,11 +7,16 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
     public static partial class XTend
     {
+        [MethodImpl(Inline), Op]
+        public static bool IsPart(this Assembly src)
+            => Attribute.IsDefined(src, typeof(PartIdAttribute));
+
         /// Determines whether the unsigned facet of a block classification is enabled
         /// </summary>
         /// <param name="k">The vector classifier</param>

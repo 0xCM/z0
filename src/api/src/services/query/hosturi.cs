@@ -19,9 +19,6 @@ namespace Z0
             return new ApiHostUri(t.Assembly.Id(), name);
         }
 
-        public static ApiHostUri hosturi<T>()
-            => hosturi(typeof(T));
-
         /// <summary>
         /// Determines the api host that owns the file, if any
         /// </summary>
