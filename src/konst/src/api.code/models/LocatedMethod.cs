@@ -33,10 +33,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator MemorySegment(LocatedMethod src)
-            => src.MemRef;
-
-        [MethodImpl(Inline)]
         public LocatedMethod(OpIdentity id, MethodInfo method, MemoryAddress location)
         {
             Id = id;
@@ -59,5 +55,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(LocatedMethod src)
             => Address.CompareTo(src.Address);
+
+        [MethodImpl(Inline)]
+        public static implicit operator MemorySegment(LocatedMethod src)
+            => src.MemRef;
     }
 }

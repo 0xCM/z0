@@ -21,6 +21,10 @@ namespace Z0
             => Target = dst;
 
         [MethodImpl(Inline)]
+        public StringBuilder ToStringBuilder()
+            => Target;
+
+        [MethodImpl(Inline)]
         public string Emit(bool reset = true)
         {
             var content = Target.ToString();

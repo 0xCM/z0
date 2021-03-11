@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XTend
+    public static partial class XTend
     {
         public static MethodInfo[] Prepare(this MethodInfo[] src)
         {

@@ -16,7 +16,7 @@ namespace Z0
     {
         public readonly struct Files : IFsEntries<FilePath>
         {
-            public readonly TableSpan<FilePath> Data;
+            public readonly Index<FilePath> Data;
 
             [MethodImpl(Inline)]
             public Files(FilePath[] src)

@@ -140,9 +140,9 @@ namespace Z0
            public int CompareTo(FileName src)
                 => Name.CompareTo(src.Name);
 
-            [MethodImpl(Inline)]
-            public static implicit operator Z0.FileName(FileName src)
-                => Z0.FileName.define(src.Name);
+            // [MethodImpl(Inline)]
+            // public static implicit operator Z0.FileName(FileName src)
+            //     => Z0.FileName.define(src.Name);
 
             [MethodImpl(Inline)]
             public static FileName operator +(FileName a, FileExt b)

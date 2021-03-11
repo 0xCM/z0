@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [Op]
-        public LocatedMethod Jit(IdentifiedMethod src)
+        public LocatedMethod JitMethod(IdentifiedMethod src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
             return new LocatedMethod(src.Id, src.Method, (MemoryAddress)src.MethodHandle.GetFunctionPointer());
@@ -63,24 +63,28 @@ namespace Z0
             where D : Delegate
                 => jit(src.Untyped);
 
-        public BasedApiMembers JitApi()
+        public BasedApiMembers JitCatalog()
+        {
+            return JitCatalog(Wf.ApiParts.ApiGlobal);
+        }
+
+        public BasedApiMembers JitCatalog(IGlobalApiCatalog catalog)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
-            var catalog = Wf.ApiParts.ApiGlobal;
             var parts = catalog.Parts;
             var kParts = parts.Length;
             var flow = Wf.Running(Msg.JittingParts.Format(kParts));
             var all = root.list<ApiMembers>();
             var total = 0u;
             foreach(var part in parts)
-                all.Add(Jit(part));
+                all.Add(JitPart(part));
 
             var members = new BasedApiMembers(@base, all.SelectMany(x => x).OrderBy(x => x.BaseAddress).Array());
             Wf.Ran(flow, Msg.JittedParts.Format(members.MemberCount, parts.Length));
             return members;
         }
 
-        public ApiMembers Jit(IApiHost src)
+        public ApiMembers JitHost(IApiHost src)
         {
             var direct = JitDirect(src);
             var generic = JitGeneric(src);
@@ -101,7 +105,7 @@ namespace Z0
             return collected;
         }
 
-        public ApiMembers Jit(IPart src)
+        public ApiMembers JitPart(IPart src)
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var dst = root.list<ApiMember>();
@@ -111,8 +115,9 @@ namespace Z0
 
             foreach(var t in types)
                 dst.AddRange(Jit(t));
+
             foreach(var h in hosts)
-                dst.AddRange(Jit(h));
+                dst.AddRange(JitHost(h));
 
             Wf.Ran(flow, Msg.JittedPart.Format(dst.Count, src.Id));
 

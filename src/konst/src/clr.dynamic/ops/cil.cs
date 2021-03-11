@@ -15,20 +15,20 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicMethod src)
-            => new CilMethod(src.Name, cilbytes(src), src.GetMethodImplementationFlags());
+        {
+            var flags = src.GetMethodImplementationFlags();
+            var uri = OpUri.located(ApiQuery.hosturi(src.DeclaringType), src.Name, src.Identify());
+            MemoryAddress address = pointer(src);
+            return new CilMethod(src.MetadataToken, address, uri, src.ResolveSignature(), cilbytes(src), flags);
+        }
 
         [MethodImpl(Inline), Op]
         public static CilMethod cil(DynamicDelegate src)
             => cil(src.Target);
 
-        [MethodImpl(Inline)]
-        public static CilMethod cil<D>(DynamicDelegate<D> src)
-            where D : Delegate
-                => cil(src.Untyped);
-
         [MethodImpl(Inline), Op]
         public static CilMethod cil(MemoryAddress @base, OpUri uri, MethodInfo src)
-            => new CilMethod(@base, uri.Format(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+            => new CilMethod(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376

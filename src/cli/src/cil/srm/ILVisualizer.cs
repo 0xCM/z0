@@ -159,13 +159,9 @@ namespace System.Reflection.Metadata
             if (codeSize >= 0 && maxStack >= 0)
             {
                 if (codeSize == 0)
-                {
                     sb.AppendLine("  // Unrealized IL");
-                }
                 else
-                {
                     sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "  // Code size {0,8} (0x{0:x})", codeSize));
-                }
 
                 sb.AppendLine(string.Format(CultureInfo.InvariantCulture, "  .maxstack  {0}", maxStack));
             }
@@ -177,15 +173,11 @@ namespace System.Reflection.Metadata
 
                 sb.Append(i == 0 ? localsDecl : new string(' ', localsDecl.Length));
                 if (local.IsPinned)
-                {
                     sb.Append("pinned ");
-                }
 
                 sb.Append(VisualizeLocalType(local.Type));
                 if (local.IsByRef)
-                {
                     sb.Append("&");
-                }
 
                 sb.Append(" ");
                 sb.Append("V_" + i);

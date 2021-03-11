@@ -88,7 +88,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.FormatHex();
+            => Data.FormatHex(zpad:false);
 
 
         public override string ToString()

@@ -26,6 +26,127 @@ namespace Z0
     {
         public IApiJit ApiJit {get; private set;}
 
+        protected override void OnInit()
+        {
+            ApiJit = Z0.ApiJit.create(Wf);
+        }
+
+        public Index<ApiCatalogRecord> LoadCatalogRecords()
+        {
+            var dir = Db.IndexDir<ApiCatalogRecord>();
+            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
+            var parser = Records.parser<ApiCatalogRecord>(parse);
+            var rows = root.list<ApiCatalogRecord>();
+            if(files.Length != 0)
+            {
+                var src = files[files.Length - 1];
+                using var reader = src.Reader();
+                var index = uint.MaxValue;
+                reader.ReadLine();
+                var line = reader.ReadLine();
+                while(line != null)
+                {
+                    var outcome = parser.ParseRow(line, out var row);
+                    if(outcome)
+                        rows.Add(row);
+                    else
+                    {
+                        Wf.Error(outcome.Message);
+                        return sys.empty<ApiCatalogRecord>();
+                    }
+                    line = reader.ReadLine();
+                }
+            }
+
+            return rows.ToArray();
+        }
+
+        public Index<DataType> DataTypes()
+            => Z0.DataTypes.search(Wf.Components);
+
+        public BasedApiMembers JitCatalog()
+            => ApiJit.JitCatalog();
+
+        public BasedApiMemberCatalog RebaseMembers()
+        {
+            return RebaseMembers(JitCatalog());
+        }
+
+        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src)
+        {
+            var dst = Db.IndexTable<ApiCatalogRecord>(root.timestamp().Format());
+            var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
+            var records = CatalogRecords(src.Base, src.Members.View);
+            var count = Records.emit<ApiCatalogRecord>(records, dst, 16);
+            Wf.EmittedTable<ApiCatalogRecord>(flow, count, dst);
+            return new BasedApiMemberCatalog(dst, src, records);
+        }
+
+        public void EmitApiClasses()
+        {
+            var dst = Db.IndexTable("api.classes");
+            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
+            var service = ApiCatalogs.classes(Wf);
+            var formatter = Records.formatter<SymbolicLiteral>();
+            var classifiers = service.Classifiers();
+            var literals = classifiers.SelectMany(x => x.Literals);
+            var count = Records.emit(literals, dst);
+            Wf.EmittedTable(flow, count);
+        }
+
+        public void EmitSymbolicLiterals()
+        {
+            var target = Db.IndexTable(SymbolicLiteral.TableId);
+            var components = Wf.Components;
+            EmitSymbolicLiterals(Wf.Components, target);
+        }
+
+        public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
+        {
+            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
+            var rows = Clr.enums(src).Sort();
+            var kRows = rows.Length;
+            using var writer = dst.Writer();
+            var formatter = Records.formatter<SymbolicLiteral>(16);
+            writer.WriteLine(formatter.FormatHeader());
+
+            for(var i=0; i<kRows; i++)
+                writer.WriteLine(formatter.Format(rows[i]));
+
+            Wf.EmittedTable<SymbolicLiteral>(flow, rows.Length);
+            return rows;
+        }
+
+        public Index<SymbolicLiteral> LoadSymbolicLiterals(TextDoc src)
+        {
+            var rc = src.RowCount;
+            var dst = alloc<SymbolicLiteral>(rc);
+            var parser = HexByteParser.Service;
+            for(var i=0; i<rc; i++)
+            {
+                ref readonly var row = ref src[i];
+                if(row.CellCount >= 3)
+                {
+                    var data = row[2];
+                    var result = parser.ParseData(data);
+                    if(result.Succeeded)
+                    {
+                        var bytes = span(result.Value);
+                        var storage = 0ul;
+                        ref var store = ref @as<ulong,byte>(storage);
+                        var count = root.min(bytes.Length,8);
+                        for(var j=0u; j<count; j++)
+                            seek(store,j) = skip(bytes,j);
+
+                        dst[i] = default;
+                    }
+                }
+                else
+                    dst[i] = default;
+            }
+            return dst;
+        }
+
         public IApiHexIndexer HexIndexer()
             => ApiHexIndexer.create(Wf);
 
@@ -49,7 +170,7 @@ namespace Z0
         public ApiHostCatalog HostCatalog(IApiHost src)
         {
             var flow = Wf.Running(Msg.CreatingHostCatalog.Format(src.Uri));
-            var members = ApiJit.Jit(src);
+            var members = ApiJit.JitHost(src);
             var result = members.Length == 0 ? ApiHostCatalog.Empty : new ApiHostCatalog(src, members.Sort());
             Wf.Ran(flow, Msg.CreatedHostCatalog.Format(src.Uri, members.Count));
             return result;
@@ -128,95 +249,6 @@ namespace Z0
         }
 
 
-        protected override void OnInit()
-        {
-            ApiJit = Z0.ApiJit.create(Wf);
-        }
-
-        public Index<DataType> DataTypes()
-            => Z0.DataTypes.search(Wf.Components);
-
-        public BasedApiMemberCatalog RebaseMembers()
-        {
-            var members = ApiJit.JitApi();
-            return RebaseMembers(members);
-        }
-
-        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src)
-        {
-            var dst = Db.IndexTable<ApiCatalogRecord>(root.timestamp().Format());
-            var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
-            var records = CatalogRecords(src.Base, src.Members.View);
-            var count = Records.emit<ApiCatalogRecord>(records, dst, 16);
-            Wf.EmittedTable<ApiCatalogRecord>(flow, count, dst);
-            return new BasedApiMemberCatalog(dst, src, records);
-        }
-
-        public void EmitApiClasses()
-        {
-            var dst = Db.IndexTable("api.classes");
-            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var service = ApiCatalogs.classes(Wf);
-            var formatter = Records.formatter<SymbolicLiteral>();
-            var classifiers = service.Classifiers();
-            var literals = classifiers.SelectMany(x => x.Literals);
-            var count = Records.emit(literals, dst);
-            Wf.EmittedTable(flow, count);
-        }
-
-        public void EmitSymbolicLiterals()
-        {
-            var target = Db.IndexTable(SymbolicLiteral.TableId);
-            var components = Wf.Components;
-            EmitSymbolicLiterals(Wf.Components, target);
-        }
-
-        public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
-        {
-            var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var rows = Clr.enums(src).Sort();
-            var kRows = rows.Length;
-            using var writer = dst.Writer();
-            var formatter = Records.formatter<SymbolicLiteral>(16);
-            writer.WriteLine(formatter.FormatHeader());
-
-            for(var i=0; i<kRows; i++)
-                writer.WriteLine(formatter.Format(rows[i]));
-
-            Wf.EmittedTable<SymbolicLiteral>(flow, rows.Length);
-            return rows;
-        }
-
-        public Index<SymbolicLiteral> LoadSymbolicLiterals(TextDoc src)
-        {
-            var rc = src.RowCount;
-            var dst = alloc<SymbolicLiteral>(rc);
-            var parser = HexByteParser.Service;
-            for(var i=0; i<rc; i++)
-            {
-                ref readonly var row = ref src[i];
-                if(row.CellCount >= 3)
-                {
-                    var data = row[2];
-                    var result = parser.ParseData(data);
-                    if(result.Succeeded)
-                    {
-                        var bytes = span(result.Value);
-                        var storage = 0ul;
-                        ref var store = ref @as<ulong,byte>(storage);
-                        var count = root.min(bytes.Length,8);
-                        for(var j=0u; j<count; j++)
-                            seek(store,j) = skip(bytes,j);
-
-                        dst[i] = default;
-                    }
-                }
-                else
-                    dst[i] = default;
-            }
-            return dst;
-        }
-
         [Op]
         Index<ApiCatalogRecord> CatalogRecords(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
@@ -239,36 +271,6 @@ namespace Z0
                 record.OpUri = member.OpUri.UriText;
             }
             return buffer;
-        }
-
-        public Index<ApiCatalogRecord> LoadApiCatalog()
-        {
-            var dir = Db.IndexDir<ApiCatalogRecord>();
-            var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
-            var parser = Records.parser<ApiCatalogRecord>(parse);
-            var rows = root.list<ApiCatalogRecord>();
-            if(files.Length != 0)
-            {
-                var src = files[files.Length - 1];
-                using var reader = src.Reader();
-                var index = uint.MaxValue;
-                reader.ReadLine();
-                var line = reader.ReadLine();
-                while(line != null)
-                {
-                    var outcome = parser.ParseRow(line, out var row);
-                    if(outcome)
-                        rows.Add(row);
-                    else
-                    {
-                        Wf.Error(outcome.Message);
-                        return sys.empty<ApiCatalogRecord>();
-                    }
-                    line = reader.ReadLine();
-                }
-            }
-
-            return rows.ToArray();
         }
 
         static Outcome parse(string src, out ApiCatalogRecord dst)

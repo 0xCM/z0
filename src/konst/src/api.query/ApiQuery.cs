@@ -9,14 +9,41 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
+    using static memory;
+
+    using Q = ApiQuery;
+
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly partial struct ApiQuery
     {
-        // public static ApiGroupNG[] ImmDirect(ApiHost host, RefinementClass kind)
-        //     => from g in direct(host)
-        //         let imm = ImmGroup(host, g, kind)
-        //         where !imm.IsEmpty
-        //         select g;
+        /// <summary>
+        /// Creates a system-level api catalog over a specified component set
+        /// </summary>
+        /// <param name="src">The source components</param>
+        [Op]
+        public static IGlobalApiCatalog catalog(Index<Assembly> src)
+        {
+            var candidates = src.Where(Q.isPart);
+            var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id).Array();
+            return new GlobalApiCatalog(parts);
+        }
+
+        /// <summary>
+        /// Attempts to resolve a part resolution type
+        /// </summary>
+        [Op]
+        static Option<IPart> TryGetPart(Assembly src)
+        {
+            try
+            {
+                return root.some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+            }
+            catch(Exception e)
+            {
+                term.error(text.format("Assembly {0} | {1}", src.GetSimpleName(), e));
+                return root.none<IPart>();
+            }
+        }
 
         public static ApiGroupNG[] ImmDirect(IApiHost host, RefinementClass kind)
             => from g in direct(host)
@@ -24,18 +51,11 @@ namespace Z0
                 where !imm.IsEmpty
                 select g;
 
-        // public static ApiMethodG[] ImmGeneric(ApiHost host, RefinementClass kind)
-        //     => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
-
         public static ApiMethodG[] ImmGeneric(IApiHost host, RefinementClass kind)
             => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
 
         static MethodInfo[] TaggedOps(IApiHost src)
             => src.Methods.Storage.Tagged<OpAttribute>();
-
-        // static ApiGroupNG[] direct(ApiHost src)
-        //     => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
-        //         select new ApiGroupNG(OpIdentityParser.parse(d.Key), src, d)).Array();
 
         static ApiGroupNG[] direct(IApiHost src)
             => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
@@ -52,12 +72,6 @@ namespace Z0
                 let closures = ApiJit.NumericClosureKinds(m)
                 where closures.Length != 0
                 select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
-
-        // static ApiMethodG[] generic(ApiHost src)
-        //      => from m in TaggedOps(src).OpenGeneric()
-        //         let closures = ApiJit.NumericClosureKinds(m)
-        //         where closures.Length != 0
-        //         select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
         static ApiGroupNG ImmGroup(IApiHost host, ApiGroupNG g, RefinementClass kind)
             => new ApiGroupNG(g.GroupId, host,

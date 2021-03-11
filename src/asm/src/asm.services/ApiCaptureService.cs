@@ -105,7 +105,7 @@ namespace Z0
         {
             try
             {
-                return Extractor.Extract(Services.ApiJit.Jit(host));
+                return Extractor.Extract(Services.ApiJit.JitHost(host));
             }
             catch(Exception e)
             {

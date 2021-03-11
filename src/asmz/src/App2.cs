@@ -481,14 +481,27 @@ namespace Z0.Asm
             HashPerfect(CollectFormExpressions());
         }
 
+        void EmitMsil()
+        {
+            var pipe = Wf.IlPipe();
+            var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
+            var buffer = text.buffer();
+            var methods = Cil.methods(members);
+            root.iter(methods, m => pipe.Render(m,buffer));
+            using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Extensions.Il)).Writer();
+            writer.Write(buffer.Emit());
+            //root.iter(methods, m => pipe.Render(m,buffer));
+        }
+
         public void Run()
         {
             // var dst = span<char>(32);
             // var vsib = AsmBytes.vsib(0b11_100_111);
             // Wf.Status(AsmBytes.format(vsib));
 
-            var commands = Wf.AsmWfCmd();
-            commands.Run(AsmWfCmdKind.EmitAsmRows);
+            EmitMsil();
+            // var commands = Wf.AsmWfCmd();
+            // commands.Run(AsmWfCmdKind.EmitAsmRows);
         }
 
         public static void Main(params string[] args)

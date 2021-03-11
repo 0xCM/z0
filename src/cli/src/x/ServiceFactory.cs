@@ -16,5 +16,8 @@ namespace Z0
 
         public static IWfCmdHost<CliWfCmdKind> CliWfCmd(this IWfShell wf)
             => CliWfCmdHost.create(wf);
+
+        public static MsilPipe IlPipe(this IWfShell wf)
+            => MsilPipe.create(wf);
     }
 }

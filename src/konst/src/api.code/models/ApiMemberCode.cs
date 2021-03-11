@@ -35,6 +35,30 @@ namespace Z0
         /// </summary>
         public ApiCodeBlock Encoded {get;}
 
+        [MethodImpl(Inline)]
+        public ApiMemberCode(ApiMember member, ApiCodeBlock code, uint seq = 0, ExtractTermCode term = 0)
+        {
+            Sequence = seq;
+            Member = member;
+            Encoded = code;
+            TermCode = term;
+        }
+
+        [MethodImpl(Inline)]
+        ApiMemberCode(ApiMember member, BinaryCode code)
+        {
+            Sequence = 0;
+            Member = member;
+            Encoded = ApiCodeBlock.Empty;
+            TermCode = 0;
+        }
+
+        public ClrToken MemberToken
+        {
+            [MethodImpl(Inline)]
+            get => Member.Token;
+        }
+
         public CliSig CliSig
         {
             [MethodImpl(Inline)]
@@ -75,24 +99,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Encoded.IsNonEmpty;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiMemberCode(ApiMember member, ApiCodeBlock code, uint seq = 0, ExtractTermCode term = 0)
-        {
-            Sequence = seq;
-            Member = member;
-            Encoded = code;
-            TermCode = term;
-        }
-
-        [MethodImpl(Inline)]
-        ApiMemberCode(ApiMember member, BinaryCode code)
-        {
-            Sequence = 0;
-            Member = member;
-            Encoded = ApiCodeBlock.Empty;
-            TermCode = 0;
         }
 
         public MemoryAddress Address

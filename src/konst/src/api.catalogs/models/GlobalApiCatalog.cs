@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a catalog over one or more parts
     /// </summary>
-    public readonly struct GlobalApiCatalog : IGlobalApiCatalog
+    public class GlobalApiCatalog : IGlobalApiCatalog
     {
         /// <summary>
         /// The members of the compostion

@@ -8,13 +8,13 @@ namespace Z0
 
     public interface IApiJit
     {
-        LocatedMethod Jit(IdentifiedMethod src);
+        LocatedMethod JitMethod(IdentifiedMethod src);
 
-        BasedApiMembers JitApi();
+        BasedApiMembers JitCatalog();
 
-        ApiMembers Jit(IPart src);
+        ApiMembers JitPart(IPart src);
 
-        ApiMembers Jit(IApiHost src);
+        ApiMembers JitHost(IApiHost src);
 
         ApiMembers Jit(Index<ApiRuntimeType> src);
     }

@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     [ApiHost(ApiNames.FS, true)]
     public readonly partial struct FS
     {
-        static RenderPattern<A,B> PathJoin<A,B>()
-            where A : IFsEntry
-            where B : IFsEntry
-                => "{0}/{1}";
     }
 }

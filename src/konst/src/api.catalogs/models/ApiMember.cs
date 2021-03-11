@@ -31,26 +31,28 @@ namespace Z0
 
         public CliSig CliSig {get;}
 
-        public ApiSetKind ApiSet {get;}
+        public ClrMethodMetadata Metadata {get;}
 
-        public ApiArtifactKey MetaUri
-            => Method;
-
-        public ApiMember Zero
-            => Empty;
-
-        [MethodImpl(Inline)]
-        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address, CliSig? sig = null)
+        public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address)
         {
             Id = uri.OpId;
             OpUri = uri;
             ApiClass = kindId;
-            Method = z.insist(method);
+            Method = root.require(method != null, method, () => $"Unfortunately, the method for {uri} is null");
             BaseAddress = address;
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(BaseAddress, uri, method);
-            CliSig = sig ?? CliSig.Empty;
-            ApiSet = Method.Tag<ApiHostAttribute>().MapValueOrDefault(x => x.ApiSet, ApiSetKind.None);
+            CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
+            Metadata = method.Metadata();
+        }
+
+        public ApiMember Zero
+            => Empty;
+
+        public ClrToken Token
+        {
+            [MethodImpl(Inline)]
+            get => Method;
         }
 
         [MethodImpl(Inline)]
@@ -70,7 +72,7 @@ namespace Z0
             var dst = new ApiMemberInfo();
             dst.Address = BaseAddress;
             dst.Host = Host.UriText;
-            dst.Member = Method.DisplayName();
+            dst.Member = Metadata.DisplaySig.Format();
             dst.ApiKind = ApiClass;
             dst.Uri = OpUri.UriText;
             return dst;

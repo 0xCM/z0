@@ -55,11 +55,6 @@ namespace Z0
 
             public override string ToString()
                 => Format();
-
-
-            [MethodImpl(Inline)]
-            public static implicit operator Z0.FolderName(FolderName src)
-                => Z0.FolderName.Define(src.Name);
         }
     }
 }

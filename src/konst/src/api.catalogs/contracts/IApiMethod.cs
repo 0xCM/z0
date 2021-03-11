@@ -25,39 +25,10 @@ namespace Z0
         MethodInfo Method {get;}
 
         /// <summary>
-        /// The apiset to which the method belongs, if any
+        /// The clr metadata token
         /// </summary>
-        ApiSetKind ApiSet
-            => Method.Tag<ApiHostAttribute>().MapValueOrDefault(x => x.ApiSet, ApiSetKind.None);
-
-        /// <summary>
-        /// Specifies whether the method is closed generic
-        /// </summary>
-        bool IsClosedGeneric
-            => Method.IsClosedGeneric();
-
-        /// <summary>
-        /// Specifies whether the method is open generic
-        /// </summary>
-        bool IsOpenGeneric
-            => Method.IsOpenGeneric();
-
-        /// <summary>
-        /// Specifies whether the method either open or clsed generic
-        /// </summary>
-        bool IsGeneric
-            => IsOpenGeneric || IsClosedGeneric;
-
-        /// <summary>
-        /// Specifies whether the method is nongeneric
-        /// </summary>
-        bool IsNonGeneric
-            => Method.IsNonGeneric();
-
-        /// <summary>
-        /// The metadata uri
-        /// </summary>
-        ApiArtifactKey MetaUri => Method;
+        ClrToken Token
+            => Method;
 
         /// <summary>
         /// The method's kind identifier if it exists
@@ -69,6 +40,9 @@ namespace Z0
         /// </summary>
         OpUri OpUri
             => OpUri.hex(Host, Method.Name, Id);
+
+        ClrMethodMetadata Metadata
+            => Method.Metadata();
 
         string ITextual.Format()
             => OpUri.Format();

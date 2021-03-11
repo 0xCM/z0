@@ -326,16 +326,27 @@ namespace Z0
 
         // NB: These are not needed for local signatures
         protected override void NotifyBeginProperty(byte elem_type) { throw new NotImplementedException(); }
+
         protected override void NotifyEndProperty() { throw new NotImplementedException(); }
+
         protected override void NotifyBeginMethod(byte elem_type) { throw new NotImplementedException(); }
+
         protected override void NotifyEndMethod() { throw new NotImplementedException(); }
+
         protected override void NotifyBeginField(byte elem_type) { throw new NotImplementedException(); }
+
         protected override void NotifyEndField() { throw new NotImplementedException(); }
+
         protected override void NotifyBeginRetType() { throw new NotImplementedException(); }
+
         protected override void NotifyEndRetType() { throw new NotImplementedException(); }
+
         protected override void NotifyBeginParam() { throw new NotImplementedException(); }
+
         protected override void NotifyParamCount(int count) { throw new NotImplementedException(); }
+
         protected override void NotifyEndParam() { throw new NotImplementedException(); }
+
         protected override void NotifyGenericParamCount(int count) { throw new NotImplementedException(); }
     }
 }

@@ -33,6 +33,12 @@ namespace Z0
              get => Location != 0;
         }
 
+        public bool IsNonZero
+        {
+             [MethodImpl(Inline)]
+             get => Location != 0;
+        }
+
         public string Identifier
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 

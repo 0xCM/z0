@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static z;
+    using static memory;
 
     partial struct Cil
     {
@@ -30,9 +30,9 @@ namespace Z0
                 summary.WriteLine(line);
             }
 
-            var decoded = Cil.decode(mod, props.Select(x => x.GetGetMethod())).ToArray();
-            var writer = new FunctionWriter(cmd.CilTarget);
-            writer.Write(decoded);
+            // var decoded = Cil.methods(mod, props.Select(x => x.GetGetMethod())).ToArray();
+            // var writer = new FunctionWriter(cmd.CilTarget);
+            // writer.Write(decoded);
         }
     }
 }

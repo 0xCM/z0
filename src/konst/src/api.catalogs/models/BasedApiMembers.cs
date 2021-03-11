@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct BasedApiMembers
+    public readonly struct BasedApiMembers : IIndex<ApiMember>
     {
         public MemoryAddress Base {get;}
 
@@ -22,10 +22,47 @@ namespace Z0
             Members = members;
         }
 
+        public ApiMember[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Members.Storage;
+        }
+
+        public ReadOnlySpan<ApiMember> View
+        {
+            [MethodImpl(Inline)]
+            get => Members.View;
+        }
+
+        public ref ApiMember First
+        {
+            [MethodImpl(Inline)]
+            get => ref Members.First;
+        }
+
         public uint MemberCount
         {
             [MethodImpl(Inline)]
             get => Members.Count;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => MemberCount == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => MemberCount != 0;
+        }
+
+
+        public static BasedApiMembers Empty
+        {
+            [MethodImpl(Inline)]
+            get => new BasedApiMembers(0, sys.empty<ApiMember>());
         }
     }
 }

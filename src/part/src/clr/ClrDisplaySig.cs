@@ -58,7 +58,6 @@ namespace Z0
                 return EmptyString;
         }
 
-
         [Op]
         public static ClrDisplaySig from(in ClrMethodMetadata src)
         {

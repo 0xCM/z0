@@ -99,10 +99,10 @@ namespace Z0
             }
 
             var getters = props.Getters();
-            var decoded = Cil.decode(mod, getters);
-            var path = FS.path(CasePath(FS.Extensions.Il).Name);
-            var cilWriter = new FunctionWriter(path);
-            cilWriter.Write(decoded);
+            // var decoded = Cil.methods(mod, getters);
+            // var path = FS.path(CasePath(FS.Extensions.Il).Name);
+            // var cilWriter = new FunctionWriter(path);
+            // cilWriter.Write(decoded);
         }
     }
 }

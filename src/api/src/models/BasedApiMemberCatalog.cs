@@ -23,6 +23,5 @@ namespace Z0
             Addresses = addresses;
             Location = location;
         }
-
     }
 }

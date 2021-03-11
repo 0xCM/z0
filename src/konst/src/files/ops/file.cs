@@ -20,9 +20,9 @@ namespace Z0
         public static FileName file(PartId part, FileExt x1, FileExt x2)
             => file(part, combine(x1, x2));
 
-        [Op]
-        public static FileName file(ApiHostUri host, FileExt ext)
-            => FS.file(Format.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+        // [Op]
+        // public static FileName file(ApiHostUri host, FileExt ext)
+        //     => FS.file(Format.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         [Op]
         public static FileName file(PartId part, string hostname, FileExt ext)

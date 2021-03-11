@@ -11,7 +11,25 @@ namespace Z0
     [Free]
     public interface IApiMember : IApiMethod
     {
+        MemoryAddress BaseAddress
+            => MemoryAddress.Zero;
 
+        CilMethod Cil
+            => ClrDynamic.cil(BaseAddress, OpUri, Method);
+
+        CliSig CliSig
+            => Method.ResolveSignature();
+
+        ApiMemberInfo Describe()
+        {
+            var dst = new ApiMemberInfo();
+            dst.Address = BaseAddress;
+            dst.Host = Host.UriText;
+            dst.Member = Metadata.DisplaySig.Format();
+            dst.ApiKind = ApiClass;
+            dst.Uri = OpUri.UriText;
+            return dst;
+        }
     }
 
     [Free]

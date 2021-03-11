@@ -5,12 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Text;
 
     using static Part;
     using static memory;
 
     public interface ITextBuffer : IRenderBuffer<string,string>
     {
+        StringBuilder ToStringBuilder();
+
         void AppendLine(string src)
         {
             Append(src);

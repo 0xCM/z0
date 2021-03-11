@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct FS
     {

@@ -18,7 +18,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly CilEmitter CilSvc;
+        readonly MsilPipe IlPipe;
 
         readonly AsmAddressMatcher AddressMatcher;
 
@@ -26,8 +26,8 @@ namespace Z0
         {
             Wf = wf;
             Asm = asm;
-            CilSvc = CilEmitter.create(Wf);
-            AddressMatcher = AsmAddressMatcher.create(wf);
+            IlPipe = Wf.IlPipe();
+            AddressMatcher = wf.AddressMatcher();
         }
 
         public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -60,8 +60,8 @@ namespace Z0
         {
             if(src.Count != 0)
             {
-                CilSvc.EmitCilCode(src, Wf.Db().CilCodeFile(host));
-                CilSvc.EmitCilData(src, Wf.Db().CilDataFile(host));
+                IlPipe.EmitCilCode(src, Wf.Db().CilCodeFile(host));
+                IlPipe.EmitCilData(src, Wf.Db().CilDataFile(host));
             }
 
             return src.Count;

@@ -156,18 +156,6 @@ namespace Z0
         public static IGlobalApiCatalog GlobalCatalog(FS.Files paths)
             => new GlobalApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
-        /// <summary>
-        /// Creates a system-level api catalog over a specified component set
-        /// </summary>
-        /// <param name="src">The source components</param>
-        [Op]
-        public static IGlobalApiCatalog GlobalCatalog(Index<Assembly> src)
-        {
-            var candidates = src.Where(Q.isPart);
-            var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id).Array();
-            return new GlobalApiCatalog(parts);
-        }
-
         [Op]
         public static IGlobalApiCatalog GlobalCatalog(FS.FolderPath src, PartId[] parts)
         {
@@ -179,22 +167,6 @@ namespace Z0
         public static IGlobalApiCatalog GlobalCatalog(Assembly src, PartId[] parts)
             => GlobalCatalog(FS.path(src.Location).FolderPath, parts);
 
-        /// <summary>
-        /// Attempts to resolve a part resolution type
-        /// </summary>
-        [Op]
-        static Option<IPart> TryGetPart(Assembly src)
-        {
-            try
-            {
-                return root.some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
-            }
-            catch(Exception e)
-            {
-                term.error(text.format("Assembly {0} | {1}", src.GetSimpleName(), e));
-                return root.none<IPart>();
-            }
-        }
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path
