@@ -160,6 +160,22 @@ namespace Z0
         }
 
         /// <summary>
+        /// Determines whether a method defines a unary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsUnaryFunction(this MethodInfo m)
+            => m.IsFunction() && m.HasArityValue(1);
+
+        /// <summary>
+        /// Determines whether a method is a unary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsUnaryOperator(this MethodInfo m)
+            => m.IsHomogenous() && m.IsUnaryFunction();
+
+        /// <summary>
         /// Determines whether a method defines an operator over a (common) domain
         /// </summary>
         /// <param name="src">The method to examine</param>
@@ -186,5 +202,21 @@ namespace Z0
         [Op]
         public static bool IsBinaryFunction(this MethodInfo m)
             => m.IsFunction() && m.HasArityValue(2);
+
+        /// <summary>
+        /// Determines whether a method defines a binary function
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsTernaryFunction(this MethodInfo m)
+            => m.IsFunction() && m.HasArityValue(3);
+
+        /// <summary>
+        /// Determines whether a method is a ternary operator
+        /// </summary>
+        /// <param name="m">The method to examine</param>
+        [Op]
+        public static bool IsTernaryOperator(this MethodInfo m)
+            => m.IsHomogenous() && m.IsTernaryFunction();
     }
 }

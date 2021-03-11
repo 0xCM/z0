@@ -138,6 +138,10 @@ namespace Z0
         public static explicit operator short(Cell16 x)
             => (short)x.Data;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(Imm16 src)
+            => new Cell16(src.Content);
+
         public static Cell16 Empty
             => default(Cell16);
    }

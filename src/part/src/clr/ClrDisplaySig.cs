@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [Op]
-        public static ClrDisplaySig from(in ClrMethodMetadata src)
+        public static ClrDisplaySig from(in ClrMethodArtifact src)
         {
             var dst = new TextBuffer(new StringBuilder());
             format(src, dst);
@@ -67,13 +67,13 @@ namespace Z0
         }
 
         [Op]
-        static void format(in ClrMethodMetadata src, ITextBuffer dst)
+        static void format(in ClrMethodArtifact src, ITextBuffer dst)
         {
             dst.Append(src.ReturnType.Format());
             dst.Append(Chars.Space);
             dst.Append(src.MethodName);
             dst.Append(Chars.LParen);
-            var parameters = src.ValueParams.View;
+            var parameters = src.Args.View;
             var count = parameters.Length;
             for(var i=0; i<count; i++)
             {

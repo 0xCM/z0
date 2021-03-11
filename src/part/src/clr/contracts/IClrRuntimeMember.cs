@@ -27,9 +27,8 @@ namespace Z0
             => (this as IClrRuntimeObject<D>).Definition;
     }
 
-
     [Free]
-    public interface IClrRuntimeMember<H,D> : IClrRuntimeMember<D>, IClrRuntimeObject<H,D>, IClrArtifact<H>
+    public interface IClrRuntimeMember<H,D> : IClrRuntimeMember<D>, IClrRuntimeObject<H,D>
         where D : MemberInfo
         where H : struct, IClrRuntimeMember<H,D>
     {

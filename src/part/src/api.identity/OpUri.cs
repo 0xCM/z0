@@ -54,7 +54,7 @@ namespace Z0
             => new OpUri(ApiUriScheme.Located, host, group, opid);
 
         [MethodImpl(Inline)]
-        internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        public OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             Scheme = scheme;
             Host = host;

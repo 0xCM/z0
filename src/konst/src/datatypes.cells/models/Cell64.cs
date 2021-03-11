@@ -121,6 +121,9 @@ namespace Z0
         public static explicit operator long(Cell64 x)
             => (long)x.Content;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cell64(Imm64 src)
+            => new Cell64(src.Content);
 
         public static Cell64 Empty => default;
    }

@@ -54,24 +54,5 @@ namespace Z0
             src.TryGetRawMetadata(out var ptr, out var size);
             return memory.cover(ptr, size);
         }
-
-        /// <summary>
-        /// Derives a signature from reflected method metadata
-        /// </summary>
-        /// <param name="src">The source method</param>
-        [Op]
-        public static ClrMethodMetadata metadata(MethodInfo src)
-        {
-            var dst = new ClrMethodMetadata();
-            dst.Token = src.MetadataToken;
-            dst.MethodName = src.DisplayName();
-            dst.DefiningAssembly = src.Module.Assembly;
-            dst.DefiningModule = src.Module.Name;
-            dst.DeclaringType = siginfo(src.DeclaringType);
-            dst.ReturnType = siginfo(src.ReturnType);
-            dst.ValueParams = src.GetParameters().Select(p => new ClrParamInfo(siginfo(p), p.RefKind(), p.Name, (ushort)p.Position));
-            dst.TypeParams = src.GenericParameters(false).Mapi((i,t) => t.DisplayName());
-            return dst;
-        }
     }
 }

@@ -11,18 +11,18 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ClrParameter : IClrArtifact<ClrParameter>
+    public readonly struct ClrParameter : IClrRuntimeObject<ClrParameter,R.ParameterInfo>
     {
-        readonly R.ParameterInfo Subject;
+        public R.ParameterInfo Definition {get;}
 
         [MethodImpl(Inline)]
         public ClrParameter(R.ParameterInfo src)
-            => Subject = src;
+            => Definition = src;
 
         public ClrToken Id
         {
             [MethodImpl(Inline)]
-            get => Subject.MetadataToken;
+            get => Definition.MetadataToken;
         }
 
         public ClrArtifactKind Kind
@@ -31,11 +31,28 @@ namespace Z0
             get => ClrArtifactKind.ValueParam;
         }
 
+        public ClrType DataType
+        {
+            get => Definition.ParameterType;
+        }
+
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Subject.Name;
+            get => Definition.Name;
         }
+
+        public int Position
+        {
+            [MethodImpl(Inline)]
+            get => Definition.Position;
+        }
+
+        public string Format()
+            => string.Format("{0}:{1}", Name, DataType.Name);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator ClrParameter(R.ParameterInfo src)
@@ -43,6 +60,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator R.ParameterInfo(ClrParameter src)
-            => src.Subject;
+            => src.Definition;
     }
 }

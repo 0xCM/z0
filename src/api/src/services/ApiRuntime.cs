@@ -82,7 +82,7 @@ namespace Z0
             var method = src.Method;
             dst.Address = src.BaseAddress;
             dst.Uri = src.OpUri;
-            dst.Sig = ClrDisplaySig.from(method.Metadata());
+            dst.Sig = ClrDisplaySig.from(method.Artifact());
             dst.Cil = src.Cil;
             return ref dst;
         }

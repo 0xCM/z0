@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
+    using static Part;
     using static memory;
 
     partial struct Clr
@@ -69,6 +70,23 @@ namespace Z0
                 }
             }
             return dst.Array();
+        }
+
+        [Op]
+        public static void strings(Type host, FieldInfo[] src, Span<string> dst)
+        {
+            var @base = memory.address(host);
+            var count = src.Length;
+            var offset = MemoryAddress.Zero;
+
+            for(var j=0u; j<count; j++)
+            {
+                ref readonly var f = ref src[j];
+                var content = ClrLiteralFields.@string(f) ?? EmptyString;
+                seek(dst,j) = content;
+                if(!text.blank(content))
+                    offset += Clr.fieldref(@base, offset, f).DataSize;
+            }
         }
     }
 }

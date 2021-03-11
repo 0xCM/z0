@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Characterizes type classifiers predicated on enumerations
@@ -17,7 +18,6 @@ namespace Z0
 
         string Name
             => Class.ToString().ToLower();
-
     }
 
     /// <summary>

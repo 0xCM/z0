@@ -38,10 +38,10 @@ namespace Z0
             return this;
         }
 
-        public ClrDataLinks<S,T> Complete()
-            => new ClrDataLinks<S,T>(Arrows);
+        public ClrArrows<S,T> Complete()
+            => new ClrArrows<S,T>(Arrows);
 
-        public static implicit operator ClrDataLinks<S,T>(ClrDataLinkBuilder<S,T> builder)
+        public static implicit operator ClrArrows<S,T>(ClrDataLinkBuilder<S,T> builder)
             => builder.Complete();
     }
 }

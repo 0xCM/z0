@@ -23,7 +23,7 @@ namespace Z0
     }
 
     [ApiHost]
-    public readonly struct Evaluate
+    public readonly partial struct Evaluate
     {
         [MethodImpl(Inline), Op]
         public static IEvalDispatcher dispatcher(IWfShell wf, IDomainSource source, uint bufferSize)

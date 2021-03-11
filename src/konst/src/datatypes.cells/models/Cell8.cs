@@ -121,6 +121,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell8 x)
             => (ulong)x.Data;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell8(Imm8 src)
+            => new Cell8(src.Content);
+
         public static Cell8 Empty => default;
     }
 }

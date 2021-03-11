@@ -8,15 +8,26 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    public interface ILiteralKind
+    {
+        Type LiteralType {get;}
+
+        Enum LiteralValue {get;}
+    }
+
     /// <summary>
     /// Characterizes a parametric literal: typed literals that support kind partitioning
     /// </summary>
     /// <typeparam name="E">The classifying enum type</typeparam>
     [Free]
-    public interface ILiteralKind<E> : ITypedLiteral<E>
+    public interface ILiteralKind<E> : ILiteralKind, ITypedLiteral<E>
         where E : unmanaged, Enum
     {
+        Type ILiteralKind.LiteralType
+            => typeof(E);
 
+        Enum ILiteralKind.LiteralValue
+            => Class;
     }
 
     /// <summary>

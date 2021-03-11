@@ -6,11 +6,31 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
 
     public readonly struct ClrArtifactRef : ITextual
     {
+        /// <summary>
+        /// Defines a reference to an artifact of parametric type
+        /// </summary>
+        /// <param name="src">The source artifact</param>
+        /// <typeparam name="A">The artifact type</typeparam>
+        [MethodImpl(Inline)]
+        public static ClrArtifactRef define(ClrToken id, ClrArtifactKind kind, Name name)
+            => new ClrArtifactRef(id,kind,name);
+
+        /// <summary>
+        /// Defines a reference to an artifact of parametric type
+        /// </summary>
+        /// <param name="src">The source artifact</param>
+        /// <typeparam name="A">The artifact type</typeparam>
+        [MethodImpl(Inline)]
+        public static ClrArtifactRef define<M>(M src)
+            where M : MemberInfo
+                => define(src.MetadataToken, ClrArtifactKind.Field, src.Name);
+
         public ClrArtifactKind Kind {get;}
 
         public ClrToken Token {get;}

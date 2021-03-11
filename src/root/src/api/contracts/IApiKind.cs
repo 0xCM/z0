@@ -6,7 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IApiKind<E> : IApiKey, ILiteralKind<E>
+    public interface IApiKind : IApiKey, ILiteralKind
+    {
+
+    }
+
+    public interface IApiKind<E> : IApiKind, ILiteralKind<E>
         where E : unmanaged, Enum
     {
         E ITypedLiteral<E>.Class

@@ -41,8 +41,8 @@ namespace Z0
         OpUri OpUri
             => OpUri.hex(Host, Method.Name, Id);
 
-        ClrMethodMetadata Metadata
-            => Method.Metadata();
+        ClrMethodArtifact Metadata
+            => Method.Artifact();
 
         string ITextual.Format()
             => OpUri.Format();

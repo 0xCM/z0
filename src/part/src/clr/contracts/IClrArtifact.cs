@@ -26,6 +26,7 @@ namespace Z0
 
         ClrArtifactRef Ref
             => new ClrArtifactRef(Id, Kind ,Name);
+
         string ITextual.Format()
             => Name;
     }

@@ -31,7 +31,7 @@ namespace Z0
 
         public CliSig CliSig {get;}
 
-        public ClrMethodMetadata Metadata {get;}
+        public ClrMethodArtifact Metadata {get;}
 
         public ApiMember(OpUri uri, MethodInfo method, ApiClass kindId, MemoryAddress address)
         {
@@ -43,7 +43,7 @@ namespace Z0
             Host = OpUri.Host;
             Cil = ClrDynamic.cil(BaseAddress, uri, method);
             CliSig = address.IsNonZero ? method.ResolveSignature() : CliSig.Empty;
-            Metadata = method.Metadata();
+            Metadata = method.Artifact();
         }
 
         public ApiMember Zero
