@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(OpCode oc, Signature sig, Statement statement)
+        public static AsmExprSet pack(AsmOpCodeExpr oc, AsmSig sig, AsmStatementExpr statement)
             => new AsmExprSet(oc,sig,statement);
 
         [Op]

@@ -37,6 +37,5 @@ namespace Z0
         /// Marker for metadata-located operations
         /// </summary>
         Meta = 32,
-
     }
 }

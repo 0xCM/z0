@@ -11,15 +11,16 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        void EmitInstructionTypes(Index<AsmMnemonic> src)
+        FS.FilePath EmitInstructionTypes(Index<AsmMnemonic> src)
         {
             var dst = GetTargetPath(AsmGenTarget.InstructionType);
             var flow = Wf.EmittingFile(dst);
             EmitInstructionTypes(src,dst);
             Wf.EmittedFile(flow, src.Count);
+            return dst;
         }
 
-        void EmitInstructionContracts()
+        FS.FilePath EmitInstructionContracts()
         {
             var dst = GetTargetPath(AsmGenTarget.InstructionContracts);
             var flow = Wf.EmittingFile(dst);
@@ -32,6 +33,7 @@ namespace Z0.Asm
             writer.Write(buffer.Emit());
 
             Wf.EmittedFile(flow);
+            return dst;
         }
 
         [Op]
@@ -42,6 +44,10 @@ namespace Z0.Asm
             buffer.AppendLine("namespace Z0.Asm");
             buffer.AppendLine(Open);
             margin += Indent;
+            buffer.IndentLine(margin, "using System.Runtime.CompilerServices;");
+            buffer.IndentLine(margin, "using static Part;");
+            buffer.AppendLine();
+
             buffer.IndentLine(margin, "public readonly struct AsmInstructions");
             buffer.IndentLine(margin, Open);
             margin += Indent;

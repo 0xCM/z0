@@ -5,11 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-      <PackageReference Include="z0.asm.lang.g" Version="1.0.0" />
+      <PackageReference Include="z0.asm.lang.g" Version="1.0.*" />
       <ProjectReference Include="$(Konst)" />
       <ProjectReference Include="$(BitCore)" />
       <ProjectReference Include="$(Gen)" />
       <ProjectReference Include="$(Digital)" />
+      <ProjectReference Include="$(AsmCore)" />
   </ItemGroup>
 
    <ItemGroup>

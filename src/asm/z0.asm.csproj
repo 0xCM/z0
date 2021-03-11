@@ -18,6 +18,8 @@
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Fsm)" />
     <ProjectReference Include="$(AsmLang)" />
+    <ProjectReference Include="$(AsmCore)" />
+
   </ItemGroup>
 
    <ItemGroup>

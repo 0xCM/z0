@@ -119,9 +119,9 @@ namespace Z0.Asm
             }
             else
             {
-                dst.OpCode = OpCode.Empty;
-                dst.Sig = Signature.Empty;
-                dst.Statement = Statement.Empty;
+                dst.OpCode = AsmOpCodeExpr.Empty;
+                dst.Sig = AsmSig.Empty;
+                dst.Statement = AsmStatementExpr.Empty;
                 dst.Encoded = AsmHexCode.Empty;
             }
 

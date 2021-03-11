@@ -113,7 +113,7 @@ namespace Z0.Asm
         [Action(K.ShowRexBits)]
         void ShowRexBits()
         {
-            var codes = AsmBytes.rexbits();
+            var codes = Rex.bits();
             var count = codes.Length;
             for(var i=0; i<count; i++)
             {

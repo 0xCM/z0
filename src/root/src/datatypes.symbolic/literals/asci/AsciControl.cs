@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Defines asci control symbols
     /// </summary>
-    [SymbolProvider]
+    [SymbolSource]
     public enum AsciControl : ushort
     {
         /// <summary>

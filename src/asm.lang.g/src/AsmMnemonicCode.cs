@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------
-// Generated   :  20210219.04.12.01.0911
+// Generated   :  2021-03-11.15.45.32.4688
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
@@ -9,1803 +9,2053 @@ namespace Z0.Asm
     {
         None = 0,
 
-        AAD = 1,
+        AAA = 1,
 
-        AAM = 2,
+        AAD = 2,
 
-        ADC = 3,
+        AAM = 3,
 
-        ADD = 4,
+        AAS = 4,
 
-        ADDPD = 5,
+        ADC = 5,
 
-        VADDPD = 6,
+        ADD = 6,
 
-        ADDPS = 7,
+        ADDPD = 7,
 
-        VADDPS = 8,
+        VADDPD = 8,
 
-        ADDSD = 9,
+        ADDPS = 9,
 
-        VADDSD = 10,
+        VADDPS = 10,
 
-        ADDSS = 11,
+        ADDSD = 11,
 
-        VADDSS = 12,
+        VADDSD = 12,
 
-        ADDSUBPD = 13,
+        ADDSS = 13,
 
-        VADDSUBPD = 14,
+        VADDSS = 14,
 
-        ADDSUBPS = 15,
+        ADDSUBPD = 15,
 
-        VADDSUBPS = 16,
+        VADDSUBPD = 16,
 
-        AESDEC = 17,
+        ADDSUBPS = 17,
 
-        VAESDEC = 18,
+        VADDSUBPS = 18,
 
-        AESDECLAST = 19,
+        AESDEC = 19,
 
-        VAESDECLAST = 20,
+        VAESDEC = 20,
 
-        AESENC = 21,
+        AESDECLAST = 21,
 
-        VAESENC = 22,
+        VAESDECLAST = 22,
 
-        AESENCLAST = 23,
+        AESENC = 23,
 
-        VAESENCLAST = 24,
+        VAESENC = 24,
 
-        AESIMC = 25,
+        AESENCLAST = 25,
 
-        VAESIMC = 26,
+        VAESENCLAST = 26,
 
-        AESKEYGENASSIST = 27,
+        AESIMC = 27,
 
-        VAESKEYGENASSIST = 28,
+        VAESIMC = 28,
 
-        AND = 29,
+        AESKEYGENASSIST = 29,
 
-        ANDN = 30,
+        VAESKEYGENASSIST = 30,
 
-        ANDPD = 31,
+        AND = 31,
 
-        VANDPD = 32,
+        ANDN = 32,
 
-        ANDPS = 33,
+        ANDPD = 33,
 
-        VANDPS = 34,
+        VANDPD = 34,
 
-        ANDNPD = 35,
+        ANDPS = 35,
 
-        VANDNPD = 36,
+        VANDPS = 36,
 
-        ANDNPS = 37,
+        ANDNPD = 37,
 
-        VANDNPS = 38,
+        VANDNPD = 38,
 
-        ARPL = 39,
+        ANDNPS = 39,
 
-        BLENDPD = 40,
+        VANDNPS = 40,
 
-        VBLENDPD = 41,
+        ARPL = 41,
 
-        BEXTR = 42,
+        BLENDPD = 42,
 
-        BLENDPS = 43,
+        VBLENDPD = 43,
 
-        VBLENDPS = 44,
+        BEXTR = 44,
 
-        BLENDVPD = 45,
+        BLENDPS = 45,
 
-        VBLENDVPD = 46,
+        VBLENDPS = 46,
 
-        BLENDVPS = 47,
+        BLENDVPD = 47,
 
-        VBLENDVPS = 48,
+        VBLENDVPD = 48,
 
-        BLSI = 49,
+        BLENDVPS = 49,
 
-        BLSMSK = 50,
+        VBLENDVPS = 50,
 
-        BLSR = 51,
+        BLSI = 51,
 
-        BOUND = 52,
+        BLSMSK = 52,
 
-        BSF = 53,
+        BLSR = 53,
 
-        BSR = 54,
+        BOUND = 54,
 
-        BSWAP = 55,
+        BSF = 55,
 
-        BT = 56,
+        BSR = 56,
 
-        BTC = 57,
+        BSWAP = 57,
 
-        BTR = 58,
+        BT = 58,
 
-        BTS = 59,
+        BTC = 59,
 
-        BZHI = 60,
+        BTR = 60,
 
-        CALL = 61,
+        BTS = 61,
 
-        CLFLUSH = 62,
+        BZHI = 62,
 
-        CMOVA = 63,
+        CALL = 63,
 
-        CMOVAE = 64,
+        CBW = 64,
 
-        CMOVB = 65,
+        CWDE = 65,
 
-        CMOVBE = 66,
+        CDQE = 66,
 
-        CMOVC = 67,
+        CLC = 67,
 
-        CMOVE = 68,
+        CLD = 68,
 
-        CMOVG = 69,
+        CLFLUSH = 69,
 
-        CMOVGE = 70,
+        CLI = 70,
 
-        CMOVL = 71,
+        CLTS = 71,
 
-        CMOVLE = 72,
+        CMC = 72,
 
-        CMOVNA = 73,
+        CMOVA = 73,
 
-        CMOVNAE = 74,
+        CMOVAE = 74,
 
-        CMOVNB = 75,
+        CMOVB = 75,
 
-        CMOVNBE = 76,
+        CMOVBE = 76,
 
-        CMOVNC = 77,
+        CMOVC = 77,
 
-        CMOVNE = 78,
+        CMOVE = 78,
 
-        CMOVNG = 79,
+        CMOVG = 79,
 
-        CMOVNGE = 80,
+        CMOVGE = 80,
 
-        CMOVNL = 81,
+        CMOVL = 81,
 
-        CMOVNLE = 82,
+        CMOVLE = 82,
 
-        CMOVNO = 83,
+        CMOVNA = 83,
 
-        CMOVNP = 84,
+        CMOVNAE = 84,
 
-        CMOVNS = 85,
+        CMOVNB = 85,
 
-        CMOVNZ = 86,
+        CMOVNBE = 86,
 
-        CMOVO = 87,
+        CMOVNC = 87,
 
-        CMOVP = 88,
+        CMOVNE = 88,
 
-        CMOVPE = 89,
+        CMOVNG = 89,
 
-        CMOVPO = 90,
+        CMOVNGE = 90,
 
-        CMOVS = 91,
+        CMOVNL = 91,
 
-        CMOVZ = 92,
+        CMOVNLE = 92,
 
-        CMP = 93,
+        CMOVNO = 93,
 
-        CMPPD = 94,
+        CMOVNP = 94,
 
-        VCMPPD = 95,
+        CMOVNS = 95,
 
-        CMPPS = 96,
+        CMOVNZ = 96,
 
-        VCMPPS = 97,
+        CMOVO = 97,
 
-        CMPS = 98,
+        CMOVP = 98,
 
-        CMPSD = 99,
+        CMOVPE = 99,
 
-        VCMPSD = 100,
+        CMOVPO = 100,
 
-        CMPSS = 101,
+        CMOVS = 101,
 
-        VCMPSS = 102,
+        CMOVZ = 102,
 
-        CMPXCHG = 103,
+        CMP = 103,
 
-        CMPXCHG8B = 104,
+        CMPPD = 104,
 
-        CMPXCHG16B = 105,
+        VCMPPD = 105,
 
-        COMISD = 106,
+        CMPPS = 106,
 
-        VCOMISD = 107,
+        VCMPPS = 107,
 
-        COMISS = 108,
+        CMPS = 108,
 
-        VCOMISS = 109,
+        CMPSB = 109,
 
-        CRC32 = 110,
+        CMPSW = 110,
 
-        CVTDQ2PD = 111,
+        CMPSD = 111,
 
-        VCVTDQ2PD = 112,
+        CMPSQ = 112,
 
-        CVTDQ2PS = 113,
+        VCMPSD = 113,
 
-        VCVTDQ2PS = 114,
+        CMPSS = 114,
 
-        CVTPD2DQ = 115,
+        VCMPSS = 115,
 
-        VCVTPD2DQ = 116,
+        CMPXCHG = 116,
 
-        CVTPD2PI = 117,
+        CMPXCHG8B = 117,
 
-        CVTPD2PS = 118,
+        CMPXCHG16B = 118,
 
-        VCVTPD2PS = 119,
+        COMISD = 119,
 
-        CVTPI2PD = 120,
+        VCOMISD = 120,
 
-        CVTPI2PS = 121,
+        COMISS = 121,
 
-        CVTPS2DQ = 122,
+        VCOMISS = 122,
 
-        VCVTPS2DQ = 123,
+        CPUID = 123,
 
-        CVTPS2PD = 124,
+        CRC32 = 124,
 
-        VCVTPS2PD = 125,
+        CVTDQ2PD = 125,
 
-        CVTPS2PI = 126,
+        VCVTDQ2PD = 126,
 
-        CVTSD2SI = 127,
+        CVTDQ2PS = 127,
 
-        VCVTSD2SI = 128,
+        VCVTDQ2PS = 128,
 
-        CVTSD2SS = 129,
+        CVTPD2DQ = 129,
 
-        VCVTSD2SS = 130,
+        VCVTPD2DQ = 130,
 
-        CVTSI2SD = 131,
+        CVTPD2PI = 131,
 
-        VCVTSI2SD = 132,
+        CVTPD2PS = 132,
 
-        CVTSI2SS = 133,
+        VCVTPD2PS = 133,
 
-        VCVTSI2SS = 134,
+        CVTPI2PD = 134,
 
-        CVTSS2SD = 135,
+        CVTPI2PS = 135,
 
-        VCVTSS2SD = 136,
+        CVTPS2DQ = 136,
 
-        CVTSS2SI = 137,
+        VCVTPS2DQ = 137,
 
-        VCVTSS2SI = 138,
+        CVTPS2PD = 138,
 
-        CVTTPD2DQ = 139,
+        VCVTPS2PD = 139,
 
-        VCVTTPD2DQ = 140,
+        CVTPS2PI = 140,
 
-        CVTTPD2PI = 141,
+        CVTSD2SI = 141,
 
-        CVTTPS2DQ = 142,
+        VCVTSD2SI = 142,
 
-        VCVTTPS2DQ = 143,
+        CVTSD2SS = 143,
 
-        CVTTPS2PI = 144,
+        VCVTSD2SS = 144,
 
-        CVTTSD2SI = 145,
+        CVTSI2SD = 145,
 
-        VCVTTSD2SI = 146,
+        VCVTSI2SD = 146,
 
-        CVTTSS2SI = 147,
+        CVTSI2SS = 147,
 
-        VCVTTSS2SI = 148,
+        VCVTSI2SS = 148,
 
-        DEC = 149,
+        CVTSS2SD = 149,
 
-        DIV = 150,
+        VCVTSS2SD = 150,
 
-        DIVPD = 151,
+        CVTSS2SI = 151,
 
-        VDIVPD = 152,
+        VCVTSS2SI = 152,
 
-        DIVPS = 153,
+        CVTTPD2DQ = 153,
 
-        VDIVPS = 154,
+        VCVTTPD2DQ = 154,
 
-        DIVSD = 155,
+        CVTTPD2PI = 155,
 
-        VDIVSD = 156,
+        CVTTPS2DQ = 156,
 
-        DIVSS = 157,
+        VCVTTPS2DQ = 157,
 
-        VDIVSS = 158,
+        CVTTPS2PI = 158,
 
-        DPPD = 159,
+        CVTTSD2SI = 159,
 
-        VDPPD = 160,
+        VCVTTSD2SI = 160,
 
-        DPPS = 161,
+        CVTTSS2SI = 161,
 
-        VDPPS = 162,
+        VCVTTSS2SI = 162,
 
-        ENTER = 163,
+        CWD = 163,
 
-        EXTRACTPS = 164,
+        CDQ = 164,
 
-        VEXTRACTPS = 165,
+        CQO = 165,
 
-        FADD = 166,
+        DAA = 166,
 
-        FADDP = 167,
+        DAS = 167,
 
-        FIADD = 168,
+        DEC = 168,
 
-        FBLD = 169,
+        DIV = 169,
 
-        FBSTP = 170,
+        DIVPD = 170,
 
-        FCMOVB = 171,
+        VDIVPD = 171,
 
-        FCMOVE = 172,
+        DIVPS = 172,
 
-        FCMOVBE = 173,
+        VDIVPS = 173,
 
-        FCMOVU = 174,
+        DIVSD = 174,
 
-        FCMOVNB = 175,
+        VDIVSD = 175,
 
-        FCMOVNE = 176,
+        DIVSS = 176,
 
-        FCMOVNBE = 177,
+        VDIVSS = 177,
 
-        FCMOVNU = 178,
+        DPPD = 178,
 
-        FCOM = 179,
+        VDPPD = 179,
 
-        FCOMP = 180,
+        DPPS = 180,
 
-        FCOMI = 181,
+        VDPPS = 181,
 
-        FCOMIP = 182,
+        EMMS = 182,
 
-        FUCOMI = 183,
+        ENTER = 183,
 
-        FUCOMIP = 184,
+        EXTRACTPS = 184,
 
-        FDIV = 185,
+        VEXTRACTPS = 185,
 
-        FDIVP = 186,
+        F2XM1 = 186,
 
-        FIDIV = 187,
+        FABS = 187,
 
-        FDIVR = 188,
+        FADD = 188,
 
-        FDIVRP = 189,
+        FADDP = 189,
 
-        FIDIVR = 190,
+        FIADD = 190,
 
-        FFREE = 191,
+        FBLD = 191,
 
-        FICOM = 192,
+        FBSTP = 192,
 
-        FICOMP = 193,
+        FCHS = 193,
 
-        FILD = 194,
+        FCLEX = 194,
 
-        FIST = 195,
+        FNCLEX = 195,
 
-        FISTP = 196,
+        FCMOVB = 196,
 
-        FISTTP = 197,
+        FCMOVE = 197,
 
-        FLD = 198,
+        FCMOVBE = 198,
 
-        FLDCW = 199,
+        FCMOVU = 199,
 
-        FLDENV = 200,
+        FCMOVNB = 200,
 
-        FMUL = 201,
+        FCMOVNE = 201,
 
-        FMULP = 202,
+        FCMOVNBE = 202,
 
-        FIMUL = 203,
+        FCMOVNU = 203,
 
-        FRSTOR = 204,
+        FCOM = 204,
 
-        FSAVE = 205,
+        FCOMP = 205,
 
-        FNSAVE = 206,
+        FCOMPP = 206,
 
-        FST = 207,
+        FCOMI = 207,
 
-        FSTP = 208,
+        FCOMIP = 208,
 
-        FSTCW = 209,
+        FUCOMI = 209,
 
-        FNSTCW = 210,
+        FUCOMIP = 210,
 
-        FSTENV = 211,
+        FCOS = 211,
 
-        FNSTENV = 212,
+        FDECSTP = 212,
 
-        FSTSW = 213,
+        FDIV = 213,
 
-        FNSTSW = 214,
+        FDIVP = 214,
 
-        FSUB = 215,
+        FIDIV = 215,
 
-        FSUBP = 216,
+        FDIVR = 216,
 
-        FISUB = 217,
+        FDIVRP = 217,
 
-        FSUBR = 218,
+        FIDIVR = 218,
 
-        FSUBRP = 219,
+        FFREE = 219,
 
-        FISUBR = 220,
+        FICOM = 220,
 
-        FUCOM = 221,
+        FICOMP = 221,
 
-        FUCOMP = 222,
+        FILD = 222,
 
-        FXCH = 223,
+        FINCSTP = 223,
 
-        FXRSTOR = 224,
+        FINIT = 224,
 
-        FXRSTOR64 = 225,
+        FNINIT = 225,
 
-        FXSAVE = 226,
+        FIST = 226,
 
-        FXSAVE64 = 227,
+        FISTP = 227,
 
-        HADDPD = 228,
+        FISTTP = 228,
 
-        VHADDPD = 229,
+        FLD = 229,
 
-        HADDPS = 230,
+        FLD1 = 230,
 
-        VHADDPS = 231,
+        FLDL2T = 231,
 
-        HSUBPD = 232,
+        FLDL2E = 232,
 
-        VHSUBPD = 233,
+        FLDPI = 233,
 
-        HSUBPS = 234,
+        FLDLG2 = 234,
 
-        VHSUBPS = 235,
+        FLDLN2 = 235,
 
-        IDIV = 236,
+        FLDZ = 236,
 
-        IMUL = 237,
+        FLDCW = 237,
 
-        IN = 238,
+        FLDENV = 238,
 
-        INC = 239,
+        FMUL = 239,
 
-        INS = 240,
+        FMULP = 240,
 
-        INSERTPS = 241,
+        FIMUL = 241,
 
-        VINSERTPS = 242,
+        FNOP = 242,
 
-        INT = 243,
+        FPATAN = 243,
 
-        INVLPG = 244,
+        FPREM = 244,
 
-        INVPCID = 245,
+        FPREM1 = 245,
 
-        JA = 246,
+        FPTAN = 246,
 
-        JAE = 247,
+        FRNDINT = 247,
 
-        JB = 248,
+        FRSTOR = 248,
 
-        JBE = 249,
+        FSAVE = 249,
 
-        JC = 250,
+        FNSAVE = 250,
 
-        JCXZ = 251,
+        FSCALE = 251,
 
-        JECXZ = 252,
+        FSIN = 252,
 
-        JRCXZ = 253,
+        FSINCOS = 253,
 
-        JE = 254,
+        FSQRT = 254,
 
-        JG = 255,
+        FST = 255,
 
-        JGE = 256,
+        FSTP = 256,
 
-        JL = 257,
+        FSTCW = 257,
 
-        JLE = 258,
+        FNSTCW = 258,
 
-        JNA = 259,
+        FSTENV = 259,
 
-        JNAE = 260,
+        FNSTENV = 260,
 
-        JNB = 261,
+        FSTSW = 261,
 
-        JNBE = 262,
+        FNSTSW = 262,
 
-        JNC = 263,
+        FSUB = 263,
 
-        JNE = 264,
+        FSUBP = 264,
 
-        JNG = 265,
+        FISUB = 265,
 
-        JNGE = 266,
+        FSUBR = 266,
 
-        JNL = 267,
+        FSUBRP = 267,
 
-        JNLE = 268,
+        FISUBR = 268,
 
-        JNO = 269,
+        FTST = 269,
 
-        JNP = 270,
+        FUCOM = 270,
 
-        JNS = 271,
+        FUCOMP = 271,
 
-        JNZ = 272,
+        FUCOMPP = 272,
 
-        JO = 273,
+        FXAM = 273,
 
-        JP = 274,
+        FXCH = 274,
 
-        JPE = 275,
+        FXRSTOR = 275,
 
-        JPO = 276,
+        FXRSTOR64 = 276,
 
-        JS = 277,
+        FXSAVE = 277,
 
-        JZ = 278,
+        FXSAVE64 = 278,
 
-        JMP = 279,
+        FXTRACT = 279,
 
-        LAR = 280,
+        FYL2X = 280,
 
-        LDDQU = 281,
+        FYL2XP1 = 281,
 
-        VLDDQU = 282,
+        HADDPD = 282,
 
-        LDMXCSR = 283,
+        VHADDPD = 283,
 
-        VLDMXCSR = 284,
+        HADDPS = 284,
 
-        LDS = 285,
+        VHADDPS = 285,
 
-        LSS = 286,
+        HLT = 286,
 
-        LES = 287,
+        HSUBPD = 287,
 
-        LFS = 288,
+        VHSUBPD = 288,
 
-        LGS = 289,
+        HSUBPS = 289,
 
-        LEA = 290,
+        VHSUBPS = 290,
 
-        LEAVE = 291,
+        IDIV = 291,
 
-        LGDT = 292,
+        IMUL = 292,
 
-        LIDT = 293,
+        IN = 293,
 
-        LLDT = 294,
+        INC = 294,
 
-        LMSW = 295,
+        INS = 295,
 
-        LODS = 296,
+        INSB = 296,
 
-        LOOP = 297,
+        INSW = 297,
 
-        LOOPE = 298,
+        INSD = 298,
 
-        LOOPNE = 299,
+        INSERTPS = 299,
 
-        LSL = 300,
+        VINSERTPS = 300,
 
-        LTR = 301,
+        INT = 301,
 
-        LZCNT = 302,
+        INTO = 302,
 
-        MASKMOVDQU = 303,
+        INVD = 303,
 
-        VMASKMOVDQU = 304,
+        INVLPG = 304,
 
-        MASKMOVQ = 305,
+        INVPCID = 305,
 
-        MAXPD = 306,
+        IRET = 306,
 
-        VMAXPD = 307,
+        IRETD = 307,
 
-        MAXPS = 308,
+        IRETQ = 308,
 
-        VMAXPS = 309,
+        JA = 309,
 
-        MAXSD = 310,
+        JAE = 310,
 
-        VMAXSD = 311,
+        JB = 311,
 
-        MAXSS = 312,
+        JBE = 312,
 
-        VMAXSS = 313,
+        JC = 313,
 
-        MINPD = 314,
+        JCXZ = 314,
 
-        VMINPD = 315,
+        JECXZ = 315,
 
-        MINPS = 316,
+        JRCXZ = 316,
 
-        VMINPS = 317,
+        JE = 317,
 
-        MINSD = 318,
+        JG = 318,
 
-        VMINSD = 319,
+        JGE = 319,
 
-        MINSS = 320,
+        JL = 320,
 
-        VMINSS = 321,
+        JLE = 321,
 
-        MOV = 322,
+        JNA = 322,
 
-        MOVAPD = 323,
+        JNAE = 323,
 
-        VMOVAPD = 324,
+        JNB = 324,
 
-        MOVAPS = 325,
+        JNBE = 325,
 
-        VMOVAPS = 326,
+        JNC = 326,
 
-        MOVBE = 327,
+        JNE = 327,
 
-        MOVD = 328,
+        JNG = 328,
 
-        MOVQ = 329,
+        JNGE = 329,
 
-        VMOVD = 330,
+        JNL = 330,
 
-        VMOVQ = 331,
+        JNLE = 331,
 
-        MOVDDUP = 332,
+        JNO = 332,
 
-        VMOVDDUP = 333,
+        JNP = 333,
 
-        MOVDQA = 334,
+        JNS = 334,
 
-        VMOVDQA = 335,
+        JNZ = 335,
 
-        MOVDQU = 336,
+        JO = 336,
 
-        VMOVDQU = 337,
+        JP = 337,
 
-        MOVDQ2Q = 338,
+        JPE = 338,
 
-        MOVHLPS = 339,
+        JPO = 339,
 
-        VMOVHLPS = 340,
+        JS = 340,
 
-        MOVHPD = 341,
+        JZ = 341,
 
-        VMOVHPD = 342,
+        JMP = 342,
 
-        MOVHPS = 343,
+        LAHF = 343,
 
-        VMOVHPS = 344,
+        LAR = 344,
 
-        MOVLHPS = 345,
+        LDDQU = 345,
 
-        VMOVLHPS = 346,
+        VLDDQU = 346,
 
-        MOVLPD = 347,
+        LDMXCSR = 347,
 
-        VMOVLPD = 348,
+        VLDMXCSR = 348,
 
-        MOVLPS = 349,
+        LDS = 349,
 
-        VMOVLPS = 350,
+        LSS = 350,
 
-        MOVMSKPD = 351,
+        LES = 351,
 
-        VMOVMSKPD = 352,
+        LFS = 352,
 
-        MOVMSKPS = 353,
+        LGS = 353,
 
-        VMOVMSKPS = 354,
+        LEA = 354,
 
-        MOVNTDQA = 355,
+        LEAVE = 355,
 
-        VMOVNTDQA = 356,
+        LFENCE = 356,
 
-        MOVNTDQ = 357,
+        LGDT = 357,
 
-        VMOVNTDQ = 358,
+        LIDT = 358,
 
-        MOVNTI = 359,
+        LLDT = 359,
 
-        MOVNTPD = 360,
+        LMSW = 360,
 
-        VMOVNTPD = 361,
+        LOCK = 361,
 
-        MOVNTPS = 362,
+        LODS = 362,
 
-        VMOVNTPS = 363,
+        LODSB = 363,
 
-        MOVNTQ = 364,
+        LODSW = 364,
 
-        MOVQ2DQ = 365,
+        LODSD = 365,
 
-        MOVS = 366,
+        LODSQ = 366,
 
-        MOVSD = 367,
+        LOOP = 367,
 
-        VMOVSD = 368,
+        LOOPE = 368,
 
-        MOVSHDUP = 369,
+        LOOPNE = 369,
 
-        VMOVSHDUP = 370,
+        LSL = 370,
 
-        MOVSLDUP = 371,
+        LTR = 371,
 
-        VMOVSLDUP = 372,
+        LZCNT = 372,
 
-        MOVSS = 373,
+        MASKMOVDQU = 373,
 
-        VMOVSS = 374,
+        VMASKMOVDQU = 374,
 
-        MOVSX = 375,
+        MASKMOVQ = 375,
 
-        MOVSXD = 376,
+        MAXPD = 376,
 
-        MOVUPD = 377,
+        VMAXPD = 377,
 
-        VMOVUPD = 378,
+        MAXPS = 378,
 
-        MOVUPS = 379,
+        VMAXPS = 379,
 
-        VMOVUPS = 380,
+        MAXSD = 380,
 
-        MOVZX = 381,
+        VMAXSD = 381,
 
-        MPSADBW = 382,
+        MAXSS = 382,
 
-        VMPSADBW = 383,
+        VMAXSS = 383,
 
-        MUL = 384,
+        MFENCE = 384,
 
-        MULPD = 385,
+        MINPD = 385,
 
-        VMULPD = 386,
+        VMINPD = 386,
 
-        MULPS = 387,
+        MINPS = 387,
 
-        VMULPS = 388,
+        VMINPS = 388,
 
-        MULSD = 389,
+        MINSD = 389,
 
-        VMULSD = 390,
+        VMINSD = 390,
 
-        MULSS = 391,
+        MINSS = 391,
 
-        VMULSS = 392,
+        VMINSS = 392,
 
-        MULX = 393,
+        MONITOR = 393,
 
-        NEG = 394,
+        MOV = 394,
 
-        NOP = 395,
+        MOVAPD = 395,
 
-        NOT = 396,
+        VMOVAPD = 396,
 
-        OR = 397,
+        MOVAPS = 397,
 
-        ORPD = 398,
+        VMOVAPS = 398,
 
-        VORPD = 399,
+        MOVBE = 399,
 
-        ORPS = 400,
+        MOVD = 400,
 
-        VORPS = 401,
+        MOVQ = 401,
 
-        OUT = 402,
+        VMOVD = 402,
 
-        OUTS = 403,
+        VMOVQ = 403,
 
-        PABSB = 404,
+        MOVDDUP = 404,
 
-        PABSW = 405,
+        VMOVDDUP = 405,
 
-        PABSD = 406,
+        MOVDQA = 406,
 
-        VPABSB = 407,
+        VMOVDQA = 407,
 
-        VPABSW = 408,
+        MOVDQU = 408,
 
-        VPABSD = 409,
+        VMOVDQU = 409,
 
-        PACKSSWB = 410,
+        MOVDQ2Q = 410,
 
-        PACKSSDW = 411,
+        MOVHLPS = 411,
 
-        VPACKSSWB = 412,
+        VMOVHLPS = 412,
 
-        VPACKSSDW = 413,
+        MOVHPD = 413,
 
-        PACKUSDW = 414,
+        VMOVHPD = 414,
 
-        VPACKUSDW = 415,
+        MOVHPS = 415,
 
-        PACKUSWB = 416,
+        VMOVHPS = 416,
 
-        VPACKUSWB = 417,
+        MOVLHPS = 417,
 
-        PADDB = 418,
+        VMOVLHPS = 418,
 
-        PADDW = 419,
+        MOVLPD = 419,
 
-        PADDD = 420,
+        VMOVLPD = 420,
 
-        VPADDB = 421,
+        MOVLPS = 421,
 
-        VPADDW = 422,
+        VMOVLPS = 422,
 
-        VPADDD = 423,
+        MOVMSKPD = 423,
 
-        PADDQ = 424,
+        VMOVMSKPD = 424,
 
-        VPADDQ = 425,
+        MOVMSKPS = 425,
 
-        PADDSB = 426,
+        VMOVMSKPS = 426,
 
-        PADDSW = 427,
+        MOVNTDQA = 427,
 
-        VPADDSB = 428,
+        VMOVNTDQA = 428,
 
-        VPADDSW = 429,
+        MOVNTDQ = 429,
 
-        PADDUSB = 430,
+        VMOVNTDQ = 430,
 
-        PADDUSW = 431,
+        MOVNTI = 431,
 
-        VPADDUSB = 432,
+        MOVNTPD = 432,
 
-        VPADDUSW = 433,
+        VMOVNTPD = 433,
 
-        PALIGNR = 434,
+        MOVNTPS = 434,
 
-        VPALIGNR = 435,
+        VMOVNTPS = 435,
 
-        PAND = 436,
+        MOVNTQ = 436,
 
-        VPAND = 437,
+        MOVQ2DQ = 437,
 
-        PANDN = 438,
+        MOVS = 438,
 
-        VPANDN = 439,
+        MOVSB = 439,
 
-        PAVGB = 440,
+        MOVSW = 440,
 
-        PAVGW = 441,
+        MOVSD = 441,
 
-        VPAVGB = 442,
+        MOVSQ = 442,
 
-        VPAVGW = 443,
+        VMOVSD = 443,
 
-        PBLENDVB = 444,
+        MOVSHDUP = 444,
 
-        VPBLENDVB = 445,
+        VMOVSHDUP = 445,
 
-        PBLENDW = 446,
+        MOVSLDUP = 446,
 
-        VPBLENDW = 447,
+        VMOVSLDUP = 447,
 
-        PCLMULQDQ = 448,
+        MOVSS = 448,
 
-        VPCLMULQDQ = 449,
+        VMOVSS = 449,
 
-        PCMPEQB = 450,
+        MOVSX = 450,
 
-        PCMPEQW = 451,
+        MOVSXD = 451,
 
-        PCMPEQD = 452,
+        MOVUPD = 452,
 
-        VPCMPEQB = 453,
+        VMOVUPD = 453,
 
-        VPCMPEQW = 454,
+        MOVUPS = 454,
 
-        VPCMPEQD = 455,
+        VMOVUPS = 455,
 
-        PCMPEQQ = 456,
+        MOVZX = 456,
 
-        VPCMPEQQ = 457,
+        MPSADBW = 457,
 
-        PCMPESTRI = 458,
+        VMPSADBW = 458,
 
-        VPCMPESTRI = 459,
+        MUL = 459,
 
-        PCMPESTRM = 460,
+        MULPD = 460,
 
-        VPCMPESTRM = 461,
+        VMULPD = 461,
 
-        PCMPGTB = 462,
+        MULPS = 462,
 
-        PCMPGTW = 463,
+        VMULPS = 463,
 
-        PCMPGTD = 464,
+        MULSD = 464,
 
-        VPCMPGTB = 465,
+        VMULSD = 465,
 
-        VPCMPGTW = 466,
+        MULSS = 466,
 
-        VPCMPGTD = 467,
+        VMULSS = 467,
 
-        PCMPGTQ = 468,
+        MULX = 468,
 
-        VPCMPGTQ = 469,
+        MWAIT = 469,
 
-        PCMPISTRI = 470,
+        NEG = 470,
 
-        VPCMPISTRI = 471,
+        NOP = 471,
 
-        PCMPISTRM = 472,
+        NOT = 472,
 
-        VPCMPISTRM = 473,
+        OR = 473,
 
-        PDEP = 474,
+        ORPD = 474,
 
-        PEXT = 475,
+        VORPD = 475,
 
-        PEXTRB = 476,
+        ORPS = 476,
 
-        PEXTRD = 477,
+        VORPS = 477,
 
-        PEXTRQ = 478,
+        OUT = 478,
 
-        VPEXTRB = 479,
+        OUTS = 479,
 
-        VPEXTRD = 480,
+        OUTSB = 480,
 
-        VPEXTRQ = 481,
+        OUTSW = 481,
 
-        PEXTRW = 482,
+        OUTSD = 482,
 
-        VPEXTRW = 483,
+        PABSB = 483,
 
-        PHADDW = 484,
+        PABSW = 484,
 
-        PHADDD = 485,
+        PABSD = 485,
 
-        VPHADDW = 486,
+        VPABSB = 486,
 
-        VPHADDD = 487,
+        VPABSW = 487,
 
-        PHADDSW = 488,
+        VPABSD = 488,
 
-        VPHADDSW = 489,
+        PACKSSWB = 489,
 
-        PHMINPOSUW = 490,
+        PACKSSDW = 490,
 
-        VPHMINPOSUW = 491,
+        VPACKSSWB = 491,
 
-        PHSUBW = 492,
+        VPACKSSDW = 492,
 
-        PHSUBD = 493,
+        PACKUSDW = 493,
 
-        VPHSUBW = 494,
+        VPACKUSDW = 494,
 
-        VPHSUBD = 495,
+        PACKUSWB = 495,
 
-        PHSUBSW = 496,
+        VPACKUSWB = 496,
 
-        VPHSUBSW = 497,
+        PADDB = 497,
 
-        PINSRB = 498,
+        PADDW = 498,
 
-        PINSRD = 499,
+        PADDD = 499,
 
-        PINSRQ = 500,
+        VPADDB = 500,
 
-        VPINSRB = 501,
+        VPADDW = 501,
 
-        VPINSRD = 502,
+        VPADDD = 502,
 
-        VPINSRQ = 503,
+        PADDQ = 503,
 
-        PINSRW = 504,
+        VPADDQ = 504,
 
-        VPINSRW = 505,
+        PADDSB = 505,
 
-        PMADDUBSW = 506,
+        PADDSW = 506,
 
-        VPMADDUBSW = 507,
+        VPADDSB = 507,
 
-        PMADDWD = 508,
+        VPADDSW = 508,
 
-        VPMADDWD = 509,
+        PADDUSB = 509,
 
-        PMAXSB = 510,
+        PADDUSW = 510,
 
-        VPMAXSB = 511,
+        VPADDUSB = 511,
 
-        PMAXSD = 512,
+        VPADDUSW = 512,
 
-        VPMAXSD = 513,
+        PALIGNR = 513,
 
-        PMAXSW = 514,
+        VPALIGNR = 514,
 
-        VPMAXSW = 515,
+        PAND = 515,
 
-        PMAXUB = 516,
+        VPAND = 516,
 
-        VPMAXUB = 517,
+        PANDN = 517,
 
-        PMAXUD = 518,
+        VPANDN = 518,
 
-        VPMAXUD = 519,
+        PAUSE = 519,
 
-        PMAXUW = 520,
+        PAVGB = 520,
 
-        VPMAXUW = 521,
+        PAVGW = 521,
 
-        PMINSB = 522,
+        VPAVGB = 522,
 
-        VPMINSB = 523,
+        VPAVGW = 523,
 
-        PMINSD = 524,
+        PBLENDVB = 524,
 
-        VPMINSD = 525,
+        VPBLENDVB = 525,
 
-        PMINSW = 526,
+        PBLENDW = 526,
 
-        VPMINSW = 527,
+        VPBLENDW = 527,
 
-        PMINUB = 528,
+        PCLMULQDQ = 528,
 
-        VPMINUB = 529,
+        VPCLMULQDQ = 529,
 
-        PMINUD = 530,
+        PCMPEQB = 530,
 
-        VPMINUD = 531,
+        PCMPEQW = 531,
 
-        PMINUW = 532,
+        PCMPEQD = 532,
 
-        VPMINUW = 533,
+        VPCMPEQB = 533,
 
-        PMOVMSKB = 534,
+        VPCMPEQW = 534,
 
-        VPMOVMSKB = 535,
+        VPCMPEQD = 535,
 
-        PMOVSXBW = 536,
+        PCMPEQQ = 536,
 
-        PMOVSXBD = 537,
+        VPCMPEQQ = 537,
 
-        PMOVSXBQ = 538,
+        PCMPESTRI = 538,
 
-        PMOVSXWD = 539,
+        VPCMPESTRI = 539,
 
-        PMOVSXWQ = 540,
+        PCMPESTRM = 540,
 
-        PMOVSXDQ = 541,
+        VPCMPESTRM = 541,
 
-        VPMOVSXBW = 542,
+        PCMPGTB = 542,
 
-        VPMOVSXBD = 543,
+        PCMPGTW = 543,
 
-        VPMOVSXBQ = 544,
+        PCMPGTD = 544,
 
-        VPMOVSXWD = 545,
+        VPCMPGTB = 545,
 
-        VPMOVSXWQ = 546,
+        VPCMPGTW = 546,
 
-        VPMOVSXDQ = 547,
+        VPCMPGTD = 547,
 
-        PMOVZXBW = 548,
+        PCMPGTQ = 548,
 
-        PMOVZXBD = 549,
+        VPCMPGTQ = 549,
 
-        PMOVZXBQ = 550,
+        PCMPISTRI = 550,
 
-        PMOVZXWD = 551,
+        VPCMPISTRI = 551,
 
-        PMOVZXWQ = 552,
+        PCMPISTRM = 552,
 
-        PMOVZXDQ = 553,
+        VPCMPISTRM = 553,
 
-        VPMOVZXBW = 554,
+        PDEP = 554,
 
-        VPMOVZXBD = 555,
+        PEXT = 555,
 
-        VPMOVZXBQ = 556,
+        PEXTRB = 556,
 
-        VPMOVZXWD = 557,
+        PEXTRD = 557,
 
-        VPMOVZXWQ = 558,
+        PEXTRQ = 558,
 
-        VPMOVZXDQ = 559,
+        VPEXTRB = 559,
 
-        PMULDQ = 560,
+        VPEXTRD = 560,
 
-        VPMULDQ = 561,
+        VPEXTRQ = 561,
 
-        PMULHRSW = 562,
+        PEXTRW = 562,
 
-        VPMULHRSW = 563,
+        VPEXTRW = 563,
 
-        PMULHUW = 564,
+        PHADDW = 564,
 
-        VPMULHUW = 565,
+        PHADDD = 565,
 
-        PMULHW = 566,
+        VPHADDW = 566,
 
-        VPMULHW = 567,
+        VPHADDD = 567,
 
-        PMULLD = 568,
+        PHADDSW = 568,
 
-        VPMULLD = 569,
+        VPHADDSW = 569,
 
-        PMULLW = 570,
+        PHMINPOSUW = 570,
 
-        VPMULLW = 571,
+        VPHMINPOSUW = 571,
 
-        PMULUDQ = 572,
+        PHSUBW = 572,
 
-        VPMULUDQ = 573,
+        PHSUBD = 573,
 
-        POP = 574,
+        VPHSUBW = 574,
 
-        POPCNT = 575,
+        VPHSUBD = 575,
 
-        POR = 576,
+        PHSUBSW = 576,
 
-        VPOR = 577,
+        VPHSUBSW = 577,
 
-        PREFETCHT0 = 578,
+        PINSRB = 578,
 
-        PREFETCHT1 = 579,
+        PINSRD = 579,
 
-        PREFETCHT2 = 580,
+        PINSRQ = 580,
 
-        PREFETCHNTA = 581,
+        VPINSRB = 581,
 
-        PSADBW = 582,
+        VPINSRD = 582,
 
-        VPSADBW = 583,
+        VPINSRQ = 583,
 
-        PSHUFB = 584,
+        PINSRW = 584,
 
-        VPSHUFB = 585,
+        VPINSRW = 585,
 
-        PSHUFD = 586,
+        PMADDUBSW = 586,
 
-        VPSHUFD = 587,
+        VPMADDUBSW = 587,
 
-        PSHUFHW = 588,
+        PMADDWD = 588,
 
-        VPSHUFHW = 589,
+        VPMADDWD = 589,
 
-        PSHUFLW = 590,
+        PMAXSB = 590,
 
-        VPSHUFLW = 591,
+        VPMAXSB = 591,
 
-        PSHUFW = 592,
+        PMAXSD = 592,
 
-        PSIGNB = 593,
+        VPMAXSD = 593,
 
-        PSIGNW = 594,
+        PMAXSW = 594,
 
-        PSIGND = 595,
+        VPMAXSW = 595,
 
-        VPSIGNB = 596,
+        PMAXUB = 596,
 
-        VPSIGNW = 597,
+        VPMAXUB = 597,
 
-        VPSIGND = 598,
+        PMAXUD = 598,
 
-        PSLLDQ = 599,
+        VPMAXUD = 599,
 
-        VPSLLDQ = 600,
+        PMAXUW = 600,
 
-        PSLLW = 601,
+        VPMAXUW = 601,
 
-        PSLLD = 602,
+        PMINSB = 602,
 
-        PSLLQ = 603,
+        VPMINSB = 603,
 
-        VPSLLW = 604,
+        PMINSD = 604,
 
-        VPSLLD = 605,
+        VPMINSD = 605,
 
-        VPSLLQ = 606,
+        PMINSW = 606,
 
-        PSRAW = 607,
+        VPMINSW = 607,
 
-        PSRAD = 608,
+        PMINUB = 608,
 
-        VPSRAW = 609,
+        VPMINUB = 609,
 
-        VPSRAD = 610,
+        PMINUD = 610,
 
-        PSRLDQ = 611,
+        VPMINUD = 611,
 
-        VPSRLDQ = 612,
+        PMINUW = 612,
 
-        PSRLW = 613,
+        VPMINUW = 613,
 
-        PSRLD = 614,
+        PMOVMSKB = 614,
 
-        PSRLQ = 615,
+        VPMOVMSKB = 615,
 
-        VPSRLW = 616,
+        PMOVSXBW = 616,
 
-        VPSRLD = 617,
+        PMOVSXBD = 617,
 
-        VPSRLQ = 618,
+        PMOVSXBQ = 618,
 
-        PSUBB = 619,
+        PMOVSXWD = 619,
 
-        PSUBW = 620,
+        PMOVSXWQ = 620,
 
-        PSUBD = 621,
+        PMOVSXDQ = 621,
 
-        VPSUBB = 622,
+        VPMOVSXBW = 622,
 
-        VPSUBW = 623,
+        VPMOVSXBD = 623,
 
-        VPSUBD = 624,
+        VPMOVSXBQ = 624,
 
-        PSUBQ = 625,
+        VPMOVSXWD = 625,
 
-        VPSUBQ = 626,
+        VPMOVSXWQ = 626,
 
-        PSUBSB = 627,
+        VPMOVSXDQ = 627,
 
-        PSUBSW = 628,
+        PMOVZXBW = 628,
 
-        VPSUBSB = 629,
+        PMOVZXBD = 629,
 
-        VPSUBSW = 630,
+        PMOVZXBQ = 630,
 
-        PSUBUSB = 631,
+        PMOVZXWD = 631,
 
-        PSUBUSW = 632,
+        PMOVZXWQ = 632,
 
-        VPSUBUSB = 633,
+        PMOVZXDQ = 633,
 
-        VPSUBUSW = 634,
+        VPMOVZXBW = 634,
 
-        PTEST = 635,
+        VPMOVZXBD = 635,
 
-        VPTEST = 636,
+        VPMOVZXBQ = 636,
 
-        PUNPCKHBW = 637,
+        VPMOVZXWD = 637,
 
-        PUNPCKHWD = 638,
+        VPMOVZXWQ = 638,
 
-        PUNPCKHDQ = 639,
+        VPMOVZXDQ = 639,
 
-        PUNPCKHQDQ = 640,
+        PMULDQ = 640,
 
-        VPUNPCKHBW = 641,
+        VPMULDQ = 641,
 
-        VPUNPCKHWD = 642,
+        PMULHRSW = 642,
 
-        VPUNPCKHDQ = 643,
+        VPMULHRSW = 643,
 
-        VPUNPCKHQDQ = 644,
+        PMULHUW = 644,
 
-        PUNPCKLBW = 645,
+        VPMULHUW = 645,
 
-        PUNPCKLWD = 646,
+        PMULHW = 646,
 
-        PUNPCKLDQ = 647,
+        VPMULHW = 647,
 
-        PUNPCKLQDQ = 648,
+        PMULLD = 648,
 
-        VPUNPCKLBW = 649,
+        VPMULLD = 649,
 
-        VPUNPCKLWD = 650,
+        PMULLW = 650,
 
-        VPUNPCKLDQ = 651,
+        VPMULLW = 651,
 
-        VPUNPCKLQDQ = 652,
+        PMULUDQ = 652,
 
-        PUSH = 653,
+        VPMULUDQ = 653,
 
-        PUSHQ = 654,
+        POP = 654,
 
-        PUSHW = 655,
+        POPA = 655,
 
-        PXOR = 656,
+        POPAD = 656,
 
-        VPXOR = 657,
+        POPCNT = 657,
 
-        RCL = 658,
+        POPF = 658,
 
-        RCR = 659,
+        POPFD = 659,
 
-        ROL = 660,
+        POPFQ = 660,
 
-        ROR = 661,
+        POR = 661,
 
-        RCPPS = 662,
+        VPOR = 662,
 
-        VRCPPS = 663,
+        PREFETCHT0 = 663,
 
-        RCPSS = 664,
+        PREFETCHT1 = 664,
 
-        VRCPSS = 665,
+        PREFETCHT2 = 665,
 
-        RDFSBASE = 666,
+        PREFETCHNTA = 666,
 
-        RDGSBASE = 667,
+        PSADBW = 667,
 
-        RDRAND = 668,
+        VPSADBW = 668,
 
-        REP_INS = 669,
+        PSHUFB = 669,
 
-        REP_MOVS = 670,
+        VPSHUFB = 670,
 
-        REP_OUTS = 671,
+        PSHUFD = 671,
 
-        REP_LODS = 672,
+        VPSHUFD = 672,
 
-        REP_STOS = 673,
+        PSHUFHW = 673,
 
-        REPE_CMPS = 674,
+        VPSHUFHW = 674,
 
-        REPE_SCAS = 675,
+        PSHUFLW = 675,
 
-        REPNE_CMPS = 676,
+        VPSHUFLW = 676,
 
-        REPNE_SCAS = 677,
+        PSHUFW = 677,
 
-        RET = 678,
+        PSIGNB = 678,
 
-        RORX = 679,
+        PSIGNW = 679,
 
-        ROUNDPD = 680,
+        PSIGND = 680,
 
-        VROUNDPD = 681,
+        VPSIGNB = 681,
 
-        ROUNDPS = 682,
+        VPSIGNW = 682,
 
-        VROUNDPS = 683,
+        VPSIGND = 683,
 
-        ROUNDSD = 684,
+        PSLLDQ = 684,
 
-        VROUNDSD = 685,
+        VPSLLDQ = 685,
 
-        ROUNDSS = 686,
+        PSLLW = 686,
 
-        VROUNDSS = 687,
+        PSLLD = 687,
 
-        RSQRTPS = 688,
+        PSLLQ = 688,
 
-        VRSQRTPS = 689,
+        VPSLLW = 689,
 
-        RSQRTSS = 690,
+        VPSLLD = 690,
 
-        VRSQRTSS = 691,
+        VPSLLQ = 691,
 
-        SAL = 692,
+        PSRAW = 692,
 
-        SAR = 693,
+        PSRAD = 693,
 
-        SHL = 694,
+        VPSRAW = 694,
 
-        SHR = 695,
+        VPSRAD = 695,
 
-        SARX = 696,
+        PSRLDQ = 696,
 
-        SHLX = 697,
+        VPSRLDQ = 697,
 
-        SHRX = 698,
+        PSRLW = 698,
 
-        SBB = 699,
+        PSRLD = 699,
 
-        SCAS = 700,
+        PSRLQ = 700,
 
-        SETA = 701,
+        VPSRLW = 701,
 
-        SETAE = 702,
+        VPSRLD = 702,
 
-        SETB = 703,
+        VPSRLQ = 703,
 
-        SETBE = 704,
+        PSUBB = 704,
 
-        SETC = 705,
+        PSUBW = 705,
 
-        SETE = 706,
+        PSUBD = 706,
 
-        SETG = 707,
+        VPSUBB = 707,
 
-        SETGE = 708,
+        VPSUBW = 708,
 
-        SETL = 709,
+        VPSUBD = 709,
 
-        SETLE = 710,
+        PSUBQ = 710,
 
-        SETNA = 711,
+        VPSUBQ = 711,
 
-        SETNAE = 712,
+        PSUBSB = 712,
 
-        SETNB = 713,
+        PSUBSW = 713,
 
-        SETNBE = 714,
+        VPSUBSB = 714,
 
-        SETNC = 715,
+        VPSUBSW = 715,
 
-        SETNE = 716,
+        PSUBUSB = 716,
 
-        SETNG = 717,
+        PSUBUSW = 717,
 
-        SETNGE = 718,
+        VPSUBUSB = 718,
 
-        SETNL = 719,
+        VPSUBUSW = 719,
 
-        SETNLE = 720,
+        PTEST = 720,
 
-        SETNO = 721,
+        VPTEST = 721,
 
-        SETNP = 722,
+        PUNPCKHBW = 722,
 
-        SETNS = 723,
+        PUNPCKHWD = 723,
 
-        SETNZ = 724,
+        PUNPCKHDQ = 724,
 
-        SETO = 725,
+        PUNPCKHQDQ = 725,
 
-        SETP = 726,
+        VPUNPCKHBW = 726,
 
-        SETPE = 727,
+        VPUNPCKHWD = 727,
 
-        SETPO = 728,
+        VPUNPCKHDQ = 728,
 
-        SETS = 729,
+        VPUNPCKHQDQ = 729,
 
-        SETZ = 730,
+        PUNPCKLBW = 730,
 
-        SGDT = 731,
+        PUNPCKLWD = 731,
 
-        SHLD = 732,
+        PUNPCKLDQ = 732,
 
-        SHRD = 733,
+        PUNPCKLQDQ = 733,
 
-        SHUFPD = 734,
+        VPUNPCKLBW = 734,
 
-        VSHUFPD = 735,
+        VPUNPCKLWD = 735,
 
-        SHUFPS = 736,
+        VPUNPCKLDQ = 736,
 
-        VSHUFPS = 737,
+        VPUNPCKLQDQ = 737,
 
-        SIDT = 738,
+        PUSH = 738,
 
-        SLDT = 739,
+        PUSHQ = 739,
 
-        SMSW = 740,
+        PUSHW = 740,
 
-        SQRTPD = 741,
+        PUSHA = 741,
 
-        VSQRTPD = 742,
+        PUSHAD = 742,
 
-        SQRTPS = 743,
+        PUSHF = 743,
 
-        VSQRTPS = 744,
+        PUSHFD = 744,
 
-        SQRTSD = 745,
+        PUSHFQ = 745,
 
-        VSQRTSD = 746,
+        PXOR = 746,
 
-        SQRTSS = 747,
+        VPXOR = 747,
 
-        VSQRTSS = 748,
+        RCL = 748,
 
-        STMXCSR = 749,
+        RCR = 749,
 
-        VSTMXCSR = 750,
+        ROL = 750,
 
-        STOS = 751,
+        ROR = 751,
 
-        STR = 752,
+        RCPPS = 752,
 
-        SUB = 753,
+        VRCPPS = 753,
 
-        SUBPD = 754,
+        RCPSS = 754,
 
-        VSUBPD = 755,
+        VRCPSS = 755,
 
-        SUBPS = 756,
+        RDFSBASE = 756,
 
-        VSUBPS = 757,
+        RDGSBASE = 757,
 
-        SUBSD = 758,
+        RDMSR = 758,
 
-        VSUBSD = 759,
+        RDPMC = 759,
 
-        SUBSS = 760,
+        RDRAND = 760,
 
-        VSUBSS = 761,
+        RDTSC = 761,
 
-        SYSEXIT = 762,
+        RDTSCP = 762,
 
-        SYSRET = 763,
+        REP_INS = 763,
 
-        TEST = 764,
+        REP_MOVS = 764,
 
-        TZCNT = 765,
+        REP_OUTS = 765,
 
-        UCOMISD = 766,
+        REP_LODS = 766,
 
-        VUCOMISD = 767,
+        REP_STOS = 767,
 
-        UCOMISS = 768,
+        REPE_CMPS = 768,
 
-        VUCOMISS = 769,
+        REPE_SCAS = 769,
 
-        UNPCKHPD = 770,
+        REPNE_CMPS = 770,
 
-        VUNPCKHPD = 771,
+        REPNE_SCAS = 771,
 
-        UNPCKHPS = 772,
+        RET = 772,
 
-        VUNPCKHPS = 773,
+        RORX = 773,
 
-        UNPCKLPD = 774,
+        ROUNDPD = 774,
 
-        VUNPCKLPD = 775,
+        VROUNDPD = 775,
 
-        UNPCKLPS = 776,
+        ROUNDPS = 776,
 
-        VUNPCKLPS = 777,
+        VROUNDPS = 777,
 
-        VBROADCASTSS = 778,
+        ROUNDSD = 778,
 
-        VBROADCASTSD = 779,
+        VROUNDSD = 779,
 
-        VBROADCASTF128 = 780,
+        ROUNDSS = 780,
 
-        VCVTPH2PS = 781,
+        VROUNDSS = 781,
 
-        VCVTPS2PH = 782,
+        RSM = 782,
 
-        VERR = 783,
+        RSQRTPS = 783,
 
-        VERW = 784,
+        VRSQRTPS = 784,
 
-        VEXTRACTF128 = 785,
+        RSQRTSS = 785,
 
-        VEXTRACTI128 = 786,
+        VRSQRTSS = 786,
 
-        VFMADD132PD = 787,
+        SAHF = 787,
 
-        VFMADD213PD = 788,
+        SAL = 788,
 
-        VFMADD231PD = 789,
+        SAR = 789,
 
-        VFMADD132PS = 790,
+        SHL = 790,
 
-        VFMADD213PS = 791,
+        SHR = 791,
 
-        VFMADD231PS = 792,
+        SARX = 792,
 
-        VFMADD132SD = 793,
+        SHLX = 793,
 
-        VFMADD213SD = 794,
+        SHRX = 794,
 
-        VFMADD231SD = 795,
+        SBB = 795,
 
-        VFMADD132SS = 796,
+        SCAS = 796,
 
-        VFMADD213SS = 797,
+        SCASB = 797,
 
-        VFMADD231SS = 798,
+        SCASW = 798,
 
-        VFMADDSUB132PD = 799,
+        SCASD = 799,
 
-        VFMADDSUB213PD = 800,
+        SCASQ = 800,
 
-        VFMADDSUB231PD = 801,
+        SETA = 801,
 
-        VFMADDSUB132PS = 802,
+        SETAE = 802,
 
-        VFMADDSUB213PS = 803,
+        SETB = 803,
 
-        VFMADDSUB231PS = 804,
+        SETBE = 804,
 
-        VFMSUBADD132PD = 805,
+        SETC = 805,
 
-        VFMSUBADD213PD = 806,
+        SETE = 806,
 
-        VFMSUBADD231PD = 807,
+        SETG = 807,
 
-        VFMSUBADD132PS = 808,
+        SETGE = 808,
 
-        VFMSUBADD213PS = 809,
+        SETL = 809,
 
-        VFMSUBADD231PS = 810,
+        SETLE = 810,
 
-        VFMSUB132PD = 811,
+        SETNA = 811,
 
-        VFMSUB213PD = 812,
+        SETNAE = 812,
 
-        VFMSUB231PD = 813,
+        SETNB = 813,
 
-        VFMSUB132PS = 814,
+        SETNBE = 814,
 
-        VFMSUB213PS = 815,
+        SETNC = 815,
 
-        VFMSUB231PS = 816,
+        SETNE = 816,
 
-        VFMSUB132SD = 817,
+        SETNG = 817,
 
-        VFMSUB213SD = 818,
+        SETNGE = 818,
 
-        VFMSUB231SD = 819,
+        SETNL = 819,
 
-        VFMSUB132SS = 820,
+        SETNLE = 820,
 
-        VFMSUB213SS = 821,
+        SETNO = 821,
 
-        VFMSUB231SS = 822,
+        SETNP = 822,
 
-        VFNMADD132PD = 823,
+        SETNS = 823,
 
-        VFNMADD213PD = 824,
+        SETNZ = 824,
 
-        VFNMADD231PD = 825,
+        SETO = 825,
 
-        VFNMADD132PS = 826,
+        SETP = 826,
 
-        VFNMADD213PS = 827,
+        SETPE = 827,
 
-        VFNMADD231PS = 828,
+        SETPO = 828,
 
-        VFNMADD132SD = 829,
+        SETS = 829,
 
-        VFNMADD213SD = 830,
+        SETZ = 830,
 
-        VFNMADD231SD = 831,
+        SFENCE = 831,
 
-        VFNMADD132SS = 832,
+        SGDT = 832,
 
-        VFNMADD213SS = 833,
+        SHLD = 833,
 
-        VFNMADD231SS = 834,
+        SHRD = 834,
 
-        VFNMSUB132PD = 835,
+        SHUFPD = 835,
 
-        VFNMSUB213PD = 836,
+        VSHUFPD = 836,
 
-        VFNMSUB231PD = 837,
+        SHUFPS = 837,
 
-        VFNMSUB132PS = 838,
+        VSHUFPS = 838,
 
-        VFNMSUB213PS = 839,
+        SIDT = 839,
 
-        VFNMSUB231PS = 840,
+        SLDT = 840,
 
-        VFNMSUB132SD = 841,
+        SMSW = 841,
 
-        VFNMSUB213SD = 842,
+        SQRTPD = 842,
 
-        VFNMSUB231SD = 843,
+        VSQRTPD = 843,
 
-        VFNMSUB132SS = 844,
+        SQRTPS = 844,
 
-        VFNMSUB213SS = 845,
+        VSQRTPS = 845,
 
-        VFNMSUB231SS = 846,
+        SQRTSD = 846,
 
-        VGATHERDPD = 847,
+        VSQRTSD = 847,
 
-        VGATHERQPD = 848,
+        SQRTSS = 848,
 
-        VGATHERDPS = 849,
+        VSQRTSS = 849,
 
-        VGATHERQPS = 850,
+        STC = 850,
 
-        VPGATHERDD = 851,
+        STD = 851,
 
-        VPGATHERQD = 852,
+        STI = 852,
 
-        VPGATHERDQ = 853,
+        STMXCSR = 853,
 
-        VPGATHERQQ = 854,
+        VSTMXCSR = 854,
 
-        VINSERTF128 = 855,
+        STOS = 855,
 
-        VINSERTI128 = 856,
+        STOSB = 856,
 
-        VMASKMOVPS = 857,
+        STOSW = 857,
 
-        VMASKMOVPD = 858,
+        STOSD = 858,
 
-        VPBLENDD = 859,
+        STOSQ = 859,
 
-        VPBROADCASTB = 860,
+        STR = 860,
 
-        VPBROADCASTW = 861,
+        SUB = 861,
 
-        VPBROADCASTD = 862,
+        SUBPD = 862,
 
-        VPBROADCASTQ = 863,
+        VSUBPD = 863,
 
-        VBROADCASTI128 = 864,
+        SUBPS = 864,
 
-        VPERMD = 865,
+        VSUBPS = 865,
 
-        VPERMPD = 866,
+        SUBSD = 866,
 
-        VPERMPS = 867,
+        VSUBSD = 867,
 
-        VPERMQ = 868,
+        SUBSS = 868,
 
-        VPERM2I128 = 869,
+        VSUBSS = 869,
 
-        VPERMILPD = 870,
+        SWAPGS = 870,
 
-        VPERMILPS = 871,
+        SYSCALL = 871,
 
-        VPERM2F128 = 872,
+        SYSENTER = 872,
 
-        VPMASKMOVD = 873,
+        SYSEXIT = 873,
 
-        VPMASKMOVQ = 874,
+        SYSRET = 874,
 
-        VPSLLVD = 875,
+        TEST = 875,
 
-        VPSLLVQ = 876,
+        TZCNT = 876,
 
-        VPSRAVD = 877,
+        UCOMISD = 877,
 
-        VPSRLVD = 878,
+        VUCOMISD = 878,
 
-        VPSRLVQ = 879,
+        UCOMISS = 879,
 
-        VTESTPS = 880,
+        VUCOMISS = 880,
 
-        VTESTPD = 881,
+        UD2 = 881,
 
-        WRFSBASE = 882,
+        UNPCKHPD = 882,
 
-        WRGSBASE = 883,
+        VUNPCKHPD = 883,
 
-        XABORT = 884,
+        UNPCKHPS = 884,
 
-        XADD = 885,
+        VUNPCKHPS = 885,
 
-        XBEGIN = 886,
+        UNPCKLPD = 886,
 
-        XCHG = 887,
+        VUNPCKLPD = 887,
 
-        XLAT = 888,
+        UNPCKLPS = 888,
 
-        XOR = 889,
+        VUNPCKLPS = 889,
 
-        XORPD = 890,
+        VBROADCASTSS = 890,
 
-        VXORPD = 891,
+        VBROADCASTSD = 891,
 
-        XORPS = 892,
+        VBROADCASTF128 = 892,
 
-        VXORPS = 893,
+        VCVTPH2PS = 893,
 
-        XRSTOR = 894,
+        VCVTPS2PH = 894,
 
-        XRSTOR64 = 895,
+        VERR = 895,
 
-        XSAVE = 896,
+        VERW = 896,
 
-        XSAVE64 = 897,
+        VEXTRACTF128 = 897,
 
-        XSAVEOPT = 898,
+        VEXTRACTI128 = 898,
 
-        XSAVEOPT64 = 899,
+        VFMADD132PD = 899,
+
+        VFMADD213PD = 900,
+
+        VFMADD231PD = 901,
+
+        VFMADD132PS = 902,
+
+        VFMADD213PS = 903,
+
+        VFMADD231PS = 904,
+
+        VFMADD132SD = 905,
+
+        VFMADD213SD = 906,
+
+        VFMADD231SD = 907,
+
+        VFMADD132SS = 908,
+
+        VFMADD213SS = 909,
+
+        VFMADD231SS = 910,
+
+        VFMADDSUB132PD = 911,
+
+        VFMADDSUB213PD = 912,
+
+        VFMADDSUB231PD = 913,
+
+        VFMADDSUB132PS = 914,
+
+        VFMADDSUB213PS = 915,
+
+        VFMADDSUB231PS = 916,
+
+        VFMSUBADD132PD = 917,
+
+        VFMSUBADD213PD = 918,
+
+        VFMSUBADD231PD = 919,
+
+        VFMSUBADD132PS = 920,
+
+        VFMSUBADD213PS = 921,
+
+        VFMSUBADD231PS = 922,
+
+        VFMSUB132PD = 923,
+
+        VFMSUB213PD = 924,
+
+        VFMSUB231PD = 925,
+
+        VFMSUB132PS = 926,
+
+        VFMSUB213PS = 927,
+
+        VFMSUB231PS = 928,
+
+        VFMSUB132SD = 929,
+
+        VFMSUB213SD = 930,
+
+        VFMSUB231SD = 931,
+
+        VFMSUB132SS = 932,
+
+        VFMSUB213SS = 933,
+
+        VFMSUB231SS = 934,
+
+        VFNMADD132PD = 935,
+
+        VFNMADD213PD = 936,
+
+        VFNMADD231PD = 937,
+
+        VFNMADD132PS = 938,
+
+        VFNMADD213PS = 939,
+
+        VFNMADD231PS = 940,
+
+        VFNMADD132SD = 941,
+
+        VFNMADD213SD = 942,
+
+        VFNMADD231SD = 943,
+
+        VFNMADD132SS = 944,
+
+        VFNMADD213SS = 945,
+
+        VFNMADD231SS = 946,
+
+        VFNMSUB132PD = 947,
+
+        VFNMSUB213PD = 948,
+
+        VFNMSUB231PD = 949,
+
+        VFNMSUB132PS = 950,
+
+        VFNMSUB213PS = 951,
+
+        VFNMSUB231PS = 952,
+
+        VFNMSUB132SD = 953,
+
+        VFNMSUB213SD = 954,
+
+        VFNMSUB231SD = 955,
+
+        VFNMSUB132SS = 956,
+
+        VFNMSUB213SS = 957,
+
+        VFNMSUB231SS = 958,
+
+        VGATHERDPD = 959,
+
+        VGATHERQPD = 960,
+
+        VGATHERDPS = 961,
+
+        VGATHERQPS = 962,
+
+        VPGATHERDD = 963,
+
+        VPGATHERQD = 964,
+
+        VPGATHERDQ = 965,
+
+        VPGATHERQQ = 966,
+
+        VINSERTF128 = 967,
+
+        VINSERTI128 = 968,
+
+        VMASKMOVPS = 969,
+
+        VMASKMOVPD = 970,
+
+        VPBLENDD = 971,
+
+        VPBROADCASTB = 972,
+
+        VPBROADCASTW = 973,
+
+        VPBROADCASTD = 974,
+
+        VPBROADCASTQ = 975,
+
+        VBROADCASTI128 = 976,
+
+        VPERMD = 977,
+
+        VPERMPD = 978,
+
+        VPERMPS = 979,
+
+        VPERMQ = 980,
+
+        VPERM2I128 = 981,
+
+        VPERMILPD = 982,
+
+        VPERMILPS = 983,
+
+        VPERM2F128 = 984,
+
+        VPMASKMOVD = 985,
+
+        VPMASKMOVQ = 986,
+
+        VPSLLVD = 987,
+
+        VPSLLVQ = 988,
+
+        VPSRAVD = 989,
+
+        VPSRLVD = 990,
+
+        VPSRLVQ = 991,
+
+        VTESTPS = 992,
+
+        VTESTPD = 993,
+
+        VZEROALL = 994,
+
+        VZEROUPPER = 995,
+
+        WAIT = 996,
+
+        FWAIT = 997,
+
+        WBINVD = 998,
+
+        WRFSBASE = 999,
+
+        WRGSBASE = 1000,
+
+        WRMSR = 1001,
+
+        XACQUIRE = 1002,
+
+        XRELEASE = 1003,
+
+        XABORT = 1004,
+
+        XADD = 1005,
+
+        XBEGIN = 1006,
+
+        XCHG = 1007,
+
+        XEND = 1008,
+
+        XGETBV = 1009,
+
+        XLAT = 1010,
+
+        XLATB = 1011,
+
+        XOR = 1012,
+
+        XORPD = 1013,
+
+        VXORPD = 1014,
+
+        XORPS = 1015,
+
+        VXORPS = 1016,
+
+        XRSTOR = 1017,
+
+        XRSTOR64 = 1018,
+
+        XSAVE = 1019,
+
+        XSAVE64 = 1020,
+
+        XSAVEOPT = 1021,
+
+        XSAVEOPT64 = 1022,
+
+        XSETBV = 1023,
+
+        XTEST = 1024,
 
     }
 }

@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmSigTokens;
     using static AsmInstructions;
+    using static AsmSyntax;
 
     partial struct AsmCases
     {

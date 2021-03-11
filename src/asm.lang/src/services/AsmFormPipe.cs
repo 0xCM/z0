@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         }
 
-        public void Emit(ReadOnlySpan<Form> src, FS.FilePath dst)
+        public void Emit(ReadOnlySpan<AsmForm> src, FS.FilePath dst)
         {
             var count = src.Length;
             if(count == 0)
@@ -40,7 +40,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        ref AsmFormRecord Fill(ushort seq, Form src, ref AsmFormRecord dst)
+        ref AsmFormRecord Fill(ushort seq, AsmForm src, ref AsmFormRecord dst)
         {
             dst.Seq = seq;
             dst.OpCode = src.OpCode;

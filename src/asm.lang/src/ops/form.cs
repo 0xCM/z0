@@ -13,7 +13,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static Form form(OpCode op, Signature sig)
-            => new Form(op, sig);
+        public static AsmForm form(AsmOpCodeExpr op, AsmSig sig)
+            => new AsmForm(op, sig);
     }
 }

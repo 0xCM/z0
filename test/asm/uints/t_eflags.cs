@@ -11,14 +11,14 @@ namespace Z0.Asm
     {
         public void modrm_encode()
         {
-            var dst = AsmBytes.modrm();
-            var count = dst.Length;
+            var bytes = ModRm.create(Wf).Table;
+            var count = bytes.Length;
 
             Claim.eq(256,count);
 
             for(var i=0; i<count; i++)
             {
-                ref readonly var encoding = ref skip(dst,i);
+                ref readonly var encoding = ref skip(bytes,i);
                 //Trace(encoding.Format());
             }
         }

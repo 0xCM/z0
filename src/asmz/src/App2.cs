@@ -11,7 +11,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static Toolsets;
-    using static AsmExpr;
 
     class App : WfService<App>
     {
@@ -47,6 +46,13 @@ namespace Z0.Asm
 
         AsmServices AsmServices;
 
+
+        public void GenerateInstructions()
+        {
+            var monics = Catalog.Mnemonics();
+            var gen = AsmGen.create(Wf);
+            gen.GenerateModels(monics);
+        }
         public void GenBits()
         {
             var factory = BitStoreFactory.create(Wf);
@@ -171,7 +177,7 @@ namespace Z0.Asm
 
         void TestRel32()
         {
-            var cases = AsmCases.load(AsmInstructions.call(), AsmSigTokenList.Rel32).View;
+            var cases = AsmCases.load(AsmInstructions.call(), AsmTokens.Rel32).View;
             var count = cases.Length;
             var errors = text.buffer();
             for(var i=0; i<count; i++)
@@ -288,15 +294,15 @@ namespace Z0.Asm
         void ShowModRmBits()
         {
             var parts = new byte[2]{2,5};
-            var codes = AsmBytes.modrm().View;
+            var codes = ModRm.create(Wf).Table;
             var count = codes.Length;
         }
 
-        OpCodeLookup OpCodes;
+        AsmOpCodeLookup OpCodes;
 
-        SignatureLookup Sigs;
+        AsmSigLookup Sigs;
 
-        FormLookup Forms;
+        AsmFormLookup Forms;
 
 
         static MsgPattern<Count,Count,Count> CollectedForms => "Collected {0} distinct opcodes, {1} distinct signatures and {2} distinct combined forms";
@@ -315,9 +321,9 @@ namespace Z0.Asm
             var distiller = Wf.AsmDistiller();
             var paths = distiller.Distillations();
             var flow = Wf.Running("Processing current statement set");
-            OpCodes = OpCodeLookup.create();
-            Sigs = SignatureLookup.create();
-            Forms = FormLookup.create();
+            OpCodes = AsmOpCodeLookup.create();
+            Sigs = AsmSigLookup.create();
+            Forms = AsmFormLookup.create();
             foreach(var path in paths)
             {
                 var loading = Wf.Running(LoadingStatements.Format(path));
@@ -510,7 +516,8 @@ namespace Z0.Asm
             // var vsib = AsmBytes.vsib(0b11_100_111);
             // Wf.Status(AsmBytes.format(vsib));
 
-            ConvertPdbXml();
+            GenerateInstructions();
+            //ConvertPdbXml();
             // var commands = Wf.AsmWfCmd();
             // commands.Run(AsmWfCmdKind.EmitAsmRows);
         }

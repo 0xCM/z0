@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [SymbolProvider]
+    [SymbolSource]
     public enum ArrowSymbols : ushort
     {
         /// <summary>

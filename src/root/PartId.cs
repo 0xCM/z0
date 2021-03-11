@@ -110,6 +110,8 @@ public enum PartId : ulong
 
     AsmLangG = 125,
 
+    AsmCore = 126,
+
     External = 130,
 
     Capture = 131,

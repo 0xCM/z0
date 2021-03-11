@@ -10,8 +10,8 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static RexPrefixFacets;
-    using static AsmSigTokens;
     using static AsmInstructions;
+    using static AsmSyntax;
 
     [ApiHost]
     public readonly partial struct AsmQuery

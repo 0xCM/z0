@@ -28,11 +28,11 @@ namespace Z0.Asm
 
         public Address16 LocalOffset;
 
-        public OpCode OpCode;
+        public AsmOpCodeExpr OpCode;
 
-		public Signature Sig;
+		public AsmSig Sig;
 
-        public Statement Statement;
+        public AsmStatementExpr Statement;
 
         public AsmHexCode Encoded;
 

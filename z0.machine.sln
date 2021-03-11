@@ -163,6 +163,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.lang", "src\asm.lang
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.digital", "src\digital\z0.digital.csproj", "{8D1D14BF-5772-49A2-B192-A8CA1467D6AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.core", "src\asm.core\z0.asm.core.csproj", "{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -436,6 +438,10 @@ Global
 		{8D1D14BF-5772-49A2-B192-A8CA1467D6AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D1D14BF-5772-49A2-B192-A8CA1467D6AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D1D14BF-5772-49A2-B192-A8CA1467D6AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -506,6 +512,7 @@ Global
 		{F0EB0AF3-475D-49A3-A6DA-D921E17C88FC} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{C7767CB1-DD72-4851-8E77-0B0D6BAFD152} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{8D1D14BF-5772-49A2-B192-A8CA1467D6AB} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{B10353B5-B3B1-4B9F-BD9B-8D9B488081FA} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

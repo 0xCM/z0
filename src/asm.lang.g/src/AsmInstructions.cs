@@ -1,14 +1,47 @@
 //-----------------------------------------------------------------------------
-// Generated   :  20210219.04.12.01.1025
+// Generated   :  2021-03-11.15.45.32.4893
 // Copyright   :  (c) Chris Moore, 2021
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System.Runtime.CompilerServices;
+    using static Part;
+
     public readonly struct AsmInstructions
     {
-        public readonly struct Aad : IAsmInstruction<Aad>
+        public struct Aaa : IAsmInstruction<Aaa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aaa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AAA;
+
+            public static implicit operator AsmMnemonicCode(Aaa src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Aaa src) => AsmMnemonics.AAA;
+        }
+
+        public static Aaa aaa() => default;
+
+        [MethodImpl(Inline)]
+        public static Aaa aaa(AsmHexCode encoded) => new Aaa(encoded);
+
+        public struct Aad : IAsmInstruction<Aad>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aad(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AAD;
 
             public static implicit operator AsmMnemonicCode(Aad src) => src.Mnemonic;
@@ -18,8 +51,19 @@ namespace Z0.Asm
 
         public static Aad aad() => default;
 
-        public readonly struct Aam : IAsmInstruction<Aam>
+        [MethodImpl(Inline)]
+        public static Aad aad(AsmHexCode encoded) => new Aad(encoded);
+
+        public struct Aam : IAsmInstruction<Aam>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aam(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AAM;
 
             public static implicit operator AsmMnemonicCode(Aam src) => src.Mnemonic;
@@ -29,8 +73,41 @@ namespace Z0.Asm
 
         public static Aam aam() => default;
 
-        public readonly struct Adc : IAsmInstruction<Adc>
+        [MethodImpl(Inline)]
+        public static Aam aam(AsmHexCode encoded) => new Aam(encoded);
+
+        public struct Aas : IAsmInstruction<Aas>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aas(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AAS;
+
+            public static implicit operator AsmMnemonicCode(Aas src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Aas src) => AsmMnemonics.AAS;
+        }
+
+        public static Aas aas() => default;
+
+        [MethodImpl(Inline)]
+        public static Aas aas(AsmHexCode encoded) => new Aas(encoded);
+
+        public struct Adc : IAsmInstruction<Adc>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Adc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADC;
 
             public static implicit operator AsmMnemonicCode(Adc src) => src.Mnemonic;
@@ -40,8 +117,19 @@ namespace Z0.Asm
 
         public static Adc adc() => default;
 
-        public readonly struct Add : IAsmInstruction<Add>
+        [MethodImpl(Inline)]
+        public static Adc adc(AsmHexCode encoded) => new Adc(encoded);
+
+        public struct Add : IAsmInstruction<Add>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Add(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADD;
 
             public static implicit operator AsmMnemonicCode(Add src) => src.Mnemonic;
@@ -51,8 +139,19 @@ namespace Z0.Asm
 
         public static Add add() => default;
 
-        public readonly struct Addpd : IAsmInstruction<Addpd>
+        [MethodImpl(Inline)]
+        public static Add add(AsmHexCode encoded) => new Add(encoded);
+
+        public struct Addpd : IAsmInstruction<Addpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDPD;
 
             public static implicit operator AsmMnemonicCode(Addpd src) => src.Mnemonic;
@@ -62,8 +161,19 @@ namespace Z0.Asm
 
         public static Addpd addpd() => default;
 
-        public readonly struct Vaddpd : IAsmInstruction<Vaddpd>
+        [MethodImpl(Inline)]
+        public static Addpd addpd(AsmHexCode encoded) => new Addpd(encoded);
+
+        public struct Vaddpd : IAsmInstruction<Vaddpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDPD;
 
             public static implicit operator AsmMnemonicCode(Vaddpd src) => src.Mnemonic;
@@ -73,8 +183,19 @@ namespace Z0.Asm
 
         public static Vaddpd vaddpd() => default;
 
-        public readonly struct Addps : IAsmInstruction<Addps>
+        [MethodImpl(Inline)]
+        public static Vaddpd vaddpd(AsmHexCode encoded) => new Vaddpd(encoded);
+
+        public struct Addps : IAsmInstruction<Addps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDPS;
 
             public static implicit operator AsmMnemonicCode(Addps src) => src.Mnemonic;
@@ -84,8 +205,19 @@ namespace Z0.Asm
 
         public static Addps addps() => default;
 
-        public readonly struct Vaddps : IAsmInstruction<Vaddps>
+        [MethodImpl(Inline)]
+        public static Addps addps(AsmHexCode encoded) => new Addps(encoded);
+
+        public struct Vaddps : IAsmInstruction<Vaddps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDPS;
 
             public static implicit operator AsmMnemonicCode(Vaddps src) => src.Mnemonic;
@@ -95,8 +227,19 @@ namespace Z0.Asm
 
         public static Vaddps vaddps() => default;
 
-        public readonly struct Addsd : IAsmInstruction<Addsd>
+        [MethodImpl(Inline)]
+        public static Vaddps vaddps(AsmHexCode encoded) => new Vaddps(encoded);
+
+        public struct Addsd : IAsmInstruction<Addsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDSD;
 
             public static implicit operator AsmMnemonicCode(Addsd src) => src.Mnemonic;
@@ -106,8 +249,19 @@ namespace Z0.Asm
 
         public static Addsd addsd() => default;
 
-        public readonly struct Vaddsd : IAsmInstruction<Vaddsd>
+        [MethodImpl(Inline)]
+        public static Addsd addsd(AsmHexCode encoded) => new Addsd(encoded);
+
+        public struct Vaddsd : IAsmInstruction<Vaddsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDSD;
 
             public static implicit operator AsmMnemonicCode(Vaddsd src) => src.Mnemonic;
@@ -117,8 +271,19 @@ namespace Z0.Asm
 
         public static Vaddsd vaddsd() => default;
 
-        public readonly struct Addss : IAsmInstruction<Addss>
+        [MethodImpl(Inline)]
+        public static Vaddsd vaddsd(AsmHexCode encoded) => new Vaddsd(encoded);
+
+        public struct Addss : IAsmInstruction<Addss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDSS;
 
             public static implicit operator AsmMnemonicCode(Addss src) => src.Mnemonic;
@@ -128,8 +293,19 @@ namespace Z0.Asm
 
         public static Addss addss() => default;
 
-        public readonly struct Vaddss : IAsmInstruction<Vaddss>
+        [MethodImpl(Inline)]
+        public static Addss addss(AsmHexCode encoded) => new Addss(encoded);
+
+        public struct Vaddss : IAsmInstruction<Vaddss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDSS;
 
             public static implicit operator AsmMnemonicCode(Vaddss src) => src.Mnemonic;
@@ -139,8 +315,19 @@ namespace Z0.Asm
 
         public static Vaddss vaddss() => default;
 
-        public readonly struct Addsubpd : IAsmInstruction<Addsubpd>
+        [MethodImpl(Inline)]
+        public static Vaddss vaddss(AsmHexCode encoded) => new Vaddss(encoded);
+
+        public struct Addsubpd : IAsmInstruction<Addsubpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addsubpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDSUBPD;
 
             public static implicit operator AsmMnemonicCode(Addsubpd src) => src.Mnemonic;
@@ -150,8 +337,19 @@ namespace Z0.Asm
 
         public static Addsubpd addsubpd() => default;
 
-        public readonly struct Vaddsubpd : IAsmInstruction<Vaddsubpd>
+        [MethodImpl(Inline)]
+        public static Addsubpd addsubpd(AsmHexCode encoded) => new Addsubpd(encoded);
+
+        public struct Vaddsubpd : IAsmInstruction<Vaddsubpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddsubpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDSUBPD;
 
             public static implicit operator AsmMnemonicCode(Vaddsubpd src) => src.Mnemonic;
@@ -161,8 +359,19 @@ namespace Z0.Asm
 
         public static Vaddsubpd vaddsubpd() => default;
 
-        public readonly struct Addsubps : IAsmInstruction<Addsubps>
+        [MethodImpl(Inline)]
+        public static Vaddsubpd vaddsubpd(AsmHexCode encoded) => new Vaddsubpd(encoded);
+
+        public struct Addsubps : IAsmInstruction<Addsubps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Addsubps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ADDSUBPS;
 
             public static implicit operator AsmMnemonicCode(Addsubps src) => src.Mnemonic;
@@ -172,8 +381,19 @@ namespace Z0.Asm
 
         public static Addsubps addsubps() => default;
 
-        public readonly struct Vaddsubps : IAsmInstruction<Vaddsubps>
+        [MethodImpl(Inline)]
+        public static Addsubps addsubps(AsmHexCode encoded) => new Addsubps(encoded);
+
+        public struct Vaddsubps : IAsmInstruction<Vaddsubps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaddsubps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VADDSUBPS;
 
             public static implicit operator AsmMnemonicCode(Vaddsubps src) => src.Mnemonic;
@@ -183,8 +403,19 @@ namespace Z0.Asm
 
         public static Vaddsubps vaddsubps() => default;
 
-        public readonly struct Aesdec : IAsmInstruction<Aesdec>
+        [MethodImpl(Inline)]
+        public static Vaddsubps vaddsubps(AsmHexCode encoded) => new Vaddsubps(encoded);
+
+        public struct Aesdec : IAsmInstruction<Aesdec>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aesdec(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESDEC;
 
             public static implicit operator AsmMnemonicCode(Aesdec src) => src.Mnemonic;
@@ -194,8 +425,19 @@ namespace Z0.Asm
 
         public static Aesdec aesdec() => default;
 
-        public readonly struct Vaesdec : IAsmInstruction<Vaesdec>
+        [MethodImpl(Inline)]
+        public static Aesdec aesdec(AsmHexCode encoded) => new Aesdec(encoded);
+
+        public struct Vaesdec : IAsmInstruction<Vaesdec>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaesdec(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESDEC;
 
             public static implicit operator AsmMnemonicCode(Vaesdec src) => src.Mnemonic;
@@ -205,8 +447,19 @@ namespace Z0.Asm
 
         public static Vaesdec vaesdec() => default;
 
-        public readonly struct Aesdeclast : IAsmInstruction<Aesdeclast>
+        [MethodImpl(Inline)]
+        public static Vaesdec vaesdec(AsmHexCode encoded) => new Vaesdec(encoded);
+
+        public struct Aesdeclast : IAsmInstruction<Aesdeclast>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aesdeclast(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESDECLAST;
 
             public static implicit operator AsmMnemonicCode(Aesdeclast src) => src.Mnemonic;
@@ -216,8 +469,19 @@ namespace Z0.Asm
 
         public static Aesdeclast aesdeclast() => default;
 
-        public readonly struct Vaesdeclast : IAsmInstruction<Vaesdeclast>
+        [MethodImpl(Inline)]
+        public static Aesdeclast aesdeclast(AsmHexCode encoded) => new Aesdeclast(encoded);
+
+        public struct Vaesdeclast : IAsmInstruction<Vaesdeclast>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaesdeclast(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESDECLAST;
 
             public static implicit operator AsmMnemonicCode(Vaesdeclast src) => src.Mnemonic;
@@ -227,8 +491,19 @@ namespace Z0.Asm
 
         public static Vaesdeclast vaesdeclast() => default;
 
-        public readonly struct Aesenc : IAsmInstruction<Aesenc>
+        [MethodImpl(Inline)]
+        public static Vaesdeclast vaesdeclast(AsmHexCode encoded) => new Vaesdeclast(encoded);
+
+        public struct Aesenc : IAsmInstruction<Aesenc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aesenc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESENC;
 
             public static implicit operator AsmMnemonicCode(Aesenc src) => src.Mnemonic;
@@ -238,8 +513,19 @@ namespace Z0.Asm
 
         public static Aesenc aesenc() => default;
 
-        public readonly struct Vaesenc : IAsmInstruction<Vaesenc>
+        [MethodImpl(Inline)]
+        public static Aesenc aesenc(AsmHexCode encoded) => new Aesenc(encoded);
+
+        public struct Vaesenc : IAsmInstruction<Vaesenc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaesenc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESENC;
 
             public static implicit operator AsmMnemonicCode(Vaesenc src) => src.Mnemonic;
@@ -249,8 +535,19 @@ namespace Z0.Asm
 
         public static Vaesenc vaesenc() => default;
 
-        public readonly struct Aesenclast : IAsmInstruction<Aesenclast>
+        [MethodImpl(Inline)]
+        public static Vaesenc vaesenc(AsmHexCode encoded) => new Vaesenc(encoded);
+
+        public struct Aesenclast : IAsmInstruction<Aesenclast>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aesenclast(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESENCLAST;
 
             public static implicit operator AsmMnemonicCode(Aesenclast src) => src.Mnemonic;
@@ -260,8 +557,19 @@ namespace Z0.Asm
 
         public static Aesenclast aesenclast() => default;
 
-        public readonly struct Vaesenclast : IAsmInstruction<Vaesenclast>
+        [MethodImpl(Inline)]
+        public static Aesenclast aesenclast(AsmHexCode encoded) => new Aesenclast(encoded);
+
+        public struct Vaesenclast : IAsmInstruction<Vaesenclast>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaesenclast(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESENCLAST;
 
             public static implicit operator AsmMnemonicCode(Vaesenclast src) => src.Mnemonic;
@@ -271,8 +579,19 @@ namespace Z0.Asm
 
         public static Vaesenclast vaesenclast() => default;
 
-        public readonly struct Aesimc : IAsmInstruction<Aesimc>
+        [MethodImpl(Inline)]
+        public static Vaesenclast vaesenclast(AsmHexCode encoded) => new Vaesenclast(encoded);
+
+        public struct Aesimc : IAsmInstruction<Aesimc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aesimc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESIMC;
 
             public static implicit operator AsmMnemonicCode(Aesimc src) => src.Mnemonic;
@@ -282,8 +601,19 @@ namespace Z0.Asm
 
         public static Aesimc aesimc() => default;
 
-        public readonly struct Vaesimc : IAsmInstruction<Vaesimc>
+        [MethodImpl(Inline)]
+        public static Aesimc aesimc(AsmHexCode encoded) => new Aesimc(encoded);
+
+        public struct Vaesimc : IAsmInstruction<Vaesimc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaesimc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESIMC;
 
             public static implicit operator AsmMnemonicCode(Vaesimc src) => src.Mnemonic;
@@ -293,8 +623,19 @@ namespace Z0.Asm
 
         public static Vaesimc vaesimc() => default;
 
-        public readonly struct Aeskeygenassist : IAsmInstruction<Aeskeygenassist>
+        [MethodImpl(Inline)]
+        public static Vaesimc vaesimc(AsmHexCode encoded) => new Vaesimc(encoded);
+
+        public struct Aeskeygenassist : IAsmInstruction<Aeskeygenassist>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Aeskeygenassist(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AESKEYGENASSIST;
 
             public static implicit operator AsmMnemonicCode(Aeskeygenassist src) => src.Mnemonic;
@@ -304,8 +645,19 @@ namespace Z0.Asm
 
         public static Aeskeygenassist aeskeygenassist() => default;
 
-        public readonly struct Vaeskeygenassist : IAsmInstruction<Vaeskeygenassist>
+        [MethodImpl(Inline)]
+        public static Aeskeygenassist aeskeygenassist(AsmHexCode encoded) => new Aeskeygenassist(encoded);
+
+        public struct Vaeskeygenassist : IAsmInstruction<Vaeskeygenassist>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vaeskeygenassist(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VAESKEYGENASSIST;
 
             public static implicit operator AsmMnemonicCode(Vaeskeygenassist src) => src.Mnemonic;
@@ -315,8 +667,19 @@ namespace Z0.Asm
 
         public static Vaeskeygenassist vaeskeygenassist() => default;
 
-        public readonly struct And : IAsmInstruction<And>
+        [MethodImpl(Inline)]
+        public static Vaeskeygenassist vaeskeygenassist(AsmHexCode encoded) => new Vaeskeygenassist(encoded);
+
+        public struct And : IAsmInstruction<And>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public And(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.AND;
 
             public static implicit operator AsmMnemonicCode(And src) => src.Mnemonic;
@@ -326,8 +689,19 @@ namespace Z0.Asm
 
         public static And and() => default;
 
-        public readonly struct Andn : IAsmInstruction<Andn>
+        [MethodImpl(Inline)]
+        public static And and(AsmHexCode encoded) => new And(encoded);
+
+        public struct Andn : IAsmInstruction<Andn>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Andn(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ANDN;
 
             public static implicit operator AsmMnemonicCode(Andn src) => src.Mnemonic;
@@ -337,8 +711,19 @@ namespace Z0.Asm
 
         public static Andn andn() => default;
 
-        public readonly struct Andpd : IAsmInstruction<Andpd>
+        [MethodImpl(Inline)]
+        public static Andn andn(AsmHexCode encoded) => new Andn(encoded);
+
+        public struct Andpd : IAsmInstruction<Andpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Andpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ANDPD;
 
             public static implicit operator AsmMnemonicCode(Andpd src) => src.Mnemonic;
@@ -348,8 +733,19 @@ namespace Z0.Asm
 
         public static Andpd andpd() => default;
 
-        public readonly struct Vandpd : IAsmInstruction<Vandpd>
+        [MethodImpl(Inline)]
+        public static Andpd andpd(AsmHexCode encoded) => new Andpd(encoded);
+
+        public struct Vandpd : IAsmInstruction<Vandpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vandpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VANDPD;
 
             public static implicit operator AsmMnemonicCode(Vandpd src) => src.Mnemonic;
@@ -359,8 +755,19 @@ namespace Z0.Asm
 
         public static Vandpd vandpd() => default;
 
-        public readonly struct Andps : IAsmInstruction<Andps>
+        [MethodImpl(Inline)]
+        public static Vandpd vandpd(AsmHexCode encoded) => new Vandpd(encoded);
+
+        public struct Andps : IAsmInstruction<Andps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Andps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ANDPS;
 
             public static implicit operator AsmMnemonicCode(Andps src) => src.Mnemonic;
@@ -370,8 +777,19 @@ namespace Z0.Asm
 
         public static Andps andps() => default;
 
-        public readonly struct Vandps : IAsmInstruction<Vandps>
+        [MethodImpl(Inline)]
+        public static Andps andps(AsmHexCode encoded) => new Andps(encoded);
+
+        public struct Vandps : IAsmInstruction<Vandps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vandps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VANDPS;
 
             public static implicit operator AsmMnemonicCode(Vandps src) => src.Mnemonic;
@@ -381,8 +799,19 @@ namespace Z0.Asm
 
         public static Vandps vandps() => default;
 
-        public readonly struct Andnpd : IAsmInstruction<Andnpd>
+        [MethodImpl(Inline)]
+        public static Vandps vandps(AsmHexCode encoded) => new Vandps(encoded);
+
+        public struct Andnpd : IAsmInstruction<Andnpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Andnpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ANDNPD;
 
             public static implicit operator AsmMnemonicCode(Andnpd src) => src.Mnemonic;
@@ -392,8 +821,19 @@ namespace Z0.Asm
 
         public static Andnpd andnpd() => default;
 
-        public readonly struct Vandnpd : IAsmInstruction<Vandnpd>
+        [MethodImpl(Inline)]
+        public static Andnpd andnpd(AsmHexCode encoded) => new Andnpd(encoded);
+
+        public struct Vandnpd : IAsmInstruction<Vandnpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vandnpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VANDNPD;
 
             public static implicit operator AsmMnemonicCode(Vandnpd src) => src.Mnemonic;
@@ -403,8 +843,19 @@ namespace Z0.Asm
 
         public static Vandnpd vandnpd() => default;
 
-        public readonly struct Andnps : IAsmInstruction<Andnps>
+        [MethodImpl(Inline)]
+        public static Vandnpd vandnpd(AsmHexCode encoded) => new Vandnpd(encoded);
+
+        public struct Andnps : IAsmInstruction<Andnps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Andnps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ANDNPS;
 
             public static implicit operator AsmMnemonicCode(Andnps src) => src.Mnemonic;
@@ -414,8 +865,19 @@ namespace Z0.Asm
 
         public static Andnps andnps() => default;
 
-        public readonly struct Vandnps : IAsmInstruction<Vandnps>
+        [MethodImpl(Inline)]
+        public static Andnps andnps(AsmHexCode encoded) => new Andnps(encoded);
+
+        public struct Vandnps : IAsmInstruction<Vandnps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vandnps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VANDNPS;
 
             public static implicit operator AsmMnemonicCode(Vandnps src) => src.Mnemonic;
@@ -425,8 +887,19 @@ namespace Z0.Asm
 
         public static Vandnps vandnps() => default;
 
-        public readonly struct Arpl : IAsmInstruction<Arpl>
+        [MethodImpl(Inline)]
+        public static Vandnps vandnps(AsmHexCode encoded) => new Vandnps(encoded);
+
+        public struct Arpl : IAsmInstruction<Arpl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Arpl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ARPL;
 
             public static implicit operator AsmMnemonicCode(Arpl src) => src.Mnemonic;
@@ -436,8 +909,19 @@ namespace Z0.Asm
 
         public static Arpl arpl() => default;
 
-        public readonly struct Blendpd : IAsmInstruction<Blendpd>
+        [MethodImpl(Inline)]
+        public static Arpl arpl(AsmHexCode encoded) => new Arpl(encoded);
+
+        public struct Blendpd : IAsmInstruction<Blendpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blendpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLENDPD;
 
             public static implicit operator AsmMnemonicCode(Blendpd src) => src.Mnemonic;
@@ -447,8 +931,19 @@ namespace Z0.Asm
 
         public static Blendpd blendpd() => default;
 
-        public readonly struct Vblendpd : IAsmInstruction<Vblendpd>
+        [MethodImpl(Inline)]
+        public static Blendpd blendpd(AsmHexCode encoded) => new Blendpd(encoded);
+
+        public struct Vblendpd : IAsmInstruction<Vblendpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vblendpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBLENDPD;
 
             public static implicit operator AsmMnemonicCode(Vblendpd src) => src.Mnemonic;
@@ -458,8 +953,19 @@ namespace Z0.Asm
 
         public static Vblendpd vblendpd() => default;
 
-        public readonly struct Bextr : IAsmInstruction<Bextr>
+        [MethodImpl(Inline)]
+        public static Vblendpd vblendpd(AsmHexCode encoded) => new Vblendpd(encoded);
+
+        public struct Bextr : IAsmInstruction<Bextr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bextr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BEXTR;
 
             public static implicit operator AsmMnemonicCode(Bextr src) => src.Mnemonic;
@@ -469,8 +975,19 @@ namespace Z0.Asm
 
         public static Bextr bextr() => default;
 
-        public readonly struct Blendps : IAsmInstruction<Blendps>
+        [MethodImpl(Inline)]
+        public static Bextr bextr(AsmHexCode encoded) => new Bextr(encoded);
+
+        public struct Blendps : IAsmInstruction<Blendps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blendps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLENDPS;
 
             public static implicit operator AsmMnemonicCode(Blendps src) => src.Mnemonic;
@@ -480,8 +997,19 @@ namespace Z0.Asm
 
         public static Blendps blendps() => default;
 
-        public readonly struct Vblendps : IAsmInstruction<Vblendps>
+        [MethodImpl(Inline)]
+        public static Blendps blendps(AsmHexCode encoded) => new Blendps(encoded);
+
+        public struct Vblendps : IAsmInstruction<Vblendps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vblendps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBLENDPS;
 
             public static implicit operator AsmMnemonicCode(Vblendps src) => src.Mnemonic;
@@ -491,8 +1019,19 @@ namespace Z0.Asm
 
         public static Vblendps vblendps() => default;
 
-        public readonly struct Blendvpd : IAsmInstruction<Blendvpd>
+        [MethodImpl(Inline)]
+        public static Vblendps vblendps(AsmHexCode encoded) => new Vblendps(encoded);
+
+        public struct Blendvpd : IAsmInstruction<Blendvpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blendvpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLENDVPD;
 
             public static implicit operator AsmMnemonicCode(Blendvpd src) => src.Mnemonic;
@@ -502,8 +1041,19 @@ namespace Z0.Asm
 
         public static Blendvpd blendvpd() => default;
 
-        public readonly struct Vblendvpd : IAsmInstruction<Vblendvpd>
+        [MethodImpl(Inline)]
+        public static Blendvpd blendvpd(AsmHexCode encoded) => new Blendvpd(encoded);
+
+        public struct Vblendvpd : IAsmInstruction<Vblendvpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vblendvpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBLENDVPD;
 
             public static implicit operator AsmMnemonicCode(Vblendvpd src) => src.Mnemonic;
@@ -513,8 +1063,19 @@ namespace Z0.Asm
 
         public static Vblendvpd vblendvpd() => default;
 
-        public readonly struct Blendvps : IAsmInstruction<Blendvps>
+        [MethodImpl(Inline)]
+        public static Vblendvpd vblendvpd(AsmHexCode encoded) => new Vblendvpd(encoded);
+
+        public struct Blendvps : IAsmInstruction<Blendvps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blendvps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLENDVPS;
 
             public static implicit operator AsmMnemonicCode(Blendvps src) => src.Mnemonic;
@@ -524,8 +1085,19 @@ namespace Z0.Asm
 
         public static Blendvps blendvps() => default;
 
-        public readonly struct Vblendvps : IAsmInstruction<Vblendvps>
+        [MethodImpl(Inline)]
+        public static Blendvps blendvps(AsmHexCode encoded) => new Blendvps(encoded);
+
+        public struct Vblendvps : IAsmInstruction<Vblendvps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vblendvps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBLENDVPS;
 
             public static implicit operator AsmMnemonicCode(Vblendvps src) => src.Mnemonic;
@@ -535,8 +1107,19 @@ namespace Z0.Asm
 
         public static Vblendvps vblendvps() => default;
 
-        public readonly struct Blsi : IAsmInstruction<Blsi>
+        [MethodImpl(Inline)]
+        public static Vblendvps vblendvps(AsmHexCode encoded) => new Vblendvps(encoded);
+
+        public struct Blsi : IAsmInstruction<Blsi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blsi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLSI;
 
             public static implicit operator AsmMnemonicCode(Blsi src) => src.Mnemonic;
@@ -546,8 +1129,19 @@ namespace Z0.Asm
 
         public static Blsi blsi() => default;
 
-        public readonly struct Blsmsk : IAsmInstruction<Blsmsk>
+        [MethodImpl(Inline)]
+        public static Blsi blsi(AsmHexCode encoded) => new Blsi(encoded);
+
+        public struct Blsmsk : IAsmInstruction<Blsmsk>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blsmsk(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLSMSK;
 
             public static implicit operator AsmMnemonicCode(Blsmsk src) => src.Mnemonic;
@@ -557,8 +1151,19 @@ namespace Z0.Asm
 
         public static Blsmsk blsmsk() => default;
 
-        public readonly struct Blsr : IAsmInstruction<Blsr>
+        [MethodImpl(Inline)]
+        public static Blsmsk blsmsk(AsmHexCode encoded) => new Blsmsk(encoded);
+
+        public struct Blsr : IAsmInstruction<Blsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Blsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BLSR;
 
             public static implicit operator AsmMnemonicCode(Blsr src) => src.Mnemonic;
@@ -568,8 +1173,19 @@ namespace Z0.Asm
 
         public static Blsr blsr() => default;
 
-        public readonly struct Bound : IAsmInstruction<Bound>
+        [MethodImpl(Inline)]
+        public static Blsr blsr(AsmHexCode encoded) => new Blsr(encoded);
+
+        public struct Bound : IAsmInstruction<Bound>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bound(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BOUND;
 
             public static implicit operator AsmMnemonicCode(Bound src) => src.Mnemonic;
@@ -579,8 +1195,19 @@ namespace Z0.Asm
 
         public static Bound bound() => default;
 
-        public readonly struct Bsf : IAsmInstruction<Bsf>
+        [MethodImpl(Inline)]
+        public static Bound bound(AsmHexCode encoded) => new Bound(encoded);
+
+        public struct Bsf : IAsmInstruction<Bsf>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bsf(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BSF;
 
             public static implicit operator AsmMnemonicCode(Bsf src) => src.Mnemonic;
@@ -590,8 +1217,19 @@ namespace Z0.Asm
 
         public static Bsf bsf() => default;
 
-        public readonly struct Bsr : IAsmInstruction<Bsr>
+        [MethodImpl(Inline)]
+        public static Bsf bsf(AsmHexCode encoded) => new Bsf(encoded);
+
+        public struct Bsr : IAsmInstruction<Bsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BSR;
 
             public static implicit operator AsmMnemonicCode(Bsr src) => src.Mnemonic;
@@ -601,8 +1239,19 @@ namespace Z0.Asm
 
         public static Bsr bsr() => default;
 
-        public readonly struct Bswap : IAsmInstruction<Bswap>
+        [MethodImpl(Inline)]
+        public static Bsr bsr(AsmHexCode encoded) => new Bsr(encoded);
+
+        public struct Bswap : IAsmInstruction<Bswap>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bswap(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BSWAP;
 
             public static implicit operator AsmMnemonicCode(Bswap src) => src.Mnemonic;
@@ -612,8 +1261,19 @@ namespace Z0.Asm
 
         public static Bswap bswap() => default;
 
-        public readonly struct Bt : IAsmInstruction<Bt>
+        [MethodImpl(Inline)]
+        public static Bswap bswap(AsmHexCode encoded) => new Bswap(encoded);
+
+        public struct Bt : IAsmInstruction<Bt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BT;
 
             public static implicit operator AsmMnemonicCode(Bt src) => src.Mnemonic;
@@ -623,8 +1283,19 @@ namespace Z0.Asm
 
         public static Bt bt() => default;
 
-        public readonly struct Btc : IAsmInstruction<Btc>
+        [MethodImpl(Inline)]
+        public static Bt bt(AsmHexCode encoded) => new Bt(encoded);
+
+        public struct Btc : IAsmInstruction<Btc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Btc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BTC;
 
             public static implicit operator AsmMnemonicCode(Btc src) => src.Mnemonic;
@@ -634,8 +1305,19 @@ namespace Z0.Asm
 
         public static Btc btc() => default;
 
-        public readonly struct Btr : IAsmInstruction<Btr>
+        [MethodImpl(Inline)]
+        public static Btc btc(AsmHexCode encoded) => new Btc(encoded);
+
+        public struct Btr : IAsmInstruction<Btr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Btr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BTR;
 
             public static implicit operator AsmMnemonicCode(Btr src) => src.Mnemonic;
@@ -645,8 +1327,19 @@ namespace Z0.Asm
 
         public static Btr btr() => default;
 
-        public readonly struct Bts : IAsmInstruction<Bts>
+        [MethodImpl(Inline)]
+        public static Btr btr(AsmHexCode encoded) => new Btr(encoded);
+
+        public struct Bts : IAsmInstruction<Bts>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bts(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BTS;
 
             public static implicit operator AsmMnemonicCode(Bts src) => src.Mnemonic;
@@ -656,8 +1349,19 @@ namespace Z0.Asm
 
         public static Bts bts() => default;
 
-        public readonly struct Bzhi : IAsmInstruction<Bzhi>
+        [MethodImpl(Inline)]
+        public static Bts bts(AsmHexCode encoded) => new Bts(encoded);
+
+        public struct Bzhi : IAsmInstruction<Bzhi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Bzhi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.BZHI;
 
             public static implicit operator AsmMnemonicCode(Bzhi src) => src.Mnemonic;
@@ -667,8 +1371,19 @@ namespace Z0.Asm
 
         public static Bzhi bzhi() => default;
 
-        public readonly struct Call : IAsmInstruction<Call>
+        [MethodImpl(Inline)]
+        public static Bzhi bzhi(AsmHexCode encoded) => new Bzhi(encoded);
+
+        public struct Call : IAsmInstruction<Call>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Call(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CALL;
 
             public static implicit operator AsmMnemonicCode(Call src) => src.Mnemonic;
@@ -678,8 +1393,129 @@ namespace Z0.Asm
 
         public static Call call() => default;
 
-        public readonly struct Clflush : IAsmInstruction<Clflush>
+        [MethodImpl(Inline)]
+        public static Call call(AsmHexCode encoded) => new Call(encoded);
+
+        public struct Cbw : IAsmInstruction<Cbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CBW;
+
+            public static implicit operator AsmMnemonicCode(Cbw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cbw src) => AsmMnemonics.CBW;
+        }
+
+        public static Cbw cbw() => default;
+
+        [MethodImpl(Inline)]
+        public static Cbw cbw(AsmHexCode encoded) => new Cbw(encoded);
+
+        public struct Cwde : IAsmInstruction<Cwde>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cwde(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CWDE;
+
+            public static implicit operator AsmMnemonicCode(Cwde src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cwde src) => AsmMnemonics.CWDE;
+        }
+
+        public static Cwde cwde() => default;
+
+        [MethodImpl(Inline)]
+        public static Cwde cwde(AsmHexCode encoded) => new Cwde(encoded);
+
+        public struct Cdqe : IAsmInstruction<Cdqe>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cdqe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CDQE;
+
+            public static implicit operator AsmMnemonicCode(Cdqe src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cdqe src) => AsmMnemonics.CDQE;
+        }
+
+        public static Cdqe cdqe() => default;
+
+        [MethodImpl(Inline)]
+        public static Cdqe cdqe(AsmHexCode encoded) => new Cdqe(encoded);
+
+        public struct Clc : IAsmInstruction<Clc>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Clc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CLC;
+
+            public static implicit operator AsmMnemonicCode(Clc src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Clc src) => AsmMnemonics.CLC;
+        }
+
+        public static Clc clc() => default;
+
+        [MethodImpl(Inline)]
+        public static Clc clc(AsmHexCode encoded) => new Clc(encoded);
+
+        public struct Cld : IAsmInstruction<Cld>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CLD;
+
+            public static implicit operator AsmMnemonicCode(Cld src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cld src) => AsmMnemonics.CLD;
+        }
+
+        public static Cld cld() => default;
+
+        [MethodImpl(Inline)]
+        public static Cld cld(AsmHexCode encoded) => new Cld(encoded);
+
+        public struct Clflush : IAsmInstruction<Clflush>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Clflush(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CLFLUSH;
 
             public static implicit operator AsmMnemonicCode(Clflush src) => src.Mnemonic;
@@ -689,8 +1525,85 @@ namespace Z0.Asm
 
         public static Clflush clflush() => default;
 
-        public readonly struct Cmova : IAsmInstruction<Cmova>
+        [MethodImpl(Inline)]
+        public static Clflush clflush(AsmHexCode encoded) => new Clflush(encoded);
+
+        public struct Cli : IAsmInstruction<Cli>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cli(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CLI;
+
+            public static implicit operator AsmMnemonicCode(Cli src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cli src) => AsmMnemonics.CLI;
+        }
+
+        public static Cli cli() => default;
+
+        [MethodImpl(Inline)]
+        public static Cli cli(AsmHexCode encoded) => new Cli(encoded);
+
+        public struct Clts : IAsmInstruction<Clts>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Clts(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CLTS;
+
+            public static implicit operator AsmMnemonicCode(Clts src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Clts src) => AsmMnemonics.CLTS;
+        }
+
+        public static Clts clts() => default;
+
+        [MethodImpl(Inline)]
+        public static Clts clts(AsmHexCode encoded) => new Clts(encoded);
+
+        public struct Cmc : IAsmInstruction<Cmc>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMC;
+
+            public static implicit operator AsmMnemonicCode(Cmc src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cmc src) => AsmMnemonics.CMC;
+        }
+
+        public static Cmc cmc() => default;
+
+        [MethodImpl(Inline)]
+        public static Cmc cmc(AsmHexCode encoded) => new Cmc(encoded);
+
+        public struct Cmova : IAsmInstruction<Cmova>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmova(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVA;
 
             public static implicit operator AsmMnemonicCode(Cmova src) => src.Mnemonic;
@@ -700,8 +1613,19 @@ namespace Z0.Asm
 
         public static Cmova cmova() => default;
 
-        public readonly struct Cmovae : IAsmInstruction<Cmovae>
+        [MethodImpl(Inline)]
+        public static Cmova cmova(AsmHexCode encoded) => new Cmova(encoded);
+
+        public struct Cmovae : IAsmInstruction<Cmovae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVAE;
 
             public static implicit operator AsmMnemonicCode(Cmovae src) => src.Mnemonic;
@@ -711,8 +1635,19 @@ namespace Z0.Asm
 
         public static Cmovae cmovae() => default;
 
-        public readonly struct Cmovb : IAsmInstruction<Cmovb>
+        [MethodImpl(Inline)]
+        public static Cmovae cmovae(AsmHexCode encoded) => new Cmovae(encoded);
+
+        public struct Cmovb : IAsmInstruction<Cmovb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVB;
 
             public static implicit operator AsmMnemonicCode(Cmovb src) => src.Mnemonic;
@@ -722,8 +1657,19 @@ namespace Z0.Asm
 
         public static Cmovb cmovb() => default;
 
-        public readonly struct Cmovbe : IAsmInstruction<Cmovbe>
+        [MethodImpl(Inline)]
+        public static Cmovb cmovb(AsmHexCode encoded) => new Cmovb(encoded);
+
+        public struct Cmovbe : IAsmInstruction<Cmovbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVBE;
 
             public static implicit operator AsmMnemonicCode(Cmovbe src) => src.Mnemonic;
@@ -733,8 +1679,19 @@ namespace Z0.Asm
 
         public static Cmovbe cmovbe() => default;
 
-        public readonly struct Cmovc : IAsmInstruction<Cmovc>
+        [MethodImpl(Inline)]
+        public static Cmovbe cmovbe(AsmHexCode encoded) => new Cmovbe(encoded);
+
+        public struct Cmovc : IAsmInstruction<Cmovc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVC;
 
             public static implicit operator AsmMnemonicCode(Cmovc src) => src.Mnemonic;
@@ -744,8 +1701,19 @@ namespace Z0.Asm
 
         public static Cmovc cmovc() => default;
 
-        public readonly struct Cmove : IAsmInstruction<Cmove>
+        [MethodImpl(Inline)]
+        public static Cmovc cmovc(AsmHexCode encoded) => new Cmovc(encoded);
+
+        public struct Cmove : IAsmInstruction<Cmove>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmove(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVE;
 
             public static implicit operator AsmMnemonicCode(Cmove src) => src.Mnemonic;
@@ -755,8 +1723,19 @@ namespace Z0.Asm
 
         public static Cmove cmove() => default;
 
-        public readonly struct Cmovg : IAsmInstruction<Cmovg>
+        [MethodImpl(Inline)]
+        public static Cmove cmove(AsmHexCode encoded) => new Cmove(encoded);
+
+        public struct Cmovg : IAsmInstruction<Cmovg>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVG;
 
             public static implicit operator AsmMnemonicCode(Cmovg src) => src.Mnemonic;
@@ -766,8 +1745,19 @@ namespace Z0.Asm
 
         public static Cmovg cmovg() => default;
 
-        public readonly struct Cmovge : IAsmInstruction<Cmovge>
+        [MethodImpl(Inline)]
+        public static Cmovg cmovg(AsmHexCode encoded) => new Cmovg(encoded);
+
+        public struct Cmovge : IAsmInstruction<Cmovge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVGE;
 
             public static implicit operator AsmMnemonicCode(Cmovge src) => src.Mnemonic;
@@ -777,8 +1767,19 @@ namespace Z0.Asm
 
         public static Cmovge cmovge() => default;
 
-        public readonly struct Cmovl : IAsmInstruction<Cmovl>
+        [MethodImpl(Inline)]
+        public static Cmovge cmovge(AsmHexCode encoded) => new Cmovge(encoded);
+
+        public struct Cmovl : IAsmInstruction<Cmovl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVL;
 
             public static implicit operator AsmMnemonicCode(Cmovl src) => src.Mnemonic;
@@ -788,8 +1789,19 @@ namespace Z0.Asm
 
         public static Cmovl cmovl() => default;
 
-        public readonly struct Cmovle : IAsmInstruction<Cmovle>
+        [MethodImpl(Inline)]
+        public static Cmovl cmovl(AsmHexCode encoded) => new Cmovl(encoded);
+
+        public struct Cmovle : IAsmInstruction<Cmovle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVLE;
 
             public static implicit operator AsmMnemonicCode(Cmovle src) => src.Mnemonic;
@@ -799,8 +1811,19 @@ namespace Z0.Asm
 
         public static Cmovle cmovle() => default;
 
-        public readonly struct Cmovna : IAsmInstruction<Cmovna>
+        [MethodImpl(Inline)]
+        public static Cmovle cmovle(AsmHexCode encoded) => new Cmovle(encoded);
+
+        public struct Cmovna : IAsmInstruction<Cmovna>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovna(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNA;
 
             public static implicit operator AsmMnemonicCode(Cmovna src) => src.Mnemonic;
@@ -810,8 +1833,19 @@ namespace Z0.Asm
 
         public static Cmovna cmovna() => default;
 
-        public readonly struct Cmovnae : IAsmInstruction<Cmovnae>
+        [MethodImpl(Inline)]
+        public static Cmovna cmovna(AsmHexCode encoded) => new Cmovna(encoded);
+
+        public struct Cmovnae : IAsmInstruction<Cmovnae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNAE;
 
             public static implicit operator AsmMnemonicCode(Cmovnae src) => src.Mnemonic;
@@ -821,8 +1855,19 @@ namespace Z0.Asm
 
         public static Cmovnae cmovnae() => default;
 
-        public readonly struct Cmovnb : IAsmInstruction<Cmovnb>
+        [MethodImpl(Inline)]
+        public static Cmovnae cmovnae(AsmHexCode encoded) => new Cmovnae(encoded);
+
+        public struct Cmovnb : IAsmInstruction<Cmovnb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNB;
 
             public static implicit operator AsmMnemonicCode(Cmovnb src) => src.Mnemonic;
@@ -832,8 +1877,19 @@ namespace Z0.Asm
 
         public static Cmovnb cmovnb() => default;
 
-        public readonly struct Cmovnbe : IAsmInstruction<Cmovnbe>
+        [MethodImpl(Inline)]
+        public static Cmovnb cmovnb(AsmHexCode encoded) => new Cmovnb(encoded);
+
+        public struct Cmovnbe : IAsmInstruction<Cmovnbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNBE;
 
             public static implicit operator AsmMnemonicCode(Cmovnbe src) => src.Mnemonic;
@@ -843,8 +1899,19 @@ namespace Z0.Asm
 
         public static Cmovnbe cmovnbe() => default;
 
-        public readonly struct Cmovnc : IAsmInstruction<Cmovnc>
+        [MethodImpl(Inline)]
+        public static Cmovnbe cmovnbe(AsmHexCode encoded) => new Cmovnbe(encoded);
+
+        public struct Cmovnc : IAsmInstruction<Cmovnc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNC;
 
             public static implicit operator AsmMnemonicCode(Cmovnc src) => src.Mnemonic;
@@ -854,8 +1921,19 @@ namespace Z0.Asm
 
         public static Cmovnc cmovnc() => default;
 
-        public readonly struct Cmovne : IAsmInstruction<Cmovne>
+        [MethodImpl(Inline)]
+        public static Cmovnc cmovnc(AsmHexCode encoded) => new Cmovnc(encoded);
+
+        public struct Cmovne : IAsmInstruction<Cmovne>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovne(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNE;
 
             public static implicit operator AsmMnemonicCode(Cmovne src) => src.Mnemonic;
@@ -865,8 +1943,19 @@ namespace Z0.Asm
 
         public static Cmovne cmovne() => default;
 
-        public readonly struct Cmovng : IAsmInstruction<Cmovng>
+        [MethodImpl(Inline)]
+        public static Cmovne cmovne(AsmHexCode encoded) => new Cmovne(encoded);
+
+        public struct Cmovng : IAsmInstruction<Cmovng>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovng(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNG;
 
             public static implicit operator AsmMnemonicCode(Cmovng src) => src.Mnemonic;
@@ -876,8 +1965,19 @@ namespace Z0.Asm
 
         public static Cmovng cmovng() => default;
 
-        public readonly struct Cmovnge : IAsmInstruction<Cmovnge>
+        [MethodImpl(Inline)]
+        public static Cmovng cmovng(AsmHexCode encoded) => new Cmovng(encoded);
+
+        public struct Cmovnge : IAsmInstruction<Cmovnge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNGE;
 
             public static implicit operator AsmMnemonicCode(Cmovnge src) => src.Mnemonic;
@@ -887,8 +1987,19 @@ namespace Z0.Asm
 
         public static Cmovnge cmovnge() => default;
 
-        public readonly struct Cmovnl : IAsmInstruction<Cmovnl>
+        [MethodImpl(Inline)]
+        public static Cmovnge cmovnge(AsmHexCode encoded) => new Cmovnge(encoded);
+
+        public struct Cmovnl : IAsmInstruction<Cmovnl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNL;
 
             public static implicit operator AsmMnemonicCode(Cmovnl src) => src.Mnemonic;
@@ -898,8 +2009,19 @@ namespace Z0.Asm
 
         public static Cmovnl cmovnl() => default;
 
-        public readonly struct Cmovnle : IAsmInstruction<Cmovnle>
+        [MethodImpl(Inline)]
+        public static Cmovnl cmovnl(AsmHexCode encoded) => new Cmovnl(encoded);
+
+        public struct Cmovnle : IAsmInstruction<Cmovnle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNLE;
 
             public static implicit operator AsmMnemonicCode(Cmovnle src) => src.Mnemonic;
@@ -909,8 +2031,19 @@ namespace Z0.Asm
 
         public static Cmovnle cmovnle() => default;
 
-        public readonly struct Cmovno : IAsmInstruction<Cmovno>
+        [MethodImpl(Inline)]
+        public static Cmovnle cmovnle(AsmHexCode encoded) => new Cmovnle(encoded);
+
+        public struct Cmovno : IAsmInstruction<Cmovno>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovno(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNO;
 
             public static implicit operator AsmMnemonicCode(Cmovno src) => src.Mnemonic;
@@ -920,8 +2053,19 @@ namespace Z0.Asm
 
         public static Cmovno cmovno() => default;
 
-        public readonly struct Cmovnp : IAsmInstruction<Cmovnp>
+        [MethodImpl(Inline)]
+        public static Cmovno cmovno(AsmHexCode encoded) => new Cmovno(encoded);
+
+        public struct Cmovnp : IAsmInstruction<Cmovnp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNP;
 
             public static implicit operator AsmMnemonicCode(Cmovnp src) => src.Mnemonic;
@@ -931,8 +2075,19 @@ namespace Z0.Asm
 
         public static Cmovnp cmovnp() => default;
 
-        public readonly struct Cmovns : IAsmInstruction<Cmovns>
+        [MethodImpl(Inline)]
+        public static Cmovnp cmovnp(AsmHexCode encoded) => new Cmovnp(encoded);
+
+        public struct Cmovns : IAsmInstruction<Cmovns>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovns(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNS;
 
             public static implicit operator AsmMnemonicCode(Cmovns src) => src.Mnemonic;
@@ -942,8 +2097,19 @@ namespace Z0.Asm
 
         public static Cmovns cmovns() => default;
 
-        public readonly struct Cmovnz : IAsmInstruction<Cmovnz>
+        [MethodImpl(Inline)]
+        public static Cmovns cmovns(AsmHexCode encoded) => new Cmovns(encoded);
+
+        public struct Cmovnz : IAsmInstruction<Cmovnz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovnz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVNZ;
 
             public static implicit operator AsmMnemonicCode(Cmovnz src) => src.Mnemonic;
@@ -953,8 +2119,19 @@ namespace Z0.Asm
 
         public static Cmovnz cmovnz() => default;
 
-        public readonly struct Cmovo : IAsmInstruction<Cmovo>
+        [MethodImpl(Inline)]
+        public static Cmovnz cmovnz(AsmHexCode encoded) => new Cmovnz(encoded);
+
+        public struct Cmovo : IAsmInstruction<Cmovo>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVO;
 
             public static implicit operator AsmMnemonicCode(Cmovo src) => src.Mnemonic;
@@ -964,8 +2141,19 @@ namespace Z0.Asm
 
         public static Cmovo cmovo() => default;
 
-        public readonly struct Cmovp : IAsmInstruction<Cmovp>
+        [MethodImpl(Inline)]
+        public static Cmovo cmovo(AsmHexCode encoded) => new Cmovo(encoded);
+
+        public struct Cmovp : IAsmInstruction<Cmovp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVP;
 
             public static implicit operator AsmMnemonicCode(Cmovp src) => src.Mnemonic;
@@ -975,8 +2163,19 @@ namespace Z0.Asm
 
         public static Cmovp cmovp() => default;
 
-        public readonly struct Cmovpe : IAsmInstruction<Cmovpe>
+        [MethodImpl(Inline)]
+        public static Cmovp cmovp(AsmHexCode encoded) => new Cmovp(encoded);
+
+        public struct Cmovpe : IAsmInstruction<Cmovpe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovpe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVPE;
 
             public static implicit operator AsmMnemonicCode(Cmovpe src) => src.Mnemonic;
@@ -986,8 +2185,19 @@ namespace Z0.Asm
 
         public static Cmovpe cmovpe() => default;
 
-        public readonly struct Cmovpo : IAsmInstruction<Cmovpo>
+        [MethodImpl(Inline)]
+        public static Cmovpe cmovpe(AsmHexCode encoded) => new Cmovpe(encoded);
+
+        public struct Cmovpo : IAsmInstruction<Cmovpo>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovpo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVPO;
 
             public static implicit operator AsmMnemonicCode(Cmovpo src) => src.Mnemonic;
@@ -997,8 +2207,19 @@ namespace Z0.Asm
 
         public static Cmovpo cmovpo() => default;
 
-        public readonly struct Cmovs : IAsmInstruction<Cmovs>
+        [MethodImpl(Inline)]
+        public static Cmovpo cmovpo(AsmHexCode encoded) => new Cmovpo(encoded);
+
+        public struct Cmovs : IAsmInstruction<Cmovs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVS;
 
             public static implicit operator AsmMnemonicCode(Cmovs src) => src.Mnemonic;
@@ -1008,8 +2229,19 @@ namespace Z0.Asm
 
         public static Cmovs cmovs() => default;
 
-        public readonly struct Cmovz : IAsmInstruction<Cmovz>
+        [MethodImpl(Inline)]
+        public static Cmovs cmovs(AsmHexCode encoded) => new Cmovs(encoded);
+
+        public struct Cmovz : IAsmInstruction<Cmovz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmovz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMOVZ;
 
             public static implicit operator AsmMnemonicCode(Cmovz src) => src.Mnemonic;
@@ -1019,8 +2251,19 @@ namespace Z0.Asm
 
         public static Cmovz cmovz() => default;
 
-        public readonly struct Cmp : IAsmInstruction<Cmp>
+        [MethodImpl(Inline)]
+        public static Cmovz cmovz(AsmHexCode encoded) => new Cmovz(encoded);
+
+        public struct Cmp : IAsmInstruction<Cmp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMP;
 
             public static implicit operator AsmMnemonicCode(Cmp src) => src.Mnemonic;
@@ -1030,8 +2273,19 @@ namespace Z0.Asm
 
         public static Cmp cmp() => default;
 
-        public readonly struct Cmppd : IAsmInstruction<Cmppd>
+        [MethodImpl(Inline)]
+        public static Cmp cmp(AsmHexCode encoded) => new Cmp(encoded);
+
+        public struct Cmppd : IAsmInstruction<Cmppd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmppd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPPD;
 
             public static implicit operator AsmMnemonicCode(Cmppd src) => src.Mnemonic;
@@ -1041,8 +2295,19 @@ namespace Z0.Asm
 
         public static Cmppd cmppd() => default;
 
-        public readonly struct Vcmppd : IAsmInstruction<Vcmppd>
+        [MethodImpl(Inline)]
+        public static Cmppd cmppd(AsmHexCode encoded) => new Cmppd(encoded);
+
+        public struct Vcmppd : IAsmInstruction<Vcmppd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcmppd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCMPPD;
 
             public static implicit operator AsmMnemonicCode(Vcmppd src) => src.Mnemonic;
@@ -1052,8 +2317,19 @@ namespace Z0.Asm
 
         public static Vcmppd vcmppd() => default;
 
-        public readonly struct Cmpps : IAsmInstruction<Cmpps>
+        [MethodImpl(Inline)]
+        public static Vcmppd vcmppd(AsmHexCode encoded) => new Vcmppd(encoded);
+
+        public struct Cmpps : IAsmInstruction<Cmpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPPS;
 
             public static implicit operator AsmMnemonicCode(Cmpps src) => src.Mnemonic;
@@ -1063,8 +2339,19 @@ namespace Z0.Asm
 
         public static Cmpps cmpps() => default;
 
-        public readonly struct Vcmpps : IAsmInstruction<Vcmpps>
+        [MethodImpl(Inline)]
+        public static Cmpps cmpps(AsmHexCode encoded) => new Cmpps(encoded);
+
+        public struct Vcmpps : IAsmInstruction<Vcmpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcmpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCMPPS;
 
             public static implicit operator AsmMnemonicCode(Vcmpps src) => src.Mnemonic;
@@ -1074,8 +2361,19 @@ namespace Z0.Asm
 
         public static Vcmpps vcmpps() => default;
 
-        public readonly struct Cmps : IAsmInstruction<Cmps>
+        [MethodImpl(Inline)]
+        public static Vcmpps vcmpps(AsmHexCode encoded) => new Vcmpps(encoded);
+
+        public struct Cmps : IAsmInstruction<Cmps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPS;
 
             public static implicit operator AsmMnemonicCode(Cmps src) => src.Mnemonic;
@@ -1085,8 +2383,63 @@ namespace Z0.Asm
 
         public static Cmps cmps() => default;
 
-        public readonly struct Cmpsd : IAsmInstruction<Cmpsd>
+        [MethodImpl(Inline)]
+        public static Cmps cmps(AsmHexCode encoded) => new Cmps(encoded);
+
+        public struct Cmpsb : IAsmInstruction<Cmpsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPSB;
+
+            public static implicit operator AsmMnemonicCode(Cmpsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cmpsb src) => AsmMnemonics.CMPSB;
+        }
+
+        public static Cmpsb cmpsb() => default;
+
+        [MethodImpl(Inline)]
+        public static Cmpsb cmpsb(AsmHexCode encoded) => new Cmpsb(encoded);
+
+        public struct Cmpsw : IAsmInstruction<Cmpsw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPSW;
+
+            public static implicit operator AsmMnemonicCode(Cmpsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cmpsw src) => AsmMnemonics.CMPSW;
+        }
+
+        public static Cmpsw cmpsw() => default;
+
+        [MethodImpl(Inline)]
+        public static Cmpsw cmpsw(AsmHexCode encoded) => new Cmpsw(encoded);
+
+        public struct Cmpsd : IAsmInstruction<Cmpsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPSD;
 
             public static implicit operator AsmMnemonicCode(Cmpsd src) => src.Mnemonic;
@@ -1096,8 +2449,41 @@ namespace Z0.Asm
 
         public static Cmpsd cmpsd() => default;
 
-        public readonly struct Vcmpsd : IAsmInstruction<Vcmpsd>
+        [MethodImpl(Inline)]
+        public static Cmpsd cmpsd(AsmHexCode encoded) => new Cmpsd(encoded);
+
+        public struct Cmpsq : IAsmInstruction<Cmpsq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpsq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPSQ;
+
+            public static implicit operator AsmMnemonicCode(Cmpsq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cmpsq src) => AsmMnemonics.CMPSQ;
+        }
+
+        public static Cmpsq cmpsq() => default;
+
+        [MethodImpl(Inline)]
+        public static Cmpsq cmpsq(AsmHexCode encoded) => new Cmpsq(encoded);
+
+        public struct Vcmpsd : IAsmInstruction<Vcmpsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcmpsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCMPSD;
 
             public static implicit operator AsmMnemonicCode(Vcmpsd src) => src.Mnemonic;
@@ -1107,8 +2493,19 @@ namespace Z0.Asm
 
         public static Vcmpsd vcmpsd() => default;
 
-        public readonly struct Cmpss : IAsmInstruction<Cmpss>
+        [MethodImpl(Inline)]
+        public static Vcmpsd vcmpsd(AsmHexCode encoded) => new Vcmpsd(encoded);
+
+        public struct Cmpss : IAsmInstruction<Cmpss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPSS;
 
             public static implicit operator AsmMnemonicCode(Cmpss src) => src.Mnemonic;
@@ -1118,8 +2515,19 @@ namespace Z0.Asm
 
         public static Cmpss cmpss() => default;
 
-        public readonly struct Vcmpss : IAsmInstruction<Vcmpss>
+        [MethodImpl(Inline)]
+        public static Cmpss cmpss(AsmHexCode encoded) => new Cmpss(encoded);
+
+        public struct Vcmpss : IAsmInstruction<Vcmpss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcmpss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCMPSS;
 
             public static implicit operator AsmMnemonicCode(Vcmpss src) => src.Mnemonic;
@@ -1129,8 +2537,19 @@ namespace Z0.Asm
 
         public static Vcmpss vcmpss() => default;
 
-        public readonly struct Cmpxchg : IAsmInstruction<Cmpxchg>
+        [MethodImpl(Inline)]
+        public static Vcmpss vcmpss(AsmHexCode encoded) => new Vcmpss(encoded);
+
+        public struct Cmpxchg : IAsmInstruction<Cmpxchg>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpxchg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPXCHG;
 
             public static implicit operator AsmMnemonicCode(Cmpxchg src) => src.Mnemonic;
@@ -1140,8 +2559,19 @@ namespace Z0.Asm
 
         public static Cmpxchg cmpxchg() => default;
 
-        public readonly struct Cmpxchg8b : IAsmInstruction<Cmpxchg8b>
+        [MethodImpl(Inline)]
+        public static Cmpxchg cmpxchg(AsmHexCode encoded) => new Cmpxchg(encoded);
+
+        public struct Cmpxchg8b : IAsmInstruction<Cmpxchg8b>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpxchg8b(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPXCHG8B;
 
             public static implicit operator AsmMnemonicCode(Cmpxchg8b src) => src.Mnemonic;
@@ -1151,8 +2581,19 @@ namespace Z0.Asm
 
         public static Cmpxchg8b cmpxchg8b() => default;
 
-        public readonly struct Cmpxchg16b : IAsmInstruction<Cmpxchg16b>
+        [MethodImpl(Inline)]
+        public static Cmpxchg8b cmpxchg8b(AsmHexCode encoded) => new Cmpxchg8b(encoded);
+
+        public struct Cmpxchg16b : IAsmInstruction<Cmpxchg16b>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cmpxchg16b(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CMPXCHG16B;
 
             public static implicit operator AsmMnemonicCode(Cmpxchg16b src) => src.Mnemonic;
@@ -1162,8 +2603,19 @@ namespace Z0.Asm
 
         public static Cmpxchg16b cmpxchg16b() => default;
 
-        public readonly struct Comisd : IAsmInstruction<Comisd>
+        [MethodImpl(Inline)]
+        public static Cmpxchg16b cmpxchg16b(AsmHexCode encoded) => new Cmpxchg16b(encoded);
+
+        public struct Comisd : IAsmInstruction<Comisd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Comisd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.COMISD;
 
             public static implicit operator AsmMnemonicCode(Comisd src) => src.Mnemonic;
@@ -1173,8 +2625,19 @@ namespace Z0.Asm
 
         public static Comisd comisd() => default;
 
-        public readonly struct Vcomisd : IAsmInstruction<Vcomisd>
+        [MethodImpl(Inline)]
+        public static Comisd comisd(AsmHexCode encoded) => new Comisd(encoded);
+
+        public struct Vcomisd : IAsmInstruction<Vcomisd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcomisd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCOMISD;
 
             public static implicit operator AsmMnemonicCode(Vcomisd src) => src.Mnemonic;
@@ -1184,8 +2647,19 @@ namespace Z0.Asm
 
         public static Vcomisd vcomisd() => default;
 
-        public readonly struct Comiss : IAsmInstruction<Comiss>
+        [MethodImpl(Inline)]
+        public static Vcomisd vcomisd(AsmHexCode encoded) => new Vcomisd(encoded);
+
+        public struct Comiss : IAsmInstruction<Comiss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Comiss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.COMISS;
 
             public static implicit operator AsmMnemonicCode(Comiss src) => src.Mnemonic;
@@ -1195,8 +2669,19 @@ namespace Z0.Asm
 
         public static Comiss comiss() => default;
 
-        public readonly struct Vcomiss : IAsmInstruction<Vcomiss>
+        [MethodImpl(Inline)]
+        public static Comiss comiss(AsmHexCode encoded) => new Comiss(encoded);
+
+        public struct Vcomiss : IAsmInstruction<Vcomiss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcomiss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCOMISS;
 
             public static implicit operator AsmMnemonicCode(Vcomiss src) => src.Mnemonic;
@@ -1206,8 +2691,41 @@ namespace Z0.Asm
 
         public static Vcomiss vcomiss() => default;
 
-        public readonly struct Crc32 : IAsmInstruction<Crc32>
+        [MethodImpl(Inline)]
+        public static Vcomiss vcomiss(AsmHexCode encoded) => new Vcomiss(encoded);
+
+        public struct Cpuid : IAsmInstruction<Cpuid>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cpuid(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CPUID;
+
+            public static implicit operator AsmMnemonicCode(Cpuid src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cpuid src) => AsmMnemonics.CPUID;
+        }
+
+        public static Cpuid cpuid() => default;
+
+        [MethodImpl(Inline)]
+        public static Cpuid cpuid(AsmHexCode encoded) => new Cpuid(encoded);
+
+        public struct Crc32 : IAsmInstruction<Crc32>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Crc32(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CRC32;
 
             public static implicit operator AsmMnemonicCode(Crc32 src) => src.Mnemonic;
@@ -1217,8 +2735,19 @@ namespace Z0.Asm
 
         public static Crc32 crc32() => default;
 
-        public readonly struct Cvtdq2pd : IAsmInstruction<Cvtdq2pd>
+        [MethodImpl(Inline)]
+        public static Crc32 crc32(AsmHexCode encoded) => new Crc32(encoded);
+
+        public struct Cvtdq2pd : IAsmInstruction<Cvtdq2pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtdq2pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTDQ2PD;
 
             public static implicit operator AsmMnemonicCode(Cvtdq2pd src) => src.Mnemonic;
@@ -1228,8 +2757,19 @@ namespace Z0.Asm
 
         public static Cvtdq2pd cvtdq2pd() => default;
 
-        public readonly struct Vcvtdq2pd : IAsmInstruction<Vcvtdq2pd>
+        [MethodImpl(Inline)]
+        public static Cvtdq2pd cvtdq2pd(AsmHexCode encoded) => new Cvtdq2pd(encoded);
+
+        public struct Vcvtdq2pd : IAsmInstruction<Vcvtdq2pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtdq2pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTDQ2PD;
 
             public static implicit operator AsmMnemonicCode(Vcvtdq2pd src) => src.Mnemonic;
@@ -1239,8 +2779,19 @@ namespace Z0.Asm
 
         public static Vcvtdq2pd vcvtdq2pd() => default;
 
-        public readonly struct Cvtdq2ps : IAsmInstruction<Cvtdq2ps>
+        [MethodImpl(Inline)]
+        public static Vcvtdq2pd vcvtdq2pd(AsmHexCode encoded) => new Vcvtdq2pd(encoded);
+
+        public struct Cvtdq2ps : IAsmInstruction<Cvtdq2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtdq2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTDQ2PS;
 
             public static implicit operator AsmMnemonicCode(Cvtdq2ps src) => src.Mnemonic;
@@ -1250,8 +2801,19 @@ namespace Z0.Asm
 
         public static Cvtdq2ps cvtdq2ps() => default;
 
-        public readonly struct Vcvtdq2ps : IAsmInstruction<Vcvtdq2ps>
+        [MethodImpl(Inline)]
+        public static Cvtdq2ps cvtdq2ps(AsmHexCode encoded) => new Cvtdq2ps(encoded);
+
+        public struct Vcvtdq2ps : IAsmInstruction<Vcvtdq2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtdq2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTDQ2PS;
 
             public static implicit operator AsmMnemonicCode(Vcvtdq2ps src) => src.Mnemonic;
@@ -1261,8 +2823,19 @@ namespace Z0.Asm
 
         public static Vcvtdq2ps vcvtdq2ps() => default;
 
-        public readonly struct Cvtpd2dq : IAsmInstruction<Cvtpd2dq>
+        [MethodImpl(Inline)]
+        public static Vcvtdq2ps vcvtdq2ps(AsmHexCode encoded) => new Vcvtdq2ps(encoded);
+
+        public struct Cvtpd2dq : IAsmInstruction<Cvtpd2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtpd2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPD2DQ;
 
             public static implicit operator AsmMnemonicCode(Cvtpd2dq src) => src.Mnemonic;
@@ -1272,8 +2845,19 @@ namespace Z0.Asm
 
         public static Cvtpd2dq cvtpd2dq() => default;
 
-        public readonly struct Vcvtpd2dq : IAsmInstruction<Vcvtpd2dq>
+        [MethodImpl(Inline)]
+        public static Cvtpd2dq cvtpd2dq(AsmHexCode encoded) => new Cvtpd2dq(encoded);
+
+        public struct Vcvtpd2dq : IAsmInstruction<Vcvtpd2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtpd2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPD2DQ;
 
             public static implicit operator AsmMnemonicCode(Vcvtpd2dq src) => src.Mnemonic;
@@ -1283,8 +2867,19 @@ namespace Z0.Asm
 
         public static Vcvtpd2dq vcvtpd2dq() => default;
 
-        public readonly struct Cvtpd2pi : IAsmInstruction<Cvtpd2pi>
+        [MethodImpl(Inline)]
+        public static Vcvtpd2dq vcvtpd2dq(AsmHexCode encoded) => new Vcvtpd2dq(encoded);
+
+        public struct Cvtpd2pi : IAsmInstruction<Cvtpd2pi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtpd2pi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPD2PI;
 
             public static implicit operator AsmMnemonicCode(Cvtpd2pi src) => src.Mnemonic;
@@ -1294,8 +2889,19 @@ namespace Z0.Asm
 
         public static Cvtpd2pi cvtpd2pi() => default;
 
-        public readonly struct Cvtpd2ps : IAsmInstruction<Cvtpd2ps>
+        [MethodImpl(Inline)]
+        public static Cvtpd2pi cvtpd2pi(AsmHexCode encoded) => new Cvtpd2pi(encoded);
+
+        public struct Cvtpd2ps : IAsmInstruction<Cvtpd2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtpd2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPD2PS;
 
             public static implicit operator AsmMnemonicCode(Cvtpd2ps src) => src.Mnemonic;
@@ -1305,8 +2911,19 @@ namespace Z0.Asm
 
         public static Cvtpd2ps cvtpd2ps() => default;
 
-        public readonly struct Vcvtpd2ps : IAsmInstruction<Vcvtpd2ps>
+        [MethodImpl(Inline)]
+        public static Cvtpd2ps cvtpd2ps(AsmHexCode encoded) => new Cvtpd2ps(encoded);
+
+        public struct Vcvtpd2ps : IAsmInstruction<Vcvtpd2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtpd2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPD2PS;
 
             public static implicit operator AsmMnemonicCode(Vcvtpd2ps src) => src.Mnemonic;
@@ -1316,8 +2933,19 @@ namespace Z0.Asm
 
         public static Vcvtpd2ps vcvtpd2ps() => default;
 
-        public readonly struct Cvtpi2pd : IAsmInstruction<Cvtpi2pd>
+        [MethodImpl(Inline)]
+        public static Vcvtpd2ps vcvtpd2ps(AsmHexCode encoded) => new Vcvtpd2ps(encoded);
+
+        public struct Cvtpi2pd : IAsmInstruction<Cvtpi2pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtpi2pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPI2PD;
 
             public static implicit operator AsmMnemonicCode(Cvtpi2pd src) => src.Mnemonic;
@@ -1327,8 +2955,19 @@ namespace Z0.Asm
 
         public static Cvtpi2pd cvtpi2pd() => default;
 
-        public readonly struct Cvtpi2ps : IAsmInstruction<Cvtpi2ps>
+        [MethodImpl(Inline)]
+        public static Cvtpi2pd cvtpi2pd(AsmHexCode encoded) => new Cvtpi2pd(encoded);
+
+        public struct Cvtpi2ps : IAsmInstruction<Cvtpi2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtpi2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPI2PS;
 
             public static implicit operator AsmMnemonicCode(Cvtpi2ps src) => src.Mnemonic;
@@ -1338,8 +2977,19 @@ namespace Z0.Asm
 
         public static Cvtpi2ps cvtpi2ps() => default;
 
-        public readonly struct Cvtps2dq : IAsmInstruction<Cvtps2dq>
+        [MethodImpl(Inline)]
+        public static Cvtpi2ps cvtpi2ps(AsmHexCode encoded) => new Cvtpi2ps(encoded);
+
+        public struct Cvtps2dq : IAsmInstruction<Cvtps2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtps2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPS2DQ;
 
             public static implicit operator AsmMnemonicCode(Cvtps2dq src) => src.Mnemonic;
@@ -1349,8 +2999,19 @@ namespace Z0.Asm
 
         public static Cvtps2dq cvtps2dq() => default;
 
-        public readonly struct Vcvtps2dq : IAsmInstruction<Vcvtps2dq>
+        [MethodImpl(Inline)]
+        public static Cvtps2dq cvtps2dq(AsmHexCode encoded) => new Cvtps2dq(encoded);
+
+        public struct Vcvtps2dq : IAsmInstruction<Vcvtps2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtps2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPS2DQ;
 
             public static implicit operator AsmMnemonicCode(Vcvtps2dq src) => src.Mnemonic;
@@ -1360,8 +3021,19 @@ namespace Z0.Asm
 
         public static Vcvtps2dq vcvtps2dq() => default;
 
-        public readonly struct Cvtps2pd : IAsmInstruction<Cvtps2pd>
+        [MethodImpl(Inline)]
+        public static Vcvtps2dq vcvtps2dq(AsmHexCode encoded) => new Vcvtps2dq(encoded);
+
+        public struct Cvtps2pd : IAsmInstruction<Cvtps2pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtps2pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPS2PD;
 
             public static implicit operator AsmMnemonicCode(Cvtps2pd src) => src.Mnemonic;
@@ -1371,8 +3043,19 @@ namespace Z0.Asm
 
         public static Cvtps2pd cvtps2pd() => default;
 
-        public readonly struct Vcvtps2pd : IAsmInstruction<Vcvtps2pd>
+        [MethodImpl(Inline)]
+        public static Cvtps2pd cvtps2pd(AsmHexCode encoded) => new Cvtps2pd(encoded);
+
+        public struct Vcvtps2pd : IAsmInstruction<Vcvtps2pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtps2pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPS2PD;
 
             public static implicit operator AsmMnemonicCode(Vcvtps2pd src) => src.Mnemonic;
@@ -1382,8 +3065,19 @@ namespace Z0.Asm
 
         public static Vcvtps2pd vcvtps2pd() => default;
 
-        public readonly struct Cvtps2pi : IAsmInstruction<Cvtps2pi>
+        [MethodImpl(Inline)]
+        public static Vcvtps2pd vcvtps2pd(AsmHexCode encoded) => new Vcvtps2pd(encoded);
+
+        public struct Cvtps2pi : IAsmInstruction<Cvtps2pi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtps2pi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTPS2PI;
 
             public static implicit operator AsmMnemonicCode(Cvtps2pi src) => src.Mnemonic;
@@ -1393,8 +3087,19 @@ namespace Z0.Asm
 
         public static Cvtps2pi cvtps2pi() => default;
 
-        public readonly struct Cvtsd2si : IAsmInstruction<Cvtsd2si>
+        [MethodImpl(Inline)]
+        public static Cvtps2pi cvtps2pi(AsmHexCode encoded) => new Cvtps2pi(encoded);
+
+        public struct Cvtsd2si : IAsmInstruction<Cvtsd2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtsd2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSD2SI;
 
             public static implicit operator AsmMnemonicCode(Cvtsd2si src) => src.Mnemonic;
@@ -1404,8 +3109,19 @@ namespace Z0.Asm
 
         public static Cvtsd2si cvtsd2si() => default;
 
-        public readonly struct Vcvtsd2si : IAsmInstruction<Vcvtsd2si>
+        [MethodImpl(Inline)]
+        public static Cvtsd2si cvtsd2si(AsmHexCode encoded) => new Cvtsd2si(encoded);
+
+        public struct Vcvtsd2si : IAsmInstruction<Vcvtsd2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtsd2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSD2SI;
 
             public static implicit operator AsmMnemonicCode(Vcvtsd2si src) => src.Mnemonic;
@@ -1415,8 +3131,19 @@ namespace Z0.Asm
 
         public static Vcvtsd2si vcvtsd2si() => default;
 
-        public readonly struct Cvtsd2ss : IAsmInstruction<Cvtsd2ss>
+        [MethodImpl(Inline)]
+        public static Vcvtsd2si vcvtsd2si(AsmHexCode encoded) => new Vcvtsd2si(encoded);
+
+        public struct Cvtsd2ss : IAsmInstruction<Cvtsd2ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtsd2ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSD2SS;
 
             public static implicit operator AsmMnemonicCode(Cvtsd2ss src) => src.Mnemonic;
@@ -1426,8 +3153,19 @@ namespace Z0.Asm
 
         public static Cvtsd2ss cvtsd2ss() => default;
 
-        public readonly struct Vcvtsd2ss : IAsmInstruction<Vcvtsd2ss>
+        [MethodImpl(Inline)]
+        public static Cvtsd2ss cvtsd2ss(AsmHexCode encoded) => new Cvtsd2ss(encoded);
+
+        public struct Vcvtsd2ss : IAsmInstruction<Vcvtsd2ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtsd2ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSD2SS;
 
             public static implicit operator AsmMnemonicCode(Vcvtsd2ss src) => src.Mnemonic;
@@ -1437,8 +3175,19 @@ namespace Z0.Asm
 
         public static Vcvtsd2ss vcvtsd2ss() => default;
 
-        public readonly struct Cvtsi2sd : IAsmInstruction<Cvtsi2sd>
+        [MethodImpl(Inline)]
+        public static Vcvtsd2ss vcvtsd2ss(AsmHexCode encoded) => new Vcvtsd2ss(encoded);
+
+        public struct Cvtsi2sd : IAsmInstruction<Cvtsi2sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtsi2sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSI2SD;
 
             public static implicit operator AsmMnemonicCode(Cvtsi2sd src) => src.Mnemonic;
@@ -1448,8 +3197,19 @@ namespace Z0.Asm
 
         public static Cvtsi2sd cvtsi2sd() => default;
 
-        public readonly struct Vcvtsi2sd : IAsmInstruction<Vcvtsi2sd>
+        [MethodImpl(Inline)]
+        public static Cvtsi2sd cvtsi2sd(AsmHexCode encoded) => new Cvtsi2sd(encoded);
+
+        public struct Vcvtsi2sd : IAsmInstruction<Vcvtsi2sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtsi2sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSI2SD;
 
             public static implicit operator AsmMnemonicCode(Vcvtsi2sd src) => src.Mnemonic;
@@ -1459,8 +3219,19 @@ namespace Z0.Asm
 
         public static Vcvtsi2sd vcvtsi2sd() => default;
 
-        public readonly struct Cvtsi2ss : IAsmInstruction<Cvtsi2ss>
+        [MethodImpl(Inline)]
+        public static Vcvtsi2sd vcvtsi2sd(AsmHexCode encoded) => new Vcvtsi2sd(encoded);
+
+        public struct Cvtsi2ss : IAsmInstruction<Cvtsi2ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtsi2ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSI2SS;
 
             public static implicit operator AsmMnemonicCode(Cvtsi2ss src) => src.Mnemonic;
@@ -1470,8 +3241,19 @@ namespace Z0.Asm
 
         public static Cvtsi2ss cvtsi2ss() => default;
 
-        public readonly struct Vcvtsi2ss : IAsmInstruction<Vcvtsi2ss>
+        [MethodImpl(Inline)]
+        public static Cvtsi2ss cvtsi2ss(AsmHexCode encoded) => new Cvtsi2ss(encoded);
+
+        public struct Vcvtsi2ss : IAsmInstruction<Vcvtsi2ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtsi2ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSI2SS;
 
             public static implicit operator AsmMnemonicCode(Vcvtsi2ss src) => src.Mnemonic;
@@ -1481,8 +3263,19 @@ namespace Z0.Asm
 
         public static Vcvtsi2ss vcvtsi2ss() => default;
 
-        public readonly struct Cvtss2sd : IAsmInstruction<Cvtss2sd>
+        [MethodImpl(Inline)]
+        public static Vcvtsi2ss vcvtsi2ss(AsmHexCode encoded) => new Vcvtsi2ss(encoded);
+
+        public struct Cvtss2sd : IAsmInstruction<Cvtss2sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtss2sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSS2SD;
 
             public static implicit operator AsmMnemonicCode(Cvtss2sd src) => src.Mnemonic;
@@ -1492,8 +3285,19 @@ namespace Z0.Asm
 
         public static Cvtss2sd cvtss2sd() => default;
 
-        public readonly struct Vcvtss2sd : IAsmInstruction<Vcvtss2sd>
+        [MethodImpl(Inline)]
+        public static Cvtss2sd cvtss2sd(AsmHexCode encoded) => new Cvtss2sd(encoded);
+
+        public struct Vcvtss2sd : IAsmInstruction<Vcvtss2sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtss2sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSS2SD;
 
             public static implicit operator AsmMnemonicCode(Vcvtss2sd src) => src.Mnemonic;
@@ -1503,8 +3307,19 @@ namespace Z0.Asm
 
         public static Vcvtss2sd vcvtss2sd() => default;
 
-        public readonly struct Cvtss2si : IAsmInstruction<Cvtss2si>
+        [MethodImpl(Inline)]
+        public static Vcvtss2sd vcvtss2sd(AsmHexCode encoded) => new Vcvtss2sd(encoded);
+
+        public struct Cvtss2si : IAsmInstruction<Cvtss2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvtss2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTSS2SI;
 
             public static implicit operator AsmMnemonicCode(Cvtss2si src) => src.Mnemonic;
@@ -1514,8 +3329,19 @@ namespace Z0.Asm
 
         public static Cvtss2si cvtss2si() => default;
 
-        public readonly struct Vcvtss2si : IAsmInstruction<Vcvtss2si>
+        [MethodImpl(Inline)]
+        public static Cvtss2si cvtss2si(AsmHexCode encoded) => new Cvtss2si(encoded);
+
+        public struct Vcvtss2si : IAsmInstruction<Vcvtss2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtss2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTSS2SI;
 
             public static implicit operator AsmMnemonicCode(Vcvtss2si src) => src.Mnemonic;
@@ -1525,8 +3351,19 @@ namespace Z0.Asm
 
         public static Vcvtss2si vcvtss2si() => default;
 
-        public readonly struct Cvttpd2dq : IAsmInstruction<Cvttpd2dq>
+        [MethodImpl(Inline)]
+        public static Vcvtss2si vcvtss2si(AsmHexCode encoded) => new Vcvtss2si(encoded);
+
+        public struct Cvttpd2dq : IAsmInstruction<Cvttpd2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttpd2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTPD2DQ;
 
             public static implicit operator AsmMnemonicCode(Cvttpd2dq src) => src.Mnemonic;
@@ -1536,8 +3373,19 @@ namespace Z0.Asm
 
         public static Cvttpd2dq cvttpd2dq() => default;
 
-        public readonly struct Vcvttpd2dq : IAsmInstruction<Vcvttpd2dq>
+        [MethodImpl(Inline)]
+        public static Cvttpd2dq cvttpd2dq(AsmHexCode encoded) => new Cvttpd2dq(encoded);
+
+        public struct Vcvttpd2dq : IAsmInstruction<Vcvttpd2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvttpd2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTTPD2DQ;
 
             public static implicit operator AsmMnemonicCode(Vcvttpd2dq src) => src.Mnemonic;
@@ -1547,8 +3395,19 @@ namespace Z0.Asm
 
         public static Vcvttpd2dq vcvttpd2dq() => default;
 
-        public readonly struct Cvttpd2pi : IAsmInstruction<Cvttpd2pi>
+        [MethodImpl(Inline)]
+        public static Vcvttpd2dq vcvttpd2dq(AsmHexCode encoded) => new Vcvttpd2dq(encoded);
+
+        public struct Cvttpd2pi : IAsmInstruction<Cvttpd2pi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttpd2pi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTPD2PI;
 
             public static implicit operator AsmMnemonicCode(Cvttpd2pi src) => src.Mnemonic;
@@ -1558,8 +3417,19 @@ namespace Z0.Asm
 
         public static Cvttpd2pi cvttpd2pi() => default;
 
-        public readonly struct Cvttps2dq : IAsmInstruction<Cvttps2dq>
+        [MethodImpl(Inline)]
+        public static Cvttpd2pi cvttpd2pi(AsmHexCode encoded) => new Cvttpd2pi(encoded);
+
+        public struct Cvttps2dq : IAsmInstruction<Cvttps2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttps2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTPS2DQ;
 
             public static implicit operator AsmMnemonicCode(Cvttps2dq src) => src.Mnemonic;
@@ -1569,8 +3439,19 @@ namespace Z0.Asm
 
         public static Cvttps2dq cvttps2dq() => default;
 
-        public readonly struct Vcvttps2dq : IAsmInstruction<Vcvttps2dq>
+        [MethodImpl(Inline)]
+        public static Cvttps2dq cvttps2dq(AsmHexCode encoded) => new Cvttps2dq(encoded);
+
+        public struct Vcvttps2dq : IAsmInstruction<Vcvttps2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvttps2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTTPS2DQ;
 
             public static implicit operator AsmMnemonicCode(Vcvttps2dq src) => src.Mnemonic;
@@ -1580,8 +3461,19 @@ namespace Z0.Asm
 
         public static Vcvttps2dq vcvttps2dq() => default;
 
-        public readonly struct Cvttps2pi : IAsmInstruction<Cvttps2pi>
+        [MethodImpl(Inline)]
+        public static Vcvttps2dq vcvttps2dq(AsmHexCode encoded) => new Vcvttps2dq(encoded);
+
+        public struct Cvttps2pi : IAsmInstruction<Cvttps2pi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttps2pi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTPS2PI;
 
             public static implicit operator AsmMnemonicCode(Cvttps2pi src) => src.Mnemonic;
@@ -1591,8 +3483,19 @@ namespace Z0.Asm
 
         public static Cvttps2pi cvttps2pi() => default;
 
-        public readonly struct Cvttsd2si : IAsmInstruction<Cvttsd2si>
+        [MethodImpl(Inline)]
+        public static Cvttps2pi cvttps2pi(AsmHexCode encoded) => new Cvttps2pi(encoded);
+
+        public struct Cvttsd2si : IAsmInstruction<Cvttsd2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttsd2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTSD2SI;
 
             public static implicit operator AsmMnemonicCode(Cvttsd2si src) => src.Mnemonic;
@@ -1602,8 +3505,19 @@ namespace Z0.Asm
 
         public static Cvttsd2si cvttsd2si() => default;
 
-        public readonly struct Vcvttsd2si : IAsmInstruction<Vcvttsd2si>
+        [MethodImpl(Inline)]
+        public static Cvttsd2si cvttsd2si(AsmHexCode encoded) => new Cvttsd2si(encoded);
+
+        public struct Vcvttsd2si : IAsmInstruction<Vcvttsd2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvttsd2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTTSD2SI;
 
             public static implicit operator AsmMnemonicCode(Vcvttsd2si src) => src.Mnemonic;
@@ -1613,8 +3527,19 @@ namespace Z0.Asm
 
         public static Vcvttsd2si vcvttsd2si() => default;
 
-        public readonly struct Cvttss2si : IAsmInstruction<Cvttss2si>
+        [MethodImpl(Inline)]
+        public static Vcvttsd2si vcvttsd2si(AsmHexCode encoded) => new Vcvttsd2si(encoded);
+
+        public struct Cvttss2si : IAsmInstruction<Cvttss2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cvttss2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CVTTSS2SI;
 
             public static implicit operator AsmMnemonicCode(Cvttss2si src) => src.Mnemonic;
@@ -1624,8 +3549,19 @@ namespace Z0.Asm
 
         public static Cvttss2si cvttss2si() => default;
 
-        public readonly struct Vcvttss2si : IAsmInstruction<Vcvttss2si>
+        [MethodImpl(Inline)]
+        public static Cvttss2si cvttss2si(AsmHexCode encoded) => new Cvttss2si(encoded);
+
+        public struct Vcvttss2si : IAsmInstruction<Vcvttss2si>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvttss2si(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTTSS2SI;
 
             public static implicit operator AsmMnemonicCode(Vcvttss2si src) => src.Mnemonic;
@@ -1635,8 +3571,129 @@ namespace Z0.Asm
 
         public static Vcvttss2si vcvttss2si() => default;
 
-        public readonly struct Dec : IAsmInstruction<Dec>
+        [MethodImpl(Inline)]
+        public static Vcvttss2si vcvttss2si(AsmHexCode encoded) => new Vcvttss2si(encoded);
+
+        public struct Cwd : IAsmInstruction<Cwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CWD;
+
+            public static implicit operator AsmMnemonicCode(Cwd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cwd src) => AsmMnemonics.CWD;
+        }
+
+        public static Cwd cwd() => default;
+
+        [MethodImpl(Inline)]
+        public static Cwd cwd(AsmHexCode encoded) => new Cwd(encoded);
+
+        public struct Cdq : IAsmInstruction<Cdq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CDQ;
+
+            public static implicit operator AsmMnemonicCode(Cdq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cdq src) => AsmMnemonics.CDQ;
+        }
+
+        public static Cdq cdq() => default;
+
+        [MethodImpl(Inline)]
+        public static Cdq cdq(AsmHexCode encoded) => new Cdq(encoded);
+
+        public struct Cqo : IAsmInstruction<Cqo>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Cqo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.CQO;
+
+            public static implicit operator AsmMnemonicCode(Cqo src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Cqo src) => AsmMnemonics.CQO;
+        }
+
+        public static Cqo cqo() => default;
+
+        [MethodImpl(Inline)]
+        public static Cqo cqo(AsmHexCode encoded) => new Cqo(encoded);
+
+        public struct Daa : IAsmInstruction<Daa>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Daa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DAA;
+
+            public static implicit operator AsmMnemonicCode(Daa src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Daa src) => AsmMnemonics.DAA;
+        }
+
+        public static Daa daa() => default;
+
+        [MethodImpl(Inline)]
+        public static Daa daa(AsmHexCode encoded) => new Daa(encoded);
+
+        public struct Das : IAsmInstruction<Das>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Das(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DAS;
+
+            public static implicit operator AsmMnemonicCode(Das src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Das src) => AsmMnemonics.DAS;
+        }
+
+        public static Das das() => default;
+
+        [MethodImpl(Inline)]
+        public static Das das(AsmHexCode encoded) => new Das(encoded);
+
+        public struct Dec : IAsmInstruction<Dec>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Dec(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DEC;
 
             public static implicit operator AsmMnemonicCode(Dec src) => src.Mnemonic;
@@ -1646,8 +3703,19 @@ namespace Z0.Asm
 
         public static Dec dec() => default;
 
-        public readonly struct Div : IAsmInstruction<Div>
+        [MethodImpl(Inline)]
+        public static Dec dec(AsmHexCode encoded) => new Dec(encoded);
+
+        public struct Div : IAsmInstruction<Div>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Div(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DIV;
 
             public static implicit operator AsmMnemonicCode(Div src) => src.Mnemonic;
@@ -1657,8 +3725,19 @@ namespace Z0.Asm
 
         public static Div div() => default;
 
-        public readonly struct Divpd : IAsmInstruction<Divpd>
+        [MethodImpl(Inline)]
+        public static Div div(AsmHexCode encoded) => new Div(encoded);
+
+        public struct Divpd : IAsmInstruction<Divpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Divpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DIVPD;
 
             public static implicit operator AsmMnemonicCode(Divpd src) => src.Mnemonic;
@@ -1668,8 +3747,19 @@ namespace Z0.Asm
 
         public static Divpd divpd() => default;
 
-        public readonly struct Vdivpd : IAsmInstruction<Vdivpd>
+        [MethodImpl(Inline)]
+        public static Divpd divpd(AsmHexCode encoded) => new Divpd(encoded);
+
+        public struct Vdivpd : IAsmInstruction<Vdivpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdivpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDIVPD;
 
             public static implicit operator AsmMnemonicCode(Vdivpd src) => src.Mnemonic;
@@ -1679,8 +3769,19 @@ namespace Z0.Asm
 
         public static Vdivpd vdivpd() => default;
 
-        public readonly struct Divps : IAsmInstruction<Divps>
+        [MethodImpl(Inline)]
+        public static Vdivpd vdivpd(AsmHexCode encoded) => new Vdivpd(encoded);
+
+        public struct Divps : IAsmInstruction<Divps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Divps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DIVPS;
 
             public static implicit operator AsmMnemonicCode(Divps src) => src.Mnemonic;
@@ -1690,8 +3791,19 @@ namespace Z0.Asm
 
         public static Divps divps() => default;
 
-        public readonly struct Vdivps : IAsmInstruction<Vdivps>
+        [MethodImpl(Inline)]
+        public static Divps divps(AsmHexCode encoded) => new Divps(encoded);
+
+        public struct Vdivps : IAsmInstruction<Vdivps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdivps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDIVPS;
 
             public static implicit operator AsmMnemonicCode(Vdivps src) => src.Mnemonic;
@@ -1701,8 +3813,19 @@ namespace Z0.Asm
 
         public static Vdivps vdivps() => default;
 
-        public readonly struct Divsd : IAsmInstruction<Divsd>
+        [MethodImpl(Inline)]
+        public static Vdivps vdivps(AsmHexCode encoded) => new Vdivps(encoded);
+
+        public struct Divsd : IAsmInstruction<Divsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Divsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DIVSD;
 
             public static implicit operator AsmMnemonicCode(Divsd src) => src.Mnemonic;
@@ -1712,8 +3835,19 @@ namespace Z0.Asm
 
         public static Divsd divsd() => default;
 
-        public readonly struct Vdivsd : IAsmInstruction<Vdivsd>
+        [MethodImpl(Inline)]
+        public static Divsd divsd(AsmHexCode encoded) => new Divsd(encoded);
+
+        public struct Vdivsd : IAsmInstruction<Vdivsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdivsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDIVSD;
 
             public static implicit operator AsmMnemonicCode(Vdivsd src) => src.Mnemonic;
@@ -1723,8 +3857,19 @@ namespace Z0.Asm
 
         public static Vdivsd vdivsd() => default;
 
-        public readonly struct Divss : IAsmInstruction<Divss>
+        [MethodImpl(Inline)]
+        public static Vdivsd vdivsd(AsmHexCode encoded) => new Vdivsd(encoded);
+
+        public struct Divss : IAsmInstruction<Divss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Divss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DIVSS;
 
             public static implicit operator AsmMnemonicCode(Divss src) => src.Mnemonic;
@@ -1734,8 +3879,19 @@ namespace Z0.Asm
 
         public static Divss divss() => default;
 
-        public readonly struct Vdivss : IAsmInstruction<Vdivss>
+        [MethodImpl(Inline)]
+        public static Divss divss(AsmHexCode encoded) => new Divss(encoded);
+
+        public struct Vdivss : IAsmInstruction<Vdivss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdivss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDIVSS;
 
             public static implicit operator AsmMnemonicCode(Vdivss src) => src.Mnemonic;
@@ -1745,8 +3901,19 @@ namespace Z0.Asm
 
         public static Vdivss vdivss() => default;
 
-        public readonly struct Dppd : IAsmInstruction<Dppd>
+        [MethodImpl(Inline)]
+        public static Vdivss vdivss(AsmHexCode encoded) => new Vdivss(encoded);
+
+        public struct Dppd : IAsmInstruction<Dppd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Dppd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DPPD;
 
             public static implicit operator AsmMnemonicCode(Dppd src) => src.Mnemonic;
@@ -1756,8 +3923,19 @@ namespace Z0.Asm
 
         public static Dppd dppd() => default;
 
-        public readonly struct Vdppd : IAsmInstruction<Vdppd>
+        [MethodImpl(Inline)]
+        public static Dppd dppd(AsmHexCode encoded) => new Dppd(encoded);
+
+        public struct Vdppd : IAsmInstruction<Vdppd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdppd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDPPD;
 
             public static implicit operator AsmMnemonicCode(Vdppd src) => src.Mnemonic;
@@ -1767,8 +3945,19 @@ namespace Z0.Asm
 
         public static Vdppd vdppd() => default;
 
-        public readonly struct Dpps : IAsmInstruction<Dpps>
+        [MethodImpl(Inline)]
+        public static Vdppd vdppd(AsmHexCode encoded) => new Vdppd(encoded);
+
+        public struct Dpps : IAsmInstruction<Dpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Dpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.DPPS;
 
             public static implicit operator AsmMnemonicCode(Dpps src) => src.Mnemonic;
@@ -1778,8 +3967,19 @@ namespace Z0.Asm
 
         public static Dpps dpps() => default;
 
-        public readonly struct Vdpps : IAsmInstruction<Vdpps>
+        [MethodImpl(Inline)]
+        public static Dpps dpps(AsmHexCode encoded) => new Dpps(encoded);
+
+        public struct Vdpps : IAsmInstruction<Vdpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vdpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VDPPS;
 
             public static implicit operator AsmMnemonicCode(Vdpps src) => src.Mnemonic;
@@ -1789,8 +3989,41 @@ namespace Z0.Asm
 
         public static Vdpps vdpps() => default;
 
-        public readonly struct Enter : IAsmInstruction<Enter>
+        [MethodImpl(Inline)]
+        public static Vdpps vdpps(AsmHexCode encoded) => new Vdpps(encoded);
+
+        public struct Emms : IAsmInstruction<Emms>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Emms(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.EMMS;
+
+            public static implicit operator AsmMnemonicCode(Emms src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Emms src) => AsmMnemonics.EMMS;
+        }
+
+        public static Emms emms() => default;
+
+        [MethodImpl(Inline)]
+        public static Emms emms(AsmHexCode encoded) => new Emms(encoded);
+
+        public struct Enter : IAsmInstruction<Enter>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Enter(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ENTER;
 
             public static implicit operator AsmMnemonicCode(Enter src) => src.Mnemonic;
@@ -1800,8 +4033,19 @@ namespace Z0.Asm
 
         public static Enter enter() => default;
 
-        public readonly struct Extractps : IAsmInstruction<Extractps>
+        [MethodImpl(Inline)]
+        public static Enter enter(AsmHexCode encoded) => new Enter(encoded);
+
+        public struct Extractps : IAsmInstruction<Extractps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Extractps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.EXTRACTPS;
 
             public static implicit operator AsmMnemonicCode(Extractps src) => src.Mnemonic;
@@ -1811,8 +4055,19 @@ namespace Z0.Asm
 
         public static Extractps extractps() => default;
 
-        public readonly struct Vextractps : IAsmInstruction<Vextractps>
+        [MethodImpl(Inline)]
+        public static Extractps extractps(AsmHexCode encoded) => new Extractps(encoded);
+
+        public struct Vextractps : IAsmInstruction<Vextractps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vextractps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VEXTRACTPS;
 
             public static implicit operator AsmMnemonicCode(Vextractps src) => src.Mnemonic;
@@ -1822,8 +4077,63 @@ namespace Z0.Asm
 
         public static Vextractps vextractps() => default;
 
-        public readonly struct Fadd : IAsmInstruction<Fadd>
+        [MethodImpl(Inline)]
+        public static Vextractps vextractps(AsmHexCode encoded) => new Vextractps(encoded);
+
+        public struct F2xm1 : IAsmInstruction<F2xm1>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public F2xm1(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.F2XM1;
+
+            public static implicit operator AsmMnemonicCode(F2xm1 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(F2xm1 src) => AsmMnemonics.F2XM1;
+        }
+
+        public static F2xm1 f2xm1() => default;
+
+        [MethodImpl(Inline)]
+        public static F2xm1 f2xm1(AsmHexCode encoded) => new F2xm1(encoded);
+
+        public struct Fabs : IAsmInstruction<Fabs>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fabs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FABS;
+
+            public static implicit operator AsmMnemonicCode(Fabs src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fabs src) => AsmMnemonics.FABS;
+        }
+
+        public static Fabs fabs() => default;
+
+        [MethodImpl(Inline)]
+        public static Fabs fabs(AsmHexCode encoded) => new Fabs(encoded);
+
+        public struct Fadd : IAsmInstruction<Fadd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fadd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FADD;
 
             public static implicit operator AsmMnemonicCode(Fadd src) => src.Mnemonic;
@@ -1833,8 +4143,19 @@ namespace Z0.Asm
 
         public static Fadd fadd() => default;
 
-        public readonly struct Faddp : IAsmInstruction<Faddp>
+        [MethodImpl(Inline)]
+        public static Fadd fadd(AsmHexCode encoded) => new Fadd(encoded);
+
+        public struct Faddp : IAsmInstruction<Faddp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Faddp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FADDP;
 
             public static implicit operator AsmMnemonicCode(Faddp src) => src.Mnemonic;
@@ -1844,8 +4165,19 @@ namespace Z0.Asm
 
         public static Faddp faddp() => default;
 
-        public readonly struct Fiadd : IAsmInstruction<Fiadd>
+        [MethodImpl(Inline)]
+        public static Faddp faddp(AsmHexCode encoded) => new Faddp(encoded);
+
+        public struct Fiadd : IAsmInstruction<Fiadd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fiadd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FIADD;
 
             public static implicit operator AsmMnemonicCode(Fiadd src) => src.Mnemonic;
@@ -1855,8 +4187,19 @@ namespace Z0.Asm
 
         public static Fiadd fiadd() => default;
 
-        public readonly struct Fbld : IAsmInstruction<Fbld>
+        [MethodImpl(Inline)]
+        public static Fiadd fiadd(AsmHexCode encoded) => new Fiadd(encoded);
+
+        public struct Fbld : IAsmInstruction<Fbld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fbld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FBLD;
 
             public static implicit operator AsmMnemonicCode(Fbld src) => src.Mnemonic;
@@ -1866,8 +4209,19 @@ namespace Z0.Asm
 
         public static Fbld fbld() => default;
 
-        public readonly struct Fbstp : IAsmInstruction<Fbstp>
+        [MethodImpl(Inline)]
+        public static Fbld fbld(AsmHexCode encoded) => new Fbld(encoded);
+
+        public struct Fbstp : IAsmInstruction<Fbstp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fbstp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FBSTP;
 
             public static implicit operator AsmMnemonicCode(Fbstp src) => src.Mnemonic;
@@ -1877,8 +4231,85 @@ namespace Z0.Asm
 
         public static Fbstp fbstp() => default;
 
-        public readonly struct Fcmovb : IAsmInstruction<Fcmovb>
+        [MethodImpl(Inline)]
+        public static Fbstp fbstp(AsmHexCode encoded) => new Fbstp(encoded);
+
+        public struct Fchs : IAsmInstruction<Fchs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fchs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCHS;
+
+            public static implicit operator AsmMnemonicCode(Fchs src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fchs src) => AsmMnemonics.FCHS;
+        }
+
+        public static Fchs fchs() => default;
+
+        [MethodImpl(Inline)]
+        public static Fchs fchs(AsmHexCode encoded) => new Fchs(encoded);
+
+        public struct Fclex : IAsmInstruction<Fclex>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fclex(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCLEX;
+
+            public static implicit operator AsmMnemonicCode(Fclex src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fclex src) => AsmMnemonics.FCLEX;
+        }
+
+        public static Fclex fclex() => default;
+
+        [MethodImpl(Inline)]
+        public static Fclex fclex(AsmHexCode encoded) => new Fclex(encoded);
+
+        public struct Fnclex : IAsmInstruction<Fnclex>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnclex(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNCLEX;
+
+            public static implicit operator AsmMnemonicCode(Fnclex src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fnclex src) => AsmMnemonics.FNCLEX;
+        }
+
+        public static Fnclex fnclex() => default;
+
+        [MethodImpl(Inline)]
+        public static Fnclex fnclex(AsmHexCode encoded) => new Fnclex(encoded);
+
+        public struct Fcmovb : IAsmInstruction<Fcmovb>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVB;
 
             public static implicit operator AsmMnemonicCode(Fcmovb src) => src.Mnemonic;
@@ -1888,8 +4319,19 @@ namespace Z0.Asm
 
         public static Fcmovb fcmovb() => default;
 
-        public readonly struct Fcmove : IAsmInstruction<Fcmove>
+        [MethodImpl(Inline)]
+        public static Fcmovb fcmovb(AsmHexCode encoded) => new Fcmovb(encoded);
+
+        public struct Fcmove : IAsmInstruction<Fcmove>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmove(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVE;
 
             public static implicit operator AsmMnemonicCode(Fcmove src) => src.Mnemonic;
@@ -1899,8 +4341,19 @@ namespace Z0.Asm
 
         public static Fcmove fcmove() => default;
 
-        public readonly struct Fcmovbe : IAsmInstruction<Fcmovbe>
+        [MethodImpl(Inline)]
+        public static Fcmove fcmove(AsmHexCode encoded) => new Fcmove(encoded);
+
+        public struct Fcmovbe : IAsmInstruction<Fcmovbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVBE;
 
             public static implicit operator AsmMnemonicCode(Fcmovbe src) => src.Mnemonic;
@@ -1910,8 +4363,19 @@ namespace Z0.Asm
 
         public static Fcmovbe fcmovbe() => default;
 
-        public readonly struct Fcmovu : IAsmInstruction<Fcmovu>
+        [MethodImpl(Inline)]
+        public static Fcmovbe fcmovbe(AsmHexCode encoded) => new Fcmovbe(encoded);
+
+        public struct Fcmovu : IAsmInstruction<Fcmovu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVU;
 
             public static implicit operator AsmMnemonicCode(Fcmovu src) => src.Mnemonic;
@@ -1921,8 +4385,19 @@ namespace Z0.Asm
 
         public static Fcmovu fcmovu() => default;
 
-        public readonly struct Fcmovnb : IAsmInstruction<Fcmovnb>
+        [MethodImpl(Inline)]
+        public static Fcmovu fcmovu(AsmHexCode encoded) => new Fcmovu(encoded);
+
+        public struct Fcmovnb : IAsmInstruction<Fcmovnb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovnb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVNB;
 
             public static implicit operator AsmMnemonicCode(Fcmovnb src) => src.Mnemonic;
@@ -1932,8 +4407,19 @@ namespace Z0.Asm
 
         public static Fcmovnb fcmovnb() => default;
 
-        public readonly struct Fcmovne : IAsmInstruction<Fcmovne>
+        [MethodImpl(Inline)]
+        public static Fcmovnb fcmovnb(AsmHexCode encoded) => new Fcmovnb(encoded);
+
+        public struct Fcmovne : IAsmInstruction<Fcmovne>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovne(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVNE;
 
             public static implicit operator AsmMnemonicCode(Fcmovne src) => src.Mnemonic;
@@ -1943,8 +4429,19 @@ namespace Z0.Asm
 
         public static Fcmovne fcmovne() => default;
 
-        public readonly struct Fcmovnbe : IAsmInstruction<Fcmovnbe>
+        [MethodImpl(Inline)]
+        public static Fcmovne fcmovne(AsmHexCode encoded) => new Fcmovne(encoded);
+
+        public struct Fcmovnbe : IAsmInstruction<Fcmovnbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovnbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVNBE;
 
             public static implicit operator AsmMnemonicCode(Fcmovnbe src) => src.Mnemonic;
@@ -1954,8 +4451,19 @@ namespace Z0.Asm
 
         public static Fcmovnbe fcmovnbe() => default;
 
-        public readonly struct Fcmovnu : IAsmInstruction<Fcmovnu>
+        [MethodImpl(Inline)]
+        public static Fcmovnbe fcmovnbe(AsmHexCode encoded) => new Fcmovnbe(encoded);
+
+        public struct Fcmovnu : IAsmInstruction<Fcmovnu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcmovnu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCMOVNU;
 
             public static implicit operator AsmMnemonicCode(Fcmovnu src) => src.Mnemonic;
@@ -1965,8 +4473,19 @@ namespace Z0.Asm
 
         public static Fcmovnu fcmovnu() => default;
 
-        public readonly struct Fcom : IAsmInstruction<Fcom>
+        [MethodImpl(Inline)]
+        public static Fcmovnu fcmovnu(AsmHexCode encoded) => new Fcmovnu(encoded);
+
+        public struct Fcom : IAsmInstruction<Fcom>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcom(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOM;
 
             public static implicit operator AsmMnemonicCode(Fcom src) => src.Mnemonic;
@@ -1976,8 +4495,19 @@ namespace Z0.Asm
 
         public static Fcom fcom() => default;
 
-        public readonly struct Fcomp : IAsmInstruction<Fcomp>
+        [MethodImpl(Inline)]
+        public static Fcom fcom(AsmHexCode encoded) => new Fcom(encoded);
+
+        public struct Fcomp : IAsmInstruction<Fcomp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcomp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOMP;
 
             public static implicit operator AsmMnemonicCode(Fcomp src) => src.Mnemonic;
@@ -1987,8 +4517,41 @@ namespace Z0.Asm
 
         public static Fcomp fcomp() => default;
 
-        public readonly struct Fcomi : IAsmInstruction<Fcomi>
+        [MethodImpl(Inline)]
+        public static Fcomp fcomp(AsmHexCode encoded) => new Fcomp(encoded);
+
+        public struct Fcompp : IAsmInstruction<Fcompp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcompp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOMPP;
+
+            public static implicit operator AsmMnemonicCode(Fcompp src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fcompp src) => AsmMnemonics.FCOMPP;
+        }
+
+        public static Fcompp fcompp() => default;
+
+        [MethodImpl(Inline)]
+        public static Fcompp fcompp(AsmHexCode encoded) => new Fcompp(encoded);
+
+        public struct Fcomi : IAsmInstruction<Fcomi>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcomi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOMI;
 
             public static implicit operator AsmMnemonicCode(Fcomi src) => src.Mnemonic;
@@ -1998,8 +4561,19 @@ namespace Z0.Asm
 
         public static Fcomi fcomi() => default;
 
-        public readonly struct Fcomip : IAsmInstruction<Fcomip>
+        [MethodImpl(Inline)]
+        public static Fcomi fcomi(AsmHexCode encoded) => new Fcomi(encoded);
+
+        public struct Fcomip : IAsmInstruction<Fcomip>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcomip(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOMIP;
 
             public static implicit operator AsmMnemonicCode(Fcomip src) => src.Mnemonic;
@@ -2009,8 +4583,19 @@ namespace Z0.Asm
 
         public static Fcomip fcomip() => default;
 
-        public readonly struct Fucomi : IAsmInstruction<Fucomi>
+        [MethodImpl(Inline)]
+        public static Fcomip fcomip(AsmHexCode encoded) => new Fcomip(encoded);
+
+        public struct Fucomi : IAsmInstruction<Fucomi>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fucomi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FUCOMI;
 
             public static implicit operator AsmMnemonicCode(Fucomi src) => src.Mnemonic;
@@ -2020,8 +4605,19 @@ namespace Z0.Asm
 
         public static Fucomi fucomi() => default;
 
-        public readonly struct Fucomip : IAsmInstruction<Fucomip>
+        [MethodImpl(Inline)]
+        public static Fucomi fucomi(AsmHexCode encoded) => new Fucomi(encoded);
+
+        public struct Fucomip : IAsmInstruction<Fucomip>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fucomip(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FUCOMIP;
 
             public static implicit operator AsmMnemonicCode(Fucomip src) => src.Mnemonic;
@@ -2031,8 +4627,63 @@ namespace Z0.Asm
 
         public static Fucomip fucomip() => default;
 
-        public readonly struct Fdiv : IAsmInstruction<Fdiv>
+        [MethodImpl(Inline)]
+        public static Fucomip fucomip(AsmHexCode encoded) => new Fucomip(encoded);
+
+        public struct Fcos : IAsmInstruction<Fcos>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fcos(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FCOS;
+
+            public static implicit operator AsmMnemonicCode(Fcos src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fcos src) => AsmMnemonics.FCOS;
+        }
+
+        public static Fcos fcos() => default;
+
+        [MethodImpl(Inline)]
+        public static Fcos fcos(AsmHexCode encoded) => new Fcos(encoded);
+
+        public struct Fdecstp : IAsmInstruction<Fdecstp>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fdecstp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FDECSTP;
+
+            public static implicit operator AsmMnemonicCode(Fdecstp src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fdecstp src) => AsmMnemonics.FDECSTP;
+        }
+
+        public static Fdecstp fdecstp() => default;
+
+        [MethodImpl(Inline)]
+        public static Fdecstp fdecstp(AsmHexCode encoded) => new Fdecstp(encoded);
+
+        public struct Fdiv : IAsmInstruction<Fdiv>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fdiv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FDIV;
 
             public static implicit operator AsmMnemonicCode(Fdiv src) => src.Mnemonic;
@@ -2042,8 +4693,19 @@ namespace Z0.Asm
 
         public static Fdiv fdiv() => default;
 
-        public readonly struct Fdivp : IAsmInstruction<Fdivp>
+        [MethodImpl(Inline)]
+        public static Fdiv fdiv(AsmHexCode encoded) => new Fdiv(encoded);
+
+        public struct Fdivp : IAsmInstruction<Fdivp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fdivp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FDIVP;
 
             public static implicit operator AsmMnemonicCode(Fdivp src) => src.Mnemonic;
@@ -2053,8 +4715,19 @@ namespace Z0.Asm
 
         public static Fdivp fdivp() => default;
 
-        public readonly struct Fidiv : IAsmInstruction<Fidiv>
+        [MethodImpl(Inline)]
+        public static Fdivp fdivp(AsmHexCode encoded) => new Fdivp(encoded);
+
+        public struct Fidiv : IAsmInstruction<Fidiv>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fidiv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FIDIV;
 
             public static implicit operator AsmMnemonicCode(Fidiv src) => src.Mnemonic;
@@ -2064,8 +4737,19 @@ namespace Z0.Asm
 
         public static Fidiv fidiv() => default;
 
-        public readonly struct Fdivr : IAsmInstruction<Fdivr>
+        [MethodImpl(Inline)]
+        public static Fidiv fidiv(AsmHexCode encoded) => new Fidiv(encoded);
+
+        public struct Fdivr : IAsmInstruction<Fdivr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fdivr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FDIVR;
 
             public static implicit operator AsmMnemonicCode(Fdivr src) => src.Mnemonic;
@@ -2075,8 +4759,19 @@ namespace Z0.Asm
 
         public static Fdivr fdivr() => default;
 
-        public readonly struct Fdivrp : IAsmInstruction<Fdivrp>
+        [MethodImpl(Inline)]
+        public static Fdivr fdivr(AsmHexCode encoded) => new Fdivr(encoded);
+
+        public struct Fdivrp : IAsmInstruction<Fdivrp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fdivrp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FDIVRP;
 
             public static implicit operator AsmMnemonicCode(Fdivrp src) => src.Mnemonic;
@@ -2086,8 +4781,19 @@ namespace Z0.Asm
 
         public static Fdivrp fdivrp() => default;
 
-        public readonly struct Fidivr : IAsmInstruction<Fidivr>
+        [MethodImpl(Inline)]
+        public static Fdivrp fdivrp(AsmHexCode encoded) => new Fdivrp(encoded);
+
+        public struct Fidivr : IAsmInstruction<Fidivr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fidivr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FIDIVR;
 
             public static implicit operator AsmMnemonicCode(Fidivr src) => src.Mnemonic;
@@ -2097,8 +4803,19 @@ namespace Z0.Asm
 
         public static Fidivr fidivr() => default;
 
-        public readonly struct Ffree : IAsmInstruction<Ffree>
+        [MethodImpl(Inline)]
+        public static Fidivr fidivr(AsmHexCode encoded) => new Fidivr(encoded);
+
+        public struct Ffree : IAsmInstruction<Ffree>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ffree(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FFREE;
 
             public static implicit operator AsmMnemonicCode(Ffree src) => src.Mnemonic;
@@ -2108,8 +4825,19 @@ namespace Z0.Asm
 
         public static Ffree ffree() => default;
 
-        public readonly struct Ficom : IAsmInstruction<Ficom>
+        [MethodImpl(Inline)]
+        public static Ffree ffree(AsmHexCode encoded) => new Ffree(encoded);
+
+        public struct Ficom : IAsmInstruction<Ficom>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ficom(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FICOM;
 
             public static implicit operator AsmMnemonicCode(Ficom src) => src.Mnemonic;
@@ -2119,8 +4847,19 @@ namespace Z0.Asm
 
         public static Ficom ficom() => default;
 
-        public readonly struct Ficomp : IAsmInstruction<Ficomp>
+        [MethodImpl(Inline)]
+        public static Ficom ficom(AsmHexCode encoded) => new Ficom(encoded);
+
+        public struct Ficomp : IAsmInstruction<Ficomp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ficomp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FICOMP;
 
             public static implicit operator AsmMnemonicCode(Ficomp src) => src.Mnemonic;
@@ -2130,8 +4869,19 @@ namespace Z0.Asm
 
         public static Ficomp ficomp() => default;
 
-        public readonly struct Fild : IAsmInstruction<Fild>
+        [MethodImpl(Inline)]
+        public static Ficomp ficomp(AsmHexCode encoded) => new Ficomp(encoded);
+
+        public struct Fild : IAsmInstruction<Fild>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fild(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FILD;
 
             public static implicit operator AsmMnemonicCode(Fild src) => src.Mnemonic;
@@ -2141,8 +4891,85 @@ namespace Z0.Asm
 
         public static Fild fild() => default;
 
-        public readonly struct Fist : IAsmInstruction<Fist>
+        [MethodImpl(Inline)]
+        public static Fild fild(AsmHexCode encoded) => new Fild(encoded);
+
+        public struct Fincstp : IAsmInstruction<Fincstp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fincstp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FINCSTP;
+
+            public static implicit operator AsmMnemonicCode(Fincstp src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fincstp src) => AsmMnemonics.FINCSTP;
+        }
+
+        public static Fincstp fincstp() => default;
+
+        [MethodImpl(Inline)]
+        public static Fincstp fincstp(AsmHexCode encoded) => new Fincstp(encoded);
+
+        public struct Finit : IAsmInstruction<Finit>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Finit(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FINIT;
+
+            public static implicit operator AsmMnemonicCode(Finit src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Finit src) => AsmMnemonics.FINIT;
+        }
+
+        public static Finit finit() => default;
+
+        [MethodImpl(Inline)]
+        public static Finit finit(AsmHexCode encoded) => new Finit(encoded);
+
+        public struct Fninit : IAsmInstruction<Fninit>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fninit(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNINIT;
+
+            public static implicit operator AsmMnemonicCode(Fninit src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fninit src) => AsmMnemonics.FNINIT;
+        }
+
+        public static Fninit fninit() => default;
+
+        [MethodImpl(Inline)]
+        public static Fninit fninit(AsmHexCode encoded) => new Fninit(encoded);
+
+        public struct Fist : IAsmInstruction<Fist>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fist(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FIST;
 
             public static implicit operator AsmMnemonicCode(Fist src) => src.Mnemonic;
@@ -2152,8 +4979,19 @@ namespace Z0.Asm
 
         public static Fist fist() => default;
 
-        public readonly struct Fistp : IAsmInstruction<Fistp>
+        [MethodImpl(Inline)]
+        public static Fist fist(AsmHexCode encoded) => new Fist(encoded);
+
+        public struct Fistp : IAsmInstruction<Fistp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fistp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FISTP;
 
             public static implicit operator AsmMnemonicCode(Fistp src) => src.Mnemonic;
@@ -2163,8 +5001,19 @@ namespace Z0.Asm
 
         public static Fistp fistp() => default;
 
-        public readonly struct Fisttp : IAsmInstruction<Fisttp>
+        [MethodImpl(Inline)]
+        public static Fistp fistp(AsmHexCode encoded) => new Fistp(encoded);
+
+        public struct Fisttp : IAsmInstruction<Fisttp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fisttp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FISTTP;
 
             public static implicit operator AsmMnemonicCode(Fisttp src) => src.Mnemonic;
@@ -2174,8 +5023,19 @@ namespace Z0.Asm
 
         public static Fisttp fisttp() => default;
 
-        public readonly struct Fld : IAsmInstruction<Fld>
+        [MethodImpl(Inline)]
+        public static Fisttp fisttp(AsmHexCode encoded) => new Fisttp(encoded);
+
+        public struct Fld : IAsmInstruction<Fld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLD;
 
             public static implicit operator AsmMnemonicCode(Fld src) => src.Mnemonic;
@@ -2185,8 +5045,173 @@ namespace Z0.Asm
 
         public static Fld fld() => default;
 
-        public readonly struct Fldcw : IAsmInstruction<Fldcw>
+        [MethodImpl(Inline)]
+        public static Fld fld(AsmHexCode encoded) => new Fld(encoded);
+
+        public struct Fld1 : IAsmInstruction<Fld1>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fld1(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLD1;
+
+            public static implicit operator AsmMnemonicCode(Fld1 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fld1 src) => AsmMnemonics.FLD1;
+        }
+
+        public static Fld1 fld1() => default;
+
+        [MethodImpl(Inline)]
+        public static Fld1 fld1(AsmHexCode encoded) => new Fld1(encoded);
+
+        public struct Fldl2t : IAsmInstruction<Fldl2t>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldl2t(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDL2T;
+
+            public static implicit operator AsmMnemonicCode(Fldl2t src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldl2t src) => AsmMnemonics.FLDL2T;
+        }
+
+        public static Fldl2t fldl2t() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldl2t fldl2t(AsmHexCode encoded) => new Fldl2t(encoded);
+
+        public struct Fldl2e : IAsmInstruction<Fldl2e>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldl2e(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDL2E;
+
+            public static implicit operator AsmMnemonicCode(Fldl2e src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldl2e src) => AsmMnemonics.FLDL2E;
+        }
+
+        public static Fldl2e fldl2e() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldl2e fldl2e(AsmHexCode encoded) => new Fldl2e(encoded);
+
+        public struct Fldpi : IAsmInstruction<Fldpi>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldpi(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDPI;
+
+            public static implicit operator AsmMnemonicCode(Fldpi src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldpi src) => AsmMnemonics.FLDPI;
+        }
+
+        public static Fldpi fldpi() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldpi fldpi(AsmHexCode encoded) => new Fldpi(encoded);
+
+        public struct Fldlg2 : IAsmInstruction<Fldlg2>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldlg2(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDLG2;
+
+            public static implicit operator AsmMnemonicCode(Fldlg2 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldlg2 src) => AsmMnemonics.FLDLG2;
+        }
+
+        public static Fldlg2 fldlg2() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldlg2 fldlg2(AsmHexCode encoded) => new Fldlg2(encoded);
+
+        public struct Fldln2 : IAsmInstruction<Fldln2>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldln2(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDLN2;
+
+            public static implicit operator AsmMnemonicCode(Fldln2 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldln2 src) => AsmMnemonics.FLDLN2;
+        }
+
+        public static Fldln2 fldln2() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldln2 fldln2(AsmHexCode encoded) => new Fldln2(encoded);
+
+        public struct Fldz : IAsmInstruction<Fldz>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDZ;
+
+            public static implicit operator AsmMnemonicCode(Fldz src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fldz src) => AsmMnemonics.FLDZ;
+        }
+
+        public static Fldz fldz() => default;
+
+        [MethodImpl(Inline)]
+        public static Fldz fldz(AsmHexCode encoded) => new Fldz(encoded);
+
+        public struct Fldcw : IAsmInstruction<Fldcw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldcw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDCW;
 
             public static implicit operator AsmMnemonicCode(Fldcw src) => src.Mnemonic;
@@ -2196,8 +5221,19 @@ namespace Z0.Asm
 
         public static Fldcw fldcw() => default;
 
-        public readonly struct Fldenv : IAsmInstruction<Fldenv>
+        [MethodImpl(Inline)]
+        public static Fldcw fldcw(AsmHexCode encoded) => new Fldcw(encoded);
+
+        public struct Fldenv : IAsmInstruction<Fldenv>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fldenv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FLDENV;
 
             public static implicit operator AsmMnemonicCode(Fldenv src) => src.Mnemonic;
@@ -2207,8 +5243,19 @@ namespace Z0.Asm
 
         public static Fldenv fldenv() => default;
 
-        public readonly struct Fmul : IAsmInstruction<Fmul>
+        [MethodImpl(Inline)]
+        public static Fldenv fldenv(AsmHexCode encoded) => new Fldenv(encoded);
+
+        public struct Fmul : IAsmInstruction<Fmul>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fmul(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FMUL;
 
             public static implicit operator AsmMnemonicCode(Fmul src) => src.Mnemonic;
@@ -2218,8 +5265,19 @@ namespace Z0.Asm
 
         public static Fmul fmul() => default;
 
-        public readonly struct Fmulp : IAsmInstruction<Fmulp>
+        [MethodImpl(Inline)]
+        public static Fmul fmul(AsmHexCode encoded) => new Fmul(encoded);
+
+        public struct Fmulp : IAsmInstruction<Fmulp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fmulp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FMULP;
 
             public static implicit operator AsmMnemonicCode(Fmulp src) => src.Mnemonic;
@@ -2229,8 +5287,19 @@ namespace Z0.Asm
 
         public static Fmulp fmulp() => default;
 
-        public readonly struct Fimul : IAsmInstruction<Fimul>
+        [MethodImpl(Inline)]
+        public static Fmulp fmulp(AsmHexCode encoded) => new Fmulp(encoded);
+
+        public struct Fimul : IAsmInstruction<Fimul>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fimul(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FIMUL;
 
             public static implicit operator AsmMnemonicCode(Fimul src) => src.Mnemonic;
@@ -2240,8 +5309,151 @@ namespace Z0.Asm
 
         public static Fimul fimul() => default;
 
-        public readonly struct Frstor : IAsmInstruction<Frstor>
+        [MethodImpl(Inline)]
+        public static Fimul fimul(AsmHexCode encoded) => new Fimul(encoded);
+
+        public struct Fnop : IAsmInstruction<Fnop>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnop(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNOP;
+
+            public static implicit operator AsmMnemonicCode(Fnop src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fnop src) => AsmMnemonics.FNOP;
+        }
+
+        public static Fnop fnop() => default;
+
+        [MethodImpl(Inline)]
+        public static Fnop fnop(AsmHexCode encoded) => new Fnop(encoded);
+
+        public struct Fpatan : IAsmInstruction<Fpatan>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fpatan(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FPATAN;
+
+            public static implicit operator AsmMnemonicCode(Fpatan src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fpatan src) => AsmMnemonics.FPATAN;
+        }
+
+        public static Fpatan fpatan() => default;
+
+        [MethodImpl(Inline)]
+        public static Fpatan fpatan(AsmHexCode encoded) => new Fpatan(encoded);
+
+        public struct Fprem : IAsmInstruction<Fprem>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fprem(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FPREM;
+
+            public static implicit operator AsmMnemonicCode(Fprem src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fprem src) => AsmMnemonics.FPREM;
+        }
+
+        public static Fprem fprem() => default;
+
+        [MethodImpl(Inline)]
+        public static Fprem fprem(AsmHexCode encoded) => new Fprem(encoded);
+
+        public struct Fprem1 : IAsmInstruction<Fprem1>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fprem1(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FPREM1;
+
+            public static implicit operator AsmMnemonicCode(Fprem1 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fprem1 src) => AsmMnemonics.FPREM1;
+        }
+
+        public static Fprem1 fprem1() => default;
+
+        [MethodImpl(Inline)]
+        public static Fprem1 fprem1(AsmHexCode encoded) => new Fprem1(encoded);
+
+        public struct Fptan : IAsmInstruction<Fptan>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fptan(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FPTAN;
+
+            public static implicit operator AsmMnemonicCode(Fptan src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fptan src) => AsmMnemonics.FPTAN;
+        }
+
+        public static Fptan fptan() => default;
+
+        [MethodImpl(Inline)]
+        public static Fptan fptan(AsmHexCode encoded) => new Fptan(encoded);
+
+        public struct Frndint : IAsmInstruction<Frndint>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Frndint(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FRNDINT;
+
+            public static implicit operator AsmMnemonicCode(Frndint src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Frndint src) => AsmMnemonics.FRNDINT;
+        }
+
+        public static Frndint frndint() => default;
+
+        [MethodImpl(Inline)]
+        public static Frndint frndint(AsmHexCode encoded) => new Frndint(encoded);
+
+        public struct Frstor : IAsmInstruction<Frstor>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Frstor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FRSTOR;
 
             public static implicit operator AsmMnemonicCode(Frstor src) => src.Mnemonic;
@@ -2251,8 +5463,19 @@ namespace Z0.Asm
 
         public static Frstor frstor() => default;
 
-        public readonly struct Fsave : IAsmInstruction<Fsave>
+        [MethodImpl(Inline)]
+        public static Frstor frstor(AsmHexCode encoded) => new Frstor(encoded);
+
+        public struct Fsave : IAsmInstruction<Fsave>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsave(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSAVE;
 
             public static implicit operator AsmMnemonicCode(Fsave src) => src.Mnemonic;
@@ -2262,8 +5485,19 @@ namespace Z0.Asm
 
         public static Fsave fsave() => default;
 
-        public readonly struct Fnsave : IAsmInstruction<Fnsave>
+        [MethodImpl(Inline)]
+        public static Fsave fsave(AsmHexCode encoded) => new Fsave(encoded);
+
+        public struct Fnsave : IAsmInstruction<Fnsave>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnsave(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNSAVE;
 
             public static implicit operator AsmMnemonicCode(Fnsave src) => src.Mnemonic;
@@ -2273,8 +5507,107 @@ namespace Z0.Asm
 
         public static Fnsave fnsave() => default;
 
-        public readonly struct Fst : IAsmInstruction<Fst>
+        [MethodImpl(Inline)]
+        public static Fnsave fnsave(AsmHexCode encoded) => new Fnsave(encoded);
+
+        public struct Fscale : IAsmInstruction<Fscale>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fscale(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSCALE;
+
+            public static implicit operator AsmMnemonicCode(Fscale src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fscale src) => AsmMnemonics.FSCALE;
+        }
+
+        public static Fscale fscale() => default;
+
+        [MethodImpl(Inline)]
+        public static Fscale fscale(AsmHexCode encoded) => new Fscale(encoded);
+
+        public struct Fsin : IAsmInstruction<Fsin>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsin(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSIN;
+
+            public static implicit operator AsmMnemonicCode(Fsin src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fsin src) => AsmMnemonics.FSIN;
+        }
+
+        public static Fsin fsin() => default;
+
+        [MethodImpl(Inline)]
+        public static Fsin fsin(AsmHexCode encoded) => new Fsin(encoded);
+
+        public struct Fsincos : IAsmInstruction<Fsincos>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsincos(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSINCOS;
+
+            public static implicit operator AsmMnemonicCode(Fsincos src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fsincos src) => AsmMnemonics.FSINCOS;
+        }
+
+        public static Fsincos fsincos() => default;
+
+        [MethodImpl(Inline)]
+        public static Fsincos fsincos(AsmHexCode encoded) => new Fsincos(encoded);
+
+        public struct Fsqrt : IAsmInstruction<Fsqrt>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsqrt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSQRT;
+
+            public static implicit operator AsmMnemonicCode(Fsqrt src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fsqrt src) => AsmMnemonics.FSQRT;
+        }
+
+        public static Fsqrt fsqrt() => default;
+
+        [MethodImpl(Inline)]
+        public static Fsqrt fsqrt(AsmHexCode encoded) => new Fsqrt(encoded);
+
+        public struct Fst : IAsmInstruction<Fst>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fst(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FST;
 
             public static implicit operator AsmMnemonicCode(Fst src) => src.Mnemonic;
@@ -2284,8 +5617,19 @@ namespace Z0.Asm
 
         public static Fst fst() => default;
 
-        public readonly struct Fstp : IAsmInstruction<Fstp>
+        [MethodImpl(Inline)]
+        public static Fst fst(AsmHexCode encoded) => new Fst(encoded);
+
+        public struct Fstp : IAsmInstruction<Fstp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fstp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSTP;
 
             public static implicit operator AsmMnemonicCode(Fstp src) => src.Mnemonic;
@@ -2295,8 +5639,19 @@ namespace Z0.Asm
 
         public static Fstp fstp() => default;
 
-        public readonly struct Fstcw : IAsmInstruction<Fstcw>
+        [MethodImpl(Inline)]
+        public static Fstp fstp(AsmHexCode encoded) => new Fstp(encoded);
+
+        public struct Fstcw : IAsmInstruction<Fstcw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fstcw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSTCW;
 
             public static implicit operator AsmMnemonicCode(Fstcw src) => src.Mnemonic;
@@ -2306,8 +5661,19 @@ namespace Z0.Asm
 
         public static Fstcw fstcw() => default;
 
-        public readonly struct Fnstcw : IAsmInstruction<Fnstcw>
+        [MethodImpl(Inline)]
+        public static Fstcw fstcw(AsmHexCode encoded) => new Fstcw(encoded);
+
+        public struct Fnstcw : IAsmInstruction<Fnstcw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnstcw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNSTCW;
 
             public static implicit operator AsmMnemonicCode(Fnstcw src) => src.Mnemonic;
@@ -2317,8 +5683,19 @@ namespace Z0.Asm
 
         public static Fnstcw fnstcw() => default;
 
-        public readonly struct Fstenv : IAsmInstruction<Fstenv>
+        [MethodImpl(Inline)]
+        public static Fnstcw fnstcw(AsmHexCode encoded) => new Fnstcw(encoded);
+
+        public struct Fstenv : IAsmInstruction<Fstenv>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fstenv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSTENV;
 
             public static implicit operator AsmMnemonicCode(Fstenv src) => src.Mnemonic;
@@ -2328,8 +5705,19 @@ namespace Z0.Asm
 
         public static Fstenv fstenv() => default;
 
-        public readonly struct Fnstenv : IAsmInstruction<Fnstenv>
+        [MethodImpl(Inline)]
+        public static Fstenv fstenv(AsmHexCode encoded) => new Fstenv(encoded);
+
+        public struct Fnstenv : IAsmInstruction<Fnstenv>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnstenv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNSTENV;
 
             public static implicit operator AsmMnemonicCode(Fnstenv src) => src.Mnemonic;
@@ -2339,8 +5727,19 @@ namespace Z0.Asm
 
         public static Fnstenv fnstenv() => default;
 
-        public readonly struct Fstsw : IAsmInstruction<Fstsw>
+        [MethodImpl(Inline)]
+        public static Fnstenv fnstenv(AsmHexCode encoded) => new Fnstenv(encoded);
+
+        public struct Fstsw : IAsmInstruction<Fstsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fstsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSTSW;
 
             public static implicit operator AsmMnemonicCode(Fstsw src) => src.Mnemonic;
@@ -2350,8 +5749,19 @@ namespace Z0.Asm
 
         public static Fstsw fstsw() => default;
 
-        public readonly struct Fnstsw : IAsmInstruction<Fnstsw>
+        [MethodImpl(Inline)]
+        public static Fstsw fstsw(AsmHexCode encoded) => new Fstsw(encoded);
+
+        public struct Fnstsw : IAsmInstruction<Fnstsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fnstsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FNSTSW;
 
             public static implicit operator AsmMnemonicCode(Fnstsw src) => src.Mnemonic;
@@ -2361,8 +5771,19 @@ namespace Z0.Asm
 
         public static Fnstsw fnstsw() => default;
 
-        public readonly struct Fsub : IAsmInstruction<Fsub>
+        [MethodImpl(Inline)]
+        public static Fnstsw fnstsw(AsmHexCode encoded) => new Fnstsw(encoded);
+
+        public struct Fsub : IAsmInstruction<Fsub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSUB;
 
             public static implicit operator AsmMnemonicCode(Fsub src) => src.Mnemonic;
@@ -2372,8 +5793,19 @@ namespace Z0.Asm
 
         public static Fsub fsub() => default;
 
-        public readonly struct Fsubp : IAsmInstruction<Fsubp>
+        [MethodImpl(Inline)]
+        public static Fsub fsub(AsmHexCode encoded) => new Fsub(encoded);
+
+        public struct Fsubp : IAsmInstruction<Fsubp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsubp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSUBP;
 
             public static implicit operator AsmMnemonicCode(Fsubp src) => src.Mnemonic;
@@ -2383,8 +5815,19 @@ namespace Z0.Asm
 
         public static Fsubp fsubp() => default;
 
-        public readonly struct Fisub : IAsmInstruction<Fisub>
+        [MethodImpl(Inline)]
+        public static Fsubp fsubp(AsmHexCode encoded) => new Fsubp(encoded);
+
+        public struct Fisub : IAsmInstruction<Fisub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fisub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FISUB;
 
             public static implicit operator AsmMnemonicCode(Fisub src) => src.Mnemonic;
@@ -2394,8 +5837,19 @@ namespace Z0.Asm
 
         public static Fisub fisub() => default;
 
-        public readonly struct Fsubr : IAsmInstruction<Fsubr>
+        [MethodImpl(Inline)]
+        public static Fisub fisub(AsmHexCode encoded) => new Fisub(encoded);
+
+        public struct Fsubr : IAsmInstruction<Fsubr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsubr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSUBR;
 
             public static implicit operator AsmMnemonicCode(Fsubr src) => src.Mnemonic;
@@ -2405,8 +5859,19 @@ namespace Z0.Asm
 
         public static Fsubr fsubr() => default;
 
-        public readonly struct Fsubrp : IAsmInstruction<Fsubrp>
+        [MethodImpl(Inline)]
+        public static Fsubr fsubr(AsmHexCode encoded) => new Fsubr(encoded);
+
+        public struct Fsubrp : IAsmInstruction<Fsubrp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fsubrp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FSUBRP;
 
             public static implicit operator AsmMnemonicCode(Fsubrp src) => src.Mnemonic;
@@ -2416,8 +5881,19 @@ namespace Z0.Asm
 
         public static Fsubrp fsubrp() => default;
 
-        public readonly struct Fisubr : IAsmInstruction<Fisubr>
+        [MethodImpl(Inline)]
+        public static Fsubrp fsubrp(AsmHexCode encoded) => new Fsubrp(encoded);
+
+        public struct Fisubr : IAsmInstruction<Fisubr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fisubr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FISUBR;
 
             public static implicit operator AsmMnemonicCode(Fisubr src) => src.Mnemonic;
@@ -2427,8 +5903,41 @@ namespace Z0.Asm
 
         public static Fisubr fisubr() => default;
 
-        public readonly struct Fucom : IAsmInstruction<Fucom>
+        [MethodImpl(Inline)]
+        public static Fisubr fisubr(AsmHexCode encoded) => new Fisubr(encoded);
+
+        public struct Ftst : IAsmInstruction<Ftst>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ftst(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FTST;
+
+            public static implicit operator AsmMnemonicCode(Ftst src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Ftst src) => AsmMnemonics.FTST;
+        }
+
+        public static Ftst ftst() => default;
+
+        [MethodImpl(Inline)]
+        public static Ftst ftst(AsmHexCode encoded) => new Ftst(encoded);
+
+        public struct Fucom : IAsmInstruction<Fucom>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fucom(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FUCOM;
 
             public static implicit operator AsmMnemonicCode(Fucom src) => src.Mnemonic;
@@ -2438,8 +5947,19 @@ namespace Z0.Asm
 
         public static Fucom fucom() => default;
 
-        public readonly struct Fucomp : IAsmInstruction<Fucomp>
+        [MethodImpl(Inline)]
+        public static Fucom fucom(AsmHexCode encoded) => new Fucom(encoded);
+
+        public struct Fucomp : IAsmInstruction<Fucomp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fucomp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FUCOMP;
 
             public static implicit operator AsmMnemonicCode(Fucomp src) => src.Mnemonic;
@@ -2449,8 +5969,63 @@ namespace Z0.Asm
 
         public static Fucomp fucomp() => default;
 
-        public readonly struct Fxch : IAsmInstruction<Fxch>
+        [MethodImpl(Inline)]
+        public static Fucomp fucomp(AsmHexCode encoded) => new Fucomp(encoded);
+
+        public struct Fucompp : IAsmInstruction<Fucompp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fucompp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FUCOMPP;
+
+            public static implicit operator AsmMnemonicCode(Fucompp src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fucompp src) => AsmMnemonics.FUCOMPP;
+        }
+
+        public static Fucompp fucompp() => default;
+
+        [MethodImpl(Inline)]
+        public static Fucompp fucompp(AsmHexCode encoded) => new Fucompp(encoded);
+
+        public struct Fxam : IAsmInstruction<Fxam>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxam(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXAM;
+
+            public static implicit operator AsmMnemonicCode(Fxam src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fxam src) => AsmMnemonics.FXAM;
+        }
+
+        public static Fxam fxam() => default;
+
+        [MethodImpl(Inline)]
+        public static Fxam fxam(AsmHexCode encoded) => new Fxam(encoded);
+
+        public struct Fxch : IAsmInstruction<Fxch>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxch(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXCH;
 
             public static implicit operator AsmMnemonicCode(Fxch src) => src.Mnemonic;
@@ -2460,8 +6035,19 @@ namespace Z0.Asm
 
         public static Fxch fxch() => default;
 
-        public readonly struct Fxrstor : IAsmInstruction<Fxrstor>
+        [MethodImpl(Inline)]
+        public static Fxch fxch(AsmHexCode encoded) => new Fxch(encoded);
+
+        public struct Fxrstor : IAsmInstruction<Fxrstor>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxrstor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXRSTOR;
 
             public static implicit operator AsmMnemonicCode(Fxrstor src) => src.Mnemonic;
@@ -2471,8 +6057,19 @@ namespace Z0.Asm
 
         public static Fxrstor fxrstor() => default;
 
-        public readonly struct Fxrstor64 : IAsmInstruction<Fxrstor64>
+        [MethodImpl(Inline)]
+        public static Fxrstor fxrstor(AsmHexCode encoded) => new Fxrstor(encoded);
+
+        public struct Fxrstor64 : IAsmInstruction<Fxrstor64>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxrstor64(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXRSTOR64;
 
             public static implicit operator AsmMnemonicCode(Fxrstor64 src) => src.Mnemonic;
@@ -2482,8 +6079,19 @@ namespace Z0.Asm
 
         public static Fxrstor64 fxrstor64() => default;
 
-        public readonly struct Fxsave : IAsmInstruction<Fxsave>
+        [MethodImpl(Inline)]
+        public static Fxrstor64 fxrstor64(AsmHexCode encoded) => new Fxrstor64(encoded);
+
+        public struct Fxsave : IAsmInstruction<Fxsave>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxsave(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXSAVE;
 
             public static implicit operator AsmMnemonicCode(Fxsave src) => src.Mnemonic;
@@ -2493,8 +6101,19 @@ namespace Z0.Asm
 
         public static Fxsave fxsave() => default;
 
-        public readonly struct Fxsave64 : IAsmInstruction<Fxsave64>
+        [MethodImpl(Inline)]
+        public static Fxsave fxsave(AsmHexCode encoded) => new Fxsave(encoded);
+
+        public struct Fxsave64 : IAsmInstruction<Fxsave64>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxsave64(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXSAVE64;
 
             public static implicit operator AsmMnemonicCode(Fxsave64 src) => src.Mnemonic;
@@ -2504,8 +6123,85 @@ namespace Z0.Asm
 
         public static Fxsave64 fxsave64() => default;
 
-        public readonly struct Haddpd : IAsmInstruction<Haddpd>
+        [MethodImpl(Inline)]
+        public static Fxsave64 fxsave64(AsmHexCode encoded) => new Fxsave64(encoded);
+
+        public struct Fxtract : IAsmInstruction<Fxtract>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fxtract(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FXTRACT;
+
+            public static implicit operator AsmMnemonicCode(Fxtract src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fxtract src) => AsmMnemonics.FXTRACT;
+        }
+
+        public static Fxtract fxtract() => default;
+
+        [MethodImpl(Inline)]
+        public static Fxtract fxtract(AsmHexCode encoded) => new Fxtract(encoded);
+
+        public struct Fyl2x : IAsmInstruction<Fyl2x>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fyl2x(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FYL2X;
+
+            public static implicit operator AsmMnemonicCode(Fyl2x src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fyl2x src) => AsmMnemonics.FYL2X;
+        }
+
+        public static Fyl2x fyl2x() => default;
+
+        [MethodImpl(Inline)]
+        public static Fyl2x fyl2x(AsmHexCode encoded) => new Fyl2x(encoded);
+
+        public struct Fyl2xp1 : IAsmInstruction<Fyl2xp1>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fyl2xp1(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FYL2XP1;
+
+            public static implicit operator AsmMnemonicCode(Fyl2xp1 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fyl2xp1 src) => AsmMnemonics.FYL2XP1;
+        }
+
+        public static Fyl2xp1 fyl2xp1() => default;
+
+        [MethodImpl(Inline)]
+        public static Fyl2xp1 fyl2xp1(AsmHexCode encoded) => new Fyl2xp1(encoded);
+
+        public struct Haddpd : IAsmInstruction<Haddpd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Haddpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.HADDPD;
 
             public static implicit operator AsmMnemonicCode(Haddpd src) => src.Mnemonic;
@@ -2515,8 +6211,19 @@ namespace Z0.Asm
 
         public static Haddpd haddpd() => default;
 
-        public readonly struct Vhaddpd : IAsmInstruction<Vhaddpd>
+        [MethodImpl(Inline)]
+        public static Haddpd haddpd(AsmHexCode encoded) => new Haddpd(encoded);
+
+        public struct Vhaddpd : IAsmInstruction<Vhaddpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vhaddpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VHADDPD;
 
             public static implicit operator AsmMnemonicCode(Vhaddpd src) => src.Mnemonic;
@@ -2526,8 +6233,19 @@ namespace Z0.Asm
 
         public static Vhaddpd vhaddpd() => default;
 
-        public readonly struct Haddps : IAsmInstruction<Haddps>
+        [MethodImpl(Inline)]
+        public static Vhaddpd vhaddpd(AsmHexCode encoded) => new Vhaddpd(encoded);
+
+        public struct Haddps : IAsmInstruction<Haddps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Haddps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.HADDPS;
 
             public static implicit operator AsmMnemonicCode(Haddps src) => src.Mnemonic;
@@ -2537,8 +6255,19 @@ namespace Z0.Asm
 
         public static Haddps haddps() => default;
 
-        public readonly struct Vhaddps : IAsmInstruction<Vhaddps>
+        [MethodImpl(Inline)]
+        public static Haddps haddps(AsmHexCode encoded) => new Haddps(encoded);
+
+        public struct Vhaddps : IAsmInstruction<Vhaddps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vhaddps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VHADDPS;
 
             public static implicit operator AsmMnemonicCode(Vhaddps src) => src.Mnemonic;
@@ -2548,8 +6277,41 @@ namespace Z0.Asm
 
         public static Vhaddps vhaddps() => default;
 
-        public readonly struct Hsubpd : IAsmInstruction<Hsubpd>
+        [MethodImpl(Inline)]
+        public static Vhaddps vhaddps(AsmHexCode encoded) => new Vhaddps(encoded);
+
+        public struct Hlt : IAsmInstruction<Hlt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Hlt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.HLT;
+
+            public static implicit operator AsmMnemonicCode(Hlt src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Hlt src) => AsmMnemonics.HLT;
+        }
+
+        public static Hlt hlt() => default;
+
+        [MethodImpl(Inline)]
+        public static Hlt hlt(AsmHexCode encoded) => new Hlt(encoded);
+
+        public struct Hsubpd : IAsmInstruction<Hsubpd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Hsubpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.HSUBPD;
 
             public static implicit operator AsmMnemonicCode(Hsubpd src) => src.Mnemonic;
@@ -2559,8 +6321,19 @@ namespace Z0.Asm
 
         public static Hsubpd hsubpd() => default;
 
-        public readonly struct Vhsubpd : IAsmInstruction<Vhsubpd>
+        [MethodImpl(Inline)]
+        public static Hsubpd hsubpd(AsmHexCode encoded) => new Hsubpd(encoded);
+
+        public struct Vhsubpd : IAsmInstruction<Vhsubpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vhsubpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VHSUBPD;
 
             public static implicit operator AsmMnemonicCode(Vhsubpd src) => src.Mnemonic;
@@ -2570,8 +6343,19 @@ namespace Z0.Asm
 
         public static Vhsubpd vhsubpd() => default;
 
-        public readonly struct Hsubps : IAsmInstruction<Hsubps>
+        [MethodImpl(Inline)]
+        public static Vhsubpd vhsubpd(AsmHexCode encoded) => new Vhsubpd(encoded);
+
+        public struct Hsubps : IAsmInstruction<Hsubps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Hsubps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.HSUBPS;
 
             public static implicit operator AsmMnemonicCode(Hsubps src) => src.Mnemonic;
@@ -2581,8 +6365,19 @@ namespace Z0.Asm
 
         public static Hsubps hsubps() => default;
 
-        public readonly struct Vhsubps : IAsmInstruction<Vhsubps>
+        [MethodImpl(Inline)]
+        public static Hsubps hsubps(AsmHexCode encoded) => new Hsubps(encoded);
+
+        public struct Vhsubps : IAsmInstruction<Vhsubps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vhsubps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VHSUBPS;
 
             public static implicit operator AsmMnemonicCode(Vhsubps src) => src.Mnemonic;
@@ -2592,8 +6387,19 @@ namespace Z0.Asm
 
         public static Vhsubps vhsubps() => default;
 
-        public readonly struct Idiv : IAsmInstruction<Idiv>
+        [MethodImpl(Inline)]
+        public static Vhsubps vhsubps(AsmHexCode encoded) => new Vhsubps(encoded);
+
+        public struct Idiv : IAsmInstruction<Idiv>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Idiv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IDIV;
 
             public static implicit operator AsmMnemonicCode(Idiv src) => src.Mnemonic;
@@ -2603,8 +6409,19 @@ namespace Z0.Asm
 
         public static Idiv idiv() => default;
 
-        public readonly struct Imul : IAsmInstruction<Imul>
+        [MethodImpl(Inline)]
+        public static Idiv idiv(AsmHexCode encoded) => new Idiv(encoded);
+
+        public struct Imul : IAsmInstruction<Imul>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Imul(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IMUL;
 
             public static implicit operator AsmMnemonicCode(Imul src) => src.Mnemonic;
@@ -2614,8 +6431,19 @@ namespace Z0.Asm
 
         public static Imul imul() => default;
 
-        public readonly struct In : IAsmInstruction<In>
+        [MethodImpl(Inline)]
+        public static Imul imul(AsmHexCode encoded) => new Imul(encoded);
+
+        public struct In : IAsmInstruction<In>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public In(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IN;
 
             public static implicit operator AsmMnemonicCode(In src) => src.Mnemonic;
@@ -2625,8 +6453,19 @@ namespace Z0.Asm
 
         public static In @in() => default;
 
-        public readonly struct Inc : IAsmInstruction<Inc>
+        [MethodImpl(Inline)]
+        public static In @in(AsmHexCode encoded) => new In(encoded);
+
+        public struct Inc : IAsmInstruction<Inc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Inc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INC;
 
             public static implicit operator AsmMnemonicCode(Inc src) => src.Mnemonic;
@@ -2636,8 +6475,19 @@ namespace Z0.Asm
 
         public static Inc inc() => default;
 
-        public readonly struct Ins : IAsmInstruction<Ins>
+        [MethodImpl(Inline)]
+        public static Inc inc(AsmHexCode encoded) => new Inc(encoded);
+
+        public struct Ins : IAsmInstruction<Ins>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ins(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INS;
 
             public static implicit operator AsmMnemonicCode(Ins src) => src.Mnemonic;
@@ -2647,8 +6497,85 @@ namespace Z0.Asm
 
         public static Ins ins() => default;
 
-        public readonly struct Insertps : IAsmInstruction<Insertps>
+        [MethodImpl(Inline)]
+        public static Ins ins(AsmHexCode encoded) => new Ins(encoded);
+
+        public struct Insb : IAsmInstruction<Insb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Insb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INSB;
+
+            public static implicit operator AsmMnemonicCode(Insb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Insb src) => AsmMnemonics.INSB;
+        }
+
+        public static Insb insb() => default;
+
+        [MethodImpl(Inline)]
+        public static Insb insb(AsmHexCode encoded) => new Insb(encoded);
+
+        public struct Insw : IAsmInstruction<Insw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Insw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INSW;
+
+            public static implicit operator AsmMnemonicCode(Insw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Insw src) => AsmMnemonics.INSW;
+        }
+
+        public static Insw insw() => default;
+
+        [MethodImpl(Inline)]
+        public static Insw insw(AsmHexCode encoded) => new Insw(encoded);
+
+        public struct Insd : IAsmInstruction<Insd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Insd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INSD;
+
+            public static implicit operator AsmMnemonicCode(Insd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Insd src) => AsmMnemonics.INSD;
+        }
+
+        public static Insd insd() => default;
+
+        [MethodImpl(Inline)]
+        public static Insd insd(AsmHexCode encoded) => new Insd(encoded);
+
+        public struct Insertps : IAsmInstruction<Insertps>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Insertps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INSERTPS;
 
             public static implicit operator AsmMnemonicCode(Insertps src) => src.Mnemonic;
@@ -2658,8 +6585,19 @@ namespace Z0.Asm
 
         public static Insertps insertps() => default;
 
-        public readonly struct Vinsertps : IAsmInstruction<Vinsertps>
+        [MethodImpl(Inline)]
+        public static Insertps insertps(AsmHexCode encoded) => new Insertps(encoded);
+
+        public struct Vinsertps : IAsmInstruction<Vinsertps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vinsertps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VINSERTPS;
 
             public static implicit operator AsmMnemonicCode(Vinsertps src) => src.Mnemonic;
@@ -2669,8 +6607,19 @@ namespace Z0.Asm
 
         public static Vinsertps vinsertps() => default;
 
-        public readonly struct Int : IAsmInstruction<Int>
+        [MethodImpl(Inline)]
+        public static Vinsertps vinsertps(AsmHexCode encoded) => new Vinsertps(encoded);
+
+        public struct Int : IAsmInstruction<Int>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Int(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INT;
 
             public static implicit operator AsmMnemonicCode(Int src) => src.Mnemonic;
@@ -2680,8 +6629,63 @@ namespace Z0.Asm
 
         public static Int @int() => default;
 
-        public readonly struct Invlpg : IAsmInstruction<Invlpg>
+        [MethodImpl(Inline)]
+        public static Int @int(AsmHexCode encoded) => new Int(encoded);
+
+        public struct Into : IAsmInstruction<Into>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Into(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INTO;
+
+            public static implicit operator AsmMnemonicCode(Into src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Into src) => AsmMnemonics.INTO;
+        }
+
+        public static Into into() => default;
+
+        [MethodImpl(Inline)]
+        public static Into into(AsmHexCode encoded) => new Into(encoded);
+
+        public struct Invd : IAsmInstruction<Invd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Invd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INVD;
+
+            public static implicit operator AsmMnemonicCode(Invd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Invd src) => AsmMnemonics.INVD;
+        }
+
+        public static Invd invd() => default;
+
+        [MethodImpl(Inline)]
+        public static Invd invd(AsmHexCode encoded) => new Invd(encoded);
+
+        public struct Invlpg : IAsmInstruction<Invlpg>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Invlpg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INVLPG;
 
             public static implicit operator AsmMnemonicCode(Invlpg src) => src.Mnemonic;
@@ -2691,8 +6695,19 @@ namespace Z0.Asm
 
         public static Invlpg invlpg() => default;
 
-        public readonly struct Invpcid : IAsmInstruction<Invpcid>
+        [MethodImpl(Inline)]
+        public static Invlpg invlpg(AsmHexCode encoded) => new Invlpg(encoded);
+
+        public struct Invpcid : IAsmInstruction<Invpcid>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Invpcid(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.INVPCID;
 
             public static implicit operator AsmMnemonicCode(Invpcid src) => src.Mnemonic;
@@ -2702,8 +6717,85 @@ namespace Z0.Asm
 
         public static Invpcid invpcid() => default;
 
-        public readonly struct Ja : IAsmInstruction<Ja>
+        [MethodImpl(Inline)]
+        public static Invpcid invpcid(AsmHexCode encoded) => new Invpcid(encoded);
+
+        public struct Iret : IAsmInstruction<Iret>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Iret(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IRET;
+
+            public static implicit operator AsmMnemonicCode(Iret src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Iret src) => AsmMnemonics.IRET;
+        }
+
+        public static Iret iret() => default;
+
+        [MethodImpl(Inline)]
+        public static Iret iret(AsmHexCode encoded) => new Iret(encoded);
+
+        public struct Iretd : IAsmInstruction<Iretd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Iretd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IRETD;
+
+            public static implicit operator AsmMnemonicCode(Iretd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Iretd src) => AsmMnemonics.IRETD;
+        }
+
+        public static Iretd iretd() => default;
+
+        [MethodImpl(Inline)]
+        public static Iretd iretd(AsmHexCode encoded) => new Iretd(encoded);
+
+        public struct Iretq : IAsmInstruction<Iretq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Iretq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.IRETQ;
+
+            public static implicit operator AsmMnemonicCode(Iretq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Iretq src) => AsmMnemonics.IRETQ;
+        }
+
+        public static Iretq iretq() => default;
+
+        [MethodImpl(Inline)]
+        public static Iretq iretq(AsmHexCode encoded) => new Iretq(encoded);
+
+        public struct Ja : IAsmInstruction<Ja>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ja(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JA;
 
             public static implicit operator AsmMnemonicCode(Ja src) => src.Mnemonic;
@@ -2713,8 +6805,19 @@ namespace Z0.Asm
 
         public static Ja ja() => default;
 
-        public readonly struct Jae : IAsmInstruction<Jae>
+        [MethodImpl(Inline)]
+        public static Ja ja(AsmHexCode encoded) => new Ja(encoded);
+
+        public struct Jae : IAsmInstruction<Jae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JAE;
 
             public static implicit operator AsmMnemonicCode(Jae src) => src.Mnemonic;
@@ -2724,8 +6827,19 @@ namespace Z0.Asm
 
         public static Jae jae() => default;
 
-        public readonly struct Jb : IAsmInstruction<Jb>
+        [MethodImpl(Inline)]
+        public static Jae jae(AsmHexCode encoded) => new Jae(encoded);
+
+        public struct Jb : IAsmInstruction<Jb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JB;
 
             public static implicit operator AsmMnemonicCode(Jb src) => src.Mnemonic;
@@ -2735,8 +6849,19 @@ namespace Z0.Asm
 
         public static Jb jb() => default;
 
-        public readonly struct Jbe : IAsmInstruction<Jbe>
+        [MethodImpl(Inline)]
+        public static Jb jb(AsmHexCode encoded) => new Jb(encoded);
+
+        public struct Jbe : IAsmInstruction<Jbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JBE;
 
             public static implicit operator AsmMnemonicCode(Jbe src) => src.Mnemonic;
@@ -2746,8 +6871,19 @@ namespace Z0.Asm
 
         public static Jbe jbe() => default;
 
-        public readonly struct Jc : IAsmInstruction<Jc>
+        [MethodImpl(Inline)]
+        public static Jbe jbe(AsmHexCode encoded) => new Jbe(encoded);
+
+        public struct Jc : IAsmInstruction<Jc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JC;
 
             public static implicit operator AsmMnemonicCode(Jc src) => src.Mnemonic;
@@ -2757,8 +6893,19 @@ namespace Z0.Asm
 
         public static Jc jc() => default;
 
-        public readonly struct Jcxz : IAsmInstruction<Jcxz>
+        [MethodImpl(Inline)]
+        public static Jc jc(AsmHexCode encoded) => new Jc(encoded);
+
+        public struct Jcxz : IAsmInstruction<Jcxz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jcxz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JCXZ;
 
             public static implicit operator AsmMnemonicCode(Jcxz src) => src.Mnemonic;
@@ -2768,8 +6915,19 @@ namespace Z0.Asm
 
         public static Jcxz jcxz() => default;
 
-        public readonly struct Jecxz : IAsmInstruction<Jecxz>
+        [MethodImpl(Inline)]
+        public static Jcxz jcxz(AsmHexCode encoded) => new Jcxz(encoded);
+
+        public struct Jecxz : IAsmInstruction<Jecxz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jecxz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JECXZ;
 
             public static implicit operator AsmMnemonicCode(Jecxz src) => src.Mnemonic;
@@ -2779,8 +6937,19 @@ namespace Z0.Asm
 
         public static Jecxz jecxz() => default;
 
-        public readonly struct Jrcxz : IAsmInstruction<Jrcxz>
+        [MethodImpl(Inline)]
+        public static Jecxz jecxz(AsmHexCode encoded) => new Jecxz(encoded);
+
+        public struct Jrcxz : IAsmInstruction<Jrcxz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jrcxz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JRCXZ;
 
             public static implicit operator AsmMnemonicCode(Jrcxz src) => src.Mnemonic;
@@ -2790,8 +6959,19 @@ namespace Z0.Asm
 
         public static Jrcxz jrcxz() => default;
 
-        public readonly struct Je : IAsmInstruction<Je>
+        [MethodImpl(Inline)]
+        public static Jrcxz jrcxz(AsmHexCode encoded) => new Jrcxz(encoded);
+
+        public struct Je : IAsmInstruction<Je>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Je(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JE;
 
             public static implicit operator AsmMnemonicCode(Je src) => src.Mnemonic;
@@ -2801,8 +6981,19 @@ namespace Z0.Asm
 
         public static Je je() => default;
 
-        public readonly struct Jg : IAsmInstruction<Jg>
+        [MethodImpl(Inline)]
+        public static Je je(AsmHexCode encoded) => new Je(encoded);
+
+        public struct Jg : IAsmInstruction<Jg>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JG;
 
             public static implicit operator AsmMnemonicCode(Jg src) => src.Mnemonic;
@@ -2812,8 +7003,19 @@ namespace Z0.Asm
 
         public static Jg jg() => default;
 
-        public readonly struct Jge : IAsmInstruction<Jge>
+        [MethodImpl(Inline)]
+        public static Jg jg(AsmHexCode encoded) => new Jg(encoded);
+
+        public struct Jge : IAsmInstruction<Jge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JGE;
 
             public static implicit operator AsmMnemonicCode(Jge src) => src.Mnemonic;
@@ -2823,8 +7025,19 @@ namespace Z0.Asm
 
         public static Jge jge() => default;
 
-        public readonly struct Jl : IAsmInstruction<Jl>
+        [MethodImpl(Inline)]
+        public static Jge jge(AsmHexCode encoded) => new Jge(encoded);
+
+        public struct Jl : IAsmInstruction<Jl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JL;
 
             public static implicit operator AsmMnemonicCode(Jl src) => src.Mnemonic;
@@ -2834,8 +7047,19 @@ namespace Z0.Asm
 
         public static Jl jl() => default;
 
-        public readonly struct Jle : IAsmInstruction<Jle>
+        [MethodImpl(Inline)]
+        public static Jl jl(AsmHexCode encoded) => new Jl(encoded);
+
+        public struct Jle : IAsmInstruction<Jle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JLE;
 
             public static implicit operator AsmMnemonicCode(Jle src) => src.Mnemonic;
@@ -2845,8 +7069,19 @@ namespace Z0.Asm
 
         public static Jle jle() => default;
 
-        public readonly struct Jna : IAsmInstruction<Jna>
+        [MethodImpl(Inline)]
+        public static Jle jle(AsmHexCode encoded) => new Jle(encoded);
+
+        public struct Jna : IAsmInstruction<Jna>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jna(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNA;
 
             public static implicit operator AsmMnemonicCode(Jna src) => src.Mnemonic;
@@ -2856,8 +7091,19 @@ namespace Z0.Asm
 
         public static Jna jna() => default;
 
-        public readonly struct Jnae : IAsmInstruction<Jnae>
+        [MethodImpl(Inline)]
+        public static Jna jna(AsmHexCode encoded) => new Jna(encoded);
+
+        public struct Jnae : IAsmInstruction<Jnae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNAE;
 
             public static implicit operator AsmMnemonicCode(Jnae src) => src.Mnemonic;
@@ -2867,8 +7113,19 @@ namespace Z0.Asm
 
         public static Jnae jnae() => default;
 
-        public readonly struct Jnb : IAsmInstruction<Jnb>
+        [MethodImpl(Inline)]
+        public static Jnae jnae(AsmHexCode encoded) => new Jnae(encoded);
+
+        public struct Jnb : IAsmInstruction<Jnb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNB;
 
             public static implicit operator AsmMnemonicCode(Jnb src) => src.Mnemonic;
@@ -2878,8 +7135,19 @@ namespace Z0.Asm
 
         public static Jnb jnb() => default;
 
-        public readonly struct Jnbe : IAsmInstruction<Jnbe>
+        [MethodImpl(Inline)]
+        public static Jnb jnb(AsmHexCode encoded) => new Jnb(encoded);
+
+        public struct Jnbe : IAsmInstruction<Jnbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNBE;
 
             public static implicit operator AsmMnemonicCode(Jnbe src) => src.Mnemonic;
@@ -2889,8 +7157,19 @@ namespace Z0.Asm
 
         public static Jnbe jnbe() => default;
 
-        public readonly struct Jnc : IAsmInstruction<Jnc>
+        [MethodImpl(Inline)]
+        public static Jnbe jnbe(AsmHexCode encoded) => new Jnbe(encoded);
+
+        public struct Jnc : IAsmInstruction<Jnc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNC;
 
             public static implicit operator AsmMnemonicCode(Jnc src) => src.Mnemonic;
@@ -2900,8 +7179,19 @@ namespace Z0.Asm
 
         public static Jnc jnc() => default;
 
-        public readonly struct Jne : IAsmInstruction<Jne>
+        [MethodImpl(Inline)]
+        public static Jnc jnc(AsmHexCode encoded) => new Jnc(encoded);
+
+        public struct Jne : IAsmInstruction<Jne>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jne(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNE;
 
             public static implicit operator AsmMnemonicCode(Jne src) => src.Mnemonic;
@@ -2911,8 +7201,19 @@ namespace Z0.Asm
 
         public static Jne jne() => default;
 
-        public readonly struct Jng : IAsmInstruction<Jng>
+        [MethodImpl(Inline)]
+        public static Jne jne(AsmHexCode encoded) => new Jne(encoded);
+
+        public struct Jng : IAsmInstruction<Jng>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jng(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNG;
 
             public static implicit operator AsmMnemonicCode(Jng src) => src.Mnemonic;
@@ -2922,8 +7223,19 @@ namespace Z0.Asm
 
         public static Jng jng() => default;
 
-        public readonly struct Jnge : IAsmInstruction<Jnge>
+        [MethodImpl(Inline)]
+        public static Jng jng(AsmHexCode encoded) => new Jng(encoded);
+
+        public struct Jnge : IAsmInstruction<Jnge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNGE;
 
             public static implicit operator AsmMnemonicCode(Jnge src) => src.Mnemonic;
@@ -2933,8 +7245,19 @@ namespace Z0.Asm
 
         public static Jnge jnge() => default;
 
-        public readonly struct Jnl : IAsmInstruction<Jnl>
+        [MethodImpl(Inline)]
+        public static Jnge jnge(AsmHexCode encoded) => new Jnge(encoded);
+
+        public struct Jnl : IAsmInstruction<Jnl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNL;
 
             public static implicit operator AsmMnemonicCode(Jnl src) => src.Mnemonic;
@@ -2944,8 +7267,19 @@ namespace Z0.Asm
 
         public static Jnl jnl() => default;
 
-        public readonly struct Jnle : IAsmInstruction<Jnle>
+        [MethodImpl(Inline)]
+        public static Jnl jnl(AsmHexCode encoded) => new Jnl(encoded);
+
+        public struct Jnle : IAsmInstruction<Jnle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNLE;
 
             public static implicit operator AsmMnemonicCode(Jnle src) => src.Mnemonic;
@@ -2955,8 +7289,19 @@ namespace Z0.Asm
 
         public static Jnle jnle() => default;
 
-        public readonly struct Jno : IAsmInstruction<Jno>
+        [MethodImpl(Inline)]
+        public static Jnle jnle(AsmHexCode encoded) => new Jnle(encoded);
+
+        public struct Jno : IAsmInstruction<Jno>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jno(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNO;
 
             public static implicit operator AsmMnemonicCode(Jno src) => src.Mnemonic;
@@ -2966,8 +7311,19 @@ namespace Z0.Asm
 
         public static Jno jno() => default;
 
-        public readonly struct Jnp : IAsmInstruction<Jnp>
+        [MethodImpl(Inline)]
+        public static Jno jno(AsmHexCode encoded) => new Jno(encoded);
+
+        public struct Jnp : IAsmInstruction<Jnp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNP;
 
             public static implicit operator AsmMnemonicCode(Jnp src) => src.Mnemonic;
@@ -2977,8 +7333,19 @@ namespace Z0.Asm
 
         public static Jnp jnp() => default;
 
-        public readonly struct Jns : IAsmInstruction<Jns>
+        [MethodImpl(Inline)]
+        public static Jnp jnp(AsmHexCode encoded) => new Jnp(encoded);
+
+        public struct Jns : IAsmInstruction<Jns>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jns(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNS;
 
             public static implicit operator AsmMnemonicCode(Jns src) => src.Mnemonic;
@@ -2988,8 +7355,19 @@ namespace Z0.Asm
 
         public static Jns jns() => default;
 
-        public readonly struct Jnz : IAsmInstruction<Jnz>
+        [MethodImpl(Inline)]
+        public static Jns jns(AsmHexCode encoded) => new Jns(encoded);
+
+        public struct Jnz : IAsmInstruction<Jnz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jnz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JNZ;
 
             public static implicit operator AsmMnemonicCode(Jnz src) => src.Mnemonic;
@@ -2999,8 +7377,19 @@ namespace Z0.Asm
 
         public static Jnz jnz() => default;
 
-        public readonly struct Jo : IAsmInstruction<Jo>
+        [MethodImpl(Inline)]
+        public static Jnz jnz(AsmHexCode encoded) => new Jnz(encoded);
+
+        public struct Jo : IAsmInstruction<Jo>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JO;
 
             public static implicit operator AsmMnemonicCode(Jo src) => src.Mnemonic;
@@ -3010,8 +7399,19 @@ namespace Z0.Asm
 
         public static Jo jo() => default;
 
-        public readonly struct Jp : IAsmInstruction<Jp>
+        [MethodImpl(Inline)]
+        public static Jo jo(AsmHexCode encoded) => new Jo(encoded);
+
+        public struct Jp : IAsmInstruction<Jp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JP;
 
             public static implicit operator AsmMnemonicCode(Jp src) => src.Mnemonic;
@@ -3021,8 +7421,19 @@ namespace Z0.Asm
 
         public static Jp jp() => default;
 
-        public readonly struct Jpe : IAsmInstruction<Jpe>
+        [MethodImpl(Inline)]
+        public static Jp jp(AsmHexCode encoded) => new Jp(encoded);
+
+        public struct Jpe : IAsmInstruction<Jpe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jpe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JPE;
 
             public static implicit operator AsmMnemonicCode(Jpe src) => src.Mnemonic;
@@ -3032,8 +7443,19 @@ namespace Z0.Asm
 
         public static Jpe jpe() => default;
 
-        public readonly struct Jpo : IAsmInstruction<Jpo>
+        [MethodImpl(Inline)]
+        public static Jpe jpe(AsmHexCode encoded) => new Jpe(encoded);
+
+        public struct Jpo : IAsmInstruction<Jpo>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jpo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JPO;
 
             public static implicit operator AsmMnemonicCode(Jpo src) => src.Mnemonic;
@@ -3043,8 +7465,19 @@ namespace Z0.Asm
 
         public static Jpo jpo() => default;
 
-        public readonly struct Js : IAsmInstruction<Js>
+        [MethodImpl(Inline)]
+        public static Jpo jpo(AsmHexCode encoded) => new Jpo(encoded);
+
+        public struct Js : IAsmInstruction<Js>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Js(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JS;
 
             public static implicit operator AsmMnemonicCode(Js src) => src.Mnemonic;
@@ -3054,8 +7487,19 @@ namespace Z0.Asm
 
         public static Js js() => default;
 
-        public readonly struct Jz : IAsmInstruction<Jz>
+        [MethodImpl(Inline)]
+        public static Js js(AsmHexCode encoded) => new Js(encoded);
+
+        public struct Jz : IAsmInstruction<Jz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JZ;
 
             public static implicit operator AsmMnemonicCode(Jz src) => src.Mnemonic;
@@ -3065,8 +7509,19 @@ namespace Z0.Asm
 
         public static Jz jz() => default;
 
-        public readonly struct Jmp : IAsmInstruction<Jmp>
+        [MethodImpl(Inline)]
+        public static Jz jz(AsmHexCode encoded) => new Jz(encoded);
+
+        public struct Jmp : IAsmInstruction<Jmp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Jmp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.JMP;
 
             public static implicit operator AsmMnemonicCode(Jmp src) => src.Mnemonic;
@@ -3076,8 +7531,41 @@ namespace Z0.Asm
 
         public static Jmp jmp() => default;
 
-        public readonly struct Lar : IAsmInstruction<Lar>
+        [MethodImpl(Inline)]
+        public static Jmp jmp(AsmHexCode encoded) => new Jmp(encoded);
+
+        public struct Lahf : IAsmInstruction<Lahf>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lahf(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LAHF;
+
+            public static implicit operator AsmMnemonicCode(Lahf src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lahf src) => AsmMnemonics.LAHF;
+        }
+
+        public static Lahf lahf() => default;
+
+        [MethodImpl(Inline)]
+        public static Lahf lahf(AsmHexCode encoded) => new Lahf(encoded);
+
+        public struct Lar : IAsmInstruction<Lar>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lar(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LAR;
 
             public static implicit operator AsmMnemonicCode(Lar src) => src.Mnemonic;
@@ -3087,8 +7575,19 @@ namespace Z0.Asm
 
         public static Lar lar() => default;
 
-        public readonly struct Lddqu : IAsmInstruction<Lddqu>
+        [MethodImpl(Inline)]
+        public static Lar lar(AsmHexCode encoded) => new Lar(encoded);
+
+        public struct Lddqu : IAsmInstruction<Lddqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lddqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LDDQU;
 
             public static implicit operator AsmMnemonicCode(Lddqu src) => src.Mnemonic;
@@ -3098,8 +7597,19 @@ namespace Z0.Asm
 
         public static Lddqu lddqu() => default;
 
-        public readonly struct Vlddqu : IAsmInstruction<Vlddqu>
+        [MethodImpl(Inline)]
+        public static Lddqu lddqu(AsmHexCode encoded) => new Lddqu(encoded);
+
+        public struct Vlddqu : IAsmInstruction<Vlddqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vlddqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VLDDQU;
 
             public static implicit operator AsmMnemonicCode(Vlddqu src) => src.Mnemonic;
@@ -3109,8 +7619,19 @@ namespace Z0.Asm
 
         public static Vlddqu vlddqu() => default;
 
-        public readonly struct Ldmxcsr : IAsmInstruction<Ldmxcsr>
+        [MethodImpl(Inline)]
+        public static Vlddqu vlddqu(AsmHexCode encoded) => new Vlddqu(encoded);
+
+        public struct Ldmxcsr : IAsmInstruction<Ldmxcsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ldmxcsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LDMXCSR;
 
             public static implicit operator AsmMnemonicCode(Ldmxcsr src) => src.Mnemonic;
@@ -3120,8 +7641,19 @@ namespace Z0.Asm
 
         public static Ldmxcsr ldmxcsr() => default;
 
-        public readonly struct Vldmxcsr : IAsmInstruction<Vldmxcsr>
+        [MethodImpl(Inline)]
+        public static Ldmxcsr ldmxcsr(AsmHexCode encoded) => new Ldmxcsr(encoded);
+
+        public struct Vldmxcsr : IAsmInstruction<Vldmxcsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vldmxcsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VLDMXCSR;
 
             public static implicit operator AsmMnemonicCode(Vldmxcsr src) => src.Mnemonic;
@@ -3131,8 +7663,19 @@ namespace Z0.Asm
 
         public static Vldmxcsr vldmxcsr() => default;
 
-        public readonly struct Lds : IAsmInstruction<Lds>
+        [MethodImpl(Inline)]
+        public static Vldmxcsr vldmxcsr(AsmHexCode encoded) => new Vldmxcsr(encoded);
+
+        public struct Lds : IAsmInstruction<Lds>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lds(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LDS;
 
             public static implicit operator AsmMnemonicCode(Lds src) => src.Mnemonic;
@@ -3142,8 +7685,19 @@ namespace Z0.Asm
 
         public static Lds lds() => default;
 
-        public readonly struct Lss : IAsmInstruction<Lss>
+        [MethodImpl(Inline)]
+        public static Lds lds(AsmHexCode encoded) => new Lds(encoded);
+
+        public struct Lss : IAsmInstruction<Lss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LSS;
 
             public static implicit operator AsmMnemonicCode(Lss src) => src.Mnemonic;
@@ -3153,8 +7707,19 @@ namespace Z0.Asm
 
         public static Lss lss() => default;
 
-        public readonly struct Les : IAsmInstruction<Les>
+        [MethodImpl(Inline)]
+        public static Lss lss(AsmHexCode encoded) => new Lss(encoded);
+
+        public struct Les : IAsmInstruction<Les>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Les(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LES;
 
             public static implicit operator AsmMnemonicCode(Les src) => src.Mnemonic;
@@ -3164,8 +7729,19 @@ namespace Z0.Asm
 
         public static Les les() => default;
 
-        public readonly struct Lfs : IAsmInstruction<Lfs>
+        [MethodImpl(Inline)]
+        public static Les les(AsmHexCode encoded) => new Les(encoded);
+
+        public struct Lfs : IAsmInstruction<Lfs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lfs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LFS;
 
             public static implicit operator AsmMnemonicCode(Lfs src) => src.Mnemonic;
@@ -3175,8 +7751,19 @@ namespace Z0.Asm
 
         public static Lfs lfs() => default;
 
-        public readonly struct Lgs : IAsmInstruction<Lgs>
+        [MethodImpl(Inline)]
+        public static Lfs lfs(AsmHexCode encoded) => new Lfs(encoded);
+
+        public struct Lgs : IAsmInstruction<Lgs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lgs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LGS;
 
             public static implicit operator AsmMnemonicCode(Lgs src) => src.Mnemonic;
@@ -3186,8 +7773,19 @@ namespace Z0.Asm
 
         public static Lgs lgs() => default;
 
-        public readonly struct Lea : IAsmInstruction<Lea>
+        [MethodImpl(Inline)]
+        public static Lgs lgs(AsmHexCode encoded) => new Lgs(encoded);
+
+        public struct Lea : IAsmInstruction<Lea>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lea(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LEA;
 
             public static implicit operator AsmMnemonicCode(Lea src) => src.Mnemonic;
@@ -3197,8 +7795,19 @@ namespace Z0.Asm
 
         public static Lea lea() => default;
 
-        public readonly struct Leave : IAsmInstruction<Leave>
+        [MethodImpl(Inline)]
+        public static Lea lea(AsmHexCode encoded) => new Lea(encoded);
+
+        public struct Leave : IAsmInstruction<Leave>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Leave(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LEAVE;
 
             public static implicit operator AsmMnemonicCode(Leave src) => src.Mnemonic;
@@ -3208,8 +7817,41 @@ namespace Z0.Asm
 
         public static Leave leave() => default;
 
-        public readonly struct Lgdt : IAsmInstruction<Lgdt>
+        [MethodImpl(Inline)]
+        public static Leave leave(AsmHexCode encoded) => new Leave(encoded);
+
+        public struct Lfence : IAsmInstruction<Lfence>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lfence(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LFENCE;
+
+            public static implicit operator AsmMnemonicCode(Lfence src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lfence src) => AsmMnemonics.LFENCE;
+        }
+
+        public static Lfence lfence() => default;
+
+        [MethodImpl(Inline)]
+        public static Lfence lfence(AsmHexCode encoded) => new Lfence(encoded);
+
+        public struct Lgdt : IAsmInstruction<Lgdt>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lgdt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LGDT;
 
             public static implicit operator AsmMnemonicCode(Lgdt src) => src.Mnemonic;
@@ -3219,8 +7861,19 @@ namespace Z0.Asm
 
         public static Lgdt lgdt() => default;
 
-        public readonly struct Lidt : IAsmInstruction<Lidt>
+        [MethodImpl(Inline)]
+        public static Lgdt lgdt(AsmHexCode encoded) => new Lgdt(encoded);
+
+        public struct Lidt : IAsmInstruction<Lidt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lidt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LIDT;
 
             public static implicit operator AsmMnemonicCode(Lidt src) => src.Mnemonic;
@@ -3230,8 +7883,19 @@ namespace Z0.Asm
 
         public static Lidt lidt() => default;
 
-        public readonly struct Lldt : IAsmInstruction<Lldt>
+        [MethodImpl(Inline)]
+        public static Lidt lidt(AsmHexCode encoded) => new Lidt(encoded);
+
+        public struct Lldt : IAsmInstruction<Lldt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lldt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LLDT;
 
             public static implicit operator AsmMnemonicCode(Lldt src) => src.Mnemonic;
@@ -3241,8 +7905,19 @@ namespace Z0.Asm
 
         public static Lldt lldt() => default;
 
-        public readonly struct Lmsw : IAsmInstruction<Lmsw>
+        [MethodImpl(Inline)]
+        public static Lldt lldt(AsmHexCode encoded) => new Lldt(encoded);
+
+        public struct Lmsw : IAsmInstruction<Lmsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lmsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LMSW;
 
             public static implicit operator AsmMnemonicCode(Lmsw src) => src.Mnemonic;
@@ -3252,8 +7927,41 @@ namespace Z0.Asm
 
         public static Lmsw lmsw() => default;
 
-        public readonly struct Lods : IAsmInstruction<Lods>
+        [MethodImpl(Inline)]
+        public static Lmsw lmsw(AsmHexCode encoded) => new Lmsw(encoded);
+
+        public struct Lock : IAsmInstruction<Lock>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lock(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LOCK;
+
+            public static implicit operator AsmMnemonicCode(Lock src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lock src) => AsmMnemonics.LOCK;
+        }
+
+        public static Lock @lock() => default;
+
+        [MethodImpl(Inline)]
+        public static Lock @lock(AsmHexCode encoded) => new Lock(encoded);
+
+        public struct Lods : IAsmInstruction<Lods>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lods(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LODS;
 
             public static implicit operator AsmMnemonicCode(Lods src) => src.Mnemonic;
@@ -3263,8 +7971,107 @@ namespace Z0.Asm
 
         public static Lods lods() => default;
 
-        public readonly struct Loop : IAsmInstruction<Loop>
+        [MethodImpl(Inline)]
+        public static Lods lods(AsmHexCode encoded) => new Lods(encoded);
+
+        public struct Lodsb : IAsmInstruction<Lodsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lodsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LODSB;
+
+            public static implicit operator AsmMnemonicCode(Lodsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lodsb src) => AsmMnemonics.LODSB;
+        }
+
+        public static Lodsb lodsb() => default;
+
+        [MethodImpl(Inline)]
+        public static Lodsb lodsb(AsmHexCode encoded) => new Lodsb(encoded);
+
+        public struct Lodsw : IAsmInstruction<Lodsw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lodsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LODSW;
+
+            public static implicit operator AsmMnemonicCode(Lodsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lodsw src) => AsmMnemonics.LODSW;
+        }
+
+        public static Lodsw lodsw() => default;
+
+        [MethodImpl(Inline)]
+        public static Lodsw lodsw(AsmHexCode encoded) => new Lodsw(encoded);
+
+        public struct Lodsd : IAsmInstruction<Lodsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lodsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LODSD;
+
+            public static implicit operator AsmMnemonicCode(Lodsd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lodsd src) => AsmMnemonics.LODSD;
+        }
+
+        public static Lodsd lodsd() => default;
+
+        [MethodImpl(Inline)]
+        public static Lodsd lodsd(AsmHexCode encoded) => new Lodsd(encoded);
+
+        public struct Lodsq : IAsmInstruction<Lodsq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lodsq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LODSQ;
+
+            public static implicit operator AsmMnemonicCode(Lodsq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Lodsq src) => AsmMnemonics.LODSQ;
+        }
+
+        public static Lodsq lodsq() => default;
+
+        [MethodImpl(Inline)]
+        public static Lodsq lodsq(AsmHexCode encoded) => new Lodsq(encoded);
+
+        public struct Loop : IAsmInstruction<Loop>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Loop(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LOOP;
 
             public static implicit operator AsmMnemonicCode(Loop src) => src.Mnemonic;
@@ -3274,8 +8081,19 @@ namespace Z0.Asm
 
         public static Loop loop() => default;
 
-        public readonly struct Loope : IAsmInstruction<Loope>
+        [MethodImpl(Inline)]
+        public static Loop loop(AsmHexCode encoded) => new Loop(encoded);
+
+        public struct Loope : IAsmInstruction<Loope>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Loope(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LOOPE;
 
             public static implicit operator AsmMnemonicCode(Loope src) => src.Mnemonic;
@@ -3285,8 +8103,19 @@ namespace Z0.Asm
 
         public static Loope loope() => default;
 
-        public readonly struct Loopne : IAsmInstruction<Loopne>
+        [MethodImpl(Inline)]
+        public static Loope loope(AsmHexCode encoded) => new Loope(encoded);
+
+        public struct Loopne : IAsmInstruction<Loopne>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Loopne(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LOOPNE;
 
             public static implicit operator AsmMnemonicCode(Loopne src) => src.Mnemonic;
@@ -3296,8 +8125,19 @@ namespace Z0.Asm
 
         public static Loopne loopne() => default;
 
-        public readonly struct Lsl : IAsmInstruction<Lsl>
+        [MethodImpl(Inline)]
+        public static Loopne loopne(AsmHexCode encoded) => new Loopne(encoded);
+
+        public struct Lsl : IAsmInstruction<Lsl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lsl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LSL;
 
             public static implicit operator AsmMnemonicCode(Lsl src) => src.Mnemonic;
@@ -3307,8 +8147,19 @@ namespace Z0.Asm
 
         public static Lsl lsl() => default;
 
-        public readonly struct Ltr : IAsmInstruction<Ltr>
+        [MethodImpl(Inline)]
+        public static Lsl lsl(AsmHexCode encoded) => new Lsl(encoded);
+
+        public struct Ltr : IAsmInstruction<Ltr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ltr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LTR;
 
             public static implicit operator AsmMnemonicCode(Ltr src) => src.Mnemonic;
@@ -3318,8 +8169,19 @@ namespace Z0.Asm
 
         public static Ltr ltr() => default;
 
-        public readonly struct Lzcnt : IAsmInstruction<Lzcnt>
+        [MethodImpl(Inline)]
+        public static Ltr ltr(AsmHexCode encoded) => new Ltr(encoded);
+
+        public struct Lzcnt : IAsmInstruction<Lzcnt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Lzcnt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.LZCNT;
 
             public static implicit operator AsmMnemonicCode(Lzcnt src) => src.Mnemonic;
@@ -3329,8 +8191,19 @@ namespace Z0.Asm
 
         public static Lzcnt lzcnt() => default;
 
-        public readonly struct Maskmovdqu : IAsmInstruction<Maskmovdqu>
+        [MethodImpl(Inline)]
+        public static Lzcnt lzcnt(AsmHexCode encoded) => new Lzcnt(encoded);
+
+        public struct Maskmovdqu : IAsmInstruction<Maskmovdqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maskmovdqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MASKMOVDQU;
 
             public static implicit operator AsmMnemonicCode(Maskmovdqu src) => src.Mnemonic;
@@ -3340,8 +8213,19 @@ namespace Z0.Asm
 
         public static Maskmovdqu maskmovdqu() => default;
 
-        public readonly struct Vmaskmovdqu : IAsmInstruction<Vmaskmovdqu>
+        [MethodImpl(Inline)]
+        public static Maskmovdqu maskmovdqu(AsmHexCode encoded) => new Maskmovdqu(encoded);
+
+        public struct Vmaskmovdqu : IAsmInstruction<Vmaskmovdqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaskmovdqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMASKMOVDQU;
 
             public static implicit operator AsmMnemonicCode(Vmaskmovdqu src) => src.Mnemonic;
@@ -3351,8 +8235,19 @@ namespace Z0.Asm
 
         public static Vmaskmovdqu vmaskmovdqu() => default;
 
-        public readonly struct Maskmovq : IAsmInstruction<Maskmovq>
+        [MethodImpl(Inline)]
+        public static Vmaskmovdqu vmaskmovdqu(AsmHexCode encoded) => new Vmaskmovdqu(encoded);
+
+        public struct Maskmovq : IAsmInstruction<Maskmovq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maskmovq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MASKMOVQ;
 
             public static implicit operator AsmMnemonicCode(Maskmovq src) => src.Mnemonic;
@@ -3362,8 +8257,19 @@ namespace Z0.Asm
 
         public static Maskmovq maskmovq() => default;
 
-        public readonly struct Maxpd : IAsmInstruction<Maxpd>
+        [MethodImpl(Inline)]
+        public static Maskmovq maskmovq(AsmHexCode encoded) => new Maskmovq(encoded);
+
+        public struct Maxpd : IAsmInstruction<Maxpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maxpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MAXPD;
 
             public static implicit operator AsmMnemonicCode(Maxpd src) => src.Mnemonic;
@@ -3373,8 +8279,19 @@ namespace Z0.Asm
 
         public static Maxpd maxpd() => default;
 
-        public readonly struct Vmaxpd : IAsmInstruction<Vmaxpd>
+        [MethodImpl(Inline)]
+        public static Maxpd maxpd(AsmHexCode encoded) => new Maxpd(encoded);
+
+        public struct Vmaxpd : IAsmInstruction<Vmaxpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaxpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMAXPD;
 
             public static implicit operator AsmMnemonicCode(Vmaxpd src) => src.Mnemonic;
@@ -3384,8 +8301,19 @@ namespace Z0.Asm
 
         public static Vmaxpd vmaxpd() => default;
 
-        public readonly struct Maxps : IAsmInstruction<Maxps>
+        [MethodImpl(Inline)]
+        public static Vmaxpd vmaxpd(AsmHexCode encoded) => new Vmaxpd(encoded);
+
+        public struct Maxps : IAsmInstruction<Maxps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maxps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MAXPS;
 
             public static implicit operator AsmMnemonicCode(Maxps src) => src.Mnemonic;
@@ -3395,8 +8323,19 @@ namespace Z0.Asm
 
         public static Maxps maxps() => default;
 
-        public readonly struct Vmaxps : IAsmInstruction<Vmaxps>
+        [MethodImpl(Inline)]
+        public static Maxps maxps(AsmHexCode encoded) => new Maxps(encoded);
+
+        public struct Vmaxps : IAsmInstruction<Vmaxps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaxps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMAXPS;
 
             public static implicit operator AsmMnemonicCode(Vmaxps src) => src.Mnemonic;
@@ -3406,8 +8345,19 @@ namespace Z0.Asm
 
         public static Vmaxps vmaxps() => default;
 
-        public readonly struct Maxsd : IAsmInstruction<Maxsd>
+        [MethodImpl(Inline)]
+        public static Vmaxps vmaxps(AsmHexCode encoded) => new Vmaxps(encoded);
+
+        public struct Maxsd : IAsmInstruction<Maxsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maxsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MAXSD;
 
             public static implicit operator AsmMnemonicCode(Maxsd src) => src.Mnemonic;
@@ -3417,8 +8367,19 @@ namespace Z0.Asm
 
         public static Maxsd maxsd() => default;
 
-        public readonly struct Vmaxsd : IAsmInstruction<Vmaxsd>
+        [MethodImpl(Inline)]
+        public static Maxsd maxsd(AsmHexCode encoded) => new Maxsd(encoded);
+
+        public struct Vmaxsd : IAsmInstruction<Vmaxsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaxsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMAXSD;
 
             public static implicit operator AsmMnemonicCode(Vmaxsd src) => src.Mnemonic;
@@ -3428,8 +8389,19 @@ namespace Z0.Asm
 
         public static Vmaxsd vmaxsd() => default;
 
-        public readonly struct Maxss : IAsmInstruction<Maxss>
+        [MethodImpl(Inline)]
+        public static Vmaxsd vmaxsd(AsmHexCode encoded) => new Vmaxsd(encoded);
+
+        public struct Maxss : IAsmInstruction<Maxss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Maxss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MAXSS;
 
             public static implicit operator AsmMnemonicCode(Maxss src) => src.Mnemonic;
@@ -3439,8 +8411,19 @@ namespace Z0.Asm
 
         public static Maxss maxss() => default;
 
-        public readonly struct Vmaxss : IAsmInstruction<Vmaxss>
+        [MethodImpl(Inline)]
+        public static Maxss maxss(AsmHexCode encoded) => new Maxss(encoded);
+
+        public struct Vmaxss : IAsmInstruction<Vmaxss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaxss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMAXSS;
 
             public static implicit operator AsmMnemonicCode(Vmaxss src) => src.Mnemonic;
@@ -3450,8 +8433,41 @@ namespace Z0.Asm
 
         public static Vmaxss vmaxss() => default;
 
-        public readonly struct Minpd : IAsmInstruction<Minpd>
+        [MethodImpl(Inline)]
+        public static Vmaxss vmaxss(AsmHexCode encoded) => new Vmaxss(encoded);
+
+        public struct Mfence : IAsmInstruction<Mfence>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mfence(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MFENCE;
+
+            public static implicit operator AsmMnemonicCode(Mfence src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Mfence src) => AsmMnemonics.MFENCE;
+        }
+
+        public static Mfence mfence() => default;
+
+        [MethodImpl(Inline)]
+        public static Mfence mfence(AsmHexCode encoded) => new Mfence(encoded);
+
+        public struct Minpd : IAsmInstruction<Minpd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Minpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MINPD;
 
             public static implicit operator AsmMnemonicCode(Minpd src) => src.Mnemonic;
@@ -3461,8 +8477,19 @@ namespace Z0.Asm
 
         public static Minpd minpd() => default;
 
-        public readonly struct Vminpd : IAsmInstruction<Vminpd>
+        [MethodImpl(Inline)]
+        public static Minpd minpd(AsmHexCode encoded) => new Minpd(encoded);
+
+        public struct Vminpd : IAsmInstruction<Vminpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vminpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMINPD;
 
             public static implicit operator AsmMnemonicCode(Vminpd src) => src.Mnemonic;
@@ -3472,8 +8499,19 @@ namespace Z0.Asm
 
         public static Vminpd vminpd() => default;
 
-        public readonly struct Minps : IAsmInstruction<Minps>
+        [MethodImpl(Inline)]
+        public static Vminpd vminpd(AsmHexCode encoded) => new Vminpd(encoded);
+
+        public struct Minps : IAsmInstruction<Minps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Minps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MINPS;
 
             public static implicit operator AsmMnemonicCode(Minps src) => src.Mnemonic;
@@ -3483,8 +8521,19 @@ namespace Z0.Asm
 
         public static Minps minps() => default;
 
-        public readonly struct Vminps : IAsmInstruction<Vminps>
+        [MethodImpl(Inline)]
+        public static Minps minps(AsmHexCode encoded) => new Minps(encoded);
+
+        public struct Vminps : IAsmInstruction<Vminps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vminps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMINPS;
 
             public static implicit operator AsmMnemonicCode(Vminps src) => src.Mnemonic;
@@ -3494,8 +8543,19 @@ namespace Z0.Asm
 
         public static Vminps vminps() => default;
 
-        public readonly struct Minsd : IAsmInstruction<Minsd>
+        [MethodImpl(Inline)]
+        public static Vminps vminps(AsmHexCode encoded) => new Vminps(encoded);
+
+        public struct Minsd : IAsmInstruction<Minsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Minsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MINSD;
 
             public static implicit operator AsmMnemonicCode(Minsd src) => src.Mnemonic;
@@ -3505,8 +8565,19 @@ namespace Z0.Asm
 
         public static Minsd minsd() => default;
 
-        public readonly struct Vminsd : IAsmInstruction<Vminsd>
+        [MethodImpl(Inline)]
+        public static Minsd minsd(AsmHexCode encoded) => new Minsd(encoded);
+
+        public struct Vminsd : IAsmInstruction<Vminsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vminsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMINSD;
 
             public static implicit operator AsmMnemonicCode(Vminsd src) => src.Mnemonic;
@@ -3516,8 +8587,19 @@ namespace Z0.Asm
 
         public static Vminsd vminsd() => default;
 
-        public readonly struct Minss : IAsmInstruction<Minss>
+        [MethodImpl(Inline)]
+        public static Vminsd vminsd(AsmHexCode encoded) => new Vminsd(encoded);
+
+        public struct Minss : IAsmInstruction<Minss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Minss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MINSS;
 
             public static implicit operator AsmMnemonicCode(Minss src) => src.Mnemonic;
@@ -3527,8 +8609,19 @@ namespace Z0.Asm
 
         public static Minss minss() => default;
 
-        public readonly struct Vminss : IAsmInstruction<Vminss>
+        [MethodImpl(Inline)]
+        public static Minss minss(AsmHexCode encoded) => new Minss(encoded);
+
+        public struct Vminss : IAsmInstruction<Vminss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vminss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMINSS;
 
             public static implicit operator AsmMnemonicCode(Vminss src) => src.Mnemonic;
@@ -3538,8 +8631,41 @@ namespace Z0.Asm
 
         public static Vminss vminss() => default;
 
-        public readonly struct Mov : IAsmInstruction<Mov>
+        [MethodImpl(Inline)]
+        public static Vminss vminss(AsmHexCode encoded) => new Vminss(encoded);
+
+        public struct Monitor : IAsmInstruction<Monitor>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Monitor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MONITOR;
+
+            public static implicit operator AsmMnemonicCode(Monitor src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Monitor src) => AsmMnemonics.MONITOR;
+        }
+
+        public static Monitor monitor() => default;
+
+        [MethodImpl(Inline)]
+        public static Monitor monitor(AsmHexCode encoded) => new Monitor(encoded);
+
+        public struct Mov : IAsmInstruction<Mov>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mov(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOV;
 
             public static implicit operator AsmMnemonicCode(Mov src) => src.Mnemonic;
@@ -3549,8 +8675,19 @@ namespace Z0.Asm
 
         public static Mov mov() => default;
 
-        public readonly struct Movapd : IAsmInstruction<Movapd>
+        [MethodImpl(Inline)]
+        public static Mov mov(AsmHexCode encoded) => new Mov(encoded);
+
+        public struct Movapd : IAsmInstruction<Movapd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movapd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVAPD;
 
             public static implicit operator AsmMnemonicCode(Movapd src) => src.Mnemonic;
@@ -3560,8 +8697,19 @@ namespace Z0.Asm
 
         public static Movapd movapd() => default;
 
-        public readonly struct Vmovapd : IAsmInstruction<Vmovapd>
+        [MethodImpl(Inline)]
+        public static Movapd movapd(AsmHexCode encoded) => new Movapd(encoded);
+
+        public struct Vmovapd : IAsmInstruction<Vmovapd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovapd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVAPD;
 
             public static implicit operator AsmMnemonicCode(Vmovapd src) => src.Mnemonic;
@@ -3571,8 +8719,19 @@ namespace Z0.Asm
 
         public static Vmovapd vmovapd() => default;
 
-        public readonly struct Movaps : IAsmInstruction<Movaps>
+        [MethodImpl(Inline)]
+        public static Vmovapd vmovapd(AsmHexCode encoded) => new Vmovapd(encoded);
+
+        public struct Movaps : IAsmInstruction<Movaps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movaps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVAPS;
 
             public static implicit operator AsmMnemonicCode(Movaps src) => src.Mnemonic;
@@ -3582,8 +8741,19 @@ namespace Z0.Asm
 
         public static Movaps movaps() => default;
 
-        public readonly struct Vmovaps : IAsmInstruction<Vmovaps>
+        [MethodImpl(Inline)]
+        public static Movaps movaps(AsmHexCode encoded) => new Movaps(encoded);
+
+        public struct Vmovaps : IAsmInstruction<Vmovaps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovaps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVAPS;
 
             public static implicit operator AsmMnemonicCode(Vmovaps src) => src.Mnemonic;
@@ -3593,8 +8763,19 @@ namespace Z0.Asm
 
         public static Vmovaps vmovaps() => default;
 
-        public readonly struct Movbe : IAsmInstruction<Movbe>
+        [MethodImpl(Inline)]
+        public static Vmovaps vmovaps(AsmHexCode encoded) => new Vmovaps(encoded);
+
+        public struct Movbe : IAsmInstruction<Movbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVBE;
 
             public static implicit operator AsmMnemonicCode(Movbe src) => src.Mnemonic;
@@ -3604,8 +8785,19 @@ namespace Z0.Asm
 
         public static Movbe movbe() => default;
 
-        public readonly struct Movd : IAsmInstruction<Movd>
+        [MethodImpl(Inline)]
+        public static Movbe movbe(AsmHexCode encoded) => new Movbe(encoded);
+
+        public struct Movd : IAsmInstruction<Movd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVD;
 
             public static implicit operator AsmMnemonicCode(Movd src) => src.Mnemonic;
@@ -3615,8 +8807,19 @@ namespace Z0.Asm
 
         public static Movd movd() => default;
 
-        public readonly struct Movq : IAsmInstruction<Movq>
+        [MethodImpl(Inline)]
+        public static Movd movd(AsmHexCode encoded) => new Movd(encoded);
+
+        public struct Movq : IAsmInstruction<Movq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVQ;
 
             public static implicit operator AsmMnemonicCode(Movq src) => src.Mnemonic;
@@ -3626,8 +8829,19 @@ namespace Z0.Asm
 
         public static Movq movq() => default;
 
-        public readonly struct Vmovd : IAsmInstruction<Vmovd>
+        [MethodImpl(Inline)]
+        public static Movq movq(AsmHexCode encoded) => new Movq(encoded);
+
+        public struct Vmovd : IAsmInstruction<Vmovd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVD;
 
             public static implicit operator AsmMnemonicCode(Vmovd src) => src.Mnemonic;
@@ -3637,8 +8851,19 @@ namespace Z0.Asm
 
         public static Vmovd vmovd() => default;
 
-        public readonly struct Vmovq : IAsmInstruction<Vmovq>
+        [MethodImpl(Inline)]
+        public static Vmovd vmovd(AsmHexCode encoded) => new Vmovd(encoded);
+
+        public struct Vmovq : IAsmInstruction<Vmovq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVQ;
 
             public static implicit operator AsmMnemonicCode(Vmovq src) => src.Mnemonic;
@@ -3648,8 +8873,19 @@ namespace Z0.Asm
 
         public static Vmovq vmovq() => default;
 
-        public readonly struct Movddup : IAsmInstruction<Movddup>
+        [MethodImpl(Inline)]
+        public static Vmovq vmovq(AsmHexCode encoded) => new Vmovq(encoded);
+
+        public struct Movddup : IAsmInstruction<Movddup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movddup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVDDUP;
 
             public static implicit operator AsmMnemonicCode(Movddup src) => src.Mnemonic;
@@ -3659,8 +8895,19 @@ namespace Z0.Asm
 
         public static Movddup movddup() => default;
 
-        public readonly struct Vmovddup : IAsmInstruction<Vmovddup>
+        [MethodImpl(Inline)]
+        public static Movddup movddup(AsmHexCode encoded) => new Movddup(encoded);
+
+        public struct Vmovddup : IAsmInstruction<Vmovddup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovddup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVDDUP;
 
             public static implicit operator AsmMnemonicCode(Vmovddup src) => src.Mnemonic;
@@ -3670,8 +8917,19 @@ namespace Z0.Asm
 
         public static Vmovddup vmovddup() => default;
 
-        public readonly struct Movdqa : IAsmInstruction<Movdqa>
+        [MethodImpl(Inline)]
+        public static Vmovddup vmovddup(AsmHexCode encoded) => new Vmovddup(encoded);
+
+        public struct Movdqa : IAsmInstruction<Movdqa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movdqa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVDQA;
 
             public static implicit operator AsmMnemonicCode(Movdqa src) => src.Mnemonic;
@@ -3681,8 +8939,19 @@ namespace Z0.Asm
 
         public static Movdqa movdqa() => default;
 
-        public readonly struct Vmovdqa : IAsmInstruction<Vmovdqa>
+        [MethodImpl(Inline)]
+        public static Movdqa movdqa(AsmHexCode encoded) => new Movdqa(encoded);
+
+        public struct Vmovdqa : IAsmInstruction<Vmovdqa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovdqa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVDQA;
 
             public static implicit operator AsmMnemonicCode(Vmovdqa src) => src.Mnemonic;
@@ -3692,8 +8961,19 @@ namespace Z0.Asm
 
         public static Vmovdqa vmovdqa() => default;
 
-        public readonly struct Movdqu : IAsmInstruction<Movdqu>
+        [MethodImpl(Inline)]
+        public static Vmovdqa vmovdqa(AsmHexCode encoded) => new Vmovdqa(encoded);
+
+        public struct Movdqu : IAsmInstruction<Movdqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movdqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVDQU;
 
             public static implicit operator AsmMnemonicCode(Movdqu src) => src.Mnemonic;
@@ -3703,8 +8983,19 @@ namespace Z0.Asm
 
         public static Movdqu movdqu() => default;
 
-        public readonly struct Vmovdqu : IAsmInstruction<Vmovdqu>
+        [MethodImpl(Inline)]
+        public static Movdqu movdqu(AsmHexCode encoded) => new Movdqu(encoded);
+
+        public struct Vmovdqu : IAsmInstruction<Vmovdqu>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovdqu(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVDQU;
 
             public static implicit operator AsmMnemonicCode(Vmovdqu src) => src.Mnemonic;
@@ -3714,8 +9005,19 @@ namespace Z0.Asm
 
         public static Vmovdqu vmovdqu() => default;
 
-        public readonly struct Movdq2q : IAsmInstruction<Movdq2q>
+        [MethodImpl(Inline)]
+        public static Vmovdqu vmovdqu(AsmHexCode encoded) => new Vmovdqu(encoded);
+
+        public struct Movdq2q : IAsmInstruction<Movdq2q>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movdq2q(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVDQ2Q;
 
             public static implicit operator AsmMnemonicCode(Movdq2q src) => src.Mnemonic;
@@ -3725,8 +9027,19 @@ namespace Z0.Asm
 
         public static Movdq2q movdq2q() => default;
 
-        public readonly struct Movhlps : IAsmInstruction<Movhlps>
+        [MethodImpl(Inline)]
+        public static Movdq2q movdq2q(AsmHexCode encoded) => new Movdq2q(encoded);
+
+        public struct Movhlps : IAsmInstruction<Movhlps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movhlps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVHLPS;
 
             public static implicit operator AsmMnemonicCode(Movhlps src) => src.Mnemonic;
@@ -3736,8 +9049,19 @@ namespace Z0.Asm
 
         public static Movhlps movhlps() => default;
 
-        public readonly struct Vmovhlps : IAsmInstruction<Vmovhlps>
+        [MethodImpl(Inline)]
+        public static Movhlps movhlps(AsmHexCode encoded) => new Movhlps(encoded);
+
+        public struct Vmovhlps : IAsmInstruction<Vmovhlps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovhlps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVHLPS;
 
             public static implicit operator AsmMnemonicCode(Vmovhlps src) => src.Mnemonic;
@@ -3747,8 +9071,19 @@ namespace Z0.Asm
 
         public static Vmovhlps vmovhlps() => default;
 
-        public readonly struct Movhpd : IAsmInstruction<Movhpd>
+        [MethodImpl(Inline)]
+        public static Vmovhlps vmovhlps(AsmHexCode encoded) => new Vmovhlps(encoded);
+
+        public struct Movhpd : IAsmInstruction<Movhpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movhpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVHPD;
 
             public static implicit operator AsmMnemonicCode(Movhpd src) => src.Mnemonic;
@@ -3758,8 +9093,19 @@ namespace Z0.Asm
 
         public static Movhpd movhpd() => default;
 
-        public readonly struct Vmovhpd : IAsmInstruction<Vmovhpd>
+        [MethodImpl(Inline)]
+        public static Movhpd movhpd(AsmHexCode encoded) => new Movhpd(encoded);
+
+        public struct Vmovhpd : IAsmInstruction<Vmovhpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovhpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVHPD;
 
             public static implicit operator AsmMnemonicCode(Vmovhpd src) => src.Mnemonic;
@@ -3769,8 +9115,19 @@ namespace Z0.Asm
 
         public static Vmovhpd vmovhpd() => default;
 
-        public readonly struct Movhps : IAsmInstruction<Movhps>
+        [MethodImpl(Inline)]
+        public static Vmovhpd vmovhpd(AsmHexCode encoded) => new Vmovhpd(encoded);
+
+        public struct Movhps : IAsmInstruction<Movhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVHPS;
 
             public static implicit operator AsmMnemonicCode(Movhps src) => src.Mnemonic;
@@ -3780,8 +9137,19 @@ namespace Z0.Asm
 
         public static Movhps movhps() => default;
 
-        public readonly struct Vmovhps : IAsmInstruction<Vmovhps>
+        [MethodImpl(Inline)]
+        public static Movhps movhps(AsmHexCode encoded) => new Movhps(encoded);
+
+        public struct Vmovhps : IAsmInstruction<Vmovhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVHPS;
 
             public static implicit operator AsmMnemonicCode(Vmovhps src) => src.Mnemonic;
@@ -3791,8 +9159,19 @@ namespace Z0.Asm
 
         public static Vmovhps vmovhps() => default;
 
-        public readonly struct Movlhps : IAsmInstruction<Movlhps>
+        [MethodImpl(Inline)]
+        public static Vmovhps vmovhps(AsmHexCode encoded) => new Vmovhps(encoded);
+
+        public struct Movlhps : IAsmInstruction<Movlhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movlhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVLHPS;
 
             public static implicit operator AsmMnemonicCode(Movlhps src) => src.Mnemonic;
@@ -3802,8 +9181,19 @@ namespace Z0.Asm
 
         public static Movlhps movlhps() => default;
 
-        public readonly struct Vmovlhps : IAsmInstruction<Vmovlhps>
+        [MethodImpl(Inline)]
+        public static Movlhps movlhps(AsmHexCode encoded) => new Movlhps(encoded);
+
+        public struct Vmovlhps : IAsmInstruction<Vmovlhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovlhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVLHPS;
 
             public static implicit operator AsmMnemonicCode(Vmovlhps src) => src.Mnemonic;
@@ -3813,8 +9203,19 @@ namespace Z0.Asm
 
         public static Vmovlhps vmovlhps() => default;
 
-        public readonly struct Movlpd : IAsmInstruction<Movlpd>
+        [MethodImpl(Inline)]
+        public static Vmovlhps vmovlhps(AsmHexCode encoded) => new Vmovlhps(encoded);
+
+        public struct Movlpd : IAsmInstruction<Movlpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movlpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVLPD;
 
             public static implicit operator AsmMnemonicCode(Movlpd src) => src.Mnemonic;
@@ -3824,8 +9225,19 @@ namespace Z0.Asm
 
         public static Movlpd movlpd() => default;
 
-        public readonly struct Vmovlpd : IAsmInstruction<Vmovlpd>
+        [MethodImpl(Inline)]
+        public static Movlpd movlpd(AsmHexCode encoded) => new Movlpd(encoded);
+
+        public struct Vmovlpd : IAsmInstruction<Vmovlpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovlpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVLPD;
 
             public static implicit operator AsmMnemonicCode(Vmovlpd src) => src.Mnemonic;
@@ -3835,8 +9247,19 @@ namespace Z0.Asm
 
         public static Vmovlpd vmovlpd() => default;
 
-        public readonly struct Movlps : IAsmInstruction<Movlps>
+        [MethodImpl(Inline)]
+        public static Vmovlpd vmovlpd(AsmHexCode encoded) => new Vmovlpd(encoded);
+
+        public struct Movlps : IAsmInstruction<Movlps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movlps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVLPS;
 
             public static implicit operator AsmMnemonicCode(Movlps src) => src.Mnemonic;
@@ -3846,8 +9269,19 @@ namespace Z0.Asm
 
         public static Movlps movlps() => default;
 
-        public readonly struct Vmovlps : IAsmInstruction<Vmovlps>
+        [MethodImpl(Inline)]
+        public static Movlps movlps(AsmHexCode encoded) => new Movlps(encoded);
+
+        public struct Vmovlps : IAsmInstruction<Vmovlps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovlps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVLPS;
 
             public static implicit operator AsmMnemonicCode(Vmovlps src) => src.Mnemonic;
@@ -3857,8 +9291,19 @@ namespace Z0.Asm
 
         public static Vmovlps vmovlps() => default;
 
-        public readonly struct Movmskpd : IAsmInstruction<Movmskpd>
+        [MethodImpl(Inline)]
+        public static Vmovlps vmovlps(AsmHexCode encoded) => new Vmovlps(encoded);
+
+        public struct Movmskpd : IAsmInstruction<Movmskpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movmskpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVMSKPD;
 
             public static implicit operator AsmMnemonicCode(Movmskpd src) => src.Mnemonic;
@@ -3868,8 +9313,19 @@ namespace Z0.Asm
 
         public static Movmskpd movmskpd() => default;
 
-        public readonly struct Vmovmskpd : IAsmInstruction<Vmovmskpd>
+        [MethodImpl(Inline)]
+        public static Movmskpd movmskpd(AsmHexCode encoded) => new Movmskpd(encoded);
+
+        public struct Vmovmskpd : IAsmInstruction<Vmovmskpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovmskpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVMSKPD;
 
             public static implicit operator AsmMnemonicCode(Vmovmskpd src) => src.Mnemonic;
@@ -3879,8 +9335,19 @@ namespace Z0.Asm
 
         public static Vmovmskpd vmovmskpd() => default;
 
-        public readonly struct Movmskps : IAsmInstruction<Movmskps>
+        [MethodImpl(Inline)]
+        public static Vmovmskpd vmovmskpd(AsmHexCode encoded) => new Vmovmskpd(encoded);
+
+        public struct Movmskps : IAsmInstruction<Movmskps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movmskps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVMSKPS;
 
             public static implicit operator AsmMnemonicCode(Movmskps src) => src.Mnemonic;
@@ -3890,8 +9357,19 @@ namespace Z0.Asm
 
         public static Movmskps movmskps() => default;
 
-        public readonly struct Vmovmskps : IAsmInstruction<Vmovmskps>
+        [MethodImpl(Inline)]
+        public static Movmskps movmskps(AsmHexCode encoded) => new Movmskps(encoded);
+
+        public struct Vmovmskps : IAsmInstruction<Vmovmskps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovmskps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVMSKPS;
 
             public static implicit operator AsmMnemonicCode(Vmovmskps src) => src.Mnemonic;
@@ -3901,8 +9379,19 @@ namespace Z0.Asm
 
         public static Vmovmskps vmovmskps() => default;
 
-        public readonly struct Movntdqa : IAsmInstruction<Movntdqa>
+        [MethodImpl(Inline)]
+        public static Vmovmskps vmovmskps(AsmHexCode encoded) => new Vmovmskps(encoded);
+
+        public struct Movntdqa : IAsmInstruction<Movntdqa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movntdqa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTDQA;
 
             public static implicit operator AsmMnemonicCode(Movntdqa src) => src.Mnemonic;
@@ -3912,8 +9401,19 @@ namespace Z0.Asm
 
         public static Movntdqa movntdqa() => default;
 
-        public readonly struct Vmovntdqa : IAsmInstruction<Vmovntdqa>
+        [MethodImpl(Inline)]
+        public static Movntdqa movntdqa(AsmHexCode encoded) => new Movntdqa(encoded);
+
+        public struct Vmovntdqa : IAsmInstruction<Vmovntdqa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovntdqa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVNTDQA;
 
             public static implicit operator AsmMnemonicCode(Vmovntdqa src) => src.Mnemonic;
@@ -3923,8 +9423,19 @@ namespace Z0.Asm
 
         public static Vmovntdqa vmovntdqa() => default;
 
-        public readonly struct Movntdq : IAsmInstruction<Movntdq>
+        [MethodImpl(Inline)]
+        public static Vmovntdqa vmovntdqa(AsmHexCode encoded) => new Vmovntdqa(encoded);
+
+        public struct Movntdq : IAsmInstruction<Movntdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movntdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTDQ;
 
             public static implicit operator AsmMnemonicCode(Movntdq src) => src.Mnemonic;
@@ -3934,8 +9445,19 @@ namespace Z0.Asm
 
         public static Movntdq movntdq() => default;
 
-        public readonly struct Vmovntdq : IAsmInstruction<Vmovntdq>
+        [MethodImpl(Inline)]
+        public static Movntdq movntdq(AsmHexCode encoded) => new Movntdq(encoded);
+
+        public struct Vmovntdq : IAsmInstruction<Vmovntdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovntdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVNTDQ;
 
             public static implicit operator AsmMnemonicCode(Vmovntdq src) => src.Mnemonic;
@@ -3945,8 +9467,19 @@ namespace Z0.Asm
 
         public static Vmovntdq vmovntdq() => default;
 
-        public readonly struct Movnti : IAsmInstruction<Movnti>
+        [MethodImpl(Inline)]
+        public static Vmovntdq vmovntdq(AsmHexCode encoded) => new Vmovntdq(encoded);
+
+        public struct Movnti : IAsmInstruction<Movnti>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movnti(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTI;
 
             public static implicit operator AsmMnemonicCode(Movnti src) => src.Mnemonic;
@@ -3956,8 +9489,19 @@ namespace Z0.Asm
 
         public static Movnti movnti() => default;
 
-        public readonly struct Movntpd : IAsmInstruction<Movntpd>
+        [MethodImpl(Inline)]
+        public static Movnti movnti(AsmHexCode encoded) => new Movnti(encoded);
+
+        public struct Movntpd : IAsmInstruction<Movntpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movntpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTPD;
 
             public static implicit operator AsmMnemonicCode(Movntpd src) => src.Mnemonic;
@@ -3967,8 +9511,19 @@ namespace Z0.Asm
 
         public static Movntpd movntpd() => default;
 
-        public readonly struct Vmovntpd : IAsmInstruction<Vmovntpd>
+        [MethodImpl(Inline)]
+        public static Movntpd movntpd(AsmHexCode encoded) => new Movntpd(encoded);
+
+        public struct Vmovntpd : IAsmInstruction<Vmovntpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovntpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVNTPD;
 
             public static implicit operator AsmMnemonicCode(Vmovntpd src) => src.Mnemonic;
@@ -3978,8 +9533,19 @@ namespace Z0.Asm
 
         public static Vmovntpd vmovntpd() => default;
 
-        public readonly struct Movntps : IAsmInstruction<Movntps>
+        [MethodImpl(Inline)]
+        public static Vmovntpd vmovntpd(AsmHexCode encoded) => new Vmovntpd(encoded);
+
+        public struct Movntps : IAsmInstruction<Movntps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movntps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTPS;
 
             public static implicit operator AsmMnemonicCode(Movntps src) => src.Mnemonic;
@@ -3989,8 +9555,19 @@ namespace Z0.Asm
 
         public static Movntps movntps() => default;
 
-        public readonly struct Vmovntps : IAsmInstruction<Vmovntps>
+        [MethodImpl(Inline)]
+        public static Movntps movntps(AsmHexCode encoded) => new Movntps(encoded);
+
+        public struct Vmovntps : IAsmInstruction<Vmovntps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovntps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVNTPS;
 
             public static implicit operator AsmMnemonicCode(Vmovntps src) => src.Mnemonic;
@@ -4000,8 +9577,19 @@ namespace Z0.Asm
 
         public static Vmovntps vmovntps() => default;
 
-        public readonly struct Movntq : IAsmInstruction<Movntq>
+        [MethodImpl(Inline)]
+        public static Vmovntps vmovntps(AsmHexCode encoded) => new Vmovntps(encoded);
+
+        public struct Movntq : IAsmInstruction<Movntq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movntq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVNTQ;
 
             public static implicit operator AsmMnemonicCode(Movntq src) => src.Mnemonic;
@@ -4011,8 +9599,19 @@ namespace Z0.Asm
 
         public static Movntq movntq() => default;
 
-        public readonly struct Movq2dq : IAsmInstruction<Movq2dq>
+        [MethodImpl(Inline)]
+        public static Movntq movntq(AsmHexCode encoded) => new Movntq(encoded);
+
+        public struct Movq2dq : IAsmInstruction<Movq2dq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movq2dq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVQ2DQ;
 
             public static implicit operator AsmMnemonicCode(Movq2dq src) => src.Mnemonic;
@@ -4022,8 +9621,19 @@ namespace Z0.Asm
 
         public static Movq2dq movq2dq() => default;
 
-        public readonly struct Movs : IAsmInstruction<Movs>
+        [MethodImpl(Inline)]
+        public static Movq2dq movq2dq(AsmHexCode encoded) => new Movq2dq(encoded);
+
+        public struct Movs : IAsmInstruction<Movs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVS;
 
             public static implicit operator AsmMnemonicCode(Movs src) => src.Mnemonic;
@@ -4033,8 +9643,63 @@ namespace Z0.Asm
 
         public static Movs movs() => default;
 
-        public readonly struct Movsd : IAsmInstruction<Movsd>
+        [MethodImpl(Inline)]
+        public static Movs movs(AsmHexCode encoded) => new Movs(encoded);
+
+        public struct Movsb : IAsmInstruction<Movsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSB;
+
+            public static implicit operator AsmMnemonicCode(Movsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Movsb src) => AsmMnemonics.MOVSB;
+        }
+
+        public static Movsb movsb() => default;
+
+        [MethodImpl(Inline)]
+        public static Movsb movsb(AsmHexCode encoded) => new Movsb(encoded);
+
+        public struct Movsw : IAsmInstruction<Movsw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSW;
+
+            public static implicit operator AsmMnemonicCode(Movsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Movsw src) => AsmMnemonics.MOVSW;
+        }
+
+        public static Movsw movsw() => default;
+
+        [MethodImpl(Inline)]
+        public static Movsw movsw(AsmHexCode encoded) => new Movsw(encoded);
+
+        public struct Movsd : IAsmInstruction<Movsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSD;
 
             public static implicit operator AsmMnemonicCode(Movsd src) => src.Mnemonic;
@@ -4044,8 +9709,41 @@ namespace Z0.Asm
 
         public static Movsd movsd() => default;
 
-        public readonly struct Vmovsd : IAsmInstruction<Vmovsd>
+        [MethodImpl(Inline)]
+        public static Movsd movsd(AsmHexCode encoded) => new Movsd(encoded);
+
+        public struct Movsq : IAsmInstruction<Movsq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSQ;
+
+            public static implicit operator AsmMnemonicCode(Movsq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Movsq src) => AsmMnemonics.MOVSQ;
+        }
+
+        public static Movsq movsq() => default;
+
+        [MethodImpl(Inline)]
+        public static Movsq movsq(AsmHexCode encoded) => new Movsq(encoded);
+
+        public struct Vmovsd : IAsmInstruction<Vmovsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVSD;
 
             public static implicit operator AsmMnemonicCode(Vmovsd src) => src.Mnemonic;
@@ -4055,8 +9753,19 @@ namespace Z0.Asm
 
         public static Vmovsd vmovsd() => default;
 
-        public readonly struct Movshdup : IAsmInstruction<Movshdup>
+        [MethodImpl(Inline)]
+        public static Vmovsd vmovsd(AsmHexCode encoded) => new Vmovsd(encoded);
+
+        public struct Movshdup : IAsmInstruction<Movshdup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movshdup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSHDUP;
 
             public static implicit operator AsmMnemonicCode(Movshdup src) => src.Mnemonic;
@@ -4066,8 +9775,19 @@ namespace Z0.Asm
 
         public static Movshdup movshdup() => default;
 
-        public readonly struct Vmovshdup : IAsmInstruction<Vmovshdup>
+        [MethodImpl(Inline)]
+        public static Movshdup movshdup(AsmHexCode encoded) => new Movshdup(encoded);
+
+        public struct Vmovshdup : IAsmInstruction<Vmovshdup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovshdup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVSHDUP;
 
             public static implicit operator AsmMnemonicCode(Vmovshdup src) => src.Mnemonic;
@@ -4077,8 +9797,19 @@ namespace Z0.Asm
 
         public static Vmovshdup vmovshdup() => default;
 
-        public readonly struct Movsldup : IAsmInstruction<Movsldup>
+        [MethodImpl(Inline)]
+        public static Vmovshdup vmovshdup(AsmHexCode encoded) => new Vmovshdup(encoded);
+
+        public struct Movsldup : IAsmInstruction<Movsldup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsldup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSLDUP;
 
             public static implicit operator AsmMnemonicCode(Movsldup src) => src.Mnemonic;
@@ -4088,8 +9819,19 @@ namespace Z0.Asm
 
         public static Movsldup movsldup() => default;
 
-        public readonly struct Vmovsldup : IAsmInstruction<Vmovsldup>
+        [MethodImpl(Inline)]
+        public static Movsldup movsldup(AsmHexCode encoded) => new Movsldup(encoded);
+
+        public struct Vmovsldup : IAsmInstruction<Vmovsldup>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovsldup(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVSLDUP;
 
             public static implicit operator AsmMnemonicCode(Vmovsldup src) => src.Mnemonic;
@@ -4099,8 +9841,19 @@ namespace Z0.Asm
 
         public static Vmovsldup vmovsldup() => default;
 
-        public readonly struct Movss : IAsmInstruction<Movss>
+        [MethodImpl(Inline)]
+        public static Vmovsldup vmovsldup(AsmHexCode encoded) => new Vmovsldup(encoded);
+
+        public struct Movss : IAsmInstruction<Movss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSS;
 
             public static implicit operator AsmMnemonicCode(Movss src) => src.Mnemonic;
@@ -4110,8 +9863,19 @@ namespace Z0.Asm
 
         public static Movss movss() => default;
 
-        public readonly struct Vmovss : IAsmInstruction<Vmovss>
+        [MethodImpl(Inline)]
+        public static Movss movss(AsmHexCode encoded) => new Movss(encoded);
+
+        public struct Vmovss : IAsmInstruction<Vmovss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVSS;
 
             public static implicit operator AsmMnemonicCode(Vmovss src) => src.Mnemonic;
@@ -4121,8 +9885,19 @@ namespace Z0.Asm
 
         public static Vmovss vmovss() => default;
 
-        public readonly struct Movsx : IAsmInstruction<Movsx>
+        [MethodImpl(Inline)]
+        public static Vmovss vmovss(AsmHexCode encoded) => new Vmovss(encoded);
+
+        public struct Movsx : IAsmInstruction<Movsx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSX;
 
             public static implicit operator AsmMnemonicCode(Movsx src) => src.Mnemonic;
@@ -4132,8 +9907,19 @@ namespace Z0.Asm
 
         public static Movsx movsx() => default;
 
-        public readonly struct Movsxd : IAsmInstruction<Movsxd>
+        [MethodImpl(Inline)]
+        public static Movsx movsx(AsmHexCode encoded) => new Movsx(encoded);
+
+        public struct Movsxd : IAsmInstruction<Movsxd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movsxd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVSXD;
 
             public static implicit operator AsmMnemonicCode(Movsxd src) => src.Mnemonic;
@@ -4143,8 +9929,19 @@ namespace Z0.Asm
 
         public static Movsxd movsxd() => default;
 
-        public readonly struct Movupd : IAsmInstruction<Movupd>
+        [MethodImpl(Inline)]
+        public static Movsxd movsxd(AsmHexCode encoded) => new Movsxd(encoded);
+
+        public struct Movupd : IAsmInstruction<Movupd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movupd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVUPD;
 
             public static implicit operator AsmMnemonicCode(Movupd src) => src.Mnemonic;
@@ -4154,8 +9951,19 @@ namespace Z0.Asm
 
         public static Movupd movupd() => default;
 
-        public readonly struct Vmovupd : IAsmInstruction<Vmovupd>
+        [MethodImpl(Inline)]
+        public static Movupd movupd(AsmHexCode encoded) => new Movupd(encoded);
+
+        public struct Vmovupd : IAsmInstruction<Vmovupd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovupd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVUPD;
 
             public static implicit operator AsmMnemonicCode(Vmovupd src) => src.Mnemonic;
@@ -4165,8 +9973,19 @@ namespace Z0.Asm
 
         public static Vmovupd vmovupd() => default;
 
-        public readonly struct Movups : IAsmInstruction<Movups>
+        [MethodImpl(Inline)]
+        public static Vmovupd vmovupd(AsmHexCode encoded) => new Vmovupd(encoded);
+
+        public struct Movups : IAsmInstruction<Movups>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movups(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVUPS;
 
             public static implicit operator AsmMnemonicCode(Movups src) => src.Mnemonic;
@@ -4176,8 +9995,19 @@ namespace Z0.Asm
 
         public static Movups movups() => default;
 
-        public readonly struct Vmovups : IAsmInstruction<Vmovups>
+        [MethodImpl(Inline)]
+        public static Movups movups(AsmHexCode encoded) => new Movups(encoded);
+
+        public struct Vmovups : IAsmInstruction<Vmovups>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmovups(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMOVUPS;
 
             public static implicit operator AsmMnemonicCode(Vmovups src) => src.Mnemonic;
@@ -4187,8 +10017,19 @@ namespace Z0.Asm
 
         public static Vmovups vmovups() => default;
 
-        public readonly struct Movzx : IAsmInstruction<Movzx>
+        [MethodImpl(Inline)]
+        public static Vmovups vmovups(AsmHexCode encoded) => new Vmovups(encoded);
+
+        public struct Movzx : IAsmInstruction<Movzx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Movzx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MOVZX;
 
             public static implicit operator AsmMnemonicCode(Movzx src) => src.Mnemonic;
@@ -4198,8 +10039,19 @@ namespace Z0.Asm
 
         public static Movzx movzx() => default;
 
-        public readonly struct Mpsadbw : IAsmInstruction<Mpsadbw>
+        [MethodImpl(Inline)]
+        public static Movzx movzx(AsmHexCode encoded) => new Movzx(encoded);
+
+        public struct Mpsadbw : IAsmInstruction<Mpsadbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mpsadbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MPSADBW;
 
             public static implicit operator AsmMnemonicCode(Mpsadbw src) => src.Mnemonic;
@@ -4209,8 +10061,19 @@ namespace Z0.Asm
 
         public static Mpsadbw mpsadbw() => default;
 
-        public readonly struct Vmpsadbw : IAsmInstruction<Vmpsadbw>
+        [MethodImpl(Inline)]
+        public static Mpsadbw mpsadbw(AsmHexCode encoded) => new Mpsadbw(encoded);
+
+        public struct Vmpsadbw : IAsmInstruction<Vmpsadbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmpsadbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMPSADBW;
 
             public static implicit operator AsmMnemonicCode(Vmpsadbw src) => src.Mnemonic;
@@ -4220,8 +10083,19 @@ namespace Z0.Asm
 
         public static Vmpsadbw vmpsadbw() => default;
 
-        public readonly struct Mul : IAsmInstruction<Mul>
+        [MethodImpl(Inline)]
+        public static Vmpsadbw vmpsadbw(AsmHexCode encoded) => new Vmpsadbw(encoded);
+
+        public struct Mul : IAsmInstruction<Mul>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mul(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MUL;
 
             public static implicit operator AsmMnemonicCode(Mul src) => src.Mnemonic;
@@ -4231,8 +10105,19 @@ namespace Z0.Asm
 
         public static Mul mul() => default;
 
-        public readonly struct Mulpd : IAsmInstruction<Mulpd>
+        [MethodImpl(Inline)]
+        public static Mul mul(AsmHexCode encoded) => new Mul(encoded);
+
+        public struct Mulpd : IAsmInstruction<Mulpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mulpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MULPD;
 
             public static implicit operator AsmMnemonicCode(Mulpd src) => src.Mnemonic;
@@ -4242,8 +10127,19 @@ namespace Z0.Asm
 
         public static Mulpd mulpd() => default;
 
-        public readonly struct Vmulpd : IAsmInstruction<Vmulpd>
+        [MethodImpl(Inline)]
+        public static Mulpd mulpd(AsmHexCode encoded) => new Mulpd(encoded);
+
+        public struct Vmulpd : IAsmInstruction<Vmulpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmulpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMULPD;
 
             public static implicit operator AsmMnemonicCode(Vmulpd src) => src.Mnemonic;
@@ -4253,8 +10149,19 @@ namespace Z0.Asm
 
         public static Vmulpd vmulpd() => default;
 
-        public readonly struct Mulps : IAsmInstruction<Mulps>
+        [MethodImpl(Inline)]
+        public static Vmulpd vmulpd(AsmHexCode encoded) => new Vmulpd(encoded);
+
+        public struct Mulps : IAsmInstruction<Mulps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mulps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MULPS;
 
             public static implicit operator AsmMnemonicCode(Mulps src) => src.Mnemonic;
@@ -4264,8 +10171,19 @@ namespace Z0.Asm
 
         public static Mulps mulps() => default;
 
-        public readonly struct Vmulps : IAsmInstruction<Vmulps>
+        [MethodImpl(Inline)]
+        public static Mulps mulps(AsmHexCode encoded) => new Mulps(encoded);
+
+        public struct Vmulps : IAsmInstruction<Vmulps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmulps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMULPS;
 
             public static implicit operator AsmMnemonicCode(Vmulps src) => src.Mnemonic;
@@ -4275,8 +10193,19 @@ namespace Z0.Asm
 
         public static Vmulps vmulps() => default;
 
-        public readonly struct Mulsd : IAsmInstruction<Mulsd>
+        [MethodImpl(Inline)]
+        public static Vmulps vmulps(AsmHexCode encoded) => new Vmulps(encoded);
+
+        public struct Mulsd : IAsmInstruction<Mulsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mulsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MULSD;
 
             public static implicit operator AsmMnemonicCode(Mulsd src) => src.Mnemonic;
@@ -4286,8 +10215,19 @@ namespace Z0.Asm
 
         public static Mulsd mulsd() => default;
 
-        public readonly struct Vmulsd : IAsmInstruction<Vmulsd>
+        [MethodImpl(Inline)]
+        public static Mulsd mulsd(AsmHexCode encoded) => new Mulsd(encoded);
+
+        public struct Vmulsd : IAsmInstruction<Vmulsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmulsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMULSD;
 
             public static implicit operator AsmMnemonicCode(Vmulsd src) => src.Mnemonic;
@@ -4297,8 +10237,19 @@ namespace Z0.Asm
 
         public static Vmulsd vmulsd() => default;
 
-        public readonly struct Mulss : IAsmInstruction<Mulss>
+        [MethodImpl(Inline)]
+        public static Vmulsd vmulsd(AsmHexCode encoded) => new Vmulsd(encoded);
+
+        public struct Mulss : IAsmInstruction<Mulss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mulss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MULSS;
 
             public static implicit operator AsmMnemonicCode(Mulss src) => src.Mnemonic;
@@ -4308,8 +10259,19 @@ namespace Z0.Asm
 
         public static Mulss mulss() => default;
 
-        public readonly struct Vmulss : IAsmInstruction<Vmulss>
+        [MethodImpl(Inline)]
+        public static Mulss mulss(AsmHexCode encoded) => new Mulss(encoded);
+
+        public struct Vmulss : IAsmInstruction<Vmulss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmulss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMULSS;
 
             public static implicit operator AsmMnemonicCode(Vmulss src) => src.Mnemonic;
@@ -4319,8 +10281,19 @@ namespace Z0.Asm
 
         public static Vmulss vmulss() => default;
 
-        public readonly struct Mulx : IAsmInstruction<Mulx>
+        [MethodImpl(Inline)]
+        public static Vmulss vmulss(AsmHexCode encoded) => new Vmulss(encoded);
+
+        public struct Mulx : IAsmInstruction<Mulx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mulx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MULX;
 
             public static implicit operator AsmMnemonicCode(Mulx src) => src.Mnemonic;
@@ -4330,8 +10303,41 @@ namespace Z0.Asm
 
         public static Mulx mulx() => default;
 
-        public readonly struct Neg : IAsmInstruction<Neg>
+        [MethodImpl(Inline)]
+        public static Mulx mulx(AsmHexCode encoded) => new Mulx(encoded);
+
+        public struct Mwait : IAsmInstruction<Mwait>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Mwait(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.MWAIT;
+
+            public static implicit operator AsmMnemonicCode(Mwait src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Mwait src) => AsmMnemonics.MWAIT;
+        }
+
+        public static Mwait mwait() => default;
+
+        [MethodImpl(Inline)]
+        public static Mwait mwait(AsmHexCode encoded) => new Mwait(encoded);
+
+        public struct Neg : IAsmInstruction<Neg>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Neg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.NEG;
 
             public static implicit operator AsmMnemonicCode(Neg src) => src.Mnemonic;
@@ -4341,8 +10347,19 @@ namespace Z0.Asm
 
         public static Neg neg() => default;
 
-        public readonly struct Nop : IAsmInstruction<Nop>
+        [MethodImpl(Inline)]
+        public static Neg neg(AsmHexCode encoded) => new Neg(encoded);
+
+        public struct Nop : IAsmInstruction<Nop>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Nop(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.NOP;
 
             public static implicit operator AsmMnemonicCode(Nop src) => src.Mnemonic;
@@ -4352,8 +10369,19 @@ namespace Z0.Asm
 
         public static Nop nop() => default;
 
-        public readonly struct Not : IAsmInstruction<Not>
+        [MethodImpl(Inline)]
+        public static Nop nop(AsmHexCode encoded) => new Nop(encoded);
+
+        public struct Not : IAsmInstruction<Not>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Not(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.NOT;
 
             public static implicit operator AsmMnemonicCode(Not src) => src.Mnemonic;
@@ -4363,8 +10391,19 @@ namespace Z0.Asm
 
         public static Not not() => default;
 
-        public readonly struct Or : IAsmInstruction<Or>
+        [MethodImpl(Inline)]
+        public static Not not(AsmHexCode encoded) => new Not(encoded);
+
+        public struct Or : IAsmInstruction<Or>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Or(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OR;
 
             public static implicit operator AsmMnemonicCode(Or src) => src.Mnemonic;
@@ -4374,8 +10413,19 @@ namespace Z0.Asm
 
         public static Or or() => default;
 
-        public readonly struct Orpd : IAsmInstruction<Orpd>
+        [MethodImpl(Inline)]
+        public static Or or(AsmHexCode encoded) => new Or(encoded);
+
+        public struct Orpd : IAsmInstruction<Orpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Orpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ORPD;
 
             public static implicit operator AsmMnemonicCode(Orpd src) => src.Mnemonic;
@@ -4385,8 +10435,19 @@ namespace Z0.Asm
 
         public static Orpd orpd() => default;
 
-        public readonly struct Vorpd : IAsmInstruction<Vorpd>
+        [MethodImpl(Inline)]
+        public static Orpd orpd(AsmHexCode encoded) => new Orpd(encoded);
+
+        public struct Vorpd : IAsmInstruction<Vorpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vorpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VORPD;
 
             public static implicit operator AsmMnemonicCode(Vorpd src) => src.Mnemonic;
@@ -4396,8 +10457,19 @@ namespace Z0.Asm
 
         public static Vorpd vorpd() => default;
 
-        public readonly struct Orps : IAsmInstruction<Orps>
+        [MethodImpl(Inline)]
+        public static Vorpd vorpd(AsmHexCode encoded) => new Vorpd(encoded);
+
+        public struct Orps : IAsmInstruction<Orps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Orps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ORPS;
 
             public static implicit operator AsmMnemonicCode(Orps src) => src.Mnemonic;
@@ -4407,8 +10479,19 @@ namespace Z0.Asm
 
         public static Orps orps() => default;
 
-        public readonly struct Vorps : IAsmInstruction<Vorps>
+        [MethodImpl(Inline)]
+        public static Orps orps(AsmHexCode encoded) => new Orps(encoded);
+
+        public struct Vorps : IAsmInstruction<Vorps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vorps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VORPS;
 
             public static implicit operator AsmMnemonicCode(Vorps src) => src.Mnemonic;
@@ -4418,8 +10501,19 @@ namespace Z0.Asm
 
         public static Vorps vorps() => default;
 
-        public readonly struct Out : IAsmInstruction<Out>
+        [MethodImpl(Inline)]
+        public static Vorps vorps(AsmHexCode encoded) => new Vorps(encoded);
+
+        public struct Out : IAsmInstruction<Out>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Out(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OUT;
 
             public static implicit operator AsmMnemonicCode(Out src) => src.Mnemonic;
@@ -4429,8 +10523,19 @@ namespace Z0.Asm
 
         public static Out @out() => default;
 
-        public readonly struct Outs : IAsmInstruction<Outs>
+        [MethodImpl(Inline)]
+        public static Out @out(AsmHexCode encoded) => new Out(encoded);
+
+        public struct Outs : IAsmInstruction<Outs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Outs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OUTS;
 
             public static implicit operator AsmMnemonicCode(Outs src) => src.Mnemonic;
@@ -4440,8 +10545,85 @@ namespace Z0.Asm
 
         public static Outs outs() => default;
 
-        public readonly struct Pabsb : IAsmInstruction<Pabsb>
+        [MethodImpl(Inline)]
+        public static Outs outs(AsmHexCode encoded) => new Outs(encoded);
+
+        public struct Outsb : IAsmInstruction<Outsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Outsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OUTSB;
+
+            public static implicit operator AsmMnemonicCode(Outsb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Outsb src) => AsmMnemonics.OUTSB;
+        }
+
+        public static Outsb outsb() => default;
+
+        [MethodImpl(Inline)]
+        public static Outsb outsb(AsmHexCode encoded) => new Outsb(encoded);
+
+        public struct Outsw : IAsmInstruction<Outsw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Outsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OUTSW;
+
+            public static implicit operator AsmMnemonicCode(Outsw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Outsw src) => AsmMnemonics.OUTSW;
+        }
+
+        public static Outsw outsw() => default;
+
+        [MethodImpl(Inline)]
+        public static Outsw outsw(AsmHexCode encoded) => new Outsw(encoded);
+
+        public struct Outsd : IAsmInstruction<Outsd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Outsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.OUTSD;
+
+            public static implicit operator AsmMnemonicCode(Outsd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Outsd src) => AsmMnemonics.OUTSD;
+        }
+
+        public static Outsd outsd() => default;
+
+        [MethodImpl(Inline)]
+        public static Outsd outsd(AsmHexCode encoded) => new Outsd(encoded);
+
+        public struct Pabsb : IAsmInstruction<Pabsb>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pabsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PABSB;
 
             public static implicit operator AsmMnemonicCode(Pabsb src) => src.Mnemonic;
@@ -4451,8 +10633,19 @@ namespace Z0.Asm
 
         public static Pabsb pabsb() => default;
 
-        public readonly struct Pabsw : IAsmInstruction<Pabsw>
+        [MethodImpl(Inline)]
+        public static Pabsb pabsb(AsmHexCode encoded) => new Pabsb(encoded);
+
+        public struct Pabsw : IAsmInstruction<Pabsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pabsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PABSW;
 
             public static implicit operator AsmMnemonicCode(Pabsw src) => src.Mnemonic;
@@ -4462,8 +10655,19 @@ namespace Z0.Asm
 
         public static Pabsw pabsw() => default;
 
-        public readonly struct Pabsd : IAsmInstruction<Pabsd>
+        [MethodImpl(Inline)]
+        public static Pabsw pabsw(AsmHexCode encoded) => new Pabsw(encoded);
+
+        public struct Pabsd : IAsmInstruction<Pabsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pabsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PABSD;
 
             public static implicit operator AsmMnemonicCode(Pabsd src) => src.Mnemonic;
@@ -4473,8 +10677,19 @@ namespace Z0.Asm
 
         public static Pabsd pabsd() => default;
 
-        public readonly struct Vpabsb : IAsmInstruction<Vpabsb>
+        [MethodImpl(Inline)]
+        public static Pabsd pabsd(AsmHexCode encoded) => new Pabsd(encoded);
+
+        public struct Vpabsb : IAsmInstruction<Vpabsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpabsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPABSB;
 
             public static implicit operator AsmMnemonicCode(Vpabsb src) => src.Mnemonic;
@@ -4484,8 +10699,19 @@ namespace Z0.Asm
 
         public static Vpabsb vpabsb() => default;
 
-        public readonly struct Vpabsw : IAsmInstruction<Vpabsw>
+        [MethodImpl(Inline)]
+        public static Vpabsb vpabsb(AsmHexCode encoded) => new Vpabsb(encoded);
+
+        public struct Vpabsw : IAsmInstruction<Vpabsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpabsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPABSW;
 
             public static implicit operator AsmMnemonicCode(Vpabsw src) => src.Mnemonic;
@@ -4495,8 +10721,19 @@ namespace Z0.Asm
 
         public static Vpabsw vpabsw() => default;
 
-        public readonly struct Vpabsd : IAsmInstruction<Vpabsd>
+        [MethodImpl(Inline)]
+        public static Vpabsw vpabsw(AsmHexCode encoded) => new Vpabsw(encoded);
+
+        public struct Vpabsd : IAsmInstruction<Vpabsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpabsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPABSD;
 
             public static implicit operator AsmMnemonicCode(Vpabsd src) => src.Mnemonic;
@@ -4506,8 +10743,19 @@ namespace Z0.Asm
 
         public static Vpabsd vpabsd() => default;
 
-        public readonly struct Packsswb : IAsmInstruction<Packsswb>
+        [MethodImpl(Inline)]
+        public static Vpabsd vpabsd(AsmHexCode encoded) => new Vpabsd(encoded);
+
+        public struct Packsswb : IAsmInstruction<Packsswb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Packsswb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PACKSSWB;
 
             public static implicit operator AsmMnemonicCode(Packsswb src) => src.Mnemonic;
@@ -4517,8 +10765,19 @@ namespace Z0.Asm
 
         public static Packsswb packsswb() => default;
 
-        public readonly struct Packssdw : IAsmInstruction<Packssdw>
+        [MethodImpl(Inline)]
+        public static Packsswb packsswb(AsmHexCode encoded) => new Packsswb(encoded);
+
+        public struct Packssdw : IAsmInstruction<Packssdw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Packssdw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PACKSSDW;
 
             public static implicit operator AsmMnemonicCode(Packssdw src) => src.Mnemonic;
@@ -4528,8 +10787,19 @@ namespace Z0.Asm
 
         public static Packssdw packssdw() => default;
 
-        public readonly struct Vpacksswb : IAsmInstruction<Vpacksswb>
+        [MethodImpl(Inline)]
+        public static Packssdw packssdw(AsmHexCode encoded) => new Packssdw(encoded);
+
+        public struct Vpacksswb : IAsmInstruction<Vpacksswb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpacksswb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPACKSSWB;
 
             public static implicit operator AsmMnemonicCode(Vpacksswb src) => src.Mnemonic;
@@ -4539,8 +10809,19 @@ namespace Z0.Asm
 
         public static Vpacksswb vpacksswb() => default;
 
-        public readonly struct Vpackssdw : IAsmInstruction<Vpackssdw>
+        [MethodImpl(Inline)]
+        public static Vpacksswb vpacksswb(AsmHexCode encoded) => new Vpacksswb(encoded);
+
+        public struct Vpackssdw : IAsmInstruction<Vpackssdw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpackssdw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPACKSSDW;
 
             public static implicit operator AsmMnemonicCode(Vpackssdw src) => src.Mnemonic;
@@ -4550,8 +10831,19 @@ namespace Z0.Asm
 
         public static Vpackssdw vpackssdw() => default;
 
-        public readonly struct Packusdw : IAsmInstruction<Packusdw>
+        [MethodImpl(Inline)]
+        public static Vpackssdw vpackssdw(AsmHexCode encoded) => new Vpackssdw(encoded);
+
+        public struct Packusdw : IAsmInstruction<Packusdw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Packusdw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PACKUSDW;
 
             public static implicit operator AsmMnemonicCode(Packusdw src) => src.Mnemonic;
@@ -4561,8 +10853,19 @@ namespace Z0.Asm
 
         public static Packusdw packusdw() => default;
 
-        public readonly struct Vpackusdw : IAsmInstruction<Vpackusdw>
+        [MethodImpl(Inline)]
+        public static Packusdw packusdw(AsmHexCode encoded) => new Packusdw(encoded);
+
+        public struct Vpackusdw : IAsmInstruction<Vpackusdw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpackusdw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPACKUSDW;
 
             public static implicit operator AsmMnemonicCode(Vpackusdw src) => src.Mnemonic;
@@ -4572,8 +10875,19 @@ namespace Z0.Asm
 
         public static Vpackusdw vpackusdw() => default;
 
-        public readonly struct Packuswb : IAsmInstruction<Packuswb>
+        [MethodImpl(Inline)]
+        public static Vpackusdw vpackusdw(AsmHexCode encoded) => new Vpackusdw(encoded);
+
+        public struct Packuswb : IAsmInstruction<Packuswb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Packuswb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PACKUSWB;
 
             public static implicit operator AsmMnemonicCode(Packuswb src) => src.Mnemonic;
@@ -4583,8 +10897,19 @@ namespace Z0.Asm
 
         public static Packuswb packuswb() => default;
 
-        public readonly struct Vpackuswb : IAsmInstruction<Vpackuswb>
+        [MethodImpl(Inline)]
+        public static Packuswb packuswb(AsmHexCode encoded) => new Packuswb(encoded);
+
+        public struct Vpackuswb : IAsmInstruction<Vpackuswb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpackuswb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPACKUSWB;
 
             public static implicit operator AsmMnemonicCode(Vpackuswb src) => src.Mnemonic;
@@ -4594,8 +10919,19 @@ namespace Z0.Asm
 
         public static Vpackuswb vpackuswb() => default;
 
-        public readonly struct Paddb : IAsmInstruction<Paddb>
+        [MethodImpl(Inline)]
+        public static Vpackuswb vpackuswb(AsmHexCode encoded) => new Vpackuswb(encoded);
+
+        public struct Paddb : IAsmInstruction<Paddb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDB;
 
             public static implicit operator AsmMnemonicCode(Paddb src) => src.Mnemonic;
@@ -4605,8 +10941,19 @@ namespace Z0.Asm
 
         public static Paddb paddb() => default;
 
-        public readonly struct Paddw : IAsmInstruction<Paddw>
+        [MethodImpl(Inline)]
+        public static Paddb paddb(AsmHexCode encoded) => new Paddb(encoded);
+
+        public struct Paddw : IAsmInstruction<Paddw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDW;
 
             public static implicit operator AsmMnemonicCode(Paddw src) => src.Mnemonic;
@@ -4616,8 +10963,19 @@ namespace Z0.Asm
 
         public static Paddw paddw() => default;
 
-        public readonly struct Paddd : IAsmInstruction<Paddd>
+        [MethodImpl(Inline)]
+        public static Paddw paddw(AsmHexCode encoded) => new Paddw(encoded);
+
+        public struct Paddd : IAsmInstruction<Paddd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDD;
 
             public static implicit operator AsmMnemonicCode(Paddd src) => src.Mnemonic;
@@ -4627,8 +10985,19 @@ namespace Z0.Asm
 
         public static Paddd paddd() => default;
 
-        public readonly struct Vpaddb : IAsmInstruction<Vpaddb>
+        [MethodImpl(Inline)]
+        public static Paddd paddd(AsmHexCode encoded) => new Paddd(encoded);
+
+        public struct Vpaddb : IAsmInstruction<Vpaddb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDB;
 
             public static implicit operator AsmMnemonicCode(Vpaddb src) => src.Mnemonic;
@@ -4638,8 +11007,19 @@ namespace Z0.Asm
 
         public static Vpaddb vpaddb() => default;
 
-        public readonly struct Vpaddw : IAsmInstruction<Vpaddw>
+        [MethodImpl(Inline)]
+        public static Vpaddb vpaddb(AsmHexCode encoded) => new Vpaddb(encoded);
+
+        public struct Vpaddw : IAsmInstruction<Vpaddw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDW;
 
             public static implicit operator AsmMnemonicCode(Vpaddw src) => src.Mnemonic;
@@ -4649,8 +11029,19 @@ namespace Z0.Asm
 
         public static Vpaddw vpaddw() => default;
 
-        public readonly struct Vpaddd : IAsmInstruction<Vpaddd>
+        [MethodImpl(Inline)]
+        public static Vpaddw vpaddw(AsmHexCode encoded) => new Vpaddw(encoded);
+
+        public struct Vpaddd : IAsmInstruction<Vpaddd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDD;
 
             public static implicit operator AsmMnemonicCode(Vpaddd src) => src.Mnemonic;
@@ -4660,8 +11051,19 @@ namespace Z0.Asm
 
         public static Vpaddd vpaddd() => default;
 
-        public readonly struct Paddq : IAsmInstruction<Paddq>
+        [MethodImpl(Inline)]
+        public static Vpaddd vpaddd(AsmHexCode encoded) => new Vpaddd(encoded);
+
+        public struct Paddq : IAsmInstruction<Paddq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDQ;
 
             public static implicit operator AsmMnemonicCode(Paddq src) => src.Mnemonic;
@@ -4671,8 +11073,19 @@ namespace Z0.Asm
 
         public static Paddq paddq() => default;
 
-        public readonly struct Vpaddq : IAsmInstruction<Vpaddq>
+        [MethodImpl(Inline)]
+        public static Paddq paddq(AsmHexCode encoded) => new Paddq(encoded);
+
+        public struct Vpaddq : IAsmInstruction<Vpaddq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDQ;
 
             public static implicit operator AsmMnemonicCode(Vpaddq src) => src.Mnemonic;
@@ -4682,8 +11095,19 @@ namespace Z0.Asm
 
         public static Vpaddq vpaddq() => default;
 
-        public readonly struct Paddsb : IAsmInstruction<Paddsb>
+        [MethodImpl(Inline)]
+        public static Vpaddq vpaddq(AsmHexCode encoded) => new Vpaddq(encoded);
+
+        public struct Paddsb : IAsmInstruction<Paddsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDSB;
 
             public static implicit operator AsmMnemonicCode(Paddsb src) => src.Mnemonic;
@@ -4693,8 +11117,19 @@ namespace Z0.Asm
 
         public static Paddsb paddsb() => default;
 
-        public readonly struct Paddsw : IAsmInstruction<Paddsw>
+        [MethodImpl(Inline)]
+        public static Paddsb paddsb(AsmHexCode encoded) => new Paddsb(encoded);
+
+        public struct Paddsw : IAsmInstruction<Paddsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDSW;
 
             public static implicit operator AsmMnemonicCode(Paddsw src) => src.Mnemonic;
@@ -4704,8 +11139,19 @@ namespace Z0.Asm
 
         public static Paddsw paddsw() => default;
 
-        public readonly struct Vpaddsb : IAsmInstruction<Vpaddsb>
+        [MethodImpl(Inline)]
+        public static Paddsw paddsw(AsmHexCode encoded) => new Paddsw(encoded);
+
+        public struct Vpaddsb : IAsmInstruction<Vpaddsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDSB;
 
             public static implicit operator AsmMnemonicCode(Vpaddsb src) => src.Mnemonic;
@@ -4715,8 +11161,19 @@ namespace Z0.Asm
 
         public static Vpaddsb vpaddsb() => default;
 
-        public readonly struct Vpaddsw : IAsmInstruction<Vpaddsw>
+        [MethodImpl(Inline)]
+        public static Vpaddsb vpaddsb(AsmHexCode encoded) => new Vpaddsb(encoded);
+
+        public struct Vpaddsw : IAsmInstruction<Vpaddsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDSW;
 
             public static implicit operator AsmMnemonicCode(Vpaddsw src) => src.Mnemonic;
@@ -4726,8 +11183,19 @@ namespace Z0.Asm
 
         public static Vpaddsw vpaddsw() => default;
 
-        public readonly struct Paddusb : IAsmInstruction<Paddusb>
+        [MethodImpl(Inline)]
+        public static Vpaddsw vpaddsw(AsmHexCode encoded) => new Vpaddsw(encoded);
+
+        public struct Paddusb : IAsmInstruction<Paddusb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddusb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDUSB;
 
             public static implicit operator AsmMnemonicCode(Paddusb src) => src.Mnemonic;
@@ -4737,8 +11205,19 @@ namespace Z0.Asm
 
         public static Paddusb paddusb() => default;
 
-        public readonly struct Paddusw : IAsmInstruction<Paddusw>
+        [MethodImpl(Inline)]
+        public static Paddusb paddusb(AsmHexCode encoded) => new Paddusb(encoded);
+
+        public struct Paddusw : IAsmInstruction<Paddusw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Paddusw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PADDUSW;
 
             public static implicit operator AsmMnemonicCode(Paddusw src) => src.Mnemonic;
@@ -4748,8 +11227,19 @@ namespace Z0.Asm
 
         public static Paddusw paddusw() => default;
 
-        public readonly struct Vpaddusb : IAsmInstruction<Vpaddusb>
+        [MethodImpl(Inline)]
+        public static Paddusw paddusw(AsmHexCode encoded) => new Paddusw(encoded);
+
+        public struct Vpaddusb : IAsmInstruction<Vpaddusb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddusb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDUSB;
 
             public static implicit operator AsmMnemonicCode(Vpaddusb src) => src.Mnemonic;
@@ -4759,8 +11249,19 @@ namespace Z0.Asm
 
         public static Vpaddusb vpaddusb() => default;
 
-        public readonly struct Vpaddusw : IAsmInstruction<Vpaddusw>
+        [MethodImpl(Inline)]
+        public static Vpaddusb vpaddusb(AsmHexCode encoded) => new Vpaddusb(encoded);
+
+        public struct Vpaddusw : IAsmInstruction<Vpaddusw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpaddusw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPADDUSW;
 
             public static implicit operator AsmMnemonicCode(Vpaddusw src) => src.Mnemonic;
@@ -4770,8 +11271,19 @@ namespace Z0.Asm
 
         public static Vpaddusw vpaddusw() => default;
 
-        public readonly struct Palignr : IAsmInstruction<Palignr>
+        [MethodImpl(Inline)]
+        public static Vpaddusw vpaddusw(AsmHexCode encoded) => new Vpaddusw(encoded);
+
+        public struct Palignr : IAsmInstruction<Palignr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Palignr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PALIGNR;
 
             public static implicit operator AsmMnemonicCode(Palignr src) => src.Mnemonic;
@@ -4781,8 +11293,19 @@ namespace Z0.Asm
 
         public static Palignr palignr() => default;
 
-        public readonly struct Vpalignr : IAsmInstruction<Vpalignr>
+        [MethodImpl(Inline)]
+        public static Palignr palignr(AsmHexCode encoded) => new Palignr(encoded);
+
+        public struct Vpalignr : IAsmInstruction<Vpalignr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpalignr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPALIGNR;
 
             public static implicit operator AsmMnemonicCode(Vpalignr src) => src.Mnemonic;
@@ -4792,8 +11315,19 @@ namespace Z0.Asm
 
         public static Vpalignr vpalignr() => default;
 
-        public readonly struct Pand : IAsmInstruction<Pand>
+        [MethodImpl(Inline)]
+        public static Vpalignr vpalignr(AsmHexCode encoded) => new Vpalignr(encoded);
+
+        public struct Pand : IAsmInstruction<Pand>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pand(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PAND;
 
             public static implicit operator AsmMnemonicCode(Pand src) => src.Mnemonic;
@@ -4803,8 +11337,19 @@ namespace Z0.Asm
 
         public static Pand pand() => default;
 
-        public readonly struct Vpand : IAsmInstruction<Vpand>
+        [MethodImpl(Inline)]
+        public static Pand pand(AsmHexCode encoded) => new Pand(encoded);
+
+        public struct Vpand : IAsmInstruction<Vpand>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpand(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPAND;
 
             public static implicit operator AsmMnemonicCode(Vpand src) => src.Mnemonic;
@@ -4814,8 +11359,19 @@ namespace Z0.Asm
 
         public static Vpand vpand() => default;
 
-        public readonly struct Pandn : IAsmInstruction<Pandn>
+        [MethodImpl(Inline)]
+        public static Vpand vpand(AsmHexCode encoded) => new Vpand(encoded);
+
+        public struct Pandn : IAsmInstruction<Pandn>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pandn(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PANDN;
 
             public static implicit operator AsmMnemonicCode(Pandn src) => src.Mnemonic;
@@ -4825,8 +11381,19 @@ namespace Z0.Asm
 
         public static Pandn pandn() => default;
 
-        public readonly struct Vpandn : IAsmInstruction<Vpandn>
+        [MethodImpl(Inline)]
+        public static Pandn pandn(AsmHexCode encoded) => new Pandn(encoded);
+
+        public struct Vpandn : IAsmInstruction<Vpandn>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpandn(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPANDN;
 
             public static implicit operator AsmMnemonicCode(Vpandn src) => src.Mnemonic;
@@ -4836,8 +11403,41 @@ namespace Z0.Asm
 
         public static Vpandn vpandn() => default;
 
-        public readonly struct Pavgb : IAsmInstruction<Pavgb>
+        [MethodImpl(Inline)]
+        public static Vpandn vpandn(AsmHexCode encoded) => new Vpandn(encoded);
+
+        public struct Pause : IAsmInstruction<Pause>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pause(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PAUSE;
+
+            public static implicit operator AsmMnemonicCode(Pause src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pause src) => AsmMnemonics.PAUSE;
+        }
+
+        public static Pause pause() => default;
+
+        [MethodImpl(Inline)]
+        public static Pause pause(AsmHexCode encoded) => new Pause(encoded);
+
+        public struct Pavgb : IAsmInstruction<Pavgb>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pavgb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PAVGB;
 
             public static implicit operator AsmMnemonicCode(Pavgb src) => src.Mnemonic;
@@ -4847,8 +11447,19 @@ namespace Z0.Asm
 
         public static Pavgb pavgb() => default;
 
-        public readonly struct Pavgw : IAsmInstruction<Pavgw>
+        [MethodImpl(Inline)]
+        public static Pavgb pavgb(AsmHexCode encoded) => new Pavgb(encoded);
+
+        public struct Pavgw : IAsmInstruction<Pavgw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pavgw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PAVGW;
 
             public static implicit operator AsmMnemonicCode(Pavgw src) => src.Mnemonic;
@@ -4858,8 +11469,19 @@ namespace Z0.Asm
 
         public static Pavgw pavgw() => default;
 
-        public readonly struct Vpavgb : IAsmInstruction<Vpavgb>
+        [MethodImpl(Inline)]
+        public static Pavgw pavgw(AsmHexCode encoded) => new Pavgw(encoded);
+
+        public struct Vpavgb : IAsmInstruction<Vpavgb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpavgb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPAVGB;
 
             public static implicit operator AsmMnemonicCode(Vpavgb src) => src.Mnemonic;
@@ -4869,8 +11491,19 @@ namespace Z0.Asm
 
         public static Vpavgb vpavgb() => default;
 
-        public readonly struct Vpavgw : IAsmInstruction<Vpavgw>
+        [MethodImpl(Inline)]
+        public static Vpavgb vpavgb(AsmHexCode encoded) => new Vpavgb(encoded);
+
+        public struct Vpavgw : IAsmInstruction<Vpavgw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpavgw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPAVGW;
 
             public static implicit operator AsmMnemonicCode(Vpavgw src) => src.Mnemonic;
@@ -4880,8 +11513,19 @@ namespace Z0.Asm
 
         public static Vpavgw vpavgw() => default;
 
-        public readonly struct Pblendvb : IAsmInstruction<Pblendvb>
+        [MethodImpl(Inline)]
+        public static Vpavgw vpavgw(AsmHexCode encoded) => new Vpavgw(encoded);
+
+        public struct Pblendvb : IAsmInstruction<Pblendvb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pblendvb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PBLENDVB;
 
             public static implicit operator AsmMnemonicCode(Pblendvb src) => src.Mnemonic;
@@ -4891,8 +11535,19 @@ namespace Z0.Asm
 
         public static Pblendvb pblendvb() => default;
 
-        public readonly struct Vpblendvb : IAsmInstruction<Vpblendvb>
+        [MethodImpl(Inline)]
+        public static Pblendvb pblendvb(AsmHexCode encoded) => new Pblendvb(encoded);
+
+        public struct Vpblendvb : IAsmInstruction<Vpblendvb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpblendvb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBLENDVB;
 
             public static implicit operator AsmMnemonicCode(Vpblendvb src) => src.Mnemonic;
@@ -4902,8 +11557,19 @@ namespace Z0.Asm
 
         public static Vpblendvb vpblendvb() => default;
 
-        public readonly struct Pblendw : IAsmInstruction<Pblendw>
+        [MethodImpl(Inline)]
+        public static Vpblendvb vpblendvb(AsmHexCode encoded) => new Vpblendvb(encoded);
+
+        public struct Pblendw : IAsmInstruction<Pblendw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pblendw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PBLENDW;
 
             public static implicit operator AsmMnemonicCode(Pblendw src) => src.Mnemonic;
@@ -4913,8 +11579,19 @@ namespace Z0.Asm
 
         public static Pblendw pblendw() => default;
 
-        public readonly struct Vpblendw : IAsmInstruction<Vpblendw>
+        [MethodImpl(Inline)]
+        public static Pblendw pblendw(AsmHexCode encoded) => new Pblendw(encoded);
+
+        public struct Vpblendw : IAsmInstruction<Vpblendw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpblendw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBLENDW;
 
             public static implicit operator AsmMnemonicCode(Vpblendw src) => src.Mnemonic;
@@ -4924,8 +11601,19 @@ namespace Z0.Asm
 
         public static Vpblendw vpblendw() => default;
 
-        public readonly struct Pclmulqdq : IAsmInstruction<Pclmulqdq>
+        [MethodImpl(Inline)]
+        public static Vpblendw vpblendw(AsmHexCode encoded) => new Vpblendw(encoded);
+
+        public struct Pclmulqdq : IAsmInstruction<Pclmulqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pclmulqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCLMULQDQ;
 
             public static implicit operator AsmMnemonicCode(Pclmulqdq src) => src.Mnemonic;
@@ -4935,8 +11623,19 @@ namespace Z0.Asm
 
         public static Pclmulqdq pclmulqdq() => default;
 
-        public readonly struct Vpclmulqdq : IAsmInstruction<Vpclmulqdq>
+        [MethodImpl(Inline)]
+        public static Pclmulqdq pclmulqdq(AsmHexCode encoded) => new Pclmulqdq(encoded);
+
+        public struct Vpclmulqdq : IAsmInstruction<Vpclmulqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpclmulqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCLMULQDQ;
 
             public static implicit operator AsmMnemonicCode(Vpclmulqdq src) => src.Mnemonic;
@@ -4946,8 +11645,19 @@ namespace Z0.Asm
 
         public static Vpclmulqdq vpclmulqdq() => default;
 
-        public readonly struct Pcmpeqb : IAsmInstruction<Pcmpeqb>
+        [MethodImpl(Inline)]
+        public static Vpclmulqdq vpclmulqdq(AsmHexCode encoded) => new Vpclmulqdq(encoded);
+
+        public struct Pcmpeqb : IAsmInstruction<Pcmpeqb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpeqb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPEQB;
 
             public static implicit operator AsmMnemonicCode(Pcmpeqb src) => src.Mnemonic;
@@ -4957,8 +11667,19 @@ namespace Z0.Asm
 
         public static Pcmpeqb pcmpeqb() => default;
 
-        public readonly struct Pcmpeqw : IAsmInstruction<Pcmpeqw>
+        [MethodImpl(Inline)]
+        public static Pcmpeqb pcmpeqb(AsmHexCode encoded) => new Pcmpeqb(encoded);
+
+        public struct Pcmpeqw : IAsmInstruction<Pcmpeqw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpeqw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPEQW;
 
             public static implicit operator AsmMnemonicCode(Pcmpeqw src) => src.Mnemonic;
@@ -4968,8 +11689,19 @@ namespace Z0.Asm
 
         public static Pcmpeqw pcmpeqw() => default;
 
-        public readonly struct Pcmpeqd : IAsmInstruction<Pcmpeqd>
+        [MethodImpl(Inline)]
+        public static Pcmpeqw pcmpeqw(AsmHexCode encoded) => new Pcmpeqw(encoded);
+
+        public struct Pcmpeqd : IAsmInstruction<Pcmpeqd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpeqd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPEQD;
 
             public static implicit operator AsmMnemonicCode(Pcmpeqd src) => src.Mnemonic;
@@ -4979,8 +11711,19 @@ namespace Z0.Asm
 
         public static Pcmpeqd pcmpeqd() => default;
 
-        public readonly struct Vpcmpeqb : IAsmInstruction<Vpcmpeqb>
+        [MethodImpl(Inline)]
+        public static Pcmpeqd pcmpeqd(AsmHexCode encoded) => new Pcmpeqd(encoded);
+
+        public struct Vpcmpeqb : IAsmInstruction<Vpcmpeqb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpeqb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPEQB;
 
             public static implicit operator AsmMnemonicCode(Vpcmpeqb src) => src.Mnemonic;
@@ -4990,8 +11733,19 @@ namespace Z0.Asm
 
         public static Vpcmpeqb vpcmpeqb() => default;
 
-        public readonly struct Vpcmpeqw : IAsmInstruction<Vpcmpeqw>
+        [MethodImpl(Inline)]
+        public static Vpcmpeqb vpcmpeqb(AsmHexCode encoded) => new Vpcmpeqb(encoded);
+
+        public struct Vpcmpeqw : IAsmInstruction<Vpcmpeqw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpeqw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPEQW;
 
             public static implicit operator AsmMnemonicCode(Vpcmpeqw src) => src.Mnemonic;
@@ -5001,8 +11755,19 @@ namespace Z0.Asm
 
         public static Vpcmpeqw vpcmpeqw() => default;
 
-        public readonly struct Vpcmpeqd : IAsmInstruction<Vpcmpeqd>
+        [MethodImpl(Inline)]
+        public static Vpcmpeqw vpcmpeqw(AsmHexCode encoded) => new Vpcmpeqw(encoded);
+
+        public struct Vpcmpeqd : IAsmInstruction<Vpcmpeqd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpeqd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPEQD;
 
             public static implicit operator AsmMnemonicCode(Vpcmpeqd src) => src.Mnemonic;
@@ -5012,8 +11777,19 @@ namespace Z0.Asm
 
         public static Vpcmpeqd vpcmpeqd() => default;
 
-        public readonly struct Pcmpeqq : IAsmInstruction<Pcmpeqq>
+        [MethodImpl(Inline)]
+        public static Vpcmpeqd vpcmpeqd(AsmHexCode encoded) => new Vpcmpeqd(encoded);
+
+        public struct Pcmpeqq : IAsmInstruction<Pcmpeqq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpeqq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPEQQ;
 
             public static implicit operator AsmMnemonicCode(Pcmpeqq src) => src.Mnemonic;
@@ -5023,8 +11799,19 @@ namespace Z0.Asm
 
         public static Pcmpeqq pcmpeqq() => default;
 
-        public readonly struct Vpcmpeqq : IAsmInstruction<Vpcmpeqq>
+        [MethodImpl(Inline)]
+        public static Pcmpeqq pcmpeqq(AsmHexCode encoded) => new Pcmpeqq(encoded);
+
+        public struct Vpcmpeqq : IAsmInstruction<Vpcmpeqq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpeqq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPEQQ;
 
             public static implicit operator AsmMnemonicCode(Vpcmpeqq src) => src.Mnemonic;
@@ -5034,8 +11821,19 @@ namespace Z0.Asm
 
         public static Vpcmpeqq vpcmpeqq() => default;
 
-        public readonly struct Pcmpestri : IAsmInstruction<Pcmpestri>
+        [MethodImpl(Inline)]
+        public static Vpcmpeqq vpcmpeqq(AsmHexCode encoded) => new Vpcmpeqq(encoded);
+
+        public struct Pcmpestri : IAsmInstruction<Pcmpestri>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpestri(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPESTRI;
 
             public static implicit operator AsmMnemonicCode(Pcmpestri src) => src.Mnemonic;
@@ -5045,8 +11843,19 @@ namespace Z0.Asm
 
         public static Pcmpestri pcmpestri() => default;
 
-        public readonly struct Vpcmpestri : IAsmInstruction<Vpcmpestri>
+        [MethodImpl(Inline)]
+        public static Pcmpestri pcmpestri(AsmHexCode encoded) => new Pcmpestri(encoded);
+
+        public struct Vpcmpestri : IAsmInstruction<Vpcmpestri>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpestri(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPESTRI;
 
             public static implicit operator AsmMnemonicCode(Vpcmpestri src) => src.Mnemonic;
@@ -5056,8 +11865,19 @@ namespace Z0.Asm
 
         public static Vpcmpestri vpcmpestri() => default;
 
-        public readonly struct Pcmpestrm : IAsmInstruction<Pcmpestrm>
+        [MethodImpl(Inline)]
+        public static Vpcmpestri vpcmpestri(AsmHexCode encoded) => new Vpcmpestri(encoded);
+
+        public struct Pcmpestrm : IAsmInstruction<Pcmpestrm>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpestrm(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPESTRM;
 
             public static implicit operator AsmMnemonicCode(Pcmpestrm src) => src.Mnemonic;
@@ -5067,8 +11887,19 @@ namespace Z0.Asm
 
         public static Pcmpestrm pcmpestrm() => default;
 
-        public readonly struct Vpcmpestrm : IAsmInstruction<Vpcmpestrm>
+        [MethodImpl(Inline)]
+        public static Pcmpestrm pcmpestrm(AsmHexCode encoded) => new Pcmpestrm(encoded);
+
+        public struct Vpcmpestrm : IAsmInstruction<Vpcmpestrm>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpestrm(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPESTRM;
 
             public static implicit operator AsmMnemonicCode(Vpcmpestrm src) => src.Mnemonic;
@@ -5078,8 +11909,19 @@ namespace Z0.Asm
 
         public static Vpcmpestrm vpcmpestrm() => default;
 
-        public readonly struct Pcmpgtb : IAsmInstruction<Pcmpgtb>
+        [MethodImpl(Inline)]
+        public static Vpcmpestrm vpcmpestrm(AsmHexCode encoded) => new Vpcmpestrm(encoded);
+
+        public struct Pcmpgtb : IAsmInstruction<Pcmpgtb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpgtb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPGTB;
 
             public static implicit operator AsmMnemonicCode(Pcmpgtb src) => src.Mnemonic;
@@ -5089,8 +11931,19 @@ namespace Z0.Asm
 
         public static Pcmpgtb pcmpgtb() => default;
 
-        public readonly struct Pcmpgtw : IAsmInstruction<Pcmpgtw>
+        [MethodImpl(Inline)]
+        public static Pcmpgtb pcmpgtb(AsmHexCode encoded) => new Pcmpgtb(encoded);
+
+        public struct Pcmpgtw : IAsmInstruction<Pcmpgtw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpgtw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPGTW;
 
             public static implicit operator AsmMnemonicCode(Pcmpgtw src) => src.Mnemonic;
@@ -5100,8 +11953,19 @@ namespace Z0.Asm
 
         public static Pcmpgtw pcmpgtw() => default;
 
-        public readonly struct Pcmpgtd : IAsmInstruction<Pcmpgtd>
+        [MethodImpl(Inline)]
+        public static Pcmpgtw pcmpgtw(AsmHexCode encoded) => new Pcmpgtw(encoded);
+
+        public struct Pcmpgtd : IAsmInstruction<Pcmpgtd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpgtd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPGTD;
 
             public static implicit operator AsmMnemonicCode(Pcmpgtd src) => src.Mnemonic;
@@ -5111,8 +11975,19 @@ namespace Z0.Asm
 
         public static Pcmpgtd pcmpgtd() => default;
 
-        public readonly struct Vpcmpgtb : IAsmInstruction<Vpcmpgtb>
+        [MethodImpl(Inline)]
+        public static Pcmpgtd pcmpgtd(AsmHexCode encoded) => new Pcmpgtd(encoded);
+
+        public struct Vpcmpgtb : IAsmInstruction<Vpcmpgtb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpgtb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPGTB;
 
             public static implicit operator AsmMnemonicCode(Vpcmpgtb src) => src.Mnemonic;
@@ -5122,8 +11997,19 @@ namespace Z0.Asm
 
         public static Vpcmpgtb vpcmpgtb() => default;
 
-        public readonly struct Vpcmpgtw : IAsmInstruction<Vpcmpgtw>
+        [MethodImpl(Inline)]
+        public static Vpcmpgtb vpcmpgtb(AsmHexCode encoded) => new Vpcmpgtb(encoded);
+
+        public struct Vpcmpgtw : IAsmInstruction<Vpcmpgtw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpgtw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPGTW;
 
             public static implicit operator AsmMnemonicCode(Vpcmpgtw src) => src.Mnemonic;
@@ -5133,8 +12019,19 @@ namespace Z0.Asm
 
         public static Vpcmpgtw vpcmpgtw() => default;
 
-        public readonly struct Vpcmpgtd : IAsmInstruction<Vpcmpgtd>
+        [MethodImpl(Inline)]
+        public static Vpcmpgtw vpcmpgtw(AsmHexCode encoded) => new Vpcmpgtw(encoded);
+
+        public struct Vpcmpgtd : IAsmInstruction<Vpcmpgtd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpgtd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPGTD;
 
             public static implicit operator AsmMnemonicCode(Vpcmpgtd src) => src.Mnemonic;
@@ -5144,8 +12041,19 @@ namespace Z0.Asm
 
         public static Vpcmpgtd vpcmpgtd() => default;
 
-        public readonly struct Pcmpgtq : IAsmInstruction<Pcmpgtq>
+        [MethodImpl(Inline)]
+        public static Vpcmpgtd vpcmpgtd(AsmHexCode encoded) => new Vpcmpgtd(encoded);
+
+        public struct Pcmpgtq : IAsmInstruction<Pcmpgtq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpgtq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPGTQ;
 
             public static implicit operator AsmMnemonicCode(Pcmpgtq src) => src.Mnemonic;
@@ -5155,8 +12063,19 @@ namespace Z0.Asm
 
         public static Pcmpgtq pcmpgtq() => default;
 
-        public readonly struct Vpcmpgtq : IAsmInstruction<Vpcmpgtq>
+        [MethodImpl(Inline)]
+        public static Pcmpgtq pcmpgtq(AsmHexCode encoded) => new Pcmpgtq(encoded);
+
+        public struct Vpcmpgtq : IAsmInstruction<Vpcmpgtq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpgtq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPGTQ;
 
             public static implicit operator AsmMnemonicCode(Vpcmpgtq src) => src.Mnemonic;
@@ -5166,8 +12085,19 @@ namespace Z0.Asm
 
         public static Vpcmpgtq vpcmpgtq() => default;
 
-        public readonly struct Pcmpistri : IAsmInstruction<Pcmpistri>
+        [MethodImpl(Inline)]
+        public static Vpcmpgtq vpcmpgtq(AsmHexCode encoded) => new Vpcmpgtq(encoded);
+
+        public struct Pcmpistri : IAsmInstruction<Pcmpistri>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpistri(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPISTRI;
 
             public static implicit operator AsmMnemonicCode(Pcmpistri src) => src.Mnemonic;
@@ -5177,8 +12107,19 @@ namespace Z0.Asm
 
         public static Pcmpistri pcmpistri() => default;
 
-        public readonly struct Vpcmpistri : IAsmInstruction<Vpcmpistri>
+        [MethodImpl(Inline)]
+        public static Pcmpistri pcmpistri(AsmHexCode encoded) => new Pcmpistri(encoded);
+
+        public struct Vpcmpistri : IAsmInstruction<Vpcmpistri>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpistri(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPISTRI;
 
             public static implicit operator AsmMnemonicCode(Vpcmpistri src) => src.Mnemonic;
@@ -5188,8 +12129,19 @@ namespace Z0.Asm
 
         public static Vpcmpistri vpcmpistri() => default;
 
-        public readonly struct Pcmpistrm : IAsmInstruction<Pcmpistrm>
+        [MethodImpl(Inline)]
+        public static Vpcmpistri vpcmpistri(AsmHexCode encoded) => new Vpcmpistri(encoded);
+
+        public struct Pcmpistrm : IAsmInstruction<Pcmpistrm>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pcmpistrm(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PCMPISTRM;
 
             public static implicit operator AsmMnemonicCode(Pcmpistrm src) => src.Mnemonic;
@@ -5199,8 +12151,19 @@ namespace Z0.Asm
 
         public static Pcmpistrm pcmpistrm() => default;
 
-        public readonly struct Vpcmpistrm : IAsmInstruction<Vpcmpistrm>
+        [MethodImpl(Inline)]
+        public static Pcmpistrm pcmpistrm(AsmHexCode encoded) => new Pcmpistrm(encoded);
+
+        public struct Vpcmpistrm : IAsmInstruction<Vpcmpistrm>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpcmpistrm(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPCMPISTRM;
 
             public static implicit operator AsmMnemonicCode(Vpcmpistrm src) => src.Mnemonic;
@@ -5210,8 +12173,19 @@ namespace Z0.Asm
 
         public static Vpcmpistrm vpcmpistrm() => default;
 
-        public readonly struct Pdep : IAsmInstruction<Pdep>
+        [MethodImpl(Inline)]
+        public static Vpcmpistrm vpcmpistrm(AsmHexCode encoded) => new Vpcmpistrm(encoded);
+
+        public struct Pdep : IAsmInstruction<Pdep>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pdep(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PDEP;
 
             public static implicit operator AsmMnemonicCode(Pdep src) => src.Mnemonic;
@@ -5221,8 +12195,19 @@ namespace Z0.Asm
 
         public static Pdep pdep() => default;
 
-        public readonly struct Pext : IAsmInstruction<Pext>
+        [MethodImpl(Inline)]
+        public static Pdep pdep(AsmHexCode encoded) => new Pdep(encoded);
+
+        public struct Pext : IAsmInstruction<Pext>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pext(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PEXT;
 
             public static implicit operator AsmMnemonicCode(Pext src) => src.Mnemonic;
@@ -5232,8 +12217,19 @@ namespace Z0.Asm
 
         public static Pext pext() => default;
 
-        public readonly struct Pextrb : IAsmInstruction<Pextrb>
+        [MethodImpl(Inline)]
+        public static Pext pext(AsmHexCode encoded) => new Pext(encoded);
+
+        public struct Pextrb : IAsmInstruction<Pextrb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pextrb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PEXTRB;
 
             public static implicit operator AsmMnemonicCode(Pextrb src) => src.Mnemonic;
@@ -5243,8 +12239,19 @@ namespace Z0.Asm
 
         public static Pextrb pextrb() => default;
 
-        public readonly struct Pextrd : IAsmInstruction<Pextrd>
+        [MethodImpl(Inline)]
+        public static Pextrb pextrb(AsmHexCode encoded) => new Pextrb(encoded);
+
+        public struct Pextrd : IAsmInstruction<Pextrd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pextrd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PEXTRD;
 
             public static implicit operator AsmMnemonicCode(Pextrd src) => src.Mnemonic;
@@ -5254,8 +12261,19 @@ namespace Z0.Asm
 
         public static Pextrd pextrd() => default;
 
-        public readonly struct Pextrq : IAsmInstruction<Pextrq>
+        [MethodImpl(Inline)]
+        public static Pextrd pextrd(AsmHexCode encoded) => new Pextrd(encoded);
+
+        public struct Pextrq : IAsmInstruction<Pextrq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pextrq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PEXTRQ;
 
             public static implicit operator AsmMnemonicCode(Pextrq src) => src.Mnemonic;
@@ -5265,8 +12283,19 @@ namespace Z0.Asm
 
         public static Pextrq pextrq() => default;
 
-        public readonly struct Vpextrb : IAsmInstruction<Vpextrb>
+        [MethodImpl(Inline)]
+        public static Pextrq pextrq(AsmHexCode encoded) => new Pextrq(encoded);
+
+        public struct Vpextrb : IAsmInstruction<Vpextrb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpextrb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPEXTRB;
 
             public static implicit operator AsmMnemonicCode(Vpextrb src) => src.Mnemonic;
@@ -5276,8 +12305,19 @@ namespace Z0.Asm
 
         public static Vpextrb vpextrb() => default;
 
-        public readonly struct Vpextrd : IAsmInstruction<Vpextrd>
+        [MethodImpl(Inline)]
+        public static Vpextrb vpextrb(AsmHexCode encoded) => new Vpextrb(encoded);
+
+        public struct Vpextrd : IAsmInstruction<Vpextrd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpextrd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPEXTRD;
 
             public static implicit operator AsmMnemonicCode(Vpextrd src) => src.Mnemonic;
@@ -5287,8 +12327,19 @@ namespace Z0.Asm
 
         public static Vpextrd vpextrd() => default;
 
-        public readonly struct Vpextrq : IAsmInstruction<Vpextrq>
+        [MethodImpl(Inline)]
+        public static Vpextrd vpextrd(AsmHexCode encoded) => new Vpextrd(encoded);
+
+        public struct Vpextrq : IAsmInstruction<Vpextrq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpextrq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPEXTRQ;
 
             public static implicit operator AsmMnemonicCode(Vpextrq src) => src.Mnemonic;
@@ -5298,8 +12349,19 @@ namespace Z0.Asm
 
         public static Vpextrq vpextrq() => default;
 
-        public readonly struct Pextrw : IAsmInstruction<Pextrw>
+        [MethodImpl(Inline)]
+        public static Vpextrq vpextrq(AsmHexCode encoded) => new Vpextrq(encoded);
+
+        public struct Pextrw : IAsmInstruction<Pextrw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pextrw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PEXTRW;
 
             public static implicit operator AsmMnemonicCode(Pextrw src) => src.Mnemonic;
@@ -5309,8 +12371,19 @@ namespace Z0.Asm
 
         public static Pextrw pextrw() => default;
 
-        public readonly struct Vpextrw : IAsmInstruction<Vpextrw>
+        [MethodImpl(Inline)]
+        public static Pextrw pextrw(AsmHexCode encoded) => new Pextrw(encoded);
+
+        public struct Vpextrw : IAsmInstruction<Vpextrw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpextrw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPEXTRW;
 
             public static implicit operator AsmMnemonicCode(Vpextrw src) => src.Mnemonic;
@@ -5320,8 +12393,19 @@ namespace Z0.Asm
 
         public static Vpextrw vpextrw() => default;
 
-        public readonly struct Phaddw : IAsmInstruction<Phaddw>
+        [MethodImpl(Inline)]
+        public static Vpextrw vpextrw(AsmHexCode encoded) => new Vpextrw(encoded);
+
+        public struct Phaddw : IAsmInstruction<Phaddw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phaddw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHADDW;
 
             public static implicit operator AsmMnemonicCode(Phaddw src) => src.Mnemonic;
@@ -5331,8 +12415,19 @@ namespace Z0.Asm
 
         public static Phaddw phaddw() => default;
 
-        public readonly struct Phaddd : IAsmInstruction<Phaddd>
+        [MethodImpl(Inline)]
+        public static Phaddw phaddw(AsmHexCode encoded) => new Phaddw(encoded);
+
+        public struct Phaddd : IAsmInstruction<Phaddd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phaddd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHADDD;
 
             public static implicit operator AsmMnemonicCode(Phaddd src) => src.Mnemonic;
@@ -5342,8 +12437,19 @@ namespace Z0.Asm
 
         public static Phaddd phaddd() => default;
 
-        public readonly struct Vphaddw : IAsmInstruction<Vphaddw>
+        [MethodImpl(Inline)]
+        public static Phaddd phaddd(AsmHexCode encoded) => new Phaddd(encoded);
+
+        public struct Vphaddw : IAsmInstruction<Vphaddw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphaddw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHADDW;
 
             public static implicit operator AsmMnemonicCode(Vphaddw src) => src.Mnemonic;
@@ -5353,8 +12459,19 @@ namespace Z0.Asm
 
         public static Vphaddw vphaddw() => default;
 
-        public readonly struct Vphaddd : IAsmInstruction<Vphaddd>
+        [MethodImpl(Inline)]
+        public static Vphaddw vphaddw(AsmHexCode encoded) => new Vphaddw(encoded);
+
+        public struct Vphaddd : IAsmInstruction<Vphaddd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphaddd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHADDD;
 
             public static implicit operator AsmMnemonicCode(Vphaddd src) => src.Mnemonic;
@@ -5364,8 +12481,19 @@ namespace Z0.Asm
 
         public static Vphaddd vphaddd() => default;
 
-        public readonly struct Phaddsw : IAsmInstruction<Phaddsw>
+        [MethodImpl(Inline)]
+        public static Vphaddd vphaddd(AsmHexCode encoded) => new Vphaddd(encoded);
+
+        public struct Phaddsw : IAsmInstruction<Phaddsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phaddsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHADDSW;
 
             public static implicit operator AsmMnemonicCode(Phaddsw src) => src.Mnemonic;
@@ -5375,8 +12503,19 @@ namespace Z0.Asm
 
         public static Phaddsw phaddsw() => default;
 
-        public readonly struct Vphaddsw : IAsmInstruction<Vphaddsw>
+        [MethodImpl(Inline)]
+        public static Phaddsw phaddsw(AsmHexCode encoded) => new Phaddsw(encoded);
+
+        public struct Vphaddsw : IAsmInstruction<Vphaddsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphaddsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHADDSW;
 
             public static implicit operator AsmMnemonicCode(Vphaddsw src) => src.Mnemonic;
@@ -5386,8 +12525,19 @@ namespace Z0.Asm
 
         public static Vphaddsw vphaddsw() => default;
 
-        public readonly struct Phminposuw : IAsmInstruction<Phminposuw>
+        [MethodImpl(Inline)]
+        public static Vphaddsw vphaddsw(AsmHexCode encoded) => new Vphaddsw(encoded);
+
+        public struct Phminposuw : IAsmInstruction<Phminposuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phminposuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHMINPOSUW;
 
             public static implicit operator AsmMnemonicCode(Phminposuw src) => src.Mnemonic;
@@ -5397,8 +12547,19 @@ namespace Z0.Asm
 
         public static Phminposuw phminposuw() => default;
 
-        public readonly struct Vphminposuw : IAsmInstruction<Vphminposuw>
+        [MethodImpl(Inline)]
+        public static Phminposuw phminposuw(AsmHexCode encoded) => new Phminposuw(encoded);
+
+        public struct Vphminposuw : IAsmInstruction<Vphminposuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphminposuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHMINPOSUW;
 
             public static implicit operator AsmMnemonicCode(Vphminposuw src) => src.Mnemonic;
@@ -5408,8 +12569,19 @@ namespace Z0.Asm
 
         public static Vphminposuw vphminposuw() => default;
 
-        public readonly struct Phsubw : IAsmInstruction<Phsubw>
+        [MethodImpl(Inline)]
+        public static Vphminposuw vphminposuw(AsmHexCode encoded) => new Vphminposuw(encoded);
+
+        public struct Phsubw : IAsmInstruction<Phsubw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phsubw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHSUBW;
 
             public static implicit operator AsmMnemonicCode(Phsubw src) => src.Mnemonic;
@@ -5419,8 +12591,19 @@ namespace Z0.Asm
 
         public static Phsubw phsubw() => default;
 
-        public readonly struct Phsubd : IAsmInstruction<Phsubd>
+        [MethodImpl(Inline)]
+        public static Phsubw phsubw(AsmHexCode encoded) => new Phsubw(encoded);
+
+        public struct Phsubd : IAsmInstruction<Phsubd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phsubd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHSUBD;
 
             public static implicit operator AsmMnemonicCode(Phsubd src) => src.Mnemonic;
@@ -5430,8 +12613,19 @@ namespace Z0.Asm
 
         public static Phsubd phsubd() => default;
 
-        public readonly struct Vphsubw : IAsmInstruction<Vphsubw>
+        [MethodImpl(Inline)]
+        public static Phsubd phsubd(AsmHexCode encoded) => new Phsubd(encoded);
+
+        public struct Vphsubw : IAsmInstruction<Vphsubw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphsubw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHSUBW;
 
             public static implicit operator AsmMnemonicCode(Vphsubw src) => src.Mnemonic;
@@ -5441,8 +12635,19 @@ namespace Z0.Asm
 
         public static Vphsubw vphsubw() => default;
 
-        public readonly struct Vphsubd : IAsmInstruction<Vphsubd>
+        [MethodImpl(Inline)]
+        public static Vphsubw vphsubw(AsmHexCode encoded) => new Vphsubw(encoded);
+
+        public struct Vphsubd : IAsmInstruction<Vphsubd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphsubd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHSUBD;
 
             public static implicit operator AsmMnemonicCode(Vphsubd src) => src.Mnemonic;
@@ -5452,8 +12657,19 @@ namespace Z0.Asm
 
         public static Vphsubd vphsubd() => default;
 
-        public readonly struct Phsubsw : IAsmInstruction<Phsubsw>
+        [MethodImpl(Inline)]
+        public static Vphsubd vphsubd(AsmHexCode encoded) => new Vphsubd(encoded);
+
+        public struct Phsubsw : IAsmInstruction<Phsubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Phsubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PHSUBSW;
 
             public static implicit operator AsmMnemonicCode(Phsubsw src) => src.Mnemonic;
@@ -5463,8 +12679,19 @@ namespace Z0.Asm
 
         public static Phsubsw phsubsw() => default;
 
-        public readonly struct Vphsubsw : IAsmInstruction<Vphsubsw>
+        [MethodImpl(Inline)]
+        public static Phsubsw phsubsw(AsmHexCode encoded) => new Phsubsw(encoded);
+
+        public struct Vphsubsw : IAsmInstruction<Vphsubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vphsubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPHSUBSW;
 
             public static implicit operator AsmMnemonicCode(Vphsubsw src) => src.Mnemonic;
@@ -5474,8 +12701,19 @@ namespace Z0.Asm
 
         public static Vphsubsw vphsubsw() => default;
 
-        public readonly struct Pinsrb : IAsmInstruction<Pinsrb>
+        [MethodImpl(Inline)]
+        public static Vphsubsw vphsubsw(AsmHexCode encoded) => new Vphsubsw(encoded);
+
+        public struct Pinsrb : IAsmInstruction<Pinsrb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pinsrb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PINSRB;
 
             public static implicit operator AsmMnemonicCode(Pinsrb src) => src.Mnemonic;
@@ -5485,8 +12723,19 @@ namespace Z0.Asm
 
         public static Pinsrb pinsrb() => default;
 
-        public readonly struct Pinsrd : IAsmInstruction<Pinsrd>
+        [MethodImpl(Inline)]
+        public static Pinsrb pinsrb(AsmHexCode encoded) => new Pinsrb(encoded);
+
+        public struct Pinsrd : IAsmInstruction<Pinsrd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pinsrd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PINSRD;
 
             public static implicit operator AsmMnemonicCode(Pinsrd src) => src.Mnemonic;
@@ -5496,8 +12745,19 @@ namespace Z0.Asm
 
         public static Pinsrd pinsrd() => default;
 
-        public readonly struct Pinsrq : IAsmInstruction<Pinsrq>
+        [MethodImpl(Inline)]
+        public static Pinsrd pinsrd(AsmHexCode encoded) => new Pinsrd(encoded);
+
+        public struct Pinsrq : IAsmInstruction<Pinsrq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pinsrq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PINSRQ;
 
             public static implicit operator AsmMnemonicCode(Pinsrq src) => src.Mnemonic;
@@ -5507,8 +12767,19 @@ namespace Z0.Asm
 
         public static Pinsrq pinsrq() => default;
 
-        public readonly struct Vpinsrb : IAsmInstruction<Vpinsrb>
+        [MethodImpl(Inline)]
+        public static Pinsrq pinsrq(AsmHexCode encoded) => new Pinsrq(encoded);
+
+        public struct Vpinsrb : IAsmInstruction<Vpinsrb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpinsrb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPINSRB;
 
             public static implicit operator AsmMnemonicCode(Vpinsrb src) => src.Mnemonic;
@@ -5518,8 +12789,19 @@ namespace Z0.Asm
 
         public static Vpinsrb vpinsrb() => default;
 
-        public readonly struct Vpinsrd : IAsmInstruction<Vpinsrd>
+        [MethodImpl(Inline)]
+        public static Vpinsrb vpinsrb(AsmHexCode encoded) => new Vpinsrb(encoded);
+
+        public struct Vpinsrd : IAsmInstruction<Vpinsrd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpinsrd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPINSRD;
 
             public static implicit operator AsmMnemonicCode(Vpinsrd src) => src.Mnemonic;
@@ -5529,8 +12811,19 @@ namespace Z0.Asm
 
         public static Vpinsrd vpinsrd() => default;
 
-        public readonly struct Vpinsrq : IAsmInstruction<Vpinsrq>
+        [MethodImpl(Inline)]
+        public static Vpinsrd vpinsrd(AsmHexCode encoded) => new Vpinsrd(encoded);
+
+        public struct Vpinsrq : IAsmInstruction<Vpinsrq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpinsrq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPINSRQ;
 
             public static implicit operator AsmMnemonicCode(Vpinsrq src) => src.Mnemonic;
@@ -5540,8 +12833,19 @@ namespace Z0.Asm
 
         public static Vpinsrq vpinsrq() => default;
 
-        public readonly struct Pinsrw : IAsmInstruction<Pinsrw>
+        [MethodImpl(Inline)]
+        public static Vpinsrq vpinsrq(AsmHexCode encoded) => new Vpinsrq(encoded);
+
+        public struct Pinsrw : IAsmInstruction<Pinsrw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pinsrw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PINSRW;
 
             public static implicit operator AsmMnemonicCode(Pinsrw src) => src.Mnemonic;
@@ -5551,8 +12855,19 @@ namespace Z0.Asm
 
         public static Pinsrw pinsrw() => default;
 
-        public readonly struct Vpinsrw : IAsmInstruction<Vpinsrw>
+        [MethodImpl(Inline)]
+        public static Pinsrw pinsrw(AsmHexCode encoded) => new Pinsrw(encoded);
+
+        public struct Vpinsrw : IAsmInstruction<Vpinsrw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpinsrw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPINSRW;
 
             public static implicit operator AsmMnemonicCode(Vpinsrw src) => src.Mnemonic;
@@ -5562,8 +12877,19 @@ namespace Z0.Asm
 
         public static Vpinsrw vpinsrw() => default;
 
-        public readonly struct Pmaddubsw : IAsmInstruction<Pmaddubsw>
+        [MethodImpl(Inline)]
+        public static Vpinsrw vpinsrw(AsmHexCode encoded) => new Vpinsrw(encoded);
+
+        public struct Pmaddubsw : IAsmInstruction<Pmaddubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaddubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMADDUBSW;
 
             public static implicit operator AsmMnemonicCode(Pmaddubsw src) => src.Mnemonic;
@@ -5573,8 +12899,19 @@ namespace Z0.Asm
 
         public static Pmaddubsw pmaddubsw() => default;
 
-        public readonly struct Vpmaddubsw : IAsmInstruction<Vpmaddubsw>
+        [MethodImpl(Inline)]
+        public static Pmaddubsw pmaddubsw(AsmHexCode encoded) => new Pmaddubsw(encoded);
+
+        public struct Vpmaddubsw : IAsmInstruction<Vpmaddubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaddubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMADDUBSW;
 
             public static implicit operator AsmMnemonicCode(Vpmaddubsw src) => src.Mnemonic;
@@ -5584,8 +12921,19 @@ namespace Z0.Asm
 
         public static Vpmaddubsw vpmaddubsw() => default;
 
-        public readonly struct Pmaddwd : IAsmInstruction<Pmaddwd>
+        [MethodImpl(Inline)]
+        public static Vpmaddubsw vpmaddubsw(AsmHexCode encoded) => new Vpmaddubsw(encoded);
+
+        public struct Pmaddwd : IAsmInstruction<Pmaddwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaddwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMADDWD;
 
             public static implicit operator AsmMnemonicCode(Pmaddwd src) => src.Mnemonic;
@@ -5595,8 +12943,19 @@ namespace Z0.Asm
 
         public static Pmaddwd pmaddwd() => default;
 
-        public readonly struct Vpmaddwd : IAsmInstruction<Vpmaddwd>
+        [MethodImpl(Inline)]
+        public static Pmaddwd pmaddwd(AsmHexCode encoded) => new Pmaddwd(encoded);
+
+        public struct Vpmaddwd : IAsmInstruction<Vpmaddwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaddwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMADDWD;
 
             public static implicit operator AsmMnemonicCode(Vpmaddwd src) => src.Mnemonic;
@@ -5606,8 +12965,19 @@ namespace Z0.Asm
 
         public static Vpmaddwd vpmaddwd() => default;
 
-        public readonly struct Pmaxsb : IAsmInstruction<Pmaxsb>
+        [MethodImpl(Inline)]
+        public static Vpmaddwd vpmaddwd(AsmHexCode encoded) => new Vpmaddwd(encoded);
+
+        public struct Pmaxsb : IAsmInstruction<Pmaxsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXSB;
 
             public static implicit operator AsmMnemonicCode(Pmaxsb src) => src.Mnemonic;
@@ -5617,8 +12987,19 @@ namespace Z0.Asm
 
         public static Pmaxsb pmaxsb() => default;
 
-        public readonly struct Vpmaxsb : IAsmInstruction<Vpmaxsb>
+        [MethodImpl(Inline)]
+        public static Pmaxsb pmaxsb(AsmHexCode encoded) => new Pmaxsb(encoded);
+
+        public struct Vpmaxsb : IAsmInstruction<Vpmaxsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXSB;
 
             public static implicit operator AsmMnemonicCode(Vpmaxsb src) => src.Mnemonic;
@@ -5628,8 +13009,19 @@ namespace Z0.Asm
 
         public static Vpmaxsb vpmaxsb() => default;
 
-        public readonly struct Pmaxsd : IAsmInstruction<Pmaxsd>
+        [MethodImpl(Inline)]
+        public static Vpmaxsb vpmaxsb(AsmHexCode encoded) => new Vpmaxsb(encoded);
+
+        public struct Pmaxsd : IAsmInstruction<Pmaxsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXSD;
 
             public static implicit operator AsmMnemonicCode(Pmaxsd src) => src.Mnemonic;
@@ -5639,8 +13031,19 @@ namespace Z0.Asm
 
         public static Pmaxsd pmaxsd() => default;
 
-        public readonly struct Vpmaxsd : IAsmInstruction<Vpmaxsd>
+        [MethodImpl(Inline)]
+        public static Pmaxsd pmaxsd(AsmHexCode encoded) => new Pmaxsd(encoded);
+
+        public struct Vpmaxsd : IAsmInstruction<Vpmaxsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXSD;
 
             public static implicit operator AsmMnemonicCode(Vpmaxsd src) => src.Mnemonic;
@@ -5650,8 +13053,19 @@ namespace Z0.Asm
 
         public static Vpmaxsd vpmaxsd() => default;
 
-        public readonly struct Pmaxsw : IAsmInstruction<Pmaxsw>
+        [MethodImpl(Inline)]
+        public static Vpmaxsd vpmaxsd(AsmHexCode encoded) => new Vpmaxsd(encoded);
+
+        public struct Pmaxsw : IAsmInstruction<Pmaxsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXSW;
 
             public static implicit operator AsmMnemonicCode(Pmaxsw src) => src.Mnemonic;
@@ -5661,8 +13075,19 @@ namespace Z0.Asm
 
         public static Pmaxsw pmaxsw() => default;
 
-        public readonly struct Vpmaxsw : IAsmInstruction<Vpmaxsw>
+        [MethodImpl(Inline)]
+        public static Pmaxsw pmaxsw(AsmHexCode encoded) => new Pmaxsw(encoded);
+
+        public struct Vpmaxsw : IAsmInstruction<Vpmaxsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXSW;
 
             public static implicit operator AsmMnemonicCode(Vpmaxsw src) => src.Mnemonic;
@@ -5672,8 +13097,19 @@ namespace Z0.Asm
 
         public static Vpmaxsw vpmaxsw() => default;
 
-        public readonly struct Pmaxub : IAsmInstruction<Pmaxub>
+        [MethodImpl(Inline)]
+        public static Vpmaxsw vpmaxsw(AsmHexCode encoded) => new Vpmaxsw(encoded);
+
+        public struct Pmaxub : IAsmInstruction<Pmaxub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXUB;
 
             public static implicit operator AsmMnemonicCode(Pmaxub src) => src.Mnemonic;
@@ -5683,8 +13119,19 @@ namespace Z0.Asm
 
         public static Pmaxub pmaxub() => default;
 
-        public readonly struct Vpmaxub : IAsmInstruction<Vpmaxub>
+        [MethodImpl(Inline)]
+        public static Pmaxub pmaxub(AsmHexCode encoded) => new Pmaxub(encoded);
+
+        public struct Vpmaxub : IAsmInstruction<Vpmaxub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXUB;
 
             public static implicit operator AsmMnemonicCode(Vpmaxub src) => src.Mnemonic;
@@ -5694,8 +13141,19 @@ namespace Z0.Asm
 
         public static Vpmaxub vpmaxub() => default;
 
-        public readonly struct Pmaxud : IAsmInstruction<Pmaxud>
+        [MethodImpl(Inline)]
+        public static Vpmaxub vpmaxub(AsmHexCode encoded) => new Vpmaxub(encoded);
+
+        public struct Pmaxud : IAsmInstruction<Pmaxud>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxud(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXUD;
 
             public static implicit operator AsmMnemonicCode(Pmaxud src) => src.Mnemonic;
@@ -5705,8 +13163,19 @@ namespace Z0.Asm
 
         public static Pmaxud pmaxud() => default;
 
-        public readonly struct Vpmaxud : IAsmInstruction<Vpmaxud>
+        [MethodImpl(Inline)]
+        public static Pmaxud pmaxud(AsmHexCode encoded) => new Pmaxud(encoded);
+
+        public struct Vpmaxud : IAsmInstruction<Vpmaxud>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxud(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXUD;
 
             public static implicit operator AsmMnemonicCode(Vpmaxud src) => src.Mnemonic;
@@ -5716,8 +13185,19 @@ namespace Z0.Asm
 
         public static Vpmaxud vpmaxud() => default;
 
-        public readonly struct Pmaxuw : IAsmInstruction<Pmaxuw>
+        [MethodImpl(Inline)]
+        public static Vpmaxud vpmaxud(AsmHexCode encoded) => new Vpmaxud(encoded);
+
+        public struct Pmaxuw : IAsmInstruction<Pmaxuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmaxuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMAXUW;
 
             public static implicit operator AsmMnemonicCode(Pmaxuw src) => src.Mnemonic;
@@ -5727,8 +13207,19 @@ namespace Z0.Asm
 
         public static Pmaxuw pmaxuw() => default;
 
-        public readonly struct Vpmaxuw : IAsmInstruction<Vpmaxuw>
+        [MethodImpl(Inline)]
+        public static Pmaxuw pmaxuw(AsmHexCode encoded) => new Pmaxuw(encoded);
+
+        public struct Vpmaxuw : IAsmInstruction<Vpmaxuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaxuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMAXUW;
 
             public static implicit operator AsmMnemonicCode(Vpmaxuw src) => src.Mnemonic;
@@ -5738,8 +13229,19 @@ namespace Z0.Asm
 
         public static Vpmaxuw vpmaxuw() => default;
 
-        public readonly struct Pminsb : IAsmInstruction<Pminsb>
+        [MethodImpl(Inline)]
+        public static Vpmaxuw vpmaxuw(AsmHexCode encoded) => new Vpmaxuw(encoded);
+
+        public struct Pminsb : IAsmInstruction<Pminsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINSB;
 
             public static implicit operator AsmMnemonicCode(Pminsb src) => src.Mnemonic;
@@ -5749,8 +13251,19 @@ namespace Z0.Asm
 
         public static Pminsb pminsb() => default;
 
-        public readonly struct Vpminsb : IAsmInstruction<Vpminsb>
+        [MethodImpl(Inline)]
+        public static Pminsb pminsb(AsmHexCode encoded) => new Pminsb(encoded);
+
+        public struct Vpminsb : IAsmInstruction<Vpminsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINSB;
 
             public static implicit operator AsmMnemonicCode(Vpminsb src) => src.Mnemonic;
@@ -5760,8 +13273,19 @@ namespace Z0.Asm
 
         public static Vpminsb vpminsb() => default;
 
-        public readonly struct Pminsd : IAsmInstruction<Pminsd>
+        [MethodImpl(Inline)]
+        public static Vpminsb vpminsb(AsmHexCode encoded) => new Vpminsb(encoded);
+
+        public struct Pminsd : IAsmInstruction<Pminsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINSD;
 
             public static implicit operator AsmMnemonicCode(Pminsd src) => src.Mnemonic;
@@ -5771,8 +13295,19 @@ namespace Z0.Asm
 
         public static Pminsd pminsd() => default;
 
-        public readonly struct Vpminsd : IAsmInstruction<Vpminsd>
+        [MethodImpl(Inline)]
+        public static Pminsd pminsd(AsmHexCode encoded) => new Pminsd(encoded);
+
+        public struct Vpminsd : IAsmInstruction<Vpminsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINSD;
 
             public static implicit operator AsmMnemonicCode(Vpminsd src) => src.Mnemonic;
@@ -5782,8 +13317,19 @@ namespace Z0.Asm
 
         public static Vpminsd vpminsd() => default;
 
-        public readonly struct Pminsw : IAsmInstruction<Pminsw>
+        [MethodImpl(Inline)]
+        public static Vpminsd vpminsd(AsmHexCode encoded) => new Vpminsd(encoded);
+
+        public struct Pminsw : IAsmInstruction<Pminsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINSW;
 
             public static implicit operator AsmMnemonicCode(Pminsw src) => src.Mnemonic;
@@ -5793,8 +13339,19 @@ namespace Z0.Asm
 
         public static Pminsw pminsw() => default;
 
-        public readonly struct Vpminsw : IAsmInstruction<Vpminsw>
+        [MethodImpl(Inline)]
+        public static Pminsw pminsw(AsmHexCode encoded) => new Pminsw(encoded);
+
+        public struct Vpminsw : IAsmInstruction<Vpminsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINSW;
 
             public static implicit operator AsmMnemonicCode(Vpminsw src) => src.Mnemonic;
@@ -5804,8 +13361,19 @@ namespace Z0.Asm
 
         public static Vpminsw vpminsw() => default;
 
-        public readonly struct Pminub : IAsmInstruction<Pminub>
+        [MethodImpl(Inline)]
+        public static Vpminsw vpminsw(AsmHexCode encoded) => new Vpminsw(encoded);
+
+        public struct Pminub : IAsmInstruction<Pminub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINUB;
 
             public static implicit operator AsmMnemonicCode(Pminub src) => src.Mnemonic;
@@ -5815,8 +13383,19 @@ namespace Z0.Asm
 
         public static Pminub pminub() => default;
 
-        public readonly struct Vpminub : IAsmInstruction<Vpminub>
+        [MethodImpl(Inline)]
+        public static Pminub pminub(AsmHexCode encoded) => new Pminub(encoded);
+
+        public struct Vpminub : IAsmInstruction<Vpminub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINUB;
 
             public static implicit operator AsmMnemonicCode(Vpminub src) => src.Mnemonic;
@@ -5826,8 +13405,19 @@ namespace Z0.Asm
 
         public static Vpminub vpminub() => default;
 
-        public readonly struct Pminud : IAsmInstruction<Pminud>
+        [MethodImpl(Inline)]
+        public static Vpminub vpminub(AsmHexCode encoded) => new Vpminub(encoded);
+
+        public struct Pminud : IAsmInstruction<Pminud>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminud(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINUD;
 
             public static implicit operator AsmMnemonicCode(Pminud src) => src.Mnemonic;
@@ -5837,8 +13427,19 @@ namespace Z0.Asm
 
         public static Pminud pminud() => default;
 
-        public readonly struct Vpminud : IAsmInstruction<Vpminud>
+        [MethodImpl(Inline)]
+        public static Pminud pminud(AsmHexCode encoded) => new Pminud(encoded);
+
+        public struct Vpminud : IAsmInstruction<Vpminud>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminud(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINUD;
 
             public static implicit operator AsmMnemonicCode(Vpminud src) => src.Mnemonic;
@@ -5848,8 +13449,19 @@ namespace Z0.Asm
 
         public static Vpminud vpminud() => default;
 
-        public readonly struct Pminuw : IAsmInstruction<Pminuw>
+        [MethodImpl(Inline)]
+        public static Vpminud vpminud(AsmHexCode encoded) => new Vpminud(encoded);
+
+        public struct Pminuw : IAsmInstruction<Pminuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pminuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMINUW;
 
             public static implicit operator AsmMnemonicCode(Pminuw src) => src.Mnemonic;
@@ -5859,8 +13471,19 @@ namespace Z0.Asm
 
         public static Pminuw pminuw() => default;
 
-        public readonly struct Vpminuw : IAsmInstruction<Vpminuw>
+        [MethodImpl(Inline)]
+        public static Pminuw pminuw(AsmHexCode encoded) => new Pminuw(encoded);
+
+        public struct Vpminuw : IAsmInstruction<Vpminuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpminuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMINUW;
 
             public static implicit operator AsmMnemonicCode(Vpminuw src) => src.Mnemonic;
@@ -5870,8 +13493,19 @@ namespace Z0.Asm
 
         public static Vpminuw vpminuw() => default;
 
-        public readonly struct Pmovmskb : IAsmInstruction<Pmovmskb>
+        [MethodImpl(Inline)]
+        public static Vpminuw vpminuw(AsmHexCode encoded) => new Vpminuw(encoded);
+
+        public struct Pmovmskb : IAsmInstruction<Pmovmskb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovmskb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVMSKB;
 
             public static implicit operator AsmMnemonicCode(Pmovmskb src) => src.Mnemonic;
@@ -5881,8 +13515,19 @@ namespace Z0.Asm
 
         public static Pmovmskb pmovmskb() => default;
 
-        public readonly struct Vpmovmskb : IAsmInstruction<Vpmovmskb>
+        [MethodImpl(Inline)]
+        public static Pmovmskb pmovmskb(AsmHexCode encoded) => new Pmovmskb(encoded);
+
+        public struct Vpmovmskb : IAsmInstruction<Vpmovmskb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovmskb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVMSKB;
 
             public static implicit operator AsmMnemonicCode(Vpmovmskb src) => src.Mnemonic;
@@ -5892,8 +13537,19 @@ namespace Z0.Asm
 
         public static Vpmovmskb vpmovmskb() => default;
 
-        public readonly struct Pmovsxbw : IAsmInstruction<Pmovsxbw>
+        [MethodImpl(Inline)]
+        public static Vpmovmskb vpmovmskb(AsmHexCode encoded) => new Vpmovmskb(encoded);
+
+        public struct Pmovsxbw : IAsmInstruction<Pmovsxbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXBW;
 
             public static implicit operator AsmMnemonicCode(Pmovsxbw src) => src.Mnemonic;
@@ -5903,8 +13559,19 @@ namespace Z0.Asm
 
         public static Pmovsxbw pmovsxbw() => default;
 
-        public readonly struct Pmovsxbd : IAsmInstruction<Pmovsxbd>
+        [MethodImpl(Inline)]
+        public static Pmovsxbw pmovsxbw(AsmHexCode encoded) => new Pmovsxbw(encoded);
+
+        public struct Pmovsxbd : IAsmInstruction<Pmovsxbd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxbd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXBD;
 
             public static implicit operator AsmMnemonicCode(Pmovsxbd src) => src.Mnemonic;
@@ -5914,8 +13581,19 @@ namespace Z0.Asm
 
         public static Pmovsxbd pmovsxbd() => default;
 
-        public readonly struct Pmovsxbq : IAsmInstruction<Pmovsxbq>
+        [MethodImpl(Inline)]
+        public static Pmovsxbd pmovsxbd(AsmHexCode encoded) => new Pmovsxbd(encoded);
+
+        public struct Pmovsxbq : IAsmInstruction<Pmovsxbq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxbq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXBQ;
 
             public static implicit operator AsmMnemonicCode(Pmovsxbq src) => src.Mnemonic;
@@ -5925,8 +13603,19 @@ namespace Z0.Asm
 
         public static Pmovsxbq pmovsxbq() => default;
 
-        public readonly struct Pmovsxwd : IAsmInstruction<Pmovsxwd>
+        [MethodImpl(Inline)]
+        public static Pmovsxbq pmovsxbq(AsmHexCode encoded) => new Pmovsxbq(encoded);
+
+        public struct Pmovsxwd : IAsmInstruction<Pmovsxwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXWD;
 
             public static implicit operator AsmMnemonicCode(Pmovsxwd src) => src.Mnemonic;
@@ -5936,8 +13625,19 @@ namespace Z0.Asm
 
         public static Pmovsxwd pmovsxwd() => default;
 
-        public readonly struct Pmovsxwq : IAsmInstruction<Pmovsxwq>
+        [MethodImpl(Inline)]
+        public static Pmovsxwd pmovsxwd(AsmHexCode encoded) => new Pmovsxwd(encoded);
+
+        public struct Pmovsxwq : IAsmInstruction<Pmovsxwq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxwq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXWQ;
 
             public static implicit operator AsmMnemonicCode(Pmovsxwq src) => src.Mnemonic;
@@ -5947,8 +13647,19 @@ namespace Z0.Asm
 
         public static Pmovsxwq pmovsxwq() => default;
 
-        public readonly struct Pmovsxdq : IAsmInstruction<Pmovsxdq>
+        [MethodImpl(Inline)]
+        public static Pmovsxwq pmovsxwq(AsmHexCode encoded) => new Pmovsxwq(encoded);
+
+        public struct Pmovsxdq : IAsmInstruction<Pmovsxdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovsxdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVSXDQ;
 
             public static implicit operator AsmMnemonicCode(Pmovsxdq src) => src.Mnemonic;
@@ -5958,8 +13669,19 @@ namespace Z0.Asm
 
         public static Pmovsxdq pmovsxdq() => default;
 
-        public readonly struct Vpmovsxbw : IAsmInstruction<Vpmovsxbw>
+        [MethodImpl(Inline)]
+        public static Pmovsxdq pmovsxdq(AsmHexCode encoded) => new Pmovsxdq(encoded);
+
+        public struct Vpmovsxbw : IAsmInstruction<Vpmovsxbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXBW;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxbw src) => src.Mnemonic;
@@ -5969,8 +13691,19 @@ namespace Z0.Asm
 
         public static Vpmovsxbw vpmovsxbw() => default;
 
-        public readonly struct Vpmovsxbd : IAsmInstruction<Vpmovsxbd>
+        [MethodImpl(Inline)]
+        public static Vpmovsxbw vpmovsxbw(AsmHexCode encoded) => new Vpmovsxbw(encoded);
+
+        public struct Vpmovsxbd : IAsmInstruction<Vpmovsxbd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxbd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXBD;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxbd src) => src.Mnemonic;
@@ -5980,8 +13713,19 @@ namespace Z0.Asm
 
         public static Vpmovsxbd vpmovsxbd() => default;
 
-        public readonly struct Vpmovsxbq : IAsmInstruction<Vpmovsxbq>
+        [MethodImpl(Inline)]
+        public static Vpmovsxbd vpmovsxbd(AsmHexCode encoded) => new Vpmovsxbd(encoded);
+
+        public struct Vpmovsxbq : IAsmInstruction<Vpmovsxbq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxbq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXBQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxbq src) => src.Mnemonic;
@@ -5991,8 +13735,19 @@ namespace Z0.Asm
 
         public static Vpmovsxbq vpmovsxbq() => default;
 
-        public readonly struct Vpmovsxwd : IAsmInstruction<Vpmovsxwd>
+        [MethodImpl(Inline)]
+        public static Vpmovsxbq vpmovsxbq(AsmHexCode encoded) => new Vpmovsxbq(encoded);
+
+        public struct Vpmovsxwd : IAsmInstruction<Vpmovsxwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXWD;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxwd src) => src.Mnemonic;
@@ -6002,8 +13757,19 @@ namespace Z0.Asm
 
         public static Vpmovsxwd vpmovsxwd() => default;
 
-        public readonly struct Vpmovsxwq : IAsmInstruction<Vpmovsxwq>
+        [MethodImpl(Inline)]
+        public static Vpmovsxwd vpmovsxwd(AsmHexCode encoded) => new Vpmovsxwd(encoded);
+
+        public struct Vpmovsxwq : IAsmInstruction<Vpmovsxwq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxwq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXWQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxwq src) => src.Mnemonic;
@@ -6013,8 +13779,19 @@ namespace Z0.Asm
 
         public static Vpmovsxwq vpmovsxwq() => default;
 
-        public readonly struct Vpmovsxdq : IAsmInstruction<Vpmovsxdq>
+        [MethodImpl(Inline)]
+        public static Vpmovsxwq vpmovsxwq(AsmHexCode encoded) => new Vpmovsxwq(encoded);
+
+        public struct Vpmovsxdq : IAsmInstruction<Vpmovsxdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovsxdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVSXDQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovsxdq src) => src.Mnemonic;
@@ -6024,8 +13801,19 @@ namespace Z0.Asm
 
         public static Vpmovsxdq vpmovsxdq() => default;
 
-        public readonly struct Pmovzxbw : IAsmInstruction<Pmovzxbw>
+        [MethodImpl(Inline)]
+        public static Vpmovsxdq vpmovsxdq(AsmHexCode encoded) => new Vpmovsxdq(encoded);
+
+        public struct Pmovzxbw : IAsmInstruction<Pmovzxbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXBW;
 
             public static implicit operator AsmMnemonicCode(Pmovzxbw src) => src.Mnemonic;
@@ -6035,8 +13823,19 @@ namespace Z0.Asm
 
         public static Pmovzxbw pmovzxbw() => default;
 
-        public readonly struct Pmovzxbd : IAsmInstruction<Pmovzxbd>
+        [MethodImpl(Inline)]
+        public static Pmovzxbw pmovzxbw(AsmHexCode encoded) => new Pmovzxbw(encoded);
+
+        public struct Pmovzxbd : IAsmInstruction<Pmovzxbd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxbd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXBD;
 
             public static implicit operator AsmMnemonicCode(Pmovzxbd src) => src.Mnemonic;
@@ -6046,8 +13845,19 @@ namespace Z0.Asm
 
         public static Pmovzxbd pmovzxbd() => default;
 
-        public readonly struct Pmovzxbq : IAsmInstruction<Pmovzxbq>
+        [MethodImpl(Inline)]
+        public static Pmovzxbd pmovzxbd(AsmHexCode encoded) => new Pmovzxbd(encoded);
+
+        public struct Pmovzxbq : IAsmInstruction<Pmovzxbq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxbq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXBQ;
 
             public static implicit operator AsmMnemonicCode(Pmovzxbq src) => src.Mnemonic;
@@ -6057,8 +13867,19 @@ namespace Z0.Asm
 
         public static Pmovzxbq pmovzxbq() => default;
 
-        public readonly struct Pmovzxwd : IAsmInstruction<Pmovzxwd>
+        [MethodImpl(Inline)]
+        public static Pmovzxbq pmovzxbq(AsmHexCode encoded) => new Pmovzxbq(encoded);
+
+        public struct Pmovzxwd : IAsmInstruction<Pmovzxwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXWD;
 
             public static implicit operator AsmMnemonicCode(Pmovzxwd src) => src.Mnemonic;
@@ -6068,8 +13889,19 @@ namespace Z0.Asm
 
         public static Pmovzxwd pmovzxwd() => default;
 
-        public readonly struct Pmovzxwq : IAsmInstruction<Pmovzxwq>
+        [MethodImpl(Inline)]
+        public static Pmovzxwd pmovzxwd(AsmHexCode encoded) => new Pmovzxwd(encoded);
+
+        public struct Pmovzxwq : IAsmInstruction<Pmovzxwq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxwq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXWQ;
 
             public static implicit operator AsmMnemonicCode(Pmovzxwq src) => src.Mnemonic;
@@ -6079,8 +13911,19 @@ namespace Z0.Asm
 
         public static Pmovzxwq pmovzxwq() => default;
 
-        public readonly struct Pmovzxdq : IAsmInstruction<Pmovzxdq>
+        [MethodImpl(Inline)]
+        public static Pmovzxwq pmovzxwq(AsmHexCode encoded) => new Pmovzxwq(encoded);
+
+        public struct Pmovzxdq : IAsmInstruction<Pmovzxdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmovzxdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMOVZXDQ;
 
             public static implicit operator AsmMnemonicCode(Pmovzxdq src) => src.Mnemonic;
@@ -6090,8 +13933,19 @@ namespace Z0.Asm
 
         public static Pmovzxdq pmovzxdq() => default;
 
-        public readonly struct Vpmovzxbw : IAsmInstruction<Vpmovzxbw>
+        [MethodImpl(Inline)]
+        public static Pmovzxdq pmovzxdq(AsmHexCode encoded) => new Pmovzxdq(encoded);
+
+        public struct Vpmovzxbw : IAsmInstruction<Vpmovzxbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXBW;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxbw src) => src.Mnemonic;
@@ -6101,8 +13955,19 @@ namespace Z0.Asm
 
         public static Vpmovzxbw vpmovzxbw() => default;
 
-        public readonly struct Vpmovzxbd : IAsmInstruction<Vpmovzxbd>
+        [MethodImpl(Inline)]
+        public static Vpmovzxbw vpmovzxbw(AsmHexCode encoded) => new Vpmovzxbw(encoded);
+
+        public struct Vpmovzxbd : IAsmInstruction<Vpmovzxbd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxbd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXBD;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxbd src) => src.Mnemonic;
@@ -6112,8 +13977,19 @@ namespace Z0.Asm
 
         public static Vpmovzxbd vpmovzxbd() => default;
 
-        public readonly struct Vpmovzxbq : IAsmInstruction<Vpmovzxbq>
+        [MethodImpl(Inline)]
+        public static Vpmovzxbd vpmovzxbd(AsmHexCode encoded) => new Vpmovzxbd(encoded);
+
+        public struct Vpmovzxbq : IAsmInstruction<Vpmovzxbq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxbq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXBQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxbq src) => src.Mnemonic;
@@ -6123,8 +13999,19 @@ namespace Z0.Asm
 
         public static Vpmovzxbq vpmovzxbq() => default;
 
-        public readonly struct Vpmovzxwd : IAsmInstruction<Vpmovzxwd>
+        [MethodImpl(Inline)]
+        public static Vpmovzxbq vpmovzxbq(AsmHexCode encoded) => new Vpmovzxbq(encoded);
+
+        public struct Vpmovzxwd : IAsmInstruction<Vpmovzxwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXWD;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxwd src) => src.Mnemonic;
@@ -6134,8 +14021,19 @@ namespace Z0.Asm
 
         public static Vpmovzxwd vpmovzxwd() => default;
 
-        public readonly struct Vpmovzxwq : IAsmInstruction<Vpmovzxwq>
+        [MethodImpl(Inline)]
+        public static Vpmovzxwd vpmovzxwd(AsmHexCode encoded) => new Vpmovzxwd(encoded);
+
+        public struct Vpmovzxwq : IAsmInstruction<Vpmovzxwq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxwq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXWQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxwq src) => src.Mnemonic;
@@ -6145,8 +14043,19 @@ namespace Z0.Asm
 
         public static Vpmovzxwq vpmovzxwq() => default;
 
-        public readonly struct Vpmovzxdq : IAsmInstruction<Vpmovzxdq>
+        [MethodImpl(Inline)]
+        public static Vpmovzxwq vpmovzxwq(AsmHexCode encoded) => new Vpmovzxwq(encoded);
+
+        public struct Vpmovzxdq : IAsmInstruction<Vpmovzxdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmovzxdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMOVZXDQ;
 
             public static implicit operator AsmMnemonicCode(Vpmovzxdq src) => src.Mnemonic;
@@ -6156,8 +14065,19 @@ namespace Z0.Asm
 
         public static Vpmovzxdq vpmovzxdq() => default;
 
-        public readonly struct Pmuldq : IAsmInstruction<Pmuldq>
+        [MethodImpl(Inline)]
+        public static Vpmovzxdq vpmovzxdq(AsmHexCode encoded) => new Vpmovzxdq(encoded);
+
+        public struct Pmuldq : IAsmInstruction<Pmuldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmuldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULDQ;
 
             public static implicit operator AsmMnemonicCode(Pmuldq src) => src.Mnemonic;
@@ -6167,8 +14087,19 @@ namespace Z0.Asm
 
         public static Pmuldq pmuldq() => default;
 
-        public readonly struct Vpmuldq : IAsmInstruction<Vpmuldq>
+        [MethodImpl(Inline)]
+        public static Pmuldq pmuldq(AsmHexCode encoded) => new Pmuldq(encoded);
+
+        public struct Vpmuldq : IAsmInstruction<Vpmuldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmuldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULDQ;
 
             public static implicit operator AsmMnemonicCode(Vpmuldq src) => src.Mnemonic;
@@ -6178,8 +14109,19 @@ namespace Z0.Asm
 
         public static Vpmuldq vpmuldq() => default;
 
-        public readonly struct Pmulhrsw : IAsmInstruction<Pmulhrsw>
+        [MethodImpl(Inline)]
+        public static Vpmuldq vpmuldq(AsmHexCode encoded) => new Vpmuldq(encoded);
+
+        public struct Pmulhrsw : IAsmInstruction<Pmulhrsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmulhrsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULHRSW;
 
             public static implicit operator AsmMnemonicCode(Pmulhrsw src) => src.Mnemonic;
@@ -6189,8 +14131,19 @@ namespace Z0.Asm
 
         public static Pmulhrsw pmulhrsw() => default;
 
-        public readonly struct Vpmulhrsw : IAsmInstruction<Vpmulhrsw>
+        [MethodImpl(Inline)]
+        public static Pmulhrsw pmulhrsw(AsmHexCode encoded) => new Pmulhrsw(encoded);
+
+        public struct Vpmulhrsw : IAsmInstruction<Vpmulhrsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmulhrsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULHRSW;
 
             public static implicit operator AsmMnemonicCode(Vpmulhrsw src) => src.Mnemonic;
@@ -6200,8 +14153,19 @@ namespace Z0.Asm
 
         public static Vpmulhrsw vpmulhrsw() => default;
 
-        public readonly struct Pmulhuw : IAsmInstruction<Pmulhuw>
+        [MethodImpl(Inline)]
+        public static Vpmulhrsw vpmulhrsw(AsmHexCode encoded) => new Vpmulhrsw(encoded);
+
+        public struct Pmulhuw : IAsmInstruction<Pmulhuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmulhuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULHUW;
 
             public static implicit operator AsmMnemonicCode(Pmulhuw src) => src.Mnemonic;
@@ -6211,8 +14175,19 @@ namespace Z0.Asm
 
         public static Pmulhuw pmulhuw() => default;
 
-        public readonly struct Vpmulhuw : IAsmInstruction<Vpmulhuw>
+        [MethodImpl(Inline)]
+        public static Pmulhuw pmulhuw(AsmHexCode encoded) => new Pmulhuw(encoded);
+
+        public struct Vpmulhuw : IAsmInstruction<Vpmulhuw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmulhuw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULHUW;
 
             public static implicit operator AsmMnemonicCode(Vpmulhuw src) => src.Mnemonic;
@@ -6222,8 +14197,19 @@ namespace Z0.Asm
 
         public static Vpmulhuw vpmulhuw() => default;
 
-        public readonly struct Pmulhw : IAsmInstruction<Pmulhw>
+        [MethodImpl(Inline)]
+        public static Vpmulhuw vpmulhuw(AsmHexCode encoded) => new Vpmulhuw(encoded);
+
+        public struct Pmulhw : IAsmInstruction<Pmulhw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmulhw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULHW;
 
             public static implicit operator AsmMnemonicCode(Pmulhw src) => src.Mnemonic;
@@ -6233,8 +14219,19 @@ namespace Z0.Asm
 
         public static Pmulhw pmulhw() => default;
 
-        public readonly struct Vpmulhw : IAsmInstruction<Vpmulhw>
+        [MethodImpl(Inline)]
+        public static Pmulhw pmulhw(AsmHexCode encoded) => new Pmulhw(encoded);
+
+        public struct Vpmulhw : IAsmInstruction<Vpmulhw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmulhw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULHW;
 
             public static implicit operator AsmMnemonicCode(Vpmulhw src) => src.Mnemonic;
@@ -6244,8 +14241,19 @@ namespace Z0.Asm
 
         public static Vpmulhw vpmulhw() => default;
 
-        public readonly struct Pmulld : IAsmInstruction<Pmulld>
+        [MethodImpl(Inline)]
+        public static Vpmulhw vpmulhw(AsmHexCode encoded) => new Vpmulhw(encoded);
+
+        public struct Pmulld : IAsmInstruction<Pmulld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmulld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULLD;
 
             public static implicit operator AsmMnemonicCode(Pmulld src) => src.Mnemonic;
@@ -6255,8 +14263,19 @@ namespace Z0.Asm
 
         public static Pmulld pmulld() => default;
 
-        public readonly struct Vpmulld : IAsmInstruction<Vpmulld>
+        [MethodImpl(Inline)]
+        public static Pmulld pmulld(AsmHexCode encoded) => new Pmulld(encoded);
+
+        public struct Vpmulld : IAsmInstruction<Vpmulld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmulld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULLD;
 
             public static implicit operator AsmMnemonicCode(Vpmulld src) => src.Mnemonic;
@@ -6266,8 +14285,19 @@ namespace Z0.Asm
 
         public static Vpmulld vpmulld() => default;
 
-        public readonly struct Pmullw : IAsmInstruction<Pmullw>
+        [MethodImpl(Inline)]
+        public static Vpmulld vpmulld(AsmHexCode encoded) => new Vpmulld(encoded);
+
+        public struct Pmullw : IAsmInstruction<Pmullw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmullw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULLW;
 
             public static implicit operator AsmMnemonicCode(Pmullw src) => src.Mnemonic;
@@ -6277,8 +14307,19 @@ namespace Z0.Asm
 
         public static Pmullw pmullw() => default;
 
-        public readonly struct Vpmullw : IAsmInstruction<Vpmullw>
+        [MethodImpl(Inline)]
+        public static Pmullw pmullw(AsmHexCode encoded) => new Pmullw(encoded);
+
+        public struct Vpmullw : IAsmInstruction<Vpmullw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmullw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULLW;
 
             public static implicit operator AsmMnemonicCode(Vpmullw src) => src.Mnemonic;
@@ -6288,8 +14329,19 @@ namespace Z0.Asm
 
         public static Vpmullw vpmullw() => default;
 
-        public readonly struct Pmuludq : IAsmInstruction<Pmuludq>
+        [MethodImpl(Inline)]
+        public static Vpmullw vpmullw(AsmHexCode encoded) => new Vpmullw(encoded);
+
+        public struct Pmuludq : IAsmInstruction<Pmuludq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pmuludq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PMULUDQ;
 
             public static implicit operator AsmMnemonicCode(Pmuludq src) => src.Mnemonic;
@@ -6299,8 +14351,19 @@ namespace Z0.Asm
 
         public static Pmuludq pmuludq() => default;
 
-        public readonly struct Vpmuludq : IAsmInstruction<Vpmuludq>
+        [MethodImpl(Inline)]
+        public static Pmuludq pmuludq(AsmHexCode encoded) => new Pmuludq(encoded);
+
+        public struct Vpmuludq : IAsmInstruction<Vpmuludq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmuludq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMULUDQ;
 
             public static implicit operator AsmMnemonicCode(Vpmuludq src) => src.Mnemonic;
@@ -6310,8 +14373,19 @@ namespace Z0.Asm
 
         public static Vpmuludq vpmuludq() => default;
 
-        public readonly struct Pop : IAsmInstruction<Pop>
+        [MethodImpl(Inline)]
+        public static Vpmuludq vpmuludq(AsmHexCode encoded) => new Vpmuludq(encoded);
+
+        public struct Pop : IAsmInstruction<Pop>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pop(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POP;
 
             public static implicit operator AsmMnemonicCode(Pop src) => src.Mnemonic;
@@ -6321,8 +14395,63 @@ namespace Z0.Asm
 
         public static Pop pop() => default;
 
-        public readonly struct Popcnt : IAsmInstruction<Popcnt>
+        [MethodImpl(Inline)]
+        public static Pop pop(AsmHexCode encoded) => new Pop(encoded);
+
+        public struct Popa : IAsmInstruction<Popa>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popa(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPA;
+
+            public static implicit operator AsmMnemonicCode(Popa src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Popa src) => AsmMnemonics.POPA;
+        }
+
+        public static Popa popa() => default;
+
+        [MethodImpl(Inline)]
+        public static Popa popa(AsmHexCode encoded) => new Popa(encoded);
+
+        public struct Popad : IAsmInstruction<Popad>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popad(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPAD;
+
+            public static implicit operator AsmMnemonicCode(Popad src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Popad src) => AsmMnemonics.POPAD;
+        }
+
+        public static Popad popad() => default;
+
+        [MethodImpl(Inline)]
+        public static Popad popad(AsmHexCode encoded) => new Popad(encoded);
+
+        public struct Popcnt : IAsmInstruction<Popcnt>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popcnt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPCNT;
 
             public static implicit operator AsmMnemonicCode(Popcnt src) => src.Mnemonic;
@@ -6332,8 +14461,85 @@ namespace Z0.Asm
 
         public static Popcnt popcnt() => default;
 
-        public readonly struct Por : IAsmInstruction<Por>
+        [MethodImpl(Inline)]
+        public static Popcnt popcnt(AsmHexCode encoded) => new Popcnt(encoded);
+
+        public struct Popf : IAsmInstruction<Popf>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popf(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPF;
+
+            public static implicit operator AsmMnemonicCode(Popf src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Popf src) => AsmMnemonics.POPF;
+        }
+
+        public static Popf popf() => default;
+
+        [MethodImpl(Inline)]
+        public static Popf popf(AsmHexCode encoded) => new Popf(encoded);
+
+        public struct Popfd : IAsmInstruction<Popfd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popfd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPFD;
+
+            public static implicit operator AsmMnemonicCode(Popfd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Popfd src) => AsmMnemonics.POPFD;
+        }
+
+        public static Popfd popfd() => default;
+
+        [MethodImpl(Inline)]
+        public static Popfd popfd(AsmHexCode encoded) => new Popfd(encoded);
+
+        public struct Popfq : IAsmInstruction<Popfq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Popfq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POPFQ;
+
+            public static implicit operator AsmMnemonicCode(Popfq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Popfq src) => AsmMnemonics.POPFQ;
+        }
+
+        public static Popfq popfq() => default;
+
+        [MethodImpl(Inline)]
+        public static Popfq popfq(AsmHexCode encoded) => new Popfq(encoded);
+
+        public struct Por : IAsmInstruction<Por>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Por(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.POR;
 
             public static implicit operator AsmMnemonicCode(Por src) => src.Mnemonic;
@@ -6343,8 +14549,19 @@ namespace Z0.Asm
 
         public static Por por() => default;
 
-        public readonly struct Vpor : IAsmInstruction<Vpor>
+        [MethodImpl(Inline)]
+        public static Por por(AsmHexCode encoded) => new Por(encoded);
+
+        public struct Vpor : IAsmInstruction<Vpor>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPOR;
 
             public static implicit operator AsmMnemonicCode(Vpor src) => src.Mnemonic;
@@ -6354,8 +14571,19 @@ namespace Z0.Asm
 
         public static Vpor vpor() => default;
 
-        public readonly struct Prefetcht0 : IAsmInstruction<Prefetcht0>
+        [MethodImpl(Inline)]
+        public static Vpor vpor(AsmHexCode encoded) => new Vpor(encoded);
+
+        public struct Prefetcht0 : IAsmInstruction<Prefetcht0>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Prefetcht0(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCHT0;
 
             public static implicit operator AsmMnemonicCode(Prefetcht0 src) => src.Mnemonic;
@@ -6365,8 +14593,19 @@ namespace Z0.Asm
 
         public static Prefetcht0 prefetcht0() => default;
 
-        public readonly struct Prefetcht1 : IAsmInstruction<Prefetcht1>
+        [MethodImpl(Inline)]
+        public static Prefetcht0 prefetcht0(AsmHexCode encoded) => new Prefetcht0(encoded);
+
+        public struct Prefetcht1 : IAsmInstruction<Prefetcht1>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Prefetcht1(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCHT1;
 
             public static implicit operator AsmMnemonicCode(Prefetcht1 src) => src.Mnemonic;
@@ -6376,8 +14615,19 @@ namespace Z0.Asm
 
         public static Prefetcht1 prefetcht1() => default;
 
-        public readonly struct Prefetcht2 : IAsmInstruction<Prefetcht2>
+        [MethodImpl(Inline)]
+        public static Prefetcht1 prefetcht1(AsmHexCode encoded) => new Prefetcht1(encoded);
+
+        public struct Prefetcht2 : IAsmInstruction<Prefetcht2>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Prefetcht2(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCHT2;
 
             public static implicit operator AsmMnemonicCode(Prefetcht2 src) => src.Mnemonic;
@@ -6387,8 +14637,19 @@ namespace Z0.Asm
 
         public static Prefetcht2 prefetcht2() => default;
 
-        public readonly struct Prefetchnta : IAsmInstruction<Prefetchnta>
+        [MethodImpl(Inline)]
+        public static Prefetcht2 prefetcht2(AsmHexCode encoded) => new Prefetcht2(encoded);
+
+        public struct Prefetchnta : IAsmInstruction<Prefetchnta>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Prefetchnta(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PREFETCHNTA;
 
             public static implicit operator AsmMnemonicCode(Prefetchnta src) => src.Mnemonic;
@@ -6398,8 +14659,19 @@ namespace Z0.Asm
 
         public static Prefetchnta prefetchnta() => default;
 
-        public readonly struct Psadbw : IAsmInstruction<Psadbw>
+        [MethodImpl(Inline)]
+        public static Prefetchnta prefetchnta(AsmHexCode encoded) => new Prefetchnta(encoded);
+
+        public struct Psadbw : IAsmInstruction<Psadbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psadbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSADBW;
 
             public static implicit operator AsmMnemonicCode(Psadbw src) => src.Mnemonic;
@@ -6409,8 +14681,19 @@ namespace Z0.Asm
 
         public static Psadbw psadbw() => default;
 
-        public readonly struct Vpsadbw : IAsmInstruction<Vpsadbw>
+        [MethodImpl(Inline)]
+        public static Psadbw psadbw(AsmHexCode encoded) => new Psadbw(encoded);
+
+        public struct Vpsadbw : IAsmInstruction<Vpsadbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsadbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSADBW;
 
             public static implicit operator AsmMnemonicCode(Vpsadbw src) => src.Mnemonic;
@@ -6420,8 +14703,19 @@ namespace Z0.Asm
 
         public static Vpsadbw vpsadbw() => default;
 
-        public readonly struct Pshufb : IAsmInstruction<Pshufb>
+        [MethodImpl(Inline)]
+        public static Vpsadbw vpsadbw(AsmHexCode encoded) => new Vpsadbw(encoded);
+
+        public struct Pshufb : IAsmInstruction<Pshufb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pshufb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSHUFB;
 
             public static implicit operator AsmMnemonicCode(Pshufb src) => src.Mnemonic;
@@ -6431,8 +14725,19 @@ namespace Z0.Asm
 
         public static Pshufb pshufb() => default;
 
-        public readonly struct Vpshufb : IAsmInstruction<Vpshufb>
+        [MethodImpl(Inline)]
+        public static Pshufb pshufb(AsmHexCode encoded) => new Pshufb(encoded);
+
+        public struct Vpshufb : IAsmInstruction<Vpshufb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpshufb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSHUFB;
 
             public static implicit operator AsmMnemonicCode(Vpshufb src) => src.Mnemonic;
@@ -6442,8 +14747,19 @@ namespace Z0.Asm
 
         public static Vpshufb vpshufb() => default;
 
-        public readonly struct Pshufd : IAsmInstruction<Pshufd>
+        [MethodImpl(Inline)]
+        public static Vpshufb vpshufb(AsmHexCode encoded) => new Vpshufb(encoded);
+
+        public struct Pshufd : IAsmInstruction<Pshufd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pshufd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSHUFD;
 
             public static implicit operator AsmMnemonicCode(Pshufd src) => src.Mnemonic;
@@ -6453,8 +14769,19 @@ namespace Z0.Asm
 
         public static Pshufd pshufd() => default;
 
-        public readonly struct Vpshufd : IAsmInstruction<Vpshufd>
+        [MethodImpl(Inline)]
+        public static Pshufd pshufd(AsmHexCode encoded) => new Pshufd(encoded);
+
+        public struct Vpshufd : IAsmInstruction<Vpshufd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpshufd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSHUFD;
 
             public static implicit operator AsmMnemonicCode(Vpshufd src) => src.Mnemonic;
@@ -6464,8 +14791,19 @@ namespace Z0.Asm
 
         public static Vpshufd vpshufd() => default;
 
-        public readonly struct Pshufhw : IAsmInstruction<Pshufhw>
+        [MethodImpl(Inline)]
+        public static Vpshufd vpshufd(AsmHexCode encoded) => new Vpshufd(encoded);
+
+        public struct Pshufhw : IAsmInstruction<Pshufhw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pshufhw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSHUFHW;
 
             public static implicit operator AsmMnemonicCode(Pshufhw src) => src.Mnemonic;
@@ -6475,8 +14813,19 @@ namespace Z0.Asm
 
         public static Pshufhw pshufhw() => default;
 
-        public readonly struct Vpshufhw : IAsmInstruction<Vpshufhw>
+        [MethodImpl(Inline)]
+        public static Pshufhw pshufhw(AsmHexCode encoded) => new Pshufhw(encoded);
+
+        public struct Vpshufhw : IAsmInstruction<Vpshufhw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpshufhw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSHUFHW;
 
             public static implicit operator AsmMnemonicCode(Vpshufhw src) => src.Mnemonic;
@@ -6486,8 +14835,19 @@ namespace Z0.Asm
 
         public static Vpshufhw vpshufhw() => default;
 
-        public readonly struct Pshuflw : IAsmInstruction<Pshuflw>
+        [MethodImpl(Inline)]
+        public static Vpshufhw vpshufhw(AsmHexCode encoded) => new Vpshufhw(encoded);
+
+        public struct Pshuflw : IAsmInstruction<Pshuflw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pshuflw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSHUFLW;
 
             public static implicit operator AsmMnemonicCode(Pshuflw src) => src.Mnemonic;
@@ -6497,8 +14857,19 @@ namespace Z0.Asm
 
         public static Pshuflw pshuflw() => default;
 
-        public readonly struct Vpshuflw : IAsmInstruction<Vpshuflw>
+        [MethodImpl(Inline)]
+        public static Pshuflw pshuflw(AsmHexCode encoded) => new Pshuflw(encoded);
+
+        public struct Vpshuflw : IAsmInstruction<Vpshuflw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpshuflw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSHUFLW;
 
             public static implicit operator AsmMnemonicCode(Vpshuflw src) => src.Mnemonic;
@@ -6508,8 +14879,19 @@ namespace Z0.Asm
 
         public static Vpshuflw vpshuflw() => default;
 
-        public readonly struct Pshufw : IAsmInstruction<Pshufw>
+        [MethodImpl(Inline)]
+        public static Vpshuflw vpshuflw(AsmHexCode encoded) => new Vpshuflw(encoded);
+
+        public struct Pshufw : IAsmInstruction<Pshufw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pshufw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSHUFW;
 
             public static implicit operator AsmMnemonicCode(Pshufw src) => src.Mnemonic;
@@ -6519,8 +14901,19 @@ namespace Z0.Asm
 
         public static Pshufw pshufw() => default;
 
-        public readonly struct Psignb : IAsmInstruction<Psignb>
+        [MethodImpl(Inline)]
+        public static Pshufw pshufw(AsmHexCode encoded) => new Pshufw(encoded);
+
+        public struct Psignb : IAsmInstruction<Psignb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psignb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSIGNB;
 
             public static implicit operator AsmMnemonicCode(Psignb src) => src.Mnemonic;
@@ -6530,8 +14923,19 @@ namespace Z0.Asm
 
         public static Psignb psignb() => default;
 
-        public readonly struct Psignw : IAsmInstruction<Psignw>
+        [MethodImpl(Inline)]
+        public static Psignb psignb(AsmHexCode encoded) => new Psignb(encoded);
+
+        public struct Psignw : IAsmInstruction<Psignw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psignw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSIGNW;
 
             public static implicit operator AsmMnemonicCode(Psignw src) => src.Mnemonic;
@@ -6541,8 +14945,19 @@ namespace Z0.Asm
 
         public static Psignw psignw() => default;
 
-        public readonly struct Psignd : IAsmInstruction<Psignd>
+        [MethodImpl(Inline)]
+        public static Psignw psignw(AsmHexCode encoded) => new Psignw(encoded);
+
+        public struct Psignd : IAsmInstruction<Psignd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psignd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSIGND;
 
             public static implicit operator AsmMnemonicCode(Psignd src) => src.Mnemonic;
@@ -6552,8 +14967,19 @@ namespace Z0.Asm
 
         public static Psignd psignd() => default;
 
-        public readonly struct Vpsignb : IAsmInstruction<Vpsignb>
+        [MethodImpl(Inline)]
+        public static Psignd psignd(AsmHexCode encoded) => new Psignd(encoded);
+
+        public struct Vpsignb : IAsmInstruction<Vpsignb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsignb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSIGNB;
 
             public static implicit operator AsmMnemonicCode(Vpsignb src) => src.Mnemonic;
@@ -6563,8 +14989,19 @@ namespace Z0.Asm
 
         public static Vpsignb vpsignb() => default;
 
-        public readonly struct Vpsignw : IAsmInstruction<Vpsignw>
+        [MethodImpl(Inline)]
+        public static Vpsignb vpsignb(AsmHexCode encoded) => new Vpsignb(encoded);
+
+        public struct Vpsignw : IAsmInstruction<Vpsignw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsignw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSIGNW;
 
             public static implicit operator AsmMnemonicCode(Vpsignw src) => src.Mnemonic;
@@ -6574,8 +15011,19 @@ namespace Z0.Asm
 
         public static Vpsignw vpsignw() => default;
 
-        public readonly struct Vpsignd : IAsmInstruction<Vpsignd>
+        [MethodImpl(Inline)]
+        public static Vpsignw vpsignw(AsmHexCode encoded) => new Vpsignw(encoded);
+
+        public struct Vpsignd : IAsmInstruction<Vpsignd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsignd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSIGND;
 
             public static implicit operator AsmMnemonicCode(Vpsignd src) => src.Mnemonic;
@@ -6585,8 +15033,19 @@ namespace Z0.Asm
 
         public static Vpsignd vpsignd() => default;
 
-        public readonly struct Pslldq : IAsmInstruction<Pslldq>
+        [MethodImpl(Inline)]
+        public static Vpsignd vpsignd(AsmHexCode encoded) => new Vpsignd(encoded);
+
+        public struct Pslldq : IAsmInstruction<Pslldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pslldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSLLDQ;
 
             public static implicit operator AsmMnemonicCode(Pslldq src) => src.Mnemonic;
@@ -6596,8 +15055,19 @@ namespace Z0.Asm
 
         public static Pslldq pslldq() => default;
 
-        public readonly struct Vpslldq : IAsmInstruction<Vpslldq>
+        [MethodImpl(Inline)]
+        public static Pslldq pslldq(AsmHexCode encoded) => new Pslldq(encoded);
+
+        public struct Vpslldq : IAsmInstruction<Vpslldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpslldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLDQ;
 
             public static implicit operator AsmMnemonicCode(Vpslldq src) => src.Mnemonic;
@@ -6607,8 +15077,19 @@ namespace Z0.Asm
 
         public static Vpslldq vpslldq() => default;
 
-        public readonly struct Psllw : IAsmInstruction<Psllw>
+        [MethodImpl(Inline)]
+        public static Vpslldq vpslldq(AsmHexCode encoded) => new Vpslldq(encoded);
+
+        public struct Psllw : IAsmInstruction<Psllw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psllw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSLLW;
 
             public static implicit operator AsmMnemonicCode(Psllw src) => src.Mnemonic;
@@ -6618,8 +15099,19 @@ namespace Z0.Asm
 
         public static Psllw psllw() => default;
 
-        public readonly struct Pslld : IAsmInstruction<Pslld>
+        [MethodImpl(Inline)]
+        public static Psllw psllw(AsmHexCode encoded) => new Psllw(encoded);
+
+        public struct Pslld : IAsmInstruction<Pslld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pslld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSLLD;
 
             public static implicit operator AsmMnemonicCode(Pslld src) => src.Mnemonic;
@@ -6629,8 +15121,19 @@ namespace Z0.Asm
 
         public static Pslld pslld() => default;
 
-        public readonly struct Psllq : IAsmInstruction<Psllq>
+        [MethodImpl(Inline)]
+        public static Pslld pslld(AsmHexCode encoded) => new Pslld(encoded);
+
+        public struct Psllq : IAsmInstruction<Psllq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psllq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSLLQ;
 
             public static implicit operator AsmMnemonicCode(Psllq src) => src.Mnemonic;
@@ -6640,8 +15143,19 @@ namespace Z0.Asm
 
         public static Psllq psllq() => default;
 
-        public readonly struct Vpsllw : IAsmInstruction<Vpsllw>
+        [MethodImpl(Inline)]
+        public static Psllq psllq(AsmHexCode encoded) => new Psllq(encoded);
+
+        public struct Vpsllw : IAsmInstruction<Vpsllw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsllw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLW;
 
             public static implicit operator AsmMnemonicCode(Vpsllw src) => src.Mnemonic;
@@ -6651,8 +15165,19 @@ namespace Z0.Asm
 
         public static Vpsllw vpsllw() => default;
 
-        public readonly struct Vpslld : IAsmInstruction<Vpslld>
+        [MethodImpl(Inline)]
+        public static Vpsllw vpsllw(AsmHexCode encoded) => new Vpsllw(encoded);
+
+        public struct Vpslld : IAsmInstruction<Vpslld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpslld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLD;
 
             public static implicit operator AsmMnemonicCode(Vpslld src) => src.Mnemonic;
@@ -6662,8 +15187,19 @@ namespace Z0.Asm
 
         public static Vpslld vpslld() => default;
 
-        public readonly struct Vpsllq : IAsmInstruction<Vpsllq>
+        [MethodImpl(Inline)]
+        public static Vpslld vpslld(AsmHexCode encoded) => new Vpslld(encoded);
+
+        public struct Vpsllq : IAsmInstruction<Vpsllq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsllq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLQ;
 
             public static implicit operator AsmMnemonicCode(Vpsllq src) => src.Mnemonic;
@@ -6673,8 +15209,19 @@ namespace Z0.Asm
 
         public static Vpsllq vpsllq() => default;
 
-        public readonly struct Psraw : IAsmInstruction<Psraw>
+        [MethodImpl(Inline)]
+        public static Vpsllq vpsllq(AsmHexCode encoded) => new Vpsllq(encoded);
+
+        public struct Psraw : IAsmInstruction<Psraw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psraw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRAW;
 
             public static implicit operator AsmMnemonicCode(Psraw src) => src.Mnemonic;
@@ -6684,8 +15231,19 @@ namespace Z0.Asm
 
         public static Psraw psraw() => default;
 
-        public readonly struct Psrad : IAsmInstruction<Psrad>
+        [MethodImpl(Inline)]
+        public static Psraw psraw(AsmHexCode encoded) => new Psraw(encoded);
+
+        public struct Psrad : IAsmInstruction<Psrad>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psrad(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRAD;
 
             public static implicit operator AsmMnemonicCode(Psrad src) => src.Mnemonic;
@@ -6695,8 +15253,19 @@ namespace Z0.Asm
 
         public static Psrad psrad() => default;
 
-        public readonly struct Vpsraw : IAsmInstruction<Vpsraw>
+        [MethodImpl(Inline)]
+        public static Psrad psrad(AsmHexCode encoded) => new Psrad(encoded);
+
+        public struct Vpsraw : IAsmInstruction<Vpsraw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsraw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRAW;
 
             public static implicit operator AsmMnemonicCode(Vpsraw src) => src.Mnemonic;
@@ -6706,8 +15275,19 @@ namespace Z0.Asm
 
         public static Vpsraw vpsraw() => default;
 
-        public readonly struct Vpsrad : IAsmInstruction<Vpsrad>
+        [MethodImpl(Inline)]
+        public static Vpsraw vpsraw(AsmHexCode encoded) => new Vpsraw(encoded);
+
+        public struct Vpsrad : IAsmInstruction<Vpsrad>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrad(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRAD;
 
             public static implicit operator AsmMnemonicCode(Vpsrad src) => src.Mnemonic;
@@ -6717,8 +15297,19 @@ namespace Z0.Asm
 
         public static Vpsrad vpsrad() => default;
 
-        public readonly struct Psrldq : IAsmInstruction<Psrldq>
+        [MethodImpl(Inline)]
+        public static Vpsrad vpsrad(AsmHexCode encoded) => new Vpsrad(encoded);
+
+        public struct Psrldq : IAsmInstruction<Psrldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psrldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRLDQ;
 
             public static implicit operator AsmMnemonicCode(Psrldq src) => src.Mnemonic;
@@ -6728,8 +15319,19 @@ namespace Z0.Asm
 
         public static Psrldq psrldq() => default;
 
-        public readonly struct Vpsrldq : IAsmInstruction<Vpsrldq>
+        [MethodImpl(Inline)]
+        public static Psrldq psrldq(AsmHexCode encoded) => new Psrldq(encoded);
+
+        public struct Vpsrldq : IAsmInstruction<Vpsrldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLDQ;
 
             public static implicit operator AsmMnemonicCode(Vpsrldq src) => src.Mnemonic;
@@ -6739,8 +15341,19 @@ namespace Z0.Asm
 
         public static Vpsrldq vpsrldq() => default;
 
-        public readonly struct Psrlw : IAsmInstruction<Psrlw>
+        [MethodImpl(Inline)]
+        public static Vpsrldq vpsrldq(AsmHexCode encoded) => new Vpsrldq(encoded);
+
+        public struct Psrlw : IAsmInstruction<Psrlw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psrlw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRLW;
 
             public static implicit operator AsmMnemonicCode(Psrlw src) => src.Mnemonic;
@@ -6750,8 +15363,19 @@ namespace Z0.Asm
 
         public static Psrlw psrlw() => default;
 
-        public readonly struct Psrld : IAsmInstruction<Psrld>
+        [MethodImpl(Inline)]
+        public static Psrlw psrlw(AsmHexCode encoded) => new Psrlw(encoded);
+
+        public struct Psrld : IAsmInstruction<Psrld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psrld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRLD;
 
             public static implicit operator AsmMnemonicCode(Psrld src) => src.Mnemonic;
@@ -6761,8 +15385,19 @@ namespace Z0.Asm
 
         public static Psrld psrld() => default;
 
-        public readonly struct Psrlq : IAsmInstruction<Psrlq>
+        [MethodImpl(Inline)]
+        public static Psrld psrld(AsmHexCode encoded) => new Psrld(encoded);
+
+        public struct Psrlq : IAsmInstruction<Psrlq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psrlq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSRLQ;
 
             public static implicit operator AsmMnemonicCode(Psrlq src) => src.Mnemonic;
@@ -6772,8 +15407,19 @@ namespace Z0.Asm
 
         public static Psrlq psrlq() => default;
 
-        public readonly struct Vpsrlw : IAsmInstruction<Vpsrlw>
+        [MethodImpl(Inline)]
+        public static Psrlq psrlq(AsmHexCode encoded) => new Psrlq(encoded);
+
+        public struct Vpsrlw : IAsmInstruction<Vpsrlw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrlw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLW;
 
             public static implicit operator AsmMnemonicCode(Vpsrlw src) => src.Mnemonic;
@@ -6783,8 +15429,19 @@ namespace Z0.Asm
 
         public static Vpsrlw vpsrlw() => default;
 
-        public readonly struct Vpsrld : IAsmInstruction<Vpsrld>
+        [MethodImpl(Inline)]
+        public static Vpsrlw vpsrlw(AsmHexCode encoded) => new Vpsrlw(encoded);
+
+        public struct Vpsrld : IAsmInstruction<Vpsrld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLD;
 
             public static implicit operator AsmMnemonicCode(Vpsrld src) => src.Mnemonic;
@@ -6794,8 +15451,19 @@ namespace Z0.Asm
 
         public static Vpsrld vpsrld() => default;
 
-        public readonly struct Vpsrlq : IAsmInstruction<Vpsrlq>
+        [MethodImpl(Inline)]
+        public static Vpsrld vpsrld(AsmHexCode encoded) => new Vpsrld(encoded);
+
+        public struct Vpsrlq : IAsmInstruction<Vpsrlq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrlq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLQ;
 
             public static implicit operator AsmMnemonicCode(Vpsrlq src) => src.Mnemonic;
@@ -6805,8 +15473,19 @@ namespace Z0.Asm
 
         public static Vpsrlq vpsrlq() => default;
 
-        public readonly struct Psubb : IAsmInstruction<Psubb>
+        [MethodImpl(Inline)]
+        public static Vpsrlq vpsrlq(AsmHexCode encoded) => new Vpsrlq(encoded);
+
+        public struct Psubb : IAsmInstruction<Psubb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBB;
 
             public static implicit operator AsmMnemonicCode(Psubb src) => src.Mnemonic;
@@ -6816,8 +15495,19 @@ namespace Z0.Asm
 
         public static Psubb psubb() => default;
 
-        public readonly struct Psubw : IAsmInstruction<Psubw>
+        [MethodImpl(Inline)]
+        public static Psubb psubb(AsmHexCode encoded) => new Psubb(encoded);
+
+        public struct Psubw : IAsmInstruction<Psubw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBW;
 
             public static implicit operator AsmMnemonicCode(Psubw src) => src.Mnemonic;
@@ -6827,8 +15517,19 @@ namespace Z0.Asm
 
         public static Psubw psubw() => default;
 
-        public readonly struct Psubd : IAsmInstruction<Psubd>
+        [MethodImpl(Inline)]
+        public static Psubw psubw(AsmHexCode encoded) => new Psubw(encoded);
+
+        public struct Psubd : IAsmInstruction<Psubd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBD;
 
             public static implicit operator AsmMnemonicCode(Psubd src) => src.Mnemonic;
@@ -6838,8 +15539,19 @@ namespace Z0.Asm
 
         public static Psubd psubd() => default;
 
-        public readonly struct Vpsubb : IAsmInstruction<Vpsubb>
+        [MethodImpl(Inline)]
+        public static Psubd psubd(AsmHexCode encoded) => new Psubd(encoded);
+
+        public struct Vpsubb : IAsmInstruction<Vpsubb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBB;
 
             public static implicit operator AsmMnemonicCode(Vpsubb src) => src.Mnemonic;
@@ -6849,8 +15561,19 @@ namespace Z0.Asm
 
         public static Vpsubb vpsubb() => default;
 
-        public readonly struct Vpsubw : IAsmInstruction<Vpsubw>
+        [MethodImpl(Inline)]
+        public static Vpsubb vpsubb(AsmHexCode encoded) => new Vpsubb(encoded);
+
+        public struct Vpsubw : IAsmInstruction<Vpsubw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBW;
 
             public static implicit operator AsmMnemonicCode(Vpsubw src) => src.Mnemonic;
@@ -6860,8 +15583,19 @@ namespace Z0.Asm
 
         public static Vpsubw vpsubw() => default;
 
-        public readonly struct Vpsubd : IAsmInstruction<Vpsubd>
+        [MethodImpl(Inline)]
+        public static Vpsubw vpsubw(AsmHexCode encoded) => new Vpsubw(encoded);
+
+        public struct Vpsubd : IAsmInstruction<Vpsubd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBD;
 
             public static implicit operator AsmMnemonicCode(Vpsubd src) => src.Mnemonic;
@@ -6871,8 +15605,19 @@ namespace Z0.Asm
 
         public static Vpsubd vpsubd() => default;
 
-        public readonly struct Psubq : IAsmInstruction<Psubq>
+        [MethodImpl(Inline)]
+        public static Vpsubd vpsubd(AsmHexCode encoded) => new Vpsubd(encoded);
+
+        public struct Psubq : IAsmInstruction<Psubq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBQ;
 
             public static implicit operator AsmMnemonicCode(Psubq src) => src.Mnemonic;
@@ -6882,8 +15627,19 @@ namespace Z0.Asm
 
         public static Psubq psubq() => default;
 
-        public readonly struct Vpsubq : IAsmInstruction<Vpsubq>
+        [MethodImpl(Inline)]
+        public static Psubq psubq(AsmHexCode encoded) => new Psubq(encoded);
+
+        public struct Vpsubq : IAsmInstruction<Vpsubq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBQ;
 
             public static implicit operator AsmMnemonicCode(Vpsubq src) => src.Mnemonic;
@@ -6893,8 +15649,19 @@ namespace Z0.Asm
 
         public static Vpsubq vpsubq() => default;
 
-        public readonly struct Psubsb : IAsmInstruction<Psubsb>
+        [MethodImpl(Inline)]
+        public static Vpsubq vpsubq(AsmHexCode encoded) => new Vpsubq(encoded);
+
+        public struct Psubsb : IAsmInstruction<Psubsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBSB;
 
             public static implicit operator AsmMnemonicCode(Psubsb src) => src.Mnemonic;
@@ -6904,8 +15671,19 @@ namespace Z0.Asm
 
         public static Psubsb psubsb() => default;
 
-        public readonly struct Psubsw : IAsmInstruction<Psubsw>
+        [MethodImpl(Inline)]
+        public static Psubsb psubsb(AsmHexCode encoded) => new Psubsb(encoded);
+
+        public struct Psubsw : IAsmInstruction<Psubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBSW;
 
             public static implicit operator AsmMnemonicCode(Psubsw src) => src.Mnemonic;
@@ -6915,8 +15693,19 @@ namespace Z0.Asm
 
         public static Psubsw psubsw() => default;
 
-        public readonly struct Vpsubsb : IAsmInstruction<Vpsubsb>
+        [MethodImpl(Inline)]
+        public static Psubsw psubsw(AsmHexCode encoded) => new Psubsw(encoded);
+
+        public struct Vpsubsb : IAsmInstruction<Vpsubsb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubsb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBSB;
 
             public static implicit operator AsmMnemonicCode(Vpsubsb src) => src.Mnemonic;
@@ -6926,8 +15715,19 @@ namespace Z0.Asm
 
         public static Vpsubsb vpsubsb() => default;
 
-        public readonly struct Vpsubsw : IAsmInstruction<Vpsubsw>
+        [MethodImpl(Inline)]
+        public static Vpsubsb vpsubsb(AsmHexCode encoded) => new Vpsubsb(encoded);
+
+        public struct Vpsubsw : IAsmInstruction<Vpsubsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBSW;
 
             public static implicit operator AsmMnemonicCode(Vpsubsw src) => src.Mnemonic;
@@ -6937,8 +15737,19 @@ namespace Z0.Asm
 
         public static Vpsubsw vpsubsw() => default;
 
-        public readonly struct Psubusb : IAsmInstruction<Psubusb>
+        [MethodImpl(Inline)]
+        public static Vpsubsw vpsubsw(AsmHexCode encoded) => new Vpsubsw(encoded);
+
+        public struct Psubusb : IAsmInstruction<Psubusb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubusb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBUSB;
 
             public static implicit operator AsmMnemonicCode(Psubusb src) => src.Mnemonic;
@@ -6948,8 +15759,19 @@ namespace Z0.Asm
 
         public static Psubusb psubusb() => default;
 
-        public readonly struct Psubusw : IAsmInstruction<Psubusw>
+        [MethodImpl(Inline)]
+        public static Psubusb psubusb(AsmHexCode encoded) => new Psubusb(encoded);
+
+        public struct Psubusw : IAsmInstruction<Psubusw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Psubusw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PSUBUSW;
 
             public static implicit operator AsmMnemonicCode(Psubusw src) => src.Mnemonic;
@@ -6959,8 +15781,19 @@ namespace Z0.Asm
 
         public static Psubusw psubusw() => default;
 
-        public readonly struct Vpsubusb : IAsmInstruction<Vpsubusb>
+        [MethodImpl(Inline)]
+        public static Psubusw psubusw(AsmHexCode encoded) => new Psubusw(encoded);
+
+        public struct Vpsubusb : IAsmInstruction<Vpsubusb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubusb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBUSB;
 
             public static implicit operator AsmMnemonicCode(Vpsubusb src) => src.Mnemonic;
@@ -6970,8 +15803,19 @@ namespace Z0.Asm
 
         public static Vpsubusb vpsubusb() => default;
 
-        public readonly struct Vpsubusw : IAsmInstruction<Vpsubusw>
+        [MethodImpl(Inline)]
+        public static Vpsubusb vpsubusb(AsmHexCode encoded) => new Vpsubusb(encoded);
+
+        public struct Vpsubusw : IAsmInstruction<Vpsubusw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsubusw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSUBUSW;
 
             public static implicit operator AsmMnemonicCode(Vpsubusw src) => src.Mnemonic;
@@ -6981,8 +15825,19 @@ namespace Z0.Asm
 
         public static Vpsubusw vpsubusw() => default;
 
-        public readonly struct Ptest : IAsmInstruction<Ptest>
+        [MethodImpl(Inline)]
+        public static Vpsubusw vpsubusw(AsmHexCode encoded) => new Vpsubusw(encoded);
+
+        public struct Ptest : IAsmInstruction<Ptest>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ptest(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PTEST;
 
             public static implicit operator AsmMnemonicCode(Ptest src) => src.Mnemonic;
@@ -6992,8 +15847,19 @@ namespace Z0.Asm
 
         public static Ptest ptest() => default;
 
-        public readonly struct Vptest : IAsmInstruction<Vptest>
+        [MethodImpl(Inline)]
+        public static Ptest ptest(AsmHexCode encoded) => new Ptest(encoded);
+
+        public struct Vptest : IAsmInstruction<Vptest>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vptest(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPTEST;
 
             public static implicit operator AsmMnemonicCode(Vptest src) => src.Mnemonic;
@@ -7003,8 +15869,19 @@ namespace Z0.Asm
 
         public static Vptest vptest() => default;
 
-        public readonly struct Punpckhbw : IAsmInstruction<Punpckhbw>
+        [MethodImpl(Inline)]
+        public static Vptest vptest(AsmHexCode encoded) => new Vptest(encoded);
+
+        public struct Punpckhbw : IAsmInstruction<Punpckhbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpckhbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKHBW;
 
             public static implicit operator AsmMnemonicCode(Punpckhbw src) => src.Mnemonic;
@@ -7014,8 +15891,19 @@ namespace Z0.Asm
 
         public static Punpckhbw punpckhbw() => default;
 
-        public readonly struct Punpckhwd : IAsmInstruction<Punpckhwd>
+        [MethodImpl(Inline)]
+        public static Punpckhbw punpckhbw(AsmHexCode encoded) => new Punpckhbw(encoded);
+
+        public struct Punpckhwd : IAsmInstruction<Punpckhwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpckhwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKHWD;
 
             public static implicit operator AsmMnemonicCode(Punpckhwd src) => src.Mnemonic;
@@ -7025,8 +15913,19 @@ namespace Z0.Asm
 
         public static Punpckhwd punpckhwd() => default;
 
-        public readonly struct Punpckhdq : IAsmInstruction<Punpckhdq>
+        [MethodImpl(Inline)]
+        public static Punpckhwd punpckhwd(AsmHexCode encoded) => new Punpckhwd(encoded);
+
+        public struct Punpckhdq : IAsmInstruction<Punpckhdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpckhdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKHDQ;
 
             public static implicit operator AsmMnemonicCode(Punpckhdq src) => src.Mnemonic;
@@ -7036,8 +15935,19 @@ namespace Z0.Asm
 
         public static Punpckhdq punpckhdq() => default;
 
-        public readonly struct Punpckhqdq : IAsmInstruction<Punpckhqdq>
+        [MethodImpl(Inline)]
+        public static Punpckhdq punpckhdq(AsmHexCode encoded) => new Punpckhdq(encoded);
+
+        public struct Punpckhqdq : IAsmInstruction<Punpckhqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpckhqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKHQDQ;
 
             public static implicit operator AsmMnemonicCode(Punpckhqdq src) => src.Mnemonic;
@@ -7047,8 +15957,19 @@ namespace Z0.Asm
 
         public static Punpckhqdq punpckhqdq() => default;
 
-        public readonly struct Vpunpckhbw : IAsmInstruction<Vpunpckhbw>
+        [MethodImpl(Inline)]
+        public static Punpckhqdq punpckhqdq(AsmHexCode encoded) => new Punpckhqdq(encoded);
+
+        public struct Vpunpckhbw : IAsmInstruction<Vpunpckhbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpckhbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKHBW;
 
             public static implicit operator AsmMnemonicCode(Vpunpckhbw src) => src.Mnemonic;
@@ -7058,8 +15979,19 @@ namespace Z0.Asm
 
         public static Vpunpckhbw vpunpckhbw() => default;
 
-        public readonly struct Vpunpckhwd : IAsmInstruction<Vpunpckhwd>
+        [MethodImpl(Inline)]
+        public static Vpunpckhbw vpunpckhbw(AsmHexCode encoded) => new Vpunpckhbw(encoded);
+
+        public struct Vpunpckhwd : IAsmInstruction<Vpunpckhwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpckhwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKHWD;
 
             public static implicit operator AsmMnemonicCode(Vpunpckhwd src) => src.Mnemonic;
@@ -7069,8 +16001,19 @@ namespace Z0.Asm
 
         public static Vpunpckhwd vpunpckhwd() => default;
 
-        public readonly struct Vpunpckhdq : IAsmInstruction<Vpunpckhdq>
+        [MethodImpl(Inline)]
+        public static Vpunpckhwd vpunpckhwd(AsmHexCode encoded) => new Vpunpckhwd(encoded);
+
+        public struct Vpunpckhdq : IAsmInstruction<Vpunpckhdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpckhdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKHDQ;
 
             public static implicit operator AsmMnemonicCode(Vpunpckhdq src) => src.Mnemonic;
@@ -7080,8 +16023,19 @@ namespace Z0.Asm
 
         public static Vpunpckhdq vpunpckhdq() => default;
 
-        public readonly struct Vpunpckhqdq : IAsmInstruction<Vpunpckhqdq>
+        [MethodImpl(Inline)]
+        public static Vpunpckhdq vpunpckhdq(AsmHexCode encoded) => new Vpunpckhdq(encoded);
+
+        public struct Vpunpckhqdq : IAsmInstruction<Vpunpckhqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpckhqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKHQDQ;
 
             public static implicit operator AsmMnemonicCode(Vpunpckhqdq src) => src.Mnemonic;
@@ -7091,8 +16045,19 @@ namespace Z0.Asm
 
         public static Vpunpckhqdq vpunpckhqdq() => default;
 
-        public readonly struct Punpcklbw : IAsmInstruction<Punpcklbw>
+        [MethodImpl(Inline)]
+        public static Vpunpckhqdq vpunpckhqdq(AsmHexCode encoded) => new Vpunpckhqdq(encoded);
+
+        public struct Punpcklbw : IAsmInstruction<Punpcklbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpcklbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKLBW;
 
             public static implicit operator AsmMnemonicCode(Punpcklbw src) => src.Mnemonic;
@@ -7102,8 +16067,19 @@ namespace Z0.Asm
 
         public static Punpcklbw punpcklbw() => default;
 
-        public readonly struct Punpcklwd : IAsmInstruction<Punpcklwd>
+        [MethodImpl(Inline)]
+        public static Punpcklbw punpcklbw(AsmHexCode encoded) => new Punpcklbw(encoded);
+
+        public struct Punpcklwd : IAsmInstruction<Punpcklwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpcklwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKLWD;
 
             public static implicit operator AsmMnemonicCode(Punpcklwd src) => src.Mnemonic;
@@ -7113,8 +16089,19 @@ namespace Z0.Asm
 
         public static Punpcklwd punpcklwd() => default;
 
-        public readonly struct Punpckldq : IAsmInstruction<Punpckldq>
+        [MethodImpl(Inline)]
+        public static Punpcklwd punpcklwd(AsmHexCode encoded) => new Punpcklwd(encoded);
+
+        public struct Punpckldq : IAsmInstruction<Punpckldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpckldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKLDQ;
 
             public static implicit operator AsmMnemonicCode(Punpckldq src) => src.Mnemonic;
@@ -7124,8 +16111,19 @@ namespace Z0.Asm
 
         public static Punpckldq punpckldq() => default;
 
-        public readonly struct Punpcklqdq : IAsmInstruction<Punpcklqdq>
+        [MethodImpl(Inline)]
+        public static Punpckldq punpckldq(AsmHexCode encoded) => new Punpckldq(encoded);
+
+        public struct Punpcklqdq : IAsmInstruction<Punpcklqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Punpcklqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUNPCKLQDQ;
 
             public static implicit operator AsmMnemonicCode(Punpcklqdq src) => src.Mnemonic;
@@ -7135,8 +16133,19 @@ namespace Z0.Asm
 
         public static Punpcklqdq punpcklqdq() => default;
 
-        public readonly struct Vpunpcklbw : IAsmInstruction<Vpunpcklbw>
+        [MethodImpl(Inline)]
+        public static Punpcklqdq punpcklqdq(AsmHexCode encoded) => new Punpcklqdq(encoded);
+
+        public struct Vpunpcklbw : IAsmInstruction<Vpunpcklbw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpcklbw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKLBW;
 
             public static implicit operator AsmMnemonicCode(Vpunpcklbw src) => src.Mnemonic;
@@ -7146,8 +16155,19 @@ namespace Z0.Asm
 
         public static Vpunpcklbw vpunpcklbw() => default;
 
-        public readonly struct Vpunpcklwd : IAsmInstruction<Vpunpcklwd>
+        [MethodImpl(Inline)]
+        public static Vpunpcklbw vpunpcklbw(AsmHexCode encoded) => new Vpunpcklbw(encoded);
+
+        public struct Vpunpcklwd : IAsmInstruction<Vpunpcklwd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpcklwd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKLWD;
 
             public static implicit operator AsmMnemonicCode(Vpunpcklwd src) => src.Mnemonic;
@@ -7157,8 +16177,19 @@ namespace Z0.Asm
 
         public static Vpunpcklwd vpunpcklwd() => default;
 
-        public readonly struct Vpunpckldq : IAsmInstruction<Vpunpckldq>
+        [MethodImpl(Inline)]
+        public static Vpunpcklwd vpunpcklwd(AsmHexCode encoded) => new Vpunpcklwd(encoded);
+
+        public struct Vpunpckldq : IAsmInstruction<Vpunpckldq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpckldq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKLDQ;
 
             public static implicit operator AsmMnemonicCode(Vpunpckldq src) => src.Mnemonic;
@@ -7168,8 +16199,19 @@ namespace Z0.Asm
 
         public static Vpunpckldq vpunpckldq() => default;
 
-        public readonly struct Vpunpcklqdq : IAsmInstruction<Vpunpcklqdq>
+        [MethodImpl(Inline)]
+        public static Vpunpckldq vpunpckldq(AsmHexCode encoded) => new Vpunpckldq(encoded);
+
+        public struct Vpunpcklqdq : IAsmInstruction<Vpunpcklqdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpunpcklqdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPUNPCKLQDQ;
 
             public static implicit operator AsmMnemonicCode(Vpunpcklqdq src) => src.Mnemonic;
@@ -7179,8 +16221,19 @@ namespace Z0.Asm
 
         public static Vpunpcklqdq vpunpcklqdq() => default;
 
-        public readonly struct Push : IAsmInstruction<Push>
+        [MethodImpl(Inline)]
+        public static Vpunpcklqdq vpunpcklqdq(AsmHexCode encoded) => new Vpunpcklqdq(encoded);
+
+        public struct Push : IAsmInstruction<Push>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Push(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSH;
 
             public static implicit operator AsmMnemonicCode(Push src) => src.Mnemonic;
@@ -7190,8 +16243,19 @@ namespace Z0.Asm
 
         public static Push push() => default;
 
-        public readonly struct Pushq : IAsmInstruction<Pushq>
+        [MethodImpl(Inline)]
+        public static Push push(AsmHexCode encoded) => new Push(encoded);
+
+        public struct Pushq : IAsmInstruction<Pushq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHQ;
 
             public static implicit operator AsmMnemonicCode(Pushq src) => src.Mnemonic;
@@ -7201,8 +16265,19 @@ namespace Z0.Asm
 
         public static Pushq pushq() => default;
 
-        public readonly struct Pushw : IAsmInstruction<Pushw>
+        [MethodImpl(Inline)]
+        public static Pushq pushq(AsmHexCode encoded) => new Pushq(encoded);
+
+        public struct Pushw : IAsmInstruction<Pushw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHW;
 
             public static implicit operator AsmMnemonicCode(Pushw src) => src.Mnemonic;
@@ -7212,8 +16287,129 @@ namespace Z0.Asm
 
         public static Pushw pushw() => default;
 
-        public readonly struct Pxor : IAsmInstruction<Pxor>
+        [MethodImpl(Inline)]
+        public static Pushw pushw(AsmHexCode encoded) => new Pushw(encoded);
+
+        public struct Pusha : IAsmInstruction<Pusha>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pusha(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHA;
+
+            public static implicit operator AsmMnemonicCode(Pusha src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pusha src) => AsmMnemonics.PUSHA;
+        }
+
+        public static Pusha pusha() => default;
+
+        [MethodImpl(Inline)]
+        public static Pusha pusha(AsmHexCode encoded) => new Pusha(encoded);
+
+        public struct Pushad : IAsmInstruction<Pushad>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushad(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHAD;
+
+            public static implicit operator AsmMnemonicCode(Pushad src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pushad src) => AsmMnemonics.PUSHAD;
+        }
+
+        public static Pushad pushad() => default;
+
+        [MethodImpl(Inline)]
+        public static Pushad pushad(AsmHexCode encoded) => new Pushad(encoded);
+
+        public struct Pushf : IAsmInstruction<Pushf>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushf(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHF;
+
+            public static implicit operator AsmMnemonicCode(Pushf src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pushf src) => AsmMnemonics.PUSHF;
+        }
+
+        public static Pushf pushf() => default;
+
+        [MethodImpl(Inline)]
+        public static Pushf pushf(AsmHexCode encoded) => new Pushf(encoded);
+
+        public struct Pushfd : IAsmInstruction<Pushfd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushfd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHFD;
+
+            public static implicit operator AsmMnemonicCode(Pushfd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pushfd src) => AsmMnemonics.PUSHFD;
+        }
+
+        public static Pushfd pushfd() => default;
+
+        [MethodImpl(Inline)]
+        public static Pushfd pushfd(AsmHexCode encoded) => new Pushfd(encoded);
+
+        public struct Pushfq : IAsmInstruction<Pushfq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pushfq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PUSHFQ;
+
+            public static implicit operator AsmMnemonicCode(Pushfq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Pushfq src) => AsmMnemonics.PUSHFQ;
+        }
+
+        public static Pushfq pushfq() => default;
+
+        [MethodImpl(Inline)]
+        public static Pushfq pushfq(AsmHexCode encoded) => new Pushfq(encoded);
+
+        public struct Pxor : IAsmInstruction<Pxor>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Pxor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.PXOR;
 
             public static implicit operator AsmMnemonicCode(Pxor src) => src.Mnemonic;
@@ -7223,8 +16419,19 @@ namespace Z0.Asm
 
         public static Pxor pxor() => default;
 
-        public readonly struct Vpxor : IAsmInstruction<Vpxor>
+        [MethodImpl(Inline)]
+        public static Pxor pxor(AsmHexCode encoded) => new Pxor(encoded);
+
+        public struct Vpxor : IAsmInstruction<Vpxor>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpxor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPXOR;
 
             public static implicit operator AsmMnemonicCode(Vpxor src) => src.Mnemonic;
@@ -7234,8 +16441,19 @@ namespace Z0.Asm
 
         public static Vpxor vpxor() => default;
 
-        public readonly struct Rcl : IAsmInstruction<Rcl>
+        [MethodImpl(Inline)]
+        public static Vpxor vpxor(AsmHexCode encoded) => new Vpxor(encoded);
+
+        public struct Rcl : IAsmInstruction<Rcl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rcl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RCL;
 
             public static implicit operator AsmMnemonicCode(Rcl src) => src.Mnemonic;
@@ -7245,8 +16463,19 @@ namespace Z0.Asm
 
         public static Rcl rcl() => default;
 
-        public readonly struct Rcr : IAsmInstruction<Rcr>
+        [MethodImpl(Inline)]
+        public static Rcl rcl(AsmHexCode encoded) => new Rcl(encoded);
+
+        public struct Rcr : IAsmInstruction<Rcr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rcr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RCR;
 
             public static implicit operator AsmMnemonicCode(Rcr src) => src.Mnemonic;
@@ -7256,8 +16485,19 @@ namespace Z0.Asm
 
         public static Rcr rcr() => default;
 
-        public readonly struct Rol : IAsmInstruction<Rol>
+        [MethodImpl(Inline)]
+        public static Rcr rcr(AsmHexCode encoded) => new Rcr(encoded);
+
+        public struct Rol : IAsmInstruction<Rol>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rol(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROL;
 
             public static implicit operator AsmMnemonicCode(Rol src) => src.Mnemonic;
@@ -7267,8 +16507,19 @@ namespace Z0.Asm
 
         public static Rol rol() => default;
 
-        public readonly struct Ror : IAsmInstruction<Ror>
+        [MethodImpl(Inline)]
+        public static Rol rol(AsmHexCode encoded) => new Rol(encoded);
+
+        public struct Ror : IAsmInstruction<Ror>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ror(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROR;
 
             public static implicit operator AsmMnemonicCode(Ror src) => src.Mnemonic;
@@ -7278,8 +16529,19 @@ namespace Z0.Asm
 
         public static Ror ror() => default;
 
-        public readonly struct Rcpps : IAsmInstruction<Rcpps>
+        [MethodImpl(Inline)]
+        public static Ror ror(AsmHexCode encoded) => new Ror(encoded);
+
+        public struct Rcpps : IAsmInstruction<Rcpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rcpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RCPPS;
 
             public static implicit operator AsmMnemonicCode(Rcpps src) => src.Mnemonic;
@@ -7289,8 +16551,19 @@ namespace Z0.Asm
 
         public static Rcpps rcpps() => default;
 
-        public readonly struct Vrcpps : IAsmInstruction<Vrcpps>
+        [MethodImpl(Inline)]
+        public static Rcpps rcpps(AsmHexCode encoded) => new Rcpps(encoded);
+
+        public struct Vrcpps : IAsmInstruction<Vrcpps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vrcpps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VRCPPS;
 
             public static implicit operator AsmMnemonicCode(Vrcpps src) => src.Mnemonic;
@@ -7300,8 +16573,19 @@ namespace Z0.Asm
 
         public static Vrcpps vrcpps() => default;
 
-        public readonly struct Rcpss : IAsmInstruction<Rcpss>
+        [MethodImpl(Inline)]
+        public static Vrcpps vrcpps(AsmHexCode encoded) => new Vrcpps(encoded);
+
+        public struct Rcpss : IAsmInstruction<Rcpss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rcpss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RCPSS;
 
             public static implicit operator AsmMnemonicCode(Rcpss src) => src.Mnemonic;
@@ -7311,8 +16595,19 @@ namespace Z0.Asm
 
         public static Rcpss rcpss() => default;
 
-        public readonly struct Vrcpss : IAsmInstruction<Vrcpss>
+        [MethodImpl(Inline)]
+        public static Rcpss rcpss(AsmHexCode encoded) => new Rcpss(encoded);
+
+        public struct Vrcpss : IAsmInstruction<Vrcpss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vrcpss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VRCPSS;
 
             public static implicit operator AsmMnemonicCode(Vrcpss src) => src.Mnemonic;
@@ -7322,8 +16617,19 @@ namespace Z0.Asm
 
         public static Vrcpss vrcpss() => default;
 
-        public readonly struct Rdfsbase : IAsmInstruction<Rdfsbase>
+        [MethodImpl(Inline)]
+        public static Vrcpss vrcpss(AsmHexCode encoded) => new Vrcpss(encoded);
+
+        public struct Rdfsbase : IAsmInstruction<Rdfsbase>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdfsbase(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDFSBASE;
 
             public static implicit operator AsmMnemonicCode(Rdfsbase src) => src.Mnemonic;
@@ -7333,8 +16639,19 @@ namespace Z0.Asm
 
         public static Rdfsbase rdfsbase() => default;
 
-        public readonly struct Rdgsbase : IAsmInstruction<Rdgsbase>
+        [MethodImpl(Inline)]
+        public static Rdfsbase rdfsbase(AsmHexCode encoded) => new Rdfsbase(encoded);
+
+        public struct Rdgsbase : IAsmInstruction<Rdgsbase>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdgsbase(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDGSBASE;
 
             public static implicit operator AsmMnemonicCode(Rdgsbase src) => src.Mnemonic;
@@ -7344,8 +16661,63 @@ namespace Z0.Asm
 
         public static Rdgsbase rdgsbase() => default;
 
-        public readonly struct Rdrand : IAsmInstruction<Rdrand>
+        [MethodImpl(Inline)]
+        public static Rdgsbase rdgsbase(AsmHexCode encoded) => new Rdgsbase(encoded);
+
+        public struct Rdmsr : IAsmInstruction<Rdmsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdmsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDMSR;
+
+            public static implicit operator AsmMnemonicCode(Rdmsr src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Rdmsr src) => AsmMnemonics.RDMSR;
+        }
+
+        public static Rdmsr rdmsr() => default;
+
+        [MethodImpl(Inline)]
+        public static Rdmsr rdmsr(AsmHexCode encoded) => new Rdmsr(encoded);
+
+        public struct Rdpmc : IAsmInstruction<Rdpmc>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdpmc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDPMC;
+
+            public static implicit operator AsmMnemonicCode(Rdpmc src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Rdpmc src) => AsmMnemonics.RDPMC;
+        }
+
+        public static Rdpmc rdpmc() => default;
+
+        [MethodImpl(Inline)]
+        public static Rdpmc rdpmc(AsmHexCode encoded) => new Rdpmc(encoded);
+
+        public struct Rdrand : IAsmInstruction<Rdrand>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdrand(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDRAND;
 
             public static implicit operator AsmMnemonicCode(Rdrand src) => src.Mnemonic;
@@ -7355,8 +16727,63 @@ namespace Z0.Asm
 
         public static Rdrand rdrand() => default;
 
-        public readonly struct Rep_ins : IAsmInstruction<Rep_ins>
+        [MethodImpl(Inline)]
+        public static Rdrand rdrand(AsmHexCode encoded) => new Rdrand(encoded);
+
+        public struct Rdtsc : IAsmInstruction<Rdtsc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdtsc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDTSC;
+
+            public static implicit operator AsmMnemonicCode(Rdtsc src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Rdtsc src) => AsmMnemonics.RDTSC;
+        }
+
+        public static Rdtsc rdtsc() => default;
+
+        [MethodImpl(Inline)]
+        public static Rdtsc rdtsc(AsmHexCode encoded) => new Rdtsc(encoded);
+
+        public struct Rdtscp : IAsmInstruction<Rdtscp>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rdtscp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RDTSCP;
+
+            public static implicit operator AsmMnemonicCode(Rdtscp src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Rdtscp src) => AsmMnemonics.RDTSCP;
+        }
+
+        public static Rdtscp rdtscp() => default;
+
+        [MethodImpl(Inline)]
+        public static Rdtscp rdtscp(AsmHexCode encoded) => new Rdtscp(encoded);
+
+        public struct Rep_ins : IAsmInstruction<Rep_ins>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rep_ins(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REP_INS;
 
             public static implicit operator AsmMnemonicCode(Rep_ins src) => src.Mnemonic;
@@ -7366,8 +16793,19 @@ namespace Z0.Asm
 
         public static Rep_ins rep_ins() => default;
 
-        public readonly struct Rep_movs : IAsmInstruction<Rep_movs>
+        [MethodImpl(Inline)]
+        public static Rep_ins rep_ins(AsmHexCode encoded) => new Rep_ins(encoded);
+
+        public struct Rep_movs : IAsmInstruction<Rep_movs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rep_movs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REP_MOVS;
 
             public static implicit operator AsmMnemonicCode(Rep_movs src) => src.Mnemonic;
@@ -7377,8 +16815,19 @@ namespace Z0.Asm
 
         public static Rep_movs rep_movs() => default;
 
-        public readonly struct Rep_outs : IAsmInstruction<Rep_outs>
+        [MethodImpl(Inline)]
+        public static Rep_movs rep_movs(AsmHexCode encoded) => new Rep_movs(encoded);
+
+        public struct Rep_outs : IAsmInstruction<Rep_outs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rep_outs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REP_OUTS;
 
             public static implicit operator AsmMnemonicCode(Rep_outs src) => src.Mnemonic;
@@ -7388,8 +16837,19 @@ namespace Z0.Asm
 
         public static Rep_outs rep_outs() => default;
 
-        public readonly struct Rep_lods : IAsmInstruction<Rep_lods>
+        [MethodImpl(Inline)]
+        public static Rep_outs rep_outs(AsmHexCode encoded) => new Rep_outs(encoded);
+
+        public struct Rep_lods : IAsmInstruction<Rep_lods>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rep_lods(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REP_LODS;
 
             public static implicit operator AsmMnemonicCode(Rep_lods src) => src.Mnemonic;
@@ -7399,8 +16859,19 @@ namespace Z0.Asm
 
         public static Rep_lods rep_lods() => default;
 
-        public readonly struct Rep_stos : IAsmInstruction<Rep_stos>
+        [MethodImpl(Inline)]
+        public static Rep_lods rep_lods(AsmHexCode encoded) => new Rep_lods(encoded);
+
+        public struct Rep_stos : IAsmInstruction<Rep_stos>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rep_stos(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REP_STOS;
 
             public static implicit operator AsmMnemonicCode(Rep_stos src) => src.Mnemonic;
@@ -7410,8 +16881,19 @@ namespace Z0.Asm
 
         public static Rep_stos rep_stos() => default;
 
-        public readonly struct Repe_cmps : IAsmInstruction<Repe_cmps>
+        [MethodImpl(Inline)]
+        public static Rep_stos rep_stos(AsmHexCode encoded) => new Rep_stos(encoded);
+
+        public struct Repe_cmps : IAsmInstruction<Repe_cmps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Repe_cmps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_CMPS;
 
             public static implicit operator AsmMnemonicCode(Repe_cmps src) => src.Mnemonic;
@@ -7421,8 +16903,19 @@ namespace Z0.Asm
 
         public static Repe_cmps repe_cmps() => default;
 
-        public readonly struct Repe_scas : IAsmInstruction<Repe_scas>
+        [MethodImpl(Inline)]
+        public static Repe_cmps repe_cmps(AsmHexCode encoded) => new Repe_cmps(encoded);
+
+        public struct Repe_scas : IAsmInstruction<Repe_scas>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Repe_scas(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPE_SCAS;
 
             public static implicit operator AsmMnemonicCode(Repe_scas src) => src.Mnemonic;
@@ -7432,8 +16925,19 @@ namespace Z0.Asm
 
         public static Repe_scas repe_scas() => default;
 
-        public readonly struct Repne_cmps : IAsmInstruction<Repne_cmps>
+        [MethodImpl(Inline)]
+        public static Repe_scas repe_scas(AsmHexCode encoded) => new Repe_scas(encoded);
+
+        public struct Repne_cmps : IAsmInstruction<Repne_cmps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Repne_cmps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_CMPS;
 
             public static implicit operator AsmMnemonicCode(Repne_cmps src) => src.Mnemonic;
@@ -7443,8 +16947,19 @@ namespace Z0.Asm
 
         public static Repne_cmps repne_cmps() => default;
 
-        public readonly struct Repne_scas : IAsmInstruction<Repne_scas>
+        [MethodImpl(Inline)]
+        public static Repne_cmps repne_cmps(AsmHexCode encoded) => new Repne_cmps(encoded);
+
+        public struct Repne_scas : IAsmInstruction<Repne_scas>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Repne_scas(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.REPNE_SCAS;
 
             public static implicit operator AsmMnemonicCode(Repne_scas src) => src.Mnemonic;
@@ -7454,8 +16969,19 @@ namespace Z0.Asm
 
         public static Repne_scas repne_scas() => default;
 
-        public readonly struct Ret : IAsmInstruction<Ret>
+        [MethodImpl(Inline)]
+        public static Repne_scas repne_scas(AsmHexCode encoded) => new Repne_scas(encoded);
+
+        public struct Ret : IAsmInstruction<Ret>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ret(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RET;
 
             public static implicit operator AsmMnemonicCode(Ret src) => src.Mnemonic;
@@ -7465,8 +16991,19 @@ namespace Z0.Asm
 
         public static Ret ret() => default;
 
-        public readonly struct Rorx : IAsmInstruction<Rorx>
+        [MethodImpl(Inline)]
+        public static Ret ret(AsmHexCode encoded) => new Ret(encoded);
+
+        public struct Rorx : IAsmInstruction<Rorx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rorx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RORX;
 
             public static implicit operator AsmMnemonicCode(Rorx src) => src.Mnemonic;
@@ -7476,8 +17013,19 @@ namespace Z0.Asm
 
         public static Rorx rorx() => default;
 
-        public readonly struct Roundpd : IAsmInstruction<Roundpd>
+        [MethodImpl(Inline)]
+        public static Rorx rorx(AsmHexCode encoded) => new Rorx(encoded);
+
+        public struct Roundpd : IAsmInstruction<Roundpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Roundpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROUNDPD;
 
             public static implicit operator AsmMnemonicCode(Roundpd src) => src.Mnemonic;
@@ -7487,8 +17035,19 @@ namespace Z0.Asm
 
         public static Roundpd roundpd() => default;
 
-        public readonly struct Vroundpd : IAsmInstruction<Vroundpd>
+        [MethodImpl(Inline)]
+        public static Roundpd roundpd(AsmHexCode encoded) => new Roundpd(encoded);
+
+        public struct Vroundpd : IAsmInstruction<Vroundpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vroundpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VROUNDPD;
 
             public static implicit operator AsmMnemonicCode(Vroundpd src) => src.Mnemonic;
@@ -7498,8 +17057,19 @@ namespace Z0.Asm
 
         public static Vroundpd vroundpd() => default;
 
-        public readonly struct Roundps : IAsmInstruction<Roundps>
+        [MethodImpl(Inline)]
+        public static Vroundpd vroundpd(AsmHexCode encoded) => new Vroundpd(encoded);
+
+        public struct Roundps : IAsmInstruction<Roundps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Roundps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROUNDPS;
 
             public static implicit operator AsmMnemonicCode(Roundps src) => src.Mnemonic;
@@ -7509,8 +17079,19 @@ namespace Z0.Asm
 
         public static Roundps roundps() => default;
 
-        public readonly struct Vroundps : IAsmInstruction<Vroundps>
+        [MethodImpl(Inline)]
+        public static Roundps roundps(AsmHexCode encoded) => new Roundps(encoded);
+
+        public struct Vroundps : IAsmInstruction<Vroundps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vroundps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VROUNDPS;
 
             public static implicit operator AsmMnemonicCode(Vroundps src) => src.Mnemonic;
@@ -7520,8 +17101,19 @@ namespace Z0.Asm
 
         public static Vroundps vroundps() => default;
 
-        public readonly struct Roundsd : IAsmInstruction<Roundsd>
+        [MethodImpl(Inline)]
+        public static Vroundps vroundps(AsmHexCode encoded) => new Vroundps(encoded);
+
+        public struct Roundsd : IAsmInstruction<Roundsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Roundsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROUNDSD;
 
             public static implicit operator AsmMnemonicCode(Roundsd src) => src.Mnemonic;
@@ -7531,8 +17123,19 @@ namespace Z0.Asm
 
         public static Roundsd roundsd() => default;
 
-        public readonly struct Vroundsd : IAsmInstruction<Vroundsd>
+        [MethodImpl(Inline)]
+        public static Roundsd roundsd(AsmHexCode encoded) => new Roundsd(encoded);
+
+        public struct Vroundsd : IAsmInstruction<Vroundsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vroundsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VROUNDSD;
 
             public static implicit operator AsmMnemonicCode(Vroundsd src) => src.Mnemonic;
@@ -7542,8 +17145,19 @@ namespace Z0.Asm
 
         public static Vroundsd vroundsd() => default;
 
-        public readonly struct Roundss : IAsmInstruction<Roundss>
+        [MethodImpl(Inline)]
+        public static Vroundsd vroundsd(AsmHexCode encoded) => new Vroundsd(encoded);
+
+        public struct Roundss : IAsmInstruction<Roundss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Roundss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.ROUNDSS;
 
             public static implicit operator AsmMnemonicCode(Roundss src) => src.Mnemonic;
@@ -7553,8 +17167,19 @@ namespace Z0.Asm
 
         public static Roundss roundss() => default;
 
-        public readonly struct Vroundss : IAsmInstruction<Vroundss>
+        [MethodImpl(Inline)]
+        public static Roundss roundss(AsmHexCode encoded) => new Roundss(encoded);
+
+        public struct Vroundss : IAsmInstruction<Vroundss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vroundss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VROUNDSS;
 
             public static implicit operator AsmMnemonicCode(Vroundss src) => src.Mnemonic;
@@ -7564,8 +17189,41 @@ namespace Z0.Asm
 
         public static Vroundss vroundss() => default;
 
-        public readonly struct Rsqrtps : IAsmInstruction<Rsqrtps>
+        [MethodImpl(Inline)]
+        public static Vroundss vroundss(AsmHexCode encoded) => new Vroundss(encoded);
+
+        public struct Rsm : IAsmInstruction<Rsm>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rsm(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RSM;
+
+            public static implicit operator AsmMnemonicCode(Rsm src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Rsm src) => AsmMnemonics.RSM;
+        }
+
+        public static Rsm rsm() => default;
+
+        [MethodImpl(Inline)]
+        public static Rsm rsm(AsmHexCode encoded) => new Rsm(encoded);
+
+        public struct Rsqrtps : IAsmInstruction<Rsqrtps>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rsqrtps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RSQRTPS;
 
             public static implicit operator AsmMnemonicCode(Rsqrtps src) => src.Mnemonic;
@@ -7575,8 +17233,19 @@ namespace Z0.Asm
 
         public static Rsqrtps rsqrtps() => default;
 
-        public readonly struct Vrsqrtps : IAsmInstruction<Vrsqrtps>
+        [MethodImpl(Inline)]
+        public static Rsqrtps rsqrtps(AsmHexCode encoded) => new Rsqrtps(encoded);
+
+        public struct Vrsqrtps : IAsmInstruction<Vrsqrtps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vrsqrtps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VRSQRTPS;
 
             public static implicit operator AsmMnemonicCode(Vrsqrtps src) => src.Mnemonic;
@@ -7586,8 +17255,19 @@ namespace Z0.Asm
 
         public static Vrsqrtps vrsqrtps() => default;
 
-        public readonly struct Rsqrtss : IAsmInstruction<Rsqrtss>
+        [MethodImpl(Inline)]
+        public static Vrsqrtps vrsqrtps(AsmHexCode encoded) => new Vrsqrtps(encoded);
+
+        public struct Rsqrtss : IAsmInstruction<Rsqrtss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Rsqrtss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.RSQRTSS;
 
             public static implicit operator AsmMnemonicCode(Rsqrtss src) => src.Mnemonic;
@@ -7597,8 +17277,19 @@ namespace Z0.Asm
 
         public static Rsqrtss rsqrtss() => default;
 
-        public readonly struct Vrsqrtss : IAsmInstruction<Vrsqrtss>
+        [MethodImpl(Inline)]
+        public static Rsqrtss rsqrtss(AsmHexCode encoded) => new Rsqrtss(encoded);
+
+        public struct Vrsqrtss : IAsmInstruction<Vrsqrtss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vrsqrtss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VRSQRTSS;
 
             public static implicit operator AsmMnemonicCode(Vrsqrtss src) => src.Mnemonic;
@@ -7608,8 +17299,41 @@ namespace Z0.Asm
 
         public static Vrsqrtss vrsqrtss() => default;
 
-        public readonly struct Sal : IAsmInstruction<Sal>
+        [MethodImpl(Inline)]
+        public static Vrsqrtss vrsqrtss(AsmHexCode encoded) => new Vrsqrtss(encoded);
+
+        public struct Sahf : IAsmInstruction<Sahf>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sahf(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SAHF;
+
+            public static implicit operator AsmMnemonicCode(Sahf src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sahf src) => AsmMnemonics.SAHF;
+        }
+
+        public static Sahf sahf() => default;
+
+        [MethodImpl(Inline)]
+        public static Sahf sahf(AsmHexCode encoded) => new Sahf(encoded);
+
+        public struct Sal : IAsmInstruction<Sal>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sal(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SAL;
 
             public static implicit operator AsmMnemonicCode(Sal src) => src.Mnemonic;
@@ -7619,8 +17343,19 @@ namespace Z0.Asm
 
         public static Sal sal() => default;
 
-        public readonly struct Sar : IAsmInstruction<Sar>
+        [MethodImpl(Inline)]
+        public static Sal sal(AsmHexCode encoded) => new Sal(encoded);
+
+        public struct Sar : IAsmInstruction<Sar>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sar(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SAR;
 
             public static implicit operator AsmMnemonicCode(Sar src) => src.Mnemonic;
@@ -7630,8 +17365,19 @@ namespace Z0.Asm
 
         public static Sar sar() => default;
 
-        public readonly struct Shl : IAsmInstruction<Shl>
+        [MethodImpl(Inline)]
+        public static Sar sar(AsmHexCode encoded) => new Sar(encoded);
+
+        public struct Shl : IAsmInstruction<Shl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHL;
 
             public static implicit operator AsmMnemonicCode(Shl src) => src.Mnemonic;
@@ -7641,8 +17387,19 @@ namespace Z0.Asm
 
         public static Shl shl() => default;
 
-        public readonly struct Shr : IAsmInstruction<Shr>
+        [MethodImpl(Inline)]
+        public static Shl shl(AsmHexCode encoded) => new Shl(encoded);
+
+        public struct Shr : IAsmInstruction<Shr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHR;
 
             public static implicit operator AsmMnemonicCode(Shr src) => src.Mnemonic;
@@ -7652,8 +17409,19 @@ namespace Z0.Asm
 
         public static Shr shr() => default;
 
-        public readonly struct Sarx : IAsmInstruction<Sarx>
+        [MethodImpl(Inline)]
+        public static Shr shr(AsmHexCode encoded) => new Shr(encoded);
+
+        public struct Sarx : IAsmInstruction<Sarx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sarx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SARX;
 
             public static implicit operator AsmMnemonicCode(Sarx src) => src.Mnemonic;
@@ -7663,8 +17431,19 @@ namespace Z0.Asm
 
         public static Sarx sarx() => default;
 
-        public readonly struct Shlx : IAsmInstruction<Shlx>
+        [MethodImpl(Inline)]
+        public static Sarx sarx(AsmHexCode encoded) => new Sarx(encoded);
+
+        public struct Shlx : IAsmInstruction<Shlx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shlx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHLX;
 
             public static implicit operator AsmMnemonicCode(Shlx src) => src.Mnemonic;
@@ -7674,8 +17453,19 @@ namespace Z0.Asm
 
         public static Shlx shlx() => default;
 
-        public readonly struct Shrx : IAsmInstruction<Shrx>
+        [MethodImpl(Inline)]
+        public static Shlx shlx(AsmHexCode encoded) => new Shlx(encoded);
+
+        public struct Shrx : IAsmInstruction<Shrx>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shrx(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHRX;
 
             public static implicit operator AsmMnemonicCode(Shrx src) => src.Mnemonic;
@@ -7685,8 +17475,19 @@ namespace Z0.Asm
 
         public static Shrx shrx() => default;
 
-        public readonly struct Sbb : IAsmInstruction<Sbb>
+        [MethodImpl(Inline)]
+        public static Shrx shrx(AsmHexCode encoded) => new Shrx(encoded);
+
+        public struct Sbb : IAsmInstruction<Sbb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sbb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SBB;
 
             public static implicit operator AsmMnemonicCode(Sbb src) => src.Mnemonic;
@@ -7696,8 +17497,19 @@ namespace Z0.Asm
 
         public static Sbb sbb() => default;
 
-        public readonly struct Scas : IAsmInstruction<Scas>
+        [MethodImpl(Inline)]
+        public static Sbb sbb(AsmHexCode encoded) => new Sbb(encoded);
+
+        public struct Scas : IAsmInstruction<Scas>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Scas(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SCAS;
 
             public static implicit operator AsmMnemonicCode(Scas src) => src.Mnemonic;
@@ -7707,8 +17519,107 @@ namespace Z0.Asm
 
         public static Scas scas() => default;
 
-        public readonly struct Seta : IAsmInstruction<Seta>
+        [MethodImpl(Inline)]
+        public static Scas scas(AsmHexCode encoded) => new Scas(encoded);
+
+        public struct Scasb : IAsmInstruction<Scasb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Scasb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SCASB;
+
+            public static implicit operator AsmMnemonicCode(Scasb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Scasb src) => AsmMnemonics.SCASB;
+        }
+
+        public static Scasb scasb() => default;
+
+        [MethodImpl(Inline)]
+        public static Scasb scasb(AsmHexCode encoded) => new Scasb(encoded);
+
+        public struct Scasw : IAsmInstruction<Scasw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Scasw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SCASW;
+
+            public static implicit operator AsmMnemonicCode(Scasw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Scasw src) => AsmMnemonics.SCASW;
+        }
+
+        public static Scasw scasw() => default;
+
+        [MethodImpl(Inline)]
+        public static Scasw scasw(AsmHexCode encoded) => new Scasw(encoded);
+
+        public struct Scasd : IAsmInstruction<Scasd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Scasd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SCASD;
+
+            public static implicit operator AsmMnemonicCode(Scasd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Scasd src) => AsmMnemonics.SCASD;
+        }
+
+        public static Scasd scasd() => default;
+
+        [MethodImpl(Inline)]
+        public static Scasd scasd(AsmHexCode encoded) => new Scasd(encoded);
+
+        public struct Scasq : IAsmInstruction<Scasq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Scasq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SCASQ;
+
+            public static implicit operator AsmMnemonicCode(Scasq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Scasq src) => AsmMnemonics.SCASQ;
+        }
+
+        public static Scasq scasq() => default;
+
+        [MethodImpl(Inline)]
+        public static Scasq scasq(AsmHexCode encoded) => new Scasq(encoded);
+
+        public struct Seta : IAsmInstruction<Seta>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Seta(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETA;
 
             public static implicit operator AsmMnemonicCode(Seta src) => src.Mnemonic;
@@ -7718,8 +17629,19 @@ namespace Z0.Asm
 
         public static Seta seta() => default;
 
-        public readonly struct Setae : IAsmInstruction<Setae>
+        [MethodImpl(Inline)]
+        public static Seta seta(AsmHexCode encoded) => new Seta(encoded);
+
+        public struct Setae : IAsmInstruction<Setae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETAE;
 
             public static implicit operator AsmMnemonicCode(Setae src) => src.Mnemonic;
@@ -7729,8 +17651,19 @@ namespace Z0.Asm
 
         public static Setae setae() => default;
 
-        public readonly struct Setb : IAsmInstruction<Setb>
+        [MethodImpl(Inline)]
+        public static Setae setae(AsmHexCode encoded) => new Setae(encoded);
+
+        public struct Setb : IAsmInstruction<Setb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETB;
 
             public static implicit operator AsmMnemonicCode(Setb src) => src.Mnemonic;
@@ -7740,8 +17673,19 @@ namespace Z0.Asm
 
         public static Setb setb() => default;
 
-        public readonly struct Setbe : IAsmInstruction<Setbe>
+        [MethodImpl(Inline)]
+        public static Setb setb(AsmHexCode encoded) => new Setb(encoded);
+
+        public struct Setbe : IAsmInstruction<Setbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETBE;
 
             public static implicit operator AsmMnemonicCode(Setbe src) => src.Mnemonic;
@@ -7751,8 +17695,19 @@ namespace Z0.Asm
 
         public static Setbe setbe() => default;
 
-        public readonly struct Setc : IAsmInstruction<Setc>
+        [MethodImpl(Inline)]
+        public static Setbe setbe(AsmHexCode encoded) => new Setbe(encoded);
+
+        public struct Setc : IAsmInstruction<Setc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETC;
 
             public static implicit operator AsmMnemonicCode(Setc src) => src.Mnemonic;
@@ -7762,8 +17717,19 @@ namespace Z0.Asm
 
         public static Setc setc() => default;
 
-        public readonly struct Sete : IAsmInstruction<Sete>
+        [MethodImpl(Inline)]
+        public static Setc setc(AsmHexCode encoded) => new Setc(encoded);
+
+        public struct Sete : IAsmInstruction<Sete>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sete(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETE;
 
             public static implicit operator AsmMnemonicCode(Sete src) => src.Mnemonic;
@@ -7773,8 +17739,19 @@ namespace Z0.Asm
 
         public static Sete sete() => default;
 
-        public readonly struct Setg : IAsmInstruction<Setg>
+        [MethodImpl(Inline)]
+        public static Sete sete(AsmHexCode encoded) => new Sete(encoded);
+
+        public struct Setg : IAsmInstruction<Setg>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETG;
 
             public static implicit operator AsmMnemonicCode(Setg src) => src.Mnemonic;
@@ -7784,8 +17761,19 @@ namespace Z0.Asm
 
         public static Setg setg() => default;
 
-        public readonly struct Setge : IAsmInstruction<Setge>
+        [MethodImpl(Inline)]
+        public static Setg setg(AsmHexCode encoded) => new Setg(encoded);
+
+        public struct Setge : IAsmInstruction<Setge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETGE;
 
             public static implicit operator AsmMnemonicCode(Setge src) => src.Mnemonic;
@@ -7795,8 +17783,19 @@ namespace Z0.Asm
 
         public static Setge setge() => default;
 
-        public readonly struct Setl : IAsmInstruction<Setl>
+        [MethodImpl(Inline)]
+        public static Setge setge(AsmHexCode encoded) => new Setge(encoded);
+
+        public struct Setl : IAsmInstruction<Setl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETL;
 
             public static implicit operator AsmMnemonicCode(Setl src) => src.Mnemonic;
@@ -7806,8 +17805,19 @@ namespace Z0.Asm
 
         public static Setl setl() => default;
 
-        public readonly struct Setle : IAsmInstruction<Setle>
+        [MethodImpl(Inline)]
+        public static Setl setl(AsmHexCode encoded) => new Setl(encoded);
+
+        public struct Setle : IAsmInstruction<Setle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETLE;
 
             public static implicit operator AsmMnemonicCode(Setle src) => src.Mnemonic;
@@ -7817,8 +17827,19 @@ namespace Z0.Asm
 
         public static Setle setle() => default;
 
-        public readonly struct Setna : IAsmInstruction<Setna>
+        [MethodImpl(Inline)]
+        public static Setle setle(AsmHexCode encoded) => new Setle(encoded);
+
+        public struct Setna : IAsmInstruction<Setna>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setna(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNA;
 
             public static implicit operator AsmMnemonicCode(Setna src) => src.Mnemonic;
@@ -7828,8 +17849,19 @@ namespace Z0.Asm
 
         public static Setna setna() => default;
 
-        public readonly struct Setnae : IAsmInstruction<Setnae>
+        [MethodImpl(Inline)]
+        public static Setna setna(AsmHexCode encoded) => new Setna(encoded);
+
+        public struct Setnae : IAsmInstruction<Setnae>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnae(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNAE;
 
             public static implicit operator AsmMnemonicCode(Setnae src) => src.Mnemonic;
@@ -7839,8 +17871,19 @@ namespace Z0.Asm
 
         public static Setnae setnae() => default;
 
-        public readonly struct Setnb : IAsmInstruction<Setnb>
+        [MethodImpl(Inline)]
+        public static Setnae setnae(AsmHexCode encoded) => new Setnae(encoded);
+
+        public struct Setnb : IAsmInstruction<Setnb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNB;
 
             public static implicit operator AsmMnemonicCode(Setnb src) => src.Mnemonic;
@@ -7850,8 +17893,19 @@ namespace Z0.Asm
 
         public static Setnb setnb() => default;
 
-        public readonly struct Setnbe : IAsmInstruction<Setnbe>
+        [MethodImpl(Inline)]
+        public static Setnb setnb(AsmHexCode encoded) => new Setnb(encoded);
+
+        public struct Setnbe : IAsmInstruction<Setnbe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnbe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNBE;
 
             public static implicit operator AsmMnemonicCode(Setnbe src) => src.Mnemonic;
@@ -7861,8 +17915,19 @@ namespace Z0.Asm
 
         public static Setnbe setnbe() => default;
 
-        public readonly struct Setnc : IAsmInstruction<Setnc>
+        [MethodImpl(Inline)]
+        public static Setnbe setnbe(AsmHexCode encoded) => new Setnbe(encoded);
+
+        public struct Setnc : IAsmInstruction<Setnc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNC;
 
             public static implicit operator AsmMnemonicCode(Setnc src) => src.Mnemonic;
@@ -7872,8 +17937,19 @@ namespace Z0.Asm
 
         public static Setnc setnc() => default;
 
-        public readonly struct Setne : IAsmInstruction<Setne>
+        [MethodImpl(Inline)]
+        public static Setnc setnc(AsmHexCode encoded) => new Setnc(encoded);
+
+        public struct Setne : IAsmInstruction<Setne>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setne(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNE;
 
             public static implicit operator AsmMnemonicCode(Setne src) => src.Mnemonic;
@@ -7883,8 +17959,19 @@ namespace Z0.Asm
 
         public static Setne setne() => default;
 
-        public readonly struct Setng : IAsmInstruction<Setng>
+        [MethodImpl(Inline)]
+        public static Setne setne(AsmHexCode encoded) => new Setne(encoded);
+
+        public struct Setng : IAsmInstruction<Setng>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setng(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNG;
 
             public static implicit operator AsmMnemonicCode(Setng src) => src.Mnemonic;
@@ -7894,8 +17981,19 @@ namespace Z0.Asm
 
         public static Setng setng() => default;
 
-        public readonly struct Setnge : IAsmInstruction<Setnge>
+        [MethodImpl(Inline)]
+        public static Setng setng(AsmHexCode encoded) => new Setng(encoded);
+
+        public struct Setnge : IAsmInstruction<Setnge>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnge(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNGE;
 
             public static implicit operator AsmMnemonicCode(Setnge src) => src.Mnemonic;
@@ -7905,8 +18003,19 @@ namespace Z0.Asm
 
         public static Setnge setnge() => default;
 
-        public readonly struct Setnl : IAsmInstruction<Setnl>
+        [MethodImpl(Inline)]
+        public static Setnge setnge(AsmHexCode encoded) => new Setnge(encoded);
+
+        public struct Setnl : IAsmInstruction<Setnl>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnl(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNL;
 
             public static implicit operator AsmMnemonicCode(Setnl src) => src.Mnemonic;
@@ -7916,8 +18025,19 @@ namespace Z0.Asm
 
         public static Setnl setnl() => default;
 
-        public readonly struct Setnle : IAsmInstruction<Setnle>
+        [MethodImpl(Inline)]
+        public static Setnl setnl(AsmHexCode encoded) => new Setnl(encoded);
+
+        public struct Setnle : IAsmInstruction<Setnle>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnle(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNLE;
 
             public static implicit operator AsmMnemonicCode(Setnle src) => src.Mnemonic;
@@ -7927,8 +18047,19 @@ namespace Z0.Asm
 
         public static Setnle setnle() => default;
 
-        public readonly struct Setno : IAsmInstruction<Setno>
+        [MethodImpl(Inline)]
+        public static Setnle setnle(AsmHexCode encoded) => new Setnle(encoded);
+
+        public struct Setno : IAsmInstruction<Setno>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setno(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNO;
 
             public static implicit operator AsmMnemonicCode(Setno src) => src.Mnemonic;
@@ -7938,8 +18069,19 @@ namespace Z0.Asm
 
         public static Setno setno() => default;
 
-        public readonly struct Setnp : IAsmInstruction<Setnp>
+        [MethodImpl(Inline)]
+        public static Setno setno(AsmHexCode encoded) => new Setno(encoded);
+
+        public struct Setnp : IAsmInstruction<Setnp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNP;
 
             public static implicit operator AsmMnemonicCode(Setnp src) => src.Mnemonic;
@@ -7949,8 +18091,19 @@ namespace Z0.Asm
 
         public static Setnp setnp() => default;
 
-        public readonly struct Setns : IAsmInstruction<Setns>
+        [MethodImpl(Inline)]
+        public static Setnp setnp(AsmHexCode encoded) => new Setnp(encoded);
+
+        public struct Setns : IAsmInstruction<Setns>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setns(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNS;
 
             public static implicit operator AsmMnemonicCode(Setns src) => src.Mnemonic;
@@ -7960,8 +18113,19 @@ namespace Z0.Asm
 
         public static Setns setns() => default;
 
-        public readonly struct Setnz : IAsmInstruction<Setnz>
+        [MethodImpl(Inline)]
+        public static Setns setns(AsmHexCode encoded) => new Setns(encoded);
+
+        public struct Setnz : IAsmInstruction<Setnz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setnz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETNZ;
 
             public static implicit operator AsmMnemonicCode(Setnz src) => src.Mnemonic;
@@ -7971,8 +18135,19 @@ namespace Z0.Asm
 
         public static Setnz setnz() => default;
 
-        public readonly struct Seto : IAsmInstruction<Seto>
+        [MethodImpl(Inline)]
+        public static Setnz setnz(AsmHexCode encoded) => new Setnz(encoded);
+
+        public struct Seto : IAsmInstruction<Seto>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Seto(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETO;
 
             public static implicit operator AsmMnemonicCode(Seto src) => src.Mnemonic;
@@ -7982,8 +18157,19 @@ namespace Z0.Asm
 
         public static Seto seto() => default;
 
-        public readonly struct Setp : IAsmInstruction<Setp>
+        [MethodImpl(Inline)]
+        public static Seto seto(AsmHexCode encoded) => new Seto(encoded);
+
+        public struct Setp : IAsmInstruction<Setp>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setp(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETP;
 
             public static implicit operator AsmMnemonicCode(Setp src) => src.Mnemonic;
@@ -7993,8 +18179,19 @@ namespace Z0.Asm
 
         public static Setp setp() => default;
 
-        public readonly struct Setpe : IAsmInstruction<Setpe>
+        [MethodImpl(Inline)]
+        public static Setp setp(AsmHexCode encoded) => new Setp(encoded);
+
+        public struct Setpe : IAsmInstruction<Setpe>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setpe(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETPE;
 
             public static implicit operator AsmMnemonicCode(Setpe src) => src.Mnemonic;
@@ -8004,8 +18201,19 @@ namespace Z0.Asm
 
         public static Setpe setpe() => default;
 
-        public readonly struct Setpo : IAsmInstruction<Setpo>
+        [MethodImpl(Inline)]
+        public static Setpe setpe(AsmHexCode encoded) => new Setpe(encoded);
+
+        public struct Setpo : IAsmInstruction<Setpo>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setpo(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETPO;
 
             public static implicit operator AsmMnemonicCode(Setpo src) => src.Mnemonic;
@@ -8015,8 +18223,19 @@ namespace Z0.Asm
 
         public static Setpo setpo() => default;
 
-        public readonly struct Sets : IAsmInstruction<Sets>
+        [MethodImpl(Inline)]
+        public static Setpo setpo(AsmHexCode encoded) => new Setpo(encoded);
+
+        public struct Sets : IAsmInstruction<Sets>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sets(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETS;
 
             public static implicit operator AsmMnemonicCode(Sets src) => src.Mnemonic;
@@ -8026,8 +18245,19 @@ namespace Z0.Asm
 
         public static Sets sets() => default;
 
-        public readonly struct Setz : IAsmInstruction<Setz>
+        [MethodImpl(Inline)]
+        public static Sets sets(AsmHexCode encoded) => new Sets(encoded);
+
+        public struct Setz : IAsmInstruction<Setz>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Setz(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SETZ;
 
             public static implicit operator AsmMnemonicCode(Setz src) => src.Mnemonic;
@@ -8037,8 +18267,41 @@ namespace Z0.Asm
 
         public static Setz setz() => default;
 
-        public readonly struct Sgdt : IAsmInstruction<Sgdt>
+        [MethodImpl(Inline)]
+        public static Setz setz(AsmHexCode encoded) => new Setz(encoded);
+
+        public struct Sfence : IAsmInstruction<Sfence>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sfence(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SFENCE;
+
+            public static implicit operator AsmMnemonicCode(Sfence src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sfence src) => AsmMnemonics.SFENCE;
+        }
+
+        public static Sfence sfence() => default;
+
+        [MethodImpl(Inline)]
+        public static Sfence sfence(AsmHexCode encoded) => new Sfence(encoded);
+
+        public struct Sgdt : IAsmInstruction<Sgdt>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sgdt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SGDT;
 
             public static implicit operator AsmMnemonicCode(Sgdt src) => src.Mnemonic;
@@ -8048,8 +18311,19 @@ namespace Z0.Asm
 
         public static Sgdt sgdt() => default;
 
-        public readonly struct Shld : IAsmInstruction<Shld>
+        [MethodImpl(Inline)]
+        public static Sgdt sgdt(AsmHexCode encoded) => new Sgdt(encoded);
+
+        public struct Shld : IAsmInstruction<Shld>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shld(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHLD;
 
             public static implicit operator AsmMnemonicCode(Shld src) => src.Mnemonic;
@@ -8059,8 +18333,19 @@ namespace Z0.Asm
 
         public static Shld shld() => default;
 
-        public readonly struct Shrd : IAsmInstruction<Shrd>
+        [MethodImpl(Inline)]
+        public static Shld shld(AsmHexCode encoded) => new Shld(encoded);
+
+        public struct Shrd : IAsmInstruction<Shrd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shrd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHRD;
 
             public static implicit operator AsmMnemonicCode(Shrd src) => src.Mnemonic;
@@ -8070,8 +18355,19 @@ namespace Z0.Asm
 
         public static Shrd shrd() => default;
 
-        public readonly struct Shufpd : IAsmInstruction<Shufpd>
+        [MethodImpl(Inline)]
+        public static Shrd shrd(AsmHexCode encoded) => new Shrd(encoded);
+
+        public struct Shufpd : IAsmInstruction<Shufpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shufpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHUFPD;
 
             public static implicit operator AsmMnemonicCode(Shufpd src) => src.Mnemonic;
@@ -8081,8 +18377,19 @@ namespace Z0.Asm
 
         public static Shufpd shufpd() => default;
 
-        public readonly struct Vshufpd : IAsmInstruction<Vshufpd>
+        [MethodImpl(Inline)]
+        public static Shufpd shufpd(AsmHexCode encoded) => new Shufpd(encoded);
+
+        public struct Vshufpd : IAsmInstruction<Vshufpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vshufpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSHUFPD;
 
             public static implicit operator AsmMnemonicCode(Vshufpd src) => src.Mnemonic;
@@ -8092,8 +18399,19 @@ namespace Z0.Asm
 
         public static Vshufpd vshufpd() => default;
 
-        public readonly struct Shufps : IAsmInstruction<Shufps>
+        [MethodImpl(Inline)]
+        public static Vshufpd vshufpd(AsmHexCode encoded) => new Vshufpd(encoded);
+
+        public struct Shufps : IAsmInstruction<Shufps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Shufps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SHUFPS;
 
             public static implicit operator AsmMnemonicCode(Shufps src) => src.Mnemonic;
@@ -8103,8 +18421,19 @@ namespace Z0.Asm
 
         public static Shufps shufps() => default;
 
-        public readonly struct Vshufps : IAsmInstruction<Vshufps>
+        [MethodImpl(Inline)]
+        public static Shufps shufps(AsmHexCode encoded) => new Shufps(encoded);
+
+        public struct Vshufps : IAsmInstruction<Vshufps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vshufps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSHUFPS;
 
             public static implicit operator AsmMnemonicCode(Vshufps src) => src.Mnemonic;
@@ -8114,8 +18443,19 @@ namespace Z0.Asm
 
         public static Vshufps vshufps() => default;
 
-        public readonly struct Sidt : IAsmInstruction<Sidt>
+        [MethodImpl(Inline)]
+        public static Vshufps vshufps(AsmHexCode encoded) => new Vshufps(encoded);
+
+        public struct Sidt : IAsmInstruction<Sidt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sidt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SIDT;
 
             public static implicit operator AsmMnemonicCode(Sidt src) => src.Mnemonic;
@@ -8125,8 +18465,19 @@ namespace Z0.Asm
 
         public static Sidt sidt() => default;
 
-        public readonly struct Sldt : IAsmInstruction<Sldt>
+        [MethodImpl(Inline)]
+        public static Sidt sidt(AsmHexCode encoded) => new Sidt(encoded);
+
+        public struct Sldt : IAsmInstruction<Sldt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sldt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SLDT;
 
             public static implicit operator AsmMnemonicCode(Sldt src) => src.Mnemonic;
@@ -8136,8 +18487,19 @@ namespace Z0.Asm
 
         public static Sldt sldt() => default;
 
-        public readonly struct Smsw : IAsmInstruction<Smsw>
+        [MethodImpl(Inline)]
+        public static Sldt sldt(AsmHexCode encoded) => new Sldt(encoded);
+
+        public struct Smsw : IAsmInstruction<Smsw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Smsw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SMSW;
 
             public static implicit operator AsmMnemonicCode(Smsw src) => src.Mnemonic;
@@ -8147,8 +18509,19 @@ namespace Z0.Asm
 
         public static Smsw smsw() => default;
 
-        public readonly struct Sqrtpd : IAsmInstruction<Sqrtpd>
+        [MethodImpl(Inline)]
+        public static Smsw smsw(AsmHexCode encoded) => new Smsw(encoded);
+
+        public struct Sqrtpd : IAsmInstruction<Sqrtpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sqrtpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SQRTPD;
 
             public static implicit operator AsmMnemonicCode(Sqrtpd src) => src.Mnemonic;
@@ -8158,8 +18531,19 @@ namespace Z0.Asm
 
         public static Sqrtpd sqrtpd() => default;
 
-        public readonly struct Vsqrtpd : IAsmInstruction<Vsqrtpd>
+        [MethodImpl(Inline)]
+        public static Sqrtpd sqrtpd(AsmHexCode encoded) => new Sqrtpd(encoded);
+
+        public struct Vsqrtpd : IAsmInstruction<Vsqrtpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsqrtpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSQRTPD;
 
             public static implicit operator AsmMnemonicCode(Vsqrtpd src) => src.Mnemonic;
@@ -8169,8 +18553,19 @@ namespace Z0.Asm
 
         public static Vsqrtpd vsqrtpd() => default;
 
-        public readonly struct Sqrtps : IAsmInstruction<Sqrtps>
+        [MethodImpl(Inline)]
+        public static Vsqrtpd vsqrtpd(AsmHexCode encoded) => new Vsqrtpd(encoded);
+
+        public struct Sqrtps : IAsmInstruction<Sqrtps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sqrtps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SQRTPS;
 
             public static implicit operator AsmMnemonicCode(Sqrtps src) => src.Mnemonic;
@@ -8180,8 +18575,19 @@ namespace Z0.Asm
 
         public static Sqrtps sqrtps() => default;
 
-        public readonly struct Vsqrtps : IAsmInstruction<Vsqrtps>
+        [MethodImpl(Inline)]
+        public static Sqrtps sqrtps(AsmHexCode encoded) => new Sqrtps(encoded);
+
+        public struct Vsqrtps : IAsmInstruction<Vsqrtps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsqrtps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSQRTPS;
 
             public static implicit operator AsmMnemonicCode(Vsqrtps src) => src.Mnemonic;
@@ -8191,8 +18597,19 @@ namespace Z0.Asm
 
         public static Vsqrtps vsqrtps() => default;
 
-        public readonly struct Sqrtsd : IAsmInstruction<Sqrtsd>
+        [MethodImpl(Inline)]
+        public static Vsqrtps vsqrtps(AsmHexCode encoded) => new Vsqrtps(encoded);
+
+        public struct Sqrtsd : IAsmInstruction<Sqrtsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sqrtsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SQRTSD;
 
             public static implicit operator AsmMnemonicCode(Sqrtsd src) => src.Mnemonic;
@@ -8202,8 +18619,19 @@ namespace Z0.Asm
 
         public static Sqrtsd sqrtsd() => default;
 
-        public readonly struct Vsqrtsd : IAsmInstruction<Vsqrtsd>
+        [MethodImpl(Inline)]
+        public static Sqrtsd sqrtsd(AsmHexCode encoded) => new Sqrtsd(encoded);
+
+        public struct Vsqrtsd : IAsmInstruction<Vsqrtsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsqrtsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSQRTSD;
 
             public static implicit operator AsmMnemonicCode(Vsqrtsd src) => src.Mnemonic;
@@ -8213,8 +18641,19 @@ namespace Z0.Asm
 
         public static Vsqrtsd vsqrtsd() => default;
 
-        public readonly struct Sqrtss : IAsmInstruction<Sqrtss>
+        [MethodImpl(Inline)]
+        public static Vsqrtsd vsqrtsd(AsmHexCode encoded) => new Vsqrtsd(encoded);
+
+        public struct Sqrtss : IAsmInstruction<Sqrtss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sqrtss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SQRTSS;
 
             public static implicit operator AsmMnemonicCode(Sqrtss src) => src.Mnemonic;
@@ -8224,8 +18663,19 @@ namespace Z0.Asm
 
         public static Sqrtss sqrtss() => default;
 
-        public readonly struct Vsqrtss : IAsmInstruction<Vsqrtss>
+        [MethodImpl(Inline)]
+        public static Sqrtss sqrtss(AsmHexCode encoded) => new Sqrtss(encoded);
+
+        public struct Vsqrtss : IAsmInstruction<Vsqrtss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsqrtss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSQRTSS;
 
             public static implicit operator AsmMnemonicCode(Vsqrtss src) => src.Mnemonic;
@@ -8235,8 +18685,85 @@ namespace Z0.Asm
 
         public static Vsqrtss vsqrtss() => default;
 
-        public readonly struct Stmxcsr : IAsmInstruction<Stmxcsr>
+        [MethodImpl(Inline)]
+        public static Vsqrtss vsqrtss(AsmHexCode encoded) => new Vsqrtss(encoded);
+
+        public struct Stc : IAsmInstruction<Stc>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stc(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STC;
+
+            public static implicit operator AsmMnemonicCode(Stc src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Stc src) => AsmMnemonics.STC;
+        }
+
+        public static Stc stc() => default;
+
+        [MethodImpl(Inline)]
+        public static Stc stc(AsmHexCode encoded) => new Stc(encoded);
+
+        public struct Std : IAsmInstruction<Std>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Std(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STD;
+
+            public static implicit operator AsmMnemonicCode(Std src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Std src) => AsmMnemonics.STD;
+        }
+
+        public static Std std() => default;
+
+        [MethodImpl(Inline)]
+        public static Std std(AsmHexCode encoded) => new Std(encoded);
+
+        public struct Sti : IAsmInstruction<Sti>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sti(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STI;
+
+            public static implicit operator AsmMnemonicCode(Sti src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sti src) => AsmMnemonics.STI;
+        }
+
+        public static Sti sti() => default;
+
+        [MethodImpl(Inline)]
+        public static Sti sti(AsmHexCode encoded) => new Sti(encoded);
+
+        public struct Stmxcsr : IAsmInstruction<Stmxcsr>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stmxcsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STMXCSR;
 
             public static implicit operator AsmMnemonicCode(Stmxcsr src) => src.Mnemonic;
@@ -8246,8 +18773,19 @@ namespace Z0.Asm
 
         public static Stmxcsr stmxcsr() => default;
 
-        public readonly struct Vstmxcsr : IAsmInstruction<Vstmxcsr>
+        [MethodImpl(Inline)]
+        public static Stmxcsr stmxcsr(AsmHexCode encoded) => new Stmxcsr(encoded);
+
+        public struct Vstmxcsr : IAsmInstruction<Vstmxcsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vstmxcsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSTMXCSR;
 
             public static implicit operator AsmMnemonicCode(Vstmxcsr src) => src.Mnemonic;
@@ -8257,8 +18795,19 @@ namespace Z0.Asm
 
         public static Vstmxcsr vstmxcsr() => default;
 
-        public readonly struct Stos : IAsmInstruction<Stos>
+        [MethodImpl(Inline)]
+        public static Vstmxcsr vstmxcsr(AsmHexCode encoded) => new Vstmxcsr(encoded);
+
+        public struct Stos : IAsmInstruction<Stos>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stos(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STOS;
 
             public static implicit operator AsmMnemonicCode(Stos src) => src.Mnemonic;
@@ -8268,8 +18817,107 @@ namespace Z0.Asm
 
         public static Stos stos() => default;
 
-        public readonly struct Str : IAsmInstruction<Str>
+        [MethodImpl(Inline)]
+        public static Stos stos(AsmHexCode encoded) => new Stos(encoded);
+
+        public struct Stosb : IAsmInstruction<Stosb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stosb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STOSB;
+
+            public static implicit operator AsmMnemonicCode(Stosb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Stosb src) => AsmMnemonics.STOSB;
+        }
+
+        public static Stosb stosb() => default;
+
+        [MethodImpl(Inline)]
+        public static Stosb stosb(AsmHexCode encoded) => new Stosb(encoded);
+
+        public struct Stosw : IAsmInstruction<Stosw>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stosw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STOSW;
+
+            public static implicit operator AsmMnemonicCode(Stosw src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Stosw src) => AsmMnemonics.STOSW;
+        }
+
+        public static Stosw stosw() => default;
+
+        [MethodImpl(Inline)]
+        public static Stosw stosw(AsmHexCode encoded) => new Stosw(encoded);
+
+        public struct Stosd : IAsmInstruction<Stosd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stosd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STOSD;
+
+            public static implicit operator AsmMnemonicCode(Stosd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Stosd src) => AsmMnemonics.STOSD;
+        }
+
+        public static Stosd stosd() => default;
+
+        [MethodImpl(Inline)]
+        public static Stosd stosd(AsmHexCode encoded) => new Stosd(encoded);
+
+        public struct Stosq : IAsmInstruction<Stosq>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Stosq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STOSQ;
+
+            public static implicit operator AsmMnemonicCode(Stosq src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Stosq src) => AsmMnemonics.STOSQ;
+        }
+
+        public static Stosq stosq() => default;
+
+        [MethodImpl(Inline)]
+        public static Stosq stosq(AsmHexCode encoded) => new Stosq(encoded);
+
+        public struct Str : IAsmInstruction<Str>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Str(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.STR;
 
             public static implicit operator AsmMnemonicCode(Str src) => src.Mnemonic;
@@ -8279,8 +18927,19 @@ namespace Z0.Asm
 
         public static Str str() => default;
 
-        public readonly struct Sub : IAsmInstruction<Sub>
+        [MethodImpl(Inline)]
+        public static Str str(AsmHexCode encoded) => new Str(encoded);
+
+        public struct Sub : IAsmInstruction<Sub>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sub(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUB;
 
             public static implicit operator AsmMnemonicCode(Sub src) => src.Mnemonic;
@@ -8290,8 +18949,19 @@ namespace Z0.Asm
 
         public static Sub sub() => default;
 
-        public readonly struct Subpd : IAsmInstruction<Subpd>
+        [MethodImpl(Inline)]
+        public static Sub sub(AsmHexCode encoded) => new Sub(encoded);
+
+        public struct Subpd : IAsmInstruction<Subpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Subpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUBPD;
 
             public static implicit operator AsmMnemonicCode(Subpd src) => src.Mnemonic;
@@ -8301,8 +18971,19 @@ namespace Z0.Asm
 
         public static Subpd subpd() => default;
 
-        public readonly struct Vsubpd : IAsmInstruction<Vsubpd>
+        [MethodImpl(Inline)]
+        public static Subpd subpd(AsmHexCode encoded) => new Subpd(encoded);
+
+        public struct Vsubpd : IAsmInstruction<Vsubpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsubpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSUBPD;
 
             public static implicit operator AsmMnemonicCode(Vsubpd src) => src.Mnemonic;
@@ -8312,8 +18993,19 @@ namespace Z0.Asm
 
         public static Vsubpd vsubpd() => default;
 
-        public readonly struct Subps : IAsmInstruction<Subps>
+        [MethodImpl(Inline)]
+        public static Vsubpd vsubpd(AsmHexCode encoded) => new Vsubpd(encoded);
+
+        public struct Subps : IAsmInstruction<Subps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Subps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUBPS;
 
             public static implicit operator AsmMnemonicCode(Subps src) => src.Mnemonic;
@@ -8323,8 +19015,19 @@ namespace Z0.Asm
 
         public static Subps subps() => default;
 
-        public readonly struct Vsubps : IAsmInstruction<Vsubps>
+        [MethodImpl(Inline)]
+        public static Subps subps(AsmHexCode encoded) => new Subps(encoded);
+
+        public struct Vsubps : IAsmInstruction<Vsubps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsubps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSUBPS;
 
             public static implicit operator AsmMnemonicCode(Vsubps src) => src.Mnemonic;
@@ -8334,8 +19037,19 @@ namespace Z0.Asm
 
         public static Vsubps vsubps() => default;
 
-        public readonly struct Subsd : IAsmInstruction<Subsd>
+        [MethodImpl(Inline)]
+        public static Vsubps vsubps(AsmHexCode encoded) => new Vsubps(encoded);
+
+        public struct Subsd : IAsmInstruction<Subsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Subsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUBSD;
 
             public static implicit operator AsmMnemonicCode(Subsd src) => src.Mnemonic;
@@ -8345,8 +19059,19 @@ namespace Z0.Asm
 
         public static Subsd subsd() => default;
 
-        public readonly struct Vsubsd : IAsmInstruction<Vsubsd>
+        [MethodImpl(Inline)]
+        public static Subsd subsd(AsmHexCode encoded) => new Subsd(encoded);
+
+        public struct Vsubsd : IAsmInstruction<Vsubsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsubsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSUBSD;
 
             public static implicit operator AsmMnemonicCode(Vsubsd src) => src.Mnemonic;
@@ -8356,8 +19081,19 @@ namespace Z0.Asm
 
         public static Vsubsd vsubsd() => default;
 
-        public readonly struct Subss : IAsmInstruction<Subss>
+        [MethodImpl(Inline)]
+        public static Vsubsd vsubsd(AsmHexCode encoded) => new Vsubsd(encoded);
+
+        public struct Subss : IAsmInstruction<Subss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Subss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SUBSS;
 
             public static implicit operator AsmMnemonicCode(Subss src) => src.Mnemonic;
@@ -8367,8 +19103,19 @@ namespace Z0.Asm
 
         public static Subss subss() => default;
 
-        public readonly struct Vsubss : IAsmInstruction<Vsubss>
+        [MethodImpl(Inline)]
+        public static Subss subss(AsmHexCode encoded) => new Subss(encoded);
+
+        public struct Vsubss : IAsmInstruction<Vsubss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vsubss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VSUBSS;
 
             public static implicit operator AsmMnemonicCode(Vsubss src) => src.Mnemonic;
@@ -8378,8 +19125,85 @@ namespace Z0.Asm
 
         public static Vsubss vsubss() => default;
 
-        public readonly struct Sysexit : IAsmInstruction<Sysexit>
+        [MethodImpl(Inline)]
+        public static Vsubss vsubss(AsmHexCode encoded) => new Vsubss(encoded);
+
+        public struct Swapgs : IAsmInstruction<Swapgs>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Swapgs(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SWAPGS;
+
+            public static implicit operator AsmMnemonicCode(Swapgs src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Swapgs src) => AsmMnemonics.SWAPGS;
+        }
+
+        public static Swapgs swapgs() => default;
+
+        [MethodImpl(Inline)]
+        public static Swapgs swapgs(AsmHexCode encoded) => new Swapgs(encoded);
+
+        public struct Syscall : IAsmInstruction<Syscall>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Syscall(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSCALL;
+
+            public static implicit operator AsmMnemonicCode(Syscall src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Syscall src) => AsmMnemonics.SYSCALL;
+        }
+
+        public static Syscall syscall() => default;
+
+        [MethodImpl(Inline)]
+        public static Syscall syscall(AsmHexCode encoded) => new Syscall(encoded);
+
+        public struct Sysenter : IAsmInstruction<Sysenter>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sysenter(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSENTER;
+
+            public static implicit operator AsmMnemonicCode(Sysenter src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Sysenter src) => AsmMnemonics.SYSENTER;
+        }
+
+        public static Sysenter sysenter() => default;
+
+        [MethodImpl(Inline)]
+        public static Sysenter sysenter(AsmHexCode encoded) => new Sysenter(encoded);
+
+        public struct Sysexit : IAsmInstruction<Sysexit>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sysexit(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSEXIT;
 
             public static implicit operator AsmMnemonicCode(Sysexit src) => src.Mnemonic;
@@ -8389,8 +19213,19 @@ namespace Z0.Asm
 
         public static Sysexit sysexit() => default;
 
-        public readonly struct Sysret : IAsmInstruction<Sysret>
+        [MethodImpl(Inline)]
+        public static Sysexit sysexit(AsmHexCode encoded) => new Sysexit(encoded);
+
+        public struct Sysret : IAsmInstruction<Sysret>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Sysret(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.SYSRET;
 
             public static implicit operator AsmMnemonicCode(Sysret src) => src.Mnemonic;
@@ -8400,8 +19235,19 @@ namespace Z0.Asm
 
         public static Sysret sysret() => default;
 
-        public readonly struct Test : IAsmInstruction<Test>
+        [MethodImpl(Inline)]
+        public static Sysret sysret(AsmHexCode encoded) => new Sysret(encoded);
+
+        public struct Test : IAsmInstruction<Test>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Test(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.TEST;
 
             public static implicit operator AsmMnemonicCode(Test src) => src.Mnemonic;
@@ -8411,8 +19257,19 @@ namespace Z0.Asm
 
         public static Test test() => default;
 
-        public readonly struct Tzcnt : IAsmInstruction<Tzcnt>
+        [MethodImpl(Inline)]
+        public static Test test(AsmHexCode encoded) => new Test(encoded);
+
+        public struct Tzcnt : IAsmInstruction<Tzcnt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Tzcnt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.TZCNT;
 
             public static implicit operator AsmMnemonicCode(Tzcnt src) => src.Mnemonic;
@@ -8422,8 +19279,19 @@ namespace Z0.Asm
 
         public static Tzcnt tzcnt() => default;
 
-        public readonly struct Ucomisd : IAsmInstruction<Ucomisd>
+        [MethodImpl(Inline)]
+        public static Tzcnt tzcnt(AsmHexCode encoded) => new Tzcnt(encoded);
+
+        public struct Ucomisd : IAsmInstruction<Ucomisd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ucomisd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UCOMISD;
 
             public static implicit operator AsmMnemonicCode(Ucomisd src) => src.Mnemonic;
@@ -8433,8 +19301,19 @@ namespace Z0.Asm
 
         public static Ucomisd ucomisd() => default;
 
-        public readonly struct Vucomisd : IAsmInstruction<Vucomisd>
+        [MethodImpl(Inline)]
+        public static Ucomisd ucomisd(AsmHexCode encoded) => new Ucomisd(encoded);
+
+        public struct Vucomisd : IAsmInstruction<Vucomisd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vucomisd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUCOMISD;
 
             public static implicit operator AsmMnemonicCode(Vucomisd src) => src.Mnemonic;
@@ -8444,8 +19323,19 @@ namespace Z0.Asm
 
         public static Vucomisd vucomisd() => default;
 
-        public readonly struct Ucomiss : IAsmInstruction<Ucomiss>
+        [MethodImpl(Inline)]
+        public static Vucomisd vucomisd(AsmHexCode encoded) => new Vucomisd(encoded);
+
+        public struct Ucomiss : IAsmInstruction<Ucomiss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ucomiss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UCOMISS;
 
             public static implicit operator AsmMnemonicCode(Ucomiss src) => src.Mnemonic;
@@ -8455,8 +19345,19 @@ namespace Z0.Asm
 
         public static Ucomiss ucomiss() => default;
 
-        public readonly struct Vucomiss : IAsmInstruction<Vucomiss>
+        [MethodImpl(Inline)]
+        public static Ucomiss ucomiss(AsmHexCode encoded) => new Ucomiss(encoded);
+
+        public struct Vucomiss : IAsmInstruction<Vucomiss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vucomiss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUCOMISS;
 
             public static implicit operator AsmMnemonicCode(Vucomiss src) => src.Mnemonic;
@@ -8466,8 +19367,41 @@ namespace Z0.Asm
 
         public static Vucomiss vucomiss() => default;
 
-        public readonly struct Unpckhpd : IAsmInstruction<Unpckhpd>
+        [MethodImpl(Inline)]
+        public static Vucomiss vucomiss(AsmHexCode encoded) => new Vucomiss(encoded);
+
+        public struct Ud2 : IAsmInstruction<Ud2>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Ud2(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UD2;
+
+            public static implicit operator AsmMnemonicCode(Ud2 src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Ud2 src) => AsmMnemonics.UD2;
+        }
+
+        public static Ud2 ud2() => default;
+
+        [MethodImpl(Inline)]
+        public static Ud2 ud2(AsmHexCode encoded) => new Ud2(encoded);
+
+        public struct Unpckhpd : IAsmInstruction<Unpckhpd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Unpckhpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UNPCKHPD;
 
             public static implicit operator AsmMnemonicCode(Unpckhpd src) => src.Mnemonic;
@@ -8477,8 +19411,19 @@ namespace Z0.Asm
 
         public static Unpckhpd unpckhpd() => default;
 
-        public readonly struct Vunpckhpd : IAsmInstruction<Vunpckhpd>
+        [MethodImpl(Inline)]
+        public static Unpckhpd unpckhpd(AsmHexCode encoded) => new Unpckhpd(encoded);
+
+        public struct Vunpckhpd : IAsmInstruction<Vunpckhpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vunpckhpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUNPCKHPD;
 
             public static implicit operator AsmMnemonicCode(Vunpckhpd src) => src.Mnemonic;
@@ -8488,8 +19433,19 @@ namespace Z0.Asm
 
         public static Vunpckhpd vunpckhpd() => default;
 
-        public readonly struct Unpckhps : IAsmInstruction<Unpckhps>
+        [MethodImpl(Inline)]
+        public static Vunpckhpd vunpckhpd(AsmHexCode encoded) => new Vunpckhpd(encoded);
+
+        public struct Unpckhps : IAsmInstruction<Unpckhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Unpckhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UNPCKHPS;
 
             public static implicit operator AsmMnemonicCode(Unpckhps src) => src.Mnemonic;
@@ -8499,8 +19455,19 @@ namespace Z0.Asm
 
         public static Unpckhps unpckhps() => default;
 
-        public readonly struct Vunpckhps : IAsmInstruction<Vunpckhps>
+        [MethodImpl(Inline)]
+        public static Unpckhps unpckhps(AsmHexCode encoded) => new Unpckhps(encoded);
+
+        public struct Vunpckhps : IAsmInstruction<Vunpckhps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vunpckhps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUNPCKHPS;
 
             public static implicit operator AsmMnemonicCode(Vunpckhps src) => src.Mnemonic;
@@ -8510,8 +19477,19 @@ namespace Z0.Asm
 
         public static Vunpckhps vunpckhps() => default;
 
-        public readonly struct Unpcklpd : IAsmInstruction<Unpcklpd>
+        [MethodImpl(Inline)]
+        public static Vunpckhps vunpckhps(AsmHexCode encoded) => new Vunpckhps(encoded);
+
+        public struct Unpcklpd : IAsmInstruction<Unpcklpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Unpcklpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UNPCKLPD;
 
             public static implicit operator AsmMnemonicCode(Unpcklpd src) => src.Mnemonic;
@@ -8521,8 +19499,19 @@ namespace Z0.Asm
 
         public static Unpcklpd unpcklpd() => default;
 
-        public readonly struct Vunpcklpd : IAsmInstruction<Vunpcklpd>
+        [MethodImpl(Inline)]
+        public static Unpcklpd unpcklpd(AsmHexCode encoded) => new Unpcklpd(encoded);
+
+        public struct Vunpcklpd : IAsmInstruction<Vunpcklpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vunpcklpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUNPCKLPD;
 
             public static implicit operator AsmMnemonicCode(Vunpcklpd src) => src.Mnemonic;
@@ -8532,8 +19521,19 @@ namespace Z0.Asm
 
         public static Vunpcklpd vunpcklpd() => default;
 
-        public readonly struct Unpcklps : IAsmInstruction<Unpcklps>
+        [MethodImpl(Inline)]
+        public static Vunpcklpd vunpcklpd(AsmHexCode encoded) => new Vunpcklpd(encoded);
+
+        public struct Unpcklps : IAsmInstruction<Unpcklps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Unpcklps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.UNPCKLPS;
 
             public static implicit operator AsmMnemonicCode(Unpcklps src) => src.Mnemonic;
@@ -8543,8 +19543,19 @@ namespace Z0.Asm
 
         public static Unpcklps unpcklps() => default;
 
-        public readonly struct Vunpcklps : IAsmInstruction<Vunpcklps>
+        [MethodImpl(Inline)]
+        public static Unpcklps unpcklps(AsmHexCode encoded) => new Unpcklps(encoded);
+
+        public struct Vunpcklps : IAsmInstruction<Vunpcklps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vunpcklps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VUNPCKLPS;
 
             public static implicit operator AsmMnemonicCode(Vunpcklps src) => src.Mnemonic;
@@ -8554,8 +19565,19 @@ namespace Z0.Asm
 
         public static Vunpcklps vunpcklps() => default;
 
-        public readonly struct Vbroadcastss : IAsmInstruction<Vbroadcastss>
+        [MethodImpl(Inline)]
+        public static Vunpcklps vunpcklps(AsmHexCode encoded) => new Vunpcklps(encoded);
+
+        public struct Vbroadcastss : IAsmInstruction<Vbroadcastss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vbroadcastss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBROADCASTSS;
 
             public static implicit operator AsmMnemonicCode(Vbroadcastss src) => src.Mnemonic;
@@ -8565,8 +19587,19 @@ namespace Z0.Asm
 
         public static Vbroadcastss vbroadcastss() => default;
 
-        public readonly struct Vbroadcastsd : IAsmInstruction<Vbroadcastsd>
+        [MethodImpl(Inline)]
+        public static Vbroadcastss vbroadcastss(AsmHexCode encoded) => new Vbroadcastss(encoded);
+
+        public struct Vbroadcastsd : IAsmInstruction<Vbroadcastsd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vbroadcastsd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBROADCASTSD;
 
             public static implicit operator AsmMnemonicCode(Vbroadcastsd src) => src.Mnemonic;
@@ -8576,8 +19609,19 @@ namespace Z0.Asm
 
         public static Vbroadcastsd vbroadcastsd() => default;
 
-        public readonly struct Vbroadcastf128 : IAsmInstruction<Vbroadcastf128>
+        [MethodImpl(Inline)]
+        public static Vbroadcastsd vbroadcastsd(AsmHexCode encoded) => new Vbroadcastsd(encoded);
+
+        public struct Vbroadcastf128 : IAsmInstruction<Vbroadcastf128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vbroadcastf128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBROADCASTF128;
 
             public static implicit operator AsmMnemonicCode(Vbroadcastf128 src) => src.Mnemonic;
@@ -8587,8 +19631,19 @@ namespace Z0.Asm
 
         public static Vbroadcastf128 vbroadcastf128() => default;
 
-        public readonly struct Vcvtph2ps : IAsmInstruction<Vcvtph2ps>
+        [MethodImpl(Inline)]
+        public static Vbroadcastf128 vbroadcastf128(AsmHexCode encoded) => new Vbroadcastf128(encoded);
+
+        public struct Vcvtph2ps : IAsmInstruction<Vcvtph2ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtph2ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPH2PS;
 
             public static implicit operator AsmMnemonicCode(Vcvtph2ps src) => src.Mnemonic;
@@ -8598,8 +19653,19 @@ namespace Z0.Asm
 
         public static Vcvtph2ps vcvtph2ps() => default;
 
-        public readonly struct Vcvtps2ph : IAsmInstruction<Vcvtps2ph>
+        [MethodImpl(Inline)]
+        public static Vcvtph2ps vcvtph2ps(AsmHexCode encoded) => new Vcvtph2ps(encoded);
+
+        public struct Vcvtps2ph : IAsmInstruction<Vcvtps2ph>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vcvtps2ph(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VCVTPS2PH;
 
             public static implicit operator AsmMnemonicCode(Vcvtps2ph src) => src.Mnemonic;
@@ -8609,8 +19675,19 @@ namespace Z0.Asm
 
         public static Vcvtps2ph vcvtps2ph() => default;
 
-        public readonly struct Verr : IAsmInstruction<Verr>
+        [MethodImpl(Inline)]
+        public static Vcvtps2ph vcvtps2ph(AsmHexCode encoded) => new Vcvtps2ph(encoded);
+
+        public struct Verr : IAsmInstruction<Verr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Verr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VERR;
 
             public static implicit operator AsmMnemonicCode(Verr src) => src.Mnemonic;
@@ -8620,8 +19697,19 @@ namespace Z0.Asm
 
         public static Verr verr() => default;
 
-        public readonly struct Verw : IAsmInstruction<Verw>
+        [MethodImpl(Inline)]
+        public static Verr verr(AsmHexCode encoded) => new Verr(encoded);
+
+        public struct Verw : IAsmInstruction<Verw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Verw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VERW;
 
             public static implicit operator AsmMnemonicCode(Verw src) => src.Mnemonic;
@@ -8631,8 +19719,19 @@ namespace Z0.Asm
 
         public static Verw verw() => default;
 
-        public readonly struct Vextractf128 : IAsmInstruction<Vextractf128>
+        [MethodImpl(Inline)]
+        public static Verw verw(AsmHexCode encoded) => new Verw(encoded);
+
+        public struct Vextractf128 : IAsmInstruction<Vextractf128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vextractf128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VEXTRACTF128;
 
             public static implicit operator AsmMnemonicCode(Vextractf128 src) => src.Mnemonic;
@@ -8642,8 +19741,19 @@ namespace Z0.Asm
 
         public static Vextractf128 vextractf128() => default;
 
-        public readonly struct Vextracti128 : IAsmInstruction<Vextracti128>
+        [MethodImpl(Inline)]
+        public static Vextractf128 vextractf128(AsmHexCode encoded) => new Vextractf128(encoded);
+
+        public struct Vextracti128 : IAsmInstruction<Vextracti128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vextracti128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VEXTRACTI128;
 
             public static implicit operator AsmMnemonicCode(Vextracti128 src) => src.Mnemonic;
@@ -8653,8 +19763,19 @@ namespace Z0.Asm
 
         public static Vextracti128 vextracti128() => default;
 
-        public readonly struct Vfmadd132pd : IAsmInstruction<Vfmadd132pd>
+        [MethodImpl(Inline)]
+        public static Vextracti128 vextracti128(AsmHexCode encoded) => new Vextracti128(encoded);
+
+        public struct Vfmadd132pd : IAsmInstruction<Vfmadd132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD132PD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd132pd src) => src.Mnemonic;
@@ -8664,8 +19785,19 @@ namespace Z0.Asm
 
         public static Vfmadd132pd vfmadd132pd() => default;
 
-        public readonly struct Vfmadd213pd : IAsmInstruction<Vfmadd213pd>
+        [MethodImpl(Inline)]
+        public static Vfmadd132pd vfmadd132pd(AsmHexCode encoded) => new Vfmadd132pd(encoded);
+
+        public struct Vfmadd213pd : IAsmInstruction<Vfmadd213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD213PD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd213pd src) => src.Mnemonic;
@@ -8675,8 +19807,19 @@ namespace Z0.Asm
 
         public static Vfmadd213pd vfmadd213pd() => default;
 
-        public readonly struct Vfmadd231pd : IAsmInstruction<Vfmadd231pd>
+        [MethodImpl(Inline)]
+        public static Vfmadd213pd vfmadd213pd(AsmHexCode encoded) => new Vfmadd213pd(encoded);
+
+        public struct Vfmadd231pd : IAsmInstruction<Vfmadd231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD231PD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd231pd src) => src.Mnemonic;
@@ -8686,8 +19829,19 @@ namespace Z0.Asm
 
         public static Vfmadd231pd vfmadd231pd() => default;
 
-        public readonly struct Vfmadd132ps : IAsmInstruction<Vfmadd132ps>
+        [MethodImpl(Inline)]
+        public static Vfmadd231pd vfmadd231pd(AsmHexCode encoded) => new Vfmadd231pd(encoded);
+
+        public struct Vfmadd132ps : IAsmInstruction<Vfmadd132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD132PS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd132ps src) => src.Mnemonic;
@@ -8697,8 +19851,19 @@ namespace Z0.Asm
 
         public static Vfmadd132ps vfmadd132ps() => default;
 
-        public readonly struct Vfmadd213ps : IAsmInstruction<Vfmadd213ps>
+        [MethodImpl(Inline)]
+        public static Vfmadd132ps vfmadd132ps(AsmHexCode encoded) => new Vfmadd132ps(encoded);
+
+        public struct Vfmadd213ps : IAsmInstruction<Vfmadd213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD213PS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd213ps src) => src.Mnemonic;
@@ -8708,8 +19873,19 @@ namespace Z0.Asm
 
         public static Vfmadd213ps vfmadd213ps() => default;
 
-        public readonly struct Vfmadd231ps : IAsmInstruction<Vfmadd231ps>
+        [MethodImpl(Inline)]
+        public static Vfmadd213ps vfmadd213ps(AsmHexCode encoded) => new Vfmadd213ps(encoded);
+
+        public struct Vfmadd231ps : IAsmInstruction<Vfmadd231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD231PS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd231ps src) => src.Mnemonic;
@@ -8719,8 +19895,19 @@ namespace Z0.Asm
 
         public static Vfmadd231ps vfmadd231ps() => default;
 
-        public readonly struct Vfmadd132sd : IAsmInstruction<Vfmadd132sd>
+        [MethodImpl(Inline)]
+        public static Vfmadd231ps vfmadd231ps(AsmHexCode encoded) => new Vfmadd231ps(encoded);
+
+        public struct Vfmadd132sd : IAsmInstruction<Vfmadd132sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd132sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD132SD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd132sd src) => src.Mnemonic;
@@ -8730,8 +19917,19 @@ namespace Z0.Asm
 
         public static Vfmadd132sd vfmadd132sd() => default;
 
-        public readonly struct Vfmadd213sd : IAsmInstruction<Vfmadd213sd>
+        [MethodImpl(Inline)]
+        public static Vfmadd132sd vfmadd132sd(AsmHexCode encoded) => new Vfmadd132sd(encoded);
+
+        public struct Vfmadd213sd : IAsmInstruction<Vfmadd213sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd213sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD213SD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd213sd src) => src.Mnemonic;
@@ -8741,8 +19939,19 @@ namespace Z0.Asm
 
         public static Vfmadd213sd vfmadd213sd() => default;
 
-        public readonly struct Vfmadd231sd : IAsmInstruction<Vfmadd231sd>
+        [MethodImpl(Inline)]
+        public static Vfmadd213sd vfmadd213sd(AsmHexCode encoded) => new Vfmadd213sd(encoded);
+
+        public struct Vfmadd231sd : IAsmInstruction<Vfmadd231sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd231sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD231SD;
 
             public static implicit operator AsmMnemonicCode(Vfmadd231sd src) => src.Mnemonic;
@@ -8752,8 +19961,19 @@ namespace Z0.Asm
 
         public static Vfmadd231sd vfmadd231sd() => default;
 
-        public readonly struct Vfmadd132ss : IAsmInstruction<Vfmadd132ss>
+        [MethodImpl(Inline)]
+        public static Vfmadd231sd vfmadd231sd(AsmHexCode encoded) => new Vfmadd231sd(encoded);
+
+        public struct Vfmadd132ss : IAsmInstruction<Vfmadd132ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd132ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD132SS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd132ss src) => src.Mnemonic;
@@ -8763,8 +19983,19 @@ namespace Z0.Asm
 
         public static Vfmadd132ss vfmadd132ss() => default;
 
-        public readonly struct Vfmadd213ss : IAsmInstruction<Vfmadd213ss>
+        [MethodImpl(Inline)]
+        public static Vfmadd132ss vfmadd132ss(AsmHexCode encoded) => new Vfmadd132ss(encoded);
+
+        public struct Vfmadd213ss : IAsmInstruction<Vfmadd213ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd213ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD213SS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd213ss src) => src.Mnemonic;
@@ -8774,8 +20005,19 @@ namespace Z0.Asm
 
         public static Vfmadd213ss vfmadd213ss() => default;
 
-        public readonly struct Vfmadd231ss : IAsmInstruction<Vfmadd231ss>
+        [MethodImpl(Inline)]
+        public static Vfmadd213ss vfmadd213ss(AsmHexCode encoded) => new Vfmadd213ss(encoded);
+
+        public struct Vfmadd231ss : IAsmInstruction<Vfmadd231ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmadd231ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADD231SS;
 
             public static implicit operator AsmMnemonicCode(Vfmadd231ss src) => src.Mnemonic;
@@ -8785,8 +20027,19 @@ namespace Z0.Asm
 
         public static Vfmadd231ss vfmadd231ss() => default;
 
-        public readonly struct Vfmaddsub132pd : IAsmInstruction<Vfmaddsub132pd>
+        [MethodImpl(Inline)]
+        public static Vfmadd231ss vfmadd231ss(AsmHexCode encoded) => new Vfmadd231ss(encoded);
+
+        public struct Vfmaddsub132pd : IAsmInstruction<Vfmaddsub132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB132PD;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub132pd src) => src.Mnemonic;
@@ -8796,8 +20049,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub132pd vfmaddsub132pd() => default;
 
-        public readonly struct Vfmaddsub213pd : IAsmInstruction<Vfmaddsub213pd>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub132pd vfmaddsub132pd(AsmHexCode encoded) => new Vfmaddsub132pd(encoded);
+
+        public struct Vfmaddsub213pd : IAsmInstruction<Vfmaddsub213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB213PD;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub213pd src) => src.Mnemonic;
@@ -8807,8 +20071,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub213pd vfmaddsub213pd() => default;
 
-        public readonly struct Vfmaddsub231pd : IAsmInstruction<Vfmaddsub231pd>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub213pd vfmaddsub213pd(AsmHexCode encoded) => new Vfmaddsub213pd(encoded);
+
+        public struct Vfmaddsub231pd : IAsmInstruction<Vfmaddsub231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB231PD;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub231pd src) => src.Mnemonic;
@@ -8818,8 +20093,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub231pd vfmaddsub231pd() => default;
 
-        public readonly struct Vfmaddsub132ps : IAsmInstruction<Vfmaddsub132ps>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub231pd vfmaddsub231pd(AsmHexCode encoded) => new Vfmaddsub231pd(encoded);
+
+        public struct Vfmaddsub132ps : IAsmInstruction<Vfmaddsub132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB132PS;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub132ps src) => src.Mnemonic;
@@ -8829,8 +20115,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub132ps vfmaddsub132ps() => default;
 
-        public readonly struct Vfmaddsub213ps : IAsmInstruction<Vfmaddsub213ps>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub132ps vfmaddsub132ps(AsmHexCode encoded) => new Vfmaddsub132ps(encoded);
+
+        public struct Vfmaddsub213ps : IAsmInstruction<Vfmaddsub213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB213PS;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub213ps src) => src.Mnemonic;
@@ -8840,8 +20137,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub213ps vfmaddsub213ps() => default;
 
-        public readonly struct Vfmaddsub231ps : IAsmInstruction<Vfmaddsub231ps>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub213ps vfmaddsub213ps(AsmHexCode encoded) => new Vfmaddsub213ps(encoded);
+
+        public struct Vfmaddsub231ps : IAsmInstruction<Vfmaddsub231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmaddsub231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMADDSUB231PS;
 
             public static implicit operator AsmMnemonicCode(Vfmaddsub231ps src) => src.Mnemonic;
@@ -8851,8 +20159,19 @@ namespace Z0.Asm
 
         public static Vfmaddsub231ps vfmaddsub231ps() => default;
 
-        public readonly struct Vfmsubadd132pd : IAsmInstruction<Vfmsubadd132pd>
+        [MethodImpl(Inline)]
+        public static Vfmaddsub231ps vfmaddsub231ps(AsmHexCode encoded) => new Vfmaddsub231ps(encoded);
+
+        public struct Vfmsubadd132pd : IAsmInstruction<Vfmsubadd132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD132PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd132pd src) => src.Mnemonic;
@@ -8862,8 +20181,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd132pd vfmsubadd132pd() => default;
 
-        public readonly struct Vfmsubadd213pd : IAsmInstruction<Vfmsubadd213pd>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd132pd vfmsubadd132pd(AsmHexCode encoded) => new Vfmsubadd132pd(encoded);
+
+        public struct Vfmsubadd213pd : IAsmInstruction<Vfmsubadd213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD213PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd213pd src) => src.Mnemonic;
@@ -8873,8 +20203,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd213pd vfmsubadd213pd() => default;
 
-        public readonly struct Vfmsubadd231pd : IAsmInstruction<Vfmsubadd231pd>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd213pd vfmsubadd213pd(AsmHexCode encoded) => new Vfmsubadd213pd(encoded);
+
+        public struct Vfmsubadd231pd : IAsmInstruction<Vfmsubadd231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD231PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd231pd src) => src.Mnemonic;
@@ -8884,8 +20225,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd231pd vfmsubadd231pd() => default;
 
-        public readonly struct Vfmsubadd132ps : IAsmInstruction<Vfmsubadd132ps>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd231pd vfmsubadd231pd(AsmHexCode encoded) => new Vfmsubadd231pd(encoded);
+
+        public struct Vfmsubadd132ps : IAsmInstruction<Vfmsubadd132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD132PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd132ps src) => src.Mnemonic;
@@ -8895,8 +20247,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd132ps vfmsubadd132ps() => default;
 
-        public readonly struct Vfmsubadd213ps : IAsmInstruction<Vfmsubadd213ps>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd132ps vfmsubadd132ps(AsmHexCode encoded) => new Vfmsubadd132ps(encoded);
+
+        public struct Vfmsubadd213ps : IAsmInstruction<Vfmsubadd213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD213PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd213ps src) => src.Mnemonic;
@@ -8906,8 +20269,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd213ps vfmsubadd213ps() => default;
 
-        public readonly struct Vfmsubadd231ps : IAsmInstruction<Vfmsubadd231ps>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd213ps vfmsubadd213ps(AsmHexCode encoded) => new Vfmsubadd213ps(encoded);
+
+        public struct Vfmsubadd231ps : IAsmInstruction<Vfmsubadd231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsubadd231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUBADD231PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsubadd231ps src) => src.Mnemonic;
@@ -8917,8 +20291,19 @@ namespace Z0.Asm
 
         public static Vfmsubadd231ps vfmsubadd231ps() => default;
 
-        public readonly struct Vfmsub132pd : IAsmInstruction<Vfmsub132pd>
+        [MethodImpl(Inline)]
+        public static Vfmsubadd231ps vfmsubadd231ps(AsmHexCode encoded) => new Vfmsubadd231ps(encoded);
+
+        public struct Vfmsub132pd : IAsmInstruction<Vfmsub132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB132PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub132pd src) => src.Mnemonic;
@@ -8928,8 +20313,19 @@ namespace Z0.Asm
 
         public static Vfmsub132pd vfmsub132pd() => default;
 
-        public readonly struct Vfmsub213pd : IAsmInstruction<Vfmsub213pd>
+        [MethodImpl(Inline)]
+        public static Vfmsub132pd vfmsub132pd(AsmHexCode encoded) => new Vfmsub132pd(encoded);
+
+        public struct Vfmsub213pd : IAsmInstruction<Vfmsub213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB213PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub213pd src) => src.Mnemonic;
@@ -8939,8 +20335,19 @@ namespace Z0.Asm
 
         public static Vfmsub213pd vfmsub213pd() => default;
 
-        public readonly struct Vfmsub231pd : IAsmInstruction<Vfmsub231pd>
+        [MethodImpl(Inline)]
+        public static Vfmsub213pd vfmsub213pd(AsmHexCode encoded) => new Vfmsub213pd(encoded);
+
+        public struct Vfmsub231pd : IAsmInstruction<Vfmsub231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB231PD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub231pd src) => src.Mnemonic;
@@ -8950,8 +20357,19 @@ namespace Z0.Asm
 
         public static Vfmsub231pd vfmsub231pd() => default;
 
-        public readonly struct Vfmsub132ps : IAsmInstruction<Vfmsub132ps>
+        [MethodImpl(Inline)]
+        public static Vfmsub231pd vfmsub231pd(AsmHexCode encoded) => new Vfmsub231pd(encoded);
+
+        public struct Vfmsub132ps : IAsmInstruction<Vfmsub132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB132PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub132ps src) => src.Mnemonic;
@@ -8961,8 +20379,19 @@ namespace Z0.Asm
 
         public static Vfmsub132ps vfmsub132ps() => default;
 
-        public readonly struct Vfmsub213ps : IAsmInstruction<Vfmsub213ps>
+        [MethodImpl(Inline)]
+        public static Vfmsub132ps vfmsub132ps(AsmHexCode encoded) => new Vfmsub132ps(encoded);
+
+        public struct Vfmsub213ps : IAsmInstruction<Vfmsub213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB213PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub213ps src) => src.Mnemonic;
@@ -8972,8 +20401,19 @@ namespace Z0.Asm
 
         public static Vfmsub213ps vfmsub213ps() => default;
 
-        public readonly struct Vfmsub231ps : IAsmInstruction<Vfmsub231ps>
+        [MethodImpl(Inline)]
+        public static Vfmsub213ps vfmsub213ps(AsmHexCode encoded) => new Vfmsub213ps(encoded);
+
+        public struct Vfmsub231ps : IAsmInstruction<Vfmsub231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB231PS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub231ps src) => src.Mnemonic;
@@ -8983,8 +20423,19 @@ namespace Z0.Asm
 
         public static Vfmsub231ps vfmsub231ps() => default;
 
-        public readonly struct Vfmsub132sd : IAsmInstruction<Vfmsub132sd>
+        [MethodImpl(Inline)]
+        public static Vfmsub231ps vfmsub231ps(AsmHexCode encoded) => new Vfmsub231ps(encoded);
+
+        public struct Vfmsub132sd : IAsmInstruction<Vfmsub132sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub132sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB132SD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub132sd src) => src.Mnemonic;
@@ -8994,8 +20445,19 @@ namespace Z0.Asm
 
         public static Vfmsub132sd vfmsub132sd() => default;
 
-        public readonly struct Vfmsub213sd : IAsmInstruction<Vfmsub213sd>
+        [MethodImpl(Inline)]
+        public static Vfmsub132sd vfmsub132sd(AsmHexCode encoded) => new Vfmsub132sd(encoded);
+
+        public struct Vfmsub213sd : IAsmInstruction<Vfmsub213sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub213sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB213SD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub213sd src) => src.Mnemonic;
@@ -9005,8 +20467,19 @@ namespace Z0.Asm
 
         public static Vfmsub213sd vfmsub213sd() => default;
 
-        public readonly struct Vfmsub231sd : IAsmInstruction<Vfmsub231sd>
+        [MethodImpl(Inline)]
+        public static Vfmsub213sd vfmsub213sd(AsmHexCode encoded) => new Vfmsub213sd(encoded);
+
+        public struct Vfmsub231sd : IAsmInstruction<Vfmsub231sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub231sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB231SD;
 
             public static implicit operator AsmMnemonicCode(Vfmsub231sd src) => src.Mnemonic;
@@ -9016,8 +20489,19 @@ namespace Z0.Asm
 
         public static Vfmsub231sd vfmsub231sd() => default;
 
-        public readonly struct Vfmsub132ss : IAsmInstruction<Vfmsub132ss>
+        [MethodImpl(Inline)]
+        public static Vfmsub231sd vfmsub231sd(AsmHexCode encoded) => new Vfmsub231sd(encoded);
+
+        public struct Vfmsub132ss : IAsmInstruction<Vfmsub132ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub132ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB132SS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub132ss src) => src.Mnemonic;
@@ -9027,8 +20511,19 @@ namespace Z0.Asm
 
         public static Vfmsub132ss vfmsub132ss() => default;
 
-        public readonly struct Vfmsub213ss : IAsmInstruction<Vfmsub213ss>
+        [MethodImpl(Inline)]
+        public static Vfmsub132ss vfmsub132ss(AsmHexCode encoded) => new Vfmsub132ss(encoded);
+
+        public struct Vfmsub213ss : IAsmInstruction<Vfmsub213ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub213ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB213SS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub213ss src) => src.Mnemonic;
@@ -9038,8 +20533,19 @@ namespace Z0.Asm
 
         public static Vfmsub213ss vfmsub213ss() => default;
 
-        public readonly struct Vfmsub231ss : IAsmInstruction<Vfmsub231ss>
+        [MethodImpl(Inline)]
+        public static Vfmsub213ss vfmsub213ss(AsmHexCode encoded) => new Vfmsub213ss(encoded);
+
+        public struct Vfmsub231ss : IAsmInstruction<Vfmsub231ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfmsub231ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFMSUB231SS;
 
             public static implicit operator AsmMnemonicCode(Vfmsub231ss src) => src.Mnemonic;
@@ -9049,8 +20555,19 @@ namespace Z0.Asm
 
         public static Vfmsub231ss vfmsub231ss() => default;
 
-        public readonly struct Vfnmadd132pd : IAsmInstruction<Vfnmadd132pd>
+        [MethodImpl(Inline)]
+        public static Vfmsub231ss vfmsub231ss(AsmHexCode encoded) => new Vfmsub231ss(encoded);
+
+        public struct Vfnmadd132pd : IAsmInstruction<Vfnmadd132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD132PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd132pd src) => src.Mnemonic;
@@ -9060,8 +20577,19 @@ namespace Z0.Asm
 
         public static Vfnmadd132pd vfnmadd132pd() => default;
 
-        public readonly struct Vfnmadd213pd : IAsmInstruction<Vfnmadd213pd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd132pd vfnmadd132pd(AsmHexCode encoded) => new Vfnmadd132pd(encoded);
+
+        public struct Vfnmadd213pd : IAsmInstruction<Vfnmadd213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD213PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd213pd src) => src.Mnemonic;
@@ -9071,8 +20599,19 @@ namespace Z0.Asm
 
         public static Vfnmadd213pd vfnmadd213pd() => default;
 
-        public readonly struct Vfnmadd231pd : IAsmInstruction<Vfnmadd231pd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd213pd vfnmadd213pd(AsmHexCode encoded) => new Vfnmadd213pd(encoded);
+
+        public struct Vfnmadd231pd : IAsmInstruction<Vfnmadd231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD231PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd231pd src) => src.Mnemonic;
@@ -9082,8 +20621,19 @@ namespace Z0.Asm
 
         public static Vfnmadd231pd vfnmadd231pd() => default;
 
-        public readonly struct Vfnmadd132ps : IAsmInstruction<Vfnmadd132ps>
+        [MethodImpl(Inline)]
+        public static Vfnmadd231pd vfnmadd231pd(AsmHexCode encoded) => new Vfnmadd231pd(encoded);
+
+        public struct Vfnmadd132ps : IAsmInstruction<Vfnmadd132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD132PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd132ps src) => src.Mnemonic;
@@ -9093,8 +20643,19 @@ namespace Z0.Asm
 
         public static Vfnmadd132ps vfnmadd132ps() => default;
 
-        public readonly struct Vfnmadd213ps : IAsmInstruction<Vfnmadd213ps>
+        [MethodImpl(Inline)]
+        public static Vfnmadd132ps vfnmadd132ps(AsmHexCode encoded) => new Vfnmadd132ps(encoded);
+
+        public struct Vfnmadd213ps : IAsmInstruction<Vfnmadd213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD213PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd213ps src) => src.Mnemonic;
@@ -9104,8 +20665,19 @@ namespace Z0.Asm
 
         public static Vfnmadd213ps vfnmadd213ps() => default;
 
-        public readonly struct Vfnmadd231ps : IAsmInstruction<Vfnmadd231ps>
+        [MethodImpl(Inline)]
+        public static Vfnmadd213ps vfnmadd213ps(AsmHexCode encoded) => new Vfnmadd213ps(encoded);
+
+        public struct Vfnmadd231ps : IAsmInstruction<Vfnmadd231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD231PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd231ps src) => src.Mnemonic;
@@ -9115,8 +20687,19 @@ namespace Z0.Asm
 
         public static Vfnmadd231ps vfnmadd231ps() => default;
 
-        public readonly struct Vfnmadd132sd : IAsmInstruction<Vfnmadd132sd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd231ps vfnmadd231ps(AsmHexCode encoded) => new Vfnmadd231ps(encoded);
+
+        public struct Vfnmadd132sd : IAsmInstruction<Vfnmadd132sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd132sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD132SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd132sd src) => src.Mnemonic;
@@ -9126,8 +20709,19 @@ namespace Z0.Asm
 
         public static Vfnmadd132sd vfnmadd132sd() => default;
 
-        public readonly struct Vfnmadd213sd : IAsmInstruction<Vfnmadd213sd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd132sd vfnmadd132sd(AsmHexCode encoded) => new Vfnmadd132sd(encoded);
+
+        public struct Vfnmadd213sd : IAsmInstruction<Vfnmadd213sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd213sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD213SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd213sd src) => src.Mnemonic;
@@ -9137,8 +20731,19 @@ namespace Z0.Asm
 
         public static Vfnmadd213sd vfnmadd213sd() => default;
 
-        public readonly struct Vfnmadd231sd : IAsmInstruction<Vfnmadd231sd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd213sd vfnmadd213sd(AsmHexCode encoded) => new Vfnmadd213sd(encoded);
+
+        public struct Vfnmadd231sd : IAsmInstruction<Vfnmadd231sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd231sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD231SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd231sd src) => src.Mnemonic;
@@ -9148,8 +20753,19 @@ namespace Z0.Asm
 
         public static Vfnmadd231sd vfnmadd231sd() => default;
 
-        public readonly struct Vfnmadd132ss : IAsmInstruction<Vfnmadd132ss>
+        [MethodImpl(Inline)]
+        public static Vfnmadd231sd vfnmadd231sd(AsmHexCode encoded) => new Vfnmadd231sd(encoded);
+
+        public struct Vfnmadd132ss : IAsmInstruction<Vfnmadd132ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd132ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD132SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd132ss src) => src.Mnemonic;
@@ -9159,8 +20775,19 @@ namespace Z0.Asm
 
         public static Vfnmadd132ss vfnmadd132ss() => default;
 
-        public readonly struct Vfnmadd213ss : IAsmInstruction<Vfnmadd213ss>
+        [MethodImpl(Inline)]
+        public static Vfnmadd132ss vfnmadd132ss(AsmHexCode encoded) => new Vfnmadd132ss(encoded);
+
+        public struct Vfnmadd213ss : IAsmInstruction<Vfnmadd213ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd213ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD213SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd213ss src) => src.Mnemonic;
@@ -9170,8 +20797,19 @@ namespace Z0.Asm
 
         public static Vfnmadd213ss vfnmadd213ss() => default;
 
-        public readonly struct Vfnmadd231ss : IAsmInstruction<Vfnmadd231ss>
+        [MethodImpl(Inline)]
+        public static Vfnmadd213ss vfnmadd213ss(AsmHexCode encoded) => new Vfnmadd213ss(encoded);
+
+        public struct Vfnmadd231ss : IAsmInstruction<Vfnmadd231ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmadd231ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMADD231SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmadd231ss src) => src.Mnemonic;
@@ -9181,8 +20819,19 @@ namespace Z0.Asm
 
         public static Vfnmadd231ss vfnmadd231ss() => default;
 
-        public readonly struct Vfnmsub132pd : IAsmInstruction<Vfnmsub132pd>
+        [MethodImpl(Inline)]
+        public static Vfnmadd231ss vfnmadd231ss(AsmHexCode encoded) => new Vfnmadd231ss(encoded);
+
+        public struct Vfnmsub132pd : IAsmInstruction<Vfnmsub132pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub132pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB132PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub132pd src) => src.Mnemonic;
@@ -9192,8 +20841,19 @@ namespace Z0.Asm
 
         public static Vfnmsub132pd vfnmsub132pd() => default;
 
-        public readonly struct Vfnmsub213pd : IAsmInstruction<Vfnmsub213pd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub132pd vfnmsub132pd(AsmHexCode encoded) => new Vfnmsub132pd(encoded);
+
+        public struct Vfnmsub213pd : IAsmInstruction<Vfnmsub213pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub213pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB213PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub213pd src) => src.Mnemonic;
@@ -9203,8 +20863,19 @@ namespace Z0.Asm
 
         public static Vfnmsub213pd vfnmsub213pd() => default;
 
-        public readonly struct Vfnmsub231pd : IAsmInstruction<Vfnmsub231pd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub213pd vfnmsub213pd(AsmHexCode encoded) => new Vfnmsub213pd(encoded);
+
+        public struct Vfnmsub231pd : IAsmInstruction<Vfnmsub231pd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub231pd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB231PD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub231pd src) => src.Mnemonic;
@@ -9214,8 +20885,19 @@ namespace Z0.Asm
 
         public static Vfnmsub231pd vfnmsub231pd() => default;
 
-        public readonly struct Vfnmsub132ps : IAsmInstruction<Vfnmsub132ps>
+        [MethodImpl(Inline)]
+        public static Vfnmsub231pd vfnmsub231pd(AsmHexCode encoded) => new Vfnmsub231pd(encoded);
+
+        public struct Vfnmsub132ps : IAsmInstruction<Vfnmsub132ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub132ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB132PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub132ps src) => src.Mnemonic;
@@ -9225,8 +20907,19 @@ namespace Z0.Asm
 
         public static Vfnmsub132ps vfnmsub132ps() => default;
 
-        public readonly struct Vfnmsub213ps : IAsmInstruction<Vfnmsub213ps>
+        [MethodImpl(Inline)]
+        public static Vfnmsub132ps vfnmsub132ps(AsmHexCode encoded) => new Vfnmsub132ps(encoded);
+
+        public struct Vfnmsub213ps : IAsmInstruction<Vfnmsub213ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub213ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB213PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub213ps src) => src.Mnemonic;
@@ -9236,8 +20929,19 @@ namespace Z0.Asm
 
         public static Vfnmsub213ps vfnmsub213ps() => default;
 
-        public readonly struct Vfnmsub231ps : IAsmInstruction<Vfnmsub231ps>
+        [MethodImpl(Inline)]
+        public static Vfnmsub213ps vfnmsub213ps(AsmHexCode encoded) => new Vfnmsub213ps(encoded);
+
+        public struct Vfnmsub231ps : IAsmInstruction<Vfnmsub231ps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub231ps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB231PS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub231ps src) => src.Mnemonic;
@@ -9247,8 +20951,19 @@ namespace Z0.Asm
 
         public static Vfnmsub231ps vfnmsub231ps() => default;
 
-        public readonly struct Vfnmsub132sd : IAsmInstruction<Vfnmsub132sd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub231ps vfnmsub231ps(AsmHexCode encoded) => new Vfnmsub231ps(encoded);
+
+        public struct Vfnmsub132sd : IAsmInstruction<Vfnmsub132sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub132sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB132SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub132sd src) => src.Mnemonic;
@@ -9258,8 +20973,19 @@ namespace Z0.Asm
 
         public static Vfnmsub132sd vfnmsub132sd() => default;
 
-        public readonly struct Vfnmsub213sd : IAsmInstruction<Vfnmsub213sd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub132sd vfnmsub132sd(AsmHexCode encoded) => new Vfnmsub132sd(encoded);
+
+        public struct Vfnmsub213sd : IAsmInstruction<Vfnmsub213sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub213sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB213SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub213sd src) => src.Mnemonic;
@@ -9269,8 +20995,19 @@ namespace Z0.Asm
 
         public static Vfnmsub213sd vfnmsub213sd() => default;
 
-        public readonly struct Vfnmsub231sd : IAsmInstruction<Vfnmsub231sd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub213sd vfnmsub213sd(AsmHexCode encoded) => new Vfnmsub213sd(encoded);
+
+        public struct Vfnmsub231sd : IAsmInstruction<Vfnmsub231sd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub231sd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB231SD;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub231sd src) => src.Mnemonic;
@@ -9280,8 +21017,19 @@ namespace Z0.Asm
 
         public static Vfnmsub231sd vfnmsub231sd() => default;
 
-        public readonly struct Vfnmsub132ss : IAsmInstruction<Vfnmsub132ss>
+        [MethodImpl(Inline)]
+        public static Vfnmsub231sd vfnmsub231sd(AsmHexCode encoded) => new Vfnmsub231sd(encoded);
+
+        public struct Vfnmsub132ss : IAsmInstruction<Vfnmsub132ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub132ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB132SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub132ss src) => src.Mnemonic;
@@ -9291,8 +21039,19 @@ namespace Z0.Asm
 
         public static Vfnmsub132ss vfnmsub132ss() => default;
 
-        public readonly struct Vfnmsub213ss : IAsmInstruction<Vfnmsub213ss>
+        [MethodImpl(Inline)]
+        public static Vfnmsub132ss vfnmsub132ss(AsmHexCode encoded) => new Vfnmsub132ss(encoded);
+
+        public struct Vfnmsub213ss : IAsmInstruction<Vfnmsub213ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub213ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB213SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub213ss src) => src.Mnemonic;
@@ -9302,8 +21061,19 @@ namespace Z0.Asm
 
         public static Vfnmsub213ss vfnmsub213ss() => default;
 
-        public readonly struct Vfnmsub231ss : IAsmInstruction<Vfnmsub231ss>
+        [MethodImpl(Inline)]
+        public static Vfnmsub213ss vfnmsub213ss(AsmHexCode encoded) => new Vfnmsub213ss(encoded);
+
+        public struct Vfnmsub231ss : IAsmInstruction<Vfnmsub231ss>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vfnmsub231ss(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VFNMSUB231SS;
 
             public static implicit operator AsmMnemonicCode(Vfnmsub231ss src) => src.Mnemonic;
@@ -9313,8 +21083,19 @@ namespace Z0.Asm
 
         public static Vfnmsub231ss vfnmsub231ss() => default;
 
-        public readonly struct Vgatherdpd : IAsmInstruction<Vgatherdpd>
+        [MethodImpl(Inline)]
+        public static Vfnmsub231ss vfnmsub231ss(AsmHexCode encoded) => new Vfnmsub231ss(encoded);
+
+        public struct Vgatherdpd : IAsmInstruction<Vgatherdpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vgatherdpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VGATHERDPD;
 
             public static implicit operator AsmMnemonicCode(Vgatherdpd src) => src.Mnemonic;
@@ -9324,8 +21105,19 @@ namespace Z0.Asm
 
         public static Vgatherdpd vgatherdpd() => default;
 
-        public readonly struct Vgatherqpd : IAsmInstruction<Vgatherqpd>
+        [MethodImpl(Inline)]
+        public static Vgatherdpd vgatherdpd(AsmHexCode encoded) => new Vgatherdpd(encoded);
+
+        public struct Vgatherqpd : IAsmInstruction<Vgatherqpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vgatherqpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VGATHERQPD;
 
             public static implicit operator AsmMnemonicCode(Vgatherqpd src) => src.Mnemonic;
@@ -9335,8 +21127,19 @@ namespace Z0.Asm
 
         public static Vgatherqpd vgatherqpd() => default;
 
-        public readonly struct Vgatherdps : IAsmInstruction<Vgatherdps>
+        [MethodImpl(Inline)]
+        public static Vgatherqpd vgatherqpd(AsmHexCode encoded) => new Vgatherqpd(encoded);
+
+        public struct Vgatherdps : IAsmInstruction<Vgatherdps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vgatherdps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VGATHERDPS;
 
             public static implicit operator AsmMnemonicCode(Vgatherdps src) => src.Mnemonic;
@@ -9346,8 +21149,19 @@ namespace Z0.Asm
 
         public static Vgatherdps vgatherdps() => default;
 
-        public readonly struct Vgatherqps : IAsmInstruction<Vgatherqps>
+        [MethodImpl(Inline)]
+        public static Vgatherdps vgatherdps(AsmHexCode encoded) => new Vgatherdps(encoded);
+
+        public struct Vgatherqps : IAsmInstruction<Vgatherqps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vgatherqps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VGATHERQPS;
 
             public static implicit operator AsmMnemonicCode(Vgatherqps src) => src.Mnemonic;
@@ -9357,8 +21171,19 @@ namespace Z0.Asm
 
         public static Vgatherqps vgatherqps() => default;
 
-        public readonly struct Vpgatherdd : IAsmInstruction<Vpgatherdd>
+        [MethodImpl(Inline)]
+        public static Vgatherqps vgatherqps(AsmHexCode encoded) => new Vgatherqps(encoded);
+
+        public struct Vpgatherdd : IAsmInstruction<Vpgatherdd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpgatherdd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPGATHERDD;
 
             public static implicit operator AsmMnemonicCode(Vpgatherdd src) => src.Mnemonic;
@@ -9368,8 +21193,19 @@ namespace Z0.Asm
 
         public static Vpgatherdd vpgatherdd() => default;
 
-        public readonly struct Vpgatherqd : IAsmInstruction<Vpgatherqd>
+        [MethodImpl(Inline)]
+        public static Vpgatherdd vpgatherdd(AsmHexCode encoded) => new Vpgatherdd(encoded);
+
+        public struct Vpgatherqd : IAsmInstruction<Vpgatherqd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpgatherqd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPGATHERQD;
 
             public static implicit operator AsmMnemonicCode(Vpgatherqd src) => src.Mnemonic;
@@ -9379,8 +21215,19 @@ namespace Z0.Asm
 
         public static Vpgatherqd vpgatherqd() => default;
 
-        public readonly struct Vpgatherdq : IAsmInstruction<Vpgatherdq>
+        [MethodImpl(Inline)]
+        public static Vpgatherqd vpgatherqd(AsmHexCode encoded) => new Vpgatherqd(encoded);
+
+        public struct Vpgatherdq : IAsmInstruction<Vpgatherdq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpgatherdq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPGATHERDQ;
 
             public static implicit operator AsmMnemonicCode(Vpgatherdq src) => src.Mnemonic;
@@ -9390,8 +21237,19 @@ namespace Z0.Asm
 
         public static Vpgatherdq vpgatherdq() => default;
 
-        public readonly struct Vpgatherqq : IAsmInstruction<Vpgatherqq>
+        [MethodImpl(Inline)]
+        public static Vpgatherdq vpgatherdq(AsmHexCode encoded) => new Vpgatherdq(encoded);
+
+        public struct Vpgatherqq : IAsmInstruction<Vpgatherqq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpgatherqq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPGATHERQQ;
 
             public static implicit operator AsmMnemonicCode(Vpgatherqq src) => src.Mnemonic;
@@ -9401,8 +21259,19 @@ namespace Z0.Asm
 
         public static Vpgatherqq vpgatherqq() => default;
 
-        public readonly struct Vinsertf128 : IAsmInstruction<Vinsertf128>
+        [MethodImpl(Inline)]
+        public static Vpgatherqq vpgatherqq(AsmHexCode encoded) => new Vpgatherqq(encoded);
+
+        public struct Vinsertf128 : IAsmInstruction<Vinsertf128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vinsertf128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VINSERTF128;
 
             public static implicit operator AsmMnemonicCode(Vinsertf128 src) => src.Mnemonic;
@@ -9412,8 +21281,19 @@ namespace Z0.Asm
 
         public static Vinsertf128 vinsertf128() => default;
 
-        public readonly struct Vinserti128 : IAsmInstruction<Vinserti128>
+        [MethodImpl(Inline)]
+        public static Vinsertf128 vinsertf128(AsmHexCode encoded) => new Vinsertf128(encoded);
+
+        public struct Vinserti128 : IAsmInstruction<Vinserti128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vinserti128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VINSERTI128;
 
             public static implicit operator AsmMnemonicCode(Vinserti128 src) => src.Mnemonic;
@@ -9423,8 +21303,19 @@ namespace Z0.Asm
 
         public static Vinserti128 vinserti128() => default;
 
-        public readonly struct Vmaskmovps : IAsmInstruction<Vmaskmovps>
+        [MethodImpl(Inline)]
+        public static Vinserti128 vinserti128(AsmHexCode encoded) => new Vinserti128(encoded);
+
+        public struct Vmaskmovps : IAsmInstruction<Vmaskmovps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaskmovps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMASKMOVPS;
 
             public static implicit operator AsmMnemonicCode(Vmaskmovps src) => src.Mnemonic;
@@ -9434,8 +21325,19 @@ namespace Z0.Asm
 
         public static Vmaskmovps vmaskmovps() => default;
 
-        public readonly struct Vmaskmovpd : IAsmInstruction<Vmaskmovpd>
+        [MethodImpl(Inline)]
+        public static Vmaskmovps vmaskmovps(AsmHexCode encoded) => new Vmaskmovps(encoded);
+
+        public struct Vmaskmovpd : IAsmInstruction<Vmaskmovpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vmaskmovpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VMASKMOVPD;
 
             public static implicit operator AsmMnemonicCode(Vmaskmovpd src) => src.Mnemonic;
@@ -9445,8 +21347,19 @@ namespace Z0.Asm
 
         public static Vmaskmovpd vmaskmovpd() => default;
 
-        public readonly struct Vpblendd : IAsmInstruction<Vpblendd>
+        [MethodImpl(Inline)]
+        public static Vmaskmovpd vmaskmovpd(AsmHexCode encoded) => new Vmaskmovpd(encoded);
+
+        public struct Vpblendd : IAsmInstruction<Vpblendd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpblendd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBLENDD;
 
             public static implicit operator AsmMnemonicCode(Vpblendd src) => src.Mnemonic;
@@ -9456,8 +21369,19 @@ namespace Z0.Asm
 
         public static Vpblendd vpblendd() => default;
 
-        public readonly struct Vpbroadcastb : IAsmInstruction<Vpbroadcastb>
+        [MethodImpl(Inline)]
+        public static Vpblendd vpblendd(AsmHexCode encoded) => new Vpblendd(encoded);
+
+        public struct Vpbroadcastb : IAsmInstruction<Vpbroadcastb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpbroadcastb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBROADCASTB;
 
             public static implicit operator AsmMnemonicCode(Vpbroadcastb src) => src.Mnemonic;
@@ -9467,8 +21391,19 @@ namespace Z0.Asm
 
         public static Vpbroadcastb vpbroadcastb() => default;
 
-        public readonly struct Vpbroadcastw : IAsmInstruction<Vpbroadcastw>
+        [MethodImpl(Inline)]
+        public static Vpbroadcastb vpbroadcastb(AsmHexCode encoded) => new Vpbroadcastb(encoded);
+
+        public struct Vpbroadcastw : IAsmInstruction<Vpbroadcastw>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpbroadcastw(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBROADCASTW;
 
             public static implicit operator AsmMnemonicCode(Vpbroadcastw src) => src.Mnemonic;
@@ -9478,8 +21413,19 @@ namespace Z0.Asm
 
         public static Vpbroadcastw vpbroadcastw() => default;
 
-        public readonly struct Vpbroadcastd : IAsmInstruction<Vpbroadcastd>
+        [MethodImpl(Inline)]
+        public static Vpbroadcastw vpbroadcastw(AsmHexCode encoded) => new Vpbroadcastw(encoded);
+
+        public struct Vpbroadcastd : IAsmInstruction<Vpbroadcastd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpbroadcastd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBROADCASTD;
 
             public static implicit operator AsmMnemonicCode(Vpbroadcastd src) => src.Mnemonic;
@@ -9489,8 +21435,19 @@ namespace Z0.Asm
 
         public static Vpbroadcastd vpbroadcastd() => default;
 
-        public readonly struct Vpbroadcastq : IAsmInstruction<Vpbroadcastq>
+        [MethodImpl(Inline)]
+        public static Vpbroadcastd vpbroadcastd(AsmHexCode encoded) => new Vpbroadcastd(encoded);
+
+        public struct Vpbroadcastq : IAsmInstruction<Vpbroadcastq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpbroadcastq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPBROADCASTQ;
 
             public static implicit operator AsmMnemonicCode(Vpbroadcastq src) => src.Mnemonic;
@@ -9500,8 +21457,19 @@ namespace Z0.Asm
 
         public static Vpbroadcastq vpbroadcastq() => default;
 
-        public readonly struct Vbroadcasti128 : IAsmInstruction<Vbroadcasti128>
+        [MethodImpl(Inline)]
+        public static Vpbroadcastq vpbroadcastq(AsmHexCode encoded) => new Vpbroadcastq(encoded);
+
+        public struct Vbroadcasti128 : IAsmInstruction<Vbroadcasti128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vbroadcasti128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VBROADCASTI128;
 
             public static implicit operator AsmMnemonicCode(Vbroadcasti128 src) => src.Mnemonic;
@@ -9511,8 +21479,19 @@ namespace Z0.Asm
 
         public static Vbroadcasti128 vbroadcasti128() => default;
 
-        public readonly struct Vpermd : IAsmInstruction<Vpermd>
+        [MethodImpl(Inline)]
+        public static Vbroadcasti128 vbroadcasti128(AsmHexCode encoded) => new Vbroadcasti128(encoded);
+
+        public struct Vpermd : IAsmInstruction<Vpermd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMD;
 
             public static implicit operator AsmMnemonicCode(Vpermd src) => src.Mnemonic;
@@ -9522,8 +21501,19 @@ namespace Z0.Asm
 
         public static Vpermd vpermd() => default;
 
-        public readonly struct Vpermpd : IAsmInstruction<Vpermpd>
+        [MethodImpl(Inline)]
+        public static Vpermd vpermd(AsmHexCode encoded) => new Vpermd(encoded);
+
+        public struct Vpermpd : IAsmInstruction<Vpermpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMPD;
 
             public static implicit operator AsmMnemonicCode(Vpermpd src) => src.Mnemonic;
@@ -9533,8 +21523,19 @@ namespace Z0.Asm
 
         public static Vpermpd vpermpd() => default;
 
-        public readonly struct Vpermps : IAsmInstruction<Vpermps>
+        [MethodImpl(Inline)]
+        public static Vpermpd vpermpd(AsmHexCode encoded) => new Vpermpd(encoded);
+
+        public struct Vpermps : IAsmInstruction<Vpermps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMPS;
 
             public static implicit operator AsmMnemonicCode(Vpermps src) => src.Mnemonic;
@@ -9544,8 +21545,19 @@ namespace Z0.Asm
 
         public static Vpermps vpermps() => default;
 
-        public readonly struct Vpermq : IAsmInstruction<Vpermq>
+        [MethodImpl(Inline)]
+        public static Vpermps vpermps(AsmHexCode encoded) => new Vpermps(encoded);
+
+        public struct Vpermq : IAsmInstruction<Vpermq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMQ;
 
             public static implicit operator AsmMnemonicCode(Vpermq src) => src.Mnemonic;
@@ -9555,8 +21567,19 @@ namespace Z0.Asm
 
         public static Vpermq vpermq() => default;
 
-        public readonly struct Vperm2i128 : IAsmInstruction<Vperm2i128>
+        [MethodImpl(Inline)]
+        public static Vpermq vpermq(AsmHexCode encoded) => new Vpermq(encoded);
+
+        public struct Vperm2i128 : IAsmInstruction<Vperm2i128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vperm2i128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERM2I128;
 
             public static implicit operator AsmMnemonicCode(Vperm2i128 src) => src.Mnemonic;
@@ -9566,8 +21589,19 @@ namespace Z0.Asm
 
         public static Vperm2i128 vperm2i128() => default;
 
-        public readonly struct Vpermilpd : IAsmInstruction<Vpermilpd>
+        [MethodImpl(Inline)]
+        public static Vperm2i128 vperm2i128(AsmHexCode encoded) => new Vperm2i128(encoded);
+
+        public struct Vpermilpd : IAsmInstruction<Vpermilpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermilpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMILPD;
 
             public static implicit operator AsmMnemonicCode(Vpermilpd src) => src.Mnemonic;
@@ -9577,8 +21611,19 @@ namespace Z0.Asm
 
         public static Vpermilpd vpermilpd() => default;
 
-        public readonly struct Vpermilps : IAsmInstruction<Vpermilps>
+        [MethodImpl(Inline)]
+        public static Vpermilpd vpermilpd(AsmHexCode encoded) => new Vpermilpd(encoded);
+
+        public struct Vpermilps : IAsmInstruction<Vpermilps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpermilps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERMILPS;
 
             public static implicit operator AsmMnemonicCode(Vpermilps src) => src.Mnemonic;
@@ -9588,8 +21633,19 @@ namespace Z0.Asm
 
         public static Vpermilps vpermilps() => default;
 
-        public readonly struct Vperm2f128 : IAsmInstruction<Vperm2f128>
+        [MethodImpl(Inline)]
+        public static Vpermilps vpermilps(AsmHexCode encoded) => new Vpermilps(encoded);
+
+        public struct Vperm2f128 : IAsmInstruction<Vperm2f128>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vperm2f128(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPERM2F128;
 
             public static implicit operator AsmMnemonicCode(Vperm2f128 src) => src.Mnemonic;
@@ -9599,8 +21655,19 @@ namespace Z0.Asm
 
         public static Vperm2f128 vperm2f128() => default;
 
-        public readonly struct Vpmaskmovd : IAsmInstruction<Vpmaskmovd>
+        [MethodImpl(Inline)]
+        public static Vperm2f128 vperm2f128(AsmHexCode encoded) => new Vperm2f128(encoded);
+
+        public struct Vpmaskmovd : IAsmInstruction<Vpmaskmovd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaskmovd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMASKMOVD;
 
             public static implicit operator AsmMnemonicCode(Vpmaskmovd src) => src.Mnemonic;
@@ -9610,8 +21677,19 @@ namespace Z0.Asm
 
         public static Vpmaskmovd vpmaskmovd() => default;
 
-        public readonly struct Vpmaskmovq : IAsmInstruction<Vpmaskmovq>
+        [MethodImpl(Inline)]
+        public static Vpmaskmovd vpmaskmovd(AsmHexCode encoded) => new Vpmaskmovd(encoded);
+
+        public struct Vpmaskmovq : IAsmInstruction<Vpmaskmovq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpmaskmovq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPMASKMOVQ;
 
             public static implicit operator AsmMnemonicCode(Vpmaskmovq src) => src.Mnemonic;
@@ -9621,8 +21699,19 @@ namespace Z0.Asm
 
         public static Vpmaskmovq vpmaskmovq() => default;
 
-        public readonly struct Vpsllvd : IAsmInstruction<Vpsllvd>
+        [MethodImpl(Inline)]
+        public static Vpmaskmovq vpmaskmovq(AsmHexCode encoded) => new Vpmaskmovq(encoded);
+
+        public struct Vpsllvd : IAsmInstruction<Vpsllvd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsllvd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLVD;
 
             public static implicit operator AsmMnemonicCode(Vpsllvd src) => src.Mnemonic;
@@ -9632,8 +21721,19 @@ namespace Z0.Asm
 
         public static Vpsllvd vpsllvd() => default;
 
-        public readonly struct Vpsllvq : IAsmInstruction<Vpsllvq>
+        [MethodImpl(Inline)]
+        public static Vpsllvd vpsllvd(AsmHexCode encoded) => new Vpsllvd(encoded);
+
+        public struct Vpsllvq : IAsmInstruction<Vpsllvq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsllvq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSLLVQ;
 
             public static implicit operator AsmMnemonicCode(Vpsllvq src) => src.Mnemonic;
@@ -9643,8 +21743,19 @@ namespace Z0.Asm
 
         public static Vpsllvq vpsllvq() => default;
 
-        public readonly struct Vpsravd : IAsmInstruction<Vpsravd>
+        [MethodImpl(Inline)]
+        public static Vpsllvq vpsllvq(AsmHexCode encoded) => new Vpsllvq(encoded);
+
+        public struct Vpsravd : IAsmInstruction<Vpsravd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsravd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRAVD;
 
             public static implicit operator AsmMnemonicCode(Vpsravd src) => src.Mnemonic;
@@ -9654,8 +21765,19 @@ namespace Z0.Asm
 
         public static Vpsravd vpsravd() => default;
 
-        public readonly struct Vpsrlvd : IAsmInstruction<Vpsrlvd>
+        [MethodImpl(Inline)]
+        public static Vpsravd vpsravd(AsmHexCode encoded) => new Vpsravd(encoded);
+
+        public struct Vpsrlvd : IAsmInstruction<Vpsrlvd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrlvd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLVD;
 
             public static implicit operator AsmMnemonicCode(Vpsrlvd src) => src.Mnemonic;
@@ -9665,8 +21787,19 @@ namespace Z0.Asm
 
         public static Vpsrlvd vpsrlvd() => default;
 
-        public readonly struct Vpsrlvq : IAsmInstruction<Vpsrlvq>
+        [MethodImpl(Inline)]
+        public static Vpsrlvd vpsrlvd(AsmHexCode encoded) => new Vpsrlvd(encoded);
+
+        public struct Vpsrlvq : IAsmInstruction<Vpsrlvq>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vpsrlvq(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VPSRLVQ;
 
             public static implicit operator AsmMnemonicCode(Vpsrlvq src) => src.Mnemonic;
@@ -9676,8 +21809,19 @@ namespace Z0.Asm
 
         public static Vpsrlvq vpsrlvq() => default;
 
-        public readonly struct Vtestps : IAsmInstruction<Vtestps>
+        [MethodImpl(Inline)]
+        public static Vpsrlvq vpsrlvq(AsmHexCode encoded) => new Vpsrlvq(encoded);
+
+        public struct Vtestps : IAsmInstruction<Vtestps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vtestps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VTESTPS;
 
             public static implicit operator AsmMnemonicCode(Vtestps src) => src.Mnemonic;
@@ -9687,8 +21831,19 @@ namespace Z0.Asm
 
         public static Vtestps vtestps() => default;
 
-        public readonly struct Vtestpd : IAsmInstruction<Vtestpd>
+        [MethodImpl(Inline)]
+        public static Vtestps vtestps(AsmHexCode encoded) => new Vtestps(encoded);
+
+        public struct Vtestpd : IAsmInstruction<Vtestpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vtestpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VTESTPD;
 
             public static implicit operator AsmMnemonicCode(Vtestpd src) => src.Mnemonic;
@@ -9698,8 +21853,129 @@ namespace Z0.Asm
 
         public static Vtestpd vtestpd() => default;
 
-        public readonly struct Wrfsbase : IAsmInstruction<Wrfsbase>
+        [MethodImpl(Inline)]
+        public static Vtestpd vtestpd(AsmHexCode encoded) => new Vtestpd(encoded);
+
+        public struct Vzeroall : IAsmInstruction<Vzeroall>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vzeroall(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VZEROALL;
+
+            public static implicit operator AsmMnemonicCode(Vzeroall src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Vzeroall src) => AsmMnemonics.VZEROALL;
+        }
+
+        public static Vzeroall vzeroall() => default;
+
+        [MethodImpl(Inline)]
+        public static Vzeroall vzeroall(AsmHexCode encoded) => new Vzeroall(encoded);
+
+        public struct Vzeroupper : IAsmInstruction<Vzeroupper>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vzeroupper(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VZEROUPPER;
+
+            public static implicit operator AsmMnemonicCode(Vzeroupper src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Vzeroupper src) => AsmMnemonics.VZEROUPPER;
+        }
+
+        public static Vzeroupper vzeroupper() => default;
+
+        [MethodImpl(Inline)]
+        public static Vzeroupper vzeroupper(AsmHexCode encoded) => new Vzeroupper(encoded);
+
+        public struct Wait : IAsmInstruction<Wait>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Wait(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.WAIT;
+
+            public static implicit operator AsmMnemonicCode(Wait src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Wait src) => AsmMnemonics.WAIT;
+        }
+
+        public static Wait wait() => default;
+
+        [MethodImpl(Inline)]
+        public static Wait wait(AsmHexCode encoded) => new Wait(encoded);
+
+        public struct Fwait : IAsmInstruction<Fwait>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Fwait(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.FWAIT;
+
+            public static implicit operator AsmMnemonicCode(Fwait src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Fwait src) => AsmMnemonics.FWAIT;
+        }
+
+        public static Fwait fwait() => default;
+
+        [MethodImpl(Inline)]
+        public static Fwait fwait(AsmHexCode encoded) => new Fwait(encoded);
+
+        public struct Wbinvd : IAsmInstruction<Wbinvd>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Wbinvd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.WBINVD;
+
+            public static implicit operator AsmMnemonicCode(Wbinvd src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Wbinvd src) => AsmMnemonics.WBINVD;
+        }
+
+        public static Wbinvd wbinvd() => default;
+
+        [MethodImpl(Inline)]
+        public static Wbinvd wbinvd(AsmHexCode encoded) => new Wbinvd(encoded);
+
+        public struct Wrfsbase : IAsmInstruction<Wrfsbase>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Wrfsbase(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.WRFSBASE;
 
             public static implicit operator AsmMnemonicCode(Wrfsbase src) => src.Mnemonic;
@@ -9709,8 +21985,19 @@ namespace Z0.Asm
 
         public static Wrfsbase wrfsbase() => default;
 
-        public readonly struct Wrgsbase : IAsmInstruction<Wrgsbase>
+        [MethodImpl(Inline)]
+        public static Wrfsbase wrfsbase(AsmHexCode encoded) => new Wrfsbase(encoded);
+
+        public struct Wrgsbase : IAsmInstruction<Wrgsbase>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Wrgsbase(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.WRGSBASE;
 
             public static implicit operator AsmMnemonicCode(Wrgsbase src) => src.Mnemonic;
@@ -9720,8 +22007,85 @@ namespace Z0.Asm
 
         public static Wrgsbase wrgsbase() => default;
 
-        public readonly struct Xabort : IAsmInstruction<Xabort>
+        [MethodImpl(Inline)]
+        public static Wrgsbase wrgsbase(AsmHexCode encoded) => new Wrgsbase(encoded);
+
+        public struct Wrmsr : IAsmInstruction<Wrmsr>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Wrmsr(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.WRMSR;
+
+            public static implicit operator AsmMnemonicCode(Wrmsr src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Wrmsr src) => AsmMnemonics.WRMSR;
+        }
+
+        public static Wrmsr wrmsr() => default;
+
+        [MethodImpl(Inline)]
+        public static Wrmsr wrmsr(AsmHexCode encoded) => new Wrmsr(encoded);
+
+        public struct Xacquire : IAsmInstruction<Xacquire>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xacquire(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XACQUIRE;
+
+            public static implicit operator AsmMnemonicCode(Xacquire src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xacquire src) => AsmMnemonics.XACQUIRE;
+        }
+
+        public static Xacquire xacquire() => default;
+
+        [MethodImpl(Inline)]
+        public static Xacquire xacquire(AsmHexCode encoded) => new Xacquire(encoded);
+
+        public struct Xrelease : IAsmInstruction<Xrelease>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xrelease(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XRELEASE;
+
+            public static implicit operator AsmMnemonicCode(Xrelease src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xrelease src) => AsmMnemonics.XRELEASE;
+        }
+
+        public static Xrelease xrelease() => default;
+
+        [MethodImpl(Inline)]
+        public static Xrelease xrelease(AsmHexCode encoded) => new Xrelease(encoded);
+
+        public struct Xabort : IAsmInstruction<Xabort>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xabort(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XABORT;
 
             public static implicit operator AsmMnemonicCode(Xabort src) => src.Mnemonic;
@@ -9731,8 +22095,19 @@ namespace Z0.Asm
 
         public static Xabort xabort() => default;
 
-        public readonly struct Xadd : IAsmInstruction<Xadd>
+        [MethodImpl(Inline)]
+        public static Xabort xabort(AsmHexCode encoded) => new Xabort(encoded);
+
+        public struct Xadd : IAsmInstruction<Xadd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xadd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XADD;
 
             public static implicit operator AsmMnemonicCode(Xadd src) => src.Mnemonic;
@@ -9742,8 +22117,19 @@ namespace Z0.Asm
 
         public static Xadd xadd() => default;
 
-        public readonly struct Xbegin : IAsmInstruction<Xbegin>
+        [MethodImpl(Inline)]
+        public static Xadd xadd(AsmHexCode encoded) => new Xadd(encoded);
+
+        public struct Xbegin : IAsmInstruction<Xbegin>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xbegin(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XBEGIN;
 
             public static implicit operator AsmMnemonicCode(Xbegin src) => src.Mnemonic;
@@ -9753,8 +22139,19 @@ namespace Z0.Asm
 
         public static Xbegin xbegin() => default;
 
-        public readonly struct Xchg : IAsmInstruction<Xchg>
+        [MethodImpl(Inline)]
+        public static Xbegin xbegin(AsmHexCode encoded) => new Xbegin(encoded);
+
+        public struct Xchg : IAsmInstruction<Xchg>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xchg(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XCHG;
 
             public static implicit operator AsmMnemonicCode(Xchg src) => src.Mnemonic;
@@ -9764,8 +22161,63 @@ namespace Z0.Asm
 
         public static Xchg xchg() => default;
 
-        public readonly struct Xlat : IAsmInstruction<Xlat>
+        [MethodImpl(Inline)]
+        public static Xchg xchg(AsmHexCode encoded) => new Xchg(encoded);
+
+        public struct Xend : IAsmInstruction<Xend>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xend(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XEND;
+
+            public static implicit operator AsmMnemonicCode(Xend src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xend src) => AsmMnemonics.XEND;
+        }
+
+        public static Xend xend() => default;
+
+        [MethodImpl(Inline)]
+        public static Xend xend(AsmHexCode encoded) => new Xend(encoded);
+
+        public struct Xgetbv : IAsmInstruction<Xgetbv>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xgetbv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XGETBV;
+
+            public static implicit operator AsmMnemonicCode(Xgetbv src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xgetbv src) => AsmMnemonics.XGETBV;
+        }
+
+        public static Xgetbv xgetbv() => default;
+
+        [MethodImpl(Inline)]
+        public static Xgetbv xgetbv(AsmHexCode encoded) => new Xgetbv(encoded);
+
+        public struct Xlat : IAsmInstruction<Xlat>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xlat(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XLAT;
 
             public static implicit operator AsmMnemonicCode(Xlat src) => src.Mnemonic;
@@ -9775,8 +22227,41 @@ namespace Z0.Asm
 
         public static Xlat xlat() => default;
 
-        public readonly struct Xor : IAsmInstruction<Xor>
+        [MethodImpl(Inline)]
+        public static Xlat xlat(AsmHexCode encoded) => new Xlat(encoded);
+
+        public struct Xlatb : IAsmInstruction<Xlatb>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xlatb(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XLATB;
+
+            public static implicit operator AsmMnemonicCode(Xlatb src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xlatb src) => AsmMnemonics.XLATB;
+        }
+
+        public static Xlatb xlatb() => default;
+
+        [MethodImpl(Inline)]
+        public static Xlatb xlatb(AsmHexCode encoded) => new Xlatb(encoded);
+
+        public struct Xor : IAsmInstruction<Xor>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XOR;
 
             public static implicit operator AsmMnemonicCode(Xor src) => src.Mnemonic;
@@ -9786,8 +22271,19 @@ namespace Z0.Asm
 
         public static Xor xor() => default;
 
-        public readonly struct Xorpd : IAsmInstruction<Xorpd>
+        [MethodImpl(Inline)]
+        public static Xor xor(AsmHexCode encoded) => new Xor(encoded);
+
+        public struct Xorpd : IAsmInstruction<Xorpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xorpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XORPD;
 
             public static implicit operator AsmMnemonicCode(Xorpd src) => src.Mnemonic;
@@ -9797,8 +22293,19 @@ namespace Z0.Asm
 
         public static Xorpd xorpd() => default;
 
-        public readonly struct Vxorpd : IAsmInstruction<Vxorpd>
+        [MethodImpl(Inline)]
+        public static Xorpd xorpd(AsmHexCode encoded) => new Xorpd(encoded);
+
+        public struct Vxorpd : IAsmInstruction<Vxorpd>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vxorpd(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VXORPD;
 
             public static implicit operator AsmMnemonicCode(Vxorpd src) => src.Mnemonic;
@@ -9808,8 +22315,19 @@ namespace Z0.Asm
 
         public static Vxorpd vxorpd() => default;
 
-        public readonly struct Xorps : IAsmInstruction<Xorps>
+        [MethodImpl(Inline)]
+        public static Vxorpd vxorpd(AsmHexCode encoded) => new Vxorpd(encoded);
+
+        public struct Xorps : IAsmInstruction<Xorps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xorps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XORPS;
 
             public static implicit operator AsmMnemonicCode(Xorps src) => src.Mnemonic;
@@ -9819,8 +22337,19 @@ namespace Z0.Asm
 
         public static Xorps xorps() => default;
 
-        public readonly struct Vxorps : IAsmInstruction<Vxorps>
+        [MethodImpl(Inline)]
+        public static Xorps xorps(AsmHexCode encoded) => new Xorps(encoded);
+
+        public struct Vxorps : IAsmInstruction<Vxorps>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Vxorps(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.VXORPS;
 
             public static implicit operator AsmMnemonicCode(Vxorps src) => src.Mnemonic;
@@ -9830,8 +22359,19 @@ namespace Z0.Asm
 
         public static Vxorps vxorps() => default;
 
-        public readonly struct Xrstor : IAsmInstruction<Xrstor>
+        [MethodImpl(Inline)]
+        public static Vxorps vxorps(AsmHexCode encoded) => new Vxorps(encoded);
+
+        public struct Xrstor : IAsmInstruction<Xrstor>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xrstor(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XRSTOR;
 
             public static implicit operator AsmMnemonicCode(Xrstor src) => src.Mnemonic;
@@ -9841,8 +22381,19 @@ namespace Z0.Asm
 
         public static Xrstor xrstor() => default;
 
-        public readonly struct Xrstor64 : IAsmInstruction<Xrstor64>
+        [MethodImpl(Inline)]
+        public static Xrstor xrstor(AsmHexCode encoded) => new Xrstor(encoded);
+
+        public struct Xrstor64 : IAsmInstruction<Xrstor64>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xrstor64(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XRSTOR64;
 
             public static implicit operator AsmMnemonicCode(Xrstor64 src) => src.Mnemonic;
@@ -9852,8 +22403,19 @@ namespace Z0.Asm
 
         public static Xrstor64 xrstor64() => default;
 
-        public readonly struct Xsave : IAsmInstruction<Xsave>
+        [MethodImpl(Inline)]
+        public static Xrstor64 xrstor64(AsmHexCode encoded) => new Xrstor64(encoded);
+
+        public struct Xsave : IAsmInstruction<Xsave>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xsave(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XSAVE;
 
             public static implicit operator AsmMnemonicCode(Xsave src) => src.Mnemonic;
@@ -9863,8 +22425,19 @@ namespace Z0.Asm
 
         public static Xsave xsave() => default;
 
-        public readonly struct Xsave64 : IAsmInstruction<Xsave64>
+        [MethodImpl(Inline)]
+        public static Xsave xsave(AsmHexCode encoded) => new Xsave(encoded);
+
+        public struct Xsave64 : IAsmInstruction<Xsave64>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xsave64(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XSAVE64;
 
             public static implicit operator AsmMnemonicCode(Xsave64 src) => src.Mnemonic;
@@ -9874,8 +22447,19 @@ namespace Z0.Asm
 
         public static Xsave64 xsave64() => default;
 
-        public readonly struct Xsaveopt : IAsmInstruction<Xsaveopt>
+        [MethodImpl(Inline)]
+        public static Xsave64 xsave64(AsmHexCode encoded) => new Xsave64(encoded);
+
+        public struct Xsaveopt : IAsmInstruction<Xsaveopt>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xsaveopt(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XSAVEOPT;
 
             public static implicit operator AsmMnemonicCode(Xsaveopt src) => src.Mnemonic;
@@ -9885,8 +22469,19 @@ namespace Z0.Asm
 
         public static Xsaveopt xsaveopt() => default;
 
-        public readonly struct Xsaveopt64 : IAsmInstruction<Xsaveopt64>
+        [MethodImpl(Inline)]
+        public static Xsaveopt xsaveopt(AsmHexCode encoded) => new Xsaveopt(encoded);
+
+        public struct Xsaveopt64 : IAsmInstruction<Xsaveopt64>
         {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xsaveopt64(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
             public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XSAVEOPT64;
 
             public static implicit operator AsmMnemonicCode(Xsaveopt64 src) => src.Mnemonic;
@@ -9895,6 +22490,53 @@ namespace Z0.Asm
         }
 
         public static Xsaveopt64 xsaveopt64() => default;
+
+        [MethodImpl(Inline)]
+        public static Xsaveopt64 xsaveopt64(AsmHexCode encoded) => new Xsaveopt64(encoded);
+
+        public struct Xsetbv : IAsmInstruction<Xsetbv>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xsetbv(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XSETBV;
+
+            public static implicit operator AsmMnemonicCode(Xsetbv src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xsetbv src) => AsmMnemonics.XSETBV;
+        }
+
+        public static Xsetbv xsetbv() => default;
+
+        [MethodImpl(Inline)]
+        public static Xsetbv xsetbv(AsmHexCode encoded) => new Xsetbv(encoded);
+
+        public struct Xtest : IAsmInstruction<Xtest>
+        {
+            public AsmHexCode Encoded;
+
+            [MethodImpl(Inline)]
+            public Xtest(AsmHexCode encoded)
+            {
+                Encoded = encoded;
+            }
+
+            public AsmMnemonicCode Mnemonic => AsmMnemonicCode.XTEST;
+
+            public static implicit operator AsmMnemonicCode(Xtest src) => src.Mnemonic;
+
+            public static implicit operator AsmMnemonic(Xtest src) => AsmMnemonics.XTEST;
+        }
+
+        public static Xtest xtest() => default;
+
+        [MethodImpl(Inline)]
+        public static Xtest xtest(AsmHexCode encoded) => new Xtest(encoded);
 
     }
 }

@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
     using static memory;
@@ -29,7 +28,7 @@ namespace Z0.Asm
                 buffer.AppendLine("namespace Z0.Asm");
                 buffer.AppendLine(Open);
                 margin += 4;
-                buffer.IndentLine(margin, "public enum AsmMnemonicCode : ushort");
+                buffer.IndentLine(margin, string.Format("public enum {0} : {1}", MonicEnumName, MonicEnumType));
                 buffer.IndentLine(margin, Open);
                 margin += 4;
 

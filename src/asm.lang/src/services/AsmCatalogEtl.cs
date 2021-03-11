@@ -243,7 +243,7 @@ namespace Z0.Asm
             return imports;
         }
 
-        public void Emit(ReadOnlySpan<Form> src)
+        public void Emit(ReadOnlySpan<AsmForm> src)
         {
             AsmFormPipe.create(Wf).Emit(src, Db.Table<AsmFormRecord>(TargetFolder));
         }
@@ -252,11 +252,11 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the forms present in the catalog
         /// </summary>
-        public ReadOnlySpan<Form> CatalogedForms()
+        public ReadOnlySpan<AsmForm> CatalogedForms()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
-            var buffer = span<Form>(count);
+            var buffer = span<AsmForm>(count);
             var sigs = AsmSigs.create(Wf);
             var j=0u;
             var k=0u;
@@ -268,7 +268,7 @@ namespace Z0.Asm
                     seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {
-                    seek(buffer, k++) = Form.Empty;
+                    seek(buffer, k++) = AsmForm.Empty;
                     Wf.Warn($"The opcode row {row.OpCode} could not be parsed");
                 }
             }
