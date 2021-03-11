@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Text;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_masks : t_bitcore<t_masks>
     {
@@ -75,7 +75,7 @@ namespace Z0
 
                 Claim.eq(count, gbits.pop(mask));
 
-                var lowered = gmath.srl(mask, (byte)(width<T>(t) -  count));
+                var lowered = gmath.srl(mask, (byte)(width<T>() -  count));
                 var width = gbits.effwidth(lowered);
                 if(count != width)
                 {

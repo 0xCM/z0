@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     [ApiComplete]
     public class t_gbb_dot : t_bitspans<t_gbb_dot>
     {

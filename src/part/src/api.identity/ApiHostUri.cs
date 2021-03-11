@@ -8,19 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static TextRules;
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
-        public static ApiHostUri from(Type src)
-        {
-            var typename = src.Name;
-            var partName = typename.LeftOfFirst('_');
-            var part = ApiPartIdParser.single(partName);
-            var host = text.ifempty(typename.RightOfFirst('_'), "anonymous");
-            return new ApiHostUri(part, host);
-        }
-
         public PartId Owner {get;}
 
         public string Name {get;}
@@ -31,7 +21,7 @@ namespace Z0
         public ApiHostUri(PartId owner, string name)
         {
             Owner = owner;
-            Name = z.insist(name);
+            Name = root.require(name != null, name, () => "Null names are bad");
             UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
         }
 

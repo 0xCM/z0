@@ -6,12 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     public class t_bits_split : t_bitcore<t_bits_split>
     {
-
         public void split_16x8()
         {
             var src = Random.Span<ushort>(RepCount);

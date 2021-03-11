@@ -16,9 +16,6 @@ namespace Z0.Asm
 
         ICaptureServices CaptureServices {get;}
 
-        IAppPaths Paths
-            => ContextRoot.Paths;
-
         IGlobalApiCatalog ApiGlobal
             => ContextRoot.ApiGlobal;
 

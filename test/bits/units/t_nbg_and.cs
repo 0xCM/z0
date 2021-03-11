@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static Part;
 
     public class t_nbg_and : t_bitgrids<t_nbg_and>

@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.IO;
 
     using static memory;
     using static Part;
@@ -157,14 +156,7 @@ namespace Z0.Asm
                 return root.none<AsmRoutineCode>();
         }
 
-        void Save(ApiCaptureBlock capture, StreamWriter dst)
-        {
-            var asm = Asm.RoutineDecoder.Decode(capture).Require();
-            var formatted = Asm.Formatter.Format(asm);
-            dst.Write(formatted);
-        }
-
-        static ReadOnlySpan<Link<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
+        static ReadOnlySpan<Arrow<Imm64,IceRegister>> moves(in AsmRoutine src, int capacity = 10)
         {
             var hander = new AsmMovHandler(capacity);
             var fx = src.Instructions.View;

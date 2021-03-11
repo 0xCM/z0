@@ -17,20 +17,13 @@ namespace Z0
     {
         public Vector256<T> State;
 
-        public readonly BitFieldSpec256<E> Spec;
+        readonly Vector256<byte> Widths;
 
         [MethodImpl(Inline)]
-        public BitField256(BitFieldSpec256<E> spec, Vector256<T> state)
+        public BitField256(Vector256<byte> widths, Vector256<T> state)
         {
-            Spec = spec;
             State = state;
-        }
-
-        [MethodImpl(Inline)]
-        public BitField256(BitFieldSpec256<E> spec)
-        {
-            Spec = spec;
-            State = default;
+            Widths = default;
         }
 
         public T this[E index]
@@ -40,20 +33,23 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public byte SegWidth(E index)
+            => cpu.vcell(Widths, bw8(index));
+
+        [MethodImpl(Inline)]
         public T Mask(E index)
-            => BitMasks.lo<T>(Spec[index]);
+            => BitMasks.lo<T>(SegWidth(index));
 
         [MethodImpl(Inline)]
         public T Read(E index)
-            => gmath.and(cpu.vcell(State, @as<E,byte>(index)), Mask(index));
+            => gmath.and(cpu.vcell(State, bw8(index)), Mask(index));
 
         [MethodImpl(Inline)]
         public void Write(T src, E index)
         {
             var mask = Mask(index);
             var conformed = gmath.and(src,mask);
-            var i  = ClrEnums.scalar<E,byte>(index);
-            State = gcpu.vset(conformed, i, State);
+            State = gcpu.vset(conformed, bw8(index), State);
         }
     }
 }

@@ -13,17 +13,17 @@ namespace Z0
     partial struct Seq
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
+        public static bool eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : IEquatable<T>
         {
-            var count = lhs.Length;
-            if(count != rhs.Length)
+            var count = a.Length;
+            if(count != b.Length)
                 return false;
 
-            ref readonly var a = ref first(lhs);
-            ref readonly var b = ref first(rhs);
+            ref readonly var left = ref first(a);
+            ref readonly var right = ref first(b);
             for(var i=0u; i<count; i++)
-                if(!skip(a, i).Equals(skip(b, i)))
+                if(!skip(left, i).Equals(skip(right, i)))
                     return false;
             return true;
         }

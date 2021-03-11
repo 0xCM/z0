@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class t_stitch : t_bitcore<t_stitch>
     {
         public void stitch_basecases()

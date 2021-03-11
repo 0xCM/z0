@@ -4,10 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-
     public class t_bv_dot : t_bitsvc<t_bv_dot>
     {
         public void bvdot_gcheck()

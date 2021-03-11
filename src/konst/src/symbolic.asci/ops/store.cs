@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     partial struct Asci
     {
@@ -45,18 +45,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void store(in asci8 src, Span<char> dst)
-            => decode(src, ref memory.first(dst));
+            => decode(src, ref first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci16 src, Span<char> dst)
-            => decode(src, ref memory.first(dst));
+            => decode(src, ref first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci32 src, Span<char> dst)
-            => decode(src, ref memory.first(dst));
+            => decode(src, ref first(dst));
 
         [MethodImpl(Inline), Op]
         public static void store(in asci64 src, Span<char> dst)
-            => decode(src, ref memory.first(dst));
+            => decode(src, ref first(dst));
     }
 }

@@ -21,9 +21,9 @@ namespace Z0
     {
         readonly Node<I,T>[] Nodes;
 
-        readonly Link<I>[] Edges;
+        readonly Arrow<I>[] Edges;
 
-        public Graph(Node<I,T>[] nodes, Link<I>[] edges)
+        public Graph(Node<I,T>[] nodes, Arrow<I>[] edges)
         {
             Nodes = nodes;
             Edges = edges;
@@ -54,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
-        public ref Link<I> Edge(int index)
+        public ref Arrow<I> Edge(int index)
             => ref Edges[index];
 
         /// <summary>

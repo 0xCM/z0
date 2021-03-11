@@ -12,7 +12,6 @@ namespace Z0
         bit Result {get;}
     }
 
-
     /// <summary>
     /// Characterizes a reified boolean outcome
     /// </summary>

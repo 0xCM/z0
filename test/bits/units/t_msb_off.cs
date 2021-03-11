@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_msb_off : t_bitcore<t_msb_off>
     {
@@ -25,7 +26,7 @@ namespace Z0
         void msboff_check<T>()
             where T : unmanaged
         {
-            var width = width<T>();
+            var width = memory.width<T>();
             for(byte i=0; i<width; i++)
                 msboff_check<T>(i);
         }
@@ -57,7 +58,7 @@ namespace Z0
             for(var i= 0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var j = Random.Next(2, width - width/2);
+                var j = Random.Next((uint)2, width - width/2);
                 var y = gbits.msboff(x, (byte)j);
 
                 var x0 = gbits.segment(x,0, (byte)(j - 1));

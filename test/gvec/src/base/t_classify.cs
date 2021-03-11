@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
 
-
     public sealed class t_classify : t_identity<t_classify>
     {
         static string FormatList(IEnumerable<NumericKind> src, char? sep = null)
@@ -43,7 +42,6 @@ namespace Z0
             var stExpect = root.hashset(typeof(sbyte), typeof(short), typeof(int), typeof(long));
             var stActual = NumericKind.SignedInts.DistinctTypes();
             Claim.seteq(stExpect,stActual);
-
         }
 
         public void classify_numeric_width()

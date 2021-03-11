@@ -4,9 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitview : t_bitcore<t_bitview>
     {

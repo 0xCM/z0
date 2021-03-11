@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static ApiUriDelimiters;
 
-    using api = ApiIdentity;
-
     public readonly struct OpUri : IApiUri<OpUri>
     {
         /// <summary>
@@ -81,22 +79,21 @@ namespace Z0
             => new OpUri(scheme, Host, GroupName, OpId);
 
         [MethodImpl(Inline)]
-        public int CompareTo(OpUri other)
-            => api.compare(this, other);
+        public int CompareTo(OpUri src)
+            => text.denullify(UriText).CompareTo(src.UriText);
 
         [MethodImpl(Inline)]
         public bool Equals(OpUri src)
-            => api.equals(this, src);
+            => text.denullify(UriText).Equals(src.UriText, NoCase);
 
         public override int GetHashCode()
-            => api.hash(this);
+            => UriText?.GetHashCode() ?? 0;
 
-        public override bool Equals(object obj)
-            => api.equals(this, obj);
+        public override bool Equals(object src)
+            => src is OpUri a && Equals(a);
 
         public override string ToString()
             => Format();
-
 
         [MethodImpl(Inline)]
         public static bool operator==(OpUri a, OpUri b)

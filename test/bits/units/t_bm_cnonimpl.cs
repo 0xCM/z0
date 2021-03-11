@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bm_cnonimpl : t_bitmatrix<t_bm_cnonimpl>
     {
         public void bm_not_32x32x32()

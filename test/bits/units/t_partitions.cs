@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
     public class t_partitions : t_bitcore<t_partitions>
     {
         public void bitpart_16x4()
@@ -61,7 +55,6 @@ namespace Z0
                 Claim.eq(expect[i+1],actual[i+1]);
                 Claim.eq(expect[i+2],actual[i+2]);
             }
-
         }
 
         public void bitpart_30x3()
@@ -81,7 +74,6 @@ namespace Z0
         {
             var n = n21;
             var t = z8;
-
 
             var src = ulong.MaxValue;
             var dst = NatSpan.alloc(n,t);

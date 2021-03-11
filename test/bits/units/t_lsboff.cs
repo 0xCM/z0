@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public class t_lsboff : t_bitcore<t_lsboff>
     {
         public void lsboff_8()

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_replicate : t_bitcore<t_replicate>
     {
         public void replicate_8x32()

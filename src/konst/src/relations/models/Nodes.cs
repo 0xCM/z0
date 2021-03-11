@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         IDictionary<V,List<V>> TargetIndex;
 
-        public static Nodes<V> Build(Node<V>[] vertices, Link<V>[] edges)
+        public static Nodes<V> Build(Node<V>[] vertices, Arrow<V>[] edges)
         {
             var index = new Nodes<V>();
             index.SourceIndex = new Dictionary<V, List<V>>();

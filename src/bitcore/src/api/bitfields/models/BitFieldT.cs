@@ -16,7 +16,7 @@ namespace Z0
     /// Defines the (stateful) bitfield api surface
     /// </summary>
     /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-    public ref struct BitField<T>
+    public struct BitField<T>
         where T : unmanaged
     {
         /// <summary>

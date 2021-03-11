@@ -14,7 +14,6 @@ namespace Z0
 
     partial struct Asci
     {
-
         [MethodImpl(Inline), Op]
         public static void decode(in BinaryCode src, Span<char> dst)
         {
@@ -38,7 +37,7 @@ namespace Z0
             var storage = 0u;
             ref var dst = ref @as<uint,char>(storage);
             seek(dst, 0) = (char)(byte)src;
-            return z.cover(dst, 2);
+            return memory.cover(dst, 2);
         }
 
         [MethodImpl(Inline), Op]
@@ -65,18 +64,18 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci8 src)
-            => memory.recover<char>(memory.bytes(vlo(vinflate256x16u(vbytes(w128, src.Storage)))));
+            => recover<char>(memory.bytes(vlo(vinflate256x16u(vbytes(w128, src.Storage)))));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci16 src)
-            => memory.recover<char>(memory.bytes(vinflate256x16u(src.Storage)));
+            => recover<char>(memory.bytes(vinflate256x16u(src.Storage)));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> decode(in asci32 src)
         {
             var lo = vinflatelo256x16u(src.Storage);
             var hi = vinflatehi256x16u(src.Storage);
-            return memory.recover<char>(memory.bytes(new Seg512(lo,hi)));
+            return recover<char>(memory.bytes(new Seg512(lo,hi)));
         }
 
         [MethodImpl(Inline), Op]
@@ -87,7 +86,7 @@ namespace Z0
             var x1 = vinflatehi256x16u(x.Lo);
             var x2 = vinflatelo256x16u(x.Hi);
             var x3 = vinflatehi256x16u(x.Hi);
-            return memory.recover<char>(memory.bytes(new Seg1024(x0,x1,x2,x3)));
+            return recover<char>(memory.bytes(new Seg1024(x0,x1,x2,x3)));
         }
 
         [MethodImpl(Inline), Op]

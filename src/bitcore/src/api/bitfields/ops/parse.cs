@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct BitFields
     {
-       /// <summary>
+        /// <summary>
         /// Produces a <see cref='BitSegment{T}'/> from text of the form '[max:min]'
         /// </summary>
         /// <param name="src">The source text</param>

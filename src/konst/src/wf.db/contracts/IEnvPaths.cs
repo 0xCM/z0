@@ -218,10 +218,8 @@ namespace Z0
         FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
             => DocRoot() + SubjectFolder(subject) + FS.file(name, ext);
 
-
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), Dmp);
-
 
         FS.FolderPath Sources()
             => DbRoot() + FS.folder("sources");
@@ -243,9 +241,6 @@ namespace Z0
 
         FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
             => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
-
-        PartFiles PartFiles()
-            => new PartFiles(RawExtractFiles(), ParsedExtractFiles(), ApiHexFiles(), AsmFiles(), ImmHexFiles(), ImmAsmFiles());
 
         FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
             => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);

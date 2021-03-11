@@ -10,14 +10,6 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        // const int CasePad = (int)((ulong)TestCaseField.CaseName >> 32);
-
-        // const int ExecutedPad = (int)((ulong)TestCaseField.Finished >> 32);
-
-        // const int DurationPad = (int)((ulong)TestCaseField.Duration >> 32);
-
-        // const int StatusPad = (int)((ulong)TestCaseField.Passed >> 32);
-
         const string FieldSep = " | ";
 
         static string DurationPlaceholder
@@ -45,7 +37,7 @@ namespace Z0
 
         static AppMsg PreCase(string testName, DateTime start)
         {
-            var fields = Arrays.from(
+            var fields = root.array(
                 FormatName(testName),
                 FormatStatus("executing"),
                 DurationPlaceholder,
@@ -57,7 +49,7 @@ namespace Z0
 
         static AppMsg PostCase(string testName, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = Arrays.from(
+            var fields = root.array(
                 FormatName(testName),
                 FormatStatus("executed"),
                 Format(elapsed),
@@ -71,7 +63,7 @@ namespace Z0
 
         static AppMsg PostUnit(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
         {
-            var fields = Arrays.from(
+            var fields = root.array(
                 FormatName(hosturi),
                 FormatStatus("completed"),
                 Format(elapsed),

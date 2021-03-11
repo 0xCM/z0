@@ -174,62 +174,6 @@ namespace Z0
             }
         }
 
-
-        void IceStuff()
-        {
-            var flow = Wf.Running();
-
-            var bitfield = Ice.IceInstructions.init();
-            var indices = bitfield.Indices;
-            var info = indices.Map(i => paired(i, (byte)i));
-            foreach(var i in info)
-                Wf.Row(i);
-
-            Wf.Ran(flow);
-        }
-
-
-        // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, MethodInfo[] src, FS.FilePath target)
-        //     => decode(asmWf, CaptureAlt.capture(src), target);
-
-        // public static void decode(IAsmWf asmWf, ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
-        // {
-        //     var count = src.Length;
-        //     var decoder = asmWf.Decoder;
-        //     var formatter = asmWf.Formatter;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var captured = ref skip(src,i);
-        //         if(decoder.Decode(captured, out var fx))
-        //         {
-        //             var asm = formatter.FormatFunction(fx);
-        //             seek(dst,i) = new AsmRoutineCode(fx,captured);
-        //         }
-        //     }
-        // }
-
-        // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
-        // {
-        //     var count = src.Length;
-        //     var dst = span<AsmRoutineCode>(count);
-        //     var decoder = asmWf.Decoder;
-        //     var formatter = asmWf.Formatter;
-
-        //     using var writer = target.Writer();
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var captured = ref skip(src,i);
-        //         if(decoder.Decode(captured, out var fx))
-        //         {
-        //             seek(dst,i) = new AsmRoutineCode(fx,captured);
-        //             var asm = formatter.FormatFunction(fx);
-        //             writer.Write(asm);
-        //         }
-        //     }
-        //     return dst;
-        // }
-
-
         void ListTextResources()
         {
             var rows = Resources.rows(Resources.strings(typeof(EnvVarNames))).View;

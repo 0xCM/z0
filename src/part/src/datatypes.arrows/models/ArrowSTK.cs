@@ -38,6 +38,12 @@ namespace Z0
             Target = dst;
         }
 
+        public string Identifier
+        {
+            [MethodImpl(Inline)]
+            get => string.Format(RP.Arrow, Source, Target);
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Arrow<S,T,K>(Tripled<S,T,K> src)
             => new Arrow<S,T,K>(src.First, src.Second, src.Third);

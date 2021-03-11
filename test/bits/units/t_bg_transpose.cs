@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bg_transpose : t_bitgrids<t_bg_transpose>
     {
         public void bg_transpose_256x16x16()

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bm_layout : t_bitmatrix<t_bm_layout>
     {
@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq(order, m.Order);
             Claim.eq(order, m.Order);
             Claim.eq(cellcount, BitMatrix<N16,byte>.RowCellCount);
-            Claim.eq(cellcount, GridCalcs.mincells((ulong)width(t),(ulong)order));
+            Claim.eq(cellcount, GridCalcs.mincells((ulong)width<byte>(),(ulong)order));
 
             for(var i=0; i < order; i++)
             for(var j=0; j < order; j++)

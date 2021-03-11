@@ -16,8 +16,6 @@ namespace Z0.Asm
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
-        AsmRecords Recordset;
-
         ApiCodeBlocks _CodeBlocks;
 
         int Sequence;
@@ -29,7 +27,6 @@ namespace Z0.Asm
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
-            Recordset = AsmRecords.Empty;
             _CodeBlocks = ApiCodeBlocks.Empty;
         }
 
@@ -92,7 +89,6 @@ namespace Z0.Asm
 
                 Wf.Ran(flow, Msg.EmittedInstructionRecords.Format(records, count));
 
-                Recordset.With(rowsets);
                 return rowsets;
 
             }
@@ -132,7 +128,6 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitJumpRows(routines[i]));
             var rows = dst.ToArray();
-            Recordset.With(rows);
             return rows;
         }
 
@@ -148,7 +143,6 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 dst.AddRange(EmitCallRows(routines[i]));
             var rows = dst.ToArray();
-            Recordset.With(rows);
             return rows;
         }
 

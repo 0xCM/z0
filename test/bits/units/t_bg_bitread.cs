@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
+    using static memory;
     public class t_bg_bitread : t_bitgrids<t_bg_bitread>
     {
         public void bg_bitread_20x20x32()
@@ -57,8 +53,8 @@ namespace Z0
             where T : unmanaged
         {
             var last = Bit32.Off;
-            int M = (int)z.width<T>();
-            int N = (int)z.width<T>();
+            int M = (int)width<T>();
+            int N = (int)width<T>();
             for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitMatrix<T>();

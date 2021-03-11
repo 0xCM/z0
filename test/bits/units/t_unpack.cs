@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_unpack : t_bitcore<t_unpack>
     {

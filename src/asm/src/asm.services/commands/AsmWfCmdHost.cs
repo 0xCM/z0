@@ -32,27 +32,6 @@ namespace Z0.Asm
             _DataEmitter = root.lazy(Wf.AsmDataEmitter);
         }
 
-        // protected override void RegisterCommands(WfCmdIndex index)
-        // {
-        //     index.Include(assign(K.ShowRexBits, ShowRexBits));
-        //     index.Include(assign(K.DistillAsmStatements, DistillAsmStatements));
-        //     index.Include(assign(K.ExportStokeImports, ExportStokeImports));
-        //     index.Include(assign(K.ShowSigOpTokens, ShowSigOpTokens));
-        //     index.Include(assign(K.ShowMnemonicSymbols, ShowMnemonicSymbols));
-        //     index.Include(assign(K.EmitApiClasses, EmitApiClasses));
-        //     index.Include(assign(K.EmitSymbolicLiterals, EmitSymbolicLiterals));
-        //     index.Include(assign(K.ShowAsmCatForms, ShowAsmCatForms));
-        //     index.Include(assign(K.EmitAsmCatForms, EmitAsmCatForms));
-        //     index.Include(assign(K.ShowEncodingKindNames, ShowEncodingKindNames));
-        //     index.Include(assign(K.CorrelateApiCode, CorrelateApiCode));
-        //     index.Include(assign(K.ShowCatalogSymbols, ShowCatalogSymbols));
-        //     index.Include(assign(K.EmitResBytes, EmitResBytes));
-        //     index.Include(assign(K.EmitImmSpecializations, EmitImmSpecializations));
-        //     index.Include(assign(K.CheckDigitParser, CheckDigitParser));
-        //     index.Include(assign(K.ShowSigOpComposites, ShowSigOpComposites));
-        //     index.Include(assign(K.ShowSigOpSymbols, ShowSigOpSymbols));
-        // }
-
         [Action(K.ShowCatalogSymbols)]
         void ShowCatalogSymbols()
         {

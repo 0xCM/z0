@@ -10,9 +10,11 @@ namespace Z0
         protected CheckProvider Checks()
             => new CheckProvider();
 
-        protected FS.FileExt CsvExt => FS.Extensions.Csv;
+        protected FS.FileExt CsvExt
+            => FS.Extensions.Csv;
 
-        protected FS.FileExt AsmExt => FS.Extensions.Asm;
+        protected FS.FileExt AsmExt
+            => FS.Extensions.Asm;
 
         public static N0 n0 => default;
 

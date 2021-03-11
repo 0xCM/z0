@@ -101,7 +101,7 @@ namespace Z0
             where T : unmanaged
         {
             var rowcount = src.Answered.Length;
-            var maxrows = bitsize<T>();
+            var maxrows = memory.width<T>();
             if(rowcount > maxrows)
                 throw new Exception($"Too many rows for a primal bitmatrix");
 
@@ -120,7 +120,7 @@ namespace Z0
             where T : unmanaged
         {
             var rowcount = src.Questions.Length;
-            var maxrows = bitsize<T>();
+            var maxrows = memory.width<T>();
             if(rowcount > maxrows)
                 throw new Exception($"Too many rows for a primal bitmatrix");
 

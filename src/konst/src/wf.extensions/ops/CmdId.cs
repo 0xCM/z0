@@ -10,8 +10,5 @@ namespace Z0
 
     partial class XWf
     {
-        public static CmdId CmdId<T>(this T spec)
-            where T : struct, ICmd<T>
-                => Cmd.id<T>();
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="vertices">The vertices in the graph</param>
         /// <param name="edges">The edges that connect the vertices</param>
         [MethodImpl(Inline)]
-        public static Graph<V,T> define<V,T>(Span<Node<V,T>> vertices, IEnumerable<Link<V>> edges)
+        public static Graph<V,T> define<V,T>(Span<Node<V,T>> vertices, IEnumerable<Arrow<V>> edges)
             where V : unmanaged
             where T : unmanaged
                 => new Graph<V,T>(vertices.ToArray(), edges.ToArray());
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="edges">The edges that connect the vertices</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
-        public static Graph<V> define<V>(Span<Node<V>> vertices, IEnumerable<Link<V>> edges)
+        public static Graph<V> define<V>(Span<Node<V>> vertices, IEnumerable<Arrow<V>> edges)
             where V : unmanaged
                 => new Graph<V>(vertices.ToArray(), edges.ToArray());
 
@@ -48,11 +48,11 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static ReadOnlySpan<Link<V>> incoming<V>(Graph<V> graph, V target)
+        public static ReadOnlySpan<Arrow<V>> incoming<V>(Graph<V> graph, V target)
             where V : unmanaged
         {
             var count = graph.EdgeCount;
-            Span<Link<V>> edges = new Link<V>[count];
+            Span<Arrow<V>> edges = new Arrow<V>[count];
             var j = 0;
             for(var i = 0; i<count; i++)
             {
@@ -69,11 +69,11 @@ namespace Z0
         /// <param name="graph">The declaring graph</param>
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
-        public static ReadOnlySpan<Link<V>> outgoing<V>(Graph<V> graph, V source)
+        public static ReadOnlySpan<Arrow<V>> outgoing<V>(Graph<V> graph, V source)
             where V : unmanaged
         {
             var count = graph.EdgeCount;
-            Span<Link<V>> edges = new Link<V>[count];
+            Span<Arrow<V>> edges = new Arrow<V>[count];
             var j = 0;
             for(var i = 0; i<count; i++)
             {
@@ -140,11 +140,11 @@ namespace Z0
                 => new LinkType<S,T,K>(typeof(S), typeof(T), typeof(K));
 
         [MethodImpl(Inline)]
-        public static string identifier<S,T>(Link<S,T> link)
+        public static string identifier<S,T>(Arrow<S,T> link)
             => Relations.RenderLink<S,T>().Format(link.Source, link.Target);
 
         [MethodImpl(Inline), Closures(Closure)]
-        public static string identifier<T>(Link<T> link)
+        public static string identifier<T>(Arrow<T> link)
             => Relations.RenderLink<T>().Format(link.Source, link.Target);
     }
 }

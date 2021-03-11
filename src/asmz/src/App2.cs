@@ -418,6 +418,13 @@ namespace Z0.Asm
             var dstPath = Db.AppDataFile(file.WithExtension(FS.Extensions.Log));
             using var writer = dstPath.Writer();
 
+
+            void HandleFiles(IXmlElement src)
+            {
+                var attributes = src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
+                writer.WriteLine(string.Format("file:{0}", attributes));
+            }
+
             void accept(IXmlPart part)
             {
                 if(!part.IsWhitespace)
@@ -446,9 +453,13 @@ namespace Z0.Asm
                 }
             }
 
+            var handlers = new ElementHandlers();
+            handlers.AddHandler("file", HandleFiles);
+
             var flow = Wf.EmittingFile(dstPath);
             using var xml = XmlSource.create(Wf, srcPath);
-            xml.Read(accept);
+            xml.Read(handlers);
+            //xml.Read(accept);
             Wf.EmittedFile(flow);
         }
 
@@ -499,7 +510,7 @@ namespace Z0.Asm
             // var vsib = AsmBytes.vsib(0b11_100_111);
             // Wf.Status(AsmBytes.format(vsib));
 
-            EmitMsil();
+            ConvertPdbXml();
             // var commands = Wf.AsmWfCmd();
             // commands.Run(AsmWfCmdKind.EmitAsmRows);
         }

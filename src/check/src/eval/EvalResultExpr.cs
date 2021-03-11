@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+
     using C = AsciCharCode;
 
     public readonly struct EvalResultExpr

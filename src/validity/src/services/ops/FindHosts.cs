@@ -9,13 +9,13 @@ namespace Z0
 
     partial class TestApp<A>
     {
-        public Type[] FindHosts()
+        public static Type[] FindHosts()
             =>  (from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
                 where t.IsConcrete() && t.Untagged<IgnoreAttribute>()
                 orderby t.Name
                 select t).Array();
 
-        public Type[] FindHosts(string[] names)
+        public static Type[] FindHosts(string[] names)
             =>  (from t in typeof(A).Assembly.Types().Realize<IUnitTest>()
                 where t.IsConcrete() && t.Untagged<IgnoreAttribute>() && names.Contains(t.Name)
                 orderby t.Name

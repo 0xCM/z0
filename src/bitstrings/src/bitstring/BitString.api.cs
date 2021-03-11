@@ -114,10 +114,10 @@ namespace Z0
         /// <param name="f">The transformation</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]
-        public static void map<T>(BitString src, Func<Bit32,T> f, Span<T> dst)
+        public static void map<T>(BitString src, Func<bit,T> f, Span<T> dst)
         {
             for(var i=0; i<dst.Length; i++)
-                dst[i] = f((Bit32)src.Data[i]);
+                dst[i] = f((bit)src.Data[i]);
         }
     }
 }

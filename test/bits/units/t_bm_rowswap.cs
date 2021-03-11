@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bm_rowswap : t_bitmatrix<t_bm_rowswap>
     {
         public void bm_rowswap_16x16x16()

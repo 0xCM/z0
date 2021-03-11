@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class t_bvxor : t_bitvectors<t_bvxor>
     {
         public void bvxor_n13x8u()

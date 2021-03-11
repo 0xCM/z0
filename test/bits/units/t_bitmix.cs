@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
     using L = BitMasks.Literals;
 
     public class t_bitmix : t_bitcore<t_bitmix>

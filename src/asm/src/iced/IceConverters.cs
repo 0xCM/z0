@@ -7,58 +7,13 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     using Iced = Iced.Intel;
 
-    //[ApiHost]
     public readonly struct IceConverters
     {
         public static IceConverters Service => default(IceConverters);
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [MethodImpl(Inline), Op]
-        public static IceMemoryOperand Thaw(Iced.MemoryOperand src)
-            => new IceMemoryOperand(
-                    (IceRegister)src.Base,
-                    (IceRegister)src.Index,
-                    src.Scale,
-                    src.Displacement,
-                    src.DisplSize,
-                    src.IsBroadcast,
-                    (IceRegister)src.SegmentPrefix
-                    );
-
-        /// <summary>
-        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
-        /// </summary>
-        /// <param name="src">The iced source value</param>
-        [Op]
-        public IceInstructionInfo Thaw(Iced.InstructionInfo src)
-        {
-            return new IceInstructionInfo
-            {
-                Encoding = Thaw(src.Encoding),
-                FlowControl = Thaw(src.FlowControl),
-                IsProtectedMode = src.IsProtectedMode,
-                IsPrivileged = src.IsPrivileged,
-                IsSaveRestoreInstruction = src.IsSaveRestoreInstruction,
-                IsStackInstruction = src.IsStackInstruction,
-                RflagsCleared = Thaw(src.RflagsCleared),
-                RflagsRead = Thaw(src.RflagsRead),
-                RflagsWritten = Thaw(src.RflagsWritten),
-                RflagsModified = Thaw(src.RflagsModified),
-                RflagsSet = Thaw(src.RflagsSet),
-                RflagsUndefined = Thaw(src.RflagsUndefined),
-                UsedMemory =  IceExtractors.UsedMemory(src),
-                UsedRegisters = IceExtractors.UsedRegisters(src),
-                CpuidFeatures = src.CpuidFeatures.Map(Thaw),
-                Access = IceExtractors.access(src)
-            };
-        }
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

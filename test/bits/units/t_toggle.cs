@@ -6,13 +6,11 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_toggle : t_bitcore<t_toggle>
     {
-        // public override bool Enabled
-        //     => false;
 
         public void toggle_8i()
             => toggle_check<sbyte>();
@@ -67,16 +65,16 @@ namespace Z0
 
         public void bitsize()
         {
-            Claim.eq(8, width<byte>());
-            Claim.eq(8, width<sbyte>());
-            Claim.eq(16, width<short>());
-            Claim.eq(16, width<ushort>());
-            Claim.eq(32, width<int>());
-            Claim.eq(32, width<uint>());
-            Claim.eq(64, width<long>());
-            Claim.eq(64, width<ulong>());
-            Claim.eq(32, width<float>());
-            Claim.eq(64, width<double>());
+            Claim.eq(8, (uint)width<byte>());
+            Claim.eq(8, (uint)width<sbyte>());
+            Claim.eq(16, (uint)width<short>());
+            Claim.eq(16, (uint)width<ushort>());
+            Claim.eq(32, (uint)width<int>());
+            Claim.eq(32, (uint)width<uint>());
+            Claim.eq(64, (uint)width<long>());
+            Claim.eq(64, (uint)width<ulong>());
+            Claim.eq(32, (uint)width<float>());
+            Claim.eq(64, (uint)width<double>());
         }
 
         public void testbit_outline()

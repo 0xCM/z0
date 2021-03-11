@@ -7,12 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     [ApiComplete]
     public class t_nbb_dot : t_bitspans<t_nbb_dot>
     {
-
         public void nbb_dot_8x8()
             => bitblock_dot_check<N8,byte>();
 

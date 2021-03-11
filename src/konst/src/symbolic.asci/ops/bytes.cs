@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static AsciCharData;
+    using static memory;
 
     partial struct Asci
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(Span<AsciCharCode> src)
-            => memory.recover<AsciCharCode,byte>(src);
+            => recover<AsciCharCode,byte>(src);
 
         /// <summary>
         /// Presents a span of asci symbols as a bytespan
@@ -26,7 +27,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(Span<AsciSymbol> src)
-            => memory.recover<AsciSymbol,byte>(src);
+            => recover<AsciSymbol,byte>(src);
 
         /// <summary>
         /// Selects a contiguous asci character sequence encoded as as bytespan
@@ -43,7 +44,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci2 src)
-            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
+            => memory.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -51,7 +52,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci4 src)
-            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
+            => memory.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan
@@ -59,7 +60,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static Span<byte> bytes(in asci8 src)
-            => memory.cover(memory.@as<byte>(src.Storage), src.Length);
+            => memory.cover(@as<byte>(src.Storage), src.Length);
 
         /// <summary>
         /// Presents the source content as a bytespan

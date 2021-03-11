@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline)]
-        public static Link<V> Connect<V,T>(this Node<V,T> src, Node<V,T> dst)
+        public static Arrow<V> Connect<V,T>(this Node<V,T> src, Node<V,T> dst)
             where V : unmanaged
             where T : unmanaged
                 => Links.connect(src,dst);
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="dst">The target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
-        public static Link<V> Connect<V>(this Node<V> src, Node<V> dst)
+        public static Arrow<V> Connect<V>(this Node<V> src, Node<V> dst)
             where V : unmanaged
                 => Links.connect(src,dst);
     }

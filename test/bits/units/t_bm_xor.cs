@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bm_xor : t_bitmatrix<t_bm_xor>
     {
@@ -72,18 +73,18 @@ namespace Z0
        protected void bm_xor_check<T>(T t = default)
             where T : unmanaged
         {
-            var Z = BitMatrix.alloc<T>();
+            var C = BitMatrix.alloc<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
-                BitMatrix.xor(A, B, Z);
+                BitMatrix.xor(A, B, C);
 
-                for(var j =0; j< Z.Order; j++)
+                for(var j =0; j< C.Order; j++)
                 {
                     var a = A[i];
                     var b = B[i];
-                    var z = Z[i];
+                    var z = C[i];
 
                     var x = BitVector.xor(a,b);
                     Claim.eq((T)x, (T)z);

@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-
+    using static Part;
+    using static memory;
 
     public class t_bg_layout : t_bitgrids<t_bg_layout>
     {
@@ -28,7 +26,5 @@ namespace Z0
             var b2 = GridCalcs.grid(5, 15, 8);
             Claim.eq(a2,b2);
         }
-
-
     }
 }

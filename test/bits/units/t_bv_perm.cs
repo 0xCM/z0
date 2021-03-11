@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bvperm : t_bitvectors<t_bvperm>
     {
         public void pbv_perm_8()

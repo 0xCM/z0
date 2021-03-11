@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public sealed class t_modn : UnitTest<t_modn>
     {
         public void mod16()

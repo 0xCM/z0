@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     [ApiComplete]
     public class t_bb_disable : t_bitspans<t_bb_disable>
     {

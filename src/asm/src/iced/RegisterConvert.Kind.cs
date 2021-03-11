@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static Konst;
     using static RegisterKind;
 
     using R = Asm.RegisterKind;

@@ -31,7 +31,7 @@ namespace Z0
         public static BitVector<N,T> reverse<N,T>(BitVector<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gmath.srl(gbits.reverse(src.Data), (byte)(width<T>() - src.Width));
+                => gmath.srl(gbits.reverse(src.Data), (byte)(memory.width<T>() - src.Width));
 
         /// <summary>
         /// Reverses the bits in the source vector

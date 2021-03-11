@@ -22,38 +22,38 @@ namespace Z0
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Op]
-        public static bool TestEq(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
-            => Seq.eq(lhs,rhs);
+        public static bool TestEq(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => Seq.eq(a, b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Op]
-        public static bool TestEq(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
-            => Seq.eq(lhs,rhs);
+        public static bool TestEq(ReadOnlySpan<byte> a, ReadOnlySpan<byte> b)
+            => Seq.eq(a,b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Op]
-        public static bool TestEq(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)
-            => Seq.eq(lhs,rhs);
+        public static bool TestEq(ReadOnlySpan<int> a, ReadOnlySpan<int> b)
+            => Seq.eq(a,b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
-        /// <param name="lhs">The left operand</param>
-        /// <param name="rhs">The right operand</param>
+        /// <param name="a">The left operand</param>
+        /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Op]
-        public static bool TestEq(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)
-            => Seq.eq(lhs,rhs);
+        public static bool TestEq(ReadOnlySpan<uint> a, ReadOnlySpan<uint> b)
+            => Seq.eq(a,b);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise

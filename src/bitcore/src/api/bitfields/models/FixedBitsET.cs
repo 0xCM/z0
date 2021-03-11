@@ -38,8 +38,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public T BitSlice(byte start, byte length)
-            => Data.BitSlice(start, length);
+        public T Slice(byte start, byte length)
+            => Data.Slice(start, length);
 
         public bit this[ByteSize offset, byte pos]
         {

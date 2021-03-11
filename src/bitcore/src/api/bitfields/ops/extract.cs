@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     readonly partial struct BitFields
     {
@@ -27,7 +28,7 @@ namespace Z0
         /// <param name="index">The segment index</param>
         /// <param name="src">The source value</param>
         /// <param name="offset">The offset amount</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T offset<T>(in BitSegment seg, T src)
             where T : unmanaged
                 => gmath.sll(extract(seg, src), (byte)seg.StartPos);
@@ -44,14 +45,14 @@ namespace Z0
         public static T extract<F,T>(F src, byte i0, byte i1)
             where F : IBitField<T>
             where T : unmanaged
-                => gbits.segment(src.Content,i0,i1);
+                => gbits.segment(src.Content, i0, i1);
 
         [MethodImpl(Inline)]
-        public static T extract<F,I,T>(F f, I i0, I i1)
-            where T : unmanaged
+        public static T extract<F,T,I>(F src, I i0, I i1)
             where F : IBitField<T>
-            where I : unmanaged, Enum
-                => extract<F,T>(f, ClrEnums.e8u(i0), ClrEnums.e8u(i1));
+            where T : unmanaged
+            where I : unmanaged
+                => extract<F,T>(src, bw8(i0), bw8(i1));
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitSegment segment, in S src)
@@ -63,6 +64,8 @@ namespace Z0
         public static T extract<S,T>(in BitSegment segment, in S src, bool offset)
             where S : INumericBits<T>
             where T : unmanaged
-                => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);
+                => offset
+                 ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos)
+                 : extract<S,T>(segment,src);
     }
 }

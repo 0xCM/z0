@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     [ApiHost]
     public readonly struct Links
@@ -22,8 +21,8 @@ namespace Z0
         /// <param name="target">The target index</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Link<T> link<T>(T src, T dst)
-            => new Link<T>(src,dst);
+        public static Arrow<T> link<T>(T src, T dst)
+            => new Arrow<T>(src,dst);
 
         /// <summary>
         /// Defines a link from a source to a target
@@ -33,8 +32,8 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static Link<S,T> link<S,T>(S src, T dst)
-            => new Link<S,T>(src, dst);
+        public static Arrow<S,T> link<S,T>(S src, T dst)
+            => new Arrow<S,T>(src, dst);
 
         [MethodImpl(Inline)]
         public static Arrow<S,T,K> link<S,T,K>(S src, T dst, K kind)
@@ -49,9 +48,9 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline)]
-        public static Link<T> connect<T>(Node<T> src, Node<T> dst)
+        public static Arrow<T> connect<T>(Node<T> src, Node<T> dst)
             where T : unmanaged
-                => new Link<T>(src, dst);
+                => new Arrow<T>(src, dst);
 
         /// <summary>
         /// Connects a source vertex to a target vertex
@@ -61,10 +60,10 @@ namespace Z0
         /// <typeparam name="V">The vertex index type</typeparam>
         /// <typeparam name="T">The vertex payload type</typeparam>
         [MethodImpl(Inline)]
-        public static Link<V> connect<V,T>(in Node<V,T> src, in Node<V,T> dst)
+        public static Arrow<V> connect<V,T>(in Node<V,T> src, in Node<V,T> dst)
             where V : unmanaged
             where T : unmanaged
-                => new Link<V>(src.Index, dst.Index);
+                => new Arrow<V>(src.Index, dst.Index);
 
         /// <summary>
         /// Defines a vertex sequence with a specified length

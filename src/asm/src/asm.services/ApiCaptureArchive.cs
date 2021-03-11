@@ -17,15 +17,6 @@ namespace Z0
                 Clear(part);
         }
 
-        IDbPaths Paths;
-
-        protected override void OnInit()
-        {
-            base.OnInit();
-
-            Paths = Wf.Db();
-        }
-
         void Clear(PartId part)
         {
             var total = 0u;
@@ -33,16 +24,20 @@ namespace Z0
             total += ClearParsed(part);
             total += ClearAsm(part);
             total += ClearHex(part);
-            total += ClearCil(part);
+            total += ClearCilData(part);
+            total += ClearCilCode(part);
+
             TotalStatus(part,total);
         }
 
         static Outcome<uint> Clear(FS.Files src)
             => src.Delete();
 
-        const string TypeStatusPattern = "Cleared {0} *.{1} {2} files";
 
-        const string TotalStatusPattern = "Cleared {0} total {1} files";
+
+        const string TypeStatusPattern = "Cleared <{0}> *.<{1}> <{2}> files";
+
+        const string TotalStatusPattern = "Cleared <{0}> total <{1}> files";
 
         void TypeStatus(PartId part, FS.FileExt ext, Count count)
             => Wf.Status(string.Format(TypeStatusPattern, count, ext, part.Format()));
@@ -53,7 +48,7 @@ namespace Z0
         Outcome<uint> ClearExtracts(PartId part)
         {
             var kind = FS.Extensions.XCsv;
-            var files = Paths.RawExtractFiles(part);
+            var files = Db.RawExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -65,7 +60,7 @@ namespace Z0
         Outcome<uint> ClearParsed(PartId part)
         {
             var kind = FS.Extensions.PCsv;
-            var files = Paths.ParsedExtractFiles(part);
+            var files = Db.ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -77,7 +72,7 @@ namespace Z0
         Outcome<uint> ClearAsm(PartId part)
         {
             var kind = FS.Extensions.Asm;
-            var files = Paths.AsmFiles(part);
+            var files = Db.AsmFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -89,7 +84,7 @@ namespace Z0
         Outcome<uint> ClearHex(PartId part)
         {
             var kind = FS.Extensions.Hex;
-            var files = Paths.ApiHexFiles(part);
+            var files = Db.ApiHexFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -98,10 +93,10 @@ namespace Z0
             return result;
         }
 
-        Outcome<uint> ClearCil(PartId part)
+        Outcome<uint> ClearCilData(PartId part)
         {
             var kind = FS.Extensions.IlData;
-            var files = Paths.CilDataFiles(part);
+            var files = Db.CilDataFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);
@@ -109,5 +104,18 @@ namespace Z0
                 Wf.Error(result.Message);
             return result;
         }
+
+        Outcome<uint> ClearCilCode(PartId part)
+        {
+            var kind = FS.Extensions.Il;
+            var files = Db.CilCodeFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Message);
+            return result;
+        }
+
     }
 }

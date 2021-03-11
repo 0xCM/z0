@@ -8,11 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-
     public class t_bg_dim : t_bitgrids<t_bg_dim>
     {
-
         public void nbg_dimensions()
         {
             var d256a = BitGrid.p2dimensions(Pow2.T08).OrderBy(x =>x.Left).ThenBy(x => x.Right).ToArray();

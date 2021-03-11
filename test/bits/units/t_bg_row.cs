@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-    using static z;
-
     public class t_bg_row : t_bitgrids<t_bg_row>
     {
         public void bg_row_128x32x4()

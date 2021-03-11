@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public interface IBinaryEval<T> : IEval
     {
         T A {get;}

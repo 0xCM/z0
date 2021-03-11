@@ -10,6 +10,15 @@ namespace Z0
 
     public readonly struct ApiPartIdParser : IPartIdParser
     {
+        public static ApiHostUri hosturi(Type src)
+        {
+            var typename = src.Name;
+            var partName = typename.LeftOfFirst('_');
+            var part = ApiPartIdParser.single(partName);
+            var host = text.ifempty(typename.RightOfFirst('_'), "anonymous");
+            return new ApiHostUri(part, host);
+        }
+
         [Op]
         public static PartId part(FS.FilePath src)
             => single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));

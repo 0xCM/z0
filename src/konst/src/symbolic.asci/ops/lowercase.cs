@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static AsciSymbols;
-    using static z;
+    using static memory;
 
     partial struct Asci
     {

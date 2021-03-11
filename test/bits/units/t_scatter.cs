@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_scatter : t_bitcore<t_scatter>
     {

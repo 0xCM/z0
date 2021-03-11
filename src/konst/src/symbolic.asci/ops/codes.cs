@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Asci
     {
@@ -19,14 +20,14 @@ namespace Z0
         public static void codes(in char src, int count, ref AsciCharCode dst)
         {
             for(var i=0u; i<count; i++)
-                memory.seek(dst,i) = (AsciCharCode)memory.skip(src,i);
+                seek(dst,i) = (AsciCharCode)skip(src,i);
         }
 
         [MethodImpl(Inline), Op]
         public static void codes(ReadOnlySpan<char> src, Span<AsciCharCode> dst)
         {
             var count = root.min(src.Length, dst.Length);
-            codes(memory.first(src), count, ref memory.first(dst));
+            codes(first(src), count, ref first(dst));
         }
     }
 }

@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class t_bm_diagonal : t_bitmatrix<t_bm_diagonal>
     {
-
         public void bm_diagonal_4x4x4()
         {
             for(var i=0; i<RepCount; i++)

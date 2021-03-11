@@ -12,14 +12,14 @@ namespace Z0.Asm
 
     ref struct AsmMovHandler
     {
-        readonly Span<Link<Imm64,IceRegister>> Buffer;
+        readonly Span<Arrow<Imm64,IceRegister>> Buffer;
 
         int Index;
 
         [MethodImpl(Inline)]
         public AsmMovHandler(int capacity)
         {
-            Buffer = new Link<Imm64,IceRegister>[capacity];
+            Buffer = new Arrow<Imm64,IceRegister>[capacity];
             Index = 0;
         }
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
                 Handle(i.Immediate64, i.Op0Register);
         }
 
-        public ReadOnlySpan<Link<Imm64,IceRegister>> Collected
+        public ReadOnlySpan<Arrow<Imm64,IceRegister>> Collected
         {
             [MethodImpl(Inline)]
             get => Buffer.Slice(0, Index);
@@ -42,7 +42,7 @@ namespace Z0.Asm
             get => Index;
         }
 
-        Link<Imm64,IceRegister> this[int index]
+        Arrow<Imm64,IceRegister> this[int index]
         {
             [MethodImpl(Inline)]
             set => seek(Buffer, (uint)index) = value;

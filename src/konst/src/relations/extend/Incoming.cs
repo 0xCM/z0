@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="target">The index of the target vertex</param>
         /// <typeparam name="V">The vertex index type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<Link<V>> Incoming<V>(this Graph<V> graph, V target)
+        public static ReadOnlySpan<Arrow<V>> Incoming<V>(this Graph<V> graph, V target)
             where V : unmanaged
                 => Graphs.incoming(graph, target);
     }

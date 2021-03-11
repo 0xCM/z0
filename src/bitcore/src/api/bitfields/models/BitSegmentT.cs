@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     /// <summary>
     /// Represents a closed interval of bits from a data source operand and corresponds to the notation [max:min] or [min,max]
@@ -47,7 +48,7 @@ namespace Z0
         public BitSegment Untyped
         {
             [MethodImpl(Inline)]
-            get => new BitSegment(Name, memory.u8(StartPos), memory.u8(EndPos));
+            get => new BitSegment(Name, bw8(StartPos), bw8(EndPos));
         }
 
         public string Format()

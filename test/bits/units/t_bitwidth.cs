@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitwidth : t_bitcore<t_bitwidth>
     {

@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
     public class t_bm_mul : t_bitmatrix<t_bm_mul>
     {
         static BitMatrix8 bmm(BitMatrix8 A, BitMatrix8 B)

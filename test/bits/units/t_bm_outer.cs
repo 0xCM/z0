@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
 
     public class t_bm_outer : t_bitmatrix<t_bm_outer>
     {

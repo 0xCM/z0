@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_cnonimpl : t_bitcore<t_cnonimpl>
     {
         public void cnonimpl_8u()

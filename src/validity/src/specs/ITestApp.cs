@@ -13,10 +13,6 @@ namespace Z0
     {
         void EmitLogs();
 
-        Type[] FindHosts();
-
-        MethodInfo[] FindTests(Type host);
-
         Duration RunCase(IUnitTest unit, MethodInfo method, List<TestCaseRecord> cases);
 
         TestCaseRecord[] SortResults();

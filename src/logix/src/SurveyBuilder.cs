@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct SurveyBuilder
@@ -53,7 +53,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name)
             where T : unmanaged
-                => template<T>(id,name, bitsize<T>(), bitsize<T>());
+                => template<T>(id,name, memory.width<T>(), memory.width<T>());
 
         /// <summary>
         /// Creates a stock survey with a specified number of questions, each of which has the maximum number
@@ -66,7 +66,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static Survey<T> template<T>(uint id, string name, int length)
             where T : unmanaged
-                => template<T>(id,name, length, bitsize<T>());
+                => template<T>(id,name, length, memory.width<T>());
 
         /// <summary>
         /// Creates a choice for a survey question

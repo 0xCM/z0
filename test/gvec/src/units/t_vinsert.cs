@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-
     public class t_vinsert : t_inx<t_vinsert>
     {
         public void vinsert_128x8i()

@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitstring : t_bitcore<t_bitstring>
     {
-
         public void bs_seq_8u()
             => bs_seq_check<byte>();
 

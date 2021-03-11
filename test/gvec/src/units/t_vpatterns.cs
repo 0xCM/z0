@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     public class t_vpatterns : t_inx<t_vpatterns>
     {
         public void vunits_check()

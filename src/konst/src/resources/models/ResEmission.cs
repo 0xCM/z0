@@ -26,11 +26,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ResEmission(Link<ResDescriptor,FS.FilePath> link)
+        public static implicit operator ResEmission(Arrow<ResDescriptor,FS.FilePath> link)
             => new ResEmission(link.Source, link.Target);
 
         [MethodImpl(Inline)]
-        public static implicit operator Link<ResDescriptor,FS.FilePath>(ResEmission src)
+        public static implicit operator Arrow<ResDescriptor,FS.FilePath>(ResEmission src)
             => new ResEmission(src.Source, src.Target);
     }
 }

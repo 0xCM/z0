@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.Intrinsics;
-
-    using static Konst;
-
     public class t_vmakemask : t_inx<t_vmakemask>
     {
         public void vmakemask_128()

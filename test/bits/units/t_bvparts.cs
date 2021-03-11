@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public class t_bvparts : t_bitvectors<t_bvparts>
     {
@@ -33,7 +32,7 @@ namespace Z0
                     var y = (BitVector4)x[j,(byte)(j+4)];
                     Claim.eq(y, dst[k]);
                 }
-            }         
+            }
         }
     }
 }

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public static class BvSrc
     {
@@ -142,7 +142,7 @@ namespace Z0
             where T : unmanaged
         {
             var v = source.Next<T>();
-            var clamp = width<T>() - math.min(width<T>(), wmax);
+            var clamp = memory.width<T>() - math.min(memory.width<T>(), wmax);
             return gmath.srl(v,(byte)clamp);
         }
 
@@ -159,7 +159,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var v = source.Next<T>();
-            var clamp = (byte)(width<T>() - math.min(width<T>(), nat32u(n)));
+            var clamp = (byte)(memory.width<T>() - math.min(memory.width<T>(), nat32u(n)));
             return gmath.srl(v,clamp);
         }
 

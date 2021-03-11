@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     public class t_bg_patterns : t_bitgrids<t_bg_patterns>
     {
         public void stripes_12x12()

@@ -16,7 +16,7 @@ namespace Z0
         {
             var buffer =  new asci16[count];
             Span<asci16> dst = buffer;
-            dst.Fill(Asci.init(n));
+            dst.Fill(init(n));
             return buffer;
         }
     }

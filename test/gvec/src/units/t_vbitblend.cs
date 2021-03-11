@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     public class t_vbitblend : t_inx<t_vbitblend>
     {
@@ -50,7 +51,7 @@ namespace Z0
         void vbitblend_check<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var count = w/z.width<T>();
+            var count = w/memory.width<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
 
@@ -85,7 +86,7 @@ namespace Z0
         void vbitblend_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = w/z.width<T>();
+            var count = w/memory.width<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector(w,t);

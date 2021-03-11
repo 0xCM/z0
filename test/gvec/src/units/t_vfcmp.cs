@@ -10,8 +10,8 @@ namespace Z0
     using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vfcmp : t_inx<t_vfcmp>
     {

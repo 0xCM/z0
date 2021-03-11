@@ -7,21 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci2 src, ref byte dst)
-            => memory.@as<byte,ushort>(dst) = src.Storage;
+            => @as<byte,ushort>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci4 src, ref byte dst)
-            => memory.@as<byte,uint>(dst) = src.Storage;
+            => @as<byte,uint>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci8 src, ref byte dst)
-            => memory.@as<byte,ulong>(dst) = src.Storage;
+            => @as<byte,ulong>(dst) = src.Storage;
 
         [MethodImpl(Inline), Op]
         public static unsafe void copy(in asci16 src, ref byte dst)

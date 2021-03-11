@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_nbb_create : t_bitspans<t_nbb_create>
     {
@@ -32,7 +32,7 @@ namespace Z0
             Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
 
             var totalcap = BitBlock<N,T>.RequiredWidth;
-            var segcap = width<T>();
+            var segcap = (uint)width<T>();
             Claim.eq(BitBlock<N,T>.CellWidth, (BitVector32)segcap);
 
             var src = Random.Span<T>(RepCount);
@@ -45,7 +45,7 @@ namespace Z0
                 Claim.eq(segcap * segcount, totalcap);
 
                 var x = src[i];
-                for(byte j = 0; j < n; j++)
+                for(byte j = 0; j<n; j++)
                     ClaimPrimal.eq(gbits.testbit(x,j), bc[j]);
             }
         }

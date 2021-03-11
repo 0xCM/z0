@@ -15,29 +15,20 @@ namespace Z0
         {
             [Op, Closures(Closure)]
             public static string delimit<T>(T[] items, char delimiter)
-            {
-                var dst = build();
-                var src = @readonly(items);
-                var count = src.Length;
-                var sep = text.format(" {0} ", delimiter);
-                for(var i=0; i<count; i++)
-                {
-                    if(i != 0)
-                        dst.Append(sep);
-                    dst.Append(skip(src,i));
-                }
-                return dst.ToString();
-            }
+                => delimit(@readonly(items), delimiter);
 
             public static string delimit<T>(ReadOnlySpan<T> src, char delimiter)
             {
                 var dst = build();
                 var count = src.Length;
-                var sep = text.format("{0} ", delimiter);
                 for(var i=0; i<count; i++)
                 {
                     if(i != 0)
-                        dst.Append(sep);
+                    {
+                        dst.Append(delimiter);
+                        dst.Append(Chars.Space);
+                    }
+
                     dst.Append(skip(src,i));
                 }
                 return dst.ToString();

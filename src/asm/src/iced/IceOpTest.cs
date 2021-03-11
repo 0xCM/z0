@@ -100,25 +100,6 @@ namespace Z0.Asm
         public static bool isImm(IceOpKind src)
             => isSignedImm(src) || isDirectImm(src) || isSpecialImm(src);
 
-        [MethodImpl(Inline), Op]
-        public bool isMem(in IceInstruction src, byte index)
-        {
-            switch(IceExtractors.opkind(src,index))
-            {
-                case Memory:
-                case Memory64:
-                case MemorySegSI:
-                case MemorySegESI:
-                case MemorySegRSI:
-                case MemoryESDI:
-                case MemoryESEDI:
-                case MemoryESRDI:
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
         /// <summary>
         /// Determines whether the classified operand is some sort of memory
         /// </summary>

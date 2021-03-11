@@ -15,7 +15,8 @@ namespace Z0
     using N = System.Xml.XmlNodeType;
     using SysXml = System.Xml;
 
-    public readonly struct XmlSource : IXmlSource
+
+    public struct XmlSource : IXmlSource
     {
         readonly IWfShell Wf;
 
@@ -45,6 +46,15 @@ namespace Z0
         {
             while(Read(out var content))
                 receiver(content);
+        }
+
+        public void Read(ElementHandlers handlers)
+        {
+            while(Read(out var content))
+            {
+                if(content is IXmlElement x && handlers.TryGetValue(x.Name, out var handler))
+                    handler(x);
+            }
         }
 
         XmlAttributes ReadAttributes()

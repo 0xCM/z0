@@ -32,7 +32,7 @@ namespace Z0
             get => Data.Right;
         }
 
-        public Link<T> Arrow
+        public Arrow<T> Arrow
         {
             [MethodImpl(Inline)]
             get => Data;

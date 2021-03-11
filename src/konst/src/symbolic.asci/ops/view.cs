@@ -8,19 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial struct Asci
     {
         [MethodImpl(Inline), Op]
         public static ref readonly asci2 view(N2 n, in ushort src)
-            => ref memory.view<ushort,asci2>(src);
+            => ref @as<ushort,asci2>(src);
 
         [MethodImpl(Inline), Op]
         public static ref readonly asci4 view(N4 n, in uint src)
-            => ref memory.view<uint,asci4>(src);
+            => ref @as<uint,asci4>(src);
 
         [MethodImpl(Inline), Op]
         public static ref readonly asci8 view(N8 n, in ulong src)
-            => ref memory.view<ulong,asci8>(src);
+            => ref @as<ulong,asci8>(src);
     }
 }

@@ -14,6 +14,8 @@ namespace Z0
     {
         public readonly struct Element : IXmlElement
         {
+            public Name Name {get;}
+
             public Name Value {get;}
 
             public XmlAttributes Attributes {get;}
@@ -21,6 +23,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public Element(string value, XmlAttributes attributes)
             {
+                Name = value;
                 Value = value;
                 Attributes = attributes;
             }

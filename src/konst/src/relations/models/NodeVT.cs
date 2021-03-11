@@ -41,8 +41,8 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static Link<I> operator +(in Node<I,T> src, in Node<I,T> dst)
-            => new Link<I>(src.Index, dst.Index);
+        public static Arrow<I> operator +(in Node<I,T> src, in Node<I,T> dst)
+            => new Arrow<I>(src.Index, dst.Index);
 
         /// <summary>
         /// Sheds the associated data to form a payload-free vertex

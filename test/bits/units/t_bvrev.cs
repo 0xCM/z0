@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     public class t_bvrev : t_bitvectors<t_bvrev>
     {
         public void bvrev_n2x8()
@@ -284,7 +281,7 @@ namespace Z0
 
         public void bvrev_n40x64()
             => bvrev_natcheck<N40,ulong>();
-        
+
         public void bvrev_n41x64()
             => bvrev_natcheck<N41,ulong>();
 
@@ -347,7 +344,7 @@ namespace Z0
 
         public void bvrev_n61x64()
             => bvrev_natcheck<N61,ulong>();
-        
+
         public void bvrev_n62x64()
             => bvrev_natcheck<N62,ulong>();
 
@@ -356,7 +353,7 @@ namespace Z0
 
         public void bvrev_n64x64()
             => bvrev_natcheck<N64,ulong>();
- 
+
         protected void bvrev_natcheck<N,T>()
             where N : unmanaged, ITypeNat
             where T : unmanaged

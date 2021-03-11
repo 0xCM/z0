@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public class t_bm_unpack : t_bitmatrix<t_bm_unpack>
     {
         public void bm_unpack_8x8x8()

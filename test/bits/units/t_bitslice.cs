@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public class t_bitslice : t_bitcore<t_bitslice>
     {
         public void bitslice_32u()

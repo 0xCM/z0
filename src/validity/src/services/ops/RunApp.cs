@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Reflection;
+
     partial class TestApp<A>
     {
         public static void Run(params string[] args)

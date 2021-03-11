@@ -21,7 +21,13 @@ namespace Z0
         public static BitField256<E,T> create<E,T>(Vector256<T> state)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new BitField256<E,T>(specify<E>(w256), state);
+                => new BitField256<E,T>(widths<E>(w256), state);
+
+        [MethodImpl(Inline)]
+        public static BitField256<E,T> create<E,T>(Vector256<byte> widths, Vector256<T> state)
+            where E : unmanaged
+            where T : unmanaged
+                => new BitField256<E,T>(widths, state);
 
         /// <summary>
         /// Creates a stateful bitfield api surface
