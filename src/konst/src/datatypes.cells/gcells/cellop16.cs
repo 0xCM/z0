@@ -30,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static D.BinaryOp16 cellop16<T>(Func<T,T,T> f)
             where T : unmanaged
-                => (Cell16 a, Cell16 b) => cell16(f(a.As<T>(),b.As<T>()));
+                => (Cell16 a, Cell16 b) => cell16(f(a.As<T>(), b.As<T>()));
     }
 }

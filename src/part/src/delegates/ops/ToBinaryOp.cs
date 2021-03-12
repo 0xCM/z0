@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
-    partial class XDelegates
+    partial class XTend
     {
         [MethodImpl(Inline)]
         public static BinaryOp<T> ToBinaryOp<T>(this System.Func<T,T,T> f)

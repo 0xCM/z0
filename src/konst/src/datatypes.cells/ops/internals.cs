@@ -17,7 +17,5 @@ namespace Z0
             where F : unmanaged, IDataCell
             where T : struct
                 => ref Unsafe.As<T,F>(ref edit(src));
-
-
     }
 }

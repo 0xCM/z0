@@ -56,14 +56,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Cell256 init<T>(Vector256<T> src)
             where T : unmanaged
-                => new Cell256(cpu.v64u(src));
+                => new Cell256(src.AsUInt64());
 
         [MethodImpl(Inline)]
         public static Cell256 init<T>(Vector128<T> a, Vector128<T> b)
             where T : unmanaged
         {
-            var c = cpu.vinsert(gcpu.v64u(a), default, LaneIndex.L0);
-            return new Cell256(cpu.vinsert(gcpu.v64u(b),c,LaneIndex.L1));
+            var c = vinsert(a.AsUInt64(), default, (byte)LaneIndex.L0);
+            var d = vinsert(b.AsUInt64(), c, (byte)LaneIndex.L1);
+            return new Cell256(d);
         }
 
         [MethodImpl(Inline)]

@@ -84,7 +84,6 @@ namespace Z0
         public static ref Cell32 lo32(in Cell256 src)
             => ref @as<Cell256,Cell32>(src);
 
-
         [MethodImpl(Inline), Op]
         public static ref Cell64 lo64(in Cell128 src)
             => ref @as<Cell128,Cell64>(src);
@@ -96,6 +95,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref Cell32 lo32(in Cell64 src)
             => ref @as<Cell64,Cell32>(src);
-
     }
 }

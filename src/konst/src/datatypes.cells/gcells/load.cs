@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct gcells
     {
-       [MethodImpl(Inline)]
+        [MethodImpl(Inline)]
         public static Cell<T> load<T>(ReadOnlySpan<byte> src)
             where T : struct
                 => load8x64<T>(src);

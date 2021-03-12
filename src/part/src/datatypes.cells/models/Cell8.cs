@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = Cells;
+    //using api = Cells;
 
     [Datatype("m8")]
     public readonly struct Cell8 : IDataCell<Cell8,W8,byte>
@@ -59,7 +59,7 @@ namespace Z0
             => Data == src;
 
         public string Format()
-            => api.format(this);
+            => Content.FormatHex();
 
         public override string ToString()
             => Format();
@@ -122,9 +122,6 @@ namespace Z0
         public static explicit operator ulong(Cell8 x)
             => (ulong)x.Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator Cell8(Imm8 src)
-            => new Cell8(src.Content);
 
         public static Cell8 Empty => default;
     }

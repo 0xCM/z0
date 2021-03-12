@@ -10,7 +10,6 @@ namespace Z0
 
     using static Part;
     using static CellDelegates;
-    using static Cells;
 
     partial struct gcells
     {

@@ -11,6 +11,7 @@ namespace Z0
     using System.Reflection.Emit;
 
     using static Part;
+    using static memory;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -391,7 +392,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryOp8 define<T>(Func<T,T> f, U8 dst)
             where T : unmanaged
-                => (Cell8 a) => gcells.cell8(f(a.As<T>()));
+                => (Cell8 a) => cell8(f(a.As<T>()));
 
         /// <summary>
         /// Creates a fixed 16-bit binary operator from caller-supplied delegate
@@ -400,7 +401,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryOp16 define<T>(Func<T,T> f, U16 dst)
             where T : unmanaged
-                => (Cell16 a) => gcells.cell16(f(a.As<T>()));
+                => (Cell16 a) => cell16(f(a.As<T>()));
 
         /// <summary>
         /// Creates a fixed 32-bit binary operator from caller-supplied delegate
@@ -409,7 +410,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryOp32 define<T>(Func<T,T> f, U32 dst)
             where T : unmanaged
-                => (Cell32 a) => gcells.cell32(f(a.As<T>()));
+                => (Cell32 a) => cell32(f(a.As<T>()));
 
         /// <summary>
         /// Creates a fixed 64-bit binary operator from caller-supplied delegate
@@ -418,7 +419,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryOp64 define<T>(Func<T,T> f, U64 dst)
             where T : unmanaged
-                => (Cell64 a) => gcells.cell64(f(a.As<T>()));
+                => (Cell64 a) => cell64(f(a.As<T>()));
 
         /// <summary>
         /// Creates a fixed 16-bit binary operator from caller-supplied delegate
@@ -427,7 +428,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp8 define<T>(Func<T,T,T> f, U8 dst)
             where T : unmanaged
-                => (Cell8 a, Cell8 b) => gcells.cell8(f(a.As<T>(),b.As<T>()));
+                => (Cell8 a, Cell8 b) => cell8(f(a.As<T>(),b.As<T>()));
 
         /// <summary>
         /// Creates a fixed 16-bit binary operator from caller-supplied delegate
@@ -436,7 +437,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp16 define<T>(Func<T,T,T> f, U16 dst)
             where T : unmanaged
-                => (Cell16 a, Cell16 b) => gcells.cell16(f(a.As<T>(),b.As<T>()));
+                => (Cell16 a, Cell16 b) => cell16(f(a.As<T>(),b.As<T>()));
 
         /// <summary>
         /// Creates a fixed 32-bit binary operator from caller-supplied delegate
@@ -445,7 +446,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp32 define<T>(Func<T,T,T> f, U32 dst)
             where T : unmanaged
-                => (Cell32 a, Cell32 b) => gcells.cell32(f(a.As<T>(),b.As<T>()));
+                => (Cell32 a, Cell32 b) => cell32(f(a.As<T>(),b.As<T>()));
 
         /// <summary>
         /// Creates a fixed 64-bit binary operator from caller-supplied delegate
@@ -454,7 +455,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BinaryOp64 define<T>(Func<T,T,T> f, U64 dst)
             where T : unmanaged
-                => (Cell64 a, Cell64 b) => gcells.cell64(f(a.As<T>(),b.As<T>()));
+                => (Cell64 a, Cell64 b) => cell64(f(a.As<T>(),b.As<T>()));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         internal static UnaryOp<T> uFx<T>(MethodInfo src, UnaryOperatorClass<T> k)
@@ -637,5 +638,24 @@ namespace Z0
         [Free]
         public delegate Bit32 BinaryPredicate512(Cell512 a, Cell512 b);
 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        static Cell8 cell8<T>(T src)
+            where T : unmanaged
+                => new Cell8(@as<T,byte>(src));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        static Cell16 cell16<T>(T src)
+            where T : unmanaged
+                => new Cell16(@as<T,ushort>(src));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        static Cell32 cell32<T>(T src)
+            where T : unmanaged
+                => new Cell32(@as<T,uint>(src));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        static Cell64 cell64<T>(T src)
+            where T : unmanaged
+                => new Cell64(@as<T,ulong>(src));
     }
 }

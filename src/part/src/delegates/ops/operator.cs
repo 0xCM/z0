@@ -5,19 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class Delegates
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryPredicate<T> predicate<T>(System.Func<T,bit> f)
-            => new UnaryPredicate<T>(f);
+        public static UnaryOp<T> @operator<T>(System.Func<T,T> f)
+            => new UnaryOp<T>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Z0.BinaryPredicate<T> predicate<T>(System.Func<T,T,bit> f)
-            => new Z0.BinaryPredicate<T>(f);
+        public static BinaryOp<T> @operator<T>(System.Func<T,T,T> f)
+            => new BinaryOp<T>(f);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static TernaryOp<T> @operator<T>(System.Func<T,T,T,T> f)
+            => new TernaryOp<T>(f);
     }
 }

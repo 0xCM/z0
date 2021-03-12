@@ -11,7 +11,6 @@ namespace Z0
     using static Part;
 
     using F = Cell128;
-    using api = Cells;
 
     [Datatype("m128")]
     public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
@@ -24,7 +23,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Cell128(ulong x0, ulong x1)
-            => Data = cpu.vparts(w128, x0,x1);
+            => Data = Vector128.Create(x0,x1);
 
         public CellKind Kind
             => CellKind.Cell128;
@@ -87,31 +86,31 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128((ulong x0, ulong x1) x)
-            => api.cell128(x);
+            => new Cell128(x.x0, x.x1);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(ulong src)
-            => api.cell128(src);
+            => new Cell128(src, 0ul);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(in ConstPair<ulong> x)
-            => api.cell128(x);
+            => new Cell128(x.Left, x.Right);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<byte> x)
-            => gcells.cell128(x);
+            => memory.@as<Vector128<byte>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ushort> x)
-            => gcells.cell128(x);
+            => memory.@as<Vector128<ushort>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<uint> x)
-            => gcells.cell128(x);
+            => memory.@as<Vector128<uint>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Cell128(Vector128<ulong> x)
-            => new Cell128(x);
+            => memory.@as<Vector128<ulong>,Cell128>(x);
 
         [MethodImpl(Inline)]
         public static implicit operator Vector128<byte>(Cell128 x)

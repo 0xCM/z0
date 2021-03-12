@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Cells;
-
     [Datatype("m16")]
     public readonly struct Cell16 : IDataCell<Cell16,W16,ushort>
     {
@@ -67,7 +65,7 @@ namespace Z0
             => Data == src.Data;
 
         public string Format()
-            => api.format(this);
+            => Content.FormatHex();
 
         public override string ToString()
             => Format();
@@ -137,10 +135,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator short(Cell16 x)
             => (short)x.Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell16(Imm16 src)
-            => new Cell16(src.Content);
 
         public static Cell16 Empty
             => default(Cell16);

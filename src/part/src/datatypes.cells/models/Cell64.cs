@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Cells;
-
     [Datatype("m64")]
     public readonly struct Cell64 : IDataCell<Cell64,W64,ulong>
     {
@@ -66,7 +64,7 @@ namespace Z0
             => Content == src.Content;
 
         public string Format()
-            => api.format(this);
+            => Content.FormatHex();
 
         public override string ToString()
             => Format();
@@ -120,10 +118,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator long(Cell64 x)
             => (long)x.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell64(Imm64 src)
-            => new Cell64(src.Content);
 
         public static Cell64 Empty => default;
    }

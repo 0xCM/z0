@@ -13,15 +13,11 @@ namespace Z0
     partial class Delegates
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp<T> @operator<T>(System.Func<T,T> f)
-            => new UnaryOp<T>(f);
+        public static UnaryPredicate<T> predicate<T>(System.Func<T,bit> f)
+            => new UnaryPredicate<T>(f);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp<T> @operator<T>(System.Func<T,T,T> f)
-            => new BinaryOp<T>(f);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static TernaryOp<T> @operator<T>(System.Func<T,T,T,T> f)
-            => new TernaryOp<T>(f);
+        public static Z0.BinaryPredicate<T> predicate<T>(System.Func<T,T,bit> f)
+            => new Z0.BinaryPredicate<T>(f);
     }
 }

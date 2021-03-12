@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Cells;
-
     [Datatype("m32")]
     public readonly struct Cell32 : IDataCell<Cell32,W32,uint>
     {
@@ -65,7 +63,7 @@ namespace Z0
             => Content == src;
 
         public string Format()
-            => api.format(this);
+            => Content.FormatHex();
 
         public override string ToString()
             => Format();
@@ -104,7 +102,6 @@ namespace Z0
         public static explicit operator ushort(Cell32 x)
             => (ushort)x.Content;
 
-
         [MethodImpl(Inline)]
         public static explicit operator int(Cell32 x)
             => (int)x.Content;
@@ -116,10 +113,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ulong(Cell32 x)
             => (ulong)x.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell32(Imm32 src)
-            => new Cell32(src.Content);
 
        public static Cell32 Empty => default;
     }

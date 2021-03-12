@@ -29,6 +29,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static D.BinaryOp32 cellop32<T>(Func<T,T,T> f)
             where T : unmanaged
-                => (Cell32 a, Cell32 b) => cell32(f(a.As<T>(),b.As<T>()));
+                => (Cell32 a, Cell32 b) => cell32(f(a.As<T>(), b.As<T>()));
     }
 }

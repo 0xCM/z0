@@ -27,10 +27,4 @@ namespace Z0
                 : Expression.GetFuncType(Arrays.concat(args, memory.array(src.ReturnType)));
         }
     }
-
-    [ApiHost(ApiNames.DelegatesX)]
-    public static partial class XDelegates
-    {
-
-    }
 }

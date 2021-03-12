@@ -58,18 +58,6 @@ namespace Z0
             => Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator ulong(I src)
-            => src.Content;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell64(I src)
-        //     => new Cell64(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator I(ulong src)
-            => new I(src);
-
-        [MethodImpl(Inline)]
         public static bool operator <(I a, I b)
             => a.Content < b.Content;
 
@@ -92,5 +80,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(I a, I b)
             => a.Content != b.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ulong(I src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell64(I src)
+            => new Cell64(src.Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(ulong src)
+            => new I(src);
     }
 }

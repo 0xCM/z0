@@ -55,18 +55,6 @@ namespace Z0
             => Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator byte(I src)
-            => src.Content;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell8(I src)
-        //     => new Cell8(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator I(byte src)
-            => new I(src);
-
-        [MethodImpl(Inline)]
         public static bool operator <(I a, I b)
             => a.Content < b.Content;
 
@@ -89,6 +77,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(I a, I b)
             => a.Content != b.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator byte(I src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(byte src)
+            => new I(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell8(I src)
+            => new Cell8(src.Content);
 
         public static W W => default;
     }

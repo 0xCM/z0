@@ -57,17 +57,6 @@ namespace Z0
         public Address16 ToAddress()
             => Content;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ushort(I src)
-            => src.Content;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell16(I src)
-        //     => new Cell16(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator I(ushort src)
-            => new I(src);
 
         [MethodImpl(Inline)]
         public static bool operator <(I a, I b)
@@ -92,5 +81,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(I a, I b)
             => a.Content != b.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ushort(I src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell16(I src)
+            => new Cell16(src.Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(ushort src)
+            => new I(src);
      }
 }

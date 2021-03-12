@@ -9,13 +9,11 @@ namespace Z0
 
     using static Part;
 
-    using api = Cells;
-
     public readonly struct CellQ : IDataCell
     {
         readonly Index<byte> Data;
 
-        internal CellQ(byte[] src)
+        public CellQ(byte[] src)
             => Data = src;
 
         public CellKind Kind
@@ -43,7 +41,13 @@ namespace Z0
         }
 
         public string Format()
-            => api.format(this);
+            => Kind switch{
+                CellKind.Cell8 => memory.first(Bytes).FormatHex(),
+                CellKind.Cell16 => memory.first16u(Bytes).FormatHex(),
+                CellKind.Cell32 => memory.first32u(Bytes).FormatHex(),
+                CellKind.Cell64 => memory.first64u(Bytes).FormatHex(),
+                _ => Bytes.FormatHex()
+            };
 
         public override string ToString()
             => Format();

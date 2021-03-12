@@ -21,7 +21,7 @@ namespace Z0
         public IntPtr Handle {get;}
 
         [MethodImpl(Inline)]
-        internal DynamicPointer(DynamicDelegate op, IntPtr handle)
+        public DynamicPointer(DynamicDelegate op, IntPtr handle)
         {
             Op = op;
             Handle = handle;

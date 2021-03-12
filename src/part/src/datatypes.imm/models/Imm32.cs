@@ -55,17 +55,6 @@ namespace Z0
         public Address32 ToAddress()
             => Content;
 
-        [MethodImpl(Inline)]
-        public static implicit operator uint(I src)
-            => src.Content;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator Cell32(I src)
-        //     => new Cell32(src.Content);
-
-        [MethodImpl(Inline)]
-        public static implicit operator I(uint src)
-            => new I(src);
 
         [MethodImpl(Inline)]
         public static bool operator <(I a, I b)
@@ -91,6 +80,17 @@ namespace Z0
         public static bool operator !=(I a, I b)
             => a.Content != b.Content;
 
+        [MethodImpl(Inline)]
+        public static implicit operator uint(I src)
+            => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell32(I src)
+            => new Cell32(src.Content);
+
+        [MethodImpl(Inline)]
+        public static implicit operator I(uint src)
+            => new I(src);
         public static W W => default;
     }
 }
