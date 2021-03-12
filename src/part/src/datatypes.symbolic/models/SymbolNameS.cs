@@ -15,19 +15,32 @@ namespace Z0
     public readonly struct SymbolName<S>
         where S : unmanaged
     {
-        readonly ISymbolSet<S> Symbols;
-
-        readonly ushort Index;
+        readonly IToken<S> Token;
 
         [MethodImpl(Inline)]
-        internal SymbolName(ISymbolSet<S> src, ushort index)
+        internal SymbolName(IToken<S> src)
         {
-            Symbols = src;
-            Index = index;
+            Token = src;
+        }
+
+        public Identifier Identifier
+        {
+            [MethodImpl(Inline)]
+            get => Token?.Name ?? EmptyString;
+        }
+
+        public string SymbolText
+        {
+            [MethodImpl(Inline)]
+            get => Token?.Symbol ?? EmptyString;
         }
 
         [MethodImpl(Inline)]
+        public static implicit operator SymbolName<S>(Token<S> src)
+            => new SymbolName<S>(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator SymbolName(SymbolName<S> src)
-            => new SymbolName(src.Symbols, src.Index);
+            => new SymbolName(src.Token);
     }
 }

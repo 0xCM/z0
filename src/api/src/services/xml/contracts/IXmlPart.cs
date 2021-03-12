@@ -13,6 +13,9 @@ namespace Z0
 
         dynamic Value {get;}
 
+        IXmlPart Ancestor
+            => XmlParts.empty();
+
         Name Name
             => Name.Empty;
 

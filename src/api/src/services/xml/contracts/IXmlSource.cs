@@ -10,6 +10,5 @@ namespace Z0
     {
         bool Read(out IXmlPart dst);
 
-        void Read(Action<IXmlPart> receiver);
     }
 }

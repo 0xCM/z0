@@ -14,10 +14,15 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bool equals(string a, string b, StringComparison type)
-            => Query.equals(a,b, type);
+            => Query.equals(a, b, type);
 
         [MethodImpl(Inline)]
         public static bool equals(string a, string b)
             => Query.equals(a,b);
+
+        [MethodImpl(Inline)]
+        public static bool neq(string a, string b, StringComparison type)
+            => Query.neq(a, b, type);
+
     }
 }

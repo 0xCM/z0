@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static memory;
 
 
-    partial struct AsmCases
+    partial class AsmCases
     {
         [Op]
         public static string format(in CallRel32 src)

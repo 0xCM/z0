@@ -13,8 +13,8 @@ namespace Z0
     public readonly partial struct XmlParts
     {
         [MethodImpl(Inline), Op]
-        public static Element element(string name, XmlAttributes attributes)
-            => new Element(name, attributes);
+        public static Element element(IXmlPart ancestore, string name, XmlAttributes attributes)
+            => new Element(ancestore, name, attributes);
 
         [MethodImpl(Inline), Op]
         public static XmlAttributes attributes()
@@ -69,8 +69,15 @@ namespace Z0
             => new EntityRef(value);
 
         [MethodImpl(Inline), Op]
+        public static XmlDoc doc(string value)
+            => new XmlDoc(value);
+
+        [MethodImpl(Inline), Op]
         public static Whitespace whitespace(string value, bool significant)
             => new Whitespace(value, significant);
 
+        [MethodImpl(Inline), Op]
+        public static Empty empty()
+            => new Empty(EmptyString);
     }
 }

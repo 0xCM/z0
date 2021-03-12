@@ -16,6 +16,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static AsmCodeSyntax line(GridPoint<uint> location, dynamic content)
-            => new AsmCodeSyntax(location,content);
+            => new AsmCodeSyntax(location, content);
     }
 }

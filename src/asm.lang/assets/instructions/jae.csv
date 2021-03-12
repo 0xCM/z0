@@ -1,0 +1,4 @@
+| Opcode   | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                    |
+| 73 cb    | JAE rel8    | D     | Valid       | Valid           | Jump short if above or equal (CF=0).                                           |
+| 0F 83 cw | JAE rel16   | D     | N.S.        | Valid           | Jump near if above or equal (CF=0). Not supported in 64-bit mode.              |
+| 0F 83 cd | JAE rel32   | D     | Valid       | Valid           | Jump near if above or equal (CF=0).                                            |

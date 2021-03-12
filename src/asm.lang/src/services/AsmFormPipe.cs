@@ -19,6 +19,13 @@ namespace Z0.Asm
 
         }
 
+        AsmSigs Sigs;
+
+        protected override void OnInit()
+        {
+            Sigs = Wf.AsmSigs();
+        }
+
         public void Emit(ReadOnlySpan<AsmForm> src, FS.FilePath dst)
         {
             var count = src.Length;
@@ -101,7 +108,7 @@ namespace Z0.Asm
                 var i = 0u;
                 Records.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
-                asm.sig(NextCell(parts, ref i), out dst.Sig);
+                Sigs.ParseSig(NextCell(parts, ref i), out dst.Sig);
                 dst.Expression = NextCell(parts, ref i);
                 return true;
             }
@@ -117,7 +124,7 @@ namespace Z0.Asm
             var i = 0;
             Records.parse(src[i++], out dst.Seq);
             dst.OpCode = asm.opcode(src[i++]);
-            asm.sig(src[i++], out dst.Sig);
+            Sigs.ParseSig(src[i++], out dst.Sig);
             dst.Expression = src[i++];
             return ref dst;
         }

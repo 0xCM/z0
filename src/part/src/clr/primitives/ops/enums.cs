@@ -4,12 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
     using static Part;
-    using static memory;
 
     using EC = ClrPrimalKind;
 
@@ -30,27 +25,5 @@ namespace Z0
                 EC.U64 => (ulong)src,
                 _ => 0ul,
             };
-
-        [Op]
-        static void fill(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral> dst)
-        {
-            ClrAssemblyName assname = type.Assembly;
-            var count = fields.Length;
-            var typeAddress = type.TypeHandle.Value;
-            var simple = assname.SimpleName;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var f = ref skip(fields,i);
-                ref var row = ref seek(dst,i);
-                row.Component = simple;
-                row.Type = type.Name;
-                row.DataType = kind;
-                row.Position = (ushort)i;
-                row.Name = f.Name;
-                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
-                row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
-                row.EncodedValue = encode(kind, f.GetRawConstantValue());
-            }
-        }
     }
 }

@@ -5,9 +5,14 @@
 namespace Z0.Asm
 {
     [ApiHost]
-    public readonly partial struct AsmCases
+    public partial class AsmCases : WfService<AsmCases>
     {
+        AsmSigs Sigs;
 
+        protected override void OnInit()
+        {
+            Sigs = Wf.AsmSigs();
+        }
     }
 
     public sealed class AsmCaseRunner : WfService<AsmCaseRunner>

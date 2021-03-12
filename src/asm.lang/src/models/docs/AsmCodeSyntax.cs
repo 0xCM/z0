@@ -9,25 +9,30 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmComment
+    public readonly struct AsmCodeSyntax : ITextual
     {
-        public TextBlock Content {get;}
+        /// <summary>
+        /// The content origin
+        /// </summary>
+        public GridPoint<uint> Location {get;}
+
+        /// <summary>
+        /// The line content
+        /// </summary>
+        public dynamic Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmComment(TextBlock text)
-            => Content = text;
+        public AsmCodeSyntax(GridPoint<uint> location, dynamic content)
+        {
+            Location = location;
+            Content = content;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content.IsNonEmpty ? string.Format("; {0}",Content) : EmptyString;
+            => Content.ToString();
 
         public override string ToString()
             => Format();
-
-        public static AsmComment Empty
-        {
-            [MethodImpl(Inline)]
-            get => new AsmComment(TextBlock.Empty);
-        }
     }
 }

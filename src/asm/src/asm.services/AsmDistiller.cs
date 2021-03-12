@@ -10,7 +10,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static AsmExpr;
 
     using Target = AsmStatementInfo;
     using Source = AsmRow;
@@ -29,6 +28,8 @@ namespace Z0.Asm
 
         MemorySymbols Symbols;
 
+        AsmSigs Sigs;
+
         uint CurrentRow;
 
         uint LastRow;
@@ -45,6 +46,7 @@ namespace Z0.Asm
 
         protected override void OnContextCreated()
         {
+            Sigs = Wf.AsmSigs();
 
         }
 
@@ -110,8 +112,8 @@ namespace Z0.Asm
             if(count == AsmStatementInfo.FieldCount)
             {
                 dst.OpCode = asm.opcode(skip(cells, i++));
-                AsmSigParser.parse(skip(cells, i++), out dst.Sig);
-                dst.Statement = asm.statement(skip(cells,i++));
+                Sigs.ParseSig(skip(cells, i++), out dst.Sig);
+                dst.Expression = asm.statement(skip(cells,i++));
                 if(HexByteParser.parse(skip(cells,i++), out var data))
                     dst.Encoded = data;
                 else
@@ -121,7 +123,7 @@ namespace Z0.Asm
             {
                 dst.OpCode = AsmOpCodeExpr.Empty;
                 dst.Sig = AsmSig.Empty;
-                dst.Statement = AsmStatementExpr.Empty;
+                dst.Expression = AsmStatementExpr.Empty;
                 dst.Encoded = AsmHexCode.Empty;
             }
 
@@ -189,8 +191,8 @@ namespace Z0.Asm
             dst.GlobalOffset = src.GlobalOffset;
             dst.LocalOffset = src.LocalOffset;
             dst.OpCode = asm.opcode(src.OpCode.Value);
-            AsmSigParser.parse(src.Instruction, out dst.Sig);
-            dst.Statement = asm.statement(src.Statement);
+            Sigs.ParseSig(src.Instruction, out dst.Sig);
+            dst.Expression = asm.statement(src.Statement);
             dst.Encoded = src.Encoded;
             return ref dst;
         }

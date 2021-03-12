@@ -16,8 +16,6 @@ namespace Z0
 
         Identifier SymId(ushort index);
 
-        SymbolName<S> SymName(ushort index);
-
         ref readonly S this[ushort index]
              => ref Symbols[index];
     }

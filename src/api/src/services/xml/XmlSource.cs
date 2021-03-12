@@ -10,11 +10,27 @@ namespace Z0
 
     using static Part;
     using static XmlParts;
-    using static memory;
 
     using N = System.Xml.XmlNodeType;
     using SysXml = System.Xml;
 
+    public readonly struct XmlLevel
+    {
+        public sbyte Depth {get;}
+
+        public string Name {get;}
+
+        [MethodImpl(Inline)]
+        public XmlLevel(sbyte depth, string name)
+        {
+            Depth = depth;
+            Name = name;
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator XmlLevel((int depth, string name) src)
+            => new XmlLevel((sbyte)src.depth, src.name);
+    }
 
     public struct XmlSource : IXmlSource
     {
@@ -24,17 +40,26 @@ namespace Z0
 
         readonly SysXml.XmlReader Reader;
 
+        bool TriggerCompletion;
+
         public static XmlSource create(IWfShell wf, FS.FilePath src)
-            => new XmlSource(wf, src.Reader());
+            => new XmlSource(wf, src);
 
         [MethodImpl(Inline)]
-        public XmlSource(IWfShell wf, StreamReader src)
+        public XmlSource(IWfShell wf, FS.FilePath path)
         {
             Wf = wf;
-            Source = src;
+            Source = path.Reader();
             var settings = new SysXml.XmlReaderSettings();
             Reader = SysXml.XmlReader.Create(Source, settings);
+            TriggerCompletion = false;
+            CurrentPart = XmlParts.doc(path.Name);
+            PriorPart = XmlParts.empty();
         }
+
+        IXmlPart PriorPart;
+
+        IXmlPart CurrentPart;
 
         public void Dispose()
         {
@@ -42,18 +67,16 @@ namespace Z0
             Reader?.Dispose();
         }
 
-        public void Read(Action<IXmlPart> receiver)
-        {
-            while(Read(out var content))
-                receiver(content);
-        }
-
         public void Read(ElementHandlers handlers)
         {
             while(Read(out var content))
             {
                 if(content is IXmlElement x && handlers.TryGetValue(x.Name, out var handler))
+                {
                     handler(x);
+                    if(Reader.IsEmptyElement)
+                        CurrentPart = x.Ancestor;
+                }
             }
         }
 
@@ -87,7 +110,9 @@ namespace Z0
                 {
                     case N.Element:
                         var attributes = ReadAttributes();
-                        dst = element(Reader.Name, attributes);
+                        PriorPart = CurrentPart;
+                        CurrentPart = element(PriorPart, Reader.Name, attributes);
+                        dst = CurrentPart;
                     break;
                     case N.Attribute:
                         dst = attribute(Reader.Name, Reader.Value);
@@ -130,6 +155,7 @@ namespace Z0
                     break;
                     case N.EndElement:
                         dst = close(Reader.Name);
+                        //CurrentPart = Current;
                     break;
                     case N.EndEntity:
                         dst = entity(Reader.Name, false);

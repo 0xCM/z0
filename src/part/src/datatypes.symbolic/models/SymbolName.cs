@@ -14,15 +14,22 @@ namespace Z0
     /// </summary>
     public readonly struct SymbolName
     {
-        readonly ISymbolSet Symbols;
-
-        readonly ushort Index;
+        readonly IToken Token;
 
         [MethodImpl(Inline)]
-        internal SymbolName(ISymbolSet src, ushort index)
+        internal SymbolName(IToken token)
+            => Token = token;
+
+        public Identifier Identifier
         {
-            Symbols = src;
-            Index = index;
+            [MethodImpl(Inline)]
+            get => Token?.Name ?? EmptyString;
+        }
+
+        public string SymbolText
+        {
+            [MethodImpl(Inline)]
+            get => Token?.Symbol ?? EmptyString;
         }
     }
 }

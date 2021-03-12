@@ -71,18 +71,6 @@ namespace Z0
             get => Index != 0;
         }
 
-        const string TypeKind = "{0}:{1}";
-
-        const string FormatPattern = "{0,-32} {1,-8} | {2,-12} | {2}";
-
-        public string FormatHeader
-            => string.Format(FormatPattern, "Type:Kind", nameof(Index), nameof(Name), nameof(Symbol));
-        public string Format()
-            => string.Format(FormatPattern, string.Format(TypeKind, typeof(K).Name, Kind), Index, text.ifempty(Name, "!!<empty>!!"), text.ifempty(Symbol, "!!<empty>!!"));
-
-        public override string ToString()
-            => Format();
-
         public static Token<K> Empty => default;
     }
 }

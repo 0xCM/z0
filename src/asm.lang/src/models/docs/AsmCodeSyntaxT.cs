@@ -9,33 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmCodeSyntax : ITextual
-    {
-        /// <summary>
-        /// The content origin
-        /// </summary>
-        public GridPoint<uint> Location {get;}
-
-        /// <summary>
-        /// The line content
-        /// </summary>
-        public dynamic Content {get;}
-
-        [MethodImpl(Inline)]
-        public AsmCodeSyntax(GridPoint<uint> location, dynamic content)
-        {
-            Location = location;
-            Content = content;
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Content.ToString();
-
-        public override string ToString()
-            => Format();
-    }
-
     public readonly struct AsmCodeSyntax<T> : ITextual
         where T : ITextual
     {

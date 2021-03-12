@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The component that defines the literal
         /// </summary>
-        public Name Component;
+        public ClrAssemblyName Component;
 
         /// <summary>
         /// The literal's declaring type

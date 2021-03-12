@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    partial struct AsmCases
+    partial class AsmCases
     {
         public struct CallRel32
         {

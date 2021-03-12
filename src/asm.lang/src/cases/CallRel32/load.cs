@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static AsmInstructions;
     using static AsmSyntax;
 
-    partial struct AsmCases
+    partial class AsmCases
     {
         [Op]
         static Address32 rel32dx(BinaryCode src)

@@ -9,8 +9,6 @@ namespace Z0.Asm
 
     using static Part;
 
-    using static AsmExpr;
-
     [Record(TableId)]
     public struct AsmStatementInfo : IRecord<AsmStatementInfo>, IComparable<AsmStatementInfo>
     {
@@ -32,9 +30,15 @@ namespace Z0.Asm
 
 		public AsmSig Sig;
 
-        public AsmStatementExpr Statement;
+        public AsmStatementExpr Expression;
 
         public AsmHexCode Encoded;
+
+        public AsmMnemonic Mnemonic
+        {
+            [MethodImpl(Inline)]
+            get => Sig.Mnemonic;
+        }
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmStatementInfo src)

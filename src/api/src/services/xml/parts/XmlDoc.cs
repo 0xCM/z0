@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
     using System.Xml;
 
@@ -12,30 +11,21 @@ namespace Z0
 
     partial struct XmlParts
     {
-        public readonly struct Element : IXmlElement
+        public readonly struct XmlDoc : IXmlPart<string>
         {
-            public IXmlPart Ancestor {get;}
-
-            public Name Name {get;}
-
-            public Name Value {get;}
-
-            public XmlAttributes Attributes {get;}
+            public string Value {get;}
 
             [MethodImpl(Inline)]
-            public Element(IXmlPart ancestor, string value, XmlAttributes attributes)
+            public XmlDoc(string value)
             {
-                Ancestor = ancestor;
-                Name = value;
                 Value = value;
-                Attributes = attributes;
             }
 
             public XmlNodeType Kind
-                => XmlNodeType.Element;
+                => XmlNodeType.Document;
 
             public override string ToString()
-                => Name;
+                => "Document";
         }
     }
 }

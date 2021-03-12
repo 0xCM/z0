@@ -41,6 +41,12 @@ namespace Z0.Asm
             get => Data.IsNonEmpty;
         }
 
+        public bool IsValid
+        {
+            [MethodImpl(Inline)]
+            get => text.neq(Data,"<invalid>", NoCase);
+        }
+
         public override int GetHashCode()
             => Data.GetHashCode();
 
@@ -72,5 +78,4 @@ namespace Z0.Asm
         public static AsmOpCodeExpr Empty
             => new AsmOpCodeExpr(EmptyString);
     }
-
 }

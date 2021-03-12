@@ -37,17 +37,19 @@ namespace Z0
             var editor = literals.Edit;
             var count = editor.Length;
             var entries = alloc<Token<E>>(count);
-            ref var entry = ref first(entries);
+            ref var dst = ref first(entries);
             var index = new Dictionary<string,Token<E>>(count);
+            var identifiers = new Dictionary<string,Token<E>>(count);
             for(var i=0u; i<count; i++)
             {
                 ref var literal = ref seek(editor, i);
                 var symbol = symbolizer(literal.DirectValue);
                 literal.Symbol = symbolizer(literal.DirectValue);
-                seek(entry, i) = new Token<E>(literal);
-                index.Add(skip(entry,i).Symbol, skip(entry, i));
+                seek(dst, i) = new Token<E>(literal);
+                index.Add(skip(dst,i).Symbol, skip(dst, i));
+                identifiers.Add(skip(dst,i).Name, skip(dst,i));
             }
-            return new SymbolTable<E>(entries, index);
+            return new SymbolTable<E>(entries, identifiers, index);
         }
 
         public static SymbolTable<E> table<E>()
@@ -58,13 +60,15 @@ namespace Z0
             var count = view.Length;
             var buffer = alloc<Token<E>>(count);
             ref var dst = ref first(buffer);
-            var index = new Dictionary<string,Token<E>>(count);
+            var symbols = new Dictionary<string,Token<E>>(count);
+            var identifiers = new Dictionary<string,Token<E>>(count);
             for(var i=0u; i<count; i++)
             {
                 seek(dst, i) = new Token<E>(skip(view, i));
-                index.Add(seek(dst,i).Symbol, skip(dst, i));
+                symbols.Add(seek(dst,i).Symbol, skip(dst, i));
+                identifiers.Add(skip(dst,i).Name, skip(dst,i));
             }
-            return new SymbolTable<E>(buffer, index);
+            return new SymbolTable<E>(buffer, identifiers, symbols);
         }
 
         public static SymbolTable<E> table<E>(Index<Token<E>> src)
@@ -73,12 +77,14 @@ namespace Z0
             var view = src.View;
             var count = view.Length;
             var index = new Dictionary<string,Token<E>>(count);
+            var identifiers = new Dictionary<string,Token<E>>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref skip(view, i);
                 index.Add(token.Symbol, token);
+                identifiers.Add(skip(view,i).Name, token);
             }
-            return new SymbolTable<E>(src, index);
+            return new SymbolTable<E>(src, identifiers, index);
         }
     }
 }

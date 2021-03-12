@@ -1,0 +1,4 @@
+| Opcode           | Instruction        | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                 |
+| 0F 42 /r         | CMOVC r16, r/m16   | RM    | Valid       | Valid           | Move if carry (CF=1).                       |
+| 0F 42 /r         | CMOVC r32, r/m32   | RM    | Valid       | Valid           | Move if carry (CF=1).                       |
+| REX.W + 0F 42 /r | CMOVC r64, r/m64   | RM    | Valid       | N.E.            | Move if carry (CF=1).                       |

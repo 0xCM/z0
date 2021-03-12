@@ -61,6 +61,90 @@ namespace Z0.Asm
         public SymbolTable<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;
 
+        bool MnemonicText(string sig, out string dst)
+        {
+            if(text.empty(sig))
+            {
+                dst = EmptyString;
+                return false;
+            }
+            else
+            {
+                var i = Query.index(sig, MnemonicTerminator);
+                if(i > 0)
+                {
+                    dst = Parse.segment(sig, 0, i - 1).ToLower();
+                    return true;
+                }
+                else
+                {
+                    dst = sig;
+                    return true;
+                }
+            }
+        }
+
+        [Op]
+        public bool ParseMnemonicCode(string sig, out AsmMnemonicCode dst)
+        {
+            if(MnemonicText(sig, out var candidate))
+            {
+                if(_Mnemonics.TokenFromSymbol(candidate, out var code))
+                {
+                    dst = code.Kind;
+                    return true;
+                }
+            }
+            dst = 0;
+            return false;
+        }
+
+        [Op]
+        public bool ParseMnemonicCode(AsmMnemonic expr, out AsmMnemonicCode dst)
+            => ParseMnemonicCode(expr.Name, out dst);
+
+        [Op]
+        public bool ParseMnemonic(string sig, out AsmMnemonic dst)
+        {
+            dst = AsmMnemonic.Empty;
+            if(text.empty(sig))
+                return false;
+
+            if(MnemonicText(sig, out var candidate))
+            {
+                dst = new AsmMnemonic(candidate);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        [Op]
+        public bool ParseSig(string src, out AsmSig dst)
+        {
+            if(text.nonempty(src))
+            {
+                if(ParseMnemonic(src, out var monic))
+                {
+                    var i = Query.index(src, MnemonicTerminator);
+                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(asm.sigop) : sys.empty<AsmSigOperand>();
+                    dst = new AsmSig(monic, operands);
+                    return true;
+                }
+            }
+            dst = AsmSig.Empty;
+            return false;
+        }
+
+        [Op]
+        public AsmSig ParseSig(string src)
+        {
+            if(ParseSig(src, out var dst))
+                return dst;
+            else
+                return AsmSig.Empty;
+        }
+
         [MethodImpl(Inline), Op]
         public ref readonly Token<AsmSigOpKind> Token(AsmSigOpKind kind)
         {
@@ -73,7 +157,7 @@ namespace Z0.Asm
         [Op]
         public bool ParseToken(AsmSigOperand src, out Token<AsmSigOpKind> token)
         {
-            if(_SigOpSymbols.Index(src.Content, out var index))
+            if(_SigOpSymbols.IndexFromSymbol(src.Content, out var index))
             {
                 token = _SigOpTokens[index];
                 return true;
@@ -96,7 +180,7 @@ namespace Z0.Asm
 
         [Op]
         public bool IsComposite(AsmSigOperand src)
-            => _Composites.Contains(src.Content);
+            => _Composites.ContainsSymbol(src.Content);
 
         [Op]
         public bool IsComposite(AsmSig src)
@@ -108,7 +192,7 @@ namespace Z0.Asm
         [Op]
         public Index<AsmSigOperand> Operands(AsmSig src)
         {
-            if(AsmSigParser.mnemonic(src.Content, out var monic))
+            if(ParseMnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return Operands(remainder);
             return Index<AsmSigOperand>.Empty;

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static AsmExpr;
-
     [Record(TableId)]
     public struct AsmFormRecord : IRecord<AsmFormRecord>
     {

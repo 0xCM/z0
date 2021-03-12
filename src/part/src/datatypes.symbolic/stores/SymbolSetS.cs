@@ -87,12 +87,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolName<S> SymName(ushort index)
-            => new SymbolName<S>(this, index);
-
-        [MethodImpl(Inline)]
         public Identifier SymId(ushort index)
             => default;
-
     }
 }

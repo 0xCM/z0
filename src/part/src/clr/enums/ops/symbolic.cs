@@ -39,41 +39,18 @@ namespace Z0
                     row.Symbol = tag.Value.Symbol;
                 else
                     row.Symbol = f.Name;
-
-                //row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
+                row.DirectValue = (E)f.GetRawConstantValue();
                 row.UniqueName = SymbolicLiterals.identity(component.SimpleName, src.Name, row.Position, f.Name);
-                row.EncodedValue = ClrPrimitives.encode(kind, f.GetRawConstantValue());
+                row.EncodedValue = ClrPrimitives.encode(kind, row.DirectValue);
             }
 
             return buffer;
         }
 
-        // [Op]
-        // internal static void fill<E>(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral<E>> dst)
-        //     where E : unmanaged, Enum
-        // {
-        //     ClrAssemblyName component = type.Assembly;
-
-        //     var count = fields.Length;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var f = ref skip(fields,i);
-        //         ref var row = ref seek(dst,i);
-        //         row.Component = component;
-        //         row.Type = type.Name;
-        //         row.DataType = kind;
-        //         row.Position = (ushort)i;
-        //         row.Name = f.Name;
-        //         row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
-        //         row.UniqueName = SymbolicLiterals.identity(component.SimpleName, type.Name, row.Position, f.Name);
-        //         row.EncodedValue = ClrPrimitives.encode(kind, f.GetRawConstantValue());
-        //     }
-        // }
-
         [Op]
         public static Index<SymbolicLiteral> symbolic(Type src)
         {
-            var fields = span(src.LiteralFields());
+            var fields = @readonly(src.LiteralFields());
             var dst = alloc<SymbolicLiteral>(fields.Length);
             symbolic(src, dst);
             return dst;
@@ -81,7 +58,7 @@ namespace Z0
 
         public static void symbolic(Type src, Span<SymbolicLiteral> dst)
         {
-            var fields = span(src.LiteralFields());
+            var fields = @readonly(src.LiteralFields());
             var ecode = ClrPrimitives.kind(src);
             fill(src, ecode, fields, dst);
         }
@@ -128,12 +105,13 @@ namespace Z0
         {
             var count = fields.Length;
             var typeAddress = type.TypeHandle.Value;
-            var asmName = type.Assembly.GetSimpleName();
+
+            ClrAssemblyName component = type.Assembly;
             for(var i=0u; i<count; i++)
             {
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
-                row.Component = asmName;
+                row.Component = component;
                 row.Type = type.Name;
                 row.DataType = kind;
                 row.Position = (ushort)i;

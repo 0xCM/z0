@@ -24,6 +24,16 @@ namespace Z0
                 => string.Equals(a,b, type);
 
             /// <summary>
+            /// Performs a string comparison according to a specified comparison type
+            /// </summary>
+            /// <param name="a">The first string</param>
+            /// <param name="b">The second string</param>
+            /// <param name="type">The comparison type</param>
+            [MethodImpl(Inline), Op]
+            public static bool neq(string a, string b, StringComparison type)
+                => !equals(a, b, type);
+
+            /// <summary>
             /// Performs a case-insensitive comparison on two source strings
             /// </summary>
             /// <param name="a">The first string</param>

@@ -14,6 +14,7 @@ namespace Z0.Asm
 
     public class AsmDataFlows : WfService<AsmDataFlows>
     {
+
         public void Submit(in AsmForm src, AsmHexCode code)
         {
 
@@ -21,15 +22,24 @@ namespace Z0.Asm
 
         public class MovHandler : AsmHandler<MovHandler, Mov>
         {
-            public override void Handle(Mov instruction)
+            public override void Handle(Mov src)
             {
 
             }
         }
 
+        public class JmpHandler : AsmHandler<JmpHandler, Jmp>
+        {
+            public override void Handle(Jmp src)
+            {
+
+            }
+        }
+
+
         public class MovzxHandler : AsmHandler<MovzxHandler, Movzx>
         {
-            public override void Handle(Movzx instruction)
+            public override void Handle(Movzx src)
             {
 
             }
@@ -37,7 +47,7 @@ namespace Z0.Asm
 
         public class CmpHandler : AsmHandler<CmpHandler, Cmp>
         {
-            public override void Handle(Cmp instruction)
+            public override void Handle(Cmp src)
             {
 
             }
@@ -45,10 +55,28 @@ namespace Z0.Asm
 
         public class JaHandler : AsmHandler<JaHandler, Ja>
         {
-            public override void Handle(Ja instruction)
+            public override void Handle(Ja src)
             {
 
             }
         }
+
+        public class JneHandler : AsmHandler<JneHandler, Jne>
+        {
+            public override void Handle(Jne src)
+            {
+
+            }
+        }
+
+        public class VmovdquHandler : AsmHandler<VmovdquHandler, Vmovdqu>
+        {
+            public override void Handle(Vmovdqu src)
+            {
+
+            }
+        }
+
+
     }
 }

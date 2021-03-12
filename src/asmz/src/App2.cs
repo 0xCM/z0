@@ -36,6 +36,9 @@ namespace Z0.Asm
             flow = Wf.Creating(nameof(AsmServices));
             AsmServices = Wf.AsmServices();
             Wf.Created(flow);
+
+            Sigs = Wf.AsmSigs();
+
         }
 
         AsmCatalogEtl Catalog;
@@ -281,10 +284,12 @@ namespace Z0.Asm
 
         void ShowCases()
         {
-            var cases = AsmCases.mov().View;
-            var count = cases.Length;
+            var cases = AsmCases.create(Wf);
+            var mov = cases.MovCases().View;
+            var count = mov.Length;
             for(var i=0; i<count; i++)
-                Wf.Row(skip(cases,i).Format());
+                Wf.Row(skip(mov,i).Format());
+
         }
 
         /// <summary>
@@ -300,30 +305,38 @@ namespace Z0.Asm
 
         AsmOpCodeLookup OpCodes;
 
-        AsmSigLookup Sigs;
+        AsmSigLookup SigLookup;
 
         AsmFormLookup Forms;
 
+        SymbolTable<AsmMnemonicCode> Mnemonics;
 
-        static MsgPattern<Count,Count,Count> CollectedForms => "Collected {0} distinct opcodes, {1} distinct signatures and {2} distinct combined forms";
+        AsmSigs Sigs;
 
-        static MsgPattern<FS.FileUri> LoadingStatements => "Loading statements from {0}";
+        static MsgPattern<Count,Count,Count> CollectedForms
+            => "Collected {0} distinct opcodes, {1} distinct signatures and {2} distinct combined forms";
 
-        static MsgPattern<Count,FS.FileUri> LoadedStatments => "Loading {0} statements from {1}";
+        static MsgPattern<FS.FileUri> LoadingStatements
+            => "Loading statements from {0}";
 
-        static MsgPattern<Count,FS.FileUri> ProcessingStatments => "Processing {0} statements from {1}";
+        static MsgPattern<Count,FS.FileUri> LoadedStatments
+            => "Loading {0} statements from {1}";
 
-        static MsgPattern<Count,FS.FileUri> ProcessedStatements => "Processed {0} statements from {1}";
+        static MsgPattern<Count,FS.FileUri> ProcessingStatments
+            => "Processing {0} statements from {1}";
 
+        static MsgPattern<Count,FS.FileUri> ProcessedStatements
+            => "Processed {0} statements from {1}";
 
-        void ProcessStatements()
+        void ProcessStatements(Action<AsmStatementInfo>  receiver)
         {
             var distiller = Wf.AsmDistiller();
             var paths = distiller.Distillations();
             var flow = Wf.Running("Processing current statement set");
             OpCodes = AsmOpCodeLookup.create();
-            Sigs = AsmSigLookup.create();
+            SigLookup = AsmSigLookup.create();
             Forms = AsmFormLookup.create();
+            Mnemonics = SymbolStores.table<AsmMnemonicCode>();
             foreach(var path in paths)
             {
                 var loading = Wf.Running(LoadingStatements.Format(path));
@@ -332,21 +345,21 @@ namespace Z0.Asm
                 Wf.Ran(loading, LoadedStatments.Format(count,path));
 
                 var processing = Wf.Running(ProcessingStatments.Format(count,path));
-                ProcessStatements(data);
+                ProcessStatements(data,receiver);
                 Wf.Ran(processing,ProcessedStatements.Format(count,path));
             }
 
-            Wf.Ran(flow, CollectedForms.Format(OpCodes.Count, Sigs.Count, Forms.Count));
+            Wf.Ran(flow, CollectedForms.Format(OpCodes.Count, SigLookup.Count, Forms.Count));
             var sorted = Forms.Values.OrderBy(x => x.OpCode).Array();
             var pipe = AsmFormPipe.create(Wf);
             var target = Db.IndexTable<AsmFormRecord>();
             pipe.Emit(sorted,target);
         }
 
-
-        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src)
+        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src,Action<AsmStatementInfo>  receiver)
         {
             var count = src.Length;
+            var invalid = root.hashset<string>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(src,i);
@@ -354,9 +367,22 @@ namespace Z0.Asm
                     continue;
                 else
                 {
-                    OpCodes.AddIfMissing(statement.OpCode);
-                    Sigs.AddIfMissing(statement.Sig);
-                    Forms.AddIfMissing(asm.form(statement.OpCode, statement.Sig));
+                    var opcode = statement.OpCode;
+                    if(opcode.IsValid)
+                    {
+                        receiver(statement);
+                        // var mnemonic = statement.Mnemonic;
+                        // if(!Sigs.ParseMnemonicCode(mnemonic, out var mc))
+                        // {
+                        //     if(!invalid.Contains(mnemonic.Name))
+                        //     {
+                        //         Wf.Warn($"Mnemonic {mnemonic} not found for statement {statement.Expression}");
+                        //         invalid.Add(mnemonic.Name);
+                        //     }
+                        // }
+                        SigLookup.AddIfMissing(statement.Sig);
+                        Forms.AddIfMissing(asm.form(opcode, statement.Sig));
+                    }
                 }
             }
         }
@@ -414,6 +440,10 @@ namespace Z0.Asm
             }
         }
 
+
+        static string FormatAttributes(IXmlElement src)
+            => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
+
         void ConvertPdbXml()
         {
             var dir = Db.ToolOutDir(Toolsets.pdb2xml);
@@ -424,48 +454,26 @@ namespace Z0.Asm
             var dstPath = Db.AppDataFile(file.WithExtension(FS.Extensions.Log));
             using var writer = dstPath.Writer();
 
+            const string Pattern = "{0}/{1}:{2}";
 
             void HandleFiles(IXmlElement src)
-            {
-                var attributes = src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
-                writer.WriteLine(string.Format("file:{0}", attributes));
-            }
+                => writer.WriteLine(string.Format(Pattern, src.Ancestor, src.Name, FormatAttributes(src)));
 
-            void accept(IXmlPart part)
-            {
-                if(!part.IsWhitespace)
-                {
-                    var output = part.HasName
-                        ? string.Format("{0}:{1}={2}", part.Kind, part.Name, part.Value)
-                        : string.Format("{0}:{1}", part.Kind, part.Value);
-                    writer.WriteLine(output);
-                    if(part is IXmlElement e)
-                    {
-                        var attributes = e.Attributes;
-                        var count = attributes.Count;
-                        if(count != 0)
-                        {
-                            buffer.Clear();
-                            for(var i=0; i<count; i++)
-                            {
-                                var a = attributes[i];
-                                buffer.AppendFormat("{0}={1}", a.Name, a.Value);
-                                if(i != count - 1)
-                                    buffer.Append(", ");
-                            }
-                        }
-                        writer.WriteLine(string.Format(" Attributes:{0}", buffer.Emit()));
-                    }
-                }
-            }
+            void HandleMethods(IXmlElement src)
+                => writer.WriteLine(string.Format(Pattern, src.Ancestor, src.Name, FormatAttributes(src)));
+
+            void HandleSequencePointEntry(IXmlElement src)
+                => writer.WriteLine(string.Format(Pattern, src.Ancestor, src.Name, FormatAttributes(src)));
+
 
             var handlers = new ElementHandlers();
             handlers.AddHandler("file", HandleFiles);
+            handlers.AddHandler("method", HandleMethods);
+            handlers.AddHandler("entry", HandleMethods);
 
             var flow = Wf.EmittingFile(dstPath);
             using var xml = XmlSource.create(Wf, srcPath);
             xml.Read(handlers);
-            //xml.Read(accept);
             Wf.EmittedFile(flow);
         }
 
@@ -493,6 +501,10 @@ namespace Z0.Asm
 
         }
 
+        void ParseMnemonics()
+        {
+
+        }
         void HashPerfect()
         {
             HashPerfect(CollectFormExpressions());
@@ -510,18 +522,52 @@ namespace Z0.Asm
             //root.iter(methods, m => pipe.Render(m,buffer));
         }
 
+        void ProcessStatements()
+        {
+            var table = SymbolStores.table<AsmMnemonicCode>();
+            var counter = 0u;
+            var successes = root.hashset<AsmMnemonicCode>();
+            var failures = root.hashset<string>();
+
+            void Receive(AsmStatementInfo src)
+            {
+                counter++;
+
+                var symbol = src.Mnemonic.Name.ToLower();
+                if(table.TokenFromSymbol(symbol, out var t))
+                {
+                    successes.Add(t.Kind);
+                }
+                else
+                    failures.Add(symbol);
+            }
+
+            ProcessStatements(Receive);
+            Wf.Status($"From {counter} statements, discerned {successes.Count} distinct mnemonics and encountered {failures.Count} distinct failures: {failures.FormatList()}");
+
+        }
         public void Run()
         {
+            ProcessStatements();
+            // var symbols = SymbolStores.table<AsmMnemonicCode>();
+            // var tokens = symbols.Tokens;
+            // foreach(var token in tokens)
+            // {
+            //     Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", token.Index, token.Name, token.Symbol));
+            // }
+
             // var dst = span<char>(32);
             // var vsib = AsmBytes.vsib(0b11_100_111);
             // Wf.Status(AsmBytes.format(vsib));
 
-            var sigs = Wf.AsmSigs();
-            var monics = sigs.Mnemonics();
-            foreach(var m in monics.Tokens)
-            {
-                Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", m.Index, m.Name, m.Symbol));
-            }
+            //ProcessDistilledStatements();
+
+            // var sigs = Wf.AsmSigs();
+            // var monics = sigs.Mnemonics();
+            // foreach(var m in monics.Tokens)
+            // {
+            //     Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", m.Index, m.Name, m.Symbol));
+            // }
 
             //GenerateInstructions();
             //ConvertPdbXml();

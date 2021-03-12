@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    partial struct AsmCases
+    partial class AsmCases
     {
         /// <summary>
         /// Validates the integrity of the case itself

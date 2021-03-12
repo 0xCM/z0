@@ -49,7 +49,7 @@ namespace Z0.Asm
         void ShowSigOpTokens()
         {
             var tokens = AsmSigs.tokens();
-            root.iter(tokens, item => Wf.Row(item.Format()));
+            root.iter(tokens, item => Wf.Row(item.Symbol));
         }
 
         [Action(K.EmitApiClasses)]
