@@ -40,6 +40,12 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
+        public AsmMnemonic Mnemonic
+        {
+            [MethodImpl(Inline)]
+            get => Sig.Mnemonic;
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(AsmForm src)
             => OpCode == src.OpCode && Sig == src.Sig;

@@ -14,10 +14,11 @@ namespace Z0.Asm
 
     public class AsmDataFlows : WfService<AsmDataFlows>
     {
-        public void Submit(in AsmForm src)
+        public void Submit(in AsmForm src, AsmHexCode code)
         {
 
         }
+
         public class MovHandler : AsmHandler<MovHandler, Mov>
         {
             public override void Handle(Mov instruction)

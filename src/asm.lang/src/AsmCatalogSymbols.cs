@@ -23,10 +23,9 @@ namespace Z0.Asm
 
         internal AsmCatalogSymbols()
         {
-            _EFlags = SymbolTables.create<EFlag>(symbolize);
-            _Modes = SymbolTables.create<Mode>(symbolize);
+            _EFlags = SymbolStores.table<EFlag>();
+            _Modes = SymbolStores.table<Mode>();
         }
-
 
         public ReadOnlySpan<Token<Mode>> Modes
             => _Modes.Tokens;
@@ -36,31 +35,35 @@ namespace Z0.Asm
 
         public enum Mode : byte
         {
-            None,
-
+            [Symbol("V")]
             Valid,
 
+            [Symbol("I")]
             Invalid,
 
+            [Symbol("NE")]
             NE,
         }
 
         public enum EFlag : byte
         {
-            None,
-
+            [Symbol("E.OF")]
             OF,
 
+            [Symbol("E.SF")]
             SF,
 
+            [Symbol("E.ZF")]
             ZF,
 
+            [Symbol("E.AF")]
             AF,
 
+            [Symbol("E.CF")]
             CF,
 
+            [Symbol("E.PF")]
             PF,
-
         }
 
         [Op]

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct Tokens<I,K,S> : IIndex<I,Token<K,S>>
         where K : unmanaged
@@ -23,7 +24,7 @@ namespace Z0
         public ref Token<K,S> this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[memory.@as<I,uint>(index)];
+            get => ref Data[@as<I,uint>(index)];
         }
 
         public ReadOnlySpan<Token<K,S>> View

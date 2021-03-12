@@ -38,6 +38,5 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static bool IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => skip(src,offset) == 0xE8 && (offset + 4) <= src.Length;
-
     }
 }

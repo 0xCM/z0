@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The component that defines the literal
         /// </summary>
-        public Name Component;
+        public ClrAssemblyName Component;
 
         /// <summary>
         /// The literal's declaring type
@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// The symbol, if so attributed, otherwise, the identifier
         /// </summary>
-        public TextBlock Symbol;
+        public string Symbol;
 
         [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral<E> src)

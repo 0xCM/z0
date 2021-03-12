@@ -12,6 +12,8 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
+        const string MonicSymbolPattern = "[Symbol(\"{0}\")]";
+
         readonly struct MonicEnumModel
         {
             readonly Index<AsmMnemonic> Monics;
@@ -39,6 +41,7 @@ namespace Z0.Asm
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var monic = ref skip(src,i);
+                    buffer.IndentLine(margin, string.Format(MonicSymbolPattern, monic.Name.ToLower()));
                     buffer.IndentLine(margin, string.Format("{0} = {1},", monic.Name, i+1));
                     buffer.AppendLine();
                 }

@@ -164,7 +164,7 @@ namespace Z0.Asm
         [Action(K.ShowSigOpSymbols)]
         void ShowSigOpSymbols()
         {
-            var symbols = Wf.AsmSigServices().SigOpSymbols();
+            var symbols = Wf.AsmSigs().SigOpSymbols();
             foreach(var token in symbols.Tokens)
             {
                 Wf.Row(token);
@@ -174,7 +174,7 @@ namespace Z0.Asm
         [Action(K.ShowSigOpComposites)]
         void ShowSigOpComposites()
         {
-            var symbols = Wf.AsmSigServices().CompositeSymbols();
+            var symbols = Wf.AsmSigs().CompositeSymbols();
             foreach(var token in symbols.Tokens)
             {
                 Wf.Row(token);

@@ -355,10 +355,5 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("k1")]
         K1,
-
-        RegClass = P2ᐞ08,
-
-
-        ImmClass = P2ᐞ11,
     }
 }

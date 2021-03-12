@@ -31,13 +31,13 @@ namespace Z0.Asm
         {
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
-            MnemonicCodes = SymbolTables.create<AsmMnemonicCode>();
+            MnemonicCodes = SymbolStores.table<AsmMnemonicCode>();
             CatalogSymbols = AsmCatalogSymbols.create();
         }
 
         protected override void OnInit()
         {
-            Sigs = Wf.AsmSigServices();
+            Sigs = Wf.AsmSigs();
         }
 
         public uint ImportRowCount {get; private set;}

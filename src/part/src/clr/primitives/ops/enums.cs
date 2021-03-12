@@ -18,26 +18,6 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [Op]
-        public static Index<SymbolicLiteral> enums(Type src)
-        {
-            var fields = span(src.LiteralFields());
-            var dst = alloc<SymbolicLiteral>(fields.Length);
-            fill(src, kind(src), fields, dst);
-            return dst;
-        }
-
-        [Op]
-        public static Index<SymbolicLiteral<E>> enums<E>()
-            where E : unmanaged, Enum
-        {
-            var src = typeof(E);
-            var fields = span(src.LiteralFields());
-            var dst = alloc<SymbolicLiteral<E>>(fields.Length);
-            fill(src, kind(src), fields, span(dst));
-            return dst;
-        }
-
-        [Op]
         public static ulong encode(ClrPrimalKind kind, object src)
             => kind switch {
                 EC.U8 => (ulong)(byte)src,
@@ -70,30 +50,6 @@ namespace Z0
                 row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
                 row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
                 row.EncodedValue = encode(kind, f.GetRawConstantValue());
-            }
-        }
-
-        [Op]
-        static void fill<E>(Type type, ClrPrimalKind kind, ReadOnlySpan<FieldInfo> fields, Span<SymbolicLiteral<E>> dst)
-            where E : unmanaged, Enum
-        {
-            ClrAssemblyName assname = type.Assembly;
-            var count = fields.Length;
-            var typeAddress = type.TypeHandle.Value;
-            var simple = assname.SimpleName;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var f = ref skip(fields,i);
-                ref var row = ref seek(dst,i);
-                row.Position = (ushort)i;
-                row.Component = simple;
-                row.Type = type.Name;
-                row.DataType = kind;
-                row.Name = f.Name;
-                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
-                row.UniqueName = SymbolicLiterals.identity(simple, type.Name, row.Position, f.Name);
-                row.DirectValue = (E)f.GetRawConstantValue();
-                row.EncodedValue = encode(kind, row.DirectValue);
             }
         }
     }

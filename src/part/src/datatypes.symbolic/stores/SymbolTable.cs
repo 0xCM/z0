@@ -24,11 +24,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Contains(TextBlock symbol)
+        public bool Contains(string symbol)
             => Keys.ContainsKey(symbol);
 
         [MethodImpl(Inline)]
-        public bool Index(TextBlock symbol, out uint index)
+        public bool Index(string symbol, out uint index)
         {
             if(Keys.TryGetValue(symbol, out var token))
             {
@@ -40,13 +40,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public bool Token(string symbol, out Token<T> dst)
+            => Keys.TryGetValue(symbol, out dst);
+
+        [MethodImpl(Inline)]
         public ref readonly Token<T> Token(uint index)
             => ref Data[index];
 
-        public ReadOnlySpan<Token<T>> Tokens
+        public Index<Token<T>> Tokens
         {
             [MethodImpl(Inline)]
-            get => Data.View;
+            get => Data;
         }
 
         public Index<string> Symbols

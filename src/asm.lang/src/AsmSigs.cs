@@ -10,7 +10,6 @@ namespace Z0.Asm
 
     using static Part;
     using static Chars;
-    using static AsmExpr;
     using static memory;
     using static Rules;
     using static TextRules;
@@ -37,6 +36,8 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmSigCompositeKind> _Composites;
 
+        readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
+
         [MethodImpl(Inline), Op]
         public static AsmMnemonicCode monicode(string src)
             => Enums.parse(src, AsmMnemonicCode.None);
@@ -44,10 +45,11 @@ namespace Z0.Asm
         public AsmSigs()
         {
             _SigOpTokens = tokens();
-            _SigOpSymbols = SymbolTables.create(_SigOpTokens);
-            _Composites = SymbolTables.create<AsmSigCompositeKind>();
+            _SigOpSymbols = SymbolStores.table(_SigOpTokens);
+            _Composites = SymbolStores.table<AsmSigCompositeKind>();
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
+            _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
         }
 
         public SymbolTable<AsmSigCompositeKind> CompositeSymbols()
@@ -56,10 +58,13 @@ namespace Z0.Asm
         public SymbolTable<AsmSigOpKind> SigOpSymbols()
             => _SigOpSymbols;
 
+        public SymbolTable<AsmMnemonicCode> Mnemonics()
+            => _Mnemonics;
+
         [MethodImpl(Inline), Op]
         public ref readonly Token<AsmSigOpKind> Token(AsmSigOpKind kind)
         {
-            if(kind <= AsmSigOpKindFacets.LastClass)
+            if((ushort)kind <= AsmSigOpKindFacets.LastClass)
                 return ref _SigOpTokens[(byte)kind];
             else
                 return ref _SigOpTokens[0];
@@ -79,7 +84,6 @@ namespace Z0.Asm
                 return false;
             }
         }
-
 
         [Op]
         public bool IsDigit(AsmOpCodeExpr src)
@@ -159,17 +163,9 @@ namespace Z0.Asm
         [Op]
         public static Index<Token<AsmSigOpKind>> tokens()
         {
-            var details = ClrEnums.details<AsmSigOpKind,ushort>().View;
-            var count = AsmSigOpKindFacets.IdentifierCount + 1;
-            var buffer = alloc<Token<AsmSigOpKind>>(count);
-            ref var dst = ref first(buffer);
-            for(byte i=1; i<count; i++)
-            {
-                ref readonly var detail = ref skip(details,i);
-                var symbol = detail.Field.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, detail.Field.Name);
-                seek(dst,i) = Tokens.token(i, detail.Name, detail.LiteralValue, symbol);
-            }
-            return buffer;
+            var symbols = SymbolStores.table<AsmSigOpKind>();
+            return symbols.Tokens;
+
         }
     }
 }

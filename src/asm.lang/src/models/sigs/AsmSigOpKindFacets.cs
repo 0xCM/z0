@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static Pow2x16;
+
     [LiteralProvider]
     public readonly struct AsmSigOpKindFacets
     {
@@ -13,8 +15,8 @@ namespace Z0.Asm
 
         public const byte IdentifierCount = (byte)MaxId - (byte)MinId + 1;
 
-        public const AsmSigOpKind FirstClass = AsmSigOpKind.RegClass;
+        public const ushort FirstClass = (ushort)P2ᐞ08;
 
-        public const AsmSigOpKind LastClass = AsmSigOpKind.ImmClass;
+        public const ushort LastClass = (ushort)P2ᐞ11;
     }
 }

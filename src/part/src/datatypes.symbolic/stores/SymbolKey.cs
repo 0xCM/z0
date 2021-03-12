@@ -9,20 +9,20 @@ namespace Z0
 
     using static Part;
 
-    /// <summary>
-    /// Defines an item selection
-    /// </summary>
-    public readonly struct SymbolicChoice<T>
-        where T : unmanaged
+    public readonly struct SymbolKey
     {
-        public T Chosen {get;}
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public SymbolicChoice(T chosen)
-            => Chosen = chosen;
+        public SymbolKey(ulong value)
+            => Value = value;
 
         [MethodImpl(Inline)]
-        public static implicit operator SymbolicChoice<T>(T src)
-            => new SymbolicChoice<T>(src);
+        public bool Equals(SymbolKey<ulong> src)
+            => Value == src.Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator SymbolKey(ulong value)
+            => new SymbolKey(value);
     }
 }

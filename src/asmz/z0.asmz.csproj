@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmLang)" />
+    <ProjectReference Include="$(AsmCore)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Tools)" />

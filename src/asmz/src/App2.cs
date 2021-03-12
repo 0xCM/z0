@@ -516,7 +516,14 @@ namespace Z0.Asm
             // var vsib = AsmBytes.vsib(0b11_100_111);
             // Wf.Status(AsmBytes.format(vsib));
 
-            GenerateInstructions();
+            var sigs = Wf.AsmSigs();
+            var monics = sigs.Mnemonics();
+            foreach(var m in monics.Tokens)
+            {
+                Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", m.Index, m.Name, m.Symbol));
+            }
+
+            //GenerateInstructions();
             //ConvertPdbXml();
             // var commands = Wf.AsmWfCmd();
             // commands.Run(AsmWfCmdKind.EmitAsmRows);
