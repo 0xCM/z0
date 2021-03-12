@@ -59,7 +59,6 @@ namespace Z0
         }
     }
 
-
     public interface IEvaluator
     {
         Outcome<dynamic> Evaluate(params dynamic[] src);

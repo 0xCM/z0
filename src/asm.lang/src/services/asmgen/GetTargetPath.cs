@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
 
     using static Part;
-    using static memory;
 
     partial class AsmGen
     {

@@ -26,21 +26,6 @@ namespace Z0
             => Define(string.Empty);
 
         /// <summary>
-        /// Just the one
-        /// </summary>
-        FolderPath[] One
-            => new FolderPath[]{this};
-
-        /// <summary>
-        /// The name of the folder sans path
-        /// </summary>
-        public FolderName FolderName
-        {
-            [MethodImpl(Inline)]
-            get => new FolderName(Directory.GetParent(Name).Name);
-        }
-
-        /// <summary>
         /// Creates a folder path directly from text, with no intervening manipulation
         /// </summary>
         /// <param name="name">The source path</param>
@@ -86,118 +71,11 @@ namespace Z0
         public bool Exists
             => Directory.Exists(Name);
 
-        public FolderPath Normalize()
-            => new FolderPath(Name.Replace(Chars.BSlash, Chars.FSlash));
-
-        /// <summary>
-        /// Nonrecursively enumerates the folder's subfolders
-        /// </summary>
-        public FolderPath[] SubDirs
-            => Directory.Exists(Name)
-            ? Directory.EnumerateDirectories(Name).Map(FolderPath.Define)
-            : sys.empty<FolderPath>();
-
-        /// <summary>
-        /// Nonrecursively enumerates all files in the folder
-        /// </summary>
-        public FilePath[] AllFiles
-            => Exists ? Directory.EnumerateFiles(Name).Map(FilePath.Define) : sys.empty<FilePath>();
-
         /// <summary>
         /// The folder path sans trailing separator
         /// </summary>
         public FolderPath WithoutSeparatorSuffix
             => Define(Path.TrimEndingDirectorySeparator(Name));
-
-        /// <summary>
-        /// Nonrecursively enumerates files in the directory, if it exists, that match a specified extension
-        /// </summary>
-        /// <param name="ext">The extension to match</param>
-        public FilePath[] Files(FileExtension ext)
-            => Exists.IfSome(() => Directory.GetFiles(Name, ext.SearchPattern).Map(FilePath.Define), FilePath.None);
-
-        public FilePath[] Files(string pattern, SearchOption options)
-            =>  Directory.EnumerateFiles(Name, pattern, options).Select(x => FilePath.Define(pattern)).Array();
-
-        public FilePath[] Files(string pattern = null)
-            =>  Directory.EnumerateFiles(Name, pattern ?? "*.*").Select(x => FilePath.Define(x)).Array();
-
-        public FilePath[] Files(FileName name)
-            => Exists.IfSome(() => Directory.GetFiles(Name, $"{name}").Map(FilePath.Define), FilePath.None);
-
-        /// <summary>
-        /// Nonrecursively enumerates part-owned folder files
-        /// </summary>
-        /// <param name="part">The owning part</param>
-        /// <param name="ext">The extension to match</param>
-        public FilePath[] Files(PartId part, FileExtension ext)
-            => Files(ext).Where(f => f.OwnedBy(part));
-
-        /// <summary>
-        /// Nonrecursively enumerates host-owned folder files
-        /// </summary>
-        /// <param name="part">The owning part</param>
-        /// <param name="ext">The extension to match</param>
-        public FilePath[] Files(ApiHostUri host, FileExtension ext)
-            => Files(ext).Where(f => f.HostedBy(host));
-
-        /// <summary>
-        /// Enumerates files in the folder, with optional recursion, that match a specified extension
-        /// </summary>
-        /// <param name="ext">The extension to match</param>
-        /// <param name="recursive">Whether to enumerate recursively</param>
-        public IEnumerable<FilePath> Files(FileExtension ext, bool recursive)
-            => recursive ? Recurse(ext) : Files(ext);
-
-        /// <summary>
-        /// Enumerates files in the folder, with optional recursion, that match a specified extension
-        /// </summary>
-        /// <param name="ext">The extension to match</param>
-        /// <param name="recursive">Whether to enumerate recursively</param>
-        public IEnumerable<FilePath> Files(FileName name, bool recursive)
-            => recursive ? Recurse(name) : Files(name);
-
-        /// <summary>
-        /// Nonrecursively enumerates folder files owned by a specified part
-        /// </summary>
-        /// <param name="part">The owning part</param>
-        public FilePath[] Files(PartId part)
-            => AllFiles.Where(f => f.OwnedBy(part));
-
-        /// <summary>
-        /// Nonrecursively Enumerates folder files that match a specified extension and with names that contain a specified substring
-        /// </summary>
-        /// <param name="substring">The substring to match</param>
-        public FilePath[] Files(FileExtension ext, string substring)
-            => Files(ext).Where(f => f.FileName.Name.Contains(substring));
-
-        /// <summary>
-        /// Enumerates the files in the folder, with optional recursion, owned by a specified parth and which match a specified extension
-        /// </summary>
-        /// <param name="part">The owning part</param>
-        /// <param name="ext">The extension to match</param>
-        /// <param name="recursive">Whether to enumerate recursively</param>
-        public IEnumerable<FilePath> Files(PartId part, FileExtension ext, bool recursive)
-            => recursive ? Recurse(part, ext)
-                : from f in Files(ext)
-                  where f.OwnedBy(part)
-                  select f;
-
-        IEnumerable<FilePath> Recurse(FileExtension ext)
-            => from d in (One).Union(SubDirs)
-               from f in d.Files(ext)
-                  select f;
-
-        IEnumerable<FilePath> Recurse(PartId owner, FileExtension ext)
-            => from d in (One).Union(SubDirs)
-               from f in d.Files(ext)
-                where f.OwnedBy(owner)
-               select f;
-
-        IEnumerable<FilePath> Recurse(FileName name)
-            => from d in (One).Union(SubDirs)
-               from f in d.Files(name)
-                  select f;
 
         [MethodImpl(Inline)]
         public bool Equals(FolderPath src)

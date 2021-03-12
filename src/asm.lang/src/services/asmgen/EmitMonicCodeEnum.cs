@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     partial class AsmGen
     {
         void EmitMonicEnum(Index<AsmMnemonic> src)

@@ -18,20 +18,16 @@ namespace Z0
         /// Describes the sort of file identified by the extension
         /// </summary>
         public string Description {get;}
-        
-        public string SearchPattern 
+
+        public string SearchPattern
             => (IsEmpty || IsWildcard) ? "*.*" : $"*{Name}";
-        
+
         public bool IsWildcard
             => Name.Contains("*.*");
 
         [MethodImpl(Inline)]
         public static FileExtension Define(string name)
             => new FileExtension(name);
-
-        [MethodImpl(Inline)]
-        public static FileExtension Define(string name, string description)
-            => new FileExtension(name, description);
 
         public FileExtension()
         {
@@ -43,13 +39,6 @@ namespace Z0
             : base(name)
         {
             Description = string.Empty;
-        }
-
-        [MethodImpl(Inline)]
-        public FileExtension(string name, string description)
-            : base(name)
-        {
-            Description = description;
         }
     }
 }

@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
+
     public readonly struct FileSplitInfo
     {
         public FileSplitSpec Spec {get;}
@@ -15,6 +17,7 @@ namespace Z0
 
         public Count TotalLineCount {get;}
 
+        [MethodImpl(Inline)]
         public FileSplitInfo(FileSplitSpec spec, FS.Files dst, Count total)
         {
             Spec = spec;

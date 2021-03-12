@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly struct DigitParserCase : ITextual
     {
@@ -31,6 +30,5 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
     }
 }

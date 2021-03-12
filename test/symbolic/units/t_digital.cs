@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public class t_digital : t_symbolic<t_digital>
     {
@@ -46,9 +47,20 @@ namespace Z0
             var b6 = Digital.bits(n6);
             var b7 = Digital.bits(n7);
             var b8 = Digital.bits(n8);
-
-
         }
 
+
+        public void t_digit_parser()
+        {
+            ReadOnlySpan<char> input = "0123456789ABCDEF";
+            var count = input.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var c = ref skip(input,i);
+                DigitParser.digit(@base16, c, out var d);
+                var s = Digital.symbol(UpperCase, d);
+                Claim.eq((char)s, c);
+            }
+        }
     }
 }

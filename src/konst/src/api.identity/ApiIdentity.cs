@@ -76,42 +76,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiClass kind(in ApiArtifactKey src)
-            => (ApiClass)cpu.vcell(src.Data, KeyIndex);
-
-        [MethodImpl(Inline), Op]
-        public static PartId part(in ApiArtifactKey src)
-            => (PartId)cpu.vcell(src.Data, PartIndex);
-
-        /// <summary>
-        /// Creates a <see cref='ApiArtifactKey'/> that identifies a specified method
-        /// </summary>
-        /// <param name="src">The source method</param>
-        [MethodImpl(Inline), Op]
-        public static ApiArtifactKey artifact(MethodInfo src)
-        {
-            var host = src.DeclaringType;
-            return new ApiArtifactKey(cpu.vparts(w128, (uint)host.Assembly.Id(), (uint)host.MetadataToken, (uint)src.KindId(), (uint)src.MetadataToken));
-        }
-
-        [MethodImpl(Inline), Op]
-        public static bool eq(in ApiArtifactKey a,in ApiArtifactKey b)
-            => a.Data.Equals(b.Data);
-
-        [MethodImpl(Inline), Op]
         public static string identifier(ApiClass src)
             => string.Format("{0}", src != 0 ? src.Format() : "unkinded");
 
         [MethodImpl(Inline), Op]
         public static string identifier(PartId src)
             => src.Format();
-
-        [Op]
-        public static string identifier(in ApiArtifactKey src)
-            => string.Format(IdentifierPattern, identifier(src.Part), identifier(src.KindKey), src.HostId, src.OperationId);
-
-        [Op]
-        public static string format(in ApiArtifactKey src)
-            => string.Format(ArtifactPattern, identifier(src.Part), identifier(src.KindKey), src.HostId, src.OperationId);
     }
 }
