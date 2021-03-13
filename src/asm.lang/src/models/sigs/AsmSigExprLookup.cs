@@ -10,13 +10,13 @@ namespace Z0.Asm
 
     using static Part;
 
-    public sealed class AsmSigLookup : Dictionary<string,AsmSig>
+    public sealed class AsmSigExprLookup : Dictionary<string,AsmSigExpr>
     {
-        public static AsmSigLookup create()
-            => new AsmSigLookup();
+        public static AsmSigExprLookup create()
+            => new AsmSigExprLookup();
 
         [MethodImpl(Inline)]
-        public void AddIfMissing(AsmSig src)
+        public void AddIfMissing(AsmSigExpr src)
             => TryAdd(src.Format(), src);
     }
 }

@@ -49,13 +49,13 @@ namespace Z0.Asm
 
         AsmServices AsmServices;
 
-
         public void GenerateInstructions()
         {
             var monics = Catalog.Mnemonics();
             var gen = AsmGen.create(Wf);
             gen.GenerateModels(monics);
         }
+
         public void GenBits()
         {
             var factory = BitStoreFactory.create(Wf);
@@ -305,7 +305,7 @@ namespace Z0.Asm
 
         AsmOpCodeLookup OpCodes;
 
-        AsmSigLookup SigLookup;
+        AsmSigExprLookup SigLookup;
 
         AsmFormLookup Forms;
 
@@ -334,7 +334,7 @@ namespace Z0.Asm
             var paths = distiller.Distillations();
             var flow = Wf.Running("Processing current statement set");
             OpCodes = AsmOpCodeLookup.create();
-            SigLookup = AsmSigLookup.create();
+            SigLookup = AsmSigExprLookup.create();
             Forms = AsmFormLookup.create();
             Mnemonics = SymbolStores.table<AsmMnemonicCode>();
             foreach(var path in paths)
@@ -371,15 +371,6 @@ namespace Z0.Asm
                     if(opcode.IsValid)
                     {
                         receiver(statement);
-                        // var mnemonic = statement.Mnemonic;
-                        // if(!Sigs.ParseMnemonicCode(mnemonic, out var mc))
-                        // {
-                        //     if(!invalid.Contains(mnemonic.Name))
-                        //     {
-                        //         Wf.Warn($"Mnemonic {mnemonic} not found for statement {statement.Expression}");
-                        //         invalid.Add(mnemonic.Name);
-                        //     }
-                        // }
                         SigLookup.AddIfMissing(statement.Sig);
                         Forms.AddIfMissing(asm.form(opcode, statement.Sig));
                     }
@@ -439,7 +430,6 @@ namespace Z0.Asm
                 Wf.EmittedFile(flow);
             }
         }
-
 
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
@@ -505,6 +495,7 @@ namespace Z0.Asm
         {
 
         }
+
         void HashPerfect()
         {
             HashPerfect(CollectFormExpressions());
@@ -548,13 +539,10 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            ProcessStatements();
-            // var symbols = SymbolStores.table<AsmMnemonicCode>();
-            // var tokens = symbols.Tokens;
-            // foreach(var token in tokens)
-            // {
-            //     Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", token.Index, token.Name, token.Symbol));
-            // }
+            var commands = Wf.AsmWfCmd();
+            commands.Run(AsmWfCmdKind.ShowSigSymbols);
+
+            //ProcessStatements();
 
             // var dst = span<char>(32);
             // var vsib = AsmBytes.vsib(0b11_100_111);
@@ -562,12 +550,6 @@ namespace Z0.Asm
 
             //ProcessDistilledStatements();
 
-            // var sigs = Wf.AsmSigs();
-            // var monics = sigs.Mnemonics();
-            // foreach(var m in monics.Tokens)
-            // {
-            //     Wf.Row(string.Format("{0,-8} | {1,-16} | {2,-16}", m.Index, m.Name, m.Symbol));
-            // }
 
             //GenerateInstructions();
             //ConvertPdbXml();

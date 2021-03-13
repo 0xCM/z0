@@ -10,13 +10,13 @@ namespace Z0.Asm
 
     using static Part;
 
-    public sealed class AsmFormLookup : Dictionary<string,AsmForm>
+    public sealed class AsmFormLookup : Dictionary<string,AsmFormExpr>
     {
         public static AsmFormLookup create()
             => new AsmFormLookup();
 
         [MethodImpl(Inline)]
-        public void AddIfMissing(AsmForm src)
+        public void AddIfMissing(AsmFormExpr src)
             => TryAdd(src.Expression, src);
     }
 }

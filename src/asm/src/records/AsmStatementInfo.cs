@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public AsmOpCodeExpr OpCode;
 
-		public AsmSig Sig;
+		public AsmSigExpr Sig;
 
         public AsmStatementExpr Expression;
 

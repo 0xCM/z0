@@ -12,12 +12,12 @@ namespace Z0.Asm
     partial struct asm
     {
         /// <summary>
-        /// Defines a <see cref='AsmSigOperand'/>
+        /// Defines a <see cref='AsmSigOperandExpr'/>
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOperand sigop(string src)
-            => new AsmSigOperand(src);
+        public static AsmSigOperandExpr sigop(string src)
+            => new AsmSigOperandExpr(src);
 
     }
 }

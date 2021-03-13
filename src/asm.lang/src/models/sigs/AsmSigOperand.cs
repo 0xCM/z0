@@ -9,61 +9,24 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmSigOperand : ITextExpr<AsmSigOperand>
+    /// <summary>
+    /// Represents an operand in the context of an instruction signature
+    /// </summary>
+    public readonly struct AsmSigOperand
     {
-        readonly TextBlock Data;
+        public Identifier Name {get;}
+
+        public AsmSigOpKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(string src)
-            => Data = src;
-
-        public string Content
+        public AsmSigOperand(Identifier name, AsmSigOpKind kind)
         {
-            [MethodImpl(Inline)]
-            get => Data.Text;
+            Name  = name;
+            Kind = kind;
         }
-
-        public int Length
-        {
-            [MethodImpl(Inline)]
-            get => Data.Length;
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
-        }
-
-        public override int GetHashCode()
-            => Data.GetHashCode();
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Data.Format();
-
-        public override string ToString()
-            => Format();
-
-        [MethodImpl(Inline)]
-        public bool Equals(AsmSigOperand src)
-            => Data.Equals(src.Data);
-
-        public override bool Equals(object src)
-            => src is AsmSigOperand x && Equals(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmSigOperand(string src)
-            => new AsmSigOperand(src);
-
-        public static AsmSigOperand Empty
-            => new AsmSigOperand(EmptyString);
+        public static implicit operator AsmSigOperand((string name, AsmSigOpKind kind) src)
+            => new AsmSigOperand(src.name, src.kind);
     }
-
 }

@@ -5,14 +5,11 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial struct asm
+    readonly struct JmpFacets
     {
-        [MethodImpl(Inline), Op]
-        public static AsmFormExpr form(AsmOpCodeExpr op, AsmSigExpr sig)
-            => new AsmFormExpr(op, sig);
+        public const ulong JMP = 1;
+
+        public const ulong JCC = 2;
     }
 }

@@ -46,8 +46,8 @@ namespace Z0
                 var symbol = symbolizer(literal.DirectValue);
                 literal.Symbol = symbolizer(literal.DirectValue);
                 seek(dst, i) = new Token<E>(literal);
-                index.Add(skip(dst,i).Symbol, skip(dst, i));
-                identifiers.Add(skip(dst,i).Name, skip(dst,i));
+                index.Add(skip(dst,i).SymbolText, skip(dst, i));
+                identifiers.Add(skip(dst,i).Identifier, skip(dst,i));
             }
             return new SymbolTable<E>(entries, identifiers, index);
         }
@@ -65,8 +65,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 seek(dst, i) = new Token<E>(skip(view, i));
-                symbols.Add(seek(dst,i).Symbol, skip(dst, i));
-                identifiers.Add(skip(dst,i).Name, skip(dst,i));
+                symbols.Add(seek(dst,i).SymbolText, skip(dst, i));
+                identifiers.Add(skip(dst,i).Identifier, skip(dst,i));
             }
             return new SymbolTable<E>(buffer, identifiers, symbols);
         }
@@ -81,8 +81,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref skip(view, i);
-                index.Add(token.Symbol, token);
-                identifiers.Add(skip(view,i).Name, token);
+                index.Add(token.SymbolText, token);
+                identifiers.Add(skip(view,i).Identifier, token);
             }
             return new SymbolTable<E>(src, identifiers, index);
         }

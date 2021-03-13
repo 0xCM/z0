@@ -19,21 +19,26 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal SymbolName(IToken<S> src)
-        {
-            Token = src;
-        }
+            => Token = src;
 
         public Identifier Identifier
         {
             [MethodImpl(Inline)]
-            get => Token?.Name ?? EmptyString;
+            get => Token.Identifier;
         }
 
-        public string SymbolText
+        public TextBlock SymbolText
         {
             [MethodImpl(Inline)]
-            get => Token?.Symbol ?? EmptyString;
+            get => Token.SymbolText;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => SymbolText;
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolName<S>(Token<S> src)

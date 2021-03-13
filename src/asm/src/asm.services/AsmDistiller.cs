@@ -122,7 +122,7 @@ namespace Z0.Asm
             else
             {
                 dst.OpCode = AsmOpCodeExpr.Empty;
-                dst.Sig = AsmSig.Empty;
+                dst.Sig = AsmSigExpr.Empty;
                 dst.Expression = AsmStatementExpr.Empty;
                 dst.Encoded = AsmHexCode.Empty;
             }

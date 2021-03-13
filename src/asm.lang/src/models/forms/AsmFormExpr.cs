@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmForm
+    public readonly struct AsmFormExpr
     {
         public AsmOpCodeExpr OpCode {get;}
 
-        public AsmSig Sig {get;}
+        public AsmSigExpr Sig {get;}
 
         [MethodImpl(Inline)]
-        internal AsmForm(AsmOpCodeExpr opcode, AsmSig sig)
+        internal AsmFormExpr(AsmOpCodeExpr opcode, AsmSigExpr sig)
         {
             OpCode = opcode;
             Sig = sig;
@@ -47,11 +47,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmForm src)
+        public bool Equals(AsmFormExpr src)
             => OpCode == src.OpCode && Sig == src.Sig;
 
         public override bool Equals(object src)
-            => src is AsmForm x && Equals(x);
+            => src is AsmFormExpr x && Equals(x);
 
         public override int GetHashCode()
             => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
@@ -62,8 +62,8 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static AsmForm Empty
-            => new AsmForm(AsmOpCodeExpr.Empty, AsmSig.Empty);
+        public static AsmFormExpr Empty
+            => new AsmFormExpr(AsmOpCodeExpr.Empty, AsmSigExpr.Empty);
     }
 
 }

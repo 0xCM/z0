@@ -6,12 +6,10 @@ namespace Z0.Asm
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
     using static TextRules;
-    using static AsmExpr;
 
     public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
     {
@@ -32,7 +30,7 @@ namespace Z0.Asm
             SourceFormat = TextDocFormat.Structured(AsmCatDelimiter, false);
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicCodes = SymbolStores.table<AsmMnemonicCode>();
-            CatalogSymbols = AsmCatalogSymbols.create();
+            CatalogSymbols = AsmSigSymbols.load();
         }
 
         protected override void OnInit()
@@ -45,7 +43,7 @@ namespace Z0.Asm
         public ReadOnlySpan<Token<AsmMnemonicCode>> MnemonicSymbols()
             => MnemonicCodes.Tokens;
 
-        public AsmCatalogSymbols CatalogSymbols {get;}
+        public AsmSigSymbols CatalogSymbols {get;}
 
         public Index<AsmMnemonicInfo> MnemonicInfo()
         {
@@ -243,7 +241,7 @@ namespace Z0.Asm
             return imports;
         }
 
-        public void Emit(ReadOnlySpan<AsmForm> src)
+        public void Emit(ReadOnlySpan<AsmFormExpr> src)
         {
             AsmFormPipe.create(Wf).Emit(src, Db.Table<AsmFormRecord>(TargetFolder));
         }
@@ -252,11 +250,11 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the forms present in the catalog
         /// </summary>
-        public ReadOnlySpan<AsmForm> CatalogedForms()
+        public ReadOnlySpan<AsmFormExpr> CatalogedForms()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
-            var buffer = span<AsmForm>(count);
+            var buffer = span<AsmFormExpr>(count);
             var sigs = AsmSigs.create(Wf);
             var j=0u;
             var k=0u;
@@ -268,7 +266,7 @@ namespace Z0.Asm
                     seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {
-                    seek(buffer, k++) = AsmForm.Empty;
+                    seek(buffer, k++) = AsmFormExpr.Empty;
                     Wf.Warn($"The opcode row {row.OpCode} could not be parsed");
                 }
             }

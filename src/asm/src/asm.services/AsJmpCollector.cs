@@ -52,9 +52,6 @@ namespace Z0.Asm
                 case IceMnemonic.Jle:
                     kind = JccKind.JLE;
                     break;
-                case IceMnemonic.Jmp:
-                    kind = JccKind.JMP;
-                    break;
                 case IceMnemonic.Jne:
                     kind = JccKind.JNE;
                     break;

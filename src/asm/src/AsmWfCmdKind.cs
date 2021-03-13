@@ -17,8 +17,6 @@ namespace Z0.Asm
 
         ExportStokeImports,
 
-        ShowSigOpTokens,
-
         [Alias("show-monics")]
         ShowMnemonicSymbols,
 
@@ -36,7 +34,8 @@ namespace Z0.Asm
         [Alias("correlate-api")]
         CorrelateApiCode,
 
-        ShowCatalogSymbols,
+        [Alias("show-sig-symbols")]
+        ShowSigSymbols,
 
         [Alias("emit-resbytes")]
         EmitResBytes,
@@ -45,13 +44,9 @@ namespace Z0.Asm
 
         CheckDigitParser,
 
-        ShowSigOpSymbols,
+        [Alias("emit-asm-rows")]
+        EmitAsmRows,
 
-        ShowSigOpComposites,
-
-       [Alias("emit-asm-rows")]
-       EmitAsmRows,
-
-       EmitLegacyOpCodes,
+        EmitLegacyOpCodes,
     }
 }

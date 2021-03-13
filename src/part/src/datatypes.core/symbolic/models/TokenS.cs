@@ -29,7 +29,7 @@ namespace Z0
             get => Literal.Position;
         }
 
-        public Identifier Name
+        public Identifier Identifier
         {
             [MethodImpl(Inline)]
             get => Literal.Name;
@@ -47,13 +47,19 @@ namespace Z0
             get => Literal.UniqueName;
         }
 
+        public SymbolName<K> SymbolName
+        {
+            [MethodImpl(Inline)]
+            get => new SymbolName<K>(this);
+        }
+
         public K Kind
         {
             [MethodImpl(Inline)]
             get => Literal.DirectValue;
         }
 
-        public TextBlock Symbol
+        public TextBlock SymbolText
         {
             [MethodImpl(Inline)]
             get => Literal.Symbol;
@@ -70,6 +76,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Index != 0;
         }
+
+        public string Format()
+            => string.Format("{0,-24} | {1,-8} | {2,-12} | {3}", typeof(K).Name, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol));
+
+        public override string ToString()
+            => Format();
 
         public static Token<K> Empty => default;
     }

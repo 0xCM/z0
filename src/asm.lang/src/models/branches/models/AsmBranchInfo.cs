@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes a branching instruction operand
     /// </summary>
-    public struct AsmBranch
+    public struct AsmBranchInfo
     {
         public MemoryAddress Base;
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
         public MemoryAddress TargetOffset;
 
         [MethodImpl(Inline)]
-        public AsmBranch(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
         {
             Base = @base;
             Source = src;

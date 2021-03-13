@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static memory;
+    using System;
 
-    using api = SymbolStores;
+    using static memory;
 
     /// <summary>
     /// Characterizes a sequence of bits with external semantics
@@ -29,7 +29,7 @@ namespace Z0
         S Value {get;}
 
         Identifier ISymbol.Name
-            => api.name(this);
+            => Value is Enum e ? e.ToString("g") : Value.ToString();
 
         string ITextual.Format()
             => string.Format("{0}", Value);

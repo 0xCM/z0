@@ -9,14 +9,14 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct JccInfo
+    public readonly struct JmpInfo
     {
-        public JccKind Kind {get;}
+        public JmpKind Kind {get;}
 
         public JccCode Code {get;}
 
         [MethodImpl(Inline)]
-        public JccInfo(JccKind kind, JccCode code)
+        public JmpInfo(JmpKind kind, JccCode code)
         {
             Kind = kind;
             Code = code;
@@ -35,13 +35,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator JccInfo((JccKind kind, JccCode code) src)
-            => new JccInfo(src.kind, src.code);
+        public static implicit operator JmpInfo((JmpKind kind, JccCode code) src)
+            => new JmpInfo(src.kind, src.code);
 
-        public static JccInfo Empty
+        public static JmpInfo Empty
         {
             [MethodImpl(Inline)]
-            get => (JccKind.None, 0);
+            get => (JmpKind.None, 0);
         }
     }
 }

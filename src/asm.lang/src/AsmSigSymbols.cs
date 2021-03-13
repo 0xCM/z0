@@ -6,32 +6,45 @@ namespace Z0.Asm
 {
     using System;
 
-    using static AsmExpr;
-    using static AsmCatalogSymbols.EFlag;
-    using static AsmCatalogSymbols.Mode;
-    using static Part;
-
     [ApiHost]
-    public class AsmCatalogSymbols
+    public class AsmSigSymbols
     {
+        public static AsmSigSymbols load()
+            => new AsmSigSymbols();
+
         readonly SymbolTable<Mode> _Modes;
 
         readonly SymbolTable<EFlag> _EFlags;
 
-        public static AsmCatalogSymbols create()
-            => new AsmCatalogSymbols();
+        readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
 
-        internal AsmCatalogSymbols()
+        readonly SymbolTable<AsmSigOpKind> _SigOps;
+
+        readonly SymbolTable<AsmSigCompositeKind> _Composites;
+
+        internal AsmSigSymbols()
         {
             _EFlags = SymbolStores.table<EFlag>();
             _Modes = SymbolStores.table<Mode>();
+            _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
+            _SigOps = SymbolStores.table<AsmSigOpKind>();
+            _Composites = SymbolStores.table<AsmSigCompositeKind>();
         }
 
-        public ReadOnlySpan<Token<Mode>> Modes
-            => _Modes.Tokens;
+        public SymbolTable<Mode> Modes
+            => _Modes;
 
-        public ReadOnlySpan<Token<EFlag>> Flags
-            => _EFlags.Tokens;
+        public SymbolTable<EFlag> Flags
+            => _EFlags;
+
+        public SymbolTable<AsmSigOpKind> SigOps
+            => _SigOps;
+
+        public SymbolTable<AsmMnemonicCode> Mnemonics
+            => _Mnemonics;
+
+        public SymbolTable<AsmSigCompositeKind> Composites
+            => _Composites;
 
         public enum Mode : byte
         {
@@ -65,26 +78,5 @@ namespace Z0.Asm
             [Symbol("E.PF")]
             PF,
         }
-
-        [Op]
-        static Name symbolize(EFlag src)
-            => src switch {
-                OF => "E.OF",
-                SF => "E.SF",
-                ZF => "E.ZF",
-                AF => "E.AF",
-                CF => "E.CF",
-                PF => "E.PF",
-                _ => EmptyString
-            };
-
-       [Op]
-        static Name symbolize(Mode src)
-            => src switch {
-                Valid => "V",
-                Invalid => "I",
-                NE => "NE",
-                _ => EmptyString
-            };
     }
 }

@@ -38,6 +38,6 @@ namespace Z0.Asm
         /// <summary>
         /// Instruction branching info, if applicable
         /// </summary>
-        public AsmBranch Branch;
+        public AsmBranchInfo Branch;
     }
 }

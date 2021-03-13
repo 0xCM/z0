@@ -120,29 +120,29 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseSig(string src, out AsmSig dst)
+        public bool ParseSig(string src, out AsmSigExpr dst)
         {
             if(text.nonempty(src))
             {
                 if(ParseMnemonic(src, out var monic))
                 {
                     var i = Query.index(src, MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(asm.sigop) : sys.empty<AsmSigOperand>();
-                    dst = new AsmSig(monic, operands);
+                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(asm.sigop) : sys.empty<AsmSigOperandExpr>();
+                    dst = new AsmSigExpr(monic, operands);
                     return true;
                 }
             }
-            dst = AsmSig.Empty;
+            dst = AsmSigExpr.Empty;
             return false;
         }
 
         [Op]
-        public AsmSig ParseSig(string src)
+        public AsmSigExpr ParseSig(string src)
         {
             if(ParseSig(src, out var dst))
                 return dst;
             else
-                return AsmSig.Empty;
+                return AsmSigExpr.Empty;
         }
 
         [MethodImpl(Inline), Op]
@@ -155,7 +155,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseToken(AsmSigOperand src, out Token<AsmSigOpKind> token)
+        public bool ParseToken(AsmSigOperandExpr src, out Token<AsmSigOpKind> token)
         {
             if(_SigOpSymbols.IndexFromSymbol(src.Content, out var index))
             {
@@ -179,27 +179,27 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool IsComposite(AsmSigOperand src)
+        public bool IsComposite(AsmSigOperandExpr src)
             => _Composites.ContainsSymbol(src.Content);
 
         [Op]
-        public bool IsComposite(AsmSig src)
+        public bool IsComposite(AsmSigExpr src)
             => src.Operands.Any(IsComposite);
 
-        public Index<AsmSigOperand> Operands(string src)
+        public Index<AsmSigOperandExpr> Operands(string src)
             => src.Split(Chars.Comma).Map(sigop);
 
         [Op]
-        public Index<AsmSigOperand> Operands(AsmSig src)
+        public Index<AsmSigOperandExpr> Operands(AsmSigExpr src)
         {
             if(ParseMnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return Operands(remainder);
-            return Index<AsmSigOperand>.Empty;
+            return Index<AsmSigOperandExpr>.Empty;
         }
 
         [Op]
-        public bool Decompose(AsmSigOperand src, out Pair<AsmSigOperand> dst)
+        public bool Decompose(AsmSigOperandExpr src, out Pair<AsmSigOperandExpr> dst)
         {
             if(IsComposite(src))
             {
@@ -227,14 +227,14 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Defines a <see cref='AsmSigOperand'/>
+        /// Defines a <see cref='AsmSigOperandExpr'/>
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static AsmSigOperand sigop(string src)
-            => new AsmSigOperand(src);
+        public static AsmSigOperandExpr sigop(string src)
+            => new AsmSigOperandExpr(src);
 
-        public static string format(AsmSig src)
+        public static string format(AsmSigExpr src)
         {
             var buffer = text.buffer();
             buffer.Append(src.Mnemonic.Format(AsmMnemonicCase.Uppercase));
@@ -249,7 +249,6 @@ namespace Z0.Asm
         {
             var symbols = SymbolStores.table<AsmSigOpKind>();
             return symbols.Tokens;
-
         }
     }
 }

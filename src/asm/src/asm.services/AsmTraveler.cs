@@ -36,9 +36,9 @@ namespace Z0.Asm
             Position = 0;
         }
 
-        JccInfo Jcc(byte src)
+        JmpInfo Jcc(byte src)
         {
-            return JccInfo.Empty;
+            return JmpInfo.Empty;
         }
 
         dynamic Interpret()

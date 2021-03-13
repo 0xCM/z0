@@ -13,12 +13,12 @@ namespace Z0.Asm
     {
         public AsmOpCodeExpr OpCode {get;}
 
-        public AsmSig Sig {get;}
+        public AsmSigExpr Sig {get;}
 
         public AsmStatementExpr Statement {get;}
 
         [MethodImpl(Inline)]
-        public AsmExprSet(AsmOpCodeExpr oc, AsmSig sig, AsmStatementExpr statement)
+        public AsmExprSet(AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement)
         {
             Sig = sig;
             OpCode = oc;

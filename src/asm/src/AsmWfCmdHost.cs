@@ -32,25 +32,29 @@ namespace Z0.Asm
             _DataEmitter = root.lazy(Wf.AsmDataEmitter);
         }
 
-        [Action(K.ShowCatalogSymbols)]
-        void ShowCatalogSymbols()
+        [Action(K.ShowSigSymbols)]
+        void ShowSigSymbols()
         {
-            var symbols =  Catalog.CatalogSymbols;
-            root.iter(symbols.Flags, f => Wf.Row(f));
+            var src = AsmSigSymbols.load();
+            ShowMnemonicSymbols(src);
+            ShowOperandKinds(src);
+            ShowFlags(src);
+            root.use(OpenShowLog("sigops.composites"), log => root.iter(src.Composites.Tokens, token => Show(token, log)));
+            root.use(OpenShowLog("sigops.modes"), log => root.iter(src.Modes.Tokens, token => Show(token, log)));
         }
+
+        void ShowFlags(AsmSigSymbols src)
+            => root.use(OpenShowLog("sigops.flags"), log => root.iter(src.Flags.Tokens, token => Show(token, log)));
+
+        void ShowMnemonicSymbols(AsmSigSymbols src)
+            => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(src.Mnemonics.Tokens, token => Show(token, log)));
+
+        void ShowOperandKinds(AsmSigSymbols src)
+            => root.use(OpenShowLog("sigops.operandkinds"), log => root.iter(src.SigOps.Tokens, token => Show(token, log)));
 
         [Action(K.EmitResBytes)]
         void EmitResBytes()
-        {
-            Wf.ResBytesEmitter().Emit();
-        }
-
-        [Action(K.ShowSigOpTokens)]
-        void ShowSigOpTokens()
-        {
-            var tokens = AsmSigs.tokens();
-            root.iter(tokens, item => Wf.Row(item.Symbol));
-        }
+            => Wf.ResBytesEmitter().Emit();
 
         [Action(K.EmitApiClasses)]
         void EmitApiClasses()
@@ -69,7 +73,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var literal = ref skip(literals, i);
-                var format = string.Format(FormatPattern, literal.Index, literal.Kind, literal.Name);
+                var format = string.Format(FormatPattern, literal.Index, literal.Kind, literal.Identifier);
                 Wf.Row(format);
             }
         }
@@ -88,27 +92,19 @@ namespace Z0.Asm
 
         [Action(K.EmitAsmCatForms)]
         void EmitAsmCatForms()
-        {
-            Catalog.Emit(Catalog.CatalogedForms());
-        }
+            => Catalog.Emit(Catalog.CatalogedForms());
 
         [Action(K.ShowEncodingKindNames)]
         void ShowEncodingKindNames()
-        {
-            root.iter(Catalog.EncodingKindNames(), Wf.Row);
-        }
+            => root.iter(Catalog.EncodingKindNames(), Wf.Row);
 
         [Action(K.ExportStokeImports)]
         void ExportStokeImports()
-        {
-            Catalog.ExportImport();
-        }
+            => Catalog.ExportImport();
 
         [Action(K.DistillAsmStatements)]
         void DistillAsmStatements()
-        {
-            Wf.AsmDistiller().DistillStatements();
-        }
+            => Wf.AsmDistiller().DistillStatements();
 
         [Action(K.ShowRexBits)]
         void ShowRexBits()
@@ -124,15 +120,11 @@ namespace Z0.Asm
 
         [Action(K.EmitImmSpecializations)]
         void EmitImmSpecializations()
-        {
-            Wf.ImmEmitter().Emit();
-        }
+            => Wf.ImmEmitter().Emit();
 
         [Action(K.EmitAsmRows)]
         void EmitAsmRows()
-        {
-            DataEmitter.EmitAsmRows();
-        }
+            => DataEmitter.EmitAsmRows();
 
         [Action(K.CheckDigitParser)]
         void CheckDigitParser()
@@ -159,26 +151,6 @@ namespace Z0.Asm
             // var evaluate = Evaluate.control(Wf, Rng.@default(), Wf.Paths.AppCaptureRoot, Pow2.T14);
             // evaluate.Execute(Wf.Api.PartIdentities);
             // Wf.Ran(flow);
-        }
-
-        [Action(K.ShowSigOpSymbols)]
-        void ShowSigOpSymbols()
-        {
-            var symbols = Wf.AsmSigs().SigOpSymbols();
-            foreach(var token in symbols.Tokens)
-            {
-                Wf.Row(token);
-            }
-        }
-
-        [Action(K.ShowSigOpComposites)]
-        void ShowSigOpComposites()
-        {
-            var symbols = Wf.AsmSigs().CompositeSymbols();
-            foreach(var token in symbols.Tokens)
-            {
-                Wf.Row(token);
-            }
         }
 
         [Action(K.EmitLegacyOpCodes)]

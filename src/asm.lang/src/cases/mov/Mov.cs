@@ -20,7 +20,7 @@ namespace Z0.Asm
             => new AsmEncodingCase(id, expr,code);
 
         [MethodImpl(Inline), Op]
-        public AsmEncodingCase define(AsmMnemonicCode monic, ushort seq, AsmOpCodeExpr oc, AsmSig sig, AsmStatementExpr statement, string encoding)
+        public AsmEncodingCase define(AsmMnemonicCode monic, ushort seq, AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement, string encoding)
             => new AsmEncodingCase(monic, seq, asm.pack(oc, sig, statement), encoding);
 
         [Op]

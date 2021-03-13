@@ -50,6 +50,12 @@ namespace Z0
             get => @as<S,T>(edit(Value));
         }
 
+        public string Format()
+            => Name;
+
+        public override string ToString()
+            => Format();
+
         /// <summary>
         /// The bit-width of a symbol
         /// </summary>

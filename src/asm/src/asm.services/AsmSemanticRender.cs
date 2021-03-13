@@ -189,7 +189,7 @@ namespace Z0.Asm
             => string.Format("{0:x}" + HexFormatSpecs.PostSpec, src);
 
         [Op]
-        static string format(AsmBranch src)
+        static string format(AsmBranchInfo src)
             => text.concat(format(src.Source), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         static HexFormatOptions HexSpec
