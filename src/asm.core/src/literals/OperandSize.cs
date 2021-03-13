@@ -6,17 +6,12 @@ namespace Z0.Asm
 {
     using System;
 
-    [Flags]
-    public enum AsmOperatingMode : byte
+    public enum OperandSize : byte
     {
-        None = 0,
+        W16 = (byte)DataWidth.W16,
 
-        Mode16 = 0b10000,
+        W32 = (byte)DataWidth.W32,
 
-        Mode32 = 0b100000,
-
-        Mode64 = 0b1000000,
-
-        Non64 = Mode16 | Mode32
+        W64 = (byte)DataWidth.W64
     }
 }

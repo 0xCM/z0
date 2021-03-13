@@ -7,12 +7,14 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Identifies a factory method which, by definition, is an emitter or a unary function
+    /// Specifies a documentation reference
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method)]
-    public class FactoryAttribute : OpAttribute
+    [AttributeUsage(AttributeTargets.All)]
+    public class DocAttribute : Attribute
     {
+        public string Reference {get;}
 
-
+        public DocAttribute(string name)
+            => Reference = name;
     }
 }

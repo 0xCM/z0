@@ -45,7 +45,7 @@ namespace Z0.Asm
             => Name;
 
         [MethodImpl(Inline)]
-        public string Format(AsmMnemonicCase @case)
+        public string Format(MnemonicCase @case)
         {
             if(IsEmpty)
                 return EmptyString;
@@ -53,11 +53,11 @@ namespace Z0.Asm
             var data = Name;
             switch(@case)
             {
-                case AsmMnemonicCase.Captialized:
+                case MnemonicCase.Captialized:
                     return string.Format("{0}{1}",Char.ToUpperInvariant(Name[0]), data.ToLowerInvariant().Substring(1));
-                case AsmMnemonicCase.Lowercase:
+                case MnemonicCase.Lowercase:
                     return data.ToLowerInvariant();
-                case AsmMnemonicCase.Uppercase:
+                case MnemonicCase.Uppercase:
                     return data.ToUpperInvariant();
             }
             return data;

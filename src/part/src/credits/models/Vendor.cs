@@ -3,9 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-
+{
     partial class CreditTypes
     {
         /// <summary>

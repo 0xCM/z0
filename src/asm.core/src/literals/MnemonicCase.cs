@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmMnemonicCase
+    public enum MnemonicCase
     {
         Lowercase = 0,
 

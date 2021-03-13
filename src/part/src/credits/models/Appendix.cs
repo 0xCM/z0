@@ -3,15 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-
+{
     partial class CreditTypes
     {
         /// <summary>
         /// Defines appendix reference component values
         /// </summary>
         public enum Appendix : byte
-        {        
+        {
             /// <summary>
             /// Appendix A
             /// </summary>

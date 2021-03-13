@@ -39,7 +39,6 @@ namespace Z0.Asm
             emit<RegIndex,byte>();
             emit<RegClass,byte>();
             emit<RegWidth,ushort>();
-            emit<AsmOperatingMode,byte>();
         }
 
         public void enum_dataset_convert()

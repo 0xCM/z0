@@ -27,11 +27,11 @@ namespace Z0.Asm
             }
 
             string TypeName()
-                => Monic.Format(AsmMnemonicCase.Captialized);
+                => Monic.Format(MnemonicCase.Captialized);
 
             string FactoryName()
             {
-                var identifier = Monic.Format(AsmMnemonicCase.Lowercase);
+                var identifier = Monic.Format(MnemonicCase.Lowercase);
                 return identifier switch{
                     "in" => "@in",
                     "out" => "@out",

@@ -271,7 +271,7 @@ namespace Z0.Asm
             {
                 var operands = src.Sig.Operands.View;
                 var count = operands.Length;
-                var monic = src.Sig.Mnemonic.Format(AsmMnemonicCase.Lowercase);
+                var monic = src.Sig.Mnemonic.Format(MnemonicCase.Lowercase);
                 if(count == 0)
                 {
                     dst.AppendFormat("{0} -> {1}", monic, src.OpCode.Format());
@@ -299,7 +299,7 @@ namespace Z0.Asm
 
         static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
         {
-            dst.Append(monic.Format(AsmMnemonicCase.Uppercase));
+            dst.Append(monic.Format(MnemonicCase.Uppercase));
             var opcount = operands.Length;
             if(opcount != 0)
             {
