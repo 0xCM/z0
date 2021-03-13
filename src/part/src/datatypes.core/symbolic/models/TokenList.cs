@@ -10,59 +10,58 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct Tokens<I,K,S> : IIndex<I,Token<K,S>>
+    public readonly struct TokenList<I,K> : IIndex<I,Token<K>>
         where K : unmanaged
-        where S : unmanaged, ISymbol
         where I : unmanaged
     {
-        readonly Index<Token<K,S>> Data;
+        readonly Index<I,Token<K>> Data;
 
         [MethodImpl(Inline)]
-        public Tokens(Token<K,S>[] src)
+        public TokenList(Token<K>[] src)
             => Data = src;
 
-        public ref Token<K,S> this[I index]
+        public ref Token<K> this[I index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[@as<I,uint>(index)];
+            get => ref Data[index];
         }
 
-        public ReadOnlySpan<Token<K,S>> View
+        public ReadOnlySpan<Token<K>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<Token<K,S>> Edit
+        public Span<Token<K>> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
-        public ushort Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => (ushort)Data.Count;
+            get => bw32(Data.Count);
         }
 
-        public ref Token<K,S> First
+        public ref Token<K> First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public Token<K,S>[] Storage
+        public Token<K>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Tokens<I,K,S>(Token<K,S>[] src)
-            => new Tokens<I,K,S>(src);
+        public static implicit operator TokenList<I,K>(Token<K>[] src)
+            => new TokenList<I,K>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Token<K,S>[](Tokens<I,K,S> src)
+        public static implicit operator Token<K>[](TokenList<I,K> src)
             => src.Storage;
     }
 }

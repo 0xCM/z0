@@ -561,14 +561,15 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            var commands = Wf.AsmWfCmd();
+            //var commands = Wf.AsmWfCmd();
             //commands.Run(AsmWfCmdKind.EmitFormCatalog);
             //commands.Run(AsmWfCmdKind.ShowRexBits);
 
-            // var commands = Wf.AsmSigCmd();
+            var commands = Wf.AsmLangCmd();
+            commands.Run(AsmLangCmdKind.ShowRegisterCodes);
             // commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
 
-            ProcessStatements();
+            //ProcessStatements();
 
             // var dst = span<char>(32);
             // var vsib = AsmBytes.vsib(0b11_100_111);

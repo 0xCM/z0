@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static memory;
 
-    using K = AsmSigCmdKind;
+    using K = AsmLangCmdKind;
 
-    public sealed class AsmSigCmdHost : WfCmdHost<AsmSigCmdHost,K>
+    public sealed class AsmLangCmdHost : WfCmdHost<AsmLangCmdHost,K>
     {
         Lazy<AsmSigSymbols> _SigSymbols;
 
@@ -33,6 +33,17 @@ namespace Z0.Asm
             ShowEFlagSymbols();
             ShowCompositeSymbols();
             ShowModeSymbols();
+        }
+
+        [Action(K.ShowRegisterCodes)]
+        void ShowRegisterCodes()
+        {
+            const string FormatPattern = "{0,-8} | {1,-10} | {2,-5} | {3,-10} | {4}";
+
+            using var log = OpenShowLog("register-codes");
+            var registers = AsmRegs.list();
+            foreach(var reg in registers)
+                Show(string.Format(FormatPattern, reg.Class, reg.Kind, reg.Width, (uint5)(byte)reg.Code, (Hex5)(byte)reg.Code), log);
         }
 
         [Action(K.ShowModeSymbols)]

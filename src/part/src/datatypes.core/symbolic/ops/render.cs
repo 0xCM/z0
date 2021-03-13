@@ -12,32 +12,6 @@ namespace Z0
 
     partial struct SymbolStores
     {
-        public static ReadOnlySpan<char> render<K,S>(Token<K,S> src, Span<char> dst)
-            where K : unmanaged
-            where S : unmanaged, ISymbol
-        {
-            var symbols = src.Symbols;
-            var count = symbols.Length;
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = render(skip(symbols,i));
-            return dst;
-        }
-
-        public static ReadOnlySpan<char> render<K,S>(ReadOnlySpan<Token<K,S>> src, Span<char> dst)
-            where K : unmanaged
-            where S : unmanaged, ISymbol
-        {
-            var tokenCount = src.Length;
-            for(var i=0u; i<tokenCount; i++)
-            {
-                var symbols = skip(src,i).Symbols;
-                var symbolCount = symbols.Length;
-                for(var j=0u; j<symbolCount; j++)
-                    seek(dst,i) = render(skip(symbols,i));
-            }
-            return dst;
-        }
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static char render<S>(S src)
             where S : unmanaged

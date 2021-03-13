@@ -32,17 +32,17 @@ namespace Z0.Asm
         /// </summary>
         public const uint Hi = MaxClass << 1;
 
-        public enum FI : byte
+        public enum FieldIndex : byte
         {
             /// <summary>
-            /// RegisterCode: [0..3]
+            /// RegisterCode: [0..7]
             /// </summary>
             C = 0,
 
             /// <summary>
-            /// RegisterClass: [4..15]
+            /// RegisterClass:[8..15]
             /// </summary>
-            K = 4,
+            K = 8,
 
             /// <summary>
             /// Register width: [16..30]
@@ -55,15 +55,13 @@ namespace Z0.Asm
             H = 31,
         }
 
-        public enum FW : byte
+        public enum FieldWidth : byte
         {
-            C = FI.K - FI.C,
+            C = FieldIndex.K - FieldIndex.C,
 
-            K = FI.W - FI.K,
+            K = FieldIndex.W - FieldIndex.K,
 
-            W = MaxClass - FI.W,
-
-            H = FI.H,
+            W = MaxClass - FieldIndex.W,
         }
     }
 }

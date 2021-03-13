@@ -65,7 +65,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => $"{Value}";
+            get => ((byte)Value).FormatHex(specifier:false, zpad:true);
         }
 
         [MethodImpl(Inline)]

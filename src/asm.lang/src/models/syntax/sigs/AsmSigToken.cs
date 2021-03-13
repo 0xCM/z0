@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static RegisterKind;
-
     using SM = AsmSyntaxMeaning;
 
     [SymbolSource]
@@ -64,51 +62,47 @@ namespace Z0.Asm
         /// <summary>
         /// <see cref='SM.r16'/>
         /// </summary>
-        [Symbol("r16")]
+        [Symbol("r16", SM.r16)]
         R16,
 
         /// <summary>
         /// <see cref='SM.r32'/>
         /// </summary>
-        [Symbol("r32")]
+        [Symbol("r32", SM.r32)]
         R32,
 
         /// <summary>
         /// <see cref='SM.r64'/>
         /// </summary>
-        [Symbol("r64")]
+        [Symbol("r64", SM.r64)]
         R64,
 
         /// <summary>
         /// <see cref='SM.rm8'/>
         /// </summary>
-        [Symbol("r/m8")]
+        [Symbol("r/m8", SM.rm8)]
         Rm8,
 
         /// <summary>
         /// <see cref='SM.rm16'/>
         /// </summary>
-        [Symbol("r/m16")]
+        [Symbol("r/m16", SM.rm16)]
         Rm16,
 
         /// <summary>
         /// <see cref='SM.rm32'/>
         /// </summary>
-        [Symbol("r/m32")]
+        [Symbol("r/m32", SM.rm32)]
         Rm32,
 
         /// <summary>
         /// <see cref='SM.rm64'/>
         /// </summary>
-        [Symbol("r/m64")]
+        [Symbol("r/m64", SM.rm64)]
         Rm64,
 
         /// <summary>
-        /// An operand in memory of width 16, 32 or 64 bits
-        /// EG
-        /// LEA r16, m
-        /// LEA r32, m
-        /// LEA r64, m
+        /// <see cref='SM.m'/>
         /// </summary>
         [Symbol("m", SM.m)]
         M,
@@ -116,38 +110,18 @@ namespace Z0.Asm
         /// <summary>
         /// <see cref='SM.m8'/>
         /// </summary>
-        /// <remarks>
-        /// For <see cref='AsmOperatingMode.Non64'/> mode, is pointed to by one of
-        /// <see cref='DS'/>:<see cref='SI'/>
-        /// <see cref='DS'/>:<see cref='ESI'/>
-        /// <see cref='ES'/>:<see cref='DI'/>
-        /// <see cref='ES'/>:<see cref='EDI'/>
-        /// For <see cref='AsmOperatingMode.Mode64'/>, it is pointed to by one of
-        /// <see cref='RSI'/>
-        /// <see cref='RDI'/>
-        /// </remarks>
         [Symbol("m8", SM.m8)]
         M8,
 
         /// <summary>
         /// A 16-bit operand in memory pointed to by a register, and applicable only to string instructions
         /// </summary>
-        /// <remarks>
-        /// The register is one of
-        /// <see cref='DS'/><see cref='SI'/>
-        /// <see cref='DS'/>:<see cref='ESI'/>
-        /// </remarks>
         [Symbol("m16", SM.m16)]
         M16,
 
         /// <summary>
         /// A 32-bit operand in memory pointed to by a register, and applicable only to string instructions
         /// </summary>
-        /// <remarks>
-        /// The register is one of
-        /// <see cref='DS'/><see cref='SI'/>
-        /// <see cref='DS'/>:<see cref='ESI'/>
-        /// </remarks>
         [Symbol("m32", SM.m32)]
         M32,
 
@@ -200,42 +174,39 @@ namespace Z0.Asm
         Xmm,
 
         /// <summary>
-        /// A first xmm register operand
+        /// <see cref='SM.xmm1'/>
         /// </summary>
-        [Symbol("xmm1")]
+        [Symbol("xmm1", SM.xmm1)]
         Xmm1,
 
         /// <summary>
-        /// A second xmm register operand
+        /// <see cref='SM.xmm2'/>
         /// </summary>
-        [Symbol("xmm2")]
+        [Symbol("xmm2", SM.xmm2)]
         Xmm2,
 
         /// <summary>
-        /// A third xmm register operand
+        /// <see cref='SM.xmm3'/>
         /// </summary>
-        [Symbol("xmm3")]
+        [Symbol("xmm3", SM.xmm3)]
         Xmm3,
 
         /// <summary>
-        /// An XMM register or a 32-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available
-        /// using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation
+        /// <see cref='SM.xmm32'/>
         /// </summary>
-        [Symbol("xmm32")]
+        [Symbol("xmm32", SM.xmm32)]
         Xmm32,
 
         /// <summary>
-        /// An XMM register or a 64-bit memory operand. The 128-bit SIMD floating-point registers are XMM0 through XMM7; XMM8 through XMM15 are available
-        /// using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation
+        /// <see cref='SM.xmm64'/>
         /// </summary>
-        [Symbol("xmm64")]
+        [Symbol("xmm64", SM.xmm64)]
         Xmm64,
 
         /// <summary>
-        /// An XMM register or a 128-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available
-        /// using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation
+        /// <see cref='SM.xmm128'/>
         /// </summary>
-        [Symbol("xmm128")]
+        [Symbol("xmm128", SM.xmm128)]
         Xmm128,
 
         /// <summary>
@@ -279,19 +250,19 @@ namespace Z0.Asm
         m16x32,
 
         /// <summary>
-        /// A relative address in the range from 128 bytes before the end of the instruction to 127 bytes after the end of the instruction
+        /// <see cref='SM.rel8'/>
         /// </summary>
         [Symbol("rel8", SM.rel8)]
         Rel8,
 
         /// <summary>
-        /// A relative address within the same code segment as the instruction assembled and applicable to instructions with an operand-size attribute of 16 bits
+        /// <see cref='SM.rel16'/>
         /// </summary>
         [Symbol("rel16", SM.rel16)]
         Rel16,
 
         /// <summary>
-        /// A relative address within the same code segment as the instruction assembled; applicable to instructions with an operand-size attribute of 32 bits
+        /// <see cref='SM.rel32'/>
         /// </summary>
         [Symbol("rel32", SM.rel32)]
         Rel32,

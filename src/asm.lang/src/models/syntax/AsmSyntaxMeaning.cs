@@ -13,27 +13,26 @@ namespace Z0.Asm
 
         public const string NFx = "Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.";
 
-        public const string Rexᕀ = "";
 
-        public const string REXㆍWᕀ = "Indicates the use of a REX prefix that affects operand size or instruction semantics";
+        public const string RexW = "Indicates the use of a REX prefix that affects operand size or instruction semantics";
 
         public const string ﾉr = "Indicates that the ModR/M byte of the instruction contains a register operand and an r/m operand";
 
-        public const string Rd0 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode";
+        public const string rd0 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 0 provides an extension to the instruction's opcode";
 
-        public const string Rd1 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode";
+        public const string rd1 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 1 provides an extension to the instruction's opcode";
 
-        public const string Rd2 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode";
+        public const string rd2 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 2 provides an extension to the instruction's opcode";
 
-        public const string Rd3 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode";
+        public const string rd3 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 3 provides an extension to the instruction's opcode";
 
-        public const string Rd4 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode";
+        public const string rd4 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 4 provides an extension to the instruction's opcode";
 
-        public const string Rd5 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode";
+        public const string rd5 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 5 provides an extension to the instruction's opcode";
 
-        public const string Rd6 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode";
+        public const string rd6 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 6 provides an extension to the instruction's opcode";
 
-        public const string Rd7 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode";
+        public const string rd7 = "The ModR/M byte of the instruction uses only the r/m operand; The register field digit 7 provides an extension to the instruction's opcode";
 
         public const string cb = "A 1-byte value following the opcode to specify a code offset and/or new value for the code segment register.";
 
@@ -163,7 +162,7 @@ namespace Z0.Asm
 
         public const string Sreg = "A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5";
 
-        public const string ᛁsaeᛁ = "Indicates support for SAE (Suppress All Exceptions). This is used for instructions that support SAE, but do not support embedded rounding control";
+        public const string sae = "Indicates support for SAE (Suppress All Exceptions). This is used for instructions that support SAE, but do not support embedded rounding control";
 
         public const string SRC  = "The source in a single-source instruction";
 
@@ -175,19 +174,25 @@ namespace Z0.Asm
 
         public const string ST = "The top element of the FPU register stack; a synonym for ST(0)";
 
-        public const string STᐸ0ᐳ = "The top element of the FPU register stack";
+        public const string ST0 = "The top element of the FPU register stack";
 
-        public const string xmm  = "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.";
+        public const string xmm  = "An XMM register. The 128-bit XMM registers are: XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode.The contents of memory are found at the address provided by the effective address computation";
 
-        public const string xmmノ32 = "An XMM register or a 32-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
+        public const string xmm32 = "An XMM register or a 32-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
 
-        public const string xmmノ64 = "An XMM register or a 64-bit memory operand. The 128-bit SIMD floating-point registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
+        public const string xmm64 = "An XMM register or a 64-bit memory operand. The 128-bit SIMD floating-point registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
 
-        public const string xmmノ128 = "An XMM register or a 128-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
+        public const string xmm128 = "An XMM register or a 128-bit memory operand. The 128-bit XMM registers are XMM0 through XMM7; XMM8 through XMM15 are available using REX.R in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
 
         public const string ᐸXMM0ᐳ = "Indicates implied use of the XMM0 register. When there is ambiguity xmm1 indicates the first source operand using an XMM register and xmm2 the second source operand using an XMM register. Some instructions use the XMM0 register as the third source operand, indicated by <XMM0>. The use of the third XMM register operand is implicit in the instruction encoding and does not affect the ModR/M encoding";
 
         public const string ymm = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
+
+        public const string xmm1 ="A first xmm register operand";
+
+        public const string xmm2 ="A second xmm register operand";
+
+        public const string xmm3 ="A third xmm register operand";
 
         public const string ymm1 ="A first ymm register operand";
 

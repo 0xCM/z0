@@ -4,14 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
-    using static Part;
-    using static memory;
-
-
     public sealed class t_asm_registers : t_asm<t_asm_registers>
     {
         public void t_register_lookup()
@@ -45,7 +37,6 @@ namespace Z0.Asm
             writer.WriteLine(string.Format(HeaderPattern, name, registers.Length));
             writer.WriteLine(PageBreak);
             root.iter(registers, r => writer.WriteLine(r));
-
         }
     }
 }

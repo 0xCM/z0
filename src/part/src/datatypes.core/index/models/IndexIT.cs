@@ -51,6 +51,11 @@ namespace Z0
             get => Data.Length;
         }
 
+        public ref T First
+        {
+            [MethodImpl(Inline)]
+            get => ref Data.First;
+        }
         public I Count
         {
             [MethodImpl(Inline)]

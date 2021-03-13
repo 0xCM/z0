@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    //using static z;
-
     public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
     {
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
@@ -44,9 +42,9 @@ namespace Z0
             root.iter(src, cmd => Nodes.TryAdd(cmd.CmdId, cmd));
         }
 
-        public CmdResult Dispatch(ICmd cmd)
+        public CmdResult Dispatch(ICmd cmd, string msg)
         {
-            using var dispatch = Wf.Running($"Dispatching {cmd.CmdName}");
+            using var dispatch = Wf.Running(msg);
             try
             {
                 if(Nodes.TryGetValue(cmd.CmdId, out var node))
@@ -71,6 +69,11 @@ namespace Z0
                 Wf.Error(e);
                 return Cmd.fail(cmd, e);
             }
+        }
+
+        public CmdResult Dispatch(ICmd cmd)
+        {
+            return Dispatch(cmd, string.Format("Dispatching <{0}>", cmd.CmdName));
         }
     }
 

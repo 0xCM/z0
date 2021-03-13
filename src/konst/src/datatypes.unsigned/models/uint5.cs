@@ -25,7 +25,6 @@ namespace Z0
 
         internal readonly T data;
 
-
         [MethodImpl(Inline)]
         internal uint5(uint8T src)
             => data = (byte)(src & MaxLiteral);

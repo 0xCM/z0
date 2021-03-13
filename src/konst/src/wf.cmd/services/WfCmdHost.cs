@@ -44,6 +44,7 @@ namespace Z0
             {
                 RegisterCommands(Index);
                 CommandsRegistered = true;
+                Wf.Babble(string.Format("Registered <{0}> commands from <{1}>", Index.Count, typeof(H).Name));
             }
         }
 

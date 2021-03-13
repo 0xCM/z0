@@ -11,51 +11,51 @@ namespace Z0.Asm
         None,
 
         /// <summary>
-        /// <see cref='SM.Rd0'/>
+        /// <see cref='SM.rd0'/>
         /// </summary>
-        [Symbol("/0", SM.Rd0)]
+        [Symbol("/0", SM.rd0)]
         Rd0,
 
         /// <summary>
-        /// <see cref='SM.Rd1'/>
+        /// <see cref='SM.rd1'/>
         /// </summary>
-        [Symbol("/1", SM.Rd1)]
+        [Symbol("/1", SM.rd1)]
         Rd1,
 
         /// <summary>
-        /// <see cref='SM.Rd2'/>
+        /// <see cref='SM.rd2'/>
         /// </summary>
-        [Symbol("/2", SM.Rd2)]
+        [Symbol("/2", SM.rd2)]
         Rd2,
 
         /// <summary>
-        /// <see cref='SM.Rd3'/>
+        /// <see cref='SM.rd3'/>
         /// </summary>
-        [Symbol("/3", SM.Rd3)]
+        [Symbol("/3", SM.rd3)]
         Rd3,
 
         /// <summary>
-        /// <see cref='SM.Rd4'/>
+        /// <see cref='SM.rd4'/>
         /// </summary>
-        [Symbol("/4", SM.Rd4)]
+        [Symbol("/4", SM.rd4)]
         Rd4,
 
         /// <summary>
-        /// <see cref='SM.Rd5'/>
+        /// <see cref='SM.rd5'/>
         /// </summary>
-        [Symbol("/5", SM.Rd5)]
+        [Symbol("/5", SM.rd5)]
         Rd5,
 
         /// <summary>
-        /// <see cref='SM.Rd6'/>
+        /// <see cref='SM.rd6'/>
         /// </summary>
-        [Symbol("/6", SM.Rd6)]
+        [Symbol("/6", SM.rd6)]
         Rd6,
 
         /// <summary>
-        /// <see cref='SM.Rd7'/>
+        /// <see cref='SM.rd7'/>
         /// </summary>
-        [Symbol("/7", SM.Rd7)]
+        [Symbol("/7", SM.rd7)]
         Rd7,
 
         [Symbol("VEX")]

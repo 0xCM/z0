@@ -76,7 +76,7 @@ namespace Z0.Asm
 
         SIL = G8.SIL,
 
-        DIL  = G8.DIL,
+        DIL = G8.DIL,
 
         R8L = G8.R8L,
 
@@ -256,15 +256,15 @@ namespace Z0.Asm
 
         XMM26 = X.XMM26,
 
-        XMM27 = r27 | XMM << ClassField | W128 << WidthField,
+        XMM27 = X.XMM27,
 
-        XMM28 = r28 | XMM << ClassField | W128 << WidthField,
+        XMM28 = X.XMM28,
 
-        XMM29 = r29 | XMM << ClassField | W128 << WidthField,
+        XMM29 = X.XMM29,
 
-        XMM30 = r30 | XMM << ClassField | W128 << WidthField,
+        XMM30 = X.XMM30,
 
-        XMM31 = r31 | XMM << ClassField | W128 << WidthField,
+        XMM31 = X.XMM31,
 
         // ~ 256-bit vectorized registers
         // ~ ------------------------------------------------------------------
@@ -291,9 +291,9 @@ namespace Z0.Asm
 
         YMM10 = Y.YMM10,
 
-        YMM11 = r11 | YMM << ClassField | W256 << WidthField,
+        YMM11 = Y.YMM11,
 
-        YMM12 = r12 | YMM << ClassField | W256 << WidthField,
+        YMM12 = Y.YMM12,
 
         YMM13 = Y.YMM13,
 
@@ -303,35 +303,35 @@ namespace Z0.Asm
 
         YMM16 = Y.YMM16,
 
-        YMM17 = r17 | YMM << ClassField | W256 << WidthField,
+        YMM17 = Y.YMM16,
 
-        YMM18 = r18 | YMM << ClassField | W256 << WidthField,
+        YMM18 = Y.YMM18,
 
-        YMM19 = r19 | YMM << ClassField | W256 << WidthField,
+        YMM19 = Y.YMM19,
 
-        YMM20 = r20 | YMM << ClassField | W256 << WidthField,
+        YMM20 = Y.YMM20,
 
-        YMM21 = r21 | YMM << ClassField | W256 << WidthField,
+        YMM21 = Y.YMM21,
 
-        YMM22 = r22 | YMM << ClassField | W256 << WidthField,
+        YMM22 = Y.YMM22,
 
-        YMM23 = r23 | YMM << ClassField | W256 << WidthField,
+        YMM23 = Y.YMM23,
 
-        YMM24 = r24 | YMM << ClassField | W256 << WidthField,
+        YMM24 = Y.YMM24,
 
-        YMM25 = r25 | YMM << ClassField | W256 << WidthField,
+        YMM25 = Y.YMM25,
 
-        YMM26 = r26 | YMM << ClassField | W256 << WidthField,
+        YMM26 = Y.YMM26,
 
-        YMM27 = r27 | YMM << ClassField | W256 << WidthField,
+        YMM27 = Y.YMM27,
 
-        YMM28 = r28 | YMM << ClassField | W256 << WidthField,
+        YMM28 = Y.YMM28,
 
-        YMM29 = r29 | YMM << ClassField | W256 << WidthField,
+        YMM29 = Y.YMM29,
 
-        YMM30 = r30 | YMM << ClassField | W256 << WidthField,
+        YMM30 = Y.YMM30,
 
-        YMM31 = r31 | YMM << ClassField | W256 << WidthField,
+        YMM31 = Y.YMM31,
 
         // ~ 512-bit vectorized registers
         // ~ ------------------------------------------------------------------
@@ -362,33 +362,33 @@ namespace Z0.Asm
 
         ZMM12 = Z.ZMM12,
 
-        ZMM13 = r13 | ZMM << ClassField | W512 << WidthField,
+        ZMM13 = Z.ZMM13,
 
-        ZMM14 = r14 | ZMM << ClassField | W512 << WidthField,
+        ZMM14 = Z.ZMM14,
 
-        ZMM15 = r15 | ZMM << ClassField | W512 << WidthField,
+        ZMM15 = Z.ZMM15,
 
-        ZMM16 = RegIndex.r16 | ZMM << ClassField | W512 << WidthField,
+        ZMM16 = Z.ZMM16,
 
-        ZMM17 = r17 | ZMM << ClassField | W512 << WidthField,
+        ZMM17 = Z.ZMM17,
 
-        ZMM18 = r18 | ZMM << ClassField | W512 << WidthField,
+        ZMM18 = Z.ZMM18,
 
-        ZMM19 = r19 | ZMM << ClassField | W512 << WidthField,
+        ZMM19 = Z.ZMM19,
 
-        ZMM20 = r20 | ZMM << ClassField | W512 << WidthField,
+        ZMM20 = Z.ZMM20,
 
-        ZMM21 = r21 | ZMM << ClassField | W512 << WidthField,
+        ZMM21 = Z.ZMM21,
 
-        ZMM22 = r22 | ZMM << ClassField | W512 << WidthField,
+        ZMM22 = Z.ZMM22,
 
-        ZMM23 = r23 | ZMM << ClassField | W512 << WidthField,
+        ZMM23 = Z.ZMM23,
 
-        ZMM24 = r24 | ZMM << ClassField | W512 << WidthField,
+        ZMM24 = Z.ZMM24,
 
-        ZMM25 = r25 | ZMM << ClassField | W512 << WidthField,
+        ZMM25 = Z.ZMM25,
 
-        ZMM26 = r26 | ZMM << ClassField | W512 << WidthField,
+        ZMM26 = Z.ZMM26,
 
         ZMM27 = r27 | ZMM << ClassField | W512 << WidthField,
 

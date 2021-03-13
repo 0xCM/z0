@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [CommandKind]
-    public enum AsmSigCmdKind
+    public enum AsmLangCmdKind
     {
         None = 0,
 
@@ -26,5 +26,8 @@ namespace Z0.Asm
 
         [Alias("show-operator-syms")]
         ShowOperandSymbols,
+
+        [Alias("show-reg-codes")]
+        ShowRegisterCodes,
     }
 }

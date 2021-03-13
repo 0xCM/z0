@@ -31,7 +31,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegIndex index(RegisterKind src)
-            => (RegIndex)Bits.extract((uint)src, (byte)FI.C, (byte)FW.C);
+            => (RegIndex)Bits.extract((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
 
         /// <summary>
         /// Determines the register class from the kind
@@ -39,7 +39,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegClass @class(RegisterKind src)
-            => (RegClass)Bits.extract((uint)src, (byte)FI.K, (byte)FW.K);
+            => (RegClass)Bits.extract((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
 
         /// <summary>
         /// Determines the register width from the kind
@@ -47,7 +47,7 @@ namespace Z0.Asm
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
         public static RegWidth width(RegisterKind src)
-            => (RegWidth)Bits.extract((uint)src, (byte)FI.W, (byte)FW.W);
+            => (RegWidth)Bits.extract((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
         /// <summary>
         /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegisterKind'/>
@@ -115,7 +115,10 @@ namespace Z0.Asm
             => src.Where(r => @class(r) == RegClass.ZMM);
 
         [Op]
+        public static Index<Register> list()
+            => Enums.literals<RegisterKind>().Map(model);
+        [Op]
         public static AsmRegLookup lookup()
-            => AsmRegLookup.create(Enums.literals<RegisterKind>().Map(model));
+            => AsmRegLookup.create(list());
     }
 }

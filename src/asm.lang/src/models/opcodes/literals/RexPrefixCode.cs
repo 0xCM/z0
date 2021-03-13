@@ -12,82 +12,82 @@ namespace Z0.Asm
     public enum RexPrefixCode : byte
     {
         /// <summary>
-        /// Defines the <see cref='x40'/> prefix
+        /// Defines the <see cref='x40'/> prefix [0100 0000]
         /// </summary>
         Rex40 = x40,
 
         /// <summary>
-        /// Defines the <see cref='x41'/> prefix
+        /// Defines the <see cref='x41'/> prefix [0100 0001]
         /// </summary>
         RexB = x41,
 
         /// <summary>
-        /// Defines the <see cref='x42'/> prefix
+        /// Defines the <see cref='x42'/> prefix [0100 0010]
         /// </summary>
         Rex42 = x42,
 
         /// <summary>
-        /// Defines the <see cref='x43'/> prefix
+        /// Defines the <see cref='x43'/> prefix [0100 0011]
         /// </summary>
         Rex43 = x43,
 
         /// <summary>
-        /// Defines the <see cref='x44'/> prefix
+        /// Defines the <see cref='x44'/> prefix [0100 0100]
         /// </summary>
-        Rex44 = x44,
+        RexR = x44,
 
         /// <summary>
-        /// Defines the <see cref='x45'/> prefix
+        /// Defines the <see cref='x45'/> prefix [0100 0101]
         /// </summary>
         Rex45 = x45,
 
         /// <summary>
-        /// Defines the <see cref='x46'/> prefix
+        /// Defines the <see cref='x46'/> prefix [0100 0110]
         /// </summary>
         Rex46 = x46,
 
         /// <summary>
-        /// Defines the <see cref='x47'/> prefix
+        /// Defines the <see cref='x47'/> prefix [0100 0111]
         /// </summary>
         Rex47 = x47,
 
         /// <summary>
-        /// Defines the <see cref='x48'/> prefix
+        /// Defines the <see cref='x48'/> prefix [0100 1000]
         /// </summary>
         RexW = x48,
 
         /// <summary>
-        /// Defines the <see cref='x49'/> prefix
+        /// Defines the <see cref='x49'/> prefix [0100 1001]
         /// </summary>
         RexWB = x49,
 
         /// <summary>
-        /// Defines the <see cref='x4a'/> prefix
+        /// Defines the <see cref='x4a'/> prefix [0100 1010]
         /// </summary>
         RexWX = x4a,
 
         /// <summary>
-        /// Defines the <see cref='x4b'/> prefix
+        /// Defines the <see cref='x4b'/> prefix [0100 1011]
         /// </summary>
         RexXB = x4b,
 
         /// <summary>
-        /// Defines the <see cref='x4c'/> prefix
+        /// Defines the <see cref='x4c'/> prefix [0100 1100]
         /// </summary>
         RexWR = x4c,
 
         /// <summary>
-        /// Defines the <see cref='x4d'/> prefix
+        /// Defines the <see cref='x4d'/> prefix [0100 1101]
         /// </summary>
         RexWRB = x4d,
 
         /// <summary>
-        /// Defines the <see cref='x4e'/> prefix
+        /// Defines the <see cref='x4e'/> prefix [0100 1110]
         /// </summary>
         RexWRX = x4e,
 
         /// <summary>
-        /// Defines the <see cref='x4f'/> prefix
+        /// Defines the <see cref='x4f'/> prefix [0100 1111]
         /// </summary>
         RexWRXB = x4f,
     }

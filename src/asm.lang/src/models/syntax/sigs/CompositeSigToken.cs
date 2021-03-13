@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+     using SM = AsmSyntaxMeaning;
+
     /// <summary>
     /// Classifies composite operand signature specifications
     /// </summary>
@@ -13,16 +15,16 @@ namespace Z0.Asm
         [Symbol("")]
         None = 0,
 
-        [Symbol("r/m8")]
+        [Symbol("r/m8", SM.rm8)]
         Rm8,
 
-        [Symbol("r/m16")]
+        [Symbol("r/m16", SM.rm8)]
         Rm16,
 
-        [Symbol("r/m32")]
+        [Symbol("r/m32", SM.rm8)]
         Rm32,
 
-        [Symbol("r/m64")]
+        [Symbol("r/m64", SM.rm8)]
         Rm64,
 
         [Symbol("reg/m8")]
@@ -37,7 +39,7 @@ namespace Z0.Asm
         [Symbol("reg")]
         Reg,
 
-        [Symbol("m")]
+        [Symbol("m", SM.m)]
         M,
 
         [Symbol("mem")]
