@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Part;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
@@ -36,6 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TypeIdentity numeric(string prefix, Type arg)
             => TypeIdentity.numeric(prefix,arg);
+
 
         /// <summary>
         /// Attempts to parse a numeric kind from a string in the form {width}{indicator}
@@ -78,8 +78,8 @@ namespace Z0
                     : numeric(part)
                 select x;
 
-        [MethodImpl(Inline)]
-        public static NumericKind nk<T>(T t = default)
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static NumericKind nk<T>()
             => Numeric.kind<T>();
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
-            => ApiIdentify.build(opname, TypeWidth.None, k, generic);
+            => build(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -100,6 +100,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => ApiIdentify.build(opname, TypeWidth.None, nk<T>(), generic);
+                => build(opname, TypeWidth.None, nk<T>(), generic);
     }
 }

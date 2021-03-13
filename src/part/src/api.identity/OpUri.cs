@@ -53,6 +53,10 @@ namespace Z0
         public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
             => new OpUri(ApiUriScheme.Located, host, group, opid);
 
+        [MethodImpl(Inline), Op]
+        public static OpUri define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+            => new OpUri(scheme, host, group, opid);
+
         [MethodImpl(Inline)]
         public OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {

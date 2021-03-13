@@ -103,7 +103,7 @@ namespace Z0.Asm
 
             var name = nameof(gcpu.vbsll);
             var src = typeof(gcpu).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
-            var id = Z0.Identity.identify(src);
+            var id = Z0.ApiIdentity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
             Claim.ClaimEq(method.Name, name);
@@ -118,7 +118,7 @@ namespace Z0.Asm
             var name = "vbsll";
             var vKind = K.vk256<uint>();
             var src = typeof(cpu).DeclaredMethods().WithName(name).OfKind(vKind).Single();
-            var id = Z0.Identity.identify(src);
+            var id = Z0.ApiIdentity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = ClrDynamic.method(ClrDynamic.handle(f.Target));
             Claim.ClaimEq(method.Name, name);

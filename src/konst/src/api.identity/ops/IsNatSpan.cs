@@ -7,15 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Determines whether a type is a natural span
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static bool IsNatSpan(Type t)
             => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
     }

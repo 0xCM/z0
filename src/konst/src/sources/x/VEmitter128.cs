@@ -25,7 +25,7 @@ namespace Z0
             => Source = source;
 
         public OpIdentity Id
-            => ApiIdentify.sfunc(Name, Kind);
+            => ApiIdentity.sfunc(Name, Kind);
 
         [MethodImpl(Inline)]
         public Vector128<T> Invoke()

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static DbNames;
 
     partial interface IEnvPaths
@@ -17,7 +15,7 @@ namespace Z0
             => ParsedExtractRoot() + name;
 
         FS.FilePath ParsedExtractFile(ApiHostUri host)
-            => ParsedExtractFile(ApiIdentity.file(host, PCsv));
+            => ParsedExtractFile(ApiFiles.filename(host, PCsv));
 
         FS.Files ParsedExtractFiles()
             => ParsedExtractRoot().AllFiles;

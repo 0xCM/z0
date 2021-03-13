@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ApiIdentify;
-
     public struct LegalIdentityBuilder : IIdentityBuilder<string,OpIdentity>
     {
         LegalIdentityOptions Options;
@@ -40,7 +38,7 @@ namespace Z0
         }
 
         public string Build(OpIdentity src)
-            => api.legalize(src,Options);
+            => ApiIdentity.legalize(src,Options);
 
         [MethodImpl(Inline)]
         internal static LegalIdentityOptions CreateFileOptions()

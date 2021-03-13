@@ -19,7 +19,7 @@ namespace Z0
         internal static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
         {
             var index = new Dictionary<string, MethodInfo>();
-            root.iter(methods, m => index.TryAdd(Identity.identify(m).Identifier, m));
+            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).Identifier, m));
             return index;
         }
 

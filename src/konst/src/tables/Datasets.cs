@@ -17,6 +17,8 @@ namespace Z0
         /// </summary>
         public const ushort PosMask = 0xFFFF;
 
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Computes the field width from a field specifier
         /// </summary>

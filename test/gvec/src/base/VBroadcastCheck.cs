@@ -36,7 +36,8 @@ namespace Z0
 
         public Vec128Kind<T> VKind => default;
 
-        public OpIdentity Id => ApiIdentify.sfunc(Name,VKind);
+        public OpIdentity Id
+            => ApiIdentity.sfunc(Name,VKind);
 
         public bit Invoke(S a, Vector128<T> x)
         {
@@ -59,7 +60,8 @@ namespace Z0
 
         public const string Name = "vbroadcast_check";
 
-        public OpIdentity Id => ApiIdentify.sfunc(Name,VKind);
+        public OpIdentity Id
+            => ApiIdentity.sfunc(Name,VKind);
 
         public bit Invoke(S a, Vector256<T> x)
         {

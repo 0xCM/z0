@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = ApiIdentify;
+    using api = ApiIdentity;
 
     partial class XApiId
     {

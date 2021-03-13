@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     /// <summary>
     /// Defines enum-predicated header content
@@ -18,7 +18,7 @@ namespace Z0
         public F[] Fields
         {
             [MethodImpl(Inline)]
-            get => Enums.literals<F>();
+            get => ClrEnums.literals<F>();
         }
 
         public string[] Labels

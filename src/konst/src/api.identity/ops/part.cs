@@ -9,8 +9,9 @@ namespace Z0
 
     using static Part;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
+        [Op]
         public static Option<TypeIndicator> SegIndicator(Type t)
         {
             if(t.IsSegmented())

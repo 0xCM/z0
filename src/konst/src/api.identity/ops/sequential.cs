@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Assigns aggregate identity to an identity sequence

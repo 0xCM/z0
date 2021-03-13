@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -37,11 +37,11 @@ namespace Z0
         /// </summary>
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpIdentity build(string opname, NumericKind k, bool generic)
             => build(opname, TypeWidth.None, k, generic);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpIdentity build(ApiClass k, NumericKind nk, bool generic)
             => build(k.Format(), nk, generic);
 

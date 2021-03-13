@@ -147,7 +147,7 @@ namespace Z0
                 var method = member.Method;
                 var kind = method.KindId();
                 var id = Diviner.Identify(method);
-                var uri = ApiIdentity.uri(ApiUriScheme.Located, member.Host, method.Name, id);
+                var uri = OpUri.define(ApiUriScheme.Located, member.Host, method.Name, id);
                 dst[i] = new ApiMember(uri,method, kind, member.Location);
             }
 
@@ -177,7 +177,7 @@ namespace Z0
                 var m = methods[i];
                 var kid = m.Method.KindId();
                 var id = Diviner.Identify(m.Method);
-                var uri = ApiIdentity.uri(ApiUriScheme.Located, src.Uri, m.Method.Name, id);
+                var uri = OpUri.define(ApiUriScheme.Located, src.Uri, m.Method.Name, id);
                 var location = address(Jit(m.Method));
                 seek(dst,i) = new ApiMember(uri, m.Method, kid, location);
 
@@ -231,7 +231,7 @@ namespace Z0
                     var reified = src.Method.MakeGenericMethod(t);
                     var address = memory.address(Jit(reified));
                     var id = Diviner.Identify(reified);
-                    var uri = ApiIdentity.uri(ApiUriScheme.Located, src.Host, method.Name, id);
+                    var uri = OpUri.define(ApiUriScheme.Located, src.Host, method.Name, id);
                     seek(dst,i) = new ApiMember(uri, reified, @class, address);
                 }
             }

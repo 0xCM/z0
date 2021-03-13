@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="host">The source type</param>
         [MethodImpl(Inline)]
         public static string owner(Type host)
-            => ApiIdentify.part(host).Format();
+            => ApiIdentity.part(host).Format();
 
         static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> NumericKindSets {get;}
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
@@ -46,10 +46,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static HashSet<NumericKind> GetNumericKindSet(NumericKind kind)
-            => NumericKindSets.GetOrAdd(kind, ApiIdentify.distinct);
+            => NumericKindSets.GetOrAdd(kind, ApiIdentity.distinct);
 
         [MethodImpl(Inline)]
         static HashSet<Type> GetNumericTypeSet(NumericKind kind)
-            => NumericTypeSets.GetOrAdd(kind, ApiIdentify.typeset);
+            => NumericTypeSets.GetOrAdd(kind, ApiIdentity.typeset);
     }
 }

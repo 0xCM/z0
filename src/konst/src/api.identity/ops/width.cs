@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Divines the bit-width of a specified type, if possible

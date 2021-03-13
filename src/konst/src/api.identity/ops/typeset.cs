@@ -9,10 +9,10 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         [Op]
         public static HashSet<Type> typeset(NumericKind k)
-            => distinct(k).Select(NumericKinds.type).ToHashSet();
+            => ApiIdentity.distinct(k).Select(NumericKinds.type).ToHashSet();
     }
 }

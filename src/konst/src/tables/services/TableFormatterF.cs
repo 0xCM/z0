@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static ushort width(FieldInfo field)
-            =>  Numeric.scalar<F,ushort>((F)field.GetRawConstantValue());
+            => Numeric.scalar<F,ushort>((F)field.GetRawConstantValue());
 
         public void EmitEol()
             => Target.Append(Eol);

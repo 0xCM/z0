@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     [ApiHost]
     public readonly partial struct Root
@@ -15,6 +13,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T @as<S,T>(in S src)
             => ref Unsafe.As<S,T>(ref Unsafe.AsRef(src));
+
+        /// <summary>
+        /// Indicates that emitted content should overwrite whatever file content may exist
+        /// </summary>
+        public const FileWriteMode Overwrite = FileWriteMode.Overwrite;
+
 
         /// <summary>
         /// The number of bits to shift a field specifier left/right to reveal/specify the width of an identified field
@@ -40,7 +44,6 @@ namespace Z0
          [MethodImpl(Inline)]
          public static Y apply<X,Y>(X x, Func<X,Y> f)
             => f(x);
-
 
 
         [MethodImpl(Inline), Op]

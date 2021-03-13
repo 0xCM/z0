@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
+    using static Root;
 
     public struct DatasetFieldFormatter<F>
         where F : unmanaged, Enum
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public DatasetFieldFormatter(StringBuilder dst, char delimiter = FieldDelimiter)
         {
-            z.insist(dst != null);
+            root.require(dst);
             Target = dst;
             Delimiter = delimiter;
         }
@@ -30,13 +30,13 @@ namespace Z0
 
         public void Append(F f, object content)
         {
-            z.insist(content != null);
+            root.require(content);
             Target.Append(Render(content).PadRight(Datasets.width(f)));
         }
 
         public void Delimit(F f, object content)
         {
-            z.insist(content != null);
+            root.require(content);
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(Render(content).PadRight(Datasets.width(f)));
@@ -45,7 +45,7 @@ namespace Z0
         public void Delimit<T>(F f, T content)
             where T : ITextual
         {
-            z.insist(content != null);
+            root.require(content as ITextual);
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(Render(content).PadRight(Datasets.width(f)));
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
         {
-            z.insist(Target != null);
+            root.require(Target);
             return Target.ToString();
         }
 

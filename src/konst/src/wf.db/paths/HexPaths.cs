@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static DbNames;
 
     partial interface IEnvPaths
@@ -44,6 +42,6 @@ namespace Z0
             => ApiHexRoot() + ApiFileName(part, api, Hex);
 
         FS.FilePath ApiHexFile(ApiHostUri host)
-            => ApiHexFile(ApiIdentity.file(host, Hex));
+            => ApiHexFile(ApiFiles.filename(host, Hex));
     }
 }

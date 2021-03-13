@@ -5,18 +5,53 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
-        /// Creates a moniker directly from source text
+        /// Assigns host-independent api member identity to a generic method; if the
+        /// source method is nongeneric, returns <see cref='OpIdentityG.Empty' />
         /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline), Op]
-        public static OpIdentityG generic(string src)
-            => new OpIdentityG(src);
+        /// <param name="src">The source method</param>
+        public static OpIdentityG generic(MethodInfo src)
+        {
+            if(!src.IsGenericMethod)
+                return OpIdentityG.Empty;
+
+            var id = name(src);
+            id += IDI.PartSep;
+            id += IDI.Generic;
+
+            var args = src.GetParameters();
+            var argtypes = src.ParameterTypes(true);
+            var last = string.Empty;
+            for(var i=0; i<argtypes.Length; i++)
+            {
+                var argtype = argtypes[i];
+                if(i != 0 && last.IsNotBlank())
+                    id += IDI.PartSep;
+
+                last = EmptyString;
+
+                if(args[i].IsParametric())
+                    last = ApiIdentity.parameter(args[i]);
+                else if(argtype.IsOpenGeneric())
+                {
+                    if(argtype.IsVector())
+                        last = text.concat(IDI.Vector, ApiIdentity.width(argtype).FormatValue());
+                    else if(argtype.IsSegmented())
+                        last = text.concat(IDI.Block, ApiIdentity.width(argtype).FormatValue());
+                    else if(SpanTypes.IsSystemSpan(argtype))
+                        last = SpanTypes.kind(argtype).Format();
+                }
+
+                id += last;
+            }
+
+            return new OpIdentityG(id);
+        }
     }
 }

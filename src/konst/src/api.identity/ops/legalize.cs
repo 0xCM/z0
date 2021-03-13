@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         [Op]
         public static string legalize(OpIdentity src, in LegalIdentityOptions options)

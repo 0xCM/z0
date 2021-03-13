@@ -41,7 +41,7 @@ namespace Z0
         public string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(ApiTestIdentity.name(f)), true);
+                => CaseName<W,T>(HostType, ApiIdentity.build<W,T>(ApiTestIdentity.name(f)), true);
 
         public string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth

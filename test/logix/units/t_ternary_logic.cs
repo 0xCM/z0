@@ -147,7 +147,7 @@ namespace Z0
                 BitVector<T> v = NumericLogixHost.eval(kind, a.Content, b.Content, c.Content);
 
                 if(u != v)
-                    Notify($"Equivalence failed for ternary op {kind}:{ApiIdentify.numeric<T>()}");
+                    Notify($"Equivalence failed for ternary op {kind}:{ApiIdentity.numeric<T>()}");
 
                 Claim.eq(u,v);
             }

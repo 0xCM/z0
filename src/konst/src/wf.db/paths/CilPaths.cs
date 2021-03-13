@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static DbNames;
 
     partial interface IEnvPaths
@@ -17,7 +15,7 @@ namespace Z0
             => CilDataRoot() + name;
 
         FS.FilePath CilDataFile(ApiHostUri host)
-            => CilDataFile(ApiIdentity.file(host, IlData));
+            => CilDataFile(ApiFiles.filename(host, IlData));
 
         FS.Files CilDataFiles()
             => CilDataRoot().Files(Csv);
@@ -32,7 +30,7 @@ namespace Z0
             => CilCodeRoot() + name;
 
         FS.FilePath CilCodeFile(ApiHostUri host)
-            => CilCodeFile(ApiIdentity.file(host, Il));
+            => CilCodeFile(ApiFiles.filename(host, Il));
 
         FS.Files CilCodeFiles()
             => CilCodeRoot().Files(Csv);

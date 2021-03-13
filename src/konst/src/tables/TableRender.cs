@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     [ApiHost]
     public readonly partial struct TableFormatter
     {
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static RowFormatter<T> row<T>(ReadOnlySpan<byte> widths, T t = default, char delimiter = FieldDelimiter)
             where T : struct
                 => new RowFormatter<T>(fields<T>(widths), text.build(), FieldDelimiter);

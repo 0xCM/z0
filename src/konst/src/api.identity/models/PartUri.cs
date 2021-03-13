@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ApiIdentity;
-
     /// <summary>
     /// Uri for .net clr assembly
     /// </summary>
@@ -41,17 +39,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(PartUri src)
-            => api.equals(this, src);
+            => Identified.equals(this, src);
 
         [MethodImpl(Inline)]
         public int CompareTo(PartUri other)
-            => api.compare(this, other);
+            => Identified.compare(this, other);
 
         public override int GetHashCode()
-            => api.hash(this);
+            => Identified.hash(this);
 
         public override bool Equals(object obj)
-            => api.equals(this, obj);
+            => Identified.equals(this, obj);
 
         public override string ToString()
             => UriText;

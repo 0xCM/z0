@@ -74,7 +74,7 @@ namespace Z0
 
             var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
-            var uri = ApiIdentity.uri(scheme, path.Value, group, id);
+            var uri = OpUri.define(scheme, path.Value, group, id);
             return root.parsed(src, uri);
         }
 
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="f">The function</param>
         [Op]
         public static string TestCase(Type host, IFunc f)
-            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
+            => $"{ApiIdentity.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
 
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId catalog, string host, string group)
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="host">The source type</param>
         [Op]
         public static string HostUri(Type host)
-            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}";
+            => $"{ApiIdentity.part(host).Format()}{UriPathSep}{host.Name}";
 
         /// <summary>
         /// Produces the name of the test case determined by a source method
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="method">The method that implements the test</param>
         [Op]
         public static string TestCase(MethodInfo method)
-            => $"{ApiIdentify.part(method.DeclaringType).Format()}{UriPathSep}{method.DeclaringType.Name}{UriPathSep}{method.Name}";
+            => $"{ApiIdentity.part(method.DeclaringType).Format()}{UriPathSep}{method.DeclaringType.Name}{UriPathSep}{method.Name}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -145,7 +145,7 @@ namespace Z0
         /// <param name="fullname">The full name of the test</param>
         [Op]
         public static string TestCase(Type host, string fullname)
-            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{fullname}";
+            => $"{ApiIdentity.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{fullname}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name
@@ -153,6 +153,6 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string TestCase(Type host, OpIdentity id)
-            => $"{ApiIdentify.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
+            => $"{ApiIdentity.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
     }
 }

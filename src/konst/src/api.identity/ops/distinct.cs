@@ -10,7 +10,7 @@ namespace Z0
     using NK = NumericKind;
     using ID = ScalarKind;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         [Op]
         public static HashSet<NumericKind> distinct(NumericKind k)

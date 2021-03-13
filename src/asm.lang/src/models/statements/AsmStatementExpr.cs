@@ -36,6 +36,10 @@ namespace Z0.Asm
         public int CompareTo(AsmStatementExpr src)
             => Content.CompareTo(src.Content);
 
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatementExpr(string src)
+            => new AsmStatementExpr(src);
+
         public static AsmStatementExpr Empty
         {
             [MethodImpl(Inline)]

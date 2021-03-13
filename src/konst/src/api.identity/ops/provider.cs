@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    using static Konst;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Retrieves a type's specialized identity provider, if it has one; otherwise, returns a caller-supplied fallback
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="fallback">The identity provider to yield if the type does not have a specialized provider</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static ITypeIdentityProvider provider(Type src, Func<Type,ITypeIdentityProvider> fallback)
             => TypeIdentities.provider(src,fallback);
     }
@@ -29,11 +29,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <param name="fallback">The identity provider to yield if the type does not have a specialized provider</param>
-        [Op]
+        [MethodImpl(Inline)]
         public static ITypeIdentityProvider provider(Type src, Func<Type,ITypeIdentityProvider> fallback)
             => TypeIdentityProviders.GetOrAdd(src.EffectiveType(), fallback);
 
         static ConcurrentDictionary<Type, ITypeIdentityProvider> TypeIdentityProviders {get;}
-                    = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
+            = new ConcurrentDictionary<Type, ITypeIdentityProvider>();
     }
 }

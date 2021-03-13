@@ -36,7 +36,7 @@ namespace Z0
             else
             {
                 var arg = src.GetGenericArguments().Single();
-                return ApiIdentify.numeric(@base, arg);
+                return ApiIdentity.numeric(@base, arg);
             }
         }
     }

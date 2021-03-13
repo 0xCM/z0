@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         public static OpIdentity id<T>([Caller] string label = null)
             where T : unmanaged
-                => ApiIdentify.numeric($"{label}", typeof(T).NumericKind());
+                => ApiIdentity.numeric($"{label}", typeof(T).NumericKind());
 
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="label">The root name</param>
         public static string name_alt<C>(Type host, string label)
             where C : unmanaged
-                => text.concat(ApiIdentify.part(host).Format(), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentify.numeric<C>());
+                => text.concat(ApiIdentity.part(host).Format(), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentity.numeric<C>());
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -85,6 +85,6 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{ApiIdentify.part(host).Format()}/{host.Name}{UriPathSep}{ApiIdentify.build(label, default(W).TypeWidth, Numeric.kind<C>(), generic)}";
+                => $"{ApiIdentity.part(host).Format()}/{host.Name}{UriPathSep}{ApiIdentity.build(label, default(W).TypeWidth, Numeric.kind<C>(), generic)}";
     }
 }

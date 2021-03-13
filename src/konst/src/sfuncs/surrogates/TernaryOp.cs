@@ -29,7 +29,7 @@ namespace Z0
             internal TernaryOp(Z0.TernaryOp<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentify.sfunc<T>(name);
+                Id = ApiIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

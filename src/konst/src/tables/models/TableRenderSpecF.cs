@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct TableRenderSpec<F> : ITextual
         where F : unmanaged
@@ -43,7 +43,6 @@ namespace Z0
             Fields = columns;
             Headers = columns.Map(f => f.Name);
         }
-
 
         /// <summary>
         /// Formats the format specification, not the object being specified

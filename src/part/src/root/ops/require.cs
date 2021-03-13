@@ -23,6 +23,14 @@ namespace Z0
                 sys.@throw(f);
         }
 
+        [MethodImpl(Inline), Op]
+        public static void require<T>(T src)
+            where T : class
+        {
+            if(src == null)
+                sys.@throw(string.Format("Null <{0}> argurment", typeof(T).Name));
+        }
+
         /// <summary>
         /// Insists upon invariant satisfaction and returns a specified value if the invariant holds
         /// </summary>

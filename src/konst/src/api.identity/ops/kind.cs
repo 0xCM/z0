@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         [MethodImpl(Inline), Op]
         public static ApiClass kind(MethodInfo src)

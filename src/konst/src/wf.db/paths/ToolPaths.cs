@@ -53,8 +53,6 @@ namespace Z0
         FS.FolderPath ToolCatalogRoot()
             => DevRoot("tooling") + FS.folder("catalog");
 
-
-
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);
     }

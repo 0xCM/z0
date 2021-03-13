@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static void map(ReadOnlySpan<FieldInfo> src, Span<TableField> dst)
         {
             var count = (ushort)src.Length;
@@ -31,6 +31,5 @@ namespace Z0
             dst.Definition = src;
             return ref dst;
         }
-
     }
 }

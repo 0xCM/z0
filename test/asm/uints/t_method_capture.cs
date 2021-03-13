@@ -68,9 +68,9 @@ namespace Z0.Asm
             using var dst = CaseWriter(FS.Extensions.Asm);
             var xor = LD.xor<uint>();
             var alt = Capture.alt(Wf, Context);
-            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(Identity.identify(xor.Method), xor.Method)), dst);
+            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
             var gteq = LD.gteq<uint>();
-            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(Identity.identify(xor.Method), xor.Method)), dst);
+            AsmCheck.WriteAsm(alt.Capture(new IdentifiedMethod(ApiIdentity.identify(xor.Method), xor.Method)), dst);
         }
 
         void capture_dynamic_delegate_batch()
@@ -81,7 +81,7 @@ namespace Z0.Asm
                 );
             var identified = z.alloc<IdentifiedMethod>(methods.Length);
             for(var i=0; i<identified.Length; i++)
-                identified[i] = new IdentifiedMethod(Identity.identify(methods[i]), methods[i]);
+                identified[i] = new IdentifiedMethod(ApiIdentity.identify(methods[i]), methods[i]);
             var buffer = sys.alloc<byte>(Pow2.T14);
             var alt = Capture.alt(Wf, Context);
             var capture = alt.Capture(identified, buffer);

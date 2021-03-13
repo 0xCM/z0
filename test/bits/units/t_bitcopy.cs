@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {
@@ -45,7 +45,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(ApiIdentify.NumericOp<T>(nameof(gbits.copy))));
+            CheckAction(check, CaseName(ApiIdentity.NumericOp<T>(nameof(gbits.copy))));
         }
     }
 }

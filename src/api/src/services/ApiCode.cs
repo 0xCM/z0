@@ -25,7 +25,7 @@ namespace Z0
         /// <param name="match">The kind to match</param>
         [Op]
         public static bool accepts(ApiCodeBlock src, NumericKind match)
-            => ApiIdentify.numeric(src.Id.Components.Skip(1)).Contains(match);
+            => ApiIdentity.numeric(src.Id.Components.Skip(1)).Contains(match);
 
         /// <summary>
         /// Determines the arity of the encoded operation

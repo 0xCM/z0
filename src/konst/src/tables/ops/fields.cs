@@ -27,6 +27,7 @@ namespace Z0
             return new TableFields(buffer);
         }
 
+        [Op]
         public static TableFields fields(Type src, bool recurse)
         {
             var collected = root.list<TableField>();

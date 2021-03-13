@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    using api = ApiIdentity;
+    using api = Identified;
 
     /// <summary>
     /// Defines an identity component

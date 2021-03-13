@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Root;
 
     using api = Table;
 
-    [ApiHost]
     public readonly struct TableArchives
     {
         public static Option<FS.FilePath> deposit<F,R>(FS.FolderPath root, R[] src, FS.FileName name)

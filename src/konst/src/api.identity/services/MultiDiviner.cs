@@ -16,17 +16,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity DivineIdentity(Type src)
-            => Identity.identify(src);
+            => ApiIdentity.identify(src);
 
         [MethodImpl(Inline)]
         public OpIdentity DivineIdentity(MethodInfo src)
-            => Identity.identify(src);
+            => ApiIdentity.identify(src);
 
         public OpIdentity DivineIdentity(Delegate src)
-            => Identity.identify(src);
+            => ApiIdentity.identify(src);
 
         [MethodImpl(Inline)]
         public OpIdentityG GenericIdentity(MethodInfo src)
-            => Identity.GenericIdentity(src);
+            => ApiIdentity.generic(src);
     }
 }

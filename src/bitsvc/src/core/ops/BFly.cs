@@ -21,7 +21,7 @@ namespace Z0
             public static Bfly<N,T> Op => default;
 
             public OpIdentity Id
-                => ApiIdentify.sfunc<N,T>(Name);
+                => ApiIdentity.sfunc<N,T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a)

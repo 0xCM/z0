@@ -20,7 +20,7 @@ namespace Z0
             => AsmFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath AsmFile(ApiHostUri host)
-            => AsmRoot() + ApiIdentity.file(host, Asm);
+            => AsmRoot() + ApiFiles.filename(host, Asm);
 
         FS.FilePath AsmFile(PartId part, string api)
             => AsmRoot() + ApiFileName(part, api, Asm);
@@ -33,6 +33,5 @@ namespace Z0
 
         FS.FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, Asm);
-
     }
 }

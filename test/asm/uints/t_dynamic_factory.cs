@@ -75,7 +75,7 @@ namespace Z0.Asm
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsSegmented(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
-                    var width = ApiIdentify.width(t);
+                    var width = ApiIdentity.width(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
                 }
             }
@@ -125,8 +125,8 @@ namespace Z0.Asm
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var dId = ApiIdentify.build(name, w, kind, false);
-            var gId = ApiIdentify.build(name, w, kind, true);
+            var dId = ApiIdentity.build(name, w, kind, false);
+            var gId = ApiIdentity.build(name, w, kind, true);
             var archive = Wf.ApiHexArchive();
             var dHost = ApiQuery.hostinfo(typeof(cpu));
             var gHost = ApiQuery.hostinfo(typeof(gcpu));

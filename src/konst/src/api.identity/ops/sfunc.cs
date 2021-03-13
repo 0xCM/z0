@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct ApiIdentify
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -19,7 +19,6 @@ namespace Z0
         /// <param name="t">A primal cell type representative</param>
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
@@ -31,7 +30,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname)
             => NumericOp(opname, typeof(T).NumericKind());
 
@@ -41,7 +40,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
                 => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
@@ -52,7 +51,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
                 => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
@@ -63,7 +62,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname, Vec512Kind<T> k)
             where T : unmanaged
                 => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);

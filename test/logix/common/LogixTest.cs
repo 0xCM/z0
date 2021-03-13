@@ -73,7 +73,7 @@ namespace Z0
         protected void bm_delegate_bench<T>(BinaryBitLogicKind opkind, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{opkind.Format()}_{ApiIdentify.numeric<T>()}_delegate";
+            var opname = $"bm_{opkind.Format()}_{ApiIdentity.numeric<T>()}_delegate";
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = Random.BitMatrix<T>();
@@ -103,7 +103,7 @@ namespace Z0
         protected void bm_and_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_and_{ApiIdentify.numeric<T>()}";
+            var opname = $"bm_and_{ApiIdentity.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -133,7 +133,7 @@ namespace Z0
         protected void bm_xor_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_xor_{ApiIdentify.numeric<T>()}";
+            var opname = $"bm_xor_{ApiIdentity.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();

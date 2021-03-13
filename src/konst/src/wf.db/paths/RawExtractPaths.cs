@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static DbNames;
 
     partial interface IEnvPaths
@@ -20,7 +18,7 @@ namespace Z0
             => RawExtractRoot() + name;
 
         FS.FilePath RawExtractFile(ApiHostUri host)
-            => RawExtractFile(ApiIdentity.file(host, XCsv));
+            => RawExtractFile(ApiFiles.filename(host, XCsv));
 
         FS.Files RawExtractFiles(PartId part)
             => RawExtractFiles().Where(f => f.IsOwner(part));

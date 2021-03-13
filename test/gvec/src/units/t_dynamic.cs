@@ -20,7 +20,7 @@ namespace Z0
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsSegmented(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
-                    var width = ApiIdentify.width(t);
+                    var width = ApiIdentity.width(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
                 }
             }
@@ -30,7 +30,7 @@ namespace Z0
         {   const byte imm8 = 9;
             var name = nameof(gcpu.vbsll);
             var src = typeof(gcpu).DeclaredMethods().WithName(name).OfKind(VK.v128).Single();
-            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), Identity.identify(src), src, imm8);
+            var op = Dynop.EmbedVUnaryOpImm(VK.vk128<uint>(), ApiIdentity.identify(src), src, imm8);
             var handle = ClrDynamic.handle(op.Target);
             var dst = ClrDynamic.method(handle);
             Claim.ClaimEq(dst.Name, name);

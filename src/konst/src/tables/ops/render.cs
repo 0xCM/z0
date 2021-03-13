@@ -8,11 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;
-    using static z;
+    using static Root;
+    using static memory;
 
     partial struct Table
     {
+        [Op, Closures(Closure)]
         public static void render<T>(TableFields fields, in T src, StringBuilder dst, bool eol = true)
             where T : struct
         {

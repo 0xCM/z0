@@ -316,7 +316,7 @@ namespace Z0
         void bm_api_bench<T>(BinaryBitLogicKind op, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{op.Format()}_{ApiIdentify.numeric<T>()}_api";
+            var opname = $"bm_{op.Format()}_{ApiIdentity.numeric<T>()}_api";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();

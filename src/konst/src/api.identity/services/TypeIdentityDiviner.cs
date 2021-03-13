@@ -33,7 +33,7 @@ namespace Z0
                 return ArrayId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
-            else if(ApiIdentify.IsNatSpan(arg))
+            else if(ApiIdentity.IsNatSpan(arg))
                 return NatSpanId(arg);
             else
                 return none<TypeIdentity>();
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="t">The source type</param>
         [MethodImpl(Inline)]
         public static ITypeIdentityProvider IdentityProvider(Type src)
-            => ApiIdentify.provider(src, CreateProvider);
+            => ApiIdentity.provider(src, CreateProvider);
 
         static TypeIdentity DoDivination(Type arg)
             => default(TypeIdentityDiviner).DivineIdentity(arg);
@@ -67,12 +67,12 @@ namespace Z0
             => TypeIdentity.define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
 
         static Option<TypeIdentity> SegmentedId(Type t)
-            =>  from i in ApiIdentify.SegIndicator(t)
-                let segwidth = ApiIdentify.width(t)
+            =>  from i in ApiIdentity.SegIndicator(t)
+                let segwidth = ApiIdentity.width(t)
                 where segwidth.IsSome()
                 let segFmt = segwidth.FormatValue()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = ApiIdentify.width(arg)
+                let argwidth = ApiIdentity.width(arg)
                 where argwidth.IsSome()
                 let argFmt = argwidth.FormatValue()
                 let nk = arg.NumericKind()
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         static Option<TypeIdentity> NatSpanId(Type src)
         {
-            if(ApiIdentify.IsNatSpan(src))
+            if(ApiIdentity.IsNatSpan(src))
             {
                 var typeargs = src.SuppliedTypeArgs();
                 var text = IDI.NatSpan;
