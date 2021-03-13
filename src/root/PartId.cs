@@ -18,6 +18,8 @@ public enum PartId : ulong
 
     Math = 4,
 
+    Core = 5,
+
     Refs = 8,
 
     Api = 9,
@@ -52,13 +54,15 @@ public enum PartId : ulong
 
     Gen = 47,
 
-    Cli = 48,
+    Clr = 60,
 
-    Canonical = 49,
+    Cli = 61,
 
-    CmdSpec = 50,
+    Canonical = 62,
 
-    CmdExec = 51,
+    CmdSpec = 63,
+
+    CmdExec = 64,
 
     BitVectors = 100,
 
@@ -92,7 +96,6 @@ public enum PartId : ulong
 
     Merge = 116,
 
-    Memory = 117,
 
     Blocked = 118,
 

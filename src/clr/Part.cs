@@ -5,11 +5,11 @@
 using System;
 using System.Reflection;
 
-[assembly: PartId(PartId.Part)]
+[assembly: PartId(PartId.Clr)]
 
 namespace Z0.Parts
 {
-    public sealed partial class Part : Part<Part>
+    public sealed partial class Clr : Part<Clr>
     {
 
     }

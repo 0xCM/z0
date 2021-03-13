@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../src/core"
+		},
+		{
+			"path": "../../src/root"
+		},
+		{
+			"path": "../../src/part"
+		},
+	],
+	"settings": {}
+}

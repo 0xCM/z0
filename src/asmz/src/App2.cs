@@ -111,10 +111,10 @@ namespace Z0.Asm
             {
                 ref readonly var item = ref skip(src,i);
                 var info = new {
-                    item.SimpleName,
-                    item.Location,
-                    item.PdbPath,
-                    item.DocPath,
+                    Name = item.SimpleName,
+                    Location = ClrAssemblies.location(item),
+                    PdbPath = ClrAssemblies.pdbpath(item, out var _),
+                    XmlDocPath = ClrAssemblies.xmlpath(item, out var _),
                     MetadataSize = ((ByteSize)item.RawMetadata.Length).Kb
                 };
                 Wf.Row(info.ToString());
