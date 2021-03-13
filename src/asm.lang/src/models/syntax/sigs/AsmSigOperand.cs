@@ -16,12 +16,12 @@ namespace Z0.Asm
     {
         public Identifier Name {get;}
 
-        public AsmSigOpKind Kind {get;}
+        public AsmSigToken Kind {get;}
 
-        public SymbolName<AsmSigOpKind> Symbol {get;}
+        public SymbolName<AsmSigToken> Symbol {get;}
 
         [MethodImpl(Inline)]
-        public AsmSigOperand(Identifier name, AsmSigOpKind kind, SymbolName<AsmSigOpKind> symbol)
+        public AsmSigOperand(Identifier name, AsmSigToken kind, SymbolName<AsmSigToken> symbol)
         {
             Name  = name;
             Kind = kind;
@@ -43,7 +43,7 @@ namespace Z0.Asm
         public static AsmSigOperand Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmSigOperand(Identifier.Empty, AsmSigOpKind.None, default);
+            get => new AsmSigOperand(Identifier.Empty, AsmSigToken.None, default);
         }
     }
 }

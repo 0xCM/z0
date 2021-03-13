@@ -25,7 +25,7 @@ namespace Z0.Asm
             var dst = bytes(cell);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i);
-            Cells.cell8(cell, 15) = count;
+            UI.cell8(cell, 15) = count;
             return new AsmHexCode(cell);
         }
 

@@ -2,17 +2,20 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
-    partial struct asm
+    partial class Cells
     {
-        [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement)
-            => new AsmExprSet(new AsmFormExpr(oc, sig), statement);
+        [MethodImpl(Inline)]
+        public static ref F from<T,F>(in T src)
+            where F : unmanaged, IDataCell
+            where T : struct
+                => ref Unsafe.As<T,F>(ref edit(src));
     }
 }

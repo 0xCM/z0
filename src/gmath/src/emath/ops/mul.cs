@@ -2,17 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct asm
+    partial struct emath
     {
-        [MethodImpl(Inline), Op]
-        public static AsmExprSet pack(AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement)
-            => new AsmExprSet(new AsmFormExpr(oc, sig), statement);
+        [MethodImpl(Inline)]
+        public static @enum<E,T> mul<E,T>(@enum<E,T> a, @enum<E,T> b)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new @enum<E,T>(gmath.mul(a.Scalar, b.Scalar));
     }
 }

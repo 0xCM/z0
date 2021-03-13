@@ -23,7 +23,7 @@ namespace Z0.Asm
         public byte Size
         {
             [MethodImpl(Inline)]
-            get => Cells.cell8(Data, 15);
+            get => UI.cell8(Data, 15);
         }
 
         public Span<byte> Bytes

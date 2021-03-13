@@ -515,6 +515,7 @@ namespace Z0
             where T : unmanaged
                 => (T a, T b) => Cells.unfix<F,T>(f(Cells.fix<T,F>(a), Cells.fix<T,F>(b)));
 
+
         [Free]
         public delegate bit Emitter1();
 

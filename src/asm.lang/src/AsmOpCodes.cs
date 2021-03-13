@@ -12,46 +12,51 @@ namespace Z0.Asm
 
     using R = RepeatPrefixCode;
     using L = LockPrefixCode;
-    using S = SizeOverrideCode;
+    using SZ = SizeOverrideCode;
+    using SG = SegOverrideCode;
     using REX = RexPrefixCode;
 
     [ApiHost]
     public readonly partial struct AsmOpCodes
     {
-        [MethodImpl(Inline), Op]
-        public static byte part(AsmOpCode src, N0 n)
-            => @as<AsmOpCode,byte>(src);
+        public static AsmOpCode create()
+            => new AsmOpCode();
 
         [MethodImpl(Inline), Op]
-        public static byte part(AsmOpCode src, N1 n)
-            => uint8(@as<AsmOpCode,uint>(src) >> 8);
+        public static AsmOpCode RexW(byte data)
+        {
+            var dst = create();
+            dst.Byte0 = (byte)REX.RexW;
+            dst.Byte1 = data;
+            return dst;
+        }
 
         [MethodImpl(Inline), Op]
-        public static byte part(AsmOpCode src, N2 n)
-            => uint8(@as<AsmOpCode,uint>(src) >> 16);
+        public static AsmOpCode RexW(EscapeCode escape, byte data)
+        {
+            var dst = new AsmOpCode();
+            dst.Byte0 = (byte)REX.RexW;
+            dst.Byte1 = (byte)escape;
+            dst.Byte2 = data;
+            return dst;
+        }
 
         [MethodImpl(Inline), Op]
-        public static bit escaped(AsmOpCode src)
-            => emath.oneof(src.Byte0, EscapeCode.x0f, EscapeCode.x66);
+        public static AsmOpCode Lock(byte data)
+        {
+            var dst = create();
+            dst.Byte0 = (byte)L.Lock;
+            dst.Byte1 = data;
+            return dst;
+        }
 
         [MethodImpl(Inline), Op]
-        public static bit locked(AsmOpCode src)
-            => emath.same(L.Lock, src.Byte0);
-
-        [MethodImpl(Inline), Op]
-        public static bit rep(AsmOpCode src)
-            => emath.oneof(src.Byte0, R.REPE, R.REPNE);
-
-        [MethodImpl(Inline), Op]
-        public static bit sizeov(AsmOpCode src)
-            => emath.oneof(src.Byte0, S.Address, S.Operand);
-
-        [MethodImpl(Inline), Op]
-        public static bit rex(AsmOpCode src)
-            => emath.oneof(src.Byte0, REX.Rex40, REX.RexWRXB);
-
-        [MethodImpl(Inline), Op]
-        public static RegDigit digit(uint3 src)
-            => new RegDigit(src);
+        public static AsmOpCode Escape(EscapeCode escape, byte data)
+        {
+            var dst = create();
+            dst.Byte0 = (byte)escape;
+            dst.Byte1 = data;
+            return dst;
+        }
     }
 }

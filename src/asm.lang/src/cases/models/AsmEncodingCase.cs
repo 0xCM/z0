@@ -8,7 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     public readonly struct AsmEncodingCase : ITextual
     {
@@ -44,10 +43,20 @@ namespace Z0.Asm
             get => Id.Segment<AsmMnemonicCode>(0,10);
         }
 
+        public void Render(AsmExprSet src, ITextBuffer dst)
+            => dst.AppendFormat("{0} ({1}) | {2}", src.OpCode.Format(), src.Sig.Format(), src.Statement.Format());
+
+        public string Format(AsmExprSet src)
+        {
+            var dst = text.buffer();
+            Render(src, dst);
+            return dst.Emit();
+        }
+
         public string Format()
         {
             var seq = Id.Segment<ushort>(11, 16);
-            return string.Format("{0}[{1:D4}] | {2} => {3}", Mnemonic, seq, Expr.Format(), Code.Format());
+            return string.Format("{0}[{1:D4}] | {2} => {3}", Mnemonic, seq, Format(Expr), Code.Format());
         }
 
         public override string ToString()

@@ -7,11 +7,11 @@ namespace Z0.Asm
     using static Pow2x16;
 
     [LiteralProvider]
-    public readonly struct AsmSigOpKindFacets
+    public readonly struct AsmSigTokenFacets
     {
-        public const AsmSigOpKind MinId = AsmSigOpKind.AL;
+        public const AsmSigToken MinId = AsmSigToken.AL;
 
-        public const AsmSigOpKind MaxId = AsmSigOpKind.K1;
+        public const AsmSigToken MaxId = AsmSigToken.K1;
 
         public const byte IdentifierCount = (byte)MaxId - (byte)MinId + 1;
 

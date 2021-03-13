@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref Cell128 cell128<T>(in Vector128<T> src)
             where T : unmanaged
-                => ref from<Vector128<T>,Cell128>(src);
+                => ref Cells.from<Vector128<T>,Cell128>(src);
 
         /// <summary>
         /// Presents a 256-bit vector as a 256-bit cell
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Cell256 cell256<T>(in Vector256<T> src)
             where T : unmanaged
-                => ref from<Vector256<T>,Cell256>(src);
+                => ref Cells.from<Vector256<T>,Cell256>(src);
 
         /// <summary>
         /// Presents a 512-bit vector as a 512-bit cell
@@ -71,6 +71,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Cell512 cell512<T>(in Vector512<T> src)
             where T : unmanaged
-                => ref from<Vector512<T>,Cell512>(src);
+                => ref Cells.from<Vector512<T>,Cell512>(src);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0.Asm
     using api = Rex;
 
     /// <summary>
-    /// REX = [ [0100] | W:4 | R:3 | X:2 | B:1 ]
+    /// REX = [ 0100 | W:4 | R:3 | X:2 | B:1 ]
     /// </summary>
     [ApiHost]
     public struct RexBits : INumericBits<byte>
@@ -110,7 +110,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => api.format(this);
+            => Data.FormatAsmHex();
 
         public override string ToString()
             => Format();

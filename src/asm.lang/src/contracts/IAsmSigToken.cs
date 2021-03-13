@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmSigToken : ISyntaxToken<AsmSigOpKind>
+    public interface IAsmSigToken : ISyntaxToken<AsmSigToken>
     {
 
     }

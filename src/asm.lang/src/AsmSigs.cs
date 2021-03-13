@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static memory;
     using static Rules;
     using static TextRules;
-    using static AsmOpCodes;
+    //using static AsmOpCodes;
 
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>
@@ -30,27 +30,27 @@ namespace Z0.Asm
 
         Adjacent<char, OneOf<char>> RegDigitRule;
 
-        readonly SymbolTable<AsmSigOpKind> _SigOpSymbols;
+        readonly SymbolTable<AsmSigToken> _SigOpSymbols;
 
-        readonly SymbolTable<AsmSigCompositeKind> _Composites;
+        readonly SymbolTable<CompositeSigToken> _Composites;
 
         readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
 
         public AsmSigs()
         {
-            _SigOpSymbols = SymbolStores.table<AsmSigOpKind>();
-            _Composites = SymbolStores.table<AsmSigCompositeKind>();
+            _SigOpSymbols = SymbolStores.table<AsmSigToken>();
+            _Composites = SymbolStores.table<CompositeSigToken>();
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
             _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
         }
 
         [MethodImpl(Inline)]
-        public SymbolTable<AsmSigCompositeKind> Composites()
+        public SymbolTable<CompositeSigToken> Composites()
             => _Composites;
 
         [MethodImpl(Inline)]
-        public SymbolTable<AsmSigOpKind> OperandKinds()
+        public SymbolTable<AsmSigToken> OperandKinds()
             => _SigOpSymbols;
 
         [MethodImpl(Inline)]
@@ -149,16 +149,16 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public ref readonly Token<AsmSigOpKind> Token(AsmSigOpKind kind)
+        public ref readonly Token<AsmSigToken> Token(AsmSigToken kind)
         {
-            if((ushort)kind <= AsmSigOpKindFacets.LastClass)
+            if((ushort)kind <= AsmSigTokenFacets.LastClass)
                 return ref _SigOpTokens[(byte)kind];
             else
                 return ref _SigOpTokens[0];
         }
 
         [Op]
-        public bool ParseToken(AsmSigOperandExpr src, out Token<AsmSigOpKind> token)
+        public bool ParseToken(AsmSigOperandExpr src, out Token<AsmSigToken> token)
         {
             if(_SigOpSymbols.IndexFromSymbol(src.Content, out var index))
             {
@@ -252,7 +252,7 @@ namespace Z0.Asm
             }
         }
 
-        Index<Token<AsmSigOpKind>> _SigOpTokens
+        Index<Token<AsmSigToken>> _SigOpTokens
         {
             [MethodImpl(Inline), Op]
             get => _SigOpSymbols.Tokens;

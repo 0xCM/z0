@@ -73,13 +73,11 @@ namespace Z0.Asm
         [Action(K.ShowRexBits)]
         void ShowRexBits()
         {
-            var codes = Rex.bits();
-            var count = codes.Length;
+            var bits = Rex.bits();
+            using var log = OpenShowLog("rexbits");
+            var count = bits.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var code = ref skip(codes,i);
-                Wf.Row(code.Format());
-            }
+                Show(Rex.FormatRow(skip(bits,i)), log);
         }
 
         [Action(K.EmitImmSpecializations)]

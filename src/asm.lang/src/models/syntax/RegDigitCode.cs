@@ -4,25 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    partial struct AsmOpCodes
+    public enum RegDigitCode : byte
     {
-        public enum RegDigitCode : byte
-        {
-            R0 = 0,
+        R0 = 0,
 
-            R1 = 1,
+        R1 = 1,
 
-            R2 = 2,
+        R2 = 2,
 
-            R3 = 3,
+        R3 = 3,
 
-            R4 = 4,
+        R4 = 4,
 
-            R5 = 5,
+        R5 = 5,
 
-            R6 = 6,
+        R6 = 6,
 
-            R7 = 7
-        }
+        R7 = 7
     }
 }

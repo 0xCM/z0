@@ -55,6 +55,11 @@ namespace Z0.Asm
             => (uint4)(src >> 4) == b0100;
 
         [MethodImpl(Inline), Op]
+        public static bit test(AsmHexCode src)
+            => AsmQuery.IsRexPrefix(skip(src.Bytes,0));
+
+
+        [MethodImpl(Inline), Op]
         public static RexBits define(byte src)
             => test(src) ? new RexBits(src) : RexBits.Empty;
 
@@ -84,13 +89,6 @@ namespace Z0.Asm
         static string hex(RexBits src)
             => src.Data.FormatAsmHex();
 
-        static Identifier symbol(RexBits src)
-        {
-            if(src.Code == RexPrefixCode.RexW)
-                return "REX.W";
-            else
-                return "";
-        }
 
         [Op]
         static string bits(RexBits src)
@@ -103,7 +101,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static string format(RexBits src)
-            => $"{hex(src)} | {bits(src)} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B} | {symbol(src)}";
+        public static string FormatRow(RexBits src)
+            => $"{src.Format()} | {bits(src)} | {RF.W}:{src.W} | {RF.R}:{src.R} | {RF.X}:{src.X} | {RF.B}:{src.B}";
     }
 }

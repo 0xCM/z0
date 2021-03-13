@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Part;
-
     [LiteralProvider]
     public readonly struct AsmSyntaxMeaning
     {
@@ -91,7 +89,7 @@ namespace Z0.Asm
 
         public const string m32  = "A doubleword operand in memory (usually expressed as a variable or array name) but pointed to by the DS:(E)SI or ES:(E)DI registers. This nomenclature is used only with the string instructions";
 
-        public const string m64  = "A memory quadword operand in memory";
+        public const string m64  = "A 64-bit operand in memory";
 
         public const string m128 = "A memory double quadword operand in memory";
 
@@ -155,13 +153,13 @@ namespace Z0.Asm
 
         public const string rel32 = "A relative address within the same code segment as the instruction assembled. The rel32 symbol applies to instructions with an operand-size attribute of 32 bits";
 
-        public const string rノm8 = "A byte operand that is either the contents of a byte general-purpose register: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or a byte from memory. Byte registers R8L - R15L are available using REX.R in 64-bit mode";
+        public const string rm8 = "A byte operand that is either the contents of a byte general-purpose register: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL}; or a byte from memory. Byte registers R8L - R15L are available using REX.R in 64-bit mode";
 
-        public const string rノm16 = "A word general-purpose register or memory operand used for instructions whose operand-size attribute is 16 bits. The word general-purpose registers are: AX, CX, DX, BX, SP, BP, SI, DI. The contents of memory are found at the address provided by the effective address computation. Word registers R8W - R15W are available using REX.R in 64-bit mode";
+        public const string rm16 = "A word general-purpose register or memory operand used for instructions whose operand-size attribute is 16 bits. The word general-purpose registers are: AX, CX, DX, BX, SP, BP, SI, DI. The contents of memory are found at the address provided by the effective address computation. Word registers R8W - R15W are available using REX.R in 64-bit mode";
 
-        public const string rノm32 = "A doubleword general-purpose register or memory operand used for instructions whose operand size attribute is 32 bits. The doubleword general-purpose registers are: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI. The contents of memory are found at the address provided by the effective address computation. Doubleword registers R8D - R15D are available when using REX.R in 64-bit mode";
+        public const string rm32 = "A doubleword general-purpose register or memory operand used for instructions whose operand size attribute is 32 bits. The doubleword general-purpose registers are: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI. The contents of memory are found at the address provided by the effective address computation. Doubleword registers R8D - R15D are available when using REX.R in 64-bit mode";
 
-        public const string rノm64 = "A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15; these are available only in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
+        public const string rm64 = "A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W. Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15; these are available only in 64-bit mode. The contents of memory are found at the address provided by the effective address computation";
 
         public const string Sreg = "A segment register. The segment register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5";
 
@@ -191,7 +189,13 @@ namespace Z0.Asm
 
         public const string ymm = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
 
-        public const string m256 = "A 32-byte operand in memory. This nomenclature is used only with AVX instructions";
+        public const string ymm1 ="A first ymm register operand";
+
+        public const string ymm2 ="A second ymm register operand";
+
+        public const string ymm3 ="A third ymm register operand";
+
+        public const string m256 = "A 256-bit operand in memory. This nomenclature is used only with AVX instructions";
 
         public const string ymmノm256 = "A YMM register or 256-bit memory operand";
 

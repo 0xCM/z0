@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     [ApiHost]
     public class AsmSigSymbols
     {
@@ -18,17 +16,17 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
 
-        readonly SymbolTable<AsmSigOpKind> _SigOps;
+        readonly SymbolTable<AsmSigToken> _SigOps;
 
-        readonly SymbolTable<AsmSigCompositeKind> _Composites;
+        readonly SymbolTable<CompositeSigToken> _Composites;
 
         internal AsmSigSymbols()
         {
             _EFlags = SymbolStores.table<EFlag>();
             _Modes = SymbolStores.table<Mode>();
             _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
-            _SigOps = SymbolStores.table<AsmSigOpKind>();
-            _Composites = SymbolStores.table<AsmSigCompositeKind>();
+            _SigOps = SymbolStores.table<AsmSigToken>();
+            _Composites = SymbolStores.table<CompositeSigToken>();
         }
 
         public SymbolTable<Mode> Modes
@@ -37,13 +35,13 @@ namespace Z0.Asm
         public SymbolTable<EFlag> Flags
             => _EFlags;
 
-        public SymbolTable<AsmSigOpKind> SigOps
+        public SymbolTable<AsmSigToken> SigOps
             => _SigOps;
 
         public SymbolTable<AsmMnemonicCode> Mnemonics
             => _Mnemonics;
 
-        public SymbolTable<AsmSigCompositeKind> Composites
+        public SymbolTable<CompositeSigToken> Composites
             => _Composites;
 
         public enum Mode : byte

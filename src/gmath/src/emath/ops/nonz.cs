@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    partial class Cells
+    partial struct emath
     {
         [MethodImpl(Inline)]
-        internal static ref F from<T,F>(in T src)
-            where F : unmanaged, IDataCell
-            where T : struct
-                => ref Unsafe.As<T,F>(ref edit(src));
+        public static bit nonz<E,T>(@enum<E,T> a)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => gmath.nonz(a.Scalar);
     }
 }

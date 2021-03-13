@@ -331,7 +331,7 @@ namespace Z0.Asm
         static MsgPattern<Count,FS.FileUri> ProcessedStatements
             => "Processed {0} statements from {1}";
 
-        void ProcessStatements(Action<AsmStatementInfo> receiver)
+        void Process(params Action<AsmStatementInfo>[] receivers)
         {
             var distiller = Wf.AsmDistiller();
             var paths = distiller.Distillations();
@@ -348,7 +348,8 @@ namespace Z0.Asm
                 Wf.Ran(loading, LoadedStatments.Format(count,path));
 
                 var processing = Wf.Running(ProcessingStatments.Format(count,path));
-                ProcessStatements(data,receiver);
+                foreach(var receiver in receivers)
+                    ProcessStatements(data, receiver);
                 Wf.Ran(processing,ProcessedStatements.Format(count,path));
             }
 
@@ -359,7 +360,7 @@ namespace Z0.Asm
             pipe.Emit(sorted,target);
         }
 
-        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src,Action<AsmStatementInfo>  receiver)
+        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src, Action<AsmStatementInfo> receiver)
         {
             var count = src.Length;
             var invalid = root.hashset<string>();
@@ -516,39 +517,58 @@ namespace Z0.Asm
             //root.iter(methods, m => pipe.Render(m,buffer));
         }
 
+
         void ProcessStatements()
         {
             var table = SymbolStores.table<AsmMnemonicCode>();
             var counter = 0u;
-            var successes = root.hashset<AsmMnemonicCode>();
+            var mnemonics = root.hashset<AsmMnemonicCode>();
             var failures = root.hashset<string>();
+            var opcodes = root.hashset<AsmOpCodeExpr>();
 
-            void Receive(AsmStatementInfo src)
+            var ocpath = Db.AppDataFile(FS.file("statement-opcodes", FS.Extensions.Csv));
+            using var ocwriter = ocpath.Writer();
+
+
+            void CountStatements(AsmStatementInfo src)
             {
                 counter++;
+            }
 
+            void CollectOpCodes(AsmStatementInfo src)
+            {
+                var encoded = src.Encoded;
+                if(AsmQuery.HasRexPrefix(src.OpCode))
+                {
+                    ocwriter.WriteLine(string.Format("{0,-24} | {1, -24} | {2,-16} | {3}", src.Expression, src.Sig, src.OpCode, src.Encoded));
+                }
+            }
+
+            void CollectMnemonics(AsmStatementInfo src)
+            {
                 var symbol = src.Mnemonic.Name.ToLower();
                 if(table.TokenFromSymbol(symbol, out var t))
-                {
-                    successes.Add(t.Kind);
-                }
+                    mnemonics.Add(t.Kind);
                 else
                     failures.Add(symbol);
             }
 
-            ProcessStatements(Receive);
-            Wf.Status($"From {counter} statements, discerned {successes.Count} distinct mnemonics and encountered {failures.Count} distinct failures: {failures.FormatList()}");
+            Process(CountStatements, CollectMnemonics, CollectOpCodes);
+            Wf.Status($"{counter} statements were processed)");
+            Wf.Status($"{mnemonics.Count} known mnemonics were encountered along with {failures.Count} unknown mnemonics: {failures.FormatList()}");
+            Wf.Status($"{opcodes.Count} distinct opcodes were collected");
 
         }
         public void Run()
         {
             var commands = Wf.AsmWfCmd();
-            commands.Run(AsmWfCmdKind.EmitFormCatalog);
+            //commands.Run(AsmWfCmdKind.EmitFormCatalog);
+            //commands.Run(AsmWfCmdKind.ShowRexBits);
 
             // var commands = Wf.AsmSigCmd();
             // commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
 
-            //ProcessStatements();
+            ProcessStatements();
 
             // var dst = span<char>(32);
             // var vsib = AsmBytes.vsib(0b11_100_111);

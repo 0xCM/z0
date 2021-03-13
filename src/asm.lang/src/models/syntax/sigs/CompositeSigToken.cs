@@ -8,7 +8,7 @@ namespace Z0.Asm
     /// Classifies composite operand signature specifications
     /// </summary>
     [SymbolSource]
-    public enum AsmSigCompositeKind : byte
+    public enum CompositeSigToken : byte
     {
         [Symbol("")]
         None = 0,

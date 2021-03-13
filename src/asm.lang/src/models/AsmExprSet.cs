@@ -9,33 +9,23 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmExprSet : ITextual
+    public readonly struct AsmExprSet
     {
-        public AsmOpCodeExpr OpCode {get;}
-
-        public AsmSigExpr Sig {get;}
+        public AsmFormExpr Form {get;}
 
         public AsmStatementExpr Statement {get;}
 
         [MethodImpl(Inline)]
-        public AsmExprSet(AsmOpCodeExpr oc, AsmSigExpr sig, AsmStatementExpr statement)
+        public AsmExprSet(AsmFormExpr form, AsmStatementExpr statement)
         {
-            Sig = sig;
-            OpCode = oc;
+            Form = form;
             Statement = statement;
         }
 
-        public void Render(ITextBuffer dst)
-            => dst.AppendFormat("{0} ({1}) | {2}", OpCode.Format(), Sig.Format(), Statement.Format());
+        public AsmOpCodeExpr OpCode
+            => Form.OpCode;
 
-        public string Format()
-        {
-            var dst = text.buffer();
-            Render(dst);
-            return dst.Emit();
-        }
-
-        public override string ToString()
-            => Format();
+        public AsmSigExpr Sig
+            => Form.Sig;
     }
 }

@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static Pow2x16;
     using static RegisterKind;
 
+    using SM = AsmSyntaxMeaning;
+
     [SymbolSource]
-    public enum AsmSigOpKind : ushort
+    public enum AsmSigToken : ushort
     {
         None = 0,
 
@@ -25,88 +26,79 @@ namespace Z0.Asm
         RAX,
 
         /// <summary>
-        /// A 128-bit bounds register. BND0 through BND3
+        /// <see cref='SM.bnd'/>
         /// </summary>
-        [Symbol("bnd")]
+        [Symbol("bnd", SM.bnd)]
         BND,
 
         /// <summary>
-        /// An 8-bit immediate operand
+        /// <see cref='SM.imm8'/>
         /// </summary>
-        [Symbol("imm8")]
+        [Symbol("imm8", SM.imm8)]
         Imm8,
 
         /// <summary>
-        /// A 16-bit immediate operand
+        /// <see cref='SM.imm16'/>
         /// </summary>
-        [Symbol("imm16")]
+        [Symbol("imm16", SM.imm16)]
         Imm16,
 
         /// <summary>
-        /// A 32-bit immediate operand
+        /// <see cref='SM.imm32'/>
         /// </summary>
-        [Symbol("imm32")]
+        [Symbol("imm32", SM.imm32)]
         Imm32,
 
         /// <summary>
-        /// A 64-bit immediate operand
+        /// <see cref='SM.imm64'/>
         /// </summary>
-        [Symbol("imm64")]
+        [Symbol("imm64", SM.imm64)]
         Imm64,
 
         /// <summary>
-        /// One of the byte general-purpose registers {AL CL DL BL AH CH DH BH BPL SPL DIL SIL} or one of the byte registers (R8L-R15L) when using REX.R and 64-bit mode.
+        /// <see cref='SM.r8'/>
         /// </summary>
-        [Symbol("r8")]
+        [Symbol("r8", SM.r8)]
         R8,
 
         /// <summary>
-        /// One of the word general-purpose registers {AX CX DX BX SP BP SI DI} or one of the word registers (R8-R15) when using REX.R and 64-bit mode
+        /// <see cref='SM.r16'/>
         /// </summary>
         [Symbol("r16")]
         R16,
 
         /// <summary>
-        /// One of the doubleword general-purpose registers {EAX ECX EDX EBX ESP EBP ESI EDI} or one of the doubleword registers (R8D - R15D) when using REX.R in 64-bit mode
+        /// <see cref='SM.r32'/>
         /// </summary>
         [Symbol("r32")]
         R32,
 
         /// <summary>
-        /// One of the quadword general-purpose registers {RAX RBX RCX RDX RDI RSI RBP RSP} or one of the (R8 - R15) registers when using REX.R and 64-bit mode
+        /// <see cref='SM.r64'/>
         /// </summary>
         [Symbol("r64")]
         R64,
 
         /// <summary>
-        /// A byte operand that is either the contents of a byte general-purpose register: {AL CL DL BL AH CH DH BH BPL SPL DIL SIL};
-        /// or a byte from memory. Byte registers R8L - R15L are available using REX.R in 64-bit mode
+        /// <see cref='SM.rm8'/>
         /// </summary>
         [Symbol("r/m8")]
         Rm8,
 
         /// <summary>
-        /// A word general-purpose register or memory operand used for instructions whose operand-size attribute is 16 bits.
-        /// The word general-purpose registers are: AX, CX, DX, BX, SP, BP, SI, DI. The contents of memory are found at the address
-        /// provided by the effective address computation. Word registers R8W - R15W are available using REX.R in 64-bit mode
+        /// <see cref='SM.rm16'/>
         /// </summary>
         [Symbol("r/m16")]
         Rm16,
 
         /// <summary>
-        /// A doubleword general-purpose register or memory operand used for instructions whose operand size attribute is 32 bits.
-        /// The doubleword general-purpose registers are: EAX, ECX, EDX, EBX, ESP, EBP, ESI, EDI. The contents of memory are found
-        /// at the address provided by the effective address computation.
-        /// Doubleword registers R8D - R15D are available when using REX.R in 64-bit mode
+        /// <see cref='SM.rm32'/>
         /// </summary>
         [Symbol("r/m32")]
         Rm32,
 
         /// <summary>
-        /// A quadword general-purpose register or memory operand used for instructions whose operand-size attribute is 64 bits when using REX.W.
-        /// Quadword general-purpose registers are: RAX, RBX, RCX, RDX, RDI, RSI, RBP, RSP, R8–R15;
-        /// these are available only in 64-bit mode. The contents of memory are found at the address provided by the
-        /// effective address computation
+        /// <see cref='SM.rm64'/>
         /// </summary>
         [Symbol("r/m64")]
         Rm64,
@@ -118,11 +110,11 @@ namespace Z0.Asm
         /// LEA r32, m
         /// LEA r64, m
         /// </summary>
-        [Symbol("m")]
+        [Symbol("m", SM.m)]
         M,
 
         /// <summary>
-        /// An 8-bit operand in memory of width pointed to by a register that is <see cref='AsmOperatingMode'/> dependent
+        /// <see cref='SM.m8'/>
         /// </summary>
         /// <remarks>
         /// For <see cref='AsmOperatingMode.Non64'/> mode, is pointed to by one of
@@ -134,7 +126,7 @@ namespace Z0.Asm
         /// <see cref='RSI'/>
         /// <see cref='RDI'/>
         /// </remarks>
-        [Symbol("m8")]
+        [Symbol("m8", SM.m8)]
         M8,
 
         /// <summary>
@@ -145,7 +137,7 @@ namespace Z0.Asm
         /// <see cref='DS'/><see cref='SI'/>
         /// <see cref='DS'/>:<see cref='ESI'/>
         /// </remarks>
-        [Symbol("m16")]
+        [Symbol("m16", SM.m16)]
         M16,
 
         /// <summary>
@@ -156,25 +148,25 @@ namespace Z0.Asm
         /// <see cref='DS'/><see cref='SI'/>
         /// <see cref='DS'/>:<see cref='ESI'/>
         /// </remarks>
-        [Symbol("m32")]
+        [Symbol("m32", SM.m32)]
         M32,
 
         /// <summary>
-        /// A 64-bit operand in memory
+        /// <see cref='SM.m64'/>
         /// </summary>
-        [Symbol("m64")]
+        [Symbol("m64", SM.m64)]
         M64,
 
         /// <summary>
         /// A 128-bit operand in memory
         /// </summary>
-        [Symbol("m128")]
+        [Symbol("m128", SM.m128)]
         M128,
 
         /// <summary>
         /// A 256-bit operand in memory
         /// </summary>
-        [Symbol("m256")]
+        [Symbol("m256", SM.m256)]
         M256,
 
         /// <summary>
@@ -247,27 +239,27 @@ namespace Z0.Asm
         Xmm128,
 
         /// <summary>
-        /// A YMM register
+        /// <see cref='SM.ymm'/>
         /// </summary>
-        [Symbol("ymm")]
+        [Symbol("ymm", SM.ymm)]
         Ymm,
 
         /// <summary>
-        /// A first ymm register operand
+        /// <see cref='SM.ymm1'/>
         /// </summary>
-        [Symbol("ymm1")]
+        [Symbol("ymm1", SM.ymm1)]
         Ymm1,
 
         /// <summary>
-        /// A second ymm register operand
+        /// <see cref='SM.ymm2'/>
         /// </summary>
-        [Symbol("ymm2")]
+        [Symbol("ymm2", SM.ymm2)]
         Ymm2,
 
         /// <summary>
-        /// A third ymm register operand
+        /// <see cref='SM.ymm3'/>
         /// </summary>
-        [Symbol("ymm3")]
+        [Symbol("ymm3", SM.ymm3)]
         Ymm3,
 
         /// <summary>
@@ -289,45 +281,49 @@ namespace Z0.Asm
         /// <summary>
         /// A relative address in the range from 128 bytes before the end of the instruction to 127 bytes after the end of the instruction
         /// </summary>
-        [Symbol("rel8")]
+        [Symbol("rel8", SM.rel8)]
         Rel8,
 
         /// <summary>
         /// A relative address within the same code segment as the instruction assembled and applicable to instructions with an operand-size attribute of 16 bits
         /// </summary>
-        [Symbol("rel16")]
+        [Symbol("rel16", SM.rel16)]
         Rel16,
 
         /// <summary>
         /// A relative address within the same code segment as the instruction assembled; applicable to instructions with an operand-size attribute of 32 bits
         /// </summary>
-        [Symbol("rel32")]
+        [Symbol("rel32", SM.rel32)]
         Rel32,
 
         /// <summary>
         /// A segment register, where the register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5
         /// </summary>
-        [Symbol("Sreg")]
+        [Symbol("Sreg", SM.Sreg)]
         Sreg,
 
         /// <summary>
+        /// <see cref='SM.moffs8'/>
         /// </summary>
-        [Symbol("moffs8")]
+        [Symbol("moffs8", SM.moffs8)]
         Moffs8,
 
         /// <summary>
+        /// <see cref='SM.moffs16'/>
         /// </summary>
-        [Symbol("moffs16")]
+        [Symbol("moffs16", SM.moffs16)]
         Moffs16,
 
         /// <summary>
+        /// <see cref='SM.moffs32'/>
         /// </summary>
-        [Symbol("moffs32")]
+        [Symbol("moffs32", SM.moffs32)]
         Moffs32,
 
         /// <summary>
+        /// <see cref='SM.moffs64'/>
         /// </summary>
-        [Symbol("moffs64")]
+        [Symbol("moffs64", SM.moffs64)]
         Moffs64,
 
         /// <summary>
