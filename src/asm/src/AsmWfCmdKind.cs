@@ -17,9 +17,6 @@ namespace Z0.Asm
 
         ExportStokeImports,
 
-        [Alias("show-monics")]
-        ShowMnemonicSymbols,
-
         [Alias("emit-api-classes")]
         EmitApiClasses,
 
@@ -33,9 +30,6 @@ namespace Z0.Asm
 
         [Alias("correlate-api")]
         CorrelateApiCode,
-
-        [Alias("show-sig-symbols")]
-        ShowSigSymbols,
 
         [Alias("emit-resbytes")]
         EmitResBytes,

@@ -19,7 +19,7 @@ namespace Z0.Asm
             var doc = IntelIntrinsics.doc();
             var name = "intel-intrinsics";
             Db.Doc(name, FS.Extensions.Xml).Overwrite(doc.Content);
-            var intrinsics = Wf.IntelIntrinsics();
+            var intrinsics = Wf.IntelCpuIntrinsics();
             var elements = intrinsics.Parse(doc).View;
             var count = elements.Length;
             var path = Db.Doc(name, FS.Extensions.Log);

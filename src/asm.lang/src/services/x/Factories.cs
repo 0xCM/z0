@@ -12,8 +12,11 @@ namespace Z0
 
     partial class XTend
     {
-        public static IntelIntrinsics IntelIntrinsics(this IWfShell wf)
-            => Z0.Asm.IntelIntrinsics.create(wf);
+        public static IWfCmdHost<AsmSigCmdKind> AsmSigCmd(this IWfShell wf)
+            => AsmSigCmdHost.create(wf);
+
+        public static IntelIntrinsics IntelCpuIntrinsics(this IWfShell wf)
+            => IntelIntrinsics.create(wf);
 
         public static AsmSigs AsmSigs(this IWfShell wf)
             => Z0.Asm.AsmSigs.create(wf);

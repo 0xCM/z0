@@ -539,8 +539,8 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            var commands = Wf.AsmWfCmd();
-            commands.Run(AsmWfCmdKind.ShowSigSymbols);
+            var commands = Wf.AsmSigCmd();
+            commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
 
             //ProcessStatements();
 

@@ -32,26 +32,6 @@ namespace Z0.Asm
             _DataEmitter = root.lazy(Wf.AsmDataEmitter);
         }
 
-        [Action(K.ShowSigSymbols)]
-        void ShowSigSymbols()
-        {
-            var src = AsmSigSymbols.load();
-            ShowMnemonicSymbols(src);
-            ShowOperandKinds(src);
-            ShowFlags(src);
-            root.use(OpenShowLog("sigops.composites"), log => root.iter(src.Composites.Tokens, token => Show(token, log)));
-            root.use(OpenShowLog("sigops.modes"), log => root.iter(src.Modes.Tokens, token => Show(token, log)));
-        }
-
-        void ShowFlags(AsmSigSymbols src)
-            => root.use(OpenShowLog("sigops.flags"), log => root.iter(src.Flags.Tokens, token => Show(token, log)));
-
-        void ShowMnemonicSymbols(AsmSigSymbols src)
-            => root.use(OpenShowLog("sigops.mnemonics"), log => root.iter(src.Mnemonics.Tokens, token => Show(token, log)));
-
-        void ShowOperandKinds(AsmSigSymbols src)
-            => root.use(OpenShowLog("sigops.operandkinds"), log => root.iter(src.SigOps.Tokens, token => Show(token, log)));
-
         [Action(K.EmitResBytes)]
         void EmitResBytes()
             => Wf.ResBytesEmitter().Emit();
@@ -64,19 +44,6 @@ namespace Z0.Asm
         void EmitSymbolicLiterals()
             => ApiServices.EmitSymbolicLiterals();
 
-        [Action(K.ShowMnemonicSymbols)]
-        void ShowMnemonicSymbols()
-        {
-            const string FormatPattern = "{0, -8} | {1, -8} | {2}";
-            var literals = Catalog.MnemonicSymbols();
-            var count = literals.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var literal = ref skip(literals, i);
-                var format = string.Format(FormatPattern, literal.Index, literal.Kind, literal.Identifier);
-                Wf.Row(format);
-            }
-        }
 
         [Action(K.ShowAsmCatForms)]
         void ShowAsmCatForms()
