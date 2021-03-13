@@ -1,7 +1,6 @@
-echo off
+@echo off
 
 set ProjectId=machines
 echo ProjectId:%ProjectId%
+call %ControlScripts%\build-test-project-config.cmd
 
-set ProjectPath=%ZDev%\test\%ProjectId%\z0.%ProjectId%.test.csproj
-echo ProjectPath:%ProjectPath%
