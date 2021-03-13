@@ -35,6 +35,8 @@
     <Check>$(Src)check/z0.check.csproj</Check>
     <Circuits>$(Src)circuits/z0.circuits.csproj</Circuits>
     <Cli>$(Src)cli/z0.cli.csproj</Cli>
+    <Clr>$(Src)clr/z0.clr.csproj</Clr>
+    <Core>$(Src)core/z0.core.csproj</Core>
 
     <Commands>$(Src)cmdspec/z0.cmdspec.csproj</Commands>
     <Reactors>$(Src)cmdexec/z0.cmdexec.csproj</Reactors>

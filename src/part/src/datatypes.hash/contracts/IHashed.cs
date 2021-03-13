@@ -20,6 +20,4 @@ namespace Z0
         int HashCode
             => (int)Hash;
     }
-
-
 }

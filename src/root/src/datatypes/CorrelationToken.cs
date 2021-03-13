@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Correlates a value with a key that uniquely identifies the value within some context
     /// </summary>
-    public readonly struct CorrelationToken : IDataTypeComparable<CorrelationToken>
+    public readonly struct CorrelationToken : IComparable<CorrelationToken>, IEquatable<CorrelationToken>
     {
         PartId Value {get;}
 

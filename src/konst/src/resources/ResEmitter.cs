@@ -14,6 +14,14 @@ namespace Z0
 
     using F = ContentLibField;
 
+    public enum ContentLibField : ushort
+    {
+        Name = 80,
+
+        Type = 20,
+    }
+
+
     [ApiHost]
     public readonly struct ResEmitter
     {

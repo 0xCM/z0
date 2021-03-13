@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct memory
     {
-
         /// <summary>
         /// Skips a specified number of 8-bit source segments and returns a reference to the located cell
         /// </summary>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Windows.Kernel32;
-    using static Part;
+    using static Root;
 
     partial struct memory
     {

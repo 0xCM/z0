@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a data structure that measures a nonnegative count (I mean, really, is there any other kind?) of 32-bit capacity
