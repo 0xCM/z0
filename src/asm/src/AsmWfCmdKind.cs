@@ -22,9 +22,11 @@ namespace Z0.Asm
 
         EmitSymbolicLiterals,
 
-        ShowAsmCatForms,
+        [Alias("show-forms")]
+        ShowFormCatalog,
 
-        EmitAsmCatForms,
+        [Alias("emit-form-catalog")]
+        EmitFormCatalog,
 
         ShowEncodingKindNames,
 

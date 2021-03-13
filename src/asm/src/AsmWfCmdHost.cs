@@ -44,22 +44,19 @@ namespace Z0.Asm
         void EmitSymbolicLiterals()
             => ApiServices.EmitSymbolicLiterals();
 
-
-        [Action(K.ShowAsmCatForms)]
-        void ShowAsmCatForms()
+        [Action(K.ShowFormCatalog)]
+        void ShowFormCatalog()
         {
-            var specifiers = Catalog.CatalogedForms();
-            var count = specifiers.Length;
+            using var writer = OpenShowLog("asm.forms");
+            var forms = Catalog.KnownFormExpressions();
+            var count = forms.Length;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var spec = ref skip(specifiers,i);
-                Wf.Row(spec.Format());
-            }
+                Show(skip(forms,i), writer);
         }
 
-        [Action(K.EmitAsmCatForms)]
-        void EmitAsmCatForms()
-            => Catalog.Emit(Catalog.CatalogedForms());
+        [Action(K.EmitFormCatalog)]
+        void EmitFormCatalog()
+            => Catalog.Emit(Catalog.KnownFormExpressions());
 
         [Action(K.ShowEncodingKindNames)]
         void ShowEncodingKindNames()

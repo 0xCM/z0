@@ -18,15 +18,32 @@ namespace Z0.Asm
 
         public AsmSigOpKind Kind {get;}
 
+        public SymbolName<AsmSigOpKind> Symbol {get;}
+
         [MethodImpl(Inline)]
-        public AsmSigOperand(Identifier name, AsmSigOpKind kind)
+        public AsmSigOperand(Identifier name, AsmSigOpKind kind, SymbolName<AsmSigOpKind> symbol)
         {
             Name  = name;
             Kind = kind;
+            Symbol = symbol;
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator AsmSigOperand((string name, AsmSigOpKind kind) src)
-            => new AsmSigOperand(src.name, src.kind);
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsEmpty || Kind == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Name.IsNonEmpty || Kind != 0;
+        }
+
+        public static AsmSigOperand Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmSigOperand(Identifier.Empty, AsmSigOpKind.None, default);
+        }
     }
 }

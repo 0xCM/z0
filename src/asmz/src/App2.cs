@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Reflection;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -36,6 +37,8 @@ namespace Z0.Asm
             flow = Wf.Creating(nameof(AsmServices));
             AsmServices = Wf.AsmServices();
             Wf.Created(flow);
+
+            Forms = root.hashset<AsmFormExpr>();
 
             Sigs = Wf.AsmSigs();
 
@@ -307,7 +310,7 @@ namespace Z0.Asm
 
         AsmSigExprLookup SigLookup;
 
-        AsmFormLookup Forms;
+        HashSet<AsmFormExpr> Forms;
 
         SymbolTable<AsmMnemonicCode> Mnemonics;
 
@@ -328,14 +331,14 @@ namespace Z0.Asm
         static MsgPattern<Count,FS.FileUri> ProcessedStatements
             => "Processed {0} statements from {1}";
 
-        void ProcessStatements(Action<AsmStatementInfo>  receiver)
+        void ProcessStatements(Action<AsmStatementInfo> receiver)
         {
             var distiller = Wf.AsmDistiller();
             var paths = distiller.Distillations();
             var flow = Wf.Running("Processing current statement set");
             OpCodes = AsmOpCodeLookup.create();
             SigLookup = AsmSigExprLookup.create();
-            Forms = AsmFormLookup.create();
+            Forms.Clear();
             Mnemonics = SymbolStores.table<AsmMnemonicCode>();
             foreach(var path in paths)
             {
@@ -350,7 +353,7 @@ namespace Z0.Asm
             }
 
             Wf.Ran(flow, CollectedForms.Format(OpCodes.Count, SigLookup.Count, Forms.Count));
-            var sorted = Forms.Values.OrderBy(x => x.OpCode).Array();
+            var sorted = Forms.OrderBy(x => x.OpCode).Array();
             var pipe = AsmFormPipe.create(Wf);
             var target = Db.IndexTable<AsmFormRecord>();
             pipe.Emit(sorted,target);
@@ -372,7 +375,7 @@ namespace Z0.Asm
                     {
                         receiver(statement);
                         SigLookup.AddIfMissing(statement.Sig);
-                        Forms.AddIfMissing(asm.form(opcode, statement.Sig));
+                        Forms.Add(asm.form(opcode, statement.Sig));
                     }
                 }
             }
@@ -539,8 +542,11 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            var commands = Wf.AsmSigCmd();
-            commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
+            var commands = Wf.AsmWfCmd();
+            commands.Run(AsmWfCmdKind.EmitFormCatalog);
+
+            // var commands = Wf.AsmSigCmd();
+            // commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
 
             //ProcessStatements();
 

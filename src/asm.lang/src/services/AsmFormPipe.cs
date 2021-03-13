@@ -14,6 +14,7 @@ namespace Z0.Asm
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
     {
         public AsmFormPipe()
+            : base(42)
         {
 
         }
@@ -107,7 +108,7 @@ namespace Z0.Asm
                 var i = 0u;
                 Records.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
-                Sigs.ParseSig(NextCell(parts, ref i), out dst.Sig);
+                Sigs.ParseSigExpr(NextCell(parts, ref i), out dst.Sig);
                 dst.Expression = NextCell(parts, ref i);
                 return true;
             }
@@ -123,7 +124,7 @@ namespace Z0.Asm
             var i = 0;
             Records.parse(src[i++], out dst.Seq);
             dst.OpCode = asm.opcode(src[i++]);
-            Sigs.ParseSig(src[i++], out dst.Sig);
+            Sigs.ParseSigExpr(src[i++], out dst.Sig);
             dst.Expression = src[i++];
             return ref dst;
         }

@@ -21,5 +21,23 @@ namespace Z0.Asm
             Mnemonic = monic;
             Operands = operands;
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Mnemonic != 0;
+        }
+
+        public static AsmSig Empty
+        {
+            [MethodImpl(Inline)]
+            get => new AsmSig(0, sys.empty<AsmSigOperand>());
+        }
     }
 }

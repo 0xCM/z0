@@ -40,9 +40,6 @@ namespace Z0.Asm
 
         public uint ImportRowCount {get; private set;}
 
-        public ReadOnlySpan<Token<AsmMnemonicCode>> MnemonicSymbols()
-            => MnemonicCodes.Tokens;
-
         public AsmSigSymbols CatalogSymbols {get;}
 
         public Index<AsmMnemonicInfo> MnemonicInfo()
@@ -145,7 +142,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                if(Sigs.ParseMnemonic(row.Instruction, out var monic))
+                if(Sigs.ParseMnemonicExpr(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -246,11 +243,10 @@ namespace Z0.Asm
             AsmFormPipe.create(Wf).Emit(src, Db.Table<AsmFormRecord>(TargetFolder));
         }
 
-
         /// <summary>
         /// Retrieves the forms present in the catalog
         /// </summary>
-        public ReadOnlySpan<AsmFormExpr> CatalogedForms()
+        public ReadOnlySpan<AsmFormExpr> KnownFormExpressions()
         {
             var imported = ImportedStokeRows();
             var count = imported.Length;
@@ -262,7 +258,7 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = asm.opcode(row.OpCode);
-                if(Sigs.ParseSig(row.Instruction, out var sig))
+                if(Sigs.ParseSigExpr(row.Instruction, out var sig))
                     seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {

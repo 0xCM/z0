@@ -32,79 +32,45 @@ namespace Z0.Asm
 
         readonly SymbolTable<AsmSigOpKind> _SigOpSymbols;
 
-        readonly Index<Token<AsmSigOpKind>> _SigOpTokens;
-
         readonly SymbolTable<AsmSigCompositeKind> _Composites;
 
         readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
 
-        [MethodImpl(Inline), Op]
-        public static AsmMnemonicCode monicode(string src)
-            => Enums.parse(src, AsmMnemonicCode.None);
-
         public AsmSigs()
         {
-            _SigOpTokens = tokens();
-            _SigOpSymbols = SymbolStores.table(_SigOpTokens);
+            _SigOpSymbols = SymbolStores.table<AsmSigOpKind>();
             _Composites = SymbolStores.table<AsmSigCompositeKind>();
             RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
             RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
             _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
         }
 
-        public SymbolTable<AsmSigCompositeKind> CompositeSymbols()
+        [MethodImpl(Inline)]
+        public SymbolTable<AsmSigCompositeKind> Composites()
             => _Composites;
 
-        public SymbolTable<AsmSigOpKind> SigOpSymbols()
+        [MethodImpl(Inline)]
+        public SymbolTable<AsmSigOpKind> OperandKinds()
             => _SigOpSymbols;
 
+        [MethodImpl(Inline)]
         public SymbolTable<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;
 
-        bool MnemonicText(string sig, out string dst)
-        {
-            if(text.empty(sig))
-            {
-                dst = EmptyString;
-                return false;
-            }
-            else
-            {
-                var i = Query.index(sig, MnemonicTerminator);
-                if(i > 0)
-                {
-                    dst = Parse.segment(sig, 0, i - 1).ToLower();
-                    return true;
-                }
-                else
-                {
-                    dst = sig;
-                    return true;
-                }
-            }
-        }
-
         [Op]
-        public bool ParseMnemonicCode(string sig, out AsmMnemonicCode dst)
+        public bool ParseMnemonicCode(AsmMnemonic src, out AsmMnemonicCode dst)
         {
-            if(MnemonicText(sig, out var candidate))
+            if(_Mnemonics.TokenFromSymbol(src.Name, out var code))
             {
-                if(_Mnemonics.TokenFromSymbol(candidate, out var code))
-                {
-                    dst = code.Kind;
-                    return true;
-                }
+                dst = code.Kind;
+                return true;
             }
             dst = 0;
             return false;
         }
 
         [Op]
-        public bool ParseMnemonicCode(AsmMnemonic expr, out AsmMnemonicCode dst)
-            => ParseMnemonicCode(expr.Name, out dst);
-
-        [Op]
-        public bool ParseMnemonic(string sig, out AsmMnemonic dst)
+        public bool ParseMnemonicExpr(string sig, out AsmMnemonic dst)
         {
             dst = AsmMnemonic.Empty;
             if(text.empty(sig))
@@ -120,15 +86,15 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseSig(string src, out AsmSigExpr dst)
+        public bool ParseSigExpr(string src, out AsmSigExpr dst)
         {
             if(text.nonempty(src))
             {
-                if(ParseMnemonic(src, out var monic))
+                if(ParseMnemonicExpr(src, out var monic))
                 {
                     var i = Query.index(src, MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(asm.sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = new AsmSigExpr(monic, operands);
+                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<AsmSigOperandExpr>();
+                    dst = new AsmSigExpr(monic, operands, format(monic, operands));
                     return true;
                 }
             }
@@ -137,9 +103,46 @@ namespace Z0.Asm
         }
 
         [Op]
-        public AsmSigExpr ParseSig(string src)
+        public Outcome ParseSig(AsmSigExpr src, out AsmSig dst)
         {
-            if(ParseSig(src, out var dst))
+            dst = AsmSig.Empty;
+            if(ParseMnemonicCode(src.Mnemonic, out var code))
+            {
+                var opsource = src.Operands.View;
+                var opcount = opsource.Length;
+                var operands = sys.alloc<AsmSigOperand>(opcount);
+                ref var optarget = ref first(operands);
+                for(var i=0; i<opcount; i++)
+                {
+                    ref readonly var opexpr = ref skip(opsource,i);
+                    var outcome = ParseOperand(opexpr, out seek(optarget,i));
+                    if(!outcome)
+                        return outcome;
+
+                }
+                dst = new AsmSig(code, operands);
+                return true;
+            }
+            return false;
+        }
+
+        public Outcome ParseOperand(AsmSigOperandExpr src, out AsmSigOperand dst)
+        {
+            if(_SigOpSymbols.TokenFromSymbol(src.Content, out var token))
+            {
+                dst = new AsmSigOperand(token.Identifier, token.Kind, token.SymbolName);
+                return true;
+            }
+            else
+            {
+                dst = AsmSigOperand.Empty;
+                return (false, $"Cannot match symbol for the operand expression <{src.Content}>");
+            }
+        }
+        [Op]
+        public AsmSigExpr ParseSigExpr(string src)
+        {
+            if(ParseSigExpr(src, out var dst))
                 return dst;
             else
                 return AsmSigExpr.Empty;
@@ -186,15 +189,15 @@ namespace Z0.Asm
         public bool IsComposite(AsmSigExpr src)
             => src.Operands.Any(IsComposite);
 
-        public Index<AsmSigOperandExpr> Operands(string src)
+        public Index<AsmSigOperandExpr> OperandExpressions(string src)
             => src.Split(Chars.Comma).Map(sigop);
 
         [Op]
-        public Index<AsmSigOperandExpr> Operands(AsmSigExpr src)
+        public Index<AsmSigOperandExpr> OperandExpressions(AsmSigExpr src)
         {
-            if(ParseMnemonic(src.Content, out var monic))
+            if(ParseMnemonicExpr(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
-                    return Operands(remainder);
+                    return OperandExpressions(remainder);
             return Index<AsmSigOperandExpr>.Empty;
         }
 
@@ -226,29 +229,87 @@ namespace Z0.Asm
             return false;
         }
 
-        /// <summary>
-        /// Defines a <see cref='AsmSigOperandExpr'/>
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline), Op]
-        public static AsmSigOperandExpr sigop(string src)
-            => new AsmSigOperandExpr(src);
-
-        public static string format(AsmSigExpr src)
+        bool MnemonicText(string sig, out string dst)
         {
-            var buffer = text.buffer();
-            buffer.Append(src.Mnemonic.Format(AsmMnemonicCase.Uppercase));
-            var opcount = src.Operands.Length;
+            if(text.empty(sig))
+            {
+                dst = EmptyString;
+                return false;
+            }
+            else
+            {
+                var i = Query.index(sig, MnemonicTerminator);
+                if(i > 0)
+                {
+                    dst = Parse.segment(sig, 0, i - 1).ToLower();
+                    return true;
+                }
+                else
+                {
+                    dst = sig;
+                    return true;
+                }
+            }
+        }
+
+        Index<Token<AsmSigOpKind>> _SigOpTokens
+        {
+            [MethodImpl(Inline), Op]
+            get => _SigOpSymbols.Tokens;
+        }
+
+        public static string format(AsmFormExpr src)
+        {
+            var dst = text.buffer();
+            render(src,dst);
+            return dst.Emit();
+        }
+
+        public static void render(AsmFormExpr src, ITextBuffer dst)
+        {
+            if(src.IsNonEmpty)
+            {
+                var operands = src.Sig.Operands.View;
+                var count = operands.Length;
+                var monic = src.Sig.Mnemonic.Format(AsmMnemonicCase.Lowercase);
+                if(count == 0)
+                {
+                    dst.AppendFormat("{0} -> {1}", monic, src.OpCode.Format());
+                }
+                else
+                {
+                    dst.AppendFormat("{0}(", monic);
+                    for(var i=0; i<count; i++)
+                    {
+                        dst.Append(skip(operands,i).Format());
+                        if(i != count - 1)
+                            dst.Append(", ");
+                    }
+                    dst.AppendFormat(") -> {0}", src.OpCode);
+                }
+            }
+        }
+
+        static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
+        {
+            var dst = text.buffer();
+            render(monic, operands, dst);
+            return dst.Emit();
+        }
+
+        static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
+        {
+            dst.Append(monic.Format(AsmMnemonicCase.Uppercase));
+            var opcount = operands.Length;
             if(opcount != 0)
-                buffer.Append(Format.join(OperandDelimiter, src.Operands));
-            return buffer.Emit();
+            {
+                dst.Append(Chars.Space);
+                dst.Append(Format.join(OperandDelimiter, operands));
+            }
         }
 
-        [Op]
-        public static Index<Token<AsmSigOpKind>> tokens()
-        {
-            var symbols = SymbolStores.table<AsmSigOpKind>();
-            return symbols.Tokens;
-        }
+        [MethodImpl(Inline), Op]
+        static AsmSigOperandExpr sigop(string src)
+            => new AsmSigOperandExpr(src.Trim());
     }
 }

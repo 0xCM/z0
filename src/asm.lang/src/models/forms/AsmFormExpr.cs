@@ -22,10 +22,16 @@ namespace Z0.Asm
             Sig = sig;
         }
 
+        public Index<AsmSigOperandExpr> Operands
+        {
+            [MethodImpl(Inline)]
+            get => Sig.Operands;
+        }
+
         public string Expression
         {
             [MethodImpl(Inline)]
-            get => string.Format("{0} -> {1}", Sig, OpCode);
+            get => AsmSigs.format(this);
         }
 
         public bool IsEmpty

@@ -112,7 +112,7 @@ namespace Z0.Asm
             if(count == AsmStatementInfo.FieldCount)
             {
                 dst.OpCode = asm.opcode(skip(cells, i++));
-                Sigs.ParseSig(skip(cells, i++), out dst.Sig);
+                Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
                 dst.Expression = asm.statement(skip(cells,i++));
                 if(HexByteParser.parse(skip(cells,i++), out var data))
                     dst.Encoded = data;
@@ -191,7 +191,7 @@ namespace Z0.Asm
             dst.GlobalOffset = src.GlobalOffset;
             dst.LocalOffset = src.LocalOffset;
             dst.OpCode = asm.opcode(src.OpCode.Value);
-            Sigs.ParseSig(src.Instruction, out dst.Sig);
+            Sigs.ParseSigExpr(src.Instruction, out dst.Sig);
             dst.Expression = asm.statement(src.Statement);
             dst.Encoded = src.Encoded;
             return ref dst;
