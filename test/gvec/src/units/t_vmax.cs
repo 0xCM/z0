@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
-    
-    using static Konst;
+
+    using static Part;
+    using static memory;
 
     public class t_vmax : t_inx<t_vmax>
     {
@@ -15,7 +16,7 @@ namespace Z0
             vmax_check(n128);
             vmax_check(n256);
         }
-        
+
         void vmax_check(N128 w)
         {
             vmax_check(w,z8);
@@ -47,7 +48,7 @@ namespace Z0
         void vmax_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vmax(w,t), w, t);
-            
+
         void vmax_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vmax(w,t), w, t);

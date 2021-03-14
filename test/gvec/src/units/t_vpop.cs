@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static gcpu;
 
     public class t_vpop : t_inx<t_vpop>
     {
@@ -125,7 +126,7 @@ namespace Z0
 
             void check()
             {
-                var zed = zero(t);
+                var zed = default(T);
                 var src = Random.Blocks<T>(w, Interval.closed(zed, Numeric.maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);

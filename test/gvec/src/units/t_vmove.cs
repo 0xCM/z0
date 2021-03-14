@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vmove : t_inx<t_vmove>
     {

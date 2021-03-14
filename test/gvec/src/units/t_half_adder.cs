@@ -6,7 +6,8 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
+    using static memory;
 
     public class t_bv_half_adder : UnitTest<t_bv_half_adder>
     {

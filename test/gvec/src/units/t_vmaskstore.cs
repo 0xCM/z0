@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
     using static HexConst;
 
     public class t_vmaskstore : t_inx<t_vmaskstore>

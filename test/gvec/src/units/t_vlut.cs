@@ -8,8 +8,8 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_vlut : t_inx<t_vlut>
     {

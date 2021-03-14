@@ -10,8 +10,9 @@ namespace Z0
 
     using static HexConst;
     using static LimitValues;
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
+    using static cpu;
 
     using M = BitMasks.Literals;
 
@@ -31,7 +32,7 @@ namespace Z0
             var w = n256;
             var a = gcpu.vinc(w, z8);
             var b = gcpu.vdec(w, Max8u);
-            var spec = z.v8u(cpu.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var spec = v8u(cpu.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
             var c = gcpu.vblend(a,b,spec);
         }
 
@@ -39,7 +40,7 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)M.Msb16x8x1 << 16;
-            cpu.vcover(z.v16u(cpu.vbroadcast(w,alt)), out Vector128<byte> spec);
+            cpu.vcover(v16u(cpu.vbroadcast(w,alt)), out Vector128<byte> spec);
             var a = gcpu.vinc(w,z16);
             var b = gcpu.vdec(w,Max16u);
             var c = gcpu.vblend(a,b,spec);
@@ -50,7 +51,7 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)M.Msb16x8x1 << 16;
             var altEven = (uint)M.Msb16x8x1;
-            cpu.vcover(z.v16u(gcpu.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
+            cpu.vcover(v16u(gcpu.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var a = gcpu.vinc(w,z16);
             var b = gcpu.vdec(w,Max16u);
             var c = gcpu.vblend(a,b,spec);
@@ -153,9 +154,9 @@ namespace Z0
             Claim.veq(cpu.vparts(0,1,A,B,4,5,E,F), cpu.vblend(left,right, Blend8x32.LLRRLLRR));
             Claim.veq(cpu.vparts(8,9,2,3,C,D,6,7), cpu.vblend(left,right, Blend8x32.RRLLRRLL));
 
-            var lrpattern = z.v32u(cpu.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = v32u(cpu.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(byte i=0; i < 8; i++)
-                Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
+                Claim.eq(vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 
             var zero = gcpu.vzero<uint>(n);
             var ones = gcpu.vones<uint>(n);

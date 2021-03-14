@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_fixed_rng : t_inx<t_fixed_rng>
     {

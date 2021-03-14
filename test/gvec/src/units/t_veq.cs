@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_veq : t_inx<t_veq>
     {

@@ -5,8 +5,9 @@
 namespace Z0
 {
     using System;
-    
-    using static Konst;
+
+    using static Part;
+    using static memory;
 
     public class t_vmin : t_inx<t_vmin>
     {
@@ -15,7 +16,7 @@ namespace Z0
             vmin_check(n128);
             vmin_check(n256);
         }
-        
+
         void vmin_check(N128 w)
         {
             vmin_check(w,z8);
@@ -47,7 +48,7 @@ namespace Z0
         void vmin_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vmin(w,t), w, t);
-            
+
         void vmin_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vmin(w,t), w, t);
