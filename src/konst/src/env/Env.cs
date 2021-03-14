@@ -31,6 +31,7 @@ namespace Z0
             dst.DevRoot = dir(N.DevRoot);
             dst.Tmp = dir(N.ZTmp);
             dst.CdbLogPath = path(N.CdbLogPath);
+            dst.DefaultSymbolCache = dir(N.DefaultSymbolCache);
         }
 
         public EnvDirVar ZDev;
@@ -54,6 +55,8 @@ namespace Z0
         public EnvDirVar ZBin;
 
         public EnvPathVar CdbLogPath;
+
+        public EnvDirVar DefaultSymbolCache;
 
         public string Format()
         {

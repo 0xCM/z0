@@ -22,7 +22,6 @@ namespace Z0.Asm
             return machine;
         }
 
-
         public static void run(ref AsmMachine m)
         {
 

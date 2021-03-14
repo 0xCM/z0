@@ -10,10 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using R = RepeatPrefixCode;
     using L = LockPrefixCode;
-    using SZ = SizeOverrideCode;
-    using SG = SegOverrideCode;
     using REX = RexPrefixCode;
 
     [ApiHost]

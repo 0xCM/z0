@@ -61,6 +61,10 @@ namespace Z0
             return count;
         }
 
+        public static Count emit<T>(T[] src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
+            where T : struct, IRecord<T>
+                => emit(@readonly(src), dst, fieldwidth, append);
+
         public static Count emit<T>(ReadOnlySpan<T> src, FS.FilePath dst, byte? fieldwidth = null, bool append = false)
             where T : struct, IRecord<T>
         {

@@ -9,11 +9,10 @@ namespace Z0
     using Microsoft.SymbolStore;
     using Microsoft.SymbolStore.KeyGenerators;
     using SOS;
-    using System.Collections.Generic;
 
     using static Root;
 
-    sealed class PdbSymbolStore : WfService<PdbSymbolStore,IPdbSymbolStore>, IPdbSymbolStore
+    public sealed class PdbSymbolStore : WfService<PdbSymbolStore>
     {
         public DirectorySymbolStore DirectoryStore(FS.FolderPath dir)
             => new DirectorySymbolStore(tracer(Wf), null, dir.Name);
@@ -24,14 +23,23 @@ namespace Z0
         public KeyGenerator KeyGenerator(SymbolStoreFile src)
             => new PortablePDBFileKeyGenerator(tracer(Wf), src);
 
-        public IEnumerable<SymbolStoreKey> Identities(KeyGenerator src)
-            => src.GetKeys(KeyTypeFlags.IdentityKey);
+        public Index<SymbolStoreKey> Identities(KeyGenerator src)
+            => src.GetKeys(KeyTypeFlags.IdentityKey).Array();
+
+        public Index<SymbolStoreKey> Identities(SymbolStoreFile src)
+            => Identities(KeyGenerator(src)).Array();
+
+        public Index<SymbolStoreKey> SymbolKeys(KeyGenerator src)
+            => src.GetKeys(KeyTypeFlags.IdentityKey).Array();
+
+        public Index<SymbolStoreKey> SymbolKeys(SymbolStoreFile src)
+            => SymbolKeys(KeyGenerator(src)).Array();
+
+        public FS.Files SymbolPaths(FS.FolderPath src)
+            => src.Files(FS.Extensions.Pdb, true);
 
         [MethodImpl(Inline)]
         static ITracer tracer(IWfShell wf)
             => new SymbolTracer(wf);
-
-        public Index<FS.FilePath> SymbolPaths(FS.FolderPath src)
-            => src.Files(FS.Extensions.Pdb, true);
     }
 }

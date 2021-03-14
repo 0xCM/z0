@@ -10,6 +10,20 @@ namespace Z0.Asm
     using static Part;
 
     [Record(TableId)]
+    public struct AsmStatementCase : IRecord<AsmStatementCase>
+    {
+        public const string TableId = "asm.statements.cases";
+
+        public AsmStatementExpr Expression;
+
+		public AsmSigExpr Sig;
+
+        public AsmOpCodeExpr OpCode;
+
+        public AsmHexCode Encoded;
+    }
+
+    [Record(TableId)]
     public struct AsmStatementInfo : IRecord<AsmStatementInfo>, IComparable<AsmStatementInfo>
     {
         public const string TableId = "asm.statements";

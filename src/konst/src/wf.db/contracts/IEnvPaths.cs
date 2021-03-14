@@ -30,6 +30,12 @@ namespace Z0
         FS.FolderPath ControlRoot()
             => Env.Control.Value;
 
+        FS.FolderPath SymbolCache()
+            => Env.DefaultSymbolCache.Value;
+
+        FS.FolderPath RuntimeRoot()
+            => Env.ZBin.Value;
+
         FS.FilePath ControlScript(FS.FileName src)
             => ControlCmdRoot() + src;
 
@@ -44,6 +50,9 @@ namespace Z0
 
         FS.FolderPath DbRoot()
             => Env.Db.Value;
+
+        FS.FilePath CdbLogPath()
+            => Env.CdbLogPath.Value;
 
         /// <summary>
         /// The root table directory

@@ -13,9 +13,29 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmBytes
     {
+        [MethodImpl(Inline), Op]
+        public static byte size(AsmHexCode src)
+            => UI.cell8(src.Data, 15);
+
+        [MethodImpl(Inline), Op]
+        public static int compare(in AsmHexCode a, in AsmHexCode b)
+            => hexbytes(a).SequenceCompareTo(hexbytes(b));
+
+        [MethodImpl(Inline), Op]
+        public static bool eq(in AsmHexCode a, in AsmHexCode b)
+            => hexbytes(a).SequenceEqual(hexbytes(b));
+
+        [MethodImpl(Inline), Op]
+        public static int hash(AsmHexCode src)
+            => (int)alg.hash.calc(hexbytes(src));
+
+        [MethodImpl(Inline), Op]
+        public static Span<byte> hexbytes(in AsmHexCode src)
+            => slice(bytes(src.Data), 0, size(src));
+
         [Op]
         public static string format(AsmHexCode src)
-            => src.Data.FormatHexData(src.Size);
+            => src.Data.FormatHexData(size(src));
 
         [MethodImpl(Inline), Op]
         public static AsmHexCode hexcode(ReadOnlySpan<byte> src)

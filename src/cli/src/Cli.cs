@@ -45,7 +45,7 @@ namespace Z0
         public static void visualize(FS.FilePath src, FS.FilePath dst)
             => Mdv.run(src.Name,dst.Name);
 
-        public static IPdbSymbolStore symbols(IWfShell wf)
+        public static PdbSymbolStore symbols(IWfShell wf)
             => PdbSymbolStore.create(wf);
     }
 
@@ -58,7 +58,7 @@ namespace Z0
     public static partial class XSvc
     {
         [ServiceFactory]
-        public static IPdbSymbolStore PdbSymbolStore(this IWfShell wf)
+        public static PdbSymbolStore PdbSymbolStore(this IWfShell wf)
             => Cli.symbols(wf);
     }
 }

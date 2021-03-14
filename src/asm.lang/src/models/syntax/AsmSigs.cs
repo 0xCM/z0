@@ -13,7 +13,6 @@ namespace Z0.Asm
     using static memory;
     using static Rules;
     using static TextRules;
-    //using static AsmOpCodes;
 
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>

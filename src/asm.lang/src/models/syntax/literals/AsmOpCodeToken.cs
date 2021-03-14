@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SM = AsmSyntaxMeaning;
+    using SM = AsmSyntaxDocs;
 
     public enum AsmOpCodeToken : byte
     {

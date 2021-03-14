@@ -510,6 +510,48 @@ namespace Z0.Asm
         }
 
 
+        void EmitStatementCases()
+        {
+            var cases = root.dict<AsmHexCode,AsmStatementCase>();
+
+            void Collect(AsmStatementInfo src)
+            {
+                var encoded = src.Encoded;
+                if(!cases.ContainsKey(encoded))
+                {
+                    var dst = new AsmStatementCase();
+                    dst.Encoded = encoded;
+                    dst.Expression = src.Expression.Format();
+                    dst.OpCode = src.OpCode;
+                    dst.Sig = src.Sig;
+                    cases[encoded] = dst;
+                }
+            }
+
+            Wf.AsmStatementProcessor().Run(Collect);
+
+            var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
+            var dst = Db.IndexTable<AsmStatementCase>();
+            var flow = Wf.EmittingTable<AsmStatementCase>(dst);
+            var count = Records.emit(collected, dst, 42);
+            Wf.EmittedTable(flow,count);
+
+            var id = Db.TableId<AsmStatementCase>();
+
+            var asmcases = Db.IndexRoot() + FS.file(id, FS.Extensions.Asm);
+            var asmflow = Wf.EmittingFile(asmcases);
+            using var writer = asmcases.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var @case = ref skip(collected,i);
+                var line = string.Format("{0,-36} ; ({1})[{2}] => {3}", @case.Expression, @case.Sig.Format(), @case.OpCode, @case.Encoded);
+                writer.WriteLine(line);
+            }
+
+            Wf.EmittedFile(asmflow, count);
+
+        }
+
         void ProcessStatements()
         {
             var table = SymbolStores.table<AsmMnemonicCode>();
@@ -553,16 +595,56 @@ namespace Z0.Asm
             Wf.Status($"{opcodes.Count} distinct opcodes were collected");
 
         }
-        public void Run()
+
+        const string XXX = "05,59,40,71,AA,E9,E3,FC,BE,A9,2F,FF,B9,EB,B4,7D,41";
+
+        FS.Files EmitSymbolPaths()
+        {
+            var symbols = Wf.PdbSymbolStore();
+            var src = Db.SymbolCache();
+            var paths = symbols.SymbolPaths(src);
+            var view = paths.View;
+            var count = view.Length;
+            var dst = Db.AppDataFile(FS.file("pdbsymbols", FS.Extensions.Csv));
+            using var writer = dst.Writer();
+            writer.WriteLine(string.Format("{0,-6} | {1}", "Seq", "Path"));
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(view,i);
+                var row = string.Format("{0,-6} | {1}", i.Format(4), path.ToUri());
+                writer.WriteLine(row);
+            }
+            return paths;
+        }
+
+        void StupidAttemptToMakeTheSymbolStoreWork()
         {
             var symbols = Wf.PdbSymbolStore();
 
             var src = FS.dir(@"C:\Cache\symbols");
-            var paths = symbols.SymbolPaths(src);
-            root.iter(paths, path => Wf.Row(path.ToUri()));
+            var paths = EmitSymbolPaths().View;
+            var count = paths.Length;
 
             using var store = symbols.DirectoryStore(src);
 
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(paths,i);
+                using var file = symbols.SymbolFile(path);
+                var keys = symbols.SymbolKeys(file).View;
+                var keycount = keys.Length;
+                for(var j=0; j<keycount; j++)
+                {
+                    ref readonly var key = ref skip(keys, j);
+                    Wf.Row(key.Index);
+                }
+            }
+
+        }
+
+        public void Run()
+        {
+            EmitStatementCases();
         }
 
         public static void Main(params string[] args)
@@ -581,5 +663,8 @@ namespace Z0.Asm
         }
     }
 
-    public static partial class XTend { }
+    public static partial class XTend
+    {
+
+    }
 }

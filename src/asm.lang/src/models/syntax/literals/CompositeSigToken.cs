@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-     using SM = AsmSyntaxMeaning;
+     using SM = AsmSyntaxDocs;
 
     /// <summary>
     /// Classifies composite operand signature specifications

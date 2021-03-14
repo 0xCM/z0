@@ -19,8 +19,12 @@ namespace Z0
 
         KeyGenerator KeyGenerator(SymbolStoreFile src);
 
-        IEnumerable<SymbolStoreKey> Identities(KeyGenerator src);
+        Index<SymbolStoreKey> Identities(KeyGenerator src);
 
-        Index<FS.FilePath> SymbolPaths(FS.FolderPath src);
+        FS.Files SymbolPaths(FS.FolderPath src);
+
+        Index<SymbolStoreKey> Identities(SymbolStoreFile src);
+
+        Index<SymbolStoreKey> SymbolKeys(SymbolStoreFile src);
     }
 }

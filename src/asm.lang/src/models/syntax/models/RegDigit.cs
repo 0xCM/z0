@@ -20,19 +20,9 @@ namespace Z0.Asm
         public RegDigit(uint3 value)
             => Value = value;
 
-        public RegDigitCode Kind
-        {
-            [MethodImpl(Inline)]
-            get => (RegDigitCode)(byte)Value;
-        }
-
         [MethodImpl(Inline)]
         public static implicit operator RegDigit(uint3 src)
             => new RegDigit(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator RegDigit(RegDigitCode src)
-            => new RegDigit((byte)src);
 
         [MethodImpl(Inline)]
         public static implicit operator RegDigit(byte src)

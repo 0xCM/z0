@@ -5,14 +5,13 @@
 namespace Z0.Asm
 {
     [LiteralProvider]
-    public readonly struct AsmSyntaxMeaning
+    public readonly struct AsmSyntaxDocs
     {
         public const string NE = "Not encodable";
 
         public const string NP = "Indicates the use of 66/F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction";
 
         public const string NFx = "Indicates the use of F2/F3 prefixes (beyond those already part of the instructions opcode) are not allowed with the instruction.";
-
 
         public const string RexW = "Indicates the use of a REX prefix that affects operand size or instruction semantics";
 

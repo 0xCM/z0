@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SM = AsmSyntaxMeaning;
+    using SM = AsmSyntaxDocs;
 
     [SymbolSource]
     public enum AsmSigToken : ushort

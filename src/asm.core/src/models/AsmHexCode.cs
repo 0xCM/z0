@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using api = AsmBytes;
 
-    public struct AsmHexCode
+    public struct AsmHexCode : IDataTypeComparable<AsmHexCode>
     {
         internal Cell128 Data;
 
@@ -23,13 +23,13 @@ namespace Z0.Asm
         public byte Size
         {
             [MethodImpl(Inline)]
-            get => UI.cell8(Data, 15);
+            get => api.size(this);
         }
 
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => slice(bytes(Data), 0, 15);
+            get => api.hexbytes(this);
         }
 
         [MethodImpl(Inline)]
@@ -48,11 +48,25 @@ namespace Z0.Asm
         public uint ToUInt64()
             => (uint)Data.Lo;
 
+        public override int GetHashCode()
+            => api.hash(this);
+
+        [MethodImpl(Inline)]
+        public bool Equals(AsmHexCode src)
+            => api.eq(this, src);
+
+        public override bool Equals(object src)
+            => src is AsmHexCode x && Equals(x);
+
         public string Format()
             => api.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public int CompareTo(AsmHexCode src)
+            => api.compare(this, src);
 
         [MethodImpl(Inline)]
         public static implicit operator AsmHexCode(BinaryCode src)
