@@ -17,9 +17,10 @@ namespace Z0.Parts
 
 namespace Z0
 {
+    using static Root;
     [ApiHost]
     public static partial class XTend
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

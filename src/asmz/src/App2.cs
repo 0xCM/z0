@@ -552,6 +552,11 @@ namespace Z0.Asm
 
         }
 
+        void EmitCpuAsmCases()
+        {
+
+        }
+
         void ProcessStatements()
         {
             var table = SymbolStores.table<AsmMnemonicCode>();

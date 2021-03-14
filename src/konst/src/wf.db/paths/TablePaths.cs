@@ -40,47 +40,100 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
 
+        /// <summary>
+        /// Creates a folder path of the form {DbRoot}/tables/{TableId}.{subject}
+        /// </summary>
+        /// <param name="subject">The subject name</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FolderPath TableDir<T>(string subject)
+            where T : struct, IRecord<T>
+                => TableRoot() + FS.folder(string.Format("{0}.{1}", TableId<T>(), subject));
+
         string TableId(Type t)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => a.TableId, () => t.Name);
+            => RecUtil.tableid(t).Identifier.Format();
 
         string TableId<T>()
-            => TableId(typeof(T));
-
-        FS.FilePath Table(string id, PartId part)
-            => TableDir(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), DefaultTableExt);
-
-        FS.FilePath Table(string id)
-            => TableRoot() + FS.file(id, DefaultTableExt);
-
-        FS.FilePath Table(PartId part, string id, FS.FileExt ext)
-            => TableDir(id) + FS.file(part.Format(), ext);
-
-        FS.FilePath Table<T>(string name)
             where T : struct, IRecord<T>
-                => Table<T>(name, Csv);
+                => RecUtil.tableid<T>().Identifier.Format();
+
+        FS.FilePath Table(string subject, PartId part)
+            => TableDir(subject) + FS.file(string.Format(RP.SlotDot2, subject, part.Format()), DefaultTableExt);
+
+        FS.FilePath Table(PartId part, string subject, FS.FileExt ext)
+            => TableDir(subject) + FS.file(part.Format(), ext);
+
+        FS.FilePath Table<T>(string subject)
+            where T : struct, IRecord<T>
+                => Table<T>(subject, Csv);
 
         FS.FilePath Table<T>(FS.FolderName subject)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(RecUtil.tableid<T>().Identifier.Format(), Csv);
+                => TableDir(subject) + FS.file(TableId<T>(), Csv);
 
         FS.FilePath Table<T>(FS.FolderName subject, string discriminator)
             where T : struct, IRecord<T>
-                => TableDir(subject) + FS.file(RecUtil.tableid<T>().Identifier.Format() + string.Format("-{0}", discriminator), Csv);
+                => TableDir(subject) + FS.file(TableId<T>() + string.Format("-{0}", discriminator), Csv);
 
-        FS.FilePath Table<T>(string name, FS.FileExt ext)
+        FS.FilePath Table<T>(string subject, FS.FileExt ext)
             where T : struct, IRecord<T>
         {
-            var id = RecUtil.tableid<T>().Identifier;
+            var id = TableId<T>();
             var dir = TableDir(id);
-            return dir + FS.file(string.Format("{0}.{1}", id, name), ext);
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext);
         }
 
         FS.FilePath Table(Type t, PartId part)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));
 
+        /// <summary>
+        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{ext}
+        /// </summary>
+        /// <param name="part">The part id</param>
+        /// <typeparam name="T">The record type</typeparam>
         FS.FilePath Table<T>(PartId part)
             where T : struct, IRecord<T>
-                => Table(typeof(T), part);
+                => TableDir<T>() + TableFile<T>(part);
+
+        /// <summary>
+        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{host}.{ext}
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        /// <param name="ext">The file extension</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FilePath Table<T>(ApiHostUri host, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+                => TableDir<T>() + TableFile<T>(host);
+
+        /// <summary>
+        /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{ext}
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        /// <param name="ext">The file extension</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FileName TableFile<T>(PartId part, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+                => FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format()), ext ?? DefaultTableExt);
+
+        /// <summary>
+        /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{host}.{ext}
+        /// </summary>
+        /// <param name="host">The host uri</param>
+        /// <param name="ext">The file extension</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FileName TableFile<T>(ApiHostUri host, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Owner.Format(), host.Name), ext ?? DefaultTableExt);
+
+        /// <summary>
+        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}.{subject}/{TableId}.{part}.{host}.{ext}
+        /// </summary>
+        /// <param name="subject">The subject name</param>
+        /// <param name="host">The host uri</param>
+        /// <param name="ext">The file extension</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FilePath Table<T>(string subject, ApiHostUri host, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+                => TableDir<T>(subject) + TableFile<T>(host, ext);
 
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
             => TableRoot()+ FS.folder(id) + FS.file(text.format(DbNames.qualified, id, subject), ext ?? Csv);
@@ -111,5 +164,12 @@ namespace Z0
         FS.FilePath IndexTable<T>(string discriminator)
             where T : struct, IRecord<T>
                 => IndexDir(typeof(T)) + FS.file(TableId<T>() + "." + discriminator, DefaultTableExt);
+
+        FS.FileName TableFileName<T>(string id)
+            where T : struct, IRecord<T>
+                => FS.file(string.Format("{0}.{1}", TableId<T>(), id), Csv);
+
+        FS.FileExt DefaultTableExt
+             => Csv;
     }
 }

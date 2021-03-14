@@ -7,15 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    [ApiHost("sys.proxy")]
-    readonly partial struct proxy
+    [ApiHost]
+    public static partial class XArray
     {
-        const NumericKind Closure = Integers;
-
-        const string EmptyString = "";
-
-        const MethodImplOptions Options = MethodImplOptions.NoInlining;
+        const NumericKind Closure = UnsignedInts;
     }
 }

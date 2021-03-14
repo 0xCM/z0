@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
+    using static Root;
 
     using O = ApiOpaqueClass;
 
-    partial struct proxy
+    partial struct sys
     {
         [MethodImpl(Options), Opaque(O.GetFieldValue)]
         public static object value(object src, FieldInfo field)
-            => field.GetValue(src);
+            => proxy.value(src,field);
 
         [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]
         public static T value<T>(object src, FieldInfo field)
-            => (T)field.GetValue(src);
+            => proxy.value<T>(src,field);
     }
 }

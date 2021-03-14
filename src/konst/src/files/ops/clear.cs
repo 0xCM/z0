@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.IO;
 
-
     partial struct FS
     {
         public static void clear(FS.FolderPath src, bool recurse = false)

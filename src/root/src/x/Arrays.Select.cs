@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     partial class XArray
     {
@@ -20,6 +20,14 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         [MethodImpl(Inline)]
         public static T[] Select<S,T>(this S[] src, Func<S,T> f)
-            => Arrays.map(src,f);
+        {
+            Span<S> source = src;
+            var count = source.Length;
+            var buffer = new T[count];
+            Span<T> target = buffer;
+            for(var i=0; i<count; i++)
+                target[i] = f(source[i]);
+            return buffer;
+        }
     }
 }

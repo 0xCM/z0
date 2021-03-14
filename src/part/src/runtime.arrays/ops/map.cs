@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Arrays
     {
-       /// <summary>
+        /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
         /// </summary>
         /// <param name="src">The source sequence</param>

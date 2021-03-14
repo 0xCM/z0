@@ -26,6 +26,12 @@ public enum PartId : ulong
 
     BitMasks = 10,
 
+    Term = 11,
+
+    Files = 12,
+
+    Sys=13,
+
     Digital = 18,
 
     Check = 19,
@@ -95,7 +101,6 @@ public enum PartId : ulong
     Machines = 115,
 
     Merge = 116,
-
 
     Blocked = 118,
 

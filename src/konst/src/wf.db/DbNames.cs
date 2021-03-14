@@ -27,6 +27,8 @@ namespace Z0
 
         public const string sources = nameof(sources);
 
+        public const string targets = nameof(targets);
+
         public const string stage = nameof(stage);
 
         public const string tools = nameof(tools);
@@ -50,7 +52,6 @@ namespace Z0
         public const string parsed = nameof(parsed);
 
         public const string il = nameof(il);
-
 
         public const string hex = nameof(hex);
 
@@ -88,5 +89,6 @@ namespace Z0
 
         public const string z0 = nameof(z0);
 
+        public const string cases = nameof(cases);
     }
 }

@@ -2,14 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IFsEntries<T> : IIndex<T>
-        where T : struct, IFsEntry<T>
+[assembly: PartId(PartId.Sys)]
+
+namespace Z0.Parts
+{
+    public sealed class Sys : Part<Sys>
     {
 
     }
 }
+
+namespace Z0
+{
+    public static partial class XTend
+    {
+
+    }
+}
+

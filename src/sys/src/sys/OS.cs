@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
+    using static Root;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using Fp = System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute;

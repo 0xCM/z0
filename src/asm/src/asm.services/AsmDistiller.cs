@@ -14,6 +14,16 @@ namespace Z0.Asm
     using Target = AsmStatementInfo;
     using Source = AsmRow;
 
+    public enum AsmDistillerFlag : byte
+    {
+        None,
+
+        PartitionByLineCount,
+
+        PartitionByHost,
+    }
+
+
     public class AsmDistiller : AsmWfService<AsmDistiller>
     {
         uint MaxLineCount;
@@ -197,12 +207,29 @@ namespace Z0.Asm
             return ref dst;
         }
 
-        public void DistillStatements()
+
+        public void DistillStatements(AsmDistillerFlag flags = AsmDistillerFlag.PartitionByLineCount)
         {
-            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
+            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks(), flags);
         }
 
-        public void DistillStatements(ApiCodeBlocks src)
+        public void DistillStatements(ApiCodeBlocks src, AsmDistillerFlag flags = AsmDistillerFlag.PartitionByLineCount)
+        {
+            if(flags == AsmDistillerFlag.PartitionByHost)
+            {
+
+            }
+
+            else
+                DistillByLineCount(src);
+        }
+
+        void DistillByHost(ApiCodeBlocks src)
+        {
+
+        }
+
+        void DistillByLineCount(ApiCodeBlocks src)
         {
             var flow = Wf.Running();
             Db.ClearTables<Target>();

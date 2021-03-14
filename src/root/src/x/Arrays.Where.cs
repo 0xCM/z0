@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Arrays;
+    using static Root;
+    using static ArrayUtil;
 
     partial class XArray
     {
@@ -32,6 +32,6 @@ namespace Z0
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline)]
         public static T[] Where<S,T>(this S[] src, Func<S,bool> test, Func<S,T> project)
-            => Arrays.map(where(src,test), project);
+            => map(where(src,test), project);
    }
 }

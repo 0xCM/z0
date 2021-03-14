@@ -59,6 +59,7 @@
     <External>$(Src)external/z0.external.csproj</External>
     <Extract>$(Src)extract/z0.extract.csproj</Extract>
 
+    <Files>$(Src)files/z0.files.csproj</Files>
     <Fsm>$(Src)fsm/z0.fsm.csproj</Fsm>
     <FVec>$(Src)fvec/z0.fvec.csproj</FVec>
 
@@ -79,7 +80,9 @@
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
 
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
+    <Sys>$(Src)sys/z0.sys.csproj</Sys>
 
+    <Term>$(Src)term/z0.term.csproj</Term>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
 
     <Validity>$(Src)validity/z0.validity.csproj</Validity>

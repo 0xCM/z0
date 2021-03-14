@@ -17,8 +17,9 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         public static T[] Mapi<S,T>(this S[] src, Func<int,S,T> f)
         {
-            var dst = new T[src.Length];
-            for(var i=0; i<dst.Length; i++)
+            var count = src.Length;
+            var dst = new T[count];
+            for(var i=0; i<count; i++)
                 dst[i] = f(i,src[i]);
             return dst;
         }
