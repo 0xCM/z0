@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=asm.lang
+set ProjectId=api
 call %ControlCommands%\build-lib.cmd

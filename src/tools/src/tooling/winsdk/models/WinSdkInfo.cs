@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Tooling
 {
-    using static Part;
-
     public struct WinSdkInfo : ITextual
     {
         public string Version;

@@ -9,9 +9,9 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CheckHiMaskResults<T> : ITableSpan<CheckHiMaskResults<T>,CheckHiMaskResult<T>>
+    public readonly struct CheckHiMaskResults<T> : IIndex<CheckHiMaskResult<T>>
     {
-        readonly TableSpan<CheckHiMaskResult<T>> Data;
+        readonly Index<CheckHiMaskResult<T>> Data;
 
         public CheckHiMaskResult<T>[] Storage
             => Data;

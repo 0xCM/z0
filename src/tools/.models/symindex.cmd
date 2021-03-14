@@ -1,1 +1,0 @@
-symstore add /o /r /p /g j:\cache\symbols /f j:\cache\symbols\*.* /x j:\cache\symbols\index.txt

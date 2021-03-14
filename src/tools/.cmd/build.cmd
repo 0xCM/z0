@@ -1,2 +1,3 @@
-set ProjectPath=%ZDev%\src\tools\z0.tools.csproj
-dotnet build %ProjectPath% -c Release
+@echo off
+set ProjectId=tools
+call %ControlCommands%\build-lib.cmd

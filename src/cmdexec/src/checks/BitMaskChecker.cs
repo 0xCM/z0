@@ -9,7 +9,7 @@ namespace Z0
     using System.Text;
 
     using static Part;
-    using static Checks;
+    using static BitChecks;
     using static memory;
     using static BitMasks;
 
@@ -72,6 +72,8 @@ namespace Z0
         {
             Wf.Disposed();
         }
+
+        public const uint Reps = Pow2.T08;
 
         [Op]
         void Init()

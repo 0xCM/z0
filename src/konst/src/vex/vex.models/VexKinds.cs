@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public partial class VK

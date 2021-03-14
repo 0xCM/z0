@@ -10,7 +10,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Part;
+    using static Root;
 
     partial class VK
     {

@@ -2,10 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
     using static Prototypes.Branch01;
 
     partial struct Prototypes
@@ -58,6 +60,5 @@ namespace Z0.Lang
 
             public const uint R5 = 0x81;
         }
-
     }
 }

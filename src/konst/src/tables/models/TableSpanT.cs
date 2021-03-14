@@ -10,7 +10,7 @@ namespace Z0
     using static memory;
     using static Part;
 
-    public readonly struct TableSpan<T> : ITableSpan<T>, ITextual
+    public readonly struct TableSpan<T> : IIndex<T>, ITextual
         where T : struct
     {
         public static TableSpan<T> Empty

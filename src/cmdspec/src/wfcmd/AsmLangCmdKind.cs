@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [CommandKind]
-    public enum AsmLangCmdKind
+    [WfCmdKind]
+    public enum AsmLangCmdKind : byte
     {
         None = 0,
 

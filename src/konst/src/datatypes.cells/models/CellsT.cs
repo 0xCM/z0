@@ -14,10 +14,10 @@ namespace Z0
     /// Defines an indexed sequence of <typeparamref name='T'/> cells
     /// </summary>
     [Datatype("m(n)")]
-    public readonly struct Cells<T> : ITableSpan<Cells<T>,T>
+    public readonly struct Cells<T> : IIndex<T>
         where T : struct, IDataCell<T>
     {
-        readonly IndexedSeq<T> Data;
+        readonly Index<T> Data;
 
         [MethodImpl(Inline)]
         public Cells(T[] src)

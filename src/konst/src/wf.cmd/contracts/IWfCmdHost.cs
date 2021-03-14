@@ -9,6 +9,8 @@ namespace Z0
 
     public interface IWfCmdHost : IWfService
     {
+        Type CommandType {get;}
+
         IEnumerable<WfCmdExec> Hosted {get;}
     }
 
@@ -16,5 +18,8 @@ namespace Z0
         where K : unmanaged
     {
         CmdResult Run(K kind);
+
+        Type IWfCmdHost.CommandType
+            => typeof(K);
     }
 }

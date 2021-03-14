@@ -8,22 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Part;
+    using static Root;
 
     [ApiHost]
     public class VLut
     {
         [MethodImpl(Inline), Init]
         public static VLut16 init(Vector128<byte> src)
-            => VLut16.Define(src);
+            => VLut16.define(src);
 
         [MethodImpl(Inline), Init]
         public static VLut16 init(ReadOnlySpan<byte> src, N16 n)
-            => VLut16.Define(src);
+            => VLut16.define(src);
 
         [MethodImpl(Inline), Init]
         public static VLut16 init(in SpanBlock128<byte> src)
-            => VLut16.Define(src);
+            => VLut16.define(src);
 
         [MethodImpl(Inline), Init]
         public static VLut32 init(Vector256<byte> src)

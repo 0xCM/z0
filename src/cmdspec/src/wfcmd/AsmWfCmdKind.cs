@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    [CommandKind]
+    [WfCmdKind]
     public enum AsmWfCmdKind : byte
     {
         None = 0,

@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a reified boolean outcome
     /// </summary>
-    public interface ISeqEval<H,T> : IEval, ISpanBuffer<T>
+    public interface ISeqEval<H,T> : IEval, IIndex<T>
         where H : struct, ISeqEval<H,T>
     {
 

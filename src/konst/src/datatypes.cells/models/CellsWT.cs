@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines an indexed sequence of <typeparamref name='W'/> width <typeparamref name='T'/> cells
     /// </summary>
-    public readonly struct Cells<W,T> : ITableSpan<Cells<W,T>, CellW<W,T>>
+    public readonly struct Cells<W,T> : IIndex<CellW<W,T>>
         where W : unmanaged, ITypeWidth
         where T : unmanaged, IDataCell<T>
     {

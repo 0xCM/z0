@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     /// <summary>
     /// Implements a parallel 16-way lookup
@@ -20,29 +19,26 @@ namespace Z0
         internal readonly Vector128<byte> Mask;
 
         [MethodImpl(Inline)]
-        public static VLut16 Define(Vector128<byte> src)
+        public static VLut16 define(Vector128<byte> src)
             => new VLut16(src);
 
         [MethodImpl(Inline)]
-        public static VLut16 Define(ReadOnlySpan<byte> src)
+        public static VLut16 define(ReadOnlySpan<byte> src)
             => new VLut16(src);
 
         [MethodImpl(Inline)]
-        public static VLut16 Define(in SpanBlock128<byte> src)
+        public static VLut16 define(in SpanBlock128<byte> src)
             => new VLut16(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<byte>(in VLut16 src)
-            => src.Mask;
 
         public byte this[byte i]
         {
              [MethodImpl(Inline)]
-             get => vcell(Mask,i);
+             get => cpu.vcell(Mask,i);
         }
 
         [MethodImpl(Inline)]
-        VLut16(Vector128<byte> src) => Mask = src;
+        VLut16(Vector128<byte> src)
+            => Mask = src;
 
         [MethodImpl(Inline)]
         VLut16(in SpanBlock128<byte> src)
@@ -51,5 +47,9 @@ namespace Z0
         [MethodImpl(Inline)]
         VLut16(ReadOnlySpan<byte> src)
             => Mask = gcpu.vload(w128,src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<byte>(in VLut16 src)
+            => src.Mask;
     }
 }

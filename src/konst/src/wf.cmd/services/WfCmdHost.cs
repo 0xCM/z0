@@ -11,12 +11,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [AttributeUsage(AttributeTargets.Enum)]
-    public class CommandKindAttribute : Attribute
-    {
-
-    }
-
     [WfCmdHost]
     public abstract class WfCmdHost<H,K> : WfService<H,IWfCmdHost<K>>, IWfCmdHost<K>
         where H : WfCmdHost<H,K>, new()
@@ -31,6 +25,8 @@ namespace Z0
             else
                 return Cmd.fail(cmd.Enclosed);
         }
+
+        public static Type CommandType => typeof(K);
 
         protected WfCmdIndex Index;
 

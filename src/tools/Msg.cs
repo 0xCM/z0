@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
-    using static z;
-
-    readonly struct Msg
+    readonly partial struct Msg
     {
 
     }

@@ -1,18 +1,18 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2030
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0.Asm
 {
-    using static Prototypes.Branch03;
+    using static Prototypes.Branch04;
 
-    using C = System.UInt64;
-    using T = System.Byte;
+    using C = System.UInt32;
+    using T = System.UInt16;
 
     partial struct Prototypes
     {
         [Op]
-        public static byte branch(Branch03 m, ulong src)
+        public static T branch(Branch04 m, C src)
         {
             switch(src)
             {
@@ -45,55 +45,56 @@ namespace Z0.Lang
             }
         }
 
-        public readonly struct Branch03
+        public readonly struct Branch04
         {
-            public const C C0 = 0xa0a0a0a;
+            public const C C0 = 0xa1a0a0a;
 
-            public const C C1= 0x10101010;
+            public const C C1= 0x10101110;
 
             public const C C2 = 0x20202020;
 
-            public const C C3 = 0x30303030;
+            public const C C3 = 0x30373030;
 
-            public const C C4 = 0x40404040;
+            public const C C4 = 0x40404049;
 
-            public const C C5 = 0x50505050;
+            public const C C5 = 0x50595050;
 
-            public const C C6 = 0x60606060;
+            public const C C6 = 0x60676060;
 
             public const C C7 = 0x70707070;
 
-            public const C C8 = 0x08080808;
+            public const C C8 = 0x38087808;
 
-            public const C C9 = 0x09090809;
+            public const C C9 = 0x19390807;
 
-            public const C CA = 0xb0b0b0b0;
+            public const C CA = 0xb7bcb0b0;
 
-            public const C CB = 0xc0c0c0c0;
+            public const C CB = 0xc9c0c0c1;
 
-            public const T R0 = 0x32;
+            public const T R0 = 0x11;
 
-            public const T R1 = 0x19;
+            public const T R1 = 0x22;
 
-            public const T R2 = 0x78;
+            public const T R2 = 0x33;
 
-            public const T R3 = 0x22;
+            public const T R3 = 0x44;
 
-            public const T R4 = 0x39;
+            public const T R4 = 0x55;
 
-            public const T R5 = 0x81;
+            public const T R5 = 0x66;
 
-            public const T R6 = 0x23;
+            public const T R6 = 0x77;
 
-            public const T R7 = 0x91;
+            public const T R7 = 0x88;
 
-            public const T R8 = 0x87;
+            public const T R8 = 0x99;
 
-            public const T R9 = 0x33;
+            public const T R9 = 0xaa;
 
-            public const T RA = 0x93;
+            public const T RA = 0xbb;
 
-            public const T RB = 0x18;
+            public const T RB = 0xcc;
         }
+
     }
 }

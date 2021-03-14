@@ -1,1 +1,0 @@
-dotnet tool install <tool-name> --tool-path <target-path>

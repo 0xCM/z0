@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Checks;
+    using static BitChecks;
 
     using static CreditTypes;
     using static CreditTypes.Vendor;

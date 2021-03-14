@@ -17,7 +17,7 @@ namespace Z0
             => dst(CliReader.GetTypeDefinition(src));
 
         [MethodImpl(Inline), Op]
-        public void Read(TableSpan<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst)
+        public void Read(Index<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst)
             => src.Iter(handle => dst(CliReader.GetTypeDefinition(handle)));
     }
 }

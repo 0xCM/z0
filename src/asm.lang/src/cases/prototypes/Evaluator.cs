@@ -11,21 +11,8 @@ namespace Z0.Asm
     using static BinaryBitLogicKind;
     using static ScalarBitLogic;
 
-    [ApiHost]
-    public readonly partial struct Prototypes
+    partial struct Prototypes
     {
-        [Op]
-        public static byte range_check(byte[] src)
-            => src[3];
-
-        const string prototypes = nameof(prototypes);
-
-        const string eval = nameof(eval);
-
-        const string contract = nameof(contract);
-
-        const string client = nameof(client);
-
         public interface IEvaluator
         {
             sbyte Eval(sbyte a, sbyte b, BinaryBitLogicKind k);
@@ -394,7 +381,6 @@ namespace Z0.Asm
             [Op]
             public static IEvaluator create()
                 => new ContractedEvaluator(new Evaluator());
-
 
             ContractedEvaluator(Evaluator e)
             {
