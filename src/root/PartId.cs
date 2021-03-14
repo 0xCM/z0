@@ -50,7 +50,7 @@ public enum PartId : ulong
 
     Interop = 45,
 
-    Dsl = 46,
+    Cpu = 46,
 
     Gen = 47,
 

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static cpu;
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector
@@ -56,7 +56,7 @@ namespace Z0
         public BitVector64 Lo
         {
             [MethodImpl(Inline)]
-            get => z.vcell(v64u(Data),0);
+            get => vcell(v64u(Data),0);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         public BitVector64 Hi
         {
             [MethodImpl(Inline)]
-            get => z.vcell(v64u(Data),1);
+            get => vcell(v64u(Data),1);
         }
 
         /// <summary>

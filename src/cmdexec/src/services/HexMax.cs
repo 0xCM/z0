@@ -10,7 +10,8 @@ namespace Z0
 
     using static Part;
     using static HexLevel;
-    using static z;
+    using static memory;
+    using static cpu;
 
     [ApiHost]
     public partial struct HexMax
