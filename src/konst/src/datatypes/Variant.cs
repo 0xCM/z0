@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static cpu;
 
     using NK = NumericKind;
 
@@ -40,13 +40,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T extract<T>(variant src)
             where T : unmanaged
-
                 => vcell(vector<T>(src), 0);
 
         [MethodImpl(Inline)]
         static Vector128<T> vector<T>(variant src)
             where T : unmanaged
-                => generic<T>(src.Storage);
+                => memory.generic<T>(src.Storage);
 
         [MethodImpl(Inline)]
         static variant from(Vector128<ulong> src)

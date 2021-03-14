@@ -52,6 +52,12 @@ namespace Z0
             get => Empty;
         }
 
+        public Span<byte> Bytes
+        {
+            [MethodImpl(Inline)]
+            get => memory.bytes(this);
+        }
+
         [MethodImpl(Inline)]
         public bool Equals(Cell128 src)
             => Data.Equals(src.Data);

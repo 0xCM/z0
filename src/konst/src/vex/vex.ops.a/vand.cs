@@ -12,7 +12,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static Part;
+    using static Root;
 
     partial struct cpu
     {
@@ -215,7 +215,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vand(Vector256<double> x, Vector256<double> y)
             => And(x, y);
-
     }
-
 }

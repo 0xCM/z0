@@ -34,7 +34,15 @@ namespace Z0
             => memory.first(recover<byte,Vector128<ulong>>(slice(src,16)));
 
         [MethodImpl(Inline), Op]
+        public static Cell128 cell(W128 w, ReadOnlySpan<byte> src)
+            => memory.first(recover<byte,Vector128<ulong>>(slice(src,16)));
+
+        [MethodImpl(Inline), Op]
         public static Cell256 cell(ReadOnlySpan<byte> src, W256 w)
+            => memory.first(recover<byte,Vector256<ulong>>(slice(src,32)));
+
+        [MethodImpl(Inline), Op]
+        public static Cell256 cell(W256 w, ReadOnlySpan<byte> src)
             => memory.first(recover<byte,Vector256<ulong>>(slice(src,32)));
 
         [MethodImpl(Inline), Op]

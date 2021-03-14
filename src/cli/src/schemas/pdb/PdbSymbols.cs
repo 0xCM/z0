@@ -11,8 +11,7 @@ namespace Z0
     using SOS;
     using System.Collections.Generic;
 
-    using static memory;
-    using static Part;
+    using static Root;
 
     sealed class PdbSymbolStore : WfService<PdbSymbolStore,IPdbSymbolStore>, IPdbSymbolStore
     {
@@ -31,5 +30,8 @@ namespace Z0
         [MethodImpl(Inline)]
         static ITracer tracer(IWfShell wf)
             => new SymbolTracer(wf);
+
+        public Index<FS.FilePath> SymbolPaths(FS.FolderPath src)
+            => src.Files(FS.Extensions.Pdb, true);
     }
 }

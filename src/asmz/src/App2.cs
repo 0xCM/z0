@@ -105,7 +105,6 @@ namespace Z0.Asm
 
         void ShowPartComponents()
         {
-
             var src = Clr.adapt(Wf.Api.PartComponents);
             for(var i=0; i<src.Length; i++)
             {
@@ -267,7 +266,6 @@ namespace Z0.Asm
             runner.RunPsScript(llvm.ml, "lex");
         }
 
-
         void SplitFiles()
         {
             var limit = new Mb(15);
@@ -282,7 +280,6 @@ namespace Z0.Asm
                 var spec = new FileSplitSpec(path, 50000, target);
                 splitter.Run(spec);
             }
-
         }
 
         void ShowCases()
@@ -495,11 +492,6 @@ namespace Z0.Asm
 
         }
 
-        void ParseMnemonics()
-        {
-
-        }
-
         void HashPerfect()
         {
             HashPerfect(CollectFormExpressions());
@@ -525,7 +517,6 @@ namespace Z0.Asm
             var mnemonics = root.hashset<AsmMnemonicCode>();
             var failures = root.hashset<string>();
             var opcodes = root.hashset<AsmOpCodeExpr>();
-
             var ocpath = Db.AppDataFile(FS.file("statement-opcodes", FS.Extensions.Csv));
             using var ocwriter = ocpath.Writer();
 
@@ -538,8 +529,10 @@ namespace Z0.Asm
             void CollectOpCodes(AsmStatementInfo src)
             {
                 var encoded = src.Encoded;
-                if(AsmQuery.HasRexPrefix(src.OpCode))
+                var opcode = src.OpCode;
+                if(!opcodes.Contains(opcode))
                 {
+                    opcodes.Add(opcode);
                     ocwriter.WriteLine(string.Format("{0,-24} | {1, -24} | {2,-16} | {3}", src.Expression, src.Sig, src.OpCode, src.Encoded));
                 }
             }
@@ -553,7 +546,8 @@ namespace Z0.Asm
                     failures.Add(symbol);
             }
 
-            Process(CountStatements, CollectMnemonics, CollectOpCodes);
+            var processor = Wf.AsmStatementProcessor();
+            processor.Run(CountStatements, CollectMnemonics, CollectOpCodes);
             Wf.Status($"{counter} statements were processed)");
             Wf.Status($"{mnemonics.Count} known mnemonics were encountered along with {failures.Count} unknown mnemonics: {failures.FormatList()}");
             Wf.Status($"{opcodes.Count} distinct opcodes were collected");
@@ -561,27 +555,14 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            //var commands = Wf.AsmWfCmd();
-            //commands.Run(AsmWfCmdKind.EmitFormCatalog);
-            //commands.Run(AsmWfCmdKind.ShowRexBits);
+            var symbols = Wf.PdbSymbolStore();
 
-            var commands = Wf.AsmLangCmd();
-            commands.Run(AsmLangCmdKind.ShowRegisterCodes);
-            // commands.Run(AsmSigCmdKind.ShowMnemonicSymbols);
+            var src = FS.dir(@"C:\Cache\symbols");
+            var paths = symbols.SymbolPaths(src);
+            root.iter(paths, path => Wf.Row(path.ToUri()));
 
-            //ProcessStatements();
+            using var store = symbols.DirectoryStore(src);
 
-            // var dst = span<char>(32);
-            // var vsib = AsmBytes.vsib(0b11_100_111);
-            // Wf.Status(AsmBytes.format(vsib));
-
-            //ProcessDistilledStatements();
-
-
-            //GenerateInstructions();
-            //ConvertPdbXml();
-            // var commands = Wf.AsmWfCmd();
-            // commands.Run(AsmWfCmdKind.EmitAsmRows);
         }
 
         public static void Main(params string[] args)

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static cpu;
 
     using NK = NumericKind;
 
@@ -119,7 +119,7 @@ namespace Z0
         [MethodImpl(Inline)]
         Vector128<T> to<T>()
             where T : unmanaged
-                => generic<T>(Storage);
+                => memory.generic<T>(Storage);
 
         [MethodImpl(Inline)]
         T cell<T>(byte index)
