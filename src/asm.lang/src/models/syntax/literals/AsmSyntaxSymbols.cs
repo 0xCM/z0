@@ -4,41 +4,42 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public readonly struct AsmKeywordNames
+
+    public readonly struct AsmSyntaxSymbols
     {
         /// <summary>
         /// 8 bits
         /// </summary>
-        public const string Byte = "byte";
+        public const string @byte = "byte";
 
         /// <summary>
         /// 16 bits
         /// </summary>
-        public const string Word = "word";
+        public const string word = "word";
 
         /// <summary>
         /// 32 bits
         /// </summary>
-        public const string DWord = "dword";
+        public const string dword = "dword";
 
         /// <summary>
         /// 64 bits
         /// </summary>
-        public const string QWord = "qword";
+        public const string qword = "qword";
 
         /// <summary>
         /// 128 bits - also known as a "Double Quadword"
         /// </summary>
-        public const string XmmWord = "xmmword";
+        public const string xmmword = "xmmword";
 
         /// <summary>
         /// 256 bits
         /// </summary>
-        public const string YmmWord = "ymmword";
+        public const string ymmword = "ymmword";
 
         /// <summary>
         /// 512 bits
         /// </summary>
-        public const string ZmmWord = "zmmword";
+        public const string zmmword = "zmmword";
     }
 }

@@ -4,59 +4,66 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SM = AsmSyntaxDocs;
+    using SD = AsmSyntaxDocs;
 
+    [SymbolSource]
     public enum AsmOpCodeToken : byte
     {
         None,
 
         /// <summary>
-        /// <see cref='SM.rd0'/>
+        /// <see cref='SD.r'/>
         /// </summary>
-        [Symbol("/0", SM.rd0)]
-        Rd0,
+        [Symbol("/r", SD.r)]
+        r,
 
         /// <summary>
-        /// <see cref='SM.rd1'/>
+        /// <see cref='SD.r0'/>
         /// </summary>
-        [Symbol("/1", SM.rd1)]
-        Rd1,
+        [Symbol("/0", SD.r0)]
+        r0,
 
         /// <summary>
-        /// <see cref='SM.rd2'/>
+        /// <see cref='SD.r1'/>
         /// </summary>
-        [Symbol("/2", SM.rd2)]
-        Rd2,
+        [Symbol("/1", SD.r1)]
+        r1,
 
         /// <summary>
-        /// <see cref='SM.rd3'/>
+        /// <see cref='SD.r2'/>
         /// </summary>
-        [Symbol("/3", SM.rd3)]
-        Rd3,
+        [Symbol("/2", SD.r2)]
+        r2,
 
         /// <summary>
-        /// <see cref='SM.rd4'/>
+        /// <see cref='SD.r3'/>
         /// </summary>
-        [Symbol("/4", SM.rd4)]
-        Rd4,
+        [Symbol("/3", SD.r3)]
+        r3,
 
         /// <summary>
-        /// <see cref='SM.rd5'/>
+        /// <see cref='SD.r4'/>
         /// </summary>
-        [Symbol("/5", SM.rd5)]
-        Rd5,
+        [Symbol("/4", SD.r4)]
+        r4,
 
         /// <summary>
-        /// <see cref='SM.rd6'/>
+        /// <see cref='SD.r5'/>
         /// </summary>
-        [Symbol("/6", SM.rd6)]
-        Rd6,
+        [Symbol("/5", SD.r5)]
+        r5,
 
         /// <summary>
-        /// <see cref='SM.rd7'/>
+        /// <see cref='SD.r6'/>
         /// </summary>
-        [Symbol("/7", SM.rd7)]
-        Rd7,
+        [Symbol("/6", SD.r6)]
+        r6,
+
+        /// <summary>
+        /// <see cref='SD.r7'/>
+        /// </summary>
+        [Symbol("/7", SD.r7)]
+        r7,
 
         [Symbol("VEX")]
         Vex,
@@ -65,87 +72,117 @@ namespace Z0.Asm
         RexW,
 
         /// <summary>
-        /// <see cref='SM.cb'/>
+        /// <see cref='SD.cb'/>
         /// </summary>
-        [Symbol("cb", SM.cb)]
-        Cb,
+        [Symbol("cb", SD.cb)]
+        cb,
 
         /// <summary>
-        /// <see cref='SM.cw'/>
+        /// <see cref='SD.cw'/>
         /// </summary>
-        [Symbol("cw", SM.cw)]
-        Cw,
+        [Symbol("cw", SD.cw)]
+        cw,
 
         /// <summary>
-        /// <see cref='SM.cd'/>
+        /// <see cref='SD.cd'/>
         /// </summary>
-        [Symbol("cd", SM.cd)]
-        Cd,
+        [Symbol("cd", SD.cd)]
+        cd,
 
         /// <summary>
-        /// <see cref='SM.cp'/>
+        /// <see cref='SD.cp'/>
         /// </summary>
-        [Symbol("cp", SM.cp)]
-        Cp,
+        [Symbol("cp", SD.cp)]
+        cp,
 
         /// <summary>
-        /// <see cref='SM.co'/>
+        /// <see cref='SD.co'/>
         /// </summary>
-        [Symbol("co", SM.co)]
-        Co,
+        [Symbol("co", SD.co)]
+        co,
 
         /// <summary>
-        /// <see cref='SM.ct'/>
+        /// <see cref='SD.ct'/>
         /// </summary>
-        [Symbol("ct", SM.ct)]
-        Ct,
+        [Symbol("ct", SD.ct)]
+        ct,
 
         /// <summary>
-        /// <see cref='SM.ib'/>
+        /// <see cref='SD.ib'/>
         /// </summary>
-        [Symbol("ib", SM.ib)]
-        Ib,
+        [Symbol("ib", SD.ib)]
+        ib,
 
         /// <summary>
-        /// <see cref='SM.iw'/>
+        /// <see cref='SD.iw'/>
         /// </summary>
-        [Symbol("iw", SM.iw)]
-        Iw,
+        [Symbol("iw", SD.iw)]
+        iw,
 
         /// <summary>
-        /// <see cref='SM.Id'/>
+        /// <see cref='SD.Id'/>
         /// </summary>
-        [Symbol("id", SM.id)]
-        Id,
+        [Symbol("id", SD.id)]
+        id,
 
         /// <summary>
-        /// <see cref='SM.io'/>
+        /// <see cref='SD.io'/>
         /// </summary>
-        [Symbol("io", SM.io)]
-        Io,
+        [Symbol("io", SD.io)]
+        io,
 
         /// <summary>
-        /// <see cref='SM.ᕀrb'/>
+        /// <see cref='SD.ᕀrb'/>
         /// </summary>
-        [Symbol("+rb",SM.ᕀrb)]
-        Rb,
+        [Symbol("+rb",SD.ᕀrb)]
+        rb,
 
         /// <summary>
-        /// <see cref='SM.ᕀrw'/>
+        /// <see cref='SD.ᕀrw'/>
         /// </summary>
-        [Symbol("+rw", SM.ᕀrw)]
-        Rw,
+        [Symbol("+rw", SD.ᕀrw)]
+        rw,
 
         /// <summary>
-        /// <see cref='SM.ᕀrd'/>
+        /// <see cref='SD.ᕀrd'/>
         /// </summary>
-        [Symbol("+rd",SM.ᕀrd)]
-        Rd,
+        [Symbol("+rd",SD.ᕀrd)]
+        rd,
 
         /// <summary>
-        /// <see cref='SM.ᕀro'/>
+        /// <see cref='SD.ᕀro'/>
         /// </summary>
-        [Symbol("+ro",SM.ᕀro)]
-        Ro,
+        [Symbol("+ro",SD.ᕀro)]
+        ro,
+
+        [Symbol("r/m8", SD.rm8)]
+        rm8,
+
+        [Symbol("r/m16", SD.rm8)]
+        rm16,
+
+        [Symbol("r/m32", SD.rm8)]
+        rm32,
+
+        [Symbol("r/m64", SD.rm8)]
+        rm64,
+
+        [Symbol("reg/m8")]
+        regM8,
+
+        [Symbol("reg/m16")]
+        regM16,
+
+        [Symbol("reg/m32")]
+        regM32,
+
+        [Symbol("reg")]
+        reg,
+
+        [Symbol("m", SD.m)]
+        m,
+
+        [Symbol("mem")]
+        mem,
     }
 }

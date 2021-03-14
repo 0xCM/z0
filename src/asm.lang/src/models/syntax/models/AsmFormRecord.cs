@@ -9,8 +9,6 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.forms";
 
-        public const byte FieldCount = 4;
-
         public uint Seq;
 
         public AsmOpCodeExpr OpCode;

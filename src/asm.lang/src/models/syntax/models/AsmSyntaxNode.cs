@@ -14,7 +14,8 @@ namespace Z0.Asm
     {
         public IAsmSyntaxNode Source {get;}
 
-        public AsmNodeKind NodeKind => Source.NodeKind;
+        public AsmNodeKind NodeKind
+            => Source.NodeKind;
 
         [MethodImpl(Inline)]
         public AsmSyntaxNode(IAsmSyntaxNode src)

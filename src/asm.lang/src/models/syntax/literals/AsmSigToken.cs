@@ -4,234 +4,234 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SM = AsmSyntaxDocs;
+    using SD = AsmSyntaxDocs;
 
     [SymbolSource]
-    public enum AsmSigToken : ushort
+    public enum AsmSigToken : byte
     {
         None = 0,
 
         [Symbol("al")]
-        AL,
+        al,
 
         [Symbol("ax")]
-        AX,
+        ax,
 
         [Symbol("eax")]
-        EAX,
+        eax,
 
         [Symbol("rax")]
-        RAX,
+        rax,
 
         /// <summary>
-        /// <see cref='SM.bnd'/>
+        /// <see cref='SD.bnd'/>
         /// </summary>
-        [Symbol("bnd", SM.bnd)]
-        BND,
+        [Symbol("bnd", SD.bnd)]
+        bnd,
 
         /// <summary>
-        /// <see cref='SM.imm8'/>
+        /// <see cref='SD.imm8'/>
         /// </summary>
-        [Symbol("imm8", SM.imm8)]
-        Imm8,
+        [Symbol("imm8", SD.imm8)]
+        imm8,
 
         /// <summary>
-        /// <see cref='SM.imm16'/>
+        /// <see cref='SD.imm16'/>
         /// </summary>
-        [Symbol("imm16", SM.imm16)]
-        Imm16,
+        [Symbol("imm16", SD.imm16)]
+        imm16,
 
         /// <summary>
-        /// <see cref='SM.imm32'/>
+        /// <see cref='SD.imm32'/>
         /// </summary>
-        [Symbol("imm32", SM.imm32)]
-        Imm32,
+        [Symbol("imm32", SD.imm32)]
+        imm32,
 
         /// <summary>
-        /// <see cref='SM.imm64'/>
+        /// <see cref='SD.imm64'/>
         /// </summary>
-        [Symbol("imm64", SM.imm64)]
-        Imm64,
+        [Symbol("imm64", SD.imm64)]
+        imm64,
 
         /// <summary>
-        /// <see cref='SM.r8'/>
+        /// <see cref='SD.r8'/>
         /// </summary>
-        [Symbol("r8", SM.r8)]
-        R8,
+        [Symbol("r8", SD.r8)]
+        r8,
 
         /// <summary>
-        /// <see cref='SM.r16'/>
+        /// <see cref='SD.r16'/>
         /// </summary>
-        [Symbol("r16", SM.r16)]
-        R16,
+        [Symbol("r16", SD.r16)]
+        r16,
 
         /// <summary>
-        /// <see cref='SM.r32'/>
+        /// <see cref='SD.r32'/>
         /// </summary>
-        [Symbol("r32", SM.r32)]
-        R32,
+        [Symbol("r32", SD.r32)]
+        r32,
 
         /// <summary>
-        /// <see cref='SM.r64'/>
+        /// <see cref='SD.r64'/>
         /// </summary>
-        [Symbol("r64", SM.r64)]
-        R64,
+        [Symbol("r64", SD.r64)]
+        r64,
 
         /// <summary>
-        /// <see cref='SM.rm8'/>
+        /// <see cref='SD.rm8'/>
         /// </summary>
-        [Symbol("r/m8", SM.rm8)]
-        Rm8,
+        [Symbol("r/m8", SD.rm8)]
+        rm8,
 
         /// <summary>
-        /// <see cref='SM.rm16'/>
+        /// <see cref='SD.rm16'/>
         /// </summary>
-        [Symbol("r/m16", SM.rm16)]
-        Rm16,
+        [Symbol("r/m16", SD.rm16)]
+        rm16,
 
         /// <summary>
-        /// <see cref='SM.rm32'/>
+        /// <see cref='SD.rm32'/>
         /// </summary>
-        [Symbol("r/m32", SM.rm32)]
-        Rm32,
+        [Symbol("r/m32", SD.rm32)]
+        rm32,
 
         /// <summary>
-        /// <see cref='SM.rm64'/>
+        /// <see cref='SD.rm64'/>
         /// </summary>
-        [Symbol("r/m64", SM.rm64)]
-        Rm64,
+        [Symbol("r/m64", SD.rm64)]
+        rm64,
 
         /// <summary>
-        /// <see cref='SM.m'/>
+        /// <see cref='SD.m'/>
         /// </summary>
-        [Symbol("m", SM.m)]
-        M,
+        [Symbol("m", SD.m)]
+        m,
 
         /// <summary>
-        /// <see cref='SM.m8'/>
+        /// <see cref='SD.m8'/>
         /// </summary>
-        [Symbol("m8", SM.m8)]
-        M8,
+        [Symbol("m8", SD.m8)]
+        m8,
 
         /// <summary>
         /// A 16-bit operand in memory pointed to by a register, and applicable only to string instructions
         /// </summary>
-        [Symbol("m16", SM.m16)]
-        M16,
+        [Symbol("m16", SD.m16)]
+        m16,
 
         /// <summary>
         /// A 32-bit operand in memory pointed to by a register, and applicable only to string instructions
         /// </summary>
-        [Symbol("m32", SM.m32)]
-        M32,
+        [Symbol("m32", SD.m32)]
+        m32,
 
         /// <summary>
-        /// <see cref='SM.m64'/>
+        /// <see cref='SD.m64'/>
         /// </summary>
-        [Symbol("m64", SM.m64)]
-        M64,
+        [Symbol("m64", SD.m64)]
+        m64,
 
         /// <summary>
         /// A 128-bit operand in memory
         /// </summary>
-        [Symbol("m128", SM.m128)]
-        M128,
+        [Symbol("m128", SD.m128)]
+        m128,
 
         /// <summary>
         /// A 256-bit operand in memory
         /// </summary>
-        [Symbol("m256", SM.m256)]
-        M256,
+        [Symbol("m256", SD.m256)]
+        m256,
 
         /// <summary>
-        /// A word integer operand in memory and designates integers that are used as operands for x87 FPU integer instructions
+        /// <see cref='SD.m16int'/>
         /// </summary>
-        [Symbol("m16int")]
-        M16Int,
+        [Symbol("m16int", SD.m16int)]
+        m16Int,
 
         /// <summary>
-        /// A doubleword integer operand in memory and designates integers that are used as operands for x87 FPU integer instructions
+        /// <see cref='SD.m32int'/>
         /// </summary>
-        [Symbol("m32int")]
-        M32Int,
+        [Symbol("m32int", SD.m32int)]
+        m32Int,
 
         /// <summary>
-        /// A quadword integer operand in memory and designates integers that are used as operands for x87 FPU integer instructions
+        /// <see cref='SD.m64int'/>
         /// </summary>
-        [Symbol("m64int")]
-        M64Int,
+        [Symbol("m64int", SD.m64int)]
+        m64Int,
 
         /// <summary>
-        /// An mmx register
+        /// <see cref='SD.mm'/>
         /// </summary>
-        [Symbol("mm")]
-        MM,
+        [Symbol("mm", SD.mm)]
+        mm,
 
         /// <summary>
-        /// An XMM register
+        /// <see cref='SD.xmm'/>
         /// </summary>
-        [Symbol("xmm")]
-        Xmm,
+        [Symbol("xmm", SD.xmm)]
+        xmm,
 
         /// <summary>
-        /// <see cref='SM.xmm1'/>
+        /// <see cref='SD.xmm1'/>
         /// </summary>
-        [Symbol("xmm1", SM.xmm1)]
-        Xmm1,
+        [Symbol("xmm1", SD.xmm1)]
+        xmm1,
 
         /// <summary>
-        /// <see cref='SM.xmm2'/>
+        /// <see cref='SD.xmm2'/>
         /// </summary>
-        [Symbol("xmm2", SM.xmm2)]
-        Xmm2,
+        [Symbol("xmm2", SD.xmm2)]
+        xmm2,
 
         /// <summary>
-        /// <see cref='SM.xmm3'/>
+        /// <see cref='SD.xmm3'/>
         /// </summary>
-        [Symbol("xmm3", SM.xmm3)]
-        Xmm3,
+        [Symbol("xmm3", SD.xmm3)]
+        xmm3,
 
         /// <summary>
-        /// <see cref='SM.xmm32'/>
+        /// <see cref='SD.xmm32'/>
         /// </summary>
-        [Symbol("xmm32", SM.xmm32)]
-        Xmm32,
+        [Symbol("xmm32", SD.xmm32)]
+        xmm32,
 
         /// <summary>
-        /// <see cref='SM.xmm64'/>
+        /// <see cref='SD.xmm64'/>
         /// </summary>
-        [Symbol("xmm64", SM.xmm64)]
-        Xmm64,
+        [Symbol("xmm64", SD.xmm64)]
+        xmm64,
 
         /// <summary>
-        /// <see cref='SM.xmm128'/>
+        /// <see cref='SD.xmm128'/>
         /// </summary>
-        [Symbol("xmm128", SM.xmm128)]
-        Xmm128,
+        [Symbol("xmm128", SD.xmm128)]
+        xmm128,
 
         /// <summary>
-        /// <see cref='SM.ymm'/>
+        /// <see cref='SD.ymm'/>
         /// </summary>
-        [Symbol("ymm", SM.ymm)]
-        Ymm,
+        [Symbol("ymm", SD.ymm)]
+        ymm,
 
         /// <summary>
-        /// <see cref='SM.ymm1'/>
+        /// <see cref='SD.ymm1'/>
         /// </summary>
-        [Symbol("ymm1", SM.ymm1)]
-        Ymm1,
+        [Symbol("ymm1", SD.ymm1)]
+        ymm1,
 
         /// <summary>
-        /// <see cref='SM.ymm2'/>
+        /// <see cref='SD.ymm2'/>
         /// </summary>
-        [Symbol("ymm2", SM.ymm2)]
-        Ymm2,
+        [Symbol("ymm2", SD.ymm2)]
+        ymm2,
 
         /// <summary>
-        /// <see cref='SM.ymm3'/>
+        /// <see cref='SD.ymm3'/>
         /// </summary>
-        [Symbol("ymm3", SM.ymm3)]
-        Ymm3,
+        [Symbol("ymm3", SD.ymm3)]
+        ymm3,
 
         /// <summary>
         /// A memory operand consisting of data item pairs whose sizes are indicated on the left and the right side of the ampersand.
@@ -250,52 +250,52 @@ namespace Z0.Asm
         m16x32,
 
         /// <summary>
-        /// <see cref='SM.rel8'/>
+        /// <see cref='SD.rel8'/>
         /// </summary>
-        [Symbol("rel8", SM.rel8)]
-        Rel8,
+        [Symbol("rel8", SD.rel8)]
+        rel8,
 
         /// <summary>
-        /// <see cref='SM.rel16'/>
+        /// <see cref='SD.rel16'/>
         /// </summary>
-        [Symbol("rel16", SM.rel16)]
-        Rel16,
+        [Symbol("rel16", SD.rel16)]
+        rel16,
 
         /// <summary>
-        /// <see cref='SM.rel32'/>
+        /// <see cref='SD.rel32'/>
         /// </summary>
-        [Symbol("rel32", SM.rel32)]
-        Rel32,
+        [Symbol("rel32", SD.rel32)]
+        rel32,
 
         /// <summary>
         /// A segment register, where the register bit assignments are ES = 0, CS = 1, SS = 2, DS = 3, FS = 4, and GS = 5
         /// </summary>
-        [Symbol("Sreg", SM.Sreg)]
+        [Symbol("Sreg", SD.Sreg)]
         Sreg,
 
         /// <summary>
-        /// <see cref='SM.moffs8'/>
+        /// <see cref='SD.moffs8'/>
         /// </summary>
-        [Symbol("moffs8", SM.moffs8)]
-        Moffs8,
+        [Symbol("moffs8", SD.moffs8)]
+        moffs8,
 
         /// <summary>
-        /// <see cref='SM.moffs16'/>
+        /// <see cref='SD.moffs16'/>
         /// </summary>
-        [Symbol("moffs16", SM.moffs16)]
-        Moffs16,
+        [Symbol("moffs16", SD.moffs16)]
+        moffs16,
 
         /// <summary>
-        /// <see cref='SM.moffs32'/>
+        /// <see cref='SD.moffs32'/>
         /// </summary>
-        [Symbol("moffs32", SM.moffs32)]
-        Moffs32,
+        [Symbol("moffs32", SD.moffs32)]
+        moffs32,
 
         /// <summary>
-        /// <see cref='SM.moffs64'/>
+        /// <see cref='SD.moffs64'/>
         /// </summary>
-        [Symbol("moffs64", SM.moffs64)]
-        Moffs64,
+        [Symbol("moffs64", SD.moffs64)]
+        moffs64,
 
         /// <summary>
         /// A far pointer typically to a code segment different from that of the instruction. The notation 16:16 indicates that the
@@ -305,7 +305,7 @@ namespace Z0.Asm
         /// E.G, CALL ptr16:16 (Call far, absolute, address given in operand)
         /// </summary>
         [Symbol("ptr16:16")]
-        Ptr16x16,
+        ptr16x16,
 
         /// <summary>
         /// A far pointer typically to a code segment different from that of the instruction and similar to ptr16:16 notation;
@@ -315,12 +315,12 @@ namespace Z0.Asm
         /// E.G, CALL ptr16:32 (Call far, absolute, address given in operand)
         /// </summary>
         [Symbol("ptr16:32")]
-        Ptr16x32,
+        ptr16x32,
 
         /// <summary>
         /// A mask register used as a regular operand (either destination or source). The 64-bit k registers are: k0 through k7
         /// </summary>
-        [Symbol("k1")]
-        K1,
+        [Symbol("k1", SD.k1)]
+        k1,
     }
 }

@@ -21,7 +21,7 @@ namespace Z0.Asm
         /// <param name="mode"></param>
         /// <param name="default"></param>
         /// <param name="effective"></param>
-        [Op,Doc(Amd + V3 + C1 + S2 + T2)]
+        [Op, Doc(Amd + V3 + C1 + S2 + T2)]
         public static bit prefix66(OperatingMode mode, OperandSize @default, OperandSize effective)
             => mode switch{
                 Mode64 => effective switch {

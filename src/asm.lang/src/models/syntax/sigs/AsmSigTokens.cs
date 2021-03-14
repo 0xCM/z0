@@ -10,7 +10,7 @@ namespace Z0.Asm
     {
         public readonly struct Al : IAsmSigToken<Al>
         {
-            public K Kind => K.AL;
+            public K Kind => K.al;
 
             public string Symbol => "al";
 
@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public readonly struct Ax : IAsmSigToken<Ax>
         {
-            public K Kind => K.AX;
+            public K Kind => K.ax;
 
             public string Symbol => "ax";
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         public readonly struct Eax : IAsmSigToken<Eax>
         {
-            public K Kind => K.EAX;
+            public K Kind => K.eax;
 
             public string Symbol => "eax";
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         public readonly struct Rax : IAsmSigToken<Rax>
         {
-            public K Kind => K.RAX;
+            public K Kind => K.rax;
 
             public string Symbol => "rax";
 
@@ -46,7 +46,7 @@ namespace Z0.Asm
 
         public readonly struct Bnd : IAsmSigToken<Bnd>
         {
-            public K Kind => K.BND;
+            public K Kind => K.bnd;
 
             public string Symbol => "bnd";
 
@@ -55,7 +55,7 @@ namespace Z0.Asm
 
         public readonly struct Imm8 : IAsmSigToken<Imm8>
         {
-            public K Kind => K.Imm8;
+            public K Kind => K.imm8;
 
             public string Symbol => "imm8";
 
@@ -64,7 +64,7 @@ namespace Z0.Asm
 
         public readonly struct Imm16 : IAsmSigToken<Imm16>
         {
-            public K Kind => K.Imm16;
+            public K Kind => K.imm16;
 
             public string Symbol => "imm16";
 
@@ -73,7 +73,7 @@ namespace Z0.Asm
 
         public readonly struct Imm32 : IAsmSigToken<Imm32>
         {
-            public K Kind => K.Imm32;
+            public K Kind => K.imm32;
 
             public string Symbol => "imm32";
 
@@ -82,7 +82,7 @@ namespace Z0.Asm
 
         public readonly struct Imm64: IAsmSigToken<Imm64>
         {
-            public K Kind => K.Imm64;
+            public K Kind => K.imm64;
 
             public string Symbol => "imm64";
 
@@ -91,7 +91,7 @@ namespace Z0.Asm
 
         public readonly struct R8 : IAsmSigToken<R8>
         {
-            public K Kind => K.R8;
+            public K Kind => K.r8;
 
             public string Symbol => "r8";
 
@@ -100,7 +100,7 @@ namespace Z0.Asm
 
         public readonly struct R16 : IAsmSigToken<R16>
         {
-            public K Kind => K.R16;
+            public K Kind => K.r16;
 
             public string Symbol => "r16";
 
@@ -109,7 +109,7 @@ namespace Z0.Asm
 
         public readonly struct R32 : IAsmSigToken<R32>
         {
-            public K Kind => K.R32;
+            public K Kind => K.r32;
 
             public string Symbol => "r32";
 
@@ -118,7 +118,7 @@ namespace Z0.Asm
 
         public readonly struct R64: IAsmSigToken<R64>
         {
-            public K Kind => K.R64;
+            public K Kind => K.r64;
 
             public string Symbol => "r64";
 
@@ -127,7 +127,7 @@ namespace Z0.Asm
 
         public readonly struct Rm8 : IAsmSigToken<Rm8>
         {
-            public K Kind => K.Rm8;
+            public K Kind => K.rm8;
 
             public string Symbol => "r/m8";
 
@@ -136,7 +136,7 @@ namespace Z0.Asm
 
         public readonly struct Rm16 : IAsmSigToken<Rm16>
         {
-            public K Kind => K.Rm16;
+            public K Kind => K.rm16;
 
             public string Symbol => "r/m16";
 
@@ -145,7 +145,7 @@ namespace Z0.Asm
 
         public readonly struct Rm32 : IAsmSigToken<Rm32>
         {
-            public K Kind => K.Rm32;
+            public K Kind => K.rm32;
 
             public string Symbol => "r/m32";
 
@@ -154,7 +154,7 @@ namespace Z0.Asm
 
         public readonly struct Rm64: IAsmSigToken<Rm64>
         {
-            public K Kind => K.Rm64;
+            public K Kind => K.rm64;
 
             public string Symbol => "r/m64";
 
@@ -163,7 +163,7 @@ namespace Z0.Asm
 
         public readonly struct M : IAsmSigToken<M>
         {
-            public K Kind => K.M;
+            public K Kind => K.m;
 
             public string Symbol => "m";
 
@@ -172,7 +172,7 @@ namespace Z0.Asm
 
         public readonly struct M8 : IAsmSigToken<M8>
         {
-            public K Kind => K.M8;
+            public K Kind => K.m8;
 
             public string Symbol => "m8";
 
@@ -181,7 +181,7 @@ namespace Z0.Asm
 
         public readonly struct M16 : IAsmSigToken<M16>
         {
-            public K Kind => K.M16;
+            public K Kind => K.m16;
 
             public string Symbol => "m16";
 
@@ -190,7 +190,7 @@ namespace Z0.Asm
 
         public readonly struct M32 : IAsmSigToken<M32>
         {
-            public K Kind => K.M32;
+            public K Kind => K.m32;
 
             public string Symbol => "m32";
 
@@ -199,7 +199,7 @@ namespace Z0.Asm
 
         public readonly struct M64: IAsmSigToken<M64>
         {
-            public K Kind => K.M64;
+            public K Kind => K.m64;
 
             public string Symbol => "m64";
 
@@ -208,7 +208,7 @@ namespace Z0.Asm
 
         public readonly struct M128: IAsmSigToken<M128>
         {
-            public K Kind => K.M128;
+            public K Kind => K.m128;
 
             public string Symbol => "m128";
 
@@ -217,7 +217,7 @@ namespace Z0.Asm
 
         public readonly struct M256: IAsmSigToken<M256>
         {
-            public K Kind => K.M256;
+            public K Kind => K.m256;
 
             public string Symbol => "m256";
 
@@ -226,7 +226,7 @@ namespace Z0.Asm
 
         public readonly struct Rel8 : IAsmSigToken<Rel8>
         {
-            public K Kind => K.Rel8;
+            public K Kind => K.rel8;
 
             public string Symbol => "rel8";
 
@@ -235,7 +235,7 @@ namespace Z0.Asm
 
         public readonly struct Rel16 : IAsmSigToken<Rel16>
         {
-            public K Kind => K.Rel16;
+            public K Kind => K.rel16;
 
             public string Symbol => "rel16";
 
@@ -244,7 +244,7 @@ namespace Z0.Asm
 
         public readonly struct Rel32 : IAsmSigToken<Rel32>
         {
-            public K Kind => K.Rel32;
+            public K Kind => K.rel32;
 
             public string Symbol => "rel32";
 
@@ -262,7 +262,7 @@ namespace Z0.Asm
 
         public readonly struct Moffs8 : IAsmSigToken<Moffs8>
         {
-            public K Kind => K.Moffs8;
+            public K Kind => K.moffs8;
 
             public string Symbol => "moffs8";
 
@@ -271,7 +271,7 @@ namespace Z0.Asm
 
         public readonly struct Moffs16 : IAsmSigToken<Moffs16>
         {
-            public K Kind => K.Moffs16;
+            public K Kind => K.moffs16;
 
             public string Symbol => "moffs16";
 
@@ -280,7 +280,7 @@ namespace Z0.Asm
 
         public readonly struct Moffs32 : IAsmSigToken<Moffs32>
         {
-            public K Kind => K.Moffs32;
+            public K Kind => K.moffs32;
 
             public string Symbol => "moffs32";
 
@@ -289,7 +289,7 @@ namespace Z0.Asm
 
         public readonly struct Moffs64: IAsmSigToken<Moffs64>
         {
-            public K Kind => K.Moffs64;
+            public K Kind => K.moffs64;
 
             public string Symbol => "moffs64";
 

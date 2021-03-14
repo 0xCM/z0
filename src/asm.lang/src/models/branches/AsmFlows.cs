@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static AsmMnemonicCode;
 
-
     [ApiHost]
     public class AsmFlows : WfService<AsmFlows>
     {

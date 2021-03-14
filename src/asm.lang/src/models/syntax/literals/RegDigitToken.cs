@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using SD = AsmSyntaxDocs;
+    using OCT = AsmOpCodeToken;
 
     /// <summary>
     /// Specifies a '/r' token where r = 0..7
@@ -12,51 +13,51 @@ namespace Z0.Asm
     public enum RegDigitToken : byte
     {
         /// <summary>
-        /// See <see cref='SD.rd0'/>
+        /// See <see cref='SD.r0'/>
         /// </summary>
-        [Symbol("/0", SD.rd0)]
-        R0 = 0,
+        [Symbol("/0", SD.r0)]
+        r0 = OCT.r0,
 
         /// <summary>
-        /// See <see cref='SD.rd1'/>
+        /// See <see cref='SD.r1'/>
         /// </summary>
-        [Symbol("/1", SD.rd1)]
-        R1 = 1,
+        [Symbol("/1", SD.r1)]
+        r1 = OCT.r1,
 
         /// <summary>
-        /// See <see cref='SD.rd2'/>
+        /// See <see cref='SD.r2'/>
         /// </summary>
-        [Symbol("/2", SD.rd2)]
-        R2 = 2,
+        [Symbol("/2", SD.r2)]
+        r2 = OCT.r2,
 
         /// <summary>
-        /// See <see cref='SD.rd3'/>
+        /// See <see cref='SD.r3'/>
         /// </summary>
-        [Symbol("/3", SD.rd3)]
-        R3 = 3,
+        [Symbol("/3", SD.r3)]
+        r3 = OCT.r3,
 
         /// <summary>
-        /// See <see cref='SD.rd4'/>
+        /// See <see cref='SD.r4'/>
         /// </summary>
-        [Symbol("/4", SD.rd4)]
-        R4 = 4,
+        [Symbol("/4", SD.r4)]
+        r4 = OCT.r4,
 
         /// <summary>
-        /// See <see cref='SD.rd5'/>
+        /// See <see cref='SD.r5'/>
         /// </summary>
-        [Symbol("/5", SD.rd5)]
-        R5 = 5,
+        [Symbol("/5", SD.r5)]
+        r5 = OCT.r5,
 
         /// <summary>
-        /// See <see cref='SD.rd6'/>
+        /// See <see cref='SD.r6'/>
         /// </summary>
-        [Symbol("/6", SD.rd6)]
-        R6 = 6,
+        [Symbol("/6", SD.r6)]
+        r6 = OCT.r6,
 
         /// <summary>
-        /// See <see cref='SD.rd7'/>
+        /// See <see cref='SD.r7'/>
         /// </summary>
-        [Symbol("/7", SD.rd7)]
-        R7 = 7
+        [Symbol("/7", SD.r7)]
+        r7 = OCT.r7,
     }
 }
