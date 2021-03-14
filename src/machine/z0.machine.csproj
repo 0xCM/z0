@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(CmdExec)" />
     <ProjectReference Include="$(Lang)" />
+    <ProjectReference Include="$(Circuits)" />
   </ItemGroup>
 
   <ItemGroup>
