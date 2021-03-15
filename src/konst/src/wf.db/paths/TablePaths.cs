@@ -82,27 +82,24 @@ namespace Z0
             return dir + FS.file(string.Format("{0}.{1}", id, subject), ext);
         }
 
-        FS.FilePath Table(Type t, PartId part)
-            => t.Tag<RecordAttribute>().MapValueOrElse(a => Table(part,  a.TableId, DefaultTableExt), () => Table(part, t.Name, DefaultTableExt));
-
         /// <summary>
-        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{ext}
+        /// Creates a <see cref='FS.FolderPath'/> of the form {DbRoot}/tables/{TableId}/{PartId}
         /// </summary>
         /// <param name="part">The part id</param>
         /// <typeparam name="T">The record type</typeparam>
-        FS.FilePath Table<T>(PartId part)
+        FS.FolderPath TableDir<T>(PartId host)
             where T : struct, IRecord<T>
-                => TableDir<T>() + TableFile<T>(part);
+                => TableDir<T>() + FS.folder(host.Format());
 
         /// <summary>
-        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{host}.{ext}
+        /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{host}.{ext}
         /// </summary>
         /// <param name="host">The host uri</param>
         /// <param name="ext">The file extension</param>
         /// <typeparam name="T">The record type</typeparam>
-        FS.FilePath Table<T>(ApiHostUri host, FS.FileExt? ext = null)
+        FS.FileName TableFile<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
-                => TableDir<T>() + TableFile<T>(host);
+                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Owner.Format(), host.Name), ext ?? DefaultTableExt);
 
         /// <summary>
         /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{ext}
@@ -115,14 +112,23 @@ namespace Z0
                 => FS.file(string.Format("{0}.{1}", TableId<T>(), part.Format()), ext ?? DefaultTableExt);
 
         /// <summary>
-        /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{host}.{ext}
+        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{host}.{ext}
         /// </summary>
         /// <param name="host">The host uri</param>
         /// <param name="ext">The file extension</param>
         /// <typeparam name="T">The record type</typeparam>
-        FS.FileName TableFile<T>(ApiHostUri host, FS.FileExt? ext = null)
+        FS.FilePath Table<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
-                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Owner.Format(), host.Name), ext ?? DefaultTableExt);
+                => TableDir<T>(host.Owner) + TableFile<T>(host, ext);
+
+        /// <summary>
+        /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{ext}
+        /// </summary>
+        /// <param name="part">The part id</param>
+        /// <typeparam name="T">The record type</typeparam>
+        FS.FilePath Table<T>(PartId part, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+                => TableDir<T>() + FS.folder(part.Format()) + TableFile<T>(part, ext);
 
         /// <summary>
         /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}.{subject}/{TableId}.{part}.{host}.{ext}

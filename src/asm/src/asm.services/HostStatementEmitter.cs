@@ -18,13 +18,10 @@ namespace Z0.Asm
 
         IAsmDecoder Decoder;
 
-        AsmServices Asm;
-
         protected override void OnInit()
         {
             Sigs = AsmSigs.create(Wf);
-            Asm = Wf.AsmServices();
-            Decoder = Asm.Decoder();
+            Decoder = Wf.AsmServices().Decoder();
         }
 
         public Index<AsmHostStatement> BuildStatements(ApiCodeBlocks src)
@@ -47,7 +44,6 @@ namespace Z0.Asm
             return records;
         }
 
-
         public void EmitStatements(AsmDataEmitter emitter)
             => EmitStatements((BuildStatements(emitter.CodeBlocks())));
 
@@ -57,42 +53,80 @@ namespace Z0.Asm
             var statements = src;
             var count = statements.Length;
             var host = ApiHostUri.Empty;
-            var khost = 0u;
-            var writer = default(StreamWriter);
-            var path = FS.FilePath.Empty;
-            var flow = default(WfTableFlow<AsmHostStatement>);
+            var counter = 0u;
+            var tableWriter = default(StreamWriter);
+            var tablePath = FS.FilePath.Empty;
+            var tableFlow = default(WfTableFlow<AsmHostStatement>);
+
+            var asmWriter = default(StreamWriter);
+            var asmPath = FS.FilePath.Empty;
+            var asmFlow = default(WfFileFlow);
+            var buffer = text.buffer();
+            var offset = z16;
 
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
+                var uri = statement.OpUri;
                 if(i == 0)
                 {
-                    host = statement.HostUri;
-                    path = Db.Table<AsmHostStatement>(host);
-                    writer = path.Writer();
-                    writer.WriteLine(formatter.FormatHeader());
-                    flow = Wf.EmittingTable<AsmHostStatement>(path);
+                    host = uri.Host;
+                    tablePath = Db.Table<AsmHostStatement>(host);
+                    tableWriter = tablePath.Writer();
+                    tableWriter.WriteLine(formatter.FormatHeader());
+                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
+
+                    asmPath = tablePath.ChangeExtension(FS.Extensions.Asm);
+                    asmWriter = asmPath.Writer();
+                    asmFlow = Wf.EmittingFile(asmPath);
                 }
 
-                if(statement.HostUri != host)
+                if(uri.Host != host)
                 {
-                    writer.Dispose();
-                    Wf.EmittedTable<AsmHostStatement>(flow,khost);
-                    host = statement.HostUri;
-                    path = Db.Table<AsmHostStatement>(host);
-                    writer = path.Writer();
-                    writer.WriteLine(formatter.FormatHeader());
-                    flow = Wf.EmittingTable<AsmHostStatement>(path);
+                    tableWriter.Dispose();
+                    Wf.EmittedTable<AsmHostStatement>(tableFlow,counter);
 
-                    khost = 0;
+                    asmWriter.Dispose();
+                    Wf.EmittedFile(asmFlow, counter);
+
+                    host = statement.OpUri.Host;
+                    tablePath = Db.Table<AsmHostStatement>(host);
+                    tableWriter = tablePath.Writer();
+                    tableWriter.WriteLine(formatter.FormatHeader());
+                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
+
+                    asmPath = tablePath.ChangeExtension(FS.Extensions.Asm);
+                    asmWriter = asmPath.Writer();
+                    asmFlow = Wf.EmittingFile(asmPath);
+
+                    counter = 0;
                 }
-                writer.WriteLine(formatter.Format(statement));
-                khost++;
-            }
-            writer.Dispose();
-            Wf.EmittedTable(flow,khost);
 
+                if(statement.Offset == 0)
+                {
+                    asmWriter.WriteLine(AsmBlockSeparator);
+                    asmWriter.WriteLine(string.Format("; {0}", statement.OpUri));
+                    asmWriter.WriteLine(AsmBlockSeparator);
+                }
+
+                tableWriter.WriteLine(formatter.Format(statement));
+                asmWriter.WriteLine(FormatAsm(statement));
+
+                counter++;
+            }
+
+            tableWriter.Dispose();
+            Wf.EmittedTable(tableFlow,counter);
+
+            asmWriter.Dispose();
+            Wf.EmittedFile(asmFlow,counter);
         }
+
+
+        const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
+
+        static string FormatAsm(in AsmHostStatement src)
+            => string.Format("{0,-36} ; {1} ({2})[{3}] => {4}", src.Expression, src.Offset, src.Sig, src.OpCode, src.Encoded);
 
         uint CreateStatements(in ApiHostCode src, List<AsmHostStatement> dst)
         {
@@ -103,12 +137,12 @@ namespace Z0.Asm
             {
                 ref readonly var block = ref skip(blocks,i);
                 var decoded = Decode(block);
-                counter += CreateStatements(src.Host, decoded, dst);
+                counter += CreateStatements(decoded, dst);
             }
             return counter;
         }
 
-        uint CreateStatements(ApiHostUri host, in AsmInstructionBlock src, List<AsmHostStatement> dst)
+        uint CreateStatements(in AsmInstructionBlock src, List<AsmHostStatement> dst)
         {
             var instructions = src.Instructions;
             var count = (uint)instructions.Length;
@@ -123,10 +157,9 @@ namespace Z0.Asm
                 statement.Offset = offset;
                 statement.BaseAddress = src.BaseAddress;
                 statement.IP = instruction.IP;
-                statement.HostUri = host;
+                statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;
                 Sigs.ParseSigExpr(instruction.OpCode.InstructionString, out statement.Sig);
-                Sigs.ParseMnemonicExpr(instruction.Mnemonic.ToString().ToUpper(), out statement.Mnemonic);
                 statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
                 statement.OpCode = asm.opcode(instruction.OpCode.ToString());
 

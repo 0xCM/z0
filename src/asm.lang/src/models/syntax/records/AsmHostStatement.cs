@@ -28,10 +28,7 @@ namespace Z0.Asm
 
         public MemoryAddress IP;
 
-        public ApiHostUri HostUri;
-
-        public AsmMnemonic Mnemonic;
-
+        public OpUri OpUri;
 
         [MethodImpl(Inline)]
         public int CompareTo(AsmHostStatement src)

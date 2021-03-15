@@ -118,7 +118,7 @@ namespace Z0.Asm
                     position += size;
 
                 }
-                return new AsmInstructionBlock(instructions, code);
+                return new AsmInstructionBlock(uri, instructions, code);
             }
             catch(Exception e)
             {
