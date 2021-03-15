@@ -12,6 +12,7 @@
       <ProjectReference Include="$(Digital)" />
       <ProjectReference Include="$(AsmCore)" />
       <ProjectReference Include="$(AsmLangG)" />
+      <ProjectReference Include="$(BitFields)" />
   </ItemGroup>
 
    <ItemGroup>

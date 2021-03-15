@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(VSvc)" />
+    <ProjectReference Include="$(Api)" />
     <ProjectReference Include="$(Logix)" />
     <ProjectReference Include="$(Gen)" />
     <ProjectReference Include="$(CmdExec)" />

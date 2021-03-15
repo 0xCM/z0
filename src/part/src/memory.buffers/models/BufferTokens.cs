@@ -15,10 +15,6 @@ namespace Z0
         readonly BufferToken[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator BufferTokens(BufferToken[] src)
-            => new BufferTokens(src);
-
-        [MethodImpl(Inline)]
         public BufferTokens(BufferToken[] src)
             => Data = src;
 
@@ -27,5 +23,9 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[(byte)id];
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator BufferTokens(BufferToken[] src)
+            => new BufferTokens(src);
     }
 }
