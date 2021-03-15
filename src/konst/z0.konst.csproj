@@ -11,6 +11,7 @@
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Files)" />
+    <ProjectReference Include="$(Term)" />
   </ItemGroup>
 
 </Project>

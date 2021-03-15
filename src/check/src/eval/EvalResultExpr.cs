@@ -132,9 +132,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => (char)((byte)((uint)Data >> 24));
             }
-
         }
-
     }
-
 }

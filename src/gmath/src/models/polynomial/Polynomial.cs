@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Represents a polynomial
@@ -193,12 +193,12 @@ namespace Z0
         /// <summary>
         /// The zero polynomial of degree N
         /// </summary>
-        public static readonly Polynomial<M,N,T> Zero = new Polynomial<M, N, T>(Monomial<M,T>.Zero(Degree));
+        public static readonly Polynomial<M,N,T> Zero = new Polynomial<M,N,T>(Monomial<M,T>.Zero(Degree));
 
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)
         {
-            insist(terms[0].Exp == Degree, "no");
+            root.require(terms[0].Exp == Degree, () => "no");
             this.Terms = terms;
         }
 

@@ -35,8 +35,8 @@ namespace Z0
         public static ReadOnlySpan<char> decode(AsciCharCode src)
         {
             var storage = 0u;
-            ref var dst = ref @as<uint,char>(storage);
-            seek(dst, 0) = (char)(byte)src;
+            ref var dst = ref memory.@as<uint,char>(storage);
+            memory.seek(dst, 0) = (char)(byte)src;
             return memory.cover(dst, 2);
         }
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static gmath;
     using static memory;
     using static Numeric;
@@ -69,6 +69,7 @@ namespace Z0
             where T : unmanaged
                 => increments(k, (uint)dst.Length, ref first(dst));
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] increments<T>(ClosedInterval<T> src)
             where T : unmanaged
         {

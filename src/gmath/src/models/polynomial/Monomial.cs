@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Represents a one-term polynomial or component of a polynomial with more than one term
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="exp">The monomial exponent/order</param>
         [MethodImpl(Inline)]
         public static Monomial<T> Zero(uint exp)
-            => new Monomial<T>(default, exp);        
+            => new Monomial<T>(default, exp);
 
         [MethodImpl(Inline)]
         public static implicit operator (T scalar, uint exp)(Monomial<T> src)
@@ -68,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public T Eval(T x)
             => gmath.mul(Scalar, gmath.pow(x,(uint)Exp));
-        
+
         public string Format(char? variable = null, bool abs = false)
         {
             if(Nonzero)
@@ -80,13 +80,13 @@ namespace Z0
                 else if(Exp == 0)
                     return scalarFmt;
                 else
-                    return $"{scalarFmt}{varname}^{Exp}";                    
+                    return $"{scalarFmt}{varname}^{Exp}";
             }
             else
                 return string.Empty;
 
         }
-        
+
         public override string ToString()
             => Format();
 
@@ -117,7 +117,7 @@ namespace Z0
             => new Monomial<N,T>(src.scalar, src.exp);
 
         [MethodImpl(Inline)]
-        public static Monomial<N,T> Zero(uint exp) 
+        public static Monomial<N,T> Zero(uint exp)
             => new Monomial<N,T>(default, exp);
 
         [MethodImpl(Inline)]

@@ -7,6 +7,9 @@
   <ItemGroup>
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Math)" />
+    <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 
 </Project>

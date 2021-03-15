@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using N = N1;
     using C = AsciSymbol;
@@ -20,6 +21,27 @@ namespace Z0
     {
         public AsciCharCode Code {get;}
 
+        /// <summary>
+        /// Returns a string of length 1 that corresponds to the specified asci code
+        /// </summary>
+        /// <param name="code">The asci code</param>
+        [MethodImpl(Inline), Op]
+        static string @string(AsciCharCode code)
+        {
+            const string buffer = " ";
+            edit16c(buffer) = (char)code;
+            return buffer;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<char> decode(AsciCharCode src)
+        {
+            var storage = 0u;
+            ref var dst = ref @as<uint,char>(storage);
+            seek(dst, 0) = (char)(byte)src;
+            return cover(dst, 2);
+        }
+
         [MethodImpl(Inline), Op]
         public AsciSymbol(AsciCharCode code)
             => Code = code;
@@ -27,19 +49,19 @@ namespace Z0
         public TextBlock Text
         {
             [MethodImpl(Inline), Op]
-            get => Asci.@string(Code);
+            get => @string(Code);
         }
 
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline), Op]
-            get => memory.bytes(this);
+            get => bytes(this);
         }
 
         public ReadOnlySpan<char> Decoded
         {
             [MethodImpl(Inline), Op]
-            get => Asci.decode(this);
+            get => decode(this);
         }
 
         public C Zero
@@ -78,7 +100,7 @@ namespace Z0
             => Text;
 
         ReadOnlySpan<byte> IByteSeq.View
-            => z.bytes(this);
+            => bytes(this);
 
         bool INullity.IsEmpty
             => IsEmpty;

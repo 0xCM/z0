@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Presents a u8 span as a T-span
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The Target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> Recover<T>(this Span<byte> src)
+        public static Span<T> Recover<T>(this  Span<byte> src)
             where T : struct
                 => recover<byte,T>(src);
 

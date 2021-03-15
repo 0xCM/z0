@@ -69,18 +69,6 @@ namespace Z0
             T.WriteError(msg);
         }
 
-        /// <summary>
-        /// Emits a message to the error output stream
-        /// </summary>
-        /// <param name="e">The raised exception</param>
-        /// <param name="title">The name/context of the error</param>
-        public static void error(ClaimException e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            var msg = string.Empty.Build();
-            msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
-            msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.define($"{msg.ToString()}", LogLevel.Error));
-        }
 
         /// <summary>
         /// Emits a message to the error output stream

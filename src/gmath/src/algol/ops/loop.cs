@@ -38,7 +38,7 @@ namespace Z0
             return dst;
        }
 
-       [Op, Closures(AllNumeric)]
+        [Op, Closures(AllNumeric)]
         public static void loop<T>(Pair<T> limits, Func<T,T> f, Action<T> g)
             where T : unmanaged
         {

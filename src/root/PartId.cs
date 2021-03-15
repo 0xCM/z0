@@ -42,6 +42,8 @@ public enum PartId : ulong
 
     GMath = 34,
 
+    GMathObjects = 35,
+
     Polyrand = 36,
 
     DynoShell = 40,
