@@ -18,7 +18,7 @@ namespace Z0
             => Root = root;
 
         public ListedFiles List()
-            => FS.list(Root.EnumerateFiles(true).Array());
+            => Archives.list(Root.EnumerateFiles(true).Array());
 
         public Deferred<FS.FilePath> Enumerate()
             => Root.EnumerateFiles(true);

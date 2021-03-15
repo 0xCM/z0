@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Konst;
-    using static z;
+    using static Root;
 
     using api = RuntimeArchive;
 
@@ -23,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RuntimeAssembly(Assembly src, FS.FilePath path)
         {
-            Component = insist(src);
+            Component = root.require(src);
             Path = path;
         }
 

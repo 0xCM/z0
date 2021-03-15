@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
+    partial class XFs
     {
-        Index<FS.FolderPath> Directories();
+        public static FileDescription Description(this FS.FilePath src)
+            => FS.describe(src);
 
-        Deferred<FS.FilePath> Enumerate();
+        public static Index<FileDescription> Descriptions(this FS.Files src)
+            => src.Map(FS.describe);
     }
 }

@@ -4,10 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
-    {
-        Index<FS.FolderPath> Directories();
+    using System;
+    using System.Runtime.CompilerServices;
 
-        Deferred<FS.FilePath> Enumerate();
+    using static Root;
+
+    partial struct FS
+    {
+        [MethodImpl(Inline), Op]
+        public static Drive drive(DriveLetter letter)
+            => new Drive(letter);
     }
 }

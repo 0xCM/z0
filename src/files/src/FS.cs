@@ -4,10 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
+    [ApiHost]
+    public readonly partial struct FS
     {
-        Index<FS.FolderPath> Directories();
-
-        Deferred<FS.FilePath> Enumerate();
     }
 }

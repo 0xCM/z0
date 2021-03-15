@@ -27,12 +27,11 @@ namespace Z0
         [Op]
         public static LocatedImage locate(ProcessModule src)
         {
-            var path = FS.path(src.FileName);
-            var part = ApiPartIdParser.part(path);
+            var part = ApiPartIdParser.fromFile(src.FileName);
             var entry = (MemoryAddress)src.EntryPointAddress;
             var @base = src.BaseAddress;
             var size = (uint)src.ModuleMemorySize;
-            return new LocatedImage(path, part, entry, @base, size);
+            return new LocatedImage(FS.path(src.FileName), part, entry, @base, size);
         }
     }
 }

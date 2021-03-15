@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
-    {
-        Index<FS.FolderPath> Directories();
+    using System;
+    using System.IO;
 
-        Deferred<FS.FilePath> Enumerate();
+    partial class XFs
+    {
+        public static BinaryWriter BinaryWriter(this FS.FilePath dst)
+            => new BinaryWriter(File.Open(dst.EnsureParentExists().Name, FileMode.Create));
     }
 }

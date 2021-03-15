@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Nats)" />
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Cpu)" />
+    <ProjectReference Include="$(Files)" />
   </ItemGroup>
 
 </Project>

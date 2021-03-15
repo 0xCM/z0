@@ -4,10 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
+    /// <summary>
+    /// Defines the fields in a <see  cref='ListedFile'/> table
+    /// </summary>
+    public enum ListedFileField : ushort
     {
-        Index<FS.FolderPath> Directories();
+        Index = 10,
 
-        Deferred<FS.FilePath> Enumerate();
+        Path = 120
     }
 }

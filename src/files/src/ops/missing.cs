@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
-    {
-        Index<FS.FolderPath> Directories();
+    using System.IO;
 
-        Deferred<FS.FilePath> Enumerate();
+    partial struct FS
+    {
+        [Op]
+        public static FileNotFoundException missing(FS.FilePath src)
+            => new FileNotFoundException(src.Name);
     }
 }

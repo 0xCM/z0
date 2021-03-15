@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IFilteredArchive
+    [ApiHost]
+    public static partial class XFs
     {
-        Index<FS.FolderPath> Directories();
 
-        Deferred<FS.FilePath> Enumerate();
     }
 }

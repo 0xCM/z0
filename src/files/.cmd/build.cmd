@@ -1,3 +1,3 @@
 @echo off
-set ProjectId=asm.core
+set ProjectId=files
 call %ControlScripts%\build-lib.cmd
