@@ -10,8 +10,8 @@ namespace Z0
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public readonly struct GenericDynamic
     {

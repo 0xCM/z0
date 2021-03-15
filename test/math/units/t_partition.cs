@@ -101,7 +101,7 @@ namespace Z0
             var src = Interval.closed(1,103);
             var dst = Partition.width(src,13);
             var fmt = dst.Map(x => x.Format()).Join(" + ");
-            Claim.Require(dst.Last().Closed);
+            Claim.require(dst.Last().Closed);
         }
 
         protected void points_check<T>(T min, T max, T width)

@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public class t_dot : t_mkl<t_dot>
     {

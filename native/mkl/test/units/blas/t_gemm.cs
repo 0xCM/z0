@@ -8,33 +8,11 @@ namespace Z0.Mkl.Test
     using System.Linq;
     using System.Collections.Generic;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_gemm : UnitTest<t_gemm>
     {
-        // /// <summary>
-        // /// Asserts that corresponding elements of two source spans of the same length are "close" as determined by a specified tolerance
-        // /// </summary>
-        // /// <param name="lhs">The left span</param>
-        // /// <param name="rhs">The right span</param>
-        // /// <param name="tolerance">The acceptable difference between corresponding left/right elements</param>
-        // /// <param name="caller">The invoking function</param>
-        // /// <param name="file">The file in which the invoking function is defined </param>
-        // /// <param name="line">The file line number of invocation</param>
-        // /// <typeparam name="T">The element type</typeparam>
-        // public void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        //     where T : unmanaged
-        // {
-        //     for(var i = 0; i< Claim.length(lhs,rhs); i++)
-        //         if(!gmath.within(lhs[i],rhs[i],tolerance))
-        //             throw AppErrors.ItemsNotEqual(i, lhs[i], rhs[i], caller, file, line);
-        // }
-
         internal static void refmul<M,N,T>(Matrix256<M,N,T> A, Block256<N,T> B, Block256<M,T> X)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -240,7 +218,7 @@ namespace Z0.Mkl.Test
                 runtime += snapshot(sw);
 
                 Mul(A, B, ref E);
-                Claim.Require(E == X);
+                Claim.require(E == X);
 
             }
 
@@ -273,7 +251,7 @@ namespace Z0.Mkl.Test
                 mkl.gemv(A,x, ref y);
                 sw.Stop();
                 refmul(A,x,z);
-                Claim.Require(z == y);
+                Claim.require(z == y);
             }
 
             var label = $"gemv<{nat32i<M>()},{nat32i<N>()},{typeof(double).DisplayName()}>";

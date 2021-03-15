@@ -90,6 +90,5 @@ namespace Z0
         where I : IClaimValidator
     {
         protected override I Claim => default(V);
-
     }
 }

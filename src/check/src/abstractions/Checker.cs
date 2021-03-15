@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public abstract class Checker<H,C> : WfService<H,C>, IOperationChecker
         where H : Checker<H,C>, new()

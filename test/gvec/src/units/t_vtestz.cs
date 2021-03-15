@@ -71,7 +71,7 @@ namespace Z0
                 // since all mask-identified source bits are disabled
                 var mask = gcpu.vcnonimpl(gcpu.vones(w,t), x);
 
-                Claim.Require(gcpu.vtestz(x,mask));
+                Claim.require(gcpu.vtestz(x,mask));
             }
         }
 
@@ -88,7 +88,7 @@ namespace Z0
                 // since all mask-identified source bits are disabled
                 var mask = gcpu.vcnonimpl(gcpu.vones(w,t), x);
 
-                Claim.Require(gcpu.vtestz(x,mask));
+                Claim.require(gcpu.vtestz(x,mask));
             }
         }
     }

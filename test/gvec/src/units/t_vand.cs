@@ -22,7 +22,7 @@ namespace Z0
             {
                 var x = Random.CpuVector(n128,z32);
                 var y = Random.CpuVector(n128,z32);
-                Claim.Require(vand(x,y));
+                Claim.require(vand(x,y));
             }
         }
 

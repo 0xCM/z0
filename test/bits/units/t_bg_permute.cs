@@ -24,7 +24,7 @@ namespace Z0
             var g1 = identity.ToBitGrid();
             var nP = identity.ToNatural();
             var g2 = nP.ToBitGrid();
-            Claim.Require(g1 == g2);
+            Claim.require(g1 == g2);
 
         }
 
@@ -62,7 +62,7 @@ namespace Z0
             var v2 = BitVector24.FromEnum(p2);
             var v2F = v2.Format(3);
             ClaimPrimalSeq.ClaimEq(p2F, v2F);
-            Claim.Require(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
+            Claim.require(v2.ToSubGrid(n8,n3) == p2.ToSubGrid());
         }
     }
 }

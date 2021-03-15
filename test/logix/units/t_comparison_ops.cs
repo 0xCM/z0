@@ -116,7 +116,7 @@ namespace Z0.Logix
                 var y = gmath.inc(x);
 
                 var y0 = gmath.eq(x,x);
-                Claim.Require(y0);
+                Claim.require(y0);
 
                 var y1 = S.equals(x,x);
                 Claim.eq(Numeric.maxval<T>(), y1);
@@ -141,7 +141,7 @@ namespace Z0.Logix
             {
                 expect = gcpu.vlt(x,y);
                 actual = gcpu.vlt(x,y);
-                Claim.Require(gcpu.vsame(expect,actual));
+                Claim.require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gcpu.vxor(x,a);
@@ -160,7 +160,7 @@ namespace Z0.Logix
             {
                 expect = gcpu.vlt(x,y);
                 actual = gcpu.vlt(x,y);
-                Claim.Require(gcpu.vsame(expect,actual));
+                Claim.require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gcpu.vxor(x,a);
@@ -180,7 +180,7 @@ namespace Z0.Logix
             {
                 expect = gcpu.vgt(x,y);
                 actual = gcpu.vgt(x,y);
-                Claim.Require(gcpu.vsame(expect,actual));
+                Claim.require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gcpu.vxor(x,a);
@@ -200,7 +200,7 @@ namespace Z0.Logix
             {
                 expect = gcpu.vgt(x,y);
                 actual = gcpu.vgt(x,y);
-                Claim.Require(gcpu.vsame(expect,actual));
+                Claim.require(gcpu.vsame(expect,actual));
 
                 var a = gcpu.vbroadcast(n,Random.Next<T>());
                 x = gcpu.vxor(x,a);

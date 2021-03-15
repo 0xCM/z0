@@ -71,7 +71,8 @@ namespace Z0
                 unpack_check(src,dst.Storage);
 
                 var rebound = gpack.pack64x8x1(dst,0);
-                Claim.eq(src,rebound);
+
+                ClaimPrimal.eq(src,rebound);
             }
         }
 

@@ -130,59 +130,59 @@ namespace Z0
 
         public void test_generic_blocks()
         {
-            Claim.Require(blocked(typeof(SpanBlock16<>)));
-            Claim.Require(blocked(typeof(SpanBlock32<>)));
-            Claim.Require(blocked(typeof(SpanBlock64<>)));
-            Claim.Require(blocked(typeof(SpanBlock128<>)));
-            Claim.Require(blocked(typeof(SpanBlock256<>)));
-            Claim.Require(blocked(typeof(SpanBlock512<>)));
+            Claim.require(blocked(typeof(SpanBlock16<>)));
+            Claim.require(blocked(typeof(SpanBlock32<>)));
+            Claim.require(blocked(typeof(SpanBlock64<>)));
+            Claim.require(blocked(typeof(SpanBlock128<>)));
+            Claim.require(blocked(typeof(SpanBlock256<>)));
+            Claim.require(blocked(typeof(SpanBlock512<>)));
         }
 
         public void test_block_16()
         {
-            Claim.Require(blocked(typeof(SpanBlock16<byte>)));
-            Claim.Require(blocked(typeof(SpanBlock16<sbyte>)));
-            Claim.Require(blocked(typeof(SpanBlock16<ushort>)));
-            Claim.Require(blocked(typeof(SpanBlock16<short>)));
+            Claim.require(blocked(typeof(SpanBlock16<byte>)));
+            Claim.require(blocked(typeof(SpanBlock16<sbyte>)));
+            Claim.require(blocked(typeof(SpanBlock16<ushort>)));
+            Claim.require(blocked(typeof(SpanBlock16<short>)));
         }
 
         public void test_block_32()
         {
-            Claim.Require(blocked(typeof(SpanBlock32<byte>)));
-            Claim.Require(blocked(typeof(SpanBlock32<sbyte>)));
-            Claim.Require(blocked(typeof(SpanBlock32<ushort>)));
-            Claim.Require(blocked(typeof(SpanBlock32<short>)));
-            Claim.Require(blocked(typeof(SpanBlock32<int>)));
-            Claim.Require(blocked(typeof(SpanBlock32<uint>)));
-            Claim.Require(blocked(typeof(SpanBlock32<float>)));
+            Claim.require(blocked(typeof(SpanBlock32<byte>)));
+            Claim.require(blocked(typeof(SpanBlock32<sbyte>)));
+            Claim.require(blocked(typeof(SpanBlock32<ushort>)));
+            Claim.require(blocked(typeof(SpanBlock32<short>)));
+            Claim.require(blocked(typeof(SpanBlock32<int>)));
+            Claim.require(blocked(typeof(SpanBlock32<uint>)));
+            Claim.require(blocked(typeof(SpanBlock32<float>)));
         }
 
         public void test_block_64()
         {
-            Claim.Require(blocked(typeof(SpanBlock64<byte>)));
-            Claim.Require(blocked(typeof(SpanBlock64<sbyte>)));
-            Claim.Require(blocked(typeof(SpanBlock64<ushort>)));
-            Claim.Require(blocked(typeof(SpanBlock64<short>)));
-            Claim.Require(blocked(typeof(SpanBlock64<int>)));
-            Claim.Require(blocked(typeof(SpanBlock64<uint>)));
-            Claim.Require(blocked(typeof(SpanBlock64<long>)));
-            Claim.Require(blocked(typeof(SpanBlock64<ulong>)));
-            Claim.Require(blocked(typeof(SpanBlock64<float>)));
-            Claim.Require(blocked(typeof(SpanBlock64<double>)));
+            Claim.require(blocked(typeof(SpanBlock64<byte>)));
+            Claim.require(blocked(typeof(SpanBlock64<sbyte>)));
+            Claim.require(blocked(typeof(SpanBlock64<ushort>)));
+            Claim.require(blocked(typeof(SpanBlock64<short>)));
+            Claim.require(blocked(typeof(SpanBlock64<int>)));
+            Claim.require(blocked(typeof(SpanBlock64<uint>)));
+            Claim.require(blocked(typeof(SpanBlock64<long>)));
+            Claim.require(blocked(typeof(SpanBlock64<ulong>)));
+            Claim.require(blocked(typeof(SpanBlock64<float>)));
+            Claim.require(blocked(typeof(SpanBlock64<double>)));
         }
 
         public void test_block_128()
         {
-            Claim.Require(blocked(typeof(SpanBlock128<byte>)));
-            Claim.Require(blocked(typeof(SpanBlock128<sbyte>)));
-            Claim.Require(blocked(typeof(SpanBlock128<ushort>)));
-            Claim.Require(blocked(typeof(SpanBlock128<short>)));
-            Claim.Require(blocked(typeof(SpanBlock128<int>)));
-            Claim.Require(blocked(typeof(SpanBlock128<uint>)));
-            Claim.Require(blocked(typeof(SpanBlock128<long>)));
-            Claim.Require(blocked(typeof(SpanBlock128<ulong>)));
-            Claim.Require(blocked(typeof(SpanBlock128<float>)));
-            Claim.Require(blocked(typeof(SpanBlock128<double>)));
+            Claim.require(blocked(typeof(SpanBlock128<byte>)));
+            Claim.require(blocked(typeof(SpanBlock128<sbyte>)));
+            Claim.require(blocked(typeof(SpanBlock128<ushort>)));
+            Claim.require(blocked(typeof(SpanBlock128<short>)));
+            Claim.require(blocked(typeof(SpanBlock128<int>)));
+            Claim.require(blocked(typeof(SpanBlock128<uint>)));
+            Claim.require(blocked(typeof(SpanBlock128<long>)));
+            Claim.require(blocked(typeof(SpanBlock128<ulong>)));
+            Claim.require(blocked(typeof(SpanBlock128<float>)));
+            Claim.require(blocked(typeof(SpanBlock128<double>)));
         }
 
         public void classify_block_16()

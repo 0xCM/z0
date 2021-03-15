@@ -41,8 +41,8 @@ namespace Z0
             var x = Random.BitMatrix(n32);
             var y = Random.BitMatrix(n32);
             Claim.nea(x.Equals(y));
-            Claim.Require(x.Equals(x));
-            Claim.Require(y.Equals(y));
+            Claim.require(x.Equals(x));
+            Claim.require(y.Equals(y));
         }
 
         public void bm_eq_64x64x64()
@@ -51,9 +51,9 @@ namespace Z0
             var y = Random.BitMatrix(n64);
             Claim.nea(x.Equals(y));
             Claim.nea(x == y);
-            Claim.Require(x != y);
-            Claim.Require(x.Equals(x));
-            Claim.Require(y.Equals(y));
+            Claim.require(x != y);
+            Claim.require(x.Equals(x));
+            Claim.require(y.Equals(y));
         }
 
         public void bm_not_64x64x64()
@@ -61,14 +61,14 @@ namespace Z0
             var x = Random.BitMatrix(n64);
             var y = x.Replicate();
             var xff = ~(~x);
-            Claim.Require(xff == y);
+            Claim.require(xff == y);
 
             var c = Random.BitMatrix(n64);
             var a = new ulong[64];
             for(var i = 0; i<64; i++)
                 a[i] = ~ c[i];
             var b = BitMatrix.primal(n64,a);
-            Claim.Require(b == ~c);
+            Claim.require(b == ~c);
         }
 
         public void bm_getcol_8x8x8()

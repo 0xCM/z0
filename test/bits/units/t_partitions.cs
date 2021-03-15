@@ -16,7 +16,7 @@ namespace Z0
             var segment = ScalarCast.uint8(0b1010).ToBitSpan32();
             var expect = segment.Replicate(4);
             var actual = dst.Edit.ToBitSpan32();
-            Claim.Require(expect.Equals(actual));
+            Claim.require(expect.Equals(actual));
 
         }
 

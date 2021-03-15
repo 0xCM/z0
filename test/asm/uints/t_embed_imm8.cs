@@ -71,9 +71,9 @@ namespace Z0.Asm
 
         void check_unary_shift(MethodInfo src, W128 w, StreamWriter dst)
         {
-            Claim.Require(src.IsVectorized(w));
-            Claim.Require(VexReflex.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1, RefinementClass.Unrefined));
+            Claim.require(src.IsVectorized(w));
+            Claim.require(VexReflex.AcceptsVector(src,0,w));
+            Claim.require(src.AcceptsImmediate(1, RefinementClass.Unrefined));
             Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(RefinementClass.Unrefined));
 
             var tVector = src.ParameterType(0);
@@ -129,9 +129,9 @@ namespace Z0.Asm
 
         void check_unary_shift(MethodInfo src, W256 w, StreamWriter dst)
         {
-            Claim.Require(src.IsVectorized(w));
-            Claim.Require(VexReflex.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1,RefinementClass.Unrefined));
+            Claim.require(src.IsVectorized(w));
+            Claim.require(VexReflex.AcceptsVector(src,0,w));
+            Claim.require(src.AcceptsImmediate(1,RefinementClass.Unrefined));
             Claim.eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(RefinementClass.Unrefined));
 
             var tVector = src.ParameterType(0);
@@ -189,46 +189,46 @@ namespace Z0.Asm
                 Notify($"tCell := {tCell.Name}");
             }
 
-            Claim.Require(tCell.IsNonEmpty());
+            Claim.require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector128<sbyte>))
             {
-                Claim.Require(tCell == typeof(sbyte));
+                Claim.require(tCell == typeof(sbyte));
                 Claim.eq(VectorKind.v128x8i, kVector);
             }
             else if(tVector == typeof(Vector128<byte>))
             {
-                Claim.Require(tCell == typeof(byte));
+                Claim.require(tCell == typeof(byte));
                 Claim.eq(VectorKind.v128x8u, kVector);
             }
             else if(tVector == typeof(Vector128<short>))
             {
-                Claim.Require(tCell == typeof(short));
+                Claim.require(tCell == typeof(short));
                 Claim.eq(VectorKind.v128x16i, kVector);
             }
             else if(tVector == typeof(Vector128<ushort>))
             {
-                Claim.Require(tCell == typeof(ushort));
+                Claim.require(tCell == typeof(ushort));
                 Claim.eq(VectorKind.v128x16u, kVector);
             }
             else if(tVector == typeof(Vector128<int>))
             {
-                Claim.Require(tCell == typeof(int));
+                Claim.require(tCell == typeof(int));
                 Claim.eq(VectorKind.v128x32i, kVector);
             }
             else if(tVector == typeof(Vector128<uint>))
             {
-                Claim.Require(tCell == typeof(uint));
+                Claim.require(tCell == typeof(uint));
                 Claim.eq(VectorKind.v128x32u, kVector);
             }
             else if(tVector == typeof(Vector128<long>))
             {
-                Claim.Require(tCell == typeof(long));
+                Claim.require(tCell == typeof(long));
                 Claim.eq(VectorKind.v128x64i, kVector);
             }
             else if(tVector == typeof(Vector128<ulong>))
             {
-                Claim.Require(tCell == typeof(ulong));
+                Claim.require(tCell == typeof(ulong));
                 Claim.eq(VectorKind.v128x64u, kVector);
             }
             else
@@ -247,46 +247,46 @@ namespace Z0.Asm
                 Notify($"tCell := {tCell.Name}");
             }
 
-            Claim.Require(tCell.IsNonEmpty());
+            Claim.require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector256<sbyte>))
             {
-                Claim.Require(tCell == typeof(sbyte));
+                Claim.require(tCell == typeof(sbyte));
                 Claim.eq(VectorKind.v256x8i, kVector);
             }
             else if(tVector == typeof(Vector256<byte>))
             {
-                Claim.Require(tCell == typeof(byte));
+                Claim.require(tCell == typeof(byte));
                 Claim.eq(VectorKind.v256x8u, kVector);
             }
             else if(tVector == typeof(Vector256<short>))
             {
-                Claim.Require(tCell == typeof(short));
+                Claim.require(tCell == typeof(short));
                 Claim.eq(VectorKind.v256x16i, kVector);
             }
             else if(tVector == typeof(Vector256<ushort>))
             {
-                Claim.Require(tCell == typeof(ushort));
+                Claim.require(tCell == typeof(ushort));
                 Claim.eq(VectorKind.v256x16u, kVector);
             }
             else if(tVector == typeof(Vector256<int>))
             {
-                Claim.Require(tCell == typeof(int));
+                Claim.require(tCell == typeof(int));
                 Claim.eq(VectorKind.v256x32i, kVector);
             }
             else if(tVector == typeof(Vector256<uint>))
             {
-                Claim.Require(tCell == typeof(uint));
+                Claim.require(tCell == typeof(uint));
                 Claim.eq(VectorKind.v256x32u, kVector);
             }
             else if(tVector == typeof(Vector256<long>))
             {
-                Claim.Require(tCell == typeof(long));
+                Claim.require(tCell == typeof(long));
                 Claim.eq(VectorKind.v256x64i, kVector);
             }
             else if(tVector == typeof(Vector256<ulong>))
             {
-                Claim.Require(tCell == typeof(ulong));
+                Claim.require(tCell == typeof(ulong));
                 Claim.eq(VectorKind.v256x64u, kVector);
             }
             else

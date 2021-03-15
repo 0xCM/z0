@@ -34,7 +34,7 @@ namespace Z0
 
             var bs = BitString.scalar(src);
             for(var i=0; i<bytecount*8; i++)
-                Claim.Require(bs[i] == (i%2 == 0));
+                Claim.require(bs[i] == (i%2 == 0));
         }
     }
 }

@@ -50,7 +50,7 @@
     <Canonical>$(Src)canonical/z0.canonical.csproj</Canonical>
 
     <Digital>$(Src)digital/z0.digital.csproj</Digital>
-    <Dynamic>$(Src)dynamic/lib/z0.dynamic.lib.csproj</Dynamic>
+    <Dynamic>$(Src)dynamic/z0.dynamic.csproj</Dynamic>
     <Gen>$(Src)gen/lib/z0.gen.lib.csproj</Gen>
 
     <DVec>$(Src)dvec/z0.dvec.csproj</DVec>

@@ -10,9 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
+    public class t_blocks_svc : WfService<t_blocks_svc>
+    {
+
+    }
+
     public class t_blocks : t_inx<t_blocks>
     {
-        public  void check_cellsize()
+        public void check_cellsize()
         {
             Claim.eq(1, size<sbyte>());
             Claim.eq(1, size<byte>());
@@ -23,7 +28,6 @@ namespace Z0
             Claim.eq(8, size<ulong>());
             Claim.eq(8, size<double>());
             Claim.eq(8, size<long>());
-
 
             Claim.eq(1, size<sbyte>());
             Claim.eq(1, size<byte>());
@@ -57,7 +61,7 @@ namespace Z0
 
         public void check_blocklength_256()
         {
-            N256 n = default;
+            var n = w256;
             Claim.eq(32, SpanBlocks.blocklength<sbyte>(n));
             Claim.eq(32, SpanBlocks.blocklength<byte>(n));
             Claim.eq(16, SpanBlocks.blocklength<short>(n));

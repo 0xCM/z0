@@ -115,15 +115,15 @@ namespace Z0.Logix
 
                 var ab = gmath.lt(a,b);
                 var abx = eval(x);
-                Claim.Require(ab == abx);
+                Claim.require(ab == abx);
 
                 var bc = gmath.lt(b,c);
                 var bcy = eval(y);
-                Claim.Require(bc == bcy);
+                Claim.require(bc == bcy);
 
                 var ca = gmath.lt(c,a);
                 var caz = eval(z);
-                Claim.Require(ca == caz);
+                Claim.require(ca == caz);
             }
 
         }

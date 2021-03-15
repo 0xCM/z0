@@ -143,7 +143,7 @@ namespace Z0
                 var y = Random.BitVector(n4);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
             }
         }
 
@@ -155,12 +155,12 @@ namespace Z0
                 var y = Random.BitVector(n8);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.Require(a == c);
+                Claim.require(a == c);
             }
         }
 
@@ -172,12 +172,12 @@ namespace Z0
                 var y = Random.BitVector(n16);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.Require(a == c);
+                Claim.require(a == c);
             }
         }
 
@@ -189,12 +189,12 @@ namespace Z0
                 var y = Random.BitVector(n32);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
 
                 var zx = x.ToNatural();
                 var zy = y.ToNatural();
                 var c = zx % zy;
-                Claim.Require(a == c);
+                Claim.require(a == c);
             }
         }
 
@@ -206,12 +206,12 @@ namespace Z0
                 var y = Random.BitVector(n64);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
-                Claim.Require(a == c);
+                Claim.require(a == c);
             }
 
             for(var i=0; i< RepCount; i++)

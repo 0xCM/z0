@@ -62,7 +62,7 @@ namespace Z0.Test
                 var matrix = Random.MatrixBlock<M,N,T>();
                 var A = MatrixWriter.write(matrix, path, m, n, t);
                 var B = MatrixReader.read(path, m, n, t);
-                Claim.Require(A == B);
+                Claim.require(A == B);
             }
         }
     }

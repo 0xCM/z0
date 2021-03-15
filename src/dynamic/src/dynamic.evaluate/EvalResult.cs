@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public struct EvalResult : ITabular<F,R>
+    public struct EvalResult : IRecord<EvalResult>
     {
         public EvalAspectKey FieldKind => EvalAspectKey.Sequence;
 

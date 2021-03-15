@@ -114,7 +114,7 @@ namespace Z0
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval<ulong>());
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,5,2,7,4,1,6,3);
-            Claim.Require(gcpu.vsame(expect,target));
+            Claim.require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -135,7 +135,7 @@ namespace Z0
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,0,1,2,7,4,5,6,3);
-            Claim.Require(gcpu.vsame(expect,target));
+            Claim.require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -157,7 +157,7 @@ namespace Z0
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,1,6,3,0,5,2,7);
-            Claim.Require(gcpu.vsame(expect,target));
+            Claim.require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -179,7 +179,7 @@ namespace Z0
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,4,5,2,3,0,1,6,7);
-            Claim.Require(gcpu.vsame(expect,target));
+            Claim.require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
@@ -200,7 +200,7 @@ namespace Z0
             var blendspec = vbroadcast(w256, BitMasks.mask(maskspec), Numeric.maxval(t));
             var target = gcpu.vblendp(source, blendspec);
             var expect = cpu.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
-            Claim.Require(gcpu.vsame(expect,target));
+            Claim.require(gcpu.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
@@ -466,7 +466,7 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.Require(gmath.eq(Numeric.force<T>(i),k));
+                    Claim.require(gmath.eq(Numeric.force<T>(i),k));
                 }
             }
         }
@@ -494,7 +494,7 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.Require(gmath.eq(Numeric.force<T>(i),k));
+                    Claim.require(gmath.eq(Numeric.force<T>(i),k));
                 }
             }
         }

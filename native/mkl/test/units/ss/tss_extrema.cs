@@ -11,7 +11,6 @@ namespace Z0.Mkl
 
     public class t_extrema: UnitTest<t_extrema>
     {
-
         public void minval()
         {
             var samplesize = Pow2.T14;
@@ -30,7 +29,7 @@ namespace Z0.Mkl
             var src = Random.Stream<double>().Take(16000).ToArray();
             var expect = src.Sum().Round(4);
             var actual = Observations.Load(src).Sum()[0].Round(4);
-            Claim.Require(gmath.within(expect,actual,.01));
+            Claim.require(gmath.within(expect,actual,.01));
         }
 
         public void mean_bench()

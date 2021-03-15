@@ -49,14 +49,14 @@ namespace Z0
                     RefOps.pack(x0, x1, x2, x3, x4, x5, x6, x7, pos, ref dst);
 
                     byte j = 0;
-                    Claim.Require(gbits.bitmatch(dst, j++, x0, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x1, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x2, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x3, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x4, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x5, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x6, pos));
-                    Claim.Require(gbits.bitmatch(dst, j++, x7, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x0, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x1, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x2, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x3, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x4, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x5, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x6, pos));
+                    Claim.require(gbits.bitmatch(dst, j++, x7, pos));
                 }
             }
         }

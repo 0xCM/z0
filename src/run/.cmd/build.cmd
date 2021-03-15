@@ -1,5 +1,5 @@
 @echo off
 
-set ZCmd=%ZDev%\.cmd
-call %ZCmd%\build-run.cmd
+set ProjectId=run
+call %ControlScripts%\build-app.cmd
 

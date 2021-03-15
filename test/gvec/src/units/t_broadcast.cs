@@ -9,8 +9,9 @@ namespace Z0
         public void t_broadcast_case1()
         {
             ulong pattern = 0b11001100;
-            var expect = pattern << 0  | pattern << 8  | pattern << 16 | pattern << 24 |
-                            pattern << 32 | pattern << 40 | pattern << 48 | pattern << 56;
+            var expect =
+                pattern << 0  | pattern << 8  | pattern << 16 | pattern << 24 |
+                pattern << 32 | pattern << 40 | pattern << 48 | pattern << 56;
             var actual = gcpu.broadcast<byte,ulong>((byte)pattern);
             Claim.eq(expect,actual);
         }

@@ -5,6 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="$(Part)" />
+    <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 

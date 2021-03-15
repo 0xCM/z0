@@ -34,7 +34,7 @@ namespace Z0
                     dst[j] = (byte)(A.Bytes[j] & B.Bytes[j]);
 
                 var D = BitMatrix.primal(n,dst);
-                Claim.Require(D == C);
+                Claim.require(D == C);
             }
         }
 
@@ -94,7 +94,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.from(n32,and(A.Bytes, B.Bytes));
-                Claim.Require(C == D);
+                Claim.require(C == D);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Z0
                 var C = A & B;
 
                 var D = BitMatrix.primal(n64,and(A.Bytes, B.Bytes));
-                Claim.Require(C == D);
+                Claim.require(C == D);
             }
         }
 
@@ -125,7 +125,7 @@ namespace Z0
                 var rbB = B.ToRowBits();
                 var rbC = rbA & rbB;
 
-                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));
+                Claim.require(BitMatrix.same(rbC.ToBitMatrix(),C));
             }
         }
 

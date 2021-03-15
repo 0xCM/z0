@@ -28,7 +28,7 @@ namespace Z0.Logix
             {
                 t.SetVars(c);
                 Claim.eq(bit.On, LogicEngine.eval(t));
-                Claim.Require(LogicEngine.satisfied(t, c[0], c[1]));
+                Claim.require(LogicEngine.satisfied(t, c[0], c[1]));
 
             }
         }
@@ -65,7 +65,7 @@ namespace Z0.Logix
             }
             clock.Stop();
             Context.ReportBenchmark(opname, opcount,clock);
-            Claim.Require(sat);
+            Claim.require(sat);
         }
 
         void evaluator_bench()

@@ -18,7 +18,7 @@ namespace Z0
                 Claim.eq(m1[i,j], m2[j,i]);
 
             var m3 = BitMatrix.transpose_v2(m2);
-            Claim.Require(m3 == m1);
+            Claim.require(m3 == m1);
         }
 
         void bm_transpose_8x8x8()
@@ -27,7 +27,7 @@ namespace Z0
             var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
-            Claim.Require(m3 == m1);
+            Claim.require(m3 == m1);
         }
 
         public void bm_transpose_16x16x16()
@@ -36,7 +36,7 @@ namespace Z0
             var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
-            Claim.Require(m3 == m1);
+            Claim.require(m3 == m1);
         }
 
         public void bm_transpose_32x32x32()
@@ -45,7 +45,7 @@ namespace Z0
             var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
-            Claim.Require(m3 == m1);
+            Claim.require(m3 == m1);
         }
 
         public void bm_transpose_64x64x64()
@@ -54,7 +54,7 @@ namespace Z0
             var m1 = Random.BitMatrix(n);
             var m2 = m1.Transpose();
             var m3 = m2.Transpose();
-            Claim.Require(m3 == m1);
+            Claim.require(m3 == m1);
         }
 
         public void bm_transpose_n12x14x16()

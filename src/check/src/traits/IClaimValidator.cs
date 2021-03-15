@@ -14,7 +14,8 @@ namespace Z0
 
     public interface IClaimValidator
     {
-        Type HostType => GetType();
+        Type HostType
+            => GetType();
 
         ClaimException Failed(ClaimKind claim, IAppMsg msg)
             => api.exception(claim, msg);

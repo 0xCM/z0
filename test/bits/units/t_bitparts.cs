@@ -14,7 +14,7 @@ namespace Z0
             Span<bit> dst = new bit[64];
             BitParts.part64x1(src, dst);
             for(var i=0; i< dst.Length; i++)
-                Claim.Require(dst[i]);
+                Claim.require(dst[i]);
         }
     }
 }

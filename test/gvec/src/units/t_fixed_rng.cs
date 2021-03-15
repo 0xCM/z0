@@ -34,7 +34,7 @@ namespace Z0
                 Trace($"actual := {actual}");
             }
 
-            Claim.Require(succeeded);
+            Claim.require(succeeded);
         }
 
         public void fixed_convert()

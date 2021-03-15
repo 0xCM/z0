@@ -7,13 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
     [ApiHost]
     public readonly struct EvalSeq
     {
-        [MethodImpl(NotInline)]
         public static SeqEval<T> alloc<T>(uint count, bit result)
             => new SeqEval<T>(new BinaryEval<T>[count], result);
 

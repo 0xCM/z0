@@ -51,7 +51,7 @@ namespace Z0
                 var y = Random.BitBlock<T>(n);
                 var a = x % y;
                 var b = BitBlocks.modprod(x,y);
-                Claim.Require(a == b);
+                Claim.require(a == b);
             }
         }
     }

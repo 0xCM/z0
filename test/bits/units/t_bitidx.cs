@@ -36,7 +36,7 @@ namespace Z0
                 var posX = positions[i];
                 var add = additions[i];
                 var posY = posX + add;
-                Claim.Require(posY >= posX);
+                Claim.require(posY >= posX);
 
                 var pos = posX;
                 for(var j=0; j< add; j++)

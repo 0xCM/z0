@@ -38,8 +38,8 @@ namespace Z0
                 var a = Random.Next<ulong>().ToBitSpan32();
                 var b = Random.Next<ulong>().ToBitSpan32();
                 var c = a.Replicate();
-                Claim.Require(a != b);
-                Claim.Require(a == c);
+                Claim.require(a != b);
+                Claim.require(a == c);
             }
         }
 
@@ -252,7 +252,7 @@ namespace Z0
             {
                 if(gmath.even(i))
                 {
-                    Claim.Require(bitspan[i]);
+                    Claim.require(bitspan[i]);
                     ClaimPrimalSeq.eq(Bit32.One, format[(int)j]);
                 }
                 else

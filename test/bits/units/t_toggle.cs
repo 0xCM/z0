@@ -79,13 +79,13 @@ namespace Z0
 
         public void testbit_outline()
         {
-            Claim.Require(bit.test(0b00000101, (byte)0));
+            Claim.require(bit.test(0b00000101, (byte)0));
             Claim.nea(bit.test(0b00000101, (byte)1));
-            Claim.Require(bit.test(0b00000101, (byte)2));
+            Claim.require(bit.test(0b00000101, (byte)2));
 
-            Claim.Require(bit.test(0b00000111, (byte)0));
-            Claim.Require(bit.test(0b00000111, (byte)1));
-            Claim.Require(bit.test(0b00000111, (byte)2));
+            Claim.require(bit.test(0b00000111, (byte)0));
+            Claim.require(bit.test(0b00000111, (byte)1));
+            Claim.require(bit.test(0b00000111, (byte)2));
         }
 
         public void enable_outline()

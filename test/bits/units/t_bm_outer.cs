@@ -24,7 +24,7 @@ namespace Z0
             var B = BitMatrix.init(v.Content,n1,n32);
             var C = BitMatrix.mul(A,B).AsSquare();
 
-            Claim.Require(C == z);
+            Claim.require(C == z);
         }
     }
 }

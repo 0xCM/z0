@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;

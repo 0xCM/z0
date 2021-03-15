@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static SFx;
 
-    using static Part;
-
-    [ApiHost(ApiNames.ApiIdentify, true)]
-    public readonly partial struct ApiIdentify
+    public interface IIteratee<T> : IAction<T,T,T>
+        where T : unmanaged
     {
 
     }

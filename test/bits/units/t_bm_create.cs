@@ -56,7 +56,7 @@ namespace Z0
             Cells.store(first(data), ref src);
             var A = BitMatrix.primal(n16, memory.bytes(src));
             var B = BitMatrix.primal(n16, data);
-            Claim.Require(BitMatrix.same(A,B));
+            Claim.require(BitMatrix.same(A,B));
         }
 
         public void bm_load_8x8x8()
@@ -80,7 +80,7 @@ namespace Z0
             var fill = BitBlocks.alloc(n9, pattern);
             var matrix = BitMatrix.init(fill, n7);
             for(var i=0; i<matrix.RowCount; i++)
-                Claim.Require(fill == matrix[i]);
+                Claim.require(fill == matrix[i]);
         }
     }
 }

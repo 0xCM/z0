@@ -94,7 +94,7 @@ namespace Z0
             for(var col = 0; col < map.ColCount; col++)
             {
                 var actual = bit.test(src, (byte)map.Position(row,col));
-                Claim.Require(actual == state);
+                Claim.require(actual == state);
                 state = !state;
             }
         }

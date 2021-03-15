@@ -336,7 +336,7 @@ namespace Z0
                 for(var i=0; i< x.Length; i++)
                     Claim.eq(x[i], z[i]);
 
-                Claim.Require(x.Equals(z));
+                Claim.require(x.Equals(z));
                 Claim.eq(x,z);
             }
         }

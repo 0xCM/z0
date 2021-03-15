@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Mkl.Test
 {
-    using System;
-    
     public class tvml_abs : UnitTest<tvml_abs>
     {
-
         public void vAbsF32()
         {
             var src = Random.VectorBlock<float>(Pow2.T08);
@@ -16,7 +13,7 @@ namespace Z0.Mkl.Test
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
             fspan.abs(src,dst2.Unblocked);
-            Claim.Require(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
 
         public void vAbsF64()
@@ -26,7 +23,7 @@ namespace Z0.Mkl.Test
             mkl.abs(src, ref dst1);
             var dst2 = src.Replicate();
             fspan.abs(src,dst2.Unblocked);
-            Claim.Require(dst1 == dst2);
+            Claim.require(dst1 == dst2);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Z0
         {
             var src = Numeric.ones<T>();
             for(var i=0; i<width<T>(); i++)
-                Claim.Require(gbits.testbit(src,i));
+                Claim.require(gbits.testbit(src,i));
         }
     }
 }

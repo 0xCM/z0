@@ -5,12 +5,11 @@
 namespace Z0
 {
     using static AppErrorMsg;
+    using static ClaimValidator;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    using static ClaimValidator;
 
     public readonly struct CheckInvariant : ICheckInvariant
     {

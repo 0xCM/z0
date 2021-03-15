@@ -311,7 +311,7 @@ namespace Z0
             var symbol = default(Symbol<Perm4L>);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.Require(VPerm.symbol(perm, i, out symbol));
+                Claim.require(VPerm.symbol(perm, i, out symbol));
                 Claim.eq(expect[i], symbol.Value);
             }
         }
