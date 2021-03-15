@@ -293,6 +293,21 @@ namespace Z0.Asm
 
         }
 
+        void ShowSymbols()
+        {
+            var components = Wf.Api.PartComponents.Storage;
+            var sources = components.Enums().Tagged<SymbolSourceAttribute>();
+            using var log = OpenShowLog("symbols", FS.Extensions.Csv);
+            foreach(var source in sources)
+            {
+                var symbols = SymbolStores.table(source);
+                foreach(var token in symbols.Tokens)
+                {
+                    Show(token.Format(), log);
+                }
+            }
+        }
+
         /// <summary>
         /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
         /// </summary>
@@ -910,11 +925,16 @@ namespace Z0.Asm
             Wf.Status($"{patterns.Length}");
         }
 
-        public void Run()
+        void EmitHostStatements()
         {
             var emitter = Wf.HostStatementEmitter();
             emitter.EmitStatements(Wf.AsmDataEmitter());
 
+        }
+
+        public void Run()
+        {
+            ShowSymbols();
         }
 
         public static void Main(params string[] args)

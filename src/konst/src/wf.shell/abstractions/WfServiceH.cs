@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Part;
 
@@ -65,6 +66,15 @@ namespace Z0
         {
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
+        }
+
+        protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
+            => Db.ShowLog(name, ext: ext ??FS.Extensions.Csv).Writer();
+
+        protected void Show<T>(T data, StreamWriter dst)
+        {
+            dst.WriteLine(string.Format("{0}",data));
+            Wf.Row(data);
         }
 
         protected virtual void OnInit()

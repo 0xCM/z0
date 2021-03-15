@@ -53,6 +53,11 @@ namespace Z0
         /// </summary>
         public string Symbol;
 
+        /// <summary>
+        /// The meaning of the literal, if available; otherwise empty
+        /// </summary>
+        public TextBlock Description;
+
         [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral<E> src)
             => UniqueName.CompareTo(src.UniqueName);

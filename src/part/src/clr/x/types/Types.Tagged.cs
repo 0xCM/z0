@@ -6,8 +6,6 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
 
     partial class ClrQuery
     {
@@ -19,5 +17,20 @@ namespace Z0
         public static Type[] Tagged<A>(this Type[] src)
             where A : Attribute
                 => src.Where(t => t.Tagged<A>());
+
+        public static Index<Paired<Type,A>> Tags<A>(this Type[] src)
+            where A : Attribute
+        {
+            var dst = root.list<Paired<Type,A>>();
+            foreach(var t in src)
+            {
+                var tag = t.Tag<A>();
+                if(tag)
+                {
+                    dst.Add((t,tag.Value));
+                }
+            }
+            return dst.ToArray();
+        }
     }
 }

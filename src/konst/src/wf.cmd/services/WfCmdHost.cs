@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
 
     using static Part;
     using static memory;
@@ -42,15 +41,6 @@ namespace Z0
                 CommandsRegistered = true;
                 Wf.Babble(string.Format("Registered <{0}> commands from <{1}>", Index.Count, typeof(H).Name));
             }
-        }
-
-        protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
-            => Db.ShowLog(name, ext: ext ??FS.Extensions.Csv).Writer();
-
-        protected void Show<T>(T data, StreamWriter dst)
-        {
-            dst.WriteLine(string.Format("{0}",data));
-            Wf.Row(data);
         }
 
         protected virtual void RegisterCommands(WfCmdIndex index)

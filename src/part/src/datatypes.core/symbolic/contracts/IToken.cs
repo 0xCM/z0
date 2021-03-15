@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface IToken : ITextual, INullity
     {
+        Type TokenType {get;}
         uint Index {get;}
 
         Identifier Identifier {get;}
@@ -17,9 +20,6 @@ namespace Z0
 
         SymbolName SymbolName
             => new SymbolName(this);
-
-        string ITextual.Format()
-            => string.Format("{0,-8} | {1,-12} | {2}", Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol));
     }
 
     [Free]
@@ -27,6 +27,9 @@ namespace Z0
         where K : unmanaged
     {
         K Kind {get;}
+
+        Type IToken.TokenType
+            => typeof(K);
 
         SymbolName IToken.SymbolName
             => new SymbolName(this);

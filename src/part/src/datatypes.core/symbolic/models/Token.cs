@@ -12,14 +12,16 @@ namespace Z0
     /// <summary>
     /// Defines a kinded token
     /// </summary>
-    public readonly struct Token<K> : IToken<K>
-        where K : unmanaged
+    public readonly struct Token : IToken
     {
-        public SymbolicLiteral<K> Literal {get;}
+        public SymbolicLiteral Literal {get;}
+
+        public Type TokenType {get;}
 
         [MethodImpl(Inline)]
-        public Token(SymbolicLiteral<K> src)
+        public Token(Type type, SymbolicLiteral src)
         {
+            TokenType = type;
             Literal = src;
         }
 
@@ -47,28 +49,28 @@ namespace Z0
             get => Literal.UniqueName;
         }
 
-        public SymbolName<K> SymbolName
+        public SymbolName SymbolName
         {
             [MethodImpl(Inline)]
-            get => new SymbolName<K>(this);
+            get => new SymbolName(this);
         }
 
-        public Type TokenType
+        public ulong Value
         {
             [MethodImpl(Inline)]
-            get => typeof(K);
-        }
-
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => Literal.DirectValue;
+            get => Literal.EncodedValue;
         }
 
         public TextBlock SymbolText
         {
             [MethodImpl(Inline)]
             get => Literal.Symbol;
+        }
+
+        public TextBlock Description
+        {
+            [MethodImpl(Inline)]
+            get => Literal.Description;
         }
 
         public bool IsEmpty
@@ -83,12 +85,21 @@ namespace Z0
             get => Index != 0;
         }
 
+        const string FormatPattern = "{0,-24} | {1,-8} | {2,-12} | {3}";
+
+        public static string HeaderFormat
+            => string.Format(FormatPattern, nameof(LiteralType), nameof(Index), nameof(Identifier), nameof(SymbolText));
+
         public string Format()
-            => string.Format("{0,-24} | {1,-8} | {2,-12} | {3}", typeof(K).Name, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol));
+            => Description.IsEmpty
+            ? string.Format("{0,-24} | {1,-8} | {2,-12} | {3}",
+                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol))
+            : string.Format("{0,-24} | {1,-8} | {2,-12} | {3} | {4}",
+                Literal.Type, Index, text.ifempty(Identifier, RP.EmptySymbol), text.ifempty(SymbolText, RP.EmptySymbol), Description);
 
         public override string ToString()
             => Format();
 
-        public static Token<K> Empty => default;
+        public static Token Empty => default;
     }
 }

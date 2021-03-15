@@ -42,6 +42,8 @@ namespace Z0
                 row.DirectValue = (E)f.GetRawConstantValue();
                 row.UniqueName = SymbolicLiterals.identity(component.SimpleName, src.Name, row.Position, f.Name);
                 row.EncodedValue = ClrPrimitives.encode(kind, row.DirectValue);
+                row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
+
             }
 
             return buffer;
@@ -69,10 +71,7 @@ namespace Z0
             var dst = root.list<SymbolicLiteral>();
             var kTypes = src.Count;
             for(var i=0; i<kTypes; i++)
-            {
-                var type = src[i];
-                dst.AddRange(symbolic(type));
-            }
+                dst.AddRange(symbolic(src[i]));
 
             return dst.Array();
         }
@@ -111,13 +110,15 @@ namespace Z0
             {
                 ref readonly var f = ref skip(fields,i);
                 ref var row = ref seek(dst,i);
+                var tag = f.Tag<SymbolAttribute>();
                 row.Component = component;
                 row.Type = type.Name;
                 row.DataType = kind;
                 row.Position = (ushort)i;
                 row.Name = f.Name;
                 row.EncodedValue = ClrEnums.unbox(kind, f.GetRawConstantValue());
-                row.Symbol = f.Tag<SymbolAttribute>().MapValueOrDefault(a => a.Symbol, f.Name);
+                row.Symbol = tag.MapValueOrDefault(a => a.Symbol, f.Name);
+                row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
             }
         }
     }

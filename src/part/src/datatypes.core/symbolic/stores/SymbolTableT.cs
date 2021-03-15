@@ -10,15 +10,16 @@ namespace Z0
 
     using static Part;
 
-    public class SymbolTable
+    public class SymbolTable<T>
+        where T : unmanaged
     {
-        readonly Index<Token> Data;
+        readonly Index<Token<T>> Data;
 
-        readonly Dictionary<string,Token> Identifiers;
+        readonly Dictionary<string,Token<T>> Identifiers;
 
-        readonly Dictionary<string,Token> Symbols;
+        readonly Dictionary<string,Token<T>> Symbols;
 
-        internal SymbolTable(Index<Token> src, Dictionary<string,Token> identifiers, Dictionary<string,Token> symbols)
+        internal SymbolTable(Index<Token<T>> src, Dictionary<string,Token<T>> identifiers, Dictionary<string,Token<T>> symbols)
         {
             Data = src;
             Identifiers = identifiers;
@@ -58,18 +59,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool TokenFromSymbol(string symbol, out Token dst)
+        public bool TokenFromSymbol(string symbol, out Token<T> dst)
             => Symbols.TryGetValue(symbol, out dst);
 
         [MethodImpl(Inline)]
-        public bool TokenFromIdentifier(string identifier, out Token dst)
+        public bool TokenFromIdentifier(string identifier, out Token<T> dst)
             => Identifiers.TryGetValue(identifier, out dst);
 
         [MethodImpl(Inline)]
-        public ref readonly Token TokenFromIndex(uint index)
+        public ref readonly Token<T> TokenFromIndex(uint index)
             => ref Data[index];
 
-        public Index<Token> Tokens
+        public Index<Token<T>> Tokens
         {
             [MethodImpl(Inline)]
             get => Data;

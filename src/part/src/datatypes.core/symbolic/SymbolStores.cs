@@ -86,5 +86,34 @@ namespace Z0
             }
             return new SymbolTable<E>(src, identifiers, index);
         }
+
+        [Op]
+        public static SymbolTable table(Type src)
+        {
+            var literals = ClrEnums.symbolic(src);
+            var view = literals.View;
+            var count = view.Length;
+            var buffer = alloc<Token>(count);
+            ref var dst = ref first(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst, i) = new Token(src, skip(view, i));
+            return table(buffer);
+        }
+
+        [Op]
+        public static SymbolTable table(Index<Token> src)
+        {
+            var view = src.View;
+            var count = view.Length;
+            var index = root.dict<string,Token>(count);
+            var identifiers = root.dict<string,Token>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var token = ref skip(view, i);
+                index.Add(token.SymbolText, token);
+                identifiers.Add(skip(view,i).Identifier, token);
+            }
+            return new SymbolTable(src, identifiers, index);
+        }
     }
 }
