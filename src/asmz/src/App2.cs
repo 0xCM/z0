@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
+    using System.IO;
 
     using static Part;
     using static memory;
@@ -649,7 +650,48 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitStatementCases();
+            var emitter = Wf.HostStatementEmitter();
+            emitter.EmitStatements(Wf.AsmDataEmitter());
+
+            // var emitter = Wf.AsmDataEmitter();
+            // var statements = emitter.BuildHostStatements().View;
+            // var formatter = Records.formatter<AsmHostStatement>();
+            // var count = statements.Length;
+            // var host = ApiHostUri.Empty;
+            // var khost = 0u;
+            // var writer = default(StreamWriter);
+            // var path = FS.FilePath.Empty;
+            // var flow = default(WfTableFlow<AsmHostStatement>);
+
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var statement = ref skip(statements,i);
+            //     if(i == 0)
+            //     {
+            //         host = statement.HostUri;
+            //         path = Db.Table<AsmHostStatement>(host);
+            //         writer = path.Writer();
+            //         writer.WriteLine(formatter.FormatHeader());
+            //         flow = Wf.EmittingTable<AsmHostStatement>(path);
+            //     }
+
+            //     if(statement.HostUri != host)
+            //     {
+            //         writer.Dispose();
+            //         Wf.EmittedTable<AsmHostStatement>(flow,khost);
+            //         host = statement.HostUri;
+            //         path = Db.Table<AsmHostStatement>(host);
+            //         writer = path.Writer();
+            //         writer.WriteLine(formatter.FormatHeader());
+            //         flow = Wf.EmittingTable<AsmHostStatement>(path);
+
+            //         khost = 0;
+            //     }
+            //     writer.WriteLine(formatter.Format(statement));
+            //     khost++;
+            // }
+            // writer.Dispose();
+            // Wf.EmittedTable(flow,khost);
         }
 
         public static void Main(params string[] args)

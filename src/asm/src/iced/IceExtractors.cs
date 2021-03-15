@@ -33,7 +33,7 @@ namespace Z0.Asm
             => () => access(src);
 
         [Op]
-        public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src, BinaryCode encoded)
+        public static AsmInstructionSpecExprLegacy specifier(Iced.Instruction src)
         {
             var iceOpCode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return new AsmInstructionSpecExprLegacy(AsmOpCodeExprLegacy.cleanse(iceOpCode.ToOpCodeString()), iceOpCode.ToInstructionString());
@@ -62,7 +62,7 @@ namespace Z0.Asm
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                Specifier = specifier(src, encoded),
+                Specifier = specifier(src),
                 ByteLength = src.ByteLength,
                 ConditionCode = Deicer.Thaw(src.ConditionCode),
                 CodeSize = Deicer.Thaw(src.CodeSize),
@@ -242,6 +242,8 @@ namespace Z0.Asm
                 OpCode = src.OpCode,
                 OperandSize = src.OperandSize,
                 OpCount = src.OpCount,
+                OpCodeString = src.ToOpCodeString().Replace("o32 ", EmptyString).Replace("o16 ", EmptyString),
+                InstructionString = src.ToInstructionString(),
                 Op0Kind = Deicer.Thaw(src.Op0Kind),
                 Op1Kind = Deicer.Thaw(src.Op1Kind),
                 Op2Kind = Deicer.Thaw(src.Op2Kind),

@@ -45,6 +45,7 @@ namespace Z0.Asm
         IAsmContext Asm {get;}
 
         AsmFormatConfig FormatConfig;
+
         [MethodImpl(Inline)]
         AsmServices(IWfShell wf, IAsmContext asm)
         {
@@ -56,6 +57,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public IAsmRoutineFormatter Formatter(in AsmFormatConfig config)
             => new AsmRoutineFormatter(config);
+
+        public IAsmDecoder Decoder()
+            => Wf.AsmDecoder(FormatConfig);
 
         public void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
         {

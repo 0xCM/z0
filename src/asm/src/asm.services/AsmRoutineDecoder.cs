@@ -25,17 +25,32 @@ namespace Z0.Asm
             => AsmFormat = format;
 
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
-            => from i in Decode(src.Parsed)
-                let block = apiblock(src.CodeBlock, i.Storage, src.TermCode)
+            => from i in Decode(src.OpUri, src.Parsed, src.BaseAddress)
+                let block = apiblock(src.CodeBlock, i.InstructionStorage, src.TermCode)
                 select routine(src.OpUri, src.Method.Artifact().DisplaySig, block);
 
         public Option<IceInstructionList> Decode(CodeBlock src)
-            => Decode(src.Code, src.BaseAddress).TryMap(x => icelist(x, src));
+            => Decode(OpUri.Empty, src.Code, src.BaseAddress).TryMap(x => icelist(x, src));
 
         public Option<AsmInstructionBlock> Decode(ApiCodeBlock src)
-            => Decode(src.Encoded, src.BaseAddress);
+            => Decode(src.OpUri, src.Encoded, src.BaseAddress);
 
-        public Option<IceInstructionList> Decode(CodeBlock src, Action<Asm.IceInstruction> f)
+        public bool Decode(in ApiCodeBlock src, out AsmInstructionBlock dst)
+        {
+            var result = Decode(src);
+            if(result)
+            {
+                dst = result.Value;
+                return true;
+            }
+            else
+            {
+                dst = AsmInstructionBlock.Empty;
+                return false;
+            }
+        }
+
+        public Option<IceInstructionList> Decode(OpUri uri, CodeBlock src, Action<Asm.IceInstruction> f)
         {
             try
             {
@@ -69,7 +84,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<AsmInstructionBlock> Decode(BinaryCode code, MemoryAddress @base)
+        public Option<AsmInstructionBlock> Decode(OpUri uri, BinaryCode code, MemoryAddress @base)
         {
             try
             {
@@ -113,7 +128,7 @@ namespace Z0.Asm
         }
 
         public Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f)
-            => Decode(new CodeBlock(src.BaseAddress, src.Data), f);
+            => Decode(src.Uri, new CodeBlock(src.BaseAddress, src.Data), f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
         {

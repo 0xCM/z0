@@ -29,6 +29,10 @@ namespace Z0
 
         public static MsgPattern<Count> CreatedAsmRowsFromBlocks => "Created {0} AsmRows";
 
+        public static MsgPattern<ApiHostUri> CreatingHostStatements => "Creating {0} host statements";
+
+        public static MsgPattern<ApiHostUri,Count> CreatedHostStatements => "Created {0} {1} host statement rows";
+
         public static MsgPattern<Count,Count,FS.FileUri> ParsedStatements => "Parsed {0} full rows and {1} partial rows from {2}";
     }
 }

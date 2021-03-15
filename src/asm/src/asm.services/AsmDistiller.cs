@@ -57,7 +57,6 @@ namespace Z0.Asm
         protected override void OnContextCreated()
         {
             Sigs = Wf.AsmSigs();
-
         }
 
         public FS.Files Distillations()
@@ -193,19 +192,6 @@ namespace Z0.Asm
             return counter;
         }
 
-        ref Target Fill(in Source src, ref Target dst)
-        {
-            dst.Sequence = src.Sequence;
-            dst.BlockAddress = src.BlockAddress;
-            dst.IP = src.IP;
-            dst.GlobalOffset = src.GlobalOffset;
-            dst.LocalOffset = src.LocalOffset;
-            dst.OpCode = asm.opcode(src.OpCode.Value);
-            Sigs.ParseSigExpr(src.Instruction, out dst.Sig);
-            dst.Expression = asm.statement(src.Statement);
-            dst.Encoded = src.Encoded;
-            return ref dst;
-        }
 
 
         public void DistillStatements(AsmDistillerFlag flags = AsmDistillerFlag.PartitionByLineCount)
@@ -226,7 +212,39 @@ namespace Z0.Asm
 
         void DistillByHost(ApiCodeBlocks src)
         {
+            var hosts = src.Hosts.View;
+            var count = hosts.Length;
+            var formatter = Records.formatter<Target>(32);
+            var rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
 
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var host = ref skip(hosts,i);
+                DistillStatements(src.HostCodeBlocks(host), formatter);
+            }
+        }
+
+        uint DistillStatements(ApiHostCode src, IRecordFormatter<Target> formatter)
+        {
+            var blocks = src.Blocks.View;
+            var count = blocks.Length;
+            var counter = 0u;
+            var dst = Db.Table<Target>(src.Host);
+            var flow = Wf.EmittingTable<Target>(dst);
+            var output = default(Target);
+
+            using var writer = dst.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(blocks,i);
+
+                counter++;
+            }
+
+            Wf.EmittedTable(flow, counter);
+
+            return counter;
         }
 
         void DistillByLineCount(ApiCodeBlocks src)
@@ -250,6 +268,20 @@ namespace Z0.Asm
             }
 
             Wf.Ran(flow,total);
+        }
+
+        ref Target Fill(in Source src, ref Target dst)
+        {
+            dst.Sequence = src.Sequence;
+            dst.BlockAddress = src.BlockAddress;
+            dst.IP = src.IP;
+            dst.GlobalOffset = src.GlobalOffset;
+            dst.LocalOffset = src.LocalOffset;
+            dst.OpCode = asm.opcode(src.OpCode.Value);
+            Sigs.ParseSigExpr(src.Instruction, out dst.Sig);
+            dst.Expression = asm.statement(src.Statement);
+            dst.Encoded = src.Encoded;
+            return ref dst;
         }
     }
 }

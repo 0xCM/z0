@@ -80,6 +80,9 @@ namespace Z0
         public static IAsmDecoder AsmDecoder(this IWfShell wf, in AsmFormatConfig config)
             => new AsmRoutineDecoder(config);
 
+        public static IAsmDecoder AsmDecoder(this IWfShell wf)
+            => new AsmRoutineDecoder(AsmFormatConfig.DefaultStreamFormat);
+
         public static IApiIndexDecoder ApiIndexDecoder(this IWfShell wf)
             => Services.ApiIndexDecoder.create(wf);
 
@@ -94,5 +97,9 @@ namespace Z0
 
         public static AsmAddressMatcher AddressMatcher(this IWfShell wf)
             => AsmAddressMatcher.create(wf);
+
+        public static HostStatementEmitter HostStatementEmitter(this IWfShell wf)
+            => Asm.HostStatementEmitter.create(wf);
+
     }
 }

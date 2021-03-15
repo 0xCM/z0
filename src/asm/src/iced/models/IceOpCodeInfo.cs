@@ -182,5 +182,12 @@ namespace Z0.Asm
         //     (Legacy encoding) Gets the required operand size (16,32,64) or 0 if no operand
         //     size prefix (66) or REX.W prefix is needed
         public int OperandSize {get; set;}
+
+        public string OpCodeString {get; set;}
+
+        public string InstructionString {get; set;}
+
+        public override string ToString()
+            => OpCodeString;
     }
 }

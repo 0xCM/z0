@@ -18,71 +18,86 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmInstructionBlock : IEnumerable<IceInstruction>, IEquatable<AsmInstructionBlock>
     {
-        readonly Index<IceInstruction> Instructions;
+        readonly Index<IceInstruction> _Instructions;
 
-        public BinaryCode Data {get;}
+        public CodeBlock Code {get;}
 
         [MethodImpl(Inline)]
-        internal AsmInstructionBlock(IceInstruction[] src, BinaryCode data)
+        internal AsmInstructionBlock(IceInstruction[] src, BinaryCode code)
         {
-            Instructions = src;
-            Data = data;
+            _Instructions = src;
+            Code = new CodeBlock(src[0].IP, code);
+        }
+
+        public ReadOnlySpan<IceInstruction> Instructions
+        {
+            [MethodImpl(Inline)]
+            get => _Instructions.View;
+        }
+
+        public IceInstruction[] InstructionStorage
+            => _Instructions.Storage;
+
+        public MemoryAddress BaseAddress
+        {
+            [MethodImpl(Inline)]
+            get => Code.BaseAddress;
         }
 
         public ref readonly IceInstruction this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Instructions[index];
+            get => ref _Instructions[index];
         }
 
         public ref readonly IceInstruction this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Instructions[index];
+            get => ref _Instructions[index];
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Instructions.Length;
+            get => _Instructions.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Instructions.Length;
+            get => (uint)_Instructions.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Instructions.IsEmpty;
+            get => _Instructions.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Instructions.IsNonEmpty;
+            get => _Instructions.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
         public bool Equals(AsmInstructionBlock src)
-            => Instructions.Equals(src.Instructions);
+            => _Instructions.Equals(src._Instructions);
 
         public string Format()
-            => Instructions.Format();
+            => _Instructions.Format();
 
         public override string ToString()
             => Format();
 
         IEnumerator<IceInstruction> IEnumerable<IceInstruction>.GetEnumerator()
-            => Instructions.AsEnumerable().GetEnumerator();
+            => _Instructions.AsEnumerable().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
-            => Instructions.AsEnumerable().GetEnumerator();
+            => _Instructions.AsEnumerable().GetEnumerator();
 
         public static implicit operator IceInstruction[](AsmInstructionBlock src)
-            => src.Instructions;
+            => src._Instructions;
 
         public static AsmInstructionBlock Empty
             => new AsmInstructionBlock(array<IceInstruction>(), BinaryCode.Empty);

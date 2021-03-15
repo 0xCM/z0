@@ -35,8 +35,10 @@ namespace Z0.Asm
 
         Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f);
 
-        Option<IceInstructionList> Decode(CodeBlock src, Action<IceInstruction> f);
+        Option<IceInstructionList> Decode(OpUri uri, CodeBlock src, Action<IceInstruction> f);
 
-        Option<AsmInstructionBlock> Decode(BinaryCode code, MemoryAddress @base);
+        Option<AsmInstructionBlock> Decode(OpUri uri, BinaryCode code, MemoryAddress @base);
+
+        bool Decode(in ApiCodeBlock src, out AsmInstructionBlock dst);
     }
 }
