@@ -17,8 +17,8 @@ namespace Z0
             var sfk = SequenceFormatKind.List;
             var sep = Chars.Comma;
             var pad = 2;
-            var sym0 = BitFields.symbols(p0).ToString();
-            var sym1 = BitFields.symbols(p1).ToString();
+            var sym0 = PermSymbolic.symbols(p0).ToString();
+            var sym1 = PermSymbolic.symbols(p1).ToString();
             var description = $"{src.Format()} |> {sym0}{sym1} = {gcpu.vperm2x128(src, p0, p1).Format()}";
             return description;
         }
@@ -43,6 +43,7 @@ namespace Z0
         /// Reifies a permutation of length 8 from its canonical scalar specification
         /// </summary>
         /// <param name="spec">The representative</param>
+        [Op]
         public static NatPerm<N8> natural(Perm8L spec)
         {
             uint data = (uint)spec;

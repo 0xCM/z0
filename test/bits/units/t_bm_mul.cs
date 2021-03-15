@@ -78,7 +78,7 @@ namespace Z0
             return dst;
         }
 
-        public void bm_mul_8x8x8()
+        void bm_mul_8x8x8()
         {
             var n = n8;
             for(var i=0; i< RepCount; i++)

@@ -12,7 +12,7 @@ namespace Z0
 
     public class t_bm_xor : t_bitmatrix<t_bm_xor>
     {
-        public void bm_xor_g8x8x8()
+        void bm_xor_g8x8x8()
             => bm_xor_check<byte>();
 
         public void bm_xor_g16x16x16()
@@ -50,9 +50,9 @@ namespace Z0
            return dst;
         }
 
-        Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
+        Span<T> xor<T>(Span<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
-                => xor(lhs,rhs, lhs);
+                => xor(a,b, a);
 
         protected void bm_xor_check<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat

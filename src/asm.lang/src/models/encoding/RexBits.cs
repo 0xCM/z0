@@ -17,7 +17,7 @@ namespace Z0.Asm
     /// REX = [ 0100 | W:4 | R:3 | X:2 | B:1 ]
     /// </summary>
     [ApiHost]
-    public struct RexBits : INumericBits<byte>
+    public struct RexBits //: INumericBits<byte>
     {
         [MethodImpl(Inline), Op]
         public static bit test(byte src)

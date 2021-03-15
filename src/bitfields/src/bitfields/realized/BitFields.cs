@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Part;
-    using static memory;
+    using static Rules;
 
-    [ApiHost]
-    public readonly partial struct BitParts
+    [ApiHost("api")]
+    public readonly partial struct BitFields
     {
-
-    }
+        const NumericKind Closure = UnsignedInts;
+   }
 }

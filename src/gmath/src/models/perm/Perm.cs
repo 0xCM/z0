@@ -8,7 +8,9 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
+    using static BitMasks.Literals;
     using static Part;
     using static memory;
 
@@ -19,6 +21,30 @@ namespace Z0
     public readonly struct Perm
     {
         const NumericKind Closure = UnsignedInts;
+
+        /// <summary>
+        /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm16 perm16(W128 w, Perm<byte> spec)
+            => new Perm16(gcpu.vload(w128, spec.Terms));
+
+        /// <summary>
+        /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm32 perm32(W256 w, Perm<byte> src)
+            => new Perm32(gcpu.vload(w, src.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm16 perm16(Vector128<byte> data)
+            => new Perm16(cpu.vand(data, cpu.vbroadcast(w128, Msb8x8x3)));
+
+        [MethodImpl(Inline), Op]
+        public static Perm32 perm32(Vector256<byte> data)
+            => new Perm32(cpu.vand(data, cpu.vbroadcast(w256, Msb8x8x3)));
 
         /// <summary>
         /// Defines the permutation (0 -> terms[0], 1 -> terms[1], ..., n - 1 -> terms[n-1])

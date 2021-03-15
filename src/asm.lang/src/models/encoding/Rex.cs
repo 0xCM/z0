@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         public Rex()
         {
-            FieldSpec = BitFields.specify<I,byte,W>();
+            FieldSpec = BitFieldSpecs.define<I,byte,W>();
         }
 
         [MethodImpl(Inline), Op]

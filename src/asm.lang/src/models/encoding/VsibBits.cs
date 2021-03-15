@@ -18,7 +18,7 @@ namespace Z0.Asm
     /// <remarks>
     /// Documentation taken from vol 4 of ADM reference manuals, p. 6
     /// </remarks>
-    public struct VsibBits : INumericBits<byte>
+    public struct VsibBits //: INumericBits<byte>
     {
         byte Data;
 

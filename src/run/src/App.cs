@@ -17,37 +17,8 @@ namespace Z0
             if(count != 0)
                 term.inform(string.Format("Command-line: {0}", args.Delimit()));
 
-            if(count >=2 && args[0] == "--control")
-            {
-                var paths = DbPaths.create();
-                var _args = slice(span(args),1).ToArray();
-
-                for(var i=1; i<count; i++)
-                {
-                    var name = FS.file(args[i]);
-                    term.inform(name);
-
-                    if(!name.HasExtension)
-                        name = name.WithExtension(FS.Extensions.Cmd);
-
-                    var script = paths.ControlScript(name);
-                    if(script.Exists)
-                    {
-                        var runner = ScriptRunner.create();
-                        var outcome = runner.RunControlScript(name);
-                        if(outcome)
-                        {
-                            var processor = Tools.processor(paths, script);
-                            term.inform("Response");
-                            root.iter(outcome.Data, x => processor.Process(x));
-                        }
-                    }
-                    else
-                    {
-                        term.error($"The script {script.ToUri()} does not exist");
-                    }
-                }
-            }
+            if(ControlCommandRunner.specifies(args))
+                ControlCommandRunner.dispatch(args);
             else
             {
                 try
@@ -77,7 +48,5 @@ namespace Z0
         }
 
         readonly IWfShell Wf;
-
-
     }
 }

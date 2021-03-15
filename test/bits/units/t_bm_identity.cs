@@ -6,7 +6,7 @@ namespace Z0
 {
     public class t_bm_identity : t_bitmatrix<t_bm_identity>
     {
-        public void bm_identity_n8x8u_check()
+        void bm_identity_n8x8u_check()
             => bm_identity_check<N8,byte>();
 
         public void bm_identity_n8x16u_check()

@@ -4,17 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using static Part;
-    using static memory;
-
-    [ApiHost]
-    public readonly partial struct BitParts
+    public interface IBitFieldPart
     {
+        Identifier Name {get;}
+    }
 
+    public interface IBitFieldPart<T> : IBitFieldPart
+        where T : unmanaged
+    {
+        T FirstIndex {get;}
+
+        T LastIndex {get;}
     }
 }

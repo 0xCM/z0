@@ -25,11 +25,11 @@ namespace Z0
 
         public void bitfield_a()
         {
-            var spec = BitFields.specify(
-                BitFields.segment(BF_A.F08_0, 0, 1),
-                BitFields.segment(BF_A.F08_1, 2, 3),
-                BitFields.segment(BF_A.F08_2, 4, 5),
-                BitFields.segment(BF_A.F08_3, 6, 7)
+            var spec = BitFieldSpecs.define(
+                BitFieldSpecs.part(BF_A.F08_0, 0, 1),
+                BitFieldSpecs.part(BF_A.F08_1, 2, 3),
+                BitFieldSpecs.part(BF_A.F08_2, 4, 5),
+                BitFieldSpecs.part(BF_A.F08_3, 6, 7)
                 );
 
             var segments = spec.Segments;
@@ -37,15 +37,15 @@ namespace Z0
             writer.WriteLine(spec);
 
             Claim.eq((byte)4, spec.FieldCount);
-            Claim.eq((byte)0, spec[0].StartPos);
-            Claim.eq((byte)2, spec[1].StartPos);
-            Claim.eq((byte)4, spec[2].StartPos);
-            Claim.eq((byte)6, spec[3].StartPos);
+            Claim.eq((byte)0, spec[0].FirstIndex);
+            Claim.eq((byte)2, spec[1].FirstIndex);
+            Claim.eq((byte)4, spec[2].FirstIndex);
+            Claim.eq((byte)6, spec[3].FirstIndex);
 
-            Claim.eq((byte)1, spec[0].EndPos);
-            Claim.eq((byte)3, spec[1].EndPos);
-            Claim.eq((byte)5, spec[2].EndPos);
-            Claim.eq((byte)7, spec[3].EndPos);
+            Claim.eq((byte)1, spec[0].LastIndex);
+            Claim.eq((byte)3, spec[1].LastIndex);
+            Claim.eq((byte)5, spec[2].LastIndex);
+            Claim.eq((byte)7, spec[3].LastIndex);
 
             Claim.eq((byte)2, spec[0].Width);
             Claim.eq((byte)2, spec[1].Width);
@@ -70,10 +70,10 @@ namespace Z0
                 Claim.eq(Bits.extract(input, 6, 2), seg3);
 
                 var output =  gmath.or(
-                    gmath.sll(seg0, (byte)spec[0].StartPos),
-                    gmath.sll(seg1, (byte)spec[1].StartPos),
-                    gmath.sll(seg2, (byte)spec[2].StartPos),
-                    gmath.sll(seg3, (byte)spec[3].StartPos));
+                    gmath.sll(seg0, (byte)spec[0].FirstIndex),
+                    gmath.sll(seg1, (byte)spec[1].FirstIndex),
+                    gmath.sll(seg2, (byte)spec[2].FirstIndex),
+                    gmath.sll(seg3, (byte)spec[3].FirstIndex));
                 Claim.eq(input, output);
             }
         }
@@ -91,11 +91,11 @@ namespace Z0
 
         public void bitfield_b()
         {
-            var spec = BitFields.specify(
-                BitFields.segment(BFB_I.BFB_0, 0, 3),
-                BitFields.segment(BFB_I.BFB_1, 4, 7),
-                BitFields.segment(BFB_I.BFB_2, 8, 9),
-                BitFields.segment(BFB_I.BFB_3, 10, 15)
+            var spec = BitFieldSpecs.define(
+                BitFieldSpecs.part(BFB_I.BFB_0, 0, 3),
+                BitFieldSpecs.part(BFB_I.BFB_1, 4, 7),
+                BitFieldSpecs.part(BFB_I.BFB_2, 8, 9),
+                BitFieldSpecs.part(BFB_I.BFB_3, 10, 15)
                 );
             using var writer = CaseWriter(LogExt);
             writer.WriteLine(spec);
@@ -115,10 +115,10 @@ namespace Z0
                 BitFields.deposit(bf.Spec, input, dst);
 
                 var output =  gmath.or(
-                    gmath.sll(dst[0], (byte)spec[0].StartPos),
-                    gmath.sll(dst[1], (byte)spec[1].StartPos),
-                    gmath.sll(dst[2], (byte)spec[2].StartPos),
-                    gmath.sll(dst[3], (byte)spec[3].StartPos)
+                    gmath.sll(dst[0], (byte)spec[0].FirstIndex),
+                    gmath.sll(dst[1], (byte)spec[1].FirstIndex),
+                    gmath.sll(dst[2], (byte)spec[2].FirstIndex),
+                    gmath.sll(dst[3], (byte)spec[3].FirstIndex)
                 );
 
                 Claim.eq(input,output);
@@ -149,7 +149,7 @@ namespace Z0
 
         public void bitfield_c()
         {
-            var spec = BitFields.specify<BFC_I,BFC_W>();
+            var spec = BitFieldSpecs.define<BFC_I,BFC_W>();
             var bf = BitFields.create<byte>(spec);
             var dst = alloc<byte>(spec.FieldCount);
             using var writer = CaseWriter(LogExt);
@@ -167,10 +167,10 @@ namespace Z0
                 BitFields.deposit(bf.Spec, input, dst);
 
                 var result1 =  gmath.or(
-                    gmath.sll(dst[0], (byte)spec[0].StartPos),
-                    gmath.sll(dst[1], (byte)spec[1].StartPos),
-                    gmath.sll(dst[2], (byte)spec[2].StartPos),
-                    gmath.sll(dst[3], (byte)spec[3].StartPos)
+                    gmath.sll(dst[0], (byte)spec[0].FirstIndex),
+                    gmath.sll(dst[1], (byte)spec[1].FirstIndex),
+                    gmath.sll(dst[2], (byte)spec[2].FirstIndex),
+                    gmath.sll(dst[3], (byte)spec[3].FirstIndex)
                     );
 
                 var result2 = gmath.or(
@@ -239,11 +239,11 @@ namespace Z0
 
         public void bitfield_d()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldSpecs.define<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
             var dst = span(alloc<ulong>(spec.FieldCount));
             var tmp = span(alloc<ulong>(spec.FieldCount));
-            var positions = spec.Segments.Map(s => (byte)s.StartPos);
+            var positions = spec.Segments.Map(s => (byte)s.FirstIndex);
             using var writer = CaseWriter(FS.Extensions.Log);
             writer.WriteLine(spec);
 
@@ -265,7 +265,7 @@ namespace Z0
 
                 var result2 = 0ul;
                 for(byte j=0; j<spec.FieldCount; j++)
-                    result2 = gmath.or(result2, gmath.sll(dst[j], (byte)spec[j].StartPos));
+                    result2 = gmath.or(result2, gmath.sll(dst[j], (byte)spec[j].FirstIndex));
 
                 Claim.eq(result1, result2);
 
@@ -283,7 +283,7 @@ namespace Z0
 
         public void bitfield_IxW()
         {
-            var spec = BitFields.specify<BFD_I,BFD_W>();
+            var spec = BitFieldSpecs.define<BFD_I,BFD_W>();
             var bf = BitFields.create<ulong>(spec);
         }
 
@@ -296,8 +296,8 @@ namespace Z0
 
         public void bitfield_model()
         {
-            var model = BitFields.model("BitField1", new string[]{"Field0","Field1","Field2"}, new byte[]{4,8,3});
-            Claim.eq(model.SegCount,3);
+            var model = BitFieldSpecs.model("BitField1", new string[]{"Field0","Field1","Field2"}, new byte[]{4,8,3});
+            Claim.eq(model.SegmentCount,3);
 
             ref readonly var seg0 = ref model.Segment(0);
             Claim.eq(seg0.Name, "Field0");

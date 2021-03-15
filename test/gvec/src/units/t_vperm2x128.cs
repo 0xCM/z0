@@ -22,8 +22,8 @@ namespace Z0
             var pad = 2;
 
             var dst = gcpu.vperm2x128(src, p0, p1);
-            var sym0 = BitFields.symbols(p0).ToString();
-            var sym1 = BitFields.symbols(p1).ToString();
+            var sym0 = PermSymbolic.symbols(p0).ToString();
+            var sym1 = PermSymbolic.symbols(p1).ToString();
             var description = $"{src.Format()} |> {sym0}{sym1} = {dst.Format()}";
             return description;
         }

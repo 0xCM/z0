@@ -252,9 +252,6 @@ public readonly struct ApiNames
 
     public const string AsciSymbols = symbolic + dot + asci + dot + symbols;
 
-    public const string PermSymbolic = symbolic + dot + permutations;
-
-    public const string PermSymbolicX = symbolic + dot + permutations + dot + extensions;
 
     // ~~ Wf
     // ~~ -----------------------------------------------------------------------------------------
