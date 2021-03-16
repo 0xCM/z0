@@ -30,6 +30,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ushort> span16u(ReadOnlySpan<byte> src)
             => recover<ushort>(src);
-
     }
 }

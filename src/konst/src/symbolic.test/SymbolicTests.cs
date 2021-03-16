@@ -26,7 +26,7 @@ namespace Z0
         public static bit whitespace(char c)
             => space(c) || tab(c) || newline(c) || vtab(c);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static bit contains<T>(ReadOnlySpan<T> src, T match)
             where T : unmanaged, IEquatable<T>
         {
