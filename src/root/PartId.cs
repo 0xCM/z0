@@ -130,6 +130,7 @@ public enum PartId : ulong
 
     Extract = 134,
 
+    BitNumbers = 135,
 
     DVec = 136,
 

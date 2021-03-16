@@ -63,7 +63,16 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => BitFormatter.format(Encoded);
+        {
+            var dst = text.buffer();
+            dst.Append(Rm.Format());
+            dst.Append(Chars.Space);
+            dst.Append(Reg.Format());
+            dst.Append(Chars.Space);
+            dst.Append(Mod.Format());
+            return dst.ToString();
+        }
+
 
         public override string ToString()
             => Format();

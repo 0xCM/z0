@@ -937,7 +937,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ShowDependencies();
+            var m1 = AsmEncoding.modrm(0b10_110_111);
+            var m2 = AsmEncoding.modrm(0b111, 0b110, 0b10);
+            Wf.Status(string.Format("{0} | {1}", m1.ToString(), m2.ToString()));
             //Wf.BitCmd().Run(BitCmdKind.ShowBitSequences);
         }
 

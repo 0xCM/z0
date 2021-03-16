@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Term)" />
+    <ProjectReference Include="$(BitNumbers)" />
   </ItemGroup>
 
 </Project>

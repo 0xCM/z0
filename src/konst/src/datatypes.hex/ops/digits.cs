@@ -33,8 +33,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = code(LowerCase, UI.crop4(d));
-                seek(dst, j--) = code(LowerCase, UI.srl(d, n4, w4));
+                seek(dst, j--) = code(LowerCase, BitNumbers.crop4(d));
+                seek(dst, j--) = code(LowerCase, BitNumbers.srl(d, n4, w4));
             }
         }
     }

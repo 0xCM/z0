@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static byte size(AsmHexCode src)
-            => UI.cell8(src.Data, 15);
+            => BitNumbers.cell8(src.Data, 15);
 
         [MethodImpl(Inline), Op]
         public static int compare(in AsmHexCode a, in AsmHexCode b)
@@ -45,7 +45,7 @@ namespace Z0.Asm
             var dst = bytes(cell);
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i);
-            UI.cell8(cell, 15) = count;
+            BitNumbers.cell8(cell, 15) = count;
             return new AsmHexCode(cell);
         }
 

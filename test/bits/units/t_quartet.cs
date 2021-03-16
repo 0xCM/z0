@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static UI;
+    using static BitNumbers;
 
     public class t_quartet : UnitTest<t_quartet>
     {

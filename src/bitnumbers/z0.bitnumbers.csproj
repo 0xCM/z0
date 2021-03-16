@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(BitMasks)" />
   </ItemGroup>
 
 </Project>
