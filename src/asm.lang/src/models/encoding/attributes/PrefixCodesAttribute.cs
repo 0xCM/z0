@@ -4,18 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmByteKind : uint
+    using System;
+
+    [AttributeUsage(AttributeTargets.Enum)]
+    public class PrefixCodesAttribute : Attribute
     {
-        None = 0,
 
-        RexPrefix,
-
-        OpCode,
-
-        ModRm,
-
-        Sib,
-
-        EscapePrefix,
     }
 }

@@ -705,7 +705,7 @@ namespace Z0.Asm
         void CheckFlags()
         {
             var flags = Clr.@enum<Windows.MinidumpType>();
-            var summary = flags.Summary();
+            var summary = flags.Describe();
             var count = summary.FieldCount;
             var details = summary.LiteralDetails;
 
@@ -935,7 +935,7 @@ namespace Z0.Asm
             ProcessStatements(statements);
         }
 
-        void ProcessStatements(ReadOnlySpan<AsmHostStatement> src)
+        void ProcessStatements(ReadOnlySpan<AsmApiStatement> src)
         {
             var count = src.Length;
             var distinct = root.hashset<AsmThumbprint>();
@@ -949,7 +949,7 @@ namespace Z0.Asm
             var output = distinct.ToArray();
             Wf.Status($"Observed {output.Length} distinct statements");
             Array.Sort(output);
-            var path = Db.TableDir<AsmHostStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
+            var path = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
             using var writer = path.Writer();
             root.iter(output, o => writer.WriteLine(o));
         }
@@ -987,7 +987,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitHostStatements();
+            Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
+            //EmitHostStatements();
             // var m1 = AsmEncoding.modrm(0b10_110_111);
             // var m2 = AsmEncoding.modrm(0b111, 0b110, 0b10);
             // Wf.Status(string.Format("{0} | {1}", m1.ToString(), m2.ToString()));

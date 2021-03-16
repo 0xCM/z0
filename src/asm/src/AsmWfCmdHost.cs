@@ -70,16 +70,6 @@ namespace Z0.Asm
         void DistillAsmStatements()
             => Wf.AsmDistiller().DistillStatements();
 
-        [Action(K.ShowRexBits)]
-        void ShowRexBits()
-        {
-            var bits = Rex.bits();
-            using var log = OpenShowLog("rexbits");
-            var count = bits.Length;
-            for(var i=0; i<count; i++)
-                Show(Rex.FormatRow(skip(bits,i)), log);
-        }
-
         [Action(K.EmitImmSpecializations)]
         void EmitImmSpecializations()
             => Wf.ImmEmitter().Emit();

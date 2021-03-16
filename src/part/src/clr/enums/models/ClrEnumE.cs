@@ -16,8 +16,8 @@ namespace Z0
         public Type Definition => TD;
 
         [MethodImpl(Inline)]
-        public ClrEnumDetails<E> Summary()
-            => new ClrEnumDetails<E>(address(_Details), address(_Literals), address(_Fields), FieldCount);
+        public ClrEnumInfo<E> Describe()
+            => new ClrEnumInfo<E>(address(_Details), address(_Literals), address(_Fields), FieldCount);
 
         public Count FieldCount
         {

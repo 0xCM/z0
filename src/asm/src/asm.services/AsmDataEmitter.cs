@@ -54,13 +54,14 @@ namespace Z0.Asm
 
         public void EmitStatements()
         {
-            Wf.AsmDistiller().DistillStatements(CodeBlocks());
+            HostStatementEmitter.create(Wf).EmitStatements(CodeBlocks());
+            //Wf.AsmDistiller().DistillStatements(CodeBlocks());
         }
 
-        public Index<AsmHostStatement> BuildHostStatements()
+        public Index<AsmApiStatement> BuildHostStatements()
             => BuildHostStatements(CodeBlocks());
 
-        public Index<AsmHostStatement> BuildHostStatements(ApiCodeBlocks src)
+        public Index<AsmApiStatement> BuildHostStatements(ApiCodeBlocks src)
             => Wf.HostStatementEmitter().BuildStatements(src);
 
         public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)

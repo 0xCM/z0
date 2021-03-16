@@ -11,7 +11,7 @@ namespace Z0
 
     using static memory;
 
-    [ApiHost(ApiNames.ApiCatalogs, true)]
+    [ApiHost]
     public readonly struct ApiCatalogs
     {
         [Op]

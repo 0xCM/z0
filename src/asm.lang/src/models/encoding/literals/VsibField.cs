@@ -24,13 +24,4 @@ namespace Z0.Asm
         [Symbol("SS")]
         SS = 6,
     }
-
-    public enum VsibFieldWidth : byte
-    {
-        Base = 3,
-
-        Index = 3,
-
-        SS = 2,
-    }
 }

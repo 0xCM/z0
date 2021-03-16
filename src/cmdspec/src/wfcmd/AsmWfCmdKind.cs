@@ -9,9 +9,6 @@ namespace Z0.Asm
     {
         None = 0,
 
-        [Alias("show-rex-bits")]
-        ShowRexBits,
-
         [Alias("distill-statements")]
         DistillAsmStatements,
 

@@ -29,5 +29,9 @@ namespace Z0.Asm
 
         [Alias("show-reg-codes")]
         ShowRegisterCodes,
+
+        [Alias("show-rex-bits")]
+        ShowRexBits,
+
     }
 }

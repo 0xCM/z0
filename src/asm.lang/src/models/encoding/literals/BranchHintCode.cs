@@ -4,21 +4,25 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+
+    using static Part;
     using static Hex8Seq;
 
     [PrefixCodes]
-    public enum SizeOverrideCode
+    public enum BranchHintCode : byte
     {
         None = 0,
 
         /// <summary>
-        /// Specifies the <see cref='x66'/> operand data size override code
+        /// Branch taken
         /// </summary>
-        Operand = x66,
+        BT = x2e,
+
 
         /// <summary>
-        /// Specifies the <see cref='x67'/> operand address size override code, which allows programs to switch between 16- and 32-bit addressing
+        /// Branch not taken
         /// </summary>
-        Address = x67,
+        BNT = x3e,
     }
 }

@@ -24,11 +24,11 @@ namespace Z0.Asm
             Decoder = Wf.AsmServices().Decoder();
         }
 
-        public Index<AsmHostStatement> BuildStatements(ApiCodeBlocks src)
+        public Index<AsmApiStatement> BuildStatements(ApiCodeBlocks src)
         {
             var hosts = src.Hosts.View;
             var count = hosts.Length;
-            var buffer = root.list<AsmHostStatement>();
+            var buffer = root.list<AsmApiStatement>();
             var counter = 0u;
             for(var i=0u; i<count; i++)
             {
@@ -44,20 +44,38 @@ namespace Z0.Asm
             return records;
         }
 
-        public void EmitStatements(AsmDataEmitter emitter)
-            => EmitStatements((BuildStatements(emitter.CodeBlocks())));
-
-        public void EmitStatements(ReadOnlySpan<AsmHostStatement> src)
+        public void EmitStatements(ApiCodeBlocks src)
         {
+            EmitStatements(BuildStatements(src));
+        }
+
+        // public void EmitStatements(AsmDataEmitter emitter)
+        // {
+        //     EmitStatements((BuildStatements(emitter.CodeBlocks())));
+        // }
+
+        void ClearTarget()
+        {
+            var dir = Db.TableDir<AsmApiStatement>();
+            var flow = Wf.Running(string.Format("Obliterating the directory <{0}>", dir));
+            dir.Delete();
+            Wf.Ran(flow, string.Format("Consigned the directory <{0}> to oblivion", dir));
+        }
+
+        public void EmitStatements(ReadOnlySpan<AsmApiStatement> src, bool clear = true)
+        {
+            if(clear)
+                ClearTarget();
+
             var thumbprints = root.list<AsmThumbprint>();
-            var formatter = Records.formatter<AsmHostStatement>();
+            var formatter = Records.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
             var host = ApiHostUri.Empty;
             var counter = 0u;
             var tableWriter = default(StreamWriter);
             var tablePath = FS.FilePath.Empty;
-            var tableFlow = default(WfTableFlow<AsmHostStatement>);
+            var tableFlow = default(WfTableFlow<AsmApiStatement>);
 
             var asmWriter = default(StreamWriter);
             var asmPath = FS.FilePath.Empty;
@@ -72,10 +90,10 @@ namespace Z0.Asm
                 if(i == 0)
                 {
                     host = uri.Host;
-                    tablePath = Db.Table<AsmHostStatement>(host);
+                    tablePath = Db.Table<AsmApiStatement>(host);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
-                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
+                    tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
 
                     asmPath = tablePath.ChangeExtension(FS.Extensions.Asm);
                     asmWriter = asmPath.Writer();
@@ -85,16 +103,16 @@ namespace Z0.Asm
                 if(uri.Host != host)
                 {
                     tableWriter.Dispose();
-                    Wf.EmittedTable<AsmHostStatement>(tableFlow,counter);
+                    Wf.EmittedTable<AsmApiStatement>(tableFlow,counter);
 
                     asmWriter.Dispose();
                     Wf.EmittedFile(asmFlow, counter);
 
                     host = statement.OpUri.Host;
-                    tablePath = Db.Table<AsmHostStatement>(host);
+                    tablePath = Db.Table<AsmApiStatement>(host);
                     tableWriter = tablePath.Writer();
                     tableWriter.WriteLine(formatter.FormatHeader());
-                    tableFlow = Wf.EmittingTable<AsmHostStatement>(tablePath);
+                    tableFlow = Wf.EmittingTable<AsmApiStatement>(tablePath);
 
                     asmPath = tablePath.ChangeExtension(FS.Extensions.Asm);
                     asmWriter = asmPath.Writer();
@@ -125,10 +143,10 @@ namespace Z0.Asm
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
-        static string FormatAsm(in AsmHostStatement src)
+        static string FormatAsm(in AsmApiStatement src)
             => string.Format("{0,-36} ; {1} {2}", src.Expression, src.Offset, src.Thumbprint());
 
-        uint CreateStatements(in ApiHostCode src, List<AsmHostStatement> dst)
+        uint CreateStatements(in ApiHostCode src, List<AsmApiStatement> dst)
         {
             var blocks = src.Blocks.View;
             var count = blocks.Length;
@@ -142,7 +160,7 @@ namespace Z0.Asm
             return counter;
         }
 
-        uint CreateStatements(in AsmInstructionBlock src, List<AsmHostStatement> dst)
+        uint CreateStatements(in AsmInstructionBlock src, List<AsmApiStatement> dst)
         {
             var instructions = src.Instructions;
             var count = (uint)instructions.Length;
@@ -155,7 +173,7 @@ namespace Z0.Asm
                 if(!opcode.IsValid)
                     break;
 
-                var statement = new AsmHostStatement();
+                var statement = new AsmApiStatement();
                 var size = (ushort)instruction.ByteLength;
                 var specifier = instruction.Specifier;
                 statement.Offset = offset;

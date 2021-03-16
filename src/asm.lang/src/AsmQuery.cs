@@ -37,7 +37,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit IsRexPrefix(byte src)
-            => emath.between(src, R.Rex40, R.RexWRXB);
+            => emath.between(src, R.Rex40, R.Rex4F);
 
         [MethodImpl(Inline), Op]
         public static bit HasEscape(AsmOpCode src)
@@ -69,7 +69,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit HasSizeOverride(AsmOpCode src)
-            => emath.oneof(src.Byte0, SZ.Address, SZ.Operand);
+            => emath.oneof(src.Byte0, SZ.ADSZ, SZ.OPSZ);
 
         static ReadOnlySpan<SG> SegOverrideCodes
             => new SG[]{SG.CS, SG.DS, SG.ES, SG.FS, SG.GS, SG.SS};

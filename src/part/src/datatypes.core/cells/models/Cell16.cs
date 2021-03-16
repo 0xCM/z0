@@ -109,6 +109,14 @@ namespace Z0
             => new Cell64(x.Content);
 
         [MethodImpl(Inline)]
+        public static explicit operator Cell16(Cell32 x)
+            => new Cell16((ushort)x.Content);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell16(Cell64 x)
+            => new Cell16((ushort)x.Content);
+
+        [MethodImpl(Inline)]
         public static implicit operator Cell16(byte x)
             => new Cell16((ushort)x);
 

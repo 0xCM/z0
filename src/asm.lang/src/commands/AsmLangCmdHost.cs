@@ -65,5 +65,15 @@ namespace Z0.Asm
         [Action(K.ShowOperandSymbols)]
         void ShowOperandSymbols()
             => root.use(OpenShowLog("sigops.operands"), log => root.iter(SigSymbols.SigOps.Tokens, token => Show(token, log)));
+
+        [Action(K.ShowRexBits)]
+        void ShowRexBits()
+        {
+            var bits = Rex.bits();
+            using var log = OpenShowLog("rexbits");
+            var count = bits.Length;
+            for(var i=0; i<count; i++)
+                Show(Rex.FormatRow(skip(bits,i)), log);
+        }
     }
 }

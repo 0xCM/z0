@@ -23,7 +23,7 @@ namespace Z0.Asm
         public static AsmOpCode RexW(byte data)
         {
             var dst = create();
-            dst.Byte0 = (byte)REX.RexW;
+            dst.Byte0 = (byte)REX.Rex48;
             dst.Byte1 = data;
             return dst;
         }
@@ -32,7 +32,7 @@ namespace Z0.Asm
         public static AsmOpCode RexW(EscapeCode escape, byte data)
         {
             var dst = new AsmOpCode();
-            dst.Byte0 = (byte)REX.RexW;
+            dst.Byte0 = (byte)REX.Rex48;
             dst.Byte1 = (byte)escape;
             dst.Byte2 = data;
             return dst;

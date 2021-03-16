@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public readonly struct ClrEnumDetails<E>
+    public readonly struct ClrEnumInfo<E>
         where E : unmanaged, Enum
     {
         readonly MemoryAddress DetailAddress;
@@ -24,7 +24,7 @@ namespace Z0
         readonly uint Filler;
 
         [MethodImpl(Inline)]
-        internal ClrEnumDetails(MemoryAddress details, MemoryAddress literals, MemoryAddress fields, uint count)
+        internal ClrEnumInfo(MemoryAddress details, MemoryAddress literals, MemoryAddress fields, uint count)
         {
             DetailAddress = details;
             LiteralAddress = literals;
@@ -50,7 +50,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref memory.@ref<Index<E>>(DetailAddress).First;
         }
-
 
         public ReadOnlySpan<EnumLiteralDetail<E>> LiteralDetails
         {

@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Part;
 
     [Record(TableId)]
-    public struct AsmHostStatement : IRecord<AsmHostStatement>, IComparable<AsmHostStatement>
+    public struct AsmApiStatement : IRecord<AsmApiStatement>, IComparable<AsmApiStatement>
     {
-        public const string TableId = "asm.host-statements";
+        public const string TableId = "asm.statements";
 
         public Address16 Offset;
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
         public OpUri OpUri;
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmHostStatement src)
+        public int CompareTo(AsmApiStatement src)
             => IP.CompareTo(src.IP);
 
         public AsmThumbprint Thumbprint()

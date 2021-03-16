@@ -95,6 +95,18 @@ namespace Z0
             => new Cell64(x.Content);
 
         [MethodImpl(Inline)]
+        public static explicit operator Cell8(Cell16 x)
+            => new Cell8((byte)x.Content);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell8(Cell32 x)
+            => new Cell8((byte)x.Content);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell8(Cell64 x)
+            => new Cell8((byte)x.Content);
+
+        [MethodImpl(Inline)]
         public static explicit operator Cell8(int x)
             => new Cell8((byte)(sbyte)x);
 

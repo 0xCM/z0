@@ -1,4 +1,4 @@
 @echo off
 
-call %ZControl%\.cmd\build-asmz.cmd
+call %ControlScripts%\build-asmz.cmd
 

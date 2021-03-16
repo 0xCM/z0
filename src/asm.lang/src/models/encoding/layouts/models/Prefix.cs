@@ -8,10 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
-    public readonly struct ModRmSpec
+    partial struct LayoutComponents
     {
+        public readonly struct Prefix : IPrefix
+        {
+            public Cell8 Value {get;}
 
+            public Prefix(Cell8 value)
+            {
+                Value = value;
+            }
+
+            public bool IsEmpty
+                => Value == 0;
+        }
     }
 }

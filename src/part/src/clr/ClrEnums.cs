@@ -8,22 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     [ApiHost(ApiNames.ClrEnums, true)]
     public readonly partial struct ClrEnums
     {
         [MethodImpl(Inline)]
-        public static ClrEnumDetails<E> summary<E>()
+        public static ClrEnumInfo<E> describe<E>()
             where E : unmanaged, Enum
-                => default(ClrEnum<E>).Summary();
+                => default(ClrEnum<E>).Describe();
 
         [MethodImpl(Inline), Op]
-        public static ClrEnumDetails<Hex8Seq> summary(Hex8Seq rep)
-            => summary<Hex8Seq>();
-
-        [MethodImpl(Inline), Op]
-        public static ClrEnumDetails<CreditTypes.ContentField> summary(CreditTypes.ContentField rep)
-            => summary<CreditTypes.ContentField>();
+        public static ClrEnumInfo<Hex8Seq> describe(Hex8Seq rep)
+            => describe<Hex8Seq>();
     }
 }
