@@ -28,12 +28,12 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var xPos = gbits.hipos(x);
-                CheckNumeric.lt(xPos, (byte)width<T>());
+                NumericClaims.lt(xPos, (byte)width<T>());
 
                 var xCount = gbits.nlz(x);
                 var y = BitString.scalar(x);
                 var yCount = y.Nlz();
-                CheckNumeric.eq(xCount, yCount);
+                NumericClaims.eq(xCount, yCount);
 
                 var yPos = y.Length - 1 - yCount;
                 Claim.eq(xPos,yPos);

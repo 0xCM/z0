@@ -15,14 +15,14 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct CheckNumeric : ICheckNumeric
+    public readonly struct NumericClaims : ICheckNumeric
     {
-        public static ICheckNumeric Checker => default(CheckNumeric);
+        public static ICheckNumeric Checker => default(NumericClaims);
 
         const NumericKind Closure = UnsignedInts;
 
         public static void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => PrimalChecks.eq((uint)lhs, (uint)rhs, caller, file, line);
+            => PrimalClaims.eq((uint)lhs, (uint)rhs, caller, file, line);
 
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

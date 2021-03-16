@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_gmath<X> : UnitTest<X,CheckNumeric,ICheckNumeric>
+    public abstract class t_gmath<X> : UnitTest<X,NumericClaims,ICheckNumeric>
         where X : t_gmath<X>, new()
     {
 

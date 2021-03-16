@@ -13,7 +13,7 @@ namespace Z0
                 pattern << 0  | pattern << 8  | pattern << 16 | pattern << 24 |
                 pattern << 32 | pattern << 40 | pattern << 48 | pattern << 56;
             var actual = gcpu.broadcast<byte,ulong>((byte)pattern);
-            Claim.eq(expect,actual);
+            PrimalClaims.eq(expect,actual);
         }
 
         public void t_broadcast_case2()
@@ -21,7 +21,7 @@ namespace Z0
             ulong pattern = ushort.MaxValue;
             var expect = pattern << 0 | pattern << 16 | pattern << 32 | pattern << 48;
             var actual = gcpu.broadcast<ushort,ulong>((ushort)pattern);
-            Claim.eq(expect,actual);
+            PrimalClaims.eq(expect,actual);
         }
 
         public void t_broadcast_case3()
@@ -29,7 +29,7 @@ namespace Z0
             ulong pattern = uint.MaxValue;
             var expect = pattern << 0 | pattern << 32;
             var actual = gcpu.broadcast<uint,ulong>((uint)pattern);
-            Claim.eq(expect,actual);
+            PrimalClaims.eq(expect,actual);
         }
 
         public void t_broadcast_case4()
@@ -37,7 +37,7 @@ namespace Z0
             ulong pattern = ulong.MaxValue;
             var expect = byte.MaxValue;
             var actual = gcpu.broadcast<ulong,byte>(pattern);
-            Claim.eq(expect,actual);
+            PrimalClaims.eq(expect,actual);
         }
     }
 }

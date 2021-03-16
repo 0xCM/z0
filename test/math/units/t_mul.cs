@@ -32,8 +32,8 @@ namespace Z0
                 Claim.eq(hi, b);
 
                 Math128.mul(z,MAX, out uint c, out uint d);
-                CheckNumeric.gt(c,0u);
-                CheckNumeric.gt(d,0u);
+                NumericClaims.gt(c,0u);
+                NumericClaims.gt(d,0u);
 
                 var c2 = (uint)(((ulong)z) * ((ulong)(MAX)));
                 Claim.eq(c2, c);

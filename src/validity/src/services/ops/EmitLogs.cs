@@ -19,7 +19,7 @@ namespace Z0
             if(results.Any())
             {
                 var timing = results.Sum(x => x.Duration.TimeSpan.TotalSeconds);
-                var dst = Db.SortedCaseLogPath();
+                var dst = Db.CaseLogSummary();
                 Wf.Status($"Emitting case log to {dst.ToUri()} with execution time of {timing} seconds");
                 EmitTestCaseLog(dst, results);
             }

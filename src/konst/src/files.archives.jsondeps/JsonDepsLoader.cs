@@ -11,10 +11,10 @@ namespace Z0
     using System.Text;
     using System.IO;
 
-    using static Part;
-    using static z;
     using static JsonDepsBuilder;
     using static JsonDepsModel;
+
+
 
     public readonly struct JsonDepsLoader
     {
@@ -33,13 +33,23 @@ namespace Z0
 
         internal static ref RuntimeLibraryInfo extract(RuntimeLibrary src, ref RuntimeLibraryInfo dst)
         {
-            dst.AssemblyGroups = sys.alloc<AssetGroupInfo>(dst.AssemblyGroups.Count);
+            dst.AssemblyGroups = sys.alloc<AssetGroupInfo>(src.RuntimeAssemblyGroups.Count);
             for(var i=0; i<dst.AssemblyGroups.Count; i++)
                 extract(src.RuntimeAssemblyGroups[i], ref dst.AssemblyGroups[i]);
 
-            dst.NativeLibraries = sys.alloc<AssetGroupInfo>(dst.NativeLibraries.Count);
+            dst.NativeLibraries = sys.alloc<AssetGroupInfo>(src.NativeLibraryGroups.Count);
             for(var i=0; i<dst.NativeLibraries.Count; i++)
                 extract(src.NativeLibraryGroups[i], ref dst.NativeLibraries[i]);
+
+            dst.ResourceAssemblies = sys.alloc<JsonDepsModel.ResourceAssembly>(src.ResourceAssemblies.Count);
+            for(var i=0; i<dst.ResourceAssemblies.Count; i++)
+            {
+
+                ref var target = ref dst.ResourceAssemblies[i];
+                target.Path = FS.path(src.ResourceAssemblies[i].Path);
+                target.Locale = src.ResourceAssemblies[i].Locale;
+            }
+
 
             return ref dst;
         }
@@ -62,6 +72,7 @@ namespace Z0
             dst.Path = FS.path(src.Path);
             return ref dst;
         }
+
 
         [Op]
         public static JsonDeps from(JsonText src)

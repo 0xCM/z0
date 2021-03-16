@@ -159,22 +159,19 @@ namespace Z0
             => Claim;
 
         protected ICheckNumeric ClaimNumeric
-            => CheckNumeric.Checker;
+            => NumericClaims.Checker;
 
         protected PartId TestedPart
             => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
 
         protected FS.FilePath StatusLogPath
-            => TestRoot + FS.file(TestedPart.Format() + "test" + "." + "status" + "log");
+            => Db.TestLogSummaryRoot() + FS.file(TestedPart.Format() + "test" + "." + "status" + "log");
 
-        protected FS.FilePath ErroLogPath
-            => TestRoot + FS.file(TestedPart.Format() + "test" + "." + "errors" + "log");
-
-        FS.FolderPath TestRoot
-            => Db.TestLogDir(TestedPart);
+        protected FS.FilePath ErrorLogPath
+            => Db.TestLogSummaryRoot() + FS.file(TestedPart.Format() + "test" + "." + "errors" + "log");
 
         protected FS.FolderPath UnitDataDir
-            => TestRoot + FS.folder(GetType().Name);
+            => Db.TestAppLogRoot<U>() + FS.folder(GetType().Name);
 
         protected static FS.FileExt LogExt => FS.Extensions.Log;
 

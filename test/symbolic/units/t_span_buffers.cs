@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Assert = PrimalChecks;
+    using Assert = PrimalClaims;
 
     [ApiHost]
     public sealed class t_spanbuffers : UnitTest<t_spanbuffers>
     {
         public override bool Enabled => true;
 
-        static new ICheckNumeric Claim = CheckNumeric.Checker;
+        static new ICheckNumeric Claim = NumericClaims.Checker;
 
         public void check_caller()
         {

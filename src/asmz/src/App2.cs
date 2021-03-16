@@ -314,10 +314,11 @@ namespace Z0.Asm
 
         void ShowModRmBits()
         {
-            var parts = new byte[2]{2,5};
-            var codes = ModRm.create(Wf).Table;
-            var count = codes.Length;
+            var log = OpenShowLog("modrm", FS.Extensions.Log);
+            AsmEncoding.table(out Index<ModRmBits> table);
+            root.iter(table, entry => Show(entry.Format(),log));
         }
+
 
         AsmOpCodeLookup OpCodes;
 
@@ -845,6 +846,8 @@ namespace Z0.Asm
             var libs = deps.Libs();
             var options = deps.Options();
             var target = deps.Target();
+            var graph = deps.Graph;
+            Wf.Row(string.Format("Target: {0} {1} {2}", target.Framework, target.Runtime, target.RuntimeSignature));
             root.iter(libs, lib => Wf.Row(lib.Name));
         }
 
@@ -934,7 +937,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            ShowSymbols();
+            ShowDependencies();
+            //Wf.BitCmd().Run(BitCmdKind.ShowBitSequences);
         }
 
         public static void Main(params string[] args)

@@ -7,9 +7,6 @@ namespace Z0
     public abstract class UnitTest<U> : TestContext<U>, IUnitTest
         where U : UnitTest<U>
     {
-        protected CheckProvider Checks()
-            => new CheckProvider();
-
         protected FS.FileExt CsvExt
             => FS.Extensions.Csv;
 

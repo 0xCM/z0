@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
     using static SFx;
-    using static CheckNumeric;
+    using static NumericClaims;
 
     public readonly struct Matches
     {

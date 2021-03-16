@@ -48,21 +48,31 @@ namespace Z0
         public ReadOnlySpan<RuntimeLibraryInfo> RuntimeLibs()
         {
             var count = _RuntimeLibraries.Count;
-            var dst = sys.alloc<RuntimeLibraryInfo>(count);
-            var src = _RuntimeLibraries;
-            for(var i=0; i<count; i++)
-                api.extract(src[i], ref dst[i]);
-            return dst;
+            if(count != 0)
+            {
+                var dst = sys.alloc<RuntimeLibraryInfo>(count);
+                var src = _RuntimeLibraries;
+                for(var i=0; i<count; i++)
+                    api.extract(src[i], ref dst[i]);
+                return dst;
+            }
+            else
+            {
+                return sys.empty<RuntimeLibraryInfo>();
+            }
         }
+
+        public Index<string> Graph
+            => RuntimeGraph.SelectMany(x => x.Fallbacks);
 
         public ReadOnlySpan<LibraryInfo> Libs()
         {
             var count = _CompilationLibraries.Count;
-            var target = span<LibraryInfo>(count);
-            var libs = _CompilationLibraries.View;
-            for(var i=0u; i<count; i++)
-                api.extract(skip(libs, i), ref seek(target, i));
-            return target;
+            var dst = span<LibraryInfo>(count);
+            var src = _CompilationLibraries.View;
+            for(var i=0; i<count; i++)
+                api.extract(src[i], ref dst[i]);
+            return dst;
         }
     }
 }

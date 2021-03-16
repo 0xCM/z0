@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,ICheckNumeric>
+    public sealed class t_span_convert : UnitTest<t_span_convert,NumericClaims,ICheckNumeric>
     {
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged

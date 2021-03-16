@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_mathsvc<X> : UnitTest<X,NumericClaims,ICheckNumeric>
-        where X : t_mathsvc<X>, new()
+    [WfCmdKind]
+    public enum BitCmdKind : byte
     {
+        None = 0,
 
+        ShowBitSequences,
     }
 }

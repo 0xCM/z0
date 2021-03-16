@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static CheckNumeric;
     using static RngCases;
 
     public class t_pcg : t_polyrand<t_pcg>
@@ -50,8 +49,8 @@ namespace Z0
             {
                 ref readonly var point = ref skip(points,i);
                 //contains(domain, point);
-                CheckNumeric.lteq(point, domain.Max);
-                CheckNumeric.gteq(point, domain.Min);
+                NumericClaims.lteq(point, domain.Max);
+                NumericClaims.gteq(point, domain.Min);
             }
         }
     }

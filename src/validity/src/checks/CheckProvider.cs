@@ -8,11 +8,14 @@ namespace Z0
 
     public readonly struct CheckProvider
     {
+        public static CheckProvider create()
+            => new CheckProvider();
+
         public IChecks Checks => new Checks();
 
         public ICheckClose CheckClose => new CheckClose();
 
-        public ICheckNumeric CheckNumeric => new CheckNumeric();
+        public ICheckNumeric CheckNumeric => new NumericClaims();
 
         public ICheckEquatable CheckEquatable => new CheckEquatable();
 

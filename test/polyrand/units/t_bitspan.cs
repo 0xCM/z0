@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using Check = PrimalChecks;
-
     using static BitSpanCases;
 
     public class t_bitspan : t_polyrand<t_bitspan>
@@ -25,13 +23,13 @@ namespace Z0
             {
                 var count = skip(counts,i);
                 var bits = Random.BitSpan(BitSpans.alloc(count));
-                Check.eq(bits.Length, count);
+                PrimalClaims.eq(bits.Length, count);
 
                 var formatted = bits.Format();
-                Check.eq(count, formatted.Length);
+                PrimalClaims.eq(count, formatted.Length);
 
                 var parsed = BitSpans.parse(formatted);
-                Check.require(bits.Equals(parsed));
+                PrimalClaims.require(bits.Equals(parsed));
             }
         }
     }

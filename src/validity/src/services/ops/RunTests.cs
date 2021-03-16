@@ -22,7 +22,7 @@ namespace Z0
             {
                 var clock = counter(true);
                 var flow = Wf.Running(typeof(A).Name + " tests");
-                ErroLogPath.Delete();
+                ErrorLogPath.Delete();
                 StatusLogPath.Delete();
                 RunTests(false, hosts);
                 EmitLogs();

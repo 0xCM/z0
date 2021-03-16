@@ -7,9 +7,6 @@ namespace Z0
     [WfCmdKind]
     public enum ApiCmdKind : byte
     {
-        None = 0,
 
-        [Alias("check-bitmasks")]
-        CheckBitMasks,
     }
 }

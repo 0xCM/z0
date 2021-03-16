@@ -6,7 +6,7 @@ namespace Z0
 {
     using static AppErrorMsg;
 
-    using api = PrimalChecks;
+    using api = PrimalClaims;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;

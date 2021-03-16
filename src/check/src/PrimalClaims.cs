@@ -16,7 +16,7 @@ namespace Z0
     using api = ClaimValidator;
 
     [ApiHost]
-    public readonly struct PrimalChecks
+    public readonly struct PrimalClaims
     {
         [MethodImpl(Inline), Op]
         public static bool require(bool src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

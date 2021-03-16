@@ -69,5 +69,6 @@ namespace Z0
             => (int)Width;
 
         public override bool Equals(object obj)
-            => obj is W;    }
+            => obj is W;
+    }
 }

@@ -4,7 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static DbNames;
+
+    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
     partial interface IEnvPaths
     {
@@ -35,13 +39,34 @@ namespace Z0
         FS.FolderPath TestLogDir(PartId id)
             => TestLogRoot() + FS.folder(id.Format());
 
-        FS.FolderPath TestLogDir(FS.FolderName folder)
-            => TestLogRoot() + folder;
+        FS.FolderPath TestAppLogRoot(string app)
+            => TestLogRoot() + FS.folder(app.Replace("z0.", string.Empty));
 
-        FS.FolderPath SortedCaseLogRoot()
+        FS.FolderPath TestAppLogRoot(Type t)
+            => TestLogDir(t.Assembly.Id());
+
+        FS.FolderPath TestAppLogRoot<T>()
+            => TestAppLogRoot(typeof(T));
+
+        FS.FolderPath TestAppLogRoot()
+            => TestAppLogRoot(AppName);
+
+        FS.FolderPath UnitLogRoot<T>()
+            => TestLogDir(typeof(T).Assembly.Id()) + FS.folder(typeof(T).Name);
+
+        FS.FolderPath UnitLogRoot(string app, string unit)
+            => TestAppLogRoot(app) + FS.folder(unit);
+
+        FS.FilePath CaseLogPath(string app, string unit, FS.FileExt ext, [Caller] string name = null)
+            => UnitLogRoot(app,unit) + FS.file(name, ext);
+
+        FS.FilePath CaseLogPath<T>(FS.FileExt ext, [Caller] string name = null)
+            => UnitLogRoot<T>() + FS.file(name,ext);
+
+        FS.FolderPath TestLogSummaryRoot()
             => TestLogRoot();
 
-        FS.FilePath SortedCaseLogPath()
-            => SortedCaseLogRoot() + FS.file(AppName, Csv);
+        FS.FilePath CaseLogSummary()
+            => TestLogSummaryRoot() + FS.file(AppName, Csv);
     }
 }

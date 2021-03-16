@@ -27,22 +27,22 @@ namespace Z0
 
         public void t_bits()
         {
-            var claim = Checks().CheckEquatable;
+            var Claim = CheckProvider.create().CheckEquatable;
 
             var b1 = Digital.bits(n1);
-            claim.eq(b1.Length, 2);
+            Claim.eq(b1.Length, 2);
 
             var b2 = Digital.bits(n2);
-            claim.eq(b2.Length, 4);
+            Claim.eq(b2.Length, 4);
 
             var b3 = Digital.bits(n3);
-            claim.eq(b3.Length, 8);
+            Claim.eq(b3.Length, 8);
 
             var b4 = Digital.bits(n4);
-            claim.eq(b4.Length, 16);
+            Claim.eq(b4.Length, 16);
 
             var b5 = Digital.bits(n5);
-            claim.eq(b5.Length, 32);
+            Claim.eq(b5.Length, 32);
 
             var b6 = Digital.bits(n6);
             var b7 = Digital.bits(n7);
