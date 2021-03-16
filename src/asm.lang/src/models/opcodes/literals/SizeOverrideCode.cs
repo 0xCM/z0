@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using static Hex8Seq;
 
+    [PrefixCodes]
     public enum SizeOverrideCode
     {
         None = 0,

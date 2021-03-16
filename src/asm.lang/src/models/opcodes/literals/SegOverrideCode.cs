@@ -11,6 +11,7 @@ namespace Z0.Asm
     /// <summary>
     /// The segment override codes as specified by Intel Vol II, 2.1.1
     /// </summary>
+    [PrefixCodes]
     public enum SegOverrideCode : byte
     {
         None = 0,

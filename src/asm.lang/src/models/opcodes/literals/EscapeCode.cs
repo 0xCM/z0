@@ -9,6 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines the escape op code byte as specified by Intel Vol II, 2.1.2
     /// </summary>
+    [PrefixCodes]
     public enum EscapeCode : byte
     {
         None = 0,

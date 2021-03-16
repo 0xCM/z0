@@ -42,7 +42,7 @@ namespace Z0.Asm
         public static AsmOpCode Lock(byte data)
         {
             var dst = create();
-            dst.Byte0 = (byte)L.Lock;
+            dst.Byte0 = (byte)L.LOCK;
             dst.Byte1 = data;
             return dst;
         }

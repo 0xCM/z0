@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Part;
     using static memory;
-    using static RexPrefixFacets;
     using static AsmInstructions;
     using static AsmSyntax;
 
@@ -62,7 +61,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static bit HasLockPrefix(AsmOpCode src)
-            => emath.same(L.Lock, src.Byte0);
+            => emath.same(L.LOCK, src.Byte0);
 
         [MethodImpl(Inline), Op]
         public static bit HasSegOverride(AsmOpCode src)
