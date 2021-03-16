@@ -11,7 +11,7 @@ namespace Z0
 
     using H = HexCharData;
 
-    [ApiHost(ApiNames.SymbolicHex, true)]
+    [ApiHost]
     public partial class Hex
     {
         public static MemorySegment[] HexRefs

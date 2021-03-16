@@ -129,6 +129,12 @@ namespace Z0
         protected StreamWriter OpenShowLog(string name, FS.FileExt? ext = null)
             => Db.ShowLog(name, ext ?? FS.Extensions.Csv).Writer();
 
+        protected void Show(string name, FS.FileExt ext, Action<ShowLog> f)
+        {
+            using var log = ShowLog(name,ext);
+            f(log);
+        }
+
         protected void Show<T>(T data, StreamWriter dst)
         {
             dst.WriteLine(string.Format("{0}",data));

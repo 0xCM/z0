@@ -8,21 +8,16 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static ModRmMasks;
 
     /// <summary>
     /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
     /// </summary>
-    public readonly struct ModRmBits : ITextual
+    public readonly struct ModRm : ITextual
     {
         readonly uint8T Data;
 
         [MethodImpl(Inline)]
-        public ModRmBits(uint3 rm, uint3 reg, uint2 mod)
-            => Data = (uint8T)rm | ((uint8T)reg << ModRmMasks.RegIndex ) | ((uint8T)mod << ModIndex);
-
-        [MethodImpl(Inline)]
-        public ModRmBits(byte src)
+        public ModRm(byte src)
             => Data = src;
 
         /// <summary>
@@ -31,7 +26,7 @@ namespace Z0.Asm
         public uint3 Rm
         {
             [MethodImpl(Inline)]
-            get => (Data & RmMask) >> RmIndex;
+            get => Bits.segment(Data, 0, 2);
         }
 
         /// <summary>
@@ -40,7 +35,7 @@ namespace Z0.Asm
         public uint3 Reg
         {
             [MethodImpl(Inline)]
-            get => (Data & RegMask) >> ModRmMasks.RegIndex;
+            get => Bits.segment(Data, 3, 5);
         }
 
         /// <summary>
@@ -49,7 +44,7 @@ namespace Z0.Asm
         public uint2 Mod
         {
             [MethodImpl(Inline)]
-            get => (Data & ModMask) >> ModIndex;
+            get => Bits.segment(Data, 6, 7);
         }
 
         /// <summary>
@@ -77,6 +72,10 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public static ModRmBits Empty => default;
+        [MethodImpl(Inline)]
+        public static ModRm operator ^(ModRm a, ModRm b)
+            => new ModRm(a.Data ^ b.Data);
+
+        public static ModRm Empty => default;
     }
 }

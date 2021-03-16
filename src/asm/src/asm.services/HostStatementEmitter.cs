@@ -49,6 +49,7 @@ namespace Z0.Asm
 
         public void EmitStatements(ReadOnlySpan<AsmHostStatement> src)
         {
+            var thumbprints = root.list<AsmThumbprint>();
             var formatter = Records.formatter<AsmHostStatement>();
             var statements = src;
             var count = statements.Length;
@@ -122,11 +123,10 @@ namespace Z0.Asm
             Wf.EmittedFile(asmFlow,counter);
         }
 
-
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
         static string FormatAsm(in AsmHostStatement src)
-            => string.Format("{0,-36} ; {1} ({2})[{3}] => {4}", src.Expression, src.Offset, src.Sig, src.OpCode, src.Encoded);
+            => string.Format("{0,-36} ; {1} {2}", src.Expression, src.Offset, src.Thumbprint());
 
         uint CreateStatements(in ApiHostCode src, List<AsmHostStatement> dst)
         {
@@ -151,6 +151,10 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
+                var opcode = asm.opcode(instruction.OpCode.ToString());
+                if(!opcode.IsValid)
+                    break;
+
                 var statement = new AsmHostStatement();
                 var size = (ushort)instruction.ByteLength;
                 var specifier = instruction.Specifier;
@@ -161,7 +165,7 @@ namespace Z0.Asm
                 statement.Expression = instruction.FormattedInstruction;
                 Sigs.ParseSigExpr(instruction.OpCode.InstructionString, out statement.Sig);
                 statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
-                statement.OpCode = asm.opcode(instruction.OpCode.ToString());
+                statement.OpCode = opcode;
 
                 dst.Add(statement);
 

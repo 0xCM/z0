@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public readonly partial struct BitSeq
+    partial struct BitSeq
     {
         static ReadOnlySpan<byte> W1
             => new byte[2]{0b00,0b01};

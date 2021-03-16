@@ -33,7 +33,6 @@ namespace Z0
             }
 
             Wf.Ran(flow, count);
-
         }
 
         public uint EmitFieldMetadata(Assembly src)
@@ -44,11 +43,11 @@ namespace Z0
             var fields = reader.Fields();
             var count = (uint)fields.Length;
 
-            var formatter = TableFormatter.row<ClrFieldInfo>(FieldMetadataWidths);
+            var formatter = Records.formatter<ClrFieldInfo>(FieldMetadataWidths);
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in fields)
-                writer.WriteLine(formatter.FormatRow(item));
+                writer.WriteLine(formatter.Format(item));
 
             Wf.EmittedTable(flow, count);
             return count;

@@ -16,6 +16,14 @@ namespace Z0
     partial struct BitNumbers
     {
         [MethodImpl(Inline), Op]
+        public static void render(U src, uint offset, Span<char> dst)
+            => render(src, 8, offset, dst);
+
+        [MethodImpl(Inline), Op]
+        public static void render(U src, Span<char> dst)
+            => render(src, 8, 0, dst);
+
+        [MethodImpl(Inline), Op]
         public static U maxval(W8 w)
             => maxval<U>();
 

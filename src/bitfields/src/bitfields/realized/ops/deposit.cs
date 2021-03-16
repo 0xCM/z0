@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    readonly partial struct BitFields
+    partial struct BitFields
     {
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment

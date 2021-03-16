@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [Datatype("mx4")]
     public struct Cell<A,B,C,D>  : IDataCell<Cell<A,B,C,D>>
         where A : struct, IDataCell<A>
         where B : struct, IDataCell<B>

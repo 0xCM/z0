@@ -16,7 +16,6 @@ namespace Z0
     /// <summary>
     /// Defines an indexed sequence of <see cref='C'/> cells
     /// </summary>
-    [Datatype("m64(n)")]
     public readonly struct CellSeq64 : IDataCells<S,I,C>
     {
         readonly IndexedSeq<C> Data;

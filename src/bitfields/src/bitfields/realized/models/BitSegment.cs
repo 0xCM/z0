@@ -12,14 +12,14 @@ namespace Z0
     /// <summary>
     /// Identifies a segment of bits within a context
     /// </summary>
-    public readonly struct BitSeg
+    public readonly struct BitSegment
     {
         public ushort MinIndex {get;}
 
         public ushort BitCount {get;}
 
         [MethodImpl(Inline)]
-        public BitSeg(ushort index, ushort count)
+        public BitSegment(ushort index, ushort count)
         {
             MinIndex = index;
             BitCount = count;
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(BitSeg src)
+        public bool Equals(BitSegment src)
             => MinIndex == src.MinIndex && BitCount == src.BitCount;
 
         public string Format()
@@ -42,13 +42,13 @@ namespace Z0
             => Format();
 
         public override bool Equals(object src)
-            => src is BitSeg s && Equals(s);
+            => src is BitSegment s && Equals(s);
 
         public override int GetHashCode()
             => MinIndex + BitCount;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitSeg((ushort min, ushort count) src)
-            => new BitSeg(src.min, src.count);
+        public static implicit operator BitSegment((ushort min, ushort count) src)
+            => new BitSegment(src.min, src.count);
     }
 }

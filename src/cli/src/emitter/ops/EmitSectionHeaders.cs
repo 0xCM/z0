@@ -32,8 +32,8 @@ namespace Z0
         public Outcome<Count> EmitImageHeaders(FS.Files src, FS.FilePath dst)
         {
             var total = Count.Zero;
-            var formatter = TableFormatter.row<ImageSectionHeader>(SectionHeaderWidths);
-            var flow = Wf.EmittingFile(dst);
+            var formatter = Records.formatter<ImageSectionHeader>(SectionHeaderWidths);
+            var flow = Wf.EmittingTable<ImageSectionHeader>(dst);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
@@ -43,12 +43,12 @@ namespace Z0
                 {
                     var count = result.Data;
                     for(var i=0u; i<count; i++)
-                        writer.WriteLine(formatter.FormatRow(skip(headers,i)));
+                        writer.WriteLine(formatter.Format(skip(headers,i)));
 
                     total += count;
                 }
             }
-            Wf.EmittedFile(flow, total);
+            Wf.EmittedTable(flow, total);
 
             return total;
         }

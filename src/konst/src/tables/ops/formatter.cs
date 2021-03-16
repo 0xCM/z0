@@ -12,11 +12,6 @@ namespace Z0
     partial struct Table
     {
         [Op, Closures(Closure)]
-        public static TableFormatter<F> formatter<F>(F f = default)
-            where F : unmanaged
-                => new TableFormatter<F>(text.build(), FieldDelimiter, ClrLiteralFields.values<F>());
-
-        [Op, Closures(Closure)]
         public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
             where F : unmanaged
                 => new TableFormatter<F>(text.build(), delimiter, fields);

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection.PortableExecutable;
 
-    using static Part;
-
     [Record(TableId)]
     public struct ImageSectionHeader : IRecord<ImageSectionHeader>
     {

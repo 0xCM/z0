@@ -33,5 +33,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public int CompareTo(AsmHostStatement src)
             => IP.CompareTo(src.IP);
+
+        public AsmThumbprint Thumbprint()
+            => new AsmThumbprint(Expression, Sig, OpCode, Encoded);
     }
 }

@@ -63,66 +63,6 @@ namespace Z0.Asm
         public Index<AsmHostStatement> BuildHostStatements(ApiCodeBlocks src)
             => Wf.HostStatementEmitter().BuildStatements(src);
 
-        // {
-        //     var hosts = src.Hosts.View;
-        //     var count = hosts.Length;
-        //     var buffer = root.list<AsmHostStatement>();
-        //     var counter = 0u;
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var host = ref skip(hosts,i);
-        //         var flow = Wf.Running(Msg.CreatingHostStatements.Format(host));
-        //         var kStatements = CreateStatements(src.HostCodeBlocks(host), buffer);
-        //         counter += kStatements;
-        //         Wf.Ran(flow,Msg.CreatedHostStatements.Format(host, kStatements));
-        //     }
-
-        //     var records = buffer.ToArray();
-        //     Array.Sort(records);
-        //     return records;
-        // }
-
-        // uint CreateStatements(in ApiHostCode src, List<AsmHostStatement> dst)
-        // {
-        //     var blocks = src.Blocks.View;
-        //     var count = blocks.Length;
-        //     var counter = 0u;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var block = ref skip(blocks,i);
-        //         var decoded = Decode(block);
-        //         counter += CreateStatements(src.Host, decoded, dst);
-        //     }
-        //     return counter;
-        // }
-
-        // uint CreateStatements(ApiHostUri host, in AsmInstructionBlock src, List<AsmHostStatement> dst)
-        // {
-        //     var instructions = src.Instructions;
-        //     var count = (uint)instructions.Length;
-        //     var offset = z16;
-        //     var bytes = src.Code.View;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var instruction = ref skip(instructions,i);
-        //         var statement = new AsmHostStatement();
-        //         var size = (ushort)instruction.ByteLength;
-        //         var specifier = instruction.Specifier;
-        //         statement.BaseAddress = src.BaseAddress;
-        //         statement.IP = instruction.IP;
-        //         statement.HostUri = host;
-        //         statement.Expression = instruction.FormattedInstruction;
-        //         Sigs.ParseSigExpr(specifier.Sig, out statement.Sig);
-        //         statement.Mnemonic = instruction.Mnemonic.ToString().ToUpper();
-        //         statement.OpCode = asm.opcode(specifier.OpCode);
-        //         statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
-        //         dst.Add(statement);
-
-        //         offset += size;
-        //     }
-        //     return count;
-        // }
-
         public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)
         {
             var count = src.Count;

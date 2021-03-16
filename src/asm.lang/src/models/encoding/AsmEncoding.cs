@@ -14,38 +14,43 @@ namespace Z0.Asm
     public readonly partial struct AsmEncoding
     {
         [MethodImpl(Inline), Op]
-        public static ModRmBits modrm(byte src)
-            => new ModRmBits(src);
+        public static ModRm modrm(byte src)
+            => new ModRm(src);
 
         [MethodImpl(Inline), Op]
-        public static ModRmBits modrm(uint3 rm, uint3 reg, uint2 mod)
-            => new ModRmBits(rm, reg, mod);
+        public static ModRm modrm(uint3 rm, uint3 reg, uint2 mod)
+            => modrm(BitFields.join((rm,0), (reg,3), (mod,6)));
 
-        public static Index<ModRmBits> table(out Index<ModRmBits> dst)
+        public static void render(ModRm src, ITextBuffer dst)
         {
-            dst = alloc<ModRmBits>(256);
-            fill(dst);
-            return dst;
-        }
+            const char Open = Chars.LBracket;
+            const char Close = Chars.RBracket;
+            const char Sep = Chars.Pipe;
 
-        [Op]
-        public static uint fill(Span<ModRmBits> dst)
-        {
-            var i = 0u;
-            var rmF = BitSeq.bits(n3);
-            var regF = BitSeq.bits(n3);
-            var modF = BitSeq.bits(n2);
+            dst.Append(Open);
 
-            for(var a=0u; a<rmF.Length; a++)
-            for(var b=0u; b<regF.Length; b++)
-            for(var c=0u; c<modF.Length; c++, i++)
-            {
-                ref readonly var rm = ref skip(rmF, a);
-                ref readonly var reg = ref skip(regF, b);
-                ref readonly var mod = ref skip(modF, c);
-                seek(dst, i) = modrm(rm, reg, mod);
-            }
-            return i;
+            dst.Append("Mod");
+            dst.Append(Open);
+            dst.Append(src.Mod.Format());
+            dst.Append(Close);
+            dst.Append(Chars.Space);
+            dst.Append(Sep);
+
+            dst.Append(Chars.Space);
+            dst.Append("Reg");
+            dst.Append(Open);
+            dst.Append(src.Reg.Format());
+            dst.Append(Close);
+            dst.Append(Chars.Space);
+            dst.Append(Sep);
+
+            dst.Append(Chars.Space);
+            dst.Append("Rm");
+            dst.Append(Open);
+            dst.Append(src.Rm.Format());
+            dst.Append(Close);
+
+            dst.Append(Close);
         }
     }
 }

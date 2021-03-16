@@ -67,7 +67,7 @@ namespace Z0
 
         [Op]
         public static int render(in byte src, int length, uint maxbits, Span<char> dst)
-            => _format(src, length,maxbits,dst);
+            => _format(src, length, maxbits,dst);
 
         [Op]
         public static int format(in byte src, int length, uint maxbits, Span<char> dst)

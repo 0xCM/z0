@@ -102,22 +102,18 @@ namespace Z0
             var entries = provider.Entries.View;
             var count = (uint)entries.Length;
 
-            var f = Table.formatter<ContentLibField>();
+            var formatter = Records.formatter<DocLibEntry>(82);
             var target = wf.Db().RefDataRoot() + FS.file("index", FS.Extensions.Csv);
             var emitting = wf.EmittingTable<DocLibEntry>(target);
+            using var dst = target.Writer();
+            dst.WriteLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
             {
                 ref readonly var entry = ref skip(entries, i);
-                f.Append(F.Type, entry.Type);
-                f.Delimit(F.Name, entry.Name);
-                f.EmitEol();
+                dst.WriteLine(formatter.Format(entry));
             }
 
-            using var dst = target.Writer();
-            dst.Write(f.Format());
-
             wf.EmittedTable(emitting, count);
-
             wf.Ran(flow);
             return  provider.Entries;
         }

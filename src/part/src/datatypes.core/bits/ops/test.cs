@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), TestBit]
         public static bit test(uint src, byte pos)
-            => new bit((src >> pos) & 1);
+            => new bit((src >> pos) & 1u);
 
         /// <summary>
         /// Tests the state of an index-identified source bit
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), TestBit]
         public static bit test(ulong src, byte pos)
-            => new bit((uint)((src >> pos) & 1));
+            => new bit((uint)((src >> pos) & 1ul));
 
         /// <summary>
         /// Determines the state of an index-identified bit

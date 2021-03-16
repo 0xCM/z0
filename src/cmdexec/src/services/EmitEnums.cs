@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
+    using static memory;
 
     [WfHost(CommandName)]
     public sealed class EmitEnums : WfHost<EmitEnums,ClrAssembly>
@@ -44,7 +44,6 @@ namespace Z0
 
         public ClrEnumRecord[] Records;
 
-        static ReadOnlySpan<byte> RenderWidths => new byte[ClrEnumRecord.FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -66,7 +65,7 @@ namespace Z0
             if(Records.Length != 0)
             {
                 var t = default(ClrEnumRecord);
-                var formatter = TableFormatter.row<ClrEnumRecord>(RenderWidths);
+                var formatter = Z0.Records.formatter<ClrEnumRecord>(RenderWidths);
                 var flow = Wf.EmittingTable<ClrEnumRecord>(Target);
                 var counter = 0u;
                 Execute(ref counter, formatter);
@@ -74,7 +73,7 @@ namespace Z0
             }
         }
 
-        void Execute(ref uint counter, in RowFormatter<ClrEnumRecord> formatter)
+        void Execute(ref uint counter, IRecordFormatter<ClrEnumRecord> formatter)
         {
             var src = @readonly(Records);
             var t = default(ClrEnumRecord);
@@ -87,7 +86,7 @@ namespace Z0
                 ref readonly var record = ref skip(src,i);
                 try
                 {
-                    var row = formatter.FormatRow(record);
+                    var row = formatter.Format(record);
                     dst.WriteLine(row);
                     counter++;
                 }
@@ -99,5 +98,8 @@ namespace Z0
                 }
             }
         }
+
+        static ReadOnlySpan<byte> RenderWidths
+            => new byte[ClrEnumRecord.FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
     }
 }

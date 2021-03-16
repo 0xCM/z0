@@ -308,16 +308,13 @@ namespace Z0.Asm
             }
         }
 
-        /// <summary>
-        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
-        /// </summary>
 
-        void ShowModRmBits()
-        {
-            var log = OpenShowLog("modrm", FS.Extensions.Log);
-            AsmEncoding.table(out Index<ModRmBits> table);
-            root.iter(table, entry => Show(entry.Format(),log));
-        }
+        // void ShowModRmBits()
+        // {
+        //     var log = OpenShowLog("modrm", FS.Extensions.Log);
+        //     AsmEncoding.table(out Index<ModRmBits> table);
+        //     root.iter(table, entry => Show(entry.Format(),log));
+        // }
 
 
         AsmOpCodeLookup OpCodes;
@@ -578,6 +575,8 @@ namespace Z0.Asm
         {
 
         }
+
+
 
         void ProcessStatements()
         {
@@ -931,15 +930,67 @@ namespace Z0.Asm
         void EmitHostStatements()
         {
             var emitter = Wf.HostStatementEmitter();
-            emitter.EmitStatements(Wf.AsmDataEmitter());
+            var statements = emitter.BuildStatements(Wf.AsmDataEmitter().CodeBlocks());
+            emitter.EmitStatements(statements);
+            ProcessStatements(statements);
+        }
 
+        void ProcessStatements(ReadOnlySpan<AsmHostStatement> src)
+        {
+            var count = src.Length;
+            var distinct = root.hashset<AsmThumbprint>();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var s = ref skip(src,i);
+                if(s.OpCode.IsValid)
+                    distinct.Add(s.Thumbprint());
+            }
+
+            var output = distinct.ToArray();
+            Wf.Status($"Observed {output.Length} distinct statements");
+            Array.Sort(output);
+            var path = Db.TableDir<AsmHostStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
+            using var writer = path.Writer();
+            root.iter(output, o => writer.WriteLine(o));
+        }
+
+        /// <summary>
+        /// ModRM = [Mod:[7:6] | Reg:[5:3] | Rm:[2:0]]
+        /// </summary>
+        void ShowModRmBits2()
+        {
+            void emit(ShowLog dst)
+            {
+                var f0 = BitSeq.bits(n3);
+                var f1 = BitSeq.bits(n3);
+                var f2 = BitSeq.bits(n2);
+                var i=0;
+
+                for(var c=0u; c<f2.Length; c++)
+                for(var b=0u; b<f1.Length; b++)
+                for(var a=0u; a<f0.Length; a++,i++)
+                {
+                    var m1 = AsmEncoding.modrm(skip(f0, a), skip(f1, b), skip(f2, c));
+                    var m2 = AsmEncoding.modrm((byte)i);
+                    AsmEncoding.render(m1, dst.Buffer);
+                    dst.Buffer.Append(" ^ ");
+                    AsmEncoding.render(m2, dst.Buffer);
+                    dst.Buffer.Append(" = ");
+                    dst.Buffer.Append((m1^m2).Encoded.FormatBits());
+                    dst.ShowBuffer();
+                }
+
+           }
+
+            Show("modrm", FS.Extensions.Log, emit);
         }
 
         public void Run()
         {
-            var m1 = AsmEncoding.modrm(0b10_110_111);
-            var m2 = AsmEncoding.modrm(0b111, 0b110, 0b10);
-            Wf.Status(string.Format("{0} | {1}", m1.ToString(), m2.ToString()));
+            EmitHostStatements();
+            // var m1 = AsmEncoding.modrm(0b10_110_111);
+            // var m2 = AsmEncoding.modrm(0b111, 0b110, 0b10);
+            // Wf.Status(string.Format("{0} | {1}", m1.ToString(), m2.ToString()));
             //Wf.BitCmd().Run(BitCmdKind.ShowBitSequences);
         }
 

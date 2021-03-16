@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Part;
     using static memory;
@@ -17,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T init<T>(ReadOnlySpan<char> src, out T dst)
-            where T : unmanaged, ICharBlock<T>
+            where T : unmanaged
         {
             dst = default;
             return ref copy(src, ref dst);
@@ -25,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T init<T>(ReadOnlySpan<char> src, in T t0, out T dst)
-            where T : unmanaged, ICharBlock<T>
+            where T : unmanaged
         {
             dst = t0;
             return ref copy(src, ref dst);
@@ -33,11 +34,25 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T copy<T>(ReadOnlySpan<char> src, ref T dst)
-            where T : unmanaged, ICharBlock<T>
+            where T : unmanaged
         {
-            var length = (uint)root.min(src.Length, size<T>()/2);
-            memory.copy(first(src), ref @as<T,char>(dst), length);
+            var count = (uint)root.min(src.Length, size<T>()/2);
+            copy(first(src), ref @as<T,char>(dst), count);
             return ref dst;
         }
+
+        [MethodImpl(Inline), Op]
+        static void copy(in byte src, ref byte dst, uint count)
+        {
+            for(var i=0; i<count; i++)
+                seek(dst,i) = skip(src,i);
+        }
+            // => CopyBlock(ref dst, ref edit(src), count);
+
+        [MethodImpl(Inline)]
+        static void copy<S,T>(in S src, ref T dst, uint srcCount, uint dstOffset = 0)
+            where S: unmanaged
+            where T :unmanaged
+                => copy(memory.u8(src), ref memory.uint8(ref seek(dst, dstOffset)), srcCount*size<S>());
     }
 }
