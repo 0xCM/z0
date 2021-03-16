@@ -13,6 +13,11 @@ namespace Z0
     [ApiComplete]
     partial struct Msg
     {
+
+        public static MsgPattern<FS.FolderPath> ObliteratingDirectory => "Obliterating the directory {0}";
+
+        public static MsgPattern<FS.FolderPath> ObliteratedDirectory => "Consigned the directory {0} to oblivion";
+
         public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";
 
         public static RenderPattern<Count,Count> EmittedInstructionRecords => "Emitted a total of {0} records for {1} instruction tables";
@@ -29,9 +34,9 @@ namespace Z0
 
         public static MsgPattern<Count> CreatedAsmRowsFromBlocks => "Created {0} AsmRows";
 
-        public static MsgPattern<ApiHostUri> CreatingHostStatements => "Creating {0} host statements";
+        public static MsgPattern<ApiHostUri> CreatingApiStatements => "Creating {0} host api statements";
 
-        public static MsgPattern<ApiHostUri,Count> CreatedHostStatements => "Created {0} {1} host statement rows";
+        public static MsgPattern<ApiHostUri,Count> CreatedApiStatements => "Created {0} {1} host api statement";
 
         public static MsgPattern<Count,Count,FS.FileUri> ParsedStatements => "Parsed {0} full rows and {1} partial rows from {2}";
     }

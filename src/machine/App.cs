@@ -86,7 +86,7 @@ namespace Z0
                 if(Options.EmitImageContent)
                     root.iter(Wf.Api.PartComponents, c => images.EmitImageContent(c));
 
-                var asm = Wf.AsmDataEmitter();
+                var asm = Wf.AsmDataStore();
 
                 if(Options.EmitAsmRows)
                     asm.EmitAsmRows();
@@ -98,7 +98,7 @@ namespace Z0
                     asm.EmitResBytes();
 
                 if(Options.EmitStatements)
-                    asm.EmitStatements();
+                    asm.EmitApiStatements();
 
             }
             catch(Exception e)

@@ -18,9 +18,9 @@ namespace Z0.Asm
 
         AsmCatalogEtl Catalog;
 
-        Lazy<AsmDataEmitter> _DataEmitter;
+        Lazy<AsmDataStore> _DataEmitter;
 
-        AsmDataEmitter DataEmitter
+        AsmDataStore DataEmitter
         {
             get => _DataEmitter.Value;
         }
@@ -29,7 +29,7 @@ namespace Z0.Asm
         {
             Catalog = Wf.AsmCatalogEtl();
             ApiServices = Wf.ApiServices();
-            _DataEmitter = root.lazy(Wf.AsmDataEmitter);
+            _DataEmitter = root.lazy(Wf.AsmDataStore);
         }
 
         [Action(K.EmitResBytes)]

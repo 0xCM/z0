@@ -20,11 +20,9 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct IceExtractors
     {
-        [MethodImpl(Inline), Op]
         public static IceUsedMemory[] UsedMemory(Iced.InstructionInfo src)
             => src.GetUsedMemory().Map(x => Deicer.Thaw(x));
 
-        [MethodImpl(Inline), Op]
         public static IceUsedRegister[] UsedRegisters(Iced.InstructionInfo src)
             => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
 
@@ -254,6 +252,7 @@ namespace Z0.Asm
                 TupleType = Deicer.Thaw(src.TupleType),
                 W = src.W,
             };
+
         static IceConverters Deicer => IceConverters.Service;
     }
 }

@@ -45,8 +45,8 @@ namespace Z0
         public FunctionWorkflows(IWfShell wf)
         {
             Wf = wf;
-            Left = array<byte>(1,2,4,8);
-            Right = array<byte>(16,32,64,128);
+            Left = array<byte>(1, 2, 4, 8);
+            Right = array<byte>(16, 32, 64, 128);
             Target = alloc<byte>(FunctionCount);
         }
 
@@ -56,10 +56,10 @@ namespace Z0
             ref readonly var a = ref first(Left);
             ref readonly var b = ref first(Right);
             ref var c = ref first(Target);
-            seek(c,i0) = f0(skip(a,i0), skip(b,i0));
-            seek(c,i1) = f1(skip(a,i1), skip(b,i1));
-            seek(c,i2) = f2(skip(a,i2), skip(b,i2));
-            seek(c,i3) = f3(skip(a,i3), skip(b,i3));
+            seek(c, i0) = f0(skip(a, i0), skip(b, i0));
+            seek(c, i1) = f1(skip(a, i1), skip(b, i1));
+            seek(c, i2) = f2(skip(a, i2), skip(b, i2));
+            seek(c, i3) = f3(skip(a, i3), skip(b, i3));
             return Target;
         }
 
@@ -69,10 +69,10 @@ namespace Z0
             ref readonly var a = ref first(Left);
             ref readonly var b = ref first(Right);
             ref var c = ref first(Target);
-            seek(c,i0) = g0(skip(a,i0), skip(b,i0));
-            seek(c,i1) = g1(skip(a,i1), skip(b,i1));
-            seek(c,i2) = g2(skip(a,i2), skip(b,i2));
-            seek(c,i3) = g3(skip(a,i3), skip(b,i3));
+            seek(c, i0) = g0(skip(a, i0), skip(b, i0));
+            seek(c, i1) = g1(skip(a, i1), skip(b, i1));
+            seek(c, i2) = g2(skip(a, i2), skip(b, i2));
+            seek(c, i3) = g3(skip(a, i3), skip(b, i3));
             return Target;
         }
 

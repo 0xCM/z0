@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmDataEmitter : AsmWfService<AsmDataEmitter>
+    public sealed class AsmDataStore : AsmWfService<AsmDataStore>
     {
         readonly Dictionary<IceMnemonic, ArrayBuilder<AsmRow>> Index;
 
@@ -24,7 +24,7 @@ namespace Z0.Asm
 
         AsmSigs Sigs;
 
-        public AsmDataEmitter()
+        public AsmDataStore()
         {
             Sequence = 0;
             Offset = 0;
@@ -52,17 +52,10 @@ namespace Z0.Asm
             EmitSemantic(routines);
         }
 
-        public void EmitStatements()
+        public void EmitApiStatements()
         {
-            HostStatementEmitter.create(Wf).EmitStatements(CodeBlocks());
-            //Wf.AsmDistiller().DistillStatements(CodeBlocks());
+            AsmApiStatementPipe.create(Wf).EmitStatements(CodeBlocks());
         }
-
-        public Index<AsmApiStatement> BuildHostStatements()
-            => BuildHostStatements(CodeBlocks());
-
-        public Index<AsmApiStatement> BuildHostStatements(ApiCodeBlocks src)
-            => Wf.HostStatementEmitter().BuildStatements(src);
 
         public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)
         {
@@ -71,7 +64,7 @@ namespace Z0.Asm
             ref readonly var block = ref src.First;
             var buffer = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-                buffer.AddRange(CreateRecords(skip(block,i)));
+                buffer.AddRange(CreateAsmRows(skip(block,i)));
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(buffer.Count));
             return buffer.ToArray();
         }
@@ -83,7 +76,7 @@ namespace Z0.Asm
             var count = addresses.Length;
             var rows = root.list<AsmRow>();
             for(var i=0u; i<count; i++)
-                rows.AddRange(CreateRecords(src[skip(addresses, i)]));
+                rows.AddRange(CreateAsmRows(src[skip(addresses, i)]));
             Wf.Ran(flow,Msg.CreatedAsmRowsFromBlocks.Format(rows.Count));
             return rows.ToArray();
         }
@@ -205,23 +198,11 @@ namespace Z0.Asm
             return calls;
         }
 
-        AsmInstructionBlock Decode(in ApiCodeBlock src)
+        Index<AsmRow> CreateAsmRows(in ApiCodeBlock src)
         {
             var decoded = Asm.RoutineDecoder.Decode(src);
             if(decoded)
-                return decoded.Value;
-            else
-            {
-                Wf.Error($"Error decoding {src.OpUri}");
-                return AsmInstructionBlock.Empty;
-            }
-        }
-
-        Index<AsmRow> CreateRecords(in ApiCodeBlock src)
-        {
-            var decoded = Asm.RoutineDecoder.Decode(src);
-            if(decoded)
-                return CreateRecords(src.Code, decoded.Value);
+                return CreateAsmRows(src.Code, decoded.Value);
             else
             {
                 Wf.Error($"Error decoding {src.OpUri}");
@@ -229,10 +210,7 @@ namespace Z0.Asm
             }
         }
 
-        Index<AsmRow> CreateRecords(in CodeBlock code, in IceInstructionList asm)
-            => CreateRecords(code, asm.Storage);
-
-        Index<AsmRow> CreateRecords(in CodeBlock code, IceInstruction[] src)
+        Index<AsmRow> CreateAsmRows(in CodeBlock code, IceInstruction[] src)
         {
             var bytes = span(code.Storage);
             var offset = z16;

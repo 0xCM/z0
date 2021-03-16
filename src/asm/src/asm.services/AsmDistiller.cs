@@ -12,17 +12,6 @@ namespace Z0.Asm
     using static memory;
 
     using Target = AsmStatementInfo;
-    using Source = AsmRow;
-
-    public enum AsmDistillerFlag : byte
-    {
-        None,
-
-        PartitionByLineCount,
-
-        PartitionByHost,
-    }
-
 
     public class AsmDistiller : AsmWfService<AsmDistiller>
     {
@@ -30,7 +19,7 @@ namespace Z0.Asm
 
         AsmRowProcessor RowProcessor;
 
-        Index<Source> Rows;
+        Index<AsmRow> Rows;
 
         MemoryAddress CurrentBlock;
 
@@ -139,7 +128,7 @@ namespace Z0.Asm
             return (byte)i;
         }
 
-        bool NextRow(out Source row)
+        bool NextRow(out AsmRow row)
         {
             if(CurrentRow < LastRow)
             {
@@ -166,7 +155,7 @@ namespace Z0.Asm
         uint DistillNextSegment()
         {
             var formatter = Records.formatter<Target>(32);
-            var input = default(Source);
+            var input = default(AsmRow);
             var output = default(Target);
             var counter = 0u;
             var finishing = false;
@@ -183,71 +172,19 @@ namespace Z0.Asm
                     writer.WriteLine(formatter.Format(Fill(input, ref output)));
                     counter++;
                     if(counter >= MaxLineCount)
-                    {
                         break;
-                    }
                 }
                 Wf.EmittedTable(flow, counter);
             }
             return counter;
         }
 
-
-
-        public void DistillStatements(AsmDistillerFlag flags = AsmDistillerFlag.PartitionByLineCount)
+        public void DistillStatements()
         {
-            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks(), flags);
+            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
         }
 
-        public void DistillStatements(ApiCodeBlocks src, AsmDistillerFlag flags = AsmDistillerFlag.PartitionByLineCount)
-        {
-            if(flags == AsmDistillerFlag.PartitionByHost)
-            {
-
-            }
-
-            else
-                DistillByLineCount(src);
-        }
-
-        void DistillByHost(ApiCodeBlocks src)
-        {
-            var hosts = src.Hosts.View;
-            var count = hosts.Length;
-            var formatter = Records.formatter<Target>(32);
-            var rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-                DistillStatements(src.HostCodeBlocks(host), formatter);
-            }
-        }
-
-        uint DistillStatements(ApiHostCode src, IRecordFormatter<Target> formatter)
-        {
-            var blocks = src.Blocks.View;
-            var count = blocks.Length;
-            var counter = 0u;
-            var dst = Db.Table<Target>(src.Host);
-            var flow = Wf.EmittingTable<Target>(dst);
-            var output = default(Target);
-
-            using var writer = dst.Writer();
-            writer.WriteLine(formatter.FormatHeader());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var block = ref skip(blocks,i);
-
-                counter++;
-            }
-
-            Wf.EmittedTable(flow, counter);
-
-            return counter;
-        }
-
-        void DistillByLineCount(ApiCodeBlocks src)
+        public void DistillStatements(ApiCodeBlocks src)
         {
             var flow = Wf.Running();
             Db.ClearTables<Target>();
@@ -270,7 +207,7 @@ namespace Z0.Asm
             Wf.Ran(flow,total);
         }
 
-        ref Target Fill(in Source src, ref Target dst)
+        ref Target Fill(in AsmRow src, ref Target dst)
         {
             dst.Sequence = src.Sequence;
             dst.BlockAddress = src.BlockAddress;

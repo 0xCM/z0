@@ -24,11 +24,15 @@ namespace Z0
         }
 
         [Op]
+        public static ApiCaptureRunner runner(IWfShell wf)
+            => wf.CaptureRunner();
+
+        [Op]
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
-            using var control = wf.CaptureRunner();
-            control.Run();
+            using var run = runner(wf);
+            run.Run();
         }
 
         [MethodImpl(Inline), Op]

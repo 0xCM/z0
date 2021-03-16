@@ -309,21 +309,7 @@ namespace Z0.Asm
         }
 
 
-        // void ShowModRmBits()
-        // {
-        //     var log = OpenShowLog("modrm", FS.Extensions.Log);
-        //     AsmEncoding.table(out Index<ModRmBits> table);
-        //     root.iter(table, entry => Show(entry.Format(),log));
-        // }
-
-
-        AsmOpCodeLookup OpCodes;
-
-        AsmSigExprLookup SigLookup;
-
         HashSet<AsmFormExpr> Forms;
-
-        SymbolTable<AsmMnemonicCode> Mnemonics;
 
         AsmSigs Sigs;
 
@@ -331,72 +317,6 @@ namespace Z0.Asm
             where T : struct, ICmd<T> => "Dispatching {0}";
 
         public static MsgPattern<CmdId> Dispatching() => "Dispatching {0}";
-
-        static MsgPattern<Count,Count,Count> CollectedForms
-            => "Collected {0} distinct opcodes, {1} distinct signatures and {2} distinct combined forms";
-
-        static MsgPattern<FS.FileUri> LoadingStatements
-            => "Loading statements from {0}";
-
-        static MsgPattern<Count,FS.FileUri> LoadedStatments
-            => "Loading {0} statements from {1}";
-
-        static MsgPattern<Count,FS.FileUri> ProcessingStatments
-            => "Processing {0} statements from {1}";
-
-        static MsgPattern<Count,FS.FileUri> ProcessedStatements
-            => "Processed {0} statements from {1}";
-
-        void Process(params Action<AsmStatementInfo>[] receivers)
-        {
-            var distiller = Wf.AsmDistiller();
-            var paths = distiller.Distillations();
-            var flow = Wf.Running("Processing current statement set");
-            OpCodes = AsmOpCodeLookup.create();
-            SigLookup = AsmSigExprLookup.create();
-            Forms.Clear();
-            Mnemonics = SymbolStores.table<AsmMnemonicCode>();
-            foreach(var path in paths)
-            {
-                var loading = Wf.Running(LoadingStatements.Format(path));
-                var data = distiller.LoadDistillation(path).View;
-                var count = data.Length;
-                Wf.Ran(loading, LoadedStatments.Format(count,path));
-
-                var processing = Wf.Running(ProcessingStatments.Format(count,path));
-                foreach(var receiver in receivers)
-                    ProcessStatements(data, receiver);
-                Wf.Ran(processing,ProcessedStatements.Format(count,path));
-            }
-
-            Wf.Ran(flow, CollectedForms.Format(OpCodes.Count, SigLookup.Count, Forms.Count));
-            var sorted = Forms.OrderBy(x => x.OpCode).Array();
-            var pipe = AsmFormPipe.create(Wf);
-            var target = Db.IndexTable<AsmFormRecord>();
-            pipe.Emit(sorted,target);
-        }
-
-        void ProcessStatements(ReadOnlySpan<AsmStatementInfo> src, Action<AsmStatementInfo> receiver)
-        {
-            var count = src.Length;
-            var invalid = root.hashset<string>();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var statement = ref skip(src,i);
-                if(statement.OpCode.IsEmpty || statement.Sig.IsEmpty)
-                    continue;
-                else
-                {
-                    var opcode = statement.OpCode;
-                    if(opcode.IsValid)
-                    {
-                        receiver(statement);
-                        SigLookup.AddIfMissing(statement.Sig);
-                        Forms.Add(asm.form(opcode, statement.Sig));
-                    }
-                }
-            }
-        }
 
         static bool parse(string src, out CilRow dst)
         {
@@ -547,7 +467,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.AsmStatementProcessor().Run(Collect);
+            Wf.AsmStatementInfoPipe().Run(Collect);
 
             var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
             var dst = Db.IndexTable<AsmStatementCase>();
@@ -571,59 +491,6 @@ namespace Z0.Asm
 
         }
 
-        void EmitCpuAsmCases()
-        {
-
-        }
-
-
-
-        void ProcessStatements()
-        {
-            var table = SymbolStores.table<AsmMnemonicCode>();
-            var counter = 0u;
-            var mnemonics = root.hashset<AsmMnemonicCode>();
-            var failures = root.hashset<string>();
-            var opcodes = root.hashset<AsmOpCodeExpr>();
-            var ocpath = Db.AppDataFile(FS.file("statement-opcodes", FS.Extensions.Csv));
-            using var ocwriter = ocpath.Writer();
-
-
-            void CountStatements(AsmStatementInfo src)
-            {
-                counter++;
-            }
-
-            void CollectOpCodes(AsmStatementInfo src)
-            {
-                var encoded = src.Encoded;
-                var opcode = src.OpCode;
-                if(!opcodes.Contains(opcode))
-                {
-                    opcodes.Add(opcode);
-                    ocwriter.WriteLine(string.Format("{0,-24} | {1, -24} | {2,-16} | {3}", src.Expression, src.Sig, src.OpCode, src.Encoded));
-                }
-            }
-
-            void CollectMnemonics(AsmStatementInfo src)
-            {
-                var symbol = src.Mnemonic.Name.ToLower();
-                if(table.TokenFromSymbol(symbol, out var t))
-                    mnemonics.Add(t.Kind);
-                else
-                    failures.Add(symbol);
-            }
-
-            var processor = Wf.AsmStatementProcessor();
-            processor.Run(CountStatements, CollectMnemonics, CollectOpCodes);
-            Wf.Status($"{counter} statements were processed)");
-            Wf.Status($"{mnemonics.Count} known mnemonics were encountered along with {failures.Count} unknown mnemonics: {failures.FormatList()}");
-            Wf.Status($"{opcodes.Count} distinct opcodes were collected");
-
-        }
-
-        const string XXX = "05,59,40,71,AA,E9,E3,FC,BE,A9,2F,FF,B9,EB,B4,7D,41";
-
         FS.Files EmitSymbolPaths()
         {
             var symbols = Wf.PdbSymbolStore();
@@ -641,31 +508,6 @@ namespace Z0.Asm
                 writer.WriteLine(row);
             }
             return paths;
-        }
-
-        void StupidAttemptToMakeTheSymbolStoreWork()
-        {
-            var symbols = Wf.PdbSymbolStore();
-
-            var src = FS.dir(@"C:\Cache\symbols");
-            var paths = EmitSymbolPaths().View;
-            var count = paths.Length;
-
-            using var store = symbols.DirectoryStore(src);
-
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(paths,i);
-                using var file = symbols.SymbolFile(path);
-                var keys = symbols.SymbolKeys(file).View;
-                var keycount = keys.Length;
-                for(var j=0; j<keycount; j++)
-                {
-                    ref readonly var key = ref skip(keys, j);
-                    Wf.Row(key.Index);
-                }
-            }
-
         }
 
         void ShowHandlers()
@@ -760,7 +602,7 @@ namespace Z0.Asm
             return Wf.Router.Dispatch(spec);
         }
 
-        void RunFxWorkflows()
+        void RunFunctionWorkflows()
         {
             FunctionWorkflows.run(Wf);
         }
@@ -927,11 +769,12 @@ namespace Z0.Asm
             Wf.Status($"{patterns.Length}");
         }
 
-        void EmitHostStatements()
+        void EmitApiStatements()
         {
-            var emitter = Wf.HostStatementEmitter();
-            var statements = emitter.BuildStatements(Wf.AsmDataEmitter().CodeBlocks());
-            emitter.EmitStatements(statements);
+            var pipe = Wf.ApiStatementPipe();
+            var store = Wf.AsmDataStore();
+            var statements = pipe.BuildStatements(store.CodeBlocks());
+            pipe.EmitStatements(statements);
             ProcessStatements(statements);
         }
 
@@ -987,12 +830,9 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
-            //EmitHostStatements();
-            // var m1 = AsmEncoding.modrm(0b10_110_111);
-            // var m2 = AsmEncoding.modrm(0b111, 0b110, 0b10);
-            // Wf.Status(string.Format("{0} | {1}", m1.ToString(), m2.ToString()));
-            //Wf.BitCmd().Run(BitCmdKind.ShowBitSequences);
+            //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
+
+            RunFunctionWorkflows();
         }
 
         public static void Main(params string[] args)

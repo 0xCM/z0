@@ -25,8 +25,8 @@ namespace Z0
         public static AsmSemanticRender AsmSemanticRender(this IWfShell wf)
             => Services.AsmSemanticRender.create(wf);
 
-        public static AsmDataEmitter AsmDataEmitter(this IWfShell wf)
-            => Services.AsmDataEmitter.create(wf);
+        public static AsmDataStore AsmDataStore(this IWfShell wf)
+            => Services.AsmDataStore.create(wf);
 
         [Op]
         public static ApiHostAsmEmitter AsmHostEmitter(this IWfShell wf, IAsmContext asm)
@@ -98,8 +98,7 @@ namespace Z0
         public static AsmAddressMatcher AddressMatcher(this IWfShell wf)
             => AsmAddressMatcher.create(wf);
 
-        public static HostStatementEmitter HostStatementEmitter(this IWfShell wf)
-            => Asm.HostStatementEmitter.create(wf);
-
+        public static AsmApiStatementPipe ApiStatementPipe(this IWfShell wf)
+            => Asm.AsmApiStatementPipe.create(wf);
     }
 }

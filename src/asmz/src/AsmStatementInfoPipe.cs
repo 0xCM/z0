@@ -9,8 +9,51 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public class AsmStatementProcessor : WfService<AsmStatementProcessor>
+    public class AsmStatementInfoPipe : WfService<AsmStatementInfoPipe>
     {
+        public void Process()
+        {
+            var table = SymbolStores.table<AsmMnemonicCode>();
+            var counter = 0u;
+            var mnemonics = root.hashset<AsmMnemonicCode>();
+            var failures = root.hashset<string>();
+            var opcodes = root.hashset<AsmOpCodeExpr>();
+            var ocpath = Db.AppDataFile(FS.file("statement-opcodes", FS.Extensions.Csv));
+            using var ocwriter = ocpath.Writer();
+
+
+            void CountStatements(AsmStatementInfo src)
+            {
+                counter++;
+            }
+
+            void CollectOpCodes(AsmStatementInfo src)
+            {
+                var encoded = src.Encoded;
+                var opcode = src.OpCode;
+                if(!opcodes.Contains(opcode))
+                {
+                    opcodes.Add(opcode);
+                    ocwriter.WriteLine(string.Format("{0,-24} | {1, -24} | {2,-16} | {3}", src.Expression, src.Sig, src.OpCode, src.Encoded));
+                }
+            }
+
+            void CollectMnemonics(AsmStatementInfo src)
+            {
+                var symbol = src.Mnemonic.Name.ToLower();
+                if(table.TokenFromSymbol(symbol, out var t))
+                    mnemonics.Add(t.Kind);
+                else
+                    failures.Add(symbol);
+            }
+
+            var processor = Wf.AsmStatementInfoPipe();
+            processor.Run(CountStatements, CollectMnemonics, CollectOpCodes);
+            Wf.Status($"{counter} statements were processed)");
+            Wf.Status($"{mnemonics.Count} known mnemonics were encountered along with {failures.Count} unknown mnemonics: {failures.FormatList()}");
+            Wf.Status($"{opcodes.Count} distinct opcodes were collected");
+        }
+
         public void Run(params Action<AsmStatementInfo>[] processors)
         {
             var distiller = Wf.AsmDistiller();
@@ -66,7 +109,7 @@ namespace Z0.Asm
 
     public static partial class XTend
     {
-        public static AsmStatementProcessor AsmStatementProcessor(this IWfShell wf)
-            => Asm.AsmStatementProcessor.create(wf);
+        public static AsmStatementInfoPipe AsmStatementInfoPipe(this IWfShell wf)
+            => Asm.AsmStatementInfoPipe.create(wf);
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class HostStatementEmitter : WfService<HostStatementEmitter>
+    public sealed class AsmApiStatementPipe : WfService<AsmApiStatementPipe>
     {
         AsmSigs Sigs;
 
@@ -33,10 +33,10 @@ namespace Z0.Asm
             for(var i=0u; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
-                var flow = Wf.Running(Msg.CreatingHostStatements.Format(host));
+                var flow = Wf.Running(Msg.CreatingApiStatements.Format(host));
                 var kStatements = CreateStatements(src.HostCodeBlocks(host), buffer);
                 counter += kStatements;
-                Wf.Ran(flow,Msg.CreatedHostStatements.Format(host, kStatements));
+                Wf.Ran(flow,Msg.CreatedApiStatements.Format(host, kStatements));
             }
 
             var records = buffer.ToArray();
@@ -49,17 +49,12 @@ namespace Z0.Asm
             EmitStatements(BuildStatements(src));
         }
 
-        // public void EmitStatements(AsmDataEmitter emitter)
-        // {
-        //     EmitStatements((BuildStatements(emitter.CodeBlocks())));
-        // }
-
         void ClearTarget()
         {
             var dir = Db.TableDir<AsmApiStatement>();
-            var flow = Wf.Running(string.Format("Obliterating the directory <{0}>", dir));
+            var flow = Wf.Running(Msg.ObliteratingDirectory.Format(dir));
             dir.Delete();
-            Wf.Ran(flow, string.Format("Consigned the directory <{0}> to oblivion", dir));
+            Wf.Ran(flow, Msg.ObliteratedDirectory.Format(dir));
         }
 
         public void EmitStatements(ReadOnlySpan<AsmApiStatement> src, bool clear = true)
@@ -124,7 +119,7 @@ namespace Z0.Asm
                 if(statement.Offset == 0)
                 {
                     asmWriter.WriteLine(AsmBlockSeparator);
-                    asmWriter.WriteLine(string.Format("; {0}", statement.OpUri));
+                    asmWriter.WriteLine(string.Format("; {0}, uri={1}", statement.BaseAddress, statement.OpUri));
                     asmWriter.WriteLine(AsmBlockSeparator);
                 }
 
