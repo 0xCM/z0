@@ -5,8 +5,6 @@ namespace Z0
 {
     using K = Cil.OpCodeValue;
 
-    using System;
-
     partial struct Cil
     {
         [ApiComplete]

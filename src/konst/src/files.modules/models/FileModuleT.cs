@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     public readonly struct FileModule<T> : IFileModule<FileModule<T>,T>
         where T : struct, IFileModule<T>

@@ -18,7 +18,7 @@ namespace Z0
     {
         public LayoutIdentity<T> Id {get;}
 
-        readonly TableSpan<LayoutPart<T>> Data;
+        readonly Index<LayoutPart<T>> Data;
 
         [MethodImpl(Inline)]
         public DataLayout(LayoutIdentity<T> id, LayoutPart<T>[] parts)
@@ -39,10 +39,10 @@ namespace Z0
             get => Data.Count;
         }
 
-        public TableSpan<LayoutPart<T>> Storage
+        public LayoutPart<T>[] Storage
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<LayoutPart<T>> Partitions

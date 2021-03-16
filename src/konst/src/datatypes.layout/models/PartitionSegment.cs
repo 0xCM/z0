@@ -35,6 +35,15 @@ namespace Z0
             get => uint64(Max) - uint64(Min);
         }
 
+        public string Format()
+            => format(this);
+        static string format(PartitionSegment<T> src)
+            => RenderPart().Format(src.Min, src.Max);
+
+        [MethodImpl(Inline)]
+        static RenderPattern<T,T> RenderPart()
+            => "[{0},{1})";
+
         [MethodImpl(Inline)]
         public static implicit operator PartitionSegment<T>((T min, T max) src)
             => new PartitionSegment<T>(src.min, src.max);

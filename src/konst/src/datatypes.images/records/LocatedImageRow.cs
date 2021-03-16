@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.InteropServices;
-
     [Record(TableId)]
     public struct LocatedImageRow : IRecord<LocatedImageRow>
     {

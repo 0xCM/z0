@@ -15,10 +15,10 @@ namespace Z0
 
         public void EmitImageHeaders()
         {
-            EmitImageHeaders(Archives.build(Wf));
+            EmitImageHeaders(Archives.runtime(Wf));
         }
 
-        public void EmitImageHeaders(IBuildArchive src)
+        public void EmitImageHeaders(IRuntimeArchive src)
         {
             var svc = ImageDataEmitter.create(Wf);
             var db = Wf.Db();

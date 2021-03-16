@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     public interface IMemoryFile : IDisposable
     {
@@ -32,7 +31,6 @@ namespace Z0
     public interface IMemoryFile<F> : IMemoryFile, IComparable<F>
         where F : IMemoryFile<F>
     {
-
 
     }
 }

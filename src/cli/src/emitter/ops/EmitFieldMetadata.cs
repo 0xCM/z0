@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
     using System.Reflection;
-
-    using static Part;
-    using static memory;
 
     partial class ImageDataEmitter
     {

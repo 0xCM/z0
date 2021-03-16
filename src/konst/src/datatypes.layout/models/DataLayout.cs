@@ -17,7 +17,7 @@ namespace Z0
     {
         public LayoutIdentity Id {get;}
 
-        readonly TableSpan<LayoutPart> Data;
+        readonly Index<LayoutPart> Data;
 
         [MethodImpl(Inline)]
         public DataLayout(LayoutIdentity id, LayoutPart[] parts)

@@ -19,18 +19,6 @@ namespace Z0
             => RuntimeArchive.create(wf.Controller.ImageDir);
 
         /// <summary>
-        /// Creates an archive over the output of a build
-        /// </summary>
-        /// <param name="root">The archive root</param>
-        [MethodImpl(Inline), Op]
-        public static IBuildArchive build(IWfShell wf,  FS.FolderPath root)
-            => new BuildArchive(wf, root);
-
-        [MethodImpl(Inline), Op]
-        public static IBuildArchive build(IWfShell wf)
-            => build(wf, FS.path(wf.Controller.Component.Location).FolderPath);
-
-        /// <summary>
         /// Creates an archive over both managed and unmanaged modules
         /// </summary>
         /// <param name="root">The archive root</param>

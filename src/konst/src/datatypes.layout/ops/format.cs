@@ -49,7 +49,12 @@ namespace Z0
         [Op, Closures(Closure)]
         public static string format<T>(in DataLayout<T> src)
             where T : unmanaged
-                => TextFormatter.format(src.Id, src.Storage);
+        {
+            var buffer = text.buffer();
+            buffer.Append(src.Id.Format());
+            root.iter(src.Storage, part => buffer.Append(string.Format(" | {0}", part.Format())));
+            return buffer.Emit();
+        }
 
         [MethodImpl(Inline), Op]
         public static void render(in LayoutPart src, ITextBuffer dst)

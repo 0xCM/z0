@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using Windows;
 
-    using static Part;
+    using static Root;
 
     public readonly struct NativeModule : INativeModule
     {

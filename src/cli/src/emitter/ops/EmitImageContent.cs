@@ -47,8 +47,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         uint Read(BinaryReader src, Span<byte> dst)
-        {
-            return  (uint)src.Read(dst);
-        }
+            => (uint)src.Read(dst);
     }
 }

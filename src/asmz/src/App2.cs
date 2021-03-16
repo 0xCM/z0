@@ -802,7 +802,7 @@ namespace Z0.Asm
         void EmitImageHeaders()
         {
             var svc = ImageDataEmitter.create(Wf);
-            svc.EmitImageHeaders(Archives.build(Wf));
+            svc.EmitImageHeaders(Archives.runtime(Wf));
         }
 
         void Receive(in ImageContent src)

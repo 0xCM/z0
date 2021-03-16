@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public interface IMemoryFileReader : IWfStateless<IMemoryFileReader>
+    public interface IMemoryFileReader
     {
         /// <summary>
         /// Reads a specified count of parametrically-identified cells from a mapped file
@@ -34,7 +33,6 @@ namespace Z0
         /// Maps all of the files in a specified directory int process memory
         /// </summary>
         /// <param name="src">The source directory</param>
-        /// <returns></returns>
         MappedFiles Map(FS.FolderPath src);
 
         ReadOnlySpan<byte> Read(MemoryAddress src, ByteSize size);

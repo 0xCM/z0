@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiExtractReader : IArchiveReader
+    public interface IApiExtractReader
     {
         Index<ApiExtractBlock> Read(FS.FilePath src);
     }
