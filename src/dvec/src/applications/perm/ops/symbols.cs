@@ -31,26 +31,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static char letter(N4 n, bit x, bit y)
-        {
-            if(x && y)
-                return 'D';
-            else if(!x && !y)
-                return 'A';
-            else if(x && !y)
-                return 'B';
-            else
-                return 'C';
-        }
-
-        [MethodImpl(Inline), Op]
         public static Span<char> letters(N4 n, BitString src, Span<char> dst)
         {
             int i=0, j=0;
-            dst[i++] = letter(n4, src[j++], src[j++]);
-            dst[i++] = letter(n4, src[j++], src[j++]);
-            dst[i++] = letter(n4, src[j++], src[j++]);
-            dst[i++] = letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
             return dst;
         }
 
@@ -66,8 +53,7 @@ namespace Z0
             var block = FormatBlock(src);
             var domain = $"{Perm4L.A}{Perm4L.B}{Perm4L.C}{Perm4L.D}";
             var codomain = new string(letters(n,bs,buffer));
-            var mapping = $"{block}: {domain} -> {codomain}";
-            return mapping;
+            return $"{block}: {domain} -> {codomain}";
         }
     }
 }

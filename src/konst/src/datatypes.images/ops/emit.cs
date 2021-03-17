@@ -14,7 +14,7 @@ namespace Z0
         {
             var dst = wf.Db().IndexTable<LocatedImageRow>();
             var flow = wf.EmittingTable<LocatedImageRow>(dst);
-            var rows = ImageMaps.emit(ImageMaps.index(), dst);
+            var rows = emit(index(), dst);
             wf.EmittedTable(flow,rows.Count);
             return rows;
         }

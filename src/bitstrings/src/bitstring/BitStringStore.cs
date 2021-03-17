@@ -41,15 +41,6 @@ namespace Z0
         public static unsafe ReadOnlySpan<byte> select(byte value)
             => new ReadOnlySpan<byte>(bitseqP(value), 8);
 
-        /// <summary>
-        /// Selects unpacked bits from a block of 8*256 bytes, where each byte represents 1 bit
-        /// </summary>
-        /// <param name="offset">The bit offset index</param>
-        /// <param name="length">The number of bits to select</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> select(int offset, int length)
-            => BitSeqData.Slice(offset,length);
-
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> bitseq<T>(T src, int count)
             where T : unmanaged
@@ -95,14 +86,14 @@ namespace Z0
             || typeof(T) == typeof(ushort)
             || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
-                bitchars_u(src,dst,offset);
+                bitchars_u(src, dst, offset);
             else if(typeof(T) == typeof(sbyte)
             || typeof(T) == typeof(short)
             || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
-                bitchars_i(src,dst,offset);
+                bitchars_i(src, dst, offset);
             else
-                bitchars_f(src,dst,offset);
+                bitchars_f(src, dst, offset);
         }
 
         const int seglen = 8;
@@ -259,20 +250,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static void bitchars_i<T>(T src, Span<char> dst, int offset)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(sbyte))
-                bitchars(int8(src),dst,offset);
-            else if(typeof(T) == typeof(short))
-                bitchars(int16(src),dst,offset);
-            else if(typeof(T) == typeof(int))
-                bitchars(int32(src),dst,offset);
-            else
-                bitchars(int64(src),dst,offset);
-        }
-
-        [MethodImpl(Inline)]
         static void bitchars_u<T>(T src, Span<char> dst, int offset)
             where T : unmanaged
         {
@@ -284,6 +261,20 @@ namespace Z0
                 bitchars(uint32(src),dst,offset);
             else
                 bitchars(uint64(src),dst,offset);
+        }
+
+        [MethodImpl(Inline)]
+        static void bitchars_i<T>(T src, Span<char> dst, int offset)
+            where T : unmanaged
+        {
+            if(typeof(T) == typeof(sbyte))
+                bitchars(int8(src),dst,offset);
+            else if(typeof(T) == typeof(short))
+                bitchars(int16(src),dst,offset);
+            else if(typeof(T) == typeof(int))
+                bitchars(int32(src),dst,offset);
+            else
+                bitchars(int64(src),dst,offset);
         }
 
         [MethodImpl(Inline)]

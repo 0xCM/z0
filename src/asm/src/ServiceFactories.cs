@@ -59,9 +59,6 @@ namespace Z0
         public static IAsmContext AsmContext(this IWfShell wf)
             => Services.AsmServices.context(wf);
 
-        public static AsmDataReader AsmDataReader(this IWfShell wf)
-            => Services.AsmDataReader.create(wf);
-
         public static ApiCaptureService ApiCapture(this IWfShell wf)
             => Z0.ApiCaptureService.create(wf);
 

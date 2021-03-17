@@ -245,12 +245,6 @@ namespace Z0.Asm
             archive.CodeBlocks(part, accept);
         }
 
-        void CheckDataReader()
-        {
-            var reader = Wf.AsmDataReader();
-            var calls = reader.LoadCallRows();
-            Wf.Status($"Loaded {calls.Count} call rows");
-        }
 
         void CheckInterfaceMaps()
         {
@@ -793,7 +787,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.ApiStatementPipe().EmitThumbprints();
+            Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
+            //Wf.ApiStatementPipe().EmitThumbprints();
 
             //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
 

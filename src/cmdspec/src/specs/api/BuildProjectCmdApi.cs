@@ -10,45 +10,6 @@ namespace Z0
     public static class BuildProjectCmdApi
     {
         [Op]
-        static void render(in BuildProjectCmd src, ITextBuffer dst)
-        {
-            dst.Append("dotnet build");
-
-            dst.AppendSpace();
-            dst.Append(src.SolutionPath.Format(PathSeparator.BS));
-
-            dst.AppendSpace();
-            dst.AppendFormat(PropertySpec, nameof(src.Configuration), src.Configuration);
-
-            dst.AppendSpace();
-            dst.AppendFormat(QuotedPropertySpec, nameof(src.Platform), src.Platform);
-
-            if(src.LogFile.IsNonEmpty)
-            {
-                dst.AppendSpace();
-                dst.AppendFormat(Flag, "fl");
-                dst.AppendSpace();
-                dst.AppendFormat(QuotedOptionAssign, "flp", nameof(src.LogFile), src.LogFile.Format(PathSeparator.BS));
-                if(src.Verbosity != 0)
-                    dst.AppendFormat(";{0}={1} ","verbosity", src.Verbosity);
-
-            }
-
-            if(src.MaxCpuCount != 0)
-            {
-                dst.AppendSpace();
-                dst.AppendFormat(OptionValue, nameof(src.MaxCpuCount), src.MaxCpuCount);
-            }
-
-            if(src.Graph)
-            {
-                dst.AppendSpace();
-                dst.AppendFormat(OptionValue, "graph", src.Graph);
-            }
-
-        }
-
-        [Op]
         public static string Format(this BuildProjectCmd src)
         {
             var dst = Buffers.text();
@@ -109,6 +70,44 @@ namespace Z0
             return src.Build(vars);
         }
 
+        [Op]
+        static void render(in BuildProjectCmd src, ITextBuffer dst)
+        {
+            dst.Append("dotnet build");
+
+            dst.AppendSpace();
+            dst.Append(src.SolutionPath.Format(PathSeparator.BS));
+
+            dst.AppendSpace();
+            dst.AppendFormat(PropertySpec, nameof(src.Configuration), src.Configuration);
+
+            dst.AppendSpace();
+            dst.AppendFormat(QuotedPropertySpec, nameof(src.Platform), src.Platform);
+
+            if(src.LogFile.IsNonEmpty)
+            {
+                dst.AppendSpace();
+                dst.AppendFormat(Flag, "fl");
+                dst.AppendSpace();
+                dst.AppendFormat(QuotedOptionAssign, "flp", nameof(src.LogFile), src.LogFile.Format(PathSeparator.BS));
+                if(src.Verbosity != 0)
+                    dst.AppendFormat(";{0}={1} ","verbosity", src.Verbosity);
+
+            }
+
+            if(src.MaxCpuCount != 0)
+            {
+                dst.AppendSpace();
+                dst.AppendFormat(OptionValue, nameof(src.MaxCpuCount), src.MaxCpuCount);
+            }
+
+            if(src.Graph)
+            {
+                dst.AppendSpace();
+                dst.AppendFormat(OptionValue, "graph", src.Graph);
+            }
+        }
+
         const string Quote = "\"";
 
         const string PropertySpec = "/p:{0}={1}";
@@ -117,18 +116,8 @@ namespace Z0
 
         const string OptionValue = "-{0}:{1}";
 
-        const string OptionAssign ="-{0}:{1}={2}";
+        const string QuotedOptionAssign ="-{0}:{1}=" + RP.QuotedSlot2;
 
-        const string QuotedOptionAssign ="-{0}:{1}=" + QuotedFence2;
-
-        const string QuotedFence = Quote + "{0}" + Quote;
-
-        const string QuotedFence1 = Quote + "{1}" + Quote;
-
-        const string QuotedFence2 = Quote + "{2}" + Quote;
-
-        const string QuotedFence3 = Quote + "{3}" + Quote;
-
-        const string QuotedPropertySpec = "/p:{0}=" + QuotedFence1;
+        const string QuotedPropertySpec = "/p:{0}=" + RP.QuotedSlot1;
     }
 }

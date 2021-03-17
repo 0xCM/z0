@@ -37,6 +37,9 @@ namespace Z0.Asm
             => IP.CompareTo(src.IP);
 
         public AsmThumbprint Thumbprint()
-            => asm.thumbprint(Expression, Sig, OpCode, Encoded);
+            => asm.thumbprint(Sig, OpCode, Encoded);
+
+        public AsmStatementThumbprint StatementThumbprint()
+            => asm.thumbprint(BaseAddress, BlockOffset, Expression, Thumbprint());
     }
 }

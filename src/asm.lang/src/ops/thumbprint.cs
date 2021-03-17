@@ -12,7 +12,11 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmThumbprint thumbprint(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => new AsmThumbprint(statement, sig, opcode, encoded);
+        public static AsmThumbprint thumbprint(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+            => new AsmThumbprint(sig, opcode, encoded);
+
+        [MethodImpl(Inline), Op]
+        public static AsmStatementThumbprint thumbprint(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprint thumbprint)
+            => new AsmStatementThumbprint(@base, offset, expr, thumbprint);
     }
 }

@@ -7,18 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Direct vectorized intrinsics
-    /// </summary>
-    [ApiHost("api")]
-    public partial class dvec
+    using static Part;
+    using static memory;
+
+    partial struct bit
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        [MethodImpl(Inline), Op]
+        public static BinaryDigit digit(bit src)
+            => (BinaryDigit)(byte)src;
     }
-
-    public static partial class XTend
-    {
-
-    }
-
 }

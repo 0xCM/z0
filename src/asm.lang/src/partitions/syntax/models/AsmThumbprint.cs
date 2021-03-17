@@ -8,8 +8,8 @@ namespace Z0.Asm
     {
         TextBlock Content {get;}
 
-        public AsmThumbprint(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => Content = string.Format("{0,-32} ; ({1})[{2}]{3}{4}", statement, sig, opcode, Encoded, encoded);
+        public AsmThumbprint(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+            => Content = string.Format("({0})[{1}]{2}{3}", sig, opcode, Implication, encoded);
 
         public string Format()
             => Content.Format();
@@ -28,11 +28,11 @@ namespace Z0.Asm
 
         public int CompareTo(AsmThumbprint src)
         {
-            var e0 = Content.Format().LeftOfFirst(Encoded);
-            var e1 = src.Content.Format().LeftOfFirst(Encoded);
+            var e0 = Content.Format().LeftOfFirst(Implication);
+            var e1 = src.Content.Format().LeftOfFirst(Implication);
             return e0.CompareTo(e1);
         }
 
-        const string Encoded = " => ";
+        const string Implication = " => ";
     }
 }

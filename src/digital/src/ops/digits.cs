@@ -286,7 +286,7 @@ namespace Z0
         /// Computes the digits corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static ref readonly NatSpan<N4,byte> digits(Perm4L src, in NatSpan<N4,byte> dst)
         {
             var scalar = (byte)src;

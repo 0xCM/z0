@@ -22,10 +22,8 @@ namespace Z0
         {
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
-            var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
-            EmitImageHeaders(cmd.Source, cmd.Target);
-            cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
-            EmitImageHeaders(cmd.Source, cmd.Target);
+            EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
+            EmitImageHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
         }
 
         public Outcome<Count> EmitImageHeaders(FS.Files src, FS.FilePath dst)

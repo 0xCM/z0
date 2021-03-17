@@ -15,6 +15,40 @@ namespace Z0
     [ApiHost]
     public readonly struct PermSymbolic
     {
+        public static string fPerm2x128<T>(Vector512<T> src, Perm2x4 p0, Perm2x4 p1)
+            where T : unmanaged
+        {
+            var sfk = SequenceFormatKind.List;
+            var sep = Chars.Comma;
+            var pad = 2;
+            var sym0 = PermSymbolic.symbols(p0).ToString();
+            var sym1 = PermSymbolic.symbols(p1).ToString();
+            return $"{src.Format()} |> {sym0}{sym1} = {gcpu.vperm2x128(src, p0, p1).Format()}";
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Span<char> letters(N4 n, BitSpan src, Span<char> dst)
+        {
+            int i=0, j=0;
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            dst[i++] = PermSymbolic.letter(n4, src[j++], src[j++]);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static char letter(N4 n, bit x, bit y)
+        {
+            if(x && y)
+                return 'D';
+            else if(!x && !y)
+                return 'A';
+            else if(x && !y)
+                return 'B';
+            else
+                return 'C';
+        }
 
         /// <summary>
         /// Creates value-to-symbol index

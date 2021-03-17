@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     public readonly struct AsmStatementExpr : IEquatable<AsmStatementExpr>
     {
@@ -33,6 +34,22 @@ namespace Z0.Asm
 
         public override bool Equals(object src)
             => src is AsmStatementExpr x && Equals(x);
+
+        public BinaryCode Serialize()
+        {
+            var count = Content.Length;
+            if(count != 0)
+            {
+                var buffer = alloc<byte>(Content.Length);
+                ref var dst = ref first(buffer);
+                var src = Content.View;
+                for(var i=0; i<count; i++)
+                    seek(dst,i) = (byte)skip(src,i);
+                return buffer;
+            }
+            else
+                return BinaryCode.Empty;
+        }
 
         public int CompareTo(AsmStatementExpr src)
             => Content.CompareTo(src.Content);

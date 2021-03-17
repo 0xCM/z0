@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitBlock(T src, uint bitcount)
         {
-            data = SpanBlocks.alloc<T>(n256);
+            data = SpanBlocks.alloc<T>(w256);
             data.First = src;
             BitCount = bitcount;
         }
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitBlock(Span<T> src, uint n)
         {
-            data = SpanBlocks.safeload(n256, src);
+            data = SpanBlocks.safeload(w256, src);
             BitCount = n;
         }
 

@@ -30,47 +30,49 @@ namespace Z0.Asm
         FS.FolderPath StatementRoot
             => Db.TableDir<AsmApiStatement>();
 
-        public void EmitThumbprints()
+        public void EmitThumbprintSummary()
         {
             var counter = 0;
-            var distinct = root.hashset<AsmThumbprint>();
+            var distinct = new AsmStatementThumbprints();
 
             void receiver(AsmApiStatement src)
             {
                 counter++;
-                distinct.Add(src.Thumbprint());
+                distinct.Add(src.StatementThumbprint());
             }
 
             Load(receiver);
 
-            var output = distinct.ToArray();
-            Wf.Status($"Collected {output.Length} thumbprints from {counter} statements");
-            EmitThumbprints(output);
+            EmitThumbprintSummary(distinct);
         }
 
-        public void EmitThumbprints(Index<AsmApiStatement> src)
+        public void EmitThumbprintSummary(Index<AsmApiStatement> src)
         {
-            var distinct = root.hashset<AsmThumbprint>();
-            root.iter(src, s => distinct.Add(s.Thumbprint()));
-            var output = distinct.ToArray();
-            Wf.Status($"Collected {output.Length} thumbprints from {src.Count} statements");
-            EmitThumbprints(output);
+            var distinct = new AsmStatementThumbprints();
+            root.iter(src, s => distinct.Add(s.StatementThumbprint()));
+            var collected = distinct.Collected();
+            Wf.Status($"Collected {collected.Length} thumbprints from {src.Count} statements");
+            EmitThumbprintSummary(distinct);
         }
 
-        void EmitThumbprints(HashSet<AsmThumbprint> src)
+        void EmitThumbprintSummary(AsmStatementThumbprints src)
         {
-            EmitThumbprints(src.ToArray());
-        }
-
-        void EmitThumbprints(Index<AsmThumbprint> src)
-        {
-            Array.Sort(src.Storage);
             var target = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
-            var emitting = Wf.EmittingFile(target);
+            var flow = Wf.EmittingFile(target);
             using var writer = target.Writer();
-            root.iter(src, o => writer.WriteLine(o));
-            Wf.EmittedFile(emitting, src.Length);
+            writer.Write(src.Format());
+            Wf.EmittedFile(flow);
         }
+
+        // void EmitThumbprintSummary(Index<AsmThumbprint> src)
+        // {
+        //     Array.Sort(src.Storage);
+        //     var target = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
+        //     var emitting = Wf.EmittingFile(target);
+        //     using var writer = target.Writer();
+        //     root.iter(src, o => writer.WriteLine(o));
+        //     Wf.EmittedFile(emitting, src.Length);
+        // }
 
         public void Load(Action<AsmApiStatement> receiver)
         {
@@ -164,7 +166,7 @@ namespace Z0.Asm
             if(clear)
                 ClearTarget();
 
-            var thumbprints = root.hashset<AsmThumbprint>();
+            var thumbprints = new AsmStatementThumbprints();
             var formatter = Records.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
@@ -182,7 +184,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
-                thumbprints.Add(statement.Thumbprint());
+                thumbprints.Add(statement.StatementThumbprint());
                 var uri = statement.OpUri;
                 if(i == 0)
                 {
@@ -226,12 +228,13 @@ namespace Z0.Asm
                 }
 
                 tableWriter.WriteLine(formatter.Format(statement));
-                asmWriter.WriteLine(FormatAsm(statement));
+
+                asmWriter.WriteLine(string.Format("{0} {1,-36} ; {2}", statement.BlockOffset, statement.Expression, statement.Thumbprint()));
 
                 counter++;
             }
 
-            EmitThumbprints(thumbprints);
+            EmitThumbprintSummary(thumbprints);
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 
@@ -240,9 +243,6 @@ namespace Z0.Asm
         }
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
-
-        static string FormatAsm(in AsmApiStatement src)
-            => string.Format("{0,-36} ; {1} {2}", src.Expression, src.BlockOffset, src.Thumbprint());
 
         uint CreateStatements(in ApiHostCode src, List<AsmApiStatement> dst)
         {

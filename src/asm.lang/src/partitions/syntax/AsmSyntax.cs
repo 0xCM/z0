@@ -6,11 +6,24 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Part;
+    using static memory;
 
     public readonly partial struct AsmSyntax
     {
-
+        public static uint render(AsmStatementThumbprints src, ITextBuffer dst)
+        {
+            var values = src.Collected();
+            var counter = 0u;
+            for(var i=0; i<values.Length; i++)
+            {
+                ref readonly var value = ref skip(values,i);
+                dst.AppendLineFormat("{0} {1,-36} ; {2}", value.Offset, value.Statement, value.Thumbprint);
+                counter++;
+            }
+            return counter;
+        }
     }
 }

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     [ApiComplete]
     public class t_bg_permute : t_bitgrids<t_bg_permute>
     {
