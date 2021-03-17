@@ -8,22 +8,24 @@ namespace Z0
 
     using static DbNames;
 
+    using X = FS.Extensions;
+
     partial interface IEnvPaths
     {
         FS.FolderPath AsmRoot()
             => CaptureRoot() + FS.folder(asm);
 
         FS.Files AsmFiles()
-            => AsmRoot().Files(Asm,true);
+            => AsmRoot().Files(X.Asm,true);
 
         FS.Files AsmFiles(PartId part)
             => AsmFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath AsmFile(ApiHostUri host)
-            => AsmRoot() + ApiFiles.filename(host, Asm);
+            => AsmRoot() + ApiFiles.filename(host, X.Asm);
 
         FS.FilePath AsmFile(PartId part, string api)
-            => AsmRoot() + ApiFileName(part, api, Asm);
+            => AsmRoot() + ApiFileName(part, api, X.Asm);
 
         FS.FilePath AsmFile(Type host)
             => AsmFile(host.HostUri());
@@ -32,6 +34,6 @@ namespace Z0
             => AsmFile(typeof(T).HostUri());
 
         FS.FileName AsmFileName(OpIdentity id)
-            => LegalFileName(id, Asm);
+            => LegalFileName(id, X.Asm);
     }
 }

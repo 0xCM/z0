@@ -119,6 +119,10 @@ namespace Z0
             public int CompareTo(FileExt src)
                 => Name.CompareTo(src.Name);
 
+            [MethodImpl(Inline)]
+            public static implicit operator FileExt((FileExt a, FileExt b) src)
+                => src.a + src.b;
+
             public static FileExt Empty
             {
                 [MethodImpl(Inline)]

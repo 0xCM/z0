@@ -6,9 +6,11 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using X = FS.Extensions;
 
     using static FS;
+
+    using X = FS.Extensions;
+
 
     [Free]
     public interface IFileExtensions

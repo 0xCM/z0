@@ -16,6 +16,10 @@ namespace Z0
 
         public static MsgPattern<FS.FolderPath> ObliteratingDirectory => "Obliterating the directory {0}";
 
+        public static MsgPattern<FS.FileUri> ParsingFile => "Parsing {0}";
+
+        public static MsgPattern<FS.FileUri> ParsedFile => "Parsed {0}";
+
         public static MsgPattern<FS.FolderPath> ObliteratedDirectory => "Consigned the directory {0} to oblivion";
 
         public static RenderPattern<Count> EmittingInstructionRecords => "Emitting {0} instruction tables";

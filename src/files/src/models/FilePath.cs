@@ -118,6 +118,19 @@ namespace Z0
             public bool Is(FileExt ext)
                 => Name.Text.EndsWith(ext.Name.Text, NoCase);
 
+            [MethodImpl(Inline)]
+            public bool Is(FileExt x1, FileExt x2)
+                => Is(x1 + x2);
+
+            [MethodImpl(Inline)]
+            public bool IsNot(FileExt ext)
+                => !Is(ext);
+
+            [MethodImpl(Inline)]
+            public bool IsNot(FileExt x1, FileExt x2)
+                => !Is(x1,x2);
+
+
             public FilePath WithoutExtension
                 => FolderPath + FileName.WithoutExtension;
 

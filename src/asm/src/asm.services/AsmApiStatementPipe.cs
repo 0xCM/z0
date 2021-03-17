@@ -18,10 +18,69 @@ namespace Z0.Asm
 
         IAsmDecoder Decoder;
 
+        const byte FieldCount = AsmApiStatement.FieldCount;
+
         protected override void OnInit()
         {
             Sigs = AsmSigs.create(Wf);
             Decoder = Wf.AsmServices().Decoder();
+        }
+
+        FS.FolderPath StatementRoot
+            => Db.TableDir<AsmApiStatement>();
+
+        public void Load(Action<AsmApiStatement> receiver)
+        {
+            var files = StatementRoot.EnumerateFiles(FS.Extensions.Csv, true).Array();
+            foreach(var file in files)
+            {
+                var flow = Wf.Running(Msg.ParsingFile.Format(file));
+                if(TextDocs.parse(file, out var doc))
+                {
+                    if(doc.Header.Labels.Length == FieldCount)
+                    {
+                        var count = doc.RowCount;
+                        var rows = doc.RowData.View;
+                        for(var i=0; i<count; i++)
+                        {
+                            ref readonly var row = ref skip(rows,i);
+                            if(Parse(row, out var statement))
+                                receiver(statement);
+                        }
+                        Wf.Ran(flow, Msg.ParsedFile.Format(file));
+                    }
+                    else
+                        Wf.Error($"Wrong field count of {doc.Header.Labels.Length}");
+
+                }
+                else
+                    Wf.Error($"Could not parse {file.ToUri()}");
+            }
+        }
+
+        Outcome Parse(TextRow src, out AsmApiStatement dst)
+        {
+            var count = src.CellCount;
+            var i=0;
+            var cells = src.Cells.View;
+            if(count == FieldCount)
+            {
+                Records.parse(skip(cells, i++), out dst.BlockOffset);
+                dst.Expression = asm.statement(skip(cells,i++));
+                Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
+                dst.OpCode = asm.opcode(skip(cells, i++));
+                dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
+                Records.parse(skip(cells, i), out dst.BaseAddress);
+                Records.parse(skip(cells, i), out dst.IP);
+                Records.parse(skip(cells, i), out dst.OpUri);
+                return true;
+            }
+            else
+            {
+                Wf.Error($"Wrong number of cells in row {src}");
+                dst = default;
+                return false;
+            }
         }
 
         public Index<AsmApiStatement> BuildStatements(ApiCodeBlocks src)

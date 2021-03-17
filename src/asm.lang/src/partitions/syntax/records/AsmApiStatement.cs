@@ -14,6 +14,8 @@ namespace Z0.Asm
     {
         public const string TableId = "asm.statements";
 
+        public const byte FieldCount = 8;
+
         public Address16 BlockOffset;
 
         public AsmStatementExpr Expression;

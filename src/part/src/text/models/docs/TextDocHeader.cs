@@ -26,6 +26,18 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Labels.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !Labels.IsEmpty;
+        }
+
         public static TextDocHeader Empty
             => new TextDocHeader(sys.empty<string>());
     }

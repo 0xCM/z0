@@ -110,7 +110,7 @@ namespace Z0
                     }
                 }
 
-                var doc = new TextDoc(fmt, docheader, counter, rows.ToArray());
+                var doc = new TextDoc(fmt, docheader ? docheader.Value : TextDocHeader.Empty, counter, rows.ToArray());
                 return root.parsed(string.Empty, doc);
             }
             catch(Exception e)

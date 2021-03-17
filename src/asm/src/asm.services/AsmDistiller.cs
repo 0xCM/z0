@@ -60,7 +60,7 @@ namespace Z0.Asm
             const byte fields = AsmStatementInfo.FieldCount;
             if(attempt)
             {
-                var header = doc.Header.Value;
+                var header = doc.Header;
                 if(header.Labels.Length !=fields)
                 {
                     Wf.Error($"The header {header} has {header.Labels.Length} fields and yet {fields} were expected");

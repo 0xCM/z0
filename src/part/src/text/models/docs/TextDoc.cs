@@ -17,12 +17,12 @@ namespace Z0
 
         public TextDocFormat Format {get;}
 
-        public Option<TextDocHeader> Header {get;}
+        public TextDocHeader Header {get;}
 
         public uint LineCount {get;}
 
         [MethodImpl(Inline)]
-        public TextDoc(TextDocFormat format, Option<TextDocHeader> header, uint count, params TextRow[] rows)
+        public TextDoc(TextDocFormat format, TextDocHeader header, uint count, params TextRow[] rows)
         {
             RowData = rows;
             Header = header;
@@ -69,7 +69,7 @@ namespace Z0
         public bool HasHeader
         {
             [MethodImpl(Inline)]
-            get => Header.IsSome();
+            get => Header.IsNonEmpty;
         }
 
         public IEnumerable<TextRows> Partition(int offset, Func<TextRow,bool> f)

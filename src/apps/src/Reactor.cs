@@ -143,7 +143,7 @@ namespace Z0
             for(ushort i=0; i<count; i++)
             {
                 ref readonly var file = ref mapped[i];
-                var target = cmd.Target + FS.file(file.Path.FileName.Name, FileExtensions.Csv);
+                var target = cmd.Target + FS.file(file.Path.FileName.Name, FS.Extensions.Csv);
                 var flow = Wf.EmittingFile(target);
                 var service = MemoryEmitter.create(Wf);
                 service.Emit(file.BaseAddress, file.Size, target);

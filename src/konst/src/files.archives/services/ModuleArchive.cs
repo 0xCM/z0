@@ -16,6 +16,24 @@ namespace Z0
     {
         public FS.FolderPath Root {get;}
 
+        public IEnumerable<FileModule> ManagedDllFiles()
+            => dll_managed();
+
+        public IEnumerable<FileModule> NativeDllFiles()
+            => dll_native();
+
+        public IEnumerable<FileModule> ManagedExeFiles()
+            => exe_managed();
+
+        public IEnumerable<FileModule> NativeExeFiles()
+            => exe_native();
+
+        public IEnumerable<FileModule> StaticLibs()
+            => lib_native();
+
+        public IEnumerable<FileModule> ArchiveFiles()
+            => modules();
+
         [MethodImpl(Inline)]
         internal ModuleArchive(FS.FolderPath root)
             => Root = root;
@@ -77,23 +95,5 @@ namespace Z0
                     yield return new NativeLibFile(path);
             }
         }
-
-        public IEnumerable<FileModule> ManagedDllFiles()
-            => dll_managed();
-
-        public IEnumerable<FileModule> NativeDllFiles()
-            => dll_native();
-
-        public IEnumerable<FileModule> ManagedExeFiles()
-            => exe_managed();
-
-        public IEnumerable<FileModule> NativeExeFiles()
-            => exe_native();
-
-        public IEnumerable<FileModule> StaticLibs()
-            => lib_native();
-
-        public IEnumerable<FileModule> ArchivedFiles()
-            => modules();
     }
 }
