@@ -42,11 +42,7 @@ public enum PartId : ulong
 
     GMath = 34,
 
-    GMathObjects = 35,
-
     Polyrand = 36,
-
-    DynoShell = 40,
 
     Tools = 41,
 
@@ -60,7 +56,9 @@ public enum PartId : ulong
 
     Cpu = 46,
 
-    Gen = 47,
+    CpuShell = 47,
+
+    Gen = 48,
 
     Clr = 60,
 

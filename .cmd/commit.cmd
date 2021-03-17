@@ -1,3 +1,3 @@
 @echo off
 
-%ZControl%\.cmd\commit-z0.cmd
+%ControlScripts%\commit-z0.cmd

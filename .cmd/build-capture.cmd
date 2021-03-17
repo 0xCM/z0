@@ -1,3 +1,2 @@
 @echo off
-
-%ZControl%\.cmd\build-capture.cmd
+%ControlScripts%\build-capture.cmd

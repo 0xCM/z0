@@ -1,3 +1,3 @@
 @echo off
 
-%ZControl%\.cmd\build-machine.cmd
+%ControlScripts%\build-machine.cmd
