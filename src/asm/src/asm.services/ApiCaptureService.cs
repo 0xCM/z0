@@ -43,6 +43,15 @@ namespace Z0
             return captured.SelectMany(x => x.Storage);
         }
 
+        public Index<AsmMemberRoutine> CaptureApi(Index<PartId> parts)
+        {
+            using var flow = Wf.Running();
+            ClearArchive(parts);
+            var captured = RunCapture(parts);
+            Wf.Ran(flow);
+            return captured.SelectMany(x => x.Storage);
+        }
+
         Index<AsmMemberRoutines> RunCapture()
         {
             var dst = root.list<AsmMemberRoutines>();
@@ -55,10 +64,28 @@ namespace Z0
             return dst.ToArray();
         }
 
+        Index<AsmMemberRoutines> RunCapture(Index<PartId> parts)
+        {
+            var dst = root.list<AsmMemberRoutines>();
+            using var flow = Wf.Running();
+            var catalogs = Wf.Api.PartCatalogs(parts).View;
+            var count = catalogs.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(CapturePart(skip(catalogs,i)));
+            Wf.Ran(flow, count);
+            return dst.ToArray();
+        }
+
         void ClearArchive()
         {
             using var archive = ApiCaptureArchive.create(Wf);
             archive.Clear();
+        }
+
+        void ClearArchive(Index<PartId> parts)
+        {
+            using var archive = ApiCaptureArchive.create(Wf);
+            archive.Clear(parts);
         }
 
         /// <summary>

@@ -5,8 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+
+    using static Part;
 
     [Flags]
     public enum CaptureRunnerOptions : byte
@@ -18,30 +21,18 @@ namespace Z0
         RebaseMembers = 2,
 
         EmitDump = 4,
-
-        All = EmitImm | RebaseMembers | EmitDump
     }
 
     public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
-        protected override void OnInit()
-        {
+        const CaptureRunnerOptions DefaultOptions = CaptureRunnerOptions.EmitDump | CaptureRunnerOptions.RebaseMembers | CaptureRunnerOptions.EmitImm;
 
+        public Index<AsmMemberRoutine> Run()
+        {
+            return Run(Wf.Api.PartIdentities, DefaultOptions);
         }
 
-
-        public void Run()
-        {
-            Run(Wf.Api.PartIdentities, CaptureRunnerOptions.All);
-            // using var flow = Wf.Running();
-            // Wf.Status(Seq.enclose(parts));
-            // var captured = CaptureParts(parts);
-            // EmitImm(parts);
-            // RebaseMembers();
-            // EmitDump();
-        }
-
-        public void Run(Index<PartId> parts, CaptureRunnerOptions options)
+        public Index<AsmMemberRoutine> Run(Index<PartId> parts, CaptureRunnerOptions options)
         {
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts.Storage));
@@ -57,13 +48,20 @@ namespace Z0
             var dump = (options & CaptureRunnerOptions.EmitDump) != 0;
             if(dump)
                 EmitDump();
+
+            return captured;
+        }
+
+        public Index<AsmMemberRoutine> Run(PartId part, CaptureRunnerOptions? options = null)
+        {
+            return Run(root.array(part), CaptureRunnerOptions.EmitImm);
         }
 
         Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
         {
             var flow = Wf.Running();
             using var step = Wf.ApiCapture();
-            var captured = step.CaptureApi();
+            var captured = step.CaptureApi(parts);
             Wf.Ran(flow);
             return captured;
         }

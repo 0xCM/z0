@@ -24,15 +24,25 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCaptureRunner runner(IWfShell wf)
-            => wf.CaptureRunner();
+        public static Index<AsmMemberRoutine> run(IWfShell wf, Index<PartId> parts, CaptureRunnerOptions options)
+        {
+            using var runner = wf.CaptureRunner();
+            return runner.Run(parts,options);
+        }
+
+        [Op]
+        public static Index<AsmMemberRoutine> run(IWfShell wf, PartId part)
+        {
+            using var runner = wf.CaptureRunner();
+            return runner.Run(part);
+        }
 
         [Op]
         public static void run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
-            using var run = runner(wf);
-            run.Run();
+            using var runner = wf.CaptureRunner();
+            runner.Run();
         }
 
         [MethodImpl(Inline), Op]

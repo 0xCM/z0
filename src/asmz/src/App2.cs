@@ -832,7 +832,9 @@ namespace Z0.Asm
         {
             //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
 
-            RunFunctionWorkflows();
+            //RunFunctionWorkflows();
+
+            Capture.run(Wf, PartId.AsmZ);
         }
 
         public static void Main(params string[] args)

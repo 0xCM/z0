@@ -17,7 +17,7 @@ namespace Z0
                 Clear(part);
         }
 
-        void Clear(PartId part)
+        public void Clear(PartId part)
         {
             var total = 0u;
             total += ClearExtracts(part);
@@ -26,16 +26,19 @@ namespace Z0
             total += ClearHex(part);
             total += ClearCilData(part);
             total += ClearCilCode(part);
-
             TotalStatus(part,total);
+        }
+
+        public void Clear(Index<PartId> parts)
+        {
+            foreach(var part in parts)
+                Clear(part);
         }
 
         static Outcome<uint> Clear(FS.Files src)
             => src.Delete();
 
-
-
-        const string TypeStatusPattern = "Cleared <{0}> *.<{1}> <{2}> files";
+        const string TypeStatusPattern = "Cleared <{0}> <{1}> files for part <{2}>";
 
         const string TotalStatusPattern = "Cleared <{0}> total <{1}> files";
 
