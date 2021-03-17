@@ -15,9 +15,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal Parser(ParseFunction<T> f)
-        {
-            F = f;
-        }
+            => F = f;
 
         [MethodImpl(Inline)]
         public Outcome Parse(string src, out T dst)

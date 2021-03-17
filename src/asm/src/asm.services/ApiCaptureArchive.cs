@@ -20,13 +20,14 @@ namespace Z0
         public void Clear(PartId part)
         {
             var total = 0u;
+            var flow = Wf.Running(string.Format("Clearing {0} files", part.Format()));
             total += ClearExtracts(part);
             total += ClearParsed(part);
             total += ClearAsm(part);
             total += ClearHex(part);
             total += ClearCilData(part);
             total += ClearCilCode(part);
-            TotalStatus(part,total);
+            Wf.Ran(flow, string.Format("Cleared {0} files for part {1}", total, part.Format()));
         }
 
         public void Clear(Index<PartId> parts)
@@ -38,15 +39,8 @@ namespace Z0
         static Outcome<uint> Clear(FS.Files src)
             => src.Delete();
 
-        const string TypeStatusPattern = "Cleared <{0}> <{1}> files for part <{2}>";
-
-        const string TotalStatusPattern = "Cleared <{0}> total <{1}> files";
-
-        void TypeStatus(PartId part, FS.FileExt ext, Count count)
-            => Wf.Status(string.Format(TypeStatusPattern, count, ext, part.Format()));
-
-        void TotalStatus(PartId part, Count count)
-            => Wf.Status(string.Format(TotalStatusPattern, count, part.Format()));
+        void ClearStatus(PartId part, FS.FileExt ext, Count count)
+            => Wf.Status(Msg.ClearedPartFiles.Format(count, ext, part));
 
         Outcome<uint> ClearExtracts(PartId part)
         {
@@ -54,7 +48,7 @@ namespace Z0
             var files = Db.RawExtractFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
@@ -66,7 +60,7 @@ namespace Z0
             var files = Db.ParsedExtractFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
@@ -78,7 +72,7 @@ namespace Z0
             var files = Db.AsmFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
@@ -90,7 +84,7 @@ namespace Z0
             var files = Db.ApiHexFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
@@ -102,7 +96,7 @@ namespace Z0
             var files = Db.CilDataFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
@@ -114,11 +108,15 @@ namespace Z0
             var files = Db.CilCodeFiles(part);
             var result = Clear(files);
             if(result)
-                TypeStatus(part, kind, result.Data);
+                ClearStatus(part, kind, result.Data);
             else
                 Wf.Error(result.Message);
             return result;
         }
+    }
 
+    partial struct Msg
+    {
+        public static MsgPattern<Count,FS.FileExt,PartName> ClearedPartFiles => "Cleared {0} {1} files for part {2}";
     }
 }

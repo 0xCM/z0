@@ -28,6 +28,22 @@ namespace Z0
         }
 
         [Op]
+        public static Outcome parse(string src, out Address64 dst)
+        {
+            var attempt = HexNumericParser.parse64u(src);
+            if(attempt)
+            {
+                dst = attempt.Value;
+                return true;
+            }
+            else
+            {
+                dst = Address64.Zero;
+                return false;
+            }
+        }
+
+        [Op]
         public static Outcome parse(string src, out Address32 dst)
         {
             var attempt = HexNumericParser.parse32u(src);
@@ -74,6 +90,5 @@ namespace Z0
                 return false;
             }
         }
-
     }
 }

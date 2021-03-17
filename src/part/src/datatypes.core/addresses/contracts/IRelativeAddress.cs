@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IRelativeAdress : ITextual, INullity
     {
         uint Offset {get;}

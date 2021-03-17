@@ -13,7 +13,6 @@ namespace Z0
         bool Parse(string src, out dynamic dst);
     }
 
-
     public interface IParseFunction<T> : IParseFunction
     {
         Outcome Parse(string src, out T dst);

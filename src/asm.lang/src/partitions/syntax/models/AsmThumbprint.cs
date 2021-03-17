@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         TextBlock Content {get;}
 
-        public AsmThumbprint(AsmStatementExpr statement,AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+        public AsmThumbprint(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
             => Content = string.Format("{0,-32} ; ({1})[{2}]{3}{4}", statement, sig, opcode, Encoded, encoded);
 
         public string Format()

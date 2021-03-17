@@ -17,59 +17,63 @@ namespace Z0
                 => new RowParser<T>(f,delimiter);
 
         [Op]
-        public static bool parse(string src, out MemoryAddress dst)
+        public static Outcome parse(string src, out MemoryAddress dst)
             => Addresses.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out Address32 dst)
+        public static Outcome parse(string src, out Address64 dst)
             => Addresses.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out Address16 dst)
+        public static Outcome parse(string src, out Address32 dst)
             => Addresses.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out Address8 dst)
+        public static Outcome parse(string src, out Address16 dst)
             => Addresses.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out byte dst)
+        public static Outcome parse(string src, out Address8 dst)
+            => Addresses.parse(src, out dst);
+
+        [Op]
+        public static Outcome parse(string src, out byte dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out short dst)
+        public static Outcome parse(string src, out short dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out ushort dst)
+        public static Outcome parse(string src, out ushort dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out int dst)
+        public static Outcome parse(string src, out int dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out uint dst)
+        public static Outcome parse(string src, out uint dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out long dst)
+        public static Outcome parse(string src, out long dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out ulong dst)
+        public static Outcome parse(string src, out ulong dst)
             => Numeric.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out bit dst)
+        public static Outcome parse(string src, out bit dst)
             => bit.parse(src, out dst);
 
         [Op]
-        public static bool parse(string src, out ByteSize dst)
+        public static Outcome parse(string src, out ByteSize dst)
             => ByteSize.parse(src, out dst);
 
         [Op]
-        public static bool eparse<T>(string src, out T dst)
+        public static Outcome eparse<T>(string src, out T dst)
             where T : unmanaged, Enum
         {
             var result = Enums.parse<T>(src);
@@ -86,7 +90,7 @@ namespace Z0
         }
 
         [Op]
-        public static bool parse(string src, out BinaryCode dst)
+        public static Outcome parse(string src, out BinaryCode dst)
         {
             var result = HexByteParser.Service.ParseData(src);
             if(result)
@@ -102,7 +106,7 @@ namespace Z0
         }
 
         [Op]
-        public static bool parse(string src, out OpUri dst)
+        public static Outcome parse(string src, out OpUri dst)
         {
             var result = ApiUri.parse(src);
             if(result)

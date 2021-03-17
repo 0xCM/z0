@@ -10,14 +10,14 @@ namespace Z0
 
     using static Part;
 
-    [ApiComplete]
+    [ApiHost]
     public class ParseFunctions
     {
-        Dictionary<ClrToken,IParseFunction> Parsers;
+        Dictionary<Type,IParseFunction> _Parsers;
 
         public ParseFunctions()
         {
-            Parsers = root.dict<ClrToken,IParseFunction>();
+            _Parsers = root.dict<Type,IParseFunction>();
         }
 
         public ParseFunctions(Index<IParseFunction> src)
@@ -26,32 +26,39 @@ namespace Z0
             root.iter(src, Include);
         }
 
+        [Op, Closures(UnsignedInts)]
+        public bool Parse<T>(string src, out T dst)
+        {
+            if(Lookup(typeof(T), out var parser))
+            {
+                if(parser.Parse(src, out var parsed))
+                {
+                    dst = (T)parsed;
+                    return true;
+                }
+            }
+            dst = default;
+            return false;
+        }
+
+        [MethodImpl(Inline)]
+        public void Include<T>(ParseFunction<T> parser)
+            => _Parsers[typeof(T)] = Parsers.create(parser);
+
         [MethodImpl(Inline)]
         public void Include(IParseFunction parser)
-            => Parsers[parser.TargetType] = parser;
+            => _Parsers[parser.TargetType] = parser;
 
         [MethodImpl(Inline)]
         public bool Lookup(Type target, out IParseFunction parser)
-            => Parsers.TryGetValue(target, out parser);
-
-        [MethodImpl(Inline)]
-        public bool Lookup(ClrToken target, out IParseFunction parser)
-            => Parsers.TryGetValue(target, out parser);
+            => _Parsers.TryGetValue(target, out parser);
 
         [MethodImpl(Inline)]
         public bool CanParse(Type target)
-            => Parsers.ContainsKey(target);
-
-        [MethodImpl(Inline)]
-        public bool CanParse(ClrToken target)
-            => Parsers.ContainsKey(target);
+            => _Parsers.ContainsKey(target);
 
         [MethodImpl(Inline)]
         public IParseFunction Require(Type target)
-            => Parsers[target];
-
-        [MethodImpl(Inline)]
-        public IParseFunction Require(ClrToken target)
-            => Parsers[target];
+            => _Parsers[target];
     }
 }

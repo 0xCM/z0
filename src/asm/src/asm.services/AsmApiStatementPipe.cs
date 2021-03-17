@@ -116,7 +116,7 @@ namespace Z0.Asm
                     counter = 0;
                 }
 
-                if(statement.Offset == 0)
+                if(statement.BlockOffset == 0)
                 {
                     asmWriter.WriteLine(AsmBlockSeparator);
                     asmWriter.WriteLine(string.Format("; {0}, uri={1}", statement.BaseAddress, statement.OpUri));
@@ -139,7 +139,7 @@ namespace Z0.Asm
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";
 
         static string FormatAsm(in AsmApiStatement src)
-            => string.Format("{0,-36} ; {1} {2}", src.Expression, src.Offset, src.Thumbprint());
+            => string.Format("{0,-36} ; {1} {2}", src.Expression, src.BlockOffset, src.Thumbprint());
 
         uint CreateStatements(in ApiHostCode src, List<AsmApiStatement> dst)
         {
@@ -171,7 +171,7 @@ namespace Z0.Asm
                 var statement = new AsmApiStatement();
                 var size = (ushort)instruction.ByteLength;
                 var specifier = instruction.Specifier;
-                statement.Offset = offset;
+                statement.BlockOffset = offset;
                 statement.BaseAddress = src.BaseAddress;
                 statement.IP = instruction.IP;
                 statement.OpUri = src.Uri;

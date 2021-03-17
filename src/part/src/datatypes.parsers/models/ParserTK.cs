@@ -17,7 +17,7 @@ namespace Z0
         public K Kind {get;}
 
         [MethodImpl(Inline)]
-        public Parser(ParseFunction<T> f, K kind)
+        internal Parser(ParseFunction<T> f, K kind)
         {
             F = f;
             Kind = kind;
