@@ -4,42 +4,50 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
-    public readonly struct AsmSyntaxSymbols
+    [SymbolSource]
+    public enum AsmKeywordToken : byte
     {
         /// <summary>
         /// 8 bits
         /// </summary>
-        public const string @byte = "byte";
+        [Symbol("byte")]
+        @byte,
 
         /// <summary>
         /// 16 bits
         /// </summary>
-        public const string word = "word";
+        [Symbol("word")]
+        word,
 
         /// <summary>
         /// 32 bits
         /// </summary>
-        public const string dword = "dword";
+        [Symbol("dword")]
+        dword,
 
         /// <summary>
         /// 64 bits
         /// </summary>
-        public const string qword = "qword";
+        [Symbol("qword")]
+        qword,
 
         /// <summary>
         /// 128 bits - also known as a "Double Quadword"
         /// </summary>
-        public const string xmmword = "xmmword";
+        [Symbol("xmmword")]
+        xmmword,
 
         /// <summary>
         /// 256 bits
         /// </summary>
-        public const string ymmword = "ymmword";
+        [Symbol("ymmword")]
+        ymmword,
 
         /// <summary>
         /// 512 bits
         /// </summary>
-        public const string zmmword = "zmmword";
+        [Symbol("zmmword")]
+        zmmword,
     }
+
 }

@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [Op]
-        public static void pipe(IWfShell wf, FS.FilePath src, RecordSink<ImageContent> dst)
+        public static void pipe(IWfShell wf, FS.FilePath src, Receiver<ImageContent> dst)
         {
             using var reader = csvreader(wf, src);
             var record = default(ImageContent);
@@ -34,7 +34,7 @@ namespace Z0
             while(@continue)
             {
                 if(reader.Read(ref record))
-                    dst.Deposit(record);
+                    dst(record);
                 else
                     @continue = false;
             }

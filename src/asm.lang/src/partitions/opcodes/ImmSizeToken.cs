@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmSyntaxDocs;
+    using OCD = AsmOpCodeDocs;
     using OCT = AsmOpCodeToken;
 
     /// <summary>
@@ -14,25 +14,25 @@ namespace Z0.Asm
     public enum ImmSizeToken : byte
     {
         /// <summary>
-        /// A size of one byte as described by <see cref='SD.ib'/>
+        /// A size of one byte as described by <see cref='OCD.ib'/>
         /// </summary>
         [Symbol("ib")]
         ib = OCT.ib,
 
         /// <summary>
-        /// A size of two bytes as described by <see cref='SD.iw'/>
+        /// A size of two bytes as described by <see cref='OCD.iw'/>
         /// </summary>
         [Symbol("iw")]
         iw = OCT.iw,
 
         /// <summary>
-        /// A size of four bytes as described by <see cref='SD.id'/>
+        /// A size of four bytes as described by <see cref='OCD.id'/>
         /// </summary>
         [Symbol("id")]
         id = OCT.id,
 
         /// <summary>
-        /// A size of eiqht bytes as described by <see cref='SD.io'/>
+        /// A size of eiqht bytes as described by <see cref='OCD.io'/>
         /// </summary>
         [Symbol("io")]
         io = OCT.io,

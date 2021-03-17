@@ -9,52 +9,38 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Part;
-
-    [Flags]
-    public enum CaptureRunnerOptions : byte
-    {
-        None = 0,
-
-        EmitImm = 1,
-
-        RebaseMembers = 2,
-
-        EmitDump = 4,
-    }
-
     public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
-        const CaptureRunnerOptions DefaultOptions = CaptureRunnerOptions.EmitDump | CaptureRunnerOptions.RebaseMembers | CaptureRunnerOptions.EmitImm;
+        const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.EmitDump | CaptureWorkflowOptions.RebaseMembers | CaptureWorkflowOptions.EmitImm;
 
         public Index<AsmMemberRoutine> Run()
         {
             return Run(Wf.Api.PartIdentities, DefaultOptions);
         }
 
-        public Index<AsmMemberRoutine> Run(Index<PartId> parts, CaptureRunnerOptions options)
+        public Index<AsmMemberRoutine> Run(Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts.Storage));
             var captured = CaptureParts(parts);
-            var emitImm = (options & CaptureRunnerOptions.EmitImm) != 0;
+            var emitImm = (options & CaptureWorkflowOptions.EmitImm) != 0;
             if(emitImm)
                 EmitImm(parts);
 
-            var rebase = (options & CaptureRunnerOptions.RebaseMembers) != 0;
+            var rebase = (options & CaptureWorkflowOptions.RebaseMembers) != 0;
             if(rebase)
                 RebaseMembers();
 
-            var dump = (options & CaptureRunnerOptions.EmitDump) != 0;
+            var dump = (options & CaptureWorkflowOptions.EmitDump) != 0;
             if(dump)
                 EmitDump();
 
             return captured;
         }
 
-        public Index<AsmMemberRoutine> Run(PartId part, CaptureRunnerOptions? options = null)
+        public Index<AsmMemberRoutine> Run(PartId part, CaptureWorkflowOptions? options = null)
         {
-            return Run(root.array(part), CaptureRunnerOptions.EmitImm);
+            return Run(root.array(part), CaptureWorkflowOptions.EmitImm);
         }
 
         Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)

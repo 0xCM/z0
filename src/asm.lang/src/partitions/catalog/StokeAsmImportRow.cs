@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     /* Example:
     | OpCode                                     | Instruction                                | EncodingKind                               | Properties                                 | ImplicitRead                               | ImplicitWrite                              | ImplicitUndef                              | Useful                                     | Protected                                  | Mode64                                     | LegacyMode                                 | Cpuid                                      | AttMnemonic                                | Preferred                                  | Description
     | 04 ib                                      | ADD AL, imm8                               | I                                          | RW, R                                      |                                            | E.OF E.SF E.ZF E.AF E.CF E.PF              |                                            |                                            |                                            | V                                          | V                                          |                                            | addb                                       |                                            | Add imm8 to AL.

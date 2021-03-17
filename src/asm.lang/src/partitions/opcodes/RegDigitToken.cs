@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmSyntaxDocs;
+    using OCD = AsmOpCodeDocs;
     using OCT = AsmOpCodeToken;
 
     /// <summary>
@@ -13,51 +13,51 @@ namespace Z0.Asm
     public enum RegDigitToken : byte
     {
         /// <summary>
-        /// See <see cref='SD.r0'/>
+        /// See <see cref='OCD.r0'/>
         /// </summary>
-        [Symbol("/0", SD.r0)]
+        [Symbol("/0", OCD.r0)]
         r0 = OCT.r0,
 
         /// <summary>
-        /// See <see cref='SD.r1'/>
+        /// See <see cref='OCD.r1'/>
         /// </summary>
-        [Symbol("/1", SD.r1)]
+        [Symbol("/1", OCD.r1)]
         r1 = OCT.r1,
 
         /// <summary>
-        /// See <see cref='SD.r2'/>
+        /// See <see cref='OCD.r2'/>
         /// </summary>
-        [Symbol("/2", SD.r2)]
+        [Symbol("/2", OCD.r2)]
         r2 = OCT.r2,
 
         /// <summary>
-        /// See <see cref='SD.r3'/>
+        /// See <see cref='OCD.r3'/>
         /// </summary>
-        [Symbol("/3", SD.r3)]
+        [Symbol("/3", OCD.r3)]
         r3 = OCT.r3,
 
         /// <summary>
-        /// See <see cref='SD.r4'/>
+        /// See <see cref='OCD.r4'/>
         /// </summary>
-        [Symbol("/4", SD.r4)]
+        [Symbol("/4", OCD.r4)]
         r4 = OCT.r4,
 
         /// <summary>
-        /// See <see cref='SD.r5'/>
+        /// See <see cref='OCD.r5'/>
         /// </summary>
-        [Symbol("/5", SD.r5)]
+        [Symbol("/5", OCD.r5)]
         r5 = OCT.r5,
 
         /// <summary>
-        /// See <see cref='SD.r6'/>
+        /// See <see cref='OCD.r6'/>
         /// </summary>
-        [Symbol("/6", SD.r6)]
+        [Symbol("/6", OCD.r6)]
         r6 = OCT.r6,
 
         /// <summary>
-        /// See <see cref='SD.r7'/>
+        /// See <see cref='OCD.r7'/>
         /// </summary>
-        [Symbol("/7", SD.r7)]
+        [Symbol("/7", OCD.r7)]
         r7 = OCT.r7,
     }
 }

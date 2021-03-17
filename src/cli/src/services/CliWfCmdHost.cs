@@ -32,7 +32,7 @@ namespace Z0
 
         void EmitImageHeaders()
         {
-            Emitter.EmitImageHeaders();
+            Emitter.EmitRuntimeHeaders();
         }
     }
 

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmSyntaxDocs;
+    using SD = AsmOpCodeDocs;
     using OCT = AsmOpCodeToken;
 
     [SymbolSource]

@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [Op]
-        public static Index<AsmMemberRoutine> run(IWfShell wf, Index<PartId> parts, CaptureRunnerOptions options)
+        public static Index<AsmMemberRoutine> run(IWfShell wf, Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var runner = wf.CaptureRunner();
             return runner.Run(parts,options);

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    using static Part;
     using static Hex8Seq;
 
     [PrefixCodes]

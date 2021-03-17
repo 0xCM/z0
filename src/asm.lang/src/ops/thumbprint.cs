@@ -2,18 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    partial struct Records
+    partial struct asm
     {
-        [MethodImpl(Inline)]
-        public static RecordSink<T> sink<T>(Receiver<T> dst)
-            where T : struct, IRecord<T>
-                => new RecordSink<T>(dst);
+        [MethodImpl(Inline), Op]
+        public static AsmThumbprint thumbprint(AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+            => new AsmThumbprint(statement, sig, opcode, encoded);
     }
 }

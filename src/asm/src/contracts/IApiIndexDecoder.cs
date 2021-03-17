@@ -2,10 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using Z0.Asm;
-
     public interface IApiIndexDecoder : IWfService
     {
         ApiAsmDataset Decode(ApiCodeBlocks src);

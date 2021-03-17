@@ -8,6 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
 
     using static Part;
     using static memory;
@@ -28,6 +29,48 @@ namespace Z0.Asm
 
         FS.FolderPath StatementRoot
             => Db.TableDir<AsmApiStatement>();
+
+        public void EmitThumbprints()
+        {
+            var counter = 0;
+            var distinct = root.hashset<AsmThumbprint>();
+
+            void receiver(AsmApiStatement src)
+            {
+                counter++;
+                distinct.Add(src.Thumbprint());
+            }
+
+            Load(receiver);
+
+            var output = distinct.ToArray();
+            Wf.Status($"Collected {output.Length} thumbprints from {counter} statements");
+            EmitThumbprints(output);
+        }
+
+        public void EmitThumbprints(Index<AsmApiStatement> src)
+        {
+            var distinct = root.hashset<AsmThumbprint>();
+            root.iter(src, s => distinct.Add(s.Thumbprint()));
+            var output = distinct.ToArray();
+            Wf.Status($"Collected {output.Length} thumbprints from {src.Count} statements");
+            EmitThumbprints(output);
+        }
+
+        void EmitThumbprints(HashSet<AsmThumbprint> src)
+        {
+            EmitThumbprints(src.ToArray());
+        }
+
+        void EmitThumbprints(Index<AsmThumbprint> src)
+        {
+            Array.Sort(src.Storage);
+            var target = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
+            var emitting = Wf.EmittingFile(target);
+            using var writer = target.Writer();
+            root.iter(src, o => writer.WriteLine(o));
+            Wf.EmittedFile(emitting, src.Length);
+        }
 
         public void Load(Action<AsmApiStatement> receiver)
         {
@@ -121,7 +164,7 @@ namespace Z0.Asm
             if(clear)
                 ClearTarget();
 
-            var thumbprints = root.list<AsmThumbprint>();
+            var thumbprints = root.hashset<AsmThumbprint>();
             var formatter = Records.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
@@ -130,7 +173,6 @@ namespace Z0.Asm
             var tableWriter = default(StreamWriter);
             var tablePath = FS.FilePath.Empty;
             var tableFlow = default(WfTableFlow<AsmApiStatement>);
-
             var asmWriter = default(StreamWriter);
             var asmPath = FS.FilePath.Empty;
             var asmFlow = default(WfFileFlow);
@@ -140,6 +182,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
+                thumbprints.Add(statement.Thumbprint());
                 var uri = statement.OpUri;
                 if(i == 0)
                 {
@@ -188,6 +231,7 @@ namespace Z0.Asm
                 counter++;
             }
 
+            EmitThumbprints(thumbprints);
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 

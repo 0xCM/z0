@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using SD = AsmSyntaxDocs;
+    using SD = AsmSigDocs;
 
     [SymbolSource]
     public enum AsmSigToken : byte

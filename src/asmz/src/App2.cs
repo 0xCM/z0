@@ -654,10 +654,9 @@ namespace Z0.Asm
 
         public void PipeImageData()
         {
-            var dst = Records.sink<ImageContent>(Receive);
             var archive = ImageArchives.tables(Wf);
             var path = archive.Root + FS.file("image.content.genapp", FS.Extensions.Csv);
-            ImageArchives.pipe(Wf, path, dst);
+            ImageArchives.pipe(Wf, path, Receive);
         }
 
         void ShowLetters()
@@ -682,7 +681,6 @@ namespace Z0.Asm
 
         void ShowDependencies(Assembly src)
         {
-            //var json = JsonDepsLoader.json(src);
             var deps = JsonDepsLoader.from(src);
             var libs = deps.Libs();
             var options = deps.Options();
@@ -733,38 +731,6 @@ namespace Z0.Asm
             }
         }
 
-        void Show(ListedFiles src)
-        {
-            for(var i=0; i<src.Count; i++)
-                Wf.Row(src[i]);
-        }
-
-        void ShowDebugFlags()
-        {
-            var archive = RuntimeArchive.create();
-            var src = archive.ManagedDllFiles.Select(x => Assembly.LoadFrom(x.Name));
-            var rows = root.map(src, f => Seq.delimit(f.GetSimpleName(), Seq.delimit(f.DebugFlags())));
-            Wf.Rows(rows);
-        }
-
-        void ShowRuntimeArchive()
-        {
-            var archive = Archives.runtime(Wf);
-            using var log  = ShowLog("modules");
-            log.Show(nameof(archive.NativeDllFiles));
-            root.iter(archive.NativeDllFiles, f => log.Show(f.ToUri()));
-            log.Show(nameof(archive.ManagedDllFiles));
-            root.iter(archive.ManagedDllFiles, f => log.Show(f.ToUri()));
-            log.Show(nameof(archive.JsonDepsFiles));
-            root.iter(archive.JsonDepsFiles, f => log.Show(f.ToUri()));
-        }
-
-        public void LoadXedSummaries()
-        {
-            var catalog = Wf.AsmCatalog();
-            var patterns = catalog.XedSummaries();
-            Wf.Status($"{patterns.Length}");
-        }
 
         void EmitApiStatements()
         {
@@ -773,32 +739,6 @@ namespace Z0.Asm
             var statements = pipe.BuildStatements(store.CodeBlocks());
             pipe.EmitStatements(statements);
             ProcessStatements(statements);
-        }
-
-        void EmitThumbprints()
-        {
-            var counter = 0;
-            var distinct = root.hashset<AsmThumbprint>();
-
-            void receiver(AsmApiStatement src)
-            {
-                counter++;
-                if(src.OpCode.IsValid)
-                    distinct.Add(src.Thumbprint());
-            }
-
-            var pipe = Wf.ApiStatementPipe();
-            pipe.Load(receiver);
-
-            var output = distinct.ToArray();
-            Wf.Status($"Collected {output.Length} thumbprints from {counter} statements");
-            Array.Sort(output);
-
-            var target = Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
-            var emitting = Wf.EmittingFile(target);
-            using var writer = target.Writer();
-            root.iter(output, o => writer.WriteLine(o));
-            Wf.EmittedFile(emitting, output.Length);
         }
 
         void ProcessStatements(ReadOnlySpan<AsmApiStatement> src)
@@ -853,7 +793,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            EmitThumbprints();
+            Wf.ApiStatementPipe().EmitThumbprints();
+
             //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
 
             //RunFunctionWorkflows();

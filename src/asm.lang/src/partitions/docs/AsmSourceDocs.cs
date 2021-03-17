@@ -7,10 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-
     [ApiHost]
-    public readonly struct AsmDocs
+    public readonly struct AsmSourceDocs
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 

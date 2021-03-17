@@ -13,6 +13,7 @@ namespace Z0.Asm
     using static memory;
     using static Rules;
     using static TextRules;
+    using static Pow2x16;
 
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>
@@ -69,7 +70,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseMnemonicExpr(string sig, out AsmMnemonic dst)
+        public Outcome ParseMnemonicExpr(string sig, out AsmMnemonic dst)
         {
             dst = AsmMnemonic.Empty;
             if(text.empty(sig))
@@ -85,7 +86,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseSigExpr(string src, out AsmSigExpr dst)
+        public Outcome ParseSigExpr(string src, out AsmSigExpr dst)
         {
             if(text.nonempty(src))
             {
@@ -150,7 +151,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public ref readonly Token<AsmSigToken> Token(AsmSigToken kind)
         {
-            if((ushort)kind <= AsmSigTokenFacets.LastClass)
+            if((ushort)kind <= (ushort)P2ᐞ11)
                 return ref _SigOpTokens[(byte)kind];
             else
                 return ref _SigOpTokens[0];

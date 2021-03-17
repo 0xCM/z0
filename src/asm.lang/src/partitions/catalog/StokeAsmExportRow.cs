@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
-    using static AsmExpr;
 
     [Record(TableId)]
     public struct StokeAsmExportRow : IRecord<StokeAsmExportRow>

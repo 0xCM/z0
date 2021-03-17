@@ -13,20 +13,19 @@ namespace Z0
         static ReadOnlySpan<byte> SectionHeaderWidths
             => new byte[9]{60,16,16,12,12,60,16,16,16};
 
-        public void EmitImageHeaders()
+        public void EmitRuntimeHeaders()
         {
             EmitImageHeaders(Archives.runtime(Wf));
         }
 
         public void EmitImageHeaders(IRuntimeArchive src)
         {
-            var svc = ImageDataEmitter.create(Wf);
             var db = Wf.Db();
             var dir = db.TableDir<ImageSectionHeader>();
             var cmd = CmdBuilder.EmitImageHeaders(src.DllFiles, db.Table(ImageSectionHeader.TableId, "dll"));
-            svc.EmitImageHeaders(cmd.Source, cmd.Target);
+            EmitImageHeaders(cmd.Source, cmd.Target);
             cmd = CmdBuilder.EmitImageHeaders(src.ExeFiles, db.Table(ImageSectionHeader.TableId, "exe"));
-            svc.EmitImageHeaders(cmd.Source, cmd.Target);
+            EmitImageHeaders(cmd.Source, cmd.Target);
         }
 
         public Outcome<Count> EmitImageHeaders(FS.Files src, FS.FilePath dst)

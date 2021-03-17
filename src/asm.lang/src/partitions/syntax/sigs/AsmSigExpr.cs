@@ -12,14 +12,6 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an expression that identifies an instruction
     /// </summary>
-    /// <remarks>
-    /// Instruction signatures are of the form
-    /// 0 operands: {Mnemonic}
-    /// 1 operand: {Mnemonic}{ }{op1}
-    /// 2 operands: {Mnemonic}{ }{op1}{,}{op2}
-    /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
-    /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
-    /// <remarks>
     public readonly struct AsmSigExpr : ITextExpr<AsmSigExpr>, IComparable<AsmSigExpr>
     {
         readonly TextBlock Data;

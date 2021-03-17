@@ -2,13 +2,19 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
-    using static Pow2x16;
+    using System;
 
-    [LiteralProvider]
-    public readonly struct AsmSigTokenFacets
+    [Flags]
+    public enum CaptureWorkflowOptions : byte
     {
-        public const ushort LastClass = (ushort)P2ᐞ11;
+        None = 0,
+
+        EmitImm = 1,
+
+        RebaseMembers = 2,
+
+        EmitDump = 4,
     }
 }
