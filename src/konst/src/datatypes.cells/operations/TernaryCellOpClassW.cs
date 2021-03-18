@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TernaryCellOpClass<W> : ICellOpClass<TernaryCellOpClass<W>,W,OperatorArity>
+    public readonly struct TernaryCellOpClass<W> : IApiCellOpClass<TernaryCellOpClass<W>,W,OperatorArity>
         where W : unmanaged, ITypeWidth
     {
         public OperatorArity Kind

@@ -29,7 +29,7 @@ namespace Z0
                 => default;
 
             ApiClass IKindedEvalSig.Class
-                => Kind.Id;
+                => Kind.ClassId;
         }
 
         public interface IKindedEvalSig<K,R> : IEvalSig

@@ -19,12 +19,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bit eval<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IApiBitLogicClass
                 => eval_1(a,b, kind);
 
         [MethodImpl(Inline)]
         static bit eval_1<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IApiBitLogicClass
         {
             if(typeof(F) == typeof(K.True))
                 return @true(a, b);
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_2<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IApiBitLogicClass
         {
             if (typeof(F) == typeof(K.Or))
                 return or(a, b);
@@ -56,7 +56,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_3<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IApiBitLogicClass
         {
             if (typeof(F) == typeof(K.Impl))
                 return impl(a, b);
@@ -72,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_4<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IApiBitLogicClass
         {
             if (typeof(F) == typeof(K.LNot))
                 return lnot(a, b);

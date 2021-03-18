@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ApiCanonicalClass;
-    using I = ICanonicalKind;
+    using I = IApiCanonicalClass;
 
     partial struct ApiClasses
     {
@@ -33,22 +33,22 @@ namespace Z0
 
         //~ Parametric
         //~ -------------------------------------------------------------------
-        public readonly struct Reverse<T> : ICanonicalKind<Reverse,T> {}
+        public readonly struct Reverse<T> : IApiCanonicalClass<Reverse,T> {}
 
-        public readonly struct Identity<T> : ICanonicalKind<Identity,T> {}
+        public readonly struct Identity<T> : IApiCanonicalClass<Identity,T> {}
 
-        public readonly struct Concat<T> : ICanonicalKind<Concat,T> {}
+        public readonly struct Concat<T> : IApiCanonicalClass<Concat,T> {}
 
-        public readonly struct Parse<T> : ICanonicalKind<Parse,T> {}
+        public readonly struct Parse<T> : IApiCanonicalClass<Parse,T> {}
 
-        public readonly struct Slice<T> : ICanonicalKind<Slice,T> {}
+        public readonly struct Slice<T> : IApiCanonicalClass<Slice,T> {}
 
-        public readonly struct Zero<T> : ICanonicalKind<Zero,T> {}
+        public readonly struct Zero<T> : IApiCanonicalClass<Zero,T> {}
 
-        public readonly struct One<T> : ICanonicalKind<One,T> {}
+        public readonly struct One<T> : IApiCanonicalClass<One,T> {}
 
-        public readonly struct Test<T> : ICanonicalKind<Test,T> {}
+        public readonly struct Test<T> : IApiCanonicalClass<Test,T> {}
 
-        public readonly struct Zip<T> : ICanonicalKind<Zip,T> {}
+        public readonly struct Zip<T> : IApiCanonicalClass<Zip,T> {}
     }
 }

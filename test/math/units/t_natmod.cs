@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     using static Part;
 
@@ -227,7 +226,5 @@ namespace Z0
 
             TypeCaseEnd<N>();
         }
-
-
     }
 }

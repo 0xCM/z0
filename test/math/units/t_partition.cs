@@ -63,7 +63,6 @@ namespace Z0
             Claim.eq(src.Right - src.Left, dst.Length);
             Claim.eq(Interval.closedL(5,6), dst.First());
             Claim.eq(Interval.closedL(19,20), dst.Last());
-
         }
 
         public void part2()

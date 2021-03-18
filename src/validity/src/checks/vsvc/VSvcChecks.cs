@@ -105,87 +105,87 @@ namespace Z0
 
         [MethodImpl(Inline)]
         bit Check128x8u<K>(Vector128<byte> a, Vector128<byte> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x8i<K>(Vector128<sbyte> a, Vector128<sbyte> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x16u<K>(Vector128<ushort> a, Vector128<ushort> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x16i<K>(Vector128<short> a, Vector128<short> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x32u<K>(Vector128<uint> a, Vector128<uint> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x32i<K>(Vector128<int> a, Vector128<int> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x64u<K>(Vector128<ulong> a, Vector128<ulong> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check128x64i<K>(Vector128<long> a, Vector128<long> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x8u<K>(Vector256<byte> a, Vector256<byte> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x8i<K>(Vector256<sbyte> a, Vector256<sbyte> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x16u<K>(Vector256<ushort> a, Vector256<ushort> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x16i<K>(Vector256<short> a, Vector256<short> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x32u<K>(Vector256<uint> a, Vector256<uint> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x32i<K>(Vector256<int> a, Vector256<int> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x64u<K>(Vector256<ulong> a, Vector256<ulong> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit Check256x64i<K>(Vector256<long> a, Vector256<long> b, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => CheckMatch(a,b,f);
 
         [MethodImpl(Inline)]
         bit CheckMatch<K,T>(Vector128<T> x, Vector128<T> y, K f = default)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
             where T : unmanaged
         {
             var w = w128;
@@ -203,7 +203,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         bit CheckMatch<K,T>(Vector256<T> x, Vector256<T> y, K f)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
             where T : unmanaged
         {
             var w = w256;

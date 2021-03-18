@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+
     using S = Surrogates;
 
     public class t_compare : t_mathsvc<t_compare>

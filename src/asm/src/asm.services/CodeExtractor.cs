@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    [ApiHost]
+    //[ApiHost]
     public unsafe ref struct CodeExtractor
     {
         readonly Span<byte> Buffer;
@@ -35,7 +35,6 @@ namespace Z0
 
         byte InstructionLimit;
 
-        [MethodImpl(Inline)]
         public CodeExtractor(byte[] buffer)
         {
             Buffer = buffer;

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ApiBitFunctionClass;
-    using I = IBitFunctionApiKey;
+    using I = IApiBitFunctionClass;
 
     partial struct ApiClasses
     {
@@ -39,30 +39,30 @@ namespace Z0
 
         public readonly struct Stitch : I {  K I.Kind => K.Stitch; }
 
-        public readonly struct TestZ<T> : IBitFunctionApiKey<TestZ,T> {}
+        public readonly struct TestZ<T> : IApiBitFunctionClass<TestZ,T> {}
 
-        public readonly struct TestC<T> : IBitFunctionApiKey<TestC,T> {}
+        public readonly struct TestC<T> : IApiBitFunctionClass<TestC,T> {}
 
-        public readonly struct Ntz<T> : IBitFunctionApiKey<Ntz,T> {}
+        public readonly struct Ntz<T> : IApiBitFunctionClass<Ntz,T> {}
 
-        public readonly struct Nlz<T> : IBitFunctionApiKey<Nlz,T> {}
+        public readonly struct Nlz<T> : IApiBitFunctionClass<Nlz,T> {}
 
-        public readonly struct Pop<T> : IBitFunctionApiKey<Pop,T> {}
+        public readonly struct Pop<T> : IApiBitFunctionClass<Pop,T> {}
 
-        public readonly struct Mux<T> : IBitFunctionApiKey<Mux,T> {}
+        public readonly struct Mux<T> : IApiBitFunctionClass<Mux,T> {}
 
-        public readonly struct Scatter<T> : IBitFunctionApiKey<Scatter,T> {}
+        public readonly struct Scatter<T> : IApiBitFunctionClass<Scatter,T> {}
 
-        public readonly struct Gather<T> : IBitFunctionApiKey<Gather,T> {}
+        public readonly struct Gather<T> : IApiBitFunctionClass<Gather,T> {}
 
-        public readonly struct Mix<T> : IBitFunctionApiKey<Mix,T> {}
+        public readonly struct Mix<T> : IApiBitFunctionClass<Mix,T> {}
 
-        public readonly struct Rank<T> : IBitFunctionApiKey<Rank,T> {}
+        public readonly struct Rank<T> : IApiBitFunctionClass<Rank,T> {}
 
-        public readonly struct BitSeg<T> : IBitFunctionApiKey<BitSeg,T> {}
+        public readonly struct BitSeg<T> : IApiBitFunctionClass<BitSeg,T> {}
 
-        public readonly struct TestBit<T> : IBitFunctionApiKey<TestBit,T> {}
+        public readonly struct TestBit<T> : IApiBitFunctionClass<TestBit,T> {}
 
-        public readonly struct TestBits<T> : IBitFunctionApiKey<TestBits,T> {}
+        public readonly struct TestBits<T> : IApiBitFunctionClass<TestBits,T> {}
     }
 }

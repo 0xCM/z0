@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     using S = Surrogates;
 
@@ -271,7 +272,6 @@ namespace Z0
             clamp_check(S.binary(fmath.clamp, name, z32f));
             clamp_check(S.binary(fmath.clamp, name, z64f));
         }
-
 
         public void inc_check()
         {

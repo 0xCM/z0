@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ApiArithmeticClass;
-    using I = IArithmeticApiKey;
+    using I = IApiArithmeticApClass;
 
     partial struct ApiClasses
     {
@@ -38,30 +38,30 @@ namespace Z0
         //~ Parametric
         //~ -------------------------------------------------------------------
 
-        public readonly struct Add<T> : IArithmeticKind<Add,T> {}
+        public readonly struct Add<T> : IApiArithmeticClass<Add,T> {}
 
-        public readonly struct Sub<T> : IArithmeticKind<Sub,T> {}
+        public readonly struct Sub<T> : IApiArithmeticClass<Sub,T> {}
 
-        public readonly struct Mul<T> : IArithmeticKind<Mul,T> {}
+        public readonly struct Mul<T> : IApiArithmeticClass<Mul,T> {}
 
-        public readonly struct Div<T> : IArithmeticKind<Div,T> {}
+        public readonly struct Div<T> : IApiArithmeticClass<Div,T> {}
 
-        public readonly struct Mod<T> : IArithmeticKind<Mod,T> {}
+        public readonly struct Mod<T> : IApiArithmeticClass<Mod,T> {}
 
-        public readonly struct Clamp<T> : IArithmeticKind<Clamp,T> {}
+        public readonly struct Clamp<T> : IApiArithmeticClass<Clamp,T> {}
 
-        public readonly struct Dot<T> : IArithmeticKind<Dot,T> {}
+        public readonly struct Dot<T> : IApiArithmeticClass<Dot,T> {}
 
-        public readonly struct Inc<T> : IArithmeticKind<Inc,T> {}
+        public readonly struct Inc<T> : IApiArithmeticClass<Inc,T> {}
 
-        public readonly struct Dec<T> : IArithmeticKind<Dec,T> {}
+        public readonly struct Dec<T> : IApiArithmeticClass<Dec,T> {}
 
-        public readonly struct Negate<T> : IArithmeticKind<Negate,T> {}
+        public readonly struct Negate<T> : IApiArithmeticClass<Negate,T> {}
 
-        public readonly struct Abs<T> : IArithmeticKind<Abs,T> {}
+        public readonly struct Abs<T> : IApiArithmeticClass<Abs,T> {}
 
-        public readonly struct Square<T> : IArithmeticKind<Square,T> {}
+        public readonly struct Square<T> : IApiArithmeticClass<Square,T> {}
 
-        public readonly struct Sqrt<T> : IArithmeticKind<Sqrt,T> {}
+        public readonly struct Sqrt<T> : IApiArithmeticClass<Sqrt,T> {}
     }
 }

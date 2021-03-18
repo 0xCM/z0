@@ -2,11 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
-{
 
-    public readonly struct ApiSectionNames
+[assembly: PartId(PartId.SFuncs)]
+
+namespace Z0.Parts
+{
+    public sealed class SFuncs : Part<SFuncs>
     {
-        public const string vcpu = nameof(vcpu);
+
     }
 }
+

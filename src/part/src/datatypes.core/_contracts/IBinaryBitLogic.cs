@@ -30,6 +30,6 @@ namespace Z0
         T cnonimpl(T a, T b);
 
         T eval<K>(T a, T b, K kind = default)
-            where K : unmanaged, IBitLogicKind;
+            where K : unmanaged, IApiBitLogicClass;
     }
 }

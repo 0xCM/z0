@@ -19,10 +19,13 @@ namespace Z0
 
             public string Name {get;}
 
+            public OpIdentity Id {get;}
+
             [MethodImpl(Inline)]
-            internal Action(string name, S.Action<A0> f)
+            internal Action(OpIdentity id, S.Action<A0> f)
             {
-                Name = name;
+                Name = id.Name;
+                Id = id;
                 F = f;
             }
 

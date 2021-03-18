@@ -26,13 +26,6 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)
-            {
-                F = f;
-                Id = ApiIdentity.sfunc<T>(name);
-            }
-
-            [MethodImpl(Inline)]
             public bit Invoke(T a)
                 => F(a);
 

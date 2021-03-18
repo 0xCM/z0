@@ -80,22 +80,22 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, K f = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IApiBitLogicClass
                     => eval_unary_1(a,f);
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K f = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IApiBitLogicClass
                     => eval_binary_1(a,b,f);
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K f = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IApiBitLogicClass
                     => eval_ternary_1(a, b, c,f);
 
             [MethodImpl(Inline)]
             Vector256<T> eval_unary_1<B>(Vector256<T> a, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IApiBitLogicClass
             {
                 if(typeof(B) == typeof(K.Not))
                     return not(a);
@@ -105,7 +105,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_1<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IApiBitLogicClass
             {
                 if(typeof(B) == typeof(K.And))
                     return and(a,b);
@@ -125,7 +125,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_2<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IApiBitLogicClass
             {
                 if(typeof(B) == typeof(K.Impl))
                     return impl(a,b);
@@ -141,7 +141,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_ternary_1<B>(Vector256<T> a, Vector256<T> b, Vector256<T> c, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IApiBitLogicClass
             {
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);

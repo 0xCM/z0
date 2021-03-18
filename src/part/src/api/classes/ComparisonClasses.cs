@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ApiComparisonClass;
-    using I = IComparisonApiKey;
+    using I = IApiComparisonClass;
 
     partial struct ApiClasses
     {
@@ -21,16 +21,16 @@ namespace Z0
 
         public readonly struct Neq : I { K I.Kind => K.Neq; }
 
-        public readonly struct Lt<T> : IComparisonKind<Lt,T> {}
+        public readonly struct Lt<T> : IApiComparisonClass<Lt,T> {}
 
-        public readonly struct LtEq<T> : IComparisonKind<LtEq,T> {}
+        public readonly struct LtEq<T> : IApiComparisonClass<LtEq,T> {}
 
-        public readonly struct Gt<T> : IComparisonKind<Gt,T> {}
+        public readonly struct Gt<T> : IApiComparisonClass<Gt,T> {}
 
-        public readonly struct GtEq<T> : IComparisonKind<GtEq,T> {}
+        public readonly struct GtEq<T> : IApiComparisonClass<GtEq,T> {}
 
-        public readonly struct Eq<T> : IComparisonKind<Eq,T> {}
+        public readonly struct Eq<T> : IApiComparisonClass<Eq,T> {}
 
-        public readonly struct Neq<T> : IComparisonKind<Neq,T> {}
+        public readonly struct Neq<T> : IApiComparisonClass<Neq,T> {}
     }
 }

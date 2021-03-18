@@ -11,11 +11,8 @@ namespace Z0
     /// Characterizes a system operation classifier
     /// </summary>
     [Free]
-    public interface IMemoryApiKey : IApiKey, IApiKind<K>
+    public interface IMemoryApiKey : IApiKind<K>
     {
-        K Kind {get;}
-
-        ApiClass IApiKey.Id
-            => (ApiClass)Kind;
+        new ApiMemoryClass Kind {get;}
     }
 }

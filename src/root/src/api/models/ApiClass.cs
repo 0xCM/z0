@@ -12,18 +12,18 @@ namespace Z0
     public readonly struct ApiClass<K> : IApiClass<ApiClass<K>,K>
         where K : unmanaged
     {
-        public K ClassId {get;}
+        public K Kind {get;}
 
         [MethodImpl(Inline)]
         public ApiClass(K id)
-            => ClassId = id;
+            => Kind = id;
 
         [MethodImpl(Inline)]
         public bool Equals(ApiClass<K> src)
-            => ClassId.Equals(src.ClassId);
+            => Kind.Equals(src.Kind);
 
         public string Format()
-            => ClassId.ToString();
+            => Kind.ToString();
 
         public override string ToString()
             => Format();
@@ -34,10 +34,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator K(ApiClass<K> src)
-            => src.ClassId;
+            => src.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator ApiClass(ApiClass<K> src)
-            => Root.@as<K,ApiClass>(src.ClassId);
+            => Root.@as<K,ApiClass>(src.Kind);
     }
 }

@@ -6,6 +6,9 @@
 		},
 		{
 			"path": "..\\cpu"
+		},
+		{
+			"path": "..\\part"
 		}
 	],
 	"settings": {}

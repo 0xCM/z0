@@ -13,14 +13,6 @@ namespace Z0
     partial struct SFx
     {
         /// <summary>
-        /// Instantiates a service operation host
-        /// </summary>
-        /// <param name="host">The hosting type</param>
-        [MethodImpl(Inline), Op]
-        public static IFunc fx(Type host)
-            => (IFunc)Activator.CreateInstance(host);
-
-        /// <summary>
         /// Creates a service provider reified by a specified type
         /// </summary>
         /// <param name="provider">The provider type</param>

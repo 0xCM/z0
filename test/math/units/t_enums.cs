@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
-
     public sealed class t_enums : t_numeric<t_enums>
     {
         public enum Choices8u : byte

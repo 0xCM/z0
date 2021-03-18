@@ -9,17 +9,18 @@ namespace Z0
     public interface IApiClass : ITextual
     {
         ApiClass ClassId {get;}
+
         string ITextual.Format()
-            => ClassId.ToString();
+            => ClassId.ToString().ToLower();
     }
 
     public interface IApiClass<K> : IApiClass
         where K : unmanaged
     {
-        new K ClassId {get;}
+        K Kind {get;}
 
         ApiClass IApiClass.ClassId
-            => Root.@as<K,ApiClass>(ClassId);
+            => Root.@as<K,ApiClass>(Kind);
     }
 
     public interface IApiClass<F,K> : IApiClass<K>, IEquatable<F>

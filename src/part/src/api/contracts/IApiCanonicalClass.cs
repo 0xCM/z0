@@ -6,32 +6,21 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using I = ICanonicalKind;
+    using I = IApiCanonicalClass;
     using K = ApiCanonicalClass;
 
     [Free]
-    public interface ICanonicalKind : IApiKey, IApiKind<K>
+    public interface IApiCanonicalClass : IApiKind<K>
     {
-        K Kind {get;}
-
-        ApiClass IApiKey.Id
-            => (ApiClass)Kind;
+        new ApiCanonicalClass Kind {get;}
     }
 
-    [Free]
-    public interface ICanonicalKind<F> : I, IApiKind<F,K>
-        where F : unmanaged, I
-    {
-        ApiClass IApiKey.Id
-            => default(F).Id;
-    }
 
     [Free]
-    public interface ICanonicalKind<F,T> : ICanonicalKind<F>
-        where F : unmanaged, I
+    public interface IApiCanonicalClass<F,T> : IApiCanonicalClass
+        where F : unmanaged, IApiCanonicalClass
     {
         K I.Kind
             => default(F).Kind;
     }
-
 }

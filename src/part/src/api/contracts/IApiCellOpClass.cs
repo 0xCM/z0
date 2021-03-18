@@ -9,8 +9,8 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICellOpClass<F,W,E> : ICellFunctionClass, IOperationClassHost<F,E>
-        where F : struct, ICellOpClass<F,W,E>
+    public interface IApiCellOpClass<F,W,E> : ICellFunctionClass, IOperationClassHost<F,E>
+        where F : struct, IApiCellOpClass<F,W,E>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {

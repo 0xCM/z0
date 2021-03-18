@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
     using K = ApiBitShiftClass;
-    using I = IBitShiftApiKey;
+    using I = IApiBitShiftClass;
 
     public readonly partial struct BitShifts
     {
@@ -28,16 +26,16 @@ namespace Z0
         //~ Parametric
         //~ -------------------------------------------------------------------
 
-        public readonly struct Sll<T> : IBitShiftApiKey<Sll,T> {}
+        public readonly struct Sll<T> : IApiBitShiftClass<Sll,T> {}
 
-        public readonly struct Sllv<T> : IBitShiftApiKey<Sllv,T> {}
+        public readonly struct Sllv<T> : IApiBitShiftClass<Sllv,T> {}
 
-        public readonly struct Srl<T> : IBitShiftApiKey<Srl,T> {}
+        public readonly struct Srl<T> : IApiBitShiftClass<Srl,T> {}
 
-        public readonly struct Srlv<T> : IBitShiftApiKey<Srlv,T> {}
+        public readonly struct Srlv<T> : IApiBitShiftClass<Srlv,T> {}
 
-        public readonly struct Rotl<T> : IBitShiftApiKey<Rotl,T> {}
+        public readonly struct Rotl<T> : IApiBitShiftClass<Rotl,T> {}
 
-        public readonly struct Rotr<T> : IBitShiftApiKey<Rotr,T> {}
+        public readonly struct Rotr<T> : IApiBitShiftClass<Rotr,T> {}
     }
 }

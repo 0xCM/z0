@@ -18,10 +18,5 @@ namespace Z0
         //~ Parametric
         //~ -------------------------------------------------------------------
 
-        public readonly struct Alloc<T> : IMemoryOpKind<Alloc,T> {}
-
-        public readonly struct Store<T> : IMemoryOpKind<Store,T> {}
-
-        public readonly struct Load<T> : IMemoryOpKind<Load,T> {}
     }
 }

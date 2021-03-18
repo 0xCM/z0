@@ -115,8 +115,9 @@ namespace Z0
         public void and_check()
         {
             const string name = "and";
+            // var op = ApiClasses.and();
+            // and_check(S.binary(BL.and, ApiIdentity.klass(op,z8i), z8i));
 
-            and_check(S.binary(BL.and, name, z8));
             and_check(S.binary(BL.and, name, z8i));
             and_check(S.binary(BL.and, name, z16));
             and_check(S.binary(BL.and, name, z16i));
@@ -272,7 +273,5 @@ namespace Z0
             cnonimpl_check(S.binary(BL.cnonimpl, name, z64));
             cnonimpl_check(S.binary(BL.cnonimpl, name, z64i));
         }
-
-
     }
 }

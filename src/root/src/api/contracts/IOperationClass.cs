@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
 
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Identifies a class that classifies operations
     /// </summary>
     [Free]
-    public interface IOperationClass
+    public interface IOperationClass : IApiClass
     {
 
     }
@@ -22,13 +23,18 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">The class type</typeparam>
     [Free]
-    public interface IOperationClass<E> : IOperationClass
+    public interface IOperationClass<E> : IOperationClass, IApiClass<E>
         where E : unmanaged, Enum
     {
-        E Kind {get;}
+
+        E IApiClass<E>.Kind
+            => Kind;
 
         string Name
             => Kind.ToString().ToLower();
+
+        string ITextual.Format()
+            => Name;
     }
 
     /// <summary>
@@ -48,6 +54,5 @@ namespace Z0
         where E : unmanaged, Enum
         where K : IOperationClass<E>, new()
     {
-        E IOperationClass<E>.Kind => new K().Kind;
     }
 }

@@ -77,22 +77,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T eval<K>(T a, K kind = default)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => eval_unary_1(a,kind);
 
         [MethodImpl(Inline)]
         public T eval<K>(T a, T b, K kind = default)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => eval_binary_1(a,b,kind);
 
         [MethodImpl(Inline)]
         public T eval<K>(T a, T b, T c, K kind = default)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IApiBitLogicClass
                 => eval_ternary_1(a, b, c,kind);
 
         [MethodImpl(Inline)]
         T eval_unary_1<B>(T a, B kind)
-            where B : unmanaged, IBitLogicKind
+            where B : unmanaged, IApiBitLogicClass
         {
             if(typeof(B) == typeof(K.Not))
                 return not(a);
@@ -102,7 +102,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T eval_binary_1<B>(T a, T b, B kind)
-            where B : unmanaged, IBitLogicKind
+            where B : unmanaged, IApiBitLogicClass
         {
             if(typeof(B) == typeof(K.And))
                 return and(a,b);
@@ -122,7 +122,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T eval_binary_2<B>(T a, T b, B kind)
-            where B : unmanaged, IBitLogicKind
+            where B : unmanaged, IApiBitLogicClass
         {
             if(typeof(B) == typeof(K.Impl))
                 return impl(a,b);
@@ -138,7 +138,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         T eval_ternary_1<B>(T a, T b, T c, B kind)
-            where B : unmanaged, IBitLogicKind
+            where B : unmanaged, IApiBitLogicClass
         {
             if(typeof(B) == typeof(K.Select))
                 return select(a,b,c);

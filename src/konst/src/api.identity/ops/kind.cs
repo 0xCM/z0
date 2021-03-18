@@ -20,5 +20,10 @@ namespace Z0
             else
                 return 0;
         }
+
+        public static OpIdentity kind<K,T>(K kind, T t = default)
+            where K : unmanaged
+            where T : unmanaged
+                => build(kind.ToString().ToLower(), (TypeWidth)memory.width<T>(), Numeric.kind<T>(), true);
     }
 }

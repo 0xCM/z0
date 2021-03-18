@@ -60,6 +60,8 @@ public enum PartId : ulong
 
     Gen = 48,
 
+    SFuncs = 49,
+
     Clr = 60,
 
     Cli = 61,

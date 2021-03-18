@@ -4,23 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using I = IOperationClass<OperationKind>;
     using K = OperationKind;
 
     partial struct ApiClasses
     {
-        public readonly struct EmitterFunc : IOperationClass<K> { public K Kind => K.Emitter; }
+        public readonly struct EmitterFunc : I { public K Kind => K.Emitter; }
 
-        public readonly struct EmitterFunc<T> : IOperationClass<EmitterFunc,K,T> {}
+        public readonly struct UnaryFunc : I { public K Kind => K.UnaryFunc; }
 
-        public readonly struct UnaryFunc : IOperationClass<K> { public K Kind => K.UnaryFunc; }
+        public readonly struct BinaryFunc : I { public K Kind => K.BinaryFunc; }
 
-        public readonly struct UnaryFunc<T> : IOperationClass<UnaryFunc,K,T> {}
-
-        public readonly struct BinaryFunc : IOperationClass<K> { public K Kind => K.BinaryFunc; }
-
-        public readonly struct BinaryFunc<T> : IOperationClass<BinaryFunc,K,T> {}
-
-        public readonly struct TernaryFunc : IOperationClass<K> { public K Kind => K.TernaryFunc; }
+        public readonly struct TernaryFunc : I { public K Kind => K.TernaryFunc; }
 
         public readonly struct TernaryFunc<T> : IOperationClass<TernaryFunc,K,T> {}
 
