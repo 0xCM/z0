@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-
     using static TypedLogicSpec;
 
     using L = AsciLetterLo;
 
-    public abstract class TypedLogixTest<X> : LogixTest<X>
-        where X : TypedLogixTest<X>
+    public abstract class t_typed_logix<X> : t_logix<X>
+        where X : t_typed_logix<X>
     {
         /// <summary>
         /// Creates a typed variable named 'a'

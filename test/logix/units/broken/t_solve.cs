@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-
     public class t_solve : UnitTest<t_solve>
     {
+        public override bool Enabled => false;
+
         public void solve_and_over_or_u32_1var()
         {
             var identity = TypedIdentities.AndOverOr<uint>();

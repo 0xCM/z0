@@ -4,14 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-       
     public class t_logicbench : UnitTest<t_logicbench>
     {
         protected override int CycleCount => Pow2.T08;
-
 
         public void scalar_op_bench()
         {
@@ -51,8 +46,5 @@ namespace Z0.Logix
 
             ReportBenchmark(opname, opcount, clock);
         }
-
-
     }
-
 }

@@ -10,10 +10,8 @@ namespace Z0.Logix
 
     using BLK = BinaryBitLogicKind;
 
-    public class t_truthtable : UnitTest<t_truthtable>
+    public class t_truthtables : t_logix<t_truthtables>
     {
-        BitLogix bitlogix => BitLogix.Service;
-
         public void unary_truth()
         {
             using var dst = UnitWriter(FS.file(CallingMember.define().CallerName));

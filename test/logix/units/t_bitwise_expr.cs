@@ -274,7 +274,7 @@ namespace Z0.Logix
                     z0[i] = BL(va[i],vb[i],vc[i]);
 
                 var z3 = SC(sa, sb, sc);
-                if(!NumericLogix.same(z3, z0.Content))
+                if(!NumericLogixOps.same(z3, z0.Content))
                     Claim.FailWith($"Evalutation of ternary op {id} failed");
 
                 var v1 = gcpu.vbroadcast(w256,sa);
@@ -282,7 +282,6 @@ namespace Z0.Logix
                 var v3 = gcpu.vbroadcast(w256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
                 Claim.eq(v4,z3);
-
 
                 var u1 = gcpu.vlo(v1);
                 var u2 = gcpu.vlo(v2);
@@ -363,7 +362,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N128 n, BinaryBitLogicKind op)
+        void check_cpu_expr<T>(W128 w, BinaryBitLogicKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
@@ -372,8 +371,8 @@ namespace Z0.Logix
 
             for(var i=0; i< RepCount; i++)
             {
-                var a = Random.CpuVector<T>(n128);
-                var b = Random.CpuVector<T>(n128);
+                var a = Random.CpuVector<T>(w);
+                var b = Random.CpuVector<T>(w);
                 v1.Set(a);
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
@@ -382,18 +381,17 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N256 n, BinaryBitLogicKind op)
+        void check_cpu_expr<T>(W256 w, BinaryBitLogicKind op)
             where T : unmanaged
         {
-
             var v1 = variable(1, default(Vector256<T>));
             var v2 = variable(2, default(Vector256<T>));
             var expr = binary(op,v1,v2);
 
             for(var i=0; i< RepCount; i++)
             {
-                var a = Random.CpuVector<T>(w256);
-                var b = Random.CpuVector<T>(w256);
+                var a = Random.CpuVector<T>(w);
+                var b = Random.CpuVector<T>(w);
                 v1.Set(a);
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);

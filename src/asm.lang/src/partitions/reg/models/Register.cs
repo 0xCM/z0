@@ -33,6 +33,9 @@ namespace Z0.Asm
         public RegWidth Width
             => api.width(Kind);
 
+        public Identifier Name
+            => Kind.ToString();
+
         [MethodImpl(Inline)]
         public bool Equals(Register src)
             => src.Kind == Kind;
@@ -64,5 +67,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static implicit operator Register(@enum<RegisterKind,uint> src)
             => new Register(src.Literal);
+
+        public static Register Empty
+            => RegisterKind.None;
     }
 }

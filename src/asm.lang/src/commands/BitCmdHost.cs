@@ -79,6 +79,25 @@ namespace Z0
             ShowBitSeq(w5, log);
             ShowBitSeq(w6, log);
         }
+
+        [Action(K.GenBitSequences)]
+        void GenBitSequences()
+        {
+            Span<char> buffer = stackalloc char[8];
+            var dst = Db.Doc("bitseq", FS.Extensions.Cs);
+            using var writer = dst.Writer();
+            writer.WriteLine("public readonly struct GeneratedBits");
+            writer.WriteLine("{");
+            writer.WriteLine("public static ReadOnlySpan<byte> SequencedBits = new byte[256]{");
+            for(var i=0; i<256; i++)
+            {
+                byte b = (byte)i;
+                var data = text.format(BitFormatter.render(b,buffer));
+                writer.Write(string.Format("{0}, ", data));
+            }
+            writer.WriteLine("};");
+            writer.WriteLine("}");
+        }
     }
 
     partial class XTend

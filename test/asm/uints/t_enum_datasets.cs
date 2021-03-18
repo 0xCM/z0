@@ -7,8 +7,8 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_enum_datasets : t_asm<t_enum_datasets>
     {

@@ -8,11 +8,24 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
     using static AsmRegBits;
 
     [ApiHost]
     public readonly partial struct AsmRegs
     {
+        [Op]
+        public static Index<RegClass> classes()
+            => ClrEnums.literals<RegClass>();
+
+        [Op]
+        public static Index<RegWidth> widths()
+            => ClrEnums.literals<RegWidth>();
+
+        [Op]
+        public static AsmRegQuery query()
+            => new AsmRegQuery(list());
+
         [MethodImpl(Inline), Op]
         public static Register model(RegisterKind kind)
             => kind;
@@ -71,54 +84,93 @@ namespace Z0.Asm
         public static string format(Register src)
         {
             const string Sep = " | ";
-            var index = BitFields.format<RegIndex,byte>(src.Code, "Index", 5);
-            var @class = BitFields.format<RegClass,byte>(src.Class, "Class", 4);
+            const string Pattern = "[{0,-12} | {1,-8} | {2}]";
+            var index = BitFields.format<RegIndex,byte>(src.Code, src.Name, 5);
+            var @class = BitFields.format<RegClass,byte>(src.Class, src.Class.ToString(), 4);
             var width = BitFields.format<RegWidth,ushort>(src.Width, base10, "Width");
-            var dst = text.bracket(text.join(Sep, index, @class, width));
-            return dst;
+            return string.Format(Pattern, index, @class, width);
         }
+
+        [MethodImpl(Inline), Op]
+        public static uint filter(RegClass @class, ReadOnlySpan<Register> src, Span<Register> dst)
+        {
+            var k=0u;
+            var j = root.min(src.Length, dst.Length);
+            for(var i=0; i<j; i++)
+            {
+                ref readonly var candidate = ref skip(src,i);
+
+                if(invalid(candidate.Code))
+                    continue;
+
+                if(candidate.Class == @class)
+                    seek(dst,k++) = candidate;
+            }
+            return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint filter(RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
+        {
+            var k=0u;
+            var j = root.min(src.Length, dst.Length);
+            for(var i=0; i<j; i++)
+            {
+                ref readonly var candidate = ref skip(src,i);
+
+                if(invalid(candidate.Code))
+                    continue;
+
+                if(candidate.Width == width)
+                    seek(dst,k++) = candidate;
+            }
+            return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static uint filter(RegClass @class, RegWidth width, ReadOnlySpan<Register> src, Span<Register> dst)
+        {
+            var k=0u;
+            var j = root.min(src.Length, dst.Length);
+            for(var i=0; i<j; i++)
+            {
+                ref readonly var candidate = ref skip(src,i);
+
+                if(invalid(candidate.Code))
+                    continue;
+
+                if(candidate.Width == width && candidate.Class == @class)
+                    seek(dst,k++) = candidate;
+            }
+            return k;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static bool valid(RegIndex src)
+            => (uint)src <= 31;
+
+        [MethodImpl(Inline), Op]
+        public static bool invalid(RegIndex src)
+            => (uint)src >= 32;
 
         [MethodImpl(Inline), Op]
         public static bool IsGp(Register r)
             => @class(r) == RegClass.GP;
 
         [MethodImpl(Inline), Op]
+        public static bool IsGp(RegClass c)
+            => c == RegClass.GP;
+
+        [MethodImpl(Inline), Op]
         public static bool IsGp(Register r, RegWidth w)
             => w == r.Width && IsGp(r);
 
-        [Op]
-        public static Index<Register> Gp8Filter(Index<Register> src)
-            => src.Where(r => IsGp(r, RegWidth.W8));
-
-        [Op]
-        public static Index<Register> Gp16Filter(Index<Register> src)
-            => src.Where(r => IsGp(r, RegWidth.W16));
-
-        [Op]
-        public static Index<Register> Gp32Filter(Index<Register> src)
-            => src.Where(r => IsGp(r, RegWidth.W32));
-
-        [Op]
-        public static Index<Register> Gp64Filter(Index<Register> src)
-            => src.Where(r => IsGp(r, RegWidth.W64));
-
-        [Op]
-        public static Index<Register> XmmFilter(Index<Register> src)
-            => src.Where(r => @class(r) == RegClass.XMM);
-
-        [Op]
-        public static Index<Register> YmmFilter(Index<Register> src)
-            => src.Where(r => @class(r) == RegClass.YMM);
-
-        [Op]
-        public static Index<Register> ZmmFilter(Index<Register> src)
-            => src.Where(r => @class(r) == RegClass.ZMM);
+        [MethodImpl(Inline), Op]
+        public static bool hi(Register r)
+            => ((uint)r.Kind & AsmRegBits.Hi) != 0;
 
         [Op]
         public static Index<Register> list()
             => Enums.literals<RegisterKind>().Map(model);
-        [Op]
-        public static AsmRegLookup lookup()
-            => AsmRegLookup.create(list());
     }
 }

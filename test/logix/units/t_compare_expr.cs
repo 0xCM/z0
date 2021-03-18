@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static LogicEngine;
 
     using CS = Comparisons;
 
-    public class t_compare_expr : TypedLogixTest<t_compare_expr>
+    public class t_compare_expr : t_typed_logix<t_compare_expr>
     {
         public void scalar_lt_check()
         {

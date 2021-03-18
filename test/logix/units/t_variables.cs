@@ -11,7 +11,7 @@ namespace Z0.Logix
 
     using static TypedLogicSpec;
 
-    public class t_variables : LogixTest<t_variables>
+    public class t_variables : t_logix<t_variables>
     {
         public void check_compositions()
         {
@@ -28,7 +28,7 @@ namespace Z0.Logix
             NumericLogixHost.BinaryLogicKinds.ToArray().Iter(check_binop_vars);
         }
 
-        public void check_solution()
+        void check_solution()
         {
             var x = variable<uint>(0u);
             var y = literal(27u);
@@ -39,7 +39,7 @@ namespace Z0.Logix
             Claim.nea(result.IsEmpty());
         }
 
-        public void minimize()
+        void minimize()
         {
             var v1 = variable<uint>(0u);
             var v2 = variable<uint>(1u);

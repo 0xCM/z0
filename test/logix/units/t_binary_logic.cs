@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Linq;
 
-    using static z;
+    using static Part;
 
     using static BitLogicSpec;
     using static LogicEngine;
@@ -15,7 +15,7 @@ namespace Z0.Logix
     using BLK = BinaryBitLogicKind;
     using BL = BitLogix;
 
-    public class t_binary_logic : LogixTest<t_binary_logic>
+    public class t_binary_logic : t_logix<t_binary_logic>
     {
         protected override int CycleCount => Pow2.T08;
 
@@ -182,6 +182,56 @@ namespace Z0.Logix
         {
             logic_op_bench(true);
             logic_op_bench(false);
+        }
+
+        void logic_op_bench(bool lookup, SystemCounter clock = default)
+        {
+            var opname = $"ops/logical/lookup[{lookup}]";
+
+            var lhsSamples = Random.BitStream32().Take(RepCount).ToArray();
+            var rhsSamples = Random.BitStream32().Take(RepCount).ToArray();
+            var result = Z0.bit.Off;
+            var kinds = bitlogix.BinaryOpKinds;
+            var opcount = 0;
+
+            clock.Start();
+
+            if(lookup)
+            {
+                for(var i=0; i<CycleCount; i++)
+                for(var sample=0; sample< RepCount; sample++)
+                for(var k=0; k< kinds.Length; k++, opcount++)
+                    result = bitlogix.Lookup(kinds[k])(lhsSamples[sample], rhsSamples[sample]);
+            }
+            else
+            {
+                for(var i=0; i<CycleCount; i++)
+                for(var sample=0; sample< RepCount; sample++)
+                for(var k=0; k< kinds.Length; k++, opcount++)
+                    result = bitlogix.Evaluate(kinds[k],lhsSamples[sample], rhsSamples[sample]);
+            }
+
+            clock.Stop();
+
+            ReportBenchmark(opname, opcount,clock);
+        }
+
+        void logic_expr_check(BLK kind, Func<bit,bit,bit> rule)
+        {
+            var v1 = lvar(1);
+            var v2 = lvar(2);
+            var expr = binary(kind, v1,v2);
+
+            foreach(var seq in bitcombo(n2))
+            {
+                var s1 = seq[0];
+                var s2 = seq[1];
+                v1.Set(s1);
+                v2.Set(s2);
+                var expect = rule(s1,s2);
+                var e1 = eval(expr);
+                Claim.eq(expect,e1);
+            }
         }
     }
 }

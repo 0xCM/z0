@@ -160,7 +160,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public void vector_bitlogic_match()
+        void vector_bitlogic_match()
         {
             using var buffers = NativeBuffers.alloc(Pow2.T14);
             var results = vector_bitlogic_match(buffers.Tokenize());

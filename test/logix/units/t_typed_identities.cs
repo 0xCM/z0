@@ -13,7 +13,7 @@ namespace Z0.Logix
 
     using TL = TypedLogicSpec;
 
-    public class t_typed_identities : LogixTest<t_typed_identities>
+    public class t_typed_identities : t_logix<t_typed_identities>
     {
         public void check_scalar_identities()
         {
@@ -42,7 +42,7 @@ namespace Z0.Logix
         void check_identity<T>(ComparisonExpr<T> identity)
             where T :unmanaged
         {
-            var @true = NumericLogix.@true<T>();
+            var @true = NumericLogixOps.@true<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();

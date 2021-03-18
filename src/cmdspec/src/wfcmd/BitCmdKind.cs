@@ -10,5 +10,7 @@ namespace Z0
         None = 0,
 
         ShowBitSequences,
+
+        GenBitSequences,
     }
 }

@@ -35,15 +35,22 @@ namespace Z0.Asm
             ShowModeSymbols();
         }
 
-        [Action(K.ShowRegisterCodes)]
-        void ShowRegisterCodes()
+        [Action(K.ShowRegBits)]
+        void ShowRegBits()
         {
             const string FormatPattern = "{0,-8} | {1,-10} | {2,-5} | {3,-10} | {4}";
 
-            using var log = OpenShowLog("register-codes");
-            var registers = AsmRegs.list();
-            foreach(var reg in registers)
-                Show(string.Format(FormatPattern, reg.Class, reg.Kind, reg.Width, (uint5)(byte)reg.Code, (Hex5)(byte)reg.Code), log);
+            var query = AsmRegs.query();
+            var classes = AsmRegs.classes();
+
+            using var log = ShowLog("register-bits", FS.Extensions.Log);
+
+            foreach(var k in classes)
+            {
+                var registers = query.Where(k);
+                foreach(var r in registers)
+                    log.Show(r);
+            }
         }
 
         [Action(K.ShowModeSymbols)]

@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public class t_symbolic : UnitTest<t_symbolic>
+    public abstract class t_logix<X> : UnitTest<X,CheckVectorBits,ICheckVectorBits>
+        where X : t_logix<X>
     {
-
-
-    }
+        protected BitLogix bitlogix => BitLogix.Service;
+     }
 }

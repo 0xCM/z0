@@ -7,18 +7,17 @@ namespace Z0.Logix
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
     using static BitLogicSpec;
 
-    public class t_logic_identities : UnitTest<t_logic_identities>
+    public class t_logic_identities : t_logix<t_logic_identities>
     {
         protected override int CycleCount
             => Pow2.T14;
 
         public void check_identities()
         {
-            iter(LogicIdentities.All, check_exhaustive);
+            root.iter(LogicIdentities.All, check_exhaustive);
         }
 
         void check_exhaustive(ComparisonExpr t)
@@ -29,7 +28,6 @@ namespace Z0.Logix
                 t.SetVars(c);
                 Claim.eq(bit.On, LogicEngine.eval(t));
                 Claim.require(LogicEngine.satisfied(t, c[0], c[1]));
-
             }
         }
 

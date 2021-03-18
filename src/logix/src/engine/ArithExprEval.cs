@@ -106,26 +106,26 @@ namespace Z0.Logix
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> inc<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericLogix.inc(eval(a).Value);
+                => NumericLogixOps.inc(eval(a).Value);
 
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> dec<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericLogix.dec(eval(a).Value);
+                => NumericLogixOps.dec(eval(a).Value);
 
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> negate<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
-                => NumericLogix.negate(eval(a).Value);
+                => NumericLogixOps.negate(eval(a).Value);
 
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> add<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => NumericLogix.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericLogixOps.add(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
 
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> sub<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged
-                => NumericLogix.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
+                => NumericLogixOps.sub(eval(expr.LeftArg).Value, eval(expr.RightArg).Value);
     }
 }

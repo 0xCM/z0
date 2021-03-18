@@ -27,8 +27,8 @@ namespace Z0.Asm
         [Alias("show-operator-syms")]
         ShowOperandSymbols,
 
-        [Alias("show-reg-codes")]
-        ShowRegisterCodes,
+        [Alias("show-reg-bits")]
+        ShowRegBits,
 
         [Alias("show-rex-bits")]
         ShowRexBits,

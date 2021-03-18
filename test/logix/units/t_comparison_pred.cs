@@ -12,12 +12,11 @@ namespace Z0.Logix
     using static ApiComparisonClass;
     using static NumericLogixHost;
 
-    public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
+    public class t_comparison_pred : t_typed_logix<t_comparison_pred>
     {
         public void trichotomy_check()
         {
             trichotomy_check<uint>();
-
         }
 
         public void eq_pred_check()
@@ -125,7 +124,6 @@ namespace Z0.Logix
                 var caz = eval(z);
                 Claim.require(ca == caz);
             }
-
         }
 
         void predicate_check<T>(ApiComparisonClass kind)

@@ -26,8 +26,11 @@ namespace Z0.Asm
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
     /// </summary>
+    [SymbolSource]
     public enum RegisterKind : uint
     {
+        None = 0,
+
         // ~ FLAGS registers
         // ~ ------------------------------------------------------------------
 
@@ -422,29 +425,40 @@ namespace Z0.Asm
         // ~ Control registers
         // ~ ------------------------------------------------------------------
 
+        [Symbol("CR0")]
         CR0 = C.CR0,
 
+        [Symbol("CR2")]
         CR2 = C.CR2,
 
+        [Symbol("CR3")]
         CR3 = C.CR3,
 
+        [Symbol("CR4")]
         CR4 = C.CR4,
 
+        [Symbol("CR8")]
         CR8 = C.CR8,
 
         // ~ Debug registers
         // ~ ------------------------------------------------------------------
 
+        [Symbol("DR0")]
         DR0 = D.DR0,
 
+        [Symbol("DR1")]
         DR1 = D.DR1,
 
+        [Symbol("DR2")]
         DR2 = D.DR2,
 
+        [Symbol("DR3")]
         DR3 = D.DR3,
 
+        [Symbol("DR6")]
         DR6 = D.DR6,
 
+        [Symbol("DR7")]
         DR7 = D.DR7,
 
         // ~ Intruction pointer registers

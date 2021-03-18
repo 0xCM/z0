@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using AK = ApiBitShiftClass;
 
-    public class t_shift_expr : TypedLogixTest<t_shift_expr>
+    public class t_shift_expr : t_typed_logix<t_shift_expr>
     {
        // ~ sll
 

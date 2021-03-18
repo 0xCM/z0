@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using S = NumericLogixOps;
 
-    using static Konst;
-    using static z;
-
-    using S = NumericLogix;
-
-    public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
+    public class t_comparison_ops : t_typed_logix<t_comparison_ops>
     {
         public void scalar_eq_op_check()
         {

@@ -9,7 +9,6 @@ namespace Z0.Logix
 
     public class t_survey : UnitTest<t_survey>
     {
-
         void emit_asci_table()
         {
             using var dst = CaseWriter(FileExtensions.Csv);

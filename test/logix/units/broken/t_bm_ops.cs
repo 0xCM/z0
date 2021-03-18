@@ -6,10 +6,14 @@ namespace Z0
 {
     using System;
 
+    using static Part;
+    using static memory;
     using static BinaryBitLogicKind;
 
-    public class t_bm_ops : LogixTest<t_bm_ops>
+    public class t_bm_ops : t_logix<t_bm_ops>
     {
+        public override bool Enabled => false;
+
         public void bm_not_check()
         {
             bm_not_check<N8,byte>();
@@ -96,6 +100,66 @@ namespace Z0
             bm_delegate_bench<ulong>(Xor);
         }
 
+        protected void bm_xor_bench<T>(SystemCounter clock = default)
+            where T : unmanaged
+        {
+            var opname = $"bm_xor_{ApiIdentity.numeric<T>()}";
+
+            var A = Random.BitMatrix<T>();
+            var B = Random.BitMatrix<T>();
+            var C = Random.BitMatrix<T>();
+            var Z = BitMatrix.alloc<T>();
+            var opcount = 0;
+
+            clock.Start();
+
+            for(var i=0; i<CycleCount; i++)
+            {
+                SquareBitLogix.xor(A, B, Z);
+                opcount++;
+                for(var sample=0; sample< RepCount; sample++)
+                {
+                    SquareBitLogix.xor(Z, A, Z);
+                    SquareBitLogix.xor(B, Z, Z);
+                    opcount +=2;
+                }
+            }
+
+            clock.Stop();
+
+            ReportBenchmark(opname, opcount, clock);
+        }
+
+        void bm_and_bench<T>(SystemCounter clock = default)
+            where T : unmanaged
+        {
+            var opname = $"bm_and_{ApiIdentity.numeric<T>()}";
+
+            var A = Random.BitMatrix<T>();
+            var B = Random.BitMatrix<T>();
+            var C = Random.BitMatrix<T>();
+            var Z = BitMatrix.alloc<T>();
+            var opcount = 0;
+
+            clock.Start();
+
+            for(var i=0; i<CycleCount; i++)
+            {
+                SquareBitLogix.and(A, B, Z);
+                opcount++;
+                for(var sample=0; sample< RepCount; sample++)
+                {
+                    SquareBitLogix.and(Z, A, Z);
+                    SquareBitLogix.and(B, Z, Z);
+                    opcount +=2;
+                }
+            }
+
+            clock.Stop();
+
+            ReportBenchmark(opname, opcount, clock);
+        }
+
          protected void bm_and_check<N,T>(BinaryBitLogicKind op = And)
             where T : unmanaged
             where N : unmanaged, ITypeNat
@@ -103,7 +167,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample<RepCount; sample++)
             {
@@ -127,7 +191,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -175,7 +239,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -199,7 +263,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -223,7 +287,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample < RepCount; sample++)
             {
@@ -247,7 +311,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -272,7 +336,7 @@ namespace Z0
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = BitMatrix.alloc<T>();
-            var n = z.nat32i<N>();
+            var n = nat32i<N>();
 
             for(var sample=0; sample< RepCount; sample++)
             {
@@ -334,6 +398,36 @@ namespace Z0
                 {
                     SquareBitLogix.eval(op, Z, A, Z);
                     SquareBitLogix.eval(op, B, Z, Z);
+                    opcount +=2;
+                }
+            }
+
+            clock.Stop();
+
+            ReportBenchmark(opname, opcount, clock);
+        }
+
+        void bm_delegate_bench<T>(BinaryBitLogicKind opkind, SystemCounter clock = default)
+            where T : unmanaged
+        {
+            var opname = $"bm_{opkind.Format()}_{ApiIdentity.numeric<T>()}_delegate";
+            var A = Random.BitMatrix<T>();
+            var B = Random.BitMatrix<T>();
+            var C = Random.BitMatrix<T>();
+            var Z = BitMatrix.alloc<T>();
+            var opcount = 0;
+            var Op = SquareBitLogix.lookup<T>(opkind);
+
+            clock.Start();
+
+            for(var i=0; i<CycleCount; i++)
+            {
+                Op(A, B, Z);
+                opcount++;
+                for(var sample=0; sample< RepCount; sample++)
+                {
+                    Op(Z, A, Z);
+                    Op(B, Z, Z);
                     opcount +=2;
                 }
             }

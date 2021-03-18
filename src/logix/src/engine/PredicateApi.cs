@@ -5,9 +5,8 @@
 namespace Z0.Logix
 {
     using System;
-    using System.Security;
 
-    using static Konst;
+    using static Part;
     using static LogicSig;
 
     using BCK = ApiComparisonClass;
@@ -20,12 +19,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return NumericLogix.equals(a,b);
-                case BCK.Neq: return NumericLogix.neq(a,b);
-                case BCK.Lt: return NumericLogix.lt(a,b);
-                case BCK.LtEq: return NumericLogix.lteq(a,b);
-                case BCK.Gt: return NumericLogix.gt(a,b);
-                case BCK.GtEq: return NumericLogix.gteq(a,b);
+                case BCK.Eq: return NumericLogixOps.equals(a,b);
+                case BCK.Neq: return NumericLogixOps.neq(a,b);
+                case BCK.Lt: return NumericLogixOps.lt(a,b);
+                case BCK.LtEq: return NumericLogixOps.lteq(a,b);
+                case BCK.Gt: return NumericLogixOps.gt(a,b);
+                case BCK.GtEq: return NumericLogixOps.gteq(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
@@ -36,12 +35,12 @@ namespace Z0.Logix
         {
             switch(kind)
             {
-                case BCK.Eq: return NumericLogix.equals;
-                case BCK.Neq: return NumericLogix.neq;
-                case BCK.Lt: return NumericLogix.lt;
-                case BCK.LtEq: return NumericLogix.lteq;
-                case BCK.Gt: return NumericLogix.gt;
-                case BCK.GtEq: return NumericLogix.gteq;
+                case BCK.Eq: return NumericLogixOps.equals;
+                case BCK.Neq: return NumericLogixOps.neq;
+                case BCK.Lt: return NumericLogixOps.lt;
+                case BCK.LtEq: return NumericLogixOps.lteq;
+                case BCK.Gt: return NumericLogixOps.gt;
+                case BCK.GtEq: return NumericLogixOps.gteq;
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }

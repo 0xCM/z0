@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    using System;
-
 
     public class t_probes : UnitTest<t_probes>
     {
@@ -18,7 +16,5 @@ namespace Z0.Logix
             var z = BitVector.select(a,b,c);
             Claim.eq(z,d);
         }
-
     }
-
 }

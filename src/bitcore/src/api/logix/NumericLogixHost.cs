@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Security;
     using System.Linq;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static Konst;
     using static LogicSig;
-    using static NumericLogix;
+    using static NumericLogixOps;
 
     using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
@@ -21,6 +18,7 @@ namespace Z0
     using BAR = ApiBinaryArithmeticClass;
     using BCK = ApiComparisonClass;
     using BSK = ApiBitShiftClass;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Defines the canonical shape of a bitwise shift function

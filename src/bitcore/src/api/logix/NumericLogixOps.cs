@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct NumericLogix
+    public readonly struct NumericLogixOps
     {
         const NumericKind Closure = UnsignedInts;
 

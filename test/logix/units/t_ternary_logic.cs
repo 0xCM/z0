@@ -9,11 +9,9 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_ternary_logic : LogixTest<t_ternary_logic>
+    public class t_ternary_logic : t_logix<t_ternary_logic>
     {
         protected override int RepCount => Pow2.T08;
-
-        BitLogix bitlogix => BitLogix.Service;
 
         ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
             => NumericLogixHost.TernaryLogicKinds;
@@ -66,7 +64,7 @@ namespace Z0
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
-                BitVector<T> x = NumericLogix.select(a.Content, b.Content, c.Content);
+                BitVector<T> x = NumericLogixOps.select(a.Content, b.Content, c.Content);
                 for(var j=0; j<x.Width; j++)
                     Claim.eq(x[j], BitLogix.select(a[j],b[j],c[j]));
             }
@@ -89,7 +87,7 @@ namespace Z0
                 var sx = x.ToSpan();
 
                 for(var j=0; j<sx.Length; j++)
-                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericLogixOps.select(sa[j], sb[j], sc[j]));
             }
 
         }
@@ -111,7 +109,7 @@ namespace Z0
                 var sx = x.ToSpan();
 
                 for(var j=0; j<sx.Length; j++)
-                    Claim.eq(sx[j], NumericLogix.select(sa[j], sb[j], sc[j]));
+                    Claim.eq(sx[j], NumericLogixOps.select(sa[j], sb[j], sc[j]));
             }
 
         }

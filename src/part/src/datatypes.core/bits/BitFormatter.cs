@@ -15,6 +15,22 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline), Op]
+        public static Span<char> render(byte src, Span<char> dst)
+        {
+            for(byte j=0; j<8; j++)
+                seek(dst, j) = @char(@bool(bit.test(src, j)));
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static Span<bit> unpack(byte src, Span<bit> dst)
+        {
+            for(byte j=0; j<8; j++)
+                seek(dst, j) = bit.test(src, j);
+            return dst;
+        }
+
         [MethodImpl(Inline), Closures(Closure)]
         public static BitFormatter<T> create<T>()
             where T : struct
@@ -29,7 +45,7 @@ namespace Z0
             => configure(false);
 
         [Op]
-        public static void format(ReadOnlySpan<byte> src, Span<char> dst)
+        public static void render(ReadOnlySpan<byte> src, Span<char> dst)
         {
             var input = span(src);
             var config = DefaultConfig;
@@ -136,7 +152,7 @@ namespace Z0
             var dst = span<char>(src.Length*8);
             var input = span(src);
             var config = DefaultConfig;
-            format(src, dst);
+            render(src, dst);
             return dst;
         }
 
