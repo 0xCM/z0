@@ -1,4 +1,3 @@
-
 namespace Z0.Workers
 {
     using System;
@@ -18,12 +17,12 @@ namespace Z0.Workers
             var logger = provider.GetService<ILogger<Worker>>();
             return new Worker(logger);
         }
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+
+        public static IHostBuilder CreateHostBuilder(string[] args)
+            => Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService(worker);
-                    //services.AddHostedService<Worker>();
                 });
     }
 }
