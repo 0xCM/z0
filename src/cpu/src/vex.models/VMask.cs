@@ -741,9 +741,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(D) == typeof(N1))
-                return veven(w,n2, n1, t);
+                return veven(w, n2, n1, t);
             else if(typeof(D) == typeof(N2))
-                return veven(w,n2, n2, t);
+                return veven(w, n2, n2, t);
             else
                 throw no<D>();
         }
@@ -763,9 +763,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(D) == typeof(N1))
-                return veven(w,n2, n1, t);
+                return veven(w, n2, n1, t);
             else if(typeof(D) == typeof(N2))
-                return veven(w,n2, n2, t);
+                return veven(w, n2, n2, t);
             else
                 throw no<D>();
         }
@@ -779,7 +779,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> veven<T>(W128 w, N2 f = default, N1 d = default, T t = default)
+        public static Vector128<T> veven<T>(W128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -792,7 +792,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> veven<T>(W256 w, N2 f = default, N1 d = default, T t = default)
+        public static Vector256<T> veven<T>(W256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -805,7 +805,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector128<T> veven<T>(W128 w, N2 f = default, N2 d = default, T t = default)
+        public static Vector128<T> veven<T>(W128 w, N2 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 
@@ -818,7 +818,7 @@ namespace Z0
         /// <param name="t">A component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Vector256<T> veven<T>(W256 w, N2 f = default, N2 d = default, T t = default)
+        public static Vector256<T> veven<T>(W256 w, N2 f, N2 d, T t = default)
             where T : unmanaged
                 => gcpu.vbroadcast(w, even(f,d,t));
 

@@ -12,25 +12,14 @@ namespace Z0
 
     using static SFx;
 
-    public readonly struct VImm8UnaryResolvers
-    {
-        public static VImm8UnaryResolver128<T> create<T>(Type host, W128 w)
-            where T : unmanaged
-                => new VImm8UnaryResolver128<T>(host);
-
-        public static VImm8UnaryResolver256<T> create<T>(Type host, W256 w)
-            where T : unmanaged
-                => new VImm8UnaryResolver256<T>(host);
-    }
-
-    public readonly struct VImm8UnaryResolver128<T> : IImm8UnaryResolver128<T>
+    public readonly struct V128Imm8UnaryResolver<T> : IImm8UnaryResolver128<T>
         where T : unmanaged
     {
         OpIdentity id => default;
 
         public Type Host {get;}
 
-        public VImm8UnaryResolver128(Type host)
+        public V128Imm8UnaryResolver(Type host)
         {
             Host = host;
         }
@@ -49,25 +38,6 @@ namespace Z0
                 ApiIdentity.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(VK.vk128<T>(), name(kind)),imm8);
 
         MethodInfo gApiMethod(Vec128Type hk, string name)
-            => Host.DeclaredMethods().WithName(name).OfKind(hk).Single();
-    }
-
-    public readonly struct VImm8UnaryResolver256<T> :  IImm8UnaryResolver256<T>
-        where T : unmanaged
-    {
-        public Type Host {get;}
-
-        public VImm8UnaryResolver256(Type host)
-        {
-            Host = host;
-        }
-
-        OpIdentity id => default;
-
-        public DynamicDelegate<UnaryOp<Vector256<T>>> @delegate(byte count)
-            => Dynop.EmbedVUnaryOpImm<T>(VK.vk256<T>(), id, gApiMethod(VK.vk256<T>(), id.Name),count);
-
-        MethodInfo gApiMethod(Vec256Type hk, string name)
             => Host.DeclaredMethods().WithName(name).OfKind(hk).Single();
     }
 }

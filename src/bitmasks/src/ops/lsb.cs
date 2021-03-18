@@ -35,13 +35,6 @@ namespace Z0
             where T : unmanaged
                 => force<ulong,T>(scatter(force<T,ulong>(src), Lsb64x32x1));
 
-        [MethodImpl(Inline)]
-        public static LsbMask<F,D,T> LsbSpec<F,D,T>(F f = default, D d = default, T t = default)
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
         [MethodImpl(Inline),Op]
         public static byte lsb8f(byte density)
             => (byte)(byte.MaxValue >> (8 - density));
@@ -370,119 +363,6 @@ namespace Z0
             else
                 throw no<T>();
         }
-
-        /// <summary>
-        /// [00000001]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N1,N1,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [01]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N2,N1,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [0001]
-        /// The least bit of each 4-bit segment is enabled
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N4,N1,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00000001]
-        /// The least bit of each 8-bit segment is enabled
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N1,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00000000 00000001]
-        /// The least bit of each 16-bit segment is enabled
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N16,N1,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00000011]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N2,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [000000111]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N3,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00000111]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N4,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00011111]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N5,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [00111111]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N6,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
-
-        /// <summary>
-        /// [01111111]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T mask<T>(LsbMask<N8,N7,T> spec)
-            where T : unmanaged
-                => lsb(spec.f,spec.d,spec.t);
 
         [MethodImpl(Inline)]
         static ulong lsb<W>(W w, N2 f, N1 d)

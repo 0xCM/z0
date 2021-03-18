@@ -12,7 +12,7 @@ namespace Z0
 
     using K = VK;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         public readonly struct Units128<T> : SFx.IEmitter128<T>
             where T : unmanaged

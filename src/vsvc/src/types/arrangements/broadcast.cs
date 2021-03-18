@@ -12,7 +12,7 @@ namespace Z0
     using static Numeric;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(AllNumeric)]
         public readonly struct Broadcast128<T> : IFactory128<T,T>

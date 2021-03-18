@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(MathSvc)" />
-    <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>
 

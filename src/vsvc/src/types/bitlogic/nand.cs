@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), Nand]
         public readonly struct Nand128<T> : IBinaryOp128D<T>

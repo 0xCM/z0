@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), Not]
         public readonly struct Not128<T> : IUnaryOp128D<T>

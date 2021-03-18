@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), CNonImpl]
         public readonly struct CNonImpl128<T> : IBinaryOp128D<T>

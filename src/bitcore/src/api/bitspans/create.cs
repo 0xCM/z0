@@ -8,22 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class BitSpans
     {
+        [Op, Closures(Closure)]
         public static BitSpan create<T>(T src)
             where T : unmanaged
                 => gpack.unpack(src);
 
+        [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => gpack.unpack(src);
 
+        [Op, Closures(Closure)]
         public static BitSpan create<T>(Span<T> src)
             where T : unmanaged
                 => gpack.unpack(src.ReadOnly());
 
-        [MethodImpl(Inline), Op]
+        [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src, Span<bit> buffer)
             where T : unmanaged
                 => gpack.unpack(src, buffer);

@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
+    using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), Reverse]
         public readonly struct Reverse128<T> : IUnaryOp128<T>
@@ -31,5 +31,4 @@ namespace Z0
                 => gcpu.vreverse(x);
         }
     }
-
 }

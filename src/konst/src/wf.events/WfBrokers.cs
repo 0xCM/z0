@@ -29,9 +29,8 @@ namespace Z0
         /// <param name="f">The process function</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static WfDataSink<T> sink<T>(IWfShell wf, Receiver<T> f)
-            where T : struct
-                => new WfDataSink<T>(wf, f);
+        public static WfSink<T> sink<T>(IWfShell wf, Receiver<T> f)
+            => new WfSink<T>(wf, f);
 
         [MethodImpl(Inline)]
         public static HubRelay relay(EventReceiver receiver)

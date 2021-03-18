@@ -785,9 +785,20 @@ namespace Z0.Asm
             Show("modrm", FS.Extensions.Log, emit);
         }
 
+
+        void CheckBitSpans()
+        {
+            var options = BitFormat.Default.WithBlockWidth(4);
+            var v1 = VMask.veven<byte>(w128,n2,n1);
+            var b1 = v1.ToBitSpan();
+            Wf.Row(b1.Format(options));
+        }
         public void Run()
         {
-            Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
+            CheckBitSpans();
+            //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
+
+            //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);
             //Wf.ApiStatementPipe().EmitThumbprints();
 
             //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);

@@ -12,7 +12,7 @@ namespace Z0
 
     using K = ApiClasses;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers)]
         public readonly struct BinaryBitLogic128<T> : IUnaryBitLogic<Vector128<T>>, IBinaryBitLogic<Vector128<T>>, ITernaryBitLogic<Vector128<T>>

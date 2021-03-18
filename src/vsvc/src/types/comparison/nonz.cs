@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(AllNumeric), Nonz]
         public readonly struct NonZ128<T> : IUnaryPred128D<T>

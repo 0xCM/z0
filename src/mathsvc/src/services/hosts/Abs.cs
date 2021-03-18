@@ -17,7 +17,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a) => gmath.abs(a);
+            public readonly T Invoke(T a)
+                => gmath.abs(a);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> src, Span<T> dst)

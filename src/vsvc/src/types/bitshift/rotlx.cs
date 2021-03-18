@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), Rotlx]
         public readonly struct Rotlx128<T> : IShiftOp128<T>

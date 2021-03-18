@@ -25,16 +25,8 @@ namespace Z0
             => Format.parenthetical(content);
 
         [MethodImpl(Inline)]
-        public static string bracket(object content)
-            => Format.bracket(content);
-
-        [MethodImpl(Inline)]
         public static string rpad(string src, int width, char c = Space)
             => Format.rpad(src, width, c);
-
-        [MethodImpl(Inline)]
-        public static string rspace(object content)
-            => Format.rspace(content);
 
         [MethodImpl(Inline)]
         public static string label(object name, object content)

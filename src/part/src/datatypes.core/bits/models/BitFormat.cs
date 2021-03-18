@@ -62,7 +62,38 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public BitFormat WithBlockWidth(uint width)
+        {
+            BlockWidth = (int)width;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitFormat WithRowWidth(uint width)
+        {
+            RowWidth = (int)width;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitFormat WithMaxBits(uint width)
+        {
+            MaxBitCount = width;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public BitFormat WithBlockSep(char sep)
+        {
+            BlockSep = sep;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
         public static implicit operator BitFormat(int blockwidth)
             => BitFormatOptions.bitblock(blockwidth, null, null,false);
+
+        public static BitFormat Default
+            => new BitFormat(false,false,null,null,null,null,null);
     }
 }

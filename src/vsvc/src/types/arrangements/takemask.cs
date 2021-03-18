@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         public readonly struct TakeMask128<T> : IVUnaryScalarFunc128<T,ushort>
             where T : unmanaged

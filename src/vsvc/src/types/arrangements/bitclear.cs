@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VBitServices
+    partial class VBitSvcHosts
     {
         [Closures(Integers)]
         public readonly struct BitClear128<T> : IUnaryImm8x2Op128D<T>

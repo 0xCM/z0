@@ -6,6 +6,7 @@ namespace Z0
 {
    using System;
    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
    using static Part;
 
@@ -82,5 +83,33 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan ToBitSpan(this Span<ulong> src)
             => BitSpans.create(src);
+
+        /// <summary>
+        /// Converts an 128-bit intrinsic vector representation to a bitspan
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        public static BitSpan ToBitSpan<T>(this Vector128<T> src, uint? maxbits = null)
+            where T : unmanaged
+                => BitSpans.load(src, maxbits);
+
+        /// <summary>
+        /// Converts an 128-bit intrinsic vector representation to a bitspan
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The underlying primal type</typeparam>
+        public static BitSpan ToBitSpan<T>(this Vector256<T> src, uint? maxbits = null)
+            where T : unmanaged
+                => BitSpans.load(src, maxbits);
+
+        /// <summary>
+        /// Converts an enumeration value to a bitspan
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <typeparam name="T">The enumeration type</typeparam>
+        public static BitSpan ToBitSpan<T>(this T src, uint? maxbits = null)
+            where T : unmanaged, Enum
+                => BitSpans.load(src, maxbits);
+
    }
 }

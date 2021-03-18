@@ -18,8 +18,10 @@ namespace Z0
         [TextUtility]
         public static IEnumerable<string> Partition(this string src, int maxlen)
         {
+            var count = src.Length;
             Span<char> buffer = stackalloc char[maxlen];
-            for(int i = 0, j=0; i<src.Length; i++, j++)
+
+            for(int i=0, j=0; i<count; i++, j++)
             {
                 if(j < maxlen)
                     buffer[j] = src[i];

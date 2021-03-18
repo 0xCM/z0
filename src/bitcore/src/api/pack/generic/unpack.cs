@@ -70,11 +70,12 @@ namespace Z0
         /// <param name="src">The source values to be unpacked</param>
         /// <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(Closure)]
+        [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
             where T : unmanaged
                 => unpack(src.ReadOnly(), dst.AsSpan());
 
+        [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src)
             where T : unmanaged
                 => unpack(src, alloc<bit>(width<T>()*src.Length));

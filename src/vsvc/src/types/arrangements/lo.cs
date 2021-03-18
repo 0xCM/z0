@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         public readonly struct Lo128<T> : IUnaryOp128<T>
             where T : unmanaged

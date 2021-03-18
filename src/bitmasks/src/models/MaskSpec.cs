@@ -15,13 +15,6 @@ namespace Z0
     public readonly struct MaskSpec : IMaskSpec
     {
         [MethodImpl(Inline)]
-        public static MaskSpec define<F,D,T>(BitMaskKind m, F f = default, D d = default, T t = default)
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
-            where T : unmanaged
-                => new MaskSpec(m, Numeric.kind<T>(), (uint)TypeNats.value<F>(), (uint)TypeNats.value<D>());
-
-        [MethodImpl(Inline)]
         public MaskSpec(BitMaskKind m, NumericKind k, uint f, uint d)
         {
             M = m;

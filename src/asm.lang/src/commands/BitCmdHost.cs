@@ -80,23 +80,33 @@ namespace Z0
             ShowBitSeq(w6, log);
         }
 
+
+        [MethodImpl(Inline), Op]
+        static Span<char> render(byte src, Span<char> dst)
+        {
+            for(var j=0; j<8; j++)
+                seek(dst, j) = @char(@bool(bit.test(src, (byte)j)));
+            dst.Reverse();
+            return dst;
+        }
+
         [Action(K.GenBitSequences)]
         void GenBitSequences()
         {
             Span<char> buffer = stackalloc char[8];
             var dst = Db.Doc("bitseq", FS.Extensions.Cs);
             using var writer = dst.Writer();
-            writer.WriteLine("public readonly struct GeneratedBits");
-            writer.WriteLine("{");
-            writer.WriteLine("public static ReadOnlySpan<byte> SequencedBits = new byte[256]{");
-            for(var i=0; i<256; i++)
+            writer.WriteLine("    public readonly struct GeneratedBits");
+            writer.WriteLine("    {");
+            writer.Write("        public static ReadOnlySpan<byte> SequencedBits = new byte[256]{");
+            for(var i=0; i<255; i++)
             {
                 byte b = (byte)i;
-                var data = text.format(BitFormatter.render(b,buffer));
-                writer.Write(string.Format("{0}, ", data));
+                var data = text.format(render(b,buffer));
+                writer.Write(string.Format("0b{0}, ", data));
             }
             writer.WriteLine("};");
-            writer.WriteLine("}");
+            writer.WriteLine("    }");
         }
     }
 

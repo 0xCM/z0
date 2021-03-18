@@ -13,13 +13,6 @@ namespace Z0
 
     partial class BitMasks
     {
-        [MethodImpl(Inline)]
-        public static CentralMask<F,D,T> CentralSpec<F,D,T>(F f = default, D d = default, T t = default)
-            where F : unmanaged, ITypeNat
-            where D : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
         /// <summary>
         /// Defines a central bitmask over 8-bit segments with a parametric bit density
         /// D:[N2 | N4 | N6]
@@ -111,16 +104,5 @@ namespace Z0
             else
                 throw no<T>();
         }
-
-        /// <summary>
-        /// [00011000]
-        /// </summary>
-        /// <param name="spec">The mask spec</param>
-        /// <typeparam name="T">The mask data type</typeparam>
-        [MethodImpl(Inline)]
-        public static T mask<D,T>(CentralMask<N8,D,T> spec)
-            where T : unmanaged
-            where D : unmanaged, ITypeNat
-                => central(spec.f, spec.d, spec.t);
     }
 }

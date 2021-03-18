@@ -21,7 +21,8 @@ namespace Z0
 
         public N n => default;
 
-        BitMaskKind IMaskSpec.M => M;
+        BitMaskKind IMaskSpec.M
+            => M;
 
         public string Format()
             => text.format(RenderPattern, nat64u<N>(), Numeric.kind<T>().Format());

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Part;
 
@@ -15,44 +16,77 @@ namespace Z0
          public static BitSpan load(Span<bit> src)
             => new BitSpan(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(byte src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(sbyte src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline)]
+         [Op]
          public static BitSpan load(ushort src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(short src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(int src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(uint src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(long src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(ulong src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(float src)
             => BitSpans.create(src);
 
-         [MethodImpl(Inline), Op]
+         [Op]
          public static BitSpan load(double src)
             => BitSpans.create(src);
+
+         [Op, Closures(Closure)]
+         public static BitSpan load<T>(Vector128<T> src, uint? maxbits = null)
+            where T : unmanaged
+        {
+            var bits = BitSpans.create(memory.bytes(src));
+            if(maxbits != null)
+                return memory.slice(bits.Storage, 0, maxbits.Value);
+            else
+                return bits;
+        }
+
+         [Op, Closures(Closure)]
+         public static BitSpan load<T>(Vector256<T> src, uint? maxbits = null)
+            where T : unmanaged
+        {
+            var bits = BitSpans.create(memory.bytes(src));
+            if(maxbits != null)
+                return memory.slice(bits.Storage, 0, maxbits.Value);
+            else
+                return bits;
+        }
+
+        [Op, Closures(Closure)]
+        public static BitSpan load<T>(T src, uint? maxbits = null)
+            where T : unmanaged
+        {
+            var bits = BitSpans.create(memory.bytes(src));
+            if(maxbits != null)
+                return memory.slice(bits.Storage, 0, maxbits.Value);
+            else
+                return bits;
+        }
     }
 }

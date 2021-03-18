@@ -5,13 +5,15 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface IWfDataSink<H,T> : IValueSink<T>
-        where T : struct
-        where H : struct, IWfDataSink<H,T>
+    using static Part;
+    using static TextRules;
+
+    partial class text
     {
-        void Deposit(ReadOnlySpan<T> src);
+        [MethodImpl(Inline)]
+        public static string rspace(object content)
+            => Format.rspace(content);
     }
 }

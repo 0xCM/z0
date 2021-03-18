@@ -21,10 +21,5 @@ namespace Z0
         public static Srl<T> srl<T>(T t = default)
             where T : unmanaged
                 => default(Srl<T>);
-
-        // [MethodImpl(Inline)]
-        // public static Parse<T> parse<T>(T t = default)
-        //     where T : unmanaged
-        //         => default(Parse<T>);
     }
 }

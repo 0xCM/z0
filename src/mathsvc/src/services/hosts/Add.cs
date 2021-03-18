@@ -17,11 +17,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly T Invoke(T a, T b) => gmath.add(a, b);
+            public readonly T Invoke(T a, T b)
+                => gmath.add(a, b);
 
             [MethodImpl(Inline)]
             public Span<T> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<T> dst)
-                => gspan.add(lhs,rhs,dst);
+                => gspan.add(lhs, rhs, dst);
         }
     }
 }

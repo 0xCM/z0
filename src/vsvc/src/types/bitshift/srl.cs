@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         [Closures(Integers), Srl]
         public readonly struct Srl128<T> : IShiftOp128D<T>, IShiftOp128<T>

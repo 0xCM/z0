@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IValueSink<T> : ISink<T>
-        where T : struct
+    public interface IWfSink<H,T> : ISink<T>
+        where H : struct, IWfSink<H,T>
     {
-        void Deposit(in T src);
-        void ISink<T>.Deposit(T src)
-            => Deposit(in src);
+        void Deposit(ReadOnlySpan<T> src);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    partial class VServices
+    partial class VSvcHosts
     {
         public readonly struct Ones128<T> : SFx.IEmitter128<T>
             where T : unmanaged

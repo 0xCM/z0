@@ -15,13 +15,6 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline), Op]
-        public static Span<char> render(byte src, Span<char> dst)
-        {
-            for(byte j=0; j<8; j++)
-                seek(dst, j) = @char(@bool(bit.test(src, j)));
-            return dst;
-        }
 
         [MethodImpl(Inline), Op]
         public static Span<bit> unpack(byte src, Span<bit> dst)

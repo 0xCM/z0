@@ -29,12 +29,13 @@ namespace Z0
 
         public T t => default;
 
-        BitMaskKind IMaskSpec.M => M;
-
         [MethodImpl(Inline)]
         public MsbMask<F,D,S> As<S>(S s = default)
             where S : unmanaged
                 => default;
+
+        BitMaskKind IMaskSpec.M
+            => M;
 
         public string Format()
             => $"msb(f:{nat32u<F>()}, d:{nat32u<D>()}, t:{typeof(T).NumericKind().Format()})";
@@ -44,6 +45,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MaskSpec(MsbMask<F,D,T> src)
-            => MaskSpec.define<F,D,T>(M);
+            => BitMasks.Specs.describe<F,D,T>(M);
     }
 }

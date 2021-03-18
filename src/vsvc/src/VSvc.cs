@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
 
-    using static Konst;
+    using static Part;
 
-    public partial class VServices
+    public partial class VSvcHosts
     {
 
     }
 
     [FunctionalService]
-    public partial class VSvc : ISFxRoot<VSvc,VServices>
+    public partial class VSvc : ISFxRoot<VSvc,VSvcHosts>
     {
         const NumericKind Closure = UInt64k;
     }

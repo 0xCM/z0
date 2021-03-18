@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static SFx;
 
-
     partial class MSvcHosts
     {
         [Closures(Integers), CImpl]

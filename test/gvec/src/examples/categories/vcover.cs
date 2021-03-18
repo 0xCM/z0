@@ -85,6 +85,7 @@ namespace Z0
                  7, 7, 7, 7, 8, 8, 8, 8);
             vcover(x6, out Vector256<byte> z6);
             Claim.veq(y6, z6);
+
         }
     }
 }

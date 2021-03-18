@@ -14,22 +14,10 @@ namespace Z0
     partial class BitMasks
     {
         [MethodImpl(Inline)]
-        public static IndexMask<N,T> IndexSpec<N,T>(N n = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => default;
-
-        [MethodImpl(Inline)]
         public static T index<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => index_lo<N,T>();
-
-        [MethodImpl(Inline)]
-        public static T mask<N,T>(IndexMask<N,T> spec)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => index<N,T>();
 
         [MethodImpl(Inline)]
         static T index_lo<N,T>()
