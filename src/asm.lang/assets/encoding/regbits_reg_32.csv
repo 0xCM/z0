@@ -1,0 +1,10 @@
+# Specified by reg Field During 32-Bit Data Operations
+| reg | w = 0 | w = 1 | Notes                                   |
+| 000 | AL    | EAX   |                                         |
+| 001 | CL    | ECX   |                                         |
+| 010 | DL    | EDX   |                                         |
+| 011 | BL    | EBX   |                                         |
+| 100 | AH    | ESP   | Cannot be encoded if REX prefix is used |
+| 101 | CH    | EBP   | Cannot be encoded if REX prefix is used |
+| 110 | DH    | ESI   | Cannot be encoded if REX prefix is used |
+| 111 | BH    | EDI   | Cannot be encoded if REX prefix is used |

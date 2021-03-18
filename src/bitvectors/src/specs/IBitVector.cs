@@ -8,7 +8,6 @@ namespace Z0
 
     using static memory;
 
-
     public interface IBitVector : ITextual<IBitVector,BitFormat>
     {
         /// <summary>

@@ -1,0 +1,10 @@
+# Register Specified by reg Field During 16-Bit Data Operations
+| reg | w = 0 | w = 1 | Notes                                   |
+| 000 | AL    | AX    |                                         |
+| 001 | CL    | CX    |                                         |
+| 010 | DL    | DX    |                                         |
+| 011 | BL    | BX    |                                         |
+| 100 | AH    | SP    | Cannot be encoded if REX prefix is used |
+| 101 | CH    | BP    | Cannot be encoded if REX prefix is used |
+| 110 | DH    | SI    | Cannot be encoded if REX prefix is used |
+| 111 | BH    | DI    | Cannot be encoded if REX prefix is used |

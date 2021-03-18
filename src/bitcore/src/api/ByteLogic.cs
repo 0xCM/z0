@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
     using static Part;
 
-    [ApiHost(ApiNames.BitLogicU8, true)]
+    [ApiHost]
     public readonly struct ByteLogic
     {
         /// <summary>

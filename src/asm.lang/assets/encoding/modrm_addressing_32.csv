@@ -1,5 +1,4 @@
 # 32-Bit Addressing Forms with the ModR/M Byte, Intel Vol2A, Table 2-2
-----------------------------------------------------------------------------
 | Identifier | EffectiveAddress | Mod | RM  | X0 | X1 | X2 | X3 | X4 | X5 | X6 | X7 |
 | Eax        | [EAX]            | 00  | 000 | 00 | 08 | 10 | 18 | 20 | 28 | 30 | 38 |
 | Ecx        | [ECX]            | 00  | 001 | 01 | 09 | 11 | 19 | 21 | 29 | 31 | 39 |

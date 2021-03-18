@@ -1,0 +1,23 @@
+# ModRM reg Field Encoding, 32-Bit and 64-Bit Addressing, AMD Vol4 Table A-34
+| Mnemonic | REX.R Bit | /0   | /1   | /2    | /3    | /4     | /5     | /6      | /7      |
+| reg8     | 0         | AL   | CL   | DL    | BL    | AH/SPL | CH/BPL | DH/SIL  | BH/DIL  |
+| reg16    | 0         | AX   | CX   | DX    | BX    | SP     | BP     | SI      | DI      |
+| reg32    | 0         | EAX  | ECX  | EDX   | EBX   | ESP    | EBP    | ESI     | EDI     |
+| reg64    | 0         | RAX  | RCX  | RDX   | RBX   | RSP    | RBP    | RSI     | RDI     |
+| mmx      | 0         | MMX0 | MMX1 | MMX2  | MMX3  | MMX4   | MMX5   | MMX6    | MMX7    |
+| xmm      | 0         | XMM0 | XMM1 | XMM2  | XMM3  | XMM4   | XMM5   | XMM6    | XMM7    |
+| ymm      | 0         | YMM0 | YMM1 | YMM2  | YMM3  | YMM4   | YMM5   | YMM6    | YMM7    |
+| sReg     | 0         | ES   | CS   | SS    | DS    | FS     | GS     | invalid | invalid |
+| cReg     | 0         | CR0  | CR1  | CR2   | CR3   | CR4    | CR5    | CR6     | CR7     |
+| dReg     | 0         | DR0  | DR1  | DR2   | DR3   | DR4    | DR5    | DR6     | DR7     |
+| reg8     | 1         | R8B  | R9B  | R10B  | R11B  | R12B   | R13B   | R14B    | R15B    |
+| reg16    | 1         | R8W  | R9W  | R10W  | R11W  | R12W   | R13W   | R14W    | R15W    |
+| reg32    | 1         | R8D  | R9D  | R10D  | R11D  | R12D   | R13D   | R14D    | R15D    |
+| reg64    | 1         | R8   | R9   | R10   | R11   | R12    | R13    | R14     | R15     |
+| mmx      | 1         | MMX0 | MMX1 | MMX2  | MMX3  | MMX4   | MMX5   | MMX6    | MMX7    |
+| xmm      | 1         | XMM8 | XMM9 | XMM10 | XMM11 | XMM12  | XMM13  | XMM14   | XMM15   |
+| ymm      | 1         | YMM8 | YMM9 | YMM10 | YMM11 | YMM12  | YMM13  | YMM14   | YMM15   |
+| sReg     | 1         | ES   | CS   | SS    | DS    | FS     | GS     | invalid | invalid |
+| cReg     | 1         | CR8  | CR9  | CR10  | CR11  | CR12   | CR13   | CR14    | CR15    |
+| dReg     | 1         | DR8  | DR9  | DR10  | DR11  | DR12   | DR13   | DR14    | DR15    |
+

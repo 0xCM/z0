@@ -56,7 +56,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => BitVector.bytes(Data);
+            get => memory.bytes(Data);
         }
 
         /// <summary>

@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static Numeric;
+    using static gmath;
 
     [ApiHost]
     public readonly struct BitTables
@@ -21,10 +23,10 @@ namespace Z0
         public static T tablesize<T>(T rows, T cols)
             where T : unmanaged
         {
-            var points = gmath.mul(rows, cols);
-            var mod = gmath.mod(points, Numeric.force<T>(8));
-            var rem = gmath.nonz(mod) ? Numeric.one<T>() : Numeric.zero<T>();
-            return gmath.add(gmath.srl(points, 3), rem);
+            var points = mul(rows, cols);
+            var module = mod(points, force<T>(8));
+            var remains = nonz(module) ? one<T>() : zero<T>();
+            return add(srl(points, 3), remains);
         }
 
         [MethodImpl(Inline), Op]

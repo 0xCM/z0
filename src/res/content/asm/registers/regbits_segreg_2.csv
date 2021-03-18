@@ -1,7 +1,0 @@
-# 2-bit Segment Register fields
-----------------------------------
-| reg | Selected |
-| 00  | ES       |
-| 01  | CS       |
-| 10  | SS       |
-| 11  | DS       |

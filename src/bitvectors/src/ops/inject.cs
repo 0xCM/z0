@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     partial class BitVector
     {
@@ -28,6 +28,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => BitVector<N,T>.Inject(src);
-
     }
 }

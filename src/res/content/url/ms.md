@@ -4,7 +4,7 @@
 
 * [CSharp - Language Spec](https://docs.microsoft.com/dotnet/csharp/language-reference/language-specification/introduction)
 
-## VsCode 
+## VsCode
 
 [VsCode - Code - Needs](https://github.com/icsharpcode/ILSpy)
 
@@ -36,7 +36,7 @@
 
 * [Hyper-V - Ubuntu Server ISO](https://www.ubuntu.com/download/server).
 * [Hyper-V - Virtual Switch](https://docs.microsoft.com/virtualization/hyper-v-on-windows/quick-start/connect-to-network)
-* 
+*
 
 ## Omnisharp
 
@@ -51,3 +51,4 @@
 * [Faster - Code](https://github.com/microsoft/FASTER)
 * [Win32 - Docs - PE Format](https://docs.microsoft.com/windows/win32/debug/pe-format)
 * [PInvoke - Site](https://www.pinvoke.net)
+* [Serving Static Files](https://docs.microsoft.com/aspnet/core/fundamentals/static-files?view=aspnetcore-3.1)

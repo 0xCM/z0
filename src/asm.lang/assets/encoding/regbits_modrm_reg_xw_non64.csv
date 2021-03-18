@@ -1,0 +1,10 @@
+# Encoding of reg Field When Mod/RM w Field is Not Present in Instruction; non 64-bit modes
+| Code | Register Selected for 16-Bit Data Ops | Register Selected for 32-Bit Data Ops |
+| 000  | AX                                    | EAX                                   |
+| 001  | CX                                    | ECX                                   |
+| 010  | DX                                    | EDX                                   |
+| 011  | BX                                    | EBX                                   |
+| 100  | SP                                    | ESP                                   |
+| 101  | BP                                    | EBP                                   |
+| 110  | SI                                    | ESI                                   |
+| 111  | DI                                    | EDI                                   |
