@@ -11,7 +11,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IStreamSource<T> : IDataSource<IEnumerable<T>>, IEnumerable<T>
+    public interface IStreamSource<T> : ISource<IEnumerable<T>>, IEnumerable<T>
     {
         IEnumerator IEnumerable.GetEnumerator()
             => Next().GetEnumerator();

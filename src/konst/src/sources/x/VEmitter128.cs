@@ -18,10 +18,10 @@ namespace Z0
 
         static Vec128Kind<T> Kind => default;
 
-        readonly IDataSource Source;
+        readonly ISource Source;
 
         [MethodImpl(Inline)]
-        public VEmitter128(IDataSource source)
+        public VEmitter128(ISource source)
             => Source = source;
 
         public OpIdentity Id

@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICellValues<T> : IDataSource<T>
+    public interface ICellValues<T> : ISource<T>
         where T : struct, IDataCell
     {
 

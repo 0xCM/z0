@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix<M,N,T> Matrix<M,N,T>(this IDataSource random, M m = default, N n = default)
+        public static Matrix<M,N,T> Matrix<M,N,T>(this ISource random, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -74,7 +74,7 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The column Type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-         public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this IDataSource random)
+         public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this ISource random)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -120,7 +120,7 @@ namespace Z0
          /// <typeparam name="N">The column type</typeparam>
          /// <typeparam name="S">The sample type</typeparam>
          /// <typeparam name="T">The matrix element type</typeparam>
-          public static Matrix256<M,N,T> MatrixBlock<M,N,S,T>(this IDataSource random, M m = default, N n = default,  T rep = default)
+          public static Matrix256<M,N,T> MatrixBlock<M,N,S,T>(this ISource random, M m = default, N n = default,  T rep = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

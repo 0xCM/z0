@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static IEnumerable<T> stream<T>(IDataSource src)
+        public static IEnumerable<T> stream<T>(ISource src)
         {
             while(true)
                 yield return src.Next<T>();

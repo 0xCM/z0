@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The value source</param>
         [Op]
-        public static IEnumerable<bit> bitstream(IDataSource src)
+        public static IEnumerable<bit> bitstream(ISource src)
         {
             while(true)
             {
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [Op, Closures(Closure)]
-        public static IEnumerable<T> bitstream<T>(IDataSource src)
+        public static IEnumerable<T> bitstream<T>(ISource src)
             where T : unmanaged
         {
             while(true)

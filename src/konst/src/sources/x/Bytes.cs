@@ -13,7 +13,7 @@ namespace Z0
         /// Produces an interminable stream of random bytes
         /// </summary>
         /// <param name="src">The data source</param>
-        public static IEnumerable<byte> Bytes(this IDataSource src)
+        public static IEnumerable<byte> Bytes(this ISource src)
             => Sources.bytes(src);
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="count">The maximum number of bytes to produce</param>
-        public static IEnumerable<byte> Bytes(this IDataSource src, int count)
+        public static IEnumerable<byte> Bytes(this ISource src, int count)
             => Sources.bytes(src, count);
     }
 }

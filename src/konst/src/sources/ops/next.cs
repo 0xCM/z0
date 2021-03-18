@@ -22,7 +22,7 @@ namespace Z0
                 => ref src.NextRef();
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T next<T>(IDataSource src)
+        public static T next<T>(ISource src)
             where T : struct
                 => src.Next<T>();
 

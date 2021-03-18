@@ -14,7 +14,7 @@ namespace Z0
     /// Characterizes a point emitter
     /// </summary>
     [Free]
-    public interface IDataSource
+    public interface ISource
     {
         /// <summary>
         /// Retrieves the next value from the source
@@ -45,7 +45,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production element type</typeparam>
     [Free]
-    public interface IDataSource<T>
+    public interface ISource<T>
     {
         /// <summary>
         /// Retrieves the next item from the source
@@ -77,7 +77,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IDataSource<H,T> : IDataSource<T>
+    public interface IDataSource<H,T> : ISource<T>
         where H : struct, IDataSource<H,T>
     {
 

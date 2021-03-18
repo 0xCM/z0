@@ -37,7 +37,7 @@ namespace Z0.Logix
         }
 
         [Op]
-        public static BinaryBitLogixCheck create(IWfShell wf, BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, IDataSource source)
+        public static BinaryBitLogixCheck create(IWfShell wf, BinaryBitLogicKind kind, Func<bit,bit,bit> rule, uint count, ISource source)
         {
             var dst = new BinaryBitLogixCheck(wf);
             dst.Kind = kind;

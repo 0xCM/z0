@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="length">The span length</param>
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static Span<T> Span<T>(this IDataSource src, int length)
+        public static Span<T> Span<T>(this ISource src, int length)
             where T : unmanaged
         {
             var dst = span<T>(length);

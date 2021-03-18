@@ -25,31 +25,31 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Cell8 Cell(this IDataSource src, W8 w)
+        public static Cell8 Cell(this ISource src, W8 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell16 Cell(this IDataSource src, W16 w)
+        public static Cell16 Cell(this ISource src, W16 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell32 Cell(this IDataSource src, W32 w)
+        public static Cell32 Cell(this ISource src, W32 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell64 Cell(this IDataSource src, W64 w)
+        public static Cell64 Cell(this ISource src, W64 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell128 Cell(this IDataSource src, W128 w)
+        public static Cell128 Cell(this ISource src, W128 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell256 Cell(this IDataSource src, W256 w)
+        public static Cell256 Cell(this ISource src, W256 w)
             => CellSource.next(src, w);
 
         [MethodImpl(Inline), Op]
-        public static Cell512 Cell(this IDataSource src, W512 w)
+        public static Cell512 Cell(this ISource src, W512 w)
             => CellSource.next(src, w);
     }
 }

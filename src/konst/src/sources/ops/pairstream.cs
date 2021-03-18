@@ -13,7 +13,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IEnumerable<Pair<T>> pairstream<T>(IDataSource src)
+        public static IEnumerable<Pair<T>> pairstream<T>(ISource src)
             where T : struct
         {
             while(true)

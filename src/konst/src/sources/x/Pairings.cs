@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="dst">The receiver</param>
         /// <typeparam name="S">The left value type</typeparam>
         /// <typeparam name="T">The right value type</typeparam>
-        public static Pairings<S,T> Pairings<S,T>(this IDataSource src, uint count)
+        public static Pairings<S,T> Pairings<S,T>(this ISource src, uint count)
             where S : struct
             where T : struct
         {
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="dst">The receiver</param>
         /// <typeparam name="S">The left value type</typeparam>
         /// <typeparam name="T">The right value type</typeparam>
-        public static void Pairings<S,T>(this IDataSource src, Pairings<S,T> dst)
+        public static void Pairings<S,T>(this ISource src, Pairings<S,T> dst)
             where S : struct
             where T : struct
         {
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <typeparam name="S">The left value type</typeparam>
         /// <typeparam name="T">The right value type</typeparam>
-        public static IEnumerable<Paired<S,T>> Pairings<S,T>(this IDataSource src)
+        public static IEnumerable<Paired<S,T>> Pairings<S,T>(this ISource src)
             where S : struct
             where T : struct
         {

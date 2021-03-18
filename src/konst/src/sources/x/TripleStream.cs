@@ -10,7 +10,7 @@ namespace Z0
 
     partial class XSource
     {
-        public static IEnumerable<Triple<T>> TripleStream<T>(this IDataSource src)
+        public static IEnumerable<Triple<T>> TripleStream<T>(this ISource src)
             where T : struct
                 => Sources.triplestream<T>(src);
     }

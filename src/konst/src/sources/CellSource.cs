@@ -16,30 +16,30 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-        readonly IDataSource Provider;
+        readonly ISource Provider;
 
         [MethodImpl(Inline), Op]
-        public static Cell8 next(IDataSource source, W8 w)
+        public static Cell8 next(ISource source, W8 w)
             => source.Next<byte>();
 
         [MethodImpl(Inline), Op]
-        public static Cell16 next(IDataSource source, W16 w)
+        public static Cell16 next(ISource source, W16 w)
             => source.Next<ushort>();
 
         [MethodImpl(Inline), Op]
-        public static Cell32 next(IDataSource source, W32 w)
+        public static Cell32 next(ISource source, W32 w)
             => source.Next<uint>();
 
         [MethodImpl(Inline), Op]
-        public static Cell64 next(IDataSource source, W64 w)
+        public static Cell64 next(ISource source, W64 w)
             => source.Next<ulong>();
 
         [MethodImpl(Inline), Op]
-        public static Cell128 next(IDataSource source, W128 w)
+        public static Cell128 next(ISource source, W128 w)
             => source.ConstPair<ulong>();
 
         [MethodImpl(Inline), Op]
-        public static Cell256 next(IDataSource source, W256 w)
+        public static Cell256 next(ISource source, W256 w)
         {
             var dst = Cell256.Empty;
             ref var storage = ref Unsafe.As<Cell256,Vector256<ulong>>(ref dst);
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static Cell512 next(IDataSource source, W512 w)
+        public static Cell512 next(ISource source, W512 w)
         {
             var lo = next(source,w256);
             var hi = next(source,w256);
@@ -57,16 +57,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static CellSource<F> create<F>(IDataSource provider)
+        public static CellSource<F> create<F>(ISource provider)
             where F : struct, IDataCell
                 => new CellSource<F>(provider);
 
         [MethodImpl(Inline), Op]
-        public static CellSource create(IDataSource provider)
+        public static CellSource create(ISource provider)
             => new CellSource(provider);
 
         [MethodImpl(Inline), Op]
-        public CellSource(IDataSource provider)
+        public CellSource(ISource provider)
             => Provider = provider;
 
         [MethodImpl(Inline), Op]
@@ -98,11 +98,11 @@ namespace Z0
             => create<Cell512>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public static Func<Cell64> emitter(IDataSource source, W64 w, NumericKind nk)
+        public static Func<Cell64> emitter(ISource source, W64 w, NumericKind nk)
             => emitter<Cell64>(source, CellWidth.W64, nk);
 
         [Op, Closures(Closure)]
-        public static Func<F> emitter<F>(IDataSource source, CellWidth width, NumericKind nk)
+        public static Func<F> emitter<F>(ISource source, CellWidth width, NumericKind nk)
             where F : unmanaged
         {
             if(width <= CellWidth.W64)

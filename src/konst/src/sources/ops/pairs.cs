@@ -15,7 +15,7 @@ namespace Z0
     {
 
         [Op, Closures(Closure)]
-        public static IEnumerable<Pair<T>> pairs<T>(IDataSource src)
+        public static IEnumerable<Pair<T>> pairs<T>(ISource src)
             where T : struct
         {
             while(true)
@@ -23,17 +23,17 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(IDataSource src, int count)
+        public static Pairs<T> pairs<T>(ISource src, int count)
             where T : struct
                 => pairs<T>(src).Take(count).Array();
 
         [Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(IDataSource src, Span<Pair<T>> dst)
+        public static Pairs<T> pairs<T>(ISource src, Span<Pair<T>> dst)
             where T : struct
                 => Sinks.deposit(pairs<T>(src).Take(dst.Length),dst);
 
         [Op, Closures(Closure)]
-        public static Pairs<T> pairs<T>(IDataSource src, Pair<T>[] dst)
+        public static Pairs<T> pairs<T>(ISource src, Pair<T>[] dst)
             where T : struct
                 => Sinks.deposit(pairs<T>(src).Take(dst.Length), dst);
     }

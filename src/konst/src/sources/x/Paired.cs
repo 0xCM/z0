@@ -12,7 +12,7 @@ namespace Z0
         /// <param name="src">The value source</param>
         /// <typeparam name="S">The left value type</typeparam>
         /// <typeparam name="T">The right value type</typeparam>
-        public static Paired<S,T> Paired<S,T>(this IDataSource src)
+        public static Paired<S,T> Paired<S,T>(this ISource src)
             where S : struct
             where T : struct
                 => Sources.paired<S,T>(src);

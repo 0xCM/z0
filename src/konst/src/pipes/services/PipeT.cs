@@ -42,7 +42,7 @@ namespace Z0
             return false;
         }
 
-        T IDataSource<T>.Next()
+        T ISource<T>.Next()
         {
             if(Next(out var dst))
                 return dst;

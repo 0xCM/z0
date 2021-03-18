@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock8<T> Blocks<T>(this IDataSource src, W8 w, int count, T t = default)
+        public static SpanBlock8<T> Blocks<T>(this ISource src, W8 w, int count, T t = default)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock16<T> Blocks<T>(this IDataSource src, W16 w, int count, T t = default)
+        public static SpanBlock16<T> Blocks<T>(this ISource src, W16 w, int count, T t = default)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock32<T> Blocks<T>(this IDataSource src, W32 w, int count)
+        public static SpanBlock32<T> Blocks<T>(this ISource src, W32 w, int count)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -144,7 +144,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock64<T> Blocks<T>(this IDataSource src, W64 w, int count)
+        public static SpanBlock64<T> Blocks<T>(this ISource src, W64 w, int count)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock64<T> Blocks<T>(this IDataSource src, W64 w, int count, T t)
+        public static SpanBlock64<T> Blocks<T>(this ISource src, W64 w, int count, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,count);
 
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock128<T> Blocks<T>(this IDataSource src, W128 w, int count = 1)
+        public static SpanBlock128<T> Blocks<T>(this ISource src, W128 w, int count = 1)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w, count)).Blocked(w);
 
@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock128<T> Blocks<T>(this IDataSource src, W128 w, int count, T t)
+        public static SpanBlock128<T> Blocks<T>(this ISource src, W128 w, int count, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,count);
 
@@ -244,7 +244,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock256<T> Blocks<T>(this IDataSource src, W256 w, int count = 1)
+        public static SpanBlock256<T> Blocks<T>(this ISource src, W256 w, int count = 1)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -281,7 +281,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock256<T> Blocks<T>(this IDataSource src, W256 w, int count, T t)
+        public static SpanBlock256<T> Blocks<T>(this ISource src, W256 w, int count, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,count);
 
@@ -294,7 +294,7 @@ namespace Z0
         /// <param name="domain">An optional domain to which values are constrained</param>
         /// <param name="filter">An optional filter that refines the domain</param>
         /// <typeparam name="T">The primal random value type</typeparam>
-        public static SpanBlock512<T> Blocks<T>(this IDataSource src, W512 w, int count = 1)
+        public static SpanBlock512<T> Blocks<T>(this ISource src, W512 w, int count = 1)
             where T : unmanaged
                 => src.Stream<T>().ToSpan(B.cellblocks<T>(w,count)).Blocked(w);
 
@@ -331,7 +331,7 @@ namespace Z0
         /// <param name="count">The number of blocks to allocate and fill</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The block cell type</typeparam>
-        public static SpanBlock512<T> Blocks<T>(this IDataSource src, W512 w, int count, T t)
+        public static SpanBlock512<T> Blocks<T>(this ISource src, W512 w, int count, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,count);
     }

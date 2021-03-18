@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector128<T> CpuVector<T>(this IDataSource src, N128 w)
+        public static Vector128<T> CpuVector<T>(this ISource src, N128 w)
             where T : unmanaged
                 => src.Blocks<T>(w).LoadVector();
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> CpuVector<T>(this IDataSource src, N256 w)
+        public static Vector256<T> CpuVector<T>(this ISource src, N256 w)
             where T : unmanaged
                 => src.Blocks<T>(w).LoadVector();
 
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector512<T> CpuVector<T>(this IDataSource src, N512 w)
+        public static Vector512<T> CpuVector<T>(this ISource src, N512 w)
             where T : unmanaged
                 => src.Blocks<T>(w).LoadVector();
 
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector128<T> CpuVector<T>(this IDataSource source, Vec128Kind<T> k, W128 w = default)
+        public static Vector128<T> CpuVector<T>(this ISource source, Vec128Kind<T> k, W128 w = default)
             where T : unmanaged
                 => source.Blocks<T>(w).LoadVector();
 
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector256<T> CpuVector<T>(this IDataSource src, Vec256Kind<T> k, W256 w = default)
+        public static Vector256<T> CpuVector<T>(this ISource src, Vec256Kind<T> k, W256 w = default)
             where T : unmanaged
                 => src.Blocks<T>(w).LoadVector();
 
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The vector width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector512<T> CpuVector<T>(this IDataSource src, Vec512Kind<T> k)
+        public static Vector512<T> CpuVector<T>(this ISource src, Vec512Kind<T> k)
             where T : unmanaged
                 => src.Blocks<T>(w512).LoadVector();
 
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static IEnumerable<Vector128<T>> CpuVectors<T>(this IDataSource src, N128 w)
+        public static IEnumerable<Vector128<T>> CpuVectors<T>(this ISource src, N128 w)
             where T : unmanaged
         {
             while(true)
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="w">The width selector</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static IEnumerable<Vector256<T>> CpuVectors<T>(this IDataSource src, N256 w)
+        public static IEnumerable<Vector256<T>> CpuVectors<T>(this ISource src, N256 w)
             where T : unmanaged
         {
             while(true)
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector128<T> CpuVector<T>(this IDataSource src, N128 w, T t)
+        public static Vector128<T> CpuVector<T>(this ISource src, N128 w, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,1).LoadVector();
 
@@ -224,7 +224,7 @@ namespace Z0
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> CpuVector<T>(this IDataSource src, N256 w, T t)
+        public static Vector256<T> CpuVector<T>(this ISource src, N256 w, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,1).LoadVector();
 
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="w">The vector width selector value</param>
         /// <param name="t">The component type representative</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        public static Vector512<T> CpuVector<T>(this IDataSource src, N512 w, T t)
+        public static Vector512<T> CpuVector<T>(this ISource src, N512 w, T t)
             where T : unmanaged
                 => src.Blocks<T>(w,1).LoadVector();
     }

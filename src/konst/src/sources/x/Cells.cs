@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static IEnumerable<F> Cells<F>(this IDataSource src)
+        public static IEnumerable<F> Cells<F>(this ISource src)
             where F: unmanaged, IDataCell
                 => Sources.cells(create<F>(src));
 
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="src">The cell count</param>
         /// <typeparam name="F">The fixed type</typeparam>
-        public static Index<F> Cells<F>(this IDataSource src, uint count)
+        public static Index<F> Cells<F>(this ISource src, uint count)
             where F: unmanaged, IDataCell
                 => src.Cells<F>().Take(count).Array();
     }

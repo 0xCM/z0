@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="count">The number of values to send to the target</param>
         /// <param name="dst">A reference to the target location</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static void Fill<T>(this IDataSource source, int count, ref T dst)
+        public static void Fill<T>(this ISource source, int count, ref T dst)
             where T : unmanaged
         {
             var it = source.Stream<T>().Take(count).GetEnumerator();
@@ -142,7 +142,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource source, in SpanBlock8<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock8<T> dst)
             where T : unmanaged
                 => source.Fill(dst.Storage);
 
@@ -152,7 +152,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource source, in SpanBlock16<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock16<T> dst)
             where T : unmanaged
                 => source.Fill(dst.Storage);
 
@@ -162,7 +162,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource source, in SpanBlock32<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock32<T> dst)
             where T : unmanaged
                 => source.Fill(dst.Storage);
 
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource source, in SpanBlock64<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock64<T> dst)
             where T : unmanaged
                 => source.Fill(dst.Storage);
 
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="source">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource source, in SpanBlock128<T> dst)
+        public static void Fill<T>(this ISource source, in SpanBlock128<T> dst)
             where T : unmanaged
                 => source.Fill(dst.Storage);
 
@@ -192,7 +192,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource src, in SpanBlock256<T> dst)
+        public static void Fill<T>(this ISource src, in SpanBlock256<T> dst)
             where T : unmanaged
                 => src.Fill(dst.Storage);
 
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IDataSource src, in SpanBlock512<T> dst)
+        public static void Fill<T>(this ISource src, in SpanBlock512<T> dst)
             where T : unmanaged
                 => src.Fill(dst.Storage);
 

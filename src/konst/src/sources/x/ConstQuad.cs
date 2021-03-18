@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstQuad<T> ConstQuad<T>(this IDataSource src)
+        public static ConstQuad<T> ConstQuad<T>(this ISource src)
             where T : struct
                 => (src.ConstPair<T>(), src.ConstPair<T>());
 

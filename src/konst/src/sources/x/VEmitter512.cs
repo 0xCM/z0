@@ -15,12 +15,12 @@ namespace Z0
     {
         public const string Name = "vemitter";
 
-        readonly IDataSource Source;
+        readonly ISource Source;
 
         static Vec512Kind<T> Kind => default;
 
         [MethodImpl(Inline)]
-        public VEmitter512(IDataSource src)
+        public VEmitter512(ISource src)
             => Source = src;
 
         public OpIdentity Id

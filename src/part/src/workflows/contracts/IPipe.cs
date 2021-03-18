@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The subject type</typeparam>
     [Free]
-    public interface IPipe<T> : ISink<T>, IDataSource<T>
+    public interface IPipe<T> : ISink<T>, ISource<T>
     {
 
 
@@ -24,7 +24,7 @@ namespace Z0
     /// <typeparam name="S">The input type</typeparam>
     /// <typeparam name="T">The output type</typeparam>
     [Free]
-    public interface IPipe<S,T> : ISink<S>, IDataSource<T>
+    public interface IPipe<S,T> : ISink<S>, ISource<T>
     {
 
     }

@@ -90,7 +90,7 @@ namespace Z0
         public ulong Next(ulong min, ulong max)
             => Next((uint)min, (uint)max);
 
-        ulong IDataSource<ulong>.Next()
+        ulong ISource<ulong>.Next()
             => Next();
     }
 }

@@ -14,13 +14,13 @@ namespace Z0
     public readonly struct BitSpanSource
     {
         [MethodImpl(Inline)]
-        public static BitSpanSource create(IDataSource src)
+        public static BitSpanSource create(ISource src)
             => new BitSpanSource(src);
 
-        readonly IDataSource Source;
+        readonly ISource Source;
 
         [MethodImpl(Inline)]
-        internal BitSpanSource(IDataSource src)
+        internal BitSpanSource(ISource src)
         {
             Source = src;
         }
@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static BitSpan BitSpan(this IDataSource source, int length)
+        public static BitSpan BitSpan(this ISource source, int length)
             => create(source).Next(length);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static ref readonly BitSpan BitSpan(this IDataSource source, in BitSpan dst)
+        public static ref readonly BitSpan BitSpan(this ISource source, in BitSpan dst)
             => ref create(source).Fill(dst);
     }
 }

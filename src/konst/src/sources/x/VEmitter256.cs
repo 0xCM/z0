@@ -16,12 +16,12 @@ namespace Z0
     {
         public const string Name = "vemitter";
 
-        readonly IDataSource Source;
+        readonly ISource Source;
 
         static Vec256Kind<T> Kind => default;
 
         [MethodImpl(Inline)]
-        public VEmitter256(IDataSource src)
+        public VEmitter256(ISource src)
             => Source = src;
 
         public OpIdentity Id

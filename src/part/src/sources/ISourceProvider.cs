@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The provided source
         /// </summary>
-        IDataSource Source {get;}
+        ISource Source {get;}
     }
 
     /// <summary>
@@ -26,11 +26,11 @@ namespace Z0
     /// <typeparam name="T">The source type</typeparam>
     [Free]
     public interface ISourceProvider<T> : ISourceProvider
-        where T : IDataSource
+        where T : ISource
     {
         new T Source {get;}
 
-        IDataSource ISourceProvider.Source
+        ISource ISourceProvider.Source
             => Source;
     }
 }

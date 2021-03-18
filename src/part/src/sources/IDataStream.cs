@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataStream<T> : IEnumerable<T>, IDataSource<T>
+    public interface IDataStream<T> : IEnumerable<T>, ISource<T>
     {
 
     }

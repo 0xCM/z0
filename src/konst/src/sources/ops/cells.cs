@@ -18,17 +18,17 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static IEnumerable<Cell128> cells<T>(IDataSource src, W128 w)
+        public static IEnumerable<Cell128> cells<T>(ISource src, W128 w)
             where T : unmanaged
                 => new CellStreamer<Cell128,W128,T>(src).Stream;
 
-        public static IEnumerable<F> cells<F,W,T>(IDataSource src, F f = default, T t = default)
+        public static IEnumerable<F> cells<F,W,T>(ISource src, F f = default, T t = default)
             where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new CellStreamer<F,W,T>(src).Stream;
 
-        public static IEnumerable<F> cells<F,W,T>(IDataSource src)
+        public static IEnumerable<F> cells<F,W,T>(ISource src)
             where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged

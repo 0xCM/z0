@@ -14,7 +14,7 @@ namespace Z0
         /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="src">The data source</param>
-        public static IEnumerable<Bit32> BitStream32(this IDataSource src)
+        public static IEnumerable<Bit32> BitStream32(this ISource src)
         {
             const int w = 64;
             while(true)
@@ -29,14 +29,14 @@ namespace Z0
         /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="src">The data source</param>
-        public static IEnumerable<bit> BitStream(this IDataSource src)
+        public static IEnumerable<bit> BitStream(this ISource src)
             => Sources.bitstream(src);
 
         /// <summary>
         /// Produces an interminable stream of random bits from a value sequence of parametric type
         /// </summary>
         /// <param name="random">The data source</param>
-        public static IEnumerable<T> BitStream<T>(this IDataSource src)
+        public static IEnumerable<T> BitStream<T>(this ISource src)
             where T : unmanaged
                 => Sources.bitstream<T>(src);
 

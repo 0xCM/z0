@@ -12,7 +12,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Triple<T> triple<T>(IDataSource src, T t = default)
+        public static Triple<T> triple<T>(ISource src, T t = default)
             where T : struct
                 => Tuples.triple(next<T>(src), next<T>(src), next<T>(src));
     }

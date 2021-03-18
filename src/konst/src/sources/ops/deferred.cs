@@ -12,7 +12,7 @@ namespace Z0
     partial struct Sources
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Deferred<T> deferred<T>(IDataSource src)
+        public static Deferred<T> deferred<T>(ISource src)
             => root.defer(stream<T>(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
