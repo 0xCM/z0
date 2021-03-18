@@ -30,7 +30,9 @@ public enum PartId : ulong
 
     Files = 12,
 
-    Sys=13,
+    Sys = 13,
+
+    Asci = 14,
 
     Digital = 18,
 

@@ -13,6 +13,8 @@
     <ProjectReference Include="$(Files)" />
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(BitNumbers)" />
+    <ProjectReference Include="$(Asci)" />
+
   </ItemGroup>
 
 </Project>

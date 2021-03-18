@@ -63,7 +63,7 @@ namespace Z0
         {
             var count = Math.Min(src.Length, dst.Length);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = z.cast<T>((byte)skip(src,i));
+                seek(dst,i) = memory.cast<T>((byte)skip(src,i));
             return count;
         }
 

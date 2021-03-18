@@ -9,33 +9,41 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static z;
+    using static memory;
 
-    using N = N16;
-    using W = W128;
-    using A = asci16;
-    using S = System.Runtime.Intrinsics.Vector128<byte>;
+    using N = N32;
+    using W = W256;
+    using A = asci32;
+    using S = System.Runtime.Intrinsics.Vector256<byte>;
 
     /// <summary>
-    /// Defines an asci code sequence of length 16
+    /// Defines an asci code sequence of length 32
     /// </summary>
-    public readonly struct asci16 : IAsciSeq<A,N>
+    public readonly struct asci32 : IAsciSeq<A,N>
     {
-        public const int Size = 16;
-
-        public readonly S Storage;
+        internal readonly S Storage;
 
         [MethodImpl(Inline)]
-        public asci16(S src)
-            => Storage = src;
+        public asci32(Vector256<byte> src)
+        {
+            Storage = src;
+        }
 
         [MethodImpl(Inline)]
-        public asci16(string src)
-            => Storage = Asci.encode(n,src).Storage;
+        public asci32(string src)
+        {
+            Storage = Asci.encode(n,src).Storage;
+        }
 
         [MethodImpl(Inline)]
-        public asci16(ReadOnlySpan<byte> src)
-            => Storage = cpu.vload(w, first(src));
+        public asci32(ReadOnlySpan<byte> src)
+        {
+            Storage = cpu.vload(w, first(src));
+        }
+
+        [MethodImpl(Inline)]
+        public asci32 Replace(string match, string value)
+            => Text.Replace(match, value);
 
         public bool IsBlank
         {
@@ -52,19 +60,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Equals(Null);
+            get => Storage.Equals(default);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => !Equals(Null);
-        }
-
-        public A Zero
-        {
-            [MethodImpl(Inline)]
-            get => Null;
+            get => !Storage.Equals(default);
         }
 
         public int Length
@@ -83,6 +85,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Asci.bytes(this);
+        }
+
+        public ReadOnlySpan<char> Decoded
+        {
+            [MethodImpl(Inline)]
+            get => Asci.decode(this);
         }
 
         public AsciCharCode this[int index]
@@ -109,10 +117,22 @@ namespace Z0
             get =>  Storage.As<byte,ulong>().GetElement(index/8);
         }
 
-        public ReadOnlySpan<char> Decoded
+        public A Zero
         {
             [MethodImpl(Inline)]
-            get => Asci.decode(this);
+            get => Null;
+        }
+
+        public asci16 Lo
+        {
+            [MethodImpl(Inline)]
+            get => new asci16(Storage.GetLower());
+        }
+
+        public asci16 Hi
+        {
+            [MethodImpl(Inline)]
+            get => new asci16(Storage.GetUpper());
         }
 
         public TextBlock Text
@@ -122,16 +142,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public int CompareTo(A src)
+            => Text.CompareTo(src.Text);
+
+        [MethodImpl(Inline)]
         public bool Equals(A src)
             => Storage.Equals(src.Storage);
-
-        [MethodImpl(Inline)]
-        public void CopyTo(Span<byte> dst)
-            => Asci.copy(this,dst);
-
-        [MethodImpl(Inline)]
-        public void CopyTo(ref byte dst)
-            => Asci.copy(this, ref dst);
 
          public override int GetHashCode()
             => Storage.GetHashCode();
@@ -146,6 +162,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public const int Size = 32;
+
         public static A Spaced
         {
             [MethodImpl(Inline)]
@@ -157,10 +175,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
-
-        [MethodImpl(Inline)]
-        public int CompareTo(A src)
-            => Text.CompareTo(src.Text);
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
