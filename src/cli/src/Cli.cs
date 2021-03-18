@@ -10,34 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using Msil;
     using System.Reflection.Metadata;
-
-    [ApiHost(ApiNames.Cil, true)]
-    public readonly partial struct Cil
-    {
-        public static ILVisualizer visualizer()
-            => ILVisualizer.service();
-
-        [Op]
-        public static string format(CliSig src)
-            => DefaultCilFormatProvider.Instance.SigByteArrayToString(src);
-
-        readonly Index<OpCodeInfo> Data;
-
-        [Op]
-        public static Cil init()
-        {
-            var buffer = sys.alloc<OpCodeInfo>(300);
-            ref var dst = ref first(span(buffer));
-            OpCodes.load(ref dst);
-            return new Cil(buffer);
-        }
-
-        [MethodImpl(Inline)]
-        Cil(OpCodeInfo[] src)
-            => Data = src;
-    }
 
     [ApiHost]
     public readonly partial struct Cli

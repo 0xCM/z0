@@ -9,7 +9,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-
     public sealed class BitMaskServices : WfService<BitMaskServices>
     {
         readonly BitMaskFormatter Formatter;

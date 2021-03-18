@@ -6,122 +6,20 @@ namespace Z0
 {
     using System;
 
-    using Z0.Asm;
-
-    class Machine : WfService<Machine>
-    {
-        CmdBuilder Commands;
-
-        EtlSettings Options;
-
-        protected override void OnInit()
-        {
-            Commands = Wf.CmdBuilder();
-            Options = EtlSettings.@default();
-        }
-
-        public void Run()
-        {
-            using var flow = Wf.Running();
-            Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
-            try
-            {
-                Wf.ApiServices().Correlate();
-
-                if(Options.EmitAsmCatalogs)
-                {
-                    var etl = Wf.AsmCatalogEtl();
-                    etl.ImportSource();
-                    etl.ExportImport();
-                }
-
-                if(Options.EmitIntrinsicsInfo)
-                    IntelIntrinsics.create(Wf).Emit();
-
-                if(Options.EmitLiteralCatalogs)
-                {
-                    EmitFieldLiterals.create().Run(Wf);
-                    Commands.EmitEnumCatalog().RunTask(Wf);
-                    BitMaskServices.create(Wf).Emit();
-                }
-
-                if(Options.CollectApiDocs)
-                {
-                    EmitComments.create().Run(Wf);
-                }
-
-                if(Options.EmitResourceData)
-                {
-                    var resources = ResDataService.create(Wf);
-                    resources.EmitContentIndex();
-                    resources.EmitReferenceData();
-                }
-
-                if(Options.RunXed)
-                {
-                    using var xed = XedWf.create(Wf);
-                    xed.Run();
-                }
-
-                var images = Wf.ImageDataEmitter();
-
-                if(Options.EmitSectionHeaders)
-                    images.EmitRuntimeHeaders();
-
-                if(Options.EmitMsilRecords)
-                    images.EmitMsilRecords();
-
-                if(Options.EmitCliStrings)
-                {
-                    images.EmitUserStrings();
-                    images.EmitSystemStrings();
-                }
-
-                if(Options.EmitCliConstants)
-                    images.EmitConstants();
-
-                if(Options.EmitCliBlobs)
-                    images.EmitApiBlobs();
-
-                if(Options.EmitImageContent)
-                    root.iter(Wf.Api.PartComponents, c => images.EmitImageContent(c));
-
-                var asm = Wf.AsmDataStore();
-
-                if(Options.EmitAsmRows)
-                    asm.EmitAsmRows();
-
-                if(Options.EmitAsmAnalysis)
-                    asm.EmitAnalyses();
-
-                if(Options.EmitResBytes)
-                    asm.EmitResBytes();
-
-                if(Options.EmitStatements)
-                    asm.EmitApiStatements();
-
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-        }
-    }
-
-    struct App
+    struct Machine
     {
         public static void run(string[] args)
             => app(shell(args)).Run();
 
-        static App app(IWfShell wf)
-            => new App(wf);
+        static Machine app(IWfShell wf)
+            => new Machine(wf);
 
         static IWfShell shell(string[] args)
             => WfShell.create(args).WithRandom(Rng.@default());
 
         IWfShell Wf;
 
-        App(IWfShell wf)
+        Machine(IWfShell wf)
         {
             Wf = wf;
         }
@@ -130,8 +28,8 @@ namespace Z0
         {
             try
             {
-                using var machine = Machine.create(Wf);
-                machine.Run();
+                using var machine = MachineRunner.create(Wf);
+                machine.Run(MachineOptions.@default());
             }
             catch(Exception e)
             {

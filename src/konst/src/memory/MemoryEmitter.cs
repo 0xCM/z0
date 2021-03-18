@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [Service(typeof(IMemoryEmitter))]
-    public class MemoryEmitter : WfService<MemoryEmitter, IMemoryEmitter>,  IMemoryEmitter
+    public class MemoryEmitter : WfService<MemoryEmitter>, IMemoryEmitter
     {
         public void Emit(MemoryRange src, StreamWriter dst, byte bpl = 40)
         {

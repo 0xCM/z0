@@ -10,8 +10,6 @@ namespace Z0
     public abstract class WfService<H,K> : WfService<H>, IWfService<H,K>
         where H : WfService<H,K>, new()
     {
-        public override Type ContractType => typeof(K);
-
         protected WfService()
         {
 

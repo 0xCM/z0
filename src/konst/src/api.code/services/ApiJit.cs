@@ -14,7 +14,7 @@ namespace Z0
     using static Part;
 
     [Service(typeof(IApiJit)), ApiHost]
-    public sealed class ApiJit : WfService<ApiJit,IApiJit>, IApiJit
+    public sealed class ApiJit : WfService<ApiJit>, IApiJit
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress jit(ApiMember src)

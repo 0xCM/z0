@@ -19,5 +19,8 @@ namespace Z0
 
         public static MsilPipe IlPipe(this IWfShell wf)
             => MsilPipe.create(wf);
+
+        public static FieldLiteralEmitter FieldLiteralEmitter(this IWfShell wf)
+            => Z0.FieldLiteralEmitter.create(wf);
     }
 }

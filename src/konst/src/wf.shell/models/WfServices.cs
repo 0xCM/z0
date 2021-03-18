@@ -23,7 +23,7 @@ namespace Z0
         {
             Wf = wf;
             Env = env;
-            Lookup = WfShell.services(components);
+            Lookup = new ConcurrentDictionary<Type, IWfService>();
             EmissionLog = new WfEmissionLog(target(env));
         }
 

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public struct EtlSettings : ISettingsSet<EtlSettings>
+    public struct MachineOptions : ISettingsSet<MachineOptions>
     {
         public Setting<bool> RunXed;
 
@@ -40,12 +40,12 @@ namespace Z0
 
         public Setting<bool> EmitStatements;
 
-        public static EtlSettings @default()
+        public static MachineOptions @default()
         {
-            var dst = new EtlSettings();
+            var dst = new MachineOptions();
             dst.RunXed = false;
-            dst.EmitResourceData = false;
-            dst.CollectApiDocs = false;
+            dst.EmitResourceData = true;
+            dst.CollectApiDocs = true;
             dst.EmitImageContent = false;
             dst.EmitSectionHeaders = true;
             dst.EmitMsilRecords = true;

@@ -21,5 +21,10 @@ namespace Z0
         public static ApiHexIndexer ApiHexIndexer(this IWfShell wf)
              => Z0.ApiHexIndexer.create(wf);
 
+        public static BitMaskServices ApiBitMasks(this IWfShell wf)
+            => BitMaskServices.create(wf);
+
+        public static ApiAssets ApiAssets(this IWfShell wf)
+            => Z0.ApiAssets.create(wf);
     }
 }

@@ -23,8 +23,6 @@ namespace Z0
 
         uint Discriminator => 0;
 
-        ServiceSpec Spec
-            => new ServiceSpec(HostType, ContractType, Discriminator, ContractArgs);
     }
 
     /// <summary>

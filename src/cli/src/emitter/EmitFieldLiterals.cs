@@ -14,31 +14,21 @@ namespace Z0
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitFieldLiteralsStep(wf, this);
+            using var step = FieldLiteralEmitter.create(wf);
             step.Run();
         }
     }
 
-    readonly ref struct EmitFieldLiteralsStep
+    public class FieldLiteralEmitter : WfService<FieldLiteralEmitter>
     {
-        readonly IWfShell Wf;
+        public FieldLiteralEmitter()
+        {
 
-        readonly WfHost Host;
+        }
 
         FS.FolderPath Target
             => Wf.Db().TableRoot() + FS.folder(CliFieldName.TableId);
 
-        public EmitFieldLiteralsStep(IWfShell wf, WfHost host)
-        {
-            Host = host;
-            Wf = wf.WithHost(host);
-            Wf.Created();
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed();
-        }
 
         void Emit(ApiPartTypes src)
         {
