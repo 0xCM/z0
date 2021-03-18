@@ -110,7 +110,7 @@ namespace Z0
                 var flow = wf.EmittingFile(dst);
                 var svc = ApiHexIndexer.create(wf);
                 index(wf, svc.IndexApiBlocks(), dst);
-                wf.EmittedFile(flow);
+                wf.EmittedFile(flow,1);
                 return dst;
             }
             catch(Exception e)

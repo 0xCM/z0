@@ -23,7 +23,7 @@ namespace Z0
                 var reader = peFile.GetMetadataReader();
                 var viz = new MetadataVisualizer(reader, target);
                 viz.Visualize();
-                return Wf.EmittedFile(flow);
+                return Wf.EmittedFile(flow,1);
             }
             catch(Exception e)
             {

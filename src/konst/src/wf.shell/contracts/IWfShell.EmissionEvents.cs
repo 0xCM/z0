@@ -36,7 +36,7 @@ namespace Z0
             return Emissions.LogEmission(Flow(dst));
         }
 
-        WfExecToken EmittedFile(WfFileFlow flow, Count count = default)
+        WfExecToken EmittedFile(WfFileFlow flow, Count count)
         {
             var completed = Ran(flow);
             var counted = flow.WithCount(count).WithToken(completed);

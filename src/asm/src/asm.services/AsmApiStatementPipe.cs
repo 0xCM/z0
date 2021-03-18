@@ -61,7 +61,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(target);
             using var writer = target.Writer();
             writer.Write(src.Format());
-            Wf.EmittedFile(flow);
+            Wf.EmittedFile(flow,1);
         }
 
         // void EmitThumbprintSummary(Index<AsmThumbprint> src)

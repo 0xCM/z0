@@ -119,7 +119,7 @@ namespace Z0
             var utf = Resources.utf8(src);
             using var writer = target.Writer();
             writer.Write(utf);
-            Wf.EmittedFile(flow);
+            Wf.EmittedFile(flow,1);
             return Links.link(src,target);
         }
     }

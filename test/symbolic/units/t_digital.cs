@@ -22,7 +22,7 @@ namespace Z0
                 Pow2 p = i;
                 writer.WriteLine(p.FormatSymbolic());
             }
-            Wf.EmittedFile(flow);
+            Wf.EmittedFile(flow,64);
         }
 
         public void t_bits()

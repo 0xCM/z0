@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
-
     sealed class DumpImages : CmdReactor<DumpImagesCmd>
     {
         protected override CmdResult Run(DumpImagesCmd cmd)
@@ -25,7 +19,7 @@ namespace Z0
                 var flow = Wf.EmittingFile(target);
                 var service = MemoryEmitter.create(Wf);
                 service.Emit(file.BaseAddress, file.Size, target);
-                Wf.EmittedFile(flow);
+                Wf.EmittedFile(flow,1);
             }
 
             return default;

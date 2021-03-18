@@ -361,7 +361,7 @@ namespace Z0.Asm
                         Wf.Warn($"The content {line} could not be parsed");
 
                 }
-                Wf.EmittedFile(flow);
+                Wf.EmittedFile(flow,1);
             }
         }
 
@@ -398,7 +398,7 @@ namespace Z0.Asm
             var flow = Wf.EmittingFile(dstPath);
             using var xml = XmlSource.create(Wf, srcPath);
             xml.Read(handlers);
-            Wf.EmittedFile(flow);
+            Wf.EmittedFile(flow,1);
         }
 
         Index<string> CollectFormExpressions()

@@ -32,7 +32,7 @@ namespace Z0.Asm
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
 
-            Wf.EmittedFile(flow);
+            Wf.EmittedFile(flow,1);
             return dst;
         }
 
