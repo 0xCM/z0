@@ -9,10 +9,8 @@ namespace Z0
 
     using static Part;
 
-    partial class WfShell
+    public readonly struct Sinks
     {
-        [MethodImpl(Inline), Op]
-        internal static IWfShell clone(IWfShell src, WfHost host, IPolySource random, LogLevel verbosity)
-            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity, src.Router, src.Services);
+
     }
 }

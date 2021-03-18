@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The element type</typeparam>
     [Free]
-    public interface IConstSet<T> : IStreamSource<T>, ICounted, INullity
+    public interface IConstSet<T> : IDeferredSource<T>, ICounted, INullity
     {
         /// <summary>
         /// Determines whether a value is a member

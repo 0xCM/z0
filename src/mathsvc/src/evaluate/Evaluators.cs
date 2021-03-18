@@ -17,7 +17,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly IPolyStream Source;
+        readonly IPolySource Source;
 
         readonly uint SampleCount;
 

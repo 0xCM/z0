@@ -13,9 +13,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IDataStream<T> Stream<T>(this IPolyStream src)
+        public static IDataStream<T> Stream<T>(this IPolySource src)
             where T : unmanaged
-                => PolyStreams.create<T>((IPolyrand)src);
+                => PolyStreams.create<T>(src);
+
+        /// <summary>
+        /// Produces a random stream of unfiltered/unbounded points from a source
+        /// </summary>
+        /// <param name="src">The point source</param>
+        /// <typeparam name="T">The point type</typeparam>
+        public static IDataStream<T> Stream<T>(this IDomainSource src)
+            where T : unmanaged
+                => PolyStreams.create<T>(src);
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -26,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IDataStream<T> Stream<T>(this IDomainSource src, T min, T max)
             where T : unmanaged
-                => PolyStreams.create<T>((IPolyrand)src,(min,max));
+                => PolyStreams.create<T>(src, (min,max));
 
         /// <summary>
         /// Produces a stream of values from the random source

@@ -287,7 +287,7 @@ namespace Z0
                 {
                     var src = Random.Next<T>();
                     var bitspan = BitSpans32.from(src);
-                    Sinks.deposit(src, bytes);
+                    Pipes.deposit(src, bytes);
                     bitspan_check(bytes, bitspan);
                 }
             }

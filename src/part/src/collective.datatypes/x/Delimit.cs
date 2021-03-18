@@ -9,10 +9,12 @@ namespace Z0
 
     using static Part;
 
-    partial class WfShell
+    partial class XCollective
     {
-        [MethodImpl(Inline), Op]
-        internal static IWfShell clone(IWfShell src, WfHost host, IPolySource random, LogLevel verbosity)
-            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity, src.Router, src.Services);
+        public static DelimitedIndex<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
+            => Seq.delimit(src, delimiter);
+
+        public static DelimitedIndex<T> Delimit<T>(this Span<T> src, char delimiter = FieldDelimiter)
+            => Seq.delimit(src, delimiter);
     }
 }

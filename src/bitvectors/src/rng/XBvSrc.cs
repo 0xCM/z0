@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="source">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector128<N128,ulong> BitVector(this IPolyStream source, N128 n)
+        public static BitVector128<N128,ulong> BitVector(this IPolySource source, N128 n)
             => source.CpuVector<ulong>(n);
 
         /// <summary>

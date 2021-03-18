@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
-
     public class Pipeline<S,T> : WfService<Pipeline<S,T>>, IPipeline<Pipeline<S,T>,S,T>
     {
         public IEmitter<S> Emitter {get; private set;}

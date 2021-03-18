@@ -62,7 +62,7 @@ namespace Z0
         /// </summary>
         Option<Exception> Error;
 
-        public IPolyStream Random {get;}
+        public IPolySource Random {get;}
 
 
         /// <summary>

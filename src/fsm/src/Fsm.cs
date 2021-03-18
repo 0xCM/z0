@@ -168,7 +168,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        static TransitionFunction<T,T> transition<T>(IPolyStream src, PrimalFsmSpec<T> spec)
+        static TransitionFunction<T,T> transition<T>(IPolySource src, PrimalFsmSpec<T> spec)
             where T : unmanaged
         {
             var sources = gAlg.stream<T>(spec.StateCount).ToArray();

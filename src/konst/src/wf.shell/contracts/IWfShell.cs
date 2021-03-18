@@ -38,7 +38,7 @@ namespace Z0
 
         IWfInit Init {get;}
 
-        IPolyStream PolyStream {get;}
+        IPolySource PolyStream {get;}
 
         WfHost Host {get;}
 
@@ -75,7 +75,7 @@ namespace Z0
         IWfShell WithHost(WfHost host)
             => WfShell.clone(this, host, PolyStream, Verbosity);
 
-        IWfShell WithRandom(IPolyStream random)
+        IWfShell WithRandom(IPolySource random)
             => WfShell.clone(this, Host, random, Verbosity);
 
         IWfShell WithVerbosity(LogLevel level)

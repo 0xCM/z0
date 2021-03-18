@@ -28,7 +28,7 @@ namespace Z0
 
         public Pair<uint> Counts;
 
-        readonly IPolyStream DataSource;
+        readonly IPolySource DataSource;
 
         Index<byte> Cases8;
 
@@ -54,7 +54,7 @@ namespace Z0
 
         CheckHiMaskResults<ulong> HiMaskResults64;
 
-        public BitMaskChecker(IWfShell wf, WfHost host, IPolyStream source, StringBuilder log)
+        public BitMaskChecker(IWfShell wf, WfHost host, IPolySource source, StringBuilder log)
             : this()
         {
             Host = host;

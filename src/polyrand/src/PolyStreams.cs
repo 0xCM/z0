@@ -18,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IEnumerable<T> src, RngKind kind)
             where T : struct
-                => new DataStream<T>(src, kind);
+                => new DataStream<T>(src, (ulong)kind);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IEnumerable<T> src)
@@ -31,19 +31,19 @@ namespace Z0
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IPolyrand src)
+        public static IDataStream<T> create<T>(IDomainSource src)
             where T : unmanaged
-                => create(forever<T>(src), src.RngKind);
+                => create(forever<T>(src));
 
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IPolyrand src, T min, T max)
+        public static IDataStream<T> create<T>(IDomainSource src, T min, T max)
             where T : unmanaged
-                => create(forever(src,min,max), src.RngKind);
+                => create(forever(src,min,max));
 
         [Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter = null)
+        public static IDataStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(forever(src, domain, filter), src.RngKind);
+                => create(forever(src, domain, filter));
 
         /// <summary>
         /// Produces a stream of values from the random source

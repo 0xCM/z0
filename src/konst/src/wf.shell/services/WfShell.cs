@@ -41,7 +41,7 @@ namespace Z0
 
         public WfController Controller {get;}
 
-        public IPolyStream PolyStream {get; private set;}
+        public IPolySource PolyStream {get; private set;}
 
         public WfHost Host {get; private set;}
 
@@ -78,7 +78,7 @@ namespace Z0
             Services = new WfServices(this, Env, Api.PartComponents);
         }
 
-        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyStream random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
+        internal WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolySource random, LogLevel verbosity, ICmdRouter router, WfServices wfservices)
         {
             Tokens = TokenDispenser.acquire();
             Env = Z0.Env.create();
