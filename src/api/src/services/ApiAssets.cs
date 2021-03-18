@@ -35,7 +35,7 @@ namespace Z0
                     Wf.Error(e);
                 }
             }
-            Wf.Ran(outer);
+            Wf.Ran(outer, string.Format("Emitted <{0}> reference files", count));
             return emissions;
         }
 
@@ -115,9 +115,11 @@ namespace Z0
             var invalid = Path.GetInvalidPathChars();
             var name =  src.Name.ToString().ReplaceAny(invalid, Chars.Underscore);
             var target = root + FS.file(name);
+            var flow = Wf.EmittingFile(target);
             var utf = Resources.utf8(src);
             using var writer = target.Writer();
             writer.Write(utf);
+            Wf.EmittedFile(flow);
             return Links.link(src,target);
         }
     }
