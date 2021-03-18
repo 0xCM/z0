@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_msb_off : t_bitcore<t_msb_off>
+    public class t_msb_off : t_bits<t_msb_off>
     {
         public void msboff_8u()
             => msboff_check<byte>();

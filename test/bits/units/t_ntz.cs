@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+
     using static memory;
 
-    public class t_ntz : t_bitcore<t_ntz>
+    public class t_ntz : t_bits<t_ntz>
     {
         public void ntz_outline()
         {

@@ -5,7 +5,8 @@
 namespace Z0
 {
     using static memory;
-    public class t_bg_bitread : t_bitgrids<t_bg_bitread>
+
+    public class t_bg_bitread : t_bits<t_bg_bitread>
     {
         public void bg_bitread_20x20x32()
             => check_bitgrid_read<uint>(20,20);

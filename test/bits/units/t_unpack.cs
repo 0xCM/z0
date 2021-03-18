@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
 
-    using static Part;
     using static memory;
 
-    public class t_unpack : t_bitcore<t_unpack>
+    public class t_unpack : t_bits<t_unpack>
     {
         public override bool Enabled
             => true;

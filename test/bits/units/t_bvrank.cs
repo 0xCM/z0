@@ -7,7 +7,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bvrank : t_bitvectors<t_bvrank>
+    public class t_bvrank : t_bits<t_bvrank>
     {
         public void bvrank_g8()
             => bvrank_gcheck<byte>();

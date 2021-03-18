@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_stitch : t_bitcore<t_stitch>
+    public class t_stitch : t_bits<t_stitch>
     {
         public void stitch_basecases()
         {

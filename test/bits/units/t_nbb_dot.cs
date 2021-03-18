@@ -10,8 +10,10 @@ namespace Z0
     using static Part;
 
     [ApiComplete]
-    public class t_nbb_dot : t_bitspans<t_nbb_dot>
+    public class t_nbb_dot : t_bits<t_nbb_dot>
     {
+        static NatSeq<N2,N1,N7> n217 => default;
+
         public void nbb_dot_8x8()
             => bitblock_dot_check<N8,byte>();
 

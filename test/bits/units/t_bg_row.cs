@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bg_row : t_bitgrids<t_bg_row>
+    public class t_bg_row : t_bits<t_bg_row>
     {
         public void bg_row_128x32x4()
         {

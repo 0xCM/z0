@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class t_bvparts : t_bitvectors<t_bvparts>
+    public class t_bvparts : t_bits<t_bvparts>
     {
         public void pbv_partition_32x16()
         {

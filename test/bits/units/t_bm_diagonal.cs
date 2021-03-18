@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bm_diagonal : t_bitmatrix<t_bm_diagonal>
+    public class t_bm_diagonal : t_bits<t_bm_diagonal>
     {
         public void bm_diagonal_4x4x4()
         {

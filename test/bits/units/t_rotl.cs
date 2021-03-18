@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_rotl : t_bitcore<t_rotl>
+    public class t_rotl : t_bits<t_rotl>
     {
         public void rotl_8()
             => rotl_check<byte>();

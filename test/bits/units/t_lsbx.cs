@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public class t_lsbx : t_bitcore<t_lsbx>
+    public class t_lsbx : t_bits<t_lsbx>
     {
         public void xlsb_outline()
         {

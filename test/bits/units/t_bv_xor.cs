@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bv_xor : t_bitsvc<t_bv_xor>
+    public class t_bv_xor : t_bits<t_bv_xor>
     {
         public void bvxor_check()
         {

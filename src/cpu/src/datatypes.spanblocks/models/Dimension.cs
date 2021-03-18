@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
+    using static memory;
 
     [ApiHost]
     public class Dimensions
@@ -41,6 +42,24 @@ namespace Z0
             where T : unmanaged
                 => default;
 
-    }
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static GridTypeExpr<N64,N8,N8,T> expression<T>(T t = default)
+            where T : unmanaged
+                => expression(n64, n8,n8, t);
 
+        /// <summary>
+        /// Defines a parametrically-specified grid type expression
+        /// </summary>
+        /// <typeparam name="W">The block width type</typeparam>
+        /// <typeparam name="M">The row count type</typeparam>
+        /// <typeparam name="N">The column count type</typeparam>
+        /// <typeparam name="T">The storage cell type</typeparam>
+        [MethodImpl(Inline)]
+        public static GridTypeExpr<W,M,N,T> expression<W,M,N,T>(W w = default, M m = default, N n = default, T t = default)
+            where W : unmanaged, ITypeNat
+            where M : unmanaged, ITypeNat
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+                => default;
+    }
 }

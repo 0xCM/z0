@@ -5,7 +5,7 @@
 namespace Z0
 {
     [ApiComplete]
-    public class t_gbb_dot : t_bitspans<t_gbb_dot>
+    public class t_gbb_dot : t_bits<t_gbb_dot>
     {
         public void gbb_dot_10x32()
             => gbb_dot_check<uint>(10);

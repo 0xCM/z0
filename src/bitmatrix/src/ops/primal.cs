@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     partial class BitMatrix
     {
@@ -31,7 +31,7 @@ namespace Z0
         {
             ushort result = 0;
             for(var i=0; i<rows.Length; i++)
-                result |= (ushort)(rows[i].Scalar << 4*i);
+                result |= (ushort)(rows[i].Content << 4*i);
             return result;
         }
 

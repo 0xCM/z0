@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bitidx : t_bitcore<t_bitidx>
+    public class t_bitidx : t_bits<t_bitidx>
     {
         public void bit_index_inc()
         {

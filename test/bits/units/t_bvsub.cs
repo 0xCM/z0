@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvsub : t_bitvectors<t_bvsub>
+    public class t_bvsub : t_bits<t_bvsub>
     {
         public void bvsub_8()
         {

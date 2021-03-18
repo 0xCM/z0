@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Part;
 
-    [ApiHost(ApiNames.GridCalcs, true)]
+    [ApiHost]
     public readonly partial struct GridCalcs
     {
         const NumericKind Closure = UnsignedInts;

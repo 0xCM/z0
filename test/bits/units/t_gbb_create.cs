@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
     using static CallingMember;
 
-    public class t_gbb_create : t_bitspans<t_gbb_create>
+    public class t_gbb_create : t_bits<t_gbb_create>
     {
         CallingMember Caller;
 

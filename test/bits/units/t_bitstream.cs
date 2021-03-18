@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public sealed class t_bitstream : UnitTest<t_bitstream>
+    public sealed class t_bitstream : t_bits<t_bitstream>
     {
         public void check_singletons()
         {

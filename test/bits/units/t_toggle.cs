@@ -9,9 +9,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_toggle : t_bitcore<t_toggle>
+    public class t_toggle : t_bits<t_toggle>
     {
-
         public void toggle_8i()
             => toggle_check<sbyte>();
 

@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
     using static memory;
 
-    public class t_bm_create : t_bitmatrix<t_bm_create>
+    public class t_bm_create : t_bits<t_bm_create>
     {
-
         void bm_format_n7x9x8()
         {
             var m1 = BitMatrix.alloc<N7,N9,byte>();

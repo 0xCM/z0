@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
-    using static memory;
 
-    public class t_bg_layout : t_bitgrids<t_bg_layout>
+    public class t_bg_layout : t_bits<t_bg_layout>
     {
         public void bg_layout_21x32x32()
         {

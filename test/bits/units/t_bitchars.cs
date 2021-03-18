@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitchars : t_bitcore<t_bitchars>
+    public class t_bitchars : t_bits<t_bitchars>
     {
         public void bitchars_8u()
             => bitchars_check<byte>();

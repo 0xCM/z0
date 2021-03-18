@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvconcat : t_bitvectors<t_bvconcat>
+    public class t_bvconcat : t_bits<t_bvconcat>
     {
         public void bv_inc_8()
         {

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_scatter : t_bitcore<t_scatter>
+    public class t_scatter : t_bits<t_scatter>
     {
         public void sb_scatter_basecase()
         {

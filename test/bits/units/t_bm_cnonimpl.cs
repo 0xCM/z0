@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bm_cnonimpl : t_bitmatrix<t_bm_cnonimpl>
+    public class t_bm_cnonimpl : t_bits<t_bm_cnonimpl>
     {
         public void bm_not_32x32x32()
         {

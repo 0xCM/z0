@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bv_dot : t_bitsvc<t_bv_dot>
+    public class t_bv_dot : t_bits<t_bv_dot>
     {
         public void bvdot_gcheck()
         {

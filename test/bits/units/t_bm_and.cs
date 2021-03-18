@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
-    public class t_bm_and : t_bitmatrix<t_bm_and>
+    public class t_bm_and : t_bits<t_bm_and>
     {
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(Span<T> a, Span<T> b)

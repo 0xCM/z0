@@ -6,12 +6,7 @@ namespace Z0
 {
     #pragma warning disable 1718 // Because comparison to self is a valid test case
 
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public class t_bm_equality : t_bitmatrix<t_bm_equality>
+    public class t_bm_equality : t_bits<t_bm_equality>
     {
 
         void bm_equality_8x8x8()

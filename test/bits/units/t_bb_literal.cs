@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    public class t_bb_literal : t_bitspans<t_bb_literal>
+    public class t_bb_literal : t_bits<t_bb_literal>
     {
         public void bb_literal_40x64()
         {

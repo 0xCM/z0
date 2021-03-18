@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bitslice : t_bitcore<t_bitslice>
+    public class t_bitslice : t_bits<t_bitslice>
     {
         public void bitslice_32u()
         {

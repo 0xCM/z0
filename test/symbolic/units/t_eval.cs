@@ -73,7 +73,7 @@ namespace Z0
         where K : unmanaged, IApiKind
     {
         ApiClass IKindedEvaluator.Class
-            => (default(K) as IApiKind).Id;
+            => (default(K) as IApiKind).ClassId;
     }
 
 

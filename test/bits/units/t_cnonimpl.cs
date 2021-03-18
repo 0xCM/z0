@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_cnonimpl : t_bitcore<t_cnonimpl>
+    public class t_cnonimpl : t_bits<t_cnonimpl>
     {
         public void cnonimpl_8u()
             => cnonimpl_check<byte>();

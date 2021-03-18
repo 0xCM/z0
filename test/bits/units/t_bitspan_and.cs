@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitspan_and : t_bitcore<t_bitspan_and>
+    public class t_bitspan_and : t_bits<t_bitspan_and>
     {
         public override bool Enabled => true;
 

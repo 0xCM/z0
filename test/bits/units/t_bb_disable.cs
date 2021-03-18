@@ -5,8 +5,10 @@
 namespace Z0
 {
     [ApiComplete]
-    public class t_bb_disable : t_bitspans<t_bb_disable>
+    public class t_bb_disable : t_bits<t_bb_disable>
     {
+        static NatSeq<N2,N1,N3> n213 = default;
+
         public void bb_disable_16x16()
             => nbb_disable_check<N16,ushort>();
 

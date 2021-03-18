@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Part;
 
-    public class t_nbg_xor : t_bitgrids<t_nbg_xor>
+    public class t_nbg_xor : t_bits<t_nbg_xor>
     {
         public void nbg_xor_8x8x8()
             => nbg_xor_check(n8,n8,z8);
@@ -44,7 +44,7 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            base.Claim.eq((uint)gz.BlockCount, (BitVector64)GridCalcs.blocks(n256, m, n, t));
+            base.Claim.eq((uint)gz.BlockCount, (BitVector64)BitGrid.blocks(n256, m, n, t));
             base.Claim.eq((uint)gz.CellCount, (BitVector64)GridCalcs.cellcount(m, n, t));
 
             BitGrid.xor(gx,gy,gz);

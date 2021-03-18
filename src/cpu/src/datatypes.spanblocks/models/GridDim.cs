@@ -76,10 +76,10 @@ namespace Z0
         /// <summary>
         /// The number of bytes required to cover a grid
         /// </summary>
-        public int ByteCount
+        public uint ByteCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.minimum<M,N>();
+            get => GridCalcs.mincells<M,N,byte>();
         }
 
         /// <summary>

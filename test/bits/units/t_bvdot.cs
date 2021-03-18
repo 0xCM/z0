@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Verifies the correct function of the natural bitvector dot product operator
     /// </summary>
-    public class t_bvdot : t_bitvectors<t_bvdot>
+    public class t_bvdot : t_bits<t_bvdot>
     {
         public void bvdot_n64x128x64()
             => bvdot_check_n128<N63,ulong>();

@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Konst;
-
-    public class t_perm : t_bitcore<t_perm>
+    public class t_perm : t_bits<t_perm>
     {
         public void perm_create_8u()
              => perm_create((byte)5, (byte)100);

@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
     using static memory;
+
     using L = BitMasks.Literals;
 
-    public class t_bitmix : t_bitcore<t_bitmix>
+    public class t_bitmix : t_bits<t_bitmix>
     {
         public void bitmix_8()
             => bitmix_check<byte>();

@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public class t_bitstring_convert : t_bitspans<t_bitstring_convert>
+    public class t_bitstring_convert : t_bits<t_bitstring_convert>
     {
         public void bitspan_from_bitstring_check<T>()
             where T : unmanaged

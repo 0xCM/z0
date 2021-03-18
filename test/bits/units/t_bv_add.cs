@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public class t_bv_add : t_bitvectors<t_bv_add>
+    public class t_bv_add : t_bits<t_bv_add>
     {
         public void pvb_add_8()
         {

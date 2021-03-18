@@ -7,7 +7,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitview : t_bitcore<t_bitview>
+    public class t_bitview : t_bits<t_bitview>
     {
         public void bitview_8()
             => bitview_check<byte>();

@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
-    public class t_bm_xor : t_bitmatrix<t_bm_xor>
+    public class t_bm_xor : t_bits<t_bm_xor>
     {
         void bm_xor_g8x8x8()
             => bm_xor_check<byte>();

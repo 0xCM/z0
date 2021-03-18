@@ -5,7 +5,7 @@
 namespace Z0
 {
     [ApiComplete]
-    public class t_bg_permute : t_bitgrids<t_bg_permute>
+    public class t_bg_permute : t_bits<t_bg_permute>
     {
         public void bg_permute_32x5()
         {

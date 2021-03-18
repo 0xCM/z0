@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitfields : t_bitcore<t_bitfields>
+    public class t_bitfields : t_bits<t_bitfields>
     {
         enum BF_A : byte
         {

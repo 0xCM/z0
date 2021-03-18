@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bit_datatype : t_bitcore<t_bit_datatype>
+    public class t_bit_datatype : t_bits<t_bit_datatype>
     {
         static bit On = bit.On;
 

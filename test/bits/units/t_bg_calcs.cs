@@ -10,10 +10,10 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bg_broken : t_bitgrids<t_bg_broken>
+    public class t_bg_calcs : t_bits<t_bg_calcs>
     {
-        public override bool Enabled => false;
-
+        // public override bool Enabled
+        //     => false;
         public void nbg_describe_dim()
         {
             var g1 = Dimensions.dim<N128,N4,N32,uint>();
@@ -39,7 +39,7 @@ namespace Z0
             Claim.eq(g2.BlockCount,1);
         }
 
-        public void bg_layout_32x8x8()
+        void bg_layout_32x8x8()
         {
             const ushort rows = 32;
             const ushort cols = 8;
@@ -57,7 +57,7 @@ namespace Z0
             Claim.eq(current, map.CellCount);
         }
 
-        public void bg_layout_17x11x8()
+        void bg_layout_17x11x8()
         {
             const ushort rows = 17;
             const ushort cols = 11;
@@ -79,7 +79,7 @@ namespace Z0
             Claim.eq(current, map.CellCount);
         }
 
-        public void bg_layout_8x8()
+        void bg_layout_8x8()
         {
 
             Span<byte> data = stackalloc byte[8];

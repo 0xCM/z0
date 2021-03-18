@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_testbit : t_bitcore<t_testbit>
+    public class t_testbit : t_bits<t_testbit>
     {
         public void testbit_8u()
             => testbit_check(z8);

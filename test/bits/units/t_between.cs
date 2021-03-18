@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class t_between : t_bitcore<t_between>
+    public class t_between : t_bits<t_between>
     {
         public void between_outline()
         {

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public class t_mul128 : t_bitcore<t_mul128>
+    public class t_mul128 : t_bits<t_mul128>
     {
         public void mul_no_overflow()
         {

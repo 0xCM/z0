@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
     using static memory;
 
-    public class t_nbg_define : t_bitgrids<t_nbg_define>
+    public class t_nbg_define : t_bits<t_nbg_define>
     {
         public void bg_define_3x5x8()
             => nbg_define_check(n3, n5, z8);

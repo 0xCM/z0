@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bg_bitstring : t_bitgrids<t_bg_bitstring>
+    public class t_bg_bitstring : t_bits<t_bg_bitstring>
     {
         public void nbg_bitstring_11x3x16()
             => nbg_bitstring_check(n11,n3, z16);

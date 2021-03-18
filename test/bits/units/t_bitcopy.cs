@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitcopy : t_bitcore<t_bitcopy>
+    public class t_bitcopy : t_bits<t_bitcopy>
     {
         public void bitcopy_check()
         {

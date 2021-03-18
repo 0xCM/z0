@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitstring : t_bitcore<t_bitstring>
+    public class t_bitstring : t_bits<t_bitstring>
     {
         public void bs_seq_8u()
             => bs_seq_check<byte>();

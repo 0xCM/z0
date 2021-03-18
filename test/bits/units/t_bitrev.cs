@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bitrev : t_bitcore<t_bitrev>
+    public class t_bitrev : t_bits<t_bitrev>
     {
         public void bitrev_8()
             => bitrev_check<byte>();

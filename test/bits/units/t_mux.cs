@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using static Konst;
-
-    public class t_mux : t_bitcore<t_mux>
+    public class t_mux : t_bits<t_mux>
     {
         bit on => bit.On;
 
@@ -60,7 +58,7 @@ namespace Z0
                 var input = Random.BitVector(n16);
                 var control = Random.BitVector(n4);
                 var output = BitVector.mux(input,control);
-                var expect = input[control.Scalar];
+                var expect = input[control.Content];
                 Claim.eq(expect, output);
             }
         }

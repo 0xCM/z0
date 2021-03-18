@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
 
-    public class t_bg_dim : t_bitgrids<t_bg_dim>
+    public class t_bg_dim : t_bits<t_bg_dim>
     {
         public void nbg_dimensions()
         {

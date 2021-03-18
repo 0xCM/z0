@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitclear : t_bitcore<t_bitclear>
+    public class t_bitclear : t_bits<t_bitclear>
     {
         public void clearbits_outline()
         {

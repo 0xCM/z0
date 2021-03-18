@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bitwidth : t_bitcore<t_bitwidth>
+    public class t_bitwidth : t_bits<t_bitwidth>
     {
         public void bitwidth_outline()
         {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_partitions : t_bitcore<t_partitions>
+    public class t_partitions : t_bits<t_partitions>
     {
         public void bitpart_16x4()
         {

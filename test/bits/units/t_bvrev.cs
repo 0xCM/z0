@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvrev : t_bitvectors<t_bvrev>
+    public class t_bvrev : t_bits<t_bvrev>
     {
         public void bvrev_n2x8()
             => bvrev_natcheck<N2,byte>();

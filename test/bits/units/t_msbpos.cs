@@ -7,7 +7,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_mbspos : t_bitcore<t_mbspos>
+    public class t_mbspos : t_bits<t_mbspos>
     {
         public void msbpos_8()
             => check_msbpos<byte>();

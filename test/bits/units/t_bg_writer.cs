@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public class t_grid_writer : t_bitgrids<t_grid_writer>
+    public class t_grid_writer : t_bits<t_grid_writer>
     {
         public void write_maps()
         {

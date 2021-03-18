@@ -4,10 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    public class t_bm_extract : t_bitmatrix<t_bm_extract>
+    public class t_bm_extract : t_bits<t_bm_extract>
     {
         public void bm_extract_n9x9x16()
             => bm_extract_check(Random.BitMatrix<N9,N9,ushort>());

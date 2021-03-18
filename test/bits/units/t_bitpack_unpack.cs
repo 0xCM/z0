@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public class t_bitpack_unpack : t_bitcore<t_bitpack_unpack>
+    public class t_bitpack_unpack : t_bits<t_bitpack_unpack>
     {
        public void unpack_64x1()
         {

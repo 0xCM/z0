@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_masks : t_bitcore<t_masks>
+    public class t_masks : t_bits<t_masks>
     {
         public void lomask_case1()
         {

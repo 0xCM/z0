@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bm_rowswap : t_bitmatrix<t_bm_rowswap>
+    public class t_bm_rowswap : t_bits<t_bm_rowswap>
     {
         public void bm_rowswap_16x16x16()
         {

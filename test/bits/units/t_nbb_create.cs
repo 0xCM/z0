@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_nbb_create : t_bitspans<t_nbb_create>
+    public class t_nbb_create : t_bits<t_nbb_create>
     {
         public void nbb_create_n63x64u()
             => check_nbb_create<N63,ulong>();

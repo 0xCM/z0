@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    public class t_bvpow : t_bitvectors<t_bvpow>
+    public class t_bvpow : t_bits<t_bvpow>
     {
         public void bvpow_8()
         {

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_nbg_col : t_bitgrids<t_nbg_col>
+    public class t_nbg_col : t_bits<t_nbg_col>
     {
         public void nbg_col_256x32x8()
         {

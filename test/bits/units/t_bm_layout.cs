@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
     using static memory;
 
-    public class t_bm_layout : t_bitmatrix<t_bm_layout>
+    public class t_bm_layout : t_bits<t_bm_layout>
     {
         public void bm_cellcount()
         {

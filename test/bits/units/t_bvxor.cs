@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvxor : t_bitvectors<t_bvxor>
+    public class t_bvxor : t_bits<t_bvxor>
     {
         public void bvxor_n13x8u()
         {

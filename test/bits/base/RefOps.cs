@@ -139,5 +139,25 @@ namespace Z0
             }
             return dst;
         }
+
+
+        // The algorithms for the functions below were taken from https://github.com/lemire/SIMDCompressionAndIntersection/blob/master/src/bitpacking.cpp
+        public static unsafe void part32x4_ref(uint src, Span<byte> dst)
+        {
+            for(int i = 0, j=0; i<32; i +=4, j++)
+                dst[j] = (byte)(((src) >> i) % (1u << 4));
+        }
+
+        public static unsafe void unpack32x4(uint* pSrc, uint* pDst)
+        {
+            for(var inner = 0; inner < 32; inner +=4)
+                *(pDst++) = ((*pSrc) >> inner) % (1u << 4);
+        }
+
+        public static unsafe void fastunpack4(uint* pSrc, uint* pDst)
+        {
+           for(var outer = 0; outer<4; ++outer)
+                unpack32x4(pSrc++,pDst);
+        }
     }
 }

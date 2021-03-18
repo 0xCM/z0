@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_nbb_pop : t_bitspans<t_nbb_pop>
+    public class t_nbb_pop : t_bits<t_nbb_pop>
     {
         public void gbb_pop_64()
         {

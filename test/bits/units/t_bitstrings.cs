@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
     using static memory;
 
-    public class t_bitstring2 : t_bitvectors<t_bitstring2>
+    public class t_bitstring2 : t_bits<t_bitstring2>
     {
         public void bs_2x8()
             => bs_check<N2,byte>();

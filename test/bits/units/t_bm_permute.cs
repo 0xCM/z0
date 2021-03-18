@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bm_permute : t_bitmatrix<t_bm_permute>
+    public class t_bm_permute : t_bits<t_bm_permute>
     {
         bit on => bit.On;
 

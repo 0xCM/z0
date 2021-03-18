@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
     using static memory;
 
-    public class t_bb_extract : t_bitspans<t_bb_extract>
+    public class t_bb_extract : t_bits<t_bb_extract>
     {
         public void bb_extract_64()
         {

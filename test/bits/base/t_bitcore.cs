@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_bitcore<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
-        where X : t_bitcore<X>, new()
+    public abstract class t_bits<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
+        where X : t_bits<X>, new()
     {
         protected override int RepCount => Pow2.T04;
 

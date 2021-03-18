@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="rows">The number of grid rows</param>
         /// <param name="cols">The number of grid columns</param>
         [MethodImpl(Inline), Op]
-        public static int tablesize(int rows, int cols)
+        public static ByteSize tablesize(int rows, int cols)
         {
             var points = rows*cols;
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="M">The row type</typeparam>
         /// <typeparam name="N">The col type</typeparam>
         [MethodImpl(Inline)]
-        public static int tablesize<M,N>(M m = default, N n = default)
+        public static ByteSize tablesize<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {

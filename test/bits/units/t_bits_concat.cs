@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_bits_concat : t_bitcore<t_bits_concat>
+    public class t_bits_concat : t_bits<t_bits_concat>
     {
         public void concat_8x2()
         {

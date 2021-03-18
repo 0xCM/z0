@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public class t_sra : t_bitcore<t_sra>
+    public class t_sra : t_bits<t_sra>
     {
         public void bs_sra_8i_check()
             => bs_sra_check<sbyte>();

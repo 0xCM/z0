@@ -5,12 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
-    public class t_gather : t_bitcore<t_gather>
+    public class t_gather : t_bits<t_gather>
     {
         public void gather_masks()
         {

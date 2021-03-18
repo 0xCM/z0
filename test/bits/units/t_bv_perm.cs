@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvperm : t_bitvectors<t_bvperm>
+    public class t_bvperm : t_bits<t_bvperm>
     {
         public void pbv_perm_8()
         {
