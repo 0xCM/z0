@@ -795,7 +795,10 @@ namespace Z0.Asm
         }
         public void Run()
         {
-            CheckBitSpans();
+            //CheckBitSpans();
+
+            var commands = Wf.ApiCmdHost();
+            commands.Run(ApiCmd.EmitAssetContent);
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 
             //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);

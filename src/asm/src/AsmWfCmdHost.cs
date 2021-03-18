@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
 
-    using static WfCmd;
     using static memory;
     using static Asm.AsmOpCodesLegacy;
 

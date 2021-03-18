@@ -8,9 +8,9 @@ namespace Z0
 
     public interface IApiAssets : IWfService
     {
-        Index<ResEmission> EmitReferenceData();
+        Index<ResEmission> EmitAssetContent();
 
-        Index<DocLibEntry> EmitContentIndex();
+        Index<DocLibEntry> EmitAssetIndex();
 
         Index<ResEmission> EmitEmbedded(Assembly src, FS.FolderPath root, utf8 match = default,  bool clear = true);
 

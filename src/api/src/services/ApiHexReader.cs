@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
 
+
+    using static Part;
     using static memory;
 
-    public sealed class ApiHexReader : WfService<ApiHexReader,IApiHexReader>, IApiHexReader
+    public sealed class ApiHexReader : WfService<ApiHexReader>, IApiHexReader
     {
         public Index<ApiCodeBlock> Read(FS.FilePath src)
         {

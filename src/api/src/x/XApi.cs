@@ -8,6 +8,10 @@ namespace Z0
     public static partial class XApi
     {
         [Op]
+        public static IWfCmdHost<ApiCmd> ApiCmdHost(this IWfShell wf)
+            => Z0.ApiCmdHost.create(wf);
+
+        [Op]
         public static ApiServices ApiServices(this IWfShell wf)
             => Z0.ApiServices.create(wf);
 

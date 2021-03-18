@@ -47,8 +47,8 @@ namespace Z0
                 if(options.EmitResourceData)
                 {
                     var assets = Wf.ApiAssets();
-                    assets.EmitContentIndex();
-                    assets.EmitReferenceData();
+                    assets.EmitAssetIndex();
+                    assets.EmitAssetContent();
                 }
 
                 if(options.RunXed)

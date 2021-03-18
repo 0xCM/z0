@@ -14,10 +14,11 @@ namespace Z0
 
     public sealed class ApiAssets : WfService<ApiAssets>, IApiAssets
     {
-        public Index<ResEmission> EmitReferenceData()
+        public Index<ResEmission> EmitAssetContent()
         {
             var outer = Wf.Running("Emitting reference data");
-            var descriptors = Resources.descriptors(Parts.Res.Assembly).View;
+            var components = Wf.Api.PartComponents;
+            var descriptors = Resources.descriptors(components).SelectMany(x => x.Storage).View;
             var count = descriptors.Length;
             var root = Db.RefDataRoot();
             var emissions = sys.alloc<ResEmission>(count);
@@ -38,22 +39,17 @@ namespace Z0
             return emissions;
         }
 
-        public Index<DocLibEntry> EmitContentIndex()
+        public Index<DocLibEntry> EmitAssetIndex()
         {
             var flow = Wf.Running();
-
-            var count = 0;
             var formatter = Records.formatter<DocLibEntry>(82);
             var target = Db.RefDataRoot() + FS.file("index", FS.Extensions.Csv);
             using var dst = target.Writer();
             dst.WriteLine(formatter.FormatHeader());
-
             var emitting = Wf.EmittingTable<DocLibEntry>(target);
             var entries = root.list<DocLibEntry>();
             Emit(root.array(Parts.Res.Assembly), dst, entries);
-            count += entries.Count;
-
-            Wf.EmittedTable(emitting, count);
+            Wf.EmittedTable(emitting, entries.Count);
 
             Wf.Ran(flow);
             return entries.ToArray();
@@ -79,10 +75,7 @@ namespace Z0
             var count = (uint)entries.Length;
             var formatter = Records.formatter<DocLibEntry>(82);
             for(var i=0u; i<count; i++)
-            {
-                ref readonly var entry = ref skip(entries, i);
-                dst.WriteLine(formatter.Format(entry));
-            }
+                dst.WriteLine(formatter.Format(skip(entries, i)));
             return count;
         }
 

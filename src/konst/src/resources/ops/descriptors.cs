@@ -15,6 +15,14 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
+        public static Index<ResDescriptors> descriptors(ReadOnlySpan<Assembly> src)
+        {
+            var dst = root.list<ResDescriptors>();
+            root.iter(src, component => dst.Add(descriptors(component)));
+            return dst.ToArray();
+        }
+
+        [MethodImpl(Inline), Op]
         public static ResDescriptors descriptors(Assembly src)
             => new ResDescriptors(src, collect(src));
 

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ResDescriptors
+    public readonly struct ResDescriptors : IIndex<ResDescriptor>
     {
         readonly Index<ResDescriptor> Data;
 
@@ -27,6 +27,11 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.Count;
+        }
+
+        public ResDescriptor[] Storage
+        {
+            get => Data.Storage;
         }
 
         public ReadOnlySpan<ResDescriptor> View
