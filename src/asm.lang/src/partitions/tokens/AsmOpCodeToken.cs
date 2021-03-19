@@ -154,5 +154,11 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("+ro",OCD.ᕀro)]
         ro,
+
+        /// <summary>
+        /// <see cref='OCD.ᕀrq'/>
+        /// </summary>
+        [Symbol("+ro",OCD.ᕀrq)]
+        rq,
     }
 }

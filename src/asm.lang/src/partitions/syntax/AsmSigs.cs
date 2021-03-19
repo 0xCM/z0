@@ -60,11 +60,12 @@ namespace Z0.Asm
         [Op]
         public bool ParseMnemonicCode(AsmMnemonic src, out AsmMnemonicCode dst)
         {
-            if(_Mnemonics.TokenFromSymbol(src.Name, out var code))
+            if(Enum.TryParse(typeof(AsmMnemonicCode), src.Format(), true, out var _code))
             {
-                dst = code.Kind;
+                dst = (AsmMnemonicCode)_code;
                 return true;
             }
+
             dst = 0;
             return false;
         }
@@ -241,7 +242,7 @@ namespace Z0.Asm
                 var i = Query.index(sig, MnemonicTerminator);
                 if(i > 0)
                 {
-                    dst = Parse.segment(sig, 0, i - 1).ToLower();
+                    dst = Parse.segment(sig, 0, i - 1).ToUpper();
                     return true;
                 }
                 else

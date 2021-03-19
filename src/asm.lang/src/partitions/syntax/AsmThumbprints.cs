@@ -41,10 +41,6 @@ namespace Z0.Asm
             return new AsmThumbprintExpr(string.Concat(lhs,Implication,rhs));
         }
 
-        [MethodImpl(Inline), Op]
-        public static AsmThumbprint create(Address16 offset, AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => new AsmThumbprint(offset, statement, sig,opcode,encoded);
-
         [Op]
         public static string format(AsmThumbprint src)
         {
@@ -79,7 +75,8 @@ namespace Z0.Asm
 
             var a = src.LeftOfFirst(Semicolon);
             var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
-            AsmStatementExpr sexpr = a.RightOfFirst(Semicolon);
+            AsmStatementExpr statement = a.RightOfFirst(Semicolon);
+
 
             var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
             if(parts.Length == 2)
@@ -90,11 +87,14 @@ namespace Z0.Asm
                 {
                     if(Expr.Sig(sigexpr, out var sig))
                     {
+                        if(!Sigs.ParseMnemonicCode(sig.Mnemonic, out var monic))
+                            Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
+
                         if(unfence(lhs, OpCodeFence, out var opcode))
                         {
                             if(AsmBytes.hexcode(rhs, out var encoded))
                             {
-                                thumbprint = new AsmThumbprint(offset, sexpr, sig, Expr.OpCode(opcode), encoded);
+                                thumbprint = new AsmThumbprint(offset, statement, monic, sig, Expr.OpCode(opcode), encoded);
                                 return true;
                             }
                             else

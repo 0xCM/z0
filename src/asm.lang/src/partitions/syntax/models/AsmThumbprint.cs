@@ -17,17 +17,21 @@ namespace Z0.Asm
 
         public AsmStatementExpr Statement {get;}
 
+        public AsmMnemonicCode Mnemonic {get;}
+
         public AsmSigExpr Sig {get;}
+
 
         public AsmOpCodeExpr OpCode {get;}
 
         public AsmHexCode Encoded {get;}
 
         [MethodImpl(Inline), Op]
-        public AsmThumbprint(Address16 offset, AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+        public AsmThumbprint(Address16 offset, AsmStatementExpr statement, AsmMnemonicCode monic, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
         {
             Offset = offset;
             Statement = statement;
+            Mnemonic = monic;
             Sig = sig;
             OpCode = opcode;
             Encoded = encoded;
@@ -55,7 +59,7 @@ namespace Z0.Asm
         public static AsmThumbprint Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmThumbprint(0, AsmStatementExpr.Empty, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
+            get => new AsmThumbprint(0, AsmStatementExpr.Empty, 0, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
         }
     }
 }

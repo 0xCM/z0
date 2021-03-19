@@ -35,6 +35,13 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("+ro",OCD.ᕀro)]
         ro = OCT.ro,
+
+        /// <summary>
+        /// <see cref='OCD.ᕀrq'/>
+        /// </summary>
+        [Symbol("+ro",OCD.ᕀrq)]
+        rq = OCT.rq,
+
     }
 }
 
