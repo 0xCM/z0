@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     partial class BitMatrix
-    {        
+    {
         /// <summary>
         /// Overwrites each row of a generic bitmatrix with a specified source vector
         /// </summary>

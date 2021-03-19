@@ -90,6 +90,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ClaimException Failed(ClaimKind claim, IAppMsg msg)
-            => api.exception(claim, msg);
+            => api.failed(claim, msg);
     }
 }

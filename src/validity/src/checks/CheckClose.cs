@@ -34,7 +34,7 @@ namespace Z0
 
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;
-            return err < tolerance ? true : throw api.exception(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
+            return err < tolerance ? true : throw api.failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
         }
 
         [Op]
@@ -46,7 +46,7 @@ namespace Z0
 
             var err = fmath.relerr(lhs,rhs);
             var tolerance = .1f;
-            return err < tolerance ? true : throw api.exception(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
+            return err < tolerance ? true : throw api.failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance));
         }
 
         [Op, Closures(Floats)]

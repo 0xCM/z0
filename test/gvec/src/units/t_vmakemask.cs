@@ -8,7 +8,7 @@ namespace Z0
     {
         public void vmakemask_128()
         {
-            for(var i=0; i< RepCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = Random.BitVector(n16);
                 var b = cpu.vmask16u(cpu.vmask128(a));
@@ -18,7 +18,7 @@ namespace Z0
 
         public void vmakemask_256()
         {
-            for(var i=0; i< RepCount; i++)
+            for(var i=0; i<RepCount; i++)
             {
                 var a = Random.BitVector(n32);
                 var b = cpu.vmask32u(cpu.vmask256(a));

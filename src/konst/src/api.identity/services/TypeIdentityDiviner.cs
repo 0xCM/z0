@@ -36,7 +36,7 @@ namespace Z0
             else if(ApiIdentity.IsNatSpan(arg))
                 return NatSpanId(arg);
             else
-                return none<TypeIdentity>();
+                return root.none<TypeIdentity>();
         }
 
         /// <summary>

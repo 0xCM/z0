@@ -16,6 +16,8 @@ namespace Z0
     [ApiHost("vex.examples")]
     public sealed partial class VexExamples : t_inx<VexExamples>
     {
+        VClaims VClaims => default;
+
         public override bool Enabled => true;
     }
 

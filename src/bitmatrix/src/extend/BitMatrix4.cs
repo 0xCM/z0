@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Part;
 
     public static class BitMatrix4x
-    {   
-        [MethodImpl(Inline)] 
+    {
+        [MethodImpl(Inline)]
         public static BitMatrix4 Replicate(this BitMatrix4 src)
             => (ushort)src;
 
@@ -23,7 +23,7 @@ namespace Z0
             => (ushort)A;
 
         [MethodImpl(Inline)]
-        public static string Format(this BitMatrix4 src)            
+        public static string Format(this BitMatrix4 src)
             => src.Bytes.FormatMatrixBits(src.Order);
 
         /// <summary>

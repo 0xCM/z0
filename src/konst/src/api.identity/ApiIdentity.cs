@@ -6,15 +6,11 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-
-    using static Root;
 
     [ApiHost]
     public readonly partial struct ApiIdentity
     {
-
         /// <summary>
         /// Assigns identity to each value parameter (not to be confused with type parametricity) declared by a method
         /// </summary>

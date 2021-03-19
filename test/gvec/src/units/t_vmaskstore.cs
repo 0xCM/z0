@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
     using static cpu;
     using static HexConst;
 
@@ -19,19 +18,19 @@ namespace Z0
             const byte Y = Pow2.T07;
             const byte N = 0;
 
-            var n = n128;
-            var dst = SpanBlocks.alloc<byte>(n);
-            var m0 = cpu.vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
+            var w = w128;
+            var dst = SpanBlocks.alloc<byte>(w);
+            var m0 = cpu.vparts(w128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = cpu.vsllx(m0,32);
             var m2 = cpu.vsllx(m1,32);
             var m3 = cpu.vsllx(m2,32);
 
             for(var i = 0; i<RepCount; i++)
             {
-                var v0 = Random.CpuVector<byte>(n);
-                var v1 = Random.CpuVector<byte>(n);
-                var v2 = Random.CpuVector<byte>(n);
-                var v3 = Random.CpuVector<byte>(n);
+                var v0 = Random.CpuVector<byte>(w);
+                var v1 = Random.CpuVector<byte>(w);
+                var v2 = Random.CpuVector<byte>(w);
+                var v3 = Random.CpuVector<byte>(w);
 
                 cpu.vmaskstore(v0, m0, dst);
                 cpu.vmaskstore(v1, m1, dst);
@@ -53,21 +52,21 @@ namespace Z0
         public void vmaskstore_256x8()
         {
             var count = 32;
-            var x = Random.CpuVector(n256,z8);
-            var storage = SpanBlocks.alloc<byte>(n256);
-            var stored = gcpu.vzero(n256,z8);
-            var mask = gcpu.vzero(n256,z8);
+            var x = Random.CpuVector(w256, z8);
+            var storage = SpanBlocks.alloc<byte>(w256);
+            var stored = gcpu.vzero(w256,z8);
+            var mask = gcpu.vzero(w256,z8);
 
             // Store every component
             storage.Clear();
-            mask = VMask.vmsb(n256, n8, n1, z8);
+            mask = VMask.vmsb(w256, n8, n1, z8);
             gcpu.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
             Claim.veq(x,stored);
 
             // Store odd components
             storage.Clear();
-            mask = VMask.vmsb(n256, n16, n1, z8);
+            mask = VMask.vmsb(w256, n16, n1, z8);
             gcpu.vmaskstore8(x,mask,storage);
             stored = storage.LoadVector();
 
@@ -80,7 +79,7 @@ namespace Z0
 
             // Store even components
             storage.Clear();
-            mask = gcpu.vbsrl(VMask.vmsb(n256,n16,n1,z8),1);
+            mask = gcpu.vbsrl(VMask.vmsb(w256, n16, n1, z8),1);
             gcpu.vmaskstore8(x, mask, storage);
             stored = storage.LoadVector();
 

@@ -174,7 +174,7 @@ namespace Z0
         [Op]
         static ref XedPattern[] patterns(in XedInstructionDoc src, out XedPattern[] dst)
         {
-            var patterns = z.list<XedPattern>();
+            var patterns = root.list<XedPattern>();
             var count = src.RowCount;
             var last = count - 1;
             for(var i=0; i<count; i++)

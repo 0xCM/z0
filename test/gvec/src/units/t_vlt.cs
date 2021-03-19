@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
-    using static Konst;
+
+    using static Part;
 
     public class t_vlt : t_inx<t_vlt>
-    {        
+    {
         public void vlt_check()
         {
-            
+
             check(n128);
             check(n256);
         }
 
         void check(N128 w)
         {
-            v_check(w, z8);                
+            v_check(w, z8);
             v_check(w, z8i);
             v_check(w, z16);
             v_check(w, z16i);
@@ -32,7 +32,7 @@ namespace Z0
 
         void check(N256 w)
         {
-            v_check(w, z8);                
+            v_check(w, z8);
             v_check(w, z8i);
             v_check(w, z16);
             v_check(w, z16i);
@@ -40,7 +40,7 @@ namespace Z0
             v_check(w, z32i);
             v_check(w, z64);
             v_check(w, z64i);
-        }            
+        }
 
         void v_check<T>(N128 w, T t = default)
             where T : unmanaged
@@ -48,6 +48,6 @@ namespace Z0
 
         void v_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.vlt(w,t), w, t); 
+                => CheckSVF.CheckBinaryOp(VSvc.vlt(w,t), w, t);
     }
 }

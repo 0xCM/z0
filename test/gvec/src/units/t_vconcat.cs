@@ -5,31 +5,32 @@
 namespace Z0
 {
     using System;
+    using static Part;
 
     public class t_vconcat : t_inx<t_vconcat>
     {
         public void vconcat_check()
         {
-            var w = n128;
-            vconcat_check(w,z8);
-            vconcat_check(w,z8i);
-            vconcat_check(w,z16);
-            vconcat_check(w,z16i);
-            vconcat_check(w,z32);
-            vconcat_check(w,z32i);
-            vconcat_check(w,z64);
-            vconcat_check(w,z64i);
+            var w = w128;
+            vconcat_check(w, z8);
+            vconcat_check(w, z8i);
+            vconcat_check(w, z16);
+            vconcat_check(w, z16i);
+            vconcat_check(w, z32);
+            vconcat_check(w, z32i);
+            vconcat_check(w, z64);
+            vconcat_check(w, z64i);
         }
 
-        void vconcat_check<T>(N128 w, T t = default)
+        void vconcat_check<T>(W128 w, T t = default)
             where T : unmanaged
                 => CheckAction(() => vconcat_checker(w,t), CaseName(VSvc.vconcat(w,t)));
 
-        Action<N128,T> vconcat_checker<T>(N128 w, T t = default)
+        Action<W128,T> vconcat_checker<T>(W128 w, T t = default)
             where T : unmanaged
                 => check<T>;
 
-        void check<T>(N128 w, T t = default)
+        void check<T>(W128 w, T t = default)
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)

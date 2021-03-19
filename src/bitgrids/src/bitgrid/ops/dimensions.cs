@@ -105,7 +105,7 @@ namespace Z0
         /// <typeparam name="W">The grid dimension type</typeparam>
         public static IEnumerable<Pair<ulong>> p2dimensions<W>()
             where W : unmanaged,INatPow2<W>
-                => p2dimensions(z.nat32u<W>());
+                => p2dimensions(TypeNats.nat32u<W>());
 
         /// <summary>
         /// Enumerates the valid grid dimensions where the total bit width is a power of 2
@@ -121,12 +121,12 @@ namespace Z0
             {
                 while(--failsafe >= 0)
                 {
-                    yield return z.pair(m,n);
+                    yield return root.pair(m,n);
 
                     if(m == n)
                         break;
 
-                    yield return z.pair(n,m);
+                    yield return root.pair(n,m);
 
                     m <<= 1;
 

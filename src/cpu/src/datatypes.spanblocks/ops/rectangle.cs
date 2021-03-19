@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static SpanBlock8<T> rectangle<T>(W8 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
 
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 16-bit blocks
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt16k)]
         public static SpanBlock16<T> rectangle<T>(W16 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
 
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 32-bit blocks
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static SpanBlock32<T> rectangle<T>(W32 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
 
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 64-bit blocks
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static SpanBlock64<T> rectangle<T>(W64 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
 
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 64-bit blocks
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static SpanBlock128<T> rectangle<T>(W128 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
 
         /// <summary>
         /// Allocates the minimum number of blocks required to block-align tabular data in 256-bit blocks
@@ -81,6 +81,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         public static SpanBlock256<T> rectangle<T>(W256 w, ulong m, ulong n)
             where T : unmanaged
-                => alloc<T>(w, cellcover<T>(w,  m*n));
+                => alloc<T>(w, cellcover<T>(w, m*n));
     }
 }

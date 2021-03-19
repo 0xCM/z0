@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
     using System.Runtime.Intrinsics;
 
-    using static z;
+    using static Part;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
@@ -275,7 +275,7 @@ namespace Z0.Logix
 
                 var z3 = SC(sa, sb, sc);
                 if(!NumericLogixOps.same(z3, z0.Content))
-                    Claim.FailWith($"Evalutation of ternary op {id} failed");
+                    Claim.failed($"Evalutation of ternary op {id} failed");
 
                 var v1 = gcpu.vbroadcast(w256,sa);
                 var v2 = gcpu.vbroadcast(w256,sb);

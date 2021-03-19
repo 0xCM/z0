@@ -133,15 +133,15 @@ namespace Z0.Asm
             var dMatch = archive.Read(dHost.Uri).Where(x => x.Id == dId);
 
             if(dMatch.Count == 0)
-                Claim.FailWith($"No matches for {dId} found in {dHost.Uri}");
+                Claim.failed($"No matches for {dId} found in {dHost.Uri}");
             else if(dMatch.Count > 1)
-                Claim.FailWith($"More than one match for {dId} found in {dHost.Uri}");
+                Claim.failed($"More than one match for {dId} found in {dHost.Uri}");
 
             var gMatch = archive.Read(gHost.Uri).Where(x => x.Id == gId);
             if(gMatch.Count == 0)
-                Claim.FailWith($"No matches for {gId} found in {gHost.Uri}");
+                Claim.failed($"No matches for {gId} found in {gHost.Uri}");
             else if(gMatch.Count > 1)
-                Claim.FailWith($"More than one match for {gId} found in {gHost.Uri}");
+                Claim.failed($"More than one match for {gId} found in {gHost.Uri}");
 
             return AsmCheck.Match(OperatorClasses.binary(), w, dMatch[0], gMatch[0], dst);
         }

@@ -16,6 +16,42 @@ namespace Z0
     partial struct cpu
     {
         /// <summary>
+        /// Replicates a 16-bit source over a 32-bit target
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Broadcast]
+        public static uint broadcast(ushort src, N32 w)
+            => cpu.vbroadcast(w128, src).AsUInt32().GetElement(0);
+
+        /// <summary>
+        /// Replicates an 8-bit source over a 64-bit target
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Broadcast]
+        public static ulong broadcast(byte src, N64 w)
+            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+
+        /// <summary>
+        /// Replicates a 16-bit source over a 64-bit target
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Broadcast]
+        public static ulong broadcast(ushort src, N64 w)
+            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+
+        /// <summary>
+        /// Replicates a 32-bit source over a 64-bit target
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The target width</param>
+        [MethodImpl(Inline), Broadcast]
+        public static ulong broadcast(uint src, N64 w)
+            => cpu.vbroadcast(w128, src).AsUInt64().GetElement(0);
+
+        /// <summary>
         /// Creates a target vector where each component is initialized with the same value
         /// </summary>
         /// <param name="w">The target vector width</param>

@@ -286,7 +286,7 @@ namespace Z0
                 {
                     var a = Random.Next<S>();
                     var v = f.Invoke(a);
-                    Require(check.Invoke(a,v), ClaimKind.Eq);
+                    require(check.Invoke(a,v), ClaimKind.Eq);
                 }
             }
 
@@ -335,7 +335,7 @@ namespace Z0
                 {
                     var a = Random.Next<S>();
                     var v = f.Invoke(a);
-                    Require(check.Invoke(a,v), ClaimKind.Eq);
+                    require(check.Invoke(a,v), ClaimKind.Eq);
                 }
             }
 

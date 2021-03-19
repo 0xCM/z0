@@ -277,7 +277,7 @@ namespace Z0
 
             var spec = pattern.LoadVector();
             var x = gcpu.vinc(w, t);
-            var y = gcpu.vadd(x, gmath.add(x.LastCell(), Z0.z.one(t)));
+            var y = gcpu.vadd(x, gmath.add(x.LastCell(), Numeric.one<byte>()));
             var z = gcpu.vblendp(x,y,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
@@ -341,17 +341,17 @@ namespace Z0
             Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gcpu.vinc(w, t);
-            var right = gcpu.vadd(left, gmath.add(left.LastCell(), z.one(t)));
+            var right = gcpu.vadd(left, gmath.add(left.LastCell(), Numeric.one<T>()));
             var blend = gcpu.vblendp(left,right,spec);
 
 
-            var dst = SpanBlocks.alloc(w,2,t);
+            var dst = SpanBlocks.alloc<T>(w,2);
             gcpu.vlo(blend).StoreTo(dst,0);
             gcpu.vhi(blend).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Storage);
             var tc = 0;
-            for(var i=0; i< perm.Length; i++)
+            for(var i=0; i<perm.Length; i++)
             {
                 var ti = Numeric.force<T>(i);
                 var identity = gmath.eq(ti ,perm[i]);
@@ -448,10 +448,10 @@ namespace Z0
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern), t);
             var a = gcpu.vinc(w, t);
-            var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), Numeric.one<T>()));
             var c = gcpu.vblendp(a,b,spec);
 
-            var dst = SpanBlocks.alloc(w,2,t);
+            var dst = SpanBlocks.alloc<T>(w,2);
             gcpu.vlo(c).StoreTo(dst,0);
             gcpu.vhi(c).StoreTo(dst,1);
 
@@ -476,7 +476,7 @@ namespace Z0
         {
             var spec = memory.@as(gcpu.vbroadcast(w, pattern),t);
             var a = gcpu.vinc(w, t);
-            var b = gcpu.vadd(a, gmath.add(a.LastCell(), z.one(t)));
+            var b = gcpu.vadd(a, gmath.add(a.LastCell(), Numeric.one<T>()));
             var c = gcpu.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);

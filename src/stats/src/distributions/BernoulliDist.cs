@@ -8,9 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
-
     /// <summary>
     /// Realizes a Bernoulli distribution
     /// </summary>
@@ -18,9 +15,9 @@ namespace Z0
     public class BernoulliDist<T> : Distribution<BernoulliSpec<T>,T>
         where T : unmanaged
     {
-        static readonly T Zero = zero<T>();
+        static T Zero => default;
 
-        static readonly T One = one<T>();
+        static T One => Numeric.one<T>();
 
         public BernoulliDist(IPolyrand random, BernoulliSpec<T> spec)
             : base(random, spec)

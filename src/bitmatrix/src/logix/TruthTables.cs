@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-    using static z;
+    using static Part;
 
     [ApiHost]
     public readonly struct TruthTables

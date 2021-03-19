@@ -232,7 +232,7 @@ namespace Z0.Asm
                 Claim.eq(VectorKind.v128x64u, kVector);
             }
             else
-                Claim.Fail();
+                Claim.fail();
         }
 
         void check_cell_type(Type tVector, W256 w)
@@ -290,7 +290,7 @@ namespace Z0.Asm
                 Claim.eq(VectorKind.v256x64u, kVector);
             }
             else
-                Claim.Fail();
+                Claim.fail();
         }
     }
 }

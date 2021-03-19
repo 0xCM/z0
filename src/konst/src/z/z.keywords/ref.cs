@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         public static unsafe StringRef @ref(string src)
-            => new StringRef((ulong)pchar(src), (uint)src.Length);
+            => new StringRef((ulong)memory.pchar(src), (uint)src.Length);
 
         /// <summary>
         /// Creates a reference to a string that includes 32 bits of arbitrary data
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
         public static unsafe StringRef @ref(string src, uint user)
-            => new StringRef((ulong)pchar(src), (uint)src.Length, user);
+            => new StringRef((ulong)memory.pchar(src), (uint)src.Length, user);
 
         /// <summary>
         /// Presents a pointer as a reference

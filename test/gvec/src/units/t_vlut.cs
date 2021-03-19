@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
     public class t_vlut : t_inx<t_vlut>
     {
@@ -21,7 +20,7 @@ namespace Z0
             var lut = VLut.init(src);
 
             var content = gcpu.vinc<byte>(w, 64);
-            var selected =  VLut.select(lut,content); //dvec.vshuf16x8(items, table);
+            var selected =  VLut.select(lut,content);
             Claim.veq(content, selected);
         }
 
@@ -33,7 +32,7 @@ namespace Z0
             var lut = VLut.init(src);
 
             var content = gcpu.vinc<byte>(w, 64);
-            var selected =  VLut.select(lut,content); //dvec.vshuf32x8(items, table);
+            var selected =  VLut.select(lut,content);
             Claim.veq(content, selected);
         }
     }

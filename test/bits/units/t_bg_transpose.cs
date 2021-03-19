@@ -42,7 +42,7 @@ namespace Z0
                     Notify(tr1.Format());
                     Notify("!=");
                     Notify(tr3.Format());
-                    Claim.Fail();
+                    Claim.fail();
                 }
 
                 if(tr1 != tr2)
@@ -50,7 +50,7 @@ namespace Z0
                     Notify(tr1.Format());
                     Notify("!=");
                     Notify(tr2.Format());
-                    Claim.Fail();
+                    Claim.fail();
                 }
             }
         }

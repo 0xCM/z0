@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class BitMatrixGx
-    {   
+    {
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < N
         /// </summary>

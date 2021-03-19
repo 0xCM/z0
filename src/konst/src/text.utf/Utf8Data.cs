@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     [ApiHost(ApiNames.Utf8Data)]
     public readonly struct Utf8Data
@@ -200,8 +200,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public utf8x4(in utf8x1<W,T> a0, in utf8x1<W,T> a1, in utf8x1<W,T> a2, in utf8x1<W,T> a3)
             {
-                A0 = pair(a0,a1);
-                A1 = pair(a2,a3);
+                A0 = root.pair(a0,a1);
+                A1 = root.pair(a2,a3);
             }
 
             /// <summary>

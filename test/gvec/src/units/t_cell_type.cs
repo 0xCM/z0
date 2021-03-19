@@ -84,7 +84,7 @@ namespace Z0
             else
             {
                 Notify($"{tVector.DisplayName()} is not a recognized 128-bit vector type");
-                Claim.Fail();
+                Claim.fail();
             }
         }
 
@@ -155,7 +155,7 @@ namespace Z0
             else
             {
                 Notify($"{tVector.DisplayName()} is not a recognized 256-bit vector type");
-                Claim.Fail();
+                Claim.fail();
             }
         }
     }

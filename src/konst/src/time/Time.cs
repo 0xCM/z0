@@ -92,7 +92,7 @@ namespace Z0
 
         public static Date[] partition(in ClosedInterval<Date> src, uint width)
         {
-            var points = z.list<Date>(new Date[]{src.Min});
+            var points = root.list<Date>(new Date[]{src.Min});
             var last = src.Min;
             var finished = false;
             while (!finished)

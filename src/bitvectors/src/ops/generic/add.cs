@@ -35,7 +35,7 @@ namespace Z0
         {
             var sum = cpu.vadd(gcpu.v64u(x.Data), gcpu.v64u(y.Data));
             bit carry = x.Lo > gcpu.vcell(sum,0);
-            return  z.generic<T>(cpu.vadd(sum, cpu.vbroadcast(n128, (ulong)carry)));
+            return  memory.generic<T>(cpu.vadd(sum, cpu.vbroadcast(w128, (ulong)carry)));
         }
     }
 }

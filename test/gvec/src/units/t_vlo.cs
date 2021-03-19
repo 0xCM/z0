@@ -7,40 +7,39 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     public class t_vlo : t_inx<t_vlo>
     {
         public void vlo_128x8u()
-            => vlo_check<byte>(n128,z8);
+            => vlo_check<byte>(w128, z8);
 
         public void vlo_128x8i()
-            => vlo_check<sbyte>(n128,z8i);
+            => vlo_check<sbyte>(w128, z8i);
 
         public void vlo_128x16i()
-            => vlo_check<short>(n128,z16i);
+            => vlo_check<short>(w128, z16i);
 
         public void vlo_128x16u()
-            => vlo_check<ushort>(n128,z16);
+            => vlo_check<ushort>(w128, z16);
 
         public void vlo_128x32i()
-            => vlo_check<int>(n128);
+            => vlo_check<int>(w128);
 
         public void vlo_128x32u()
-            => vlo_check<uint>(n128);
+            => vlo_check<uint>(w128);
 
         public void vlo_128x64i()
-            => vlo_check<long>(n128);
+            => vlo_check<long>(w128);
 
         public void vlo_128x64u()
-            => vlo_check<ulong>(n128);
+            => vlo_check<ulong>(w128);
 
         public void vlo_128x32f()
-            => vlo_check<float>(n128);
+            => vlo_check<float>(w128);
 
         public void vlo_128x64f()
-            => vlo_check<double>(n128);
+            => vlo_check<double>(w128);
 
         public void vlo_256x8u()
             => vlo_check<byte>(n256);

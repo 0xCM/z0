@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
     using static HexConst;
 
     public class t_vconvert : t_inx<t_vconvert>

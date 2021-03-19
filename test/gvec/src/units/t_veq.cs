@@ -76,7 +76,7 @@ namespace Z0
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(z.ones(t));
+            result.Fill(Numeric.ones<T>());
             CheckSVF.CheckExplicit(f,x,x,result, name);
         }
 
@@ -88,7 +88,7 @@ namespace Z0
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/cpu.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
-            result.Fill(z.ones(t));
+            result.Fill(Numeric.ones<T>());
             CheckSVF.CheckExplicit(f,x,x,result,name);
         }
 

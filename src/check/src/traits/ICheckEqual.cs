@@ -15,13 +15,13 @@ namespace Z0
         void Eq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(!object.Equals(a,b))
-                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
+                throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
 
         void Neq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             if(object.Equals(a,b))
-                throw Failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
+                throw failed(ClaimKind.Eq, NotEqual(a,b, caller, file, line));
         }
     }
 }

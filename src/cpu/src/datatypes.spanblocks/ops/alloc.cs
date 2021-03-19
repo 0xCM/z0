@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock8<T> alloc<T>(W8 w, ulong count, T t = default)
+        public static SpanBlock8<T> alloc<T>(W8 w, ulong count)
             where T : unmanaged
                 => new SpanBlock8<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock16<T> alloc<T>(W16 w, ulong count, T t = default)
+        public static SpanBlock16<T> alloc<T>(W16 w, ulong count)
             where T : unmanaged
                 => new SpanBlock16<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock32<T> alloc<T>(W32 w, ulong count, T t = default)
+        public static SpanBlock32<T> alloc<T>(W32 w, ulong count)
             where T : unmanaged
                 => new SpanBlock32<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock64<T> alloc<T>(W64 w, ulong count, T t = default)
+        public static SpanBlock64<T> alloc<T>(W64 w, ulong count)
             where T : unmanaged
                 => new SpanBlock64<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -139,7 +139,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock128<T> alloc<T>(W128 w, ulong count, T t = default)
+        public static SpanBlock128<T> alloc<T>(W128 w, ulong count)
             where T : unmanaged
                 => new SpanBlock128<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock256<T> alloc<T>(W256 w, ulong count, T t = default)
+        public static SpanBlock256<T> alloc<T>(W256 w, ulong count)
             where T : unmanaged
                 => new SpanBlock256<T>(new T[count * (ulong)blocklength<T>(w)]);
 
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="blocks">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock512<T> alloc<T>(W512 w, ulong blocks, T t = default)
+        public static SpanBlock512<T> alloc<T>(W512 w, ulong blocks)
             where T : unmanaged
                 => new SpanBlock512<T>(new T[blocks * (ulong)blocklength<T>(w)]);
 
@@ -172,7 +172,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock8<T> alloc<T>(W8 w, long count, T t = default)
+        public static SpanBlock8<T> alloc<T>(W8 w, long count)
             where T : unmanaged
                 => new SpanBlock8<T>(new T[count * blocklength<T>(w)]);
 
@@ -183,7 +183,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock16<T> alloc<T>(W16 w, long count, T t = default)
+        public static SpanBlock16<T> alloc<T>(W16 w, long count)
             where T : unmanaged
                 => new SpanBlock16<T>(new T[count * blocklength<T>(w)]);
 
@@ -194,7 +194,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock32<T> alloc<T>(W32 w, long count, T t = default)
+        public static SpanBlock32<T> alloc<T>(W32 w, long count)
             where T : unmanaged
                 => new SpanBlock32<T>(new T[count * blocklength<T>(w)]);
 
@@ -205,7 +205,7 @@ namespace Z0
         /// <param name="count">The block allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static SpanBlock64<T> alloc<T>(W64 w, long count, T t = default)
+        public static SpanBlock64<T> alloc<T>(W64 w, long count)
             where T : unmanaged
                 => new SpanBlock64<T>(new T[count * blocklength<T>(w)]);
 

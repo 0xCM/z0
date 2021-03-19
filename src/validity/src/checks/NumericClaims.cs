@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static AppErrorMsg;
@@ -37,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T).IsPrimalNumeric())
-                gmath.neq(lhs,rhs).OnNone(() => throw exception(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
+                gmath.neq(lhs,rhs).OnNone(() => throw failed(ClaimKind.NEq, Equal(lhs, rhs, caller, file, line)));
             else
                 CheckEqual.Checker.Neq(lhs,rhs);
         }
@@ -52,19 +51,19 @@ namespace Z0
 
         public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gt(lhs,rhs) ? true : throw exception(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
+                => gmath.gt(lhs,rhs) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
         public static bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gteq(lhs,rhs) ? true : throw exception(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
+                => gmath.gteq(lhs,rhs) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
 
         public static bool lt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lt(lhs,rhs) ? true : throw exception(ClaimKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
+                => gmath.lt(lhs,rhs) ? true : throw failed(ClaimKind.Lt, NotLessThan(lhs, rhs, caller, file, line));
 
         public static bool lteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.lteq(lhs,rhs) ? true : throw exception(ClaimKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
+                => gmath.lteq(lhs,rhs) ? true : throw failed(ClaimKind.GtEq, NotGreaterThanOrEqual(lhs, rhs, caller, file, line));
 
         [Op, Closures(Closure)]
         public static void eq<T>(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs)
