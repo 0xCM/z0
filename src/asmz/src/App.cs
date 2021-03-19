@@ -60,6 +60,23 @@ namespace Z0.Asm
             gen.GenerateModels(monics);
         }
 
+        MemoryAddress GetKernel32Proc(string name = "CreateDirectoryA")
+        {
+            var flow = Wf.Running();
+            using var kernel = NativeModules.kernel32();
+            Wf.Row(kernel);
+
+            var f = NativeModules.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
+            Wf.Row(f);
+
+            var address = (MemoryAddress)f.Invoke(kernel, name);
+            Wf.Row(address);
+
+            Wf.Ran(flow);
+
+            return address;
+        }
+
         public void GenBits()
         {
             var factory = BitStoreFactory.create(Wf);

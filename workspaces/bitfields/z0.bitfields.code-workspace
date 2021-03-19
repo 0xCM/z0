@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../src/bitfields.shell",
+            "name": "shell"
+		},
+		{
+			"path": "../../src/bitfields"
+		},
+		{
+			"path": "../../src/part"
+		}
+	],
+	"settings": {
+
+    }
+}

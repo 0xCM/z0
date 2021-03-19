@@ -6,10 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-
-    [CmdAugmenter]
-    public abstract class CmdAugmenter<T,C> : WfService<T,ICmdAugmenter<C>>, ICmdAugmenter<C>
+    public abstract class CmdAugmenter<T,C> : WfService<T>, ICmdAugmenter<C>
         where T : CmdAugmenter<T,C>, new()
         where C : struct, ICmd<C>
     {
@@ -17,10 +14,5 @@ namespace Z0
 
         public CmdBuilder Builder
             => Wf.CmdBuilder();
-    }
-
-    public class CmdAugmenterAttribute : Attribute
-    {
-
     }
 }

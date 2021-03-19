@@ -173,6 +173,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.dynamic", "src\dynamic\z
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.bitnumbers", "src\bitnumbers\z0.bitnumbers.csproj", "{8398B4DC-CBFA-4CD7-9600-FE2B9E094DC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.cpu.shell", "src\cpu.shell\z0.cpu.shell.csproj", "{F333633E-5F8A-4779-A75D-12257339C665}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.bitfields.shell", "src\bitfields.shell\z0.bitfields.shell.csproj", "{E51E81C7-4FAC-4409-AD00-6939119E3ACE}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -470,6 +474,14 @@ Global
 		{8398B4DC-CBFA-4CD7-9600-FE2B9E094DC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8398B4DC-CBFA-4CD7-9600-FE2B9E094DC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8398B4DC-CBFA-4CD7-9600-FE2B9E094DC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F333633E-5F8A-4779-A75D-12257339C665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F333633E-5F8A-4779-A75D-12257339C665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F333633E-5F8A-4779-A75D-12257339C665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F333633E-5F8A-4779-A75D-12257339C665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E51E81C7-4FAC-4409-AD00-6939119E3ACE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E51E81C7-4FAC-4409-AD00-6939119E3ACE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E51E81C7-4FAC-4409-AD00-6939119E3ACE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E51E81C7-4FAC-4409-AD00-6939119E3ACE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -545,6 +557,8 @@ Global
 		{61BDB2D1-D292-4910-A115-387C2457316F} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{B1D1BA07-81C4-40DB-A207-21735AED5ACB} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{8398B4DC-CBFA-4CD7-9600-FE2B9E094DC5} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{F333633E-5F8A-4779-A75D-12257339C665} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{E51E81C7-4FAC-4409-AD00-6939119E3ACE} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

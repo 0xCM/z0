@@ -46,23 +46,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Extract(in BitFieldPart seg)
-            => api.extract(seg, _State);
+            => api.read(seg, _State);
 
         [MethodImpl(Inline)]
         public T Extract(byte index)
-            => api.extract(Segment(index), _State);
+            => api.read(Segment(index), _State);
 
         [MethodImpl(Inline)]
         public BitField<T> Deposit(in BitFieldPart seg, in T src)
         {
-            api.deposit<T>(seg, src, ref _State);
+            api.store<T>(seg, src, ref _State);
             return this;
         }
 
         [MethodImpl(Inline)]
         public BitField<T> Deposit(byte index, in T src)
         {
-            api.deposit<T>(Segment(index), src, ref _State);
+            api.store<T>(Segment(index), src, ref _State);
             return this;
         }
 

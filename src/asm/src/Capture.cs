@@ -38,11 +38,15 @@ namespace Z0
         }
 
         [Op]
-        public static void run(string[] args)
+        public static Index<AsmMemberRoutine> run(string[] args)
         {
             using var wf = configure(WfShell.create(args));
             using var runner = wf.CaptureRunner();
-            runner.Run();
+
+            if(args.Length != 0)
+                return runner.Run(wf.Api.PartIdentities,CaptureWorkflowOptions.EmitImm);
+            else
+                return runner.Run();
         }
 
         [MethodImpl(Inline), Op]

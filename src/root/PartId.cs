@@ -74,6 +74,8 @@ public enum PartId : ulong
 
     CmdExec = 64,
 
+    BitFieldsShell = 65,
+
     BitVectors = 100,
 
     BitSpans = 102,

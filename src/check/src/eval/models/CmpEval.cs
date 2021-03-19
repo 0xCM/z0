@@ -4,13 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    using api = EvalResults;
-
     public struct CmpEval<T>
     {
         public ComparisonKind Kind;
@@ -21,8 +14,6 @@ namespace Z0
 
         public bit Result;
 
-        [MethodImpl(Inline)]
-        public static implicit operator BinaryEval<ComparisonKind,T,bit>(CmpEval<T> src)
-            => api.binary(src.Kind, src.A, src.B, src.Result);
+        public SuccessCode Success;
     }
 }

@@ -12,6 +12,29 @@ namespace Z0
 
     partial class text
     {
+
+        [MethodImpl(Inline)]
+        static string msgarg<T>(T src)
+            => string.Format("<{0}>", src);
+
+        public static string msg<T>(string pattern, T a)
+            => Format.format(pattern, msgarg(a));
+
+        public static string msg<A,B>(string pattern, A a, B b)
+            => Format.format(pattern, msgarg(a), msgarg(b));
+
+        public static string msg<A,B,C>(string pattern, A a, B b, C c)
+            => Format.format(pattern, msgarg(a), msgarg(b), msgarg(c));
+
+        public static string msg<A,B,C,D>(string pattern, A a, B b, C c, D d)
+            => Format.format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d));
+
+        public static string msg<A,B,C,D,E>(string pattern, A a, B b, C c, D d, E e)
+            => Format.format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d), msgarg(e));
+
+        public static string msg<A,B,C,D,E,F>(string pattern, A a, B b, C c, D d, E e, F f)
+            => Format.format(pattern, msgarg(a), msgarg(b), msgarg(c), msgarg(d), msgarg(e), msgarg(f));
+
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)
             => Format.format(src);
@@ -43,6 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<T>(string pattern, T a)
             => Format.format(pattern, a);
+
 
         [MethodImpl(Inline)]
         public static string format<A,B>(string pattern, A a, B b)

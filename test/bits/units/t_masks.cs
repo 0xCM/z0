@@ -64,7 +64,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var count = Random.Next(mincount,maxcount);
-                var mask = BitMasks.hi(count,t);
+                var mask = BitMasks.hi<T>(count);
                 var pop = gbits.pop(mask);
                 if(pop != count)
                 {

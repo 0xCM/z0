@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using NK = NumericKind;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Returns a kind-identified system type if possible; throws an exception otherwise
         /// </summary>

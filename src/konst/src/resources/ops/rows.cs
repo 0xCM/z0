@@ -18,7 +18,6 @@ namespace Z0
             var count = view.Length;
             if(count == 0)
                 return default;
-
             var buffer = alloc<BinaryResRow>(count);
             rows(src,buffer);
 

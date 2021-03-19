@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
     partial class XVex
     {

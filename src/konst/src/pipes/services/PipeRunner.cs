@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    sealed class PipeRunnerSvc : WfService<PipeRunnerSvc,IPipeRunner>, IPipeRunner
+    sealed class PipeRunnerSvc : WfService<PipeRunnerSvc>, IPipeRunner
     {
         public WfExecToken Flow<T>(ReadOnlySpan<T> src, Pipe<T> dst)
         {

@@ -112,7 +112,7 @@ namespace Z0
                 bf = bf.State(input);
                 writer.WriteLine(bf.Format());
 
-                BitFields.deposit(bf.Spec, input, dst);
+                BitFields.store(bf.Spec, input, dst);
 
                 var output =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].FirstIndex),
@@ -164,7 +164,7 @@ namespace Z0
                 writer.WriteLine(bf.Format());
                 dst.Clear();
 
-                BitFields.deposit(bf.Spec, input, dst);
+                BitFields.store(bf.Spec, input, dst);
 
                 var result1 =  gmath.or(
                     gmath.sll(dst[0], (byte)spec[0].FirstIndex),
@@ -258,7 +258,7 @@ namespace Z0
 
                 var expect = gbits.extract(input,0, (byte)spec.TotalWidth);
 
-                BitFields.deposit(bf.Spec, input, dst);
+                BitFields.store(bf.Spec, input, dst);
 
                 gspan.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());

@@ -10,13 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-
-    public interface IEnumDataEmitter : IWfService
-    {
-
-    }
-
-    sealed class EnumDataEmitter : WfService<EnumDataEmitter,IEnumDataEmitter>, IEnumDataEmitter
+    public sealed class EnumDataEmitter : WfService<EnumDataEmitter>
     {
         public Index<ClrEnumRecord> EmitEnumRecords(ClrAssembly src, FS.FilePath dst)
         {

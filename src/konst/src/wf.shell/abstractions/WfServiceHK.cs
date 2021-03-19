@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     [WfService]
     public abstract class WfService<H,K> : WfService<H>, IWfService<H,K>
         where H : WfService<H,K>, new()

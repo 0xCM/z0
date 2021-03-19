@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../src/cpu.shell",
+            "name": "shell"
+		},
+		{
+			"path": "../src/cpu"
+		},
+		{
+			"path": "../src/part"
+		}
+	],
+	"settings": {
+
+    }
+}

@@ -33,18 +33,6 @@ namespace Z0
 
         IWfDb Db;
 
-        // [MethodImpl(Inline)]
-        // public MergeRunner(WfCaptureState wf)
-        // {
-        //     Host = WfShell.host(typeof(MergeRunner));
-        //     Wf = wf.Wf.WithHost(Host);
-        //     Db = Wf.Db();
-        //     State = wf;
-        //     Buffer = z.span<string>(256);
-        //     offset = 0;
-        //     Asm = wf.Asm;
-        //     Random = wf.App.Random;
-        // }
 
         public void Dispose()
         {

@@ -36,12 +36,12 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T hi<T>(int n, T t = default)
+        public static T hi<T>(int n)
             where T : unmanaged
                 => force<T>(lo64(n) << ((int)width<T>() - n));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T hi<T>(byte n, T t = default)
+        public static T hi<T>(byte n)
             where T : unmanaged
                 => force<T>(lo64(n) << ((int)width<T>() - n));
 

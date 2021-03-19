@@ -47,13 +47,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmpEval<T> eq<T>(T a, T b, bit equal)
+        public static CmpEval<T> eq<T>(T a, T b, bit result)
         {
             var dst = new CmpEval<T>();
             dst.Kind = ComparisonKind.Eq;
             dst.A = a;
             dst.B = b;
-            dst.Result = equal;
+            dst.Result = result;
+            dst.Success = result ? SuccessCode.Success : SuccessCode.Failure;
             return dst;
         }
 
@@ -65,6 +66,7 @@ namespace Z0
             dst.A = a;
             dst.B = b;
             dst.Result = result;
+            dst.Success = result ? SuccessCode.Success : SuccessCode.Failure;
             return dst;
         }
 
@@ -76,6 +78,7 @@ namespace Z0
             dst.A = a;
             dst.B = b;
             dst.Result = result;
+            dst.Success = result ? SuccessCode.Success : SuccessCode.Failure;
             return dst;
         }
 
@@ -87,6 +90,7 @@ namespace Z0
             dst.A = a;
             dst.B = b;
             dst.Result = result;
+            dst.Success = result ? SuccessCode.Success : SuccessCode.Failure;
             return dst;
         }
 
@@ -98,6 +102,7 @@ namespace Z0
             dst.A = a;
             dst.B = b;
             dst.Result = result;
+            dst.Success = result ? SuccessCode.Success : SuccessCode.Failure;
             return dst;
         }
     }

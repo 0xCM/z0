@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Extract(E index, in T src)
-            => api.extract(Segment(index), src);
+            => api.read(Segment(index), src);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -74,7 +74,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Deposit(E index, in T src, ref T dst)
         {
-            api.deposit<T>(Segment(index), src, ref dst);
+            api.store<T>(Segment(index), src, ref dst);
             return ref dst;
         }
     }

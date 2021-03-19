@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Root;
+
     partial struct BitFields
     {
-        [Op, Closures(Closure)]
         public static string format<T>(in BitField<T> src)
             where T : unmanaged
         {
@@ -18,7 +19,7 @@ namespace Z0
             return dst.Emit();
         }
 
-        [Op, Closures(Closure)]
+        [Op, Closures(UInt64k)]
         public static void render<T>(in BitField<T> src, ITextBuffer dst)
             where T : unmanaged
         {

@@ -2,14 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using System;
-using System.Reflection;
-
 [assembly: PartId(PartId.BitFields)]
 
 namespace Z0.Parts
 {
-    public sealed partial class Digital : Part<Digital>
+    public sealed partial class BitFields : Part<BitFields>
     {
 
     }

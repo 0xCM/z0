@@ -9,10 +9,17 @@ namespace Z0
     using static CodeGenerator;
     using static memory;
 
-    public sealed class ResBytesEmitter : WfService<ResBytesEmitter, IResBytesEmitter>
+    public sealed class ResBytesEmitter : WfService<ResBytesEmitter>
     {
         FS.FolderPath RespackDir
             => Db.PartDir("respack") + FS.folder("content") + FS.folder("bytes");
+
+        ApiResProvider ResProvider;
+
+        protected override void OnInit()
+        {
+            ResProvider = Wf.ApiResProvider();
+        }
 
         public Index<ApiHostRes> Emit()
         {
@@ -60,7 +67,8 @@ namespace Z0
 
         ApiHostRes Emit(in ApiHostCode src, FS.FilePath target)
         {
-            var resources = Resources.from(src);
+            //var resources = Resources.from(src);
+            var resources = ResProvider.Hosted(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
             var members = root.hashset<string>();

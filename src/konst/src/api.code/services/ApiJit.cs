@@ -16,7 +16,7 @@ namespace Z0
     [Service(typeof(IApiJit)), ApiHost]
     public sealed class ApiJit : WfService<ApiJit>, IApiJit
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static MemoryAddress jit(ApiMember src)
         {
             RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
@@ -196,29 +196,11 @@ namespace Z0
             return buffer.ToArray();
         }
 
-        /// <summary>
-        /// Computes a method's numeric closures, predicated on available metadata
-        /// </summary>
-        /// <param name="m">The source method</param>
-        [Op]
-        public static NumericKind[] NumericClosureKinds(MethodInfo m)
-            => (from tag in m.Tag<ClosuresAttribute>()
-                where tag.Kind == TypeClosureKind.Numeric
-                let spec = (NumericKind)tag.Spec
-                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());
-
-        [Op]
-        static Type[] NumericClosureTypes(MethodInfo m)
-            => from c in NumericClosureKinds(m)
-               let t = c.ToSystemType()
-               where t != typeof(void)
-               select t;
-
         [Op]
         ApiMember[] JitGeneric(JittedMethod src)
         {
             var method = src.Method;
-            var types = @readonly(NumericClosureTypes(method));
+            var types = @readonly(ApiIdentityKinds.NumericClosureTypes(method));
             var count = types.Length;
             var buffer = alloc<ApiMember>(count);
             var dst = span(buffer);

@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(in BitFieldPart part, in S src)
-            => api.extract<S,T>(part, src);
+            => api.read<S,T>(part, src);
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the segment specification
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(E index, in S src)
-            => api.extract<S,T>(Segment(index), src);
+            => api.read<S,T>(Segment(index), src);
 
         /// <summary>
         /// Extracts all segments from the source value and deposits the result in a caller-suppled span
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(in S src, Span<T> dst)
-            => api.deposit<S,T>(Spec, src, dst);
+            => api.store<S,T>(Spec, src, dst);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(in BitFieldPart segment, in S src, bool offset)
-            => api.extract<S,T>(segment, src, offset);
+            => api.read<S,T>(segment, src, offset);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(E index, in S src, bool offset)
-            => api.extract<S,T>(Segment(index), src, offset);
+            => api.read<S,T>(Segment(index), src, offset);
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Store(in BitFieldPart segment, in S src, ref T dst)
         {
-            api.deposit<S,T>(segment, src, ref dst);
+            api.store<S,T>(segment, src, ref dst);
             return ref dst;
         }
 
@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Store(in BitFieldPart segment, in S src, ref S dst)
         {
-            api.deposit<S,T>(segment, src, ref dst);
+            api.store<S,T>(segment, src, ref dst);
             return ref dst;
         }
 
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Store(E index, in S src, ref S dst)
         {
-            api.deposit<S,T>(Segment(index), src, ref dst);
+            api.store<S,T>(Segment(index), src, ref dst);
             return ref dst;
         }
 
@@ -139,7 +139,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Store(E index, in S src, ref T dst)
         {
-            api.deposit<S,T>(Segment(index), src, ref dst);
+            api.store<S,T>(Segment(index), src, ref dst);
             return ref dst;
         }
 
