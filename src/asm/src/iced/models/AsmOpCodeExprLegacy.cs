@@ -14,6 +14,9 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmOpCodeExprLegacy : ITextual
     {
+        public static string conform(string src)
+            => src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString).Replace("+", " +");
+
         public asci32 Value {get;}
 
         public static AsmOpCodeExprLegacy cleanse(string src)
@@ -24,7 +27,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         AsmOpCodeExprLegacy(string src)
-            => Value = src.Replace("o32 ", EmptyString).Replace("o16 ", EmptyString);
+            => Value = conform(src);
 
         [MethodImpl(Inline)]
         AsmOpCodeExprLegacy(asci32 src)

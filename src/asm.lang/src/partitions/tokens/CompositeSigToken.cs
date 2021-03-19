@@ -5,6 +5,7 @@
 namespace Z0.Asm
 {
     using SD = AsmSigDocs;
+    using ST = AsmSigToken;
 
     /// <summary>
     /// Classifies composite operand signature specifications
@@ -15,33 +16,33 @@ namespace Z0.Asm
         None = 0,
 
         [Symbol("r/m8", SD.rm8)]
-        rm8,
+        rm8 = ST.rm8,
 
         [Symbol("r/m16", SD.rm8)]
-        rm16,
+        rm16 = ST.rm16,
 
         [Symbol("r/m32", SD.rm8)]
-        rm32,
+        rm32 = ST.rm32,
 
         [Symbol("r/m64", SD.rm8)]
-        rm64,
+        rm64 = ST.rm64,
 
         [Symbol("reg/m8")]
-        regM8,
+        regM8 = ST.regM8,
 
         [Symbol("reg/m16")]
-        regM16,
+        regM16 = ST.regM16,
 
         [Symbol("reg/m32")]
-        regM32,
+        regM32 = ST.regM32,
 
         [Symbol("reg")]
-        reg,
+        reg = ST.reg,
 
         [Symbol("m", SD.m)]
-        m,
+        m = ST.m,
 
         [Symbol("mem")]
-        mem,
+        mem = ST.mem,
     }
 }

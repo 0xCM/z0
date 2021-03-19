@@ -101,11 +101,26 @@ namespace Z0.Asm
         [Symbol("r/m64", SD.rm64)]
         rm64,
 
+        [Symbol("reg/m8")]
+        regM8,
+
+        [Symbol("reg/m16")]
+        regM16,
+
+        [Symbol("reg/m32")]
+        regM32,
+
+        [Symbol("reg")]
+        reg,
+
         /// <summary>
         /// <see cref='SD.m'/>
         /// </summary>
         [Symbol("m", SD.m)]
         m,
+
+        [Symbol("mem")]
+        mem,
 
         /// <summary>
         /// <see cref='SD.m8'/>

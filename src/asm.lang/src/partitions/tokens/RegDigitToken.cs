@@ -10,6 +10,7 @@ namespace Z0.Asm
     /// <summary>
     /// Specifies a '/r' token where r = 0..7
     /// </summary>
+    [SymbolSource]
     public enum RegDigitToken : byte
     {
         /// <summary>

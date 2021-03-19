@@ -200,7 +200,6 @@ namespace Z0.Asm
                     _ => SI.from(src.ToString())
             };
 
-
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
@@ -240,7 +239,7 @@ namespace Z0.Asm
                 OpCode = src.OpCode,
                 OperandSize = src.OperandSize,
                 OpCount = src.OpCount,
-                OpCodeString = src.ToOpCodeString().Replace("o32 ", EmptyString).Replace("o16 ", EmptyString),
+                OpCodeString = AsmOpCodeExprLegacy.conform(src.ToOpCodeString()),
                 InstructionString = src.ToInstructionString(),
                 Op0Kind = Deicer.Thaw(src.Op0Kind),
                 Op1Kind = Deicer.Thaw(src.Op1Kind),
