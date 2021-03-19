@@ -62,6 +62,15 @@ namespace Z0
             where T : unmanaged
                 => ApiUri.TestCase(host, id<T>(label));
 
+        /// <summary>
+        /// Produces a test case name predicated on a parametrically-specialized label
+        /// </summary>
+        /// <param name="label">The case label</param>
+        /// <typeparam name="T">The label specialization type</typeparam>
+        public static string name<T>(ApiHostUri host, [Caller] string label = null)
+            where T : unmanaged
+                => ApiUri.TestCase(host, id<T>(label));
+
         [Op]
         public static string name(Type host, [Caller] string label = null)
             => ApiUri.TestCase(host, label);

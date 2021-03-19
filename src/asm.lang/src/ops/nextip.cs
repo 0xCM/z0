@@ -13,6 +13,10 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress nextip(in AsmCallSite src)
-            => src.Caller.Base + src.InstructionOffset + src.InstructionSize;
+            => nextip(src.Caller.Base, src.InstructionOffset, src.InstructionSize);
+
+        [MethodImpl(Inline), Op]
+        public static MemoryAddress nextip(MemoryAddress @base, Address16 offset, byte currentsize)
+            => @base + offset + currentsize;
     }
 }

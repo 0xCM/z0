@@ -12,13 +12,8 @@ namespace Z0
     /// <summary>
     /// Associates a collection of components along with a<see cref = 'IGlobalApiCatalog'/>
     /// </summary>
-    public readonly struct ApiPartSet : IApiParts
+    public class ApiPartSet : IApiParts
     {
-        /// <summary>
-        /// The controlling assembly
-        /// </summary>
-        public Assembly Control {get;}
-
         /// <summary>
         /// The root of the archive one which the api module set is predicated
         /// </summary>
@@ -26,41 +21,30 @@ namespace Z0
 
         public FS.Files ManagedSources {get;}
 
-        public Assembly[] PartComponents {get;}
+        public Assembly[] Components {get;}
 
-        public IGlobalApiCatalog ApiGlobal {get;}
+        public IGlobalApiCatalog ApiCatalog {get;}
 
-        public ApiPartSet(Assembly control, FS.FolderPath src)
+        public ApiPartSet(FS.FolderPath source, PartId[] parts)
         {
-            Control = control;
-            Source = src;
-            ManagedSources = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            PartComponents = WfShell.components(ManagedSources);
-            ApiGlobal = ApiCatalogs.GlobalCatalog(ManagedSources);
+            Source = source;
+            ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
+            ApiCatalog = ApiCatalogs.GlobalCatalog(Source, parts);
+            Components = ApiCatalog.PartComponents;
         }
 
-        public ApiPartSet(Assembly control, PartId[] parts)
+        public ApiPartSet(FS.FolderPath source)
         {
-            Control = control;
-            Source = FS.path(control.Location).FolderPath;
+            Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiGlobal = ApiCatalogs.GlobalCatalog(control, parts);
-            PartComponents = ApiGlobal.PartComponents;
-        }
-
-        public ApiPartSet(Assembly control)
-        {
-            Control = control;
-            Source = FS.path(control.Location).FolderPath;
-            ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiGlobal =  ApiCatalogs.GlobalCatalog(ManagedSources);
-            PartComponents = ApiGlobal.PartComponents;
+            ApiCatalog =  ApiCatalogs.GlobalCatalog(ManagedSources);
+            Components = ApiCatalog.PartComponents;
         }
 
         public bool Component(PartId part, out Assembly component)
         {
-            var components = @readonly(PartComponents);
-            var count = PartComponents.Length;
+            var components = @readonly(Components);
+            var count = Components.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var candidate = ref skip(components,i);

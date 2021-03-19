@@ -42,12 +42,11 @@ namespace Z0
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
             Decoder = asm.RoutineDecoder;
-            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed();
+
         }
 
         [MethodImpl(Inline)]

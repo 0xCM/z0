@@ -65,7 +65,7 @@ namespace Z0
 
         public BasedApiMembers JitCatalog()
         {
-            return JitCatalog(Wf.ApiParts.ApiGlobal);
+            return JitCatalog(Wf.ApiParts.ApiCatalog);
         }
 
         public BasedApiMembers JitCatalog(IGlobalApiCatalog catalog)

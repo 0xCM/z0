@@ -7,23 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
 
-    using Z0.Asm;
-
-
+    using static Part;
     using static CellDelegates;
-    using static z;
 
     public readonly struct CheckDynamicVectors
     {
-        readonly IAsmContext Context;
+        public static CheckDynamicVectors create(IWfShell wf, Type host, BufferToken buffer)
+            => new CheckDynamicVectors(wf, Rng.@default(), host, buffer);
+
+        readonly IWfShell Context;
 
         readonly BufferToken Buffer;
 
+        readonly IPolySource Source;
+
         readonly Type Host;
 
-        public CheckDynamicVectors(IAsmContext context, Type host, BufferToken buffer)
+        public CheckDynamicVectors(IWfShell context, IPolySource source, Type host, BufferToken buffer)
         {
             Context = context;
+            Source = source;
             Buffer = buffer;
             Host = host;
         }
@@ -32,10 +35,7 @@ namespace Z0
             => Dynops.Dynexus;
 
         uint PointCount<T>()
-            => z.size<T>()/Buffer.BufferSize;
-
-        IPolyrand Random
-            => Context.Random;
+            => memory.size<T>()/Buffer.BufferSize;
 
         public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiCodeBlock bits)
             where T : unmanaged
@@ -62,12 +62,12 @@ namespace Z0
 
             for(var i=0; i<count; i++)
             {
-                var x = Random.CpuVector(w,t);
-                var y = Random.CpuVector(w,t);
+                var x = Source.CpuVector(w,t);
+                var y = Source.CpuVector(w,t);
                 success &= gcpu.vtestc(gcpu.veq(f(x,y), g.Apply(x,y)));
             }
 
-            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);
+            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host, id), success, clock);
         }
 
         public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity id)
@@ -81,12 +81,12 @@ namespace Z0
 
             for(var i=0; i<count; i++)
             {
-                var x = Random.CpuVector(w,t);
-                var y = Random.CpuVector(w,t);
+                var x = Source.CpuVector(w,t);
+                var y = Source.CpuVector(w,t);
                 success &= gcpu.vtestc(gcpu.veq(f(x,y), g.Apply(x,y)));
             }
 
-            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host,id), success, clock);
+            return TestCaseRecord.define(ApiTestIdentity.name<T>(Host, id), success, clock);
         }
     }
 }

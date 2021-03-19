@@ -9,8 +9,10 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmStatementThumbprint : IComparable<AsmStatementThumbprint>
+    public readonly struct AsmStatementSummary : IComparable<AsmStatementSummary>
     {
+        public MemoryAddress Base {get;}
+
         public Address16 Offset {get;}
 
         public AsmStatementExpr Statement {get;}
@@ -18,8 +20,9 @@ namespace Z0.Asm
         public AsmThumbprintExpr Thumbprint {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatementThumbprint(Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
+        public AsmStatementSummary(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
         {
+            Base = @base;
             Offset = offset;
             Statement = expr;
             Thumbprint = thumbprint;
@@ -31,7 +34,7 @@ namespace Z0.Asm
         public override int GetHashCode()
             => (int)Key().Hash;
 
-        public int CompareTo(AsmStatementThumbprint src)
+        public int CompareTo(AsmStatementSummary src)
             => Thumbprint.CompareTo(src.Thumbprint);
     }
 }

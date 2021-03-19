@@ -27,12 +27,11 @@ namespace Z0
             Wf = wf;
             Buffers = CpuBuffers.create(DefaultBufferSize);
             ProcessedCount = 0;
-            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed();
+
         }
 
         [Op]

@@ -12,19 +12,19 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public class AsmStatementThumbprints
+    public class AsmStatementSummaries
     {
-        public AsmStatementThumbprints()
+        public AsmStatementSummaries()
         {
-            Lookup = new Dictionary<AsmThumbprintExpr, AsmStatementThumbprint>();
-            _Collected = Index<AsmStatementThumbprint>.Empty;
+            Lookup = new Dictionary<AsmThumbprintExpr, AsmStatementSummary>();
+            _Collected = Index<AsmStatementSummary>.Empty;
         }
 
-        readonly Dictionary<AsmThumbprintExpr,AsmStatementThumbprint> Lookup;
+        readonly Dictionary<AsmThumbprintExpr,AsmStatementSummary> Lookup;
 
-        Index<AsmStatementThumbprint> _Collected;
+        Index<AsmStatementSummary> _Collected;
 
-        public ReadOnlySpan<AsmStatementThumbprint> Collected()
+        public ReadOnlySpan<AsmStatementSummary> Collected()
         {
             if(_Collected.IsEmpty)
             {
@@ -50,7 +50,7 @@ namespace Z0.Asm
         public override string ToString()
             => Format();
 
-        public void Add(AsmStatementThumbprint src)
+        public void Add(AsmStatementSummary src)
         {
             if(!IsFrozen)
                 Lookup.TryAdd(src.Thumbprint, src);

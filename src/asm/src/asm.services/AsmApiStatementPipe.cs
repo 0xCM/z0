@@ -32,17 +32,17 @@ namespace Z0.Asm
         public void EmitThumbprints()
         {
             var counter = 0;
-            var distinct = new AsmStatementThumbprints();
+            var distinct = new AsmStatementSummaries();
 
             void receiver(AsmApiStatement src)
             {
                 counter++;
-                distinct.Add(src.StatementThumbprint());
+                distinct.Add(src.Summary());
             }
 
             Load(receiver);
 
-            EmitThumbprints(distinct);
+            EmitSummaries(distinct);
         }
 
         public Index<AsmThumbprint> LoadThumbprints()
@@ -60,19 +60,19 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
-        public void EmitThumbprints(Index<AsmApiStatement> src)
+        public void EmitDistinct(Index<AsmApiStatement> src)
         {
-            var distinct = new AsmStatementThumbprints();
-            root.iter(src, s => distinct.Add(s.StatementThumbprint()));
+            var distinct = new AsmStatementSummaries();
+            root.iter(src, s => distinct.Add(s.Summary()));
             var collected = distinct.Collected();
             Wf.Status($"Collected {collected.Length} thumbprints from {src.Count} statements");
-            EmitThumbprints(distinct);
+            EmitSummaries(distinct);
         }
 
         FS.FilePath ThumbprintsPath()
             => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
 
-        void EmitThumbprints(AsmStatementThumbprints src)
+        void EmitSummaries(AsmStatementSummaries src)
         {
             var target = ThumbprintsPath();
             var flow = Wf.EmittingFile(target);
@@ -173,7 +173,7 @@ namespace Z0.Asm
             if(clear)
                 ClearTarget();
 
-            var thumbprints = new AsmStatementThumbprints();
+            var distinct = new AsmStatementSummaries();
             var formatter = Records.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
@@ -191,7 +191,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var statement = ref skip(statements,i);
-                thumbprints.Add(statement.StatementThumbprint());
+                distinct.Add(statement.Summary());
                 var uri = statement.OpUri;
                 if(i == 0)
                 {
@@ -241,7 +241,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            EmitThumbprints(thumbprints);
+            EmitSummaries(distinct);
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 

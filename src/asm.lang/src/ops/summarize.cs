@@ -11,14 +11,8 @@ namespace Z0.Asm
 
     partial struct asm
     {
-        /// <summary>
-        /// Summarizes a collection of far-call datapoints
-        /// </summary>
-        /// <param name="sources">The base addresses of the calling blocks</param>
-        /// <param name="targets">The addresses at which the target call instruction is issued</param>
-        /// <param name="targets">The call targets</param>
         [MethodImpl(Inline), Op]
-        public static AsmCallSummary summarize(Index<AsmCallInfo> calls)
-            => new AsmCallSummary(calls);
+        public static AsmStatementSummary summary(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
+            => new AsmStatementSummary(@base, offset, expr, thumbprint);
     }
 }

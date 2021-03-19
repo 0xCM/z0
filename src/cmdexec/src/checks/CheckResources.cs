@@ -36,7 +36,6 @@ namespace Z0
             Wf = wf;
             Host = host;
             Source = src;
-            Wf.Created();
         }
 
         public void Run()
@@ -51,7 +50,7 @@ namespace Z0
             using var map = MemoryFiles.map(Source);
             var @base = map.BaseAddress;
             var sig = map.View(0, 2).AsUInt16();
-            Wf.Status(Host, map.Description);
+            Wf.Status(map.Description);
         }
 
         void TryRun()
@@ -68,7 +67,6 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed();
         }
     }
 }

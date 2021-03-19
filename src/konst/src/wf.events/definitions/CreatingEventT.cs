@@ -20,7 +20,7 @@ namespace Z0
 
         public EventPayload<T> Content {get;}
 
-        public FlairKind Flair  => FlairKind.Creating;
+        public FlairKind Flair => FlairKind.Creating;
 
         [MethodImpl(Inline)]
         public CreatingEvent(WfStepId step, T content, CorrelationToken ct)

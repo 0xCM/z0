@@ -12,7 +12,7 @@ namespace Z0
         public void EmitFieldMetadata()
         {
             var count = 0u;
-            var parts = Wf.ApiParts.PartComponents;
+            var parts = Wf.ApiParts.Components;
             var flow = Wf.Running(parts.Length);
 
             foreach(var part in parts)

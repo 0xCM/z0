@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using Target = AsmStatementInfo;
+    using Target = AsmStatementDetail;
 
     public class AsmDistiller : AsmWfService<AsmDistiller>
     {
@@ -49,26 +49,26 @@ namespace Z0.Asm
         }
 
         public FS.Files Distillations()
-            => Db.TableDir<AsmStatementInfo>().AllFiles;
+            => Db.TableDir<AsmStatementDetail>().AllFiles;
 
-        public Index<AsmStatementInfo> LoadDistillation(FS.FilePath src)
+        public Index<AsmStatementDetail> LoadDistillation(FS.FilePath src)
         {
             var flow = Wf.Running($"Parsing {src.ToUri()}");
             var partial = 0;
             var full = 0;
             var attempt = TextDocs.parse(src, out var doc);
-            const byte fields = AsmStatementInfo.FieldCount;
+            const byte fields = AsmStatementDetail.FieldCount;
             if(attempt)
             {
                 var header = doc.Header;
                 if(header.Labels.Length !=fields)
                 {
                     Wf.Error($"The header {header} has {header.Labels.Length} fields and yet {fields} were expected");
-                    return sys.empty<AsmStatementInfo>();
+                    return sys.empty<AsmStatementDetail>();
                 }
                 var count = doc.RowCount;
                 var rows = doc.RowData.View;
-                var buffer = sys.alloc<AsmStatementInfo>(count);
+                var buffer = sys.alloc<AsmStatementDetail>(count);
                 var dst = span(buffer);
                 for(var i=0; i<count; i++)
                 {
@@ -87,11 +87,11 @@ namespace Z0.Asm
             else
             {
                 Wf.Error(attempt.Message);
-                return sys.empty<AsmStatementInfo>();
+                return sys.empty<AsmStatementDetail>();
             }
         }
 
-        Outcome<byte> Parse(TextRow src, out AsmStatementInfo dst)
+        Outcome<byte> Parse(TextRow src, out AsmStatementDetail dst)
         {
             var count = src.CellCount;
             var i=0;
@@ -107,7 +107,7 @@ namespace Z0.Asm
                 Records.parse(skip(cells, i++), out dst.LocalOffset);
             }
 
-            if(count == AsmStatementInfo.FieldCount)
+            if(count == AsmStatementDetail.FieldCount)
             {
                 dst.OpCode = asm.opcode(skip(cells, i++));
                 Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);

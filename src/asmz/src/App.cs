@@ -459,12 +459,11 @@ namespace Z0.Asm
             //root.iter(methods, m => pipe.Render(m,buffer));
         }
 
-
         void EmitStatementCases()
         {
             var cases = root.dict<AsmHexCode,AsmStatementCase>();
 
-            void Collect(AsmStatementInfo src)
+            void Collect(AsmStatementDetail src)
             {
                 var encoded = src.Encoded;
                 if(!cases.ContainsKey(encoded))
@@ -478,7 +477,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.AsmStatementInfoPipe().Run(Collect);
+            Wf.AsmStatementDetailPipe().Run(Collect);
 
             var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
             var dst = Db.IndexTable<AsmStatementCase>();
@@ -574,19 +573,32 @@ namespace Z0.Asm
         }
 
 
+
         void CalcAddress()
         {
             // ; BaseAddress = 7ffc56862280h
             // 0025h call 7ffc52e94420h                      ; CALL rel32                       | E8 cd                            | 5   | e8 76 21 63 fc
             // Expected: 7ffc56862310h
             const ulong FunctionBase = 0x7ffc56862280;
-            const ulong InstructionOffset = 0x25;
-            const ulong InstructionSize = 0x5;
+            const ushort InstructionOffset = 0x25;
+            const byte InstructionSize = 0x5;
             const ulong Displacement = 0xfc632176;
             var instruction = array<byte>(0xe8, 0x76, 0x21, 0x63, 0xfc);
             MemoryAddress Encoded =  0x7ffc52e94420;
-            MemoryAddress nextIp = FunctionBase + InstructionOffset + InstructionSize;
+            MemoryAddress nextIp = asm.nextip(FunctionBase,  InstructionOffset, InstructionSize);
             MemoryAddress target = nextIp + Displacement;
+
+        }
+
+        void CheckRel32()
+        {
+            const ulong FunctionBase = 0x7ffc56862280;
+            const ushort InstructionOffset = 0x25;
+            const uint Displacement = 0xfc632176;
+
+            MemoryAddress client = FunctionBase + InstructionOffset;
+            var call = asm.call(client,Displacement);
+            Wf.Status(call.Format());
         }
 
         public void ShowCommands()
@@ -819,10 +831,11 @@ namespace Z0.Asm
             //var asmlang = Wf.AsmLangCmdRunner();
             //var asmcmd = Wf.AsmCmdRunner();
 
-            var pipe = Wf.ApiStatementPipe();
-            var loaded = pipe.LoadThumbprints();
-            root.iter(loaded, x => Wf.Row(x));
+            // var pipe = Wf.ApiStatementPipe();
+            // var loaded = pipe.LoadThumbprints();
+            // root.iter(loaded, x => Wf.Row(x));
 
+            CheckRel32();
 
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 

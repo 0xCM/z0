@@ -39,7 +39,7 @@ namespace Z0.Asm
         public AsmThumbprintExpr Thumbprint()
             => AsmThumbprints.expression(Sig, OpCode, Encoded);
 
-        public AsmStatementThumbprint StatementThumbprint()
-            => AsmThumbprints.create(BlockOffset, Expression, Thumbprint());
+        public AsmStatementSummary Summary()
+            => asm.summary(BaseAddress, BlockOffset, Expression, Thumbprint());
     }
 }

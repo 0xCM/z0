@@ -25,15 +25,6 @@ namespace Z0
             Wf.EmittedFile(flow, count);
 
         }
-        [Op]
-        public static EmitRenderPatternsCmd specify(IWfShell wf, Type src)
-        {
-            var dst = wf.Db().Doc("render.patterns", src.Name, FileExtensions.Csv);
-            var cmd = new EmitRenderPatternsCmd();
-            cmd.Source = src;
-            cmd.Target = dst;
-            return cmd;
-        }
 
         [Op]
         public static RenderPatternSources sources(Type src)
@@ -45,20 +36,6 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(dst,i) = new RenderPatternSource(skip(fields,i), skip(values,i));
             return buffer;
-        }
-
-        [Op]
-        public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd cmd)
-        {
-            using var writer = cmd.Target.Writer();
-            var flow = wf.EmittingFile(cmd.Target);
-            var patterns = sources(cmd.Source);
-            var view = patterns.View;
-            var count = view.Length;
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(view,i).Format());
-            wf.EmittedFile(flow, count);
-            return Cmd.ok(cmd);
         }
     }
 }

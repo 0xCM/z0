@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     public readonly partial struct AsmSyntax
     {
-        public static uint render(AsmStatementThumbprints src, ITextBuffer dst)
+        public static uint render(AsmStatementSummaries src, ITextBuffer dst)
         {
             var values = src.Collected();
             var counter = 0u;

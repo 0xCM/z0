@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     class Runner
     {
         public static void Main(params string[] args)
@@ -24,7 +21,7 @@ namespace Z0
                 try
                 {
                     var parts = WfShell.parts(Index<PartId>.Empty);
-                    term.inform(AppMsg.status(text.prop("PartCount", parts.PartComponents.Length)));
+                    term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
                     var rng = Rng.@default();
                     using var wf = WfShell.create(parts, args).WithRandom(rng);
                     if(args.Length == 0)

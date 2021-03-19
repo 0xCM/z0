@@ -14,8 +14,8 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public ref struct MergeRunner
     {
@@ -49,14 +49,6 @@ namespace Z0
                 term.print(Buffer[i]);
         }
 
-
-        void Status<T>(T message)
-            => Wf.Status(Host, message);
-
-        void Status<T>(WfStepId step, T message)
-        {
-            Wf.Status(step, message);
-        }
 
         static void format(ValueType src, StringBuilder dst)
         {
@@ -125,7 +117,7 @@ namespace Z0
             var @base = map.BaseAddress;
             var sig = map.View(0, 2).AsUInt16();
             var info = map.Description;
-            Status(format(info));
+            Wf.Status(format(info));
         }
 
         unsafe static void Emit(MemoryRange src, FS.FilePath dst)
@@ -183,7 +175,7 @@ namespace Z0
         {
             var src = @readonly(Resources.strings<uint>(typeof(EnvVarNames)));
             for(var i=0; i<src.Length; i++)
-                Status(skip(src,i).Format());
+                Wf.Status(skip(src,i).Format());
         }
 
         public static Type[] DiscoverWfHosts(params Assembly[] src)
@@ -194,9 +186,9 @@ namespace Z0
 
         public void Run999()
         {
-            var hosts = DiscoverWfHosts(Wf.ApiParts.PartComponents).OrderBy(x => x.Assembly.FullName);
+            var hosts = DiscoverWfHosts(Wf.ApiParts.Components).OrderBy(x => x.Assembly.FullName);
             var wf = Wf;
-            iter(hosts, h => wf.Status(Seq.delimit(h.Assembly.GetSimpleName(),h.Name)));
+            root.iter(hosts, h => wf.Status(Seq.delimit(h.Assembly.GetSimpleName(),h.Name)));
         }
 
         public void Run()

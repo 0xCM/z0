@@ -49,14 +49,14 @@ namespace Z0
 
         public void Init(IWfShell wf)
         {
-            wf.Babble($"Initializing {typeof(H).Name}");
+            var flow = wf.Creating(typeof(H).Name);
             Host = WfShell.host(typeof(H));
             Wf = wf.WithHost(Host);
             Db = new WfDb(wf, wf.Env.Db.Value);
             Events = EventCache.init(wf);
             OnInit();
             Initialized();
-            wf.Babble($"Initialized {typeof(H).Name}");
+            wf.Created(flow);
         }
 
         protected WfService()

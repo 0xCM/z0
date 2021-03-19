@@ -10,12 +10,6 @@ namespace Z0
 
     partial interface IWfShell
     {
-        void Created()
-        {
-            if(Verbosity.IsBabble())
-                Raise(created(Host.Id, Ct));
-        }
-
         void Disposed()
         {
             if(Verbosity.IsBabble())

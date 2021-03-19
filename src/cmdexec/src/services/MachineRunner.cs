@@ -41,7 +41,7 @@ namespace Z0
 
                 if(options.CollectApiDocs)
                 {
-                    EmitComments.create().Run(Wf);
+                    ApiComments.create(Wf).Collect();
                 }
 
                 if(options.EmitResourceData)

@@ -42,12 +42,11 @@ namespace Z0
             var db = Wf.Db();
             Target = db.TableArchive(Subject);
             Root = Target.Root;
-            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed();
+
         }
 
         public void Run()

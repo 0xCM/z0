@@ -20,11 +20,11 @@ namespace Z0
 
         Error = MsgFlair.Error,
 
-        Creating = ConsoleColor.DarkGray,
+        Creating = MsgFlair.Babble,
 
-        Created = ConsoleColor.DarkGray,
+        Created = MsgFlair.Babble,
 
-        Disposed = ConsoleColor.DarkGray,
+        Disposed = MsgFlair.Babble,
 
         Running = ConsoleColor.Cyan,
 

@@ -65,10 +65,6 @@ namespace Z0.Asm
             return e0.CompareTo(e1);
         }
 
-        [MethodImpl(Inline), Op]
-        public static AsmStatementThumbprint create(Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
-            => new AsmStatementThumbprint(offset, expr, thumbprint);
-
         public Outcome Parse(string src, out AsmThumbprint thumbprint)
         {
             thumbprint = AsmThumbprint.Empty;
@@ -76,7 +72,6 @@ namespace Z0.Asm
             var a = src.LeftOfFirst(Semicolon);
             var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
             AsmStatementExpr statement = a.RightOfFirst(Semicolon);
-
 
             var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
             if(parts.Length == 2)
@@ -94,7 +89,7 @@ namespace Z0.Asm
                         {
                             if(AsmBytes.hexcode(rhs, out var encoded))
                             {
-                                thumbprint = new AsmThumbprint(offset, statement, monic, sig, Expr.OpCode(opcode), encoded);
+                                thumbprint = new AsmThumbprint(sig, Expr.OpCode(opcode), encoded);
                                 return true;
                             }
                             else
@@ -113,9 +108,7 @@ namespace Z0.Asm
             else
                 Wf.Error($"Could not dichotomize {src} ");
 
-
             return false;
         }
     }
-
 }

@@ -82,7 +82,7 @@ namespace Z0
             => WfShell.clone(this, Host, PolyStream, level);
 
         Assembly[] Components
-            => Context.ApiParts.PartComponents;
+            => Context.ApiParts.Components;
 
         /// <summary>
         /// Provides a <see cref='IWfDb'/> rooted at a shell-configured location
@@ -97,20 +97,11 @@ namespace Z0
             return e.EventId;
         }
 
-        void Status<T>(WfStepId step, T data)
-            => signal(this).Status(step, data);
-
         void Status<T>(T data)
             => signal(this).Status(data);
 
         void Babble<T>(T data)
             => signal(this).Babble(data);
-
-        void Babble<T>(WfStepId step, T data)
-            => signal(this).Babble(step, data);
-
-        void Warn<T>(WfStepId step, T data)
-            => signal(this).Warn(step, data);
 
         void Warn<T>(T content)
             => signal(this).Warn(content);

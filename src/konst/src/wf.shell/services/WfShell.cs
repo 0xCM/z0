@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-
     [ApiHost(ApiNames.WfShell, true)]
     public partial class WfShell : IWfShell
     {
@@ -71,7 +70,7 @@ namespace Z0
             Args = config.Shell.Args;
             Settings = config.Shell.Settings;
             ApiParts = config.ApiParts;
-            Api = config.ApiParts.ApiGlobal;
+            Api = config.ApiParts.ApiCatalog;
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Router = new CmdRouter(this);
@@ -89,7 +88,7 @@ namespace Z0
             Paths = config.Shell.Paths;
             Settings = config.Shell.Settings;
             ApiParts = config.ApiParts;
-            Api = config.ApiParts.ApiGlobal;
+            Api = config.ApiParts.ApiCatalog;
             Controller = config.Control;
             AppName = config.Shell.AppName;
             Ct = ct;

@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
 
     [Record(TableId)]
-    public struct AsmStatementInfo : IRecord<AsmStatementInfo>, IComparable<AsmStatementInfo>
+    public struct AsmStatementDetail : IRecord<AsmStatementDetail>, IComparable<AsmStatementDetail>
     {
         public const string TableId = "asm.statements";
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public int CompareTo(AsmStatementInfo src)
+        public int CompareTo(AsmStatementDetail src)
             => IP.CompareTo(src.IP);
     }
 }

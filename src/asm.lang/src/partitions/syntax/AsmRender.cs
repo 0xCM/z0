@@ -5,11 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
 
-    using static Part;
-    using static memory;
     using static Chars;
 
     [ApiHost]
@@ -29,5 +25,9 @@ namespace Z0.Asm
 
         public static string format(in AsmCallInfo src)
             => string.Format("{0} -> {2}", src.CallSite, src.Target);
+
+        [Op]
+        public static string format(in CallRel32 src)
+            => string.Format("{0}:{1} -> {2}", src.ClientAddress, src.TargetDx, src.TargetAddress);
     }
 }

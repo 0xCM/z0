@@ -47,7 +47,7 @@ namespace Z0
                 {
                     var msg = $"Error emitting row {i}/{count}";
                     dst.WriteLine(msg);
-                    Wf.Warn(Host, msg);
+                    Wf.Warn(msg);
                 }
             }
         }

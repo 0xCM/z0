@@ -11,19 +11,16 @@ namespace Z0
 
     ref struct TestRunner
     {
-        readonly WfHost Host;
-
         readonly IWfShell Wf;
 
         public TestRunner(IWfShell wf)
         {
-            Host = WfShell.host(typeof(TestRunner));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
         }
 
         public void Dispose()
         {
-            Wf.Disposed();
+
         }
 
         public void Run()

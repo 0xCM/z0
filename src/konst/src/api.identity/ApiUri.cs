@@ -92,6 +92,7 @@ namespace Z0
                 return (false,result.Message?.ToString() ?? EmptyString);
             }
         }
+
         /// <summary>
         /// Defines an 8-bit immediate suffix predicated on an immediate value
         /// </summary>
@@ -154,5 +155,21 @@ namespace Z0
         [Op]
         public static string TestCase(Type host, OpIdentity id)
             => $"{ApiIdentity.part(host).Format()}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, excluding the host name
+        /// </summary>
+        /// <param name="id">Identity of the operation under test</param>
+        [Op]
+        public static string TestCase(OpUri uri)
+            => $"{uri.Part.Format()}{UriPathSep}{uri.Host.Name}{UriPathSep}{uri.OpId}";
+
+        /// <summary>
+        /// Produces the name of the test case predicated on fully-specified name, excluding the host name
+        /// </summary>
+        /// <param name="id">Identity of the operation under test</param>
+        [Op]
+        public static string TestCase(ApiHostUri host, OpIdentity id)
+            => $"{host.Owner.Format()}{UriPathSep}{host.Name}{UriPathSep}{id}";
     }
 }

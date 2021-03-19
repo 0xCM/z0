@@ -12,16 +12,6 @@ namespace Z0
     partial struct WfEvents
     {
         /// <summary>
-        /// Defines a <see cref='CreatingEvent'/> event
-        /// </summary>
-        /// <param name="id">The step identifier</param>
-        /// <param name="ct">The correlation token</param>
-        /// <param name="flair">The flair</param>
-        [MethodImpl(Inline), Op]
-        public static CreatingEvent creating(WfStepId id, CorrelationToken ct)
-            => new CreatingEvent(id, ct);
-
-        /// <summary>
         /// Defines a <see cref='CreatedEvent{T}'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>

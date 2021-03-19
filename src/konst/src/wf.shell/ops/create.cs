@@ -15,7 +15,7 @@ namespace Z0
             => create(WfShell.parts(controller(), args), args, verbose);
 
         [Op]
-        public static IWfShell create(ApiPartSet parts, string[] args, bool verbose = true)
+        public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)
         {
             var status = new WfInitStatus();
             status.StartTS = root.now();
@@ -33,7 +33,7 @@ namespace Z0
             if(verbose)
                 term.inform(AppMsg.status(text.prop("DbRoot", dbRoot)));
 
-            var partIdList = parts.ApiGlobal.PartIdentities;
+            var partIdList = parts.ApiCatalog.PartIdentities;
             if(verbose)
             {
                 var fence = text.fence(Chars.LBrace, Chars.RBrace);

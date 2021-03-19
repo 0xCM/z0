@@ -2,11 +2,8 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0.Asm
 {
-    using System;
-
-    using static Part;
     using static Hex4Seq;
 
     partial struct Prototypes

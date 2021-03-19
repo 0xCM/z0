@@ -56,7 +56,7 @@ namespace Z0
             Context = ctx;
             ApiParts = ctx.ApiParts;
             Control = ctx.Controller;
-            ApiGlobal = ctx.ApiParts.ApiGlobal;
+            ApiGlobal = ctx.ApiParts.ApiCatalog;
             ControlId = ctx.Controller.Id;
             LogConfig = logConfig;
             PartIdentities = parts;

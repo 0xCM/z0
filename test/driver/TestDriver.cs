@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using Z0.Asm;
 
     sealed class TestDriver : WfHost<TestDriver>
     {
