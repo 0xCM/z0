@@ -16,11 +16,11 @@ namespace Z0.Asm
     {
         public AsmStatementThumbprints()
         {
-            Lookup = new Dictionary<AsmThumbprint, AsmStatementThumbprint>();
+            Lookup = new Dictionary<AsmThumbprintExpr, AsmStatementThumbprint>();
             _Collected = Index<AsmStatementThumbprint>.Empty;
         }
 
-        readonly Dictionary<AsmThumbprint,AsmStatementThumbprint> Lookup;
+        readonly Dictionary<AsmThumbprintExpr,AsmStatementThumbprint> Lookup;
 
         Index<AsmStatementThumbprint> _Collected;
 

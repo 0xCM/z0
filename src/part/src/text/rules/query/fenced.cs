@@ -26,12 +26,46 @@ namespace Z0
             {
                 if(nonempty(src))
                 {
+                    var leftIndex = -1;
+                    var rightIndex = -1;
                     var chars = span(src.Trim());
                     var count = chars.Length;
                     return first(chars) == left && skip(chars, count - 1) == right;
                 }
 
                 return false;
+            }
+
+            [Op]
+            public static bool fenced(string src, Fence<char> fence, out Pair<int> location)
+            {
+                location = root.pair(NotFound,NotFound);
+                if(nonempty(src))
+                {
+                    var chars = span(src);
+                    var count = chars.Length;
+                    for(var i=0; i<count; i++)
+                    {
+                        ref readonly var c = ref skip(chars,i);
+                        if(location.Left == NotFound)
+                        {
+                            if(c == fence.Left)
+                                location.Left = i;
+                        }
+
+                        else if(location.Left != NotFound && location.Right == NotFound)
+                        {
+                            if(c == fence.Right)
+                            {
+                                location.Right = i;
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+                return location.Left != NotFound && location.Right != NotFound;
             }
 
             /// <summary>

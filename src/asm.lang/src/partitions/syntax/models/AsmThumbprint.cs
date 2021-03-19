@@ -4,35 +4,58 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
+    using api = AsmThumbprints;
+
     public readonly struct AsmThumbprint : IDataTypeComparable<AsmThumbprint>
     {
-        TextBlock Content {get;}
+        public Address16 Offset {get;}
 
-        public AsmThumbprint(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
-            => Content = string.Format("({0})[{1}]{2}{3}", sig, opcode, Implication, encoded);
+        public AsmStatementExpr Statement {get;}
+
+        public AsmSigExpr Sig {get;}
+
+        public AsmOpCodeExpr OpCode {get;}
+
+        public AsmHexCode Encoded {get;}
+
+        [MethodImpl(Inline), Op]
+        public AsmThumbprint(Address16 offset, AsmStatementExpr statement, AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
+        {
+            Offset = offset;
+            Statement = statement;
+            Sig = sig;
+            OpCode = opcode;
+            Encoded = encoded;
+        }
+
+        public byte CodeSize
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Size;
+        }
+
+        public int CompareTo(AsmThumbprint src)
+            => api.cmp(this, src);
+
+
+        public bool Equals(AsmThumbprint src)
+            => api.eq(this, src);
 
         public string Format()
-            => Content.Format();
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
-        public override int GetHashCode()
-            => Content.GetHashCode();
-
-        public bool Equals(AsmThumbprint src)
-            => src.Content.Equals(Content);
-
-        public override bool Equals(object src)
-            => src is AsmThumbprint t && Equals(t);
-
-        public int CompareTo(AsmThumbprint src)
+        public static AsmThumbprint Empty
         {
-            var e0 = Content.Format().LeftOfFirst(Implication);
-            var e1 = src.Content.Format().LeftOfFirst(Implication);
-            return e0.CompareTo(e1);
+            [MethodImpl(Inline)]
+            get => new AsmThumbprint(0, AsmStatementExpr.Empty, AsmSigExpr.Empty, AsmOpCodeExpr.Empty, AsmHexCode.Empty);
         }
-
-        const string Implication = " => ";
     }
 }

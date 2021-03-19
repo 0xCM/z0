@@ -8,7 +8,7 @@ namespace Z0
     public static partial class XApi
     {
         [Op]
-        public static IWfCmdHost<ApiCmd> ApiCmdHost(this IWfShell wf)
+        public static ICmdRunner<ApiCmd> ApiCmdRunner(this IWfShell wf)
             => Z0.ApiCmdHost.create(wf);
 
         [Op]

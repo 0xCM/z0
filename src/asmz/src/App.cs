@@ -738,7 +738,7 @@ namespace Z0.Asm
         void ProcessStatements(ReadOnlySpan<AsmApiStatement> src)
         {
             var count = src.Length;
-            var distinct = root.hashset<AsmThumbprint>();
+            var distinct = root.hashset<AsmThumbprintExpr>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(src,i);
@@ -793,16 +793,23 @@ namespace Z0.Asm
             var b1 = v1.ToBitSpan();
             Wf.Row(b1.Format(options));
         }
+
         public void Run()
         {
             //CheckBitSpans();
 
-            var commands = Wf.ApiCmdHost();
-            commands.Run(ApiCmd.EmitAssetContent);
+            //var api = Wf.ApiCmdRunner();
+            //var asmlang = Wf.AsmLangCmdRunner();
+            //var asmcmd = Wf.AsmCmdRunner();
+
+            var pipe = Wf.ApiStatementPipe();
+            var loaded = pipe.LoadThumbprints();
+            root.iter(loaded, x => Wf.Row(x));
+
+
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 
             //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);
-            //Wf.ApiStatementPipe().EmitThumbprints();
 
             //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
 

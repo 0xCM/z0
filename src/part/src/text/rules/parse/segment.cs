@@ -19,9 +19,14 @@ namespace Z0
             /// <param name="src">The source text</param>
             /// <param name="i0">The index of the first character in the substring</param>
             /// <param name="i1">The index of the last character in the substring</param>
-            [MethodImpl(Inline), Op]
+            [Op]
             public static string segment(string src, int i0, int i1)
-                => substring(src, i0, i1 - i0 + 1);
+            {
+                var length = i1 - i0 + 1;
+                if(length < 0  || length - i0 > src.Length)
+                    root.@throw($"Cannot select the segment [{i0},{i1}] from the source string {src}");
+                return substring(src, i0, length);
+            }
 
             /// <summary>
             /// Extracts an index-identified substring

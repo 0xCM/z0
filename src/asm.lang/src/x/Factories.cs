@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Xml;
 
     using Z0.Asm;
 
     partial class XTend
     {
-        public static IWfCmdHost<AsmLangCmdKind> AsmLangCmd(this IWfShell wf)
+        public static ICmdRunner<AsmLangCmdKind> AsmLangCmdRunner(this IWfShell wf)
             => AsmLangCmdHost.create(wf);
 
         public static IntelIntrinsics IntelCpuIntrinsics(this IWfShell wf)

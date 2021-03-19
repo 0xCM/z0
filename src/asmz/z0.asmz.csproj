@@ -12,9 +12,12 @@
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(AsmCore)" />
+
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CmdSpec)" />
     <ProjectReference Include="$(Tools)" />
+
+    <Reference Include="$(AsmLangG)"/>
 
   </ItemGroup>
 

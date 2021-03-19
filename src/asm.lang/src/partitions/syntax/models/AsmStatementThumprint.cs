@@ -5,31 +5,27 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
     public readonly struct AsmStatementThumbprint : IComparable<AsmStatementThumbprint>
     {
-        public MemoryAddress BaseAddress {get;}
-
         public Address16 Offset {get;}
 
         public AsmStatementExpr Statement {get;}
 
-        public AsmThumbprint Thumbprint {get;}
+        public AsmThumbprintExpr Thumbprint {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatementThumbprint(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprint thumbprint)
+        public AsmStatementThumbprint(Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
         {
-            BaseAddress = @base;
             Offset = offset;
             Statement = expr;
             Thumbprint = thumbprint;
         }
 
-        public Key<AsmStatementExpr,AsmThumbprint> Key()
+        public Key<AsmStatementExpr,AsmThumbprintExpr> Key()
             => root.paired(Statement, Thumbprint);
 
         public override int GetHashCode()

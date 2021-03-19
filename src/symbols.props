@@ -15,7 +15,8 @@
     <Apps>$(Src)apps/z0.apps.csproj</Apps>
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <AsmLang>$(Src)asm.lang/z0.asm.lang.csproj</AsmLang>
-    <AsmLangG>$(Src)asm.lang.g/z0.asm.lang.g.csproj</AsmLangG>
+    <AsmLangG>$(ZPack)\z0.asm.lang.g\z0.asm.lang.g.dll</AsmLangG>
+
     <AsmCore>$(Src)asm.core/z0.asm.core.csproj</AsmCore>
     <Asci>$(Src)asci/z0.asci.csproj</Asci>
 

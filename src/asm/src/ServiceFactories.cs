@@ -16,7 +16,7 @@ namespace Z0
         public static AsmEtl AsmRowEtl(this IWfShell wf)
             => AsmEtl.create(wf);
 
-        public static IWfCmdHost<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
+        public static ICmdRunner<AsmWfCmdKind> AsmCmdRunner(this IWfShell wf)
             => AsmWfCmdHost.create(wf);
 
         public static AsmCatalog AsmCatalog(this IWfShell wf)
@@ -86,7 +86,7 @@ namespace Z0
        public static AsmRowProcessor AsmRowProcessor(this IWfShell wf)
             => Services.AsmRowProcessor.create(wf);
 
-       public static AsmDistiller AsmDistiller(this IWfShell wf)
+        public static AsmDistiller AsmDistiller(this IWfShell wf)
             => Z0.Asm.AsmDistiller.create(wf);
 
         public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)

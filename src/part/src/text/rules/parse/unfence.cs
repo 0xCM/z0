@@ -24,10 +24,9 @@ namespace Z0
             public static bool unfence(string src, Fence<char> fence, out string dst)
             {
                 dst = EmptyString;
-                if(!Query.blank(src) && Query.fenced(src, fence))
+                if(!Query.blank(src) && Query.fenced(src, fence, out var location))
                 {
-                    var len = src.Length;
-                    dst = substring(src.Trim(), 1, len - 2);
+                    dst = segment(src, location.Left + 1,  location.Right - 1);
                     return true;
                 }
                 return false;

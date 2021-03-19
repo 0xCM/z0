@@ -27,6 +27,12 @@ namespace Z0
                 Right = right;
             }
 
+            public string Format()
+                => string.Format("{0}..{1}", Left, Right);
+
+            public override string ToString()
+                => Format();
+
             [MethodImpl(Inline)]
             public static implicit operator Fence((dynamic left, dynamic right) src)
                 => new Fence(src.left, src.right);
@@ -48,6 +54,12 @@ namespace Z0
                 Left = left;
                 Right = right;
             }
+
+            public string Format()
+                => string.Format("{0}..{1}", Left, Right);
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator Fence<T>((T left, T right) src)
@@ -74,6 +86,12 @@ namespace Z0
                 Left = left;
                 Right = right;
             }
+
+            public string Format()
+                => string.Format("{0}..{1}", Left, Right);
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
             public static implicit operator Fence<A,B>((A left, B right) src)
