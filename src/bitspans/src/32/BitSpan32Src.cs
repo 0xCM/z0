@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
 
     public static class BitSpan32Src

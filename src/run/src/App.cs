@@ -4,9 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    class Runner
+    class App
     {
         public static void Main(params string[] args)
         {
@@ -14,36 +12,19 @@ namespace Z0
             if(count != 0)
                 term.inform(string.Format("Command-line: {0}", args.Delimit()));
 
-            if(ControlCommandRunner.specifies(args))
-                ControlCommandRunner.dispatch(args);
-            else
+            var kind = CommandSwitch.kind(args);
+            switch(kind)
             {
-                try
-                {
-                    var parts = WfShell.parts(Index<PartId>.Empty);
-                    term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
-                    var rng = Rng.@default();
-                    using var wf = WfShell.create(parts, args).WithRandom(rng);
-                    if(args.Length == 0)
-                    {
-                        wf.Status("usage: run <command> [options]");
-                        var settings = wf.Settings;
-                        wf.Row(settings.Format());
-                    }
-                    else
-                    {
-                        wf.Status("Dispatching");
-                        Reactor.init(wf).Dispatch(args);
-                    }
-
-                }
-                catch(Exception e)
-                {
-                    term.error(e);
-                }
+                case CommandSwitchKind.Control:
+                    ControlCommandDispatcher.dispatch(args);
+                break;
+                case CommandSwitchKind.Workflow:
+                    WorkflowCommandDispatcher.dispatch(args);
+                break;
+                default:
+                    DefaultCommandDispatcher.dispatch(args);
+                break;
             }
         }
-
-        readonly IWfShell Wf;
     }
 }
