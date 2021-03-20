@@ -22,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The memory source</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<sbyte> src)
-            => ConvertToVector128Int64(gptr(src.First));
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<sbyte> src, uint offset)
+            => ConvertToVector128Int64(gptr(src[offset]));
 
         /// <summary>
         /// PMOVZXBQ xmm, m16
@@ -32,8 +32,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<byte> src)
-            => ConvertToVector128Int64(gptr(src.First));
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock16<byte> src, uint offset)
+            => ConvertToVector128Int64(gptr(src[offset]));
 
         /// <summary>
         /// PMOVSXWQ xmm, m32
@@ -42,7 +42,17 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock32<short> src)
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock32<short> src, uint offset)
+            => ConvertToVector128Int64(gptr(src[offset]));
+
+        /// <summary>
+        /// PMOVZXWQ xmm, m32
+        /// </summary>
+        /// <param name="src">The memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<long> vinflate128x64i(in SpanBlock32<ushort> src, uint offset)
             => ConvertToVector128Int64(gptr(src.First));
+
     }
 }

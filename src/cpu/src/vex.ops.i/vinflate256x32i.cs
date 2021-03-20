@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vinflate256x32i(Vector128<short> src, W256 w = default)
+        public static Vector256<int> vinflate256x32i(Vector128<short> src)
             => ConvertToVector256Int32(src);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vinflate256x32i(Vector128<ushort> src, W256 w = default)
+        public static Vector256<int> vinflate256x32i(Vector128<ushort> src)
             => ConvertToVector256Int32(src);
 
         /// <summary>
@@ -44,7 +44,18 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<int> vinflate256x32i(in SpanBlock64<sbyte> src)
-            => ConvertToVector256Int32(gptr(src.First));
+        public static unsafe Vector256<int> vinflate256x32i(in SpanBlock64<sbyte> src, uint offset)
+            => ConvertToVector256Int32(gptr(src[offset]));
+
+        /// <summary>
+        /// VPMOVZXWD ymm, m128
+        /// 8x16u -> 8x32i
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<int> vinflate256x32i(in SpanBlock128<ushort> src, uint offset)
+            => ConvertToVector256Int32(gptr(src[offset]));
+
     }
 }

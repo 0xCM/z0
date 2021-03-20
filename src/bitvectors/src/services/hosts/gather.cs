@@ -8,17 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
-    partial class BV
+    partial class BvHosts
     {
-        [Closures(Closure)]
-        public readonly struct EffWidth<T> : IFunc<BitVector<T>,int>
+        [Closures(UnsignedInts), Gather]
+        public readonly struct Gather<T> : IBvBinaryOp<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly int Invoke(BitVector<T> a)
-                => BitVector.effwidth(a);
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.gather(a,b);
+
+            [MethodImpl(Inline)]
+            public T Invoke(T a, T b)
+                => gbits.gather(a,b);
         }
     }
 }

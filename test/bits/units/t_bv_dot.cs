@@ -21,7 +21,7 @@ namespace Z0
         protected void bvdot_gcheck<T>(T t = default)
             where T : unmanaged
         {
-            var f = BV.dot<T>();
+            var f = BvSvc.dot<T>();
 
             void check()
             {

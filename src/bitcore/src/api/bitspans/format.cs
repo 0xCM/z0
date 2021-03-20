@@ -16,7 +16,7 @@ namespace Z0
         public static string format(in BitSpan src, BitFormat? fmt = null)
         {
             var options = fmt ?? BitFormatter.configure();
-            var bitcount = src.BitCount;
+            var bitcount = root.min(options.MaxBitCount,src.BitCount);
             var blocked = options.BlockWidth != 0;
             var blocks = (uint)(blocked ? src.Length / options.BlockWidth : 0);
             bitcount += blocks; // space for block separators

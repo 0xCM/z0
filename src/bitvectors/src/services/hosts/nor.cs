@@ -9,19 +9,19 @@ namespace Z0
 
     using static Part;
 
-    partial class BV
+    partial class BvHosts
     {
-        [Closures(Closure), Add]
-        public readonly struct Add<T> : IBvBinaryOp<T>
+        [Closures(UnsignedInts), Nor]
+        public readonly struct Nor<T> : IBvBinaryOp<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
-                => BitVector.add(a,b);
+                => BitVector.nor(a,b);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)
-                => gmath.add(a,b);
+                => gmath.nor(a,b);
         }
     }
 }

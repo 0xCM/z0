@@ -9,19 +9,18 @@ namespace Z0
 
     using static Part;
 
-    partial class BV
+    partial class BvHosts
     {
-        [Closures(UnsignedInts), Dot]
-        public readonly struct Dot<T> : IBvBinaryPred<T>
+        [Closures(UnsignedInts), Not]
+        public readonly struct Not<T> : IBvUnaryOp<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(BitVector<T> a, BitVector<T> b)
-                => BitVector.dot(a,b);
+            public readonly BitVector<T> Invoke(BitVector<T> a)
+                => BitVector.not(a);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b)
-                => gbits.dot(a,b);
+            public T Invoke(T a) => gmath.not(a);
         }
     }
 }

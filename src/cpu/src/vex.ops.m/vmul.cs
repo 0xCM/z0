@@ -68,8 +68,8 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<uint> vmul(Vector128<ushort> x, Vector128<ushort> y)
         {
-            var z0 = vinflate256x32u(x, w256);
-            var z1 = vinflate256x32u(y, w256);
+            var z0 = vinflate256x32u(x);
+            var z1 = vinflate256x32u(y);
             return vmullo(z0,z1);
         }
 

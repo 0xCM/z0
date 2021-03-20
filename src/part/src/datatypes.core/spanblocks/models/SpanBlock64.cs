@@ -97,6 +97,15 @@ namespace Z0
         }
 
         /// <summary>
+        /// Mediates access to the underlying storage cells via linear index
+        /// </summary>
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref add(First, index);
+        }
+
+        /// <summary>
         /// Mediates access to the the underlying storage cells via block index and block-relative cell index
         /// </summary>
         public ref T this[int block, int segment]

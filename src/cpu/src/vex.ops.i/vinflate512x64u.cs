@@ -42,9 +42,9 @@ namespace Z0
         /// <param name="lo">The lower target</param>
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vinflate512x64u(in SpanBlock256<uint> src)
-            => (v64u(ConvertToVector256Int64(gptr(src.First))),
-                v64u(ConvertToVector256Int64(gptr(src.First,4))));
+        public static unsafe Vector512<ulong> vinflate512x64u(in SpanBlock256<uint> src, uint offset)
+            => (v64u(ConvertToVector256Int64(gptr(src[offset]))),
+                v64u(ConvertToVector256Int64(gptr(src[offset],4))));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -54,9 +54,9 @@ namespace Z0
         /// <param name="lo">The lower target</param>
         /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<ulong> vinflate512x64u(in SpanBlock128<ushort> src)
-            => (v64u(ConvertToVector256Int64(gptr(src.First))),
-                v64u(ConvertToVector256Int64(gptr(src.First,4))));
+        public static unsafe Vector512<ulong> vinflate512x64u(in SpanBlock128<ushort> src, uint offset)
+            => (v64u(ConvertToVector256Int64(gptr(src[offset]))),
+                v64u(ConvertToVector256Int64(gptr(src[offset],4))));
 
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
             => Vector128.Create(lo,hi).As<ulong,byte>();
 
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vbytes(W256 w, ulong x0, ulong x1, ulong x2, ulong x3)
-            => Vector256.Create(x0,x1,x2,x3).As<ulong,byte>();
+        public static Vector256<byte> vbytes(W256 w, ulong a, ulong b, ulong c, ulong d)
+            => Vector256.Create(a,b,c,d).As<ulong,byte>();
     }
 }

@@ -8,12 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
-    using static memory;
 
     partial struct cpu
     {
@@ -26,7 +21,7 @@ namespace Z0
         /// <param name="x0">The first target vector</param>
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector512<short> vinflate512x16i(Vector256<sbyte> src, W512 w = default)
+        public static Vector512<short> vinflate512x16i(Vector256<sbyte> src)
             => (vmaplo256x16i(src), vmaphi256x16i(src));
 
         /// <summary>
@@ -38,6 +33,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector512<short> vinflate512x16i(Vector256<byte> src)
             => (vmaplo256x16i(src), vmaphi256x16i(src));
-
     }
 }

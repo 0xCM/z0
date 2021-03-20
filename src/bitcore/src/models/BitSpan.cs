@@ -35,7 +35,7 @@ namespace Z0
         public ref bit this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Data,index);
+            get => ref seek(Data, index);
         }
 
         public ref bit this[long index]

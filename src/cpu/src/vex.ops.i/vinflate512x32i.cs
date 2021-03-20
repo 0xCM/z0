@@ -43,8 +43,8 @@ namespace Z0
         /// <param name="src">The memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<int> vinflate512x32i(in SpanBlock128<short> src)
-            => (ConvertToVector256Int32(gptr(src.First)),
-                ConvertToVector256Int32(gptr(src.First, 8)));
+        public static unsafe Vector512<int> vinflate512x32i(in SpanBlock128<short> src, uint offset)
+            => (ConvertToVector256Int32(gptr(src[offset])),
+                ConvertToVector256Int32(gptr(src[offset], 8)));
     }
 }

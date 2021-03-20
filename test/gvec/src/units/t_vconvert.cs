@@ -17,7 +17,7 @@ namespace Z0
             var blockA = SpanBlocks.parts<byte>(n32,1,2,3,4);
             var x = cpu.vparts(n128,1,2,3,4);
             var blockB = x.ToBlock();
-            var y = cpu.vinflate128x32u(blockA);
+            var y = cpu.vinflate128x32u(blockA,0);
             var blockC = y.ToBlock();
             Claim.eq(x,y);
             Claim.eq(blockB,blockC);
@@ -28,7 +28,7 @@ namespace Z0
             var block = SpanBlocks.parts<byte>(n64,1,2,3,4,5,6,7,8);
             var xE = cpu.vparts(n128,1,2,3,4);
             var yE = cpu.vparts(n128,5,6,7,8);
-            var z = cpu.vinflate256x32u(block);
+            var z = cpu.vinflate256x32u(block,0);
             Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
@@ -39,7 +39,7 @@ namespace Z0
             var xE = cpu.vparts(1,2);
             var yE = cpu.vparts(3,4);
 
-            var z = cpu.vinflate256x64u(block);
+            var z = cpu.vinflate256x64u(block,0);
             Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
         }
@@ -49,7 +49,7 @@ namespace Z0
             var block = SpanBlocks.parts<byte>(n128,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16);
             var xE = cpu.vparts(n128,1,2,3,4,5,6,7,8);
             var yE = cpu.vparts(n128,9,10,11,12,13,14,15,16);
-            var z = cpu.vinflate256x16u(block);
+            var z = cpu.vinflate256x16u(block,0);
 
             Claim.eq(xE, cpu.vlo(z));
             Claim.eq(yE, cpu.vhi(z));
@@ -57,16 +57,16 @@ namespace Z0
 
         public void v128x8u_v128x16u()
         {
-            var x = cpu.vparts(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var x = cpu.vparts(w128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
             var y = cpu.vmaplo128x16u(x);
-            var z = cpu.vparts(n128,0,1,2,3,4,5,6,7);
+            var z = cpu.vparts(w128,0,1,2,3,4,5,6,7);
             Claim.eq(y,z);
         }
 
         public void m64x8u_v128x16u()
         {
-            var x = SpanBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = cpu.vinflate128x16u(x);
+            var x = SpanBlocks.parts<byte>(w64,0,1,2,3,4,5,6,7);
+            var y = cpu.vinflate128x16u(x,0);
             var z = cpu.vparts(w128,0,1,2,3,4,5,6,7);
 
             Claim.eq(y,z);
@@ -74,8 +74,8 @@ namespace Z0
 
         public void blockspan_128x8u_v128x16u()
         {
-            var x = SpanBlocks.parts<byte>(n128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
-            var q = cpu.vinflate256x16u(x);
+            var x = SpanBlocks.parts<byte>(w128,0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F);
+            var q = cpu.vinflate256x16u(x,0);
             var z0 = x.LoBlock(0);
             var z1 = x.HiBlock(0);
             var y0s = cpu.vlo(q).ToSpan();
@@ -91,7 +91,7 @@ namespace Z0
         public void blockspan_64x8u_v2x128x32u()
         {
             var x = SpanBlocks.parts<byte>(n64,0,1,2,3,4,5,6,7);
-            var y = cpu.vinflate256x32u(x);
+            var y = cpu.vinflate256x32u(x,0);
             var z0 = x.Slice(0,4);
             var z1 = x.Slice(4,4);
             var y0s = cpu.vlo(y).ToSpan();

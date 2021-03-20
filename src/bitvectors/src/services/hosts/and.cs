@@ -9,17 +9,19 @@ namespace Z0
 
     using static Part;
 
-    partial class BV
+    partial class BvHosts
     {
-        [Closures(UnsignedInts), Gather]
-        public readonly struct Gather<T> : IBvBinaryOp<T>
+        [Closures(UnsignedInts), And]
+        public readonly struct And<T> : IBvBinaryOp<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b) => BitVector.gather(a,b);
+            public readonly BitVector<T> Invoke(BitVector<T> a, BitVector<T> b)
+                => BitVector.and(a,b);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gbits.gather(a,b);
+            public T Invoke(T a, T b)
+                => gmath.and(a,b);
         }
     }
 }

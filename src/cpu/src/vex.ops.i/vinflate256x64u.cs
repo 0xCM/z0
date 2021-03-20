@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
     using static memory;
@@ -33,8 +31,8 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock32<byte> src)
-            => v64u(ConvertToVector256Int64(gptr(src.First)));
+        public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock32<byte> src, uint offset)
+            => v64u(ConvertToVector256Int64(gptr(src[offset])));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -43,7 +41,17 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock64<ushort> src)
-            => v64u(ConvertToVector256Int64(gptr(src.First)));
+        public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock64<ushort> src, uint offset)
+            => v64u(ConvertToVector256Int64(gptr(src[offset])));
+
+        /// <summary>
+        /// VPMOVZXDQ ymm, m128
+        /// 4x32u -> 4x64u
+        /// </summary>
+        /// <param name="src">The blocked memory source</param>
+        /// <param name="dst">The target vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector256<ulong> vinflate256x64u(in SpanBlock128<uint> src, uint offset)
+            => v64u(ConvertToVector256Int64(gptr(src[offset])));
     }
 }

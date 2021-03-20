@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
     using static memory;
@@ -43,8 +41,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The blocked memory source</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector512<uint> vinflate512x32u(in SpanBlock256<ushort> src)
-            => (v32u(ConvertToVector256Int32(gptr(src.First))),
-                v32u(ConvertToVector256Int32(gptr(src.First, 8))));
+        public static unsafe Vector512<uint> vinflate512x32u(in SpanBlock256<ushort> src, uint offset)
+            => (v32u(ConvertToVector256Int32(gptr(src[offset]))),
+                v32u(ConvertToVector256Int32(gptr(src[offset], 8))));
     }
 }

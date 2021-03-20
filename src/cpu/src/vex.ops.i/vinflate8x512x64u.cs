@@ -45,6 +45,5 @@ namespace Z0
         public static unsafe Vector512<ulong> vinflate8x512x64u(in ushort src)
             => (v64u(ConvertToVector256Int64(gptr(src))),
                 v64u(ConvertToVector256Int64(gptr(src,4))));
-
     }
 }

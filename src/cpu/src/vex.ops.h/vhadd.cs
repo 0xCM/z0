@@ -16,27 +16,17 @@ namespace Z0
 
     partial struct cpu
     {
-        // public static byte vhexbin(byte src)
-        // {
-        //     if(src <= 0xF)
-        //         return 0;
-        //     var a = vbroadcast(w128, src);
-        //     var b = VMask.hexbins(w128);
-        //     var c = vand(a,b);
-        //     return 0;
-        // }
-
         /// <summary>
         /// Computes the horizontal sum of the source vectors
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
         [MethodImpl(Inline), AddH]
-        public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
+        public static Vector128<sbyte> vhadd(Vector128<sbyte> a, Vector128<sbyte> b)
         {
-            var a = vinflate256x16i(x, w256);
-            var b = vinflate256x16i(y, w256);
-            return vpack128x8i(vhadd(a,b));
+            var c = vinflate256x16i(a);
+            var d = vinflate256x16i(b);
+            return vpack128x8i(vhadd(c,d));
         }
 
         /// <summary>
@@ -122,11 +112,11 @@ namespace Z0
         /// <summary>
         /// __m256 _mm256_hadd_ps (__m256 a, __m256 b) VHADDPS ymm, ymm, ymm/m256
         /// </summary>
-        /// <param name="x">The left vector</param>
-        /// <param name="y">The right vector</param>
+        /// <param name="a">The left vector</param>
+        /// <param name="b">The right vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<float> vhadd(Vector256<float> x, Vector256<float> y)
-            => HorizontalAdd(x, y);
+        public static Vector256<float> vhadd(Vector256<float> a, Vector256<float> b)
+            => HorizontalAdd(a, b);
 
         /// <summary>
         /// __m256d _mm256_hadd_pd (__m256d a, __m256d b) VHADDPD ymm, ymm, ymm/m256

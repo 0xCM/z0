@@ -10,8 +10,7 @@ namespace Z0
     using static Part;
     using static SFx;
 
-    [FunctionalService]
-    public partial class BV : ISFxHost<BV>
+    public partial class BvHosts : ISFxHost<BvHosts>
     {
         const NumericKind Closure = UnsignedInts;
 

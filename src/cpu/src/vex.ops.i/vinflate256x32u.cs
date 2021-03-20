@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vinflate256x32u(Vector128<ushort> src, W256 w = default)
+        public static Vector256<uint> vinflate256x32u(Vector128<ushort> src)
             => v32u(ConvertToVector256Int32(src));
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vinflate256x32u(in SpanBlock64<byte> src)
+        public static unsafe Vector256<uint> vinflate256x32u(in SpanBlock64<byte> src, uint offset)
             => v32u(ConvertToVector256Int32(gptr(src.First)));
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<uint> vinflate256x32u(in SpanBlock128<ushort> src)
+        public static unsafe Vector256<uint> vinflate256x32u(in SpanBlock128<ushort> src, uint offset)
             => v32u(ConvertToVector256Int32(gptr(src.First)));
     }
 }

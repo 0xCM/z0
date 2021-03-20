@@ -4,14 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static SFx;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    partial class BV
+    partial class BvHosts
     {
         [Free, SFx]
         public interface IBvUnaryOp<T> : IUnaryOp<BitVector<T>>

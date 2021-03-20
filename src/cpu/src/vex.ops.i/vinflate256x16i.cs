@@ -8,9 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
-    using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
     using static memory;
@@ -26,7 +23,7 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vinflate256x16i(Vector128<byte> src, W256 w = default)
+        public static Vector256<short> vinflate256x16i(Vector128<byte> src)
             => ConvertToVector256Int16(src);
 
         /// <summary>
@@ -36,7 +33,7 @@ namespace Z0
         /// <param name="lo">The target for the lower source elements</param>
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vinflate256x16i(Vector128<sbyte> src, W256 w = default)
+        public static Vector256<short> vinflate256x16i(Vector128<sbyte> src)
             => vconcat(vmaplo128x16i(src), vmaphi128x16i(src));
 
         /// <summary>
@@ -44,19 +41,17 @@ namespace Z0
         /// 16x8i -> 16x16i
         /// </summary>
         /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<short> vinflate256x16i(in SpanBlock128<sbyte> src)
-            => ConvertToVector256Int16(gptr(src.First));
+        public static unsafe Vector256<short> vinflate256x16i(in SpanBlock128<sbyte> src, uint offset)
+            => ConvertToVector256Int16(gptr(src[offset]));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
         /// 16x8u -> 16x16i
         /// </summary>
         /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector256<short> vinflate256x16i(in SpanBlock128<byte> src)
-            => ConvertToVector256Int16(gptr(src.First));
+        public static unsafe Vector256<short> vinflate256x16i(in SpanBlock128<byte> src, uint offset)
+            => ConvertToVector256Int16(gptr(src[offset]));
     }
 }

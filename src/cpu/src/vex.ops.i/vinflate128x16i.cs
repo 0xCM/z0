@@ -19,19 +19,17 @@ namespace Z0
         /// 8x8i -> 8x16i
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<short> vinflate128x16i(in SpanBlock64<sbyte> src)
-            => ConvertToVector128Int16(gptr(src.First));
+        public static unsafe Vector128<short> vinflate128x16i(in SpanBlock64<sbyte> src, uint offset)
+            => ConvertToVector128Int16(gptr(src[offset]));
 
         /// <summary>
         /// PMOVZXBW xmm, m64
         /// 8x8u -> 8x16u
         /// </summary>
         /// <param name="src">The memory source</param>
-        /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<short> vinflate128x16i(in SpanBlock64<byte> src)
-            => ConvertToVector128Int16(gptr(src.First));
+        public static unsafe Vector128<short> vinflate128x16i(in SpanBlock64<byte> src, uint offset)
+            => ConvertToVector128Int16(gptr(src[offset]));
     }
 }

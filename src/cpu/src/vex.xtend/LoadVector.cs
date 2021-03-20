@@ -23,7 +23,6 @@ namespace Z0
             where T : unmanaged
                 => gcpu.vload(src, 0);
 
-
         /// <summary>
         /// Loads a 256-bit vector from the first 256-bit block
         /// </summary>
@@ -33,7 +32,6 @@ namespace Z0
         public static Vector256<T> LoadVector<T>(this in SpanBlock256<T> src)
             where T : unmanaged
                 => gcpu.vload(src);
-
 
         /// <summary>
         /// Loads a 512-bit vector from the first 512-bit block

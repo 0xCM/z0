@@ -11,7 +11,6 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    using static System.Runtime.Intrinsics.X86.Avx2;
     using static Part;
     using static memory;
 
@@ -24,8 +23,8 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<uint> vinflate128x32u(in SpanBlock32<byte> src)
-            => v32u(ConvertToVector128Int32(gptr(src.First)));
+        public static unsafe Vector128<uint> vinflate128x32u(in SpanBlock32<byte> src, uint offset)
+            => v32u(ConvertToVector128Int32(gptr(src[offset])));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
@@ -34,7 +33,7 @@ namespace Z0
         /// <param name="src">The blocked memory source</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static unsafe Vector128<uint> vinflate128x32u(in SpanBlock64<ushort> src)
-            => v32u(ConvertToVector128Int32(gptr(src.First)));
+        public static unsafe Vector128<uint> vinflate128x32u(in SpanBlock64<ushort> src, uint offset)
+            => v32u(ConvertToVector128Int32(gptr(src[offset])));
     }
 }

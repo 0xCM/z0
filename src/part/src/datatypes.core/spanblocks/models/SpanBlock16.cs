@@ -90,10 +90,19 @@ namespace Z0
         /// <summary>
         /// Mediates access to the underlying storage cells via linear index
         /// </summary>
-        public ref T this[int cell]
+        public ref T this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref add(First, cell);
+            get => ref add(First, index);
+        }
+
+        /// <summary>
+        /// Mediates access to the underlying storage cells via linear index
+        /// </summary>
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(First,index);
         }
 
         /// <summary>
