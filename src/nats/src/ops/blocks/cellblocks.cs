@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct SpanBlocks
+    partial struct BlockCalcs
     {
         /// <summary>
         /// Calculates the number of cells that comprise a specified number of blocks

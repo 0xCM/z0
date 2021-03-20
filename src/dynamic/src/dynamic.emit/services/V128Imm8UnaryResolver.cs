@@ -35,7 +35,7 @@ namespace Z0
 
         public DynamicDelegate<UnaryOp<Vector128<T>>> inject(byte imm8, ApiClass kind)
             => Dynop.EmbedVUnaryOpImm<T>(VK.vk128<T>(),
-                ApiIdentity.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(VK.vk128<T>(), name(kind)),imm8);
+                ApiIdentityBuilder.build(name(kind), TypeWidth.W128, typeof(T).NumericKind(), true), gApiMethod(VK.vk128<T>(), name(kind)),imm8);
 
         MethodInfo gApiMethod(Vec128Type hk, string name)
             => Host.DeclaredMethods().WithName(name).OfKind(hk).Single();

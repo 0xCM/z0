@@ -86,7 +86,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, OpIdentity fId, BinaryOp256 g, OpIdentity gId)
@@ -106,7 +106,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
     }
 }

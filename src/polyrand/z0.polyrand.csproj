@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Konst)" />
+
   </ItemGroup>
 
 </Project>

@@ -83,6 +83,7 @@
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
 
+    <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
 

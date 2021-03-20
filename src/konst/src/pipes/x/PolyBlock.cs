@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using B = SpanBlocks;
+    using B = BlockCalcs;
 
     public static class PolyBlock
     {

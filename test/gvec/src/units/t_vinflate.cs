@@ -16,12 +16,12 @@ namespace Z0
     {
         public void vinflate_128x8u()
         {
-            var v128x8u_input = gcpu.vinc<byte>(n128,0);
+            var v128x8u_input = gcpu.vinc<byte>(w128,0);
             var v256x16u =  cpu.vinflate256x16u(v128x8u_input);
             var v128x16u_a = cpu.vlo(v256x16u);
             var v128x16u_b = cpu.vhi(v256x16u);
-            var v128x16u_a_expect = gcpu.vinc<ushort>(n128,0);
-            var v128x16u_b_expect = gcpu.vinc<ushort>(n128,8);
+            var v128x16u_a_expect = gcpu.vinc<ushort>(w128,0);
+            var v128x16u_b_expect = gcpu.vinc<ushort>(w128,8);
             var v128x8u_output = cpu.vpack128x8u(v128x16u_a, v128x16u_b);
 
             Claim.veq(v128x16u_a_expect, v128x16u_a);
@@ -43,7 +43,7 @@ namespace Z0
 
         public void vinflate_256x8_1024x32()
         {
-            var w = n256;
+            var w = w256;
 
             var a0 = gcpu.vinc<uint>(w,0);
             var b0 = gcpu.vinc<uint>(w,8);

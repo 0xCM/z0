@@ -8,58 +8,49 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static SFx;
 
     partial class Surrogates
     {
-        /// <summary>
-        /// Captures a delegate that is exposed as an emitter
-        /// </summary>
-        public readonly struct Emitter<T> : SFx.IEmitter<T>
+        public readonly struct TernaryOp<T> : ITernaryOp<T>
         {
+            readonly Z0.TernaryOp<T> F;
+
             public OpIdentity Id {get;}
 
-            readonly Z0.Emitter<T> F;
-
             [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, OpIdentity id)
+            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)
             {
                 F = f;
                 Id = id;
             }
 
             [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, string name)
+            internal TernaryOp(Z0.TernaryOp<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = SFx.identity<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke() => F();
+            public T Invoke(T a, T b, T c) => F(a, b, c);
 
-            public Z0.Emitter<T> Subject
+            public Z0.TernaryOp<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T> AsFunc()
+            public Func<T,T,T,T> AsFunc()
                 => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
-            public string Format()
-                => Id;
-
-            public override string ToString()
-                => Format();
-
-            [MethodImpl(Inline)]
-            public static implicit operator Func<T>(Emitter<T> src)
+            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
                 => src.AsFunc();
 
             [MethodImpl(Inline)]
-            public static implicit operator Emitter<T>(Func<T> src)
+            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
                 => SFx.canonical(src);
         }
     }

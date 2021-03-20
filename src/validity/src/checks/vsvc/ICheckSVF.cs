@@ -66,7 +66,7 @@ namespace Z0
         {
             var cells = cpu.vcount<T>(n128);
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -97,7 +97,7 @@ namespace Z0
         {
             var cells = cpu.vcount<T>(n256);
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -126,7 +126,7 @@ namespace Z0
             where T : unmanaged
             where F : IBinaryOp128<T>
         {
-            var casename = name ?? ApiTestIdentity.name(f);
+            var casename = name ?? SFx.name(f);
             var w = n128;
             var t = default(T);
             var cells = cpu.vcount(w,t);
@@ -161,7 +161,7 @@ namespace Z0
             where T : unmanaged
             where F : IBinaryOp256<T>
         {
-            var casename = name ?? ApiTestIdentity.name(f);
+            var casename = name ?? SFx.name(f);
             var w = n256;
             var t = default(T);
             var cells = cpu.vcount(w,t);
@@ -204,7 +204,7 @@ namespace Z0
             where F : SFx.IEmitter128<T>
         {
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -236,7 +236,7 @@ namespace Z0
             where F : SFx.IEmitter256<T>
         {
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -275,7 +275,7 @@ namespace Z0
             where C : ICheckSF128<S,T>
         {
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();
@@ -324,7 +324,7 @@ namespace Z0
             where C : ICheckSF256<S,T>
         {
             var succeeded = true;
-            var casename = ApiTestIdentity.name(f);
+            var casename = SFx.name(f);
             var count = Time.counter();
 
             count.Start();

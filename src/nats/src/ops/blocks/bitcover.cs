@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct SpanBlocks
+    partial struct BlockCalcs
     {
         /// <summary>
         /// Computes the number of blocks required to cover a specified number of bits

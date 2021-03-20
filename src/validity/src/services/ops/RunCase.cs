@@ -13,7 +13,7 @@ namespace Z0
         public Duration RunCase(IUnitTest unit, MethodInfo method, List<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
-            var casename = ApiUri.TestCase(method);
+            var casename = TestCaseIdentity.from(method);
             var clock = Time.counter(false);
             var messages = root.list<IAppMsg>();
             var outcomes = root.list<TestCaseRecord>();

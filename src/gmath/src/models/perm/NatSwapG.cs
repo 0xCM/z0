@@ -47,14 +47,6 @@ namespace Z0
         }
 
         /// <summary>
-        /// Parses a transposition in canonical form (i j), if possible; otherwise
-        /// returns the empty transposition
-        /// </summary>
-        /// <param name="src">The source text</param>
-        public static NatSwap<N,T> Parse(string src)
-            => FromTuple(Swap<T>.Parse(src));
-
-        /// <summary>
         /// Converts a tuple representation to a swap
         /// </summary>
         /// <param name="i">The first term index</param>
@@ -120,15 +112,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSwap((int i, int j) src)
         {
-            this.i = src.i;
-            this.j = src.j;
+            i = src.i;
+            j = src.j;
         }
 
         [MethodImpl(Inline)]
         public NatSwap((T i, T j) src)
         {
-            this.i = Numeric.force<T,uint>(src.i);
-            this.j = Numeric.force<T,uint>(src.j);
+            i = Numeric.force<T,uint>(src.i);
+            j = Numeric.force<T,uint>(src.j);
         }
 
         [MethodImpl(Inline)]

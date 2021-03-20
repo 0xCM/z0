@@ -16,7 +16,7 @@ namespace Z0
     /// Generates the data presented by VData
     /// </summary>
     [ApiHost]
-    public static class VDataGen
+    public static class VGen
     {
         /// <summary>
         /// Creates a vector populated with component values that alternate between the first operand and the second
@@ -29,7 +29,7 @@ namespace Z0
             where T : unmanaged
         {
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
                 seek(mem, i) = gmath.even(i) ? a : b;
@@ -48,7 +48,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
@@ -71,7 +71,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
@@ -94,7 +94,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
@@ -116,7 +116,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
@@ -132,7 +132,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
@@ -149,7 +149,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i < len; i++)
             {
@@ -172,7 +172,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
@@ -194,7 +194,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
@@ -211,7 +211,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {
@@ -228,7 +228,7 @@ namespace Z0
         {
             var current = first;
             var data = SpanBlocks.alloc<T>(n);
-            var len = SpanBlocks.blocklength<T>(n);
+            var len = BlockCalcs.blocklength<T>(n);
             ref var mem = ref data.First;
             for(var i=0; i<len; i++)
             {

@@ -11,11 +11,5 @@ namespace Z0
 
     partial struct ApiIdentity
     {
-        /// <summary>
-        /// Defines an <see cref='Enum'/> identifier
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static EnumIdentity @enum(Type src)
-            => EnumIdentity.define(src);
     }
 }

@@ -299,7 +299,7 @@ namespace Z0
         public readonly PermCycle<T> Cycle(T start)
         {
             var iStart = iVal(start);
-            z.insist(iStart >= 0 && iStart < Length, "no");
+            root.require(iStart >= 0 && iStart < Length, () => "no");
             Span<PermTerm<T>> cterms = stackalloc PermTerm<T>[Length];
             var traversed = new HashSet<T>(Length);
             var index = start;

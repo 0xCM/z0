@@ -27,7 +27,7 @@ namespace Z0
 
         static IEnumerable<IAppMsg> FormatErrors(Exception e, MethodInfo method)
         {
-            var casename = ApiUri.TestCase(method);
+            var casename = TestCaseIdentity.from(method);
             if(e is TargetInvocationException i)
             {
                 foreach(var m in FormatErrors(e.InnerException, method))

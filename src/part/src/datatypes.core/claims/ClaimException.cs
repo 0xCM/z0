@@ -26,7 +26,6 @@ namespace Z0
             msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
             return AppMsg.define($"{msg.ToString()}", LogLevel.Error);
-            //term.WriteError(AppMsg.define($"{msg.ToString()}"));
         }
 
         public static ClaimException define(ClaimKind op, TextBlock msg)

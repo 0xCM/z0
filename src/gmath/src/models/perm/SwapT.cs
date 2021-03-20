@@ -49,19 +49,6 @@ namespace Z0
         public static Swap<T> Parse(string src)
             => throw new NotImplementedException();
 
-        // {
-        //     var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
-        //     if(indices.Length != 2)
-        //         return Zero;
-
-        //     var parser = NumericParser.create<T>();
-        //     var result = Try(() => (parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
-        //     if(result.IsSome())
-        //         return result.Value();
-        //     else
-        //         return Zero;
-        // }
-
         [MethodImpl(Inline)]
         public static implicit operator Swap<T>((T i, T j) src)
             => new Swap<T>(src.i, src.j);

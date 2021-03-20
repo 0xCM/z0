@@ -78,7 +78,7 @@ namespace Z0
                 bit a = x % y;
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
-                    Notify($"nbc {n}x{ApiIdentity.numeric<T>()} is a problem");
+                    Notify($"nbc {n}x{TypeIdentity.numeric<T>()} is a problem");
                 Claim.require(a == b);
             }
         }

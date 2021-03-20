@@ -20,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> LoBlock<T>(this in SpanBlock128<T> src, int block)
             where T : unmanaged
-                => src.Slice(block * src.BlockLength, SpanBlocks.blocklength<T>(w64));
+                => src.Slice(block * src.BlockLength, BlockCalcs.blocklength<T>(w64));
     }
 }

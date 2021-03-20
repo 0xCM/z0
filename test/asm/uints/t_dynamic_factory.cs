@@ -125,8 +125,8 @@ namespace Z0.Asm
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var dId = ApiIdentity.build(name, w, kind, false);
-            var gId = ApiIdentity.build(name, w, kind, true);
+            var dId = ApiIdentityBuilder.build(name, w, kind, false);
+            var gId = ApiIdentityBuilder.build(name, w, kind, true);
             var archive = Wf.ApiHexArchive();
             var dHost = ApiQuery.hostinfo(typeof(cpu));
             var gHost = ApiQuery.hostinfo(typeof(gcpu));

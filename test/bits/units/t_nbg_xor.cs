@@ -44,7 +44,7 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            base.Claim.eq((uint)gz.BlockCount, (BitVector64)BitGrid.blocks(n256, m, n, t));
+            base.Claim.eq((uint)gz.BlockCount, (BitVector64)BlockCalcs.blocks(n256, m, n, t));
             base.Claim.eq((uint)gz.CellCount, (BitVector64)GridCalcs.cellcount(m, n, t));
 
             BitGrid.xor(gx,gy,gz);

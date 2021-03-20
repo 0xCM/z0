@@ -8,9 +8,29 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static ApiUriDelimiters;
 
-    partial struct ApiIdentity
+    [ApiHost(ApiNames.SFx, true)]
+    public readonly partial struct SFx
     {
+        [Op]
+        public static string name(IFunc f)
+            => text.ifempty(f.GetType().Tag<OpKindAttribute>()
+                   .MapValueOrDefault(a => f.GetType().DisplayName(), f.GetType().DisplayName()),  f.GetType().DisplayName());
+
+        [MethodImpl(Inline), Op]
+        public static string name(Type host, IFunc f)
+            =>$"{host.Assembly.Id().Format()}{UriPathSep}{host.Name}{UriPathSep}{SFx.name(f)}";
+
+        [Op]
+        public static string name(IFunc f, IFunc g)
+            => text.format("{0} <-> {1}", name(f), name(g));
+
+        public static string name<W,T>(Type host, IFunc f)
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => ApiIdentityBuilder.name<W,T>(host, ApiIdentityBuilder.build<W,T>(SFx.name(f)), true);
+
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
         /// </summary>
@@ -19,10 +39,10 @@ namespace Z0
         /// <param name="t">A primal cell type representative</param>
         /// <typeparam name="W">The bit width type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
+        public static OpIdentity identity<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => build(opname, (TypeWidth)TypeNats.value<W>(), Numeric.kind<T>(), generic);
+                => ApiIdentityBuilder.build(opname, (TypeWidth)TypeNats.value<W>(), Numeric.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -31,8 +51,8 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(AllNumeric)]
-        public static OpIdentity sfunc<T>(string opname)
-            => NumericOp(opname, typeof(T).NumericKind());
+        public static OpIdentity identity<T>(string opname)
+            => ApiIdentityBuilder.NumericOp(opname, typeof(T).NumericKind());
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -41,9 +61,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(AllNumeric)]
-        public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
+        public static OpIdentity identity<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -52,9 +72,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(AllNumeric)]
-        public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
+        public static OpIdentity identity<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -63,8 +83,9 @@ namespace Z0
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
         [Op, Closures(AllNumeric)]
-        public static OpIdentity sfunc<T>(string opname, Vec512Kind<T> k)
+        public static OpIdentity identity<T>(string opname, Vec512Kind<T> k)
             where T : unmanaged
-                => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+        const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
     }
 }

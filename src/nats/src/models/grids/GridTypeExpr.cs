@@ -83,7 +83,7 @@ namespace Z0
         public uint BlockCount
         {
             [MethodImpl(Inline)]
-            get => (uint)SpanBlocks.cellcover<W,M,N,T>();
+            get => (uint)BlockCalcs.cellcover<W,M,N,T>();
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         public uint BlockLength
         {
             [MethodImpl(Inline)]
-            get => (uint)SpanBlocks.cells<W,T>();
+            get => (uint)BlockCalcs.cells<W,T>();
         }
     }
 }

@@ -4,9 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost(ApiNames.SFx, true)]
-    public readonly partial struct SFx
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Root;
+    using static memory;
+
+    [ApiHost]
+    public readonly partial struct BlockCalcs
     {
-        const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
-    }
+        const NumericKind Closure = UnsignedInts;
+
+   }
 }

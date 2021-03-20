@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static BlockCalcs;
 
     partial class BXTend
     {
@@ -20,6 +21,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> HiBlock<T>(this in SpanBlock128<T> src, int block)
             where T : unmanaged
-                => src.Slice(block * src.BlockLength + SpanBlocks.blocklength<T>(w64), SpanBlocks.blocklength<T>(w64));
+                => src.Slice(block * src.BlockLength + blocklength<T>(w64), blocklength<T>(w64));
     }
 }

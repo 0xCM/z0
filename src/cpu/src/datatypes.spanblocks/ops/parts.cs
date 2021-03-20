@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using static BlockCalcs;
+
     partial struct SpanBlocks
     {
         /// <summary>

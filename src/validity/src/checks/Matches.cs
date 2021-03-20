@@ -31,7 +31,7 @@ namespace Z0
             where F : IFunc<T,R>
             where G : IFunc<T,R>
         {
-            var casename = ApiUri.TestCase(context.HostType, $"{g.Id}_span");
+            var casename = TestCaseIdentity.identify(context.HostType, $"{g.Id}_span");
             var succeeded = true;
             var clock = Time.counter(false);
 
@@ -64,7 +64,7 @@ namespace Z0
             where F : IFunc<T,R>
             where G : IFunc<T,R>
         {
-            var casename = ApiUri.TestCase(context.HostType, g);
+            var casename = SFx.name(context.HostType, g);
             var succeeded = true;
             var count = context.RepCount;
             var clock = Time.counter(false);

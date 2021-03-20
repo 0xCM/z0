@@ -328,7 +328,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check,CaseName(ApiIdentity.sfunc<T>("bsparse")));
+            CheckAction(check,CaseName(SFx.identity<T>("bsparse")));
         }
 
         void bitspan_check(Span<byte> packed, BitSpan32 bitspan)

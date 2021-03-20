@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static memory;
 
-    partial struct SpanBlocks
+    partial struct BlockCalcs
     {
         /// <summary>
         /// Computes the number of bits covered by a specified cell count and width

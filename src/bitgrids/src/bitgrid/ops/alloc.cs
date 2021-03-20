@@ -12,42 +12,12 @@ namespace Z0
 
     partial class BitGrid
     {
-
-        /// <summary>
-        /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
-        /// </summary>
-        /// <param name="w">The block width selctor</param>
-        /// <param name="rows">The row count</param>
-        /// <param name="cols">The col count</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ulong blocks<T>(W256 w, uint rows, uint cols)
-            where T : unmanaged
-                => SpanBlocks.cellcover<T>(w, GridCalcs.cellcount<T>(rows,cols));
-
-        /// <summary>
-        /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
-        /// </summary>
-        /// <param name="w">The block width selctor</param>
-        /// <param name="m">The row count representative</param>
-        /// <param name="n">The col count representative</param>
-        /// <param name="t">The cell type representative</param>
-        /// <typeparam name="M">The row count type</typeparam>
-        /// <typeparam name="N">The col count type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
-        public static ulong blocks<M,N,T>(N256 w, M m = default, N n = default, T t = default)
-            where M : unmanaged, ITypeNat
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => SpanBlocks.cellcover<T>(w, GridCalcs.cellcount<T>(nat32u(m), nat32u(n)));
-
         [Alloc, Closures(Closure)]
         public static BitGrid<T> alloc<T>(uint m, uint n, T t = default)
             where T : unmanaged
         {
             var blocksize = W256.W;
-            var blocks = blocks<T>(blocksize,(uint)m,(uint)n);
+            var blocks = BlockCalcs.blocks<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }
@@ -57,7 +27,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = W256.W;
-            var blocks = blocks<T>(blocksize,(uint)m,(uint)n);
+            var blocks = BlockCalcs.blocks<T>(blocksize,(uint)m,(uint)n);
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }
@@ -68,9 +38,9 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<T> alloc<T>(N16 w)
+        public static BitGrid16<T> zero<T>(N16 w)
             where T : unmanaged
-                => new BitGrid16<T>(Konst.z16);
+                => new BitGrid16<T>(Part.z16);
 
         /// <summary>
         /// Creates a zero-filled 32-bit grid of caller-interpreted dimension
@@ -78,9 +48,9 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<T> alloc<T>(N32 w)
+        public static BitGrid32<T> zero<T>(N32 w)
             where T : unmanaged
-               => new BitGrid32<T>(Konst.z32);
+               => new BitGrid32<T>(Part.z32);
 
         /// <summary>
         /// Creates a zero-filled 64-bit grid of caller-interpreted dimension
@@ -88,9 +58,9 @@ namespace Z0
         /// <param name="w">The grid width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<T> alloc<T>(N64 w)
+        public static BitGrid64<T> zero<T>(N64 w)
             where T : unmanaged
-               => new BitGrid64<T>(Konst.z64);
+               => new BitGrid64<T>(Part.z64);
 
         /// <summary>
         /// Allocates a zero-filled 1x16 grid
@@ -101,9 +71,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<N1,N16,T> alloc<T>(N16 w, N1 m, N16 n, T t = default)
+        public static BitGrid16<N1,N16,T> zero<T>(N16 w, N1 m, N16 n, T t = default)
             where T : unmanaged
-                => alloc16<N1,N16,T>();
+                => z16<N1,N16,T>();
 
         /// <summary>
         /// Allocates a zero-filled 16x1 grid
@@ -114,9 +84,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<N16,N1,T> alloc<T>(N16 w, N16 m, N1 n, T t = default)
+        public static BitGrid16<N16,N1,T> zero<T>(N16 w, N16 m, N1 n, T t = default)
             where T : unmanaged
-                => alloc16<N16,N1,T>();
+                => z16<N16,N1,T>();
 
         /// <summary>
         /// Allocates a zero-filled 2x8 grid
@@ -127,9 +97,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<N2,N8,T> alloc<T>(N16 w, N2 m, N8 n, T t = default)
+        public static BitGrid16<N2,N8,T> zero<T>(N16 w, N2 m, N8 n, T t = default)
             where T : unmanaged
-                => alloc16<N2,N8,T>();
+                => z16<N2,N8,T>();
 
         /// <summary>
         /// Allocates a zero-filled 8x2 grid
@@ -140,9 +110,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<N8,N2,T> alloc<T>(N16 w, N8 m, N2 n, T t = default)
+        public static BitGrid16<N8,N2,T> zero<T>(N16 w, N8 m, N2 n, T t = default)
             where T : unmanaged
-                => alloc16<N8,N2,T>();
+                => z16<N8,N2,T>();
 
         /// <summary>
         /// Allocates a zero-filled 4x4 grid
@@ -153,9 +123,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
-        public static BitGrid16<N4,N4,T> alloc<T>(N16 w, N4 m, N4 n, T t = default)
+        public static BitGrid16<N4,N4,T> zero<T>(N16 w, N4 m, N4 n, T t = default)
             where T : unmanaged
-                => alloc16<N4,N4,T>();
+                => z16<N4,N4,T>();
 
         /// <summary>
         /// Allocates a zero-filled 1x32 grid
@@ -166,9 +136,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N1,N32,T> alloc<T>(N32 w, N1 m, N32 n, T t = default)
+        public static BitGrid32<N1,N32,T> zero<T>(N32 w, N1 m, N32 n, T t = default)
             where T : unmanaged
-                => alloc32<N1,N32,T>();
+                => z32<N1,N32,T>();
 
         /// <summary>
         /// Allocates a zero-filled 32x1 grid
@@ -179,9 +149,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N32,N1,T> alloc<T>(N32 w, N32 m = default, N1 n = default, T t = default)
+        public static BitGrid32<N32,N1,T> zero<T>(N32 w, N32 m = default, N1 n = default, T t = default)
             where T : unmanaged
-                => alloc32<N32,N1,T>();
+                => z32<N32,N1,T>();
 
         /// <summary>
         /// Allocates a zero-filled 16x2 grid
@@ -192,9 +162,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N16,N2,T> alloc<T>(N32 w, N16 m = default, N2 n = default, T t = default)
+        public static BitGrid32<N16,N2,T> zero<T>(N32 w, N16 m = default, N2 n = default, T t = default)
             where T : unmanaged
-                => alloc32<N16,N2,T>();
+                => z32<N16,N2,T>();
 
         /// Allocates a zero-filled 2x16 grid
         /// </summary>
@@ -204,9 +174,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N2,N16,T> alloc<T>(N32 w, N2 m = default, N16 n = default, T t = default)
+        public static BitGrid32<N2,N16,T> zero<T>(N32 w, N2 m = default, N16 n = default, T t = default)
             where T : unmanaged
-                => alloc32<N2,N16,T>();
+                => z32<N2,N16,T>();
 
         /// <summary>
         /// Allocates a zero-filled 8x4 grid
@@ -217,9 +187,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N8,N4,T> alloc<T>(N32 w, N8 m = default, N4 n = default, T t = default)
+        public static BitGrid32<N8,N4,T> zero<T>(N32 w, N8 m = default, N4 n = default, T t = default)
             where T : unmanaged
-                => alloc32<N8,N4,T>();
+                => z32<N8,N4,T>();
 
         /// <summary>
         /// Allocates a zero-filled 4x8 grid
@@ -230,9 +200,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
-        public static BitGrid32<N4,N8,T> alloc<T>(N32 w, N4 m = default, N8 n = default, T t = default)
+        public static BitGrid32<N4,N8,T> zero<T>(N32 w, N4 m = default, N8 n = default, T t = default)
             where T : unmanaged
-                => alloc32<N4,N8,T>();
+                => z32<N4,N8,T>();
 
         /// <summary>
         /// Allocates a zero-filled 1x64 grid
@@ -243,9 +213,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N1,N64,T> alloc<T>(N64 w, N1 m = default, N64 n = default, T t = default)
+        public static BitGrid64<N1,N64,T> zero<T>(N64 w, N1 m = default, N64 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N1,N64,T>();
+                => z64<N1,N64,T>();
 
         /// <summary>
         /// Allocates a zero-filled 64x1 grid
@@ -256,9 +226,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N64,N1,T> alloc<T>(N64 w, N64 m = default, N1 n = default, T t = default)
+        public static BitGrid64<N64,N1,T> zero<T>(N64 w, N64 m = default, N1 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N64,N1,T>();
+                => z64<N64,N1,T>();
 
         /// <summary>
         /// Allocates a zero-filled 2x32 grid
@@ -269,9 +239,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N2,N32,T> alloc<T>(N64 w, N2 m = default, N32 n = default, T t = default)
+        public static BitGrid64<N2,N32,T> zero<T>(N64 w, N2 m = default, N32 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N2,N32,T>();
+                => z64<N2,N32,T>();
 
         /// <summary>
         /// Allocates a zero-filled 32x2 grid
@@ -282,9 +252,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N32,N2,T> alloc<T>(N64 w, N32 m = default, N2 n = default, T t = default)
+        public static BitGrid64<N32,N2,T> zero<T>(N64 w, N32 m = default, N2 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N32,N2,T>();
+                => z64<N32,N2,T>();
 
         /// <summary>
         /// Allocates a zero-filled 4x16 grid
@@ -295,9 +265,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N4,N16,T> alloc<T>(N64 w, N4 m = default, N16 n = default, T t = default)
+        public static BitGrid64<N4,N16,T> zero<T>(N64 w, N4 m = default, N16 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N4,N16,T>();
+                => z64<N4,N16,T>();
 
         /// <summary>
         /// Allocates a zero-filled 16x4 grid
@@ -308,9 +278,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N16,N4,T> alloc<T>(N64 w, N16 m = default, N4 n = default, T t = default)
+        public static BitGrid64<N16,N4,T> zero<T>(N64 w, N16 m = default, N4 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N16,N4,T>();
+                => z64<N16,N4,T>();
 
         /// <summary>
         /// Allocates a zero-filled 8x8 grid
@@ -321,9 +291,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid64<N8,N8,T> alloc<T>(N64 w, N8 m = default, N8 n = default, T t = default)
+        public static BitGrid64<N8,N8,T> zero<T>(N64 w, N8 m = default, N8 n = default, T t = default)
             where T : unmanaged
-                => alloc64<N8,N8,T>();
+                => z64<N8,N8,T>();
 
         /// <summary>
         /// Allocates a zero-filled 1x128 grid
@@ -334,9 +304,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N1,N128,T> alloc<T>(N128 w, N1 m, N128 n, T t = default)
+        public static BitGrid128<N1,N128,T> zero<T>(N128 w, N1 m, N128 n, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 128x1 grid
@@ -347,9 +317,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N128,N1,T> alloc<T>(N128 w, N128 m = default, N1 n = default, T t = default)
+        public static BitGrid128<N128,N1,T> zero<T>(N128 w, N128 m = default, N1 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 2x64 grid
@@ -360,9 +330,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N2,N64,T> alloc<T>(N128 block, N2 m = default, N64 n = default,T t = default)
+        public static BitGrid128<N2,N64,T> zero<T>(N128 block, N2 m = default, N64 n = default,T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 64x2 grid
@@ -373,9 +343,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N64,N2,T> alloc<T>(N128 block, N64 m = default, N2 n = default, T t = default)
+        public static BitGrid128<N64,N2,T> zero<T>(N128 block, N64 m = default, N2 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 4x32 grid
@@ -386,9 +356,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N4,N32,T> alloc<T>(N128 w, N4 m = default, N32 n = default, T t = default)
+        public static BitGrid128<N4,N32,T> zero<T>(N128 w, N4 m = default, N32 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 32x4 grid
@@ -399,9 +369,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N32,N4,T> alloc<T>(N128 w, N32 m = default, N4 n = default, T t = default)
+        public static BitGrid128<N32,N4,T> zero<T>(N128 w, N32 m = default, N4 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 8x16 grid
@@ -412,9 +382,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N8,N16,T> alloc<T>(N128 w, N8 m = default, N16 n = default, T t = default)
+        public static BitGrid128<N8,N16,T> zero<T>(N128 w, N8 m = default, N16 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 16x8 grid
@@ -425,9 +395,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid128<N16,N8,T> alloc<T>(N128 w, N16 m = default, N8 n = default, T t = default)
+        public static BitGrid128<N16,N8,T> zero<T>(N128 w, N16 m = default, N8 n = default, T t = default)
             where T : unmanaged
-                => alloc128(m,n,t);
+                => z128(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 1x256 grid
@@ -438,9 +408,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N1,N256,T> alloc<T>(N256 w, N1 m = default, N256 n = default, T t = default)
+        public static BitGrid256<N1,N256,T> zero<T>(N256 w, N1 m = default, N256 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 256x1 grid
@@ -451,9 +421,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N256,N1,T> alloc<T>(N256 w, N256 m = default, N1 n = default, T t = default)
+        public static BitGrid256<N256,N1,T> zero<T>(N256 w, N256 m = default, N1 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 2x128 grid
@@ -463,9 +433,9 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static BitGrid256<N2,N128,T> alloc<T>(N256 w, N2 m = default, N128 n = default, T t = default)
+        public static BitGrid256<N2,N128,T> zero<T>(N256 w, N2 m = default, N128 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 128x2 grid
@@ -476,9 +446,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N128,N2,T> alloc<T>(N256 w, N128 m = default, N2 n = default, T t = default)
+        public static BitGrid256<N128,N2,T> zero<T>(N256 w, N128 m = default, N2 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 4x64 grid
@@ -489,9 +459,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N4,N64,T> alloc<T>(N256 w, N4 m = default, N64 n = default,T t = default)
+        public static BitGrid256<N4,N64,T> zero<T>(N256 w, N4 m = default, N64 n = default,T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 64x4 grid
@@ -502,9 +472,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N64,N4,T> alloc<T>(N256 w, N64 m = default, N4 n = default, T t = default)
+        public static BitGrid256<N64,N4,T> zero<T>(N256 w, N64 m = default, N4 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 8x32 grid
@@ -515,9 +485,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N8,N32,T> alloc<T>(N256 w, N8 m = default, N32 n = default, T t = default)
+        public static BitGrid256<N8,N32,T> zero<T>(N256 w, N8 m = default, N32 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 32x8 grid
@@ -528,9 +498,9 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N32,N8,T> alloc<T>(N256 w, N32 m = default, N8 n = default, T t = default)
+        public static BitGrid256<N32,N8,T> zero<T>(N256 w, N32 m = default, N8 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
 
         /// <summary>
         /// Allocates a zero-filled 16x16 grid
@@ -541,8 +511,8 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(Closure)]
-        public static BitGrid256<N16,N16,T> alloc<T>(N256 w, N16 m = default, N16 n = default, T t = default)
+        public static BitGrid256<N16,N16,T> zero<T>(N256 w, N16 m = default, N16 n = default, T t = default)
             where T : unmanaged
-                => alloc256(m,n,t);
+                => z256(m,n,t);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
             public const string Name = "bitslice";
 
             public OpIdentity Id
-                => ApiIdentity.sfunc<T>(Name);
+                => SFx.identity<T>(Name);
 
             public T Invoke(T a, byte k1, byte k2)
                 => gbits.extract(a,k1,k2);

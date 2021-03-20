@@ -12,6 +12,8 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using static BlockCalcs;
+
     partial struct SpanBlocks
     {
         /// <summary>

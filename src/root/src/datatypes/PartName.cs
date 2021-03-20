@@ -6,11 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Root;
 
     public readonly struct PartName : ITextual
     {
+        [MethodImpl(Inline)]
+        public static PartName from(Assembly src)
+            => new PartName(src.Id());
+
+        [MethodImpl(Inline)]
+        public static PartName from(Type src)
+            => new PartName(src.Assembly.Id());
+
         public PartId Id {get;}
 
         [MethodImpl(Inline)]

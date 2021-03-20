@@ -12,46 +12,50 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct TernaryOp<T> : ITernaryOp<T>
+        public readonly struct BinaryPredicate8<T> : IFunc<T,T,bit>
         {
-            readonly Z0.TernaryOp<T> F;
+            readonly Z0.BinaryPredicate<T> F;
 
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)
+            internal BinaryPredicate8(Z0.BinaryPredicate<T> f, OpIdentity id)
             {
                 F = f;
                 Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, string name)
+            internal BinaryPredicate8(Z0.BinaryPredicate<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = SFx.identity<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b, T c) => F(a, b, c);
+            public bit Invoke(T a, T b)
+                => F(a,b);
 
-            public Z0.TernaryOp<T> Subject
+            public Z0.BinaryPredicate<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T,T,T> AsFunc()
+            public Func<T,T,bit> AsFunc()
                 => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T,T,T>(TernaryOp<T> src)
-                => src.AsFunc();
+            public string Format()
+                => Id;
+
+            public override string ToString()
+                => Format();
 
             [MethodImpl(Inline)]
-            public static implicit operator TernaryOp<T>(Func<T,T,T,T> src)
-                => SFx.canonical(src);
+            public static implicit operator Func<T,T,bit>(BinaryPredicate8<T> src)
+                => src.AsFunc();
         }
     }
 }

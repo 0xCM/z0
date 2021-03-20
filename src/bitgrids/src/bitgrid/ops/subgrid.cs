@@ -27,7 +27,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid16<M,N,T>(z16);
+                => new SubGrid16<M,N,T>(Part.z16);
 
         /// <summary>
         /// Allocates a populated 16-bit subgrid
@@ -61,7 +61,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid32<M, N, T>(z32);
+                => new SubGrid32<M,N,T>(Part.z32);
 
         /// <summary>
         /// Allocates a populated 32-bit subgrid
@@ -78,7 +78,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid32<M, N, T>(Numeric.force<T,uint>(data));
+                => new SubGrid32<M,N,T>(Numeric.force<T,uint>(data));
 
         /// <summary>
         /// Allocates a 0-filled 64-bitsubgrid
@@ -95,7 +95,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid64<M, N, T>(z64);
+                => new SubGrid64<M,N,T>(Part.z64);
 
         /// <summary>
         /// Allocates a populated 64-bit subgrid
@@ -112,7 +112,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid64<M, N, T>(Numeric.force<T,ulong>(data));
+                => new SubGrid64<M,N,T>(Numeric.force<T,ulong>(data));
 
         /// <summary>
         /// Allocates a 0-filled 128-bit subgrid
@@ -129,7 +129,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid128<M, N, T>(default);
+                => new SubGrid128<M,N,T>(default);
 
         /// <summary>
         /// Allocates a populated 128-bit subgrid
@@ -145,7 +145,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid128<M, N, T>(data);
+                => new SubGrid128<M,N,T>(data);
 
         /// <summary>
         /// Allocates a 0-filled 256-bit subgrid
@@ -162,7 +162,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid256<M, N, T>(default);
+                => new SubGrid256<M,N,T>(default);
 
         /// <summary>
         /// Allocates a populated 256-bit subgrid
@@ -178,6 +178,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new SubGrid256<M, N, T>(data);
+                => new SubGrid256<M,N,T>(data);
     }
 }

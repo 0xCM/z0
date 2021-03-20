@@ -44,6 +44,6 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => $"v{w}_{m}x{n}x{ApiIdentity.numeric(t)}";
+                => $"v{w}_{m}x{n}x{TypeIdentity.numeric<T>()}";
     }
 }

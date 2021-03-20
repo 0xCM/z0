@@ -21,7 +21,7 @@ namespace Z0
             public const string Name = "byteswap";
 
             public OpIdentity Id
-                => ApiIdentity.sfunc<T>(Name);
+                => SFx.identity<T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a)

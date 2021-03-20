@@ -63,7 +63,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
 
         /// <summary>
@@ -189,7 +189,7 @@ namespace Z0
                 }
             }
 
-            return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
+            return ActionTest.TestAction(check, Identity.match(fId, gId));
         }
     }
 }

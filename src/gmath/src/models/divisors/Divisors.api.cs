@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class Divisors
     {
@@ -47,14 +47,14 @@ namespace Z0
                 => divisors<T>().index(interval);
 
         [MethodImpl(Inline)]
-        public static IEnumerable<DivisorIndex<T>> Compute<T>(Interval<T> interval, T step)        
+        public static IEnumerable<DivisorIndex<T>> Compute<T>(Interval<T> interval, T step)
             where T : unmanaged
                 => divisors<T>().indices(interval,step);
 
         public static ulong[] Compute(ulong src)
         {
             var result = new List<ulong>();
-            
+
             if(src != 0UL &&  src != 1UL)
             {
                 var upper = src/2UL + 1UL;
@@ -67,14 +67,14 @@ namespace Z0
 
                     current = ++current;
                 }
-            }    
+            }
             return result.ToArray();
         }
 
         public static uint[] Compute(uint src)
         {
             var result = new List<uint>();
-            
+
             if(src != 0u &&  src != 1u)
             {
                 var upper = src/2u + 1u;
@@ -87,7 +87,7 @@ namespace Z0
 
                     current = ++current;
                 }
-            }    
+            }
             return result.ToArray();
         }
     }

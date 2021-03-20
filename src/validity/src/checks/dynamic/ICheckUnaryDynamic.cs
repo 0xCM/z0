@@ -102,7 +102,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         /// <summary>
@@ -177,7 +177,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
                 }
             }
 
-            return TestAction(check, MatchCaseName(fId, gId));
+            return TestAction(check, match(fId, gId));
         }
     }
 }

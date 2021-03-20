@@ -19,9 +19,9 @@ namespace Z0
         /// <param name="block">The block index</param>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vector<T>(in BitGrid<T> src, int block, N256 n = default)
+        public static Vector256<T> vector<T>(in BitGrid<T> src, int block, W256 w = default)
             where T : unmanaged
-                => gcpu.vload(n, in src.Data.BlockRef(block));
+                => gcpu.vload(w, src.Data.BlockRef(block));
 
         /// <summary>
         /// Loads a 256-bit cpu vector from an index-identified block
@@ -32,10 +32,10 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Vector256<T> vector<M,N,T>(in BitGrid<M,N,T> src, int block, N256 n = default)
+        public static Vector256<T> vector<M,N,T>(in BitGrid<M,N,T> src, int block, W256 w = default)
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => gcpu.vload(n, in src.Data.BlockRef(block));
+                => gcpu.vload(w, src.Data.BlockRef(block));
     }
 }

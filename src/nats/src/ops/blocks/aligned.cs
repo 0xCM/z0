@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    partial struct SpanBlocks
+    partial struct BlockCalcs
     {
         /// <summary>
         /// Determines whether a specified number of elements can be evenly covered by 8-bit segments

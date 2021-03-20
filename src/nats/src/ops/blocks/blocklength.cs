@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static memory;
 
-    partial struct SpanBlocks
+    partial struct BlockCalcs
     {
         /// <summary>
         /// Computes the number of cells that comprise a single 8-bit block
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The block width selector</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int blocklength<T>(W128 w)
             where T : unmanaged
                 => 16/(int)size<T>();
@@ -93,5 +93,6 @@ namespace Z0
             where W : unmanaged, ITypeNat
             where T : unmanaged
                 => (int)((NatCalc.div(w, default(N8)))/size<T>());
+
     }
 }

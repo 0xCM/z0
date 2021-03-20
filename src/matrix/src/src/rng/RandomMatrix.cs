@@ -78,7 +78,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Z0.Matrix.blockload<M,N,T>(random.Blocks<T>(n256, Z0.SpanBlocks.blockcount<M,N,T>(n256)));
+                => Z0.Matrix.blockload<M,N,T>(random.Blocks<T>(n256, BlockCalcs.blockcount<M,N,T>(n256)));
 
         /// <summary>
         /// Samples a blocked matrix of natural dimensions where the entries are constrained to a specified domain
@@ -94,7 +94,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Z0.Matrix.blockload<M, N, T>(random.Blocks(n256, domain, Z0.SpanBlocks.blockcount<M,N,T>(n256)));
+                => Z0.Matrix.blockload<M, N, T>(random.Blocks(n256, domain, BlockCalcs.blockcount<M,N,T>(n256)));
 
         /// <summary>
         /// Samples a square matrix of natural order
@@ -105,7 +105,7 @@ namespace Z0
          public static Matrix256<N,T> MatrixBlock<N,T>(this IDomainSource random, Interval<T>? domain = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Z0.Matrix.blockload<N,T>(random.Blocks(n256, domain.ValueOrElse(() => ClosedInterval<T>.Full), Z0.SpanBlocks.blockcount<N,N,T>(n256)));
+                => Z0.Matrix.blockload<N,T>(random.Blocks(n256, domain.ValueOrElse(() => ClosedInterval<T>.Full), BlockCalcs.blockcount<N,N,T>(n256)));
 
          /// <summary>
          /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed

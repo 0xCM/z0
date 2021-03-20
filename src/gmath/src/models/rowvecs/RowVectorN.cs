@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     public struct RowVector<N,T>
         where N : unmanaged, ITypeNat
@@ -64,7 +64,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public RowVector(T[] src)
         {
-            Demands.reason(src.Length >= Dim, $"{src.Length} < {Dim}");
+            root.require(src.Length >= Dim, () => $"{src.Length} < {Dim}");
             data = src;
         }
 

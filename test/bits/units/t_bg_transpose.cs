@@ -14,7 +14,7 @@ namespace Z0
             var t = z16;
             ushort pattern = 0b1100110011001100;
 
-            var g = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));
+            var g = BitGrid.broadcast(pattern, BitGrid.zero(w,m,n,t));
             var gT = BitGrid.transpose(g);
             var bsT = g.ToBitString().Transpose(m,n).ToBitGrid(w,m,n,t);
 

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Nats)" />
   </ItemGroup>
 
 </Project>

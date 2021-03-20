@@ -27,7 +27,7 @@ namespace Z0
         BenchmarkRecord ReportBenchmark<W,T>(IFunc f, int ops, Duration time, W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => ReportBenchmark(TestCaseIdentity.service(GetType()).CaseName<W,T>(f), ops, time);
+                => ReportBenchmark(SFx.name<W,T>(GetType(), f), ops, time);
 
         /// <summary>
         /// Captures a duration and the number of operations executed within the period

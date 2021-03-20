@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Math)" />
-    <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Check)" />
-    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Nats)" />
+    <ProjectReference Include="$(Cpu)" />
   </ItemGroup>
 
 </Project>

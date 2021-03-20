@@ -24,7 +24,7 @@ namespace Z0
             => Source = src;
 
         public OpIdentity Id
-            => ApiIdentity.sfunc(Name, Kind);
+            => SFx.identity(Name, Kind);
 
         [MethodImpl(Inline)]
         public Vector512<T> Invoke()

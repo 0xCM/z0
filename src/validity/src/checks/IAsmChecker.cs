@@ -88,7 +88,7 @@ namespace Z0.Asm
                 eq(v1,v2);
             }
 
-            return TestAction(check, CaseName<T>(src.Name));
+            return TestAction(check, name<T>(src.Name));
         }
 
         TestCaseRecord TestImmInjection<T>(W256 w, BinaryOperatorClass k, MethodInfo src, byte imm)
@@ -110,7 +110,7 @@ namespace Z0.Asm
                 eq(v1,v2);
             }
 
-            return TestAction(check, CaseName<T>(src.Name));
+            return TestAction(check, name<T>(src.Name));
         }
 
         TestCaseRecord TestBinaryImm<T>(W128 w, MethodInfo method, byte imm)
@@ -131,7 +131,7 @@ namespace Z0.Asm
                 var v2 = g(x.ToCell(),y.ToCell()).ToVector<T>();
                 gcpu.veq(v1,v2);
             }
-            return TestAction(check, CaseName<T>(method.Name));
+            return TestAction(check, name<T>(method.Name));
         }
 
         TestCaseRecord TestUnaryImm<T>(W256 w, MethodInfo method, byte imm)
@@ -155,7 +155,7 @@ namespace Z0.Asm
                 gcpu.veq(v1,v2);
             }
 
-            return TestAction(check, CaseName<T>(method.Name));
+            return TestAction(check, name<T>(method.Name));
         }
     }
 }

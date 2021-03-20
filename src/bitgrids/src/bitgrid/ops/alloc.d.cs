@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = BitGrid.blocks<T>(blocksize, (uint)nat64u(m), (uint)nat64u(n));
+            var blocks = BlockCalcs.blocks<T>(blocksize, (uint)nat64u(m), (uint)nat64u(n));
             var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<M, N, T>(data);
         }
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid16<M,N,T> alloc16<M,N,T>(M m = default, N n = default, T t = default)
+        static BitGrid16<M,N,T> z16<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -55,7 +55,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid32<M,N,T> alloc32<M,N,T>(M m = default, N n = default, T t = default)
+        static BitGrid32<M,N,T> z32<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid64<M,N,T> alloc64<M,N,T>(M m = default, N n = default, T t = default)
+        static BitGrid64<M,N,T> z64<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -87,7 +87,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid128<M,N,T> alloc128<M,N,T>(M m = default, N n = default, T t = default)
+        static BitGrid128<M,N,T> z128<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -103,7 +103,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        static BitGrid256<M,N,T> alloc256<M,N,T>(M m = default, N n = default, T t = default)
+        static BitGrid256<M,N,T> z256<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

@@ -88,7 +88,7 @@ namespace Z0
         public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => SpanBlocks.cellcover<W,M,N,T>();
+            get => BlockCalcs.cellcover<W,M,N,T>();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => SpanBlocks.blocklength<W,T>();
+            get => BlockCalcs.blocklength<W,T>();
         }
 
         /// <summary>

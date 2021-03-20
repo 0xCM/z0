@@ -17,7 +17,7 @@ namespace Z0
         [Op]
         public static KindedEvalSig sig(MethodInfo src)
         {
-            var @class = ApiIdentity.kind(src);
+            var @class = ApiIdentityBuilder.klass(src);
             var @return = src.ReturnType;
             var @params = src.ParameterTypes();
             var count = @params.Length + 1;

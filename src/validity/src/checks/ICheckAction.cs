@@ -91,12 +91,12 @@ namespace Z0
             try
             {
                 f();
-                return TestCaseRecord.define(CaseName<T>(label), true, clock);
+                return TestCaseRecord.define(name<T>(label), true, clock);
             }
             catch(Exception e)
             {
                 Print(e, label);
-                return TestCaseRecord.define(CaseName<T>(label), false, clock);
+                return TestCaseRecord.define(name<T>(label), false, clock);
             }
         }
     }

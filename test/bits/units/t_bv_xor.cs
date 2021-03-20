@@ -32,7 +32,7 @@ namespace Z0
 
             }
 
-            CheckAction(check, ApiTestIdentity.name(f));
+            CheckAction(check, SFx.name(f));
         }
     }
 }

@@ -8,46 +8,59 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static SFx;
 
     partial class Surrogates
     {
-        public readonly struct UnaryOp<T> : IUnaryOp<T>
+        /// <summary>
+        /// Captures a delegate that is exposed as an emitter
+        /// </summary>
+        public readonly struct Emitter<T> : SFx.IEmitter<T>
         {
             public OpIdentity Id {get;}
 
-            readonly Z0.UnaryOp<T> F;
+            readonly Z0.Emitter<T> F;
 
             [MethodImpl(Inline)]
-            internal UnaryOp(Z0.UnaryOp<T> f, OpIdentity id)
+            public Emitter(Z0.Emitter<T> f, OpIdentity id)
             {
                 F = f;
                 Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal UnaryOp(Z0.UnaryOp<T> f, string name)
+            public Emitter(Z0.Emitter<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = SFx.identity<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => F(a);
+            public T Invoke() => F();
 
-            public Z0.UnaryOp<T> Subject
+            public Z0.Emitter<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
 
             [MethodImpl(Inline)]
-            public Func<T,T> AsFunc()
+            public Func<T> AsFunc()
                 => SFx.surrogate(this);
 
             [MethodImpl(Inline)]
-            public static implicit operator Func<T,T>(UnaryOp<T> src)
+            public string Format()
+                => Id;
+
+            public override string ToString()
+                => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Func<T>(Emitter<T> src)
                 => src.AsFunc();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Emitter<T>(Func<T> src)
+                => SFx.canonical(src);
         }
     }
 }

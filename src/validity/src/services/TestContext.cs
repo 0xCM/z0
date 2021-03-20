@@ -177,18 +177,18 @@ namespace Z0
 
         protected string CaseName<C>(string root, C t = default)
             where C : unmanaged
-                => Context.CaseName<C>(root);
+                => Context.name<C>(root);
 
         protected string CaseName(OpIdentity id)
-            => Context.CaseName(id);
+            => Context.name(id);
 
         protected string CaseName<W,C>([Caller] string label = null, W w = default, C t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => Context.CaseName<W,C>(label, generic);
+                => Context.name<W,C>(label, generic);
 
         protected string CaseName(IFunc f)
-            => ApiTestIdentity.name(f);
+            => SFx.name(f);
 
         CasePaths GetCasePaths()
         {

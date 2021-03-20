@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Part;
-    using static memory;
 
     partial class BitGrid
     {
@@ -17,7 +16,7 @@ namespace Z0
         public static BitGrid64<N8,N8,T> transpose<T>(BitGrid64<N8,N8,T> g)
             where T : unmanaged
         {
-            var dst = alloc64<N8,N8,byte>();
+            var dst = z64<N8,N8,byte>();
             var src = cpu.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {

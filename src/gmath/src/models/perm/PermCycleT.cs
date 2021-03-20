@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Describes cycle in a perutation
@@ -20,7 +20,7 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                insist(gmath.eq(src[0].Source, src[len - 1].Target), "no");
+                root.require(gmath.eq(src[0].Source, src[len - 1].Target), () => "no");
 
             this.Terms = src;
         }
