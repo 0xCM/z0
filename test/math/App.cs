@@ -6,10 +6,19 @@ namespace Z0
 {
     public class MathTestApp : TestApp<MathTestApp>
     {
-        static void Main(params string[] args)
-            => Run(args);
+        static PartId[] Parts => root.array(PartId.MathSvc, PartId.Math, PartId.GMath);
 
-        public static void run(params string[] args)
-            => Run(args);
+        // static void Run(IWfShell wf)
+        // {
+        //     var flow = wf.Running();
+
+        //     wf.Ran(flow);
+        // }
+
+        // static void Main(params string[] args)
+        //     => Run(Parts, Run);
+
+        static void Main(params string[] args)
+            => Run(Parts, args);
     }
 }

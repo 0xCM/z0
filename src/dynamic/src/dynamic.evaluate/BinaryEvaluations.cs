@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryEvaluations(in Pairs<T> src, PairEvalResults<T> dst)
         {
-            Demands.insist(src.PointCount, dst.PointCount);
+            root.require(src.PointCount == dst.PointCount, () => "no");
             Source = src;
             Target = dst;
         }
 
-        public int PointCount
+        public uint PointCount
             => Source.PointCount;
 
         public ref Pair<T> First

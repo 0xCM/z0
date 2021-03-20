@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
 
     partial class TestApp<A>
     {
@@ -19,11 +18,22 @@ namespace Z0
 
         public static void Run(PartId part, params string[] units)
         {
+            Run(root.array(part), units);
+        }
+
+        public static void Run(Index<PartId> parts, params string[] units)
+        {
             var app = new A();
-            var shell = WfShell.create(WfShell.parts(new PartId[1]{part}), sys.empty<string>());
+            var shell = WfShell.create(WfShell.parts(parts), sys.empty<string>());
             app.InjectShell(shell);
             app.SetMode(InDiagnosticMode);
             app.RunTests(units);
+        }
+
+        public static void Run(Index<PartId> parts, Action<IWfShell> runner)
+        {
+            using var shell = WfShell.create(WfShell.parts(parts), sys.empty<string>());
+            runner(shell);
         }
     }
 }

@@ -177,8 +177,6 @@ namespace Z0
             var sampleMax = 10;
             var fp = typeof(T).IsFloatingPoint();
 
-            //Sink.AnalyzingEvaluation(api);
-
             var xLabel = eval.LeftLabel;
             var yLabel = eval.RightLabel;
 

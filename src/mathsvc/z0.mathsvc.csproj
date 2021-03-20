@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Pipes)" />
+    <ProjectReference Include="$(SFuncs)" />
   </ItemGroup>
 
 </Project>

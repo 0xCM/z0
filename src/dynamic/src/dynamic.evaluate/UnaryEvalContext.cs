@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public UnaryEvalContext(in EvalContext context, in UnaryEvaluations<T> dst)
         {
-            Demands.insist(dst.Source.Length, dst.Target.PointCount);
+            root.require(dst.Source.Length == dst.Target.PointCount, () => "no");
             Context = context;
             Target = dst;
         }
@@ -36,10 +36,10 @@ namespace Z0
              get => Target.Target;
         }
 
-        public int PointCount
-            => Target.Source.Length;
+        public uint PointCount
+            => (uint)Target.Source.Length;
 
-        public int DstCount
+        public uint DstCount
             => Target.Target.PointCount;
 
         public ApiMemberCode ApiCode

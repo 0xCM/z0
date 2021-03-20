@@ -14,7 +14,25 @@ namespace Z0
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
     {
-        void signum_check<T>(T t = default)
+       public void signum_8i()
+            => signum_check<sbyte>();
+
+        public void signum_16i()
+            => signum_check<short>();
+
+        public void signum_32i()
+            => signum_check<int>();
+
+        public void signum_64i()
+            => signum_check<long>();
+
+        public void signum_32f()
+            => signum_check<float>();
+
+        public void signum_64f()
+            => signum_check<double>();
+
+        void signum_check<T>()
             where T : unmanaged
         {
             var zero = Numeric.zero<T>();
@@ -23,7 +41,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
                 var actual = gmath.signum(x);
-                Claim.eq(expect,actual);
+                NumericClaims.eq(expect,actual);
             }
         }
 
@@ -31,16 +49,10 @@ namespace Z0
         void add_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
         {
-            if(DiagnosticMode)
-                term.print(text.concat("Executing", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
-
             var g = MSvc.add(t);
             var validator = this.BinaryOpMatch(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
-
-            if(DiagnosticMode)
-                term.print(text.concat("Execututed", Space, CallingMember.define(), $"[{typeof(T).DisplayName()}]"));
         }
 
         [MethodImpl(Inline)]
@@ -152,7 +164,7 @@ namespace Z0
             gAlg.increments(first, count, ref src);
 
             for(var i=0; i < count; i++)
-                Claim.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);
+                NumericClaims.eq(gmath.add(first, Numeric.force<T>(i)), data[i]);
         }
 
         public void add_check()
@@ -346,22 +358,6 @@ namespace Z0
             CheckAction(() => check_increments(z64i), CaseName(name, z64i));
         }
 
-        public void signum_8i()
-            => signum_check<sbyte>();
 
-        public void signum_16i()
-            => signum_check<short>();
-
-        public void signum_32i()
-            => signum_check<int>();
-
-        public void signum_64i()
-            => signum_check<long>();
-
-        public void signum_32f()
-            => signum_check<float>();
-
-        public void signum_64f()
-            => signum_check<double>();
     }
 }

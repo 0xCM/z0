@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BinaryEvalContext(in EvalContext context, in BinaryEvaluations<T> dst)
         {
-            Demands.insist(dst.Source.PointCount, dst.Target.PointCount);
+            root.require(dst.Source.PointCount == dst.Target.PointCount, () => "no");
             Context = context;
             Target = dst;
         }
@@ -36,7 +36,7 @@ namespace Z0
             get => Target.Target;
         }
 
-        public int PointCount
+        public uint PointCount
             => Target.Source.PointCount;
 
         public BufferTokens Buffers

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Part;
     using static memory;
@@ -27,13 +26,17 @@ namespace Z0
         public Pairs(Span<Pair<T>> data)
             => Data = data;
 
-        /// <summary>
-        /// Returns a mutable reference to an index-identified sequence element
-        /// </summary>
-        /// <param name="index">The zero-based sequence index</param>
-        [MethodImpl(Inline)]
-        public ref Pair<T> Select(int index)
-            => ref seek(Data, (uint)index);
+        public Span<Pair<T>> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<Pair<T>> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
 
         /// <summary>
         /// Returns a mutable reference to an index-identified sequence element
@@ -42,7 +45,17 @@ namespace Z0
         public ref Pair<T> this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref Select(index);
+            get => ref seek(Data, index);
+        }
+
+        /// <summary>
+        /// Returns a mutable reference to an index-identified sequence element
+        /// </summary>
+        /// <param name="index">The zero-based sequence index</param>
+        public ref Pair<T> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Data, index);
         }
 
         public ref Pair<T> First
@@ -54,10 +67,10 @@ namespace Z0
         /// <summary>
         /// Specifies the number of elements in the sequence
         /// </summary>
-        public int PointCount
+        public uint PointCount
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => (uint)Data.Length;
         }
 
         /// <summary>
@@ -73,5 +86,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Pairs<T>(Pair<T>[] src)
             => new Pairs<T>(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Pairings<T,T>(Pairs<T> src)
+            => new Pairings<T,T>(memory.recover<Pair<T>,Paired<T,T>>(src.Data));
     }
 }

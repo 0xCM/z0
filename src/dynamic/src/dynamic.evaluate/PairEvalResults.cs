@@ -43,7 +43,7 @@ namespace Z0
             get => ref Target.First;
         }
 
-        public int PointCount
+        public uint PointCount
         {
             [MethodImpl(Inline)]
             get => Target.PointCount;
