@@ -15,27 +15,27 @@ namespace Z0
         /// <summary>
         /// Derives the system random rng from polyrand
         /// </summary>
-        /// <param name="random">The source rng</param>
-        public static System.Random From(IPolySource random)
-            => new PolySystem(random);
+        /// <param name="source">The source rng</param>
+        public static System.Random From(IPolySource source)
+            => new PolySystem(source);
 
-        public PolySystem(IPolySource random)
-            => Random = random;
+        public PolySystem(IPolySource source)
+            => Source = source;
 
-        readonly IPolySource Random;
+        readonly IPolySource Source;
 
         public override int Next()
-            => Random.Next(Int32.MaxValue);
+            => Source.Next(Int32.MaxValue);
 
         public override int Next(int maxValue)
-            => Random.Next(maxValue);
+            => Source.Next(maxValue);
 
         public override int Next(int minValue, int maxValue)
-            => Random.Next(minValue,maxValue);
+            => Source.Next(minValue, maxValue);
 
         public override void NextBytes(byte[] buffer)
         {
-            var src = Random.Bytes().Take(buffer.Length);
+            var src = Source.Bytes().Take(buffer.Length);
             var i = 0;
             var it = src.GetEnumerator();
             while(it.MoveNext())
@@ -44,7 +44,7 @@ namespace Z0
 
         public override void NextBytes(Span<byte> buffer)
         {
-            var src = Random.Bytes().Take(buffer.Length);
+            var src = Source.Bytes().Take(buffer.Length);
             var i = 0;
             var it = src.GetEnumerator();
             while(it.MoveNext())
@@ -52,6 +52,6 @@ namespace Z0
         }
 
         public override double NextDouble()
-            => Random.Next<double>();
+            => Source.Next<double>();
     }
 }

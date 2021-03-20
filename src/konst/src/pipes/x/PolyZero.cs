@@ -9,19 +9,19 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     public static class PolyZero
     {
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
         /// </summary>
-        /// <param name="random">The random source</param>
+        /// <param name="source">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IDataStream<T> NonZStream<T>(this IDomainSource random, Interval<T> domain)
+        public static IDataStream<T> NonZStream<T>(this IDomainSource source, Interval<T> domain)
             where T : unmanaged
-                => PolyStreams.create<T>(random, domain, x => root.nonz(x));
+                => DataStreams.create<T>(source, domain, x => root.nonz(x));
 
         /// <summary>
         /// Queries the source for the next nonzero value within a range

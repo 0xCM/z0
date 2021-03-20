@@ -7,8 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     sealed class GammaSampler<T> : Sampler<T, GammaSpec<T>>
         where T : unmanaged
@@ -20,7 +20,7 @@ namespace Z0.Mkl
         }
 
         public GammaSampler(MklRng src, T alpha, T dx, T beta,  int? buferLen = null)
-            : base(src, GammaSpec<T>.Define(alpha, dx, beta), buferLen)
+            : base(src, Distributions.gamma(alpha, dx, beta), buferLen)
         {
 
         }
@@ -32,7 +32,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sample.gamma(Source, float64(DistSpec.Alpha), float64(DistSpec.Dx), float64(DistSpec.Beta), Spans.s64f(buffer));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
             return buffer.Length;
         }

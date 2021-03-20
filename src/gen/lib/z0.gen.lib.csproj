@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(DVec)" />
     <ProjectReference Include="$(Commands)" />
     <ProjectReference Include="$(Lang)" />
   </ItemGroup>

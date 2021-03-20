@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Defines a random variable
@@ -21,10 +21,10 @@ namespace Z0
 
         public readonly Interval<T> Domain;
 
-        public RVar(Interval<T> domain, IPolyrand random)
+        public RVar(Interval<T> domain, IDomainSource source)
         {
             Domain = domain;
-            stream = random.Stream<T>(domain);
+            stream = source.Stream<T>(domain);
         }
 
         /// <summary>

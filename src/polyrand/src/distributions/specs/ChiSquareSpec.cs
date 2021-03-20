@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Characterizes a bernouli distribution
@@ -17,21 +16,9 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public static implicit operator ChiSquareSpec<T>(int freedom)
-            => Define(freedom);
-
-        [MethodImpl(Inline)]
-        public static implicit operator int(ChiSquareSpec<T> src)
-            => src.Freedom;
-
-        [MethodImpl(Inline)]
-        public static ChiSquareSpec<T> Define(int freedom)
-            => new ChiSquareSpec<T>(freedom);
-
-        [MethodImpl(Inline)]
         public ChiSquareSpec(int freedom)
         {
-            this.Freedom = freedom;
+            Freedom = freedom;
         }
 
         /// <summary>
@@ -44,5 +31,13 @@ namespace Z0
         /// </summary>
         public DistributionKind DistKind
             => DistributionKind.Chi2;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ChiSquareSpec<T>(int freedom)
+            => new ChiSquareSpec<T>(freedom);
+
+        [MethodImpl(Inline)]
+        public static implicit operator int(ChiSquareSpec<T> src)
+            => src.Freedom;
     }
 }

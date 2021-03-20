@@ -23,7 +23,7 @@ namespace Z0
         /// <typeparam name="T">The seed type</typeparam>
         public static T Entropic<T>()
             where T : unmanaged
-                => Entropy.Value<T>();
+                => Entropy.value<T>();
 
         /// <summary>
         /// Produces a seed from embedded application resources that, for a given index, remanins fixed

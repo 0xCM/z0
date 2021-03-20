@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Implements a 16-bit random number generator
@@ -15,14 +15,6 @@ namespace Z0
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
     public class WyHash16 : IRngDomainValues<ushort>
     {
-        /// <summary>
-        /// Creates a wyhash 16-bit rng
-        /// </summary>
-        /// <param name="state">The initial state</param>
-        /// <param name="index">The stream index</param>
-        [MethodImpl(Inline)]
-        public static WyHash16 Define(ushort state, ushort? index = null)
-            => new WyHash16(state,index);
 
         [MethodImpl(Inline)]
         internal WyHash16(ushort state, ushort? index = null)

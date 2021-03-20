@@ -239,7 +239,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> gamma(MklRng src, float alpha, float dx, float beta, int? capacity = null)
-            => new GammaSampler<float>(src, GammaSpec<float>.Define(alpha, dx, beta), capacity);
+            => new GammaSampler<float>(src, Distributions.gamma(alpha, dx, beta), capacity);
 
         /// <summary>
         /// Creates gamma sampler for 64-bit floating point
@@ -251,7 +251,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> gamma(MklRng src, double alpha, double dx, double beta, int? capacity = null)
-            => new GammaSampler<double>(src, GammaSpec<double>.Define(alpha, dx, beta), capacity);
+            => new GammaSampler<double>(src, Distributions.gamma(alpha, dx, beta), capacity);
 
         /// <summary>
         /// Creates gamma sampler for 32-bit floating point

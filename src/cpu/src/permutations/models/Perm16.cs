@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
 
+
     /// <summary>
     /// Defines a 16-symbol permutation
     /// </summary>

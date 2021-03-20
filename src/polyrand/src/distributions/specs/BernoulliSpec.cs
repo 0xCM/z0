@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Characterizes a bernoulli distribution
@@ -26,17 +24,9 @@ namespace Z0
         public DistributionKind DistKind
             => DistributionKind.Bernoulli;
 
-        /// <summary>
-        /// Defines a Bernoulli distribution predicated on the probability of trial success
-        /// </summary>
-        /// <param name="p">The probability of success</param>
-        [MethodImpl(Inline)]
-        public static BernoulliSpec<T> Define(double p)
-            => new BernoulliSpec<T>(p);
-
         [MethodImpl(Inline)]
         public static implicit operator BernoulliSpec<T>(double p)
-            => Define(p);
+            => new BernoulliSpec<T>(p);
 
         [MethodImpl(Inline)]
         public static implicit operator double(BernoulliSpec<T> p)

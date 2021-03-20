@@ -12,8 +12,41 @@ namespace Z0
     [ApiHost]
     public readonly struct Distributions
     {
+        /// <summary>
+        /// Interprets a supplied spec as a gamma spec; an error
+        /// is raised if the spec does not define gamma distribution
+        /// </summary>
+        /// <param name="spec">The distribution specifier</param>
+        /// <typeparam name="T">The sample element type</typeparam>
+        [MethodImpl(Inline)]
+        public static GammaSpec<T> gamma<T>(IDistributionSpec<T> src)
+            where T : unmanaged
+                => (GammaSpec<T>)src;
+
+        /// <summary>
+        /// Defines a gamma distribution
+        /// </summary>
+        /// <param name="alpha"></param>
+        /// <param name="dx"></param>
+        /// <param name="beta"></param>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static GammaSpec<T> gamma<T>(T alpha, T dx, T beta)
+            where T : unmanaged
+                => new GammaSpec<T>(alpha : alpha, dx : RngMath.recip(beta), beta : beta);
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static RVar<T> rvar<T>(IPolyrand src, Interval<T> domain)
+        public static BinomialSpec<T> binomial<T>(IDistributionSpec<T> src)
+            where T : unmanaged
+                => (BinomialSpec<T>)src;
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static BinomialSpec<T> binomial<T>(T n, double p)
+            where T : unmanaged
+                => new BinomialSpec<T>(n,p);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static RVar<T> rvar<T>(IDomainSource src, Interval<T> domain)
             where T : unmanaged
                 => new RVar<T>(domain,src);
 
@@ -35,7 +68,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static BernoulliSpec<T> bernoulli<T>(double p)
             where T : unmanaged
-                => BernoulliSpec<T>.Define(p);
+                => new BernoulliSpec<T>(p);
 
         /// <summary>
         /// Interprets a supplied spec as a uniform spec; an error
@@ -57,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UniformSpec<T> uniform<T>(T min, T max)
             where T : unmanaged
-                => UniformSpec<T>.Define(min,max);
+                => new UniformSpec<T>(min,max);
 
         /// <summary>
         /// Defines a uniform distribution bound to an interval domain
@@ -67,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UniformSpec<T> uniform<T>(in Interval<T> domain)
             where T : unmanaged
-                => UniformSpec<T>.Define(domain);
+                => new UniformSpec<T>(domain);
 
         /// <summary>
         /// Interprets a supplied spec as a Gaussian spec; an error
@@ -109,6 +142,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static UniformBitsSpec<T> uniformbits<T>()
             where T : unmanaged
-                => UniformBitsSpec<T>.Define();
+                => default;
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
     using static memory;
 
     using G = WyHash64;
@@ -43,7 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong next(ref G g, ulong max)
-            => Rng.contract(g.Next(), max);
+            => RngMath.contract(g.Next(), max);
 
         [MethodImpl(Inline), Op]
         public static ulong next(ref G g, ulong min, ulong max)

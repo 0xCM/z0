@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Implements a 64-bit random number generator
@@ -34,11 +34,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Rng.contract(Next(),max);
+            => RngMath.contract(Next(),max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)
-            => min + Rng.contract(Next(),max - min);
+            => min + RngMath.contract(Next(),max - min);
 
         [MethodImpl(Inline)]
         static ulong NextState(ulong state)

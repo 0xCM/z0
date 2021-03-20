@@ -68,7 +68,7 @@ namespace Z0
                     yield return random.BitString(minlen, maxlen);
             }
 
-            return PolyStreams.create(produce());
+            return DataStreams.create(produce());
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Z0
     /// Facilities deterministic/repeatable executions of pseudorandom processes
     /// </summary>
     public static class PolySeed256
-    {        
-        static Guid[] guids = new Guid[]        
-        {   
+    {
+        static Guid[] guids = new Guid[]
+        {
             Guid.Parse("5bbf8e0e-86d7-4500-8d7a-d800a31aa74c"),
             Guid.Parse("e0ceda40-871f-454e-ae55-9e8014641f11"),
             Guid.Parse("af710899-ad13-4b38-8025-686cbd11f727"),
@@ -183,15 +183,13 @@ namespace Z0
             Guid.Parse("8cf3136f-6af6-4a4d-9cbf-013602b6103d"),
         };
 
-        public static ulong[] Default = Arrays.from(guids[18],guids[19]).ToU64Array();        
+        public static ulong[] Default = Arrays.from(guids[18],guids[19]).ToU64Array();
 
-        static string enquote(object content)
-            => "\"" + content + "\"";
         public static void generate()
         {
             static string guid()
-                => enquote(Guid.NewGuid().ToString());
-            
+                => text.enquote(Guid.NewGuid().ToString());
+
             for(var i = 0; i< 200; i++)
                 Console.WriteLine($"Guid.Parse({guid()}),");
         }

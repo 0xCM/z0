@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
     using System.Collections.Generic;
 
     public interface IDistribution<T> : IEnumerable<T>
@@ -14,10 +12,10 @@ namespace Z0
         IEnumerable<T> Sample();
     }
 
-    public interface IDistribution<S,T> : IDistribution<T> 
+    public interface IDistribution<S,T> : IDistribution<T>
         where S : IDistributionSpec
         where T : unmanaged
     {
-        
+
     }
 }

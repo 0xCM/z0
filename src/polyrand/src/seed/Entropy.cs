@@ -10,6 +10,7 @@ namespace Z0
     using System.Security.Cryptography;
 
     using static Part;
+    using static memory;
 
     public static class Entropy
     {
@@ -24,6 +25,21 @@ namespace Z0
             var dst = new byte[count];
             csp.GetBytes(dst);
             return dst;
+        }
+
+        [Op]
+        public static Index<byte> bytes(ByteSize count)
+        {
+            var dst = new byte[count];
+            fill(dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void fill(Span<byte> dst)
+        {
+            using var csp = new RNGCryptoServiceProvider();
+            csp.GetBytes(dst);
         }
 
         /// Produces a specified number of entropic primal values
@@ -45,12 +61,13 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static T Value<T>()
+        public static T value<T>()
             where T : unmanaged
         {
-            var typeBz = Unsafe.SizeOf<T>();
-            var src = Bytes(typeBz);
-            return MemoryMarshal.Cast<byte,T>(src)[0];
+            var count = size<T>();
+            var storage = default(T);
+            fill(memory.bytes(storage));
+            return storage;
         }
     }
 }

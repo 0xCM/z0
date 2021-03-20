@@ -4,11 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Characterizes a binomial distribution
@@ -29,12 +27,11 @@ namespace Z0
             => DistributionKind.Binomial;
 
         [MethodImpl(Inline)]
-        public static BinomialSpec<T> From(IDistributionSpec<T> src)
-            => (BinomialSpec<T>)src;
-
-        [MethodImpl(Inline)]
-        public static BinomialSpec<T> Define(T n, double p)
-            => new BinomialSpec<T>(n,p);
+        public BinomialSpec(T n, double p)
+        {
+            Trials = n;
+            Success = p;
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator (T n, double p)(BinomialSpec<T> spec)
@@ -43,13 +40,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BinomialSpec<T>((T n, double p) spec)
             => (spec.n, spec.p);
-
-
-        [MethodImpl(Inline)]
-        public BinomialSpec(T n, double p)
-        {
-            Trials = n;
-            Success = p;
-        }
     }
 }

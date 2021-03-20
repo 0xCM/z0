@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public static partial class RngStats
+    public static class PolyStats
     {
         /// <summary>
         /// Counts the number of sample points that lie within a specified interval
@@ -55,7 +55,7 @@ namespace Z0
             // metric
             var eps = (double)zed / (double)samples;
             var metric = ratio + eps;
-            return  Math.Round(metric,6);
+            return Math.Round(metric,6);
         }
     }
 }

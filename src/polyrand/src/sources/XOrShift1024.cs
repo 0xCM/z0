@@ -3,7 +3,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
     /// <summary>
     /// Implements an XOrShift generator
@@ -13,26 +13,20 @@ namespace Z0
     /// </remarks>
     public class XOrShift1024 : IRngDomainValues<ulong>
     {
-        readonly ulong[] state;
+        readonly ulong[] State;
 
-        int p;
-
-        [MethodImpl(Inline)]
-        public static IRngDomainValues<ulong> Define(params ulong[] seed)
-            => new XOrShift1024(seed);
+        int P;
 
         public XOrShift1024(ulong[] seed)
         {
-            if(seed.Length < 16)
-                throw new Exception($"Not enough seed! 1024 bits = 128 bytes = 16 longs are required");
-            this.state = seed;
+            root.require(seed.Length >= 16, () => $"Not enough seed! 1024 bits = 128 bytes = 16 longs are required");
+            State = seed;
         }
 
         public XOrShift1024(Span<byte> seed)
         {
-            if(seed.Length < 128)
-                throw new Exception($"Not enough seed! 1024 bits = 128 bytes are required");
-            this.state = Spans.s64u(seed).ToArray();
+            root.require(seed.Length >= 128, () => $"Not enough seed! 1024 bits = 128 bytes are required");
+            State = memory.recover<ulong>(seed).ToArray();
         }
 
         public RngKind RngKind
@@ -47,27 +41,27 @@ namespace Z0
             {
                 if ( (JT[i] & 1ul << b) != 0)
                     for(int j = 0; j < 16; j++)
-                        t[j] ^= state[(j + p) & 15];
+                        t[j] ^= State[(j + P) & 15];
                 Next();
             }
 
             for(int j = 0; j < 16; j++)
-                state[(j + p) & 15] = t[j];
+                State[(j + P) & 15] = t[j];
         }
 
         [MethodImpl(Inline)]
         public ulong Next()
         {
-            ulong s0 = state[p];
-            ulong s1 = state[p = (p + 1) & 15];
+            ulong s0 = State[P];
+            ulong s1 = State[P = (P + 1) & 15];
             s1 ^= s1 << 31; // a
-            state[p] = s1 ^ s0 ^ (s1 >> 11) ^ (s0 >> 30); // b,c
-            return state[p] * Multiplier;
+            State[P] = s1 ^ s0 ^ (s1 >> 11) ^ (s0 >> 30); // b,c
+            return State[P] * Multiplier;
         }
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => Rng.contract(Next(), max);
+            => RngMath.contract(Next(), max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)

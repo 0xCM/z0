@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Characterizes a Poisson distribution
@@ -17,18 +17,6 @@ namespace Z0
     public readonly struct PoissonSpec<T> : IDistributionSpec<T>
         where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static PoissonSpec<T> Define(double rate)
-            => new PoissonSpec<T>(rate);
-
-        [MethodImpl(Inline)]
-        public static implicit operator PoissonSpec<T>(double rate)
-            => Define(rate);
-
-        [MethodImpl(Inline)]
-        public static implicit operator double(PoissonSpec<T> spec)
-            => spec.Rate;
-
         [MethodImpl(Inline)]
         public PoissonSpec(double rate)
         {
@@ -45,5 +33,14 @@ namespace Z0
         /// </summary>
         public DistributionKind DistKind
             => DistributionKind.Poisson;
+
+        [MethodImpl(Inline)]
+        public static implicit operator PoissonSpec<T>(double rate)
+            => new PoissonSpec<T>(rate);
+
+        [MethodImpl(Inline)]
+        public static implicit operator double(PoissonSpec<T> spec)
+            => spec.Rate;
+
    }
 }

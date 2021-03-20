@@ -8,35 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Numeric;
-
-    public static class GammaSpec
-    {
-        /// <summary>
-        /// Interprets a supplied spec as a gamma spec; an error
-        /// is raised if the spec does not define gamma distribution
-        /// </summary>
-        /// <param name="spec">The distribution specifier</param>
-        /// <typeparam name="T">The sample element type</typeparam>
-        [MethodImpl(Inline)]
-        public static GammaSpec<T> From<T>(IDistributionSpec<T> src)
-            where T : unmanaged
-                => (GammaSpec<T>)src;
-
-        /// <summary>
-        /// Defines a gamma distribution
-        /// </summary>
-        /// <param name="alpha"></param>
-        /// <param name="dx"></param>
-        /// <param name="beta"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        [MethodImpl(Inline)]
-        public static GammaSpec<T> Define<T>(T alpha, T dx, T beta)
-            where T : unmanaged
-                => GammaSpec<T>.Define(alpha,dx, beta);
-
-    }
 
     /// <summary>
     /// Characterizes a Gamma distribution
@@ -46,15 +17,11 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public static GammaSpec<T> Define(T alpha, T dx, T beta)
-            => new GammaSpec<T>(alpha : alpha, dx : MathUtil.recip(beta), beta : beta);
-
-        [MethodImpl(Inline)]
-        GammaSpec(T alpha, T dx, T beta)
+        internal GammaSpec(T alpha, T dx, T beta)
         {
-            this.Alpha = alpha;
-            this.Dx = dx;
-            this.Beta = beta;
+            Alpha = alpha;
+            Dx = dx;
+            Beta = beta;
         }
 
         public readonly T Alpha;
@@ -68,17 +35,5 @@ namespace Z0
         /// </summary>
         public DistributionKind DistKind
             => DistributionKind.Gamma;
-    }
-
-    static class MathUtil
-    {
-        [MethodImpl(Inline)]
-        public static T recip<T>(T value)
-            where T : unmanaged
-        {
-            var x = force<T,double>(value);
-            var r = 1.0/x;
-            return Numeric.force<T>(r);
-        }
     }
 }

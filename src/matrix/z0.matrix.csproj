@@ -8,5 +8,6 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Gmath)" />
     <ProjectReference Include="$(Polyrand)" />
+    <ProjectReference Include="$(DVec)" />
   </ItemGroup>
 </Project>

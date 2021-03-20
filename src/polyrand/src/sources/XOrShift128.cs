@@ -7,37 +7,36 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
     public struct XOrShift128 : IRngSource, ISource<uint>
     {
-        uint a;
+        uint A;
 
-        uint b;
+        uint B;
 
-        uint c;
+        uint C;
 
-        uint d;
+        uint D;
 
         public XOrShift128(uint a, uint b, uint c, uint d)
         {
-            this.a = a;
-            this.b = b;
-            this.c = c;
-            this.d = d;
+            A = a;
+            B = b;
+            C = c;
+            D = d;
         }
 
         public XOrShift128(ReadOnlySpan<uint> state)
         {
-            insist(state.Length >= 4, $"The source length {state.Length} >= 4");
-            a = state[0];
-            b = state[1];
-            c = state[2];
-            d = state[3];
+            A = skip(state,0);
+            B = skip(state,1);
+            C = skip(state,2);
+            D = skip(state,3);
         }
 
         public RngKind RngKind
@@ -47,12 +46,12 @@ namespace Z0
         // The stream produced should have a period of 2^128 - 1
         public uint Next()
         {
-            var t = xorsl(a,15);
-            a = b;
-            b = c;
-            c = d;
-            d = Grind(d,t);
-            return d;
+            var t = xorsl(A,15);
+            A = B;
+            B = C;
+            C = D;
+            D = Grind(D,t);
+            return D;
         }
 
         [MethodImpl(Inline)]

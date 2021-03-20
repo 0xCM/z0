@@ -9,66 +9,63 @@ namespace Z0
 
     using static Part;
 
+    [ApiComplete]
     public static class PolySeed64
     {
         static int Count => RawBytes.Length >> 3;
 
-        [MethodImpl(Inline)]
-        public static ulong Lookup(uint i)
+        [MethodImpl(Inline), Op]
+        public static ulong lookup(uint i)
         {
-            if(i < Count)
-                return memory.cell<ulong>(RawBytes, (int)(i*8));
-            else
-            {
-                throw new Exception("bad");
-            }
+            var index = root.min(i, Count - 1);
+            return memory.cell<ulong>(RawBytes, (int)(index*8));
         }
 
-        public static ulong Seed00 => Lookup(0);
+        public static ulong Seed00 => lookup(0);
 
-        public static ulong Seed01 => Lookup(1);
+        public static ulong Seed01 => lookup(1);
 
-        public static ulong Seed02 => Lookup(2);
+        public static ulong Seed02 => lookup(2);
 
-        public static ulong Seed03 => Lookup(3);
+        public static ulong Seed03 => lookup(3);
 
-        public static ulong Seed04 => Lookup(4);
+        public static ulong Seed04 => lookup(4);
 
-        public static ulong Seed05 => Lookup(5);
+        public static ulong Seed05 => lookup(5);
 
-        public static ulong Seed06 => Lookup(6);
+        public static ulong Seed06 => lookup(6);
 
-        public static ulong Seed07 => Lookup(7);
+        public static ulong Seed07 => lookup(7);
 
-        public static ulong Seed08 => Lookup(8);
+        public static ulong Seed08 => lookup(8);
 
-        public static ulong Seed09 => Lookup(9);
+        public static ulong Seed09 => lookup(9);
 
-        public static ulong Seed10 => Lookup(10);
+        public static ulong Seed10 => lookup(10);
 
-        public static ulong Seed11 => Lookup(11);
+        public static ulong Seed11 => lookup(11);
 
-        public static ulong Seed12 => Lookup(12);
+        public static ulong Seed12 => lookup(12);
 
-        public static ulong Seed13 => Lookup(13);
+        public static ulong Seed13 => lookup(13);
 
-        public static ulong Seed14 => Lookup(14);
+        public static ulong Seed14 => lookup(14);
 
-        public static ulong Seed15 => Lookup(15);
+        public static ulong Seed15 => lookup(15);
 
-        public static ulong Seed16 => Lookup(16);
+        public static ulong Seed16 => lookup(16);
 
-        public static ulong Seed17 => Lookup(17);
+        public static ulong Seed17 => lookup(17);
 
-        public static ulong Seed18 => Lookup(18);
+        public static ulong Seed18 => lookup(18);
 
-        public static ulong Seed19 => Lookup(19);
+        public static ulong Seed19 => lookup(19);
 
-        public static ulong Seed20 => Lookup(20);
+        public static ulong Seed20 => lookup(20);
 
-        public static ulong Seed21 => Lookup(21);
+        public static ulong Seed21 => lookup(21);
 
-        public static ulong Seed22 => Lookup(22);
+        public static ulong Seed22 => lookup(22);
 
         /// <summary>
         /// See https://vcsjones.com/2019/02/01/csharp-readonly-span-bytes-static/ for an explanation of how the jit optimizes this

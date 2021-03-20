@@ -8,27 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     [ApiHost]
     public readonly struct Rng
     {
         /// <summary>
-        /// Evenly projects points from the interval [0,2^31 - 1] onto the interval [0,max]
+        /// Produces a non-deterministic seed
         /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
-        [MethodImpl(Inline), Op]
-        internal static uint contract(uint src, uint max)
-            => (uint)(((ulong)src * (ulong)max) >> 32);
+        /// <typeparam name="T">The seed type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static T entropy<T>()
+            where T : unmanaged
+                => Entropy.value<T>();
+        [Op]
+        public static Index<byte> entropy(ByteSize size)
+            => Entropy.bytes(size);
 
-        /// <summary>
-        /// Evenly projects points from the interval [0,2^63 - 1] onto the interval [0,max]
-        /// </summary>
-        /// <param name="src">The value to contract</param>
-        /// <param name="max">The maximum value in the target interval</param>
         [MethodImpl(Inline), Op]
-        internal static ulong contract(ulong src, ulong max)
-            => Math128.mulhi(src,max);
+        public static void entropy(Span<byte> dst)
+            => Entropy.fill(dst);
 
         [MethodImpl(Inline), Op]
         public static IPolyrand @default()
@@ -64,6 +63,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IPolyrand pcg64(ulong seed, ulong? index = null)
             => create(Pcg.pcg64(seed, index));
+
+        /// <summary>
+        /// Creates a wyhash 16-bit rng
+        /// </summary>
+        /// <param name="state">The initial state</param>
+        /// <param name="index">The stream index</param>
+        [MethodImpl(Inline), Op]
+        public static WyHash16 wyhash16(ushort state, ushort? index = null)
+            => new WyHash16(state,index);
 
         /// <summary>
         /// Creates a new WyHash16 generator

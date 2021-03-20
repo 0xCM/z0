@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
     /// <summary>
     /// Characterizes a Gaussian (normal) distribution
@@ -63,7 +63,7 @@ namespace Z0
             {
                 var sig = Numeric.force<T,double>(StdDev);
                 root.require(sig != 0, () => $"The invariant k := (sigma == 0) failed");
-                return Numeric.force<T>(MathUtil.recip(sig*sig));
+                return Numeric.force<T>(RngMath.recip(sig*sig));
             }
         }
 

@@ -5,25 +5,22 @@
 namespace Z0
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
     [ApiHost]
-    public static class PolyStreams
+    public readonly struct DataStreams
     {
         const NumericKind Closure = NumericKind.U64;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IEnumerable<T> src, RngKind kind)
+        public static IDataStream<T> create<T>(IEnumerable<T> src, ulong classifier = 0)
             where T : struct
-                => new DataStream<T>(src, (ulong)kind);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static IDataStream<T> create<T>(IEnumerable<T> src)
-            where T : struct
-                => new DataStream<T>(src);
+                => new DataStream<T>(src, classifier);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
@@ -33,17 +30,17 @@ namespace Z0
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src)
             where T : unmanaged
-                => create(forever<T>(src));
+                => DataStreams.create(forever<T>(src));
 
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, T min, T max)
             where T : unmanaged
-                => create(forever(src,min,max));
+                => DataStreams.create(forever(src,min,max));
 
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(forever(src, domain, filter));
+                => DataStreams.create(forever(src, domain, filter));
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -55,7 +52,7 @@ namespace Z0
         [Op, Closures(Closure)]
         public static IDataStream<T> create<T>(IDomainSource src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(forever(src, domain, filter));
+                => DataStreams.create(forever(src, domain, filter));
 
         [Op, Closures(Closure)]
         static IEnumerable<T> forever<T>(IDomainSource src, ClosedInterval<T> domain, Func<T,bool> filter)
@@ -128,5 +125,6 @@ namespace Z0
                 }
             }
         }
+
     }
 }

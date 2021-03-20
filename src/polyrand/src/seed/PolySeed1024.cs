@@ -10,8 +10,8 @@ namespace Z0
 
     public static class PolySeed1024
     {
-        static Guid[] FixedGuids = new Guid[]        
-        {   
+        static Guid[] FixedGuids = new Guid[]
+        {
             Guid.Parse("a719bf6a-b70f-473c-9a25-00f4f7169af7"),
             Guid.Parse("002ec328-4f86-4b48-8c4c-5c9002b8871b"),
             Guid.Parse("2664bdb7-7223-4026-b81b-44e509f7fa9b"),
@@ -46,13 +46,13 @@ namespace Z0
             Guid.Parse("58d433a1-6844-4adf-8596-e6cba3d35855"),
 
            };
- 
-        public static ulong[] TestSeed 
+
+        public static ulong[] TestSeed
             = Arrays.from(
                 FixedGuids[0],FixedGuids[1],FixedGuids[2],FixedGuids[3],
                 FixedGuids[4],FixedGuids[5],FixedGuids[6],FixedGuids[7]).ToU64Array();
-               
-        public static ulong[] AppSeed 
+
+        public static ulong[] AppSeed
             = Arrays.from(FixedGuids[16],FixedGuids[17],FixedGuids[18],FixedGuids[19],
                 FixedGuids[20],FixedGuids[21],FixedGuids[22],FixedGuids[23]).ToU64Array();
 
@@ -62,7 +62,6 @@ namespace Z0
 
         static ulong[] Entropy()
         {
-        
             using var csp = new RNGCryptoServiceProvider();
             var dst = new byte[1024];
             csp.GetBytes(dst);
@@ -70,6 +69,6 @@ namespace Z0
         }
 
         public static ulong[] Entropic
-            => Entropy(); 
+            => Entropy();
     }
 }
