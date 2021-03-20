@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITestOperatorMatch : ICheckBinaryCellOp, ICheckUnaryCellOp, ICheckNumericMatch
+    public interface ITestOperatorMatch : ICheckBinaryCellOp, ICheckNumericMatch
     {
 
     }

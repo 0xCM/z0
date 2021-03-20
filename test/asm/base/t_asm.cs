@@ -17,15 +17,12 @@ namespace Z0.Asm
 
         protected new IAsmContext Context;
 
-        AsmServices Services;
-
         protected IAsmChecker AsmCheck;
 
         protected override void OnShellInjected()
         {
             Context = AsmServices.context(Wf);
             AsmCheck = Z0.AsmChecks.tester(Context);
-            Services = AsmServices.create(Wf,Context);
             UnitDataDir.Clear();
         }
 

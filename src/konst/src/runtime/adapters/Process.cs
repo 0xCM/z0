@@ -777,7 +777,7 @@ namespace Z0.Adapters
         //     The process does not have an System.Diagnostics.Process.Id, or no process is
         //     associated with the System.Diagnostics.Process instance. -or- The associated
         //     process has exited.
-        public IndexedSeq<ProcessThread> Threads
+        public Index<ProcessThread> Threads
         {
             [MethodImpl(Inline)]
             get => Subject.Threads.Cast<D.ProcessThread>().Map(ProcessThread.adapt);

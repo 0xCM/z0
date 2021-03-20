@@ -114,7 +114,6 @@ namespace Z0
         public static Node<T> node<T>(T src)
             => new Node<T>(src);
 
-
         [Op, Closures(Closure)]
         public static string format(LinkType t)
             => render<string>().Format(t.Source.Name, t.Target.Name);

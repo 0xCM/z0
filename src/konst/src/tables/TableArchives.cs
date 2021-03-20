@@ -22,7 +22,7 @@ namespace Z0
             where R : struct, ITabular
         {
             if(data == null || data.Length == 0)
-                return Option.none<FS.FilePath>();
+                return root.none<FS.FilePath>();
 
             try
             {
@@ -35,7 +35,7 @@ namespace Z0
                 if(emitHeader)
                     writer.WriteLine(spec.FormatHeader());
 
-                z.iter(data, r => writer.WriteLine(r.DelimitedText(spec.Delimiter)));
+                root.iter(data, r => writer.WriteLine(r.DelimitedText(spec.Delimiter)));
                 return dst;
             }
             catch(Exception e)

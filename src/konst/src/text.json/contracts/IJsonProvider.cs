@@ -20,11 +20,4 @@ namespace Z0
         JsonText IJsonProvider.ToJson(object src)
             => ToJson((T)src);
     }
-
-    [Free]
-    public interface IJsonProvider<H,T> : IJsonProvider<T>
-        where H : struct, IJsonProvider<H,T>
-    {
-
-    }
 }

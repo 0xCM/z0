@@ -4,7 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITestDynamic :  ITestBinaryDynamic, ICheckUnaryDynamic, ICheckNumericDynamic, ICheckFixedDynamic
+    public interface ITestDynamic
+        : ITestBinaryDynamic,
+          ICheckUnaryDynamic,
+          ICheckNumericDynamic,
+          ICheckFixedDynamic
     {
 
     }

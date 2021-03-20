@@ -11,6 +11,7 @@ namespace Z0
     using static BufferSeqId;
 
     using K = BinaryOperatorClass;
+    using Test = TestFixedBinaryOp;
 
     public readonly struct CheckBinaryDynamic : ITestBinaryDynamic
     {
@@ -18,10 +19,6 @@ namespace Z0
 
         public IPolyrand Random
             => Matcher.Random;
-
-        [MethodImpl(Inline)]
-        public static ITestBinaryDynamic Service(ICheckBinaryCellOp matcher)
-            => new CheckBinaryDynamic(matcher);
 
         [MethodImpl(Inline)]
         internal static CheckBinaryDynamic Check(ICheckBinaryCellOp matcher)
@@ -64,42 +61,42 @@ namespace Z0
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
         public TestCaseRecord Match(K k, W16 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
         public TestCaseRecord Match(K k, W32 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
         public TestCaseRecord Match(K k, W64 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
         public TestCaseRecord Match(K k,  W128 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
         public TestCaseRecord Match(K k, W256 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+            return Test.Check(Random).Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
     }
 }

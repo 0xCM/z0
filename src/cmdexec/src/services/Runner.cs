@@ -165,11 +165,6 @@ namespace Z0
             }
         }
 
-        public void Run89(params Assembly[] src)
-        {
-            for(var i=0; i<src.Length; i++)
-                EmitEnums.create().Run(Wf, src[i]);
-        }
 
         public void Run233()
         {

@@ -1,8 +1,6 @@
 namespace Z0.Workers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Hosting;
@@ -10,19 +8,19 @@ namespace Z0.Workers
 
     public class Worker : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        readonly ILogger<Worker> _logger;
 
         public Worker(ILogger<Worker> logger)
         {
             _logger = logger;
         }
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        protected override async Task ExecuteAsync(CancellationToken cancel)
         {
-            while (!stoppingToken.IsCancellationRequested)
+            while (!cancel.IsCancellationRequested)
             {
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
+                await Task.Delay(1000, cancel);
             }
         }
     }

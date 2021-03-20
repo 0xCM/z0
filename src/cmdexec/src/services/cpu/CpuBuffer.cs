@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
-    using static Spans;
+    using static memory;
 
     [ApiComplete]
     public ref struct CpuBuffer

@@ -13,10 +13,7 @@ namespace Z0.Workers
         }
 
         static Worker worker(IServiceProvider provider)
-        {
-            var logger = provider.GetService<ILogger<Worker>>();
-            return new Worker(logger);
-        }
+            => new Worker(provider.GetService<ILogger<Worker>>());
 
         public static IHostBuilder CreateHostBuilder(string[] args)
             => Host.CreateDefaultBuilder(args)
