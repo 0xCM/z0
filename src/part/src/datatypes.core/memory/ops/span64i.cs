@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<long> span64i<T>(in T src)
             where T : struct
-                => recover<long>(AsBytes(CreateSpan(ref edit(src), 1)));
+                => recover<long>(bytes(src));
 
         /// <summary>
         /// Creates a u32 span from a bytespan

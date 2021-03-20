@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static memory;
-
     partial class ClrQuery
     {
         /// <summary>
@@ -31,10 +29,9 @@ namespace Z0
             var count = src.Length;
             var methods = root.list<TaggedMethod<A>>();
             var found = 0;
-            var input = span(src);
             for(var i=0; i<count; i++)
             {
-                var method = skip(input,i);
+                var method = src[i];
                 if(method.Tag<A>(out var a))
                     methods.Add((method,a));
             }

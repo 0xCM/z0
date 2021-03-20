@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
-    using static Part;
+
+    using static Root;
 
     partial class ClrQuery
     {
@@ -41,9 +41,5 @@ namespace Z0
             dst.Modifier = dst.IsIn ? "in " : dst.IsOut ? "out " : dst.IsByRef ? "ref " : EmptyString;
             return dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static ClrPrimitiveInfo Describe(this ClrPrimalKind src)
-            => new ClrPrimitiveInfo(src, ClrPrimitives.width(src), ClrPrimitives.sign(src), (PrimalCode)ClrPrimitives.code(src));
     }
 }

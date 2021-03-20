@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    using static Part;
+    using static Root;
 
     partial class ClrQuery
     {

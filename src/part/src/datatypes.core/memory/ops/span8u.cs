@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
@@ -20,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<byte> span8u<T>(in T src)
             where T : struct
-                => AsBytes(CreateSpan(ref edit(src), 1));
+                => bytes(src);
     }
 }

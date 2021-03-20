@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
@@ -20,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ushort> span16u<T>(in T src)
             where T : struct
-                => recover<ushort>(AsBytes(CreateSpan(ref edit(src), 1)));
+                => recover<ushort>(bytes(src));
 
         /// <summary>
         /// Creates a u16 span from a T-cell reference

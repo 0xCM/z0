@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {
@@ -20,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<ulong> span64u<T>(in T src)
             where T : struct
-                => recover<ulong>(AsBytes(CreateSpan(ref edit(src), 1)));
+                => recover<ulong>(bytes(src));
 
         /// <summary>
         /// Creates a u32 span from a bytespan

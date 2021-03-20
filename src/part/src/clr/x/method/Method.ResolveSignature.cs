@@ -7,8 +7,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static Part;
-
     partial class ClrQuery
     {
         public static CliSig ResolveSignature(this MethodInfo src)

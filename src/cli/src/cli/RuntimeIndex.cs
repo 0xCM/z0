@@ -8,10 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Collections.Concurrent;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static memory;
 
     partial struct Cil
     {

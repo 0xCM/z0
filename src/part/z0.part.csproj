@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Core)" />
     <ProjectReference Include="$(Interop)" />
     <ProjectReference Include="$(Sys)" />
+    <ProjectReference Include="$(Clr)" />
   </ItemGroup>
 
 </Project>

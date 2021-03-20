@@ -94,9 +94,9 @@ namespace Z0
                 case ShowRuntimeArchiveCmd.CmdName:
                     Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
-                case EmitImageMapsCmd.CmdName:
-                    Builder.EmitImageMaps().RunTask(Wf);
-                    break;
+                // case EmitImageMapsCmd.CmdName:
+                //     Builder.EmitImageMaps().RunTask(Wf);
+                //     break;
                 case EmitHexIndexCmd.CmdName:
                     Builder.EmitHexIndex().RunTask(Wf);
                 break;
@@ -112,9 +112,9 @@ namespace Z0
                 case BuildProjectCmd.CmdName:
                     Builder.Build().RunTask(Wf);
                 break;
-                case EmitImageContentCmd.CmdName:
-                    Builder.EmitImageContent().RunDirect(Wf);
-                break;
+                // case EmitImageContentCmd.CmdName:
+                //     Builder.EmitImageContent().RunDirect(Wf);
+                //break;
                 case RunPartCmd.CmdName:
                     Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();
                     break;
@@ -151,10 +151,10 @@ namespace Z0
             }
         }
 
-        void Run(in EmitImageMapsCmd cmd)
-        {
-            cmd.Dispatch(Wf).Wait();
-        }
+        // void Run(in EmitImageMapsCmd cmd)
+        // {
+        //     cmd.Dispatch(Wf).Wait();
+        // }
 
         void EmitProcessDump()
         {
