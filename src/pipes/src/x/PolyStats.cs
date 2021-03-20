@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public static class PolyStats
+    partial class XSource
     {
         /// <summary>
         /// Counts the number of sample points that lie within a specified interval
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="samples">The sample count</param>
         public static double SignRatio(IDomainSource source, long samples, long radius)
         {
-            var domain = Interval.closed(0 - math.abs(radius), 0 + math.abs(radius));
+            var domain = Z0.Interval.closed(0 - math.abs(radius), 0 + math.abs(radius));
             var pos = 0L;
             var neg = 0L;
             var zed = 0L;

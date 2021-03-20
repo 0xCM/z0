@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Part;
     using static memory;
@@ -19,83 +18,36 @@ namespace Z0
         readonly ISource Provider;
 
         [MethodImpl(Inline), Op]
-        public static Cell8 next(ISource source, W8 w)
-            => source.Next<byte>();
-
-        [MethodImpl(Inline), Op]
-        public static Cell16 next(ISource source, W16 w)
-            => source.Next<ushort>();
-
-        [MethodImpl(Inline), Op]
-        public static Cell32 next(ISource source, W32 w)
-            => source.Next<uint>();
-
-        [MethodImpl(Inline), Op]
-        public static Cell64 next(ISource source, W64 w)
-            => source.Next<ulong>();
-
-        [MethodImpl(Inline), Op]
-        public static Cell128 next(ISource source, W128 w)
-            => source.ConstPair<ulong>();
-
-        [MethodImpl(Inline), Op]
-        public static Cell256 next(ISource source, W256 w)
-        {
-            var dst = Cell256.Empty;
-            ref var storage = ref Unsafe.As<Cell256,Vector256<ulong>>(ref dst);
-            storage = storage.WithLower(next(source,w128));
-            storage = storage.WithUpper(next(source,w128));
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static Cell512 next(ISource source, W512 w)
-        {
-            var lo = next(source,w256);
-            var hi = next(source,w256);
-            return new Cell512(lo,hi);
-        }
-
-        [MethodImpl(Inline)]
-        public static CellSource<F> create<F>(ISource provider)
-            where F : struct, IDataCell
-                => new CellSource<F>(provider);
-
-        [MethodImpl(Inline), Op]
-        public static CellSource create(ISource provider)
-            => new CellSource(provider);
-
-        [MethodImpl(Inline), Op]
         public CellSource(ISource provider)
             => Provider = provider;
 
         [MethodImpl(Inline), Op]
         public Cell8 next(W8 w)
-            => create<Cell8>(Provider).Next();
+            => Sources.cellsource<Cell8>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell16 next(W16 w)
-            => create<Cell16>(Provider).Next();
+            => Sources.cellsource<Cell16>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell32 next(W32 w)
-            => create<Cell32>(Provider).Next();
+            => Sources.cellsource<Cell32>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell64 next(W64 w)
-            => create<Cell64>(Provider).Next();
+            => Sources.cellsource<Cell64>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell128 next(W128 w)
-            => create<Cell128>(Provider).Next();
+            => Sources.cellsource<Cell128>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell256 next(W256 w)
-            => create<Cell256>(Provider).Next();
+            => Sources.cellsource<Cell256>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public Cell512 next(W512 w)
-            => create<Cell512>(Provider).Next();
+            => Sources.cellsource<Cell512>(Provider).Next();
 
         [MethodImpl(Inline), Op]
         public static Func<Cell64> emitter(ISource source, W64 w, NumericKind nk)

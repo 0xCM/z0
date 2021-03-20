@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public static class PolyRaze
+    partial class XSource
     {
         /// <summary>
         /// Produces an array of random values

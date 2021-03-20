@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public static class PolyNats
+    partial class XSource
     {
         /// <summary>
         /// Allocates a span of natural dimensions and populates it with random values
@@ -61,14 +61,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => Z0.TableSpans.load<M,N,T>(src.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);
 
-        static Span<T> create<T>(IDomainSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
-            where T : unmanaged
-        {
-            var dst = span<T>(length);
-            src.Fill(domain, length, ref first(dst), filter);
-            return dst;
-        }
-
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values
         /// </summary>
@@ -78,7 +70,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)nat64u(n), Interval<T>.Full);
+                => Sources.polyspan<T>(src, (int)nat64u(n), Z0.Interval<T>.Full);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -89,7 +81,7 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, T min, T max, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)nat64u(n), (min, max));
+                => Sources.polyspan<T>(src, (int)nat64u(n), (min, max));
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -100,6 +92,6 @@ namespace Z0
         public static Span<T> Span<N,T>(this IDomainSource src, Interval<T> domain, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => create<T>(src, (int)nat64u(n), domain);
+                => Sources.polyspan<T>(src, (int)nat64u(n), domain);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector128<T> CpuVector<T>(this ISource src, N128 w)
             where T : unmanaged
-                => src.Blocks<T>(w).LoadVector();
+                => src.SpanBlocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -31,7 +31,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector256<T> CpuVector<T>(this ISource src, N256 w)
             where T : unmanaged
-                => src.Blocks<T>(w).LoadVector();
+                => src.SpanBlocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -41,7 +41,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector512<T> CpuVector<T>(this ISource src, N512 w)
             where T : unmanaged
-                => src.Blocks<T>(w).LoadVector();
+                => src.SpanBlocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a 128-bit cpu vector over random T-cells
@@ -51,7 +51,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector128<T> CpuVector<T>(this ISource source, Vec128Kind<T> k, W128 w = default)
             where T : unmanaged
-                => source.Blocks<T>(w).LoadVector();
+                => source.SpanBlocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -61,7 +61,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector256<T> CpuVector<T>(this ISource src, Vec256Kind<T> k, W256 w = default)
             where T : unmanaged
-                => src.Blocks<T>(w).LoadVector();
+                => src.SpanBlocks<T>(w).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -71,7 +71,7 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector512<T> CpuVector<T>(this ISource src, Vec512Kind<T> k)
             where T : unmanaged
-                => src.Blocks<T>(w512).LoadVector();
+                => src.SpanBlocks<T>(w512).LoadVector();
 
         /// <summary>
         /// Produces a stream of 128-bit cpu vectors over random T-cells
@@ -109,7 +109,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IDomainSource src, N128 w, Interval<T> domain)
             where T : unmanaged
-                => src.Blocks<T>(w,domain,1).LoadVector();
+                => src.SpanBlocks<T>(w,domain,1).LoadVector();
 
         /// <summary>
         /// Produces a stream of 128-bit cpu vectors over random T-cells, each bound to a specified common domain
@@ -137,7 +137,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this IDomainSource src, N128 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => src.Blocks<T>(w, domain, 1, filter).LoadVector();
+                => src.SpanBlocks<T>(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a 256-bit cpu vector over random T-cells, each bound to a specified common domain
@@ -149,7 +149,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IDomainSource src, N256 w, Interval<T> domain)
             where T : unmanaged
-                => src.Blocks<T>(w, domain, 1).LoadVector();
+                => src.SpanBlocks<T>(w, domain, 1).LoadVector();
 
         /// <summary>
         /// Produces a stream of 256-bit cpu vectors over random T-cells, each bound to a specified common domain
@@ -177,7 +177,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this IDomainSource src, N256 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => src.Blocks<T>(w, domain, 1, filter).LoadVector();
+                => src.SpanBlocks<T>(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 512-bit cpu vector
@@ -190,7 +190,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> CpuVector<T>(this IDomainSource src, N512 w, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => src.Blocks(w, domain, 1, filter).LoadVector();
+                => src.SpanBlocks(w, domain, 1, filter).LoadVector();
 
         /// <summary>
         /// Produces a random 512-bit cpu vector
@@ -214,7 +214,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<T> CpuVector<T>(this ISource src, N128 w, T t)
             where T : unmanaged
-                => src.Blocks<T>(w,1).LoadVector();
+                => src.SpanBlocks<T>(w,1).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -226,7 +226,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<T> CpuVector<T>(this ISource src, N256 w, T t)
             where T : unmanaged
-                => src.Blocks<T>(w,1).LoadVector();
+                => src.SpanBlocks<T>(w,1).LoadVector();
 
         /// <summary>
         /// Produces a random 256-bit cpu vector
@@ -237,6 +237,6 @@ namespace Z0
         /// <typeparam name="T">The vector component type</typeparam>
         public static Vector512<T> CpuVector<T>(this ISource src, N512 w, T t)
             where T : unmanaged
-                => src.Blocks<T>(w,1).LoadVector();
+                => src.SpanBlocks<T>(w,1).LoadVector();
     }
 }

@@ -8,8 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
+    using static Part;
+
     partial struct Sources
     {
+        [MethodImpl(Inline)]
+        public static CellSource<F> cellsource<F>(ISource provider)
+            where F : struct, IDataCell
+                => new CellSource<F>(provider);
+
+        [MethodImpl(Inline), Op]
+        public static CellSource cellsource(ISource provider)
+            => new CellSource(provider);
+
         public static IEnumerable<F> cells<F>(ICellValues<F> source)
             where F : struct, IDataCell
         {

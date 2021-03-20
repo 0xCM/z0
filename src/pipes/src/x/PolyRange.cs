@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    public static class PolyRange
+    partial class XSource
     {
         /// <summary>
         /// Produces a random closed interval [a,b] where a >= min and b < max

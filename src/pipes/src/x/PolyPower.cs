@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public static class PolyPower
+    partial class XSource
     {
         /// <summary>
         /// Produces a random power of 2 within the primal type domain

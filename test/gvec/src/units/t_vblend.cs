@@ -197,11 +197,11 @@ namespace Z0
 
             for(var sample=0; sample<RepCount; sample++)
             {
-                var xs = Random.Blocks<ulong>(n);
+                var xs = Random.SpanBlocks<ulong>(n);
                 var x = xs.LoadVector();
                 Claim.veq(x, cpu.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
-                var ys = Random.Blocks<ulong>(n);
+                var ys = Random.SpanBlocks<ulong>(n);
                 var y = ys.LoadVector();
                 Claim.veq(y, cpu.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 

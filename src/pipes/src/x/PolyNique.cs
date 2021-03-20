@@ -12,7 +12,7 @@ namespace Z0
     using static Part;
     using static NumericCast;
 
-    public static class PolyNique
+    partial class XSource
     {
         /// <summary>
         /// Samples the source values without replacement

@@ -153,8 +153,8 @@ namespace Z0
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var xb = Random.Blocks<T>(w, blocks);
-            var yb = Random.Blocks<T>(w, blocks);
+            var xb = Random.SpanBlocks<T>(w, blocks);
+            var yb = Random.SpanBlocks<T>(w, blocks);
             var zb = Z0.SpanBlocks.alloc<T>(w, blocks);
             Blocked.or(xb,yb,zb);
 
@@ -170,8 +170,8 @@ namespace Z0
             var step = stats.BlockLength;
             var cells = stats.CellCount;
 
-            var xb = Random.Blocks<T>(w, blocks);
-            var yb = Random.Blocks<T>(w, blocks);
+            var xb = Random.SpanBlocks<T>(w, blocks);
+            var yb = Random.SpanBlocks<T>(w, blocks);
             var zb = Z0.SpanBlocks.alloc<T>(w, blocks);
             Blocked.or(xb,yb,zb);
 

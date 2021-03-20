@@ -9,7 +9,7 @@ namespace Z0
 
     using static memory;
 
-    public static class PolyFill
+    partial class XSource
     {
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from a random source

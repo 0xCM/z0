@@ -8,6 +8,8 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(MklApi)" />
+    <ProjectReference Include="$(DVec)" />
+
   </ItemGroup>
 
 </Project>

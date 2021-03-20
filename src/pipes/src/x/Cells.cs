@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static CellSource;
-
-    partial class XCell
+    partial class XSource
     {
         /// <summary>
         /// Creates a stream of fixed values
@@ -18,7 +16,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> Cells<F>(this ISource src)
             where F: unmanaged, IDataCell
-                => Sources.cells(create<F>(src));
+                => Sources.cells(Sources.cellsource<F>(src));
 
         /// <summary>
         /// Creates a cell index of specified count

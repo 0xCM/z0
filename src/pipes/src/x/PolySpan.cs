@@ -7,8 +7,9 @@ namespace Z0
     using System;
 
     using static memory;
+    using static Sources;
 
-    public static class PolySpan
+    partial class XSource
     {
         /// <summary>
         /// Produces a span of random values
@@ -25,14 +26,6 @@ namespace Z0
             return dst;
         }
 
-        static Span<T> create<T>(IDomainSource src, int length, Interval<T> domain, Func<T,bool> filter = null)
-            where T : unmanaged
-        {
-            var dst = span<T>(length);
-            src.Fill(domain, length, ref first(dst), filter);
-            return dst;
-        }
-
         /// <summary>
         /// Produces a span of random values constraint to a specified domain
         /// </summary>
@@ -42,7 +35,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> Span<T>(this IDomainSource src, int length, T min, T max, Func<T,bool> filter = null)
             where T : unmanaged
-                => create<T>(src, length, (min, max), filter);
+                => polyspan<T>(src, length, (min, max), filter);
 
         /// <summary>
         /// Produces a span of random values
@@ -59,7 +52,6 @@ namespace Z0
             src.Fill(domain, length, ref first(dst));
             return dst;
         }
-
 
         /// <summary>
         /// Produces a span of random values constraint to a specified domain

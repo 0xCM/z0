@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public static class PolyShuffle
+    partial class XSource
     {
         /// <summary>
         /// Shuffles span content in-place

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Part;
 
-    public static class PolyZero
+    partial class XSource
     {
         /// <summary>
         /// Produces a stream of nonzero uniformly random values

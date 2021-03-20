@@ -9,16 +9,15 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static CellSource;
 
     public struct CellSource<F> : ICellValues<F>
         where F : struct, IDataCell
     {
-        readonly ISource Values;
+        readonly ISource DataSource;
 
         [MethodImpl(Inline)]
         public CellSource(ISource source)
-            => Values = source;
+            => DataSource = source;
 
         [MethodImpl(Inline)]
         public F Next()
@@ -53,25 +52,32 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        F pull(W8 w) => cell(next(Values, w));
+        F pull(W8 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W16 w) => cell(next(Values, w));
+        F pull(W16 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W32 w) => cell(next(Values, w));
+        F pull(W32 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W64 w) => cell(next(Values, w));
+        F pull(W64 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W128 w) => cell(next(Values, w));
+        F pull(W128 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W256 w) => cell(next(Values, w));
+        F pull(W256 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
-        F pull(W512 w) => cell(next(Values, w));
+        F pull(W512 w)
+            => cell(Sources.cell(DataSource, w));
 
         [MethodImpl(Inline)]
         static F cell<K>(in K x)

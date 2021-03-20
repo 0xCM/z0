@@ -100,7 +100,7 @@ namespace Z0
             var w = w128;
             var count = Pow2.T08;
 
-            var src = Random.Blocks<int>(w, count);
+            var src = Random.SpanBlocks<int>(w, count);
             var dst = SpanBlocks.alloc<int>(w, count);
 
             Claim.eq(src.CellCount, dst.CellCount);

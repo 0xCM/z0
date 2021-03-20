@@ -9,6 +9,7 @@
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Matrix)" />
+    <ProjectReference Include="$(DVec)" />
 
   </ItemGroup>
 

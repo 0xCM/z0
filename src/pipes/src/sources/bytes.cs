@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
     using static Part;
@@ -17,15 +16,14 @@ namespace Z0
         /// Produces an interminable stream of random bytes
         /// </summary>
         /// <param name="src">The data source</param>
-        public static IEnumerable<byte> bytes(ISource src)
+        [Op]
+        public static IEnumerable<byte> bytes(ISource source)
         {
-            var cache = new byte[8];
             while(true)
             {
-                var value = src.Next<ulong>();
-                Pipes.deposit(value,cache);
-                for(var i=0; i < cache.Length; i++)
-                    yield return cache[i];
+                var u64 = source.Next<ulong>();
+                for(byte i=0; i<8; i++)
+                    yield return @byte(u64, i);
             }
         }
 
@@ -50,17 +48,6 @@ namespace Z0
 
                     yield return bytes[k];
                 }
-            }
-        }
-
-        [Op]
-        static IEnumerable<byte> stream(W8 w, ISource source)
-        {
-            while(true)
-            {
-                var u64 = source.Next<ulong>();
-                for(byte i=0; i<8; i++)
-                    yield return @byte(u64,i);
             }
         }
     }

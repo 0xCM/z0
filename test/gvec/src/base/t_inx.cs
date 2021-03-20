@@ -37,8 +37,8 @@ namespace Z0
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
-                var lData = Random.Blocks<T>(w,blockcount);
-                var rData = Random.Blocks<T>(w,blockcount);
+                var lData = Random.SpanBlocks<T>(w,blockcount);
+                var rData = Random.SpanBlocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
@@ -60,8 +60,8 @@ namespace Z0
 
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
-                var lData = Random.Blocks<T>(w,blockcount);
-                var rData = Random.Blocks<T>(w,blockcount);
+                var lData = Random.SpanBlocks<T>(w,blockcount);
+                var rData = Random.SpanBlocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
@@ -85,7 +85,7 @@ namespace Z0
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var data = Random.Blocks<T>(w,blockcount);
+                var data = Random.SpanBlocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
@@ -109,7 +109,7 @@ namespace Z0
             for(var cycle = 0; cycle < CycleCount; cycle++)
             {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
-                var data = Random.Blocks<T>(w,blockcount);
+                var data = Random.SpanBlocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)

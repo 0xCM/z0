@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public static class PolyStream
+    partial class XSource
     {
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source

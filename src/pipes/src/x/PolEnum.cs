@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public static class PolEnum
+    partial class XSource
     {
         /// <summary>
         /// Produces a stream of values sampled from an enum
@@ -19,7 +19,7 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var names = Enum.GetNames(typeof(E)).Mapi((index, name) => (index, name)).ToDictionary();
-            var domain = Interval.closed(0, names.Count);
+            var domain = Z0.Interval.closed(0, names.Count);
             var stream = src.Stream(domain);
 
             while(true)
