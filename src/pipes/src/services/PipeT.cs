@@ -8,27 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static SFx;
 
-    public readonly struct Pipe<S,T> : IPipe<S,T>
+    public readonly struct Pipe<T> : IPipe<T>
     {
-        readonly IWfShell Wf;
+        readonly PipeBuffer<T> Buffer;
 
-        readonly PipeBuffer<S> Buffer;
-
-        readonly SFx.IProjector<S,T> Projector;
+        readonly IProjector<T> Projector;
 
         [MethodImpl(Inline)]
-        internal Pipe(IWfShell wf, PipeBuffer<S> buffer, SFx.IProjector<S,T> projector)
+        internal Pipe(PipeBuffer<T> buffer, IProjector<T> projector)
         {
-            Wf = wf;
             Buffer = buffer;
             Projector = projector;
         }
 
         [MethodImpl(Inline)]
-        public void Deposit(S src)
+        public void Deposit(T src)
             => Buffer.Enqueue(src);
 
+        [MethodImpl(Inline)]
         public bool Next(out T dst)
         {
             if(Buffer.TryDequeue(out var src))

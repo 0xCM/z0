@@ -64,6 +64,8 @@ public enum PartId : ulong
 
     SFuncs = 49,
 
+    Pipes = 50,
+
     Clr = 60,
 
     Cli = 61,

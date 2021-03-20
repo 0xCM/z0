@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
+
     partial struct Pipes
     {
-        [Op]
-        public static IPipeRunner runner(IWfShell wf)
-            => PipeRunnerSvc.create(wf);
+        public static IPipeRunner runner()
+            => default(PipeRunner);
     }
 }

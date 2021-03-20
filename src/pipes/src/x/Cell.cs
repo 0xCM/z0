@@ -8,22 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     partial class XCell
     {
-        [Op]
-        public static string FormatHexData(this Cell128 src, byte? count = null)
-        {
-            var c = count ?? 16;
-            if(c <= 16)
-            {
-                var data = slice(bytes(src), 0, c);
-                return HexFormat.format(data, HexFormatSpecs.HexData);
-            }
-            return "!!FormatError!!";
-        }
-
         [MethodImpl(Inline), Op]
         public static Cell8 Cell(this ISource src, W8 w)
             => CellSource.next(src, w);

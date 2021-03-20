@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static Demands;
     using static memory;
 
     /// <summary>
@@ -64,7 +63,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
-            reason(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");
+            var len = src.Length;
+            root.require(len >= CellCount, () =>  $"length(src) = {len} < {CellCount} = SpanLength");
             return new TableSpan<M,N,T>(src);
         }
 
@@ -77,14 +77,15 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(Span<T> src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
+            var len = src.Length;
+            root.require(len == CellCount, () => $"length(src) = {len} != {CellCount} = SpanLength");
             data = src;
         }
 
         [MethodImpl(Inline)]
         internal TableSpan(T[] src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
+            root.require(src.Length == CellCount, () => $"length(src) = {src.Length} != {CellCount} = SpanLength");
             data = src;
         }
 
@@ -98,7 +99,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(ReadOnlySpan<T> src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
+            var len = src.Length;
+            root.require(src.Length == CellCount, () => $"length(src) = {len} != {CellCount} = SpanLength");
             data = src.ToArray();
         }
 
@@ -179,7 +181,7 @@ namespace Z0
 
         public ref NatSpan<M,T> Col(int col, ref NatSpan<M,T> dst)
         {
-            reason(col >= 0 && col < ColCount, $"The column index {col} is out of range");
+            root.require(col >= 0 && col < ColCount, () => $"The column index {col} is out of range");
 
             for(var row = 0; row < ColLength; row++)
                 dst[row] = data[row*RowLength + col];
@@ -189,7 +191,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatSpan<N,T> Row(int row)
         {
-            reason(row >= 0 && row < RowCount, $"The row index {row} is out of range");
+            root.require(row >= 0 && row < RowCount, () => $"The row index {row} is out of range");
             return data.Slice(row * RowLength, RowLength);
         }
 

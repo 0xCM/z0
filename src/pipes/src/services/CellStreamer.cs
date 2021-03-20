@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static F Fixed<K>(in K x)
             where K : struct
-                => z.@as<K,F>(x);
+                => memory.@as<K,F>(x);
 
         public static Func<F> CreateEmitter(ISource source, CellWidth width, NumericKind nk)
         {

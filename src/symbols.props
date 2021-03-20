@@ -82,6 +82,7 @@
     <Nats>$(Src)nats/z0.nats.csproj</Nats>
 
     <Polyrand>$(Src)polyrand/z0.polyrand.csproj</Polyrand>
+    <Pipes>$(Src)pipes/z0.pipes.csproj</Pipes>
 
     <SFuncs>$(Src)sfuncs/z0.sfuncs.csproj</SFuncs>
     <Stats>$(Src)stats/z0.stats.csproj</Stats>

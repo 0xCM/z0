@@ -22,13 +22,12 @@ namespace Z0
         IReceiver<T> Receiver {get;}
 
         bool Connected {get;}
-
     }
 
     [Free]
     public interface IPipeline<C,S,T> : IPipeline<S,T>
         where C : IPipeline<C,S,T>
     {
-        C Connect(IEmitter<S> emitter, IProjector<S,T> projector, IReceiver<T> receiver);
+
     }
 }

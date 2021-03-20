@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    public interface IPipeRunner : IWfService
+    public interface IPipeRunner
     {
-        WfExecToken Flow<T>(ReadOnlySpan<T> src, Pipe<T> dst);
+        uint Flow<T>(ReadOnlySpan<T> src, Pipe<T> dst);
 
-        WfExecToken Flow<T>(Pipe<T> src, Pipe<T> dst);
+        uint Flow<T>(Pipe<T> src, Pipe<T> dst);
     }
 }
