@@ -312,10 +312,6 @@ namespace Z0
             where T : unmanaged
                 => (Cell256 a, Cell256 b) => f(a.ToVector<T>(),b.ToVector<T>()).ToCell();
 
-        [MethodImpl(Inline), Op]
-        public static BinaryOp1 define(BinaryOp<Bit32> f)
-            => (a,b) => f(a,b);
-
         /// <summary>
         /// Evaluates a 128-bit unary operator over a vector
         /// </summary>
@@ -390,7 +386,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp8 define<T>(Func<T,T> f, U8 dst)
+        public static UnaryOp8 define<T>(Func<T,T> f, W8 dst)
             where T : unmanaged
                 => (Cell8 a) => cell8(f(a.As<T>()));
 
@@ -399,7 +395,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp16 define<T>(Func<T,T> f, U16 dst)
+        public static UnaryOp16 define<T>(Func<T,T> f, W16 dst)
             where T : unmanaged
                 => (Cell16 a) => cell16(f(a.As<T>()));
 
@@ -408,7 +404,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp32 define<T>(Func<T,T> f, U32 dst)
+        public static UnaryOp32 define<T>(Func<T,T> f, W32 dst)
             where T : unmanaged
                 => (Cell32 a) => cell32(f(a.As<T>()));
 
@@ -417,7 +413,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static UnaryOp64 define<T>(Func<T,T> f, U64 dst)
+        public static UnaryOp64 define<T>(Func<T,T> f, W64 dst)
             where T : unmanaged
                 => (Cell64 a) => cell64(f(a.As<T>()));
 
@@ -426,7 +422,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp8 define<T>(Func<T,T,T> f, U8 dst)
+        public static BinaryOp8 define<T>(Func<T,T,T> f, W8 dst)
             where T : unmanaged
                 => (Cell8 a, Cell8 b) => cell8(f(a.As<T>(),b.As<T>()));
 
@@ -435,7 +431,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp16 define<T>(Func<T,T,T> f, U16 dst)
+        public static BinaryOp16 define<T>(Func<T,T,T> f, W16 dst)
             where T : unmanaged
                 => (Cell16 a, Cell16 b) => cell16(f(a.As<T>(),b.As<T>()));
 
@@ -444,7 +440,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp32 define<T>(Func<T,T,T> f, U32 dst)
+        public static BinaryOp32 define<T>(Func<T,T,T> f, W32 dst)
             where T : unmanaged
                 => (Cell32 a, Cell32 b) => cell32(f(a.As<T>(),b.As<T>()));
 
@@ -453,7 +449,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The source delegate</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BinaryOp64 define<T>(Func<T,T,T> f, U64 dst)
+        public static BinaryOp64 define<T>(Func<T,T,T> f, W64 dst)
             where T : unmanaged
                 => (Cell64 a, Cell64 b) => cell64(f(a.As<T>(),b.As<T>()));
 

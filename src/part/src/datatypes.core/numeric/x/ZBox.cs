@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XTend
+    partial class XNumeric
     {
         /// <summary>
         /// Returns 0 in a box

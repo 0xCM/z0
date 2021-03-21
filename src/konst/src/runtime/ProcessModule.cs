@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Adapters
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -11,9 +11,9 @@ namespace Z0.Adapters
 
     using S = System.Diagnostics.ProcessModule;
     using D = System.Diagnostics;
-    using A = ProcessModule;
+    using A = ProcessModuleAdapter;
 
-    public readonly struct ProcessModule : IAdapter<A,S>
+    public readonly struct ProcessModuleAdapter : IAdapter<A,S>
     {
         [MethodImpl(Inline)]
         public static A adapt(S subject)
@@ -22,11 +22,11 @@ namespace Z0.Adapters
         public S Subject {get;}
 
         [MethodImpl(Inline)]
-        public ProcessModule(S subject)
+        public ProcessModuleAdapter(S subject)
             => Subject = subject;
 
         [MethodImpl(Inline)]
-        public ProcessModule Adapt(S subject)
+        public ProcessModuleAdapter Adapt(S subject)
             => adapt(subject);
 
         public override string ToString()

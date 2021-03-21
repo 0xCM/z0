@@ -12,6 +12,7 @@ namespace Z0
     using NK = NumericKind;
     using T = System.Single;
 
+
     public readonly struct F32 : INumericKind<T>
     {
         public const T Max = T.MaxValue;

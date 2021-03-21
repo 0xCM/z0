@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Adapters
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -14,27 +14,27 @@ namespace Z0.Adapters
 
     using S = System.Diagnostics.Process;
     using D = System.Diagnostics;
-    using A = Process;
+    using A = ProcessAdapter;
 
-    public sealed class Process : Adapter<A,S>
+    public sealed class ProcessAdapter : Adapter<A,S>
     {
-        public Process()
+        public ProcessAdapter()
         {}
 
         [MethodImpl(Inline)]
-        public Process(S subject)
+        public ProcessAdapter(S subject)
             : base(subject)
         {
 
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Process(AdapterHost<A,S> src)
-            => new Process(src.Subject);
+        public static implicit operator ProcessAdapter(AdapterHost<A,S> src)
+            => new ProcessAdapter(src.Subject);
 
         [MethodImpl(Inline)]
-        public static implicit operator Process(S subject)
-            => new Process(subject);
+        public static implicit operator ProcessAdapter(S subject)
+            => new ProcessAdapter(subject);
 
         [MethodImpl(Inline)]
         public static implicit operator S(A src)
@@ -242,10 +242,10 @@ namespace Z0.Adapters
         //   T:System.InvalidOperationException:
         //     The process System.Diagnostics.Process.Id is not available. -or- The process
         //     has exited.
-        public ProcessModule MainModule
+        public ProcessModuleAdapter MainModule
         {
             [MethodImpl(Inline)]
-            get => new ProcessModule(Subject.MainModule);
+            get => new ProcessModuleAdapter(Subject.MainModule);
         }
 
         //
@@ -383,10 +383,10 @@ namespace Z0.Adapters
         //     You are attempting to access the System.Diagnostics.Process.Modules property
         //     for either the system process or the idle process. These processes do not have
         //     modules.
-        public IndexedSeq<ProcessModule> Modules
+        public IndexedSeq<ProcessModuleAdapter> Modules
         {
             [MethodImpl(Inline)]
-            get => Subject.Modules.Cast<D.ProcessModule>().Map(ProcessModule.adapt);
+            get => Subject.Modules.Cast<D.ProcessModule>().Map(ProcessModuleAdapter.adapt);
 
             //Subject.Modules.Cast<D.ProcessModule>().Union(root.seq(Subject.MainModule)).Map(ProcessModule.adapt);
         }
@@ -777,10 +777,10 @@ namespace Z0.Adapters
         //     The process does not have an System.Diagnostics.Process.Id, or no process is
         //     associated with the System.Diagnostics.Process instance. -or- The associated
         //     process has exited.
-        public Index<ProcessThread> Threads
+        public Index<ProcessThreadAdapter> Threads
         {
             [MethodImpl(Inline)]
-            get => Subject.Threads.Cast<D.ProcessThread>().Map(ProcessThread.adapt);
+            get => Subject.Threads.Cast<D.ProcessThread>().Map(ProcessThreadAdapter.adapt);
         }
 
         //

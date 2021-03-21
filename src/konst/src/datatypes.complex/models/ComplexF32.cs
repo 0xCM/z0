@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
 
 	/// <summary>
 	/// Represents a 32-bit floating point complex number
@@ -17,7 +17,7 @@ namespace Z0
 	public struct ComplexF32 : IEquatable<ComplexF32>
 	{
 		/// <summary>
-		/// Loads a span of span of complext values from a source span where adjacent 
+		/// Loads a span of span of complext values from a source span where adjacent
 		/// entries (i,i+j) are interpreted respectively as real and imaginary components
 		/// </summary>
 		/// <param name="src">The source span, which must contain an even number of elements</param>
@@ -141,7 +141,7 @@ namespace Z0
         /// <param name="tupelize">Whether the value should be represented as a tuple (re,im) or in canonical form re +imi</param>
 		public string Format(bool tupelize = false)
 			=> Complex<float>.Format(re,im,tupelize);
-		
+
 		/// <summary>
 		/// Partitions the complex number into real and imanginary components
 		/// </summary>
@@ -152,9 +152,9 @@ namespace Z0
 		{
 			re = this.re;
 			im = this.im;
-		}		
+		}
 
-		public override string ToString() 
+		public override string ToString()
 			=>  Format();
 
         public override int GetHashCode()

@@ -10,19 +10,9 @@ namespace Z0
     using static BufferSeqId;
     using static memory;
 
+
     public interface ICheckFixedDynamic : ITestRandom, ICheckNull, ICheckDynamic, IBufferedChecker
     {
-        void CheckFixedMatch<F>(UnaryOperatorClass k, ApiCodeBlock a, ApiCodeBlock b)
-            where F : unmanaged, IDataCell
-        {
-            var f = Dynamic.EmitFixedUnary<F>(Tokens[Left], a);
-            var g = Dynamic.EmitFixedUnary<F>(Tokens[Right], b);
-            var stream = Random.Cells<F>();
-            var points = stream.Take(RepCount);
-            var checker = CheckEqual.Checker;
-            root.iter(points, x => checker.Eq(f(x), g(x)));
-        }
-
         Index<UnaryPairEval<UnaryOperatorClass,F,bit>> EvalEquality<F>(UnaryOperatorClass k, ApiCodeBlock a, ApiCodeBlock b)
             where F : unmanaged, IDataCell
         {

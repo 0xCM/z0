@@ -16,7 +16,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> Cells<F>(this ISource src)
             where F: unmanaged, IDataCell
-                => Sources.cells(Sources.cellsource<F>(src));
+                => Sources.cells<F>(src);
 
         /// <summary>
         /// Creates a cell index of specified count
@@ -26,6 +26,6 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         public static Index<F> Cells<F>(this ISource src, uint count)
             where F: unmanaged, IDataCell
-                => src.Cells<F>().Take(count).Array();
+                => Sources.cells<F>(src, count);
     }
 }

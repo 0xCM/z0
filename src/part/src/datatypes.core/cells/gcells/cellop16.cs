@@ -11,7 +11,6 @@ namespace Z0
 
     using D = CellDelegates;
 
-
     partial struct gcells
     {
         /// <summary>

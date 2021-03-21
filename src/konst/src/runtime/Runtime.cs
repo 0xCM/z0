@@ -13,8 +13,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using A = Z0.Adapters;
-
     [ApiHost]
     public readonly struct Runtime
     {
@@ -24,14 +22,14 @@ namespace Z0
             get => Assembly.GetEntryAssembly();
         }
 
-        public static A.Process CurrentProcess
+        public static ProcessAdapter CurrentProcess
         {
             [MethodImpl(Inline), Op]
             get => Process.GetCurrentProcess();
         }
 
         [Op]
-        public static ProcessMemoryMap map(A.Process src)
+        public static ProcessMemoryMap map(ProcessAdapter src)
         {
             var mods = modules(src);
             var count = mods.Length;
@@ -47,11 +45,11 @@ namespace Z0
         }
 
         [Op]
-        public static ReadOnlySpan<A.ProcessModule> modules(A.Process src)
+        public static ReadOnlySpan<ProcessModuleAdapter> modules(ProcessAdapter src)
             => src.Modules.OrderBy(x => x.BaseAddress).Array();
 
         [Op]
-        public static ReadOnlySpan<A.ProcessModule> modules()
+        public static ReadOnlySpan<ProcessModuleAdapter> modules()
             => modules(CurrentProcess);
     }
 }

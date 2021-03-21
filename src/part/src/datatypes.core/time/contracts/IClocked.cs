@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using System.Diagnostics;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
 
     public interface IClocked
     {

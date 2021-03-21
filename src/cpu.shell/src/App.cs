@@ -12,6 +12,7 @@ namespace Z0
             => run(args, PartId.Cpu, PartId.CpuShell);
 
         IPolySource Source;
+
         protected override void OnInit()
         {
             Source = Rng.@default();

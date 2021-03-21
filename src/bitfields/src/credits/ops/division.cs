@@ -96,7 +96,6 @@ namespace Z0
         public static Entity section(Section src)
             => (ulong)src << (byte)D.Section;
 
-
         public static string format(Entity src)
         {
             return text.concat(

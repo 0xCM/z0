@@ -20,16 +20,13 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
-        public static void eq(Bit32 lhs, Bit32 rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => PrimalClaims.eq((uint)lhs, (uint)rhs, caller, file, line);
-
-        public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static void eq<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(typeof(T).IsPrimalNumeric())
-                gmath.eq(lhs,rhs).OnNone(() => throw ClaimException.define(ClaimKind.Eq, NotEqual(lhs, rhs, caller, file, line).Format()));
+                gmath.eq(a,b).OnNone(() => throw ClaimException.define(ClaimKind.Eq, NotEqual(a, b, caller, file, line).Format()));
             else
-                CheckEqual.Checker.Eq(lhs,rhs);
+                CheckEqual.Checker.Eq(a,b);
         }
 
         public static void neq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -49,9 +46,9 @@ namespace Z0
             where T : unmanaged
                 => !gmath.nonz(x) ? true : throw AppErrors.NotNonzero(caller,file,line);
 
-        public static bool gt<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static bool gt<T>(T a, T b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
-                => gmath.gt(lhs,rhs) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(lhs, rhs, caller, file, line));
+                => gmath.gt(a,b) ? true : throw failed(ClaimKind.Gt, NotGreaterThan(a, b, caller, file, line));
 
         public static bool gteq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

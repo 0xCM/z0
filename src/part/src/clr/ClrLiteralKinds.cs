@@ -6,8 +6,8 @@ namespace Z0
 {
     using System.Runtime.CompilerServices;
 
-    using static ClrLiteralKind;
     using static Part;
+    using LK = ClrLiteralKind;
 
     [ApiHost(ApiNames.ClrLiteralKinds, true)]
     public readonly struct ClrLiteralKinds
@@ -20,11 +20,11 @@ namespace Z0
         public static ClrLiteralKind kind<T>()
         {
             if(typeof(T) == typeof(string))
-                return String;
+                return LK.String;
             else if(typeof(T) == typeof(char))
-                return C16;
+                return LK.C16;
             else if(typeof(T) == typeof(bool))
-                return U1;
+                return LK.U1;
             else
                 return numeric<T>();
         }
@@ -41,13 +41,13 @@ namespace Z0
         static ClrLiteralKind numeric_u<T>()
         {
             if(typeof(T) == typeof(byte))
-                return U8;
+                return LK.U8;
             else if(typeof(T) == typeof(ushort))
-                return U16;
+                return LK.U16;
             else if(typeof(T) == typeof(uint))
-                return U32;
+                return LK.U32;
             else if(typeof(T) == typeof(ulong))
-                return U64;
+                return LK.U64;
             else
                 return numeric_i<T>();
         }
@@ -56,13 +56,13 @@ namespace Z0
         static ClrLiteralKind numeric_i<T>()
         {
             if(typeof(T) == typeof(sbyte))
-                return I8;
+                return LK.I8;
             else if(typeof(T) == typeof(short))
-                return I16;
+                return LK.I16;
             else if(typeof(T) == typeof(int))
-                return I32;
+                return LK.I32;
             else if(typeof(T) == typeof(long))
-                return I64;
+                return LK.I64;
             return numeric_f<T>();
         }
 
@@ -70,11 +70,11 @@ namespace Z0
         static ClrLiteralKind numeric_f<T>()
         {
             if(typeof(T) == typeof(float))
-                return I8;
+                return LK.I8;
             else if(typeof(T) == typeof(double))
-                return I16;
+                return LK.I16;
             else if(typeof(T) == typeof(decimal))
-                return I32;
+                return LK.I32;
             else
                 return ClrLiteralKind.None;
         }

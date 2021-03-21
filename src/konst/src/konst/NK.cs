@@ -108,48 +108,5 @@ namespace Z0
 
         public const NK UInt16x32x64k = Int16x32x64k;
 
-        /// <summary>
-        /// Defines a <see cref='U8'/> representative
-        /// </summary>
-        public static U8 t8u => default;
-
-        /// <summary>
-        /// Defines a global <see cref='I8'/> representative
-        /// </summary>
-        public static I8 t8i => default;
-
-        /// <summary>
-        /// Defines a global <see cref='U16'/> representative
-        /// </summary>
-        public static U16 t16u => default;
-
-        /// <summary>
-        /// Defines a global <see cref='I16'/> representative
-        /// </summary>
-        public static I16 t16i => default;
-
-        /// <summary>
-        /// Defines a global <see cref='U32'/> representative
-        /// </summary>
-        public static U32 t32u => default;
-
-        /// <summary>
-        /// Defines a global <see cref='I32'/> representative
-        /// </summary>
-        public static I32 t32i => default;
-
-        /// <summary>
-        /// Defines a global <see cref='U64'/> representative
-        /// </summary>
-        public static U64 t64u => default;
-
-        /// <summary>
-        /// Defines a global <see cref='I64'/> representative
-        /// </summary>
-        public static I64 t64i => default;
-
-        public static F32 t32f => default;
-
-        public static F64 t64f => default;
     }
 }

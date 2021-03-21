@@ -44,5 +44,24 @@ namespace Z0
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new CellStreamer<F,W,T>(src).Stream;
+
+        /// <summary>
+        /// Creates a stream of fixed values
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="F">The fixed type</typeparam>
+        public static IEnumerable<F> cells<F>(ISource src)
+            where F: unmanaged, IDataCell
+                => cells(cellsource<F>(src));
+
+        /// <summary>
+        /// Creates a cell index of specified count
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="src">The cell count</param>
+        /// <typeparam name="F">The fixed type</typeparam>
+        public static Index<F> cells<F>(ISource src, uint count)
+            where F: unmanaged, IDataCell
+                => cells<F>(src).Take(count).Array();
     }
 }

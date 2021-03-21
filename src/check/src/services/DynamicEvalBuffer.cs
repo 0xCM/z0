@@ -9,17 +9,25 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct BufferedChecker : IBufferedChecker
+    public readonly struct DynamicEvalBuffer : IDisposable
     {
+        public static DynamicEvalBuffer create(uint length, byte count)
+            => new DynamicEvalBuffer(length,count);
+
         readonly NativeBuffer BufferAlloc;
 
         public readonly BufferTokens Tokens {get;}
 
-        [MethodImpl(Inline)]
-        public BufferedChecker(uint length, byte count)
+        public DynamicEvalBuffer(uint length, byte count)
             => Tokens = Buffers.sequence(length, count, out BufferAlloc).Tokenize();
 
         public void Dispose()
             => BufferAlloc.Dispose();
+
+        public ref readonly BufferToken this[BufferSeqId id]
+        {
+            [MethodImpl(Inline)]
+            get => ref Tokens[id];
+        }
     }
 }

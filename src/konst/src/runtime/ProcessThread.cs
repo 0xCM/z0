@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Adapters
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -12,9 +12,9 @@ namespace Z0.Adapters
 
     using S = System.Diagnostics.ProcessThread;
     using D = System.Diagnostics;
-    using A = ProcessThread;
+    using A = ProcessThreadAdapter;
 
-    public readonly struct ProcessThread : IAdapter<A,S>
+    public readonly struct ProcessThreadAdapter : IAdapter<A,S>
     {
         [MethodImpl(Inline)]
         public static A adapt(S subject)
@@ -23,7 +23,7 @@ namespace Z0.Adapters
         public S Subject {get;}
 
         [MethodImpl(Inline)]
-        public ProcessThread(S subject)
+        public ProcessThreadAdapter(S subject)
             => Subject = subject;
 
         [MethodImpl(Inline)]
