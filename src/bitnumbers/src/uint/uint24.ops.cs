@@ -181,5 +181,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool eq(U a, U b)
             => a.data == b.data;
+
+        static BitFormat FormatConfig24
+            => BitFormatter.limited(U.Width,U.Width);
+
+        [MethodImpl(Inline)]
+        public static string format(U src)
+            => BitFormatter.format(src.data, FormatConfig24);
+
     }
 }

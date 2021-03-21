@@ -51,9 +51,9 @@ namespace Z0
 
             for(var i=0; i<n; i+= 3)
             {
-                Claim.eq(expect[i],actual[i]);
-                Claim.eq(expect[i+1],actual[i+1]);
-                Claim.eq(expect[i+2],actual[i+2]);
+                PrimalClaims.eq((byte)expect[i], actual[i]);
+                PrimalClaims.eq((byte)expect[i+1], actual[i+1]);
+                PrimalClaims.eq((byte)expect[i+2], actual[i+2]);
             }
         }
 

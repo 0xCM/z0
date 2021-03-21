@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class AsciTestCases
     {
@@ -65,7 +66,7 @@ namespace Z0
                 sb.Append(code.FormatHex(specifier:false));
                 sb.Append(Delimiter);
 
-                sb.AppendLine(yn(success).ToString());
+                sb.AppendLine(success.ToString());
             }
             return sb.ToString();
         }

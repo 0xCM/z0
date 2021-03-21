@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="t">A mask type representative</param>
         /// <typeparam name="T">The mask data type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T odd<T>(N2 f, N1 d)
+        public static T odd<T>(N2 f = default, N1 d = default)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))

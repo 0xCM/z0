@@ -104,11 +104,13 @@ namespace Z0
 
         public override bool Equals(object y)
             => data.Equals(y);
+
+        [MethodImpl(Inline)]
         public string Format()
-            => data.FormatAsmHex();
+             => format(this);
 
         public override string ToString()
-            => data.ToString();
+            => Format();
 
        [MethodImpl(Inline)]
         public static implicit operator S(K src)
@@ -289,7 +291,6 @@ namespace Z0
 
         public static S One => 1;
 
-
         /// <summary>
         /// Specifies the minimum <see cref='S'/> value
         /// </summary>
@@ -311,6 +312,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static S wrap(int x)
             => new S((byte)x);
-
     }
 }

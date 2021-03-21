@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public readonly struct CheckVectorBits : ICheckVectorBits, IClaimValidator<CheckVectorBits,ICheckVectorBits>
     {
         public static ICheckVectorBits Checker => default(CheckVectorBits);

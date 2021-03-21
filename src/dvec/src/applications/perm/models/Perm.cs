@@ -177,7 +177,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Perm<T> identity<T>(T n)
             where T : unmanaged
-                => Perm.Init(gAlg.stream(default, gmath.dec(n)));
+                => Perm.init(gAlg.stream(default, gmath.dec(n)));
 
         /// <summary>
         /// Defines an untyped permutation determined by values in a source span
@@ -203,7 +203,7 @@ namespace Z0
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(T n, (T i, T j)[] swaps)
+        public static Perm<T> init<T>(T n, (T i, T j)[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
 
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="n">The length of the permutation</param>
         /// <param name="swaps">The transpositions applied to the identity</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(T n, Swap<T>[] swaps)
+        public static Perm<T> init<T>(T n, Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
 
@@ -228,7 +228,7 @@ namespace Z0
                 => new Perm<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(IEnumerable<T> src)
+        public static Perm<T> init<T>(IEnumerable<T> src)
             where T : unmanaged
                 => new Perm<T>(src);
 
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The integral type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Perm<T> Init<T>(params T[] src)
+        public static Perm<T> init<T>(params T[] src)
             where T : unmanaged
                 => new Perm<T>(src);
 

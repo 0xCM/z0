@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     [ApiHost(ApiNames.StateBuffers)]
     public readonly struct StateBuffers
     {

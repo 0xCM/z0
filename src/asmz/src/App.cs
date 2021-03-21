@@ -823,10 +823,25 @@ namespace Z0.Asm
             Wf.Row(b1.Format(options));
         }
 
+
+        void CheckBitView()
+        {
+            var m1 = BitMasks.odd<ulong>();
+            var bits = BitView.create(m1);
+            Wf.Row($"1: {bits.View(w1)}");
+            Wf.Row($"2: {bits.View(w2)}");
+            Wf.Row($"3: {bits.View(w3)}");
+            Wf.Row($"4: {bits.View(w4)}");
+            Wf.Row($"5: {bits.View(w5)}");
+            Wf.Row($"6: {bits.View(w6)}");
+            Wf.Row($"7: {bits.View(w7)}");
+            Wf.Row($"8: {bits.View(w8)}");
+
+        }
         public void Run()
         {
             //CheckBitSpans();
-
+            CheckBitView();
             //var api = Wf.ApiCmdRunner();
             //var asmlang = Wf.AsmLangCmdRunner();
             //var asmcmd = Wf.AsmCmdRunner();
@@ -835,7 +850,7 @@ namespace Z0.Asm
             // var loaded = pipe.LoadThumbprints();
             // root.iter(loaded, x => Wf.Row(x));
 
-            CheckRel32();
+            //CheckRel32();
 
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 

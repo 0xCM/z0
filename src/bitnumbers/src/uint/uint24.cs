@@ -10,6 +10,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static BitNumbers;
 
     using U = uint24;
     using W = W24;
@@ -19,6 +20,7 @@ namespace Z0
     using L = Limits24u;
 
     using api = BitNumbers;
+
 
     public enum BitSeq24 : uint
     {
@@ -223,10 +225,6 @@ namespace Z0
         public bool Equals(U rhs)
             => data == rhs.data;
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => data.FormatAsmHex();
-
         [Ignore]
         bool IEquatable<U>.Equals(U rhs)
             => data == rhs.data;
@@ -263,11 +261,10 @@ namespace Z0
         public override bool Equals(object rhs)
             => data.Equals(rhs);
 
-        [Ignore]
-        string ITextual.Format()
-            => Format();
+        [MethodImpl(Inline)]
+        public string Format()
+             => format(this);
 
-        [Ignore]
         public override string ToString()
             => Format();
 

@@ -58,7 +58,6 @@ namespace Z0
             get => Data.Storage;
         }
 
-
         [MethodImpl(Inline)]
         public Block256<N,U> As<U>()
             where U : unmanaged

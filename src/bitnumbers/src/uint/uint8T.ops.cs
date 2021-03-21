@@ -216,5 +216,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint8T extend(W8 w, uint2 src)
             => new U(src.data);
+
+        static BitFormat FormatConfig8
+            => BitFormatter.limited(U.Width,U.Width);
+
+        [MethodImpl(Inline)]
+        public static string format(U src)
+            => BitFormatter.format(src.data, FormatConfig8);
     }
 }

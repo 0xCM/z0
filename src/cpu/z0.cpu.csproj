@@ -10,7 +10,6 @@
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(GMath)" />
-
   </ItemGroup>
 
 </Project>

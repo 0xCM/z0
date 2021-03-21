@@ -12,8 +12,8 @@ namespace Z0
     public readonly struct CheckRowVectors : ICheckRowVectors<CheckRowVectors>
     {
         [MethodImpl(Inline)]
-        public static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs)
+        public static int length<T>(RowVector256<T> a, RowVector256<T> b)
             where T : unmanaged
-                => lhs.Length == rhs.Length ? lhs.Length  : AppErrors.ThrowNotEqualNoCaller(lhs.Length, rhs.Length);
+                => a.Length == b.Length ? a.Length  : AppErrors.ThrowNotEqualNoCaller(a.Length, b.Length);
     }
 }

@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Root;
 
     using prim = System.UInt16;
     using analog = uint16_t;
@@ -20,20 +20,19 @@ namespace Z0
 
         public static readonly analog one = 1;
 
-
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public uint16_t(prim x)
             => data =x;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static analog @bool(bool x)
             => x ? one : zero;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static bool operator true(analog x)
             => x.data != 0;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static bool operator false(analog x)
             => x.data == 0;
 
@@ -87,27 +86,27 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static analog operator == (analog lhs, analog rhs) 
+        public static analog operator == (analog lhs, analog rhs)
             => @bool(lhs.data == rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator != (analog lhs, analog rhs) 
+        public static analog operator != (analog lhs, analog rhs)
             => @bool(lhs.data != rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator + (analog lhs, analog rhs) 
+        public static analog operator + (analog lhs, analog rhs)
             => (analog)(lhs.data + rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog lhs, analog rhs) 
+        public static analog operator - (analog lhs, analog rhs)
             => (analog)(lhs.data - rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator * (analog lhs, analog rhs) 
+        public static analog operator * (analog lhs, analog rhs)
             => (analog)(lhs.data * rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator / (analog lhs, analog rhs) 
+        public static analog operator / (analog lhs, analog rhs)
             => (analog)(lhs.data / rhs.data);
 
         [MethodImpl(Inline)]
@@ -115,70 +114,70 @@ namespace Z0
             => (analog)(lhs.data % rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator < (analog lhs, analog rhs) 
+        public static analog operator < (analog lhs, analog rhs)
             => @bool(lhs.data < rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator <= (analog lhs, analog rhs) 
+        public static analog operator <= (analog lhs, analog rhs)
             => @bool(lhs.data <= rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator > (analog lhs, analog rhs) 
+        public static analog operator > (analog lhs, analog rhs)
             => @bool(lhs.data > rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator >= (analog lhs, analog rhs) 
+        public static analog operator >= (analog lhs, analog rhs)
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator & (analog lhs, analog rhs) 
+        public static analog operator & (analog lhs, analog rhs)
             => (analog)(lhs.data & rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator | (analog lhs, analog rhs) 
+        public static analog operator | (analog lhs, analog rhs)
             => (analog)(lhs.data | rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator ^ (analog lhs, analog rhs) 
+        public static analog operator ^ (analog lhs, analog rhs)
             => (analog)(lhs.data ^ rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator ^ (analog lhs, uint8_t rhs) 
+        public static analog operator ^ (analog lhs, uint8_t rhs)
             => (analog)(lhs.data ^ (uint16_t)rhs);
 
         [MethodImpl(Inline)]
-        public static analog operator ~ (analog x) 
+        public static analog operator ~ (analog x)
             => (analog)~ x.data;
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog src) 
+        public static analog operator - (analog src)
             => (analog)(~src.data + 1);
 
         [MethodImpl(Inline)]
-        public static analog operator >> (analog lhs, int rhs) 
+        public static analog operator >> (analog lhs, int rhs)
             => (analog)(lhs.data >> rhs);
-        
+
         [MethodImpl(Inline)]
-        public static analog operator << (analog lhs, int rhs) 
+        public static analog operator << (analog lhs, int rhs)
             => (analog)(lhs.data << rhs);
 
         [MethodImpl(Inline)]
-        public static analog operator -- (analog x) 
+        public static analog operator -- (analog x)
             =>  --x.data;
 
         [MethodImpl(Inline)]
-        public static analog operator ++ (analog x) 
+        public static analog operator ++ (analog x)
             =>  ++x.data;
-        
+
         [MethodImpl(Inline)]
         public bool Equals(analog rhs)
             => data == rhs.data;
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
 
         public override bool Equals(object rhs)
             => throw new NotSupportedException();
-        
+
     }
 }

@@ -7,25 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public interface ICheckSpans : IClaimValidator, ICheckGeneric
+    public readonly struct SpanClaims : ICheckSpans
     {
-        void eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
+        public static void eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged
-                => SpanClaims.eq(a,b);
+                => root.iter(a,b, (a,b) => NumericClaims.eq(a,b));
 
-        void eq<T>(Span<T> a, Span<T> b)
+        public static void eq<T>(Span<T> a, Span<T> b)
             where T : unmanaged
-                => SpanClaims.eq(a,b);
+                => root.iter(a,b, (a,b) => NumericClaims.eq(a,b));
 
-        void eq<N,T>(NatSpan<N,T> a, NatSpan<N,T> b)
+        public static void eq<N,T>(NatSpan<N,T> a, NatSpan<N,T> b)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => SpanClaims.eq(a,b);
+                => eq(a.Edit, b.Edit);
 
-       void eq<M,N,T>(TableSpan<M,N,T> a, TableSpan<M,N,T> b)
+       public static void eq<M,N,T>(TableSpan<M,N,T> a, TableSpan<M,N,T> b)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanClaims.eq(a,b);
-    }
+                => eq(a.Data, b.Data);
+   }
 }
