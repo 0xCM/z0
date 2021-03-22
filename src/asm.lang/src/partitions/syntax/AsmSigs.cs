@@ -14,6 +14,7 @@ namespace Z0.Asm
     using static Rules;
     using static TextRules;
     using static Pow2x16;
+    using static TextRules.Parse;
 
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>
@@ -57,6 +58,52 @@ namespace Z0.Asm
         public SymbolTable<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;
 
+        public Outcome ParseThumbprint(string src, out AsmThumbprint thumbprint)
+        {
+            thumbprint = AsmThumbprint.Empty;
+
+            var a = src.LeftOfFirst(Semicolon);
+            var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
+            AsmStatementExpr statement = a.RightOfFirst(Semicolon);
+
+            var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
+            if(parts.Length == 2)
+            {
+                var lhs = parts[0];
+                var rhs = parts[1];
+                if(unfence(lhs, SigFence, out var sigexpr))
+                {
+                    if(ParseSigExpr(sigexpr, out var sig))
+                    {
+                        if(!ParseMnemonicCode(sig.Mnemonic, out var monic))
+                            Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
+
+                        if(unfence(lhs, OpCodeFence, out var opcode))
+                        {
+                            if(AsmBytes.hexcode(rhs, out var encoded))
+                            {
+                                thumbprint = new AsmThumbprint(sig, asm.opcode(opcode), encoded);
+                                return true;
+                            }
+                            else
+                                Wf.Error($"Could not parse the encoded bytes");
+                        }
+                        else
+                            Wf.Error($"Could not located the opcode fence ${OpCodeFence}");
+
+                    }
+                    else
+                        Wf.Error($"Could not parse sig expression from ${sigexpr}");
+                }
+                else
+                    Wf.Error($"Could not locate the signature fence {SigFence}");
+            }
+            else
+                Wf.Error($"Could not dichotomize {src} ");
+
+            return false;
+        }
+
         [Op]
         public bool ParseMnemonicCode(AsmMnemonic src, out AsmMnemonicCode dst)
         {
@@ -84,6 +131,44 @@ namespace Z0.Asm
             }
             else
                 return false;
+        }
+
+        public Outcome ParseFormExpr(string src, out AsmFormExpr dst)
+        {
+            dst = AsmFormExpr.Empty;
+            if(unfence(src, SigFence, out var sigexpr))
+            {
+                if(ParseSigExpr(sigexpr, out var sig))
+                {
+                    if(!ParseMnemonicCode(sig.Mnemonic, out var monic))
+                        Wf.Warn(MonicCodeParseFailed.Format(sig.Mnemonic));
+
+                    if(unfence(src, OpCodeFence, out var opcode))
+                    {
+                        dst = new AsmFormExpr(asm.opcode(opcode), sig);
+                        return true;
+                    }
+                    else
+                        return (false,FenceNotFound.Format(OpCodeFence, src));
+                }
+                else
+                    return (false, CouldNotParseSigExpr.Format(sigexpr));
+            }
+            else
+                return (false,FenceNotFound.Format(SigFence,src));
+        }
+
+        static MsgPattern<Fence<char>,string> FenceNotFound = "The signature fence {0} for the source expression {1} is not present";
+
+        static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
+
+        static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
+
+
+        public Outcome ParseOpCodeExpr(string src,  out AsmOpCodeExpr dst)
+        {
+            dst = new AsmOpCodeExpr(src);
+            return true;
         }
 
         [Op]
@@ -140,6 +225,7 @@ namespace Z0.Asm
                 return (false, $"Cannot match symbol for the operand expression <{src.Content}>");
             }
         }
+
         [Op]
         public AsmSigExpr ParseSigExpr(string src)
         {
@@ -259,38 +345,6 @@ namespace Z0.Asm
             get => _SigOpSymbols.Tokens;
         }
 
-        public static string format(AsmFormExpr src)
-        {
-            var dst = text.buffer();
-            render(src,dst);
-            return dst.Emit();
-        }
-
-        public static void render(AsmFormExpr src, ITextBuffer dst)
-        {
-            if(src.IsNonEmpty)
-            {
-                var operands = src.Sig.Operands.View;
-                var count = operands.Length;
-                var monic = src.Sig.Mnemonic.Format(MnemonicCase.Lowercase);
-                if(count == 0)
-                {
-                    dst.AppendFormat("{0} -> {1}", monic, src.OpCode.Format());
-                }
-                else
-                {
-                    dst.AppendFormat("{0}(", monic);
-                    for(var i=0; i<count; i++)
-                    {
-                        dst.Append(skip(operands,i).Format());
-                        if(i != count - 1)
-                            dst.Append(", ");
-                    }
-                    dst.AppendFormat(") -> {0}", src.OpCode);
-                }
-            }
-        }
-
         static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
         {
             var dst = text.buffer();
@@ -312,5 +366,15 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static AsmSigOperandExpr sigop(string src)
             => new AsmSigOperandExpr(src.Trim());
+
+        const string Implication = " => ";
+
+        static Fence<char> SigFence => (LParen, RParen);
+
+        static Fence<char> OpCodeFence => (Lt, Gt);
+
+        static Fence<char> SizeFence => (LBracket, RBracket);
+
+
     }
 }

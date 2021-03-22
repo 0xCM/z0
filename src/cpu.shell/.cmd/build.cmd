@@ -1,3 +1,3 @@
 @echo off
 set ProjectId=cpu.shell
-call %ControlScripts%\build-app64.cmd
+call %ControlScripts%\build-app.cmd

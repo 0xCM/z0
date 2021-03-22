@@ -80,12 +80,16 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex1(Bit32 src)
-            => new Hex1((byte)(src ? 1 : 0));
+        public int CompareTo(H src)
+            => Value.CompareTo(src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex1(bool src)
-            => new Hex1(memory.@byte(src));
+        public static implicit operator H(Bit32 src)
+            => new H((byte)(src ? 1 : 0));
+
+        [MethodImpl(Inline)]
+        public static implicit operator H(bool src)
+            => new H(memory.@byte(src));
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)

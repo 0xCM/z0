@@ -11,6 +11,18 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    [Record(TableId)]
+    public struct AsmFormHash : IRecord<AsmFormHash>
+    {
+        public const string TableId = "asm.forms.hashed";
+
+        public Hex32 HashCode;
+
+        public uint IndexKey;
+
+        public AsmFormExpr Form;
+    }
+
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
     {
         public AsmFormPipe()
@@ -24,6 +36,76 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Sigs = Wf.AsmSigs();
+        }
+
+        public void HashFormIndex()
+        {
+
+        }
+
+        public Index<AsmFormExpr> LoadFormExpressions()
+        {
+            Wf.AsmEtlCmd().Run(AsmEtlCmdKind.EmitFormCatalog);
+
+            var pipe = AsmFormPipe.create(Wf);
+            var src = Db.AsmCatalogTable<AsmFormRecord>();
+            var records = pipe.Load(src).View;
+
+            var count = records.Length;
+            var expressions = alloc<AsmFormExpr>(count);
+            ref var block = ref first(expressions);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                seek(block, i) = record.FormExpr;
+            }
+            return expressions;
+        }
+
+        Index<AsmFormHash> HashPerfect(Span<AsmFormExpr> src)
+        {
+            Wf.Status($"Attempting to find perfect hashes for {src.Length} form expressions");
+
+            var perfect = HashFunctions.perfect(src).Codes;
+            var count = (uint)perfect.Length;
+
+            Wf.Status($"Found {count} distinct hash codes for {src.Length} form expressions");
+
+            var dst = Db.AsmCatalogTable<AsmFormHash>();
+            var buffer = alloc<AsmFormHash>(count);
+            ref var records = ref first(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref var record = ref seek(records,i);
+                ref readonly var hash = ref skip(perfect,i);
+                record.Form = hash.Source;
+                record.HashCode = hash.Hash;
+                record.IndexKey = (hash.Hash % count);
+            }
+            var emitting = Wf.EmittingTable<AsmFormHash>(dst);
+            var ecount = Records.emit(buffer, dst, 36);
+            Wf.EmittedTable(emitting, ecount);
+            return buffer;
+        }
+
+        public Index<AsmFormHash> EmitFormHashes()
+        {
+            var pipe = Wf.AsmFormPipe();
+            var expressions = pipe.LoadFormExpressions();
+            var unique = root.dict<string,AsmFormExpr>();
+            var duplicates = root.dict<string,AsmFormExpr>();
+            foreach(var e in expressions)
+            {
+                if(e.IsEmpty)
+                    continue;
+
+                var format = e.Format();
+                if(!unique.TryAdd(format,e))
+                    duplicates[format] = e;
+            }
+
+            root.iter(duplicates.Keys, k => Wf.Warn(string.Format("Duplicate Form: {0}", k)));
+            return HashPerfect(unique.Values.Array());
         }
 
         public void Emit(ReadOnlySpan<AsmFormExpr> src, FS.FilePath dst)
@@ -52,7 +134,7 @@ namespace Z0.Asm
             dst.Seq = seq;
             dst.OpCode = src.OpCode;
             dst.Sig = src.Sig;
-            dst.Expression = src.Expression;
+            dst.FormExpr = src;
             return ref dst;
         }
 
@@ -83,6 +165,7 @@ namespace Z0.Asm
             var dst = root.list<AsmFormRecord>();
             if(src.Exists)
             {
+                var flow = Wf.Running($"Loading form records from {src.ToUri()}");
                 var doc = TextDocs.parse(src);
                 if(doc.Failed)
                 {
@@ -90,7 +173,9 @@ namespace Z0.Asm
                     return sys.empty<AsmFormRecord>();
                 }
 
-                return Load(doc.Value);
+                var forms = Load(doc.Value);
+                Wf.Ran(flow, string.Format("Loaded {0} forms from {1}", forms.Length, src.ToUri()));
+                return forms;
             }
             else
             {
@@ -109,7 +194,7 @@ namespace Z0.Asm
                 Records.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
                 Sigs.ParseSigExpr(NextCell(parts, ref i), out dst.Sig);
-                dst.Expression = NextCell(parts, ref i);
+                dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
                 return true;
             }
             else
@@ -123,10 +208,15 @@ namespace Z0.Asm
         {
             var i = 0;
             Records.parse(src[i++], out dst.Seq);
-            dst.OpCode = asm.opcode(src[i++]);
+            Sigs.ParseOpCodeExpr(src[i++], out dst.OpCode);
             Sigs.ParseSigExpr(src[i++], out dst.Sig);
-            dst.Expression = src[i++];
+            Sigs.ParseFormExpr(src[i++], out dst.FormExpr);
             return ref dst;
         }
+
+        // public bool ParseExpr(string src, out AsmFormExpr dst)
+        // {
+        //     var parts = src.SplitClean()
+        // }
     }
 }

@@ -181,6 +181,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.sfuncs", "src\sfuncs\z0.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.pipes", "src\pipes\z0.pipes.csproj", "{1FF41A57-2F7F-4D62-8EB3-3BBF1BBAD1DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "z0.asm.lang.g", "src\asm.lang.g\z0.asm.lang.g.csproj", "{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		src\share\z0.share.projitems*{666886d1-8cc4-481c-a270-9166da0bc711}*SharedItemsImports = 13
@@ -494,6 +496,10 @@ Global
 		{1FF41A57-2F7F-4D62-8EB3-3BBF1BBAD1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF41A57-2F7F-4D62-8EB3-3BBF1BBAD1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF41A57-2F7F-4D62-8EB3-3BBF1BBAD1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -573,6 +579,7 @@ Global
 		{E51E81C7-4FAC-4409-AD00-6939119E3ACE} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{25CA8B7E-8E29-4FB7-AA1E-BFCD52B5F1DC} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 		{1FF41A57-2F7F-4D62-8EB3-3BBF1BBAD1DE} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
+		{0D3EC677-9FD5-42A5-AF6E-7F32C211CFA2} = {A5FA280E-F0F4-49EA-806D-D814BD4014E4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {75DBF59A-77AC-430F-B85D-CC30D6061CCB}

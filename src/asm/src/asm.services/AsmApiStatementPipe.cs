@@ -49,12 +49,12 @@ namespace Z0.Asm
         {
             var dst = root.list<AsmThumbprint>();
             var source = ThumbprintsPath();
-            var api = AsmThumbprints.create(Wf);
+            var sigs = Wf.AsmSigs();
             using var reader = source.Reader();
             while(!reader.EndOfStream)
             {
                 var data = reader.ReadLine();
-                if(api.Parse(data, out var thumbprint))
+                if(sigs.ParseThumbprint(data, out var thumbprint))
                     dst.Add(thumbprint);
             }
             return dst.ToArray();

@@ -20,7 +20,7 @@
     <ProjectReference Include="$(AsmLang)" />
     <ProjectReference Include="$(AsmCore)" />
 
-    <Reference Include="$(AsmLangG)"/>
+    <ProjectReference Include="$(AsmLangG)"/>
 
   </ItemGroup>
 

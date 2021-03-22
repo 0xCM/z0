@@ -20,5 +20,11 @@ namespace Z0
 
         public static AsmCatalogEtl AsmCatalogEtl(this IWfShell wf)
             => Z0.Asm.AsmCatalogEtl.create(wf);
+
+        public static AsmEltCmdHost AsmEtlCmd(this IWfShell wf)
+            => AsmEltCmdHost.create(wf);
+
+        public static AsmFormPipe AsmFormPipe(this IWfShell wf)
+            => Z0.Asm.AsmFormPipe.create(wf);
     }
 }

@@ -75,5 +75,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> Map<S,T>(this Span<S> src, Func<S,T> f)
             => src.ReadOnly().Map(f);
+
+        [MethodImpl(Inline)]
+        public static Span<T> Select<S,T>(this Span<S> src, Func<S,T> f)
+            => src.ReadOnly().Map(f);
+
     }
 }

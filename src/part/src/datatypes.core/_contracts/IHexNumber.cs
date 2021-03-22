@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IHexNumber : IByte
     {
 
     }
 
     public interface IHexNumber<K> : IHexNumber
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
         new K Value {get;}
 
@@ -22,14 +20,14 @@ namespace Z0
 
     public interface IHexNumber<F,K> : IHexNumber<K>, IByte<F>
         where F : unmanaged, IHexNumber<F,K>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
 
     }
 
-    public interface IHexNumber<F,W,K> : IHexNumber<F,K>, IDataType<F>
+    public interface IHexNumber<F,W,K> : IHexNumber<F,K>, IDataTypeComparable<F>
         where F : unmanaged, IHexNumber<F,W,K>
-        where K : unmanaged, Enum
+        where K : unmanaged
         where W : unmanaged, IDataWidth
     {
         BitWidth ISized.Width

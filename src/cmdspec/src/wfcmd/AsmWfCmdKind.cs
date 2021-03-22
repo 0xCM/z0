@@ -22,9 +22,6 @@ namespace Z0.Asm
         [Alias("show-forms")]
         ShowFormCatalog,
 
-        [Alias("emit-form-catalog")]
-        EmitFormCatalog,
-
         ShowEncodingKindNames,
 
         [Alias("correlate-api")]

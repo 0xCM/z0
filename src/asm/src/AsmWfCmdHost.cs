@@ -53,10 +53,6 @@ namespace Z0.Asm
                 Show(skip(forms,i), writer);
         }
 
-        [Action(K.EmitFormCatalog)]
-        void EmitFormCatalog()
-            => Catalog.Emit(Catalog.KnownFormExpressions());
-
         [Action(K.ShowEncodingKindNames)]
         void ShowEncodingKindNames()
             => root.iter(Catalog.EncodingKindNames(), Wf.Row);

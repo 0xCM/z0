@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Root;
@@ -74,6 +75,10 @@ namespace Z0
 
         public override string ToString()
             => Text;
+
+        [MethodImpl(Inline)]
+        public int CompareTo(H src)
+            => Value.CompareTo(src.Value);
 
         [MethodImpl(Inline)]
         public static implicit operator H(K src)

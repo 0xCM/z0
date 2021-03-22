@@ -10,27 +10,10 @@ namespace Z0.Asm
     using static Part;
     using static Rules;
     using static Chars;
-    using static TextRules.Parse;
 
     public class AsmThumbprints : WfService<AsmThumbprints>
     {
         const string Implication = " => ";
-
-        static Fence<char> SigFence => (LParen, RParen);
-
-        static Fence<char> OpCodeFence => (Lt, Gt);
-
-        static Fence<char> SizeFence => (LBracket, RBracket);
-
-        AsmSigs Sigs;
-
-        AsmExpr Expr;
-
-        protected override void OnInit()
-        {
-            Sigs = Wf.AsmSigs();
-            Expr = AsmExpr.create(Wf);
-        }
 
         [Op]
         public static AsmThumbprintExpr expression(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
@@ -63,51 +46,5 @@ namespace Z0.Asm
             var e1 = b.Format().LeftOfFirst(Implication);
             return e0.CompareTo(e1);
         }
-
-        public Outcome Parse(string src, out AsmThumbprint thumbprint)
-        {
-            thumbprint = AsmThumbprint.Empty;
-
-            var a = src.LeftOfFirst(Semicolon);
-            var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
-            AsmStatementExpr statement = a.RightOfFirst(Semicolon);
-
-            var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
-            if(parts.Length == 2)
-            {
-                var lhs = parts[0];
-                var rhs = parts[1];
-                if(unfence(lhs, SigFence, out var sigexpr))
-                {
-                    if(Expr.Sig(sigexpr, out var sig))
-                    {
-                        if(!Sigs.ParseMnemonicCode(sig.Mnemonic, out var monic))
-                            Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
-
-                        if(unfence(lhs, OpCodeFence, out var opcode))
-                        {
-                            if(AsmBytes.hexcode(rhs, out var encoded))
-                            {
-                                thumbprint = new AsmThumbprint(sig, Expr.OpCode(opcode), encoded);
-                                return true;
-                            }
-                            else
-                                Wf.Error($"Could not parse the encoded bytes");
-                        }
-                        else
-                            Wf.Error($"Could not located the opcode fence ${OpCodeFence}");
-
-                    }
-                    else
-                        Wf.Error($"Could not parse sig expression from ${sigexpr}");
-                }
-                else
-                    Wf.Error($"Could not locate the signature fence {SigFence}");
-            }
-            else
-                Wf.Error($"Could not dichotomize {src} ");
-
-            return false;
-        }
-    }
+   }
 }

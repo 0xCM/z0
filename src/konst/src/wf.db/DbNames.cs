@@ -90,5 +90,7 @@ namespace Z0
         public const string z0 = nameof(z0);
 
         public const string cases = nameof(cases);
+
+        public const string asmcat = nameof(asmcat);
     }
 }

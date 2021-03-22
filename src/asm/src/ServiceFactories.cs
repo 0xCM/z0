@@ -13,7 +13,7 @@ namespace Z0
         public static AsmEtl AsmRowEtl(this IWfShell wf)
             => AsmEtl.create(wf);
 
-        public static ICmdRunner<AsmWfCmdKind> AsmCmdRunner(this IWfShell wf)
+        public static ICmdRunner<AsmWfCmdKind> AsmWfCmd(this IWfShell wf)
             => AsmWfCmdHost.create(wf);
 
         public static AsmCatalog AsmCatalog(this IWfShell wf)

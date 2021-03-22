@@ -15,6 +15,6 @@ namespace Z0.Asm
 
         public AsmSigExpr Sig;
 
-        public TextBlock Expression;
+        public AsmFormExpr FormExpr;
     }
 }

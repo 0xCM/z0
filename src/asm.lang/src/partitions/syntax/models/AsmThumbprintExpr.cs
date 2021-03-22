@@ -15,11 +15,9 @@ namespace Z0.Asm
     {
         TextBlock Content {get;}
 
-
         [MethodImpl(Inline)]
         internal AsmThumbprintExpr(string content)
             => Content = content;
-
         public string Format()
             => Content.Format();
 
@@ -43,7 +41,5 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmThumbprintExpr(EmptyString);
         }
-
-        const string Implication = " => ";
     }
 }

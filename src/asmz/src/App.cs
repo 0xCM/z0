@@ -444,34 +444,49 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-        Index<string> CollectFormExpressions()
-        {
-            var pipe = AsmFormPipe.create(Wf);
-            var src = Db.IndexTable<AsmFormRecord>();
-            var records = pipe.Load(src).View;
-            var count = records.Length;
-            var expressions = alloc<string>(count);
-            ref var block = ref first(expressions);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(records,i);
-                seek(block, i) = record.Expression;
-                root.require(skip(block,i) != null, () => $"Row {i} is null");
-            }
-            return expressions;
-        }
+        // Index<AsmFormExpr> LoadFormExpressions()
+        // {
+        //     Wf.AsmEtlCmd().Run(AsmEtlCmdKind.EmitFormCatalog);
 
-        void HashPerfect(Index<string> src)
-        {
-            var perfect = HashFunctions.perfect(src);
-            root.iter(perfect, p => Wf.Row(p));
+        //     var pipe = AsmFormPipe.create(Wf);
+        //     var src = Db.AsmCatalogTable<AsmFormRecord>();
+        //     var records = pipe.Load(src).View;
 
-        }
+        //     var count = records.Length;
+        //     var expressions = alloc<AsmFormExpr>(count);
+        //     ref var block = ref first(expressions);
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var record = ref skip(records,i);
+        //         seek(block, i) = record.FormExpr;
+        //     }
+        //     return expressions;
+        // }
 
-        void HashPerfect()
-        {
-            HashPerfect(CollectFormExpressions());
-        }
+
+        // void HashPerfect(Span<AsmFormExpr> src)
+        // {
+        //     Wf.Row($"Attempting to find perfect hashes for {src.Length} form expressions");
+        //     var perfect = HashFunctions.perfect(src).Codes;
+        //     root.iter(perfect, p => Wf.Row(p));
+        // }
+
+        // void HashPerfect()
+        // {
+        //     var pipe = Wf.AsmFormPipe();
+        //     var expressions = pipe.LoadFormExpressions();
+        //     var unique = root.dict<string,AsmFormExpr>();
+        //     var duplicates = root.dict<string,AsmFormExpr>();
+        //     foreach(var e in expressions)
+        //     {
+        //         var format = e.Format();
+        //         if(!unique.TryAdd(format,e))
+        //             duplicates[format] = e;
+        //     }
+
+        //     root.iter(duplicates.Keys, k => Wf.Row(string.Format("Duplicate: {0}", k)));
+        //     HashPerfect(unique.Values.Array());
+        // }
 
         void EmitMsil()
         {
@@ -874,7 +889,7 @@ namespace Z0.Asm
 
         public void Run()
         {
-            CheckSigParser();
+            Wf.AsmFormPipe().EmitFormHashes();
             //PipeImageData();
             //CheckBitSpans();
             //CheckBitView();

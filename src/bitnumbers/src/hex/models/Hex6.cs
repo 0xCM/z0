@@ -76,6 +76,10 @@ namespace Z0
             => Text;
 
         [MethodImpl(Inline)]
+        public int CompareTo(H src)
+            => Value.CompareTo(src.Value);
+
+        [MethodImpl(Inline)]
         public static implicit operator H(K src)
             => new H(src);
 

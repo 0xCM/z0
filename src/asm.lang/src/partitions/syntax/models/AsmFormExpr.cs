@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmFormExpr
+    public readonly struct AsmFormExpr : ITextual
     {
         public AsmOpCodeExpr OpCode {get;}
 
@@ -28,12 +28,6 @@ namespace Z0.Asm
             get => Sig.Operands;
         }
 
-        public string Expression
-        {
-            [MethodImpl(Inline)]
-            get => AsmSigs.format(this);
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -44,12 +38,6 @@ namespace Z0.Asm
         {
             [MethodImpl(Inline)]
             get => !IsEmpty;
-        }
-
-        public AsmMnemonic Mnemonic
-        {
-            [MethodImpl(Inline)]
-            get => Sig.Mnemonic;
         }
 
         [MethodImpl(Inline)]
@@ -63,7 +51,7 @@ namespace Z0.Asm
             => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
-            => Expression;
+            => AsmSyntax.format(this);
 
         public override string ToString()
             => Format();

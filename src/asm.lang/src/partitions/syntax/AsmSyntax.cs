@@ -8,6 +8,10 @@ namespace Z0.Asm
 
     public readonly partial struct AsmSyntax
     {
+        [Op]
+        public static string format(AsmFormExpr src)
+            => string.Format("({0})<{1}>", src.Sig, src.OpCode);
+
         public static uint render(AsmStatementSummaries src, ITextBuffer dst)
         {
             var values = src.Collected();
