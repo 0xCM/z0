@@ -10,9 +10,12 @@ namespace Z0
     using static Part;
     using static memory;
 
+    using G = XOrShift128;
+
     /// <summary>
     /// Defines pseudorandom number generator
     /// </summary>
+    [ApiHost]
     public struct XOrShift128 : IRngSource, ISource<uint>
     {
         uint A;
@@ -23,6 +26,7 @@ namespace Z0
 
         uint D;
 
+        [MethodImpl(Inline)]
         public XOrShift128(uint a, uint b, uint c, uint d)
         {
             A = a;
@@ -31,6 +35,7 @@ namespace Z0
             D = d;
         }
 
+        [MethodImpl(Inline)]
         public XOrShift128(ReadOnlySpan<uint> state)
         {
             A = skip(state,0);
@@ -42,27 +47,32 @@ namespace Z0
         public RngKind RngKind
             => RngKind.XOrShift128;
 
+        [MethodImpl(Inline), Op]
+        public static uint next(ref G g)
+            => g.Next();
+
         // From Marsaglia's Xorshift RNGs
         // The stream produced should have a period of 2^128 - 1
+        [MethodImpl(Inline)]
         public uint Next()
         {
             var t = xorsl(A,15);
             A = B;
             B = C;
             C = D;
-            D = Grind(D,t);
+            D = grind(D,t);
             return D;
         }
 
-        [MethodImpl(Inline)]
-        static uint Grind(uint d, uint t)
+        [MethodImpl(Inline), Op]
+        static uint grind(uint d, uint t)
             => xorsr(d, 21) ^ xorsr(t, 4);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static uint xorsl(uint a, byte offset)
             => a^(a << offset);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static uint xorsr(uint a, byte offset)
             => a^(a >> offset);
     }

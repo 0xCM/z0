@@ -40,7 +40,7 @@ namespace Z0.Asm
                 distinct.Add(src.Summary());
             }
 
-            Load(receiver);
+            LoadStatements(receiver);
 
             EmitSummaries(distinct);
         }
@@ -81,7 +81,7 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-        public void Load(Action<AsmApiStatement> receiver)
+        public void LoadStatements(Action<AsmApiStatement> receiver)
         {
             var files = StatementRoot.EnumerateFiles(FS.Extensions.Csv, true).Array();
             foreach(var file in files)

@@ -13,7 +13,7 @@ namespace Z0
     /// Defines pseudorandom number generator
     /// </summary>
     /// <remarks> Core algorithm taken from http://xoshiro.di.unimi.it/xoshiro256starstar.c</remarks>
-    public class XOrShift256 : IRngDomainValues<ulong>
+    public class XOrShift256 : IRngDomainSource<ulong>
     {
         readonly ulong[] State;
 

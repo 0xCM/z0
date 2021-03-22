@@ -4,16 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public static class SeriesEvolution
     {
-        public static SeriesEvolution<T> Define<T>(in ulong[] Seed, in Interval<T> Domain, 
+        public static SeriesEvolution<T> define<T>(in ulong[] Seed, in Interval<T> Domain,
             in SeriesTerm<T> FirstTerm, in SeriesTerm<T> FinalTerm, in Duration Time)
                 where T : unmanaged
-                    => new SeriesEvolution<T>(in Seed, in Domain, in FirstTerm, in FinalTerm, in Time);
+                    => new SeriesEvolution<T>(Seed, Domain, FirstTerm, FinalTerm, Time);
     }
-    
+
     public readonly struct SeriesEvolution<T>
         where T : unmanaged
     {
@@ -26,8 +24,8 @@ namespace Z0
             this.Time = Time;
         }
         public readonly ulong[] Seed;
-        
-        public readonly Interval<T> Domain; 
+
+        public readonly Interval<T> Domain;
 
         public readonly SeriesTerm<T> FirstTerm;
 

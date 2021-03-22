@@ -13,9 +13,8 @@ namespace Z0
     /// Implements a 16-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://lemire.me/blog/2019/07/03/a-fast-16-bit-random-number-generator/</remarks>
-    public class WyHash16 : IRngDomainValues<ushort>
+    public class WyHash16 : IRngDomainSource<ushort>
     {
-
         [MethodImpl(Inline)]
         internal WyHash16(ushort state, ushort? index = null)
         {
@@ -62,7 +61,6 @@ namespace Z0
             var hash = input * key;
             return (ushort) (((hash >> 16) ^ hash) & 0xFFFF);
         }
-
 
         [MethodImpl(Inline)]
         static ushort mod(ushort a, ushort m)

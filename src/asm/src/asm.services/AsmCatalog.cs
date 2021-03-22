@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
     public sealed class AsmCatalog : WfService<AsmCatalog>
     {
         public Index<XedSummaryRow> XedSummaries()

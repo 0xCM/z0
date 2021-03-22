@@ -28,15 +28,16 @@ namespace Z0
             return true;
         }
 
-        void Fill<T>(Span<T> dst)
+        uint Fill<T>(Span<T> dst)
         {
-            var count = dst.Length;
+            var count = (uint)dst.Length;
             if(count != 0)
             {
                 ref var target = ref first(dst);
                 for(var i=0; i<count; i++)
                     seek(target,i) = Next<T>();
             }
+            return count;
         }
     }
 
@@ -62,13 +63,13 @@ namespace Z0
         /// Fills the span, from stem-to-stern with <typeparamref name='T'/> cells from the reifying source
         /// </summary>
         /// <param name="dst">The target spen</param>
-        int Fill(Span<T> dst)
+        uint Fill(Span<T> dst)
         {
-            var count = dst.Length;
+            var count = (uint)dst.Length;
             if(count != 0)
             {
                 ref var target = ref first(dst);
-                for(var i=0; i<count; i++)
+                for(var i=0u; i<count; i++)
                     if(!Next(out target))
                         return i;
             }

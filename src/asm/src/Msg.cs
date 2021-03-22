@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Text;
-
-    using static Part;
-
     [ApiComplete]
     partial struct Msg
     {
-
         public static MsgPattern<FS.FolderPath> ObliteratingDirectory => "Obliterating the directory {0}";
 
         public static MsgPattern<FS.FileUri> ParsingFile => "Parsing {0}";

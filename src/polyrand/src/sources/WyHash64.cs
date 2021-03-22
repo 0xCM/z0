@@ -17,21 +17,77 @@ namespace Z0
     /// </summary>
     /// <remarks>Core algorithm taken from https://github.com/lemire/testingRNG/blob/master/source/wyhash.h</remarks>
     [ApiHost]
-    public struct WyHash64 : IRngDomainValues<ulong>
+    public struct WyHash64 : IRngDomainSource<ulong>
     {
         ulong State;
 
         [MethodImpl(Inline)]
         public WyHash64(ulong state)
-        {
-            State = state;
-        }
+            => State = state;
 
         public RngKind RngKind
             => RngKind.WyHash64;
 
         [MethodImpl(Inline), Op]
-        public static ulong next(ref G g)
+        public static uint Fill(ref G g, Span<ulong> dst)
+        {
+            var count = (uint)dst.Length;
+            if(count != 0)
+            {
+                ref var point = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(point,i) = next(ref g);
+            }
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
+        public uint Fill(Span<ulong> dst, ulong max)
+        {
+            var count = (uint)dst.Length;
+            if(count != 0)
+            {
+                ref var point = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(point,i) = next(ref this, max);
+            }
+            return count;
+        }
+
+        [MethodImpl(Inline), Op]
+        public uint Fill(Span<ulong> dst, ulong min, ulong max)
+        {
+            var count = (uint)dst.Length;
+            if(count != 0)
+            {
+                ref var point = ref first(dst);
+                for(var i=0; i<count; i++)
+                    seek(point,i) = next(ref this, min, max);
+            }
+            return count;
+        }
+
+        [MethodImpl(Inline)]
+        public ulong Next()
+            => next(ref this);
+
+        [MethodImpl(Inline)]
+        public static bool Next(ref G g, out ulong dst)
+        {
+            dst = next(ref g);
+            return true;
+        }
+
+        [MethodImpl(Inline)]
+        public ulong Next(ulong max)
+            => next(ref this, max);
+
+        [MethodImpl(Inline)]
+        public ulong Next(ulong min, ulong max)
+            => next(ref this, min, max);
+
+        [MethodImpl(Inline), Op]
+        static ulong next(ref G g)
         {
             g.State += X1;
             Math128.mul(g.State, X2, out Pair<ulong> Y1);
@@ -42,60 +98,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ulong next(ref G g, ulong max)
+        static ulong next(ref G g, ulong max)
             => RngMath.contract(g.Next(), max);
 
         [MethodImpl(Inline), Op]
-        public static ulong next(ref G g, ulong min, ulong max)
+        static ulong next(ref G g, ulong min, ulong max)
             => min + next(ref g, max - min);
-
-        [MethodImpl(Inline), Op]
-        public static void fill(ref G rng, Span<ulong> dst)
-        {
-            var count = dst.Length;
-            if(count != 0)
-            {
-                ref var point = ref first(dst);
-                for(var i=0; i<count; i++)
-                    seek(point,i) = next(ref rng);
-            }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void fill(ref G g, Span<ulong> dst, ulong max)
-        {
-            var count = dst.Length;
-            if(count != 0)
-            {
-                ref var point = ref first(dst);
-                for(var i=0; i<count; i++)
-                    seek(point,i) = next(ref g, max);
-            }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void fill(ref G g, Span<ulong> dst, ulong min, ulong max)
-        {
-            var count = dst.Length;
-            if(count != 0)
-            {
-                ref var point = ref first(dst);
-                for(var i=0; i<count; i++)
-                    seek(point,i) = next(ref g, max, max);
-            }
-        }
-
-        [MethodImpl(Inline)]
-        public ulong Next()
-            => next(ref this);
-
-        [MethodImpl(Inline)]
-        public ulong Next(ulong max)
-            => next(ref this, max);
-
-        [MethodImpl(Inline)]
-        public ulong Next(ulong min, ulong max)
-            => next(ref this, min, max);
 
         const ulong X1 = 0x60bee2bee120fc15;
 

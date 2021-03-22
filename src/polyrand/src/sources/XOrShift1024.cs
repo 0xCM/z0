@@ -11,7 +11,7 @@ namespace Z0
     /// <remarks>
     /// Core algorithms taken from the paper: https://arxiv.org/pdf/1402.6246.pdf
     /// </remarks>
-    public class XOrShift1024 : IRngDomainValues<ulong>
+    public class XOrShift1024 : IRngDomainSource<ulong>
     {
         readonly ulong[] State;
 

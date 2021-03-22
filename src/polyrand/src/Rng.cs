@@ -107,7 +107,7 @@ namespace Z0
             => create(new XOrShift1024(seed ?? PolySeed1024.Default));
 
         [MethodImpl(Inline), Op]
-        public static IPolyrand create(IRngDomainValues<ulong> src)
+        public static IPolyrand create(IRngDomainSource<ulong> src)
             => new Polyrand(src);
 
         [MethodImpl(Inline), Op]

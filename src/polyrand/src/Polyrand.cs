@@ -16,12 +16,12 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
-        readonly IRngDomainValues<ulong> Points;
+        readonly IRngDomainSource<ulong> Points;
 
         public Option<IRngNav> Navigator {get;}
 
         [MethodImpl(Inline)]
-        internal Polyrand(IRngDomainValues<ulong> points)
+        internal Polyrand(IRngDomainSource<ulong> points)
         {
             Points = points;
             Navigator = default;
@@ -434,6 +434,5 @@ namespace Z0
         [MethodImpl(Inline)]
         double NextF64()
             => ((double)Points.Next())/double.MaxValue;
-
     }
 }

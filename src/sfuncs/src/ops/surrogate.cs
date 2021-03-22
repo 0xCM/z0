@@ -27,30 +27,26 @@ namespace Z0
             => new S.Action<A0,A1,A3>(id, src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static S.Func<T,T,bit> surrogate<T>(S.BinaryPredicate8<T> src)
-            => new S.Func<T,T,bit>(Delegates.func(src.Subject), src.Id);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static S.Func<T> surrogate<T>(S.Emitter<T> src)
             => new S.Func<T>(Delegates.func(src.Subject), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,T> surrogate<T>(S.UnaryOp<T> src)
             => new S.Func<T,T>(Delegates.func(src.Subject), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,T,T> surrogate<T>(S.BinaryOp<T> src)
             => new S.Func<T,T,T>(Delegates.func(src.Subject), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,T,T,T> surrogate<T>(S.TernaryOp<T> src)
             => new S.Func<T,T,T,T>(Delegates.func(src.Subject), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,bit> surrogate<T>(S.UnaryPredicate<T> src)
             => new S.Func<T,bit>(Delegates.func(src.Subject), src.Id);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static S.Func<T,T,bit> surrogate<T>(S.BinaryPredicate<T> src)
             => new S.Func<T,T,bit>(Delegates.func(src.Subject), src.Id);
     }

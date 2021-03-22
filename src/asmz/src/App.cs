@@ -193,6 +193,31 @@ namespace Z0.Asm
             //Wf.Status(definitions.BlockCount);
         }
 
+        void CheckSigParser()
+        {
+            var success = root.hashset<string>();
+            var fail = root.hashset<string>();
+
+            void parse(AsmApiStatement src)
+            {
+                var expr = src.Sig;
+                if(Sigs.ParseSig(expr, out var sig))
+                {
+                    success.Add(expr.Format());
+                }
+                else
+                    fail.Add(expr.Format());
+            }
+            var pipe = Wf.ApiStatementPipe();
+            pipe.LoadStatements(parse);
+
+            root.iter(fail, f => Wf.Row(f));
+
+
+            Wf.Status($"SuccessCount = {success.Count}, FailureCount = {fail.Count}");
+
+        }
+
         void CheckIndexDecoder()
         {
             var blocks = ApiServices.HexIndexer().IndexApiBlocks();
@@ -649,7 +674,6 @@ namespace Z0.Asm
         void ListCommands()
         {
             root.iter(Wf.Router.SupportedCommands, c => Wf.Status($"{c} enabled"));
-
         }
 
         public void RunPipes()
@@ -850,6 +874,7 @@ namespace Z0.Asm
 
         public void Run()
         {
+            CheckSigParser();
             //PipeImageData();
             //CheckBitSpans();
             //CheckBitView();
@@ -857,8 +882,6 @@ namespace Z0.Asm
             //var asmlang = Wf.AsmLangCmdRunner();
             //var asmcmd = Wf.AsmCmdRunner();
 
-            // var pipe = Wf.ApiStatementPipe();
-            // var loaded = pipe.LoadThumbprints();
             // root.iter(loaded, x => Wf.Row(x));
 
             //CheckRel32();

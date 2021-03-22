@@ -165,7 +165,6 @@ namespace Z0
         public static IGlobalApiCatalog GlobalCatalog(Assembly src, PartId[] parts)
             => GlobalCatalog(FS.path(src.Location).FolderPath, parts);
 
-
         /// <summary>
         /// Attempts to resolve a part from an assembly file path
         /// </summary>

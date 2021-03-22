@@ -49,7 +49,6 @@ namespace Z0.Asm
             var routines = Wf.ApiIndexDecoder().Decode(CodeBlocks()).Routines;
             EmitCallRows(routines);
             EmitJmpRows(routines);
-            EmitSemantic(routines);
         }
 
         public void EmitApiStatements()

@@ -8,12 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static RngMath;
+
+    using G = SplitMix64;
 
     /// <summary>
     /// Implements a 64-bit random number generator
     /// </summary>
     /// <remarks>Algorithms take from https://github.com/lemire/testingRNG/blob/master/source/splitmix64.h</remarks>
-    public class SplitMix64 : IRngDomainValues<ulong>
+    [ApiHost]
+    public struct SplitMix64 : IRngDomainSource<ulong>
     {
         ulong State;
 
@@ -26,28 +30,34 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ulong Next()
-        {
-            var next = NextState(State);
-            State += X1;
-            return next;
-        }
+            => next(ref this);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
-            => RngMath.contract(Next(),max);
+            => next(ref this, max);
 
         [MethodImpl(Inline)]
         public ulong Next(ulong min, ulong max)
-            => min + RngMath.contract(Next(),max - min);
+            => next(ref this, min, max);
 
-        [MethodImpl(Inline)]
-        static ulong NextState(ulong state)
+        [MethodImpl(Inline), Op]
+        static ulong next(ref G g)
         {
-            ulong z = state + X1;
+            var  z = g.State + X1;
             z = (z ^ (z >> 30)) * X2;
             z = (z ^ (z >> 27)) * X3;
-            return z ^ (z >> 31);
+            z = z ^ (z >> 31);
+            g.State += X1;
+            return z;
         }
+
+        [MethodImpl(Inline), Op]
+        static ulong next(ref G g, ulong max)
+            => contract(next(ref g), max);
+
+        [MethodImpl(Inline), Op]
+        static ulong next(ref G g, ulong min, ulong max)
+            => min + contract(next(ref g), max - min);
 
         const ulong X1 = 0x9E3779B97F4A7C15;
 

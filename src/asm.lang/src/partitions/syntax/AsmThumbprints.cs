@@ -30,7 +30,6 @@ namespace Z0.Asm
         {
             Sigs = Wf.AsmSigs();
             Expr = AsmExpr.create(Wf);
-
         }
 
         [Op]

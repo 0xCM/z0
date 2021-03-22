@@ -83,7 +83,7 @@ namespace Z0
             Demands.insist(series.Observed.Observed.Equals(terms[steps - 1].Observed));
 
             var elapsed = Duration.init(sw.ElapsedTicks);
-            var evolved = SeriesEvolution.Define(seed, domain, s0.Observed, series.Observed, elapsed);
+            var evolved = SeriesEvolution.define(seed, domain, s0.Observed, series.Observed, elapsed);
             return evolved;
         }
 

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Linq;
-
     public interface ITimeSeries
     {
         long Id {get;}
@@ -18,6 +15,6 @@ namespace Z0
     {
         SeriesTerm<T> Observed {get;}
 
-        Interval<T> Domain {get;}         
+        Interval<T> Domain {get;}
     }
 }

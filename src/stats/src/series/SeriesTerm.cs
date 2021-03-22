@@ -11,8 +11,8 @@ namespace Z0
     {
         public SeriesTerm(long index, T observation)
         {
-            this.Index = index;
-            this.Observed = observation;
+            Index = index;
+            Observed = observation;
         }
 
         public readonly long Index;
@@ -21,7 +21,7 @@ namespace Z0
 
         public string Format()
             => $"({Index}, {Observed})";
-    
+
         public override string ToString()
             => Format();
     }

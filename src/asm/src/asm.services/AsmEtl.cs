@@ -32,7 +32,6 @@ namespace Z0.Asm
                 where i.Mnemonic == mnemonic
                 select a;
 
-
         [MethodImpl(Inline), Op]
         public Index<AsmRow> Resequence(Index<AsmRow> src)
         {

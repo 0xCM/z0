@@ -11,7 +11,7 @@ namespace Z0
 
     using api = Pcg;
 
-    public struct Pcg32 : IRngNav<uint>, IRngDomainValues<ulong>
+    public struct Pcg32 : IRngNav<uint>, IRngDomainSource<ulong>
     {
         [MethodImpl(Inline)]
         internal Pcg32(ulong s0, ulong? index = null)
@@ -80,7 +80,6 @@ namespace Z0
             => $"{State}[{Index}]";
 
         const ulong Multiplier = Pcg.DefaultMultiplier;
-
 
         [MethodImpl(Inline)]
         public ulong Next(ulong max)
