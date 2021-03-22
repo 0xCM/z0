@@ -110,18 +110,6 @@ namespace Z0
         }
 
         [Op]
-        public static void emit(ListedFiles src, FS.FilePath dst)
-        {
-            var records = src.View;
-            var count = records.Length;
-            var header = Table.header<ListedFileField>();
-            using var writer = dst.Writer();
-            writer.WriteLine(header.HeaderText);
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(format(skip(records,i)));
-        }
-
-        [Op]
         public static string format(ListedFiles src)
         {
             var dst = Z0.text.build();

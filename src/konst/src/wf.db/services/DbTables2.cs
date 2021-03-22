@@ -36,10 +36,5 @@ namespace Z0
 
         public IEnumerable<FS.FilePath> Files()
             => Root.Files(X.Csv, true);
-
-        public Option<FS.FilePath> Deposit<F,R>(R[] src, FS.FileName name)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => TableArchives.deposit<F,R>(Root, src, name);
     }
 }

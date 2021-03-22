@@ -102,7 +102,8 @@ namespace Z0
         public XedSummaryRow[] Emit(XedPattern[] src)
         {
             var records = Xed.sort(src).Map(p => Xed.row(p));
-            Target.Deposit<F,R>(records, Config.SummaryFile);
+            var target = Wf.Db().Table<XedSummaryRow>("xed", FS.Extensions.Csv);
+            Records.emit(records,  target);
             return records;
         }
 
@@ -112,7 +113,5 @@ namespace Z0
             var dst = Target.TablePath(FS.file("mnemonics", FileExtensions.Csv));
             dst.Overwrite(upper);
         }
-
-
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using R = XedSummaryRow;
 
     [Record(TableId)]
-    public struct XedSummaryRow : ITabular<F,R>
+    public struct XedSummaryRow : ITabular<F,R>, IRecord<XedSummaryRow>
     {
         public const string TableId = "xed.summary";
 
