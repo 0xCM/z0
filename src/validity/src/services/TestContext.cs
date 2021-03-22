@@ -164,11 +164,14 @@ namespace Z0
         protected PartId TestedPart
             => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
 
+        protected PartName TestApp
+            => (PartId)((ulong)Assembly.GetEntryAssembly().Id());
+
         protected FS.FilePath StatusLogPath
-            => Db.TestLogSummaryRoot() + FS.file(TestedPart.Format() + "test" + "." + "status" + "log");
+            => Db.TestLogSummaryRoot() + FS.file(TestApp.Format() + "test" + "." + "status" + "log");
 
         protected FS.FilePath ErrorLogPath
-            => Db.TestLogSummaryRoot() + FS.file(TestedPart.Format() + "test" + "." + "errors" + "log");
+            => Db.TestLogSummaryRoot() + FS.file(TestApp.Format() + "test" + "." + "errors" + "log");
 
         protected FS.FolderPath UnitDataDir
             => Db.TestAppLogRoot<U>() + FS.folder(GetType().Name);
@@ -193,7 +196,7 @@ namespace Z0
         CasePaths GetCasePaths()
         {
             root.require(Db != null, () => $"Db for {GetType().Name} is null");
-            return new CasePaths(Db.TestLogRoot(), TestedPart, GetType());
+            return new CasePaths(Db.TestLogRoot(), TestApp, GetType());
         }
 
         public CasePaths Paths

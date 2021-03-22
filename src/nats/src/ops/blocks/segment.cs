@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
-    using static memory;
+    using static Part;
 
-    [ApiHost]
-    public readonly partial struct BlockCalcs
+    partial struct CellCalcs
     {
-        const NumericKind Closure = UnsignedInts;
-
-   }
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static GridSegment<T> segment<T>(GridDim dim, uint segwidth)
+            where T : unmanaged
+                => new GridSegment<T>(dim, segwidth);
+    }
 }

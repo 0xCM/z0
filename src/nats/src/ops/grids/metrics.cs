@@ -11,26 +11,6 @@ namespace Z0
 
     partial struct GridCalcs
     {
-        /// <summary>
-        /// Calculates memory block statistics for specified parameters
-        /// </summary>
-        /// <param name="bc">The block count</param>
-        /// <param name="bw">The block width</param>
-        /// <param name="cw">The cell width</param>
-        [MethodImpl(Inline), Op]
-        public static BlockedGridStats metrics(int bc, int bw, int cw)
-            => new BlockedGridStats(bc, bw, cw);
-
-        /// <summary>
-        /// Calculates memory block statistics for specified function and type parameters
-        /// </summary>
-        /// <param name="bc">The block count</param>
-        /// <param name="bw">The block width</param>
-        /// <typeparam name="T">The type that determines cell width</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BLockedGridStats<T> metrics<T>(int bc, int bw)
-            where T : unmanaged
-                => new BLockedGridStats<T>(bc, bw);
 
         /// <summary>
         /// Calculates a grid layout from a specification
@@ -48,7 +28,7 @@ namespace Z0
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline), Op]
         public static GridMetrics metrics(ushort rows, ushort cols, ushort segwidth)
-             => metrics(GridCalcs.grid(rows, cols, segwidth));
+             => metrics(CellCalcs.grid(rows, cols, segwidth));
 
         /// <summary>
         /// Defines a grid map predicated row count, col count and the bit width of parametric type
@@ -58,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static GridMetrics metrics<T>(ushort rows, ushort cols)
             where T : unmanaged
-                => metrics(GridCalcs.grid<T>(rows,cols));
+                => metrics(CellCalcs.grid<T>(rows,cols));
 
         /// <summary>
         /// Calculates memory block statistics for specified function and type parameters
@@ -86,6 +66,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => metrics(grid(m,n, zero));
+                => metrics(CellCalcs.grid(m,n, zero));
     }
 }

@@ -11,8 +11,6 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
-
     partial class gmath
     {
         /// <summary>
@@ -64,13 +62,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(BL.or(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.or(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return force<T>(BL.or(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.or(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.or(uint32(a), uint32(b)));
+                return generic<T>(math.or(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.or(uint64(a), uint64(b)));
+                return generic<T>(math.or(uint64(a), uint64(b)));
             else
                 return or_i(a,b);
         }
@@ -80,13 +78,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BL.or(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.or(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return force<T>(BL.or(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.or(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(BL.or(int32(a), int32(b)));
+                 return generic<T>(math.or(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(BL.or(int64(a), int64(b)));
+                 return generic<T>(math.or(int64(a), int64(b)));
             else
                 throw no<T>();
         }
@@ -96,13 +94,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BL.or(uint8(a), uint8(b), uint8(c)));
+                return generic<T>(math.or(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BL.or(uint16(a), uint16(b), uint16(c)));
+                return generic<T>(math.or(uint16(a), uint16(b), uint16(c)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.or(uint32(a), uint32(b), uint32(c)));
+                return generic<T>(math.or(uint32(a), uint32(b), uint32(c)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.or(uint64(a), uint64(b), uint64(c)));
+                return generic<T>(math.or(uint64(a), uint64(b), uint64(c)));
             else
                 return or_i(a,b,c);
         }
@@ -112,13 +110,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(BL.or(int8(a), int8(b), int8(c)));
+                 return generic<T>(math.or(int8(a), int8(b), int8(c)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(BL.or(int16(a), int16(b), int16(c)));
+                 return generic<T>(math.or(int16(a), int16(b), int16(c)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(BL.or(int32(a), int32(b), int32(c)));
+                 return generic<T>(math.or(int32(a), int32(b), int32(c)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(BL.or(int64(a), int64(b), int64(c)));
+                 return generic<T>(math.or(int64(a), int64(b), int64(c)));
             else
                 throw no<T>();
         }

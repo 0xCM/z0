@@ -26,7 +26,7 @@ namespace Z0
             using var reader = stream.BinaryReader();
             using var writer = dst.Writer();
             writer.WriteLine(text.concat($"Address".PadRight(12), RP.SpacedPipe, "Data"));
-            var buffer = span<byte>(rowsize);
+            var buffer = alloc<byte>(rowsize);
             var k = Read(reader, buffer);
             var offset = MemoryAddress.Zero;
             var lines = 0;

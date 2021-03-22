@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline), Xor]
         public static BitMatrix4 xor(in BitMatrix4 A, in BitMatrix4 B)
-            => ScalarBitLogic.xor((ushort)A,(ushort)B);
+            => math.xor((ushort)A,(ushort)B);
 
         /// <summary>
         /// Computes the logical Xor btween two primal bitmatrices, depositing the result to a caller-allocated target

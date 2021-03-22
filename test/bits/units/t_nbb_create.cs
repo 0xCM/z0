@@ -28,7 +28,7 @@ namespace Z0
         {
             int n = (int)nat64u<N>();
             var rep = default(N);
-            var segcount = (int)GridCalcs.mincells<T>(nat64u<N>());
+            var segcount = (int)CellCalcs.mincells<T>(nat64u<N>());
             Claim.eq(BitBlock<N,T>.RequiredCells, segcount);
 
             var totalcap = BitBlock<N,T>.RequiredWidth;

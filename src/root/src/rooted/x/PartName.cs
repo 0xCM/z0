@@ -5,18 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
 
-    partial struct GridCalcs
+    partial class XTend
     {
-        /// <summary>
-        /// Computes the grid cell count
-        /// </summary>
-        /// <param name="src">The grid dimension</param>
         [MethodImpl(Inline), Op]
-        public static ulong points(GridDim src)
-            => (ulong)src.RowCount*(ulong)src.ColCount;
+        public static PartName PartName(this PartId id)
+            => id;
+
+        [MethodImpl(Inline), Op]
+        public static PartName PartName(this Assembly src)
+            => Root.id(src);
     }
 }

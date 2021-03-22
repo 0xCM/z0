@@ -10,7 +10,8 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
+
     {
         /// <summary>
         /// Defines a grid specification predicated on specified row count, col count and bit width
@@ -21,9 +22,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static GridSpec grid(ushort rows, ushort cols, ushort segwidth)
         {
-            var bytes = (uint)GridCalcs.tablesize(rows, cols);
+            var bytes = (uint)CellCalcs.tablesize(rows, cols);
             var bits = bytes*8;
-            var segs = cellcount(rows, cols, segwidth);
+            var segs = CellCalcs.cellcount(rows, cols, segwidth);
             return new GridSpec(rows, cols, segwidth, bytes, bits, segs);
         }
 

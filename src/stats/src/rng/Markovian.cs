@@ -144,7 +144,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
         {
-            var dst = Z0.SpanBlocks.alloc<float>(n256, (uint)BlockCalcs.blockcount<float>(n256, length));
+            var dst = Z0.SpanBlocks.alloc<float>(n256, (uint)CellCalcs.blockcount<float>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Storage, dst.Storage.Avg() * length);
             return dst;
@@ -153,7 +153,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
         {
-            var dst = Z0.SpanBlocks.alloc<double>(n256, (uint)BlockCalcs.blockcount<double>(n256, length));
+            var dst = Z0.SpanBlocks.alloc<double>(n256, (uint)CellCalcs.blockcount<double>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Storage, dst.Storage.Avg() * length);
             return dst;

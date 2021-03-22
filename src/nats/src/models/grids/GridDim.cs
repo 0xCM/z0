@@ -70,7 +70,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => (int)GridCalcs.cellcount<M,N,T>();
+            get => (int)CellCalcs.cellcount<M,N,T>();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public uint ByteCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.mincells<M,N,byte>();
+            get => CellCalcs.mincells<M,N,byte>();
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         public int BlockCount
         {
             [MethodImpl(Inline)]
-            get => BlockCalcs.cellcover<W,M,N,T>();
+            get => CellCalcs.cellcover<W,M,N,T>();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => BlockCalcs.blocklength<W,T>();
+            get => CellCalcs.blocklength<W,T>();
         }
 
         /// <summary>

@@ -27,7 +27,7 @@ namespace Z0
         }
 
         public static ScalarBitLogicOps init()
-            => new ScalarBitLogicOps(prepare(typeof(ScalarBitLogic).DeclaredStaticMethods()));
+            => new ScalarBitLogicOps(prepare(typeof(math).DeclaredStaticMethods()));
 
         ScalarBitLogicOps(MethodInfo[] src)
         {

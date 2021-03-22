@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static memory;
 
-    partial struct BlockCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the number of T-cells that comprise an N-block

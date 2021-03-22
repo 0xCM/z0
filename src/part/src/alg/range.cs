@@ -6,7 +6,6 @@ namespace alg
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using Z0;
 
@@ -116,7 +115,7 @@ namespace alg
         }
 
         [Op, Closures(Integers)]
-        public static IEnumerable<T> stream<T>(T x0, T x1, T step)
+        public static Index<T> points<T>(T x0, T x1, T step)
             where T : unmanaged
         {
             var min = @as<T,ulong>(x0);
@@ -124,13 +123,12 @@ namespace alg
             var inc = @as<T,ulong>(step);
             var count = (max - min)/inc;
             var buffer = sys.alloc<T>(count);
-            stream_1(x0,x1,step,buffer);
-            foreach(var point in buffer)
-                yield return point;
+            fill_1(x0,x1,step,buffer);
+            return buffer;
         }
 
         [MethodImpl(Inline)]
-        static void stream_1<T>(T x0, T x1, T step, Span<T> dst)
+        static void fill_1<T>(T x0, T x1, T step, Span<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -142,11 +140,11 @@ namespace alg
             else if(typeof(T) == typeof(ushort))
                 u16(x0,x1,step,dst);
             else
-                stream_2(x0,x1,step,dst);
+                fill_2(x0,x1,step,dst);
         }
 
         [MethodImpl(Inline)]
-        static void stream_2<T>(T x0, T x1, T step, Span<T> dst)
+        static void fill_2<T>(T x0, T x1, T step, Span<T> dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(int))

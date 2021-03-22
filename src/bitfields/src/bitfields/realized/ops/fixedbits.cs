@@ -13,7 +13,7 @@ namespace Z0
     {
        public static SpanBits<T> fixedbits<T>(uint bitcount)
             where T : unmanaged
-                => new SpanBits<T>(SpanBlocks.alloc<T>(n64, BlockCalcs.bitcover<T>(bitcount)), bitcount);
+                => new SpanBits<T>(SpanBlocks.alloc<T>(n64, CellCalcs.bitcover<T>(bitcount)), bitcount);
 
         /// <summary>
         /// Defines and creates a fixed-width bitfield

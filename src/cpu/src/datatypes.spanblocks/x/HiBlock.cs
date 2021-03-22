@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static BlockCalcs;
+    using static CellCalcs;
 
     partial class BXTend
     {

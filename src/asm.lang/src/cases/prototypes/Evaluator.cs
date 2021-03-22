@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
     using static BinaryBitLogicKind;
-    using static ScalarBitLogic;
+    using static math;
 
     partial struct Prototypes
     {

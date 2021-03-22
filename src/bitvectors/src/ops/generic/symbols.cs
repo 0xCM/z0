@@ -26,7 +26,7 @@ namespace Z0
         {
             var index = Enums.dictionary<E,T>();
             var bitcount = maxbits ?? BitWidth.measure<T>();
-            var count = GridCalcs.mincells((ulong)segwidth, (ulong)bitcount);
+            var count = CellCalcs.mincells((ulong)segwidth, (ulong)bitcount);
             Span<char> symbols = new char[count];
             for(int i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {

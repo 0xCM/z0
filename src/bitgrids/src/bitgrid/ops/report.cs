@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static TextRules;
-    using static z;
+    using static Part;
 
     partial class BitGrid
     {

@@ -10,8 +10,6 @@ namespace Z0
     using static Root;
     using static memory;
 
-    using BL = ScalarBitLogic;
-
     partial class gmath
     {
         [MethodImpl(Inline), Not, Closures(Integers)]
@@ -24,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BL.not(uint8(a)));
+                return generic<T>(math.not(uint8(a)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BL.not(uint16(a)));
+                return generic<T>(math.not(uint16(a)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.not(uint32(a)));
+                return generic<T>(math.not(uint32(a)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.not(uint64(a)));
+                return generic<T>(math.not(uint64(a)));
             else
                 return not_i(a);
         }
@@ -40,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(BL.not(int8(a)));
+                 return generic<T>(math.not(int8(a)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(BL.not(int16(a)));
+                 return generic<T>(math.not(int16(a)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(BL.not(int32(a)));
+                 return generic<T>(math.not(int32(a)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(BL.not(int64(a)));
+                 return generic<T>(math.not(int64(a)));
             else
                 throw no<T>();
         }

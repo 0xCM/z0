@@ -11,7 +11,6 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
 
     partial class gmath
     {
@@ -30,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(BL.nonimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.nonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return force<T>(BL.nonimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.nonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.nonimpl(uint32(a), uint32(b)));
+                return generic<T>(math.nonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.nonimpl(uint64(a), uint64(b)));
+                return generic<T>(math.nonimpl(uint64(a), uint64(b)));
             else
                 return nonimpl_i(a,b);
         }
@@ -46,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BL.nonimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.nonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return force<T>(BL.nonimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.nonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(BL.nonimpl(int32(a), int32(b)));
+                return generic<T>(math.nonimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(BL.nonimpl(int64(a), int64(b)));
+                return generic<T>(math.nonimpl(int64(a), int64(b)));
             else
                 throw Unsupported.define<T>();
         }

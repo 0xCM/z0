@@ -13,6 +13,12 @@ namespace Z0
             public Index<AssetGroupInfo> NativeLibraries;
 
             public Index<ResourceAssembly> ResourceAssemblies;
+
+            public void Render(ITextBuffer dst)
+            {
+                root.iter(AssemblyGroups, x => x.Render(dst));
+                root.iter(NativeLibraries, x => x.Render(dst));
+            }
         }
     }
 }

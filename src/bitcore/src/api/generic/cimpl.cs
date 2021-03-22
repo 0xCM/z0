@@ -11,8 +11,6 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
-
     partial class gbits
     {
         /// <summary>
@@ -30,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(BL.cimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.cimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return force<T>(BL.cimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.cimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.cimpl(uint32(a), uint32(b)));
+                return generic<T>(math.cimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.cimpl(uint64(a), uint64(b)));
+                return generic<T>(math.cimpl(uint64(a), uint64(b)));
             else
                 return cimpl_i(a,b);
         }
@@ -46,15 +44,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BL.cimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.cimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return force<T>(BL.cimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.cimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(BL.cimpl(int32(a), int32(b)));
+                return generic<T>(math.cimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(BL.cimpl(int64(a), int64(b)));
+                return generic<T>(math.cimpl(int64(a), int64(b)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

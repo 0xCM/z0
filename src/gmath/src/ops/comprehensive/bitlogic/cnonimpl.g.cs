@@ -11,8 +11,6 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
-
     partial class gmath
     {
         /// <summary>
@@ -30,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(BL.cnonimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.cnonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return force<T>(BL.cnonimpl(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.cnonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.cnonimpl(uint32(a), uint32(b)));
+                return generic<T>(math.cnonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.cnonimpl(uint64(a), uint64(b)));
+                return generic<T>(math.cnonimpl(uint64(a), uint64(b)));
             else
                 return cnonimpl_i(a,b);
         }
@@ -46,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BL.cnonimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.cnonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return force<T>(BL.cnonimpl(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.cnonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(BL.cnonimpl(int32(a), int32(b)));
+                return generic<T>(math.cnonimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(BL.cnonimpl(int64(a), int64(b)));
+                return generic<T>(math.cnonimpl(int64(a), int64(b)));
             else
                 throw no<T>();
         }

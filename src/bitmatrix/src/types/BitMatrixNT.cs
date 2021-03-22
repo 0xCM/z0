@@ -55,7 +55,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  GridCalcs.mincells((ulong)width<T>(),nat64u<N>());
+            get =>  CellCalcs.mincells((ulong)width<T>(),nat64u<N>());
         }
 
         public static int TotalCellCount

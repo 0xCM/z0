@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="col">The 0-based col index</param>
         [MethodImpl(Inline), Op]
         public static int offset(in GridMetrics src, int row, int col)
-            => linear(src, row,col) % src.CellWidth;
+            => CellCalcs.linear(src, row,col) % src.CellWidth;
     }
 }

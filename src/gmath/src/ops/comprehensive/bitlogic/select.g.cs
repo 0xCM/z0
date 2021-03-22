@@ -10,8 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using BL = ScalarBitLogic;
-
     partial class gmath
     {
         /// <summary>
@@ -27,9 +25,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BL.select(uint8(a), uint8(b), uint8(c)));
+                return generic<T>(math.select(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BL.select(uint16(a), uint16(b), uint16(c)));
+                return generic<T>(math.select(uint16(a), uint16(b), uint16(c)));
             else
                 return or(and(a,b), nonimpl(a,c));
         }

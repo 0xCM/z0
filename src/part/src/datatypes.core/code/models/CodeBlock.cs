@@ -101,6 +101,9 @@ namespace Z0
             => Code.Format();
 
 
+        public override string ToString()
+            => Format();
+
         public override int GetHashCode()
             => Code.GetHashCode();
 

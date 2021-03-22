@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Xor, Closures(UInt8x16k)]
         public static BitGrid16<T> xor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(ScalarBitLogic.xor(gx,gy));
+                => init16<T>(math.xor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise xor between generic bitgrids
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Xor, Closures(UInt8x16x32k)]
         public static BitGrid32<T> xor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => init32<T>(ScalarBitLogic.xor(gx,gy));
+                => init32<T>(math.xor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise xor between generic bitgrids
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Xor, Closures(Closure)]
         public static BitGrid64<T> xor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => init64<T>(ScalarBitLogic.xor(gx,gy));
+                => init64<T>(math.xor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XOR between generic bitgrids and stores the result to a caller-supplied target
@@ -74,7 +74,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ScalarBitLogic.xor(gx,gy);
+                => math.xor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise xor between natural bitgrids
@@ -89,7 +89,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ScalarBitLogic.xor(gx,gy);
+                => math.xor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise xor between natural bitgrids
@@ -104,7 +104,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ScalarBitLogic.xor(gx,gy);
+                => math.xor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise xor between natural bitgrids

@@ -41,7 +41,7 @@ namespace Z0
         /// for the possibility that the id doesn't identify anything in the index
         /// </summary>
         /// <param name="id"></param>
-        Option<T> Lookup(OpIdentity id);
+        bool Lookup(OpIdentity id, out T value);
 
         /// <summary>
         /// Enumerates the key/value index pairs

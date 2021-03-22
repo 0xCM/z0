@@ -132,7 +132,7 @@ namespace Z0
         int RowCellCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.minimum<N,T>();
+            get => CellCalcs.minimum<N,T>();
         }
 
         /// <summary>

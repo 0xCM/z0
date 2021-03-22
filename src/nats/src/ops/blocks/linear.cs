@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the 0-based linear index determined by column width and a row/col coordinate
@@ -61,7 +61,6 @@ namespace Z0
         public static uint linear(GridDim dim, uint row, uint col)
             => linear(dim, (row,col));
 
-
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width
         /// </summary>
@@ -83,5 +82,14 @@ namespace Z0
         public static uint linear<W>(uint row, uint col, W w = default)
             where W : unmanaged, IDataWidth
                 => (uint)row * (uint)Widths.data(w) + col;
+
+        /// <summary>
+        /// Computes the storage segment that covers a specified row/col coordinate
+        /// </summary>
+        /// <param name="row">The 0-based row index</param>
+        /// <param name="col">The 0-based col index</param>
+        [MethodImpl(Inline), Op]
+        public static int seg(in GridMetrics src, int row, int col)
+            => linear(src,row,col) / src.CellWidth;
     }
 }

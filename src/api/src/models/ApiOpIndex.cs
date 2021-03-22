@@ -21,8 +21,13 @@ namespace Z0
             Duplicates = duplicates;
         }
 
-        public Option<T> Lookup(OpIdentity id)
-            => HashTable.TryFind(id);
+        public bool Lookup(OpIdentity id, out T value)
+        {
+            if(HashTable.TryGetValue(id, out value))
+                return true;
+            else
+                return false;
+        }
 
         public T this[OpIdentity id]
         {
@@ -46,6 +51,9 @@ namespace Z0
 
         public IReadOnlyList<OpIdentity> DuplicateKeys
             => Duplicates;
+
+        public IEnumerable<T> Values
+            => HashTable.Values;
 
         IEnumerable<KeyedValue<OpIdentity,T>> KeyedValues
             => HashTable.Select(x => root.kv(x.Key, x.Value));

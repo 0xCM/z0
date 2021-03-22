@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using B = BlockCalcs;
+    using B = CellCalcs;
 
     partial class XSource
     {

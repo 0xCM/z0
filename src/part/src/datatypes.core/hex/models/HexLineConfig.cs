@@ -27,7 +27,7 @@ namespace Z0
         public char Delimiter {get;}
 
         [MethodImpl(Inline)]
-        public HexLineConfig(ushort linebytes, bool linelabels, char delimiter = FieldDelimiter)
+        public HexLineConfig(ushort linebytes, bool linelabels, char delimiter = Chars.Space)
         {
             BytesPerLine = linebytes;
             LineLabels = linelabels;

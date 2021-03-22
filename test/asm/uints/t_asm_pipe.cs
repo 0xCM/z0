@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Collections.Generic;
 
     using static Part;
     using static memory;
@@ -15,8 +16,29 @@ namespace Z0.Asm
 
     public class t_asm_pipe : t_asm<t_asm_pipe>
     {
-        public t_asm_pipe()
+        const string LinePattern ="{0,-36} | {1,-16} | {2}";
+        const string NamePattern = "{0}/{1}";
+
+        public void t_check_hex_blocks()
         {
+
+            var archive = Wf.ApiHexArchive();
+            using var writer = CaseWriter(FS.Extensions.Csv);
+            writer.WriteLine(string.Format(LinePattern, "Operation", "BaseAddress", "Hex"));
+
+            var direct = ApiIndex.create(archive.HostBlocks<math>().Array());
+            var generic = ApiIndex.create(archive.HostBlocks<gmath>().Array());
+
+            write(direct.Values, writer);
+            write(generic.Values, writer);
+
+        }
+
+
+        void write(IEnumerable<ApiCodeBlock> src, StreamWriter dst)
+        {
+            root.iter(src, block => dst.WriteLine(string.Format(LinePattern,  string.Format(NamePattern, block.Uri.Host, block.OpId), block.BaseAddress, block.Code)));
+
         }
 
         public void check_math()

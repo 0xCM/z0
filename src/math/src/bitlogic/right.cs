@@ -10,83 +10,85 @@ namespace Z0
     partial class math
     {
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static sbyte and(sbyte a, sbyte b)
-            => (sbyte)(a & b);
+        [MethodImpl(Inline), Right]
+        public static sbyte right(sbyte a, sbyte b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static byte and(byte a, byte b)
-            => (byte)(a & b);
+        [MethodImpl(Inline), Right]
+        public static byte right(byte a, byte b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static short and(short a, short b)
-            => (short)(a & b);
+        [MethodImpl(Inline), Right]
+        public static short right(short a, short b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static ushort and(ushort a, ushort b)
-            => (ushort)(a & b);
+        [MethodImpl(Inline), Right]
+        public static ushort right(ushort a, ushort b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static int and(int a, int b)
-            => a & b;
+        [MethodImpl(Inline), Right]
+        public static int right(int a, int b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static uint and(uint a, uint b)
-            => a & b;
+        [MethodImpl(Inline), Right]
+        public static uint right(uint a, uint b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static long and(long a, long b)
-            => a & b;
+        [MethodImpl(Inline), Right]
+        public static long right(long a, long b)
+            => b;
 
         /// <summary>
-        /// Computes the bitwise and c := ~(a & b) for operands a and b
+        /// Returns the right operand value
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal operand type</typeparam>
-        [MethodImpl(Inline), And]
-        public static ulong and(ulong a, ulong b)
-            => a & b;
-  }
+        [MethodImpl(Inline), Right]
+        public static ulong right(ulong a, ulong b)
+            => b;
+
+
+    }
 }

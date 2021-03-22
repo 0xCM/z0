@@ -6,6 +6,7 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
+    using System.Diagnostics;
     using System.Linq;
     using System.Collections.Generic;
     using System.IO;
@@ -677,10 +678,14 @@ namespace Z0.Asm
 
         public void PipeImageData()
         {
-            var archive = ImageArchives.tables(Wf);
-            var path = archive.Root + FS.file("image.content.genapp", FS.Extensions.Csv);
-            ImageArchives.pipe(Wf, path, Receive);
+            var emitter = Wf.ImageDataEmitter();
+            root.iter(Wf.Api.PartComponents, c => emitter.EmitImageContent(c));
+
+            // var archive = ImageArchives.tables(Wf);
+            // var path = archive.Root + FS.file("image.content.genapp", FS.Extensions.Csv);
+            // ImageArchives.pipe(Wf, path, Receive);
         }
+
 
         void ShowLetters()
         {
@@ -706,11 +711,15 @@ namespace Z0.Asm
         {
             var deps = JsonDepsLoader.from(src);
             var libs = deps.Libs();
+            var rtlibs = deps.RuntimeLibs();
             var options = deps.Options();
             var target = deps.Target();
             var graph = deps.Graph;
             Wf.Row(string.Format("Target: {0} {1} {2}", target.Framework, target.Runtime, target.RuntimeSignature));
             root.iter(libs, lib => Wf.Row(lib.Name));
+            var buffer = text.buffer();
+            root.iter(rtlibs, lib => lib.Render(buffer));
+            Wf.Row(buffer.Emit());
         }
 
         void ShowCmdModels()
@@ -838,10 +847,12 @@ namespace Z0.Asm
             Wf.Row($"8: {bits.View(w8)}");
 
         }
+
         public void Run()
         {
+            //PipeImageData();
             //CheckBitSpans();
-            CheckBitView();
+            //CheckBitView();
             //var api = Wf.ApiCmdRunner();
             //var asmlang = Wf.AsmLangCmdRunner();
             //var asmcmd = Wf.AsmCmdRunner();

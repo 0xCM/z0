@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         [MethodImpl(Inline), Op]
         public static uint remainder(in GridMetrics src, W128 w)
@@ -33,13 +33,5 @@ namespace Z0
             return r != 0 ? r + 1 : r;
         }
 
-        /// <summary>
-        /// Computes the storage segment that covers a specified row/col coordinate
-        /// </summary>
-        /// <param name="row">The 0-based row index</param>
-        /// <param name="col">The 0-based col index</param>
-        [MethodImpl(Inline), Op]
-        public static int seg(in GridMetrics src, int row, int col)
-            => linear(src,row,col) / src.CellWidth;
     }
 }

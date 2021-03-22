@@ -10,76 +10,76 @@ namespace Z0
     partial class math
     {
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static sbyte xor(sbyte a, sbyte b)
-            => (sbyte)(a ^ b);
+        [MethodImpl(Inline), Xnor]
+        public static sbyte xnor(sbyte a, sbyte b)
+            => not(xor(a,b));
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static byte xor(byte a, byte b)
-            => (byte)(a ^ b);
+        [MethodImpl(Inline), Xnor]
+        public static byte xnor(byte a, byte b)
+            => not(xor(a,b));
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static short xor(short a, short b)
-            => (short)(a ^ b);
+        [MethodImpl(Inline), Xnor]
+        public static short xnor(short a, short b)
+            => not(xor(a,b));
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static ushort xor(ushort a, ushort b)
-            => (ushort)(a ^ b);
+        [MethodImpl(Inline), Xnor]
+        public static ushort xnor(ushort a, ushort b)
+            => not(xor(a,b));
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static int xor(int a, int b)
-            => a ^ b;
+        [MethodImpl(Inline), Xnor]
+        public static int xnor(int a, int b)
+            => ~ (a ^ b);
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static uint xor(uint a, uint b)
-            => a ^ b;
+        [MethodImpl(Inline), Xnor]
+        public static uint xnor(uint a, uint b)
+            => ~ (a ^ b);
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static long xor(long a, long b)
-            => a ^ b;
+        [MethodImpl(Inline), Xnor]
+        public static long xnor(long a, long b)
+            => ~ (a ^ b);
 
         /// <summary>
-        /// Computes the bitwise xor c := a ^ b for operands a and b
+        /// Computes the bitwise xnor c := ~(a ^ b) for operands a and b
         /// </summary>
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
-        [MethodImpl(Inline), Xor]
-        public static ulong xor(ulong a, ulong b)
-            => a ^ b;
+        [MethodImpl(Inline), Xnor]
+        public static ulong xnor(ulong a, ulong b)
+            => ~ (a ^ b);
 
     }
 }

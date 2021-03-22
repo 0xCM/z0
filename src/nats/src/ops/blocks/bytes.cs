@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the number of bytes that can be covered by a specified number of cells of parametric type
@@ -45,5 +45,6 @@ namespace Z0
             var points = (int)(rows*cols);
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
+
     }
 }

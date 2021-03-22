@@ -32,7 +32,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 32;
 
-
         [MethodImpl(Inline)]
         internal BitGrid256(Vector256<T> src)
             => Data = src;

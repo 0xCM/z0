@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the number of bytes required to cover a grid, predicated on row/col counts

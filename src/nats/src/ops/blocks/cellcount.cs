@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
+    using static Root;
     using static memory;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the number of packed cells required to cover a rectangular area

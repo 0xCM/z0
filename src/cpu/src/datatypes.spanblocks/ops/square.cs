@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static BlockCalcs;
+    using static CellCalcs;
 
     partial struct SpanBlocks
     {

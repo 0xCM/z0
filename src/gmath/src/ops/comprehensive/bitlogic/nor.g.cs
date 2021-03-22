@@ -11,7 +11,6 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
 
     partial class gmath
     {
@@ -30,13 +29,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return force<T>(BL.nor(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.nor(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return force<T>(BL.nor(force<T,uint>(a), force<T,uint>(b)));
+                return force<T>(math.nor(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BL.nor(uint32(a), uint32(b)));
+                return generic<T>(math.nor(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BL.nor(uint64(a), uint64(b)));
+                return generic<T>(math.nor(uint64(a), uint64(b)));
             else
                 return nor_i(a,b);
         }
@@ -46,13 +45,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return force<T>(BL.nor(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.nor(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return force<T>(BL.nor(force<T,int>(a), force<T,int>(b)));
+                return force<T>(math.nor(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(BL.nor(int32(a), int32(b)));
+                return generic<T>(math.nor(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(BL.nor(int64(a), int64(b)));
+                return generic<T>(math.nor(int64(a), int64(b)));
             else
                 throw no<T>();
         }

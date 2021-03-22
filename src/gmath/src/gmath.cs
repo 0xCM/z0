@@ -4,16 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-
     [ApiHost(ApiSetKind.Math | ApiSetKind.Generic)]
     public partial class gmath
     {
-
-
 
     }
 
@@ -28,7 +21,6 @@ namespace Z0
     {
 
     }
-
 
     public static partial class XTend
     {

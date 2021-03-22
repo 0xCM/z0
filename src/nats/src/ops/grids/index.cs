@@ -17,7 +17,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rowCellCount = ScalarCast.uint16(GridCalcs.minimum<N,T>());
+            var rowCellCount = ScalarCast.uint16(CellCalcs.minimum<N,T>());
             var rowOffset = ScalarCast.uint32(rowCellCount*row);
             return index(
                 CellIndex: ScalarCast.uint16(rowOffset + BitWidth.div(col,t)),

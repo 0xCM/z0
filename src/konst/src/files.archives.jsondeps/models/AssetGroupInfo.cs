@@ -13,6 +13,21 @@ namespace Z0
             public Index<FS.FilePath> AssetPaths;
 
             public Index<RuntimeFileInfo> RuntimeFiles;
+
+            public void Render(ITextBuffer dst)
+            {
+                if(AssetPaths.Count != 0)
+                {
+                    dst.AppendLine("assets:");
+                    root.iter(AssetPaths, p => dst.AppendLine(string.Format("{0}", p.ToUri())));
+                }
+
+                if(RuntimeFiles.Count != 0)
+                {
+                    dst.AppendLine("runtime_files:");
+                    root.iter(RuntimeFiles, f => dst.AppendLine(string.Format("{0}", f.Format())));
+                }
+            }
         }
     }
 }

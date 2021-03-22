@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = SpanBlocks.alloc<T>(blocksize, BlockCalcs.blocks(blocksize, m,n,d));
+            var blocks = SpanBlocks.alloc<T>(blocksize, CellCalcs.blocks(blocksize, m,n,d));
             broadcast(d, blocks);
             return new BitGrid<M,N,T>(blocks);
         }

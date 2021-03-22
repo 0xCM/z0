@@ -44,34 +44,34 @@ namespace Z0
         public void check_blocklength_128()
         {
             N128 n = default;
-            Claim.eq(16, BlockCalcs.blocklength<sbyte>(n));
-            Claim.eq(16, BlockCalcs.blocklength<byte>(n));
-            Claim.eq(8, BlockCalcs.blocklength<short>(n));
-            Claim.eq(8, BlockCalcs.blocklength<ushort>(n));
-            Claim.eq(4, BlockCalcs.blocklength<int>(n));
-            Claim.eq(4, BlockCalcs.blocklength<uint>(n));
-            Claim.eq(2, BlockCalcs.blocklength<long>(n));
-            Claim.eq(2, BlockCalcs.blocklength<ulong>(n));
-            Claim.eq(4, BlockCalcs.blocklength<float>(n));
-            Claim.eq(2, BlockCalcs.blocklength<double>(n));
-            Claim.eq(8, BlockCalcs.cellblocks<int>(n,2));
-            Claim.eq(4, BlockCalcs.cellblocks<long>(n, 2));
-            Claim.eq(32, BlockCalcs.cellblocks<byte>(n, 2));
+            Claim.eq(16, CellCalcs.blocklength<sbyte>(n));
+            Claim.eq(16, CellCalcs.blocklength<byte>(n));
+            Claim.eq(8, CellCalcs.blocklength<short>(n));
+            Claim.eq(8, CellCalcs.blocklength<ushort>(n));
+            Claim.eq(4, CellCalcs.blocklength<int>(n));
+            Claim.eq(4, CellCalcs.blocklength<uint>(n));
+            Claim.eq(2, CellCalcs.blocklength<long>(n));
+            Claim.eq(2, CellCalcs.blocklength<ulong>(n));
+            Claim.eq(4, CellCalcs.blocklength<float>(n));
+            Claim.eq(2, CellCalcs.blocklength<double>(n));
+            Claim.eq(8, CellCalcs.cellblocks<int>(n,2));
+            Claim.eq(4, CellCalcs.cellblocks<long>(n, 2));
+            Claim.eq(32, CellCalcs.cellblocks<byte>(n, 2));
         }
 
         public void check_blocklength_256()
         {
             var n = w256;
-            Claim.eq(32, BlockCalcs.blocklength<sbyte>(n));
-            Claim.eq(32, BlockCalcs.blocklength<byte>(n));
-            Claim.eq(16, BlockCalcs.blocklength<short>(n));
-            Claim.eq(16, BlockCalcs.blocklength<ushort>(n));
-            Claim.eq(8, BlockCalcs.blocklength<int>(n));
-            Claim.eq(8, BlockCalcs.blocklength<uint>(n));
-            Claim.eq(4, BlockCalcs.blocklength<long>(n));
-            Claim.eq(4, BlockCalcs.blocklength<ulong>(n));
-            Claim.eq(8, BlockCalcs.blocklength<float>(n));
-            Claim.eq(4, BlockCalcs.blocklength<double>(n));
+            Claim.eq(32, CellCalcs.blocklength<sbyte>(n));
+            Claim.eq(32, CellCalcs.blocklength<byte>(n));
+            Claim.eq(16, CellCalcs.blocklength<short>(n));
+            Claim.eq(16, CellCalcs.blocklength<ushort>(n));
+            Claim.eq(8, CellCalcs.blocklength<int>(n));
+            Claim.eq(8, CellCalcs.blocklength<uint>(n));
+            Claim.eq(4, CellCalcs.blocklength<long>(n));
+            Claim.eq(4, CellCalcs.blocklength<ulong>(n));
+            Claim.eq(8, CellCalcs.blocklength<float>(n));
+            Claim.eq(4, CellCalcs.blocklength<double>(n));
         }
 
         public void check_block_slice()

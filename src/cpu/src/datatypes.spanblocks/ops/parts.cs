@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using static BlockCalcs;
+    using static CellCalcs;
 
     partial struct SpanBlocks
     {

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Computes the minimum number of T-cells required to store N bits

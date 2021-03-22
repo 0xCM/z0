@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using S = Surrogates;
-    using BL = ScalarBitLogic;
+    using BL = math;
 
     public class t_bitlogic : t_mathsvc<t_bitlogic>
     {

@@ -21,10 +21,10 @@ namespace Z0
         /// <summary>
         /// The total number gb of grid bits determined by gb := MxN
         /// </summary>
-        public int BitCount
+        public BitWidth BitCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.tablebits<M,N>();
+            get => CellCalcs.tablewidth<M,N>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public uint CellCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.cellcount<M,N,T>();
+            get => CellCalcs.cellcount<M,N,T>();
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         public int ByteCount
         {
             [MethodImpl(Inline)]
-            get => GridCalcs.tablesize<M,N>();
+            get => CellCalcs.tablesize<M,N>();
         }
 
         /// <summary>

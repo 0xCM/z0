@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
     using static Numeric;
 
-    using BL = ScalarBitLogic;
+    using BL = math;
 
     partial class gmath
     {

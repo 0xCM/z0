@@ -13,7 +13,7 @@ namespace Z0
     using static memory;
     using static Buffers;
 
-    using L = ScalarBitLogic;
+    using L = math;
 
     public readonly struct ByteLogic64
     {

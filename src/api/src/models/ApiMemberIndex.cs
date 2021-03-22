@@ -25,8 +25,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Option<ApiMember> Lookup(OpIdentity id)
-            => Data.TryFind(id);
+        public bool Lookup(OpIdentity id, out ApiMember dst)
+            => Data.TryGetValue(id, out dst);
 
         public ApiMember this[OpIdentity id]
         {

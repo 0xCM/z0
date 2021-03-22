@@ -9,11 +9,14 @@ namespace Z0
 
     using static Part;
 
-    partial struct GridCalcs
+    partial struct CellCalcs
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static GridSegment<T> segment<T>(GridDim dim, uint segwidth)
-            where T : unmanaged
-                => new GridSegment<T>(dim, segwidth);
+        /// <summary>
+        /// Computes the grid cell count
+        /// </summary>
+        /// <param name="src">The grid dimension</param>
+        [MethodImpl(Inline), Op]
+        public static ulong points(GridDim src)
+            => (ulong)src.RowCount*(ulong)src.ColCount;
     }
 }

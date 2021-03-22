@@ -33,7 +33,6 @@ namespace Z0
         /// </summary>
         public const int ByteCount = 16;
 
-
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)
             => this.Data = data;

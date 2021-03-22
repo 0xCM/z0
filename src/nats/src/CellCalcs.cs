@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [WfCmdKind]
-    public enum ApiCmdKind : byte
-    {
+    using static Root;
 
-    }
+    [ApiHost]
+    public readonly partial struct CellCalcs
+    {
+        const NumericKind Closure = UnsignedInts;
+   }
 }

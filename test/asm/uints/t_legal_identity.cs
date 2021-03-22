@@ -6,7 +6,8 @@ namespace Z0.Asm
 {
     using System;
 
-    using static z;
+    using static Part;
+    using static memory;
 
     public class t_legal_identity : t_asm<t_legal_identity>
     {

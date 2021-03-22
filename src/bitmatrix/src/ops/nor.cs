@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using BL = ScalarBitLogic;
+    using BL = math;
 
     partial class BitMatrix
     {

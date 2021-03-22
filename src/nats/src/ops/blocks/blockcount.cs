@@ -10,7 +10,7 @@ namespace Z0
     using static Root;
     using static memory;
 
-    partial struct BlockCalcs
+    partial struct CellCalcs
     {
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with a specified number of rows/cols
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong blocks<T>(W256 w, uint rows, uint cols)
             where T : unmanaged
-                => BlockCalcs.cellcover<T>(w, GridCalcs.cellcount<T>(rows,cols));
+                => CellCalcs.cellcover<T>(w, CellCalcs.cellcount<T>(rows,cols));
 
         /// <summary>
         /// Calculates the number of 256-bit blocks reqired to cover a grid with natural dimensions
@@ -39,7 +39,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BlockCalcs.cellcover<T>(w, GridCalcs.cellcount<T>(nat32u(m), nat32u(n)));
+                => CellCalcs.cellcover<T>(w, CellCalcs.cellcount<T>(nat32u(m), nat32u(n)));
 
         /// <summary>
         /// Computes the whole number of blocks that cover a specified count of T-cells

@@ -26,17 +26,20 @@ namespace Z0
         public FS.Files Files()
             => Root.Files(Ext);
 
-        /// <summary>
-        /// Enumerates the archived files owned by a specified part
-        /// </summary>
-        public FS.Files Files(PartId owner)
-            => Root.Files(owner, Ext, true);
+        public FS.FilePath HostFile<T>()
+            => HostFile(typeof(T).HostUri());
+
+        public FS.FilePath HostFile(Type host)
+            => HostFile(host.HostUri());
 
         /// <summary>
         /// Enumerates the archived files owned by a specified part
         /// </summary>
-        public FS.Files Files(ApiHostUri host)
-            => Root.Files(host, Ext, true);
+        public FS.Files PartFiles(PartId owner)
+            => Root.Files(owner, Ext, true);
+
+        public FS.FilePath HostFile(ApiHostUri host)
+            => Root + FS.file(host.Owner, host.Name, Ext);
 
         public Deferred<FS.FilePath> Enumerate()
             => Root.EnumerateFiles(Ext, true);
@@ -62,17 +65,37 @@ namespace Z0
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
-        public IEnumerable<ApiCodeBlock> CodeBlocks(PartId owner)
+        public IEnumerable<ApiCodeBlock> PartBlocks(PartId part)
         {
-            foreach(var file in Files(owner))
+            foreach(var file in PartFiles(part))
             foreach(var item in Read(file))
                 if(item.IsNonEmpty)
                     yield return item;
         }
 
+        /// <summary>
+        /// Enumerates the content of archived files owned by a specified part
+        /// </summary>
+        public IEnumerable<ApiCodeBlock> HostBlocks(ApiHostUri host)
+        {
+            var file = HostFile(host);
+            if(file.Exists)
+            {
+                foreach(var item in Read(file))
+                    if(item.IsNonEmpty)
+                        yield return item;
+            }
+        }
+
+        /// <summary>
+        /// Enumerates the content of archived files owned by a specified part
+        /// </summary>
+        public IEnumerable<ApiCodeBlock> HostBlocks<T>()
+            => HostBlocks(typeof(T).HostUri());
+
         public void CodeBlocks(PartId owner, Receiver<ApiCodeBlock> dst)
         {
-            var files = Files(owner).View;
+            var files = PartFiles(owner).View;
             var count = files.Length;
             for(var i=0; i<count; i++)
             {
