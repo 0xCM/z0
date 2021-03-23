@@ -65,11 +65,6 @@ namespace Z0
 
             switch(name)
             {
-                case DumpImagesCmd.CmdName:
-                    var srcDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9");
-                    var dstDir = FS.dir(@"K:\cache\symbols\netsdk\shared\Microsoft.NetCore.App\3.1.9.dumps");
-                    Run(Builder.DumpImages(srcDir, dstDir));
-                break;
                 case EmitResDataCmd.CmdName:
                     Builder.EmitResData().RunTask(Wf);
                     break;
@@ -94,9 +89,6 @@ namespace Z0
                 case ShowRuntimeArchiveCmd.CmdName:
                     Builder.ShowRuntimeArchive().RunTask(Wf);
                     break;
-                // case EmitImageMapsCmd.CmdName:
-                //     Builder.EmitImageMaps().RunTask(Wf);
-                //     break;
                 case EmitHexIndexCmd.CmdName:
                     Builder.EmitHexIndex().RunTask(Wf);
                 break;
@@ -112,9 +104,6 @@ namespace Z0
                 case BuildProjectCmd.CmdName:
                     Builder.Build().RunTask(Wf);
                 break;
-                // case EmitImageContentCmd.CmdName:
-                //     Builder.EmitImageContent().RunDirect(Wf);
-                //break;
                 case RunPartCmd.CmdName:
                     Builder.RunPart(ApiPartIdParser.single(a0)).Dispatch(Wf).Wait();
                     break;
@@ -130,26 +119,6 @@ namespace Z0
         public void ShowSupported()
             => root.iter(Wf.Router.SupportedCommands, c => Wf.Status(c));
 
-        static string format(MemoryFileInfo file)
-            => string.Format("{0} | {1} | {2,-16} | {3}", file.BaseAddress, file.EndAddress, file.Size, file.Path.ToUri());
-
-        void Run(in DumpImagesCmd cmd)
-        {
-            using var mapped = MemoryFiles.map(cmd.Source);
-            var info = mapped.Descriptions;
-            var count = info.Count;
-            root.iter(info, file => Wf.Row(format(file)));
-
-            for(ushort i=0; i<count; i++)
-            {
-                ref readonly var file = ref mapped[i];
-                var target = cmd.Target + FS.file(file.Path.FileName.Name, FS.Extensions.Csv);
-                var flow = Wf.EmittingFile(target);
-                var service = MemoryEmitter.create(Wf);
-                service.Emit(file.BaseAddress, file.Size, target);
-                Wf.EmittedFile(flow,1);
-            }
-        }
 
         // void Run(in EmitImageMapsCmd cmd)
         // {

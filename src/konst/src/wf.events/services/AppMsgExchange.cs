@@ -50,7 +50,7 @@ namespace Z0
         public IReadOnlyList<IAppMsg> Flush(Exception e)
         {
             var messages = Queue.Flush(e);
-            z.iter(messages, msg => term.print(msg));
+            root.iter(messages, msg => term.print(msg));
             return messages;
         }
 

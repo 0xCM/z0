@@ -6,6 +6,13 @@ namespace Z0.Asm
 {
     using SD = AsmSigDocs;
 
+    using static Pow2x64;
+
+    public enum AsmSigOpKind : ulong
+    {
+        None = 0,
+    }
+
     [SymbolSource]
     public enum AsmSigToken : byte
     {

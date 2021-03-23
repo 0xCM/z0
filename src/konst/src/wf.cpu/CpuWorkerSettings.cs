@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public struct CpuWorkerSettings
     {
         public uint Id;

@@ -36,6 +36,12 @@ namespace Z0
             return Emissions.LogEmission(Flow(dst));
         }
 
+        WfFileFlow EmittingFile<T>(FS.FilePath dst, T payload)
+        {
+            signal(this).EmittingFile(payload, dst);
+            return Emissions.LogEmission(Flow(dst));
+        }
+
         WfExecToken EmittedFile(WfFileFlow flow, Count count)
         {
             var completed = Ran(flow);

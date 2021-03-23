@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The (arbitrary) source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte skip8u<T>(in T src, uint count)
+        public static ref readonly byte skip8<T>(in T src, uint count)
             => ref add(@as<T,byte>(edit(src)), (int)count);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">The number of 8-bit segments to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte skip8u<T>(ReadOnlySpan<T> src, uint count)
+        public static ref readonly byte skip8<T>(ReadOnlySpan<T> src, uint count)
             => ref add(@as<T,byte>(first(src)), (int)count);
     }
 }

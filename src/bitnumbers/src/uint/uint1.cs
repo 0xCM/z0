@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents either 0 or 1
     /// </summary>
-    public readonly struct uint1 : ISizedInt<U,W,K,T>
+    public readonly struct uint1 : IBitNumber<U,W,K,T>
     {
         internal readonly T data;
 
@@ -431,6 +431,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new U(1,true);
+        }
+
+        public Span<bit> Bits
+        {
+            [MethodImpl(Inline)]
+            get => bits(this);
         }
    }
 }

@@ -8,8 +8,8 @@ namespace Z0.Dynamics
     using System.Linq;
     using System.Collections.Generic;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Collects standard method classifications

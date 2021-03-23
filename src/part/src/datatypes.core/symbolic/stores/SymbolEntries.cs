@@ -10,14 +10,15 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct SymbolEntries<E>
+    public readonly struct SymbolEntries<K>
+        where K : unmanaged
     {
-        readonly Index<SymbolEntry<E>> Data;
+        readonly Index<SymbolEntry<K>> Data;
 
-        readonly Dictionary<string,SymbolEntry<E>> Keys;
+        readonly Dictionary<string,SymbolEntry<K>> Keys;
 
         [MethodImpl(Inline)]
-        internal SymbolEntries(Index<SymbolEntry<E>> src, Dictionary<string,SymbolEntry<E>> keys)
+        internal SymbolEntries(Index<SymbolEntry<K>> src, Dictionary<string,SymbolEntry<K>> keys)
         {
             Data = src;
             Keys = keys;
@@ -40,10 +41,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly SymbolEntry<E> Entry(uint index)
+        public ref readonly SymbolEntry<K> Entry(uint index)
             => ref Data[index];
 
-        public ReadOnlySpan<SymbolEntry<E>> Entries
+        public ReadOnlySpan<SymbolEntry<K>> Entries
         {
             [MethodImpl(Inline)]
             get => Data.View;

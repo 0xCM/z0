@@ -38,8 +38,6 @@ namespace Z0
 
         internal Thread ManagedWorkerThread;
 
-        readonly WfHost Host;
-
         ulong CycleCounter;
 
         ProcessThread NativeWorkerThread;
@@ -61,7 +59,6 @@ namespace Z0
             MaxCycles = cycles;
             CycleCounter = 0;
             CycleLength = length;
-            Host = WfShell.host(typeof(CpuWorker<T>));
             WorkerStatus = default;
             ManagedWorkerThread = default;
         }

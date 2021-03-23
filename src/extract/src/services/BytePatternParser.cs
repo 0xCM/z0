@@ -11,7 +11,7 @@ namespace Z0
     using Asm;
 
     using static Part;
-    using static z;
+    using static memory;
 
     /// <summary>
     /// Parses sequences of bytes, governed by patterns supplied upon initialization

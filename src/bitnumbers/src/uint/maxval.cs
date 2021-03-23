@@ -195,17 +195,17 @@ namespace Z0
             => ref seek(@as<Cell512,Cell16>(src), part);
         [MethodImpl(Inline)]
         static S cast<S>(byte src)
-            where S : unmanaged, ISizedInt<S>
+            where S : unmanaged, IBitNumber<S>
                 => @as<byte,S>(src);
 
         [MethodImpl(Inline)]
         static S cast<S>(Limits24u src)
-            where S : unmanaged, ISizedInt<S>
+            where S : unmanaged, IBitNumber<S>
                 => @as<Limits24u,S>(src);
 
         [MethodImpl(Inline)]
         static S maxval<S>()
-            where S : unmanaged, ISizedInt<S>
+            where S : unmanaged, IBitNumber<S>
         {
             if(typeof(S) == typeof(uint1))
                 return cast<S>(Q.uint1.MaxLiteral);
@@ -221,7 +221,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static S maxval<S>(W5 w5)
-            where S : unmanaged, ISizedInt<S>
+            where S : unmanaged, IBitNumber<S>
         {
             if(typeof(S) == typeof(uint5))
                 return cast<S>(Q.uint5.MaxLiteral);
@@ -237,7 +237,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static S maxval<S>(W16 w)
-            where S : unmanaged, ISizedInt<S>
+            where S : unmanaged, IBitNumber<S>
         {
             if(typeof(S) == typeof(uint24))
                 return cast<S>(Q.uint24.MaxVal);

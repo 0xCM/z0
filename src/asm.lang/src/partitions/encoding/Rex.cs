@@ -86,10 +86,6 @@ namespace Z0.Asm
         public static ReadOnlySpan<RexBits> bits()
             => recover<RexBits>(RexBits.All);
 
-        static string hex(RexBits src)
-            => src.Data.FormatAsmHex();
-
-
         [Op]
         static string bits(RexBits src)
         {

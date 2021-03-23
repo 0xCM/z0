@@ -32,5 +32,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string concat(ReadOnlySpan<string> src, string delimiter)
             => Format.concat(src, delimiter);
+
+        /// <summary>
+        /// Formats the pair of strings represented by respective character spans
+        /// </summary>
+        /// <param name="a">The leading content</param>
+        /// <param name="b">The trailing content</param>
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
+            => string.Concat(a,b);
     }
 }

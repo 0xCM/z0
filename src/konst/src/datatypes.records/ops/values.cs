@@ -17,7 +17,7 @@ namespace Z0
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
-            var dst = sys.alloc<FieldValue>(fields.Length);
+            var dst = alloc<FieldValue>(fields.Length);
             values(src, fields, dst);
             return dst;
         }
@@ -33,8 +33,8 @@ namespace Z0
         public static FieldValue<S>[] values<S,T>(S src)
             where S : struct, IRecord<S>
         {
-            var fields = z.@readonly(typeof(S).DeclaredInstanceFields());
-            var buffer = sys.alloc<FieldValue<S>>(fields.Length);
+            var fields = @readonly(typeof(S).DeclaredInstanceFields());
+            var buffer = alloc<FieldValue<S>>(fields.Length);
             var dst = span(buffer);
             ref var target = ref first(dst);
             var tRef = __makeref(src);

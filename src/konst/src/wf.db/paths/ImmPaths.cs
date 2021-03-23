@@ -20,16 +20,6 @@ namespace Z0
         FS.Files ImmHexFiles()
             => ImmRoot().Files(X.Hex, true);
 
-        FS.FolderPath AsmCatalogRoot()
-            => TableRoot() + FS.folder(asmcat);
-
-        FS.FilePath AsmCatalogTable<T>()
-            where T : struct, IRecord<T>
-                => AsmCatalogRoot() + FS.file(TableId<T>(), X.Csv);
-
-        FS.FilePath AsmCatalogFile(FS.FileName name)
-                => AsmCatalogRoot() + name;
-
         FS.FolderPath[] ImmDirs(PartId part)
             => ImmRoot().SubDirs().Where(d => d.Name.EndsWith(part.Format()));
 

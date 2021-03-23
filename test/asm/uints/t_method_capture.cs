@@ -76,10 +76,10 @@ namespace Z0.Asm
         void capture_dynamic_delegate_batch()
         {
             using var dst = CaseWriter(FS.Extensions.Asm);
-            var methods = z.array(
+            var methods = root.array(
                 LD.xor<byte>().Method, LD.xor<ushort>().Method, LD.xor<uint>().Method, LD.xor<ulong>().Method
                 );
-            var identified = z.alloc<IdentifiedMethod>(methods.Length);
+            var identified = memory.alloc<IdentifiedMethod>(methods.Length);
             for(var i=0; i<identified.Length; i++)
                 identified[i] = new IdentifiedMethod(ApiIdentity.identify(methods[i]), methods[i]);
             var buffer = sys.alloc<byte>(Pow2.T14);

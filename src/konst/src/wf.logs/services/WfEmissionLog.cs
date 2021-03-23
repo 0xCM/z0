@@ -50,9 +50,9 @@ namespace Z0
         {
             try
             {
-                var count = flow.EmissionCount;
-                var status = count == 0 ? "Emitting" : "Emitted";
-                var format = string.Format(FormatPattern, flow.Token, RecUtil.tableid<T>(), status, count, flow.Target.ToUri());
+                var metric = flow.EmissionCount;
+                var status = metric == 0 ? "Emitting" : "Emitted";
+                var format = string.Format(FormatPattern, flow.Token, RecUtil.tableid<T>(), status, metric, flow.Target.ToUri());
                 FS.write(format + Eol, Emissions);
             }
             catch(Exception error)

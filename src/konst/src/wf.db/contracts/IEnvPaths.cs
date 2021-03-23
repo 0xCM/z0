@@ -33,19 +33,11 @@ namespace Z0
         FS.FolderPath ControlRoot()
             => Env.Control.Value;
 
-        FS.FolderPath SymbolCache()
-            => Env.DefaultSymbolCache.Value;
-
         FS.FolderPath RuntimeRoot()
             => Env.ZBin.Value;
 
-
         FS.FolderPath SettingsRoot()
             => DbRoot() + FS.folder(settings);
-
-        FS.FilePath CdbLogPath()
-            => Env.CdbLogPath.Value;
-
 
         FS.FolderPath ControlScripts()
             => ControlRoot() + FS.folder(".cmd");
@@ -58,13 +50,6 @@ namespace Z0
 
         FS.FolderName SubjectFolder<S>(S src)
             => FS.folder(src.ToString().ToLowerInvariant());
-
-        /// <summary>
-        /// The root table directory
-        /// </summary>
-        FS.FolderPath TableRoot()
-            => DbRoot() + FS.folder(tables);
-
 
         FS.FilePath SettingsPath(string id)
             => SettingsRoot() + FS.file(id, Settings);
@@ -119,9 +104,6 @@ namespace Z0
 
         FS.FolderPath CmdLogRoot()
             => LogRoot() + FS.folder(commands);
-
-        FS.FolderPath CaptureRoot()
-            => DbRoot() + FS.folder(capture);
 
         FS.FilePath TmpFile(FS.FileName file)
             => TmpRoot() + file;

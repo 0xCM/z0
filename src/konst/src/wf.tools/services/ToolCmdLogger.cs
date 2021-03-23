@@ -48,7 +48,7 @@ namespace Z0
         {
             const string Pattern = "| {0,-10} | {1}";
             var entry = string.Format(Pattern, kind, content);
-            var data = Encoded.utf8(entry + Eol);
+            var data = text.utf8(entry + Eol);
             LogStream.Seek(0, SeekOrigin.End);
             LogStream.Write(data, 0, data.Length);
             LogStream.Flush();

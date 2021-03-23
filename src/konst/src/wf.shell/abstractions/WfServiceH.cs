@@ -85,6 +85,7 @@ namespace Z0
             f(log);
         }
 
+
         protected void Show<T>(T data, StreamWriter dst)
         {
             dst.WriteLine(string.Format("{0}",data));

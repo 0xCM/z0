@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string utf8(in ResDescriptor src)
-            => Encoded.utf8(view(src));
+            => text.utf8(view(src));
     }
 }

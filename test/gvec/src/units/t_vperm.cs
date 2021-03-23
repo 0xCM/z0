@@ -179,7 +179,7 @@ namespace Z0
         {
             var src = gcpu.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return gcpu.vload(n, in z.first(src));
+            return gcpu.vload(n, in memory.first(src));
         }
 
         [MethodImpl(Inline)]

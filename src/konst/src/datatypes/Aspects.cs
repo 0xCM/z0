@@ -89,7 +89,7 @@ namespace Z0
 
         public string[] FormatValues()
         {
-            var dst = z.alloc<string>(Count);
+            var dst = memory.alloc<string>(Count);
             for(var i=0u; i<dst.Length; i++)
                 dst[i] = FormatValue(i);
             return dst;

@@ -8,8 +8,8 @@ namespace Z0.Mkl
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     unsafe struct VslSSTaskHandle<T> : IDisposable
         where T : unmanaged

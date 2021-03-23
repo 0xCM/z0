@@ -13,31 +13,40 @@ namespace Z0
     public class SymbolTable<T>
         where T : unmanaged
     {
-        readonly Index<Token<T>> Data;
+        readonly Index<Token<T>> _Tokens;
 
-        readonly Dictionary<string,Token<T>> Identifiers;
+        readonly Dictionary<string,Token<T>> _Identifiers;
 
-        readonly Dictionary<string,Token<T>> Symbols;
+        readonly Dictionary<string,Token<T>> _Symbols;
+
+        readonly Index<SymbolEntry<T>> _Entries;
 
         internal SymbolTable(Index<Token<T>> src, Dictionary<string,Token<T>> identifiers, Dictionary<string,Token<T>> symbols)
         {
-            Data = src;
-            Identifiers = identifiers;
-            Symbols = symbols;
+            var count = src.Count;
+            _Tokens = src;
+            _Identifiers = identifiers;
+            _Symbols = symbols;
+            _Entries = memory.alloc<SymbolEntry<T>>(count);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var token = ref _Tokens[i];
+                _Entries[i] = new SymbolEntry<T>(i, token.SymbolName.SymbolText, token.Kind);
+            }
         }
 
         [MethodImpl(Inline)]
         public bool ContainsSymbol(string symbol)
-            => Symbols.ContainsKey(symbol);
+            => _Symbols.ContainsKey(symbol);
 
         [MethodImpl(Inline)]
         public bool ContainsIdentifier(string identifier)
-            => Identifiers.ContainsKey(identifier);
+            => _Identifiers.ContainsKey(identifier);
 
         [MethodImpl(Inline)]
         public bool IndexFromSymbol(string symbol, out uint index)
         {
-            if(Symbols.TryGetValue(symbol, out var token))
+            if(_Symbols.TryGetValue(symbol, out var token))
             {
                 index = token.Index;
                 return true;
@@ -49,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool IndexFromIdentifier(string identifier, out uint index)
         {
-            if(Identifiers.TryGetValue(identifier, out var token))
+            if(_Identifiers.TryGetValue(identifier, out var token))
             {
                 index = token.Index;
                 return true;
@@ -60,38 +69,32 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool TokenFromSymbol(string symbol, out Token<T> dst)
-            => Symbols.TryGetValue(symbol, out dst);
+            => _Symbols.TryGetValue(symbol, out dst);
 
         [MethodImpl(Inline)]
         public bool TokenFromIdentifier(string identifier, out Token<T> dst)
-            => Identifiers.TryGetValue(identifier, out dst);
+            => _Identifiers.TryGetValue(identifier, out dst);
 
         [MethodImpl(Inline)]
         public ref readonly Token<T> TokenFromIndex(uint index)
-            => ref Data[index];
+            => ref _Tokens[index];
 
         public Index<Token<T>> Tokens
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => _Tokens;
         }
 
         public uint TokenCount
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => _Tokens.Count;
         }
 
-        public ReadOnlySpan<string> SymbolList
+        public ReadOnlySpan<SymbolEntry<T>> Symbols
         {
             [MethodImpl(Inline)]
-            get => Symbols.Keys.Array();
-        }
-
-        public ReadOnlySpan<string> IdentifierList
-        {
-            [MethodImpl(Inline)]
-            get => Identifiers.Keys.Array();
+            get => _Entries.View;
         }
     }
 }

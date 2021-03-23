@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents a value in the range [<see cef='MinLiteral'/>, <see cref='MaxLiteral'/>]
     /// </summary>
-    public readonly struct uint4 : ISizedInt<U,W,K,T>
+    public readonly struct uint4 : IBitNumber<U,W,K,T>
     {
         public const byte BitCount = 4;
 

@@ -15,15 +15,6 @@ namespace Z0
     partial struct TextFormatter
     {
         /// <summary>
-        /// Formats the pair of strings represented by respective character spans
-        /// </summary>
-        /// <param name="a">The leading content</param>
-        /// <param name="b">The trailing content</param>
-        [MethodImpl(Inline), Op]
-        public static string format(ReadOnlySpan<char> a, ReadOnlySpan<char> b)
-            => string.Concat(a,b);
-
-        /// <summary>
         /// Renders a variable assignment as '<paramref name='name'/>=</paramref name='value'/>;
         /// </summary>
         /// <param name="name">The variable name</param>
@@ -32,15 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string assign<T>(Name name, T value)
             => string.Format(RP.Assign, name, value);
-
-        /// <summary>
-        /// Formats the pair of strings represented by respective character spans
-        /// </summary>
-        /// <param name="a">The leading content</param>
-        /// <param name="b">The trailing content</param>
-        [MethodImpl(Inline), Op]
-        public static string format(ReadOnlySpan<char> a)
-            => a.ToString();
 
         [MethodImpl(Inline), Op]
         static string format(string src)

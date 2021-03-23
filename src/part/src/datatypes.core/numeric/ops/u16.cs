@@ -18,6 +18,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ushort u16(ReadOnlySpan<byte> src, uint offset)
-            => skip16u(src, offset);
+            => skip16(src, offset);
     }
 }

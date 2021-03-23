@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IApiExtractParser
     {
         Outcome Parse(string src, out ApiExtractBlock dst);

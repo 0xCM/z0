@@ -32,7 +32,7 @@ namespace Z0.Dynamics
                       ? some(new MemberOrdering(builder.orders))
                       : none<MemberOrdering>();
 
-            iter(builder.junctions, j => j.Flatten());
+            root.iter(builder.junctions, j => j.Flatten());
             var model = new SelectionModel(X, selection, order, builder.junctions , facets);
             return model;
         }
@@ -119,7 +119,7 @@ namespace Z0.Dynamics
 
             if (method.IsPrimary)
                 orders
-                    = mapi(orders.Reverse<MemberItemOrder>(), (i, e) => e.Clone(NewPrecedence: i)).ToList();
+                    = root.mapi(orders.Reverse<MemberItemOrder>(), (i, e) => e.Clone(NewPrecedence: i)).ToList();
         }
 
         void HandleMethodCall(WhereMethod method, MethodCallExpression X)
@@ -181,7 +181,7 @@ namespace Z0.Dynamics
 
             var subject = X.Type.GetGenericArguments()[1];
             var members = subject.GetProperties().Cast<MemberInfo>().Union(subject.GetFields());
-            selections.AddRange(mapi(members, (i, m) => new SelectedMember(m, i)));
+            selections.AddRange(root.mapi(members, (i, m) => new SelectedMember(m, i)));
         }
 
         void Traversed(MethodCallExpression X)

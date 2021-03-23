@@ -15,7 +15,7 @@ namespace Z0
         {
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
-            var patterns = sources(src);
+            var patterns = Sources(src);
             var view = patterns.View;
 
             var count = view.Length;
@@ -23,11 +23,10 @@ namespace Z0
                 writer.WriteLine(skip(view,i).Format());
 
             Wf.EmittedFile(flow, count);
-
         }
 
         [Op]
-        public static RenderPatternSources sources(Type src)
+        public RenderPatternSources Sources(Type src)
         {
             var values = src.LiteralFieldValues<string>(out var fields);
             var count = values.Length;

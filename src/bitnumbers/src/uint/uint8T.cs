@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]
     /// </summary>
-    public readonly struct uint8T : ISizedInt<S,W,K,T>
+    public readonly struct uint8T : IBitNumber<S,W,K,T>
     {
         public const byte BitCount = 8;
 
@@ -307,6 +307,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new S(MaxLiteral);
+        }
+
+        public Span<bit> Bits
+        {
+            [MethodImpl(Inline)]
+            get => bits(this);
         }
 
         [MethodImpl(Inline)]

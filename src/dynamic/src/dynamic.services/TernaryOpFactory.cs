@@ -15,9 +15,9 @@ namespace Z0
 
         public Func<T,T,T,T> Create(MethodInfo method, object instance = null)
         {
-            var args = z.array(paramX<T,T,T>());
+            var args = root.array(paramX<T,T,T>());
             var callExpr = call(instance, method, args);
-            var f = lambda<T, T, T, T>(args, callExpr).Compile();
+            var f = lambda<T,T,T,T>(args, callExpr).Compile();
             return f;
         }
     }

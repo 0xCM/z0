@@ -18,6 +18,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ulong u64(ReadOnlySpan<byte> src, uint offset)
-            => skip64u(src, offset);
+            => skip64(src, offset);
     }
 }

@@ -453,7 +453,7 @@ namespace Z0
             => or(and(a,b), nonimpl(a,c));
 
         [MethodImpl(Inline), Op]
-        public static Span<bit> bits(uint2 src)
+        public static Span<bit> bits(U src)
         {
             var storage = 0ul;
             var dst = slice(@recover<byte,bit>(@bytes(storage)),0, U.BitCount);

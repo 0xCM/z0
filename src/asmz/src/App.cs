@@ -201,20 +201,28 @@ namespace Z0.Asm
             void parse(AsmApiStatement src)
             {
                 var expr = src.Sig;
-                if(Sigs.ParseSig(expr, out var sig))
+                var operands = src.Sig.Operands;
+                var exprText = expr.Format();
+                if(exprText.Contains(Chars.FSlash))
                 {
-                    success.Add(expr.Format());
+                    var parts = exprText.SplitClean(Chars.FSlash);
+                    var count = parts.Length;
+                    if(count != 2)
+                    {
+                        Wf.Warn($"Unexpected composite {exprText}");
+                    }
+                    else
+                    {
+                        var opformat = $"{parts[0]}/{parts[1]}";
+                        if(success.Add(opformat))
+                        {
+                            Wf.Status($"Parse succeeded for {exprText} with composite operands {opformat}");
+                        }
+                    }
                 }
-                else
-                    fail.Add(expr.Format());
             }
-            var pipe = Wf.ApiStatementPipe();
-            pipe.LoadStatements(parse);
 
-            root.iter(fail, f => Wf.Row(f));
-
-
-            Wf.Status($"SuccessCount = {success.Count}, FailureCount = {fail.Count}");
+            Wf.ApiStatementPipe().LoadStatements(parse);
 
         }
 
@@ -444,49 +452,6 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-        // Index<AsmFormExpr> LoadFormExpressions()
-        // {
-        //     Wf.AsmEtlCmd().Run(AsmEtlCmdKind.EmitFormCatalog);
-
-        //     var pipe = AsmFormPipe.create(Wf);
-        //     var src = Db.AsmCatalogTable<AsmFormRecord>();
-        //     var records = pipe.Load(src).View;
-
-        //     var count = records.Length;
-        //     var expressions = alloc<AsmFormExpr>(count);
-        //     ref var block = ref first(expressions);
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         ref readonly var record = ref skip(records,i);
-        //         seek(block, i) = record.FormExpr;
-        //     }
-        //     return expressions;
-        // }
-
-
-        // void HashPerfect(Span<AsmFormExpr> src)
-        // {
-        //     Wf.Row($"Attempting to find perfect hashes for {src.Length} form expressions");
-        //     var perfect = HashFunctions.perfect(src).Codes;
-        //     root.iter(perfect, p => Wf.Row(p));
-        // }
-
-        // void HashPerfect()
-        // {
-        //     var pipe = Wf.AsmFormPipe();
-        //     var expressions = pipe.LoadFormExpressions();
-        //     var unique = root.dict<string,AsmFormExpr>();
-        //     var duplicates = root.dict<string,AsmFormExpr>();
-        //     foreach(var e in expressions)
-        //     {
-        //         var format = e.Format();
-        //         if(!unique.TryAdd(format,e))
-        //             duplicates[format] = e;
-        //     }
-
-        //     root.iter(duplicates.Keys, k => Wf.Row(string.Format("Duplicate: {0}", k)));
-        //     HashPerfect(unique.Values.Array());
-        // }
 
         void EmitMsil()
         {
@@ -545,7 +510,7 @@ namespace Z0.Asm
         FS.Files EmitSymbolPaths()
         {
             var symbols = Wf.PdbSymbolStore();
-            var src = Db.SymbolCache();
+            var src = Db.DefaultSymbolCache();
             var paths = symbols.SymbolPaths(src);
             var view = paths.View;
             var count = view.Length;
@@ -612,8 +577,6 @@ namespace Z0.Asm
                 Wf.Row(description);
             }
         }
-
-
 
         void CalcAddress()
         {
@@ -862,7 +825,6 @@ namespace Z0.Asm
             Show("modrm", FS.Extensions.Log, emit);
         }
 
-
         void CheckBitSpans()
         {
             var options = BitFormat.Default.WithBlockWidth(4);
@@ -870,7 +832,6 @@ namespace Z0.Asm
             var b1 = v1.ToBitSpan();
             Wf.Row(b1.Format(options));
         }
-
 
         void CheckBitView()
         {
@@ -887,9 +848,22 @@ namespace Z0.Asm
 
         }
 
+        void DumpImages()
+        {
+            var emitter = MemoryEmitter.create(Wf);
+            var src = Db.DotNetSymbolDir(3,1,12);
+            var dst = Db.DotNetImageDumpDir(3,1,12);
+            dst.Clear();
+            emitter.DumpImages(src,dst);
+        }
+
         public void Run()
         {
-            Wf.AsmFormPipe().EmitFormHashes();
+            Wf.AsmCatalogEtl().EmitMnemonicInfo();
+
+            //Wf.AsmFormPipe().EmitFormHashes();
+
+            //Sigs.ShowSymbols();
             //PipeImageData();
             //CheckBitSpans();
             //CheckBitView();

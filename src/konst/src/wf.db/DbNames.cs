@@ -92,5 +92,13 @@ namespace Z0
         public const string cases = nameof(cases);
 
         public const string asmcat = nameof(asmcat);
+
+        public const string dotnet = nameof(dotnet);
+
+        public const string symbols = nameof(symbols);
+
+        public const string @default = "default";
+
+        public const string images = nameof(images);
     }
 }

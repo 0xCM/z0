@@ -33,7 +33,7 @@ namespace Z0
         new T Value {get;}
 
         ulong IWfFuncArg.Value
-            => z.uint64(Value);
+            => memory.uint64(Value);
     }
 
     /// <summary>
@@ -48,6 +48,6 @@ namespace Z0
         new I Index {get;}
 
         byte IWfFuncArg.Index
-            => z.uint8(Index);
+            => memory.uint8(Index);
     }
 }

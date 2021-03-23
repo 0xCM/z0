@@ -7,6 +7,7 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.IO;
 
     using static Part;
     using static Chars;
@@ -47,16 +48,41 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public SymbolTable<CompositeSigToken> Composites()
+        public SymbolTable<CompositeSigToken> CompositeTokens()
             => _Composites;
 
         [MethodImpl(Inline)]
-        public SymbolTable<AsmSigToken> OperandKinds()
+        public SymbolTable<AsmSigToken> SigTokens()
             => _SigOpSymbols;
 
         [MethodImpl(Inline)]
         public SymbolTable<AsmMnemonicCode> Mnemonics()
             => _Mnemonics;
+
+        void ShowSymbols<T>(SymbolTable<T> src, ShowLog dst)
+            where T : unmanaged
+        {
+            var count = src.TokenCount;
+            var symbols = src.Symbols;
+            var sort = typeof(T).Name;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var symbol = ref skip(symbols,i);
+                dst.Show(string.Format("{0,-18} | {1,-12} | {2}", sort, symbol.Name, symbol.Kind));
+            }
+        }
+
+        public void ShowSymbols()
+        {
+            using var sigs = ShowLog("sig-tokens", FS.Extensions.Csv);
+            ShowSymbols(SigTokens(), sigs);
+
+            using var monics = ShowLog("mnemonic-symbols", FS.Extensions.Csv);
+            ShowSymbols(Mnemonics(), monics);
+
+            using var composites = ShowLog("composite-symbols", FS.Extensions.Csv);
+            ShowSymbols(CompositeTokens(), composites);
+        }
 
         public Outcome ParseThumbprint(string src, out AsmThumbprint thumbprint)
         {
@@ -201,7 +227,7 @@ namespace Z0.Asm
                 for(var i=0; i<opcount; i++)
                 {
                     ref readonly var opexpr = ref skip(opsource,i);
-                    var outcome = ParseOperand(opexpr, out seek(optarget,i));
+                    var outcome = ParseOperand(opexpr.Content, out seek(optarget,i));
                     if(!outcome)
                         return outcome;
 
@@ -212,9 +238,9 @@ namespace Z0.Asm
             return false;
         }
 
-        public Outcome ParseOperand(AsmSigOperandExpr src, out AsmSigOperand dst)
+        public Outcome ParseOperand(string src, out AsmSigOperand dst)
         {
-            if(_SigOpSymbols.TokenFromSymbol(src.Content, out var token))
+            if(_SigOpSymbols.TokenFromSymbol(src, out var token))
             {
                 dst = new AsmSigOperand(token.Identifier, token.Kind, token.SymbolName);
                 return true;
@@ -222,7 +248,7 @@ namespace Z0.Asm
             else
             {
                 dst = AsmSigOperand.Empty;
-                return (false, $"Cannot match symbol for the operand expression <{src.Content}>");
+                return (false, $"Cannot match symbol for the operand expression <{src}>");
             }
         }
 

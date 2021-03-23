@@ -16,7 +16,7 @@ namespace Z0
 
         readonly FieldInfo Field;
 
-        readonly StringRef Content;
+        readonly string Content;
 
         [MethodImpl(Inline)]
         public RenderPatternSource(FieldInfo src, string content)

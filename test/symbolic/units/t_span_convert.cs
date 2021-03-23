@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static memory;
+
     public sealed class t_span_convert : UnitTest<t_span_convert,NumericClaims,ICheckNumeric>
     {
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
@@ -21,16 +23,16 @@ namespace Z0
             where T : unmanaged
         {
             var x = Random.Next<T>();
-            var y = z.bytes(x);
+            var y = memory.bytes(x);
             VerifySpanBytesToValue(y,x);
 
             var valSize = Unsafe.SizeOf<T>();
             var values = Random.Stream<T>().ToSpan(Pow2.T08);
-            var bytes = z.alloc<byte>(valSize*values.Length);
+            var bytes = alloc<byte>(valSize*values.Length);
             for(int i = 0, offset = 0; i< values.Length; i++, offset += valSize)
             {
                 var value = values[i];
-                var valBytes = z.bytes(value);
+                var valBytes = memory.bytes(value);
                 valBytes.CopyTo(bytes, offset);
             }
 

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface ITableFormatter<F> : ITextual
         where F : unmanaged
     {
@@ -14,14 +12,5 @@ namespace Z0
         string FormatHeader();
 
         void EmitHeader();
-    }
-
-    public interface ITableFormatter<F,T>
-        where F : unmanaged, Enum
-        where T : struct
-    {
-        string FormatHeader();
-
-        string FormatRow(in T src);
     }
 }

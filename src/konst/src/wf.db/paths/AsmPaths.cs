@@ -12,6 +12,9 @@ namespace Z0
 
     partial interface IEnvPaths
     {
+        FS.FolderPath CaptureRoot()
+            => DbRoot() + FS.folder(capture);
+
         FS.FolderPath AsmRoot()
             => CaptureRoot() + FS.folder(asm);
 
@@ -35,5 +38,15 @@ namespace Z0
 
         FS.FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, X.Asm);
+
+        FS.FolderPath AsmCatalogRoot()
+            => TableRoot() + FS.folder(asmcat);
+
+        FS.FilePath AsmCatalogTable<T>()
+            where T : struct, IRecord<T>
+                => AsmCatalogRoot() + FS.file(TableId<T>(), X.Csv);
+
+        FS.FilePath AsmCatalogFile(FS.FileName name)
+                => AsmCatalogRoot() + name;
     }
 }

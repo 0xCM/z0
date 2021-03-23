@@ -10,6 +10,12 @@ namespace Z0
 
     partial interface IEnvPaths
     {
+        /// <summary>
+        /// The root table directory
+        /// </summary>
+        FS.FolderPath TableRoot()
+            => DbRoot() + FS.folder(tables);
+
        /// <summary>
         /// Specifies a table root for an identified subject
         /// </summary>

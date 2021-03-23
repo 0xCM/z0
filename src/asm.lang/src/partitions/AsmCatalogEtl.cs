@@ -55,6 +55,16 @@ namespace Z0.Asm
                 throw new Exception();
         }
 
+        public Index<AsmMnemonicInfo> EmitMnemonicInfo()
+        {
+            var src = MnemonicInfo();
+            var dst = Db.AsmCatalogTable<AsmMnemonicInfo>();
+            var flow = Wf.EmittingTable<AsmMnemonicInfo>(dst);
+            var count = Records.emit(src,dst);
+            Wf.EmittedTable(flow,count);
+            return src;
+        }
+
         public Index<StokeAsmExportRow> ExportImport()
         {
             var src = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);

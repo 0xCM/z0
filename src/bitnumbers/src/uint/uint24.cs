@@ -14,24 +14,17 @@ namespace Z0
 
     using U = uint24;
     using W = W24;
-    using K = BitSeq24;
     using T = System.UInt32;
     using N = N24;
     using L = Limits24u;
 
     using api = BitNumbers;
 
-
-    public enum BitSeq24 : uint
-    {
-
-    }
-
     /// <summary>
     /// Represents the value of an unsigned integer of bit-width 24
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size = Size)]
-    public struct uint24 : ISizedInt<U,W,K,T>
+    public struct uint24 : IBitNumber<U,W,T>
     {
         internal ushort Lo;
 
@@ -120,12 +113,6 @@ namespace Z0
             get => bit.test(data, pos);
         }
 
-        public K Kind
-        {
-            [MethodImpl(Inline)]
-            get => (K) data;
-        }
-
         T Value
         {
             [MethodImpl(Inline)]
@@ -173,10 +160,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public uint24(byte src)
             : this() => Lo = src;
-
-        [MethodImpl(Inline)]
-        public uint24(K src)
-            : this() => api.update((T)src, ref this);
 
         [MethodImpl(Inline)]
         internal uint24(sbyte src)
@@ -229,19 +212,13 @@ namespace Z0
         bool IEquatable<U>.Equals(U rhs)
             => data == rhs.data;
 
-        bool ISizedInt.IsNonZero
+        bool IBitNumber.IsNonZero
         {
             [Ignore]
             get => IsNonZero;
         }
 
-        K ISizedInt<U,W,K,uint>.Kind
-        {
-            [Ignore]
-            get => Kind;
-        }
-
-        bool ISizedInt.IsZero
+        bool IBitNumber.IsZero
         {
             [Ignore]
             get => IsZero;
@@ -268,13 +245,8 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        [MethodImpl(Inline)]
-        public static implicit operator U(K src)
-            => memory.@as<K,U>(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator K(U src)
-            => memory.@as<U,K>(src);
+        public Span<bit> Bits
+            => throw new NotImplementedException();
 
         [MethodImpl(Inline)]
         public static bool operator true(U x)
@@ -303,18 +275,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static explicit operator ushort(U src)
             => (ushort)src.data;
-
-        // [MethodImpl(Inline)]
-        // public static explicit operator uint16_t(U src)
-        //     => (ushort)src.data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator uint32_t(U src)
-        //     => (uint)src.data;
-
-        // [MethodImpl(Inline)]
-        // public static implicit operator uint64_t(U src)
-        //     => (ulong)src.data;
 
         [MethodImpl(Inline)]
         public static implicit operator int(U src)
