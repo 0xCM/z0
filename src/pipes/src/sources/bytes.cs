@@ -50,5 +50,8 @@ namespace Z0
                 }
             }
         }
+
+        public static IEnumerable<byte> bytes(ISource source, uint count)
+            => bytes(source, (int)count);
     }
 }

@@ -23,6 +23,4 @@ namespace Z0
                 seek(dst, j) = @char(@bool(bit.test(src, i++)));
         }
     }
-
-
 }

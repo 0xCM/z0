@@ -23,5 +23,13 @@ namespace Z0
         /// <param name="count">The maximum number of bytes to produce</param>
         public static IEnumerable<byte> Bytes(this ISource src, int count)
             => Sources.bytes(src, count);
+
+        /// <summary>
+        /// Produces a limited stream of random bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="count">The maximum number of bytes to produce</param>
+        public static IEnumerable<byte> Bytes(this ISource src, uint count)
+            => Sources.bytes(src, count);
     }
 }

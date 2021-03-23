@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 using System;
-using System.Reflection;
+using System.Runtime.CompilerServices;
 
 [assembly: PartId(PartId.Part)]
 

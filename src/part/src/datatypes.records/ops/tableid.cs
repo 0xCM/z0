@@ -16,9 +16,11 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The record type</typeparam>
         [MethodImpl(Inline)]
-        public static TableId<T> tableid<T>()
+        public static TableId tableid<T>()
             where T : struct, IRecord<T>
-                => new TableId<T>(tableid(typeof(T)));
+                => default(T).TableId;
+
+                //=> new TableId<T>(tableid(typeof(T)));
 
         /// <summary>
         /// Computes the <see cref='TableId'/> of a parametrically-identified record

@@ -14,6 +14,28 @@ namespace Z0
 
     partial struct BitNumbers
     {
+        public struct FormatCheck<W,T> : IRecord<FormatCheck<W,T>>
+            where W : unmanaged, IDataWidth
+            where T : unmanaged, IBitNumber
+        {
+            public uint Sequence;
+
+            public byte Input;
+
+            public T Number;
+
+            public string Formatted;
+
+            public byte LengthExpect;
+
+            public byte LengthActual;
+
+            public bool LenthMatch;
+
+            public TableId TableId
+                => new TableId(typeof(FormatCheck<W,T>), string.Format("uint{0}.format-check",default(T).Width));
+        }
+
         /// <summary>
         /// Seeks an index-identified <see cref='Cell8'/> value from a specified <see cref='Cell16'/> source
         /// </summary>

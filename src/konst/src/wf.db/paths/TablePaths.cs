@@ -46,6 +46,38 @@ namespace Z0
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
 
+        FS.FolderName TableFolder<T>()
+            where T : struct, IRecord<T>
+                => FS.folder(TableId<T>());
+
+        FS.FolderName TableFolder(Type t)
+                => FS.folder(TableId(t));
+
+        FS.FolderPath AppTableRoot
+            => AppDataFolder() + FS.folder(tables);
+
+        FS.FolderPath AppTableDir<T>()
+            where T : struct, IRecord<T>
+                => AppTableRoot + TableFolder<T>();
+
+        FS.FolderPath AppTableDir(Type t)
+            => AppTableRoot + TableFolder(t);
+
+        FS.FilePath AppTablePath<T>(string subject, FS.FileExt? ext = null)
+            where T : struct, IRecord<T>
+        {
+            var id = TableId<T>();
+            var dir = AppTableDir<T>();
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? Csv);
+        }
+
+        FS.FilePath AppTablePath(Type t, string subject, FS.FileExt? ext = null)
+        {
+            var id = TableId(t);
+            var dir = AppTableDir(t);
+            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? Csv);
+        }
+
         /// <summary>
         /// Creates a folder path of the form {DbRoot}/tables/{TableId}.{subject}
         /// </summary>

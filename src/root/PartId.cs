@@ -58,7 +58,7 @@ public enum PartId : ulong
 
     Cpu = 46,
 
-    CpuShell = 47,
+    CpuShell = Cpu | Shell,
 
     Gen = 48,
 
@@ -76,8 +76,6 @@ public enum PartId : ulong
 
     CmdExec = 64,
 
-    BitFieldsShell = 65,
-
     BitVectors = 100,
 
     BitSpans = 102,
@@ -91,6 +89,8 @@ public enum PartId : ulong
     BitSvc = 106,
 
     BitFields = 107,
+
+    BitFieldsShell = BitFields | Shell,
 
     BitSuite = 108,
 
@@ -137,6 +137,8 @@ public enum PartId : ulong
     Extract = 134,
 
     BitNumbers = 135,
+
+    BitNumbersShell = BitNumbers | Shell,
 
     DVec = 136,
 
