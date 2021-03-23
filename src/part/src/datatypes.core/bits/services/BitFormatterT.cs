@@ -15,19 +15,20 @@ namespace Z0
     /// <summary>
     /// Configurable bit data type formatter
     /// </summary>
-    public readonly struct BitFormatter<T> : ITextFormatter<T>
+    public readonly struct BitFormatter<T> : IBitFormatter<T>
         where T : struct
     {
-        [MethodImpl(Inline)]
-        public string Format(ReadOnlySpan<byte> src, in BitFormat config)
-            => api.format(src, config);
+        readonly BitFormat Config;
 
         [MethodImpl(Inline)]
-        public string Format(T src, in BitFormat config)
-            => api.format(bytes(src).ReadOnly(), config);
+        public BitFormatter(BitFormat config)
+            => Config = config;
+
+        public string Format(ReadOnlySpan<byte> src)
+            => api.format(src, Config);
 
         [MethodImpl(Inline)]
         public string Format(T src)
-            => Format(src, BitFormatter.configure());
+            => api.format(src, Config);
     }
 }

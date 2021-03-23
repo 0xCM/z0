@@ -22,6 +22,7 @@ namespace Z0
             for(var j=offset; j<count; j++)
                 seek(dst, j) = @char(@bool(bit.test(src, i++)));
         }
-
     }
+
+
 }

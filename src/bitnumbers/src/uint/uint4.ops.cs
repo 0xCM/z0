@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         [MethodImpl(Inline), Op]
         public static U srl(byte src, N4 n, W w)
-            => crop4(Bytes.srl(src,4));
+            => uint4(Bytes.srl(src,4));
 
         /// <summary>
         /// Creates a 4-bit unsigned integer, equal to zero or one, if the source value is respectively false or true
@@ -260,16 +260,8 @@ namespace Z0
             => new U((byte)src, false);
 
         [MethodImpl(Inline)]
-        public static byte crop4(byte x)
-            => (byte)(U.MaxLiteral & x);
-
-        static BitFormat FormatConfig4
-            => BitFormatter.limited(U.Width, U.Width);
-
-        [MethodImpl(Inline)]
         public static string format(U src)
-            => BitFormatter.format(src.data, FormatConfig4);
-
+            => BitFormatter.format(src.data, BitFormatter.limited(U.Width, U.Width));
 
         [MethodImpl(Inline), Op]
         public static U @false(U a, U b)

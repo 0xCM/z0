@@ -15,19 +15,10 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
-
-        [MethodImpl(Inline), Op]
-        public static Span<bit> unpack(byte src, Span<bit> dst)
-        {
-            for(byte j=0; j<8; j++)
-                seek(dst, j) = bit.test(src, j);
-            return dst;
-        }
-
         [MethodImpl(Inline), Closures(Closure)]
-        public static BitFormatter<T> create<T>()
+        public static BitFormatter<T> create<T>(BitFormat? config = null)
             where T : struct
-                => default;
+                => new BitFormatter<T>(config ?? BitFormatter.configure());
 
         [Op, Closures(Closure)]
         public static string format<T>(T src, int? digits = null)
@@ -69,6 +60,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitFormat limited(uint maxbits, int? zpad = null)
             => BitFormatOptions.bitmax(maxbits, zpad);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat limited(uint maxbits, uint zpad)
+            => BitFormatOptions.bitmax(maxbits, (int)zpad);
 
         [MethodImpl(Inline), Op]
         public static BitFormat blocked(int width, char? sep = null, uint? maxbits = null, bool specifier = false)

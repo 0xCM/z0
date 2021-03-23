@@ -15,10 +15,15 @@ namespace Z0.Generate
     public class BinaryKindGenerator : CodeGenerator
     {
         public static BinaryKindGenerator Create(uint max = 0xFF)
-            => new BinaryKindGenerator
-            {
-                MaxValue = max,
-            };
+            => new BinaryKindGenerator(max);
+
+        public BinaryKindGenerator(uint max)
+        {
+            MaxValue = max;
+            MaxBitCount = effwidth(MaxValue);
+            Formatter = BitFormatter.create<byte>(BitFormatter.limited(MaxBitCount, MaxBitCount));
+        }
+
 
         BitFormatter<byte> Formatter {get;}
             = BitFormatter.create<byte>();
@@ -49,8 +54,7 @@ namespace Z0.Generate
         static byte effwidth(uint src)
             => (byte)(32 - nlz(src));
 
-        byte MaxBitCount
-            => effwidth(MaxValue);
+        byte MaxBitCount {get;}
 
         public string TypeName
         {
@@ -88,10 +92,10 @@ namespace Z0.Generate
         }
 
         string LiteralName(byte value)
-            => text.concat(AsciLetterLo.b, Formatter.Format(value, BitFormatter.limited(MaxBitCount, MaxBitCount)));
+            => text.concat(AsciLetterLo.b, Formatter.Format(value));
 
         string LiteralValue(byte value)
-            => text.concat("0b", Formatter.Format(value, BitFormatter.limited(MaxBitCount, MaxBitCount)));
+            => text.concat("0b", Formatter.Format(value));
 
         string Literal(string Name, string Value)
             => text.assign(Name, Value);

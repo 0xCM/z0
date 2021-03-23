@@ -60,11 +60,11 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var formatter = BitFormatter.create<T>();
             var data = ClrEnums.scalar<E,T>(src);
             var limit = (uint)gbits.effwidth(data);
             var config = BitFormatter.limited(limit,zpad);
-            return text.concat(name, Chars.Colon, formatter.Format(data,config));
+            var formatter = BitFormatter.create<T>(config);
+            return text.concat(name, Chars.Colon, formatter.Format(data));
         }
 
         /// <summary>

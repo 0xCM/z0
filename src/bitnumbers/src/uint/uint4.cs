@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint4(byte src)
-            => data = crop4(src);
+            => data = (byte)(U.MaxLiteral & src);
 
         [MethodImpl(Inline)]
         internal uint4(byte src, bool @unchecked)
