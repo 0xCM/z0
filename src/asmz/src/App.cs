@@ -856,15 +856,28 @@ namespace Z0.Asm
             emitter.DumpImages(src,dst);
         }
 
+
+        void EmitImageMaps()
+        {
+            var src = ImageMaps.current();
+            var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
+            ImageMaps.emit(Wf, src, dst);
+
+        }
+
+        void ShowThumprintCatalog()
+        {
+            var pipe = Wf.ApiStatementPipe();
+            pipe.ShowThumprintCatalog();
+        }
+
         public void Run()
         {
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
             //Wf.AsmFormPipe().EmitFormHashes();
+            ShowThumprintCatalog();
 
-            var src = ImageMaps.current();
-            var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
-            ImageMaps.emit(Wf, src, dst);
             //Sigs.ShowSymbols();
             //PipeImageData();
             //CheckBitSpans();

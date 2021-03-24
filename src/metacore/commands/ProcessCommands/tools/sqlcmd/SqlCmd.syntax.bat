@@ -1,1 +1,0 @@
-SqlCmd /? > SqlCmd.syntax.txt

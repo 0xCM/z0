@@ -1,0 +1,11 @@
+| Expression     | Kind          |
+| jmp near reg   | Indirect      |
+| jmp near [mem] | Indirect      |
+| jmp far [mem]  | Indirect      |
+| jcc short      | Conditional   |
+| jcc near       | Conditional   |
+| loop           | Conditional   |
+| loopcc         | Conditional   |
+| jrcxz          | Conditional   |
+| jmp near       | Unconditional |
+| jmp far        | Unconditional |

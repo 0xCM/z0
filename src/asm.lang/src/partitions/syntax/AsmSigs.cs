@@ -7,7 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
-    using System.IO;
 
     using static Part;
     using static Chars;
@@ -184,7 +183,7 @@ namespace Z0.Asm
                 return (false,FenceNotFound.Format(SigFence,src));
         }
 
-        static MsgPattern<Fence<char>,string> FenceNotFound = "The signature fence {0} for the source expression {1} is not present";
+        static MsgPattern<Fence<char>,string> FenceNotFound => "The signature fence {0} for the source expression {1} is not present";
 
         static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
 
@@ -400,7 +399,5 @@ namespace Z0.Asm
         static Fence<char> OpCodeFence => (Lt, Gt);
 
         static Fence<char> SizeFence => (LBracket, RBracket);
-
-
     }
 }

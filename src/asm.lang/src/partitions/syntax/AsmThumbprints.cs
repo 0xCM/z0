@@ -7,10 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Part;
-    using static Rules;
-    using static Chars;
-
     public class AsmThumbprints : WfService<AsmThumbprints>
     {
         const string Implication = " => ";

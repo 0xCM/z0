@@ -1,1 +1,0 @@
-MsBuild /? > MsBuild.syntax.txt
