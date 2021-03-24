@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes a file system repository
     /// </summary>
     [Free]
-    public interface IFileArchive : IFileExtensions
+    public interface IFileArchive
     {
         FS.FolderPath Root {get;}
 

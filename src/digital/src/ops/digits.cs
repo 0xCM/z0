@@ -302,7 +302,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         public static NatSpan<N4,byte> digits(Perm4L src)
-            => digits(src,NatSpan.alloc<N4,byte>());
+            => digits(src, NatSpans.alloc<N4,byte>());
 
         [MethodImpl(Inline), Op]
         public static void digits(ReadOnlySpan<BinarySym> src, Span<BinaryDigit> dst)

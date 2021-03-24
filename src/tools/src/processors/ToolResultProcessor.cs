@@ -10,7 +10,7 @@ namespace Z0
 
     class ToolResultProcessor : IToolResultProcessor
     {
-        readonly IDbPaths Paths;
+        readonly IEnvPaths Paths;
 
         public FS.FilePath ScriptPath {get;}
 
@@ -20,7 +20,7 @@ namespace Z0
 
         Index<IToolResultHandler> KnownHandlers;
 
-        public ToolResultProcessor(IDbPaths paths, FS.FilePath script)
+        public ToolResultProcessor(IEnvPaths paths, FS.FilePath script)
         {
             Paths = paths;
             ScriptPath = script;

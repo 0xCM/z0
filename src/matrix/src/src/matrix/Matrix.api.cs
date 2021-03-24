@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -27,7 +27,7 @@ namespace Z0
         public static NatSpan<N,T> natspan<N,T>(in SpanBlock256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.load(src.Storage,n);
+                => NatSpans.load(src.Storage,n);
 
         /// <summary>
         /// Allocates a memory span of specified length

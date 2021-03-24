@@ -33,16 +33,16 @@ namespace Z0
             const byte D = 0b11;
 
             var dABCD = Perm4L.ABCD.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpan.parts(n4, A, B, C, D), dABCD);
+            ClaimNumeric.ClaimEq(NatSpans.parts(n4, A, B, C, D), dABCD);
 
             var dDCBA = Perm4L.DCBA.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpan.parts(n4, D, C, B, A), dDCBA);
+            ClaimNumeric.ClaimEq(NatSpans.parts(n4, D, C, B, A), dDCBA);
 
             var dACBD = Perm4L.ACBD.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpan.parts(n4, A, C, B, D), dACBD);
+            ClaimNumeric.ClaimEq(NatSpans.parts(n4, A, C, B, D), dACBD);
 
             var dCBDA = Perm4L.CBDA.ToDigits();
-            ClaimNumeric.ClaimEq(NatSpan.parts(n4, C, B, D, A), dCBDA);
+            ClaimNumeric.ClaimEq(NatSpans.parts(n4, C, B, D, A), dCBDA);
         }
 
         public void vpermlo_4x16_outline()

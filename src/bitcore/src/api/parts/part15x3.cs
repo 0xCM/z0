@@ -9,6 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
+    using static BitMasks;
     using static BitMasks.Literals;
 
     partial struct BitParts
@@ -21,8 +22,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte part15x3(ushort src, ref byte dst)
         {
-            seek32(dst, 0) = Bits.scatter(src, Lsb32x8x3);
-            seek(dst, 4) = (byte)Bits.scatter((byte)(src >> 12), Lsb8x8x3);
+            seek32(dst, 0) = scatter(src, Lsb32x8x3);
+            seek(dst, 4) = (byte)scatter((byte)(src >> 12), Lsb8x8x3);
             return ref dst;
         }
     }

@@ -32,8 +32,8 @@ namespace Z0.Mkl
             var wslen = n*n;
             var exitcode = 0;
             var v = 'V';
-            var wr = NatSpan.alloc<N,double>();
-            var wi = NatSpan.alloc<N,double>();
+            var wr = NatSpans.alloc<N,double>();
+            var wi = NatSpans.alloc<N,double>();
             var lVec = A.Replicate();
             var rVec = A.Replicate();
 

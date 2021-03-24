@@ -5,24 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.IO;
-    using System.Runtime.CompilerServices;
 
     using static Part;
     using static memory;
 
     [ApiHost]
-    public sealed class CmdParser : WfService<CmdParser,IToolCmdParser>, IToolCmdParser
+    public readonly struct CmdParser
     {
-        readonly Index<ArgPrefix> Prefixes;
-
-        readonly Index<ArgQualifier> Qualifiers;
-
-        public CmdParser()
-        {
-
-        }
-
         const string InvalidOption = "Option text invalid";
 
         [Op]
@@ -55,14 +44,8 @@ namespace Z0
             return fail;
         }
 
-        public Outcome Parse(CmdLine src, out ToolExecSpec dst)
-            => parse(Prefixes, src, out dst);
-
-        public Outcome Parse(ReadOnlySpan<char> src, out ArgPrefix dst)
-            => parse(Prefixes, src, out dst);
-
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out ToolExecSpec dst)
+        public static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, CmdLine src, out ToolExecSpec dst)
         {
             var parts = src.Parts;
             var count = parts.Length;
@@ -80,7 +63,7 @@ namespace Z0
         }
 
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, ushort index, CmdLinePart part, out ToolCmdArg arg)
+        public static Outcome parse(ReadOnlySpan<ArgPrefix> prefixes, ushort index, CmdLinePart part, out ToolCmdArg arg)
         {
             var data = part.Chars;
             if(parse(prefixes, part.Chars, out ArgPrefix prefix))
@@ -94,7 +77,7 @@ namespace Z0
         }
 
         [Op]
-        static Outcome parse(ReadOnlySpan<ArgPrefix> matches, ReadOnlySpan<char> src, out ArgPrefix dst)
+        public static Outcome parse(ReadOnlySpan<ArgPrefix> matches, ReadOnlySpan<char> src, out ArgPrefix dst)
         {
             dst = default;
             var kSrc = (uint)src.Length;

@@ -28,7 +28,7 @@ namespace Z0
         public static NatSpan<N,T> natspan<N,T>(in SpanBlock256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.load(src.Storage,n);
+                => NatSpans.load(src.Storage, n);
 
         /// <summary>
         /// Loads an unsized 256-bit blocked span from a sized unblocked span

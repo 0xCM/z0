@@ -14,22 +14,20 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ScriptRunner create(Env env)
-            => new ScriptRunner(DbPaths.create(env));
+            => new ScriptRunner(EnvPaths.create(env));
 
         [MethodImpl(Inline)]
         public static ScriptRunner create()
-            => new ScriptRunner(DbPaths.create());
+            => new ScriptRunner(EnvPaths.create());
 
-        readonly IDbPaths Db;
+        readonly IEnvPaths Paths;
 
         [MethodImpl(Inline)]
-        public ScriptRunner(IDbPaths db)
-        {
-            Db = db;
-        }
+        public ScriptRunner(IEnvPaths paths)
+            => Paths = paths;
 
         public Outcome<TextLines> RunControlScript(FS.FileName name)
-            => RunScript(Db.ControlScript(name), new ScriptId(name.Name));
+            => RunScript(Paths.ControlScript(name), new ScriptId(name.Name));
 
         public Outcome<TextLines> RunCmdScript(ToolId tool, ScriptId script)
             => RunScript(tool, script, ToolScriptKind.Cmd);
@@ -42,7 +40,7 @@ namespace Z0
 
         Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
         {
-            using var writer = Db.CmdLog(script).Writer();
+            using var writer = Paths.CmdLog(script).Writer();
 
             try
             {
@@ -70,14 +68,14 @@ namespace Z0
                 ToolScriptKind.Ps => FS.Extensions.Ps1,
                 _ => FS.FileExt.Empty
             };
-            return Db.ToolScript(tool, script, x);
+            return Paths.ToolScript(tool, script, x);
         }
 
         CmdLine CmdLine(FS.FilePath path, ToolScriptKind kind)
         {
             return kind switch{
                 ToolScriptKind.Cmd => WinCmd.script(path),
-                ToolScriptKind.Ps => Pwsh.script(path),
+                ToolScriptKind.Ps => PwshCmd.script(path),
                 _ => Z0.CmdLine.Empty
             };
         }

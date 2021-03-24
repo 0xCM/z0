@@ -11,14 +11,14 @@ namespace Z0
 
     class DefaultResultHandler : IToolResultHandler
     {
-        readonly IDbPaths Paths;
+        readonly IEnvPaths Paths;
 
         public ToolId Tool => default;
 
         void Status(TextLine src)
             => term.babble(src);
 
-        public DefaultResultHandler(IDbPaths paths)
+        public DefaultResultHandler(IEnvPaths paths)
         {
             Paths = paths;
         }

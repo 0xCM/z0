@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartFileNames : IFileExtensions
+    public interface IPartFileNames
     {
         FS.FileName LegalFileName(OpIdentity id, FS.FileExt ext)
             => id.ToFileName(ext);

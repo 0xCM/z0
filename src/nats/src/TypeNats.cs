@@ -103,13 +103,13 @@ namespace Z0
         public static NatSpan<N,T> span<N,T>(T[] src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.load(src,n);
+                => NatSpans.load(src,n);
 
         [MethodImpl(Inline)]
         public static NatSpan<N,T> span<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => NatSpan.load(src,n);
+                => NatSpans.load(src,n);
 
         /// <summary>
         /// Constructs a natural representative

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiCaptureArchive : IWfService, IFileExtensions
+    public interface IApiCaptureArchive : IWfService
     {
         void Clear();
     }

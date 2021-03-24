@@ -11,7 +11,7 @@ namespace Z0
 
     class RobocopyResultHandler : IToolResultHandler
     {
-        readonly IDbPaths Paths;
+        readonly IEnvPaths Paths;
 
         public ToolId Tool => Toolsets.robocopy;
 
@@ -21,7 +21,7 @@ namespace Z0
         void Found(string marker)
             => term.inform(marker);
 
-        public RobocopyResultHandler(IDbPaths paths)
+        public RobocopyResultHandler(IEnvPaths paths)
         {
             Paths = paths;
         }

@@ -21,14 +21,14 @@ namespace Z0
 
         [DisplayName("n4x32u")]
         public static NatSpan<N4,uint> Case_n4x32u
-            => NatSpan.alloc(n4,Konst.z32);
+            => NatSpans.alloc(n4,Konst.z32);
 
         [DisplayName("n128x64u")]
         public static NatSpan<N128,ulong> Case_n128x64u
-            => NatSpan.alloc(n128,Konst.z64);
+            => NatSpans.alloc(n128,Konst.z64);
 
         [DisplayName("n256x1u")]
         public static NatSpan<N256,Bit32> Case_n128x1u
-            => NatSpan.alloc<N256,Bit32>();
+            => NatSpans.alloc<N256,Bit32>();
     }
 }

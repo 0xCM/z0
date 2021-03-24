@@ -4,24 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using static Part;
-    using static TextRules;
 
     public readonly struct ControlRunner
     {
-        public static ControlRunner create(IDbPaths paths)
+        public static ControlRunner create(IEnvPaths paths)
             => new ControlRunner(paths);
 
-        readonly IDbPaths Db;
+        readonly IEnvPaths Paths;
 
         readonly ScriptRunner Runner;
 
-        public ControlRunner(IDbPaths paths)
+        public ControlRunner(IEnvPaths paths)
         {
-            Db = paths;
+            Paths = paths;
             Runner = ScriptRunner.create();
         }
 

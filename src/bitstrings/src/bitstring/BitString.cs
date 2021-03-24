@@ -347,7 +347,7 @@ namespace Z0
         public NatSpan<N,bit> ToNatBits<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatSpan.alloc<N,bit>();
+            var dst = NatSpans.alloc<N,bit>();
             for(var i=0; i< Data.Length; i++)
                 dst[i] = (bit)Data[i];
             return dst;

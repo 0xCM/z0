@@ -45,7 +45,7 @@ namespace Z0
         {
             var builder = wf.CmdBuilder();
             var archive = Archives.runtime(wf);
-            var types = array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib, archive.Xml, archive.Json);
+            var types = array(FS.Extensions.Dll, FS.Extensions.Exe, FS.Extensions.Pdb, FS.Extensions.Lib, FS.Extensions.Xml, FS.Extensions.Json);
             var cmd = builder.ListFiles(label + ".build-artifacts", archive.Root, types);
             wf.Router.Dispatch(cmd);
         }

@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public partial class BitPack32
+    public class BitPack32
     {
         const NumericKind Closure = Part.UnsignedInts;
 

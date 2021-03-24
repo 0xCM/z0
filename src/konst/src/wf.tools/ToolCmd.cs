@@ -37,7 +37,6 @@ namespace Z0
             return new ToolExecSpec(Cmd.id(t), buffer);
         }
 
-
         /// <summary>
         /// Populates a <see cref='ToolCmdArg'/> structure from a specified source
         /// </summary>
@@ -119,31 +118,31 @@ namespace Z0
             where K : unmanaged
                 => new ScriptPattern<K>(id,content);
 
-        // public static async Task<int> start(ToolCmdSpec spec, WfStatusRelay dst)
-        // {
-        //     var info = new ProcessStartInfo
-        //     {
-        //         FileName = spec.CmdPath.Name,
-        //         Arguments = spec.Args.Format(),
-        //         RedirectStandardError = true,
-        //         RedirectStandardOutput = true,
-        //         RedirectStandardInput = true
-        //     };
+        public static async Task<int> start(ToolCmdSpec spec, Action<string> status, Action<string> error)
+        {
+            var info = new ProcessStartInfo
+            {
+                FileName = spec.CmdPath.Name,
+                Arguments = spec.Args.Format(),
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+                RedirectStandardInput = true
+            };
 
-        //     var process = new Process {StartInfo = info};
+            var process = new Process {StartInfo = info};
 
-        //     if (!spec.WorkingDir.IsNonEmpty)
-        //         process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
+            if (!spec.WorkingDir.IsNonEmpty)
+                process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
 
-        //     root.iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+            root.iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
 
-        //     process.OutputDataReceived += (s,d) => dst.OnInfo(d.Data ?? EmptyString);
-        //     process.ErrorDataReceived += (s,d) => dst.OnError(d.Data ?? EmptyString);
-        //     process.Start();
-        //     process.BeginOutputReadLine();
-        //     process.BeginErrorReadLine();
-        //     return await wait(process);
-        // }
+            process.OutputDataReceived += (s,d) => status(d.Data ?? EmptyString);
+            process.ErrorDataReceived += (s,d) => error(d.Data ?? EmptyString);
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            return await wait(process);
+        }
 
         static async Task<int> wait(Process process)
         {

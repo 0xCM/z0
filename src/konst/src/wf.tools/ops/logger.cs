@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Part;
 
     partial struct ToolCmd
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ToolCmdLogger logger<T>(IDbPaths paths,  T id)
+        public static ToolCmdLogger logger<T>(IEnvPaths paths,  T id)
             where T : unmanaged
                 => logger(paths, id.ToString());
 
         [MethodImpl(Inline), Op]
-        public static ToolCmdLogger logger(IDbPaths paths, string name)
+        public static ToolCmdLogger logger(IEnvPaths paths, string name)
             => new ToolCmdLogger(paths.CmdLogRoot() + FS.file(name, FS.Extensions.StatusLog));
     }
 }

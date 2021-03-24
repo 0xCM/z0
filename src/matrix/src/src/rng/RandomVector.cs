@@ -247,7 +247,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolySource random, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(z.nat32i<N>(), ref vector.Data[0]);
+                => random.Fill<T>(memory.nat32i<N>(), ref vector.Data[0]);
 
         /// <summary>
         /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type,
@@ -261,7 +261,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = Z0.NatSpan.alloc<N,T>();
+            var dst = NatSpans.alloc<N,T>();
             for(var i=0; i<dst.Count; i++)
                 dst[i] = gAlg.squeeze(src[i],max[i]);
             return dst;

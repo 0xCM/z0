@@ -11,7 +11,7 @@ namespace Z0
 
     class MsBuildResultHandler : IToolResultHandler
     {
-        readonly IDbPaths Paths;
+        readonly IEnvPaths Paths;
 
         public ToolId Tool => Toolsets.msbuild;
 
@@ -21,7 +21,7 @@ namespace Z0
         void Found(string marker)
             => term.inform(marker);
 
-        public MsBuildResultHandler(IDbPaths paths)
+        public MsBuildResultHandler(IEnvPaths paths)
         {
             Paths = paths;
         }

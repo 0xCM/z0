@@ -8,63 +8,57 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
+    using static memory;
 
     partial class BitVector
     {
         [MethodImpl(Inline), Op]
-        public static Span<BitVector4> partition(ushort src, Span<BitVector4> dst)
+        public static void part4x4(ushort src, Span<BitVector4> dst)
         {
-            BitParts.part4x4(src, ref NatSpan.bytes(dst,n4).First);
-            return dst;
+            ref var target = ref @as<BitVector4,byte>(memory.first(dst));
+            BitParts.part4x4(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<BitVector4> partition(uint src, Span<BitVector4> dst)
+        public static void part8x4(uint src, Span<BitVector4> dst)
         {
-            BitParts.part8x4(src, ref NatSpan.bytes(dst,n8).First);
-            return dst;
+            ref var target = ref @as<BitVector4,byte>(memory.first(dst));
+            BitParts.part8x4(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<BitVector8> partition(uint src, Span<BitVector8> dst)
+        public static void part4x8(uint src, Span<BitVector8> dst)
         {
-            BitParts.part4x8(src, ref NatSpan.bytes(dst,n4).First);
-            return dst;
+            ref var target = ref @as<BitVector8,byte>(memory.first(dst));
+            BitParts.part4x8(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<BitVector16> partition(uint src, Span<BitVector16> dst)
+        public static void part2x16(uint src, Span<BitVector16> dst)
         {
-            BitParts.part32x16(src, ref NatSpan.load(dst.AsUInt16(), n2).First);
-            return dst;
+            ref var target = ref @as<BitVector16,ushort>(memory.first(dst));
+            BitParts.part2x16(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<BitVector8> partition(ulong src, Span<BitVector8> dst)
+        public static void part8x8(ulong src, Span<BitVector8> dst)
         {
-            BitParts.part8x8(src, ref NatSpan.bytes(dst,n8).First);
-            return dst;
+            ref var target = ref @as<BitVector8,byte>(memory.first(dst));
+            BitParts.part8x8(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static byte partition(uint src, ref byte dst)
+        public static void part2x16(uint src, Span<BitVector<ushort>> dst)
         {
-            BitParts.part4x8(src, ref dst);
-            return dst;
+            ref var target = ref @as<BitVector<ushort>,ushort>(memory.first(dst));
+            BitParts.part2x16(src, ref target);
         }
 
         [MethodImpl(Inline), Op]
-        public static Span<BitVector<ushort>> partition(uint src, Span<BitVector<ushort>> dst)
+        public static void part8x8(ulong src, Span<BitVector<byte>> dst)
         {
-            BitParts.part32x16(src, ref NatSpan.load(dst.AsUInt16(), n2).First);
-            return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static Span<BitVector<byte>> partition(ulong src, Span<BitVector<byte>> dst)
-        {
-            BitParts.part8x8(src, ref NatSpan.bytes(dst,n8).First);
-            return dst;
+            ref var target = ref @as<BitVector<byte>,byte>(memory.first(dst));
+            BitParts.part8x8(src, ref target);
         }
     }
 }

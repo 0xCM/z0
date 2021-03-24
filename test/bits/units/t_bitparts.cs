@@ -8,7 +8,7 @@ namespace Z0
 
     public class t_bitparts : t_bits<t_bitparts>
     {
-        public void part_64x1()
+        public void bitpart_64x1()
         {
             var src = ulong.MaxValue;
             Span<bit> dst = new bit[64];
@@ -17,6 +17,81 @@ namespace Z0
                 Claim.require(dst[i]);
         }
 
+        public void bitpart_16x4()
+        {
+            var n = n4;
+            var t = z8;
+            var src = BitMasks.msb(n2,n1,z16);
+            var dst = NatSpans.alloc(n,t);
+            BitParts.part4x4(src, ref dst.First);
+            var segment = ScalarCast.uint8(0b1010).ToBitSpan32();
+            var expect = segment.Replicate(4);
+            var actual = dst.Edit.ToBitSpan32();
+            Claim.require(expect.Equals(actual));
+
+        }
+
+        public void bitpart_24x3()
+        {
+            var n = n8;
+            var t = z8;
+
+            var src = uint.MaxValue;
+            var dst = NatSpans.alloc(n,t);
+
+            BitParts.part24x3(src, ref dst.First);
+            for(var i=0; i<n; i++)
+                Claim.eq(dst[i],(byte)7);
+        }
+
+        public void bitpart_27x3()
+        {
+            var n = n9;
+            var t = z8;
+
+            var src = uint.MaxValue;
+            var dst = NatSpans.alloc(n,t);
+
+            BitParts.part27x3(src, ref dst.First);
+
+            var expect = BitSpans32.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
+            var actual = dst.Edit.ToBitSpan32();
+
+            Notify(expect.Format());
+            Notify(actual.Format());
+
+            for(var i=0; i<n; i+= 3)
+            {
+                PrimalClaims.eq((byte)expect[i], actual[i]);
+                PrimalClaims.eq((byte)expect[i+1], actual[i+1]);
+                PrimalClaims.eq((byte)expect[i+2], actual[i+2]);
+            }
+        }
+
+        public void bitpart_30x3()
+        {
+            var n = n10;
+            var t = z8;
+
+            var src = uint.MaxValue;
+            var dst = NatSpans.alloc(n,t);
+
+            BitParts.part10x3(src, ref dst.First);
+            for(var i=0; i<n; i++)
+                Claim.eq(dst[i],(byte)7);
+        }
+
+        public void bitpart_63x3()
+        {
+            var n = n21;
+            var t = z8;
+
+            var src = ulong.MaxValue;
+            var dst = NatSpans.alloc(n,t);
+            BitParts.part21x3(src, ref dst.First);
+            for(var i=0; i<n; i++)
+                Claim.eq(dst[i],(byte)7);
+        }
         protected void bitpart_check<A,B>(SpanPartitioner<A,B> part, int count, int width)
             where A : unmanaged
             where B : unmanaged
@@ -32,7 +107,5 @@ namespace Z0
                     Claim.eq(y[i], BitString.scalar(dst[i]).ToBitVector(n8));
             }
         }
-
-
     }
 }

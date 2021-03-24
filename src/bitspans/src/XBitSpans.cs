@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSpan<N,Bit32> ToNatSpan<N>(this in BitSpan32 src, N n = default)
             where N : unmanaged, ITypeNat
-                => NatSpan.load(src.Edit,n);
+                => NatSpans.load(src.Edit,n);
 
         /// <summary>
         /// Obliterates all bitspan content

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using X = FS.Extensions;
 
     public interface IRuntimeArchive : IFileArchive

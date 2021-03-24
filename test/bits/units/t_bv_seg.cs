@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public class t_bvseg : t_bits<t_bvseg>
+    public class t_bv_seg : t_bits<t_bv_seg>
     {
         public void bvlsbseg_8()
         {
