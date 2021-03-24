@@ -7,16 +7,16 @@ namespace Msil
 
     public class ReadableILStringVisitor : ILInstructionVisitor
     {
-        protected readonly ICilFormatProvider formatProvider;
+        protected readonly IMsilFormatProvider formatProvider;
 
         protected readonly IILStringCollector collector;
 
         public ReadableILStringVisitor(IILStringCollector collector)
-            : this(collector, DefaultCilFormatProvider.Instance)
+            : this(collector, DefaultMsilFormatProvider.Instance)
         {
         }
 
-        public ReadableILStringVisitor(IILStringCollector collector, ICilFormatProvider formatProvider)
+        public ReadableILStringVisitor(IILStringCollector collector, IMsilFormatProvider formatProvider)
         {
             this.formatProvider = formatProvider;
             this.collector = collector;

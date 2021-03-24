@@ -27,9 +27,9 @@ namespace Z0
             if(emitImm)
                 EmitImm(parts);
 
-            var rebase = (options & CaptureWorkflowOptions.RebaseMembers) != 0;
-            if(rebase)
-                RebaseMembers();
+            // var rebase = (options & CaptureWorkflowOptions.RebaseMembers) != 0;
+            // if(rebase)
+            //     RebaseMembers();
 
             var dump = (options & CaptureWorkflowOptions.EmitDump) != 0;
             if(dump)
@@ -59,23 +59,32 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-        void RebaseMembers()
+
+        void EmitRebase(Timestamp ts)
         {
-            var flow = Wf.Running();
-            var catalog = Wf.ApiServices().RebaseMembers();
-            Wf.Ran(flow);
+            var rebasing = Wf.Running();
+            var catalog = Wf.ApiServices().RebaseMembers(ts);
+            Wf.Ran(rebasing);
         }
+
+        void EmitMaps(Timestamp ts)
+        {
+            ImageMaps.emit(Wf, ts);
+        }
+
 
         void EmitDump()
         {
-            ImageMaps.EmitProcessLocations(Wf);
+            var ts = root.timestamp();
+            EmitRebase(ts);
+            EmitMaps(ts);
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var dst = Db.ProcDumpPath(name).EnsureParentExists();
-            var flow = Wf.EmittingFile(dst);
             dst.Delete();
-            DumpEmitter.emit(Runtime.CurrentProcess, dst.Name, DumpTypeOption.Full);
-            Wf.Ran(flow);
+            var flow = Wf.EmittingFile(dst);
+            DumpEmitter.emit(process, dst.Name, DumpTypeOption.Full);
+            Wf.EmittedFile(flow,1);
         }
     }
 }

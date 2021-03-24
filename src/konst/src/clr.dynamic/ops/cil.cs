@@ -14,21 +14,21 @@ namespace Z0
     partial struct ClrDynamic
     {
         [MethodImpl(Inline), Op]
-        public static CilMethod cil(DynamicMethod src)
+        public static OpMsil cil(DynamicMethod src)
         {
             var flags = src.GetMethodImplementationFlags();
             var uri = OpUri.located(src.DeclaringType.HostUri(), src.Name, src.Identify());
             MemoryAddress address = pointer(src);
-            return new CilMethod(src.MetadataToken, address, uri, src.ResolveSignature(), cilbytes(src), flags);
+            return new OpMsil(src.MetadataToken, address, uri, src.ResolveSignature(), cilbytes(src), flags);
         }
 
         [MethodImpl(Inline), Op]
-        public static CilMethod cil(DynamicDelegate src)
+        public static OpMsil cil(DynamicDelegate src)
             => cil(src.Target);
 
         [MethodImpl(Inline), Op]
-        public static CilMethod cil(MemoryAddress @base, OpUri uri, MethodInfo src)
-            => new CilMethod(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+        public static OpMsil cil(MemoryAddress @base, OpUri uri, MethodInfo src)
+            => new OpMsil(src.MetadataToken, @base, uri, src.ResolveSignature(), src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         /// <summary>
         /// See https://stackoverflow.com/questions/4148297/resolving-the-tokens-found-in-the-il-from-a-dynamic-method/35711376#35711376

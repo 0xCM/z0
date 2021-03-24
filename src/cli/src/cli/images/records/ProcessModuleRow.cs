@@ -7,7 +7,7 @@ namespace Z0
     [Record(TableId)]
     public struct ProcessModuleRow : IRecord<ProcessModuleRow>
     {
-        public const string TableId = "process-module";
+        public const string TableId = "process.modules";
 
         public MemoryAddress BaseAddress;
 

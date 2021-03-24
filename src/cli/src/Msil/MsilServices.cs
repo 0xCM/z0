@@ -5,17 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
+    using System.Text;
     using System.Reflection;
 
     using static memory;
 
-    partial struct Cil
+    public readonly struct MsilServices
     {
-        public static Index<CilMethod> methods(MethodInfo[] src)
+        [Op]
+        public static RuntimeIndex index(Assembly src)
+            => RuntimeIndex.create(src);
+
+        public static Index<OpMsil> methods(MethodInfo[] src)
         {
             var count = src.Length;
-            var buffer = alloc<CilMethod>(count);
+            var buffer = alloc<OpMsil>(count);
             var methods = @readonly(src);
             var target = span(buffer);
             for(var i=0; i<count; i++)
@@ -30,7 +34,7 @@ namespace Z0
                 {
                     var ilbytes = body.GetILAsByteArray() ?? Array.Empty<byte>();
                     var length = ilbytes.Length;
-                    seek(target,i) = new CilMethod(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
+                    seek(target,i) = new OpMsil(method.MetadataToken, address, uri, sig, ilbytes, method.MethodImplementationFlags);
                 }
             }
 

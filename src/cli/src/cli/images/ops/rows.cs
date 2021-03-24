@@ -9,11 +9,11 @@ namespace Z0
     partial struct ImageMaps
     {
         [Op]
-        static Index<LocatedImageRow> rows(Index<LocatedImage> src)
+        static Index<ProcessImageRow> rows(Index<LocatedImage> src)
         {
             var count = src.Count;
             var images = src.View;
-            var buffer = alloc<LocatedImageRow>(count);
+            var buffer = alloc<ProcessImageRow>(count);
             var summaries = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -22,7 +22,6 @@ namespace Z0
                 dst.BaseAddress = image.BaseAddress;
                 dst.EndAddress = image.EndAddress;
                 dst.MemorySize = image.Size;
-                dst.PartId = image.PartId;
                 dst.ImageName = image.Name;
 
                 if(i != 0)

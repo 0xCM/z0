@@ -15,6 +15,6 @@ namespace Z0
 
         public ClrDisplaySig Sig;
 
-        public CilMethod Cil;
+        public OpMsil Cil;
     }
 }

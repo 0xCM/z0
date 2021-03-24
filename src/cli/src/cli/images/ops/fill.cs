@@ -14,13 +14,11 @@ namespace Z0
     partial struct ImageMaps
     {
         [MethodImpl(Inline), Op]
-        public static void fill(ProcessModule[] src, ProcessModuleRow[] dst)
+        public static void fill(ReadOnlySpan<ProcessModule> src, Span<ProcessModuleRow> dst)
         {
             var count = root.min(src.Length, dst.Length);
-            ref readonly var s = ref first(span(src));
-            ref var t = ref first(span(dst));
             for(var i=0u; i<count; i++)
-                fill(skip(s,i), ref seek(t,i));
+                fill(skip(src,i), ref seek(dst,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -50,10 +48,10 @@ namespace Z0
         {
             dst.ImageName = src.ProcessName;
             dst.ProcessId = (uint)src.Id;
-            dst.BaseAddress = src.Handle;
+            dst.BaseAddress = src.MainModule.BaseAddress;
             dst.MinWorkingSet =(ulong)src.MinWorkingSet;
             dst.MaxWorkingSet = (ulong)src.MaxWorkingSet;
-            dst.Affinity = (ushort)src.ProcessorAffinity;
+            dst.Affinity = (ulong)src.ProcessorAffinity;
             dst.StartTime = src.StartTime;
             dst.TotalRuntime = src.TotalProcessorTime;
             dst.UserRuntime = src.UserProcessorTime;

@@ -5,17 +5,15 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct LocatedImageRow : IRecord<LocatedImageRow>
+    public struct ProcessImageRow : IRecord<ProcessImageRow>
     {
-        public const string TableId = "images.located";
+        public const string TableId = "process.images";
 
         public MemoryAddress BaseAddress;
 
         public MemoryAddress EndAddress;
 
         public ByteSize MemorySize;
-
-        public PartId PartId;
 
         public ByteSize Gap;
 

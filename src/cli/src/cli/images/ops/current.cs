@@ -4,9 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    sealed class EmitImageMaps : CmdReactor<EmitImageMapsCmd, Index<LocatedImageRow>>
+    partial struct ImageMaps
     {
-        protected override Index<LocatedImageRow> Run(EmitImageMapsCmd cmd)
-            => ImageMaps.emit(ImageMaps.index(), cmd.Target);
+        /// <summary>
+        /// Creates a <see cref='ImageMap'/> for the current process
+        /// </summary>
+        [Op]
+        public static ImageMap current()
+            => define(sys.CurrentProcess);
     }
 }

@@ -29,7 +29,7 @@ namespace Z0
             IlViz = Cil.visualizer();
         }
 
-        public void EmitCilCode(Index<ApiMemberCode> src, FS.FilePath dst)
+        public void EmitMsil(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
             var builder = text.build();
@@ -62,7 +62,7 @@ namespace Z0
             }
         }
 
-        public void Render(CilMethod src, ITextBuffer dst)
+        public void Render(OpMsil src, ITextBuffer dst)
         {
             var bytes = src.Encoded;
             var sig = src.Signature.Data;
@@ -86,7 +86,7 @@ namespace Z0
             return ref dst;
         }
 
-        public void EmitCilData(Index<ApiMemberCode> src, FS.FilePath dst)
+        public void EmitMsilData(Index<ApiMemberCode> src, FS.FilePath dst)
         {
             var count = src.Count;
             if(count != 0)

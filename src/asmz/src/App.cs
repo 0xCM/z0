@@ -381,40 +381,6 @@ namespace Z0.Asm
             }
         }
 
-        void EmitCilBlocks()
-        {
-            var service = Cil.visualizer();
-            var input = Db.CilDataFiles().View;
-            var count = input.Length;
-            var builder = text.build();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var path = ref skip(input,i);
-                var output = Db.CilCodeFile(path.FileName.WithoutExtension);
-                using var reader = path.Reader();
-                using var writer = output.Writer();
-                var flow = Wf.EmittingFile(output);
-                while(!reader.EndOfStream)
-                {
-                    builder.Clear();
-                    var line = reader.ReadLine();
-                    if(parse(line, out var row))
-                    {
-                        var code = row.CilCode;
-                        service.DumpILBlock(code, code.Length, builder);
-                        writer.WriteLine(string.Format("// {0} {1}", row.BaseAddress, row.Uri));
-                        writer.WriteLine("{");
-                        writer.WriteLine(builder.ToString());
-                        writer.WriteLine("}");
-                        writer.WriteLine();
-                    }
-                    else
-                        Wf.Warn($"The content {line} could not be parsed");
-
-                }
-                Wf.EmittedFile(flow,1);
-            }
-        }
 
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
@@ -452,13 +418,12 @@ namespace Z0.Asm
             Wf.EmittedFile(flow,1);
         }
 
-
         void EmitMsil()
         {
             var pipe = Wf.IlPipe();
             var members = Wf.Api.ApiHosts.Where(h => h.HostType == typeof(math)).Single().Methods;
             var buffer = text.buffer();
-            var methods = Cil.methods(members);
+            var methods = MsilServices.methods(members);
             root.iter(methods, m => pipe.Render(m,buffer));
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Extensions.Il)).Writer();
             writer.Write(buffer.Emit());
@@ -848,6 +813,41 @@ namespace Z0.Asm
 
         }
 
+        void EmitCilBlocks()
+        {
+            var service = Cil.visualizer();
+            var input = Db.CilDataFiles().View;
+            var count = input.Length;
+            var builder = text.build();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(input,i);
+                var output = Db.CilCodeFile(path.FileName.WithoutExtension);
+                using var reader = path.Reader();
+                using var writer = output.Writer();
+                var flow = Wf.EmittingFile(output);
+                while(!reader.EndOfStream)
+                {
+                    builder.Clear();
+                    var line = reader.ReadLine();
+                    if(parse(line, out var row))
+                    {
+                        var code = row.CilCode;
+                        service.DumpILBlock(code, code.Length, builder);
+                        writer.WriteLine(string.Format("// {0} {1}", row.BaseAddress, row.Uri));
+                        writer.WriteLine("{");
+                        writer.WriteLine(builder.ToString());
+                        writer.WriteLine("}");
+                        writer.WriteLine();
+                    }
+                    else
+                        Wf.Warn($"The content {line} could not be parsed");
+
+                }
+                Wf.EmittedFile(flow,1);
+            }
+        }
+
         void DumpImages()
         {
             var emitter = MemoryEmitter.create(Wf);
@@ -859,10 +859,13 @@ namespace Z0.Asm
 
         public void Run()
         {
-            Wf.AsmCatalogEtl().EmitMnemonicInfo();
+            //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
             //Wf.AsmFormPipe().EmitFormHashes();
 
+            var src = ImageMaps.current();
+            var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
+            ImageMaps.emit(Wf, src, dst);
             //Sigs.ShowSymbols();
             //PipeImageData();
             //CheckBitSpans();

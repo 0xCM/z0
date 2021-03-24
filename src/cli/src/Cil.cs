@@ -21,7 +21,7 @@ namespace Z0
 
         [Op]
         public static string format(CliSig src)
-            => DefaultCilFormatProvider.Instance.SigByteArrayToString(src);
+            => DefaultMsilFormatProvider.Instance.SigByteArrayToString(src);
 
         readonly Index<OpCodeInfo> Data;
 

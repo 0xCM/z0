@@ -27,7 +27,7 @@ namespace Z0
 
         public ApiHostUri Host {get;}
 
-        public CilMethod Cil {get;}
+        public OpMsil Cil {get;}
 
         public CliSig CliSig {get;}
 

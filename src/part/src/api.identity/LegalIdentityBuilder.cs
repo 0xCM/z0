@@ -5,11 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial struct ApiIdentity
+    using static Part;
+
+    public struct LegalIdentityBuilder : IIdentityBuilder<string,OpIdentity>
     {
+        [MethodImpl(Inline)]
+        public static LegalIdentityBuilder service(LegalIdentityOptions options)
+            => new LegalIdentityBuilder(options);
+
         [Op]
-        public static string legalize(OpIdentity src, in LegalIdentityOptions options)
+        public static string legalize(in OpIdentity src, in LegalIdentityOptions options)
         {
             var length = src.Identifier.Length;
             Span<char> dst = stackalloc char[length];
@@ -65,5 +72,43 @@ namespace Z0
             }
             return new string(dst.Trim());
         }
+
+        LegalIdentityOptions Options;
+
+        [MethodImpl(Inline)]
+        public static string code(OpIdentity src)
+            => new LegalIdentityBuilder(CreateCodeOptions()).Build(src);
+
+        [MethodImpl(Inline)]
+        public static string file(OpIdentity src)
+            => new LegalIdentityBuilder(CreateFileOptions()).Build(src);
+
+        [MethodImpl(Inline)]
+        internal LegalIdentityBuilder(LegalIdentityOptions options)
+            => Options = options;
+
+        public string Build(OpIdentity src)
+            => LegalIdentityBuilder.legalize(src,Options);
+
+        [MethodImpl(Inline)]
+        static LegalIdentityOptions CreateFileOptions()
+            => new LegalIdentityOptions(
+                TypeArgsOpen: Chars.LBracket,
+                TypeArgsClose: Chars.RBracket,
+                ArgsOpen: Chars.LParen,
+                ArgsClose: Chars.RParen,
+                ArgSep: Chars.Comma,
+                ModSep: IDI.ModSep);
+
+        [MethodImpl(Inline)]
+        static LegalIdentityOptions CreateCodeOptions()
+            => new LegalIdentityOptions(
+            TypeArgsOpen: SymNot.Lt,
+            TypeArgsClose: SymNot.Gt,
+            ArgsOpen: SymNot.Circle,
+            ArgsClose: SymNot.Circle,
+            ArgSep: SymNot.Dot,
+            ModSep: (char)SymNotKind.Plus
+            );
     }
 }

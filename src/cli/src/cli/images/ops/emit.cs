@@ -10,21 +10,22 @@ namespace Z0
 
     partial struct ImageMaps
     {
-        public static Index<LocatedImageRow> EmitProcessLocations(IWfShell wf)
+        public static Index<ProcessImageRow> emit(IWfShell wf, Timestamp? ts = null)
         {
-            var dst = wf.Db().IndexTable<LocatedImageRow>();
-            var flow = wf.EmittingTable<LocatedImageRow>(dst);
-            var rows = emit(index(), dst);
-            wf.EmittedTable(flow,rows.Count);
+            var process = Runtime.CurrentProcess;
+            var name = process.ProcessName;
+            var dst = wf.Db().IndexTable<ProcessImageRow>(string.Format("{0}.{1}", name, (ts ?? root.timestamp()).Format()));
+            var flow = wf.EmittingTable<ProcessImageRow>(dst);
+            var rows = emit(index(process), dst);
+            wf.EmittedTable(flow, rows.Count);
             return rows;
         }
 
-        public static Index<LocatedImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)
+        public static Index<ProcessImageRow> emit(Index<LocatedImage> src, FS.FilePath dst)
         {
-            var images = index();
-            var records = rows(images);
+            var records = rows(src);
             var target = records.Edit;
-            var formatter = Tables.formatter<LocatedImageRow>(16);
+            var formatter = Tables.formatter<ProcessImageRow>(16);
             var count = records.Length;
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
@@ -41,14 +42,14 @@ namespace Z0
                 using var writer = dst.Writer();
 
                 var f1 = Tables.formatter<ProcessState>(16);
-                var f2 = Tables.formatter<LocatedImageRow>(16);
+                var f2 = Tables.formatter<ProcessImageRow>(16);
 
                 writer.WriteLine(string.Format("# {0}", nameof(ProcessState)));
                 writer.WriteLine(f1.FormatHeader());
                 writer.WriteLine(RP.PageBreak240);
                 writer.WriteLine(f1.Format(src.Process));
                 writer.WriteLine();
-                writer.WriteLine(string.Format("# {0}", nameof(LocatedImageRow)));
+                writer.WriteLine(string.Format("# {0}", nameof(ProcessImageRow)));
 
                 var images = rows(src.Images).View;
                 writer.WriteLine(f2.FormatHeader());

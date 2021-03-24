@@ -26,7 +26,7 @@ namespace Z0
 
         public ExtractTermCode TermCode;
 
-        public CilMethod Cil;
+        public OpMsil Cil;
 
         public CliSig CliSig;
 

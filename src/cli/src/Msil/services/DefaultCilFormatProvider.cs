@@ -5,11 +5,11 @@ namespace Msil
     using System;
     using System.Text;
 
-    public class DefaultCilFormatProvider : ICilFormatProvider
+    public class DefaultMsilFormatProvider : IMsilFormatProvider
     {
-        private DefaultCilFormatProvider() { }
+        private DefaultMsilFormatProvider() { }
 
-        public static readonly DefaultCilFormatProvider Instance = new DefaultCilFormatProvider();
+        public static readonly DefaultMsilFormatProvider Instance = new DefaultMsilFormatProvider();
 
         public virtual string Int32ToHex(int int32)
             => int32.ToString("X8");

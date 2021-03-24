@@ -14,7 +14,7 @@ namespace Z0
         MemoryAddress BaseAddress
             => MemoryAddress.Zero;
 
-        CilMethod Cil
+        OpMsil Cil
             => ClrDynamic.cil(BaseAddress, OpUri, Method);
 
         CliSig CliSig

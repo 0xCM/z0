@@ -10,38 +10,18 @@ namespace Z0
 
     partial interface IEnvPaths
     {
-        /// <summary>
-        /// The root table directory
-        /// </summary>
         FS.FolderPath TableRoot()
             => DbRoot() + FS.folder(tables);
 
-       /// <summary>
-        /// Specifies a table root for an identified subject
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
         FS.FolderPath TableDir(string subject)
             => TableRoot() + FS.folder(subject);
 
-        /// <summary>
-        /// Specifies a table subdirectory
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
         FS.FolderPath TableDir(FS.FolderName subject)
             => TableRoot() + subject;
 
-        /// <summary>
-        /// Specifies a table root for a type-identified subject
-        /// </summary>
-        /// <param name="t">The identifying type</param>
         FS.FolderPath TableDir(Type t)
             => t.Tag<RecordAttribute>().MapValueOrElse(a => TableDir(a.TableId), () => TableDir(t.Name));
 
-        /// <summary>
-        /// Specifies a table root for a parametrically-identified subject
-        /// </summary>
-        /// <param name="subject">The subject identifier</param>
-        /// <typeparam name="S">The subject type</typeparam>
         FS.FolderPath TableDir<T>()
             where T : struct, IRecord<T>
                 => TableDir(typeof(T));
@@ -53,36 +33,6 @@ namespace Z0
         FS.FolderName TableFolder(Type t)
                 => FS.folder(TableId(t));
 
-        FS.FolderPath AppTableRoot
-            => AppDataFolder() + FS.folder(tables);
-
-        FS.FolderPath AppTableDir<T>()
-            where T : struct, IRecord<T>
-                => AppTableRoot + TableFolder<T>();
-
-        FS.FolderPath AppTableDir(Type t)
-            => AppTableRoot + TableFolder(t);
-
-        FS.FilePath AppTablePath<T>(string subject, FS.FileExt? ext = null)
-            where T : struct, IRecord<T>
-        {
-            var id = TableId<T>();
-            var dir = AppTableDir<T>();
-            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? Csv);
-        }
-
-        FS.FilePath AppTablePath(Type t, string subject, FS.FileExt? ext = null)
-        {
-            var id = TableId(t);
-            var dir = AppTableDir(t);
-            return dir + FS.file(string.Format("{0}.{1}", id, subject), ext ?? Csv);
-        }
-
-        /// <summary>
-        /// Creates a folder path of the form {DbRoot}/tables/{TableId}.{subject}
-        /// </summary>
-        /// <param name="subject">The subject name</param>
-        /// <typeparam name="T">The record type</typeparam>
         FS.FolderPath TableDir<T>(string subject)
             where T : struct, IRecord<T>
                 => TableRoot() + FS.folder(string.Format("{0}.{1}", TableId<T>(), subject));

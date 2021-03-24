@@ -2,15 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
-    using System.Reflection;
-
-    public readonly partial struct Cil
+    public interface IAsmFormatter
     {
-        [Op]
-        public static RuntimeIndex index(Assembly src)
-            => RuntimeIndex.create(src);
+
     }
+
 }

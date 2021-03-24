@@ -13,13 +13,6 @@ namespace Z0
 
     partial struct ImageMaps
     {
-       /// <summary>
-        /// Creates a <see cref='ImageMap'/> for the current process
-        /// </summary>
-        [Op]
-        public static ImageMap define()
-            => define(sys.CurrentProcess);
-
         [Op]
         public static ImageMap define(Process src)
         {

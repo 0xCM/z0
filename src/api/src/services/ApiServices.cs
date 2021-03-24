@@ -67,14 +67,14 @@ namespace Z0
         public BasedApiMembers JitCatalog()
             => ApiJit.JitCatalog();
 
-        public BasedApiMemberCatalog RebaseMembers()
+        public BasedApiMemberCatalog RebaseMembers(Timestamp? ts = null)
         {
-            return RebaseMembers(JitCatalog());
+            return RebaseMembers(JitCatalog(), ts);
         }
 
-        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src)
+        public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src, Timestamp? ts = null)
         {
-            var dst = Db.IndexTable<ApiCatalogRecord>(root.timestamp().Format());
+            var dst = Db.IndexTable<ApiCatalogRecord>( (ts ?? root.timestamp()).Format());
             var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
             var records = CatalogRecords(src.Base, src.Members.View);
             var count = Tables.emit<ApiCatalogRecord>(records, dst, 16);

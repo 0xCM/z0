@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CilMethod
+    public readonly struct OpMsil
     {
         public ClrToken Id {get;}
 
@@ -40,7 +40,7 @@ namespace Z0
         public MethodImplAttributes ImplSpec {get;}
 
         [MethodImpl(Inline)]
-        public CilMethod(ClrToken id, MemoryAddress @base, OpUri name, CliSig sig, BinaryCode data, MethodImplAttributes impl)
+        public OpMsil(ClrToken id, MemoryAddress @base, OpUri name, CliSig sig, BinaryCode data, MethodImplAttributes impl)
         {
             Id = id;
             BaseAddress = @base;

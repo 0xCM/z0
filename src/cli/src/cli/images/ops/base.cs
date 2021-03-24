@@ -27,8 +27,7 @@ namespace Z0
         public static MemoryAddress @base(Name procname)
         {
             var match =  procname.Content;
-            var mods = modules(Process.GetCurrentProcess());
-            var module = mods.Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
+            var module = modules(Process.GetCurrentProcess()).Where(m => Path.GetFileNameWithoutExtension(m.ImagePath.Name) == match).First();
             return module.BaseAddress;
         }
     }

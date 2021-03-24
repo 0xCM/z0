@@ -23,5 +23,9 @@ namespace Z0
             fill(src, ref dst);
             return dst;
         }
+
+        [Op]
+        public static ProcessState state()
+            => state(Process.GetCurrentProcess());
     }
 }

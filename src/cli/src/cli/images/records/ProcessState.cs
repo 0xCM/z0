@@ -15,6 +15,11 @@ namespace Z0
         public MemoryAddress BaseAddress;
 
         /// <summary>
+        /// The address of the entry point
+        /// </summary>
+        public MemoryAddress EntryAddress;
+
+        /// <summary>
         /// The number of bytes occupied by the module
         /// </summary>
         public ByteSize MemorySize;
@@ -40,19 +45,9 @@ namespace Z0
         public uint ProcessId;
 
         /// <summary>
-        /// The path of the process image
-        /// </summary>
-        public FS.FilePath ImagePath;
-
-        /// <summary>
         /// The process image version
         /// </summary>
         public VersionInfo ImageVersion;
-
-        /// <summary>
-        /// The address of the entry point
-        /// </summary>
-        public MemoryAddress EntryAddress;
 
         /// <summary>
         /// The minimum working set size
@@ -67,7 +62,7 @@ namespace Z0
         /// <summary>
         /// The cpu affinity provided by <see cref='Process.ProcessorAffinity'/>
         /// </summary>
-        public ushort Affinity;
+        public ulong Affinity;
 
         /// <summary>
         /// Captures the process start time
@@ -83,5 +78,11 @@ namespace Z0
         /// Captures the value provided by <see cref='Process.UserProcessorTime'/>
         /// </summary>
         public Duration UserRuntime;
+
+        /// <summary>
+        /// The path of the process image
+        /// </summary>
+        public FS.FilePath ImagePath;
+
     }
 }

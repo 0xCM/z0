@@ -20,9 +20,10 @@ namespace Z0
             var modules = @readonly(src.Modules.Cast<ProcessModule>().Array());
             var count = modules.Length;
             var buffer = alloc<ProcessModuleRow>(count);
-            var dst = span(buffer);
-            for(var i=0u; i<count; i++)
-                fill(skip(modules,i), ref seek(dst, i));
+            fill(modules, buffer);
+            // var dst = span(buffer);
+            // for(var i=0u; i<count; i++)
+            //     fill(skip(modules,i), ref seek(dst, i));
             return buffer;
         }
     }

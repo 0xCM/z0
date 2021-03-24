@@ -60,8 +60,8 @@ namespace Z0
         {
             if(src.Count != 0)
             {
-                IlPipe.EmitCilCode(src, Wf.Db().CilCodeFile(host));
-                IlPipe.EmitCilData(src, Wf.Db().CilDataFile(host));
+                IlPipe.EmitMsil(src, Wf.Db().CilCodeFile(host));
+                IlPipe.EmitMsilData(src, Wf.Db().CilDataFile(host));
             }
 
             return src.Count;

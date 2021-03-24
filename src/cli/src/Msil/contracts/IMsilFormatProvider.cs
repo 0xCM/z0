@@ -2,8 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace Msil
 {
-
-    public interface ICilFormatProvider
+    public interface IMsilFormatProvider
     {
         string Int32ToHex(int int32);
 
