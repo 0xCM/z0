@@ -46,8 +46,8 @@ namespace Z0.Mkl
                 sample.uniform(stream, ufRange, bufferF64);
                 Observations.Load(bufferF64,1).Extrema();
                 var max = Observations.Load(bufferF64,1).Max()[0];
-                ClaimNumeric.lteq(max, ufRange.Right);
-                ClaimNumeric.neq(max,0);
+                NumericClaims.lteq(max, ufRange.Right);
+                NumericClaims.neq(max,0);
 
                 sample.bits(stream, bufferU32);
 

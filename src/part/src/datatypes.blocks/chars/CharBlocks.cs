@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Part;
     using static memory;
@@ -47,7 +46,6 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(src,i);
         }
-            // => CopyBlock(ref dst, ref edit(src), count);
 
         [MethodImpl(Inline)]
         static void copy<S,T>(in S src, ref T dst, uint srcCount, uint dstOffset = 0)

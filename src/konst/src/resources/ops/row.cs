@@ -21,13 +21,5 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
-        public unsafe static ref StringResRow row(in StringRes src, out StringResRow dst)
-        {
-            dst.Id = src.Source.MetadataToken;
-            dst.Address = src.Address;
-            dst.Length = (uint)src.Value.Length;
-            return ref dst;
-        }
     }
 }

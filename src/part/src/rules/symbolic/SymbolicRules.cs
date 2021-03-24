@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static SymbolicTests;
 
-    [ApiHost(ApiNames.Rules, true)]
+    [ApiHost]
     public readonly partial struct SymbolicRules
     {
         const NumericKind Closure = UnsignedInts;

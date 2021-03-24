@@ -55,7 +55,7 @@ namespace Z0
                     var before = gbits.testbit(x, j);
                     x = gbits.toggle(x, j);
                     var after = gbits.testbit(x, j);
-                    ClaimNumeric.neq((uint)before, (uint)after);
+                    NumericClaims.neq((uint)before, (uint)after);
                     x = gbits.toggle(x, j);
                     Claim.eq(x, src[i]);
                 }
@@ -64,16 +64,16 @@ namespace Z0
 
         public void bitsize()
         {
-            Claim.eq(8, (uint)width<byte>());
-            Claim.eq(8, (uint)width<sbyte>());
-            Claim.eq(16, (uint)width<short>());
-            Claim.eq(16, (uint)width<ushort>());
-            Claim.eq(32, (uint)width<int>());
-            Claim.eq(32, (uint)width<uint>());
-            Claim.eq(64, (uint)width<long>());
-            Claim.eq(64, (uint)width<ulong>());
-            Claim.eq(32, (uint)width<float>());
-            Claim.eq(64, (uint)width<double>());
+            PrimalClaims.eq((byte)8, width<byte>(w8));
+            PrimalClaims.eq((byte)8, width<sbyte>(w8));
+            PrimalClaims.eq((byte)16, width<short>(w8));
+            PrimalClaims.eq((byte)16, width<ushort>(w8));
+            PrimalClaims.eq((byte)32, width<int>(w8));
+            PrimalClaims.eq((byte)32, width<uint>(w8));
+            PrimalClaims.eq((byte)64, width<long>(w8));
+            PrimalClaims.eq((byte)64, width<ulong>(w8));
+            PrimalClaims.eq((byte)32, width<float>(w8));
+            PrimalClaims.eq((byte)64, width<double>(w8));
         }
 
         public void testbit_outline()

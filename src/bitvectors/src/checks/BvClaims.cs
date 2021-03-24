@@ -13,11 +13,11 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct BitVectorClaims : ICheckPrimal, ICheckInvariant
+    public readonly struct BvClaims : ICheckPrimal, ICheckInvariant
     {
-        static ICheckPrimal Primal => default(BitVectorClaims);
+        static ICheckPrimal Primal => default(BvClaims);
 
-        static ICheckInvariant Invariant => default(BitVectorClaims);
+        static ICheckInvariant Invariant => default(BvClaims);
 
         [MethodImpl(Inline)]
         public static void eq(BitVector4 x, BitVector4 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

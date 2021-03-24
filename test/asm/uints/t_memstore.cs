@@ -28,7 +28,7 @@ namespace Z0
 
         public void read_models()
         {
-            var svc = Resources.stores(n256);
+            var svc = ConstBytes256.reader();
             var store = svc.Segments();
             var results = svc.Locations(store);
             var dst = CaseWriter(FileExtensions.Csv);
@@ -54,7 +54,7 @@ namespace Z0
 
         public void run_2()
         {
-            var svc = Resources.stores(n256);
+            var svc = ConstBytes256.reader();
             var store = svc.Segments();
             var sources = store.View;
             for(var i=0u; i<sources.Length; i++)

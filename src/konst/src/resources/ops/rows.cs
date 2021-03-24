@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static StringResRows rows(StringRes[] src)
+        public static Index<StringResRow> rows(Index<StringRes> src)
             => src.Select(r => row(r));
     }
 }

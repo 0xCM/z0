@@ -9,9 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = StorageReader;
-
-    public unsafe readonly struct ConstBytesReader : IStorageReader<ConstBytesReader, ConstBytes256>
+    public unsafe readonly partial struct ConstBytesReader : IStorageReader<ConstBytesReader, ConstBytes256>
     {
         readonly ConstBytes256 Data;
 
@@ -27,46 +25,46 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public MemorySegments Segments()
-            => api.segments(Data);
+            => segments(Data);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> Leads()
-            => api.leads(Data);
+            => leads(Data);
 
         [Op]
         public ReadOnlySpan<MemoryAddress> Locations(MemorySegments store)
-            => api.addresses(Data, store);
+            => addresses(Data, store);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Span(byte n)
-            => api.span(Data, n);
+            => span(Data, n);
 
         [MethodImpl(Inline)]
         public MemorySegment Segment(byte n)
-            => api.segment(Data, n);
+            => segment(Data, n);
 
         [MethodImpl(Inline)]
         public ref readonly byte Cell(byte n, int i)
-            => ref api.cell(Data, n, i);
+            => ref cell(Data, n, i);
 
         [MethodImpl(Inline)]
         public ReadOnlySpan<byte> Span<N>(N n)
             where N : unmanaged, ITypeNat
-            => api.span(Data, n);
+            => span(Data, n);
 
         [MethodImpl(Inline)]
         public ref readonly byte First<N>(N n)
             where N : unmanaged, ITypeNat
-                => ref api.first(Data, n);
+                => ref first(Data, n);
 
         [MethodImpl(Inline)]
         public ref readonly byte Cell<N>(N n, int i)
             where N : unmanaged, ITypeNat
-                => ref api.cell(Data, n, i);
+                => ref cell(Data, n, i);
 
         [MethodImpl(Inline)]
         public unsafe MemorySegment Segment<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => api.segment(Data, n);
+                => segment(Data, n);
     }
 }

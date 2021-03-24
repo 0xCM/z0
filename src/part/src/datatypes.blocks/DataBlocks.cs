@@ -17,7 +17,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block02<T> alloc<T>(N2 n, out Block02<T> dst)
+        public static ref Block02<T> init<T>(N2 n, out Block02<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block03<T> alloc<T>(N3 n, out Block03<T> dst)
+        public static ref Block03<T> init<T>(N3 n, out Block03<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block04<T> alloc<T>(N4 n, out Block04<T> dst)
+        public static ref Block04<T> init<T>(N4 n, out Block04<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block05<T> alloc<T>(N5 n, out Block05<T> dst)
+        public static ref Block05<T> init<T>(N5 n, out Block05<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -49,7 +49,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block06<T> alloc<T>(N6 n, out Block06<T> dst)
+        public static ref Block06<T> init<T>(N6 n, out Block06<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block07<T> alloc<T>(N7 n, out Block07<T> dst)
+        public static ref Block07<T> init<T>(N7 n, out Block07<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block08<T> alloc<T>(N8 n, out Block08<T> dst)
+        public static ref Block08<T> init<T>(N8 n, out Block08<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -73,7 +73,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block12<T> alloc<T>(N2 n, out Block12<T> dst)
+        public static ref Block12<T> init<T>(N2 n, out Block12<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref Block16<T> alloc<T>(N16 n, out Block16<T> dst)
+        public static ref Block16<T> init<T>(N16 n, out Block16<T> dst)
             where T : unmanaged
         {
             dst = default;
@@ -159,7 +159,6 @@ namespace Z0
             dst = first(recover<T,Block16<T>>(src));
             return ref dst;
         }
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly Block02<T> store<T>(in Block02<T> src, Span<T> dst)
@@ -319,6 +318,5 @@ namespace Z0
 
             Block08<T> Cell1;
         }
-
     }
 }

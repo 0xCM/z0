@@ -13,6 +13,10 @@ namespace Z0
     [ApiHost(ApiNames.ConstBytes256, true)]
     public readonly struct ConstBytes256
     {
+        [MethodImpl(Inline), Op]
+        public static ConstBytesReader reader()
+            => new ConstBytesReader(new ConstBytes256());
+
         public static ConstBytes256 Storage => default;
 
         public const byte SegCount = 7;

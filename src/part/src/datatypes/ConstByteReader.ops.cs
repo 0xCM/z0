@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct StorageReader
+    partial struct ConstBytesReader
     {
         [MethodImpl(Inline), Op]
         public static MemorySegment[] refs(ConstBytes256 src)

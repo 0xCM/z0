@@ -18,21 +18,6 @@ namespace Z0
     [ApiHost]
     public readonly struct StringRef : ITextual
     {
-        [MethodImpl(Inline), Op]
-        public static ref CharBlock16 copy(ReadOnlySpan<char> src, ref CharBlock16 dst)
-        {
-            var vSrc = cpu.vload(w128, first(recover<char,byte>(src)));
-            cpu.vstore(vSrc, ref u8(dst));
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref CharBlock32 copy(ReadOnlySpan<char> src, ref CharBlock32 dst)
-        {
-            var vSrc = cpu.vload(w256, u8(dst));
-            cpu.vstore(vSrc, ref u8(dst));
-            return ref dst;
-        }
 
         readonly Vector128<ulong> Data;
 
@@ -325,7 +310,7 @@ namespace Z0
             => src.Text;
 
         [MethodImpl(Inline)]
-        public static implicit operator StringRef(string src)
-            => z.@ref(src);
+        public static unsafe implicit operator StringRef(string src)
+            => new StringRef((ulong)memory.pchar(src), (uint)src.Length);
    }
 }

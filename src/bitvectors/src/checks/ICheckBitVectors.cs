@@ -8,7 +8,7 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using Claims = BitVectorClaims;
+    using Claims = BvClaims;
 
     public interface ICheckBitVectors : ICheckPrimal, ICheckInvariant
     {

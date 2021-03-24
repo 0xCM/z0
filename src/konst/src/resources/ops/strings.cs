@@ -13,7 +13,7 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static StringRes[] strings(Type src)
+        public static Index<StringRes> strings(Type src)
         {
             var values = span(ClrLiterals.values<string>(src));
             var count = values.Length;
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [Op, Closures(Closure)]
-        public static StringRes<T>[] strings<T>(Type src)
+        public static Index<StringRes<T>> strings<T>(Type src)
             where T : unmanaged
         {
             var values = span(ClrLiterals.values<string>(src));

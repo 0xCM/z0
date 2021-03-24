@@ -156,7 +156,7 @@ namespace Z0
 
         void ListTextResources()
         {
-            var rows = Resources.rows(Resources.strings(typeof(EnvVarNames))).View;
+            var rows = Resources.strings(typeof(EnvVarNames)).View;
             var count = rows.Length;
             for(var i=0; i<count; i++)
             {
@@ -168,7 +168,7 @@ namespace Z0
 
         public void Run233()
         {
-            var src = @readonly(Resources.strings<uint>(typeof(EnvVarNames)));
+            var src = Resources.strings<uint>(typeof(EnvVarNames)).View;
             for(var i=0; i<src.Length; i++)
                 Wf.Status(skip(src,i).Format());
         }

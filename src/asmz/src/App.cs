@@ -657,9 +657,8 @@ namespace Z0.Asm
         void ShowLetters()
         {
             using var flow = Wf.Running();
-            var data = Resources.strings(typeof(AsciLetterLoText));
-            var resources = @readonly(data);
-            var rows = Resources.rows(data).View;
+            var resources = Resources.strings(typeof(AsciLetterLoText));
+            var rows = Resources.rows(resources).View;
             var count = resources.Length;
             for(var i=0; i<count; i++)
             {

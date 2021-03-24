@@ -18,7 +18,7 @@ namespace Z0
             var m1 =   0b00000011_00000011_00000011_00000011u;
             var d1e =  0b00000010_00000010_00000010_00000010u;
             var d1a = BitMasks.scatter(src1, m1);
-            Claim.eq(d1e,d1a);
+            PrimalClaims.eq(d1e,d1a);
         }
 
         public void sb_scatter_8()
@@ -139,16 +139,16 @@ namespace Z0
         /// Generic scalar bit scatter check
         /// </summary>
         /// <typeparam name="T">The scalar type</typeparam>
-        protected void sb_scatter_check<T>(T t = default)
+        void sb_scatter_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i<RepCount; i++)
             {
                 var src = Random.Next<T>();
                 var mask = Random.Next<T>();
-                var s1 = scatter(src,mask);
-                var s2 = gbits.scatter(src,mask);
-                Claim.eq(s1,s2);
+                var a = scatter(src, mask);
+                var b = gbits.scatter(src,mask);
+                NumericClaims.eq(a,b);
             }
         }
     }

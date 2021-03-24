@@ -15,7 +15,8 @@ namespace Z0
     {
         public K Id {get;}
 
-        public VarContextKind VarContext => VarContextKind.Workflow;
+        public VarContextKind VarContext
+            => VarContextKind.Workflow;
 
         Cell128 _Value;
 
@@ -81,5 +82,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdVar<K>(Paired<K,Cell128> src)
             => new CmdVar<K>(src.Left, src.Right);
+
+
+        /// <summary>
+        /// Creates a reference to a string
+        /// </summary>
+        /// <param name="src">The source string</param>
+        [MethodImpl(Inline), Op]
+        static unsafe StringRef @ref(string src)
+            => new StringRef((ulong)memory.pchar(src), (uint)src.Length);
+
     }
 }
