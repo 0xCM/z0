@@ -18,7 +18,7 @@ namespace Z0.Asm
             => Content;
     }
 
-    public interface IAsmOpContent<W,T> : IAsmOpContent<T>, ISized<W>
+    public interface IAsmOpContent<W,T> : IAsmOpContent<T>
         where T : struct
         where W : unmanaged
     {

@@ -22,5 +22,8 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => (DataWidth)(Content.Count * 8);
         }
+
+        BitWidth ISized.Width
+            => Width;
     }
 }

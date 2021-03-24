@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -13,15 +11,21 @@ namespace Z0
     {
         BitWidth Width {get;}
 
-        ByteSize Size => Width.Bytes;
+        ByteSize Size
+            => Width.Bytes;
     }
 
+    [Free]
     public interface ISized<T> : ISized
         where T : unmanaged
     {
-        new T Width {get;}
+        new T Width
+            => memory.@as<T>(memory.size<T>());
 
         BitWidth ISized.Width
+            => memory.size<T>();
+
+        ByteSize ISized.Size
             => memory.size<T>();
     }
 }
