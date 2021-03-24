@@ -69,7 +69,7 @@ namespace Z0
             => Raise(processed(Host, data, Ct));
 
         public void Processed<T>(ApiHostUri uri, T data)
-            => Raise(processed(Host, Seq.delimit(uri,data), Ct));
+            => Raise(processed(Host, Seq.delimit(Chars.Pipe, 0, uri, data), Ct));
 
         public void Creating<T>(T data)
             => Raise(creating(Host, data, Ct));

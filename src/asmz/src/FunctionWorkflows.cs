@@ -19,8 +19,8 @@ namespace Z0
             var fx = new FunctionWorkflows(wf);
             var f = fx.RunF();
             var g = fx.RunG();
-            wf.Status(f.Delimit());
-            wf.Status(g.Delimit());
+            wf.Status(f.Delimit().Format());
+            wf.Status(g.Delimit().Format());
             f.SequenceEqual(g);
         }
 

@@ -16,27 +16,6 @@ namespace Z0
     {
         Env Env {get;}
 
-        FS.FolderPath DbRoot()
-            => Env.Db.Value;
-
-        FS.FolderPath PackageRoot()
-            => Env.Packages.Value;
-
-        FS.FolderPath DevRoot()
-            => Env.DevRoot.Value;
-
-        FS.FolderPath ArchiveRoot()
-            => Env.Archives.Value;
-
-        FS.FolderPath TmpRoot()
-            => Env.Tmp.Value + FS.folder(tmp);
-
-        FS.FolderPath ControlRoot()
-            => Env.Control.Value;
-
-        FS.FolderPath RuntimeRoot()
-            => Env.ZBin.Value;
-
         FS.FolderPath SettingsRoot()
             => DbRoot() + FS.folder(settings);
 
@@ -128,11 +107,14 @@ namespace Z0
         FS.FilePath ProcDumpPath(Name process)
             => ProcDumpRoot() + FS.file(process.Format(), X.Dmp);
 
-        FS.FolderPath DataSources()
+        FS.FolderPath DataSourceRoot()
             => DbRoot() + FS.folder("sources");
 
-        FS.FolderPath DataSource(string id)
-            => DataSources() + FS.folder(id);
+        FS.FilePath DataSource(FS.FileName file)
+            => DataSourceRoot() + file;
+
+        FS.FolderPath DataSourceDir(string id)
+            => DataSourceRoot() + FS.folder(id);
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();

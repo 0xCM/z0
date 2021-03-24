@@ -31,7 +31,7 @@ namespace Z0
         }
 
         WfExecToken Ran<C,T>(WfExecFlow<string> flow, C @case, T data)
-            => Wf.Ran(flow, Seq.delimit(@case, data));
+            => Wf.Ran(flow, Seq.delimit(Chars.Colon, 0, @case, data));
 
         [Op]
         public void Run()

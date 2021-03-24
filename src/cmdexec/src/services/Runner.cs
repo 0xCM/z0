@@ -183,7 +183,7 @@ namespace Z0
         {
             var hosts = DiscoverWfHosts(Wf.ApiParts.Components).OrderBy(x => x.Assembly.FullName);
             var wf = Wf;
-            root.iter(hosts, h => wf.Status(Seq.delimit(h.Assembly.GetSimpleName(),h.Name)));
+            root.iter(hosts, h => wf.Status(Seq.delimit(Chars.Pipe, 32, h.Assembly.GetSimpleName(),h.Name)));
         }
 
         public void Run()
@@ -195,7 +195,7 @@ namespace Z0
                 Wf.Warn("No catalogs");
 
             foreach(var c in catalogs.View)
-                Wf.Row(Seq.delimit(c.PartId, c.ApiHosts.Count));
+                Wf.Row(Seq.delimit(Chars.Pipe, 0, c.PartId, c.ApiHosts.Count));
         }
     }
 }

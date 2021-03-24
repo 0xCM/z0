@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
+    using System.IO;
 
     using static Part;
 
-    partial class XCollective
+    partial class XText
     {
-        public static DelimitedIndex<T> Delimit<T>(this ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
-            => Seq.delimit(src, delimiter);
-
-        public static DelimitedIndex<T> Delimit<T>(this Span<T> src, char delimiter = FieldDelimiter)
-            => Seq.delimit(src, delimiter);
+        [MethodImpl(Inline), Op]
+        public static TextLine ReadTextLine(this StreamReader src, uint number)
+            => new TextLine(number, src.ReadLine());
     }
 }

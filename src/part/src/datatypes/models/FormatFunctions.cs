@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     /// <summary>
     /// Defines common format function delegates
     /// </summary>
     public readonly struct FormatFunctions
     {
-        public delegate string FormatIndex<T>(T[] src, char delimiter);
+        public delegate string FormatCells<T>(ReadOnlySpan<T> src, char delimiter, int pad);
 
         /// <summary>
         /// Characterizes a content render function

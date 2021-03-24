@@ -35,5 +35,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ScriptVar(EnvDirVar src)
             => new EnvDirVar(src.Symbol, src.Value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FS.FolderPath(EnvDirVar src)
+            => src.Value;
+
     }
 }

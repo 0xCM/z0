@@ -14,34 +14,20 @@ namespace Z0
 
     partial class text
     {
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static string delimit<T>(T[] src, char delimiter)
             => Format.delimit(src, delimiter);
 
-        [MethodImpl(Inline)]
+        [Op, Closures(Closure)]
         public static string delimit<T>(IEnumerable<T> src, char delimiter)
             => Format.delimit(src, delimiter);
 
-        [MethodImpl(Inline)]
-        public static string nest(params object[] src)
-            => Format.nest(src);
+        [Op, Closures(Closure)]
+        public static string delimit<T>(ReadOnlySpan<T> src, char delimiter, int pad)
+            => Format.delimit(src, delimiter, pad);
 
-        [Op]
-        public static string delimit(ReadOnlySpan<string> src, char delimiter)
-        {
-            var dst = text.buffer();
-            var last = src.Length - 1;
-            var count = src.Length;
-            var sep = string.Format(" {0} ", delimiter);
-            for(var i=0; i<count; i++)
-            {
-                if(i != 0)
-                    dst.Append(sep);
-
-                dst.Append(skip(src,i));
-            }
-
-            return dst.Emit();
-        }
+        [Op, Closures(Closure)]
+        public static string delimit<T>(IEnumerable<T> src, char delimiter, int pad)
+            => Format.delimit(src.ToSpan().ReadOnly(), delimiter, pad);
     }
 }

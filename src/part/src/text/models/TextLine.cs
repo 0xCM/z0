@@ -78,6 +78,9 @@ namespace Z0
             ? spec.SplitClean ? Content.SplitClean(spec.Delimiter) : Content.Split(spec.Delimiter)
             : sys.empty<string>();
 
+        public string[] Split(char delimiter, bool clean = true)
+            => clean ? Content.SplitClean(delimiter) : Content.Split(delimiter);
+
         public string Format()
             => $"{LineNumber.ToString().PadLeft(8, '0')}:{Content}";
 

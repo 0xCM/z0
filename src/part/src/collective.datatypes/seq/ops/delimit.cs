@@ -15,28 +15,28 @@ namespace Z0
     partial struct Seq
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<object> delimit(params object[] src)
-            => new DelimitedIndex<object>(src, FieldDelimiter);
+        public static DelimitedSpan<T> delimit<T>(char delimiter, int pad, Span<T> src)
+            => new DelimitedSpan<T>(src, delimiter, pad);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(params T[] src)
+        public static DelimitedSpan<T> delimit<T>(char delimiter, int pad, ReadOnlySpan<T> src)
+            => new DelimitedSpan<T>(src, delimiter, pad);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedIndex<T> delimit<T>(char delimiter, int pad, IEnumerable<T> src)
+            => new DelimitedIndex<T>(src.Array(), delimiter, pad);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedIndex<T> delimit<T>(char delimiter, int pad, T[] src)
             where T : unmanaged
-                => new DelimitedIndex<T>(src, text.delimit, FieldDelimiter);
+                => new DelimitedIndex<T>(src, text.delimit, delimiter, pad);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(char delimiter, params T[] src)
-            => new DelimitedIndex<T>(src, text.delimit, delimiter);
-
-        [MethodImpl(Inline)]
-        public static DelimitedIndex<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedIndex<T>(src.ToArray(), delimiter);
+        public static DelimitedIndex<object> delimit(char delimiter, int pad, params object[] src)
+            => new DelimitedIndex<object>(src, delimiter, pad);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(Span<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedIndex<T>(array(src), delimiter);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static DelimitedIndex<T> delimit<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
-            => new DelimitedIndex<T>(src.ToArray(), delimiter);
+        public static DelimitedIndex<string> delimit(char delimiter, int pad, params string[] src)
+            => new DelimitedIndex<string>(src, delimiter, pad);
     }
 }

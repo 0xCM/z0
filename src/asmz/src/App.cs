@@ -876,7 +876,24 @@ namespace Z0.Asm
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
             //Wf.AsmFormPipe().EmitFormHashes();
-            ShowThumprintCatalog();
+            //ShowThumprintCatalog();
+
+            var pipe = XedInstructionPipe.create(Wf);
+            var records = pipe.LoadSourceRecords().View;
+            var count = records.Length;
+            if(count !=0 )
+            {
+
+                using var log = ShowLog("xed-instructions", FS.Extensions.Csv);
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var record = ref skip(records,i);
+                    var id = record.Form;
+                    var components = id.Split(Chars.Underscore).Delimit(Chars.Pipe, 32);
+                    log.Show(record.Form);
+                }
+            }
+
 
             //Sigs.ShowSymbols();
             //PipeImageData();

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Seq;
 
     public readonly struct ClrFieldValues<T> : IIndex<ClrFieldValue<T>>, ITextual
     {
@@ -30,6 +29,12 @@ namespace Z0
             get => Data.Storage;
         }
 
+        public ReadOnlySpan<ClrFieldValue<T>> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
         public ref ClrFieldValue<T> First
         {
             [MethodImpl(Inline)]
@@ -43,7 +48,7 @@ namespace Z0
         }
 
         public string Format()
-            => delimit(this).Format();
+            => Seq.delimit(Chars.Pipe, 0, View).Format();
 
         [MethodImpl(Inline)]
         public static implicit operator ClrFieldValues<T>(ClrFieldValue<T>[] src)

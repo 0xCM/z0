@@ -12,34 +12,39 @@ namespace Z0
 
     public readonly struct DelimitedIndex<T> : IIndex<T>, ITextual
     {
-        public readonly Index<T> Data;
+        public Index<T> Data {get;}
 
-        public readonly char Delimiter;
+        public char Delimiter {get;}
 
-        readonly FormatIndex<T> Render;
+        public int CellPad {get;}
+
+        readonly FormatCells<T> Render;
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(Index<T> src, char delimiter =  FieldDelimiter)
+        public DelimitedIndex(Index<T> src, char delimiter = FieldDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;
             Render = text.delimit;
+            CellPad = pad;
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, char delimiter =  FieldDelimiter)
+        public DelimitedIndex(T[] src, char delimiter =  FieldDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;
             Render = text.delimit;
+            CellPad = pad;
         }
 
         [MethodImpl(Inline)]
-        public DelimitedIndex(T[] src, FormatIndex<T> fx, char delimiter = FieldDelimiter)
+        public DelimitedIndex(T[] src, FormatCells<T> fx, char delimiter = FieldDelimiter, int pad = 0)
         {
             Data = src;
             Delimiter = delimiter;
             Render = fx;
+            CellPad = pad;
         }
 
         public T[] Storage
@@ -50,7 +55,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render(Data, Delimiter);
+            => Render(Data, Delimiter, CellPad);
 
         public override string ToString()
             => Format();

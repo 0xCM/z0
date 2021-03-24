@@ -34,6 +34,23 @@ namespace Z0
                 return dst.ToString();
             }
 
+            public static string delimit<T>(ReadOnlySpan<T> src, char delimiter, int pad)
+            {
+                var dst = text.buffer();
+                var count = src.Length;
+                var slot = RP.pad(pad);
+                for(var i=0; i<count; i++)
+                {
+                    dst.AppendFormat(slot, skip(src,i));
+                    if(i != 0)
+                    {
+                        dst.Append(delimiter);
+                        dst.Append(Chars.Space);
+                    }
+                }
+                return dst.Emit();
+            }
+
             /// <summary>
             /// Formats a sequence of formattable things as delimited list
             /// </summary>

@@ -17,6 +17,31 @@ namespace Z0.Asm
         public static AsmServices create(IWfShell wf, IAsmContext asm)
             => new AsmServices(wf, asm);
 
+        public static void MatchAddresses(IWfShell wf, ApiMemberExtract[] extracted, AsmRoutine[] decoded)
+        {
+            try
+            {
+                var flow = wf.Running(Seq.delimit(Chars.Pipe, 16,  extracted.Length, decoded.Length));
+                var a = extracted.Select(x => x.Address).ToHashSet();
+                if(a.Count != extracted.Length)
+                    wf.Error($"count(Extracted) = {extracted.Length} != {a.Count} = count(set(Extracted))");
+
+                var b = decoded.Select(f => f.BaseAddress).ToHashSet();
+                if(b.Count != decoded.Length)
+                    wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(set(Decoded))");
+
+                b.IntersectWith(a);
+                if(b.Count != decoded.Length)
+                    wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
+
+                wf.Ran(flow);
+            }
+            catch(Exception e)
+            {
+                wf.Error(e);
+            }
+        }
+
         [Op]
         public static IAsmContext context(IWfShell wf)
             => new AsmContext(Apps.context(wf), wf);

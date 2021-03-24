@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Seq.delimit(Chars.Space, Data).Format();
+            => Seq.delimit(Chars.Space, 0, Data).Format();
 
         public override string ToString()
             => Format();

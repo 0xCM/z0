@@ -20,14 +20,11 @@ namespace Z0
 
         readonly MsilPipe IlPipe;
 
-        readonly AsmAddressMatcher AddressMatcher;
-
         public ApiCaptureEmitter(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;
             IlPipe = Wf.IlPipe();
-            AddressMatcher = wf.AddressMatcher();
         }
 
         public AsmMemberRoutines Emit(ApiHostUri host, Index<ApiMemberExtract> src)
@@ -97,7 +94,7 @@ namespace Z0
             var emitter = Wf.AsmHostEmitter(Asm);
             emitter.Emit(host, src, out var decoded);
             if(decoded.Count != 0)
-                AddressMatcher.Match(extracts, decoded.AsmRoutines);
+                AsmServices.MatchAddresses(Wf, extracts, decoded.AsmRoutines);
             return decoded;
        }
 

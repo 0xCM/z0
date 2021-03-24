@@ -13,7 +13,7 @@ namespace Z0
         public void Run(MachineOptions options)
         {
             using var flow = Wf.Running();
-            Wf.Status(Seq.delimit(Wf.Api.PartIdentities));
+            Wf.Status(Seq.delimit(Chars.Comma, 0, Wf.Api.PartIdentities));
             try
             {
                 var api = Wf.ApiServices();

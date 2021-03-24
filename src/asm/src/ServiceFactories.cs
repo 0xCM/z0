@@ -89,9 +89,6 @@ namespace Z0
         public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, decoder);
 
-        public static AsmAddressMatcher AddressMatcher(this IWfShell wf)
-            => AsmAddressMatcher.create(wf);
-
         public static AsmApiStatementPipe ApiStatementPipe(this IWfShell wf)
             => Asm.AsmApiStatementPipe.create(wf);
     }
