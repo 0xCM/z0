@@ -27,7 +27,7 @@ namespace Z0.Asm
             var count = src.Count;
             var view = src.View;
             var flow = Wf.EmittingTable<AsmRow>(dst);
-            var header = Table.header53<AsmRowField>();
+            var header = Datasets.header53<AsmRowField>();
             using var writer = dst.Writer();
             writer.WriteLine(header);
             var buffer = text.buffer();

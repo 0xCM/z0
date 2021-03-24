@@ -9,19 +9,10 @@ namespace Z0
 
     using static Part;
 
-    public enum BenchmarkField : uint
-    {
-        OpId = 0 | (50 << WidthOffset),
-
-        OpCount = 1 | (12 << WidthOffset),
-
-        Timing = 2 | (12 << WidthOffset),
-    }
-
     /// <summary>
     /// Defines a benchmark measure for an operator
     /// </summary>
-    public readonly struct BenchmarkRecord : ITabular<BenchmarkField, BenchmarkRecord>, IComparable<BenchmarkRecord>, IComparable
+    public readonly struct BenchmarkRecord : IRecord<BenchmarkRecord>, IComparable<BenchmarkRecord>, IComparable
     {
         /// <summary>
         /// The name of the measured operation
@@ -59,9 +50,9 @@ namespace Z0
         [MethodImpl(Inline)]
         BenchmarkRecord(OpIdentity id, long opcount, Duration elapsed)
         {
-            this.OpId = id;
-            this.OpCount = opcount;
-            this.Timing = elapsed;
+            OpId = id;
+            OpCount = opcount;
+            Timing = elapsed;
         }
 
         [MethodImpl(Inline)]
@@ -78,18 +69,6 @@ namespace Z0
 
         public string Format(int? labelPad = null)
             => $"{OpId}".PadRight(labelPad ?? OpNamePad) + $" | Ops = {OpCount} " + $"| Time = {Timing}";
-
-        public string DelimitedText(char delimiter)
-            => text.concat(
-                $"{OpId.Format().PadRight(OpNamePad)}{delimiter}{Chars.Space}",
-                 OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
-                $"{Timing.Ms}");
-
-        public static string[] GetHeaders()
-            => new string[]{nameof(OpId).PadRight(OpNamePad),
-                Chars.Space + nameof(OpCount).PadRight(OpCountPad),
-                Chars.Space + nameof(Timing),
-                };
 
         public override string ToString()
             => Format();

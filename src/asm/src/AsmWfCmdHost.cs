@@ -106,20 +106,18 @@ namespace Z0.Asm
             var data = dataset().Entries;
             var count = data.Count;
             var view = data.View;
-            var formatter = formatter<AsmOpCodeField>();
+            var formatter = Tables.formatter<AsmOpCodeRowLegacy>();
             var rowbuffer = alloc<AsmOpCodeRowLegacy>(count);
             var rows = span(rowbuffer);
             var path = Db.IndexTable<AsmOpCodeRowLegacy>();
             using var dst = path.Writer();
-            formatter.EmitHeader(false);
-            dst.WriteLine(formatter.Render());
+            dst.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(view,i);
                 seek(rows,i) = record;
 
-                format(record, formatter);
-                dst.WriteLine(formatter.Render());
+                dst.WriteLine(formatter.Format(record));
             }
         }
     }

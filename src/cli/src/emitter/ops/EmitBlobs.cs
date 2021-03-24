@@ -34,7 +34,7 @@ namespace Z0
             using var reader = PeTableReader.open(src);
             var rows = reader.Blobs();
             var count = (uint)rows.Length;
-            var formatter = Records.formatter<BlobRow>(16);
+            var formatter = Tables.formatter<BlobRow>(16);
 
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());

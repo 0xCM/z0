@@ -50,19 +50,10 @@ namespace Z0
                 return;
 
             using var writer = dst.Writer();
-            writer.WriteLine(Table.header53<F>(delimiter));
-            var formatter = Table.formatter<F>(delimiter);
+            writer.WriteLine(Datasets.header53<F>(delimiter));
+            var formatter = Datasets.formatter<F>(delimiter);
             root.iter(records, r => writer.WriteLine(r.Format()));
         }
 
-        FS.FilePath Write(BenchmarkRecord[] src, FS.FilePath path)
-        {
-            using var writer = path.Writer();
-            writer.WriteLine(string.Join(Chars.Pipe, BenchmarkRecord.GetHeaders()));
-            foreach(var r in src)
-                writer.WriteLine(r.DelimitedText(Chars.Pipe));
-
-            return path;
-        }
     }
 }

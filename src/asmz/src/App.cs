@@ -374,9 +374,9 @@ namespace Z0.Asm
             }
             else
             {
-                Records.parse(skip(parts,0), out dst.BaseAddress);
-                Records.parse(skip(parts,1), out dst.Uri);
-                Records.parse(skip(parts,2), out dst.CilCode);
+                Tables.parse(skip(parts,0), out dst.BaseAddress);
+                Tables.parse(skip(parts,1), out dst.Uri);
+                Tables.parse(skip(parts,2), out dst.CilCode);
                 return true;
             }
         }
@@ -488,7 +488,7 @@ namespace Z0.Asm
             var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
             var dst = Db.IndexTable<AsmStatementCase>();
             var flow = Wf.EmittingTable<AsmStatementCase>(dst);
-            var count = Records.emit(collected, dst, 42);
+            var count = Tables.emit(collected, dst, 42);
             Wf.EmittedTable(flow,count);
 
             var id = Db.TableId<AsmStatementCase>();

@@ -72,7 +72,7 @@ namespace Z0
             var src = Wf.Db().DumpFilePath("capture");
             if(src.Exists)
             {
-                var formatter = Records.formatter<Minidump.FileHeader>();
+                var formatter = Tables.formatter<Minidump.FileHeader>();
                 using var md = Minidump.open(Wf, src);
                 var header = formatter.Format(md.Header, RecordFormatKind.KeyValuePairs);
                 Wf.Row(header);

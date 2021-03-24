@@ -103,7 +103,7 @@ namespace Z0
         {
             var records = Xed.sort(src).Map(p => Xed.row(p));
             var target = Wf.Db().Table<XedSummaryRow>("xed", FS.Extensions.Csv);
-            Records.emit(records,  target);
+            Tables.emit(records,  target);
             return records;
         }
 

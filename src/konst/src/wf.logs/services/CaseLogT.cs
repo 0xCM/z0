@@ -27,7 +27,7 @@ namespace Z0
             Target = dst;
             Locker = new object();
             Status = dst.Stream();
-            FS.write(Table.header53<F>(), Status);
+            FS.write(Datasets.header53<F>(), Status);
             Counter = 0;
         }
 

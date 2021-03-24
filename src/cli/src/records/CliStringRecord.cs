@@ -34,20 +34,5 @@ namespace Z0
 
             Value,
         }
-
-        public enum RenderWidths : ushort
-        {
-            Sequence = 12,
-
-            Source = 12,
-
-            HeapSize = 12,
-
-            Length = 12,
-
-            Offset = 12,
-
-            Value = 12,
-        }
     }
 }

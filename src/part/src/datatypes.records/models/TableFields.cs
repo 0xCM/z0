@@ -6,11 +6,78 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
+    using static memory;
 
     public readonly struct TableFields
     {
+        [Op]
+        public static TableFields discover(Type type)
+        {
+            if(!type.IsStruct() || type.IsPrimitive)
+                return TableFields.Empty;
+
+            var declared = type.Fields();
+            var count = declared.Length;
+            var buffer = alloc<TableField>(count);
+
+            map(declared, buffer);
+
+            return new TableFields(buffer);
+        }
+
+        [Op]
+        public static TableFields discover(Type src, bool recurse)
+        {
+            var collected = root.list<TableField>();
+            ushort j = 0;
+            if(src.IsStruct() && !src.IsPrimitive)
+            {
+                var defs = @readonly(src.DeclaredInstanceFields());
+                var count = defs.Length;
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var def = ref skip(defs,i);
+                    var dst = new TableField();
+                    map(def, j++, ref dst);
+                    var ft = def.FieldType;
+                    if(ft.IsStruct() && !ft.IsPrimitive && recurse)
+                    {
+                        var subfields = discover(ft, recurse);
+                        collected.AddRange(subfields.Storage);
+                    }
+                }
+            }
+
+            var final = collected.ToArray();
+            var fCount = final.Length;
+            ref var f = ref first(span(final));
+            for(ushort index = 0; index<fCount; index++)
+                seek(f,index).Index = index;
+
+            return final;
+        }
+
+        static void map(ReadOnlySpan<FieldInfo> src, Span<TableField> dst)
+        {
+            var count = (ushort)src.Length;
+            for(var i=z16; i<count; i++)
+                map(skip(src, i), i, ref seek(dst, i));
+        }
+
+        [MethodImpl(Inline), Op]
+        static ref TableField map(FieldInfo src, ushort index, ref TableField dst)
+        {
+            dst.Index = index;
+            dst.RecordType = src.DeclaringType;
+            dst.DataType = src.FieldType;
+            dst.RenderWidth = 16;
+            dst.Definition = src;
+            return ref dst;
+        }
+
         readonly Index<TableField> Data;
 
         [MethodImpl(Inline)]

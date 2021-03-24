@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XMem
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T Reduce<T>(this ReadOnlySpan<T> src, Func<T,T,T> f)

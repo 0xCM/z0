@@ -37,7 +37,7 @@ namespace Z0
             _Data = src.Bytes(SourceCount).Array();
 
             var outcome = Check(w3);
-            var formatter = Records.formatter<FormatCheck<W3,uint3>>();
+            var formatter = Tables.formatter<FormatCheck<W3,uint3>>();
             var target = Db.AppTablePath<FormatCheck<W3,uint3>>("checks");
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());

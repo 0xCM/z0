@@ -20,7 +20,7 @@ namespace Z0
             TableId = RecUtil.tableid<T>();
             Fields = RecUtil.fields<T>();
             FieldCount = Fields.Count;
-            Formatter = Records.formatter<T>(fieldwidth);
+            Formatter = Tables.formatter<T>(fieldwidth);
         }
 
         protected char FieldDelimiter {get;}

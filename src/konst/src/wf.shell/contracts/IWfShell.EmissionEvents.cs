@@ -10,7 +10,7 @@ namespace Z0
 
     partial interface IWfShell
     {
-        IWfEmissionLog Emissions
+        IEmissionLogger Emissions
             => Services.EmissionLog;
 
         WfTableFlow<T> EmittingTable<T>(FS.FilePath dst)

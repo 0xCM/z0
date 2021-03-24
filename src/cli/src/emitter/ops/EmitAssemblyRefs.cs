@@ -17,7 +17,7 @@ namespace Z0
             var sources = input.View;
             var srcCount = sources.Length;
             using var writer = dst.Writer();
-            var formatter = Records.formatter<AssemblyRefInfo>(48);
+            var formatter = Tables.formatter<AssemblyRefInfo>(48);
             writer.WriteLine(formatter.FormatHeader());
             for(var k=0u; k<srcCount; k++)
             {

@@ -18,7 +18,7 @@ namespace Z0
             => ApiHexReader.create(wf);
 
         public static Count emit(ReadOnlySpan<ApiHexRow> src, FS.FilePath dst)
-            => src.Length != 0 ? Records.emit(src,dst) : 0;
+            => src.Length != 0 ? Tables.emit(src,dst) : 0;
 
         [Op]
         public static Index<ApiHexRow> emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<ApiMemberCode> src)
@@ -85,13 +85,13 @@ namespace Z0
                 }
 
                 var index = 0;
-                Records.parse(fields[index++], out dst.Seq);
-                Records.parse(fields[index++], out dst.SourceSeq);
-                Records.parse(fields[index++], out dst.Address);
-                Records.parse(fields[index++], out dst.Length);
-                Records.eparse(fields[index++], out dst.TermCode);
-                Records.parse(fields[index++], out dst.Uri);
-                Records.parse(fields[index++], out dst.Data);
+                Tables.parse(fields[index++], out dst.Seq);
+                Tables.parse(fields[index++], out dst.SourceSeq);
+                Tables.parse(fields[index++], out dst.Address);
+                Tables.parse(fields[index++], out dst.Length);
+                Tables.eparse(fields[index++], out dst.TermCode);
+                Tables.parse(fields[index++], out dst.Uri);
+                Tables.parse(fields[index++], out dst.Data);
                 return true;
             }
             catch(Exception e)
@@ -129,7 +129,7 @@ namespace Z0
             var count = blocks.Length;
             var buffer = sys.alloc<ApiHexIndexRow>(count);
             var target = span(buffer);
-            using var emitter = Records.emitter<ApiHexIndexRow>(sys.array<byte>(10, 16, 20, 20, 20, 120), dst);
+            using var emitter = Tables.emitter<ApiHexIndexRow>(sys.array<byte>(10, 16, 20, 20, 20, 120), dst);
             emitter.EmitHeader();
             for(var i=0u; i<count; i++)
             {

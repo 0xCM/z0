@@ -15,7 +15,7 @@ namespace Z0
         readonly ITextBuffer Buffer;
 
         public static BitMaskFormatter create()
-            => new BitMaskFormatter(Records.formatter<R>());
+            => new BitMaskFormatter(Tables.formatter<R>());
 
         BitMaskFormatter(IRecordFormatter<R> formatter)
         {

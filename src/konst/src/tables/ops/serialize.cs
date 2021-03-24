@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Defines the fields in a <see  cref='ListedFile'/> table
-    /// </summary>
-    public enum ListedFileField : ushort
-    {
-        Index = 10,
+    using System;
 
-        Path = 120
+    partial struct Tables
+    {
+        [Op, Closures(Closure)]
+        public static Span<byte> serialize<T>(in T src)
+            where T : struct, IRecord<T>
+                => memory.bytes(src);
     }
 }

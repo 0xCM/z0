@@ -65,7 +65,7 @@ namespace Z0
             if(Records.Length != 0)
             {
                 var t = default(ClrEnumRecord);
-                var formatter = Z0.Records.formatter<ClrEnumRecord>(RenderWidths);
+                var formatter = Z0.Tables.formatter<ClrEnumRecord>(RenderWidths);
                 var flow = Wf.EmittingTable<ClrEnumRecord>(Target);
                 var counter = 0u;
                 Execute(ref counter, formatter);

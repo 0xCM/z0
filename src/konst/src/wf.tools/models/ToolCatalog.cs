@@ -28,7 +28,7 @@ namespace Z0
             var count = files.Count;
             var buffer = sys.alloc<ToolHelpEntry>(count);
             var entries = span(buffer);
-            var formatter = Records.formatter<ToolHelpEntry>(46);
+            var formatter = Tables.formatter<ToolHelpEntry>(46);
             using var index = path.Writer();
             index.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count;  i++)

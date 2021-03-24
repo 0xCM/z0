@@ -11,7 +11,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Records
+    partial struct Tables
     {
         public static ReadOnlySpan<FieldValue> values<T>(in T src)
             where T : struct

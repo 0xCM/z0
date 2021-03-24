@@ -15,11 +15,6 @@ namespace Z0.Asm
     [ApiHost]
     readonly struct AsmOpCodesLegacy
     {
-        [MethodImpl(Inline)]
-        public static DatasetFormatter<T> formatter<T>()
-            where T : unmanaged, Enum
-                => Table.dsformatter<T>();
-
         /// <summary>
         /// Defines, in a predictable and hopefully meaningful way, a programmatic identifier that designates an op code
         /// </summary>
@@ -99,21 +94,6 @@ namespace Z0.Asm
                 }
             }
 
-            return ref dst;
-        }
-
-        [Op]
-        public static ref readonly DatasetFormatter<F> format(in AsmOpCodeRowLegacy src, in DatasetFormatter<F> dst)
-        {
-            dst.Delimit(F.Sequence, src.Sequence);
-            dst.Delimit(F.Mnemonic, src.Mnemonic);
-            dst.Delimit(F.OpCode, src.OpCode);
-            dst.Delimit(F.Instruction, src.Instruction);
-            dst.Delimit(F.M16, src.M16);
-            dst.Delimit(F.M32, src.M32);
-            dst.Delimit(F.M64, src.M64);
-            dst.Delimit(F.CpuId, src.CpuId);
-            dst.Delimit(F.CodeId, src.CodeId);
             return ref dst;
         }
     }

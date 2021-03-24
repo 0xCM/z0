@@ -11,7 +11,7 @@ namespace Z0
 
     using F = EnumDatasetField;
 
-    partial struct Records
+    partial struct Tables
     {
         public static void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FS.FilePath dst)
             where E : unmanaged, Enum
@@ -52,7 +52,7 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var count = src.Length;
-            var formatter = Records.formatter<T>(spec);
+            var formatter = Tables.formatter<T>(spec);
             using var writer = dst.Writer();
             writer.WriteLine(RecUtil.FormatHeader(spec.Header));
             for(var i=0; i<count; i++)
@@ -69,7 +69,7 @@ namespace Z0
             where T : struct, IRecord<T>
         {
             var count = src.Length;
-            var formatter = Records.formatter<T>(fieldwidth ?? DefaultFieldWidth);
+            var formatter = Tables.formatter<T>(fieldwidth ?? DefaultFieldWidth);
             var header = (dst.Exists && append) ? false : true;
 
             using var writer = dst.Writer(append);

@@ -24,7 +24,7 @@ namespace Z0
             var images = index();
             var records = rows(images);
             var target = records.Edit;
-            var formatter = Records.formatter<LocatedImageRow>(16);
+            var formatter = Tables.formatter<LocatedImageRow>(16);
             var count = records.Length;
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());
@@ -40,8 +40,8 @@ namespace Z0
                 var flow = wf.EmittingFile(dst);
                 using var writer = dst.Writer();
 
-                var f1 = Records.formatter<ProcessState>(16);
-                var f2 = Records.formatter<LocatedImageRow>(16);
+                var f1 = Tables.formatter<ProcessState>(16);
+                var f2 = Tables.formatter<LocatedImageRow>(16);
 
                 writer.WriteLine(string.Format("# {0}", nameof(ProcessState)));
                 writer.WriteLine(f1.FormatHeader());

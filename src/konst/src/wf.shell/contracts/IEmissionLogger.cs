@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IWfEmissionLog : IDisposable
+    public interface IEmissionLogger : IDisposable
     {
         ref readonly WfTableFlow<T> LogEmission<T>(in WfTableFlow<T> flow)
             where T : struct, IRecord<T>;

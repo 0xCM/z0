@@ -19,7 +19,7 @@ namespace Z0
             if(records.Length != 0)
             {
                 var t = default(ClrEnumRecord);
-                var formatter = Records.formatter<ClrEnumRecord>(32);
+                var formatter = Tables.formatter<ClrEnumRecord>(32);
                 var flow = Wf.EmittingTable<ClrEnumRecord>(dst);
                 var counter = 0u;
                 Execute(records, ref counter, formatter, dst);

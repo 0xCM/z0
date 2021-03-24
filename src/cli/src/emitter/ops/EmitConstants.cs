@@ -16,7 +16,7 @@ namespace Z0
         {
             var target = Wf.Db().IndexTable<T>();
             var flow = Wf.EmittingTable<T>(target);
-            var formatter = Records.formatter<T>();
+            var formatter = Tables.formatter<T>();
             var counter = 0u;
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());

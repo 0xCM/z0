@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial struct Records
+    partial struct Tables
     {
         /// <summary>
         /// Formats a <see cref='DynamicRow{T}'/> according to supplied specifiecation

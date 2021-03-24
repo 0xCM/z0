@@ -42,7 +42,7 @@ namespace Z0
         public Index<DocLibEntry> EmitAssetIndex()
         {
             var flow = Wf.Running();
-            var formatter = Records.formatter<DocLibEntry>(82);
+            var formatter = Tables.formatter<DocLibEntry>(82);
             var target = Db.RefDataRoot() + FS.file("index", FS.Extensions.Csv);
             using var dst = target.Writer();
             dst.WriteLine(formatter.FormatHeader());
@@ -73,7 +73,7 @@ namespace Z0
         uint Emit(ReadOnlySpan<DocLibEntry> entries, StreamWriter dst)
         {
             var count = (uint)entries.Length;
-            var formatter = Records.formatter<DocLibEntry>(82);
+            var formatter = Tables.formatter<DocLibEntry>(82);
             for(var i=0u; i<count; i++)
                 dst.WriteLine(formatter.Format(skip(entries, i)));
             return count;

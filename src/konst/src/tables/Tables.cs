@@ -8,7 +8,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly partial struct Records
+    public readonly partial struct Tables
     {
         const NumericKind Closure = UnsignedInts;
 

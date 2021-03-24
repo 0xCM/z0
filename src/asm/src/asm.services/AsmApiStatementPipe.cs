@@ -117,14 +117,14 @@ namespace Z0.Asm
             var cells = src.Cells.View;
             if(count == FieldCount)
             {
-                Records.parse(skip(cells, i++), out dst.BlockOffset);
+                Tables.parse(skip(cells, i++), out dst.BlockOffset);
                 dst.Expression = asm.statement(skip(cells,i++));
                 Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
                 dst.OpCode = asm.opcode(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
-                Records.parse(skip(cells, i), out dst.BaseAddress);
-                Records.parse(skip(cells, i), out dst.IP);
-                Records.parse(skip(cells, i), out dst.OpUri);
+                Tables.parse(skip(cells, i), out dst.BaseAddress);
+                Tables.parse(skip(cells, i), out dst.IP);
+                Tables.parse(skip(cells, i), out dst.OpUri);
                 return true;
             }
             else
@@ -174,7 +174,7 @@ namespace Z0.Asm
                 ClearTarget();
 
             var distinct = new AsmStatementSummaries();
-            var formatter = Records.formatter<AsmApiStatement>();
+            var formatter = Tables.formatter<AsmApiStatement>();
             var statements = src;
             var count = statements.Length;
             var host = ApiHostUri.Empty;

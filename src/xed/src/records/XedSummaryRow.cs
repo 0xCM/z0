@@ -4,11 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using F = XedSummaryField;
-    using R = XedSummaryRow;
-
     [Record(TableId)]
-    public struct XedSummaryRow : ITabular<F,R>, IRecord<XedSummaryRow>
+    public struct XedSummaryRow : IRecord<XedSummaryRow>
     {
         public const string TableId = "xed.summary";
 
@@ -31,8 +28,5 @@ namespace Z0
         public TextBlock Pattern;
 
         public TextBlock Operands;
-
-        public string DelimitedText(char sep)
-            => Xed.format(this, sep);
     }
 }

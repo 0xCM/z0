@@ -95,7 +95,7 @@ namespace Z0.Asm
                 var dst = Db.Table(AsmRow.TableId, src.Key.ToString());
                 var flow = Wf.EmittingTable<AsmRow>(dst);
                 var records = span(src.Sequenced);
-                var formatter = Records.formatter<AsmRow>(32);
+                var formatter = Tables.formatter<AsmRow>(32);
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var i=0; i<count; i++)

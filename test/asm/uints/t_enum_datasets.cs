@@ -45,7 +45,7 @@ namespace Z0.Asm
         {
             var path = CasePath(FileExtensions.Csv);
             var enums = @readonly(ClrEnums.describe<AsmOpCodeField,byte>());
-            Records.emit(enums,path);
+            Tables.emit(enums,path);
         }
     }
 }

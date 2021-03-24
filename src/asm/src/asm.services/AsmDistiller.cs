@@ -100,11 +100,11 @@ namespace Z0.Asm
             if(count >= 5)
             {
                 ref readonly var cell = ref skip(cells,i);
-                Records.parse(skip(cells, i++), out dst.Sequence);
-                Records.parse(skip(cells, i++), out dst.BlockAddress);
-                Records.parse(skip(cells, i++), out dst.IP);
-                Records.parse(skip(cells, i++), out dst.GlobalOffset);
-                Records.parse(skip(cells, i++), out dst.LocalOffset);
+                Tables.parse(skip(cells, i++), out dst.Sequence);
+                Tables.parse(skip(cells, i++), out dst.BlockAddress);
+                Tables.parse(skip(cells, i++), out dst.IP);
+                Tables.parse(skip(cells, i++), out dst.GlobalOffset);
+                Tables.parse(skip(cells, i++), out dst.LocalOffset);
             }
 
             if(count == AsmStatementDetail.FieldCount)
@@ -154,7 +154,7 @@ namespace Z0.Asm
 
         uint DistillNextSegment()
         {
-            var formatter = Records.formatter<Target>(32);
+            var formatter = Tables.formatter<Target>(32);
             var input = default(AsmRow);
             var output = default(Target);
             var counter = 0u;

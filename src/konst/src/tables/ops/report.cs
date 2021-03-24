@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct Tables
     {
         [MethodImpl(Inline)]
         public static Report<T> report<T>(Index<T> rows, FS.FilePath location)

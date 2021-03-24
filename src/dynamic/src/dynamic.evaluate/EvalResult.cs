@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using F = EvalAspectKey;
-    using R = EvalResult;
 
     /// <summary>
     /// Describes the outcome of a test case
@@ -37,18 +33,6 @@ namespace Z0
             Duration = duration;
             Timestamp = DateTime.Now;
             Message = message ?? "Empty result!";
-        }
-
-        public string DelimitedText(char delimiter)
-        {
-            var dst = Table.formatter<F>(delimiter);
-            dst.Append(F.Sequence, Sequence);
-            dst.Delimit(F.CaseName, CaseName);
-            dst.Delimit(F.Status, Status);
-            dst.Delimit(F.Duration, Duration);
-            dst.Delimit(F.Timestamp, Timestamp);
-            dst.Delimit(F.Message, Message);
-            return dst.ToString();
         }
     }
 }

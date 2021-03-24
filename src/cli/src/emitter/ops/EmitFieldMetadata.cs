@@ -38,7 +38,7 @@ namespace Z0
             var fields = reader.Fields();
             var count = (uint)fields.Length;
 
-            var formatter = Records.formatter<ClrFieldInfo>(FieldMetadataWidths);
+            var formatter = Tables.formatter<ClrFieldInfo>(FieldMetadataWidths);
             using var writer = target.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in fields)

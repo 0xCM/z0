@@ -25,7 +25,7 @@ namespace Z0
             var fields = Clr.fields(t);
             var count = fields.Length;
             var reflected = alloc<FieldValue>(count);
-            Records.values(spec, fields, reflected);
+            Tables.values(spec, fields, reflected);
             var buffer = alloc<ToolCmdArg>(count);
             var target = span(buffer);
             var source = @readonly(reflected);

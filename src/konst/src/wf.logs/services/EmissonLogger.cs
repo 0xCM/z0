@@ -10,11 +10,40 @@ namespace Z0
 
     using static Part;
 
-    struct WfEmissionLog : IWfEmissionLog
+    [Record(TableId)]
+    public struct EmissionLogEntry : IRecord<EmissionLogEntry>
+    {
+        public const string TableId = "emissions";
+
+        public WfExecToken Token;
+
+        [RenderWidth(24)]
+        public FS.FileExt TargetExt;
+
+        public EmissionPhase Phase;
+
+        [RenderWidth(10)]
+        public ulong Metric;
+
+        public FS.FileUri Target;
+    }
+
+    [RenderWidth(12)]
+    public enum EmissionPhase : byte
+    {
+        None = 0,
+
+        Emitting = 1,
+
+        Emitted = 2
+    }
+
+
+    struct EmissonLogger : IEmissionLogger
     {
         readonly FileStream Emissions;
 
-        internal WfEmissionLog(FS.FilePath dst)
+        internal EmissonLogger(FS.FilePath dst)
         {
             dst.EnsureParentExists().Delete();
             Emissions = dst.Stream();

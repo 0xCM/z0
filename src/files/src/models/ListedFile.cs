@@ -12,11 +12,14 @@ namespace Z0
     /// <summary>
     /// Defines an entry in list of files
     /// </summary>
-    public readonly struct ListedFile : ITextual
+    [Record(TableId)]
+    public struct ListedFile : IRecord<ListedFile>, ITextual
     {
-        public uint Index {get;}
+        public const string TableId = "listed-file";
 
-        public FS.FilePath Path {get;}
+        public uint Index;
+
+        public FS.FilePath Path;
 
         [MethodImpl(Inline)]
         public ListedFile(uint index, FS.FilePath path)
@@ -34,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Archives.format(this);
+            => text.format("{0,-10} | {1}", Index, Path);
 
         public override string ToString()
             => Format();

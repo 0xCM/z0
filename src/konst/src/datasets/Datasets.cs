@@ -19,6 +19,19 @@ namespace Z0
 
         const NumericKind Closure = UnsignedInts;
 
+        [MethodImpl(Inline)]
+        public static DatasetFieldFormatter<F> formatter<F>(char delimiter, F f = default)
+            where F : unmanaged, Enum
+                => new DatasetFieldFormatter<F>(text.build(), delimiter);
+
+        public static string header53<T>(char delimiter = FieldDelimiter)
+            where T : unmanaged, Enum
+                => datasetHeader<T>().Render(delimiter);
+
+        [MethodImpl(Inline)]
+        public static DatasetHeader<F> datasetHeader<F>()
+            where F : unmanaged, Enum
+                => new DatasetHeader<F>();
         /// <summary>
         /// Computes the field width from a field specifier
         /// </summary>

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial struct Records
+    partial struct Tables
     {
         /// <summary>
         /// Defines a <typeparamref name='T'/> record emitter

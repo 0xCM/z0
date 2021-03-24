@@ -117,21 +117,17 @@ namespace Z0
             return dst.ToString();
         }
 
-        [MethodImpl(Inline), Op]
-        public static string format(ListedFile src)
-            => Z0.text.format("{0,-10} | {1}", src.Index, src.Path);
-
         [Op]
         public static void format(ListedFiles src, StringBuilder dst)
         {
             var records = src.View;
             var count = records.Length;
-            var header = Table.header<ListedFileField>();
-            dst.AppendLine(header.HeaderText);
+            var formatter = Tables.formatter<ListedFile>();
+            dst.AppendLine(formatter.FormatHeader());
             for(var i=0u; i<count; i++)
             {
-                ref readonly var record = ref src[i];
-                dst.AppendLine(format(record));
+                ref readonly var listed = ref src[i];
+                dst.AppendLine(formatter.Format(listed));
             }
         }
 
@@ -140,11 +136,12 @@ namespace Z0
         {
             var count = src.Count;
             var listed = src.View;
+            var formatter = Tables.formatter<ListedFile>();
             ref readonly var file = ref src[0];
             ref var formatted = ref first(dst);
 
             for(var i=0u; i<count; i++)
-                seek(formatted,i) = format(skip(file,i));
+                seek(formatted,i) = formatter.Format(skip(file,i));
         }
     }
 }

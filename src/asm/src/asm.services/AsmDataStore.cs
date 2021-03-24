@@ -170,7 +170,7 @@ namespace Z0.Asm
             if(src.Length != 0)
             {
                 var flow = Wf.EmittingTable<AsmJmpRow>(dst);
-                var formatter = Records.formatter<AsmJmpRow>();
+                var formatter = Tables.formatter<AsmJmpRow>();
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 var count = src.Length;
@@ -189,7 +189,7 @@ namespace Z0.Asm
             var calls = etl.Calls(src.Instructions());
             var view = calls.View;
             var count = view.Length;
-            var formatter = Records.formatter<AsmCallRow>();
+            var formatter = Tables.formatter<AsmCallRow>();
             writer.WriteLine(formatter.FormatHeader());
             for(var i=0; i<count; i++)
                 writer.WriteLine(formatter.Format(skip(view,i)));
@@ -218,12 +218,12 @@ namespace Z0.Asm
                             var cells = row.Cells.View;
                             var record = new AsmCallRow();
                             var k = 0;
-                            Records.parse(skip(cells, k++).Text, out record.Source);
-                            Records.parse(skip(cells, k++).Text, out record.Target);
-                            Records.parse(skip(cells, k++).Text, out record.InstructionSize);
-                            Records.parse(skip(cells, k++).Text, out record.TargetOffset);
+                            Tables.parse(skip(cells, k++).Text, out record.Source);
+                            Tables.parse(skip(cells, k++).Text, out record.Target);
+                            Tables.parse(skip(cells, k++).Text, out record.InstructionSize);
+                            Tables.parse(skip(cells, k++).Text, out record.TargetOffset);
                             record.Instruction = skip(cells, k++).Text;
-                            Records.parse(skip(cells, k).Text, out record.Encoded);
+                            Tables.parse(skip(cells, k).Text, out record.Encoded);
                             dst.Add(record);
                         }
                     }

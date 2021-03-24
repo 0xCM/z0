@@ -4,13 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static Root;
 
-    partial struct Records
+    [ApiHost]
+    public readonly struct Table
     {
-        [Op, Closures(Closure)]
-        public static Span<byte> serialize<T>(in T src)
-            where T : struct, IRecord<T>
-                => memory.bytes(src);
+        const NumericKind Closure = UnsignedInts;
     }
+
+    // [ApiHost]
+    // public readonly struct Tables
+    // {
+    //     const NumericKind Closure = UnsignedInts;
+    // }
 }

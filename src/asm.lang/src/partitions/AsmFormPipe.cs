@@ -83,7 +83,7 @@ namespace Z0.Asm
                 record.IndexKey = (hash.Hash % count);
             }
             var emitting = Wf.EmittingTable<AsmFormHash>(dst);
-            var ecount = Records.emit(buffer, dst, 36);
+            var ecount = Tables.emit(buffer, dst, 36);
             Wf.EmittedTable(emitting, ecount);
             return buffer;
         }
@@ -191,7 +191,7 @@ namespace Z0.Asm
             if(count == FieldCount)
             {
                 var i = 0u;
-                Records.parse(NextCell(parts, ref i), out dst.Seq);
+                Tables.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
                 Sigs.ParseSigExpr(NextCell(parts, ref i), out dst.Sig);
                 dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
@@ -207,7 +207,7 @@ namespace Z0.Asm
         public ref AsmFormRecord Parse(TextRow src, ref AsmFormRecord dst)
         {
             var i = 0;
-            Records.parse(src[i++], out dst.Seq);
+            Tables.parse(src[i++], out dst.Seq);
             Sigs.ParseOpCodeExpr(src[i++], out dst.OpCode);
             Sigs.ParseSigExpr(src[i++], out dst.Sig);
             Sigs.ParseFormExpr(src[i++], out dst.FormExpr);

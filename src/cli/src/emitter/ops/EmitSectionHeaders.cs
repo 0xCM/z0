@@ -29,7 +29,7 @@ namespace Z0
         public Outcome<Count> EmitImageHeaders(FS.Files src, FS.FilePath dst)
         {
             var total = Count.Zero;
-            var formatter = Records.formatter<ImageSectionHeader>(SectionHeaderWidths);
+            var formatter = Tables.formatter<ImageSectionHeader>(SectionHeaderWidths);
             var flow = Wf.EmittingTable<ImageSectionHeader>(dst);
             using var writer = dst.Writer();
             writer.WriteLine(formatter.FormatHeader());

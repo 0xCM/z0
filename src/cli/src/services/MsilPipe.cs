@@ -94,7 +94,7 @@ namespace Z0
                 var flow = Wf.EmittingTable<MsilDataRow>(dst);
                 var view = src.View;
 
-                var formatter = Records.formatter<MsilDataRow>(array<byte>(16,16,80,20));
+                var formatter = Tables.formatter<MsilDataRow>(array<byte>(16,16,80,20));
                 using var writer = dst.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 for(var i=0u; i<count; i++)

@@ -35,7 +35,7 @@ namespace Z0
         {
             var dir = Db.IndexDir<ApiCatalogRecord>();
             var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
-            var parser = Records.parser<ApiCatalogRecord>(parse);
+            var parser = Tables.parser<ApiCatalogRecord>(parse);
             var rows = root.list<ApiCatalogRecord>();
             if(files.Length != 0)
             {
@@ -77,7 +77,7 @@ namespace Z0
             var dst = Db.IndexTable<ApiCatalogRecord>(root.timestamp().Format());
             var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
             var records = CatalogRecords(src.Base, src.Members.View);
-            var count = Records.emit<ApiCatalogRecord>(records, dst, 16);
+            var count = Tables.emit<ApiCatalogRecord>(records, dst, 16);
             Wf.EmittedTable<ApiCatalogRecord>(flow, count, dst);
             return new BasedApiMemberCatalog(dst, src, records);
         }
@@ -87,10 +87,10 @@ namespace Z0
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
             var service = ApiCatalogs.classes(Wf);
-            var formatter = Records.formatter<SymbolicLiteral>();
+            var formatter = Tables.formatter<SymbolicLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);
-            var count = Records.emit(literals, dst);
+            var count = Tables.emit(literals, dst);
             Wf.EmittedTable(flow, count);
         }
 
@@ -107,7 +107,7 @@ namespace Z0
             var rows = ClrEnums.symbolic(src).Sort();
             var kRows = rows.Length;
             using var writer = dst.Writer();
-            var formatter = Records.formatter<SymbolicLiteral>(16);
+            var formatter = Tables.formatter<SymbolicLiteral>(16);
             writer.WriteLine(formatter.FormatHeader());
 
             for(var i=0; i<kRows; i++)
@@ -206,7 +206,7 @@ namespace Z0
             var path = Db.IndexTable<ApiCorrelationEntry>();
             var emitting = Wf.EmittingTable<ApiCorrelationEntry>(path);
             var output = @readonly(records.OrderBy(x => x.RuntimeAddress).Array());
-            Records.emit(output, path);
+            Tables.emit(output, path);
             Wf.EmittedTable(emitting, output.Length);
 
             Wf.Ran(flow);

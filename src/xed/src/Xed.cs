@@ -37,37 +37,30 @@ namespace Z0
             return buffer;
         }
 
-        [Op]
-        public static string format(in XedPattern src, char delimiter)
-        {
-            var dst = Table.formatter<XedSummaryField>(delimiter);
-            render(src,dst);
-            return dst.Format();
-        }
+        // [Op]
+        // public static string format(in XedPattern src, char delimiter)
+        // {
+        //     var dst = Table.formatter<XedSummaryField>(delimiter);
+        //     render(src,dst);
+        //     return dst.Format();
+        // }
 
-        [Op]
-        public static string format(in XedSummaryRow src, char delimiter)
-        {
-            var dst = Table.formatter<XedSummaryField>(delimiter);
-            render(src, dst);
-            return dst.Format();
-        }
 
-        [MethodImpl(Inline), Op]
-        static ref readonly DatasetFieldFormatter<XedSummaryField> render(in XedPattern src, in DatasetFieldFormatter<XedSummaryField> dst)
-        {
-            dst.Delimit(F.Class, src.Class);
-            dst.Delimit(F.Category, src.Category);
-            dst.Delimit(F.Extension, src.Extension);
-            dst.Delimit(F.IsaSet, src.IsaSet);
-            dst.Delimit(F.IForm, src.IForm);
-            dst.Delimit(F.BaseCode, Xed.code(src));
-            dst.Delimit(F.Mod, Xed.mod(src));
-            dst.Delimit(F.Reg, Xed.reg(src));
-            dst.Delimit(F.Pattern, src.PatternText);
-            dst.Delimit(F.Operands, src.Operands);
-            return ref dst;
-        }
+        // [MethodImpl(Inline), Op]
+        // static ref readonly DatasetFieldFormatter<XedSummaryField> render(in XedPattern src, in DatasetFieldFormatter<XedSummaryField> dst)
+        // {
+        //     dst.Delimit(F.Class, src.Class);
+        //     dst.Delimit(F.Category, src.Category);
+        //     dst.Delimit(F.Extension, src.Extension);
+        //     dst.Delimit(F.IsaSet, src.IsaSet);
+        //     dst.Delimit(F.IForm, src.IForm);
+        //     dst.Delimit(F.BaseCode, Xed.code(src));
+        //     dst.Delimit(F.Mod, Xed.mod(src));
+        //     dst.Delimit(F.Reg, Xed.reg(src));
+        //     dst.Delimit(F.Pattern, src.PatternText);
+        //     dst.Delimit(F.Operands, src.Operands);
+        //     return ref dst;
+        // }
 
         [MethodImpl(Inline), Op]
         static ref readonly DatasetFieldFormatter<XedSummaryField> render(in XedSummaryRow src, in DatasetFieldFormatter<XedSummaryField> dst)

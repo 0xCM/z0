@@ -60,7 +60,7 @@ namespace Z0.Asm
             var src = MnemonicInfo();
             var dst = Db.AsmCatalogTable<AsmMnemonicInfo>();
             var flow = Wf.EmittingTable<AsmMnemonicInfo>(dst);
-            var count = Records.emit(src,dst);
+            var count = Tables.emit(src,dst);
             Wf.EmittedTable(flow,count);
             return src;
         }
@@ -89,7 +89,7 @@ namespace Z0.Asm
         {
             var dst = Wf.Db().Table<StokeAsmExportRow>(TargetFolder);
             var flow = Wf.EmittingTable<StokeAsmExportRow>(dst);
-            var count = Records.emit(src, dst, 32);
+            var count = Tables.emit(src, dst, 32);
             Wf.EmittedTable(flow,count);
         }
 
@@ -243,7 +243,7 @@ namespace Z0.Asm
             var dst = Wf.Db().Table<StokeAsmImportRow>(TargetFolder);
             var flow = Wf.EmittingTable<StokeAsmImportRow>(dst);
             var imports = ImportedStokeRows();
-            var count = Records.emit(imports, dst, 42);
+            var count = Tables.emit(imports, dst, 42);
             Wf.EmittedTable(flow, count);
             return imports;
         }
