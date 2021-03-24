@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> digits(Perm16 spec)
-            => cpu.vshuf16x8(gcpu.vinc<byte>(w128), spec.data);
+            => cpu.vshuf16x8(gcpu.vinc<byte>(w128), spec.Data);
 
         /// <summary>
         /// Computes the digits corresponding to each 5-bit segment of the permutation spec

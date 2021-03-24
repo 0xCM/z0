@@ -10,16 +10,15 @@ namespace Z0
 
     using static Part;
 
-
     /// <summary>
     /// Defines a 16-symbol permutation
     /// </summary>
     public readonly struct Perm16
     {
-        public readonly Vector128<byte> data;
+        public readonly Vector128<byte> Data;
 
         [MethodImpl(Inline)]
-        public Perm16(Vector128<byte> data)
-            => this.data = data;
+        public Perm16(Vector128<byte> src)
+            => Data = src;
     }
 }

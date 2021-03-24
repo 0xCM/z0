@@ -20,12 +20,75 @@ namespace Z0
         /// <summary>
         /// The first index
         /// </summary>
-        Mod<N> i;
+        Mod<N> I;
 
         /// <summary>
         /// The second index
         /// </summary>
-        Mod<N> j;
+        Mod<N> J;
+
+        [MethodImpl(Inline)]
+        public NatSwap((int i, int j) src)
+        {
+            I = src.i;
+            J = src.j;
+        }
+
+        [MethodImpl(Inline)]
+        public NatSwap((T i, T j) src)
+        {
+            I = Numeric.force<T,uint>(src.i);
+            J = Numeric.force<T,uint>(src.j);
+        }
+
+        [MethodImpl(Inline)]
+        NatSwap(Mod<N> i, Mod<N> j)
+        {
+            this.I = i;
+            this.J = j;
+        }
+
+        /// <summary>
+        /// Renders the tranposition as text in canonical form
+        /// </summary>
+        public string Format()
+            => $"({I} {J})";
+
+        public bool IsEmpy
+            => I == Zero.I && J == Zero.J;
+
+        /// <summary>
+        /// Determines whether this transposition is identical to another.
+        /// Note that the order of indices is immaterial
+        /// </summary>
+        /// <param name="rhs">The right transposition</param>
+        [MethodImpl(Inline)]
+        public bool Equals(NatSwap<N,T> rhs)
+            => (I == rhs.I && J == rhs.J) || (I == rhs.J && J == rhs.I);
+
+        [MethodImpl(Inline)]
+        public void Deconstruct(out T i, out T j)
+        {
+            i = Numeric.force<T>(this.I.State);
+            j = Numeric.force<T>(this.J.State);
+        }
+
+        /// <summary>
+        /// Converts the transpostion to its canonical tuple representation
+        /// </summary>
+        /// <param name="i">The first term index</param>
+        /// <param name="j">The second term index</param>
+        [MethodImpl(Inline)]
+        public (T i, T j) ToTuple()
+            => (Numeric.force<T>(I.State), Numeric.force<T>(J.State));
+
+        /// <summary>
+        /// Creates a copy
+        /// </summary>
+        [MethodImpl(Inline)]
+        public NatSwap<N,T> Replicate()
+            => new NatSwap<N,T>(I,J);
+
 
         /// <summary>
         /// The monodial zero
@@ -79,14 +142,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Swap(NatSwap<N,T> src)
-            => (src.i, src.j);
+            => (src.I, src.J);
 
         [MethodImpl(Inline)]
         public static NatSwap<N,T> operator ++(in NatSwap<N,T> src)
         {
             ref var dst = ref edit(src);
-            dst.i++;
-            dst.j++;
+            dst.I++;
+            dst.J++;
             return dst;
         }
 
@@ -94,10 +157,10 @@ namespace Z0
         public static NatSwap<N,T> operator --(in NatSwap<N,T> src)
         {
             ref var dst = ref edit(src);
-            if(src.i != 0)
-                dst.i--;
-            if(src.j != 0)
-                --dst.j;
+            if(src.I != 0)
+                dst.I--;
+            if(src.J != 0)
+                --dst.J;
             return dst;
         }
 
@@ -109,73 +172,10 @@ namespace Z0
         public static bool operator !=(NatSwap<N,T> lhs, NatSwap<N,T> rhs)
             => !(lhs == rhs);
 
-        [MethodImpl(Inline)]
-        public NatSwap((int i, int j) src)
-        {
-            i = src.i;
-            j = src.j;
-        }
-
-        [MethodImpl(Inline)]
-        public NatSwap((T i, T j) src)
-        {
-            i = Numeric.force<T,uint>(src.i);
-            j = Numeric.force<T,uint>(src.j);
-        }
-
-        [MethodImpl(Inline)]
-        NatSwap(Mod<N> i, Mod<N> j)
-        {
-            this.i = i;
-            this.j = j;
-        }
-
-        /// <summary>
-        /// Renders the tranposition as text in canonical form
-        /// </summary>
-        public string Format()
-            => $"({i} {j})";
-
-        public bool IsEmpy
-            => i == Zero.i && j == Zero.j;
-
-        /// <summary>
-        /// Determines whether this transposition is identical to another.
-        /// Note that the order of indices is immaterial
-        /// </summary>
-        /// <param name="rhs">The right transposition</param>
-        [MethodImpl(Inline)]
-        public bool Equals(NatSwap<N,T> rhs)
-            => (i == rhs.i && j == rhs.j) || (i == rhs.j && j == rhs.i);
-
-        [MethodImpl(Inline)]
-        public void Deconstruct(out T i, out T j)
-        {
-            i = Numeric.force<T>(this.i.State);
-            j = Numeric.force<T>(this.j.State);
-        }
-
-        /// <summary>
-        /// Converts the transpostion to its canonical tuple representation
-        /// </summary>
-        /// <param name="i">The first term index</param>
-        /// <param name="j">The second term index</param>
-        [MethodImpl(Inline)]
-        public (T i, T j) ToTuple()
-            => (Numeric.force<T>(i.State), Numeric.force<T>(j.State));
-
-        /// <summary>
-        /// Creates a copy
-        /// </summary>
-        [MethodImpl(Inline)]
-        public NatSwap<N,T> Replicate()
-            => new NatSwap<N,T>(i,j);
-
         public override int GetHashCode()
             => throw new NotSupportedException();
 
         public override bool Equals(object o)
             => throw new NotSupportedException();
     }
-
 }

@@ -19,6 +19,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Perm32(Vector256<byte> src)
-            => this.Data = src;
+            => Data = src;
     }
 }

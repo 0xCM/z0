@@ -48,8 +48,8 @@ namespace Z0
         [MethodImpl(Inline)]
         Monomial(T scalar, uint exp)
         {
-            this.Scalar = scalar;
-            this.Exp = exp;
+            Scalar = scalar;
+            Exp = exp;
         }
 
         /// <summary>
@@ -123,8 +123,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public Monomial(T scalar, uint exp)
         {
-            this.Scalar = scalar;
-            this.Exp = exp;
+            Scalar = scalar;
+            Exp = exp;
         }
 
         public Monomial<T> Unsized

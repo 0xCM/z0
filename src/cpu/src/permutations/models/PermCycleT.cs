@@ -22,7 +22,7 @@ namespace Z0
             if(len > 1)
                 root.require(gmath.eq(src[0].Source, src[len - 1].Target), () => "no");
 
-            this.Terms = src;
+            Terms = src;
         }
 
         [MethodImpl(Inline)]
@@ -41,6 +41,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Terms.Length;
         }
+
         public string Format()
         {
             var sb = text.build();

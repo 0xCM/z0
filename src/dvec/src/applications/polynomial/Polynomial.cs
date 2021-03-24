@@ -25,13 +25,13 @@ namespace Z0
         /// <summary>
         /// The canonical zero polynomial - with one term of order 0 with coefficient 0
         /// </summary>
-        public static readonly Polynomial<T> Zero = Define((zero<T>(), 0));
+        public static Polynomial<T> Zero => create((zero<T>(), 0));
 
         /// <summary>
         /// Constructs a polynomial from a sparse term sequence of scalar coefficients  paired with the
         /// corresponding term exponent value
         /// </summary>
-        public static Polynomial<T> Define(params (T scalar, uint exp)[] terms)
+        public static Polynomial<T> create(params (T scalar, uint exp)[] terms)
         {
             var expanse = new Monomial<T>[terms[0].exp + 1];
             for(var i = 0; i < terms.Length; i++)
