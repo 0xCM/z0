@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static AsmMnemonicCode;
 
     [ApiHost]
-    public class AsmFlows : WfService<AsmFlows>
+    public class AsmFlowControl : WfService<AsmFlowControl>
     {
         [MethodImpl(Inline), Op]
         public JmpKind EvalJmpKind(AsmMnemonicCode src)

@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmJmpCollector : WfService<AsmJmpCollector,AsmJmpCollector>
+    public sealed class AsmJmpCollector : WfService<AsmJmpCollector>
     {
         [MethodImpl(Inline), Op]
         static JccKind jccKind(IceMnemonic src)
@@ -98,12 +98,13 @@ namespace Z0.Asm
                         switch(fc)
                         {
                             case IceFlowControl.ConditionalBranch:
-                            case IceFlowControl.UnconditionalBranch:
                             case IceFlowControl.IndirectBranch:
                                 var kind = jccKind(fx.Mnemonic);
                                 IceExtractors.jmprow(fx, kind, out var dst);
                                 collection.Add(dst);
                             break;
+                            case IceFlowControl.UnconditionalBranch:
+                                break;
                         }
                     }
                 }
