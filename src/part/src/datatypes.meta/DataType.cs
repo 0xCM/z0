@@ -27,9 +27,9 @@ namespace Z0
         public bool IsFixedWidth => StorageWidth != 0;
 
         [MethodImpl(Inline)]
-        public DataType(IDataType rep)
+        public DataType(IDataType rep, uint width = 0)
         {
-            StorageWidth = rep.Width;
+            StorageWidth = width;
             ContainerType = rep.ContainerType;
             ContentType = rep.ContentType;
             Formatter = rep.Format;

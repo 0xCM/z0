@@ -32,6 +32,12 @@ namespace Z0.Asm
                 get => !IsEmpty;
             }
 
+            public string Format()
+                => Value.Format();
+
+            public override string ToString()
+                => Format();
+
             public static FourByteDisplacement Empty
                 => default;
         }

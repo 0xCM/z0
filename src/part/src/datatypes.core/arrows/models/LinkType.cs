@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = Graphs;
-
     public readonly struct LinkType : IEquatable<LinkType>
     {
         public Type Source {get;}
@@ -37,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(LinkType src)
-            => api.eq(this, src);
+            => Links.eq(this, src);
 
         public string Format()
             => Links.format(this);
@@ -46,7 +44,7 @@ namespace Z0
             => Format();
 
         public override int GetHashCode()
-            => (int)api.hash32(this);
+            => (int)Links.hash32(this);
 
         public override bool Equals(object src)
             => src is LinkType x && Equals(x);

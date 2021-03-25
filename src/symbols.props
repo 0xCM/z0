@@ -94,6 +94,7 @@
     <Validity>$(Src)validity/z0.validity.csproj</Validity>
     <VSvc>$(Src)vsvc/z0.vsvc.csproj</VSvc>
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
+    <Workflow>$(Src)workflow/z0.workflow.csproj</Workflow>
 
   </PropertyGroup>
 

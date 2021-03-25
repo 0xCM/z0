@@ -18,6 +18,12 @@ namespace Z0
 
         public Type DataType => typeof(T);
 
+        public string Format()
+            => CmdId.Format();
+
+        public override string ToString()
+            => Format();
+
         public Index<FieldInfo> Fields
         {
             [MethodImpl(Inline)]

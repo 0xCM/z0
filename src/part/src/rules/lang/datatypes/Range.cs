@@ -22,6 +22,12 @@ namespace Z0.Lang
             Max = max;
         }
 
+       public string Format()
+            => string.Format("[{0},{1}]", Min, Max);
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Range((long min, long max) src)
             => new Range(src.min, src.max);

@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -16,8 +13,7 @@ namespace Z0
     [Free]
     public interface IFixedDataType<T> : IDataType<T>
     {
-        bool IDataType.IsFixedWidth
-            => true;
+
     }
 
     /// <summary>

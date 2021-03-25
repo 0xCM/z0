@@ -74,6 +74,9 @@ namespace Z0
             get => Position(row,col);
         }
 
+       public string Format()
+            => EmptyString;
+
         public GridDim Dim
         {
             [MethodImpl(Inline)]

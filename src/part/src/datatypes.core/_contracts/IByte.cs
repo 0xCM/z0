@@ -7,9 +7,12 @@ namespace Z0
     /// <summary>
     /// A byte, just one
     /// </summary>
-    public interface IByte : IHashed
+    public interface IByte : IHashed, ISized
     {
         byte Value {get;}
+
+        BitWidth ISized.Width
+            => 8;
 
         uint IHashed.Hash
             => Value;

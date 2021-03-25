@@ -34,6 +34,8 @@ public enum PartId : ulong
 
     Asci = 14,
 
+    Workflow = 15,
+
     Digital = 18,
 
     Check = 19,

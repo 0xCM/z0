@@ -11,6 +11,7 @@
     <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Cpu)" />
     <ProjectReference Include="$(Files)" />
+    <ProjectReference Include="$(Workflow)" />
     <ProjectReference Include="$(Term)" />
     <ProjectReference Include="$(BitNumbers)" />
     <ProjectReference Include="$(Asci)" />

@@ -22,10 +22,9 @@ namespace Z0
     }
 
     [Free]
-    public interface IVariant<V> : IVariant, IDataType<V>
+    public interface IVariant<V> : IVariant
         where V : unmanaged, IVariant<V>
     {
-        V IDataType<V>.Content
-            => (V)this;
+
     }
 }

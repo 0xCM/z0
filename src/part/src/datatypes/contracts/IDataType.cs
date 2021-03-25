@@ -10,7 +10,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IDataType : ISized, ITextual
+    public interface IDataType : ITextual
     {
         Type ContentType {get;}
 
@@ -19,9 +19,6 @@ namespace Z0
         /// </summary>
         Type ContainerType
             => GetType();
-
-        bool IsFixedWidth
-            => GetType().Tag<DatatypeAttribute>().MapValueOrElse(a => !a.VariableWidth, () => true);
 
         Index<object> Synonyms
             => GetType().Tag<DatatypeAttribute>().MapValueOrElse(a => a.Synonyms, () => Array.Empty<object>());
@@ -32,15 +29,6 @@ namespace Z0
     {
         Type IDataType.ContentType
             => typeof(T);
-
-        T Content
-            => (T)this;
-
-        BitWidth ISized.Width
-            => Unsafe.SizeOf<T>()*8;
-
-        string ITextual.Format()
-            => Content?.ToString() ?? string.Empty;
     }
 
     [Free]

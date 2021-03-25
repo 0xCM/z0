@@ -82,8 +82,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static DataType metadata<T>(T src)
+        public static DataType metadata<T>(T src, uint width = 0)
             where T : IDataType
-                => new DataType(src);
+                => new DataType(src, width);
     }
 }

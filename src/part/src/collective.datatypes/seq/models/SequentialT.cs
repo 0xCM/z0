@@ -58,6 +58,8 @@ namespace Z0
             x -= Step;
         }
 
+        public string Format()
+            => EmptyString;
 
         [MethodImpl(Inline)]
         public static Sequential<T> operator ++(Sequential<T> src)

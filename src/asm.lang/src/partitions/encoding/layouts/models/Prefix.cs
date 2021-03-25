@@ -22,6 +22,13 @@ namespace Z0.Asm
 
             public bool IsEmpty
                 => Value == 0;
+
+            public string Format()
+                => Value.Format();
+
+            public override string ToString()
+                => Format();
+
         }
     }
 }

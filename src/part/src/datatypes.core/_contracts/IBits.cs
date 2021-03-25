@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IBits : IDataType
     {
-        new ushort Width {get;}
+        ushort Width {get;}
     }
 
     public interface IBits<T> : IBits

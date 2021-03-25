@@ -11,22 +11,25 @@ namespace Z0
     [Free]
     public interface ITextBlock : IDataType
     {
-        string Text {get;}
-
-        ByteSize BufferSize
-            => Text.Length;
+        string Content {get;}
 
         uint Length
-            => (uint)Text.Length;
+            => (uint)Content.Length;
 
         ReadOnlySpan<char> Characters
-            => Text;
+            => Content;
+
+        string ITextual.Format()
+            => Content;
     }
 
     [Free]
-    public interface ITextBlock<T> : ITextBlock
-        where T : unmanaged
+    public interface ITextBlock<T> : ITextBlock, IDataType<T>
+        where T : ITextual, IParseable<T>
     {
-        ReadOnlySpan<T> Data {get;}
+        new T Content {get;}
+
+        string ITextBlock.Content
+            => Content.Format();
     }
 }

@@ -2,28 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Lang
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Part;
 
-    public readonly struct Text : IDataType<Text>
+    public readonly struct TextLine<T> : ITextLine<T>
+        where T : ITextual, IParseable<T>
     {
-        public TextKind Kind {get;}
+        public uint LineNumber {get;}
 
-        public string Content {get;}
+        public T Content {get;}
 
         [MethodImpl(Inline)]
-        public Text(TextKind kind, string content)
+        public TextLine(uint number, T content)
         {
-            Kind = kind;
+            LineNumber = number;
             Content = content;
         }
-
         public string Format()
-            => Content;
+            => Content.Format();
 
         public override string ToString()
             => Format();

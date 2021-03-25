@@ -20,6 +20,7 @@ namespace Z0.Asm
             {
                 Value = value;
             }
+
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
@@ -31,6 +32,12 @@ namespace Z0.Asm
                 [MethodImpl(Inline)]
                 get => !IsEmpty;
             }
+
+            public string Format()
+                => Value.Format();
+
+            public override string ToString()
+                => Format();
 
             public static TwoByteDisplacement Empty
                 => default;

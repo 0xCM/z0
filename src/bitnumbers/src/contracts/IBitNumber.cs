@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IBitNumber : IDataType, IHashed
+    public interface IBitNumber : IDataType, IHashed, ISized
     {
         Span<bit> Bits {get;}
 

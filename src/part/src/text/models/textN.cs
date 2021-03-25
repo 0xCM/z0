@@ -9,7 +9,7 @@ namespace Z0
 
     using static Root;
 
-    public readonly struct TextBlock<N> : IDataTypeComparable<TextBlock<N>>
+    public readonly struct text<N> : IDataTypeComparable<text<N>>
         where N : unmanaged, ITypeNat
     {
         readonly string Data;
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TextBlock(string src)
+        public text(string src)
             => Data = text.empty(src) ? EmptyString : text.slice(src, 0, root.min(n, src.Length));
 
         public ReadOnlySpan<char> View
@@ -79,40 +79,40 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public bool Equals(TextBlock<N> src)
+        public bool Equals(text<N> src)
             => string.Equals(Data, src.Data);
 
-        public bool Equals(TextBlock<N> src, bool insensitive)
+        public bool Equals(text<N> src, bool insensitive)
             => insensitive
             ? string.Equals(Data, src.Data, StringComparison.CurrentCultureIgnoreCase)
             : string.Equals(Data, src.Data);
 
         public override bool Equals(object src)
-            => src is TextBlock<N> x && Equals(x);
+            => src is text<N> x && Equals(x);
 
         public override int GetHashCode()
             => (int)Hash;
 
         [MethodImpl(Inline)]
-        public int CompareTo(TextBlock<N> src)
+        public int CompareTo(text<N> src)
             => string.Compare(Data, src.Data);
 
         [MethodImpl(Inline)]
-        public static implicit operator TextBlock<N>(string src)
-            => new TextBlock<N>(src);
+        public static implicit operator text<N>(string src)
+            => new text<N>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator TextBlock<N>(char src)
-            => new TextBlock<N>(src.ToString());
+        public static implicit operator text<N>(char src)
+            => new text<N>(src.ToString());
 
         [MethodImpl(Inline)]
-        public static implicit operator string(TextBlock<N> src)
+        public static implicit operator string(text<N> src)
             => src.Data;
 
-        public static TextBlock<N> Empty
+        public static text<N> Empty
         {
             [MethodImpl(Inline)]
-            get => new TextBlock<N>(EmptyString);
+            get => new text<N>(EmptyString);
         }
     }
 }

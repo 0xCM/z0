@@ -65,5 +65,9 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is GridStorage x && Equals(x);
+
+        public string Format()
+            => EmptyString;
+
     }
 }

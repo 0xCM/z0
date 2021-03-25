@@ -78,7 +78,7 @@ namespace Z0.Asm
 
         public Address16 LocalOffset;
 
-		public TextBlock<N16> Mnemonic;
+		public text<N16> Mnemonic;
 
 		public AsmOpCodeExprLegacy OpCode;
 

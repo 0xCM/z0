@@ -14,6 +14,28 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+
+        [MethodImpl(Inline)]
+        public static LinkType type<T>(T t = default)
+            => new LinkType<T>(typeof(T), typeof(T));
+
+        [MethodImpl(Inline), Op]
+        public static LinkType type(Type src, Type dst)
+            => new LinkType(src,dst);
+
+        [MethodImpl(Inline), Op]
+        public static LinkType type(Type src, Type dst, Type kind)
+            => new LinkType(src,dst, kind);
+
+        [MethodImpl(Inline)]
+        public static LinkType type<S,T>()
+            => new LinkType<S,T>(typeof(S), typeof(T));
+
+        [MethodImpl(Inline)]
+        public static LinkType type<S,T,K>()
+            where K : unmanaged
+                => new LinkType<S,T,K>(typeof(S), typeof(T), typeof(K));
+
         /// <summary>
         /// Defines an edge from an index-identified source to an index identified target
         /// </summary>
@@ -23,6 +45,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Arrow<T> link<T>(T src, T dst)
             => new Arrow<T>(src,dst);
+
+        [MethodImpl(Inline), Op]
+        public static bool eq(LinkType a, LinkType b)
+            => a.Source == b.Source && a.Target == b.Target;
+
+        [MethodImpl(Inline), Op]
+        public static uint hash32(LinkType src)
+            => alg.hash.calc(src.Source) ^ alg.hash.calc(src.Target) ^ alg.hash.calc(src.Kind);
 
         /// <summary>
         /// Defines a link from a source to a target

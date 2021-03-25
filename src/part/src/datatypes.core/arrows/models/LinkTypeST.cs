@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    using api = Graphs;
+    using api = Links;
 
     public readonly struct LinkType<S,T>
     {

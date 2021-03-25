@@ -119,27 +119,6 @@ namespace Z0
             => a.Source == b.Source && a.Target == b.Target;
 
         [MethodImpl(Inline)]
-        public static LinkType type<T>(T t = default)
-            => new LinkType<T>(typeof(T), typeof(T));
-
-        [MethodImpl(Inline), Op]
-        public static LinkType type(Type src, Type dst)
-            => new LinkType(src,dst);
-
-        [MethodImpl(Inline), Op]
-        public static LinkType type(Type src, Type dst, Type kind)
-            => new LinkType(src,dst, kind);
-
-        [MethodImpl(Inline)]
-        public static LinkType type<S,T>()
-            => new LinkType<S,T>(typeof(S), typeof(T));
-
-        [MethodImpl(Inline)]
-        public static LinkType type<S,T,K>()
-            where K : unmanaged
-                => new LinkType<S,T,K>(typeof(S), typeof(T), typeof(K));
-
-        [MethodImpl(Inline)]
         public static string identifier<S,T>(Arrow<S,T> link)
             => Relations.RenderLink<S,T>().Format(link.Source, link.Target);
 
