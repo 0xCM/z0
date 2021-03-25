@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct ApiCatalogRecord : IRecord<ApiCatalogRecord>
+    public struct ApiCatalogEntry : IRecord<ApiCatalogEntry>
     {
         public const string TableId = "api.catalog";
 

@@ -10,9 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using F = XedSummaryField;
-    using R = XedSummaryRow;
-
     [ApiHost]
     public readonly ref struct XedWf
     {
@@ -40,7 +37,7 @@ namespace Z0
             Config = config;
             Source = Xed.sources(Config.Source);
             var db = Wf.Db();
-            Target = db.TableArchive(Subject);
+            Target = new DbTables<string>(db, Subject);
             Root = Target.Root;
         }
 

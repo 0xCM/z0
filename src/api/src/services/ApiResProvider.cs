@@ -16,6 +16,19 @@ namespace Z0
 
     public sealed class ApiResProvider : WfService<ApiResProvider>
     {
+        [MethodImpl(Inline), Op]
+        public static unsafe ApiRes resource(ApiResAccessor src)
+        {
+            var data = description(src);
+            var address = slice(data,8,8).TakeUInt64();
+            var size = slice(data,22,4).TakeUInt32();
+            return new ApiRes(src, address, size);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<byte> description(ApiResAccessor src, byte size = 29)
+            => cover<byte>(ApiJit.jit(src.Member), size);
+
         /// <summary>
         /// Loades the corresponding method definitions
         /// </summary>
@@ -48,11 +61,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public unsafe ApiRes Resource(ApiResAccessor src)
-            => api.resource(src);
+            => resource(src);
 
         [MethodImpl(Inline), Op]
         public unsafe ReadOnlySpan<byte> Description(ApiResAccessor src)
-            => api.description(src);
+            => description(src);
 
         /// <summary>
         /// Queries the source assemblies for ByteSpan property getters

@@ -14,8 +14,6 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-        ParseResult<TextDoc> Document(FS.FilePath src)
-            => TextDocs.parse(src);
 
         Deferred<FS.FilePath> ArchiveFiles()
             => Root.EnumerateFiles(true);

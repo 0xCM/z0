@@ -15,13 +15,6 @@ namespace Z0
     using static TextRules;
     using static Sequential;
 
-    partial struct Msg
-    {
-        public static MsgPattern<Count> CorrelatingParts => "Correlating {0} part catalogs";
-
-        public static MsgPattern<string> CorrelatingOperations => "Correlating {0} operations";
-    }
-
     public sealed class ApiServices : WfService<ApiServices>
     {
         public IApiJit ApiJit {get; private set;}
@@ -31,12 +24,12 @@ namespace Z0
             ApiJit = Z0.ApiJit.create(Wf);
         }
 
-        public Index<ApiCatalogRecord> LoadCatalogRecords()
+        public Index<ApiCatalogEntry> LoadCatalogRecords()
         {
-            var dir = Db.IndexDir<ApiCatalogRecord>();
+            var dir = Db.IndexDir<ApiCatalogEntry>();
             var files = dir.Files(FS.Extensions.Csv).OrderBy(f => f.Name);
-            var parser = Tables.parser<ApiCatalogRecord>(parse);
-            var rows = root.list<ApiCatalogRecord>();
+            var parser = Tables.parser<ApiCatalogEntry>(parse);
+            var rows = root.list<ApiCatalogEntry>();
             if(files.Length != 0)
             {
                 var src = files[files.Length - 1];
@@ -52,7 +45,7 @@ namespace Z0
                     else
                     {
                         Wf.Error(outcome.Message);
-                        return sys.empty<ApiCatalogRecord>();
+                        return sys.empty<ApiCatalogEntry>();
                     }
                     line = reader.ReadLine();
                 }
@@ -72,11 +65,11 @@ namespace Z0
 
         public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src, Timestamp? ts = null)
         {
-            var dst = Db.IndexTable<ApiCatalogRecord>( (ts ?? root.timestamp()).Format());
-            var flow = Wf.EmittingTable<ApiCatalogRecord>(dst);
-            var records = CatalogRecords(src.Base, src.Members.View);
-            var count = Tables.emit<ApiCatalogRecord>(records, dst, 16);
-            Wf.EmittedTable<ApiCatalogRecord>(flow, count, dst);
+            var dst = Db.IndexTable<ApiCatalogEntry>((ts ?? root.timestamp()).Format());
+            var flow = Wf.EmittingTable<ApiCatalogEntry>(dst);
+            var records = CatalogEntries(src.Base, src.Members.View);
+            var count = Tables.emit<ApiCatalogEntry>(records, dst, 16);
+            Wf.EmittedTable<ApiCatalogEntry>(flow, count, dst);
             return new BasedApiMemberCatalog(dst, src, records);
         }
 
@@ -248,10 +241,10 @@ namespace Z0
 
 
         [Op]
-        Index<ApiCatalogRecord> CatalogRecords(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
+        Index<ApiCatalogEntry> CatalogEntries(MemoryAddress @base, ReadOnlySpan<ApiMember> members)
         {
             var count = members.Length;
-            var buffer = alloc<ApiCatalogRecord>(count);
+            var buffer = alloc<ApiCatalogEntry>(count);
             ref var dst = ref first(buffer);
             var rebase = first(members).BaseAddress;
             for(uint seq=0; seq<count; seq++)
@@ -271,10 +264,10 @@ namespace Z0
             return buffer;
         }
 
-        static Outcome parse(string src, out ApiCatalogRecord dst)
+        static Outcome parse(string src, out ApiCatalogEntry dst)
         {
             const char Delimiter = FieldDelimiter;
-            const byte FieldCount = ApiCatalogRecord.FieldCount;
+            const byte FieldCount = ApiCatalogEntry.FieldCount;
 
             var fields = RecUtil.fields(src,Delimiter).View;
             if(fields.Length != FieldCount)

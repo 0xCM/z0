@@ -15,8 +15,6 @@ namespace Z0
 
     public sealed class ApiCaptureService : WfService<ApiCaptureService>
     {
-        IAsmContext Asm;
-
         ApiMemberExtractor Extractor;
 
         ApiServices Services;
@@ -25,10 +23,9 @@ namespace Z0
 
         protected override void OnInit()
         {
-            Asm = Wf.AsmContext();
             Extractor = ApiCodeExtractors.service();
             Services = Wf.ApiServices();
-            Emitter = Wf.CaptureEmitter(Asm);
+            Emitter = Wf.CaptureEmitter(Wf.AsmContext());
         }
 
         /// <summary>
@@ -50,6 +47,19 @@ namespace Z0
             var captured = RunCapture(parts);
             Wf.Ran(flow);
             return captured.SelectMany(x => x.Storage);
+        }
+
+        public Index<AsmMemberRoutines> CaptureApiCatalog(IGlobalApiCatalog catalog)
+        {
+            var dst = root.list<AsmMemberRoutines>();
+            using var flow = Wf.Running();
+            var catalogs = catalog.Catalogs.View;
+            var count = catalogs.Length;
+            for(var i=0; i<count; i++)
+                dst.AddRange(CapturePart(skip(catalogs,i)));
+            Wf.Ran(flow, count);
+            return dst.ToArray();
+
         }
 
         Index<AsmMemberRoutines> RunCapture()

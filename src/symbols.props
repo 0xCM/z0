@@ -88,6 +88,7 @@
     <Stats>$(Src)stats/z0.stats.csproj</Stats>
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
 
+    <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Term>$(Src)term/z0.term.csproj</Term>
     <Tools>$(Src)tools/z0.tools.csproj</Tools>
 

@@ -35,5 +35,10 @@ namespace Z0
         public static string Unparsed<T>(T src) => unparsed<T>().Format(src);
 
         static RenderPattern<T> unparsed<T>() => "Unable to parse {0}";
+
+        public static MsgPattern<Count> CorrelatingParts => "Correlating {0} part catalogs";
+
+        public static MsgPattern<string> CorrelatingOperations => "Correlating {0} operations";
+
     }
 }

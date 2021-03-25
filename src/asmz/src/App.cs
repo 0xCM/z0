@@ -180,8 +180,8 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var accessor = ref skip(accessors,i);
-                var description = Resources.description(accessor);
-                var resource = Resources.resource(accessor);
+                var description = ApiResProvider.description(accessor);
+                var resource = ApiResProvider.resource(accessor);
                 Wf.Row(string.Format("{0} | {1,-8} | {2}", resource.Address, resource.Size, resource.Accessor.Member.Name));
                 //Wf.Row(string.Format("{0} | {1} ", description.FormatHex(), accessor.Member.Name));
             }

@@ -13,11 +13,11 @@ namespace Z0
     {
         readonly BasedApiMembers Members {get;}
 
-        readonly Index<ApiCatalogRecord> Addresses {get;}
+        readonly Index<ApiCatalogEntry> Addresses {get;}
 
         readonly FS.FilePath Location {get;}
 
-        internal BasedApiMemberCatalog(FS.FilePath location, BasedApiMembers members, Index<ApiCatalogRecord> addresses)
+        internal BasedApiMemberCatalog(FS.FilePath location, BasedApiMembers members, Index<ApiCatalogEntry> addresses)
         {
             Members = members;
             Addresses = addresses;

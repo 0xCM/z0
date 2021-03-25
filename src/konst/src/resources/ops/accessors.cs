@@ -13,21 +13,6 @@ namespace Z0
 
     partial struct Resources
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe ApiRes resource(ApiResAccessor src)
-        {
-            var data = description(src);
-            var address = slice(data,8,8).TakeUInt64();
-            var size = slice(data,22,4).TakeUInt32();
-            return new ApiRes(src, address, size);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<byte> description(ApiResAccessor src)
-        {
-            return cover<byte>(ApiJit.jit(src.Member), 29);
-        }
-
         /// <summary>
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>

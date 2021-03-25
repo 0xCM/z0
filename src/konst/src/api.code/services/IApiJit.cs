@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IApiJit
     {
         LocatedMethod JitMethod(IdentifiedMethod src);

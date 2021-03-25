@@ -12,7 +12,7 @@ namespace Z0
 
     using X = FS.Extensions;
 
-    public struct DbTables<S> : ITableArchive
+    struct DbTables<S> : ITableArchive
     {
         public IEnvPaths Paths {get;}
 
@@ -21,7 +21,7 @@ namespace Z0
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        internal DbTables(IEnvPaths paths, S subject)
+        public DbTables(IEnvPaths paths, S subject)
         {
             Paths = paths;
             Subject = subject;

@@ -58,7 +58,6 @@ namespace Z0
             get => MemberCount != 0;
         }
 
-
         public static BasedApiMembers Empty
         {
             [MethodImpl(Inline)]
