@@ -29,7 +29,7 @@ namespace Z0.Asm
         FS.FolderPath StatementRoot
             => Db.TableDir<AsmApiStatement>();
 
-        public void EmitThumbprintCatalog()
+        public void EmitThumbprints()
         {
             var counter = 0;
             var distinct = new AsmStatementSummaries();
@@ -41,11 +41,10 @@ namespace Z0.Asm
             }
 
             LoadStatements(receiver);
-
-            EmitThumbprintCatalog(distinct);
+            EmitThumbprints(distinct);
         }
 
-        public AsmThumprintCatalog LoadThumbprintCatalog()
+        public AsmThumprintCatalog LoadThumbprints()
         {
             var dst = root.list<Paired<AsmStatementExpr,AsmThumbprint>>();
 
@@ -57,17 +56,14 @@ namespace Z0.Asm
                 var data = reader.ReadLine();
                 var statement = asm.statement(data.LeftOfFirst(Chars.Semicolon));
                 if(sigs.ParseThumbprint(data, out var thumbprint))
-                {
-                    var entry = root.paired(statement,thumbprint);
-                    dst.Add(entry);
-                }
+                    dst.Add(root.paired(statement,thumbprint));
             }
             return new AsmThumprintCatalog(dst.ToArray());
         }
 
         public void ShowThumprintCatalog()
         {
-            var src = LoadThumbprintCatalog().Entries;
+            var src = LoadThumbprints().Entries;
             var count = src.Length;
             using var log = ShowLog(FS.Extensions.Asm, "thumbprints");
             for(var i=0; i<count; i++)
@@ -78,24 +74,26 @@ namespace Z0.Asm
             }
         }
 
-        public void EmitThumbprintCatalog(Index<AsmApiStatement> src)
+        public void EmitThumbprints(Index<AsmApiStatement> src)
         {
             var distinct = new AsmStatementSummaries();
             root.iter(src, s => distinct.Add(s.Summary()));
             var collected = distinct.Collected();
             Wf.Status($"Collected {collected.Length} thumbprints from {src.Count} statements");
-            EmitThumbprintCatalog(distinct);
+            EmitThumbprints(distinct);
         }
 
         FS.FilePath ThumbprintsPath()
             => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
 
-        void EmitThumbprintCatalog(AsmStatementSummaries src)
+        void EmitThumbprints(AsmStatementSummaries src)
         {
             var target = ThumbprintsPath();
             var flow = Wf.EmittingFile(target);
             using var writer = target.Writer();
-            writer.Write(src.Format());
+            var buffer = text.buffer();
+            AsmSyntax.render(src, buffer);
+            writer.Write(buffer.Emit());
             Wf.EmittedFile(flow,1);
         }
 
@@ -259,7 +257,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            EmitThumbprintCatalog(distinct);
+            EmitThumbprints(distinct);
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 

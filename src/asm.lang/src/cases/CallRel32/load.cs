@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static AsmInstructions;
-    using static AsmSyntax;
 
     partial class AsmCases
     {
@@ -25,7 +24,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static Index<CallRel32> load(Call call, Rel32 rel32)
+        public static Index<CallRel32> loadRel32(Call call)
         {
             var caller = asm.caller(0x7ffe6818a0e0ul, "canonical/abi2/Run");
             var cases = alloc<CallRel32>(4);

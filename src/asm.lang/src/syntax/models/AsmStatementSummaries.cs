@@ -34,21 +34,8 @@ namespace Z0.Asm
             return _Collected;
         }
 
-        public uint Render(ITextBuffer dst)
-            => AsmSyntax.render(this, dst);
-
         public bool IsFrozen
             => _Collected.IsNonEmpty;
-
-        public string Format()
-        {
-            var dst = text.buffer();
-            Render(dst);
-            return dst.Emit();
-        }
-
-        public override string ToString()
-            => Format();
 
         public void Add(AsmStatementSummary src)
         {

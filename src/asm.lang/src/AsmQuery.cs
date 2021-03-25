@@ -10,7 +10,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
     using static AsmInstructions;
-    using static AsmSyntax;
 
     using REP = RepeatPrefixCode;
     using L = LockPrefixCode;
@@ -25,12 +24,12 @@ namespace Z0.Asm
         public static bit IsCallRel32(ReadOnlySpan<byte> src, uint offset)
             => skip(src,offset) == 0xE8 && (offset + 4) <= src.Length;
 
-        public static bit Test(AsmHexCode src, Jmp jmp, Rel8 rel8)
+        public static bit TestRel8(AsmHexCode src, Jmp jmp)
         {
             return false;
         }
 
-        public static bit Test(AsmHexCode src, Jmp jmp, Rel32 rel8)
+        public static bit TestRel32(AsmHexCode src, Jmp jmp)
         {
             return false;
         }

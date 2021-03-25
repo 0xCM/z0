@@ -41,7 +41,7 @@ namespace Z0.Asm
             => api.eq(this, src);
 
         public string Format()
-            => api.format(this);
+            => AsmSyntax.format(this);
 
         public override string ToString()
             => Format();

@@ -234,7 +234,7 @@ namespace Z0.Asm
 
         void TestRel32()
         {
-            var cases = AsmCases.load(AsmInstructions.call(), AsmTokens.Rel32).View;
+            var cases = AsmCases.loadRel32(AsmInstructions.call()).View;
             var count = cases.Length;
             var errors = text.buffer();
             for(var i=0; i<count; i++)
@@ -871,13 +871,8 @@ namespace Z0.Asm
             pipe.ShowThumprintCatalog();
         }
 
-        public void Run()
+        void ShowXedInstructions()
         {
-            //Wf.AsmCatalogEtl().EmitMnemonicInfo();
-
-            //Wf.AsmFormPipe().EmitFormHashes();
-            //ShowThumprintCatalog();
-
             var pipe = XedInstructionPipe.create(Wf);
             var records = pipe.LoadSourceRecords().View;
             var count = records.Length;
@@ -893,6 +888,14 @@ namespace Z0.Asm
                     log.Show(record.Form);
                 }
             }
+        }
+
+        public void Run()
+        {
+            //Wf.AsmCatalogEtl().EmitMnemonicInfo();
+
+            //Wf.AsmFormPipe().EmitFormHashes();
+            //ShowThumprintCatalog();
 
 
             //Sigs.ShowSymbols();
@@ -907,6 +910,7 @@ namespace Z0.Asm
 
             //CheckRel32();
 
+            Wf.ApiStatementPipe().EmitThumbprints();
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 
             //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);
