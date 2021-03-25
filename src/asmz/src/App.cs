@@ -222,7 +222,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.ApiStatementPipe().LoadStatements(parse);
+            Wf.AsmStatements().Load(parse);
 
         }
 
@@ -742,7 +742,7 @@ namespace Z0.Asm
         void ProcessStatements(ReadOnlySpan<AsmApiStatement> src)
         {
             var count = src.Length;
-            var distinct = root.hashset<AsmThumbprintExpr>();
+            var distinct = root.hashset<AsmThumbprint>();
             for(var i=0; i<count; i++)
             {
                 ref readonly var s = ref skip(src,i);
@@ -862,12 +862,11 @@ namespace Z0.Asm
             var src = ImageMaps.current();
             var dst = Db.AppLog("imagemap", FS.Extensions.Csv);
             ImageMaps.emit(Wf, src, dst);
-
         }
 
         void ShowThumprintCatalog()
         {
-            var pipe = Wf.ApiStatementPipe();
+            var pipe = Wf.AsmThumbprints();
             pipe.ShowThumprintCatalog();
         }
 
@@ -878,14 +877,13 @@ namespace Z0.Asm
             var count = records.Length;
             if(count !=0 )
             {
-
                 using var log = ShowLog("xed-instructions", FS.Extensions.Csv);
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var record = ref skip(records,i);
                     var id = record.Form;
-                    var components = id.Split(Chars.Underscore).Delimit(Chars.Pipe, 32);
-                    log.Show(record.Form);
+                    var components = id.Split(Chars.Underscore).Delimit(Chars.Pipe, -16);
+                    log.Show(string.Format("{0,-64} | {1}", id, components));
                 }
             }
         }
@@ -896,7 +894,7 @@ namespace Z0.Asm
 
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();
-
+            ShowXedInstructions();
 
             //Sigs.ShowSymbols();
             //PipeImageData();
@@ -910,7 +908,8 @@ namespace Z0.Asm
 
             //CheckRel32();
 
-            Wf.ApiStatementPipe().EmitThumbprints();
+            //Wf.ApiStatementPipe().EmitThumbprints();
+            //Wf.ApiStatementPipe().ShowThumprintCatalog();
             //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
 
             //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);

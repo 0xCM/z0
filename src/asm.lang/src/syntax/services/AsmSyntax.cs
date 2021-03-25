@@ -1,15 +1,15 @@
-
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    using System;
+    using static memory;
 
-    public interface IGenerator<S,T>
+    public sealed class AsmSyntax : WfService<AsmSyntax>
     {
-        T Generate(S src);
+        [Op]
+        public static string format(AsmFormExpr src)
+            => string.Format("({0})<{1}>", src.Sig, src.OpCode);
     }
-
 }

@@ -18,8 +18,14 @@ namespace Z0
         public static AsmSigs AsmSigs(this IWfShell wf)
             => Z0.Asm.AsmSigs.create(wf);
 
+        public static AsmStatements AsmStatements(this IWfShell wf)
+            => Z0.Asm.AsmStatements.create(wf);
+
         public static AsmCatalogEtl AsmCatalogEtl(this IWfShell wf)
             => Z0.Asm.AsmCatalogEtl.create(wf);
+
+        public static AsmThumbprints AsmThumbprints(this IWfShell wf)
+            => Z0.Asm.AsmThumbprints.create(wf);
 
         public static AsmEltCmdHost AsmEtlCmd(this IWfShell wf)
             => AsmEltCmdHost.create(wf);

@@ -21,9 +21,6 @@ namespace Z0.Asm
 
         public ExtractTermCode TermCode {get;}
 
-        public AsmDocPartKind Kind
-            => AsmDocPartKind.BlockHeader;
-
         [MethodImpl(Inline)]
         public ApiCodeBlockHeader(string sep, OpUri uri, ClrDisplaySig sig, CodeBlock code, ExtractTermCode term)
         {

@@ -18,138 +18,20 @@ namespace Z0.Asm
 
         IAsmDecoder Decoder;
 
-        const byte FieldCount = AsmApiStatement.FieldCount;
+        AsmStatements Statements;
+
+        AsmThumbprints Thumbprints;
 
         protected override void OnInit()
         {
-            Sigs = AsmSigs.create(Wf);
-            Decoder = Wf.AsmServices().Decoder();
+            Sigs = Wf.AsmSigs();
+            Decoder = Wf.AsmDecoder();
+            Statements = Wf.AsmStatements();
+            Thumbprints = Wf.AsmThumbprints();
         }
 
         FS.FolderPath StatementRoot
             => Db.TableDir<AsmApiStatement>();
-
-        public void EmitThumbprints()
-        {
-            var counter = 0;
-            var distinct = new AsmStatementSummaries();
-
-            void receiver(AsmApiStatement src)
-            {
-                counter++;
-                distinct.Add(src.Summary());
-            }
-
-            LoadStatements(receiver);
-            EmitThumbprints(distinct);
-        }
-
-        public AsmThumprintCatalog LoadThumbprints()
-        {
-            var dst = root.list<Paired<AsmStatementExpr,AsmThumbprint>>();
-
-            var source = ThumbprintsPath();
-            var sigs = Wf.AsmSigs();
-            using var reader = source.Reader();
-            while(!reader.EndOfStream)
-            {
-                var data = reader.ReadLine();
-                var statement = asm.statement(data.LeftOfFirst(Chars.Semicolon));
-                if(sigs.ParseThumbprint(data, out var thumbprint))
-                    dst.Add(root.paired(statement,thumbprint));
-            }
-            return new AsmThumprintCatalog(dst.ToArray());
-        }
-
-        public void ShowThumprintCatalog()
-        {
-            var src = LoadThumbprints().Entries;
-            var count = src.Length;
-            using var log = ShowLog(FS.Extensions.Asm, "thumbprints");
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var entry = ref skip(src,i);
-                var output = string.Format("{0,-48} ; {1}", entry.Left, entry.Right);
-                log.Show(output);
-            }
-        }
-
-        public void EmitThumbprints(Index<AsmApiStatement> src)
-        {
-            var distinct = new AsmStatementSummaries();
-            root.iter(src, s => distinct.Add(s.Summary()));
-            var collected = distinct.Collected();
-            Wf.Status($"Collected {collected.Length} thumbprints from {src.Count} statements");
-            EmitThumbprints(distinct);
-        }
-
-        FS.FilePath ThumbprintsPath()
-            => Db.TableDir<AsmApiStatement>() + FS.file("thumbprints", FS.Extensions.Asm);
-
-        void EmitThumbprints(AsmStatementSummaries src)
-        {
-            var target = ThumbprintsPath();
-            var flow = Wf.EmittingFile(target);
-            using var writer = target.Writer();
-            var buffer = text.buffer();
-            AsmSyntax.render(src, buffer);
-            writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow,1);
-        }
-
-        public void LoadStatements(Action<AsmApiStatement> receiver)
-        {
-            var files = StatementRoot.EnumerateFiles(FS.Extensions.Csv, true).Array();
-            foreach(var file in files)
-            {
-                var flow = Wf.Running(Msg.ParsingFile.Format(file));
-                if(TextDocs.parse(file, out var doc))
-                {
-                    if(doc.Header.Labels.Length == FieldCount)
-                    {
-                        var count = doc.RowCount;
-                        var rows = doc.RowData.View;
-                        for(var i=0; i<count; i++)
-                        {
-                            ref readonly var row = ref skip(rows,i);
-                            if(Parse(row, out var statement))
-                                receiver(statement);
-                        }
-                        Wf.Ran(flow, Msg.ParsedFile.Format(file));
-                    }
-                    else
-                        Wf.Error($"Wrong field count of {doc.Header.Labels.Length}");
-
-                }
-                else
-                    Wf.Error($"Could not parse {file.ToUri()}");
-            }
-        }
-
-        Outcome Parse(TextRow src, out AsmApiStatement dst)
-        {
-            var count = src.CellCount;
-            var i=0;
-            var cells = src.Cells.View;
-            if(count == FieldCount)
-            {
-                Tables.parse(skip(cells, i++), out dst.BlockOffset);
-                dst.Expression = asm.statement(skip(cells,i++));
-                Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
-                dst.OpCode = asm.opcode(skip(cells, i++));
-                dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
-                Tables.parse(skip(cells, i), out dst.BaseAddress);
-                Tables.parse(skip(cells, i), out dst.IP);
-                Tables.parse(skip(cells, i), out dst.OpUri);
-                return true;
-            }
-            else
-            {
-                Wf.Error($"Wrong number of cells in row {src}");
-                dst = default;
-                return false;
-            }
-        }
 
         public Index<AsmApiStatement> BuildStatements(ApiCodeBlocks src)
         {
@@ -257,7 +139,7 @@ namespace Z0.Asm
                 counter++;
             }
 
-            EmitThumbprints(distinct);
+            Thumbprints.EmitThumbprints(distinct);
             tableWriter.Dispose();
             Wf.EmittedTable(tableFlow,counter);
 

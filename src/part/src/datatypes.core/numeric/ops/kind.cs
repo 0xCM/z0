@@ -13,6 +13,7 @@ namespace Z0
     using TC = System.TypeCode;
     using NI = NumericIndicator;
     using NW = NumericWidth;
+    using EK = ClrEnumKind;
 
     partial struct Numeric
     {
@@ -93,6 +94,21 @@ namespace Z0
 
             return NK.None;
         }
+
+        [Op]
+        public static NumericKind kind(ClrEnumKind src)
+            => src switch {
+                EK.I8 => NK.I8,
+                EK.U8 => NK.U8,
+                EK.I16 => NK.I16,
+                EK.U16 => NK.U16,
+                EK.I32 => NK.I32,
+                EK.U32 => NK.U32,
+                EK.I64 => NK.I64,
+                EK.U64 => NK.U64,
+                _ => NK.None
+            };
+
 
         /// <summary>
         /// Computes the numeric kind determined by a bit-width and numeric indicator

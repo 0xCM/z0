@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,7 @@ namespace Z0.Generate
 
     using static Konst;
 
-    public class HexMachineGen : CodeGenerator
+    public class HexMachineGenerator : CodeGenerator
     {
         byte MinHandler;
 

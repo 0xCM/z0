@@ -2,15 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
-    using static Konst;
+    using static Part;
+    using static Chars;
 
     public class BinaryKindGenerator : CodeGenerator
     {
@@ -23,7 +23,6 @@ namespace Z0.Generate
             MaxBitCount = effwidth(MaxValue);
             Formatter = BitFormatter.create<byte>(BitFormatter.limited(MaxBitCount, MaxBitCount));
         }
-
 
         BitFormatter<byte> Formatter {get;}
             = BitFormatter.create<byte>();
@@ -71,9 +70,9 @@ namespace Z0.Generate
         {
             var dst = text.build();
             dst.Append(FileHeader);
-            line(l0("namespace", Space, Namespace), dst);
+            line(l0("namespace", Chars.Space, Namespace), dst);
             line(l0(LBrace), dst);
-            line(concat(Level1,Access, Space, spaced(TypeKind, TypeName, Chars.Colon, BaseType)), dst);
+            line(concat(Level1,Access, Chars.Space, spaced(TypeKind, TypeName, Colon, BaseType)), dst);
             line(l1(LBrace), dst);
             lines(Literals(), dst);
             line(l1(RBrace), dst);
@@ -86,7 +85,7 @@ namespace Z0.Generate
         {
             for(var i=0; i<=MaxValue; i++)
             {
-                yield return l2(Literal(LiteralName((byte)i), LiteralValue((byte)i)), Chars.Comma);
+                yield return l2(Literal(LiteralName((byte)i), LiteralValue((byte)i)), Comma);
                 yield return EmptyString;
             }
         }

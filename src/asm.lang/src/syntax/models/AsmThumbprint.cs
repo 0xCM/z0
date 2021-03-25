@@ -40,11 +40,16 @@ namespace Z0.Asm
         public bool Equals(AsmThumbprint src)
             => api.eq(this, src);
 
+        public override int GetHashCode()
+            => Format().GetHashCode();
         public string Format()
-            => AsmSyntax.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
+
+        public AsmThumbprintExpr ToExpression()
+            => new AsmThumbprintExpr(Format());
 
         public static AsmThumbprint Empty
         {

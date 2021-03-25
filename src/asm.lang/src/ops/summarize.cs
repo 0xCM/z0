@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmStatementSummary summary(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprintExpr thumbprint)
-            => new AsmStatementSummary(@base, offset, expr, thumbprint);
+        public static AsmStatementSummary summary(MemoryAddress @base, Address16 offset, AsmStatementExpr expr, AsmThumbprint thumbprint)
+            => new AsmStatementSummary(@base, offset, expr, thumbprint.ToExpression());
     }
 }

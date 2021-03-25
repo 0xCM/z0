@@ -97,7 +97,6 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmStatement<A,B>(0, default, default);
         }
-
     }
 
     public readonly struct AsmStatement<A,B,C> : IAsmStatement<A,B,C>

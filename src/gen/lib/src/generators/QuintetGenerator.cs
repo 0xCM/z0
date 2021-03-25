@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0
 {
-    public class TriadGenerator : BitSetGenerator
+    public class QuintetGenerator : BitSetGenerator
     {
-        public static BitSetGenerator Service => new TriadGenerator();
+        public static BitSetGenerator Service => new QuintetGenerator();
 
-        public override byte Digits => 3;
+        public override byte Digits => 5;
 
-        public override byte MaxValue => 7;
+        public override byte MaxValue => 31;
     }
 }

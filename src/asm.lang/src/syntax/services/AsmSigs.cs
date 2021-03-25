@@ -83,52 +83,6 @@ namespace Z0.Asm
             ShowSymbols(CompositeTokens(), composites);
         }
 
-        public Outcome ParseThumbprint(string src, out AsmThumbprint thumbprint)
-        {
-            thumbprint = AsmThumbprint.Empty;
-
-            var a = src.LeftOfFirst(Semicolon);
-            var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
-            AsmStatementExpr statement = a.RightOfFirst(Semicolon);
-
-            var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
-            if(parts.Length == 2)
-            {
-                var lhs = parts[0];
-                var rhs = parts[1];
-                if(unfence(lhs, SigFence, out var sigexpr))
-                {
-                    if(ParseSigExpr(sigexpr, out var sig))
-                    {
-                        if(!ParseMnemonicCode(sig.Mnemonic, out var monic))
-                            Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
-
-                        if(unfence(lhs, OpCodeFence, out var opcode))
-                        {
-                            if(AsmBytes.hexcode(rhs, out var encoded))
-                            {
-                                thumbprint = new AsmThumbprint(sig, asm.opcode(opcode), encoded);
-                                return true;
-                            }
-                            else
-                                Wf.Error($"Could not parse the encoded bytes");
-                        }
-                        else
-                            Wf.Error($"Could not located the opcode fence ${OpCodeFence}");
-
-                    }
-                    else
-                        Wf.Error($"Could not parse sig expression from ${sigexpr}");
-                }
-                else
-                    Wf.Error($"Could not locate the signature fence {SigFence}");
-            }
-            else
-                Wf.Error($"Could not dichotomize {src} ");
-
-            return false;
-        }
-
         [Op]
         public bool ParseMnemonicCode(AsmMnemonic src, out AsmMnemonicCode dst)
         {
@@ -182,13 +136,6 @@ namespace Z0.Asm
             else
                 return (false,FenceNotFound.Format(SigFence,src));
         }
-
-        static MsgPattern<Fence<char>,string> FenceNotFound => "The signature fence {0} for the source expression {1} is not present";
-
-        static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
-
-        static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
-
 
         public Outcome ParseOpCodeExpr(string src,  out AsmOpCodeExpr dst)
         {
@@ -341,7 +288,7 @@ namespace Z0.Asm
             return false;
         }
 
-        bool MnemonicText(string sig, out string dst)
+        static bool MnemonicText(string sig, out string dst)
         {
             if(text.empty(sig))
             {
@@ -399,5 +346,11 @@ namespace Z0.Asm
         static Fence<char> OpCodeFence => (Lt, Gt);
 
         static Fence<char> SizeFence => (LBracket, RBracket);
+
+        static MsgPattern<Fence<char>,string> FenceNotFound => "The signature fence {0} for the source expression {1} is not present";
+
+        static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
+
+        static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
     }
 }

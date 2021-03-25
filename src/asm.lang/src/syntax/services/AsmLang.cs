@@ -2,14 +2,18 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0.Asm
 {
-    public class QuintetGenerator : BitSetGenerator
+    using Z0.Lang;
+
+    using static Part;
+
+    [ApiHost]
+    public readonly struct AsmLang : ILanguage<AsmLang>
     {
-        public static BitSetGenerator Service => new QuintetGenerator();
+        const Z0.NumericKind Closure = UnsignedInts;
 
-        public override byte Digits => 5;
+        public Name Id => "asm";
 
-        public override byte MaxValue => 31;
     }
 }

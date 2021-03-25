@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0
 {
     public class DuetGenerator : BitSetGenerator
     {

@@ -11,7 +11,6 @@ namespace Z0
 
     using static Part;
 
-
     partial class XText
     {
         [MethodImpl(Inline)]

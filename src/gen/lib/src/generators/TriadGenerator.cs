@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
-    [ApiHost]
-    public readonly partial struct ProjectModel
+    public class TriadGenerator : BitSetGenerator
     {
+        public static BitSetGenerator Service => new TriadGenerator();
 
+        public override byte Digits => 3;
+
+        public override byte MaxValue => 7;
     }
 }

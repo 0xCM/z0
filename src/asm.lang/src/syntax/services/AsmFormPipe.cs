@@ -11,18 +11,6 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    [Record(TableId)]
-    public struct AsmFormHash : IRecord<AsmFormHash>
-    {
-        public const string TableId = "asm.forms.hashed";
-
-        public Hex32 HashCode;
-
-        public uint IndexKey;
-
-        public AsmFormExpr Form;
-    }
-
     public class AsmFormPipe : RecordPipe<AsmFormPipe,AsmFormRecord>
     {
         public AsmFormPipe()
@@ -213,10 +201,5 @@ namespace Z0.Asm
             Sigs.ParseFormExpr(src[i++], out dst.FormExpr);
             return ref dst;
         }
-
-        // public bool ParseExpr(string src, out AsmFormExpr dst)
-        // {
-        //     var parts = src.SplitClean()
-        // }
     }
 }

@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // Copyright   :  Microsoft
 // License     :  MIT
-// Source      : Adapted from the tools CLI repo; 
+// Source      : Adapted from the tools CLI repo;
 //             : see https://github.com/dotnet/core-setup/blob/master/src/corehost/cli/fxr/fx_ver.cpp
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -9,8 +9,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
 
     [ApiHost]
     public readonly struct BuildVersions
@@ -135,7 +134,7 @@ namespace Z0
             }
             return true;
         }
-    
+
 
         [MethodImpl(Inline), Op]
         public static bool ValidIdentifier(string id, bool buildMeta)

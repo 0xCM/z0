@@ -21,15 +21,17 @@ namespace Z0
             {
                 var dst = build();
                 var count = src.Length;
+                var last = count - 1;
                 for(var i=0; i<count; i++)
                 {
-                    if(i != 0)
+                    dst.Append(skip(src,i));
+
+                    if(i != last)
                     {
                         dst.Append(delimiter);
                         dst.Append(Chars.Space);
                     }
 
-                    dst.Append(skip(src,i));
                 }
                 return dst.ToString();
             }
@@ -39,10 +41,11 @@ namespace Z0
                 var dst = text.buffer();
                 var count = src.Length;
                 var slot = RP.pad(pad);
+                var last = count - 1;
                 for(var i=0; i<count; i++)
                 {
                     dst.AppendFormat(slot, skip(src,i));
-                    if(i != 0)
+                    if(i != last)
                     {
                         dst.Append(delimiter);
                         dst.Append(Chars.Space);

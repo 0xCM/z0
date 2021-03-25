@@ -2,12 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Generate
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
 
-    using static Konst;
 
     public abstract class BitSetGenerator : CodeGenerator
     {

@@ -36,8 +36,8 @@ namespace Z0.Asm
         public int CompareTo(AsmApiStatement src)
             => IP.CompareTo(src.IP);
 
-        public AsmThumbprintExpr Thumbprint()
-            => AsmThumbprints.expression(Sig, OpCode, Encoded);
+        public AsmThumbprint Thumbprint()
+            => AsmThumbprints.define(Sig, OpCode, Encoded);
 
         public AsmStatementSummary Summary()
             => asm.summary(BaseAddress, BlockOffset, Expression, Thumbprint());

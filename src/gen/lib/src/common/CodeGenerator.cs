@@ -77,13 +77,13 @@ namespace Z0
         public static string l0(params object[] src)
             => text.concat(src);
 
-        public static  string l1(params object[] src)
+        public static string l1(params object[] src)
             => Level1 + text.concat(src);
 
-        public static  string l2(params object[] src)
+        public static string l2(params object[] src)
             => Level2 + text.concat(src);
 
-        public static  string l3(params object[] src)
+        public static string l3(params object[] src)
             => Level3 + text.concat(src);
 
         public static string usingNs(int n, string ns)
@@ -204,5 +204,10 @@ namespace Z0
             dst.WriteLine(level(l, definition));
             dst.WriteLine();
         }
+    }
+
+    public abstract class CodeGenerator<C> : CodeGenerator
+    {
+        public abstract void Generate(in C config, ITextBuffer dst);
     }
 }
