@@ -55,6 +55,12 @@ namespace Z0
             get => _Details.View;
         }
 
+        public SymbolTable<E> Symbols
+        {
+            [MethodImpl(Inline)]
+            get => _Symbols;
+        }
+
         public EnumDetailProvider<E> DetailProvider
         {
             [MethodImpl(Inline)]
@@ -91,5 +97,8 @@ namespace Z0
 
         [FixedAddressValueType]
         static Index<ClrEnumField<E>> _Fields = Provider.EnumFields;
+
+        [FixedAddressValueType]
+        static SymbolTable<E> _Symbols = SymbolStores.table<E>();
     }
 }

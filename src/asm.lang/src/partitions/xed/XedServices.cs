@@ -5,37 +5,20 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Linq;
 
     using static Part;
     using static memory;
+    using static XedModels;
 
-    public sealed class XedInstructionPipe : WfService<XedInstructionPipe>
+    public sealed class XedServices : WfService<XedServices>
     {
-        public struct SourceRecord
-        {
-            public const byte FieldCount = 6;
-
-            public string Class;
-
-            public string Extension;
-
-            public string Category;
-
-            public string Form;
-
-            public string IsaSet;
-
-            public string Attributes;
-        }
-
         const char CommentMarker = Chars.Hash;
 
         const char FieldDelimiter = Chars.Space;
 
-        public Index<XedForm> LoadXedForms()
+        public Index<XedForm> LoadForms()
         {
-            var records = LoadSourceRecords().View;
+            var records = LoadFormSources().View;
             var count = records.Length;
             var buffer = alloc<XedForm>(count);
             var dst = span(buffer);
@@ -47,15 +30,15 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public Index<SourceRecord> LoadSourceRecords()
+        public Index<XedFormSource> LoadFormSources()
         {
             var src = Db.DataSource(FS.file("xed-idata", FS.Extensions.Txt));
             var flow = Wf.Running($"Importing {src.ToUri()}");
             using var reader = src.Reader();
             var counter = 0u;
-            var header = memory.alloc<string>(SourceRecord.FieldCount);
+            var header = memory.alloc<string>(XedFormSource.FieldCount);
             var succeeded = true;
-            var records = root.list<SourceRecord>();
+            var records = root.list<XedFormSource>();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadTextLine(counter);
@@ -74,7 +57,7 @@ namespace Z0.Asm
                 }
                 else
                 {
-                   var dst = new SourceRecord();
+                   var dst = new XedFormSource();
                    var outcome = ParseSource(line, out dst);
                    if(outcome)
                    {
@@ -97,13 +80,13 @@ namespace Z0.Asm
             return records.ToArray();
         }
 
-        static Outcome ParseSource(TextLine src, out SourceRecord dst)
+        static Outcome ParseSource(TextLine src, out XedFormSource dst)
         {
             dst = default;
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != SourceRecord.FieldCount)
-                return(false, $"Line splits into {count} parts, not {SourceRecord.FieldCount} as required");
+            if(count != XedFormSource.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
             var i = 0;
             dst.Class = skip(parts,i++);
             dst.Extension = skip(parts,i++);
@@ -118,8 +101,8 @@ namespace Z0.Asm
         {
             var parts = @readonly(src.Split(FieldDelimiter));
             var count = parts.Length;
-            if(count != SourceRecord.FieldCount)
-                return(false, $"Line splits into {count} parts, not {SourceRecord.FieldCount} as required");
+            if(count != XedFormSource.FieldCount)
+                return(false, $"Line splits into {count} parts, not {XedFormSource.FieldCount} as required");
 
             for(var i=0; i<count; i++)
                 seek(dst,i) = skip(parts,i);

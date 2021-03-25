@@ -58,7 +58,9 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         public static SymbolStore<E> create<E>()
             where E : unmanaged, Enum
-                => create<E>(ClrEnums.literals<E>());
+        {
+            return create<E>(ClrEnums.literals<E>());
+        }
 
         /// <summary>
         /// Creates a symbol store predicated on enumeration literals

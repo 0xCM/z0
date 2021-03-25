@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Reflection;
-    using System.Diagnostics;
     using System.Linq;
     using System.Collections.Generic;
     using System.IO;
@@ -872,8 +871,8 @@ namespace Z0.Asm
 
         void ShowXedInstructions()
         {
-            var pipe = Wf.XedPipe();
-            var records = pipe.LoadSourceRecords().View;
+            var pipe = Wf.Xed();
+            var records = pipe.LoadFormSources().View;
             var count = records.Length;
             if(count !=0 )
             {
@@ -890,16 +889,25 @@ namespace Z0.Asm
 
         void ShowXedForms()
         {
-            var pipe = Wf.XedPipe();
-            var forms = pipe.LoadXedForms();
+            var pipe = Wf.Xed();
+            var forms = pipe.LoadForms();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
             root.iter(forms, form => log.Show(form));
 
         }
 
+        public void ShowXedSymbols()
+        {
+            using var log = ShowLog("xed-symbols", FS.Extensions.Log);
+            root.iter(Symbols.symbols<XedModels.CpuidBit>(w8), symbol => log.Show(symbol));
+            root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => log.Show(symbol));
+        }
+
         public void Run()
         {
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
+
+            ShowXedSymbols();
 
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();

@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     public readonly struct SymbolSet<S> : ISymbolSet<SymbolSet<S>,S>
-        where S : unmanaged, ISymbol
+        where S : unmanaged
     {
         public Index<S> Symbols {get;}
 

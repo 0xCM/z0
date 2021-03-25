@@ -12,17 +12,16 @@ namespace Z0
 
     using R = System.Reflection;
 
-    public readonly struct ClrEnumField<T> : IClrRuntimeMember<ClrEnumField<T>,FieldInfo>
-        where T : unmanaged, Enum
+    public readonly struct ClrEnumField : IClrRuntimeMember<ClrEnumField,FieldInfo>
     {
         public uint Index {get;}
 
         public FieldInfo Definition {get;}
 
-        public T Value {get;}
+        public ulong Value {get;}
 
         [MethodImpl(Inline)]
-        public ClrEnumField(uint index, FieldInfo src, T value)
+        public ClrEnumField(uint index, FieldInfo src, ulong value)
         {
             Index = index;
             Definition = src;
@@ -92,19 +91,15 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrEnumField<T> a, ClrEnumField<T> b)
+        public static bool operator ==(ClrEnumField a, ClrEnumField b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrEnumField<T> a, ClrEnumField<T> b)
+        public static bool operator !=(ClrEnumField a, ClrEnumField b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldInfo(ClrEnumField<T> src)
+        public static implicit operator FieldInfo(ClrEnumField src)
             => src.Definition;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrEnumField(ClrEnumField<T> src)
-            => new ClrEnumField(src.Index, src.Definition, memory.bw64(src.Value));
     }
 }

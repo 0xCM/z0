@@ -31,8 +31,14 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref _Tokens[i];
-                _Entries[i] = new SymbolEntry<T>(i, token.SymbolName.SymbolText, token.Kind);
+                _Entries[i] = new SymbolEntry<T>(i, token.Identifier, token.Kind, token.SymbolName.SymbolText);
             }
+        }
+
+        public ref readonly SymbolEntry<T> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref _Entries[index];
         }
 
         [MethodImpl(Inline)]

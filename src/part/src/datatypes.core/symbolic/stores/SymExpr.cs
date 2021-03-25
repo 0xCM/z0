@@ -9,20 +9,23 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct SymbolKey
+    public readonly struct SymExpr : ITextual
     {
-        public ulong Value {get;}
+        readonly string Content;
 
         [MethodImpl(Inline)]
-        public SymbolKey(ulong value)
-            => Value = value;
+        public SymExpr(string content)
+            => Content = content ?? EmptyString;
 
         [MethodImpl(Inline)]
-        public bool Equals(SymbolKey<ulong> src)
-            => Value == src.Value;
+        public string Format()
+            => Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator SymbolKey(ulong value)
-            => new SymbolKey(value);
+        public override string ToString()
+            => Format();
+
+        public static implicit operator SymExpr(string src)
+            => new SymExpr(src);
     }
 }

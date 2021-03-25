@@ -13,7 +13,7 @@ namespace Z0
     /// Specifies symbol characteristics
     /// </summary>
     public readonly struct SymbolSet<S,W> : ISymbolSet<S>
-        where S : unmanaged, ISymbol
+        where S : unmanaged
         where W : unmanaged, IDataWidth
     {
         /// <summary>

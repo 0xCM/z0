@@ -14,7 +14,7 @@ namespace Z0
     /// Defines a set of S-symbol values, each of bit-width N and covered by a T-storage cell
     /// </summary>
     public readonly struct SymbolSet<S,T,W> : ISymbolSet<S>
-        where S : unmanaged, ISymbol
+        where S : unmanaged
         where T : unmanaged
         where W : unmanaged, IDataWidth
     {

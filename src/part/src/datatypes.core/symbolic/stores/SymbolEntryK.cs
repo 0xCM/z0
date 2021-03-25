@@ -14,28 +14,32 @@ namespace Z0
     {
         public uint Index {get;}
 
-        public string Name {get;}
+        public Identifier Name {get;}
 
-        public K Kind {get;}
+        public K Value {get;}
+
+        public string Symbol {get;}
 
         [MethodImpl(Inline)]
-        internal SymbolEntry(uint index, SymbolicLiteral<K> value)
+        internal SymbolEntry(uint index, SymbolicLiteral<K> literal)
         {
             Index = index;
-            Kind = value.DirectValue;
-            Name = value.Name;
+            Value = literal.DirectValue;
+            Name = literal.Name;
+            Symbol = literal.Symbol;
         }
 
         [MethodImpl(Inline)]
-        internal SymbolEntry(uint index, string name, K kind)
+        internal SymbolEntry(uint index, string name, K value, string symbol)
         {
             Index = index;
             Name = name;
-            Kind = kind;
+            Value = value;
+            Symbol = symbol;
         }
 
         public string Format()
-            => string.Format("{0}:{1}", Name, Kind);
+            => string.Format("{0}:{1}", Name, Value);
 
         public override string ToString()
             => Format();

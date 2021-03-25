@@ -93,7 +93,7 @@ namespace Z0
             var buffer = alloc<ClrEnumField<E>>(_FieldCount);
             ref var dst = ref first(buffer);
             for(var i=0u; i<_FieldCount; i++)
-                seek(dst,i) = new ClrEnumField<E>(i, skip(defs,i),  skip(values,i));
+                seek(dst,i) = ClrEnums.field(i, skip(defs,i),  skip(values,i));
             return buffer;
         }
 

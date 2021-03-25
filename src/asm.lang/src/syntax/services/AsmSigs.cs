@@ -67,7 +67,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var symbol = ref skip(symbols,i);
-                dst.Show(string.Format("{0,-18} | {1,-12} | {2}", sort, symbol.Name, symbol.Kind));
+                dst.Show(string.Format("{0,-18} | {1,-12} | {2}", sort, symbol.Name, symbol.Value));
             }
         }
 
