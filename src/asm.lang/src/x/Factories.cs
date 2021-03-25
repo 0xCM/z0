@@ -32,5 +32,9 @@ namespace Z0
 
         public static AsmFormPipe AsmFormPipe(this IWfShell wf)
             => Z0.Asm.AsmFormPipe.create(wf);
+
+        public static XedInstructionPipe XedPipe(this IWfShell wf)
+            => Z0.Asm.XedInstructionPipe.create(wf);
+
     }
 }

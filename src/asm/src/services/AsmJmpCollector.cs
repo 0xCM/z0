@@ -10,65 +10,82 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    using K = JmpKind;
+
     public sealed class AsmJmpCollector : WfService<AsmJmpCollector>
     {
         [MethodImpl(Inline), Op]
-        static JccKind jccKind(IceMnemonic src)
-            => classify(src, out JccKind _);
+        static K jmpKind(IceMnemonic src)
+            => classify(src, out K _);
 
         [Op]
-        static ref JccKind classify(IceMnemonic src, out JccKind kind)
+        static ref K classify(IceMnemonic src, out K kind)
         {
-            kind = JccKind.None;
+            kind = K.None;
             switch(src)
             {
+                case IceMnemonic.Jmp:
+                    kind = K.JMP;
+                    break;
+
                 case IceMnemonic.Ja:
-                    kind = JccKind.JA;
+                    kind = K.JA;
                     break;
                 case IceMnemonic.Jae:
-                    kind = JccKind.JAE;
+                    kind = K.JAE;
                     break;
+
                 case IceMnemonic.Jb:
-                    kind = JccKind.JB;
+                    kind = K.JB;
                     break;
                 case IceMnemonic.Jbe:
-                    kind = JccKind.JE;
+                    kind = K.JBE;
                     break;
+
                 case IceMnemonic.Jcxz:
-                    kind = JccKind.JCXZ;
+                    kind = K.JCXZ;
                     break;
+
                 case IceMnemonic.Je:
-                    kind = JccKind.JE;
-                    break;
-                case IceMnemonic.Jg:
-                    kind = JccKind.JG;
-                    break;
-                case IceMnemonic.Jge:
-                    kind = JccKind.JGE;
-                    break;
-                case IceMnemonic.Jl:
-                    kind = JccKind.JL;
-                    break;
-                case IceMnemonic.Jle:
-                    kind = JccKind.JLE;
+                    kind = K.JE;
                     break;
                 case IceMnemonic.Jne:
-                    kind = JccKind.JNE;
+                    kind = K.JNE;
+                    break;
+
+                case IceMnemonic.Jg:
+                    kind = K.JG;
+                    break;
+                case IceMnemonic.Jge:
+                    kind = K.JGE;
+                    break;
+
+                case IceMnemonic.Jl:
+                    kind = K.JL;
+                    break;
+                case IceMnemonic.Jle:
+                    kind = K.JLE;
+                    break;
+
+                case IceMnemonic.Jo:
+                    kind = K.JO;
                     break;
                 case IceMnemonic.Jno:
-                    kind = JccKind.JNO;
+                    kind = K.JNO;
+                    break;
+
+                case IceMnemonic.Jp:
+                    kind= K.JP;
                     break;
                 case IceMnemonic.Jnp:
-                    kind = JccKind.JNP;
+                    kind = K.JNP;
+                    break;
+
+                case IceMnemonic.Js:
+                    kind= K.JS;
                     break;
                 case IceMnemonic.Jns:
-                    kind = JccKind.JNS;
-                    break;
-                case IceMnemonic.Jo:
-                    kind = JccKind.JO;
-                    break;
-                case IceMnemonic.Jp:
-                    kind= JccKind.JP;
+                    kind = K.JNS;
                     break;
                 default:
                 break;
@@ -99,12 +116,11 @@ namespace Z0.Asm
                         {
                             case IceFlowControl.ConditionalBranch:
                             case IceFlowControl.IndirectBranch:
-                                var kind = jccKind(fx.Mnemonic);
+                            case IceFlowControl.UnconditionalBranch:
+                                var kind = jmpKind(fx.Mnemonic);
                                 IceExtractors.jmprow(fx, kind, out var dst);
                                 collection.Add(dst);
                             break;
-                            case IceFlowControl.UnconditionalBranch:
-                                break;
                         }
                     }
                 }

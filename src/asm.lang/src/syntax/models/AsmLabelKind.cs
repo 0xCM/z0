@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmDocPart : ITextual
+    public enum AsmLabelKind : byte
     {
+        None = 0,
 
-    }
+        Offset = 1,
 
-    public interface IAsmDocPart<T> : IAsmDocPart
-        where T : IAsmDocPart<T>
-    {
-
+        Block = 2
     }
 }

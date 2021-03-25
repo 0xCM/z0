@@ -51,7 +51,7 @@ namespace Z0.Asm
             => (int)alg.hash.combine(OpCode.GetHashCode(), Sig.GetHashCode());
 
         public string Format()
-            => AsmSyntax.format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();

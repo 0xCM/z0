@@ -4,17 +4,29 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-
+    using static Part;
     using static Chars;
 
     [ApiHost]
     public class AsmRender : WfService<AsmRender>
     {
         [Op]
+        public static string format(in AsmOffsetLabel src)
+            => src.Width switch{
+                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
+                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
+                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
+                DataWidth.W64 => src.Offset.FormatAsmHex(),
+                _ => EmptyString
+            };
+
+        [Op]
         public static string format(in AsmCallSite src)
             => string.Format("{0}:{1}", src.Caller, src.InstructionOffset);
 
+        [Op]
+        public static string format(AsmFormExpr src)
+            => string.Format("({0})<{1}>", src.Sig, src.OpCode);
         [Op]
         public static string format(in AsmCaller src)
             => string.Format("{0} {1}", src.Base, src.Identity);

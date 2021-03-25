@@ -33,6 +33,20 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
+        public Index<XedForm> LoadXedForms()
+        {
+            var records = LoadSourceRecords().View;
+            var count = records.Length;
+            var buffer = alloc<XedForm>(count);
+            var dst = span(buffer);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                seek(dst,i) = new XedForm(record.Form, new AsmMnemonic(record.Class), 0, 0);
+            }
+            return buffer;
+        }
+
         public Index<SourceRecord> LoadSourceRecords()
         {
             var src = Db.DataSource(FS.file("xed-idata", FS.Extensions.Txt));

@@ -9,25 +9,17 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmComment
+    public readonly struct AsmLabel : IAsmLabel
     {
         public TextBlock Content {get;}
 
-        [MethodImpl(Inline)]
-        public AsmComment(TextBlock text)
-            => Content = text;
+        public AsmLabelKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Content.IsNonEmpty ? string.Format("; {0}",Content) : EmptyString;
-
-        public override string ToString()
-            => Format();
-
-        public bool IsNonEmpty
+        public AsmLabel(TextBlock content, AsmLabelKind kind)
         {
-            [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            Content = content;
+            Kind = kind;
         }
 
         public bool IsEmpty
@@ -36,10 +28,17 @@ namespace Z0.Asm
             get => Content.IsEmpty;
         }
 
-        public static AsmComment Empty
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => new AsmComment(TextBlock.Empty);
+            get => Content.IsNonEmpty;
         }
+
+        public string Format()
+            => Content.Format();
+
+        public override string ToString()
+            => Format();
+
     }
 }

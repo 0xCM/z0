@@ -102,9 +102,6 @@ namespace Z0.Asm
         /// <summary> Jump if Parity Even; PF=1 </summary>
         JPE = JCC*28 | JCC,
 
-        /// <summary> Jump if Parity Odd; PF=0 </summary>
-        JPO = JCC*29 | JCC,
-
         /// <summary> Jump if Signed (signed); SF=1 </summary>
         JS = JCC*30 | JCC,
 

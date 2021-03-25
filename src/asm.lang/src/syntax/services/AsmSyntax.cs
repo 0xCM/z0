@@ -8,8 +8,7 @@ namespace Z0.Asm
 
     public sealed class AsmSyntax : WfService<AsmSyntax>
     {
-        [Op]
-        public static string format(AsmFormExpr src)
-            => string.Format("({0})<{1}>", src.Sig, src.OpCode);
+
+
     }
 }

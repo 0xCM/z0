@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct IceExtractors
     {
         [Op]
-        public static ref AsmJmpRow jmprow(in ApiInstruction src, JccKind jk, out AsmJmpRow dst)
+        public static ref AsmJmpRow jmprow(in ApiInstruction src, JmpKind jk, out AsmJmpRow dst)
         {
             dst.Kind = jk;
             dst.Base = src.BaseAddress;

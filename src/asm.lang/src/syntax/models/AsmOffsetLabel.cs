@@ -9,55 +9,42 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmLineLabel : IAsmDocPart<AsmLineLabel>
+    public readonly struct AsmOffsetLabel : IAsmOffsetLabel
     {
-        [Op]
-        public static string format(in AsmLineLabel src)
-            => src.Width switch{
-                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
-                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
-                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
-                DataWidth.W64 => src.Offset.FormatAsmHex(),
-                _ => EmptyString
-            };
-
         public ulong Offset {get;}
 
         public DataWidth Width {get;}
 
-        public AsmDocPartKind Kind
-            => AsmDocPartKind.LineLabel;
-
         [MethodImpl(Inline)]
-        internal AsmLineLabel(byte offset)
+        internal AsmOffsetLabel(byte offset)
         {
             Offset = offset;
             Width = DataWidth.W8;
         }
 
         [MethodImpl(Inline)]
-        internal AsmLineLabel(ushort offset)
+        internal AsmOffsetLabel(ushort offset)
         {
             Offset = offset;
             Width = DataWidth.W16;
         }
 
         [MethodImpl(Inline)]
-        internal AsmLineLabel(uint offset)
+        internal AsmOffsetLabel(uint offset)
         {
             Offset = offset;
             Width = DataWidth.W32;
         }
 
         [MethodImpl(Inline)]
-        internal AsmLineLabel(ulong offset)
+        internal AsmOffsetLabel(ulong offset)
         {
             Offset = offset;
             Width = DataWidth.W64;
         }
 
         [MethodImpl(Inline)]
-        AsmLineLabel(ulong offset, DataWidth width)
+        AsmOffsetLabel(ulong offset, DataWidth width)
         {
             Offset = offset;
             Width = width;
@@ -76,15 +63,15 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => format(this);
+            => AsmRender.format(this);
 
         public override string ToString()
             => Format();
 
-        public static AsmLineLabel Empty
+        public static AsmOffsetLabel Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmLineLabel(0, DataWidth.None);
+            get => new AsmOffsetLabel(0, DataWidth.None);
         }
     }
 }

@@ -12,19 +12,19 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmLineLabel label(W8 w, ulong offset)
-            => new AsmLineLabel((byte)offset);
+        public static AsmOffsetLabel label(W8 w, ulong offset)
+            => new AsmOffsetLabel((byte)offset);
 
         [MethodImpl(Inline), Op]
-        public static AsmLineLabel label(W16 w, ulong offset)
-            => new AsmLineLabel((ushort)offset);
+        public static AsmOffsetLabel label(W16 w, ulong offset)
+            => new AsmOffsetLabel((ushort)offset);
 
         [MethodImpl(Inline), Op]
-        public static AsmLineLabel label(W32 w, ulong offset)
-            => new AsmLineLabel((uint)offset);
+        public static AsmOffsetLabel label(W32 w, ulong offset)
+            => new AsmOffsetLabel((uint)offset);
 
         [MethodImpl(Inline), Op]
-        public static AsmLineLabel label(W64 w, ulong offset)
-            => new AsmLineLabel(offset);
+        public static AsmOffsetLabel label(W64 w, ulong offset)
+            => new AsmOffsetLabel(offset);
     }
 }

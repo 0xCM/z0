@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public MemoryAddress Target;
 
-        public JccKind Kind;
+        public JmpKind Kind;
 
         public string Asm;
     }

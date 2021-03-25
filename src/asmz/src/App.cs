@@ -872,7 +872,7 @@ namespace Z0.Asm
 
         void ShowXedInstructions()
         {
-            var pipe = XedInstructionPipe.create(Wf);
+            var pipe = Wf.XedPipe();
             var records = pipe.LoadSourceRecords().View;
             var count = records.Length;
             if(count !=0 )
@@ -888,13 +888,21 @@ namespace Z0.Asm
             }
         }
 
+        void ShowXedForms()
+        {
+            var pipe = Wf.XedPipe();
+            var forms = pipe.LoadXedForms();
+            using var log = ShowLog("xed-forms", FS.Extensions.Csv);
+            root.iter(forms, form => log.Show(form));
+
+        }
+
         public void Run()
         {
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();
-            ShowXedInstructions();
 
             //Sigs.ShowSymbols();
             //PipeImageData();
