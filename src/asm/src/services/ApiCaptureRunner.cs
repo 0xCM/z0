@@ -11,7 +11,7 @@ namespace Z0
 
     public class ApiCaptureRunner : WfService<ApiCaptureRunner>
     {
-        const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.EmitDump | CaptureWorkflowOptions.RebaseMembers | CaptureWorkflowOptions.EmitImm;
+        const CaptureWorkflowOptions DefaultOptions = CaptureWorkflowOptions.CaptureContext | CaptureWorkflowOptions.EmitImm;
 
         public Index<AsmMemberRoutine> Run()
         {
@@ -23,25 +23,18 @@ namespace Z0
             using var flow = Wf.Running();
             Wf.Status(Seq.enclose(parts.Storage));
             var captured = CaptureParts(parts);
-            var emitImm = (options & CaptureWorkflowOptions.EmitImm) != 0;
-            if(emitImm)
+
+            if((options & CaptureWorkflowOptions.EmitImm) != 0)
                 EmitImm(parts);
 
-            // var rebase = (options & CaptureWorkflowOptions.RebaseMembers) != 0;
-            // if(rebase)
-            //     RebaseMembers();
-
-            var dump = (options & CaptureWorkflowOptions.EmitDump) != 0;
-            if(dump)
-                EmitDump();
+            if((options & CaptureWorkflowOptions.CaptureContext) != 0)
+                EmitContext();
 
             return captured;
         }
 
         public Index<AsmMemberRoutine> Run(PartId part, CaptureWorkflowOptions? options = null)
-        {
-            return Run(root.array(part), CaptureWorkflowOptions.EmitImm);
-        }
+            => Run(root.array(part), CaptureWorkflowOptions.EmitImm);
 
         Index<AsmMemberRoutine> CaptureParts(Index<PartId> parts)
         {
@@ -59,25 +52,19 @@ namespace Z0
             Wf.Ran(flow);
         }
 
-
-        void EmitRebase(Timestamp ts)
+        BasedApiMemberCatalog EmitRebase(Timestamp ts)
         {
             var rebasing = Wf.Running();
             var catalog = Wf.ApiServices().RebaseMembers(ts);
             Wf.Ran(rebasing);
+            return catalog;
         }
 
-        void EmitMaps(Timestamp ts)
-        {
-            ImageMaps.emit(Wf, ts);
-        }
+        Index<ProcessImageRow> EmitMaps(Timestamp ts)
+            => ImageMaps.emit(Wf, ts);
 
-
-        void EmitDump()
+        void EmitDump(Timestamp ts)
         {
-            var ts = root.timestamp();
-            EmitRebase(ts);
-            EmitMaps(ts);
             var process = Runtime.CurrentProcess;
             var name = process.ProcessName;
             var dst = Db.ProcDumpPath(name).EnsureParentExists();
@@ -85,6 +72,14 @@ namespace Z0
             var flow = Wf.EmittingFile(dst);
             DumpEmitter.emit(process, dst.Name, DumpTypeOption.Full);
             Wf.EmittedFile(flow,1);
+        }
+
+        void EmitContext()
+        {
+            var ts = root.timestamp();
+            EmitRebase(ts);
+            EmitMaps(ts);
+            EmitDump(ts);
         }
     }
 }

@@ -13,8 +13,7 @@ namespace Z0
 
         EmitImm = 1,
 
-        RebaseMembers = 2,
+        CaptureContext = 2,
 
-        EmitDump = 4,
     }
 }

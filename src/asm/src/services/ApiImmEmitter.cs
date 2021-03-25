@@ -25,7 +25,7 @@ namespace Z0.Asm
         protected override void OnInit()
         {
             Asm = Wf.AsmContext();
-            Specializer = Wf.ImmSpecializer(Asm);
+            Specializer = Wf.ImmSpecializer();
         }
 
         bool Append = true;
@@ -127,7 +127,7 @@ namespace Z0.Asm
         IAsmImmWriter Archive(IApiHost host)
             => AsmServices.immwriter(Wf, Asm, host.Uri);
 
-        void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
+        void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, PartId[] parts)
         {
             EmitUnrefinedDirect(exchange, imm8, parts);
             EmitUnrefinedGeneric(exchange, imm8, parts);
@@ -144,7 +144,7 @@ namespace Z0.Asm
             }
         }
 
-        Index<AsmRoutine> EmitUnrefinedDirect(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
+        Index<AsmRoutine> EmitUnrefinedDirect(in CaptureExchange exchange, Imm8R[] imm8, PartId[] parts)
         {
             var routines = root.list<AsmRoutine>();
             foreach(var host in Hosts(parts))

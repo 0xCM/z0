@@ -68,9 +68,7 @@ namespace Z0
             => ApiJit.JitCatalog();
 
         public BasedApiMemberCatalog RebaseMembers(Timestamp? ts = null)
-        {
-            return RebaseMembers(JitCatalog(), ts);
-        }
+            => RebaseMembers(JitCatalog(), ts);
 
         public BasedApiMemberCatalog RebaseMembers(BasedApiMembers src, Timestamp? ts = null)
         {
