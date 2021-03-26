@@ -14,10 +14,27 @@ namespace Z0
 
     partial class ImageDataEmitter
     {
+        public void ClearApiImageContent()
+        {
+            var dir = Db.TableDir<ImageContent>();
+            var flow = Wf.Running($"Clearing content from <{dir}>");
+            var dst = root.list<FS.FilePath>();
+            dir.Clear(dst);
+            Wf.Ran(flow, $"Cleared <{dst.Count}> files from <{dir}>");
+        }
+
+        public void EmitApiImageContent()
+        {
+            var flow = Wf.Running();
+            ClearApiImageContent();
+            root.iter(Wf.Api.PartComponents, c => EmitImageContent(c));
+            Wf.Ran(flow);
+        }
+
         public MemoryRange EmitImageContent(Assembly src)
         {
             var rowsize = ImageContent.RowDataSize;
-            var dst = Wf.Db().Table(ImageContent.TableId, src.GetSimpleName());
+            var dst = Db.Table(ImageContent.TableId, src.GetSimpleName());
             var flow = Wf.EmittingTable<ImageContent>(dst);
             var @base = ImageMaps.@base(src);
             var formatter = Hex.formatter(@base, rowsize);

@@ -59,7 +59,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i<cells; i++)
                 for(byte j=0; j<wCell; j++)
-                    seek(dst, k++)  = gbits.testbit(skip(src,i), j) == bit.On ? Numeric.one<T>() : zero<T>();
+                    seek(dst, k++) = gbits.testbit(skip(src,i), j) == bit.On ? Numeric.one<T>() : zero<T>();
                 return dst;
             }
         }
@@ -73,7 +73,7 @@ namespace Z0
         [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
             where T : unmanaged
-                => unpack(src.ReadOnly(), dst.AsSpan());
+                => unpack(src.ReadOnly(), memory.span(dst));
 
         [Unpack, Closures(Closure)]
         public static Span<bit> unpack<T>(ReadOnlySpan<T> src)

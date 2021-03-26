@@ -14,14 +14,15 @@ namespace Z0
     partial struct BitParts
     {
         /// <summary>
-        /// Partitions the first 12 bits of a 32-bit source into 4 target segments each with an effective width of 3
+        /// [11:0] => [11:9 | 8:6 | 5:3 | 2:0]
+        /// Partitions the first 12 bits of a 16-bit source into 4 target segments each with an effective width of 3
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>
         [MethodImpl(Inline), Op]
-        public static ref byte part4x3(uint src, ref byte dst)
+        public static ref byte part4x3(ushort src, ref byte dst)
         {
-            part3x3((ushort)src, ref dst);
+            part3x3(src, ref dst);
             seek(dst, 3) = (byte)(src >> 9 & Lsb8x8x3);
             return ref dst;
         }

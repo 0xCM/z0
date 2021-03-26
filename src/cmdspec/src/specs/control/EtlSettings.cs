@@ -24,6 +24,8 @@ namespace Z0
 
         public Setting<bool> EmitCliConstants;
 
+        public Setting<bool> EmitApiMetadata;
+
         public Setting<bool> EmitLiteralCatalogs;
 
         public Setting<bool> EmitAsmCatalogs;
@@ -38,13 +40,15 @@ namespace Z0
 
         public Setting<bool> EmitStatements;
 
+        public Setting<bool> CorrelateMembers;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
             dst.RunXed = false;
             dst.EmitResourceData = true;
             dst.CollectApiDocs = true;
-            dst.EmitImageContent = false;
+            dst.EmitImageContent = true;
             dst.EmitSectionHeaders = true;
             dst.EmitMsilRecords = true;
             dst.EmitCliStrings = true;
@@ -57,6 +61,8 @@ namespace Z0
             dst.EmitAsmAnalysis = true;
             dst.EmitIntrinsicsInfo = true;
             dst.EmitStatements = true;
+            dst.EmitApiMetadata = true;
+            dst.CorrelateMembers = true;
             return dst;
         }
 

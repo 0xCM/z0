@@ -811,6 +811,21 @@ namespace Z0.Asm
 
         }
 
+        // void DumpApiMetadata()
+        // {
+        //     var components = Wf.Api.PartComponents.View;
+        //     var count = components.Length;
+        //     var tables = Wf.CliTables();
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         var component = skip(components,i);
+        //         var source = FS.path(component.Location);
+        //         var name = source.FileName.WithoutExtension;
+        //         var target = Db.TableDir("api.metadata") + name + FS.Extensions.Txt;
+        //         tables.DumpMetadata(source,target);
+        //     }
+        // }
+
         void EmitCilBlocks()
         {
             var service = Cil.visualizer();
@@ -855,7 +870,6 @@ namespace Z0.Asm
             emitter.DumpImages(src,dst);
         }
 
-
         void EmitImageMaps()
         {
             var src = ImageMaps.current();
@@ -887,6 +901,16 @@ namespace Z0.Asm
             }
         }
 
+        void CheckXedSymbols()
+        {
+            var symbols = Symbols.symbols<XedModels.Extension>(w8);
+            var literals = ClrEnums.literals<XedModels.Extension>();
+            foreach(var l in literals)
+            {
+                Wf.Row(string.Format("{0}={1}", l, symbols[l].Expression));
+            }
+
+        }
         void ShowXedForms()
         {
             var pipe = Wf.Xed();
@@ -903,11 +927,16 @@ namespace Z0.Asm
             root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => log.Show(symbol));
         }
 
+        public void EmitApiImageContent()
+        {
+            Wf.ImageDataEmitter().EmitApiImageContent();
+        }
+
         public void Run()
         {
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
-            ShowXedForms();
+            EmitApiImageContent();
 
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();

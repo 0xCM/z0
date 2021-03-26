@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static BitMasks;
     using static BitMasks.Literals;
     using static memory;
     using static Part;
@@ -22,6 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack4x8x1<T>(in SpanBlock32<T> src, int block)
             where T : unmanaged
-                => (byte)Bits.gather(uint32(src.BlockRef(block)), Lsb32x8x1);
+                => (byte)gather(uint32(src.BlockRef(block)), Lsb32x8x1);
     }
 }

@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         public static IRecordFormatter<T> formatter<T>(ReadOnlySpan<byte> widths)
             where T : struct, IRecord<T>
-                => formatter<T>(RecUtil.rowspec<T>(widths));
+                => formatter<T>(rowspec<T>(widths));
 
         /// <summary>
         /// Defines a <typeparamref name='T'/> record formatter
@@ -39,12 +39,12 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         public static IRecordFormatter<T> formatter<T>(byte fieldwidth = DefaultFieldWidth)
             where T : struct, IRecord<T>
-                => formatter<T>(RecUtil.rowspec<T>(fieldwidth));
+                => formatter<T>(rowspec<T>(fieldwidth));
 
         public static IRecordFormatter<T> formatter<E,T>()
             where E : unmanaged, Enum
             where T : struct, IRecord<T>
-                => formatter<T>(RecUtil.rowspec<T>(ClrEnums.numeric<E,byte>()));
+                => formatter<T>(rowspec<T>(ClrEnums.numeric<E,byte>()));
 
         public static Func<T,string> formatFx<T>(byte? fieldwidth = null)
             where T : struct, IRecord<T>

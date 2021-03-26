@@ -8,6 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Text;
+    using System.IO;
 
     using static Part;
 
@@ -35,7 +36,7 @@ namespace Z0
 
         Option<Action> TerminationHandler;
 
-        readonly FS.FilePath ErrorLogPath;
+        readonly string ErrorLogPath;
 
         Terminal()
         {
@@ -45,7 +46,7 @@ namespace Z0
              Console.OutputEncoding = new UnicodeEncoding();
              Console.CancelKeyPress += OnCancelKeyPressed;
              //ErrorLogPath = Env.create().Logs.Value + FS.file("term.errors.log");
-             ErrorLogPath = FS.path(@"c:\data\zdb\logs\term.erros.log");
+             ErrorLogPath = @"c:\data\zdb\logs\term.erros.log";
         }
 
         /// <summary>
@@ -218,7 +219,7 @@ namespace Z0
                     }
 
                     lock(ErrLock)
-                        ErrorLogPath.AppendLine(rendered);
+                        File.AppendText(rendered + "\r\n");
                 }
             }
         }

@@ -43,7 +43,6 @@ namespace Z0
                 row.UniqueName = SymbolicLiterals.identity(component.SimpleName, src.Name, row.Position, f.Name);
                 row.EncodedValue = ClrPrimitives.encode(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
-
             }
 
             return buffer;

@@ -14,7 +14,8 @@ namespace Z0
     partial struct BitParts
     {
         /// <summary>
-        /// Partitions the first 12 bits of the source value into 3 target segments of effective width of 4
+        /// [11:0] => [11:8 | 7:4 | 3:0]
+        /// Partitions the first 12 bits of the source value into 3 target segments each of effective width of 4
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">A target span of sufficient length</param>

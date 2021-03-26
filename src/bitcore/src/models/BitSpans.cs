@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost("api")]
+    [ApiHost]
     public partial class BitSpans
     {
         const NumericKind Closure = Konst.UnsignedInts;

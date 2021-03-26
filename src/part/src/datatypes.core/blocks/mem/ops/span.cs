@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> span<T>(ref MemBlock8 src)
             where T : unmanaged
-                => cover(u8(src), 8).Recover<byte,T>();
+                => recover<T>(cover(u8(src), 8));
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(ref MemBlock16 src)
             where T : unmanaged
-                => cover(u8(src), 16).Recover<byte,T>();
+                => recover<T>(cover(u8(src), 16));
 
         /// <summary>
         /// Fills a span with data from a stack storage block
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(ref MemBlock32 src)
             where T : unmanaged
-                => cover(u8(src), 32).Recover<byte,T>();
+                => recover<T>(cover(u8(src), 32));
 
         /// <summary>
         /// Fills a span with data from a stack storage block

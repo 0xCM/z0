@@ -18,8 +18,8 @@ namespace Z0
         public static ref ulong unpack1x8x16(ushort src, ref ulong dst)
         {
             const ulong M = (ulong)Lsb64x8x1;
-            seek(dst, 0) = Bits.scatter(src, M);
-            seek(dst, 1) = Bits.scatter(ScalarCast.uint16(src >> 8), M);
+            seek(dst, 0) = scatter(src, M);
+            seek(dst, 1) = scatter((ushort)(src >> 8), M);
             return ref dst;
         }
 
@@ -46,8 +46,8 @@ namespace Z0
         public static ref byte unpack1x8x16(ushort src, ref byte dst)
         {
             var m = lsb<ulong>(n8, n1);
-            seek64(dst, 0) = Bits.scatter((ulong)(byte)src, m);
-            seek64(dst, 1) = Bits.scatter((ulong)((byte)(src >> 8)), m);
+            seek64(dst, 0) = scatter((ulong)(byte)src, m);
+            seek64(dst, 1) = scatter((ulong)((byte)(src >> 8)), m);
             return ref dst;
         }
 

@@ -269,7 +269,7 @@ namespace Z0
             const char Delimiter = FieldDelimiter;
             const byte FieldCount = ApiCatalogEntry.FieldCount;
 
-            var fields = RecUtil.fields(src,Delimiter).View;
+            var fields = Tables.fields(src,Delimiter).View;
             if(fields.Length != FieldCount)
             {
                 dst = default;

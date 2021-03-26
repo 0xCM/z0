@@ -71,6 +71,19 @@ namespace Z0
             return new SymbolTable<E>(buffer, identifiers, symbols);
         }
 
+        public static Index<Sym<E>> symindex<E>()
+            where E : unmanaged, Enum
+        {
+            var literals = ClrEnums.symbolic<E>();
+            var view = literals.View;
+            var count = view.Length;
+            var buffer = alloc<Sym<E>>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new Sym<E>(i, skip(view,i));
+            return buffer;
+        }
+
         public static SymbolTable<E> table<E>(Index<Token<E>> src)
             where E : unmanaged, Enum
         {

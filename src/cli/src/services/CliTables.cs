@@ -10,6 +10,8 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.IO;
 
+    using static memory;
+
     public sealed class CliTables : WfService<CliTables>
     {
         public WfExecToken DumpMetadata(FS.FilePath src, FS.FilePath dst)
@@ -29,6 +31,24 @@ namespace Z0
             {
                 Wf.Error(e);
                 return WfExecToken.Empty;
+            }
+        }
+
+
+        public void DumpApiMetadata()
+        {
+            var dir = Db.TableDir("api.metadata");
+            dir.Clear();
+            var components = Wf.Api.PartComponents.View;
+            var count = components.Length;
+            var tables = Wf.CliTables();
+            for(var i=0; i<count; i++)
+            {
+                var component = skip(components,i);
+                var source = FS.path(component.Location);
+                var name = source.FileName.WithoutExtension;
+                var target = dir + name + FS.Extensions.Txt;
+                tables.DumpMetadata(source,target);
             }
         }
     }

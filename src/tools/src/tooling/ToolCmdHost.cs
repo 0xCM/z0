@@ -11,7 +11,7 @@ namespace Z0.Asm
         [Action(K.UpdateToolHelpIndex)]
         void UpdateToolHelpIndex()
         {
-            var catalog = Tools.catalog(Wf);
+            var catalog = ToolCatalog.create(Wf);
             var index = catalog.UpdateHelpIndex();
             root.iter(index, entry => Wf.Row(entry.HelpPath));
         }

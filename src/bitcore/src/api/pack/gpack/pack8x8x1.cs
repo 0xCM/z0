@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static BitMasks;
     using static BitMasks.Literals;
+    using static Numeric;
     using static memory;
     using static Part;
 
@@ -18,7 +20,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         static byte pack8(ulong src)
-            => (byte)Bits.gather(src, Lsb64x8x1);
+            => (byte)gather(src, Lsb64x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -27,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in T src)
             where T : unmanaged
-                => (byte)Bits.gather(Numeric.force<T,ulong>(src), Lsb64x8x1);
+                => (byte)gather(force<T,ulong>(src), Lsb64x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte
@@ -50,6 +52,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack8x8x1<T>(in SpanBlock64<T> src, uint block)
             where T : unmanaged
-                => pack8(Numeric.force<T,ulong>(src.BlockRef((int)block)));
+                => pack8(force<T,ulong>(src.BlockRef((int)block)));
     }
 }

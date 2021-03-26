@@ -9,7 +9,7 @@ namespace Z0
     {
         public const string TableId = "image.content";
 
-        public const byte RowDataSize = 32;
+        public const byte RowDataSize = 64;
 
         public MemoryAddress Address;
 

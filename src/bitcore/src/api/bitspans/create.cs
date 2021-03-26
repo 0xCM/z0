@@ -5,6 +5,10 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+    using static memory;
 
     partial class BitSpans
     {
@@ -12,6 +16,47 @@ namespace Z0
         public static BitSpan create<T>(T src)
             where T : unmanaged
                 => gpack.unpack(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitSpan scalar<T>(T src)
+            where T : unmanaged
+        {
+            if(size<T>() == 1)
+            {
+                var input = bw8(src);
+                var storage = MemBlocks.alloc(n8);
+                var target = MemBlocks.span<bit>(ref storage);
+                BitPack.unpack(input, target);
+                return target;
+            }
+            else if(size<T>() == 2)
+            {
+                var input = bw16(src);
+                var storage = MemBlocks.alloc(n16);
+                var target = MemBlocks.span<bit>(ref storage);
+                BitPack.unpack(input, target);
+                return target;
+            }
+            else if(size<T>() == 4)
+            {
+                var input = bw32(src);
+                var storage = MemBlocks.alloc(n32);
+                var target = MemBlocks.span<bit>(ref storage);
+                BitPack.unpack(input, target);
+                return target;
+            }
+            else if(size<T>() == 8)
+            {
+                var input = bw64(src);
+                var storage = MemBlocks.alloc(n64);
+                var target = MemBlocks.span<bit>(ref storage);
+                BitPack.unpack(input, target);
+                return target;
+            }
+            else
+                throw no<T>();
+
+        }
 
         [Op, Closures(Closure)]
         public static BitSpan create<T>(ReadOnlySpan<T> src)

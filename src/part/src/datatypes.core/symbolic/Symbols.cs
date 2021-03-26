@@ -18,7 +18,7 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Sym8<T> symbol<T>(W8 w, SymKey<byte> key, Identifier name, T value, string expr)
+        public static Sym8<T> symbol<T>(W8 w, SymKey<byte> key, Identifier name, T value, SymExpr expr)
             where T : unmanaged
                 => new Sym8<T>(key, name,value,expr);
 
@@ -26,26 +26,26 @@ namespace Z0
         public static Sym8<E> symbol<E>(W8 w, uint index)
             where E : unmanaged, Enum
         {
-            var src = new ClrEnum<E>();
-            var entry = src.Symbols[index];
-            return symbol(w, (byte)entry.Index, entry.Name, entry.Value, entry.Symbol);
+            var e = Clr.@enum<E>();
+            var entry = e.SymbolIndex[index];
+            return symbol(w, (byte)entry.Key, entry.Name, entry.Value, entry.Symbol);
         }
 
         public static string format(Sym8 src)
             => string.Format(DefaultPattern, src.Key, src.Name, src.Expression);
 
-        public static Index<Sym8<E>> symbols<E>(W8 w)
+        public static Index<E,Sym8<E>> symbols<E>(W8 w)
             where E : unmanaged, Enum
         {
-            var e = new ClrEnum<E>();
-            var src = e.Symbols.Symbols;
+            var e = Clr.@enum<E>();
+            var src = e.SymbolIndex.View;
             var count = src.Length;
             var buffer = alloc<Sym8<E>>(count);
             var dst = span(buffer);
             for(var i=0; i<count; i++)
             {
                 ref readonly var entry = ref skip(src,i);
-                seek(dst,i) = new Sym8<E>((byte)entry.Index, entry.Name, entry.Value, entry.Symbol);
+                seek(dst,i) = new Sym8<E>((byte)entry.Key, entry.Name, entry.Value, entry.Symbol);
             }
             return buffer;
         }

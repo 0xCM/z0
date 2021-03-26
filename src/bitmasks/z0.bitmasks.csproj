@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
     <ProjectReference Include="$(Nats)" />
-    <ProjectReference Include="$(Tables)" />
   </ItemGroup>
 
 </Project>

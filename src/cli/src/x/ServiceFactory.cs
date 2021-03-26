@@ -14,7 +14,7 @@ namespace Z0
         public static ImageDataEmitter ImageDataEmitter(this IWfShell wf)
             => Z0.ImageDataEmitter.create(wf);
 
-        public static IWfCmdHost<CliWfCmdKind> CliWfCmd(this IWfShell wf)
+        public static CliWfCmdHost CliCmd(this IWfShell wf)
             => CliWfCmdHost.create(wf);
 
         public static MsilPipe IlPipe(this IWfShell wf)
@@ -22,5 +22,8 @@ namespace Z0
 
         public static FieldLiteralEmitter FieldLiteralEmitter(this IWfShell wf)
             => Z0.FieldLiteralEmitter.create(wf);
+
+        public static CliTables CliTables(this IWfShell wf)
+            => Z0.CliTables.create(wf);
     }
 }

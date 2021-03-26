@@ -13,6 +13,7 @@ namespace Z0
     partial struct BitParts
     {
         /// <summary>
+        /// [31:0] => [31:16 | 15:0]
         /// Partitions a 32-bit source value into 2 segments of width 16
         /// </summary>
         /// <param name="src">The source value</param>

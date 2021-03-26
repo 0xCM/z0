@@ -19,7 +19,7 @@ namespace Z0
 
         readonly Dictionary<string,Token<T>> _Symbols;
 
-        readonly Index<SymbolEntry<T>> _Entries;
+        readonly Index<Sym<T>> _Entries;
 
         internal SymbolTable(Index<Token<T>> src, Dictionary<string,Token<T>> identifiers, Dictionary<string,Token<T>> symbols)
         {
@@ -27,15 +27,15 @@ namespace Z0
             _Tokens = src;
             _Identifiers = identifiers;
             _Symbols = symbols;
-            _Entries = memory.alloc<SymbolEntry<T>>(count);
+            _Entries = memory.alloc<Sym<T>>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref _Tokens[i];
-                _Entries[i] = new SymbolEntry<T>(i, token.Identifier, token.Kind, token.SymbolName.SymbolText);
+                _Entries[i] = new Sym<T>(i, token.Identifier, token.Kind, token.SymbolName.SymbolText);
             }
         }
 
-        public ref readonly SymbolEntry<T> this[uint index]
+        public ref readonly Sym<T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref _Entries[index];
@@ -97,7 +97,7 @@ namespace Z0
             get => _Tokens.Count;
         }
 
-        public ReadOnlySpan<SymbolEntry<T>> Symbols
+        public ReadOnlySpan<Sym<T>> Symbols
         {
             [MethodImpl(Inline)]
             get => _Entries.View;

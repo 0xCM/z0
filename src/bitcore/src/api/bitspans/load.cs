@@ -18,43 +18,43 @@ namespace Z0
 
          [Op]
          public static BitSpan load(byte src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(sbyte src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(ushort src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(short src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(int src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(uint src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(long src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(ulong src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(float src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op]
          public static BitSpan load(double src)
-            => BitSpans.create(src);
+            => BitSpans.scalar(src);
 
          [Op, Closures(Closure)]
          public static BitSpan load<T>(Vector128<T> src, uint? maxbits = null)

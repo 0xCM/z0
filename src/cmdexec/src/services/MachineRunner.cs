@@ -20,7 +20,10 @@ namespace Z0
                 var images = Wf.ImageDataEmitter();
                 var asm = Wf.AsmDataStore();
 
-                api.Correlate();
+                if(options.CorrelateMembers)
+                {
+                    api.Correlate();
+                }
 
                 if(options.EmitAsmCatalogs)
                 {
@@ -30,7 +33,7 @@ namespace Z0
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    IntelIntrinsics.create(Wf).Emit();
+                    Wf.IntelCpuIntrinsics().Emit();
 
                 if(options.EmitLiteralCatalogs)
                 {
@@ -51,12 +54,14 @@ namespace Z0
                     assets.EmitAssetContent();
                 }
 
+                if(options.EmitApiMetadata)
+                    Wf.CliCmd().Run(CliWfCmdKind.DumpApiMetadata);
+
                 if(options.RunXed)
                 {
                     using var xed = XedWf.create(Wf);
                     xed.Run();
                 }
-
 
                 if(options.EmitSectionHeaders)
                     images.EmitRuntimeHeaders();
@@ -77,7 +82,7 @@ namespace Z0
                     images.EmitApiBlobs();
 
                 if(options.EmitImageContent)
-                    root.iter(Wf.Api.PartComponents, c => images.EmitImageContent(c));
+                    images.EmitApiImageContent();
 
                 if(options.EmitAsmRows)
                     asm.EmitAsmRows();

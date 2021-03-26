@@ -4,11 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    using static Part;
-    using static memory;
-
     class DefaultResultHandler : IToolResultHandler
     {
         readonly IEnvPaths Paths;

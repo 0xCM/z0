@@ -5,8 +5,6 @@
 namespace Z0
 {
 
-    using static WfCmd;
-
     using K = CliWfCmdKind;
 
     public enum CliWfCmdKind : byte
@@ -14,26 +12,29 @@ namespace Z0
         None = 0,
 
         EmitImageHeaders,
+
+        DumpApiMetadata,
     }
 
     public sealed class CliWfCmdHost : WfCmdHost<CliWfCmdHost, CliWfCmdKind>
     {
         ImageDataEmitter Emitter;
 
+        CliTables CliTables;
+
         protected override void OnInit()
         {
             Emitter = Wf.ImageDataEmitter();
+            CliTables = Wf.CliTables();
         }
 
-        protected override void RegisterCommands(WfCmdIndex index)
-        {
-            index.Include(assign(K.EmitImageHeaders, EmitImageHeaders));
-        }
-
+        [Action(K.EmitImageHeaders)]
         void EmitImageHeaders()
-        {
-            Emitter.EmitRuntimeHeaders();
-        }
-    }
+            => Emitter.EmitRuntimeHeaders();
 
+
+        [Action(K.DumpApiMetadata)]
+        void DumpApiMetadata()
+            => CliTables.DumpApiMetadata();
+    }
 }
