@@ -19,7 +19,7 @@ namespace Z0.Asm
             dst.Source = src.IP;
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
-            dst.Target = branch(src.BaseAddress, src.Instruction, 0).Target.Address;
+            dst.Target = branch(dst.Source, src.Instruction, 0).Target.Address;
             dst.Asm = src.FormattedInstruction;
             return ref dst;
         }

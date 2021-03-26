@@ -75,8 +75,8 @@ namespace Z0
 
         Triple<bool> Include(in ApiCodeBlock src)
         {
-            var a = CodeAddress.TryAdd(src.BaseAddress, src);
-            var b = AddressUri.TryAdd(src.BaseAddress, src.Uri);
+            var a = CodeAddress.TryAdd(src.Address, src);
+            var b = AddressUri.TryAdd(src.Address, src.Uri);
             var c = UriCode.TryAdd(src.Uri, src);
             return root.triple(a,b,c);
         }

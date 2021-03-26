@@ -34,11 +34,11 @@ namespace Z0.Asm
             => (uint)(dst - (src + fxSize));
 
         [MethodImpl(Inline), Op]
-        public static AsmBranchInfo branch(in MemoryAddress @base, in IceInstruction ix, in AsmBranchTarget target)
-            => new AsmBranchInfo(@base, ix.IP, target, offset(ix.IP, (byte)ix.ByteLength, target.Address));
+        public static AsmBranchInfo branch(MemoryAddress @base, in IceInstruction src, in AsmBranchTarget target)
+            => new AsmBranchInfo(@base, src.IP, target, offset(src.IP, (byte)src.ByteLength, target.Address));
 
         [MethodImpl(Inline), Op]
-        public static AsmBranchInfo branch(in MemoryAddress @base, in IceInstruction src, byte index)
+        public static AsmBranchInfo branch(MemoryAddress @base, in IceInstruction src, byte index)
             => branch(@base, src, branch(src, index));
 
         [Op]

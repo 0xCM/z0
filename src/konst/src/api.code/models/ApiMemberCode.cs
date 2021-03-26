@@ -104,7 +104,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Encoded.BaseAddress;
+            get => Encoded.Address;
         }
 
         public ApiClass KindId

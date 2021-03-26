@@ -55,7 +55,7 @@ namespace Z0.Asm
                 OpId = i.OpId;
                 Instructions = src;
                 HostAddress = @base;
-                BaseAddress = i.BaseAddress;
+                BaseAddress = i.IP;
             }
             else
             {

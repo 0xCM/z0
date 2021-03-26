@@ -14,13 +14,16 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ApiInstruction
     {
+        public MemoryAddress BaseAddress {get;}
+
         public ApiCodeBlock Encoded {get;}
 
         public IceInstruction Instruction {get;}
 
         [MethodImpl(Inline)]
-        public ApiInstruction(IceInstruction fx, ApiCodeBlock encoded)
+        public ApiInstruction(MemoryAddress @base, IceInstruction fx, ApiCodeBlock encoded)
         {
+            BaseAddress = @base;
             Instruction = fx;
             Encoded = encoded;
         }
@@ -31,17 +34,17 @@ namespace Z0.Asm
             get => (byte)Instruction.ByteLength;
         }
 
-        public MemoryAddress BaseAddress
-        {
-            [MethodImpl(Inline)]
-            get => Encoded.BaseAddress;
-        }
-
         public string OpId
             => Encoded.OpId;
 
         public BinaryCode EncodedData
             => Encoded.Data;
+
+        public MemoryAddress Offset
+        {
+            [MethodImpl(Inline)]
+            get => IP - BaseAddress;
+        }
 
         public string FormattedInstruction
         {

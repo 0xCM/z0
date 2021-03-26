@@ -60,7 +60,7 @@ namespace Z0.Asm
             {
                 var code = skip(view,i).Code;
                 seek(block,i) = skip(view,i).Code;
-                writer.WriteLine(string.Format("{0,-16} | {1,-80} | {2}", code.BaseAddress, code.Uri, code.Encoded.Format()));
+                writer.WriteLine(string.Format("{0,-16} | {1,-80} | {2}", code.Address, code.Uri, code.Encoded.Format()));
             }
             return ApiCodeset.create(path, blocks);
         }

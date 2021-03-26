@@ -57,7 +57,7 @@ namespace Z0
         /// <summary>
         /// The code's base address
         /// </summary>
-        public MemoryAddress BaseAddress
+        public MemoryAddress Address
         {
              [MethodImpl(Inline)]
              get => Code.BaseAddress;
@@ -146,7 +146,7 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
-            => text.concat(BaseAddress.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
+            => text.concat(Address.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
 
         public string Format()
             => Format(60);
@@ -156,7 +156,7 @@ namespace Z0
             => Format();
 
         public int CompareTo(ApiCodeBlock src)
-            => BaseAddress.CompareTo(src.BaseAddress);
+            => Address.CompareTo(src.Address);
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(ApiCodeBlock src)

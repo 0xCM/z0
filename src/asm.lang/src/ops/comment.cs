@@ -12,7 +12,7 @@ namespace Z0.Asm
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static string comment(string text)
-            =>  $"; {text}";
+        public static AsmComment comment(string src)
+            =>  src;
     }
 }

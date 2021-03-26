@@ -233,7 +233,7 @@ namespace Z0
         static ref ApiCorrelationEntry fill(Seq16x2 seq, ApiMember member, ApiCodeBlock code, out ApiCorrelationEntry dst)
         {
             dst.Sequence = seq;
-            dst.CaptureAddress = code.BaseAddress;
+            dst.CaptureAddress = code.Address;
             dst.RuntimeAddress = member.BaseAddress;
             dst.Id = code.Uri;
             return ref dst;

@@ -141,7 +141,7 @@ namespace Z0.Asm
         [Op]
         void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, AsmOffsetSequence seq)
         {
-            var @base = src.BaseAddress;
+            var @base = address;
             var fx = src.Instruction;
             var encoded = Format(src.Encoded);
             var location = LineLocation(fx, address, offset, seq);

@@ -136,7 +136,7 @@ namespace Z0
                 ref readonly var block = ref skip(blocks,i);
                 ref var record = ref seek(target, i);
                 record.Seqence = i;
-                record.Address = block.BaseAddress;
+                record.Address = block.Address;
                 record.Component = block.OpUri.Part.Format();
                 record.HostName = block.OpUri.Host.Name;
                 record.MethodName = block.OpId.Name;

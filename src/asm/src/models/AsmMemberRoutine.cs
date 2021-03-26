@@ -33,19 +33,19 @@ namespace Z0.Asm
         /// <summary>
         /// The x86 encoded content
         /// </summary>
-        public ApiCodeBlock Code
+        public ApiCodeBlock CodeBlock
             => Routine.Code;
 
         public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => Code.BaseAddress;
+            get => CodeBlock.Address;
         }
 
         public ByteSize Size
         {
             [MethodImpl(Inline)]
-            get => Code.Length;
+            get => CodeBlock.Length;
         }
 
         public int CompareTo(AsmMemberRoutine src)

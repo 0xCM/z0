@@ -33,7 +33,7 @@ namespace Z0.Asm
             => Decode(OpUri.Empty, src.Code, src.BaseAddress).TryMap(x => icelist(x, src));
 
         public Option<AsmInstructionBlock> Decode(ApiCodeBlock src)
-            => Decode(src.OpUri, src.Encoded, src.BaseAddress);
+            => Decode(src.OpUri, src.Encoded, src.Address);
 
         public bool Decode(in ApiCodeBlock src, out AsmInstructionBlock dst)
         {
@@ -128,7 +128,7 @@ namespace Z0.Asm
         }
 
         public Option<IceInstructionList> Decode(ApiCodeBlock src, Action<IceInstruction> f)
-            => Decode(src.Uri, new CodeBlock(src.BaseAddress, src.Data), f);
+            => Decode(src.Uri, new CodeBlock(src.Address, src.Data), f);
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
         {

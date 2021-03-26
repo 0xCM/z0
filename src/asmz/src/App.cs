@@ -932,12 +932,64 @@ namespace Z0.Asm
             Wf.ImageDataEmitter().EmitApiImageContent();
         }
 
+
+        void Summarize(ApiInstruction src, ITextBuffer dst)
+        {
+            var itext = src.FormattedInstruction;
+            var idata = src.EncodedData;
+            var isize = src.Size;
+            var icomment = asm.comment(string.Format("encoded[{0},{1}]:{2}", src.Offset, isize, idata));
+            var summary = string.Format("{0,-46} {1}", itext, icomment);
+            dst.Append(summary);
+        }
+
+        void Summarize(ReadOnlySpan<AsmMemberRoutine> src)
+        {
+            var dst = Db.AppLog("routines", FS.Extensions.Asm);
+            var count = src.Length;
+            var flow = Wf.EmittingFile(dst, string.Format("Creating summaries for <{0}> routines", count));
+            var buffer = text.buffer();
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var routine = ref skip(src,i);
+                var @base = routine.Base;
+                var block = routine.CodeBlock;
+                var code = block.Code;
+                var member = routine.Member;
+                var instructions = routine.Instructions.View;
+                var icount = instructions.Length;
+
+                writer.WriteLine(AsmComment.separate());
+                writer.WriteLine(asm.comment(member.OpUri.Format()));
+                writer.WriteLine(asm.comment(string.Format("{0}[{1}]:{2}", @base.Format(), code.Length, code.Format())));
+                for(var j=0; j<icount; j++)
+                {
+
+                    ref readonly var instruction = ref skip(instructions,j);
+                    Summarize(instruction, buffer);
+                    writer.WriteLine(buffer.Emit());
+                    // var itext = instruction.FormattedInstruction;
+                    // var idata = instruction.EncodedData;
+                    // var isize = instruction.Size;
+                    // var icomment = asm.comment(string.Format("encoded[{0}]:{1}", isize, idata));
+                    // writer.WriteLine(string.Format("{0,-46} {1}", itext, icomment));
+
+                }
+
+            }
+            Wf.EmittedFile(flow, count);
+        }
+
         public void Run()
         {
+            var options = CaptureWorkflowOptions.EmitImm;
+            var parts = root.array(PartId.AsmLang, PartId.AsmZ);
+            var routines = Capture.run(Wf, parts, options);
+            Summarize(routines);
+
+
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
-
-            EmitApiImageContent();
-
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();
 
@@ -963,7 +1015,6 @@ namespace Z0.Asm
 
             //RunFunctionWorkflows();
 
-            //Capture.run(Wf, PartId.AsmZ);
         }
 
         public static void Main(params string[] args)
