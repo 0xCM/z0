@@ -9,8 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [Record]
-    public struct GridStats : IRecord<GridStats>
+    public struct GridStats
     {
         [MethodImpl(Inline), Op]
         public static uint remainder(in GridMetrics src, W128 w)

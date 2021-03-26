@@ -13,7 +13,7 @@ namespace Z0
     /// Defines an entry in list of files
     /// </summary>
     [Record(TableId)]
-    public struct ListedFile : IRecord<ListedFile>, ITextual
+    public struct ListedFile : ITextual, IRecord<ListedFile>
     {
         public const string TableId = "listed-file";
 

@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref MemBlock8 src, int index)
             where T : unmanaged
-                => ref memory.add(head<T>(ref src), index);
+                => ref memory.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref MemBlock16 src, int index)
             where T : unmanaged
-                => ref memory.add(head<T>(ref src), index);
+                => ref memory.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref MemBlock32 src, int index)
             where T : unmanaged
-                => ref memory.add(head<T>(ref src), index);
+                => ref memory.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref MemBlock64 src, int index)
             where T : unmanaged
-                => ref memory.add(head<T>(ref src), index);
+                => ref memory.add(first<T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates an index-identified generic cell value
@@ -64,6 +64,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T cell<T>(ref MemBlock128 src, int index)
             where T : unmanaged
-                => ref memory.add(head<T>(ref src), index);
+                => ref memory.add(first<T>(ref src), index);
     }
 }

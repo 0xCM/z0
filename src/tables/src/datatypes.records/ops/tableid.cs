@@ -20,8 +20,6 @@ namespace Z0
             where T : struct, IRecord<T>
                 => default(T).TableId;
 
-                //=> new TableId<T>(tableid(typeof(T)));
-
         /// <summary>
         /// Computes the <see cref='TableId'/> of a parametrically-identified record
         /// </summary>

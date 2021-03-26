@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref MemBlock8 src)
+        public static ref ulong first64(ref MemBlock8 src)
             => ref u64(src);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref MemBlock16 src)
+        public static ref ulong first64(ref MemBlock16 src)
             => ref u64(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref MemBlock32 src)
+        public static ref ulong first64(ref MemBlock32 src)
             => ref u64(src);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref MemBlock64 src)
+        public static ref ulong first64(ref MemBlock64 src)
             => ref u64(src);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref MemBlock128 src)
+        public static ref ulong first64(ref MemBlock128 src)
             => ref u64(src);
     }
 }

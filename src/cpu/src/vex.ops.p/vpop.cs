@@ -123,7 +123,7 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = MemBlocks.alloc(n32);
-            ref var X = ref MemBlocks.head(ref dst, z64);
+            ref var X = ref MemBlocks.first<ulong>(ref dst);
             vstore(odd, ref X);
 
             var total = 0ul;

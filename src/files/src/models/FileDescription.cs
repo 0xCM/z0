@@ -5,7 +5,7 @@
 namespace Z0
 {
     [Record(TableId)]
-    public struct FileDescription : IRecord<FileDescription>
+    public struct FileDescription
     {
         public const string TableId = "fs.info";
 

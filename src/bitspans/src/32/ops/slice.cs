@@ -68,7 +68,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n8);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<byte>(unpacked);
         }
@@ -85,7 +85,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n16);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<ushort>(unpacked);
         }
@@ -119,7 +119,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n64);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<ulong>(unpacked);
         }
@@ -129,7 +129,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n8);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack<sbyte>(unpacked);
         }
@@ -139,7 +139,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n16);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked, z16i);
         }
@@ -149,7 +149,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n32);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked,z32i);
         }
@@ -159,7 +159,7 @@ namespace Z0
         {
             var buffer = MemBlocks.alloc(n64);
             var unpacked = MemBlocks.span<Bit32>(ref buffer);
-            ref var dst = ref MemBlocks.head<Bit32>(ref buffer);
+            ref var dst = ref MemBlocks.first<Bit32>(ref buffer);
             memory.copy(skip(src.Edit, offset), ref dst, count);
             return BitPack32.pack(unpacked, z64i);
         }

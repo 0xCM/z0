@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref uint head32(in MemBlock4 src)
+        public static ref uint first32(in MemBlock4 src)
             => ref u32(src);
     }
 }

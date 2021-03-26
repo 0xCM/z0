@@ -42,14 +42,14 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref MemBlock8 copy(ReadOnlySpan<byte> src, ref MemBlock8 dst)
         {
-            dst = first(recover<byte,MemBlock8>(src));
+            dst = memory.first(recover<byte,MemBlock8>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
         public static ref MemBlock16 copy(ReadOnlySpan<byte> src, ref MemBlock16 dst)
         {
-            var vSrc = vload(w128, first(src));
+            var vSrc = vload(w128, memory.first(src));
             vstore(vSrc, ref u8(dst));
             return ref dst;
         }
@@ -57,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref MemBlock32 copy(ReadOnlySpan<byte> src, ref MemBlock32 dst)
         {
-            var vSrc = vload(w256, first(src));
+            var vSrc = vload(w256, memory.first(src));
             vstore(vSrc, ref u8(dst));
             return ref dst;
         }
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref MemBlock64 copy(ReadOnlySpan<byte> src, ref MemBlock64 dst)
         {
-            var vSrc = vload(w512, first(src));
+            var vSrc = vload(w512, memory.first(src));
             vstore(vSrc, ref u8(dst));
             return ref dst;
         }
@@ -80,8 +80,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static void copy(in MemBlock64 src, ref MemBlock128 dst, byte offset)
-        {
-            seek(@as<MemBlock128,MemBlock64>(dst), offset) = src;
-        }
+            => seek(@as<MemBlock128,MemBlock64>(dst), offset) = src;
+
     }
 }

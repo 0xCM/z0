@@ -16,6 +16,72 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
+        IForm ParseIdentifier(string src)
+        {
+            if(Enum.TryParse<IForm>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        IsaKind ParseIsaKind(string src)
+        {
+            if(Enum.TryParse<IsaKind>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        IClass ParseIClass(string src)
+        {
+            if(Enum.TryParse<IClass>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        Category ParseCategory(string src)
+        {
+            if(Enum.TryParse<Category>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        AttributeKind ParseAttribute(string src)
+        {
+            if(Enum.TryParse<AttributeKind>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        Extension ParseExtension(string src)
+        {
+            if(Enum.TryParse<Extension>(src, out var dst))
+                return dst;
+            else
+                return 0;
+        }
+
+        Index<AttributeKind> ParseAttributes(string src)
+        {
+            var parts = src.SplitClean(Chars.Colon);
+            var count = parts.Length;
+            return count != 0 ? parts.Select(ParseAttribute) : sys.empty<AttributeKind>();
+        }
+
+        XedForm LoadForm(ushort index, XedFormSource src)
+        {
+            var id = ParseIdentifier(src.Form);
+            var iclass = ParseIClass(src.Class);
+            var category = ParseCategory(src.Category);
+            var attributes = ParseAttributes(src.Attributes);
+            var isa = ParseIsaKind(src.IsaSet);
+            var ext = ParseExtension(src.Extension);
+            return new XedForm((ushort)index, id, iclass, category, attributes, isa, ext);
+        }
+
         public Index<XedForm> LoadForms()
         {
             var records = LoadFormSources().View;
@@ -23,10 +89,7 @@ namespace Z0.Asm
             var buffer = alloc<XedForm>(count);
             var dst = span(buffer);
             for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(records,i);
-                seek(dst,i) = new XedForm(record.Form, new AsmMnemonic(record.Class), 0, 0);
-            }
+                seek(dst,i) = LoadForm((ushort)i, skip(records,i));
             return buffer;
         }
 

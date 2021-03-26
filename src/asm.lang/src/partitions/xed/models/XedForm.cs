@@ -13,25 +13,40 @@ namespace Z0.Asm
     {
         public readonly struct XedForm
         {
-            public Identifier Name {get;}
+            public ushort Index {get;}
 
-            public AsmMnemonic Mnemonic {get;}
+            public IForm Identifier {get;}
 
-            public AttributeKind Attributes {get;}
+            public IClass Class {get;}
+
+            public Category Category {get;}
+
+            public Index<AttributeKind> Attributes {get;}
 
             public IsaKind IsaKind {get;}
 
+            public Extension Extension {get;}
+
             [MethodImpl(Inline)]
-            public XedForm(Identifier name, AsmMnemonic monic, AttributeKind attribs, IsaKind isa)
+            public XedForm(ushort index, IForm key, IClass iclass, Category category, Index<AttributeKind> attribs, IsaKind isa, Extension ext)
             {
-                Name = name;
-                Mnemonic = monic;
+                Index = index;
+                Identifier = key;
+                Class = iclass;
+                Category = category;
                 Attributes = attribs;
                 IsaKind = isa;
+                Extension = ext;
             }
 
+            const string FormatPattern = "{0,-8} | {1,-56} | {2,-32} | {3,-16} | {4,-16} | {5}";
+
+            public static string Header
+                => string.Format(FormatPattern, nameof(Index), nameof(Identifier), nameof(Class),
+                     nameof(IsaKind),nameof(Extension), nameof(Attributes));
+
             public string Format()
-                => string.Format("{0,-48} | {1}", Name, Mnemonic);
+                => string.Format(FormatPattern, Index, Identifier, Class, IsaKind, Extension, Attributes.Delimit(Chars.Comma));
 
             public override string ToString()
                 => Format();

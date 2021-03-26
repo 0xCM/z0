@@ -137,7 +137,7 @@ namespace Z0
         {
             var w = w128;
             var stack = MemBlocks.alloc(n16);
-            ref var dst = ref MemBlocks.head<T>(ref stack);
+            ref var dst = ref MemBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
@@ -153,7 +153,7 @@ namespace Z0
         {
             var w = w256;
             var stack = MemBlocks.alloc(n32);
-            ref var dst = ref MemBlocks.head<T>(ref stack);
+            ref var dst = ref MemBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }
@@ -169,7 +169,7 @@ namespace Z0
         {
             var w = w512;
             var stack = MemBlocks.alloc(n64);
-            ref var dst = ref MemBlocks.head<T>(ref stack);
+            ref var dst = ref MemBlocks.first<T>(ref stack);
             gcpu.vstore(src, ref dst);
             return SpanBlocks.load(w, ref dst);
         }

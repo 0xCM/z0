@@ -41,10 +41,10 @@ namespace Z0
         public static Span<uint> unpack1x32x32(uint src)
         {
             var buffer = MemBlocks.alloc(n32);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
             var storage = MemBlocks.alloc(n128);
-            ref var target = ref MemBlocks.head<uint>(ref storage);
+            ref var target = ref MemBlocks.first<uint>(ref storage);
 
             unpack1x8x32(src, ref tmp);
             cpu.vinflate8x256x32u(tmp, 0, ref target);

@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock1 src)
+        public static ref byte first8(in MemBlock1 src)
             => ref u8(src);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock2 src)
+        public static ref byte first8(in MemBlock2 src)
             => ref u8(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock4 src)
+        public static ref byte first8(in MemBlock4 src)
             => ref u8(src);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock8 src)
+        public static ref byte first8(in MemBlock8 src)
             => ref u8(src);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock16 src)
+        public static ref byte first8(in MemBlock16 src)
             => ref u8(src);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock32 src)
+        public static ref byte first8(in MemBlock32 src)
             => ref u8(src);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock64 src)
+        public static ref byte first8(in MemBlock64 src)
             => ref u8(src);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in MemBlock128 src)
+        public static ref byte first8(in MemBlock128 src)
             => ref u8(src);
     }
 }

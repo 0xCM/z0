@@ -76,38 +76,58 @@ namespace Z0
         public static MemBlock8 alloc(N8 n)
             => default;
 
+        /// <summary>
+        /// Allocates 9 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock9 alloc(N9 n)
             => default;
 
+        /// <summary>
+        /// Allocates 10 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock10 alloc(N10 n)
             => default;
 
+        /// <summary>
+        /// Allocates 11 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock11 alloc(N11 n)
             => default;
 
+        /// <summary>
+        /// Allocates 12 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock12 alloc(N12 n)
             => default;
 
+        /// <summary>
+        /// Allocates 13 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock13 alloc(N13 n)
             => default;
 
         /// <summary>
-        /// Allocates a 14-byte block
+        /// Allocates 14 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock14 alloc(N14 n)
             => default;
 
         /// <summary>
-        /// Allocates a 15-byte block
+        /// Allocates 15 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock15 alloc(N15 n)
             => default;
@@ -115,8 +135,7 @@ namespace Z0
         /// <summary>
         /// Allocates 16 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock16 alloc(N16 n)
             => default;
@@ -124,8 +143,7 @@ namespace Z0
         /// <summary>
         /// Allocates 32 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock32 alloc(N32 n)
             => default;
@@ -133,8 +151,7 @@ namespace Z0
         /// <summary>
         /// Allocates 64 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock64 alloc(N64 n)
             => default;
@@ -142,8 +159,7 @@ namespace Z0
         /// <summary>
         /// Allocates 128 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
         public static MemBlock128 alloc(N128 n)
             => default;

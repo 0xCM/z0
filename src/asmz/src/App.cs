@@ -892,8 +892,8 @@ namespace Z0.Asm
             var pipe = Wf.Xed();
             var forms = pipe.LoadForms();
             using var log = ShowLog("xed-forms", FS.Extensions.Csv);
+            log.Show(XedModels.XedForm.Header);
             root.iter(forms, form => log.Show(form));
-
         }
 
         public void ShowXedSymbols()
@@ -907,7 +907,7 @@ namespace Z0.Asm
         {
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
 
-            ShowXedSymbols();
+            ShowXedForms();
 
             //Wf.AsmFormPipe().EmitFormHashes();
             //ShowThumprintCatalog();

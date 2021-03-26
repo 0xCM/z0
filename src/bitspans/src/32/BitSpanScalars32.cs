@@ -18,10 +18,10 @@ namespace Z0
         public static BitSpan32 from(byte src)
         {
             var buffer = MemBlocks.alloc(n8);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
             var storage = MemBlocks.alloc(n32);
-            ref var target = ref MemBlocks.head<uint>(ref storage);
+            ref var target = ref MemBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8x8(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
@@ -32,10 +32,10 @@ namespace Z0
         public static BitSpan32 from(ushort src)
         {
             var buffer = MemBlocks.alloc(n16);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
             var storage = MemBlocks.alloc(n64);
-            ref var target = ref MemBlocks.head<uint>(ref storage);
+            ref var target = ref MemBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8x16(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
@@ -47,10 +47,10 @@ namespace Z0
         public static BitSpan32 from(uint src)
         {
             var buffer = MemBlocks.alloc(n32);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
             var storage = MemBlocks.alloc(n128);
-            ref var target = ref MemBlocks.head<uint>(ref storage);
+            ref var target = ref MemBlocks.first<uint>(ref storage);
 
             BitPack.unpack1x8x32(src, ref tmp);
             vinflate8x256x32u(tmp, 0, ref target);
@@ -64,7 +64,7 @@ namespace Z0
         public static BitSpan32 from(ulong src)
         {
             var buffer = MemBlocks.alloc(n64);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
             Span<uint> storage = new uint[64];
             ref var target = ref first(storage);
@@ -85,7 +85,7 @@ namespace Z0
         public static ref readonly BitSpan32 fill(byte src, in BitSpan32 dst)
         {
             var buffer = MemBlocks.alloc(n8);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x8x8(src, ref tmp);
@@ -97,7 +97,7 @@ namespace Z0
         public static ref readonly BitSpan32 fill(ushort src, in BitSpan32 dst)
         {
             var buffer = MemBlocks.alloc(n16);
-            ref var tmp = ref MemBlocks.head<byte>(ref buffer);
+            ref var tmp = ref MemBlocks.first<byte>(ref buffer);
             ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack1x8x16(src, ref tmp);
