@@ -23,11 +23,11 @@ namespace Z0
             Data = memory.alloc<BinaryRes>(count);
 
             var index = 0;
-            Register(index++, OpIdentityParser.parse(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);
-            Register(index++, OpIdentityParser.parse(nameof(or_ᐤ16uㆍ16uᐤ)), or_ᐤ16uㆍ16uᐤ);
-            Register(index++, OpIdentityParser.parse(nameof(or_ᐤ32uㆍ32uᐤ)), or_ᐤ32uㆍ32uᐤ);
-            Register(index++, OpIdentityParser.parse(nameof(or_ᐤ64uㆍ64uᐤ)), or_ᐤ64uㆍ64uᐤ);
-            Register(index++, OpIdentityParser.parse(nameof(within_ᐤ8uㆍ8uㆍ8uᐤ)), within_ᐤ8uㆍ8uㆍ8uᐤ);
+            Register(index++, ApiUri.opid(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);
+            Register(index++, ApiUri.opid(nameof(or_ᐤ16uㆍ16uᐤ)), or_ᐤ16uㆍ16uᐤ);
+            Register(index++, ApiUri.opid(nameof(or_ᐤ32uㆍ32uᐤ)), or_ᐤ32uㆍ32uᐤ);
+            Register(index++, ApiUri.opid(nameof(or_ᐤ64uㆍ64uᐤ)), or_ᐤ64uㆍ64uᐤ);
+            Register(index++, ApiUri.opid(nameof(within_ᐤ8uㆍ8uㆍ8uᐤ)), within_ᐤ8uㆍ8uㆍ8uᐤ);
         }
 
         public readonly BinaryRes[] Data;

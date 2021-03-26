@@ -24,7 +24,7 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return primal(arg).AsTypeIdentity().ToOption();
+                return ApiUri.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return some(EnumIdentity.define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
@@ -40,25 +40,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Creates a type identity provider from a host type that realizes the required interface, if possible;
-        /// otherwise, returns none
-        /// </summary>
-        /// <param name="host">A type that realizes an identity provider</param>
-        public static Option<ITypeIdentityProvider> HostedProvider(Type host)
-            => Option.Try(() => Activator.CreateInstance(host) as ITypeIdentityProvider);
-
-        public static Option<ITypeIdentityProvider> AttributedProvider(Type t)
-            => from a in t.Tag<IdentityProviderAttribute>()
-               from tid in HostedProvider(a.Host.ToOption().ValueOrDefault(t))
-               select tid;
-
-        /// <summary>
         /// Retrieves a cached identity provider, if found; otherwise, creates and caches the identity provider for the source type
         /// </summary>
         /// <param name="t">The source type</param>
         [MethodImpl(Inline)]
         public static ITypeIdentityProvider IdentityProvider(Type src)
-            => ApiIdentity.provider(src, CreateProvider);
+            => TypeIdentityProviders.create(src, DefaultProvider);
 
         static TypeIdentity DoDivination(Type arg)
             => default(TypeIdentityDiviner).DivineIdentity(arg);
@@ -132,27 +119,14 @@ namespace Z0
         static readonly ITypeIdentityProvider DefaultProvider
             = new TypeIdentityProvider(DoDivination);
 
-        internal static ITypeIdentityProvider CreateProvider(Type t)
-        {
-            var provider = none<ITypeIdentityProvider>();
-            if(t.Tagged<IdentityProviderAttribute>())
-                provider = AttributedProvider(t);
-            else if(t.Reifies<ITypeIdentityProvider>())
-                provider = HostedProvider(t);
-            return provider.ValueOrElse(() => DefaultProvider);
-        }
-
-        /// <summary>
-        /// Defines a primal identity if the source type represents a recognized primitive; otherwise,
-        /// returns <see cref='PrimalIdentity.Empty'/>
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [Op]
-        static PrimalIdentity primal(Type src)
-            => src.IsSystemDefined() ?
-               (NumericKinds.test(src)
-               ? new PrimalIdentity(src.NumericKind(), ClrDisplaySig.keyword(src))
-               : new PrimalIdentity(ClrDisplaySig.keyword(src))
-               ) : PrimalIdentity.Empty;
+        // internal static ITypeIdentityProvider CreateProvider(Type t)
+        // {
+        //     var provider = none<ITypeIdentityProvider>();
+        //     if(t.Tagged<IdentityProviderAttribute>())
+        //         provider = TypeIdentityProviders.attributed(t);
+        //     else if(t.Reifies<ITypeIdentityProvider>())
+        //         provider = TypeIdentityProviders.hosted(t);
+        //     return provider.ValueOrElse(() => DefaultProvider);
+        // }
     }
 }

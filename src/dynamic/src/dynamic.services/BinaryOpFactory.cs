@@ -50,7 +50,7 @@ namespace Z0
         static OpIdentity identify<T>(string name)
         {
             var operand = MultiDiviner.Service.Identify(typeof(T));
-            return OpIdentityParser.Service.Parse($"{name}_({operand},{operand})");
+            return ApiUri.opid($"{name}_({operand},{operand})");
         }
 
         static BinaryOp<T> emit<T>(OpIdentity id, in SegRef target)

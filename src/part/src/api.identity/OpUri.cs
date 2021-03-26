@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static ApiUriDelimiters;
 
     public readonly struct OpUri : IApiUri<OpUri>
     {
@@ -46,27 +45,13 @@ namespace Z0
             => Host.Owner;
 
         [MethodImpl(Inline)]
-        public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Hex, host, group, opid);
-
-        [MethodImpl(Inline)]
-        public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Located, host, group, opid);
-
-        [MethodImpl(Inline), Op]
-        public static OpUri define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(scheme, host, group, opid);
-
-        [MethodImpl(Inline)]
         public OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             Scheme = scheme;
             Host = host;
             OpId = opid;
             GroupName = group;
-            UriText = (opid.IsEmpty
-                ? QueryText(scheme, host.Owner, host.Name, group)
-                : FullUriText(scheme, host.Owner, host.Name, GroupName, opid)).Trim();
+            UriText = ApiUri.BuildUriText(scheme, host, group, opid);
         }
 
         public bool IsEmpty
@@ -112,11 +97,5 @@ namespace Z0
         /// </summary>
         public static OpUri Empty
             => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
-
-        static string QueryText(ApiUriScheme scheme, PartId part, string host, string group)
-            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}";
-
-        static string FullUriText(ApiUriScheme scheme, PartId part, string host, string group, OpIdentity opid)
-            => $"{scheme.ToString().ToLower()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.Identifier}";
     }
 }

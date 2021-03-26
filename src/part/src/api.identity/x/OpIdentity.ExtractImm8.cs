@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = ApiIdentity;
-
     partial class XApiId
     {
         /// <summary>
@@ -19,6 +17,6 @@ namespace Z0
         /// <param name="src">The source identity</param>
         [MethodImpl(Inline), Op]
         public static Option<byte> ExtractImm8(this OpIdentity src)
-            => api.imm8(src);
+            => ApiUri.imm8(src);
     }
 }

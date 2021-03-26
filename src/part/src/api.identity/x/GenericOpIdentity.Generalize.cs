@@ -4,10 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Part;
+
     partial class XApiId
     {
-         [Op]
-         public static string FormatLegalIdentifier(this OpIdentity src)
-            => LegalIdentityBuilder.code(src);
+        [MethodImpl(Inline)]
+        public static OpIdentity Generalize(this OpIdentityG src)
+            => ApiUri.opid(src.Identifier);
     }
 }

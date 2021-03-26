@@ -90,11 +90,11 @@ namespace Z0
             var w = (CellWidth)tw;
             var g = generic ? $"{IDI.Generic}" : EmptyString;
             if(generic && k == 0)
-                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
+                return ApiUri.opid(text.concat(opname, IDI.PartSep, IDI.Generic));
             else if(w.IsSome())
-                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.FormatValue()}{IDI.SegSep}{k.Format()}"));
+                return ApiUri.opid(text.concat(opname, IDI.PartSep, $"{g}{w.FormatValue()}{IDI.SegSep}{k.Format()}"));
             else
-                return OpIdentityParser.parse(text.concat($"{opname}_{g}{k.Format()}"));
+                return ApiUri.opid(text.concat($"{opname}_{g}{k.Format()}"));
         }
 
         /// <summary>

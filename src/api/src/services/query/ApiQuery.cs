@@ -57,7 +57,7 @@ namespace Z0
 
         static ApiGroupNG[] direct(IApiHost src)
             => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
-                select new ApiGroupNG(OpIdentityParser.parse(d.Key), src, d)).Array();
+                select new ApiGroupNG(ApiUri.opid(d.Key), src, d)).Array();
 
         static IEnumerable<ApiMethodNG> DirectOpSpecs(IApiHost src)
             => from m in TaggedOps(src).NonGeneric() select new ApiMethodNG(src, Diviner.Identify(m), m);

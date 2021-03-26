@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Linq;
 
-    partial class XApiId
+    public static partial class XApiId
     {
-       /// <summary>
+        /// <summary>
         /// Enables the generic indicator
         /// </summary>
         [Op]
@@ -18,7 +18,7 @@ namespace Z0
             if(src.Components.Skip(1).First()[0] == IDI.Generic)
                 return src;
             else
-               return OpIdentityParser.parse(
+               return ApiUri.opid(
                    text.concat(src.Identifier.LeftOfFirst(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOfFirst(IDI.PartSep)));
         }
     }

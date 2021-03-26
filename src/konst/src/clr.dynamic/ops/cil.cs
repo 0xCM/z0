@@ -17,7 +17,7 @@ namespace Z0
         public static OpMsil cil(DynamicMethod src)
         {
             var flags = src.GetMethodImplementationFlags();
-            var uri = OpUri.located(src.DeclaringType.HostUri(), src.Name, src.Identify());
+            var uri = ApiUri.located(src.DeclaringType.HostUri(), src.Name, src.Identify());
             MemoryAddress address = pointer(src);
             return new OpMsil(src.MetadataToken, address, uri, src.ResolveSignature(), cilbytes(src), flags);
         }

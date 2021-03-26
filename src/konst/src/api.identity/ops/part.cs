@@ -5,10 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
-    using static TextRules;
 
     partial struct ApiIdentity
     {
@@ -22,9 +18,5 @@ namespace Z0
             else
                 return root.none<TypeIndicator>();
         }
-
-        [MethodImpl(Inline), Op]
-        public static PartId part(Type src)
-            => src.Assembly.Id();
     }
 }

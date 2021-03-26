@@ -4,12 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Root;
-
-    partial struct ApiIdentity
+    partial class XApiId
     {
+         [Op]
+         public static string FormatCodeIdentifier(this OpIdentity src)
+            => LegalIdentityBuilder.code(src);
     }
 }

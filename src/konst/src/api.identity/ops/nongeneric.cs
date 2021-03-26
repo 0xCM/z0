@@ -24,7 +24,7 @@ namespace Z0
             id += name(src);
             id += IDI.PartSep;
             id += sequential(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
-            return OpIdentityParser.parse(id);
+            return ApiUri.opid(id);
         }
     }
 }

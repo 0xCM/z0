@@ -4,20 +4,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     partial class XApiId
     {
         /// <summary>
-        /// Clears an attached immediate suffix, if any
+        /// Enables the assembly indicator
         /// </summary>
         [Op]
-        public static OpIdentity WithoutImm8(this OpIdentity src)
+        public static OpIdentity WithAsm(this OpIdentity src)
         {
-            var perhaps = src.ExtractImm8();
-            if(!perhaps)
+            if(src.Identifier.Contains(IDI.AsmLocator))
                 return src;
-            return OpIdentityParser.parse(src.Identifier.Remove(ApiUri.Imm8Suffix(perhaps.Value)));
+            else
+                return ApiUri.opid(src.Identifier + IDI.AsmLocator);
         }
     }
 }
