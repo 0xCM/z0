@@ -10,14 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         /// <summary>
         /// Presents the leading source storage cell as reference to an unsigned 32-bit integer
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref uint head32(in BitBlock32 src)
+        public static ref uint head32(in MemBlock4 src)
             => ref u32(src);
     }
 }

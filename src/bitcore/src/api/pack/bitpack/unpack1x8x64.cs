@@ -16,7 +16,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack1x8x64(ulong src, Span<uint> dst)
         {
-            var buffer = MemoryStacks.alloc(w512);
+            var buffer = MemBlocks.alloc(n64);
             ref var tmp = ref first(slice(dst,56,8).Recover<uint,byte>());
             ref var target = ref first(dst);
 

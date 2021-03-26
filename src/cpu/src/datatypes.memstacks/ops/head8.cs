@@ -10,70 +10,70 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock8 src)
-            => ref u8(src.X0);
+        public static ref byte head8(in MemBlock1 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock16 src)
-            => ref u8(src.X0);
+        public static ref byte head8(in MemBlock2 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock32 src)
-            => ref u8(src.X0);
+        public static ref byte head8(in MemBlock4 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock64 src)
-            => ref u8(src.X0);
+        public static ref byte head8(in MemBlock8 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock128 src)
-            => ref u8(src.X0);
+        public static ref byte head8(in MemBlock16 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock256 src)
-            => ref head8(src.X0);
+        public static ref byte head8(in MemBlock32 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock512 src)
-            => ref head8(src.X0);
+        public static ref byte head8(in MemBlock64 src)
+            => ref u8(src);
 
         /// <summary>
         /// Presents the leading source storage cell as a byte reference
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref byte head8(in BitBlock1024 src)
-            => ref head8(src.X0);
+        public static ref byte head8(in MemBlock128 src)
+            => ref u8(src);
     }
 }

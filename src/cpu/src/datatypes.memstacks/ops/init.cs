@@ -11,13 +11,13 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         [MethodImpl(Inline), Op]
-        public static StackBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
+        public static MemBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
         {
             var src = new Seg512(lo,hi);
-            var dst = alloc(w8, n32);
+            var dst = alloc(n32);
             copy(bytes(src), ref dst);
             return dst;
         }
@@ -37,10 +37,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock32 init<T>(in T src, W32 w)
+        public static MemBlock4 init<T>(in T src, W32 w)
             where T : unmanaged
         {
-            ref var dst8 = ref alloc(out BitBlock32 dst);
+            ref var dst8 = ref alloc(out MemBlock4 dst);
             if(typeof(T) == typeof(byte))
             {
                 ref var x = ref dst8;
@@ -78,29 +78,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock64 init<T>(in T src, W64 w)
+        public static MemBlock8 init<T>(in T src, W64 w)
             where T : unmanaged
         {
-            var x = cpu.vbroadcast(w128, uint8(src));
-            cpu.vstore(x, ref alloc(out BitBlock128 dst));
-            return @as<BitBlock128,BitBlock64>(dst);
+            var x = vbroadcast(w128, uint8(src));
+            vstore(x, ref alloc(out MemBlock16 dst));
+            return @as<MemBlock16,MemBlock8>(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock128 init<T>(in T src, W128 w)
+        public static MemBlock16 init<T>(in T src, W128 w)
             where T : unmanaged
         {
-            var x = cpu.vbroadcast(w, uint8(src));
-            cpu.vstore(x, ref alloc(out BitBlock128 dst));
+            var x = vbroadcast(w, uint8(src));
+            vstore(x, ref alloc(out MemBlock16 dst));
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static BitBlock256 init<T>(in T src, W256 w)
+        public static MemBlock32 init<T>(in T src, W256 w)
             where T : unmanaged
         {
-            var x = cpu.vbroadcast(w, uint8(src));
-            cpu.vstore(x, ref alloc(out BitBlock256 dst));
+            var x = vbroadcast(w, uint8(src));
+            vstore(x, ref alloc(out MemBlock32 dst));
             return dst;
         }
     }

@@ -10,175 +10,90 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         /// <summary>
         /// Stack allocates 8 bits of storage
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock8 alloc(W8 w)
+        public static MemBlock1 alloc(N1 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 16 bits of storage
+        /// Stack allocates 2 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock16 alloc(W16 w)
+        public static MemBlock2 alloc(N2 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 32 bits of storage
+        /// Allocates 3 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock32 alloc(W32 w)
+        public static MemBlock3 alloc(N3 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 64 bits of storage
+        /// Allocates 4 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock64 alloc(W64 w)
+        public static MemBlock4 alloc(N4 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 16 bytes = 128 bits of storage
+        /// Allocates 5 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock128 alloc(W128 w)
+        public static MemBlock5 alloc(N5 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 32 bytes = 256-bits of storage
+        /// Allocates 6 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock256 alloc(W256 w)
+        public static MemBlock6 alloc(N6 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 64 bytes = 512-bits of storage
+        /// Allocates 7 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
-        /// <param name="seg">The segment width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock512 alloc(W512 w)
+        public static MemBlock7 alloc(N7 n)
             => default;
 
         /// <summary>
-        /// Stack allocates 128 bytes = 1024-bits of storage
+        /// Allocates 8 bytes of storage
         /// </summary>
-        /// <param name="w">The storage width</param>
+        /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static BitBlock1024 alloc(W1024 w)
+        public static MemBlock8 alloc(N8 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock8 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock16 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock32 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock64 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock128 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock256 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref byte alloc(out BitBlock512 dst)
-        {
-            dst = default;
-            return ref u8(dst);
-        }
-
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock1 alloc(W8 w, N1 n)
+        public static MemBlock9 alloc(N9 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static StackBlock2 alloc(W8 w, N2 n)
+        public static MemBlock10 alloc(N10 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static StackBlock3 alloc(W8 w, N3 n)
+        public static MemBlock11 alloc(N11 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static StackBlock4 alloc(W8 w, N4 n)
+        public static MemBlock12 alloc(N12 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static StackBlock5 alloc(W8 w, N5 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock6 alloc(W8 w, N6 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock7 alloc(W8 w, N7 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock8 alloc(W8 w, N8 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock9 alloc(W8 w, N9 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock10 alloc(W8 w, N10 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock11 alloc(W8 w, N11 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock12 alloc(W8 w, N12 n)
-            => default;
-
-        [MethodImpl(Inline), Op]
-        public static StackBlock13 alloc(W8 w, N13 n)
+        public static MemBlock13 alloc(N13 n)
             => default;
 
         /// <summary>
@@ -186,7 +101,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock14 alloc(W8 w, N14 n)
+        public static MemBlock14 alloc(N14 n)
             => default;
 
         /// <summary>
@@ -194,71 +109,96 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock15 alloc(W8 w, N15 n)
+        public static MemBlock15 alloc(N15 n)
             => default;
 
         /// <summary>
-        /// Allocates a 16-byte block
+        /// Allocates 16 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock16 alloc(W8 w, N16 n)
+        public static MemBlock16 alloc(N16 n)
             => default;
 
         /// <summary>
-        /// Allocates a 32-byte block
+        /// Allocates 32 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock32 alloc(W8 w, N32 n)
+        public static MemBlock32 alloc(N32 n)
             => default;
 
         /// <summary>
-        /// Allocates a 64-byte block
+        /// Allocates 64 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock64 alloc(W8 w, N64 n)
+        public static MemBlock64 alloc(N64 n)
             => default;
 
         /// <summary>
-        /// Allocates a 128-byte block
+        /// Allocates 128 bytes of storage
         /// </summary>
-        /// <param name="n">The byte-count selector</param>
+        /// <param name="w">The storage width</param>
+        /// <param name="seg">The segment width</param>
         [MethodImpl(Inline), Op]
-        public static StackBlock128 alloc(W8 w, N128 n)
+        public static MemBlock128 alloc(N128 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out StackBlock8 dst)
+        public static ref byte alloc(out MemBlock1 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out StackBlock16 dst)
+        public static ref byte alloc(out MemBlock2 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out StackBlock32 dst)
+        public static ref byte alloc(out MemBlock4 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out StackBlock64 dst)
+        public static ref byte alloc(out MemBlock8 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out StackBlock128 dst)
+        public static ref byte alloc(out MemBlock16 dst)
+        {
+            dst = default;
+            return ref u8(dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref byte alloc(out MemBlock32 dst)
+        {
+            dst = default;
+            return ref u8(dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref byte alloc(out MemBlock64 dst)
+        {
+            dst = default;
+            return ref u8(dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref byte alloc(out MemBlock128 dst)
         {
             dst = default;
             return ref u8(dst);
@@ -269,7 +209,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out StackBlock128 a, out StackBlock128 b)
+        public static void alloc(out MemBlock16 a, out MemBlock16 b)
         {
             a = default;
             b = default;
@@ -280,7 +220,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out StackBlock128 a, out StackBlock128 b, out StackBlock128 c)
+        public static void alloc(out MemBlock64 a, out MemBlock64 b, out MemBlock64 c)
         {
             a = default;
             b = default;
@@ -292,7 +232,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out StackBlock128 a, out StackBlock128 b, out StackBlock128 c, out StackBlock128 d)
+        public static void alloc(out MemBlock128 a, out MemBlock128 b, out MemBlock128 c, out MemBlock128 d)
         {
             a = default;
             b = default;

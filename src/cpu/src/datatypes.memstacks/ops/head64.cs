@@ -10,14 +10,14 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         /// <summary>
         /// Presents the leading source storage cell as reference to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitBlock64 src)
+        public static ref ulong head64(ref MemBlock8 src)
             => ref u64(src);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitBlock128 src)
+        public static ref ulong head64(ref MemBlock16 src)
             => ref u64(src);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitBlock256 src)
+        public static ref ulong head64(ref MemBlock32 src)
             => ref u64(src);
 
         /// <summary>
@@ -41,15 +41,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitBlock512 src)
-            => ref head64(ref src.X0);
+        public static ref ulong head64(ref MemBlock64 src)
+            => ref u64(src);
 
         /// <summary>
         /// Presents the leading source storage cell as reference to an unsigned 64-bit integer
         /// </summary>
         /// <param name="src">The storage source</param>
         [MethodImpl(Inline), Op]
-        public static ref ulong head64(ref BitBlock1024 src)
-            => ref head64(ref src.X0);
+        public static ref ulong head64(ref MemBlock128 src)
+            => ref u64(src);
     }
 }

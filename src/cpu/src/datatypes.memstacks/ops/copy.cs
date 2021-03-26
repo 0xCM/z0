@@ -10,10 +10,10 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class MemoryStacks
+    partial class MemBlocks
     {
         [MethodImpl(Inline), Op]
-        public static ref StackBlock2 copy(ReadOnlySpan<byte> src, ref StackBlock2 dst)
+        public static ref MemBlock2 copy(ReadOnlySpan<byte> src, ref MemBlock2 dst)
         {
             u8(dst,0) = skip(src,0);
             u8(dst,1) = skip(src,1);
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock3 copy(ReadOnlySpan<byte> src, ref StackBlock3 dst)
+        public static ref MemBlock3 copy(ReadOnlySpan<byte> src, ref MemBlock3 dst)
         {
             u8(dst,0) = skip(src,0);
             u8(dst,1) = skip(src,1);
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock4 copy(ReadOnlySpan<byte> src, ref StackBlock4 dst)
+        public static ref MemBlock4 copy(ReadOnlySpan<byte> src, ref MemBlock4 dst)
         {
             u8(dst,0) = skip(src,0);
             u8(dst,1) = skip(src,1);
@@ -40,48 +40,48 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock8 copy(ReadOnlySpan<byte> src, ref StackBlock8 dst)
+        public static ref MemBlock8 copy(ReadOnlySpan<byte> src, ref MemBlock8 dst)
         {
-            dst = first(recover<byte,StackBlock8>(src));
+            dst = first(recover<byte,MemBlock8>(src));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock16 copy(ReadOnlySpan<byte> src, ref StackBlock16 dst)
+        public static ref MemBlock16 copy(ReadOnlySpan<byte> src, ref MemBlock16 dst)
         {
-            var vSrc = cpu.vload(w128, first(src));
-            cpu.vstore(vSrc, ref u8(dst));
+            var vSrc = vload(w128, first(src));
+            vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock32 copy(ReadOnlySpan<byte> src, ref StackBlock32 dst)
+        public static ref MemBlock32 copy(ReadOnlySpan<byte> src, ref MemBlock32 dst)
         {
-            var vSrc = cpu.vload(w256, first(src));
-            cpu.vstore(vSrc, ref u8(dst));
+            var vSrc = vload(w256, first(src));
+            vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock64 copy(ReadOnlySpan<byte> src, ref StackBlock64 dst)
+        public static ref MemBlock64 copy(ReadOnlySpan<byte> src, ref MemBlock64 dst)
         {
-            var vSrc = cpu.vload(w512, first(src));
-            cpu.vstore(vSrc, ref u8(dst));
+            var vSrc = vload(w512, first(src));
+            vstore(vSrc, ref u8(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ref StackBlock128 copy(ReadOnlySpan<byte> src, ref StackBlock128 dst)
+        public static ref MemBlock128 copy(ReadOnlySpan<byte> src, ref MemBlock128 dst)
         {
-            copy(src, ref dst.Lo);
-            copy(slice(src,64), ref dst.Hi);
+            copy(src, ref dst.A);
+            copy(slice(src,64), ref dst.B);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static void copy(in StackBlock64 src, ref StackBlock128 dst, byte offset)
+        public static void copy(in MemBlock64 src, ref MemBlock128 dst, byte offset)
         {
-            seek(@as<StackBlock128,StackBlock64>(dst), offset) = src;
+            seek(@as<MemBlock128,MemBlock64>(dst), offset) = src;
         }
     }
 }
