@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    using K = RegisterKind;
+    using K = RegKind;
     using W = W8;
     using T = System.Byte;
     using G = AsmRegs.r8;
@@ -31,7 +31,7 @@ namespace Z0.Asm
                 get => Data;
             }
 
-            public RegisterKind RegKind
+            public RegKind RegKind
             {
                 [MethodImpl(Inline)]
                 get => default(R).RegKind;

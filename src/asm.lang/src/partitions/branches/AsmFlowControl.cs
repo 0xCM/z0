@@ -14,7 +14,7 @@ namespace Z0.Asm
     public class AsmFlowControl : WfService<AsmFlowControl>
     {
         [Op]
-        public ref JccCode EvalJccCode(JccKind src, out JccCode code)
+        public ref JccCode EvalJcc(JmpKind src, out JccCode code)
         {
             code = 0;
             return ref code;

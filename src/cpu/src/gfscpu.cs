@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Generic scalar intrinsics over floating-point domains
     /// </summary>
-    //[ApiHost]
+    [ApiHost]
     public static class gfscpu
     {
         [MethodImpl(Inline), Op, Closures(Floats)]

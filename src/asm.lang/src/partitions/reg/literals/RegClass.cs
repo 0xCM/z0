@@ -77,5 +77,24 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("k")]
         Mask = 11,
+
+        /// <summary>
+        /// Classifies a 128-bit bounds register
+        /// </summary>
+        [Symbol("bnd")]
+        BND = 12,
+
+        /// <summary>
+        /// Classifies an 80-bit fpu register
+        /// </summary>
+        [Symbol("st")]
+        ST = 13,
+
+        /// <summary>
+        /// Classifies a 64-bit mmx register
+        /// </summary>
+        [Symbol("mmx")]
+        MMX = 14,
+
     }
 }

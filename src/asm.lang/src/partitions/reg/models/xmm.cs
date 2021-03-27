@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    using K = RegisterKind;
+    using K = RegKind;
     using W = W128;
     using T = Cell128;
 
@@ -45,7 +45,7 @@ namespace Z0.Asm
             public Xmm(Cell128 value)
                 => Content = value;
 
-            public RegisterKind RegKind
+            public RegKind RegKind
                 => default(R).RegKind;
 
             [MethodImpl(Inline)]

@@ -16,14 +16,14 @@ namespace Z0.Asm
     {
         public uint Displacement {get;}
 
-        public RegisterKind Base {get;}
+        public RegKind Base {get;}
 
-        public RegisterKind Index {get;}
+        public RegKind Index {get;}
 
         public MemoryScale Scale {get;}
 
         [MethodImpl(Inline)]
-        public MemoryOffset(uint dx, RegisterKind @base, RegisterKind index, MemoryScale scale)
+        public MemoryOffset(uint dx, RegKind @base, RegKind index, MemoryScale scale)
         {
             Displacement = dx;
             Base = @base;

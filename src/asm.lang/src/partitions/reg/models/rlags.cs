@@ -15,7 +15,7 @@ namespace Z0.Asm
         {
             public RFlagKind Content  {get; private set;}
 
-            public RegisterKind RegKind => RegisterKind.RFLAGS;
+            public RegKind RegKind => RegKind.RFLAGS;
 
             public bit CF
             {

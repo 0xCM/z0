@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    using K = RegisterKind;
+    using K = RegKind;
     using T = Cell512;
 
     partial struct AsmRegs
@@ -18,10 +18,10 @@ namespace Z0.Asm
         {
             public Cell512 Content {get;}
 
-            public RegisterKind RegKind {get;}
+            public RegKind RegKind {get;}
 
             [MethodImpl(Inline)]
-            public zmm(Cell512 value, RegisterKind kind)
+            public zmm(Cell512 value, RegKind kind)
             {
                 Content = value;
                 RegKind = kind;
@@ -36,7 +36,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             public Zmm(Cell512 value)
                 => Content = value;
-            public RegisterKind RegKind
+            public RegKind RegKind
                 => default(R).RegKind;
 
             [MethodImpl(Inline)]

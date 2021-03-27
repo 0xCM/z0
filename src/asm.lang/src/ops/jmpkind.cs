@@ -112,16 +112,11 @@ namespace Z0.Asm
                 case JO:
                     kind = JmpKind.JO;
                     break;
+                case JPE:
                 case JP:
                     kind= JmpKind.JP;
                     break;
 
-                case JPE:
-                    kind= JmpKind.JPE;
-                    break;
-                // case JPO:
-                //     kind= JmpKind.JPO;
-                //     break;
                 case JS:
                     kind= JmpKind.JS;
                     break;

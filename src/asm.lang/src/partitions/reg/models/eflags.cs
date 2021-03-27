@@ -28,7 +28,7 @@ namespace Z0.Asm
             }
 
             [Ignore]
-            public RegisterKind RegKind => RegisterKind.EFLAGS;
+            public RegKind RegKind => RegKind.EFLAGS;
 
             public bit CF
             {

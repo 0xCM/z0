@@ -11,37 +11,40 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [Op]
-        public static T branch(Branch04 m, C src)
+        partial struct Branches
         {
-            switch(src)
+            [Op]
+            public static T branch(Branch04 m, C src)
             {
-                case C0:
-                    return R0;
-                case C1:
-                    return R1;
-                case C2:
-                    return R2;
-                case C3:
-                    return R3;
-                case C4:
-                    return R4;
-                case C5:
-                    return R5;
-                case C6:
-                    return R6;
-                case C7:
-                    return R7;
-                case C8:
-                    return R8;
-                case C9:
-                    return R9;
-                case CA:
-                    return RA;
-                case CB:
-                    return RB;
-                default:
-                    return 0;
+                switch(src)
+                {
+                    case C0:
+                        return R0;
+                    case C1:
+                        return R1;
+                    case C2:
+                        return R2;
+                    case C3:
+                        return R3;
+                    case C4:
+                        return R4;
+                    case C5:
+                        return R5;
+                    case C6:
+                        return R6;
+                    case C7:
+                        return R7;
+                    case C8:
+                        return R8;
+                    case C9:
+                        return R9;
+                    case CA:
+                        return RA;
+                    case CB:
+                        return RB;
+                    default:
+                        return 0;
+                }
             }
         }
 
@@ -95,6 +98,5 @@ namespace Z0.Asm
 
             public const T RB = 0xcc;
         }
-
     }
 }

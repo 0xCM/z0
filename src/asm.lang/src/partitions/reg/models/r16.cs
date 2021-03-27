@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    using K = RegisterKind;
+    using K = RegKind;
     using W = W16;
     using T = System.UInt16;
     using G = AsmRegs.r16;
@@ -50,7 +50,7 @@ namespace Z0.Asm
             public R16(ushort value)
                 => Content = value;
 
-            public RegisterKind RegKind
+            public RegKind RegKind
             {
                 [MethodImpl(Inline)]
                 get => default(R).RegKind;

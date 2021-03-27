@@ -5,14 +5,16 @@
 namespace Z0.Asm
 {
     using System;
-    using static Konst;
+    using System.Runtime.CompilerServices;
+
     using static Asm.IceRegister;
 
     using R = Asm.IceRegister;
 
-    readonly partial struct RegisterKindConverter
+    readonly partial struct RegConversionData
     {
-        static ReadOnlySpan<R> IceRegisters() => new R[]{
+        [FixedAddressValueType]
+        internal static Index<R> IceRegisters = new R[]{
             None,
             AL, // 1,
             CL, // 2,

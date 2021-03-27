@@ -12,25 +12,28 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [Op]
-        public static uint branch(Branch01 m, string src)
+        partial struct Branches
         {
-            switch(src)
+            [Op]
+            public static uint branch(Branch01 m, string src)
             {
-                case C0:
-                    return R0;
-                case C1:
-                    return R1;
-                case C2:
-                    return R2;
-                case C3:
-                    return R3;
-                case C4:
-                    return R4;
-                case C5:
-                    return R5;
-                default:
-                    return 0;
+                switch(src)
+                {
+                    case C0:
+                        return R0;
+                    case C1:
+                        return R1;
+                    case C2:
+                        return R2;
+                    case C3:
+                        return R3;
+                    case C4:
+                        return R4;
+                    case C5:
+                        return R5;
+                    default:
+                        return 0;
+                }
             }
         }
 

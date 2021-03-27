@@ -172,7 +172,6 @@ namespace Z0
         public static Vector128<double> vmuls(Vector128<double> x, Vector128<double> y)
             =>  MultiplyScalar(x, y);
 
-
         /// <summary>
         /// __m128 _mm_fmadd_ss (__m128 a, __m128 b, __m128 c) VFMADDSS xmm, xmm, xmm/m32
         /// </summary>

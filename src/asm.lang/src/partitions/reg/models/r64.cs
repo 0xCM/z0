@@ -9,10 +9,11 @@ namespace Z0.Asm
 
     using static Part;
 
-    using K = RegisterKind;
+    using K = RegKind;
     using W = W64;
     using T = System.UInt64;
     using G = AsmRegs.r64;
+
 
     partial struct AsmRegs
     {
@@ -48,7 +49,7 @@ namespace Z0.Asm
             public R64(ulong src)
                 => Content= src;
 
-            public RegisterKind RegKind
+            public RegKind RegKind
             {
                 [MethodImpl(Inline)]
                 get => default(R).RegKind;
@@ -79,10 +80,10 @@ namespace Z0.Asm
             public rax(T value)
                 => Content = value;
 
-            public eax Eax
+            public al Al
             {
                 [MethodImpl(Inline)]
-                get => new eax((uint)Content);
+                get => new al((byte)Content);
             }
 
             public ax Ax
@@ -91,10 +92,10 @@ namespace Z0.Asm
                 get => new ax((ushort)Content);
             }
 
-            public al Al
+            public eax Eax
             {
                 [MethodImpl(Inline)]
-                get => new al((byte)Content);
+                get => new eax((uint)Content);
             }
 
             public K RegKind => K.RAX;
@@ -105,7 +106,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Register C Extended
+        /// Register C Extended: 0001  [rcx    | ecx    | cx     | cl    ]
         /// </summary>
         public struct rcx : IRegister<rcx,W,T>, IRegOp64<T>
         {
@@ -127,6 +128,24 @@ namespace Z0.Asm
 
             public K RegKind => K.RAX;
 
+            public cl Cl
+            {
+                [MethodImpl(Inline)]
+                get => new cl((byte)Content);
+            }
+
+            public cx Cx
+            {
+                [MethodImpl(Inline)]
+                get => new cx((ushort)Content);
+            }
+
+            public ecx Ecx
+            {
+                [MethodImpl(Inline)]
+                get => new ecx((uint)Content);
+            }
+
             public G Generalized
             {
                 [MethodImpl(Inline)]
@@ -135,7 +154,7 @@ namespace Z0.Asm
         }
 
         /// <summary>
-        /// Register D Extended
+        /// Register D Extended: | 0010  | rdx    | edx    | dx     | dl    |
         /// </summary>
         public struct rdx : IRegister<rdx,W,T>, IRegOp64<T>
         {

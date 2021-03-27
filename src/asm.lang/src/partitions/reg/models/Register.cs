@@ -14,10 +14,10 @@ namespace Z0.Asm
     [Datatype]
     public readonly struct Register : IDataTypeEquatable<Register>
     {
-        public RegisterKind Kind {get;}
+        public RegKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public Register(RegisterKind kind)
+        public Register(RegKind kind)
             => Kind = kind;
 
         [MethodImpl(Inline)]
@@ -53,22 +53,22 @@ namespace Z0.Asm
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Register(RegisterKind src)
+        public static implicit operator Register(RegKind src)
             => new Register(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator RegisterKind(Register src)
+        public static implicit operator RegKind(Register src)
             => src.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator @enum<RegisterKind,uint>(Register src)
+        public static implicit operator @enum<RegKind,uint>(Register src)
             => @enum.e32u(src.Kind);
 
         [MethodImpl(Inline)]
-        public static implicit operator Register(@enum<RegisterKind,uint> src)
+        public static implicit operator Register(@enum<RegKind,uint> src)
             => new Register(src.Literal);
 
         public static Register Empty
-            => RegisterKind.None;
+            => RegKind.None;
     }
 }

@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// <summary>
         /// The register's kind classifier
         /// </summary>
-        RegisterKind RegKind {get;}
+        RegKind RegKind {get;}
 
         RegIndex Index
             => (RegIndex)((byte)RegKind);

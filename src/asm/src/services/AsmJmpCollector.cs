@@ -86,6 +86,7 @@ namespace Z0.Asm
                     break;
                 case IceMnemonic.Jns:
                     kind = K.JNS;
+
                     break;
                 default:
                 break;

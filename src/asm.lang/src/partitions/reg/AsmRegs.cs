@@ -14,6 +14,11 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmRegs
     {
+        public static RegLayout layout(RegIndex index)
+        {
+            return default;
+        }
+
         [Op]
         public static Index<RegClass> classes()
             => ClrEnums.literals<RegClass>();
@@ -27,7 +32,7 @@ namespace Z0.Asm
             => new AsmRegQuery(list());
 
         [MethodImpl(Inline), Op]
-        public static Register model(RegisterKind kind)
+        public static Register model(RegKind kind)
             => kind;
 
         [MethodImpl(Inline), Op]
@@ -35,7 +40,7 @@ namespace Z0.Asm
             => new Register(c, k, w);
 
         [MethodImpl(Inline), Op]
-        public static Register model(@enum<RegisterKind,uint> src)
+        public static Register model(@enum<RegKind,uint> src)
             => new Register(src.Literal);
 
         /// <summary>
@@ -43,7 +48,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegIndex index(RegisterKind src)
+        public static RegIndex index(RegKind src)
             => (RegIndex)Bits.extract((uint)src, (byte)FieldIndex.C, (byte)FieldWidth.C);
 
         /// <summary>
@@ -51,7 +56,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegClass @class(RegisterKind src)
+        public static RegClass @class(RegKind src)
             => (RegClass)Bits.extract((uint)src, (byte)FieldIndex.K, (byte)FieldWidth.K);
 
         /// <summary>
@@ -59,21 +64,21 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline), Op]
-        public static RegWidth width(RegisterKind src)
+        public static RegWidth width(RegKind src)
             => (RegWidth)Bits.extract((uint)src, (byte)FieldIndex.W, (byte)FieldWidth.W);
 
         /// <summary>
-        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegisterKind'/>
+        /// Combines a <see cref='RegIndex'/>, a <see cref='RegClass'/> and a <see cref='RegWidth'/> to produce a <see cref='RegKind'/>
         /// </summary>
         /// <param name="i">The register index</param>
         /// <param name="k">The register class</param>
         /// <param name="w">The register width</param>
         [MethodImpl(Inline), Op]
-        public static RegisterKind kind(RegIndex i, RegClass k, RegWidth w)
-            => (RegisterKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
+        public static RegKind kind(RegIndex i, RegClass k, RegWidth w)
+            => (RegKind)((uint)i  << IndexField | (uint)k << ClassField | (uint)w << WidthField);
 
         [MethodImpl(Inline)]
-        public static void split(RegisterKind src, out RegIndex c, out RegClass k, out RegWidth w)
+        public static void split(RegKind src, out RegIndex c, out RegClass k, out RegWidth w)
         {
             c = AsmRegs.index(src);
             k = AsmRegs.@class(src);
@@ -171,6 +176,6 @@ namespace Z0.Asm
 
         [Op]
         public static Index<Register> list()
-            => Enums.literals<RegisterKind>().Map(model);
+            => Enums.literals<RegKind>().Map(model);
     }
 }

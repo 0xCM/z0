@@ -22,12 +22,15 @@ namespace Z0.Asm
     using C = ControlRegKind;
     using D = DebugRegKind;
     using I = IpRegKind;
+    using B = BndRegKind;
+    using ST = FpuRegKind;
+    using MM = MmxRegKind;
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
     /// </summary>
     [SymbolSource]
-    public enum RegisterKind : uint
+    public enum RegKind : uint
     {
         None = 0,
 
@@ -460,6 +463,75 @@ namespace Z0.Asm
 
         [Symbol("DR7")]
         DR7 = D.DR7,
+
+        // ~ BND registers
+        // ~ ------------------------------------------------------------------
+
+        [Symbol("BND0")]
+        BND0 = B.DR0,
+
+        [Symbol("BND1")]
+        BND1 = B.DR1,
+
+        [Symbol("BND2")]
+        BND2 = B.DR2,
+
+        [Symbol("BND3")]
+        BND3 = B.DR3,
+
+        // ~ FP registers
+        // ~ ------------------------------------------------------------------
+
+        [Symbol("ST(0)")]
+        ST0 = ST.ST0,
+
+        [Symbol("ST(1)")]
+        ST1 = ST.ST1,
+
+        [Symbol("ST(2)")]
+        ST2 = ST.ST2,
+
+        [Symbol("ST(3)")]
+        ST3 = ST.ST3,
+
+        [Symbol("ST(4)")]
+        ST4 = ST.ST4,
+
+        [Symbol("ST(5)")]
+        ST5 = ST.ST5,
+
+        [Symbol("ST(6)")]
+        ST6 = ST.ST6,
+
+        [Symbol("ST(7)")]
+        ST7 = ST.ST7,
+
+        // ~ MMX registers
+        // ~ ------------------------------------------------------------------
+
+        [Symbol("MM(0)")]
+        MM0 = MM.MM0,
+
+        [Symbol("MM(1)")]
+        MM1 = MM.MM1,
+
+        [Symbol("MM(2)")]
+        MM2 = MM.MM2,
+
+        [Symbol("MM(3)")]
+        MM3 = MM.MM3,
+
+        [Symbol("MM(4)")]
+        MM4 = MM.MM4,
+
+        [Symbol("MM(5)")]
+        MM5 = MM.MM5,
+
+        [Symbol("MM(6)")]
+        MM6 = MM.MM6,
+
+        [Symbol("MM(7)")]
+        MM7 = MM.MM7,
 
         // ~ Intruction pointer registers
         // ~ ------------------------------------------------------------------

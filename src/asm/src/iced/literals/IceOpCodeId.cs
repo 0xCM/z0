@@ -1256,7 +1256,8 @@ namespace Z0.Asm
 		/// <c>8086+</c><br/>
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
-		Jo_rel8_16 = 159,
+        Jo_rel8_16 = 159,
+
 		/// <summary><c>JO rel8</c><br/>
 		/// <br/>
 		/// <c>o32 70 cb</c><br/>
@@ -1265,6 +1266,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jo_rel8_32 = 160,
+
 		/// <summary><c>JO rel8</c><br/>
 		/// <br/>
 		/// <c>70 cb</c><br/>
@@ -1273,6 +1275,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jo_rel8_64 = 161,
+
 		/// <summary><c>JNO rel8</c><br/>
 		/// <br/>
 		/// <c>o16 71 cb</c><br/>
@@ -1281,6 +1284,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jno_rel8_16 = 162,
+
 		/// <summary><c>JNO rel8</c><br/>
 		/// <br/>
 		/// <c>o32 71 cb</c><br/>
@@ -1289,6 +1293,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jno_rel8_32 = 163,
+
 		/// <summary><c>JNO rel8</c><br/>
 		/// <br/>
 		/// <c>71 cb</c><br/>
@@ -1297,6 +1302,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jno_rel8_64 = 164,
+
 		/// <summary><c>JB rel8</c><br/>
 		/// <br/>
 		/// <c>o16 72 cb</c><br/>
@@ -1305,6 +1311,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jb_rel8_16 = 165,
+
 		/// <summary><c>JB rel8</c><br/>
 		/// <br/>
 		/// <c>o32 72 cb</c><br/>
@@ -1313,6 +1320,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jb_rel8_32 = 166,
+
 		/// <summary><c>JB rel8</c><br/>
 		/// <br/>
 		/// <c>72 cb</c><br/>
@@ -1321,6 +1329,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jb_rel8_64 = 167,
+
 		/// <summary><c>JAE rel8</c><br/>
 		/// <br/>
 		/// <c>o16 73 cb</c><br/>
@@ -1329,6 +1338,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jae_rel8_16 = 168,
+
 		/// <summary><c>JAE rel8</c><br/>
 		/// <br/>
 		/// <c>o32 73 cb</c><br/>
@@ -1337,6 +1347,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jae_rel8_32 = 169,
+
 		/// <summary><c>JAE rel8</c><br/>
 		/// <br/>
 		/// <c>73 cb</c><br/>
@@ -1345,6 +1356,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jae_rel8_64 = 170,
+
 		/// <summary><c>JE rel8</c><br/>
 		/// <br/>
 		/// <c>o16 74 cb</c><br/>
@@ -1353,6 +1365,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Je_rel8_16 = 171,
+
 		/// <summary><c>JE rel8</c><br/>
 		/// <br/>
 		/// <c>o32 74 cb</c><br/>
@@ -1361,6 +1374,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Je_rel8_32 = 172,
+
 		/// <summary><c>JE rel8</c><br/>
 		/// <br/>
 		/// <c>74 cb</c><br/>
@@ -1369,6 +1383,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Je_rel8_64 = 173,
+
 		/// <summary><c>JNE rel8</c><br/>
 		/// <br/>
 		/// <c>o16 75 cb</c><br/>
@@ -1377,6 +1392,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jne_rel8_16 = 174,
+
 		/// <summary><c>JNE rel8</c><br/>
 		/// <br/>
 		/// <c>o32 75 cb</c><br/>
@@ -1385,7 +1401,8 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jne_rel8_32 = 175,
-		/// <summary><c>JNE rel8</c><br/>
+
+        /// <summary><c>JNE rel8</c><br/>
 		/// <br/>
 		/// <c>75 cb</c><br/>
 		/// <br/>
@@ -1393,6 +1410,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jne_rel8_64 = 176,
+
 		/// <summary><c>JBE rel8</c><br/>
 		/// <br/>
 		/// <c>o16 76 cb</c><br/>
@@ -1401,6 +1419,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jbe_rel8_16 = 177,
+
 		/// <summary><c>JBE rel8</c><br/>
 		/// <br/>
 		/// <c>o32 76 cb</c><br/>
@@ -1409,6 +1428,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jbe_rel8_32 = 178,
+
 		/// <summary><c>JBE rel8</c><br/>
 		/// <br/>
 		/// <c>76 cb</c><br/>
@@ -1417,6 +1437,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jbe_rel8_64 = 179,
+
 		/// <summary><c>JA rel8</c><br/>
 		/// <br/>
 		/// <c>o16 77 cb</c><br/>
@@ -1425,6 +1446,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Ja_rel8_16 = 180,
+
 		/// <summary><c>JA rel8</c><br/>
 		/// <br/>
 		/// <c>o32 77 cb</c><br/>
@@ -1433,6 +1455,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Ja_rel8_32 = 181,
+
 		/// <summary><c>JA rel8</c><br/>
 		/// <br/>
 		/// <c>77 cb</c><br/>
@@ -1441,6 +1464,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Ja_rel8_64 = 182,
+
 		/// <summary><c>JS rel8</c><br/>
 		/// <br/>
 		/// <c>o16 78 cb</c><br/>
@@ -1449,6 +1473,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Js_rel8_16 = 183,
+
 		/// <summary><c>JS rel8</c><br/>
 		/// <br/>
 		/// <c>o32 78 cb</c><br/>
@@ -1457,6 +1482,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Js_rel8_32 = 184,
+
 		/// <summary><c>JS rel8</c><br/>
 		/// <br/>
 		/// <c>78 cb</c><br/>
@@ -1465,6 +1491,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Js_rel8_64 = 185,
+
 		/// <summary><c>JNS rel8</c><br/>
 		/// <br/>
 		/// <c>o16 79 cb</c><br/>
@@ -1473,6 +1500,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jns_rel8_16 = 186,
+
 		/// <summary><c>JNS rel8</c><br/>
 		/// <br/>
 		/// <c>o32 79 cb</c><br/>
@@ -1481,6 +1509,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jns_rel8_32 = 187,
+
 		/// <summary><c>JNS rel8</c><br/>
 		/// <br/>
 		/// <c>79 cb</c><br/>
@@ -1489,6 +1518,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jns_rel8_64 = 188,
+
 		/// <summary><c>JP rel8</c><br/>
 		/// <br/>
 		/// <c>o16 7A cb</c><br/>
@@ -1497,6 +1527,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jp_rel8_16 = 189,
+
 		/// <summary><c>JP rel8</c><br/>
 		/// <br/>
 		/// <c>o32 7A cb</c><br/>
@@ -1505,6 +1536,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jp_rel8_32 = 190,
+
 		/// <summary><c>JP rel8</c><br/>
 		/// <br/>
 		/// <c>7A cb</c><br/>
@@ -1513,6 +1545,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jp_rel8_64 = 191,
+
 		/// <summary><c>JNP rel8</c><br/>
 		/// <br/>
 		/// <c>o16 7B cb</c><br/>
@@ -1521,6 +1554,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jnp_rel8_16 = 192,
+
 		/// <summary><c>JNP rel8</c><br/>
 		/// <br/>
 		/// <c>o32 7B cb</c><br/>
@@ -1529,6 +1563,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jnp_rel8_32 = 193,
+
 		/// <summary><c>JNP rel8</c><br/>
 		/// <br/>
 		/// <c>7B cb</c><br/>
@@ -1537,6 +1572,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jnp_rel8_64 = 194,
+
 		/// <summary><c>JL rel8</c><br/>
 		/// <br/>
 		/// <c>o16 7C cb</c><br/>
@@ -1545,6 +1581,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jl_rel8_16 = 195,
+
 		/// <summary><c>JL rel8</c><br/>
 		/// <br/>
 		/// <c>o32 7C cb</c><br/>
@@ -1553,6 +1590,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jl_rel8_32 = 196,
+
 		/// <summary><c>JL rel8</c><br/>
 		/// <br/>
 		/// <c>7C cb</c><br/>
@@ -1569,6 +1607,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32/64-bit</c></summary>
 		Jge_rel8_16 = 198,
+
 		/// <summary><c>JGE rel8</c><br/>
 		/// <br/>
 		/// <c>o32 7D cb</c><br/>
@@ -1577,6 +1616,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>16/32-bit</c></summary>
 		Jge_rel8_32 = 199,
+
 		/// <summary><c>JGE rel8</c><br/>
 		/// <br/>
 		/// <c>7D cb</c><br/>
@@ -1585,6 +1625,7 @@ namespace Z0.Asm
 		/// <br/>
 		/// <c>64-bit</c></summary>
 		Jge_rel8_64 = 200,
+
 		/// <summary><c>JLE rel8</c><br/>
 		/// <br/>
 		/// <c>o16 7E cb</c><br/>

@@ -992,9 +992,8 @@ namespace Z0.Asm
             Wf.EmittedFile(flow, count);
         }
 
-
         static bool filter(AsmMemberRoutine src)
-            => src.Member.Method.DeclaringType == typeof(Prototypes.Extend);
+            => src.Member.Host == Prototypes.Extensions.Uri;
 
         public void Run()
         {
@@ -1002,7 +1001,7 @@ namespace Z0.Asm
             var parts = root.array(PartId.AsmLang, PartId.AsmZ);
             var routines = Capture.run(Wf, parts, options);
             var filtered = span<AsmMemberRoutine>(routines.Length);
-            var dst = Db.AppLog("routines", FS.Extensions.Asm);
+            var dst = Db.AppLog("extensions", FS.Extensions.Asm);
             var count = AsmRoutines.filter(routines,filter,filtered);
             Summarize(slice(filtered,0, count), dst);
 

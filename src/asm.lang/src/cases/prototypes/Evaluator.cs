@@ -4,35 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Part;
     using static BinaryBitLogicKind;
     using static math;
 
     partial struct Prototypes
     {
-        public interface IEvaluator
-        {
-            sbyte Eval(sbyte a, sbyte b, BinaryBitLogicKind k);
-
-            byte Eval(byte a, byte b, BinaryBitLogicKind k);
-
-            short Eval(short a, short b, BinaryBitLogicKind k);
-
-            ushort Eval(ushort a, ushort b, BinaryBitLogicKind k);
-
-            int Eval(int a, int b, BinaryBitLogicKind k);
-
-            uint Eval(uint a, uint b, BinaryBitLogicKind k);
-
-            long Eval(long a, long b, BinaryBitLogicKind k);
-
-            ulong Eval(ulong a, ulong b, BinaryBitLogicKind k);
-        }
-
-        [ApiHost(prototypes + eval)]
+        //[ApiHost(prototypes + dot + evaluator)]
         public readonly struct Evaluator
         {
             [Op]
@@ -373,7 +350,7 @@ namespace Z0.Asm
 
         }
 
-        [ApiHost(prototypes + eval + contract)]
+        //[ApiHost(prototypes + evaluator + contracted)]
         public readonly struct ContractedEvaluator : IEvaluator
         {
             readonly Evaluator E;
@@ -421,7 +398,7 @@ namespace Z0.Asm
         }
 
 
-        [ApiHost(prototypes + eval + client)]
+        //[ApiHost(prototypes + eval + client)]
         public readonly struct EvalClient
         {
             readonly Evaluator E;
@@ -466,6 +443,26 @@ namespace Z0.Asm
             [Op]
             public ulong Eval(ulong a, ulong b, BinaryBitLogicKind k)
                 => E.Eval(a,b,k);
+        }
+
+
+        public interface IEvaluator
+        {
+            sbyte Eval(sbyte a, sbyte b, BinaryBitLogicKind k);
+
+            byte Eval(byte a, byte b, BinaryBitLogicKind k);
+
+            short Eval(short a, short b, BinaryBitLogicKind k);
+
+            ushort Eval(ushort a, ushort b, BinaryBitLogicKind k);
+
+            int Eval(int a, int b, BinaryBitLogicKind k);
+
+            uint Eval(uint a, uint b, BinaryBitLogicKind k);
+
+            long Eval(long a, long b, BinaryBitLogicKind k);
+
+            ulong Eval(ulong a, ulong b, BinaryBitLogicKind k);
         }
     }
 }

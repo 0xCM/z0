@@ -9,7 +9,7 @@ namespace Z0.Asm
     [Free]
     public interface IImmOp : IAsmOp
     {
-        RegisterKind RegKind => default;
+        RegKind RegKind => default;
     }
 
     [Free]

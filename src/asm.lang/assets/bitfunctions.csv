@@ -1,0 +1,14 @@
+# https://www.sandpile.org/x86/bits.htm
+| CPUID | Mnemonic | Operation   | Description                                           | Example                  |
+| TBM   | BLCS     | a OR (a+1)  | turn on rightmost 0-bit                               | 10101 0 11 => 10101 1 11 |
+| BMI   | BLSR     | a & (a-1)   | turn off rightmost 1-bit -- test if a is 2^n          | 1010 1 000 => 1010 0 000 |
+| TBM   | BLCFILL  | a & (a+1)   | right-propagate rightmost 0-bit -- test if a is 2^n-1 | 1010 0 111 => 1010 0000  |
+| TBM   | BLSFILL  | a OR (a-1)  | right-propagate rightmost 1-bit                       | 1010 1 000 => 1010 1111  |
+| TBM   | BLCMSK   | a ^ (a+1)   | form mask of rightmost 0 and trailing 1s              | 10101 011 => 00000 111   |
+| BMI   | BLSMSK   | a ^ (a-1)   | form mask of rightmost 1 and trailing 0s              | 1010 1000 => 0000 1111   |
+| BMI   | BLSI     | a & -a      | form mask of rightmost 1-bit                          | 10100 1 00 => 00000 1 00 |
+| TBM   | BLCIC    | ~a & (a+1)  | form mask of rightmost 0-bit                          | 10101 0 11 => 00000 1 00 |
+| TBM   | TZMSK    | ~a & (a-1)  | form mask of trailing 0s                              | 10101 000 => 00000 111   |
+| TBM   | BLCI     | a OR ~(a+1) | form complemented mask of rightmost 0-bit             | 10101 0 11 => 11111 0 11 |
+| TBM   | BLSIC    | ~a OR (a-1) | form complemented mask of rightmost 1-bit             | 10101 1 00 => 11111 0 11 |
+| TBM   | T1MSKC   | ~a OR (a+1) | form complemented mask of trailing 1s                 | 101010 11 => 111111 00   |

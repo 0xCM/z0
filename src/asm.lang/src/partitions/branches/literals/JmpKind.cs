@@ -6,17 +6,15 @@ namespace Z0.Asm
 {
     using System;
 
-    using F = JmpFacets;
-
-    using static JmpFacets;
-
     [Flags]
     public enum JmpKind : ulong
     {
         None = 0,
 
         /// <summary> Unconditional Jump</summary>
-        JMP = F.JMP,
+        JMP = 1,
+
+        JCC = 2,
 
         /// <summary> Jump if Above; CF=0 and ZF=0 </summary>
         JA = JCC*1 | JCC,
@@ -99,13 +97,10 @@ namespace Z0.Asm
         /// <summary> Jump if Parity; PF=1 </summary>
         JP = JCC*27 | JCC,
 
-        /// <summary> Jump if Parity Even; PF=1 </summary>
-        JPE = JCC*28 | JCC,
-
         /// <summary> Jump if Signed (signed); SF=1 </summary>
-        JS = JCC*30 | JCC,
+        JS = JCC*28 | JCC,
 
         /// <summary> Jump if Zero; ZF=1 </summary>
-        JZ = JCC*31 | JCC,
+        JZ = JCC*29 | JCC,
     }
 }
