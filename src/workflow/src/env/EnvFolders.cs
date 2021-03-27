@@ -33,6 +33,10 @@ namespace Z0
 
         public const string tools = nameof(tools);
 
+        public const string tooling = nameof(tooling);
+
+        public const string help = nameof(help);
+
         public const string jobs = nameof(jobs);
 
         public const string capture = nameof(capture);
@@ -58,6 +62,8 @@ namespace Z0
         public const string extracts = nameof(extracts);
 
         public const string output = nameof(output);
+
+        public const string input = nameof(input);
 
         public const string delimiter = ".";
 

@@ -13,7 +13,7 @@ namespace Z0
             => CaptureRoot() + FS.folder(extracts);
 
         FS.Files RawExtractFiles()
-            => RawExtractRoot().AllFiles;
+            => RawExtractRoot().TopFiles;
 
         FS.FilePath RawExtractFile(FS.FileName name)
             => RawExtractRoot() + name;

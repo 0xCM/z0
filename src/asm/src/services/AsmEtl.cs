@@ -26,7 +26,7 @@ namespace Z0.Asm
         /// <param name="src">The data sourde</param>
         /// <param name="mnemonic">The mnemonic of interest</param>
         [Op]
-        static ApiInstructions filter(ApiInstructions src, IceMnemonic mnemonic)
+        static Index<ApiInstruction> filter(Index<ApiInstruction> src, IceMnemonic mnemonic)
             => from a in src.Storage
                 let i = a.Instruction
                 where i.Mnemonic == mnemonic
@@ -43,7 +43,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public Index<AsmCallRow> Calls(ApiInstructions src)
+        public Index<AsmCallRow> Calls(Index<ApiInstruction> src)
         {
             var calls = filter(src, IceMnemonic.Call).View;
             var count = calls.Length;
@@ -111,6 +111,9 @@ namespace Z0.Asm
         [Op]
         public Index<ApiInstruction> ApiInstructions(ApiCodeBlock code, IceInstruction[] src)
             => ToApiInstructions(code,src);
+
+        public ApiInstructionBlock ApiInstructionBlock(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
+            => new ApiInstructionBlock(@base, ApiInstructions(code, src));
 
         [Op]
         public static Index<ApiInstruction> ToApiInstructions(ApiCodeBlock code, IceInstruction[] src)

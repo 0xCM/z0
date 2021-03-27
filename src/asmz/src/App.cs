@@ -45,6 +45,10 @@ namespace Z0.Asm
 
         }
 
+        HashSet<AsmFormExpr> Forms;
+
+        AsmSigs Sigs;
+
         AsmCatalogEtl Catalog;
 
         IAsmContext Asm;
@@ -353,9 +357,6 @@ namespace Z0.Asm
         }
 
 
-        HashSet<AsmFormExpr> Forms;
-
-        AsmSigs Sigs;
 
         public static MsgPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
@@ -933,78 +934,21 @@ namespace Z0.Asm
         }
 
 
-        static string format(Address16 offset, BinaryCode code)
-            => string.Format("{0}[{1}] => {2}", offset.Format(), code.Length, code.Format());
-
-        static string format(MemoryAddress @base, CodeBlock code)
-            => string.Format("{0}[{1}] = {2}", @base.Format(), code.Length, code.Format());
-
-
-        AsmOpCodeExpr opcode(in ApiInstruction src)
-            => asm.opcode(src.Instruction.OpCode.OpCodeString);
-
-        AsmSigExpr sig(in ApiInstruction src)
-            => Sigs.ParseSigExpr(src.Instruction.OpCode.InstructionString);
-
-        void Summarize(in ApiInstruction src, ITextBuffer dst)
-        {
-            var itext = src.FormattedInstruction;
-            var code = src.EncodedData;
-            var hexcode = AsmBytes.hexcode(code);
-            var form = asm.form(opcode(src), sig(src));
-            var tp = AsmThumbprints.define(form,hexcode);
-            var isize = (byte)src.Size;
-            var offset = (Address16)src.Offset;
-            var icomment = asm.comment(format(offset, code));
-            var summary = string.Format("{0,-46} ; {1} {2}", itext, offset, tp);
-
-            dst.Append(summary);
-        }
-
-        void Summarize(ReadOnlySpan<AsmMemberRoutine> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            var flow = Wf.EmittingFile(dst, string.Format("Creating summaries for <{0}> routines", count));
-            var buffer = text.buffer();
-            using var writer = dst.Writer();
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var routine = ref skip(src,i);
-                var @base = routine.Base;
-                var block = routine.CodeBlock;
-                var code = block.Code;
-                var member = routine.Member;
-                var instructions = routine.Instructions.View;
-                var icount = instructions.Length;
-
-                writer.WriteLine(AsmComment.separate());
-                writer.WriteLine(asm.comment(member.OpUri.Format()));
-                writer.WriteLine(asm.comment(format(@base, code)));
-                for(var j=0; j<icount; j++)
-                {
-
-                    ref readonly var instruction = ref skip(instructions,j);
-                    Summarize(instruction, buffer);
-                    writer.WriteLine(buffer.Emit());
-                }
-
-            }
-            Wf.EmittedFile(flow, count);
-        }
-
-        static bool filter(AsmMemberRoutine src)
-            => src.Member.Host == Prototypes.Extensions.Uri;
-
         public void Run()
         {
-            var options = CaptureWorkflowOptions.EmitImm;
-            var parts = root.array(PartId.AsmLang, PartId.AsmZ);
-            var routines = Capture.run(Wf, parts, options);
-            var filtered = span<AsmMemberRoutine>(routines.Length);
-            var dst = Db.AppLog("extensions", FS.Extensions.Asm);
-            var count = AsmRoutines.filter(routines,filter,filtered);
-            Summarize(slice(filtered,0, count), dst);
+            // var options = CaptureWorkflowOptions.EmitImm;
+            // var parts = root.array(PartId.AsmLang, PartId.AsmZ);
+            // var routines = Capture.run(Wf, parts, options);
+            // var filtered = span<AsmMemberRoutine>(routines.Length);
+            // var dst = Db.AppLog("extensions", FS.Extensions.Asm);
+            // var count = AsmRoutines.filter(routines,filter,filtered);
+            // Summarize(slice(filtered,0, count), dst);
 
+            // var productions = AsmProductions.create(Wf);
+            // productions.Produce();
+
+            var converter = RegKindConverter.create();
+            root.iter(converter.Kinds, k => Wf.Row(k));
 
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
             //Wf.AsmFormPipe().EmitFormHashes();

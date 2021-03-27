@@ -89,7 +89,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        void Render(ApiInstructionSet src, StreamWriter dst, ref MemoryAddress offset)
+        void Render(ApiInstructionBlock src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
             Buffer.Add(src.OpId);

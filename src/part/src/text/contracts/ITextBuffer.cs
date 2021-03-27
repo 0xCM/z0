@@ -20,6 +20,15 @@ namespace Z0
             Append(Eol);
         }
 
+        void AppendLine<T>(T src)
+        {
+            if(src != null)
+            {
+                Append(src.ToString());
+                Append(Eol);
+            }
+        }
+
         void AppendSpace()
         {
             Append(Space);
@@ -28,14 +37,14 @@ namespace Z0
         void AppendLine()
             => Append(Eol);
 
-        void AppendFormat(string pattern, params object[] args)
-            => Append(string.Format(pattern, args));
-
         void AppendLineFormat(string pattern, params object[] args)
             => AppendLine(string.Format(pattern, args));
 
-        void AppendLine<T>(PropFormat<T> src)
-            => AppendLine(src.Format());
+        void IndentLine<T>(uint margin, T src)
+            => AppendLine(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
+
+        void AppendFormat(string pattern, params object[] args)
+            => Append(string.Format(pattern, args));
 
         void Append(ReadOnlySpan<char> src)
             => Append(new string(src));
@@ -48,21 +57,6 @@ namespace Z0
 
         void AppendItem<T>(T src)
             => Append(src?.ToString() ?? "!<null>!");
-
-        void AppendLine<T>(T src)
-        {
-            if(src != null)
-            {
-                Append(src.ToString());
-                Append(Eol);
-            }
-        }
-
-        void Indent<T>(uint margin, T src)
-            => Append(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
-
-        void IndentLine<T>(uint margin, T src)
-            => AppendLine(string.Format("{0}{1}", new string(Chars.Space, (int)margin), src));
 
         void AppendDelimited(string delimiter, params object[] src)
         {
@@ -88,22 +82,6 @@ namespace Z0
             var width = uint32(field) >> shift;
             Append(text.rspace(c));
             Append($"{value}".PadRight((int)width));
-        }
-
-        void AppendValue<T>(T value, uint width, char c = FieldDelimiter)
-            where T : struct
-        {
-            Append(text.rspace(c));
-            Append(value.ToString().PadRight((int)width));
-        }
-
-        void Append(string value, uint width, char c = FieldDelimiter)
-        {
-            if(text.nonempty(value))
-            {
-                Append(text.rspace(c));
-                Append(value.PadRight((int)width));
-            }
         }
 
         void AppendFormatted(string pattern, params object[] args)

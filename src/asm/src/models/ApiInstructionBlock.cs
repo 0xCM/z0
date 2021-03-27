@@ -12,15 +12,35 @@ namespace Z0.Asm
     /// <summary>
     /// Specifies the asm routine determined by an api member
     /// </summary>
-    public readonly struct ApiInstructionSet
+    public readonly struct ApiInstructionBlock
     {
-        public string OpId {get;}
+        public OpIdentity OpId {get;}
 
-        public ApiInstructions Instructions {get;}
+        public Index<ApiInstruction> Instructions {get;}
 
         public MemoryAddress BaseAddress {get;}
 
         public MemoryAddress HostAddress {get;}
+
+        [MethodImpl(Inline)]
+        public ApiInstructionBlock(MemoryAddress @base, ApiInstruction[] src)
+        {
+            if(src.Length != 0)
+            {
+                var i = memory.first(src);
+                OpId = i.OpId;
+                Instructions = src;
+                HostAddress = @base;
+                BaseAddress = i.IP;
+            }
+            else
+            {
+                OpId = OpIdentity.Empty;
+                Instructions = default;
+                HostAddress = default;
+                BaseAddress = default;
+            }
+        }
 
         public uint InstructionCount
         {
@@ -31,39 +51,19 @@ namespace Z0.Asm
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => InstructionCount == 0;
+            get => Instructions.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => InstructionCount != 0;
+            get => Instructions.IsNonEmpty;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
             get => Instructions.Length;
-        }
-
-        [MethodImpl(Inline)]
-        public ApiInstructionSet(MemoryAddress @base, ApiInstruction[] src)
-        {
-            if(src.Length != 0)
-            {
-                var i = src[0];
-                OpId = i.OpId;
-                Instructions = src;
-                HostAddress = @base;
-                BaseAddress = i.IP;
-            }
-            else
-            {
-                OpId = EmptyString;
-                Instructions = default;
-                HostAddress = default;
-                BaseAddress = default;
-            }
         }
     }
 }

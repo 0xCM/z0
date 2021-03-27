@@ -58,7 +58,7 @@ namespace Z0.Tooling
             Id = id;
             Args =  alloc<CmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
-            OutputDir = Wf.Db().Output(Id);
+            OutputDir = Wf.Db().ToolOutDir(Id);
         }
 
         public DumpBin With<T>(Flag option, T value)

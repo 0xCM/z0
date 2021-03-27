@@ -152,7 +152,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
             {
                 ref readonly var row = ref skip(rows,i);
-                if(Sigs.ParseMnemonicExpr(row.Instruction, out var monic))
+                if(AsmSyntax.mnemonic(row.Instruction, out var monic))
                     dst.Add(monic);
             }
             return dst.ToArray();
@@ -268,7 +268,7 @@ namespace Z0.Asm
             {
                 ref readonly var row = ref skip(imported, i);
                 var oc = asm.opcode(row.OpCode);
-                if(Sigs.ParseSigExpr(row.Instruction, out var sig))
+                if(AsmSyntax.sig(row.Instruction, out var sig))
                     seek(buffer, k++) = asm.form(oc, sig);
                 else
                 {

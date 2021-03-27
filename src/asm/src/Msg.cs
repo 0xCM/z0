@@ -32,5 +32,18 @@ namespace Z0
         public static MsgPattern<ApiHostUri,Count> CreatedApiStatements => "Created {0} {1} host api statement";
 
         public static MsgPattern<Count,Count,FS.FileUri> ParsedStatements => "Parsed {0} full rows and {1} partial rows from {2}";
+
+        public static MsgPattern<Count> DecodingParts => "Decoding {0} parts";
+
+        public static MsgPattern<Count,PartName> DecodingPartRoutines => "Decoding {0} {1} hosts";
+
+        public static MsgPattern<Count,PartName> DecodedPartRoutines => "Decoded {0} {1} routines";
+
+        public static MsgPattern<ApiHostUri> DecodingHostRoutines => "Decoding {0} routines";
+
+        public static MsgPattern<Count,ApiHostUri> DecodedHostRoutines => "Decoded {0} {1} routines";
+
+        public static MsgPattern<Count,Count> DecodedMachine => "Decoded {0} routines from {1} parts";
+
     }
 }

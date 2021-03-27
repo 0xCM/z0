@@ -199,7 +199,7 @@ namespace Z0.Asm
 
         public Index<AsmCallRow> LoadCallRows()
         {
-            var files = Db.TableDir<AsmCallRow>().AllFiles.View;
+            var files = Db.TableDir<AsmCallRow>().TopFiles.View;
             var dst = root.list<AsmCallRow>();
             var count = files.Length;
             for(var i=0; i<count; i++)

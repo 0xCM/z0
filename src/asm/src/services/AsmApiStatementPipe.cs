@@ -190,7 +190,7 @@ namespace Z0.Asm
                 statement.IP = instruction.IP;
                 statement.OpUri = src.Uri;
                 statement.Expression = instruction.FormattedInstruction;
-                Sigs.ParseSigExpr(instruction.OpCode.InstructionString, out statement.Sig);
+                AsmSyntax.sig(instruction.OpCode.InstructionString, out statement.Sig);
                 statement.Encoded = AsmBytes.hexcode(bytes.Slice(offset, size));
                 statement.OpCode = opcode;
 

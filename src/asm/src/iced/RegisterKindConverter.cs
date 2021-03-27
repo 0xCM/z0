@@ -37,7 +37,7 @@ namespace Z0.Asm
             get => @ref<Index<IceRegister>>(pIce).View;
         }
 
-        ReadOnlySpan<RegKind> Kinds
+        public ReadOnlySpan<RegKind> Kinds
         {
             [MethodImpl(Inline)]
             get => @ref<Index<RegKind>>(pKind).View;

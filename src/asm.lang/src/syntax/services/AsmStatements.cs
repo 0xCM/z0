@@ -27,7 +27,7 @@ namespace Z0.Asm
             {
                 Tables.parse(skip(cells, i++), out dst.BlockOffset);
                 dst.Expression = asm.statement(skip(cells,i++));
-                Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
+                AsmSyntax.sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = asm.opcode(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
                 Tables.parse(skip(cells, i), out dst.BaseAddress);

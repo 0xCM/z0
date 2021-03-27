@@ -19,8 +19,7 @@ namespace Z0.Asm
             var dst = alloc<ApiPartRoutines>(partCount);
             var hostFx = root.list<ApiHostRoutines>();
             var stats = ApiDecoderStats.init();
-
-            var flow = Wf.Running($"Decoding {partCount} parts");
+            var flow = Wf.Running(Msg.DecodingParts.Format(parts.Count));
 
             for(var i=0; i<partCount; i++)
             {
@@ -33,8 +32,7 @@ namespace Z0.Asm
                     var hosts = src.Hosts.Where(h => h.Owner == part).View;
                     var hostCount = hosts.Length;
 
-                    var inner = Wf.Running($"Decoding {hostCount} {part} hosts");
-
+                    var decoding = Wf.Running(Msg.DecodingPartRoutines.Format(hostCount, part));
                     for(var j=0; j<hostCount; j++)
                     {
                         ref readonly var host = ref skip(hosts,j);
@@ -53,22 +51,21 @@ namespace Z0.Asm
                     dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
                     stats.PartCount++;
 
-                    Wf.Ran(inner, string.Format("{0} | {1}",
-                        text.format(WfProgress.DecodedPart, hostFx.Count, part.Format()),
-                        stats.Format()));
+                    var decoded = string.Format("{0} | {1}", Msg.DecodedPartRoutines.Format(hostFx.Count, part), stats.Format());
+                    Wf.Ran(decoding, decoded);
                 }
             }
 
-            Wf.Ran(flow, text.format(WfProgress.DecodedMachine, src.EntryCount, src.Parts.Length));
+            Wf.Ran(flow, Msg.DecodedMachine.Format(src.EntryCount, src.Parts.Length));
             return new ApiAsmDataset(src, dst);
         }
 
         public ApiHostRoutines Decode(ApiHostCode src)
         {
             var host = src.Host;
-            var flow = Wf.Running($"Decoding {host} routines");
+            var flow = Wf.Running(Msg.DecodingHostRoutines.Format(host));
             var routines = DecodeRoutines(src);
-            Wf.Ran(flow, $"Decoded {routines.Length} {host} routines");
+            Wf.Ran(flow, Msg.DecodedHostRoutines.Format(routines.Length, host));
             return routines;
         }
 
@@ -77,7 +74,7 @@ namespace Z0.Asm
             var host = src.Host;
             var view = src.Blocks.View;
             var count = view.Length;
-            var instructions = root.list<ApiInstructionSet>();
+            var instructions = root.list<ApiInstructionBlock>();
             var ip = MemoryAddress.Zero;
             var target = root.list<IceInstruction>();
             var decoder = Asm.RoutineDecoder;
@@ -90,7 +87,7 @@ namespace Z0.Asm
                 {
                     if(i == 0)
                         ip = target[0].IP;
-                     instructions.Add(Load(ip, block, target.ToArray()));
+                     instructions.Add(Etl.ApiInstructionBlock(ip, block, target.ToArray()));
                 }
                 else
                     Wf.Warn($"Decoder failure for {block.OpUri}");
@@ -99,15 +96,5 @@ namespace Z0.Asm
 
             return new ApiHostRoutines(host, instructions.ToArray());
         }
-
-        ApiInstructionSet Load(MemoryAddress @base, ApiCodeBlock code, IceInstruction[] src)
-            => new ApiInstructionSet(@base, Etl.ApiInstructions(code, src));
-    }
-
-    readonly struct WfProgress
-    {
-        public const string DecodedPart = "Decoded {0} routines from {1}";
-
-        public const string DecodedMachine = "Decoded {0} routines from {1} parts";
     }
 }

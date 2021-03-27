@@ -14,7 +14,6 @@ namespace Z0.Asm
     using static Rules;
     using static TextRules;
     using static Pow2x16;
-    using static TextRules.Parse;
 
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>
@@ -84,87 +83,10 @@ namespace Z0.Asm
         }
 
         [Op]
-        public bool ParseMnemonicCode(AsmMnemonic src, out AsmMnemonicCode dst)
-        {
-            if(Enum.TryParse(typeof(AsmMnemonicCode), src.Format(), true, out var _code))
-            {
-                dst = (AsmMnemonicCode)_code;
-                return true;
-            }
-
-            dst = 0;
-            return false;
-        }
-
-        [Op]
-        public Outcome ParseMnemonicExpr(string sig, out AsmMnemonic dst)
-        {
-            dst = AsmMnemonic.Empty;
-            if(text.empty(sig))
-                return false;
-
-            if(MnemonicText(sig, out var candidate))
-            {
-                dst = new AsmMnemonic(candidate);
-                return true;
-            }
-            else
-                return false;
-        }
-
-        public Outcome ParseFormExpr(string src, out AsmFormExpr dst)
-        {
-            dst = AsmFormExpr.Empty;
-            if(unfence(src, SigFence, out var sigexpr))
-            {
-                if(ParseSigExpr(sigexpr, out var sig))
-                {
-                    if(!ParseMnemonicCode(sig.Mnemonic, out var monic))
-                        Wf.Warn(MonicCodeParseFailed.Format(sig.Mnemonic));
-
-                    if(unfence(src, OpCodeFence, out var opcode))
-                    {
-                        dst = new AsmFormExpr(asm.opcode(opcode), sig);
-                        return true;
-                    }
-                    else
-                        return (false,FenceNotFound.Format(OpCodeFence, src));
-                }
-                else
-                    return (false, CouldNotParseSigExpr.Format(sigexpr));
-            }
-            else
-                return (false,FenceNotFound.Format(SigFence,src));
-        }
-
-        public Outcome ParseOpCodeExpr(string src,  out AsmOpCodeExpr dst)
-        {
-            dst = new AsmOpCodeExpr(src);
-            return true;
-        }
-
-        [Op]
-        public Outcome ParseSigExpr(string src, out AsmSigExpr dst)
-        {
-            if(text.nonempty(src))
-            {
-                if(ParseMnemonicExpr(src, out var monic))
-                {
-                    var i = Query.index(src, MnemonicTerminator);
-                    var operands = i > 0 ? src.Substring(i).Split(OperandDelimiter).Map(sigop) : sys.empty<AsmSigOperandExpr>();
-                    dst = new AsmSigExpr(monic, operands, format(monic, operands));
-                    return true;
-                }
-            }
-            dst = AsmSigExpr.Empty;
-            return false;
-        }
-
-        [Op]
         public Outcome ParseSig(AsmSigExpr src, out AsmSig dst)
         {
             dst = AsmSig.Empty;
-            if(ParseMnemonicCode(src.Mnemonic, out var code))
+            if(AsmSyntax.code(src.Mnemonic, out var code))
             {
                 var opsource = src.Operands.View;
                 var opcount = opsource.Length;
@@ -196,15 +118,6 @@ namespace Z0.Asm
                 dst = AsmSigOperand.Empty;
                 return (false, $"Cannot match symbol for the operand expression <{src}>");
             }
-        }
-
-        [Op]
-        public AsmSigExpr ParseSigExpr(string src)
-        {
-            if(ParseSigExpr(src, out var dst))
-                return dst;
-            else
-                return AsmSigExpr.Empty;
         }
 
         [MethodImpl(Inline), Op]
@@ -254,7 +167,7 @@ namespace Z0.Asm
         [Op]
         public Index<AsmSigOperandExpr> OperandExpressions(AsmSigExpr src)
         {
-            if(ParseMnemonicExpr(src.Content, out var monic))
+            if(AsmSyntax.mnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return OperandExpressions(remainder);
             return Index<AsmSigOperandExpr>.Empty;
@@ -288,28 +201,6 @@ namespace Z0.Asm
             return false;
         }
 
-        static bool MnemonicText(string sig, out string dst)
-        {
-            if(text.empty(sig))
-            {
-                dst = EmptyString;
-                return false;
-            }
-            else
-            {
-                var i = Query.index(sig, MnemonicTerminator);
-                if(i > 0)
-                {
-                    dst = Parse.segment(sig, 0, i - 1).ToUpper();
-                    return true;
-                }
-                else
-                {
-                    dst = sig;
-                    return true;
-                }
-            }
-        }
 
         Index<Token<AsmSigToken>> _SigOpTokens
         {
@@ -339,18 +230,10 @@ namespace Z0.Asm
         static AsmSigOperandExpr sigop(string src)
             => new AsmSigOperandExpr(src.Trim());
 
-        const string Implication = " => ";
-
         static Fence<char> SigFence => (LParen, RParen);
 
         static Fence<char> OpCodeFence => (Lt, Gt);
 
         static Fence<char> SizeFence => (LBracket, RBracket);
-
-        static MsgPattern<Fence<char>,string> FenceNotFound => "The signature fence {0} for the source expression {1} is not present";
-
-        static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
-
-        static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
     }
 }

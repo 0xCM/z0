@@ -128,9 +128,9 @@ namespace Z0.Asm
                 var rhs = parts[1];
                 if(unfence(lhs, SigFence, out var sigexpr))
                 {
-                    if(Sigs.ParseSigExpr(sigexpr, out var sig))
+                    if(AsmSyntax.sig(sigexpr, out var sig))
                     {
-                        if(!Sigs.ParseMnemonicCode(sig.Mnemonic, out var monic))
+                        if(!AsmSyntax.code(sig.Mnemonic, out var monic))
                             Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
 
                         if(unfence(lhs, OpCodeFence, out var opcode))

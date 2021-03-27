@@ -6,26 +6,25 @@ namespace Z0
 {
     public readonly struct Toolsets
     {
-        public enum ToolKind : uint
-        {
-            None,
-
-            MsBuild,
-
-            Robocopy,
-        }
-
-        public static ToolId dia2dump => "dia2dump";
-
         public static ToolId robocopy => windows.robocopy;
+
+        public static ToolId cmd => windows.cmd;
+
+        public static ToolId dia2dump => msdev.dia2dump;
 
         public static ToolId msbuild => msdev.msbuild;
 
         public static ToolId cl => msdev.cl;
 
-        public static ToolId ildasm => msdev.cl;
+        public static ToolId ildasm => msdev.ildasm;
 
         public static ToolId pdb2xml => msdev.pdb2xml;
+
+        public static ToolId nasm => asm.nasm;
+
+        public static ToolId ndisasm => asm.ndisasm;
+
+        public static ToolId xed => asm.xed;
 
         public readonly struct clang
         {
@@ -34,6 +33,15 @@ namespace Z0
             public static ToolId query => "clang-query";
 
             public static ToolId cc1 => "clang-cc1";
+        }
+
+        public readonly struct asm
+        {
+            public static ToolId nasm => "nasm";
+
+            public static ToolId ndisasm => "ndisasm";
+
+            public static ToolId xed => "xed";
         }
 
         public readonly struct llvm
@@ -47,10 +55,14 @@ namespace Z0
             public static ToolId ml => "llvm-ml";
 
             public static ToolId mc => "llvm-mc";
+
+            public static ToolId objdump => "llvm-objdump";
         }
 
         public readonly struct windows
         {
+            public static ToolId cmd => "cmd";
+
             public static ToolId robocopy => "robocopy";
         }
 
@@ -63,6 +75,8 @@ namespace Z0
             public static ToolId ildasm => "ildasm";
 
             public static ToolId pdb2xml => "pdb2xml";
+
+            public static ToolId dia2dump => "dia2dump";
         }
     }
 }

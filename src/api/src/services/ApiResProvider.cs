@@ -171,7 +171,5 @@ namespace Z0
                 kind = ApiResKind.CharSpan;
             return kind;
         }
-
-
     }
 }

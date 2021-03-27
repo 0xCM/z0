@@ -79,10 +79,16 @@ namespace Z0
             /// <summary>
             /// Nonrecursively enumerates all files in the folder
             /// </summary>
-            public FS.Files AllFiles
+            public FS.Files TopFiles
                 => Directory.Exists(Name)
                 ? files(Directory.EnumerateFiles(Name).Map(path))
                 : FS.Files.Empty;
+
+            /// <summary>
+            /// Recursively enumerates all files in the folder
+            /// </summary>
+            public FS.Files AllFiles
+                => Files(true);
 
             public FS.Files Files(string pattern, bool recurse)
                 => Exists

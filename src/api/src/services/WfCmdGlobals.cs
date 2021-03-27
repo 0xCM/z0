@@ -21,20 +21,6 @@ namespace Z0
 
     public class WfCmdGlobals : WfCmdHost<WfCmdGlobals, GlobalWfCmd>
     {
-        // protected override void RegisterCommands(WfCmdIndex index)
-        // {
-        //     var count = GetType().DeclaredInstanceMethods().Tagged<ActionAttribute>(out var methods);
-        //     if(count != 0)
-        //     {
-        //         var view = methods.View;
-        //         for(var i=0; i<count; i++)
-        //         {
-        //             ref readonly var method = ref skip(view,i);
-        //             index.Include(WfCmd.assign((GlobalWfCmd)method.Tag.Key, (Action)method.Method.CreateDelegate(typeof(Action),this)));
-        //         }
-        //     }
-        // }
-
         [Action(K.ShowByteConversions)]
         void ShowByteConversions()
         {

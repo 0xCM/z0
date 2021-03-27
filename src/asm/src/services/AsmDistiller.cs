@@ -49,7 +49,7 @@ namespace Z0.Asm
         }
 
         public FS.Files Distillations()
-            => Db.TableDir<AsmStatementDetail>().AllFiles;
+            => Db.TableDir<AsmStatementDetail>().TopFiles;
 
         public Index<AsmStatementDetail> LoadDistillation(FS.FilePath src)
         {
@@ -110,7 +110,7 @@ namespace Z0.Asm
             if(count == AsmStatementDetail.FieldCount)
             {
                 dst.OpCode = asm.opcode(skip(cells, i++));
-                Sigs.ParseSigExpr(skip(cells, i++), out dst.Sig);
+                AsmSyntax.sig(skip(cells, i++), out dst.Sig);
                 dst.Expression = asm.statement(skip(cells,i++));
                 if(HexByteParser.parse(skip(cells,i++), out var data))
                     dst.Encoded = data;
@@ -215,7 +215,7 @@ namespace Z0.Asm
             dst.GlobalOffset = src.GlobalOffset;
             dst.LocalOffset = src.LocalOffset;
             dst.OpCode = asm.opcode(src.OpCode.Value);
-            Sigs.ParseSigExpr(src.Instruction, out dst.Sig);
+            AsmSyntax.sig(src.Instruction, out dst.Sig);
             dst.Expression = asm.statement(src.Statement);
             dst.Encoded = src.Encoded;
             return ref dst;

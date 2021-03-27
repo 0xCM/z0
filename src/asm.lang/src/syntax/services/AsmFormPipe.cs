@@ -181,7 +181,7 @@ namespace Z0.Asm
                 var i = 0u;
                 Tables.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
-                Sigs.ParseSigExpr(NextCell(parts, ref i), out dst.Sig);
+                AsmSyntax.sig(NextCell(parts, ref i), out dst.Sig);
                 dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
                 return true;
             }
@@ -196,9 +196,9 @@ namespace Z0.Asm
         {
             var i = 0;
             Tables.parse(src[i++], out dst.Seq);
-            Sigs.ParseOpCodeExpr(src[i++], out dst.OpCode);
-            Sigs.ParseSigExpr(src[i++], out dst.Sig);
-            Sigs.ParseFormExpr(src[i++], out dst.FormExpr);
+            AsmSyntax.opcode(src[i++], out dst.OpCode);
+            AsmSyntax.sig(src[i++], out dst.Sig);
+            AsmSyntax.form(src[i++], out dst.FormExpr);
             return ref dst;
         }
     }

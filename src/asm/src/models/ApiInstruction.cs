@@ -34,7 +34,7 @@ namespace Z0.Asm
             get => (byte)Instruction.ByteLength;
         }
 
-        public string OpId
+        public OpIdentity OpId
             => Encoded.OpId;
 
         public BinaryCode EncodedData
@@ -69,5 +69,8 @@ namespace Z0.Asm
         /// </summary>
         public int Size
             => Instruction.ByteLength;
+
+        public AsmOpCodeExpr OpCode
+            => asm.opcode(Instruction.OpCode.OpCodeString);
     }
 }

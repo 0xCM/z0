@@ -20,7 +20,7 @@ namespace Z0
             => ParsedExtractFile(ApiFiles.filename(host, X.PCsv));
 
         FS.Files ParsedExtractFiles()
-            => ParsedExtractRoot().AllFiles;
+            => ParsedExtractRoot().TopFiles;
 
         FS.Files ParsedExtractFiles(PartId part)
             => ParsedExtractFiles().Where(f => f.IsOwner(part));
