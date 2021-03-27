@@ -218,7 +218,7 @@ namespace Z0
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
             var suffix  = index.MapValueOrDefault(i => Chars.Dot + index.ToString().PadLeft(3,'0'), EmptyString);
-            return FS.file($"{@base}{suffix}",FileExtensions.Csv);
+            return FS.file($"{@base}{suffix}", FS.Csv);
         }
 
         /// <summary>

@@ -61,10 +61,17 @@ namespace Z0.Asm
             return counter;
         }
 
+        uint Produce(in AsmMemberRoutine src, ITextBuffer dst)
+        {
+            dst.AppendLine(AsmComment.separate());
+            FormatHeader(src, dst);
+            return ProduceInstructions(src, dst);
+        }
+
         uint Produce(ReadOnlySpan<AsmMemberRoutine> src, FS.FilePath dst)
         {
             var count = src.Length;
-            var flow = Wf.EmittingFile(dst, string.Format("Creating productions for <{0}> routines", count));
+            var flow = Wf.EmittingFile(dst, Msg.CreatingProductions.Format(count));
             var buffer = text.buffer();
             var counter = 0u;
             using var writer = dst.Writer();
@@ -79,16 +86,49 @@ namespace Z0.Asm
                 counter += ProduceInstructions(routine, buffer);
                 writer.Write(buffer.Emit());
             }
-            Wf.EmittedFile(flow, count);
+            Wf.EmittedFile(flow, counter);
+            return counter;
+        }
+
+        uint Produce(AsmMemberRoutines src, FS.FilePath dst)
+        {
+            var counter = 0u;
+            var count = src.Count;
+            var host = src.Host;
+            var flow = Wf.EmittingFile(dst, Msg.CreatingHostProductions.Format(count,host));
+            var view = src.View;
+            var buffer = text.buffer();
+            using var writer = dst.Writer();
+            for(var i=0; i<count; i++)
+            {
+                counter += Produce(skip(view,i), buffer);
+                writer.Write(buffer.Emit());
+            }
+            Wf.EmittedFile(flow, counter);
             return counter;
         }
 
         static bool filter(AsmMemberRoutine src)
             => src.Member.Host == Prototypes.Extensions.Uri;
 
+        public uint Produce(ToolId consumer, params ApiHostUri[] hosts)
+        {
+            var options = CaptureWorkflowOptions.None;
+            var routines = Capture.run(Wf, hosts, options).View;
+            var count = routines.Length;
+            var counter = 0u;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var hr = ref skip(routines,i);
+                var dst = Db.ToolInput(consumer, FS.file(hr.Host, FS.Extensions.Asm));
+                counter += Produce(skip(routines,i), dst);
+            }
+            return counter;
+        }
+
         public void Produce()
         {
-            var dst = Db.ToolInFile(Toolsets.nasm, "extensions", FS.Extensions.Asm);
+            var dst = Db.ToolInput(Toolsets.nasm, "extensions", FS.Extensions.Asm);
             var flow = Wf.Running();
             var options = CaptureWorkflowOptions.EmitImm;
             var parts = root.array(PartId.AsmLang, PartId.AsmZ);
@@ -99,4 +139,13 @@ namespace Z0.Asm
             Wf.Ran(flow, string.Format("Produced <{0}> statements for <{1}> routines", statements, count));
         }
     }
+
+    partial struct Msg
+    {
+        public static MsgPattern<Count> CreatingProductions => "Creating {0} routine productions";
+
+        public static MsgPattern<Count,ApiHostUri> CreatingHostProductions => "Creating {0} {1} routine productions";
+
+    }
+
 }

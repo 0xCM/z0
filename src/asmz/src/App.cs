@@ -933,6 +933,29 @@ namespace Z0.Asm
             Wf.ImageDataEmitter().EmitApiImageContent();
         }
 
+        public void ShowRegisterKinds()
+        {
+            var converter = RegKindConverter.create();
+            using var log = ShowLog("registers", FS.Csv);
+            log.Show("Register");
+            root.iter(converter.Kinds, k => log.Show(k));
+        }
+
+
+        static Index<ApiHostUri> InnerHosts(Type src)
+        {
+            var dst = root.list<ApiHostUri>();
+            var nested = @readonly(src.GetNestedTypes());
+            var count = nested.Length;
+            for(var i=0; i<count; i++)
+            {
+                var candidate = skip(nested,i);
+                var uri = candidate.HostUri();
+                if(uri.IsNonEmpty)
+                    dst.Add(uri);
+            }
+            return dst.ToArray();
+        }
 
         public void Run()
         {
@@ -944,11 +967,13 @@ namespace Z0.Asm
             // var count = AsmRoutines.filter(routines,filter,filtered);
             // Summarize(slice(filtered,0, count), dst);
 
-            // var productions = AsmProductions.create(Wf);
             // productions.Produce();
 
-            var converter = RegKindConverter.create();
-            root.iter(converter.Kinds, k => Wf.Row(k));
+            ShowRegisterKinds();
+            var productions = AsmProductions.create(Wf);
+            var hosts = InnerHosts(typeof(Prototypes));
+            var count = productions.Produce(Toolsets.nasm, hosts);
+
 
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
             //Wf.AsmFormPipe().EmitFormHashes();

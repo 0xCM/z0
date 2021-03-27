@@ -16,6 +16,10 @@ namespace Z0
             => throw new Exception(msg);
 
         [MethodImpl(Options), Opaque(Throw)]
+        public static void @throw(string msg, string caller, int? line, string path)
+            => throw new Exception(string.Format("{0}:{1} {2} {3}",msg, caller, line, path));
+
+        [MethodImpl(Options), Opaque(Throw)]
         public static T @throw<T>(object msg)
             => throw new Exception(msg?.ToString() ?? EmptyString);
 
@@ -25,7 +29,7 @@ namespace Z0
 
         [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(object e)
-            => throw new Exception($"e");
+            => throw new Exception($"{e}");
 
         [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(Func<string> f)

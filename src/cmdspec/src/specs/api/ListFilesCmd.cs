@@ -42,7 +42,7 @@ namespace Z0
             cmd.ListName = name;
             cmd.SourceDir = src;
             cmd.Extensions = kinds;
-            cmd.TargetPath = builder.Db.List(name, FileExtensions.Csv);
+            cmd.TargetPath = builder.Db.List(name, FS.Csv);
             cmd.ListFormat = ListFormatKind.Markdown;
             return cmd;
         }

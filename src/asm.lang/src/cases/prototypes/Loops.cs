@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [ApiHost(prototypes + dot + loops)]
+        [ApiHost(prototypes + loops)]
         public readonly struct Loops
         {
             [Op]

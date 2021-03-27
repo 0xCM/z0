@@ -11,7 +11,7 @@ namespace Z0.Logix
     {
         void emit_asci_table()
         {
-            using var dst = CaseWriter(FileExtensions.Csv);
+            using var dst = CaseWriter(FS.Csv);
 
             var min = (int)'A';
             var max = (int)'Z';

@@ -25,11 +25,14 @@ namespace Z0
 
         [Op]
         public static T @throw<T>([Caller] string caller = null, [Line] int? line = null, [File] string? path = null)
-            => throw new Exception();
+        {
+            sys.@throw("Something bad happened", caller, line, path);
+            return default;
+        }
 
         [MethodImpl(Inline), Op]
-        public static void @throw(string msg)
-            => sys.@throw(msg);
+        public static void @throw(string msg, [Caller] string caller = null, [Line] int? line = null, [File] string? path = null)
+            => sys.@throw(msg, caller, line, path);
 
         [MethodImpl(Inline), Op]
         public static void @throw(Func<string> f)

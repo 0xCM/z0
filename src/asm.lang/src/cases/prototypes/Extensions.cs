@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [ApiHost(prototypes + dot + extensions)]
+        [ApiHost(prototypes + extensions)]
         public readonly struct Extensions
         {
             public static ApiHostUri Uri => typeof(Extensions).HostUri();

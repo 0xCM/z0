@@ -22,6 +22,13 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => Data.Select(x => x.Routine);
         }
+
+        public ApiHostUri Host
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty ? Data.First.Member.Host : ApiHostUri.Empty;
+        }
+
         public uint Count
         {
             [MethodImpl(Inline)]

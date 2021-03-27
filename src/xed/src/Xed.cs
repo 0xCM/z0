@@ -124,7 +124,7 @@ namespace Z0
 
         [Op]
         internal static FS.FileName rulefile(FS.FileName src, string name)
-            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FileExtensions.Csv);
+            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), FS.Csv);
 
         [Op]
         internal static string pattern(XedInstructionDoc src, string name)

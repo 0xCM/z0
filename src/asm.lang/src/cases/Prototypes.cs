@@ -16,7 +16,9 @@ namespace Z0.Asm
         public static ref byte range_check(byte[] src)
             => ref memory.seek(src,3);
 
-        const string prototypes = nameof(prototypes);
+        const string dot = ".";
+
+        const string prototypes = nameof(prototypes) + dot;
 
         const string eval = nameof(eval);
 
@@ -36,9 +38,10 @@ namespace Z0.Asm
 
         const string nested = nameof(nested);
 
-        const string dot = ".";
+        const string vcopy = nameof(vcopy);
 
-        [ApiHost(prototypes + dot + branches)]
+
+        [ApiHost(prototypes + branches)]
         public readonly partial struct Branches
         {
         }

@@ -5,10 +5,54 @@
 namespace Z0
 {
     using static FileKindNames;
-    using static FS;
 
     partial struct FS
     {
+        /// <summary>
+        /// Defines the <see cref='asm'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Asm => ext(asm);
+
+        /// <summary>
+        /// Defines the <see cref='csv'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Csv => Extensions.Csv;
+
+        /// <summary>
+        /// Defines the <see cref='dll'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Dll => ext(dll);
+
+        /// <summary>
+        /// Defines the <see cref='exe'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Exe => ext(exe);
+
+        /// <summary>
+        /// Defines the <see cref='hex'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Hex => ext(hex);
+
+        /// <summary>
+        /// Defines the <see cref='log'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Log => ext(log);
+
+        /// <summary>
+        /// Defines the <see cref='lib'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Lib => ext(lib);
+
+        /// <summary>
+        /// Defines the <see cref='json'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Json => ext(json);
+
+        /// <summary>
+        /// Defines the <see cref='pdb'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Pdb => ext(pdb);
+
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions
         {
@@ -171,14 +215,5 @@ namespace Z0
             /// </summary>
             public static FileExt Settings => ext(settings);
         }
-    }
-
-    public readonly struct FileExtensions
-    {
-        /// <summary>
-        /// Defines the <see cref='csv'/> <see cref='FileExt'/>
-        /// </summary>
-        public static FileExt Csv => ext(csv);
-
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.IO;
 
     using Z0.Asm;
 
@@ -113,6 +114,32 @@ namespace Z0
             return dst.ToArray();
         }
 
+        public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<ApiHostUri> src)
+        {
+            var dst = root.list<AsmMemberRoutines>();
+            try
+            {
+                var hosts = Wf.Api.FindHosts(src);
+                var count = hosts.Length;
+                var view = hosts.View;
+                for(var i=0; i<count; i++)
+                {
+                    var host = skip(view,i);
+                    dst.Add(CaptureHost(host));
+                }
+            }
+            catch(IOException e)
+            {
+                Wf.Error(string.Format("!!IOException!! {0}", e.Message));
+            }
+            catch(Exception e)
+            {
+                Wf.Error(string.Format("!!Exception!! {0}", e.Message));
+            }
+
+            return dst.ToArray();
+        }
+
         public Index<AsmMemberRoutines> CaptureHosts(ReadOnlySpan<IApiHost> src)
         {
             var count = src.Length;
@@ -124,6 +151,7 @@ namespace Z0
 
         public AsmMemberRoutines CaptureHost(IApiHost api)
         {
+            api = root.require(api);
             var routines = AsmMemberRoutines.Empty;
             var flow = Wf.Running(api.Name);
             try

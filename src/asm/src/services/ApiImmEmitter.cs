@@ -38,6 +38,11 @@ namespace Z0.Asm
             EmitRefined(selected);
         }
 
+        public void Emit(ReadOnlySpan<ApiHostUri> hosts)
+        {
+
+        }
+
         void ClearArchive(PartId[] parts)
         {
             if(parts.Length != 0)

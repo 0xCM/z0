@@ -8,7 +8,7 @@ namespace Z0.Asm
 
     partial struct Prototypes
     {
-        [ApiHost(prototypes + dot + @switch + nested)]
+        [ApiHost(prototypes + @switch)]
         public readonly struct NestedSwitch
         {
             [Op]

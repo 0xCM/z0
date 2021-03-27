@@ -35,8 +35,11 @@ namespace Z0
         FS.FolderPath ToolExeRoot(ToolId id)
             => ToolExeRoot() + FS.folder(id.Format());
 
-        FS.FilePath ToolOutPath(ToolId tool, string id, FS.FileExt ext)
+        FS.FilePath ToolOutput(ToolId tool, string id, FS.FileExt ext)
             => ToolOutDir(tool) + FS.file(id, ext);
+
+        FS.FilePath ToolOutput(ToolId tool, FS.FileName file)
+            => ToolOutDir(tool) + file;
 
         FS.Files ToolOutFiles(ToolId tool)
             => ToolOutDir(tool).EnumerateFiles(true).Array();
@@ -44,8 +47,11 @@ namespace Z0
         FS.FolderPath ToolInDir(ToolId tool)
             => ToolDataRoot() + FS.folder(tool.Format()) + FS.folder(input);
 
-        FS.FilePath ToolInFile(ToolId tool,string id, FS.FileExt ext)
+        FS.FilePath ToolInput(ToolId tool,string id, FS.FileExt ext)
             => ToolInDir(tool) + FS.file(id,ext);
+
+        FS.FilePath ToolInput(ToolId tool,FS.FileName file)
+            => ToolInDir(tool) + file;
 
         FS.FolderPath ToolScriptDir(ToolId tool)
             => ToolScriptRoot() + FS.folder(tool.Format());
@@ -61,7 +67,6 @@ namespace Z0
 
         FS.FilePath ToolScript<K>(K kind, ScriptId script, FS.FileExt? ext = null)
             => ToolScriptDir(kind) + FS.file(script.Format(), ext ?? FS.Extensions.Cmd);
-
 
         FS.FolderPath Output(ToolId tool, CmdId cmd)
             => ToolExeRoot() + FS.folder(tool.Format()) + FS.folder(cmd.Format()) + FS.folder(output);

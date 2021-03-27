@@ -27,14 +27,21 @@ namespace Z0
         public static Index<AsmMemberRoutine> run(IWfShell wf, Index<PartId> parts, CaptureWorkflowOptions options)
         {
             using var runner = wf.CaptureRunner();
-            return runner.Run(parts,options);
+            return runner.Capture(parts, options);
+        }
+
+        [Op]
+        public static Index<AsmMemberRoutines> run(IWfShell wf, Index<ApiHostUri> parts, CaptureWorkflowOptions options)
+        {
+            using var runner = wf.CaptureRunner();
+            return runner.Capture(parts, options);
         }
 
         [Op]
         public static Index<AsmMemberRoutine> run(IWfShell wf, PartId part)
         {
             using var runner = wf.CaptureRunner();
-            return runner.Run(part);
+            return runner.Capture(part);
         }
 
         [Op]
@@ -44,7 +51,7 @@ namespace Z0
             using var runner = wf.CaptureRunner();
 
             if(args.Length != 0)
-                return runner.Run(wf.Api.PartIdentities,CaptureWorkflowOptions.EmitImm);
+                return runner.Capture(wf.Api.PartIdentities,CaptureWorkflowOptions.EmitImm);
             else
                 return runner.Run();
         }

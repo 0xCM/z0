@@ -14,6 +14,10 @@ namespace Z0
             => proxy.@throw(msg);
 
         [MethodImpl(Options), Op]
+        public static void @throw(string msg, string caller, int? line, string path)
+            => proxy.@throw(msg, caller, line, path);
+
+        [MethodImpl(Options), Op]
         public static void @throw(Exception e)
             => proxy.@throw(e);
 

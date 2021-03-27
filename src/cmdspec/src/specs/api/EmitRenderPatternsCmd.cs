@@ -21,7 +21,7 @@ namespace Z0
         {
             var cmd = new EmitRenderPatternsCmd();
             cmd.Source = src;
-            cmd.Target = builder.Db.Doc("render.patterns", src.Name, FileExtensions.Csv);
+            cmd.Target = builder.Db.Doc("render.patterns", src.Name, FS.Csv);
             return cmd;
         }
     }

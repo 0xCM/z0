@@ -53,15 +53,6 @@ namespace Z0.Asm
             get => Routines.Length;
         }
 
-        /// <summary>
-        /// Indexes into the member instruction content
-        /// </summary>
-        public ref ApiInstructionBlock this[int index]
-        {
-            [MethodImpl(Inline)]
-             get => ref Routines[index];
-        }
-
         public uint RoutineCount
         {
             [MethodImpl(Inline)]

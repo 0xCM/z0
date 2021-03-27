@@ -34,7 +34,7 @@ namespace Z0
         {
             var fields = Clr.fieldrefs(src.Types);
             if(fields.Length != 0)
-                Emit(fields, Target + FS.file(src.Part.Format(), FileExtensions.Csv));
+                Emit(fields, Target + FS.file(src.Part.Format(), FS.Csv));
         }
 
         public void Run()

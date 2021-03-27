@@ -31,7 +31,7 @@ namespace Z0
             var svc = ConstBytes256.reader();
             var store = svc.Segments();
             var results = svc.Locations(store);
-            var dst = CaseWriter(FileExtensions.Csv);
+            var dst = CaseWriter(FS.Csv);
             for(var i=0; i<results.Length; i++)
             {
                 var result = results[i];

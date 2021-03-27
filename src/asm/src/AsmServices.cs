@@ -21,20 +21,29 @@ namespace Z0.Asm
         {
             try
             {
-                var flow = wf.Running(Seq.delimit(Chars.Pipe, 16,  extracted.Length, decoded.Length));
+                var flow = wf.Running(string.Format("Attempting to match <{0}> routine addresses", extracted.Length));
                 var a = extracted.Select(x => x.Address).ToHashSet();
                 if(a.Count != extracted.Length)
+                {
                     wf.Error($"count(Extracted) = {extracted.Length} != {a.Count} = count(set(Extracted))");
+                    return;
+                }
 
                 var b = decoded.Select(f => f.BaseAddress).ToHashSet();
                 if(b.Count != decoded.Length)
+                {
                     wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(set(Decoded))");
+                    return;
+                }
 
                 b.IntersectWith(a);
                 if(b.Count != decoded.Length)
+                {
                     wf.Error($"count(Decoded) = {decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
+                    return;
+                }
 
-                wf.Ran(flow);
+                wf.Ran(flow, string.Format("Matched <{0}> routine addresses", extracted.Length));
             }
             catch(Exception e)
             {

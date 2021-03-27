@@ -17,6 +17,10 @@ namespace Z0
             => file(part.Format(), ext);
 
         [Op]
+        public static FileName file(ApiHostUri host, FileExt ext)
+            => file(string.Format("{0}.{1}", host.Owner.Format(), host.Name), ext);
+
+        [Op]
         public static FileName file(PartId part, FileExt x1, FileExt x2)
             => file(part, combine(x1, x2));
 

@@ -35,6 +35,6 @@ namespace Z0
             => Target + InstructionFolder;
 
         public FS.FileExt DataFileExt
-            => FileExtensions.Csv;
+            => FS.Csv;
     }
 }

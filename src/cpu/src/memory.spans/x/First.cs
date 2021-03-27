@@ -13,8 +13,7 @@ namespace Z0
     partial class XSpan
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T? First<T>(this ReadOnlySpan<T> src, Func<T,bool> predicate)
-            where T : struct
+        public static Outcome<T> First<T>(this ReadOnlySpan<T> src, Func<T,bool> predicate)
         {
             var count = src.Length;
             if(count == 0)
@@ -27,7 +26,7 @@ namespace Z0
                 if(predicate(candidate))
                     return candidate;
             }
-            return null;
+            return false;
         }
 
         /// <summary>
@@ -37,26 +36,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T First<T>(this Span<T> src)
-        {
-            if(src.IsEmpty)
-                ThrowEmptySpanError();
-            return ref first(src);
-        }
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static bool First<T>(this Span<T> src, out T dst)
-        {
-            if(!src.IsEmpty)
-            {
-                dst = first(src);
-                return true;
-            }
-            else
-            {
-                dst = default;
-                return false;
-            }
-        }
+            => ref first(src);
 
         /// <summary>
         /// Returns a reference to the last element of a nonempty span

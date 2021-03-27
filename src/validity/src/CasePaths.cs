@@ -50,7 +50,7 @@ namespace Z0
         FS.FileExt DefaultExt
         {
             [MethodImpl(Inline)]
-            get => FileExtensions.Csv;
+            get => FS.Csv;
         }
     }
 }

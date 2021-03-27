@@ -257,7 +257,7 @@ namespace Z0
             => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
 
         static HashSet<string> Ignore
-            => root.hashset("ToString","GetHashCode", "Equals", "ToString");
+            => root.hashset(root.array("ToString","GetHashCode", "Equals", "ToString"));
 
     }
 

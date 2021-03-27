@@ -99,7 +99,7 @@ namespace Z0
         public XedSummaryRow[] Emit(XedPattern[] src)
         {
             var records = Xed.sort(src).Map(p => Xed.row(p));
-            var target = Wf.Db().Table<XedSummaryRow>("xed", FS.Extensions.Csv);
+            var target = Wf.Db().Table<XedSummaryRow>("xed", FS.Csv);
             Tables.emit(records,  target);
             return records;
         }
@@ -107,7 +107,7 @@ namespace Z0
         void SaveMnemonics(XedSummaryRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Target.TablePath(FS.file("mnemonics", FileExtensions.Csv));
+            var dst = Target.TablePath(FS.file("mnemonics", FS.Csv));
             dst.Overwrite(upper);
         }
     }
