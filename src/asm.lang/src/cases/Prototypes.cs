@@ -23,5 +23,9 @@ namespace Z0.Asm
         const string contract = nameof(contract);
 
         const string client = nameof(client);
+
+        const string loops = nameof(loops);
+
+        const string dot = ".";
     }
 }

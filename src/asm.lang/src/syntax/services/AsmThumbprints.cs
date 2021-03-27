@@ -5,6 +5,8 @@
 namespace Z0.Asm
 {
     using System;
+    using System.Runtime.CompilerServices;
+
     using static Part;
     using static Chars;
     using static memory;
@@ -165,8 +167,13 @@ namespace Z0.Asm
             return e0.CompareTo(e1);
         }
 
+        [MethodImpl(Inline),Op]
         public static AsmThumbprint define(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)
             => new AsmThumbprint(sig, opcode, encoded);
+
+        [MethodImpl(Inline),Op]
+        public static AsmThumbprint define(AsmFormExpr form, AsmHexCode encoded)
+            => new AsmThumbprint(form.Sig, form.OpCode, encoded);
 
         [Op]
         public static AsmThumbprintExpr expression(AsmSigExpr sig, AsmOpCodeExpr opcode, AsmHexCode encoded)

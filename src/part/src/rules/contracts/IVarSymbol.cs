@@ -13,7 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IVarSymbol<T> : IVarSymbol, IIdentified<T>
+    public interface IVarSymbol<T> : IVarSymbol, ITypedIdentity<T>
     {
         string IVarSymbol.Name
             => Id?.ToString() ?? string.Empty;

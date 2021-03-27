@@ -14,7 +14,7 @@ namespace Z0
 
     using W = W2;
 
-    public readonly struct W2 : WData<W>, IIdentified<string>
+    public readonly struct W2 : WData<W>, ITypedIdentity<string>
     {
         public const DW Width = DW.W2;
 

@@ -11,43 +11,45 @@ namespace Z0.Asm
 
     public readonly struct AsmOffsetLabel : IAsmOffsetLabel
     {
+        public Identifier Name {get;}
+
         public ulong Offset {get;}
 
         public DataWidth Width {get;}
 
-        [MethodImpl(Inline)]
         internal AsmOffsetLabel(byte offset)
         {
             Offset = offset;
             Width = DataWidth.W8;
+            Name = string.Format("_{0}", AsmRender.offset(Offset, Width));
         }
 
-        [MethodImpl(Inline)]
         internal AsmOffsetLabel(ushort offset)
         {
             Offset = offset;
             Width = DataWidth.W16;
+            Name = string.Format("_{0}", AsmRender.offset(Offset, Width));
         }
 
-        [MethodImpl(Inline)]
         internal AsmOffsetLabel(uint offset)
         {
             Offset = offset;
             Width = DataWidth.W32;
+            Name = string.Format("_{0}", AsmRender.offset(Offset, Width));
         }
 
-        [MethodImpl(Inline)]
         internal AsmOffsetLabel(ulong offset)
         {
             Offset = offset;
             Width = DataWidth.W64;
+            Name = string.Format("_{0}", AsmRender.offset(Offset, Width));
         }
 
-        [MethodImpl(Inline)]
         AsmOffsetLabel(ulong offset, DataWidth width)
         {
             Offset = offset;
             Width = width;
+            Name = string.Format("_{0}", AsmRender.offset(Offset, Width));
         }
 
         public bool IsEmpty
@@ -63,7 +65,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => AsmRender.format(this);
+            => Name;
 
         public override string ToString()
             => Format();
@@ -73,5 +75,9 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => new AsmOffsetLabel(0, DataWidth.None);
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmLabel(AsmOffsetLabel src)
+            => new AsmLabel(src.Name);
     }
 }

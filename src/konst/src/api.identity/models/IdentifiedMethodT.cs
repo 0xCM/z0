@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct IdentifiedMethod<I> : ITextual, IIdentified<I>
+    public readonly struct IdentifiedMethod<I> : ITextual, ITypedIdentity<I>
         where I : unmanaged
     {
         public I Id {get;}

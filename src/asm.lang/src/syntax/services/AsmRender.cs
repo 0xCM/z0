@@ -10,13 +10,23 @@ namespace Z0.Asm
     [ApiHost]
     public class AsmRender : WfService<AsmRender>
     {
+        // [Op]
+        // public static string format(in AsmOffsetLabel src)
+        //     => src.Width switch{
+        //         DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
+        //         DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
+        //         DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
+        //         DataWidth.W64 => src.Offset.FormatAsmHex(),
+        //         _ => EmptyString
+        //     };
+
         [Op]
-        public static string format(in AsmOffsetLabel src)
-            => src.Width switch{
-                DataWidth.W8 => ScalarCast.uint8(src.Offset).FormatAsmHex(),
-                DataWidth.W16 => ScalarCast.uint16(src.Offset).FormatAsmHex(),
-                DataWidth.W32 => ScalarCast.uint32(src.Offset).FormatAsmHex(),
-                DataWidth.W64 => src.Offset.FormatAsmHex(),
+        public static string offset(ulong offset, DataWidth width)
+            => width switch{
+                DataWidth.W8 => ScalarCast.uint8(offset).FormatAsmHex(),
+                DataWidth.W16 => ScalarCast.uint16(offset).FormatAsmHex(),
+                DataWidth.W32 => ScalarCast.uint32(offset).FormatAsmHex(),
+                DataWidth.W64 => offset.FormatAsmHex(),
                 _ => EmptyString
             };
 

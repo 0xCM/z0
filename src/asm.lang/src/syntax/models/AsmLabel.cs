@@ -11,34 +11,28 @@ namespace Z0.Asm
 
     public readonly struct AsmLabel : IAsmLabel
     {
-        public TextBlock Content {get;}
-
-        public AsmLabelKind Kind {get;}
+        public Identifier Name {get;}
 
         [MethodImpl(Inline)]
-        public AsmLabel(TextBlock content, AsmLabelKind kind)
-        {
-            Content = content;
-            Kind = kind;
-        }
+        public AsmLabel(Identifier name)
+            => Name = name;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsEmpty;
+            get => Name.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Content.IsNonEmpty;
+            get => Name.IsNonEmpty;
         }
 
         public string Format()
-            => Content.Format();
+            => Name;
 
         public override string ToString()
             => Format();
-
     }
 }

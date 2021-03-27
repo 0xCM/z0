@@ -10,13 +10,13 @@ namespace Z0
     /// Characterizes a tool-specific file archive
     /// </summary>
     [Free]
-    public interface IToolWorkspace : IIdentified<ToolId>, IFileArchive
+    public interface IToolWorkspace : ITypedIdentity<ToolId>, IFileArchive
     {
         ToolId ToolId {get;}
 
         ToolArchiveKind ArchiveKind {get;}
 
-        ToolId IIdentified<ToolId>.Id
+        ToolId ITypedIdentity<ToolId>.Id
             => ToolId;
     }
 

@@ -14,19 +14,12 @@ namespace Z0
     }
 
     [Free]
-    public interface IName<S> : IName, IContented<S>, IIdentified<S>
+    public interface IName<S> : IName, IContented<S>, ITypedIdentity<S>
     {
         string IIdentified.Identifier
             => string.Format("{0}", Content);
 
-        S IIdentified<S>.Id
+        S ITypedIdentity<S>.Id
             => Content;
-    }
-
-    [Free]
-    public interface INameHost<H,S> : IName<S>
-        where H : struct, INameHost<H,S>
-    {
-
     }
 }

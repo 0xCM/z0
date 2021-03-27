@@ -16,6 +16,9 @@ namespace Z0
     {
         string Identifier {get;}
 
+        Identifier _Identifier
+            => new Identifier(Identifier);
+
         bool IsEmpty
             => string.IsNullOrWhiteSpace(Identifier);
 
@@ -24,18 +27,5 @@ namespace Z0
 
         string ITextual.Format()
             => Identifier;
-    }
-
-    [Free]
-    public interface IIdentified<T>
-    {
-        T Id {get;}
-    }
-
-    [Free]
-    public interface IIdentified<H,T> : IIdentified<T>, IEquatable<H>
-        where H : struct, IIdentified<H,T>
-    {
-
     }
 }

@@ -15,10 +15,10 @@ namespace Z0.Asm
 
         public ApiCaptureBlocks Blocks {get;}
 
-        public AsmRoutines Routines {get;}
+        public AsmRoutineIndex Routines {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostCaptureSet(ApiHostCatalog catalog, ApiCaptureBlocks blocks, AsmRoutines routines)
+        public ApiHostCaptureSet(ApiHostCatalog catalog, ApiCaptureBlocks blocks, AsmRoutineIndex routines)
         {
             Catalog = catalog;
             Blocks = blocks;

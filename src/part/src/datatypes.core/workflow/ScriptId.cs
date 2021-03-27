@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Identifies an internal or external tool
     /// </summary>
-    public struct ScriptId : IIdentified<ScriptId,string>
+    public struct ScriptId : ITypedIdentity<ScriptId,string>
     {
         public string Id {get;}
 

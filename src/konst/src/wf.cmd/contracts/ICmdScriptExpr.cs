@@ -13,7 +13,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdScriptExpr<K,T> : IIdentified<K>, IContented<T>
+    public interface ICmdScriptExpr<K,T> : ITypedIdentity<K>, IContented<T>
         where K : unmanaged
     {
 

@@ -27,15 +27,12 @@ namespace Z0.Asm
         public string Format(AsmRoutine src)
             => format(src, Config);
 
-        [MethodImpl(Inline)]
         public string Format(in MemoryAddress @base, in AsmInstructionSummary src)
             => format(@base, src, Config);
 
-        [MethodImpl(Inline)]
-        public void Render(in AsmRoutines src, ITextBuffer dst)
+        public void Render(in AsmRoutineIndex src, ITextBuffer dst)
             => format(src, Config, dst);
 
-        [MethodImpl(Inline)]
         public void Render(in AsmRoutine src, ITextBuffer dst)
             => format(src, Config, dst);
 
@@ -113,7 +110,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(AsmInstructionSpecExprLegacy src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Sig, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHex());
 
@@ -143,7 +140,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static void format(in AsmRoutines src, in AsmFormatConfig config, ITextBuffer dst)
+        public static void format(in AsmRoutineIndex src, in AsmFormatConfig config, ITextBuffer dst)
         {
             var count = src.Count;
             if(count != 0)

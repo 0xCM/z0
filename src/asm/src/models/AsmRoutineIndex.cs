@@ -9,12 +9,12 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmRoutines : IIndex<AsmRoutine>
+    public readonly struct AsmRoutineIndex : IIndex<AsmRoutine>
     {
         readonly Index<AsmRoutine> Data;
 
         [MethodImpl(Inline)]
-        public AsmRoutines(AsmRoutine[] src)
+        public AsmRoutineIndex(AsmRoutine[] src)
             => Data = src;
 
         public uint Count
@@ -48,13 +48,13 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRoutines(AsmRoutine[] src)
-            => new AsmRoutines(src);
+        public static implicit operator AsmRoutineIndex(AsmRoutine[] src)
+            => new AsmRoutineIndex(src);
 
-        public static AsmRoutines Empty
+        public static AsmRoutineIndex Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmRoutines(sys.empty<AsmRoutine>());
+            get => new AsmRoutineIndex(sys.empty<AsmRoutine>());
         }
     }
 }

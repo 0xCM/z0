@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct ScriptPattern<K> : IIdentified<K>
+    public readonly struct ScriptPattern<K> : ITypedIdentity<K>
         where K : unmanaged
     {
         public K Id {get;}

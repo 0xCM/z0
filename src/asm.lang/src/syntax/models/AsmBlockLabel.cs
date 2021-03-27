@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmBlockLabel : IAsmBlockLabel
+    public readonly struct AsmBlockLabel : IAsmLabel
     {
         public Identifier Name {get;}
 

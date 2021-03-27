@@ -933,19 +933,36 @@ namespace Z0.Asm
         }
 
 
-        void Summarize(ApiInstruction src, ITextBuffer dst)
+        static string format(Address16 offset, BinaryCode code)
+            => string.Format("{0}[{1}] => {2}", offset.Format(), code.Length, code.Format());
+
+        static string format(MemoryAddress @base, CodeBlock code)
+            => string.Format("{0}[{1}] = {2}", @base.Format(), code.Length, code.Format());
+
+
+        AsmOpCodeExpr opcode(in ApiInstruction src)
+            => asm.opcode(src.Instruction.OpCode.OpCodeString);
+
+        AsmSigExpr sig(in ApiInstruction src)
+            => Sigs.ParseSigExpr(src.Instruction.OpCode.InstructionString);
+
+        void Summarize(in ApiInstruction src, ITextBuffer dst)
         {
             var itext = src.FormattedInstruction;
-            var idata = src.EncodedData;
-            var isize = src.Size;
-            var icomment = asm.comment(string.Format("encoded[{0},{1}]:{2}", src.Offset, isize, idata));
-            var summary = string.Format("{0,-46} {1}", itext, icomment);
+            var code = src.EncodedData;
+            var hexcode = AsmBytes.hexcode(code);
+            var form = asm.form(opcode(src), sig(src));
+            var tp = AsmThumbprints.define(form,hexcode);
+            var isize = (byte)src.Size;
+            var offset = (Address16)src.Offset;
+            var icomment = asm.comment(format(offset, code));
+            var summary = string.Format("{0,-46} ; {1} {2}", itext, offset, tp);
+
             dst.Append(summary);
         }
 
-        void Summarize(ReadOnlySpan<AsmMemberRoutine> src)
+        void Summarize(ReadOnlySpan<AsmMemberRoutine> src, FS.FilePath dst)
         {
-            var dst = Db.AppLog("routines", FS.Extensions.Asm);
             var count = src.Length;
             var flow = Wf.EmittingFile(dst, string.Format("Creating summaries for <{0}> routines", count));
             var buffer = text.buffer();
@@ -962,31 +979,32 @@ namespace Z0.Asm
 
                 writer.WriteLine(AsmComment.separate());
                 writer.WriteLine(asm.comment(member.OpUri.Format()));
-                writer.WriteLine(asm.comment(string.Format("{0}[{1}]:{2}", @base.Format(), code.Length, code.Format())));
+                writer.WriteLine(asm.comment(format(@base, code)));
                 for(var j=0; j<icount; j++)
                 {
 
                     ref readonly var instruction = ref skip(instructions,j);
                     Summarize(instruction, buffer);
                     writer.WriteLine(buffer.Emit());
-                    // var itext = instruction.FormattedInstruction;
-                    // var idata = instruction.EncodedData;
-                    // var isize = instruction.Size;
-                    // var icomment = asm.comment(string.Format("encoded[{0}]:{1}", isize, idata));
-                    // writer.WriteLine(string.Format("{0,-46} {1}", itext, icomment));
-
                 }
 
             }
             Wf.EmittedFile(flow, count);
         }
 
+
+        static bool filter(AsmMemberRoutine src)
+            => src.Member.Method.DeclaringType == typeof(Prototypes.Extend);
+
         public void Run()
         {
             var options = CaptureWorkflowOptions.EmitImm;
             var parts = root.array(PartId.AsmLang, PartId.AsmZ);
             var routines = Capture.run(Wf, parts, options);
-            Summarize(routines);
+            var filtered = span<AsmMemberRoutine>(routines.Length);
+            var dst = Db.AppLog("routines", FS.Extensions.Asm);
+            var count = AsmRoutines.filter(routines,filter,filtered);
+            Summarize(slice(filtered,0, count), dst);
 
 
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
