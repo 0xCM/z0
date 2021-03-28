@@ -28,7 +28,7 @@ namespace Z0
         public string Format()
             => api.format(this);
 
-        public string Identifier
+        public string IdentityText
         {
             [MethodImpl(Inline)]
             get => api.identifier(this);

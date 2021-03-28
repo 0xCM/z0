@@ -22,14 +22,14 @@ namespace Z0
             Target = dst;
         }
 
-        public string Identifier
+        public string IdentityText
         {
             [MethodImpl(Inline)]
             get => string.Format(RP.Arrow, Source, Target);
         }
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         public override string ToString()
             => Format();

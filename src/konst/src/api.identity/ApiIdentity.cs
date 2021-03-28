@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The constructed generic method</param>
         static IEnumerable<string> TypeArgIdentities(MethodInfo src)
-            => src.GenericArguments().Select(arg => ApiIdentity.identify(arg).Identifier);
+            => src.GenericArguments().Select(arg => ApiIdentity.identify(arg).IdentityText);
 
         /// <summary>
         /// Assigns aggregate identity to the type argument sequence that closes a generic method

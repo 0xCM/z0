@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct EnumIdentity : IIdentifiedType<EnumIdentity>
     {
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public Name TypeName {get;}
 
@@ -29,14 +29,14 @@ namespace Z0
         {
             TypeName = name;
             BaseType = basetype;
-            Identifier = basetype != 0 ? $"{TypeName}{IDI.ModSep}{basetype.Format()}" : EmptyString;
+            IdentityText = basetype != 0 ? $"{TypeName}{IDI.ModSep}{basetype.Format()}" : EmptyString;
         }
 
         IIdentifiedType<EnumIdentity> Identified
             => this;
 
         public override int GetHashCode()
-            => text.denullify(Identifier).GetHashCode();
+            => text.denullify(IdentityText).GetHashCode();
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -46,11 +46,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.define(Identifier);
+            => TypeIdentity.define(IdentityText);
 
         [MethodImpl(Inline)]
         public static implicit operator string(EnumIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(EnumIdentity src)

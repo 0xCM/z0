@@ -14,21 +14,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int compare<T>(in T a, in T b)
             where T : IIdentified
-                => text.denullify(a.Identifier).CompareTo(b.Identifier);
+                => text.denullify(a.IdentityText).CompareTo(b.IdentityText);
 
         [MethodImpl(Inline)]
         public static bool equals<T>(in T a, object b)
             where T : IIdentified
-                => text.equals(a.Identifier, b is T x ? x.Identifier : EmptyString, NoCase);
+                => text.equals(a.IdentityText, b is T x ? x.IdentityText : EmptyString, NoCase);
 
         [MethodImpl(Inline)]
         public static bool equals<T>(in T a, in T b)
             where T : IIdentified
-                => text.equals(a.Identifier, b.Identifier, NoCase);
+                => text.equals(a.IdentityText, b.IdentityText, NoCase);
 
         [MethodImpl(Inline)]
         public static int hash<T>(in T src)
             where T : IIdentified
-                => text.denullify(src.Identifier).GetHashCode();
+                => text.denullify(src.IdentityText).GetHashCode();
     }
 }

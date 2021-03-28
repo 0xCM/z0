@@ -11,32 +11,32 @@ namespace Z0
 
     public readonly struct PrimalIdentity : IIdentifiedType<PrimalIdentity>
     {
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public string Keyword {get;}
 
         [MethodImpl(Inline)]
         public PrimalIdentity(NumericKind kind, string keyword)
         {
-            Identifier = NumericIdentity.define(kind);
+            IdentityText = NumericIdentity.define(kind);
             Keyword = keyword;
         }
 
         [MethodImpl(Inline)]
         public PrimalIdentity(string keyword)
         {
-            Identifier = keyword;
+            IdentityText = keyword;
             Keyword = keyword;
         }
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.define(Identifier);
+            => TypeIdentity.define(IdentityText);
 
         IIdentifiedType<PrimalIdentity> Identified => this;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -46,7 +46,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(PrimalIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(PrimalIdentity src)

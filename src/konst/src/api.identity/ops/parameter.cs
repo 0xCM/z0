@@ -24,7 +24,7 @@ namespace Z0
                     : identify(src.ParameterType.EffectiveType());
 
                 if(!id.IsEmpty)
-                    return text.concat(id.Identifier, src.RefKind().Format());
+                    return text.concat(id.IdentityText, src.RefKind().Format());
             }
 
             return EmptyString;

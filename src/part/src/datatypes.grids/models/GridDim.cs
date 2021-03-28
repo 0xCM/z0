@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Part;
-    using static data.tchars;
+    using static CharText;
 
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization

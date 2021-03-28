@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public NumericKind NumericKind {get;}
 
@@ -23,13 +23,13 @@ namespace Z0
         NumericIdentity(NumericKind kind)
         {
             NumericKind = kind;
-            Identifier = $"{kind.TypeWidth().FormatValue()}{NumericKind.Indicator().Format()}";
+            IdentityText = $"{kind.TypeWidth().FormatValue()}{NumericKind.Indicator().Format()}";
         }
 
         IIdentifiedType<NumericIdentity> Identified => this;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -39,11 +39,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(NumericIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator TypeIdentity(NumericIdentity src)
-            => new TypeIdentity(src.Identifier);
+            => new TypeIdentity(src.IdentityText);
 
         [MethodImpl(Inline)]
         public static bool operator==(NumericIdentity a, NumericIdentity b)

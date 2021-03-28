@@ -95,7 +95,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(Type host, OpIdentity id)
-            => $"{PartName.from(host)}{UriPathSep}{host.Name}{UriPathSep}{id.Identifier}";
+            => $"{PartName.from(host)}{UriPathSep}{host.Name}{UriPathSep}{id.IdentityText}";
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -103,6 +103,6 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         public static string match(Type host, OpIdentity f, OpIdentity g)
-             => identify(host, $"{f.Identifier}_vs_{g.Identifier}");
+             => identify(host, $"{f.IdentityText}_vs_{g.IdentityText}");
    }
 }

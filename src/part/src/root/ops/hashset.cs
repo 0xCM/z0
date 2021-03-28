@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static HashSet<T> hashset<T>(T[] src)
+        public static HashSet<T> hashset<T>(params T[] src)
             => new HashSet<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]

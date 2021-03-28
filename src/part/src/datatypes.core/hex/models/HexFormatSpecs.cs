@@ -44,12 +44,12 @@ namespace Z0
         /// <summary>
         /// The uppercase hex format code
         /// </summary>
-        public const string UC = data.tchars.X;
+        public const string UC = CharText.X;
 
         /// <summary>
         /// The lowercase hex format code
         /// </summary>
-        public const string LC = data.tchars.x;
+        public const string LC = CharText.x;
 
         /// <summary>
         /// The delimiter used to separate hex numbers when rendering a hex data sequence

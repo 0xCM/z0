@@ -10,7 +10,7 @@ namespace Z0
     public interface IArrow : ITextual, IIdentified
     {
         string ITextual.Format()
-            => Identifier;
+            => IdentityText;
     }
 
     /// <summary>
@@ -25,10 +25,10 @@ namespace Z0
 
         T Target {get;}
 
-        string IIdentified.Identifier
+        string IIdentified.IdentityText
             => string.Format(RP.Arrow, Source, Target);
         string ITextual.Format()
-            => Identifier;
+            => IdentityText;
     }
 
     [Free]
@@ -41,9 +41,9 @@ namespace Z0
     public interface IArrow<S,T,K> : IArrow<S,T>, IKinded<K>
         where K : unmanaged
     {
-        string IIdentified.Identifier
+        string IIdentified.IdentityText
             => string.Format(RP.Arrow, Source, Target);
         string ITextual.Format()
-            => Identifier;
+            => IdentityText;
    }
 }

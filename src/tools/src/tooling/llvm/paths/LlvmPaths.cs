@@ -13,6 +13,7 @@ namespace Z0.Tooling
 
     public interface ILlvmPaths : IFileArchive
     {
+
         ILlvmSourcePaths Source => new SourcePaths(Root + FS.folder("llvm"));
 
         ILlvmTestCasePaths Test => new TestCasePaths(Root + FS.folder("llvm") + FS.folder("test"));
@@ -24,7 +25,7 @@ namespace Z0.Tooling
 
     partial struct Llvm
     {
-        public ILlvmPaths Paths
+        public ILlvmPaths LPaths
             => new LlvmPaths(SrcRoot);
 
         internal struct LlvmPaths : ILlvmPaths

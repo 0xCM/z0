@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Option<byte> imm8(OpIdentity src)
         {
-            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(IDI.Imm), out var immval))
+            if(src.HasImm && byte.TryParse(src.IdentityText.RightOfLast(IDI.Imm), out var immval))
                 return immval;
             else
                 return root.none<byte>();
@@ -72,7 +72,7 @@ namespace Z0
 
         [Op]
         public static string FullUriText(ApiUriScheme scheme, PartId part, string host, string group, OpIdentity opid)
-            => $"{scheme.Format()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.Identifier}";
+            => $"{scheme.Format()}{UriEndOfScheme}{part.Format()}{UriPathSep}{host}{UriQuery}{group}{UriFragment}{opid.IdentityText}";
 
         public static ApiUriScheme scheme(string src)
             => Enum.TryParse(typeof(ApiUriScheme), src, true, out var result) ? (ApiUriScheme)result : ApiUriScheme.None;

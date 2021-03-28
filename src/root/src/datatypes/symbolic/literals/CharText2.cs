@@ -2,14 +2,33 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace data
+namespace Z0
 {
     /// <summary>
-    /// Defines a set of characters represented by strings
+    /// Defines an arbitrary collection of text literals
     /// </summary>
     [LiteralProvider]
-    public static class tchars
+    public static class CharText
     {
+        /// <summary>
+        /// The '=' character text
+        /// </summary>
+        public const string Eq = "=";
+
+        /// <summary>
+        /// The '|' character text
+        /// </summary>
+        public const string Pipe = "|";
+
+        /// The ' ' character text
+        /// </summary>
+        public const string Space = " ";
+
+        /// <summary>
+        /// The ''' character text
+        /// </summary>
+        public const string SQuote = "\'";
+
         /// <summary>
         /// The 'a' character represented as text
         /// </summary>
@@ -270,15 +289,12 @@ namespace data
         /// </summary>
         public const string Z = "Z";
 
-        public const string Space = " ";
 
         public const string DQuote = "\"";
 
-        public const string SQuote = "'";
 
         public const string LBrace = "{";
 
-        public const string RBrace = "}";
 
         public const string LBrack = "[";
 
@@ -288,6 +304,9 @@ namespace data
 
         public const string RParen = ")";
 
+        /// <summary>
+        /// The ':' character text
+        /// </summary>
         public const string Colon = ":";
 
         public const string Comma = ",";
@@ -299,8 +318,6 @@ namespace data
         public const string Dot = ".";
 
         public const string Underscore = "_";
-
-        public const string Pipe = "|";
 
         public const string Bang = "!";
 

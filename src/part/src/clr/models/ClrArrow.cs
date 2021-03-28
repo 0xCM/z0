@@ -27,7 +27,7 @@ namespace Z0
 
         const string MemberFormat = "{0}[{1}]";
 
-        public string Identifier
+        public string IdentityText
             => string.Format(RP.Arrow,
                 string.Format(MemberFormat, Source.Name, Source.Id),
                 string.Format(MemberFormat, Target.Name, Target.Id)
@@ -42,7 +42,7 @@ namespace Z0
 
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
 
         public override string ToString()

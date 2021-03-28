@@ -20,13 +20,13 @@ namespace Z0
 
         public readonly ApiIdentityPartKind Kind;
 
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         public ApiIdentityPart(byte index, ApiIdentityPartKind kind, string text)
         {
             Index = index;
             Kind = kind;
-            Identifier = text;
+            IdentityText = text;
         }
 
         public bool IsName
@@ -53,7 +53,7 @@ namespace Z0
             => api.compare(this, other);
 
         public override string ToString()
-            => Identifier;
+            => IdentityText;
 
         public override int GetHashCode()
             => api.hash(this);
@@ -67,7 +67,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(ApiIdentityPart src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static bool operator==(ApiIdentityPart a, ApiIdentityPart b)

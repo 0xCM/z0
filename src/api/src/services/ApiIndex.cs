@@ -59,13 +59,13 @@ namespace Z0
         {
             var items = src.ToArray();
             var identities = items.Select(x => x.Item1).ToArray();
-            var duplicates = (from g in identities.GroupBy(i => i.Identifier)
+            var duplicates = (from g in identities.GroupBy(i => i.IdentityText)
                              where g.Count() > 1
                              select g.Key).ToHashSet();
 
             var dst = new Dictionary<OpIdentity,T>();
             if(duplicates.Count() != 0)
-                dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
+                dst = items.Where(i => !duplicates.Contains(i.Item1.IdentityText)).ToDictionary();
             else
                 dst = src.ToDictionary();
 
@@ -77,13 +77,13 @@ namespace Z0
         {
             var items = src.ToArray();
             var identities = items.Select(x => x.Left).ToArray();
-            var duplicates = (from g in identities.GroupBy(i => i.Identifier)
+            var duplicates = (from g in identities.GroupBy(i => i.IdentityText)
                              where g.Count() > 1
                              select g.Key).ToHashSet();
 
             var dst = new Dictionary<OpIdentity,T>();
             if(duplicates.Count() != 0)
-                dst = items.Where(i => !duplicates.Contains(i.Left.Identifier)).ToDictionary();
+                dst = items.Where(i => !duplicates.Contains(i.Left.IdentityText)).ToDictionary();
             else
                 dst = src.ToDictionary();
 
@@ -95,13 +95,13 @@ namespace Z0
             try
             {
                 var identities = src.Select(x => x.Item1);
-                var duplicates = (from g in identities.GroupBy(i => i.Identifier)
+                var duplicates = (from g in identities.GroupBy(i => i.IdentityText)
                                 where g.Count() > 1
                                 select g.Key).ToHashSet();
 
                 var dst = new Dictionary<OpIdentity,T>();
                 if(duplicates.Count() != 0)
-                    dst = src.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
+                    dst = src.Where(i => !duplicates.Contains(i.Item1.IdentityText)).ToDictionary();
                 else
                     dst = src.ToDictionary();
                 return new ApiOpIndex<T>(dst, duplicates.Select(d => ApiUri.opid(d)).Array());

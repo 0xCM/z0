@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The identifier computed from the name and parameter identities
         /// </summary>
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         /// <summary>
         /// Indicates whether identifier should be rendered with a generic marker
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal DelegateIdentity(string identifier, string name, bool generic, TypeIdentity[] parameters)
         {
-            Identifier = identifier;
+            IdentityText = identifier;
             DelegateName = name;
             Parameters = parameters;
             Generic = generic;
@@ -49,7 +49,7 @@ namespace Z0
             => this;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -59,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(DelegateIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static bool operator==(DelegateIdentity a, DelegateIdentity b)

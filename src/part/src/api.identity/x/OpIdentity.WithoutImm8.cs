@@ -17,7 +17,7 @@ namespace Z0
             var perhaps = src.ExtractImm8();
             if(!perhaps)
                 return src;
-            return ApiUri.opid(src.Identifier.Remove(ApiUri.Imm8Suffix(perhaps.Value)));
+            return ApiUri.opid(src.IdentityText.Remove(ApiUri.Imm8Suffix(perhaps.Value)));
         }
     }
 }

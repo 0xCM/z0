@@ -12,7 +12,7 @@ namespace Z0
     {
         string UriText {get;}
 
-        string IIdentified.Identifier
+        string IIdentified.IdentityText
             => UriText;
     }
 

@@ -38,7 +38,7 @@ namespace Z0
 
 
         public bool FindMethod(OpUri uri, out MethodInfo method)
-            => Index.TryGetValue(uri.OpId.Identifier, out method);
+            => Index.TryGetValue(uri.OpId.IdentityText, out method);
 
         [MethodImpl(Inline)]
         public string Format()

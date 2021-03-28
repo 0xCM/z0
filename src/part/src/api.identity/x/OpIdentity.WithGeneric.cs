@@ -19,7 +19,7 @@ namespace Z0
                 return src;
             else
                return ApiUri.opid(
-                   text.concat(src.Identifier.LeftOfFirst(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOfFirst(IDI.PartSep)));
+                   text.concat(src.IdentityText.LeftOfFirst(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.IdentityText.RightOfFirst(IDI.PartSep)));
         }
     }
 }

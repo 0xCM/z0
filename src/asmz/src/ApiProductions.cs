@@ -2,14 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
 
     using static Part;
     using static memory;
 
-    public sealed class AsmProductions : WfService<AsmProductions>
+    using Z0.Asm;
+
+    public sealed class ApiProductions : WfService<ApiProductions>
     {
         protected override void OnInit()
         {
@@ -33,7 +35,6 @@ namespace Z0.Asm
 
         AsmStatementExpr statement(ApiInstruction src)
         {
-
             return src.FormattedInstruction.Replace(" ptr", EmptyString);
         }
 

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static data.tchars;
+    using static CharText;
 
     public readonly struct GridSegment<T> : IDataType<T>
         where T : unmanaged

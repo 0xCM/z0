@@ -10,13 +10,13 @@ namespace Z0
     public interface IName : ITextual, IIdentified
     {
         string ITextual.Format()
-            => Identifier;
+            => IdentityText;
     }
 
     [Free]
     public interface IName<S> : IName, IContented<S>, ITypedIdentity<S>
     {
-        string IIdentified.Identifier
+        string IIdentified.IdentityText
             => string.Format("{0}", Content);
 
         S ITypedIdentity<S>.Id

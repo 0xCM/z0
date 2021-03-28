@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -14,18 +13,18 @@ namespace Z0
     [Free]
     public interface IIdentified : ITextual
     {
-        string Identifier {get;}
+        string IdentityText {get;}
 
-        Identifier _Identifier
-            => new Identifier(Identifier);
+        Identifier Identifier
+            => new Identifier(IdentityText);
 
         bool IsEmpty
-            => string.IsNullOrWhiteSpace(Identifier);
+            => string.IsNullOrWhiteSpace(IdentityText);
 
         bool IsNonEmpty
             => !IsEmpty;
 
         string ITextual.Format()
-            => Identifier;
+            => IdentityText;
     }
 }

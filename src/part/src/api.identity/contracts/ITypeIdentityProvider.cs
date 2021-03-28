@@ -50,6 +50,6 @@ namespace Z0
         new T Identify(Type src);
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
-            => new TypeIdentity(Identify(src).Identifier);
+            => new TypeIdentity(Identify(src).IdentityText);
     }
 }

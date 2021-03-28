@@ -78,7 +78,7 @@ namespace Z0
         public NumericWidth NumericWidth
             => (NumericWidth)T.Width();
 
-        public string Identifier
+        public string IdentityText
             => M != null
                ? $"{M}{IDI.SegSep}{N}{IDI.SegSep}{T.Format()}"
                : $"{N}{IDI.SegSep}{T.Format()}";
@@ -115,7 +115,7 @@ namespace Z0
         /// Formats the dimension in canonical form
         /// </summary>
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         [MethodImpl(Inline)]
         public bool Equals(NatKind src)

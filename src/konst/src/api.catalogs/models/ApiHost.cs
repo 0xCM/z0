@@ -19,7 +19,7 @@ namespace Z0
         internal static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
         {
             var index = new Dictionary<string, MethodInfo>();
-            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).Identifier, m));
+            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
             return index;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         public bool FindMethod(OpUri uri, out MethodInfo method)
-            => Index.TryGetValue(uri.OpId.Identifier, out method);
+            => Index.TryGetValue(uri.OpId.IdentityText, out method);
 
         public bool IsEmpty
         {

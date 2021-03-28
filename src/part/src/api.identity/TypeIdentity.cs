@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct TypeIdentity : IIdentifiedType<TypeIdentity>
     {
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         /// <summary>
         /// Defines an <see cref='Enum'/> identifier
@@ -96,18 +96,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity(string id)
-            => Identifier = id;
+            => IdentityText = id;
 
         IIdentifiedType<TypeIdentity> Identified => this;
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => string.IsNullOrWhiteSpace(Identifier);
+            get => string.IsNullOrWhiteSpace(IdentityText);
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);
@@ -129,7 +129,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator string(TypeIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static bool operator==(TypeIdentity a, TypeIdentity b)

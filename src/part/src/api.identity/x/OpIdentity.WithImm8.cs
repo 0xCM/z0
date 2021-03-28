@@ -15,6 +15,6 @@ namespace Z0
         /// <param name="immval">The immediate value to attach</param>
         [Op]
         public static OpIdentity WithImm8(this OpIdentity src, byte immval)
-            => ApiUri.opid(text.concat(src.WithoutImm8().Identifier, ApiUri.Imm8Suffix(immval)));
+            => ApiUri.opid(text.concat(src.WithoutImm8().IdentityText, ApiUri.Imm8Suffix(immval)));
     }
 }

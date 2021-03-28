@@ -10,10 +10,10 @@ namespace Z0.Tooling
 
     partial struct Vc
     {
-        public static CmdLine configure(ClCmdInfo cmdinfo, FS.FolderPath vsdir)
+        public static CmdLine cl(ClCmdInfo cmdinfo, FS.FolderPath vsdir)
         {
             var winSdk = WinSdk.latest();
-            var vcToolDir = Vc.info(vsdir).ToolVersionRoot;
+            var vcToolDir = Vc.vcinfo(vsdir).ToolVersionRoot;
 
             bool isDebug = IsDebug(cmdinfo.Configuration);
             bool is64Bit = Is64BitTarget(cmdinfo.Architecture, cmdinfo.RuntimeID);

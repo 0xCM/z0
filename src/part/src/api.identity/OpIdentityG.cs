@@ -17,14 +17,14 @@ namespace Z0
         /// <summary>
         /// The operation identifier
         /// </summary>
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         [MethodImpl(Inline)]
         public OpIdentityG(string src)
-            => Identifier = src ?? EmptyString;
+            => IdentityText = src ?? EmptyString;
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public override bool Equals(object obj)
             => Identified.Same(obj);

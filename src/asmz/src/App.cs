@@ -970,7 +970,7 @@ namespace Z0.Asm
             // productions.Produce();
 
             ShowRegisterKinds();
-            var productions = AsmProductions.create(Wf);
+            var productions = ApiProductions.create(Wf);
             var hosts = InnerHosts(typeof(Prototypes));
             var count = productions.Produce(Toolsets.nasm, hosts);
 

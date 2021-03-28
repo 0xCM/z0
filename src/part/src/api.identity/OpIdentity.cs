@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The operation identifier
         /// </summary>
-        public string Identifier {get;}
+        public string IdentityText {get;}
 
         /// <summary>
         /// The unqualified operation name
@@ -54,7 +54,7 @@ namespace Z0
 
         public OpIdentity(string data, string name, string suffix, bool generic, bool imm, string[] components)
         {
-            Identifier = text.trim(Safe(data));
+            IdentityText = text.trim(Safe(data));
             Name = text.trim(name);
             Suffix = text.trim(suffix);
             IsGeneric = generic;
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         OpIdentity(string data)
         {
-            Identifier = Safe(data);
+            IdentityText = Safe(data);
             Name = EmptyString;
             Suffix = EmptyString;
             IsGeneric = false;
@@ -76,33 +76,33 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.empty(Identifier);
+            get => text.empty(IdentityText);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => text.nonempty(Identifier);
+            get => text.nonempty(IdentityText);
         }
 
         public override int GetHashCode()
-            => (int)alg.hash.calc(Identifier);
+            => (int)alg.hash.calc(IdentityText);
 
         public bool Equals(OpIdentity src)
-            => text.equals(Identifier, src.Identifier);
+            => text.equals(IdentityText, src.IdentityText);
 
         public override bool Equals(object src)
             => src is OpIdentity x && Equals(x);
 
         public string Format()
-            => Identifier;
+            => IdentityText;
 
         public override string ToString()
-            => Identifier;
+            => IdentityText;
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
-            => src.Identifier;
+            => src.IdentityText;
 
         [MethodImpl(Inline)]
         public static bool operator==(OpIdentity a, OpIdentity b)

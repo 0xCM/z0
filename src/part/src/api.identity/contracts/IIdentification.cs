@@ -15,17 +15,14 @@ namespace Z0
         IdentityTargetKind TargetKind
             => IdentityTargetKind.Type;
 
-        protected string DenullifiedIdentity
-            => text.denullify(Identifier);
-
         bool Same(object src)
-            => src is IIdentification t && string.Equals(Identifier, t.Identifier, StringComparison.InvariantCultureIgnoreCase);
+            => src is IIdentification t && string.Equals(IdentityText, t.IdentityText, StringComparison.InvariantCultureIgnoreCase);
 
         string ITextual.Format()
-            => text.denullify(Identifier);
+            => text.denullify(IdentityText);
 
         int IComparable.CompareTo(object src)
-            => text.denullify(Identifier).CompareTo((src as IIdentified)?.Identifier);
+            => text.denullify(IdentityText).CompareTo((src as IIdentified)?.IdentityText);
     }
 
     /// <summary>
@@ -39,6 +36,6 @@ namespace Z0
             => Same(src);
 
         int IComparable<T>.CompareTo(T src)
-            => text.denullify(Identifier).CompareTo(src.Identifier);
+            => text.denullify(IdentityText).CompareTo(src.IdentityText);
     }
 }
