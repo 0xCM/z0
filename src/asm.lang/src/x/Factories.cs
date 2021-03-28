@@ -18,8 +18,8 @@ namespace Z0
         public static AsmSigs AsmSigs(this IWfShell wf)
             => Z0.Asm.AsmSigs.create(wf);
 
-        public static AsmStatements AsmStatements(this IWfShell wf)
-            => Z0.Asm.AsmStatements.create(wf);
+        public static AsmApiStatements AsmStatements(this IWfShell wf)
+            => Z0.Asm.AsmApiStatements.create(wf);
 
         public static AsmCatalogEtl AsmCatalogEtl(this IWfShell wf)
             => Z0.Asm.AsmCatalogEtl.create(wf);
@@ -35,5 +35,8 @@ namespace Z0
 
         public static XedServices Xed(this IWfShell wf)
             => Z0.Asm.XedServices.create(wf);
+
+        public static AsmGen AsmCodeGenerator(this IWfShell wf)
+            => AsmGen.create(wf);
     }
 }

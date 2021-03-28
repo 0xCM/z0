@@ -14,7 +14,7 @@ namespace Z0
 
     [Free]
     public interface ITool<T> : ITool
-        where T : struct, ITool<T>
+        where T : ITool<T>, new()
     {
 
     }

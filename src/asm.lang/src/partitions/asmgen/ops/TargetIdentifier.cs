@@ -9,16 +9,14 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        string FileIdentifier(AsmGenTarget kind)
+        static Identifier TargetIdentifier(AsmGenTarget kind)
             => kind switch {
-                AsmGenTarget.InstructionType => "AsmInstructions",
-                AsmGenTarget.MonicCode => "AsmMnemonicCode",
+                AsmGenTarget.InstructionTypes => "AsmInstructions",
+                AsmGenTarget.MonicCodeEnum => "AsmMnemonicCode",
                 AsmGenTarget.MonicExpression => "AsmMnemonics",
                 AsmGenTarget.InstructionContracts=> "IAsmInstruction",
+                AsmGenTarget.StatementBuilder => "AsmStatementBuilder",
                 _ => EmptyString
             };
-
-        FS.FilePath GetTargetPath(AsmGenTarget kind)
-            => Db.SourceFile(PartId.AsmLangG, FS.file(FileIdentifier(kind), FS.Extensions.Cs));
     }
 }

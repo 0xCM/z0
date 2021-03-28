@@ -10,9 +10,13 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    using T = AsmGenTarget;
+
     partial class AsmGen
     {
         const string MonicSymbolPattern = "[Symbol(\"{0}\")]";
+
+        public const string MonicEnumType = "ushort";
 
         readonly struct MonicEnumModel
         {
@@ -27,10 +31,11 @@ namespace Z0.Asm
             public void Render(uint margin, ITextBuffer buffer)
             {
                 var src = Monics.View;
+
                 buffer.AppendLine("namespace Z0.Asm");
                 buffer.AppendLine(Open);
                 margin += 4;
-                buffer.IndentLine(margin, string.Format("public enum {0} : {1}", MonicEnumName, MonicEnumType));
+                buffer.IndentLine(margin, string.Format("public enum {0} : {1}", TargetIdentifier(T.MonicCodeEnum), MonicEnumType));
                 buffer.IndentLine(margin, Open);
                 margin += 4;
 
@@ -51,7 +56,6 @@ namespace Z0.Asm
                 margin -= 4;
                 buffer.IndentLine(margin, Close);
             }
-
 
             [MethodImpl(Inline)]
             public static implicit operator MonicEnumModel(AsmMnemonic[] src)

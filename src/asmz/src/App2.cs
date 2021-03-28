@@ -16,6 +16,7 @@ namespace Z0.Asm
     using static memory;
     using static Toolsets;
 
+
     class App : WfService<App>
     {
         public App()
@@ -59,11 +60,32 @@ namespace Z0.Asm
 
         AsmServices AsmServices;
 
-        public void GenerateInstructions()
+        public void GenInstructionModels()
         {
             var monics = Catalog.Mnemonics();
             var gen = AsmGen.create(Wf);
             gen.GenerateModels(monics);
+        }
+
+        void EmitMnemonicInfo()
+        {
+            Wf.AsmCatalogEtl().EmitMnemonicInfo();
+        }
+
+        void ShowSigSymbols()
+        {
+            Sigs.ShowSymbols();
+        }
+
+        void EmitFormHashes()
+        {
+            Wf.AsmFormPipe().EmitFormHashes();
+        }
+
+        ApiHostCaptureSet CaptureHost(Type host)
+        {
+            var capture = AsmServices.HostCapture(Wf);
+            return capture.Capture(host);
         }
 
         MemoryAddress GetKernel32Proc(string name = "CreateDirectoryA")
@@ -99,13 +121,6 @@ namespace Z0.Asm
             var merge = ByteSpans.merge(buffer, "CharBytes");
             var s0 = recover<char>(merge.Segment(16,16));
             Wf.Row(s0.ToString());
-        }
-
-
-        ApiHostCaptureSet RunCapture(Type host)
-        {
-            var capture = AsmServices.HostCapture(Wf);
-            return capture.Capture(host);
         }
 
         public static ReadOnlySpan<byte> TestCase01 => new byte[44]{0x0f,0x1f,0x44,0x00,0x00,0x49,0xb8,0x68,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x4d,0x8b,0x00,0x48,0xba,0x28,0xd5,0x9e,0x18,0x36,0x02,0x00,0x00,0x48,0x8b,0x12,0x48,0xb8,0x90,0x2c,0x8b,0x64,0xfe,0x7f,0x00,0x00,0x48,0xff,0xe0};
@@ -228,7 +243,6 @@ namespace Z0.Asm
             }
 
             Wf.AsmStatements().Load(parse);
-
         }
 
         void CheckIndexDecoder()
@@ -239,7 +253,8 @@ namespace Z0.Asm
 
         void TestRel32()
         {
-            var cases = AsmCases.loadRel32(AsmInstructions.call()).View;
+            var builder = new AsmStatementBuilder();
+            var cases = AsmCases.loadRel32(builder.call()).View;
             var count = cases.Length;
             var errors = text.buffer();
             for(var i=0; i<count; i++)
@@ -302,10 +317,11 @@ namespace Z0.Asm
         }
 
 
-        void CheckInterfaceMaps()
+        void ShowInterfaceMaps()
         {
             var imap = Clr.imap(typeof(Prototypes.ContractedEvaluator), typeof(Prototypes.IEvaluator));
-            Wf.Row(imap.Format());
+            using var log = ShowLog("imap",FS.Log);
+            log.Show(imap.Format());
         }
 
         void RunScripts()
@@ -358,10 +374,10 @@ namespace Z0.Asm
             }
         }
 
-        public static MsgPattern<T> Dispatching<T>()
+        public static MsgPattern<T> DispatchingCmd<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
 
-        public static MsgPattern<CmdId> Dispatching() => "Dispatching {0}";
+        public static MsgPattern<CmdId> DispatchingCmd() => "Dispatching {0}";
 
         static bool parse(string src, out CilRow dst)
         {
@@ -380,7 +396,6 @@ namespace Z0.Asm
                 return true;
             }
         }
-
 
         static string FormatAttributes(IXmlElement src)
             => src.Attributes.Select(x => string.Format("{0}={1}",x.Name, x.Value)).Delimit(Chars.Comma).Format();
@@ -427,7 +442,6 @@ namespace Z0.Asm
             root.iter(methods, m => pipe.Render(m,buffer));
             using var writer = Db.AppDataFile(FS.file(nameof(math), FS.Extensions.Il)).Writer();
             writer.Write(buffer.Emit());
-            //root.iter(methods, m => pipe.Render(m,buffer));
         }
 
         void EmitStatementCases()
@@ -583,14 +597,14 @@ namespace Z0.Asm
 
         public CmdResult Run(ICmd spec)
         {
-            Wf.Status(Dispatching().Format(spec.CmdId));
+            Wf.Status(DispatchingCmd().Format(spec.CmdId));
             return Wf.Router.Dispatch(spec);
         }
 
         public CmdResult Run<T>(T spec)
             where T : struct, ICmd<T>
         {
-            Wf.Status(Dispatching<T>().Format(spec));
+            Wf.Status(DispatchingCmd<T>().Format(spec));
             return Wf.Router.Dispatch(spec);
         }
 
@@ -969,7 +983,6 @@ namespace Z0.Asm
             var count = productions.Produce(Toolsets.nasm, hosts);
         }
 
-
         Index<NasmListEntry> RunNasmCase(string name)
         {
             var tool = Tools.nasm(Db);
@@ -1006,106 +1019,23 @@ namespace Z0.Asm
 
         }
 
-        void DescribeListings()
+
+        Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
-            var @case = "bswap";
-
-            var nasm = Tools.nasm(Db);
-            using var log = ShowLog(nasm.Id.Format() + "." + @case, FS.Log);
-
-            var i=0;
-
-            var runner = ScriptRunner.create(Db);
-            var ran = runner.RunToolCmd(nasm.Id, @case);
-            if(ran)
-                root.iter(ran.Data, x => log.Show(x));
-            else
-                Wf.Error(string.Format("{0}/{1} execution failed", nasm.Id, @case));
-
-
-            log.Property(nameof(nasm.InDir), nasm.InDir);
-            log.Property(nameof(nasm.OutDir), nasm.OutDir);
-
-            var inputs = nasm.Inputs();
-            var outputs = nasm.Outputs();
-            var listings = nasm.Listings();
-
-            log.Title(NasmFileKind.Input);
-            i=0;
-            root.iter(inputs, path => log.Row(i++, NasmFileKind.Input, path.ToUri()));
-
-            log.Title(NasmFileKind.Output);
-            i=0;
-            root.iter(outputs, path => log.Row(i++, NasmFileKind.Output, path.ToUri()));
-
-            log.Title(NasmFileKind.Listing);
-
-            foreach(var path in listings)
-            {
-                var listing = nasm.Listing(path);
-                var entries = root.list<NasmListEntry>();
-                var lines = listing.Lines.View;
-                log.Title(path.ToUri());
-                var count = lines.Length;
-                for(var j=0; j<count; j++)
-                {
-                    ref readonly var line = ref skip(lines,j);
-                    var content = span(line.Content);
-
-                    if(!Nasm.entry(line, out var _entry))
-                        Wf.Error("Parse entry failed");
-                    else
-                    {
-                        nasm.Render(_entry, log.Buffer);
-                        log.ShowBuffer();
-                    }
-
-                }
-            }
+            var options = CaptureWorkflowOptions.EmitImm;
+            var parts = root.array(PartId.AsmLang, PartId.AsmZ);
+            var routines = Capture.run(Wf, parts, options);
+            return routines;
         }
 
         public void Run()
         {
 
-            // var options = CaptureWorkflowOptions.EmitImm;
-            // var parts = root.array(PartId.AsmLang, PartId.AsmZ);
-            // var routines = Capture.run(Wf, parts, options);
-            // var filtered = span<AsmMemberRoutine>(routines.Length);
-            // var dst = Db.AppLog("extensions", FS.Extensions.Asm);
-            // var count = AsmRoutines.filter(routines,filter,filtered);
-            // Summarize(slice(filtered,0, count), dst);
-
-            RunNasmCase("bswap");
-
+            //RunNasmCase("bswap");
 
             // productions.Produce();
 
-
-            //Wf.AsmCatalogEtl().EmitMnemonicInfo();
-            //Wf.AsmFormPipe().EmitFormHashes();
-            //ShowThumprintCatalog();
-
-            //Sigs.ShowSymbols();
-            //PipeImageData();
-            //CheckBitSpans();
-            //CheckBitView();
-            //var api = Wf.ApiCmdRunner();
-            //var asmlang = Wf.AsmLangCmdRunner();
-            //var asmcmd = Wf.AsmCmdRunner();
-
-            // root.iter(loaded, x => Wf.Row(x));
-
-            //CheckRel32();
-
-            //Wf.ApiStatementPipe().EmitThumbprints();
-            //Wf.ApiStatementPipe().ShowThumprintCatalog();
-            //Wf.ApiStatementPipe().EmitStatements(Wf.AsmDataStore().CodeBlocks());
-
-            //Wf.BitCmd().Run(BitCmdKind.GenBitSequences);
-
-            //Wf.AsmLangCmd().Run(AsmLangCmdKind.ShowRexBits);
-
-            //RunFunctionWorkflows();
+            Wf.CodeGenerators().GenerateAsmModels();
 
         }
 

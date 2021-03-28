@@ -21,6 +21,9 @@ namespace Z0
         public Index(T[] src)
             => Data = src;
 
+        public Index(Count count)
+            => Data = alloc<T>(count);
+
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
@@ -56,16 +59,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
-        public I Count
+
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => @as<uint,I>(Data.Count);
+            get => (uint)Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Length == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
         }
 
         [MethodImpl(Inline)]

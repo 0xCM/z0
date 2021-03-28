@@ -9,7 +9,7 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    public sealed class AsmStatements : WfService<AsmStatements>
+    public sealed class AsmApiStatements : WfService<AsmApiStatements>
     {
         AsmSigs Sigs;
 

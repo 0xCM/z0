@@ -15,6 +15,7 @@ namespace Z0.Asm
             EmitMonicExpressions(src);
             EmitMonicEnum(src);
             EmitInstructionTypes(src);
+            EmitStatementBuilder(src);
             Wf.Ran(flow);
         }
 
@@ -23,9 +24,5 @@ namespace Z0.Asm
         const string Open = "{";
 
         const string Close = "}";
-
-        public const string MonicEnumName = "AsmMnemonicCode";
-
-        public const string MonicEnumType = "ushort";
     }
 }

@@ -11,6 +11,9 @@ namespace Z0.Asm
 
     partial struct asm
     {
+        public static Args args(uint2 count)
+            => new Args(new IAsmOp[count]);
+
         [MethodImpl(Inline)]
         public static Args<A> args<A>(A a)
             where A : unmanaged, IAsmOp

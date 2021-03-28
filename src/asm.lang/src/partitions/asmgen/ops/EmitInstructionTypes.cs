@@ -9,11 +9,14 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
+    using T = AsmGenTarget;
+
     partial class AsmGen
     {
+
         FS.FilePath EmitInstructionTypes(Index<AsmMnemonic> src)
         {
-            var dst = GetTargetPath(AsmGenTarget.InstructionType);
+            var dst = GetTargetPath(T.InstructionTypes);
             var flow = Wf.EmittingFile(dst);
             EmitInstructionTypes(src,dst);
             Wf.EmittedFile(flow, src.Count);
@@ -22,7 +25,7 @@ namespace Z0.Asm
 
         FS.FilePath EmitInstructionContracts()
         {
-            var dst = GetTargetPath(AsmGenTarget.InstructionContracts);
+            var dst = GetTargetPath(T.InstructionContracts);
             var flow = Wf.EmittingFile(dst);
             var contracts = default(InstructionContracts);
             var buffer = text.buffer();

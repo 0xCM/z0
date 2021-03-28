@@ -8,7 +8,7 @@ namespace Z0.Asm
     {
         void EmitMonicEnum(Index<AsmMnemonic> src)
         {
-            var dst = GetTargetPath(AsmGenTarget.MonicCode);
+            var dst = GetTargetPath(AsmGenTarget.MonicCodeEnum);
             var flow = Wf.EmittingFile(dst);
             EmitMonicEnum(src,dst);
             Wf.EmittedFile(flow, src.Count);

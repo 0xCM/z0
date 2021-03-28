@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         IAsmDecoder Decoder;
 
-        AsmStatements Statements;
+        AsmApiStatements Statements;
 
         AsmThumbprints Thumbprints;
 

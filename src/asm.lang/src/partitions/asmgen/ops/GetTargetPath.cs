@@ -4,16 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public enum AsmGenTarget
+    using static Part;
+
+    partial class AsmGen
     {
-        None,
-
-        InstructionType,
-
-        MonicCode,
-
-        MonicExpression,
-
-        InstructionContracts
+        FS.FilePath GetTargetPath(AsmGenTarget kind)
+            => Db.SourceFile(PartId.AsmLangG, FS.file(TargetIdentifier(kind).Format(), FS.Extensions.Cs));
     }
 }

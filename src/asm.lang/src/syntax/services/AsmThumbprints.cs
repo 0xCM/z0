@@ -17,7 +17,7 @@ namespace Z0.Asm
     {
         AsmSigs Sigs;
 
-        AsmStatements Statements;
+        AsmApiStatements Statements;
 
         protected override void OnInit()
         {

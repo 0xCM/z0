@@ -17,6 +17,8 @@ namespace Z0.Asm
 
         public static asm Service => new asm(2);
 
+        public static AsmStatementBuilder builder() => new AsmStatementBuilder();
+
         readonly object[] state;
 
         ref object this[byte index]

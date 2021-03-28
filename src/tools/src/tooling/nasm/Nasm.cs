@@ -11,8 +11,13 @@ namespace Z0.Tooling
     using static memory;
 
     [ApiHost]
-    public readonly partial struct Nasm : ITool<Nasm>
+    public sealed partial class Nasm : WfService<Nasm>, ITool<Nasm>
     {
+        public Nasm()
+        {
+
+        }
+
         [MethodImpl(Inline)]
         public static Nasm tool(IEnvPaths paths)
             => new Nasm(paths);
