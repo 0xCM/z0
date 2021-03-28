@@ -110,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => ToolArgs.format(this);
 
         public override string ToString()
             => Format();

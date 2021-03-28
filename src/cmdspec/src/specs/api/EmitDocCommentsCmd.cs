@@ -19,7 +19,7 @@ namespace Z0
     public static partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static EmitDocCommentsCmd EmitDocComments(this CmdBuilder builder)
+        public static EmitDocCommentsCmd EmitDocComments(this WfCmdBuilder builder)
             => new EmitDocCommentsCmd();
     }
 }

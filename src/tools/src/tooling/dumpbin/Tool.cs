@@ -49,14 +49,14 @@ namespace Z0.Tooling
 
         public ToolId Id {get;}
 
-        public CmdArgs<Flag,object> Args {get;}
+        public ToolCmdArgs<Flag,object> Args {get;}
 
         [MethodImpl(Inline)]
         internal DumpBin(IWfShell wf, ToolId id)
         {
             Wf = wf;
             Id = id;
-            Args =  alloc<CmdArg<Flag,object>>(MaxVarCount);
+            Args =  alloc<ToolCmdArg<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
             OutputDir = Wf.Db().ToolOutDir(Id);
         }
@@ -64,7 +64,7 @@ namespace Z0.Tooling
         public DumpBin With<T>(Flag option, T value)
         {
             if(ArgIndex < MaxVarIndex)
-                Args[ArgIndex++] = ToolCmd.arg(option, (object)value);
+                Args[ArgIndex++] = ToolArgs.arg(option, (object)value);
             return this;
         }
     }

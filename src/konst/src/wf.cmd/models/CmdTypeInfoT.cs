@@ -14,7 +14,7 @@ namespace Z0
     public readonly struct CmdTypeInfo<T> : ICmdTypeInfo<CmdTypeInfo<T>,T>
         where T : struct, ICmd<T>
     {
-        public CmdId CmdId => Cmd.id<T>();
+        public CmdId CmdId => CmdId.from<T>();
 
         public Type DataType => typeof(T);
 

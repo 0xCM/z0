@@ -7,10 +7,16 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICmdCatalog
+    public interface ITool
     {
-        IWfShell Wf {get;}
-
-        IWfDb Db => Wf.Db();
+        ToolId Id {get;}
     }
+
+    [Free]
+    public interface ITool<T> : ITool
+        where T : struct, ITool<T>
+    {
+
+    }
+
 }

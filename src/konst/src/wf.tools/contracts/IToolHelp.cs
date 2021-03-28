@@ -7,7 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IToolHelp : IContented<utf8>, ITypedIdentity<ToolId>
+    public interface IToolHelp : IContented<TextBlock>, ITypedIdentity<ToolId>
     {
 
     }

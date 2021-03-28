@@ -17,7 +17,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static ShowEnvCmd ShowEnv(this CmdBuilder builder)
+        public static ShowEnvCmd ShowEnv(this WfCmdBuilder builder)
         {
             var dst = new ShowEnvCmd();
             return dst;

@@ -22,7 +22,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static EmitImageHeadersCmd EmitImageHeaders(this CmdBuilder wf, FS.Files src, FS.FilePath dst)
+        public static EmitImageHeadersCmd EmitImageHeaders(this WfCmdBuilder wf, FS.Files src, FS.FilePath dst)
         {
             var cmd = new EmitImageHeadersCmd();
             cmd.Source = src;

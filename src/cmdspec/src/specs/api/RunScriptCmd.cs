@@ -23,7 +23,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static RunScriptCmd RunScript(this CmdBuilder builder, FS.FilePath path)
+        public static RunScriptCmd RunScript(this WfCmdBuilder builder, FS.FilePath path)
         {
             var cmd = new RunScriptCmd();
             cmd.ScriptPath = path;

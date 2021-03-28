@@ -24,7 +24,7 @@ namespace Z0
         where T : struct, ICmd<T>
     {
         CmdId ICmdTypeInfo.CmdId
-            => Cmd.id<T>();
+            => CmdId.from<T>();
 
         Type ICmdTypeInfo.DataType
             => typeof(T);

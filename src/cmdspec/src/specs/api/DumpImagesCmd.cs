@@ -22,7 +22,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static DumpImagesCmd DumpImages(this CmdBuilder builder, FS.FolderPath src, FS.FolderPath dst)
+        public static DumpImagesCmd DumpImages(this WfCmdBuilder builder, FS.FolderPath src, FS.FolderPath dst)
         {
             var cmd = new DumpImagesCmd();
             cmd.Source = src;
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static DumpImagesCmd DumpImages(this CmdBuilder builder)
+        public static DumpImagesCmd DumpImages(this WfCmdBuilder builder)
         {
             var cmd = new DumpImagesCmd();
             return cmd;

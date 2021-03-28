@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CmdTypeInfo(Type type, FieldInfo[] fields)
         {
-            CmdId = Cmd.id(type);
+            CmdId = CmdId.from(type);
             DataType = type;
             Fields = fields;
         }

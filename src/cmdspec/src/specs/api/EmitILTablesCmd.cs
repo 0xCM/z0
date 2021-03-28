@@ -22,7 +22,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static EmitILTablesCmd EmitILTables(this CmdBuilder wf, FS.FilePath src)
+        public static EmitILTablesCmd EmitILTables(this WfCmdBuilder wf, FS.FilePath src)
         {
             var dst = new EmitILTablesCmd();
             dst.Source = src;

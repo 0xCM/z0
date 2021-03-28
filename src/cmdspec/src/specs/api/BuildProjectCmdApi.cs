@@ -18,15 +18,15 @@ namespace Z0
         }
 
         [Op]
-        static FS.FilePath ProjectPath(this CmdBuilder src, in BuildCmdVars vars)
+        static FS.FilePath ProjectPath(this WfCmdBuilder src, in BuildCmdVars vars)
             => src.Env.ZDev.Value + FS.folder("src") + FS.folder(vars.ProjectId) + FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.CsProj);
 
         [Op]
-        static FS.FilePath SolutionPath(this CmdBuilder src, in BuildCmdVars vars)
+        static FS.FilePath SolutionPath(this WfCmdBuilder src, in BuildCmdVars vars)
             => src.Env.ZDev.Value + FS.file(string.Format("z0.{0}", vars.SlnId), FS.Extensions.Sln);
 
         [Op]
-        static FS.FilePath LogPath(this CmdBuilder src, in BuildCmdVars vars)
+        static FS.FilePath LogPath(this WfCmdBuilder src, in BuildCmdVars vars)
             => src.Db.BuildLogPath(FS.file(string.Format("z0.{0}", vars.ProjectId), FS.Extensions.Log));
 
         [Op]
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [Op]
-        public static BuildProjectCmd Build(this CmdBuilder src, BuildCmdVars vars)
+        public static BuildProjectCmd Build(this WfCmdBuilder src, BuildCmdVars vars)
         {
             var dst = new BuildProjectCmd();
             dst.Verbosity = BuildLogVerbosity.detailed;
@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [Op]
-        public static BuildProjectCmd Build(this CmdBuilder src)
+        public static BuildProjectCmd Build(this WfCmdBuilder src)
         {
             var vars = new BuildCmdVars();
             vars.ProjectId = PartId.Machine.Format();

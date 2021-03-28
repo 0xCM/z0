@@ -2,16 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tooling
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IToolResultHandler
+    using static Root;
+
+    public enum NasmFileKind : byte
     {
-        ToolId Tool => default;
+        None = 0,
 
-        bool CanHandle(TextLine src);
+        Asm = 1,
 
-        bool Handle(TextLine src);
+        Obj = 2,
+
+        Bin = 4,
+
+        AsmList = 8,
     }
+
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct ToolCmdArg<T> : ICmdArg<T>
+    public struct ToolCmdArg<T> : IToolCmdArg<T>
     {
         /// <summary>
         /// The argument's relative position
@@ -66,14 +66,16 @@ namespace Z0
             IsFlag = flag;
         }
 
-        public ArgPrefix Prefix => Protocol.Prefix;
+        public ArgPrefix Prefix
+            => Protocol.Prefix;
 
-        public ArgQualifier Qualifier => Protocol.Qualifier;
+        public ArgQualifier Qualifier
+            => Protocol.Qualifier;
 
 
         [MethodImpl(Inline)]
         public string Format()
-            => Cmd.format(this);
+            => ToolArgs.format(this);
 
         public override string ToString()
             => Format();

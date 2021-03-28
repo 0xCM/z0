@@ -6,9 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static Part;
 
     partial struct Cmd
     {
+        public static ToolCmdArgs args<T>(T src)
+            where T : struct, ICmd<T>
+                => typeof(T).DeclaredInstanceFields().Select(f => new ToolCmdArg(f.Name, f.GetValue(src)?.ToString() ?? EmptyString));
+
         public static CmdResult fail(ICmd cmd)
             => new CmdResult(cmd.CmdId, false);
 

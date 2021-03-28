@@ -12,7 +12,6 @@ namespace Z0
 
     partial class text
     {
-
         [MethodImpl(Inline)]
         static string msgarg<T>(T src)
             => string.Format("<{0}>", src);

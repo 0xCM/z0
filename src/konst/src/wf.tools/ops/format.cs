@@ -34,7 +34,7 @@ namespace Z0
             var count = src.Count;
             for(var i=0u; i<count; i++)
             {
-                dst.Append(Cmd.format(src[i]));
+                dst.Append(ToolArgs.format(src[i]));
                 if(i != count - 1)
                     dst.Append(Space);
             }

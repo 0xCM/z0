@@ -19,7 +19,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static EmitProcessDumpCmd EmitProcessDump(this CmdBuilder builder)
+        public static EmitProcessDumpCmd EmitProcessDump(this WfCmdBuilder builder)
         {
             var dst = new EmitProcessDumpCmd();
             dst.Source = Runtime.CurrentProcess;
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [Op]
-        public static EmitProcessDumpCmd EmitProcessDump(this CmdBuilder builder, Process src)
+        public static EmitProcessDumpCmd EmitProcessDump(this WfCmdBuilder builder, Process src)
         {
             var dst = new EmitProcessDumpCmd();
             dst.Source = src;

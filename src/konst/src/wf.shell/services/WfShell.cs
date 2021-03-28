@@ -73,7 +73,7 @@ namespace Z0
             Api = config.ApiParts.ApiCatalog;
             Controller = config.Control;
             AppName = config.Shell.AppName;
-            Router = new CmdRouter(this);
+            Router = new WfCmdRouter(this);
             Services = new WfServices(this, Env, Api.PartComponents);
         }
 

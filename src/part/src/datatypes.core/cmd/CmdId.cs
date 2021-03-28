@@ -11,11 +11,11 @@ namespace Z0
 
     public readonly struct CmdId : ITextual, IEquatable<CmdId>, INullity, IHashed
     {
-        public static CmdId id<T>()
-            => id(typeof(T));
+        public static CmdId from<T>()
+            => from(typeof(T));
 
         [Op]
-        public static CmdId id(Type spec)
+        public static CmdId from(Type spec)
         {
             var tag = spec.Tag<CmdAttribute>();
             if(tag)
@@ -30,12 +30,8 @@ namespace Z0
                 return new CmdId(spec.Name);
         }
 
-        /// <summary>
-        /// Parses a <see cref='CmdId'/> from a command identifier
-        /// </summary>
-        /// <param name="src">The command identifier</param>
         [MethodImpl(Inline), Op]
-        public static CmdId id(string src)
+        public static CmdId from(string src)
             => new CmdId(src);
 
         public static Name name<T>()
@@ -111,7 +107,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdId(Type spec)
-            => id(spec);
+            => from(spec);
 
         [MethodImpl(Inline)]
         public static implicit operator Name(CmdId src)

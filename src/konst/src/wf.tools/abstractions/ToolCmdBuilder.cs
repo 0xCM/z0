@@ -118,7 +118,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value, DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value, DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }
@@ -126,7 +126,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgPrefix prefix)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value, prefix);
+            Args[Index] = ToolArgs.arg(Index, name, value, prefix);
             Index++;
             return (T)this;
         }
@@ -134,7 +134,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value, DefaultPrefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value, DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -142,7 +142,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg<A>(string name, A value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value, prefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value, prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -150,7 +150,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), prefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator,QuotePaths), prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -158,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -166,7 +166,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FolderPath value)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator,QuotePaths), DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }
@@ -174,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value, ArgPrefix prefix, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), prefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator, QuotePaths), prefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -182,7 +182,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value, ArgQualifier qualifier)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, qualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, qualifier);
             Index++;
             return (T)this;
         }
@@ -190,7 +190,7 @@ namespace Z0
         [MethodImpl(Inline)]
         protected T AppendArg(string name, FS.FilePath value)
         {
-            Args[Index] = ToolCmd.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, DefaultQualifier);
+            Args[Index] = ToolArgs.arg(Index, name, value.Format(PathSeparator, QuotePaths), DefaultPrefix, DefaultQualifier);
             Index++;
             return (T)this;
         }

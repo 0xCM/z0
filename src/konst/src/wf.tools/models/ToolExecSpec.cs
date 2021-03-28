@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public struct ToolExecSpec : ICmd, IDataType<ToolExecSpec>
+    public struct ToolExecSpec : IToolCmd, IDataType<ToolExecSpec>
     {
         public CmdId CmdId {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         public string Format()
-            => Cmd.format(this);
+            => ToolCmd.format(this);
 
         public override string ToString()
             => Format();

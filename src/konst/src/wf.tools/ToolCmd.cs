@@ -17,6 +17,35 @@ namespace Z0
     {
         const NumericKind Closure = UnsignedInts;
 
+
+        [Op]
+        public static string format(IToolCmd src)
+        {
+            var count = src.Args.Count;
+            var buffer = Buffers.text();
+            buffer.AppendFormat("{0}{1}", src.CmdId.Format(), Chars.LParen);
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref src.Args[i];
+                buffer.AppendFormat(RP.Assign, arg.Name, arg.Value);
+                if(i != count - 1)
+                    buffer.Append(", ");
+            }
+
+            buffer.Append(Chars.RParen);
+            return buffer.Emit();
+        }
+
+
+        [MethodImpl(Inline), Formatter, Closures(Closure)]
+        public static string format<K>(in ToolOptionSpec<K> src)
+            where K : unmanaged
+                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+
+        [MethodImpl(Inline), Formatter]
+        public static string format(ToolOptionSpec src)
+            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
+
         [Op, Closures(UInt64k)]
         public static ToolExecSpec untype<T>(in T spec)
             where T : struct
@@ -34,7 +63,7 @@ namespace Z0
                 ref readonly var fv = ref skip(source,i);
                 seek(target,i) = new ToolCmdArg(fv.Field.Name, fv.Value?.ToString() ?? EmptyString);
             }
-            return new ToolExecSpec(Cmd.id(t), buffer);
+            return new ToolExecSpec(CmdId.from(t), buffer);
         }
 
         /// <summary>
@@ -69,7 +98,7 @@ namespace Z0
         /// <typeparam name="K">The option kind type</typeparam>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline)]
-        public static ToolCmdArg untype<K,T>(in CmdArg<K,T> src)
+        public static ToolCmdArg untype<K,T>(in ToolCmdArg<K,T> src)
             where K : unmanaged
         {
             var dst = new ToolCmdArg();
@@ -85,7 +114,7 @@ namespace Z0
         /// <typeparam name="K">The option kind type</typeparam>
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline)]
-        public static ref ToolCmdArg untype<K,T>(in CmdArg<K,T> src, ref ToolCmdArg dst)
+        public static ref ToolCmdArg untype<K,T>(in ToolCmdArg<K,T> src, ref ToolCmdArg dst)
             where K : unmanaged
         {
             dst = new ToolCmdArg(src.Kind.ToString(), src.Value.ToString());

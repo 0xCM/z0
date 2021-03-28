@@ -16,9 +16,7 @@ namespace Z0
             => new ToolHelp((uint)src.RowCount);
 
         protected override void Processed(in TextLine src, dynamic output, ref ToolHelp dst)
-        {
-            dst[src.LineNumber] = output;
-        }
+            => dst[src.LineNumber] = output;
 
         protected override ITextLineProcessor Processor(in TextLine src)
             => new DefaultLineProcessor();

@@ -20,7 +20,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static EmitEnumCatalogCmd EmitEnumCatalog(this CmdBuilder builder, FS.FilePath dst)
+        public static EmitEnumCatalogCmd EmitEnumCatalog(this WfCmdBuilder builder, FS.FilePath dst)
         {
             var cmd = new EmitEnumCatalogCmd();
             cmd.Target = dst;
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [Op]
-        public static EmitEnumCatalogCmd EmitEnumCatalog(this CmdBuilder builder)
+        public static EmitEnumCatalogCmd EmitEnumCatalog(this WfCmdBuilder builder)
         {
             var cmd = new EmitEnumCatalogCmd();
             cmd.Target = builder.Db.IndexFile("enum-catalog");

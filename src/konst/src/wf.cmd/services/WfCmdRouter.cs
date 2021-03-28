@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Concurrent;
 
-    public sealed class CmdRouter : WfService<CmdRouter,ICmdRouter<CmdRouter>>, ICmdRouter<CmdRouter>
+    public sealed class WfCmdRouter : WfService<WfCmdRouter,ICmdRouter<WfCmdRouter>>, ICmdRouter<WfCmdRouter>
     {
         ConcurrentDictionary<CmdId,ICmdReactor> Nodes;
 
-        public CmdRouter()
+        public WfCmdRouter()
         {
             Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
         }
 
-        public CmdRouter(IWfShell wf)
+        public WfCmdRouter(IWfShell wf)
             : base(wf)
         {
             Nodes = new ConcurrentDictionary<CmdId,ICmdReactor>();
@@ -60,7 +60,7 @@ namespace Z0
                 }
                 else
                 {
-                    Wf.Error(WfEvents.missing(cmd.CmdId,WfEvents.originate(nameof(CmdRouter) + "Error")));
+                    Wf.Error(WfEvents.missing(cmd.CmdId,WfEvents.originate(nameof(WfCmdRouter) + "Error")));
                     return Cmd.fail(cmd);
                 }
             }
@@ -73,7 +73,7 @@ namespace Z0
 
         public CmdResult Dispatch(ICmd cmd)
         {
-            return Dispatch(cmd, string.Format("Dispatching <{0}>", cmd.CmdName));
+            return Dispatch(cmd, string.Format("Dispatching <{0}>", cmd.CmdId));
         }
     }
 

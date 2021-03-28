@@ -10,14 +10,6 @@ namespace Z0
     public interface ICmd : ITextual
     {
         CmdId CmdId {get;}
-
-        Name CmdName
-            => CmdId;
-
-        ToolCmdArgs Args {get;}
-
-        string ITextual.Format()
-            => Cmd.format(this);
     }
 
     [Free]
@@ -25,10 +17,7 @@ namespace Z0
         where T : struct, ICmd<T>
     {
         CmdId ICmd.CmdId
-            => Cmd.id<T>();
-
-        ToolCmdArgs ICmd.Args
-            => Cmd.args((T)this);
+            => CmdId.from<T>();
 
         string ITextual.Format()
             => Cmd.format(this);

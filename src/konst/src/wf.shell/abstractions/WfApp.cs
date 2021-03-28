@@ -4,12 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.IO;
-
-    using static Part;
-
     public abstract class WfApp<A> : WfService<A>
         where A : WfApp<A>, new()
     {

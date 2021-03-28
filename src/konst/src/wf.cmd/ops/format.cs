@@ -15,8 +15,8 @@ namespace Z0
         public static string format<T>(ICmd<T> src)
             where T : struct, ICmd<T>
         {
-            var buffer = Buffers.text();
-            buffer.AppendFormat("{0}{1}", src.CmdName, Chars.LParen);
+            var buffer = text.buffer();
+            buffer.AppendFormat("{0}{1}", src.CmdId, Chars.LParen);
 
             var fields = ClrFields.instance(typeof(T));
             if(fields.Length != 0)
@@ -39,82 +39,11 @@ namespace Z0
             }
         }
 
-        [Op]
-        public static string format(ICmd src)
-        {
-            var count = src.Args.Count;
-            var buffer = Buffers.text();
-            buffer.AppendFormat("{0}{1}", src.CmdId.Format(), Chars.LParen);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var arg = ref src.Args[i];
-                buffer.AppendFormat(RP.Assign, arg.Name, arg.Value);
-                if(i != count - 1)
-                    buffer.Append(", ");
-            }
-
-            buffer.Append(Chars.RParen);
-            return buffer.Emit();
-        }
-
-        [MethodImpl(Inline), Formatter, Closures(Closure)]
-        public static string format<K>(in ToolOptionSpec<K> src)
-            where K : unmanaged
-                => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
 
         [Op]
         public static string format(CmdVarValue src)
             => src.Content ?? EmptyString;
 
-        public static string format<K,T>(in CmdArgs<K,T> src)
-            where K : unmanaged
-        {
-            var dst = text.build();
-            var view = src.View;
-            var count = view.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(src,i).Format());
-            return dst.ToString();
-        }
-
-        [MethodImpl(Inline)]
-        public static string Format(in ToolCmdArg src)
-            => text.nonempty(src.Name)
-             ? string.Format(RP.Setting, src.Name, src.Value)
-             : src.Value?.ToString() ?? EmptyString;
-
-
-        [MethodImpl(Inline), Formatter]
-        public static string format(ToolOptionSpec src)
-            => src.IsAnonymous || src.IsEmpty ? EmptyString : src.Name;
-
-        /// <summary>
-        /// Renders a specified option as text
-        /// </summary>
-        /// <param name="src">The data source</param>
-        [MethodImpl(Inline), Op]
-        public static string format(in ToolCmdArg src)
-            => TextFormatter.assign(src.Name, src.Value);
-
-        /// <summary>
-        /// Renders a specified option as text
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static string format<T>(in ToolCmdArg<T> src)
-            => TextFormatter.assign(src.Name, src.Value);
-
-        /// <summary>
-        /// Renders a specified option as text
-        /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="K">The option kind</typeparam>
-        /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline)]
-        public static string format<K,T>(in CmdArg<K,T> src)
-            where K : unmanaged
-                => TextFormatter.assign(src.Kind.ToString(), src.Value);
         [Op]
         public static string format(CmdTypeInfo src)
         {

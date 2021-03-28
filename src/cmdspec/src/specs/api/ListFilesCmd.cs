@@ -36,7 +36,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static ListFilesCmd ListFiles(this CmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
+        public static ListFilesCmd ListFiles(this WfCmdBuilder builder, string name, FS.FolderPath src, params FS.FileExt[] kinds)
         {
             var cmd = new ListFilesCmd();
             cmd.ListName = name;

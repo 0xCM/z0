@@ -11,7 +11,7 @@ namespace Z0
 
     public sealed class Reactor : WfSingleton<Reactor,IReactor,int>, IReactor
     {
-        CmdBuilder Builder;
+        WfCmdBuilder Builder;
 
         IWfDb Db;
 

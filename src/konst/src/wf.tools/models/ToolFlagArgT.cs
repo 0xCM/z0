@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a tool flag argument
     /// </summary>
-    public readonly struct ToolFlagArg<T> : ICmdArg<T>
+    public readonly struct ToolFlagArg<T> : IToolCmdArg<T>
     {
         /// <summary>
         /// The argument's relative position

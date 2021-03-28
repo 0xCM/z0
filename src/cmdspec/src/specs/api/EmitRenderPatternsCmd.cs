@@ -17,7 +17,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static EmitRenderPatternsCmd EmitRenderPatterns(this CmdBuilder builder, Type src)
+        public static EmitRenderPatternsCmd EmitRenderPatterns(this WfCmdBuilder builder, Type src)
         {
             var cmd = new EmitRenderPatternsCmd();
             cmd.Source = src;

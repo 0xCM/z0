@@ -44,7 +44,7 @@ namespace Z0
         public virtual Type ContractType
             => typeof(H);
 
-        protected CmdBuilder CmdBuilder
+        protected WfCmdBuilder CmdBuilder
             => Wf.CmdBuilder();
 
         public void Init(IWfShell wf)

@@ -24,7 +24,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline), Op]
-        public static RunPartCmd RunPart(this CmdBuilder builder, PartId id)
+        public static RunPartCmd RunPart(this WfCmdBuilder builder, PartId id)
         {
             var cmd = new RunPartCmd();
             cmd.PartId = id;

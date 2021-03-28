@@ -12,7 +12,7 @@ namespace Z0
     {
         public abstract ref C Augment(ref C cmd);
 
-        public CmdBuilder Builder
+        public WfCmdBuilder Builder
             => Wf.CmdBuilder();
     }
 }

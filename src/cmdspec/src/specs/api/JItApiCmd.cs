@@ -9,7 +9,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static JitApiCmd JitApiCmd(this CmdBuilder builder)
+        public static JitApiCmd JitApiCmd(this WfCmdBuilder builder)
             => new JitApiCmd();
     }
 }

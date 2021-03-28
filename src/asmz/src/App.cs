@@ -706,7 +706,7 @@ namespace Z0.Asm
             if(result.Succeeded)
             {
                 var value = result.Value;
-                Wf.Status(Cmd.format(value));
+                Wf.Status(value.Format());
             }
             else
                 Wf.Error(result.Message);

@@ -9,45 +9,45 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdArgs<K,T> : IIndex<CmdArg<K,T>>
+    public readonly struct ToolCmdArgs<K,T> : IIndex<ToolCmdArg<K,T>>
         where K : unmanaged
     {
-        readonly Index<CmdArg<K,T>> Data;
+        readonly Index<ToolCmdArg<K,T>> Data;
 
         [MethodImpl(Inline)]
-        public CmdArgs(CmdArg<K,T>[] src)
+        public ToolCmdArgs(ToolCmdArg<K,T>[] src)
             => Data = src;
 
-        public ReadOnlySpan<CmdArg<K,T>> View
+        public ReadOnlySpan<ToolCmdArg<K,T>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public CmdArg<K,T>[] Storage
+        public ToolCmdArg<K,T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;
         }
 
-        public ref CmdArg<K,T> this[uint index]
+        public ref ToolCmdArg<K,T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
         public string Format()
-            => Cmd.format(this);
+            => ToolArgs.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdArgs<K,T>(CmdArg<K,T>[] src)
-            => new CmdArgs<K,T>(src);
+        public static implicit operator ToolCmdArgs<K,T>(ToolCmdArg<K,T>[] src)
+            => new ToolCmdArgs<K,T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ToolCmdArgs(CmdArgs<K,T> src)
+        public static implicit operator ToolCmdArgs(ToolCmdArgs<K,T> src)
             => new ToolCmdArgs(src.Storage.Select(x => (ToolCmdArg)x));
     }
 }

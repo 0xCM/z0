@@ -54,7 +54,7 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdArg<T> : IToolCmdArg
+    public interface IToolCmdArg<T> : IToolCmdArg
     {
         new T Value {get;}
 

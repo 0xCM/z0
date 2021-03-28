@@ -13,7 +13,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static EmitRuntimeIndexCmd EmitRuntimeIndex(this CmdBuilder builder)
+        public static EmitRuntimeIndexCmd EmitRuntimeIndex(this WfCmdBuilder builder)
         {
             var dst = new EmitRuntimeIndexCmd();
 

@@ -16,7 +16,7 @@ namespace Z0
 
     partial class XCmd
     {
-        public static EmitAssemblyRefsCmd EmitAssemblyRefs(this CmdBuilder builder, FS.Files sources, FS.FilePath target)
+        public static EmitAssemblyRefsCmd EmitAssemblyRefs(this WfCmdBuilder builder, FS.Files sources, FS.FilePath target)
         {
             var cmd = new EmitAssemblyRefsCmd();
             cmd.Sources = sources;
@@ -24,7 +24,7 @@ namespace Z0
             return cmd;
         }
 
-        public static EmitAssemblyRefsCmd EmitAssemblyRefs(this CmdBuilder builder)
+        public static EmitAssemblyRefsCmd EmitAssemblyRefs(this WfCmdBuilder builder)
         {
             var cmd = new EmitAssemblyRefsCmd();
             cmd.Sources = FS.dir(@"J:\tools\netsdk\sdk\3.1.403").Files(FS.Extensions.Dll);

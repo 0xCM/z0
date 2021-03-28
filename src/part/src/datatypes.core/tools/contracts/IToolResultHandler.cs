@@ -4,18 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
-    [Free]
-    public interface ITool
+    public interface IToolResultHandler
     {
-        ToolId Id {get;}
-    }
+        ToolId Tool => default;
 
-    [Free]
-    public interface ITool<T> : ITool
-        where T : struct, ITool<T>
-    {
+        bool CanHandle(TextLine src);
 
+        bool Handle(TextLine src);
     }
 }

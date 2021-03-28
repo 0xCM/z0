@@ -17,7 +17,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline)]
-        public static ShowRuntimeArchiveCmd ShowRuntimeArchive(this CmdBuilder wf)
+        public static ShowRuntimeArchiveCmd ShowRuntimeArchive(this WfCmdBuilder wf)
             => default;
     }
 }

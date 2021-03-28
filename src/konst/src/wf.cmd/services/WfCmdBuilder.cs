@@ -9,14 +9,14 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct CmdBuilder
+    public readonly struct WfCmdBuilder
     {
         readonly IWfShell _Wf;
 
         readonly IWfDb _Db;
 
         [MethodImpl(Inline)]
-        public CmdBuilder(IWfShell wf)
+        public WfCmdBuilder(IWfShell wf)
         {
             _Wf = wf;
             _Db = wf.Db();

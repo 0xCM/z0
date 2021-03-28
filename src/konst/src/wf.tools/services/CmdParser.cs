@@ -24,14 +24,14 @@ namespace Z0
             if(count != 0)
             {
                 ref readonly var part = ref first(parts);
-                var id = Cmd.id(part);
+                var id = CmdId.from(part);
                 var options = root.list<ToolCmdArg>();
                 for(var i=1; i<count; i++)
                 {
                     ref readonly var next = ref skip(parts,i);
                     if(!text.blank(next))
                     {
-                        var option = ToolCmd.arg(pos++,next, qualifier);
+                        var option = ToolArgs.parse(pos++,next, qualifier);
                         if(option)
                             options.Add(option.Value);
                         else
@@ -58,7 +58,7 @@ namespace Z0
                     args.Add(arg);
                 }
             }
-            dst = new ToolExecSpec(Cmd.id(""), args.Array());
+            dst = new ToolExecSpec(CmdId.from(""), args.Array());
             return false;
         }
 

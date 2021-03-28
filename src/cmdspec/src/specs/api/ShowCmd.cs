@@ -26,7 +26,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static ShowCmd Show(this CmdBuilder builder, string target)
+        public static ShowCmd Show(this WfCmdBuilder builder, string target)
         {
             var dst = new ShowCmd();
             dst.Target = target;

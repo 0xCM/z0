@@ -26,7 +26,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src = null, string id = null, string match = null)
+        public static EmitResDataCmd EmitResData(this WfCmdBuilder builder, Assembly src = null, string id = null, string match = null)
         {
             var dst = new EmitResDataCmd();
             dst.Source = src ?? Parts.Res.Assembly;

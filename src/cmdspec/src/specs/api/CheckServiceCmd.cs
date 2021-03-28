@@ -20,7 +20,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static CheckServiceCmd CheckService(this CmdBuilder builder, Name name)
+        public static CheckServiceCmd CheckService(this WfCmdBuilder builder, Name name)
         {
             var dst = new CheckServiceCmd();
             dst.Name = name;

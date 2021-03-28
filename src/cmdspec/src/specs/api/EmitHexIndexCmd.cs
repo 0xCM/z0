@@ -13,7 +13,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static EmitHexIndexCmd EmitHexIndex(this CmdBuilder builder)
+        public static EmitHexIndexCmd EmitHexIndex(this WfCmdBuilder builder)
         {
             var dst = new EmitHexIndexCmd();
 

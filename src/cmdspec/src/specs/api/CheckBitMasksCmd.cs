@@ -18,7 +18,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static CheckBitMasksCmd CheckBitmasks(this CmdBuilder builder)
+        public static CheckBitMasksCmd CheckBitmasks(this WfCmdBuilder builder)
         {
             var cmd = new CheckBitMasksCmd();
             return cmd;

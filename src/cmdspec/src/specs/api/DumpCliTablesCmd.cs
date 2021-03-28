@@ -31,7 +31,7 @@ namespace Z0
     partial class XCmd
     {
         [MethodImpl(Inline), Op]
-        public static DumpCliTablesCmd DumpCliTables(this CmdBuilder wf, FS.FilePath src)
+        public static DumpCliTablesCmd DumpCliTables(this WfCmdBuilder wf, FS.FilePath src)
         {
             var dst = new DumpCliTablesCmd();
             dst.Source = src;
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static DumpCliTablesCmd DumpCliTables(this CmdBuilder wf, Assembly src)
+        public static DumpCliTablesCmd DumpCliTables(this WfCmdBuilder wf, Assembly src)
         {
             var dst = new DumpCliTablesCmd();
             dst.Source = FS.path(src.Location);

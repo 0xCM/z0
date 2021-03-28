@@ -13,7 +13,7 @@ namespace Z0
     partial class XCmd
     {
         [Op]
-        public static ShowProcessMemoryCmd ShowProcessMemory(this CmdBuilder builder)
+        public static ShowProcessMemoryCmd ShowProcessMemory(this WfCmdBuilder builder)
             => new ShowProcessMemoryCmd();
     }
 }

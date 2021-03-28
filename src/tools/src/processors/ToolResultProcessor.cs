@@ -48,9 +48,7 @@ namespace Z0
         public TextLine Process(TextLine src)
         {
             if(!Handle(src))
-            {
                 Revert();
-            }
 
             foreach(var handler in KnownHandlers)
             {
