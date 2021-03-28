@@ -21,7 +21,7 @@ namespace Z0
 
         Assembly[] Components {get;}
 
-        IGlobalApiCatalog ApiCatalog {get;}
+        IApiCatalogDataset ApiCatalog {get;}
 
         /// <summary>
         /// Searches for a component with a specified identity

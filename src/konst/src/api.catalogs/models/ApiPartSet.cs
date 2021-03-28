@@ -10,7 +10,7 @@ namespace Z0
     using static memory;
 
     /// <summary>
-    /// Associates a collection of components along with a<see cref = 'IGlobalApiCatalog'/>
+    /// Associates a collection of components along with a<see cref = 'IApiCatalogDataset'/>
     /// </summary>
     public class ApiPartSet : IApiParts
     {
@@ -23,13 +23,13 @@ namespace Z0
 
         public Assembly[] Components {get;}
 
-        public IGlobalApiCatalog ApiCatalog {get;}
+        public IApiCatalogDataset ApiCatalog {get;}
 
         public ApiPartSet(FS.FolderPath source, PartId[] parts)
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog = ApiCatalogs.GlobalCatalog(Source, parts);
+            ApiCatalog = ApiCatalogs.Dataset(Source, parts);
             Components = ApiCatalog.PartComponents;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog =  ApiCatalogs.GlobalCatalog(ManagedSources);
+            ApiCatalog =  ApiCatalogs.Dataset(ManagedSources);
             Components = ApiCatalog.PartComponents;
         }
 

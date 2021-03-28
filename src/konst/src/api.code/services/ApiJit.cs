@@ -68,7 +68,7 @@ namespace Z0
             return JitCatalog(Wf.ApiParts.ApiCatalog);
         }
 
-        public BasedApiMembers JitCatalog(IGlobalApiCatalog catalog)
+        public BasedApiMembers JitCatalog(IApiCatalogDataset catalog)
         {
             var @base = Runtime.CurrentProcess.BaseAddress;
             var parts = catalog.Parts;

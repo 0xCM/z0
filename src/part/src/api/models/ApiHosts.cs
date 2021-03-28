@@ -8,11 +8,42 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Root;
-
-    using api = ApiCatalogs;
+    using static memory;
 
     public readonly struct ApiHosts : IIndex<IApiHost>
     {
+        static bool host(ApiHosts src, ApiHostUri uri, out IApiHost host)
+        {   var count = src.Count;
+            for(var i=0; i<count; i++)
+            {
+                var terms = src.View;
+                ref readonly var candidate = ref skip(terms,i);
+                if(candidate.Uri == uri)
+                {
+                    host = candidate;
+                    return true;
+                }
+            }
+            host = null;
+            return false;
+        }
+
+        static bool host(ApiHosts src, Type t, out IApiHost host)
+        {   var count = src.Count;
+            for(var i=0; i<count; i++)
+            {
+                var terms = src.View;
+                ref readonly var candidate = ref skip(terms,i);
+                if(candidate.GetType() == t)
+                {
+                    host = candidate;
+                    return true;
+                }
+            }
+            host = null;
+            return false;
+        }
+
         readonly Index<IApiHost> Data;
 
         [MethodImpl(Inline)]
@@ -55,11 +86,11 @@ namespace Z0
             get => Data;
         }
 
-        public bool Host(Type t, out IApiHost host)
-            => api.host(this, t, out host);
+        public bool Host(Type t, out IApiHost h)
+            => host(this, t, out h);
 
-        public bool Host(ApiHostUri uri, out IApiHost host)
-            => api.host(this, uri, out host);
+        public bool Host(ApiHostUri uri, out IApiHost h)
+            => host(this, uri, out h);
 
         public string Format()
             => Seq.format(Storage);

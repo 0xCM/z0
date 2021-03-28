@@ -16,13 +16,6 @@ namespace Z0
     /// </summary>
     public readonly struct ApiHost : IApiHost, IComparable<ApiHost>
     {
-        internal static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
-        {
-            var index = new Dictionary<string, MethodInfo>();
-            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
-            return index;
-        }
-
         public PartId PartId {get;}
 
         public Type HostType {get;}
@@ -36,14 +29,14 @@ namespace Z0
         Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
-        public ApiHost(Type type, string name, PartId part, ApiHostUri uri)
+        public ApiHost(Type type, string name, PartId part, ApiHostUri uri, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
         {
             HostType = type;
             Name = name;
             PartId = part;
             Uri = uri;
-            Methods = HostType.DeclaredMethods();
-            Index = index(Methods);
+            Methods = methods;
+            Index = index;
         }
 
         public bool FindMethod(OpUri uri, out MethodInfo method)
@@ -95,6 +88,6 @@ namespace Z0
             => !a.Equals(b);
 
         public static ApiHost Empty
-            => new ApiHost(typeof(void), EmptyString, 0, ApiHostUri.Empty);
+            => new ApiHost(typeof(void), EmptyString, 0, ApiHostUri.Empty, sys.empty<MethodInfo>(), new());
     }
 }

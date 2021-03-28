@@ -50,7 +50,7 @@ namespace Z0
             return captured.SelectMany(x => x.Storage);
         }
 
-        public Index<AsmMemberRoutines> CaptureApiCatalog(IGlobalApiCatalog catalog)
+        public Index<AsmMemberRoutines> CaptureApiCatalog(IApiCatalogDataset catalog)
         {
             var dst = root.list<AsmMemberRoutines>();
             using var flow = Wf.Running();

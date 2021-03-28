@@ -34,7 +34,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public IGlobalApiCatalog Api {get;}
+        public IApiCatalogDataset Api {get;}
 
         public string AppName {get;}
 

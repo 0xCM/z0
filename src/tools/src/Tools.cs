@@ -16,9 +16,8 @@ namespace Z0
         public static IToolResultProcessor processor(IEnvPaths paths, FS.FilePath script)
             => new ToolResultProcessor(paths, script);
 
-
         [MethodImpl(Inline), Op]
-        public static Nasm nasm(IEnvPaths paths)
-            => Nasm.tool(paths);
+        public static Nasm nasm(IWfShell wf)
+            => Nasm.create(wf);
     }
 }

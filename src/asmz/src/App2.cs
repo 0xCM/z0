@@ -961,7 +961,7 @@ namespace Z0.Asm
             root.iter(converter.Kinds, k => Show(k,log));
         }
 
-        static Index<ApiHostUri> InnerHosts(Type src)
+        static Index<ApiHostUri> NestedHosts(Type src)
         {
             var dst = root.list<ApiHostUri>();
             var nested = @readonly(src.GetNestedTypes());
@@ -979,46 +979,9 @@ namespace Z0.Asm
         void Produce()
         {
             var productions = ApiProductions.create(Wf);
-            var hosts = InnerHosts(typeof(Prototypes));
+            var hosts = NestedHosts(typeof(Prototypes));
             var count = productions.Produce(Toolsets.nasm, hosts);
         }
-
-        Index<NasmListEntry> RunNasmCase(string name)
-        {
-            var tool = Tools.nasm(Db);
-            var @case = name;
-            using var log = ShowLog(tool.Id.Format() + "." + @case, FS.Log);
-            var runner = ScriptRunner.create(Db);
-            var ran = runner.RunToolCmd(tool.Id, @case);
-            if(ran)
-                root.iter(ran.Data, x => log.Show(x));
-            else
-                Wf.Error(string.Format("{0}/{1} execution failed", tool.Id, @case));
-
-            var listpath = tool.Listings().Where(l => l.Name.Contains(@case)).Single();
-            var listing = tool.Listing(listpath);
-            var entries = root.list<NasmListEntry>();
-            var lines = listing.Lines.View;
-            log.Title(listpath.ToUri());
-            var count = lines.Length;
-            for(var j=0; j<count; j++)
-            {
-                ref readonly var line = ref skip(lines,j);
-                var content = span(line.Content);
-
-                if(!Nasm.entry(line, out var entry))
-                    Wf.Error("Parse entry failed");
-                else
-                {
-                    tool.Render(entry, log.Buffer);
-                    log.ShowBuffer();
-                    entries.Add(entry);
-                }
-            }
-            return entries.ToArray();
-
-        }
-
 
         Index<AsmMemberRoutine> CaptureSelectedRoutines()
         {
@@ -1030,12 +993,12 @@ namespace Z0.Asm
 
         public void Run()
         {
-
-            //RunNasmCase("bswap");
+            var tool = Tools.nasm(Wf);
+            tool.RunCase("bswap");
 
             // productions.Produce();
 
-            Wf.CodeGenerators().GenerateAsmModels();
+            //Wf.CodeGenerators().GenerateAsmModels();
 
         }
 

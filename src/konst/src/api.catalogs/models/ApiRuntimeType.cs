@@ -26,16 +26,15 @@ namespace Z0
         Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
-        public ApiRuntimeType(Type type, string name, PartId part, ApiHostUri uri)
+        public ApiRuntimeType(Type type, string name, PartId part, ApiHostUri uri, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
         {
             HostType = type;
             Name = name;
             PartId = part;
             Uri = uri;
-            Methods = HostType.DeclaredMethods();
-            Index = ApiHost.index(Methods);
+            Methods = methods;
+            Index = index;
         }
-
 
         public bool FindMethod(OpUri uri, out MethodInfo method)
             => Index.TryGetValue(uri.OpId.IdentityText, out method);
@@ -60,7 +59,6 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is ApiRuntimeType t && Equals(t);
-
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiRuntimeType src)

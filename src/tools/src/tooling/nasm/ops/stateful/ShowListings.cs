@@ -34,36 +34,11 @@ namespace Z0.Tooling
                         Wf.Error("Parse entry failed");
                     else
                     {
-                        Render(_entry, log.Buffer);
+                        RenderEntry(_entry, log.Buffer);
                         log.ShowBuffer();
                     }
                 }
             }
-
-        }
-
-        public void ShowFiles()
-        {
-            var @case = "bswap";
-
-            using var log = ShowLog(Id.Format() + "." + "files", FS.Log);
-
-            var i=0;
-
-            log.Property(nameof(InDir), InDir);
-            log.Property(nameof(OutDir), OutDir);
-
-            var inputs = Inputs();
-            var outputs = Outputs();
-            var listings = Listings();
-
-            log.Title(NasmFileKind.Input);
-            i=0;
-            root.iter(inputs, path => log.Row(i++, NasmFileKind.Input, path.ToUri()));
-
-            log.Title(NasmFileKind.Output);
-            i=0;
-            root.iter(outputs, path => log.Row(i++, NasmFileKind.Output, path.ToUri()));
         }
     }
 }

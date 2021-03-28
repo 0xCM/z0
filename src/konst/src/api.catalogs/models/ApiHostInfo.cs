@@ -27,13 +27,13 @@ namespace Z0
         Dictionary<string,MethodInfo> Index {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods)
+        public ApiHostInfo(Type host, ApiHostUri uri, PartId part, MethodInfo[] methods, Dictionary<string,MethodInfo> index)
         {
             HostType = host;
             Uri = uri;
             PartId = part;
             Methods = methods;
-            Index = ApiHost.index(methods);
+            Index = index;
         }
 
         public bool FindMethod(OpUri uri, out MethodInfo method)

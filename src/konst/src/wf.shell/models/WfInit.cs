@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         public IApiParts ApiParts {get;}
 
-        public IGlobalApiCatalog ApiGlobal {get;}
+        public IApiCatalogDataset ApiGlobal {get;}
 
         public FS.FolderPath DbRoot {get;}
 

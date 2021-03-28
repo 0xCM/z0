@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         ICaptureServices CaptureServices {get;}
 
-        IGlobalApiCatalog ApiGlobal
+        IApiCatalogDataset ApiGlobal
             => ContextRoot.ApiGlobal;
 
         /// <summary>

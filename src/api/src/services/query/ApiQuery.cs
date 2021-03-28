@@ -14,17 +14,9 @@ namespace Z0
     [ApiHost(ApiNames.ApiQuery, true)]
     public readonly partial struct ApiQuery
     {
-        /// <summary>
-        /// Creates a system-level api catalog over a specified component set
-        /// </summary>
-        /// <param name="src">The source components</param>
         [Op]
-        public static IGlobalApiCatalog catalog(Index<Assembly> src)
-        {
-            var candidates = src.Where(x => x.IsPart());
-            var parts = candidates.Select(TryGetPart).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id).Array();
-            return new GlobalApiCatalog(parts);
-        }
+        public static IPart part(Assembly src)
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).Single();
 
         /// <summary>
         /// Attempts to resolve a part resolution type
@@ -43,15 +35,6 @@ namespace Z0
             }
         }
 
-        public static ApiGroupNG[] ImmDirect(IApiHost host, RefinementClass kind)
-            => from g in direct(host)
-                let imm = ImmGroup(host, g, kind)
-                where !imm.IsEmpty
-                select g;
-
-        public static ApiMethodG[] ImmGeneric(IApiHost host, RefinementClass kind)
-            => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
-
         static MethodInfo[] TaggedOps(IApiHost src)
             => src.Methods.Storage.Tagged<OpAttribute>();
 
@@ -64,16 +47,6 @@ namespace Z0
 
         static MethodInfo GenericDefintion(MethodInfo src)
             => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
-
-        static ApiMethodG[] generic(IApiHost src)
-             => from m in TaggedOps(src).OpenGeneric()
-                let closures = ApiIdentityKinds.NumericClosureKinds(m)
-                where closures.Length != 0
-                select new ApiMethodG(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
-
-        static ApiGroupNG ImmGroup(IApiHost host, ApiGroupNG g, RefinementClass kind)
-            => new ApiGroupNG(g.GroupId, host,
-                g.Members.Storage.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
 
        static IMultiDiviner Diviner
             => MultiDiviner.Service;

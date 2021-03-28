@@ -35,6 +35,16 @@ namespace Z0
             return dst.Slice(0, (int)j).ToArray();
         }
 
+        [Op, Closures(Closure)]
+        public static T single<T>(T[] src)
+        {
+            var count = src.Length;
+            if(count != 1)
+                throw new Exception($"There are {src.Length} elements where there should be exactly 1");
+            else
+                return src[0];
+        }
+
         /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
         /// </summary>

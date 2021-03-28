@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static memory;
 
@@ -15,37 +16,24 @@ namespace Z0
     public readonly struct ApiCatalogs
     {
         [Op]
-        internal static bool host(ApiHosts src, ApiHostUri uri, out IApiHost host)
-        {   var count = src.Count;
-            for(var i=0; i<count; i++)
-            {
-                var terms = src.View;
-                ref readonly var candidate = ref skip(terms,i);
-                if(candidate.Uri == uri)
-                {
-                    host = candidate;
-                    return true;
-                }
-            }
-            host = null;
-            return false;
+        public static ApiHostInfo hostinfo(Type t)
+        {
+            var ass = t.Assembly;
+            var part = ass.Id();
+            var uri = t.HostUri();
+            var methods = t.DeclaredMethods();
+            return new ApiHostInfo(t, uri, part, methods, index(methods));
         }
 
         [Op]
-        internal static bool host(ApiHosts src, Type t, out IApiHost host)
-        {   var count = src.Count;
-            for(var i=0; i<count; i++)
-            {
-                var terms = src.View;
-                ref readonly var candidate = ref skip(terms,i);
-                if(candidate.GetType() == t)
-                {
-                    host = candidate;
-                    return true;
-                }
-            }
-            host = null;
-            return false;
+        public static ApiHostInfo hostinfo<T>()
+            => hostinfo(typeof(T));
+
+        public static Dictionary<string,MethodInfo> index(Index<MethodInfo> methods)
+        {
+            var index = new Dictionary<string, MethodInfo>();
+            root.iter(methods, m => index.TryAdd(ApiIdentity.identify(m).IdentityText, m));
+            return index;
         }
 
         [Op]
@@ -56,13 +44,14 @@ namespace Z0
         /// Describes an api host
         /// </summary>
         /// <param name="part">The defining part</param>
-        /// <param name="src">The reifying type</param>
+        /// <param name="type">The reifying type</param>
         [Op]
-        public static ApiHost ApiHost(Type src)
+        public static ApiHost ApiHost(Type type)
         {
-            var part = src.Assembly.Id();
-            var name =  HostName(src);
-            return new ApiHost(src, name, part, new ApiHostUri(part, name));
+            var part = type.Assembly.Id();
+            var name =  HostName(type);
+            var declared = type.DeclaredMethods();
+            return new ApiHost(type, name, part, new ApiHostUri(part, name), declared, index(declared));
         }
 
         [Op]
@@ -78,10 +67,11 @@ namespace Z0
         /// <param name="part">The defining part</param>
         /// <param name="t">The reifying type</param>
         [Op]
-        public static ApiHost ApiHost(PartId part, Type t)
+        public static ApiHost ApiHost(PartId part, Type type)
         {
-            var name =  HostName(t);
-            return new ApiHost(t, name, part, new ApiHostUri(part, name));
+            var name =  HostName(type);
+            var declared = type.DeclaredMethods();
+            return new ApiHost(type, name, part, new ApiHostUri(part, name), declared, index(declared));
         }
 
         [Op]
@@ -141,7 +131,8 @@ namespace Z0
                 var attrib = type.Tag<ApiCompleteAttribute>();
                 var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
-                seek(dst, i) = new ApiRuntimeType(type, name, part, uri);
+                var declared = type.DeclaredMethods();
+                seek(dst, i) = new ApiRuntimeType(type, name, part, uri, declared, index(declared));
             }
             return buffer;
         }
@@ -151,19 +142,19 @@ namespace Z0
         /// </summary>
         /// <param name="paths">The source paths</param>
         [Op]
-        public static IGlobalApiCatalog GlobalCatalog(FS.Files paths)
+        public static IApiCatalogDataset Dataset(FS.Files paths)
             => new GlobalApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         [Op]
-        public static IGlobalApiCatalog GlobalCatalog(FS.FolderPath src, PartId[] parts)
+        public static IApiCatalogDataset Dataset(FS.FolderPath src, PartId[] parts)
         {
             var managed = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            return parts.Length != 0 ? new GlobalApiCatalog(GlobalCatalog(managed).Parts.Where(x => parts.Contains(x.Id))) : GlobalCatalog(managed);
+            return parts.Length != 0 ? new GlobalApiCatalog(Dataset(managed).Parts.Where(x => parts.Contains(x.Id))) : Dataset(managed);
         }
 
         [Op]
-        public static IGlobalApiCatalog GlobalCatalog(Assembly src, PartId[] parts)
-            => GlobalCatalog(FS.path(src.Location).FolderPath, parts);
+        public static IApiCatalogDataset Dataset(Assembly src, PartId[] parts)
+            => Dataset(FS.path(src.Location).FolderPath, parts);
 
         /// <summary>
         /// Attempts to resolve a part from an assembly file path

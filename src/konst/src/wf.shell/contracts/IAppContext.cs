@@ -23,7 +23,7 @@ namespace Z0
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));
 
-        IGlobalApiCatalog ApiGlobal {get;}
+        IApiCatalogDataset ApiGlobal {get;}
 
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);
