@@ -7,17 +7,18 @@ namespace Z0.Tooling
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Part;
     using static memory;
+    using static TextRules;
 
     public readonly struct NasmListing : IRenderCapable<NasmListing>
     {
         public FS.FilePath Source {get;}
 
-        public Index<TextLine> Lines {get;}
+        public Index<NasmListLine> Lines {get;}
 
         [MethodImpl(Inline)]
-        public NasmListing(FS.FilePath src, Index<TextLine> lines)
+        public NasmListing(FS.FilePath src, Index<NasmListLine> lines)
         {
             Source = src;
             Lines = lines;
@@ -32,6 +33,14 @@ namespace Z0.Tooling
                 ref readonly var line = ref skip(src,i);
                 dst.AppendLine(line.Format());
             }
+        }
+
+
+        [MethodImpl(Inline)]
+        public ref readonly NasmListLine Line(uint number)
+        {
+            ref readonly var line =  ref Lines[number - 1];
+            return ref line;
         }
 
         public string Format()

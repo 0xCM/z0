@@ -14,9 +14,14 @@ namespace Z0
         public static FileExt Asm => ext(asm);
 
         /// <summary>
+        /// Defines the <see cref='cmd'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Cmd => ext(cmd);
+
+        /// <summary>
         /// Defines the <see cref='csv'/> <see cref='FileExt'/>
         /// </summary>
-        public static FileExt Csv => Extensions.Csv;
+        public static FileExt Csv => ext(csv);
 
         /// <summary>
         /// Defines the <see cref='dll'/> <see cref='FileExt'/>
@@ -52,6 +57,11 @@ namespace Z0
         /// Defines the <see cref='pdb'/> <see cref='FileExt'/>
         /// </summary>
         public static FileExt Pdb => ext(pdb);
+
+        /// <summary>
+        /// Defines the <see cref='ps1'/> <see cref='FileExt'/>
+        /// </summary>
+        public static FileExt Ps1 => ext(ps1);
 
         [ValueProvider(typeof(FileExt))]
         public readonly struct Extensions

@@ -45,6 +45,12 @@ namespace Z0
             get => Content[charidx];
         }
 
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
+
         [MethodImpl(Inline)]
         public TextBlock Segment(uint i0, uint i1)
             => Parse.segment(Content, i0, i1);

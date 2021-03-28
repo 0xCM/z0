@@ -52,6 +52,33 @@ namespace Z0
             Wf.Row(src);
         }
 
+        public void Show(ReadOnlySpan<char> src)
+        {
+            Show(text.format(src));
+        }
+
+        public void Title<T>(T name)
+        {
+            Show(EmptyString);
+            Show(name);
+            Show(RP.PageBreak120);
+        }
+
+        public void Row<T>(int index, T data)
+            => Show(string.Format("{0:D4}: {1}", index, data));
+
+        public void Row<T>(uint index, T data)
+            => Show(string.Format("{0:D4}: {1}", index, data));
+
+        public void Row<K,T>(int index, K kind, T data)
+            => Show(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
+
+        public void Row<K,T>(uint index, K kind, T data)
+            => Show(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
+
+        public void Property<T>(string name, T value)
+            => Show(string.Format("{0}:{1}", name, value));
+
         public void ShowBuffer()
         {
             var src = Buffer.Emit();

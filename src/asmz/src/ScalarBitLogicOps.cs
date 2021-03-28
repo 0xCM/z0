@@ -11,6 +11,19 @@ namespace Z0
     using static Part;
     using static memory;
 
+
+    public static partial class XTend
+    {
+        public static bool IsZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) == 0;
+
+        public static bool IsNonZero<T>(this T src)
+            where T : unmanaged, Enum
+                => bw64(src) != 0;
+
+    }
+
     readonly struct ScalarBitLogicOps
     {
         readonly Index<MemberAddress> Members;

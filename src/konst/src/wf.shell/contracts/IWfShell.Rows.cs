@@ -15,6 +15,18 @@ namespace Z0
        void Row<T>(T data)
             => Raise(row(data));
 
+        void Row<T>(uint index, T data)
+            => Row(string.Format("{0:D4}: {1}", index, data));
+
+        void Row<T>(int index, T data)
+            => Row(string.Format("{0:D4}: {1}", index, data));
+
+        void Row<K,T>(uint index, K kind, T data)
+            => Row(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
+
+        void Row<K,T>(int index, K kind, T data)
+            => Row(string.Format("{0:D4}: {1,-12} | {2}", index, kind, data));
+
         void Rows<T>(T[] src)
             => Rows(@readonly(src), EmptyString);
 

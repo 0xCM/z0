@@ -50,7 +50,7 @@ namespace Z0
 
 
         [Op]
-        public static bool parse(string src, out byte[] dst)
+        public static Outcome parse(string src, out byte[] dst)
         {
             try
             {
@@ -70,7 +70,6 @@ namespace Z0
                 return false;
             }
         }
-
 
         public ParseResult<byte> Parse(string src)
         {

@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
     using static memory;
 
-    using B = BinaryDigit;
     using D = DecimalDigit;
     using X = HexDigit;
 
@@ -205,7 +204,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = Digital.digit(base10, skip(src,i));
+                seek(dst,i) = digit(base10, skip(src,i));
             return dst;
         }
 
@@ -214,7 +213,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = Digital.digit(skip(src,i));
+                seek(dst,i) = digit(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -222,7 +221,7 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = Digital.digit(skip(src,i));
+                seek(dst,i) = digit(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -272,14 +271,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Span<byte> digits(Perm4L src, Span<byte> dst)
+        public static void digits(Perm4L src, Span<byte> dst)
         {
             var scalar = (byte)src;
             seek(dst,0) = BitMasks.extract(scalar, 0, 1);
             seek(dst,1) = BitMasks.extract(scalar, 2, 3);
             seek(dst,2) = BitMasks.extract(scalar, 4, 5);
             seek(dst,3) = BitMasks.extract(scalar, 6, 7);
-            return dst;
         }
 
         /// <summary>
@@ -317,17 +315,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Span<OctalDigit> digits(Perm8L src, Span<OctalDigit> dst)
-        {
-            return digits((uint)src, dst);
-        }
+        public static uint digits(Perm8L src, Span<OctalDigit> dst)
+            => digits((uint)src, dst);
 
         /// <summary>
         /// Computes the digits corresponding to each 3-bit segment of a <see cref='uint'/> value
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Span<OctalDigit> digits(uint src, Span<OctalDigit> dst)
+        public static uint digits(uint src, Span<OctalDigit> dst)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
             seek(dst,0) = (OctalDigit)BitMasks.extract(src, 0, 2);
@@ -338,7 +334,7 @@ namespace Z0
             seek(dst,5) = (OctalDigit)BitMasks.extract(src, 15, 17);
             seek(dst,6) = (OctalDigit)BitMasks.extract(src, 18, 20);
             seek(dst,7) = (OctalDigit)BitMasks.extract(src, 21, 23);
-            return dst;
+            return 8;
         }
 
         /// <summary>
@@ -346,14 +342,18 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         public static Span<OctalDigit> digits(Perm8L src)
-            => digits(src, alloc<OctalDigit>(8));
+        {
+            var dst = alloc<OctalDigit>(8);
+            digits(src, dst);
+            return dst;
+        }
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
         [MethodImpl(Inline), Op]
-        public static Span<HexDigit> digits(Perm16L src, Span<HexDigit> dst)
+        public static uint digits(Perm16L src, Span<HexDigit> dst)
         {
             var scalar = (ulong)src;
             seek(dst,0) = (X)BitMasks.extract(scalar, 0, 3);
@@ -372,7 +372,7 @@ namespace Z0
             seek(dst,13) = (X)BitMasks.extract(scalar, 52, 55);
             seek(dst,14) = (X)BitMasks.extract(scalar, 56, 59);
             seek(dst,15) = (X)BitMasks.extract(scalar, 60, 63);
-            return dst;
+            return 16;
         }
 
         /// <summary>
@@ -380,6 +380,10 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         public static Span<HexDigit> digits(Perm16L src)
-            => digits(src, alloc<HexDigit>(16));
+        {
+            var dst = alloc<HexDigit>(16);
+            digits(src, dst);
+            return dst;
+        }
     }
 }

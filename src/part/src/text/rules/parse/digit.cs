@@ -9,11 +9,33 @@ namespace Z0
 
     using static Part;
     using static Chars;
+    using static memory;
+    using C = AsciCharCode;
 
     partial struct TextRules
     {
         partial struct Parse
         {
+            [Op]
+            public static uint digits(ReadOnlySpan<char> src, uint offset, Span<byte> dst)
+            {
+                var i=offset;
+                var j=0u;
+                var imax = src.Length - 1;
+                while(i <= imax)
+                {
+                    ref readonly var c = ref skip(src, i++);
+                    if(Query.space(c) && j==0)
+                        continue;
+
+                    if(Query.digit(c))
+                        seek(dst, j++) = C.d9 - (C)c;
+                    else
+                        break;
+                }
+                return j;
+            }
+
             [Op]
             public static bool digit(char src, out byte dst)
             {

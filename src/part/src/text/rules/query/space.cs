@@ -16,20 +16,20 @@ namespace Z0
         partial struct Query
         {
             /// <summary>
-            /// Determines whether a code is one of <see cref='AsciDigitCode'/>
+            /// Determines whether an asci code defines the <see cref='Chars.Space'/> character
             /// </summary>
             /// <param name="src">The value to test</param>
             [MethodImpl(Inline), Op]
-            public static bit digit(C src)
-                => contains(C.d0, C.d9, src);
+            public static bit space(C src)
+                => src == C.Space;
 
             /// <summary>
-            /// Determines whether the code of a specified character is one of <see cref='AsciDigitCode'/>
+            /// Determines whether an asci code defines the <see cref='Chars.Space'/> character
             /// </summary>
             /// <param name="src">The value to test</param>
             [MethodImpl(Inline), Op]
-            public static bit digit(char src)
-                => digit((C)src);
+            public static bit space(char src)
+                => space((C)src);
         }
     }
 }

@@ -13,29 +13,28 @@ namespace Z0
     public sealed class ScriptRunner
     {
         [MethodImpl(Inline)]
-        public static ScriptRunner create(Env env)
-            => new ScriptRunner(EnvPaths.create(env));
-
-        [MethodImpl(Inline)]
-        public static ScriptRunner create()
-            => new ScriptRunner(EnvPaths.create());
+        public static ScriptRunner create(IEnvPaths paths)
+            => new ScriptRunner(paths);
 
         readonly IEnvPaths Paths;
 
         [MethodImpl(Inline)]
-        public ScriptRunner(IEnvPaths paths)
+        ScriptRunner(IEnvPaths paths)
             => Paths = paths;
 
         public Outcome<TextLines> RunControlScript(FS.FileName name)
             => RunScript(Paths.ControlScript(name), new ScriptId(name.Name));
 
-        public Outcome<TextLines> RunCmdScript(ToolId tool, ScriptId script)
-            => RunScript(tool, script, ToolScriptKind.Cmd);
+        public Outcome<TextLines> RunToolCmd(ToolId tool, ScriptId script)
+            => RunToolScript(tool, script, ToolScriptKind.Cmd);
 
-        public Outcome<TextLines> RunPsScript(ToolId tool, ScriptId script)
-            => RunScript(tool, script, ToolScriptKind.Ps);
+        public FS.FilePath ToolCmdPath(ToolId tool, ScriptId script)
+            => ScriptFile(tool,script,ToolScriptKind.Cmd);
 
-        public Outcome<TextLines> RunScript(ToolId tool, ScriptId script, ToolScriptKind kind)
+        public Outcome<TextLines> RunToolPs(ToolId tool, ScriptId script)
+            => RunToolScript(tool, script, ToolScriptKind.Ps);
+
+        public Outcome<TextLines> RunToolScript(ToolId tool, ScriptId script, ToolScriptKind kind)
             => Run(CmdLine(ScriptFile(tool, script, kind), kind), script);
 
         Outcome<TextLines> Run(CmdLine cmd, ScriptId script)
@@ -64,8 +63,8 @@ namespace Z0
         FS.FilePath ScriptFile(ToolId tool, ScriptId script, ToolScriptKind kind)
         {
             var x = kind switch{
-                ToolScriptKind.Cmd => FS.Extensions.Cmd,
-                ToolScriptKind.Ps => FS.Extensions.Ps1,
+                ToolScriptKind.Cmd => FS.Cmd,
+                ToolScriptKind.Ps => FS.Ps1,
                 _ => FS.FileExt.Empty
             };
             return Paths.ToolScript(tool, script, x);

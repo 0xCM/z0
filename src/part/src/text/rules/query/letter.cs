@@ -10,7 +10,6 @@ namespace Z0
     using static Part;
 
     using C = AsciCharCode;
-    using F = AsciCodeFacets;
 
     partial struct TextRules
     {

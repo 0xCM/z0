@@ -39,7 +39,7 @@ namespace Z0
                     var script = paths.ControlScript(name);
                     if(script.Exists)
                     {
-                        var runner = ScriptRunner.create();
+                        var runner = ScriptRunner.create(paths);
                         var outcome = runner.RunControlScript(name);
                         if(outcome)
                         {

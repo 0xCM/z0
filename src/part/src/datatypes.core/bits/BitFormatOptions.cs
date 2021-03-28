@@ -20,7 +20,6 @@ namespace Z0
         public static BitFormat bitmax(uint maxbits, int? zpad = null)
             => define(tlz:true, maxbits: maxbits, zpad:zpad);
 
-
         [MethodImpl(Inline), Op]
         public static BitFormat bitblock(int width, char? sep = null, uint? maxbits = null, bool specifier = false)
             => define(tlz:false, blockWidth: width, blocksep: sep, maxbits:maxbits, specifier: specifier);

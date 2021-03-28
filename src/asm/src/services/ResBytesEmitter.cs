@@ -30,7 +30,7 @@ namespace Z0
         public Index<ApiHostRes> Emit(ApiCodeBlocks src)
         {
             var apires = Emit(src, RespackDir);
-            var runner = ScriptRunner.create(Wf.Env);
+            var runner = ScriptRunner.create(Db);
 
             var build = runner.RunControlScript(ControlScriptNames.BuildRespack).Data;
             root.iter(build, line => Wf.Row(line));

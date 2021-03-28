@@ -10,6 +10,8 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
 
+    using Z0.Tooling;
+
     using static Part;
     using static memory;
     using static Toolsets;
@@ -308,11 +310,11 @@ namespace Z0.Asm
 
         void RunScripts()
         {
-            var runner = ScriptRunner.create(Wf.Env);
-            runner.RunCmdScript(clang.name, "codegen");
-            runner.RunCmdScript(clang.name, "parse");
-            runner.RunPsScript(clang.name, "fast-math");
-            runner.RunPsScript(llvm.ml, "lex");
+            var runner = ScriptRunner.create(Db);
+            runner.RunToolCmd(clang.name, "codegen");
+            runner.RunToolCmd(clang.name, "parse");
+            runner.RunToolPs(clang.name, "fast-math");
+            runner.RunToolPs(llvm.ml, "lex");
         }
 
         void SplitFiles()
@@ -355,8 +357,6 @@ namespace Z0.Asm
                 }
             }
         }
-
-
 
         public static MsgPattern<T> Dispatching<T>()
             where T : struct, ICmd<T> => "Dispatching {0}";
@@ -933,14 +933,19 @@ namespace Z0.Asm
             Wf.ImageDataEmitter().EmitApiImageContent();
         }
 
+        void Show(RegKind src, ShowLog dst)
+        {
+            if(src.IsNonZero())
+                dst.Show(src);
+        }
+
         public void ShowRegisterKinds()
         {
             var converter = RegKindConverter.create();
             using var log = ShowLog("registers", FS.Csv);
             log.Show("Register");
-            root.iter(converter.Kinds, k => log.Show(k));
+            root.iter(converter.Kinds, k => Show(k,log));
         }
-
 
         static Index<ApiHostUri> InnerHosts(Type src)
         {
@@ -957,8 +962,111 @@ namespace Z0.Asm
             return dst.ToArray();
         }
 
+        void Produce()
+        {
+            var productions = ApiProductions.create(Wf);
+            var hosts = InnerHosts(typeof(Prototypes));
+            var count = productions.Produce(Toolsets.nasm, hosts);
+        }
+
+
+        Index<NasmListEntry> RunNasmCase(string name)
+        {
+            var tool = Tools.nasm(Db);
+            var @case = name;
+            using var log = ShowLog(tool.Id.Format() + "." + @case, FS.Log);
+            var runner = ScriptRunner.create(Db);
+            var ran = runner.RunToolCmd(tool.Id, @case);
+            if(ran)
+                root.iter(ran.Data, x => log.Show(x));
+            else
+                Wf.Error(string.Format("{0}/{1} execution failed", tool.Id, @case));
+
+            var listpath = tool.Listings().Where(l => l.Name.Contains(@case)).Single();
+            var listing = tool.Listing(listpath);
+            var entries = root.list<NasmListEntry>();
+            var lines = listing.Lines.View;
+            log.Title(listpath.ToUri());
+            var count = lines.Length;
+            for(var j=0; j<count; j++)
+            {
+                ref readonly var line = ref skip(lines,j);
+                var content = span(line.Content);
+
+                if(!Nasm.entry(line, out var entry))
+                    Wf.Error("Parse entry failed");
+                else
+                {
+                    tool.Render(entry, log.Buffer);
+                    log.ShowBuffer();
+                    entries.Add(entry);
+                }
+            }
+            return entries.ToArray();
+
+        }
+
+        void DescribeListings()
+        {
+            var @case = "bswap";
+
+            var nasm = Tools.nasm(Db);
+            using var log = ShowLog(nasm.Id.Format() + "." + @case, FS.Log);
+
+            var i=0;
+
+            var runner = ScriptRunner.create(Db);
+            var ran = runner.RunToolCmd(nasm.Id, @case);
+            if(ran)
+                root.iter(ran.Data, x => log.Show(x));
+            else
+                Wf.Error(string.Format("{0}/{1} execution failed", nasm.Id, @case));
+
+
+            log.Property(nameof(nasm.InDir), nasm.InDir);
+            log.Property(nameof(nasm.OutDir), nasm.OutDir);
+
+            var inputs = nasm.Inputs();
+            var outputs = nasm.Outputs();
+            var listings = nasm.Listings();
+
+            log.Title(NasmFileKind.Input);
+            i=0;
+            root.iter(inputs, path => log.Row(i++, NasmFileKind.Input, path.ToUri()));
+
+            log.Title(NasmFileKind.Output);
+            i=0;
+            root.iter(outputs, path => log.Row(i++, NasmFileKind.Output, path.ToUri()));
+
+            log.Title(NasmFileKind.Listing);
+
+            foreach(var path in listings)
+            {
+                var listing = nasm.Listing(path);
+                var entries = root.list<NasmListEntry>();
+                var lines = listing.Lines.View;
+                log.Title(path.ToUri());
+                var count = lines.Length;
+                for(var j=0; j<count; j++)
+                {
+                    ref readonly var line = ref skip(lines,j);
+                    var content = span(line.Content);
+
+                    if(!Nasm.entry(line, out var _entry))
+                        Wf.Error("Parse entry failed");
+                    else
+                    {
+                        nasm.Render(_entry, log.Buffer);
+                        log.ShowBuffer();
+                    }
+
+                }
+            }
+        }
+
         public void Run()
         {
+
             // var options = CaptureWorkflowOptions.EmitImm;
             // var parts = root.array(PartId.AsmLang, PartId.AsmZ);
             // var routines = Capture.run(Wf, parts, options);
@@ -967,12 +1075,10 @@ namespace Z0.Asm
             // var count = AsmRoutines.filter(routines,filter,filtered);
             // Summarize(slice(filtered,0, count), dst);
 
-            // productions.Produce();
+            RunNasmCase("bswap");
 
-            ShowRegisterKinds();
-            var productions = ApiProductions.create(Wf);
-            var hosts = InnerHosts(typeof(Prototypes));
-            var count = productions.Produce(Toolsets.nasm, hosts);
+
+            // productions.Produce();
 
 
             //Wf.AsmCatalogEtl().EmitMnemonicInfo();
