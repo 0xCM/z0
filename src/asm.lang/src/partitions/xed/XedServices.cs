@@ -16,7 +16,7 @@ namespace Z0.Asm
 
         const char FieldDelimiter = Chars.Space;
 
-        IForm ParseIdentifier(string src)
+        IForm ParseIForm(string src)
         {
             if(Enum.TryParse<IForm>(src, out var dst))
                 return dst;
@@ -73,7 +73,7 @@ namespace Z0.Asm
 
         XedForm LoadForm(ushort index, XedFormSource src)
         {
-            var id = ParseIdentifier(src.Form);
+            var id = ParseIForm(src.Form);
             var iclass = ParseIClass(src.Class);
             var category = ParseCategory(src.Category);
             var attributes = ParseAttributes(src.Attributes);
@@ -91,6 +91,27 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 seek(dst,i) = LoadForm((ushort)i, skip(records,i));
             return buffer;
+        }
+
+        public void EmitCatalogEntries()
+        {
+            EmitSymbols();
+            EmitForms();
+        }
+
+        public void EmitForms()
+        {
+            var src = LoadForms().View;
+            var dst = Db.AsmCatalogFile(FS.file("xed-forms", FS.Csv));
+            var count = src.Length;
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            writer.WriteLine(XedForm.Header);
+            for(var i=0; i<count; i++)
+            {
+                writer.WriteLine(skip(src,i).Format());
+            }
+            Wf.EmittedFile(flow, count);
         }
 
         public Index<XedFormSource> LoadFormSources()
@@ -171,6 +192,29 @@ namespace Z0.Asm
                 seek(dst,i) = skip(parts,i);
 
             return true;
+        }
+
+        public void EmitSymbols()
+        {
+            var dst = Db.AsmCatalogFile(FS.file("xed-symbols", FS.Csv));
+            var flow = Wf.EmittingFile(dst);
+            using var writer = dst.Writer();
+            root.iter(Symbols.symbols<XedModels.CpuidBit>(w16), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.AddressWidth>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.AttributeKind>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.Category>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.ChipCode>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.Extension>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.Flag>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.IClass>(w16), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.IForm>(w16), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.MachineMode>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.Nonterminal>(w16), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.RegClass>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.RegRole>(w8), symbol => writer.WriteLine(symbol));
+            root.iter(Symbols.symbols<XedModels.RegId>(w16), symbol => writer.WriteLine(symbol));
+            Wf.EmittedFile(flow,1);
         }
     }
 }

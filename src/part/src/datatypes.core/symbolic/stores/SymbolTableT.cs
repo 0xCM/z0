@@ -31,7 +31,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var token = ref _Tokens[i];
-                _Entries[i] = new Sym<T>(i, token.Identifier, token.Kind, token.SymbolName.SymbolText);
+                _Entries[i] = new Sym<T>(i, token.Identifier, token.Kind, token.SymbolName.SymbolText.Format());
             }
         }
 

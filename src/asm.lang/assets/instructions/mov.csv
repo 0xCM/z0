@@ -34,3 +34,34 @@
 | C7 / 0 iw         | MOV r/m16, imm16         | MI    | Valid       | Valid           | Move imm16 to r/m16.                                           |
 | C7 / 0 id         | MOV r/m32, imm32         | MI    | Valid       | Valid           | Move imm32 to r/m32.                                           |
 | REX.W + C7 / 0 id | MOV r/m64, imm32         | MI    | Valid       | N.E.            | Move imm32 sign extended to 64-bits to r/m64.                  |
+
+# MOV Data
+| register1 to register2                            | 0100 0R0B : 1000 100w : 11 reg1 reg2          |
+| qwordregister1 to qwordregister2                  | 0100 1R0B 1000 1001 : 11 qwordeg1 qwordreg2   |
+| register2 to register1                            | 0100 0R0B : 1000 101w : 11 reg1 reg2          |
+| qwordregister2 to qwordregister1                  | 0100 1R0B 1000 1011 : 11 qwordreg1 qwordreg2  |
+| memory to reg                                     | 0100 0RXB : 1000 101w : mod reg r/m           |
+| memory64 to qwordregister                         | 0100 1RXB 1000 1011 : mod qwordreg r/m        |
+| reg to memory                                     | 0100 0RXB : 1000 100w : mod reg r/m           |
+| qwordregister to memory64                         | 0100 1RXB 1000 1001 : mod qwordreg r/m        |
+| immediate to register                             | 0100 000B : 1100 011w : 11 000 reg : imm      |
+| immediate32 to qwordregister (zero extend)        | 0100 100B 1100 0111 : 11 000 qwordreg : imm32 |
+| immediate to register (alternate encoding)        | 0100 000B : 1011 w reg : imm                  |
+| immediate64 to qwordregister (alternate encoding) | 0100 100B 1011 1000 reg : imm64               |
+| immediate to memory                               | 0100 00XB : 1100 011w : mod 000 r/m : imm     |
+| immediate32 to memory64 (zero extend)             | 0100 10XB 1100 0111 : mod 000 r/m : imm32     |
+| memory to AL, AX, or EAX                          | 0100 0000 : 1010 000w : displacement          |
+| memory64 to RAX                                   | 0100 1000 1010 0001 : displacement64          |
+| AL, AX, or EAX to memory                          | 0100 0000 : 1010 001w : displacement          |
+| RAX to memory64                                   | 0100 1000 1010 0011 : displacement64          |
+
+# MOV to/from Segment Registers
+| register to segment register                      | 0100 W00Bw : 1000 1110 : 11 sreg reg   |
+| register to SS                                    | 0100 000B : 1000 1110 : 11 sreg reg    |
+| memory to segment register                        | 0100 00XB : 1000 1110 : mod sreg r/m   |
+| memory64 to segment register (lower 16 bits)      | 0100 10XB 1000 1110 : mod sreg r/m     |
+| memory to SS                                      | 0100 00XB : 1000 1110 : mod sreg r/m   |
+| segment register to register                      | 0100 000B : 1000 1100 : 11 sreg reg    |
+| segment register to qwordregister (zero extended) | 0100 100B 1000 1100 : 11 sreg qwordreg |
+| segment register to memory                        | 0100 00XB : 1000 1100 : mod sreg r/m   |
+| segment register to memory64 (zero extended)      | 0100 10XB 1000 1100 : mod sreg3 r/m    |

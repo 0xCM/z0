@@ -6,7 +6,6 @@ namespace Z0.Tooling
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;
 
     using static Root;
     using static memory;
@@ -47,5 +46,6 @@ namespace Z0.Tooling
             }
             return entries.ToArray();
         }
+
     }
 }

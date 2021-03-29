@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static Part;
 
-    public readonly struct UnicodeFacets
+    [ApiHost]
+    public readonly partial struct Symbols
     {
-
-    }
+        const NumericKind Closure = UnsignedInts;
+   }
 }

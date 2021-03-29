@@ -68,12 +68,4 @@ namespace Z0
         F INullary<F>.Zero
             => default;
     }
-
-    [Free]
-    public interface IBytes<F,C,N> : IBytes<F,N>, IContented<C>
-        where N : unmanaged, ITypeNat
-        where F : struct, IBytes<F,N>
-    {
-
-    }
 }

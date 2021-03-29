@@ -987,13 +987,6 @@ namespace Z0.Asm
             root.iter(forms, form => log.Show(form));
         }
 
-        public void ShowXedSymbols()
-        {
-            using var log = ShowLog("xed-symbols", FS.Extensions.Log);
-            root.iter(Symbols.symbols<XedModels.CpuidBit>(w8), symbol => log.Show(symbol));
-            root.iter(Symbols.symbols<XedModels.IsaKind>(w8), symbol => log.Show(symbol));
-        }
-
         public void EmitApiImageContent()
         {
             Wf.ImageDataEmitter().EmitApiImageContent();
@@ -1046,9 +1039,12 @@ namespace Z0.Asm
         public void Run()
         {
             //EmitBitstrings();
-            CaptureSelectedRoutines();
-            // var tool = Tools.nasm(Wf);
-            // tool.RunCase("bswap");
+            //CaptureSelectedRoutines();
+            //var tool = Tools.nasm(Wf);
+            //var entries = tool.RunCase("vptestmb");
+            var pipe = Wf.Xed();
+            pipe.EmitCatalogEntries();
+
 
             // productions.Produce();
 

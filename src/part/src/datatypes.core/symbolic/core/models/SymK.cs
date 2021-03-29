@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Sym<K> : ITextual
+    public readonly struct Sym<K> : ISym<K>
         where K : unmanaged
     {
         public SymKey Key {get;}
@@ -18,7 +18,7 @@ namespace Z0
 
         public K Value {get;}
 
-        public SymExpr Symbol {get;}
+        public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
         internal Sym(uint index, SymbolicLiteral<K> literal)
@@ -26,16 +26,16 @@ namespace Z0
             Key = index;
             Value = literal.DirectValue;
             Name = literal.Name;
-            Symbol = literal.Symbol;
+            Expression = literal.Symbol;
         }
 
         [MethodImpl(Inline)]
-        internal Sym(uint index, string name, K value, string symbol)
+        internal Sym(uint index, string name, K value, SymExpr symbol)
         {
             Key = index;
             Name = name;
             Value = value;
-            Symbol = symbol;
+            Expression = symbol;
         }
 
         public string Format()

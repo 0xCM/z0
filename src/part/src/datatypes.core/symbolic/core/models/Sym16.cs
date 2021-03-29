@@ -9,18 +9,18 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct Sym8 : ISym<W8,byte>
+    public readonly struct Sym16 : ISym<W16,ushort>
     {
-        public SymKey<byte> Key {get;}
+        public SymKey<ushort> Key {get;}
 
         public Identifier Name {get;}
 
-        public byte Value {get;}
+        public ushort Value {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym8(SymKey<byte> key, Name name, byte value, SymExpr expr)
+        public Sym16(SymKey<ushort> key, Name name, ushort value, SymExpr expr)
         {
             Key = key;
             Name = name;
@@ -33,12 +33,16 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sym<ushort>(Sym16 src)
+            => new Sym<ushort>(src.Key.Value, src.Name, src.Value, src.Expression);
     }
 
-    public readonly struct Sym8<T> : ISym<W8,T>
+    public readonly struct Sym16<T> : ISym<W16,T>
         where T : unmanaged
     {
-        public SymKey<byte> Key {get;}
+        public SymKey<ushort> Key {get;}
 
         public Identifier Name {get;}
 
@@ -47,7 +51,7 @@ namespace Z0
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym8(SymKey<byte> key, Identifier name, T value, SymExpr expr)
+        public Sym16(SymKey<ushort> key, Identifier name, T value, SymExpr expr)
         {
             Key = key;
             Name = name;
@@ -62,7 +66,11 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Key, src.Name, memory.bw8(src.Value), src.Expression);
+        public static implicit operator Sym16(Sym16<T> src)
+            => new Sym16(src.Key, src.Name, memory.bw16(src.Value), src.Expression);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sym<T>(Sym16<T> src)
+            => new Sym<T>(src.Key.Value, src.Name, src.Value, src.Expression);
     }
 }

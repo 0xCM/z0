@@ -17,6 +17,10 @@ namespace Z0
         public static Index<SymbolicLiteral<E>> symbolic<E>()
             where E : unmanaged, Enum
         {
+
+            static Name identity(Name component, Name type, ushort position, Name name)
+                => text.format(RP.SlotDot4, component, type, position, name);
+
             var src = typeof(E);
             ClrAssemblyName component = src.Assembly;
             var fields = @readonly(src.LiteralFields());
@@ -40,7 +44,7 @@ namespace Z0
                 else
                     row.Symbol = f.Name;
                 row.DirectValue = (E)f.GetRawConstantValue();
-                row.UniqueName = SymbolicLiterals.identity(component.SimpleName, src.Name, row.Position, f.Name);
+                row.UniqueName = identity(component.SimpleName, src.Name, row.Position, f.Name);
                 row.EncodedValue = ClrPrimitives.encode(kind, row.DirectValue);
                 row.Description = tag.MapValueOrDefault(a => a.Description, EmptyString);
             }
