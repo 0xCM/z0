@@ -16,5 +16,6 @@ namespace Z0
         public static MsgPattern<AsmMnemonic> MonicCodeParseFailed => "No corresponding mnemonic code for {0} was found";
 
         public static MsgPattern<string> CouldNotParseSigExpr => "Could not created a signature expression from {0}";
+
     }
 }

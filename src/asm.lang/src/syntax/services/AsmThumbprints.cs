@@ -15,13 +15,10 @@ namespace Z0.Asm
 
     public sealed class AsmThumbprints : WfService<AsmThumbprints>
     {
-        AsmSigs Sigs;
-
         AsmApiStatements Statements;
 
         protected override void OnInit()
         {
-            Sigs = Wf.AsmSigs();
             Statements = Wf.AsmStatements();
         }
 
@@ -131,7 +128,7 @@ namespace Z0.Asm
                     if(AsmSyntax.sig(sigexpr, out var sig))
                     {
                         if(!AsmSyntax.code(sig.Mnemonic, out var monic))
-                            Wf.Warn($"Could not parse mnemonic code for {sig.Mnemonic}");
+                            Wf.Warn(Msg.MonicCodeParseFailed.Format(sig.Mnemonic));
 
                         if(unfence(lhs, OpCodeFence, out var opcode))
                         {
@@ -191,8 +188,8 @@ namespace Z0.Asm
         public static string format(AsmThumbprint src)
         {
             var lhs = string.Format("({0})<{1}>[{2}]", src.Sig, src.OpCode, src.Encoded.Size);
-            var rhs = src.Encoded.Format();
-            return string.Concat(lhs,Implication,rhs);
+            var encoded = src.Encoded.Format();
+            return string.Concat(lhs,Implication, encoded);
         }
     }
 }

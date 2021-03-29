@@ -743,16 +743,6 @@ namespace Z0.Asm
             }
         }
 
-
-        void EmitApiStatements()
-        {
-            var pipe = Wf.ApiStatementPipe();
-            var store = Wf.AsmDataStore();
-            var statements = pipe.BuildStatements(store.CodeBlocks());
-            pipe.EmitStatements(statements);
-            ProcessStatements(statements);
-        }
-
         void ProcessStatements(ReadOnlySpan<AsmApiStatement> src)
         {
             var count = src.Length;
@@ -924,8 +914,8 @@ namespace Z0.Asm
             {
                 Wf.Row(string.Format("{0}={1}", l, symbols[l].Expression));
             }
-
         }
+
         void ShowXedForms()
         {
             var pipe = Wf.Xed();
@@ -993,8 +983,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var tool = Tools.nasm(Wf);
-            tool.RunCase("bswap");
+            // var tool = Tools.nasm(Wf);
+            // tool.RunCase("bswap");
 
             // productions.Produce();
 

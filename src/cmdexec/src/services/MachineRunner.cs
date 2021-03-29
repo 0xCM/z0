@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Z0.Asm;
-
     public class MachineRunner : WfService<MachineRunner>
     {
         public void Run(MachineOptions options)
@@ -94,7 +92,7 @@ namespace Z0
                     asm.EmitResBytes();
 
                 if(options.EmitStatements)
-                    asm.EmitApiStatements();
+                    Wf.ApiStatementPipe().EmitStatements();
 
             }
             catch(Exception e)

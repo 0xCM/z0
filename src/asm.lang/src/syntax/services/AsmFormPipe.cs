@@ -19,13 +19,6 @@ namespace Z0.Asm
 
         }
 
-        AsmSigs Sigs;
-
-        protected override void OnInit()
-        {
-            Sigs = Wf.AsmSigs();
-        }
-
         public void HashFormIndex()
         {
 

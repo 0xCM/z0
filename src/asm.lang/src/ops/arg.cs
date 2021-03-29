@@ -20,6 +20,5 @@ namespace Z0.Asm
         public static AsmOp<T> arg<T>(AsmOpKind kind, T content)
             where T : struct, IAsmOpContent
                 => new AsmOp<T>(kind, content);
-
     }
 }

@@ -22,19 +22,12 @@ namespace Z0.Asm
 
         uint Offset;
 
-        AsmSigs Sigs;
-
         public AsmDataStore()
         {
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<IceMnemonic, ArrayBuilder<AsmRow>>();
             _CodeBlocks = ApiCodeBlocks.Empty;
-        }
-
-        protected override void OnContextCreated()
-        {
-            Sigs = AsmSigs.create(Wf);
         }
 
         public ApiCodeBlocks CodeBlocks()
@@ -49,11 +42,6 @@ namespace Z0.Asm
             var routines = Wf.ApiIndexDecoder().Decode(CodeBlocks()).Routines;
             EmitCallRows(routines);
             EmitJmpRows(routines);
-        }
-
-        public void EmitApiStatements()
-        {
-            AsmApiStatementPipe.create(Wf).EmitStatements(CodeBlocks());
         }
 
         public Index<AsmRow> CreateAsmRows(Index<ApiCodeBlock> src)
@@ -231,6 +219,7 @@ namespace Z0.Asm
             }
             return dst.ToArray();
         }
+
         Index<AsmRow> CreateAsmRows(in ApiCodeBlock src)
         {
             var decoded = Asm.RoutineDecoder.Decode(src);

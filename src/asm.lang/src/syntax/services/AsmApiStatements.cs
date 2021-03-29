@@ -11,13 +11,6 @@ namespace Z0.Asm
 
     public sealed class AsmApiStatements : WfService<AsmApiStatements>
     {
-        AsmSigs Sigs;
-
-        protected override void OnInit()
-        {
-            Sigs = Wf.AsmSigs();
-        }
-
         public Outcome Parse(TextRow src, out AsmApiStatement dst)
         {
             var count = src.CellCount;

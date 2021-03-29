@@ -22,16 +22,16 @@ namespace Z0.Asm
 
         AsmThumbprints Thumbprints;
 
+        AsmDataStore DataStore;
+
         protected override void OnInit()
         {
             Sigs = Wf.AsmSigs();
-            Decoder = Wf.AsmDecoder();
-            Statements = Wf.AsmStatements();
             Thumbprints = Wf.AsmThumbprints();
+            Statements = Wf.AsmStatements();
+            DataStore = Wf.AsmDataStore();
+            Decoder = Wf.AsmDecoder();
         }
-
-        FS.FolderPath StatementRoot
-            => Db.TableDir<AsmApiStatement>();
 
         public Index<AsmApiStatement> BuildStatements(ApiCodeBlocks src)
         {
@@ -53,9 +53,14 @@ namespace Z0.Asm
             return records;
         }
 
-        public void EmitStatements(ApiCodeBlocks src)
+        public Index<AsmApiStatement> EmitStatements()
+            => EmitStatements(DataStore.CodeBlocks());
+
+        public Index<AsmApiStatement> EmitStatements(ApiCodeBlocks src)
         {
-            EmitStatements(BuildStatements(src));
+            var statements = BuildStatements(src);
+            EmitStatements(statements);
+            return statements;
         }
 
         void ClearTarget()
