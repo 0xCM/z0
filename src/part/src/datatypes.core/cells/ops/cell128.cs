@@ -18,8 +18,12 @@ namespace Z0
             => new Cell128(x.x0, x.x1);
 
         [MethodImpl(Inline), Op]
-        public static Cell128 cell128(ulong lo, ulong hi = 0)
+        public static Cell128 cell128(ulong lo, ulong hi)
             => new Cell128(lo, hi);
+
+        [MethodImpl(Inline), Op]
+        public static Cell128 cell128(uint a00, uint a01, uint a10, uint a11)
+            => new Cell128(a00,a01,a10,a11);
 
         [MethodImpl(Inline), Op]
         public static Cell128 cell128(in ConstPair<ulong> x)

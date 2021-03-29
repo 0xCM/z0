@@ -66,7 +66,6 @@ namespace Z0
         public static string format<T>(string pattern, T a)
             => Format.format(pattern, a);
 
-
         [MethodImpl(Inline)]
         public static string format<A,B>(string pattern, A a, B b)
             => Format.format(pattern, a, b);
@@ -92,8 +91,8 @@ namespace Z0
             => Format.format(pattern, a, b, c, d, e, f, g);
 
         [MethodImpl(Inline)]
-        public static string format<T>(T src)
-            where T : struct, ITextual
-                => src.Format();
+        public static string format<A,B,C,D,E,F,G,H>(string pattern, A a, B b, C c, D d, E e, F f, G g, H h)
+            => Format.format(pattern, a, b, c, d, e, f, g, h);
+
     }
 }

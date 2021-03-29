@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmOp : ISizedOperand, IAsmOpContent
+    public interface IAsmOp : ISizedOperand
     {
         AsmOpKind OpKind {get;}
 
@@ -12,7 +12,7 @@ namespace Z0.Asm
             => (AsmOpClass)OpKind;
     }
 
-    public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>, IAsmOpContent<T>
+    public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>
         where T : struct
     {
 

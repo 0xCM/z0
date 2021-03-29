@@ -10,9 +10,10 @@ namespace Z0.Asm
     using static Part;
 
     [Free]
-    public interface IRegOp : IAsmOp
+    public interface IRegOp : IAsmOp, ITextual
     {
         RegKind RegKind => default;
+
     }
 
     [Free]
@@ -24,6 +25,14 @@ namespace Z0.Asm
 
         BitWidth ISized.Width
             => width<T>();
+
+        string ITextual.Format()
+        {
+            var data = bytes(Content);
+            var formatter = Hex.formatter<byte>();
+            return formatter.Format(data);
+        }
+
     }
 
     [Free]

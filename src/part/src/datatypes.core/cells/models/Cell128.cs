@@ -25,6 +25,10 @@ namespace Z0
         public Cell128(ulong x0, ulong x1)
             => Data = Vector128.Create(x0,x1);
 
+        [MethodImpl(Inline)]
+        public Cell128(uint a00, uint a01, uint a10, uint a11)
+            => Data = Vector128.Create(a00, a01,a10,a11).AsUInt64();
+
         public CellKind Kind
             => CellKind.Cell128;
 

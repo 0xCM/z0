@@ -158,6 +158,33 @@ namespace Z0
                                 g is ITextual t6 ? t6.Format() : $"{g}"
                                 );
 
+            /// <summary>
+            /// Renders a septet of <see cref='ITextual'/> values as pipe-delimited text
+            /// </summary>
+            /// <param name="a">The first value</param>
+            /// <param name="b">The second value</param>
+            /// <param name="c">The third value</param>
+            /// <param name="d">The fourth value</param>
+            /// <param name="e">The fifth value</param>
+            /// <param name="f">The sixth value</param>
+            /// <typeparam name="A">The first value type</typeparam>
+            /// <typeparam name="B">The second value type</typeparam>
+            /// <typeparam name="C">The third value type</typeparam>
+            /// <typeparam name="D">The fourth value type</typeparam>
+            /// <typeparam name="E">The fifth value type</typeparam>
+            /// <typeparam name="F">The sixth value type</typeparam>
+            /// <typeparam name="G">The seventh value type</typeparam>
+            public static string format<A,B,C,D,E,F,G,H>(string pattern, A a, B b, C c, D d, E e, F f, G g, H h)
+                => string.Format(pattern,
+                                a is ITextual t0 ? t0.Format() : $"{a}",
+                                b is ITextual t1 ? t1.Format() : $"{b}",
+                                c is ITextual t2 ? t2.Format() : $"{c}",
+                                d is ITextual t3 ? t3.Format() : $"{d}",
+                                e is ITextual t4 ? t4.Format() : $"{e}",
+                                f is ITextual t5 ? t5.Format() : $"{f}",
+                                g is ITextual t6 ? t6.Format() : $"{g}",
+                                h is ITextual t7 ? t7.Format() : $"{h}"
+                                );
 
         }
     }

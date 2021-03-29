@@ -14,7 +14,6 @@ namespace Z0.Asm
     using T = System.UInt64;
     using G = AsmRegs.r64;
 
-
     partial struct AsmRegs
     {
         /// <summary>

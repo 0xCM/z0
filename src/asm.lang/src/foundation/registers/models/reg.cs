@@ -18,9 +18,7 @@ namespace Z0.Asm
 
             [MethodImpl(Inline)]
             public reg(T src)
-            {
-                Content = src;
-            }
+                => Content = src;
 
             [MethodImpl(Inline)]
             public reg<T> Reposition(byte pos)

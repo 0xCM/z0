@@ -141,6 +141,30 @@ namespace Z0
             => default;
 
         /// <summary>
+        /// Allocates 16 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static Block17 block(N17 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 18 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static Block18 block(N18 n)
+            => default;
+
+        /// <summary>
+        /// Allocates 24 bytes of storage
+        /// </summary>
+        /// <param name="n">The size selector</param>
+        [MethodImpl(Inline), Op]
+        public static Block24 block(N24 n)
+            => default;
+
+        /// <summary>
         /// Allocates 32 bytes of storage
         /// </summary>
         /// <param name="n">The size selector</param>
