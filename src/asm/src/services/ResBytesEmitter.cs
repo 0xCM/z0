@@ -70,7 +70,7 @@ namespace Z0
             //var resources = Resources.from(src);
             var resources = ResProvider.Hosted(src);
             var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
-            var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
+            var typename = text.concat(src.Host.Part.Format(), Chars.Underscore, hostname);
             var members = root.hashset<string>();
             using var writer = target.Writer();
             EmitFileHeader(writer);

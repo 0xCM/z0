@@ -13,6 +13,7 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmBytes
     {
+
         [MethodImpl(Inline), Op]
         public static byte size(AsmHexCode src)
             => BitNumbers.cell8(src.Data, 15);

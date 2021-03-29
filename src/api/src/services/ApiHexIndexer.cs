@@ -91,7 +91,7 @@ namespace Z0
         ApiIndexStatus Status()
         {
             var dst = default(ApiIndexStatus);
-            dst.Parts = UriCode.Keys.Select(x => x.Host.Owner).Distinct().Array();
+            dst.Parts = UriCode.Keys.Select(x => x.Host.Part).Distinct().Array();
             dst.Hosts = UriCode.Keys.Select(x => x.Host).Distinct().Array();
             dst.Addresses = CodeAddress.Keys.Array();
             dst.MemberCount = (uint)CodeAddress.Keys.Count;
@@ -102,7 +102,7 @@ namespace Z0
         ApiCodeBlocks Freeze()
         {
             var memories = CodeAddress.ToKVPairs();
-            var parts = UriCode.Keys.Select(x => x.Host.Owner).Distinct().Array();
+            var parts = UriCode.Keys.Select(x => x.Host.Part).Distinct().Array();
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)

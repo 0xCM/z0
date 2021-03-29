@@ -24,7 +24,7 @@ namespace Z0
             if(size<T>() == 1)
             {
                 var input = bw8(src);
-                var storage = MemBlocks.alloc(n8);
+                var storage = MemBlocks.block(n8);
                 var target = MemBlocks.span<bit>(ref storage);
                 BitPack.unpack(input, target);
                 return target;
@@ -32,7 +32,7 @@ namespace Z0
             else if(size<T>() == 2)
             {
                 var input = bw16(src);
-                var storage = MemBlocks.alloc(n16);
+                var storage = MemBlocks.block(n16);
                 var target = MemBlocks.span<bit>(ref storage);
                 BitPack.unpack(input, target);
                 return target;
@@ -40,7 +40,7 @@ namespace Z0
             else if(size<T>() == 4)
             {
                 var input = bw32(src);
-                var storage = MemBlocks.alloc(n32);
+                var storage = MemBlocks.block(n32);
                 var target = MemBlocks.span<bit>(ref storage);
                 BitPack.unpack(input, target);
                 return target;
@@ -48,7 +48,7 @@ namespace Z0
             else if(size<T>() == 8)
             {
                 var input = bw64(src);
-                var storage = MemBlocks.alloc(n64);
+                var storage = MemBlocks.block(n64);
                 var target = MemBlocks.span<bit>(ref storage);
                 BitPack.unpack(input, target);
                 return target;

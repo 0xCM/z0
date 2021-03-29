@@ -88,7 +88,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         FS.FileName TableFile<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
-                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Owner.Format(), host.Name), ext ?? DefaultTableExt);
+                => FS.file(string.Format("{0}.{1}.{2}", TableId<T>(), host.Part.Format(), host.Name), ext ?? DefaultTableExt);
 
         /// <summary>
         /// Creates a <see cref='FS.FileName'/> of the form {TableId}.{part}.{ext}
@@ -108,7 +108,7 @@ namespace Z0
         /// <typeparam name="T">The record type</typeparam>
         FS.FilePath Table<T>(ApiHostUri host, FS.FileExt? ext = null)
             where T : struct, IRecord<T>
-                => TableDir<T>(host.Owner) + TableFile<T>(host, ext);
+                => TableDir<T>(host.Part) + TableFile<T>(host, ext);
 
         /// <summary>
         /// Creates a <see cref='FS.FilePath'/> of the form {DbRoot}/tables/{TableId}/{TableId}.{part}.{ext}

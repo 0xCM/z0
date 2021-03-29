@@ -70,6 +70,10 @@ namespace Z0
             => new A(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator T(A src)
+            => src.Location;
+
+        [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)
             => new Address<W,T>(src.Location);
 

@@ -35,7 +35,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         static FS.FileName LegalFileNameRule(ApiHostUri host, FS.FileExt ext)
-            => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+            => FS.file(string.Concat(host.Part.Format(), Chars.Dot, host.Name), ext);
 
         [MethodImpl(Inline), Op]
         static FS.FileName SemanticFileNameRule(ApiHostUri host, FS.FileExt ext)
@@ -55,6 +55,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         static FS.FilePath SemanticPathRule(FS.FolderPath docroot,  ApiHostUri host)
-            => SemanticDirRule(docroot, host.Owner) + SemanticFileNameRule(host, SemanticExtRule());
+            => SemanticDirRule(docroot, host.Part) + SemanticFileNameRule(host, SemanticExtRule());
     }
 }

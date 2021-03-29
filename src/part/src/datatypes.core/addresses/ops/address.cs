@@ -12,6 +12,26 @@ namespace Z0
     public readonly partial struct Addresses
     {
         [MethodImpl(Inline), Op]
+        public static MemoryAddress memory(ulong src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Address8 address(byte src)
+            => new Address8(src);
+
+        [MethodImpl(Inline), Op]
+        public static Address16 address(ushort src)
+            => new Address16(src);
+
+        [MethodImpl(Inline), Op]
+        public static Address32 address(uint src)
+            => new Address32(src);
+
+        [MethodImpl(Inline), Op]
+        public static Address64 address(ulong src)
+            => new Address64(src);
+
+        [MethodImpl(Inline), Op]
         public static Address<W8,byte> address(W8 w, byte src)
             => new Address<W8,byte>(src);
 

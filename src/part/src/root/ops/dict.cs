@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
 
     using static Part;
 
@@ -19,18 +20,7 @@ namespace Z0
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
         public static Dictionary<K,V> dict<K,V>()
-            => new Dictionary<K,V>();
-
-        /// <summary>
-        /// Initializes an empty dictionary
-        /// </summary>
-        /// <param name="kRep">A key representative used only for type inference</param>
-        /// <param name="vRep">A value representative used only for type inference</param>
-        /// <typeparam name="K">The key type</typeparam>
-        /// <typeparam name="V">The vale type</typeparam>
-        [MethodImpl(Inline)]
-        public static Dictionary<K,V> dict<K,V>(K kRep, V vRep)
-            => new Dictionary<K,V>();
+            => new();
 
         /// <summary>
         /// Initializes an empty dictionary with a specified capacity
@@ -41,8 +31,8 @@ namespace Z0
         /// <typeparam name="K">The key type</typeparam>
         /// <typeparam name="V">The vale type</typeparam>
         [MethodImpl(Inline)]
-        public static Dictionary<K,V> dict<K,V>(int capacity, K kRep = default, V vRep = default)
-            => new Dictionary<K,V>(capacity);
+        public static Dictionary<K,V> dict<K,V>(Count capacity)
+            => new((int)capacity);
 
         /// <summary>
         /// Creates a dictionary, excluding any duplicates, and invokes a caller-supplied action for each encountered duplicate

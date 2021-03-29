@@ -40,10 +40,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Span<uint> unpack1x32x32(uint src)
         {
-            var buffer = MemBlocks.alloc(n32);
+            var buffer = MemBlocks.block(n32);
             ref var tmp = ref MemBlocks.first<byte>(ref buffer);
 
-            var storage = MemBlocks.alloc(n128);
+            var storage = MemBlocks.block(n128);
             ref var target = ref MemBlocks.first<uint>(ref storage);
 
             unpack1x8x32(src, ref tmp);

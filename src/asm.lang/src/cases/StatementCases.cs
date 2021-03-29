@@ -12,20 +12,19 @@ namespace Z0.Asm
 
     partial class AsmCases
     {
-
-        public partial class Statements
+        [ApiHost("cases.statements")]
+        public partial struct Statements
         {
             AsmStatementBuilder Builder;
 
             public static Statements create()
-                => new Statements();
+                => new Statements(new AsmStatementBuilder());
 
-            Statements()
+            [MethodImpl(Inline)]
+            Statements(AsmStatementBuilder builder)
             {
-                Builder = new AsmStatementBuilder();
+                Builder = builder;
             }
-
         }
-
     }
 }

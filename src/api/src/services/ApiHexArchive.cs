@@ -39,14 +39,14 @@ namespace Z0
             => Root.Files(owner, Ext, true);
 
         public FS.FilePath HostFile(ApiHostUri host)
-            => Root + FS.file(host.Owner, host.Name, Ext);
+            => Root + FS.file(host.Part, host.Name, Ext);
 
         public Deferred<FS.FilePath> Enumerate()
             => Root.EnumerateFiles(Ext, true);
 
         public Index<ApiCodeBlock> Read(ApiHostUri host)
         {
-            var file = FS.file(host.Owner, host.Name, Ext);
+            var file = FS.file(host.Part, host.Name, Ext);
             var path = Paths().Where(f => f.FileName.Name == file.Name).FirstOrDefault(FS.FilePath.Empty);
             if(path.IsEmpty)
             {

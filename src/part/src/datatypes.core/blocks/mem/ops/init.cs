@@ -14,10 +14,10 @@ namespace Z0
     partial class MemBlocks
     {
         [MethodImpl(Inline), Op]
-        public static MemBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
+        public static Block32 init(Vector256<ushort> lo, Vector256<ushort> hi)
         {
             var src = new Seg512(lo,hi);
-            var dst = alloc(n32);
+            var dst = block(n32);
             copy(bytes(src), ref dst);
             return dst;
         }
@@ -37,10 +37,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemBlock4 init<T>(in T src, W32 w)
+        public static Block4 init<T>(in T src, W32 w)
             where T : unmanaged
         {
-            ref var dst8 = ref alloc(out MemBlock4 dst);
+            ref var dst8 = ref block(out Block4 dst);
             if(typeof(T) == typeof(byte))
             {
                 ref var x = ref dst8;
@@ -78,29 +78,29 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemBlock8 init<T>(in T src, W64 w)
+        public static Block8 init<T>(in T src, W64 w)
             where T : unmanaged
         {
             var x = vbroadcast(w128, uint8(src));
-            vstore(x, ref alloc(out MemBlock16 dst));
-            return @as<MemBlock16,MemBlock8>(dst);
+            vstore(x, ref block(out Block16 dst));
+            return @as<Block16,Block8>(dst);
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemBlock16 init<T>(in T src, W128 w)
+        public static Block16 init<T>(in T src, W128 w)
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref alloc(out MemBlock16 dst));
+            vstore(x, ref block(out Block16 dst));
             return dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static MemBlock32 init<T>(in T src, W256 w)
+        public static Block32 init<T>(in T src, W256 w)
             where T : unmanaged
         {
             var x = vbroadcast(w, uint8(src));
-            vstore(x, ref alloc(out MemBlock32 dst));
+            vstore(x, ref block(out Block32 dst));
             return dst;
         }
     }

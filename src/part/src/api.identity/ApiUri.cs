@@ -50,8 +50,8 @@ namespace Z0
         [Op]
         internal static string BuildUriText(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
             => (opid.IsEmpty
-                ? QueryText(scheme, host.Owner, host.Name, group)
-                : FullUriText(scheme, host.Owner, host.Name, group, opid)).Trim();
+                ? QueryText(scheme, host.Part, host.Name, group)
+                : FullUriText(scheme, host.Part, host.Name, group, opid)).Trim();
 
         [MethodImpl(Inline), Op]
         public static OpUri define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
@@ -169,7 +169,7 @@ namespace Z0
 
         [Op]
         public static string GroupUriText(ApiUriScheme scheme, ApiHostUri host, string group)
-            => QueryText(scheme, host.Owner, host.Name, group);
+            => QueryText(scheme, host.Part, host.Name, group);
 
         /// <summary>
         /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly and host is the name of the type

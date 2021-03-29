@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
-        public PartId Owner {get;}
+        public PartId Part {get;}
 
         public string Name {get;}
 
@@ -20,15 +20,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiHostUri(PartId owner, string name)
         {
-            Owner = owner;
+            Part = owner;
             Name = root.require(name != null, name, () => "Null names are bad");
-            UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
+            UriText = owner != 0 ? text.format("{0}{1}{2}", Part.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
         }
+
+        public Name Id
+            =>  IsEmpty ? "__empty__" : string.Format("{0}.{1}", Part.Format(), Name);
 
         [MethodImpl(Inline)]
         ApiHostUri(string name)
         {
-            Owner = PartId.None;
+            Part = PartId.None;
             Name = EmptyString;
             UriText = EmptyString;
         }

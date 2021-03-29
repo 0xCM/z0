@@ -42,7 +42,7 @@ namespace Z0
         /// The defining part
         /// </summary>
         public PartId Part
-            => Host.Owner;
+            => Host.Part;
 
         [MethodImpl(Inline)]
         public OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)

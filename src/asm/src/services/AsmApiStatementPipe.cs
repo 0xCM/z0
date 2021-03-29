@@ -154,8 +154,8 @@ namespace Z0.Asm
         }
 
         FS.FilePath TargetPath(ApiHostUri host, FS.FileExt ext)
-            => Db.TableDir<AsmApiStatement>() + FS.folder(host.Owner.Format())
-                + FS.file(string.Format("{0}.{1}", host.Owner.Format(), host.Name), ext);
+            => Db.TableDir<AsmApiStatement>() + FS.folder(host.Part.Format())
+                + FS.file(string.Format("{0}.{1}", host.Part.Format(), host.Name), ext);
 
 
         const string AsmBlockSeparator = "; ------------------------------------------------------------------------------------------------------------------------";

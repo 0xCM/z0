@@ -29,7 +29,7 @@ namespace Z0.Asm
                     dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
                 else
                 {
-                    var hosts = src.Hosts.Where(h => h.Owner == part).View;
+                    var hosts = src.Hosts.Where(h => h.Part == part).View;
                     var hostCount = hosts.Length;
 
                     var decoding = Wf.Running(Msg.DecodingPartRoutines.Format(hostCount, part));

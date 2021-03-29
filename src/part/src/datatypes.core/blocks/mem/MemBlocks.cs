@@ -55,6 +55,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe Vector256<byte> vbroadcast(W256 w, byte src)
             => BroadcastScalarToVector256(&src);
-
     }
 }

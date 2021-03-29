@@ -48,9 +48,8 @@ namespace Z0
             return false;
         }
 
-
         [Op]
-        public static Outcome parse(string src, out byte[] dst)
+        public static bool parse(string src, out byte[] dst)
         {
             try
             {
@@ -83,7 +82,7 @@ namespace Z0
             }
         }
 
-        public int Parse(string src, Span<byte> dst)
+        public static int parse(string src, Span<byte> dst)
         {
             const char Null = (char)0;
             try
@@ -104,7 +103,7 @@ namespace Z0
                     {
                         if(c0 != Null || c1 != Null)
                         {
-                            if(Parse(c0, c1, out seek(dst,j)))
+                            if(parse(c0, c1, out seek(dst,j)))
                                 j++;
                             c0 = Null;
                             c1 = Null;
@@ -119,7 +118,7 @@ namespace Z0
                             c1 = c;
                         else
                         {
-                            if(Parse(c0, c1, out seek(dst,j)))
+                            if(parse(c0, c1, out seek(dst,j)))
                                 j++;
                             c0 = Null;
                             c1 = Null;
@@ -136,7 +135,7 @@ namespace Z0
         }
 
         [Op]
-        public bool Parse(char c0, char c1, out byte dst)
+        public static bool parse(char c0, char c1, out byte dst)
         {
             if(parse(c0, out var d0) && parse(c1, out var d1))
             {
@@ -146,7 +145,6 @@ namespace Z0
             dst = 0;
             return false;
         }
-
 
         /// <summary>
         /// Parses a single hex digit
@@ -179,15 +177,6 @@ namespace Z0
                 return unparsed<byte[]>(src,e);
             }
         }
-
-        public byte Succeed(char c)
-            => Parse(c).ValueOrDefault();
-
-        public byte[] Succeed(string text)
-            => ParseData(text).ValueOrDefault(Array.Empty<byte>());
-
-        public byte[] ParseData(string text, byte[] @default)
-            => ParseData(text).ValueOrDefault(@default);
 
         /// <summary>
         /// Parses a hex byte

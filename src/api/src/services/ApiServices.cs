@@ -258,7 +258,7 @@ namespace Z0
                 record.MemberRebase = (uint)(member.BaseAddress - rebase);
                 record.MaxSize = seq < count - 1 ? (ulong)(skip(members, seq + 1).BaseAddress - record.MemberBase) : 0ul;
                 record.HostName = member.Host.Name;
-                record.PartName = member.Host.Owner.Format();
+                record.PartName = member.Host.Part.Format();
                 record.OpUri = member.OpUri.UriText;
             }
             return buffer;

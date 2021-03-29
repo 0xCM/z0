@@ -123,5 +123,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator H(Hex5Seq src)
             => new H((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator H(Address8 src)
+            => new H((byte)src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Address8(H src)
+            => new Address8(src);
     }
 }

@@ -23,19 +23,19 @@ namespace Z0.Asm
                 => new imm<T>(src);
 
         [MethodImpl(Inline), Op]
-        public imm8 imm8(Cell8 value)
+        public static imm8 imm8(Cell8 value)
             => new imm8(value);
 
         [MethodImpl(Inline), Op]
-        public imm16 imm16(Cell16 value)
+        public static imm16 imm16(Cell16 value)
             => new imm16(value);
 
         [MethodImpl(Inline), Op]
-        public imm32 imm32(Cell32 value)
+        public static imm32 imm32(Cell32 value)
             => new imm32(value);
 
         [MethodImpl(Inline), Op]
-        public imm64 imm64(Cell64 value)
+        public static imm64 imm64(Cell64 value)
             => new imm64(value);
     }
 }

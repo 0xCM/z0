@@ -15,13 +15,6 @@ namespace Z0.Asm
 
     public sealed class AsmThumbprints : WfService<AsmThumbprints>
     {
-        AsmApiStatements Statements;
-
-        protected override void OnInit()
-        {
-            Statements = Wf.AsmStatements();
-        }
-
         const string Implication = " => ";
 
         static Fence<char> SigFence => (LParen, RParen);
@@ -60,7 +53,7 @@ namespace Z0.Asm
                 distinct.Add(src.Summary());
             }
 
-            Statements.Load(receiver);
+            Wf.AsmStatements().Traverse(receiver);
             EmitThumbprints(distinct);
         }
 

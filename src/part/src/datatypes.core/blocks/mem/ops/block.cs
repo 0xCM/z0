@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The storage width</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock1 alloc(N1 n)
+        public static Block1 block(N1 n)
             => default;
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock2 alloc(N2 n)
+        public static Block2 block(N2 n)
             => default;
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock3 alloc(N3 n)
+        public static Block3 block(N3 n)
             => default;
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock4 alloc(N4 n)
+        public static Block4 block(N4 n)
             => default;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock5 alloc(N5 n)
+        public static Block5 block(N5 n)
             => default;
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock6 alloc(N6 n)
+        public static Block6 block(N6 n)
             => default;
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock7 alloc(N7 n)
+        public static Block7 block(N7 n)
             => default;
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock8 alloc(N8 n)
+        public static Block8 block(N8 n)
             => default;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock9 alloc(N9 n)
+        public static Block9 block(N9 n)
             => default;
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock10 alloc(N10 n)
+        public static Block10 block(N10 n)
             => default;
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock11 alloc(N11 n)
+        public static Block11 block(N11 n)
             => default;
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock12 alloc(N12 n)
+        public static Block12 block(N12 n)
             => default;
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock13 alloc(N13 n)
+        public static Block13 block(N13 n)
             => default;
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock14 alloc(N14 n)
+        public static Block14 block(N14 n)
             => default;
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock15 alloc(N15 n)
+        public static Block15 block(N15 n)
             => default;
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock16 alloc(N16 n)
+        public static Block16 block(N16 n)
             => default;
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock32 alloc(N32 n)
+        public static Block32 block(N32 n)
             => default;
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock64 alloc(N64 n)
+        public static Block64 block(N64 n)
             => default;
 
         /// <summary>
@@ -161,82 +161,82 @@ namespace Z0
         /// </summary>
         /// <param name="n">The size selector</param>
         [MethodImpl(Inline), Op]
-        public static MemBlock128 alloc(N128 n)
+        public static Block128 block(N128 n)
             => default;
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock1 dst)
+        public static ref byte block(out Block1 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock2 dst)
+        public static ref byte block(out Block2 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock4 dst)
+        public static ref byte block(out Block4 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock8 dst)
+        public static ref byte block(out Block8 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock16 dst)
+        public static ref byte block(out Block16 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock32 dst)
+        public static ref byte block(out Block32 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock64 dst)
+        public static ref byte block(out Block64 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         [MethodImpl(Inline), Op]
-        public static ref byte alloc(out MemBlock128 dst)
+        public static ref byte block(out Block128 dst)
         {
             dst = default;
             return ref u8(dst);
         }
 
         /// <summary>
-        /// Allocates 2 128-byte blocks
+        /// Allocates 2 16-byte blocks
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out MemBlock16 a, out MemBlock16 b)
+        public static void blocks(out Block16 a, out Block16 b)
         {
             a = default;
             b = default;
         }
 
         /// <summary>
-        /// Allocates 3 128-byte blocks
+        /// Allocates 3 64-byte blocks
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out MemBlock64 a, out MemBlock64 b, out MemBlock64 c)
+        public static void blocks(out Block64 a, out Block64 b, out Block64 c)
         {
             a = default;
             b = default;
@@ -248,7 +248,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The byte-count selector</param>
         [MethodImpl(Inline), Op]
-        public static void alloc(out MemBlock128 a, out MemBlock128 b, out MemBlock128 c, out MemBlock128 d)
+        public static void blocks(out Block128 a, out Block128 b, out Block128 c, out Block128 d)
         {
             a = default;
             b = default;

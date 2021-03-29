@@ -87,7 +87,7 @@ namespace Z0
         /// <param name="id">Identity of the operation under test</param>
         [Op]
         public static string from(ApiHostUri host, OpIdentity id)
-            => $"{host.Owner.Format()}{UriPathSep}{host.Name}{UriPathSep}{id}";
+            => $"{host.Part.Format()}{UriPathSep}{host.Name}{UriPathSep}{id}";
 
         /// <summary>
         /// Produces the name of the test case predicated on fully-specified name, excluding the host name

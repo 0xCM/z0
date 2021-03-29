@@ -13,8 +13,7 @@ namespace Z0.Asm
 
     partial class AsmCases
     {
-
-        partial class Statements
+        partial struct Statements
         {
             /// <summary>
             /// | 0F B6 / r | MOVZX r16, r8 | Move byte to word with zero-extension.

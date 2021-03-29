@@ -1,4 +1,0 @@
-| Opcode   | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                    |
-| 77 cb    | JA rel8     | D     | Valid       | Valid           | Jump short if above (CF=0 and ZF=0).                                           |
-| 0F 87 cw | JA rel16    | D     | N.S.        | Valid           | Jump near if above (CF=0 and ZF=0). Not supported in 64-bit mode.              |
-| 0F 87 cd | JA rel32    | D     | Valid       | Valid           | Jump near if above (CF=0 and ZF=0).                                            |

@@ -4,206 +4,362 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
+    using static Part;
 
     partial class MemBlocks
     {
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock1
+        public struct Block1
         {
             byte A;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock2
+        public struct Block2
         {
-            MemBlock1 A;
+            Block1 A;
 
-            MemBlock1 B;
+            Block1 B;
         }
 
         /// <summary>
         /// 3 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock3
+        public struct Block3
         {
-            MemBlock2 A;
+            Block2 A;
 
-            MemBlock1 B;
+            Block1 B;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock4
+        public struct Block4
         {
-            MemBlock2 A;
+            Block2 A;
 
-            MemBlock2 B;
+            Block2 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// 5 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock5
+        public struct Block5
         {
-            MemBlock4 A;
+            Block4 A;
 
-            MemBlock1 B;
+            Block1 B;
         }
 
         /// <summary>
         /// 6 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock6
+        public struct Block6
         {
-            MemBlock5 A;
+            Block5 A;
 
-            MemBlock1 B;
+            Block1 B;
         }
 
         /// <summary>
         /// 7 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock7
+        public struct Block7
         {
-            public MemBlock6 A;
+            Block6 A;
 
-            public MemBlock1 B;
+            Block1 B;
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock8
+        public struct Block8
         {
-            MemBlock4 A;
+            Block4 A;
 
-            MemBlock4 B;
+            Block4 B;
         }
 
         /// <summary>
         /// 9 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock9
+        public struct Block9
         {
-            MemBlock8 A;
+            Block8 A;
 
-            MemBlock1 B;
+            Block1 B;
         }
 
         /// <summary>
         /// 10 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock10
+        public struct Block10
         {
-            MemBlock9 A;
+            Block9 A;
 
-            MemBlock1 B;
+            Block1 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// 11 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock11
+        public struct Block11
         {
-            MemBlock10 A;
+            Block10 A;
 
-            MemBlock1 B;
+            Block1 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// 12 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock12
+        public struct Block12
         {
-            MemBlock8 A;
+            Block8 A;
 
-            MemBlock4 B;
+            Block4 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// 13 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock13
+        public struct Block13
         {
-            MemBlock12 A;
+            Block12 A;
 
-            MemBlock1 B;
+            Block1 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// 14 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock14
+        public struct Block14
         {
-            MemBlock7 A;
+            Block7 A;
 
-            MemBlock7 B;
+            Block7 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
+
         }
-
 
         /// <summary>
         /// 15 bytes of storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock15
+        public struct Block15
         {
-            public MemBlock10 A;
+            public Block10 A;
 
-            public MemBlock5 B;
+            public Block5 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
+
         }
-
 
         /// <summary>
         /// Defines 16 bytes = 512 bits of stack-allocated storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock16
+        public struct Block16
         {
             public ulong X0;
 
             public ulong X1;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// Covers 32 bytes = 256 bits of stack-allocated storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock32
+        public struct Block32
         {
-            MemBlock16 A;
+            Block16 A;
 
-            MemBlock16 B;
+            Block16 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// Covers 64 bytes = 512 bits of stack-allocated storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock64
+        public struct Block64
         {
-            MemBlock32 A;
+            Block32 A;
 
-            MemBlock32 B;
+            Block32 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
         }
 
         /// <summary>
         /// Covers 128 bytes = 1024 bits of stack-allocated storage
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct MemBlock128
+        public struct Block128
         {
-            internal MemBlock64 A;
+            internal Block64 A;
 
-            internal MemBlock64 B;
+            internal Block64 B;
+
+            public Span<byte> Bytes
+            {
+                [MethodImpl(Inline)]
+                get => span<byte>(ref this);
+            }
+        }
+
+        public struct Block01<T>
+            where T : unmanaged
+        {
+            T Data;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block02<T>
+            where T : unmanaged
+        {
+            Block01<T> A;
+
+            Block01<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block03<T>
+            where T : unmanaged
+        {
+            Block01<T> A;
+
+            Block02<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block04<T>
+            where T : unmanaged
+        {
+            Block02<T> A;
+
+            Block02<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block05<T>
+            where T : unmanaged
+        {
+            Block04<T> A;
+
+            Block01<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block06<T>
+            where T : unmanaged
+        {
+            Block03<T> A;
+
+            Block03<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block07<T>
+            where T : unmanaged
+        {
+            Block06<T> A;
+
+            Block01<T> B;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block08<T>
+            where T : unmanaged
+        {
+            Block04<T> Cell0;
+
+            Block04<T> Cell1;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block12<T>
+            where T : unmanaged
+        {
+            Block06<T> Cell0;
+
+            Block06<T> Cell1;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct Block16<T>
+            where T : unmanaged
+        {
+            Block08<T> Cell0;
+
+            Block08<T> Cell1;
         }
     }
 }

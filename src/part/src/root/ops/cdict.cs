@@ -6,18 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Collections.Concurrent;
 
     using static Part;
-    using static memory;
 
-    partial class MemBlocks
+    partial struct root
     {
         /// <summary>
-        /// Presents the leading source storage cell as reference to an unsigned 32-bit integer
+        /// Initializes an empty concurrent dictionary
         /// </summary>
-        /// <param name="src">The storage source</param>
-        [MethodImpl(Inline), Op]
-        public static ref uint first32(in Block4 src)
-            => ref u32(src);
+        /// <typeparam name="K">The key type</typeparam>
+        /// <typeparam name="V">The vale type</typeparam>
+        public static ConcurrentDictionary<K,V> cdict<K,V>()
+            => new();
     }
 }

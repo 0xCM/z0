@@ -23,9 +23,11 @@ namespace Z0.Asm
                 AsmSyntax.sig(skip(cells, i++), out dst.Sig);
                 dst.OpCode = asm.opcode(skip(cells, i++));
                 dst.Encoded = AsmBytes.hexcode(skip(cells, i++));
-                Tables.parse(skip(cells, i), out dst.BaseAddress);
-                Tables.parse(skip(cells, i), out dst.IP);
-                Tables.parse(skip(cells, i), out dst.OpUri);
+                Tables.parse(skip(cells, i++), out dst.BaseAddress);
+                Tables.parse(skip(cells, i++), out dst.IP);
+                if(!Tables.parse(skip(cells, i++), out dst.OpUri))
+                    return (false, $"Failed to parse uri text <{skip(cells,i)}>");
+
                 return true;
             }
             else
@@ -40,7 +42,7 @@ namespace Z0.Asm
         FS.FolderPath StatementRoot
             => Db.TableDir<AsmApiStatement>();
 
-        public void Load(Action<AsmApiStatement> receiver)
+        public void Traverse(Action<AsmApiStatement> receiver)
         {
             var files = StatementRoot.EnumerateFiles(FS.Extensions.Csv, true).Array();
             foreach(var file in files)

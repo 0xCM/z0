@@ -15,10 +15,6 @@ namespace Z0
         public T Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Count<T>(T value)
-            => new Count<T>(value);
-
-        [MethodImpl(Inline)]
         public Count(T value)
             => Value = value;
 
@@ -28,5 +24,9 @@ namespace Z0
 
         T ICounted<T>.Count
             => Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Count<T>(T value)
+            => new Count<T>(value);
     }
 }
