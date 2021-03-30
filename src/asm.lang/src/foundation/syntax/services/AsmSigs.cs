@@ -19,13 +19,22 @@ namespace Z0.Asm
 
     unsafe struct AsmSigSymbolCache
     {
-        public MemoryAddress MnemonicsAddress;
+        const char DigitQualifier = FSlash;
 
-        public SymbolTable<AsmMnemonicCode> Mnemonics
+
+
+        public static AsmSigSymbolCache create()
         {
-            [MethodImpl(Inline)]
-            get => @as<SymbolTable<AsmMnemonicCode>>(MnemonicsAddress.Pointer());
+            var dst = new AsmSigSymbolCache();
+            dst.SigOpSymbols = SymbolStores.table<AsmSigToken>();
+            dst.Composites = SymbolStores.table<CompositeSigToken>();
+            dst.Mnemonics = SymbolStores.table<AsmMnemonicCode>();
+            dst.RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
+            dst.RegDigitRule = Rules.adjacent(DigitQualifier, oneof(dst.RegDigits));
+            return dst;
         }
+
+        public SymbolTable<AsmMnemonicCode> Mnemonics;
 
         public SymbolTable<AsmSigToken> SigOpSymbols;
 
@@ -34,45 +43,6 @@ namespace Z0.Asm
         public Index<char> RegDigits;
 
         public Adjacent<char, OneOf<char>> RegDigitRule;
-
-    }
-
-    readonly struct AsmSigSymbolStorage
-    {
-        const char DigitQualifier = FSlash;
-
-        [FixedAddressValueType]
-        static readonly SymbolTable<AsmSigToken> SigOpSymbols;
-
-        [FixedAddressValueType]
-        static readonly SymbolTable<CompositeSigToken> Composites;
-
-        [FixedAddressValueType]
-        static readonly SymbolTable<AsmMnemonicCode> Mnemonics;
-
-        [FixedAddressValueType]
-        static readonly Index<char> RegDigits;
-
-        [FixedAddressValueType]
-        static Adjacent<char, OneOf<char>> RegDigitRule;
-
-        public static void access(out AsmSigSymbolCache dst)
-        {
-            dst.MnemonicsAddress = address(Mnemonics);
-            dst.SigOpSymbols = SigOpSymbols;
-            dst.Composites = Composites;
-            dst.RegDigits = RegDigits;
-            dst.RegDigitRule = RegDigitRule;
-        }
-
-        static AsmSigSymbolStorage()
-        {
-            SigOpSymbols = SymbolStores.table<AsmSigToken>();
-            Composites = SymbolStores.table<CompositeSigToken>();
-            Mnemonics = SymbolStores.table<AsmMnemonicCode>();
-            RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
-            RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
-        }
     }
 
     [ApiHost]
@@ -88,9 +58,21 @@ namespace Z0.Asm
 
         readonly AsmSigSymbolCache Cache;
 
+        readonly Symbols<AsmMnemonicCode> MnemonicSyms;
+
+        [FixedAddressValueType]
+        static readonly Symbols<AsmMnemonicCode> _Mnemonics;
+
+        static AsmSigs()
+        {
+            _Mnemonics = Symbols.index<AsmMnemonicCode>();
+
+        }
+
         public AsmSigs()
         {
-            AsmSigSymbolStorage.access(out Cache);
+            Cache = AsmSigSymbolCache.create();
+            MnemonicSyms = _Mnemonics;
         }
 
         void DefineSubstitutions()
@@ -107,14 +89,23 @@ namespace Z0.Asm
             => Cache.SigOpSymbols;
 
         [MethodImpl(Inline), Op]
-        public SymbolTable<AsmMnemonicCode> Mnemonics()
-            => Cache.Mnemonics;
+        public Symbols<AsmMnemonicCode> Mnemonics()
+            => MnemonicSyms;
 
         void ShowSymbols<T>(SymbolTable<T> src, ShowLog dst)
             where T : unmanaged
         {
             var count = src.TokenCount;
             var symbols = src.Symbols;
+            for(var i=0; i<count; i++)
+                dst.Show(skip(symbols,i).Format());
+        }
+
+        void ShowSymbols<T>(Symbols<T> src, ShowLog dst)
+            where T : unmanaged
+        {
+            var count = src.Count;
+            var symbols = src.View;
             for(var i=0; i<count; i++)
                 dst.Show(skip(symbols,i).Format());
         }

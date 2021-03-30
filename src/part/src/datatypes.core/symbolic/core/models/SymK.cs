@@ -48,5 +48,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static Sym<K> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Sym<K>(default, EmptyString, default, SymExpr.Empty);
+        }
     }
 }

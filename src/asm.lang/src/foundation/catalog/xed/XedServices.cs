@@ -108,12 +108,12 @@ namespace Z0.Asm
             }
         }
 
-        public ReadOnlySpan<Sym<IClass>> EmitClasses()
+        public Symbols<IClass> EmitClasses()
         {
-            var src = ClrEnums.@enum<IClass>();
+            var symbols = SymCache<IClass>.get().Entries;
+            var entries = symbols.View;
             var dst = Db.AsmCatalogFile(FS.file("xed-classes", FS.Csv));
-            var symbols = src.SymbolIndex;
-            EmitSymbols(symbols.View, dst);
+            EmitSymbols(entries, dst);
             return symbols;
         }
 

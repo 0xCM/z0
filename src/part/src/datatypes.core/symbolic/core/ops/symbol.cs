@@ -26,8 +26,7 @@ namespace Z0
         public static Sym8<E> symbol<E>(W8 w, uint index)
             where E : unmanaged, Enum
         {
-            var e = Clr.@enum<E>();
-            var entry = e.SymbolIndex[index];
+            ref readonly var entry = ref SymCache<E>.get().Entries[index];
             return symbol(w, (byte)entry.Key, entry.Name, entry.Value, entry.Expression);
         }
 
@@ -35,8 +34,7 @@ namespace Z0
         public static Sym16<E> symbol<E>(W16 w, uint index)
             where E : unmanaged, Enum
         {
-            var e = Clr.@enum<E>();
-            var entry = e.SymbolIndex[index];
+            ref readonly var entry = ref SymCache<E>.get().Entries[index];
             return symbol(w, (byte)entry.Key, entry.Name, entry.Value, entry.Expression);
         }
     }
