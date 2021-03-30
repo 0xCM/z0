@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XTend
     {
        /// <summary>
         /// Projects a range of elements from a source span to a target span

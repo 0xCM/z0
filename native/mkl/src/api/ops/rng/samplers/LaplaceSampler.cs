@@ -6,9 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
-    using static z;
-    using static Spans;
+    using static Part;
+    using static memory;
 
     sealed class LaplaceSampler<T> : Sampler<T, LaplaceSpec<T>>
         where T : unmanaged
@@ -28,9 +27,9 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.laplace(Source, float32(DistSpec.Location), float32(DistSpec.Scale),  s32f(buffer));
+                sample.laplace(Source, float32(DistSpec.Location), float32(DistSpec.Scale), float32(buffer));
             else if (typeof(T) == typeof(double))
-                sample.laplace(Source, float64(DistSpec.Location), float64(DistSpec.Scale), s64f(buffer));
+                sample.laplace(Source, float64(DistSpec.Location), float64(DistSpec.Scale), float64(buffer));
             else
                 throw Unsupported.define<T>();
             return buffer.Length;

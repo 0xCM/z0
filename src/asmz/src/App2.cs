@@ -215,34 +215,40 @@ namespace Z0.Asm
 
         void CheckSigParser()
         {
-            var success = root.hashset<string>();
-            var fail = root.hashset<string>();
+            // var success = root.hashset<AsmSig>();
+            // var fail = root.hashset<AsmSigExpr>();
+
+            var wincounter = 0u;
+            var failcounter = 0u;
+            var failpath = Db.AppLog("sig-parse-failures");
+            var winpath = Db.AppLog("sig-parse-successes");
+            using var fails = failpath.Writer();
+            using var wins = winpath.Writer();
 
             void parse(AsmApiStatement src)
             {
-                var expr = src.Sig;
-                var operands = src.Sig.Operands;
-                var exprText = expr.Format();
-                if(exprText.Contains(Chars.FSlash))
+                var input = src.Sig;
+                var result = Sigs.ParseSig(input, out var output);
+                if(!result)
                 {
-                    var parts = exprText.SplitClean(Chars.FSlash);
-                    var count = parts.Length;
-                    if(count != 2)
-                    {
-                        Wf.Warn($"Unexpected composite {exprText}");
-                    }
-                    else
-                    {
-                        var opformat = $"{parts[0]}/{parts[1]}";
-                        if(success.Add(opformat))
-                        {
-                            Wf.Status($"Parse succeeded for {exprText} with composite operands {opformat}");
-                        }
-                    }
+                    failcounter++;
+                    fails.WriteLine(string.Format("{0,-46} | {1}", input, result.Message));
                 }
+                else
+                {
+                    wincounter++;
+                    wins.WriteLine(input);
+                }
+
             }
 
             Wf.AsmTraverser().Traverse(parse);
+
+            if(failcounter != 0)
+                Wf.Error(string.Format($"{failcounter} parse failures:{failpath.ToUri()}"));
+            if(wincounter != 0)
+                Wf.Status(string.Format($"{wincounter} parse successes:{winpath.ToUri()}"));
+
         }
 
         void CheckIndexDecoder()
@@ -570,7 +576,6 @@ namespace Z0.Asm
             MemoryAddress Encoded =  0x7ffc52e94420;
             MemoryAddress nextIp = asm.nextip(FunctionBase,  InstructionOffset, InstructionSize);
             MemoryAddress target = nextIp + Displacement;
-
         }
 
         void CheckRel32()
@@ -656,17 +661,6 @@ namespace Z0.Asm
         {
             Wf.Row(src.Data);
         }
-
-        public void PipeImageData()
-        {
-            var emitter = Wf.ImageDataEmitter();
-            root.iter(Wf.Api.PartComponents, c => emitter.EmitImageContent(c));
-
-            // var archive = ImageArchives.tables(Wf);
-            // var path = archive.Root + FS.file("image.content.genapp", FS.Extensions.Csv);
-            // ImageArchives.pipe(Wf, path, Receive);
-        }
-
 
         void ShowLetters()
         {
@@ -797,20 +791,6 @@ namespace Z0.Asm
 
         }
 
-        // void DumpApiMetadata()
-        // {
-        //     var components = Wf.Api.PartComponents.View;
-        //     var count = components.Length;
-        //     var tables = Wf.CliTables();
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         var component = skip(components,i);
-        //         var source = FS.path(component.Location);
-        //         var name = source.FileName.WithoutExtension;
-        //         var target = Db.TableDir("api.metadata") + name + FS.Extensions.Txt;
-        //         tables.DumpMetadata(source,target);
-        //     }
-        // }
 
         void EmitCilBlocks()
         {
@@ -957,9 +937,10 @@ namespace Z0.Asm
 
         public void EmitXedCatalog()
         {
-            var pipe = Wf.Xed();
-            pipe.EmitCatalogEntries();
-
+            var xed = Wf.Xed();
+            xed.EmitForms();
+            xed.EmitClasses();
+            xed.EmitSumbolSummary();
         }
 
         public void EmitBitstrings()
@@ -968,15 +949,21 @@ namespace Z0.Asm
             pipe.EmitBitstrings();
         }
 
-        public void Run()
+        void CheckCpuid()
         {
-            CaptureSelectedRoutines();
-
             var cpuid = CpuId.request(0u,0u);
-            //00000015 EBX:756E6547 ECX:6C65746E EDX:49656E69
             var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
             CpuId.response(result, ref cpuid);
             Wf.Row(cpuid.Format());
+
+        }
+
+        public void Run()
+        {
+            CaptureSelectedRoutines();
+            ShowSigSymbols();
+
+            //00000015 EBX:756E6547 ECX:6C65746E EDX:49656E69
             //EmitBitstrings();
 
             //var tool = Tools.nasm(Wf);

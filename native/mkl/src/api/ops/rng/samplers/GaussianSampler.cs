@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     sealed class GaussianSampler<T> : Sampler<T, GaussianSpec<T>>
         where T : unmanaged
@@ -27,11 +27,11 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), Spans.s32f(buffer));
+                sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), float32(buffer));
             else if(typeof(T) == typeof(double))
-                sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), Spans.s64f(buffer));
+                sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), float64(buffer));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
             return buffer.Length;
 

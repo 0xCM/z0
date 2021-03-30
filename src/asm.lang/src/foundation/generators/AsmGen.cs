@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     [ApiHost]
-    public sealed partial class AsmGen : WfService<AsmGen,AsmGen>
+    public sealed partial class AsmGen : WfService<AsmGen>
     {
         [Op]
         public void GenerateModels(Index<AsmMnemonic> src)

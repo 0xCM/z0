@@ -1,0 +1,2 @@
+| Opcode | Instruction | Op/En | 64-Bit Mode | Compat/Leg Mode | Description                                                                                                                                                           |
+| 0F A2  | CPUID       | ZO    | Valid       | Valid           | Returns processor identification and feature information to the EAX, EBX, ECX, and EDX registers, as determined by input entered in EAX (in some cases, ECX as well). |

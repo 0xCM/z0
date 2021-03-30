@@ -7,8 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     sealed class ExponentialSampler<T> : Sampler<T, ExponentialSpec<T>>
         where T : unmanaged
@@ -28,11 +28,11 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(float))
-                sample.exp(Source, float32(DistSpec.a), float32(DistSpec.b), Spans.s32f(buffer));
+                sample.exp(Source, float32(DistSpec.a), float32(DistSpec.b), float32(buffer));
             else if(typeof(T) == typeof(double))
-                sample.exp(Source, float64(DistSpec.a), float64(DistSpec.b), Spans.s64f(buffer));
+                sample.exp(Source, float64(DistSpec.a), float64(DistSpec.b), float64(buffer));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
             return buffer.Length;
         }

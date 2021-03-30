@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XSpan
+    partial class XTend
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void Iter<T>(this Span<T> src, Action<T> f)

@@ -45,6 +45,5 @@ namespace Z0
             var points = (int)(rows*cols);
             return (points >> 3) + (points % 8 != 0 ? 1 : 0);
         }
-
     }
 }

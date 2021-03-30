@@ -4,19 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [WfService]
-    public abstract class WfService<H,K> : WfService<H>, IWfService<H,K>
-        where H : WfService<H,K>, new()
+    using System.Runtime.CompilerServices;
+
+    public abstract class WfService<H,S> : WfService<H>
+        where H : WfService<H,S>, new()
+        where S : struct
     {
         protected WfService()
         {
 
         }
 
-        protected WfService(IWfShell wf)
-            : base(wf)
-        {
-
-        }
+        [FixedAddressValueType]
+        protected static S State;
     }
 }

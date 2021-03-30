@@ -9,9 +9,8 @@ namespace Z0
 
     using static Part;
     using static memory;
-    using static Spans;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Reads a partial value if there aren't a sufficient number of bytes to comprise a target value
@@ -22,21 +21,6 @@ namespace Z0
         public static T Take<T>(this Span<byte> src)
             where T : struct
                 => partial<T>(src);
-
-        /// <summary>
-        /// Copies at most n bytes from the source span to the target span where n is the length of the target span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="dst">The target span</param>
-        [MethodImpl(Inline), Op]
-        public static Span<byte> TakeBytes(this ReadOnlySpan<byte> src, Span<byte> dst)
-        {
-            if(src.Length > dst.Length)
-                src.Slice(0,dst.Length).CopyTo(dst);
-            else
-                src.CopyTo(dst);
-            return dst;
-        }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte TakeUInt8<T>(this ReadOnlySpan<T> src)

@@ -6,24 +6,19 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Part;
     using static Chars;
-    using static memory;
     using static Rules;
     using static TextRules;
     using static TextRules.Parse;
 
-    public sealed class AsmSyntax : WfService<AsmSyntax>
+    [ApiHost]
+    public readonly struct AsmSyntax
     {
-        const char DigitQualifier = FSlash;
-
         const char OperandDelimiter = Chars.Comma;
 
         const char MnemonicTerminator = Chars.Space;
-
-        const char CompositeIndicator = Chars.FSlash;
 
         [Op]
         public static Outcome mnemonic(string sig, out AsmMnemonic dst)
@@ -67,6 +62,7 @@ namespace Z0.Asm
             return false;
         }
 
+        [Op]
         public static Outcome form(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;
@@ -89,6 +85,7 @@ namespace Z0.Asm
                 return (false, Msg.FenceNotFound.Format(SigFence,src));
         }
 
+        [Op]
         public static Outcome opcode(string src, out AsmOpCodeExpr dst)
         {
             dst = new AsmOpCodeExpr(src);
@@ -112,6 +109,7 @@ namespace Z0.Asm
         static AsmSigOperandExpr sigop(string src)
             => new AsmSigOperandExpr(src.Trim());
 
+        [Op]
         static bool MnemonicText(string sig, out string dst)
         {
             const char MnemonicTerminator = Chars.Space;
@@ -137,6 +135,7 @@ namespace Z0.Asm
             }
         }
 
+        [Op]
         static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
         {
             var dst = text.buffer();
@@ -144,6 +143,7 @@ namespace Z0.Asm
             return dst.Emit();
         }
 
+        [Op]
         static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
         {
             dst.Append(monic.Format(MnemonicCase.Uppercase));
@@ -158,6 +158,5 @@ namespace Z0.Asm
         static Fence<char> SigFence => (LParen, RParen);
 
         static Fence<char> OpCodeFence => (Lt, Gt);
-
     }
 }

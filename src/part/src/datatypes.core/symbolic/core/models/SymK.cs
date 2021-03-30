@@ -9,6 +9,8 @@ namespace Z0
 
     using static Part;
 
+    using api = Symbols;
+
     public readonly struct Sym<K> : ISym<K>
         where K : unmanaged
     {
@@ -38,8 +40,11 @@ namespace Z0
             Expression = symbol;
         }
 
+        public Identifier Kind
+            => typeof(K).Name;
+
         public string Format()
-            => string.Format("{0}:{1}", Name, Value);
+            => api.format(this);
 
         public override string ToString()
             => Format();

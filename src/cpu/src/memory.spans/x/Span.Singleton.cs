@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Renders a non-allocating mutable view over a source span segment that is presented as an individual target value

@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Forms a new span via concatenation [head,tail]

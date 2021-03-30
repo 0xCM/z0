@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     public interface ISym : ITextual
     {
+        Identifier Kind {get;}
+
         Identifier Name {get;}
 
         SymExpr Expression {get;}

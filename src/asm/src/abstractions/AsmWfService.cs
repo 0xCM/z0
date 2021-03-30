@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public abstract class AsmWfService<H> : WfService<H,H>
+    public abstract class AsmWfService<H> : WfService<H>
         where H : AsmWfService<H>, new()
     {
         protected override void OnInit()

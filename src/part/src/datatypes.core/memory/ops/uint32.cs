@@ -55,20 +55,20 @@ namespace Z0
                 => As<T?, uint?>(ref src);
 
         /// <summary>
-        /// Projects a sequence of <typeparamref name='T'/> cells onto a sequence of <see cref='uint'/> cells
+        /// Presents a span of generic values as a span of unsigned 32-bit integers
         /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<uint> uint32<T>(Span<T> src)
             where T : struct
                 => recover<T,uint>(src);
 
         /// <summary>
-        /// Projects a readonly sequence of <typeparamref name='T'/> cells onto a readonly sequence of <see cref='uint'/> cells
+        /// Presents a readonly span of generic values as a readonly span of unsigned 32-bit integers
         /// </summary>
-        /// <param name="src">The data source</param>
-        /// <typeparam name="T">The source type</typeparam>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<uint> uint32<T>(ReadOnlySpan<T> src)
             where T : struct

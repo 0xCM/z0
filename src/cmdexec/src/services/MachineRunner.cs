@@ -28,6 +28,11 @@ namespace Z0
                     var etl = Wf.AsmCatalogEtl();
                     Emitted(etl.ImportSource());
                     Emitted(etl.ExportImport());
+
+                    var xed = Wf.Xed();
+                    xed.EmitForms();
+                    xed.EmitClasses();
+                    xed.EmitSumbolSummary();
                 }
 
                 if(options.EmitIntrinsicsInfo)

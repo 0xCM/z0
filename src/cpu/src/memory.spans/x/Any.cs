@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Determines whether any elements of a span satisfy a supplied predicate

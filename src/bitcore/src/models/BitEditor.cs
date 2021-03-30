@@ -63,11 +63,11 @@ namespace Z0
             => throw new NotSupportedException();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitEditor<T> lhs, BitEditor<T> rhs)
-            => lhs.Data.ValuesEqual(rhs.Data);
+        public static bool operator ==(BitEditor<T> a, BitEditor<T> b)
+            => a.Data.ValuesEqual(b.Data);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(BitEditor<T> lhs, BitEditor<T> rhs)
-            => !(lhs == rhs);
+        public static bool operator !=(BitEditor<T> a, BitEditor<T> b)
+            => !(a == b);
     }
 }

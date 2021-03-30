@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static Rules;
-    using static memory;
 
     partial struct TextRules
     {
@@ -17,7 +15,7 @@ namespace Z0
         {
             [MethodImpl(Inline), Op]
             public static bool begins(string src, char match)
-                => length(src) != 0 && src[0] == match;
+                => length(src) != 0 && memory.@char(src) == match;
 
             [MethodImpl(Inline), Op]
             public static bool begins(string src, string match)

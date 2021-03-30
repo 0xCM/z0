@@ -11,7 +11,7 @@ namespace Z0
     using static memory;
 
     [WfCmdHost]
-    public abstract class WfCmdHost<H,K> : WfService<H,IWfCmdHost<K>>, IWfCmdHost<K>
+    public abstract class WfCmdHost<H,K> : WfService<H>, IWfCmdHost<K>
         where H : WfCmdHost<H,K>, new()
         where K : unmanaged
     {

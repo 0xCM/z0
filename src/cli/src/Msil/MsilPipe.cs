@@ -10,7 +10,7 @@ namespace Z0
 
     using static memory;
 
-    public sealed class MsilPipe : WfService<MsilPipe, MsilPipe>
+    public sealed class MsilPipe : WfService<MsilPipe>
     {
         const string CommentToken = "// ";
 

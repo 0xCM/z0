@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    public abstract class ApiValidator<V> : WfService<V,V>, IApiValidator
+    public abstract class ApiValidator<V> : WfService<V>, IApiValidator
         where V : ApiValidator<V>,new()
     {
         protected IDomainSource Source {get; private set;}
@@ -29,6 +25,5 @@ namespace Z0
         protected uint SampleCount {get;}
 
         public abstract void Validate();
-
     }
 }

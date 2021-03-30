@@ -6,9 +6,6 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
-    using static z;
-
     sealed class PoissonSampler<T> : Sampler<T, PoissonSpec<T>>
         where T : unmanaged
     {
@@ -22,7 +19,7 @@ namespace Z0.Mkl
         {
 
             if(typeof(T) == typeof(int))
-                sample.poisson(Source,  ScalarCast.float64(DistSpec.Rate), Spans.s32i(buffer));
+                sample.poisson(Source,  ScalarCast.float64(DistSpec.Rate), memory.int32(buffer));
             else
                 throw Unsupported.define<T>();
 

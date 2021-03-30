@@ -10,7 +10,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    partial class XSpan
+    partial class XTend
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Outcome<T> First<T>(this ReadOnlySpan<T> src, Func<T,bool> predicate)

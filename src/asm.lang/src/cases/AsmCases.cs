@@ -7,12 +7,7 @@ namespace Z0.Asm
     [ApiHost]
     public partial class AsmCases : WfService<AsmCases>
     {
-        AsmSigs Sigs;
 
-        protected override void OnInit()
-        {
-            Sigs = Wf.AsmSigs();
-        }
     }
 
     public sealed class AsmCaseRunner : WfService<AsmCaseRunner>

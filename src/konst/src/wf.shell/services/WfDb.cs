@@ -9,7 +9,7 @@ namespace Z0
     using static Part;
     using static memory;
 
-    public sealed class WfDb : WfService<WfDb,IWfDb>, IWfDb
+    public sealed class WfDb : WfService<WfDb>, IWfDb
     {
         public FS.FolderPath Root {get; private set;}
 

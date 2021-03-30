@@ -15,6 +15,66 @@ namespace Z0.Asm
     using static TextRules;
     using static Pow2x16;
 
+    using syntax = AsmSyntax;
+
+    unsafe struct AsmSigSymbolCache
+    {
+        public MemoryAddress MnemonicsAddress;
+
+        public SymbolTable<AsmMnemonicCode> Mnemonics
+        {
+            [MethodImpl(Inline)]
+            get => @as<SymbolTable<AsmMnemonicCode>>(MnemonicsAddress.Pointer());
+        }
+
+        public SymbolTable<AsmSigToken> SigOpSymbols;
+
+        public SymbolTable<CompositeSigToken> Composites;
+
+        public Index<char> RegDigits;
+
+        public Adjacent<char, OneOf<char>> RegDigitRule;
+
+    }
+
+    readonly struct AsmSigSymbolStorage
+    {
+        const char DigitQualifier = FSlash;
+
+        [FixedAddressValueType]
+        static readonly SymbolTable<AsmSigToken> SigOpSymbols;
+
+        [FixedAddressValueType]
+        static readonly SymbolTable<CompositeSigToken> Composites;
+
+        [FixedAddressValueType]
+        static readonly SymbolTable<AsmMnemonicCode> Mnemonics;
+
+        [FixedAddressValueType]
+        static readonly Index<char> RegDigits;
+
+        [FixedAddressValueType]
+        static Adjacent<char, OneOf<char>> RegDigitRule;
+
+        public static void access(out AsmSigSymbolCache dst)
+        {
+            dst.MnemonicsAddress = address(Mnemonics);
+            dst.SigOpSymbols = SigOpSymbols;
+            dst.Composites = Composites;
+            dst.RegDigits = RegDigits;
+            dst.RegDigitRule = RegDigitRule;
+        }
+
+        static AsmSigSymbolStorage()
+        {
+            SigOpSymbols = SymbolStores.table<AsmSigToken>();
+            Composites = SymbolStores.table<CompositeSigToken>();
+            Mnemonics = SymbolStores.table<AsmMnemonicCode>();
+            RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
+            RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
+        }
+    }
+
     [ApiHost]
     public class AsmSigs : WfService<AsmSigs>
     {
@@ -26,59 +86,52 @@ namespace Z0.Asm
 
         const char CompositeIndicator = Chars.FSlash;
 
-        Index<char> RegDigits;
-
-        Adjacent<char, OneOf<char>> RegDigitRule;
-
-        readonly SymbolTable<AsmSigToken> _SigOpSymbols;
-
-        readonly SymbolTable<CompositeSigToken> _Composites;
-
-        readonly SymbolTable<AsmMnemonicCode> _Mnemonics;
+        readonly AsmSigSymbolCache Cache;
 
         public AsmSigs()
         {
-            _SigOpSymbols = SymbolStores.table<AsmSigToken>();
-            _Composites = SymbolStores.table<CompositeSigToken>();
-            RegDigits = array(D0, D1, D2, D3, D4, D5, D6, D7);
-            RegDigitRule = Rules.adjacent(DigitQualifier, oneof(RegDigits));
-            _Mnemonics = SymbolStores.table<AsmMnemonicCode>();
+            AsmSigSymbolStorage.access(out Cache);
         }
 
-        [MethodImpl(Inline)]
+        void DefineSubstitutions()
+        {
+
+        }
+
+        [MethodImpl(Inline), Op]
         public SymbolTable<CompositeSigToken> CompositeTokens()
-            => _Composites;
+            => Cache.Composites;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public SymbolTable<AsmSigToken> SigTokens()
-            => _SigOpSymbols;
+            => Cache.SigOpSymbols;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public SymbolTable<AsmMnemonicCode> Mnemonics()
-            => _Mnemonics;
+            => Cache.Mnemonics;
 
         void ShowSymbols<T>(SymbolTable<T> src, ShowLog dst)
             where T : unmanaged
         {
             var count = src.TokenCount;
             var symbols = src.Symbols;
-            var sort = typeof(T).Name;
             for(var i=0; i<count; i++)
-            {
-                ref readonly var symbol = ref skip(symbols,i);
-                dst.Show(string.Format("{0,-18} | {1,-12} | {2}", sort, symbol.Name, symbol.Value));
-            }
+                dst.Show(skip(symbols,i).Format());
         }
 
         public void ShowSymbols()
         {
-            using var sigs = ShowLog("sig-tokens", FS.Extensions.Csv);
+            var header = Symbols.header();
+            using var sigs = ShowLog("sig-tokens", FS.Csv);
+            sigs.Show(header);
             ShowSymbols(SigTokens(), sigs);
 
-            using var monics = ShowLog("mnemonic-symbols", FS.Extensions.Csv);
+            using var monics = ShowLog("sig-mnemonics", FS.Csv);
+            monics.Show(header);
             ShowSymbols(Mnemonics(), monics);
 
-            using var composites = ShowLog("composite-symbols", FS.Extensions.Csv);
+            using var composites = ShowLog("sig-composites", FS.Csv);
+            composites.Show(header);
             ShowSymbols(CompositeTokens(), composites);
         }
 
@@ -86,7 +139,7 @@ namespace Z0.Asm
         public Outcome ParseSig(AsmSigExpr src, out AsmSig dst)
         {
             dst = AsmSig.Empty;
-            if(AsmSyntax.code(src.Mnemonic, out var code))
+            if(syntax.code(src.Mnemonic, out var code))
             {
                 var opsource = src.Operands.View;
                 var opcount = opsource.Length;
@@ -106,9 +159,25 @@ namespace Z0.Asm
             return false;
         }
 
+        [Op]
+        public Outcome ParseSig(string src, out AsmSig dst)
+        {
+            var eparse = syntax.sig(src, out var expr);
+            if(eparse)
+            {
+                return ParseSig(expr, out dst);
+            }
+            else
+            {
+                dst = AsmSig.Empty;
+                return eparse;
+            }
+        }
+
+        [Op]
         public Outcome ParseOperand(string src, out AsmSigOperand dst)
         {
-            if(_SigOpSymbols.TokenFromSymbol(src, out var token))
+            if(Cache.SigOpSymbols.TokenFromSymbol(src, out var token))
             {
                 dst = new AsmSigOperand(token.Identifier, token.Kind, token.SymbolName);
                 return true;
@@ -132,7 +201,7 @@ namespace Z0.Asm
         [Op]
         public bool ParseToken(AsmSigOperandExpr src, out Token<AsmSigToken> token)
         {
-            if(_SigOpSymbols.IndexFromSymbol(src.Content, out var index))
+            if(Cache.SigOpSymbols.IndexFromSymbol(src.Content, out var index))
             {
                 token = _SigOpTokens[index];
                 return true;
@@ -149,13 +218,13 @@ namespace Z0.Asm
         {
             var s = src.Content;
             return s.Length >= 2
-                && Query.begins(s, DigitQualifier)
-                && Query.test(s[1], Rules.oneof(RegDigits));
+                && @char(s) == DigitQualifier
+                && Query.test(@char(s,1), Rules.oneof(Cache.RegDigits));
         }
 
         [Op]
         public bool IsComposite(AsmSigOperandExpr src)
-            => _Composites.ContainsSymbol(src.Content);
+            => Cache.Composites.ContainsSymbol(src.Content);
 
         [Op]
         public bool IsComposite(AsmSigExpr src)
@@ -167,7 +236,7 @@ namespace Z0.Asm
         [Op]
         public Index<AsmSigOperandExpr> OperandExpressions(AsmSigExpr src)
         {
-            if(AsmSyntax.mnemonic(src.Content, out var monic))
+            if(syntax.mnemonic(src.Content, out var monic))
                 if(Parse.after(src.Content, monic.Name, out var remainder))
                     return OperandExpressions(remainder);
             return Index<AsmSigOperandExpr>.Empty;
@@ -182,8 +251,8 @@ namespace Z0.Asm
                 if(parts.Length != 2)
                     root.@throw(new Exception($"Composition logic wrong for {src.Content}"));
 
-                var left = AsmSigs.sigop(parts[0]);
-                var right = AsmSigs.sigop(parts[1]);
+                var left = sigop(parts[0]);
+                var right = sigop(parts[1]);
                 dst = root.pair(left,right);
                 return true;
             }
@@ -195,35 +264,16 @@ namespace Z0.Asm
         public bool ParseDigit(string src, out RegDigit dst)
         {
             dst = default;
-            if(Parse.rule(src, RegDigitRule, out var result) &&
+            if(Parse.rule(src, Cache.RegDigitRule, out var result) &&
                 Parse.digit(result.B, out var digit))
                     return assign(digit, out dst);
             return false;
         }
 
-
         Index<Token<AsmSigToken>> _SigOpTokens
         {
             [MethodImpl(Inline), Op]
-            get => _SigOpSymbols.Tokens;
-        }
-
-        static string format(AsmMnemonic monic, Index<AsmSigOperandExpr> operands)
-        {
-            var dst = text.buffer();
-            render(monic, operands, dst);
-            return dst.Emit();
-        }
-
-        static void render(AsmMnemonic monic, Index<AsmSigOperandExpr> operands, ITextBuffer dst)
-        {
-            dst.Append(monic.Format(MnemonicCase.Uppercase));
-            var opcount = operands.Length;
-            if(opcount != 0)
-            {
-                dst.Append(Chars.Space);
-                dst.Append(Format.join(OperandDelimiter, operands));
-            }
+            get => Cache.SigOpSymbols.Tokens;
         }
 
         [MethodImpl(Inline), Op]

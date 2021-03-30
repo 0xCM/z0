@@ -11,15 +11,13 @@ namespace Z0.Asm
     using static memory;
     using static TextRules;
 
-    public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl,AsmCatalogEtl>
+    public sealed class AsmCatalogEtl : WfService<AsmCatalogEtl>
     {
         readonly TextDocFormat SourceFormat;
 
         readonly Index<StokeAsmImportRow> RowBuffer;
 
         readonly SymbolTable<AsmMnemonicCode> MnemonicCodes;
-
-        AsmSigs Sigs;
 
         const uint MaxRowCount = 2500;
 
@@ -31,11 +29,6 @@ namespace Z0.Asm
             RowBuffer = alloc<StokeAsmImportRow>(MaxRowCount);
             MnemonicCodes = SymbolStores.table<AsmMnemonicCode>();
             CatalogSymbols = AsmSigSymbols.load();
-        }
-
-        protected override void OnInit()
-        {
-            Sigs = Wf.AsmSigs();
         }
 
         public uint ImportRowCount {get; private set;}

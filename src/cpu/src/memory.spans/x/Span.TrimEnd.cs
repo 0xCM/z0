@@ -6,7 +6,9 @@ namespace Z0
 {
     using System;
 
-    partial class XSpan
+    using static memory;
+
+    partial class XTend
     {
         /// <summary>
         /// Eliminates trailing zeros in the source span
@@ -18,9 +20,8 @@ namespace Z0
             var length = src.Length;
             for(var i= length - 1; i>=0; i--)
             {
-                ref readonly var x = ref memory.skip(src,(uint)i);
-                if(x != 0)
-                    return memory.slice(src, 0,length);
+                if(skip(src,(uint)i) != 0)
+                    return slice(src, 0, length);
             }
             return Span<byte>.Empty;
         }

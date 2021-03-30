@@ -9,13 +9,7 @@ namespace Z0
     using static memory;
     using static Part;
 
-    [ApiHost]
-    public readonly partial struct BitStore
-    {
-
-    }
-
-    public sealed class BitStoreFactory : WfService<BitStoreFactory,BitStoreFactory>
+    public sealed class BitStoreFactory : WfService<BitStoreFactory>
     {
         public Index<CharBlock8> ByteCharBlocks(ushort start = 0, ushort end = 255)
         {

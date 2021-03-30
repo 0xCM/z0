@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public static partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Counts the number of values in the source that satisfy the predicate
@@ -31,5 +31,10 @@ namespace Z0
         public static int Count<T>(this Span<T> src, Func<T,bool> f)
              where T : unmanaged
                 => src.ReadOnly().Count(f);
+    }
+
+    public static partial class XSpan
+    {
+
     }
 }

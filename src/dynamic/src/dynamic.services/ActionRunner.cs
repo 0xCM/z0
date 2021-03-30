@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    public sealed class ActionRunner : WfService<ActionRunner,IActionRunner>, IActionRunner
+    public sealed class ActionRunner : WfService<ActionRunner>, IActionRunner
     {
         int seq;
 

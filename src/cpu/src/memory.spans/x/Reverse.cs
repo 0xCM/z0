@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
 
     using static Part;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Produces a reversed span from a readonly span

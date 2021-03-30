@@ -11,27 +11,31 @@ namespace Z0
 
     partial struct CellCalcs
     {
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint remainder(in GridMetrics src, W128 w)
-            => src.StoreSize % 16;
+        public static uint remainder(uint src, W64 w)
+            => src % 8;
 
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint remainder(in GridMetrics src, W256 w)
-            => src.StoreSize % 32;
+        public static uint remainder(uint src, W128 w)
+            => src % 16;
 
+        /// <summary>
+        /// Computes, in terms of bytes,the modulus src % w
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="w">The bit-width selector</param>
         [MethodImpl(Inline), Op]
-        public static uint coverage(in GridMetrics src, W128 w)
-        {
-            var r = remainder(src,w);
-            return r != 0 ? r + 1 : r;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static uint coverage(in GridMetrics src, W256 w)
-        {
-            var r = remainder(src,w);
-            return r != 0 ? r + 1 : r;
-        }
-
+        public static uint remainder(uint src, W256 w)
+            => src % 32;
     }
 }

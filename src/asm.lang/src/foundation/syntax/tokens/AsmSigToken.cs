@@ -6,13 +6,6 @@ namespace Z0.Asm
 {
     using SD = AsmSigDocs;
 
-    using static Pow2x64;
-
-    public enum AsmSigOpKind : ulong
-    {
-        None = 0,
-    }
-
     [SymbolSource]
     public enum AsmSigToken : byte
     {
@@ -77,6 +70,18 @@ namespace Z0.Asm
         /// </summary>
         [Symbol("r32", SD.r32)]
         r32,
+
+        /// <summary>
+        /// <see cref='SD.r32a'/>
+        /// </summary>
+        [Symbol("r32a", SD.r32a)]
+        r32a,
+
+        /// <summary>
+        /// <see cref='SD.r32b'/>
+        /// </summary>
+        [Symbol("r32b", SD.r32b)]
+        r32b,
 
         /// <summary>
         /// <see cref='SD.r64'/>

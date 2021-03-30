@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Copies the source span to a target span begininning at a specified target offset

@@ -5,11 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Part;
-
-    partial class XSpan
+    partial class XTend
     {
         /// <summary>
         /// Clones the source span into a new span

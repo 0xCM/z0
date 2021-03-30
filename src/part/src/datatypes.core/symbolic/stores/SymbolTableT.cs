@@ -10,7 +10,7 @@ namespace Z0
 
     using static Part;
 
-    public class SymbolTable<T>
+    public struct SymbolTable<T>
         where T : unmanaged
     {
         readonly Index<Token<T>> _Tokens;

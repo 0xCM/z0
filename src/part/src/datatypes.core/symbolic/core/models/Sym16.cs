@@ -9,9 +9,12 @@ namespace Z0
 
     using static Part;
 
+    using api = Symbols;
     public readonly struct Sym16 : ISym<W16,ushort>
     {
         public SymKey<ushort> Key {get;}
+
+        public Identifier Kind {get;}
 
         public Identifier Name {get;}
 
@@ -20,16 +23,17 @@ namespace Z0
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym16(SymKey<ushort> key, Name name, ushort value, SymExpr expr)
+        public Sym16(SymKey<ushort> key, Identifier kind, Identifier name, ushort value, SymExpr expr)
         {
             Key = key;
+            Kind = kind;
             Name = name;
             Value = value;
             Expression = expr;
         }
 
         public string Format()
-            => Symbols.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
@@ -43,6 +47,9 @@ namespace Z0
         where T : unmanaged
     {
         public SymKey<ushort> Key {get;}
+
+        public Identifier Kind
+            => typeof(T).Name;
 
         public Identifier Name {get;}
 
@@ -60,14 +67,14 @@ namespace Z0
         }
 
         public string Format()
-            => Symbols.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym16(Sym16<T> src)
-            => new Sym16(src.Key, src.Name, memory.bw16(src.Value), src.Expression);
+            => new Sym16(src.Key, src.Kind, src.Name, memory.bw16(src.Value), src.Expression);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym16<T> src)

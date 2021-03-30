@@ -3,6 +3,8 @@
 Sources: <http://github/acl2/books/projects/x86isa>, <https://www.cs.utexas.edu/users/moore/acl2/manuals/current/manual/?topic=ACL2____X86ISA>
 
 
+Opcode Maps: <file:///J:/source/acl2/books/projects/x86isa/machine/inst-listing.lisp>
+
 ## Symbols
 
 E := general-purpose register or memory operand specified by the ModRM.r/m field

@@ -93,25 +93,43 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public void EmitCatalogEntries()
+        void EmitSymbols<K>(ReadOnlySpan<Sym<K>> src, FS.FilePath dst)
+            where K : unmanaged
         {
-            EmitSymbols();
-            EmitForms();
+            var count = src.Length;
+            if(count != 0)
+            {
+                var flow = Wf.EmittingFile(dst);
+                using var writer = dst.Writer();
+                writer.WriteLine(Symbols.header());
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(src,i));
+                Wf.EmittedFile(flow, count);
+            }
         }
 
-        public void EmitForms()
+        public ReadOnlySpan<Sym<IClass>> EmitClasses()
         {
-            var src = LoadForms().View;
+            var src = ClrEnums.@enum<IClass>();
+            var dst = Db.AsmCatalogFile(FS.file("xed-classes", FS.Csv));
+            var symbols = src.SymbolIndex;
+            EmitSymbols(symbols.View, dst);
+            return symbols;
+        }
+
+        public Index<XedForm> EmitForms()
+        {
+            var records = LoadForms();
+            var src = records.View;
             var dst = Db.AsmCatalogFile(FS.file("xed-forms", FS.Csv));
             var count = src.Length;
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             writer.WriteLine(XedForm.Header);
             for(var i=0; i<count; i++)
-            {
                 writer.WriteLine(skip(src,i).Format());
-            }
             Wf.EmittedFile(flow, count);
+            return records;
         }
 
         public Index<XedFormSource> LoadFormSources()
@@ -194,7 +212,7 @@ namespace Z0.Asm
             return true;
         }
 
-        public void EmitSymbols()
+        public void EmitSumbolSummary()
         {
             var dst = Db.AsmCatalogFile(FS.file("xed-symbols", FS.Csv));
             var flow = Wf.EmittingFile(dst);

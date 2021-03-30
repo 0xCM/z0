@@ -81,6 +81,46 @@ namespace Z0
             where T : unmanaged
                 => count % blocklength<T>(w) == 0;
 
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool aligned<T>(W16 w, uint count, out uint rem)
+            where T : unmanaged
+        {
+            rem = count % (uint)blocklength<T>(w);
+            return rem == 0;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool aligned<T>(W32 w, uint count, out uint rem)
+            where T : unmanaged
+        {
+            rem = count % (uint)blocklength<T>(w);
+            return rem == 0;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool aligned<T>(W64 w, uint count, out uint rem)
+            where T : unmanaged
+        {
+            rem = count % (uint)blocklength<T>(w);
+            return rem == 0;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool aligned<T>(W128 w, uint count, out uint rem)
+            where T : unmanaged
+        {
+            rem = count % (uint)blocklength<T>(w);
+            return rem == 0;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool aligned<T>(W256 w, uint count, out uint rem)
+            where T : unmanaged
+        {
+            rem = count % (uint)blocklength<T>(w);
+            return rem == 0;
+        }
+
         /// <summary>
         /// Computes the minimum number of w-cells required to evenly cover a grid of bit-dimensions mxn
         /// </summary>

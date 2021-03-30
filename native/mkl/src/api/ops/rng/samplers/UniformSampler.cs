@@ -6,8 +6,8 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Konst;
-    using static z;
+    using static Part;
+    using static memory;
 
     sealed class UniformSampler<T> : Sampler<T, UniformSpec<T>>
         where T : unmanaged
@@ -21,13 +21,13 @@ namespace Z0.Mkl
         protected override int FillBuffer(Span<T> buffer)
         {
             if(typeof(T) == typeof(int))
-                sample.uniform(Source, int32(DistSpec.Min), int32(DistSpec.Max), Spans.s32i(buffer));
+                sample.uniform(Source, int32(DistSpec.Min), int32(DistSpec.Max), int32(buffer));
             else if(typeof(T) == typeof(float))
-                sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), Spans.s32f(buffer));
+                sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), float32(buffer));
             else if(typeof(T) == typeof(double))
-                sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), Spans.s64f(buffer));
+                sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), float64(buffer));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
             return buffer.Length;
         }

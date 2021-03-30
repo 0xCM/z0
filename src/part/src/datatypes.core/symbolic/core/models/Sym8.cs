@@ -9,27 +9,31 @@ namespace Z0
 
     using static Part;
 
+    using api = Symbols;
+
     public readonly struct Sym8 : ISym<W8,byte>
     {
         public SymKey<byte> Key {get;}
 
-        public Identifier Name {get;}
+        public Identifier Kind {get;}
 
+        public Identifier Name {get;}
         public byte Value {get;}
 
         public SymExpr Expression {get;}
 
         [MethodImpl(Inline)]
-        public Sym8(SymKey<byte> key, Name name, byte value, SymExpr expr)
+        public Sym8(SymKey<byte> key, Identifier kind, Identifier name, byte value, SymExpr expr)
         {
             Key = key;
+            Kind = kind;
             Name = name;
             Value = value;
             Expression = expr;
         }
 
         public string Format()
-            => Symbols.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
@@ -50,6 +54,9 @@ namespace Z0
 
         public SymExpr Expression {get;}
 
+        public Identifier Kind
+            => typeof(T).Name;
+
         [MethodImpl(Inline)]
         public Sym8(SymKey<byte> key, Identifier name, T value, SymExpr expr)
         {
@@ -60,18 +67,17 @@ namespace Z0
         }
 
         public string Format()
-            => Symbols.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
         [MethodImpl(Inline)]
         public static implicit operator Sym8(Sym8<T> src)
-            => new Sym8(src.Key, src.Name, memory.bw8(src.Value), src.Expression);
+            => new Sym8(src.Key, src.Kind, src.Name, memory.bw8(src.Value), src.Expression);
 
         [MethodImpl(Inline)]
         public static implicit operator Sym<T>(Sym8<T> src)
             => new Sym<T>(src.Key.Value, src.Name, src.Value, src.Expression);
-
     }
 }

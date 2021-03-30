@@ -139,6 +139,10 @@ namespace Z0.Asm
 
         public const string ymm = "A YMM register. The 256-bit YMM registers are: YMM0 through YMM7; YMM8 through YMM15 are available in 64-bit mode";
 
+        public const string r32a ="A first r32 register operand";
+
+        public const string r32b ="A second r32 register operand";
+
         public const string xmm1 ="A first xmm register operand";
 
         public const string xmm2 ="A second xmm register operand";

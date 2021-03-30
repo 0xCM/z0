@@ -12,7 +12,7 @@ namespace Z0
     using static memory;
 
     [Service(typeof(IApiHexIndexer))]
-    public class ApiHexIndexer : WfService<ApiHexIndexer,IApiHexIndexer>, IApiHexIndexer
+    public class ApiHexIndexer : WfService<ApiHexIndexer>, IApiHexIndexer
     {
         public ApiCodeBlocks Product;
 
