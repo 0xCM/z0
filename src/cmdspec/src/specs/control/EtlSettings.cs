@@ -6,9 +6,7 @@ namespace Z0
 {
     public struct MachineOptions : ISettingsSet<MachineOptions>
     {
-        public Setting<bool> RunXed;
-
-        public Setting<bool> EmitResourceData;
+        public Setting<bool> EmitAssetIndex;
 
         public Setting<bool> CollectApiDocs;
 
@@ -26,7 +24,9 @@ namespace Z0
 
         public Setting<bool> EmitApiMetadata;
 
-        public Setting<bool> EmitLiteralCatalogs;
+        public Setting<bool> EmitFieldLiterals;
+
+        public Setting<bool> EmitSymbolicLiterals;
 
         public Setting<bool> EmitAsmCatalogs;
 
@@ -42,11 +42,15 @@ namespace Z0
 
         public Setting<bool> CorrelateMembers;
 
+        public Setting<bool> EmitAsmBitstrings;
+
+        public Setting<bool> EmitAssetContent;
+
+        public Setting<bool> EmitApiBitMasks;
+
         public static MachineOptions @default()
         {
             var dst = new MachineOptions();
-            dst.RunXed = false;
-            dst.EmitResourceData = true;
             dst.CollectApiDocs = true;
             dst.EmitImageContent = true;
             dst.EmitSectionHeaders = true;
@@ -54,7 +58,7 @@ namespace Z0
             dst.EmitCliStrings = true;
             dst.EmitCliBlobs = true;
             dst.EmitCliConstants = true;
-            dst.EmitLiteralCatalogs = true;
+            dst.EmitFieldLiterals = true;
             dst.EmitAsmCatalogs = true;
             dst.EmitAsmRows = true;
             dst.EmitResBytes = true;
@@ -63,6 +67,11 @@ namespace Z0
             dst.EmitStatements = true;
             dst.EmitApiMetadata = true;
             dst.CorrelateMembers = true;
+            dst.EmitAsmBitstrings = true;
+            dst.EmitAssetIndex = true;
+            dst.EmitAssetContent = true;
+            dst.EmitSymbolicLiterals = true;
+            dst.EmitApiBitMasks = true;
             return dst;
         }
 

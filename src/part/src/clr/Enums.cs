@@ -41,6 +41,18 @@ namespace Z0
                 return root.unparsed<E>(name);
         }
 
+        public static Outcome parse<E>(string src, out E dst)
+            where E : unmanaged, Enum
+        {
+            if(Enum.TryParse(src, true, out dst))
+                return true;
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
+
         /// <summary>
         /// Gets the declaration-order indices for each named literal
         /// </summary>

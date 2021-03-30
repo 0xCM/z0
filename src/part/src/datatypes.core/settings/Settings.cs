@@ -23,6 +23,32 @@ namespace Z0
             return dst.Emit();
         }
 
+        public static Outcome parse(string src, out Setting<string> dst)
+        {
+            if(text.empty(src))
+            {
+                dst = default;
+                return (false, "!!Empty!!");
+            }
+            else
+            {
+                var i = src.IndexOf(Chars.Colon);
+                if(i == NotFound)
+                {
+                    dst = default;
+                    return (false, "Setting delimiter not found");
+                }
+                else
+                {
+                    if(i == 0)
+                        dst = new Setting<string>(EmptyString, text.slice(src,i+1));
+                    else
+                        dst = new Setting<string>(text.slice(src,0, i), text.slice(src,i+1));
+                    return true;
+                }
+            }
+        }
+
         public static Index<Setting> set<T>(T src)
             where T : ISettingsSet<T>, new()
         {

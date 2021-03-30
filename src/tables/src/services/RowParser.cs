@@ -24,7 +24,7 @@ namespace Z0
         }
 
         public Outcome ParseHeader(string src, out RowHeader dst)
-            => Tables.parse(src, FieldDelimiter, out dst);
+            => RowHeader.parse(src, FieldDelimiter, out dst);
 
         public Outcome ParseRow(string src, out T dst)
             => F(src, out dst);

@@ -15,28 +15,29 @@ namespace Z0
         public uint EmitMsilRecords()
             => EmitMsilRecords(Wf.Components);
 
-        public uint EmitMsilRecords(Assembly src)
+        public Index<MsilRow> EmitMsilRecords(Assembly src)
         {
             var srcPath = FS.path(src.Location);
             var processing = Wf.Running(srcPath);
             var methods = CliFileReader.cil(srcPath);
+            var view = methods.View;
             var count = (uint)methods.Length;
             if(count != 0)
             {
-                var dst = Wf.Db().Table<MsilRow>(src.GetSimpleName());
+                var dst = Db.Table<MsilRow>(src.GetSimpleName());
                 var flow = Wf.EmittingTable<MsilRow>(dst);
                 using var writer = dst.Writer();
                 writer.WriteLine(CilRowHeader);
 
                 for(var i=0u; i<count; i++)
-                    writer.WriteLine(format(skip(methods,i)));
+                    writer.WriteLine(format(skip(view,i)));
 
                 Wf.EmittedTable<MsilRow>(flow, count);
             }
 
             Wf.Ran(processing, src);
 
-            return count;
+            return methods;
         }
 
         public uint EmitMsilRecords(ReadOnlySpan<Assembly> src)
@@ -44,7 +45,7 @@ namespace Z0
             var total = 0u;
             var count = src.Length;
             for(var i=0; i<count; i++)
-                total += EmitMsilRecords(skip(src,i));
+                EmitMsilRecords(skip(src,i));
             return total;
         }
 

@@ -85,11 +85,11 @@ namespace Z0
             Wf.EmittedTable(flow, count);
         }
 
-        public void EmitSymbolicLiterals()
+        public Index<SymbolicLiteral> EmitSymbolicLiterals()
         {
             var target = Db.IndexTable(SymbolicLiteral.TableId);
             var components = Wf.Components;
-            EmitSymbolicLiterals(Wf.Components, target);
+            return EmitSymbolicLiterals(Wf.Components, target);
         }
 
         public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)

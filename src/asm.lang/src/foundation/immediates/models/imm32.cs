@@ -21,10 +21,6 @@ namespace Z0.Asm
 
             public AsmOpKind OpKind
                 => AsmOpKind.Imm | AsmOpKind.W32;
-
-            [MethodImpl(Inline)]
-            public static implicit operator Arg32(imm32 src)
-                => new Arg32(src.Content, src.OpKind);
         }
     }
 }

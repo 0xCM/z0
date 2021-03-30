@@ -9,12 +9,12 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<CliSystemStringInfo> SystemStrings()
+        public Index<CliSystemStringInfo> SystemStrings()
         {
             var reader = State.Reader;
             int size = reader.GetHeapSize(HeapIndex.String);
             if (size == 0)
-                return empty<CliSystemStringInfo>();
+                return sys.empty<CliSystemStringInfo>();
 
             var values = root.list<CliSystemStringInfo>();
             var handle = MetadataTokens.StringHandle(0);

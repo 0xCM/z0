@@ -13,10 +13,10 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Args Args {get;}
+        public AsmOps Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicCode monic, Args src)
+        public AsmStatement(AsmMnemonicCode monic, AsmOps src)
         {
             Mnemonic = monic;
             Args = src;
@@ -37,7 +37,7 @@ namespace Z0.Asm
         public static AsmStatement Empty
         {
             [MethodImpl(Inline)]
-            get => new AsmStatement(0, Args.Empty);
+            get => new AsmStatement(0, AsmOps.Empty);
         }
     }
 
@@ -46,7 +46,7 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Args<A> Args {get;}
+        public AsmOps<A> Args {get;}
 
         [MethodImpl(Inline)]
         public AsmStatement(AsmMnemonicCode mnemonic, A a)
@@ -54,10 +54,6 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = a;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(AsmStatement<A> src)
-            => new AsmStatement(src.Mnemonic, src.Args);
 
         public static AsmStatement<A> Empty
         {
@@ -72,7 +68,7 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Args<A,B> Args {get;}
+        public AsmOps<A,B> Args {get;}
 
         [MethodImpl(Inline)]
         public AsmStatement(AsmMnemonicCode mnemonic, A a, B b)
@@ -82,15 +78,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicCode mnemonic, Args<A,B> args)
+        public AsmStatement(AsmMnemonicCode mnemonic, AsmOps<A,B> args)
         {
             Mnemonic = mnemonic;
             Args = args;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(AsmStatement<A,B> src)
-            => new AsmStatement(src.Mnemonic, src.Args);
 
         public static AsmStatement<A,B> Empty
         {
@@ -106,7 +98,7 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Args<A,B,C> Args {get;}
+        public AsmOps<A,B,C> Args {get;}
 
         [MethodImpl(Inline)]
         public AsmStatement(AsmMnemonicCode mnemonic, A a, B b, C c)
@@ -116,15 +108,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicCode mnemonic, Args<A,B,C> args)
+        public AsmStatement(AsmMnemonicCode mnemonic, AsmOps<A,B,C> args)
         {
             Mnemonic = mnemonic;
             Args = args;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(AsmStatement<A,B,C> src)
-            => new AsmStatement(src.Mnemonic, src.Args);
     }
 
     public readonly struct AsmStatement<A,B,C,D> : IAsmStatement<A,B,C,D>
@@ -135,10 +123,10 @@ namespace Z0.Asm
     {
         public AsmMnemonicCode Mnemonic {get;}
 
-        public Args<A,B,C,D> Args {get;}
+        public AsmOps<A,B,C,D> Args {get;}
 
         [MethodImpl(Inline)]
-        public AsmStatement(AsmMnemonicCode mnemonic, Args<A,B,C,D> args)
+        public AsmStatement(AsmMnemonicCode mnemonic, AsmOps<A,B,C,D> args)
         {
             Mnemonic = mnemonic;
             Args = args;
@@ -150,9 +138,5 @@ namespace Z0.Asm
             Mnemonic = mnemonic;
             Args = (a,b,c,d);
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator AsmStatement(AsmStatement<A,B,C,D> src)
-            => new AsmStatement(src.Mnemonic, src.Args);
     }
 }

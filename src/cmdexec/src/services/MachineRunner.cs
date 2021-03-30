@@ -8,6 +8,7 @@ namespace Z0
 
     public class MachineRunner : WfService<MachineRunner>
     {
+
         public void Run(MachineOptions options)
         {
             using var flow = Wf.Running();
@@ -17,49 +18,41 @@ namespace Z0
                 var api = Wf.ApiServices();
                 var images = Wf.ImageDataEmitter();
                 var asm = Wf.AsmDataStore();
+                var assets = Wf.ApiAssets();
 
                 if(options.CorrelateMembers)
-                {
                     api.Correlate();
-                }
 
                 if(options.EmitAsmCatalogs)
                 {
                     var etl = Wf.AsmCatalogEtl();
-                    etl.ImportSource();
-                    etl.ExportImport();
+                    Emitted(etl.ImportSource());
+                    Emitted(etl.ExportImport());
                 }
 
                 if(options.EmitIntrinsicsInfo)
-                    Wf.IntelCpuIntrinsics().Emit();
+                    Emitted(Wf.IntelCpuIntrinsics().Emit());
 
-                if(options.EmitLiteralCatalogs)
-                {
+                if(options.EmitSymbolicLiterals)
+                    Emitted(api.EmitSymbolicLiterals());
+
+                if(options.EmitApiBitMasks)
+                    Emitted(Wf.ApiBitMasks().Emit());
+
+                if(options.EmitFieldLiterals)
                     Wf.FieldLiteralEmitter().Run();
-                    api.EmitSymbolicLiterals();
-                    Wf.ApiBitMasks().Emit();
-                }
 
                 if(options.CollectApiDocs)
-                {
-                    ApiComments.create(Wf).Collect();
-                }
+                    Wf.ApiComments().Collect();
 
-                if(options.EmitResourceData)
-                {
-                    var assets = Wf.ApiAssets();
+                if(options.EmitAssetIndex)
                     assets.EmitAssetIndex();
-                    assets.EmitAssetContent();
-                }
+
+                if(options.EmitAssetContent)
+                    Emitted(assets.EmitAssetContent());
 
                 if(options.EmitApiMetadata)
                     Wf.CliCmd().Run(CliWfCmdKind.DumpApiMetadata);
-
-                if(options.RunXed)
-                {
-                    using var xed = XedWf.create(Wf);
-                    xed.Run();
-                }
 
                 if(options.EmitSectionHeaders)
                     images.EmitRuntimeHeaders();
@@ -70,7 +63,7 @@ namespace Z0
                 if(options.EmitCliStrings)
                 {
                     images.EmitUserStrings();
-                    images.EmitSystemStrings();
+                    Emitted(images.EmitSystemStrings());
                 }
 
                 if(options.EmitCliConstants)
@@ -92,7 +85,10 @@ namespace Z0
                     asm.EmitResBytes();
 
                 if(options.EmitStatements)
-                    Wf.ApiStatementPipe().EmitStatements();
+                    Wf.AsmStatementPipe().EmitStatements();
+
+                if(options.EmitAsmBitstrings)
+                    Wf.AsmStatementPipe().EmitBitstrings();
 
             }
             catch(Exception e)
@@ -100,5 +96,15 @@ namespace Z0
                 Wf.Error(e);
             }
         }
+
+        void Emitted<T>(ReadOnlySpan<T> src)
+        {
+
+        }
+
+
+        void Emitted<T>(Index<T> src)
+            => Emitted(src.View);
+
     }
 }

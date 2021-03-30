@@ -35,12 +35,13 @@ namespace Z0
             writer.WriteLine(formatter.FormatHeader());
             foreach(var file in src)
             {
-                var result = read(file, out Span<ImageSectionHeader> headers);
+                var result = read(file, out Index<ImageSectionHeader> headers);
                 if(result)
                 {
                     var count = result.Data;
+                    var view = headers.View;
                     for(var i=0u; i<count; i++)
-                        writer.WriteLine(formatter.Format(skip(headers,i)));
+                        writer.WriteLine(formatter.Format(skip(view,i)));
 
                     total += count;
                 }
@@ -50,7 +51,7 @@ namespace Z0
             return total;
         }
 
-        static Outcome<uint> read(FS.FilePath path, out Span<ImageSectionHeader> target)
+        static Outcome<uint> read(FS.FilePath path, out Index<ImageSectionHeader> target)
         {
             target = PeTableReader.headers(path);
             return (uint)target.Length;

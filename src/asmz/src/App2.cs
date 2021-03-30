@@ -242,7 +242,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.AsmStatements().Traverse(parse);
+            Wf.AsmTraverser().Traverse(parse);
         }
 
         void CheckIndexDecoder()
@@ -390,9 +390,9 @@ namespace Z0.Asm
             }
             else
             {
-                Tables.parse(skip(parts,0), out dst.BaseAddress);
-                Tables.parse(skip(parts,1), out dst.Uri);
-                Tables.parse(skip(parts,2), out dst.CilCode);
+                DataParser.parse(skip(parts,0), out dst.BaseAddress);
+                DataParser.parse(skip(parts,1), out dst.Uri);
+                DataParser.parse(skip(parts,2), out dst.CilCode);
                 return true;
             }
         }
@@ -462,7 +462,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.AsmStatementDetailPipe().Run(Collect);
+            Wf.AsmDetailPipe().Run(Collect);
 
             var collected = @readonly(cases.Values.OrderBy(x => x.Encoded).Array());
             var dst = Db.IndexTable<AsmStatementCase>();
@@ -964,14 +964,8 @@ namespace Z0.Asm
 
         public void EmitBitstrings()
         {
-            var pipe = Wf.AsmStatementDetailPipe();
+            var pipe = Wf.AsmStatementPipe();
             pipe.EmitBitstrings();
-        }
-
-        public static string format(in CpuId src)
-        {
-            const string FormatPattern = "fx:{0} subfx:{1} => eax:{2} ebx:{3} ecx:{4} edx:{5}";
-            return text.format(FormatPattern, src.Fx, src.SubFx, src.Eax, src.Ebx, src.Ecx, src.Edx);
         }
 
         public void Run()
@@ -982,13 +976,11 @@ namespace Z0.Asm
             //00000015 EBX:756E6547 ECX:6C65746E EDX:49656E69
             var result = Cells.cell128(0x00000015, 0x756E6547, 0x6C65746E, 0x49656E69);
             CpuId.response(result, ref cpuid);
-            Wf.Row(format(cpuid));
+            Wf.Row(cpuid.Format());
             //EmitBitstrings();
 
             //var tool = Tools.nasm(Wf);
             //var entries = tool.RunCase("vptestmb");
-
-
 
             // productions.Produce();
 

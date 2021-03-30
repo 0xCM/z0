@@ -4,7 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IAsmOp : ISizedOperand
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IOperand
+    {
+        dynamic Content {get;}
+    }
+
+    [Free]
+    public interface IOperand<T> : IOperand
+    {
+        new T Content {get;}
+
+        dynamic IOperand.Content
+            => Content;
+    }
+
+    public interface IAsmOp : ISized, IOperand
     {
         AsmOpKind OpKind {get;}
 
@@ -12,9 +29,11 @@ namespace Z0.Asm
             => (AsmOpClass)OpKind;
     }
 
-    public interface IAsmOp<T> : IAsmOp, ISizedOperand<T>
+    public interface IAsmOp<T> : IAsmOp, IOperand<T>
         where T : struct
     {
+        BitWidth ISized.Width
+            => memory.width<T>();
 
     }
 

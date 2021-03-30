@@ -10,6 +10,9 @@ namespace Z0
 
     partial class XTend
     {
+        public static AsmDetailPipe AsmDetailPipe(this IWfShell wf)
+            => Asm.AsmDetailPipe.create(wf);
+
         public static AsmEtl AsmRowEtl(this IWfShell wf)
             => AsmEtl.create(wf);
 
@@ -89,7 +92,7 @@ namespace Z0
         public static ApiHostDecoder ApiHostDecoder(this IWfShell wf, IAsmDecoder decoder)
             => new ApiHostDecoder(wf, decoder);
 
-        public static AsmApiStatementPipe ApiStatementPipe(this IWfShell wf)
-            => Asm.AsmApiStatementPipe.create(wf);
+        public static AsmStatementPipe AsmStatementPipe(this IWfShell wf)
+            => Asm.AsmStatementPipe.create(wf);
     }
 }

@@ -16,8 +16,5 @@ namespace Z0
 
         WfExecToken EmitTable<T>(ReadOnlySpan<T> src, string name)
             where T : struct, IRecord<T>;
-
-        // ITableArchive TableArchive<S>(S subject)
-        //     => new DbTables<S>(this, subject);
     }
 }

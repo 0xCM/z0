@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static Part;
 
-    public interface IAsmOpererands
+    public interface IAsmOps
     {
         /// <summary>
         /// The number of arguments accepted by the operand
@@ -14,11 +14,11 @@ namespace Z0.Asm
         byte Count {get;}
     }
 
-    public interface IAsmOperands<F,A> : IAsmOpererands
-        where F : struct, IAsmOperands<F,A>
+    public interface IAsmOps<F,A> : IAsmOps
+        where F : struct, IAsmOps<F,A>
         where A : unmanaged, IAsmOp
     {
-        byte IAsmOpererands.Count
+        byte IAsmOps.Count
             => 1;
 
         A this[N0 n] {get;}
@@ -26,13 +26,12 @@ namespace Z0.Asm
         A First => this[n0];
     }
 
-    public interface IAsmOperands<F,A,B> : IAsmOpererands
-        where F : struct, IAsmOperands<F,A,B>
+    public interface IAsmOps<F,A,B> : IAsmOps
+        where F : struct, IAsmOps<F,A,B>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
     {
-
-        byte IAsmOpererands.Count
+        byte IAsmOps.Count
             => 2;
 
         A this[N0 n] {get;}
@@ -44,13 +43,13 @@ namespace Z0.Asm
         B Second => this[n1];
     }
 
-    public interface IAsmOperands<F,A,B,C> : IAsmOpererands
-        where F : struct, IAsmOperands<F,A,B,C>
+    public interface IAsmOps<F,A,B,C> : IAsmOps
+        where F : struct, IAsmOps<F,A,B,C>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
         where C : unmanaged, IAsmOp
     {
-        byte IAsmOpererands.Count
+        byte IAsmOps.Count
             => 3;
 
         A this[N0 n] {get;}
@@ -66,14 +65,14 @@ namespace Z0.Asm
         C Third => this[n2];
     }
 
-    public interface IAsmOperands<F,A,B,C,D> : IAsmOpererands
-        where F : struct, IAsmOperands<F,A,B,C,D>
+    public interface IAsmOps<F,A,B,C,D> : IAsmOps
+        where F : struct, IAsmOps<F,A,B,C,D>
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
         where C : unmanaged, IAsmOp
         where D : unmanaged, IAsmOp
     {
-        byte IAsmOpererands.Count
+        byte IAsmOps.Count
             => 4;
 
         A this[N0 n] {get;}

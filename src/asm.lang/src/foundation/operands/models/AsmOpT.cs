@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Defines an asm operand
     /// </summary>
     public readonly struct AsmOp<T> : IAsmOp<T>
-        where T : struct, IAsmOpContent
+        where T : struct
     {
         public T Content {get;}
 

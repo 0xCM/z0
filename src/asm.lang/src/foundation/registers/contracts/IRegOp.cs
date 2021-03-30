@@ -9,6 +9,8 @@ namespace Z0.Asm
     using static memory;
     using static Part;
 
+    using api = AsmRegs;
+
     [Free]
     public interface IRegOp : IAsmOp, ITextual
     {
@@ -27,11 +29,7 @@ namespace Z0.Asm
             => width<T>();
 
         string ITextual.Format()
-        {
-            var data = bytes(Content);
-            var formatter = Hex.formatter<byte>();
-            return formatter.Format(data);
-        }
+            => api.format(this);
 
     }
 

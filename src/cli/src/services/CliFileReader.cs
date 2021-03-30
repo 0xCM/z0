@@ -41,7 +41,7 @@ namespace Z0
             Stream.Dispose();
         }
 
-        public static ReadOnlySpan<MsilRow> cil(FS.FilePath src)
+        public static Index<MsilRow> cil(FS.FilePath src)
         {
             var dst = sys.list<MsilRow>();
 

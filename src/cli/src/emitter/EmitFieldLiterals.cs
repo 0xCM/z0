@@ -29,12 +29,13 @@ namespace Z0
         FS.FolderPath Target
             => Wf.Db().TableRoot() + FS.folder(CliFieldName.TableId);
 
-
-        void Emit(ApiPartTypes src)
+        Index<Paired<FieldRef,string>> Emit(ApiPartTypes src)
         {
             var fields = Clr.fieldrefs(src.Types);
             if(fields.Length != 0)
-                Emit(fields, Target + FS.file(src.Part.Format(), FS.Csv));
+                return Emit(fields, Target + FS.file(src.Part.Format(), FS.Csv));
+            else
+                return Index<Paired<FieldRef,string>>.Empty;
         }
 
         public void Run()
@@ -80,11 +81,13 @@ namespace Z0
                 "Value".PadRight(48), Sep
                 );
 
-        void Emit(FieldRef[] src, FS.FilePath dst)
+        Index<Paired<FieldRef,string>> Emit(FieldRef[] src, FS.FilePath dst)
         {
             var flow = Wf.EmittingFile(dst);
             var input = span(src);
             var count = input.Length;
+            var buffer = sys.alloc<Paired<FieldRef,string>>(count);
+            ref var emissions = ref first(buffer);
 
             using var writer = dst.Writer();
             writer.WriteLine(FormatHeader());
@@ -94,7 +97,10 @@ namespace Z0
                 try
                 {
                     ref readonly var field = ref skip(input,i);
-                    writer.WriteLine(formatLine(field));
+                    var formatted = formatLine(field);
+                    seek(emissions, i) = (field,formatted);
+
+                    writer.WriteLine(formatted);
                 }
                 catch(Exception e)
                 {
@@ -103,6 +109,7 @@ namespace Z0
             }
 
             Wf.EmittedFile(flow, count);
+            return buffer;
         }
     }
 }

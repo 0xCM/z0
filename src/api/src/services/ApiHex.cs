@@ -85,13 +85,13 @@ namespace Z0
                 }
 
                 var index = 0;
-                Tables.parse(fields[index++], out dst.Seq);
-                Tables.parse(fields[index++], out dst.SourceSeq);
-                Tables.parse(fields[index++], out dst.Address);
-                Tables.parse(fields[index++], out dst.Length);
-                Tables.eparse(fields[index++], out dst.TermCode);
-                Tables.parse(fields[index++], out dst.Uri);
-                Tables.parse(fields[index++], out dst.Data);
+                DataParser.parse(fields[index++], out dst.Seq);
+                DataParser.parse(fields[index++], out dst.SourceSeq);
+                DataParser.parse(fields[index++], out dst.Address);
+                DataParser.parse(fields[index++], out dst.Length);
+                DataParser.eparse(fields[index++], out dst.TermCode);
+                DataParser.parse(fields[index++], out dst.Uri);
+                DataParser.parse(fields[index++], out dst.Data);
                 return true;
             }
             catch(Exception e)

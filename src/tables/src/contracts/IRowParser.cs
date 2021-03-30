@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
     public interface IRowParser
     {
         char FieldDelimiter => Chars.Pipe;

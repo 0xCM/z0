@@ -12,7 +12,6 @@ namespace Z0
         const NumericKind Closure = UnsignedInts;
 
         public const string DefaultDelimiter = " | ";
-
     }
 
     partial struct Msg

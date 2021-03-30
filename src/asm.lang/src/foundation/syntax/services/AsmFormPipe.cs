@@ -172,7 +172,7 @@ namespace Z0.Asm
             if(count == FieldCount)
             {
                 var i = 0u;
-                Tables.parse(NextCell(parts, ref i), out dst.Seq);
+                DataParser.parse(NextCell(parts, ref i), out dst.Seq);
                 dst.OpCode = asm.opcode(NextCell(parts, ref i));
                 AsmSyntax.sig(NextCell(parts, ref i), out dst.Sig);
                 dst.FormExpr = new AsmFormExpr(dst.OpCode, dst.Sig);
@@ -188,7 +188,7 @@ namespace Z0.Asm
         public ref AsmFormRecord Parse(TextRow src, ref AsmFormRecord dst)
         {
             var i = 0;
-            Tables.parse(src[i++], out dst.Seq);
+            DataParser.parse(src[i++], out dst.Seq);
             AsmSyntax.opcode(src[i++], out dst.OpCode);
             AsmSyntax.sig(src[i++], out dst.Sig);
             AsmSyntax.form(src[i++], out dst.FormExpr);

@@ -53,7 +53,7 @@ namespace Z0.Asm
                 distinct.Add(src.Summary());
             }
 
-            Wf.AsmStatements().Traverse(receiver);
+            Wf.AsmTraverser().Traverse(receiver);
             EmitThumbprints(distinct);
         }
 

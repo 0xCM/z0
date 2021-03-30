@@ -100,11 +100,11 @@ namespace Z0.Asm
             if(count >= 5)
             {
                 ref readonly var cell = ref skip(cells,i);
-                Tables.parse(skip(cells, i++), out dst.Sequence);
-                Tables.parse(skip(cells, i++), out dst.BlockAddress);
-                Tables.parse(skip(cells, i++), out dst.IP);
-                Tables.parse(skip(cells, i++), out dst.GlobalOffset);
-                Tables.parse(skip(cells, i++), out dst.LocalOffset);
+                DataParser.parse(skip(cells, i++), out dst.Sequence);
+                DataParser.parse(skip(cells, i++), out dst.BlockAddress);
+                DataParser.parse(skip(cells, i++), out dst.IP);
+                DataParser.parse(skip(cells, i++), out dst.GlobalOffset);
+                DataParser.parse(skip(cells, i++), out dst.LocalOffset);
             }
 
             if(count == AsmStatementDetail.FieldCount)

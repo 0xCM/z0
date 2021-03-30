@@ -27,7 +27,7 @@ namespace Z0.Asm
                 => new AsmStatement<A,B>(mnemonic,a,b);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B> statement<A,B>(AsmMnemonicCode mnemonic, Args<A,B> args)
+        public static AsmStatement<A,B> statement<A,B>(AsmMnemonicCode mnemonic, AsmOps<A,B> args)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
                 => new AsmStatement<A,B>(mnemonic, args);
@@ -40,7 +40,7 @@ namespace Z0.Asm
                 => new AsmStatement<A,B,C>(mnemonic,a,b,c);
 
         [MethodImpl(Inline)]
-        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonicCode mnemonic, Args<A,B,C> args)
+        public static AsmStatement<A,B,C> statement<A,B,C>(AsmMnemonicCode mnemonic, AsmOps<A,B,C> args)
             where A : unmanaged, IAsmOp
             where B : unmanaged, IAsmOp
             where C : unmanaged, IAsmOp

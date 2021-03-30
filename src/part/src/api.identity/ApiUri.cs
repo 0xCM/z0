@@ -139,6 +139,7 @@ namespace Z0
             return root.parsed(src, uri);
         }
 
+        [Op]
         public static Outcome parse(string src, out OpUri dst)
         {
             var result = parse(src);
@@ -150,10 +151,9 @@ namespace Z0
             else
             {
                 dst = OpUri.Empty;
-                return (false,result.Message?.ToString() ?? EmptyString);
+                return false;
             }
         }
-
         /// <summary>
         /// Defines an 8-bit immediate suffix predicated on an immediate value
         /// </summary>

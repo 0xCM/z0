@@ -9,19 +9,4 @@ namespace Z0.Asm
         dynamic Content {get;}
     }
 
-    public interface IAsmOpContent<T> : IAsmOpContent
-        where T : struct
-    {
-        new T Content {get;}
-
-        dynamic IAsmOpContent.Content
-            => Content;
-    }
-
-    public interface IAsmOpContent<W,T> : IAsmOpContent<T>
-        where T : struct
-        where W : unmanaged
-    {
-
-    }
 }

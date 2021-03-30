@@ -206,12 +206,12 @@ namespace Z0.Asm
                             var cells = row.Cells.View;
                             var record = new AsmCallRow();
                             var k = 0;
-                            Tables.parse(skip(cells, k++).Text, out record.Source);
-                            Tables.parse(skip(cells, k++).Text, out record.Target);
-                            Tables.parse(skip(cells, k++).Text, out record.InstructionSize);
-                            Tables.parse(skip(cells, k++).Text, out record.TargetOffset);
+                            DataParser.parse(skip(cells, k++).Text, out record.Source);
+                            DataParser.parse(skip(cells, k++).Text, out record.Target);
+                            DataParser.parse(skip(cells, k++).Text, out record.InstructionSize);
+                            DataParser.parse(skip(cells, k++).Text, out record.TargetOffset);
                             record.Instruction = skip(cells, k++).Text;
-                            Tables.parse(skip(cells, k).Text, out record.Encoded);
+                            DataParser.parse(skip(cells, k).Text, out record.Encoded);
                             dst.Add(record);
                         }
                     }

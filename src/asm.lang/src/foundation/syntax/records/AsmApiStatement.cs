@@ -16,6 +16,10 @@ namespace Z0.Asm
 
         public const byte FieldCount = 8;
 
+        public MemoryAddress BaseAddress;
+
+        public MemoryAddress IP;
+
         public Address16 BlockOffset;
 
         public AsmStatementExpr Expression;
@@ -25,10 +29,6 @@ namespace Z0.Asm
         public AsmOpCodeExpr OpCode;
 
         public AsmHexCode Encoded;
-
-        public MemoryAddress BaseAddress;
-
-        public MemoryAddress IP;
 
         public OpUri OpUri;
 

@@ -11,14 +11,14 @@ namespace Z0.Asm
 
     partial struct asm
     {
-         /// <summary>
+        /// <summary>
         /// Generalizes a <see cref='IAsmOp{T}'/> reification
         /// </summary>
         /// <param name="src">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static AsmOp<T> arg<T>(AsmOpKind kind, T content)
-            where T : struct, IAsmOpContent
+            where T : struct
                 => new AsmOp<T>(kind, content);
     }
 }

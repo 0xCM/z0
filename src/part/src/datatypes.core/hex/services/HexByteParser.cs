@@ -179,6 +179,24 @@ namespace Z0
         }
 
         /// <summary>
+        /// Parses a space-delimited sequence of hex text
+        /// </summary>
+        /// <param name="src">The space-delimited hex</param>
+        public static Outcome ParseData(string src, out Index<byte> dst)
+        {
+            try
+            {
+                dst = src.SplitClean(Chars.Space).Select(x => byte.Parse(x, NumberStyles.HexNumber));
+                return true;
+            }
+            catch(Exception e)
+            {
+                dst = Index<byte>.Empty;
+                return e;
+            }
+        }
+
+        /// <summary>
         /// Parses a hex byte
         /// </summary>
         /// <param name="src">hex text</param>

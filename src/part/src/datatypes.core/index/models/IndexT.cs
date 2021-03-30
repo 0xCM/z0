@@ -19,9 +19,6 @@ namespace Z0
         public Index(T[] content)
             => Data = content;
 
-        public Index(Count count)
-            => Data = alloc<T>(count);
-
         public int Length
         {
             [MethodImpl(Inline)]

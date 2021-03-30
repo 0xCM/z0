@@ -14,13 +14,14 @@ namespace Z0.Asm
 
     public partial class IntelIntrinsics : WfService<IntelIntrinsics>
     {
-        public void Emit()
+        public Index<Intrinsic> Emit()
         {
             var doc = IntelIntrinsics.doc();
             var name = "intel-intrinsics";
             Db.Doc(name, FS.Extensions.Xml).Overwrite(doc.Content);
             var intrinsics = Wf.IntelCpuIntrinsics();
-            var elements = intrinsics.Parse(doc).View;
+            var parsed = intrinsics.Parse(doc);
+            var elements = parsed.View;
             var count = elements.Length;
             var path = Db.Doc(name, FS.Extensions.Log);
             var flow = Wf.EmittingFile(path);
@@ -28,6 +29,7 @@ namespace Z0.Asm
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(elements,i).Format());
             Wf.EmittedFile(flow, count);
+            return parsed;
         }
 
         public static XmlDoc doc()

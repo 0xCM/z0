@@ -12,15 +12,14 @@ namespace Z0.Asm
     public interface IAsmStatement<A> : IAsmStatement
         where A : unmanaged, IAsmOp
     {
-        Args<A> Args {get;}
+        AsmOps<A> Args {get;}
     }
 
     public interface IAsmStatement<A,B> : IAsmStatement
         where A : unmanaged, IAsmOp
         where B : unmanaged, IAsmOp
     {
-        Args<A,B> Args {get;}
-
+        AsmOps<A,B> Args {get;}
     }
 
     public interface IAsmStatement<A,B,C> : IAsmStatement
@@ -28,7 +27,7 @@ namespace Z0.Asm
         where B : unmanaged, IAsmOp
         where C : unmanaged, IAsmOp
     {
-        Args<A,B,C> Args {get;}
+        AsmOps<A,B,C> Args {get;}
     }
 
     public interface IAsmStatement<A,B,C,D> : IAsmStatement
@@ -37,6 +36,6 @@ namespace Z0.Asm
         where C : unmanaged, IAsmOp
         where D : unmanaged, IAsmOp
     {
-        Args<A,B,C,D> Args {get;}
+        AsmOps<A,B,C,D> Args {get;}
     }
 }

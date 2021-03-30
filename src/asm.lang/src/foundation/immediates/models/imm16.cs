@@ -21,10 +21,6 @@ namespace Z0.Asm
 
             public AsmOpKind OpKind
                 => AsmOpKind.Imm | AsmOpKind.W16;
-
-            [MethodImpl(Inline)]
-            public static implicit operator Arg16(imm16 src)
-                => new Arg16(src.Content, src.OpKind);
         }
     }
 }

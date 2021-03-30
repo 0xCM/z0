@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static AsmRegs;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct CpuId
+    public struct CpuId : ITextual
     {
         public eax Fx;
 
@@ -42,6 +42,12 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CpuId WithResponse(in Cell128 src)
             => response(src, ref this);
+
+        public string Format()
+            => AsmRender.format(this);
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static ref CpuId clear(ref CpuId target)

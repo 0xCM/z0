@@ -8,15 +8,16 @@ namespace Z0.Asm
 
     using static Pow2x16;
 
+    [Flags]
     public enum AsmOpKind : ushort
     {
         None = 0,
 
-        R = P2ᐞ00,
+        R = AsmOpClass.R,
 
-        M = P2ᐞ01,
+        M = AsmOpClass.M,
 
-        Imm = P2ᐞ02,
+        Imm = AsmOpClass.Imm,
 
         W8 = P2ᐞ03,
 
@@ -31,7 +32,5 @@ namespace Z0.Asm
         W256 = P2ᐞ08,
 
         W512 = P2ᐞ09,
-
-        IO = P2ᐞ12,
     }
 }

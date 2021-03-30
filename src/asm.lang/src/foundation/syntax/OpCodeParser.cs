@@ -38,14 +38,8 @@ namespace Z0.Asm
             Subject = src;
             CurrentPos = 0;
             LastPos = (uint)src.Length - 1;
-            ParsingNumber = false;
-            ParsingString = false;
             Run();
         }
-
-        bool ParsingNumber;
-
-        bool ParsingString;
 
         void Run()
         {
