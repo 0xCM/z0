@@ -13,10 +13,6 @@ namespace Z0
 
     partial struct ClrEnums
     {
-        [MethodImpl(Inline)]
-        static ClrAssemblyName name(Assembly src)
-            => src;
-
         /// <summary>
         /// Queries the source assemblies for enum types
         /// </summary>
@@ -27,7 +23,7 @@ namespace Z0
             var x = from part in src
                     let enums = part.Enums()
                     orderby part.FullName
-                    select Lookups.keyed(name(part), enums);
+                    select Lookups.keyed(Clr.name(part), enums);
             return x;
         }
     }

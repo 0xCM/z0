@@ -10,7 +10,6 @@ namespace Z0
     using System.IO;
 
     using static Root;
-    using static memory;
 
     [ApiHost]
     public readonly struct ClrAssemblies

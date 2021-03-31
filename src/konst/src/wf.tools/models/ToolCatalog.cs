@@ -62,7 +62,7 @@ namespace Z0
         public bool HasHelp(ToolId tool)
             => HelpFile(tool).Exists;
 
-        public Index<TextLine> HelpText(ToolId tool)
+        public TextLines HelpText(ToolId tool)
             => HelpFile(tool).ReadTextLines();
 
         public void Emit(CmdScript script)

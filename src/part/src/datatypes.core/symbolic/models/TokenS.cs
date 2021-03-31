@@ -41,10 +41,10 @@ namespace Z0
             get => Literal.DataType;
         }
 
-        public Identifier UniqueName
+        public SymIdentity Identity
         {
             [MethodImpl(Inline)]
-            get => Literal.UniqueName;
+            get => Literal.Identity;
         }
 
         public SymbolName<K> SymbolName

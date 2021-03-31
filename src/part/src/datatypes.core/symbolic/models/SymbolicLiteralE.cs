@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// A global identifier
         /// </summary>
-        public Identifier UniqueName;
+        public SymIdentity Identity;
 
         /// <summary>
         /// The literal's primitive classifier
@@ -60,6 +60,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(SymbolicLiteral<E> src)
-            => UniqueName.CompareTo(src.UniqueName);
+            => Identity.CompareTo(src.Identity);
     }
 }

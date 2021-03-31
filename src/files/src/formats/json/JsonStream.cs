@@ -17,6 +17,9 @@ namespace Z0
 
     public ref struct JsonStream
     {
+        public static JsonStream create(FS.FilePath src)
+            => new JsonStream(src.Reader());
+
         readonly JsonReaderState State;
 
         readonly StreamReader Stream;
@@ -29,8 +32,6 @@ namespace Z0
 
         bool ReadingObject;
 
-        public static JsonStream create(FS.FilePath src)
-            => new JsonStream(src.Reader());
 
         [MethodImpl(Inline)]
         JsonStream(StreamReader stream)
@@ -116,7 +117,6 @@ namespace Z0
         void BeginArrayRead(Utf8JsonReader reader)
         {
             ReadingArray = true;
-
 
         }
 

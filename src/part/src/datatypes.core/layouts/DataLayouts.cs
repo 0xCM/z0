@@ -4,12 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static Part;
 
-    public readonly struct UV
+    [ApiHost]
+    public readonly partial struct DataLayouts
     {
-
-
+        const NumericKind Closure = UnsignedInts;
     }
-
 }

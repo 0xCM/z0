@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static memory;
 
     using api = Symbols;
 
@@ -19,9 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Symbols(Sym<K>[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         public bool Contains(SymExpr src)
             => api.contains(this, src);
@@ -66,6 +63,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Sym<K>[](Symbols<K> src)
             => src.Storage;
-
     }
 }

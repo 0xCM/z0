@@ -12,12 +12,20 @@ namespace Z0
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(O.Equals)]
-        public static bool equals(object lhs, object rhs)
-            => object.Equals(lhs,rhs);
+        public static bool equals(object a, object b)
+            => object.Equals(a,b);
 
         [MethodImpl(Options), Opaque(O.Equals), Closures(Closure)]
-        public static bool equals<T>(T lhs, T rhs)
+        public static bool equals<T>(T a, T b)
             where T : struct
-                => lhs.Equals(rhs);
+                => a.Equals(b);
+
+        [MethodImpl(Options), Opaque(O.Equals)]
+        public static bool equals(string a, string b)
+            => a.Equals(b);
+
+        [MethodImpl(Options), Opaque(O.Equals)]
+        public static bool equals(string a, string b, StringComparison options)
+            => a.Equals(b,options);
     }
 }

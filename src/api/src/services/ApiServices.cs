@@ -95,7 +95,7 @@ namespace Z0
         public Index<SymbolicLiteral> EmitSymbolicLiterals(Index<Assembly> src, FS.FilePath dst)
         {
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var rows = ClrEnums.symbolic(src).Sort();
+            var rows = Symbols.symbolic(src).Sort();
             var kRows = rows.Length;
             using var writer = dst.Writer();
             var formatter = Tables.formatter<SymbolicLiteral>(16);

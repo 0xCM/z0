@@ -19,7 +19,7 @@ namespace Z0
         public static SymbolTable<E> table<E>()
             where E : unmanaged, Enum
         {
-            var literals = ClrEnums.symbolic<E>();
+            var literals = Symbols.symbolic<E>();
             var view = literals.View;
             var count = view.Length;
             var buffer = alloc<Token<E>>(count);
@@ -38,7 +38,7 @@ namespace Z0
         [Op]
         public static SymbolTable table(Type src)
         {
-            var literals = ClrEnums.symbolic(src);
+            var literals = Symbols.symbolic(src);
             var view = literals.View;
             var count = view.Length;
             var buffer = alloc<Token>(count);

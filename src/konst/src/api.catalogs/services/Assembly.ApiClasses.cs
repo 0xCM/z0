@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XFs
+    using System;
+    using System.Reflection;
+
+    partial class XTend
     {
-        /// <summary>
-        /// Reads the full content of a text file
-        /// </summary>
-        /// <param name="src">The file path</param>
         [Op]
-        public static string ReadText(this FS.FilePath src)
-            => FS.text(src);
+        public static Index<SymbolicLiteral> ApiClasses(this Assembly src)
+            => Symbols.symbolic(src.Enums().Tagged<ApiClassAttribute>());
     }
 }

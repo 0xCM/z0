@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Part;
+    using static memory;
 
-    partial class XFs
+    partial struct Symbols
     {
         [Op]
-        public static FS.FileName Component(this PartId part, FS.FileExt ext)
-            => FS.component(part, ext);
-
-        [Op]
-        public static FS.FileName Component(this PartId part, FS.FileExt x1, FS.FileExt x2)
-            => FS.component(part, x1, x2);
+        public static SymIdentity identity(FieldInfo field, ushort index)
+            => text.format(RP.SlotDot4, field.DeclaringType.Assembly.GetSimpleName(), field.DeclaringType.Name, index, field.Name);
     }
 }

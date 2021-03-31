@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IRelativeAdress : ITextual, INullity
+    public interface IOutcome : ITextual
     {
-        uint Offset {get;}
+        bool Ok {get;}
 
-        DataWidth Grain {get;}
+        string Message {get;}
     }
 
-    public interface IRelativeAddress<T>: IRelativeAdress, INullary<T>, ITextual, INullity
-        where T : unmanaged, IRelativeAddress<T>
+    public interface IOutcome<T> : IOutcome
     {
-
+        T Data {get;}
     }
 }

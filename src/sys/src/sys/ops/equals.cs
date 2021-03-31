@@ -17,5 +17,13 @@ namespace Z0
         public static bool equals<T>(T a, T b)
             where T : struct
                 => proxy.equals(a,b);
+
+        [MethodImpl(Options), Op]
+        public static bool equals(string a, string b)
+            => proxy.equals(a,b);
+
+        [MethodImpl(Options), Op]
+        public static bool equals(string a, string b, StringComparison options)
+            => proxy.equals(a, b, options);
     }
 }

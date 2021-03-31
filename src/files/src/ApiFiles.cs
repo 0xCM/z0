@@ -11,9 +11,6 @@ namespace Z0
 
     public readonly struct ApiFiles
     {
-        // public static FS.FileName filename(ApiHostUri host, FS.FileExt ext)
-        //     => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
-
         public static FS.FileName filename(ApiHostUri host, FS.FileExt ext)
             => FS.file(host.Id.Format(), ext);
 
@@ -27,6 +24,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FS.FolderName folder(PartId part)
             => FS.folder(part.Format());
-
     }
 }
