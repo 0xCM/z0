@@ -13,14 +13,12 @@ namespace Z0.Asm
     {
         readonly IWfShell Wf;
 
-        readonly WfHost Host;
 
         readonly IAsmContext Asm;
 
         public ApiHostAsmEmitter(IWfShell wf, IAsmContext asm)
         {
-            Host = WfShell.host(nameof(ApiHostAsmEmitter));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Asm = asm;
         }
 

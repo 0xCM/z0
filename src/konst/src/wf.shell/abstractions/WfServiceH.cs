@@ -50,7 +50,7 @@ namespace Z0
         public void Init(IWfShell wf)
         {
             var flow = wf.Creating(typeof(H).Name);
-            Host = WfShell.host(typeof(H));
+            Host = new WfSelfHost(typeof(H));
             Wf = wf.WithHost(Host);
             Db = new WfDb(wf, wf.Env.Db.Value);
             Events = EventCache.init(wf);
@@ -66,7 +66,7 @@ namespace Z0
 
         protected WfService(IWfShell wf)
         {
-            Host = WfShell.host(typeof(H));
+            Host = new WfSelfHost(typeof(H));
             Wf = wf.WithHost(Host);
         }
 

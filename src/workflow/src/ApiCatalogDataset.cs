@@ -98,7 +98,6 @@ namespace Z0
         MethodInfo[] IApiCatalogDataset.Operations
             => _Operations;
 
-
         public ApiCatalogDataset(Index<IPart> parts, Index<Assembly> components, ApiPartCatalogs catalogs, Index<IApiHost> hosts, Index<PartId> partIds, Index<MethodInfo> ops)
         {
             _Parts = parts;

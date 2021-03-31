@@ -15,9 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfSelfHost host(Type self)
             => new WfSelfHost(self);
-
-        [MethodImpl(Inline), Op]
-        public static WfSelfHost host(Name name)
-            => new WfSelfHost(name);
     }
 }

@@ -109,7 +109,7 @@ namespace Z0
         {
             var flow = Wf.Running(Msg.JittingPart.Format(src.Id));
             var dst = root.list<ApiMember>();
-            var catalog = ApiCatalogs.PartCatalog(src);
+            var catalog = ApiCatalogs.catalog(src);
             var types = catalog.ApiTypes;
             var hosts = catalog.ApiHosts;
 

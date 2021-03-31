@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiClassCatalog : IWfService
+    public interface IApiClassCatalog
     {
         Index<ApiClassifier> Classifiers();
     }

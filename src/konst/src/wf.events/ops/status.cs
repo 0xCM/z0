@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <typeparam name="T">The content type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static StatusEvent<T> status<T>(WfStepId step, T content, CorrelationToken ct)
-            => new StatusEvent<T>(step, content, ct);
+        public static StatusEvent<T> status<T>(WfStepId step, T content, CorrelationToken ct = default)
+            => new StatusEvent<T>(step, content);
     }
 }

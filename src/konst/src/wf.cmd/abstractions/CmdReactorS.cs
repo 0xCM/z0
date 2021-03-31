@@ -10,8 +10,6 @@ namespace Z0
     public abstract class CmdReactor<S> : ICmdReactor<S>
         where S : struct, ICmd<S>
     {
-        protected WfHost Host;
-
         protected IWfShell Wf;
 
         protected IWfDb Db => Wf.Db();
@@ -44,8 +42,7 @@ namespace Z0
 
         public void Init(IWfShell wf)
         {
-            Host = WfShell.host(GetType());
-            Wf = wf.WithHost(Host);
+            Wf = wf;
         }
     }
 }

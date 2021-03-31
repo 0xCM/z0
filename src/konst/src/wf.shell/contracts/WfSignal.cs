@@ -108,7 +108,7 @@ namespace Z0
             => Raise(emittedFile(Host, payload, dst, Ct));
 
         public void Status<T>(WfStepId step, T data)
-            => Raise(status(step, data, Ct));
+            => Raise(status(step, data));
 
         public void Status<T>(T data)
             => Status(Host, data);

@@ -39,10 +39,9 @@ namespace Z0
         public void SetMode(bool diagnostic)
             => DiagnosticMode = diagnostic;
 
-
         protected TestContext()
         {
-            ApiParts = WfShell.parts();
+            ApiParts = ApiCatalogs.parts();
         }
 
         public IApiParts ApiParts {get;}

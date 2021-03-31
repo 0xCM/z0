@@ -35,7 +35,7 @@ namespace Z0
             CommandQueue = new ConcurrentQueue<string>();
             ExecLog = new ConcurrentDictionary<ulong,WfExecToken>();
             DispatchKeys = new ConcurrentBag<Guid>();
-            Tokenizer = WfShell.tokenizer();
+            Tokenizer = WfTokenProvider.create();
             Running = false;
             Initialized = false;
         }
@@ -51,6 +51,14 @@ namespace Z0
         bool Running;
 
         bool Initialized;
+
+        IWorkerLog WorkerLog;
+
+        Process Worker;
+
+        Task SpinTask;
+
+        WfExecToken Token;
 
         WfTokenProvider Tokenizer;
 
@@ -82,13 +90,6 @@ namespace Z0
         protected abstract FS.FilePath ExePath {get;}
 
 
-        IWorkerLog WorkerLog;
-
-        Process Worker;
-
-        Task SpinTask;
-
-        WfExecToken Token;
 
         public void Run()
         {
@@ -146,7 +147,7 @@ namespace Z0
             if(e != null && e.Data != null)
             {
                 WorkerLog?.LogStatus(e.Data);
-                TermLog.Deposit(WfEvents.status(Host, e.Data, Wf.Ct));
+                TermLog.Deposit(WfEvents.status(Host, e.Data));
             }
         }
 

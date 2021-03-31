@@ -29,7 +29,7 @@ namespace Z0
         public FlairKind Flair => FlairKind.Running;
 
         [MethodImpl(Inline)]
-        public RunningEvent(WfStepId step, T data, CorrelationToken ct)
+        public RunningEvent(WfStepId step, T data, CorrelationToken ct = default)
         {
             EventId = WfEventId.define(EventName, step);
             StepId = step;
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public RunningEvent(WfStepId step, string operation, T data, CorrelationToken ct)
+        public RunningEvent(WfStepId step, string operation, T data, CorrelationToken ct = default)
         {
             EventId = WfEventId.define(EventName, step);
             Operation = operation;

@@ -29,7 +29,7 @@ namespace Z0
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog = ApiCatalogs.Dataset(Source, parts);
+            ApiCatalog = ApiCatalogs.dataset(Source, parts);
             Components = ApiCatalog.PartComponents;
         }
 
@@ -37,7 +37,7 @@ namespace Z0
         {
             Source = source;
             ManagedSources = Source.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            ApiCatalog =  ApiCatalogs.Dataset(ManagedSources);
+            ApiCatalog =  ApiCatalogs.dataset(ManagedSources);
             Components = ApiCatalog.PartComponents;
         }
 

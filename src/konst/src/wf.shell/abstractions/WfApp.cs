@@ -9,7 +9,7 @@ namespace Z0
     {
         public static void run(string[] args, params PartId[] parts)
         {
-            using var wf = WfShell.create(WfShell.parts(parts), args);
+            using var wf = WfShell.create(ApiCatalogs.parts(parts), args);
             using var app = new A();
             app.Init(wf);
             var name = typeof(A).Name;

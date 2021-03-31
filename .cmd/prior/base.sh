@@ -1,1 +1,0 @@
-export ScriptDir="$(dirname "$0")"

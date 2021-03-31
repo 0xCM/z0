@@ -23,8 +23,6 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly WfHost Host;
-
         readonly IAsmDecoder Decoder;
 
         readonly IAsmRoutineFormatter Formatter;
@@ -36,8 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal MemoryCapture(IWfShell wf, IAsmContext asm, uint bufferlen = Pow2.T14)
         {
-            Host = WfShell.host(typeof(MemoryCapture));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Formatter = asm.Formatter;
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);

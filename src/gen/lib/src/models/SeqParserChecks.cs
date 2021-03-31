@@ -18,16 +18,12 @@ namespace Z0
         [Op]
         public static SeqParserChecks create(IWfShell wf)
             => new SeqParserChecks(wf);
-
-        readonly WfHost Host;
-
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
         internal SeqParserChecks(IWfShell wf)
         {
-            Host = WfShell.host(typeof(SeqParserChecks));
-            Wf = wf.WithHost(Host).WithVerbosity(LogLevel.Babble);
+            Wf = wf;
         }
 
         WfExecToken Ran<C,T>(WfExecFlow<string> flow, C @case, T data)

@@ -1,1 +1,0 @@
-dotnet new sln --name %sln_name% --output %sln_dir%

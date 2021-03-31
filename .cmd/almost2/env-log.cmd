@@ -1,1 +1,0 @@
-set > %ZControl%\settings\env.log

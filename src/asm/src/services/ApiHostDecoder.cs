@@ -14,15 +14,12 @@ namespace Z0.Asm
     {
         public IWfShell Wf {get;}
 
-        readonly WfHost Host;
-
         readonly IAsmDecoder Decoder;
 
         [MethodImpl(Inline)]
         internal ApiHostDecoder(IWfShell wf, IAsmDecoder decoder)
         {
-            Host = WfShell.host(nameof(ApiHostDecoder));
-            Wf = wf.WithHost(Host);
+            Wf = wf;
             Decoder = decoder;
         }
 
@@ -48,14 +45,14 @@ namespace Z0.Asm
             }
             catch(Exception e)
             {
-                Wf.Error(Host, $"{uri}: {e}");
+                Wf.Error($"{uri}: {e}");
                 return sys.empty<AsmMemberRoutine>();
             }
         }
 
         void HandleFailure(in ApiMemberCode member)
         {
-            Wf.Error(Host, $"Could not decode {member}");
+            Wf.Error($"Could not decode {member}");
         }
     }
 }

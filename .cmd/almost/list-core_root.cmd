@@ -1,1 +1,0 @@
-dir %core_root% /s/b > %ZDb%\lists\core_root.list

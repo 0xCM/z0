@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
 
@@ -15,17 +13,49 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiCatalogs
     {
-        public static ApiCatalogDataset dataset(IPart[] parts)
+        [Op]
+        public static IApiParts parts()
+            => parts(root.controller(), Environment.GetCommandLineArgs());
+
+        [Op]
+        public static IApiParts parts(FS.FolderPath src)
+            => new ApiPartSet(src);
+
+        /// <summary>
+        /// Creates a <see cref='ApiPartSet'/> predicated an optionally-specified <see cref='PartId'/> sequence
+        /// </summary>
+        /// <param name="control">The controlling assembly</param>
+        /// <param name="identifiers">The desired parts to include, or empty to include all known parts</param>
+        [Op]
+        public static IApiParts parts(Assembly control, Index<PartId> identifiers)
         {
-            var catalogs = parts.Select(x => PartCatalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
-            var dst = new ApiCatalogDataset(parts,
-                parts.Select(p => p.Owner),
-                catalogs,
-                catalogs.SelectMany(c => c.ApiHosts.Storage),
-                parts.Select(p => p.Id),
-                catalogs.SelectMany(x => x.Operations)
-                );
-            return dst;
+            if(identifiers.IsNonEmpty)
+               return new ApiPartSet(FS.path(control.Location).FolderPath, identifiers);
+            else
+                return new ApiPartSet(FS.path(control.Location).FolderPath);
+        }
+
+        /// <summary>
+        /// Creates a <see cref='ApiPartSet'/> predicated an optionally-specified <see cref='PartId'/> sequence
+        /// where the entry assembly is assumed to be the locus of control
+        /// </summary>
+        /// <param name="control">The controlling assembly</param>
+        /// <param name="identifiers">The desired parts to include, or empty to include all known parts</param>
+        [Op]
+        public static IApiParts parts(Index<PartId> identifiers)
+            => parts(root.controller(), identifiers);
+
+        [Op]
+        public static IApiParts parts(Assembly control, string[] args)
+        {
+            if(args.Length != 0)
+            {
+                var identifiers = ApiPartIdParser.parse(args);
+                if(identifiers.Length != 0)
+                    return new ApiPartSet(FS.path(control.Location).FolderPath, identifiers);
+            }
+
+            return new ApiPartSet(FS.path(control.Location).FolderPath);
         }
 
         [Op]
@@ -55,19 +85,19 @@ namespace Z0
         /// <param name="part">The defining part</param>
         /// <param name="type">The reifying type</param>
         [Op]
-        public static ApiHost ApiHost(Type type)
+        public static ApiHost host(Type type)
         {
             var part = type.Assembly.Id();
-            var name =  HostName(type);
+            var name =  ApiParts.hostname(type);
             var declared = type.DeclaredMethods();
             return new ApiHost(type, name, part, new ApiHostUri(part, name), declared, index(declared));
         }
 
         [Op]
-        public static Index<ApiHost> ApiHosts(Assembly src)
+        public static Index<ApiHost> hosts(Assembly src)
         {
             var _id = src.Id();
-            return ApiHostTypes(src).Select(h => ApiHost(_id, h));
+            return ApiParts.ApiHostTypes(src).Select(h => host(_id, h));
         }
 
         /// <summary>
@@ -76,51 +106,28 @@ namespace Z0
         /// <param name="part">The defining part</param>
         /// <param name="t">The reifying type</param>
         [Op]
-        public static ApiHost ApiHost(PartId part, Type type)
+        public static ApiHost host(PartId part, Type type)
         {
-            var name =  HostName(type);
+            var name =  ApiParts.hostname(type);
             var declared = type.DeclaredMethods();
             return new ApiHost(type, name, part, new ApiHostUri(part, name), declared, index(declared));
         }
-
-        [Op]
-        public static Identifier HostName(Type src)
-        {
-            var attrib = src.Tag<ApiHostAttribute>();
-            return text.ifempty(attrib.MapValueOrDefault(a => a.HostName, src.Name), src.Name).ToLower();
-        }
-
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        public static Index<Type> ApiHostTypes(Assembly src)
-            => src.GetTypes().Where(IsApiHost);
-
-        /// <summary>
-        /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
-        /// </summary>
-        /// <param name="src">The assembly to search</param>
-        [Op]
-        public static Type[] ServiceHostTypes(Assembly src)
-            => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
 
         /// <summary>
         /// Defines a <see cref='ApiPartCatalog'/> for a specified part
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog PartCatalog(IPart src)
-            => PartCatalog(src.Owner);
+        public static IApiPartCatalog catalog(IPart src)
+            => catalog(src.Owner);
 
         /// <summary>
         /// Defines a <see cref='ApiPartCatalog'/> over a specified assembly
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static IApiPartCatalog PartCatalog(Assembly src)
-            => new ApiPartCatalog(src.Id(), src, ApiTypes(src), ApiHosts(src), ServiceHostTypes(src));
+        public static IApiPartCatalog catalog(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, ApiTypes(src), hosts(src), ApiParts.ServiceHostTypes(src));
 
         /// <summary>
         /// Searches an assembly for types tagged with the <see cref="ApiCompleteAttribute"/>
@@ -146,57 +153,29 @@ namespace Z0
             return buffer;
         }
 
-        /// <summary>
-        /// Creates a system-level api catalog over a set of path-identified components
-        /// </summary>
-        /// <param name="paths">The source paths</param>
-        [Op]
-        public static IApiCatalogDataset Dataset(FS.Files paths)
-            => new GlobalApiCatalog(paths.Storage.Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
-
-        [Op]
-        public static IApiCatalogDataset Dataset(FS.FolderPath src, PartId[] parts)
+        public static IApiCatalogDataset dataset(IPart[] parts)
         {
-            var managed = src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            return parts.Length != 0 ? new GlobalApiCatalog(Dataset(managed).Parts.Where(x => parts.Contains(x.Id))) : Dataset(managed);
+            var catalogs = parts.Select(x => catalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
+            var dst = new ApiCatalogDataset(parts,
+                parts.Select(p => p.Owner),
+                catalogs,
+                catalogs.SelectMany(c => c.ApiHosts.Storage),
+                parts.Select(p => p.Id),
+                catalogs.SelectMany(x => x.Operations)
+                );
+            return dst;
         }
 
         [Op]
-        public static IApiCatalogDataset Dataset(Assembly src, PartId[] parts)
-            => Dataset(FS.path(src.Location).FolderPath, parts);
-
-        /// <summary>
-        /// Attempts to resolve a part from an assembly file path
-        /// </summary>
-        [Op]
-        static Option<IPart> part(FS.FilePath src)
-                => from c in ApiParts.component(src)
-                from t in resolve(c)
-                from p in resolve(t)
-                from part in resolve(p)
-                select part;
-
-        /// <summary>
-        /// Attempts to resolve a part resolution type
-        /// </summary>
-        static Option<Type> resolve(Assembly src)
-            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).FirstOrDefault();
-
-        /// <summary>
-        /// Attempts to resolve a part resolution property
-        /// </summary>
-        static Option<PropertyInfo> resolve(Type src)
-            => src.StaticProperties().Where(p => p.Name == "Resolved").FirstOrDefault();
-
-        /// <summary>
-        /// Attempts to resolve a part from a resolution property
-        /// </summary>
-        [Op]
-        static Option<IPart> resolve(PropertyInfo src)
-            => root.@try(src, x => (IPart)x.GetValue(null));
+        public static IApiCatalogDataset dataset(FS.Files paths)
+            => dataset(paths.Storage.Select(ApiParts.part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         [Op]
-        static bool IsApiHost(Type src)
-            => src.Tagged<ApiHostAttribute>();
+        public static IApiCatalogDataset dataset(FS.FolderPath src, PartId[] parts)
+            => dataset(src.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)));
+
+        [Op]
+        public static IApiCatalogDataset datset(Assembly src, PartId[] parts)
+            => dataset(FS.path(src.Location).FolderPath, parts);
     }
 }

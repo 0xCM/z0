@@ -12,7 +12,7 @@ namespace Z0
     {
         [Op]
         public static IWfShell create(string[] args, bool verbose = true)
-            => create(WfShell.parts(root.controller(), args), args, verbose);
+            => create(ApiCatalogs.parts(root.controller(), args), args, verbose);
 
         [Op]
         public static IWfShell create(IApiParts parts, string[] args, bool verbose = true)

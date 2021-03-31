@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
 
-    using static Part;
-    using static memory;
-
     readonly struct DefaultCmdDispatcher
     {
         public static void dispatch(string[] args)
         {
             try
             {
-                var parts = WfShell.parts(Index<PartId>.Empty);
+                var parts = ApiCatalogs.parts(Index<PartId>.Empty);
                 term.inform(AppMsg.status(text.prop("PartCount", parts.Components.Length)));
                 var rng = Rng.@default();
                 using var wf = WfShell.create(parts, args).WithRandom(rng);

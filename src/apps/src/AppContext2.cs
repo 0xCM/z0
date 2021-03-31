@@ -30,7 +30,7 @@ namespace Z0
             Settings = settings;
             MessageQueue = queue;
             ApiGlobal = catalog;
-            ApiParts = WfShell.parts();
+            ApiParts = ApiCatalogs.parts();
         }
     }
 }

@@ -8,10 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static z;
 
     public class WfTokenProvider
     {
+        [MethodImpl(Inline), Op]
+        public static WfTokenProvider create()
+            => new WfTokenProvider();
+
         long StartToken;
 
         ExecTokens Tokens;

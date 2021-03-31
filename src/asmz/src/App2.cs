@@ -10,12 +10,9 @@ namespace Z0.Asm
     using System.Collections.Generic;
     using System.IO;
 
-    using Z0.Tooling;
-
     using static Part;
     using static memory;
     using static Toolsets;
-
 
     class App : WfService<App>
     {
@@ -308,7 +305,7 @@ namespace Z0.Asm
         {
             var part = PartId.Math;
             var component = Wf.Api.FindComponent(part).Require();
-            var catalog = ApiCatalogs.PartCatalog(component);
+            var catalog = ApiCatalogs.catalog(component);
 
             void accept(in ApiCodeBlock block)
             {
@@ -979,7 +976,7 @@ namespace Z0.Asm
         {
             try
             {
-                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
+                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args).WithRandom(Rng.@default());
                 var app = App.create(wf);
                 app.Run();
 

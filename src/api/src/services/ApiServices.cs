@@ -73,11 +73,15 @@ namespace Z0
             return new BasedApiMemberCatalog(dst, src, records);
         }
 
+        [Op]
+        public static IApiClassCatalog classes(IWfShell wf)
+            => ApiClassCatalog.create(wf);
+
         public void EmitApiClasses()
         {
             var dst = Db.IndexTable("api.classes");
             var flow = Wf.EmittingTable<SymbolicLiteral>(dst);
-            var service = WfShell.classes(Wf);
+            var service = classes(Wf);
             var formatter = Tables.formatter<SymbolicLiteral>();
             var classifiers = service.Classifiers();
             var literals = classifiers.SelectMany(x => x.Literals);
@@ -150,7 +154,7 @@ namespace Z0
         /// <param name="wf">The workflow context</param>
         /// <param name="src">The host type</param>
         public ApiHostCatalog HostCatalog(Type src)
-            => HostCatalog(ApiCatalogs.ApiHost(src));
+            => HostCatalog(ApiCatalogs.host(src));
 
         /// <summary>
         /// Returns a <see cref='ApiHostCatalog'/> for a specified host

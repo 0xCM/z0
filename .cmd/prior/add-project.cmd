@@ -1,1 +1,0 @@
-dotnet sln %sln_file% add %project_path%

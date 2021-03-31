@@ -11,7 +11,7 @@ namespace Z0
         public void Generate(string[] args)
         {
             var flow = Wf.Running("Generating");
-            z.iter(args, arg => Wf.Row(arg));
+            root.iter(args, arg => Wf.Row(arg));
             Wf.Ran(flow);
         }
     }
@@ -23,7 +23,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.create(WfShell.parts(Index<PartId>.Empty), args);
+                using var wf = WfShell.create(ApiCatalogs.parts(Index<PartId>.Empty), args);
                 Generator.create(wf).Generate(args);
             }
             catch(Exception e)
