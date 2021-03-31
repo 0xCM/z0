@@ -210,41 +210,67 @@ namespace Z0.Asm
             //Wf.Status(definitions.BlockCount);
         }
 
-        void CheckSigParser()
+
+        [Op]
+        public static bool test(AsmOpCodeExpr opcode, AsmOpCodeToken token, Symbols<AsmOpCodeToken> symbols)
         {
-            // var success = root.hashset<AsmSig>();
-            // var fail = root.hashset<AsmSigExpr>();
+            symbols.Match(opcode.Content, out var match);
+            return match.Value == token;
+        }
 
-            var wincounter = 0u;
-            var failcounter = 0u;
-            var failpath = Db.AppLog("sig-parse-failures");
-            var winpath = Db.AppLog("sig-parse-successes");
-            using var fails = failpath.Writer();
-            using var wins = winpath.Writer();
+        void ShowOpCodeTokens()
+        {
+            var symbols = Symbols.load<AsmOpCodeToken>();
+            Show(symbols.View, FS.file("opcode-symbols", FS.Csv), oc => oc.Format(), Symbols.header());
+        }
 
+        void CheckOpCodeParser()
+        {
+            const string FormatPattern = "{0,-36} ; {1} [{2}]";
+
+            var vexpath = Db.AppLog("opcodes-vex", FS.Asm);
+            var rexpath = Db.AppLog("opcodes-rex", FS.Asm);
+            var rextp = root.hashset<string>();
+            var vextp = root.hashset<string>();
+            var bitstrings = AsmBitstrings.service();
+            using var vex = vexpath.Writer();
+            using var rex = rexpath.Writer();
             void parse(AsmApiStatement src)
             {
-                var input = src.Sig;
-                var result = Sigs.ParseSig(input, out var output);
-                if(!result)
+                var tp = src.Thumbprint();
+                var tpexpr = tp.Format();
+
+                var parser = new AsmOpCodeParser(src.OpCode);
+                if(parser.HasRex())
                 {
-                    failcounter++;
-                    fails.WriteLine(string.Format("{0,-46} | {1}", input, result.Message));
+                    if(!rextp.Contains(tpexpr))
+                    {
+                        rex.WriteLine(string.Format(FormatPattern, src.Expression, tpexpr, bitstrings.Format(tp.Encoded)));
+                        rextp.Add(tpexpr);
+                    }
                 }
-                else
+                else if(parser.HasVex())
                 {
-                    wincounter++;
-                    wins.WriteLine(input);
+                    if(!vextp.Contains(tpexpr))
+                    {
+                        vex.WriteLine(string.Format(FormatPattern, src.Expression, tpexpr, bitstrings.Format(tp.Encoded)));
+                        vextp.Add(tpexpr);
+                    }
                 }
+
 
             }
 
             Wf.AsmTraverser().Traverse(parse);
 
-            if(failcounter != 0)
-                Wf.Error(string.Format($"{failcounter} parse failures:{failpath.ToUri()}"));
-            if(wincounter != 0)
-                Wf.Status(string.Format($"{wincounter} parse successes:{winpath.ToUri()}"));
+            // using var stats = Db.AppLog("opcode-stats", FS.Log).Writer();
+            // for(var i=0; i<tokens.Count; i++)
+            // {
+            //     var t = (AsmOpCodeToken)i;
+            //     var count = tokens[t];
+            //     if(count != 0)
+            //         stats.WriteLine(string.Format("{0, -10} | {1}", t, count));
+            // }
 
         }
 
@@ -777,17 +803,16 @@ namespace Z0.Asm
         {
             var m1 = BitMasks.odd<ulong>();
             var bits = BitView.create(m1);
-            Wf.Row($"1: {bits.View(w1)}");
-            Wf.Row($"2: {bits.View(w2)}");
-            Wf.Row($"3: {bits.View(w3)}");
-            Wf.Row($"4: {bits.View(w4)}");
-            Wf.Row($"5: {bits.View(w5)}");
-            Wf.Row($"6: {bits.View(w6)}");
-            Wf.Row($"7: {bits.View(w7)}");
-            Wf.Row($"8: {bits.View(w8)}");
+            Wf.Row($"1: {bits.View(w1, 0)}");
+            Wf.Row($"2: {bits.View(w2, 0)}");
+            Wf.Row($"3: {bits.View(w3, 0)}");
+            Wf.Row($"4: {bits.View(w4, 0)}");
+            Wf.Row($"5: {bits.View(w5, 0)}");
+            Wf.Row($"6: {bits.View(w6, 0)}");
+            Wf.Row($"7: {bits.View(w7, 0)}");
+            Wf.Row($"8: {bits.View(w8, 0)}");
 
         }
-
 
         void EmitCilBlocks()
         {
@@ -864,16 +889,6 @@ namespace Z0.Asm
             }
         }
 
-        // void CheckXedSymbols()
-        // {
-        //     var symbols = Symbols.symbols<XedModels.Extension>(w8);
-        //     var literals = ClrEnums.literals<XedModels.Extension>();
-        //     foreach(var l in literals)
-        //     {
-        //         Wf.Row(string.Format("{0}={1}", l, symbols[l].Expression));
-        //     }
-        // }
-
         void ShowXedForms()
         {
             var pipe = Wf.Xed();
@@ -942,8 +957,7 @@ namespace Z0.Asm
 
         public void EmitBitstrings()
         {
-            var pipe = Wf.AsmStatementPipe();
-            pipe.EmitBitstrings();
+            Wf.AsmStatementPipe().EmitBitstrings();
         }
 
         void CheckCpuid()
@@ -974,8 +988,10 @@ namespace Z0.Asm
         {
             //CaptureSelectedRoutines();
 
-            var tokens = Wf.AsmTokens().Prefixes();
-            Show(tokens.View, FS.file("asmtokens", FS.Log));
+            // var tokens = Wf.AsmTokens().Prefixes();
+            // Show(tokens.View, FS.file("asmtokens", FS.Log));
+
+            ShowOpCodeTokens();
 
             //Show("asm.tokens.prefixes", FS.Log, show);
             //root.iter(Wf.AsmTokens().Prefixes(), p => ;

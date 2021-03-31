@@ -30,9 +30,6 @@ namespace Z0
 
         public CliSig CliSig;
 
-        public ApiArtifactKey ArtifactKey
-            => Method;
-
         public ApiCaptureBlock(OpIdentity id, MethodInfo method, CodeBlock extracted, CodeBlock parsed, ExtractTermCode term)
         {
             Extracted = extracted;

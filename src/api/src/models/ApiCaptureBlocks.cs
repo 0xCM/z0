@@ -13,7 +13,6 @@ namespace Z0
 
     public readonly struct ApiCaptureBlocks : IIndex<ApiCaptureBlock>
     {
-
         [MethodImpl(Inline), Op]
         public static Pair<ByteSize> sizes(ReadOnlySpan<ApiCaptureBlock> src)
         {

@@ -11,11 +11,8 @@ namespace Z0.Asm
 
     public readonly struct AsmBitstrings
     {
-        [Op]
-        public static AsmBitstring bitstring(AsmHexCode src)
-            => new AsmBitstring(src, Service.Format(src));
-
-        public static AsmBitstrings Service => new AsmBitstrings(_Formatter);
+        public static AsmBitstrings service()
+            => new AsmBitstrings(_Formatter);
 
         readonly BitFormatter<byte> Formatter;
 
@@ -25,7 +22,7 @@ namespace Z0.Asm
             Formatter = formatter;
         }
 
-        string Format(AsmHexCode src)
+        public string Format(AsmHexCode src)
         {
             var bytes = src.Bytes.Replicate();
             bytes.Reverse();

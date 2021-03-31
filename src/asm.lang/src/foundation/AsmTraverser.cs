@@ -11,35 +11,39 @@ namespace Z0.Asm
 
     public sealed class AsmTraverser : WfService<AsmTraverser>
     {
-        FS.FolderPath StatementRoot
-            => Db.TableDir<AsmApiStatement>();
+        const byte StatementFieldCount = AsmApiStatement.FieldCount;
 
         public void Traverse(Action<AsmApiStatement> receiver)
         {
-            var files = StatementRoot.EnumerateFiles(FS.Extensions.Csv, true).Array();
+            var dir = Db.TableDir<AsmApiStatement>();
+            var files = dir.EnumerateFiles(FS.Csv, true).Array();
             foreach(var file in files)
             {
                 var flow = Wf.Running(FS.Msg.ParsingFile.Format(file));
                 if(TextDocs.parse(file, out var doc))
                 {
-                    if(doc.Header.Labels.Length == AsmApiStatement.FieldCount)
+                    if(doc.Header.Labels.Length == StatementFieldCount)
                     {
                         var count = doc.RowCount;
                         var rows = doc.RowData.View;
                         for(var i=0; i<count; i++)
                         {
                             ref readonly var row = ref skip(rows,i);
-                            if(AsmParser.parse(row, out var statement))
+                            var result = AsmParser.parse(row, out var statement);
+                            if(result)
                                 receiver(statement);
+                            else
+                                Wf.Error(Msg.CouldNotParseStatementRow.Format(row,result.Message));
                         }
                         Wf.Ran(flow, FS.Msg.ParsedFile.Format(file));
                     }
                     else
-                        Wf.Error($"Wrong field count of {doc.Header.Labels.Length}");
+                        Wf.Error(Msg.UnexpectedFieldCount.Format(StatementFieldCount, doc.Header.Labels.Length));
                 }
                 else
-                    Wf.Error($"Could not parse {file.ToUri()}");
+                    Wf.Error(Msg.CouldNotParseDocument.Format(file));
             }
         }
+
     }
 }

@@ -19,34 +19,20 @@ namespace Z0.Asm
 
         readonly string Content;
 
-        bool? _HasRex;
-
-        bool? _HasVex;
 
         [MethodImpl(Inline)]
-        public AsmOpCodeParser(string src)
+        public AsmOpCodeParser(AsmOpCodeExpr src)
         {
-            Data = src;
-            Content = src;
-            _HasRex = null;
-            _HasVex = null;
+            Data = src.Data;
+            Content = src.Content;
         }
 
         [Op]
         public bool HasRex()
-        {
-            if(_HasRex == null)
-                _HasRex = Content.StartsWith("REX");
-            return _HasRex.Value;
-        }
+            => Content.StartsWith("REX");
 
         [Op]
         public bool HasVex()
-        {
-            if(_HasRex == null)
-                _HasRex = Content.StartsWith("VEX");
-            return _HasRex.Value;
-        }
-
+            => Content.StartsWith("VEX");
     }
 }

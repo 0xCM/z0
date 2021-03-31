@@ -9,29 +9,29 @@ namespace Z0
 
     using static Part;
 
-    public readonly struct MemorySymbol : IStoredSymbol<MemorySymbol>
+    public readonly struct MemorySymbol
     {
-        readonly ISymbolStore SymbolStore;
+        readonly IMemorySymbols Store;
 
         public uint SymbolId {get;}
 
         [MethodImpl(Inline)]
-        internal MemorySymbol(ISymbolStore store, uint id)
+        internal MemorySymbol(IMemorySymbols store, uint id)
         {
-            SymbolStore = store;
+            Store = store;
             SymbolId = id;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => SymbolStore is null;
+            get => Store is null;
         }
 
         public string SymbolName
         {
             [MethodImpl(Inline)]
-            get => SymbolStore?.SymbolName(SymbolId) ?? EmptyString;
+            get => Store?.SymbolName(SymbolId) ?? EmptyString;
         }
 
         public static MemorySymbol Empty

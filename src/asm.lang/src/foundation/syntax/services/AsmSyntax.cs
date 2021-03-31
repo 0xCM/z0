@@ -63,6 +63,13 @@ namespace Z0.Asm
         }
 
         [Op]
+        public static Outcome sig(string src, out AsmSigExpr dst, out Outcome result)
+        {
+            result = sig(src, out dst);
+            return result;
+        }
+
+        [Op]
         public static Outcome form(string src, out AsmFormExpr dst)
         {
             dst = AsmFormExpr.Empty;

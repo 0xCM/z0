@@ -47,10 +47,6 @@ namespace Z0
             => new ByteSpanProp(name, data, @static);
 
         [MethodImpl(Inline), Op]
-        public static string property(CodeBlock src, ApiArtifactKey uri)
-            => comment(new ByteSpanProp(uri.Identifier, src).Format());
-
-        [MethodImpl(Inline), Op]
         public static string property(CodeBlock src, OpIdentity id)
             => comment(new ByteSpanProp(LegalIdentityBuilder.code(id), src).Format());
 

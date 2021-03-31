@@ -18,71 +18,71 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static BitView create(ulong src)
-            => new BitView(span64u(src));
+            => new BitView(bytes(src));
 
         /// <summary>
         /// The data over which the view is constructed
         /// </summary>
-        readonly ReadOnlySpan<ulong> Data;
+        readonly ReadOnlySpan<byte> Data;
 
-        const byte CellWidth = 64;
+        const byte CellWidth = 8;
 
         [MethodImpl(Inline)]
-        public BitView(ReadOnlySpan<ulong> src)
+        public BitView(ReadOnlySpan<byte> src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public bit View(W1 w, uint offset = 0)
+        public bit View(W1 w, ByteSize offset)
         {
-            var (i, j) = math.divmod(offset,64);
+            var (i, j) = math.divmod(offset,CellWidth);
             ref readonly var cell = ref skip(Data,i);
             return bit.test(cell, (byte)j);
         }
 
         [MethodImpl(Inline)]
-        public uint2 View(W2 w, uint offset = 0)
+        public uint2 View(W2 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint2)Bits.extract(skip(Data,d), (byte)r, 2);
         }
 
         [MethodImpl(Inline)]
-        public uint3 View(W3 w, uint offset = 0)
+        public uint3 View(W3 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint3)Bits.extract(skip(Data,d), (byte)r, 3);
         }
 
         [MethodImpl(Inline)]
-        public uint4 View(W4 w, uint offset = 0)
+        public uint4 View(W4 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint4)Bits.extract(skip(Data,d), (byte)r, 4);
         }
 
         [MethodImpl(Inline)]
-        public uint5 View(W5 w, uint offset = 0)
+        public uint5 View(W5 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint5)Bits.extract(skip(Data,d), (byte)r, 5);
         }
 
         [MethodImpl(Inline)]
-        public uint6 View(W6 w, uint offset = 0)
+        public uint6 View(W6 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint6)Bits.extract(skip(Data,d), (byte)r, 6);
         }
 
         [MethodImpl(Inline)]
-        public uint7 View(W7 w, uint offset = 0)
+        public uint7 View(W7 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint7)Bits.extract(skip(Data,d), (byte)r, 7);
         }
 
         [MethodImpl(Inline)]
-        public uint8T View(W8 w, uint offset = 0)
+        public uint8T View(W8 w, ByteSize offset)
         {
             math.divmod(offset, CellWidth, out var d, out var r);
             return (uint8T)Bits.extract(skip(Data,d), (byte)r, 8);

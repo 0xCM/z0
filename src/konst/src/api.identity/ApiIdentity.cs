@@ -21,7 +21,7 @@ namespace Z0
             var argtypes = src.ParameterTypes(true);
             for(var i=0; i<argtypes.Length; i++)
             {
-                var argtext = ApiIdentity.parameter(args[i]);
+                var argtext = parameter(args[i]);
                 if(argtext.IsNotBlank())
                     yield return argtext;
             }

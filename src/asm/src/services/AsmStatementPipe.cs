@@ -219,6 +219,7 @@ namespace Z0.Asm
             var writers = root.dict<ApiHostUri,StreamWriter>();
             var @base = new MemoryAddress();
             var opcodes = root.hashset<AsmOpCodeExpr>();
+            var bitstrings = AsmBitstrings.service();
 
             var dir = Db.TableDir("asm.bitstrings");
             dir.Delete();
@@ -266,7 +267,7 @@ namespace Z0.Asm
                 var asmcode = src.Expression;
                 var hexcode = src.Encoded;
                 var sig = src.Sig;
-                var bitcode = asm.bitstring(hexcode);
+                var bitcode = bitstrings.Format(hexcode);
                 var offset = Addresses.address((uint)(src.IP - @base));
                 var target = writer(src.OpUri.Host);
                 var row = string.Format(RenderPattern, src.IP, offset, hexcode.Size, asmcode, sig, opcode, hexcode, bitcode);

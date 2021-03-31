@@ -43,7 +43,7 @@ namespace Z0
             {
                 Addresses[CurrentIndex] = address;
                 Names[CurrentIndex] = name;
-                var symbol = new MemorySymbol(this,CurrentIndex);
+                var symbol = new MemorySymbol(this, CurrentIndex);
                 CurrentIndex++;
                 return symbol;
 

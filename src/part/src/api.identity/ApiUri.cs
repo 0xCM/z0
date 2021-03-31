@@ -48,23 +48,22 @@ namespace Z0
         /// <param name="group"></param>
         /// <param name="opid"></param>
         [Op]
-        internal static string BuildUriText(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        static string BuildUriText(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
             => (opid.IsEmpty
                 ? QueryText(scheme, host.Part, host.Name, group)
                 : FullUriText(scheme, host.Part, host.Name, group, opid)).Trim();
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpUri define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(scheme, host, group, opid);
+            => new OpUri(scheme, host, group, opid, BuildUriText(scheme, host, group, opid));
 
-        [MethodImpl(Inline)]
+        [Op]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Hex, host, group, opid);
-
+            => new OpUri(ApiUriScheme.Hex, host, group, opid, BuildUriText(ApiUriScheme.Hex, host, group, opid));
 
         [MethodImpl(Inline), Op]
         public static OpUri located(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(ApiUriScheme.Located, host, group, opid);
+            => new OpUri(ApiUriScheme.Located, host, group, opid, BuildUriText(ApiUriScheme.Located, host, group, opid));
 
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId part, string host, string group)
@@ -79,7 +78,6 @@ namespace Z0
 
         public static ParseResult<ApiHostUri> fromFilename(string filename)
             => host(Path.GetFileNameWithoutExtension(filename).Replace(Chars.Dot, ApiUriDelimiters.UriPathSep));
-
 
         public static ParseResult<ApiHostUri> host(string src)
         {

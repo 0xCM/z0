@@ -11,48 +11,54 @@ namespace Z0.Asm
 
     public readonly struct AsmOpCodeExpr : IComparable<AsmOpCodeExpr>
     {
-        readonly TextBlock Data;
+        readonly TextBlock _Data;
 
         [MethodImpl(Inline)]
         public AsmOpCodeExpr(string src)
-            => Data = src;
+            => _Data = src;
 
         public string Content
         {
             [MethodImpl(Inline)]
-            get => Data.Text;
+            get => _Data.Text;
+        }
+
+        public ReadOnlySpan<char> Data
+        {
+            [MethodImpl(Inline)]
+            get => _Data.Text;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => _Data.Length;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsEmpty;
+            get => _Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data.IsNonEmpty;
+            get => _Data.IsNonEmpty;
         }
 
         public bool IsValid
         {
             [MethodImpl(Inline)]
-            get => text.neq(Data,"<invalid>", NoCase);
+            get => text.neq(_Data,"<invalid>", NoCase);
         }
 
         public override int GetHashCode()
-            => Data.GetHashCode();
+            => _Data.GetHashCode();
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.Format();
+            => _Data.Format();
 
         public override string ToString()
             => Format();
@@ -62,10 +68,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public bool Equals(AsmOpCodeExpr src)
-            => Data.Equals(src.Data);
+            => _Data.Equals(src._Data);
 
         public int CompareTo(AsmOpCodeExpr src)
-            => Data.CompareTo(src.Data);
+            => _Data.CompareTo(src._Data);
 
         [MethodImpl(Inline)]
         public static bool operator ==(AsmOpCodeExpr a, AsmOpCodeExpr b)

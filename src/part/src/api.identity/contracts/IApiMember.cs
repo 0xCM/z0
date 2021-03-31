@@ -14,22 +14,11 @@ namespace Z0
         MemoryAddress BaseAddress
             => MemoryAddress.Zero;
 
-        OpMsil Cil
-            => ClrDynamic.cil(BaseAddress, OpUri, Method);
+        OpMsil Cil {get;}
 
-        CliSig CliSig
-            => Method.ResolveSignature();
+        CliSig CliSig {get;}
 
-        ApiMemberInfo Describe()
-        {
-            var dst = new ApiMemberInfo();
-            dst.Address = BaseAddress;
-            dst.Host = Host.UriText;
-            dst.Member = Metadata.DisplaySig.Format();
-            dst.ApiKind = ApiClass;
-            dst.Uri = OpUri.UriText;
-            return dst;
-        }
+        ApiMemberInfo Describe();
     }
 
     [Free]

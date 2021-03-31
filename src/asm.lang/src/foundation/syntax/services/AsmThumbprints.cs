@@ -106,19 +106,19 @@ namespace Z0.Asm
         public Outcome ParseThumbprint(string src, out AsmThumbprint thumbprint)
         {
             thumbprint = AsmThumbprint.Empty;
-
+            var outcome = Outcome.Empty;
             var a = src.LeftOfFirst(Semicolon);
             var offset = HexNumericParser.parse16u(a.LeftOfFirst(Chars.Space)).ValueOrDefault();
             AsmStatementExpr statement = a.RightOfFirst(Semicolon);
 
-            var parts = src.RightOfFirst(Semicolon).SplitClean(Implication);
+            var parts = @readonly(src.RightOfFirst(Semicolon).SplitClean(Implication));
             if(parts.Length == 2)
             {
-                var lhs = parts[0];
-                var rhs = parts[1];
+                var lhs = skip(parts,0);
+                var rhs = skip(parts,1);
                 if(unfence(lhs, SigFence, out var sigexpr))
                 {
-                    if(AsmSyntax.sig(sigexpr, out var sig))
+                    if(AsmSyntax.sig(sigexpr, out var sig, out outcome))
                     {
                         if(!AsmSyntax.code(sig.Mnemonic, out var monic))
                             Wf.Warn(Msg.MonicCodeParseFailed.Format(sig.Mnemonic));

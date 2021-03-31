@@ -118,15 +118,5 @@ namespace Z0
 
         static readonly ITypeIdentityProvider DefaultProvider
             = new TypeIdentityProvider(DoDivination);
-
-        // internal static ITypeIdentityProvider CreateProvider(Type t)
-        // {
-        //     var provider = none<ITypeIdentityProvider>();
-        //     if(t.Tagged<IdentityProviderAttribute>())
-        //         provider = TypeIdentityProviders.attributed(t);
-        //     else if(t.Reifies<ITypeIdentityProvider>())
-        //         provider = TypeIdentityProviders.hosted(t);
-        //     return provider.ValueOrElse(() => DefaultProvider);
-        // }
     }
 }

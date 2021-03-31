@@ -16,6 +16,5 @@ namespace Z0
                 let pt = k.ToSystemType().ToOption() where pt.IsSome()
                 let id = identify(op.Method, k) where !id.IsEmpty
                 select new ApiMethodClosure(op.Host, id, k, op.Method.MakeGenericMethod(pt.Value));
-
     }
 }

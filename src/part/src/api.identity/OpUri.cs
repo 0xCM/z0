@@ -44,14 +44,13 @@ namespace Z0
         public PartId Part
             => Host.Part;
 
-        [MethodImpl(Inline)]
-        public OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        internal OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid, string uritext)
         {
             Scheme = scheme;
             Host = host;
             OpId = opid;
             GroupName = group;
-            UriText = ApiUri.BuildUriText(scheme, host, group, opid);
+            UriText = uritext;
         }
 
         public bool IsEmpty
@@ -63,9 +62,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => UriText;
-
-        public OpUri WithScheme(ApiUriScheme scheme)
-            => new OpUri(scheme, Host, GroupName, OpId);
 
         [MethodImpl(Inline)]
         public int CompareTo(OpUri src)
@@ -96,6 +92,6 @@ namespace Z0
         /// Emptiness of nothing
         /// </summary>
         public static OpUri Empty
-            => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
+            => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty, EmptyString);
     }
 }

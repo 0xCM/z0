@@ -37,13 +37,13 @@ namespace Z0
                 last = EmptyString;
 
                 if(args[i].IsParametric())
-                    last = ApiIdentity.parameter(args[i]);
+                    last = parameter(args[i]);
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, ApiIdentity.width(argtype).FormatValue());
+                        last = text.concat(IDI.Vector, width(argtype).FormatValue());
                     else if(argtype.IsSegmented())
-                        last = text.concat(IDI.Block, ApiIdentity.width(argtype).FormatValue());
+                        last = text.concat(IDI.Block, width(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }

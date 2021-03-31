@@ -9,9 +9,9 @@ namespace Z0.Asm
 
     using static Part;
 
-    public readonly struct AsmBitstring : ITextual
+    public readonly struct AsmBitstring
     {
-        readonly string Bits;
+        readonly MemoryAddress Bits;
 
         public AsmHexCode Code {get;}
 
@@ -19,20 +19,7 @@ namespace Z0.Asm
         public AsmBitstring(AsmHexCode code, string bits)
         {
             Code = code;
-            Bits = bits;
+            Bits = memory.address(string.Intern(bits));
         }
-
-        public ReadOnlySpan<char> Chars
-        {
-            [MethodImpl(Inline)]
-            get => Bits;
-        }
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Bits;
-
-        public override string ToString()
-            => Format();
     }
 }

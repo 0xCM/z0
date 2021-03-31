@@ -27,8 +27,6 @@ namespace Z0.Asm
 
         MemorySymbols Symbols;
 
-        AsmSigs Sigs;
-
         uint CurrentRow;
 
         uint LastRow;
@@ -43,13 +41,36 @@ namespace Z0.Asm
             Symbols = MemorySymbols.alloc(50000);
         }
 
-        protected override void OnContextCreated()
-        {
-            Sigs = Wf.AsmSigs();
-        }
-
         public FS.Files Distillations()
             => Db.TableDir<AsmStatementDetail>().TopFiles;
+
+        public void DistillStatements()
+        {
+            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
+        }
+
+        public void DistillStatements(ApiCodeBlocks src)
+        {
+            var flow = Wf.Running();
+            Db.ClearTables<Target>();
+
+            RowProcessor = Wf.AsmRowProcessor();
+            CurrentRow = 0;
+            Blocks = src;
+            Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
+            LastRow = Rows.Count - 1;
+            CurrentBlock = Rows[CurrentRow].BlockAddress;
+
+            var total = 0u;
+            var count = DistillNextSegment();
+            while(count != 0)
+            {
+                count = DistillNextSegment();
+                total += count;
+            }
+
+            Wf.Ran(flow,total);
+        }
 
         public Index<AsmStatementDetail> LoadDistillation(FS.FilePath src)
         {
@@ -177,34 +198,6 @@ namespace Z0.Asm
                 Wf.EmittedTable(flow, counter);
             }
             return counter;
-        }
-
-        public void DistillStatements()
-        {
-            DistillStatements(Wf.ApiHexIndexer().IndexApiBlocks());
-        }
-
-        public void DistillStatements(ApiCodeBlocks src)
-        {
-            var flow = Wf.Running();
-            Db.ClearTables<Target>();
-
-            RowProcessor = Wf.AsmRowProcessor();
-            CurrentRow = 0;
-            Blocks = src;
-            Rows = RowProcessor.CreateAsmRows(Blocks).Where(x => x.IP != 0).OrderBy(x => x.IP).Array();
-            LastRow = Rows.Count - 1;
-            CurrentBlock = Rows[CurrentRow].BlockAddress;
-
-            var total = 0u;
-            var count = DistillNextSegment();
-            while(count != 0)
-            {
-                count = DistillNextSegment();
-                total += count;
-            }
-
-            Wf.Ran(flow,total);
         }
 
         ref Target Fill(in AsmRow src, ref Target dst)
