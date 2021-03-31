@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        public void EmitStatementBuilder(ReadOnlySpan<AsmMnemonic> src)
+        public void EmitStatementBuilder(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
             var buffer = text.buffer();
             var margin = 0u;
@@ -37,13 +37,11 @@ namespace Z0.Asm
             margin -= Indent;
             buffer.IndentLine(margin, Close);
 
-            var dst = GetTargetPath(T.StatementBuilder);
             var flow = Wf.EmittingFile(dst);
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
-            Wf.EmittedFile(flow,1);
+            Wf.EmittedFile(flow,src.Length);
         }
-
     }
 }

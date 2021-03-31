@@ -57,11 +57,14 @@ namespace Z0.Asm
 
         AsmServices AsmServices;
 
-        public void GenInstructionModels()
+        public void GenerateInstructionModels()
         {
-            var monics = Catalog.Mnemonics();
-            var gen = AsmGen.create(Wf);
-            gen.GenerateModels(monics);
+            Wf.AsmCodeGenerator().GenerateModelsInPlace();
+        }
+
+        public void GenerateInstructionModelPreview()
+        {
+            Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
         }
 
         void EmitMnemonicInfo()
@@ -991,8 +994,11 @@ namespace Z0.Asm
             // var tokens = Wf.AsmTokens().Prefixes();
             // Show(tokens.View, FS.file("asmtokens", FS.Log));
 
-            ShowOpCodeTokens();
+            //ShowOpCodeTokens();
+            //Wf.AsmCodeGenerator().GenerateModels(Db.AppLogDir() + FS.folder("asm.lang.g"));
 
+
+            GenerateInstructionModels();
             //Show("asm.tokens.prefixes", FS.Log, show);
             //root.iter(Wf.AsmTokens().Prefixes(), p => ;
 

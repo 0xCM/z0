@@ -9,39 +9,12 @@ namespace Z0.Asm
     using static Part;
     using static memory;
 
-    using T = AsmGenTarget;
-
     partial class AsmGen
     {
-
-        FS.FilePath EmitInstructionTypes(Index<AsmMnemonic> src)
-        {
-            var dst = GetTargetPath(T.InstructionTypes);
-            var flow = Wf.EmittingFile(dst);
-            EmitInstructionTypes(src,dst);
-            Wf.EmittedFile(flow, src.Count);
-            return dst;
-        }
-
-        FS.FilePath EmitInstructionContracts()
-        {
-            var dst = GetTargetPath(T.InstructionContracts);
-            var flow = Wf.EmittingFile(dst);
-            var contracts = default(InstructionContracts);
-            var buffer = text.buffer();
-            contracts.Render(0,buffer);
-
-            using var writer = dst.Writer();
-            writer.Write(Dev.SourceHeader());
-            writer.Write(buffer.Emit());
-
-            Wf.EmittedFile(flow,1);
-            return dst;
-        }
-
         [Op]
         void EmitInstructionTypes(ReadOnlySpan<AsmMnemonic> src, FS.FilePath dst)
         {
+            var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
             var margin = 0u;
             buffer.AppendLine("namespace Z0.Asm");
@@ -72,6 +45,8 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
+
+            Wf.EmittedFile(flow, src.Length);
         }
     }
 }

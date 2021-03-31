@@ -6,16 +6,9 @@ namespace Z0.Asm
 {
     partial class AsmGen
     {
-        void EmitMonicEnum(Index<AsmMnemonic> src)
-        {
-            var dst = GetTargetPath(AsmGenTarget.MonicCodeEnum);
-            var flow = Wf.EmittingFile(dst);
-            EmitMonicEnum(src,dst);
-            Wf.EmittedFile(flow, src.Count);
-        }
-
         void EmitMonicEnum(Index<AsmMnemonic> src, FS.FilePath dst)
         {
+            var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
             var margin = 0u;
             MonicEnumModel model = src.Storage;
@@ -23,6 +16,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
+            Wf.EmittedFile(flow, src.Count);
         }
     }
 }

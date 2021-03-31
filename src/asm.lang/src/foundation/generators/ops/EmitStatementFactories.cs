@@ -15,11 +15,7 @@ namespace Z0.Asm
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-            {
                 EmitStatementFactories(margin, skip(src,i), dst);
-                // var model = new InstructionModel(skip(src,i));
-                // model.RenderFactories(margin, dst);
-            }
         }
 
         public void EmitStatementFactories(uint margin, AsmMnemonic mnemonic, ITextBuffer dst)

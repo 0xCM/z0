@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     using static Part;
 
     partial class AsmGen
@@ -14,7 +13,7 @@ namespace Z0.Asm
                 AsmGenTarget.InstructionTypes => "AsmInstructions",
                 AsmGenTarget.MonicCodeEnum => "AsmMnemonicCode",
                 AsmGenTarget.MonicExpression => "AsmMnemonics",
-                AsmGenTarget.InstructionContracts=> "IAsmInstruction",
+                AsmGenTarget.InstructionContracts=> "ITypedInstruction",
                 AsmGenTarget.StatementBuilder => "AsmStatementBuilder",
                 _ => EmptyString
             };

@@ -12,11 +12,13 @@ namespace Z0.Asm
 
     partial class AsmGen
     {
-        const string IAsmInstructionName = nameof(IAsmInstruction);
+        const string InstructionContractName = nameof(ITypedInstruction);
 
         const string InlineAttributeSpec = "[MethodImpl(Inline)]";
 
         const string InlineOpAttributeSpec = "[MethodImpl(Inline), Op]";
+
+        const string EncodedPropertyType = nameof(AsmHexCode);
 
         const string HostAttributeSpec = "[ApiHost]";
 
@@ -57,24 +59,29 @@ namespace Z0.Asm
 
             public void Render(uint margin, ITextBuffer dst)
             {
-                dst.IndentLine(margin, string.Format("public struct {0} : {1}<{0}>", TypeName, IAsmInstructionName));
+                dst.IndentLine(margin, string.Format("public struct {0} : {1}<{0}>", TypeName, InstructionContractName));
                 dst.IndentLine(margin, Open);
                 margin += Indent;
-                dst.IndentLine(margin, string.Format("public AsmHexCode Encoded;"));
+                dst.IndentLine(margin, string.Format("public AsmHexCode Content;"));
                 dst.AppendLine();
                 dst.IndentLine(margin, InlineAttributeSpec);
                 dst.IndentLine(margin, string.Format("public {0}(AsmHexCode encoded)", TypeName));
                 dst.IndentLine(margin, Open);
                 margin += Indent;
-                dst.IndentLine(margin, string.Format("Encoded = encoded;"));
+                dst.IndentLine(margin, string.Format("Content = encoded;"));
                 margin -= Indent;
                 dst.IndentLine(margin, Close);
                 dst.AppendLine();
                 dst.IndentLine(margin, string.Format("public AsmMnemonicCode Mnemonic => AsmMnemonicCode.{0};", Monic.Name));
                 dst.AppendLine();
+                dst.IndentLine(margin, "public AsmHexCode Encoded => Content;");
+
+                dst.AppendLine();
                 dst.IndentLine(margin, string.Format("public static implicit operator AsmMnemonicCode({0} src) => src.Mnemonic;", TypeName));
                 dst.AppendLine();
                 dst.IndentLine(margin, string.Format("public static implicit operator AsmMnemonic({0} src) => AsmMnemonics.{1};", TypeName, Monic.Name));
+                dst.AppendLine();
+                dst.IndentLine(margin, string.Format("public static implicit operator AsmHexCode({0} src) => src.Encoded;", TypeName));
                 margin -= Indent;
                 dst.IndentLine(margin, Close);
                 dst.AppendLine();

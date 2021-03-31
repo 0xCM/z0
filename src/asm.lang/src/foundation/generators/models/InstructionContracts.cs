@@ -6,27 +6,39 @@ namespace Z0.Asm
 {
     partial class AsmGen
     {
-        readonly struct InstructionContracts
+        void EmitInstructionContracts(FS.FilePath dst)
         {
-            public void Render(uint margin, ITextBuffer dst)
-            {
-                dst.AppendLine(Pattern);
-            }
+            var flow = Wf.EmittingFile(dst);
+            var buffer = text.buffer();
+            RenderInstructionContracts(0,buffer);
 
-            const string Pattern = @"namespace Z0.Asm
+            using var writer = dst.Writer();
+            writer.Write(Dev.SourceHeader());
+            writer.Write(buffer.Emit());
+
+            Wf.EmittedFile(flow,1);
+        }
+
+        void RenderInstructionContracts(uint margin, ITextBuffer dst)
+        {
+            var target = TargetIdentifier(AsmGenTarget.InstructionContracts);
+            var content = InstructionContractPattern.Replace(text.embrace("TargetName"), target);
+            dst.AppendLine(content);
+        }
+
+        const string InstructionContractPattern = @"namespace Z0.Asm
 {
-    public interface IAsmInstruction
+    public interface {TargetName}
     {
         AsmMnemonicCode Mnemonic {get;}
     }
 
-    public interface IAsmInstruction<T> : IAsmInstruction
-        where T : struct, IAsmInstruction<T>
+    public interface {TargetName}<T> : {TargetName}
+        where T : struct, {TargetName}<T>
     {
 
     }
 }";
 
-        }
     }
 }

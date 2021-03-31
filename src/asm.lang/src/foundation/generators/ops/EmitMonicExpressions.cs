@@ -9,13 +9,12 @@ namespace Z0.Asm
         void EmitMonicExpressions(Index<AsmMnemonic> src)
         {
             var dst = GetTargetPath(AsmGenTarget.MonicExpression);
-            var flow = Wf.EmittingFile(dst);
             EmitMonicExpressions(src,dst);
-            Wf.EmittedFile(flow, src.Count);
         }
 
         void EmitMonicExpressions(Index<AsmMnemonic> src, FS.FilePath dst)
         {
+            var flow = Wf.EmittingFile(dst);
             var buffer = text.buffer();
             var margin = 0u;
             MonicExpressionModel model = src.Storage;
@@ -23,6 +22,7 @@ namespace Z0.Asm
             using var writer = dst.Writer();
             writer.Write(Dev.SourceHeader());
             writer.Write(buffer.Emit());
+            Wf.EmittedFile(flow, src.Count);
         }
     }
 }

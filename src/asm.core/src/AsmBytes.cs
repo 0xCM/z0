@@ -13,7 +13,6 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmBytes
     {
-
         [MethodImpl(Inline), Op]
         public static byte size(AsmHexCode src)
             => BitNumbers.cell8(src.Data, 15);
@@ -33,6 +32,21 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static Span<byte> hexbytes(in AsmHexCode src)
             => slice(bytes(src.Data), 0, size(src));
+
+        [MethodImpl(Inline), Op]
+        public static T convert<T>(in AsmHexCode src)
+            where T : unmanaged
+                => first(recover<T>(hexbytes(src)));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static AsmInstruction untype<T>(AsmInstruction<T> src)
+            where T : unmanaged
+                => new AsmInstruction(hexcode(src.Data));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static AsmHexCode hexcode<T>(T src)
+            where T : unmanaged
+                => hexcode(bytes(src));
 
         [Op]
         public static string format(AsmHexCode src)

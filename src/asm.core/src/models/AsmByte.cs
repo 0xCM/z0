@@ -9,91 +9,108 @@ namespace Z0.Asm
 
     using static Part;
 
-    using Wrapped = System.Byte;
-    using Wrapper = AsmByte;
+    using T = System.Byte;
 
     /// <summary>
     /// Represents an encoded instruction byte
     /// </summary>
-    public readonly struct AsmByte : IDataTypeComparable<Wrapper>
+    public struct AsmByte : IDataTypeComparable<AsmByte>
     {
-        public Wrapped Value {get;}
+        public T Content;
+
+        public T Value
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
 
         [MethodImpl(Inline)]
-        public AsmByte(Wrapped value)
-            => Value = value;
+        public AsmByte(T value)
+            => Content = value;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Value.FormatHex(specifier:false);
+            => Content.FormatHex(specifier:false);
 
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
-            => Value.GetHashCode();
+            => Content.GetHashCode();
 
         public override bool Equals(object src)
-            => src is Wrapper a && Equals(a);
+            => src is AsmByte a && Equals(a);
+
+        public uint4 Lo
+        {
+            [MethodImpl(Inline)]
+            get => Content;
+        }
+
+        public uint4 Hi
+        {
+            [MethodImpl(Inline)]
+            get => (uint4)(Content >> 4);
+        }
 
         [MethodImpl(Inline)]
-        public int CompareTo(Wrapper src)
-            => Value.CompareTo(src.Value);
+        public int CompareTo(AsmByte src)
+            => Content.CompareTo(src.Content);
 
         [MethodImpl(Inline)]
-        public bool Equals(Wrapper src)
-            => Value.Equals(src.Value);
+        public bool Equals(AsmByte src)
+            => Content.Equals(src.Content);
 
         [MethodImpl(Inline)]
-        public static bit operator == (Wrapper a, Wrapper b)
-            => a.Value == b.Value;
+        public static bit operator == (AsmByte a, AsmByte b)
+            => a.Content == b.Content;
 
         [MethodImpl(Inline)]
-        public static bit operator != (Wrapper a, Wrapper b)
-            => a.Value != b.Value;
+        public static bit operator != (AsmByte a, AsmByte b)
+            => a.Content != b.Content;
 
         [MethodImpl(Inline)]
-        public static bit operator < (Wrapper a, Wrapper b)
-            => a.Value < b.Value;
+        public static bit operator < (AsmByte a, AsmByte b)
+            => a.Content < b.Content;
 
         [MethodImpl(Inline)]
-        public static bit operator <= (Wrapper a, Wrapper b)
-            => a.Value <= b.Value;
+        public static bit operator <= (AsmByte a, AsmByte b)
+            => a.Content <= b.Content;
 
         [MethodImpl(Inline)]
-        public static bit operator > (Wrapper a, Wrapper b)
-            => a.Value > b.Value;
+        public static bit operator > (AsmByte a, AsmByte b)
+            => a.Content > b.Content;
 
         [MethodImpl(Inline)]
-        public static bit operator >= (Wrapper a, Wrapper b)
-            => a.Value >= b.Value;
+        public static bit operator >= (AsmByte a, AsmByte b)
+            => a.Content >= b.Content;
 
         [MethodImpl(Inline)]
-        public static Wrapper operator & (Wrapper a, Wrapper b)
-            => (Wrapper)(a.Value & b.Value);
+        public static AsmByte operator & (AsmByte a, AsmByte b)
+            => (AsmByte)(a.Content & b.Content);
 
         [MethodImpl(Inline)]
-        public static Wrapper operator | (Wrapper a, Wrapper b)
-            => (Wrapper)(a.Value | b.Value);
+        public static AsmByte operator | (AsmByte a, AsmByte b)
+            => (AsmByte)(a.Content | b.Content);
 
         [MethodImpl(Inline)]
-        public static Wrapper operator ^ (Wrapper a, Wrapper b)
-            => (Wrapper)(a.Value ^ b.Value);
+        public static AsmByte operator ^ (AsmByte a, AsmByte b)
+            => (AsmByte)(a.Content ^ b.Content);
 
         [MethodImpl(Inline)]
-        public static Wrapper operator >> (Wrapper a, int offset)
-            => (Wrapper)(a.Value >> offset);
+        public static AsmByte operator >> (AsmByte a, int offset)
+            => (AsmByte)(a.Content >> offset);
 
         [MethodImpl(Inline)]
-        public static Wrapper operator << (Wrapper a, int offset)
-            => (Wrapper)(a.Value << offset);
+        public static AsmByte operator << (AsmByte a, int offset)
+            => (AsmByte)(a.Content << offset);
 
         [MethodImpl(Inline)]
-        public static Wrapper operator ~ (Wrapper x)
-            => (Wrapper)~ x.Value;
+        public static AsmByte operator ~ (AsmByte x)
+            => (AsmByte)~ x.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator Wrapper(Wrapped src)
-            => new Wrapper(src);
+        public static implicit operator AsmByte(T src)
+            => new AsmByte(src);
     }
 }

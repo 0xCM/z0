@@ -26,6 +26,5 @@ namespace Z0.Asm
 
         public static string MonicTypeName(AsmMnemonic src)
             => src.Format(MnemonicCase.Captialized);
-
     }
 }
